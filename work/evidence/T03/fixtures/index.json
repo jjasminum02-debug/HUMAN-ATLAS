@@ -1,0 +1,140 @@
+{
+  "purpose": "Synthetic-only contract fixtures; no anatomy source data, actual approval, or clinical values.",
+  "positiveFixture": "work/evidence/T03/fixtures/positive.json",
+  "expectedIndividualMuscleConceptCount": 1,
+  "fixtures": [
+    {
+      "name": "positive-complete-synthetic-contract",
+      "path": "work/evidence/T03/fixtures/positive.json",
+      "expectedValid": true
+    },
+    {
+      "name": "orphan-id",
+      "path": "work/evidence/T03/fixtures/negative/orphan-id.json",
+      "expectedValid": false,
+      "expectedDiagnostics": [
+        "missing_reference"
+      ]
+    },
+    {
+      "name": "duplicate-id",
+      "path": "work/evidence/T03/fixtures/negative/duplicate-id.json",
+      "expectedValid": false,
+      "expectedDiagnostics": [
+        "duplicate_id"
+      ]
+    },
+    {
+      "name": "left-right-mismatch",
+      "path": "work/evidence/T03/fixtures/negative/left-right-mismatch.json",
+      "expectedValid": false,
+      "expectedDiagnostics": [
+        "mesh_laterality_mismatch"
+      ]
+    },
+    {
+      "name": "stale-annotation",
+      "path": "work/evidence/T03/fixtures/negative/stale-annotation.json",
+      "expectedValid": false,
+      "expectedDiagnostics": [
+        "stale_annotation_reviewed"
+      ]
+    },
+    {
+      "name": "unsupported-reviewed",
+      "path": "work/evidence/T03/fixtures/negative/unsupported-reviewed.json",
+      "expectedValid": false,
+      "expectedDiagnostics": [
+        "reviewed_item_missing_evidence"
+      ]
+    },
+    {
+      "name": "ai-reviewer-cannot-approve",
+      "path": "work/evidence/T03/fixtures/negative/ai-reviewer-cannot-approve.json",
+      "expectedValid": false,
+      "expectedDiagnostics": [
+        "reviewed_item_without_current_human_approval"
+      ]
+    },
+    {
+      "name": "thousand-fold-marker-error",
+      "path": "work/evidence/T03/fixtures/negative/thousand-fold-marker-error.json",
+      "expectedValid": false,
+      "expectedDiagnostics": [
+        "landmark_check_out_of_tolerance"
+      ]
+    },
+    {
+      "name": "learning-license-not-granted",
+      "path": "work/evidence/T03/fixtures/negative/learning-license-not-granted.json",
+      "expectedValid": false,
+      "expectedDiagnostics": [
+        "publication_source_permission_missing"
+      ]
+    },
+    {
+      "name": "learning-attribution-wrong",
+      "path": "work/evidence/T03/fixtures/negative/learning-attribution-wrong.json",
+      "expectedValid": false,
+      "expectedDiagnostics": [
+        "publication_attribution_missing_or_wrong"
+      ]
+    },
+    {
+      "name": "missing-annotation-units",
+      "path": "work/evidence/T03/fixtures/negative/missing-annotation-units.json",
+      "expectedValid": false,
+      "expectedDiagnostics": [
+        "schema_required"
+      ]
+    },
+    {
+      "name": "annotation-not-in-internal-meters",
+      "path": "work/evidence/T03/fixtures/negative/annotation-not-in-internal-meters.json",
+      "expectedValid": false,
+      "expectedDiagnostics": [
+        "schema_const"
+      ]
+    },
+    {
+      "name": "t02-wrong-transform-scale",
+      "path": "work/evidence/T03/fixtures/negative/t02-wrong-transform-scale.json",
+      "expectedValid": false,
+      "expectedDiagnostics": [
+        "t02_transform_contract_mismatch"
+      ]
+    },
+    {
+      "name": "t02-wrong-rotation",
+      "path": "work/evidence/T03/fixtures/negative/t02-wrong-rotation.json",
+      "expectedValid": false,
+      "expectedDiagnostics": [
+        "t02_transform_contract_mismatch"
+      ]
+    },
+    {
+      "name": "stale-review-content-hash",
+      "path": "work/evidence/T03/fixtures/negative/stale-review-content-hash.json",
+      "expectedValid": false,
+      "expectedDiagnostics": [
+        "reviewed_item_without_current_human_approval"
+      ]
+    },
+    {
+      "name": "parent-cycle",
+      "path": "work/evidence/T03/fixtures/negative/parent-cycle.json",
+      "expectedValid": false,
+      "expectedDiagnostics": [
+        "parent_cycle"
+      ]
+    },
+    {
+      "name": "missing-hani-not-auto-translated",
+      "path": "work/evidence/T03/fixtures/negative/missing-hani-not-auto-translated.json",
+      "expectedValid": false,
+      "expectedDiagnostics": [
+        "unreviewed_hani_term_filled"
+      ]
+    }
+  ]
+}

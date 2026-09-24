@@ -30,3 +30,12 @@
 - 실제 mesh hash/ID/우측 경계, 단일 부위 viewer의 근육+뼈 화면을 확인했다. viewer gate는 이 후보의 방향·공간 정렬/표시 시험으로 한정된다. shape/identity, 부착면, 임상 의미의 사람 검토를 뜻하지 않는다.
 - `OpenSim_Models`는 `d9b05d470b1a481c222372c85b75772faf8f7792`에서 clean 상태이며 `.osim` 근육 이름만 비교했다. 파일 내용은 복사·변환·수정하지 않았다. 기존 `README.md`, `AGENTS.md`, `design/**`의 사전·사후 SHA-256은 모두 일치한다.
 - T02 완료. 다음 직렬 task는 T03 공통 스키마와 검증기이며 여기서 시작하지 않는다.
+
+## T03 — 2026-09-25
+
+- 실제 프로젝트 데이터 계약을 Draft 2020-12 스키마로 구현하고, 기본 JSON Schema 키워드와 교차 참조·순환·좌우·좌표·asset revision·증거·리뷰 hash·학습 공개 규칙은 Python 표준 라이브러리 기반 검증기가 검사한다. 사용하지 않는 Draft 키워드는 사전 점검에서 실패하도록 해 묵시적으로 건너뛰지 않게 한다. 이는 범용 JSON Schema 엔진 전체를 구현한다는 뜻은 아니다.
+- T02 좌표계약을 RH, meters, +X 환자 좌, +Y 머리/상방, +Z 전방의 Atlas frame으로 고정한다. BodyParts3D source frame에서 Atlas frame으로 변환할 때 `atlas[x,y,z]m = source[x,z,-y]mm/1000`, 회전행렬 `[[1,0,0],[0,0,1],[0,-1,0]]`, determinant +1을 검증한다. asset-native frame/units에서 annotation의 frame/units가 다른 경우 이어지는 transformChain을 요구한다. 알려진 표지 오차는 기록된 meter 허용치와 비교한다.
+- Claim/Term/SpatialAnnotation/MeshMapping 및 기능·평가 레코드의 reviewed 상태는 evidence와 현재 content hash에 맞는 human/approved Review 레코드가 필요하다. JSON 자체는 실제 사람 신원이나 서명을 인증하지 않으므로 별도 production review access control 없이는 사람 승인으로 간주하지 않는다.
+- Hani 결측은 null과 사유로 저장할 수 있다. Hani 문구가 채워졌으면 evidence 및 현재 사람 리뷰 없이 통과하지 않는다. 자동 번역이나 누락 채우기는 구현하지 않는다.
+- fixture와 승인 기록은 gate 검증만을 위한 synthetic 데이터이며 실제 학습자료, 해부 claim, 실제 human review가 아니다. fixtures 경로를 실제 catalog 입력으로 쓰지 않는다.
+- T03 검증 성공; 다음 직렬 작업은 T04 전체 근육 목록과 언어 정책이다. T03에서는 실제 데이터나 T04 목록을 시작하지 않았다.

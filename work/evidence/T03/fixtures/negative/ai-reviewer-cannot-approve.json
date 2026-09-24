@@ -1,0 +1,527 @@
+{
+  "schemaVersion": "1.0.0",
+  "revision": "fixture:dataset-v1",
+  "entities": {
+    "regions": [
+      {
+        "id": "fixture:region",
+        "parentId": null,
+        "label": "Synthetic region",
+        "notes": "Fixture only; not an anatomical assertion."
+      }
+    ],
+    "muscleConcepts": [
+      {
+        "id": "fixture:muscle",
+        "entityType": "individual_muscle",
+        "regionIds": [
+          "fixture:region"
+        ],
+        "standardRefs": [],
+        "applicability": {
+          "populations": [
+            "synthetic fixture"
+          ]
+        }
+      },
+      {
+        "id": "fixture:group",
+        "entityType": "muscle_group",
+        "regionIds": [
+          "fixture:region"
+        ],
+        "standardRefs": [],
+        "applicability": {
+          "populations": [
+            "synthetic fixture"
+          ]
+        }
+      }
+    ],
+    "instances": [
+      {
+        "id": "fixture:instance-left",
+        "conceptId": "fixture:muscle",
+        "side": "left"
+      },
+      {
+        "id": "fixture:instance-right",
+        "conceptId": "fixture:muscle",
+        "side": "right"
+      }
+    ],
+    "muscleParts": [
+      {
+        "id": "fixture:part",
+        "parentMuscleId": "fixture:muscle",
+        "partKind": "other",
+        "termIds": []
+      }
+    ],
+    "terms": [
+      {
+        "id": "fixture:term-en",
+        "conceptId": "fixture:muscle",
+        "language": "en",
+        "script": "Latn",
+        "text": "Synthetic Muscle Name",
+        "termRole": "preferred",
+        "edition": "synthetic fixture edition 1",
+        "evidenceIds": [
+          "fixture:evidence-term"
+        ],
+        "reviewState": "reviewed"
+      },
+      {
+        "id": "fixture:term-hani-missing",
+        "conceptId": "fixture:muscle",
+        "language": "zh-Hans",
+        "script": "Hani",
+        "text": null,
+        "termRole": "preferred",
+        "edition": null,
+        "evidenceIds": [],
+        "reviewState": "draft",
+        "missingReason": "No terminology source is supplied in this synthetic fixture."
+      }
+    ],
+    "structures": [
+      {
+        "id": "fixture:structure-tendon",
+        "kind": "tendon",
+        "termIds": []
+      },
+      {
+        "id": "fixture:structure-landmark",
+        "kind": "landmark",
+        "termIds": []
+      },
+      {
+        "id": "fixture:structure-joint",
+        "kind": "joint",
+        "termIds": []
+      },
+      {
+        "id": "fixture:structure-nerve",
+        "kind": "nerve",
+        "termIds": []
+      }
+    ],
+    "attachments": [
+      {
+        "id": "fixture:attachment",
+        "muscleOrPartId": "fixture:muscle",
+        "role": "undifferentiated",
+        "targetStructureId": "fixture:structure-tendon",
+        "landmarkId": "fixture:structure-landmark",
+        "descriptionClaimId": "fixture:claim-attachment",
+        "variantContext": null
+      }
+    ],
+    "spatialAnnotations": [
+      {
+        "id": "fixture:annotation",
+        "attachmentId": "fixture:attachment",
+        "instanceId": "fixture:instance-right",
+        "assetId": "fixture:mesh-right",
+        "assetRevision": "fixture:mesh-rev-1",
+        "assetRevisionHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "geometry": {
+          "kind": "point",
+          "position": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "units": "m",
+        "poseId": "fixture:static-pose",
+        "precision": "representative",
+        "method": "manual_mapping",
+        "transformChain": [
+          {
+            "sourceFrameId": "BODYPARTS3D_R4_SOURCE_MM",
+            "targetFrameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+            "sourceUnits": "mm",
+            "targetUnits": "m",
+            "scale": 0.001,
+            "rotationDeterminant": 1.0,
+            "rotationMatrix": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ],
+              [
+                0,
+                -1,
+                0
+              ]
+            ],
+            "evidenceId": "fixture:evidence-annotation"
+          }
+        ],
+        "landmarkChecks": [
+          {
+            "landmarkId": "fixture:structure-landmark",
+            "expectedAtlasPositionM": [
+              0.1,
+              0.2,
+              0.3
+            ],
+            "observedAtlasPositionM": [
+              0.1,
+              0.2,
+              0.3
+            ],
+            "toleranceM": 0.001,
+            "evidenceId": "fixture:evidence-annotation"
+          }
+        ],
+        "evidenceIds": [
+          "fixture:evidence-annotation"
+        ],
+        "reviewState": "reviewed"
+      }
+    ],
+    "meshAssets": [
+      {
+        "id": "fixture:mesh-right",
+        "revision": "fixture:mesh-rev-1",
+        "sourceId": "fixture:source",
+        "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "topologyHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "uri": "fixture://synthetic-right-mesh",
+        "format": "obj",
+        "units": "mm",
+        "axes": {
+          "frameId": "BODYPARTS3D_R4_SOURCE_MM",
+          "handedness": "right",
+          "positiveX": "patient_left",
+          "positiveY": "posterior",
+          "positiveZ": "superior"
+        },
+        "pose": {
+          "id": "fixture:static-pose",
+          "description": "Synthetic fixed reference pose; not an anatomical pose."
+        },
+        "licenseId": "fixture:license",
+        "laterality": "right"
+      }
+    ],
+    "meshMappings": [
+      {
+        "id": "fixture:mapping",
+        "instanceIds": [
+          "fixture:instance-right"
+        ],
+        "partIds": [
+          "fixture:part"
+        ],
+        "meshIds": [
+          "fixture:mesh-right"
+        ],
+        "representationType": "muscle_part",
+        "evidenceIds": [
+          "fixture:evidence-mapping"
+        ],
+        "reviewState": "reviewed"
+      }
+    ],
+    "jointActions": [
+      {
+        "id": "fixture:action",
+        "muscleOrPartIds": [
+          "fixture:muscle"
+        ],
+        "jointIds": [
+          "fixture:structure-joint"
+        ],
+        "action": "synthetic action placeholder",
+        "postureConditions": [],
+        "contractionRole": "unspecified",
+        "evidenceIds": [],
+        "reviewState": "draft"
+      }
+    ],
+    "innervations": [
+      {
+        "id": "fixture:innervation",
+        "muscleOrPartId": "fixture:muscle",
+        "nerveStructureId": "fixture:structure-nerve",
+        "rootLevels": [],
+        "context": "synthetic placeholder",
+        "evidenceIds": [],
+        "reviewState": "draft"
+      }
+    ],
+    "assessments": [
+      {
+        "id": "fixture:assessment",
+        "targetFunctionIds": [
+          "fixture:action"
+        ],
+        "relatedMuscleIds": [
+          "fixture:muscle"
+        ],
+        "scope": "individual",
+        "purpose": "Synthetic contract placeholder",
+        "protocol": {
+          "variantId": "fixture:protocol-variant",
+          "steps": []
+        },
+        "observations": [],
+        "interpretations": [],
+        "limitations": [
+          "Synthetic fixture only; no protocol is asserted."
+        ],
+        "safety": [],
+        "evidenceIds": [],
+        "reviewState": "draft"
+      }
+    ],
+    "sources": [
+      {
+        "id": "fixture:source",
+        "title": "Synthetic validator fixture source",
+        "authors": [
+          "Synthetic test generator"
+        ],
+        "edition": "fixture edition",
+        "year": 2026,
+        "urlOrLocalRef": "fixture://not-a-real-source",
+        "accessDate": "2026-09-25",
+        "license": {
+          "id": "fixture:license",
+          "name": "Synthetic test-only terms",
+          "spdxId": null,
+          "allowedUses": [
+            "internal",
+            "learning"
+          ],
+          "attributionRequired": true,
+          "attributionText": "Synthetic validator fixture; no real anatomy source.",
+          "derivativesAllowed": false,
+          "redistributionAllowed": false
+        }
+      }
+    ],
+    "evidence": [
+      {
+        "id": "fixture:evidence-attachment",
+        "sourceId": "fixture:source",
+        "locator": "synthetic fixture locator: attachment",
+        "supportedClaimIds": [
+          "fixture:claim-attachment"
+        ],
+        "evidenceKind": "synthetic_fixture"
+      },
+      {
+        "id": "fixture:evidence-mapping",
+        "sourceId": "fixture:source",
+        "locator": "synthetic fixture locator: mapping",
+        "supportedClaimIds": [
+          "fixture:claim-mapping"
+        ],
+        "evidenceKind": "synthetic_fixture"
+      },
+      {
+        "id": "fixture:evidence-annotation",
+        "sourceId": "fixture:source",
+        "locator": "synthetic fixture locator: annotation and known-marker gate",
+        "supportedClaimIds": [
+          "fixture:claim-annotation"
+        ],
+        "evidenceKind": "synthetic_fixture"
+      },
+      {
+        "id": "fixture:evidence-term",
+        "sourceId": "fixture:source",
+        "locator": "synthetic fixture locator: term gate",
+        "supportedClaimIds": [
+          "fixture:claim-term"
+        ],
+        "evidenceKind": "synthetic_fixture"
+      }
+    ],
+    "claims": [
+      {
+        "id": "fixture:claim-attachment",
+        "subjectId": "fixture:attachment",
+        "field": "description",
+        "value": {
+          "text": "Synthetic attachment description; not an anatomy claim."
+        },
+        "evidenceIds": [
+          "fixture:evidence-attachment"
+        ],
+        "attribution": "source_summary",
+        "reviewState": "reviewed"
+      },
+      {
+        "id": "fixture:claim-mapping",
+        "subjectId": "fixture:mapping",
+        "field": "mapping",
+        "value": "Synthetic mapping fixture.",
+        "evidenceIds": [
+          "fixture:evidence-mapping"
+        ],
+        "attribution": "user_note",
+        "reviewState": "reviewed"
+      },
+      {
+        "id": "fixture:claim-annotation",
+        "subjectId": "fixture:annotation",
+        "field": "coordinate",
+        "value": "Synthetic coordinate fixture in meters.",
+        "evidenceIds": [
+          "fixture:evidence-annotation"
+        ],
+        "attribution": "user_note",
+        "reviewState": "reviewed"
+      },
+      {
+        "id": "fixture:claim-term",
+        "subjectId": "fixture:term-en",
+        "field": "text",
+        "value": "Synthetic Muscle Name",
+        "evidenceIds": [
+          "fixture:evidence-term"
+        ],
+        "attribution": "user_note",
+        "reviewState": "reviewed"
+      }
+    ],
+    "reviews": [
+      {
+        "id": "fixture:review-1",
+        "targetId": "fixture:term-en",
+        "targetRevisionHash": "cdc194a4b8e189f38f2ea3f887f58e799ba21f376fb675109fe47860a9262790",
+        "reviewerKind": "human",
+        "reviewerId": "fixture-reviewer-id",
+        "decision": "approved",
+        "reviewedAt": "2026-09-25T00:00:00Z",
+        "notes": "Synthetic approval record for exercising validator gates only; not a real person review."
+      },
+      {
+        "id": "fixture:review-2",
+        "targetId": "fixture:mapping",
+        "targetRevisionHash": "18d53465d872fd64e215c10155f9bbc77ff2261c3daba58d12a9273050f010a7",
+        "reviewerKind": "human",
+        "reviewerId": "fixture-reviewer-id",
+        "decision": "approved",
+        "reviewedAt": "2026-09-25T00:00:00Z",
+        "notes": "Synthetic approval record for exercising validator gates only; not a real person review."
+      },
+      {
+        "id": "fixture:review-3",
+        "targetId": "fixture:annotation",
+        "targetRevisionHash": "0898a15fdac673ba90a24d12121a23fd6fb4171b9a9635d29ed796dea5021155",
+        "reviewerKind": "human",
+        "reviewerId": "fixture-reviewer-id",
+        "decision": "approved",
+        "reviewedAt": "2026-09-25T00:00:00Z",
+        "notes": "Synthetic approval record for exercising validator gates only; not a real person review."
+      },
+      {
+        "id": "fixture:review-4",
+        "targetId": "fixture:claim-attachment",
+        "targetRevisionHash": "6eb0e06cf36e1cccc1b81f6151e18a7d24eac6eb24344ff7f805a798d0561bfa",
+        "reviewerKind": "ai",
+        "reviewerId": "fixture-reviewer-id",
+        "decision": "approved",
+        "reviewedAt": "2026-09-25T00:00:00Z",
+        "notes": "Synthetic approval record for exercising validator gates only; not a real person review."
+      },
+      {
+        "id": "fixture:review-5",
+        "targetId": "fixture:claim-mapping",
+        "targetRevisionHash": "a4fbe4d994c99060a10f499f51219970a917348e96f6319f7cd416d1791963c6",
+        "reviewerKind": "human",
+        "reviewerId": "fixture-reviewer-id",
+        "decision": "approved",
+        "reviewedAt": "2026-09-25T00:00:00Z",
+        "notes": "Synthetic approval record for exercising validator gates only; not a real person review."
+      },
+      {
+        "id": "fixture:review-6",
+        "targetId": "fixture:claim-annotation",
+        "targetRevisionHash": "f154a1a8bfe78286df4a5127b63831868fcad9baaf8c27ef2727ca876aa7c396",
+        "reviewerKind": "human",
+        "reviewerId": "fixture-reviewer-id",
+        "decision": "approved",
+        "reviewedAt": "2026-09-25T00:00:00Z",
+        "notes": "Synthetic approval record for exercising validator gates only; not a real person review."
+      },
+      {
+        "id": "fixture:review-7",
+        "targetId": "fixture:claim-term",
+        "targetRevisionHash": "688effd39cde0c0138dd044507573e8e23c26d4bdbd4019a549a1f02f85c89c1",
+        "reviewerKind": "human",
+        "reviewerId": "fixture-reviewer-id",
+        "decision": "approved",
+        "reviewedAt": "2026-09-25T00:00:00Z",
+        "notes": "Synthetic approval record for exercising validator gates only; not a real person review."
+      }
+    ],
+    "modelElements": [
+      {
+        "id": "fixture:model-element-mapped",
+        "sourceId": "fixture:source",
+        "modelVersion": "synthetic-only",
+        "elementType": "actuator",
+        "elementRef": "fixtureActuator",
+        "mappingStatus": "provisional",
+        "muscleConceptId": "fixture:group"
+      },
+      {
+        "id": "fixture:model-element-unmapped",
+        "sourceId": "fixture:source",
+        "modelVersion": "synthetic-only",
+        "elementType": "path",
+        "elementRef": "fixturePath",
+        "mappingStatus": "unmapped"
+      }
+    ]
+  },
+  "publicationManifests": [
+    {
+      "id": "fixture:learning-manifest",
+      "scope": "learning",
+      "generatedAt": "2026-09-25T00:00:00Z",
+      "includedClaimIds": [
+        "fixture:claim-attachment",
+        "fixture:claim-mapping",
+        "fixture:claim-annotation",
+        "fixture:claim-term"
+      ],
+      "includedTermIds": [
+        "fixture:term-en"
+      ],
+      "includedSpatialAnnotationIds": [
+        "fixture:annotation"
+      ],
+      "includedMeshMappingIds": [
+        "fixture:mapping"
+      ],
+      "includedMeshAssetIds": [
+        "fixture:mesh-right"
+      ],
+      "includedJointActionIds": [],
+      "includedInnervationIds": [],
+      "includedAssessmentIds": [],
+      "attributions": [
+        {
+          "sourceId": "fixture:source",
+          "text": "Synthetic validator fixture; no real anatomy source."
+        }
+      ]
+    }
+  ]
+}

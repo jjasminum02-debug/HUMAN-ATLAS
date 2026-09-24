@@ -1,0 +1,1641 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://human-atlas.invalid/schema/atlas.schema.json",
+  "title": "HUMAN ATLAS dataset contract",
+  "description": "Core educational anatomy entities and reference integrity contract. Values are unreviewed until supported by current evidence and review records.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "revision",
+    "entities",
+    "publicationManifests"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "revision": {
+      "$ref": "#/$defs/Id"
+    },
+    "entities": {
+      "$ref": "#/$defs/Entities"
+    },
+    "publicationManifests": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/PublicationManifest"
+      },
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "Id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "Sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "NonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "IdArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Id"
+      },
+      "uniqueItems": true
+    },
+    "EvidenceIdArray": {
+      "$ref": "#/$defs/IdArray"
+    },
+    "ReviewState": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "needs_review",
+        "reviewed",
+        "held",
+        "stale"
+      ]
+    },
+    "Side": {
+      "type": "string",
+      "enum": [
+        "left",
+        "right",
+        "midline",
+        "unpaired"
+      ]
+    },
+    "CoordinateUnit": {
+      "type": "string",
+      "enum": [
+        "m",
+        "mm",
+        "cm"
+      ]
+    },
+    "CoordinatePosition": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "number"
+      }
+    },
+    "Region": {
+      "type": "object",
+      "required": [
+        "id",
+        "label"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "parentId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "label": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "StandardRef": {
+      "type": "object",
+      "required": [
+        "scheme",
+        "identifier"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "scheme": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "identifier": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "edition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "uri": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "Applicability": {
+      "type": "object",
+      "required": [
+        "populations"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "populations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NonEmptyString"
+          },
+          "uniqueItems": true
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "MuscleConcept": {
+      "type": "object",
+      "required": [
+        "id",
+        "entityType",
+        "regionIds",
+        "standardRefs",
+        "applicability"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "entityType": {
+          "type": "string",
+          "enum": [
+            "individual_muscle",
+            "muscle_group",
+            "muscle_part",
+            "variant"
+          ]
+        },
+        "regionIds": {
+          "$ref": "#/$defs/IdArray"
+        },
+        "parentId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "standardRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/StandardRef"
+          },
+          "uniqueItems": true
+        },
+        "applicability": {
+          "$ref": "#/$defs/Applicability"
+        }
+      }
+    },
+    "AnatomicalInstance": {
+      "type": "object",
+      "required": [
+        "id",
+        "conceptId",
+        "side"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "conceptId": {
+          "$ref": "#/$defs/Id"
+        },
+        "side": {
+          "$ref": "#/$defs/Side"
+        },
+        "variantId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "MusclePart": {
+      "type": "object",
+      "required": [
+        "id",
+        "parentMuscleId",
+        "partKind",
+        "termIds"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "parentMuscleId": {
+          "$ref": "#/$defs/Id"
+        },
+        "partKind": {
+          "type": "string",
+          "enum": [
+            "head",
+            "portion",
+            "belly",
+            "other"
+          ]
+        },
+        "termIds": {
+          "$ref": "#/$defs/IdArray"
+        }
+      }
+    },
+    "Term": {
+      "type": "object",
+      "required": [
+        "id",
+        "conceptId",
+        "language",
+        "script",
+        "text",
+        "termRole",
+        "edition",
+        "evidenceIds",
+        "reviewState"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "conceptId": {
+          "$ref": "#/$defs/Id"
+        },
+        "language": {
+          "type": "string",
+          "pattern": "^[a-z]{2,3}(-[A-Z][a-z]{3})?(-[A-Z]{2})?$"
+        },
+        "script": {
+          "type": "string",
+          "enum": [
+            "Hang",
+            "Hani",
+            "Latn",
+            "Zyyy",
+            "Zzzz"
+          ]
+        },
+        "text": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "termRole": {
+          "type": "string",
+          "enum": [
+            "preferred",
+            "standard",
+            "synonym",
+            "colloquial",
+            "historical",
+            "variant"
+          ]
+        },
+        "edition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidenceIds": {
+          "$ref": "#/$defs/EvidenceIdArray"
+        },
+        "reviewState": {
+          "$ref": "#/$defs/ReviewState"
+        },
+        "missingReason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "text": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        {
+          "required": [
+            "missingReason"
+          ],
+          "properties": {
+            "text": {
+              "type": "null"
+            },
+            "missingReason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "reviewState": {
+              "enum": [
+                "draft",
+                "needs_review",
+                "held",
+                "stale"
+              ]
+            },
+            "evidenceIds": {
+              "maxItems": 0
+            }
+          }
+        }
+      ]
+    },
+    "Structure": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "termIds"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "bone",
+            "landmark",
+            "tendon",
+            "fascia",
+            "aponeurosis",
+            "skin",
+            "nerve",
+            "joint",
+            "other"
+          ]
+        },
+        "parentId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "termIds": {
+          "$ref": "#/$defs/IdArray"
+        }
+      }
+    },
+    "Attachment": {
+      "type": "object",
+      "required": [
+        "id",
+        "muscleOrPartId",
+        "role",
+        "targetStructureId",
+        "descriptionClaimId",
+        "variantContext"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "muscleOrPartId": {
+          "$ref": "#/$defs/Id"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "origin",
+            "insertion",
+            "other_attachment",
+            "undifferentiated"
+          ]
+        },
+        "targetStructureId": {
+          "$ref": "#/$defs/Id"
+        },
+        "landmarkId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "descriptionClaimId": {
+          "$ref": "#/$defs/Id"
+        },
+        "variantContext": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "AxisFrame": {
+      "type": "object",
+      "required": [
+        "frameId",
+        "handedness",
+        "positiveX",
+        "positiveY",
+        "positiveZ"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "frameId": {
+          "$ref": "#/$defs/Id"
+        },
+        "handedness": {
+          "type": "string",
+          "enum": [
+            "right",
+            "left"
+          ]
+        },
+        "positiveX": {
+          "type": "string",
+          "enum": [
+            "patient_left",
+            "patient_right",
+            "anterior",
+            "posterior",
+            "head",
+            "feet",
+            "unknown",
+            "superior",
+            "inferior"
+          ]
+        },
+        "positiveY": {
+          "type": "string",
+          "enum": [
+            "patient_left",
+            "patient_right",
+            "anterior",
+            "posterior",
+            "head",
+            "feet",
+            "unknown",
+            "superior",
+            "inferior"
+          ]
+        },
+        "positiveZ": {
+          "type": "string",
+          "enum": [
+            "patient_left",
+            "patient_right",
+            "anterior",
+            "posterior",
+            "head",
+            "feet",
+            "unknown",
+            "superior",
+            "inferior"
+          ]
+        }
+      }
+    },
+    "MeshAsset": {
+      "type": "object",
+      "required": [
+        "id",
+        "revision",
+        "sourceId",
+        "hash",
+        "uri",
+        "format",
+        "units",
+        "axes",
+        "pose",
+        "licenseId",
+        "laterality"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "revision": {
+          "$ref": "#/$defs/Id"
+        },
+        "sourceId": {
+          "$ref": "#/$defs/Id"
+        },
+        "hash": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "topologyHash": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "uri": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "obj",
+            "glb",
+            "gltf",
+            "stl",
+            "ply",
+            "other"
+          ]
+        },
+        "units": {
+          "$ref": "#/$defs/CoordinateUnit"
+        },
+        "axes": {
+          "$ref": "#/$defs/AxisFrame"
+        },
+        "pose": {
+          "type": "object",
+          "required": [
+            "id",
+            "description"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/Id"
+            },
+            "description": {
+              "$ref": "#/$defs/NonEmptyString"
+            }
+          }
+        },
+        "licenseId": {
+          "$ref": "#/$defs/Id"
+        },
+        "laterality": {
+          "type": "string",
+          "enum": [
+            "left",
+            "right",
+            "midline",
+            "unpaired",
+            "bilateral",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "PointGeometry": {
+      "type": "object",
+      "required": [
+        "kind",
+        "position"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "point"
+        },
+        "position": {
+          "$ref": "#/$defs/CoordinatePosition"
+        }
+      }
+    },
+    "PolylineGeometry": {
+      "type": "object",
+      "required": [
+        "kind",
+        "vertices"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "polyline"
+        },
+        "vertices": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "$ref": "#/$defs/CoordinatePosition"
+          }
+        }
+      }
+    },
+    "SurfacePatchGeometry": {
+      "type": "object",
+      "required": [
+        "kind",
+        "triangleIds",
+        "topologyHash"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "surface_patch"
+        },
+        "triangleIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "uniqueItems": true
+        },
+        "topologyHash": {
+          "$ref": "#/$defs/Sha256"
+        }
+      }
+    },
+    "Geometry": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/PointGeometry"
+        },
+        {
+          "$ref": "#/$defs/PolylineGeometry"
+        },
+        {
+          "$ref": "#/$defs/SurfacePatchGeometry"
+        }
+      ]
+    },
+    "LandmarkCheck": {
+      "type": "object",
+      "required": [
+        "landmarkId",
+        "expectedAtlasPositionM",
+        "observedAtlasPositionM",
+        "toleranceM",
+        "evidenceId"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "landmarkId": {
+          "$ref": "#/$defs/Id"
+        },
+        "expectedAtlasPositionM": {
+          "$ref": "#/$defs/CoordinatePosition"
+        },
+        "observedAtlasPositionM": {
+          "$ref": "#/$defs/CoordinatePosition"
+        },
+        "toleranceM": {
+          "type": "number",
+          "minimum": 0
+        },
+        "evidenceId": {
+          "$ref": "#/$defs/Id"
+        }
+      }
+    },
+    "TransformStep": {
+      "type": "object",
+      "required": [
+        "sourceFrameId",
+        "targetFrameId",
+        "sourceUnits",
+        "targetUnits",
+        "scale",
+        "rotationDeterminant",
+        "rotationMatrix"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "sourceFrameId": {
+          "$ref": "#/$defs/Id"
+        },
+        "targetFrameId": {
+          "$ref": "#/$defs/Id"
+        },
+        "sourceUnits": {
+          "$ref": "#/$defs/CoordinateUnit"
+        },
+        "targetUnits": {
+          "$ref": "#/$defs/CoordinateUnit"
+        },
+        "scale": {
+          "type": "number",
+          "minimum": 1e-09
+        },
+        "rotationDeterminant": {
+          "type": "number",
+          "minimum": 0.999999,
+          "maximum": 1.000001
+        },
+        "evidenceId": {
+          "$ref": "#/$defs/Id"
+        },
+        "rotationMatrix": {
+          "$ref": "#/$defs/Matrix3"
+        }
+      }
+    },
+    "SpatialAnnotation": {
+      "type": "object",
+      "required": [
+        "id",
+        "attachmentId",
+        "instanceId",
+        "assetId",
+        "assetRevision",
+        "assetRevisionHash",
+        "geometry",
+        "frameId",
+        "units",
+        "poseId",
+        "precision",
+        "method",
+        "transformChain",
+        "landmarkChecks",
+        "evidenceIds",
+        "reviewState"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "attachmentId": {
+          "$ref": "#/$defs/Id"
+        },
+        "instanceId": {
+          "$ref": "#/$defs/Id"
+        },
+        "assetId": {
+          "$ref": "#/$defs/Id"
+        },
+        "assetRevision": {
+          "$ref": "#/$defs/Id"
+        },
+        "assetRevisionHash": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "geometry": {
+          "$ref": "#/$defs/Geometry"
+        },
+        "frameId": {
+          "$ref": "#/$defs/Id"
+        },
+        "units": {
+          "const": "m"
+        },
+        "poseId": {
+          "$ref": "#/$defs/Id"
+        },
+        "precision": {
+          "type": "string",
+          "enum": [
+            "representative",
+            "approximate_extent",
+            "reviewed_extent"
+          ]
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "source_annotation",
+            "manual_mapping",
+            "model_derived"
+          ]
+        },
+        "transformChain": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TransformStep"
+          }
+        },
+        "landmarkChecks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LandmarkCheck"
+          }
+        },
+        "evidenceIds": {
+          "$ref": "#/$defs/EvidenceIdArray"
+        },
+        "reviewState": {
+          "$ref": "#/$defs/ReviewState"
+        }
+      }
+    },
+    "MeshMapping": {
+      "type": "object",
+      "required": [
+        "id",
+        "instanceIds",
+        "partIds",
+        "meshIds",
+        "representationType",
+        "evidenceIds",
+        "reviewState"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "instanceIds": {
+          "$ref": "#/$defs/IdArray"
+        },
+        "partIds": {
+          "$ref": "#/$defs/IdArray"
+        },
+        "meshIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Id"
+          },
+          "uniqueItems": true
+        },
+        "representationType": {
+          "type": "string",
+          "enum": [
+            "whole_muscle",
+            "muscle_part",
+            "composite",
+            "subset",
+            "segment_path",
+            "other"
+          ]
+        },
+        "evidenceIds": {
+          "$ref": "#/$defs/EvidenceIdArray"
+        },
+        "reviewState": {
+          "$ref": "#/$defs/ReviewState"
+        }
+      }
+    },
+    "JointAction": {
+      "type": "object",
+      "required": [
+        "id",
+        "muscleOrPartIds",
+        "jointIds",
+        "action",
+        "postureConditions",
+        "contractionRole",
+        "evidenceIds",
+        "reviewState"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "muscleOrPartIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Id"
+          },
+          "uniqueItems": true
+        },
+        "jointIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Id"
+          },
+          "uniqueItems": true
+        },
+        "action": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "postureConditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NonEmptyString"
+          }
+        },
+        "contractionRole": {
+          "type": "string",
+          "enum": [
+            "concentric",
+            "eccentric",
+            "isometric",
+            "stabilizing",
+            "unspecified"
+          ]
+        },
+        "taskContext": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "roleInTask": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidenceIds": {
+          "$ref": "#/$defs/EvidenceIdArray"
+        },
+        "reviewState": {
+          "$ref": "#/$defs/ReviewState"
+        }
+      }
+    },
+    "Innervation": {
+      "type": "object",
+      "required": [
+        "id",
+        "muscleOrPartId",
+        "nerveStructureId",
+        "rootLevels",
+        "context",
+        "evidenceIds",
+        "reviewState"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "muscleOrPartId": {
+          "$ref": "#/$defs/Id"
+        },
+        "nerveStructureId": {
+          "$ref": "#/$defs/Id"
+        },
+        "rootLevels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NonEmptyString"
+          }
+        },
+        "context": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "evidenceIds": {
+          "$ref": "#/$defs/EvidenceIdArray"
+        },
+        "reviewState": {
+          "$ref": "#/$defs/ReviewState"
+        }
+      }
+    },
+    "Assessment": {
+      "type": "object",
+      "required": [
+        "id",
+        "targetFunctionIds",
+        "relatedMuscleIds",
+        "scope",
+        "purpose",
+        "protocol",
+        "observations",
+        "interpretations",
+        "limitations",
+        "safety",
+        "evidenceIds",
+        "reviewState"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "targetFunctionIds": {
+          "$ref": "#/$defs/IdArray"
+        },
+        "relatedMuscleIds": {
+          "$ref": "#/$defs/IdArray"
+        },
+        "scope": {
+          "type": "string",
+          "enum": [
+            "individual",
+            "group",
+            "movement_task"
+          ]
+        },
+        "purpose": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "protocol": {
+          "type": "object",
+          "required": [
+            "variantId",
+            "steps"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "variantId": {
+              "$ref": "#/$defs/Id"
+            },
+            "steps": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/NonEmptyString"
+              }
+            },
+            "position": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "equipment": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/NonEmptyString"
+              }
+            }
+          }
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NonEmptyString"
+          }
+        },
+        "interpretations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NonEmptyString"
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NonEmptyString"
+          }
+        },
+        "safety": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NonEmptyString"
+          }
+        },
+        "evidenceIds": {
+          "$ref": "#/$defs/EvidenceIdArray"
+        },
+        "reviewState": {
+          "$ref": "#/$defs/ReviewState"
+        }
+      }
+    },
+    "LicenseTerms": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "spdxId",
+        "allowedUses",
+        "attributionRequired",
+        "attributionText",
+        "derivativesAllowed",
+        "redistributionAllowed"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "name": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "spdxId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "allowedUses": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "internal",
+              "research",
+              "learning",
+              "public_learning",
+              "derivative",
+              "redistribute"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "attributionRequired": {
+          "type": "boolean"
+        },
+        "attributionText": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "derivativesAllowed": {
+          "type": "boolean"
+        },
+        "redistributionAllowed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Source": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "authors",
+        "edition",
+        "year",
+        "urlOrLocalRef",
+        "accessDate",
+        "license"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "title": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "authors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NonEmptyString"
+          }
+        },
+        "edition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "year": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "urlOrLocalRef": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "accessDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "license": {
+          "$ref": "#/$defs/LicenseTerms"
+        }
+      }
+    },
+    "Evidence": {
+      "type": "object",
+      "required": [
+        "id",
+        "sourceId",
+        "locator",
+        "supportedClaimIds",
+        "evidenceKind"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "sourceId": {
+          "$ref": "#/$defs/Id"
+        },
+        "locator": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "supportedClaimIds": {
+          "$ref": "#/$defs/IdArray"
+        },
+        "excerptHash": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidenceKind": {
+          "type": "string",
+          "enum": [
+            "primary",
+            "secondary",
+            "dataset",
+            "metadata",
+            "user_note",
+            "synthetic_fixture"
+          ]
+        }
+      }
+    },
+    "Claim": {
+      "type": "object",
+      "required": [
+        "id",
+        "subjectId",
+        "field",
+        "value",
+        "evidenceIds",
+        "attribution",
+        "reviewState"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "subjectId": {
+          "$ref": "#/$defs/Id"
+        },
+        "field": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "value": {},
+        "evidenceIds": {
+          "$ref": "#/$defs/EvidenceIdArray"
+        },
+        "attribution": {
+          "type": "string",
+          "enum": [
+            "source_summary",
+            "source_quote",
+            "ai_interpretation",
+            "user_note"
+          ]
+        },
+        "reviewState": {
+          "$ref": "#/$defs/ReviewState"
+        }
+      }
+    },
+    "Review": {
+      "type": "object",
+      "required": [
+        "id",
+        "targetId",
+        "targetRevisionHash",
+        "reviewerKind",
+        "reviewerId",
+        "decision",
+        "reviewedAt",
+        "notes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "targetId": {
+          "$ref": "#/$defs/Id"
+        },
+        "targetRevisionHash": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "reviewerKind": {
+          "type": "string",
+          "enum": [
+            "human",
+            "ai"
+          ]
+        },
+        "reviewerId": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "approved",
+            "rejected",
+            "needs_revision",
+            "held"
+          ]
+        },
+        "reviewedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "ModelElement": {
+      "type": "object",
+      "required": [
+        "id",
+        "sourceId",
+        "modelVersion",
+        "elementType",
+        "elementRef",
+        "mappingStatus"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "sourceId": {
+          "$ref": "#/$defs/Id"
+        },
+        "modelVersion": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "elementType": {
+          "type": "string",
+          "enum": [
+            "actuator",
+            "path",
+            "body",
+            "joint",
+            "other"
+          ]
+        },
+        "elementRef": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "mappingStatus": {
+          "type": "string",
+          "enum": [
+            "verified",
+            "provisional",
+            "unmapped"
+          ]
+        },
+        "muscleConceptId": {
+          "$ref": "#/$defs/Id"
+        }
+      }
+    },
+    "Entities": {
+      "type": "object",
+      "required": [
+        "regions",
+        "muscleConcepts",
+        "instances",
+        "muscleParts",
+        "terms",
+        "structures",
+        "attachments",
+        "spatialAnnotations",
+        "meshAssets",
+        "meshMappings",
+        "jointActions",
+        "innervations",
+        "assessments",
+        "sources",
+        "evidence",
+        "claims",
+        "reviews",
+        "modelElements"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "regions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Region"
+          }
+        },
+        "muscleConcepts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MuscleConcept"
+          }
+        },
+        "instances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnatomicalInstance"
+          }
+        },
+        "muscleParts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MusclePart"
+          }
+        },
+        "terms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Term"
+          }
+        },
+        "structures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Structure"
+          }
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Attachment"
+          }
+        },
+        "spatialAnnotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SpatialAnnotation"
+          }
+        },
+        "meshAssets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MeshAsset"
+          }
+        },
+        "meshMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MeshMapping"
+          }
+        },
+        "jointActions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/JointAction"
+          }
+        },
+        "innervations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Innervation"
+          }
+        },
+        "assessments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Assessment"
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Source"
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Evidence"
+          }
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Claim"
+          }
+        },
+        "reviews": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Review"
+          }
+        },
+        "modelElements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ModelElement"
+          }
+        }
+      }
+    },
+    "PublicationAttribution": {
+      "type": "object",
+      "required": [
+        "sourceId",
+        "text"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "sourceId": {
+          "$ref": "#/$defs/Id"
+        },
+        "text": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      }
+    },
+    "PublicationManifest": {
+      "type": "object",
+      "required": [
+        "id",
+        "scope",
+        "generatedAt",
+        "includedClaimIds",
+        "includedTermIds",
+        "includedSpatialAnnotationIds",
+        "includedMeshMappingIds",
+        "includedMeshAssetIds",
+        "includedJointActionIds",
+        "includedInnervationIds",
+        "includedAssessmentIds",
+        "attributions"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "scope": {
+          "type": "string",
+          "enum": [
+            "internal",
+            "learning"
+          ]
+        },
+        "generatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "includedClaimIds": {
+          "$ref": "#/$defs/IdArray"
+        },
+        "includedTermIds": {
+          "$ref": "#/$defs/IdArray"
+        },
+        "includedSpatialAnnotationIds": {
+          "$ref": "#/$defs/IdArray"
+        },
+        "includedMeshMappingIds": {
+          "$ref": "#/$defs/IdArray"
+        },
+        "includedMeshAssetIds": {
+          "$ref": "#/$defs/IdArray"
+        },
+        "includedJointActionIds": {
+          "$ref": "#/$defs/IdArray"
+        },
+        "includedInnervationIds": {
+          "$ref": "#/$defs/IdArray"
+        },
+        "includedAssessmentIds": {
+          "$ref": "#/$defs/IdArray"
+        },
+        "attributions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PublicationAttribution"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "Matrix3": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "$ref": "#/$defs/CoordinatePosition"
+      }
+    }
+  }
+}

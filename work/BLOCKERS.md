@@ -21,3 +21,11 @@
 - 선택된 OBJ의 embedded comments에는 이전 CC BY-SA 2.1 Japan 문구가 남아 있다. 변형하지 않았고 current LSDB Archive notice와 요구 귀속을 manifest에 기록했다. 이번 task에서 외부 공개하지 않았다. 이후 공개 전에 archive 조건/필요 귀속을 다시 확인한다.
 - 6 pilot의 해부학적 identity/shape, gastrocnemius head 관계, attachment 영역, joint pose는 사람 검토 대상이다. 다섯 연결 뼈 mesh는 교차표에서만 확인했다. 이는 T02 범위를 통과시키지 못하는 blocker로 분류하지 않고 다음 review gate에 보낸다.
 - 다음 직렬 task T03은 schema/validator 작업이며 이 task에서 시작하지 않았다.
+
+## T03
+
+- T03 blocker 없음. 스키마/검증기와 1 positive + 16 negative synthetic fixtures의 지정된 검증 결과가 통과했다.
+- 실제 reviewer 신원/서명은 JSON validator에서 확인할 수 없다. `reviewed`는 기록된 human-kind 결정, evidence, revision hash의 구조적 gate로만 취급하며 실제 사람 검토로 주장하지 않는다.
+- fixture의 source/term/mesh/claim/coordinate/approval 값은 synthetic test data다. 실제 해부학 입력, 실제 메시의 승인, license 공개 권리 또는 임상 타당성을 뜻하지 않는다.
+- T04 입력 전에 필요한 정확한 TA2/Korean terminology edition, 실제 항목 locator와 완전한 목록은 여전히 확보되지 않았다. 기존 `work/review-queue/source-gaps.md`를 이어받아 확보/결측 상태를 명시한다.
+- 다음 직렬 task는 T04이며 이 task에서 시작하지 않았다.
