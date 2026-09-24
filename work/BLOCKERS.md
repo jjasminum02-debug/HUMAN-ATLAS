@@ -14,3 +14,10 @@
 - T01 차단 항목 없음. 지정된 전신 부위와 분류/집계 정책, 출처 후보·판본·license·locator 확보 상태를 기록했고 machine-readable validation을 실행했다.
 - 후속 단계 공백은 `work/review-queue/source-gaps.md`에 출처별로 세분화했다. 이 공백은 T01을 막지 않았으며 현재 T02를 자동으로 막는 것으로 판정하지 않았다.
 - 다음 단계에서 실제 파일 접근이 실패하거나 해당 구조/권리를 확인할 수 없으면, 이유와 독립적으로 가능한 일을 T02 보고서에 기록한다. 파일 내용과 license를 확인하지 않은 상태에서 메시나 부착 데이터가 지원된다고 주장하지 않는다.
+
+## T02
+
+- T02 blocker 없음. archive source file과 현재 archive 사용 조건/귀속을 확인했고 소량 mesh, source ID, shape/좌표, viewer trial을 기록했다.
+- 선택된 OBJ의 embedded comments에는 이전 CC BY-SA 2.1 Japan 문구가 남아 있다. 변형하지 않았고 current LSDB Archive notice와 요구 귀속을 manifest에 기록했다. 이번 task에서 외부 공개하지 않았다. 이후 공개 전에 archive 조건/필요 귀속을 다시 확인한다.
+- 6 pilot의 해부학적 identity/shape, gastrocnemius head 관계, attachment 영역, joint pose는 사람 검토 대상이다. 다섯 연결 뼈 mesh는 교차표에서만 확인했다. 이는 T02 범위를 통과시키지 못하는 blocker로 분류하지 않고 다음 review gate에 보낸다.
+- 다음 직렬 task T03은 schema/validator 작업이며 이 task에서 시작하지 않았다.

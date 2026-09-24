@@ -1,0 +1,25 @@
+T02 viewer trial evidence
+Date: 2026-09-25
+Local-only page: work/evidence/T02/calf-viewer-trial.html (127.0.0.1:8765 while trial server was running)
+Reference device: macOS desktop, Codex In-app Browser; viewport 810 x 752 CSS px; devicePixelRatio 2. Physical computer model not inspected.
+
+Observed browser load state:
+- 11/11 selected OBJ files loaded; 21,480 vertices and 30,032 polygon faces parsed.
+- runtime/load error counter: 0.
+- internal display transform shown by the viewer: source mm -> atlas m; atlas [x,y,z] = source [x,z,-y] / 1000.
+- default scene displayed right soleus FJ1437 with right tibia FJ3387, fibula FJ3366, talus FJ3385, and calcaneus FJ3360.
+- source x < 0 geometry appeared to the right-of-patient axis side (screen left of midline) in the anterior view; superior/head axis pointed upward.
+
+Actions actually performed in the browser:
+1. Opened the local trial page and observed all 11 layer controls and successful asset load status.
+2. Selected “pilot 전체”; the layer state changed from 5 to 11 displayed meshes.
+3. Dragged the scene; the camera visibly orbited.
+4. Scrolled over the canvas; the calf visibly zoomed in.
+5. Selected the anterior/front view and confirmed the soleus-plus-bones reference scene.
+6. Saved the canvas PNG via the local evidence endpoint; HTTP POST returned 200. Final PNG: 1544 x 902 pixels, 177,200 bytes, valid PNG signature (recaptured after final page revision).
+
+Local server access evidence: page request and each of 11 first-load OBJ requests returned HTTP 200; cached reload requests returned 304; PNG capture POST returned 200. One initial page request returned 404 before the task-owned server root was corrected; after correction all viewer/data requests succeeded.
+
+Browser console collection: the final tab capture through `tab.dev.logs({})` returned an empty entry list; see `browser-console.json`. The page also tracks window errors/unhandled rejections and asset-load failures, and the displayed counter remained 0. The API result is limited to the accessible capture window and is not evidence about earlier navigation.
+
+Image is a shape/orientation trial only. It is not an anatomy review, attachment-surface annotation, or production app screenshot.

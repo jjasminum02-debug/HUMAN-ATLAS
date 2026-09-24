@@ -20,3 +20,13 @@
 - T02용 3D 후보는 LSDB Archive의 BodyParts3D Release 4.0으로 한정 등록한다. archive page는 CC BY 4.0(2025-02-27 갱신)과 exact credit string을 표시한다. 배포 데이터 날짜(2013-06-19)와 license 갱신일을 구별한다. live information/API 페이지의 CC BY-SA 2.1 JP 표시는 archive license와 혼합하지 않고 source-specific 검증 대상으로 남긴다.
 - BodyParts3D 파일, TA2/KAA/OpenStax/Merck 본문 데이터, OpenSim remote model은 T01에서 다운로드/복사하지 않았다. 레지스트리에는 웹 페이지, 판본 식별, locator, local-file 확보 상태를 분리 기록한다.
 - 기존 `README.md`, `design/**`, 템플릿과 `OpenSim_Models`는 변경하지 않는다. T01은 외부 공개·앱·임상 task가 아니다. 다음 직렬 task는 T02이다.
+
+## T02 — 2026-09-25
+
+- LSDB Archive의 exact BodyParts3D Release 4.0 OBJ archive에서 필요한 11개 member만 HTTP Range로 획득했다. ZIP 전체는 저장하지 않았다. FMA concept→BP representation→FJ mesh crosswalk는 공식 IS-A 테이블의 locator로 기록했다.
+- 우측 6개 pilot concept에 대해 7개 mesh 후보를 유지한다. 우측 gastrocnemius는 medial/lateral head가 별도 concept/파일이므로 하나의 whole-muscle mesh라고 합치지 않는다. 우측 tibia/fibula/talus/calcaneus 네 mesh도 확보했다. 추가 5개 뼈는 crosswalk availability만 기록했다.
+- 좌표 결정: source mm, +X 환자 좌/음수 X 우, +Y 후방, +Z 상방을 atlas meter, +X 환자 좌, +Y 상방, +Z 전방으로 `atlas[x,y,z]m = source[x,z,-y]mm/1000` 변환한다. determinant 1이며 오른쪽 부호가 유지된다. source는 성인 남성 정적 reference geometry이고 관절 pose를 표준화한 metadata는 없다.
+- official current LSDB Archive page와 README는 CC BY 4.0 및 exact credit을 표시한다. 선택된 2013 OBJ header는 과거 CC BY-SA 2.1 Japan 문구를 포함하므로 원문을 그대로 보존하고 manifest에 차이를 기록한다. 이번에는 외부 배포하지 않으며 배포 시점에 조건을 재확인한다.
+- 실제 mesh hash/ID/우측 경계, 단일 부위 viewer의 근육+뼈 화면을 확인했다. viewer gate는 이 후보의 방향·공간 정렬/표시 시험으로 한정된다. shape/identity, 부착면, 임상 의미의 사람 검토를 뜻하지 않는다.
+- `OpenSim_Models`는 `d9b05d470b1a481c222372c85b75772faf8f7792`에서 clean 상태이며 `.osim` 근육 이름만 비교했다. 파일 내용은 복사·변환·수정하지 않았다. 기존 `README.md`, `AGENTS.md`, `design/**`의 사전·사후 SHA-256은 모두 일치한다.
+- T02 완료. 다음 직렬 task는 T03 공통 스키마와 검증기이며 여기서 시작하지 않는다.

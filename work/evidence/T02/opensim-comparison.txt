@@ -1,0 +1,17 @@
+T02 read-only OpenSim comparison
+Checkout: HUMAN ATLAS/OpenSim_Models/
+HEAD: d9b05d470b1a481c222372c85b75772faf8f7792
+Working-tree status: ## master...origin/master
+git diff --quiet HEAD -- exit: 0
+Rajagopal model: OpenSim_Models/Models/Rajagopal/Rajagopal2016.osim
+SHA-256: 3f5c5f23e486073f2ad2aa4a4967ffe2fcdd582b1e355512bc54f70c36376bf4
+Right calf muscle force/model names found in the Rajagopal .osim file:
+- gasmed_r: present
+- gaslat_r: present
+- soleus_r: present
+- tibant_r: present
+- tibpost_r: present
+- perlong_r: present
+- perbrev_r: present
+
+This is a name-level comparison only. OpenSim force/path-point records are not BodyParts3D mesh IDs or attachment validation. No OpenSim file was copied, transformed, or modified.

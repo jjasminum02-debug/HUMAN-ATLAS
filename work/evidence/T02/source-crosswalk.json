@@ -1,0 +1,230 @@
+{
+  "task": "T02",
+  "source_tables": {
+    "concept_representation": {
+      "file": "isa_parts_list_e.txt",
+      "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_parts_list_e.txt",
+      "columns": [
+        "concept id (FMA)",
+        "representation id (BP)",
+        "English name"
+      ]
+    },
+    "element_mesh_mapping": {
+      "file": "isa_element_parts.txt",
+      "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_element_parts.txt",
+      "columns": [
+        "concept id (FMA)",
+        "name",
+        "element file id (FJ)"
+      ]
+    }
+  },
+  "row_locator_note": "row numbers count from 1 using the official tab-delimited file; the matching line numbers were cross-checked in official LSDB Archive browser rendering.",
+  "pilot_muscles": [
+    {
+      "pilot_concept": "gastrocnemius",
+      "part": "medial head",
+      "concept_id": "FMA45957",
+      "representation_id": "BP5539",
+      "element_file_id": "FJ1397",
+      "source_name": "medial head of right gastrocnemius",
+      "table_rows": {
+        "isa_parts_list_e.txt": 1644,
+        "isa_element_parts.txt": 5965
+      },
+      "local_asset": "atlas-data/assets/bodyparts3d-v4-pilot/FJ1397.obj",
+      "support": "head_mesh_candidate"
+    },
+    {
+      "pilot_concept": "gastrocnemius",
+      "part": "lateral head",
+      "concept_id": "FMA45960",
+      "representation_id": "BP5541",
+      "element_file_id": "FJ1394",
+      "source_name": "lateral head of right gastrocnemius",
+      "table_rows": {
+        "isa_parts_list_e.txt": 1647,
+        "isa_element_parts.txt": 5969
+      },
+      "local_asset": "atlas-data/assets/bodyparts3d-v4-pilot/FJ1394.obj",
+      "support": "head_mesh_candidate"
+    },
+    {
+      "pilot_concept": "soleus",
+      "part": null,
+      "concept_id": "FMA22558",
+      "representation_id": "BP4999",
+      "element_file_id": "FJ1437",
+      "source_name": "right soleus",
+      "table_rows": {
+        "isa_parts_list_e.txt": 863,
+        "isa_element_parts.txt": 3643
+      },
+      "local_asset": "atlas-data/assets/bodyparts3d-v4-pilot/FJ1437.obj",
+      "support": "right_muscle_mesh_candidate"
+    },
+    {
+      "pilot_concept": "tibialis_anterior",
+      "part": null,
+      "concept_id": "FMA22544",
+      "representation_id": "BP5018",
+      "element_file_id": "FJ1439",
+      "source_name": "right tibialis anterior",
+      "table_rows": {
+        "isa_parts_list_e.txt": 851,
+        "isa_element_parts.txt": 3631
+      },
+      "local_asset": "atlas-data/assets/bodyparts3d-v4-pilot/FJ1439.obj",
+      "support": "right_muscle_mesh_candidate"
+    },
+    {
+      "pilot_concept": "tibialis_posterior",
+      "part": null,
+      "concept_id": "FMA65018",
+      "representation_id": "BP5004",
+      "element_file_id": "FJ1440",
+      "source_name": "right tibialis posterior",
+      "table_rows": {
+        "isa_parts_list_e.txt": 2353,
+        "isa_element_parts.txt": 15733
+      },
+      "local_asset": "atlas-data/assets/bodyparts3d-v4-pilot/FJ1440.obj",
+      "support": "right_muscle_mesh_candidate"
+    },
+    {
+      "pilot_concept": "fibularis_longus",
+      "part": null,
+      "concept_id": "FMA22552",
+      "representation_id": "BP5013",
+      "element_file_id": "FJ1410",
+      "source_name": "right fibularis longus",
+      "table_rows": {
+        "isa_parts_list_e.txt": 859,
+        "isa_element_parts.txt": 3639
+      },
+      "local_asset": "atlas-data/assets/bodyparts3d-v4-pilot/FJ1410.obj",
+      "support": "right_muscle_mesh_candidate"
+    },
+    {
+      "pilot_concept": "fibularis_brevis",
+      "part": null,
+      "concept_id": "FMA22554",
+      "representation_id": "BP5015",
+      "element_file_id": "FJ1409",
+      "source_name": "right fibularis brevis",
+      "table_rows": {
+        "isa_parts_list_e.txt": 861,
+        "isa_element_parts.txt": 3641
+      },
+      "local_asset": "atlas-data/assets/bodyparts3d-v4-pilot/FJ1409.obj",
+      "support": "right_muscle_mesh_candidate"
+    }
+  ],
+  "region_bone_inventory": [
+    {
+      "concept_id": "FMA24474",
+      "representation_id": "BP8920",
+      "element_file_id": "FJ3365",
+      "source_name": "right femur",
+      "availability": "listed_mapped_not_acquired",
+      "table_rows": {
+        "isa_parts_list_e.txt": 1172,
+        "isa_element_parts.txt": 4375
+      }
+    },
+    {
+      "concept_id": "FMA24477",
+      "representation_id": "BP8031",
+      "element_file_id": "FJ3387",
+      "source_name": "right tibia",
+      "availability": "subset_acquired",
+      "table_rows": {
+        "isa_parts_list_e.txt": 1175,
+        "isa_element_parts.txt": 4379
+      },
+      "local_asset": "atlas-data/assets/bodyparts3d-v4-pilot/FJ3387.obj"
+    },
+    {
+      "concept_id": "FMA24480",
+      "representation_id": "BP8009",
+      "element_file_id": "FJ3366",
+      "source_name": "right fibula",
+      "availability": "subset_acquired",
+      "table_rows": {
+        "isa_parts_list_e.txt": 1178,
+        "isa_element_parts.txt": 4383
+      },
+      "local_asset": "atlas-data/assets/bodyparts3d-v4-pilot/FJ3366.obj"
+    },
+    {
+      "concept_id": "FMA24482",
+      "representation_id": "BP8033",
+      "element_file_id": "FJ3385",
+      "source_name": "right talus",
+      "availability": "subset_acquired",
+      "table_rows": {
+        "isa_parts_list_e.txt": 1180,
+        "isa_element_parts.txt": 4385
+      },
+      "local_asset": "atlas-data/assets/bodyparts3d-v4-pilot/FJ3385.obj"
+    },
+    {
+      "concept_id": "FMA24497",
+      "representation_id": "BP9040",
+      "element_file_id": "FJ3360",
+      "source_name": "right calcaneus",
+      "availability": "subset_acquired",
+      "table_rows": {
+        "isa_parts_list_e.txt": 1189,
+        "isa_element_parts.txt": 4445
+      },
+      "local_asset": "atlas-data/assets/bodyparts3d-v4-pilot/FJ3360.obj"
+    },
+    {
+      "concept_id": "FMA24500",
+      "representation_id": "BP9133",
+      "element_file_id": "FJ3308",
+      "source_name": "navicular bone of right foot",
+      "availability": "listed_mapped_not_acquired",
+      "table_rows": {
+        "isa_parts_list_e.txt": 1192,
+        "isa_element_parts.txt": 4449
+      }
+    },
+    {
+      "concept_id": "FMA24507",
+      "representation_id": "BP8230",
+      "element_file_id": "FJ3351",
+      "source_name": "right first metatarsal bone",
+      "availability": "listed_mapped_not_acquired",
+      "table_rows": {
+        "isa_parts_list_e.txt": 1199,
+        "isa_element_parts.txt": 4461
+      }
+    },
+    {
+      "concept_id": "FMA24515",
+      "representation_id": "BP7912",
+      "element_file_id": "FJ3359",
+      "source_name": "right fifth metatarsal bone",
+      "availability": "listed_mapped_not_acquired",
+      "table_rows": {
+        "isa_parts_list_e.txt": 1207,
+        "isa_element_parts.txt": 4469
+      }
+    },
+    {
+      "concept_id": "FMA24521",
+      "representation_id": "BP8830",
+      "element_file_id": "FJ3377",
+      "source_name": "right medial cuneiform bone",
+      "availability": "listed_mapped_not_acquired",
+      "table_rows": {
+        "isa_parts_list_e.txt": 1213,
+        "isa_element_parts.txt": 4483
+      }
+    }
+  ],
+  "interpretation_limit": "A table row or mesh association is availability/crosswalk evidence only; it does not assert origin/insertion, attachment area, complete representation, or anatomical correctness. Gastrocnemius is represented at right medial/lateral head level; the archive mapping does not provide one inspected whole-right-gastrocnemius mesh here."
+}

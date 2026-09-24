@@ -1,0 +1,357 @@
+{
+  "task": "T02",
+  "checked_at_local_date": "2026-09-25",
+  "command": "python3 work/evidence/T02/validate_t02.py",
+  "passed": true,
+  "checks_passed": 13,
+  "checks_total": 13,
+  "checks": [
+    {
+      "name": "official_release_and_bounded_range_transfer",
+      "passed": true,
+      "observed": {
+        "archive_bytes": 142903898,
+        "range_bytes": 2656859,
+        "full_zip_saved": false
+      }
+    },
+    {
+      "name": "archive_license_and_embedded_notice_recorded",
+      "passed": true,
+      "observed": {
+        "archive_license": "CC BY 4.0",
+        "required_credit": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+        "legacy_notice": "Selected 2013 OBJ members contain a CC BY-SA 2.1 Japan license/credit notice in comments. Headers were preserved unchanged.",
+        "public_release": false
+      }
+    },
+    {
+      "name": "six_pilot_concepts_have_traceable_source_ids",
+      "passed": true,
+      "observed": {
+        "concepts": [
+          "fibularis_brevis",
+          "fibularis_longus",
+          "gastrocnemius",
+          "soleus",
+          "tibialis_anterior",
+          "tibialis_posterior"
+        ],
+        "muscle_mesh_rows": 7,
+        "gastrocnemius_parts": [
+          "medial head",
+          "lateral head"
+        ]
+      }
+    },
+    {
+      "name": "related_bone_crosswalk_counts",
+      "passed": true,
+      "observed": {
+        "total": 9,
+        "acquired": 4,
+        "listed_only": 5
+      }
+    },
+    {
+      "name": "coordinate_unit_axis_transform_and_pose_limit",
+      "passed": true,
+      "observed": {
+        "formula": "[x_atlas,y_atlas,z_atlas]m = [x_source,z_source,-y_source]mm / 1000",
+        "computed_full_transform_determinant": 1e-09,
+        "computed_rotation_determinant": 1.0,
+        "pose": "bodyparts3d-r4-static-reference"
+      }
+    },
+    {
+      "name": "all_eleven_obj_hashes_headers_geometry_and_right_side",
+      "passed": true,
+      "observed": {
+        "asset_count": 11,
+        "total_bytes": 2256442,
+        "total_vertices": 21480,
+        "total_polygon_faces": 30032,
+        "assets": [
+          {
+            "file": "FJ1394.obj",
+            "bytes": 201640,
+            "sha256": "621dc10e974bcc1c53a8843bf1db3a1c322c8327d279010c58533bd28952bf08",
+            "zip_crc32": "1d3a08c1",
+            "vertices": 1748,
+            "faces": 3052,
+            "source_x_max_mm": -61.167
+          },
+          {
+            "file": "FJ1397.obj",
+            "bytes": 260975,
+            "sha256": "d7f3aa44801171baade1a59c40a8f8bda72097bec07047f93f24ebaac4546cb4",
+            "zip_crc32": "186ba2b2",
+            "vertices": 2263,
+            "faces": 3842,
+            "source_x_max_mm": -21.7597
+          },
+          {
+            "file": "FJ1409.obj",
+            "bytes": 151020,
+            "sha256": "ba330adc0128b26a50b4a5bd0a0cedcd3f32dbf09ae25f4e0587949dbd9d3d11",
+            "zip_crc32": "4cb22cb3",
+            "vertices": 1605,
+            "faces": 1766,
+            "source_x_max_mm": -82.1431
+          },
+          {
+            "file": "FJ1410.obj",
+            "bytes": 304555,
+            "sha256": "40c36bc4dc24e161c84daf6e96017f9d78b4cf964579a873e267d2619be4aa2c",
+            "zip_crc32": "62d8452e",
+            "vertices": 2946,
+            "faces": 3860,
+            "source_x_max_mm": -82.4042
+          },
+          {
+            "file": "FJ1437.obj",
+            "bytes": 307036,
+            "sha256": "c9c62b720ffe375a8eddf390608684a796f1ea54880a5c34fa440404addc399e",
+            "zip_crc32": "df38f2ac",
+            "vertices": 2674,
+            "faces": 4418,
+            "source_x_max_mm": -35.6001
+          },
+          {
+            "file": "FJ1439.obj",
+            "bytes": 213354,
+            "sha256": "b03d2f54644969d153d3dfe4025ee629858e72c1e5ee3b0e7d5f16f54dc505b3",
+            "zip_crc32": "8e090aca",
+            "vertices": 2204,
+            "faces": 2510,
+            "source_x_max_mm": -66.967
+          },
+          {
+            "file": "FJ1440.obj",
+            "bytes": 476926,
+            "sha256": "6fc367885524fc416139372b55c64d8e1e4bc9010bee64020a72ad8e6f34a57d",
+            "zip_crc32": "61e45e90",
+            "vertices": 5039,
+            "faces": 5136,
+            "source_x_max_mm": -42.6838
+          },
+          {
+            "file": "FJ3360.obj",
+            "bytes": 81782,
+            "sha256": "b53e7970e822e997e1b05f94f42514d07a3f98edcc63ec7dd7219354ce1d8176",
+            "zip_crc32": "47ecd25c",
+            "vertices": 739,
+            "faces": 1262,
+            "source_x_max_mm": -44.8758
+          },
+          {
+            "file": "FJ3366.obj",
+            "bytes": 69197,
+            "sha256": "d03fee02cf8eefad1ecfcb9246e3f43ad3c4615c21ce08dc5e2b6901c6395a86",
+            "zip_crc32": "1140551b",
+            "vertices": 593,
+            "faces": 1142,
+            "source_x_max_mm": -84.3445
+          },
+          {
+            "file": "FJ3385.obj",
+            "bytes": 89820,
+            "sha256": "8b35f0132c1a05b64f26746fdd0496a2495280cd0c2ac90dbf637fd74f79f54f",
+            "zip_crc32": "232ca618",
+            "vertices": 812,
+            "faces": 1380,
+            "source_x_max_mm": -49.6273
+          },
+          {
+            "file": "FJ3387.obj",
+            "bytes": 100137,
+            "sha256": "01879d7310938e82eecc02e1115332497e94085ff5cc1fa8eeee47ad1f5d3578",
+            "zip_crc32": "2efd9adb",
+            "vertices": 857,
+            "faces": 1664,
+            "source_x_max_mm": -35.216
+          }
+        ]
+      }
+    },
+    {
+      "name": "source_obj_faces_are_triangles_for_viewer_count",
+      "passed": true,
+      "observed": {
+        "total_face_records": 30032,
+        "assets": {
+          "FJ1394.obj": {
+            "face_records": 3052,
+            "min_vertices": 3,
+            "max_vertices": 3
+          },
+          "FJ1397.obj": {
+            "face_records": 3842,
+            "min_vertices": 3,
+            "max_vertices": 3
+          },
+          "FJ1409.obj": {
+            "face_records": 1766,
+            "min_vertices": 3,
+            "max_vertices": 3
+          },
+          "FJ1410.obj": {
+            "face_records": 3860,
+            "min_vertices": 3,
+            "max_vertices": 3
+          },
+          "FJ1437.obj": {
+            "face_records": 4418,
+            "min_vertices": 3,
+            "max_vertices": 3
+          },
+          "FJ1439.obj": {
+            "face_records": 2510,
+            "min_vertices": 3,
+            "max_vertices": 3
+          },
+          "FJ1440.obj": {
+            "face_records": 5136,
+            "min_vertices": 3,
+            "max_vertices": 3
+          },
+          "FJ3360.obj": {
+            "face_records": 1262,
+            "min_vertices": 3,
+            "max_vertices": 3
+          },
+          "FJ3366.obj": {
+            "face_records": 1142,
+            "min_vertices": 3,
+            "max_vertices": 3
+          },
+          "FJ3385.obj": {
+            "face_records": 1380,
+            "min_vertices": 3,
+            "max_vertices": 3
+          },
+          "FJ3387.obj": {
+            "face_records": 1664,
+            "min_vertices": 3,
+            "max_vertices": 3
+          }
+        }
+      }
+    },
+    {
+      "name": "legacy_obj_license_comment_preserved",
+      "passed": true,
+      "observed": {
+        "assets_with_legacy_comment": [
+          "FJ1394.obj",
+          "FJ1397.obj",
+          "FJ1409.obj",
+          "FJ1410.obj",
+          "FJ1437.obj",
+          "FJ1439.obj",
+          "FJ1440.obj",
+          "FJ3360.obj",
+          "FJ3366.obj",
+          "FJ3385.obj",
+          "FJ3387.obj"
+        ]
+      }
+    },
+    {
+      "name": "viewer_png_crc_dimensions_and_terminal_chunk",
+      "passed": true,
+      "observed": {
+        "valid": true,
+        "width": 1544,
+        "height": 902,
+        "bytes": 177200,
+        "chunks": [
+          "IHDR",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IDAT",
+          "IEND"
+        ]
+      }
+    },
+    {
+      "name": "actual_viewer_trial_and_reference_device_recorded",
+      "passed": true,
+      "observed": {
+        "console_entries": 0,
+        "device": "macOS desktop / Codex In-app Browser / 810x752 CSS px / DPR 2",
+        "record_file": "work/evidence/T02/viewer-trial.log"
+      }
+    },
+    {
+      "name": "preexisting_readme_instructions_and_design_unchanged",
+      "passed": true,
+      "observed": {
+        "files_checked": 10,
+        "all_unchanged": true
+      }
+    },
+    {
+      "name": "opensim_original_checkout_read_only",
+      "passed": true,
+      "observed": {
+        "head": "d9b05d470b1a481c222372c85b75772faf8f7792",
+        "status": "## master...origin/master",
+        "diff_exit": 0,
+        "model_sha256": "3f5c5f23e486073f2ad2aa4a4967ffe2fcdd582b1e355512bc54f70c36376bf4"
+      }
+    },
+    {
+      "name": "task_report_status_and_next_task_recorded",
+      "passed": true,
+      "observed": {
+        "T02": "complete",
+        "next_task": "T03",
+        "automatic_start": false
+      }
+    }
+  ],
+  "interpretation": "Technical source/hash/geometry/coordinate/viewer/preservation checks only. Not an anatomy, attachment, clinical, or app approval."
+}
