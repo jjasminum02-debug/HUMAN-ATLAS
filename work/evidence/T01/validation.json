@@ -1,0 +1,139 @@
+{
+  "task_id": "T01",
+  "checked_on": "2026-09-25",
+  "validation_state": "pass",
+  "initial_attempt_note": "The first structural validation attempt had one false negative because its assertion searched for the literal phrase \"source scope\". The registry already contained the full source-specific license boundary. The assertion was corrected to inspect archive-only, live-API, listed-file and not-downloaded fields; no project artifact was changed for this correction.",
+  "commands_and_methods": [
+    "python3 structural JSON invariants",
+    "find/shasum preexisting design and root README before/after",
+    "git -C HUMAN ATLAS/OpenSim_Models rev-parse/status/diff"
+  ],
+  "checks": [
+    {
+      "name": "required_body_regions_included",
+      "passed": true,
+      "exit_code": 0,
+      "command_or_method": "python3 JSON invariant check",
+      "evidence": "18 required region records; all included"
+    },
+    {
+      "name": "cardiac_and_smooth_default_exclusions",
+      "passed": true,
+      "exit_code": 0,
+      "command_or_method": "python3 JSON invariant check",
+      "evidence": "both tissue classes have explicit exclusion reasons"
+    },
+    {
+      "name": "counting_policy_and_pending_catalog",
+      "passed": true,
+      "exit_code": 0,
+      "command_or_method": "python3 JSON invariant check",
+      "evidence": "counting rules present; full item count remains null pending T04"
+    },
+    {
+      "name": "source_registry_structure",
+      "passed": true,
+      "exit_code": 0,
+      "command_or_method": "python3 JSON invariant check",
+      "evidence": "7 unique source records with category/title/edition/access states"
+    },
+    {
+      "name": "archive_asset_rights_and_attribution",
+      "passed": true,
+      "exit_code": 0,
+      "command_or_method": "python3 JSON invariant check",
+      "evidence": "archive license, exact credit, files listed-but-not-downloaded, and archive-vs-live source boundary recorded"
+    },
+    {
+      "name": "nomenclature_edition_and_gaps",
+      "passed": true,
+      "exit_code": 0,
+      "command_or_method": "python3 JSON invariant check",
+      "evidence": "TA2 edition/link separated from local file; KAA candidate rights/current edition unresolved"
+    },
+    {
+      "name": "anatomy_and_assessment_candidate_limits",
+      "passed": true,
+      "exit_code": 0,
+      "command_or_method": "python3 JSON invariant check",
+      "evidence": "OpenStax license and limited scope; Merck reuse rights and protocol limits recorded"
+    },
+    {
+      "name": "source_gaps_queue",
+      "passed": true,
+      "exit_code": 0,
+      "command_or_method": "file and section inspection",
+      "evidence": "gap queue covers terminology, anatomy, assessment, asset pilot and next catalog task"
+    },
+    {
+      "name": "existing_design_templates_and_readme_preserved",
+      "passed": true,
+      "exit_code": 0,
+      "command_or_method": "find/shasum manifests and byte comparison",
+      "evidence": "before/after SHA-256 manifests byte-identical"
+    },
+    {
+      "name": "opensim_source_checkout_unchanged",
+      "passed": true,
+      "exit_code": 0,
+      "command_or_method": "git rev-parse/status/diff and before-after record comparison",
+      "evidence": "HEAD=d9b05d470b1a481c222372c85b75772faf8f7792; status empty; diff clean"
+    },
+    {
+      "name": "required_work_file_T01.md",
+      "passed": true,
+      "exit_code": 0,
+      "command_or_method": "file existence and non-empty check",
+      "evidence": "HUMAN ATLAS/work/tasks/T01.md"
+    },
+    {
+      "name": "required_work_file_T01.md",
+      "passed": true,
+      "exit_code": 0,
+      "command_or_method": "file existence and non-empty check",
+      "evidence": "HUMAN ATLAS/work/reports/T01.md"
+    },
+    {
+      "name": "required_work_file_STATUS.md",
+      "passed": true,
+      "exit_code": 0,
+      "command_or_method": "file existence and non-empty check",
+      "evidence": "HUMAN ATLAS/work/STATUS.md"
+    },
+    {
+      "name": "task_owned_staged_paths_only",
+      "passed": true,
+      "exit_code": 0,
+      "command_or_method": "git diff --cached --name-only plus T01 path allowlist",
+      "evidence": [
+        "atlas-data/manifests/scope.json",
+        "atlas-data/sources/registry.json",
+        "work/BLOCKERS.md",
+        "work/DECISIONS.md",
+        "work/STATUS.md",
+        "work/evidence/T01/opensim-after.txt",
+        "work/evidence/T01/opensim-before.txt",
+        "work/evidence/T01/preexisting-design-after.sha256",
+        "work/evidence/T01/preexisting-design-before.sha256",
+        "work/evidence/T01/root-readme-after.sha256",
+        "work/evidence/T01/root-readme-before.sha256",
+        "work/evidence/T01/validation.json",
+        "work/reports/T01.md",
+        "work/review-queue/source-gaps.md",
+        "work/tasks/T01.md"
+      ]
+    },
+    {
+      "name": "staged_diff_whitespace_check",
+      "passed": true,
+      "exit_code": 0,
+      "command_or_method": "git diff --cached --check",
+      "evidence": "no whitespace errors"
+    }
+  ],
+  "not_run": [
+    "application build/typecheck/browser validation: no app exists and T01 changes no UI",
+    "full anatomical semantic review: no muscle claims or assets were ingested",
+    "BodyParts3D archive file checksum/content verification: no file was downloaded"
+  ]
+}

@@ -1,0 +1,194 @@
+{
+  "schema_version": "0.1",
+  "registry_id": "human-atlas-source-registry",
+  "revision": "T01-v1",
+  "status": "candidate_sources_and_access_states_only",
+  "accessed_on": "2026-09-25",
+  "policy": {
+    "source_content": "This registry records candidate references, visible publisher/archive metadata, exact locators inspected, and access/rights status. It is not an anatomy dataset and contains no copied muscle claims or source tables.",
+    "access_is_not_permission": "A freely viewable page or downloadable file does not automatically authorize copying, adaptation, redistribution, or inclusion in an application. Record the license for the exact edition/file and its attribution separately from access.",
+    "claim_provenance": "Future anatomy and assessment statements require source ID, exact edition, claim-level page/table/figure locator, access date, and an independent evidence/review state. Do not turn a citation to a general chapter into evidence for an unlocated claim.",
+    "files_not_obtained": "A web page, file listing, or external link being visible is not recorded as a file download. Unless a row says otherwise, no source files were downloaded into this project and no checksum exists.",
+    "attribution_record_fields": [
+      "source_id", "publisher_or_rightsholder", "source_title", "edition_or_release", "source_file_name", "source_file_url", "retrieved_at", "source_file_sha256", "license_name_and_version", "license_url", "required_credit_verbatim", "modification_summary", "derived_file_sha256", "local_storage_path", "permitted_use_check"
+    ],
+    "asset_gate": "Do not import an asset into a public build or redistribute it unless the exact source file, release, license, required credit, modifications, and hashes are recorded and the license permits that use."
+  },
+  "sources": [
+    {
+      "id": "FIPAT_TA2",
+      "category": "international_anatomical_nomenclature",
+      "title": "Terminologia Anatomica, 2nd edition (TA2)",
+      "organization": "Federative International Programme on Anatomical Terminologies (FIPAT), International Federation of Associations of Anatomists (IFAA)",
+      "edition": "Second edition; published online in 2019 and approved by the IFAA General Assembly",
+      "edition_status": "publisher_metadata_verified",
+      "primary_locator": "https://ifaa.net/committees/anatomical-terminology-fipat/fipat-ifaa-terminologies/",
+      "edition_locator": "https://fipat.library.dal.ca/TA2/",
+      "verified_locator_detail": "IFAA terminology page identifies TA2 as the second edition, online 2019, approved by IFAA; the TA2 publication link is present. Exact muscle rows/pages and a frozen local edition file were not obtained.",
+      "license": {
+        "name": "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)",
+        "status": "official_IFAA_page_states_terminologies_are_web_published_under_CC_BY_ND_4_0",
+        "url": "https://ifaa.net/committees/anatomical-terminology-fipat/fipat-ifaa-terminologies/",
+        "required_credit_verbatim": null,
+        "note": "No exact attribution string for a particular TA2 file was captured. Do not redistribute an altered/translated terminology table based on a generic citation. Follow the license and confirm the exact edition's notice before reuse."
+      },
+      "access_state": "web_metadata_and_publication_link_viewed; publication_file_not_downloaded",
+      "artifact_state": "no_local_copy; no_hash; no term-level locator list",
+      "intended_use_candidate": "International Latin/English terminology concept crosswalk and catalog baseline candidate; not the sole source for Korean/Hanja terms, muscle attachments, assessment procedures, or anatomy claims.",
+      "limitations": ["FIPAT distinguishes official terms, equivalents, synonyms, related terms, and candidate terms; preserve these categories rather than flattening them.", "The online terminology environment may be revised; retain a dated edition/revision and exact row locator when T04 acquires a usable list."]
+    },
+    {
+      "id": "KAA_KOREAN_ANATOMICAL_TERMINOLOGY_6E",
+      "category": "korean_anatomical_nomenclature_candidate",
+      "title": "Korean Anatomical Terminology, 6th edition (대한해부학회 해부학용어집 제6판)",
+      "organization": "Korean Association of Anatomists (대한해부학회); publisher cited as Academia",
+      "edition": "6th edition, 2014 (bibliographic evidence in a 2017 history article and 2019 article references)",
+      "edition_status": "candidate_edition_secondary_bibliographic_evidence_only; latest_available_edition_not_verified",
+      "primary_source_locator": null,
+      "secondary_locator": "https://journal.kci.go.kr/aba/archive/articlePdf?artiId=ART002295653",
+      "additional_locator": "https://journal.kci.go.kr/aba/archive/articlePdf?artiId=ART002454250",
+      "verified_locator_detail": "KCI-hosted articles identify the 6th edition as 2014 and cite the book. The actual book, any official partial PDF, exact muscle entries, and current KAA edition status were not obtained or verified.",
+      "license": {
+        "name": null,
+        "status": "not_verified_for_the_book",
+        "url": null,
+        "required_credit_verbatim": null,
+        "note": "The cited articles' open licenses apply to those articles, not automatically to the terminology book. No term text is copied here."
+      },
+      "access_state": "bibliographic_article_pages_viewed; terminology_book_not_obtained",
+      "artifact_state": "no_local_copy; no_hash; no_term_level_locators",
+      "intended_use_candidate": "Korean term comparison candidate only after the primary book/source and latest edition are verified.",
+      "limitations": ["The 2014 edition may not be the latest current reference.", "Do not treat KAA anatomical terms and Korean Medical Association medical terms as interchangeable.", "Hanja mapping and reuse terms remain unverified."]
+    },
+    {
+      "id": "OPENSTAX_AP2E",
+      "category": "anatomy_text_candidate",
+      "title": "Anatomy and Physiology 2e",
+      "organization": "OpenStax, Rice University",
+      "edition": "Second edition; online text pages inspected; section pages include publication/copyright date Jan 27, 2022",
+      "edition_status": "edition_and_relevant_page_locators_verified; no_download",
+      "primary_locator": "https://openstax.org/books/anatomy-and-physiology-2e/pages/preface",
+      "verified_content_locators": [
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-3-axial-muscles-of-the-head-neck-and-back",
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-5-muscles-of-the-pectoral-girdle-and-upper-limbs",
+        "https://openstax.org/books/anatomy-and-physiology/pages/11-6-appendicular-muscles-of-the-pelvic-girdle-and-lower-limbs"
+      ],
+      "verified_locator_detail": "Chapter 11 pages contain introductory region coverage and selected origin/insertion/function tables. These are example claim locators only, not a checked complete list of muscles or full claim-level evidence package.",
+      "license": {
+        "name": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)",
+        "status": "book_preface_states_license; inspected pages also state page-level attribution requirements for redistribution",
+        "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/preface",
+        "required_credit_verbatim": "Access for free at https://openstax.org/books/anatomy-and-physiology/pages/1-introduction",
+        "note": "Redistribution/adaptation is noncommercial and share-alike; verify separate figure/component credits and the exact page requirements before any reuse."
+      },
+      "access_state": "online_text_pages_and_license_viewed; book_file_not_downloaded",
+      "artifact_state": "no_local_copy; no_hash; several relevant section locators recorded",
+      "intended_use_candidate": "Broad educational cross-check for selected skeletal-muscle regions and selected claims; not the canonical taxonomy or complete source for every muscle attachment.",
+      "limitations": ["Coverage is pedagogical and selective; some attachment descriptions are simplified or incomplete.", "Do not reproduce text, figures, or tables without following the relevant license and exact page-level attribution conditions."]
+    },
+    {
+      "id": "MERCK_PROFESSIONAL_STRENGTH_ASSESSMENT",
+      "category": "assessment_reference_candidate",
+      "title": "How To Assess Muscle Strength",
+      "organization": "Merck Manual Professional Edition",
+      "edition": "Web reference; page states full review/last update August 2025",
+      "edition_status": "web_page_and_general_locator_verified",
+      "primary_locator": "https://www.merckmanuals.com/professional/neurologic-disorders/neurologic-examination/how-to-assess-muscle-strength",
+      "verified_locator_detail": "The page discusses resisted group testing, side comparison, pain as an effort limiter, MRC-style grading, and functional maneuvers. This is a general reference locator, not a complete per-muscle test catalog or diagnostic-performance source.",
+      "license": {
+        "name": null,
+        "status": "reuse_license_not_verified",
+        "url": null,
+        "required_credit_verbatim": null,
+        "note": "Treat as link/citation-only in this project until reuse permissions are separately verified; do not copy page text or images."
+      },
+      "access_state": "web_page_viewed; no file acquired",
+      "artifact_state": "no_local_copy; no_hash",
+      "intended_use_candidate": "Future educational assessment-method cross-check, with explicit limitations and claim-level locator; not a source for diagnosis or treatment rules.",
+      "limitations": ["Does not establish individual-muscle test validity or diagnostic accuracy for every listed maneuver.", "This registry does not approve patient assessment use or clinical interpretation."]
+    },
+    {
+      "id": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "category": "3d_anatomy_asset_candidate",
+      "title": "BodyParts3D downloadable dataset, Release 4.0",
+      "organization": "Database Center for Life Science (DBCLS), Japan Science and Technology Agency NBDC LSDB Archive",
+      "edition": "Data release 4.0; archive update history records the data update as 2013-06-19. The current LATEST README and license notice were updated 2025-02-27.",
+      "edition_status": "archive_listing_release_license_and_attribution_verified; files_not_downloaded",
+      "primary_locator": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html",
+      "license_locator": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+      "release_readme_locator": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/README.html",
+      "release_note_locator": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/release_4.0_e.html",
+      "listed_candidate_files": [
+        {"file": "isa_BP3D_4.0_obj_99.zip", "tree": "IS-A", "listed_size": "136 MB", "status": "listed_not_downloaded"},
+        {"file": "partof_BP3D_4.0_obj_99.zip", "tree": "PART-OF", "listed_size": "62 MB", "status": "listed_not_downloaded"},
+        {"file": "isa_parts_list_e.txt", "tree": "IS-A", "listed_size": "126 KB", "status": "listed_not_downloaded"},
+        {"file": "partof_parts_list_e.txt", "tree": "PART-OF", "listed_size": "58 KB", "status": "listed_not_downloaded"}
+      ],
+      "verified_locator_detail": "The archive download page explicitly lists Release 4.0 OBJ and part/ID tables and instructs users to read its license. Exact pilot muscle/bone representations and attachment-surface coverage have not been checked.",
+      "license": {
+        "name": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "status": "archive_license_page_updated_2025_02_27",
+        "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+        "required_credit_verbatim": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+        "permitted_uses_as_stated_by_archive": ["access and acquire all or part of the database", "redistribute all or part of the data", "create and distribute derivatives based on all or part of the data"],
+        "conditions_as_stated_by_archive": ["show the specified database credit when distributing source data or adapted material", "contact the licensor for uses not granted by the license"],
+        "scope_note": "Apply this record only to the exact archive files and release obtained from the LSDB Archive. The legacy BodyParts3D information page separately displays CC BY-SA 2.1 JP; do not use its notice for archive files, live API output, or other variants without confirming the exact asset source and applicable terms."
+      },
+      "access_state": "download_listing_readme_release_note_and_license_page_viewed; no_asset_file_downloaded",
+      "artifact_state": "no_local_copy; no_hash; availability_of_listed_archive_files_verified_at_page_level_only",
+      "intended_use_candidate": "Bounded geometry and crosswalk availability check for the right calf pilot in T02; not a verified complete muscle catalog or attachment-surface reference.",
+      "quality_caveats": ["The BodyParts3D information page warns that many concepts are not represented and that errors may affect anatomical education.", "Representation IDs, concept IDs, and compound tree logic are distinct; preserve both concept and representation mapping.", "A muscle-belly mesh does not by itself prove a specific origin or insertion surface.", "Release 4.0 data dates to 2013 even though archive permission metadata was updated in 2025."]
+    },
+    {
+      "id": "BODYPARTS3D_LIVE_INFORMATION_NOTICE",
+      "category": "3d_source_quality_and_legacy_license_notice",
+      "title": "BodyParts3D Information / legacy live-site notice",
+      "organization": "BodyParts3D / Database Center for Life Science",
+      "edition": "Live information page, accessed 2026-09-25; content includes older release notes",
+      "edition_status": "page_viewed; not adopted as permission record for LSDB archive downloads",
+      "primary_locator": "https://lifesciencedb.jp/bp3d/info/index.html",
+      "verified_locator_detail": "The page states that many anatomical concepts are absent and that some errors may occur in anatomical education use; it also displays a CC BY-SA 2.1 JP notice for its contour data and rendered image.",
+      "license": {
+        "name": "CC BY-SA 2.1 Japan (notice displayed on the live information page)",
+        "status": "page_notice_verified_but_scope_and_relationship_to_2025_archive_license_not_reconciled_for_non_archive_material",
+        "url": "https://lifesciencedb.jp/bp3d/info/index.html",
+        "required_credit_verbatim": null,
+        "note": "Keep separate from the 2025 LSDB archive license record. Recheck the exact source and license for live API output or a non-archive copy before using it."
+      },
+      "access_state": "web_page_viewed; no data acquired",
+      "artifact_state": "no_local_copy; no_hash",
+      "intended_use_candidate": "Source quality caveat and license-scope separation only.",
+      "limitations": ["Do not infer that a listed anatomical concept has a mesh or reliable attachments.", "Do not silently combine live-site outputs with archive files under a single license record."]
+    },
+    {
+      "id": "OPENSIM_OFFICIAL_MODEL_DOCUMENTATION",
+      "category": "biomechanical_model_representation_reference",
+      "title": "OpenSim Musculoskeletal Models and Muscle Editor documentation",
+      "organization": "OpenSim / Stanford University community documentation",
+      "edition": "Online documentation pages; Musculoskeletal Models page updated 2022-10-04",
+      "edition_status": "documentation_pages_verified; no model files downloaded from web in T01",
+      "primary_locator": "https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim/pages/53090607",
+      "additional_locators": ["https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim/pages/53090145", "https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim/pages/53088700"],
+      "verified_locator_detail": "Documentation describes a range of core, example, and user-contributed models and the GUI's muscle groups. Muscle paths/actuators are model representations, not a complete anatomical nomenclature list.",
+      "license": {
+        "name": null,
+        "status": "documentation_page_and_each_model_license_not_recorded_as_a_single_permission",
+        "url": null,
+        "required_credit_verbatim": null,
+        "note": "Do not infer model asset license from OpenSim software documentation. Check each model/repository and file notice separately before copying or converting."
+      },
+      "access_state": "documentation_pages_viewed; existing_local_OpenSim_Models_checkout_left_untouched",
+      "artifact_state": "no_remote_asset_acquired_in_T01",
+      "intended_use_candidate": "Interpretation/context for future crosswalks and model element distinctions only; not a source of canonical muscle counts or attachment truth.",
+      "limitations": ["Model completeness, simplification, actuators, paths, and coordinate choices vary by model.", "The local `OpenSim_Models` checkout remains a read-only source and is not imported into this registry as an acquired T01 asset."]
+    }
+  ],
+  "decisions_for_t01": [
+    "Use FIPAT TA2 as the international nomenclature candidate, but wait until T04 to freeze the actual catalog after exact item lists and locators are available.",
+    "Treat Korean Anatomical Terminology 6th edition (2014) as a candidate trace, not a confirmed current source; verify the primary source/latest edition before entering terms.",
+    "Use OpenStax Anatomy and Physiology 2e only as an educational cross-check candidate; record the exact claim locator and its CC BY-NC-SA terms if any content is later reused.",
+    "Use the Merck Manual page as a general assessment evidence candidate only; no copied text, per-muscle protocol, diagnosis rule, or treatment rule is authorized.",
+    "For T02, use only exact LSDB Archive files whose source and license are recorded. The archive's 2025 notice states CC BY 4.0 and a required credit; do not assume that notice applies to live API outputs or other dataset copies.",
+    "Do not count the OpenSim model's muscle or force-element rows as canonical muscle concepts."
+  ]
+}

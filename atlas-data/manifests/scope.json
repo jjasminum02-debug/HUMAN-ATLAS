@@ -1,0 +1,63 @@
+{
+  "schema_version": "0.1",
+  "manifest_id": "human-atlas-adult-skeletal-muscle-scope",
+  "revision": "T01-policy-v1",
+  "status": "policy_frozen_catalog_pending",
+  "created_on": "2026-09-25",
+  "project": "HUMAN ATLAS",
+  "population": {
+    "target": "adult human anatomy",
+    "sex_specificity": "Include applicable structures when an authoritative source supports them; record applicability per concept. Do not create sex-specific copies of otherwise shared concepts.",
+    "variation_policy": "Record anatomical variants separately from the standard catalog denominator unless an adopted authority recognizes them as separate standard concepts and a later human review approves that classification."
+  },
+  "target_entity": "named skeletal muscle concept",
+  "inclusion_rule": "Include named skeletal muscles throughout the adult human body. Include muscles whose attachment may be to fascia, tendon, aponeurosis, skin, or another non-bone structure when they otherwise meet the skeletal-muscle scope.",
+  "regions": [
+    {"id": "head", "label": "Head and scalp", "decision": "included", "note": "Head-region muscles; overlapping subregion tags do not create duplicate concepts."},
+    {"id": "face", "label": "Face and facial expression", "decision": "included", "note": "Includes muscles attaching to skin or connective tissue where applicable."},
+    {"id": "mastication", "label": "Mastication", "decision": "included"},
+    {"id": "eye", "label": "Extraocular and other skeletal muscles associated with the eye", "decision": "included", "note": "Smooth muscle of the eye is excluded by tissue type."},
+    {"id": "tongue", "label": "Tongue", "decision": "included", "note": "Intrinsic and extrinsic skeletal muscles."},
+    {"id": "pharynx", "label": "Pharynx", "decision": "included"},
+    {"id": "larynx", "label": "Larynx", "decision": "included"},
+    {"id": "neck", "label": "Neck", "decision": "included"},
+    {"id": "back", "label": "Back and vertebral column", "decision": "included"},
+    {"id": "thorax_respiratory", "label": "Thorax and respiratory muscles", "decision": "included"},
+    {"id": "abdominal_wall", "label": "Abdominal wall", "decision": "included"},
+    {"id": "pelvic_floor_perineum", "label": "Pelvic floor and perineum", "decision": "included", "note": "Record source-supported sex-specific applicability where relevant."},
+    {"id": "shoulder", "label": "Shoulder and pectoral girdle", "decision": "included"},
+    {"id": "upper_extremity", "label": "Upper extremity", "decision": "included", "note": "Shoulder and hand may also be used as more specific region tags."},
+    {"id": "hand", "label": "Hand", "decision": "included"},
+    {"id": "gluteal", "label": "Gluteal region", "decision": "included"},
+    {"id": "lower_extremity", "label": "Lower extremity", "decision": "included", "note": "Gluteal region and foot may also be used as more specific region tags."},
+    {"id": "foot", "label": "Foot", "decision": "included"}
+  ],
+  "exclusions": [
+    {"entity": "cardiac muscle", "decision": "excluded_by_default", "reason": "The product scope is adult skeletal muscle; cardiac muscle is a different tissue class and outside the anatomy catalog target."},
+    {"entity": "smooth muscle", "decision": "excluded_by_default", "reason": "The product scope is adult skeletal muscle; smooth muscle is a different tissue class and outside the anatomy catalog target."},
+    {"entity": "tendon, fascia, aponeurosis, skin, bone, ligament, nerve, and other non-muscle structures", "decision": "not_muscle_concepts", "reason": "These may be attachment targets, neighboring structures, or context, but do not enter the muscle-concept denominator."}
+  ],
+  "classification_and_counting": {
+    "denominator_unit": "unique canonical skeletal-muscle concept ID in the adopted catalog",
+    "canonical_catalog": {"status": "pending_T04", "item_count": null, "note": "T01 fixes scope and counting policy only; it does not create or claim a complete muscle list."},
+    "region_assignment": "A concept may carry multiple region tags at anatomical boundaries, but it contributes once to the whole-body denominator. Store a primary region only when the selected source supports one; do not infer it from a model file path.",
+    "laterality": "Left and right are instances of one bilateral concept and do not double the concept count. Midline or unpaired structures remain one instance and must not be duplicated to force bilateral symmetry.",
+    "heads_and_parts": "Named heads, bellies, slips, parts, and other subdivisions are child structures linked to their parent concept. They do not add to the muscle-concept denominator. Keep them individually selectable where supported by the source.",
+    "groups_and_compounds": "A muscle group or compound grouping is a non-counting organizational node. Each independently named muscle concept in that group is counted once. Do not count the group and its members as if they were the same type.",
+    "models_and_actuators": "OpenSim actuators, force elements, muscle paths, path points, wrapping objects, and mesh representation IDs are model/asset records, not canonical muscle concepts. Crosswalk them to concepts where supported; never use their record count as the denominator.",
+    "aliases_and_external_ids": "Synonyms, translations, Latin labels, FIPAT/FMA identifiers, and source-specific representation IDs are aliases or crosswalk keys on a canonical concept, not new concepts.",
+    "anatomical_variants": "Keep a variant or anomaly as a separate variant record. It does not change the standard denominator without a source-backed taxonomy decision and later human review."
+  },
+  "nomenclature_policy": {
+    "candidate_baseline": "FIPAT Terminologia Anatomica, 2nd edition (TA2, online 2019) is the international terminology candidate; the exact muscle item list and locator set have not been acquired, so the canonical catalog is not yet frozen.",
+    "local_language_terms": "Korean standard/common terms and any Hanja form require an identifiable Korean source and edition. English/Latin terms and external IDs require an exact source locator. Never invent, machine-translate, or silently normalize a term.",
+    "term_status": "A missing term is null with a reason in future data; its absence does not block learning work, but it is not counted as a verified translation."
+  },
+  "gate_state": {
+    "scope_policy": "fixed_for_T01",
+    "full_catalog": "not_created; planned for T04",
+    "anatomy_review": "not_reviewed_by_human",
+    "assessment_review": "not_reviewed",
+    "public_release": "not_authorized_or_attempted"
+  }
+}
