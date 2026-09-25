@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { loadT07ViewerBundle, type T07ViewerBundle } from "./manifest";
 import { T07WebGLViewer, type ViewerMesh } from "./glb";
+import { AnnotationWorkbench } from "./AnnotationWorkbench";
+import type { AtlasRecord } from "../data/catalog";
 
 type Visibility = "visible" | "transparent" | "hidden";
 type CameraPreset = "front" | "back" | "lateral";
@@ -9,6 +11,8 @@ type Concept = { id: string; entityType?: unknown; parentId?: unknown };
 interface Props {
   selectedEntityId: string | null;
   concepts: readonly Concept[];
+  attachments: readonly AtlasRecord[];
+  claims: readonly AtlasRecord[];
   onSelectEntity: (id: string) => void;
 }
 
@@ -23,9 +27,11 @@ function errorText(error: unknown): string {
   return error instanceof Error ? error.message : "T07 GLB viewer를 불러오지 못했습니다.";
 }
 
-export function GLBViewer({ selectedEntityId, concepts, onSelectEntity }: Props) {
+export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onSelectEntity }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const overlayCanvasRef = useRef<HTMLCanvasElement>(null);
   const viewerRef = useRef<T07WebGLViewer | null>(null);
+  const [viewer, setViewer] = useState<T07WebGLViewer | null>(null);
   const [bundle, setBundle] = useState<T07ViewerBundle | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [pickedMeshId, setPickedMeshId] = useState<string | null>(null);
@@ -63,6 +69,7 @@ export function GLBViewer({ selectedEntityId, concepts, onSelectEntity }: Props)
       renderer = new T07WebGLViewer(canvasRef.current, (mesh) => chooseMesh(mesh, true));
       renderer.setScene(bundle.meshes);
       viewerRef.current = renderer;
+      setViewer(renderer);
       setError(null);
     } catch (viewerError) {
       setError(errorText(viewerError));
@@ -70,7 +77,10 @@ export function GLBViewer({ selectedEntityId, concepts, onSelectEntity }: Props)
     }
     return () => {
       renderer.dispose();
-      if (viewerRef.current === renderer) viewerRef.current = null;
+      if (viewerRef.current === renderer) {
+        viewerRef.current = null;
+        setViewer((current) => current === renderer ? null : current);
+      }
     };
     // Renderer construction is tied to the immutable loaded bundle.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -83,9 +93,9 @@ export function GLBViewer({ selectedEntityId, concepts, onSelectEntity }: Props)
     setPickedMeshId((current) => selectedMeshIds.includes(current ?? "") ? current : selectedMeshIds[0]);
   }, [selectedMeshIds]);
 
-  function chooseMesh(mesh: ViewerMesh, updateCard: boolean) {
+  function chooseMesh(mesh: ViewerMesh, updateCard: boolean, focus = true) {
     setPickedMeshId(mesh.meshAssetId);
-    viewerRef.current?.selectMeshes([mesh.meshAssetId], true);
+    viewerRef.current?.selectMeshes([mesh.meshAssetId], focus);
     if (!updateCard || !mesh.targetEntityId) return;
     const target = conceptById.get(mesh.targetEntityId);
     if (target && (target.entityType === "individual_muscle" || target.entityType === "muscle_part")) {
@@ -165,6 +175,7 @@ export function GLBViewer({ selectedEntityId, concepts, onSelectEntity }: Props)
               tabIndex={0}
               data-testid="anatomy-viewer"
             />
+            <canvas ref={overlayCanvasRef} className="viewer-overlay" aria-hidden="true" />
             {!bundle && <div className="viewer-loading" role="status">GLB와 manifest를 확인하고 있습니다…</div>}
             {bundle && <span className="viewer-axis">RH · m · +X 좌 / +Y 머리 / +Z 앞</span>}
           </div>
@@ -238,6 +249,21 @@ export function GLBViewer({ selectedEntityId, concepts, onSelectEntity }: Props)
               <span>{bundle.attribution}</span>
               <span>Crosswalk는 provisional / needs_review입니다. 3D 표시·선택은 해부학적 동일성이나 부착 위치의 검토 완료를 뜻하지 않습니다.</span>
             </div>
+          )}
+          {bundle && (
+            <AnnotationWorkbench
+              viewer={viewer}
+              overlayCanvas={overlayCanvasRef.current}
+              assets={bundle.annotationAssets}
+              meshes={bundle.meshes}
+              concepts={concepts}
+              attachments={attachments}
+              claims={claims}
+              selectedEntityId={selectedEntityId}
+              pickedMesh={pickedMesh}
+              visibility={visibility}
+              onSelectMesh={(mesh) => chooseMesh(mesh, false, false)}
+            />
           )}
         </>
       )}

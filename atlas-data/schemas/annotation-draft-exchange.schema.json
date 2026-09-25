@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://human-atlas.invalid/schema/annotation-draft-exchange.schema.json",
+  "title": "HUMAN ATLAS local annotation draft exchange",
+  "description": "Local, unreviewed overlay exchange. This is deliberately distinct from the canonical SpatialAnnotation entity until a real AnatomicalInstance exists and the annotation is reviewed.",
+  "type": "object",
+  "required": ["schemaVersion", "syntheticFixture", "annotations"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": "HA-annotation-draft-exchange-v1" },
+    "syntheticFixture": { "type": "boolean" },
+    "annotations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/AnnotationDraft" }
+    }
+  },
+  "$defs": {
+    "Id": { "type": "string", "minLength": 1, "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$" },
+    "Sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "PositionM": {
+      "type": "array", "minItems": 3, "maxItems": 3,
+      "items": { "type": "number" }
+    },
+    "Geometry": {
+      "oneOf": [
+        {
+          "type": "object", "required": ["kind", "position"], "additionalProperties": false,
+          "properties": { "kind": { "const": "point" }, "position": { "$ref": "#/$defs/PositionM" } }
+        },
+        {
+          "type": "object", "required": ["kind", "vertices"], "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "polyline" },
+            "vertices": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/PositionM" } }
+          }
+        },
+        {
+          "type": "object", "required": ["kind", "triangleIds", "topologyHash"], "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "surface_patch" },
+            "triangleIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "integer", "minimum": 0 } },
+            "topologyHash": { "$ref": "#/$defs/Sha256" }
+          }
+        }
+      ]
+    },
+    "AnnotationDraft": {
+      "type": "object",
+      "required": [
+        "id", "attachmentId", "descriptionClaimId", "instanceId", "side", "assetId", "assetRevision",
+        "assetRevisionHash", "topologyHash", "geometry", "frameId", "units", "poseId", "precision", "method",
+        "transformChain", "landmarkChecks", "evidenceIds", "reviewState", "synthetic"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/Id" },
+        "attachmentId": { "oneOf": [{ "$ref": "#/$defs/Id" }, { "type": "null" }] },
+        "descriptionClaimId": { "oneOf": [{ "$ref": "#/$defs/Id" }, { "type": "null" }] },
+        "instanceId": { "oneOf": [{ "$ref": "#/$defs/Id" }, { "type": "null" }] },
+        "side": { "enum": ["left", "right"] },
+        "assetId": { "$ref": "#/$defs/Id" },
+        "assetRevision": { "$ref": "#/$defs/Id" },
+        "assetRevisionHash": { "$ref": "#/$defs/Sha256" },
+        "topologyHash": { "$ref": "#/$defs/Sha256" },
+        "geometry": { "$ref": "#/$defs/Geometry" },
+        "frameId": { "const": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR" },
+        "units": { "const": "m" },
+        "poseId": { "$ref": "#/$defs/Id" },
+        "precision": { "enum": ["representative", "approximate_extent"] },
+        "method": { "const": "manual_mapping" },
+        "transformChain": { "type": "array", "maxItems": 0 },
+        "landmarkChecks": { "type": "array", "maxItems": 0 },
+        "evidenceIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/Id" } },
+        "reviewState": { "enum": ["draft", "stale"] },
+        "synthetic": { "type": "boolean" }
+      }
+    }
+  }
+}

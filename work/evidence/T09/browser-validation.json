@@ -1,0 +1,58 @@
+{
+  "task": "T09",
+  "environment": "Codex in-app browser, local Vite app at http://127.0.0.1:5173/?muscle=HA-M-000001",
+  "method": "CUA visible-browser interaction; no remote service",
+  "modelBundle": {
+    "meshCount": 11,
+    "selectedMeshAssetId": "HA-MESH-BP3D4-FJ1394",
+    "selectedMeshTargetId": "HA-P-000001",
+    "sourceAttachmentId": "HA-A-T05-GASTRO-LAT-FEMUR-ORIGIN",
+    "sourceClaimId": "HA-C-T05-GASTRO-LAT-FEMUR-ORIGIN",
+    "sourceEvidenceId": "EV-GRAY1918-GASTRO",
+    "reviewState": "needs_review"
+  },
+  "checks": [
+    {
+      "id": "point-polyline-surface-patch",
+      "result": "pass",
+      "details": "Clicked the selected T07 mesh surface and created a point, a two-vertex polyline, and a two-triangle surface patch. All were draft-only and linked to the selected T05 attachment/claim/evidence."
+    },
+    {
+      "id": "edit-delete",
+      "result": "pass",
+      "details": "Re-entered and saved the point geometry under its existing draft ID, then deleted all temporary rows through the UI."
+    },
+    {
+      "id": "json-export-import",
+      "result": "pass",
+      "details": "JSON export populated the exchange text area with all three geometry kinds; a valid import round-trip restored three drafts."
+    },
+    {
+      "id": "reject-side-and-revision-mismatch",
+      "result": "pass",
+      "details": "Changing side to left was rejected as annotation_laterality_mismatch. Changing assetRevision was rejected as asset_revision_mismatch. Each invalid import preserved the prior three draft rows."
+    },
+    {
+      "id": "camera-and-reload-stability",
+      "result": "pass",
+      "details": "After camera drag and wheel zoom, the overlay remained visible. A serialized JSON snapshot was byte-for-byte identical after reload. All temporary drafts were then deleted and a second reload showed zero drafts."
+    },
+    {
+      "id": "console",
+      "result": "pass",
+      "details": "The final browser console query returned zero errors and warnings."
+    }
+  ],
+  "temporaryData": {
+    "rowsCreatedForUiSmoke": 3,
+    "rowsRemainingAfterDeleteAndReload": 0,
+    "canonicalCatalogModified": false,
+    "atlasDataSpatialAnnotationsAdded": 0,
+    "anatomyReviewGranted": false
+  },
+  "screenCapture": {
+    "capturedAndVisuallyInspectedInCUA": true,
+    "binarySavedInProject": false,
+    "reason": "The browser URL policy rejected a data:image navigation used to transfer the captured screenshot into the project. No alternative route was attempted."
+  }
+}

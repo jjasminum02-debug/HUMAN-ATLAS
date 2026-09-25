@@ -1,15 +1,15 @@
 # 진행 상태 — HUMAN ATLAS
 
 - LAST_UPDATED: 2026-09-25
-- CURRENT_PHASE: T08 정적 3D 선택·카메라 통합 완료; anatomy review는 대기
-- CURRENT_TASK: 없음 (T08 구현·브라우저 상호작용 검증 완료; T07 crosswalk와 모든 anatomy claim은 needs_review)
-- NEXT_TASK: T09 — 부착부 annotation 검토 도구
-- LAST_REPORT: work/reports/T08.md
+- CURRENT_PHASE: T09 annotation draft 도구 기술 검증 완료; anatomy review는 대기
+- CURRENT_TASK: T09 — 부착부 annotation 검토 도구 (완료; 브라우저 화면 캡처 파일은 보존되지 않음)
+- NEXT_TASK: T10 — 실제 파일럿 기시·정지 매핑 (사용자 요청으로 아직 시작하지 않음)
+- LAST_REPORT: work/reports/T09.md
 - SCOPE_REVISION: T01-policy-v1 (전신 부위와 집계 규칙 고정; canonical 전체 목록은 미동결)
 - DATA_REVISION: T05-pilot-structure-text-v1 (6 muscles + 2 gastroc head parts; 54 structure terms, 41 attachments, 45 claims; all claims unreviewed)
 - SCHEMA_REVISION: T03-atlas-schema-v1 (Draft 2020-12 schema + project validator)
 - CATALOG_REVISION: T04-partial-catalog-v1 (85 indexed row items; 48 individual, 16 groups, 21 parts; whole-body denominator null)
-- TECHNICAL_GATE: T03 schema/fixture/dataset checks, T05 structure/provenance/coverage checks, T06 type/build/basic browser checks, T07 GLB/source geometry/coordinate/repeatability checks, T08 type/build and browser selection/visibility/camera checks pass. Catalog remains partial; broader T13 end-to-end gate outstanding.
+- TECHNICAL_GATE: T03 schema/fixture/dataset checks, T05 structure/provenance/coverage checks, T06 type/build/basic browser checks, T07 GLB/source geometry/coordinate/repeatability checks, T08 selection/camera checks, T09 draft schema/11 unit cases/build/browser interaction log pass. T09 screenshot binary was visually inspected in CUA but not saved after browser URL-policy rejection. Catalog remains partial; broader T13 end-to-end gate outstanding.
 - CATALOG_GATE: BLOCKED — 원본 TA2 Part 2 PDF 미확보, 18 region 전수 추출·term column review 미완료, KAA source missing.
 - ANATOMY_GATE: needs_human_review (T05 historical-source claims and T07 mesh identity/pose/attachment surfaces have no independent human review)
 - ASSESSMENT_GATE: 미검토 (protocol/임상 타당성 검토 없음)
@@ -25,18 +25,17 @@
 | T06 | complete_with_partial_catalog_and_review_pending | work/tasks/T06.md; atlas-web/; work/evidence/T06/; work/reports/T06.md | anatomy claim review, TA2 visual audit, Korean/Hanja source gaps |
 | T07 | complete_with_anatomy_review_pending | `atlas-data/assets/derived-glb/bodyparts3d-r4-right-lower-leg/right-lower-leg.glb`; T07 manifest/crosswalk; `work/evidence/T07/`; `work/reports/T07.md` | talus internal ID missing; T03 anatomical instance/MeshMapping data absent; all mesh relations need human review |
 | T08 | complete_with_anatomy_review_pending | `atlas-web/src/viewer/`; T08 browser evidence; `work/reports/T08.md` | T07 mesh crosswalk, anatomical identity, pose and attachment surfaces remain unreviewed; not a clinical or public release |
+| T09 | complete_with_ui_log_screenshot_not_saved | `atlas-data/schemas/annotation-draft-exchange.schema.json`; `atlas-web/src/viewer/AnnotationWorkbench.tsx`; `work/evidence/T09/`; `work/reports/T09.md` | draft는 instance 미생성·미검토. 해부학적 좌표 채택·review 승격 없음 |
 
-## 다음 직렬 작업
+## 진행 중 작업
 
-다음은 **T09 — 부착부 annotation 검토 도구**다. 여기서는 시작하지 않았다. T09는 검토 모드에서 point/polyline/surface patch를 만들고·편집하고·삭제하며 JSON import/export를 제공한다. annotation은 T05 부착 문장과 연결할 수 있지만 원본 GLB/OBJ를 고치지 않고 독립 overlay data로 보관한다. 먼저 synthetic fixture로 회전·확대 후 위치 유지, 재로딩, 좌우·asset revision mismatch 거부, topology 변경 시 stale 표시를 확인한다. 실제 파일럿 기시·정지 부착 표면 지정은 T10 범위로 남긴다.
-
-> 작업 대상은 현재 폴더 아래 HUMAN ATLAS 프로젝트다. `design/2026-09-25-muscle-atlas/00-START-HERE.md`, `03-LUNA-SERIAL-RUNBOOK.md`, `work/STATUS.md`를 읽고 실행서의 T09만 수행해 줘. 상세 설계는 같은 폴더의 01, 02, 04와 T05/T08 작업·결과에서 확인해라. 검토 모드의 point/polyline/surface patch 생성·편집·삭제, annotation schema, JSON import/export를 구현해라. annotation은 T05 부착 문장과 연결할 수 있으나 원본 mesh를 변경하지 않는 overlay data여야 한다. 처음에는 synthetic fixture로 회전·확대 후 위치 고정, 재로딩 동일성, 좌우 및 asset revision mismatch 거부, topology revision 변경 시 stale 처리를 검증해라. 실제 파일럿 기시·정지 영역 매핑, anatomy `reviewed` 승격, 원본 OBJ/GLB/OpenSim 변경, 공개·자동 배포는 하지 마라. 기존 사용자 파일·지침과 T08 결과를 보존하고, 작업 명세·결과·검증·상태·다음 작업을 HUMAN ATLAS 안에 기록해라. 자동 배포, 환자 진단·치료·침 시뮬레이션은 범위 밖이다. T09만 완료한 뒤 다음 task ID와 붙여 넣을 프롬프트를 적고 멈춰라. 다음 task를 자동 시작하지 마라.
+T09 검토 도구 구현과 기술 검증을 완료했다. 실제 T05 문장에 연결된 표면 입력은 브라우저 smoke test에서만 사용했고, 임시 초안 3개는 삭제 후 재접속에서 0개를 확인했다. 실제 부착면 후보 입력·해부학 확정은 수행하지 않았다. 화면 캡처는 CUA에서 육안 확인했지만 이미지 파일을 프로젝트에 저장하지 못한 제한이 `work/reports/T09.md`에 기록돼 있다.
 
 ## 변경하지 말아야 할 경로
 
-- `OpenSim_Models/`: 읽기 전용 원본 checkout, revision `d9b05d470b1a481c222372c85b75772faf8f7792`; T08 작업에서도 수정하지 않음
-- `design/2026-09-25-muscle-atlas/`: 설계·템플릿 원본; T08 작업 전후 SHA-256 대조
-- 기존 사용자 파일 및 지침: README, AGENTS 및 설계 파일 T08 작업 전후 보존 대조 수행
+- `OpenSim_Models/`: 읽기 전용 원본 checkout, revision `d9b05d470b1a481c222372c85b75772faf8f7792`; T09 전후 clean/hash 동일
+- `design/2026-09-25-muscle-atlas/`: 설계·템플릿 원본; T09 전후 SHA-256 대조
+- 기존 사용자 파일 및 지침: README, AGENTS 및 설계 파일 T09 전후 보존 대조 수행
 
 ## 검토 대기
 
@@ -46,3 +45,26 @@
 - T02 BodyParts3D pilot link는 provisional; mesh identity·attachment·pose 사람 검토 및 공개 전 license 검토가 남아 있다.
 - `reviewed` gate는 T03에서 evidence/hash 구조를 검사하지만 reviewer 실제 신원을 증명하지 않는다.
 - T05 anatomy claims는 역사적 출처 summary다. T06 앱과 T08 viewer는 검토 대기 상태로 표시하며, 실제 사람 review·공개 배포·임상 적격성은 없다. WebGL canvas에서의 선택·렌더링은 mesh의 해부학적 동일성이나 부착 위치를 검증하지 않는다.
+- T09 draft는 현재 anatomical instances가 0개여서 canonical `SpatialAnnotation`이 아니며, 브라우저 저장은 해당 기기의 localStorage에만 둔다.
+
+## 다음 작업 프롬프트 — T10
+
+```text
+작업 대상은 현재 폴더 아래의 HUMAN ATLAS 프로젝트다.
+
+design/2026-09-25-muscle-atlas/00-START-HERE.md와
+03-LUNA-SERIAL-RUNBOOK.md를 읽고, work/STATUS.md의 선행 조건과
+T05/T09 명세·보고서·실제 데이터 및 T09 검증기를 확인해라.
+실행서에 정의된 T10만 수행해라.
+
+T05 근거 문장별로 파일럿 근육/근두의 부착 annotation 후보와 사람 검토용
+정면·후면·측면 장면/목록을 만든다. 넓은 영역을 대표점 하나로 완료 처리하지
+말고, 근거·좌우·mesh 대상·revision·pose·범위를 함께 남겨라. 자료가 연결되지
+않거나 위치를 확인할 수 없으면 추측하지 말고 미확인으로 기록해라.
+
+모든 후보는 needs_review/draft로 남기고 해부학적 검토 완료나 정답 상태로
+승격하지 마라. 기존 OpenSim_Models는 읽기 전용이며 원본·사용자 파일·지침을
+보존해라. T10 작업 명세·결과·검증·상태·다음 작업을 프로젝트 파일로 남겨라.
+자동 배포, 환자 진단, 치료, 침 시뮬레이션은 범위 밖이다. T10만 마친 뒤 멈추고,
+다음 task ID와 붙여 넣을 프롬프트만 안내해라.
+```

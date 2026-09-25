@@ -62,3 +62,12 @@
 
 - T06에 Three.js가 포함되어 있지 않고 로컬 pnpm metadata/store에도 패키지가 없으며 네트워크 접근이 제한되어 있다. T08은 dependency 다운로드 대신 T07에서 생성한 고정 단일 GLB의 실제 계약(정점·법선·삼각형 인덱스와 node/mesh ID)을 검증하는 앱 내부 WebGL viewer를 사용한다.
 - 이 viewer는 T07 asset에 한정한 로컬 학습 UI로, 범용 glTF 엔진 또는 임상/해부학적 정확성 검토기가 아니다. T07 crosswalk의 `needs_review`, provisional 관계, 기준 포즈의 한계는 표시 상태에서 유지한다. renderer 교체 또는 전체 glTF support는 별도 범위다.
+
+## T09 — 2026-09-25
+
+- T03 canonical `SpatialAnnotation` 스키마를 완화하지 않고, instance가 없는 `draft`를 교환하기 위한 별도 로컬 스키마를 추가했다. `instanceId: null`, `reviewState: draft|stale`로 제한하며 reviewed를 입력할 수 없다.
+- point/polyline은 표면 ray hit 위치를 Atlas asset frame의 meter 좌표로 보관한다. surface patch는 mesh-local triangle ID와 topology hash를 함께 보관한다. camera pose에서 좌표를 만들지 않고, rotation/zoom 후 현재 카메라 투영으로 overlay를 다시 그린다.
+- 가져오기에서는 T05 attachment/description claim/evidence 연결, T07 mesh target, side, asset revision/hash, frame/units/pose/topology를 함께 확인한다. mesh revision이 달라지면 import는 실패하고 저장본의 revision/topology가 달라진 기존 draft는 stale로 격리한다.
+- T09 UI smoke에서 실제 T05 설명에 연결된 draft 3개를 임시 생성해 geometry, 수정, JSON, reload 경로를 확인한 뒤 UI에서 모두 삭제했다. 두 번의 확인에서 final local draft count는 0이다. 해당 smoke 좌표는 anatomical mapping이나 검토 후보로 기록하지 않았다.
+- CUA의 브라우저 화면 캡처는 실행 중 시각적으로 확인했다. 이미지 파일을 프로젝트로 저장하려던 data URL 이동이 Codex browser URL policy에 의해 거부되어 우회하지 않았고, 대신 브라우저 상호작용·console 결과를 JSON 로그에 남겼다.
+- T09는 local-only draft tooling이다. Canonical catalog/T05 claims/T03 SpatialAnnotation/OpenSim 원본을 수정하지 않았으며 T10 actual mapping과 사람 검토는 시작하지 않았다.

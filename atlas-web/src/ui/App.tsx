@@ -350,7 +350,13 @@ function App() {
           <p className="panel-footnote">오른쪽 종아리의 정적 mesh만 연결되어 있습니다. 이름·대상 연결은 검토 대기입니다.</p>
         </aside>
 
-        <GLBViewer selectedEntityId={selectedId} concepts={viewerConcepts} onSelectEntity={choose} />
+        <GLBViewer
+          selectedEntityId={selectedId}
+          concepts={viewerConcepts}
+          attachments={catalog.attachments}
+          claims={catalog.claims}
+          onSelectEntity={choose}
+        />
 
         <main className="detail-panel" id="details" tabIndex={-1}>
           {unknownSelection ? (

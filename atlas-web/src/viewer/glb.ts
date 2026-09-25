@@ -22,6 +22,20 @@ export interface ViewerMesh extends ExpectedNode {
   bounds: MeshBounds;
 }
 
+export interface AnnotationSurfaceHit {
+  mesh: ViewerMesh;
+  triangleId: number;
+  position: [number, number, number];
+  barycentric: [number, number, number];
+}
+
+export interface ProjectedPoint {
+  x: number;
+  y: number;
+  depth: number;
+  visible: boolean;
+}
+
 interface GlbDocument {
   accessors?: Array<{
     bufferView?: number;
@@ -328,6 +342,8 @@ export class T07WebGLViewer {
   private readonly meshes = new Map<string, GpuMesh>();
   private readonly visibility = new Map<string, Visibility>();
   private readonly onPick: (mesh: ViewerMesh) => void;
+  private onAnnotationPick: ((hit: AnnotationSurfaceHit) => void) | null = null;
+  private onFrame: (() => void) | null = null;
   private readonly pointerDown = (event: PointerEvent) => this.handlePointerDown(event);
   private readonly pointerMove = (event: PointerEvent) => this.handlePointerMove(event);
   private readonly pointerUp = (event: PointerEvent) => this.handlePointerUp(event);
@@ -397,6 +413,39 @@ export class T07WebGLViewer {
     this.radius = this.boundsRadius(unionBounds(meshes));
     this.distance = Math.max(0.5, this.radius * 3.1);
     this.render();
+  }
+
+  setAnnotationPickHandler(handler: ((hit: AnnotationSurfaceHit) => void) | null): void {
+    this.onAnnotationPick = handler;
+  }
+
+  setFrameCallback(callback: (() => void) | null): void {
+    this.onFrame = callback;
+    this.onFrame?.();
+  }
+
+  getMesh(id: string): ViewerMesh | undefined {
+    return this.meshes.get(id)?.mesh;
+  }
+
+  projectPoint(point: readonly [number, number, number]): ProjectedPoint {
+    const rect = this.canvas.getBoundingClientRect();
+    const mvp = this.camera().mvp;
+    const [x, y, z] = point;
+    const clipX = mvp[0] * x + mvp[4] * y + mvp[8] * z + mvp[12];
+    const clipY = mvp[1] * x + mvp[5] * y + mvp[9] * z + mvp[13];
+    const clipZ = mvp[2] * x + mvp[6] * y + mvp[10] * z + mvp[14];
+    const clipW = mvp[3] * x + mvp[7] * y + mvp[11] * z + mvp[15];
+    if (clipW <= 0) return { x: 0, y: 0, depth: Infinity, visible: false };
+    const ndcX = clipX / clipW;
+    const ndcY = clipY / clipW;
+    const ndcZ = clipZ / clipW;
+    return {
+      x: (ndcX + 1) * 0.5 * rect.width,
+      y: (1 - ndcY) * 0.5 * rect.height,
+      depth: ndcZ,
+      visible: ndcX >= -1 && ndcX <= 1 && ndcY >= -1 && ndcY <= 1 && ndcZ >= -1 && ndcZ <= 1,
+    };
   }
 
   selectMeshes(ids: readonly string[], focus = false): void {
@@ -561,7 +610,10 @@ export class T07WebGLViewer {
     this.resize();
     const gl = this.gl;
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    if (this.meshes.size === 0) return;
+    if (this.meshes.size === 0) {
+      this.onFrame?.();
+      return;
+    }
     const camera = this.camera();
     const opaque = this.availableMeshes(false);
     const transparent = this.availableMeshes(true).filter((gpu) => this.visibility.get(gpu.mesh.meshAssetId) === "transparent");
@@ -593,6 +645,7 @@ export class T07WebGLViewer {
       gl.depthMask(true);
       gl.disable(gl.BLEND);
     }
+    this.onFrame?.();
   }
 
   private pick(event: PointerEvent): void {
@@ -620,7 +673,65 @@ export class T07WebGLViewer {
     const index = pixel[0] + pixel[1] * 256 + pixel[2] * 65536 - 1;
     const mesh = index >= 0 ? [...this.meshes.values()][index]?.mesh : undefined;
     this.render();
-    if (mesh && this.availableMeshes(false).some((gpu) => gpu.mesh.meshAssetId === mesh.meshAssetId)) this.onPick(mesh);
+    if (mesh && this.availableMeshes(false).some((gpu) => gpu.mesh.meshAssetId === mesh.meshAssetId)) {
+      if (this.onAnnotationPick) {
+        const hit = this.raycastMesh(event, mesh);
+        if (hit) this.onAnnotationPick(hit);
+      } else {
+        this.onPick(mesh);
+      }
+    }
+  }
+
+  private raycastMesh(event: PointerEvent, mesh: ViewerMesh): AnnotationSurfaceHit | null {
+    const rect = this.canvas.getBoundingClientRect();
+    const ndcX = ((event.clientX - rect.left) / Math.max(1, rect.width)) * 2 - 1;
+    const ndcY = 1 - ((event.clientY - rect.top) / Math.max(1, rect.height)) * 2;
+    const { eye } = this.camera();
+    const forward = normalize(subtract(this.center, eye));
+    const right = normalize(cross(forward, [0, 1, 0]));
+    const screenUp = cross(right, forward);
+    const halfHeight = Math.tan(Math.PI / 8);
+    const aspect = this.canvas.width / Math.max(1, this.canvas.height);
+    const direction = normalize([
+      forward[0] + right[0] * ndcX * halfHeight * aspect + screenUp[0] * ndcY * halfHeight,
+      forward[1] + right[1] * ndcX * halfHeight * aspect + screenUp[1] * ndcY * halfHeight,
+      forward[2] + right[2] * ndcX * halfHeight * aspect + screenUp[2] * ndcY * halfHeight,
+    ]);
+    let nearestDistance = Infinity;
+    let result: AnnotationSurfaceHit | null = null;
+    const indices = mesh.indices;
+    const positions = mesh.positions;
+    for (let offset = 0; offset < indices.length; offset += 3) {
+      const i0 = indices[offset] * 3;
+      const i1 = indices[offset + 1] * 3;
+      const i2 = indices[offset + 2] * 3;
+      const v0: Vec3 = [positions[i0], positions[i0 + 1], positions[i0 + 2]];
+      const v1: Vec3 = [positions[i1], positions[i1 + 1], positions[i1 + 2]];
+      const v2: Vec3 = [positions[i2], positions[i2 + 1], positions[i2 + 2]];
+      const edge1 = subtract(v1, v0);
+      const edge2 = subtract(v2, v0);
+      const p = cross(direction, edge2);
+      const determinant = dot(edge1, p);
+      if (Math.abs(determinant) < 1e-10) continue;
+      const inverse = 1 / determinant;
+      const fromVertex = subtract(eye, v0);
+      const u = inverse * dot(fromVertex, p);
+      if (u < 0 || u > 1) continue;
+      const q = cross(fromVertex, edge1);
+      const v = inverse * dot(direction, q);
+      if (v < 0 || u + v > 1) continue;
+      const distance = inverse * dot(edge2, q);
+      if (distance <= 0 || distance >= nearestDistance) continue;
+      nearestDistance = distance;
+      result = {
+        mesh,
+        triangleId: offset / 3,
+        position: [eye[0] + direction[0] * distance, eye[1] + direction[1] * distance, eye[2] + direction[2] * distance],
+        barycentric: [1 - u - v, u, v],
+      };
+    }
+    return result;
   }
 
   private handlePointerDown(event: PointerEvent): void {

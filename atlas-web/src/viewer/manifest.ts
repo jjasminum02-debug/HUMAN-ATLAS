@@ -1,6 +1,7 @@
 import rawManifest from "virtual:human-atlas-mesh-manifest";
 import glbUrl from "../../../atlas-data/assets/derived-glb/bodyparts3d-r4-right-lower-leg/right-lower-leg.glb?url";
 import { decodeT07Glb, type ExpectedNode, type ViewerMesh } from "./glb";
+import type { AnnotationAssetContext } from "./annotationDrafts";
 
 interface T07Manifest {
   manifestVersion?: string;
@@ -13,11 +14,13 @@ interface T07Manifest {
   validation?: { anatomyIdentityReviewed?: boolean; attachmentAnnotationsCreated?: boolean; reviewState?: string };
   meshNodes?: Array<Record<string, unknown>>;
   meshCrosswalk?: Array<Record<string, unknown>>;
+  meshAssets?: Array<Record<string, unknown>>;
 }
 
 export interface T07ViewerBundle {
   manifest: T07Manifest;
   meshes: ViewerMesh[];
+  annotationAssets: AnnotationAssetContext[];
   attribution: string;
   sourceTitle: string;
 }
@@ -85,6 +88,44 @@ function expectedNodes(manifest: T07Manifest): ExpectedNode[] {
   return mapped;
 }
 
+function annotationAssets(manifest: T07Manifest, meshes: readonly ViewerMesh[]): AnnotationAssetContext[] {
+  const sources = manifest.meshAssets;
+  if (!sources || sources.length !== meshes.length) throw new Error("T07 mesh asset metadata가 GLB mesh 수와 일치하지 않습니다.");
+  const meshById = new Map(meshes.map((mesh) => [mesh.meshAssetId, mesh]));
+  const frameId = "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR";
+  const revisionHash = manifest.glb?.sha256;
+  if (!revisionHash) throw new Error("T07 GLB revision hash가 없습니다.");
+  return sources.map((row) => {
+    const id = row.id;
+    const revision = row.revision;
+    const hash = row.hash;
+    const topologyHash = row.topologyHash;
+    const laterality = row.laterality;
+    const units = row.units;
+    const axes = row.axes;
+    const pose = row.pose;
+    const mesh = typeof id === "string" ? meshById.get(id) : undefined;
+    if (typeof id !== "string" || !mesh || typeof revision !== "string" || typeof hash !== "string" || hash !== revisionHash ||
+      typeof topologyHash !== "string" || !/^[a-f0-9]{64}$/.test(topologyHash) || laterality !== "right" || units !== "m" ||
+      typeof axes !== "object" || axes === null || (axes as Record<string, unknown>).frameId !== frameId ||
+      typeof pose !== "object" || pose === null || typeof (pose as Record<string, unknown>).id !== "string") {
+      throw new Error(`T07 annotation asset metadata가 지원 계약과 일치하지 않습니다: ${String(id)}`);
+    }
+    return {
+      assetId: id,
+      assetRevision: revision,
+      assetRevisionHash: hash,
+      topologyHash,
+      laterality,
+      frameId,
+      units,
+      poseId: (pose as Record<string, unknown>).id as string,
+      triangleCount: mesh.indices.length / 3,
+      targetEntityId: mesh.targetEntityId,
+    };
+  });
+}
+
 async function sha256(buffer: ArrayBuffer): Promise<string> {
   if (!globalThis.crypto?.subtle) throw new Error("브라우저 Web Crypto API가 없어 GLB SHA-256을 확인할 수 없습니다.");
   const digest = await globalThis.crypto.subtle.digest("SHA-256", buffer);
@@ -102,9 +143,11 @@ export async function loadT07ViewerBundle(): Promise<T07ViewerBundle> {
   if (digest !== manifest.glb?.sha256) throw new Error("T07 GLB SHA-256이 manifest와 다릅니다.");
   const meshes = decodeT07Glb(buffer, expected);
   if (meshes.length !== manifest.glb?.meshCount) throw new Error("T07 manifest GLB mesh count와 decode 결과가 다릅니다.");
+  const assets = annotationAssets(manifest, meshes);
   return {
     manifest,
     meshes,
+    annotationAssets: assets,
     attribution: manifest.attribution?.requiredCreditVerbatim ?? "필수 귀속 문구가 T07 manifest에 없습니다.",
     sourceTitle: manifest.attribution?.sourceTitle ?? "출처 미기록",
   };
