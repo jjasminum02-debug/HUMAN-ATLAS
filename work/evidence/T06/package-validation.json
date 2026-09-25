@@ -1,0 +1,21 @@
+{
+  "recordedAt": "2026-09-25",
+  "results": [
+    {
+      "command": "pnpm install --frozen-lockfile --offline",
+      "exitCode": 0,
+      "output": "Already up to date\nDone in 209ms using pnpm v11.19.0\n"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "output": "$ tsc -b --pretty false\n"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "output": "$ tsc -b && vite build\nvite v8.3.1 building client environment for production...\ntransforming...\n✓ 18 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.55 kB │ gzip:  0.36 kB\ndist/assets/index-DR8W4mVU.css   11.50 kB │ gzip:  3.51 kB\ndist/assets/index-YPEaD19z.js   318.61 kB │ gzip: 83.12 kB\n\n✓ built in 62ms\n"
+    }
+  ],
+  "allPassed": true
+}

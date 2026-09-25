@@ -1,0 +1,266 @@
+{
+  "recordedAt": "2026-09-25",
+  "results": [
+    {
+      "command": "python3 atlas-data/schemas/validate.py --check-schemas",
+      "exitCode": 0,
+      "passed": true,
+      "output": {
+        "passed": true,
+        "schema": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/schemas/atlas.schema.json",
+        "draft": "https://json-schema.org/draft/2020-12/schema",
+        "keywordSubsetChecked": true
+      }
+    },
+    {
+      "command": "python3 atlas-data/schemas/validate.py --fixtures",
+      "exitCode": 0,
+      "passed": true,
+      "output": {
+        "schemaCheck": "passed",
+        "fixtureSuite": {
+          "fixtures": [
+            {
+              "name": "positive-complete-synthetic-contract",
+              "expectedValid": true,
+              "expectedDiagnostics": [],
+              "actualValid": true,
+              "actualDiagnostics": [],
+              "passed": true,
+              "detail": "Valid fixture passed."
+            },
+            {
+              "name": "orphan-id",
+              "expectedValid": false,
+              "expectedDiagnostics": [
+                "missing_reference"
+              ],
+              "actualValid": false,
+              "actualDiagnostics": [
+                "missing_reference"
+              ],
+              "passed": true,
+              "detail": "Expected negative diagnostics observed."
+            },
+            {
+              "name": "duplicate-id",
+              "expectedValid": false,
+              "expectedDiagnostics": [
+                "duplicate_id"
+              ],
+              "actualValid": false,
+              "actualDiagnostics": [
+                "duplicate_id",
+                "missing_reference"
+              ],
+              "passed": true,
+              "detail": "Expected negative diagnostics observed."
+            },
+            {
+              "name": "left-right-mismatch",
+              "expectedValid": false,
+              "expectedDiagnostics": [
+                "mesh_laterality_mismatch"
+              ],
+              "actualValid": false,
+              "actualDiagnostics": [
+                "mesh_laterality_mismatch"
+              ],
+              "passed": true,
+              "detail": "Expected negative diagnostics observed."
+            },
+            {
+              "name": "stale-annotation",
+              "expectedValid": false,
+              "expectedDiagnostics": [
+                "stale_annotation_reviewed"
+              ],
+              "actualValid": false,
+              "actualDiagnostics": [
+                "publication_stale_annotation",
+                "stale_annotation_reviewed"
+              ],
+              "passed": true,
+              "detail": "Expected negative diagnostics observed."
+            },
+            {
+              "name": "unsupported-reviewed",
+              "expectedValid": false,
+              "expectedDiagnostics": [
+                "reviewed_item_missing_evidence"
+              ],
+              "actualValid": false,
+              "actualDiagnostics": [
+                "reviewed_item_missing_evidence"
+              ],
+              "passed": true,
+              "detail": "Expected negative diagnostics observed."
+            },
+            {
+              "name": "ai-reviewer-cannot-approve",
+              "expectedValid": false,
+              "expectedDiagnostics": [
+                "reviewed_item_without_current_human_approval"
+              ],
+              "actualValid": false,
+              "actualDiagnostics": [
+                "reviewed_item_without_current_human_approval"
+              ],
+              "passed": true,
+              "detail": "Expected negative diagnostics observed."
+            },
+            {
+              "name": "thousand-fold-marker-error",
+              "expectedValid": false,
+              "expectedDiagnostics": [
+                "landmark_check_out_of_tolerance"
+              ],
+              "actualValid": false,
+              "actualDiagnostics": [
+                "landmark_check_out_of_tolerance"
+              ],
+              "passed": true,
+              "detail": "Expected negative diagnostics observed."
+            },
+            {
+              "name": "learning-license-not-granted",
+              "expectedValid": false,
+              "expectedDiagnostics": [
+                "publication_source_permission_missing"
+              ],
+              "actualValid": false,
+              "actualDiagnostics": [
+                "publication_source_permission_missing"
+              ],
+              "passed": true,
+              "detail": "Expected negative diagnostics observed."
+            },
+            {
+              "name": "learning-attribution-wrong",
+              "expectedValid": false,
+              "expectedDiagnostics": [
+                "publication_attribution_missing_or_wrong"
+              ],
+              "actualValid": false,
+              "actualDiagnostics": [
+                "publication_attribution_missing_or_wrong"
+              ],
+              "passed": true,
+              "detail": "Expected negative diagnostics observed."
+            },
+            {
+              "name": "missing-annotation-units",
+              "expectedValid": false,
+              "expectedDiagnostics": [
+                "schema_required"
+              ],
+              "actualValid": false,
+              "actualDiagnostics": [
+                "schema_required"
+              ],
+              "passed": true,
+              "detail": "Expected negative diagnostics observed."
+            },
+            {
+              "name": "annotation-not-in-internal-meters",
+              "expectedValid": false,
+              "expectedDiagnostics": [
+                "schema_const"
+              ],
+              "actualValid": false,
+              "actualDiagnostics": [
+                "schema_const"
+              ],
+              "passed": true,
+              "detail": "Expected negative diagnostics observed."
+            },
+            {
+              "name": "t02-wrong-transform-scale",
+              "expectedValid": false,
+              "expectedDiagnostics": [
+                "t02_transform_contract_mismatch"
+              ],
+              "actualValid": false,
+              "actualDiagnostics": [
+                "t02_transform_contract_mismatch"
+              ],
+              "passed": true,
+              "detail": "Expected negative diagnostics observed."
+            },
+            {
+              "name": "t02-wrong-rotation",
+              "expectedValid": false,
+              "expectedDiagnostics": [
+                "t02_transform_contract_mismatch"
+              ],
+              "actualValid": false,
+              "actualDiagnostics": [
+                "t02_transform_contract_mismatch"
+              ],
+              "passed": true,
+              "detail": "Expected negative diagnostics observed."
+            },
+            {
+              "name": "stale-review-content-hash",
+              "expectedValid": false,
+              "expectedDiagnostics": [
+                "reviewed_item_without_current_human_approval"
+              ],
+              "actualValid": false,
+              "actualDiagnostics": [
+                "reviewed_item_without_current_human_approval"
+              ],
+              "passed": true,
+              "detail": "Expected negative diagnostics observed."
+            },
+            {
+              "name": "parent-cycle",
+              "expectedValid": false,
+              "expectedDiagnostics": [
+                "parent_cycle"
+              ],
+              "actualValid": false,
+              "actualDiagnostics": [
+                "parent_cycle"
+              ],
+              "passed": true,
+              "detail": "Expected negative diagnostics observed."
+            },
+            {
+              "name": "missing-hani-not-auto-translated",
+              "expectedValid": false,
+              "expectedDiagnostics": [
+                "unreviewed_hani_term_filled"
+              ],
+              "actualValid": false,
+              "actualDiagnostics": [
+                "unreviewed_hani_term_filled"
+              ],
+              "passed": true,
+              "detail": "Expected negative diagnostics observed."
+            }
+          ],
+          "passed": true,
+          "fixtureCount": 17,
+          "conceptCountCheck": true
+        },
+        "passed": true,
+        "exitCode": 0
+      }
+    },
+    {
+      "command": "python3 atlas-data/schemas/validate.py --dataset atlas-data/catalog/canonical-catalog.json",
+      "exitCode": 0,
+      "passed": true,
+      "output": {
+        "schemaCheck": "passed",
+        "dataset": "atlas-data/catalog/canonical-catalog.json",
+        "valid": true,
+        "issues": [],
+        "passed": true,
+        "exitCode": 0
+      }
+    }
+  ],
+  "allPassed": true
+}

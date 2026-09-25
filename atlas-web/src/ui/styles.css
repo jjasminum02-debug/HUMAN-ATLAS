@@ -1,0 +1,225 @@
+:root {
+  font-family: "DM Sans", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  color: #1f2925;
+  background: #f3f4ef;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --ink: #1f2925;
+  --subtle-ink: #63706b;
+  --quiet-ink: #77827c;
+  --line: #dce1d9;
+  --paper: #ffffff;
+  --wash: #f7f8f4;
+  --green: #236850;
+  --green-soft: #e6f2ec;
+  --amber: #805411;
+  --amber-soft: #fff4dc;
+  --red: #943e31;
+  --red-soft: #fff0eb;
+  --shadow: 0 18px 55px rgba(34, 53, 43, 0.055);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(206, 225, 209, 0.43), transparent 31rem),
+    #f3f4ef;
+}
+
+button, input { font: inherit; }
+button { color: inherit; }
+a { color: var(--green); text-underline-offset: 0.2em; }
+a:hover { color: #154b37; }
+
+.app-shell { max-width: 1440px; margin: 0 auto; padding: 0 42px 26px; }
+.skip-link {
+  position: fixed; z-index: 10; top: 10px; left: 10px; transform: translateY(-160%);
+  padding: 11px 14px; border-radius: 8px; background: var(--ink); color: white; text-decoration: none;
+}
+.skip-link:focus { transform: translateY(0); }
+
+.topbar {
+  min-height: 100px; display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; border-bottom: 1px solid rgba(151, 164, 152, 0.3);
+}
+.brand-block { display: grid; gap: 3px; }
+.eyebrow {
+  margin: 0; color: #638071; font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+  line-height: 1.35; text-transform: uppercase;
+}
+.brand {
+  color: var(--ink); font: 800 22px/1.1 Manrope, "Apple SD Gothic Neo", sans-serif;
+  letter-spacing: -0.06em; text-decoration: none;
+}
+.topbar-meta { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.revision-pill, .scope-pill {
+  display: inline-flex; align-items: center; min-height: 29px; padding: 0 11px; border: 1px solid #d6dfd7;
+  border-radius: 999px; background: rgba(255,255,255,0.55); color: #53675e; font-size: 11px; font-weight: 600;
+}
+.revision-pill { max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.scope-pill { border-color: transparent; background: #e2ece5; color: #426251; }
+
+.catalog-notice {
+  display: flex; gap: 12px; margin: 24px 0 22px; padding: 15px 18px; border: 1px solid #e4d6b7;
+  border-radius: 12px; background: #fff9eb; color: #5c4c2e;
+}
+.catalog-notice p { margin: 4px 0 0; color: #786a4d; font-size: 12px; line-height: 1.55; }
+.catalog-notice strong { color: #544222; font-size: 13px; }
+.notice-mark {
+  display: grid; flex: 0 0 23px; width: 23px; height: 23px; place-items: center; border: 1px solid #d6c498;
+  border-radius: 50%; color: #8b692a; font: 700 13px/1 Manrope, sans-serif;
+}
+
+.explorer-layout { display: grid; grid-template-columns: minmax(260px, 325px) minmax(0, 1fr); align-items: start; gap: 22px; }
+.catalog-panel, .detail-panel {
+  border: 1px solid #e2e6df; border-radius: 16px; background: var(--paper); box-shadow: var(--shadow);
+}
+.catalog-panel { position: sticky; top: 20px; overflow: hidden; padding: 24px 18px 17px; }
+.panel-intro { padding: 0 3px 15px; }
+.panel-intro h1 { margin: 5px 0 5px; font: 700 22px/1.22 Manrope, "Apple SD Gothic Neo", sans-serif; letter-spacing: -0.045em; }
+.muted { color: var(--subtle-ink); }
+.panel-intro .muted { margin: 0; font-size: 12px; }
+.search-label { display: block; margin: 5px 0 7px; color: #5e6c64; font-size: 11px; font-weight: 700; }
+.search-input {
+  width: 100%; height: 43px; padding: 0 12px; border: 1px solid #dce2da; border-radius: 9px;
+  outline: none; background: #fbfcfa; color: var(--ink); font-size: 13px; transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+.search-input::placeholder { color: #9aa49d; }
+.search-input:focus { border-color: #6b9c82; box-shadow: 0 0 0 3px rgba(70, 131, 98, .14); }
+.list-count { margin: 12px 2px 8px; color: var(--quiet-ink); font-size: 10px; font-weight: 600; }
+.muscle-list { display: grid; gap: 6px; }
+.muscle-option, .part-option {
+  position: relative; display: grid; width: 100%; gap: 3px; padding: 11px 12px; border: 1px solid transparent;
+  border-radius: 10px; background: transparent; text-align: left; cursor: pointer;
+}
+.muscle-option:hover, .part-option:hover { border-color: #dde7df; background: #f7faf7; }
+.muscle-option:focus-visible, .part-option:focus-visible, .button-link:focus-visible, a:focus-visible, #details:focus-visible {
+  outline: 3px solid rgba(50, 126, 86, .44); outline-offset: 2px;
+}
+.muscle-option.is-selected { border-color: #b8d1c0; background: #eff6f1; }
+.option-name { padding-right: 40px; color: #27352e; font-size: 13px; font-weight: 700; line-height: 1.35; }
+.option-secondary { color: #637269; font-size: 11px; line-height: 1.35; }
+.option-id, .record-id { color: #859088; font: 500 10px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.015em; }
+.option-parts { position: absolute; top: 10px; right: 10px; color: #5c7968; font-size: 10px; }
+.panel-footnote { margin: 14px 3px 0; padding-top: 13px; border-top: 1px solid #edf0eb; color: #7e8981; font-size: 10px; line-height: 1.55; }
+
+.detail-panel { min-width: 0; min-height: 620px; padding: 32px 34px 38px; }
+.detail-heading { padding: 0 0 21px; border-bottom: 1px solid #e9ede7; }
+.detail-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
+.detail-heading h2 { margin: 7px 0 5px; color: #1c2d24; font: 700 clamp(25px, 3vw, 36px)/1.15 Manrope, "Apple SD Gothic Neo", sans-serif; letter-spacing: -0.055em; }
+.latin-title { margin: 0; color: #718077; font: italic 14px/1.5 "DM Sans", sans-serif; }
+.stable-id { flex: 0 0 auto; margin-top: 5px; padding: 7px 10px; border: 1px solid #e2e7e1; border-radius: 7px; color: #6d7a71; font: 11px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.detail-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+.region-chip { padding: 4px 9px; border-radius: 999px; background: #f1f4ef; color: #66776c; font-size: 10px; }
+.badge { display: inline-flex; align-items: center; width: fit-content; min-height: 21px; padding: 2px 8px; border-radius: 999px; font-size: 10px; font-weight: 700; line-height: 1.35; }
+.badge-review { background: var(--amber-soft); color: var(--amber); }
+.badge-muted { background: #eff1ef; color: #68736c; }
+.missing-banner { margin: 17px 0 0; padding: 13px 15px; border: 1px solid #f0d2c6; border-radius: 10px; background: var(--red-soft); }
+.missing-banner strong { color: #873d2e; font-size: 12px; }
+.missing-banner p { margin: 5px 0 0; color: #875e52; font-size: 11px; line-height: 1.55; }
+
+.content-section { padding: 24px 0; border-bottom: 1px solid #e9ede7; }
+.content-section:last-child { border-bottom: 0; }
+.section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; margin-bottom: 15px; }
+.section-heading h3 { margin: 4px 0 0; color: #26362e; font: 700 18px/1.25 Manrope, "Apple SD Gothic Neo", sans-serif; letter-spacing: -0.04em; }
+.section-count { display: inline-grid; min-width: 26px; height: 26px; padding: 0 7px; place-items: center; border: 1px solid #e3e8e1; border-radius: 999px; color: #78847b; font-size: 10px; }
+.term-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.term-row { padding: 13px 14px; border: 1px solid #e9ede7; border-radius: 10px; background: #fdfefc; }
+.term-heading, .claim-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.term-language { color: #68756d; font-size: 10px; font-weight: 700; }
+.term-value { margin: 9px 0 0; color: #27352d; font-size: 14px; font-weight: 600; line-height: 1.45; overflow-wrap: anywhere; }
+.missing-value { color: #a24737; font-weight: 600; }
+.missing-reason { margin: 6px 0 0; color: #81584c; font-size: 11px; line-height: 1.5; }
+.term-evidence { display: grid; gap: 4px; margin-top: 10px; }
+.evidence-line { display: grid; grid-template-columns: minmax(110px, .3fr) minmax(0, 1fr) auto; gap: 6px 10px; color: #768078; font-size: 10px; line-height: 1.45; }
+.evidence-line span:nth-child(2) { overflow-wrap: anywhere; }
+
+.part-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+.part-option { gap: 5px; border-color: #e6ebe5; background: #fbfcfa; }
+.part-option span:first-child { color: #34463b; font-size: 12px; font-weight: 700; line-height: 1.35; }
+.part-option.is-current { border-color: #b7d1bf; background: #eff6f1; }
+.attachment-list, .claim-list { display: grid; gap: 10px; }
+.attachment-card { padding: 14px; border: 1px solid #e4eae3; border-radius: 11px; background: #fcfdfb; }
+.attachment-title { display: flex; align-items: flex-start; gap: 10px; }
+.attachment-title strong { padding-top: 1px; color: #34453a; font-size: 13px; line-height: 1.45; }
+.role-tag { flex: 0 0 auto; min-width: 40px; padding: 4px 7px; border-radius: 5px; background: #e8f2ec; color: #37664f; text-align: center; font-size: 10px; font-weight: 700; }
+.role-insertion { background: #eef0fb; color: #4e5783; }
+.attachment-card > .record-id { margin: 5px 0 10px 50px; }
+.claim-card { margin-top: 11px; padding: 12px; border-radius: 8px; background: #f3f5f2; }
+.attachment-card > .claim-card { margin-top: 10px; }
+.claim-heading { color: #53635a; font-size: 10px; font-weight: 700; }
+.claim-summary { margin: 8px 0 0; color: #36443b; font-size: 12px; line-height: 1.65; }
+.claim-edition { margin: 7px 0 0; color: #77827b; font-size: 10px; line-height: 1.5; }
+.claim-sources { display: grid; gap: 5px; margin: 10px 0 0; padding: 8px 0 0; border-top: 1px solid #e1e6df; list-style: none; }
+.claim-sources li { display: grid; grid-template-columns: minmax(110px, .35fr) minmax(0, 1fr) auto; align-items: start; gap: 6px 9px; color: #78827b; font-size: 10px; line-height: 1.5; }
+.claim-sources li span:nth-child(2) { overflow-wrap: anywhere; }
+.source-title { color: #617166; font-weight: 600; }
+.claim-sources a { white-space: nowrap; }
+.empty-note { margin: 0; padding: 12px; border-radius: 8px; background: #f7f8f5; color: #7b867e; font-size: 11px; line-height: 1.55; }
+.source-state { color: #69776e; font-size: 12px; line-height: 1.6; }
+.source-state p { margin: 7px 0; }
+.source-state .record-id { margin-top: 10px; }
+.empty-state { max-width: 560px; margin: 65px auto; padding: 30px; border: 1px dashed #d4ddd3; border-radius: 14px; background: #fbfcfa; text-align: center; }
+.empty-state h2 { margin: 8px 0; font: 700 22px/1.3 Manrope, "Apple SD Gothic Neo", sans-serif; letter-spacing: -0.035em; }
+.empty-state p:last-child { color: #6f7c73; font-size: 12px; line-height: 1.6; }
+.state-page { max-width: 720px; margin: 12vh auto; padding: 36px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); }
+.state-page h1 { margin: 10px 0; font: 700 26px/1.2 Manrope, sans-serif; }
+.state-page p { line-height: 1.6; }
+.page-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 3px 0; color: #879188; font-size: 10px; }
+
+@media (max-width: 900px) {
+  .app-shell { padding-right: 22px; padding-left: 22px; }
+  .explorer-layout { grid-template-columns: minmax(230px, 285px) minmax(0, 1fr); gap: 14px; }
+  .catalog-panel { padding: 19px 13px 14px; }
+  .detail-panel { padding: 26px 23px 30px; }
+}
+
+@media (max-width: 700px) {
+  .app-shell { padding: 0 13px 22px; }
+  .topbar { min-height: 80px; }
+  .brand { font-size: 18px; }
+  .eyebrow { font-size: 9px; }
+  .revision-pill { max-width: 125px; font-size: 9px; }
+  .scope-pill { min-height: 27px; padding: 0 9px; font-size: 10px; }
+  .catalog-notice { margin: 14px 0; padding: 12px; }
+  .catalog-notice p { font-size: 11px; }
+  .explorer-layout { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .catalog-panel { position: static; padding: 16px 14px 12px; }
+  .panel-intro { padding-bottom: 10px; }
+  .panel-intro h1 { font-size: 18px; }
+  .panel-intro .muted { font-size: 11px; }
+  .search-label { margin-top: 3px; }
+  .search-input { height: 41px; }
+  .list-count { margin-top: 9px; }
+  .muscle-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; }
+  .muscle-option { min-height: 79px; padding: 9px; }
+  .option-name { padding-right: 0; font-size: 11px; }
+  .option-secondary { font-size: 9px; }
+  .option-id { font-size: 8px; }
+  .option-parts { top: auto; right: 8px; bottom: 8px; font-size: 8px; }
+  .panel-footnote { margin-top: 10px; padding-top: 9px; font-size: 9px; }
+  .detail-panel { min-height: 400px; padding: 20px 15px 23px; }
+  .detail-title-row { display: block; }
+  .detail-heading h2 { margin-top: 6px; font-size: 26px; }
+  .stable-id { display: inline-flex; margin-top: 9px; }
+  .latin-title { font-size: 12px; }
+  .section-heading h3 { font-size: 16px; }
+  .content-section { padding: 20px 0; }
+  .part-list { grid-template-columns: minmax(0, 1fr); }
+  .part-option { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+  .part-option .option-id { text-align: right; }
+  .evidence-line, .claim-sources li { grid-template-columns: minmax(0, 1fr) auto; }
+  .evidence-line span:first-child, .claim-sources .source-title { grid-column: 1 / -1; }
+  .claim-sources li span:nth-child(2) { grid-column: 1 / -1; }
+  .claim-sources a { grid-column: 2; grid-row: 2; }
+  .page-footer { align-items: flex-start; flex-direction: column; gap: 5px; font-size: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+}

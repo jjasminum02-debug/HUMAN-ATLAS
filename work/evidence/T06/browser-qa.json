@@ -1,0 +1,62 @@
+{
+  "recordedAt": "2026-09-25",
+  "browser": "Codex In-app Browser controlled through CUA",
+  "localUrl": "http://127.0.0.1:4173/",
+  "screenshots": {
+    "mobile": {
+      "capture": "CUA getAXStateAndScreenshot",
+      "viewport": { "width": 390, "height": 844 },
+      "observed": "Single-column page, partial-catalog notice, two-column pilot list, detail content below; screenshot was emitted inline in the T06 browser-verification output."
+    },
+    "default": {
+      "capture": "CUA getAXStateAndScreenshot after resetting the viewport override",
+      "viewport": { "width": 810, "height": 752 },
+      "observed": "Sidebar and selected structure card display side by side; screenshot was emitted inline in the T06 browser-verification output."
+    },
+    "localImageFiles": []
+  },
+  "layoutMetrics": {
+    "mobile": {
+      "documentWidth": 390,
+      "documentHeight": 2801,
+      "horizontalOverflow": false
+    },
+    "default": {
+      "documentWidth": 810,
+      "documentHeight": 2183,
+      "gridColumns": "285px 467px",
+      "horizontalOverflow": false
+    }
+  },
+  "checks": {
+    "sixPilotMuscleConceptsRenderedFromCatalog": true,
+    "twoChildPartsRenderedFromCatalog": true,
+    "termsAndSourceLocatorsVisible": true,
+    "missingHangulAndHanjaVisible": true,
+    "needsReviewClaimsVisible": true,
+    "partialCatalogNoticeVisible": true,
+    "keyboardSearchTabEnterSelectsSoleus": {
+      "passed": true,
+      "search": "Soleus",
+      "resultingUrl": "http://127.0.0.1:4173/?muscle=HA-M-000002"
+    },
+    "directMuscleDeepLink": {
+      "id": "HA-M-000004",
+      "heading": "Tibialis posterior muscle",
+      "passed": true
+    },
+    "directPartDeepLinkAndReload": {
+      "id": "HA-P-000002",
+      "heading": "Medial head of gastrocnemius",
+      "reloadRetainedQuery": true,
+      "passed": true
+    },
+    "unknownSelectionShowsUnavailableState": true,
+    "browserConsoleErrorsAndWarnings": []
+  },
+  "notes": [
+    "An actual CUA-controlled browser was used; no scripted DOM state was substituted for the visible page check.",
+    "The CUA screenshot surface emitted images inline but did not expose a local screenshot file export. Viewport, layout and interaction evidence are retained in this JSON and the accompanying report.",
+    "The catalog read-error branch is implemented and visible through the app state page; it was not forced by changing or renaming the protected T05 input files."
+  ]
+}
