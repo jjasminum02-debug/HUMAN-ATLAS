@@ -50,3 +50,10 @@ T01은 이 공백을 드러내고 범위/정책/출처 레지스트리를 작성
 - TA2의 7열 term role을 설명하는 IFAA 안내는 읽었지만 원본 Part 2 행을 화면으로 보지 못했다. 개별 Latin/English 값의 official/equivalent/synonym 열 역할은 확인 전까지 미승인이다. 공식 Errata PDF 링크는 식별했으나 사용 행 전부를 대조하지 않았다.
 - 대한해부학회 용어집 제6판(2014) 원본, 현행판 확인, 근육별 용어/한자 locator와 재사용 조건은 여전히 미확보다. Hangul/Hanja 값은 null로 둔다.
 - T04 단계에서 우측 BodyParts3D 파일과 TA2 행의 이름/계층 crosswalk를 provisional 상태로 기록했다. 해부학적 동일성에 대한 사람 검토는 하지 않았다.
+
+## T05 업데이트 — 2026-09-25
+
+- **Gray 1918 역사 해부학 출처:** 정확한 서지는 Henry Gray, Warren H. Lewis 편, *Anatomy of the Human Body*, 20th US ed., Lea & Febiger, 1918이다. Section 8c의 해당 근육 subsection과 tibialis anterior p. 480 온라인 텍스트를 확인했다. Gray는 현행 해부학 표준이 아니며 source file/hash와 현대 독립 출처 대조가 없다. T05 구조 요약은 모두 `needs_review`; registry 사용 범위는 internal/research로 제한했다.
+- **OpenStax 2e:** 공식 11.6 페이지에서 책 본문을 LLM/생성형 AI 서비스에 사전 허가 없이 ingestion하는 제한을 확인했다. T05에서 본문을 이용한 claim 추출은 하지 않았다. 권리 조건과 허가를 별도 확인하기 전에는 source 후보로만 둔다.
+- **T05 pilot 용어:** 여섯 muscle concept와 gastrocnemius 두 head part의 TA2 row/page records는 T04에서 연결됐다. TA2 Part 2 바이너리/시각 검토/Errata 대조, 표 용어열 역할 확정, Korean Anatomical Terminology 정확한 판본·항목 locator·Hanja 대응이 여전히 필요하다. 현재 term rows는 `needs_review`; Korean/Hanja는 null/held다.
+- **T05 해부 구조 텍스트:** Gray section 8c claims/evidence locator를 등록했으나 현대 독립 출처 대조와 사람 검토는 없다. 변이 설명은 별도 개념으로 정규화하지 않았다. `work/review-queue/pilot-structure-gaps.md`를 참조한다. 좌표와 mesh annotation은 입력하지 않았다.

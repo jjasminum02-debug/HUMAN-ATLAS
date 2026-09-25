@@ -112,8 +112,10 @@
       "intended_use_candidate": "Broad educational cross-check for selected skeletal-muscle regions and selected claims; not the canonical taxonomy or complete source for every muscle attachment.",
       "limitations": [
         "Coverage is pedagogical and selective; some attachment descriptions are simplified or incomplete.",
-        "Do not reproduce text, figures, or tables without following the relevant license and exact page-level attribution conditions."
-      ]
+        "Do not reproduce text, figures, or tables without following the relevant license and exact page-level attribution conditions.",
+        "The official section page includes an express restriction against ingesting book content into generative AI offerings without prior written permission. No OpenStax body text was added to T05 claims; AI-assisted extraction remains unused pending permission or a different source workflow."
+      ],
+      "t05_ai_extraction_status": "not_used_due_to_publisher_ingestion_restriction"
     },
     {
       "id": "MERCK_PROFESSIONAL_STRENGTH_ASSESSMENT",
@@ -253,6 +255,36 @@
       "limitations": [
         "Model completeness, simplification, actuators, paths, and coordinate choices vary by model.",
         "The local `OpenSim_Models` checkout remains a read-only source and is not imported into this registry as an acquired T01 asset."
+      ]
+    },
+    {
+      "id": "GRAY_ANATOMY_20E_1918",
+      "category": "historical_anatomy_reference",
+      "title": "Anatomy of the Human Body",
+      "organization": "Henry Gray; Warren H. Lewis (editor); Lea & Febiger",
+      "edition": "Anatomy of the Human Body, 20th US edition, thoroughly revised and re-edited by Warren H. Lewis; Lea & Febiger, 1918",
+      "edition_status": "20th edition and 1918 imprint verified by the title page and library catalog; section 8c and the Tibialis anterior printed page 480 inspected as online text; not treated as a current anatomy standard",
+      "primary_locator": "https://www.bartleby.com/lit-hub/anatomy-of-the-human-body/8c-the-muscles-and-fasci-of-the-leg/",
+      "edition_locator": "https://www.biodiversitylibrary.org/bibliography/20311",
+      "verified_content_locators": [
+        "https://www.bartleby.com/lit-hub/anatomy-of-the-human-body/pages-480/",
+        "https://www.bartleby.com/lit-hub/anatomy-of-the-human-body/8c-the-muscles-and-fasci-of-the-leg/"
+      ],
+      "verified_locator_detail": "T05 uses paraphrased attachment summaries with the exact source edition and subsection/page locator recorded per evidence item. No full text or image is copied into project data. The online chapter is used as a historical source transcription; source claims remain needs_review.",
+      "license": {
+        "name": "Public domain in the United States (1918 original); global status not assessed",
+        "status": "1918 original identified as not in copyright by Biodiversity Heritage Library; Wikisource source record states US public-domain basis; no public redistribution is authorized by this task",
+        "url": "https://www.biodiversitylibrary.org/bibliography/20311",
+        "required_credit_verbatim": null,
+        "note": "The task stores internal paraphrases and citations only. Check territorial status and the exact source copy before any external distribution."
+      },
+      "access_state": "bibliographic record and scan-backed text section accessed online; no source file downloaded",
+      "artifact_state": "no local source copy; no source hash; claim-level locators retained in atlas-data/catalog/canonical-catalog.json",
+      "intended_use_candidate": "Historical structural cross-check for pilot origin/insertion and tendon-course claims; not a current nomenclature authority, complete variation catalog, or clinical source.",
+      "limitations": [
+        "The 1918 edition predates current nomenclature and contemporary anatomy references; every T05 claim remains needs_review.",
+        "The source transcription describes selected anatomy and does not establish the completeness of each attachment region or all variants.",
+        "U.S. public-domain status does not establish worldwide distribution status for this project's future release context."
       ]
     }
   ],

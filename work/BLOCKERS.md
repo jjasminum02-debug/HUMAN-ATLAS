@@ -37,3 +37,12 @@
 - **term review blocker:** FIPAT 7-column term role을 설명하는 안내는 확인했지만 로컬 PDF visual check와 TA2 Errata 전수 대조가 없다. row terms는 `needs_review`다.
 - **anatomy blocker:** T02 mesh ID mapping은 provisional name crosswalk. shape/identity, head relationship, attachment surface, pose를 사람 검토로 확정하지 않았다. T04에는 해부학 주장/부착 데이터가 없다.
 - **reuse blocker:** CC BY-ND 4.0 조건의 exact attribution and derivative-catalog redistribution review는 미완료. 공개/재배포하지 않는다.
+
+## T05
+
+- **해부학 검토 필요:** Gray 1918은 historical source다. T05의 45 structure claims에 현대 독립 출처 대조와 사람 review가 없다. 모든 claim은 `needs_review`; 어떠한 `reviewed` 기록도 추가하지 않았다.
+- **언어 자료 미확보:** 6 muscles + 2 gastrocnemius head parts의 Hangul/Hanja standard term을 확정할 KAA primary/current edition, item locator, Hanja correspondence가 없다. 값은 null/held다.
+- **TA2 visual audit 미완료:** 공식 PDF binary/checksum/page image 및 Errata 대조가 없어 원 term columns와 T04 termRole 의미를 확정하지 않았다.
+- **variant taxonomy 미완료:** Gray 1918에 나온 변이 설명을 stable variant concepts/attachments로 정규화하지 않았다. review queue로 남겼다.
+- **공간자료 미입력:** T02 mesh links remain provisional; T05에는 spatial annotation/coordinates가 없다. Attachment prose does not imply a reviewed mesh surface.
+- **release 제한:** Gray global copyright status/redistribution과 OpenStax AI-ingestion permission은 확인되지 않았다. T05 public release/redistribution was not authorized or attempted.

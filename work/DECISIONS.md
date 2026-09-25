@@ -49,3 +49,11 @@
 - 7개의 T02 FMA→representation→OBJ 관계를 stable IDs에 provisional crosswalk했다. 두 gastroc meshes는 각 head part에만 연결하며 whole muscle mesh로 합치지 않는다. 해부학적 동일성 사람 review는 남았다.
 - CC BY-ND 4.0 안내에 따라 부분 파생 인덱스는 내부 작업물로 두고 public release/redistribution을 하지 않는다. Exact file attribution/reuse review remains open.
 - T04는 `complete_with_partial_catalog`; `CATALOG_GATE=blocked`, T05 pilot은 Runbook에 따라 다음 진행 가능. T04에서 anatomy claim, attachments, app, release, diagnosis/treatment/acupuncture work를 시작하지 않았다.
+
+## T05 — 2026-09-25
+
+- T04의 여섯 pilot stable IDs와 비복근 두 head part ID를 그대로 사용했다. T04 TA2 row 용어는 English/Latin 관찰 자료로 유지하며 원본 행 시각 검토와 term-role 대조 전까지 `needs_review`로 남겼다. 여덟 항목의 Korean Hangul/Hanja는 출처 locator가 없어 null/held로 보존했다.
+- 역사적 구조 텍스트 출처로 Gray/Lewis, *Anatomy of the Human Body*, 20th US ed. (1918), section 8c의 해당 근육 subsection을 선정했다. Tibialis anterior는 printed p. 480 locator도 확인했다. Gray는 현행 표준이 아니고 미국 외 배포 권리는 확인하지 않아 source registry scope를 `internal`, `research`로 한정했다. 41 attachments와 45 claims 전부 `needs_review`다.
+- OpenStax 2e page에 generative-AI ingestion 제한이 있으므로 본문 anatomy 추출에는 사용하지 않았다. License/reuse 상태는 registry에 source-specific으로 남기고 허가된 대체 작업 절차가 마련되기 전까지 제외한다.
+- 구조 term 54개와 attachment target structure 54개는 source-bounded historical labels로 추가했다. 넓은 tibia/fibula 표기를 원문에 명시된 head/surface/segment landmark로 분할하고 비복근 condyle/인접 femur, 뒤정강근 인접 septa 관계를 각각 보존했다. 총 41 attachments, 45 claims를 추가했다. 변이, 현대적 용어 선택, 3D 좌표/mesh annotation으로 의미를 넓히지 않았다.
+- T05는 부분 catalog 상태에서 pilot 데이터 추출 및 명시적 gap 기록까지 완료했다. Human anatomy review, claims 승격, public release와 전신 denominator freeze는 하지 않았다. 다음 작업은 T06 텍스트 탐색 앱이며 구조 검토 상태는 그대로 전달한다.
