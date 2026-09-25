@@ -1,0 +1,42 @@
+{
+  "task": "T07",
+  "commands": [
+    {
+      "label": "syntax-check",
+      "command": "python3 \"/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T07/check_t07_syntax.py\"",
+      "exitCode": 0,
+      "stdoutPath": "work/evidence/T07/syntax-check.stdout.txt",
+      "stderrPath": "work/evidence/T07/syntax-check.stderr.txt",
+      "stdout": "atlas-data/tools/convert_bodyparts3d_obj_to_glb.py: syntax_ok\nwork/evidence/T07/validate_t07.py: syntax_ok\nwork/evidence/T07/run_t07_validation.py: syntax_ok",
+      "stderr": ""
+    },
+    {
+      "label": "conversion-primary",
+      "command": "python3 \"/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/tools/convert_bodyparts3d_obj_to_glb.py\"",
+      "exitCode": 0,
+      "stdoutPath": "work/evidence/T07/conversion-primary.stdout.txt",
+      "stderrPath": "work/evidence/T07/conversion-primary.stderr.txt",
+      "stdout": "GLB: /Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/assets/derived-glb/bodyparts3d-r4-right-lower-leg/right-lower-leg.glb\nManifest: /Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/manifests/derived-assets-t07.json\nMeshes: 11\nGLB SHA-256: 044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341\nManifest SHA-256: b37692ab56f3024e49425663643271274e2351c6cedd4191871508f810c1744b",
+      "stderr": ""
+    },
+    {
+      "label": "conversion-repeat",
+      "command": "python3 \"/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/tools/convert_bodyparts3d_obj_to_glb.py\" --output-glb work/evidence/T07/repeat-run/right-lower-leg.glb --output-manifest work/evidence/T07/repeat-run/derived-assets-t07.json",
+      "exitCode": 0,
+      "stdoutPath": "work/evidence/T07/conversion-repeat.stdout.txt",
+      "stderrPath": "work/evidence/T07/conversion-repeat.stderr.txt",
+      "stdout": "GLB: /Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T07/repeat-run/right-lower-leg.glb\nManifest: /Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T07/repeat-run/derived-assets-t07.json\nMeshes: 11\nGLB SHA-256: 044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341\nManifest SHA-256: 31fc7a9cc51aa4cf039de4ee24628e7e023881c8f8fec58e053d287df1bba5c5",
+      "stderr": ""
+    },
+    {
+      "label": "verification",
+      "command": "python3 \"/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T07/validate_t07.py\"",
+      "exitCode": 0,
+      "stdoutPath": "work/evidence/T07/verification.stdout.txt",
+      "stderrPath": "work/evidence/T07/verification.stderr.txt",
+      "stdout": "{\n  \"task\": \"T07\",\n  \"status\": \"pass_with_anatomy_review_pending\",\n  \"checks\": {\n    \"t02_actual_assets_only\": true,\n    \"source_obj_hash_and_size_unchanged\": true,\n    \"glb_v2_header_chunks_and_accessors\": true,\n    \"glb_mesh_node_ids_stable_and_unique\": true,\n    \"all_11_vertices_normals_triangles_match_source\": true,\n    \"source_to_atlas_axes_units_and_right_sidedness\": true,\n    \"bounds_match_t02_within_1_micron\": true,\n    \"source_and_canonical_crosswalks_traceable\": true,\n    \"repeated_glb_bytes_identical\": true,\n    \"repeated_semantic_geometry_and_manifest_identical\": true,\n    \"t03_mesh_asset_dataset_overlay_valid\": true,\n    \"anatomy_review_and_annotations_not_claimed\": true,\n    \"preexisting_user_files_and_opensim_preserved\": true\n  },\n  \"glb\": {\n    \"path\": \"atlas-data/assets/derived-glb/bodyparts3d-r4-right-lower-leg/right-lower-leg.glb\",\n    \"sha256\": \"044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341\",\n    \"bytes\": 712192,\n    \"meshCount\": 11\n  },\n  \"repeatRun\": {\n    \"path\": \"work/evidence/T07/repeat-run/right-lower-leg.glb\",\n    \"sha256\": \"044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341\",\n    \"bytes\": 712192,\n    \"byteIdentical\": true,\n    \"semanticMeshCount\": 11\n  },\n  \"meshCountByKind\": {\n    \"muscle\": 7,\n    \"bone\": 4\n  },\n  \"unresolvedCrosswalk\": [\n    {\n      \"sourceFileId\": \"FJ3385\",\n      \"externalConceptId\": \"FMA24482\",\n      \"reason\": \"unmapped_internal_concept_no_talus_record_in_current_catalog\"\n    }\n  ],\n  \"t03Validator\": {\n    \"command\": \"python3 atlas-data/schemas/validate.py --dataset work/evidence/T07/t03-validation-dataset.json\",\n    \"exitCode\": 0,\n    \"stdout\": \"{\\n  \\\"schemaCheck\\\": \\\"passed\\\",\\n  \\\"dataset\\\": \\\"/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T07/t03-validation-dataset.json\\\",\\n  \\\"valid\\\": true,\\n  \\\"issues\\\": [],\\n  \\\"passed\\\": true,\\n  \\\"exitCode\\\": 0\\n}\",\n    \"stderr\": \"\",\n    \"overlayNotIngested\": true,\n    \"overlayRevision\": \"T07-validation-overlay-only-not-canonical-catalog\"\n  },\n  \"preservation\": {\n    \"preexistingHashesBeforePath\": \"work/evidence/T07/preexisting-files-before.sha256\",\n    \"preexistingHashesAfterPath\": \"work/evidence/T07/preexisting-files-after.sha256\",\n    \"preexistingFileCount\": 16,\n    \"preexistingFilesUnchanged\": true,\n    \"changedPreexistingFiles\": [],\n    \"opensimExpectedHead\": \"d9b05d470b1a481c222372c85b75772faf8f7792\",\n    \"opensimHeadAfter\": \"d9b05d470b1a481c222372c85b75772faf8f7792\",\n    \"opensimStatusAfter\": \"\",\n    \"opensimWorkingAndIndexDiffClean\": true,\n    \"opensimUnchanged\": true\n  },\n  \"bounds\": {\n    \"maxAtlasBoundsErrorMeters\": 1.483535766455546e-08\n  },\n  \"limitations\": [\n    \"No independent anatomical review of mesh identity, pose, or attachment surfaces.\",\n    \"The T03 catalog has no anatomical instances for laterality-specific MeshMapping and no talus structure; the T07 source crosswalk remains provisional, with talus internal target unresolved.\",\n    \"The Khronos glTF structural requirements were checked locally; no separate Khronos glTF Validator binary was installed or run.\"\n  ]\n}",
+      "stderr": ""
+    }
+  ],
+  "allExitCodesZero": true
+}
