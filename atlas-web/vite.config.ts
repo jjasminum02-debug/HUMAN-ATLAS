@@ -9,8 +9,11 @@ type EntityCollections = Record<string, AnyRecord[]>;
 const projectRoot = fileURLToPath(new URL("../", import.meta.url));
 const catalogPath = new URL("../atlas-data/catalog/canonical-catalog.json", import.meta.url);
 const statusPath = new URL("../atlas-data/catalog/catalog-status.json", import.meta.url);
+const meshManifestPath = new URL("../atlas-data/manifests/derived-assets-t07.json", import.meta.url);
 const virtualModuleId = "virtual:human-atlas-catalog";
 const resolvedVirtualModuleId = `\0${virtualModuleId}`;
+const meshModuleId = "virtual:human-atlas-mesh-manifest";
+const resolvedMeshModuleId = `\0${meshModuleId}`;
 
 function records(entities: EntityCollections, key: string): AnyRecord[] {
   const value = entities[key];
@@ -165,9 +168,34 @@ function catalogPlugin(): Plugin {
   };
 }
 
+function meshManifestPlugin(): Plugin {
+  return {
+    name: "human-atlas-t07-mesh-manifest",
+    resolveId(id) {
+      if (id === meshModuleId) return resolvedMeshModuleId;
+    },
+    async load(id) {
+      if (id !== resolvedMeshModuleId) return;
+      const source = await readFile(meshManifestPath, "utf8");
+      return `export default ${JSON.stringify(JSON.parse(source))};`;
+    },
+    configureServer(server) {
+      server.watcher.add(fileURLToPath(meshManifestPath));
+    },
+    handleHotUpdate({ file, server }) {
+      if (file !== fileURLToPath(meshManifestPath)) return;
+      const module = server.moduleGraph.getModuleById(resolvedMeshModuleId);
+      if (module) {
+        server.moduleGraph.invalidateModule(module);
+        return [module];
+      }
+    },
+  };
+}
+
 export default defineConfig({
   root: projectRoot + "atlas-web",
-  plugins: [catalogPlugin()],
-  server: { strictPort: true },
+  plugins: [catalogPlugin(), meshManifestPlugin()],
+  server: { strictPort: true, fs: { allow: [projectRoot] } },
   preview: { strictPort: true },
 });

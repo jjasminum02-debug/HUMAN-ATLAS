@@ -57,3 +57,8 @@
 - OpenStax 2e page에 generative-AI ingestion 제한이 있으므로 본문 anatomy 추출에는 사용하지 않았다. License/reuse 상태는 registry에 source-specific으로 남기고 허가된 대체 작업 절차가 마련되기 전까지 제외한다.
 - 구조 term 54개와 attachment target structure 54개는 source-bounded historical labels로 추가했다. 넓은 tibia/fibula 표기를 원문에 명시된 head/surface/segment landmark로 분할하고 비복근 condyle/인접 femur, 뒤정강근 인접 septa 관계를 각각 보존했다. 총 41 attachments, 45 claims를 추가했다. 변이, 현대적 용어 선택, 3D 좌표/mesh annotation으로 의미를 넓히지 않았다.
 - T05는 부분 catalog 상태에서 pilot 데이터 추출 및 명시적 gap 기록까지 완료했다. Human anatomy review, claims 승격, public release와 전신 denominator freeze는 하지 않았다. 다음 작업은 T06 텍스트 탐색 앱이며 구조 검토 상태는 그대로 전달한다.
+
+## T08 — 2026-09-25
+
+- T06에 Three.js가 포함되어 있지 않고 로컬 pnpm metadata/store에도 패키지가 없으며 네트워크 접근이 제한되어 있다. T08은 dependency 다운로드 대신 T07에서 생성한 고정 단일 GLB의 실제 계약(정점·법선·삼각형 인덱스와 node/mesh ID)을 검증하는 앱 내부 WebGL viewer를 사용한다.
+- 이 viewer는 T07 asset에 한정한 로컬 학습 UI로, 범용 glTF 엔진 또는 임상/해부학적 정확성 검토기가 아니다. T07 crosswalk의 `needs_review`, provisional 관계, 기준 포즈의 한계는 표시 상태에서 유지한다. renderer 교체 또는 전체 glTF support는 별도 범위다.

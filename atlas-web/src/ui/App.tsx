@@ -9,6 +9,7 @@ import {
   type AtlasRecord,
   type PilotCatalog,
 } from "../data/catalog";
+import { GLBViewer } from "../viewer/GLBViewer";
 
 const languageNames: Record<string, string> = { en: "English", la: "Latin", ko: "한국어" };
 const scriptNames: Record<string, string> = { Hang: "한글", Hani: "한자", Latn: "로마자" };
@@ -204,6 +205,11 @@ function App() {
   }, [catalog, availableIds]);
 
   const concepts = catalog?.concepts ?? [];
+  const viewerConcepts = useMemo(() => concepts.map((concept) => ({
+    id: concept.id,
+    entityType: concept.entityType,
+    parentId: rowValue(concept, "parentId"),
+  })), [concepts]);
   const primaryConcepts = catalog?.pilotMuscleIds.flatMap((id) => {
     const concept = concepts.find((row) => row.id === id);
     return concept ? [concept] : [];
@@ -280,7 +286,7 @@ function App() {
         </div>
         <div className="topbar-meta">
           <span className="revision-pill">{catalog.revision ?? "revision 미기록"}</span>
-          <span className="scope-pill">텍스트 파일럿</span>
+          <span className="scope-pill">정적 3D 파일럿 · 검토 대기</span>
         </div>
       </header>
 
@@ -341,8 +347,10 @@ function App() {
             })}
             {filteredConcepts.length === 0 && <p className="empty-note">검색 결과가 없습니다.</p>}
           </nav>
-          <p className="panel-footnote">3D 모델은 포함하지 않습니다. 구조와 출처 텍스트를 확인할 수 있습니다.</p>
+          <p className="panel-footnote">오른쪽 종아리의 정적 mesh만 연결되어 있습니다. 이름·대상 연결은 검토 대기입니다.</p>
         </aside>
+
+        <GLBViewer selectedEntityId={selectedId} concepts={viewerConcepts} onSelectEntity={choose} />
 
         <main className="detail-panel" id="details" tabIndex={-1}>
           {unknownSelection ? (

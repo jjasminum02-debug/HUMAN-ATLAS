@@ -1,0 +1,96 @@
+{
+  "task": "T08",
+  "method": "Manual browser interaction through CUA Playwright on the local Vite app",
+  "origin": "http://127.0.0.1:5173",
+  "finalUrl": "http://127.0.0.1:5173/?muscle=HA-M-000004",
+  "viewport": {
+    "width": 810,
+    "height": 752
+  },
+  "manifestRuntime": {
+    "version": "T07-derived-assets-v1",
+    "modelId": "HA-MODEL-BP3D4-R4-RIGHT-LOWER-LEG-STATIC",
+    "meshCount": 11,
+    "glbBytes": 712192,
+    "glbSha256": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341",
+    "crosswalkReviewState": "needs_review"
+  },
+  "scenarios": [
+    {
+      "name": "mesh-to-card",
+      "result": "pass",
+      "evidence": "Selecting right soleus changed URL/card to HA-M-000002; selecting lateral gastrocnemius head changed URL/card to HA-P-000001."
+    },
+    {
+      "name": "card-list-to-mesh-and-fast-switches",
+      "result": "pass",
+      "evidence": [
+        {
+          "cardId": "HA-M-000006",
+          "meshId": "HA-MESH-BP3D4-FJ1409",
+          "targetId": "HA-M-000006"
+        },
+        {
+          "cardId": "HA-M-000002",
+          "meshId": "HA-MESH-BP3D4-FJ1437",
+          "targetId": "HA-M-000002"
+        },
+        {
+          "cardId": "HA-M-000003",
+          "meshId": "HA-MESH-BP3D4-FJ1439",
+          "targetId": "HA-M-000003"
+        },
+        {
+          "cardId": "HA-M-000004",
+          "meshId": "HA-MESH-BP3D4-FJ1440",
+          "targetId": "HA-M-000004"
+        }
+      ]
+    },
+    {
+      "name": "mesh-without-pilot-card",
+      "result": "pass",
+      "evidence": "Selecting a bone mesh changed mesh selection only; no muscle/part card or ID was fabricated."
+    },
+    {
+      "name": "hide-and-picking",
+      "result": "pass",
+      "evidence": "After tibia was hidden, a canvas pick at the same location selected the visible mesh behind it; hidden tibia was not selected."
+    },
+    {
+      "name": "transparent-and-picking",
+      "result": "pass",
+      "evidence": "After soleus was made transparent, a canvas pick passed through it to an opaque underlying mesh."
+    },
+    {
+      "name": "restore-and-isolation",
+      "result": "pass",
+      "evidence": "Restore all cleared hidden/transparent states; isolate marked non-selected rows as excluded and toggling isolation off restored them."
+    },
+    {
+      "name": "camera-and-framing",
+      "result": "pass",
+      "evidence": "Front, back and right-lateral presets, whole model, surrounding view, and selected-structure zoom were each activated in the browser; screenshots showed camera/framing changes."
+    }
+  ],
+  "finalSelection": {
+    "cardId": "HA-M-000004",
+    "cardName": "Tibialis posterior muscle",
+    "meshId": "HA-MESH-BP3D4-FJ1440",
+    "meshName": "right tibialis posterior",
+    "urlParam": "muscle=HA-M-000004"
+  },
+  "console": {
+    "errors": 0,
+    "warnings": 0,
+    "captured": true
+  },
+  "screenshot": {
+    "path": "work/evidence/T08/browser-screen.jpg",
+    "format": "JPEG",
+    "width": 810,
+    "height": 752,
+    "bytes": 45362,
+    "sha256": "3683e8c77cb794ae51466a65ba3991dc1dbefcdcdf03f4f05bc71db99e040cee"
+  }
+}

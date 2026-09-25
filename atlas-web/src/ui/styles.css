@@ -75,8 +75,8 @@ a:hover { color: #154b37; }
   border-radius: 50%; color: #8b692a; font: 700 13px/1 Manrope, sans-serif;
 }
 
-.explorer-layout { display: grid; grid-template-columns: minmax(260px, 325px) minmax(0, 1fr); align-items: start; gap: 22px; }
-.catalog-panel, .detail-panel {
+.explorer-layout { display: grid; grid-template-columns: minmax(240px, 285px) minmax(380px, 1.15fr) minmax(330px, .95fr); align-items: start; gap: 16px; }
+.catalog-panel, .detail-panel, .viewer-panel {
   border: 1px solid #e2e6df; border-radius: 16px; background: var(--paper); box-shadow: var(--shadow);
 }
 .catalog-panel { position: sticky; top: 20px; overflow: hidden; padding: 24px 18px 17px; }
@@ -109,6 +109,48 @@ a:hover { color: #154b37; }
 .panel-footnote { margin: 14px 3px 0; padding-top: 13px; border-top: 1px solid #edf0eb; color: #7e8981; font-size: 10px; line-height: 1.55; }
 
 .detail-panel { min-width: 0; min-height: 620px; padding: 32px 34px 38px; }
+.viewer-panel { min-width: 0; padding: 18px; }
+.viewer-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 13px; }
+.viewer-heading h2 { margin: 4px 0 0; color: #26362e; font: 700 18px/1.25 Manrope, "Apple SD Gothic Neo", sans-serif; letter-spacing: -0.04em; }
+.viewer-canvas-wrap { position: relative; height: clamp(300px, 42vw, 510px); overflow: hidden; border: 1px solid #e2e8e1; border-radius: 12px; background: #f6f8f4; }
+.viewer-canvas { display: block; width: 100%; height: 100%; outline: none; cursor: grab; touch-action: none; }
+.viewer-canvas:active { cursor: grabbing; }
+.viewer-canvas:focus-visible { box-shadow: inset 0 0 0 3px rgba(50, 126, 86, .42); }
+.viewer-axis { position: absolute; top: 9px; right: 9px; padding: 5px 8px; border: 1px solid rgba(216, 225, 215, .9); border-radius: 999px; background: rgba(255,255,255,.88); color: #5d6d62; font-size: 9px; pointer-events: none; }
+.viewer-loading { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(247, 249, 245, .72); color: #63756a; font-size: 12px; }
+.viewer-toolbar { display: grid; gap: 7px; margin-top: 9px; }
+.camera-buttons { display: flex; flex-wrap: wrap; gap: 5px; }
+.camera-buttons button, .viewer-actions button, .mesh-controls button {
+  min-height: 30px; padding: 0 8px; border: 1px solid #dfe6de; border-radius: 7px; background: #fbfcfa; color: #53665a; font-size: 10px; font-weight: 650; cursor: pointer;
+}
+.camera-buttons button:hover, .viewer-actions button:hover, .mesh-controls button:hover { border-color: #b7cebd; background: #f0f6f1; }
+.camera-buttons button[aria-pressed="true"], .viewer-actions button.is-active, .mesh-controls button[aria-pressed="true"] { border-color: #9dbfa7; background: #e8f2eb; color: #285c42; }
+.camera-buttons button:focus-visible, .viewer-actions button:focus-visible, .mesh-controls button:focus-visible, .mesh-select:focus-visible { outline: 3px solid rgba(50, 126, 86, .38); outline-offset: 2px; }
+.viewer-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.viewer-actions button:disabled { opacity: .48; cursor: not-allowed; }
+.viewer-help { flex: 1 1 100%; color: #7a877f; font-size: 9px; line-height: 1.5; }
+.viewer-selected { display: grid; gap: 3px; min-height: 70px; margin-top: 12px; padding: 10px 11px; border: 1px solid #e2e8e1; border-radius: 9px; background: #f8faf7; color: #617166; font-size: 10px; line-height: 1.45; }
+.viewer-selected strong { color: #304538; font-size: 11px; }
+.viewer-selected code, .mesh-select code { color: #748278; font: 9px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+.mesh-list-wrap { margin-top: 17px; padding-top: 15px; border-top: 1px solid #edf0eb; }
+.mesh-list-heading { align-items: center; margin-bottom: 8px; }
+.mesh-list-heading h3 { margin: 3px 0 0; color: #34463b; font-size: 13px; }
+.mesh-list { display: grid; max-height: 310px; overflow: auto; border: 1px solid #e7ece5; border-radius: 9px; }
+.mesh-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 5px; padding: 6px 7px; border-bottom: 1px solid #edf0eb; }
+.mesh-row:last-child { border-bottom: 0; }
+.mesh-row.is-current { background: #f0f6f1; }
+.mesh-row.is-hidden { background: #f7f7f4; opacity: .68; }
+.mesh-select { display: grid; min-width: 0; gap: 2px; padding: 3px 4px; border: 0; border-radius: 5px; background: transparent; text-align: left; cursor: pointer; }
+.mesh-source-name { color: #34463b; font-size: 10px; font-weight: 700; line-height: 1.35; }
+.mesh-link-state { color: #839087; font-size: 8px; line-height: 1.3; overflow-wrap: anywhere; }
+.mesh-controls { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 3px; }
+.mesh-controls button { min-height: 25px; padding: 0 6px; font-size: 9px; }
+.mesh-state-label { min-width: 26px; color: #7b877f; text-align: right; font-size: 8px; }
+.viewer-provenance { display: grid; gap: 4px; margin-top: 12px; padding-top: 10px; border-top: 1px solid #edf0eb; color: #77837b; font-size: 8px; line-height: 1.5; overflow-wrap: anywhere; }
+.viewer-provenance strong { color: #526459; font-size: 9px; }
+.viewer-error { padding: 18px 15px; border: 1px solid #efd3ca; border-radius: 10px; background: #fff6f2; color: #873d2e; font-size: 12px; line-height: 1.55; overflow-wrap: anywhere; }
+.viewer-error p { margin: 7px 0; }
+.viewer-error .muted { color: #7b6d67; }
 .detail-heading { padding: 0 0 21px; border-bottom: 1px solid #e9ede7; }
 .detail-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
 .detail-heading h2 { margin: 7px 0 5px; color: #1c2d24; font: 700 clamp(25px, 3vw, 36px)/1.15 Manrope, "Apple SD Gothic Neo", sans-serif; letter-spacing: -0.055em; }
@@ -172,11 +214,15 @@ a:hover { color: #154b37; }
 .state-page p { line-height: 1.6; }
 .page-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 3px 0; color: #879188; font-size: 10px; }
 
-@media (max-width: 900px) {
+@media (max-width: 1180px) {
   .app-shell { padding-right: 22px; padding-left: 22px; }
-  .explorer-layout { grid-template-columns: minmax(230px, 285px) minmax(0, 1fr); gap: 14px; }
+  .explorer-layout { grid-template-columns: minmax(220px, 270px) minmax(0, 1fr); gap: 14px; }
+  .catalog-panel { grid-column: 1; grid-row: 1 / span 2; }
+  .viewer-panel, .detail-panel { grid-column: 2; }
   .catalog-panel { padding: 19px 13px 14px; }
   .detail-panel { padding: 26px 23px 30px; }
+  .viewer-panel { padding: 14px; }
+  .viewer-canvas-wrap { height: clamp(330px, 55vw, 500px); }
 }
 
 @media (max-width: 700px) {
@@ -190,6 +236,7 @@ a:hover { color: #154b37; }
   .catalog-notice p { font-size: 11px; }
   .explorer-layout { grid-template-columns: minmax(0, 1fr); gap: 12px; }
   .catalog-panel { position: static; padding: 16px 14px 12px; }
+  .catalog-panel, .viewer-panel, .detail-panel { grid-column: 1; grid-row: auto; }
   .panel-intro { padding-bottom: 10px; }
   .panel-intro h1 { font-size: 18px; }
   .panel-intro .muted { font-size: 11px; }
@@ -204,6 +251,12 @@ a:hover { color: #154b37; }
   .option-parts { top: auto; right: 8px; bottom: 8px; font-size: 8px; }
   .panel-footnote { margin-top: 10px; padding-top: 9px; font-size: 9px; }
   .detail-panel { min-height: 400px; padding: 20px 15px 23px; }
+  .viewer-panel { padding: 12px; }
+  .viewer-heading h2 { font-size: 17px; }
+  .viewer-canvas-wrap { height: min(112vw, 430px); min-height: 280px; }
+  .camera-buttons button { flex: 1 0 auto; }
+  .mesh-row { grid-template-columns: minmax(0, 1fr); }
+  .mesh-controls { justify-content: flex-start; padding-left: 4px; }
   .detail-title-row { display: block; }
   .detail-heading h2 { margin-top: 6px; font-size: 26px; }
   .stable-id { display: inline-flex; margin-top: 9px; }

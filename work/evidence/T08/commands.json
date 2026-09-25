@@ -1,0 +1,33 @@
+{
+  "task": "T08",
+  "commands": [
+    {
+      "command": "pnpm typecheck",
+      "cwd": "atlas-web",
+      "exitCode": 1,
+      "result": "Initial shell PATH did not contain node; rerun with the configured bundled Node and pnpm binaries."
+    },
+    {
+      "command": "pnpm typecheck",
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "result": "TypeScript project build passed with configured bundled Node in PATH."
+    },
+    {
+      "command": "pnpm build",
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "result": "Vite production build passed; GLB copied as right-lower-leg-C7dvV-l1.glb (712.19 kB), CSS 15.91 kB, JS 375.79 kB."
+    },
+    {
+      "command": "pnpm add --offline three@0.180.0",
+      "cwd": "atlas-web",
+      "exitCode": 1,
+      "result": "ERR_PNPM_NO_OFFLINE_META; Three.js was unavailable in local pnpm metadata. package.json and lockfile remained unchanged."
+    }
+  ],
+  "runtime": {
+    "node": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "pnpm": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback/pnpm"
+  }
+}
