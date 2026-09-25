@@ -1,0 +1,269 @@
+{
+  "schema_version": "0.1",
+  "revision": "T04-region-tree-partial-v1",
+  "status": "scope_complete_catalog_partial",
+  "root_id": "HA-R-ROOT",
+  "source_of_region_nodes": "atlas-data/manifests/scope.json (T01-policy-v1)",
+  "hierarchy_policy": "T01's 18 scope regions are direct children of a synthetic project root. This is not a claim that TA2 uses the same region hierarchy; no unsourced subregion nodes were invented.",
+  "regions": [
+    {
+      "id": "head",
+      "label": "Head and scalp",
+      "parentId": "HA-R-ROOT",
+      "includedByT01": true,
+      "coverageStatus": "partial_located_group_and_eye_rows",
+      "partialCatalogEntryCount": 1
+    },
+    {
+      "id": "face",
+      "label": "Face and facial expression",
+      "parentId": "HA-R-ROOT",
+      "includedByT01": true,
+      "coverageStatus": "not_enumerated_in_captured_source_rows",
+      "partialCatalogEntryCount": 0
+    },
+    {
+      "id": "mastication",
+      "label": "Mastication",
+      "parentId": "HA-R-ROOT",
+      "includedByT01": true,
+      "coverageStatus": "partial_located_group_and_selected_muscles",
+      "partialCatalogEntryCount": 11
+    },
+    {
+      "id": "eye",
+      "label": "Extraocular and other skeletal muscles associated with the eye",
+      "parentId": "HA-R-ROOT",
+      "includedByT01": true,
+      "coverageStatus": "partial_located_group_and_selected_muscles",
+      "partialCatalogEntryCount": 6
+    },
+    {
+      "id": "tongue",
+      "label": "Tongue",
+      "parentId": "HA-R-ROOT",
+      "includedByT01": true,
+      "coverageStatus": "partial_located_group_and_selected_muscles",
+      "partialCatalogEntryCount": 4
+    },
+    {
+      "id": "pharynx",
+      "label": "Pharynx",
+      "parentId": "HA-R-ROOT",
+      "includedByT01": true,
+      "coverageStatus": "not_enumerated_in_captured_source_rows",
+      "partialCatalogEntryCount": 0
+    },
+    {
+      "id": "larynx",
+      "label": "Larynx",
+      "parentId": "HA-R-ROOT",
+      "includedByT01": true,
+      "coverageStatus": "not_enumerated_in_captured_source_rows",
+      "partialCatalogEntryCount": 0
+    },
+    {
+      "id": "neck",
+      "label": "Neck",
+      "parentId": "HA-R-ROOT",
+      "includedByT01": true,
+      "coverageStatus": "not_enumerated_in_captured_source_rows",
+      "partialCatalogEntryCount": 0
+    },
+    {
+      "id": "back",
+      "label": "Back and vertebral column",
+      "parentId": "HA-R-ROOT",
+      "includedByT01": true,
+      "coverageStatus": "partial_located_group_and_selected_muscles",
+      "partialCatalogEntryCount": 9
+    },
+    {
+      "id": "thorax_respiratory",
+      "label": "Thorax and respiratory muscles",
+      "parentId": "HA-R-ROOT",
+      "includedByT01": true,
+      "coverageStatus": "partial_located_group_and_selected_muscles",
+      "partialCatalogEntryCount": 7
+    },
+    {
+      "id": "abdominal_wall",
+      "label": "Abdominal wall",
+      "parentId": "HA-R-ROOT",
+      "includedByT01": true,
+      "coverageStatus": "partial_located_muscle_rows_no_full_region_extract",
+      "partialCatalogEntryCount": 2
+    },
+    {
+      "id": "pelvic_floor_perineum",
+      "label": "Pelvic floor and perineum",
+      "parentId": "HA-R-ROOT",
+      "includedByT01": true,
+      "coverageStatus": "not_enumerated_scope_match_unresolved",
+      "partialCatalogEntryCount": 0
+    },
+    {
+      "id": "shoulder",
+      "label": "Shoulder and pectoral girdle",
+      "parentId": "HA-R-ROOT",
+      "includedByT01": true,
+      "coverageStatus": "partial_located_group_and_selected_muscles",
+      "partialCatalogEntryCount": 10
+    },
+    {
+      "id": "upper_extremity",
+      "label": "Upper extremity",
+      "parentId": "HA-R-ROOT",
+      "includedByT01": true,
+      "coverageStatus": "partial_located_group_and_selected_muscles",
+      "partialCatalogEntryCount": 10
+    },
+    {
+      "id": "hand",
+      "label": "Hand",
+      "parentId": "HA-R-ROOT",
+      "includedByT01": true,
+      "coverageStatus": "not_enumerated_in_captured_source_rows",
+      "partialCatalogEntryCount": 0
+    },
+    {
+      "id": "gluteal",
+      "label": "Gluteal region",
+      "parentId": "HA-R-ROOT",
+      "includedByT01": true,
+      "coverageStatus": "partial_located_group_and_selected_muscles",
+      "partialCatalogEntryCount": 10
+    },
+    {
+      "id": "lower_extremity",
+      "label": "Lower extremity",
+      "parentId": "HA-R-ROOT",
+      "includedByT01": true,
+      "coverageStatus": "partial_located_groups_and_selected_muscles",
+      "partialCatalogEntryCount": 12
+    },
+    {
+      "id": "foot",
+      "label": "Foot",
+      "parentId": "HA-R-ROOT",
+      "includedByT01": true,
+      "coverageStatus": "partial_located_group_and_selected_muscles",
+      "partialCatalogEntryCount": 3
+    }
+  ],
+  "t03RegionEntities": [
+    {
+      "id": "HA-R-ROOT",
+      "label": "Adult human skeletal muscle scope (T01)",
+      "notes": "Project scope root only; not a TA2 anatomical region heading."
+    },
+    {
+      "id": "head",
+      "parentId": "HA-R-ROOT",
+      "label": "Head and scalp",
+      "notes": "Head-region muscles; overlapping subregion tags do not create duplicate concepts."
+    },
+    {
+      "id": "face",
+      "parentId": "HA-R-ROOT",
+      "label": "Face and facial expression",
+      "notes": "Includes muscles attaching to skin or connective tissue where applicable."
+    },
+    {
+      "id": "mastication",
+      "parentId": "HA-R-ROOT",
+      "label": "Mastication",
+      "notes": "T01 scope region; coverage=partial_located_group_and_selected_muscles."
+    },
+    {
+      "id": "eye",
+      "parentId": "HA-R-ROOT",
+      "label": "Extraocular and other skeletal muscles associated with the eye",
+      "notes": "Smooth muscle of the eye is excluded by tissue type."
+    },
+    {
+      "id": "tongue",
+      "parentId": "HA-R-ROOT",
+      "label": "Tongue",
+      "notes": "Intrinsic and extrinsic skeletal muscles."
+    },
+    {
+      "id": "pharynx",
+      "parentId": "HA-R-ROOT",
+      "label": "Pharynx",
+      "notes": "T01 scope region; coverage=not_enumerated_in_captured_source_rows."
+    },
+    {
+      "id": "larynx",
+      "parentId": "HA-R-ROOT",
+      "label": "Larynx",
+      "notes": "T01 scope region; coverage=not_enumerated_in_captured_source_rows."
+    },
+    {
+      "id": "neck",
+      "parentId": "HA-R-ROOT",
+      "label": "Neck",
+      "notes": "T01 scope region; coverage=not_enumerated_in_captured_source_rows."
+    },
+    {
+      "id": "back",
+      "parentId": "HA-R-ROOT",
+      "label": "Back and vertebral column",
+      "notes": "T01 scope region; coverage=partial_located_group_and_selected_muscles."
+    },
+    {
+      "id": "thorax_respiratory",
+      "parentId": "HA-R-ROOT",
+      "label": "Thorax and respiratory muscles",
+      "notes": "T01 scope region; coverage=partial_located_group_and_selected_muscles."
+    },
+    {
+      "id": "abdominal_wall",
+      "parentId": "HA-R-ROOT",
+      "label": "Abdominal wall",
+      "notes": "T01 scope region; coverage=partial_located_muscle_rows_no_full_region_extract."
+    },
+    {
+      "id": "pelvic_floor_perineum",
+      "parentId": "HA-R-ROOT",
+      "label": "Pelvic floor and perineum",
+      "notes": "Record source-supported sex-specific applicability where relevant."
+    },
+    {
+      "id": "shoulder",
+      "parentId": "HA-R-ROOT",
+      "label": "Shoulder and pectoral girdle",
+      "notes": "T01 scope region; coverage=partial_located_group_and_selected_muscles."
+    },
+    {
+      "id": "upper_extremity",
+      "parentId": "HA-R-ROOT",
+      "label": "Upper extremity",
+      "notes": "Shoulder and hand may also be used as more specific region tags."
+    },
+    {
+      "id": "hand",
+      "parentId": "HA-R-ROOT",
+      "label": "Hand",
+      "notes": "T01 scope region; coverage=not_enumerated_in_captured_source_rows."
+    },
+    {
+      "id": "gluteal",
+      "parentId": "HA-R-ROOT",
+      "label": "Gluteal region",
+      "notes": "T01 scope region; coverage=partial_located_group_and_selected_muscles."
+    },
+    {
+      "id": "lower_extremity",
+      "parentId": "HA-R-ROOT",
+      "label": "Lower extremity",
+      "notes": "Gluteal region and foot may also be used as more specific region tags."
+    },
+    {
+      "id": "foot",
+      "parentId": "HA-R-ROOT",
+      "label": "Foot",
+      "notes": "T01 scope region; coverage=partial_located_group_and_selected_muscles."
+    }
+  ]
+}

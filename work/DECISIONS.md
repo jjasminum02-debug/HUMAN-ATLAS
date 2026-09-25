@@ -39,3 +39,13 @@
 - Hani 결측은 null과 사유로 저장할 수 있다. Hani 문구가 채워졌으면 evidence 및 현재 사람 리뷰 없이 통과하지 않는다. 자동 번역이나 누락 채우기는 구현하지 않는다.
 - fixture와 승인 기록은 gate 검증만을 위한 synthetic 데이터이며 실제 학습자료, 해부 claim, 실제 human review가 아니다. fixtures 경로를 실제 catalog 입력으로 쓰지 않는다.
 - T03 검증 성공; 다음 직렬 작업은 T04 전체 근육 목록과 언어 정책이다. T03에서는 실제 데이터나 T04 목록을 시작하지 않았다.
+
+## T04 — 2026-09-25
+
+- 국제 nomenclature 기준 candidate는 IFAA 승인 TA2 제2판(온라인 2019), Part 2로 두었다. 공식 PDF 검색 색인에서 확인 가능한 exact 행/인쇄 쪽 locator만 구조화했으며 바이너리와 checksum을 확보하지 못했다. Part 2 원본 시각 검토/전수 추출 전까지 canonical 전체 목록이나 denominator를 동결하지 않는다.
+- 부분 catalog에는 85개 안정 ID를 부여했다: 48 `individual_muscle`, 16 `muscle_group`, 21 `muscle_part`. 개별 근육만 partial count에 포함한다. region tree는 T01의 18 scope node를 scope root 아래 보존하며 TA2 전체 region hierarchy라고 주장하지 않는다.
+- source-row Latin/English observation은 exact row/page locator와 연결하되 term records는 `needs_review`다. FIPAT term column role의 원본 시각 확인, TA2 Errata 전수 대조, 대한해부학회 primary/current 용어집과 Korean/Hanja locators 전까지 해당 term promotion/translation을 하지 않는다.
+- T05 pilot stable IDs: gastrocnemius `HA-M-000001` (lateral head `HA-P-000001`, medial head `HA-P-000002`); soleus `HA-M-000002`; tibialis anterior `HA-M-000003`; tibialis posterior `HA-M-000004`; fibularis longus `HA-M-000005`; fibularis brevis `HA-M-000006`.
+- 7개의 T02 FMA→representation→OBJ 관계를 stable IDs에 provisional crosswalk했다. 두 gastroc meshes는 각 head part에만 연결하며 whole muscle mesh로 합치지 않는다. 해부학적 동일성 사람 review는 남았다.
+- CC BY-ND 4.0 안내에 따라 부분 파생 인덱스는 내부 작업물로 두고 public release/redistribution을 하지 않는다. Exact file attribution/reuse review remains open.
+- T04는 `complete_with_partial_catalog`; `CATALOG_GATE=blocked`, T05 pilot은 Runbook에 따라 다음 진행 가능. T04에서 anatomy claim, attachments, app, release, diagnosis/treatment/acupuncture work를 시작하지 않았다.

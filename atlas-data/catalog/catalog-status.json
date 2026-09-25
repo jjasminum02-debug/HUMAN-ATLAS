@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.1",
+  "revision": "T04-partial-catalog-v1",
+  "status": "partial_source_index_extract",
+  "taskStatus": "complete_with_partial_catalog",
+  "catalogComplete": false,
+  "wholeBodyGate": "blocked",
+  "denominatorFrozen": false,
+  "wholeBodyIndividualMuscleCount": null,
+  "partialEntryCounts": {
+    "individualMuscles": 48,
+    "groups": 16,
+    "parts": 21,
+    "variants": 0
+  },
+  "partialSourceRows": 85,
+  "sourceEdition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+  "sourceBinaryAcquired": false,
+  "reasons": [
+    "The exact official TA2 Part 2 PDF could not be acquired locally; the accessible official search index exposes only excerpts.",
+    "The 18-region catalog is not systematically enumerated from a full source table.",
+    "Official/equivalent/synonym table-cell roles have not been visually checked against the PDF.",
+    "The Korean primary nomenclature source and exact edition/item locators remain unavailable."
+  ],
+  "nextAllowedWork": "T05 pilot text may proceed using the six stable individual-muscle IDs below, while retaining missing Korean/Hanja terms and all anatomy claims as unreviewed.",
+  "pilotConceptIds": {
+    "fibularis_brevis": "HA-M-000006",
+    "fibularis_longus": "HA-M-000005",
+    "gastrocnemius": "HA-M-000001",
+    "soleus": "HA-M-000002",
+    "tibialis_anterior": "HA-M-000003",
+    "tibialis_posterior": "HA-M-000004"
+  },
+  "notImplied": [
+    "anatomical review",
+    "complete muscle denominator",
+    "public reuse permission",
+    "clinical readiness"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "checkedOn": "2026-09-25",
+  "commands": {
+    "python3 atlas-data/schemas/validate.py --check-schemas": {
+      "exitCode": 0,
+      "passed": true
+    },
+    "python3 atlas-data/schemas/validate.py --fixtures": {
+      "exitCode": 0,
+      "passed": true,
+      "fixtureCount": 17
+    },
+    "python3 atlas-data/schemas/validate.py --dataset atlas-data/catalog/canonical-catalog.json": {
+      "exitCode": 0,
+      "passed": true,
+      "issues": []
+    },
+    "python3 work/evidence/T04/validate_t04.py": {
+      "exitCode": 0,
+      "passed": true,
+      "checkCount": 17
+    },
+    "curl -I -L --max-time 15 <official TA2 Part 2 PDF URL>": {
+      "exitCode": 6,
+      "passed": false,
+      "expectedAccessBlocker": "official PDF host DNS resolution failed; full catalog gate remains blocked"
+    }
+  },
+  "sourceFetchFailureIsNotCatalogValidation": "The validation commands check the bounded partial catalog; they do not imply successful acquisition or full enumeration of TA2."
+}

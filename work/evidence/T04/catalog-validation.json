@@ -1,0 +1,100 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "all_18_t01_regions_in_tree",
+      "passed": true,
+      "detail": "scope=18 tree=18 missing=[]"
+    },
+    {
+      "name": "scope_tree_has_single_project_root",
+      "passed": true,
+      "detail": "T01 scope regions are direct children of the project root; no unsourced subregions were added."
+    },
+    {
+      "name": "t03_region_ids_resolve",
+      "passed": true,
+      "detail": "T03 region entity count=19"
+    },
+    {
+      "name": "stable_ids_unique_and_namespaced",
+      "passed": true,
+      "detail": "concepts=85; IDs are opaque, unique, append-only project IDs."
+    },
+    {
+      "name": "concept_types_and_counts",
+      "passed": true,
+      "detail": "counts={'individualMuscles': 48, 'groups': 16, 'parts': 21, 'variants': 0}; only individual_muscle enters the partial count."
+    },
+    {
+      "name": "all_parent_concepts_resolve",
+      "passed": true,
+      "detail": "concept references checked=85"
+    },
+    {
+      "name": "every_catalog_item_has_exact_row_and_page",
+      "passed": true,
+      "detail": "row crosswalks=85"
+    },
+    {
+      "name": "row_reference_matches_concept_standard_ref",
+      "passed": true,
+      "detail": "T03 StandardRef locators match the source crosswalk row/page for each item."
+    },
+    {
+      "name": "all_row_evidence_resolves",
+      "passed": true,
+      "detail": "evidence records=85; each source item points to a recorded TA2 row locator."
+    },
+    {
+      "name": "terms_are_traceable_or_explicitly_missing",
+      "passed": true,
+      "detail": "term records=340; source observations are needs_review, Korean/Hanja entries are null with reasons."
+    },
+    {
+      "name": "no_review_or_claims_or_attachments",
+      "passed": true,
+      "detail": "No anatomy claims, attachments, spatial annotations, functions, assessments, or reviewer approvals were created."
+    },
+    {
+      "name": "whole_body_denominator_stays_unfrozen",
+      "passed": true,
+      "detail": "Partial source extraction is not represented as the whole-body denominator."
+    },
+    {
+      "name": "all_t02_pilot_concepts_have_stable_ids",
+      "passed": true,
+      "detail": "{\"fibularis_brevis\": \"HA-M-000006\", \"fibularis_longus\": \"HA-M-000005\", \"gastrocnemius\": \"HA-M-000001\", \"soleus\": \"HA-M-000002\", \"tibialis_anterior\": \"HA-M-000003\", \"tibialis_posterior\": \"HA-M-000004\"}"
+    },
+    {
+      "name": "all_7_t02_fma_mesh_mappings_carried_forward",
+      "passed": true,
+      "detail": "T02 FMA IDs=7 mapped=7"
+    },
+    {
+      "name": "gastrocnemius_head_meshes_map_to_distinct_parts",
+      "passed": true,
+      "detail": "Two right-side T02 head meshes stay on child part IDs; no whole-muscle mesh is asserted."
+    },
+    {
+      "name": "no_bilateral_duplicate_instances_or_right_left_catalog_labels",
+      "passed": true,
+      "detail": "Canonical concepts are side-independent; T02 side-specific assets remain in the external crosswalk."
+    },
+    {
+      "name": "no_variants_fabricated",
+      "passed": true,
+      "detail": "No variant was asserted; the gap queue explicitly says zero enumerated is not absence."
+    }
+  ],
+  "conceptCounts": {
+    "individualMuscles": 48,
+    "groups": 16,
+    "parts": 21,
+    "variants": 0
+  },
+  "regionCount": 18,
+  "termCount": 340,
+  "rowEvidenceCount": 85,
+  "wholeBodyGate": "blocked"
+}

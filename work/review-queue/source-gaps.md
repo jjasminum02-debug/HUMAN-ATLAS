@@ -42,3 +42,11 @@
 | OpenSim 개별 모델의 file-level rights | 해당 모델을 실제로 인용/변환할 task에서 확인 | T01에서 OpenSim 원본을 열거나 수정하지 않음 |
 
 T01은 이 공백을 드러내고 범위/정책/출처 레지스트리를 작성하는 task이므로, 이 공백 자체는 T01을 막지 않는다. 기술 상태와 사람 해부학 검토 상태는 별도로 유지한다.
+
+## T04 업데이트 — 2026-09-25
+
+- **TA2:** IFAA 공식 안내는 TA2 제2판(온라인 2019, IFAA 승인)과 CC BY-ND 4.0을 확인해 준다. FIPAT 공식 Part 2 PDF 검색 색인에서 `work/evidence/T04/source-locator-register.json`에 적은 일부 근육/근군 행 및 인쇄 쪽 locator 85개를 확인했다. 원본 PDF 바이너리는 현재 환경에서 DNS 실패로 내려받지 못했고 로컬 파일·checksum·전체 표 시각 검토는 없다. 따라서 이 locator 모음은 전신 명칭 목록이나 고정판 확보로 승격하지 않는다.
+- 공식 TA2 Part 2 PDF에 머리/눈·저작·혀·등·흉곽·복벽·골반 머리말·어깨/상지·엉덩이/하지·발의 일부가 잡혔고, `face`, `pharynx`, `larynx`, `neck`, `hand`의 T04 캡처 행은 없다. 다른 영역도 일부 항목만 확인했다. 영역별 범위와 남은 작업은 `work/review-queue/catalog-gaps.md`에서 관리한다.
+- TA2의 7열 term role을 설명하는 IFAA 안내는 읽었지만 원본 Part 2 행을 화면으로 보지 못했다. 개별 Latin/English 값의 official/equivalent/synonym 열 역할은 확인 전까지 미승인이다. 공식 Errata PDF 링크는 식별했으나 사용 행 전부를 대조하지 않았다.
+- 대한해부학회 용어집 제6판(2014) 원본, 현행판 확인, 근육별 용어/한자 locator와 재사용 조건은 여전히 미확보다. Hangul/Hanja 값은 null로 둔다.
+- T04 단계에서 우측 BodyParts3D 파일과 TA2 행의 이름/계층 crosswalk를 provisional 상태로 기록했다. 해부학적 동일성에 대한 사람 검토는 하지 않았다.

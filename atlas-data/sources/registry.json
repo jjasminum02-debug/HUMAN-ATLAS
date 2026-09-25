@@ -1,8 +1,8 @@
 {
   "schema_version": "0.1",
   "registry_id": "human-atlas-source-registry",
-  "revision": "T01-v1",
-  "status": "candidate_sources_and_access_states_only",
+  "revision": "T04-partial-source-access-v1",
+  "status": "candidate_sources_with_partial_official_locator_extract",
   "accessed_on": "2026-09-25",
   "policy": {
     "source_content": "This registry records candidate references, visible publisher/archive metadata, exact locators inspected, and access/rights status. It is not an anatomy dataset and contains no copied muscle claims or source tables.",
@@ -10,7 +10,21 @@
     "claim_provenance": "Future anatomy and assessment statements require source ID, exact edition, claim-level page/table/figure locator, access date, and an independent evidence/review state. Do not turn a citation to a general chapter into evidence for an unlocated claim.",
     "files_not_obtained": "A web page, file listing, or external link being visible is not recorded as a file download. Unless a row says otherwise, no source files were downloaded into this project and no checksum exists.",
     "attribution_record_fields": [
-      "source_id", "publisher_or_rightsholder", "source_title", "edition_or_release", "source_file_name", "source_file_url", "retrieved_at", "source_file_sha256", "license_name_and_version", "license_url", "required_credit_verbatim", "modification_summary", "derived_file_sha256", "local_storage_path", "permitted_use_check"
+      "source_id",
+      "publisher_or_rightsholder",
+      "source_title",
+      "edition_or_release",
+      "source_file_name",
+      "source_file_url",
+      "retrieved_at",
+      "source_file_sha256",
+      "license_name_and_version",
+      "license_url",
+      "required_credit_verbatim",
+      "modification_summary",
+      "derived_file_sha256",
+      "local_storage_path",
+      "permitted_use_check"
     ],
     "asset_gate": "Do not import an asset into a public build or redistribute it unless the exact source file, release, license, required credit, modifications, and hashes are recorded and the license permits that use."
   },
@@ -21,21 +35,29 @@
       "title": "Terminologia Anatomica, 2nd edition (TA2)",
       "organization": "Federative International Programme on Anatomical Terminologies (FIPAT), International Federation of Associations of Anatomists (IFAA)",
       "edition": "Second edition; published online in 2019 and approved by the IFAA General Assembly",
-      "edition_status": "publisher_metadata_verified",
+      "edition_status": "publisher_metadata_verified; official Part 2 PDF indexed with partial table rows; binary not locally acquired",
       "primary_locator": "https://ifaa.net/committees/anatomical-terminology-fipat/fipat-ifaa-terminologies/",
       "edition_locator": "https://fipat.library.dal.ca/TA2/",
-      "verified_locator_detail": "IFAA terminology page identifies TA2 as the second edition, online 2019, approved by IFAA; the TA2 publication link is present. Exact muscle rows/pages and a frozen local edition file were not obtained.",
+      "verified_locator_detail": "IFAA identifies TA2 as the approved second edition published online in 2019. The official FIPAT-hosted Part 2 PDF search index exposed selected exact row and printed-page snippets; captured ranges are listed in work/evidence/T04/source-access.md and work/evidence/T04/source-locator-register.json. The PDF binary was not acquired or visually reviewed, so no full table, frozen file hash, or complete muscle list is claimed.",
       "license": {
         "name": "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)",
         "status": "official_IFAA_page_states_terminologies_are_web_published_under_CC_BY_ND_4_0",
         "url": "https://ifaa.net/committees/anatomical-terminology-fipat/fipat-ifaa-terminologies/",
         "required_credit_verbatim": null,
-        "note": "No exact attribution string for a particular TA2 file was captured. Do not redistribute an altered/translated terminology table based on a generic citation. Follow the license and confirm the exact edition's notice before reuse."
+        "note": "IFAA states web-published terminologies are CC BY-ND 4.0. The T04 row extract is a private, unreviewed working index; exact attribution requirements for a specific TA2 file and permission to redistribute any adapted catalog have not been separately cleared. No public sharing is authorized by this task."
       },
-      "access_state": "web_metadata_and_publication_link_viewed; publication_file_not_downloaded",
-      "artifact_state": "no_local_copy; no_hash; no term-level locator list",
+      "access_state": "IFAA metadata and publication page viewed; official Part 2 PDF search-index excerpts viewed for selected rows/pages; PDF binary not downloaded; official errata link identified but not exhaustively checked",
+      "artifact_state": "no original local copy or source hash; 85 partial row locators structured in the T04 catalog; full list and table-column verification incomplete",
       "intended_use_candidate": "International Latin/English terminology concept crosswalk and catalog baseline candidate; not the sole source for Korean/Hanja terms, muscle attachments, assessment procedures, or anatomy claims.",
-      "limitations": ["FIPAT distinguishes official terms, equivalents, synonyms, related terms, and candidate terms; preserve these categories rather than flattening them.", "The online terminology environment may be revised; retain a dated edition/revision and exact row locator when T04 acquires a usable list."]
+      "limitations": [
+        "FIPAT distinguishes official terms, equivalents, synonyms, related terms, and candidate terms; preserve these categories rather than flattening them.",
+        "The online terminology environment may be revised; retain a dated edition/revision and exact row locator when T04 acquires a usable list.",
+        "Search-index excerpts are partial and do not replace a local visual audit of the exact fixed source PDF.",
+        "Official/equivalent/synonym cell roles and all applicable errata need visual cross-check before term promotion.",
+        "The partial excerpt set does not support a whole-body denominator or absence claims for unextracted regions."
+      ],
+      "part_2_pdf_locator": "https://fipat.library.dal.ca/wp-content/uploads/2020/09/FIPAT-TA2-Part-2.pdf",
+      "errata_locator": "https://fipat.library.dal.ca/wp-content/uploads/2021/08/FIPAT-TA2-Errata.pdf"
     },
     {
       "id": "KAA_KOREAN_ANATOMICAL_TERMINOLOGY_6E",
@@ -58,7 +80,11 @@
       "access_state": "bibliographic_article_pages_viewed; terminology_book_not_obtained",
       "artifact_state": "no_local_copy; no_hash; no_term_level_locators",
       "intended_use_candidate": "Korean term comparison candidate only after the primary book/source and latest edition are verified.",
-      "limitations": ["The 2014 edition may not be the latest current reference.", "Do not treat KAA anatomical terms and Korean Medical Association medical terms as interchangeable.", "Hanja mapping and reuse terms remain unverified."]
+      "limitations": [
+        "The 2014 edition may not be the latest current reference.",
+        "Do not treat KAA anatomical terms and Korean Medical Association medical terms as interchangeable.",
+        "Hanja mapping and reuse terms remain unverified."
+      ]
     },
     {
       "id": "OPENSTAX_AP2E",
@@ -84,7 +110,10 @@
       "access_state": "online_text_pages_and_license_viewed; book_file_not_downloaded",
       "artifact_state": "no_local_copy; no_hash; several relevant section locators recorded",
       "intended_use_candidate": "Broad educational cross-check for selected skeletal-muscle regions and selected claims; not the canonical taxonomy or complete source for every muscle attachment.",
-      "limitations": ["Coverage is pedagogical and selective; some attachment descriptions are simplified or incomplete.", "Do not reproduce text, figures, or tables without following the relevant license and exact page-level attribution conditions."]
+      "limitations": [
+        "Coverage is pedagogical and selective; some attachment descriptions are simplified or incomplete.",
+        "Do not reproduce text, figures, or tables without following the relevant license and exact page-level attribution conditions."
+      ]
     },
     {
       "id": "MERCK_PROFESSIONAL_STRENGTH_ASSESSMENT",
@@ -105,7 +134,10 @@
       "access_state": "web_page_viewed; no file acquired",
       "artifact_state": "no_local_copy; no_hash",
       "intended_use_candidate": "Future educational assessment-method cross-check, with explicit limitations and claim-level locator; not a source for diagnosis or treatment rules.",
-      "limitations": ["Does not establish individual-muscle test validity or diagnostic accuracy for every listed maneuver.", "This registry does not approve patient assessment use or clinical interpretation."]
+      "limitations": [
+        "Does not establish individual-muscle test validity or diagnostic accuracy for every listed maneuver.",
+        "This registry does not approve patient assessment use or clinical interpretation."
+      ]
     },
     {
       "id": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
@@ -119,10 +151,30 @@
       "release_readme_locator": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/README.html",
       "release_note_locator": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/release_4.0_e.html",
       "listed_candidate_files": [
-        {"file": "isa_BP3D_4.0_obj_99.zip", "tree": "IS-A", "listed_size": "136 MB", "status": "listed_not_downloaded"},
-        {"file": "partof_BP3D_4.0_obj_99.zip", "tree": "PART-OF", "listed_size": "62 MB", "status": "listed_not_downloaded"},
-        {"file": "isa_parts_list_e.txt", "tree": "IS-A", "listed_size": "126 KB", "status": "listed_not_downloaded"},
-        {"file": "partof_parts_list_e.txt", "tree": "PART-OF", "listed_size": "58 KB", "status": "listed_not_downloaded"}
+        {
+          "file": "isa_BP3D_4.0_obj_99.zip",
+          "tree": "IS-A",
+          "listed_size": "136 MB",
+          "status": "listed_not_downloaded"
+        },
+        {
+          "file": "partof_BP3D_4.0_obj_99.zip",
+          "tree": "PART-OF",
+          "listed_size": "62 MB",
+          "status": "listed_not_downloaded"
+        },
+        {
+          "file": "isa_parts_list_e.txt",
+          "tree": "IS-A",
+          "listed_size": "126 KB",
+          "status": "listed_not_downloaded"
+        },
+        {
+          "file": "partof_parts_list_e.txt",
+          "tree": "PART-OF",
+          "listed_size": "58 KB",
+          "status": "listed_not_downloaded"
+        }
       ],
       "verified_locator_detail": "The archive download page explicitly lists Release 4.0 OBJ and part/ID tables and instructs users to read its license. Exact pilot muscle/bone representations and attachment-surface coverage have not been checked.",
       "license": {
@@ -130,14 +182,26 @@
         "status": "archive_license_page_updated_2025_02_27",
         "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
         "required_credit_verbatim": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
-        "permitted_uses_as_stated_by_archive": ["access and acquire all or part of the database", "redistribute all or part of the data", "create and distribute derivatives based on all or part of the data"],
-        "conditions_as_stated_by_archive": ["show the specified database credit when distributing source data or adapted material", "contact the licensor for uses not granted by the license"],
+        "permitted_uses_as_stated_by_archive": [
+          "access and acquire all or part of the database",
+          "redistribute all or part of the data",
+          "create and distribute derivatives based on all or part of the data"
+        ],
+        "conditions_as_stated_by_archive": [
+          "show the specified database credit when distributing source data or adapted material",
+          "contact the licensor for uses not granted by the license"
+        ],
         "scope_note": "Apply this record only to the exact archive files and release obtained from the LSDB Archive. The legacy BodyParts3D information page separately displays CC BY-SA 2.1 JP; do not use its notice for archive files, live API output, or other variants without confirming the exact asset source and applicable terms."
       },
       "access_state": "download_listing_readme_release_note_and_license_page_viewed; no_asset_file_downloaded",
       "artifact_state": "no_local_copy; no_hash; availability_of_listed_archive_files_verified_at_page_level_only",
       "intended_use_candidate": "Bounded geometry and crosswalk availability check for the right calf pilot in T02; not a verified complete muscle catalog or attachment-surface reference.",
-      "quality_caveats": ["The BodyParts3D information page warns that many concepts are not represented and that errors may affect anatomical education.", "Representation IDs, concept IDs, and compound tree logic are distinct; preserve both concept and representation mapping.", "A muscle-belly mesh does not by itself prove a specific origin or insertion surface.", "Release 4.0 data dates to 2013 even though archive permission metadata was updated in 2025."]
+      "quality_caveats": [
+        "The BodyParts3D information page warns that many concepts are not represented and that errors may affect anatomical education.",
+        "Representation IDs, concept IDs, and compound tree logic are distinct; preserve both concept and representation mapping.",
+        "A muscle-belly mesh does not by itself prove a specific origin or insertion surface.",
+        "Release 4.0 data dates to 2013 even though archive permission metadata was updated in 2025."
+      ]
     },
     {
       "id": "BODYPARTS3D_LIVE_INFORMATION_NOTICE",
@@ -158,7 +222,10 @@
       "access_state": "web_page_viewed; no data acquired",
       "artifact_state": "no_local_copy; no_hash",
       "intended_use_candidate": "Source quality caveat and license-scope separation only.",
-      "limitations": ["Do not infer that a listed anatomical concept has a mesh or reliable attachments.", "Do not silently combine live-site outputs with archive files under a single license record."]
+      "limitations": [
+        "Do not infer that a listed anatomical concept has a mesh or reliable attachments.",
+        "Do not silently combine live-site outputs with archive files under a single license record."
+      ]
     },
     {
       "id": "OPENSIM_OFFICIAL_MODEL_DOCUMENTATION",
@@ -168,7 +235,10 @@
       "edition": "Online documentation pages; Musculoskeletal Models page updated 2022-10-04",
       "edition_status": "documentation_pages_verified; no model files downloaded from web in T01",
       "primary_locator": "https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim/pages/53090607",
-      "additional_locators": ["https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim/pages/53090145", "https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim/pages/53088700"],
+      "additional_locators": [
+        "https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim/pages/53090145",
+        "https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim/pages/53088700"
+      ],
       "verified_locator_detail": "Documentation describes a range of core, example, and user-contributed models and the GUI's muscle groups. Muscle paths/actuators are model representations, not a complete anatomical nomenclature list.",
       "license": {
         "name": null,
@@ -180,7 +250,10 @@
       "access_state": "documentation_pages_viewed; existing_local_OpenSim_Models_checkout_left_untouched",
       "artifact_state": "no_remote_asset_acquired_in_T01",
       "intended_use_candidate": "Interpretation/context for future crosswalks and model element distinctions only; not a source of canonical muscle counts or attachment truth.",
-      "limitations": ["Model completeness, simplification, actuators, paths, and coordinate choices vary by model.", "The local `OpenSim_Models` checkout remains a read-only source and is not imported into this registry as an acquired T01 asset."]
+      "limitations": [
+        "Model completeness, simplification, actuators, paths, and coordinate choices vary by model.",
+        "The local `OpenSim_Models` checkout remains a read-only source and is not imported into this registry as an acquired T01 asset."
+      ]
     }
   ],
   "decisions_for_t01": [

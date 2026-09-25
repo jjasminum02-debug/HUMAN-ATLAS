@@ -29,3 +29,11 @@
 - fixture의 source/term/mesh/claim/coordinate/approval 값은 synthetic test data다. 실제 해부학 입력, 실제 메시의 승인, license 공개 권리 또는 임상 타당성을 뜻하지 않는다.
 - T04 입력 전에 필요한 정확한 TA2/Korean terminology edition, 실제 항목 locator와 완전한 목록은 여전히 확보되지 않았다. 기존 `work/review-queue/source-gaps.md`를 이어받아 확보/결측 상태를 명시한다.
 - 다음 직렬 task는 T04이며 이 task에서 시작하지 않았다.
+
+## T04
+
+- **전신 catalog gate blocked:** 공식 TA2 Part 2 PDF 바이너리 요청이 DNS 오류로 실패했다. Official search index excerpts로 85개 row locator만 확보했다. 전신 목록을 완전하게 확인한 것이 아니므로 분모를 null로 두었다. T05 pilot은 Runbook의 partial-catalog rule에 따라 진행 가능하다.
+- **언어 blocker:** 대한해부학회 해부학용어집의 primary/current edition, 근육별 entry locator, Hanja correspondence와 재사용 조건이 없다. Hangul/Hanja는 모든 현재 node에서 null이다.
+- **term review blocker:** FIPAT 7-column term role을 설명하는 안내는 확인했지만 로컬 PDF visual check와 TA2 Errata 전수 대조가 없다. row terms는 `needs_review`다.
+- **anatomy blocker:** T02 mesh ID mapping은 provisional name crosswalk. shape/identity, head relationship, attachment surface, pose를 사람 검토로 확정하지 않았다. T04에는 해부학 주장/부착 데이터가 없다.
+- **reuse blocker:** CC BY-ND 4.0 조건의 exact attribution and derivative-catalog redistribution review는 미완료. 공개/재배포하지 않는다.
