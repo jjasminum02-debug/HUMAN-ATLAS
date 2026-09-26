@@ -11,6 +11,14 @@ import {
   type SceneManifest,
   type SelectionReferences,
 } from "./navigation.ts";
+import {
+  categoriesForMuscleConcept,
+  categoryMemberships,
+  defaultLearnerRoute,
+  resolveLearnerRoute,
+  routeForCategory,
+  routeForMuscleSelection,
+} from "./regionNavigation.ts";
 
 const navigation = JSON.parse(readFileSync(new URL("../../../atlas-data/navigation/atlas-navigation.json", import.meta.url), "utf8")) as NavigationContract;
 const catalog = JSON.parse(readFileSync(new URL("../../../atlas-data/catalog/canonical-catalog.json", import.meta.url), "utf8")).entities;
@@ -73,6 +81,62 @@ test("region, typed selection, and legacy muscle URL adapters preserve explicit 
   assert.equal(parseAtlasRoute("?region=eye&kind=muscle&id=HA-S-TIBIA", categories, refs), null);
   assert.equal(parseAtlasRoute("?region=not-a-category", categories, refs), null);
   assert.equal(serializeAtlasRoute("?muscle=old&tab=structure", parsed!), "tab=structure&region=leg&kind=muscle&id=HA-M-000001&side=right");
+  const part = parseAtlasRoute("?region=leg&kind=muscle&id=HA-M-000001&part=HA-P-000001", categories, refs);
+  assert.deepEqual(part, {
+    regionId: "leg", side: null, selection: { kind: "muscle", conceptId: "HA-M-000001", partId: "HA-P-000001" }, legacyRoute: false,
+  });
+  assert.equal(serializeAtlasRoute("", part!), "region=leg&kind=muscle&id=HA-M-000001&part=HA-P-000001");
+});
+
+test("learner category routes expose twelve regions but only the six sourced leg memberships", () => {
+  assert.equal(navigation.categories.length, 12);
+  assert.deepEqual(categoryMemberships(navigation, "leg").map((row) => row.entityId), [
+    "HA-M-000001", "HA-M-000002", "HA-M-000003", "HA-M-000004", "HA-M-000005", "HA-M-000006",
+  ]);
+  for (const category of navigation.categories.filter((row) => row.id !== "leg")) {
+    assert.deepEqual(categoryMemberships(navigation, category.id), [], `${category.id} must not gain inferred members`);
+  }
+  assert.deepEqual(categoriesForMuscleConcept(navigation, "HA-M-000001"), ["leg"]);
+  assert.deepEqual(categoriesForMuscleConcept(navigation, "HA-M-000030"), []);
+});
+
+test("category switching clears nonmember selection and never carries the calf scene into another region", () => {
+  assert.deepEqual(defaultLearnerRoute(navigation), {
+    regionId: "leg", side: "right", selection: { kind: "muscle", conceptId: "HA-M-000001" }, legacyRoute: false,
+  });
+  assert.deepEqual(routeForCategory(navigation, "head", { kind: "muscle", conceptId: "HA-M-000001" }), {
+    regionId: "head", side: null, selection: null, legacyRoute: false,
+  });
+  assert.deepEqual(routeForCategory(navigation, "leg", null), {
+    regionId: "leg", side: "right", selection: { kind: "muscle", conceptId: "HA-M-000001" }, legacyRoute: false,
+  });
+  const unsupported = resolveLearnerRoute("?region=foot", navigation, refs);
+  assert.equal(unsupported.route.regionId, "foot");
+  assert.equal(unsupported.route.selection, null);
+  const mismatch = resolveLearnerRoute("?region=foot&kind=muscle&id=HA-M-000001", navigation, refs);
+  assert.equal(mismatch.route.regionId, "foot");
+  assert.equal(mismatch.route.selection, null);
+  assert.match(mismatch.notice ?? "", /연결되어 있지 않습니다/);
+});
+
+test("legacy pilot links canonicalize to leg, while unassigned search selections stay unassigned", () => {
+  const legacy = resolveLearnerRoute("?muscle=HA-M-000001", navigation, refs);
+  assert.equal(legacy.canonicalize, true);
+  assert.deepEqual(legacy.route, {
+    regionId: "leg", side: "right", selection: { kind: "muscle", conceptId: "HA-M-000001" }, legacyRoute: false,
+  });
+  const unassigned = resolveLearnerRoute("?kind=muscle&id=HA-M-000030", navigation, refs);
+  assert.equal(unassigned.route.regionId, null);
+  assert.deepEqual(unassigned.route.selection, { kind: "muscle", conceptId: "HA-M-000030" });
+});
+
+test("search selection routes parts through their existing parent without inventing a region", () => {
+  assert.deepEqual(routeForMuscleSelection(navigation, "HA-M-000001", "HA-P-000001", "leg"), {
+    regionId: "leg", side: "right", selection: { kind: "muscle", conceptId: "HA-M-000001", partId: "HA-P-000001" }, legacyRoute: false,
+  });
+  assert.deepEqual(routeForMuscleSelection(navigation, "HA-M-000030", undefined, null), {
+    regionId: null, side: null, selection: { kind: "muscle", conceptId: "HA-M-000030" }, legacyRoute: false,
+  });
 });
 
 test("synthetic obturator internus membership is multi-region only in this test fixture", () => {

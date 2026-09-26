@@ -2,16 +2,16 @@
 
 - LAST_UPDATED: 2026-09-26
 - PLAN_REVISION: R13-2026-09-26 — R12 유지 + AI 원문 대조/작용 설명/교육용 움직임/독립 T16–40
-- CURRENT_TASK: T15b — complete_with_gaps; 12부위/다중 소속/뼈 인스턴스·선택·장면 계약과 비파괴 overlay migration 완료
-- NEXT_TASK: T15c — Luna Max (not_started); T14b 사람검토는 별도 대기
-- LAST_REPORT: work/reports/T15b.md
+- CURRENT_TASK: T15c — complete_with_gaps; 12개 부위 탐색·구조 목록, typed URL/history 및 빈 자료 상태 구현
+- NEXT_TASK: T15d — Luna Max (not_started); T14b 사람검토는 별도 대기
+- LAST_REPORT: work/reports/T15c.md
 - CATALOG: partial85 (individual48/group16/part21); 전신 분모 미동결
 - LEARNING_OVERLAY: names81; B01 field evidence57 + B02 50 + B03 50 + B04 50 + B05 51 + B06 60 + B07 67 + B08 56 + B09 48; canonical coverage 85/85 checked_with_gaps (partial catalog only); humanReviewed=false
 - GEOMETRY: 오른쪽 종아리 6근육, 근육메시 7+뼈 13. T15b navigation overlay에 기존 source crosswalk의 우측 뼈 instance/mapping 9개를 needs_review로 연결, 미확정 mesh 4개는 unbound context. canonical spatialAnnotation 0; T13c-B01/B02/B03 context_only geometry:null draft 3건 보존; T05 표면 후보 0/41, text_only 28/41, matching target mesh missing 13/41, human_review_pending 41/41
 - FUNCTION_AND_ASSESSMENT: 미구현, 학습 탭은 준비 중
-- TECHNICAL_GATE: T15b navigation schema/relations/migration check, 6 Node + 12 Python navigation tests, search 40/40, annotation 12/12, spatial draft 8/8, T03 17 fixtures, learning validator, typecheck, build passed. Build retains the >500 kB chunk warning. No UI changed, so no browser session was needed. Canonical catalog/source regions/assets and OpenSim HEAD/status unchanged; T14b reviewer opinions 0, approval records 0; no anatomy promotion.
+- TECHNICAL_GATE: T15c navigation domain tests 10/10 + Python 12/12, navigation data 12 categories/6 memberships, search 40/40, learning validator, typecheck/build passed; real learner browser checks at 1440/1024/390 widths, history/deep-link/keyboard/mobile/unsupported-region/opposite-side scene gate passed; browser console errors/warnings 0. Build retains the >500 kB chunk warning. Canonical catalog/source regions/assets, T13 spatial drafts and OpenSim HEAD/status unchanged; T14b reviewer opinions 0, approval records 0; no anatomy promotion.
 - ANATOMY_GATE: needs_human_review; 전신 구조 완성 아님
-- DEV_URL: none (T15b did not modify learner/review UI)
+- DEV_URL: none (temporary T15c local browser server stopped after verification)
 
 | task | 상태 | 산출물/보고서 | 차단 조건 |
 |---|---|---|---|
@@ -47,6 +47,7 @@
 | T14b | needs_human_review | work/tasks/T14b.md; work/evidence/T14b/reviewer-packet.md + SHA manifest; work/evidence/T14b/; work/reports/T14b.md; Astra context brief | Six-item review packet is ready; actual qualified reviewer identity/date/opinions absent; no promotion; T15 not started |
 | T15a | complete_with_gaps | work/reports/T15a.md; work/evidence/T15a/; three-name projection; source-backed deltoid aliases; learner/review Hanja filtering/redaction | Bone search and whole-catalog language completion are not implemented; T14b human anatomy approval still absent |
 | T15b | complete_with_gaps | `work/tasks/T15b.md`; `atlas-data/schemas/navigation.schema.json`; `atlas-data/navigation/`; `atlas-web/src/domain/navigation.ts`; `work/evidence/T15b/`; `work/reports/T15b.md` | Six leg product memberships only; 4 source meshes unbound; T13 model not merged into leg scene; learner UI and remaining memberships await T15c–g; no human review/attachment surface/motion |
+| T15c | complete_with_gaps | `work/tasks/T15c.md`; learner 12-region navigation/list UI; typed/legacy route adapter; `work/evidence/T15c/`; `work/reports/T15c.md` | Only six leg memberships have source-backed scene/list entries; 11 categories have no assigned structures/scene; T15d bone card and T15e scene lifecycle not started; no anatomy review/promotion |
 
 ## 실제 현재 상태와 원본 보존
 
@@ -93,7 +94,9 @@ T13 spatial drafts, T14b needs_human_review 상태를 보존해라. 합성 내�
 ```
 
 
-## T15b 결과 및 다음 실행
+## T15b 결과 및 다음 실행 (과거 인계 기록)
+
+이 섹션은 T15c 실행 전의 이력이다. T15c는 완료됐으며 현재 인계는 문서 끝의 T15c 결과 및 다음 실행 섹션을 따른다.
 
 T15b는 `atlas-data/schemas/navigation.schema.json`, `atlas-data/navigation/atlas-navigation.json`, 재현 가능한 migration builder/validator, TypeScript navigation domain/route adapter와 회귀 테스트를 추가했다. 12개 제품 부위는 18개 source region+root와 분리되어 있다. product decision `T15b-D01`로 T12 파일럿에 실재하는 여섯 근육만 `leg`에 연결했다. 이는 해부학적 유일 소속이 아니다. 오른쪽 뼈 `StructureInstance` 9개와 `StructureMeshMapping` 9개는 기존 crosswalk를 새 별도 overlay로 옮기고 모두 `needs_review`/`not_reviewed`로 유지했다. canonical ID, 기존 근육 Instance/MeshMapping, 원분류는 변경하지 않았다.
 
@@ -124,8 +127,34 @@ T15d 이상·자동 배포·경혈/Pro mode·환자 진단·치료·침 시뮬�
 
 ## R13 설계 인계 — 2026-09-26
 
-T15a 및 T15b의 실행 결과는 위 기록과 각 보고서를 유지한다. 다음 구현은 T15c/Luna Max이며 T15b–g 순서는 바꾸지 않았다. T14b 사람 검토는 실제 의견이 없는 별도 대기 경로이고 모든 기본 문헌 설명의 표시 조건은 아니다. 기본 자료는 T16–18의 AI 출처 대조 계약과 작업으로 준비한다.
+T15a 및 T15b의 실행 결과는 위 기록과 각 보고서를 유지한다. 당시 다음 구현은 T15c/Luna Max였으며, T15c는 완료됐다. 현재 인계는 아래 T15c 결과를 따른다. T14b 사람 검토는 실제 의견이 없는 별도 대기 경로이고 모든 기본 문헌 설명의 표시 조건은 아니다. 기본 자료는 T16–18의 AI 출처 대조 계약과 작업으로 준비한다.
 
 이후 실행은 07/08/09, work/task-registry-r13.json, 개정 T16–40 task 명세를 사용한다. 구 T16–24는 work/tasks/archive/R12-before-motion-roadmap에 보존했다. 새 계획은 아직 실행하지 않았다. 현재 두 GLB의 skin/animation/morph는 모두 0으로 확인했다. 앱의 움직임 기능이 완성됐다고 표시하지 않는다.
 
-이번 설계 보고서: work/reports/R13-AI-MOTION-ROADMAP-2026-09-26.md. T15c 인계는 이 파일의 `T15b 결과 및 다음 실행` 섹션을 따른다. 누적 체크포인트는 별도 사용자 요청으로 수행한다.
+이번 설계 보고서: work/reports/R13-AI-MOTION-ROADMAP-2026-09-26.md. 과거 T15c 인계는 이 파일의 `T15b 결과 및 다음 실행` 섹션에 보존했다. 현재 다음 task는 아래 T15d 프롬프트를 따른다. 누적 체크포인트는 별도 사용자 요청으로 수행한다.
+
+## T15c 결과 및 다음 실행
+
+T15c는 12개 product region 선택과 부위별 구조 목록을 learner `/`에 연결했다. 기본 category menu는 12개로 고정했고 category 아래 근군 메뉴는 만들지 않았다. 현재 product membership은 기존 T15b 오른쪽 종아리 pilot 여섯 근육뿐이다. 나머지 11개 부위는 미할당/자료 준비 상태이고 category 이름을 근거로 구조를 추정하지 않았다. 지원되지 않는 부위와 category-mismatch URL에서 calf viewer가 표시되지 않는다. typed `region/kind/id/side`와 `part`, legacy `?muscle=`, browser back/forward를 연결했다.
+
+실제 browser 검증은 1440×900, 1024×768, 390×844에서 category switch, deep link, history, keyboard, mobile selector/list 및 빈 자료 흐름을 확인했다. 탐색 domain Node 10/10, navigation Python 12/12, search 40/40, annotation 12/12, spatial draft 8/8, learning validator, typecheck, build와 diff check가 통과했다. OpenSim_Models, canonical 원분류, 실제 mesh, T13 drafts와 기존 47개 미커밋 스냅샷은 보존했다. 빌드의 큰 chunk 경고는 남는다. T14b 사람 검토는 계속 `needs_human_review`다.
+
+미완: 다른 category memberships와 장면, 뼈 카드, 장면 수명관리, 사람 해부학 검토. T15d 뼈 카드와 T15e loader를 당겨 구현하지 않았다. 자세한 결과와 evidence는 `work/reports/T15c.md`, `work/evidence/T15c/`에 있다.
+
+다음 task는 **T15d / Luna Max (not_started)**다. 자동 진행하지 않는다. 붙여 넣을 프롬프트:
+
+```text
+HUMAN ATLAS에서 AGENTS.md, work/STATUS.md, work/tasks/T15d.md,
+work/reports/T15c.md와 work/evidence/T15c/, work/tasks/T15c.md,
+T15b navigation overlay/evidence, 기존 structure/catalog/asset manifests와 viewer selection 구현을 읽고
+T15d만 수행해라. 먼저 시작 HEAD와 기존 사용자 변경 기준선을 기록해라.
+T15b/T15c overlay에서 출처 및 안정 ID가 확인되는 종아리 pilot 뼈만 typed bone binding으로 연결하고,
+미확정 mesh는 미매핑으로 유지해라. 뼈 정보 카드에 출처가 뒷받침하는 이름, 좌우, 주요 표지,
+근거 있는 연결 근육만 표시해라. 근육→뼈→근육 선택, URL 및 카드 일치와 미매핑 클릭에서
+이전 근육 카드 제거를 실제 브라우저로 검증해라. landmark와 whole-bone ID를 합치지 마라.
+기존 사용자 초안·canonical ID/원분류·실제 자산·T13 spatial drafts·OpenSim_Models를 보존하고
+사람 검토 없이 reviewed 승격이나 해부학 claim 추가를 하지 마라.
+관련 테스트·typecheck·build·실제 브라우저를 검증하고 결과·미완·STATUS 및 다음 T15e 프롬프트를
+남겨라. 검증한 T15d 소유 변경만 선별 로컬 커밋하고 해시·포함 범위·제외/잔여 변경을 보고해라.
+T15e 이상·자동 배포·경혈/Pro mode·환자 진단·치료·침 시뮬레이션은 시작하지 마라.
+```

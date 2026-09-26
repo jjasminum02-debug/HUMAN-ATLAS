@@ -272,15 +272,16 @@ export function parseAtlasRoute(search: string, validCategoryIds: ReadonlySet<st
   if (side === undefined) return null;
   const kind = params.get("kind");
   const id = params.get("id");
+  const partId = params.get("part");
   const legacyMuscle = params.get("muscle");
-  if (legacyMuscle && (kind || id)) return null;
+  if (legacyMuscle && (kind || id || partId)) return null;
   if (legacyMuscle) {
     const selection = validateSelection({ kind: "muscle", conceptId: legacyMuscle }, refs);
     return selection ? { regionId, side, selection, legacyRoute: true } : null;
   }
-  if (kind === null && id === null) return { regionId, side, selection: null, legacyRoute: false };
-  if (kind === null || id === null) return null;
-  const selection = validateSelection({ kind, conceptId: id }, refs);
+  if (kind === null && id === null && partId === null) return { regionId, side, selection: null, legacyRoute: false };
+  if (kind === null || id === null || (partId !== null && kind !== "muscle")) return null;
+  const selection = validateSelection({ kind, conceptId: id, ...(partId ? { partId } : {}) }, refs);
   if (!selection) return null;
   if (side && selection.instanceId) {
     const instanceSide = selection.kind === "muscle"
@@ -298,9 +299,12 @@ export function serializeAtlasRoute(search: string, state: AtlasRouteState): str
   if (state.selection) {
     params.set("kind", state.selection.kind);
     params.set("id", state.selection.conceptId);
+    if (state.selection.kind === "muscle" && state.selection.partId) params.set("part", state.selection.partId);
+    else params.delete("part");
   } else {
     params.delete("kind");
     params.delete("id");
+    params.delete("part");
   }
   if (state.side) params.set("side", state.side); else params.delete("side");
   return params.toString();
