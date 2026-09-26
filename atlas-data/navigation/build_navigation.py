@@ -316,6 +316,55 @@ def build() -> dict[str, Any]:
         },
     }
 
+    # T13 is a separate source model. It may share the leg category only while
+    # its recorded source, frame, units and reference pose match the T12 scene.
+    if (t13["sourceId"] != t12["sourceId"] or
+            t13["transform"]["frameId"] != t12["frameId"] or
+            t13["transform"]["targetUnits"] != t12["units"] or
+            t13["transform"]["poseId"] != t12["poseId"]):
+        raise ValueError("T12/T13 source frame or pose differs; do not combine these leg scenes")
+    t13_mesh_ids = sorted(row["meshAssetId"] for row in t13["viewerNodes"])
+    t13_uri = mesh_assets[t13_mesh_ids[0]]["uri"]
+    if any(mesh_assets[mesh_id]["uri"] != t13_uri or mesh_assets[mesh_id]["hash"] != t13["glb"]["sha256"] for mesh_id in t13_mesh_ids):
+        raise ValueError("T13 bone meshes do not share the recorded GLB revision")
+    t13_bindings = []
+    for mapping in structure_mesh_mappings:
+        mesh_id = mapping["meshIds"][0]
+        if mesh_id not in t13_mesh_ids:
+            continue
+        instance = next(row for row in structure_instances if row["id"] == mapping["structureInstanceId"])
+        t13_bindings.append({
+            "meshAssetId": mesh_id,
+            "sourceMappingId": mapping["id"],
+            "reviewState": mapping["reviewState"],
+            "selection": {"kind": "bone", "conceptId": instance["structureId"], "instanceId": instance["id"], "meshId": mesh_id},
+            "stateDimensions": state_dimensions,
+        })
+    t13_context = [{
+        "meshAssetId": row["meshAssetId"], "modelId": row["modelId"], "selection": None,
+        "reasonCode": row["reasonCode"],
+        "stateDimensions": {
+            "sourceRelation": "source_identity_without_canonical_structure_id",
+            "humanAnatomyReview": row["humanReviewState"],
+            "staticGeometry": row["geometryState"],
+            "attachmentLocation": "none", "motion": row["motionState"],
+        },
+    } for row in unresolved if row["modelId"] == t13["modelId"]]
+    t13_scene = {
+        "id": "HA-SCENE-LEG-RIGHT-BONES-T13", "categoryId": "leg", "revision": "T15e-scene-v1",
+        "availability": "partial",
+        "assetRefs": [{"modelId": t13["modelId"], "uri": t13_uri, "sha256": t13["glb"]["sha256"], "meshAssetIds": t13_mesh_ids}],
+        "selectableBindings": sorted(t13_bindings, key=lambda row: row["meshAssetId"]),
+        "contextBindings": sorted(t13_context, key=lambda row: row["meshAssetId"]),
+        "defaultView": {"side": "right", "selection": None},
+        "frameId": t13["transform"]["frameId"], "units": t13["transform"]["targetUnits"],
+        "poseId": t13["transform"]["poseId"], "modelId": t13["modelId"],
+        "stateDimensions": {
+            "sourceRelation": "inherited_t13_source_crosswalk", "humanAnatomyReview": "not_reviewed",
+            "staticGeometry": "whole_bone_context_only", "attachmentLocation": "none", "motion": "absent",
+        },
+    }
+
     return {
         "schemaVersion": "T15b-navigation-v1",
         "status": "partial_pilot_contract",
@@ -328,7 +377,7 @@ def build() -> dict[str, Any]:
         "structureInstances": structure_instances,
         "structureMeshMappings": structure_mesh_mappings,
         "unmappedMeshContexts": unresolved,
-        "sceneManifests": [scene],
+        "sceneManifests": [scene, t13_scene],
         "migrationNotes": {
             "canonicalCatalogMutation": False,
             "legacyMuscleInstancesPreserved": True,
@@ -376,8 +425,8 @@ def summarize(value: dict[str, Any]) -> dict[str, Any]:
             "boneMeshMappings": len(value["structureMeshMappings"]),
             "unmappedSourceContexts": len(value["unmappedMeshContexts"]),
             "sceneManifests": len(value["sceneManifests"]),
-            "sceneSelectableBindings": len(value["sceneManifests"][0]["selectableBindings"]),
-            "sceneContextBindings": len(value["sceneManifests"][0]["contextBindings"]),
+            "sceneSelectableBindings": sum(len(row["selectableBindings"]) for row in value["sceneManifests"]),
+            "sceneContextBindings": sum(len(row["contextBindings"]) for row in value["sceneManifests"]),
         },
         "migrationDelta": {
             "writeTarget": OUTPUT.relative_to(ROOT).as_posix(),

@@ -66,6 +66,7 @@ export interface SceneStateDimensions {
 
 export interface SceneManifest {
   id: string;
+  revision: string;
   categoryId: string;
   modelId: string;
   availability: "available" | "partial" | "unavailable";

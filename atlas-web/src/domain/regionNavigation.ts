@@ -156,7 +156,6 @@ export function resolveLearnerRoute(
   let route = parsed;
   let notice: string | null = null;
   let canonicalize = parsed.legacyRoute;
-  let selectionMismatch = false;
   const selection = parsed.selection;
 
   if (selection?.kind === "muscle") {
@@ -165,7 +164,6 @@ export function resolveLearnerRoute(
       route = { ...route, side: null, selection: null, legacyRoute: false };
       notice = "이 근육은 선택한 부위의 구조 목록에 연결되어 있지 않습니다.";
       canonicalize = true;
-      selectionMismatch = true;
     } else if (!route.regionId && categoryIds.length === 1) {
       route = { ...route, regionId: categoryIds[0], side: defaultSide(navigation, categoryIds[0]), legacyRoute: false };
       canonicalize = true;
@@ -178,7 +176,6 @@ export function resolveLearnerRoute(
       route = { regionId: route.regionId, side: null, selection: null, legacyRoute: false };
       notice = "이 뼈의 출처 연결을 확인할 수 없습니다. 확인된 구조만 선택할 수 있습니다.";
       canonicalize = true;
-      selectionMismatch = true;
     } else if (route.regionId !== normalized.regionId || route.side !== normalized.side ||
       route.selection?.kind !== "bone" || route.selection.instanceId !== normalized.selection?.instanceId ||
       route.selection.meshId !== normalized.selection?.meshId) {
@@ -187,10 +184,7 @@ export function resolveLearnerRoute(
     }
   }
 
-  if (!selectionMismatch && route.regionId && !route.selection && categoryMemberships(navigation, route.regionId).length > 0) {
-    route = routeForCategory(navigation, route.regionId, null);
-    canonicalize = true;
-  }
+  // An explicit empty selection is a durable URL state (clear/back/forward).
 
   return { route, notice, canonicalize };
 }

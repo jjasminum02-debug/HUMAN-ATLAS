@@ -3,8 +3,8 @@ import glbUrl from "../../../atlas-data/assets/derived-glb/bodyparts3d-r4-right-
 import boneGlbUrl from "../../../atlas-data/assets/derived-glb/bodyparts3d-r4-t13-right-bones/right-bones.glb?url";
 import { decodeT07Glb, type ExpectedNode, type ViewerMesh } from "./glb";
 import type { AnnotationAssetContext } from "./annotationDrafts";
-import { Mesh } from "three";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import type { SceneManifest } from "../domain/navigation";
+import { assertCompatibleSceneGroup, sceneRevision } from "./scenePlan";
 import canonicalData from "../../../atlas-data/catalog/canonical-catalog.json";
 import bridgeData from "../../../atlas-data/manifests/canonical-geometry-t12.json";
 import boneManifest from "../../../atlas-data/manifests/derived-bones-t13.json";
@@ -27,10 +27,10 @@ interface T07Manifest {
 export interface T07ViewerBundle {
   manifest: T07Manifest;
   meshes: ViewerMesh[];
-  threeMeshes: Map<string, Mesh>;
   annotationAssets: AnnotationAssetContext[];
   attribution: string;
   sourceTitle: string;
+  sceneRevision: string;
 }
 
 function asManifest(value: unknown): T07Manifest {
@@ -200,71 +200,47 @@ async function sha256(buffer: ArrayBuffer): Promise<string> {
   return [...new Uint8Array(digest)].map((value) => value.toString(16).padStart(2, "0")).join("");
 }
 
-async function checkedThreeMeshes(buffer: ArrayBuffer, meshes: readonly ViewerMesh[]): Promise<Map<string, Mesh>> {
-  const parsed = await new Promise<Awaited<ReturnType<GLTFLoader["loadAsync"]>>>((resolve, reject) => {
-    new GLTFLoader().parse(buffer, "", resolve, reject);
-  });
-  const nodes = new Map<string, Mesh>();
-  parsed.scene.traverse((object) => {
-    if (!(object instanceof Mesh)) return;
-    if (nodes.has(object.name)) throw new Error(`GLTFLoader가 중복 mesh ID를 읽었습니다: ${object.name}`);
-    nodes.set(object.name, object);
-  });
-  if (nodes.size !== meshes.length) throw new Error("GLTFLoader와 T07 decoder의 mesh 수가 다릅니다.");
-  for (const raw of meshes) {
-    const loaded = nodes.get(raw.meshAssetId);
-    if (!loaded || loaded.userData.stableMeshAssetId !== raw.meshAssetId || loaded.parent !== parsed.scene ||
-      loaded.position.lengthSq() !== 0 || loaded.rotation.x !== 0 || loaded.rotation.y !== 0 || loaded.rotation.z !== 0 ||
-      loaded.scale.x !== 1 || loaded.scale.y !== 1 || loaded.scale.z !== 1) {
-      throw new Error(`${raw.meshAssetId}: Three scene의 stable ID 또는 identity transform이 다릅니다.`);
-    }
-    const position = loaded.geometry.getAttribute("position")?.array;
-    const normal = loaded.geometry.getAttribute("normal")?.array;
-    const index = loaded.geometry.index?.array;
-    if (!position || !normal || !index || position.length !== raw.positions.length || normal.length !== raw.normals.length || index.length !== raw.indices.length) {
-      throw new Error(`${raw.meshAssetId}: Three geometry 길이가 T07과 다릅니다.`);
-    }
-    for (let i = 0; i < position.length; i += 1) if (position[i] !== raw.positions[i]) throw new Error(`${raw.meshAssetId}: position 순서가 달라졌습니다.`);
-    for (let i = 0; i < normal.length; i += 1) if (normal[i] !== raw.normals[i]) throw new Error(`${raw.meshAssetId}: normal 순서가 달라졌습니다.`);
-    for (let i = 0; i < index.length; i += 1) if (index[i] !== raw.indices[i]) throw new Error(`${raw.meshAssetId}: triangle index가 달라졌습니다. 기존 annotation을 사용하지 않습니다.`);
-  }
-  return nodes;
-}
-
-export async function loadT07ViewerBundle(): Promise<T07ViewerBundle> {
+export async function loadSceneViewerBundle(scenes: readonly SceneManifest[], signal: AbortSignal): Promise<T07ViewerBundle> {
   const manifest = asManifest(rawManifest);
-  const expected = expectedNodes(manifest);
-  const boneExpected = expectedBoneNodes();
-  const [response, boneResponse] = await Promise.all([fetch(glbUrl), fetch(boneGlbUrl)]);
-  if (!response.ok) throw new Error(`T07 GLB를 불러오지 못했습니다 (HTTP ${response.status}).`);
-  const buffer = await response.arrayBuffer();
-  if (buffer.byteLength !== manifest.glb?.bytes) throw new Error("T07 GLB byte count가 manifest와 다릅니다.");
-  const digest = await sha256(buffer);
-  if (digest !== manifest.glb?.sha256) throw new Error("T07 GLB SHA-256이 manifest와 다릅니다.");
-  const meshes = decodeT07Glb(buffer, expected);
-  if (meshes.length !== manifest.glb?.meshCount) throw new Error("T07 manifest GLB mesh count와 decode 결과가 다릅니다.");
-  const threeMeshes = await checkedThreeMeshes(buffer, meshes);
-  if (!boneResponse.ok) throw new Error(`T13 뼈 GLB를 불러오지 못했습니다 (HTTP ${boneResponse.status}).`);
-  const boneBuffer = await boneResponse.arrayBuffer();
-  if (boneBuffer.byteLength !== boneManifest.glb.bytes || await sha256(boneBuffer) !== boneManifest.glb.sha256) {
-    throw new Error("T13 뼈 GLB 크기 또는 SHA-256이 manifest와 다릅니다.");
+  assertCompatibleSceneGroup(scenes);
+  if (scenes[0].frameId !== bridgeData.frameId || scenes[0].units !== bridgeData.units || scenes[0].poseId !== bridgeData.poseId) {
+    throw new Error("scene frame/pose가 원본 모델 계약과 다릅니다.");
   }
-  const boneMeshes = decodeT07Glb(boneBuffer, boneExpected);
-  const boneThreeMeshes = await checkedThreeMeshes(boneBuffer, boneMeshes);
-  for (const [id, mesh] of boneThreeMeshes) {
-    if (threeMeshes.has(id)) throw new Error(`T07/T13 mesh ID가 중복됩니다: ${id}`);
-    threeMeshes.set(id, mesh);
-  }
-  const assets = [
-    ...annotationAssets(manifest.meshAssets ?? [], manifest.glb?.sha256 ?? "", meshes),
-    ...annotationAssets(boneManifest.meshAssets, boneManifest.glb.sha256, boneMeshes),
-  ];
+  const known = new Map([
+    [manifest.modelId, { url: glbUrl, hash: manifest.glb?.sha256, bytes: manifest.glb?.bytes, nodes: () => expectedNodes(manifest), sources: manifest.meshAssets ?? [] }],
+    [boneManifest.modelId, { url: boneGlbUrl, hash: boneManifest.glb.sha256, bytes: boneManifest.glb.bytes, nodes: expectedBoneNodes, sources: boneManifest.meshAssets }],
+  ]);
+  const refs = scenes.flatMap((scene) => {
+    if (scene.availability === "unavailable") throw new Error(`사용할 수 없는 scene입니다: ${scene.id}`);
+    return scene.assetRefs.map((ref) => ({ scene, ref }));
+  });
+  const decoded = await Promise.all(refs.map(async ({ scene, ref }) => {
+    const source = known.get(ref.modelId);
+    if (!source || scene.modelId !== ref.modelId || ref.sha256 !== source.hash ||
+      ref.uri !== (ref.modelId === manifest.modelId ? manifest.glb?.uri : boneManifest.glb.uri)) {
+      throw new Error(`scene 자산 참조가 원본 manifest와 다릅니다: ${ref.modelId}`);
+    }
+    const expected = source.nodes();
+    if (expected.length !== ref.meshAssetIds.length || !expected.every((node) => ref.meshAssetIds.includes(node.meshAssetId))) {
+      throw new Error(`scene mesh 범위가 원본 manifest와 다릅니다: ${scene.id}`);
+    }
+    const response = await fetch(source.url, { signal });
+    if (!response.ok) throw new Error(`scene GLB를 불러오지 못했습니다 (HTTP ${response.status}).`);
+    const buffer = await response.arrayBuffer();
+    if (signal.aborted) throw new DOMException("Scene loading cancelled", "AbortError");
+    if (buffer.byteLength !== source.bytes || await sha256(buffer) !== source.hash) throw new Error(`scene GLB 크기/hash가 manifest와 다릅니다: ${scene.id}`);
+    const meshes = decodeT07Glb(buffer, expected);
+    if (signal.aborted) throw new DOMException("Scene loading cancelled", "AbortError");
+    return { meshes, assets: annotationAssets(source.sources, source.hash ?? "", meshes) };
+  }));
+  const meshes = decoded.flatMap((item) => item.meshes);
+  if (new Set(meshes.map((mesh) => mesh.meshAssetId)).size !== meshes.length) throw new Error("scene 간 mesh ID가 중복되었습니다.");
   return {
     manifest,
-    meshes: [...meshes, ...boneMeshes],
-    threeMeshes,
-    annotationAssets: assets,
+    meshes,
+    annotationAssets: decoded.flatMap((item) => item.assets),
     attribution: manifest.attribution?.requiredCreditVerbatim ?? "필수 귀속 문구가 T07 manifest에 없습니다.",
     sourceTitle: manifest.attribution?.sourceTitle ?? "출처 미기록",
+    sceneRevision: sceneRevision(scenes),
   };
 }

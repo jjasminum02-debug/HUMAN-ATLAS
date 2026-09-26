@@ -1,5 +1,5 @@
 import {
-  AmbientLight, Box3, BufferGeometry, Color, DirectionalLight, DoubleSide,
+  AmbientLight, Box3, BufferAttribute, BufferGeometry, Color, DirectionalLight, DoubleSide,
   Mesh, MeshPhongMaterial, PerspectiveCamera, Raycaster, Scene, Triangle,
   Vector2, Vector3, WebGLRenderer,
 } from "three";
@@ -76,22 +76,25 @@ export class ThreeViewer {
     this.observer.observe(canvas);
   }
 
-  setScene(meshes: readonly ViewerMesh[], source: ReadonlyMap<string, Mesh>): void {
+  setScene(meshes: readonly ViewerMesh[]): void {
     for (const object of this.display.values()) {
       this.scene.remove(object);
       object.material.dispose();
+      object.geometry.dispose();
     }
     this.meshes.clear();
     this.display.clear();
     this.visibility.clear();
     meshes.forEach((mesh, index) => {
-      const loaded = source.get(mesh.meshAssetId);
-      if (!loaded || !loaded.geometry.index) throw new Error(`${mesh.meshAssetId}: GLTFLoader geometry가 없습니다.`);
+      const geometry = new BufferGeometry();
+      geometry.setAttribute("position", new BufferAttribute(mesh.positions, 3));
+      geometry.setAttribute("normal", new BufferAttribute(mesh.normals, 3));
+      geometry.setIndex(new BufferAttribute(mesh.indices, 1));
       const material = new MeshPhongMaterial({
         color: mesh.targetEntityType === "structure" ? 0xe0d9bd : PALETTE[index % PALETTE.length],
         side: DoubleSide, shininess: 28,
       });
-      const object: DisplayMesh = new Mesh(loaded.geometry, material);
+      const object: DisplayMesh = new Mesh(geometry, material);
       object.name = mesh.meshAssetId;
       this.scene.add(object);
       this.meshes.set(mesh.meshAssetId, mesh);
@@ -246,8 +249,15 @@ export class ThreeViewer {
     this.canvas.removeEventListener("pointercancel", this.onUp);
     this.canvas.removeEventListener("keydown", this.onKey);
     this.controls.dispose();
-    for (const object of this.display.values()) object.material.dispose();
+    for (const object of this.display.values()) {
+      this.scene.remove(object);
+      object.material.dispose();
+      object.geometry.dispose();
+    }
+    this.onFrame = null;
+    this.onAnnotationPick = null;
     this.renderer.dispose();
+    this.renderer.forceContextLoss();
     this.display.clear();
     this.meshes.clear();
   }

@@ -97,6 +97,25 @@ test("unconfirmed and absent scene bindings do not retain the previous typed sel
   assert.deepEqual(resolveSceneMeshPick(legScene, "HA-MESH-NOT-IN-SCENE", refs), { status: "unbound" });
 });
 
+test("T13 scene keeps six sourced bones selectable and three source meshes unbound", () => {
+  const scene = navigation.sceneManifests[1];
+  assert.equal(scene.selectableBindings.length, 6);
+  assert.equal(scene.contextBindings.length, 3);
+  assert.deepEqual(resolveSceneMeshPick(scene, "HA-MESH-BP3D4-FJ3365", refs), {
+    status: "selection", selection: {
+      kind: "bone", conceptId: "HA-S-FEMUR", instanceId: "HA-SI-R-HA-S-FEMUR", meshId: "HA-MESH-BP3D4-FJ3365",
+    },
+  });
+  assert.deepEqual(resolveSceneMeshPick(scene, "HA-MESH-BP3D4-FJ3353", refs), { status: "context", reasonCode: "canonical_target_unconfirmed" });
+});
+
+test("explicit empty typed selection survives URL normalization and reload", () => {
+  const state = resolveLearnerRoute("?region=leg&side=right", navigation, refs);
+  assert.equal(state.route.selection, null);
+  assert.equal(state.canonicalize, false);
+  assert.equal(serializeAtlasRoute("", state.route), "region=leg&side=right");
+});
+
 test("muscle, whole bone, and landmark selections reject cross-kind references", () => {
   assert.equal(validateSelection({ kind: "muscle", conceptId: "HA-S-TIBIA" }, refs), null);
   assert.equal(validateSelection({ kind: "bone", conceptId: "HA-M-000001" }, refs), null);

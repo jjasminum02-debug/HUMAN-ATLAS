@@ -1,5 +1,7 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
-import { loadT07ViewerBundle, type T07ViewerBundle } from "./manifest";
+import { loadSceneViewerBundle, type T07ViewerBundle } from "./manifest";
+import { sceneRevision } from "./scenePlan";
+import { SceneRequestCache } from "./sceneCache";
 import type { ViewerMesh } from "./glb";
 import { ThreeViewer } from "./ThreeViewer";
 import { attachmentContextById, attachmentContexts, buildSpatialDraftContext } from "./attachmentContext";
@@ -12,7 +14,9 @@ import {
 const AnnotationWorkbench = import.meta.env.DEV ? lazy(() => import("./AnnotationWorkbench").then(module => ({ default: module.AnnotationWorkbench }))) : null;
 import type { AtlasRecord } from "../data/catalog";
 import { boneSelectionForMesh } from "../domain/regionNavigation";
-import type { BoneSelection, NavigationContract, Selection } from "../domain/navigation";
+import type { BoneSelection, NavigationContract, SceneManifest, Selection } from "../domain/navigation";
+
+const sceneCache = new SceneRequestCache<T07ViewerBundle>();
 
 type Visibility = "visible" | "transparent" | "hidden";
 type CameraPreset = "front" | "back" | "lateral";
@@ -25,12 +29,14 @@ interface Props {
   selectedSelection: Selection | null;
   unmappedMeshId?: string | null;
   navigation: NavigationContract;
+  scenes: readonly SceneManifest[];
   concepts: readonly Concept[];
   attachments: readonly AtlasRecord[];
   claims: readonly AtlasRecord[];
   onSelectEntity: (id: string) => void;
   onSelectBone: (selection: BoneSelection) => void;
   onSelectUnmappedMesh: (mesh: { meshAssetId: string; sourceName: string }) => void;
+  onClearSelection?: () => void;
   onClearAttachment?: () => void;
 }
 
@@ -48,10 +54,11 @@ function errorText(error: unknown): string {
   return error instanceof Error ? error.message : "T07 GLB viewer를 불러오지 못했습니다.";
 }
 
-export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId = null, navigation, concepts, attachments, claims, onSelectEntity, onSelectBone, onSelectUnmappedMesh, onClearAttachment, studyMode = false, activeAttachmentId = null }: Props) {
+export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId = null, navigation, scenes, concepts, attachments, claims, onSelectEntity, onSelectBone, onSelectUnmappedMesh, onClearSelection, onClearAttachment, studyMode = false, activeAttachmentId = null }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const overlayCanvasRef = useRef<HTMLCanvasElement>(null);
   const viewerRef = useRef<ThreeViewer | null>(null);
+  const onMeshPickRef = useRef<(mesh: ViewerMesh) => void>(() => undefined);
   const [viewer, setViewer] = useState<ThreeViewer | null>(null);
   const [bundle, setBundle] = useState<T07ViewerBundle | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -87,37 +94,47 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
   const reviewOwners = new Set([selectedEntityId, ...concepts.filter((concept) => concept.parentId === selectedEntityId).map((concept) => concept.id)]);
   const reviewContexts = attachmentContexts.filter((row) => reviewOwners.has(row.ownerConceptId));
   const spatialContext = useMemo(() => bundle ? buildSpatialDraftContext(bundle.annotationAssets) : null, [bundle]);
+  const revision = sceneRevision(scenes);
 
   useEffect(() => {
     let active = true;
-    loadT07ViewerBundle()
+    const controller = new AbortController();
+    setBundle(null);
+    setError(null);
+    setPickedMeshId(null);
+    setLearnerOverlay({ count: 0, syntheticTest: false, error: false });
+    sceneCache.acquire(revision, (signal) => loadSceneViewerBundle(scenes, signal), controller.signal)
       .then((loaded) => {
         if (active) setBundle(loaded);
       })
       .catch((loadError: unknown) => {
-        if (active) setError(errorText(loadError));
+        if (active && !(loadError instanceof DOMException && loadError.name === "AbortError")) setError(errorText(loadError));
       });
-    return () => { active = false; };
-  }, []);
+    return () => { active = false; controller.abort(); };
+    // The revision contains every scene ID and asset hash. A changed revision starts a new request.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [revision]);
 
   useEffect(() => {
     if (!bundle || !canvasRef.current) return;
-    let renderer: ThreeViewer;
+    let renderer: ThreeViewer | null = null;
     try {
-      renderer = new ThreeViewer(canvasRef.current, (mesh) => chooseMesh(mesh, true));
-      renderer.setScene(bundle.meshes, bundle.threeMeshes);
+      renderer = new ThreeViewer(canvasRef.current, (mesh) => onMeshPickRef.current(mesh));
+      renderer.setScene(bundle.meshes);
       viewerRef.current = renderer;
       setViewer(renderer);
       setError(null);
     } catch (viewerError) {
+      renderer?.dispose();
       setError(errorText(viewerError));
       return;
     }
+    const mounted = renderer;
     return () => {
-      renderer.dispose();
-      if (viewerRef.current === renderer) {
+      mounted.dispose();
+      if (viewerRef.current === mounted) {
         viewerRef.current = null;
-        setViewer((current) => current === renderer ? null : current);
+        setViewer((current) => current === mounted ? null : current);
       }
     };
     // Renderer construction is tied to the immutable loaded bundle.
@@ -206,7 +223,7 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
       const context = canvas.getContext("2d");
       context?.clearRect(0, 0, canvas.width, canvas.height);
     };
-  }, [bundle, concepts, selectedEntityId, spatialContext, studyMode, viewer, visibility]);
+  }, [bundle, concepts, selectedEntityId, spatialContext, studyMode, viewer]);
 
   function chooseMesh(mesh: ViewerMesh, updateCard: boolean, focus = true) {
     if (isolating) {
@@ -216,7 +233,7 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
     setPickedMeshId(mesh.meshAssetId);
     viewerRef.current?.selectMeshes([mesh.meshAssetId], focus);
     if (!updateCard) return;
-    const sceneBinding = navigation.sceneManifests.flatMap((scene) => scene.selectableBindings)
+    const sceneBinding = scenes.flatMap((scene) => scene.selectableBindings)
       .find((binding) => binding.meshAssetId === mesh.meshAssetId);
     if (sceneBinding?.selection.kind === "muscle") {
       const entityId = sceneBinding.selection.partId ?? sceneBinding.selection.conceptId;
@@ -233,6 +250,7 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
     }
     onSelectUnmappedMesh({ meshAssetId: mesh.meshAssetId, sourceName: mesh.sourceName });
   }
+  onMeshPickRef.current = (mesh) => chooseMesh(mesh, true);
 
   function applyVisibility(meshId: string, next: Visibility) {
     viewerRef.current?.setVisibility(meshId, next);
@@ -307,6 +325,7 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
         <button aria-pressed={bonesVisible} onClick={() => setBonesVisible(v => !v)}>뼈</button>
         <button onClick={showAll}>전체 보기</button>
         <button onClick={restoreAll}>보기 초기화</button>
+        <button onClick={onClearSelection} disabled={!selectedSelection && !unmappedMeshId}>선택 해제</button>
       </div>
       <p className="study-gesture">드래그하여 회전 · 스크롤하여 확대</p>
       {activeContext && <p className="study-attachment-context" role="status">{activeContext.contextMeshAssetId

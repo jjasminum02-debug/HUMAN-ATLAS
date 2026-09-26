@@ -359,6 +359,7 @@ function App() {
           selectedEntityId={selectedId}
           selectedSelection={null}
           navigation={navigation}
+          scenes={navigation.sceneManifests.filter((scene) => scene.categoryId === "leg" && scene.defaultView.side === "right")}
           concepts={viewerConcepts}
           attachments={catalog.attachments}
           claims={catalog.claims}

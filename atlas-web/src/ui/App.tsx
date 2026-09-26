@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { loadPilotCatalog, linkedEvidence, sourceForEvidence, type PilotCatalog } from '../data/catalog';
 import { findMuscles, learningConcepts, nameFor, nameSources, structureSummary } from '../data/learning';
 import { GLBViewer } from '../viewer/GLBViewer';
+import { sceneRevision } from '../viewer/scenePlan';
 import { attachmentContextById } from '../viewer/attachmentContext';
 import { boneSourceLabel, buildBoneCardData } from '../domain/boneCard';
 import {
@@ -63,6 +64,7 @@ export default function App() {
   const [catalog, setCatalog] = useState<PilotCatalog | null>(null);
   const [error, setError] = useState('');
   const [route, setRoute] = useState<AtlasRouteState>(() => defaultLearnerRoute(navigation));
+  const [routeReady, setRouteReady] = useState(false);
   const [routeNotice, setRouteNotice] = useState<string | null>(null);
   const [query, setQuery] = useState('');
   const [tab, setTab] = useState<TabName>('구조');
@@ -125,6 +127,7 @@ export default function App() {
     const sync = () => {
       const resolved = resolveLearnerRoute(location.search, navigation, routeRefs);
       setRoute(resolved.route);
+      setRouteReady(true);
       setRouteNotice(resolved.notice);
       setUnmappedMeshNotice(null);
       setTab('구조');
@@ -162,16 +165,10 @@ export default function App() {
   const listItems = query.trim()
     ? searchResults.map(({ entry, approximate }) => ({ id: entry.id, label: entry.label, approximate }))
     : regionMuscles.map((concept) => ({ id: concept.id, label: nameFor(catalog!, concept.id).label, approximate: false }));
-  const selectedBaseId = route.selection?.kind === 'muscle' ? route.selection.conceptId : null;
-  const legScene = navigation.sceneManifests.find((scene) => scene.categoryId === 'leg');
-  const sideHasScene = Boolean(legScene && legScene.availability !== 'unavailable' &&
-    (!route.side || legScene.defaultView.side === route.side));
-  const boneSelectionMapped = route.selection?.kind === 'bone' && navigation.structureMeshMappings.some((mapping) =>
-    mapping.structureInstanceId === route.selection?.instanceId && (!route.selection.meshId || mapping.meshIds.includes(route.selection.meshId)));
-  const sceneAvailable = route.regionId === 'leg' && sideHasScene && (
-    Boolean(selectedBaseId && categoryMemberships(navigation, 'leg').some((row) => row.entityId === selectedBaseId)) ||
-    Boolean(boneSelectionMapped) || Boolean(unmappedMeshNotice)
-  );
+  const regionScenes = navigation.sceneManifests.filter((scene) => scene.categoryId === route.regionId);
+  const activeScenes = regionScenes.filter((scene) => scene.availability !== 'unavailable' && scene.assetRefs.length > 0 &&
+    (!route.side || scene.defaultView.side === route.side));
+  const sceneAvailable = activeScenes.length > 0;
 
   function commitRoute(nextRoute: AtlasRouteState, replace = false) {
     const nextUrl = routeUrl(nextRoute);
@@ -206,21 +203,24 @@ export default function App() {
   }
 
   function chooseUnmappedMesh(mesh: UnmappedMeshNotice) {
-    commitRoute({ regionId: 'leg', side: 'right', selection: null, legacyRoute: false });
+    commitRoute({ regionId: route.regionId, side: route.side, selection: null, legacyRoute: false });
     setUnmappedMeshNotice(mesh);
   }
 
+  function clearSelection() {
+    commitRoute({ regionId: route.regionId, side: route.side, selection: null, legacyRoute: false });
+  }
+
   if (error) return <main className="load-state"><h1>자료를 불러오지 못했습니다</h1><p>{error}</p><button onClick={() => location.reload()}>다시 시도</button></main>;
-  if (!catalog) return <main className="load-state" role="status">Human Atlas를 준비하고 있습니다…</main>;
+  if (!catalog || !routeReady) return <main className="load-state" role="status">Human Atlas를 준비하고 있습니다…</main>;
 
   const stageTitle = region?.labelKo ?? (selected ? '구조 사전' : '부위 선택');
   const selectedSideLabel = route.side === 'left' ? '왼쪽' : route.side === 'right' ? '오른쪽' : null;
-  const sideScenePending = route.regionId === 'leg' && Boolean(selectedSideLabel) &&
-    Boolean(legScene) && legScene!.defaultView.side !== route.side;
+  const sideScenePending = Boolean(selectedSideLabel) && regionScenes.length > 0 && activeScenes.length === 0;
   const stageDescription = sceneAvailable
-    ? '현재 확보된 오른쪽 종아리 파일럿 장면입니다. 출처 연결이 확인된 근육과 뼈를 선택할 수 있습니다.'
+    ? '현재 확보된 부위 장면입니다. 출처 연결이 확인된 근육과 뼈를 선택할 수 있습니다.'
     : sideScenePending
-      ? `${selectedSideLabel} 종아리 장면은 준비 중입니다. 현재 오른쪽 파일럿 장면을 다른 쪽 자료처럼 표시하지 않습니다.`
+      ? `${selectedSideLabel} ${region?.labelKo ?? '해당 부위'} 장면은 준비 중입니다. 다른 좌우의 모형을 대신 표시하지 않습니다.`
     : region
       ? `${region.labelKo} 자료를 준비하고 있습니다. 현재 종아리 장면을 다른 부위 자료처럼 표시하지 않습니다.`
       : '아직 부위 연결이 확인되지 않은 구조입니다. 3D 장면은 표시하지 않습니다.';
@@ -275,11 +275,11 @@ export default function App() {
       <section className={`study-stage ${sceneAvailable ? '' : 'is-unavailable'}`} aria-label={`${stageTitle} 학습 장면`}>
         <div className="stage-caption"><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{stageTitle}</h2><p>{stageDescription}</p></div>
         {sceneAvailable
-          ? <GLBViewer selectedEntityId={route.selection?.kind === 'muscle' ? routeEntityId(route.selection) : null} selectedSelection={route.selection} unmappedMeshId={unmappedMeshNotice?.meshAssetId ?? null} navigation={navigation} activeAttachmentId={activeAttachmentId} concepts={concepts.map((concept) => ({ id: concept.id, entityType: concept.entityType, parentId: concept.parentId ?? null }))} attachments={catalog.attachments} claims={catalog.claims} onSelectEntity={chooseEntity} onSelectBone={chooseBone} onSelectUnmappedMesh={chooseUnmappedMesh} onClearAttachment={() => setActiveAttachmentId(null)} studyMode/>
+          ? <GLBViewer key={`${route.regionId}:${route.side}:${sceneRevision(activeScenes)}`} selectedEntityId={route.selection?.kind === 'muscle' ? routeEntityId(route.selection) : null} selectedSelection={route.selection} unmappedMeshId={unmappedMeshNotice?.meshAssetId ?? null} navigation={navigation} scenes={activeScenes} activeAttachmentId={activeAttachmentId} concepts={concepts.map((concept) => ({ id: concept.id, entityType: concept.entityType, parentId: concept.parentId ?? null }))} attachments={catalog.attachments} claims={catalog.claims} onSelectEntity={chooseEntity} onSelectBone={chooseBone} onSelectUnmappedMesh={chooseUnmappedMesh} onClearSelection={clearSelection} onClearAttachment={() => setActiveAttachmentId(null)} studyMode/>
           : <div className="region-empty-scene" role="status">
               <span className="empty-scene-mark" aria-hidden="true">◎</span>
               <h3>{region ? `${region.labelKo} 장면은 준비 중입니다` : selected ? '이 구조의 부위 연결은 준비 중입니다' : '부위를 선택해 주세요'}</h3>
-              <p>{routeNotice ?? (sideScenePending ? '현재 확보된 자료는 오른쪽 종아리 파일럿뿐입니다. 선택한 좌우의 장면은 준비 중입니다.' : region && sceneMembershipSources.size === 0 ? '아직 확인된 구조 목록이 없습니다. 다른 부위 자료를 대신 보여주지 않습니다.' : '이 화면에서는 확인된 자료가 있는 장면만 표시합니다.')}</p>
+              <p>{routeNotice ?? (sideScenePending ? '선택한 좌우의 장면은 준비 중입니다.' : region && sceneMembershipSources.size === 0 ? '아직 확인된 구조 목록이 없습니다. 다른 부위 자료를 대신 보여주지 않습니다.' : '이 화면에서는 확인된 자료가 있는 장면만 표시합니다.')}</p>
             </div>}
       </section>
       <details className="study-details" id="study-details" open={detailsOpen} onToggle={(event) => setDetailsOpen(event.currentTarget.open)}>

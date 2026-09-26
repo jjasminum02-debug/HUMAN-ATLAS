@@ -2,14 +2,14 @@
 
 - LAST_UPDATED: 2026-09-26
 - PLAN_REVISION: R13-2026-09-26 — R12 유지 + AI 원문 대조/작용 설명/교육용 움직임/독립 T16–40
-- CURRENT_TASK: T15d — complete_with_gaps; 기존 source/stable-ID가 있는 우측 종아리 뼈의 typed selection·출처 요약 카드 구현
-- NEXT_TASK: T15e — Sol High (not_started); 장면 로더 수명관리, T14b 사람검토는 별도 대기
-- LAST_REPORT: work/reports/T15d.md
+- CURRENT_TASK: T15e — complete_with_gaps; 부위별 scene loader·선택/주석 수명관리·decoder build QA 검증
+- NEXT_TASK: T15f — Luna Max (not_started); 종아리 근육·뼈 장면 통합, T14b 사람검토는 별도 대기
+- LAST_REPORT: work/reports/T15e.md
 - CATALOG: partial85 (individual48/group16/part21); 전신 분모 미동결
 - LEARNING_OVERLAY: names81; B01 field evidence57 + B02 50 + B03 50 + B04 50 + B05 51 + B06 60 + B07 67 + B08 56 + B09 48; canonical coverage 85/85 checked_with_gaps (partial catalog only); humanReviewed=false
 - GEOMETRY: 오른쪽 종아리 6근육, 근육메시 7+뼈 13. T15b navigation overlay에 기존 source crosswalk의 우측 뼈 instance/mapping 9개를 needs_review로 연결, 미확정 mesh 4개는 unbound context. canonical spatialAnnotation 0; T13c-B01/B02/B03 context_only geometry:null draft 3건 보존; T05 표면 후보 0/41, text_only 28/41, matching target mesh missing 13/41, human_review_pending 41/41
 - FUNCTION_AND_ASSESSMENT: 미구현, 학습 탭은 준비 중
-- TECHNICAL_GATE: T15d focused bone/navigation tests 14/14, navigation Node/Python 12/12 each, search 40/40, annotation 12/12, spatial draft 8/8, navigation validator, learning validator, typecheck/build passed; real browser verified typed bone URL/card, muscle→bone→muscle, unbound-mesh card clearing; fresh-tab browser console errors/warnings 0. Build retains the >500 kB chunk warning. Canonical catalog/source regions/assets, T13 spatial drafts and OpenSim HEAD/status unchanged; T14b reviewer opinions 0, approval records 0; no anatomy promotion.
+- TECHNICAL_GATE: T15e scene lifecycle 8/8, navigation Node 14/14 and Python 12/12, search 40/40, annotation 12/12, spatial draft 8/8, navigation validator/generator, decoder equivalence build QA, typecheck/build passed; browser region/back/reselection/404 recovery/resize/selection-clear/T13 femur card verified, final normal-tab console error/warning 0. Empty-region initial GLB fetch regression fixed; build retains >500 kB chunk warning. Canonical/source/assets, T13 spatial drafts, 9 needs_review bone mappings, OpenSim and existing snapshots preserved; human approval 0.
 - ANATOMY_GATE: needs_human_review; 전신 구조 완성 아님
 - DEV_URL: none (temporary T15d local browser server stopped after verification)
 
@@ -49,6 +49,7 @@
 | T15b | complete_with_gaps | `work/tasks/T15b.md`; `atlas-data/schemas/navigation.schema.json`; `atlas-data/navigation/`; `atlas-web/src/domain/navigation.ts`; `work/evidence/T15b/`; `work/reports/T15b.md` | Six leg product memberships only; 4 source meshes unbound; T13 model not merged into leg scene; learner UI and remaining memberships await T15c–g; no human review/attachment surface/motion |
 | T15c | complete_with_gaps | `work/tasks/T15c.md`; learner 12-region navigation/list UI; typed/legacy route adapter; `work/evidence/T15c/`; `work/reports/T15c.md` | Only six leg memberships have source-backed scene/list entries; 11 categories have no assigned structures/scene; T15e scene lifecycle not started; no anatomy review/promotion |
 | T15d | complete_with_gaps | `work/tasks/T15d.md`; typed bone route/card for 9 existing source-linked right pilot bones; `work/evidence/T15d/`; `work/reports/T15d.md` | 4 meshes remain unbound; English/Gray 1918 summaries only; no modern bone-name review or human anatomy approval; other scenes wait for later work |
+| T15e | complete_with_gaps | `work/tasks/T15e.md`; 2 leg scene manifests, revision cache/abort/GPU cleanup, decoder build QA; `work/evidence/T15e/`; `work/reports/T15e.md` | 11 other regions lack scenes; numeric GPU memory and raw browser draft hash unavailable; T14b review and attachment surfaces remain open |
 
 ## 실제 현재 상태와 원본 보존
 
@@ -187,3 +188,13 @@ OpenSim_Models, canonical ID/원분류, 기존 자산·사용자 초안·T13 spa
 hash/포함·제외·잔여 변경을 보고해라. T15f 이상, 배포, 환자 진단·치료, 경혈/Pro mode 및 침 시뮬레이션은
 범위 밖이며 시작하지 마라.
 ```
+
+## T15e 결과 및 다음 실행 — 2026-09-26
+
+T15e는 기존 T12 leg scene을 유지하고 T13 뼈 9 mesh의 별도 같은 좌표계/pose leg scene을 manifest에 등록했다. 활성 부위의 scene만 가져오는 revision CPU cache·취소/늦은 응답 폐기·실패 재시도·GPU geometry/material/context 해제와 typed 선택/URL/annotation 수명을 연결했다. 이전 9개 뼈 mapping의 `needs_review`/`not_reviewed`, unbound 4개와 정확한 부착 표면 0/41은 그대로다. 런타임 이중 decoder는 측정 후 하나로 줄이고 독립 parser 동등성 검사를 build QA에 포함했다.
+
+검증은 scene lifecycle 8/8, navigation Node/Python 14/14·12/12, search 40/40, annotation 12/12, spatial drafts 8/8, navigation schema/generator, decoder QA, typecheck/build pass. 실제 브라우저에서 부위 전환, 빠른 전환, 404 GLB 실패/복구, 재선택, 뒤로가기, 390/1024 resize, 선택 해제/새로고침 및 T13 femur 카드가 작동했다. 빈 부위 첫 진입의 잘못된 종아리 GLB 선요청은 수정 후 정적 서버 로그에서 0으로 확인했다. 정상 최종 탭 console error/warning 0, 기존 대형 chunk 경고는 남는다. 상세 결과는 `work/reports/T15e.md`, evidence는 `work/evidence/T15e/`.
+
+OpenSim_Models, canonical ID/원분류, source manifest·GLB/OBJ, T13c spatial draft 3건과 시작 시점의 기존 스냅샷 47파일은 hash/상태 대조에서 보존됐다. 실제 브라우저 localStorage raw 사용자 초안 hash와 GPU 메모리 수치는 확보하지 못했으며 읽기/쓰기/삭제를 실행하지 않았다. T14b는 `needs_human_review` 별도 대기, 다른 11부위 scene 미확보다. T15f는 시작하지 않았다.
+
+다음 task는 **T15f / Luna Max (not_started)**. 붙여 넣을 프롬프트는 `work/reports/T15e.md`의 끝부분에 있다. 자동 진행하지 않는다.

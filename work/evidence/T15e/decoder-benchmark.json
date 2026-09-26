@@ -1,0 +1,52 @@
+{
+  "task": "T15e",
+  "runtimeNode": "v24.19.0",
+  "iterations": 5,
+  "results": [
+    {
+      "manifest": "atlas-data/manifests/derived-assets-t07.json",
+      "glbBytes": 712192,
+      "meshes": 11,
+      "parserEquivalence": "pass",
+      "rawMs": [
+        6.034250000000043,
+        2.793041999999957,
+        2.2508750000000077,
+        1.7197080000000255,
+        0.9437910000000329
+      ],
+      "gltfMs": [
+        2.695500000000038,
+        0.8186670000000049,
+        0.5361669999999776,
+        0.6521669999999631,
+        0.38129199999997354
+      ],
+      "rawMedianMs": 2.2508750000000077,
+      "gltfMedianMs": 0.6521669999999631
+    },
+    {
+      "manifest": "atlas-data/manifests/derived-bones-t13.json",
+      "glbBytes": 205392,
+      "meshes": 9,
+      "parserEquivalence": "pass",
+      "rawMs": [
+        1.1125840000000267,
+        1.178291999999999,
+        0.9187499999999886,
+        0.3198749999999677,
+        0.24695800000000645
+      ],
+      "gltfMs": [
+        0.3425409999999829,
+        0.25983300000001464,
+        0.20412499999997635,
+        0.42066699999998036,
+        0.23741699999999355
+      ],
+      "rawMedianMs": 0.9187499999999886,
+      "gltfMedianMs": 0.25983300000001464
+    }
+  ],
+  "decision": "single strict GLB decoder at runtime; independent GLTFLoader equivalence in build QA"
+}
