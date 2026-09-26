@@ -12,12 +12,15 @@ import {
 } from "../data/catalog";
 import { learnerVisibleTerms, withoutHanScript } from "../domain/search";
 import { GLBViewer } from "../viewer/GLBViewer";
+import rawNavigation from "../../../atlas-data/navigation/atlas-navigation.json";
+import type { NavigationContract } from "../domain/navigation";
 
 const languageNames: Record<string, string> = { en: "English", la: "Latin", ko: "한국어" };
 const scriptNames: Record<string, string> = { Hang: "한글", Latn: "로마자" };
 const roleNames: Record<string, string> = { origin: "기시", insertion: "정지" };
 const typeNames: Record<string, string> = { individual_muscle: "개별 근육", muscle_part: "근육 부분" };
 const stateNames: Record<string, string> = { needs_review: "검토 대기", held: "미확인", reviewed: "검토 완료" };
+const navigation = rawNavigation as NavigationContract;
 
 function text(value: unknown): string | null {
   return typeof value === "string" && value.length > 0 ? value : null;
@@ -354,10 +357,14 @@ function App() {
 
         <GLBViewer
           selectedEntityId={selectedId}
+          selectedSelection={null}
+          navigation={navigation}
           concepts={viewerConcepts}
           attachments={catalog.attachments}
           claims={catalog.claims}
           onSelectEntity={choose}
+          onSelectBone={() => {}}
+          onSelectUnmappedMesh={() => {}}
         />
 
         <main className="detail-panel" id="details" tabIndex={-1}>

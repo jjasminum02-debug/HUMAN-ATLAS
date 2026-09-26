@@ -1,0 +1,23 @@
+{
+  "task": "T15d",
+  "date": "2026-09-26",
+  "nodeRuntime": "workspace bundled Node.js; initial default shell PATH lacked node, then all Node-backed checks were rerun with workspace runtime",
+  "results": [
+    {"command": "node --experimental-strip-types --test src/domain/navigation.test.ts src/domain/boneCard.test.ts", "passed": true, "tests": 14},
+    {"command": "pnpm run test:navigation", "passed": true, "nodeTests": 12, "pythonContractTests": 12},
+    {"command": "pnpm run test:search", "passed": true, "tests": 40},
+    {"command": "pnpm run test:annotations", "passed": true, "tests": 12, "schema": true},
+    {"command": "pnpm run test:spatial-drafts", "passed": true, "tests": 8, "schema": true},
+    {"command": "pnpm run validate:navigation", "passed": true, "categories": 12, "memberships": 6, "structureInstances": 9, "structureMeshMappings": 9, "unmappedMeshContexts": 4, "issues": 0},
+    {"command": "pnpm run typecheck", "passed": true},
+    {"command": "pnpm run build", "passed": true, "warning": "App chunk exceeds 500 kB; 1.44 MB minified"},
+    {"command": "git diff --check", "passed": true}
+  ],
+  "browser": {
+    "passed": true,
+    "flows": ["bone deep link matches Tibia card", "Soleus to Tibia and back to Soleus", "unbound talus selection clears previous Soleus card"],
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "evidence": "work/evidence/T15d/browser-validation.md"
+  }
+}

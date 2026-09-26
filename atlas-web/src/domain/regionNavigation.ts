@@ -1,12 +1,13 @@
 import {
   parseAtlasRoute,
   type AtlasRouteState,
+  type BoneSelection,
   type NavigationContract,
   type Selection,
   type SelectionReferences,
 } from "./navigation.ts";
 
-export type LearnerNavigationData = Pick<NavigationContract, "categories" | "memberships" | "sceneManifests">;
+export type LearnerNavigationData = Pick<NavigationContract, "categories" | "memberships" | "sceneManifests" | "structureInstances" | "structureMeshMappings">;
 
 export interface ResolvedLearnerRoute {
   route: AtlasRouteState;
@@ -80,6 +81,60 @@ export function routeForMuscleSelection(
   };
 }
 
+export function boneSelectionForMesh(navigation: LearnerNavigationData, meshId: string): BoneSelection | null {
+  const matches = navigation.structureMeshMappings.filter((mapping) => mapping.meshIds.includes(meshId));
+  if (matches.length === 0) return null;
+  if (matches.length !== 1) throw new Error(`Bone mesh ${meshId} has ambiguous source mappings.`);
+  const mapping = matches[0];
+  const instance = navigation.structureInstances.find((row) => row.id === mapping.structureInstanceId);
+  if (!instance) return null;
+  const sceneSelections = navigation.sceneManifests.flatMap((scene) => scene.selectableBindings)
+    .filter((binding) => binding.meshAssetId === meshId && binding.selection.kind === "bone");
+  if (sceneSelections.length > 1 || (sceneSelections[0] &&
+    (sceneSelections[0].selection.conceptId !== instance.structureId || sceneSelections[0].selection.instanceId !== instance.id))) {
+    throw new Error(`Scene and source crosswalk disagree for bone mesh ${meshId}.`);
+  }
+  return {
+    kind: "bone",
+    conceptId: instance.structureId,
+    instanceId: instance.id,
+    meshId,
+  };
+}
+
+function normalizeBoneRoute(navigation: LearnerNavigationData, selection: BoneSelection): AtlasRouteState | null {
+  let instance = selection.instanceId
+    ? navigation.structureInstances.find((row) => row.id === selection.instanceId)
+    : undefined;
+  if (!instance) {
+    const eligibleInstances = navigation.structureInstances.filter((row) => row.structureId === selection.conceptId &&
+      navigation.structureMeshMappings.some((mapping) => mapping.structureInstanceId === row.id));
+    if (eligibleInstances.length !== 1) return null;
+    instance = eligibleInstances[0];
+  }
+  if (instance.structureId !== selection.conceptId) return null;
+  const mappings = navigation.structureMeshMappings.filter((mapping) => mapping.structureInstanceId === instance!.id);
+  if (mappings.length === 0) return null;
+  let meshId = selection.meshId;
+  if (meshId && !mappings.some((mapping) => mapping.meshIds.includes(meshId!))) return null;
+  if (!meshId) {
+    const mappedMeshes = [...new Set(mappings.flatMap((mapping) => mapping.meshIds))];
+    if (mappedMeshes.length === 1) meshId = mappedMeshes[0];
+  }
+  return {
+    regionId: "leg",
+    side: instance.side,
+    selection: { kind: "bone", conceptId: instance.structureId, instanceId: instance.id, ...(meshId ? { meshId } : {}) },
+    legacyRoute: false,
+  };
+}
+
+export function routeForBoneSelection(navigation: LearnerNavigationData, selection: BoneSelection): AtlasRouteState {
+  return normalizeBoneRoute(navigation, selection) ?? {
+    regionId: "leg", side: null, selection: null, legacyRoute: false,
+  };
+}
+
 export function resolveLearnerRoute(
   search: string,
   navigation: LearnerNavigationData,
@@ -113,6 +168,21 @@ export function resolveLearnerRoute(
       selectionMismatch = true;
     } else if (!route.regionId && categoryIds.length === 1) {
       route = { ...route, regionId: categoryIds[0], side: defaultSide(navigation, categoryIds[0]), legacyRoute: false };
+      canonicalize = true;
+    }
+  }
+
+  if (selection?.kind === "bone") {
+    const normalized = normalizeBoneRoute(navigation, selection);
+    if (!normalized) {
+      route = { regionId: route.regionId, side: null, selection: null, legacyRoute: false };
+      notice = "이 뼈의 출처 연결을 확인할 수 없습니다. 확인된 구조만 선택할 수 있습니다.";
+      canonicalize = true;
+      selectionMismatch = true;
+    } else if (route.regionId !== normalized.regionId || route.side !== normalized.side ||
+      route.selection?.kind !== "bone" || route.selection.instanceId !== normalized.selection?.instanceId ||
+      route.selection.meshId !== normalized.selection?.meshId) {
+      route = normalized;
       canonicalize = true;
     }
   }

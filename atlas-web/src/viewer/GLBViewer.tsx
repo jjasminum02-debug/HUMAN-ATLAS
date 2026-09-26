@@ -11,6 +11,8 @@ import {
 } from "./spatialDraftLayer";
 const AnnotationWorkbench = import.meta.env.DEV ? lazy(() => import("./AnnotationWorkbench").then(module => ({ default: module.AnnotationWorkbench }))) : null;
 import type { AtlasRecord } from "../data/catalog";
+import { boneSelectionForMesh } from "../domain/regionNavigation";
+import type { BoneSelection, NavigationContract, Selection } from "../domain/navigation";
 
 type Visibility = "visible" | "transparent" | "hidden";
 type CameraPreset = "front" | "back" | "lateral";
@@ -20,10 +22,15 @@ interface Props {
   studyMode?: boolean;
   activeAttachmentId?: string | null;
   selectedEntityId: string | null;
+  selectedSelection: Selection | null;
+  unmappedMeshId?: string | null;
+  navigation: NavigationContract;
   concepts: readonly Concept[];
   attachments: readonly AtlasRecord[];
   claims: readonly AtlasRecord[];
   onSelectEntity: (id: string) => void;
+  onSelectBone: (selection: BoneSelection) => void;
+  onSelectUnmappedMesh: (mesh: { meshAssetId: string; sourceName: string }) => void;
   onClearAttachment?: () => void;
 }
 
@@ -41,7 +48,7 @@ function errorText(error: unknown): string {
   return error instanceof Error ? error.message : "T07 GLB viewer를 불러오지 못했습니다.";
 }
 
-export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onSelectEntity, onClearAttachment, studyMode = false, activeAttachmentId = null }: Props) {
+export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId = null, navigation, concepts, attachments, claims, onSelectEntity, onSelectBone, onSelectUnmappedMesh, onClearAttachment, studyMode = false, activeAttachmentId = null }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const overlayCanvasRef = useRef<HTMLCanvasElement>(null);
   const viewerRef = useRef<ThreeViewer | null>(null);
@@ -58,13 +65,20 @@ export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onS
 
   const conceptById = useMemo(() => new Map(concepts.map((concept) => [concept.id, concept])), [concepts]);
   const selectedMeshIds = useMemo(() => {
-    if (!bundle || !selectedEntityId) return [];
+    if (!bundle) return [];
+    if (selectedSelection?.kind === "bone") {
+      const meshIds = selectedSelection.meshId
+        ? [selectedSelection.meshId]
+        : navigation.structureMeshMappings.filter((mapping) => mapping.structureInstanceId === selectedSelection.instanceId).flatMap((mapping) => mapping.meshIds);
+      return meshIds.filter((id) => bundle.meshes.some((mesh) => mesh.meshAssetId === id));
+    }
+    if (!selectedEntityId) return [];
     const targets = new Set([selectedEntityId]);
     for (const concept of concepts) if (concept.parentId === selectedEntityId) targets.add(concept.id);
     return bundle.meshes
       .filter((mesh) => mesh.targetEntityId !== null && targets.has(mesh.targetEntityId))
       .map((mesh) => mesh.meshAssetId);
-  }, [bundle, concepts, selectedEntityId]);
+  }, [bundle, concepts, navigation, selectedEntityId, selectedSelection]);
   const pickedMesh = bundle?.meshes.find((mesh) => mesh.meshAssetId === pickedMeshId) ?? null;
   const reviewFocusIds = pickedMesh?.targetEntityType === "structure"
     ? [pickedMesh.meshAssetId]
@@ -113,11 +127,16 @@ export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onS
   useEffect(() => {
     const renderer = viewerRef.current;
     if (!renderer) return;
-    if (selectedMeshIds.length === 0) { renderer.selectMeshes([]); setPickedMeshId(null); return; }
+    if (selectedMeshIds.length === 0) {
+      const pendingMesh = unmappedMeshId && bundle?.meshes.some((mesh) => mesh.meshAssetId === unmappedMeshId) ? unmappedMeshId : null;
+      renderer.selectMeshes(pendingMesh ? [pendingMesh] : [], false);
+      setPickedMeshId(pendingMesh);
+      return;
+    }
     renderer.selectMeshes(selectedMeshIds, !studyMode);
     if (studyMode) renderer.focus(selectedMeshIds, 1.4);
     setPickedMeshId((current) => selectedMeshIds.includes(current ?? "") ? current : selectedMeshIds[0]);
-  }, [selectedMeshIds, studyMode]);
+  }, [bundle, selectedMeshIds, studyMode, unmappedMeshId]);
 
   useEffect(() => {
     if (!studyMode || !viewer) return;
@@ -196,11 +215,23 @@ export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onS
     }
     setPickedMeshId(mesh.meshAssetId);
     viewerRef.current?.selectMeshes([mesh.meshAssetId], focus);
-    if (!updateCard || !mesh.targetEntityId) return;
-    const target = conceptById.get(mesh.targetEntityId);
-    if (target && (target.entityType === "individual_muscle" || target.entityType === "muscle_part")) {
-      onSelectEntity(mesh.targetEntityId);
+    if (!updateCard) return;
+    const sceneBinding = navigation.sceneManifests.flatMap((scene) => scene.selectableBindings)
+      .find((binding) => binding.meshAssetId === mesh.meshAssetId);
+    if (sceneBinding?.selection.kind === "muscle") {
+      const entityId = sceneBinding.selection.partId ?? sceneBinding.selection.conceptId;
+      const target = conceptById.get(entityId);
+      if (target && (target.entityType === "individual_muscle" || target.entityType === "muscle_part")) {
+        onSelectEntity(entityId);
+        return;
+      }
     }
+    const boneSelection = boneSelectionForMesh(navigation, mesh.meshAssetId);
+    if (boneSelection) {
+      onSelectBone(boneSelection);
+      return;
+    }
+    onSelectUnmappedMesh({ meshAssetId: mesh.meshAssetId, sourceName: mesh.sourceName });
   }
 
   function applyVisibility(meshId: string, next: Visibility) {
@@ -255,18 +286,18 @@ export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onS
     if (targets.length > 0) viewerRef.current?.focus(targets, margin);
   }
 
-  if (studyMode) return <section className="study-viewer" aria-label="3D 근육 탐색">
-    <div className={`study-canvas-wrap ${bundle && selectedMeshIds.length === 0 ? "no-model" : ""}`}>
+  if (studyMode) return <section className="study-viewer" aria-label="3D 근육과 뼈 탐색">
+    <div className={`study-canvas-wrap ${bundle && selectedSelection && selectedMeshIds.length === 0 ? "no-model" : ""}`}>
       <div className="study-canvas-stage">
-        <canvas ref={canvasRef} className="viewer-canvas" tabIndex={0} aria-label="근육 모형. 드래그로 회전, 휠로 확대, 화살표 키로 회전" data-testid="anatomy-viewer"/>
+        <canvas ref={canvasRef} className="viewer-canvas" tabIndex={0} aria-label="근육과 뼈 모형. 드래그로 회전, 휠로 확대, 화살표 키로 회전" data-testid="anatomy-viewer"/>
         <canvas ref={overlayCanvasRef} className="viewer-overlay" aria-hidden="true" data-testid="learner-spatial-overlay"/>
         {learnerOverlay.syntheticTest && <span className="learner-overlay-warning" role="status">합성 검증 미리보기 · 학습 자료가 아닙니다</span>}
         {!learnerOverlay.syntheticTest && learnerOverlay.count > 0 && <span className="learner-overlay-warning" role="status">미검토 표면 후보가 읽기 전용으로 표시됩니다</span>}
         {learnerOverlay.error && <span className="learner-overlay-warning" role="status">공간 초안을 확인하지 못해 표시를 보류했습니다</span>}
       </div>
-      {error ? <div className="model-message" role="alert"><h3>3D를 불러오지 못했습니다</h3><p>근육 설명과 검색은 계속 이용할 수 있습니다.</p></div> : !bundle ? <div className="model-message" role="status">모형을 불러오는 중…</div> : selectedMeshIds.length === 0 ? <div className="model-message"><span>◎</span><h3>이 근육의 3D는 준비 중입니다</h3><p>오른쪽 카드에서 이름을 확인할 수 있습니다.</p></div> : null}
+      {error ? <div className="model-message" role="alert"><h3>3D를 불러오지 못했습니다</h3><p>근육 설명과 검색은 계속 이용할 수 있습니다.</p></div> : !bundle ? <div className="model-message" role="status">모형을 불러오는 중…</div> : selectedSelection && selectedMeshIds.length === 0 ? <div className="model-message"><span>◎</span><h3>선택 구조의 3D는 준비 중입니다</h3><p>오른쪽 카드에서 이름과 자료 상태를 확인할 수 있습니다.</p></div> : null}
     </div>
-    {bundle && selectedMeshIds.length > 0 && <>
+    {bundle && <>
       <div className="study-camera" aria-label="모형 방향">
         {(["front", "back", "lateral"] as CameraPreset[]).map(preset => <button key={preset} aria-pressed={cameraPreset === preset} onClick={() => chooseCamera(preset)}>{{front:"정면",back:"후면",lateral:"측면"}[preset]}</button>)}
       </div>
@@ -391,7 +422,7 @@ export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onS
               const mesh = bundle.meshes.find((item) => item.meshAssetId === row.contextMeshAssetId);
               return <li key={row.attachmentId}>
                 <span>{row.role === "origin" ? "기시" : row.role === "insertion" ? "정지" : "그 외 부착"} · {summary}</span>
-                {mesh ? <button type="button" onClick={() => chooseMesh(mesh, false)}>관련 뼈 보기 · 표면 미지정</button> : <em>대상 메시 없음 · 보류</em>}
+                {mesh ? <button type="button" onClick={() => chooseMesh(mesh, true)}>관련 뼈 선택 · 표면 미지정</button> : <em>대상 메시 없음 · 보류</em>}
               </li>;
             })}</ul>
           </section>}

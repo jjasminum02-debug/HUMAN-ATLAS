@@ -3,6 +3,7 @@ import { loadPilotCatalog, linkedEvidence, sourceForEvidence, type PilotCatalog 
 import { findMuscles, learningConcepts, nameFor, nameSources, structureSummary } from '../data/learning';
 import { GLBViewer } from '../viewer/GLBViewer';
 import { attachmentContextById } from '../viewer/attachmentContext';
+import { boneSourceLabel, buildBoneCardData } from '../domain/boneCard';
 import {
   serializeAtlasRoute,
   type AtlasRouteState,
@@ -16,6 +17,7 @@ import {
   defaultLearnerRoute,
   resolveLearnerRoute,
   routeForCategory,
+  routeForBoneSelection,
   routeForMuscleSelection,
 } from '../domain/regionNavigation';
 import rawNavigation from '../../../atlas-data/navigation/atlas-navigation.json';
@@ -24,6 +26,7 @@ import './styles.css';
 type TabName = '구조' | '기능' | '평가';
 type StandardReference = { uri: string; edition: string; identifier: string };
 type LearnerConcept = ReturnType<typeof learningConcepts>[number];
+type UnmappedMeshNotice = { meshAssetId: string; sourceName: string };
 const navigation = rawNavigation as NavigationContract;
 
 function standardReferences(value: unknown): StandardReference[] {
@@ -46,8 +49,8 @@ function routeUrl(route: AtlasRouteState) {
 }
 
 function routeEntityId(selection: Selection | null): string | null {
-  if (!selection || selection.kind !== 'muscle') return null;
-  return selection.partId ?? selection.conceptId;
+  if (!selection) return null;
+  return selection.kind === 'muscle' ? selection.partId ?? selection.conceptId : selection.conceptId;
 }
 
 function muscleConceptId(concept: LearnerConcept | undefined, fallbackId: string): string {
@@ -64,6 +67,7 @@ export default function App() {
   const [query, setQuery] = useState('');
   const [tab, setTab] = useState<TabName>('구조');
   const [activeAttachmentId, setActiveAttachmentId] = useState<string | null>(null);
+  const [unmappedMeshNotice, setUnmappedMeshNotice] = useState<UnmappedMeshNotice | null>(null);
   const [detailsOpen, setDetailsOpen] = useState(() => typeof window === 'undefined' || window.matchMedia('(min-width: 761px)').matches);
 
   useEffect(() => {
@@ -84,6 +88,7 @@ export default function App() {
   const routeRefs = useMemo<SelectionReferences>(() => {
     const muscles = new Map<string, { entityType: string }>();
     const muscleParts = new Map<string, { parentId: string }>();
+    const structures = new Map<string, { kind: string; parentId?: string }>();
     for (const concept of concepts) {
       if (concept.entityType === 'individual_muscle' || concept.entityType === 'muscle_group') {
         muscles.set(concept.id, { entityType: String(concept.entityType) });
@@ -92,17 +97,28 @@ export default function App() {
         muscleParts.set(concept.id, { parentId: concept.parentId });
       }
     }
+    for (const structure of catalog?.structures ?? []) {
+      if (typeof structure.kind !== 'string') continue;
+      structures.set(structure.id, { kind: structure.kind, ...(typeof structure.parentId === 'string' ? { parentId: structure.parentId } : {}) });
+    }
+    const structureInstances = new Map(navigation.structureInstances.map((row) => [row.id, { structureId: row.structureId, side: row.side }]));
+    const structureMeshMappings = new Map(navigation.structureMeshMappings.map((row) => [row.id, { structureInstanceId: row.structureInstanceId, meshIds: row.meshIds }]));
+    const meshAssets = new Map<string, { laterality?: string }>();
+    for (const mapping of navigation.structureMeshMappings) {
+      const instance = structureInstances.get(mapping.structureInstanceId);
+      for (const meshId of mapping.meshIds) meshAssets.set(meshId, { laterality: instance?.side });
+    }
     return {
       muscles,
       muscleInstances: new Map(),
       muscleParts,
-      structures: new Map(),
-      structureInstances: new Map(),
-      meshAssets: new Map(),
+      structures,
+      structureInstances,
+      meshAssets,
       muscleMeshMappings: new Map(),
-      structureMeshMappings: new Map(),
+      structureMeshMappings,
     };
-  }, [concepts]);
+  }, [catalog, concepts]);
 
   useEffect(() => {
     if (!catalog) return;
@@ -110,6 +126,7 @@ export default function App() {
       const resolved = resolveLearnerRoute(location.search, navigation, routeRefs);
       setRoute(resolved.route);
       setRouteNotice(resolved.notice);
+      setUnmappedMeshNotice(null);
       setTab('구조');
       setActiveAttachmentId(null);
       if (resolved.canonicalize) {
@@ -128,6 +145,9 @@ export default function App() {
   const selectedId = routeEntityId(route.selection);
   const selected = selectedId ? concepts.find((concept) => concept.id === selectedId) : undefined;
   const name = catalog && selectedId ? nameFor(catalog, selectedId) : null;
+  const selectedBoneCard = catalog && route.selection?.kind === 'bone'
+    ? buildBoneCardData(catalog, navigation, route.selection)
+    : null;
   const standardRefs = standardReferences(selected && 'standardRefs' in selected ? selected.standardRefs : undefined);
   const parentId = selected?.entityType === 'muscle_part' && typeof selected.parentId === 'string' ? selected.parentId : selectedId;
   const parts = concepts.filter((concept) => concept.entityType === 'muscle_part' && concept.parentId === parentId);
@@ -146,9 +166,12 @@ export default function App() {
   const legScene = navigation.sceneManifests.find((scene) => scene.categoryId === 'leg');
   const sideHasScene = Boolean(legScene && legScene.availability !== 'unavailable' &&
     (!route.side || legScene.defaultView.side === route.side));
-  const sceneAvailable = route.regionId === 'leg' && selectedBaseId !== null &&
-    sideHasScene && categoryMemberships(navigation, 'leg').some((row) => row.entityId === selectedBaseId);
-  const routeSelectionId = route.selection?.kind === 'muscle' ? route.selection.conceptId : null;
+  const boneSelectionMapped = route.selection?.kind === 'bone' && navigation.structureMeshMappings.some((mapping) =>
+    mapping.structureInstanceId === route.selection?.instanceId && (!route.selection.meshId || mapping.meshIds.includes(route.selection.meshId)));
+  const sceneAvailable = route.regionId === 'leg' && sideHasScene && (
+    Boolean(selectedBaseId && categoryMemberships(navigation, 'leg').some((row) => row.entityId === selectedBaseId)) ||
+    Boolean(boneSelectionMapped) || Boolean(unmappedMeshNotice)
+  );
 
   function commitRoute(nextRoute: AtlasRouteState, replace = false) {
     const nextUrl = routeUrl(nextRoute);
@@ -159,6 +182,7 @@ export default function App() {
     }
     setRoute(nextRoute);
     setRouteNotice(null);
+    setUnmappedMeshNotice(null);
     setTab('구조');
     setActiveAttachmentId(null);
     setDetailsOpen(true);
@@ -177,6 +201,15 @@ export default function App() {
     commitRoute(routeForMuscleSelection(navigation, conceptId, partId, route.regionId));
   }
 
+  function chooseBone(selection: Extract<Selection, { kind: 'bone' }>) {
+    commitRoute(routeForBoneSelection(navigation, selection));
+  }
+
+  function chooseUnmappedMesh(mesh: UnmappedMeshNotice) {
+    commitRoute({ regionId: 'leg', side: 'right', selection: null, legacyRoute: false });
+    setUnmappedMeshNotice(mesh);
+  }
+
   if (error) return <main className="load-state"><h1>자료를 불러오지 못했습니다</h1><p>{error}</p><button onClick={() => location.reload()}>다시 시도</button></main>;
   if (!catalog) return <main className="load-state" role="status">Human Atlas를 준비하고 있습니다…</main>;
 
@@ -185,7 +218,7 @@ export default function App() {
   const sideScenePending = route.regionId === 'leg' && Boolean(selectedSideLabel) &&
     Boolean(legScene) && legScene!.defaultView.side !== route.side;
   const stageDescription = sceneAvailable
-    ? '현재 확보된 오른쪽 종아리 파일럿 장면입니다. 선택 근육과 연결된 구조만 표시합니다.'
+    ? '현재 확보된 오른쪽 종아리 파일럿 장면입니다. 출처 연결이 확인된 근육과 뼈를 선택할 수 있습니다.'
     : sideScenePending
       ? `${selectedSideLabel} 종아리 장면은 준비 중입니다. 현재 오른쪽 파일럿 장면을 다른 쪽 자료처럼 표시하지 않습니다.`
     : region
@@ -241,8 +274,8 @@ export default function App() {
       </aside>
       <section className={`study-stage ${sceneAvailable ? '' : 'is-unavailable'}`} aria-label={`${stageTitle} 학습 장면`}>
         <div className="stage-caption"><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{stageTitle}</h2><p>{stageDescription}</p></div>
-        {sceneAvailable && routeSelectionId
-          ? <GLBViewer selectedEntityId={routeEntityId(route.selection)} activeAttachmentId={activeAttachmentId} concepts={concepts.map((concept) => ({ id: concept.id, entityType: concept.entityType, parentId: concept.parentId ?? null }))} attachments={catalog.attachments} claims={catalog.claims} onSelectEntity={chooseEntity} onClearAttachment={() => setActiveAttachmentId(null)} studyMode/>
+        {sceneAvailable
+          ? <GLBViewer selectedEntityId={route.selection?.kind === 'muscle' ? routeEntityId(route.selection) : null} selectedSelection={route.selection} unmappedMeshId={unmappedMeshNotice?.meshAssetId ?? null} navigation={navigation} activeAttachmentId={activeAttachmentId} concepts={concepts.map((concept) => ({ id: concept.id, entityType: concept.entityType, parentId: concept.parentId ?? null }))} attachments={catalog.attachments} claims={catalog.claims} onSelectEntity={chooseEntity} onSelectBone={chooseBone} onSelectUnmappedMesh={chooseUnmappedMesh} onClearAttachment={() => setActiveAttachmentId(null)} studyMode/>
           : <div className="region-empty-scene" role="status">
               <span className="empty-scene-mark" aria-hidden="true">◎</span>
               <h3>{region ? `${region.labelKo} 장면은 준비 중입니다` : selected ? '이 구조의 부위 연결은 준비 중입니다' : '부위를 선택해 주세요'}</h3>
@@ -252,7 +285,34 @@ export default function App() {
       <details className="study-details" id="study-details" open={detailsOpen} onToggle={(event) => setDetailsOpen(event.currentTarget.open)}>
         <summary className="mobile-detail-summary">{selected && name ? `${name.label} 설명` : '선택한 구조 설명'}</summary>
         <div className="study-detail-content">
-          {selected && name ? <>
+          {selectedBoneCard ? <>
+            <div className="detail-top"><span className="eyebrow">BONE STRUCTURE</span><span className="status-dot">출처 요약 · 사람 검토 전</span></div>
+            <h2>{selectedBoneCard.label ?? '이 뼈의 이름은 확인 중입니다'}</h2>
+            <p className="english-name"><span>뼈 표기</span> {selectedBoneCard.label ?? '이름 자료 준비 중'}</p>
+            <div className="names-card bone-side-card"><div><span>좌우</span><strong>{selectedBoneCard.side === 'right' ? '오른쪽' : selectedBoneCard.side === 'left' ? '왼쪽' : selectedBoneCard.side === 'midline' ? '정중' : '좌우 구분 없음'}</strong></div></div>
+            <section className="attachment-section bone-card-section"><h3>근거가 연결된 주요 표지</h3>
+              {selectedBoneCard.landmarks.length > 0 ? <ul>{selectedBoneCard.landmarks.map((landmark) => <li key={landmark.id}><span>{landmark.label}</span>{landmark.sources.map((source) => <small key={source.id}>{boneSourceLabel(source.id)}</small>)}</li>)}</ul> : <p className="quiet-note">이 뼈에 연결된 주요 표지는 아직 표시할 근거가 없습니다.</p>}
+            </section>
+            <section className="attachment-section bone-card-section"><h3>근거가 연결된 근육</h3>
+              {selectedBoneCard.relations.length > 0 ? <ul>{selectedBoneCard.relations.map((relation) => <li key={relation.muscleOrPartId}>
+                <button type="button" className="bone-related-muscle" onClick={() => chooseEntity(relation.muscleOrPartId)}>{nameFor(catalog, relation.muscleOrPartId).label}</button>
+                <span>{relation.roles.map((role) => role === 'origin' ? '기시' : role === 'insertion' ? '정지' : '그 외 부착').join(' · ')}</span>
+                {relation.landmarks.length > 0 && <small>{relation.landmarks.map((id) => selectedBoneCard.landmarks.find((landmark) => landmark.id === id)?.label).filter(Boolean).join(' · ')}</small>}
+                {relation.sources.map((source) => <small key={source.id}>{boneSourceLabel(source.id)}</small>)}
+              </li>)}</ul> : <p className="quiet-note">이 뼈와 근육을 연결하는 출처 근거가 아직 없습니다.</p>}
+            </section>
+            <details className="study-sources"><summary>이름과 연결의 출처</summary>
+              {[...selectedBoneCard.nameSources, ...selectedBoneCard.assetSources].filter((source, index, rows) => rows.findIndex((other) => other.id === source.id) === index).map((source) => <p key={source.id}>{source.url ? <a href={source.url} target="_blank" rel="noreferrer">{boneSourceLabel(source.id)} ↗</a> : boneSourceLabel(source.id)}{source.edition && <small>{source.edition}</small>}</p>)}
+              <p>표시한 이름과 부착 관계는 기존 출처 요약을 연결한 것입니다. mesh의 선택 상태나 표시가 사람 해부학 검토, 정확한 부착 위치 승인 또는 `reviewed` 상태를 뜻하지 않습니다.</p>
+            </details>
+          </> : unmappedMeshNotice ? <>
+            <div className="detail-top"><span className="eyebrow">STRUCTURE INFORMATION</span><span className="status-dot">자료 연결 준비 중</span></div>
+            <h2>이 메시의 뼈 연결은 확인되지 않았습니다</h2>
+            <p>{unmappedMeshNotice.sourceName}에 대한 안정된 전체 뼈 ID와 출처 crosswalk를 확인하지 못했습니다. 이전에 선택한 근육 설명은 닫았습니다.</p>
+          </> : route.selection?.kind === 'bone' ? <>
+            <div className="detail-top"><span className="eyebrow">BONE STRUCTURE</span><span className="status-dot">자료 연결 준비 중</span></div>
+            <h2>뼈 정보를 불러올 수 없습니다</h2><p>선택된 뼈의 이름 또는 근거 자료를 확인할 수 없습니다.</p>
+          </> : selected && name ? <>
             <div className="detail-top"><span className="eyebrow">MUSCLE ATLAS</span><span className="status-dot">학습 초안</span></div>
             <h2>{name.label}</h2><p className="english-name"><span>영어명</span> {name.en || '—'}</p>
             <div className="names-card" aria-label="이름"><div><span>우리말명</span><strong>{name.koModern || '—'}</strong></div><div><span>한자어명 (한글 표기)</span><strong>{name.koTraditional || '—'}</strong></div></div>

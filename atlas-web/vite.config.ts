@@ -6,10 +6,15 @@ import { defineConfig } from "vite";
 type AnyRecord = Record<string, unknown>;
 type EntityCollections = Record<string, AnyRecord[]>;
 
+function isRecord(value: unknown): value is AnyRecord {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
 const projectRoot = fileURLToPath(new URL("../", import.meta.url));
 const catalogPath = new URL("../atlas-data/catalog/canonical-catalog.json", import.meta.url);
 const statusPath = new URL("../atlas-data/catalog/catalog-status.json", import.meta.url);
 const meshManifestPath = new URL("../atlas-data/manifests/derived-assets-t07.json", import.meta.url);
+const navigationPath = new URL("../atlas-data/navigation/atlas-navigation.json", import.meta.url);
 const virtualModuleId = "virtual:human-atlas-catalog";
 const resolvedVirtualModuleId = `\0${virtualModuleId}`;
 const meshModuleId = "virtual:human-atlas-mesh-manifest";
@@ -26,12 +31,14 @@ function collectIds(values: unknown[]): string[] {
 
 async function readPilotCatalog(): Promise<unknown> {
   try {
-    const [catalogText, statusText] = await Promise.all([
+    const [catalogText, statusText, navigationText] = await Promise.all([
       readFile(catalogPath, "utf8"),
       readFile(statusPath, "utf8"),
+      readFile(navigationPath, "utf8"),
     ]);
     const rawCatalog = JSON.parse(catalogText) as { revision?: string; entities?: EntityCollections };
     const status = JSON.parse(statusText) as AnyRecord;
+    const navigation = JSON.parse(navigationText) as AnyRecord;
     const entities = rawCatalog.entities;
 
     if (!entities || typeof entities !== "object") {
@@ -75,6 +82,18 @@ async function readPilotCatalog(): Promise<unknown> {
     }
 
     const allStructures = records(entities, "structures");
+    const mappedBoneIds = Array.isArray(navigation.structureInstances)
+      ? navigation.structureInstances.flatMap((row) => isRecord(row) && typeof row.structureId === "string" ? [row.structureId] : [])
+      : [];
+    const mappedBoneIdSet = new Set(mappedBoneIds);
+    // Include only existing catalog bone concepts plus their source catalog children;
+    // this projects existing data for cards and does not create new anatomy records.
+    for (const boneId of mappedBoneIds) structureIds.add(boneId);
+    for (const structure of allStructures) {
+      if (structure.kind === "landmark" && typeof structure.parentId === "string" && mappedBoneIdSet.has(structure.parentId)) {
+        structureIds.add(structure.id as string);
+      }
+    }
     const structures = allStructures.filter((row) => structureIds.has(row.id as string));
     const structureTermIds = new Set(
       structures.flatMap((row) => collectIds(Array.isArray(row.termIds) ? row.termIds : [])),
@@ -90,6 +109,13 @@ async function readPilotCatalog(): Promise<unknown> {
     }
     for (const claim of claims) {
       collectIds(Array.isArray(claim.evidenceIds) ? claim.evidenceIds : []).forEach((id) => evidenceIds.add(id));
+    }
+    if (Array.isArray(navigation.structureMeshMappings)) {
+      for (const mapping of navigation.structureMeshMappings) {
+        if (isRecord(mapping) && Array.isArray(mapping.evidenceIds)) {
+          collectIds(mapping.evidenceIds).forEach((id) => evidenceIds.add(id));
+        }
+      }
     }
     const evidence = records(entities, "evidence").filter((row) => evidenceIds.has(row.id as string));
     const sourceIds = new Set(evidence.map((row) => row.sourceId).filter((id): id is string => typeof id === "string"));
@@ -148,14 +174,16 @@ function catalogPlugin(): Plugin {
     },
     configureServer(server) {
       server.watcher.add([
-        fileURLToPath(catalogPath),
-        fileURLToPath(statusPath),
+      fileURLToPath(catalogPath),
+      fileURLToPath(statusPath),
+      fileURLToPath(navigationPath),
       ]);
     },
     handleHotUpdate({ file, server }) {
       const catalogFile = fileURLToPath(catalogPath);
       const statusFile = fileURLToPath(statusPath);
-      if (file !== catalogFile && file !== statusFile) return;
+      const navigationFile = fileURLToPath(navigationPath);
+      if (file !== catalogFile && file !== statusFile && file !== navigationFile) return;
       const module = server.moduleGraph.getModuleById(resolvedVirtualModuleId);
       if (module) {
         server.moduleGraph.invalidateModule(module);

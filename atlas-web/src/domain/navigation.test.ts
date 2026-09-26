@@ -12,12 +12,14 @@ import {
   type SelectionReferences,
 } from "./navigation.ts";
 import {
+  boneSelectionForMesh,
   categoriesForMuscleConcept,
   categoryMemberships,
   defaultLearnerRoute,
   resolveLearnerRoute,
   routeForCategory,
   routeForMuscleSelection,
+  routeForBoneSelection,
 } from "./regionNavigation.ts";
 
 const navigation = JSON.parse(readFileSync(new URL("../../../atlas-data/navigation/atlas-navigation.json", import.meta.url), "utf8")) as NavigationContract;
@@ -52,6 +54,40 @@ test("mesh picks resolve through one typed mapping into a bone selection", () =>
       kind: "bone", conceptId: "HA-S-TIBIA", instanceId: "HA-SI-R-HA-S-TIBIA", meshId: "HA-MESH-BP3D4-FJ3387",
     },
   });
+});
+
+test("sourced bone mesh selection round-trips through an explicit typed URL and stays separate from landmarks", () => {
+  const selection = boneSelectionForMesh(navigation, "HA-MESH-BP3D4-FJ3387");
+  assert.deepEqual(selection, {
+    kind: "bone", conceptId: "HA-S-TIBIA", instanceId: "HA-SI-R-HA-S-TIBIA", meshId: "HA-MESH-BP3D4-FJ3387",
+  });
+  assert.deepEqual(routeForBoneSelection(navigation, selection!), {
+    regionId: "leg", side: "right", selection, legacyRoute: false,
+  });
+  const route = parseAtlasRoute("?region=leg&kind=bone&id=HA-S-TIBIA&instance=HA-SI-R-HA-S-TIBIA&mesh=HA-MESH-BP3D4-FJ3387&side=right", categories, refs);
+  assert.deepEqual(route?.selection, selection);
+  assert.equal(serializeAtlasRoute("", route!), "region=leg&kind=bone&id=HA-S-TIBIA&instance=HA-SI-R-HA-S-TIBIA&mesh=HA-MESH-BP3D4-FJ3387&side=right");
+  assert.equal(parseAtlasRoute("?region=leg&kind=bone&id=HA-S-TIBIA-LATERAL-CONDYLE&instance=HA-SI-R-HA-S-TIBIA", categories, refs), null);
+  assert.equal(parseAtlasRoute("?region=leg&kind=bone&id=HA-S-TIBIA&instance=HA-SI-R-HA-S-TIBIA&mesh=HA-MESH-BP3D4-FJ3360&side=right", categories, refs), null);
+});
+
+test("all nine source-linked bone mappings can be typed while the four unconfirmed meshes stay unbound", () => {
+  for (const mapping of navigation.structureMeshMappings) {
+    assert.equal(mapping.reviewState, "needs_review");
+    for (const meshId of mapping.meshIds) {
+      const selection = boneSelectionForMesh(navigation, meshId);
+      assert.ok(selection, `${meshId} should resolve through its existing source mapping`);
+      assert.equal(selection.kind, "bone");
+      assert.equal(navigation.structureInstances.find((row) => row.id === selection.instanceId)?.side, "right");
+    }
+  }
+  for (const context of navigation.unmappedMeshContexts ?? []) assert.equal(boneSelectionForMesh(navigation, context.meshAssetId), null);
+  const directBoneRoute = resolveLearnerRoute("?kind=bone&id=HA-S-FEMUR", navigation, refs);
+  assert.equal(directBoneRoute.route.regionId, "leg");
+  assert.deepEqual(directBoneRoute.route.selection, {
+    kind: "bone", conceptId: "HA-S-FEMUR", instanceId: "HA-SI-R-HA-S-FEMUR", meshId: "HA-MESH-BP3D4-FJ3365",
+  });
+  assert.equal(directBoneRoute.canonicalize, true);
 });
 
 test("unconfirmed and absent scene bindings do not retain the previous typed selection", () => {

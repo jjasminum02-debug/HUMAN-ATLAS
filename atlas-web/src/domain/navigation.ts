@@ -85,7 +85,8 @@ export interface NavigationContract {
   categories: NavigationCategory[];
   memberships: RegionMembership[];
   structureInstances: Array<{ id: string; structureId: string; side: Laterality; variantId: string | null }>;
-  structureMeshMappings: Array<{ id: string; structureInstanceId: string; meshIds: string[]; reviewState: string }>;
+  structureMeshMappings: Array<{ id: string; structureInstanceId: string; meshIds: string[]; evidenceIds?: string[]; reviewState: string }>;
+  unmappedMeshContexts?: Array<{ meshAssetId: string }>;
   sceneManifests: SceneManifest[];
 }
 
@@ -158,11 +159,14 @@ export function validateSelection(value: unknown, refs: SelectionReferences): Se
     if (!structure || structure.kind !== "bone") return null;
     const instanceId = value.instanceId as string | undefined;
     const meshId = value.meshId as string | undefined;
+    if (meshId && !instanceId) return null;
     if (meshId && !refs.meshAssets.has(meshId)) return null;
     if (instanceId) {
       const instance = refs.structureInstances.get(instanceId);
       if (!instance || instance.structureId !== value.conceptId) return null;
       if (meshId && !sideMatches(refs.meshAssets.get(meshId), instance.side)) return null;
+      const mappings = [...refs.structureMeshMappings.values()].filter((mapping) => mapping.structureInstanceId === instanceId);
+      if (mappings.length === 0 || (meshId && !mappings.some((mapping) => mapping.meshIds.includes(meshId)))) return null;
     }
     return { kind: "bone", conceptId: value.conceptId, ...(instanceId ? { instanceId } : {}), ...(meshId ? { meshId } : {}) };
   }
@@ -273,15 +277,17 @@ export function parseAtlasRoute(search: string, validCategoryIds: ReadonlySet<st
   const kind = params.get("kind");
   const id = params.get("id");
   const partId = params.get("part");
+  const instanceId = params.get("instance");
+  const meshId = params.get("mesh");
   const legacyMuscle = params.get("muscle");
-  if (legacyMuscle && (kind || id || partId)) return null;
+  if (legacyMuscle && (kind || id || partId || instanceId || meshId)) return null;
   if (legacyMuscle) {
     const selection = validateSelection({ kind: "muscle", conceptId: legacyMuscle }, refs);
     return selection ? { regionId, side, selection, legacyRoute: true } : null;
   }
-  if (kind === null && id === null && partId === null) return { regionId, side, selection: null, legacyRoute: false };
+  if (kind === null && id === null && partId === null && instanceId === null && meshId === null) return { regionId, side, selection: null, legacyRoute: false };
   if (kind === null || id === null || (partId !== null && kind !== "muscle")) return null;
-  const selection = validateSelection({ kind, conceptId: id, ...(partId ? { partId } : {}) }, refs);
+  const selection = validateSelection({ kind, conceptId: id, ...(partId ? { partId } : {}), ...(instanceId ? { instanceId } : {}), ...(meshId ? { meshId } : {}) }, refs);
   if (!selection) return null;
   if (side && selection.instanceId) {
     const instanceSide = selection.kind === "muscle"
@@ -301,10 +307,16 @@ export function serializeAtlasRoute(search: string, state: AtlasRouteState): str
     params.set("id", state.selection.conceptId);
     if (state.selection.kind === "muscle" && state.selection.partId) params.set("part", state.selection.partId);
     else params.delete("part");
+    if (state.selection.kind === "bone" && state.selection.instanceId) params.set("instance", state.selection.instanceId);
+    else params.delete("instance");
+    if (state.selection.kind === "bone" && state.selection.meshId) params.set("mesh", state.selection.meshId);
+    else params.delete("mesh");
   } else {
     params.delete("kind");
     params.delete("id");
     params.delete("part");
+    params.delete("instance");
+    params.delete("mesh");
   }
   if (state.side) params.set("side", state.side); else params.delete("side");
   return params.toString();
