@@ -1,0 +1,78 @@
+{
+  "revision": "T15g-expansion-batches-v1",
+  "status": "plan_only_ids_not_frozen",
+  "denominatorFrozen": false,
+  "taskNumberPolicyReference": "design/2026-09-25-muscle-atlas/08-SERIAL-ROADMAP-AND-GIT.md#더-필요한-task를-추가하는-방법",
+  "gates": [
+    {
+      "taskId": "T32",
+      "role": "freeze authoritative whole-body inventory and per-region gaps after T31",
+      "maxConcepts": null,
+      "requiredOutputs": [
+        "frozen authority and edition",
+        "stable unique IDs",
+        "group/part/variant exclusions",
+        "per-concept region decisions",
+        "source/term/asset gaps",
+        "bounded task specs"
+      ],
+      "status": "planned_not_started"
+    },
+    {
+      "taskId": "T33",
+      "role": "first structure expansion batch, only after T32 freezes IDs",
+      "maxConcepts": 10,
+      "targetStableIds": [],
+      "targetStableIdsStatus": "pending_T32; do not fabricate IDs",
+      "acceptance": [
+        "all source fields have edition/locator or explicit missing reason",
+        "stable-ID and parent/type/reference validation",
+        "name/text/source/membership states separated",
+        "asset missingness separate from surface and human-review state"
+      ],
+      "status": "planned_not_started"
+    },
+    {
+      "taskId": "T41+",
+      "role": "additional independent data batches after T32",
+      "maxConcepts": 10,
+      "targetStableIds": [],
+      "targetStableIdsStatus": "assigned only after T32 and registry audit",
+      "numbering": "next unused integer in work/task-registry-r13.json; register exact scope/dependency/output/acceptance before execution",
+      "status": "not_issued"
+    }
+  ],
+  "sceneBatchRule": {
+    "maxScenesPerTask": 1,
+    "currentSceneCategoryIds": [
+      "leg"
+    ],
+    "currentSceneStatus": "leg has two partial scene manifests; other categories have no scene manifest",
+    "newSceneTaskRequires": [
+      "source license",
+      "asset hash",
+      "side",
+      "frame",
+      "units",
+      "pose limits",
+      "scene-scoped validator",
+      "actual browser validation"
+    ],
+    "taskIds": "not issued until T32 work sizing and registry audit",
+    "runtimeValidationDependency": {
+      "taskId": "T15f-FU01",
+      "status": "not_started_backlog",
+      "requirement": "Complete before T33 adds new regional canonical/runtime scene data: replace manifest.ts global canonical-count assumptions with scene-scoped validation.",
+      "T15gAction": "recorded_as_dependency_only; not implemented here"
+    }
+  },
+  "additionalTaskIdCandidateAfterRegistryAudit": "T41",
+  "ordering": [
+    "T15g inventory/plan",
+    "T16-T31 in registry order",
+    "T32 freeze",
+    "T33 first bounded batch",
+    "T41+ only if T32 creates additional tasks"
+  ],
+  "doNotStartAutomatically": true
+}

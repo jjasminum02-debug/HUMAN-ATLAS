@@ -1,0 +1,285 @@
+{
+  "revision": "T15g-source-region-routing-candidates-v1",
+  "status": "candidate_policy_only_not_runtime_memberships",
+  "denominatorFrozen": false,
+  "sourceTaxonomyPath": "atlas-data/manifests/scope.json",
+  "productTaxonomyPath": "atlas-data/navigation/atlas-navigation.json",
+  "policyReference": "design/2026-09-25-muscle-atlas/06-REGION12-MUSCLE-BONE-REVISION.md#2",
+  "rules": [
+    "Preserve all source region IDs and stable concept IDs.",
+    "A candidate route is not an approved per-concept membership and never creates a second concept ID.",
+    "For a concept genuinely spanning product regions, create evidence-backed memberships using the same stable ID in each relevant category.",
+    "Resolve lower_extremity records individually; do not copy the source region to thigh, leg, and foot.",
+    "Resolve pharynx/larynx and other boundaries individually; unresolved concepts stay in an internal unassigned queue.",
+    "Region scene context, including nearby bones, does not establish muscle or bone membership."
+  ],
+  "sourceRegions": [
+    {
+      "sourceRegionId": "head",
+      "sourceLabel": "Head and scalp",
+      "capturedRows": 1,
+      "candidateProductCategoryIds": [
+        "head"
+      ],
+      "routingRule": "merge_head_face_mastication_eye_tongue",
+      "status": "per_concept_membership_review_required",
+      "membershipRowsCreated": 0,
+      "notes": "Candidate taxonomy routing only; this generated plan does not add runtime membership rows."
+    },
+    {
+      "sourceRegionId": "face",
+      "sourceLabel": "Face and facial expression",
+      "capturedRows": 0,
+      "candidateProductCategoryIds": [
+        "head"
+      ],
+      "routingRule": "merge_head_face_mastication_eye_tongue",
+      "status": "per_concept_membership_review_required",
+      "membershipRowsCreated": 0,
+      "notes": "Candidate taxonomy routing only; this generated plan does not add runtime membership rows."
+    },
+    {
+      "sourceRegionId": "mastication",
+      "sourceLabel": "Mastication",
+      "capturedRows": 11,
+      "candidateProductCategoryIds": [
+        "head"
+      ],
+      "routingRule": "merge_head_face_mastication_eye_tongue",
+      "status": "per_concept_membership_review_required",
+      "membershipRowsCreated": 0,
+      "notes": "Candidate taxonomy routing only; this generated plan does not add runtime membership rows."
+    },
+    {
+      "sourceRegionId": "eye",
+      "sourceLabel": "Extraocular and other skeletal muscles associated with the eye",
+      "capturedRows": 6,
+      "candidateProductCategoryIds": [
+        "head"
+      ],
+      "routingRule": "merge_head_face_mastication_eye_tongue",
+      "status": "per_concept_membership_review_required",
+      "membershipRowsCreated": 0,
+      "notes": "Candidate taxonomy routing only; this generated plan does not add runtime membership rows."
+    },
+    {
+      "sourceRegionId": "tongue",
+      "sourceLabel": "Tongue",
+      "capturedRows": 4,
+      "candidateProductCategoryIds": [
+        "head"
+      ],
+      "routingRule": "merge_head_face_mastication_eye_tongue",
+      "status": "per_concept_membership_review_required",
+      "membershipRowsCreated": 0,
+      "notes": "Candidate taxonomy routing only; this generated plan does not add runtime membership rows."
+    },
+    {
+      "sourceRegionId": "pharynx",
+      "sourceLabel": "Pharynx",
+      "capturedRows": 0,
+      "candidateProductCategoryIds": [],
+      "routingRule": "manual_per_concept_boundary_decision",
+      "status": "per_concept_membership_review_required",
+      "membershipRowsCreated": 0,
+      "notes": "Candidate taxonomy routing only; this generated plan does not add runtime membership rows."
+    },
+    {
+      "sourceRegionId": "larynx",
+      "sourceLabel": "Larynx",
+      "capturedRows": 0,
+      "candidateProductCategoryIds": [],
+      "routingRule": "manual_per_concept_boundary_decision",
+      "status": "per_concept_membership_review_required",
+      "membershipRowsCreated": 0,
+      "notes": "Candidate taxonomy routing only; this generated plan does not add runtime membership rows."
+    },
+    {
+      "sourceRegionId": "neck",
+      "sourceLabel": "Neck",
+      "capturedRows": 0,
+      "candidateProductCategoryIds": [
+        "neck"
+      ],
+      "routingRule": "candidate_same_named_region_not_membership",
+      "status": "per_concept_membership_review_required",
+      "membershipRowsCreated": 0,
+      "notes": "Candidate taxonomy routing only; this generated plan does not add runtime membership rows."
+    },
+    {
+      "sourceRegionId": "back",
+      "sourceLabel": "Back and vertebral column",
+      "capturedRows": 9,
+      "candidateProductCategoryIds": [
+        "back"
+      ],
+      "routingRule": "candidate_same_named_region_not_membership",
+      "status": "per_concept_membership_review_required",
+      "membershipRowsCreated": 0,
+      "notes": "Candidate taxonomy routing only; this generated plan does not add runtime membership rows."
+    },
+    {
+      "sourceRegionId": "thorax_respiratory",
+      "sourceLabel": "Thorax and respiratory muscles",
+      "capturedRows": 7,
+      "candidateProductCategoryIds": [
+        "thorax"
+      ],
+      "routingRule": "candidate_same_named_region_not_membership",
+      "status": "per_concept_membership_review_required",
+      "membershipRowsCreated": 0,
+      "notes": "Candidate taxonomy routing only; this generated plan does not add runtime membership rows."
+    },
+    {
+      "sourceRegionId": "abdominal_wall",
+      "sourceLabel": "Abdominal wall",
+      "capturedRows": 2,
+      "candidateProductCategoryIds": [
+        "abdomen-lumbar"
+      ],
+      "routingRule": "candidate_same_named_region_not_membership",
+      "status": "per_concept_membership_review_required",
+      "membershipRowsCreated": 0,
+      "notes": "Candidate taxonomy routing only; this generated plan does not add runtime membership rows."
+    },
+    {
+      "sourceRegionId": "pelvic_floor_perineum",
+      "sourceLabel": "Pelvic floor and perineum",
+      "capturedRows": 0,
+      "candidateProductCategoryIds": [
+        "pelvis-perineum"
+      ],
+      "routingRule": "candidate_same_named_region_not_membership",
+      "status": "per_concept_membership_review_required",
+      "membershipRowsCreated": 0,
+      "notes": "Candidate taxonomy routing only; this generated plan does not add runtime membership rows."
+    },
+    {
+      "sourceRegionId": "shoulder",
+      "sourceLabel": "Shoulder and pectoral girdle",
+      "capturedRows": 10,
+      "candidateProductCategoryIds": [
+        "shoulder-scapular"
+      ],
+      "routingRule": "candidate_same_named_region_not_membership",
+      "status": "per_concept_membership_review_required",
+      "membershipRowsCreated": 0,
+      "notes": "Candidate taxonomy routing only; this generated plan does not add runtime membership rows."
+    },
+    {
+      "sourceRegionId": "upper_extremity",
+      "sourceLabel": "Upper extremity",
+      "capturedRows": 10,
+      "candidateProductCategoryIds": [
+        "upper-limb"
+      ],
+      "routingRule": "candidate_same_named_region_not_membership",
+      "status": "per_concept_membership_review_required",
+      "membershipRowsCreated": 0,
+      "notes": "Candidate taxonomy routing only; this generated plan does not add runtime membership rows."
+    },
+    {
+      "sourceRegionId": "hand",
+      "sourceLabel": "Hand",
+      "capturedRows": 0,
+      "candidateProductCategoryIds": [
+        "upper-limb"
+      ],
+      "routingRule": "candidate_same_named_region_not_membership",
+      "status": "per_concept_membership_review_required",
+      "membershipRowsCreated": 0,
+      "notes": "Candidate taxonomy routing only; this generated plan does not add runtime membership rows."
+    },
+    {
+      "sourceRegionId": "gluteal",
+      "sourceLabel": "Gluteal region",
+      "capturedRows": 10,
+      "candidateProductCategoryIds": [
+        "gluteal-hip"
+      ],
+      "routingRule": "candidate_same_named_region_not_membership",
+      "status": "per_concept_membership_review_required",
+      "membershipRowsCreated": 0,
+      "notes": "Candidate taxonomy routing only; this generated plan does not add runtime membership rows."
+    },
+    {
+      "sourceRegionId": "lower_extremity",
+      "sourceLabel": "Lower extremity",
+      "capturedRows": 12,
+      "candidateProductCategoryIds": [],
+      "routingRule": "manual_per_concept_split_thigh_leg_foot",
+      "status": "per_concept_membership_review_required",
+      "membershipRowsCreated": 0,
+      "notes": "Candidate taxonomy routing only; this generated plan does not add runtime membership rows."
+    },
+    {
+      "sourceRegionId": "foot",
+      "sourceLabel": "Foot",
+      "capturedRows": 3,
+      "candidateProductCategoryIds": [
+        "foot"
+      ],
+      "routingRule": "candidate_same_named_region_not_membership",
+      "status": "per_concept_membership_review_required",
+      "membershipRowsCreated": 0,
+      "notes": "Candidate taxonomy routing only; this generated plan does not add runtime membership rows."
+    }
+  ],
+  "currentConfirmedProductMemberships": [
+    {
+      "id": "HA-RM-LEG-HA-M-000001",
+      "categoryId": "leg",
+      "entityKind": "muscle",
+      "entityId": "HA-M-000001",
+      "reason": "Existing right lower-leg pilot is the product entry for the leg category; source regionIds remain unchanged.",
+      "productDecisionRef": "T15b-D01",
+      "status": "decision_only"
+    },
+    {
+      "id": "HA-RM-LEG-HA-M-000002",
+      "categoryId": "leg",
+      "entityKind": "muscle",
+      "entityId": "HA-M-000002",
+      "reason": "Existing right lower-leg pilot is the product entry for the leg category; source regionIds remain unchanged.",
+      "productDecisionRef": "T15b-D01",
+      "status": "decision_only"
+    },
+    {
+      "id": "HA-RM-LEG-HA-M-000003",
+      "categoryId": "leg",
+      "entityKind": "muscle",
+      "entityId": "HA-M-000003",
+      "reason": "Existing right lower-leg pilot is the product entry for the leg category; source regionIds remain unchanged.",
+      "productDecisionRef": "T15b-D01",
+      "status": "decision_only"
+    },
+    {
+      "id": "HA-RM-LEG-HA-M-000004",
+      "categoryId": "leg",
+      "entityKind": "muscle",
+      "entityId": "HA-M-000004",
+      "reason": "Existing right lower-leg pilot is the product entry for the leg category; source regionIds remain unchanged.",
+      "productDecisionRef": "T15b-D01",
+      "status": "decision_only"
+    },
+    {
+      "id": "HA-RM-LEG-HA-M-000005",
+      "categoryId": "leg",
+      "entityKind": "muscle",
+      "entityId": "HA-M-000005",
+      "reason": "Existing right lower-leg pilot is the product entry for the leg category; source regionIds remain unchanged.",
+      "productDecisionRef": "T15b-D01",
+      "status": "decision_only"
+    },
+    {
+      "id": "HA-RM-LEG-HA-M-000006",
+      "categoryId": "leg",
+      "entityKind": "muscle",
+      "entityId": "HA-M-000006",
+      "reason": "Existing right lower-leg pilot is the product entry for the leg category; source regionIds remain unchanged.",
+      "productDecisionRef": "T15b-D01",
+      "status": "decision_only"
+    }
+  ],
+  "unassignedPolicy": "Do not invent a 13th product category or fill uncertain membership by anatomical guess; keep candidates internal until evidence and product decision are recorded."
+}

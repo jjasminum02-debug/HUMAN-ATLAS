@@ -1,0 +1,80 @@
+{
+  "task": "T15g",
+  "date": "2026-09-26",
+  "status": "passed_with_gaps",
+  "validation": [
+    {
+      "command": "python3 atlas-data/catalog/test_t15g_inventory.py",
+      "result": "passed",
+      "passed": 7,
+      "failed": 0,
+      "scope": "85 unique partial muscle IDs, type separation, unfrozen denominator, missing names, candidate-only memberships, bone/mapping separation, local OBJ availability, nine T13 source OBJ hashes, bounded batches"
+    },
+    {
+      "command": "python3 atlas-data/catalog/build_t15g_inventory.py --check",
+      "result": "passed",
+      "scope": "generated planning artifacts match source hashes and built-in inventory, source crosswalk, batch invariants"
+    },
+    {
+      "command": "python3 atlas-data/schemas/validate.py --check-schemas",
+      "result": "passed"
+    },
+    {
+      "command": "python3 atlas-data/schemas/validate.py --dataset atlas-data/catalog/canonical-catalog.json",
+      "result": "passed",
+      "issues": 0
+    },
+    {
+      "command": "python3 atlas-data/navigation/test_navigation.py",
+      "result": "passed",
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "command": "python3 atlas-data/navigation/validate_navigation.py --report work/evidence/T15g/navigation-validation.json",
+      "result": "passed",
+      "counts": {
+        "categories": 12,
+        "memberships": 6,
+        "structureInstances": 9,
+        "structureMeshMappings": 9,
+        "unmappedMeshContexts": 4,
+        "sceneManifests": 2
+      },
+      "issues": 0
+    },
+    {
+      "command": "PATH=/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:$PATH pnpm --dir atlas-web typecheck",
+      "result": "passed"
+    },
+    {
+      "command": "PATH=/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:$PATH pnpm --dir atlas-web build",
+      "result": "passed",
+      "warnings": ["existing App JavaScript chunk exceeds 500 kB after minification"],
+      "buildSubchecks": ["learning content validator passed: 81 name entries, 14 summaries", "scene decoder QA passed: 11 and 9 meshes"]
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    }
+  ],
+  "browserValidation": {
+    "result": "not_applicable",
+    "reason": "T15g changed only internal planning inventory, batch/crosswalk artifacts and their generator; no learner UI or runtime scene changed."
+  },
+  "preservation": {
+    "result": "passed",
+    "preexistingUntrackedSnapshots": "47/47 unchanged",
+    "protectedAtlasDataAndAssets": "98/98 unchanged",
+    "protectedT13SpatialDrafts": "48/48 unchanged",
+    "OpenSim_Models": "HEAD d9b05d470b1a481c222372c85b75772faf8f7792 unchanged and clean",
+    "reviewLocalStorage": "not read or changed"
+  },
+  "anatomyAndReviewStates": {
+    "TA2FullPdfVisualAudit": "not_performed; source crosswalk remains partial index-based evidence",
+    "humanAnatomyApproval": "not_created",
+    "attachmentSurfaceAnnotations": 0,
+    "motionRecords": 0,
+    "T14b": "needs_human_review; unchanged"
+  }
+}

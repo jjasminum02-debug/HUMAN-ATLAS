@@ -2,14 +2,14 @@
 
 - LAST_UPDATED: 2026-09-26
 - PLAN_REVISION: R13-2026-09-26 — R12 유지 + AI 원문 대조/작용 설명/교육용 움직임/독립 T16–40
-- CURRENT_TASK: T15f — complete_with_gaps; 종아리 근육·뼈 장면 통합, 문장별 현대 근거 대조, cache/browser 회귀 검증
-- NEXT_TASK: T15g — Luna Max (not_started); 전신 inventory/지역 membership·자산 배치 계획, FU01 scene 검증 의존성 확인
-- LAST_REPORT: work/reports/T15f.md
+- CURRENT_TASK: T15g — complete_with_gaps; 부분 전신 inventory·12부위 routing 후보·bounded batch 계획만 작성
+- NEXT_TASK: T16 — Sol High (planned_not_started); AI 근거 상태와 학습 표시 계약
+- LAST_REPORT: work/reports/T15g.md
 - CATALOG: partial85 (individual48/group16/part21); 전신 분모 미동결
-- LEARNING_OVERLAY: names81; B01 field evidence57 + B02 50 + B03 50 + B04 50 + B05 51 + B06 60 + B07 67 + B08 56 + B09 48; canonical coverage 85/85 checked_with_gaps (partial catalog only); humanReviewed=false
+- LEARNING_OVERLAY: entries81; current canonical overlap 79/85, six group IDs lack overlay entries, two lookup-only IDs are extra; T11 B01-B09 field work covered the current partial catalog with gaps; humanReviewed=false
 - GEOMETRY: 오른쪽 종아리 6근육, 근육메시 7+뼈 13. T15b navigation overlay에 기존 source crosswalk의 우측 뼈 instance/mapping 9개를 needs_review로 연결, 미확정 mesh 4개는 unbound context. canonical spatialAnnotation 0; T13c-B01/B02/B03 context_only geometry:null draft 3건 보존; T05 표면 후보 0/41, text_only 28/41, matching target mesh missing 13/41, human_review_pending 41/41
 - FUNCTION_AND_ASSESSMENT: 미구현, 학습 탭은 준비 중
-- TECHNICAL_GATE: T15f scene lifecycle/cache 9/9 (동시 5개 완료/capacity=2 회귀 포함), 현대 attachment crosscheck 2/2·14개 요약 연결, navigation Node 14/14 + Python 12/12, search 40/40, annotation 12/12, spatial draft 8/8, validators/migration, typecheck/build 통과; 실제 브라우저 선택→해제→다른 근육→뒤로→초기화, 6 muscle/9 bone 카드, 1440/1024/390 확인. Build >500 kB chunk warning 유지. canonical/source/assets와 T13 drafts 보호, 4 unbound, 9 needs_review/not_reviewed, human approval 0.
+- TECHNICAL_GATE: T15f 통합검증 유지; T15g inventory validator와 회귀 7/7, schema/dataset validation, typecheck/build 통과. UI 변경 없음으로 브라우저 검증은 미적용. T15f surface 0/41, 4 unbound, bone mapping 9 needs_review/not_reviewed, T14b human review pending. 기존 production build >500 kB 경고 유지.
 - ANATOMY_GATE: needs_human_review; 전신 구조 완성 아님
 - DEV_URL: none (temporary T15f local production preview stopped after verification)
 
@@ -52,6 +52,7 @@
 | T15e | complete_with_gaps | `work/tasks/T15e.md`; 2 leg scene manifests, revision cache/abort/GPU cleanup, decoder build QA; `work/evidence/T15e/`; `work/reports/T15e.md` | 11 other regions lack scenes; numeric GPU memory and raw browser draft hash unavailable; T14b review and attachment surfaces remain open |
 | T15f | complete_with_gaps | work/tasks/T15f.md; source-linked learner crosschecks for 14 summary rows; cache completion-capacity regression; work/evidence/T15f/; work/reports/T15f.md | 4 meshes unbound; surfaces 0/41; nine bone mappings needs_review/not_reviewed; T14b human review pending; global manifest counts tracked as separate FU01 |
 | T15f-FU01 | not_started (backlog) | work/tasks/T15f-FU01.md; scene-scoped manifest validation migration plan | global canonical count checks must be separated before new regional runtime data |
+| T15g | complete_with_gaps | work/tasks/T15g.md; partial whole-body inventory, 18-region candidate crosswalk, bounded expansion plan; work/evidence/T15g/; work/reports/T15g.md | authoritative whole-body denominator, missing concept IDs, per-concept product memberships, 11 regional scenes/assets, terminology and human review remain open; T15f-FU01 remains prerequisite before T33 runtime expansion |
 
 ## 실제 현재 상태와 원본 보존
 
@@ -201,7 +202,7 @@ OpenSim_Models, canonical ID/원분류, source manifest·GLB/OBJ, T13c spatial d
 
 다음 task는 **T15f / Luna Max (not_started)**. 붙여 넣을 프롬프트는 `work/reports/T15e.md`의 끝부분에 있다. 자동 진행하지 않는다.
 
-## T15f 결과 및 현재 인계 — 2026-09-26
+## T15f 결과 및 당시 T15g 인계 — 2026-09-26 (이력)
 
 T15f 결과는 work/reports/T15f.md, evidence는 work/evidence/T15f/에 있다. scene cache 동시 완료 회귀, 6 muscle/9 bone learner 카드, 14개 기시·정지 summary 근거 비교 행을 검증했다. 실제 브라우저에서 요청된 isolate→clear→다른 근육→back→reset 순서의 URL/card/selection/isolation 상태가 일치했다. OpenSim_Models와 보호 대상 98개 데이터·자산, 48개 T13 공간자료/evidence, 시작부터 미커밋이던 47개 스냅샷은 시작 hash와 동일하다. OpenSim HEAD와 clean 상태도 유지했다. /review 및 localStorage 초안은 읽거나 쓰지 않았다.
 
@@ -211,7 +212,7 @@ T15f는 complete_with_gaps다. 표면 후보 0/41이며 4개 mesh는 unbound, �
 
 work/tasks/T15f-FU01.md는 not_started인 별도 backlog다. atlas-web/src/viewer/manifest.ts canonical 전체 개수 20/6/7 고정은 새 지역 canonical data가 들어올 때 종아리 검증을 깨뜨릴 수 있다. T07/T12 source-asset 고정 검증은 보존하면서 전체 catalog count와 scene별 검증을 분리하고, test-only 다른 지역 data 추가 후 종아리 invariant가 통과하는 회귀가 필요하다. FU01을 T15g 또는 T16으로 자동 합치지 않는다.
 
-다음 serial task는 **T15g / Luna Max (not_started)**. 이번 인계에서 자동 실행하지 않는다. 다음 prompt:
+T15f 종료 당시 다음 serial task는 **T15g / Luna Max (not_started)**였다. 아래 prompt는 완료 전 이력이다.
 
     HUMAN ATLAS에서 AGENTS.md, work/STATUS.md, work/tasks/T15g.md,
     work/reports/T15f.md와 work/evidence/T15f/, work/tasks/T15f-FU01.md,
@@ -231,3 +232,35 @@ work/tasks/T15f-FU01.md는 not_started인 별도 backlog다. atlas-web/src/viewe
     task 명세·결과·검증·미완·STATUS와 다음 실행 프롬프트를 남겨라.
     확인된 T15g task 소유 변경만 선별 로컬 커밋하고 포함·제외·잔여 변경을 보고해라.
     push·배포·다음 task 자동 실행·경혈/Pro mode·환자 진단·치료·침 시뮬레이션은 하지 마라.
+
+## T15g 결과 및 현재 인계 — 2026-09-26
+
+T15g는 complete_with_gaps다. 허용된 inventory·source-region 후보 crosswalk·batch 계획 범위를 수행했다. machine-readable 출력은 `atlas-data/catalog/whole-body-inventory-t15g.json`, `work/review-queue/region-crosswalk-t15g.json`, `work/review-queue/expansion-batches-t15g.json`; 생성/검증 도구는 `atlas-data/catalog/build_t15g_inventory.py`다. 전체 분모와 누락 concept ID는 미동결/미확정이며 coverage percentage는 기록하지 않았다.
+
+확인값: partial catalog 85 IDs(개별근 48/근군 16/부분 21), source rows 85; name overlay canonical overlap 79/85, missing group overlay 6, lookup-only 2; canonical bone IDs 10, scene-bound 9; 12 categories 중 현재 membership 6개(모두 종아리 근육), partial scene 2개(모두 종아리), 4 unbound context; local raw OBJ 20 및 scene GLB 2. source crosswalk는 partial이며 TA2 PDF 원문 visual audit는 미완이다. 실제 membership·canonical ID·asset·UI·attachment, 사람 검토와 motion을 추가하지 않았다.
+
+T33 전 dependency: `T15f-FU01`의 `manifest.ts` 전체 개수 가정을 scene-scoped validation으로 전환해야 한다. 이는 T15g에서 구현하지 않은 별도 backlog이며 현재 T16을 막지는 않고 새 지역 runtime data 전에 확인한다. T14b 사람 검토는 계속 대기다.
+
+검증: T15g planning regression 7/7, inventory generator/hash check, schema check, canonical dataset validator, typecheck, production build pass. Build는 기존 500 kB 초과 App chunk warning을 유지한다. UI 변경이 없어 실제 브라우저 검증은 해당 없음. 상세 command, hash preservation와 커밋 범위는 `work/reports/T15g.md` 및 `work/evidence/T15g/`에 기록한다.
+
+다음 serial task는 **T16 / Sol High / planned_not_started**다. 다음 prompt:
+
+```text
+HUMAN ATLAS에서 AGENTS.md, work/STATUS.md, work/task-registry-r13.json,
+design/2026-09-25-muscle-atlas/00-START-HERE.md 및 같은 폴더의 06/07/08/09,
+work/tasks/T16.md, work/reports/T15g.md, work/evidence/T15g/,
+atlas-data/catalog/whole-body-inventory-t15g.json,
+work/review-queue/region-crosswalk-t15g.json와 실제 기존 evidence/review 자료를 읽고
+오직 T16만 수행해라. 담당은 Sol High다.
+필드별 AI evidence overlay와 학습 표시 정책을 schema/types/validator/adapter에 반영하되
+기존 reviewed/human review 의미, canonical IDs, 사용자 초안과 source/hash를 보존해라.
+cross_checked가 사람 승인을 만들지 않게 하고 single_source/conflicted/unavailable,
+geometry 및 motion 상태를 서로 독립적으로 유지해라. 같은 원문을 재인용한 두 사이트 fixture,
+충돌 필드, legacy migration과 ref/hash 검증을 추가해라.
+T15g의 전신 denominator는 여전히 미동결이다. whole-body coverage를 완성으로 표시하거나
+T32/T33/FU01을 당겨 실행하지 마라. OpenSim_Models와 기존 사용자 변경을 보존하고,
+학습 화면에 내부 상태 코드나 제작 JSON을 노출하지 마라.
+작업 기준선, 관련 테스트·typecheck·build 및 필요한 실제 브라우저 검증, 결과·미완·STATUS를
+기록해라. 검증한 T16 소유 변경만 선별 로컬 커밋하고 hash/포함·제외/잔여 변경을 보고해라.
+T17 이상·push·배포·경혈/Pro mode·환자 진단·치료·침 시뮬레이션은 시작하지 마라.
+```
