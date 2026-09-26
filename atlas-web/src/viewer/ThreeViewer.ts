@@ -5,8 +5,8 @@ import {
 } from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import type { AnnotationSurfaceHit, ProjectedPoint, ViewerMesh } from "./glb";
+import { isFocusDimmed, pickThroughTransparent, visibilityAfterRestore, type MeshVisibility } from "./visibilityPolicy";
 
-type Visibility = "visible" | "transparent" | "hidden";
 type Preset = "front" | "back" | "lateral";
 type DisplayMesh = Mesh<BufferGeometry, MeshPhongMaterial>;
 
@@ -22,8 +22,12 @@ export class ThreeViewer {
   private readonly observer: ResizeObserver;
   private readonly meshes = new Map<string, ViewerMesh>();
   private readonly display = new Map<string, DisplayMesh>();
-  private readonly visibility = new Map<string, Visibility>();
+  private readonly visibility = new Map<string, MeshVisibility>();
+  private readonly baseColors = new Map<string, Color>();
   private selectedIds = new Set<string>();
+  private focusIds = new Set<string>();
+  private focusFadeEnabled = false;
+  private pickThroughTransparent = false;
   private isolatedIds: Set<string> | null = null;
   private onAnnotationPick: ((hit: AnnotationSurfaceHit) => void) | null = null;
   private onFrame: (() => void) | null = null;
@@ -85,6 +89,9 @@ export class ThreeViewer {
     this.meshes.clear();
     this.display.clear();
     this.visibility.clear();
+    this.baseColors.clear();
+    this.focusIds.clear();
+    this.focusFadeEnabled = false;
     meshes.forEach((mesh, index) => {
       const geometry = new BufferGeometry();
       geometry.setAttribute("position", new BufferAttribute(mesh.positions, 3));
@@ -100,6 +107,7 @@ export class ThreeViewer {
       this.meshes.set(mesh.meshAssetId, mesh);
       this.display.set(mesh.meshAssetId, object);
       this.visibility.set(mesh.meshAssetId, "visible");
+      this.baseColors.set(mesh.meshAssetId, material.color.clone());
     });
     this.fitAll();
   }
@@ -126,20 +134,26 @@ export class ThreeViewer {
     if (focus && ids.length > 0) this.focus(ids, 1.25);
   }
 
-  setVisibility(id: string, value: Visibility): void {
+  setVisibility(id: string, value: MeshVisibility): void {
     if (!this.meshes.has(id)) return;
     this.visibility.set(id, value);
     this.updateDisplay();
   }
 
-  getVisibility(id: string): Visibility { return this.visibility.get(id) ?? "visible"; }
+  getVisibility(id: string): MeshVisibility { return this.visibility.get(id) ?? "visible"; }
+  setPickThroughTransparent(enabled: boolean): void { this.pickThroughTransparent = enabled; }
+  setSelectionFocus(ids: readonly string[], enabled: boolean): void {
+    this.focusIds = new Set(ids);
+    this.focusFadeEnabled = enabled;
+    this.updateDisplay();
+  }
   setIsolation(ids: readonly string[] | null): void {
     this.isolatedIds = ids && ids.length > 0 ? new Set(ids) : null;
     this.updateDisplay();
   }
   isIsolated(id: string): boolean { return this.isolatedIds !== null && !this.isolatedIds.has(id); }
-  restoreAll(): void {
-    for (const id of this.meshes.keys()) this.visibility.set(id, "visible");
+  restoreAll(preserveBaseVisibility = false): void {
+    for (const id of this.meshes.keys()) this.visibility.set(id, visibilityAfterRestore(this.getVisibility(id), preserveBaseVisibility));
     this.isolatedIds = null;
     this.updateDisplay();
     this.fitAll();
@@ -190,11 +204,13 @@ export class ThreeViewer {
   private updateDisplay(): void {
     for (const [id, object] of this.display) {
       const state = this.getVisibility(id);
+      const focusDimmed = isFocusDimmed(id, this.meshes.get(id)?.targetEntityType ?? "", this.focusIds, this.focusFadeEnabled);
       object.visible = state !== "hidden" && !this.isIsolated(id);
-      object.material.transparent = state === "transparent";
-      object.material.opacity = state === "transparent" ? 0.2 : 1;
-      object.material.depthWrite = state !== "transparent";
-      object.material.color.copy(this.selectedIds.has(id) ? SELECTED_COLOR : new Color(this.meshes.get(id)?.targetEntityType === "structure" ? 0xe0d9bd : PALETTE[[...this.meshes.keys()].indexOf(id) % PALETTE.length]));
+      const transparent = state === "transparent" || focusDimmed;
+      object.material.transparent = transparent;
+      object.material.opacity = state === "transparent" ? 0.2 : focusDimmed ? 0.28 : 1;
+      object.material.depthWrite = !transparent;
+      object.material.color.copy(this.selectedIds.has(id) ? SELECTED_COLOR : this.baseColors.get(id) ?? new Color(0x888888));
       object.material.needsUpdate = true;
     }
     this.render();
@@ -224,8 +240,22 @@ export class ThreeViewer {
     if (rect.width <= 0 || rect.height <= 0) return;
     const ndc = new Vector2((event.clientX - rect.left) / rect.width * 2 - 1, 1 - (event.clientY - rect.top) / rect.height * 2);
     this.raycaster.setFromCamera(ndc, this.camera);
-    const eligible = [...this.display.values()].filter((object) => object.visible && this.getVisibility(object.name) === "visible");
-    const hit = this.raycaster.intersectObjects(eligible, false)[0];
+    const eligible = [...this.display.values()].filter((object) => object.visible);
+    const intersections = this.raycaster.intersectObjects(
+      this.pickThroughTransparent ? eligible : eligible.filter((object) => this.getVisibility(object.name) === "visible"),
+      false,
+    );
+    let hit: (typeof intersections)[number] | undefined = intersections[0];
+    if (this.pickThroughTransparent) {
+      const picked = pickThroughTransparent(intersections.map((intersection) => ({ intersection, meshAssetId: intersection.object.name })), (id) => {
+        if (this.isIsolated(id)) return "hidden";
+        const baseVisibility = this.getVisibility(id);
+        if (baseVisibility === "hidden") return "hidden";
+        if (baseVisibility === "transparent") return "transparent";
+        return isFocusDimmed(id, this.meshes.get(id)?.targetEntityType ?? "", this.focusIds, this.focusFadeEnabled) ? "transparent" : "visible";
+      });
+      hit = picked?.intersection;
+    }
     if (!hit || !(hit.object instanceof Mesh)) return;
     const mesh = this.meshes.get(hit.object.name);
     if (!mesh) return;

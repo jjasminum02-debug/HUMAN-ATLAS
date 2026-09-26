@@ -1,0 +1,18 @@
+$ node --experimental-strip-types --test src/viewer/sceneCache.test.ts src/viewer/scenePlan.test.ts
+✔ same revision shares one request, a changed revision fetches again (0.574708ms)
+✔ abandoned response cannot enter cache or replace the current scene (0.487ms)
+✔ one caller may cancel a shared request without cancelling the other (0.216959ms)
+✔ failed request is removed so reselection can retry (0.17575ms)
+✔ resolved CPU cache evicts the oldest revision at capacity (0.221916ms)
+✔ capacity is enforced after five different in-flight requests resolve together (0.630083ms)
+✔ both source model scenes share only the verified leg frame and pose (0.40675ms)
+✔ frame, pose, region, side, missing asset, and duplicate model fail closed (0.208458ms)
+✔ asset revision changes the cache key without changing anatomy IDs (0.075167ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 65.937792

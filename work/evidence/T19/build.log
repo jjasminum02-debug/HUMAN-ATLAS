@@ -1,0 +1,30 @@
+$ python3 scripts/validate-learning-content.py && python3 ../atlas-data/schemas/validate_ai_evidence.py --check && node scripts/check-scene-decoders.mjs && tsc -b && vite build
+{"pass": true, "nameEntries": 81, "summaries": 14, "scope": "references and stale hashes, not anatomy approval"}
+{
+  "task": "T16",
+  "mode": "check",
+  "pass": true,
+  "legacyRowsCheckedInTestOnlyMigrationPreview": 14,
+  "productionFieldItems": 16,
+  "migrationPreviewIssues": [],
+  "issues": []
+}
+Scene decoder QA passed: 11 meshes/712192 bytes, 9 meshes/205392 bytes
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 51 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                               0.47 kB │ gzip:   0.32 kB
+dist/assets/right-bones-BYcHKn-q.glb        205.39 kB
+dist/assets/right-lower-leg-C7dvV-l1.glb    712.19 kB
+dist/assets/App-B9o1wFz1.css                 19.92 kB │ gzip:   4.76 kB
+dist/assets/index-DWBplHRl.js               221.68 kB │ gzip:  69.57 kB
+dist/assets/App-B1ZQJQWd.js               1,419.20 kB │ gzip: 251.18 kB
+
+✓ built in 130ms
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.

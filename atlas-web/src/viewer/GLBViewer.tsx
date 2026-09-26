@@ -66,6 +66,7 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
   const [visibility, setVisibility] = useState<Record<string, Visibility>>({});
   const [isolating, setIsolating] = useState(false);
   const [contextTransparent, setContextTransparent] = useState(false);
+  const [focusFadeEnabled, setFocusFadeEnabled] = useState(true);
   const [bonesVisible, setBonesVisible] = useState(true);
   const [cameraPreset, setCameraPreset] = useState<CameraPreset>("front");
   const [learnerOverlay, setLearnerOverlay] = useState<{ count: number; syntheticTest: boolean; error: boolean }>({ count: 0, syntheticTest: false, error: false });
@@ -93,6 +94,12 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
   const activeContext = activeAttachmentId ? attachmentContextById.get(activeAttachmentId) : undefined;
   const reviewOwners = new Set([selectedEntityId, ...concepts.filter((concept) => concept.parentId === selectedEntityId).map((concept) => concept.id)]);
   const reviewContexts = attachmentContexts.filter((row) => reviewOwners.has(row.ownerConceptId));
+  const isolationIds = Array.from(new Set([
+    ...reviewFocusIds,
+    ...(selectedSelection?.kind === "muscle"
+      ? reviewContexts.flatMap((row) => row.contextMeshAssetId && bundle?.meshes.some((mesh) => mesh.meshAssetId === row.contextMeshAssetId) ? [row.contextMeshAssetId] : [])
+      : []),
+  ]));
   const spatialContext = useMemo(() => bundle ? buildSpatialDraftContext(bundle.annotationAssets) : null, [bundle]);
   const revision = sceneRevision(scenes);
 
@@ -121,6 +128,7 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
     try {
       renderer = new ThreeViewer(canvasRef.current, (mesh) => onMeshPickRef.current(mesh));
       renderer.setScene(bundle.meshes);
+      renderer.setPickThroughTransparent(studyMode);
       viewerRef.current = renderer;
       setViewer(renderer);
       setError(null);
@@ -139,7 +147,7 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
     };
     // Renderer construction is tied to the immutable loaded bundle.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bundle]);
+  }, [bundle, studyMode]);
 
   useEffect(() => {
     const renderer = viewerRef.current;
@@ -182,6 +190,17 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
       viewer.setVisibility(mesh.meshAssetId, state);
     }
   }, [studyMode, bundle, viewer, contextTransparent, bonesVisible, selectedMeshIds, activeContext]);
+
+  useEffect(() => {
+    if (!studyMode || !bundle || !viewer) return;
+    const focusIds = selectedSelection?.kind === "muscle" ? selectedMeshIds : [];
+    viewer.setSelectionFocus(focusIds, focusFadeEnabled);
+  }, [studyMode, bundle, viewer, selectedMeshIds, selectedSelection, focusFadeEnabled]);
+
+  useEffect(() => {
+    if (!studyMode || !viewer || !isolating) return;
+    viewer.setIsolation(isolationIds);
+  }, [studyMode, viewer, isolating, isolationIds.join("|")]);
 
   useEffect(() => {
     if (!studyMode || !bundle || !viewer || !spatialContext || !overlayCanvasRef.current) return;
@@ -230,10 +249,6 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
   }, [bundle, concepts, selectedEntityId, spatialContext, studyMode, viewer]);
 
   function chooseMesh(mesh: ViewerMesh, updateCard: boolean, focus = true) {
-    if (isolating) {
-      viewerRef.current?.setIsolation(null);
-      setIsolating(false);
-    }
     setPickedMeshId(mesh.meshAssetId);
     viewerRef.current?.selectMeshes([mesh.meshAssetId], focus);
     if (!updateCard) return;
@@ -262,7 +277,7 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
   }
 
   function restoreAll() {
-    viewerRef.current?.restoreAll();
+    viewerRef.current?.restoreAll(studyMode);
     viewerRef.current?.setPreset("front");
     if (studyMode) {
       onClearAttachment?.();
@@ -271,10 +286,9 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
         viewerRef.current?.focus(selectedMeshIds, 1.4);
         setPickedMeshId(selectedMeshIds[0]);
       }
+    } else {
+      setVisibility({});
     }
-    setVisibility({});
-    setContextTransparent(false);
-    setBonesVisible(true);
     setIsolating(false);
     setCameraPreset("front");
   }
@@ -324,7 +338,8 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
         {(["front", "back", "lateral"] as CameraPreset[]).map(preset => <button key={preset} aria-pressed={cameraPreset === preset} onClick={() => chooseCamera(preset)}>{{front:"정면",back:"후면",lateral:"측면"}[preset]}</button>)}
       </div>
       <div className="study-view-tools" aria-label="모형 보기">
-        <button aria-pressed={isolating} onClick={toggleIsolation}>선택만 보기</button>
+        <button aria-pressed={focusFadeEnabled} onClick={() => setFocusFadeEnabled(value => !value)}>주변 근육 흐리게</button>
+        <button aria-pressed={isolating} onClick={toggleIsolation}>{isolating ? "격리 해제" : "이 근육만 보기"}</button>
         <button aria-pressed={contextTransparent} onClick={() => setContextTransparent(v => !v)}>주변 투명하게</button>
         <button aria-pressed={bonesVisible} onClick={() => setBonesVisible(v => !v)}>뼈</button>
         <button onClick={showAll}>전체 보기</button>
@@ -387,7 +402,7 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
 
           <div className="viewer-actions">
             <button type="button" className={isolating ? "is-active" : ""} aria-pressed={isolating} onClick={toggleIsolation} disabled={!selectedEntityId && !pickedMeshId}>
-              {isolating ? "격리 해제" : "선택만 보기"}
+              {isolating ? "격리 해제" : "이 근육만 보기"}
             </button>
             <button type="button" onClick={restoreAll}>모두 복원</button>
             <span className="viewer-help">드래그 회전 · 휠 확대/축소 · 숨김 및 투명 메시를 통한 선택은 차단합니다.</span>

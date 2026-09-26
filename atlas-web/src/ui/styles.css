@@ -722,3 +722,9 @@
 .attachment-crosscheck small{display:block;margin-top:3px;color:#77878b;font-size:10px;line-height:1.55}
 .learner-mesh-note{margin:0 0 8px;color:#7b888c;font-size:11px}
 @media(max-width:760px){.attachment-crosscheck{font-size:11px;padding:9px}.attachment-crosscheck small{font-size:9px}}
+
+/* T19: wrap the viewer toolbar inside the narrow canvas instead of widening the page. */
+@media(max-width:760px){
+  .study-view-tools{left:8px;right:8px;width:auto;max-width:none;transform:none;flex-wrap:wrap;justify-content:center;box-sizing:border-box;white-space:normal}
+  .study-view-tools button{flex:1 1 auto;min-width:0;padding:8px 6px}
+}

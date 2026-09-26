@@ -1,0 +1,110 @@
+{
+  "task": "T19",
+  "checkedAt": "2026-09-27",
+  "browser": "Codex In-app Browser",
+  "builtPreview": "http://127.0.0.1:4174/",
+  "devPreview": "http://127.0.0.1:4173/",
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "documentWidth": 1440,
+      "canvas": { "width": 746, "height": 637 },
+      "horizontalOverflow": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1024,
+      "height": 900,
+      "documentWidth": 1024,
+      "canvas": { "width": 488, "height": 562 },
+      "horizontalOverflow": false,
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "beforeFix": { "documentWidth": 450, "horizontalOverflow": true },
+      "afterFix": {
+        "documentWidth": 390,
+        "canvas": { "width": 374, "height": 165 },
+        "toolbar": { "x": 16, "right": 374, "width": 358, "height": 71 },
+        "horizontalOverflow": false
+      },
+      "builtPreviewAfterFix": { "documentWidth": 390, "horizontalOverflow": false },
+      "result": "PASS"
+    }
+  ],
+  "interactionChecks": [
+    {
+      "name": "selected focus default and OFF persistence",
+      "result": "PASS",
+      "evidence": "주변 근육 흐리게 starts aria-pressed=true; after turning it off, selecting another muscle retained false and the route/card changed to that muscle."
+    },
+    {
+      "name": "keyboard muscle selection and viewer rotation input",
+      "result": "PASS",
+      "evidence": "ArrowLeft was sent to the focused anatomy canvas; Enter on structure-list controls selected posterior tibialis and updated the card and URL. Repeated on the built preview at 390px."
+    },
+    {
+      "name": "muscle to bone to muscle",
+      "result": "PASS",
+      "evidence": "A real canvas pointer click selected the right tibia and its bone card/URL; the tibia card's soleus link returned to the soleus muscle card/URL. Repeated the tibia pointer pick on the built preview."
+    },
+    {
+      "name": "transparent/de-emphasized pointer access",
+      "result": "PASS",
+      "evidence": "With surrounding muscles transparent, canvas pointer selection reached the right fibula. In a posterior scene with bones hidden and the anterior tibialis selected, a pointer click through faded layers selected soleus."
+    },
+    {
+      "name": "isolation follows changing selection",
+      "result": "PASS",
+      "evidence": "Isolation remained pressed while selecting a different muscle; the selected structure, card, route and isolation target moved together. A built-preview mobile keyboard run reproduced this."
+    },
+    {
+      "name": "restore preserves base hidden state",
+      "result": "PASS",
+      "evidence": "After hiding bones, isolating a muscle and using view reset, isolation cleared while the bones control remained off."
+    },
+    {
+      "name": "browser history and selection clearing",
+      "result": "PASS",
+      "evidence": "Back/forward restored the prior and next muscle URL and selected card. Selection clear removed the typed selection; a subsequent keyboard list selection restored the corresponding card."
+    },
+    {
+      "name": "unsupported region transition",
+      "result": "PASS",
+      "evidence": "Selecting head showed the explicit preparation state and did not display the calf scene; returning to leg showed the calf scene and a valid calf selection."
+    },
+    {
+      "name": "learner surface labels",
+      "result": "PASS",
+      "evidence": "Visible controls use learner wording; no task number, JSON, authoring tool or internal review code appeared in the learner DOM/accessibility tree."
+    }
+  ],
+  "consoleErrorsAndWarnings": [],
+  "finalBuiltPreviewSmoke": {
+    "checkedAt": "2026-09-27",
+    "viewport": { "width": 390, "height": 844 },
+    "sequence": ["뼈 숨김", "이 근육만 보기", "보기 초기화"],
+    "afterReset": {
+      "selected": "비복근",
+      "isolationPressed": "false",
+      "bonesPressed": "false",
+      "focusFadePressed": "true",
+      "url": "http://127.0.0.1:4174/?region=leg&kind=muscle&id=HA-M-000001&side=right"
+    },
+    "layout": {
+      "documentWidth": 390,
+      "horizontalOverflow": false,
+      "canvas": { "width": 374, "height": 165 },
+      "toolbar": { "left": 16, "right": 374, "width": 358, "height": 71 }
+    },
+    "consoleErrorsAndWarnings": []
+  },
+  "scopeNotes": [
+    "Screenshots were visually inspected in the in-app browser; this evidence file stores measured geometry and interaction outcomes, not image exports.",
+    "No anatomy claims, source records, canonical IDs, geometry, motion, localStorage drafts or assets were changed.",
+    "T14b human review remains pending; surface coverage remains 0/41."
+  ]
+}

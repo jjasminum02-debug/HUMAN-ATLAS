@@ -2,17 +2,17 @@
 
 - LAST_UPDATED: 2026-09-27
 - PLAN_REVISION: R13-2026-09-26 — R12 유지 + AI 원문 대조/작용 설명/교육용 움직임/독립 T16–40
-- CURRENT_TASK: T18 — complete_with_gaps; 종아리 6근육 origin/insertion 실제 문헌 대조, 긴종아리근 기시 충돌은 보류. 이름 대조·사람 검토·표면/움직임 자료는 미완.
-- NEXT_TASK: T19 — Luna Max (planned_not_started); 선택 근육 집중 보기/흐림/격리·복원 및 키보드/모바일 접근성.
-- LAST_REPORT: work/reports/T18.md
+- CURRENT_TASK: T19 — technical_pass; 선택 근육 흐림 기본 ON/토글, isolation·복원, 투명층 뒤 포인터 선택 및 반응형·키보드 브라우저 검사 완료.
+- NEXT_TASK: T20 — Sol High (planned_not_started); MuscleAction/MotionDefinition/MotionAsset/MotionSession 데이터 계약과 검증.
+- LAST_REPORT: work/reports/T19.md
 - CATALOG: partial85 (individual48/group16/part21); 전신 분모 미동결
 - LEARNING_OVERLAY: entries81; current canonical overlap 79/85, six group IDs lack overlay entries, two lookup-only IDs are extra; T11 B01-B09 field work covered the current partial catalog with gaps; humanReviewed=false
 - AI_EVIDENCE_OVERLAY: T16 schema/types/validator/learner adapter + T18 source-bound origin/insertion rows 16; 14 legacy rows remain test-only preview; canonical human review unchanged; geometry/motion absent
 - GEOMETRY: 오른쪽 종아리 6근육, 근육메시 7+뼈 13. T15b navigation overlay에 기존 source crosswalk의 우측 뼈 instance/mapping 9개를 needs_review로 연결, 미확정 mesh 4개는 unbound context. canonical spatialAnnotation 0; T13c-B01/B02/B03 context_only geometry:null draft 3건 보존; T05 표면 후보 0/41, text_only 28/41, matching target mesh missing 13/41, human_review_pending 41/41
 - FUNCTION_AND_ASSESSMENT: 미구현, 학습 탭은 준비 중
-- TECHNICAL_GATE: T18 source workflow 18/18, T16 fixtures 8/8, AI evidence tests 9/9, search 40/40, learning validator 81 names/14 summaries, typecheck/build, actual learner browser 및 preservation pass. Production AI overlay 16 T18 rows. T15g denominator false/null/null, T14b human review pending, geometry 0/41. 기존 production App chunk >500 kB 경고 유지.
+- TECHNICAL_GATE: T19 visibility-policy 5/5, scene lifecycle 9/9, navigation 14+12/14+12, search 40/40, typecheck/build, dev+production actual browser 1440/1024/390, preservation 및 console pass. T18 source evidence 16 rows 유지. T15g denominator false/null/null, T14b human review pending, geometry 0/41. 기존 production App chunk >500 kB 경고 유지.
 - ANATOMY_GATE: needs_human_review; 전신 구조 완성 아님
-- DEV_URL: none (T18 temporary local production preview stopped after learner browser verification)
+- DEV_URL: none (T19 dev and production preview servers stopped after browser verification)
 
 | task | 상태 | 산출물/보고서 | 차단 조건 |
 |---|---|---|---|
@@ -57,6 +57,7 @@
 | T16 | complete_with_gaps | work/tasks/T16.md; AI evidence schema/types/validator/learner adapter; empty production overlay; work/evidence/T16/; work/reports/T16.md | Actual field-by-field AI evidence rows remain unpopulated; legacy migration was preview-only; human review and whole-body denominator remain open |
 | T17 | complete_with_gaps | work/tasks/T17.md; atlas-data/schemas/source-research-manifest.schema.json; atlas-data/sources/source_research.py; work/evidence/T17/; work/reports/T17.md | Tool is tested only with synthetic fixture data; no actual anatomy source was researched or written to production overlay |
 | T18 | complete_with_gaps | work/tasks/T18.md; 16 field-level origin/insertion AI evidence rows; source comparison, learner citations and browser QA; work/evidence/T18/; work/reports/T18.md | fibularis longus origin conflict unresolved; name comparison not performed per T17 handoff; human review, exact surface, motion and external redistribution rights remain open |
+| T19 | technical_pass | work/tasks/T19.md; focus fade/isolation/pick policy; mobile toolbar wrap; work/evidence/T19/; work/reports/T19.md | T18 source conflict, human anatomy review, exact surface geometry, motion and whole-body denominator remain unchanged |
 
 ## 실제 현재 상태와 원본 보존
 
@@ -312,3 +313,13 @@ T18은 실제로 연 두 문헌의 locator를 이용해 현재 여섯 개인 근
 사람 해부학 검토는 계속 `needs_human_review`; exact attachment geometry는 0/41; motion은 absent; T15g 전신 denominator는 `false/null/null`이다. 자세한 제한은 `work/reports/T18.md`에 있다.
 
 다음은 **T19 / Luna Max / planned_not_started**다. 이번 작업에서 T19를 시작하지 않았다. 붙여 넣을 구체 prompt는 `work/reports/T18.md`의 `다음 작업` 섹션에 있다.
+
+## T19 결과 및 현재 인계 — 2026-09-27
+
+T19 선택 근육 focus fade, 기본 ON 토글, 선택 근육+확인된 관련 뼈 isolate, target-follow selection, 학습 base visibility 보존 복원을 구현했다. 투명/흐림 표면 아래의 불투명 또는 가장 깊은 서로 다른 mesh를 pointer로 선택한다. 모바일에서 7개 조작이 문서 폭을 450px로 확장하던 문제는 툴바 wrap으로 고쳤고 390px 폭/가로 넘침 없음으로 확인했다.
+
+검증: focus/pick policy 5/5, scene lifecycle 9/9, navigation Node 14/14 + Python 12/12, search 40/40, typecheck/build pass. 실제 dev 및 production browser에서 1440×1000, 1024×900, 390×844, muscle↔bone 카드/URL, toggle OFF 지속, isolation 중 재선택, 뼈 숨김 후 view reset, history, 비지원 부위, 키보드와 투명층 뒤 pointer를 확인했다. 최종 production 재검에서 390px 뼈 숨김→격리→초기화 후 격리 해제/뼈 숨김 지속도 확인했다. Console error/warning 없음. Build의 기존 1,419 kB App chunk 경고는 유지된다. 보호 파일 102개, 미커밋 사용자 snapshot 47개 hash와 OpenSim_Models HEAD/clean 상태는 시작과 동일하다. evidence/report는 `work/evidence/T19/`, `work/reports/T19.md`에 있다.
+
+T18의 긴종아리근 기시 충돌과 출처 상태, T14b 사람 검토 대기, surface 0/41, T15g denominator `false/null/null`은 변경하지 않았다. AI 비교는 사람 승인이나 부착 surface 좌표가 아니다.
+
+다음은 **T20 / Sol High / planned_not_started**다. T20만 별도 요청에서 실행한다. 구체 prompt는 `work/reports/T19.md`의 `다음 작업` 섹션을 사용한다.
