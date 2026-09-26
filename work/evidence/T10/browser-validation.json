@@ -1,0 +1,80 @@
+{
+  "tool": "CUA in-app browser",
+  "url": "http://127.0.0.1:5174/",
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 900,
+      "visual": "white cards, central real GLB, origin/insertion card"
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "documentWidth": 1024,
+      "scrollWidth": 1024
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "documentWidth": 390,
+      "scrollWidth": 390,
+      "visual": "stacked list, model, detail; function placeholder visible"
+    }
+  ],
+  "cases": [
+    {
+      "query": "등세모근",
+      "result": "승모근 Trapezius",
+      "selectedId": "HA-M-000019",
+      "geometry": "no-model message, previous calf hidden"
+    },
+    {
+      "query": "spleinus",
+      "result": [
+        "경판상근 Splenius cervicis",
+        "두판상근 Splenius capitis"
+      ],
+      "approximate": true
+    },
+    {
+      "query": "측면삼각극",
+      "result": "삼각근 · 견봉부 Acromial part of deltoid"
+    },
+    {
+      "query": "前脛骨筋",
+      "result": "전경골근 Tibialis anterior",
+      "selectedId": "HA-M-000003",
+      "geometry": "calf rendered"
+    }
+  ],
+  "controls": [
+    "surroundings transparent + back view visually inspected",
+    "restore resets front/transparency",
+    "isolation pressed state toggles then reset",
+    "initial full-model framing checked after fix"
+  ],
+  "learnerDebugTextVisible": false,
+  "reviewRoute": "dev /review shows preserved authoring tools including JSON and T09; no drafts changed",
+  "console": {
+    "historicalErrors": [
+      {
+        "timestamp": "2026-09-25T05:04:58.789Z",
+        "message": "Failed to fetch dynamically imported App.tsx during development reload"
+      },
+      {
+        "timestamp": "2026-09-25T05:04:58.790Z",
+        "message": "React error warning from same failed import"
+      }
+    ],
+    "finalNavigation": "learner/review both rendered after final navigation; log reread showed no additional error entries",
+    "zeroHistoricalErrorsClaimed": false
+  },
+  "screenshots": "visually inspected in CUA; no image file saved",
+  "viewportOverrideReset": true,
+  "production": "build no ReviewApp/AnnotationWorkbench chunks; production not browser-tested",
+  "limitations": [
+    "No whole-body data or anatomical review",
+    "No complete keyboard/accessibility audit",
+    "No production deployment"
+  ]
+}

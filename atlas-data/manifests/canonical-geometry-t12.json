@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "T12b-canonical-geometry-bridge-v1",
+  "modelId": "HA-MODEL-BP3D4-R4-RIGHT-LOWER-LEG-STATIC",
+  "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+  "sourceManifest": "atlas-data/manifests/derived-assets-t07.json",
+  "sourceGlbSha256": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341",
+  "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+  "units": "m",
+  "poseId": "bodyparts3d-r4-static-reference",
+  "reviewState": "needs_review",
+  "muscleLinks": [
+    {
+      "fileId": "FJ1394",
+      "meshAssetId": "HA-MESH-BP3D4-FJ1394",
+      "instanceId": "HA-I-R-HA-M-000001",
+      "partConceptId": "HA-P-000001",
+      "mappingId": "HA-MAP-BP3D4-FJ1394",
+      "reviewState": "needs_review"
+    },
+    {
+      "fileId": "FJ1397",
+      "meshAssetId": "HA-MESH-BP3D4-FJ1397",
+      "instanceId": "HA-I-R-HA-M-000001",
+      "partConceptId": "HA-P-000002",
+      "mappingId": "HA-MAP-BP3D4-FJ1397",
+      "reviewState": "needs_review"
+    },
+    {
+      "fileId": "FJ1409",
+      "meshAssetId": "HA-MESH-BP3D4-FJ1409",
+      "instanceId": "HA-I-R-HA-M-000006",
+      "partConceptId": null,
+      "mappingId": "HA-MAP-BP3D4-FJ1409",
+      "reviewState": "needs_review"
+    },
+    {
+      "fileId": "FJ1410",
+      "meshAssetId": "HA-MESH-BP3D4-FJ1410",
+      "instanceId": "HA-I-R-HA-M-000005",
+      "partConceptId": null,
+      "mappingId": "HA-MAP-BP3D4-FJ1410",
+      "reviewState": "needs_review"
+    },
+    {
+      "fileId": "FJ1437",
+      "meshAssetId": "HA-MESH-BP3D4-FJ1437",
+      "instanceId": "HA-I-R-HA-M-000002",
+      "partConceptId": null,
+      "mappingId": "HA-MAP-BP3D4-FJ1437",
+      "reviewState": "needs_review"
+    },
+    {
+      "fileId": "FJ1439",
+      "meshAssetId": "HA-MESH-BP3D4-FJ1439",
+      "instanceId": "HA-I-R-HA-M-000003",
+      "partConceptId": null,
+      "mappingId": "HA-MAP-BP3D4-FJ1439",
+      "reviewState": "needs_review"
+    },
+    {
+      "fileId": "FJ1440",
+      "meshAssetId": "HA-MESH-BP3D4-FJ1440",
+      "instanceId": "HA-I-R-HA-M-000004",
+      "partConceptId": null,
+      "mappingId": "HA-MAP-BP3D4-FJ1440",
+      "reviewState": "needs_review"
+    }
+  ],
+  "unmappedStructureAssets": [
+    {
+      "fileId": "FJ3360",
+      "meshAssetId": "HA-MESH-BP3D4-FJ3360",
+      "structureId": "HA-S-CALCANEUS",
+      "structureExists": true,
+      "reason": "MeshMapping has no structure-target field; asset remains canonical, mapping is excluded",
+      "reviewState": "needs_review"
+    },
+    {
+      "fileId": "FJ3366",
+      "meshAssetId": "HA-MESH-BP3D4-FJ3366",
+      "structureId": "HA-S-FIBULA",
+      "structureExists": true,
+      "reason": "MeshMapping has no structure-target field; asset remains canonical, mapping is excluded",
+      "reviewState": "needs_review"
+    },
+    {
+      "fileId": "FJ3385",
+      "meshAssetId": "HA-MESH-BP3D4-FJ3385",
+      "structureId": null,
+      "structureExists": false,
+      "reason": "No canonical talus structure ID; do not invent one. Asset remains canonical with null crosswalk target, mapping excluded",
+      "reviewState": "needs_review"
+    },
+    {
+      "fileId": "FJ3387",
+      "meshAssetId": "HA-MESH-BP3D4-FJ3387",
+      "structureId": "HA-S-TIBIA",
+      "structureExists": true,
+      "reason": "MeshMapping has no structure-target field; asset remains canonical, mapping is excluded",
+      "reviewState": "needs_review"
+    }
+  ],
+  "coverage": {
+    "meshAssets": 11,
+    "rightMuscleInstances": 6,
+    "muscleMeshMappings": 7,
+    "unmappedStructureAssets": 4
+  }
+}

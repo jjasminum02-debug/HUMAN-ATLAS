@@ -1,0 +1,24 @@
+{
+  "task": "T13",
+  "date": "2026-09-26",
+  "scope": "source-verified right bone context and source-linked review queue; no approved attachment surface",
+  "commands": [
+    {"command": "python3 work/evidence/T13/fetch_bone_subset.py", "exitCode": 0, "result": "5 T02-listed source OBJ; 1346139 range bytes; no full ZIP"},
+    {"command": "python3 work/evidence/T13/fetch_additional_foot_bones.py", "exitCode": 0, "result": "4 source-table-verified right foot OBJ; 821851 range bytes; no full ZIP"},
+    {"command": "python3 work/evidence/T13/build_t13_bones.py", "exitCode": 0, "result": "9 meshes; 205392 byte GLB; SHA-256 a5b16cf1e6991b52f66706dee7cf3c77d9832b1a3bde0e3dffd5de5619db6662"},
+    {"command": "python3 work/evidence/T13/build_attachment_context.py", "exitCode": 0, "result": "41 source-linked records; 28 whole-bone contexts; 13 held; 0 located surfaces"},
+    {"command": "python3 work/evidence/T13/validate_t13.py", "exitCode": 0, "result": "20 canonical assets, 9 new bones, 6 right instances, 7 muscle mappings; source hash/license/table/pose/frame/ref/coverage; negative claim/geometry tests"},
+    {"command": "python3 atlas-data/schemas/validate.py --dataset atlas-data/catalog/canonical-catalog.json", "exitCode": 0, "result": "schemaCheck passed; issues []"},
+    {"command": "python3 atlas-data/schemas/validate.py --fixtures --check-schemas", "exitCode": 0, "result": "17/17 positive and negative fixtures; includes stale and human-review gates"},
+    {"command": "python3 work/evidence/T12/validate_t12b.py", "exitCode": 0, "result": "T07 11 asset, 6 right instance, 7 mapping and talus null regression passed"},
+    {"command": "cd atlas-web && pnpm test:annotations", "exitCode": 0, "result": "12/12; schema exchange, stale, JSON round trip and target-bone asset guard passed"},
+    {"command": "cd atlas-web && pnpm build", "exitCode": 0, "result": "learning validator, TypeScript and Vite passed; 20-mesh bundle; chunk size advisory only"},
+    {"command": "git diff --check", "exitCode": 0, "result": "no whitespace errors"},
+    {"command": "git -C OpenSim_Models status --short", "exitCode": 0, "result": "clean at d9b05d470b1a481c222372c85b75772faf8f7792"}
+  ],
+  "browserEvidence": "work/evidence/T13/browser-qa.md",
+  "reviewPacket": "work/evidence/T13/review-packet.md",
+  "coverage": {"t05Attachments": 41, "wholeBoneContexts": 28, "heldWithoutTargetMesh": 13, "locatedSurfaceAnnotations": 0, "humanReviewedSurfaces": 0},
+  "preservation": {"t07GlbSha256": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341", "openSimClean": true, "talusFJ3385CanonicalStructureId": null},
+  "notRun": ["41 item-level multi-view anatomical surface delineation", "human anatomical review", "modern independent source comparison", "T14 or later", "deployment"]
+}

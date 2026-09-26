@@ -1,0 +1,79 @@
+{
+  "capturedAt": "2026-09-25",
+  "batchId": "T11-B02",
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "work/evidence/T11/B02/validate_t11_b02.py"
+      ],
+      "exitCode": 0,
+      "stdout": "{\n  \"pass\": true,\n  \"batchId\": \"T11-B02\",\n  \"canonicalCoverage\": 10,\n  \"fieldEvidence\": 50,\n  \"englishAndLatinRows\": 20,\n  \"koreanDisplayOverlays\": 7,\n  \"sourceHanjaValues\": 4,\n  \"withheldGroupLabels\": 3,\n  \"humanReviewed\": false,\n  \"overallT11Status\": \"in_progress_partial\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "pnpm",
+        "--dir",
+        "atlas-web",
+        "test:search"
+      ],
+      "exitCode": 0,
+      "stdout": "✔ same muscle: 승모근 (0.586667ms)\n✔ same muscle: 등세모근 (0.150291ms)\n✔ same muscle: 僧帽筋 (0.362208ms)\n✔ same muscle: TRAPEZIUS (1.121333ms)\n✔ same muscle:   등 세모근   (0.087209ms)\n✔ tibialis: 전경골근 (0.08975ms)\n✔ tibialis: 앞정강근 (0.050083ms)\n✔ tibialis: 前脛骨筋 (0.048416ms)\n✔ tibialis: tibialis anterior (0.412ms)\n✔ transposed typo returns both splenius muscles, never a false single identity (6.681875ms)\n✔ deltoid portion stays separate (0.122417ms)\n✔ user Korean name lateral deltoid maps to the acromial part (0.386959ms)\n✔ named acromial part is included in the learner search projection (0.144959ms)\n✔ splenius capitis names share one lookup candidate (0.435375ms)\n✔ splenius cervicis and colli names share one lookup candidate (0.564791ms)\n✔ short Korean typo does not fuzzily match unrelated muscles (0.045958ms)\n✔ unrelated query has no results (0.182083ms)\n✔ historical peroneus synonym resolves to fibularis (0.296541ms)\n✔ T11-B02 learner catalog English and Latin terms stay attached to their ten existing group IDs (2.618125ms)\n✔ T11-B02 attested Korean/Hanja names resolve to existing groups and unresolved near-matches stay withheld (0.300583ms)\nℹ tests 20\nℹ suites 0\nℹ pass 20\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 92.673958\n",
+      "stderr": "$ node --experimental-strip-types --test src/domain/search.test.ts\n"
+    },
+    {
+      "command": [
+        "pnpm",
+        "--dir",
+        "atlas-web",
+        "validate:learning"
+      ],
+      "exitCode": 0,
+      "stdout": "{\"pass\": true, \"nameEntries\": 20, \"summaries\": 14, \"scope\": \"references and stale hashes, not anatomy approval\"}\n",
+      "stderr": "$ python3 scripts/validate-learning-content.py\n"
+    },
+    {
+      "command": [
+        "pnpm",
+        "--dir",
+        "atlas-web",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "$ tsc -b --pretty false\n"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "work/evidence/T11/B02/check_preservation.py"
+      ],
+      "exitCode": 0,
+      "stdout": "{\n  \"pass\": true,\n  \"preExistingFilesCompared\": 1319,\n  \"allowedPreExistingFilesChanged\": [\n    \"atlas-web/src/domain/search.test.ts\",\n    \"work/STATUS.md\",\n    \"work/review-queue/terminology-gaps.md\",\n    \"work/reports/T11.md\",\n    \"atlas-data/terminology/term-review-batches.json\",\n    \"atlas-data/terminology/learning-names.json\"\n  ],\n  \"unexpectedPreExistingFilesChanged\": [],\n  \"preExistingFilesMissing\": [],\n  \"openSimModels\": {\n    \"head\": \"d9b05d470b1a481c222372c85b75772faf8f7792\",\n    \"status\": [],\n    \"unchanged\": true,\n    \"readOnly\": true\n  },\n  \"commitCreated\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "work/evidence/T11/B02/validate_artifacts.py"
+      ],
+      "exitCode": 0,
+      "stdout": "{\n  \"pass\": true,\n  \"jsonParsed\": 5,\n  \"textChecked\": 16,\n  \"trailingWhitespace\": 0,\n  \"finalNewlinesPresent\": true\n}\n",
+      "stderr": ""
+    }
+  ],
+  "allPassed": true,
+  "productionBuildRun": false,
+  "reasonBuildNotRun": "No learner UI or build configuration changed; avoid rewriting pre-existing generated bundles."
+}

@@ -1,0 +1,173 @@
+{
+  "url": "http://127.0.0.1:5174/",
+  "method": "Codex in-app browser, direct user-visible browser interaction",
+  "screenshots": "Captured and visually inspected inline; not persisted as files.",
+  "consoleErrors": 0,
+  "consoleWarnings": 0,
+  "defaultState": {
+    "outerAttachmentDisclosureOpen": false,
+    "sourceDetailDisclosureOpen": [
+      false,
+      false
+    ],
+    "sourceEnglishClaimVisibleInBodyText": false,
+    "originAndInsertionSummariesPresent": 2,
+    "viewButtons": [
+      "선택만 보기",
+      "주변 투명하게",
+      "뼈",
+      "전체 보기",
+      "보기 초기화"
+    ]
+  },
+  "viewports": [
+    {
+      "size": "1440x900",
+      "canvas": {
+        "x": 296,
+        "y": 217,
+        "width": 746,
+        "height": 537
+      },
+      "originSummaryVisible": true,
+      "insertionSummaryVisible": true,
+      "summaryBoundsY": [
+        [
+          480.25,
+          592.34
+        ],
+        [
+          606.34,
+          678.14
+        ]
+      ],
+      "muscleVerticalFillVisualEstimate": "about 75% of canvas height",
+      "horizontalOverflow": false
+    },
+    {
+      "size": "1280x720",
+      "layout": {
+        "sidebar": [
+          28,
+          112,
+          248,
+          582
+        ],
+        "stage": [
+          296,
+          112,
+          586,
+          582
+        ],
+        "details": [
+          902,
+          112,
+          350,
+          582
+        ],
+        "canvas": [
+          296,
+          217,
+          586,
+          357
+        ],
+        "camera": [
+          820.97,
+          232,
+          51.03,
+          116
+        ],
+        "viewTools": [
+          407.77,
+          586,
+          362.45,
+          48
+        ],
+        "viewToolsWithinStage": true
+      },
+      "columnOverlap": false,
+      "documentSize": [
+        1280,
+        720
+      ],
+      "muscleVerticalFillVisualEstimate": "about 65% of canvas height"
+    },
+    {
+      "size": "390x844",
+      "layout": {
+        "sidebar": [
+          14,
+          145,
+          362,
+          281.5
+        ],
+        "stage": [
+          14,
+          440.5,
+          362,
+          520
+        ],
+        "details": [
+          14,
+          974.5,
+          362,
+          1111.81
+        ],
+        "canvas": [
+          14,
+          535.5,
+          362,
+          315
+        ],
+        "camera": [
+          320.97,
+          545.5,
+          51.03,
+          116
+        ],
+        "viewTools": [
+          46.31,
+          866,
+          297.38,
+          46.5
+        ],
+        "viewToolsWithinStage": true
+      },
+      "documentSize": [
+        390,
+        2106
+      ],
+      "horizontalOverflow": false,
+      "columnOverlap": false,
+      "pilotMuscleItems": {
+        "visible": 6,
+        "allFullyVisible": true,
+        "listClientHeight": 174,
+        "listScrollHeight": 174
+      }
+    }
+  ],
+  "interactions": [
+    {
+      "flow": "select first origin attachment",
+      "result": "one attachment button pressed; related-bone context notice shown; English source detail remained closed; retested after final control update"
+    },
+    {
+      "flow": "보기 초기화",
+      "result": "selected attachment buttons 0; context notice absent; isolation/transparency controls false; selected muscle framing restored; retested after final control update"
+    },
+    {
+      "flow": "전체 보기",
+      "result": "separate whole-scene framing action works without changing the selected muscle"
+    },
+    {
+      "flow": "select attachment, choose 가자미근, browser back",
+      "result": "muscle switch cleared active attachment; back restored 비복근 route and kept active attachment cleared"
+    }
+  ],
+  "limits": [
+    "Only the learner / route in the local Vite development server was exercised.",
+    "No anatomical accuracy or exact attachment surface was reviewed.",
+    "No screenshot file was saved."
+  ]
+}

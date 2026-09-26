@@ -1,0 +1,67 @@
+{
+  "checkedDate": "2026-09-25",
+  "checks": [
+    {
+      "name": "search-regression",
+      "command": "pnpm test:search",
+      "exitCode": 0,
+      "stdout": "$ node --experimental-strip-types --test src/domain/search.test.ts\n✔ same muscle: 승모근 (0.49125ms)\n✔ same muscle: 등세모근 (0.061333ms)\n✔ same muscle: 僧帽筋 (0.349125ms)\n✔ same muscle: TRAPEZIUS (0.504708ms)\n✔ same muscle:   등 세모근   (0.043917ms)\n✔ tibialis: 전경골근 (0.053583ms)\n✔ tibialis: 앞정강근 (0.049375ms)\n✔ tibialis: 前脛骨筋 (0.038ms)\n✔ tibialis: tibialis anterior (0.211834ms)\n✔ transposed typo returns both splenius muscles, never a false single identity (4.646083ms)\n✔ deltoid portion stays separate (0.056042ms)\n✔ user Korean name lateral deltoid maps to the acromial part (0.047709ms)\n✔ named acromial part is included in the learner search projection (0.105209ms)\n✔ splenius capitis names share one lookup candidate (0.612459ms)\n✔ splenius cervicis and colli names share one lookup candidate (0.6965ms)\n✔ short Korean typo does not fuzzily match unrelated muscles (0.041542ms)\n✔ unrelated query has no results (0.174667ms)\n✔ historical peroneus synonym resolves to fibularis (0.184375ms)\nℹ tests 18\nℹ suites 0\nℹ pass 18\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 59.501875\n",
+      "stderr": "",
+      "sessionId": null
+    },
+    {
+      "name": "learning-overlay-validator",
+      "command": "pnpm validate:learning",
+      "exitCode": 0,
+      "stdout": "$ python3 scripts/validate-learning-content.py\n{\"pass\": true, \"nameEntries\": 13, \"summaries\": 14, \"scope\": \"references and stale hashes, not anatomy approval\"}\n",
+      "stderr": "",
+      "sessionId": null
+    },
+    {
+      "name": "typecheck",
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "stdout": "$ tsc -b --pretty false\n",
+      "stderr": "",
+      "sessionId": null
+    },
+    {
+      "name": "production-build",
+      "command": "pnpm build",
+      "exitCode": 0,
+      "stdout": "$ python3 scripts/validate-learning-content.py && tsc -b && vite build\n{\"pass\": true, \"nameEntries\": 13, \"summaries\": 14, \"scope\": \"references and stale hashes, not anatomy approval\"}\nvite v8.3.1 building client environment for production...\ntransforming...\n✓ 28 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                             0.47 kB │ gzip:  0.32 kB\ndist/assets/right-lower-leg-C7dvV-l1.glb  712.19 kB\ndist/assets/App-B3M1Bejc.css                9.42 kB │ gzip:  2.83 kB\ndist/assets/index-CepSYoP-.js             221.68 kB │ gzip: 69.57 kB\ndist/assets/App-BNjMN0qk.js               318.04 kB │ gzip: 42.40 kB\n\n✓ built in 66ms\n",
+      "stderr": "",
+      "sessionId": null
+    },
+    {
+      "name": "T11-B01-structural-provenance-validator",
+      "command": "python3 work/evidence/T11/validate_t11_b01.py",
+      "exitCode": 0,
+      "stdout": "{\"pass\": true, \"validator\": \"T11-B01\", \"checkedDate\": \"2026-09-25\", \"checkCount\": 150, \"canonicalCoverage\": 85, \"canonicalStatusCounts\": {\"not_started\": 77, \"web_checked_with_gaps\": 8}, \"batchSizes\": {\"T11-B01\": 10, \"T11-B02\": 10, \"T11-B03\": 10, \"T11-B04\": 10, \"T11-B05\": 10, \"T11-B06\": 10, \"T11-B07\": 10, \"T11-B08\": 10, \"T11-B09\": 7}, \"B01EntryCount\": 10, \"fieldEvidenceCount\": 57, \"humanAnatomyReview\": \"not_performed\", \"catalogDenominatorFrozen\": false}\n",
+      "stderr": "",
+      "sessionId": null
+    },
+    {
+      "name": "git-diff-check",
+      "command": "git diff --check",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "sessionId": null
+    },
+    {
+      "name": "T11-artifact-json-and-whitespace-validator",
+      "command": "python3 work/evidence/T11/validate_t11_artifacts.py",
+      "exitCode": 0,
+      "stdout": "{\"pass\": true, \"jsonFilesParsed\": 6, \"textFilesChecked\": 17, \"trailingWhitespace\": 0, \"finalNewlinesPresent\": true}\n",
+      "stderr": ""
+    },
+    {
+      "name": "T11-preservation-check",
+      "command": "python3 work/evidence/T11/check_t11_preservation.py",
+      "exitCode": 0,
+      "stdout": "{\"pass\": true, \"preExistingFilesChanged\": [\"atlas-web/dist/index.html\", \"atlas-web/src/data/learning.ts\", \"atlas-web/src/domain/search.ts\", \"atlas-web/src/domain/search.test.ts\", \"work/STATUS.md\", \"atlas-data/terminology/learning-names.json\"], \"preExistingSourceFilesMissing\": [], \"generatedHashBundlesRemovedByCleanBuild\": [\"atlas-web/dist/assets/App-DUI2AJsV.js\", \"atlas-web/dist/assets/index-DZ8W_8Tq.js\"], \"unexpectedPreExistingChanges\": [], \"openSimModels\": {\"head\": \"d9b05d470b1a481c222372c85b75772faf8f7792\", \"statusPorcelain\": [], \"unchanged\": true, \"readOnly\": true}}\n",
+      "stderr": ""
+    }
+  ]
+}

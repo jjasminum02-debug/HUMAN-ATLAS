@@ -1,0 +1,68 @@
+{
+  "pass": true,
+  "taskId": "T11-B04",
+  "commands": [
+    {
+      "name": "coverage_and_field_provenance",
+      "command": [
+        "python3",
+        "work/evidence/T11/B04/validate_t11_b04.py"
+      ],
+      "exitCode": 0,
+      "output": "{\n  \"pass\": true,\n  \"batchId\": \"T11-B04\",\n  \"assignedCanonicalIds\": [\n    \"HA-M-000011\",\n    \"HA-M-000012\",\n    \"HA-M-000013\",\n    \"HA-M-000014\",\n    \"HA-M-000015\",\n    \"HA-M-000016\",\n    \"HA-M-000017\",\n    \"HA-M-000018\",\n    \"HA-M-000020\",\n    \"HA-M-000021\"\n  ],\n  \"batchCoverage\": 10,\n  \"fieldEvidence\": 50,\n  \"englishAndLatinFields\": 20,\n  \"learnerNameOverlays\": 10,\n  \"sourceHanjaValues\": 9,\n  \"withheldIncompleteHanja\": [\n    \"HA-M-000016\"\n  ],\n  \"checkedCoverageTotal\": 38,\n  \"humanReviewed\": false,\n  \"nextBatchStarted\": false,\n  \"nextTask\": \"T11-B05\"\n}\n"
+    },
+    {
+      "name": "integrated_search_regression",
+      "command": [
+        "pnpm",
+        "--dir",
+        "atlas-web",
+        "test:search"
+      ],
+      "exitCode": 0,
+      "output": "$ node --experimental-strip-types --test src/domain/search.test.ts\n✔ same muscle: 승모근 (0.500833ms)\n✔ same muscle: 등세모근 (0.081458ms)\n✔ same muscle: 僧帽筋 (0.076125ms)\n✔ same muscle: TRAPEZIUS (0.842542ms)\n✔ same muscle:   등 세모근   (0.08375ms)\n✔ tibialis: 전경골근 (0.071959ms)\n✔ tibialis: 앞정강근 (0.074458ms)\n✔ tibialis: 前脛骨筋 (0.0555ms)\n✔ tibialis: tibialis anterior (0.778667ms)\n✔ transposed typo returns both splenius muscles, never a false single identity (4.81675ms)\n✔ deltoid portion stays separate (0.078208ms)\n✔ user Korean name lateral deltoid maps to the acromial part (0.068666ms)\n✔ named acromial part is included in the learner search projection (0.089125ms)\n✔ splenius capitis names share one lookup candidate (0.873084ms)\n✔ splenius cervicis and colli names share one lookup candidate (1.029625ms)\n✔ short Korean typo does not fuzzily match unrelated muscles (0.0485ms)\n✔ unrelated query has no results (0.268667ms)\n✔ historical peroneus synonym resolves to fibularis (0.277625ms)\n✔ T11-B02 learner catalog English and Latin terms stay attached to their ten existing group IDs (2.519ms)\n✔ T11-B02 attested Korean/Hanja names resolve to existing groups and unresolved near-matches stay withheld (0.21275ms)\n✔ T11-B03 English and Latin index terms stay attached to the ten assigned existing IDs (3.091292ms)\n✔ T11-B03 attested Korean and source Hanja resolve to their same existing IDs (0.221333ms)\n✔ T11-B03 generic or narrower gluteal/foot candidates remain unlinked to the three withheld groups (0.217209ms)\n✔ T11-B04 English and Latin TA2 observations stay attached to the ten assigned existing muscle IDs (2.764042ms)\n✔ T11-B04 attested Korean names and source Hanja resolve to the same existing IDs; incomplete Hanja stays withheld (0.337792ms)\nℹ tests 25\nℹ suites 0\nℹ pass 25\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 71.695125\n"
+    },
+    {
+      "name": "existing_learning_data_references",
+      "command": [
+        "pnpm",
+        "--dir",
+        "atlas-web",
+        "validate:learning"
+      ],
+      "exitCode": 0,
+      "output": "$ python3 scripts/validate-learning-content.py\n{\"pass\": true, \"nameEntries\": 37, \"summaries\": 14, \"scope\": \"references and stale hashes, not anatomy approval\"}\n"
+    },
+    {
+      "name": "git_diff_whitespace",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "name": "pre_existing_and_opensim_preservation",
+      "command": [
+        "python3",
+        "work/evidence/T11/B04/check_preservation.py"
+      ],
+      "exitCode": 0,
+      "output": "{\n  \"pass\": true,\n  \"preExistingFilesCompared\": 1383,\n  \"preExistingFilesMissing\": [],\n  \"preExistingFilesChanged\": [\n    \"atlas-data/terminology/learning-names.json\",\n    \"atlas-data/terminology/term-review-batches.json\",\n    \"atlas-web/src/domain/search.test.ts\",\n    \"work/STATUS.md\",\n    \"work/reports/T11.md\",\n    \"work/review-queue/terminology-gaps.md\"\n  ],\n  \"unexpectedPreExistingChanges\": [],\n  \"unexpectedNewFiles\": [],\n  \"projectHeadBeforeAndAfter\": \"9c54eff73b55406d3dec3deb531e2bfeb1c49fd2\",\n  \"openSimModels\": {\n    \"headBeforeAndAfter\": \"d9b05d470b1a481c222372c85b75772faf8f7792\",\n    \"statusBefore\": [],\n    \"statusAfter\": [],\n    \"preExistingFilesCompared\": 432,\n    \"fileChanges\": [],\n    \"newFiles\": [],\n    \"unchanged\": true,\n    \"readOnly\": true\n  },\n  \"commitCreated\": false\n}\n"
+    }
+  ],
+  "runtime": {
+    "nodeExecutable": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "pathPrefix": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin"
+  },
+  "searchTestCount": 25,
+  "scope": "B04 only; no learner UI edit, B05, T12, build, or deploy",
+  "limitations": [
+    "TA2 PDF original visual/column review not performed because direct open returned HTTP 502",
+    "most KMLE underlying dictionary revisions unexposed",
+    "human anatomy review not performed"
+  ],
+  "initialSearchAssertionCorrection": "The first B04 test attempt had one failed assertion because 舌筋 occurs as a substring in fully attested Hanja forms 舌骨舌筋 (HA-M-000017) and 莖突舌筋 (HA-M-000018). Generic substring search returns those two IDs, not HA-M-000016. The assertion was narrowed to prohibit assigning the incomplete fragment to genioglossus; the final integrated suite passed 25/25. No term value was changed by this test correction."
+}

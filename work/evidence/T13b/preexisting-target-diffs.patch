@@ -1,0 +1,1964 @@
+diff --git a/atlas-web/package.json b/atlas-web/package.json
+index fea8561..ff82174 100644
+--- a/atlas-web/package.json
++++ b/atlas-web/package.json
+@@ -5,19 +5,23 @@
+   "type": "module",
+   "scripts": {
+     "dev": "vite --host 127.0.0.1",
+-    "build": "tsc -b && vite build",
++    "build": "python3 scripts/validate-learning-content.py && tsc -b && vite build",
+     "preview": "vite preview --host 127.0.0.1",
+     "typecheck": "tsc -b --pretty false",
+-    "test:annotations": "node --experimental-strip-types --test src/viewer/annotationDrafts.test.ts && python3 scripts/validate-annotation-exchange-schema.py"
++    "test:annotations": "node --experimental-strip-types --test src/viewer/annotationDrafts.test.ts && python3 scripts/validate-annotation-exchange-schema.py",
++    "test:search": "node --experimental-strip-types --test src/domain/search.test.ts",
++    "validate:learning": "python3 scripts/validate-learning-content.py"
+   },
+   "dependencies": {
+     "react": "19.3.0",
+-    "react-dom": "19.3.0"
++    "react-dom": "19.3.0",
++    "three": "0.186.1"
+   },
+   "devDependencies": {
+     "@types/node": "24.10.1",
+     "@types/react": "19.2.12",
+     "@types/react-dom": "19.2.3",
++    "@types/three": "0.186.0",
+     "typescript": "5.9.3",
+     "vite": "8.3.1"
+   }
+diff --git a/atlas-web/src/ui/App.tsx b/atlas-web/src/ui/App.tsx
+index 41c7dec..5ba99eb 100644
+--- a/atlas-web/src/ui/App.tsx
++++ b/atlas-web/src/ui/App.tsx
+@@ -1,486 +1,105 @@
+-import { useEffect, useMemo, useState } from "react";
+-import {
+-  displayTerms,
+-  linkedEvidence,
+-  loadPilotCatalog,
+-  recordLabel,
+-  sourceForEvidence,
+-  termText,
+-  type AtlasRecord,
+-  type PilotCatalog,
+-} from "../data/catalog";
+-import { GLBViewer } from "../viewer/GLBViewer";
+-
+-const languageNames: Record<string, string> = { en: "English", la: "Latin", ko: "한국어" };
+-const scriptNames: Record<string, string> = { Hang: "한글", Hani: "한자", Latn: "로마자" };
+-const roleNames: Record<string, string> = { origin: "기시", insertion: "정지" };
+-const typeNames: Record<string, string> = { individual_muscle: "개별 근육", muscle_part: "근육 부분" };
+-const stateNames: Record<string, string> = { needs_review: "검토 대기", held: "미확인", reviewed: "검토 완료" };
+-
+-function text(value: unknown): string | null {
+-  return typeof value === "string" && value.length > 0 ? value : null;
+-}
+-
+-function rowValue(row: AtlasRecord, key: string): string | null {
+-  return text(row[key]);
+-}
+-
+-function values(row: AtlasRecord, key: string): string[] {
+-  const value = row[key];
+-  return Array.isArray(value) ? value.filter((part): part is string => typeof part === "string") : [];
+-}
+-
+-function preferredTerm(catalog: PilotCatalog, id: string): string {
+-  return termText(catalog, id, "en") ?? termText(catalog, id, "la") ?? id;
+-}
+-
+-function termState(row: AtlasRecord): string {
+-  const state = rowValue(row, "reviewState");
+-  return state ? stateNames[state] ?? state : "상태 미기록";
+-}
+-
+-function sourceName(source: AtlasRecord | undefined): string {
+-  return source ? rowValue(source, "title") ?? source.id : "출처 정보 없음";
+-}
+-
+-function TermList({ catalog, conceptId }: { catalog: PilotCatalog; conceptId: string }) {
+-  const terms = displayTerms(catalog, conceptId);
+-  if (terms.length === 0) return <p className="muted">등록된 용어가 없습니다.</p>;
+-
+-  return (
+-    <ul className="term-list">
+-      {terms.map((term) => {
+-        const language = rowValue(term, "language") ?? "";
+-        const script = rowValue(term, "script") ?? "";
+-        const missingReason = rowValue(term, "missingReason");
+-        const linked = linkedEvidence(catalog, term.evidenceIds);
+-        return (
+-          <li className="term-row" key={term.id}>
+-            <div className="term-heading">
+-              <span className="term-language">
+-                {languageNames[language] ?? (language || "언어 미기록")}
+-                {scriptNames[script] ? ` · ${scriptNames[script]}` : ""}
+-              </span>
+-              <span className={`badge ${term.reviewState === "needs_review" ? "badge-review" : "badge-muted"}`}>
+-                {termState(term)}
+-              </span>
+-            </div>
+-            <p className={text(term.text) ? "term-value" : "term-value missing-value"}>
+-              {text(term.text) ?? "용어 미확인"}
+-            </p>
+-            {missingReason && <p className="missing-reason">{missingReason}</p>}
+-            {linked.length > 0 && (
+-              <div className="term-evidence">
+-                {linked.map((item) => {
+-                  const source = sourceForEvidence(catalog, item);
+-                  return (
+-                    <div className="evidence-line" key={item.id}>
+-                      <span>{sourceName(source)}</span>
+-                      <span>{rowValue(item, "locator") ?? item.id}</span>
+-                      {source && text(source.urlOrLocalRef) && (
+-                        <a href={text(source.urlOrLocalRef)!} target="_blank" rel="noreferrer">
+-                          출처 열기
+-                        </a>
+-                      )}
+-                    </div>
+-                  );
+-                })}
+-              </div>
+-            )}
+-          </li>
+-        );
+-      })}
+-    </ul>
+-  );
+-}
+-
+-function ClaimCard({ catalog, claim }: { catalog: PilotCatalog; claim: AtlasRecord }) {
+-  const value = claim.value && typeof claim.value === "object" ? (claim.value as Record<string, unknown>) : {};
+-  const summary = text(value.summary);
+-  const field = rowValue(claim, "field") ?? "기록";
+-  const evidence = linkedEvidence(catalog, claim.evidenceIds);
+-  const edition = text(value.edition);
+-  return (
+-    <article className="claim-card">
+-      <div className="claim-heading">
+-        <span>{field === "attachment_description" ? "부착 설명" : field === "tendon_course_related_structures" ? "건 주행 기록" : field}</span>
+-        <span className="badge badge-review">{termState(claim)}</span>
+-      </div>
+-      <p className="claim-summary">{summary ?? "기록된 요약이 없습니다."}</p>
+-      {edition && <p className="claim-edition">판본: {edition}</p>}
+-      {evidence.length > 0 ? (
+-        <ul className="claim-sources">
+-          {evidence.map((item) => {
+-            const source = sourceForEvidence(catalog, item);
+-            const url = text(source?.urlOrLocalRef);
+-            return (
+-              <li key={item.id}>
+-                <span className="source-title">{sourceName(source)}</span>
+-                <span>{rowValue(item, "locator") ?? item.id}</span>
+-                {url && <a href={url} target="_blank" rel="noreferrer">원문</a>}
+-              </li>
+-            );
+-          })}
+-        </ul>
+-      ) : (
+-        <p className="muted">연결된 근거 항목이 없습니다.</p>
+-      )}
+-    </article>
+-  );
+-}
+-
+-function AttachmentList({ catalog, conceptId }: { catalog: PilotCatalog; conceptId: string }) {
+-  const attachments = catalog.attachments.filter((item) => item.muscleOrPartId === conceptId);
+-  if (attachments.length === 0) return <p className="empty-note">연결된 기시·정지 기록이 아직 없습니다.</p>;
+-
+-  return (
+-    <div className="attachment-list">
+-      {attachments.map((attachment) => {
+-        const role = rowValue(attachment, "role") ?? "구조 연결";
+-        const targetId = rowValue(attachment, "targetStructureId") ?? rowValue(attachment, "landmarkId");
+-        const claim = catalog.claims.find((row) => row.id === attachment.descriptionClaimId);
+-        return (
+-          <article className="attachment-card" key={attachment.id}>
+-            <div className="attachment-title">
+-              <span className={`role-tag role-${role}`}>{roleNames[role] ?? role}</span>
+-              <strong>{targetId ? recordLabel(catalog, targetId) : "대상 구조 미기록"}</strong>
+-            </div>
+-            {targetId && <p className="record-id">{targetId}</p>}
+-            {claim ? (
+-              <ClaimCard catalog={catalog} claim={claim} />
+-            ) : (
+-              <p className="empty-note">설명 claim이 연결되지 않았습니다.</p>
+-            )}
+-          </article>
+-        );
+-      })}
+-    </div>
+-  );
+-}
+-
+-function App() {
++import { useEffect, useMemo, useState } from 'react';
++import { loadPilotCatalog, linkedEvidence, sourceForEvidence, type PilotCatalog } from '../data/catalog';
++import { findMuscles, learningConcepts, nameFor, nameSources, structureSummary } from '../data/learning';
++import { GLBViewer } from '../viewer/GLBViewer';
++import { attachmentContextById } from '../viewer/attachmentContext';
++import './styles.css';
++
++type TabName = '구조' | '기능' | '평가';
++export default function App() {
+   const [catalog, setCatalog] = useState<PilotCatalog | null>(null);
+-  const [loadError, setLoadError] = useState<string | null>(null);
+-  const [selectedId, setSelectedId] = useState<string | null>(null);
+-  const [search, setSearch] = useState("");
+-
++  const [error, setError] = useState('');
++  const [selectedId, setSelectedId] = useState('HA-M-000001');
++  const [query, setQuery] = useState('');
++  const [tab, setTab] = useState<TabName>('구조');
++  const [scope, setScope] = useState<'model' | 'all'>('model');
++  const [activeAttachmentId, setActiveAttachmentId] = useState<string | null>(null);
++  useEffect(() => { let active = true; loadPilotCatalog().then(c => { if (active) setCatalog(c); }).catch(e => { if (active) setError(String(e)); }); return () => { active = false; }; }, []);
+   useEffect(() => {
+-    let active = true;
+-    loadPilotCatalog()
+-      .then((loaded) => {
+-        if (active) setCatalog(loaded);
+-      })
+-      .catch((error: unknown) => {
+-        if (active) setLoadError(error instanceof Error ? error.message : "카탈로그를 불러오지 못했습니다.");
+-      });
+-    return () => {
+-      active = false;
+-    };
++    const sync = () => { setSelectedId(new URLSearchParams(location.search).get('muscle') ?? 'HA-M-000001'); setTab('구조'); setActiveAttachmentId(null); };
++    sync(); window.addEventListener('popstate', sync); return () => window.removeEventListener('popstate', sync);
+   }, []);
+-
+-  const availableIds = useMemo(
+-    () => new Set(catalog?.concepts.map((concept) => concept.id) ?? []),
+-    [catalog],
+-  );
+-
+-  useEffect(() => {
+-    if (!catalog) return;
+-    const syncSelection = () => {
+-      const url = new URL(window.location.href);
+-      const queryId = url.searchParams.get("muscle");
+-      if (queryId === null) {
+-        const fallbackId = catalog.pilotMuscleIds.find((id) => availableIds.has(id)) ?? null;
+-        setSelectedId(fallbackId);
+-        if (fallbackId) {
+-          url.searchParams.set("muscle", fallbackId);
+-          window.history.replaceState(window.history.state, "", url);
+-        }
+-        return;
+-      }
+-      setSelectedId(availableIds.has(queryId) ? queryId : null);
+-    };
+-    syncSelection();
+-    window.addEventListener("popstate", syncSelection);
+-    return () => window.removeEventListener("popstate", syncSelection);
+-  }, [catalog, availableIds]);
+-
+-  const concepts = catalog?.concepts ?? [];
+-  const viewerConcepts = useMemo(() => concepts.map((concept) => ({
+-    id: concept.id,
+-    entityType: concept.entityType,
+-    parentId: rowValue(concept, "parentId"),
+-  })), [concepts]);
+-  const primaryConcepts = catalog?.pilotMuscleIds.flatMap((id) => {
+-    const concept = concepts.find((row) => row.id === id);
+-    return concept ? [concept] : [];
+-  }) ?? [];
+-  const filteredConcepts = primaryConcepts.filter((concept) => {
+-    const query = search.trim().toLocaleLowerCase();
+-    if (!query || !catalog) return true;
+-    const searchable = [concept.id, termText(catalog, concept.id, "en"), termText(catalog, concept.id, "la")]
+-      .filter((value): value is string => Boolean(value))
+-      .join(" ")
+-      .toLocaleLowerCase();
+-    return searchable.includes(query);
+-  });
+-  const selected = concepts.find((concept) => concept.id === selectedId) ?? null;
+-  const selectedParentId = rowValue(selected ?? ({} as AtlasRecord), "parentId");
+-  const selectedMainId = selected?.entityType === "muscle_part" ? selectedParentId : selectedId;
+-  const selectedMain = selectedMainId ? concepts.find((concept) => concept.id === selectedMainId) : null;
+-  const childParts = selectedMain
+-    ? catalog?.headPartIds.flatMap((id) => {
+-        const child = concepts.find((concept) => concept.id === id && concept.parentId === selectedMain.id);
+-        return child ? [child] : [];
+-      }) ?? []
+-    : [];
+-  const selectedRegionLabels = selected && catalog
+-    ? values(selected, "regionIds").map((id) => {
+-        const region = catalog.regions.find((row) => row.id === id);
+-        return text(region?.label) ?? id;
+-      })
+-    : [];
+-  const claimsForSelected = selected
+-    ? catalog?.claims.filter((claim) => claim.subjectId === selected.id) ?? []
+-    : [];
+-  const missingTerms = selected && catalog
+-    ? displayTerms(catalog, selected.id).filter((term) => !text(term.text))
+-    : [];
+-  const catalogPartial = Boolean(catalog && catalog.catalogStatus.catalogComplete !== true);
+-
++  const concepts = useMemo(() => catalog ? learningConcepts(catalog) : [], [catalog]);
++  const viewerConcepts = useMemo(() => concepts.map(c => ({ id: c.id, entityType: c.entityType, parentId: typeof c.parentId === 'string' ? c.parentId : null })), [concepts]);
++  if (error) return <main className="load-state"><h1>자료를 불러오지 못했습니다</h1><p>{error}</p><button onClick={() => location.reload()}>다시 시도</button></main>;
++  if (!catalog) return <main className="load-state" role="status">Human Atlas를 준비하고 있습니다…</main>;
++  const selected = concepts.find(c => c.id === selectedId);
++  const name = nameFor(catalog, selectedId);
++  const parent = selected?.entityType === 'muscle_part' && typeof selected.parentId === 'string' ? selected.parentId : selectedId;
++  const parts = concepts.filter(c => c.entityType === 'muscle_part' && c.parentId === parent);
++  const owners = new Set([selectedId, ...concepts.filter(c => c.parentId === selectedId).map(c => c.id)]);
++  const attachments = catalog.attachments.filter(a => owners.has(String(a.muscleOrPartId)));
++  const canShow = catalog.pilotMuscleIds.includes(selectedId) || catalog.headPartIds.includes(selectedId);
++  const results = findMuscles(catalog, query).filter(r => query.trim() || scope === 'all' || catalog.pilotMuscleIds.includes(r.entry.id));
+   function choose(id: string) {
+-    const url = new URL(window.location.href);
+-    url.searchParams.set("muscle", id);
+-    window.history.pushState(window.history.state, "", url);
+-    setSelectedId(id);
++    setSelectedId(id); setTab('구조'); setActiveAttachmentId(null);
++    const url = new URL(location.href); url.searchParams.set('muscle', id); history.pushState(null, '', url);
+   }
+-
+-  if (loadError) {
+-    return (
+-      <main className="state-page" role="alert">
+-        <p className="eyebrow">HUMAN ATLAS · LOCAL STUDY</p>
+-        <h1>카탈로그를 불러오지 못했습니다</h1>
+-        <p>{loadError}</p>
+-        <p className="muted">프로젝트의 atlas-data/catalog 파일 접근 상태를 확인한 뒤 다시 실행해 주세요.</p>
+-      </main>
+-    );
+-  }
+-  if (!catalog) {
+-    return (
+-      <main className="state-page" role="status" aria-live="polite">
+-        <p className="eyebrow">HUMAN ATLAS · LOCAL STUDY</p>
+-        <h1>구조 자료를 불러오는 중입니다</h1>
+-        <p className="muted">파일럿 카탈로그를 읽고 있습니다.</p>
+-      </main>
+-    );
+-  }
+-
+-  const unknownSelection = new URLSearchParams(window.location.search).has("muscle") && !selected;
+-
+-  return (
+-    <div className="app-shell">
+-      <a className="skip-link" href="#details">선택한 구조 내용으로 건너뛰기</a>
+-      <header className="topbar">
+-        <div className="brand-block">
+-          <p className="eyebrow">LOCAL ANATOMY STUDY</p>
+-          <a className="brand" href="/" aria-label="HUMAN ATLAS 시작">HUMAN ATLAS</a>
+-        </div>
+-        <div className="topbar-meta">
+-          <span className="revision-pill">{catalog.revision ?? "revision 미기록"}</span>
+-          <span className="scope-pill">정적 3D 파일럿 · 검토 대기</span>
+-        </div>
+-      </header>
+-
+-      <div className="catalog-notice" role="status">
+-        <span className="notice-mark" aria-hidden="true">i</span>
+-        <div>
+-          <strong>{catalogPartial ? "부분 카탈로그" : "카탈로그 상태 확인"}</strong>
+-          <p>
+-            현재 파일럿 ID {catalog.pilotMuscleIds.length}개를 표시합니다. 전체 근육 목록을 뜻하지 않으며,
+-            기록된 해부학 내용은 사람 검토 전 상태입니다.
+-          </p>
+-          {catalog.missingConceptIds.length > 0 && (
+-            <p>카탈로그에서 찾지 못한 ID: {catalog.missingConceptIds.join(", ")}</p>
+-          )}
+-          {catalog.warnings.includes("claims_need_review") && <p>연결된 구조 claim은 모두 검토 대기 상태입니다.</p>}
+-        </div>
++  return <div className="study-shell">
++    <a className="skip-link" href="#study-details">근육 설명으로 이동</a>
++    <header className="study-header">
++      <a className="brand" href="/"><span className="brand-dot"/> HUMAN ATLAS <small>구조를 보고, 움직임을 이해하다</small></a>
++      <label className="global-search"><span aria-hidden="true">⌕</span><input type="search" aria-label="근육 검색" placeholder="근육 검색 · 한글, 한자, English" value={query} onChange={e => setQuery(e.target.value)} autoComplete="off"/>{query && <button aria-label="검색 지우기" onClick={() => setQuery('')}>×</button>}</label>
++    </header>
++    <div className="study-layout">
++      <aside className="study-sidebar">
++        <div className="sidebar-heading"><span className="eyebrow">EXPLORE ANATOMY</span><h1>근육 탐색</h1><p>이름이 달라도, 같은 근육으로.</p></div>
++        <div className="scope-control" aria-label="목록 범위"><button aria-pressed={scope === 'model'} onClick={() => setScope('model')}>3D 근육</button><button aria-pressed={scope === 'all'} onClick={() => setScope('all')}>전체 목록</button></div>
++        <p className="result-count" role="status">{query ? `검색 결과 ${results.length}` : scope === 'model' ? '오른쪽 종아리 · 6개 근육' : `${results.length}개 항목 · 부분 목록`}</p>
++        <nav className="study-list" aria-label="근육 목록">{results.map(({entry, approximate}) => <button key={entry.id} className={entry.id === selectedId || entry.id === parent ? 'selected' : ''} aria-pressed={entry.id === selectedId} onClick={() => choose(entry.id)}><span>{entry.label}</span><small>{nameFor(catalog, entry.id).english}</small>{approximate && <em>비슷한 이름</em>}</button>)}{results.length === 0 && <p className="quiet-note">찾는 이름이 아직 등록되지 않았습니다. 다른 언어 이름으로도 검색해 보세요.</p>}</nav>
++        <div className="sidebar-bottom"><span className="small-dot"/> 구조부터 차근차근<small>현재 3D 범위는 오른쪽 종아리입니다.</small></div>
++      </aside>
++      <div className="study-stage">
++        <div className="stage-caption"><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{canShow ? '오른쪽 종아리' : '근육 사전'}</h2><p>{canShow ? '근육을 선택하고 주변 구조를 살펴보세요.' : '이름을 먼저 익히고, 구조는 차례로 연결합니다.'}</p></div>
++        <GLBViewer selectedEntityId={selectedId} activeAttachmentId={activeAttachmentId} concepts={viewerConcepts} attachments={catalog.attachments} claims={catalog.claims} onSelectEntity={choose} onClearAttachment={() => setActiveAttachmentId(null)} studyMode/>
++        <div className="stage-credit">BodyParts3D · CC BY 4.0 <details><summary>자료 안내</summary><p>BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International. 원본 형상을 좌표 변환했습니다. 형태와 부착 위치는 검토 중입니다.</p></details></div>
+       </div>
+-
+-      <div className="explorer-layout">
+-        <aside className="catalog-panel" aria-label="근육 파일럿 목록">
+-          <div className="panel-intro">
+-            <p className="eyebrow">CATALOG</p>
+-            <h1>근육 찾아보기</h1>
+-            <p className="muted">이름이나 안정 ID로 검색합니다.</p>
+-          </div>
+-          <label className="search-label" htmlFor="muscle-search">검색</label>
+-          <input
+-            id="muscle-search"
+-            className="search-input"
+-            type="search"
+-            value={search}
+-            onChange={(event) => setSearch(event.currentTarget.value)}
+-            placeholder="이름 또는 HA-M ID"
+-            autoComplete="off"
+-          />
+-          <p className="list-count" aria-live="polite">표시 {filteredConcepts.length} / {primaryConcepts.length}</p>
+-          <nav className="muscle-list" aria-label="파일럿 근육">
+-            {filteredConcepts.map((concept) => {
+-              const mainName = preferredTerm(catalog, concept.id);
+-              const latin = termText(catalog, concept.id, "la");
+-              const partsCount = catalog.headPartIds.filter((id) =>
+-                concepts.some((part) => part.id === id && part.parentId === concept.id),
+-              ).length;
+-              return (
+-                <button
+-                  className={`muscle-option ${selectedMainId === concept.id ? "is-selected" : ""}`}
+-                  key={concept.id}
+-                  type="button"
+-                  aria-pressed={selectedMainId === concept.id}
+-                  onClick={() => choose(concept.id)}
+-                >
+-                  <span className="option-name">{mainName}</span>
+-                  {latin && latin !== mainName && <span className="option-secondary">{latin}</span>}
+-                  <span className="option-id">{concept.id}</span>
+-                  {partsCount > 0 && <span className="option-parts">부분 {partsCount}</span>}
+-                </button>
+-              );
+-            })}
+-            {filteredConcepts.length === 0 && <p className="empty-note">검색 결과가 없습니다.</p>}
+-          </nav>
+-          <p className="panel-footnote">오른쪽 종아리의 정적 mesh만 연결되어 있습니다. 이름·대상 연결은 검토 대기입니다.</p>
+-        </aside>
+-
+-        <GLBViewer
+-          selectedEntityId={selectedId}
+-          concepts={viewerConcepts}
+-          attachments={catalog.attachments}
+-          claims={catalog.claims}
+-          onSelectEntity={choose}
+-        />
+-
+-        <main className="detail-panel" id="details" tabIndex={-1}>
+-          {unknownSelection ? (
+-            <section className="empty-state" role="status">
+-              <p className="eyebrow">UNAVAILABLE ID</p>
+-              <h2>선택한 ID를 이 파일럿에서 찾을 수 없습니다</h2>
+-              <p>주소의 <code>muscle</code> 값을 확인하거나 왼쪽 목록에서 자료를 선택해 주세요.</p>
+-            </section>
+-          ) : selected ? (
+-            <>
+-              <section className="detail-heading">
+-                <div className="detail-title-row">
+-                  <div>
+-                    <p className="eyebrow">{typeNames[String(selected.entityType)] ?? "구조 항목"}</p>
+-                    <h2>{preferredTerm(catalog, selected.id)}</h2>
+-                    {termText(catalog, selected.id, "la") && termText(catalog, selected.id, "la") !== preferredTerm(catalog, selected.id) && (
+-                      <p className="latin-title">{termText(catalog, selected.id, "la")}</p>
+-                    )}
+-                  </div>
+-                  <span className="stable-id">{selected.id}</span>
+-                </div>
+-                <div className="detail-meta">
+-                  {selectedRegionLabels.map((label) => <span className="region-chip" key={label}>{label}</span>)}
+-                  <span className="badge badge-review">내용 검토 대기</span>
+-                </div>
+-              </section>
+-
+-              {missingTerms.length > 0 && (
+-                <section className="missing-banner" aria-label="미확인 용어">
+-                  <strong>한국어 용어 미확인</strong>
+-                  <p>정확한 1차 용어 출처와 항목 위치가 아직 연결되지 않았습니다. 번역어를 추정해 표시하지 않습니다.</p>
+-                </section>
+-              )}
+-
+-              {childParts.length > 0 && (
+-                <section className="content-section part-section" aria-labelledby="parts-heading">
+-                  <div className="section-heading">
+-                    <div>
+-                      <p className="eyebrow">CHILD RECORDS</p>
+-                      <h3 id="parts-heading">하위 근육 부분</h3>
+-                    </div>
+-                    <span className="section-count">{childParts.length}</span>
+-                  </div>
+-                  <div className="part-list">
+-                    {childParts.map((part) => (
+-                      <button
+-                        className={`part-option ${selected.id === part.id ? "is-current" : ""}`}
+-                        key={part.id}
+-                        type="button"
+-                        aria-pressed={selected.id === part.id}
+-                        onClick={() => choose(part.id)}
+-                      >
+-                        <span>{preferredTerm(catalog, part.id)}</span>
+-                        <span className="option-id">{part.id}</span>
+-                      </button>
+-                    ))}
+-                  </div>
+-                </section>
+-              )}
+-
+-              <section className="content-section" aria-labelledby="terms-heading">
+-                <div className="section-heading">
+-                  <div>
+-                    <p className="eyebrow">TERMS & SOURCES</p>
+-                    <h3 id="terms-heading">용어와 출처</h3>
+-                  </div>
+-                  <span className="section-count">{displayTerms(catalog, selected.id).length}</span>
+-                </div>
+-                <TermList catalog={catalog} conceptId={selected.id} />
+-              </section>
+-
+-              <section className="content-section" aria-labelledby="attachments-heading">
+-                <div className="section-heading">
+-                  <div>
+-                    <p className="eyebrow">ATTACHMENTS</p>
+-                    <h3 id="attachments-heading">기시와 정지 기록</h3>
+-                  </div>
+-                  <span className="section-count">{catalog.attachments.filter((item) => item.muscleOrPartId === selected.id).length}</span>
+-                </div>
+-                <AttachmentList catalog={catalog} conceptId={selected.id} />
+-              </section>
+-
+-              {claimsForSelected.length > 0 && (
+-                <section className="content-section" aria-labelledby="course-heading">
+-                  <div className="section-heading">
+-                    <div>
+-                      <p className="eyebrow">RELATED CLAIMS</p>
+-                      <h3 id="course-heading">연결된 추가 구조 기록</h3>
+-                    </div>
+-                    <span className="section-count">{claimsForSelected.length}</span>
+-                  </div>
+-                  <div className="claim-list">
+-                    {claimsForSelected.map((claim) => <ClaimCard key={claim.id} catalog={catalog} claim={claim} />)}
+-                  </div>
+-                </section>
+-              )}
+-
+-              <section className="content-section source-state" aria-labelledby="review-heading">
+-                <div className="section-heading">
+-                  <div>
+-                    <p className="eyebrow">REVIEW STATE</p>
+-                    <h3 id="review-heading">검토 상태</h3>
+-                  </div>
+-                  <span className="badge badge-review">needs_review</span>
+-                </div>
+-                <p>이 화면은 출처 연결과 데이터 구조를 보여 줍니다. 등록된 내용의 해부학적 검토 완료를 뜻하지 않습니다.</p>
+-                <p className="record-id">원본 레코드 ID: {selected.id}</p>
+-              </section>
+-            </>
+-          ) : (
+-            <section className="empty-state" role="status">
+-              <p className="eyebrow">NO PILOT RECORD</p>
+-              <h2>표시할 구조가 없습니다</h2>
+-              <p>카탈로그 데이터에 파일럿 ID가 있는지 확인해 주세요.</p>
+-            </section>
+-          )}
+-        </main>
+-      </div>
+-      <footer className="page-footer">
+-        <span>HUMAN ATLAS · 로컬 학습 자료</span>
+-        <span>임상 진단·치료 목적이 아닙니다.</span>
+-      </footer>
++      <main className="study-details" id="study-details" tabIndex={-1}>
++        {selected ? <>
++          <div className="detail-top"><span className="eyebrow">MUSCLE ATLAS</span><span className="status-dot">학습 초안</span></div>
++          <h2>{name.label}</h2><p className="english-name">{name.english}</p>
++          <div className="names-card"><div><span>우리말</span><strong>{name.korean || '자료 준비 중'}</strong></div><div><span>한자</span><strong>{name.hanja || '표기 대조 중'}</strong></div></div>
++          <div className="study-tabs" role="tablist" aria-label="학습 내용">{(['구조','기능','평가'] as TabName[]).map(t => <button key={t} role="tab" id={`tab-${t}`} aria-controls="study-tab-panel" aria-selected={tab === t} onClick={() => setTab(t)}>{t}</button>)}</div>
++          <section id="study-tab-panel" role="tabpanel" aria-labelledby={`tab-${tab}`}>
++          {tab === '구조' ? <>
++            {parts.length > 0 && <div className="part-pills" aria-label="근육 부분"><button aria-pressed={selectedId === parent} onClick={() => choose(parent)}>전체</button>{parts.map(part => <button key={part.id} aria-pressed={part.id === selectedId} onClick={() => choose(part.id)}>{nameFor(catalog, part.id).label.split(' · ').at(-1)}</button>)}</div>}
++            {(['origin','insertion'] as const).map(role => <section className="attachment-section attachment-summary-block" key={role}>
++              <h3><i className={role}/>{role === 'origin' ? '기시' : '정지'}<span>{role === 'origin' ? 'ORIGIN' : 'INSERTION'}</span></h3>
++              {structureSummary(selectedId, role) ? <p>{structureSummary(selectedId, role)}</p> : <p className="quiet-note">이 근육의 {role === 'origin' ? '기시' : '정지'} 설명은 준비 중입니다.</p>}
++            </section>)}
++            {attachments.length > 0 && <details className="attachment-context-disclosure">
++              <summary>부착별 관련 뼈와 영문 근거 보기</summary>
++              {(['origin','insertion','other_attachment'] as const).filter(role => attachments.some(a => a.role === role)).map(role => {
++                const roleAttachments = attachments.filter(a => a.role === role);
++                return <section className="attachment-section" key={role}>
++                  <h3><i className={role}/>{role === 'origin' ? '기시 문맥' : role === 'insertion' ? '정지 문맥' : '그 외 부착'}</h3>
++                  <div className="attachment-candidates">{roleAttachments.map(a => {
++                    const context = attachmentContextById.get(a.id);
++                    return <button key={a.id} type="button" aria-pressed={activeAttachmentId === a.id} aria-label={`${role === 'origin' ? '기시' : role === 'insertion' ? '정지' : '부착'} 설명 선택`} onClick={() => setActiveAttachmentId(a.id)}>
++                      <span>{context?.contextMeshAssetId ? '관련 뼈 강조' : '3D 위치 표시 보류'}</span>
++                      <small>{context?.contextMeshAssetId ? '정확한 부착면은 미지정' : '표적 구조 3D 미확보 · 위치 표시 보류'}</small>
++                    </button>;
++                  })}</div>
++                  <details className="attachment-source-detail">
++                    <summary>영문 상세 설명과 판본 펼치기</summary>
++                    {roleAttachments.map(a => {
++                      const claim = catalog.claims.find(c => c.id === a.descriptionClaimId);
++                      const value = claim?.value as { summary?: string; edition?: string } | undefined;
++                      return <div className="attachment-source-item" key={a.id}>
++                        {value?.summary && <p lang="en">{value.summary}</p>}
++                        {value?.edition && <small>{value.edition}</small>}
++                      </div>;
++                    })}
++                  </details>
++                </section>;
++              })}
++              <p className="quiet-note">부착 설명은 Gray 1918년판에 근거한 검토 전 요약입니다. 강조된 뼈 전체는 표면 검토 대상이며 정확한 부착 영역은 아직 연결되지 않았습니다.</p>
++            </details>}
++          </> : <div className="upcoming"><span>{tab === '기능' ? '↗' : '◎'}</span><h3>{tab} 자료를 준비하고 있습니다</h3><p>{tab === '기능' ? '관절의 움직임, 자세에 따른 역할과 안정화 작용을 연결할 예정입니다.' : '검사 목적, 시행 방법과 결과를 해석하는 순서를 연결할 예정입니다.'}</p></div>}
++          </section>
++          <details className="study-sources"><summary>출처와 자료 상태</summary><p>용어는 웹 자료 대조본이며, 부착 설명은 Gray 1918년판 요약을 AI가 번역한 초안입니다. 현대 문헌 및 사람 검토는 아직 완료되지 않았습니다.</p>{name.sources.map(id => { const s = nameSources[id]; return s && <p key={id}>{s.url ? <a href={s.url} target="_blank" rel="noreferrer">{s.title} ↗</a> : s.title}<small>{s.locator}</small></p>; })}{Array.from(new Set(attachments.flatMap(a => { const c = catalog.claims.find(c => c.id === a.descriptionClaimId); return linkedEvidence(catalog,c?.evidenceIds).map(e => e.sourceId); }))).map(id => { const e = catalog.evidence.find(e => e.sourceId === id); const s = e && sourceForEvidence(catalog,e); return s && <p key={String(id)}><a href={String(s.urlOrLocalRef)} target="_blank" rel="noreferrer">{String(s.title)} ↗</a></p>; })}</details>
++        </> : <div className="upcoming"><h2>선택한 근육을 찾지 못했습니다</h2><p>목록에서 근육을 선택해 주세요.</p></div>}
++      </main>
+     </div>
+-  );
++  </div>;
+ }
+-
+-export default App;
+diff --git a/atlas-web/src/ui/styles.css b/atlas-web/src/ui/styles.css
+index 62354ce..29748dd 100644
+--- a/atlas-web/src/ui/styles.css
++++ b/atlas-web/src/ui/styles.css
+@@ -1,306 +1,603 @@
+-:root {
+-  font-family: "DM Sans", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+-  color: #1f2925;
+-  background: #f3f4ef;
+-  font-synthesis: none;
+-  text-rendering: optimizeLegibility;
+-  -webkit-font-smoothing: antialiased;
+-  --ink: #1f2925;
+-  --subtle-ink: #63706b;
+-  --quiet-ink: #77827c;
+-  --line: #dce1d9;
+-  --paper: #ffffff;
+-  --wash: #f7f8f4;
+-  --green: #236850;
+-  --green-soft: #e6f2ec;
+-  --amber: #805411;
+-  --amber-soft: #fff4dc;
+-  --red: #943e31;
+-  --red-soft: #fff0eb;
+-  --shadow: 0 18px 55px rgba(34, 53, 43, 0.055);
+-}
+-
+-* { box-sizing: border-box; }
+-
+-body {
+-  margin: 0;
+-  min-width: 320px;
+-  min-height: 100vh;
+-  background:
+-    radial-gradient(ellipse at 12% 0%, rgba(206, 225, 209, 0.43), transparent 31rem),
+-    #f3f4ef;
+-}
+-
+-button, input { font: inherit; }
+-button { color: inherit; }
+-a { color: var(--green); text-underline-offset: 0.2em; }
+-a:hover { color: #154b37; }
+-
+-.app-shell { max-width: 1440px; margin: 0 auto; padding: 0 42px 26px; }
+-.skip-link {
+-  position: fixed; z-index: 10; top: 10px; left: 10px; transform: translateY(-160%);
+-  padding: 11px 14px; border-radius: 8px; background: var(--ink); color: white; text-decoration: none;
+-}
+-.skip-link:focus { transform: translateY(0); }
+-
+-.topbar {
+-  min-height: 100px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 20px; border-bottom: 1px solid rgba(151, 164, 152, 0.3);
+-}
+-.brand-block { display: grid; gap: 3px; }
+-.eyebrow {
+-  margin: 0; color: #638071; font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+-  line-height: 1.35; text-transform: uppercase;
+-}
+-.brand {
+-  color: var(--ink); font: 800 22px/1.1 Manrope, "Apple SD Gothic Neo", sans-serif;
+-  letter-spacing: -0.06em; text-decoration: none;
+-}
+-.topbar-meta { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+-.revision-pill, .scope-pill {
+-  display: inline-flex; align-items: center; min-height: 29px; padding: 0 11px; border: 1px solid #d6dfd7;
+-  border-radius: 999px; background: rgba(255,255,255,0.55); color: #53675e; font-size: 11px; font-weight: 600;
+-}
+-.revision-pill { max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+-.scope-pill { border-color: transparent; background: #e2ece5; color: #426251; }
+-
+-.catalog-notice {
+-  display: flex; gap: 12px; margin: 24px 0 22px; padding: 15px 18px; border: 1px solid #e4d6b7;
+-  border-radius: 12px; background: #fff9eb; color: #5c4c2e;
+-}
+-.catalog-notice p { margin: 4px 0 0; color: #786a4d; font-size: 12px; line-height: 1.55; }
+-.catalog-notice strong { color: #544222; font-size: 13px; }
+-.notice-mark {
+-  display: grid; flex: 0 0 23px; width: 23px; height: 23px; place-items: center; border: 1px solid #d6c498;
+-  border-radius: 50%; color: #8b692a; font: 700 13px/1 Manrope, sans-serif;
+-}
+-
+-.explorer-layout { display: grid; grid-template-columns: minmax(240px, 285px) minmax(380px, 1.15fr) minmax(330px, .95fr); align-items: start; gap: 16px; }
+-.catalog-panel, .detail-panel, .viewer-panel {
+-  border: 1px solid #e2e6df; border-radius: 16px; background: var(--paper); box-shadow: var(--shadow);
+-}
+-.catalog-panel { position: sticky; top: 20px; overflow: hidden; padding: 24px 18px 17px; }
+-.panel-intro { padding: 0 3px 15px; }
+-.panel-intro h1 { margin: 5px 0 5px; font: 700 22px/1.22 Manrope, "Apple SD Gothic Neo", sans-serif; letter-spacing: -0.045em; }
+-.muted { color: var(--subtle-ink); }
+-.panel-intro .muted { margin: 0; font-size: 12px; }
+-.search-label { display: block; margin: 5px 0 7px; color: #5e6c64; font-size: 11px; font-weight: 700; }
+-.search-input {
+-  width: 100%; height: 43px; padding: 0 12px; border: 1px solid #dce2da; border-radius: 9px;
+-  outline: none; background: #fbfcfa; color: var(--ink); font-size: 13px; transition: border-color 120ms ease, box-shadow 120ms ease;
+-}
+-.search-input::placeholder { color: #9aa49d; }
+-.search-input:focus { border-color: #6b9c82; box-shadow: 0 0 0 3px rgba(70, 131, 98, .14); }
+-.list-count { margin: 12px 2px 8px; color: var(--quiet-ink); font-size: 10px; font-weight: 600; }
+-.muscle-list { display: grid; gap: 6px; }
+-.muscle-option, .part-option {
+-  position: relative; display: grid; width: 100%; gap: 3px; padding: 11px 12px; border: 1px solid transparent;
+-  border-radius: 10px; background: transparent; text-align: left; cursor: pointer;
+-}
+-.muscle-option:hover, .part-option:hover { border-color: #dde7df; background: #f7faf7; }
+-.muscle-option:focus-visible, .part-option:focus-visible, .button-link:focus-visible, a:focus-visible, #details:focus-visible {
+-  outline: 3px solid rgba(50, 126, 86, .44); outline-offset: 2px;
+-}
+-.muscle-option.is-selected { border-color: #b8d1c0; background: #eff6f1; }
+-.option-name { padding-right: 40px; color: #27352e; font-size: 13px; font-weight: 700; line-height: 1.35; }
+-.option-secondary { color: #637269; font-size: 11px; line-height: 1.35; }
+-.option-id, .record-id { color: #859088; font: 500 10px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.015em; }
+-.option-parts { position: absolute; top: 10px; right: 10px; color: #5c7968; font-size: 10px; }
+-.panel-footnote { margin: 14px 3px 0; padding-top: 13px; border-top: 1px solid #edf0eb; color: #7e8981; font-size: 10px; line-height: 1.55; }
+-
+-.detail-panel { min-width: 0; min-height: 620px; padding: 32px 34px 38px; }
+-.viewer-panel { min-width: 0; padding: 18px; }
+-.viewer-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 13px; }
+-.viewer-heading h2 { margin: 4px 0 0; color: #26362e; font: 700 18px/1.25 Manrope, "Apple SD Gothic Neo", sans-serif; letter-spacing: -0.04em; }
+-.viewer-canvas-wrap { position: relative; height: clamp(300px, 42vw, 510px); overflow: hidden; border: 1px solid #e2e8e1; border-radius: 12px; background: #f6f8f4; }
+-.viewer-canvas { display: block; width: 100%; height: 100%; outline: none; cursor: grab; touch-action: none; }
+-.viewer-overlay { position: absolute; inset: 0; z-index: 1; display: block; width: 100%; height: 100%; pointer-events: none; }
+-.viewer-canvas:active { cursor: grabbing; }
+-.viewer-canvas:focus-visible { box-shadow: inset 0 0 0 3px rgba(50, 126, 86, .42); }
+-.viewer-axis { position: absolute; top: 9px; right: 9px; padding: 5px 8px; border: 1px solid rgba(216, 225, 215, .9); border-radius: 999px; background: rgba(255,255,255,.88); color: #5d6d62; font-size: 9px; pointer-events: none; }
+-.viewer-loading { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(247, 249, 245, .72); color: #63756a; font-size: 12px; }
+-.viewer-toolbar { display: grid; gap: 7px; margin-top: 9px; }
+-.camera-buttons { display: flex; flex-wrap: wrap; gap: 5px; }
+-.camera-buttons button, .viewer-actions button, .mesh-controls button {
+-  min-height: 30px; padding: 0 8px; border: 1px solid #dfe6de; border-radius: 7px; background: #fbfcfa; color: #53665a; font-size: 10px; font-weight: 650; cursor: pointer;
+-}
+-.camera-buttons button:hover, .viewer-actions button:hover, .mesh-controls button:hover { border-color: #b7cebd; background: #f0f6f1; }
+-.camera-buttons button[aria-pressed="true"], .viewer-actions button.is-active, .mesh-controls button[aria-pressed="true"] { border-color: #9dbfa7; background: #e8f2eb; color: #285c42; }
+-.camera-buttons button:focus-visible, .viewer-actions button:focus-visible, .mesh-controls button:focus-visible, .mesh-select:focus-visible { outline: 3px solid rgba(50, 126, 86, .38); outline-offset: 2px; }
+-.viewer-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+-.viewer-actions button:disabled { opacity: .48; cursor: not-allowed; }
+-.viewer-help { flex: 1 1 100%; color: #7a877f; font-size: 9px; line-height: 1.5; }
+-.viewer-selected { display: grid; gap: 3px; min-height: 70px; margin-top: 12px; padding: 10px 11px; border: 1px solid #e2e8e1; border-radius: 9px; background: #f8faf7; color: #617166; font-size: 10px; line-height: 1.45; }
+-.viewer-selected strong { color: #304538; font-size: 11px; }
+-.viewer-selected code, .mesh-select code { color: #748278; font: 9px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+-.mesh-list-wrap { margin-top: 17px; padding-top: 15px; border-top: 1px solid #edf0eb; }
+-.mesh-list-heading { align-items: center; margin-bottom: 8px; }
+-.mesh-list-heading h3 { margin: 3px 0 0; color: #34463b; font-size: 13px; }
+-.mesh-list { display: grid; max-height: 310px; overflow: auto; border: 1px solid #e7ece5; border-radius: 9px; }
+-.mesh-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 5px; padding: 6px 7px; border-bottom: 1px solid #edf0eb; }
+-.mesh-row:last-child { border-bottom: 0; }
+-.mesh-row.is-current { background: #f0f6f1; }
+-.mesh-row.is-hidden { background: #f7f7f4; opacity: .68; }
+-.mesh-select { display: grid; min-width: 0; gap: 2px; padding: 3px 4px; border: 0; border-radius: 5px; background: transparent; text-align: left; cursor: pointer; }
+-.mesh-source-name { color: #34463b; font-size: 10px; font-weight: 700; line-height: 1.35; }
+-.mesh-link-state { color: #839087; font-size: 8px; line-height: 1.3; overflow-wrap: anywhere; }
+-.mesh-controls { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 3px; }
+-.mesh-controls button { min-height: 25px; padding: 0 6px; font-size: 9px; }
+-.mesh-state-label { min-width: 26px; color: #7b877f; text-align: right; font-size: 8px; }
+-.viewer-provenance { display: grid; gap: 4px; margin-top: 12px; padding-top: 10px; border-top: 1px solid #edf0eb; color: #77837b; font-size: 8px; line-height: 1.5; overflow-wrap: anywhere; }
+-.viewer-provenance strong { color: #526459; font-size: 9px; }
+-.annotation-workbench { display: grid; gap: 9px; margin-top: 13px; padding: 13px; border: 1px solid #dfe7df; border-radius: 10px; background: #fbfcfa; }
+-.annotation-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+-.annotation-heading h3 { margin: 3px 0 0; color: #34463b; font-size: 13px; }
+-.annotation-warning { margin: 0; padding: 9px 10px; border: 1px solid #e6d5b2; border-radius: 8px; background: #fff8e9; color: #6b552e; font-size: 9px; line-height: 1.55; }
+-.annotation-link-row { display: grid; gap: 5px; }
+-.annotation-link-row label, .annotation-tools label, .annotation-json-label { color: #56695d; font-size: 9px; font-weight: 700; }
+-.annotation-link-row select, .annotation-tools select { min-width: 0; min-height: 31px; padding: 4px 7px; border: 1px solid #dce4db; border-radius: 7px; background: white; color: #38483e; font-size: 9px; }
+-.annotation-source-note { margin: 0; color: #78847c; font-size: 8px; line-height: 1.5; overflow-wrap: anywhere; }
+-.annotation-tools { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
+-.annotation-tools button, .annotation-json-actions button, .annotation-row-actions button { min-height: 29px; padding: 0 8px; border: 1px solid #dfe6de; border-radius: 7px; background: #fff; color: #4d6255; font-size: 9px; font-weight: 650; cursor: pointer; }
+-.annotation-tools button:hover, .annotation-json-actions button:hover, .annotation-row-actions button:hover { border-color: #b7cebd; background: #f0f6f1; }
+-.annotation-tools button:disabled, .annotation-row-actions button:disabled { opacity: .5; cursor: not-allowed; }
+-.annotation-message { min-height: 30px; margin: 0; color: #66766c; font-size: 9px; line-height: 1.5; }
+-.annotation-list { display: grid; gap: 5px; }
+-.annotation-list .empty-note { margin: 0; padding: 9px; border: 1px dashed #dce3db; border-radius: 7px; color: #7d8880; font-size: 9px; }
+-.annotation-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 5px; padding: 8px; border: 1px solid #e4e9e2; border-radius: 8px; background: #fff; }
+-.annotation-row.is-stale { border-color: #e6c4b8; background: #fff8f5; }
+-.annotation-row-copy { display: grid; min-width: 0; gap: 3px; color: #708077; font-size: 8px; line-height: 1.45; overflow-wrap: anywhere; }
+-.annotation-row-copy strong { color: #43564a; font-size: 9px; }
+-.annotation-row-copy code { color: #879188; font: 8px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; }
+-.annotation-unbound { color: #9a653a; }
+-.annotation-row-actions { display: flex; align-items: start; gap: 3px; }
+-.annotation-row-actions button { min-height: 25px; padding: 0 6px; font-size: 8px; }
+-.annotation-json-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
+-.annotation-json-actions span { flex: 1 1 100%; color: #818c84; font-size: 8px; }
+-.annotation-json-label { margin-top: 1px; }
+-.annotation-workbench textarea { width: 100%; min-height: 100px; resize: vertical; padding: 8px; border: 1px solid #dfe6de; border-radius: 7px; background: #fff; color: #536257; font: 8px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; }
+-.viewer-error { padding: 18px 15px; border: 1px solid #efd3ca; border-radius: 10px; background: #fff6f2; color: #873d2e; font-size: 12px; line-height: 1.55; overflow-wrap: anywhere; }
+-.viewer-error p { margin: 7px 0; }
+-.viewer-error .muted { color: #7b6d67; }
+-.detail-heading { padding: 0 0 21px; border-bottom: 1px solid #e9ede7; }
+-.detail-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
+-.detail-heading h2 { margin: 7px 0 5px; color: #1c2d24; font: 700 clamp(25px, 3vw, 36px)/1.15 Manrope, "Apple SD Gothic Neo", sans-serif; letter-spacing: -0.055em; }
+-.latin-title { margin: 0; color: #718077; font: italic 14px/1.5 "DM Sans", sans-serif; }
+-.stable-id { flex: 0 0 auto; margin-top: 5px; padding: 7px 10px; border: 1px solid #e2e7e1; border-radius: 7px; color: #6d7a71; font: 11px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; }
+-.detail-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+-.region-chip { padding: 4px 9px; border-radius: 999px; background: #f1f4ef; color: #66776c; font-size: 10px; }
+-.badge { display: inline-flex; align-items: center; width: fit-content; min-height: 21px; padding: 2px 8px; border-radius: 999px; font-size: 10px; font-weight: 700; line-height: 1.35; }
+-.badge-review { background: var(--amber-soft); color: var(--amber); }
+-.badge-muted { background: #eff1ef; color: #68736c; }
+-.missing-banner { margin: 17px 0 0; padding: 13px 15px; border: 1px solid #f0d2c6; border-radius: 10px; background: var(--red-soft); }
+-.missing-banner strong { color: #873d2e; font-size: 12px; }
+-.missing-banner p { margin: 5px 0 0; color: #875e52; font-size: 11px; line-height: 1.55; }
+-
+-.content-section { padding: 24px 0; border-bottom: 1px solid #e9ede7; }
+-.content-section:last-child { border-bottom: 0; }
+-.section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; margin-bottom: 15px; }
+-.section-heading h3 { margin: 4px 0 0; color: #26362e; font: 700 18px/1.25 Manrope, "Apple SD Gothic Neo", sans-serif; letter-spacing: -0.04em; }
+-.section-count { display: inline-grid; min-width: 26px; height: 26px; padding: 0 7px; place-items: center; border: 1px solid #e3e8e1; border-radius: 999px; color: #78847b; font-size: 10px; }
+-.term-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+-.term-row { padding: 13px 14px; border: 1px solid #e9ede7; border-radius: 10px; background: #fdfefc; }
+-.term-heading, .claim-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+-.term-language { color: #68756d; font-size: 10px; font-weight: 700; }
+-.term-value { margin: 9px 0 0; color: #27352d; font-size: 14px; font-weight: 600; line-height: 1.45; overflow-wrap: anywhere; }
+-.missing-value { color: #a24737; font-weight: 600; }
+-.missing-reason { margin: 6px 0 0; color: #81584c; font-size: 11px; line-height: 1.5; }
+-.term-evidence { display: grid; gap: 4px; margin-top: 10px; }
+-.evidence-line { display: grid; grid-template-columns: minmax(110px, .3fr) minmax(0, 1fr) auto; gap: 6px 10px; color: #768078; font-size: 10px; line-height: 1.45; }
+-.evidence-line span:nth-child(2) { overflow-wrap: anywhere; }
+-
+-.part-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+-.part-option { gap: 5px; border-color: #e6ebe5; background: #fbfcfa; }
+-.part-option span:first-child { color: #34463b; font-size: 12px; font-weight: 700; line-height: 1.35; }
+-.part-option.is-current { border-color: #b7d1bf; background: #eff6f1; }
+-.attachment-list, .claim-list { display: grid; gap: 10px; }
+-.attachment-card { padding: 14px; border: 1px solid #e4eae3; border-radius: 11px; background: #fcfdfb; }
+-.attachment-title { display: flex; align-items: flex-start; gap: 10px; }
+-.attachment-title strong { padding-top: 1px; color: #34453a; font-size: 13px; line-height: 1.45; }
+-.role-tag { flex: 0 0 auto; min-width: 40px; padding: 4px 7px; border-radius: 5px; background: #e8f2ec; color: #37664f; text-align: center; font-size: 10px; font-weight: 700; }
+-.role-insertion { background: #eef0fb; color: #4e5783; }
+-.attachment-card > .record-id { margin: 5px 0 10px 50px; }
+-.claim-card { margin-top: 11px; padding: 12px; border-radius: 8px; background: #f3f5f2; }
+-.attachment-card > .claim-card { margin-top: 10px; }
+-.claim-heading { color: #53635a; font-size: 10px; font-weight: 700; }
+-.claim-summary { margin: 8px 0 0; color: #36443b; font-size: 12px; line-height: 1.65; }
+-.claim-edition { margin: 7px 0 0; color: #77827b; font-size: 10px; line-height: 1.5; }
+-.claim-sources { display: grid; gap: 5px; margin: 10px 0 0; padding: 8px 0 0; border-top: 1px solid #e1e6df; list-style: none; }
+-.claim-sources li { display: grid; grid-template-columns: minmax(110px, .35fr) minmax(0, 1fr) auto; align-items: start; gap: 6px 9px; color: #78827b; font-size: 10px; line-height: 1.5; }
+-.claim-sources li span:nth-child(2) { overflow-wrap: anywhere; }
+-.source-title { color: #617166; font-weight: 600; }
+-.claim-sources a { white-space: nowrap; }
+-.empty-note { margin: 0; padding: 12px; border-radius: 8px; background: #f7f8f5; color: #7b867e; font-size: 11px; line-height: 1.55; }
+-.source-state { color: #69776e; font-size: 12px; line-height: 1.6; }
+-.source-state p { margin: 7px 0; }
+-.source-state .record-id { margin-top: 10px; }
+-.empty-state { max-width: 560px; margin: 65px auto; padding: 30px; border: 1px dashed #d4ddd3; border-radius: 14px; background: #fbfcfa; text-align: center; }
+-.empty-state h2 { margin: 8px 0; font: 700 22px/1.3 Manrope, "Apple SD Gothic Neo", sans-serif; letter-spacing: -0.035em; }
+-.empty-state p:last-child { color: #6f7c73; font-size: 12px; line-height: 1.6; }
+-.state-page { max-width: 720px; margin: 12vh auto; padding: 36px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); }
+-.state-page h1 { margin: 10px 0; font: 700 26px/1.2 Manrope, sans-serif; }
+-.state-page p { line-height: 1.6; }
+-.page-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 3px 0; color: #879188; font-size: 10px; }
+-
+-@media (max-width: 1180px) {
+-  .app-shell { padding-right: 22px; padding-left: 22px; }
+-  .explorer-layout { grid-template-columns: minmax(220px, 270px) minmax(0, 1fr); gap: 14px; }
+-  .catalog-panel { grid-column: 1; grid-row: 1 / span 2; }
+-  .viewer-panel, .detail-panel { grid-column: 2; }
+-  .catalog-panel { padding: 19px 13px 14px; }
+-  .detail-panel { padding: 26px 23px 30px; }
+-  .viewer-panel { padding: 14px; }
+-  .viewer-canvas-wrap { height: clamp(330px, 55vw, 500px); }
+-}
+-
+-@media (max-width: 700px) {
+-  .app-shell { padding: 0 13px 22px; }
+-  .topbar { min-height: 80px; }
+-  .brand { font-size: 18px; }
+-  .eyebrow { font-size: 9px; }
+-  .revision-pill { max-width: 125px; font-size: 9px; }
+-  .scope-pill { min-height: 27px; padding: 0 9px; font-size: 10px; }
+-  .catalog-notice { margin: 14px 0; padding: 12px; }
+-  .catalog-notice p { font-size: 11px; }
+-  .explorer-layout { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+-  .catalog-panel { position: static; padding: 16px 14px 12px; }
+-  .catalog-panel, .viewer-panel, .detail-panel { grid-column: 1; grid-row: auto; }
+-  .panel-intro { padding-bottom: 10px; }
+-  .panel-intro h1 { font-size: 18px; }
+-  .panel-intro .muted { font-size: 11px; }
+-  .search-label { margin-top: 3px; }
+-  .search-input { height: 41px; }
+-  .list-count { margin-top: 9px; }
+-  .muscle-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; }
+-  .muscle-option { min-height: 79px; padding: 9px; }
+-  .option-name { padding-right: 0; font-size: 11px; }
+-  .option-secondary { font-size: 9px; }
+-  .option-id { font-size: 8px; }
+-  .option-parts { top: auto; right: 8px; bottom: 8px; font-size: 8px; }
+-  .panel-footnote { margin-top: 10px; padding-top: 9px; font-size: 9px; }
+-  .detail-panel { min-height: 400px; padding: 20px 15px 23px; }
+-  .viewer-panel { padding: 12px; }
+-  .viewer-heading h2 { font-size: 17px; }
+-  .viewer-canvas-wrap { height: min(112vw, 430px); min-height: 280px; }
+-  .camera-buttons button { flex: 1 0 auto; }
+-  .mesh-row { grid-template-columns: minmax(0, 1fr); }
+-  .mesh-controls { justify-content: flex-start; padding-left: 4px; }
+-  .detail-title-row { display: block; }
+-  .detail-heading h2 { margin-top: 6px; font-size: 26px; }
+-  .stable-id { display: inline-flex; margin-top: 9px; }
+-  .latin-title { font-size: 12px; }
+-  .section-heading h3 { font-size: 16px; }
+-  .content-section { padding: 20px 0; }
+-  .part-list { grid-template-columns: minmax(0, 1fr); }
+-  .part-option { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+-  .part-option .option-id { text-align: right; }
+-  .evidence-line, .claim-sources li { grid-template-columns: minmax(0, 1fr) auto; }
+-  .evidence-line span:first-child, .claim-sources .source-title { grid-column: 1 / -1; }
+-  .claim-sources li span:nth-child(2) { grid-column: 1 / -1; }
+-  .claim-sources a { grid-column: 2; grid-row: 2; }
+-  .page-footer { align-items: flex-start; flex-direction: column; gap: 5px; font-size: 9px; }
+-}
++:root{
++  font-family:Inter,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
++  color:#272e32;
++  background:#f1f2f3;
++  font-synthesis:none;
++  font-size:14px}
++  *{
++    box-sizing:border-box}
++    body{
++      margin:0}
++      button,input{
++        font:inherit}
++        button,a,input,summary{
++          -webkit-tap-highlight-color:transparent}
++          button{
++            cursor:pointer}
++            button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible,canvas:focus-visible{
++              outline:3px solid #4d8584;
++              outline-offset:3px}
++              a{
++                color:#426e70;
++                text-decoration:none}
++                button{
++                  border:0;
++                  background:transparent;
++                  color:inherit}
++                  p{
++                    line-height:1.65}
++                    button[aria-pressed=true]{
++                      background:#e4eeee;
++                      color:#356262}
++                      button:disabled{
++                        opacity:.45;
++                        cursor:default}
++                        .study-shell{
++                          height:100dvh;
++                          display:flex;
++                          flex-direction:column}
++                          .study-header{
++                            height:100px;
++                            flex-shrink:0;
++                            display:flex;
++                            align-items:center;
++                            justify-content:space-between;
++                            padding:0 36px;
++                            gap:30px}
++                            .brand{
++                              color:#232a2f;
++                              font-weight:750;
++                              letter-spacing:.06em;
++                              font-size:20px;
++                              white-space:nowrap}
++                              .brand-dot,.small-dot{
++                                display:inline-block;
++                                background:#648e8c;
++                                border-radius:50%;
++                                width:8px;
++                                height:8px;
++                                margin-right:10px}
++                                .brand small{
++                                  display:block;
++                                  font-size:11px;
++                                  color:#7e878f;
++                                  font-weight:400;
++                                  letter-spacing:0;
++                                  margin:9px 0 0 18px}
++                                  .global-search{
++                                    width:380px;
++                                    display:flex;
++                                    align-items:center;
++                                    gap:10px;
++                                    border:1px solid #e2e5e8;
++                                    background:#fff;
++                                    border-radius:15px;
++                                    padding:0 15px;
++                                    box-shadow:0 3px 15px #29394403}
++                                    .global-search>span{
++                                      font-size:30px;
++                                      color:#7d878f}
++                                      .global-search input{
++                                        width:100%;
++                                        min-width:0;
++                                        border:0;
++                                        outline:none;
++                                        background:transparent;
++                                        height:50px;
++                                        font-size:13px}
++                                        .global-search button{
++                                          font-size:22px}
++                                          .study-layout{
++                                            display:grid;
++                                            grid-template-columns:248px minmax(0,1fr) 350px;
++                                            gap:20px;
++                                            padding:12px 28px 26px;
++                                            min-height:0;
++                                            flex:1}
++                                            .study-sidebar,.study-details{
++                                              background:#ffffffed;
++                                              border:1px solid #e8eaec;
++                                              border-radius:24px;
++                                              box-shadow:0 12px 40px #263b4910;
++                                              min-height:0;
++                                              overflow:auto}
++                                              .study-sidebar{
++                                                display:flex;
++                                                flex-direction:column;
++                                                padding:25px 15px 18px}
++                                                .sidebar-heading{
++                                                  padding:0 10px}
++                                                  .eyebrow{
++                                                    font-size:10px;
++                                                    letter-spacing:.16em;
++                                                    color:#869097;
++                                                    font-weight:650}
++                                                    .sidebar-heading h1{
++                                                      font-size:22px;
++                                                      margin:10px 0 8px;
++                                                      letter-spacing:-.04em}
++                                                      .sidebar-heading p{
++                                                        font-size:12px;
++                                                        color:#7a858d;
++                                                        margin:0 0 22px}
++                                                        .scope-control{
++                                                          display:flex;
++                                                          background:#f1f3f4;
++                                                          border-radius:11px;
++                                                          padding:4px}
++                                                          .scope-control button{
++                                                            flex:1;
++                                                            padding:9px 0;
++                                                            border-radius:8px;
++                                                            font-size:12px;
++                                                            color:#79838b}
++                                                            .scope-control button[aria-pressed=true]{
++                                                              background:white;
++                                                              color:#344149;
++                                                              box-shadow:0 2px 5px #00000008}
++                                                              .result-count{
++                                                                font-size:11px;
++                                                                color:#8d979e;
++                                                                padding:0 10px;
++                                                                margin:18px 0 10px}
++                                                                .study-list{
++                                                                  overflow:auto;
++                                                                  min-height:0;
++                                                                  flex:1;
++                                                                  display:flex;
++                                                                  flex-direction:column;
++                                                                  gap:5px}
++                                                                  .study-list button{
++                                                                    text-align:left;
++                                                                    border-radius:12px;
++                                                                    padding:14px 13px;
++                                                                    flex-shrink:0;
++                                                                    border:1px solid transparent}
++                                                                    .study-list button:hover{
++                                                                      background:#f4f6f7}
++                                                                      .study-list button.selected{
++                                                                        background:#edf3f2;
++                                                                        border-color:#dce9e7}
++                                                                        .study-list button span{
++                                                                          font-size:15px;
++                                                                          font-weight:600;
++                                                                          display:block}
++                                                                          .study-list small{
++                                                                            display:block;
++                                                                            color:#89939a;
++                                                                            font-size:11px;
++                                                                            margin-top:6px}
++                                                                            .study-list em{
++                                                                              font-size:10px;
++                                                                              color:#527d7d;
++                                                                              font-style:normal}
++                                                                              .sidebar-bottom{
++                                                                                border-top:1px solid #edf0f1;
++                                                                                margin:18px 10px 0;
++                                                                                padding-top:18px;
++                                                                                color:#65767c;
++                                                                                font-size:11px}
++                                                                                .sidebar-bottom small{
++                                                                                  display:block;
++                                                                                  font-size:10px;
++                                                                                  color:#98a0a5;
++                                                                                  margin-top:9px}
++                                                                                  .small-dot{
++                                                                                    width:6px;
++                                                                                    height:6px}
++                                                                                    .study-stage{
++                                                                                      position:relative;
++                                                                                      min-width:0;
++                                                                                      min-height:0;
++                                                                                      display:flex;
++                                                                                      flex-direction:column}
++                                                                                      .stage-caption{
++                                                                                        position:absolute;
++                                                                                        z-index:2;
++                                                                                        top:18px;
++                                                                                        left:16px;
++                                                                                        pointer-events:none}
++                                                                                        .stage-caption h2{
++                                                                                          font-size:32px;
++                                                                                          font-weight:600;
++                                                                                          letter-spacing:-.05em;
++                                                                                          margin:10px 0 4px}
++                                                                                          .stage-caption p{
++                                                                                            font-size:12px;
++                                                                                            color:#8b959c;
++                                                                                            margin:0}
++                                                                                            .study-viewer{
++                                                                                              height:100%;
++                                                                                              min-height:0;
++                                                                                              position:relative}
++                                                                                              .study-canvas-wrap{
++                                                                                                height:100%;
++                                                                                                width:100%;
++                                                                                                padding-top:105px;
++                                                                                                padding-bottom:120px}
++                                                                                                .viewer-canvas{
++                                                                                                  width:100%;
++                                                                                                  height:100%;
++                                                                                                  display:block;
++                                                                                                  touch-action:none;
++                                                                                                  outline:none;
++                                                                                                  cursor:grab}
++                                                                                                  .viewer-canvas:active{
++                                                                                                    cursor:grabbing}
++                                                                                                    .no-model .viewer-canvas{
++                                                                                                      visibility:hidden}
++                                                                                                      .model-message{
++                                                                                                        position:absolute;
++                                                                                                        top:40%;
++                                                                                                        left:0;
++                                                                                                        right:0;
++                                                                                                        text-align:center;
++                                                                                                        color:#77848b;
++                                                                                                        padding:20px}
++                                                                                                        .model-message>span{
++                                                                                                          font-size:60px;
++                                                                                                          color:#b9cccd}
++                                                                                                          .model-message h3{
++                                                                                                            font-size:18px;
++                                                                                                            font-weight:500;
++                                                                                                            color:#52656d}
++                                                                                                            .model-message p{
++                                                                                                              font-size:12px}
++                                                                                                              .study-camera{
++                                                                                                                position:absolute;
++                                                                                                                top:120px;
++                                                                                                                right:10px;
++                                                                                                                display:flex;
++                                                                                                                flex-direction:column;
++                                                                                                                gap:4px;
++                                                                                                                background:#ffffffd9;
++                                                                                                                border:1px solid #e3e7e9;
++                                                                                                                padding:5px;
++                                                                                                                border-radius:12px}
++                                                                                                                .study-camera button{
++                                                                                                                  font-size:11px;
++                                                                                                                  padding:9px 10px;
++                                                                                                                  border-radius:8px}
++                                                                                                                  .study-view-tools{
++                                                                                                                    position:absolute;
++                                                                                                                    bottom:60px;
++                                                                                                                    left:50%;
++                                                                                                                    transform:translateX(-50%);
++                                                                                                                    display:flex;
++                                                                                                                    gap:4px;
++                                                                                                                    background:#ffffffed;
++                                                                                                                    border:1px solid #e4e7e9;
++                                                                                                                    border-radius:14px;
++                                                                                                                    padding:6px;
++                                                                                                                    box-shadow:0 5px 20px #394d5810;
++                                                                                                                    white-space:nowrap}
++                                                                                                                    .study-view-tools button{
++                                                                                                                      font-size:11px;
++                                                                                                                      padding:10px 12px;
++                                                                                                                      border-radius:9px}
++                                                                                                                      .study-gesture{
++                                                                                                                        position:absolute;
++                                                                                                                        bottom:25px;
++                                                                                                                        left:0;
++                                                                                                                        right:0;
++                                                                                                                        text-align:center;
++                                                                                                                        font-size:10px;
++                                                                                                                        color:#99a1a8;
++                                                                                                                        pointer-events:none}
++                                                                                                                        .stage-credit{
++                                                                                                                          position:absolute;
++                                                                                                                          bottom:0;
++                                                                                                                          left:0;
++                                                                                                                          right:0;
++                                                                                                                          display:flex;
++                                                                                                                          justify-content:center;
++                                                                                                                          gap:8px;
++                                                                                                                          color:#99a2a8;
++                                                                                                                          font-size:9px}
++                                                                                                                          .stage-credit summary{
++                                                                                                                            cursor:pointer;
++                                                                                                                            color:#7d8c92}
++                                                                                                                            .stage-credit details[open]{
++                                                                                                                              position:absolute;
++                                                                                                                              z-index:5;
++                                                                                                                              bottom:10px;
++                                                                                                                              background:white;
++                                                                                                                              border:1px solid #e1e5e6;
++                                                                                                                              border-radius:12px;
++                                                                                                                              padding:15px;
++                                                                                                                              max-width:330px;
++                                                                                                                              font-size:11px;
++                                                                                                                              color:#6c7d83}
++                                                                                                                              .study-details{
++                                                                                                                                padding:28px 25px}
++                                                                                                                                .detail-top{
++                                                                                                                                  display:flex;
++                                                                                                                                  align-items:center;
++                                                                                                                                  justify-content:space-between;
++                                                                                                                                  gap:12px}
++                                                                                                                                  .status-dot{
++                                                                                                                                    font-size:10px;
++                                                                                                                                    color:#8b969b}
++                                                                                                                                    .study-details>h2{
++                                                                                                                                      font-size:32px;
++                                                                                                                                      letter-spacing:-.05em;
++                                                                                                                                      margin:24px 0 8px}
++                                                                                                                                      .english-name{
++                                                                                                                                        color:#859098;
++                                                                                                                                        font-size:15px;
++                                                                                                                                        margin:0 0 22px}
++                                                                                                                                        .names-card{
++                                                                                                                                          border-radius:14px;
++                                                                                                                                          background:#f6f8f8;
++                                                                                                                                          padding:15px 17px;
++                                                                                                                                          display:grid;
++                                                                                                                                          gap:12px;
++                                                                                                                                          margin-bottom:22px}
++                                                                                                                                          .names-card div{
++                                                                                                                                            display:flex;
++                                                                                                                                            align-items:center;
++                                                                                                                                            justify-content:space-between;
++                                                                                                                                            gap:15px}
++                                                                                                                                            .names-card span{
++                                                                                                                                              color:#8d979c;
++                                                                                                                                              font-size:11px}
++                                                                                                                                              .names-card strong{
++                                                                                                                                                font-size:14px;
++                                                                                                                                                font-weight:500}
++                                                                                                                                                .study-tabs{
++                                                                                                                                                  display:flex;
++                                                                                                                                                  border-bottom:1px solid #e9edef;
++                                                                                                                                                  margin-bottom:20px}
++                                                                                                                                                  .study-tabs button{
++                                                                                                                                                    flex:1;
++                                                                                                                                                    padding:13px 8px;
++                                                                                                                                                    border-bottom:2px solid transparent;
++                                                                                                                                                    color:#98a1a6}
++                                                                                                                                                    .study-tabs button[aria-selected=true]{
++                                                                                                                                                      color:#426e70;
++                                                                                                                                                      border-bottom-color:#527c7b;
++                                                                                                                                                      font-weight:650}
++                                                                                                                                                      .attachment-section{
++                                                                                                                                                        margin:25px 0}
++                                                                                                                                                        .attachment-section h3{
++                                                                                                                                                          font-size:14px;
++                                                                                                                                                          display:flex;
++                                                                                                                                                          align-items:center;
++                                                                                                                                                          gap:8px}
++                                                                                                                                                          .attachment-section h3 span{
++                                                                                                                                                            font-size:9px;
++                                                                                                                                                            color:#9aa4aa;
++                                                                                                                                                            letter-spacing:.09em;
++                                                                                                                                                            margin-left:auto}
++                                                                                                                                                            .attachment-section i{
++                                                                                                                                                              width:7px;
++                                                                                                                                                              height:7px;
++                                                                                                                                                              border-radius:50%;
++                                                                                                                                                              background:#5a9290}
++                                                                                                                                                              .attachment-section i.insertion{
++                                                                                                                                                                background:#c6ab70}
++                                                                                                                                                                .attachment-section p{
++                                                                                                                                                                  font-size:12px;
++                                                                                                                                                                  color:#667780;
++                                                                                                                                                                  margin:12px 0;
++                                                                                                                                                                  border-left:2px solid #edf1f1;
++                                                                                                                                                                  padding-left:11px}
++                                                                                                                                                                  .quiet-note{
++                                                                                                                                                                    font-size:11px;
++                                                                                                                                                                    color:#97a0a6;
++                                                                                                                                                                    line-height:1.75}
++                                                                                                                                                                    .part-pills{
++                                                                                                                                                                      display:flex;
++                                                                                                                                                                      flex-wrap:wrap;
++                                                                                                                                                                      gap:5px}
++                                                                                                                                                                      .part-pills button{
++                                                                                                                                                                        font-size:11px;
++                                                                                                                                                                        padding:7px 10px;
++                                                                                                                                                                        border-radius:8px;
++                                                                                                                                                                        background:#f1f4f4}
++                                                                                                                                                                        .part-pills button[aria-pressed=true]{
++                                                                                                                                                                          background:#e4eeee}
++                                                                                                                                                                          .study-sources{
++                                                                                                                                                                            margin-top:30px;
++                                                                                                                                                                            border-top:1px solid #edf0f1;
++                                                                                                                                                                            padding-top:18px;
++                                                                                                                                                                            color:#89959d;
++                                                                                                                                                                            font-size:11px}
++                                                                                                                                                                            .study-sources summary{
++                                                                                                                                                                              cursor:pointer;
++                                                                                                                                                                              color:#74848b;
++                                                                                                                                                                              font-size:12px}
++                                                                                                                                                                              .study-sources small{
++                                                                                                                                                                                display:block;
++                                                                                                                                                                                font-size:10px;
++                                                                                                                                                                                margin-top:5px;
++                                                                                                                                                                                line-height:1.65}
++                                                                                                                                                                                .upcoming{
++                                                                                                                                                                                  text-align:center;
++                                                                                                                                                                                  padding:45px 5px;
++                                                                                                                                                                                  color:#929da3}
++                                                                                                                                                                                  .upcoming>span{
++                                                                                                                                                                                    font-size:36px;
++                                                                                                                                                                                    color:#97b1b2}
++                                                                                                                                                                                    .upcoming h3{
++                                                                                                                                                                                      font-size:15px;
++                                                                                                                                                                                      color:#718289;
++                                                                                                                                                                                      font-weight:500}
++                                                                                                                                                                                      .upcoming p{
++                                                                                                                                                                                        font-size:12px}
++                                                                                                                                                                                        .skip-link{
++                                                                                                                                                                                          position:fixed;
++                                                                                                                                                                                          left:20px;
++                                                                                                                                                                                          top:-100px;
++                                                                                                                                                                                          z-index:20;
++                                                                                                                                                                                          background:white;
++                                                                                                                                                                                          padding:12px}
++                                                                                                                                                                                          .skip-link:focus{
++                                                                                                                                                                                            top:10px}
++                                                                                                                                                                                            .load-state{
++                                                                                                                                                                                              max-width:600px;
++                                                                                                                                                                                              margin:15vh auto;
++                                                                                                                                                                                              padding:24px}
++                                                                                                                                                                                              .load-state button{
++                                                                                                                                                                                                background:#e0eeee;
++                                                                                                                                                                                                padding:12px;
++                                                                                                                                                                                                border-radius:10px}
++                                                                                                                                                                                                @media(min-width:1600px){
++                                                                                                                                                                                                  .study-layout{
++                                                                                                                                                                                                    grid-template-columns:280px minmax(0,1fr) 390px;
++                                                                                                                                                                                                    gap:30px;
++                                                                                                                                                                                                    padding:18px 40px 35px}
++                                                                                                                                                                                                    .study-header{
++                                                                                                                                                                                                      padding:0 48px;
++                                                                                                                                                                                                      height:115px}
++                                                                                                                                                                                                      .stage-caption h2{
++                                                                                                                                                                                                        font-size:40px}
++                                                                                                                                                                                                        .study-details{
++                                                                                                                                                                                                          padding:32px}
++                                                                                                                                                                                                          .study-list button{
++                                                                                                                                                                                                            padding:17px}
++                                                                                                                                                                                                          }
++                                                                                                                                                                                                          @media(max-width:1100px) and (min-width:761px){
++                                                                                                                                                                                                            .study-layout{
++                                                                                                                                                                                                              grid-template-columns:200px minmax(0,1fr) 280px;
++                                                                                                                                                                                                              gap:12px;
++                                                                                                                                                                                                              padding:8px 16px 20px}
++                                                                                                                                                                                                              .study-header{
++                                                                                                                                                                                                                padding:0 22px;
++                                                                                                                                                                                                                height:85px}
++                                                                                                                                                                                                                .study-details{
++                                                                                                                                                                                                                  padding:22px 18px}
++                                                                                                                                                                                                                  .study-details>h2{
++                                                                                                                                                                                                                    font-size:27px}
++                                                                                                                                                                                                                    .study-sidebar{
++                                                                                                                                                                                                                      padding:20px 10px}
++                                                                                                                                                                                                                      .study-view-tools{
++                                                                                                                                                                                                                        flex-wrap:wrap;
++                                                                                                                                                                                                                        width:220px;
++                                                                                                                                                                                                                        justify-content:center}
++                                                                                                                                                                                                                        .stage-caption{
++                                                                                                                                                                                                                          left:8px}
++                                                                                                                                                                                                                          .stage-caption h2{
++                                                                                                                                                                                                                            font-size:26px}
++                                                                                                                                                                                                                            .stage-caption p{
++                                                                                                                                                                                                                              max-width:170px}
++                                                                                                                                                                                                                              .study-camera{
++                                                                                                                                                                                                                                top:145px;
++                                                                                                                                                                                                                                right:0}
++                                                                                                                                                                                                                                .study-list button span{
++                                                                                                                                                                                                                                  font-size:13px}
++                                                                                                                                                                                                                                  .global-search{
++                                                                                                                                                                                                                                    width:320px}
++                                                                                                                                                                                                                                  }
++                                                                                                                                                                                                                                  @media(max-width:760px){
++                                                                                                                                                                                                                                    .study-shell{
++                                                                                                                                                                                                                                      height:auto;
++                                                                                                                                                                                                                                      min-height:100dvh}
++                                                                                                                                                                                                                                      .study-header{
++                                                                                                                                                                                                                                        height:auto;
++                                                                                                                                                                                                                                        padding:22px 18px 14px;
++                                                                                                                                                                                                                                        flex-wrap:wrap;
++                                                                                                                                                                                                                                        gap:18px}
++                                                                                                                                                                                                                                        .brand{
++                                                                                                                                                                                                                                          font-size:18px}
++                                                                                                                                                                                                                                          .brand small{
++                                                                                                                                                                                                                                            font-size:10px}
++                                                                                                                                                                                                                                            .global-search{
++                                                                                                                                                                                                                                              width:100%}
++                                                                                                                                                                                                                                              .global-search input{
++                                                                                                                                                                                                                                                height:46px}
++                                                                                                                                                                                                                                                .study-layout{
++                                                                                                                                                                                                                                                  display:flex;
++                                                                                                                                                                                                                                                  flex-direction:column;
++                                                                                                                                                                                                                                                  padding:0 14px 20px;
++                                                                                                                                                                                                                                                  gap:14px}
++                                                                                                                                                                                                                                                  .study-sidebar{
++                                                                                                                                                                                                                                                    padding:14px;
++                                                                                                                                                                                                                                                    border-radius:18px;
++                                                                                                                                                                                                                                                    max-height:265px;
++                                                                                                                                                                                                                                                    flex-shrink:0}
++                                                                                                                                                                                                                                                    .sidebar-heading,.sidebar-bottom{
++                                                                                                                                                                                                                                                      display:none}
++                                                                                                                                                                                                                                                      .scope-control{
++                                                                                                                                                                                                                                                        max-width:230px}
++                                                                                                                                                                                                                                                        .result-count{
++                                                                                                                                                                                                                                                          margin:10px 0;
++                                                                                                                                                                                                                                                          font-size:10px}
++                                                                                                                                                                                                                                                          .study-list{
++                                                                                                                                                                                                                                                            display:grid;
++                                                                                                                                                                                                                                                            grid-template-columns:repeat(2,minmax(0,1fr));
++                                                                                                                                                                                                                                                            max-height:165px;
++                                                                                                                                                                                                                                                            gap:3px}
++                                                                                                                                                                                                                                                            .study-list button{
++                                                                                                                                                                                                                                                              padding:10px;
++                                                                                                                                                                                                                                                              min-width:0}
++                                                                                                                                                                                                                                                              .study-list button span{
++                                                                                                                                                                                                                                                                font-size:13px}
++                                                                                                                                                                                                                                                                .study-list small{
++                                                                                                                                                                                                                                                                  font-size:10px}
++                                                                                                                                                                                                                                                                  .study-stage{
++                                                                                                                                                                                                                                                                    height:520px;
++                                                                                                                                                                                                                                                                    flex:none}
++                                                                                                                                                                                                                                                                    .stage-caption{
++                                                                                                                                                                                                                                                                      top:12px;
++                                                                                                                                                                                                                                                                      left:10px}
++                                                                                                                                                                                                                                                                      .stage-caption h2{
++                                                                                                                                                                                                                                                                        font-size:28px}
++                                                                                                                                                                                                                                                                        .study-camera{
++                                                                                                                                                                                                                                                                          top:105px;
++                                                                                                                                                                                                                                                                          right:4px}
++                                                                                                                                                                                                                                                                          .study-canvas-wrap{
++                                                                                                                                                                                                                                                                            padding-top:95px;
++                                                                                                                                                                                                                                                                            padding-bottom:110px}
++                                                                                                                                                                                                                                                                            .study-details{
++                                                                                                                                                                                                                                                                              padding:24px;
++                                                                                                                                                                                                                                                                              border-radius:20px;
++                                                                                                                                                                                                                                                                              overflow:visible}
++                                                                                                                                                                                                                                                                              .study-details>h2{
++                                                                                                                                                                                                                                                                                margin-top:17px}
++                                                                                                                                                                                                                                                                                .study-view-tools{
++                                                                                                                                                                                                                                                                                  bottom:48px;
++                                                                                                                                                                                                                                                                                  max-width:100%;
++                                                                                                                                                                                                                                                                                  gap:0}
++                                                                                                                                                                                                                                                                                  .study-view-tools button{
++                                                                                                                                                                                                                                                                                    padding:10px 9px;
++                                                                                                                                                                                                                                                                                    font-size:10px}
++                                                                                                                                                                                                                                                                                    .study-gesture{
++                                                                                                                                                                                                                                                                                      bottom:20px}
++                                                                                                                                                                                                                                                                                      .stage-credit{
++                                                                                                                                                                                                                                                                                        font-size:8px}
++                                                                                                                                                                                                                                                                                      }
++                                                                                                                                                                                                                                                                                      @media(prefers-reduced-motion:reduce){
++                                                                                                                                                                                                                                                                                        *{
++                                                                                                                                                                                                                                                                                          scroll-behavior:auto!important}
++                                                                                                                                                                                                                                                                                        }
++/* T13 source-linked, read-only attachment review context. */
++.attachment-candidates{display:flex;flex-direction:column;gap:7px;margin:10px 0 16px}
++.attachment-candidates button{display:block;width:100%;padding:11px 12px;text-align:left;border:1px solid #e5eaeb;border-radius:10px;background:#fff;color:#35454b}
++.attachment-candidates button:hover,.attachment-candidates button[aria-pressed=true]{border-color:#86aaa6;background:#edf5f3}
++.attachment-candidates button span{display:block;font-size:12px;line-height:1.45}
++.attachment-candidates button small{display:block;margin-top:7px;color:#667d7c;font-size:10px}
++.study-attachment-context{position:absolute;top:103px;left:14px;right:14px;z-index:2;margin:0;padding:9px 12px;border:1px solid #d5e5e1;border-radius:10px;background:#f5faf8e8;color:#3f6360;font-size:11px;line-height:1.45}
+ 
+-@media (prefers-reduced-motion: reduce) {
+-  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
++/* T13a: keep the Korean study summary above compact, optional source detail. */
++.attachment-section>p:not(.quiet-note){margin:8px 0 10px;color:#34494f;font-size:13px;line-height:1.55}
++.attachment-candidates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:8px 0 6px}
++.attachment-candidates button{min-width:0;padding:8px 9px}
++.attachment-candidates button span{font-size:11px;font-weight:650}
++.attachment-candidates button small{margin-top:3px;font-size:9px;line-height:1.35}
++.attachment-source-detail{margin:4px 0 12px;padding:0 2px;color:#65767b;font-size:11px}
++.attachment-source-detail>summary{cursor:pointer;color:#667d7c}
++.attachment-source-item{margin:8px 0;padding:8px 10px;border-left:2px solid #dbe8e5;background:#f8faf9}
++.attachment-source-item p{margin:0 0 5px;color:#4c5e63;font-size:11px;line-height:1.45}
++.attachment-source-item small{display:block;color:#75858a;font-size:10px;line-height:1.4}
++.attachment-summary-block{margin:13px 0 14px}
++.attachment-summary-block>p{margin:7px 0 0!important}
++.attachment-context-disclosure{margin:14px 0 8px;padding:10px 11px;border:1px solid #e6ebeb;border-radius:12px;background:#fbfcfc;color:#52666b;font-size:11px}
++.attachment-context-disclosure>summary{cursor:pointer;font-weight:600}
++.attachment-context-disclosure .attachment-section{margin-top:10px}
++.attachment-context-disclosure .attachment-section h3{font-size:12px}
++.attachment-context-disclosure>.quiet-note{margin:8px 0 0;font-size:10px;line-height:1.45}
++@media(max-width:760px){
++  .study-sidebar{max-height:315px}
++  .study-list{max-height:210px}
+ }
+diff --git a/atlas-web/src/viewer/AnnotationWorkbench.tsx b/atlas-web/src/viewer/AnnotationWorkbench.tsx
+index a3101c2..6e22fb1 100644
+--- a/atlas-web/src/viewer/AnnotationWorkbench.tsx
++++ b/atlas-web/src/viewer/AnnotationWorkbench.tsx
+@@ -9,7 +9,9 @@ import {
+   type AnnotationDraft,
+   type AnnotationGeometry,
+ } from "./annotationDrafts";
+-import type { AnnotationSurfaceHit, T07WebGLViewer, ViewerMesh } from "./glb";
++import type { AnnotationSurfaceHit, ViewerMesh } from "./glb";
++import type { ThreeViewer } from "./ThreeViewer";
++import { attachmentContextById } from "./attachmentContext";
+ 
+ const STORAGE_KEY = "human-atlas:t09:annotation-drafts:v1";
+ const FRAME_ID = "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR";
+@@ -32,7 +34,7 @@ interface PendingGeometry {
+ }
+ 
+ interface Props {
+-  viewer: T07WebGLViewer | null;
++  viewer: ThreeViewer | null;
+   overlayCanvas: HTMLCanvasElement | null;
+   assets: readonly AnnotationAssetContext[];
+   meshes: readonly ViewerMesh[];
+@@ -126,24 +128,30 @@ export function AnnotationWorkbench({
+   }, [concepts, selectedConcept?.entityType, selectedEntityId]);
+ 
+   const attachmentOptions = useMemo<AttachmentOption[]>(() => {
+-    if (!pickedMesh?.targetEntityId || pickedMesh.targetEntityType === "structure") return [];
++    if (!pickedMesh) return [];
+     return attachments.flatMap((attachment) => {
+       const ownerId = stringValue(attachment.muscleOrPartId);
+       const id = stringValue(attachment.id);
+       const descriptionClaimId = stringValue(attachment.descriptionClaimId);
+-      if (!id || !ownerId || !descriptionClaimId || !availableOwners.has(ownerId) || ownerId !== pickedMesh.targetEntityId) return [];
++      if (!id || !ownerId || !descriptionClaimId || !availableOwners.has(ownerId)) return [];
++      const context = attachmentContextById.get(id);
++      const matchesMesh = context
++        ? context.contextMeshAssetId !== null && context.contextMeshAssetId === pickedMesh.meshAssetId
++        : ownerId === pickedMesh.targetEntityId;
++      if (!matchesMesh) return [];
+       const claim = claims.find((row) => row.id === descriptionClaimId);
+       if (!claim || claim.subjectId !== id || claim.reviewState !== "needs_review") return [];
+       return [{
+         id,
+         descriptionClaimId,
+         evidenceIds: listStrings(claim.evidenceIds),
++        allowedAssetIds: context?.contextMeshAssetId ? [context.contextMeshAssetId] : [pickedMesh.meshAssetId],
+         ownerId,
+         role: stringValue(attachment.role) ?? "attachment",
+         summary: claimSummary(claim),
+       }];
+     });
+-  }, [attachments, availableOwners, claims, pickedMesh]);
++  }, [attachments, availableOwners, claims, meshes, pickedMesh]);
+ 
+   const allAttachmentContexts = useMemo<AnnotationAttachmentContext[]>(() => attachments.flatMap((attachment) => {
+     const id = stringValue(attachment.id);
+@@ -151,8 +159,12 @@ export function AnnotationWorkbench({
+     const descriptionClaimId = stringValue(attachment.descriptionClaimId);
+     const claim = descriptionClaimId ? claims.find((row) => row.id === descriptionClaimId) : undefined;
+     if (!id || !ownerId || !descriptionClaimId || !claim || claim.subjectId !== id || claim.reviewState !== "needs_review") return [];
+-    return [{ id, ownerId, descriptionClaimId, evidenceIds: listStrings(claim.evidenceIds) }];
+-  }), [attachments, claims]);
++    const context = attachmentContextById.get(id);
++    return [{ id, ownerId, descriptionClaimId, evidenceIds: listStrings(claim.evidenceIds), allowedAssetIds: [
++      ...meshes.filter((mesh) => mesh.targetEntityType !== "structure" && mesh.targetEntityId === ownerId).map((mesh) => mesh.meshAssetId),
++      ...(context?.contextMeshAssetId ? [context.contextMeshAssetId] : []),
++    ] }];
++  }), [attachments, claims, meshes]);
+ 
+   useEffect(() => {
+     if (!assets.length || storageReady) return;
+@@ -304,7 +316,7 @@ export function AnnotationWorkbench({
+         setMessage("먼저 현재 mesh에 연결된 T05 기시·정지 설명을 선택하세요.");
+         return;
+       }
+-      if (hit.mesh.meshAssetId !== pickedMesh.meshAssetId || hit.mesh.targetEntityId !== activeAttachment.ownerId) {
++      if (hit.mesh.meshAssetId !== pickedMesh.meshAssetId || !activeAttachment.allowedAssetIds?.includes(hit.mesh.meshAssetId)) {
+         setMessage("선택한 초안의 mesh/attachment 대상과 다른 표면입니다. 이 클릭은 좌표에 추가하지 않았습니다.");
+         return;
+       }
+@@ -347,11 +359,11 @@ export function AnnotationWorkbench({
+       return;
+     }
+     if (!pickedMesh || !activeAttachment) {
+-      setMessage("현재 선택한 근육/근두 mesh와 연결된 T05 부착 설명이 필요합니다.");
++      setMessage("현재 선택한 대상 뼈 mesh와 연결된 T05 부착 설명이 필요합니다. 대상 mesh가 없는 항목은 보류합니다.");
+       return;
+     }
+     if (!assets.some((asset) => asset.assetId === pickedMesh.meshAssetId)) {
+-      setMessage("선택 mesh의 T07 asset revision을 찾을 수 없습니다.");
++      setMessage("선택 mesh의 검증된 asset revision을 찾을 수 없습니다.");
+       return;
+     }
+     setKind(nextKind);
+@@ -496,11 +508,11 @@ export function AnnotationWorkbench({
+         </div>
+         <span className="badge badge-review">draft · 미검토</span>
+       </header>
+-      <p className="annotation-warning">T05 원문 설명을 참조하는 로컬 제안만 저장합니다. 현재 catalog의 anatomical instances는 0개이므로 이 기록은 canonical SpatialAnnotation으로 승격할 수 없습니다. 좌표·mesh 연결은 anatomy review가 아닙니다.</p>
++      <p className="annotation-warning">T05 원문 설명을 참조하는 로컬 제안만 저장합니다. 뼈 전체 표시는 부착 범위를 뜻하지 않습니다. 초안은 instanceId가 없으며 canonical SpatialAnnotation이나 해부학 검토 결과로 승격되지 않습니다.</p>
+       <div className="annotation-link-row">
+         <label htmlFor="annotation-attachment">연결할 T05 부착 설명</label>
+         <select id="annotation-attachment" value={selectedAttachmentId} onChange={(event) => setSelectedAttachmentId(event.currentTarget.value)} disabled={attachmentOptions.length === 0 || activeKind !== null}>
+-          {attachmentOptions.length === 0 && <option value="">현재 mesh와 일치하는 source 설명 없음</option>}
++          {attachmentOptions.length === 0 && <option value="">대상 뼈 mesh와 연결된 부착 설명 없음 · 입력 보류</option>}
+           {attachmentOptions.map((option) => (
+             <option key={option.id} value={option.id}>{roleLabel(option.role)} · {option.summary} · {option.id}</option>
+           ))}
+diff --git a/atlas-web/src/viewer/GLBViewer.tsx b/atlas-web/src/viewer/GLBViewer.tsx
+index ddf3a6b..61b2d4f 100644
+--- a/atlas-web/src/viewer/GLBViewer.tsx
++++ b/atlas-web/src/viewer/GLBViewer.tsx
+@@ -1,7 +1,9 @@
+-import { useEffect, useMemo, useRef, useState } from "react";
++import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
+ import { loadT07ViewerBundle, type T07ViewerBundle } from "./manifest";
+-import { T07WebGLViewer, type ViewerMesh } from "./glb";
+-import { AnnotationWorkbench } from "./AnnotationWorkbench";
++import type { ViewerMesh } from "./glb";
++import { ThreeViewer } from "./ThreeViewer";
++import { attachmentContextById, attachmentContexts } from "./attachmentContext";
++const AnnotationWorkbench = import.meta.env.DEV ? lazy(() => import("./AnnotationWorkbench").then(module => ({ default: module.AnnotationWorkbench }))) : null;
+ import type { AtlasRecord } from "../data/catalog";
+ 
+ type Visibility = "visible" | "transparent" | "hidden";
+@@ -9,17 +11,23 @@ type CameraPreset = "front" | "back" | "lateral";
+ type Concept = { id: string; entityType?: unknown; parentId?: unknown };
+ 
+ interface Props {
++  studyMode?: boolean;
++  activeAttachmentId?: string | null;
+   selectedEntityId: string | null;
+   concepts: readonly Concept[];
+   attachments: readonly AtlasRecord[];
+   claims: readonly AtlasRecord[];
+   onSelectEntity: (id: string) => void;
++  onClearAttachment?: () => void;
+ }
+ 
+ function targetNames(mesh: ViewerMesh, conceptById: Map<string, Concept>): { label: string; mapped: boolean } {
+   if (mesh.targetEntityId && conceptById.has(mesh.targetEntityId)) {
+     return { label: mesh.targetEntityId, mapped: true };
+   }
++  if (mesh.targetEntityType === "structure" && mesh.targetEntityId) {
++    return { label: mesh.targetEntityId, mapped: false };
++  }
+   return { label: mesh.targetEntityId ?? "catalog ID 미확인", mapped: false };
+ }
+ 
+@@ -27,16 +35,18 @@ function errorText(error: unknown): string {
+   return error instanceof Error ? error.message : "T07 GLB viewer를 불러오지 못했습니다.";
+ }
+ 
+-export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onSelectEntity }: Props) {
++export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onSelectEntity, onClearAttachment, studyMode = false, activeAttachmentId = null }: Props) {
+   const canvasRef = useRef<HTMLCanvasElement>(null);
+   const overlayCanvasRef = useRef<HTMLCanvasElement>(null);
+-  const viewerRef = useRef<T07WebGLViewer | null>(null);
+-  const [viewer, setViewer] = useState<T07WebGLViewer | null>(null);
++  const viewerRef = useRef<ThreeViewer | null>(null);
++  const [viewer, setViewer] = useState<ThreeViewer | null>(null);
+   const [bundle, setBundle] = useState<T07ViewerBundle | null>(null);
+   const [error, setError] = useState<string | null>(null);
+   const [pickedMeshId, setPickedMeshId] = useState<string | null>(null);
+   const [visibility, setVisibility] = useState<Record<string, Visibility>>({});
+   const [isolating, setIsolating] = useState(false);
++  const [contextTransparent, setContextTransparent] = useState(false);
++  const [bonesVisible, setBonesVisible] = useState(true);
+   const [cameraPreset, setCameraPreset] = useState<CameraPreset>("front");
+ 
+   const conceptById = useMemo(() => new Map(concepts.map((concept) => [concept.id, concept])), [concepts]);
+@@ -49,6 +59,12 @@ export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onS
+       .map((mesh) => mesh.meshAssetId);
+   }, [bundle, concepts, selectedEntityId]);
+   const pickedMesh = bundle?.meshes.find((mesh) => mesh.meshAssetId === pickedMeshId) ?? null;
++  const reviewFocusIds = pickedMesh?.targetEntityType === "structure"
++    ? [pickedMesh.meshAssetId]
++    : selectedMeshIds.length > 0 ? selectedMeshIds : pickedMeshId ? [pickedMeshId] : [];
++  const activeContext = activeAttachmentId ? attachmentContextById.get(activeAttachmentId) : undefined;
++  const reviewOwners = new Set([selectedEntityId, ...concepts.filter((concept) => concept.parentId === selectedEntityId).map((concept) => concept.id)]);
++  const reviewContexts = attachmentContexts.filter((row) => reviewOwners.has(row.ownerConceptId));
+ 
+   useEffect(() => {
+     let active = true;
+@@ -64,10 +80,10 @@ export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onS
+ 
+   useEffect(() => {
+     if (!bundle || !canvasRef.current) return;
+-    let renderer: T07WebGLViewer;
++    let renderer: ThreeViewer;
+     try {
+-      renderer = new T07WebGLViewer(canvasRef.current, (mesh) => chooseMesh(mesh, true));
+-      renderer.setScene(bundle.meshes);
++      renderer = new ThreeViewer(canvasRef.current, (mesh) => chooseMesh(mesh, true));
++      renderer.setScene(bundle.meshes, bundle.threeMeshes);
+       viewerRef.current = renderer;
+       setViewer(renderer);
+       setError(null);
+@@ -88,12 +104,42 @@ export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onS
+ 
+   useEffect(() => {
+     const renderer = viewerRef.current;
+-    if (!renderer || selectedMeshIds.length === 0) return;
+-    renderer.selectMeshes(selectedMeshIds, true);
++    if (!renderer) return;
++    if (selectedMeshIds.length === 0) { renderer.selectMeshes([]); setPickedMeshId(null); return; }
++    renderer.selectMeshes(selectedMeshIds, !studyMode);
++    if (studyMode) renderer.focus(selectedMeshIds, 1.4);
+     setPickedMeshId((current) => selectedMeshIds.includes(current ?? "") ? current : selectedMeshIds[0]);
+-  }, [selectedMeshIds]);
++  }, [selectedMeshIds, studyMode]);
++
++  useEffect(() => {
++    if (!studyMode || !viewer) return;
++    const contextId = activeContext?.contextMeshAssetId;
++    if (contextId && bundle?.meshes.some((mesh) => mesh.meshAssetId === contextId)) {
++      viewer.selectMeshes([...selectedMeshIds, contextId]);
++      setPickedMeshId(contextId);
++    } else if (selectedMeshIds.length > 0) {
++      viewer.selectMeshes(selectedMeshIds);
++      viewer.focus(selectedMeshIds, 1.4);
++      setPickedMeshId(selectedMeshIds[0]);
++    }
++  }, [activeContext, bundle, selectedMeshIds, studyMode, viewer]);
++
++  useEffect(() => {
++    if (!studyMode || !bundle || !viewer) return;
++    for (const mesh of bundle.meshes) {
++      const emphasized = selectedMeshIds.includes(mesh.meshAssetId) || mesh.meshAssetId === activeContext?.contextMeshAssetId;
++      const state = mesh.targetEntityType === "structure"
++        ? mesh.meshAssetId === activeContext?.contextMeshAssetId ? "visible" : bonesVisible ? activeContext ? "transparent" : "visible" : "hidden"
++        : activeContext?.contextMeshAssetId ? "transparent" : contextTransparent && !emphasized ? "transparent" : "visible";
++      viewer.setVisibility(mesh.meshAssetId, state);
++    }
++  }, [studyMode, bundle, viewer, contextTransparent, bonesVisible, selectedMeshIds, activeContext]);
+ 
+   function chooseMesh(mesh: ViewerMesh, updateCard: boolean, focus = true) {
++    if (isolating) {
++      viewerRef.current?.setIsolation(null);
++      setIsolating(false);
++    }
+     setPickedMeshId(mesh.meshAssetId);
+     viewerRef.current?.selectMeshes([mesh.meshAssetId], focus);
+     if (!updateCard || !mesh.targetEntityId) return;
+@@ -111,7 +157,17 @@ export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onS
+   function restoreAll() {
+     viewerRef.current?.restoreAll();
+     viewerRef.current?.setPreset("front");
++    if (studyMode) {
++      onClearAttachment?.();
++      if (selectedMeshIds.length > 0) {
++        viewerRef.current?.selectMeshes(selectedMeshIds);
++        viewerRef.current?.focus(selectedMeshIds, 1.4);
++        setPickedMeshId(selectedMeshIds[0]);
++      }
++    }
+     setVisibility({});
++    setContextTransparent(false);
++    setBonesVisible(true);
+     setIsolating(false);
+     setCameraPreset("front");
+   }
+@@ -122,11 +178,7 @@ export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onS
+       setIsolating(false);
+       return;
+     }
+-    const targets = selectedMeshIds.length > 0
+-      ? selectedMeshIds
+-      : pickedMeshId
+-        ? [pickedMeshId]
+-        : [];
++    const targets = reviewFocusIds;
+     if (targets.length > 0) {
+       viewerRef.current?.setIsolation(targets);
+       setIsolating(true);
+@@ -145,10 +197,33 @@ export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onS
+   }
+ 
+   function focusSelected(margin: number) {
+-    const targets = selectedMeshIds.length > 0 ? selectedMeshIds : pickedMeshId ? [pickedMeshId] : [];
++    const targets = reviewFocusIds;
+     if (targets.length > 0) viewerRef.current?.focus(targets, margin);
+   }
+ 
++  if (studyMode) return <section className="study-viewer" aria-label="3D 근육 탐색">
++    <div className={`study-canvas-wrap ${bundle && selectedMeshIds.length === 0 ? "no-model" : ""}`}>
++      <canvas ref={canvasRef} className="viewer-canvas" tabIndex={0} aria-label="근육 모형. 드래그로 회전, 휠로 확대, 화살표 키로 회전" data-testid="anatomy-viewer"/>
++      {error ? <div className="model-message" role="alert"><h3>3D를 불러오지 못했습니다</h3><p>근육 설명과 검색은 계속 이용할 수 있습니다.</p></div> : !bundle ? <div className="model-message" role="status">모형을 불러오는 중…</div> : selectedMeshIds.length === 0 ? <div className="model-message"><span>◎</span><h3>이 근육의 3D는 준비 중입니다</h3><p>오른쪽 카드에서 이름을 확인할 수 있습니다.</p></div> : null}
++    </div>
++    {bundle && selectedMeshIds.length > 0 && <>
++      <div className="study-camera" aria-label="모형 방향">
++        {(["front", "back", "lateral"] as CameraPreset[]).map(preset => <button key={preset} aria-pressed={cameraPreset === preset} onClick={() => chooseCamera(preset)}>{{front:"정면",back:"후면",lateral:"측면"}[preset]}</button>)}
++      </div>
++      <div className="study-view-tools" aria-label="모형 보기">
++        <button aria-pressed={isolating} onClick={toggleIsolation}>선택만 보기</button>
++        <button aria-pressed={contextTransparent} onClick={() => setContextTransparent(v => !v)}>주변 투명하게</button>
++        <button aria-pressed={bonesVisible} onClick={() => setBonesVisible(v => !v)}>뼈</button>
++        <button onClick={showAll}>전체 보기</button>
++        <button onClick={restoreAll}>보기 초기화</button>
++      </div>
++      <p className="study-gesture">드래그하여 회전 · 스크롤하여 확대</p>
++      {activeContext && <p className="study-attachment-context" role="status">{activeContext.contextMeshAssetId
++        ? "관련 뼈 전체를 검토 대상으로 강조했습니다. 정확한 부착 영역은 아직 표시되지 않습니다."
++        : "이 설명의 표적 구조는 현재 3D 자산에 없습니다. 부착 영역 표시는 보류했습니다."}</p>}
++    </>}
++  </section>;
++
+   return (
+     <section className="viewer-panel" aria-labelledby="viewer-heading">
+       <header className="viewer-heading">
+@@ -214,19 +289,19 @@ export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onS
+ 
+           <div className="mesh-list-wrap">
+             <div className="section-heading mesh-list-heading">
+-              <div><p className="eyebrow">T07 MESHES</p><h3>이 영역에 확보된 메시</h3></div>
++              <div><p className="eyebrow">SOURCE MESHES</p><h3>이 영역에 확보된 메시</h3></div>
+               <span className="section-count">{bundle?.meshes.length ?? 0}</span>
+             </div>
+-            <div className="mesh-list" role="list" aria-label="T07 mesh 목록">
++            <div className="mesh-list" role="list" aria-label="원본 mesh 목록">
+               {bundle?.meshes.map((mesh) => {
+                 const state = visibility[mesh.meshAssetId] ?? "visible";
+-                const isolatedOut = isolating && !selectedMeshIds.includes(mesh.meshAssetId) && mesh.meshAssetId !== pickedMeshId;
++                const isolatedOut = isolating && !reviewFocusIds.includes(mesh.meshAssetId);
+                 return (
+                   <div className={`mesh-row ${pickedMeshId === mesh.meshAssetId ? "is-current" : ""} ${state === "hidden" || isolatedOut ? "is-hidden" : ""}`} key={mesh.meshAssetId} role="listitem" data-mesh-id={mesh.meshAssetId}>
+                     <button className="mesh-select" type="button" aria-pressed={pickedMeshId === mesh.meshAssetId} onClick={() => chooseMesh(mesh, true)}>
+                       <span className="mesh-source-name">{mesh.sourceName}</span>
+                       <code>{mesh.meshAssetId}</code>
+-                      <span className="mesh-link-state">{isolatedOut ? "격리 중 제외" : targetNames(mesh, conceptById).mapped ? `대상 ${mesh.targetEntityId}` : "대상 ID 미확인"}</span>
++                      <span className="mesh-link-state">{isolatedOut ? "격리 중 제외" : targetNames(mesh, conceptById).mapped ? `대상 ${mesh.targetEntityId}` : mesh.targetEntityId ? `구조 후보 ${mesh.targetEntityId}` : "대상 ID 미확인"}</span>
+                     </button>
+                     <div className="mesh-controls" aria-label={`${mesh.meshAssetId} 표시 상태`}>
+                       <button type="button" aria-pressed={state === "transparent"} onClick={() => applyVisibility(mesh.meshAssetId, state === "transparent" ? "visible" : "transparent")}>
+@@ -243,6 +318,21 @@ export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onS
+             </div>
+           </div>
+ 
++          {bundle && reviewContexts.length > 0 && <section className="attachment-review-context" aria-label="부착 표면 검토 대상">
++            <h3>부착 표면 검토 대상</h3>
++            <p>원문 설명과 관련 뼈 전체를 연결했습니다. 면·선·점 좌표는 아직 기록되지 않았습니다.</p>
++            <ul>{reviewContexts.map((row) => {
++              const claim = claims.find((item) => item.id === row.descriptionClaimId);
++              const value = claim?.value;
++              const summary = value && typeof value === "object" && "summary" in value && typeof value.summary === "string" ? value.summary : row.targetStructureId;
++              const mesh = bundle.meshes.find((item) => item.meshAssetId === row.contextMeshAssetId);
++              return <li key={row.attachmentId}>
++                <span>{row.role === "origin" ? "기시" : row.role === "insertion" ? "정지" : "그 외 부착"} · {summary}</span>
++                {mesh ? <button type="button" onClick={() => chooseMesh(mesh, false)}>관련 뼈 보기 · 표면 미지정</button> : <em>대상 메시 없음 · 보류</em>}
++              </li>;
++            })}</ul>
++          </section>}
++
+           {bundle && (
+             <div className="viewer-provenance">
+               <strong>{bundle.sourceTitle} · local candidate</strong>
+@@ -250,8 +340,8 @@ export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onS
+               <span>Crosswalk는 provisional / needs_review입니다. 3D 표시·선택은 해부학적 동일성이나 부착 위치의 검토 완료를 뜻하지 않습니다.</span>
+             </div>
+           )}
+-          {bundle && (
+-            <AnnotationWorkbench
++          {bundle && AnnotationWorkbench && (
++            <Suspense fallback={<p>제작 도구를 불러오는 중…</p>}><AnnotationWorkbench
+               viewer={viewer}
+               overlayCanvas={overlayCanvasRef.current}
+               assets={bundle.annotationAssets}
+@@ -263,7 +353,7 @@ export function GLBViewer({ selectedEntityId, concepts, attachments, claims, onS
+               pickedMesh={pickedMesh}
+               visibility={visibility}
+               onSelectMesh={(mesh) => chooseMesh(mesh, false, false)}
+-            />
++            /></Suspense>
+           )}
+         </>
+       )}
+diff --git a/atlas-web/src/viewer/annotationDrafts.test.ts b/atlas-web/src/viewer/annotationDrafts.test.ts
+index bcc8293..15b947a 100644
+--- a/atlas-web/src/viewer/annotationDrafts.test.ts
++++ b/atlas-web/src/viewer/annotationDrafts.test.ts
+@@ -116,3 +116,21 @@ test("source attachment owner must match a known mesh target", () => {
+   });
+   expectCode(payload, "attachment_asset_target_mismatch", sourceContext);
+ });
++
++test("T13 permits only a provenance-linked target-bone review draft", () => {
++  const sourceContext: AnnotationValidationContext = {
++    ...context,
++    assets: context.assets.map((asset) => ({ ...asset, targetEntityId: "SYN-BONE-01" })),
++    attachments: [{ id: "SYN-ATTACHMENT-01", descriptionClaimId: "SYN-CLAIM-01", evidenceIds: ["SYN-EVIDENCE-01"],
++      ownerId: "SYN-MUSCLE-01", allowedAssetIds: [context.assets[0].assetId] }],
++  };
++  const payload = structuredClone(fixture<Record<string, unknown>>("positive-exchange.json"));
++  payload.syntheticFixture = false;
++  const rows = payload.annotations as Array<Record<string, unknown>>;
++  rows.splice(1);
++  Object.assign(rows[0], { attachmentId: "SYN-ATTACHMENT-01", descriptionClaimId: "SYN-CLAIM-01",
++    instanceId: null, evidenceIds: ["SYN-EVIDENCE-01"], synthetic: false });
++  assert.equal(validateAnnotationDraftExchange(payload, sourceContext).annotations[0].reviewState, "draft");
++  sourceContext.attachments[0].allowedAssetIds = ["SYN-UNRELATED-BONE"];
++  expectCode(payload, "attachment_asset_target_mismatch", sourceContext);
++});
+diff --git a/atlas-web/src/viewer/annotationDrafts.ts b/atlas-web/src/viewer/annotationDrafts.ts
+index fd7e8e4..bd9b4ae 100644
+--- a/atlas-web/src/viewer/annotationDrafts.ts
++++ b/atlas-web/src/viewer/annotationDrafts.ts
+@@ -52,6 +52,7 @@ export interface AnnotationAttachmentContext {
+   ownerId: string;
+   descriptionClaimId: string;
+   evidenceIds: string[];
++  allowedAssetIds?: string[];
+ }
+ 
+ export interface AnnotationValidationContext {
+@@ -187,10 +188,14 @@ export function validateAnnotationDraftExchange(
+       if (row.attachmentId === null || row.descriptionClaimId === null) fail("source_attachment_required", `draft ${row.id} must link an existing T05 attachment and description claim.`);
+       const attachment = attachments.get(row.attachmentId as string);
+       if (!attachment || attachment.descriptionClaimId !== row.descriptionClaimId) fail("attachment_claim_mismatch", `draft ${row.id} does not resolve to the selected T05 attachment/claim pair.`);
+-      if (!asset.targetEntityId || attachment.ownerId !== asset.targetEntityId) fail("attachment_asset_target_mismatch", `draft ${row.id} attachment owner does not match a known T07 mesh target.`);
++      if (attachment.allowedAssetIds) {
++        if (!attachment.allowedAssetIds.includes(asset.assetId)) fail("attachment_asset_target_mismatch", `draft ${row.id} asset is not a recorded muscle or target-bone review context for its attachment.`);
++      } else if (!asset.targetEntityId || attachment.ownerId !== asset.targetEntityId) {
++        fail("attachment_asset_target_mismatch", `draft ${row.id} attachment owner does not match a known mesh target.`);
++      }
+       if (row.evidenceIds.some((id) => !attachment.evidenceIds.includes(id))) fail("annotation_evidence_mismatch", `draft ${row.id} includes evidence not linked to its T05 attachment claim.`);
+       if (row.instanceId === null) {
+-        // Current T05 data has no AnatomicalInstance rows; this explicit draft is not a canonical SpatialAnnotation.
++        // An instance-less local draft remains distinct from canonical SpatialAnnotation even after T12b added instances.
+       } else if (!instanceIds.has(row.instanceId)) {
+         fail("instance_unknown", `instance ${row.instanceId} is not in the current catalog.`);
+       }

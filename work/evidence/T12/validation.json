@@ -1,0 +1,23 @@
+{
+  "task": "T12a",
+  "date": "2026-09-25",
+  "package": {"name": "three", "version": "0.186.1", "location": "/private/tmp/human-atlas-t12a-three", "productionDependencyChanged": false},
+  "commands": [
+    {"command": "pnpm add three@0.186.1 --save-exact --ignore-scripts --dir /private/tmp/human-atlas-t12a-three --store-dir /private/tmp/human-atlas-t12a-store", "exitCode": 0, "result": "Three.js 0.186.1 installed in temporary experiment location"},
+    {"command": "PATH=/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:$PATH pnpm exec tsc --target ES2022 --module ESNext --lib ES2022,DOM --skipLibCheck --outDir /private/tmp/human-atlas-t12a-js src/viewer/glb.ts", "cwd": "atlas-web", "exitCode": 0, "result": "Existing T07 parser compiled only to temporary JS"},
+    {"command": "T12_THREE_ROOT=/private/tmp/human-atlas-t12a-three/node_modules/three T12_GLB_JS=/private/tmp/human-atlas-t12a-js/glb.js /Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node work/evidence/T12/compare-engines.mjs > work/evidence/T12/equivalence.json", "exitCode": 0, "result": "11 meshes; exact position/normal/index parity; hashes, transform, right side and pose metadata passed; keyboard default mismatch recorded", "output": "work/evidence/T12/equivalence.json"},
+    {"command": "PATH=/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:$PATH pnpm test:annotations", "cwd": "atlas-web", "exitCode": 0, "result": "11/11 tests; exchange schema passed, including topology stale and JSON round trip"},
+    {"command": "PATH=/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:$PATH pnpm build", "cwd": "atlas-web", "exitCode": 0, "result": "learning validator, TypeScript and Vite build passed; production viewer unchanged"},
+    {"command": "python3 atlas-data/schemas/validate.py --fixtures --check-schemas", "exitCode": 0, "result": "schema check and 17/17 fixtures passed"},
+    {"command": "git -C OpenSim_Models status --porcelain; git -C OpenSim_Models rev-parse HEAD; git diff --check", "exitCode": 0, "result": "OpenSim status empty, HEAD d9b05d470b1a481c222372c85b75772faf8f7792; diff whitespace check passed"}
+  ],
+  "preservation": {
+    "comparison": "Current SHA-256 matched T11-B09 preservation-before.json for atlas-web/package.json, pnpm-lock.yaml, glb.ts, GLBViewer.tsx, T07 manifest, T07 GLB and canonical-catalog.json",
+    "sourceObjCount": 11,
+    "sourceObjHashesMatchedManifest": true,
+    "glbSha256": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341",
+    "openSimClean": true
+  },
+  "notRun": ["Three.js WebGLRenderer pixel comparison", "browser picking/visibility/annotation overlay and keyboard regression", "canonical instance/meshMapping validation", "human anatomy identity review"],
+  "initialSetupFailures": ["In-project pnpm add rejected a mismatch between linked and requested store paths", "sandboxed temporary pnpm add could not resolve registry.npmjs.org", "Node strip-only TypeScript could not import glb.ts because of a parameter property; temporary tsc compile succeeded"]
+}

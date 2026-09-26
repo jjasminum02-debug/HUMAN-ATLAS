@@ -1,0 +1,86 @@
+$ python3 work/evidence/T11/B02/validate_t11_b02.py
+exit=0
+{
+  "pass": true,
+  "batchId": "T11-B02",
+  "canonicalCoverage": 10,
+  "fieldEvidence": 50,
+  "englishAndLatinRows": 20,
+  "koreanDisplayOverlays": 7,
+  "sourceHanjaValues": 4,
+  "withheldGroupLabels": 3,
+  "humanReviewed": false,
+  "overallT11Status": "in_progress_partial"
+}
+$ pnpm --dir atlas-web test:search
+exit=0
+✔ same muscle: 승모근 (0.586667ms)
+✔ same muscle: 등세모근 (0.150291ms)
+✔ same muscle: 僧帽筋 (0.362208ms)
+✔ same muscle: TRAPEZIUS (1.121333ms)
+✔ same muscle:   등 세모근   (0.087209ms)
+✔ tibialis: 전경골근 (0.08975ms)
+✔ tibialis: 앞정강근 (0.050083ms)
+✔ tibialis: 前脛骨筋 (0.048416ms)
+✔ tibialis: tibialis anterior (0.412ms)
+✔ transposed typo returns both splenius muscles, never a false single identity (6.681875ms)
+✔ deltoid portion stays separate (0.122417ms)
+✔ user Korean name lateral deltoid maps to the acromial part (0.386959ms)
+✔ named acromial part is included in the learner search projection (0.144959ms)
+✔ splenius capitis names share one lookup candidate (0.435375ms)
+✔ splenius cervicis and colli names share one lookup candidate (0.564791ms)
+✔ short Korean typo does not fuzzily match unrelated muscles (0.045958ms)
+✔ unrelated query has no results (0.182083ms)
+✔ historical peroneus synonym resolves to fibularis (0.296541ms)
+✔ T11-B02 learner catalog English and Latin terms stay attached to their ten existing group IDs (2.618125ms)
+✔ T11-B02 attested Korean/Hanja names resolve to existing groups and unresolved near-matches stay withheld (0.300583ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 92.673958
+$ node --experimental-strip-types --test src/domain/search.test.ts
+$ pnpm --dir atlas-web validate:learning
+exit=0
+{"pass": true, "nameEntries": 20, "summaries": 14, "scope": "references and stale hashes, not anatomy approval"}
+$ python3 scripts/validate-learning-content.py
+$ pnpm --dir atlas-web typecheck
+exit=0
+$ tsc -b --pretty false
+$ git diff --check
+exit=0
+$ python3 work/evidence/T11/B02/check_preservation.py
+exit=0
+{
+  "pass": true,
+  "preExistingFilesCompared": 1319,
+  "allowedPreExistingFilesChanged": [
+    "atlas-web/src/domain/search.test.ts",
+    "work/STATUS.md",
+    "work/review-queue/terminology-gaps.md",
+    "work/reports/T11.md",
+    "atlas-data/terminology/term-review-batches.json",
+    "atlas-data/terminology/learning-names.json"
+  ],
+  "unexpectedPreExistingFilesChanged": [],
+  "preExistingFilesMissing": [],
+  "openSimModels": {
+    "head": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "status": [],
+    "unchanged": true,
+    "readOnly": true
+  },
+  "commitCreated": false
+}
+$ python3 work/evidence/T11/B02/validate_artifacts.py
+exit=0
+{
+  "pass": true,
+  "jsonParsed": 5,
+  "textChecked": 16,
+  "trailingWhitespace": 0,
+  "finalNewlinesPresent": true
+}

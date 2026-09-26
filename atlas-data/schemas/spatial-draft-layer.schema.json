@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://human-atlas.invalid/schema/spatial-draft-layer.schema.json",
+  "title": "HUMAN ATLAS separate spatial draft layer",
+  "description": "Non-canonical, provenance-bound spatial candidates for review and read-only learner overlays. This does not approve or replace SpatialAnnotation records.",
+  "type": "object",
+  "required": ["schemaVersion", "syntheticFixture", "sourceContextVersion", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": "HA-spatial-draft-layer-v1" },
+    "syntheticFixture": { "type": "boolean" },
+    "sourceContextVersion": { "const": "T13-attachment-context-v2" },
+    "records": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/SpatialDraftRecord" }
+    }
+  },
+  "$defs": {
+    "Id": { "type": "string", "minLength": 1, "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$" },
+    "Sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "PositionM": {
+      "type": "array", "minItems": 3, "maxItems": 3,
+      "items": { "type": "number" }
+    },
+    "Geometry": {
+      "oneOf": [
+        {
+          "type": "object", "required": ["kind", "position"], "additionalProperties": false,
+          "properties": { "kind": { "const": "point" }, "position": { "$ref": "#/$defs/PositionM" } }
+        },
+        {
+          "type": "object", "required": ["kind", "vertices"], "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "polyline" },
+            "vertices": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/PositionM" } }
+          }
+        },
+        {
+          "type": "object", "required": ["kind", "triangleIds", "topologyHash"], "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "surface_patch" },
+            "triangleIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "integer", "minimum": 0 } },
+            "topologyHash": { "$ref": "#/$defs/Sha256" }
+          }
+        }
+      ]
+    },
+    "SpatialDraftRecord": {
+      "type": "object",
+      "required": [
+        "id", "status", "attachmentId", "descriptionClaimId", "sourceClaimHash", "instanceId", "side",
+        "assetId", "assetRevision", "assetRevisionHash", "topologyHash", "geometry", "frameId", "units",
+        "poseId", "precision", "method", "evidenceIds", "reviewId", "staleReason", "migrationSource"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/Id" },
+        "status": { "enum": ["pending", "context_only", "draft_surface", "reviewed", "stale"] },
+        "attachmentId": { "oneOf": [{ "$ref": "#/$defs/Id" }, { "type": "null" }] },
+        "descriptionClaimId": { "oneOf": [{ "$ref": "#/$defs/Id" }, { "type": "null" }] },
+        "sourceClaimHash": { "oneOf": [{ "$ref": "#/$defs/Sha256" }, { "type": "null" }] },
+        "instanceId": { "oneOf": [{ "$ref": "#/$defs/Id" }, { "type": "null" }] },
+        "side": { "enum": ["left", "right"] },
+        "assetId": { "oneOf": [{ "$ref": "#/$defs/Id" }, { "type": "null" }] },
+        "assetRevision": { "oneOf": [{ "$ref": "#/$defs/Id" }, { "type": "null" }] },
+        "assetRevisionHash": { "oneOf": [{ "$ref": "#/$defs/Sha256" }, { "type": "null" }] },
+        "topologyHash": { "oneOf": [{ "$ref": "#/$defs/Sha256" }, { "type": "null" }] },
+        "geometry": { "oneOf": [{ "$ref": "#/$defs/Geometry" }, { "type": "null" }] },
+        "frameId": { "oneOf": [{ "$ref": "#/$defs/Id" }, { "type": "null" }] },
+        "units": { "oneOf": [{ "enum": ["m", "mm", "cm"] }, { "type": "null" }] },
+        "poseId": { "oneOf": [{ "$ref": "#/$defs/Id" }, { "type": "null" }] },
+        "precision": { "oneOf": [{ "enum": ["representative", "approximate_extent", "reviewed_extent"] }, { "type": "null" }] },
+        "method": { "oneOf": [{ "enum": ["source_annotation", "manual_mapping", "model_derived"] }, { "type": "null" }] },
+        "evidenceIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/Id" } },
+        "reviewId": { "oneOf": [{ "$ref": "#/$defs/Id" }, { "type": "null" }] },
+        "staleReason": { "oneOf": [{ "type": "string", "minLength": 1 }, { "type": "null" }] },
+        "migrationSource": { "oneOf": [{ "type": "string", "minLength": 1 }, { "type": "null" }] }
+      }
+    }
+  }
+}

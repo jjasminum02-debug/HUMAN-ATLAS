@@ -1,0 +1,29 @@
+{
+  "cwd": "atlas-web",
+  "runtime": "bundled workspace Node.js and pnpm on PATH",
+  "checks": [
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "result": "TypeScript project check passed"
+    },
+    {
+      "command": "pnpm test:search",
+      "exitCode": 0,
+      "result": "38/38 passed"
+    },
+    {
+      "command": "pnpm test:annotations",
+      "exitCode": 0,
+      "result": "12/12 passed; annotation exchange schema passed"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "result": "learning content validator, TypeScript, Vite production build passed; App JavaScript chunk about 1,381.09 kB and 247.50 kB gzip"
+    }
+  ],
+  "warnings": [
+    "Vite reports the App JavaScript chunk is over 500 kB after minification (about 1,381 kB; 247.50 kB gzip). Build still passes."
+  ]
+}

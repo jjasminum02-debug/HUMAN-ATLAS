@@ -1,0 +1,122 @@
+{
+  "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+  "archiveSizeBytes": 142903898,
+  "archiveLastModified": "Wed, 22 May 2013 06:46:24 GMT",
+  "archiveEtag": "\"8848a5a-4dd48ec9df000\"",
+  "retrieval": "HTTP byte ranges from exact T02 archive; full ZIP not saved",
+  "rangeBytesTransferred": 821851,
+  "rangeBudgetBytes": 25165824,
+  "licensePage": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+  "requiredCredit": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+  "sourceCoordinates": {
+    "sourceUnit": "mm",
+    "sourceAxes": {
+      "handedness": "right-handed",
+      "positiveX": "patient left; x > 0 is left and x < 0 is right",
+      "positiveY": "posterior",
+      "negativeY": "anterior",
+      "positiveZ": "superior; superior values increase"
+    },
+    "sourceCoordinateEvidence": "Official Release 4.0 coordinate_system.png and exact OBJ bounds/metadata; see T02 report.",
+    "atlasInternalUnit": "m",
+    "atlasAxes": {
+      "handedness": "right-handed",
+      "positiveX": "patient left",
+      "positiveY": "head/superior",
+      "positiveZ": "anterior"
+    },
+    "sourceToAtlasTransform": {
+      "formula": "[x_atlas,y_atlas,z_atlas]m = [x_source,z_source,-y_source]mm / 1000",
+      "matrix": [
+        [
+          0.001,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0.001
+        ],
+        [
+          0,
+          -0.001,
+          0
+        ]
+      ],
+      "rotationDeterminant": 1,
+      "preservesRightSide": "source x < 0 remains atlas x < 0"
+    },
+    "pose": {
+      "id": "bodyparts3d-r4-static-reference",
+      "description": "Fixed source reference geometry for the archive's adult male model. Coordinate documentation defines anatomical directions but does not specify an articulated joint posture; do not label this as a verified standardized anatomical pose.",
+      "animationOrDeformation": "none"
+    }
+  },
+  "sourceTableSha256": {
+    "isa_parts_list_e.txt": "ab7796deedd49205e77f3609a1cb8c53e2bbee14ecb5c9a6ca05227469780513",
+    "isa_element_parts.txt": "a3de74423f943b0d724ae8f59b3a817f87c423a544f8db98113b1980817cbeaf"
+  },
+  "assets": [
+    {
+      "fileId": "FJ3353",
+      "archiveMember": "isa_BP3D_4.0_obj_99/FJ3353.obj",
+      "localPath": "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3353.obj",
+      "bytes": 53148,
+      "sha256": "f6c034b6b18aee623f510ee40e4171346c084e8bdd092354d634c87fc9af6acf",
+      "zipCrc32": "f33013f4",
+      "representationId": "BP8627",
+      "externalConceptId": "FMA24509",
+      "sourceName": "right second metatarsal bone",
+      "sourceTableRows": {
+        "isa_parts_list_e.txt": 1202,
+        "isa_element_parts.txt": 4464
+      }
+    },
+    {
+      "fileId": "FJ3355",
+      "archiveMember": "isa_BP3D_4.0_obj_99/FJ3355.obj",
+      "localPath": "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3355.obj",
+      "bytes": 45924,
+      "sha256": "90b28dbcd11e3d3a6f253adb1ddaa33f30040a08c71bb3a86242372ea9b6170e",
+      "zipCrc32": "bd8cc2f0",
+      "representationId": "BP8802",
+      "externalConceptId": "FMA24511",
+      "sourceName": "right third metatarsal bone",
+      "sourceTableRows": {
+        "isa_parts_list_e.txt": 1204,
+        "isa_element_parts.txt": 4466
+      }
+    },
+    {
+      "fileId": "FJ3357",
+      "archiveMember": "isa_BP3D_4.0_obj_99/FJ3357.obj",
+      "localPath": "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3357.obj",
+      "bytes": 43587,
+      "sha256": "a5fd57a36b7525de383809bbbb37ff6a56a08ed0fb25af1684085418cc6e8202",
+      "zipCrc32": "0a57589e",
+      "representationId": "BP9130",
+      "externalConceptId": "FMA24513",
+      "sourceName": "right fourth metatarsal bone",
+      "sourceTableRows": {
+        "isa_parts_list_e.txt": 1206,
+        "isa_element_parts.txt": 4468
+      }
+    },
+    {
+      "fileId": "FJ3364",
+      "archiveMember": "isa_BP3D_4.0_obj_99/FJ3364.obj",
+      "localPath": "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3364.obj",
+      "bytes": 60077,
+      "sha256": "d5ac55e9aa466b0e14d8d7760f7ef2a6edb0d95cfea56205557f647c451a8079",
+      "zipCrc32": "48f4d7c9",
+      "representationId": "BP8873",
+      "externalConceptId": "FMA24528",
+      "sourceName": "right cuboid bone",
+      "sourceTableRows": {
+        "isa_parts_list_e.txt": 1221,
+        "isa_element_parts.txt": 4492
+      }
+    }
+  ]
+}

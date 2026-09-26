@@ -1,0 +1,778 @@
+{
+  "pass": true,
+  "validator": "T11-B01",
+  "checkedDate": "2026-09-25",
+  "checkCount": 150,
+  "canonicalCoverage": 85,
+  "canonicalStatusCounts": {
+    "not_started": 77,
+    "web_checked_with_gaps": 8
+  },
+  "batchSizes": {
+    "T11-B01": 10,
+    "T11-B02": 10,
+    "T11-B03": 10,
+    "T11-B04": 10,
+    "T11-B05": 10,
+    "T11-B06": 10,
+    "T11-B07": 10,
+    "T11-B08": 10,
+    "T11-B09": 7
+  },
+  "B01EntryCount": 10,
+  "fieldEvidenceCount": 57,
+  "humanAnatomyReview": "not_performed",
+  "catalogDenominatorFrozen": false,
+  "checks": [
+    {
+      "check": "catalog-crosswalk-equality",
+      "passed": true,
+      "detail": "catalog=85 crosswalk=85 coverage=85"
+    },
+    {
+      "check": "canonical-batch-unique-complete",
+      "passed": true,
+      "detail": "assigned=85 unique=85"
+    },
+    {
+      "check": "all-batches-at-most-ten",
+      "passed": true,
+      "detail": "{'T11-B01': 10, 'T11-B02': 10, 'T11-B03': 10, 'T11-B04': 10, 'T11-B05': 10, 'T11-B06': 10, 'T11-B07': 10, 'T11-B08': 10, 'T11-B09': 7}"
+    },
+    {
+      "check": "batch-size-fields-match",
+      "passed": true,
+      "detail": "all declared batch sizes equal target counts"
+    },
+    {
+      "check": "B01-bounded-targets",
+      "passed": true,
+      "detail": "canonical=8; lookup=2"
+    },
+    {
+      "check": "partial-catalog-not-whole-body",
+      "passed": true,
+      "detail": "85 is explicitly documented as a partial catalog"
+    },
+    {
+      "check": "no-overlay-id-duplicates",
+      "passed": true,
+      "detail": "overlay entries=13"
+    },
+    {
+      "check": "no-new-lookup-canonical-id",
+      "passed": true,
+      "detail": "both splenius records remain lookupOnly and absent from canonical"
+    },
+    {
+      "check": "B01-evidence-target-count",
+      "passed": true,
+      "detail": "review entries=10"
+    },
+    {
+      "check": "overlay-entry-ids-preserved",
+      "passed": true,
+      "detail": "T10 overlay entry count remains 13"
+    },
+    {
+      "check": "HA-M-000001-human-review-separated",
+      "passed": true,
+      "detail": "web verification does not set or imply a human review"
+    },
+    {
+      "check": "HA-M-000001-field-evidence-present",
+      "passed": true,
+      "detail": "4 field-level records"
+    },
+    {
+      "check": "HA-M-000001-label-single-value-record",
+      "passed": true,
+      "detail": "overlay value '비복근'"
+    },
+    {
+      "check": "HA-M-000001-korean-single-value-record",
+      "passed": true,
+      "detail": "overlay value '장딴지근'"
+    },
+    {
+      "check": "HA-M-000001-english-single-value-record",
+      "passed": true,
+      "detail": "overlay value 'Gastrocnemius'"
+    },
+    {
+      "check": "HA-M-000001-hanja-single-value-record",
+      "passed": true,
+      "detail": "overlay value None"
+    },
+    {
+      "check": "HA-M-000001-aliases-covered",
+      "passed": true,
+      "detail": "aliases=0"
+    },
+    {
+      "check": "HA-M-000001-label-source-reference",
+      "passed": true,
+      "detail": "kmle-gastro locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000001-korean-source-reference",
+      "passed": true,
+      "detail": "kmle-gastro locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000001-english-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000001-hanja-missing-reason",
+      "passed": true,
+      "detail": "null term has an explicit missing/conflict reason"
+    },
+    {
+      "check": "HA-M-000001-hanja-source-reference",
+      "passed": true,
+      "detail": "kmle-gastro locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000002-human-review-separated",
+      "passed": true,
+      "detail": "web verification does not set or imply a human review"
+    },
+    {
+      "check": "HA-M-000002-field-evidence-present",
+      "passed": true,
+      "detail": "4 field-level records"
+    },
+    {
+      "check": "HA-M-000002-label-single-value-record",
+      "passed": true,
+      "detail": "overlay value '가자미근'"
+    },
+    {
+      "check": "HA-M-000002-korean-single-value-record",
+      "passed": true,
+      "detail": "overlay value '가자미근'"
+    },
+    {
+      "check": "HA-M-000002-english-single-value-record",
+      "passed": true,
+      "detail": "overlay value 'Soleus'"
+    },
+    {
+      "check": "HA-M-000002-hanja-single-value-record",
+      "passed": true,
+      "detail": "overlay value None"
+    },
+    {
+      "check": "HA-M-000002-aliases-covered",
+      "passed": true,
+      "detail": "aliases=0"
+    },
+    {
+      "check": "HA-M-000002-label-source-reference",
+      "passed": true,
+      "detail": "kmle-soleus locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000002-korean-source-reference",
+      "passed": true,
+      "detail": "kmle-soleus locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000002-english-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000002-hanja-missing-reason",
+      "passed": true,
+      "detail": "null term has an explicit missing/conflict reason"
+    },
+    {
+      "check": "HA-M-000002-hanja-source-reference",
+      "passed": true,
+      "detail": "kmle-soleus locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000003-human-review-separated",
+      "passed": true,
+      "detail": "web verification does not set or imply a human review"
+    },
+    {
+      "check": "HA-M-000003-field-evidence-present",
+      "passed": true,
+      "detail": "4 field-level records"
+    },
+    {
+      "check": "HA-M-000003-label-single-value-record",
+      "passed": true,
+      "detail": "overlay value '전경골근'"
+    },
+    {
+      "check": "HA-M-000003-korean-single-value-record",
+      "passed": true,
+      "detail": "overlay value '앞정강근'"
+    },
+    {
+      "check": "HA-M-000003-english-single-value-record",
+      "passed": true,
+      "detail": "overlay value 'Tibialis anterior'"
+    },
+    {
+      "check": "HA-M-000003-hanja-single-value-record",
+      "passed": true,
+      "detail": "overlay value '前脛骨筋'"
+    },
+    {
+      "check": "HA-M-000003-aliases-covered",
+      "passed": true,
+      "detail": "aliases=0"
+    },
+    {
+      "check": "HA-M-000003-label-source-reference",
+      "passed": true,
+      "detail": "kmle-tibialis locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000003-korean-source-reference",
+      "passed": true,
+      "detail": "kmle-tibialis locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000003-english-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000003-hanja-source-reference",
+      "passed": true,
+      "detail": "nikom-ta locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000004-human-review-separated",
+      "passed": true,
+      "detail": "web verification does not set or imply a human review"
+    },
+    {
+      "check": "HA-M-000004-field-evidence-present",
+      "passed": true,
+      "detail": "4 field-level records"
+    },
+    {
+      "check": "HA-M-000004-label-single-value-record",
+      "passed": true,
+      "detail": "overlay value '후경골근'"
+    },
+    {
+      "check": "HA-M-000004-korean-single-value-record",
+      "passed": true,
+      "detail": "overlay value '뒤정강근'"
+    },
+    {
+      "check": "HA-M-000004-english-single-value-record",
+      "passed": true,
+      "detail": "overlay value 'Tibialis posterior'"
+    },
+    {
+      "check": "HA-M-000004-hanja-single-value-record",
+      "passed": true,
+      "detail": "overlay value '後脛骨筋'"
+    },
+    {
+      "check": "HA-M-000004-aliases-covered",
+      "passed": true,
+      "detail": "aliases=0"
+    },
+    {
+      "check": "HA-M-000004-label-source-reference",
+      "passed": true,
+      "detail": "kmle-tibialis locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000004-korean-source-reference",
+      "passed": true,
+      "detail": "kmle-tibialis locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000004-english-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000004-hanja-source-reference",
+      "passed": true,
+      "detail": "kmle-tibialis locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000005-human-review-separated",
+      "passed": true,
+      "detail": "web verification does not set or imply a human review"
+    },
+    {
+      "check": "HA-M-000005-field-evidence-present",
+      "passed": true,
+      "detail": "5 field-level records"
+    },
+    {
+      "check": "HA-M-000005-label-single-value-record",
+      "passed": true,
+      "detail": "overlay value '장비골근'"
+    },
+    {
+      "check": "HA-M-000005-korean-single-value-record",
+      "passed": true,
+      "detail": "overlay value '긴종아리근'"
+    },
+    {
+      "check": "HA-M-000005-english-single-value-record",
+      "passed": true,
+      "detail": "overlay value 'Fibularis longus'"
+    },
+    {
+      "check": "HA-M-000005-hanja-single-value-record",
+      "passed": true,
+      "detail": "overlay value None"
+    },
+    {
+      "check": "HA-M-000005-aliases-covered",
+      "passed": true,
+      "detail": "aliases=1"
+    },
+    {
+      "check": "HA-M-000005-label-source-reference",
+      "passed": true,
+      "detail": "kmle-peroneus locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000005-korean-source-reference",
+      "passed": true,
+      "detail": "kmle-peroneus locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000005-english-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000005-hanja-missing-reason",
+      "passed": true,
+      "detail": "null term has an explicit missing/conflict reason"
+    },
+    {
+      "check": "HA-M-000005-hanja-source-reference",
+      "passed": true,
+      "detail": "kmle-peroneus locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000005-aliases[0]-source-reference",
+      "passed": true,
+      "detail": "kmle-peroneus locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000006-human-review-separated",
+      "passed": true,
+      "detail": "web verification does not set or imply a human review"
+    },
+    {
+      "check": "HA-M-000006-field-evidence-present",
+      "passed": true,
+      "detail": "5 field-level records"
+    },
+    {
+      "check": "HA-M-000006-label-single-value-record",
+      "passed": true,
+      "detail": "overlay value '단비골근'"
+    },
+    {
+      "check": "HA-M-000006-korean-single-value-record",
+      "passed": true,
+      "detail": "overlay value '짧은종아리근'"
+    },
+    {
+      "check": "HA-M-000006-english-single-value-record",
+      "passed": true,
+      "detail": "overlay value 'Fibularis brevis'"
+    },
+    {
+      "check": "HA-M-000006-hanja-single-value-record",
+      "passed": true,
+      "detail": "overlay value None"
+    },
+    {
+      "check": "HA-M-000006-aliases-covered",
+      "passed": true,
+      "detail": "aliases=1"
+    },
+    {
+      "check": "HA-M-000006-label-source-reference",
+      "passed": true,
+      "detail": "kmle-peroneus locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000006-korean-source-reference",
+      "passed": true,
+      "detail": "kmle-peroneus locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000006-english-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000006-hanja-missing-reason",
+      "passed": true,
+      "detail": "null term has an explicit missing/conflict reason"
+    },
+    {
+      "check": "HA-M-000006-hanja-source-reference",
+      "passed": true,
+      "detail": "kmle-peroneus locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000006-aliases[0]-source-reference",
+      "passed": true,
+      "detail": "kmle-peroneus locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000019-human-review-separated",
+      "passed": true,
+      "detail": "web verification does not set or imply a human review"
+    },
+    {
+      "check": "HA-M-000019-field-evidence-present",
+      "passed": true,
+      "detail": "4 field-level records"
+    },
+    {
+      "check": "HA-M-000019-label-single-value-record",
+      "passed": true,
+      "detail": "overlay value '승모근'"
+    },
+    {
+      "check": "HA-M-000019-korean-single-value-record",
+      "passed": true,
+      "detail": "overlay value '등세모근'"
+    },
+    {
+      "check": "HA-M-000019-english-single-value-record",
+      "passed": true,
+      "detail": "overlay value 'Trapezius'"
+    },
+    {
+      "check": "HA-M-000019-hanja-single-value-record",
+      "passed": true,
+      "detail": "overlay value '僧帽筋'"
+    },
+    {
+      "check": "HA-M-000019-aliases-covered",
+      "passed": true,
+      "detail": "aliases=0"
+    },
+    {
+      "check": "HA-M-000019-label-source-reference",
+      "passed": true,
+      "detail": "nikl-trapezius locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000019-korean-source-reference",
+      "passed": true,
+      "detail": "nikl-trapezius locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000019-english-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "HA-M-000019-hanja-source-reference",
+      "passed": true,
+      "detail": "nikl-trapezius locator and edition state recorded"
+    },
+    {
+      "check": "HA-P-000015-human-review-separated",
+      "passed": true,
+      "detail": "web verification does not set or imply a human review"
+    },
+    {
+      "check": "HA-P-000015-field-evidence-present",
+      "passed": true,
+      "detail": "7 field-level records"
+    },
+    {
+      "check": "HA-P-000015-label-single-value-record",
+      "passed": true,
+      "detail": "overlay value '삼각근 · 견봉부'"
+    },
+    {
+      "check": "HA-P-000015-korean-single-value-record",
+      "passed": true,
+      "detail": "overlay value '어깨세모근 · 견봉부분'"
+    },
+    {
+      "check": "HA-P-000015-english-single-value-record",
+      "passed": true,
+      "detail": "overlay value 'Acromial part of deltoid'"
+    },
+    {
+      "check": "HA-P-000015-hanja-single-value-record",
+      "passed": true,
+      "detail": "overlay value None"
+    },
+    {
+      "check": "HA-P-000015-aliases-covered",
+      "passed": true,
+      "detail": "aliases=3"
+    },
+    {
+      "check": "HA-P-000015-label-source-reference",
+      "passed": true,
+      "detail": "kmle-deltoid locator and edition state recorded"
+    },
+    {
+      "check": "HA-P-000015-label-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "HA-P-000015-korean-source-reference",
+      "passed": true,
+      "detail": "kmle-deltoid locator and edition state recorded"
+    },
+    {
+      "check": "HA-P-000015-korean-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "HA-P-000015-english-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "HA-P-000015-hanja-missing-reason",
+      "passed": true,
+      "detail": "null term has an explicit missing/conflict reason"
+    },
+    {
+      "check": "HA-P-000015-hanja-source-reference",
+      "passed": true,
+      "detail": "kmle-deltoid locator and edition state recorded"
+    },
+    {
+      "check": "HA-P-000015-aliases[0]-source-reference",
+      "passed": true,
+      "detail": "user-search locator and edition state recorded"
+    },
+    {
+      "check": "HA-P-000015-aliases[1]-source-reference",
+      "passed": true,
+      "detail": "user-search locator and edition state recorded"
+    },
+    {
+      "check": "HA-P-000015-aliases[2]-source-reference",
+      "passed": true,
+      "detail": "ncbi-statpearls-deltoid locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CAPITIS-human-review-separated",
+      "passed": true,
+      "detail": "web verification does not set or imply a human review"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CAPITIS-field-evidence-present",
+      "passed": true,
+      "detail": "9 field-level records"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CAPITIS-label-single-value-record",
+      "passed": true,
+      "detail": "overlay value '두판상근'"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CAPITIS-korean-single-value-record",
+      "passed": true,
+      "detail": "overlay value '머리널판근'"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CAPITIS-english-single-value-record",
+      "passed": true,
+      "detail": "overlay value 'Splenius capitis'"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CAPITIS-hanja-single-value-record",
+      "passed": true,
+      "detail": "overlay value '頭板狀筋'"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CAPITIS-aliases-covered",
+      "passed": true,
+      "detail": "aliases=5"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CAPITIS-label-source-reference",
+      "passed": true,
+      "detail": "kmle-splenius locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CAPITIS-korean-source-reference",
+      "passed": true,
+      "detail": "kmle-splenius locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CAPITIS-english-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CAPITIS-hanja-source-reference",
+      "passed": true,
+      "detail": "kmle-splenius locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CAPITIS-aliases[0]-source-reference",
+      "passed": true,
+      "detail": "kmle-splenius locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CAPITIS-aliases[1]-source-reference",
+      "passed": true,
+      "detail": "kmle-splenius locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CAPITIS-aliases[2]-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CAPITIS-aliases[3]-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CAPITIS-aliases[4]-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CAPITIS-lookup-not-canonical",
+      "passed": true,
+      "detail": "no guessed stable ID or row-to-canonical join"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-human-review-separated",
+      "passed": true,
+      "detail": "web verification does not set or imply a human review"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-field-evidence-present",
+      "passed": true,
+      "detail": "11 field-level records"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-label-single-value-record",
+      "passed": true,
+      "detail": "overlay value '경판상근'"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-korean-single-value-record",
+      "passed": true,
+      "detail": "overlay value '목널판근'"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-english-single-value-record",
+      "passed": true,
+      "detail": "overlay value 'Splenius cervicis'"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-hanja-single-value-record",
+      "passed": true,
+      "detail": "overlay value '頸板狀筋'"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-aliases-covered",
+      "passed": true,
+      "detail": "aliases=7"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-label-source-reference",
+      "passed": true,
+      "detail": "kmle-splenius locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-korean-source-reference",
+      "passed": true,
+      "detail": "kmle-splenius locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-english-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-hanja-source-reference",
+      "passed": true,
+      "detail": "kmle-splenius locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-aliases[0]-source-reference",
+      "passed": true,
+      "detail": "kmle-splenius locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-aliases[1]-source-reference",
+      "passed": true,
+      "detail": "kmle-splenius locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-aliases[2]-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-aliases[3]-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-aliases[4]-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-aliases[5]-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-aliases[6]-source-reference",
+      "passed": true,
+      "detail": "fipat-ta2-index locator and edition state recorded"
+    },
+    {
+      "check": "LOOKUP-SPLENIUS-CERVICIS-lookup-not-canonical",
+      "passed": true,
+      "detail": "no guessed stable ID or row-to-canonical join"
+    },
+    {
+      "check": "splenius-hanja-fields-added",
+      "passed": true,
+      "detail": "both characters are visible in KMLE legacy terminology page text"
+    },
+    {
+      "check": "trapezius-same-concept-forms",
+      "passed": true,
+      "detail": "four name forms remain connected to HA-M-000019"
+    },
+    {
+      "check": "source-records-have-edition-state",
+      "passed": true,
+      "detail": "edition is exact, explicitly unavailable, or not applicable"
+    },
+    {
+      "check": "review-manifest-does-not-claim-anatomy-approval",
+      "passed": true,
+      "detail": "all web/name evidence remains separate from human anatomy review"
+    }
+  ]
+}

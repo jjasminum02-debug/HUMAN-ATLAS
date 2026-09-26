@@ -1,0 +1,116 @@
+$ python3 work/evidence/T11/B05/validate_t11_b05.py
+[exit 0]
+{
+  "pass": true,
+  "batchId": "T11-B05",
+  "assignedExistingIds": [
+    "HA-M-000022",
+    "HA-M-000023",
+    "HA-M-000024",
+    "HA-M-000025",
+    "HA-M-000026",
+    "HA-M-000027",
+    "HA-M-000028",
+    "HA-M-000029",
+    "HA-M-000030",
+    "HA-M-000031"
+  ],
+  "coverageChecked": 10,
+  "requiredFieldEvidence": 50,
+  "preservedDeltoidAliasEvidence": 1,
+  "batchFieldEvidence": 51,
+  "cumulativeFieldEvidence": 258,
+  "learnerOverlaysTotal": 46,
+  "newOverlays": 9,
+  "preexistingOverlayEnriched": [
+    "HA-M-000030"
+  ],
+  "checkedCanonicalTotal": 48,
+  "catalogDenominator": 85,
+  "humanReviewed": false,
+  "nextBatchStarted": false,
+  "nextTask": "T11-B06"
+}
+
+$ pnpm --dir atlas-web test:search
+[exit 0]
+$ node --experimental-strip-types --test src/domain/search.test.ts
+✔ same muscle: 승모근 (0.531375ms)
+✔ same muscle: 등세모근 (0.104208ms)
+✔ same muscle: 僧帽筋 (0.101959ms)
+✔ same muscle: TRAPEZIUS (0.930625ms)
+✔ same muscle:   등 세모근   (0.077375ms)
+✔ tibialis: 전경골근 (0.096542ms)
+✔ tibialis: 앞정강근 (0.27325ms)
+✔ tibialis: 前脛骨筋 (0.088416ms)
+✔ tibialis: tibialis anterior (0.753125ms)
+✔ transposed typo returns both splenius muscles, never a false single identity (4.813667ms)
+✔ deltoid portion stays separate (0.085292ms)
+✔ user Korean name lateral deltoid maps to the acromial part (0.0685ms)
+✔ named acromial part is included in the learner search projection (0.099959ms)
+✔ splenius capitis names share one lookup candidate (0.981083ms)
+✔ splenius cervicis and colli names share one lookup candidate (1.306125ms)
+✔ short Korean typo does not fuzzily match unrelated muscles (0.05225ms)
+✔ unrelated query has no results (0.388958ms)
+✔ historical peroneus synonym resolves to fibularis (0.350417ms)
+✔ T11-B02 learner catalog English and Latin terms stay attached to their ten existing group IDs (2.63075ms)
+✔ T11-B02 attested Korean/Hanja names resolve to existing groups and unresolved near-matches stay withheld (0.194958ms)
+✔ T11-B03 English and Latin index terms stay attached to the ten assigned existing IDs (3.036792ms)
+✔ T11-B03 attested Korean and source Hanja resolve to their same existing IDs (0.156208ms)
+✔ T11-B03 generic or narrower gluteal/foot candidates remain unlinked to the three withheld groups (0.301917ms)
+✔ T11-B04 English and Latin TA2 observations stay attached to the ten assigned existing muscle IDs (2.730833ms)
+✔ T11-B04 attested Korean names and source Hanja resolve to the same existing IDs; incomplete Hanja stays withheld (0.36475ms)
+✔ T11-B05 direct TA2 English and Latin observations resolve to their ten assigned existing IDs (3.039167ms)
+✔ T11-B05 attested customary Korean names, current Korean names and source Hanja stay on their assigned IDs (0.47425ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 78.572
+
+$ pnpm --dir atlas-web validate:learning
+[exit 0]
+$ python3 scripts/validate-learning-content.py
+{"pass": true, "nameEntries": 46, "summaries": 14, "scope": "references and stale hashes, not anatomy approval"}
+
+$ git diff --check
+[exit 0]
+
+
+$ python3 work/evidence/T11/B05/check_preservation.py
+[exit 0]
+{
+  "pass": true,
+  "preExistingFilesCompared": 1397,
+  "preExistingFilesMissing": [],
+  "preExistingFilesChanged": [
+    "atlas-data/terminology/learning-names.json",
+    "atlas-data/terminology/term-review-batches.json",
+    "atlas-web/src/domain/search.test.ts",
+    "work/STATUS.md",
+    "work/reports/T11.md",
+    "work/review-queue/terminology-gaps.md"
+  ],
+  "unexpectedPreExistingChanges": [],
+  "unexpectedNewFiles": [],
+  "projectHeadBeforeAndAfter": "9c54eff73b55406d3dec3deb531e2bfeb1c49fd2",
+  "openSimModels": {
+    "headBeforeAndAfter": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "statusBefore": [],
+    "statusAfter": [],
+    "preExistingFilesCompared": 432,
+    "fileChanges": [],
+    "newFiles": [],
+    "unchanged": true,
+    "readOnly": true
+  },
+  "commitCreated": false
+}
+
+
+$ git diff --check (after report result table update)
+[exit 0]
+

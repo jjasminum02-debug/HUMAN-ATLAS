@@ -1,0 +1,62 @@
+{
+  "task": "T13b",
+  "date": "2026-09-26",
+  "browser": "Codex in-app browser",
+  "origin": "http://127.0.0.1:5174",
+  "viewport": "1280x720",
+  "reviewRoute": {
+    "url": "/review?muscle=HA-M-000001",
+    "visibleLegacyT09DraftCount": 0,
+    "spatialLayerRecords": 0,
+    "reloadCheck": "after reloading /review, the legacy draft count remained 0 and the new spatial layer reloaded as empty",
+    "spatialLayerReadyMessage": "분리된 공간자료 저장소가 준비되었습니다. 기존 T09 초안은 자동 복사·수정하지 않았습니다.",
+    "contextStateCounts": {
+      "context_only": 28,
+      "pending": 13,
+      "draft_surface": 0,
+      "reviewed": 0,
+      "stale": 0
+    },
+    "sourceAndToolState": "review authoring tools are present only on the review route"
+  },
+  "validatorChecks": {
+    "result": "passed",
+    "rejected": [
+      "unknown source attachment",
+      "left/right mismatch",
+      "source claim hash mismatch",
+      "unknown mesh",
+      "mesh revision hash mismatch"
+    ],
+    "topologyChange": "retained as stale; not rendered as current",
+    "reviewPromotion": "none"
+  },
+  "importCheck": {
+    "input": "invalid schema document",
+    "result": "rejected with layer_schema_invalid",
+    "visibleMessage": "공간자료 가져오기를 거부했습니다. 기존 T09 초안과 분리 저장값은 바뀌지 않았습니다.",
+    "existingStoredLayerChanged": false
+  },
+  "isolatedLearnerPreview": {
+    "url": "/?__t13bTestOverlay=1&muscle=HA-M-000001",
+    "fixture": "one camera-visible triangle from an existing context femur mesh; explicitly synthetic, stored only under the T13b test key",
+    "saveResult": "saved to isolated test-only storage",
+    "reloadResult": "after page reload the synthetic warning and dashed colored triangle patch reappeared",
+    "visualCheck": "overlay patch was visible over the femur in the rendered 3D canvas",
+    "productionCatalogManifestOrLearningData": "not modified"
+  },
+  "learnerIsolation": {
+    "url": "/?muscle=HA-M-000001",
+    "whileTestFixtureWasStored": {
+      "syntheticBannerCount": 0,
+      "authoringWorkbenchCount": 0
+    },
+    "afterTestFixtureCleanup": "test preview banner and overlay disappeared; the test key was cleared through the dedicated cleanup button",
+    "visibleT09StorageMutation": "none"
+  },
+  "console": {
+    "reviewErrorsAndWarnings": 0,
+    "learnerErrorsAndWarnings": 0
+  },
+  "preservationLimit": "The existing T09 storage key showed zero drafts in /review. The browser evaluator did not expose raw localStorage bytes for hashing; no migration, delete, or T09 draft edit action was used. The initial hydration write is skipped in code, and later writes occur only after an explicit draft change."
+}

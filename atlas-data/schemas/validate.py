@@ -380,7 +380,15 @@ def validate_dataset(data: Any, schema: dict) -> list[Issue]:
     for mapping in entities["meshMappings"]:
         path = f"$.meshMappings.{mapping['id']}"
         for iid in mapping["instanceIds"]: ref(exists("instances", iid), "missing_reference", f"{path}.instanceIds", iid)
-        for pid in mapping["partIds"]: ref(exists("muscleParts", pid), "missing_reference", f"{path}.partIds", pid)
+        for pid in mapping["partIds"]:
+            part_concept = buckets["muscleConcepts"].get(pid)
+            valid_part_concept = part_concept is not None and part_concept["entityType"] == "muscle_part"
+            ref(exists("muscleParts", pid) or valid_part_concept, "missing_reference", f"{path}.partIds", pid)
+            if valid_part_concept and mapping["instanceIds"]:
+                parent = part_concept.get("parentId")
+                for iid in mapping["instanceIds"]:
+                    if exists("instances", iid) and buckets["instances"][iid]["conceptId"] != parent:
+                        issues.append(Issue("mesh_part_instance_parent_mismatch", f"{path}.partIds", f"Part concept {pid!r} does not belong to instance {iid!r}."))
         for mid in mapping["meshIds"]: ref(exists("meshAssets", mid), "missing_reference", f"{path}.meshIds", mid)
         for iid in mapping["instanceIds"]:
             if not exists("instances", iid): continue
@@ -401,7 +409,12 @@ def validate_dataset(data: Any, schema: dict) -> list[Issue]:
         if exists("attachments", ann["attachmentId"]) and exists("instances", ann["instanceId"]):
             attachment = buckets["attachments"][ann["attachmentId"]]
             owner = attachment["muscleOrPartId"]
-            expected_concept = buckets["muscleParts"][owner]["parentMuscleId"] if exists("muscleParts", owner) else owner
+            if exists("muscleParts", owner):
+                expected_concept = buckets["muscleParts"][owner]["parentMuscleId"]
+            elif owner in buckets["muscleConcepts"] and buckets["muscleConcepts"][owner]["entityType"] == "muscle_part":
+                expected_concept = buckets["muscleConcepts"][owner].get("parentId")
+            else:
+                expected_concept = owner
             if buckets["instances"][ann["instanceId"]]["conceptId"] != expected_concept:
                 issues.append(Issue("annotation_instance_concept_mismatch", f"{path}.instanceId", "Annotation instance must belong to the attachment's muscle concept."))
         if exists("meshAssets", ann["assetId"]):

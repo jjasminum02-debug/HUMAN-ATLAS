@@ -46,3 +46,22 @@
 - **variant taxonomy 미완료:** Gray 1918에 나온 변이 설명을 stable variant concepts/attachments로 정규화하지 않았다. review queue로 남겼다.
 - **공간자료 미입력:** T02 mesh links remain provisional; T05에는 spatial annotation/coordinates가 없다. Attachment prose does not imply a reviewed mesh surface.
 - **release 제한:** Gray global copyright status/redistribution과 OpenStax AI-ingestion permission은 확인되지 않았다. T05 public release/redistribution was not authorized or attempted.
+
+## T10 — 현재 상태 갱신
+
+기존 T04/T05 언어 차단 기록은 당시 canonical 상태를 설명한다. 현재 표시/검색 overlay13개와 한국어 요약14개를 추가했으며 공식 용어집 원본 미확보가 모든 이름 표시를 막지는 않는다. canonical 및 사람 검토 상태는 그대로다. 나머지85목록 명칭 조사, 일부 한자 원문 대조, 전신 inventory, canonical 공간 연결, 실제 부착면, 현대 문헌/사람 검토는 미완. 새 다음 작업은 T11이며 구 번호와 혼용하지 않는다.
+
+## T12b — 2026-09-26
+
+- 기술 연결은 통과했다. T07의 근육 7 mesh를 우측 instance6과 canonical MeshMapping7에 연결했고 11 MeshAsset을 보존했다. 이 기록은 당시 T10의 `canonical 공간 연결 미완` 중 근육 geometry 계약 부분을 갱신한다.
+- FJ3385 talus는 T07 source crosswalk의 canonical structure ID가 null이다. 임의 ID를 만들지 않고 `canonical-geometry-t12.json`에서 제외했다. 다음 행동: 신뢰할 수 있는 구조 용어/출처와 T07 파일 관계를 대조한 뒤 별도 구조 ID 여부를 결정한다.
+- 종골·비골·경골과 talus의 4개 뼈 asset은 T03 `MeshMapping`에 structure-target 필드가 없어 구조 mapping으로 승격하지 않았다. 다음 행동: T13에서 구조 대상 계약을 검토하고 사람 identity review 전에는 후보로 유지한다.
+- 현 GLB에 T13의 대퇴골 및 일부 발 부착 대상 뼈가 없다. 다음 행동: 필요한 표면별 source 파일, license, 변환/frame/pose를 확인해 파생 자산을 추가하거나 해당 annotation을 보류한다. T12b 자체의 기술 통과를 막지 않는다.
+
+## T13 — 2026-09-26
+
+- T12b에서 빠졌던 우측 대퇴골·발 뼈 9개는 공식 교차표와 ZIP member를 확인해 별도 파생 GLB로 보강했다. 이전 T12b 자산 공백 기록은 당시 상태다.
+- T05 부착 41개 중 28개는 관련 뼈 **전체 검색** 컨텍스트를 확보했다. 정확한 부착 패치·경계·삼각형은 0개다. 원문 요약과 whole-bone mesh만으로 범위를 특정할 수 없어 T13의 실제 표면 후보 acceptance가 차단된다. 다음 행동: 항목별 다각도 판독과 독립 근거/사람 검토 뒤 `/review`에 초안 면 또는 경계를 입력하고 hash/pose/stale를 재검증한다.
+- 13개는 관절낭, 가자미근 건활, 하퇴 골간막, 근막·근간중격, 세 설상골 복합 대상 등 적합한 대상 mesh가 없다. 각 항목의 이유와 다음 행동은 `work/review-queue/attachment-surfaces-t13.md`에 기록했다. 다음 행동: 출처·이용 조건·좌표가 확인된 정확한 표면이 있으면 별도 파생 자산으로 확보하고, 없으면 보류를 유지한다.
+- 제2~4중족골은 공식 source 파일 FJ3353/FJ3355/FJ3357을 확인했으나 현 canonical에 전체 뼈 ID가 없다. source 파일 기반 검색 컨텍스트로만 사용하며 canonical ID를 추정하지 않는다. FJ3385 talus ID도 null이다.
+- 현대 독립 해부학 대조와 사람 검토는 없으며 T05 claim, 구조 후보, T13 mesh 및 부착 검색 컨텍스트는 승인 상태가 아니다. T14는 시작하지 않았다.

@@ -1,0 +1,74 @@
+{
+  "pass": true,
+  "taskId": "T11-B05",
+  "commands": [
+    {
+      "name": "coverage_and_field_provenance",
+      "command": [
+        "python3",
+        "work/evidence/T11/B05/validate_t11_b05.py"
+      ],
+      "exitCode": 0,
+      "output": "{\n  \"pass\": true,\n  \"batchId\": \"T11-B05\",\n  \"assignedExistingIds\": [\n    \"HA-M-000022\",\n    \"HA-M-000023\",\n    \"HA-M-000024\",\n    \"HA-M-000025\",\n    \"HA-M-000026\",\n    \"HA-M-000027\",\n    \"HA-M-000028\",\n    \"HA-M-000029\",\n    \"HA-M-000030\",\n    \"HA-M-000031\"\n  ],\n  \"coverageChecked\": 10,\n  \"requiredFieldEvidence\": 50,\n  \"preservedDeltoidAliasEvidence\": 1,\n  \"batchFieldEvidence\": 51,\n  \"cumulativeFieldEvidence\": 258,\n  \"learnerOverlaysTotal\": 46,\n  \"newOverlays\": 9,\n  \"preexistingOverlayEnriched\": [\n    \"HA-M-000030\"\n  ],\n  \"checkedCanonicalTotal\": 48,\n  \"catalogDenominator\": 85,\n  \"humanReviewed\": false,\n  \"nextBatchStarted\": false,\n  \"nextTask\": \"T11-B06\"\n}\n"
+    },
+    {
+      "name": "integrated_search_regression",
+      "command": [
+        "pnpm",
+        "--dir",
+        "atlas-web",
+        "test:search"
+      ],
+      "exitCode": 0,
+      "output": "$ node --experimental-strip-types --test src/domain/search.test.ts\n✔ same muscle: 승모근 (0.531375ms)\n✔ same muscle: 등세모근 (0.104208ms)\n✔ same muscle: 僧帽筋 (0.101959ms)\n✔ same muscle: TRAPEZIUS (0.930625ms)\n✔ same muscle:   등 세모근   (0.077375ms)\n✔ tibialis: 전경골근 (0.096542ms)\n✔ tibialis: 앞정강근 (0.27325ms)\n✔ tibialis: 前脛骨筋 (0.088416ms)\n✔ tibialis: tibialis anterior (0.753125ms)\n✔ transposed typo returns both splenius muscles, never a false single identity (4.813667ms)\n✔ deltoid portion stays separate (0.085292ms)\n✔ user Korean name lateral deltoid maps to the acromial part (0.0685ms)\n✔ named acromial part is included in the learner search projection (0.099959ms)\n✔ splenius capitis names share one lookup candidate (0.981083ms)\n✔ splenius cervicis and colli names share one lookup candidate (1.306125ms)\n✔ short Korean typo does not fuzzily match unrelated muscles (0.05225ms)\n✔ unrelated query has no results (0.388958ms)\n✔ historical peroneus synonym resolves to fibularis (0.350417ms)\n✔ T11-B02 learner catalog English and Latin terms stay attached to their ten existing group IDs (2.63075ms)\n✔ T11-B02 attested Korean/Hanja names resolve to existing groups and unresolved near-matches stay withheld (0.194958ms)\n✔ T11-B03 English and Latin index terms stay attached to the ten assigned existing IDs (3.036792ms)\n✔ T11-B03 attested Korean and source Hanja resolve to their same existing IDs (0.156208ms)\n✔ T11-B03 generic or narrower gluteal/foot candidates remain unlinked to the three withheld groups (0.301917ms)\n✔ T11-B04 English and Latin TA2 observations stay attached to the ten assigned existing muscle IDs (2.730833ms)\n✔ T11-B04 attested Korean names and source Hanja resolve to the same existing IDs; incomplete Hanja stays withheld (0.36475ms)\n✔ T11-B05 direct TA2 English and Latin observations resolve to their ten assigned existing IDs (3.039167ms)\n✔ T11-B05 attested customary Korean names, current Korean names and source Hanja stay on their assigned IDs (0.47425ms)\nℹ tests 27\nℹ suites 0\nℹ pass 27\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 78.572\n"
+    },
+    {
+      "name": "existing_learning_data_references",
+      "command": [
+        "pnpm",
+        "--dir",
+        "atlas-web",
+        "validate:learning"
+      ],
+      "exitCode": 0,
+      "output": "$ python3 scripts/validate-learning-content.py\n{\"pass\": true, \"nameEntries\": 46, \"summaries\": 14, \"scope\": \"references and stale hashes, not anatomy approval\"}\n"
+    },
+    {
+      "name": "git_diff_whitespace",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "name": "pre_existing_and_opensim_preservation",
+      "command": [
+        "python3",
+        "work/evidence/T11/B05/check_preservation.py"
+      ],
+      "exitCode": 0,
+      "output": "{\n  \"pass\": true,\n  \"preExistingFilesCompared\": 1397,\n  \"preExistingFilesMissing\": [],\n  \"preExistingFilesChanged\": [\n    \"atlas-data/terminology/learning-names.json\",\n    \"atlas-data/terminology/term-review-batches.json\",\n    \"atlas-web/src/domain/search.test.ts\",\n    \"work/STATUS.md\",\n    \"work/reports/T11.md\",\n    \"work/review-queue/terminology-gaps.md\"\n  ],\n  \"unexpectedPreExistingChanges\": [],\n  \"unexpectedNewFiles\": [],\n  \"projectHeadBeforeAndAfter\": \"9c54eff73b55406d3dec3deb531e2bfeb1c49fd2\",\n  \"openSimModels\": {\n    \"headBeforeAndAfter\": \"d9b05d470b1a481c222372c85b75772faf8f7792\",\n    \"statusBefore\": [],\n    \"statusAfter\": [],\n    \"preExistingFilesCompared\": 432,\n    \"fileChanges\": [],\n    \"newFiles\": [],\n    \"unchanged\": true,\n    \"readOnly\": true\n  },\n  \"commitCreated\": false\n}\n"
+    }
+  ],
+  "runtime": {
+    "nodeExecutable": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "pathPrefix": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin"
+  },
+  "searchTestCount": 27,
+  "scope": "B05 only; no learner UI edit, B06, T12, build, or deploy",
+  "limitations": [
+    "FIPAT library URL returned HTTP 502; Dalhousie-hosted official TA2 PDF opened directly and relevant text rows/table headings were read, but visual page screenshots were not inspected",
+    "KMLE underlying dictionary editions/revisions remain unexposed for most terms; one KMLE HTML page was opened for deltoid and CancerWEB date was visible",
+    "human anatomy review was not performed"
+  ],
+  "preservedPriorTerm": {
+    "id": "HA-M-000030",
+    "existingEnglish": "Deltoid",
+    "preservedAsAlias": "Deltoid",
+    "newTa2English": "Deltoid muscle",
+    "newLatin": "Musculus deltoideus"
+  }
+}

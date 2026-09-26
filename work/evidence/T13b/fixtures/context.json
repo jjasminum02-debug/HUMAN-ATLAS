@@ -1,0 +1,54 @@
+{
+  "assets": [
+    {
+      "assetId": "SYN-MESH-R1",
+      "assetRevision": "SYN-REV-1",
+      "assetRevisionHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "topologyHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "laterality": "right",
+      "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "units": "m",
+      "poseId": "SYN-POSE-1",
+      "triangleCount": 3,
+      "targetEntityId": "SYN-BONE-1"
+    }
+  ],
+  "attachments": [
+    {
+      "id": "SYN-ATTACHMENT-1",
+      "ownerId": "SYN-MUSCLE-1",
+      "descriptionClaimId": "SYN-CLAIM-1",
+      "evidenceIds": ["SYN-EVIDENCE-1"],
+      "allowedAssetIds": ["SYN-MESH-R1"]
+    }
+  ],
+  "t13Records": [
+    {
+      "attachmentId": "SYN-ATTACHMENT-1",
+      "descriptionClaimId": "SYN-CLAIM-1",
+      "claimEvidenceIds": ["SYN-EVIDENCE-1"],
+      "ownerConceptId": "SYN-MUSCLE-1",
+      "instanceId": "SYN-INSTANCE-R-1",
+      "side": "right",
+      "role": "origin",
+      "contextMeshAssetId": "SYN-MESH-R1",
+      "contextStatus": "whole_bone_search_context_only",
+      "reason": "synthetic fixture only"
+    }
+  ],
+  "claims": [
+    {
+      "id": "SYN-CLAIM-1",
+      "subjectId": "SYN-ATTACHMENT-1",
+      "field": "attachment_description",
+      "value": {"summary": "Synthetic test claim; not an anatomy statement."},
+      "evidenceIds": ["SYN-EVIDENCE-1"],
+      "attribution": "user_note",
+      "reviewState": "needs_review"
+    }
+  ],
+  "instances": [
+    {"id": "SYN-INSTANCE-R-1", "conceptId": "SYN-MUSCLE-1", "side": "right"}
+  ],
+  "reviews": []
+}

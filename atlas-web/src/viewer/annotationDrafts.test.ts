@@ -116,3 +116,21 @@ test("source attachment owner must match a known mesh target", () => {
   });
   expectCode(payload, "attachment_asset_target_mismatch", sourceContext);
 });
+
+test("T13 permits only a provenance-linked target-bone review draft", () => {
+  const sourceContext: AnnotationValidationContext = {
+    ...context,
+    assets: context.assets.map((asset) => ({ ...asset, targetEntityId: "SYN-BONE-01" })),
+    attachments: [{ id: "SYN-ATTACHMENT-01", descriptionClaimId: "SYN-CLAIM-01", evidenceIds: ["SYN-EVIDENCE-01"],
+      ownerId: "SYN-MUSCLE-01", allowedAssetIds: [context.assets[0].assetId] }],
+  };
+  const payload = structuredClone(fixture<Record<string, unknown>>("positive-exchange.json"));
+  payload.syntheticFixture = false;
+  const rows = payload.annotations as Array<Record<string, unknown>>;
+  rows.splice(1);
+  Object.assign(rows[0], { attachmentId: "SYN-ATTACHMENT-01", descriptionClaimId: "SYN-CLAIM-01",
+    instanceId: null, evidenceIds: ["SYN-EVIDENCE-01"], synthetic: false });
+  assert.equal(validateAnnotationDraftExchange(payload, sourceContext).annotations[0].reviewState, "draft");
+  sourceContext.attachments[0].allowedAssetIds = ["SYN-UNRELATED-BONE"];
+  expectCode(payload, "attachment_asset_target_mismatch", sourceContext);
+});

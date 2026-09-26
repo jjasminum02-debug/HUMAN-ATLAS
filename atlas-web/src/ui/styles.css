@@ -1,306 +1,614 @@
-:root {
-  font-family: "DM Sans", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-  color: #1f2925;
-  background: #f3f4ef;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  --ink: #1f2925;
-  --subtle-ink: #63706b;
-  --quiet-ink: #77827c;
-  --line: #dce1d9;
-  --paper: #ffffff;
-  --wash: #f7f8f4;
-  --green: #236850;
-  --green-soft: #e6f2ec;
-  --amber: #805411;
-  --amber-soft: #fff4dc;
-  --red: #943e31;
-  --red-soft: #fff0eb;
-  --shadow: 0 18px 55px rgba(34, 53, 43, 0.055);
-}
+:root{
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  color:#272e32;
+  background:#f1f2f3;
+  font-synthesis:none;
+  font-size:14px}
+  *{
+    box-sizing:border-box}
+    body{
+      margin:0}
+      button,input{
+        font:inherit}
+        button,a,input,summary{
+          -webkit-tap-highlight-color:transparent}
+          button{
+            cursor:pointer}
+            button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible,canvas:focus-visible{
+              outline:3px solid #4d8584;
+              outline-offset:3px}
+              a{
+                color:#426e70;
+                text-decoration:none}
+                button{
+                  border:0;
+                  background:transparent;
+                  color:inherit}
+                  p{
+                    line-height:1.65}
+                    button[aria-pressed=true]{
+                      background:#e4eeee;
+                      color:#356262}
+                      button:disabled{
+                        opacity:.45;
+                        cursor:default}
+                        .study-shell{
+                          height:100dvh;
+                          display:flex;
+                          flex-direction:column}
+                          .study-header{
+                            height:100px;
+                            flex-shrink:0;
+                            display:flex;
+                            align-items:center;
+                            justify-content:space-between;
+                            padding:0 36px;
+                            gap:30px}
+                            .brand{
+                              color:#232a2f;
+                              font-weight:750;
+                              letter-spacing:.06em;
+                              font-size:20px;
+                              white-space:nowrap}
+                              .brand-dot,.small-dot{
+                                display:inline-block;
+                                background:#648e8c;
+                                border-radius:50%;
+                                width:8px;
+                                height:8px;
+                                margin-right:10px}
+                                .brand small{
+                                  display:block;
+                                  font-size:11px;
+                                  color:#7e878f;
+                                  font-weight:400;
+                                  letter-spacing:0;
+                                  margin:9px 0 0 18px}
+                                  .global-search{
+                                    width:380px;
+                                    display:flex;
+                                    align-items:center;
+                                    gap:10px;
+                                    border:1px solid #e2e5e8;
+                                    background:#fff;
+                                    border-radius:15px;
+                                    padding:0 15px;
+                                    box-shadow:0 3px 15px #29394403}
+                                    .global-search>span{
+                                      font-size:30px;
+                                      color:#7d878f}
+                                      .global-search input{
+                                        width:100%;
+                                        min-width:0;
+                                        border:0;
+                                        outline:none;
+                                        background:transparent;
+                                        height:50px;
+                                        font-size:13px}
+                                        .global-search button{
+                                          font-size:22px}
+                                          .study-layout{
+                                            display:grid;
+                                            grid-template-columns:248px minmax(0,1fr) 350px;
+                                            gap:20px;
+                                            padding:12px 28px 26px;
+                                            min-height:0;
+                                            flex:1}
+                                            .study-sidebar,.study-details{
+                                              background:#ffffffed;
+                                              border:1px solid #e8eaec;
+                                              border-radius:24px;
+                                              box-shadow:0 12px 40px #263b4910;
+                                              min-height:0;
+                                              overflow:auto}
+                                              .study-sidebar{
+                                                display:flex;
+                                                flex-direction:column;
+                                                padding:25px 15px 18px}
+                                                .sidebar-heading{
+                                                  padding:0 10px}
+                                                  .eyebrow{
+                                                    font-size:10px;
+                                                    letter-spacing:.16em;
+                                                    color:#869097;
+                                                    font-weight:650}
+                                                    .sidebar-heading h1{
+                                                      font-size:22px;
+                                                      margin:10px 0 8px;
+                                                      letter-spacing:-.04em}
+                                                      .sidebar-heading p{
+                                                        font-size:12px;
+                                                        color:#7a858d;
+                                                        margin:0 0 22px}
+                                                        .scope-control{
+                                                          display:flex;
+                                                          background:#f1f3f4;
+                                                          border-radius:11px;
+                                                          padding:4px}
+                                                          .scope-control button{
+                                                            flex:1;
+                                                            padding:9px 0;
+                                                            border-radius:8px;
+                                                            font-size:12px;
+                                                            color:#79838b}
+                                                            .scope-control button[aria-pressed=true]{
+                                                              background:white;
+                                                              color:#344149;
+                                                              box-shadow:0 2px 5px #00000008}
+                                                              .result-count{
+                                                                font-size:11px;
+                                                                color:#8d979e;
+                                                                padding:0 10px;
+                                                                margin:18px 0 10px}
+                                                                .study-list{
+                                                                  overflow:auto;
+                                                                  min-height:0;
+                                                                  flex:1;
+                                                                  display:flex;
+                                                                  flex-direction:column;
+                                                                  gap:5px}
+                                                                  .study-list button{
+                                                                    text-align:left;
+                                                                    border-radius:12px;
+                                                                    padding:14px 13px;
+                                                                    flex-shrink:0;
+                                                                    border:1px solid transparent}
+                                                                    .study-list button:hover{
+                                                                      background:#f4f6f7}
+                                                                      .study-list button.selected{
+                                                                        background:#edf3f2;
+                                                                        border-color:#dce9e7}
+                                                                        .study-list button span{
+                                                                          font-size:15px;
+                                                                          font-weight:600;
+                                                                          display:block}
+                                                                          .study-list small{
+                                                                            display:block;
+                                                                            color:#89939a;
+                                                                            font-size:11px;
+                                                                            margin-top:6px}
+                                                                            .study-list em{
+                                                                              font-size:10px;
+                                                                              color:#527d7d;
+                                                                              font-style:normal}
+                                                                              .sidebar-bottom{
+                                                                                border-top:1px solid #edf0f1;
+                                                                                margin:18px 10px 0;
+                                                                                padding-top:18px;
+                                                                                color:#65767c;
+                                                                                font-size:11px}
+                                                                                .sidebar-bottom small{
+                                                                                  display:block;
+                                                                                  font-size:10px;
+                                                                                  color:#98a0a5;
+                                                                                  margin-top:9px}
+                                                                                  .small-dot{
+                                                                                    width:6px;
+                                                                                    height:6px}
+                                                                                    .study-stage{
+                                                                                      position:relative;
+                                                                                      min-width:0;
+                                                                                      min-height:0;
+                                                                                      display:flex;
+                                                                                      flex-direction:column}
+                                                                                      .stage-caption{
+                                                                                        position:absolute;
+                                                                                        z-index:2;
+                                                                                        top:18px;
+                                                                                        left:16px;
+                                                                                        pointer-events:none}
+                                                                                        .stage-caption h2{
+                                                                                          font-size:32px;
+                                                                                          font-weight:600;
+                                                                                          letter-spacing:-.05em;
+                                                                                          margin:10px 0 4px}
+                                                                                          .stage-caption p{
+                                                                                            font-size:12px;
+                                                                                            color:#8b959c;
+                                                                                            margin:0}
+                                                                                            .study-viewer{
+                                                                                              height:100%;
+                                                                                              min-height:0;
+                                                                                              position:relative}
+                                                                                              .study-canvas-wrap{
+                                                                                                height:100%;
+                                                                                                width:100%;
+                                                                                                padding-top:105px;
+                                                                                                padding-bottom:120px}
+                                                                                                .viewer-canvas{
+                                                                                                  width:100%;
+                                                                                                  height:100%;
+                                                                                                  display:block;
+                                                                                                  touch-action:none;
+                                                                                                  outline:none;
+                                                                                                  cursor:grab}
+                                                                                                  .viewer-canvas:active{
+                                                                                                    cursor:grabbing}
+                                                                                                    .no-model .viewer-canvas{
+                                                                                                      visibility:hidden}
+                                                                                                      .model-message{
+                                                                                                        position:absolute;
+                                                                                                        top:40%;
+                                                                                                        left:0;
+                                                                                                        right:0;
+                                                                                                        text-align:center;
+                                                                                                        color:#77848b;
+                                                                                                        padding:20px}
+                                                                                                        .model-message>span{
+                                                                                                          font-size:60px;
+                                                                                                          color:#b9cccd}
+                                                                                                          .model-message h3{
+                                                                                                            font-size:18px;
+                                                                                                            font-weight:500;
+                                                                                                            color:#52656d}
+                                                                                                            .model-message p{
+                                                                                                              font-size:12px}
+                                                                                                              .study-camera{
+                                                                                                                position:absolute;
+                                                                                                                top:120px;
+                                                                                                                right:10px;
+                                                                                                                display:flex;
+                                                                                                                flex-direction:column;
+                                                                                                                gap:4px;
+                                                                                                                background:#ffffffd9;
+                                                                                                                border:1px solid #e3e7e9;
+                                                                                                                padding:5px;
+                                                                                                                border-radius:12px}
+                                                                                                                .study-camera button{
+                                                                                                                  font-size:11px;
+                                                                                                                  padding:9px 10px;
+                                                                                                                  border-radius:8px}
+                                                                                                                  .study-view-tools{
+                                                                                                                    position:absolute;
+                                                                                                                    bottom:60px;
+                                                                                                                    left:50%;
+                                                                                                                    transform:translateX(-50%);
+                                                                                                                    display:flex;
+                                                                                                                    gap:4px;
+                                                                                                                    background:#ffffffed;
+                                                                                                                    border:1px solid #e4e7e9;
+                                                                                                                    border-radius:14px;
+                                                                                                                    padding:6px;
+                                                                                                                    box-shadow:0 5px 20px #394d5810;
+                                                                                                                    white-space:nowrap}
+                                                                                                                    .study-view-tools button{
+                                                                                                                      font-size:11px;
+                                                                                                                      padding:10px 12px;
+                                                                                                                      border-radius:9px}
+                                                                                                                      .study-gesture{
+                                                                                                                        position:absolute;
+                                                                                                                        bottom:25px;
+                                                                                                                        left:0;
+                                                                                                                        right:0;
+                                                                                                                        text-align:center;
+                                                                                                                        font-size:10px;
+                                                                                                                        color:#99a1a8;
+                                                                                                                        pointer-events:none}
+                                                                                                                        .stage-credit{
+                                                                                                                          position:absolute;
+                                                                                                                          bottom:0;
+                                                                                                                          left:0;
+                                                                                                                          right:0;
+                                                                                                                          display:flex;
+                                                                                                                          justify-content:center;
+                                                                                                                          gap:8px;
+                                                                                                                          color:#99a2a8;
+                                                                                                                          font-size:9px}
+                                                                                                                          .stage-credit summary{
+                                                                                                                            cursor:pointer;
+                                                                                                                            color:#7d8c92}
+                                                                                                                            .stage-credit details[open]{
+                                                                                                                              position:absolute;
+                                                                                                                              z-index:5;
+                                                                                                                              bottom:10px;
+                                                                                                                              background:white;
+                                                                                                                              border:1px solid #e1e5e6;
+                                                                                                                              border-radius:12px;
+                                                                                                                              padding:15px;
+                                                                                                                              max-width:330px;
+                                                                                                                              font-size:11px;
+                                                                                                                              color:#6c7d83}
+                                                                                                                              .study-details{
+                                                                                                                                padding:28px 25px}
+                                                                                                                                .detail-top{
+                                                                                                                                  display:flex;
+                                                                                                                                  align-items:center;
+                                                                                                                                  justify-content:space-between;
+                                                                                                                                  gap:12px}
+                                                                                                                                  .status-dot{
+                                                                                                                                    font-size:10px;
+                                                                                                                                    color:#8b969b}
+                                                                                                                                    .study-details>h2{
+                                                                                                                                      font-size:32px;
+                                                                                                                                      letter-spacing:-.05em;
+                                                                                                                                      margin:24px 0 8px}
+                                                                                                                                      .english-name{
+                                                                                                                                        color:#859098;
+                                                                                                                                        font-size:15px;
+                                                                                                                                        margin:0 0 22px}
+                                                                                                                                        .names-card{
+                                                                                                                                          border-radius:14px;
+                                                                                                                                          background:#f6f8f8;
+                                                                                                                                          padding:15px 17px;
+                                                                                                                                          display:grid;
+                                                                                                                                          gap:12px;
+                                                                                                                                          margin-bottom:22px}
+                                                                                                                                          .names-card div{
+                                                                                                                                            display:flex;
+                                                                                                                                            align-items:center;
+                                                                                                                                            justify-content:space-between;
+                                                                                                                                            gap:15px}
+                                                                                                                                            .names-card span{
+                                                                                                                                              color:#8d979c;
+                                                                                                                                              font-size:11px}
+                                                                                                                                              .names-card strong{
+                                                                                                                                                font-size:14px;
+                                                                                                                                                font-weight:500}
+                                                                                                                                                .study-tabs{
+                                                                                                                                                  display:flex;
+                                                                                                                                                  border-bottom:1px solid #e9edef;
+                                                                                                                                                  margin-bottom:20px}
+                                                                                                                                                  .study-tabs button{
+                                                                                                                                                    flex:1;
+                                                                                                                                                    padding:13px 8px;
+                                                                                                                                                    border-bottom:2px solid transparent;
+                                                                                                                                                    color:#98a1a6}
+                                                                                                                                                    .study-tabs button[aria-selected=true]{
+                                                                                                                                                      color:#426e70;
+                                                                                                                                                      border-bottom-color:#527c7b;
+                                                                                                                                                      font-weight:650}
+                                                                                                                                                      .attachment-section{
+                                                                                                                                                        margin:25px 0}
+                                                                                                                                                        .attachment-section h3{
+                                                                                                                                                          font-size:14px;
+                                                                                                                                                          display:flex;
+                                                                                                                                                          align-items:center;
+                                                                                                                                                          gap:8px}
+                                                                                                                                                          .attachment-section h3 span{
+                                                                                                                                                            font-size:9px;
+                                                                                                                                                            color:#9aa4aa;
+                                                                                                                                                            letter-spacing:.09em;
+                                                                                                                                                            margin-left:auto}
+                                                                                                                                                            .attachment-section i{
+                                                                                                                                                              width:7px;
+                                                                                                                                                              height:7px;
+                                                                                                                                                              border-radius:50%;
+                                                                                                                                                              background:#5a9290}
+                                                                                                                                                              .attachment-section i.insertion{
+                                                                                                                                                                background:#c6ab70}
+                                                                                                                                                                .attachment-section p{
+                                                                                                                                                                  font-size:12px;
+                                                                                                                                                                  color:#667780;
+                                                                                                                                                                  margin:12px 0;
+                                                                                                                                                                  border-left:2px solid #edf1f1;
+                                                                                                                                                                  padding-left:11px}
+                                                                                                                                                                  .quiet-note{
+                                                                                                                                                                    font-size:11px;
+                                                                                                                                                                    color:#97a0a6;
+                                                                                                                                                                    line-height:1.75}
+                                                                                                                                                                    .part-pills{
+                                                                                                                                                                      display:flex;
+                                                                                                                                                                      flex-wrap:wrap;
+                                                                                                                                                                      gap:5px}
+                                                                                                                                                                      .part-pills button{
+                                                                                                                                                                        font-size:11px;
+                                                                                                                                                                        padding:7px 10px;
+                                                                                                                                                                        border-radius:8px;
+                                                                                                                                                                        background:#f1f4f4}
+                                                                                                                                                                        .part-pills button[aria-pressed=true]{
+                                                                                                                                                                          background:#e4eeee}
+                                                                                                                                                                          .study-sources{
+                                                                                                                                                                            margin-top:30px;
+                                                                                                                                                                            border-top:1px solid #edf0f1;
+                                                                                                                                                                            padding-top:18px;
+                                                                                                                                                                            color:#89959d;
+                                                                                                                                                                            font-size:11px}
+                                                                                                                                                                            .study-sources summary{
+                                                                                                                                                                              cursor:pointer;
+                                                                                                                                                                              color:#74848b;
+                                                                                                                                                                              font-size:12px}
+                                                                                                                                                                              .study-sources small{
+                                                                                                                                                                                display:block;
+                                                                                                                                                                                font-size:10px;
+                                                                                                                                                                                margin-top:5px;
+                                                                                                                                                                                line-height:1.65}
+                                                                                                                                                                                .upcoming{
+                                                                                                                                                                                  text-align:center;
+                                                                                                                                                                                  padding:45px 5px;
+                                                                                                                                                                                  color:#929da3}
+                                                                                                                                                                                  .upcoming>span{
+                                                                                                                                                                                    font-size:36px;
+                                                                                                                                                                                    color:#97b1b2}
+                                                                                                                                                                                    .upcoming h3{
+                                                                                                                                                                                      font-size:15px;
+                                                                                                                                                                                      color:#718289;
+                                                                                                                                                                                      font-weight:500}
+                                                                                                                                                                                      .upcoming p{
+                                                                                                                                                                                        font-size:12px}
+                                                                                                                                                                                        .skip-link{
+                                                                                                                                                                                          position:fixed;
+                                                                                                                                                                                          left:20px;
+                                                                                                                                                                                          top:-100px;
+                                                                                                                                                                                          z-index:20;
+                                                                                                                                                                                          background:white;
+                                                                                                                                                                                          padding:12px}
+                                                                                                                                                                                          .skip-link:focus{
+                                                                                                                                                                                            top:10px}
+                                                                                                                                                                                            .load-state{
+                                                                                                                                                                                              max-width:600px;
+                                                                                                                                                                                              margin:15vh auto;
+                                                                                                                                                                                              padding:24px}
+                                                                                                                                                                                              .load-state button{
+                                                                                                                                                                                                background:#e0eeee;
+                                                                                                                                                                                                padding:12px;
+                                                                                                                                                                                                border-radius:10px}
+                                                                                                                                                                                                @media(min-width:1600px){
+                                                                                                                                                                                                  .study-layout{
+                                                                                                                                                                                                    grid-template-columns:280px minmax(0,1fr) 390px;
+                                                                                                                                                                                                    gap:30px;
+                                                                                                                                                                                                    padding:18px 40px 35px}
+                                                                                                                                                                                                    .study-header{
+                                                                                                                                                                                                      padding:0 48px;
+                                                                                                                                                                                                      height:115px}
+                                                                                                                                                                                                      .stage-caption h2{
+                                                                                                                                                                                                        font-size:40px}
+                                                                                                                                                                                                        .study-details{
+                                                                                                                                                                                                          padding:32px}
+                                                                                                                                                                                                          .study-list button{
+                                                                                                                                                                                                            padding:17px}
+                                                                                                                                                                                                          }
+                                                                                                                                                                                                          @media(max-width:1100px) and (min-width:761px){
+                                                                                                                                                                                                            .study-layout{
+                                                                                                                                                                                                              grid-template-columns:200px minmax(0,1fr) 280px;
+                                                                                                                                                                                                              gap:12px;
+                                                                                                                                                                                                              padding:8px 16px 20px}
+                                                                                                                                                                                                              .study-header{
+                                                                                                                                                                                                                padding:0 22px;
+                                                                                                                                                                                                                height:85px}
+                                                                                                                                                                                                                .study-details{
+                                                                                                                                                                                                                  padding:22px 18px}
+                                                                                                                                                                                                                  .study-details>h2{
+                                                                                                                                                                                                                    font-size:27px}
+                                                                                                                                                                                                                    .study-sidebar{
+                                                                                                                                                                                                                      padding:20px 10px}
+                                                                                                                                                                                                                      .study-view-tools{
+                                                                                                                                                                                                                        flex-wrap:wrap;
+                                                                                                                                                                                                                        width:220px;
+                                                                                                                                                                                                                        justify-content:center}
+                                                                                                                                                                                                                        .stage-caption{
+                                                                                                                                                                                                                          left:8px}
+                                                                                                                                                                                                                          .stage-caption h2{
+                                                                                                                                                                                                                            font-size:26px}
+                                                                                                                                                                                                                            .stage-caption p{
+                                                                                                                                                                                                                              max-width:170px}
+                                                                                                                                                                                                                              .study-camera{
+                                                                                                                                                                                                                                top:145px;
+                                                                                                                                                                                                                                right:0}
+                                                                                                                                                                                                                                .study-list button span{
+                                                                                                                                                                                                                                  font-size:13px}
+                                                                                                                                                                                                                                  .global-search{
+                                                                                                                                                                                                                                    width:320px}
+                                                                                                                                                                                                                                  }
+                                                                                                                                                                                                                                  @media(max-width:760px){
+                                                                                                                                                                                                                                    .study-shell{
+                                                                                                                                                                                                                                      height:auto;
+                                                                                                                                                                                                                                      min-height:100dvh}
+                                                                                                                                                                                                                                      .study-header{
+                                                                                                                                                                                                                                        height:auto;
+                                                                                                                                                                                                                                        padding:22px 18px 14px;
+                                                                                                                                                                                                                                        flex-wrap:wrap;
+                                                                                                                                                                                                                                        gap:18px}
+                                                                                                                                                                                                                                        .brand{
+                                                                                                                                                                                                                                          font-size:18px}
+                                                                                                                                                                                                                                          .brand small{
+                                                                                                                                                                                                                                            font-size:10px}
+                                                                                                                                                                                                                                            .global-search{
+                                                                                                                                                                                                                                              width:100%}
+                                                                                                                                                                                                                                              .global-search input{
+                                                                                                                                                                                                                                                height:46px}
+                                                                                                                                                                                                                                                .study-layout{
+                                                                                                                                                                                                                                                  display:flex;
+                                                                                                                                                                                                                                                  flex-direction:column;
+                                                                                                                                                                                                                                                  padding:0 14px 20px;
+                                                                                                                                                                                                                                                  gap:14px}
+                                                                                                                                                                                                                                                  .study-sidebar{
+                                                                                                                                                                                                                                                    padding:14px;
+                                                                                                                                                                                                                                                    border-radius:18px;
+                                                                                                                                                                                                                                                    max-height:265px;
+                                                                                                                                                                                                                                                    flex-shrink:0}
+                                                                                                                                                                                                                                                    .sidebar-heading,.sidebar-bottom{
+                                                                                                                                                                                                                                                      display:none}
+                                                                                                                                                                                                                                                      .scope-control{
+                                                                                                                                                                                                                                                        max-width:230px}
+                                                                                                                                                                                                                                                        .result-count{
+                                                                                                                                                                                                                                                          margin:10px 0;
+                                                                                                                                                                                                                                                          font-size:10px}
+                                                                                                                                                                                                                                                          .study-list{
+                                                                                                                                                                                                                                                            display:grid;
+                                                                                                                                                                                                                                                            grid-template-columns:repeat(2,minmax(0,1fr));
+                                                                                                                                                                                                                                                            max-height:165px;
+                                                                                                                                                                                                                                                            gap:3px}
+                                                                                                                                                                                                                                                            .study-list button{
+                                                                                                                                                                                                                                                              padding:10px;
+                                                                                                                                                                                                                                                              min-width:0}
+                                                                                                                                                                                                                                                              .study-list button span{
+                                                                                                                                                                                                                                                                font-size:13px}
+                                                                                                                                                                                                                                                                .study-list small{
+                                                                                                                                                                                                                                                                  font-size:10px}
+                                                                                                                                                                                                                                                                  .study-stage{
+                                                                                                                                                                                                                                                                    height:520px;
+                                                                                                                                                                                                                                                                    flex:none}
+                                                                                                                                                                                                                                                                    .stage-caption{
+                                                                                                                                                                                                                                                                      top:12px;
+                                                                                                                                                                                                                                                                      left:10px}
+                                                                                                                                                                                                                                                                      .stage-caption h2{
+                                                                                                                                                                                                                                                                        font-size:28px}
+                                                                                                                                                                                                                                                                        .study-camera{
+                                                                                                                                                                                                                                                                          top:105px;
+                                                                                                                                                                                                                                                                          right:4px}
+                                                                                                                                                                                                                                                                          .study-canvas-wrap{
+                                                                                                                                                                                                                                                                            padding-top:95px;
+                                                                                                                                                                                                                                                                            padding-bottom:110px}
+                                                                                                                                                                                                                                                                            .study-details{
+                                                                                                                                                                                                                                                                              padding:24px;
+                                                                                                                                                                                                                                                                              border-radius:20px;
+                                                                                                                                                                                                                                                                              overflow:visible}
+                                                                                                                                                                                                                                                                              .study-details>h2{
+                                                                                                                                                                                                                                                                                margin-top:17px}
+                                                                                                                                                                                                                                                                                .study-view-tools{
+                                                                                                                                                                                                                                                                                  bottom:48px;
+                                                                                                                                                                                                                                                                                  max-width:100%;
+                                                                                                                                                                                                                                                                                  gap:0}
+                                                                                                                                                                                                                                                                                  .study-view-tools button{
+                                                                                                                                                                                                                                                                                    padding:10px 9px;
+                                                                                                                                                                                                                                                                                    font-size:10px}
+                                                                                                                                                                                                                                                                                    .study-gesture{
+                                                                                                                                                                                                                                                                                      bottom:20px}
+                                                                                                                                                                                                                                                                                      .stage-credit{
+                                                                                                                                                                                                                                                                                        font-size:8px}
+                                                                                                                                                                                                                                                                                      }
+                                                                                                                                                                                                                                                                                      @media(prefers-reduced-motion:reduce){
+                                                                                                                                                                                                                                                                                        *{
+                                                                                                                                                                                                                                                                                          scroll-behavior:auto!important}
+                                                                                                                                                                                                                                                                                        }
+/* T13 source-linked, read-only attachment review context. */
+.attachment-candidates{display:flex;flex-direction:column;gap:7px;margin:10px 0 16px}
+.attachment-candidates button{display:block;width:100%;padding:11px 12px;text-align:left;border:1px solid #e5eaeb;border-radius:10px;background:#fff;color:#35454b}
+.attachment-candidates button:hover,.attachment-candidates button[aria-pressed=true]{border-color:#86aaa6;background:#edf5f3}
+.attachment-candidates button span{display:block;font-size:12px;line-height:1.45}
+.attachment-candidates button small{display:block;margin-top:7px;color:#667d7c;font-size:10px}
+.study-attachment-context{position:absolute;top:103px;left:14px;right:14px;z-index:2;margin:0;padding:9px 12px;border:1px solid #d5e5e1;border-radius:10px;background:#f5faf8e8;color:#3f6360;font-size:11px;line-height:1.45}
 
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  background:
-    radial-gradient(ellipse at 12% 0%, rgba(206, 225, 209, 0.43), transparent 31rem),
-    #f3f4ef;
+/* T13a: keep the Korean study summary above compact, optional source detail. */
+.attachment-section>p:not(.quiet-note){margin:8px 0 10px;color:#34494f;font-size:13px;line-height:1.55}
+.attachment-candidates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:8px 0 6px}
+.attachment-candidates button{min-width:0;padding:8px 9px}
+.attachment-candidates button span{font-size:11px;font-weight:650}
+.attachment-candidates button small{margin-top:3px;font-size:9px;line-height:1.35}
+.attachment-source-detail{margin:4px 0 12px;padding:0 2px;color:#65767b;font-size:11px}
+.attachment-source-detail>summary{cursor:pointer;color:#667d7c}
+.attachment-source-item{margin:8px 0;padding:8px 10px;border-left:2px solid #dbe8e5;background:#f8faf9}
+.attachment-source-item p{margin:0 0 5px;color:#4c5e63;font-size:11px;line-height:1.45}
+.attachment-source-item small{display:block;color:#75858a;font-size:10px;line-height:1.4}
+.attachment-summary-block{margin:13px 0 14px}
+.attachment-summary-block>p{margin:7px 0 0!important}
+.attachment-context-disclosure{margin:14px 0 8px;padding:10px 11px;border:1px solid #e6ebeb;border-radius:12px;background:#fbfcfc;color:#52666b;font-size:11px}
+.attachment-context-disclosure>summary{cursor:pointer;font-weight:600}
+.attachment-context-disclosure .attachment-section{margin-top:10px}
+.attachment-context-disclosure .attachment-section h3{font-size:12px}
+.attachment-context-disclosure>.quiet-note{margin:8px 0 0;font-size:10px;line-height:1.45}
+@media(max-width:760px){
+  .study-sidebar{max-height:315px}
+  .study-list{max-height:210px}
 }
-
-button, input { font: inherit; }
-button { color: inherit; }
-a { color: var(--green); text-underline-offset: 0.2em; }
-a:hover { color: #154b37; }
-
-.app-shell { max-width: 1440px; margin: 0 auto; padding: 0 42px 26px; }
-.skip-link {
-  position: fixed; z-index: 10; top: 10px; left: 10px; transform: translateY(-160%);
-  padding: 11px 14px; border-radius: 8px; background: var(--ink); color: white; text-decoration: none;
-}
-.skip-link:focus { transform: translateY(0); }
-
-.topbar {
-  min-height: 100px; display: flex; align-items: center; justify-content: space-between;
-  gap: 20px; border-bottom: 1px solid rgba(151, 164, 152, 0.3);
-}
-.brand-block { display: grid; gap: 3px; }
-.eyebrow {
-  margin: 0; color: #638071; font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
-  line-height: 1.35; text-transform: uppercase;
-}
-.brand {
-  color: var(--ink); font: 800 22px/1.1 Manrope, "Apple SD Gothic Neo", sans-serif;
-  letter-spacing: -0.06em; text-decoration: none;
-}
-.topbar-meta { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
-.revision-pill, .scope-pill {
-  display: inline-flex; align-items: center; min-height: 29px; padding: 0 11px; border: 1px solid #d6dfd7;
-  border-radius: 999px; background: rgba(255,255,255,0.55); color: #53675e; font-size: 11px; font-weight: 600;
-}
-.revision-pill { max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.scope-pill { border-color: transparent; background: #e2ece5; color: #426251; }
-
-.catalog-notice {
-  display: flex; gap: 12px; margin: 24px 0 22px; padding: 15px 18px; border: 1px solid #e4d6b7;
-  border-radius: 12px; background: #fff9eb; color: #5c4c2e;
-}
-.catalog-notice p { margin: 4px 0 0; color: #786a4d; font-size: 12px; line-height: 1.55; }
-.catalog-notice strong { color: #544222; font-size: 13px; }
-.notice-mark {
-  display: grid; flex: 0 0 23px; width: 23px; height: 23px; place-items: center; border: 1px solid #d6c498;
-  border-radius: 50%; color: #8b692a; font: 700 13px/1 Manrope, sans-serif;
-}
-
-.explorer-layout { display: grid; grid-template-columns: minmax(240px, 285px) minmax(380px, 1.15fr) minmax(330px, .95fr); align-items: start; gap: 16px; }
-.catalog-panel, .detail-panel, .viewer-panel {
-  border: 1px solid #e2e6df; border-radius: 16px; background: var(--paper); box-shadow: var(--shadow);
-}
-.catalog-panel { position: sticky; top: 20px; overflow: hidden; padding: 24px 18px 17px; }
-.panel-intro { padding: 0 3px 15px; }
-.panel-intro h1 { margin: 5px 0 5px; font: 700 22px/1.22 Manrope, "Apple SD Gothic Neo", sans-serif; letter-spacing: -0.045em; }
-.muted { color: var(--subtle-ink); }
-.panel-intro .muted { margin: 0; font-size: 12px; }
-.search-label { display: block; margin: 5px 0 7px; color: #5e6c64; font-size: 11px; font-weight: 700; }
-.search-input {
-  width: 100%; height: 43px; padding: 0 12px; border: 1px solid #dce2da; border-radius: 9px;
-  outline: none; background: #fbfcfa; color: var(--ink); font-size: 13px; transition: border-color 120ms ease, box-shadow 120ms ease;
-}
-.search-input::placeholder { color: #9aa49d; }
-.search-input:focus { border-color: #6b9c82; box-shadow: 0 0 0 3px rgba(70, 131, 98, .14); }
-.list-count { margin: 12px 2px 8px; color: var(--quiet-ink); font-size: 10px; font-weight: 600; }
-.muscle-list { display: grid; gap: 6px; }
-.muscle-option, .part-option {
-  position: relative; display: grid; width: 100%; gap: 3px; padding: 11px 12px; border: 1px solid transparent;
-  border-radius: 10px; background: transparent; text-align: left; cursor: pointer;
-}
-.muscle-option:hover, .part-option:hover { border-color: #dde7df; background: #f7faf7; }
-.muscle-option:focus-visible, .part-option:focus-visible, .button-link:focus-visible, a:focus-visible, #details:focus-visible {
-  outline: 3px solid rgba(50, 126, 86, .44); outline-offset: 2px;
-}
-.muscle-option.is-selected { border-color: #b8d1c0; background: #eff6f1; }
-.option-name { padding-right: 40px; color: #27352e; font-size: 13px; font-weight: 700; line-height: 1.35; }
-.option-secondary { color: #637269; font-size: 11px; line-height: 1.35; }
-.option-id, .record-id { color: #859088; font: 500 10px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.015em; }
-.option-parts { position: absolute; top: 10px; right: 10px; color: #5c7968; font-size: 10px; }
-.panel-footnote { margin: 14px 3px 0; padding-top: 13px; border-top: 1px solid #edf0eb; color: #7e8981; font-size: 10px; line-height: 1.55; }
-
-.detail-panel { min-width: 0; min-height: 620px; padding: 32px 34px 38px; }
-.viewer-panel { min-width: 0; padding: 18px; }
-.viewer-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 13px; }
-.viewer-heading h2 { margin: 4px 0 0; color: #26362e; font: 700 18px/1.25 Manrope, "Apple SD Gothic Neo", sans-serif; letter-spacing: -0.04em; }
-.viewer-canvas-wrap { position: relative; height: clamp(300px, 42vw, 510px); overflow: hidden; border: 1px solid #e2e8e1; border-radius: 12px; background: #f6f8f4; }
-.viewer-canvas { display: block; width: 100%; height: 100%; outline: none; cursor: grab; touch-action: none; }
-.viewer-overlay { position: absolute; inset: 0; z-index: 1; display: block; width: 100%; height: 100%; pointer-events: none; }
-.viewer-canvas:active { cursor: grabbing; }
-.viewer-canvas:focus-visible { box-shadow: inset 0 0 0 3px rgba(50, 126, 86, .42); }
-.viewer-axis { position: absolute; top: 9px; right: 9px; padding: 5px 8px; border: 1px solid rgba(216, 225, 215, .9); border-radius: 999px; background: rgba(255,255,255,.88); color: #5d6d62; font-size: 9px; pointer-events: none; }
-.viewer-loading { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(247, 249, 245, .72); color: #63756a; font-size: 12px; }
-.viewer-toolbar { display: grid; gap: 7px; margin-top: 9px; }
-.camera-buttons { display: flex; flex-wrap: wrap; gap: 5px; }
-.camera-buttons button, .viewer-actions button, .mesh-controls button {
-  min-height: 30px; padding: 0 8px; border: 1px solid #dfe6de; border-radius: 7px; background: #fbfcfa; color: #53665a; font-size: 10px; font-weight: 650; cursor: pointer;
-}
-.camera-buttons button:hover, .viewer-actions button:hover, .mesh-controls button:hover { border-color: #b7cebd; background: #f0f6f1; }
-.camera-buttons button[aria-pressed="true"], .viewer-actions button.is-active, .mesh-controls button[aria-pressed="true"] { border-color: #9dbfa7; background: #e8f2eb; color: #285c42; }
-.camera-buttons button:focus-visible, .viewer-actions button:focus-visible, .mesh-controls button:focus-visible, .mesh-select:focus-visible { outline: 3px solid rgba(50, 126, 86, .38); outline-offset: 2px; }
-.viewer-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-.viewer-actions button:disabled { opacity: .48; cursor: not-allowed; }
-.viewer-help { flex: 1 1 100%; color: #7a877f; font-size: 9px; line-height: 1.5; }
-.viewer-selected { display: grid; gap: 3px; min-height: 70px; margin-top: 12px; padding: 10px 11px; border: 1px solid #e2e8e1; border-radius: 9px; background: #f8faf7; color: #617166; font-size: 10px; line-height: 1.45; }
-.viewer-selected strong { color: #304538; font-size: 11px; }
-.viewer-selected code, .mesh-select code { color: #748278; font: 9px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
-.mesh-list-wrap { margin-top: 17px; padding-top: 15px; border-top: 1px solid #edf0eb; }
-.mesh-list-heading { align-items: center; margin-bottom: 8px; }
-.mesh-list-heading h3 { margin: 3px 0 0; color: #34463b; font-size: 13px; }
-.mesh-list { display: grid; max-height: 310px; overflow: auto; border: 1px solid #e7ece5; border-radius: 9px; }
-.mesh-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 5px; padding: 6px 7px; border-bottom: 1px solid #edf0eb; }
-.mesh-row:last-child { border-bottom: 0; }
-.mesh-row.is-current { background: #f0f6f1; }
-.mesh-row.is-hidden { background: #f7f7f4; opacity: .68; }
-.mesh-select { display: grid; min-width: 0; gap: 2px; padding: 3px 4px; border: 0; border-radius: 5px; background: transparent; text-align: left; cursor: pointer; }
-.mesh-source-name { color: #34463b; font-size: 10px; font-weight: 700; line-height: 1.35; }
-.mesh-link-state { color: #839087; font-size: 8px; line-height: 1.3; overflow-wrap: anywhere; }
-.mesh-controls { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 3px; }
-.mesh-controls button { min-height: 25px; padding: 0 6px; font-size: 9px; }
-.mesh-state-label { min-width: 26px; color: #7b877f; text-align: right; font-size: 8px; }
-.viewer-provenance { display: grid; gap: 4px; margin-top: 12px; padding-top: 10px; border-top: 1px solid #edf0eb; color: #77837b; font-size: 8px; line-height: 1.5; overflow-wrap: anywhere; }
-.viewer-provenance strong { color: #526459; font-size: 9px; }
-.annotation-workbench { display: grid; gap: 9px; margin-top: 13px; padding: 13px; border: 1px solid #dfe7df; border-radius: 10px; background: #fbfcfa; }
-.annotation-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
-.annotation-heading h3 { margin: 3px 0 0; color: #34463b; font-size: 13px; }
-.annotation-warning { margin: 0; padding: 9px 10px; border: 1px solid #e6d5b2; border-radius: 8px; background: #fff8e9; color: #6b552e; font-size: 9px; line-height: 1.55; }
-.annotation-link-row { display: grid; gap: 5px; }
-.annotation-link-row label, .annotation-tools label, .annotation-json-label { color: #56695d; font-size: 9px; font-weight: 700; }
-.annotation-link-row select, .annotation-tools select { min-width: 0; min-height: 31px; padding: 4px 7px; border: 1px solid #dce4db; border-radius: 7px; background: white; color: #38483e; font-size: 9px; }
-.annotation-source-note { margin: 0; color: #78847c; font-size: 8px; line-height: 1.5; overflow-wrap: anywhere; }
-.annotation-tools { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
-.annotation-tools button, .annotation-json-actions button, .annotation-row-actions button { min-height: 29px; padding: 0 8px; border: 1px solid #dfe6de; border-radius: 7px; background: #fff; color: #4d6255; font-size: 9px; font-weight: 650; cursor: pointer; }
-.annotation-tools button:hover, .annotation-json-actions button:hover, .annotation-row-actions button:hover { border-color: #b7cebd; background: #f0f6f1; }
-.annotation-tools button:disabled, .annotation-row-actions button:disabled { opacity: .5; cursor: not-allowed; }
-.annotation-message { min-height: 30px; margin: 0; color: #66766c; font-size: 9px; line-height: 1.5; }
-.annotation-list { display: grid; gap: 5px; }
-.annotation-list .empty-note { margin: 0; padding: 9px; border: 1px dashed #dce3db; border-radius: 7px; color: #7d8880; font-size: 9px; }
-.annotation-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 5px; padding: 8px; border: 1px solid #e4e9e2; border-radius: 8px; background: #fff; }
-.annotation-row.is-stale { border-color: #e6c4b8; background: #fff8f5; }
-.annotation-row-copy { display: grid; min-width: 0; gap: 3px; color: #708077; font-size: 8px; line-height: 1.45; overflow-wrap: anywhere; }
-.annotation-row-copy strong { color: #43564a; font-size: 9px; }
-.annotation-row-copy code { color: #879188; font: 8px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; }
-.annotation-unbound { color: #9a653a; }
-.annotation-row-actions { display: flex; align-items: start; gap: 3px; }
-.annotation-row-actions button { min-height: 25px; padding: 0 6px; font-size: 8px; }
-.annotation-json-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
-.annotation-json-actions span { flex: 1 1 100%; color: #818c84; font-size: 8px; }
-.annotation-json-label { margin-top: 1px; }
-.annotation-workbench textarea { width: 100%; min-height: 100px; resize: vertical; padding: 8px; border: 1px solid #dfe6de; border-radius: 7px; background: #fff; color: #536257; font: 8px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; }
-.viewer-error { padding: 18px 15px; border: 1px solid #efd3ca; border-radius: 10px; background: #fff6f2; color: #873d2e; font-size: 12px; line-height: 1.55; overflow-wrap: anywhere; }
-.viewer-error p { margin: 7px 0; }
-.viewer-error .muted { color: #7b6d67; }
-.detail-heading { padding: 0 0 21px; border-bottom: 1px solid #e9ede7; }
-.detail-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
-.detail-heading h2 { margin: 7px 0 5px; color: #1c2d24; font: 700 clamp(25px, 3vw, 36px)/1.15 Manrope, "Apple SD Gothic Neo", sans-serif; letter-spacing: -0.055em; }
-.latin-title { margin: 0; color: #718077; font: italic 14px/1.5 "DM Sans", sans-serif; }
-.stable-id { flex: 0 0 auto; margin-top: 5px; padding: 7px 10px; border: 1px solid #e2e7e1; border-radius: 7px; color: #6d7a71; font: 11px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; }
-.detail-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
-.region-chip { padding: 4px 9px; border-radius: 999px; background: #f1f4ef; color: #66776c; font-size: 10px; }
-.badge { display: inline-flex; align-items: center; width: fit-content; min-height: 21px; padding: 2px 8px; border-radius: 999px; font-size: 10px; font-weight: 700; line-height: 1.35; }
-.badge-review { background: var(--amber-soft); color: var(--amber); }
-.badge-muted { background: #eff1ef; color: #68736c; }
-.missing-banner { margin: 17px 0 0; padding: 13px 15px; border: 1px solid #f0d2c6; border-radius: 10px; background: var(--red-soft); }
-.missing-banner strong { color: #873d2e; font-size: 12px; }
-.missing-banner p { margin: 5px 0 0; color: #875e52; font-size: 11px; line-height: 1.55; }
-
-.content-section { padding: 24px 0; border-bottom: 1px solid #e9ede7; }
-.content-section:last-child { border-bottom: 0; }
-.section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; margin-bottom: 15px; }
-.section-heading h3 { margin: 4px 0 0; color: #26362e; font: 700 18px/1.25 Manrope, "Apple SD Gothic Neo", sans-serif; letter-spacing: -0.04em; }
-.section-count { display: inline-grid; min-width: 26px; height: 26px; padding: 0 7px; place-items: center; border: 1px solid #e3e8e1; border-radius: 999px; color: #78847b; font-size: 10px; }
-.term-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
-.term-row { padding: 13px 14px; border: 1px solid #e9ede7; border-radius: 10px; background: #fdfefc; }
-.term-heading, .claim-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.term-language { color: #68756d; font-size: 10px; font-weight: 700; }
-.term-value { margin: 9px 0 0; color: #27352d; font-size: 14px; font-weight: 600; line-height: 1.45; overflow-wrap: anywhere; }
-.missing-value { color: #a24737; font-weight: 600; }
-.missing-reason { margin: 6px 0 0; color: #81584c; font-size: 11px; line-height: 1.5; }
-.term-evidence { display: grid; gap: 4px; margin-top: 10px; }
-.evidence-line { display: grid; grid-template-columns: minmax(110px, .3fr) minmax(0, 1fr) auto; gap: 6px 10px; color: #768078; font-size: 10px; line-height: 1.45; }
-.evidence-line span:nth-child(2) { overflow-wrap: anywhere; }
-
-.part-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
-.part-option { gap: 5px; border-color: #e6ebe5; background: #fbfcfa; }
-.part-option span:first-child { color: #34463b; font-size: 12px; font-weight: 700; line-height: 1.35; }
-.part-option.is-current { border-color: #b7d1bf; background: #eff6f1; }
-.attachment-list, .claim-list { display: grid; gap: 10px; }
-.attachment-card { padding: 14px; border: 1px solid #e4eae3; border-radius: 11px; background: #fcfdfb; }
-.attachment-title { display: flex; align-items: flex-start; gap: 10px; }
-.attachment-title strong { padding-top: 1px; color: #34453a; font-size: 13px; line-height: 1.45; }
-.role-tag { flex: 0 0 auto; min-width: 40px; padding: 4px 7px; border-radius: 5px; background: #e8f2ec; color: #37664f; text-align: center; font-size: 10px; font-weight: 700; }
-.role-insertion { background: #eef0fb; color: #4e5783; }
-.attachment-card > .record-id { margin: 5px 0 10px 50px; }
-.claim-card { margin-top: 11px; padding: 12px; border-radius: 8px; background: #f3f5f2; }
-.attachment-card > .claim-card { margin-top: 10px; }
-.claim-heading { color: #53635a; font-size: 10px; font-weight: 700; }
-.claim-summary { margin: 8px 0 0; color: #36443b; font-size: 12px; line-height: 1.65; }
-.claim-edition { margin: 7px 0 0; color: #77827b; font-size: 10px; line-height: 1.5; }
-.claim-sources { display: grid; gap: 5px; margin: 10px 0 0; padding: 8px 0 0; border-top: 1px solid #e1e6df; list-style: none; }
-.claim-sources li { display: grid; grid-template-columns: minmax(110px, .35fr) minmax(0, 1fr) auto; align-items: start; gap: 6px 9px; color: #78827b; font-size: 10px; line-height: 1.5; }
-.claim-sources li span:nth-child(2) { overflow-wrap: anywhere; }
-.source-title { color: #617166; font-weight: 600; }
-.claim-sources a { white-space: nowrap; }
-.empty-note { margin: 0; padding: 12px; border-radius: 8px; background: #f7f8f5; color: #7b867e; font-size: 11px; line-height: 1.55; }
-.source-state { color: #69776e; font-size: 12px; line-height: 1.6; }
-.source-state p { margin: 7px 0; }
-.source-state .record-id { margin-top: 10px; }
-.empty-state { max-width: 560px; margin: 65px auto; padding: 30px; border: 1px dashed #d4ddd3; border-radius: 14px; background: #fbfcfa; text-align: center; }
-.empty-state h2 { margin: 8px 0; font: 700 22px/1.3 Manrope, "Apple SD Gothic Neo", sans-serif; letter-spacing: -0.035em; }
-.empty-state p:last-child { color: #6f7c73; font-size: 12px; line-height: 1.6; }
-.state-page { max-width: 720px; margin: 12vh auto; padding: 36px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); }
-.state-page h1 { margin: 10px 0; font: 700 26px/1.2 Manrope, sans-serif; }
-.state-page p { line-height: 1.6; }
-.page-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 3px 0; color: #879188; font-size: 10px; }
-
-@media (max-width: 1180px) {
-  .app-shell { padding-right: 22px; padding-left: 22px; }
-  .explorer-layout { grid-template-columns: minmax(220px, 270px) minmax(0, 1fr); gap: 14px; }
-  .catalog-panel { grid-column: 1; grid-row: 1 / span 2; }
-  .viewer-panel, .detail-panel { grid-column: 2; }
-  .catalog-panel { padding: 19px 13px 14px; }
-  .detail-panel { padding: 26px 23px 30px; }
-  .viewer-panel { padding: 14px; }
-  .viewer-canvas-wrap { height: clamp(330px, 55vw, 500px); }
-}
-
-@media (max-width: 700px) {
-  .app-shell { padding: 0 13px 22px; }
-  .topbar { min-height: 80px; }
-  .brand { font-size: 18px; }
-  .eyebrow { font-size: 9px; }
-  .revision-pill { max-width: 125px; font-size: 9px; }
-  .scope-pill { min-height: 27px; padding: 0 9px; font-size: 10px; }
-  .catalog-notice { margin: 14px 0; padding: 12px; }
-  .catalog-notice p { font-size: 11px; }
-  .explorer-layout { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-  .catalog-panel { position: static; padding: 16px 14px 12px; }
-  .catalog-panel, .viewer-panel, .detail-panel { grid-column: 1; grid-row: auto; }
-  .panel-intro { padding-bottom: 10px; }
-  .panel-intro h1 { font-size: 18px; }
-  .panel-intro .muted { font-size: 11px; }
-  .search-label { margin-top: 3px; }
-  .search-input { height: 41px; }
-  .list-count { margin-top: 9px; }
-  .muscle-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; }
-  .muscle-option { min-height: 79px; padding: 9px; }
-  .option-name { padding-right: 0; font-size: 11px; }
-  .option-secondary { font-size: 9px; }
-  .option-id { font-size: 8px; }
-  .option-parts { top: auto; right: 8px; bottom: 8px; font-size: 8px; }
-  .panel-footnote { margin-top: 10px; padding-top: 9px; font-size: 9px; }
-  .detail-panel { min-height: 400px; padding: 20px 15px 23px; }
-  .viewer-panel { padding: 12px; }
-  .viewer-heading h2 { font-size: 17px; }
-  .viewer-canvas-wrap { height: min(112vw, 430px); min-height: 280px; }
-  .camera-buttons button { flex: 1 0 auto; }
-  .mesh-row { grid-template-columns: minmax(0, 1fr); }
-  .mesh-controls { justify-content: flex-start; padding-left: 4px; }
-  .detail-title-row { display: block; }
-  .detail-heading h2 { margin-top: 6px; font-size: 26px; }
-  .stable-id { display: inline-flex; margin-top: 9px; }
-  .latin-title { font-size: 12px; }
-  .section-heading h3 { font-size: 16px; }
-  .content-section { padding: 20px 0; }
-  .part-list { grid-template-columns: minmax(0, 1fr); }
-  .part-option { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
-  .part-option .option-id { text-align: right; }
-  .evidence-line, .claim-sources li { grid-template-columns: minmax(0, 1fr) auto; }
-  .evidence-line span:first-child, .claim-sources .source-title { grid-column: 1 / -1; }
-  .claim-sources li span:nth-child(2) { grid-column: 1 / -1; }
-  .claim-sources a { grid-column: 2; grid-row: 2; }
-  .page-footer { align-items: flex-start; flex-direction: column; gap: 5px; font-size: 9px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
-}
+.study-stage .viewer-panel { position: absolute; inset: 0; min-height: 0; display: flex; flex-direction: column; }
+.study-stage .viewer-panel > header { position: absolute; z-index: 2; top: 10px; left: 14px; border: 0; background: transparent; }
+.study-stage .viewer-panel .viewer-canvas-wrap { position: absolute; inset: 0; overflow: hidden; }
+.study-stage .viewer-panel .viewer-canvas { position: absolute; inset: 0; }
+.study-stage .viewer-panel .viewer-overlay { position: absolute; inset: 0; z-index: 1; display: block; width: 100%; height: 100%; pointer-events: none; }
+.study-stage .viewer-panel .viewer-axis { position: absolute; z-index: 2; top: 10px; right: 10px; padding: 5px 8px; border: 1px solid #d8e1d7; border-radius: 999px; background: rgba(255,255,255,.88); color: #5d6d62; font-size: 9px; pointer-events: none; }
+.study-stage .viewer-panel .learner-overlay-warning { position: absolute; z-index: 2; left: 10px; bottom: 10px; max-width: calc(100% - 20px); padding: 6px 9px; border: 1px solid #e6d5b2; border-radius: 7px; background: rgba(255,248,233,.96); color: #6b552e; font-size: 9px; line-height: 1.4; pointer-events: none; }
+.study-canvas-stage { position: relative; width: 100%; height: 100%; min-height: 0; }
+.study-canvas-stage .viewer-canvas { position: absolute; inset: 0; }
+.study-canvas-stage .viewer-overlay { position: absolute; inset: 0; z-index: 1; display: block; width: 100%; height: 100%; pointer-events: none; }
+.study-canvas-stage .learner-overlay-warning { position: absolute; z-index: 2; left: 10px; bottom: 10px; max-width: calc(100% - 20px); padding: 6px 9px; border: 1px solid #e6d5b2; border-radius: 7px; background: rgba(255,248,233,.96); color: #6b552e; font-size: 9px; line-height: 1.4; pointer-events: none; }

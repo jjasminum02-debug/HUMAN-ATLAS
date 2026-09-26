@@ -1,0 +1,75 @@
+{
+  "pass": true,
+  "taskId": "T11-B03",
+  "commands": [
+    {
+      "name": "field_locators",
+      "command": [
+        "python3",
+        "work/evidence/T11/B03/refine_t11_b03_locators.py"
+      ],
+      "exitCode": 0,
+      "output": "{\n  \"updated\": true,\n  \"batchId\": \"T11-B03\",\n  \"logicalEnglishLatinFields\": 20,\n  \"serializedLocatorCopiesUpdated\": 40,\n  \"ids\": [\n    \"HA-G-000011\",\n    \"HA-G-000012\",\n    \"HA-G-000013\",\n    \"HA-G-000014\",\n    \"HA-G-000015\",\n    \"HA-G-000016\",\n    \"HA-M-000007\",\n    \"HA-M-000008\",\n    \"HA-M-000009\",\n    \"HA-M-000010\"\n  ]\n}\n"
+    },
+    {
+      "name": "coverage_provenance",
+      "command": [
+        "python3",
+        "work/evidence/T11/B03/validate_t11_b03.py"
+      ],
+      "exitCode": 0,
+      "output": "{\n  \"pass\": true,\n  \"batchId\": \"T11-B03\",\n  \"canonicalCoverage\": 10,\n  \"fieldEvidence\": 50,\n  \"englishAndLatinFields\": 20,\n  \"learnerNameOverlays\": 7,\n  \"sourceHanjaValues\": 4,\n  \"withheldGroupLabels\": [\n    \"HA-G-000011\",\n    \"HA-G-000012\",\n    \"HA-G-000016\"\n  ],\n  \"checkedCoverageTotal\": 28,\n  \"humanReviewed\": false,\n  \"nextBatchStarted\": false,\n  \"overallT11Status\": \"in_progress_partial\"\n}\n"
+    },
+    {
+      "name": "integrated_search_regression",
+      "command": [
+        "pnpm",
+        "--dir",
+        "atlas-web",
+        "test:search"
+      ],
+      "exitCode": 0,
+      "output": "$ node --experimental-strip-types --test src/domain/search.test.ts\n✔ same muscle: 승모근 (0.520833ms)\n✔ same muscle: 등세모근 (0.07025ms)\n✔ same muscle: 僧帽筋 (0.058667ms)\n✔ same muscle: TRAPEZIUS (0.723416ms)\n✔ same muscle:   등 세모근   (0.079584ms)\n✔ tibialis: 전경골근 (0.07ms)\n✔ tibialis: 앞정강근 (0.05725ms)\n✔ tibialis: 前脛骨筋 (0.059958ms)\n✔ tibialis: tibialis anterior (0.647541ms)\n✔ transposed typo returns both splenius muscles, never a false single identity (4.732584ms)\n✔ deltoid portion stays separate (0.069083ms)\n✔ user Korean name lateral deltoid maps to the acromial part (0.0545ms)\n✔ named acromial part is included in the learner search projection (0.092542ms)\n✔ splenius capitis names share one lookup candidate (0.608584ms)\n✔ splenius cervicis and colli names share one lookup candidate (0.877458ms)\n✔ short Korean typo does not fuzzily match unrelated muscles (0.041416ms)\n✔ unrelated query has no results (0.229042ms)\n✔ historical peroneus synonym resolves to fibularis (0.215875ms)\n✔ T11-B02 learner catalog English and Latin terms stay attached to their ten existing group IDs (2.640417ms)\n✔ T11-B02 attested Korean/Hanja names resolve to existing groups and unresolved near-matches stay withheld (0.228042ms)\n✔ T11-B03 English and Latin index terms stay attached to the ten assigned existing IDs (3.136083ms)\n✔ T11-B03 attested Korean and source Hanja resolve to their same existing IDs (0.167083ms)\n✔ T11-B03 generic or narrower gluteal/foot candidates remain unlinked to the three withheld groups (0.20925ms)\nℹ tests 23\nℹ suites 0\nℹ pass 23\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 79.705334\n"
+    },
+    {
+      "name": "learning_content_references",
+      "command": [
+        "pnpm",
+        "--dir",
+        "atlas-web",
+        "validate:learning"
+      ],
+      "exitCode": 0,
+      "output": "$ python3 scripts/validate-learning-content.py\n{\"pass\": true, \"nameEntries\": 27, \"summaries\": 14, \"scope\": \"references and stale hashes, not anatomy approval\"}\n"
+    },
+    {
+      "name": "git_diff_whitespace",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "name": "preservation",
+      "command": [
+        "python3",
+        "work/evidence/T11/B03/check_preservation.py"
+      ],
+      "exitCode": 0,
+      "output": "{\n  \"pass\": true,\n  \"preExistingFilesCompared\": 1331,\n  \"allowedPreExistingFilesChanged\": [\n    \"atlas-data/terminology/learning-names.json\",\n    \"atlas-data/terminology/term-review-batches.json\",\n    \"atlas-web/src/domain/search.test.ts\",\n    \"work/STATUS.md\",\n    \"work/reports/T11.md\",\n    \"work/review-queue/terminology-gaps.md\"\n  ],\n  \"unexpectedPreExistingFilesChanged\": [],\n  \"preExistingFilesMissing\": [],\n  \"openSimModels\": {\n    \"headBeforeAndAfter\": \"d9b05d470b1a481c222372c85b75772faf8f7792\",\n    \"statusAfter\": [],\n    \"unchanged\": true,\n    \"readOnly\": true\n  },\n  \"commitCreated\": false\n}\n"
+    }
+  ],
+  "runtime": {
+    "nodeExecutable": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "pathPrefix": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin"
+  },
+  "searchTestCount": 23,
+  "scope": "T11-B03 only; no UI build/deploy, B04, or T12",
+  "limitations": [
+    "TA2 original PDF was not visually inspected",
+    "human anatomy review was not performed"
+  ]
+}

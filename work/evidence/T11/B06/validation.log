@@ -1,0 +1,115 @@
+$ python3 work/evidence/T11/B06/validate_t11_b06.py
+[exit 0]
+{
+  "pass": true,
+  "batchId": "T11-B06",
+  "assignedExistingIds": [
+    "HA-M-000032",
+    "HA-M-000033",
+    "HA-M-000034",
+    "HA-M-000035",
+    "HA-M-000036",
+    "HA-M-000037",
+    "HA-M-000038",
+    "HA-M-000039",
+    "HA-M-000040",
+    "HA-M-000041"
+  ],
+  "coverageChecked": 10,
+  "requiredCoreFieldEvidence": 50,
+  "additionalAliasEvidence": 10,
+  "batchFieldEvidence": 60,
+  "cumulativeFieldEvidence": 318,
+  "learnerOverlaysTotal": 56,
+  "newOverlays": 10,
+  "hanjaAttested": 9,
+  "hanjaMissing": [
+    "HA-M-000036"
+  ],
+  "checkedCanonicalTotal": 58,
+  "catalogDenominator": 85,
+  "humanReviewed": false,
+  "nextBatchStarted": false,
+  "nextTask": "T11-B07"
+}
+
+$ pnpm --dir atlas-web test:search
+[exit 0]
+$ node --experimental-strip-types --test src/domain/search.test.ts
+✔ same muscle: 승모근 (0.647375ms)
+✔ same muscle: 등세모근 (0.16675ms)
+✔ same muscle: 僧帽筋 (0.116917ms)
+✔ same muscle: TRAPEZIUS (1.421416ms)
+✔ same muscle:   등 세모근   (0.094208ms)
+✔ tibialis: 전경골근 (0.096083ms)
+✔ tibialis: 앞정강근 (0.071708ms)
+✔ tibialis: 前脛骨筋 (0.080333ms)
+✔ tibialis: tibialis anterior (1.122042ms)
+✔ transposed typo returns both splenius muscles, never a false single identity (5.038875ms)
+✔ deltoid portion stays separate (0.080125ms)
+✔ user Korean name lateral deltoid maps to the acromial part (0.07175ms)
+✔ named acromial part is included in the learner search projection (0.094333ms)
+✔ splenius capitis names share one lookup candidate (1.35575ms)
+✔ splenius cervicis and colli names share one lookup candidate (1.664958ms)
+✔ short Korean typo does not fuzzily match unrelated muscles (0.066834ms)
+✔ unrelated query has no results (0.484125ms)
+✔ historical peroneus synonym resolves to fibularis (0.453584ms)
+✔ T11-B02 learner catalog English and Latin terms stay attached to their ten existing group IDs (2.639917ms)
+✔ T11-B02 attested Korean/Hanja names resolve to existing groups and unresolved near-matches stay withheld (0.207292ms)
+✔ T11-B03 English and Latin index terms stay attached to the ten assigned existing IDs (3.162208ms)
+✔ T11-B03 attested Korean and source Hanja resolve to their same existing IDs (0.254125ms)
+✔ T11-B03 generic or narrower gluteal/foot candidates remain unlinked to the three withheld groups (0.224542ms)
+✔ T11-B04 English and Latin TA2 observations stay attached to the ten assigned existing muscle IDs (2.830291ms)
+✔ T11-B04 attested Korean names and source Hanja resolve to the same existing IDs; incomplete Hanja stays withheld (0.344666ms)
+✔ T11-B05 direct TA2 English and Latin observations resolve to their ten assigned existing IDs (3.115292ms)
+✔ T11-B05 attested customary Korean names, current Korean names and source Hanja stay on their assigned IDs (0.424167ms)
+✔ T11-B06 opened TA2 English/Latin terms and sourced synonyms stay on their ten existing IDs (4.218042ms)
+✔ T11-B06 attested Korean names/Hanja resolve to their assigned IDs; conflicting and unverified forms stay withheld (0.611458ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 90.166708
+
+$ pnpm --dir atlas-web validate:learning
+[exit 0]
+$ python3 scripts/validate-learning-content.py
+{"pass": true, "nameEntries": 56, "summaries": 14, "scope": "references and stale hashes, not anatomy approval"}
+
+$ git diff --check
+[exit 0]
+
+
+$ python3 work/evidence/T11/B06/check_preservation.py
+[exit 0]
+{
+  "pass": true,
+  "preExistingFilesCompared": 1409,
+  "preExistingFilesMissing": [],
+  "preExistingFilesChanged": [
+    "atlas-data/terminology/learning-names.json",
+    "atlas-data/terminology/term-review-batches.json",
+    "atlas-web/src/domain/search.test.ts",
+    "work/STATUS.md",
+    "work/reports/T11.md",
+    "work/review-queue/terminology-gaps.md"
+  ],
+  "unexpectedPreExistingChanges": [],
+  "unexpectedNewFiles": [],
+  "projectHeadBeforeAndAfter": "9c54eff73b55406d3dec3deb531e2bfeb1c49fd2",
+  "openSimModels": {
+    "headBeforeAndAfter": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "statusBefore": [],
+    "statusAfter": [],
+    "preExistingFilesCompared": 432,
+    "fileChanges": [],
+    "newFiles": [],
+    "unchanged": true,
+    "readOnly": true
+  },
+  "commitCreated": false
+}
+

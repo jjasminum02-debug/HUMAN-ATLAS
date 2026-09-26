@@ -49,10 +49,7 @@ async function readPilotCatalog(): Promise<unknown> {
     const conceptsById = new Map(conceptsSource.map((row) => [row.id, row]));
     const expectedIds = [...muscleIds, ...partIds];
     const missingConceptIds = expectedIds.filter((id) => !conceptsById.has(id));
-    const concepts = expectedIds.flatMap((id) => {
-      const row = conceptsById.get(id);
-      return row ? [row] : [];
-    });
+    const concepts = conceptsSource;
     const conceptIdSet = new Set(concepts.map((row) => row.id as string));
 
     const attachments = records(entities, "attachments").filter((row) =>

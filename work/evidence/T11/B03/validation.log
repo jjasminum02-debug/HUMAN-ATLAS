@@ -1,0 +1,110 @@
+$ python3 work/evidence/T11/B03/refine_t11_b03_locators.py
+[exit 0]
+{
+  "updated": true,
+  "batchId": "T11-B03",
+  "logicalEnglishLatinFields": 20,
+  "serializedLocatorCopiesUpdated": 40,
+  "ids": [
+    "HA-G-000011",
+    "HA-G-000012",
+    "HA-G-000013",
+    "HA-G-000014",
+    "HA-G-000015",
+    "HA-G-000016",
+    "HA-M-000007",
+    "HA-M-000008",
+    "HA-M-000009",
+    "HA-M-000010"
+  ]
+}
+
+$ python3 work/evidence/T11/B03/validate_t11_b03.py
+[exit 0]
+{
+  "pass": true,
+  "batchId": "T11-B03",
+  "canonicalCoverage": 10,
+  "fieldEvidence": 50,
+  "englishAndLatinFields": 20,
+  "learnerNameOverlays": 7,
+  "sourceHanjaValues": 4,
+  "withheldGroupLabels": [
+    "HA-G-000011",
+    "HA-G-000012",
+    "HA-G-000016"
+  ],
+  "checkedCoverageTotal": 28,
+  "humanReviewed": false,
+  "nextBatchStarted": false,
+  "overallT11Status": "in_progress_partial"
+}
+
+$ pnpm --dir atlas-web test:search
+[exit 0]
+$ node --experimental-strip-types --test src/domain/search.test.ts
+✔ same muscle: 승모근 (0.520833ms)
+✔ same muscle: 등세모근 (0.07025ms)
+✔ same muscle: 僧帽筋 (0.058667ms)
+✔ same muscle: TRAPEZIUS (0.723416ms)
+✔ same muscle:   등 세모근   (0.079584ms)
+✔ tibialis: 전경골근 (0.07ms)
+✔ tibialis: 앞정강근 (0.05725ms)
+✔ tibialis: 前脛骨筋 (0.059958ms)
+✔ tibialis: tibialis anterior (0.647541ms)
+✔ transposed typo returns both splenius muscles, never a false single identity (4.732584ms)
+✔ deltoid portion stays separate (0.069083ms)
+✔ user Korean name lateral deltoid maps to the acromial part (0.0545ms)
+✔ named acromial part is included in the learner search projection (0.092542ms)
+✔ splenius capitis names share one lookup candidate (0.608584ms)
+✔ splenius cervicis and colli names share one lookup candidate (0.877458ms)
+✔ short Korean typo does not fuzzily match unrelated muscles (0.041416ms)
+✔ unrelated query has no results (0.229042ms)
+✔ historical peroneus synonym resolves to fibularis (0.215875ms)
+✔ T11-B02 learner catalog English and Latin terms stay attached to their ten existing group IDs (2.640417ms)
+✔ T11-B02 attested Korean/Hanja names resolve to existing groups and unresolved near-matches stay withheld (0.228042ms)
+✔ T11-B03 English and Latin index terms stay attached to the ten assigned existing IDs (3.136083ms)
+✔ T11-B03 attested Korean and source Hanja resolve to their same existing IDs (0.167083ms)
+✔ T11-B03 generic or narrower gluteal/foot candidates remain unlinked to the three withheld groups (0.20925ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 79.705334
+
+$ pnpm --dir atlas-web validate:learning
+[exit 0]
+$ python3 scripts/validate-learning-content.py
+{"pass": true, "nameEntries": 27, "summaries": 14, "scope": "references and stale hashes, not anatomy approval"}
+
+$ git diff --check
+[exit 0]
+
+
+$ python3 work/evidence/T11/B03/check_preservation.py
+[exit 0]
+{
+  "pass": true,
+  "preExistingFilesCompared": 1331,
+  "allowedPreExistingFilesChanged": [
+    "atlas-data/terminology/learning-names.json",
+    "atlas-data/terminology/term-review-batches.json",
+    "atlas-web/src/domain/search.test.ts",
+    "work/STATUS.md",
+    "work/reports/T11.md",
+    "work/review-queue/terminology-gaps.md"
+  ],
+  "unexpectedPreExistingFilesChanged": [],
+  "preExistingFilesMissing": [],
+  "openSimModels": {
+    "headBeforeAndAfter": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "statusAfter": [],
+    "unchanged": true,
+    "readOnly": true
+  },
+  "commitCreated": false
+}
+

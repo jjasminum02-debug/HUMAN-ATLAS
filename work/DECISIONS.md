@@ -71,3 +71,19 @@
 - T09 UI smoke에서 실제 T05 설명에 연결된 draft 3개를 임시 생성해 geometry, 수정, JSON, reload 경로를 확인한 뒤 UI에서 모두 삭제했다. 두 번의 확인에서 final local draft count는 0이다. 해당 smoke 좌표는 anatomical mapping이나 검토 후보로 기록하지 않았다.
 - CUA의 브라우저 화면 캡처는 실행 중 시각적으로 확인했다. 이미지 파일을 프로젝트로 저장하려던 data URL 이동이 Codex browser URL policy에 의해 거부되어 우회하지 않았고, 대신 브라우저 상호작용·console 결과를 JSON 로그에 남겼다.
 - T09는 local-only draft tooling이다. Canonical catalog/T05 claims/T03 SpatialAnnotation/OpenSim 원본을 수정하지 않았으며 T10 actual mapping과 사람 검토는 시작하지 않았다.
+
+## 2026-09-25 — 사용자 UI 감사에 따른 개정 T10
+
+학습 UI/제작 UI를 분리하고 관용명 우선·다언어 통합검색을 구현한다. source-attested 표시 overlay와 human-reviewed canonical claim을 구분한다. 구조 요약은 hash로 원문 변경을 감지하는 AI 번역이다. 기존 데이터/자산/원본은 보존한다. 구 T10의 부착매핑은 새 T13, 다음은 T11 용어 보완. T11–T24의 명세는 실행 산출물이 아니다. 현재 기술 문제를 특정 모델의 능력 부족으로 단정하지 않는다.
+
+## T12a — 2026-09-25
+
+Three.js 0.186.1 GLTFLoader는 현재 11개 T07 mesh의 geometry/topology를 기존 파서와 정확히 같게 읽었다. T12b adapter 대상으로 채택하되 현재 viewer는 유지한다. OrbitControls 일반 화살표는 기존 회전 조작과 달라 명시적 키 연결이 필요하다. 브라우저 렌더/picking/annotation 회귀 및 canonical 연결 통과 전에는 T12 완료나 해부학 승인으로 간주하지 않는다. 근거와 수용 조건은 `work/evidence/T12/engine-decision.md` 및 `work/reports/T12.md`에 기록했다.
+
+## T12b — 2026-09-26
+
+Three.js 0.186.1 renderer/controls/raycaster로 viewer를 전환하고 T07 decoder와 GLTFLoader의 11개 배열 순서를 런타임에 대조한다. 우측 근육 instance6, mesh asset11, 근육 mapping7만 canonical에 연결하며 모두 `needs_review`로 유지한다. 현 T03 MeshMapping의 partIds는 기존 canonical `muscle_part` concept을 참조할 수 있도록 부모 instance 검사를 추가했다. 구조물 mesh4는 canonical asset으로 보존하되 구조 대상 mapping 필드가 없어 bridge에서 명시적 제외한다. FJ3385 talus는 근거 없는 ID를 만들지 않고 null 제외 상태를 유지한다. T09 로컬 draft는 canonical SpatialAnnotation으로 자동 승격하지 않는다.
+
+## T13 — 2026-09-26
+
+T05의 41개 부착을 근육/근두·대상 구조·원문 claim/evidence·우측 instance 단위로 분리 유지한다. BodyParts3D Release 4.0 공식 교차표에서 확인한 우측 대퇴골·발 뼈 9개를 별도 파생 GLB로 보강하고 원본 OBJ와 T07 자산을 보존한다. whole-bone 표시는 표면 검색 컨텍스트에 한정하며 부착면 annotation으로 간주하지 않는다. 제2~4중족골 전체 canonical ID와 FJ3385 talus ID는 추정하지 않는다. T09 입력은 `/review`의 source-linked 대상 뼈에 한정하고 학습 `/`은 읽기 전용이다. 실제 표면 위치를 근거로 지정하지 못한 T13은 `technical_partial_surface_review_pending`으로 남겨 T14로 자동 진행하지 않는다.

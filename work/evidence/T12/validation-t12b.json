@@ -1,0 +1,16 @@
+{
+  "date": "2026-09-26",
+  "commands": [
+    {"command": "python3 atlas-data/schemas/validate.py --dataset atlas-data/catalog/canonical-catalog.json", "exitCode": 0, "result": "schemaCheck passed; issues []"},
+    {"command": "python3 atlas-data/schemas/validate.py --fixtures --check-schemas", "exitCode": 0, "result": "17/17 synthetic fixtures passed"},
+    {"command": "python3 work/evidence/T12/validate_t12b.py", "exitCode": 0, "result": "11 meshAssets; 6 right instances; 7 muscle mappings; 4 explicit structure exclusions; GLB SHA-256/frame/meter/pose parity; negative parent and side mismatches rejected"},
+    {"command": "cd atlas-web && pnpm test:annotations", "exitCode": 0, "result": "11/11; topology stale, JSON round trip, coordinate and provenance guards passed"},
+    {"command": "cd atlas-web && pnpm typecheck", "exitCode": 0, "result": "tsc -b passed"},
+    {"command": "cd atlas-web && pnpm build", "exitCode": 0, "result": "learning validator passed; Vite build passed; large chunk advisory"},
+    {"command": "git diff --check", "exitCode": 0, "result": "no whitespace errors"},
+    {"command": "git -C OpenSim_Models status --short", "exitCode": 0, "result": "clean"}
+  ],
+  "browserEvidence": "work/evidence/T12/browser-qa-t12b.md",
+  "openSimHead": "d9b05d470b1a481c222372c85b75772faf8f7792",
+  "sourceGlbSha256": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341"
+}

@@ -225,8 +225,9 @@ uniform vec4 u_color;
 out vec4 outColor;
 void main() {
   vec3 n = normalize(v_normal);
-  float diffuse = abs(dot(n, normalize(vec3(0.32, 0.82, 0.48))));
-  float light = 0.42 + 0.58 * diffuse;
+  float diffuse = max(0.0, dot(n, normalize(vec3(0.32, 0.82, 0.65))));
+  float fill = max(0.0, dot(n, normalize(vec3(-0.7, 0.2, 0.7))));
+  float light = 0.50 + 0.40 * diffuse + 0.16 * fill;
   outColor = vec4(u_color.rgb * light, u_color.a);
 }
 `;
@@ -377,15 +378,15 @@ export class T07WebGLViewer {
     gl.enable(gl.DEPTH_TEST);
     gl.depthFunc(gl.LEQUAL);
     gl.disable(gl.CULL_FACE);
-    gl.clearColor(0.965, 0.974, 0.956, 1);
+    gl.clearColor(0.945, 0.949, 0.953, 1);
   }
 
   setScene(meshes: readonly ViewerMesh[]): void {
     this.disposeMeshes();
     const gl = this.gl;
     const palette: Array<[number, number, number]> = [
-      [0.70, 0.43, 0.31], [0.78, 0.54, 0.40], [0.45, 0.62, 0.50], [0.61, 0.69, 0.51],
-      [0.55, 0.52, 0.69], [0.42, 0.63, 0.69], [0.68, 0.58, 0.42],
+      [0.67, 0.35, 0.29], [0.72, 0.40, 0.33], [0.65, 0.34, 0.29], [0.73, 0.42, 0.35],
+      [0.69, 0.38, 0.32], [0.76, 0.44, 0.36], [0.68, 0.36, 0.30],
     ];
     meshes.forEach((mesh, index) => {
       const positionBuffer = gl.createBuffer();
@@ -405,7 +406,7 @@ export class T07WebGLViewer {
         indexBuffer,
         count: mesh.indices.length,
         indexType: mesh.indices instanceof Uint16Array ? gl.UNSIGNED_SHORT : gl.UNSIGNED_INT,
-        color: mesh.targetEntityType === "structure" ? [0.72, 0.69, 0.60] : palette[index % palette.length],
+        color: mesh.targetEntityType === "structure" ? [0.88, 0.85, 0.74] : palette[index % palette.length],
       });
       this.visibility.set(mesh.meshAssetId, "visible");
     });
@@ -625,7 +626,7 @@ export class T07WebGLViewer {
     });
     gl.useProgram(this.surfaceProgram);
     const colorLocation = gl.getUniformLocation(this.surfaceProgram, "u_color");
-    const selectedColor: [number, number, number] = [0.10, 0.50, 0.39];
+    const selectedColor: [number, number, number] = [0.81, 0.48, 0.38];
     for (const gpu of opaque) {
       this.bindMesh(gpu, this.surfaceProgram, camera.mvp, camera.view);
       const color = this.selectedIds.has(gpu.mesh.meshAssetId) ? selectedColor : gpu.color;

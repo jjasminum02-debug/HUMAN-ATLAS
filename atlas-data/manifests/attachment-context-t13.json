@@ -1,0 +1,893 @@
+{
+  "schemaVersion": "T13-attachment-context-v2",
+  "sourceCatalogRevision": "T13-attachment-context-v2",
+  "t05SourceBoundary": "Gray 1918 historical claim/evidence, all needs_review; no independent modern or human anatomy approval.",
+  "assetSourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+  "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+  "units": "m",
+  "poseId": "bodyparts3d-r4-static-reference",
+  "assetSets": [
+    {
+      "manifest": "atlas-data/manifests/derived-assets-t07.json",
+      "glbSha256": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341",
+      "meshCount": 11
+    },
+    {
+      "manifest": "atlas-data/manifests/derived-bones-t13.json",
+      "glbSha256": "a5b16cf1e6991b52f66706dee7cf3c77d9832b1a3bde0e3dffd5de5619db6662",
+      "meshCount": 9
+    }
+  ],
+  "coverage": {
+    "t05Attachments": 41,
+    "wholeBoneContexts": 28,
+    "heldWithoutTargetMesh": 13,
+    "locatedSurfaceAnnotations": 0,
+    "humanReviewedSurfaces": 0
+  },
+  "records": [
+    {
+      "attachmentId": "HA-A-T05-GASTRO-LAT-FEMUR-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-GASTRO-LAT-FEMUR-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-GASTRO"
+      ],
+      "ownerConceptId": "HA-P-000001",
+      "instanceId": "HA-I-R-HA-M-000001",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-FEMORAL-CONDYLE-LATERAL",
+      "targetBoneId": "HA-S-FEMUR",
+      "sourceBoneFileId": "FJ3365",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3365",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-GASTRO-LAT-FEMUR-POSTERIOR-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-GASTRO-LAT-FEMUR-POSTERIOR-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-GASTRO"
+      ],
+      "ownerConceptId": "HA-P-000001",
+      "instanceId": "HA-I-R-HA-M-000001",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-FEMUR-POSTERIOR-ABOVE-LATERAL-CONDYLE",
+      "targetBoneId": "HA-S-FEMUR",
+      "sourceBoneFileId": "FJ3365",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3365",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-GASTRO-LAT-KNEE-CAPSULE-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-GASTRO-LAT-KNEE-CAPSULE-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-GASTRO"
+      ],
+      "ownerConceptId": "HA-P-000001",
+      "instanceId": "HA-I-R-HA-M-000001",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-KNEE-CAPSULE",
+      "targetBoneId": null,
+      "sourceBoneFileId": null,
+      "contextMeshAssetId": null,
+      "contextStatus": "held_no_matching_target_mesh",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "No source-confirmed mesh for this exact target in the T13 acquired subset; surface mapping held."
+    },
+    {
+      "attachmentId": "HA-A-T05-GASTRO-MED-FEMUR-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-GASTRO-MED-FEMUR-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-GASTRO"
+      ],
+      "ownerConceptId": "HA-P-000002",
+      "instanceId": "HA-I-R-HA-M-000001",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-FEMORAL-CONDYLE-MEDIAL",
+      "targetBoneId": "HA-S-FEMUR",
+      "sourceBoneFileId": "FJ3365",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3365",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-GASTRO-MED-FEMUR-ADJACENT-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-GASTRO-MED-FEMUR-ADJACENT-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-GASTRO"
+      ],
+      "ownerConceptId": "HA-P-000002",
+      "instanceId": "HA-I-R-HA-M-000001",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-FEMUR-ADJACENT-MEDIAL-CONDYLE",
+      "targetBoneId": "HA-S-FEMUR",
+      "sourceBoneFileId": "FJ3365",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3365",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-GASTRO-MED-KNEE-CAPSULE-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-GASTRO-MED-KNEE-CAPSULE-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-GASTRO"
+      ],
+      "ownerConceptId": "HA-P-000002",
+      "instanceId": "HA-I-R-HA-M-000001",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-KNEE-CAPSULE",
+      "targetBoneId": null,
+      "sourceBoneFileId": null,
+      "contextMeshAssetId": null,
+      "contextStatus": "held_no_matching_target_mesh",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "No source-confirmed mesh for this exact target in the T13 acquired subset; surface mapping held."
+    },
+    {
+      "attachmentId": "HA-A-T05-GASTRO-CALCANEUS-INSERTION",
+      "descriptionClaimId": "HA-C-T05-GASTRO-CALCANEUS-INSERTION",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-GASTRO",
+        "EV-GRAY1918-CALCANEAL-TENDON"
+      ],
+      "ownerConceptId": "HA-M-000001",
+      "instanceId": "HA-I-R-HA-M-000001",
+      "side": "right",
+      "role": "insertion",
+      "targetStructureId": "HA-S-CALCANEUS-POSTERIOR-MIDDLE",
+      "targetBoneId": "HA-S-CALCANEUS",
+      "sourceBoneFileId": "FJ3360",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3360",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-SOLEUS-FIBULA-HEAD-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-SOLEUS-FIBULA-HEAD-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-SOLEUS"
+      ],
+      "ownerConceptId": "HA-M-000002",
+      "instanceId": "HA-I-R-HA-M-000002",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-FIBULA-HEAD",
+      "targetBoneId": "HA-S-FIBULA",
+      "sourceBoneFileId": "FJ3366",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3366",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-SOLEUS-FIBULA-POSTERIOR-UPPER-THIRD-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-SOLEUS-FIBULA-POSTERIOR-UPPER-THIRD-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-SOLEUS"
+      ],
+      "ownerConceptId": "HA-M-000002",
+      "instanceId": "HA-I-R-HA-M-000002",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-FIBULA-POSTERIOR-UPPER-THIRD",
+      "targetBoneId": "HA-S-FIBULA",
+      "sourceBoneFileId": "FJ3366",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3366",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-SOLEUS-TIBIA-POPLITEAL-LINE-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-SOLEUS-TIBIA-POPLITEAL-LINE-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-SOLEUS"
+      ],
+      "ownerConceptId": "HA-M-000002",
+      "instanceId": "HA-I-R-HA-M-000002",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-TIBIA-POPLITEAL-LINE",
+      "targetBoneId": "HA-S-TIBIA",
+      "sourceBoneFileId": "FJ3387",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3387",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-SOLEUS-TIBIA-MEDIAL-BORDER-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-SOLEUS-TIBIA-MEDIAL-BORDER-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-SOLEUS"
+      ],
+      "ownerConceptId": "HA-M-000002",
+      "instanceId": "HA-I-R-HA-M-000002",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-TIBIA-MEDIAL-BORDER-MIDDLE-THIRD",
+      "targetBoneId": "HA-S-TIBIA",
+      "sourceBoneFileId": "FJ3387",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3387",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-SOLEUS-ARCH-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-SOLEUS-ARCH-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-SOLEUS"
+      ],
+      "ownerConceptId": "HA-M-000002",
+      "instanceId": "HA-I-R-HA-M-000002",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-TENDINOUS-ARCH-SOLEUS",
+      "targetBoneId": null,
+      "sourceBoneFileId": null,
+      "contextMeshAssetId": null,
+      "contextStatus": "held_no_matching_target_mesh",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "No source-confirmed mesh for this exact target in the T13 acquired subset; surface mapping held."
+    },
+    {
+      "attachmentId": "HA-A-T05-SOLEUS-CALCANEUS-INSERTION",
+      "descriptionClaimId": "HA-C-T05-SOLEUS-CALCANEUS-INSERTION",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-SOLEUS",
+        "EV-GRAY1918-CALCANEAL-TENDON"
+      ],
+      "ownerConceptId": "HA-M-000002",
+      "instanceId": "HA-I-R-HA-M-000002",
+      "side": "right",
+      "role": "insertion",
+      "targetStructureId": "HA-S-CALCANEUS-POSTERIOR-MIDDLE",
+      "targetBoneId": "HA-S-CALCANEUS",
+      "sourceBoneFileId": "FJ3360",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3360",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-TA-TIBIA-CONDYLE-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-TA-TIBIA-CONDYLE-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-ANTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000003",
+      "instanceId": "HA-I-R-HA-M-000003",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-TIBIA-LATERAL-CONDYLE",
+      "targetBoneId": "HA-S-TIBIA",
+      "sourceBoneFileId": "FJ3387",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3387",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-TA-TIBIA-SURFACE-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-TA-TIBIA-SURFACE-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-ANTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000003",
+      "instanceId": "HA-I-R-HA-M-000003",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-TIBIA-UPPER-LATERAL-SURFACE",
+      "targetBoneId": "HA-S-TIBIA",
+      "sourceBoneFileId": "FJ3387",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3387",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-TA-IOM-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-TA-IOM-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-ANTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000003",
+      "instanceId": "HA-I-R-HA-M-000003",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-INTEROSSEOUS-MEMBRANE-LEG",
+      "targetBoneId": null,
+      "sourceBoneFileId": null,
+      "contextMeshAssetId": null,
+      "contextStatus": "held_no_matching_target_mesh",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "No source-confirmed mesh for this exact target in the T13 acquired subset; surface mapping held."
+    },
+    {
+      "attachmentId": "HA-A-T05-TA-FASCIA-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-TA-FASCIA-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-ANTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000003",
+      "instanceId": "HA-I-R-HA-M-000003",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-CRURAL-FASCIA",
+      "targetBoneId": null,
+      "sourceBoneFileId": null,
+      "contextMeshAssetId": null,
+      "contextStatus": "held_no_matching_target_mesh",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "No source-confirmed mesh for this exact target in the T13 acquired subset; surface mapping held."
+    },
+    {
+      "attachmentId": "HA-A-T05-TA-SEPTUM-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-TA-SEPTUM-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-ANTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000003",
+      "instanceId": "HA-I-R-HA-M-000003",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-TA-EDL-SEPTUM",
+      "targetBoneId": null,
+      "sourceBoneFileId": null,
+      "contextMeshAssetId": null,
+      "contextStatus": "held_no_matching_target_mesh",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "No source-confirmed mesh for this exact target in the T13 acquired subset; surface mapping held."
+    },
+    {
+      "attachmentId": "HA-A-T05-TA-CUNEIFORM-INSERTION",
+      "descriptionClaimId": "HA-C-T05-TA-CUNEIFORM-INSERTION",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-ANTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000003",
+      "instanceId": "HA-I-R-HA-M-000003",
+      "side": "right",
+      "role": "insertion",
+      "targetStructureId": "HA-S-MEDIAL-CUNEIFORM-INFEROMEDIAL-SURFACE",
+      "targetBoneId": "HA-S-MEDIAL-CUNEIFORM",
+      "sourceBoneFileId": "FJ3377",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3377",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-TA-MT1-INSERTION",
+      "descriptionClaimId": "HA-C-T05-TA-MT1-INSERTION",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-ANTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000003",
+      "instanceId": "HA-I-R-HA-M-000003",
+      "side": "right",
+      "role": "insertion",
+      "targetStructureId": "HA-S-BASE-METATARSAL-1",
+      "targetBoneId": "HA-S-METATARSAL-1",
+      "sourceBoneFileId": "FJ3351",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3351",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-TP-IOM-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-TP-IOM-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-POSTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000004",
+      "instanceId": "HA-I-R-HA-M-000004",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-INTEROSSEOUS-MEMBRANE-LEG",
+      "targetBoneId": null,
+      "sourceBoneFileId": null,
+      "contextMeshAssetId": null,
+      "contextStatus": "held_no_matching_target_mesh",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "No source-confirmed mesh for this exact target in the T13 acquired subset; surface mapping held."
+    },
+    {
+      "attachmentId": "HA-A-T05-TP-TIBIA-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-TP-TIBIA-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-POSTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000004",
+      "instanceId": "HA-I-R-HA-M-000004",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-TIBIA-POSTERIOR-LATERAL-TP-REGION",
+      "targetBoneId": "HA-S-TIBIA",
+      "sourceBoneFileId": "FJ3387",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3387",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-TP-FIBULA-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-TP-FIBULA-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-POSTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000004",
+      "instanceId": "HA-I-R-HA-M-000004",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-FIBULA-MEDIAL-UPPER-TWO-THIRDS",
+      "targetBoneId": "HA-S-FIBULA",
+      "sourceBoneFileId": "FJ3366",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3366",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-TP-TRANSVERSE-FASCIA-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-TP-TRANSVERSE-FASCIA-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-POSTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000004",
+      "instanceId": "HA-I-R-HA-M-000004",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-DEEP-TRANSVERSE-FASCIA-LEG",
+      "targetBoneId": null,
+      "sourceBoneFileId": null,
+      "contextMeshAssetId": null,
+      "contextStatus": "held_no_matching_target_mesh",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "No source-confirmed mesh for this exact target in the T13 acquired subset; surface mapping held."
+    },
+    {
+      "attachmentId": "HA-A-T05-TP-SEPTA-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-TP-SEPTA-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-POSTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000004",
+      "instanceId": "HA-I-R-HA-M-000004",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-TP-ADJACENT-INTERMUSCULAR-SEPTA",
+      "targetBoneId": null,
+      "sourceBoneFileId": null,
+      "contextMeshAssetId": null,
+      "contextStatus": "held_no_matching_target_mesh",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "No source-confirmed mesh for this exact target in the T13 acquired subset; surface mapping held."
+    },
+    {
+      "attachmentId": "HA-A-T05-TP-NAVICULAR-INSERTION",
+      "descriptionClaimId": "HA-C-T05-TP-NAVICULAR-INSERTION",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-POSTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000004",
+      "instanceId": "HA-I-R-HA-M-000004",
+      "side": "right",
+      "role": "insertion",
+      "targetStructureId": "HA-S-NAVICULAR-TUBEROSITY",
+      "targetBoneId": "HA-S-NAVICULAR",
+      "sourceBoneFileId": "FJ3308",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3308",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-TP-SUSTENTACULUM-EXPANSION",
+      "descriptionClaimId": "HA-C-T05-TP-SUSTENTACULUM-EXPANSION",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-POSTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000004",
+      "instanceId": "HA-I-R-HA-M-000004",
+      "side": "right",
+      "role": "other_attachment",
+      "targetStructureId": "HA-S-SUSTENTACULUM-TALI",
+      "targetBoneId": "HA-S-CALCANEUS",
+      "sourceBoneFileId": "FJ3360",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3360",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-TP-CUNEIFORM-EXPANSION",
+      "descriptionClaimId": "HA-C-T05-TP-CUNEIFORM-EXPANSION",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-POSTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000004",
+      "instanceId": "HA-I-R-HA-M-000004",
+      "side": "right",
+      "role": "other_attachment",
+      "targetStructureId": "HA-S-CUNEIFORM-BONES",
+      "targetBoneId": null,
+      "sourceBoneFileId": null,
+      "contextMeshAssetId": null,
+      "contextStatus": "held_no_matching_target_mesh",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "No source-confirmed mesh for this exact target in the T13 acquired subset; surface mapping held."
+    },
+    {
+      "attachmentId": "HA-A-T05-TP-CUBOID-EXPANSION",
+      "descriptionClaimId": "HA-C-T05-TP-CUBOID-EXPANSION",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-POSTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000004",
+      "instanceId": "HA-I-R-HA-M-000004",
+      "side": "right",
+      "role": "other_attachment",
+      "targetStructureId": "HA-S-CUBOID",
+      "targetBoneId": "HA-S-CUBOID",
+      "sourceBoneFileId": "FJ3364",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3364",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-TP-MT2-EXPANSION",
+      "descriptionClaimId": "HA-C-T05-TP-MT2-EXPANSION",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-POSTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000004",
+      "instanceId": "HA-I-R-HA-M-000004",
+      "side": "right",
+      "role": "other_attachment",
+      "targetStructureId": "HA-S-BASE-METATARSAL-2",
+      "targetBoneId": null,
+      "sourceBoneFileId": "FJ3353",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3353",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-TP-MT3-EXPANSION",
+      "descriptionClaimId": "HA-C-T05-TP-MT3-EXPANSION",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-POSTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000004",
+      "instanceId": "HA-I-R-HA-M-000004",
+      "side": "right",
+      "role": "other_attachment",
+      "targetStructureId": "HA-S-BASE-METATARSAL-3",
+      "targetBoneId": null,
+      "sourceBoneFileId": "FJ3355",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3355",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-TP-MT4-EXPANSION",
+      "descriptionClaimId": "HA-C-T05-TP-MT4-EXPANSION",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-TIBIALIS-POSTERIOR"
+      ],
+      "ownerConceptId": "HA-M-000004",
+      "instanceId": "HA-I-R-HA-M-000004",
+      "side": "right",
+      "role": "other_attachment",
+      "targetStructureId": "HA-S-BASE-METATARSAL-4",
+      "targetBoneId": null,
+      "sourceBoneFileId": "FJ3357",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3357",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-FL-FIBULA-HEAD-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-FL-FIBULA-HEAD-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-FIBULARIS-LONGUS"
+      ],
+      "ownerConceptId": "HA-M-000005",
+      "instanceId": "HA-I-R-HA-M-000005",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-FIBULA-HEAD",
+      "targetBoneId": "HA-S-FIBULA",
+      "sourceBoneFileId": "FJ3366",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3366",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-FL-FIBULA-LATERAL-UPPER-TWO-THIRDS-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-FL-FIBULA-LATERAL-UPPER-TWO-THIRDS-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-FIBULARIS-LONGUS"
+      ],
+      "ownerConceptId": "HA-M-000005",
+      "instanceId": "HA-I-R-HA-M-000005",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-FIBULA-LATERAL-UPPER-TWO-THIRDS",
+      "targetBoneId": "HA-S-FIBULA",
+      "sourceBoneFileId": "FJ3366",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3366",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-FL-FASCIA-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-FL-FASCIA-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-FIBULARIS-LONGUS"
+      ],
+      "ownerConceptId": "HA-M-000005",
+      "instanceId": "HA-I-R-HA-M-000005",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-CRURAL-FASCIA",
+      "targetBoneId": null,
+      "sourceBoneFileId": null,
+      "contextMeshAssetId": null,
+      "contextStatus": "held_no_matching_target_mesh",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "No source-confirmed mesh for this exact target in the T13 acquired subset; surface mapping held."
+    },
+    {
+      "attachmentId": "HA-A-T05-FL-SEPTA-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-FL-SEPTA-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-FIBULARIS-LONGUS"
+      ],
+      "ownerConceptId": "HA-M-000005",
+      "instanceId": "HA-I-R-HA-M-000005",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-LATERAL-LEG-SEPTA",
+      "targetBoneId": null,
+      "sourceBoneFileId": null,
+      "contextMeshAssetId": null,
+      "contextStatus": "held_no_matching_target_mesh",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "No source-confirmed mesh for this exact target in the T13 acquired subset; surface mapping held."
+    },
+    {
+      "attachmentId": "HA-A-T05-FL-MT1-INSERTION",
+      "descriptionClaimId": "HA-C-T05-FL-MT1-INSERTION",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-FIBULARIS-LONGUS"
+      ],
+      "ownerConceptId": "HA-M-000005",
+      "instanceId": "HA-I-R-HA-M-000005",
+      "side": "right",
+      "role": "insertion",
+      "targetStructureId": "HA-S-BASE-METATARSAL-1",
+      "targetBoneId": "HA-S-METATARSAL-1",
+      "sourceBoneFileId": "FJ3351",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3351",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-FL-CUNEIFORM-INSERTION",
+      "descriptionClaimId": "HA-C-T05-FL-CUNEIFORM-INSERTION",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-FIBULARIS-LONGUS"
+      ],
+      "ownerConceptId": "HA-M-000005",
+      "instanceId": "HA-I-R-HA-M-000005",
+      "side": "right",
+      "role": "insertion",
+      "targetStructureId": "HA-S-MEDIAL-CUNEIFORM",
+      "targetBoneId": "HA-S-MEDIAL-CUNEIFORM",
+      "sourceBoneFileId": "FJ3377",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3377",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-FB-FIBULA-LATERAL-LOWER-TWO-THIRDS-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-FB-FIBULA-LATERAL-LOWER-TWO-THIRDS-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-FIBULARIS-BREVIS"
+      ],
+      "ownerConceptId": "HA-M-000006",
+      "instanceId": "HA-I-R-HA-M-000006",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-FIBULA-LATERAL-LOWER-TWO-THIRDS",
+      "targetBoneId": "HA-S-FIBULA",
+      "sourceBoneFileId": "FJ3366",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3366",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    },
+    {
+      "attachmentId": "HA-A-T05-FB-SEPTA-ORIGIN",
+      "descriptionClaimId": "HA-C-T05-FB-SEPTA-ORIGIN",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-FIBULARIS-BREVIS"
+      ],
+      "ownerConceptId": "HA-M-000006",
+      "instanceId": "HA-I-R-HA-M-000006",
+      "side": "right",
+      "role": "origin",
+      "targetStructureId": "HA-S-LATERAL-LEG-SEPTA",
+      "targetBoneId": null,
+      "sourceBoneFileId": null,
+      "contextMeshAssetId": null,
+      "contextStatus": "held_no_matching_target_mesh",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "No source-confirmed mesh for this exact target in the T13 acquired subset; surface mapping held."
+    },
+    {
+      "attachmentId": "HA-A-T05-FB-MT5-INSERTION",
+      "descriptionClaimId": "HA-C-T05-FB-MT5-INSERTION",
+      "claimEvidenceIds": [
+        "EV-GRAY1918-FIBULARIS-BREVIS"
+      ],
+      "ownerConceptId": "HA-M-000006",
+      "instanceId": "HA-I-R-HA-M-000006",
+      "side": "right",
+      "role": "insertion",
+      "targetStructureId": "HA-S-TUBEROSITY-BASE-METATARSAL-5",
+      "targetBoneId": "HA-S-METATARSAL-5",
+      "sourceBoneFileId": "FJ3359",
+      "contextMeshAssetId": "HA-MESH-BP3D4-FJ3359",
+      "contextStatus": "whole_bone_search_context_only",
+      "spatialAnnotationId": null,
+      "geometry": null,
+      "precision": null,
+      "surfaceReviewState": "not_started",
+      "reason": "T05 prose and a whole-bone mesh do not locate attachment triangles or extent; manual multi-view review required."
+    }
+  ]
+}

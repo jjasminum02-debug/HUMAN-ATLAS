@@ -9,7 +9,26 @@ import {
   type AnnotationDraft,
   type AnnotationGeometry,
 } from "./annotationDrafts";
-import type { AnnotationSurfaceHit, T07WebGLViewer, ViewerMesh } from "./glb";
+import type { AnnotationSurfaceHit, ViewerMesh } from "./glb";
+import type { ThreeViewer } from "./ThreeViewer";
+import { attachmentContextById, buildSpatialDraftContext } from "./attachmentContext";
+import {
+  SPATIAL_DRAFT_LAYER_STORAGE_KEY,
+  SPATIAL_DRAFT_TEST_STORAGE_KEY,
+  SpatialDraftValidationError,
+  contextStatusRecords,
+  emptySpatialDraftLayer,
+  makeDraftSurfaceRecord,
+  makePendingLegacyRecord,
+  mergeSpatialDraftLayers,
+  parseSpatialDraftLayerText,
+  serializeSpatialDraftLayer,
+  saveSyntheticTestSpatialDraftLayer,
+  validateSpatialDraftLayer,
+  type SpatialDraftLayer,
+  type SpatialDraftRecord,
+  type SpatialDraftStatus,
+} from "./spatialDraftLayer";
 
 const STORAGE_KEY = "human-atlas:t09:annotation-drafts:v1";
 const FRAME_ID = "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR";
@@ -32,7 +51,7 @@ interface PendingGeometry {
 }
 
 interface Props {
-  viewer: T07WebGLViewer | null;
+  viewer: ThreeViewer | null;
   overlayCanvas: HTMLCanvasElement | null;
   assets: readonly AnnotationAssetContext[];
   meshes: readonly ViewerMesh[];
@@ -113,7 +132,15 @@ export function AnnotationWorkbench({
   const [jsonText, setJsonText] = useState("");
   const [storageReady, setStorageReady] = useState(false);
   const [storageBlocked, setStorageBlocked] = useState(false);
+  const [spatialLayer, setSpatialLayer] = useState<SpatialDraftLayer>(emptySpatialDraftLayer);
+  const [spatialContextRows, setSpatialContextRows] = useState<SpatialDraftRecord[]>([]);
+  const [spatialReady, setSpatialReady] = useState(false);
+  const [spatialBlocked, setSpatialBlocked] = useState(false);
+  const [spatialMessage, setSpatialMessage] = useState("분리된 공간자료 초안을 확인하고 있습니다.");
+  const [spatialJsonText, setSpatialJsonText] = useState("");
+  const legacyHydrationComplete = useRef(false);
   const drawRef = useRef<() => void>(() => undefined);
+  const spatialContext = useMemo(() => buildSpatialDraftContext(assets), [assets]);
 
   const selectedConcept = concepts.find((concept) => concept.id === selectedEntityId);
   const availableOwners = useMemo(() => {
@@ -126,24 +153,30 @@ export function AnnotationWorkbench({
   }, [concepts, selectedConcept?.entityType, selectedEntityId]);
 
   const attachmentOptions = useMemo<AttachmentOption[]>(() => {
-    if (!pickedMesh?.targetEntityId || pickedMesh.targetEntityType === "structure") return [];
+    if (!pickedMesh) return [];
     return attachments.flatMap((attachment) => {
       const ownerId = stringValue(attachment.muscleOrPartId);
       const id = stringValue(attachment.id);
       const descriptionClaimId = stringValue(attachment.descriptionClaimId);
-      if (!id || !ownerId || !descriptionClaimId || !availableOwners.has(ownerId) || ownerId !== pickedMesh.targetEntityId) return [];
+      if (!id || !ownerId || !descriptionClaimId || !availableOwners.has(ownerId)) return [];
+      const context = attachmentContextById.get(id);
+      const matchesMesh = context
+        ? context.contextMeshAssetId !== null && context.contextMeshAssetId === pickedMesh.meshAssetId
+        : ownerId === pickedMesh.targetEntityId;
+      if (!matchesMesh) return [];
       const claim = claims.find((row) => row.id === descriptionClaimId);
       if (!claim || claim.subjectId !== id || claim.reviewState !== "needs_review") return [];
       return [{
         id,
         descriptionClaimId,
         evidenceIds: listStrings(claim.evidenceIds),
+        allowedAssetIds: context?.contextMeshAssetId ? [context.contextMeshAssetId] : [pickedMesh.meshAssetId],
         ownerId,
         role: stringValue(attachment.role) ?? "attachment",
         summary: claimSummary(claim),
       }];
     });
-  }, [attachments, availableOwners, claims, pickedMesh]);
+  }, [attachments, availableOwners, claims, meshes, pickedMesh]);
 
   const allAttachmentContexts = useMemo<AnnotationAttachmentContext[]>(() => attachments.flatMap((attachment) => {
     const id = stringValue(attachment.id);
@@ -151,8 +184,12 @@ export function AnnotationWorkbench({
     const descriptionClaimId = stringValue(attachment.descriptionClaimId);
     const claim = descriptionClaimId ? claims.find((row) => row.id === descriptionClaimId) : undefined;
     if (!id || !ownerId || !descriptionClaimId || !claim || claim.subjectId !== id || claim.reviewState !== "needs_review") return [];
-    return [{ id, ownerId, descriptionClaimId, evidenceIds: listStrings(claim.evidenceIds) }];
-  }), [attachments, claims]);
+    const context = attachmentContextById.get(id);
+    return [{ id, ownerId, descriptionClaimId, evidenceIds: listStrings(claim.evidenceIds), allowedAssetIds: [
+      ...meshes.filter((mesh) => mesh.targetEntityType !== "structure" && mesh.targetEntityId === ownerId).map((mesh) => mesh.meshAssetId),
+      ...(context?.contextMeshAssetId ? [context.contextMeshAssetId] : []),
+    ] }];
+  }), [attachments, claims, meshes]);
 
   useEffect(() => {
     if (!assets.length || storageReady) return;
@@ -177,6 +214,10 @@ export function AnnotationWorkbench({
 
   useEffect(() => {
     if (!storageReady || storageBlocked) return;
+    if (!legacyHydrationComplete.current) {
+      legacyHydrationComplete.current = true;
+      return;
+    }
     try {
       localStorage.setItem(STORAGE_KEY, serializeAnnotationDraftExchange(drafts));
     } catch (error) {
@@ -185,8 +226,43 @@ export function AnnotationWorkbench({
     }
   }, [drafts, storageBlocked, storageReady]);
 
+  useEffect(() => {
+    if (!assets.length || spatialReady) return;
+    let active = true;
+    void (async () => {
+      try {
+        const raw = localStorage.getItem(SPATIAL_DRAFT_LAYER_STORAGE_KEY);
+        const loaded = raw === null ? emptySpatialDraftLayer() : await parseSpatialDraftLayerText(raw, spatialContext);
+        const contexts = await contextStatusRecords(spatialContext);
+        if (!active) return;
+        setSpatialLayer(loaded);
+        setSpatialContextRows(contexts);
+        setSpatialMessage(raw === null
+          ? "분리된 공간자료 저장소가 준비되었습니다. 기존 T09 초안은 자동 복사·수정하지 않았습니다."
+          : `${loaded.records.length}개 분리 공간자료를 참조·hash 검증했습니다. 기존 T09 초안은 별도 key에 보존됩니다.`);
+        setSpatialReady(true);
+      } catch (error) {
+        if (!active) return;
+        setSpatialBlocked(true);
+        setSpatialReady(true);
+        setSpatialMessage(`기존 공간자료 JSON을 보존했습니다. 검증 실패로 저장과 표시를 차단했습니다. ${error instanceof Error ? error.message : "검증 실패"}`);
+      }
+    })();
+    return () => { active = false; };
+  }, [assets, spatialContext, spatialReady]);
+
   const attachmentById = useMemo(() => new Map(attachmentOptions.map((row) => [row.id, row])), [attachmentOptions]);
   const activeAttachment = attachmentById.get(selectedAttachmentId);
+
+  async function persistSpatialLayer(next: SpatialDraftLayer): Promise<SpatialDraftLayer> {
+    const checked = await validateSpatialDraftLayer(next, spatialContext);
+    localStorage.setItem(SPATIAL_DRAFT_LAYER_STORAGE_KEY, serializeSpatialDraftLayer(checked));
+    setSpatialLayer(checked);
+    setSpatialBlocked(false);
+    setSpatialMessage(`${checked.records.length}개 분리 공간자료를 검증해 저장했습니다. 사람 검토 승격은 수행하지 않았습니다.`);
+    window.dispatchEvent(new Event("human-atlas:spatial-draft-layer-changed"));
+    return checked;
+  }
 
   const drawOverlay = useCallback(() => {
     if (!overlayCanvas || !viewer) return;
@@ -304,7 +380,7 @@ export function AnnotationWorkbench({
         setMessage("먼저 현재 mesh에 연결된 T05 기시·정지 설명을 선택하세요.");
         return;
       }
-      if (hit.mesh.meshAssetId !== pickedMesh.meshAssetId || hit.mesh.targetEntityId !== activeAttachment.ownerId) {
+      if (hit.mesh.meshAssetId !== pickedMesh.meshAssetId || !activeAttachment.allowedAssetIds?.includes(hit.mesh.meshAssetId)) {
         setMessage("선택한 초안의 mesh/attachment 대상과 다른 표면입니다. 이 클릭은 좌표에 추가하지 않았습니다.");
         return;
       }
@@ -342,16 +418,16 @@ export function AnnotationWorkbench({
   }, [attachmentOptions, selectedAttachmentId]);
 
   function beginNew(nextKind: GeometryKind) {
-    if (storageBlocked) {
-      setMessage("기존 저장 JSON을 보존하기 위해 쓰기를 막았습니다. 유효한 초안 JSON을 가져온 뒤 다시 시도하세요.");
+    if (storageBlocked || spatialBlocked || !spatialReady) {
+      setMessage("초안 저장소 또는 공간자료 계약을 확인할 수 없어 새 작성을 막았습니다. 저장값은 변경하지 않았습니다.");
       return;
     }
     if (!pickedMesh || !activeAttachment) {
-      setMessage("현재 선택한 근육/근두 mesh와 연결된 T05 부착 설명이 필요합니다.");
+      setMessage("현재 선택한 대상 뼈 mesh와 연결된 T05 부착 설명이 필요합니다. 대상 mesh가 없는 항목은 보류합니다.");
       return;
     }
     if (!assets.some((asset) => asset.assetId === pickedMesh.meshAssetId)) {
-      setMessage("선택 mesh의 T07 asset revision을 찾을 수 없습니다.");
+      setMessage("선택 mesh의 검증된 asset revision을 찾을 수 없습니다.");
       return;
     }
     setKind(nextKind);
@@ -361,7 +437,7 @@ export function AnnotationWorkbench({
     setMessage(`${geometryLabel(nextKind)} 입력 중입니다. 모델 표면을 클릭해 주세요. 초안은 저장될 때까지 목록에 반영되지 않습니다.`);
   }
 
-  function savePending() {
+  async function savePending() {
     if (!pending || !activeAttachment) return;
     const asset = assets.find((row) => row.assetId === pending.assetId);
     if (!asset) {
@@ -403,15 +479,29 @@ export function AnnotationWorkbench({
       reviewState: "draft",
       synthetic: false,
     };
-    setDrafts((rows) => {
-      const next = editingId ? rows.map((row) => row.id === editingId ? annotation : row) : [...rows, annotation];
-      const context = { assets, attachments: allAttachmentContexts, instanceIds: [] };
-      return validateAnnotationDraftExchange({ schemaVersion: "HA-annotation-draft-exchange-v1", syntheticFixture: false, annotations: next }, context).annotations;
-    });
-    setPending(null);
-    setEditingId(null);
-    setActiveKind(null);
-    setMessage("검토 전 로컬 초안을 저장했습니다. Canonical spatial annotation이나 해부학적으로 확정된 위치가 아닙니다.");
+    try {
+      const nextLegacy = editingId
+        ? drafts.map((row) => row.id === editingId ? annotation : row)
+        : [...drafts, annotation];
+      const legacyChecked = validateAnnotationDraftExchange(
+        { schemaVersion: "HA-annotation-draft-exchange-v1", syntheticFixture: false, annotations: nextLegacy },
+        { assets, attachments: allAttachmentContexts, instanceIds: [] },
+      );
+      const currentRecord = await makeDraftSurfaceRecord(annotation, spatialContext);
+      const nextSpatial = {
+        ...spatialLayer,
+        records: [...spatialLayer.records.filter((row) => row.id !== currentRecord.id), currentRecord],
+      };
+      await persistSpatialLayer(nextSpatial);
+      setDrafts(legacyChecked.annotations);
+      setPending(null);
+      setEditingId(null);
+      setActiveKind(null);
+      setMessage("검토 전 로컬 초안을 별도 공간자료 계층에 저장했습니다. 읽기 전용 학습 표시에서도 미검토 상태를 유지합니다.");
+    } catch (error) {
+      const detail = error instanceof SpatialDraftValidationError ? `${error.code}: ${error.message}` : error instanceof Error ? error.message : "저장 실패";
+      setMessage(`공간자료 검증을 통과하지 못해 저장하지 않았습니다. 기존 T09 초안과 분리 저장값은 유지했습니다. ${detail}`);
+    }
   }
 
   function cancelDrawing() {
@@ -441,10 +531,15 @@ export function AnnotationWorkbench({
     setMessage(`기존 ${geometryLabel(annotation.geometry.kind)}의 재입력 모드입니다. 클릭으로 새 geometry를 만들고 변경 저장하세요.`);
   }
 
-  function deleteDraft(id: string) {
-    setDrafts((rows) => rows.filter((row) => row.id !== id));
-    if (editingId === id) cancelDrawing();
-    setMessage("선택한 draft를 로컬 저장소와 목록에서 삭제했습니다.");
+  async function deleteDraft(id: string) {
+    try {
+      await persistSpatialLayer({ ...spatialLayer, records: spatialLayer.records.filter((row) => row.id !== id) });
+      setDrafts((rows) => rows.filter((row) => row.id !== id));
+      if (editingId === id) cancelDrawing();
+      setMessage("선택한 draft를 분리 저장소와 T09 로컬 목록에서 삭제했습니다.");
+    } catch (error) {
+      setMessage(`검증된 분리 저장을 유지하기 위해 삭제를 취소했습니다. ${error instanceof Error ? error.message : "저장 실패"}`);
+    }
   }
 
   function exportJson() {
@@ -463,9 +558,16 @@ export function AnnotationWorkbench({
     try {
       const parsed: unknown = JSON.parse(jsonText);
       const result = validateAnnotationDraftExchange(parsed, { assets, attachments: allAttachmentContexts, instanceIds: [] });
-      setDrafts(result.annotations);
+      const byId = new Map(drafts.map((row) => [row.id, row]));
+      for (const row of result.annotations) {
+        const current = byId.get(row.id);
+        if (current && JSON.stringify(current) !== JSON.stringify(row)) throw new Error(`ID ${row.id}가 기존 초안과 다릅니다. 기존 자료를 덮어쓰지 않았습니다.`);
+        byId.set(row.id, row);
+      }
+      legacyHydrationComplete.current = true;
+      setDrafts([...byId.values()]);
       setStorageBlocked(false);
-      setMessage(`${result.annotations.length}개 검증된 JSON draft를 불러왔습니다. 잘못된 입력은 저장값을 바꾸지 않습니다.`);
+      setMessage(`${result.annotations.length}개 검증된 JSON draft를 기존 목록과 합쳤습니다. 같은 ID의 다른 값은 덮어쓰지 않습니다.`);
     } catch (error) {
       const detail = error instanceof AnnotationValidationError ? `${error.code}: ${error.message}` : error instanceof Error ? error.message : "JSON을 읽지 못했습니다.";
       setMessage(`가져오기를 거부했습니다. 기존 저장 초안은 변경하지 않았습니다. ${detail}`);
@@ -477,6 +579,152 @@ export function AnnotationWorkbench({
     setMessage("현재 초안을 JSON text area에 준비했습니다. 가져오기 전 파일 내용을 확인하세요.");
   }
 
+  async function copyLegacyDraftsAsPending() {
+    try {
+      const currentIds = new Set(spatialLayer.records.map((row) => row.id));
+      const pendingRows = drafts.map(makePendingLegacyRecord).filter((row) => !currentIds.has(row.id));
+      const next = { ...spatialLayer, records: [...spatialLayer.records, ...pendingRows] };
+      await persistSpatialLayer(next);
+      setSpatialMessage(`${pendingRows.length}개 기존 T09 초안을 pending 복사했습니다. 원래 T09 저장값은 유지했습니다.`);
+    } catch (error) {
+      setSpatialMessage(`기존 초안 복사를 차단했습니다. ${error instanceof Error ? error.message : "변환 실패"}`);
+    }
+  }
+
+  async function importSpatialJson() {
+    try {
+      const incoming = await parseSpatialDraftLayerText(spatialJsonText, spatialContext);
+      const next = mergeSpatialDraftLayers(spatialLayer, incoming);
+      await persistSpatialLayer(next);
+      setSpatialJsonText(serializeSpatialDraftLayer(next));
+      setSpatialMessage(`${incoming.records.length}개 검증된 공간자료를 추가했습니다. 기존 ID 충돌은 거부합니다.`);
+    } catch (error) {
+      const detail = error instanceof SpatialDraftValidationError ? `${error.code}: ${error.message}` : error instanceof Error ? error.message : "JSON 검증 실패";
+      setSpatialMessage(`공간자료 가져오기를 거부했습니다. 기존 T09 초안과 분리 저장값은 바뀌지 않았습니다. ${detail}`);
+    }
+  }
+
+  function exportSpatialJson() {
+    const text = serializeSpatialDraftLayer(spatialLayer);
+    setSpatialJsonText(text);
+    const url = URL.createObjectURL(new Blob([text], { type: "application/json" }));
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "human-atlas-spatial-draft-layer.json";
+    link.click();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1_000);
+    setSpatialMessage(`${spatialLayer.records.length}개 분리 공간자료를 JSON으로 내보냈습니다.`);
+  }
+
+  async function buildSyntheticBrowserFixture(): Promise<SpatialDraftLayer> {
+    const source = spatialContext.t13Records.find((row) => row.contextMeshAssetId && row.contextStatus === "whole_bone_search_context_only");
+    if (!source) throw new Error("검증 전용으로 사용할 현재 mesh context가 없습니다.");
+    const asset = spatialContext.assets.find((row) => row.assetId === source.contextMeshAssetId);
+    const contextAttachment = spatialContext.attachments.find((row) => row.id === source.attachmentId);
+    if (!asset || !contextAttachment || asset.triangleCount < 1) throw new Error("fixture 참조 mesh/claim을 확인하지 못했습니다.");
+    const activeViewer = viewer;
+    const mesh = activeViewer?.getMesh(asset.assetId);
+    if (!activeViewer || !mesh) throw new Error("검증 전용 preview용 mesh가 아직 준비되지 않았습니다.");
+    let visibleTriangleId: number | null = null;
+    let largestProjectedArea = 0;
+    const triangleCount = Math.min(mesh.indices.length / 3, 50_000);
+    for (let triangleId = 0; triangleId < triangleCount; triangleId += 1) {
+      const base = triangleId * 3;
+      const projected = [0, 1, 2].map((corner) => {
+        const vertexId = mesh.indices[base + corner];
+        const offset = vertexId * 3;
+        return activeViewer.projectPoint([mesh.positions[offset], mesh.positions[offset + 1], mesh.positions[offset + 2]]);
+      });
+      if (projected.some((point) => !point.visible)) continue;
+      const [a, b, c] = projected;
+      const area = Math.abs((b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y)) / 2;
+      if (area > largestProjectedArea) {
+        largestProjectedArea = area;
+        visibleTriangleId = triangleId;
+      }
+    }
+    if (visibleTriangleId === null) throw new Error("현재 카메라에서 표시 가능한 합성 삼각형을 찾지 못했습니다.");
+    const record = await makeDraftSurfaceRecord({
+        id: "SYNTHETIC-T13B-BROWSER-ONLY",
+        attachmentId: source.attachmentId,
+        descriptionClaimId: source.descriptionClaimId,
+        instanceId: null,
+        side: source.side,
+        assetId: asset.assetId,
+        assetRevision: asset.assetRevision,
+        assetRevisionHash: asset.assetRevisionHash,
+        topologyHash: asset.topologyHash,
+        geometry: { kind: "surface_patch", triangleIds: [visibleTriangleId], topologyHash: asset.topologyHash },
+        frameId: asset.frameId,
+        units: "m",
+        poseId: asset.poseId,
+        precision: "approximate_extent",
+        method: "manual_mapping",
+        transformChain: [],
+        landmarkChecks: [],
+        evidenceIds: [...contextAttachment.evidenceIds],
+        reviewState: "draft",
+        synthetic: false,
+    }, spatialContext);
+    record.migrationSource = `synthetic_test_fixture_only_triangle_${visibleTriangleId}_not_an_attachment_claim`;
+    return {
+      schemaVersion: "HA-spatial-draft-layer-v1",
+      syntheticFixture: true,
+      sourceContextVersion: "T13-attachment-context-v2",
+      records: [record],
+    };
+  }
+
+  async function saveSyntheticBrowserPreview() {
+    try {
+      const fixture = await buildSyntheticBrowserFixture();
+      await saveSyntheticTestSpatialDraftLayer(localStorage, fixture, spatialContext);
+      setSpatialMessage("합성 표면 검증 fixture를 테스트 전용 저장소에 기록했습니다. 실제 부착면 자료에는 포함되지 않습니다.");
+      window.dispatchEvent(new Event("human-atlas:spatial-draft-layer-changed"));
+    } catch (error) {
+      setSpatialMessage(`테스트 전용 fixture 저장 실패: ${error instanceof Error ? error.message : "오류"}`);
+    }
+  }
+
+  async function runSpatialBrowserChecks() {
+    try {
+      const fixture = await buildSyntheticBrowserFixture();
+      const expectations: Array<[string, (row: SpatialDraftRecord) => void, string]> = [
+        ["source", (row) => { row.attachmentId = "UNKNOWN-ATTACHMENT"; }, "source_attachment_unknown"],
+        ["laterality", (row) => { row.side = "left"; }, "instance_side_mismatch"],
+        ["claim hash", (row) => { row.sourceClaimHash = "c".repeat(64); }, "source_claim_hash_mismatch"],
+        ["mesh", (row) => { row.assetId = "UNKNOWN-MESH"; }, "mesh_reference_invalid"],
+        ["asset hash", (row) => { row.assetRevisionHash = "c".repeat(64); }, "asset_revision_hash_mismatch"],
+      ];
+      const rejected: string[] = [];
+      for (const [label, mutate, expected] of expectations) {
+        const bad = structuredClone(fixture);
+        mutate(bad.records[0]);
+        try {
+          await validateSpatialDraftLayer(bad, spatialContext, { allowSyntheticFixture: true });
+        } catch (error) {
+          if (error instanceof SpatialDraftValidationError && error.code === expected) rejected.push(label);
+          else throw error;
+        }
+      }
+      const changedContext = {
+        ...spatialContext,
+        assets: spatialContext.assets.map((asset) => ({ ...asset, topologyHash: "d".repeat(64) })),
+      };
+      const stale = await validateSpatialDraftLayer(fixture, changedContext, { allowSyntheticFixture: true });
+      if (rejected.length !== expectations.length || stale.records[0].status !== "stale") throw new Error("negative test assertion failed");
+      setSpatialMessage(`실제 브라우저 검증 통과: 잘못된 ${rejected.join(", ")} 거부 · topology 변경 stale · 사람 승인 없음.`);
+    } catch (error) {
+      setSpatialMessage(`브라우저 공간자료 검증 실패: ${error instanceof Error ? error.message : "오류"}`);
+    }
+  }
+
+  function clearSyntheticBrowserPreview() {
+    localStorage.removeItem(SPATIAL_DRAFT_TEST_STORAGE_KEY);
+    window.dispatchEvent(new Event("human-atlas:spatial-draft-layer-changed"));
+    setSpatialMessage("테스트 전용 합성 preview 저장값만 지웠습니다. 사용자 초안 저장소에는 접근하지 않았습니다.");
+  }
+
   function annotationPreview(annotation: AnnotationDraft) {
     const source = attachments.find((row) => row.id === annotation.attachmentId);
     const claimId = source?.descriptionClaimId;
@@ -486,6 +734,17 @@ export function AnnotationWorkbench({
   }
 
   const pendingComplete = !!pending && (pending.kind === "point" ? pending.positions.length === 1 : pending.kind === "polyline" ? pending.positions.length >= 2 : pending.triangleIds.length > 0);
+  const contextCounts = spatialContextRows.reduce<Record<SpatialDraftStatus, number>>((counts, row) => {
+    counts[row.status] += 1;
+    return counts;
+  }, { pending: 0, context_only: 0, draft_surface: 0, reviewed: 0, stale: 0 });
+  const spatialStatusLabel: Record<SpatialDraftStatus, string> = {
+    pending: "pending · 연결/표적 대기",
+    context_only: "context_only · 관련 구조만 있음",
+    draft_surface: "draft_surface · 미검토 면/선/점",
+    reviewed: "reviewed · 유효한 사람 검토 기록",
+    stale: "stale · 자산 topology 변경",
+  };
 
   return (
     <section className="annotation-workbench" aria-labelledby="annotation-heading">
@@ -496,11 +755,11 @@ export function AnnotationWorkbench({
         </div>
         <span className="badge badge-review">draft · 미검토</span>
       </header>
-      <p className="annotation-warning">T05 원문 설명을 참조하는 로컬 제안만 저장합니다. 현재 catalog의 anatomical instances는 0개이므로 이 기록은 canonical SpatialAnnotation으로 승격할 수 없습니다. 좌표·mesh 연결은 anatomy review가 아닙니다.</p>
+      <p className="annotation-warning">T05 원문 설명을 참조하는 로컬 제안만 저장합니다. 뼈 전체 표시는 부착 범위를 뜻하지 않습니다. 초안은 instanceId가 없으며 canonical SpatialAnnotation이나 해부학 검토 결과로 승격되지 않습니다.</p>
       <div className="annotation-link-row">
         <label htmlFor="annotation-attachment">연결할 T05 부착 설명</label>
         <select id="annotation-attachment" value={selectedAttachmentId} onChange={(event) => setSelectedAttachmentId(event.currentTarget.value)} disabled={attachmentOptions.length === 0 || activeKind !== null}>
-          {attachmentOptions.length === 0 && <option value="">현재 mesh와 일치하는 source 설명 없음</option>}
+          {attachmentOptions.length === 0 && <option value="">대상 뼈 mesh와 연결된 부착 설명 없음 · 입력 보류</option>}
           {attachmentOptions.map((option) => (
             <option key={option.id} value={option.id}>{roleLabel(option.role)} · {option.summary} · {option.id}</option>
           ))}
@@ -518,8 +777,8 @@ export function AnnotationWorkbench({
           <option value="polyline">선</option>
           <option value="surface_patch">면 패치</option>
         </select>
-        <button type="button" onClick={() => beginNew(kind)} disabled={activeKind !== null || !pickedMesh || !activeAttachment || storageBlocked}>새 {geometryLabel(kind)} 입력</button>
-        {activeKind && <button type="button" onClick={savePending} disabled={!pendingComplete}>{editingId ? "변경 저장" : "초안 저장"}</button>}
+        <button type="button" onClick={() => beginNew(kind)} disabled={activeKind !== null || !pickedMesh || !activeAttachment || storageBlocked || spatialBlocked || !spatialReady}>새 {geometryLabel(kind)} 입력</button>
+        {activeKind && <button type="button" onClick={savePending} disabled={!pendingComplete || spatialBlocked || !spatialReady}>{editingId ? "변경 저장" : "초안 저장"}</button>}
         {activeKind && <button type="button" onClick={cancelDrawing}>취소</button>}
       </div>
       <p className="annotation-message" role="status" aria-live="polite" data-testid="annotation-message">{message}</p>
@@ -538,12 +797,55 @@ export function AnnotationWorkbench({
               </div>
               <div className="annotation-row-actions">
                 <button type="button" onClick={() => beginEdit(draft)} disabled={stale || storageBlocked}>편집</button>
-                <button type="button" onClick={() => deleteDraft(draft.id)} disabled={storageBlocked}>삭제</button>
+                <button type="button" onClick={() => deleteDraft(draft.id)} disabled={storageBlocked || spatialBlocked || !spatialReady}>삭제</button>
               </div>
             </article>
           );
         })}
       </div>
+      <section className="spatial-draft-layer" aria-labelledby="spatial-draft-layer-heading" data-testid="spatial-draft-layer">
+        <div className="section-heading">
+          <div><p className="eyebrow">DRAFT SPATIAL LAYER</p><h4 id="spatial-draft-layer-heading">분리된 공간자료 초안</h4></div>
+          <span className="badge badge-review">{spatialLayer.records.length}개 저장</span>
+        </div>
+        <p className="annotation-warning">T03 SpatialAnnotation과 별도인 검토 전 계층입니다. 기존 T13 context-only manifest를 그대로 읽으며, 표면 좌표나 사람 승인으로 해석하지 않습니다.</p>
+        <p className="annotation-message" role="status" aria-live="polite" data-testid="spatial-draft-message">{spatialMessage}</p>
+        <div className="spatial-state-summary" aria-label="T13 공간 상태 요약">
+          <span>context_only {contextCounts.context_only}</span>
+          <span>pending {contextCounts.pending}</span>
+          <span>draft_surface {spatialLayer.records.filter((row) => row.status === "draft_surface").length}</span>
+          <span>reviewed {spatialLayer.records.filter((row) => row.status === "reviewed").length}</span>
+          <span>stale {spatialLayer.records.filter((row) => row.status === "stale").length}</span>
+        </div>
+        {drafts.length > 0 && <button type="button" onClick={copyLegacyDraftsAsPending} disabled={spatialBlocked || !spatialReady}>
+          기존 T09 초안을 pending으로 비파괴 복사
+        </button>}
+        {spatialLayer.records.length === 0
+          ? <p className="empty-note">저장된 표면 초안이 없습니다. 기존 context-only 자료는 별도 상태로 유지됩니다.</p>
+          : <div className="spatial-draft-list" role="list" aria-label="분리된 공간자료 상태">
+            {spatialLayer.records.map((row) => <div className={`spatial-draft-row state-${row.status}`} key={row.id} role="listitem" data-spatial-draft-id={row.id}>
+              <strong>{spatialStatusLabel[row.status]}</strong>
+              <span>{row.geometry?.kind ?? "geometry 없음"} · {row.side} · {row.assetId ?? "mesh 대기"}</span>
+              {row.staleReason && <small>{row.staleReason}</small>}
+              {row.status === "reviewed" && <small>검토 record {row.reviewId}</small>}
+            </div>)}
+          </div>}
+        <div className="annotation-json-actions">
+          <button type="button" onClick={exportSpatialJson} disabled={spatialBlocked || !spatialReady}>공간자료 JSON 내보내기</button>
+          <button type="button" onClick={() => setSpatialJsonText(serializeSpatialDraftLayer(spatialLayer))} disabled={spatialBlocked || !spatialReady}>저장 JSON 준비</button>
+          <button type="button" onClick={importSpatialJson} disabled={spatialBlocked || !spatialReady}>공간자료 JSON 가져오기 · 검증</button>
+        </div>
+        {import.meta.env.DEV && <div className="spatial-test-tools" aria-label="격리된 합성 검증 도구">
+          <strong>격리된 합성 browser 검증</strong>
+          <button type="button" onClick={saveSyntheticBrowserPreview} disabled={!spatialReady}>테스트 표면 fixture 저장</button>
+          <button type="button" onClick={runSpatialBrowserChecks} disabled={!spatialReady}>브라우저 참조/hash/stale 검사</button>
+          <a href="/?__t13bTestOverlay=1&muscle=HA-M-000001" target="_blank" rel="noreferrer">읽기 전용 learner test preview 열기</a>
+          <button type="button" onClick={clearSyntheticBrowserPreview}>테스트 fixture 저장값 지우기</button>
+          <small>이 fixture는 합성 표시 점검용이며 일반 learner route와 production layer에서 읽지 않습니다.</small>
+        </div>}
+        <label className="annotation-json-label" htmlFor="spatial-draft-json">분리 공간자료 교환</label>
+        <textarea id="spatial-draft-json" aria-label="분리 공간자료 JSON" value={spatialJsonText} onChange={(event) => setSpatialJsonText(event.currentTarget.value)} spellCheck={false} />
+      </section>
       <div className="annotation-json-actions">
         <button type="button" onClick={exportJson}>JSON 내보내기</button>
         <button type="button" onClick={downloadStoredJson}>JSON text 준비</button>

@@ -52,6 +52,7 @@ export interface AnnotationAttachmentContext {
   ownerId: string;
   descriptionClaimId: string;
   evidenceIds: string[];
+  allowedAssetIds?: string[];
 }
 
 export interface AnnotationValidationContext {
@@ -187,10 +188,14 @@ export function validateAnnotationDraftExchange(
       if (row.attachmentId === null || row.descriptionClaimId === null) fail("source_attachment_required", `draft ${row.id} must link an existing T05 attachment and description claim.`);
       const attachment = attachments.get(row.attachmentId as string);
       if (!attachment || attachment.descriptionClaimId !== row.descriptionClaimId) fail("attachment_claim_mismatch", `draft ${row.id} does not resolve to the selected T05 attachment/claim pair.`);
-      if (!asset.targetEntityId || attachment.ownerId !== asset.targetEntityId) fail("attachment_asset_target_mismatch", `draft ${row.id} attachment owner does not match a known T07 mesh target.`);
+      if (attachment.allowedAssetIds) {
+        if (!attachment.allowedAssetIds.includes(asset.assetId)) fail("attachment_asset_target_mismatch", `draft ${row.id} asset is not a recorded muscle or target-bone review context for its attachment.`);
+      } else if (!asset.targetEntityId || attachment.ownerId !== asset.targetEntityId) {
+        fail("attachment_asset_target_mismatch", `draft ${row.id} attachment owner does not match a known mesh target.`);
+      }
       if (row.evidenceIds.some((id) => !attachment.evidenceIds.includes(id))) fail("annotation_evidence_mismatch", `draft ${row.id} includes evidence not linked to its T05 attachment claim.`);
       if (row.instanceId === null) {
-        // Current T05 data has no AnatomicalInstance rows; this explicit draft is not a canonical SpatialAnnotation.
+        // An instance-less local draft remains distinct from canonical SpatialAnnotation even after T12b added instances.
       } else if (!instanceIds.has(row.instanceId)) {
         fail("instance_unknown", `instance ${row.instanceId} is not in the current catalog.`);
       }
