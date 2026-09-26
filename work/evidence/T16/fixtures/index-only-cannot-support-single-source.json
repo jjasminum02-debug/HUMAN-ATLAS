@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "1.0.0",
+  "revision": "T16-test-fixture-index-only",
+  "denominatorFrozen": false,
+  "wholeBodyIndividualMuscleCount": null,
+  "coveragePercent": null,
+  "items": [
+    {
+      "id": "TEST-FIELD-SAME-WORK-SINGLE",
+      "subjectId": "HA-M-000001",
+      "field": "origin",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "TEST-CLAIM-A",
+          "value": "Synthetic value",
+          "valueHash": "3e9e6827950ab078b9ea8784f285561c76a68c3c86befbd570fe324f953a8386",
+          "evidenceIds": [
+            "TEST-EVIDENCE-A",
+            "TEST-EVIDENCE-B"
+          ],
+          "attribution": "ai_structured"
+        }
+      ],
+      "sources": [
+        {
+          "id": "SITE-A",
+          "underlyingWorkId": "WORK-ONE",
+          "title": "Synthetic source SITE-A",
+          "url": "https://example.invalid/site-a",
+          "editionStatus": "verified",
+          "edition": "Synthetic test fixture v1",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "search_index",
+          "textAccess": "index_only",
+          "fixtureOnly": true,
+          "sourceHash": "65277a7c1ccc6607b77f39a2286d63f975fb2b4e8a237bfbcd0c68627f1c0627"
+        },
+        {
+          "id": "SITE-B",
+          "underlyingWorkId": "WORK-ONE",
+          "title": "Synthetic source SITE-B",
+          "url": "https://example.invalid/site-b",
+          "editionStatus": "verified",
+          "edition": "Synthetic test fixture v1",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "search_index",
+          "textAccess": "index_only",
+          "fixtureOnly": true,
+          "sourceHash": "b283e6bd2fe18ab46eab8d7eeadc0e617800e554ed24810ad9273d3a56ef5588"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "TEST-EVIDENCE-A",
+          "sourceId": "SITE-A",
+          "locator": "Fixture-only site A cites WORK-ONE, chapter 2",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "search_index",
+          "textAccess": "index_only",
+          "excerptHash": null,
+          "supportsClaimIds": [
+            "TEST-CLAIM-A"
+          ],
+          "evidenceHash": "b360eb45549421ed41725b9f3067d51bdd01faa71f1bc3f32d2d9ebf89611870"
+        },
+        {
+          "id": "TEST-EVIDENCE-B",
+          "sourceId": "SITE-B",
+          "locator": "Fixture-only site B repeats citation to WORK-ONE, chapter 2",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "search_index",
+          "textAccess": "index_only",
+          "excerptHash": null,
+          "supportsClaimIds": [
+            "TEST-CLAIM-A"
+          ],
+          "evidenceHash": "f744704e788239df4b82c9e5ef73d52133b064a22029d1cce2f3275446ff929b"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "absent"
+    }
+  ]
+}

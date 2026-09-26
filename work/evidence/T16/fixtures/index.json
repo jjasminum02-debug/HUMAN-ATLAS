@@ -1,0 +1,41 @@
+{
+  "purpose": "synthetic contract fixtures only; never learner content or anatomical evidence",
+  "fixtures": [
+    {
+      "path": "work/evidence/T16/fixtures/same-work-two-sites-single-source.json",
+      "valid": true
+    },
+    {
+      "path": "work/evidence/T16/fixtures/same-work-two-sites-false-cross-check.json",
+      "valid": false,
+      "expectedIssue": "cross_checked_not_independent"
+    },
+    {
+      "path": "work/evidence/T16/fixtures/independent-cross-check.json",
+      "valid": true
+    },
+    {
+      "path": "work/evidence/T16/fixtures/conflicted-field.json",
+      "valid": true
+    },
+    {
+      "path": "work/evidence/T16/fixtures/orthogonal-evidence-geometry-motion.json",
+      "valid": true
+    },
+    {
+      "path": "work/evidence/T16/fixtures/invalid-refs-and-hashes.json",
+      "valid": false,
+      "expectedIssue": "claim_hash_mismatch"
+    },
+    {
+      "path": "work/evidence/T16/fixtures/cross-check-cannot-set-review.json",
+      "valid": false,
+      "expectedIssue": "schema_additional_property"
+    },
+    {
+      "path": "work/evidence/T16/fixtures/index-only-cannot-support-single-source.json",
+      "valid": false,
+      "expectedIssue": "single_source_text_not_opened"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "task": "T16",
+  "passed": true,
+  "checks": [
+    {
+      "command": "pnpm --dir atlas-web test:ai-evidence",
+      "result": "passed",
+      "evidence": "work/evidence/T16/test-ai-evidence.log",
+      "summary": "7 Node adapter tests passed; 8 positive/negative Python contract fixtures passed, including rejection of index-only support; the test-only legacy migration preview checked 14 rows while production remained empty."
+    },
+    {
+      "command": "pnpm --dir atlas-web test:attachment-crosschecks",
+      "result": "passed",
+      "evidence": "work/evidence/T16/test-attachment-crosschecks.log",
+      "summary": "2 source-linked comparison regression tests passed."
+    },
+    {
+      "command": "pnpm --dir atlas-web typecheck",
+      "result": "passed",
+      "evidence": "work/evidence/T16/typecheck.log"
+    },
+    {
+      "command": "pnpm --dir atlas-web validate:learning",
+      "result": "passed",
+      "evidence": "work/evidence/T16/validate-learning.log",
+      "summary": "81 name entries and 14 summary rows; content validation is not anatomy approval."
+    },
+    {
+      "command": "python3 atlas-data/schemas/validate_ai_evidence.py --check",
+      "result": "passed",
+      "evidence": "work/evidence/T16/production-overlay-validation.json",
+      "summary": "0 production field items; 14 legacy migration-preview rows validated in memory with no issues."
+    },
+    {
+      "command": "python3 atlas-data/schemas/validate_ai_evidence.py --fixtures",
+      "result": "passed",
+      "evidence": "work/evidence/T16/fixture-validation.json",
+      "summary": "8 contract fixtures passed, including same-work URLs, index-only rejection, independent works, conflict, orthogonal geometry/motion, stale references/hashes, and attempted AI human-review promotion."
+    },
+    {
+      "command": "python3 atlas-data/schemas/validate.py --check-schemas",
+      "result": "passed",
+      "evidence": "work/evidence/T16/t03-schema-validation.log"
+    },
+    {
+      "command": "python3 atlas-data/schemas/validate.py --dataset atlas-data/catalog/canonical-catalog.json",
+      "result": "passed",
+      "evidence": "work/evidence/T16/canonical-dataset-validation.log"
+    },
+    {
+      "command": "pnpm --dir atlas-web build",
+      "result": "passed_with_existing_chunk_warning",
+      "evidence": "work/evidence/T16/build.log",
+      "summary": "Validation, scene decoder QA, TypeScript build, and Vite production build passed; the App chunk remains above 500 kB."
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed",
+      "evidence": "work/evidence/T16/git-diff-check.log"
+    },
+    {
+      "command": "python3 work/evidence/T16/check_preservation.py",
+      "result": "passed",
+      "evidence": "work/evidence/T16/preservation-after.json"
+    },
+    {
+      "command": "actual local learner-browser inspection",
+      "result": "passed",
+      "evidence": "work/evidence/T16/browser-validation.json"
+    }
+  ],
+  "knownWarnings": [
+    "Existing Vite production App chunk size exceeds 500 kB."
+  ]
+}

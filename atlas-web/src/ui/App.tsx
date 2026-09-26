@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { loadPilotCatalog, linkedEvidence, recordLabel, sourceForEvidence, type PilotCatalog } from '../data/catalog';
-import { findMuscles, learningConcepts, nameFor, nameSources, structureSummary } from '../data/learning';
+import { findMuscles, learningConcepts, nameFor, nameSources, structureFieldForLearner } from '../data/learning';
 import { attachmentCrosscheckFor } from '../domain/attachmentCrosschecks';
 import { GLBViewer } from '../viewer/GLBViewer';
 import { sceneRevision } from '../viewer/scenePlan';
@@ -323,7 +323,20 @@ export default function App() {
                 {parts.length > 0 && <div className="part-pills" aria-label="근육 부분"><button aria-pressed={selectedId === parentId} onClick={() => chooseEntity(parentId!)}>전체</button>{parts.map((part) => <button key={part.id} aria-pressed={part.id === selectedId} onClick={() => chooseEntity(part.id)}>{nameFor(catalog, part.id).label.split(' · ').at(-1)}</button>)}</div>}
                 {(['origin','insertion'] as const).map((role) => <section className="attachment-section attachment-summary-block" key={role}>
                   <h3><i className={role}/>{role === 'origin' ? '기시' : '정지'}<span>{role === 'origin' ? 'ORIGIN' : 'INSERTION'}</span></h3>
-                  {structureSummary(selectedId!, role) ? <p>{structureSummary(selectedId!, role)}</p> : <p className="quiet-note">이 근육의 {role === 'origin' ? '기시' : '정지'} 설명은 준비 중입니다.</p>}
+                  {(() => {
+                    const fieldView = structureFieldForLearner(selectedId!, role);
+                    if (!fieldView) return <p className="quiet-note">이 근육의 {role === 'origin' ? '기시' : '정지'} 설명은 준비 중입니다.</p>;
+                    return <>
+                      {fieldView.text && <p>{fieldView.text}</p>}
+                      {fieldView.note && <p className="quiet-note">{fieldView.note}</p>}
+                      {fieldView.alternatives.length > 0 && <ul className="field-evidence-alternatives">{fieldView.alternatives.map((alternative, index) => <li key={`${role}-alternative-${index}`}><p>{alternative.text}</p></li>)}</ul>}
+                      {fieldView.sources.length > 0 && <details className="field-evidence-sources"><summary>이 문장의 근거</summary><ul>{fieldView.sources.map((source, index) => <li key={`${source.url}-${source.locator}-${index}`}>
+                        <a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a>
+                        {source.edition && <small>{source.edition}</small>}
+                        <small>{source.locator}</small>
+                      </li>)}</ul></details>}
+                    </>;
+                  })()}
                   {attachmentCrosscheckFor(selectedId!, role) && <details className="attachment-crosscheck">
                     <summary>현대 연구와 비교하기</summary>
                     <p>{attachmentCrosscheckFor(selectedId!, role)!.item.comparison}</p>

@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0.0",
+  "revision": "T16-test-fixture-only",
+  "denominatorFrozen": false,
+  "wholeBodyIndividualMuscleCount": null,
+  "coveragePercent": null,
+  "items": [
+    {
+      "id": "TEST-FIELD-GEOMETRY-ONLY",
+      "subjectId": "HA-M-000001",
+      "field": "origin",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "TEST-CLAIM-E",
+          "value": "Synthetic bounded statement",
+          "valueHash": "608d3ece2902081491a29a7224d680b520dd2a07f23cab5f6ef4b89ab8c6193a",
+          "evidenceIds": [
+            "TEST-EVIDENCE-G"
+          ],
+          "attribution": "ai_structured"
+        }
+      ],
+      "sources": [
+        {
+          "id": "SITE-G",
+          "underlyingWorkId": "WORK-SIX",
+          "title": "Synthetic source SITE-G",
+          "url": "https://example.invalid/site-g",
+          "editionStatus": "verified",
+          "edition": "Synthetic test fixture v1",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "publisher_full_text",
+          "textAccess": "full_text_opened",
+          "fixtureOnly": true,
+          "sourceHash": "f2b278ed4f399b927bd21268d8ad98a56a1de448b44ac6954092b7b6a0bf5017"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "TEST-EVIDENCE-G",
+          "sourceId": "SITE-G",
+          "locator": "Fixture-only locator: synthetic field row 1",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "publisher_full_text",
+          "textAccess": "full_text_opened",
+          "excerptHash": null,
+          "supportsClaimIds": [
+            "TEST-CLAIM-E"
+          ],
+          "evidenceHash": "3b40576b20bb3a304a64cfe0233280d4149de91b44677a3467683cd7792b7e9b"
+        }
+      ],
+      "geometryState": "context",
+      "motionState": "absent"
+    },
+    {
+      "id": "TEST-FIELD-MOTION-WITHOUT-CLAIM",
+      "subjectId": "HA-M-000001",
+      "field": "insertion",
+      "evidenceState": "unavailable",
+      "claims": [],
+      "sources": [
+        {
+          "id": "SITE-H",
+          "underlyingWorkId": "WORK-SEVEN",
+          "title": "Synthetic source SITE-H",
+          "url": "https://example.invalid/site-h",
+          "editionStatus": "verified",
+          "edition": "Synthetic test fixture v1",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "synthetic_fixture",
+          "textAccess": "fixture_only",
+          "fixtureOnly": true,
+          "sourceHash": "539a274d4c7d3f9fdbb9f8cf2946b1bb1f724a964e2240902b86f5c05215a870"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "TEST-EVIDENCE-H",
+          "sourceId": "SITE-H",
+          "locator": "Fixture-only locator: synthetic field row 1",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "synthetic_fixture",
+          "textAccess": "fixture_only",
+          "excerptHash": null,
+          "supportsClaimIds": [],
+          "evidenceHash": "fc0dbb10bcdb2471ab7e044eec864d68452c9d8a28216227452dddee5d91e8d0"
+        }
+      ],
+      "geometryState": "illustrative",
+      "motionState": "clip_draft",
+      "unavailableReason": "Synthetic fixture records a missing field source."
+    }
+  ]
+}

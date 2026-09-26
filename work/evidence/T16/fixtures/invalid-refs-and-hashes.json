@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0.0",
+  "revision": "T16-test-fixture-only",
+  "denominatorFrozen": false,
+  "wholeBodyIndividualMuscleCount": null,
+  "coveragePercent": null,
+  "items": [
+    {
+      "id": "TEST-FIELD-BAD",
+      "subjectId": "HA-M-000001",
+      "field": "origin",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "TEST-CLAIM-BAD",
+          "value": "Synthetic stale value",
+          "valueHash": "1111111111111111111111111111111111111111111111111111111111111111",
+          "evidenceIds": [
+            "MISSING-EVIDENCE"
+          ],
+          "attribution": "ai_structured"
+        }
+      ],
+      "sources": [
+        {
+          "id": "SITE-I",
+          "underlyingWorkId": "WORK-EIGHT",
+          "title": "Synthetic source SITE-I",
+          "url": "https://example.invalid/site-i",
+          "editionStatus": "verified",
+          "edition": "Synthetic test fixture v1",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "synthetic_fixture",
+          "textAccess": "fixture_only",
+          "fixtureOnly": true,
+          "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "TEST-EVIDENCE-BAD",
+          "sourceId": "MISSING-SOURCE",
+          "locator": "Fixture-only locator: synthetic field row 1",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "synthetic_fixture",
+          "textAccess": "fixture_only",
+          "excerptHash": null,
+          "supportsClaimIds": [
+            "TEST-CLAIM-BAD"
+          ],
+          "evidenceHash": "2222222222222222222222222222222222222222222222222222222222222222"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "absent"
+    }
+  ]
+}

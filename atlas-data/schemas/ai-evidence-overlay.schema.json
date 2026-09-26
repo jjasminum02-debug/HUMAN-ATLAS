@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://human-atlas.local/schemas/ai-evidence-overlay.schema.json",
+  "title": "HUMAN ATLAS field-level AI evidence overlay",
+  "description": "A provenance-bound learning evidence layer. It does not contain human approval, clinical eligibility, or canonical review state.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "revision",
+    "denominatorFrozen",
+    "wholeBodyIndividualMuscleCount",
+    "coveragePercent",
+    "items"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "revision": { "$ref": "#/$defs/NonEmptyString" },
+    "denominatorFrozen": { "type": "boolean" },
+    "wholeBodyIndividualMuscleCount": { "type": ["integer", "null"], "minimum": 0 },
+    "coveragePercent": { "type": ["number", "null"], "minimum": 0, "maximum": 100 },
+    "items": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/FieldEvidence" },
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "Id": { "type": "string", "minLength": 1, "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$" },
+    "NonEmptyString": { "type": "string", "minLength": 1 },
+    "Sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "EvidenceState": {
+      "type": "string",
+      "enum": ["unresearched", "single_source", "cross_checked", "conflicted", "unavailable"]
+    },
+    "GeometryState": {
+      "type": "string",
+      "enum": ["absent", "context", "illustrative", "model_validated"]
+    },
+    "MotionState": {
+      "type": "string",
+      "enum": ["absent", "text_ready", "clip_draft", "educational_ready"]
+    },
+    "ReviewState": {
+      "type": "string",
+      "enum": ["draft", "needs_review", "reviewed", "held", "stale"]
+    },
+    "SourceRecord": {
+      "type": "object",
+      "required": [
+        "id", "underlyingWorkId", "title", "url", "editionStatus", "edition",
+        "accessedOn", "accessMethod", "textAccess", "sourceHash"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/Id" },
+        "underlyingWorkId": { "$ref": "#/$defs/Id" },
+        "title": { "$ref": "#/$defs/NonEmptyString" },
+        "url": { "type": "string", "minLength": 1, "pattern": "^(https?://|local://)" },
+        "editionStatus": { "type": "string", "enum": ["verified", "not_exposed", "unknown"] },
+        "edition": { "type": ["string", "null"] },
+        "accessedOn": { "type": "string", "format": "date" },
+        "accessMethod": {
+          "type": "string",
+          "enum": ["publisher_full_text", "repository_full_text", "secondary_full_text", "abstract", "metadata", "search_index", "legacy_record", "synthetic_fixture"]
+        },
+        "textAccess": {
+          "type": "string",
+          "enum": ["full_text_opened", "partial_text_opened", "abstract_only", "metadata_only", "index_only", "legacy_record", "fixture_only", "unavailable"]
+        },
+        "sourceHash": { "$ref": "#/$defs/Sha256" },
+        "fixtureOnly": { "type": "boolean" }
+      }
+    },
+    "EvidenceRecord": {
+      "type": "object",
+      "required": [
+        "id", "sourceId", "locator", "accessedOn", "accessMethod", "textAccess",
+        "supportsClaimIds", "evidenceHash"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/Id" },
+        "sourceId": { "$ref": "#/$defs/Id" },
+        "locator": { "$ref": "#/$defs/NonEmptyString" },
+        "accessedOn": { "type": "string", "format": "date" },
+        "accessMethod": {
+          "type": "string",
+          "enum": ["publisher_full_text", "repository_full_text", "secondary_full_text", "abstract", "metadata", "search_index", "legacy_record", "synthetic_fixture"]
+        },
+        "textAccess": {
+          "type": "string",
+          "enum": ["full_text_opened", "partial_text_opened", "abstract_only", "metadata_only", "index_only", "legacy_record", "fixture_only", "unavailable"]
+        },
+        "excerptHash": { "oneOf": [{ "$ref": "#/$defs/Sha256" }, { "type": "null" }] },
+        "supportsClaimIds": { "type": "array", "items": { "$ref": "#/$defs/Id" }, "uniqueItems": true },
+        "evidenceHash": { "$ref": "#/$defs/Sha256" }
+      }
+    },
+    "FieldClaim": {
+      "type": "object",
+      "required": ["id", "value", "valueHash", "evidenceIds", "attribution"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/Id" },
+        "value": {},
+        "valueHash": { "$ref": "#/$defs/Sha256" },
+        "evidenceIds": { "type": "array", "items": { "$ref": "#/$defs/Id" }, "uniqueItems": true },
+        "attribution": {
+          "type": "string",
+          "enum": ["ai_structured", "ai_source_summary", "source_paraphrase", "source_quote", "legacy_summary_migration"]
+        }
+      }
+    },
+    "LegacyReviewState": {
+      "type": "object",
+      "required": ["claimId", "reviewState"],
+      "additionalProperties": false,
+      "properties": {
+        "claimId": { "$ref": "#/$defs/Id" },
+        "reviewState": { "$ref": "#/$defs/ReviewState" }
+      }
+    },
+    "LegacyBinding": {
+      "type": "object",
+      "required": [
+        "summaryKey", "summaryHash", "sourceClaimIds", "sourceClaimHash",
+        "summaryHumanReviewed", "claimReviewStates", "humanReviewRecordIds"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "summaryKey": { "$ref": "#/$defs/NonEmptyString" },
+        "summaryHash": { "$ref": "#/$defs/Sha256" },
+        "sourceClaimIds": { "type": "array", "items": { "$ref": "#/$defs/Id" }, "minItems": 1, "uniqueItems": true },
+        "sourceClaimHash": { "$ref": "#/$defs/Sha256" },
+        "summaryHumanReviewed": { "type": "boolean" },
+        "claimReviewStates": { "type": "array", "items": { "$ref": "#/$defs/LegacyReviewState" }, "minItems": 1, "uniqueItems": true },
+        "humanReviewRecordIds": { "type": "array", "items": { "$ref": "#/$defs/Id" }, "uniqueItems": true }
+      }
+    },
+    "FieldEvidence": {
+      "type": "object",
+      "required": [
+        "id", "subjectId", "field", "evidenceState", "claims", "sources", "evidence",
+        "geometryState", "motionState"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/Id" },
+        "subjectId": { "$ref": "#/$defs/Id" },
+        "field": { "$ref": "#/$defs/NonEmptyString" },
+        "evidenceState": { "$ref": "#/$defs/EvidenceState" },
+        "claims": { "type": "array", "items": { "$ref": "#/$defs/FieldClaim" }, "uniqueItems": true },
+        "sources": { "type": "array", "items": { "$ref": "#/$defs/SourceRecord" }, "uniqueItems": true },
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/EvidenceRecord" }, "uniqueItems": true },
+        "unavailableReason": { "$ref": "#/$defs/NonEmptyString" },
+        "geometryState": { "$ref": "#/$defs/GeometryState" },
+        "motionState": { "$ref": "#/$defs/MotionState" },
+        "legacyBinding": { "$ref": "#/$defs/LegacyBinding" }
+      }
+    }
+  }
+}

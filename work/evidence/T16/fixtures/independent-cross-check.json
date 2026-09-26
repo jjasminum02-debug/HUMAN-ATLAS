@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "1.0.0",
+  "revision": "T16-test-fixture-only",
+  "denominatorFrozen": false,
+  "wholeBodyIndividualMuscleCount": null,
+  "coveragePercent": null,
+  "items": [
+    {
+      "id": "TEST-FIELD-INDEPENDENT",
+      "subjectId": "HA-M-000001",
+      "field": "origin",
+      "evidenceState": "cross_checked",
+      "claims": [
+        {
+          "id": "TEST-CLAIM-B",
+          "value": "Synthetic agreement",
+          "valueHash": "05461d618b2e8509dd835fa88503b493bb191ad36e0d763b55d12e05bc30f5a8",
+          "evidenceIds": [
+            "TEST-EVIDENCE-C",
+            "TEST-EVIDENCE-D"
+          ],
+          "attribution": "ai_structured"
+        }
+      ],
+      "sources": [
+        {
+          "id": "SITE-C",
+          "underlyingWorkId": "WORK-TWO",
+          "title": "Synthetic source SITE-C",
+          "url": "https://example.invalid/site-c",
+          "editionStatus": "verified",
+          "edition": "Synthetic test fixture v1",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "publisher_full_text",
+          "textAccess": "full_text_opened",
+          "fixtureOnly": true,
+          "sourceHash": "3e1249aed170f0b2bff02f5742b1982f6c41040be11dc31b183f4e1c5dce6e93"
+        },
+        {
+          "id": "SITE-D",
+          "underlyingWorkId": "WORK-THREE",
+          "title": "Synthetic source SITE-D",
+          "url": "https://example.invalid/site-d",
+          "editionStatus": "verified",
+          "edition": "Synthetic test fixture v1",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "publisher_full_text",
+          "textAccess": "full_text_opened",
+          "fixtureOnly": true,
+          "sourceHash": "a5ad20553081900bed9facff9c4dc66993829891c9ba0dcffd1229f7a0a845f8"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "TEST-EVIDENCE-C",
+          "sourceId": "SITE-C",
+          "locator": "Fixture-only site C opened work two, page 4",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "publisher_full_text",
+          "textAccess": "full_text_opened",
+          "excerptHash": null,
+          "supportsClaimIds": [
+            "TEST-CLAIM-B"
+          ],
+          "evidenceHash": "8beff84f9a20be3d345b628d96e935d24c21350f74fb1281c83f0478ac328c5a"
+        },
+        {
+          "id": "TEST-EVIDENCE-D",
+          "sourceId": "SITE-D",
+          "locator": "Fixture-only site D opened work three, table 1",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "publisher_full_text",
+          "textAccess": "full_text_opened",
+          "excerptHash": null,
+          "supportsClaimIds": [
+            "TEST-CLAIM-B"
+          ],
+          "evidenceHash": "4f09d3daf53ca4918e92a231cdf2f00e1e2ad5fad43e28e9ee4a76b8c03c1017"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "absent"
+    }
+  ]
+}

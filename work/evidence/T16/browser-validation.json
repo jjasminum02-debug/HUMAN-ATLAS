@@ -1,0 +1,26 @@
+{
+  "task": "T16",
+  "browser": "Codex in-app browser with local Vite dev server",
+  "url": "http://127.0.0.1:5173/?region=leg&kind=muscle&id=HA-M-000001&side=right",
+  "viewportCssPixels": {
+    "width": 817,
+    "height": 817
+  },
+  "checks": {
+    "deepLinkSelectsRightGastrocnemius": true,
+    "legacyOriginAndInsertionTextRemainVisible": true,
+    "historicalModernComparisonDisclosureAndCitationRender": true,
+    "modernComparisonExpandedAndPublisherLinkPresent": true,
+    "learnerSurfaceContainsInternalEvidenceCodes": false,
+    "learnerSurfaceContainsTaskNumber": false,
+    "learnerSurfaceContainsAuthoringJson": false,
+    "browserConsoleErrors": 0,
+    "browserConsoleWarnings": 0
+  },
+  "notes": [
+    "The production AI evidence overlay contains zero field items; the learner uses the unchanged legacy summary adapter.",
+    "Modern comparison shows the existing source-level access limitation, while stating that literature comparison and human anatomy review are separate.",
+    "The final browser pass ran with the task-required empty production overlay; new evidence-state display policies are covered by domain tests and synthetic fixtures.",
+    "The /review route and browser localStorage user drafts were not opened, read, or written."
+  ]
+}

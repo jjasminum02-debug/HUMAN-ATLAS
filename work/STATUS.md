@@ -1,15 +1,16 @@
 # 진행 상태 — HUMAN ATLAS
 
-- LAST_UPDATED: 2026-09-26
+- LAST_UPDATED: 2026-09-27
 - PLAN_REVISION: R13-2026-09-26 — R12 유지 + AI 원문 대조/작용 설명/교육용 움직임/독립 T16–40
-- CURRENT_TASK: T15g — complete_with_gaps; 부분 전신 inventory·12부위 routing 후보·bounded batch 계획만 작성
-- NEXT_TASK: T16 — Sol High (planned_not_started); AI 근거 상태와 학습 표시 계약
-- LAST_REPORT: work/reports/T15g.md
+- CURRENT_TASK: T16 — complete_with_gaps; AI 근거 계약·validator·학습 projection 구현, production field overlay는 명세대로 빈 상태
+- NEXT_TASK: T17 — Luna Max (planned_not_started); 출처 수집·필드 대조 로컬 도구
+- LAST_REPORT: work/reports/T16.md
 - CATALOG: partial85 (individual48/group16/part21); 전신 분모 미동결
 - LEARNING_OVERLAY: entries81; current canonical overlap 79/85, six group IDs lack overlay entries, two lookup-only IDs are extra; T11 B01-B09 field work covered the current partial catalog with gaps; humanReviewed=false
+- AI_EVIDENCE_OVERLAY: schema/types/validator/learner adapter ready; production field items 0; 14 legacy rows validated only in test-only migration preview; canonical human review unchanged
 - GEOMETRY: 오른쪽 종아리 6근육, 근육메시 7+뼈 13. T15b navigation overlay에 기존 source crosswalk의 우측 뼈 instance/mapping 9개를 needs_review로 연결, 미확정 mesh 4개는 unbound context. canonical spatialAnnotation 0; T13c-B01/B02/B03 context_only geometry:null draft 3건 보존; T05 표면 후보 0/41, text_only 28/41, matching target mesh missing 13/41, human_review_pending 41/41
 - FUNCTION_AND_ASSESSMENT: 미구현, 학습 탭은 준비 중
-- TECHNICAL_GATE: T15f 통합검증 유지; T15g inventory validator와 회귀 7/7, schema/dataset validation, typecheck/build 통과. UI 변경 없음으로 브라우저 검증은 미적용. T15f surface 0/41, 4 unbound, bone mapping 9 needs_review/not_reviewed, T14b human review pending. 기존 production build >500 kB 경고 유지.
+- TECHNICAL_GATE: T16 AI evidence fixtures 8/8, adapter Node 7/7, migration preview 14 rows, attachment crosschecks 2/2, T03 schema/catalog, learning validator, typecheck/build, learner browser 및 preservation pass. T15f surface 0/41, 4 unbound, bone mapping 9 needs_review/not_reviewed, T14b human review pending. 기존 production build >500 kB 경고 유지.
 - ANATOMY_GATE: needs_human_review; 전신 구조 완성 아님
 - DEV_URL: none (temporary T15f local production preview stopped after verification)
 
@@ -53,6 +54,7 @@
 | T15f | complete_with_gaps | work/tasks/T15f.md; source-linked learner crosschecks for 14 summary rows; cache completion-capacity regression; work/evidence/T15f/; work/reports/T15f.md | 4 meshes unbound; surfaces 0/41; nine bone mappings needs_review/not_reviewed; T14b human review pending; global manifest counts tracked as separate FU01 |
 | T15f-FU01 | not_started (backlog) | work/tasks/T15f-FU01.md; scene-scoped manifest validation migration plan | global canonical count checks must be separated before new regional runtime data |
 | T15g | complete_with_gaps | work/tasks/T15g.md; partial whole-body inventory, 18-region candidate crosswalk, bounded expansion plan; work/evidence/T15g/; work/reports/T15g.md | authoritative whole-body denominator, missing concept IDs, per-concept product memberships, 11 regional scenes/assets, terminology and human review remain open; T15f-FU01 remains prerequisite before T33 runtime expansion |
+| T16 | complete_with_gaps | work/tasks/T16.md; AI evidence schema/types/validator/learner adapter; empty production overlay; work/evidence/T16/; work/reports/T16.md | Actual field-by-field AI evidence rows remain unpopulated; legacy migration was preview-only; human review and whole-body denominator remain open |
 
 ## 실제 현재 상태와 원본 보존
 
@@ -263,4 +265,29 @@ T32/T33/FU01을 당겨 실행하지 마라. OpenSim_Models와 기존 사용자 �
 작업 기준선, 관련 테스트·typecheck·build 및 필요한 실제 브라우저 검증, 결과·미완·STATUS를
 기록해라. 검증한 T16 소유 변경만 선별 로컬 커밋하고 hash/포함·제외/잔여 변경을 보고해라.
 T17 이상·push·배포·경혈/Pro mode·환자 진단·치료·침 시뮬레이션은 시작하지 마라.
+```
+
+## T16 결과 및 현재 인계 — 2026-09-27
+
+T16은 field-level AI evidence schema/types/validator/learner projection을 구현해 **complete_with_gaps**로 기록한다. production `ai-evidence-overlay.json`은 task 명세대로 빈 상태다. 14개 기존 legacy summary와 canonical claim/review/source/hash는 변경하지 않았고, 정확한 입력을 대상으로 만든 migration preview를 메모리에서 검증했다. cross-check는 독립 underlying work를 요구하며 사람 해부학 검토·3D 위치 검토와 분리된다. conflicted 값은 대안으로 표시하며 geometry/motion 상태는 evidence 상태와 독립이다.
+
+검증과 보존 결과는 `work/reports/T16.md` 및 `work/evidence/T16/`에 있다. AI evidence fixtures 8/8, adapter Node 7/7, migration preview 14개 row, T03 schema/catalog, learning validator, attachment crosscheck 2/2, typecheck/build, 실제 local learner browser, preservation 및 diff check가 통과했다. 기존 App chunk >500 kB 경고는 남는다. 시작 시 미커밋 사용자 evidence 47개, T13 spatial evidence 48개, OpenSim_Models HEAD/clean 상태를 보존했다. `/review`와 localStorage 초안은 읽거나 쓰지 않았다. T15g denominator `false/null/null`, T14b human review pending 유지. production field-by-field AI evidence, whole-body coverage, T32/T33/FU01은 미완/미착수다.
+
+다음 task는 **T17 / Luna Max / planned_not_started**다. 아래 prompt를 붙여 넣고 별도 지시 전 시작하지 않는다.
+
+```text
+HUMAN ATLAS에서 AGENTS.md, work/STATUS.md, work/task-registry-r13.json,
+design/2026-09-25-muscle-atlas/00-START-HERE.md 및 같은 폴더의 06/07/08/09,
+work/tasks/T17.md, work/reports/T16.md와 work/evidence/T16/를 읽고 T17만 수행해라.
+담당은 Luna Max다. 작은 입력 manifest로 원문 접근 기록→필드 추출→비교표→예외 목록을 만드는
+로컬 도구를 구현해라. 검색 API나 계정이 없으면 실제 열어 본 자료를 명시적으로 입력하는 경로를 제공하고,
+검색 snippet/index, 열린 원문, 서로 독립된 underlying work, 사람 해부학 검토를 구분해라.
+URL·판본 또는 판본 미노출·locator·조회일·접근방식, field/value hash와 ref를 검증해라.
+변이·표현 차이·실질 충돌·unavailable을 나누고 실패한 접근을 성공으로 처리하지 마라.
+6개 근육 이하 입력으로 재실행·중복·캐시 변경 회귀를 검증해라. AI evidence를 사람이 승인한 것으로 바꾸지 마라.
+T16의 빈 production overlay, 기존 canonical claim/review/hash, 사용자 초안, T13 spatial draft,
+OpenSim_Models와 T15g denominator false/null을 보존하고 실제 학습 자료에 합성 fixture를 넣지 마라.
+관련 테스트·typecheck·build와 UI 변경 시 실제 브라우저를 검증하고 결과·미완·STATUS·다음 T18 prompt를 남겨라.
+검증한 T17 소유 변경만 선별 로컬 커밋하고 hash·포함/제외·잔여 변경을 보고해라.
+T18 이상, T32/T33/FU01, push·배포, 경혈/Pro mode, 환자 진단·치료·침 시뮬레이션은 시작하지 마라.
 ```

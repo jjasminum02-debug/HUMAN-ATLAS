@@ -1,0 +1,99 @@
+{
+  "task": "T16",
+  "mode": "fixtures",
+  "pass": true,
+  "fixtures": [
+    {
+      "fixture": "work/evidence/T16/fixtures/same-work-two-sites-single-source.json",
+      "expectedValid": true,
+      "actualValid": true,
+      "expectedIssue": null,
+      "expectedIssueFound": true,
+      "issueCodes": [],
+      "passed": true
+    },
+    {
+      "fixture": "work/evidence/T16/fixtures/same-work-two-sites-false-cross-check.json",
+      "expectedValid": false,
+      "actualValid": false,
+      "expectedIssue": "cross_checked_not_independent",
+      "expectedIssueFound": true,
+      "issueCodes": [
+        "cross_checked_not_independent",
+        "cross_checked_source_not_opened"
+      ],
+      "passed": true
+    },
+    {
+      "fixture": "work/evidence/T16/fixtures/independent-cross-check.json",
+      "expectedValid": true,
+      "actualValid": true,
+      "expectedIssue": null,
+      "expectedIssueFound": true,
+      "issueCodes": [],
+      "passed": true
+    },
+    {
+      "fixture": "work/evidence/T16/fixtures/conflicted-field.json",
+      "expectedValid": true,
+      "actualValid": true,
+      "expectedIssue": null,
+      "expectedIssueFound": true,
+      "issueCodes": [],
+      "passed": true
+    },
+    {
+      "fixture": "work/evidence/T16/fixtures/orthogonal-evidence-geometry-motion.json",
+      "expectedValid": true,
+      "actualValid": true,
+      "expectedIssue": null,
+      "expectedIssueFound": true,
+      "issueCodes": [],
+      "passed": true
+    },
+    {
+      "fixture": "work/evidence/T16/fixtures/invalid-refs-and-hashes.json",
+      "expectedValid": false,
+      "actualValid": false,
+      "expectedIssue": "claim_hash_mismatch",
+      "expectedIssueFound": true,
+      "issueCodes": [
+        "source_hash_mismatch",
+        "orphan_evidence_source",
+        "evidence_hash_mismatch",
+        "claim_hash_mismatch",
+        "orphan_claim_evidence",
+        "claim_evidence_link_not_reciprocal",
+        "single_source_evidence_missing",
+        "single_source_multiple_works"
+      ],
+      "passed": true
+    },
+    {
+      "fixture": "work/evidence/T16/fixtures/cross-check-cannot-set-review.json",
+      "expectedValid": false,
+      "actualValid": false,
+      "expectedIssue": "schema_additional_property",
+      "expectedIssueFound": true,
+      "issueCodes": [
+        "schema_additional_property",
+        "schema_additional_property"
+      ],
+      "passed": true
+    },
+    {
+      "fixture": "work/evidence/T16/fixtures/index-only-cannot-support-single-source.json",
+      "expectedValid": false,
+      "actualValid": false,
+      "expectedIssue": "single_source_text_not_opened",
+      "expectedIssueFound": true,
+      "issueCodes": [
+        "single_source_text_not_opened"
+      ],
+      "passed": true
+    }
+  ],
+  "fixtureCount": 8,
+  "passed": 8,
+  "failed": 0
+}

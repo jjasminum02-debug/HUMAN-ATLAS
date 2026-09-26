@@ -1,7 +1,10 @@
 import summaries from "../../../atlas-data/terminology/learning-structure-summaries.json";
+import aiEvidenceOverlay from "../../../atlas-data/terminology/ai-evidence-overlay.json";
 import names from '../../../atlas-data/terminology/learning-names.json';
 import { displayTerms, termText, type PilotCatalog } from './catalog';
 import { learnerNameProjection, learnerSearchEntry, learnerVisibleTerms, mergeLearningConcepts, searchEntries, withoutHanScript, type SearchEntry } from '../domain/search';
+import { projectAiEvidenceField, type AiEvidenceField, type LearnerFieldProjection } from '../domain/aiEvidence';
+import { projectLegacySummary, type LegacyLearningSummary } from '../domain/legacyEvidenceAdapter';
 const rawNameSources = names.sources as Record<string, { title: string; url: string | null; locator: string }>;
 export const nameSources = Object.fromEntries(Object.entries(rawNameSources).map(([id, source]) => [id, {
   ...source, title: withoutHanScript(source.title), locator: withoutHanScript(source.locator),
@@ -34,4 +37,19 @@ export function findMuscles(catalog: PilotCatalog, query: string) {
   return searchEntries(entries, query);
 }
 
-export function structureSummary(conceptId: string, role: string) { return summaries.find(row => row.conceptId === conceptId && row.role === role)?.summary; }
+const aiFieldItems = (aiEvidenceOverlay as { items: AiEvidenceField[] }).items;
+const legacySummaryRows = summaries as LegacyLearningSummary[];
+
+/** Prefer the current field overlay; keep an exact-text legacy fallback for older fields.
+ * The returned projection intentionally omits internal evidence/review/geometry/motion codes.
+ */
+export function structureFieldForLearner(conceptId: string, field: string): LearnerFieldProjection | null {
+  const aiField = aiFieldItems.find((row) => row.subjectId === conceptId && row.field === field);
+  if (aiField) return projectAiEvidenceField(aiField);
+  const legacy = legacySummaryRows.find((row) => row.conceptId === conceptId && row.role === field);
+  return projectLegacySummary(legacy);
+}
+
+export function structureSummary(conceptId: string, role: string) {
+  return structureFieldForLearner(conceptId, role)?.text ?? undefined;
+}
