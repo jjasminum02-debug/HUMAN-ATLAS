@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "1.0.0",
+  "manifestId": "T17-SYNTHETIC-DEMO",
+  "fixtureOnly": true,
+  "subjects": [
+    {
+      "id": "SYNTHETIC-MUSCLE-01",
+      "kind": "individual_muscle",
+      "recordType": "synthetic_fixture",
+      "fields": [
+        "origin",
+        "insertion"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "SRC-SYN-A",
+      "underlyingWorkId": "SYN-WORK-A",
+      "title": "Synthetic source A",
+      "url": "local://fixture/source-a",
+      "editionStatus": "not_exposed",
+      "edition": null,
+      "workIdentityBasis": "TEST ONLY: same imaginary work label reused across two synthetic URLs."
+    },
+    {
+      "id": "SRC-SYN-A-MIRROR",
+      "underlyingWorkId": "SYN-WORK-A",
+      "title": "Synthetic mirror of source A",
+      "url": "https://fixture.example/mirror-a",
+      "editionStatus": "not_exposed",
+      "edition": null,
+      "workIdentityBasis": "TEST ONLY: same imaginary work label reused across two synthetic URLs."
+    },
+    {
+      "id": "SRC-SYN-B",
+      "underlyingWorkId": "SYN-WORK-B",
+      "title": "Synthetic independent source B",
+      "url": "local://fixture/source-b",
+      "editionStatus": "verified",
+      "edition": "fixture edition 1",
+      "workIdentityBasis": "TEST ONLY: separate synthetic work label; no real citation."
+    },
+    {
+      "id": "SRC-SYN-INDEX",
+      "underlyingWorkId": null,
+      "title": "Synthetic search index record",
+      "url": "https://search.fixture.example/?q=synthetic",
+      "editionStatus": "not_exposed",
+      "edition": null,
+      "workIdentityBasis": "TEST ONLY: index/attempt did not identify a resolvable underlying work."
+    },
+    {
+      "id": "SRC-SYN-FAILED",
+      "underlyingWorkId": null,
+      "title": "Synthetic failed access",
+      "url": "https://unavailable.fixture.example/item",
+      "editionStatus": "unknown",
+      "edition": null,
+      "workIdentityBasis": "TEST ONLY: index/attempt did not identify a resolvable underlying work."
+    }
+  ],
+  "accesses": [
+    {
+      "id": "ACC-SYN-A",
+      "sourceId": "SRC-SYN-A",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "locator": "Fixture paragraph A",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "synthetic_fixture",
+      "textAccess": "fixture_only",
+      "accessOutcome": "opened",
+      "note": "Synthetic opened text for validator exercise."
+    },
+    {
+      "id": "ACC-SYN-A-MIRROR",
+      "sourceId": "SRC-SYN-A-MIRROR",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "locator": "Fixture mirror row",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "synthetic_fixture",
+      "textAccess": "fixture_only",
+      "accessOutcome": "opened",
+      "note": "Second URL points to the same synthetic underlying work."
+    },
+    {
+      "id": "ACC-SYN-B",
+      "sourceId": "SRC-SYN-B",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "locator": "Fixture table B",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "synthetic_fixture",
+      "textAccess": "fixture_only",
+      "accessOutcome": "opened",
+      "note": "Synthetic independent work for comparison-class regression."
+    },
+    {
+      "id": "ACC-SYN-INDEX",
+      "sourceId": "SRC-SYN-INDEX",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "locator": "Synthetic result snippet 1",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "search_index",
+      "textAccess": "index_only",
+      "accessOutcome": "opened",
+      "note": "Index page opened; original not opened."
+    },
+    {
+      "id": "ACC-SYN-FAILED",
+      "sourceId": "SRC-SYN-FAILED",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "locator": "Requested item URL",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "secondary_full_text",
+      "textAccess": "unavailable",
+      "accessOutcome": "failed",
+      "note": "Failed access retained as a failed attempt.",
+      "failureReason": "Synthetic fixture: request denied."
+    }
+  ],
+  "extractions": [
+    {
+      "id": "OBS-SYN-A",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "accessId": "ACC-SYN-A",
+      "value": "TEST ONLY: synthetic phrasing Alpha",
+      "valueHash": "6bc8b8336e6ba7884c7aa52b2d31fa89af2758bcaea036b80062364574527be5",
+      "reference": {
+        "sourceId": "SRC-SYN-A",
+        "accessId": "ACC-SYN-A",
+        "locator": "Fixture paragraph A"
+      },
+      "note": "TEST ONLY; synthetic comparison text, not anatomy."
+    },
+    {
+      "id": "OBS-SYN-B",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "accessId": "ACC-SYN-A-MIRROR",
+      "value": "TEST ONLY: synthetic wording for the same imaginary statement",
+      "valueHash": "16c1bdb5367e599ebd851d99763de6f7facf86ce522f98f276057b99778ffed3",
+      "reference": {
+        "sourceId": "SRC-SYN-A-MIRROR",
+        "accessId": "ACC-SYN-A-MIRROR",
+        "locator": "Fixture mirror row"
+      },
+      "note": "TEST ONLY; synthetic comparison text, not anatomy."
+    },
+    {
+      "id": "OBS-SYN-C",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "accessId": "ACC-SYN-B",
+      "value": "TEST ONLY: an intentionally different synthetic variant",
+      "valueHash": "b5e3e8a3197c4a7833c0fcb858151549cde7a8186b7f3e2f1518db8e05bab40d",
+      "reference": {
+        "sourceId": "SRC-SYN-B",
+        "accessId": "ACC-SYN-B",
+        "locator": "Fixture table B"
+      },
+      "note": "TEST ONLY; synthetic comparison text, not anatomy."
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "CMP-SYN-WORDING",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "leftExtractionId": "OBS-SYN-A",
+      "rightExtractionId": "OBS-SYN-B",
+      "classification": "wording_difference",
+      "assessmentMode": "researcher_entered",
+      "rationale": "TEST ONLY: equivalent synthetic wording recorded as a wording difference."
+    },
+    {
+      "id": "CMP-SYN-VARIANT",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "leftExtractionId": "OBS-SYN-A",
+      "rightExtractionId": "OBS-SYN-C",
+      "classification": "variation",
+      "assessmentMode": "ai_candidate",
+      "rationale": "TEST ONLY: separate synthetic alternatives; no anatomy assertion."
+    },
+    {
+      "id": "CMP-SYN-CONFLICT",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "leftExtractionId": "OBS-SYN-B",
+      "rightExtractionId": "OBS-SYN-C",
+      "classification": "substantive_conflict",
+      "assessmentMode": "researcher_entered",
+      "rationale": "TEST ONLY: contradictory synthetic values stay separate."
+    }
+  ]
+}

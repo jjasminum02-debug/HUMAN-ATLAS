@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.0.0",
+  "manifestId": "T17-SYNTHETIC-DEMO",
+  "inputFingerprint": "efc3ebe2bf37b492f60cac360a8f36893d869807ebaa12b5aab63e3255962302",
+  "fixtureOnly": true,
+  "exceptionCount": 7,
+  "exceptions": [
+    {
+      "kind": "non_full_text_not_claim_support",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "sourceId": "SRC-SYN-A",
+      "accessId": "ACC-SYN-A",
+      "url": "local://fixture/source-a",
+      "locator": "Fixture paragraph A",
+      "reason": "The accessed item is an abstract, metadata, legacy row, or test fixture; it is not treated as opened field-level original text."
+    },
+    {
+      "kind": "non_full_text_not_claim_support",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "sourceId": "SRC-SYN-A-MIRROR",
+      "accessId": "ACC-SYN-A-MIRROR",
+      "url": "https://fixture.example/mirror-a",
+      "locator": "Fixture mirror row",
+      "reason": "The accessed item is an abstract, metadata, legacy row, or test fixture; it is not treated as opened field-level original text."
+    },
+    {
+      "kind": "non_full_text_not_claim_support",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "sourceId": "SRC-SYN-B",
+      "accessId": "ACC-SYN-B",
+      "url": "local://fixture/source-b",
+      "locator": "Fixture table B",
+      "reason": "The accessed item is an abstract, metadata, legacy row, or test fixture; it is not treated as opened field-level original text."
+    },
+    {
+      "kind": "index_only_not_source_text",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "sourceId": "SRC-SYN-INDEX",
+      "accessId": "ACC-SYN-INDEX",
+      "url": "https://search.fixture.example/?q=synthetic",
+      "locator": "Synthetic result snippet 1",
+      "reason": "Search index/snippet was opened, but original field text was not opened and cannot support an extraction."
+    },
+    {
+      "kind": "unavailable",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "sourceId": "SRC-SYN-FAILED",
+      "accessId": "ACC-SYN-FAILED",
+      "url": "https://unavailable.fixture.example/item",
+      "locator": "Requested item URL",
+      "reason": "Synthetic fixture: request denied."
+    },
+    {
+      "kind": "variation",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "comparisonId": "CMP-SYN-VARIANT",
+      "leftExtractionId": "OBS-SYN-A",
+      "rightExtractionId": "OBS-SYN-C",
+      "rationale": "TEST ONLY: separate synthetic alternatives; no anatomy assertion.",
+      "underlyingWorkRelationship": "independent_underlying_works"
+    },
+    {
+      "kind": "substantive_conflict",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "comparisonId": "CMP-SYN-CONFLICT",
+      "leftExtractionId": "OBS-SYN-B",
+      "rightExtractionId": "OBS-SYN-C",
+      "rationale": "TEST ONLY: contradictory synthetic values stay separate.",
+      "underlyingWorkRelationship": "independent_underlying_works"
+    }
+  ]
+}

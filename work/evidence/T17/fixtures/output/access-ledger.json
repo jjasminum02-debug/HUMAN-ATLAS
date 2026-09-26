@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "1.0.0",
+  "manifestId": "T17-SYNTHETIC-DEMO",
+  "inputFingerprint": "efc3ebe2bf37b492f60cac360a8f36893d869807ebaa12b5aab63e3255962302",
+  "fixtureOnly": true,
+  "sources": [
+    {
+      "id": "SRC-SYN-A",
+      "underlyingWorkId": "SYN-WORK-A",
+      "title": "Synthetic source A",
+      "url": "local://fixture/source-a",
+      "editionStatus": "not_exposed",
+      "edition": null,
+      "workIdentityBasis": "TEST ONLY: same imaginary work label reused across two synthetic URLs.",
+      "sourceHash": "f306bb1804760d824f3c14b1d257a2becaa946495d12f7f95f4e0b50872a239f"
+    },
+    {
+      "id": "SRC-SYN-A-MIRROR",
+      "underlyingWorkId": "SYN-WORK-A",
+      "title": "Synthetic mirror of source A",
+      "url": "https://fixture.example/mirror-a",
+      "editionStatus": "not_exposed",
+      "edition": null,
+      "workIdentityBasis": "TEST ONLY: same imaginary work label reused across two synthetic URLs.",
+      "sourceHash": "5187f7982feba704cfd83e4bcc156c5ff83ed5da3c68d2fc49631c2a39004145"
+    },
+    {
+      "id": "SRC-SYN-B",
+      "underlyingWorkId": "SYN-WORK-B",
+      "title": "Synthetic independent source B",
+      "url": "local://fixture/source-b",
+      "editionStatus": "verified",
+      "edition": "fixture edition 1",
+      "workIdentityBasis": "TEST ONLY: separate synthetic work label; no real citation.",
+      "sourceHash": "0345a02c90b77839fe8d9bfe866180f385b08d11b536e0eebda059248dbe9ad1"
+    },
+    {
+      "id": "SRC-SYN-INDEX",
+      "underlyingWorkId": null,
+      "title": "Synthetic search index record",
+      "url": "https://search.fixture.example/?q=synthetic",
+      "editionStatus": "not_exposed",
+      "edition": null,
+      "workIdentityBasis": "TEST ONLY: index/attempt did not identify a resolvable underlying work.",
+      "sourceHash": "79c3ad930158cb65da3327973582a7a632e140d55d69996e9d7baecd0b706377"
+    },
+    {
+      "id": "SRC-SYN-FAILED",
+      "underlyingWorkId": null,
+      "title": "Synthetic failed access",
+      "url": "https://unavailable.fixture.example/item",
+      "editionStatus": "unknown",
+      "edition": null,
+      "workIdentityBasis": "TEST ONLY: index/attempt did not identify a resolvable underlying work.",
+      "sourceHash": "05e62cad42b137de89684432f97f331cb09a7deeb9940d7c6f7d0d255c15d4fe"
+    }
+  ],
+  "accesses": [
+    {
+      "id": "ACC-SYN-A",
+      "sourceId": "SRC-SYN-A",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "locator": "Fixture paragraph A",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "synthetic_fixture",
+      "textAccess": "fixture_only",
+      "accessOutcome": "opened",
+      "note": "Synthetic opened text for validator exercise.",
+      "source": {
+        "id": "SRC-SYN-A",
+        "underlyingWorkId": "SYN-WORK-A",
+        "title": "Synthetic source A",
+        "url": "local://fixture/source-a",
+        "editionStatus": "not_exposed",
+        "edition": null,
+        "workIdentityBasis": "TEST ONLY: same imaginary work label reused across two synthetic URLs."
+      },
+      "sourceHash": "f306bb1804760d824f3c14b1d257a2becaa946495d12f7f95f4e0b50872a239f",
+      "accessHash": "180210045943185964858874cc0eb1c675c37d6656228e2364225f22bc55e41c",
+      "openedOriginalText": false,
+      "supportsFieldExtraction": true
+    },
+    {
+      "id": "ACC-SYN-A-MIRROR",
+      "sourceId": "SRC-SYN-A-MIRROR",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "locator": "Fixture mirror row",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "synthetic_fixture",
+      "textAccess": "fixture_only",
+      "accessOutcome": "opened",
+      "note": "Second URL points to the same synthetic underlying work.",
+      "source": {
+        "id": "SRC-SYN-A-MIRROR",
+        "underlyingWorkId": "SYN-WORK-A",
+        "title": "Synthetic mirror of source A",
+        "url": "https://fixture.example/mirror-a",
+        "editionStatus": "not_exposed",
+        "edition": null,
+        "workIdentityBasis": "TEST ONLY: same imaginary work label reused across two synthetic URLs."
+      },
+      "sourceHash": "5187f7982feba704cfd83e4bcc156c5ff83ed5da3c68d2fc49631c2a39004145",
+      "accessHash": "e2aead7ed3401c97a1877abad7961798b8550a5ca7e4ead3c82e1d6058996239",
+      "openedOriginalText": false,
+      "supportsFieldExtraction": true
+    },
+    {
+      "id": "ACC-SYN-B",
+      "sourceId": "SRC-SYN-B",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "locator": "Fixture table B",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "synthetic_fixture",
+      "textAccess": "fixture_only",
+      "accessOutcome": "opened",
+      "note": "Synthetic independent work for comparison-class regression.",
+      "source": {
+        "id": "SRC-SYN-B",
+        "underlyingWorkId": "SYN-WORK-B",
+        "title": "Synthetic independent source B",
+        "url": "local://fixture/source-b",
+        "editionStatus": "verified",
+        "edition": "fixture edition 1",
+        "workIdentityBasis": "TEST ONLY: separate synthetic work label; no real citation."
+      },
+      "sourceHash": "0345a02c90b77839fe8d9bfe866180f385b08d11b536e0eebda059248dbe9ad1",
+      "accessHash": "c86eb2cf5eaa06b4d88f4a4fa72667999042e2823b2816994ec86b2116c4dff3",
+      "openedOriginalText": false,
+      "supportsFieldExtraction": true
+    },
+    {
+      "id": "ACC-SYN-INDEX",
+      "sourceId": "SRC-SYN-INDEX",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "locator": "Synthetic result snippet 1",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "search_index",
+      "textAccess": "index_only",
+      "accessOutcome": "opened",
+      "note": "Index page opened; original not opened.",
+      "source": {
+        "id": "SRC-SYN-INDEX",
+        "underlyingWorkId": null,
+        "title": "Synthetic search index record",
+        "url": "https://search.fixture.example/?q=synthetic",
+        "editionStatus": "not_exposed",
+        "edition": null,
+        "workIdentityBasis": "TEST ONLY: index/attempt did not identify a resolvable underlying work."
+      },
+      "sourceHash": "79c3ad930158cb65da3327973582a7a632e140d55d69996e9d7baecd0b706377",
+      "accessHash": "2bece83a2a51a939375e7bea94250815341cac9a35f0d03460fa0f7a3e939a08",
+      "openedOriginalText": false,
+      "supportsFieldExtraction": false
+    },
+    {
+      "id": "ACC-SYN-FAILED",
+      "sourceId": "SRC-SYN-FAILED",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "locator": "Requested item URL",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "secondary_full_text",
+      "textAccess": "unavailable",
+      "accessOutcome": "failed",
+      "note": "Failed access retained as a failed attempt.",
+      "failureReason": "Synthetic fixture: request denied.",
+      "source": {
+        "id": "SRC-SYN-FAILED",
+        "underlyingWorkId": null,
+        "title": "Synthetic failed access",
+        "url": "https://unavailable.fixture.example/item",
+        "editionStatus": "unknown",
+        "edition": null,
+        "workIdentityBasis": "TEST ONLY: index/attempt did not identify a resolvable underlying work."
+      },
+      "sourceHash": "05e62cad42b137de89684432f97f331cb09a7deeb9940d7c6f7d0d255c15d4fe",
+      "accessHash": "ea5af484027f7ed6f78d066d67d77254fba202104ee1875a2ef0be72efea2e28",
+      "openedOriginalText": false,
+      "supportsFieldExtraction": false
+    }
+  ],
+  "humanAnatomyReview": {
+    "performed": false,
+    "status": "not_performed_by_this_tool",
+    "reviewer": null
+  }
+}

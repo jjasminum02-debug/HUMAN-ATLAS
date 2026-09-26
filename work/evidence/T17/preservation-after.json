@@ -1,0 +1,933 @@
+{
+  "task": "T17",
+  "startHead": "a154a06783deb0bc4d76c5864cd2726984b963f0",
+  "preexistingUntrackedCount": 47,
+  "preexistingUntrackedPreserved": true,
+  "protectedInputCount": 145,
+  "protectedInputsPassed": true,
+  "protectedInputs": [
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-pilot/FJ1394.obj",
+      "expectedSha256": "621dc10e974bcc1c53a8843bf1db3a1c322c8327d279010c58533bd28952bf08",
+      "actualSha256": "621dc10e974bcc1c53a8843bf1db3a1c322c8327d279010c58533bd28952bf08",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-pilot/FJ1397.obj",
+      "expectedSha256": "d7f3aa44801171baade1a59c40a8f8bda72097bec07047f93f24ebaac4546cb4",
+      "actualSha256": "d7f3aa44801171baade1a59c40a8f8bda72097bec07047f93f24ebaac4546cb4",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-pilot/FJ1409.obj",
+      "expectedSha256": "ba330adc0128b26a50b4a5bd0a0cedcd3f32dbf09ae25f4e0587949dbd9d3d11",
+      "actualSha256": "ba330adc0128b26a50b4a5bd0a0cedcd3f32dbf09ae25f4e0587949dbd9d3d11",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-pilot/FJ1410.obj",
+      "expectedSha256": "40c36bc4dc24e161c84daf6e96017f9d78b4cf964579a873e267d2619be4aa2c",
+      "actualSha256": "40c36bc4dc24e161c84daf6e96017f9d78b4cf964579a873e267d2619be4aa2c",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-pilot/FJ1437.obj",
+      "expectedSha256": "c9c62b720ffe375a8eddf390608684a796f1ea54880a5c34fa440404addc399e",
+      "actualSha256": "c9c62b720ffe375a8eddf390608684a796f1ea54880a5c34fa440404addc399e",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-pilot/FJ1439.obj",
+      "expectedSha256": "b03d2f54644969d153d3dfe4025ee629858e72c1e5ee3b0e7d5f16f54dc505b3",
+      "actualSha256": "b03d2f54644969d153d3dfe4025ee629858e72c1e5ee3b0e7d5f16f54dc505b3",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-pilot/FJ1440.obj",
+      "expectedSha256": "6fc367885524fc416139372b55c64d8e1e4bc9010bee64020a72ad8e6f34a57d",
+      "actualSha256": "6fc367885524fc416139372b55c64d8e1e4bc9010bee64020a72ad8e6f34a57d",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-pilot/FJ3360.obj",
+      "expectedSha256": "b53e7970e822e997e1b05f94f42514d07a3f98edcc63ec7dd7219354ce1d8176",
+      "actualSha256": "b53e7970e822e997e1b05f94f42514d07a3f98edcc63ec7dd7219354ce1d8176",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-pilot/FJ3366.obj",
+      "expectedSha256": "d03fee02cf8eefad1ecfcb9246e3f43ad3c4615c21ce08dc5e2b6901c6395a86",
+      "actualSha256": "d03fee02cf8eefad1ecfcb9246e3f43ad3c4615c21ce08dc5e2b6901c6395a86",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-pilot/FJ3385.obj",
+      "expectedSha256": "8b35f0132c1a05b64f26746fdd0496a2495280cd0c2ac90dbf637fd74f79f54f",
+      "actualSha256": "8b35f0132c1a05b64f26746fdd0496a2495280cd0c2ac90dbf637fd74f79f54f",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-pilot/FJ3387.obj",
+      "expectedSha256": "01879d7310938e82eecc02e1115332497e94085ff5cc1fa8eeee47ad1f5d3578",
+      "actualSha256": "01879d7310938e82eecc02e1115332497e94085ff5cc1fa8eeee47ad1f5d3578",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3308.obj",
+      "expectedSha256": "0e08f1570755a9675e2556013eda861f00f31fe7ae2139e24584129dfe78d2c2",
+      "actualSha256": "0e08f1570755a9675e2556013eda861f00f31fe7ae2139e24584129dfe78d2c2",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3351.obj",
+      "expectedSha256": "b70e565ec8ad8c09264ae66159415ca4f0cf639598812aac6fcf7b761c3758d3",
+      "actualSha256": "b70e565ec8ad8c09264ae66159415ca4f0cf639598812aac6fcf7b761c3758d3",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3353.obj",
+      "expectedSha256": "f6c034b6b18aee623f510ee40e4171346c084e8bdd092354d634c87fc9af6acf",
+      "actualSha256": "f6c034b6b18aee623f510ee40e4171346c084e8bdd092354d634c87fc9af6acf",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3355.obj",
+      "expectedSha256": "90b28dbcd11e3d3a6f253adb1ddaa33f30040a08c71bb3a86242372ea9b6170e",
+      "actualSha256": "90b28dbcd11e3d3a6f253adb1ddaa33f30040a08c71bb3a86242372ea9b6170e",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3357.obj",
+      "expectedSha256": "a5fd57a36b7525de383809bbbb37ff6a56a08ed0fb25af1684085418cc6e8202",
+      "actualSha256": "a5fd57a36b7525de383809bbbb37ff6a56a08ed0fb25af1684085418cc6e8202",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3359.obj",
+      "expectedSha256": "cc75b866a2d5ac0317eb3a1d64cef41a65231fab975613d108a4fcdcbc2c58b1",
+      "actualSha256": "cc75b866a2d5ac0317eb3a1d64cef41a65231fab975613d108a4fcdcbc2c58b1",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3364.obj",
+      "expectedSha256": "d5ac55e9aa466b0e14d8d7760f7ef2a6edb0d95cfea56205557f647c451a8079",
+      "actualSha256": "d5ac55e9aa466b0e14d8d7760f7ef2a6edb0d95cfea56205557f647c451a8079",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3365.obj",
+      "expectedSha256": "5eff0f92905dd45bd0e79b1de0144dc15988c73c683468163255ba1452d58037",
+      "actualSha256": "5eff0f92905dd45bd0e79b1de0144dc15988c73c683468163255ba1452d58037",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3377.obj",
+      "expectedSha256": "7ae757be0a8a55129816045c2e92b32576e2c96fe3b047f7841807092b5bf8f4",
+      "actualSha256": "7ae757be0a8a55129816045c2e92b32576e2c96fe3b047f7841807092b5bf8f4",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/derived-glb/bodyparts3d-r4-right-lower-leg/right-lower-leg.glb",
+      "expectedSha256": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341",
+      "actualSha256": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/assets/derived-glb/bodyparts3d-r4-t13-right-bones/right-bones.glb",
+      "expectedSha256": "a5b16cf1e6991b52f66706dee7cf3c77d9832b1a3bde0e3dffd5de5619db6662",
+      "actualSha256": "a5b16cf1e6991b52f66706dee7cf3c77d9832b1a3bde0e3dffd5de5619db6662",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/catalog/canonical-catalog.json",
+      "expectedSha256": "6b10da0388b06f24d9bfb6b0852d88196cb7064835741360ee15a91b6abaf873",
+      "actualSha256": "6b10da0388b06f24d9bfb6b0852d88196cb7064835741360ee15a91b6abaf873",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/catalog/catalog-status.json",
+      "expectedSha256": "79cd24fc293d3b4d66e4965626b3d38d876f4f0380f87f2067aba5064f55c499",
+      "actualSha256": "79cd24fc293d3b4d66e4965626b3d38d876f4f0380f87f2067aba5064f55c499",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/catalog/pilot-structure-coverage.json",
+      "expectedSha256": "4b68e84862f901df6d233c89381ad72d9aca5f8bad913fd238ffe053d3eae49f",
+      "actualSha256": "4b68e84862f901df6d233c89381ad72d9aca5f8bad913fd238ffe053d3eae49f",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/catalog/region-tree.json",
+      "expectedSha256": "7eba5ef7825a385596a7cdb41ecc476daa508f98bdf2c2aedcbbb74a2d70dbd5",
+      "actualSha256": "7eba5ef7825a385596a7cdb41ecc476daa508f98bdf2c2aedcbbb74a2d70dbd5",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/catalog/source-crosswalk.json",
+      "expectedSha256": "26891c9c301b79911220d491201d639cbe4a78e5d3b1fdf3df6373cd4d68238b",
+      "actualSha256": "26891c9c301b79911220d491201d639cbe4a78e5d3b1fdf3df6373cd4d68238b",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/catalog/vocabulary-policy.md",
+      "expectedSha256": "d093e59b97816ff999a66b9aac2c2125198493c1294c4448087166d2111f7178",
+      "actualSha256": "d093e59b97816ff999a66b9aac2c2125198493c1294c4448087166d2111f7178",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/manifests/assets.json",
+      "expectedSha256": "44100f374337d527531bcadae13f1b9293cfa54ead96b1ef970fcf14349fdb4a",
+      "actualSha256": "44100f374337d527531bcadae13f1b9293cfa54ead96b1ef970fcf14349fdb4a",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/manifests/attachment-context-t13.json",
+      "expectedSha256": "3cb4cffd3b74e56784383dab6a77717e4ac82127451b2a0b02dce2d3e492a943",
+      "actualSha256": "3cb4cffd3b74e56784383dab6a77717e4ac82127451b2a0b02dce2d3e492a943",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/manifests/canonical-geometry-t12.json",
+      "expectedSha256": "02f4cb6ff99008207a62c4590acd030192453031f94eeb0f67c4a607e1630507",
+      "actualSha256": "02f4cb6ff99008207a62c4590acd030192453031f94eeb0f67c4a607e1630507",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/manifests/derived-assets-t07.json",
+      "expectedSha256": "b37692ab56f3024e49425663643271274e2351c6cedd4191871508f810c1744b",
+      "actualSha256": "b37692ab56f3024e49425663643271274e2351c6cedd4191871508f810c1744b",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/manifests/derived-bones-t13.json",
+      "expectedSha256": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e",
+      "actualSha256": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/manifests/mesh-crosswalk-t07.json",
+      "expectedSha256": "d9f173a80cc243e189ee21e460ce10d500a411ffbd003be470e2bd1ef64954d9",
+      "actualSha256": "d9f173a80cc243e189ee21e460ce10d500a411ffbd003be470e2bd1ef64954d9",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/manifests/scope.json",
+      "expectedSha256": "7baffcdabac92f73f54014e59b084cf3ef8f3cd3f2a6bbd7e527ce92422ac920",
+      "actualSha256": "7baffcdabac92f73f54014e59b084cf3ef8f3cd3f2a6bbd7e527ce92422ac920",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/navigation/atlas-navigation.json",
+      "expectedSha256": "d5a32d9a350cfaa0888d38be39a3bcc070c2413a9b99a421a9ce38601d7a9e4d",
+      "actualSha256": "d5a32d9a350cfaa0888d38be39a3bcc070c2413a9b99a421a9ce38601d7a9e4d",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/navigation/build_navigation.py",
+      "expectedSha256": "58a1a5d3c4eac9f5f93f0973e0e7def685dc788d08daccea26b69334234b3134",
+      "actualSha256": "58a1a5d3c4eac9f5f93f0973e0e7def685dc788d08daccea26b69334234b3134",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/navigation/test_navigation.py",
+      "expectedSha256": "c6edf4fe8c3a597f31a603f4c201fcbc9f43810b21beb1ae58d0a0aadfdcac9f",
+      "actualSha256": "c6edf4fe8c3a597f31a603f4c201fcbc9f43810b21beb1ae58d0a0aadfdcac9f",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/navigation/validate_navigation.py",
+      "expectedSha256": "6ca559e5eb1131081582eb5b5d13463dcdf45dc885cdf03752302a3c61d4031d",
+      "actualSha256": "6ca559e5eb1131081582eb5b5d13463dcdf45dc885cdf03752302a3c61d4031d",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/schemas/annotation-draft-exchange.schema.json",
+      "expectedSha256": "8b9ad4c5fb68b152106d67b2473b642c5184e558b89b1e8e263c58c9b71543a9",
+      "actualSha256": "8b9ad4c5fb68b152106d67b2473b642c5184e558b89b1e8e263c58c9b71543a9",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/schemas/atlas.schema.json",
+      "expectedSha256": "a77dbf34ef0f012be458b5c1a2f6ee6fcf7b09eb61fb0e03ca7c38272299fe8b",
+      "actualSha256": "a77dbf34ef0f012be458b5c1a2f6ee6fcf7b09eb61fb0e03ca7c38272299fe8b",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/schemas/navigation.schema.json",
+      "expectedSha256": "e89d5db334dbe4393044acf5a86c786779cbae48e1f4d700e84929c2422ea22f",
+      "actualSha256": "e89d5db334dbe4393044acf5a86c786779cbae48e1f4d700e84929c2422ea22f",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/schemas/spatial-draft-layer.schema.json",
+      "expectedSha256": "961400792f5b63806ba484b7d223163f678b2446ad00d75f83f239df31257aec",
+      "actualSha256": "961400792f5b63806ba484b7d223163f678b2446ad00d75f83f239df31257aec",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/schemas/validate.py",
+      "expectedSha256": "a43af5a7fc4e0200679f60cf87ca9869cf2d58b6619e740da7f777958e656dd1",
+      "actualSha256": "a43af5a7fc4e0200679f60cf87ca9869cf2d58b6619e740da7f777958e656dd1",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/sources/registry.json",
+      "expectedSha256": "d0c53c80b8e13b2305ca22c2a26f8ae3a8491ae5d33d7165a548aba46f1f0746",
+      "actualSha256": "d0c53c80b8e13b2305ca22c2a26f8ae3a8491ae5d33d7165a548aba46f1f0746",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/terminology/learning-names.json",
+      "expectedSha256": "6f78fbce22d999aff95ba10fb835f137ba1dfdb2a9c790bb90fef18e580b776e",
+      "actualSha256": "6f78fbce22d999aff95ba10fb835f137ba1dfdb2a9c790bb90fef18e580b776e",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/terminology/learning-structure-summaries.json",
+      "expectedSha256": "3fd23284b9515411378fbf07036022bd717ca6e2c0f2755dd3b63785c6fb4b4e",
+      "actualSha256": "3fd23284b9515411378fbf07036022bd717ca6e2c0f2755dd3b63785c6fb4b4e",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/terminology/term-review-batches.json",
+      "expectedSha256": "6df6992a5b9a6010d775ad2e55ad4f0e439895988f9174b0099ac68bd63a0c91",
+      "actualSha256": "6df6992a5b9a6010d775ad2e55ad4f0e439895988f9174b0099ac68bd63a0c91",
+      "passed": true
+    },
+    {
+      "path": "atlas-data/tools/convert_bodyparts3d_obj_to_glb.py",
+      "expectedSha256": "05c1216fce695885386d026e4b51419a92e22e2114964e303520fcfa0e409756",
+      "actualSha256": "05c1216fce695885386d026e4b51419a92e22e2114964e303520fcfa0e409756",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/preservation-before.json",
+      "expectedSha256": "40c74badee414c19e48527e9da187d8c38892ea78d1a9d02c8380db083e97f3a",
+      "actualSha256": "40c74badee414c19e48527e9da187d8c38892ea78d1a9d02c8380db083e97f3a",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/spatial-draft-layer.json",
+      "expectedSha256": "fcc9f3929996e1b8b5853eee3897b310f1a396ec7b9b0b73b68fe2b25b4143fd",
+      "actualSha256": "fcc9f3929996e1b8b5853eee3897b310f1a396ec7b9b0b73b68fe2b25b4143fd",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/browser-mesh-review.json",
+      "expectedSha256": "d226bff83abb6dc09f25686259dcdd983933257b45b2c521d5be2f0eff54f432",
+      "actualSha256": "d226bff83abb6dc09f25686259dcdd983933257b45b2c521d5be2f0eff54f432",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/preservation-after.json",
+      "expectedSha256": "0d807addbc84a54376f226faa43a76dc6153d3f7b327469587f74ea320f0b207",
+      "actualSha256": "0d807addbc84a54376f226faa43a76dc6153d3f7b327469587f74ea320f0b207",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/typecheck.log",
+      "expectedSha256": "5cfb036289d819b2a87e947d65f4532031dd37753f3cf2def0f77d398eea1737",
+      "actualSha256": "5cfb036289d819b2a87e947d65f4532031dd37753f3cf2def0f77d398eea1737",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/validate_record.py",
+      "expectedSha256": "2590b99de6d97ab7636a66ce72f68feefa03473dffb854be391e186fe7843eaa",
+      "actualSha256": "2590b99de6d97ab7636a66ce72f68feefa03473dffb854be391e186fe7843eaa",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/browser-validation.json",
+      "expectedSha256": "b2886fc2d15425bbf2e2406afd8f333b897e2511495f5f8aadfe210d7e15c633",
+      "actualSha256": "b2886fc2d15425bbf2e2406afd8f333b897e2511495f5f8aadfe210d7e15c633",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/spatial-draft-tests.log",
+      "expectedSha256": "280e24845a17cc5e1393c5e589a32802ad587b9a25334b4683f0002c2bd19e35",
+      "actualSha256": "280e24845a17cc5e1393c5e589a32802ad587b9a25334b4683f0002c2bd19e35",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/source-evidence.json",
+      "expectedSha256": "04f2dd6db2900b6160de8ac0634fab4f5c5f647e73f8a85388e95fef1439010f",
+      "actualSha256": "04f2dd6db2900b6160de8ac0634fab4f5c5f647e73f8a85388e95fef1439010f",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/check_preservation.py",
+      "expectedSha256": "247cc15c151920d5c6b9133222c350c526624553933606a7cd20a07f808817db",
+      "actualSha256": "247cc15c151920d5c6b9133222c350c526624553933606a7cd20a07f808817db",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/build.log",
+      "expectedSha256": "41bb5840495e6fa9400096672110dd7dfad71a4c3f22933465b866706c2e7c12",
+      "actualSha256": "41bb5840495e6fa9400096672110dd7dfad71a4c3f22933465b866706c2e7c12",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/preservation-before.json",
+      "expectedSha256": "90055c75c1ff7da94b842ac395ea6c825bbab035e8ad8137f5ca9bb1cfe7429b",
+      "actualSha256": "90055c75c1ff7da94b842ac395ea6c825bbab035e8ad8137f5ca9bb1cfe7429b",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/spatial-draft-layer.json",
+      "expectedSha256": "67b51cf9bf5216e750a42da3038371cca77d201792d46962cf9c3f06e9b12d93",
+      "actualSha256": "67b51cf9bf5216e750a42da3038371cca77d201792d46962cf9c3f06e9b12d93",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/browser-mesh-review.json",
+      "expectedSha256": "9e93c72b59cd1a4ea6f8a6da76e2e51892f4d7298d3c85fbc4fe7609edcbb2d6",
+      "actualSha256": "9e93c72b59cd1a4ea6f8a6da76e2e51892f4d7298d3c85fbc4fe7609edcbb2d6",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/validator-result.log",
+      "expectedSha256": "8aacc858b4f32bfbe3d19bcf5bab056feb5930a202c24edf93e2eb2c44ffcf48",
+      "actualSha256": "8aacc858b4f32bfbe3d19bcf5bab056feb5930a202c24edf93e2eb2c44ffcf48",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/browser-baseline.json",
+      "expectedSha256": "10c5399df04f5d5211be157eb60075c2e634762a11db7c900b65b87d2a1f4d5d",
+      "actualSha256": "10c5399df04f5d5211be157eb60075c2e634762a11db7c900b65b87d2a1f4d5d",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/preservation-after.json",
+      "expectedSha256": "30ac1e8e6c50199c429e99c98791701729a39fdf6f460ecc16b95af7aafdc839",
+      "actualSha256": "30ac1e8e6c50199c429e99c98791701729a39fdf6f460ecc16b95af7aafdc839",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/typecheck.log",
+      "expectedSha256": "5cfb036289d819b2a87e947d65f4532031dd37753f3cf2def0f77d398eea1737",
+      "actualSha256": "5cfb036289d819b2a87e947d65f4532031dd37753f3cf2def0f77d398eea1737",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/validate_record.py",
+      "expectedSha256": "51ef16e3101a147334a92fb7b9bb51e18be44620f6f2ee1603e075907379605c",
+      "actualSha256": "51ef16e3101a147334a92fb7b9bb51e18be44620f6f2ee1603e075907379605c",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/browser-validation.json",
+      "expectedSha256": "52654d7a8b5f96be02d55748c8fc59e30613994d1a777a9bd973ec9afd1f0b7e",
+      "actualSha256": "52654d7a8b5f96be02d55748c8fc59e30613994d1a777a9bd973ec9afd1f0b7e",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/t03-schema-validation.log",
+      "expectedSha256": "2621645aa5ba5511c262dfb7044152f105faaea5be3fe275ba0757521b866e21",
+      "actualSha256": "2621645aa5ba5511c262dfb7044152f105faaea5be3fe275ba0757521b866e21",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/spatial-draft-tests.log",
+      "expectedSha256": "b7bddf88705cc2fbcf4db084b379395f5adef6e7068119bf99006b89eef5ab01",
+      "actualSha256": "b7bddf88705cc2fbcf4db084b379395f5adef6e7068119bf99006b89eef5ab01",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/source-evidence.json",
+      "expectedSha256": "d074204e91387af7954e725ab91a2a77e0adecfcabbeedc1d1827d8efcb205ac",
+      "actualSha256": "d074204e91387af7954e725ab91a2a77e0adecfcabbeedc1d1827d8efcb205ac",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/validator-result.json",
+      "expectedSha256": "8aacc858b4f32bfbe3d19bcf5bab056feb5930a202c24edf93e2eb2c44ffcf48",
+      "actualSha256": "8aacc858b4f32bfbe3d19bcf5bab056feb5930a202c24edf93e2eb2c44ffcf48",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/preservation-check.log",
+      "expectedSha256": "c783232bec5f47515ca631202cb22dd29cd5472a7f11b2f0aece8e8e4a7b0267",
+      "actualSha256": "c783232bec5f47515ca631202cb22dd29cd5472a7f11b2f0aece8e8e4a7b0267",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/check_preservation.py",
+      "expectedSha256": "41ba0a3aa80d47c3e826458b13479e7531b386c3249cef6ae2c511a71c61c5d8",
+      "actualSha256": "41ba0a3aa80d47c3e826458b13479e7531b386c3249cef6ae2c511a71c61c5d8",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/build.log",
+      "expectedSha256": "a8a3303bd1db2a34825d88d31d6b097342e256c985c312e44be00bb14a624b8b",
+      "actualSha256": "a8a3303bd1db2a34825d88d31d6b097342e256c985c312e44be00bb14a624b8b",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/preservation-before.json",
+      "expectedSha256": "e1f26576f75384090d8e528e1726cffce1cba474ac929c620cecc1d7e6a341aa",
+      "actualSha256": "e1f26576f75384090d8e528e1726cffce1cba474ac929c620cecc1d7e6a341aa",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/spatial-draft-layer.json",
+      "expectedSha256": "d634cc00781fb46d84ee8e18b2c271c4a378b2656b2674b05611b5c202504714",
+      "actualSha256": "d634cc00781fb46d84ee8e18b2c271c4a378b2656b2674b05611b5c202504714",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/browser-mesh-review.json",
+      "expectedSha256": "1d302a7f402bb37105953c4838585ed88477b8cc19837b42e4bcf7a83955bcba",
+      "actualSha256": "1d302a7f402bb37105953c4838585ed88477b8cc19837b42e4bcf7a83955bcba",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/browser-baseline.json",
+      "expectedSha256": "e38637330292c00d03cd28283ce34cfe453b3818be58566e4eb0f85ec5f845e5",
+      "actualSha256": "e38637330292c00d03cd28283ce34cfe453b3818be58566e4eb0f85ec5f845e5",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/preservation-after.json",
+      "expectedSha256": "043f220ce92bbb3743309c7fa8db38e78a92a212989aedcd70abfa3b174f7c0f",
+      "actualSha256": "043f220ce92bbb3743309c7fa8db38e78a92a212989aedcd70abfa3b174f7c0f",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/typecheck.log",
+      "expectedSha256": "40b435412feb2dc8c30904f8d10e8064dad8f04f6636ddedcc607bfbde9e2cf2",
+      "actualSha256": "40b435412feb2dc8c30904f8d10e8064dad8f04f6636ddedcc607bfbde9e2cf2",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/validate_record.py",
+      "expectedSha256": "c01c1ebd3cf9520bae1b3ca483f32ec16f77b3432f1356bdbdec9ce813a6342e",
+      "actualSha256": "c01c1ebd3cf9520bae1b3ca483f32ec16f77b3432f1356bdbdec9ce813a6342e",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/git-diff-check.log",
+      "expectedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actualSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/t03-schema-fixtures.log",
+      "expectedSha256": "2621645aa5ba5511c262dfb7044152f105faaea5be3fe275ba0757521b866e21",
+      "actualSha256": "2621645aa5ba5511c262dfb7044152f105faaea5be3fe275ba0757521b866e21",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/browser-validation.json",
+      "expectedSha256": "463deefab2f9c6ba1e265cbb411b1c0e380060ea1ae16553763c868a013cf912",
+      "actualSha256": "463deefab2f9c6ba1e265cbb411b1c0e380060ea1ae16553763c868a013cf912",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/handoff-check.json",
+      "expectedSha256": "1086f0aaf1f019895038667f163900978f030f6c181c2f6b2d9f6830cc4bb052",
+      "actualSha256": "1086f0aaf1f019895038667f163900978f030f6c181c2f6b2d9f6830cc4bb052",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/spatial-draft-tests.log",
+      "expectedSha256": "d6c356685b32085f05a32dde1226ff8abf11e33bb137a25345de01e3afa49fdf",
+      "actualSha256": "d6c356685b32085f05a32dde1226ff8abf11e33bb137a25345de01e3afa49fdf",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/run_checks.py",
+      "expectedSha256": "da209249ddc532f9b8968f1b4f61736bf30e68bb2463190519c2d1dc9a3b5f59",
+      "actualSha256": "da209249ddc532f9b8968f1b4f61736bf30e68bb2463190519c2d1dc9a3b5f59",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/source-evidence.json",
+      "expectedSha256": "dddef00da127eeeb3afb52dc2e3967cb0a0665547d7dff18af386bdc37643ae7",
+      "actualSha256": "dddef00da127eeeb3afb52dc2e3967cb0a0665547d7dff18af386bdc37643ae7",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/record-validator.log",
+      "expectedSha256": "d396ebc62e50d1dd4ea3d290d9096690be06d12b36ee9627568533f21dc24099",
+      "actualSha256": "d396ebc62e50d1dd4ea3d290d9096690be06d12b36ee9627568533f21dc24099",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/validator-result.json",
+      "expectedSha256": "d396ebc62e50d1dd4ea3d290d9096690be06d12b36ee9627568533f21dc24099",
+      "actualSha256": "d396ebc62e50d1dd4ea3d290d9096690be06d12b36ee9627568533f21dc24099",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/build_spatial_draft.py",
+      "expectedSha256": "309c86f703ef438eda8869157b498dbbd8ac6b7c21480cbce08a90250a72598a",
+      "actualSha256": "309c86f703ef438eda8869157b498dbbd8ac6b7c21480cbce08a90250a72598a",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/capture_preservation.py",
+      "expectedSha256": "a3a738a0e9ed59520badc432c0ab10fb47ed2a993a57626acb3f3e3a6032e0ce",
+      "actualSha256": "a3a738a0e9ed59520badc432c0ab10fb47ed2a993a57626acb3f3e3a6032e0ce",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/validation-summary.json",
+      "expectedSha256": "626ddb3dcb5d78150690dfdf9ae09fce5e5aa46a683a594b751d5da111e7a32e",
+      "actualSha256": "626ddb3dcb5d78150690dfdf9ae09fce5e5aa46a683a594b751d5da111e7a32e",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/check_preservation.py",
+      "expectedSha256": "52024bc6831a90684c78a5214e8bd253be96b12caa335e082690c978dff3d253",
+      "actualSha256": "52024bc6831a90684c78a5214e8bd253be96b12caa335e082690c978dff3d253",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/build.log",
+      "expectedSha256": "a25f7b59cb825014dc37d9c87d3b2e1b87cd6abab9a7f6923985ee02275d0a06",
+      "actualSha256": "a25f7b59cb825014dc37d9c87d3b2e1b87cd6abab9a7f6923985ee02275d0a06",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/preservation-before.json",
+      "expectedSha256": "40c74badee414c19e48527e9da187d8c38892ea78d1a9d02c8380db083e97f3a",
+      "actualSha256": "40c74badee414c19e48527e9da187d8c38892ea78d1a9d02c8380db083e97f3a",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/spatial-draft-layer.json",
+      "expectedSha256": "fcc9f3929996e1b8b5853eee3897b310f1a396ec7b9b0b73b68fe2b25b4143fd",
+      "actualSha256": "fcc9f3929996e1b8b5853eee3897b310f1a396ec7b9b0b73b68fe2b25b4143fd",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/browser-mesh-review.json",
+      "expectedSha256": "d226bff83abb6dc09f25686259dcdd983933257b45b2c521d5be2f0eff54f432",
+      "actualSha256": "d226bff83abb6dc09f25686259dcdd983933257b45b2c521d5be2f0eff54f432",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/preservation-after.json",
+      "expectedSha256": "0d807addbc84a54376f226faa43a76dc6153d3f7b327469587f74ea320f0b207",
+      "actualSha256": "0d807addbc84a54376f226faa43a76dc6153d3f7b327469587f74ea320f0b207",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/typecheck.log",
+      "expectedSha256": "5cfb036289d819b2a87e947d65f4532031dd37753f3cf2def0f77d398eea1737",
+      "actualSha256": "5cfb036289d819b2a87e947d65f4532031dd37753f3cf2def0f77d398eea1737",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/validate_record.py",
+      "expectedSha256": "2590b99de6d97ab7636a66ce72f68feefa03473dffb854be391e186fe7843eaa",
+      "actualSha256": "2590b99de6d97ab7636a66ce72f68feefa03473dffb854be391e186fe7843eaa",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/browser-validation.json",
+      "expectedSha256": "b2886fc2d15425bbf2e2406afd8f333b897e2511495f5f8aadfe210d7e15c633",
+      "actualSha256": "b2886fc2d15425bbf2e2406afd8f333b897e2511495f5f8aadfe210d7e15c633",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/spatial-draft-tests.log",
+      "expectedSha256": "280e24845a17cc5e1393c5e589a32802ad587b9a25334b4683f0002c2bd19e35",
+      "actualSha256": "280e24845a17cc5e1393c5e589a32802ad587b9a25334b4683f0002c2bd19e35",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/source-evidence.json",
+      "expectedSha256": "04f2dd6db2900b6160de8ac0634fab4f5c5f647e73f8a85388e95fef1439010f",
+      "actualSha256": "04f2dd6db2900b6160de8ac0634fab4f5c5f647e73f8a85388e95fef1439010f",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/check_preservation.py",
+      "expectedSha256": "247cc15c151920d5c6b9133222c350c526624553933606a7cd20a07f808817db",
+      "actualSha256": "247cc15c151920d5c6b9133222c350c526624553933606a7cd20a07f808817db",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B01/build.log",
+      "expectedSha256": "41bb5840495e6fa9400096672110dd7dfad71a4c3f22933465b866706c2e7c12",
+      "actualSha256": "41bb5840495e6fa9400096672110dd7dfad71a4c3f22933465b866706c2e7c12",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/preservation-before.json",
+      "expectedSha256": "90055c75c1ff7da94b842ac395ea6c825bbab035e8ad8137f5ca9bb1cfe7429b",
+      "actualSha256": "90055c75c1ff7da94b842ac395ea6c825bbab035e8ad8137f5ca9bb1cfe7429b",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/spatial-draft-layer.json",
+      "expectedSha256": "67b51cf9bf5216e750a42da3038371cca77d201792d46962cf9c3f06e9b12d93",
+      "actualSha256": "67b51cf9bf5216e750a42da3038371cca77d201792d46962cf9c3f06e9b12d93",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/browser-mesh-review.json",
+      "expectedSha256": "9e93c72b59cd1a4ea6f8a6da76e2e51892f4d7298d3c85fbc4fe7609edcbb2d6",
+      "actualSha256": "9e93c72b59cd1a4ea6f8a6da76e2e51892f4d7298d3c85fbc4fe7609edcbb2d6",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/validator-result.log",
+      "expectedSha256": "8aacc858b4f32bfbe3d19bcf5bab056feb5930a202c24edf93e2eb2c44ffcf48",
+      "actualSha256": "8aacc858b4f32bfbe3d19bcf5bab056feb5930a202c24edf93e2eb2c44ffcf48",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/browser-baseline.json",
+      "expectedSha256": "10c5399df04f5d5211be157eb60075c2e634762a11db7c900b65b87d2a1f4d5d",
+      "actualSha256": "10c5399df04f5d5211be157eb60075c2e634762a11db7c900b65b87d2a1f4d5d",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/preservation-after.json",
+      "expectedSha256": "30ac1e8e6c50199c429e99c98791701729a39fdf6f460ecc16b95af7aafdc839",
+      "actualSha256": "30ac1e8e6c50199c429e99c98791701729a39fdf6f460ecc16b95af7aafdc839",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/typecheck.log",
+      "expectedSha256": "5cfb036289d819b2a87e947d65f4532031dd37753f3cf2def0f77d398eea1737",
+      "actualSha256": "5cfb036289d819b2a87e947d65f4532031dd37753f3cf2def0f77d398eea1737",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/validate_record.py",
+      "expectedSha256": "51ef16e3101a147334a92fb7b9bb51e18be44620f6f2ee1603e075907379605c",
+      "actualSha256": "51ef16e3101a147334a92fb7b9bb51e18be44620f6f2ee1603e075907379605c",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/browser-validation.json",
+      "expectedSha256": "52654d7a8b5f96be02d55748c8fc59e30613994d1a777a9bd973ec9afd1f0b7e",
+      "actualSha256": "52654d7a8b5f96be02d55748c8fc59e30613994d1a777a9bd973ec9afd1f0b7e",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/t03-schema-validation.log",
+      "expectedSha256": "2621645aa5ba5511c262dfb7044152f105faaea5be3fe275ba0757521b866e21",
+      "actualSha256": "2621645aa5ba5511c262dfb7044152f105faaea5be3fe275ba0757521b866e21",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/spatial-draft-tests.log",
+      "expectedSha256": "b7bddf88705cc2fbcf4db084b379395f5adef6e7068119bf99006b89eef5ab01",
+      "actualSha256": "b7bddf88705cc2fbcf4db084b379395f5adef6e7068119bf99006b89eef5ab01",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/source-evidence.json",
+      "expectedSha256": "d074204e91387af7954e725ab91a2a77e0adecfcabbeedc1d1827d8efcb205ac",
+      "actualSha256": "d074204e91387af7954e725ab91a2a77e0adecfcabbeedc1d1827d8efcb205ac",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/validator-result.json",
+      "expectedSha256": "8aacc858b4f32bfbe3d19bcf5bab056feb5930a202c24edf93e2eb2c44ffcf48",
+      "actualSha256": "8aacc858b4f32bfbe3d19bcf5bab056feb5930a202c24edf93e2eb2c44ffcf48",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/preservation-check.log",
+      "expectedSha256": "c783232bec5f47515ca631202cb22dd29cd5472a7f11b2f0aece8e8e4a7b0267",
+      "actualSha256": "c783232bec5f47515ca631202cb22dd29cd5472a7f11b2f0aece8e8e4a7b0267",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/check_preservation.py",
+      "expectedSha256": "41ba0a3aa80d47c3e826458b13479e7531b386c3249cef6ae2c511a71c61c5d8",
+      "actualSha256": "41ba0a3aa80d47c3e826458b13479e7531b386c3249cef6ae2c511a71c61c5d8",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B02/build.log",
+      "expectedSha256": "a8a3303bd1db2a34825d88d31d6b097342e256c985c312e44be00bb14a624b8b",
+      "actualSha256": "a8a3303bd1db2a34825d88d31d6b097342e256c985c312e44be00bb14a624b8b",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/preservation-before.json",
+      "expectedSha256": "e1f26576f75384090d8e528e1726cffce1cba474ac929c620cecc1d7e6a341aa",
+      "actualSha256": "e1f26576f75384090d8e528e1726cffce1cba474ac929c620cecc1d7e6a341aa",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/spatial-draft-layer.json",
+      "expectedSha256": "d634cc00781fb46d84ee8e18b2c271c4a378b2656b2674b05611b5c202504714",
+      "actualSha256": "d634cc00781fb46d84ee8e18b2c271c4a378b2656b2674b05611b5c202504714",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/browser-mesh-review.json",
+      "expectedSha256": "1d302a7f402bb37105953c4838585ed88477b8cc19837b42e4bcf7a83955bcba",
+      "actualSha256": "1d302a7f402bb37105953c4838585ed88477b8cc19837b42e4bcf7a83955bcba",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/browser-baseline.json",
+      "expectedSha256": "e38637330292c00d03cd28283ce34cfe453b3818be58566e4eb0f85ec5f845e5",
+      "actualSha256": "e38637330292c00d03cd28283ce34cfe453b3818be58566e4eb0f85ec5f845e5",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/preservation-after.json",
+      "expectedSha256": "043f220ce92bbb3743309c7fa8db38e78a92a212989aedcd70abfa3b174f7c0f",
+      "actualSha256": "043f220ce92bbb3743309c7fa8db38e78a92a212989aedcd70abfa3b174f7c0f",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/typecheck.log",
+      "expectedSha256": "40b435412feb2dc8c30904f8d10e8064dad8f04f6636ddedcc607bfbde9e2cf2",
+      "actualSha256": "40b435412feb2dc8c30904f8d10e8064dad8f04f6636ddedcc607bfbde9e2cf2",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/validate_record.py",
+      "expectedSha256": "c01c1ebd3cf9520bae1b3ca483f32ec16f77b3432f1356bdbdec9ce813a6342e",
+      "actualSha256": "c01c1ebd3cf9520bae1b3ca483f32ec16f77b3432f1356bdbdec9ce813a6342e",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/git-diff-check.log",
+      "expectedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actualSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/t03-schema-fixtures.log",
+      "expectedSha256": "2621645aa5ba5511c262dfb7044152f105faaea5be3fe275ba0757521b866e21",
+      "actualSha256": "2621645aa5ba5511c262dfb7044152f105faaea5be3fe275ba0757521b866e21",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/browser-validation.json",
+      "expectedSha256": "463deefab2f9c6ba1e265cbb411b1c0e380060ea1ae16553763c868a013cf912",
+      "actualSha256": "463deefab2f9c6ba1e265cbb411b1c0e380060ea1ae16553763c868a013cf912",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/handoff-check.json",
+      "expectedSha256": "1086f0aaf1f019895038667f163900978f030f6c181c2f6b2d9f6830cc4bb052",
+      "actualSha256": "1086f0aaf1f019895038667f163900978f030f6c181c2f6b2d9f6830cc4bb052",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/spatial-draft-tests.log",
+      "expectedSha256": "d6c356685b32085f05a32dde1226ff8abf11e33bb137a25345de01e3afa49fdf",
+      "actualSha256": "d6c356685b32085f05a32dde1226ff8abf11e33bb137a25345de01e3afa49fdf",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/run_checks.py",
+      "expectedSha256": "da209249ddc532f9b8968f1b4f61736bf30e68bb2463190519c2d1dc9a3b5f59",
+      "actualSha256": "da209249ddc532f9b8968f1b4f61736bf30e68bb2463190519c2d1dc9a3b5f59",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/source-evidence.json",
+      "expectedSha256": "dddef00da127eeeb3afb52dc2e3967cb0a0665547d7dff18af386bdc37643ae7",
+      "actualSha256": "dddef00da127eeeb3afb52dc2e3967cb0a0665547d7dff18af386bdc37643ae7",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/record-validator.log",
+      "expectedSha256": "d396ebc62e50d1dd4ea3d290d9096690be06d12b36ee9627568533f21dc24099",
+      "actualSha256": "d396ebc62e50d1dd4ea3d290d9096690be06d12b36ee9627568533f21dc24099",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/validator-result.json",
+      "expectedSha256": "d396ebc62e50d1dd4ea3d290d9096690be06d12b36ee9627568533f21dc24099",
+      "actualSha256": "d396ebc62e50d1dd4ea3d290d9096690be06d12b36ee9627568533f21dc24099",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/build_spatial_draft.py",
+      "expectedSha256": "309c86f703ef438eda8869157b498dbbd8ac6b7c21480cbce08a90250a72598a",
+      "actualSha256": "309c86f703ef438eda8869157b498dbbd8ac6b7c21480cbce08a90250a72598a",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/capture_preservation.py",
+      "expectedSha256": "a3a738a0e9ed59520badc432c0ab10fb47ed2a993a57626acb3f3e3a6032e0ce",
+      "actualSha256": "a3a738a0e9ed59520badc432c0ab10fb47ed2a993a57626acb3f3e3a6032e0ce",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/validation-summary.json",
+      "expectedSha256": "626ddb3dcb5d78150690dfdf9ae09fce5e5aa46a683a594b751d5da111e7a32e",
+      "actualSha256": "626ddb3dcb5d78150690dfdf9ae09fce5e5aa46a683a594b751d5da111e7a32e",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/check_preservation.py",
+      "expectedSha256": "52024bc6831a90684c78a5214e8bd253be96b12caa335e082690c978dff3d253",
+      "actualSha256": "52024bc6831a90684c78a5214e8bd253be96b12caa335e082690c978dff3d253",
+      "passed": true
+    },
+    {
+      "path": "work/evidence/T13c-B03/build.log",
+      "expectedSha256": "a25f7b59cb825014dc37d9c87d3b2e1b87cd6abab9a7f6923985ee02275d0a06",
+      "actualSha256": "a25f7b59cb825014dc37d9c87d3b2e1b87cd6abab9a7f6923985ee02275d0a06",
+      "passed": true
+    }
+  ],
+  "OpenSim_Models": {
+    "head": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "statusPorcelain": "",
+    "passed": true
+  },
+  "productionAiEvidenceOverlayItemCount": 0,
+  "T15gDenominator": {
+    "frozen": false,
+    "wholeBodyIndividualMuscleCount": null,
+    "coveragePercent": null
+  },
+  "taskOwnedTrackedPaths": [
+    "atlas-data/schemas/source-research-manifest.schema.json",
+    "atlas-data/sources/README-T17-source-research.md",
+    "atlas-data/sources/source_research.py",
+    "atlas-data/sources/test_source_research.py",
+    "work/STATUS.md",
+    "work/evidence/T17/ai-evidence-regression.log",
+    "work/evidence/T17/ai-overlay-check.json",
+    "work/evidence/T17/attachment-crosschecks.log",
+    "work/evidence/T17/build.log",
+    "work/evidence/T17/canonical-dataset-check.log",
+    "work/evidence/T17/check_preservation.py",
+    "work/evidence/T17/fixture-cli-after-cache-change.json",
+    "work/evidence/T17/fixture-cli-after-cache-reuse.json",
+    "work/evidence/T17/fixture-cli-cache-changed.json",
+    "work/evidence/T17/fixture-cli-first.json",
+    "work/evidence/T17/fixture-cli-second.json",
+    "work/evidence/T17/fixtures/output/access-ledger.json",
+    "work/evidence/T17/fixtures/output/comparison-table.csv",
+    "work/evidence/T17/fixtures/output/exceptions.json",
+    "work/evidence/T17/fixtures/output/field-observations.json",
+    "work/evidence/T17/fixtures/output/run-summary.json",
+    "work/evidence/T17/fixtures/synthetic-manifest-cache-changed.json",
+    "work/evidence/T17/fixtures/synthetic-manifest.json",
+    "work/evidence/T17/git-diff-check.log",
+    "work/evidence/T17/learning-validation.log",
+    "work/evidence/T17/preservation-after.json",
+    "work/evidence/T17/preservation-check.log",
+    "work/evidence/T17/schema-check.log",
+    "work/evidence/T17/source-research-tests.log",
+    "work/evidence/T17/start-baseline.json",
+    "work/evidence/T17/t03-schema-check.log",
+    "work/evidence/T17/typecheck.log",
+    "work/evidence/T17/validation-results.json",
+    "work/reports/T17.md",
+    "work/tasks/T17.md"
+  ],
+  "taskOwnedUntrackedPaths": [],
+  "unexpectedTrackedPaths": [],
+  "unexpectedUntrackedPaths": [],
+  "issues": [],
+  "pass": true
+}

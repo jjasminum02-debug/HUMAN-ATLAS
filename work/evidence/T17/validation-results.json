@@ -1,0 +1,160 @@
+{
+  "task": "T17",
+  "capturedAtLocal": "2026-09-27",
+  "passed": true,
+  "toolValidation": {
+    "subjectCount": 1,
+    "fixtureOnly": true,
+    "accessAttempts": 5,
+    "fieldExtractions": 3,
+    "comparisonRecords": 3,
+    "comparisonCsvRows": 8,
+    "exceptionCount": 7,
+    "fieldSummaries": [
+      {
+        "subjectId": "SYNTHETIC-MUSCLE-01",
+        "field": "origin",
+        "accessAttemptCount": 5,
+        "openedOriginalAccessCount": 0,
+        "indexOnlyAccessCount": 1,
+        "failedAccessCount": 1,
+        "extractionCount": 3,
+        "observedUnderlyingWorkCount": 2,
+        "comparisonCount": 3,
+        "possiblePairCount": 3,
+        "comparisonClasses": [
+          "substantive_conflict",
+          "variation",
+          "wording_difference"
+        ],
+        "comparisonOutcome": "conflicted",
+        "humanAnatomyReview": "not_performed_by_this_tool"
+      },
+      {
+        "subjectId": "SYNTHETIC-MUSCLE-01",
+        "field": "insertion",
+        "accessAttemptCount": 0,
+        "openedOriginalAccessCount": 0,
+        "indexOnlyAccessCount": 0,
+        "failedAccessCount": 0,
+        "extractionCount": 0,
+        "observedUnderlyingWorkCount": 0,
+        "comparisonCount": 0,
+        "possiblePairCount": 0,
+        "comparisonClasses": [],
+        "comparisonOutcome": "unresearched",
+        "humanAnatomyReview": "not_performed_by_this_tool"
+      }
+    ],
+    "humanAnatomyReview": {
+      "performed": false,
+      "status": "not_performed_by_this_tool",
+      "reviewer": null
+    },
+    "promotion": {
+      "aiEvidenceApproval": "none",
+      "canonicalClaimsWritten": false,
+      "productionOverlayWritten": false
+    }
+  },
+  "cacheRegression": [
+    {
+      "evidence": "work/evidence/T17/fixture-cli-first.json",
+      "cache": "miss_or_invalidated",
+      "inputFingerprint": "efc3ebe2bf37b492f60cac360a8f36893d869807ebaa12b5aab63e3255962302"
+    },
+    {
+      "evidence": "work/evidence/T17/fixture-cli-second.json",
+      "cache": "hit",
+      "inputFingerprint": "efc3ebe2bf37b492f60cac360a8f36893d869807ebaa12b5aab63e3255962302"
+    },
+    {
+      "evidence": "work/evidence/T17/fixture-cli-cache-changed.json",
+      "cache": "miss_or_invalidated",
+      "inputFingerprint": "956e89c312ef80195a956b453e775fa030a80fa2a6fefef516da2c073596fbdd"
+    },
+    {
+      "evidence": "work/evidence/T17/fixture-cli-after-cache-change.json",
+      "cache": "miss_or_invalidated",
+      "inputFingerprint": "efc3ebe2bf37b492f60cac360a8f36893d869807ebaa12b5aab63e3255962302"
+    },
+    {
+      "evidence": "work/evidence/T17/fixture-cli-after-cache-reuse.json",
+      "cache": "hit",
+      "inputFingerprint": "efc3ebe2bf37b492f60cac360a8f36893d869807ebaa12b5aab63e3255962302"
+    }
+  ],
+  "checks": [
+    {
+      "name": "T17 manifest schema",
+      "result": "passed",
+      "evidence": "work/evidence/T17/schema-check.log"
+    },
+    {
+      "name": "T17 source workflow regression",
+      "result": "passed 18/18",
+      "evidence": "work/evidence/T17/source-research-tests.log"
+    },
+    {
+      "name": "T16 AI evidence Node adapter",
+      "result": "passed 7/7; Python fixtures 8/8; legacy preview 14 rows; production overlay 0 rows",
+      "evidence": "work/evidence/T17/ai-evidence-regression.log"
+    },
+    {
+      "name": "Attachment comparison regression",
+      "result": "passed 2/2",
+      "evidence": "work/evidence/T17/attachment-crosschecks.log"
+    },
+    {
+      "name": "T03 schema and canonical catalog",
+      "result": "passed",
+      "evidence": [
+        "work/evidence/T17/t03-schema-check.log",
+        "work/evidence/T17/canonical-dataset-check.log"
+      ]
+    },
+    {
+      "name": "Learning content references",
+      "result": "passed; 81 names and 14 summaries",
+      "evidence": "work/evidence/T17/learning-validation.log"
+    },
+    {
+      "name": "AI evidence production overlay",
+      "result": "passed; 0 production rows, 14 legacy preview rows",
+      "evidence": "work/evidence/T17/ai-overlay-check.json"
+    },
+    {
+      "name": "TypeScript typecheck",
+      "result": "passed",
+      "evidence": "work/evidence/T17/typecheck.log"
+    },
+    {
+      "name": "Production build",
+      "result": "passed with existing App chunk >500 kB warning",
+      "evidence": "work/evidence/T17/build.log"
+    },
+    {
+      "name": "Real browser",
+      "result": "not_applicable; no UI/runtime files were changed",
+      "evidence": null
+    },
+    {
+      "name": "Git whitespace check",
+      "result": "passed",
+      "evidence": "work/evidence/T17/git-diff-check.log"
+    },
+    {
+      "name": "Protected data and user change preservation",
+      "result": "passed; 47 existing untracked files, 97 protected atlas/data/assets, 48 T13 spatial evidence hashes, OpenSim clean, overlay empty, denominator unchanged",
+      "evidence": "work/evidence/T17/preservation-after.json"
+    }
+  ],
+  "scopeNotes": [
+    "Synthetic fixture only; no actual anatomy source was researched.",
+    "No production AI evidence, canonical claim/review, learner data, user draft, spatial draft, asset, or OpenSim source was written.",
+    "All report output is fixtureOnly and local under work/evidence/T17."
+  ],
+  "knownWarnings": [
+    "Existing production App bundle exceeds the 500 kB warning threshold."
+  ]
+}

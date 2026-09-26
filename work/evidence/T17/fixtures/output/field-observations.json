@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "1.0.0",
+  "manifestId": "T17-SYNTHETIC-DEMO",
+  "inputFingerprint": "efc3ebe2bf37b492f60cac360a8f36893d869807ebaa12b5aab63e3255962302",
+  "fixtureOnly": true,
+  "observations": [
+    {
+      "id": "OBS-SYN-A",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "accessId": "ACC-SYN-A",
+      "value": "TEST ONLY: synthetic phrasing Alpha",
+      "valueHash": "6bc8b8336e6ba7884c7aa52b2d31fa89af2758bcaea036b80062364574527be5",
+      "reference": {
+        "sourceId": "SRC-SYN-A",
+        "accessId": "ACC-SYN-A",
+        "locator": "Fixture paragraph A"
+      },
+      "note": "TEST ONLY; synthetic comparison text, not anatomy.",
+      "sourceId": "SRC-SYN-A",
+      "locator": "Fixture paragraph A",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "synthetic_fixture",
+      "textAccess": "fixture_only",
+      "underlyingWorkId": "SYN-WORK-A",
+      "recordHash": "ac132753adb9a3923d29106bd016a8023978f78f5647402b93b6ba83045e6f61"
+    },
+    {
+      "id": "OBS-SYN-B",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "accessId": "ACC-SYN-A-MIRROR",
+      "value": "TEST ONLY: synthetic wording for the same imaginary statement",
+      "valueHash": "16c1bdb5367e599ebd851d99763de6f7facf86ce522f98f276057b99778ffed3",
+      "reference": {
+        "sourceId": "SRC-SYN-A-MIRROR",
+        "accessId": "ACC-SYN-A-MIRROR",
+        "locator": "Fixture mirror row"
+      },
+      "note": "TEST ONLY; synthetic comparison text, not anatomy.",
+      "sourceId": "SRC-SYN-A-MIRROR",
+      "locator": "Fixture mirror row",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "synthetic_fixture",
+      "textAccess": "fixture_only",
+      "underlyingWorkId": "SYN-WORK-A",
+      "recordHash": "6f812834a40ab35d6dc37435ad78410324ee41808976ab8ba0097962a89127e9"
+    },
+    {
+      "id": "OBS-SYN-C",
+      "subjectId": "SYNTHETIC-MUSCLE-01",
+      "field": "origin",
+      "accessId": "ACC-SYN-B",
+      "value": "TEST ONLY: an intentionally different synthetic variant",
+      "valueHash": "b5e3e8a3197c4a7833c0fcb858151549cde7a8186b7f3e2f1518db8e05bab40d",
+      "reference": {
+        "sourceId": "SRC-SYN-B",
+        "accessId": "ACC-SYN-B",
+        "locator": "Fixture table B"
+      },
+      "note": "TEST ONLY; synthetic comparison text, not anatomy.",
+      "sourceId": "SRC-SYN-B",
+      "locator": "Fixture table B",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "synthetic_fixture",
+      "textAccess": "fixture_only",
+      "underlyingWorkId": "SYN-WORK-B",
+      "recordHash": "ae3bd99888e13c10cbd84530242b444c39c59de8d6dbc03badee7ac8c010ef11"
+    }
+  ],
+  "humanAnatomyReview": {
+    "performed": false,
+    "status": "not_performed_by_this_tool",
+    "reviewer": null
+  }
+}
