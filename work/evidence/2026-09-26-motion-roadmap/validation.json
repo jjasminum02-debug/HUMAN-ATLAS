@@ -1,0 +1,55 @@
+{
+  "scope": "design consistency only; no anatomy or animation certification",
+  "passed": true,
+  "checks": {
+    "independent_task_ids_16_to_40": true,
+    "planned_order_matches_specs": true,
+    "task_specs_exist": true,
+    "no_false_implementation_status": true,
+    "default_successors_exist": true,
+    "t15_flow_preserved": true,
+    "next_new_numeric_id_is_41": true,
+    "source_locator_and_access_recorded": true,
+    "claim_source_references_exist": true,
+    "option_claim_references_exist": true,
+    "example_has_no_fabricated_human_review": true,
+    "example_has_no_fabricated_geometry": true,
+    "example_has_no_fabricated_clip": true,
+    "example_is_not_runtime_data": true,
+    "prior_task_plans_preserved": true,
+    "report_exists": true,
+    "diff_check": true
+  },
+  "prior_task_plan_hashes": {
+    "T16.md": "dd6b6e6acc9be8e15c77d1181dd6b186fd42cc22482fa59ba5ece0eeedc83d88",
+    "T17.md": "350b1121a09dc999417b334d27ecfd60bffc51eeb31c1cdac13b3105c9158726",
+    "T18.md": "85ef5b9bb7603698018fa99751eb65279882f010db457f9b769efe2a7d4f1b78",
+    "T19.md": "f6731ffdb4ab1a1a0fb1ef04b42e28e3bd47be5fce0b2746ed7f76429be29b09",
+    "T20.md": "aa50ee570d3ca724445ea1151ba8c5b2cb7e0c781056c3a55fe37f5c0658aed2",
+    "T21.md": "f2d742daa5f12f8e610030db668594c8a055c067c96a98482c56bd6c801070cf",
+    "T22.md": "921059a331054f6521cd2baa3095def016f958700b962b52d135f7113587da25",
+    "T23.md": "d12f796f42c3cbc342a3377378a2acb4304ae2eecc6f8f9d74dc335ac813e64f",
+    "T24.md": "3c11f46003af45d2f27df83c4a47575dedc5126d9528a156d32e2fefe0576fb4"
+  },
+  "protected_file_count": 65,
+  "observed_runtime_changes_during_concurrent_T15a": [
+    {
+      "path": "atlas-web/src/ui/App.tsx",
+      "before": "1764200b1398684a5a93e0cd4a2dad29b42130fac14009888ec7cfe9d0987b4c",
+      "after": "1a83a57ac7b6576240fcb24d987ada4b71c45c22adb5590401e483e3e92e3754"
+    },
+    {
+      "path": "atlas-web/src/data/learning.ts",
+      "before": "bfd95fc9c9e33429c10b8f9a86d7c4a80a29dd430dea8ce0e81ac164922354ff",
+      "after": "902384973ed956df7f95fc19bc990f81c92f651d1099df4d45040bdb716ddd96"
+    }
+  ],
+  "runtime_changes_authored_by_this_design_task": [],
+  "head_before": "4452411d8a6f52e7a9aacfce003571d8ae53fb6b",
+  "head_after": "d2a7680389200d93effa463a1cfb258df324002b",
+  "diff_check_output": "",
+  "app_tests_rerun": false,
+  "application_browser_tests_run": false,
+  "reference_site_images_visually_inspected": true,
+  "commit_push_deploy_by_this_task": false
+}

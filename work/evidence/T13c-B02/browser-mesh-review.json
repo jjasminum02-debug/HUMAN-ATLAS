@@ -1,0 +1,44 @@
+{
+  "date": "2026-09-26",
+  "browser": "Codex in-app browser",
+  "route": "http://127.0.0.1:5173/review?muscle=HA-M-000003",
+  "targetAttachmentId": "HA-A-T05-TA-TIBIA-CONDYLE-ORIGIN",
+  "selectedContextAsset": {
+    "assetId": "HA-MESH-BP3D4-FJ3387",
+    "sourceFileId": "FJ3387",
+    "displayName": "right tibia",
+    "sourceRelease": "BodyParts3D Release 4.0",
+    "revision": "BP3D-R4-OBJ-TO-GLB-V1",
+    "assetSha256": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341",
+    "topologyHash": "1a44d95c1a84f014cce9452a7185814ec3c416efe3781e05bd223650c3c26f38",
+    "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+    "units": "m",
+    "poseId": "bodyparts3d-r4-static-reference"
+  },
+  "actions": [
+    "Selected “관련 뼈 보기 · 표면 미지정” for the target attachment.",
+    "Isolated selected mesh with “선택만 보기” (UI then showed “격리 해제”).",
+    "Viewed frontal preset, posterior preset, right lateral preset, and one free-rotated view.",
+    "Reset camera to “전체 보기” before recording the multi-view observation."
+  ],
+  "views": [
+    {
+      "view": "frontal preset",
+      "observed": "Whole right tibia visible in selected-only view; unmarked surface. Proximal condylar end visible but no attachment patch/landmark annotation."
+    },
+    {
+      "view": "posterior preset",
+      "observed": "Whole tibia visible from posterior; no painted origin boundary, marker, or triangle identifiers."
+    },
+    {
+      "view": "right lateral preset",
+      "observed": "Whole tibia visible; broad bone shape only. No source-defined condylar footprint boundary."
+    },
+    {
+      "view": "free-rotated oblique",
+      "observed": "Rotation changed apparent proximal and shaft contours, but exposed no attachment mark or reproducible point/triangle set."
+    }
+  ],
+  "limits": "The browser viewport screenshot was visually inspected during the task; no screenshot file export is exposed by the selected UI API. Observations are captured in this record. The mesh is an unmarked static reference model; the image alone cannot establish the TA attachment extent. No geometry was inferred or entered.",
+  "decision": "No surface point, line, or patch can be reproducibly mapped from the source into this asset. Keep context_only and geometry null."
+}

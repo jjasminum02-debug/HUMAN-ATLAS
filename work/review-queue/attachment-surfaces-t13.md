@@ -4,6 +4,7 @@
 
 | T05 attachment | 표적 | 보류 이유 | 다음 행동 |
 |---|---|---|---|
+| HA-A-T05-GASTRO-LAT-FEMUR-ORIGIN | 우측 대퇴골 외측과 · 우측 비복근 외측두 기시 | 현대 사체해부 연구 §4.4는 외측과의 뒤위쪽을 지지하지만, 현재 FJ3365 mesh에서 재현 가능한 부착 경계/삼각형은 확인되지 않음. B01은 `context_only`, `geometry:null`로 분리 draft에 보존 | 독립 근거의 해부학적 영역과 mesh landmark 대응을 사람 검토자가 확인하고, 삼각형 경계/범위가 재현 가능한 경우에만 별도 draft 갱신; 그렇지 않으면 보류 유지 |
 | HA-A-T05-GASTRO-LAT-KNEE-CAPSULE-ORIGIN | 무릎 관절낭 | 현재 파생 자산에 관절낭 표면 없음 | 우측 관절낭의 출처·라이선스·좌표가 확인된 메시를 찾고 외측 근두 원문과 구분해 검토 |
 | HA-A-T05-GASTRO-MED-KNEE-CAPSULE-ORIGIN | 무릎 관절낭 | 현재 파생 자산에 관절낭 표면 없음 | 같은 대상 자산을 확보해 내측 근두의 별도 claim/범위를 검토 |
 | HA-A-T05-SOLEUS-ARCH-ORIGIN | 가자미근 건활 | 뼈 메시로 건활 면을 대체할 수 없음 | 출처가 있는 우측 건활/힘줄 경계를 확보하거나 보류 |
@@ -17,5 +18,7 @@
 | HA-A-T05-FL-FASCIA-ORIGIN | 하퇴 근막 | 근막 표면 메시 없음 | 장비골근 기시의 원문 범위를 대상 근막에서 확인 |
 | HA-A-T05-FL-SEPTA-ORIGIN | 가쪽 하퇴 근간중격 | 정확한 중격 메시 없음 | 장비골근 부착 중격을 원문/자산에서 구별 |
 | HA-A-T05-FB-SEPTA-ORIGIN | 가쪽 하퇴 근간중격 | 정확한 중격 메시 없음 | 단비골근 부착 중격을 장비골근과 별개로 검토 |
+| HA-A-T05-TA-TIBIA-CONDYLE-ORIGIN | 우측 경골 외측과 · 전경골근 기시 | Kimata et al. 2022 원문은 외측과 기시를 넓게 지지하지만 FJ3387 표면 경계/landmark를 재현할 수 없음. T13c-B02는 `context_only`, `geometry:null` draft로 보존 | 외측과 footprint의 독립 좌표 또는 재현 가능한 landmark가 확보될 때만 사람 검토 패킷과 geometry를 갱신; 현재 보류 |
+| HA-A-T05-TA-TIBIA-SURFACE-ORIGIN | 우측 경골 몸통 가쪽면 · 전경골근 기시 | Gray 1918 p.480 및 Kimata et al. 2022의 열린 원문은 넓은 근위 가쪽 부착을 지지하지만, 현대 연구의 종축 distal endpoint는 FJ3387의 2D 경계/삼각형으로 변환할 수 없음. T13c-B03은 `context_only`, `geometry:null` draft로 보존 | 근위 경골 외측 표면의 source landmark/mesh triangle 대응을 독립적으로 재현하고 사람 해부학 검토를 받은 경우에만 별도 surface draft 갱신; 현재 보류 |
 
 제2~4중족골 source 파일은 확보했지만 전체 뼈 canonical ID는 미확정이다. 세 항목은 원천 FJ ID가 있는 뼈 **전체 검색**만 가능하며 바닥부 패치가 지정된 것으로 세지 않는다. FJ3385 talus 역시 canonical ID null을 유지한다.

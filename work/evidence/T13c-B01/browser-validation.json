@@ -1,0 +1,35 @@
+{
+  "date": "2026-09-26",
+  "browser": "Codex in-app browser",
+  "authoringRoute": {
+    "url": "http://127.0.0.1:5174/review?muscle=HA-M-000001",
+    "beforeImport": {
+      "legacyT09AnnotationExportCount": 0,
+      "spatialDraftExportCount": 0,
+      "sourceStatusText": "분리된 공간자료 저장소가 준비되었습니다. 기존 T09 초안은 자동 복사·수정하지 않았습니다."
+    },
+    "importResult": {
+      "visibleStatusText": "1개 검증된 공간자료를 추가했습니다. 기존 ID 충돌은 거부합니다.",
+      "recordStatus": "context_only",
+      "geometry": null,
+      "visibleRecordText": "context_only · 관련 구조만 있음 geometry 없음 · right · HA-MESH-BP3D4-FJ3365"
+    },
+    "afterReload": {
+      "savedSpatialDraftCount": 1,
+      "savedSpatialStatus": "context_only",
+      "savedGeometry": null,
+      "legacyT09AnnotationExportCount": 0,
+      "humanReviewed": false
+    },
+    "storageObservationLimit": "The browser's read-only page evaluator omits localStorage and WebCrypto. The app's existing UI export/status was used before and after; no raw localStorage key digest is claimed. Import code writes only the spatial-draft storage key, and the existing T09 UI export remained empty after reload."
+  },
+  "learnerRoute": {
+    "url": "http://127.0.0.1:5174/?muscle=HA-M-000001",
+    "loaded": true,
+    "readOnlyOverlayCanvasCount": 1,
+    "surfaceCandidateWarningCount": 0,
+    "spatialLoadErrorWarningCount": 0,
+    "visualResult": "Actual page screenshot showed the ordinary selected gastrocnemius and context bones, with no B01 surface patch/point/line overlay. This record is geometry-null/context-only."
+  },
+  "result": "pass_for_context_only_review; no surface was rendered and no review promotion occurred."
+}

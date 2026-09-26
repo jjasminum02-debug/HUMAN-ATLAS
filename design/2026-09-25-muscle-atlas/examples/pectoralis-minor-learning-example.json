@@ -1,0 +1,124 @@
+{
+  "status": "design_example_not_runtime_data",
+  "revision": "R13-2026-09-26",
+  "conceptId": "HA-M-000025",
+  "names": {
+    "primary": "소흉근",
+    "koModern": "작은가슴근",
+    "en": "pectoralis minor",
+    "provenance": "Existing learning-names.json entry; Korean dictionary edition limitations preserved"
+  },
+  "sources": [
+    {
+      "id": "elsevier-pm",
+      "url": "https://www.elsevier.com/resources/anatomy/muscular-system/muscles-of-upper-limb/pectoralis-minor-muscle/21327",
+      "locator": "Origin; Insertion; Actions",
+      "accessed": "2026-09-26",
+      "opened": true,
+      "type": "publisher_anatomy_reference"
+    },
+    {
+      "id": "openstax-11-5",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-5-muscles-of-the-pectoral-girdle-and-upper-limbs",
+      "locator": "Table 11.8, pectoralis minor row",
+      "accessed": "2026-09-26",
+      "opened": true,
+      "type": "open_textbook"
+    }
+  ],
+  "claims": [
+    {
+      "id": "example-origin",
+      "field": "origin",
+      "summaryKo": "보통 제3–5늑골의 앞쪽에서 시작하며 기시 범위에는 변이가 있다.",
+      "evidenceState": "cross_checked",
+      "sourceIds": [
+        "elsevier-pm",
+        "openstax-11-5"
+      ],
+      "comparison": "Representative range is 3–5 in Elsevier; OpenStax includes 2–4 or 3–5. Variation retained, no exact-value consensus claimed."
+    },
+    {
+      "id": "example-insertion",
+      "field": "insertion",
+      "summaryKo": "견갑골 오훼돌기에 붙는다.",
+      "evidenceState": "cross_checked",
+      "sourceIds": [
+        "elsevier-pm",
+        "openstax-11-5"
+      ],
+      "comparison": "Both support coracoid process. Finer surface detail is not assigned to a 3D mesh here."
+    },
+    {
+      "id": "example-protraction",
+      "field": "action",
+      "summaryKo": "견갑대의 전인에 관여한다.",
+      "evidenceState": "single_source",
+      "sourceIds": [
+        "elsevier-pm"
+      ]
+    },
+    {
+      "id": "example-downrotation",
+      "field": "action",
+      "summaryKo": "견갑대의 하방회전에 관여한다.",
+      "evidenceState": "single_source",
+      "sourceIds": [
+        "elsevier-pm"
+      ]
+    },
+    {
+      "id": "example-depression",
+      "field": "action",
+      "summaryKo": "견갑대를 아래로 내리는 하강을 돕는다.",
+      "evidenceState": "cross_checked",
+      "sourceIds": [
+        "elsevier-pm",
+        "openstax-11-5"
+      ]
+    }
+  ],
+  "humanReview": null,
+  "exactAttachmentGeometry": null,
+  "learnerCard": {
+    "summaryKo": "소흉근은 갈비뼈에서 견갑골로 연결되는 근육입니다. 견갑골을 앞으로 당기는 전인, 아래로 내리는 하강 보조, 하방회전에 관여합니다.",
+    "contextKo": "이 보기에서는 흉곽을 기준으로 견갑대가 움직이는 교육용 상황을 설명합니다. 각 작용을 구분해서 보고 실제 운동에서의 협력 관계는 근거 있는 범위에서 덧붙입니다.",
+    "primaryButton": "움직임으로 이해하기",
+    "contextToggle": "주변 근육 흐리게",
+    "contextToggleDefault": true,
+    "motionOptions": [
+      {
+        "label": "앞으로 당기기 · 전인",
+        "claimId": "example-protraction"
+      },
+      {
+        "label": "아래로 내리기 · 하강",
+        "claimId": "example-depression"
+      },
+      {
+        "label": "아래로 돌리기 · 하방회전",
+        "claimId": "example-downrotation"
+      }
+    ]
+  },
+  "motion": {
+    "status": "absent",
+    "assetId": null,
+    "clipId": null,
+    "rigId": null,
+    "rangeDegrees": null,
+    "requirements": [
+      "verified thorax/scapula/clavicle assets",
+      "action-specific path and stable frame",
+      "muscle deformation or explicitly simplified path",
+      "no whole-muscle scale-only animation",
+      "explanation synchronized with clip phases"
+    ]
+  },
+  "limitations": [
+    "No motion clip or accurate footprint authored in this design example",
+    "AI comparison is not human approval",
+    "Cross-check state applies to individual fields, not all content",
+    "Single-source action fields require further cross-check in T26; useful educational text need not wait for human review"
+  ]
+}

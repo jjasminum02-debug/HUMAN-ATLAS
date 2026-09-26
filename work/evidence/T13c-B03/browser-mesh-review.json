@@ -1,0 +1,45 @@
+{
+  "date": "2026-09-26",
+  "browser": "Codex in-app browser, live local Vite app",
+  "route": "http://127.0.0.1:5173/review?muscle=HA-M-000003",
+  "targetAttachmentId": "HA-A-T05-TA-TIBIA-SURFACE-ORIGIN",
+  "targetClaimId": "HA-C-T05-TA-TIBIA-SURFACE-ORIGIN",
+  "selectedContextAsset": {
+    "assetId": "HA-MESH-BP3D4-FJ3387",
+    "sourceFileId": "FJ3387",
+    "displayName": "right tibia",
+    "sourceRelease": "BodyParts3D Release 4.0",
+    "revision": "BP3D-R4-OBJ-TO-GLB-V1",
+    "assetSha256": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341",
+    "topologyHash": "1a44d95c1a84f014cce9452a7185814ec3c416efe3781e05bd223650c3c26f38",
+    "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+    "units": "m",
+    "poseId": "bodyparts3d-r4-static-reference"
+  },
+  "actions": [
+    "Selected the target attachment's ‘관련 뼈 보기 · 표면 미지정’ control, then chose the separate upper-lateral tibial-body claim in the T09 attachment selector; did not save or edit a T09 annotation.",
+    "Enabled selected-only display for right tibia FJ3387.",
+    "Viewed the full tibia in the frontal preset, posterior preset, and right-lateral preset, plus a manually free-rotated oblique view.",
+    "Restored frontal preset, used whole-view camera reset, and disabled selected-only display before leaving the page."
+  ],
+  "views": [
+    {
+      "view": "frontal preset",
+      "observed": "The complete right tibia was visible in isolation. Its proximal and distal ends and the anterior border could be viewed, but there was no source mark, attachment coloration, boundary, or triangle identifier."
+    },
+    {
+      "view": "posterior preset",
+      "observed": "The whole tibia was visible from posterior; no patch, source landmark, or proximal lateral-surface boundary was present."
+    },
+    {
+      "view": "right lateral preset",
+      "observed": "The whole bone showed a broad proximal-to-distal contour but no surface footprint or lateral/perimeter annotation."
+    },
+    {
+      "view": "free-rotated oblique",
+      "observed": "Manual rotation exposed another unmarked contour. The visible shape did not provide a reproducible attachment perimeter or a source-to-mesh landmark correspondence."
+    }
+  ],
+  "limits": "The 3D screen was visually reviewed in the actual browser. The browser interaction surface did not provide a way to save a screenshot into the project, so view observations are recorded here. The static unmarked mesh cannot establish anatomy from appearance alone; no coordinates, points, lines, triangle IDs, or patch were inferred.",
+  "decision": "No reproducible source-to-mesh boundary can be mapped for this claim. Keep context_only, geometry null, and reviewId null."
+}

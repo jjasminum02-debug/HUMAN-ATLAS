@@ -1,0 +1,42 @@
+{
+  "checkedAt": "2026-09-26",
+  "browser": "Codex in-app browser, live local Vite app",
+  "reviewRoute": "http://127.0.0.1:5173/review?muscle=HA-M-000003",
+  "target": "HA-A-T05-TA-TIBIA-CONDYLE-ORIGIN",
+  "import": {
+    "action": "Imported the one-record B02 JSON layer with the review UI validation control.",
+    "announcement": "1개 검증된 공간자료를 추가했습니다. 기존 ID 충돌은 거부합니다.",
+    "savedCount": 1,
+    "stateLabel": "context_only · 관련 구조만 있음 geometry 없음 · right · HA-MESH-BP3D4-FJ3387"
+  },
+  "reload": {
+    "action": "Reloaded the review route in the same browser profile.",
+    "savedCountAfterReload": 1,
+    "revalidationAnnouncement": "1개 분리 공간자료를 참조·hash 검증했습니다. 기존 T09 초안은 별도 key에 보존됩니다.",
+    "spatialExport": {
+      "recordCount": 1,
+      "recordId": "T13C-B02-HA-A-T05-TA-TIBIA-CONDYLE-ORIGIN",
+      "status": "context_only",
+      "geometry": null,
+      "reviewId": null
+    },
+    "legacyT09Export": {
+      "annotationCount": 0,
+      "annotations": []
+    }
+  },
+  "learner": {
+    "route": "http://127.0.0.1:5173/?muscle=HA-M-000003",
+    "loaded": true,
+    "renderedContent": [
+      "전경골근 learner page",
+      "기시/정지 Korean summary",
+      "existing static lower-leg model and bone visibility controls",
+      "source and review-state disclosure"
+    ],
+    "b02GeometryOverlay": "none; the saved geometry-null context_only record produced no surface patch or highlight",
+    "humanReview": "not performed; page identifies content as a draft/review pending"
+  },
+  "visualInspection": "Inspected the rendered learner screenshot in the browser. The pre-existing tibialis anterior model was visible; no B02 attachment-surface mark was shown. Screenshot was not exported to a project file by the browser surface.",
+  "rawLocalStorageDigest": "unavailable through the read-only browser inspection interface; verified by reloading the same browser profile and by spatial/T09 export instead"
+}

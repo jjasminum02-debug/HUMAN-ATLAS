@@ -1,0 +1,54 @@
+{
+  "evidenceId": "SRC-T13C-B02-KIMATA-2022",
+  "independentOfHistoricalClaim": true,
+  "citation": {
+    "authors": [
+      "Kentaro Kimata",
+      "Shun Otsuka",
+      "Hiroki Yokota",
+      "Xiyao Shan",
+      "Naoyuki Hatayama",
+      "Munekazu Naito"
+    ],
+    "title": "Relationship between attachment site of tibialis anterior muscle and shape of tibia: anatomical study of cadavers",
+    "journal": "Journal of Foot and Ankle Research",
+    "volume": 15,
+    "articleNumber": "54",
+    "year": 2022,
+    "doi": "10.1186/s13047-022-00559-y",
+    "published": "2022-07-12",
+    "versionOfRecord": "2022-07-12"
+  },
+  "url": "https://link.springer.com/article/10.1186/s13047-022-00559-y",
+  "accessedDate": "2026-09-26",
+  "accessMethod": "Publisher-hosted open full-text HTML directly opened in the in-app browser; Methods and Results sections, figures/captions, and limitations were read. Search result used only for discovery.",
+  "sourceStatus": "Version-of-record bibliographic metadata displayed by Springer Nature; no local copy downloaded.",
+  "studyDesignAndSample": "Gross anatomical cadaver dissection study of 40 lower legs (20 male, 20 female) from 20 Japanese cadavers. No detected right-left difference for reported parameters.",
+  "locators": [
+    {
+      "locator": "Materials and Methods, paragraph beginning “Twenty Japanese cadavers”; dissection protocol and origin definition",
+      "observed": "The TA tendon was cut and turned laterally. Origin was defined where muscle fibers firmly adhered to bone cortex. Distal ends of anterior and posterior tibial attachment were marked A and P, measured along tibial length. These are longitudinal endpoint measurements, not a condylar footprint triangle map."
+    },
+    {
+      "locator": "Results, first paragraph; Fig. 1 caption",
+      "observed": "The authors report anterior TA fibers originating from the lateral condyle and anterior border of the tibia; posterior fibers originate from the anterolateral tibial surface and anterior interosseous membrane. Fig. 1 is a cadaver dissection view, not a transferable mesh coordinate/triangle dataset."
+    },
+    {
+      "locator": "Discussion, paragraph comparing textbook extents; Fig. 2/Table 1",
+      "observed": "The reported 47.1% and 66.1% values refer to distal limits of anterior and posterior fiber attachment along proximal-to-distal tibial length; the study does not provide a lateral-condyle surface boundary for this project mesh."
+    },
+    {
+      "locator": "Limitations",
+      "observed": "Authors note a relatively small Japanese cadaver sample, age/demographic generalizability limits, and formalin fixation."
+    }
+  ],
+  "independentAnatomySupport": "Supports the broad claim that anterior tibialis anterior fibers include an origin at the tibial lateral condyle. It helps distinguish this attachment from shaft and interosseous-membrane claims but does not identify exact lateral-condyle surface extent or BodyParts3D FJ3387 triangles/coordinates.",
+  "sourceSeparation": {
+    "historicalClaim": "Gray 20th US edition (1918), section 8c, subsection “The Tibialis anterior (Tibialis anticus)”, printed p. 480; the source was opened as Bartleby chapter text in the browser. The project registry identifies the editor/publisher/edition.",
+    "modernEvidence": "Kimata et al. 2022 peer-reviewed cadaveric study, original publisher full text opened; not a terminology index.",
+    "searchIndex": "Discovery aid only; final support taken from opened full-text source.",
+    "humanAnatomyReview": "Not performed by a credentialed project anatomy reviewer; AI/browser source check is not human approval."
+  },
+  "geometryDecision": "held_context_only_geometry_null",
+  "geometryHoldReason": "The modern study maps gross origin and longitudinal distal endpoints, but does not bound the lateral-condyle footprint with coordinates or mesh triangles. The unmarked FJ3387 surface has no source-to-mesh landmark crosswalk. Do not trace a patch from viewport appearance or transfer population ratios to this single adult-male template mesh."
+}

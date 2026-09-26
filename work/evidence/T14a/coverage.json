@@ -1,0 +1,92 @@
+{
+  "createdOn": "2026-09-26",
+  "source": "atlas-data/manifests/attachment-context-t13.json",
+  "sourceRevision": "T13-attachment-context-v2",
+  "denominator": 41,
+  "definitions": {
+    "actualSurfaceCandidate": "A reproducible source-backed surface geometry; whole-bone context and geometry-null T13c drafts are excluded.",
+    "text_only": "whole_bone_search_context_only: textual attachment plus whole-bone search context, no footprint geometry.",
+    "missing": "held_no_matching_target_mesh: exact target structure has no matching T13 mesh.",
+    "human_review_pending": "Attachment has not received human surface/anatomy review; orthogonal to the text_only/missing split."
+  },
+  "overall": {
+    "actualSurfaceCandidate": 0,
+    "text_only": 28,
+    "missing": 13,
+    "human_review_pending": 41,
+    "canonicalSpatialAnnotations": 0,
+    "separateT13cGeometryNullDrafts": {
+      "count": 3,
+      "states": [
+        "context_only"
+      ],
+      "geometry": null,
+      "reviewId": null,
+      "note": "B01–B03 evidence drafts are separate context records, not T05 surface candidates."
+    }
+  },
+  "byMuscle": {
+    "HA-M-000001": {
+      "label": "비복근",
+      "attachmentCount": 7,
+      "actualSurfaceCandidate": 0,
+      "text_only": 5,
+      "missing": 2,
+      "human_review_pending": 7,
+      "includesPartOwners": [
+        "HA-P-000001",
+        "HA-P-000002"
+      ]
+    },
+    "HA-M-000002": {
+      "label": "가자미근",
+      "attachmentCount": 6,
+      "actualSurfaceCandidate": 0,
+      "text_only": 5,
+      "missing": 1,
+      "human_review_pending": 6,
+      "includesPartOwners": []
+    },
+    "HA-M-000003": {
+      "label": "전경골근",
+      "attachmentCount": 7,
+      "actualSurfaceCandidate": 0,
+      "text_only": 4,
+      "missing": 3,
+      "human_review_pending": 7,
+      "includesPartOwners": []
+    },
+    "HA-M-000004": {
+      "label": "후경골근",
+      "attachmentCount": 12,
+      "actualSurfaceCandidate": 0,
+      "text_only": 8,
+      "missing": 4,
+      "human_review_pending": 12,
+      "includesPartOwners": []
+    },
+    "HA-M-000005": {
+      "label": "장비골근",
+      "attachmentCount": 6,
+      "actualSurfaceCandidate": 0,
+      "text_only": 4,
+      "missing": 2,
+      "human_review_pending": 6,
+      "includesPartOwners": []
+    },
+    "HA-M-000006": {
+      "label": "단비골근",
+      "attachmentCount": 3,
+      "actualSurfaceCandidate": 0,
+      "text_only": 2,
+      "missing": 1,
+      "human_review_pending": 3,
+      "includesPartOwners": []
+    }
+  },
+  "invariantCheck": {
+    "surfacePlusTextOnlyPlusMissingEqualsDenominator": true,
+    "surfaceReviewNotStartedCount": 41,
+    "sourceManifestHumanReviewCountIsZero": true
+  }
+}

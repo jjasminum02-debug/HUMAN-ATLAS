@@ -1,0 +1,114 @@
+{
+  "status": "design_only_not_runtime_data",
+  "revision": "R12-2026-09-26",
+  "authority": "user_product_navigation",
+  "categories": [
+    {
+      "id": "head",
+      "order": 1,
+      "labelKo": "머리",
+      "labelEn": "Head",
+      "sceneBoneScopeProposal": "두개골·하악골",
+      "note": "표정근·씹기근·외안근·혀근육 등은 내부 자료에 유지하되 하위 메뉴로 노출하지 않음"
+    },
+    {
+      "id": "neck",
+      "order": 2,
+      "labelKo": "목",
+      "labelEn": "Neck",
+      "sceneBoneScopeProposal": "경추·목뿔뼈 및 필요한 인접 뼈",
+      "note": "뒤목을 포함. 등/어깨와 중복 소속 가능"
+    },
+    {
+      "id": "back",
+      "order": 3,
+      "labelKo": "등",
+      "labelEn": "Back",
+      "sceneBoneScopeProposal": "척추·갈비뼈·어깨뼈 문맥",
+      "note": "얕은층과 깊은층은 표시 필터이지 새 분류가 아님"
+    },
+    {
+      "id": "shoulder-scapular",
+      "order": 4,
+      "labelKo": "어깨·어깨뼈",
+      "labelEn": "Shoulder/Scapular",
+      "sceneBoneScopeProposal": "어깨뼈·빗장뼈·위팔뼈 문맥",
+      "note": "견갑거근을 포함하는 사용자 범위. 팔·손과 중복 허용"
+    },
+    {
+      "id": "thorax",
+      "order": 5,
+      "labelKo": "가슴우리",
+      "labelEn": "Thorax",
+      "sceneBoneScopeProposal": "갈비뼈·복장뼈·흉추 문맥",
+      "note": "호흡근 포함"
+    },
+    {
+      "id": "abdomen-lumbar",
+      "order": 6,
+      "labelKo": "배·허리",
+      "labelEn": "Abdomen/Lumbar",
+      "sceneBoneScopeProposal": "요추·아래쪽 갈비뼈·골반 문맥",
+      "note": "요방형근·대요근 포함"
+    },
+    {
+      "id": "pelvis-perineum",
+      "order": 7,
+      "labelKo": "골반·샅",
+      "labelEn": "Pelvis/Perineum",
+      "sceneBoneScopeProposal": "골반뼈·엉치뼈·꼬리뼈 문맥",
+      "note": "폐쇄근 등 엉덩이와 중복 허용. 성별 적용 범위는 자료로 구분"
+    },
+    {
+      "id": "gluteal-hip",
+      "order": 8,
+      "labelKo": "볼기·깊은엉덩이",
+      "labelEn": "Gluteal/Hip",
+      "sceneBoneScopeProposal": "골반뼈·대퇴골 근위부 문맥",
+      "note": "심부 외회전근 포함"
+    },
+    {
+      "id": "thigh",
+      "order": 9,
+      "labelKo": "넙다리",
+      "labelEn": "Thigh",
+      "sceneBoneScopeProposal": "대퇴골·무릎뼈·인접 골반/하퇴뼈 문맥",
+      "note": "종아리와 다른 학습 부위"
+    },
+    {
+      "id": "leg",
+      "order": 10,
+      "labelKo": "종아리",
+      "labelEn": "Leg",
+      "sceneBoneScopeProposal": "경골·비골·필요한 대퇴골 원위부와 발뼈 문맥",
+      "note": "현재 파일럿을 첫 실제 장면으로 재사용"
+    },
+    {
+      "id": "foot",
+      "order": 11,
+      "labelKo": "발",
+      "labelEn": "Foot",
+      "sceneBoneScopeProposal": "발목뼈·중족골·발가락뼈 문맥",
+      "note": "발 intrinsic 포함, 하퇴근 부착 문맥은 필요 시 공유"
+    },
+    {
+      "id": "upper-limb",
+      "order": 12,
+      "labelKo": "팔·손",
+      "labelEn": "Upper limb",
+      "sceneBoneScopeProposal": "위팔뼈·노뼈·자뼈·손뼈 및 인접 어깨 문맥",
+      "note": "위팔/아래팔/손 별도 대분류를 만들지 않음"
+    }
+  ],
+  "membershipCardinality": "many_to_many",
+  "requiredVisibleSubcategories": false,
+  "namePolicy": {
+    "primary": "koTraditional (Hangul, e.g. 삼각근)",
+    "secondary": [
+      "koModern (어깨세모근)",
+      "en (deltoid)"
+    ],
+    "hanjaCharactersRequired": false
+  },
+  "anatomicalMemberships": []
+}

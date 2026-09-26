@@ -87,3 +87,12 @@ Three.js 0.186.1 renderer/controls/raycaster로 viewer를 전환하고 T07 decod
 ## T13 — 2026-09-26
 
 T05의 41개 부착을 근육/근두·대상 구조·원문 claim/evidence·우측 instance 단위로 분리 유지한다. BodyParts3D Release 4.0 공식 교차표에서 확인한 우측 대퇴골·발 뼈 9개를 별도 파생 GLB로 보강하고 원본 OBJ와 T07 자산을 보존한다. whole-bone 표시는 표면 검색 컨텍스트에 한정하며 부착면 annotation으로 간주하지 않는다. 제2~4중족골 전체 canonical ID와 FJ3385 talus ID는 추정하지 않는다. T09 입력은 `/review`의 source-linked 대상 뼈에 한정하고 학습 `/`은 읽기 전용이다. 실제 표면 위치를 근거로 지정하지 못한 T13은 `technical_partial_surface_review_pending`으로 남겨 T14로 자동 진행하지 않는다.
+
+## R12 — 2026-09-26 사용자 요구 변경
+
+12개부위는제품탐색분류이며기존source분류와분리. 근육·뼈개념은다중소속가능, 구조ID중복생성금지. 한자명은삼각근처럼한글로쓴관용명이며실제한자입력요구폐기. 근육과뼈의typed selection/card계약도입. T14b검토대기는독립기술개발을막지않음. T15를a–g로분할, Luna Max기본/Sol High는b와e. 경혈/Pro는후속별도설계. 실제구현은이번설계개정에서수행하지않음.
+
+
+## 2026-09-26 R13 — AI 자료 대조와 교육용 움직임
+
+기본 이름·기시정지·작용 표는 AI가 원문을 찾아 필드별 대조한다. T14b의 실제 사람 검토 상태는 보존하되 전항목 학습/개발의 필수 조건에서 제외한다. 정확한 3D footprint와 교육용 clip은 별도 검증한다. T15 흐름 유지, 이후 T16–40의 독립 task와 필요 시 T41 이후 번호를 사용한다. 버튼은 움직임으로 이해하기, 기본 주변 흐림은 켜되 원복 가능. 근육/뼈 카드 분리, 함수 설명과 시범의 동기화, 현재 정적 GLB의 rig 부재를 전제로 한다. 누적 체크포인트 후 task마다 검증·선별 로컬 커밋; push/배포 별도 요청. 07/08/09 및 task-registry-r13.json이 상세 근거다.

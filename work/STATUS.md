@@ -1,17 +1,17 @@
 # 진행 상태 — HUMAN ATLAS
 
 - LAST_UPDATED: 2026-09-26
-- PLAN_REVISION: T13-audit-next-plan-2026-09-26 (T13b 분리 공간자료 저장·검증·overlay)
-- CURRENT_TASK: T13b — technical pass, synthetic browser fixture only; 상위 T13 표면 검토는 미완
-- NEXT_TASK: T13c-B01 — 비복근 외측두 대퇴골 기시 한 항목의 근거 기반 draft 검토 (not_started)
-- LAST_REPORT: work/reports/T13b.md
+- PLAN_REVISION: R13-2026-09-26 — R12 유지 + AI 원문 대조/작용 설명/교육용 움직임/독립 T16–40
+- CURRENT_TASK: T15a — complete_with_gaps; 한글 명칭 투영·검색·Hanja 노출/누락 처리 수정 완료
+- NEXT_TASK: T15b — Sol High (not_started); T14b 사람검토는 별도 대기
+- LAST_REPORT: work/reports/T15a.md
 - CATALOG: partial85 (individual48/group16/part21); 전신 분모 미동결
 - LEARNING_OVERLAY: names81; B01 field evidence57 + B02 50 + B03 50 + B04 50 + B05 51 + B06 60 + B07 67 + B08 56 + B09 48; canonical coverage 85/85 checked_with_gaps (partial catalog only); humanReviewed=false
-- GEOMETRY: 오른쪽 종아리6근육, 근육메시7+뼈13(기존4+T13 9). canonical 우측 instance6/meshAsset20/근육 meshMapping7; 구조 mesh는 근육 mapping 제외. spatialAnnotation0
+- GEOMETRY: 오른쪽 종아리 6근육, 근육메시 7+뼈 13. canonical spatialAnnotation 0; T13c-B01/B02/B03 context_only geometry:null draft 3건 보존; T05 표면 후보 0/41, text_only 28/41, matching target mesh missing 13/41, human_review_pending 41/41
 - FUNCTION_AND_ASSESSMENT: 미구현, 학습 탭은 준비 중
-- TECHNICAL_GATE: T12b 11 mesh 보존; T13 9개 뼈 파생 GLB와 20 mesh 브라우저 로드, T05 부착 41개 중 뼈 검색 28/대상 mesh 보류 13, 실제 surface 0; T13b spatial draft schema/ref/claim-hash/side/frame/unit/pose/topology gate; spatial 8/8, annotation 12/12, search 38/38, T03 fixtures 17/17, production build 및 learner read-only synthetic-overlay browser check 통과
+- TECHNICAL_GATE: T15a search 40/40, learning-content validator, typecheck, build, and actual learner/review browser checks passed. deltoid 4 name queries resolve HA-M-000030; Hanja query 0 results; browser visible Hanja 0. Canonical catalog and structure-summary hashes unchanged; OpenSim HEAD/status unchanged. T14b reviewer opinions 0, approval records 0; no anatomy promotion.
 - ANATOMY_GATE: needs_human_review; 전신 구조 완성 아님
-- DEV_URL: http://127.0.0.1:5174/ (이번 세션 서버; 재시작 시 사용 가능 포트 확인)
+- DEV_URL: none (T15a temporary verification server stopped after browser verification)
 
 | task | 상태 | 산출물/보고서 | 차단 조건 |
 |---|---|---|---|
@@ -40,42 +40,60 @@
 | T13 | technical_partial_surface_review_pending | 뼈 OBJ 9개·파생 GLB; `attachment-context-t13.json`; `work/evidence/T13/`; `work/reports/T13.md` | 정확한 부착 표면 0/41; 적합한 대상 mesh 13개 보류; 사람 검토 없음. T14 미착수 |
 | T13a | technical_pass | `work/tasks/T13a.md`; 학습 카메라·요약·선택 초기화; `work/evidence/T13a/`; `work/reports/T13a.md` | T13 표면 후보 0/41; 실제 draft와 사람 검토 미완 |
 | T13b | technical_pass_test_fixture_only | `work/tasks/T13b.md`; 별도 spatial draft schema/validator·저장/import/export·learner overlay; `work/evidence/T13b/`; `work/reports/T13b.md` | 실제 source-backed surface draft 0/41, 사람 검토 0/41; 기존 T09 화면 draft 0개였고 raw localStorage hash는 미확인 |
+| T13c-B01 | complete_with_geometry_held | `work/tasks/T13c-B01.md`; `work/evidence/T13c-B01/`; `work/reports/T13c-B01.md`; modern source + 1 context-only draft; browser save/reload/learner overlay | 외측과 뒤위쪽 영역의 독립 근거는 확인했지만 재현 가능한 triangle/coordinate boundary 미확보. B01 surface 0, 사람 승인 없음; raw localStorage hash는 브라우저 평가환경에서 미노출 |
+| T13c-B02 | complete_with_geometry_held | `work/tasks/T13c-B02.md`; `work/evidence/T13c-B02/`; `work/reports/T13c-B02.md`; 우측 경골 외측과 기시 1건 context draft | 현대 근거는 넓은 외측과 기시를 지지하지만 FJ3387에 재현 가능한 footprint 경계 없음; surface 0, human review 0 |
+| T13c-B03 | complete_with_geometry_held | `work/tasks/T13c-B03.md`; `work/evidence/T13c-B03/`; `work/reports/T13c-B03.md`; 우측 경골 몸통 가쪽면 기시 1건 context-only draft | Kimata 2022는 넓은 위치/종축 endpoint만 지지; FJ3387의 2D 경계/triangle 대응 없음. surface 0/41, 사람 검토 0/41; T14a 미착수 |
+| T14a | complete_with_gaps | work/tasks/T14a.md; work/reports/T14a.md; work/evidence/T14a/; six pilot learner paths checked; source mapping/390px summary fixes | actual surface 0/41; text_only 28; missing target mesh 13; human review pending 41; modern sources not linked in learner panel. T14b state is tracked in its own row; T15 not started |
+| T14b | needs_human_review | work/tasks/T14b.md; work/evidence/T14b/reviewer-packet.md + SHA manifest; work/evidence/T14b/; work/reports/T14b.md; Astra context brief | Six-item review packet is ready; actual qualified reviewer identity/date/opinions absent; no promotion; T15 not started |
+| T15a | complete_with_gaps | work/reports/T15a.md; work/evidence/T15a/; three-name projection; source-backed deltoid aliases; learner/review Hanja filtering/redaction | Bone search and whole-catalog language completion are not implemented; T14b human anatomy approval still absent |
 
 ## 실제 현재 상태와 원본 보존
 
-학습 `/`와 제작 `/review`를 분리했다. `/review`는 개발 환경만 제공한다. 현재는 정적 앱이며 서버 인증 시스템이 아니다. 이름의 label은 출처에서 확인한 한글 관용명 우선이고 우리말/실제 한자/영어/라틴어는 같은 기존 이름 ID에 연결된다. 부분 canonical 85개와 lookup 2개가 검색에 잡히며, overlay는 81개다. T11-B01–B09 누적 통합검색은 38/38 통과했다. 이름이 있는 근육 부분도 learner search projection에 연결되어 있다.
+학습 `/`와 제작 `/review`를 분리했다. `/review`는 개발 환경만 제공한다. 현재는 정적 앱이며 서버 인증 시스템이 아니다. learner 명칭은 `koTraditional` → `koModern` → `en` 순이며, 실제 한자와 그 provenance는 원자료에 보존하고 learner 입력·검색·표시에서는 제외한다. 라틴어는 출처가 뒷받침하는 검색 보조어로 남긴다. 부분 canonical 85개와 lookup 2개가 검색에 잡히며, overlay는 81개다. T11-B01–B09 누적 통합검색은 38/38 통과했다. 이름이 있는 근육 부분도 learner search projection에 연결되어 있다.
 
 T11 batch sequence는 **총 9개(B01–B09)** 다. B01은 canonical 8개와 lookup 후보 2개, B02–B08은 각 10개 canonical ID, B09는 7개 canonical ID다. B09를 마쳐 현재 partial catalog 85/85 항목을 checked-with-gaps로 기록했다. 이 85개는 전신 분모가 아니며 사람 해부학 검토나 T14 언어 gate가 완료된 것도 아니다. B01 판상근 lookup의 canonical 동결 절차도 별도 확인이 남는다.
 
-OpenSim_Models는 읽기 전용이며 T13a/T13b 전후 HEAD/status가 동일하다. T13b는 보호된 canonical catalog, T12/T13 manifests, 기존 annotation schema, 기존 GLB를 수정하지 않았다. 기존 dirty working tree와 T13b 시작 전 diff는 보존 증거에 기록했다. T09 초안 화면은 0개였고 초기 hydration write를 건너뛰도록 했다. 이전 task의 기술 통과는 제품의 해부학/전신 완료가 아니다.
+OpenSim_Models는 읽기 전용이다. T14a 전후 HEAD d9b05d470b1a481c222372c85b75772faf8f7792 및 clean status가 동일하다. 보호 파일 32개(그중 GLB/OBJ 22개), canonical/T12/T13 파일과 T13c-B01/B02/B03 geometry-null draft의 해시가 전후 동일하다. 비교 evidence는 work/evidence/T14a/preservation-before.json 및 preservation-after.json이다. T09 localStorage 사용자 초안은 열거나 쓰기·가져오기·삭제하지 않았고, 브라우저 저장소 원시 키 해시는 읽지 않아 별도 해시 대조를 주장하지 않는다. 학습 원문 자료의 제한된 변경은 잘못된 이름 출처 연결을 바로잡은 learning-names overlay와 화면의 해당 locator 표시뿐이다. T14b packet/report 생성 중에도 canonical/data/model files와 기존 사용자 초안을 바꾸지 않았다. T14b 보호검사는 work/evidence/T14b/preservation.json에 있다. T15a 시작 HEAD는 `4452411d8a6f52e7a9aacfce003571d8ae53fb6b`; OpenSim은 HEAD `d9b05d470b1a481c222372c85b75772faf8f7792`, clean status가 유지됐다. T15a는 canonical catalog/structure summaries를 수정하지 않았고, 기존 learning-names overlay의 원문 Hanja·sourceIds·근거 locator를 보존했다. `deltoids` 편의 alias만 추가했다. `/review`는 조회만 했고 저장/가져오기/삭제를 실행하지 않았다.
 
 ## 계속 유지할 차단 사항
 
 - 전신 TA2/용어 출처 및 분모 동결 미완. T11 용어 검색을 웹 근거 overlay로 보완하되 canonical 검토로 위장하지 않는다.
 - T07 provisional 근육 mapping은 canonical instance/meshMapping에 연결했다. talus 구조 ID는 미확정으로 명시적 제외했고 뼈4개 구조 mapping도 T03 계약상 제외했다. 사람 identity review는 남는다.
-- T13에서 관련 대퇴골·발 뼈 9개를 출처 확인 후 보강했다. T05 부착 28개는 뼈 전체 검색만 가능하고 정확한 부착 표면은 0/41이다. 적합한 표적 mesh 13개는 보류 중이다. T13 실제 표면 판독/입력이 남아 있다.
-- 역사적 Gray 요약의 현대 근거 대조와 사람이 확인한 구조 검토가 없다(T14).
+- T13에서 관련 대퇴골·발 뼈 9개를 출처 확인 후 보강했다. T05 부착 28개는 뼈 전체 검색만 가능하고 정확한 부착 표면은 0/41이다. 적합한 표적 mesh 13개는 보류 중이다. T13c-B01의 비복근 외측두 대퇴골 기시와 B02/B03의 전경골근 경골 외측과/몸통 가쪽면 기시는 독립 현대 근거를 확인했지만 재현 가능한 면 경계가 없어 모두 context-only로 유지한다. 실제 surface 후보는 여전히 0/41이다.
+- T13c 근거/mesh 확인과 T14a의 현대 원문 대조는 사람 해부학 검토나 승인을 대신하지 않는다. T14b는 여섯 파일럿 review packet을 준비했으나 실제 reviewer identity/date/opinion은 0건이다. T14b는 needs_human_review로 대기하고 모든 T05 attachments는 human_review_pending이다.
 - 기능/평가/퀴즈는 후속 계획이고 현재 구현된 것처럼 표시하지 않는다.
 
-## 다음 실행
+## T15a 결과 및 다음 실행
 
-이번에 수행한 **T13b**는 별도 draft spatial layer와 `/review` 검증·교환·상태 경로, learner 읽기 전용 overlay를 연결했다. 1280×720 in-app browser에서 test-only 표면 fixture의 저장→새로고침→overlay 표시, 오류 거부·topology stale, 일반 learner 경로의 분리를 확인했다. typecheck, spatial/annotation/search regressions, T03 17 fixture, build, preservation 확인이 통과했다. 합성 도형은 test key에서 확인 후 지웠다. 실제 source-backed 표면 후보 0/41, 사람 표면 검토 0/41이고 T13은 technical partial 상태다. **다음 작업은 T13c-B01** 한 건이며 아래 프롬프트로 시작한다.
+T15a는 overlay의 label/korean/english를 `koTraditional`/`koModern`/`en`으로 투영하고, 제품 제목은 삼각근 → 어깨세모근 → 영어 순으로 선택한다. 학습 화면에는 우리말명·한자어명(한글 표기)과 영어명을 표시한다. learner 검색 alias에서 Han script와 Hani 용어 행을 제외하고, 출처를 여는 경우 locator의 실제 한자는 `[출처 한자 생략]`으로 표시한다. 기존 원자료 `hanja`, field evidence, source IDs와 locator는 보존했다. deltoid의 `삼각근`, `어깨세모근`, `Deltoid`, `deltoids` 검색 선택은 동일한 `HA-M-000030`에 도착했다.
+
+`T15a` 검증은 search 40/40, learning-content validator, typecheck, production build, learner 및 `/review` 실제 브라우저 확인을 통과했다. 브라우저에서 Hanja 검색은 0건, 보이는 실제 한자 문자는 0건, `표기 대조 중`은 0건이었다. 빌드에는 기존 대형 chunk 경고가 남았다. 브라우저 화면은 작업 당시 1280×720였고, T15a에서는 반응형 전신 장면이나 뼈 검색을 검증/완료로 주장하지 않는다.
+
+T14b는 계속 `needs_human_review`다. 실제 사람 검토자 의견은 0이며 reviewed 승격은 없었다. 미완 사항은 전신 명칭 coverage/누락 한국어 용어, 뼈 검색, 전신 자산과 3D 장면, 해부학 검토다. 이 작업에서 새 명칭이나 해부학 사실을 추정하지 않았다.
+
+다음 작업은 **T15b (Sol High)**다. 자동 시작하지 않는다. 붙여 넣을 프롬프트:
 
 ```text
-HUMAN ATLAS 프로젝트에서 `AGENTS.md`, `work/STATUS.md`,
-`work/reports/T13-AUDIT-NEXT-PLAN-2026-09-26.md`, `work/reports/T13b.md`,
-`work/tasks/T13b.md`, `work/review-queue/attachment-surfaces-t13.md`,
-T03 SpatialAnnotation 계약, T12 instance/mesh, T13 context manifest를 읽고
-T13c-B01만 수행해라. 먼저 `work/tasks/T13c-B01.md`에 입력·수정범위·산출물·
-합격 기준을 기록해라. 대상은 `HA-A-T05-GASTRO-LAT-FEMUR-ORIGIN`
-(우측 비복근 외측두의 대퇴골 기시) 한 항목으로 제한한다. 원문 claim 외에
-독립된 현대 해부학 근거를 확인하고, 현재 femur mesh를 다각도로 검토해
-실제 근거가 뒷받침하는 표면 범위만 `/review` draft 공간자료 계층에 기록해라.
-뼈 전체를 부착 영역으로 제출하거나 mesh 시각만으로 좌표를 추정하지 마라.
-범위를 재현할 근거가 없으면 geometry를 비워두고 보류 사유를 남겨라.
-source/instance/side/frame/unit/pose/asset/topology/hash 검증을 통과시키고
-읽기 전용 learner overlay를 확인해라. 자동으로 `reviewed`로 승격하지 마라.
-실제 데이터·GLB/OBJ·사용자 초안·OpenSim_Models를 보존하고 검증 결과·미완
-항목·STATUS를 갱신한 뒤 멈춰라. 다음 T13c batch, T14 및 자동 배포,
-환자 진단·치료·침 시뮬레이션은 시작하지 마라.
+HUMAN ATLAS에서 AGENTS.md, work/STATUS.md, design/2026-09-25-muscle-atlas/00-START-HERE.md,
+같은 설계 폴더의 01/02/03/04 및 06-REGION12-MUSCLE-BONE-REVISION.md,
+work/reports/R12-DESIGN-REVIEW-2026-09-26.md, work/tasks/T15b.md,
+work/reports/T15a.md, work/evidence/T15a/와 실제 canonical/instance/mesh/draft 자료를 읽고
+T15b만 수행해라. Sol High 수준으로 계약과 migration 범위를 설계·검증하되 T15c를 시작하지 마라.
+먼저 T15b의 시작 HEAD와 기존 변경 기준선을 기록하고, product categories, many-to-many region membership,
+StructureInstance, StructureMeshMapping, Selection, scene manifest의 schema/type/runtime validator와
+migration/dry-run diff를 구현해라. 기존 canonical ID, 원분류, 사용자 변경, OpenSim_Models,
+T13 spatial drafts, T14b needs_human_review 상태를 보존해라. 합성 내폐쇄근 다중소속 회귀는 test-only로 격리하고
+실제 해부학 membership이나 새 부착 좌표를 추정하지 마라. 관련 테스트·typecheck·build를 실행하고,
+필요한 브라우저 경로가 바뀌면 실제 브라우저로 검증해라. 작업 결과·검증·미완 사항·STATUS와 다음 T15c 프롬프트를
+갱신한 뒤 task 소유 변경만 선별 커밋하고 해시·제외/잔여 변경을 남겨라. T15c 이상, 자동 배포, 경혈/Pro mode,
+환자 진단·치료·침 시뮬레이션은 범위 밖이며 시작하지 마라.
 ```
+
+
+## R13 설계 인계 — 2026-09-26
+
+T15a의 실행 결과는 위 기록과 보고서를 유지한다. 다음 구현은 T15b/Sol High이며 T15b–g 순서는 바꾸지 않았다. T14b 사람 검토는 실제 의견이 없는 별도 대기 경로이고 모든 기본 문헌 설명의 표시 조건은 아니다. 기본 자료는 T16–18의 AI 출처 대조 계약과 작업으로 준비한다.
+
+이후 실행은 07/08/09, work/task-registry-r13.json, 개정 T16–40 task 명세를 사용한다. 구 T16–24는 work/tasks/archive/R12-before-motion-roadmap에 보존했다. 새 계획은 아직 실행하지 않았다. 현재 두 GLB의 skin/animation/morph는 모두 0으로 확인했다. 앱의 움직임 기능이 완성됐다고 표시하지 않는다.
+
+이번 설계 보고서: work/reports/R13-AI-MOTION-ROADMAP-2026-09-26.md. 현재용 T15b 프롬프트는 00-START-HERE.md와 work/evidence/2026-09-26-motion-roadmap/next-prompt.txt에 있다. 누적 체크포인트는 T15a 작업자의 저장/검증/커밋이 끝난 다음, 같은 checkout에 쓰는 다른 작업이 없을 때 수행한다.

@@ -1,0 +1,45 @@
+{
+  "reviewId": "T13C-B01-BROWSER-MESH-REVIEW",
+  "date": "2026-09-26",
+  "method": "Actual local /review browser page. Target attachment card selected right femur FJ3365; selected-only isolation hid other meshes. Camera presets and a manual drag were used. Viewer banner showed RH, m, +X left / +Y head / +Z anterior.",
+  "target": "HA-A-T05-GASTRO-LAT-FEMUR-ORIGIN",
+  "mesh": {
+    "assetId": "HA-MESH-BP3D4-FJ3365",
+    "sourceFileId": "FJ3365",
+    "sourceFile": "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3365.obj",
+    "sourceConcept": "FMA24474",
+    "vertexCount": 1574,
+    "triangleCount": 3102,
+    "assetRevision": "BP3D-R4-T13-BONES-GLB-V1",
+    "assetRevisionHash": "a5b16cf1e6991b52f66706dee7cf3c77d9832b1a3bde0e3dffd5de5619db6662",
+    "topologyHash": "4b97b67b91fe0653755b827002a7775762d3b701c1c30a0a6f10fe4b97165b85",
+    "laterality": "right",
+    "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+    "units": "m",
+    "poseId": "bodyparts3d-r4-static-reference"
+  },
+  "views": [
+    {
+      "view": "front",
+      "action": "front camera preset",
+      "observation": "Whole femur silhouette fit; proximal head and distal condyles visible. Target condyle is part of a continuous unannotated bone surface."
+    },
+    {
+      "view": "back",
+      "action": "back camera preset",
+      "observation": "Posterior full-length view; proximal head/trochanter contour and paired distal condylar mass visible. No attachment annotation or boundary is present."
+    },
+    {
+      "view": "right_lateral",
+      "action": "right lateral camera preset",
+      "observation": "Lateral full-length silhouette; distal end visible but mesh has no labeled popliteal tendon reference or attachment footprint."
+    },
+    {
+      "view": "free_rotation",
+      "action": "manual pointer drag on the isolated model",
+      "observation": "Oblique rotation changes apparent condylar contours; without source-to-mesh anatomical landmarks or triangle-level evidence, the target patch cannot be delineated reproducibly."
+    }
+  ],
+  "visualLimits": "Mesh appearance confirms only that an isolated right femur surface is rendered. The view does not establish exact posterior-superior lateral-condyle boundary, footprint area, triangle IDs, or coordinates. No coordinates were inferred from pixels.",
+  "decision": "No surface polygon/point/polyline written; geometry null and context_only held."
+}

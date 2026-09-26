@@ -613,3 +613,18 @@
 .study-canvas-stage .viewer-canvas { position: absolute; inset: 0; }
 .study-canvas-stage .viewer-overlay { position: absolute; inset: 0; z-index: 1; display: block; width: 100%; height: 100%; pointer-events: none; }
 .study-canvas-stage .learner-overlay-warning { position: absolute; z-index: 2; left: 10px; bottom: 10px; max-width: calc(100% - 20px); padding: 6px 9px; border: 1px solid #e6d5b2; border-radius: 7px; background: rgba(255,248,233,.96); color: #6b552e; font-size: 9px; line-height: 1.4; pointer-events: none; }
+/* T14a: on narrow screens, keep the selected muscle's Korean structure card in the first viewport. */
+@media(max-width:760px){
+  .study-sidebar{order:1;max-height:230px;padding:8px}
+  .study-list{max-height:140px}
+  .study-list button{padding:3px 7px}
+  .study-details{order:2;padding:16px 18px}
+  .study-details>h2{margin:8px 0 4px}
+  .english-name{margin:0 0 10px}
+  .names-card{padding:8px 10px;gap:5px;margin-bottom:10px}
+  .study-tabs{margin-bottom:7px}
+  .study-tabs button{padding-top:8px;padding-bottom:8px}
+  .attachment-summary-block{margin:6px 0 7px}
+  .attachment-summary-block>p{font-size:12px;line-height:1.4}
+  .study-stage{order:3}
+}

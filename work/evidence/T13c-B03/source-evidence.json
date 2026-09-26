@@ -1,0 +1,64 @@
+{
+  "evidenceId": "SRC-T13C-B03-KIMATA-2022",
+  "targetAttachmentId": "HA-A-T05-TA-TIBIA-SURFACE-ORIGIN",
+  "targetClaimId": "HA-C-T05-TA-TIBIA-SURFACE-ORIGIN",
+  "accessedDate": "2026-09-26",
+  "historicalClaim": {
+    "sourceId": "GRAY_ANATOMY_20E_1918",
+    "citation": "Gray, Henry. Anatomy of the Human Body. 20th US edition, thoroughly revised and re-edited by Warren H. Lewis; Lea & Febiger, 1918.",
+    "url": "https://www.bartleby.com/lit-hub/anatomy-of-the-human-body/pages-480/",
+    "section": "8c. The Muscles and Fasciae of the Leg; subsection The Tibialis anterior (Tibialis anticus)",
+    "locator": "Printed page 480; the tibialis anterior paragraph states origin from the lateral condyle and upper half or two-thirds of the lateral surface of the tibial body, among other structures.",
+    "accessMethod": "Opened the Bartleby page directly in the Codex in-app browser. Page masthead displayed Henry Gray, Anatomy of the Human Body, 1918; the full tibialis anterior paragraph was visible. The associated section URL and the printed-page locator are retained separately.",
+    "searchIndex": "A web search result also surfaced the same page text but was used for discovery only; claim verification used the opened page.",
+    "projectEvidenceId": "EV-GRAY1918-TIBIALIS-ANTERIOR"
+  },
+  "independentModernEvidence": {
+    "independentOfHistoricalClaim": true,
+    "authors": [
+      "Kentaro Kimata",
+      "Shun Otsuka",
+      "Hiroki Yokota",
+      "Xiyao Shan",
+      "Naoyuki Hatayama",
+      "Munekazu Naito"
+    ],
+    "title": "Relationship between attachment site of tibialis anterior muscle and shape of tibia: anatomical study of cadavers",
+    "journal": "Journal of Foot and Ankle Research",
+    "volume": 15,
+    "articleNumber": "54",
+    "year": 2022,
+    "doi": "10.1186/s13047-022-00559-y",
+    "url": "https://link.springer.com/article/10.1186/s13047-022-00559-y",
+    "versionOfRecord": "2022-07-12",
+    "accessMethod": "Opened Springer Nature publisher-hosted open-access full-text HTML in the browser and read Introduction, Materials and Methods, Results, Discussion, figures/captions, and Limitations. Search output was used for discovery only; support and limitations were taken from the opened article.",
+    "studyDesignAndSample": "Gross anatomical cadaver dissection study: 40 lower legs (20 male, 20 female) from 20 Japanese cadavers; no significant right-left difference was detected for the reported measures.",
+    "locators": [
+      {
+        "locator": "Introduction, paragraph on textbook extent descriptions",
+        "observed": "The article describes textbook accounts as inconsistent, ranging from one-half to two-thirds of the proximal distance along the lateral tibial surface. This contextualizes, but does not independently settle, a precise surface perimeter."
+      },
+      {
+        "locator": "Materials and Methods, dissection and measurement paragraph; Fig. 1 and Fig. 2 captions",
+        "observed": "The authors defined origin as the site where muscle fibers firmly adhered to the bone cortex. They identified distal endpoints of anterior and posterior fiber attachment (A and P), measured from the upper end of the medial condyle against total tibial length. These are gross dissection endpoints and longitudinal ratios."
+      },
+      {
+        "locator": "Results, first paragraph; Discussion paragraph beginning “The anterior and posterior fibers of the TA were attached to different levels”",
+        "observed": "Anterior fibers were reported from the lateral condyle and anterior tibial border; posterior fibers from the anterolateral tibial surface and anterior interosseous membrane. The distal attachment endpoints were reported at approximately 47.1% and 66.1% of proximal tibial length for anterior and posterior fibers, respectively, with sex variation for anterior fibers. These results support broad proximal lateral tibial attachment extent, but not the two-dimensional boundary of the footprint."
+      },
+      {
+        "locator": "Limitations and Availability of data and materials",
+        "observed": "The paper notes its relatively small sample, Japanese cadavers and formalin fixation; the analyzed dataset is available from the corresponding author on reasonable request rather than included as a mesh-coordinate or triangle-label dataset."
+      }
+    ],
+    "supportBoundary": "Supports a broad proximal lateral tibial-body origin and variation in distal endpoint by fiber partition. The measured ratios locate distal limits along a longitudinal tibial axis, not the proximal start, lateral-to-anterior surface perimeter, or a source-to-triangle mapping for the project's individual mesh. The study specimens are not the BodyParts3D adult-male reference tibia."
+  },
+  "sourceSeparation": {
+    "searchIndex": "Discovery only; not counted as an opened-source check.",
+    "historicalOriginal": "Gray 20th US edition (1918), opened directly at the printed-page-480 Bartleby display.",
+    "modernOriginal": "Kimata et al. 2022, publisher-hosted full text opened and section locators recorded.",
+    "humanAnatomyReview": "Not performed. Browser/source inspection and AI interpretation are not a qualified project human anatomy review."
+  },
+  "geometryDecision": "held_context_only_geometry_null",
+  "geometryHoldReason": "The modern dissection supplies cohort-level proximal-to-distal endpoint measurements, but no reproducible 2D lateral-surface perimeter or mesh landmark/triangle crosswalk for FJ3387. Do not transfer cohort ratios to the different reference mesh or estimate a surface region from its unmarked appearance."
+}

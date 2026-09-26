@@ -1,0 +1,56 @@
+{
+  "checkedAt": "2026-09-26",
+  "browser": "Codex in-app browser, live local Vite app",
+  "reviewRoute": "http://127.0.0.1:5173/review?muscle=HA-M-000003",
+  "storageFlow": [
+    "Before import, /review visibly contained the prior B02 record as the one stored spatial draft; the T09 annotation export was empty.",
+    "Imported the one-record B03 JSON through the visible spatial-draft import/validate control. UI confirmed one validated record appended and duplicate IDs are rejected.",
+    "Reloaded /review. It restored two spatial draft records; export showed the prior B02 record plus B03, both context_only with geometry null and reviewId null. B03 retained the expected source claim hash, right tibia instance, frame, units, pose, asset hash, and topology hash.",
+    "Prepared and checked the separate T09 annotation export after reload; annotations remained empty. No browser storage key was cleared or replaced."
+  ],
+  "before": {
+    "spatialDraftCount": 1,
+    "spatialDraftIds": ["T13C-B02-HA-A-T05-TA-TIBIA-CONDYLE-ORIGIN"],
+    "t09AnnotationCount": 0
+  },
+  "afterReload": {
+    "spatialDraftCount": 2,
+    "records": [
+      {
+        "id": "T13C-B02-HA-A-T05-TA-TIBIA-CONDYLE-ORIGIN",
+        "status": "context_only",
+        "geometry": null,
+        "reviewId": null
+      },
+      {
+        "id": "T13C-B03-HA-A-T05-TA-TIBIA-SURFACE-ORIGIN",
+        "attachmentId": "HA-A-T05-TA-TIBIA-SURFACE-ORIGIN",
+        "descriptionClaimId": "HA-C-T05-TA-TIBIA-SURFACE-ORIGIN",
+        "sourceClaimHash": "53c8cf3aa8518dbf44410c8a24c0a11259acd39eb8b68d40dc60b3d3feaaf8e5",
+        "instanceId": "HA-I-R-HA-M-000003",
+        "side": "right",
+        "assetId": "HA-MESH-BP3D4-FJ3387",
+        "assetRevision": "BP3D-R4-OBJ-TO-GLB-V1",
+        "assetRevisionHash": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341",
+        "topologyHash": "1a44d95c1a84f014cce9452a7185814ec3c416efe3781e05bd223650c3c26f38",
+        "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "units": "m",
+        "poseId": "bodyparts3d-r4-static-reference",
+        "status": "context_only",
+        "geometry": null,
+        "reviewId": null
+      }
+    ],
+    "t09AnnotationCount": 0
+  },
+  "learnerRoute": {
+    "url": "http://127.0.0.1:5173/?muscle=HA-M-000003",
+    "rendered": true,
+    "selectedMuscle": "전경골근 / Tibialis anterior",
+    "displayedAttachmentSummary": "기시·정지 한국어 요약과 접을 수 있는 영어 근거 영역",
+    "targetB03SurfaceMark": "not present; B03 has null geometry and learner page showed the ordinary muscle-and-bone view without a surface patch",
+    "internalDraftJsonOrTaskIdVisible": false,
+    "visualInspection": "A real browser screenshot was visually inspected. The viewer showed the lower-leg model and selected tibialis anterior but no tibial surface patch. The browser interface does not expose a project screenshot export path, so no screenshot file is claimed."
+  },
+  "rawLocalStorageDigest": "not available through the read-only browser inspection interface; no clear or overwrite was performed"
+}

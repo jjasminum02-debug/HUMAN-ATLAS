@@ -6,6 +6,22 @@ import { attachmentContextById } from '../viewer/attachmentContext';
 import './styles.css';
 
 type TabName = '구조' | '기능' | '평가';
+type StandardReference = { uri: string; edition: string; identifier: string };
+
+function standardReferences(value: unknown): StandardReference[] {
+  if (!Array.isArray(value)) return [];
+  return value.flatMap((candidate) => {
+    if (typeof candidate !== 'object' || candidate === null || Array.isArray(candidate)) return [];
+    const reference = candidate as Record<string, unknown>;
+    if (typeof reference.uri !== 'string') return [];
+    return [{
+      uri: reference.uri,
+      edition: typeof reference.edition === 'string' ? reference.edition : '',
+      identifier: typeof reference.identifier === 'string' ? reference.identifier : '',
+    }];
+  });
+}
+
 export default function App() {
   const [catalog, setCatalog] = useState<PilotCatalog | null>(null);
   const [error, setError] = useState('');
@@ -24,6 +40,7 @@ export default function App() {
   if (error) return <main className="load-state"><h1>자료를 불러오지 못했습니다</h1><p>{error}</p><button onClick={() => location.reload()}>다시 시도</button></main>;
   if (!catalog) return <main className="load-state" role="status">Human Atlas를 준비하고 있습니다…</main>;
   const selected = concepts.find(c => c.id === selectedId);
+  const standardRefs = standardReferences(selected && 'standardRefs' in selected ? selected.standardRefs : undefined);
   const name = nameFor(catalog, selectedId);
   const parent = selected?.entityType === 'muscle_part' && typeof selected.parentId === 'string' ? selected.parentId : selectedId;
   const parts = concepts.filter(c => c.entityType === 'muscle_part' && c.parentId === parent);
@@ -97,7 +114,7 @@ export default function App() {
             </details>}
           </> : <div className="upcoming"><span>{tab === '기능' ? '↗' : '◎'}</span><h3>{tab} 자료를 준비하고 있습니다</h3><p>{tab === '기능' ? '관절의 움직임, 자세에 따른 역할과 안정화 작용을 연결할 예정입니다.' : '검사 목적, 시행 방법과 결과를 해석하는 순서를 연결할 예정입니다.'}</p></div>}
           </section>
-          <details className="study-sources"><summary>출처와 자료 상태</summary><p>용어는 웹 자료 대조본이며, 부착 설명은 Gray 1918년판 요약을 AI가 번역한 초안입니다. 현대 문헌 및 사람 검토는 아직 완료되지 않았습니다.</p>{name.sources.map(id => { const s = nameSources[id]; return s && <p key={id}>{s.url ? <a href={s.url} target="_blank" rel="noreferrer">{s.title} ↗</a> : s.title}<small>{s.locator}</small></p>; })}{Array.from(new Set(attachments.flatMap(a => { const c = catalog.claims.find(c => c.id === a.descriptionClaimId); return linkedEvidence(catalog,c?.evidenceIds).map(e => e.sourceId); }))).map(id => { const e = catalog.evidence.find(e => e.sourceId === id); const s = e && sourceForEvidence(catalog,e); return s && <p key={String(id)}><a href={String(s.urlOrLocalRef)} target="_blank" rel="noreferrer">{String(s.title)} ↗</a></p>; })}</details>
+          <details className="study-sources"><summary>출처와 자료 상태</summary><p>용어 출처와 Gray 1918년판의 역사적 부착 설명을 구분했습니다. 부착 문구는 번역 요약이며 현대 근거 대조와 사람 해부학 검토는 일부 또는 미완료입니다.</p>{name.sources.map(id => { const s = nameSources[id]; return s && <p key={id}>{s.url ? <a href={s.url} target="_blank" rel="noreferrer">{s.title} ↗</a> : s.title}<small>{s.locator}</small></p>; })}{standardRefs.map((reference, index) => <p key={`standard-reference-${index}`}><a href={reference.uri} target="_blank" rel="noreferrer">FIPAT · Terminologia Anatomica, Part 2 ↗</a><small>{reference.edition}{reference.identifier ? ` · ${reference.identifier}` : ''}</small></p>)}{Array.from(new Set(attachments.flatMap(a => { const c = catalog.claims.find(c => c.id === a.descriptionClaimId); return linkedEvidence(catalog,c?.evidenceIds).map(e => e.sourceId); }))).map(id => { const e = catalog.evidence.find(e => e.sourceId === id); const s = e && sourceForEvidence(catalog,e); return s && <p key={String(id)}><a href={String(s.urlOrLocalRef)} target="_blank" rel="noreferrer">{String(s.title)} ↗</a></p>; })}</details>
         </> : <div className="upcoming"><h2>선택한 근육을 찾지 못했습니다</h2><p>목록에서 근육을 선택해 주세요.</p></div>}
       </main>
     </div>

@@ -1,0 +1,65 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "record-validator",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "work/evidence/T13c-B03/validate_record.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "passed": true,
+      "log": "work/evidence/T13c-B03/record-validator.log"
+    },
+    {
+      "name": "t03-schema-fixtures",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "atlas-data/schemas/validate.py",
+        "--check-schemas",
+        "--fixtures"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "passed": true,
+      "log": "work/evidence/T13c-B03/t03-schema-fixtures.log"
+    },
+    {
+      "name": "spatial-draft-tests",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback/pnpm",
+        "run",
+        "test:spatial-drafts"
+      ],
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "passed": true,
+      "log": "work/evidence/T13c-B03/spatial-draft-tests.log"
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback/pnpm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "passed": true,
+      "log": "work/evidence/T13c-B03/typecheck.log"
+    },
+    {
+      "name": "build",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback/pnpm",
+        "run",
+        "build"
+      ],
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "passed": true,
+      "log": "work/evidence/T13c-B03/build.log"
+    }
+  ]
+}
