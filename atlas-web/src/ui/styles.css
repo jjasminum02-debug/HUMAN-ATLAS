@@ -723,6 +723,25 @@
 .learner-mesh-note{margin:0 0 8px;color:#7b888c;font-size:11px}
 @media(max-width:760px){.attachment-crosscheck{font-size:11px;padding:9px}.attachment-crosscheck small{font-size:9px}}
 
+/* T21: keep source-bound action text readable and the animation boundary explicit. */
+.muscle-action-learning{display:grid;gap:10px;max-width:760px;margin:8px 0 20px}
+.muscle-action-summary,.action-context-card,.motion-learning-entry{border:1px solid #e3eae8;border-radius:12px;background:#fbfcfc;padding:12px 14px;color:#52666b;font-size:13px;line-height:1.6}
+.muscle-action-summary h3{margin:0 0 7px;color:#365d60;font-size:17px}
+.muscle-action-summary p{margin:6px 0}
+.muscle-action-summary .action-label{color:#263f46;font-size:15px;font-weight:650}
+.action-context-card h4{margin:0 0 7px;color:#45686a;font-size:13px}
+.action-context-card ul,.action-source-details ul{display:grid;gap:7px;margin:6px 0;padding-left:19px}
+.action-context-card li p{margin:3px 0}
+.action-context-card li small{color:#758589}
+.action-source-details{font-size:12px}
+.action-source-details>section{margin-top:10px}
+.action-source-details h4{margin:0;color:#45686a;font-size:12px}
+.action-source-details li a{color:#426e70;text-decoration:underline;text-underline-offset:2px}
+.action-source-details li small{display:block;margin-top:3px;color:#77878b;font-size:10px;line-height:1.5}
+.motion-learning-entry>summary,.action-source-details>summary{cursor:pointer;color:#426e70;font-weight:650}
+.motion-learning-entry p{margin:8px 0 0}
+@media(max-width:760px){.muscle-action-learning{gap:8px;margin-top:6px}.muscle-action-summary,.action-context-card,.motion-learning-entry{padding:10px 11px;font-size:12px}.muscle-action-summary h3{font-size:16px}.muscle-action-summary .action-label{font-size:14px}}
+
 /* T19: wrap the viewer toolbar inside the narrow canvas instead of widening the page. */
 @media(max-width:760px){
   .study-view-tools{left:8px;right:8px;width:auto;max-width:none;transform:none;flex-wrap:wrap;justify-content:center;box-sizing:border-box;white-space:normal}

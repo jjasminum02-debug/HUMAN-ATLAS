@@ -1,0 +1,59 @@
+{
+  "task": "T21",
+  "verifiedAt": "2026-09-27",
+  "browser": "Codex In-app Browser",
+  "localUrl": "http://127.0.0.1:5173/",
+  "observedViewportPx": {
+    "width": 1280,
+    "height": 720
+  },
+  "checks": [
+    {
+      "step": "Default pilot route",
+      "result": "pass",
+      "selection": "right calf; gastrocnemius selected; Structure tab visible"
+    },
+    {
+      "step": "Open Function tab",
+      "result": "pass",
+      "visible": [
+        "이 근육이 하는 일",
+        "발목 발바닥굽힘",
+        "문헌에 나온 검사 자세 예시",
+        "검사 자세가 일상 지침이 아니라는 경계"
+      ]
+    },
+    {
+      "step": "Open source disclosure",
+      "result": "pass",
+      "visible": [
+        "StatPearls Table 1 source link and table row locator",
+        "2023 MMT article link and ankle test locator",
+        "edition/citation and accessed date"
+      ]
+    },
+    {
+      "step": "Open movement disclosure",
+      "result": "pass",
+      "visible": "Text explanation only; moving 3D material is preparing; no animation is played."
+    },
+    {
+      "step": "Keyboard navigation",
+      "result": "pass",
+      "observation": "Tab moved focus to the native source/details disclosure; focus was visible."
+    },
+    {
+      "step": "Select another pilot muscle",
+      "result": "pass",
+      "selection": "posterior tibialis; route changed to existing HA-M-000004 right-side route; Function tab showed inversion label, test posture, source-specific arch context and unresolved contraction note."
+    },
+    {
+      "step": "Learner-facing redaction",
+      "result": "pass",
+      "observation": "Visible card body contains no task ID, raw JSON, source-evidence IDs, or internal evidence/review state code; typed concept ID exists only in the route URL."
+    }
+  ],
+  "consoleLogs": "not collected through the selected browser surface",
+  "screenshot": "Visually inspected in-browser; screenshot file not persisted.",
+  "result": "pass for the sampled desktop browser paths; responsive-width matrix was not required by T21 and was not claimed."
+}

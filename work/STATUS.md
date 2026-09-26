@@ -2,17 +2,17 @@
 
 - LAST_UPDATED: 2026-09-27
 - PLAN_REVISION: R13-2026-09-26 — R12 유지 + AI 원문 대조/작용 설명/교육용 움직임/독립 T16–40
-- CURRENT_TASK: T20 — complete_with_gaps; action/motion 별도 계약·validator·types·legacy migration preview 완료. canonical joint ID·source-backed action·실제 motion asset은 없어 production bundle은 비어 있음.
-- NEXT_TASK: T21 — Luna Max (planned_not_started); 출처 기반 종아리 6근육 작용 설명 및 learner card.
-- LAST_REPORT: work/reports/T20.md
+- CURRENT_TASK: T21 — complete_with_gaps; 여섯 종아리 작용 카드와 field-scoped 출처를 검증하고 로컬 커밋함.
+- NEXT_TASK: T22 — planned_not_started / Sol High. T22는 자동 시작하지 않음.
+- LAST_REPORT: work/reports/T21.md
 - CATALOG: partial85 (individual48/group16/part21); 전신 분모 미동결
 - LEARNING_OVERLAY: entries81; current canonical overlap 79/85, six group IDs lack overlay entries, two lookup-only IDs are extra; T11 B01-B09 field work covered the current partial catalog with gaps; humanReviewed=false
-- AI_EVIDENCE_OVERLAY: T16 schema/types/validator/learner adapter + T18 source-bound origin/insertion rows 16; 14 legacy rows remain test-only preview; T20 motion bundle separate/empty; canonical human review unchanged; geometry/motion absent
+- AI_EVIDENCE_OVERLAY: T16 schema/types/validator/learner adapter + T18 origin/insertion rows 16 + T21 action/context rows 35; 14 legacy rows remain test-only preview; canonical human review unchanged; T21 claims remain source-derived and geometry absent
 - GEOMETRY: 오른쪽 종아리 6근육, 근육메시 7+뼈 13. T15b navigation overlay에 기존 source crosswalk의 우측 뼈 instance/mapping 9개를 needs_review로 연결, 미확정 mesh 4개는 unbound context. canonical spatialAnnotation 0; T13c-B01/B02/B03 context_only geometry:null draft 3건 보존; T05 표면 후보 0/41, text_only 28/41, matching target mesh missing 13/41, human_review_pending 41/41
-- FUNCTION_AND_ASSESSMENT: T20 action/motion 계약·validator 구현; production action/definition/asset 0건. learner action card는 T21, 실제 canonical joint ID·clip·재생은 미완
-- TECHNICAL_GATE: T20 motion fixtures 16/16, Node 6/6, T16/T18 AI regressions 9/9 + fixture 8/8, T03 canonical validation, typecheck/build pass. UI 변경이 없어 브라우저 검증 미실시. T15g denominator false/null/null, T14b human review pending, geometry 0/41. 기존 production App chunk 1,419 kB 경고 유지.
+- FUNCTION_AND_ASSESSMENT: T21 오른쪽 종아리 pilot 6개 ID에 출처 연결 text action card 구현. joint binding 0, MotionDefinition 0, MotionAsset/clip 0; 개별 수축 형태·사람 검토는 미확인/대기
+- TECHNICAL_GATE: T21 AI overlay 51 fields/no issues; action/motion validator 6 actions/0 definitions/0 assets, fixture 16/16; AI fixtures 8/8; Node tests 18/18; T03 catalog schema·typecheck·build pass. 실제 브라우저에서 비복근/뒤정강근 기능 카드·출처 펼침·키보드 포커스를 확인. build App chunk 1,507.24 kB 경고. T15g denominator false/null/null, T14b human review pending, surface 0/41.
 - ANATOMY_GATE: needs_human_review; 전신 구조 완성 아님
-- DEV_URL: none (T19 dev and production preview servers stopped after browser verification)
+- DEV_URL: none (T21 localhost server stopped after browser verification)
 
 | task | 상태 | 산출물/보고서 | 차단 조건 |
 |---|---|---|---|
@@ -59,6 +59,7 @@
 | T18 | complete_with_gaps | work/tasks/T18.md; 16 field-level origin/insertion AI evidence rows; source comparison, learner citations and browser QA; work/evidence/T18/; work/reports/T18.md | fibularis longus origin conflict unresolved; name comparison not performed per T17 handoff; human review, exact surface, motion and external redistribution rights remain open |
 | T19 | technical_pass | work/tasks/T19.md; focus fade/isolation/pick policy; mobile toolbar wrap; work/evidence/T19/; work/reports/T19.md | T18 source conflict, human anatomy review, exact surface geometry, motion and whole-body denominator remain unchanged |
 | T20 | complete_with_gaps | work/tasks/T20.md; motion-learning schema/types/validator; empty production bundle; preview-only JointAction adapter; work/evidence/T20/; work/reports/T20.md | canonical joint IDs and source-backed action rows absent; real motion assets/playback and human review remain open |
+| T21 | complete_with_gaps | `work/tasks/T21.md`; six source-linked calf action cards; `atlas-data/motion/motion-learning.json`; 35 AI evidence overlay rows; `work/evidence/T21/`; `work/reports/T21.md` | canonical joint ID/clip 0; contraction type unavailable; human anatomy review pending; no 3D motion; action summaries do not establish individual contribution or clinical guidance |
 
 ## 실제 현재 상태와 원본 보존
 

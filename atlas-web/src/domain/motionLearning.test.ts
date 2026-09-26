@@ -39,8 +39,15 @@ const asset: MotionAsset = {
   technicalStatus: "binding_verified",
 };
 
-test("production action/motion bundle stays empty until source-backed reviewed content exists", () => {
-  assert.deepEqual(production, { schemaVersion: "1.0.0", revision: "T20-empty-production-contract-v1", muscleActions: [], motionDefinitions: [], motionAssets: [] });
+test("production bundle has six source-bound action texts and no joint or motion asset bindings", () => {
+  assert.equal(production.muscleActions.length, 6);
+  assert.equal(production.motionDefinitions.length, 0);
+  assert.equal(production.motionAssets.length, 0);
+  const actions = production.muscleActions as MuscleAction[];
+  assert.deepEqual(actions.map((row) => row.subjectIds[0]), [
+    "HA-M-000001", "HA-M-000002", "HA-M-000003", "HA-M-000004", "HA-M-000005", "HA-M-000006",
+  ]);
+  assert.ok(actions.every((row) => row.jointBindingState === "unmapped" && row.targetJointIds.length === 0 && row.sourceRefs.length > 0));
 });
 
 test("text can be present while there is no compatible motion clip", () => {
@@ -78,4 +85,17 @@ test("runtime session is resettable state and exposes no persisted content/revie
 test("learner text projection omits authoring IDs, JSON, task codes, and review states", () => {
   const output = JSON.stringify(projectLearnerActionText(action));
   assert.doesNotMatch(output, /FX-|reviewed|needs_review|T20|JSON/);
+});
+
+test("learner action projection translates roles and unspecified contraction into plain Korean", () => {
+  const actionWithUnspecifiedRole = { ...action, contextRoles: [action.contextRoles[0]!, { ...action.contextRoles[1]!, contractionRole: "unspecified" as const }] };
+  const output = projectLearnerActionText(actionWithUnspecifiedRole, [{
+    section: "action", title: "Source title", url: "https://example.org/source", edition: "Edition",
+    locator: "Action column", accessedOn: "2026-09-27",
+  }]);
+  assert.equal(output?.contextNotes[1]?.label, "출처가 설명한 지지 역할");
+  assert.match(output?.contractionNote ?? "", /수축 종류를 따로 구분하지 않았습니다/);
+  assert.equal(output?.citations[0]?.locator, "Action column");
+  const serialized = JSON.stringify(output);
+  assert.doesNotMatch(serialized, /stabilizer|unspecified|FX-|reviewed|needs_review/);
 });

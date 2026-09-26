@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { loadPilotCatalog, linkedEvidence, recordLabel, sourceForEvidence, type PilotCatalog } from '../data/catalog';
-import { findMuscles, learningConcepts, nameFor, nameSources, structureFieldForLearner } from '../data/learning';
+import { actionCardForLearner, findMuscles, learningConcepts, nameFor, nameSources, structureFieldForLearner } from '../data/learning';
 import { attachmentCrosscheckFor } from '../domain/attachmentCrosschecks';
 import { GLBViewer } from '../viewer/GLBViewer';
 import { sceneRevision } from '../viewer/scenePlan';
@@ -154,6 +154,7 @@ export default function App() {
     : null;
   const standardRefs = standardReferences(selected && 'standardRefs' in selected ? selected.standardRefs : undefined);
   const parentId = selected?.entityType === 'muscle_part' && typeof selected.parentId === 'string' ? selected.parentId : selectedId;
+  const actionCard = selectedId && parentId ? actionCardForLearner(parentId) : null;
   const parts = concepts.filter((concept) => concept.entityType === 'muscle_part' && concept.parentId === parentId);
   const owners = new Set([selectedId, ...concepts.filter((concept) => concept.parentId === selectedId).map((concept) => concept.id)]);
   const attachments = catalog ? catalog.attachments.filter((attachment) => owners.has(String(attachment.muscleOrPartId))) : [];
@@ -377,7 +378,48 @@ export default function App() {
                   })}
                   <p className="quiet-note">부착 설명은 Gray 1918년판에 근거한 검토 전 요약입니다. 강조된 뼈 전체는 표면 검토 대상이며 정확한 부착 영역은 아직 연결되지 않았습니다.</p>
                 </details>}
-              </> : <div className="upcoming"><span>{tab === '기능' ? '↗' : '◎'}</span><h3>{tab} 자료를 준비하고 있습니다</h3><p>{tab === '기능' ? '관절의 움직임, 자세에 따른 역할과 안정화 작용을 연결할 예정입니다.' : '검사 목적, 시행 방법과 결과를 해석하는 순서를 연결할 예정입니다.'}</p></div>}
+              </> : tab === '기능' ? actionCard ? <div className="muscle-action-learning">
+                <section className="muscle-action-summary" aria-labelledby="action-summary-title">
+                  <h3 id="action-summary-title">이 근육이 하는 일</h3>
+                  <p className="action-label">{actionCard.label}</p>
+                  <p>{actionCard.explanation}</p>
+                </section>
+                <section className="action-context-card" aria-labelledby="action-context-title">
+                  <h4 id="action-context-title">문헌에 나온 검사 자세 예시</h4>
+                  <ul>{actionCard.postureConditions.map((condition, index) => <li key={`${index}-${condition}`}>{condition}</li>)}</ul>
+                  <p className="quiet-note">이는 한 문헌의 검사 맥락이며, 일상 움직임에 필요한 자세나 검사 지침을 뜻하지 않습니다.</p>
+                </section>
+                {actionCard.contextNotes.length > 0 && <section className="action-context-card" aria-labelledby="action-role-title">
+                  <h4 id="action-role-title">문헌에서 확인한 역할과 맥락</h4>
+                  <ul>{actionCard.contextNotes.map((context, index) => <li key={`${index}-${context.label}`}><small>{context.label}</small><p>{context.explanation}</p></li>)}</ul>
+                </section>}
+                <section className="action-context-card" aria-labelledby="action-boundary-title">
+                  <h4 id="action-boundary-title">안정화와 수축 형태</h4>
+                  {actionCard.stabilizationConditions.length > 0 && <ul>{actionCard.stabilizationConditions.map((condition, index) => <li key={`${index}-${condition}`}>{condition}</li>)}</ul>}
+                  {actionCard.stabilizationNote && <p>{actionCard.stabilizationNote}</p>}
+                  {actionCard.contractionNote && <p className="quiet-note">{actionCard.contractionNote}</p>}
+                </section>
+                <details className="field-evidence-sources action-source-details">
+                  <summary>이 설명의 출처</summary>
+                  {(['action', 'posture', 'role', 'stabilization'] as const).map((section) => {
+                    const rows = actionCard.citations.filter((citation) => citation.section === section);
+                    if (!rows.length) return null;
+                    const title = section === 'action' ? '작용 요약' : section === 'posture' ? '검사 자세' : section === 'role' ? '역할과 맥락' : '안정화 범위';
+                    return <section key={section}><h4>{title}</h4><ul>{rows.map((citation, index) => <li key={`${citation.url}-${citation.locator}-${index}`}>
+                      <a href={citation.url} target="_blank" rel="noreferrer">{citation.title} ↗</a>
+                      {citation.edition && <small>{citation.edition}</small>}
+                      <small>{citation.locator}</small>
+                      <small>원문 확인 · {citation.accessedOn}</small>
+                    </li>)}</ul></section>;
+                  })}
+                  <p className="quiet-note">문헌 대조는 사람의 해부학 검토와 별도입니다. 이 설명으로 3D 부착 위치나 움직임 자산을 확정하지 않습니다.</p>
+                </details>
+                <details className="motion-learning-entry">
+                  <summary>움직임으로 이해하기</summary>
+                  <p>현재는 출처가 연결된 글 설명만 확인할 수 있습니다.</p>
+                  <p className="quiet-note">움직이는 3D 자료는 아직 준비 중입니다. 이 항목은 애니메이션을 재생하지 않습니다.</p>
+                </details>
+              </div> : <div className="upcoming"><span>↗</span><h3>작용 설명을 준비하고 있습니다</h3><p>출처가 확인된 기능 자료가 연결되면 이곳에 표시합니다.</p></div> : <div className="upcoming"><span>◎</span><h3>평가 자료를 준비하고 있습니다</h3><p>검사 목적, 시행 방법과 결과 해석은 별도의 학습 범위에서 다룹니다.</p></div>}
             </section>
             <details className="study-sources"><summary>출처와 자료 상태</summary><p>용어 출처와 Gray 1918년판의 역사적 부착 설명을 구분했습니다. 현대 연구 대조는 각 기시·정지 문장 옆에서 열 수 있으며, 직접 측정·배경 설명·미측정 범위를 구별합니다. 사람 해부학 검토와 3D 부착면 승인은 별도입니다.</p>{name.sources.map((id) => { const source = nameSources[id]; return source && <p key={id}>{source.url ? <a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a> : source.title}<small>{source.locator}</small></p>; })}{standardRefs.map((reference, index) => <p key={`standard-reference-${index}`}><a href={reference.uri} target="_blank" rel="noreferrer">FIPAT · Terminologia Anatomica, Part 2 ↗</a><small>{reference.edition}{reference.identifier ? ` · ${reference.identifier}` : ''}</small></p>)}{Array.from(new Set(attachments.flatMap((attachment) => { const claim = catalog.claims.find((item) => item.id === attachment.descriptionClaimId); return linkedEvidence(catalog, claim?.evidenceIds).map((evidence) => evidence.sourceId); }))).map((id) => { const evidence = catalog.evidence.find((item) => item.sourceId === id); const source = evidence && sourceForEvidence(catalog, evidence); return source && <p key={String(id)}><a href={String(source.urlOrLocalRef)} target="_blank" rel="noreferrer">{String(source.title)} ↗</a></p>; })}</details>
           </> : <div className="upcoming"><h2>{routeNotice ? '주소의 구조 연결을 확인해 주세요' : '구조를 선택해 주세요'}</h2><p>{routeNotice ?? (region ? `${region.labelKo}의 구조 자료는 준비 중입니다.` : '검색하거나 부위를 선택해 학습할 구조를 찾을 수 있습니다.')}</p></div>}

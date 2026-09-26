@@ -1,10 +1,12 @@
 import summaries from "../../../atlas-data/terminology/learning-structure-summaries.json";
 import aiEvidenceOverlay from "../../../atlas-data/terminology/ai-evidence-overlay.json";
+import motionLearningBundle from "../../../atlas-data/motion/motion-learning.json";
 import names from '../../../atlas-data/terminology/learning-names.json';
 import { displayTerms, termText, type PilotCatalog } from './catalog';
 import { learnerNameProjection, learnerSearchEntry, learnerVisibleTerms, mergeLearningConcepts, searchEntries, withoutHanScript, type SearchEntry } from '../domain/search';
 import { projectAiEvidenceField, type AiEvidenceField, type LearnerFieldProjection } from '../domain/aiEvidence';
 import { projectLegacySummary, type LegacyLearningSummary } from '../domain/legacyEvidenceAdapter';
+import { projectLearnerActionCard, type MotionLearningBundle } from '../domain/motionLearning';
 const rawNameSources = names.sources as Record<string, { title: string; url: string | null; locator: string }>;
 export const nameSources = Object.fromEntries(Object.entries(rawNameSources).map(([id, source]) => [id, {
   ...source, title: withoutHanScript(source.title), locator: withoutHanScript(source.locator),
@@ -39,6 +41,13 @@ export function findMuscles(catalog: PilotCatalog, query: string) {
 
 const aiFieldItems = (aiEvidenceOverlay as { items: AiEvidenceField[] }).items;
 const legacySummaryRows = summaries as LegacyLearningSummary[];
+const motionBundle = motionLearningBundle as MotionLearningBundle;
+
+/** Project a source-bound muscle action without exposing evidence, task, or authoring identifiers. */
+export function actionCardForLearner(conceptId: string) {
+  const action = motionBundle.muscleActions.find((row) => row.subjectIds.includes(conceptId));
+  return projectLearnerActionCard(action, aiFieldItems);
+}
 
 /** Prefer the current field overlay; keep an exact-text legacy fallback for older fields.
  * The returned projection intentionally omits internal evidence/review/geometry/motion codes.

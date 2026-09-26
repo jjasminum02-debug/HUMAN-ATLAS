@@ -1,0 +1,91 @@
+{
+  "task": "T21",
+  "verifiedAt": "2026-09-27",
+  "status": "pass_with_gaps",
+  "commands": [
+    {
+      "name": "AI evidence production check",
+      "command": "python3 atlas-data/schemas/validate_ai_evidence.py --check",
+      "result": "pass",
+      "productionFields": 51,
+      "issues": 0
+    },
+    {
+      "name": "AI evidence fixtures",
+      "command": "python3 atlas-data/schemas/validate_ai_evidence.py --fixtures",
+      "result": "pass",
+      "passed": 8,
+      "failed": 0
+    },
+    {
+      "name": "Motion learning production check",
+      "command": "python3 atlas-data/schemas/validate_motion_learning.py --check",
+      "result": "pass",
+      "actions": 6,
+      "definitions": 0,
+      "assets": 0
+    },
+    {
+      "name": "Motion learning fixtures",
+      "command": "python3 atlas-data/schemas/validate_motion_learning.py --fixtures",
+      "result": "pass",
+      "passed": 16,
+      "failed": 0
+    },
+    {
+      "name": "Motion / legacy projection Node tests",
+      "command": "node --experimental-strip-types --test src/domain/motionLearning.test.ts src/domain/legacyJointActionAdapter.test.ts",
+      "result": "pass",
+      "passed": 7,
+      "failed": 0
+    },
+    {
+      "name": "Learner action card / T18 retention Node tests",
+      "command": "node --experimental-strip-types --test src/data/learning.test.ts src/domain/t18Evidence.integration.test.ts",
+      "result": "pass",
+      "passed": 4,
+      "failed": 0
+    },
+    {
+      "name": "AI evidence projection Node tests",
+      "command": "node --experimental-strip-types --test src/domain/aiEvidence.test.ts src/domain/legacyEvidenceAdapter.test.ts",
+      "result": "pass",
+      "passed": 7,
+      "failed": 0
+    },
+    {
+      "name": "T03 canonical catalog schema",
+      "command": "python3 atlas-data/schemas/validate.py --dataset atlas-data/catalog/canonical-catalog.json",
+      "result": "pass",
+      "issues": 0
+    },
+    {
+      "name": "TypeScript typecheck",
+      "command": "pnpm run typecheck",
+      "result": "pass"
+    },
+    {
+      "name": "Production build",
+      "command": "pnpm run build",
+      "result": "pass",
+      "transformedModules": 53,
+      "existingChunkWarning": "App-BmBB1FWf.js 1,507.24 kB exceeds the 500 kB advisory threshold"
+    },
+    {
+      "name": "Diff whitespace",
+      "command": "git diff --check",
+      "result": "pass"
+    }
+  ],
+  "totals": {
+    "nodeTestsPassed": 18,
+    "nodeTestsFailed": 0,
+    "aiEvidenceFixturesPassed": 8,
+    "motionFixturesPassed": 16
+  },
+  "knownCaveats": [
+    "Human anatomy review was not performed.",
+    "No canonical joint IDs, motion definitions, assets, clips, or playback were added.",
+    "Build succeeds with an existing large app chunk warning."
+  ]
+}

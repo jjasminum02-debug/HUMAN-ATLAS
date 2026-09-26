@@ -1,7 +1,550 @@
 {
   "schemaVersion": "1.0.0",
-  "revision": "T20-empty-production-contract-v1",
-  "muscleActions": [],
+  "revision": "T21-2026-09-27-calf-actions-v1",
+  "muscleActions": [
+    {
+      "id": "T21-ACTION-HA-M-000001",
+      "subjectIds": [
+        "HA-M-000001"
+      ],
+      "sideApplicability": "bilateral",
+      "jointBindingState": "unmapped",
+      "jointBindingNote": "현재 canonical catalog에 대응 joint ID가 없어 텍스트 작용만 연결합니다.",
+      "targetJointIds": [],
+      "actionLabel": "발목 발바닥굽힘",
+      "explanation": "해당 근육은 발목 발바닥굽힘에 관여합니다. 이 요약은 해당 작용을 다룬 출처에 한정되며, 이 근육 하나가 움직임 전체를 단독으로 만든다는 뜻은 아닙니다.",
+      "postureConditions": [
+        "문헌의 검사 예시: 검사할 다리에 서고 무릎을 편 자세."
+      ],
+      "stabilizationConditions": [],
+      "stabilizationNote": "문헌의 자세 설정과 검사자 손/지지면은 검사 방법으로만 남겼습니다. 이를 이 근육이 고정하는 해부학적 구조나 일반 안정화 작용으로 바꾸지 않았습니다.",
+      "contextRoles": [
+        {
+          "contextId": "T21-CONTEXT-HA-M-000001-MANUAL-TEST",
+          "role": "unspecified",
+          "contractionRole": "unspecified",
+          "explanation": "이 문헌은 해당 근육을 발목 발바닥굽힘 검사에서 주 검사 근육으로 지정합니다. 이는 검사 맥락의 지정이며, 일반 움직임에서 작용근·협력근 역할이나 기여 비중을 따로 분류하지 않습니다."
+        },
+        {
+          "contextId": "T21-C-HA-M-000001-KNEE-FLEXION",
+          "role": "unspecified",
+          "contractionRole": "unspecified",
+          "explanation": "문헌은 무릎이 편 때 발목 발바닥굽힘에 기여하고 무릎 굽힘도 돕는다고 설명합니다."
+        }
+      ],
+      "sourceRefs": [
+        {
+          "layer": "ai_field",
+          "field": "action",
+          "appliesTo": "action_explanation",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000001-action",
+          "valueHash": "c02059b0da0736e3611a8071326c4c35912efe135e9bac3b93b180a1190374af",
+          "evidenceId": "T21-E-HA-M-000001-action-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000001-action"
+        },
+        {
+          "layer": "ai_field",
+          "field": "action",
+          "appliesTo": "action_explanation",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000001-action",
+          "valueHash": "c02059b0da0736e3611a8071326c4c35912efe135e9bac3b93b180a1190374af",
+          "evidenceId": "T21-E-HA-M-000001-action-2",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000001-action"
+        },
+        {
+          "layer": "ai_field",
+          "field": "action_context",
+          "appliesTo": "posture_condition",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000001-action_context",
+          "valueHash": "cc471f1086f8608f150d5f61da539d5d900717021f8f51cee6f22637de7d76bb",
+          "evidenceId": "T21-E-HA-M-000001-action_context-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000001-action_context"
+        },
+        {
+          "layer": "ai_field",
+          "field": "context_role",
+          "appliesTo": "context_role",
+          "contextId": "T21-CONTEXT-HA-M-000001-MANUAL-TEST",
+          "claimId": "T21-C-HA-M-000001-context_role",
+          "valueHash": "8a8e79451bd6e71daa6f1e034981e5220c196cc19761305ee9ab23d610166651",
+          "evidenceId": "T21-E-HA-M-000001-context_role-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000001-context_role"
+        },
+        {
+          "layer": "ai_field",
+          "field": "stabilization_note",
+          "appliesTo": "stabilization_condition",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000001-stabilization_note",
+          "valueHash": "291f9c83cfb2e5bd64a491bdea4a221142f28411b3514c7f4a9d0839484a75a0",
+          "evidenceId": "T21-E-HA-M-000001-stabilization_note-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000001-stabilization_note"
+        },
+        {
+          "layer": "ai_field",
+          "field": "functional_context",
+          "appliesTo": "context_role",
+          "contextId": "T21-C-HA-M-000001-KNEE-FLEXION",
+          "claimId": "T21-C-HA-M-000001-functional_context",
+          "valueHash": "e44cda0a175458d5791c9e6d35e0aaeb81db1a866da4b9469c4cb0b948257a93",
+          "evidenceId": "T21-E-HA-M-000001-functional_context-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000001-functional_context"
+        }
+      ]
+    },
+    {
+      "id": "T21-ACTION-HA-M-000002",
+      "subjectIds": [
+        "HA-M-000002"
+      ],
+      "sideApplicability": "bilateral",
+      "jointBindingState": "unmapped",
+      "jointBindingNote": "현재 canonical catalog에 대응 joint ID가 없어 텍스트 작용만 연결합니다.",
+      "targetJointIds": [],
+      "actionLabel": "발목 발바닥굽힘",
+      "explanation": "해당 근육은 발목 발바닥굽힘에 관여합니다. 이 요약은 해당 작용을 다룬 출처에 한정되며, 이 근육 하나가 움직임 전체를 단독으로 만든다는 뜻은 아닙니다.",
+      "postureConditions": [
+        "문헌의 검사 예시: 검사할 다리에 서고 무릎을 편 자세."
+      ],
+      "stabilizationConditions": [],
+      "stabilizationNote": "문헌의 자세 설정과 검사자 손/지지면은 검사 방법으로만 남겼습니다. 이를 이 근육이 고정하는 해부학적 구조나 일반 안정화 작용으로 바꾸지 않았습니다.",
+      "contextRoles": [
+        {
+          "contextId": "T21-CONTEXT-HA-M-000002-MANUAL-TEST",
+          "role": "unspecified",
+          "contractionRole": "unspecified",
+          "explanation": "이 문헌은 해당 근육을 발목 발바닥굽힘 검사에서 주 검사 근육으로 지정합니다. 이는 검사 맥락의 지정이며, 일반 움직임에서 작용근·협력근 역할이나 기여 비중을 따로 분류하지 않습니다."
+        },
+        {
+          "contextId": "T21-C-HA-M-000002-KNEE-INDEPENDENCE",
+          "role": "unspecified",
+          "contractionRole": "unspecified",
+          "explanation": "문헌은 가자미근의 발목 발바닥굽힘이 무릎 위치와 관계없이 이뤄진다고 설명합니다."
+        }
+      ],
+      "sourceRefs": [
+        {
+          "layer": "ai_field",
+          "field": "action",
+          "appliesTo": "action_explanation",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000002-action",
+          "valueHash": "c02059b0da0736e3611a8071326c4c35912efe135e9bac3b93b180a1190374af",
+          "evidenceId": "T21-E-HA-M-000002-action-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000002-action"
+        },
+        {
+          "layer": "ai_field",
+          "field": "action",
+          "appliesTo": "action_explanation",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000002-action",
+          "valueHash": "c02059b0da0736e3611a8071326c4c35912efe135e9bac3b93b180a1190374af",
+          "evidenceId": "T21-E-HA-M-000002-action-2",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000002-action"
+        },
+        {
+          "layer": "ai_field",
+          "field": "action_context",
+          "appliesTo": "posture_condition",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000002-action_context",
+          "valueHash": "cc471f1086f8608f150d5f61da539d5d900717021f8f51cee6f22637de7d76bb",
+          "evidenceId": "T21-E-HA-M-000002-action_context-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000002-action_context"
+        },
+        {
+          "layer": "ai_field",
+          "field": "context_role",
+          "appliesTo": "context_role",
+          "contextId": "T21-CONTEXT-HA-M-000002-MANUAL-TEST",
+          "claimId": "T21-C-HA-M-000002-context_role",
+          "valueHash": "8a8e79451bd6e71daa6f1e034981e5220c196cc19761305ee9ab23d610166651",
+          "evidenceId": "T21-E-HA-M-000002-context_role-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000002-context_role"
+        },
+        {
+          "layer": "ai_field",
+          "field": "stabilization_note",
+          "appliesTo": "stabilization_condition",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000002-stabilization_note",
+          "valueHash": "291f9c83cfb2e5bd64a491bdea4a221142f28411b3514c7f4a9d0839484a75a0",
+          "evidenceId": "T21-E-HA-M-000002-stabilization_note-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000002-stabilization_note"
+        },
+        {
+          "layer": "ai_field",
+          "field": "functional_context",
+          "appliesTo": "context_role",
+          "contextId": "T21-C-HA-M-000002-KNEE-INDEPENDENCE",
+          "claimId": "T21-C-HA-M-000002-functional_context",
+          "valueHash": "ebdbd9cda6eeaf38e2594cbba21a99ee86aa455f8bbb834855102d2440921793",
+          "evidenceId": "T21-E-HA-M-000002-functional_context-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000002-functional_context"
+        }
+      ]
+    },
+    {
+      "id": "T21-ACTION-HA-M-000003",
+      "subjectIds": [
+        "HA-M-000003"
+      ],
+      "sideApplicability": "bilateral",
+      "jointBindingState": "unmapped",
+      "jointBindingNote": "현재 canonical catalog에 대응 joint ID가 없어 텍스트 작용만 연결합니다.",
+      "targetJointIds": [],
+      "actionLabel": "발목 등쪽굽힘과 발 안쪽번짐",
+      "explanation": "해당 근육은 발목 등쪽굽힘과 발 안쪽번짐에 관여합니다. 이 요약은 해당 작용을 다룬 출처에 한정되며, 이 근육 하나가 움직임 전체를 단독으로 만든다는 뜻은 아닙니다.",
+      "postureConditions": [
+        "문헌의 검사 예시: 반듯이 누워 뒤꿈치를 지지면에 댄 자세."
+      ],
+      "stabilizationConditions": [],
+      "stabilizationNote": "문헌의 자세 설정과 검사자 손/지지면은 검사 방법으로만 남겼습니다. 이를 이 근육이 고정하는 해부학적 구조나 일반 안정화 작용으로 바꾸지 않았습니다.",
+      "contextRoles": [
+        {
+          "contextId": "T21-CONTEXT-HA-M-000003-MANUAL-TEST",
+          "role": "unspecified",
+          "contractionRole": "unspecified",
+          "explanation": "이 문헌은 해당 근육을 발목 등쪽굽힘과 발 안쪽번짐 검사에서 주 검사 근육으로 지정합니다. 이는 검사 맥락의 지정이며, 일반 움직임에서 작용근·협력근 역할이나 기여 비중을 따로 분류하지 않습니다."
+        }
+      ],
+      "sourceRefs": [
+        {
+          "layer": "ai_field",
+          "field": "action",
+          "appliesTo": "action_explanation",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000003-action",
+          "valueHash": "41e329961eb4417a9bf9a6a93eb0e6a499225af24fa7a4345fc782029838d7cc",
+          "evidenceId": "T21-E-HA-M-000003-action-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000003-action"
+        },
+        {
+          "layer": "ai_field",
+          "field": "action",
+          "appliesTo": "action_explanation",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000003-action",
+          "valueHash": "41e329961eb4417a9bf9a6a93eb0e6a499225af24fa7a4345fc782029838d7cc",
+          "evidenceId": "T21-E-HA-M-000003-action-2",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000003-action"
+        },
+        {
+          "layer": "ai_field",
+          "field": "action_context",
+          "appliesTo": "posture_condition",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000003-action_context",
+          "valueHash": "626707a2003c72f4b77bada14ca980fd24a25fceb5f01369a47225734fdd3e75",
+          "evidenceId": "T21-E-HA-M-000003-action_context-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000003-action_context"
+        },
+        {
+          "layer": "ai_field",
+          "field": "context_role",
+          "appliesTo": "context_role",
+          "contextId": "T21-CONTEXT-HA-M-000003-MANUAL-TEST",
+          "claimId": "T21-C-HA-M-000003-context_role",
+          "valueHash": "45d6436738802296e3cdc6627a4bd61208ab03711c798a2b98bb9b9ae034eb07",
+          "evidenceId": "T21-E-HA-M-000003-context_role-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000003-context_role"
+        },
+        {
+          "layer": "ai_field",
+          "field": "stabilization_note",
+          "appliesTo": "stabilization_condition",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000003-stabilization_note",
+          "valueHash": "291f9c83cfb2e5bd64a491bdea4a221142f28411b3514c7f4a9d0839484a75a0",
+          "evidenceId": "T21-E-HA-M-000003-stabilization_note-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000003-stabilization_note"
+        }
+      ]
+    },
+    {
+      "id": "T21-ACTION-HA-M-000004",
+      "subjectIds": [
+        "HA-M-000004"
+      ],
+      "sideApplicability": "bilateral",
+      "jointBindingState": "unmapped",
+      "jointBindingNote": "현재 canonical catalog에 대응 joint ID가 없어 텍스트 작용만 연결합니다.",
+      "targetJointIds": [],
+      "actionLabel": "발 안쪽번짐",
+      "explanation": "해당 근육은 발 안쪽번짐에 관여합니다. 이 요약은 해당 작용을 다룬 출처에 한정되며, 이 근육 하나가 움직임 전체를 단독으로 만든다는 뜻은 아닙니다.",
+      "postureConditions": [
+        "문헌의 검사 예시: 반듯이 누워 발목을 약간 발바닥굽힘 위치에 둔 자세."
+      ],
+      "stabilizationConditions": [],
+      "stabilizationNote": "문헌의 자세 설정과 검사자 손/지지면은 검사 방법으로만 남겼습니다. 이를 이 근육이 고정하는 해부학적 구조나 일반 안정화 작용으로 바꾸지 않았습니다.",
+      "contextRoles": [
+        {
+          "contextId": "T21-CONTEXT-HA-M-000004-MANUAL-TEST",
+          "role": "unspecified",
+          "contractionRole": "unspecified",
+          "explanation": "이 문헌은 해당 근육을 발 안쪽번짐 검사에서 주 검사 근육으로 지정합니다. 이는 검사 맥락의 지정이며, 일반 움직임에서 작용근·협력근 역할이나 기여 비중을 따로 분류하지 않습니다."
+        },
+        {
+          "contextId": "T21-C-HA-M-000004-ARCH-SUPPORT",
+          "role": "stabilizer",
+          "contractionRole": "unspecified",
+          "explanation": "문헌은 뒤정강근이 발목 발바닥굽힘에 기여하고 중간발 안쪽번짐과 안쪽세로발바닥활 지지에 관여한다고 설명합니다. 보행 중 중간입각기의 중간발 엎침 조절도 언급합니다."
+        },
+        {
+          "contextId": "T21-C-HA-M-000004-TABLE-DETAIL",
+          "role": "unspecified",
+          "contractionRole": "unspecified",
+          "explanation": "표는 뒤정강근에 발 모음·발바닥굽힘과 회외 보조도 적습니다."
+        }
+      ],
+      "sourceRefs": [
+        {
+          "layer": "ai_field",
+          "field": "action",
+          "appliesTo": "action_explanation",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000004-action",
+          "valueHash": "8f2659b495a93991884b2df3e47e2da31c2468b492f5c20bf7cedb8a7344b40b",
+          "evidenceId": "T21-E-HA-M-000004-action-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000004-action"
+        },
+        {
+          "layer": "ai_field",
+          "field": "action",
+          "appliesTo": "action_explanation",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000004-action",
+          "valueHash": "8f2659b495a93991884b2df3e47e2da31c2468b492f5c20bf7cedb8a7344b40b",
+          "evidenceId": "T21-E-HA-M-000004-action-2",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000004-action"
+        },
+        {
+          "layer": "ai_field",
+          "field": "action_context",
+          "appliesTo": "posture_condition",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000004-action_context",
+          "valueHash": "25370a9c5f69a4e079b33a97fa2a0110e6b554858da0d87a6b2c8b45cf77a708",
+          "evidenceId": "T21-E-HA-M-000004-action_context-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000004-action_context"
+        },
+        {
+          "layer": "ai_field",
+          "field": "context_role",
+          "appliesTo": "context_role",
+          "contextId": "T21-CONTEXT-HA-M-000004-MANUAL-TEST",
+          "claimId": "T21-C-HA-M-000004-context_role",
+          "valueHash": "1501405c77fa27f37b17221d66570363427a73a3f500e51b0efc7e5f228a1e3e",
+          "evidenceId": "T21-E-HA-M-000004-context_role-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000004-context_role"
+        },
+        {
+          "layer": "ai_field",
+          "field": "stabilization_note",
+          "appliesTo": "stabilization_condition",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000004-stabilization_note",
+          "valueHash": "291f9c83cfb2e5bd64a491bdea4a221142f28411b3514c7f4a9d0839484a75a0",
+          "evidenceId": "T21-E-HA-M-000004-stabilization_note-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000004-stabilization_note"
+        },
+        {
+          "layer": "ai_field",
+          "field": "functional_context",
+          "appliesTo": "context_role",
+          "contextId": "T21-C-HA-M-000004-ARCH-SUPPORT",
+          "claimId": "T21-C-HA-M-000004-functional_context",
+          "valueHash": "6f81a96d418fb3f846143576001f4c965c124f2b86db79b9f1fe9ec585419d38",
+          "evidenceId": "T21-E-HA-M-000004-functional_context-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000004-functional_context"
+        },
+        {
+          "layer": "ai_field",
+          "field": "action_detail",
+          "appliesTo": "context_role",
+          "contextId": "T21-C-HA-M-000004-TABLE-DETAIL",
+          "claimId": "T21-C-HA-M-000004-action_detail",
+          "valueHash": "587b0cdfd32d595a5565a09058cd198fcd5cc193059848ea61a6e76fae69babb",
+          "evidenceId": "T21-E-HA-M-000004-action_detail-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000004-action_detail"
+        }
+      ]
+    },
+    {
+      "id": "T21-ACTION-HA-M-000005",
+      "subjectIds": [
+        "HA-M-000005"
+      ],
+      "sideApplicability": "bilateral",
+      "jointBindingState": "unmapped",
+      "jointBindingNote": "현재 canonical catalog에 대응 joint ID가 없어 텍스트 작용만 연결합니다.",
+      "targetJointIds": [],
+      "actionLabel": "발 가쪽번짐과 발목 발바닥굽힘",
+      "explanation": "해당 근육은 발 가쪽번짐과 발목 발바닥굽힘에 관여합니다. 이 요약은 해당 작용을 다룬 출처에 한정되며, 이 근육 하나가 움직임 전체를 단독으로 만든다는 뜻은 아닙니다.",
+      "postureConditions": [
+        "문헌의 검사 예시: 앉거나 반듯이 누워 발목을 중립에 둔 자세."
+      ],
+      "stabilizationConditions": [],
+      "stabilizationNote": "문헌의 자세 설정과 검사자 손/지지면은 검사 방법으로만 남겼습니다. 이를 이 근육이 고정하는 해부학적 구조나 일반 안정화 작용으로 바꾸지 않았습니다.",
+      "contextRoles": [
+        {
+          "contextId": "T21-CONTEXT-HA-M-000005-MANUAL-TEST",
+          "role": "unspecified",
+          "contractionRole": "unspecified",
+          "explanation": "이 문헌은 해당 근육을 발 가쪽번짐과 발목 발바닥굽힘 검사에서 주 검사 근육으로 지정합니다. 이는 검사 맥락의 지정이며, 일반 움직임에서 작용근·협력근 역할이나 기여 비중을 따로 분류하지 않습니다."
+        },
+        {
+          "contextId": "T21-C-HA-M-000005-TABLE-DETAIL",
+          "role": "stabilizer",
+          "contractionRole": "unspecified",
+          "explanation": "표는 긴종아리근의 가로발바닥활 지지도 적습니다."
+        }
+      ],
+      "sourceRefs": [
+        {
+          "layer": "ai_field",
+          "field": "action",
+          "appliesTo": "action_explanation",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000005-action",
+          "valueHash": "4f98e21b2d6b45766c71c72e11a64e66cb1e03cc07c6ee680e7d813ae0b43093",
+          "evidenceId": "T21-E-HA-M-000005-action-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000005-action"
+        },
+        {
+          "layer": "ai_field",
+          "field": "action",
+          "appliesTo": "action_explanation",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000005-action",
+          "valueHash": "4f98e21b2d6b45766c71c72e11a64e66cb1e03cc07c6ee680e7d813ae0b43093",
+          "evidenceId": "T21-E-HA-M-000005-action-2",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000005-action"
+        },
+        {
+          "layer": "ai_field",
+          "field": "action_context",
+          "appliesTo": "posture_condition",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000005-action_context",
+          "valueHash": "c4257dfe5fa47ddb4e38db862e8fe6d073c3afcbcb6b9fe1a177ae667a3ee9d5",
+          "evidenceId": "T21-E-HA-M-000005-action_context-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000005-action_context"
+        },
+        {
+          "layer": "ai_field",
+          "field": "context_role",
+          "appliesTo": "context_role",
+          "contextId": "T21-CONTEXT-HA-M-000005-MANUAL-TEST",
+          "claimId": "T21-C-HA-M-000005-context_role",
+          "valueHash": "7fea55e2b16cab9870ec9c0adc9d1ba965dbd294023bc1fc9a8559b4c7a8bbcb",
+          "evidenceId": "T21-E-HA-M-000005-context_role-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000005-context_role"
+        },
+        {
+          "layer": "ai_field",
+          "field": "stabilization_note",
+          "appliesTo": "stabilization_condition",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000005-stabilization_note",
+          "valueHash": "291f9c83cfb2e5bd64a491bdea4a221142f28411b3514c7f4a9d0839484a75a0",
+          "evidenceId": "T21-E-HA-M-000005-stabilization_note-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000005-stabilization_note"
+        },
+        {
+          "layer": "ai_field",
+          "field": "action_detail",
+          "appliesTo": "context_role",
+          "contextId": "T21-C-HA-M-000005-TABLE-DETAIL",
+          "claimId": "T21-C-HA-M-000005-action_detail",
+          "valueHash": "31bd648c78cda778bfe2604ee0ec8d848b104b2623d66d67230c1e78190a8b49",
+          "evidenceId": "T21-E-HA-M-000005-action_detail-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000005-action_detail"
+        }
+      ]
+    },
+    {
+      "id": "T21-ACTION-HA-M-000006",
+      "subjectIds": [
+        "HA-M-000006"
+      ],
+      "sideApplicability": "bilateral",
+      "jointBindingState": "unmapped",
+      "jointBindingNote": "현재 canonical catalog에 대응 joint ID가 없어 텍스트 작용만 연결합니다.",
+      "targetJointIds": [],
+      "actionLabel": "발 가쪽번짐과 발목 발바닥굽힘",
+      "explanation": "해당 근육은 발 가쪽번짐과 발목 발바닥굽힘에 관여합니다. 이 요약은 해당 작용을 다룬 출처에 한정되며, 이 근육 하나가 움직임 전체를 단독으로 만든다는 뜻은 아닙니다.",
+      "postureConditions": [
+        "문헌의 검사 예시: 앉거나 반듯이 누워 발목을 중립에 둔 자세."
+      ],
+      "stabilizationConditions": [],
+      "stabilizationNote": "문헌의 자세 설정과 검사자 손/지지면은 검사 방법으로만 남겼습니다. 이를 이 근육이 고정하는 해부학적 구조나 일반 안정화 작용으로 바꾸지 않았습니다.",
+      "contextRoles": [
+        {
+          "contextId": "T21-CONTEXT-HA-M-000006-MANUAL-TEST",
+          "role": "unspecified",
+          "contractionRole": "unspecified",
+          "explanation": "이 문헌은 해당 근육을 발 가쪽번짐과 발목 발바닥굽힘 검사에서 주 검사 근육으로 지정합니다. 이는 검사 맥락의 지정이며, 일반 움직임에서 작용근·협력근 역할이나 기여 비중을 따로 분류하지 않습니다."
+        }
+      ],
+      "sourceRefs": [
+        {
+          "layer": "ai_field",
+          "field": "action",
+          "appliesTo": "action_explanation",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000006-action",
+          "valueHash": "4f98e21b2d6b45766c71c72e11a64e66cb1e03cc07c6ee680e7d813ae0b43093",
+          "evidenceId": "T21-E-HA-M-000006-action-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000006-action"
+        },
+        {
+          "layer": "ai_field",
+          "field": "action",
+          "appliesTo": "action_explanation",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000006-action",
+          "valueHash": "4f98e21b2d6b45766c71c72e11a64e66cb1e03cc07c6ee680e7d813ae0b43093",
+          "evidenceId": "T21-E-HA-M-000006-action-2",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000006-action"
+        },
+        {
+          "layer": "ai_field",
+          "field": "action_context",
+          "appliesTo": "posture_condition",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000006-action_context",
+          "valueHash": "c4257dfe5fa47ddb4e38db862e8fe6d073c3afcbcb6b9fe1a177ae667a3ee9d5",
+          "evidenceId": "T21-E-HA-M-000006-action_context-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000006-action_context"
+        },
+        {
+          "layer": "ai_field",
+          "field": "context_role",
+          "appliesTo": "context_role",
+          "contextId": "T21-CONTEXT-HA-M-000006-MANUAL-TEST",
+          "claimId": "T21-C-HA-M-000006-context_role",
+          "valueHash": "7fea55e2b16cab9870ec9c0adc9d1ba965dbd294023bc1fc9a8559b4c7a8bbcb",
+          "evidenceId": "T21-E-HA-M-000006-context_role-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000006-context_role"
+        },
+        {
+          "layer": "ai_field",
+          "field": "stabilization_note",
+          "appliesTo": "stabilization_condition",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000006-stabilization_note",
+          "valueHash": "291f9c83cfb2e5bd64a491bdea4a221142f28411b3514c7f4a9d0839484a75a0",
+          "evidenceId": "T21-E-HA-M-000006-stabilization_note-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000006-stabilization_note"
+        }
+      ]
+    }
+  ],
   "motionDefinitions": [],
   "motionAssets": []
 }

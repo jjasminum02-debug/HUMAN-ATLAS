@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "revision": "T18-2026-09-27-calf-origin-insertion",
+  "revision": "T21-2026-09-27-calf-actions",
   "denominatorFrozen": false,
   "wholeBodyIndividualMuscleCount": null,
   "coveragePercent": null,
@@ -1114,6 +1114,1867 @@
       ],
       "geometryState": "absent",
       "motionState": "absent"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000001-action",
+      "subjectId": "HA-M-000001",
+      "field": "action",
+      "evidenceState": "cross_checked",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000001-action",
+          "value": "발목 발바닥굽힘",
+          "valueHash": "c02059b0da0736e3611a8071326c4c35912efe135e9bac3b93b180a1190374af",
+          "evidenceIds": [
+            "T21-E-HA-M-000001-action-1",
+            "T21-E-HA-M-000001-action-2"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "underlyingWorkId": "WORK-STATPEARLS-CARD-BORDONI-2025",
+          "title": "Table 1. Overview of the Extrinsic Foot Muscles | StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK539705/table/article-32230.table1/",
+          "editionStatus": "verified",
+          "edition": "Card RK, Bordoni B. Anatomy, Bony Pelvis and Lower Limb, Foot Muscles. Updated 2025-12-09. In: StatPearls [Internet], 2026 Jan-. Table 1.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "e855799c612709e011d98b395ba032ce707fb92079d09703f46aca2ae36aeba7"
+        },
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000001-action-1",
+          "sourceId": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "locator": "Table 1, Gastrocnemius row, Action column",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000001-action"
+          ],
+          "evidenceHash": "8bf7ef7943fb03d7cbaa7ec3bbfeb2bf0216c126b61478f8560df07e2a6c72c4"
+        },
+        {
+          "id": "T21-E-HA-M-000001-action-2",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > i) Ankle plantar flexion > named test movement and primary muscle(s)",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000001-action"
+          ],
+          "evidenceHash": "b77dc71d1a03bd31f5d91c1b5c1cfe589a045a6262fba48a1043fa4bc8fd0565"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000001-action_context",
+      "subjectId": "HA-M-000001",
+      "field": "action_context",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000001-action_context",
+          "value": "문헌의 검사 예시: 검사할 다리에 서고 무릎을 편 자세.",
+          "valueHash": "cc471f1086f8608f150d5f61da539d5d900717021f8f51cee6f22637de7d76bb",
+          "evidenceIds": [
+            "T21-E-HA-M-000001-action_context-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000001-action_context-1",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > i) Ankle plantar flexion > Grading; position statement",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000001-action_context"
+          ],
+          "evidenceHash": "fcc85b1617d0948200e84887d7a4ab96a5f8e8a3c077eec84e8aa1b75ef55d71"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000001-context_role",
+      "subjectId": "HA-M-000001",
+      "field": "context_role",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000001-context_role",
+          "value": "이 문헌은 해당 근육을 발목 발바닥굽힘 검사에서 주 검사 근육으로 지정합니다. 이는 검사 맥락의 지정이며, 일반 움직임에서 작용근·협력근 역할이나 기여 비중을 따로 분류하지 않습니다.",
+          "valueHash": "8a8e79451bd6e71daa6f1e034981e5220c196cc19761305ee9ab23d610166651",
+          "evidenceIds": [
+            "T21-E-HA-M-000001-context_role-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000001-context_role-1",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > i) Ankle plantar flexion > named test movement and primary muscle(s)",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000001-context_role"
+          ],
+          "evidenceHash": "dba3606bd33a03967da9e4d69f5093811e94d30ceeacd66f7f358fb6e3708065"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000001-stabilization_note",
+      "subjectId": "HA-M-000001",
+      "field": "stabilization_note",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000001-stabilization_note",
+          "value": "문헌의 자세 설정과 검사자 손/지지면은 검사 방법으로만 남겼습니다. 이를 이 근육이 고정하는 해부학적 구조나 일반 안정화 작용으로 바꾸지 않았습니다.",
+          "valueHash": "291f9c83cfb2e5bd64a491bdea4a221142f28411b3514c7f4a9d0839484a75a0",
+          "evidenceIds": [
+            "T21-E-HA-M-000001-stabilization_note-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000001-stabilization_note-1",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > i) Ankle plantar flexion > Grading; external support/stabilization setup",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000001-stabilization_note"
+          ],
+          "evidenceHash": "3103f8153376e8d6696081608a5da0b247f6307bb7815c8026662f16091bca3b"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000001-contraction_mode",
+      "subjectId": "HA-M-000001",
+      "field": "contraction_mode",
+      "evidenceState": "unavailable",
+      "claims": [],
+      "sources": [
+        {
+          "id": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "underlyingWorkId": "WORK-STATPEARLS-CARD-BORDONI-2025",
+          "title": "Table 1. Overview of the Extrinsic Foot Muscles | StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK539705/table/article-32230.table1/",
+          "editionStatus": "verified",
+          "edition": "Card RK, Bordoni B. Anatomy, Bony Pelvis and Lower Limb, Foot Muscles. Updated 2025-12-09. In: StatPearls [Internet], 2026 Jan-. Table 1.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "e855799c612709e011d98b395ba032ce707fb92079d09703f46aca2ae36aeba7"
+        },
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000001-contraction_mode-1",
+          "sourceId": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "locator": "Table 1, Gastrocnemius row, Action column",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [],
+          "evidenceHash": "1b1f9ac6cb4e2f52e024be1b1b346eb0e901b968dc007a5c760654c6f00e6675"
+        },
+        {
+          "id": "T21-E-HA-M-000001-contraction_mode-2",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > i) Ankle plantar flexion > named test movement and primary muscle(s)",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [],
+          "evidenceHash": "2a0ee02fb0ef852bff3ffdaa57fab2e8228d05e87f6233756a0de5ce0f478381"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "absent",
+      "unavailableReason": "열람한 작용 표와 검사 절은 해당 근육의 동적 작용을 동심성·편심성 등 수축 형태로 구분하지 않습니다. 검사 자세를 유지하거나 저항을 받는 지시만으로 수축 유형을 추정하지 않았습니다."
+    },
+    {
+      "id": "T21-FIELD-HA-M-000001-functional_context",
+      "subjectId": "HA-M-000001",
+      "field": "functional_context",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000001-functional_context",
+          "value": "문헌은 무릎이 편 때 발목 발바닥굽힘에 기여하고 무릎 굽힘도 돕는다고 설명합니다.",
+          "valueHash": "e44cda0a175458d5791c9e6d35e0aaeb81db1a866da4b9469c4cb0b948257a93",
+          "evidenceIds": [
+            "T21-E-HA-M-000001-functional_context-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-STATPEARLS-LEG-POSTERIOR-2026",
+          "underlyingWorkId": "WORK-STATPEARLS-ABUQUBO-GRAEFE-LAROSE-2026",
+          "title": "Anatomy, Bony Pelvis and Lower Limb: Leg Posterior Compartment",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK537340/?report=printable",
+          "editionStatus": "verified",
+          "edition": "Abuqubo R, Graefe SB, La Rose J. StatPearls [Internet], 2026 Jan-. Last update 2026-05-13.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "ec1cd709899a1d4576a804c82badf7286969afcfdd0886d5398c44fe667a295d"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000001-functional_context-1",
+          "sourceId": "T21-STATPEARLS-LEG-POSTERIOR-2026",
+          "locator": "Structure and Function > superficial posterior muscles; lines 26-27",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000001-functional_context"
+          ],
+          "evidenceHash": "d0320f7bbde32c8102e037d9cf7fb6b675e55e7046d156131487b56a46cc5c48"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000002-action",
+      "subjectId": "HA-M-000002",
+      "field": "action",
+      "evidenceState": "cross_checked",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000002-action",
+          "value": "발목 발바닥굽힘",
+          "valueHash": "c02059b0da0736e3611a8071326c4c35912efe135e9bac3b93b180a1190374af",
+          "evidenceIds": [
+            "T21-E-HA-M-000002-action-1",
+            "T21-E-HA-M-000002-action-2"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "underlyingWorkId": "WORK-STATPEARLS-CARD-BORDONI-2025",
+          "title": "Table 1. Overview of the Extrinsic Foot Muscles | StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK539705/table/article-32230.table1/",
+          "editionStatus": "verified",
+          "edition": "Card RK, Bordoni B. Anatomy, Bony Pelvis and Lower Limb, Foot Muscles. Updated 2025-12-09. In: StatPearls [Internet], 2026 Jan-. Table 1.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "e855799c612709e011d98b395ba032ce707fb92079d09703f46aca2ae36aeba7"
+        },
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000002-action-1",
+          "sourceId": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "locator": "Table 1, Soleus row, Action column",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000002-action"
+          ],
+          "evidenceHash": "4332898df5a29e5d74d3f45e6c41d2f30ea9316642b18d4cf78fb5ab86572f46"
+        },
+        {
+          "id": "T21-E-HA-M-000002-action-2",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > i) Ankle plantar flexion > named test movement and primary muscle(s)",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000002-action"
+          ],
+          "evidenceHash": "7930e302532462db3d76a2d2a6edd9b4697017b5aa75e0ffabfad4e43eb2b4fd"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000002-action_context",
+      "subjectId": "HA-M-000002",
+      "field": "action_context",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000002-action_context",
+          "value": "문헌의 검사 예시: 검사할 다리에 서고 무릎을 편 자세.",
+          "valueHash": "cc471f1086f8608f150d5f61da539d5d900717021f8f51cee6f22637de7d76bb",
+          "evidenceIds": [
+            "T21-E-HA-M-000002-action_context-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000002-action_context-1",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > i) Ankle plantar flexion > Grading; position statement",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000002-action_context"
+          ],
+          "evidenceHash": "4bac66a3fd59e167727c9b6b127851eca6330fd7771813c6bcd7f951eca35f99"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000002-context_role",
+      "subjectId": "HA-M-000002",
+      "field": "context_role",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000002-context_role",
+          "value": "이 문헌은 해당 근육을 발목 발바닥굽힘 검사에서 주 검사 근육으로 지정합니다. 이는 검사 맥락의 지정이며, 일반 움직임에서 작용근·협력근 역할이나 기여 비중을 따로 분류하지 않습니다.",
+          "valueHash": "8a8e79451bd6e71daa6f1e034981e5220c196cc19761305ee9ab23d610166651",
+          "evidenceIds": [
+            "T21-E-HA-M-000002-context_role-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000002-context_role-1",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > i) Ankle plantar flexion > named test movement and primary muscle(s)",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000002-context_role"
+          ],
+          "evidenceHash": "33152f20b31311c96336920bb8e97dfc7d80a96c15d08e22d1257a7a5a7aca7f"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000002-stabilization_note",
+      "subjectId": "HA-M-000002",
+      "field": "stabilization_note",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000002-stabilization_note",
+          "value": "문헌의 자세 설정과 검사자 손/지지면은 검사 방법으로만 남겼습니다. 이를 이 근육이 고정하는 해부학적 구조나 일반 안정화 작용으로 바꾸지 않았습니다.",
+          "valueHash": "291f9c83cfb2e5bd64a491bdea4a221142f28411b3514c7f4a9d0839484a75a0",
+          "evidenceIds": [
+            "T21-E-HA-M-000002-stabilization_note-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000002-stabilization_note-1",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > i) Ankle plantar flexion > Grading; external support/stabilization setup",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000002-stabilization_note"
+          ],
+          "evidenceHash": "d1c34f423c043b7e7c558907ae960c520d19490de0b606fabc10ac8c3c791a76"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000002-contraction_mode",
+      "subjectId": "HA-M-000002",
+      "field": "contraction_mode",
+      "evidenceState": "unavailable",
+      "claims": [],
+      "sources": [
+        {
+          "id": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "underlyingWorkId": "WORK-STATPEARLS-CARD-BORDONI-2025",
+          "title": "Table 1. Overview of the Extrinsic Foot Muscles | StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK539705/table/article-32230.table1/",
+          "editionStatus": "verified",
+          "edition": "Card RK, Bordoni B. Anatomy, Bony Pelvis and Lower Limb, Foot Muscles. Updated 2025-12-09. In: StatPearls [Internet], 2026 Jan-. Table 1.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "e855799c612709e011d98b395ba032ce707fb92079d09703f46aca2ae36aeba7"
+        },
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000002-contraction_mode-1",
+          "sourceId": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "locator": "Table 1, Soleus row, Action column",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [],
+          "evidenceHash": "21146d8f4486629acaae059b46a6f769da7755d143a2123184b1d8573a0ad4f6"
+        },
+        {
+          "id": "T21-E-HA-M-000002-contraction_mode-2",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > i) Ankle plantar flexion > named test movement and primary muscle(s)",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [],
+          "evidenceHash": "c9b2b3c0c2ad9de60765e1ea0f210806bc7717ba06a0233788b007708fb3cc5e"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "absent",
+      "unavailableReason": "열람한 작용 표와 검사 절은 해당 근육의 동적 작용을 동심성·편심성 등 수축 형태로 구분하지 않습니다. 검사 자세를 유지하거나 저항을 받는 지시만으로 수축 유형을 추정하지 않았습니다."
+    },
+    {
+      "id": "T21-FIELD-HA-M-000002-functional_context",
+      "subjectId": "HA-M-000002",
+      "field": "functional_context",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000002-functional_context",
+          "value": "문헌은 가자미근의 발목 발바닥굽힘이 무릎 위치와 관계없이 이뤄진다고 설명합니다.",
+          "valueHash": "ebdbd9cda6eeaf38e2594cbba21a99ee86aa455f8bbb834855102d2440921793",
+          "evidenceIds": [
+            "T21-E-HA-M-000002-functional_context-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-STATPEARLS-LEG-POSTERIOR-2026",
+          "underlyingWorkId": "WORK-STATPEARLS-ABUQUBO-GRAEFE-LAROSE-2026",
+          "title": "Anatomy, Bony Pelvis and Lower Limb: Leg Posterior Compartment",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK537340/?report=printable",
+          "editionStatus": "verified",
+          "edition": "Abuqubo R, Graefe SB, La Rose J. StatPearls [Internet], 2026 Jan-. Last update 2026-05-13.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "ec1cd709899a1d4576a804c82badf7286969afcfdd0886d5398c44fe667a295d"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000002-functional_context-1",
+          "sourceId": "T21-STATPEARLS-LEG-POSTERIOR-2026",
+          "locator": "Structure and Function > superficial posterior muscles; line 26",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000002-functional_context"
+          ],
+          "evidenceHash": "619f77ff5a2802b7a555c430e5ff3e7bbbbc850efc7305fd1057425ce5acfdb6"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000003-action",
+      "subjectId": "HA-M-000003",
+      "field": "action",
+      "evidenceState": "cross_checked",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000003-action",
+          "value": "발목 등쪽굽힘과 발 안쪽번짐",
+          "valueHash": "41e329961eb4417a9bf9a6a93eb0e6a499225af24fa7a4345fc782029838d7cc",
+          "evidenceIds": [
+            "T21-E-HA-M-000003-action-1",
+            "T21-E-HA-M-000003-action-2"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "underlyingWorkId": "WORK-STATPEARLS-CARD-BORDONI-2025",
+          "title": "Table 1. Overview of the Extrinsic Foot Muscles | StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK539705/table/article-32230.table1/",
+          "editionStatus": "verified",
+          "edition": "Card RK, Bordoni B. Anatomy, Bony Pelvis and Lower Limb, Foot Muscles. Updated 2025-12-09. In: StatPearls [Internet], 2026 Jan-. Table 1.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "e855799c612709e011d98b395ba032ce707fb92079d09703f46aca2ae36aeba7"
+        },
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000003-action-1",
+          "sourceId": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "locator": "Table 1, Tibialis anterior row, Action column",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000003-action"
+          ],
+          "evidenceHash": "269ae7a8bbb68877f0bc47dee57057e227ff3629f4017321361df4c5368c2747"
+        },
+        {
+          "id": "T21-E-HA-M-000003-action-2",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > ii) Foot dorsiflexion and inversion > named test movement and primary muscle(s)",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000003-action"
+          ],
+          "evidenceHash": "393fb22eb914d533c34c846d78a8c5782cc1b3d1732a104eb46588001e89b57e"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000003-action_context",
+      "subjectId": "HA-M-000003",
+      "field": "action_context",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000003-action_context",
+          "value": "문헌의 검사 예시: 반듯이 누워 뒤꿈치를 지지면에 댄 자세.",
+          "valueHash": "626707a2003c72f4b77bada14ca980fd24a25fceb5f01369a47225734fdd3e75",
+          "evidenceIds": [
+            "T21-E-HA-M-000003-action_context-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000003-action_context-1",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > ii) Foot dorsiflexion and inversion > Grading; position statement",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000003-action_context"
+          ],
+          "evidenceHash": "d59f27596c8f59da8676fff5e6bc5ce49dda4d31c54744166be412154662975b"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000003-context_role",
+      "subjectId": "HA-M-000003",
+      "field": "context_role",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000003-context_role",
+          "value": "이 문헌은 해당 근육을 발목 등쪽굽힘과 발 안쪽번짐 검사에서 주 검사 근육으로 지정합니다. 이는 검사 맥락의 지정이며, 일반 움직임에서 작용근·협력근 역할이나 기여 비중을 따로 분류하지 않습니다.",
+          "valueHash": "45d6436738802296e3cdc6627a4bd61208ab03711c798a2b98bb9b9ae034eb07",
+          "evidenceIds": [
+            "T21-E-HA-M-000003-context_role-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000003-context_role-1",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > ii) Foot dorsiflexion and inversion > named test movement and primary muscle(s)",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000003-context_role"
+          ],
+          "evidenceHash": "c8117a8822d89971db734e7f6f24b0e1358c2d34dc2b564ad26af433800cccb6"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000003-stabilization_note",
+      "subjectId": "HA-M-000003",
+      "field": "stabilization_note",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000003-stabilization_note",
+          "value": "문헌의 자세 설정과 검사자 손/지지면은 검사 방법으로만 남겼습니다. 이를 이 근육이 고정하는 해부학적 구조나 일반 안정화 작용으로 바꾸지 않았습니다.",
+          "valueHash": "291f9c83cfb2e5bd64a491bdea4a221142f28411b3514c7f4a9d0839484a75a0",
+          "evidenceIds": [
+            "T21-E-HA-M-000003-stabilization_note-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000003-stabilization_note-1",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > ii) Foot dorsiflexion and inversion > Grading; external support/stabilization setup",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000003-stabilization_note"
+          ],
+          "evidenceHash": "edd895a7eeeaa9fc6a1ace080a1c0428500ab8e32974be4d2508c41d2f73cdd5"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000003-contraction_mode",
+      "subjectId": "HA-M-000003",
+      "field": "contraction_mode",
+      "evidenceState": "unavailable",
+      "claims": [],
+      "sources": [
+        {
+          "id": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "underlyingWorkId": "WORK-STATPEARLS-CARD-BORDONI-2025",
+          "title": "Table 1. Overview of the Extrinsic Foot Muscles | StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK539705/table/article-32230.table1/",
+          "editionStatus": "verified",
+          "edition": "Card RK, Bordoni B. Anatomy, Bony Pelvis and Lower Limb, Foot Muscles. Updated 2025-12-09. In: StatPearls [Internet], 2026 Jan-. Table 1.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "e855799c612709e011d98b395ba032ce707fb92079d09703f46aca2ae36aeba7"
+        },
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000003-contraction_mode-1",
+          "sourceId": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "locator": "Table 1, Tibialis anterior row, Action column",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [],
+          "evidenceHash": "99782869e25051ac1a33b08a1b70bdb4b8de024b14f67406efcace8696fc9be1"
+        },
+        {
+          "id": "T21-E-HA-M-000003-contraction_mode-2",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > ii) Foot dorsiflexion and inversion > named test movement and primary muscle(s)",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [],
+          "evidenceHash": "7690da8043ac3e428886ebb01c99c2cd63c495f61d103cdd96ce637c0983db49"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "absent",
+      "unavailableReason": "열람한 작용 표와 검사 절은 해당 근육의 동적 작용을 동심성·편심성 등 수축 형태로 구분하지 않습니다. 검사 자세를 유지하거나 저항을 받는 지시만으로 수축 유형을 추정하지 않았습니다."
+    },
+    {
+      "id": "T21-FIELD-HA-M-000004-action",
+      "subjectId": "HA-M-000004",
+      "field": "action",
+      "evidenceState": "cross_checked",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000004-action",
+          "value": "발 안쪽번짐",
+          "valueHash": "8f2659b495a93991884b2df3e47e2da31c2468b492f5c20bf7cedb8a7344b40b",
+          "evidenceIds": [
+            "T21-E-HA-M-000004-action-1",
+            "T21-E-HA-M-000004-action-2"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "underlyingWorkId": "WORK-STATPEARLS-CARD-BORDONI-2025",
+          "title": "Table 1. Overview of the Extrinsic Foot Muscles | StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK539705/table/article-32230.table1/",
+          "editionStatus": "verified",
+          "edition": "Card RK, Bordoni B. Anatomy, Bony Pelvis and Lower Limb, Foot Muscles. Updated 2025-12-09. In: StatPearls [Internet], 2026 Jan-. Table 1.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "e855799c612709e011d98b395ba032ce707fb92079d09703f46aca2ae36aeba7"
+        },
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000004-action-1",
+          "sourceId": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "locator": "Table 1, Tibialis posterior row, Action column",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000004-action"
+          ],
+          "evidenceHash": "5205e2f3fcf68d8402e15f0af927493e9a37548807af299ef7c8a0dbc0a59836"
+        },
+        {
+          "id": "T21-E-HA-M-000004-action-2",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > iii) Foot inversion > named test movement and primary muscle(s)",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000004-action"
+          ],
+          "evidenceHash": "a0bba53b5b5ae9d34ac45978743096021c907979bc7206b76dd8d80f7cff9700"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000004-action_context",
+      "subjectId": "HA-M-000004",
+      "field": "action_context",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000004-action_context",
+          "value": "문헌의 검사 예시: 반듯이 누워 발목을 약간 발바닥굽힘 위치에 둔 자세.",
+          "valueHash": "25370a9c5f69a4e079b33a97fa2a0110e6b554858da0d87a6b2c8b45cf77a708",
+          "evidenceIds": [
+            "T21-E-HA-M-000004-action_context-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000004-action_context-1",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > iii) Foot inversion > Grading; position statement",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000004-action_context"
+          ],
+          "evidenceHash": "73ac11c9d1ccc07bd657c99ec56def6e9b2386a9f28f130a2e050a153f5f3df3"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000004-context_role",
+      "subjectId": "HA-M-000004",
+      "field": "context_role",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000004-context_role",
+          "value": "이 문헌은 해당 근육을 발 안쪽번짐 검사에서 주 검사 근육으로 지정합니다. 이는 검사 맥락의 지정이며, 일반 움직임에서 작용근·협력근 역할이나 기여 비중을 따로 분류하지 않습니다.",
+          "valueHash": "1501405c77fa27f37b17221d66570363427a73a3f500e51b0efc7e5f228a1e3e",
+          "evidenceIds": [
+            "T21-E-HA-M-000004-context_role-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000004-context_role-1",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > iii) Foot inversion > named test movement and primary muscle(s)",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000004-context_role"
+          ],
+          "evidenceHash": "499086defd10c6f3c880aed5bb22b96881978b6843467e481ceb7fc96e95aefc"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000004-stabilization_note",
+      "subjectId": "HA-M-000004",
+      "field": "stabilization_note",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000004-stabilization_note",
+          "value": "문헌의 자세 설정과 검사자 손/지지면은 검사 방법으로만 남겼습니다. 이를 이 근육이 고정하는 해부학적 구조나 일반 안정화 작용으로 바꾸지 않았습니다.",
+          "valueHash": "291f9c83cfb2e5bd64a491bdea4a221142f28411b3514c7f4a9d0839484a75a0",
+          "evidenceIds": [
+            "T21-E-HA-M-000004-stabilization_note-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000004-stabilization_note-1",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > iii) Foot inversion > Grading; external support/stabilization setup",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000004-stabilization_note"
+          ],
+          "evidenceHash": "dedaf6fa9f2e546139fed08818c5ab49a6c62e62f4484f8d221476f6291cd075"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000004-contraction_mode",
+      "subjectId": "HA-M-000004",
+      "field": "contraction_mode",
+      "evidenceState": "unavailable",
+      "claims": [],
+      "sources": [
+        {
+          "id": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "underlyingWorkId": "WORK-STATPEARLS-CARD-BORDONI-2025",
+          "title": "Table 1. Overview of the Extrinsic Foot Muscles | StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK539705/table/article-32230.table1/",
+          "editionStatus": "verified",
+          "edition": "Card RK, Bordoni B. Anatomy, Bony Pelvis and Lower Limb, Foot Muscles. Updated 2025-12-09. In: StatPearls [Internet], 2026 Jan-. Table 1.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "e855799c612709e011d98b395ba032ce707fb92079d09703f46aca2ae36aeba7"
+        },
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000004-contraction_mode-1",
+          "sourceId": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "locator": "Table 1, Tibialis posterior row, Action column",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [],
+          "evidenceHash": "ffd48f2c65bdf49012855855413850ff8bf21d84278e9c65467c8e24e7caea05"
+        },
+        {
+          "id": "T21-E-HA-M-000004-contraction_mode-2",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > iii) Foot inversion > named test movement and primary muscle(s)",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [],
+          "evidenceHash": "4ee1a752a06424b5fc5c2059742a20c55d47d3a9af636f08f18f7e3e71881c57"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "absent",
+      "unavailableReason": "열람한 작용 표와 검사 절은 해당 근육의 동적 작용을 동심성·편심성 등 수축 형태로 구분하지 않습니다. 검사 자세를 유지하거나 저항을 받는 지시만으로 수축 유형을 추정하지 않았습니다."
+    },
+    {
+      "id": "T21-FIELD-HA-M-000004-functional_context",
+      "subjectId": "HA-M-000004",
+      "field": "functional_context",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000004-functional_context",
+          "value": "문헌은 뒤정강근이 발목 발바닥굽힘에 기여하고 중간발 안쪽번짐과 안쪽세로발바닥활 지지에 관여한다고 설명합니다. 보행 중 중간입각기의 중간발 엎침 조절도 언급합니다.",
+          "valueHash": "6f81a96d418fb3f846143576001f4c965c124f2b86db79b9f1fe9ec585419d38",
+          "evidenceIds": [
+            "T21-E-HA-M-000004-functional_context-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-STATPEARLS-LEG-POSTERIOR-2026",
+          "underlyingWorkId": "WORK-STATPEARLS-ABUQUBO-GRAEFE-LAROSE-2026",
+          "title": "Anatomy, Bony Pelvis and Lower Limb: Leg Posterior Compartment",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK537340/?report=printable",
+          "editionStatus": "verified",
+          "edition": "Abuqubo R, Graefe SB, La Rose J. StatPearls [Internet], 2026 Jan-. Last update 2026-05-13.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "ec1cd709899a1d4576a804c82badf7286969afcfdd0886d5398c44fe667a295d"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000004-functional_context-1",
+          "sourceId": "T21-STATPEARLS-LEG-POSTERIOR-2026",
+          "locator": "Structure and Function > tibialis posterior; lines 28 and 55",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000004-functional_context"
+          ],
+          "evidenceHash": "a3dae2623396dd003965ecf3f6e5461cef4fc112bee2bd36846b5a72638575da"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000004-action_detail",
+      "subjectId": "HA-M-000004",
+      "field": "action_detail",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000004-action_detail",
+          "value": "표는 뒤정강근에 발 모음·발바닥굽힘과 회외 보조도 적습니다.",
+          "valueHash": "587b0cdfd32d595a5565a09058cd198fcd5cc193059848ea61a6e76fae69babb",
+          "evidenceIds": [
+            "T21-E-HA-M-000004-action_detail-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "underlyingWorkId": "WORK-STATPEARLS-CARD-BORDONI-2025",
+          "title": "Table 1. Overview of the Extrinsic Foot Muscles | StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK539705/table/article-32230.table1/",
+          "editionStatus": "verified",
+          "edition": "Card RK, Bordoni B. Anatomy, Bony Pelvis and Lower Limb, Foot Muscles. Updated 2025-12-09. In: StatPearls [Internet], 2026 Jan-. Table 1.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "e855799c612709e011d98b395ba032ce707fb92079d09703f46aca2ae36aeba7"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000004-action_detail-1",
+          "sourceId": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "locator": "Table 1, Tibialis posterior row, Action column",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000004-action_detail"
+          ],
+          "evidenceHash": "cc425234903033e1bbc8f137d3ca851175a7e84ede8db2e867f5134a5ea08f71"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000005-action",
+      "subjectId": "HA-M-000005",
+      "field": "action",
+      "evidenceState": "cross_checked",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000005-action",
+          "value": "발 가쪽번짐과 발목 발바닥굽힘",
+          "valueHash": "4f98e21b2d6b45766c71c72e11a64e66cb1e03cc07c6ee680e7d813ae0b43093",
+          "evidenceIds": [
+            "T21-E-HA-M-000005-action-1",
+            "T21-E-HA-M-000005-action-2"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "underlyingWorkId": "WORK-STATPEARLS-CARD-BORDONI-2025",
+          "title": "Table 1. Overview of the Extrinsic Foot Muscles | StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK539705/table/article-32230.table1/",
+          "editionStatus": "verified",
+          "edition": "Card RK, Bordoni B. Anatomy, Bony Pelvis and Lower Limb, Foot Muscles. Updated 2025-12-09. In: StatPearls [Internet], 2026 Jan-. Table 1.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "e855799c612709e011d98b395ba032ce707fb92079d09703f46aca2ae36aeba7"
+        },
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000005-action-1",
+          "sourceId": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "locator": "Table 1, Fibularis longus row, Action column",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000005-action"
+          ],
+          "evidenceHash": "536779015e9a273437e9272fcc9a417ba5f9c6ba6f10d06f745ec7c9b1b4ffe6"
+        },
+        {
+          "id": "T21-E-HA-M-000005-action-2",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > iv) Foot eversion with plantar flexion > named test movement and primary muscle(s)",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000005-action"
+          ],
+          "evidenceHash": "1a6f2b4988d30b76f8cad22251084d1d4e6b6cf9819401e954cd8b8b023bd048"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000005-action_context",
+      "subjectId": "HA-M-000005",
+      "field": "action_context",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000005-action_context",
+          "value": "문헌의 검사 예시: 앉거나 반듯이 누워 발목을 중립에 둔 자세.",
+          "valueHash": "c4257dfe5fa47ddb4e38db862e8fe6d073c3afcbcb6b9fe1a177ae667a3ee9d5",
+          "evidenceIds": [
+            "T21-E-HA-M-000005-action_context-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000005-action_context-1",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > iv) Foot eversion with plantar flexion > Grading; position statement",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000005-action_context"
+          ],
+          "evidenceHash": "db6b1b4917884a20b48b24d51a276401582ae17b066ef63e20e527cf41bc7122"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000005-context_role",
+      "subjectId": "HA-M-000005",
+      "field": "context_role",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000005-context_role",
+          "value": "이 문헌은 해당 근육을 발 가쪽번짐과 발목 발바닥굽힘 검사에서 주 검사 근육으로 지정합니다. 이는 검사 맥락의 지정이며, 일반 움직임에서 작용근·협력근 역할이나 기여 비중을 따로 분류하지 않습니다.",
+          "valueHash": "7fea55e2b16cab9870ec9c0adc9d1ba965dbd294023bc1fc9a8559b4c7a8bbcb",
+          "evidenceIds": [
+            "T21-E-HA-M-000005-context_role-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000005-context_role-1",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > iv) Foot eversion with plantar flexion > named test movement and primary muscle(s)",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000005-context_role"
+          ],
+          "evidenceHash": "689a712037cbabbc1c6803dfae810b8830e53859ce4c0d557a1c36247009047b"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000005-stabilization_note",
+      "subjectId": "HA-M-000005",
+      "field": "stabilization_note",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000005-stabilization_note",
+          "value": "문헌의 자세 설정과 검사자 손/지지면은 검사 방법으로만 남겼습니다. 이를 이 근육이 고정하는 해부학적 구조나 일반 안정화 작용으로 바꾸지 않았습니다.",
+          "valueHash": "291f9c83cfb2e5bd64a491bdea4a221142f28411b3514c7f4a9d0839484a75a0",
+          "evidenceIds": [
+            "T21-E-HA-M-000005-stabilization_note-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000005-stabilization_note-1",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > iv) Foot eversion with plantar flexion > Grading; external support/stabilization setup",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000005-stabilization_note"
+          ],
+          "evidenceHash": "626511ac9a4e4388216770d40ce94279c0c131e53f9c0795dadaeaf3b65481f5"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000005-contraction_mode",
+      "subjectId": "HA-M-000005",
+      "field": "contraction_mode",
+      "evidenceState": "unavailable",
+      "claims": [],
+      "sources": [
+        {
+          "id": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "underlyingWorkId": "WORK-STATPEARLS-CARD-BORDONI-2025",
+          "title": "Table 1. Overview of the Extrinsic Foot Muscles | StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK539705/table/article-32230.table1/",
+          "editionStatus": "verified",
+          "edition": "Card RK, Bordoni B. Anatomy, Bony Pelvis and Lower Limb, Foot Muscles. Updated 2025-12-09. In: StatPearls [Internet], 2026 Jan-. Table 1.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "e855799c612709e011d98b395ba032ce707fb92079d09703f46aca2ae36aeba7"
+        },
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000005-contraction_mode-1",
+          "sourceId": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "locator": "Table 1, Fibularis longus row, Action column",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [],
+          "evidenceHash": "8669ea0786c3e0af39a41fd223c6aea85e794eec8ea749ced6b1a0d42c391cb7"
+        },
+        {
+          "id": "T21-E-HA-M-000005-contraction_mode-2",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > iv) Foot eversion with plantar flexion > named test movement and primary muscle(s)",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [],
+          "evidenceHash": "da0fab4cc70e50a2ba627ce2a2f6234dd8ad1f6dbacab88ff6bf4d5ecdb8d8c8"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "absent",
+      "unavailableReason": "열람한 작용 표와 검사 절은 해당 근육의 동적 작용을 동심성·편심성 등 수축 형태로 구분하지 않습니다. 검사 자세를 유지하거나 저항을 받는 지시만으로 수축 유형을 추정하지 않았습니다."
+    },
+    {
+      "id": "T21-FIELD-HA-M-000005-action_detail",
+      "subjectId": "HA-M-000005",
+      "field": "action_detail",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000005-action_detail",
+          "value": "표는 긴종아리근의 가로발바닥활 지지도 적습니다.",
+          "valueHash": "31bd648c78cda778bfe2604ee0ec8d848b104b2623d66d67230c1e78190a8b49",
+          "evidenceIds": [
+            "T21-E-HA-M-000005-action_detail-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "underlyingWorkId": "WORK-STATPEARLS-CARD-BORDONI-2025",
+          "title": "Table 1. Overview of the Extrinsic Foot Muscles | StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK539705/table/article-32230.table1/",
+          "editionStatus": "verified",
+          "edition": "Card RK, Bordoni B. Anatomy, Bony Pelvis and Lower Limb, Foot Muscles. Updated 2025-12-09. In: StatPearls [Internet], 2026 Jan-. Table 1.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "e855799c612709e011d98b395ba032ce707fb92079d09703f46aca2ae36aeba7"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000005-action_detail-1",
+          "sourceId": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "locator": "Table 1, Fibularis longus row, Action column",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000005-action_detail"
+          ],
+          "evidenceHash": "700b8a06365641f3f83486dd59ca424891ee8bb495ede216e80e88d04f91f296"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000006-action",
+      "subjectId": "HA-M-000006",
+      "field": "action",
+      "evidenceState": "cross_checked",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000006-action",
+          "value": "발 가쪽번짐과 발목 발바닥굽힘",
+          "valueHash": "4f98e21b2d6b45766c71c72e11a64e66cb1e03cc07c6ee680e7d813ae0b43093",
+          "evidenceIds": [
+            "T21-E-HA-M-000006-action-1",
+            "T21-E-HA-M-000006-action-2"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "underlyingWorkId": "WORK-STATPEARLS-CARD-BORDONI-2025",
+          "title": "Table 1. Overview of the Extrinsic Foot Muscles | StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK539705/table/article-32230.table1/",
+          "editionStatus": "verified",
+          "edition": "Card RK, Bordoni B. Anatomy, Bony Pelvis and Lower Limb, Foot Muscles. Updated 2025-12-09. In: StatPearls [Internet], 2026 Jan-. Table 1.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "e855799c612709e011d98b395ba032ce707fb92079d09703f46aca2ae36aeba7"
+        },
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000006-action-1",
+          "sourceId": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "locator": "Table 1, Fibularis brevis row, Action column",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000006-action"
+          ],
+          "evidenceHash": "4a67a67d046bf2747c7e32e9316b1117576e87793fd4cb1bbe04c478efa4d395"
+        },
+        {
+          "id": "T21-E-HA-M-000006-action-2",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > iv) Foot eversion with plantar flexion > named test movement and primary muscle(s)",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000006-action"
+          ],
+          "evidenceHash": "0c5b0ebf0f5411727a1cdebf566eb459d21911a9c55e2ad2139196b9671c58cf"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000006-action_context",
+      "subjectId": "HA-M-000006",
+      "field": "action_context",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000006-action_context",
+          "value": "문헌의 검사 예시: 앉거나 반듯이 누워 발목을 중립에 둔 자세.",
+          "valueHash": "c4257dfe5fa47ddb4e38db862e8fe6d073c3afcbcb6b9fe1a177ae667a3ee9d5",
+          "evidenceIds": [
+            "T21-E-HA-M-000006-action_context-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000006-action_context-1",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > iv) Foot eversion with plantar flexion > Grading; position statement",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000006-action_context"
+          ],
+          "evidenceHash": "0d12a905d2a03791f0ccb1ccef3d39b9bbc8b773dff3e6fcf9de73d4114e79cf"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000006-context_role",
+      "subjectId": "HA-M-000006",
+      "field": "context_role",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000006-context_role",
+          "value": "이 문헌은 해당 근육을 발 가쪽번짐과 발목 발바닥굽힘 검사에서 주 검사 근육으로 지정합니다. 이는 검사 맥락의 지정이며, 일반 움직임에서 작용근·협력근 역할이나 기여 비중을 따로 분류하지 않습니다.",
+          "valueHash": "7fea55e2b16cab9870ec9c0adc9d1ba965dbd294023bc1fc9a8559b4c7a8bbcb",
+          "evidenceIds": [
+            "T21-E-HA-M-000006-context_role-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000006-context_role-1",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > iv) Foot eversion with plantar flexion > named test movement and primary muscle(s)",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000006-context_role"
+          ],
+          "evidenceHash": "3aaed2b3132225a9691b5efbe05a9232be04cb6beb3424edf4cd48223efe3313"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000006-stabilization_note",
+      "subjectId": "HA-M-000006",
+      "field": "stabilization_note",
+      "evidenceState": "single_source",
+      "claims": [
+        {
+          "id": "T21-C-HA-M-000006-stabilization_note",
+          "value": "문헌의 자세 설정과 검사자 손/지지면은 검사 방법으로만 남겼습니다. 이를 이 근육이 고정하는 해부학적 구조나 일반 안정화 작용으로 바꾸지 않았습니다.",
+          "valueHash": "291f9c83cfb2e5bd64a491bdea4a221142f28411b3514c7f4a9d0839484a75a0",
+          "evidenceIds": [
+            "T21-E-HA-M-000006-stabilization_note-1"
+          ],
+          "attribution": "ai_source_summary"
+        }
+      ],
+      "sources": [
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000006-stabilization_note-1",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > iv) Foot eversion with plantar flexion > Grading; external support/stabilization setup",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [
+            "T21-C-HA-M-000006-stabilization_note"
+          ],
+          "evidenceHash": "524b41b4b980fd1b52e79071e17dd39e8ec5eca98ba184aef670549441c4ea24"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "text_ready"
+    },
+    {
+      "id": "T21-FIELD-HA-M-000006-contraction_mode",
+      "subjectId": "HA-M-000006",
+      "field": "contraction_mode",
+      "evidenceState": "unavailable",
+      "claims": [],
+      "sources": [
+        {
+          "id": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "underlyingWorkId": "WORK-STATPEARLS-CARD-BORDONI-2025",
+          "title": "Table 1. Overview of the Extrinsic Foot Muscles | StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK539705/table/article-32230.table1/",
+          "editionStatus": "verified",
+          "edition": "Card RK, Bordoni B. Anatomy, Bony Pelvis and Lower Limb, Foot Muscles. Updated 2025-12-09. In: StatPearls [Internet], 2026 Jan-. Table 1.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "e855799c612709e011d98b395ba032ce707fb92079d09703f46aca2ae36aeba7"
+        },
+        {
+          "id": "T21-MJMS-STRUCTURED-MMT-2023",
+          "underlyingWorkId": "WORK-LIM-WONG-IDRIS-GHANI-ETAL-2023",
+          "title": "Structured Manual Muscle Testing of the Lower Limbs",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+          "editionStatus": "verified",
+          "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "sourceHash": "d2f0e487ff95a5b46fe398227252e9715f9d77527127c9ed3725016dfe368552"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "T21-E-HA-M-000006-contraction_mode-1",
+          "sourceId": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+          "locator": "Table 1, Fibularis brevis row, Action column",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [],
+          "evidenceHash": "0b83ebb0230b3534624219fa174c5d50b052c5c33e32df77dc9306419139fb2e"
+        },
+        {
+          "id": "T21-E-HA-M-000006-contraction_mode-2",
+          "sourceId": "T21-MJMS-STRUCTURED-MMT-2023",
+          "locator": "Ankle > iv) Foot eversion with plantar flexion > named test movement and primary muscle(s)",
+          "accessedOn": "2026-09-27",
+          "accessMethod": "repository_full_text",
+          "textAccess": "full_text_opened",
+          "supportsClaimIds": [],
+          "evidenceHash": "3a5354083385e7488e5ad1da2d11e89682be7bcd80d30544400337546e7c7f02"
+        }
+      ],
+      "geometryState": "absent",
+      "motionState": "absent",
+      "unavailableReason": "열람한 작용 표와 검사 절은 해당 근육의 동적 작용을 동심성·편심성 등 수축 형태로 구분하지 않습니다. 검사 자세를 유지하거나 저항을 받는 지시만으로 수축 유형을 추정하지 않았습니다."
     }
   ]
 }

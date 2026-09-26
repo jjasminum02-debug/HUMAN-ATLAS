@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1",
   "registry_id": "human-atlas-source-registry",
-  "revision": "T04-partial-source-access-v1",
+  "revision": "T21-2026-09-27-calf-action-sources",
   "status": "candidate_sources_with_partial_official_locator_extract",
   "accessed_on": "2026-09-25",
   "policy": {
@@ -329,6 +329,72 @@
       "limitations": [
         "A compact table; omission of a structure is not evidence that an attachment is absent.",
         "The shared citation identifies the containing article but does not prove an independent primary anatomical dataset."
+      ]
+    },
+    {
+      "id": "T21-STATPEARLS-FOOT-MUSCLES-2025",
+      "category": "modern_anatomy_reference",
+      "title": "Table 1. Overview of the Extrinsic Foot Muscles | StatPearls",
+      "organization": "StatPearls Publishing / NCBI Bookshelf",
+      "edition": "Card RK, Bordoni B. Anatomy, Bony Pelvis and Lower Limb, Foot Muscles. Updated 2025-12-09. In: StatPearls [Internet], 2026 Jan-. Table 1.",
+      "edition_status": "parent article citation and update date preserved from T18; current Table 1 route opened and checked on 2026-09-27",
+      "primary_locator": "https://www.ncbi.nlm.nih.gov/books/NBK539705/table/article-32230.table1/",
+      "license": {
+        "name": "CC BY-NC-ND 4.0",
+        "status": "opened table footer identifies this license",
+        "url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "note": "T21 stores short independent Korean summaries and links only; no table text or images are copied. External redistribution or adaptation is not authorized by this task."
+      },
+      "access_state": "table1_opened_in_browser_2026-09-27; previous T18 table0 URL now returns page-not-available; see work/evidence/T21/source-manifest.json",
+      "artifact_state": "no remote source file downloaded; source metadata and locator hashes only",
+      "intended_use_candidate": "Narrow action-summary cross-check and citation-only context; not a human review or movement asset.",
+      "limitations": [
+        "Compact action table; it does not give posture, contraction mode, or a full action model.",
+        "Do not count the StatPearls table and other StatPearls chapters as independent primary research."
+      ]
+    },
+    {
+      "id": "T21-MJMS-STRUCTURED-MMT-2023",
+      "category": "movement_test_context_reference",
+      "title": "Structured Manual Muscle Testing of the Lower Limbs",
+      "organization": "Malaysian Journal of Medical Sciences / Universiti Sains Malaysia",
+      "edition": "Lim XY, Wong JKC, Idris Z, Ghani ARI, Abdul Halim S, Abdullah JM. Malays J Med Sci. 2023 Oct 30;30(5):206–220. doi:10.21315/mjms2023.30.5.17. CC BY 4.0.",
+      "edition_status": "article metadata and full text opened on PMC",
+      "primary_locator": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/?report=reader",
+      "license": {
+        "name": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "status": "article copyright/license block states CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "note": "T21 paraphrases the relevant movement-test context with attribution; no article figures or video copied."
+      },
+      "access_state": "full_text_reader_opened_in_browser_2026-09-27; exact ankle headings and passages recorded in field observations",
+      "artifact_state": "no remote source file downloaded; no article text or media copied",
+      "intended_use_candidate": "Movement labels and example test positions only; not patient instructions, diagnosis, strength grading, or an exhaustive muscle-function taxonomy.",
+      "limitations": [
+        "Manual muscle testing identifies test targets and procedures, not the complete physiological role of each muscle.",
+        "Examiner hand support is test setup and is not converted to a muscle stabilization claim."
+      ]
+    },
+    {
+      "id": "T21-STATPEARLS-LEG-POSTERIOR-2026",
+      "category": "modern_anatomy_reference",
+      "title": "Anatomy, Bony Pelvis and Lower Limb: Leg Posterior Compartment",
+      "organization": "StatPearls Publishing / NCBI Bookshelf",
+      "edition": "Abuqubo R, Graefe SB, La Rose J. StatPearls [Internet], 2026 Jan-. Last update 2026-05-13.",
+      "edition_status": "full text states authors, current edition and last update",
+      "primary_locator": "https://www.ncbi.nlm.nih.gov/books/NBK537340/?report=printable",
+      "license": {
+        "name": "CC BY-NC-ND 4.0",
+        "status": "opened full-text footer states this license",
+        "url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "note": "T21 uses short independent Korean summaries and links only; no source text or image copied. External redistribution or adaptation is not authorized by this task."
+      },
+      "access_state": "full_text_opened_2026-09-27; Structure and Function lines 26-31, 55 and citation metadata inspected",
+      "artifact_state": "no remote source file downloaded; metadata and field locators only",
+      "intended_use_candidate": "Narrow context for posterior-compartment function; not a clip or individual gait contribution measurement.",
+      "limitations": [
+        "A narrative StatPearls chapter, not a primary gait experiment.",
+        "Group-level gait statements are not allocated to individual muscles in T21."
       ]
     }
   ],

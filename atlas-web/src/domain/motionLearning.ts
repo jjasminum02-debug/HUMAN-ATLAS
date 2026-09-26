@@ -107,16 +107,76 @@ export interface LearnerActionText {
   explanation: string;
   postureConditions: string[];
   stabilizationConditions: string[];
+  stabilizationNote: string | null;
+  contextNotes: Array<{ label: string; explanation: string }>;
+  contractionNote: string;
+  citations: LearnerActionCitation[];
 }
 
-export function projectLearnerActionText(action: MuscleAction | undefined): LearnerActionText | null {
+export interface LearnerActionCitation {
+  section: "action" | "posture" | "role" | "stabilization";
+  title: string;
+  url: string;
+  edition: string | null;
+  locator: string;
+  accessedOn: string;
+}
+
+export interface ActionCitationEvidenceField {
+  id: string;
+  evidence: Array<{ id: string; sourceId: string; locator: string; accessedOn: string }>;
+  sources: Array<{ id: string; title: string; url: string; edition: string | null }>;
+}
+
+export function projectLearnerActionText(
+  action: MuscleAction | undefined,
+  citations: readonly LearnerActionCitation[] = [],
+): LearnerActionText | null {
   if (!action || !action.explanation.trim()) return null;
   return {
     label: action.actionLabel,
     explanation: action.explanation,
     postureConditions: [...action.postureConditions],
     stabilizationConditions: action.stabilizationConditions.map((condition) => condition.description),
+    stabilizationNote: action.stabilizationNote,
+    contextNotes: action.contextRoles.map((context) => ({
+      label: context.role === "stabilizer" ? "출처가 설명한 지지 역할" : "출처에서 확인한 맥락",
+      explanation: context.explanation,
+    })),
+    contractionNote: action.contextRoles.some((context) => context.contractionRole === "unspecified")
+      ? "조사한 자료는 개별 근육의 수축 종류를 따로 구분하지 않았습니다."
+      : "",
+    citations: [...citations],
   };
+}
+
+/** Resolve only citations explicitly referenced by an action; keep review and geometry states private. */
+export function projectLearnerActionCard(
+  action: MuscleAction | undefined,
+  fields: readonly ActionCitationEvidenceField[],
+): LearnerActionText | null {
+  if (!action) return null;
+  const scopeToSection: Record<EvidenceRef["appliesTo"], LearnerActionCitation["section"] | null> = {
+    action_explanation: "action",
+    posture_condition: "posture",
+    context_role: "role",
+    stabilization_condition: "stabilization",
+    motion_pose_range: null,
+  };
+  const citations: LearnerActionCitation[] = [];
+  for (const ref of action.sourceRefs) {
+    const section = scopeToSection[ref.appliesTo];
+    if (!section || !ref.fieldEvidenceId) continue;
+    const field = fields.find((row) => row.id === ref.fieldEvidenceId);
+    const evidence = field?.evidence.find((row) => row.id === ref.evidenceId);
+    const source = evidence && field?.sources.find((row) => row.id === evidence.sourceId);
+    if (!evidence || !source) continue;
+    citations.push({ section, title: source.title, url: source.url, edition: source.edition, locator: evidence.locator, accessedOn: evidence.accessedOn });
+  }
+  const uniqueCitations = citations.filter((citation, index, rows) => rows.findIndex((row) =>
+    row.section === citation.section && row.url === citation.url && row.locator === citation.locator,
+  ) === index);
+  return projectLearnerActionText(action, uniqueCitations);
 }
 
 export interface MotionCapability {

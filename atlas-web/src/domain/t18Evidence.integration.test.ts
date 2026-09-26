@@ -15,7 +15,7 @@ const targetIds = [
 ];
 
 test("T18 adds only origin/insertion fields for the six calf muscles and two existing gastrocnemius heads", () => {
-  const rows = overlay.items.filter((row) => targetIds.includes(row.subjectId));
+  const rows = overlay.items.filter((row) => targetIds.includes(row.subjectId) && ["origin", "insertion"].includes(row.field));
   assert.equal(rows.length, 16);
   assert.deepEqual(new Set(rows.map((row) => row.field)), new Set(["origin", "insertion"]));
   for (const id of targetIds) {
