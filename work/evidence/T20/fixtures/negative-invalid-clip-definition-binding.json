@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0.0",
+  "revision": "fixture-only",
+  "muscleActions": [
+    {
+      "id": "FX-ACTION-1",
+      "subjectIds": [
+        "FX-MUSCLE-1"
+      ],
+      "sideApplicability": "right",
+      "targetJointIds": [
+        "FX-JOINT-1"
+      ],
+      "actionLabel": "fixture-only action",
+      "explanation": "fixture-only text; not an anatomical claim",
+      "postureConditions": [
+        "fixture-only position"
+      ],
+      "stabilizationConditions": [
+        {
+          "description": "fixture-only stabilization",
+          "structureIds": [
+            "FX-BONE-FIXED"
+          ]
+        }
+      ],
+      "contextRoles": [
+        {
+          "contextId": "FX-CONTEXT-1",
+          "role": "agonist",
+          "contractionRole": "concentric",
+          "explanation": "fixture-only role"
+        },
+        {
+          "contextId": "FX-CONTEXT-2",
+          "role": "stabilizer",
+          "contractionRole": "isometric",
+          "explanation": "fixture-only role in a separate context"
+        }
+      ],
+      "sourceRefs": [
+        {
+          "layer": "ai_field",
+          "claimId": "FX-CLAIM-ACTION",
+          "valueHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "evidenceId": "FX-EVIDENCE-ACTION",
+          "fieldEvidenceId": "FX-FIELD-ACTION",
+          "field": "fixture_action",
+          "appliesTo": "action_explanation",
+          "contextId": null
+        },
+        {
+          "layer": "ai_field",
+          "claimId": "FX-CLAIM-ACTION",
+          "valueHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "evidenceId": "FX-EVIDENCE-ACTION",
+          "fieldEvidenceId": "FX-FIELD-ACTION",
+          "field": "fixture_action",
+          "appliesTo": "posture_condition",
+          "contextId": null
+        },
+        {
+          "layer": "ai_field",
+          "claimId": "FX-CLAIM-ACTION",
+          "valueHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "evidenceId": "FX-EVIDENCE-ACTION",
+          "fieldEvidenceId": "FX-FIELD-ACTION",
+          "field": "fixture_action",
+          "appliesTo": "stabilization_condition",
+          "contextId": null
+        },
+        {
+          "layer": "ai_field",
+          "claimId": "FX-CLAIM-ACTION",
+          "valueHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "evidenceId": "FX-EVIDENCE-ACTION",
+          "fieldEvidenceId": "FX-FIELD-ACTION",
+          "field": "fixture_action",
+          "appliesTo": "context_role",
+          "contextId": "FX-CONTEXT-1"
+        },
+        {
+          "layer": "ai_field",
+          "claimId": "FX-CLAIM-ACTION",
+          "valueHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "evidenceId": "FX-EVIDENCE-ACTION",
+          "fieldEvidenceId": "FX-FIELD-ACTION",
+          "field": "fixture_action",
+          "appliesTo": "context_role",
+          "contextId": "FX-CONTEXT-2"
+        }
+      ],
+      "jointBindingState": "canonical_bound",
+      "jointBindingNote": null,
+      "stabilizationNote": null
+    }
+  ],
+  "motionDefinitions": [
+    {
+      "id": "FX-DEFINITION-1",
+      "actionId": "FX-ACTION-1",
+      "instanceId": "FX-INSTANCE-R",
+      "side": "right",
+      "targetJointIds": [
+        "FX-JOINT-1"
+      ],
+      "movingStructureIds": [
+        "FX-BONE-MOVING"
+      ],
+      "fixedStructureIds": [
+        "FX-BONE-FIXED"
+      ],
+      "staticReference": {
+        "sceneId": "FX-SCENE-1",
+        "sceneRevision": "fixture-rev",
+        "modelId": "FX-MODEL-1",
+        "sourceAssetSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "frameId": "FX-FRAME",
+        "units": "m",
+        "poseId": "FX-STATIC-POSE"
+      },
+      "startPoseId": "FX-STATIC-POSE",
+      "endPoseId": "FX-MOTION-POSE",
+      "poseSourceRefs": [
+        {
+          "layer": "ai_field",
+          "claimId": "FX-CLAIM-POSE",
+          "valueHash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "evidenceId": "FX-EVIDENCE-POSE",
+          "fieldEvidenceId": "FX-FIELD-POSE",
+          "field": "fixture_pose",
+          "appliesTo": "motion_pose_range",
+          "contextId": null
+        }
+      ]
+    }
+  ],
+  "motionAssets": [
+    {
+      "id": "FX-ASSET-1",
+      "motionDefinitionId": "FX-NOT-A-DEFINITION",
+      "uri": "fixture://assets/fixture-motion.bin",
+      "revision": "fixture-asset-rev",
+      "sha256": "85b284ca97591a7dec2185308f7fbfc36f4b349bbc2cbbf60a94cf1f19528a6d",
+      "licenseId": "FX-LICENSE-1",
+      "representationType": "rigged_mesh",
+      "staticBinding": {
+        "sceneId": "FX-SCENE-1",
+        "modelId": "FX-MODEL-1",
+        "sourceAssetSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "frameId": "FX-FRAME",
+        "units": "m",
+        "side": "right",
+        "referencePoseId": "FX-STATIC-POSE",
+        "sceneRevision": "fixture-rev"
+      },
+      "rig": {
+        "id": "FX-RIG-1",
+        "nodeBindings": [
+          {
+            "structureId": "FX-BONE-MOVING",
+            "nodeId": "node-1"
+          }
+        ]
+      },
+      "illustration": null,
+      "clip": {
+        "id": "FX-CLIP-1",
+        "durationSeconds": 1,
+        "startPoseId": "FX-STATIC-POSE",
+        "endPoseId": "FX-MOTION-POSE"
+      },
+      "technicalStatus": "binding_verified",
+      "sourceId": "FX-SOURCE-1"
+    }
+  ]
+}

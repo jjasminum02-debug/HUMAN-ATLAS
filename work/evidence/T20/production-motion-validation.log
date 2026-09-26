@@ -1,0 +1,354 @@
+{
+  "production": {
+    "valid": true,
+    "actionCount": 0,
+    "definitionCount": 0,
+    "assetCount": 0,
+    "issues": []
+  },
+  "fixtures": {
+    "fixtureCount": 16,
+    "passed": 16,
+    "failed": 0,
+    "cases": [
+      {
+        "id": "valid-bound-synthetic-contract",
+        "expectPass": true,
+        "passed": true,
+        "issueCodes": [],
+        "issues": []
+      },
+      {
+        "id": "text-only-does-not-require-or-imply-clip",
+        "expectPass": true,
+        "passed": true,
+        "issueCodes": [],
+        "issues": []
+      },
+      {
+        "id": "valid-illustrative-path-binding",
+        "expectPass": true,
+        "passed": true,
+        "issueCodes": [],
+        "issues": []
+      },
+      {
+        "id": "static-motion-pose-mismatch",
+        "expectPass": false,
+        "passed": true,
+        "issueCodes": [
+          "asset_frame_side_revision_mismatch",
+          "asset_static_pose_mismatch",
+          "false_binding_verified_status"
+        ],
+        "issues": [
+          {
+            "code": "asset_static_pose_mismatch",
+            "path": "$.motionAssets[0].clip",
+            "message": "Asset start/end poses must exactly match the definition and its static reference pose."
+          },
+          {
+            "code": "asset_frame_side_revision_mismatch",
+            "path": "$.motionAssets[0].staticBinding",
+            "message": "Asset binding differs from its motion definition: referencePoseId."
+          },
+          {
+            "code": "false_binding_verified_status",
+            "path": "$.motionAssets[0].technicalStatus",
+            "message": "Technical binding status cannot be verified while required asset, pose, frame, side, or revision checks fail."
+          }
+        ]
+      },
+      {
+        "id": "missing-rig-binding",
+        "expectPass": false,
+        "passed": true,
+        "issueCodes": [
+          "false_binding_verified_status",
+          "missing_rig_binding",
+          "rig_moving_structure_binding_mismatch"
+        ],
+        "issues": [
+          {
+            "code": "missing_rig_binding",
+            "path": "$.motionAssets[0].rig",
+            "message": "A rigged mesh requires a rig/node binding."
+          },
+          {
+            "code": "rig_moving_structure_binding_mismatch",
+            "path": "$.motionAssets[0].rig.nodeBindings",
+            "message": "A rigged asset must bind exactly the moving structures declared by its definition."
+          },
+          {
+            "code": "false_binding_verified_status",
+            "path": "$.motionAssets[0].technicalStatus",
+            "message": "Technical binding status cannot be verified while required asset, pose, frame, side, or revision checks fail."
+          }
+        ]
+      },
+      {
+        "id": "missing-asset-file",
+        "expectPass": false,
+        "passed": true,
+        "issueCodes": [
+          "false_binding_verified_status",
+          "motion_asset_file_missing"
+        ],
+        "issues": [
+          {
+            "code": "motion_asset_file_missing",
+            "path": "$.motionAssets[0].uri",
+            "message": "Motion asset file does not exist: 'fixture://assets/missing.bin'."
+          },
+          {
+            "code": "false_binding_verified_status",
+            "path": "$.motionAssets[0].technicalStatus",
+            "message": "Technical binding status cannot be verified while required asset, pose, frame, side, or revision checks fail."
+          }
+        ]
+      },
+      {
+        "id": "invalid-muscle-action-references",
+        "expectPass": false,
+        "passed": true,
+        "issueCodes": [
+          "invalid_action_joint_binding",
+          "motion_action_joint_mismatch",
+          "motion_instance_subject_mismatch",
+          "orphan_action_subject"
+        ],
+        "issues": [
+          {
+            "code": "orphan_action_subject",
+            "path": "$.muscleActions[0].subjectIds",
+            "message": "Unknown muscle/part ID 'FX-NOT-A-MUSCLE'."
+          },
+          {
+            "code": "invalid_action_joint_binding",
+            "path": "$.muscleActions[0].targetJointIds",
+            "message": "Target 'FX-NOT-A-JOINT' does not resolve to a canonical joint structure."
+          },
+          {
+            "code": "motion_action_joint_mismatch",
+            "path": "$.motionDefinitions[0].targetJointIds",
+            "message": "Motion definition joints must be declared by its MuscleAction."
+          },
+          {
+            "code": "motion_instance_subject_mismatch",
+            "path": "$.motionDefinitions[0].instanceId",
+            "message": "Instance concept is not a subject of the bound MuscleAction."
+          }
+        ]
+      },
+      {
+        "id": "invalid-clip-definition-binding",
+        "expectPass": false,
+        "passed": true,
+        "issueCodes": [
+          "orphan_motion_definition"
+        ],
+        "issues": [
+          {
+            "code": "orphan_motion_definition",
+            "path": "$.motionAssets[0].motionDefinitionId",
+            "message": "Unknown motion definition 'FX-NOT-A-DEFINITION'."
+          }
+        ]
+      },
+      {
+        "id": "left-right-mismatch",
+        "expectPass": false,
+        "passed": true,
+        "issueCodes": [
+          "asset_frame_side_revision_mismatch",
+          "false_binding_verified_status",
+          "motion_action_side_mismatch",
+          "motion_instance_side_mismatch"
+        ],
+        "issues": [
+          {
+            "code": "motion_action_side_mismatch",
+            "path": "$.motionDefinitions[0].side",
+            "message": "Motion laterality conflicts with the MuscleAction side applicability."
+          },
+          {
+            "code": "motion_instance_side_mismatch",
+            "path": "$.motionDefinitions[0].side",
+            "message": "Motion side must match the canonical instance laterality."
+          },
+          {
+            "code": "asset_frame_side_revision_mismatch",
+            "path": "$.motionAssets[0].staticBinding",
+            "message": "Asset binding differs from its motion definition: side."
+          },
+          {
+            "code": "false_binding_verified_status",
+            "path": "$.motionAssets[0].technicalStatus",
+            "message": "Technical binding status cannot be verified while required asset, pose, frame, side, or revision checks fail."
+          }
+        ]
+      },
+      {
+        "id": "frame-mismatch",
+        "expectPass": false,
+        "passed": true,
+        "issueCodes": [
+          "asset_frame_side_revision_mismatch",
+          "false_binding_verified_status"
+        ],
+        "issues": [
+          {
+            "code": "asset_frame_side_revision_mismatch",
+            "path": "$.motionAssets[0].staticBinding",
+            "message": "Asset binding differs from its motion definition: frameId."
+          },
+          {
+            "code": "false_binding_verified_status",
+            "path": "$.motionAssets[0].technicalStatus",
+            "message": "Technical binding status cannot be verified while required asset, pose, frame, side, or revision checks fail."
+          }
+        ]
+      },
+      {
+        "id": "source-claim-value-hash-mismatch",
+        "expectPass": false,
+        "passed": true,
+        "issueCodes": [
+          "ai_claim_value_hash_mismatch"
+        ],
+        "issues": [
+          {
+            "code": "ai_claim_value_hash_mismatch",
+            "path": "$.muscleActions[0].sourceRefs[0].valueHash",
+            "message": "AI field claim hash differs from the referenced overlay claim."
+          },
+          {
+            "code": "ai_claim_value_hash_mismatch",
+            "path": "$.muscleActions[0].sourceRefs[1].valueHash",
+            "message": "AI field claim hash differs from the referenced overlay claim."
+          },
+          {
+            "code": "ai_claim_value_hash_mismatch",
+            "path": "$.muscleActions[0].sourceRefs[2].valueHash",
+            "message": "AI field claim hash differs from the referenced overlay claim."
+          },
+          {
+            "code": "ai_claim_value_hash_mismatch",
+            "path": "$.muscleActions[0].sourceRefs[3].valueHash",
+            "message": "AI field claim hash differs from the referenced overlay claim."
+          },
+          {
+            "code": "ai_claim_value_hash_mismatch",
+            "path": "$.muscleActions[0].sourceRefs[4].valueHash",
+            "message": "AI field claim hash differs from the referenced overlay claim."
+          }
+        ]
+      },
+      {
+        "id": "motion-asset-content-hash-mismatch",
+        "expectPass": false,
+        "passed": true,
+        "issueCodes": [
+          "false_binding_verified_status",
+          "motion_asset_hash_mismatch"
+        ],
+        "issues": [
+          {
+            "code": "motion_asset_hash_mismatch",
+            "path": "$.motionAssets[0].sha256",
+            "message": "Motion asset file content does not match its recorded SHA-256."
+          },
+          {
+            "code": "false_binding_verified_status",
+            "path": "$.motionAssets[0].technicalStatus",
+            "message": "Technical binding status cannot be verified while required asset, pose, frame, side, or revision checks fail."
+          }
+        ]
+      },
+      {
+        "id": "static-scene-revision-mismatch",
+        "expectPass": false,
+        "passed": true,
+        "issueCodes": [
+          "asset_frame_side_revision_mismatch",
+          "false_binding_verified_status",
+          "static_scene_binding_mismatch"
+        ],
+        "issues": [
+          {
+            "code": "static_scene_binding_mismatch",
+            "path": "$.motionDefinitions[0].staticReference",
+            "message": "Static context differs from its scene manifest fields: sceneRevision."
+          },
+          {
+            "code": "asset_frame_side_revision_mismatch",
+            "path": "$.motionAssets[0].staticBinding",
+            "message": "Asset binding differs from its motion definition: sceneRevision."
+          },
+          {
+            "code": "false_binding_verified_status",
+            "path": "$.motionAssets[0].technicalStatus",
+            "message": "Technical binding status cannot be verified while required asset, pose, frame, side, or revision checks fail."
+          }
+        ]
+      },
+      {
+        "id": "unmapped-text-action-cannot-bind-motion",
+        "expectPass": false,
+        "passed": true,
+        "issueCodes": [
+          "motion_action_joint_unmapped"
+        ],
+        "issues": [
+          {
+            "code": "motion_action_joint_unmapped",
+            "path": "$.motionDefinitions[0].actionId",
+            "message": "A motion definition requires canonical joint bindings; text-only unmapped actions cannot define a clip."
+          }
+        ]
+      },
+      {
+        "id": "source-field-reference-mismatch",
+        "expectPass": false,
+        "passed": true,
+        "issueCodes": [
+          "ai_field_name_mismatch"
+        ],
+        "issues": [
+          {
+            "code": "ai_field_name_mismatch",
+            "path": "$.muscleActions[0].sourceRefs[0].field",
+            "message": "AI field name differs from the recorded source field."
+          }
+        ]
+      },
+      {
+        "id": "motion-source-license-mismatch",
+        "expectPass": false,
+        "passed": true,
+        "issueCodes": [
+          "false_binding_verified_status",
+          "motion_source_license_mismatch",
+          "unregistered_motion_license"
+        ],
+        "issues": [
+          {
+            "code": "unregistered_motion_license",
+            "path": "$.motionAssets[0].licenseId",
+            "message": "License 'FX-WRONG-LICENSE' is not registered in source/catalog data."
+          },
+          {
+            "code": "motion_source_license_mismatch",
+            "path": "$.motionAssets[0].licenseId",
+            "message": "Motion asset license must match the registered license of its source."
+          },
+          {
+            "code": "false_binding_verified_status",
+            "path": "$.motionAssets[0].technicalStatus",
+            "message": "Technical binding status cannot be verified while required asset, pose, frame, side, or revision checks fail."
+          }
+        ]
+      }
+    ]
+  }
+}

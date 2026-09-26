@@ -2,15 +2,15 @@
 
 - LAST_UPDATED: 2026-09-27
 - PLAN_REVISION: R13-2026-09-26 — R12 유지 + AI 원문 대조/작용 설명/교육용 움직임/독립 T16–40
-- CURRENT_TASK: T19 — technical_pass; 선택 근육 흐림 기본 ON/토글, isolation·복원, 투명층 뒤 포인터 선택 및 반응형·키보드 브라우저 검사 완료.
-- NEXT_TASK: T20 — Sol High (planned_not_started); MuscleAction/MotionDefinition/MotionAsset/MotionSession 데이터 계약과 검증.
-- LAST_REPORT: work/reports/T19.md
+- CURRENT_TASK: T20 — complete_with_gaps; action/motion 별도 계약·validator·types·legacy migration preview 완료. canonical joint ID·source-backed action·실제 motion asset은 없어 production bundle은 비어 있음.
+- NEXT_TASK: T21 — Luna Max (planned_not_started); 출처 기반 종아리 6근육 작용 설명 및 learner card.
+- LAST_REPORT: work/reports/T20.md
 - CATALOG: partial85 (individual48/group16/part21); 전신 분모 미동결
 - LEARNING_OVERLAY: entries81; current canonical overlap 79/85, six group IDs lack overlay entries, two lookup-only IDs are extra; T11 B01-B09 field work covered the current partial catalog with gaps; humanReviewed=false
-- AI_EVIDENCE_OVERLAY: T16 schema/types/validator/learner adapter + T18 source-bound origin/insertion rows 16; 14 legacy rows remain test-only preview; canonical human review unchanged; geometry/motion absent
+- AI_EVIDENCE_OVERLAY: T16 schema/types/validator/learner adapter + T18 source-bound origin/insertion rows 16; 14 legacy rows remain test-only preview; T20 motion bundle separate/empty; canonical human review unchanged; geometry/motion absent
 - GEOMETRY: 오른쪽 종아리 6근육, 근육메시 7+뼈 13. T15b navigation overlay에 기존 source crosswalk의 우측 뼈 instance/mapping 9개를 needs_review로 연결, 미확정 mesh 4개는 unbound context. canonical spatialAnnotation 0; T13c-B01/B02/B03 context_only geometry:null draft 3건 보존; T05 표면 후보 0/41, text_only 28/41, matching target mesh missing 13/41, human_review_pending 41/41
-- FUNCTION_AND_ASSESSMENT: 미구현, 학습 탭은 준비 중
-- TECHNICAL_GATE: T19 visibility-policy 5/5, scene lifecycle 9/9, navigation 14+12/14+12, search 40/40, typecheck/build, dev+production actual browser 1440/1024/390, preservation 및 console pass. T18 source evidence 16 rows 유지. T15g denominator false/null/null, T14b human review pending, geometry 0/41. 기존 production App chunk >500 kB 경고 유지.
+- FUNCTION_AND_ASSESSMENT: T20 action/motion 계약·validator 구현; production action/definition/asset 0건. learner action card는 T21, 실제 canonical joint ID·clip·재생은 미완
+- TECHNICAL_GATE: T20 motion fixtures 16/16, Node 6/6, T16/T18 AI regressions 9/9 + fixture 8/8, T03 canonical validation, typecheck/build pass. UI 변경이 없어 브라우저 검증 미실시. T15g denominator false/null/null, T14b human review pending, geometry 0/41. 기존 production App chunk 1,419 kB 경고 유지.
 - ANATOMY_GATE: needs_human_review; 전신 구조 완성 아님
 - DEV_URL: none (T19 dev and production preview servers stopped after browser verification)
 
@@ -58,6 +58,7 @@
 | T17 | complete_with_gaps | work/tasks/T17.md; atlas-data/schemas/source-research-manifest.schema.json; atlas-data/sources/source_research.py; work/evidence/T17/; work/reports/T17.md | Tool is tested only with synthetic fixture data; no actual anatomy source was researched or written to production overlay |
 | T18 | complete_with_gaps | work/tasks/T18.md; 16 field-level origin/insertion AI evidence rows; source comparison, learner citations and browser QA; work/evidence/T18/; work/reports/T18.md | fibularis longus origin conflict unresolved; name comparison not performed per T17 handoff; human review, exact surface, motion and external redistribution rights remain open |
 | T19 | technical_pass | work/tasks/T19.md; focus fade/isolation/pick policy; mobile toolbar wrap; work/evidence/T19/; work/reports/T19.md | T18 source conflict, human anatomy review, exact surface geometry, motion and whole-body denominator remain unchanged |
+| T20 | complete_with_gaps | work/tasks/T20.md; motion-learning schema/types/validator; empty production bundle; preview-only JointAction adapter; work/evidence/T20/; work/reports/T20.md | canonical joint IDs and source-backed action rows absent; real motion assets/playback and human review remain open |
 
 ## 실제 현재 상태와 원본 보존
 
@@ -322,4 +323,12 @@ T19 선택 근육 focus fade, 기본 ON 토글, 선택 근육+확인된 관련 �
 
 T18의 긴종아리근 기시 충돌과 출처 상태, T14b 사람 검토 대기, surface 0/41, T15g denominator `false/null/null`은 변경하지 않았다. AI 비교는 사람 승인이나 부착 surface 좌표가 아니다.
 
-다음은 **T20 / Sol High / planned_not_started**다. T20만 별도 요청에서 실행한다. 구체 prompt는 `work/reports/T19.md`의 `다음 작업` 섹션을 사용한다.
+T19 종료 당시 다음은 **T20 / Sol High / planned_not_started**였다. 실행 완료와 현재 인계는 아래 `T20 결과 및 현재 인계` 섹션을 따른다.
+
+## T20 결과 및 현재 인계 — 2026-09-27
+
+T20은 `MuscleAction`, `MotionDefinition`, `MotionAsset` 계약/검증과 runtime-only `MotionSession` type을 별도 계층에 추가했다. 기존 T03 JointAction/review semantics와 Assessment reference는 보존했다. source claim field/hash/evidence 및 purpose/context 연결, canonical subject/joint/instance, 좌우, 정적 scene revision/hash/frame/unit/pose, rig 또는 trajectory와 clip을 검사한다. action text는 joint ID가 아직 없을 경우 명시적 `unmapped` 상태로 둘 수 있지만 MotionDefinition 연결은 차단된다. 역할과 contraction mode는 action context별이다. legacy JointAction adapter는 원본 review/hash/evidence를 유지하는 non-persistable preview다.
+
+검증은 motion contract synthetic fixture 16/16, Node 6/6, 기존 AI/T18 regression 9/9, T16 fixture 8/8, T03 canonical validation, typecheck/build 및 preservation 통과다. 프로덕션 action, motion definition, motion asset은 모두 0건이다. `OpenSim_Models` 동일 HEAD/clean, 기존 사용자 snapshot 47개, T19 protected input 102개는 보존됐다. T14b 사람 검토는 `needs_human_review`, T15g denominator `false/null/null`, T18 긴종아리근 기시 충돌, surface 0/41 상태를 유지했다. build의 기존 1,419 kB chunk 경고가 남는다. 실제 UI를 바꾸지 않아 브라우저 검증은 하지 않았다.
+
+다음은 **T21 / Luna Max / planned_not_started**다. 종아리 6근육의 source-backed action text와 learner card만 다룬다. canonical joint ID가 없으면 텍스트는 source ref와 `unmapped` reason을 연결하고 구조 ID·MotionDefinition·clip을 추정하지 않는다. 전체 붙여 넣기 prompt는 `work/reports/T20.md` 마지막 섹션에 있다. T21 이상은 시작하지 않았다.

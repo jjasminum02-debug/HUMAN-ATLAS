@@ -1,0 +1,81 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import test from "node:test";
+import { assessMotionCapability, createIdleMotionSession, projectLearnerActionText, type MotionAsset, type MotionDefinition, type MuscleAction } from "./motionLearning.ts";
+
+const production = JSON.parse(readFileSync(new URL("../../../atlas-data/motion/motion-learning.json", import.meta.url), "utf8")) as {
+  muscleActions: unknown[]; motionDefinitions: unknown[]; motionAssets: unknown[];
+};
+
+const action: MuscleAction = {
+  id: "FX-ACTION-1", subjectIds: ["FX-MUSCLE-1"], sideApplicability: "right", jointBindingState: "canonical_bound", jointBindingNote: null, targetJointIds: ["FX-JOINT-1"],
+  actionLabel: "fixture-only action", explanation: "fixture-only text; not an anatomical claim", postureConditions: ["fixture-only position"],
+  stabilizationConditions: [{ description: "fixture-only stabilization", structureIds: ["FX-BONE-FIXED"] }], stabilizationNote: null,
+  contextRoles: [
+    { contextId: "FX-CONTEXT-1", role: "agonist", contractionRole: "concentric", explanation: "fixture-only role" },
+    { contextId: "FX-CONTEXT-2", role: "stabilizer", contractionRole: "isometric", explanation: "fixture-only role in a separate context" },
+  ],
+  sourceRefs: [
+    { layer: "ai_field", field: "fixture_action", appliesTo: "action_explanation", contextId: null },
+    { layer: "ai_field", field: "fixture_action", appliesTo: "posture_condition", contextId: null },
+    { layer: "ai_field", field: "fixture_action", appliesTo: "stabilization_condition", contextId: null },
+    { layer: "ai_field", field: "fixture_action", appliesTo: "context_role", contextId: "FX-CONTEXT-1" },
+    { layer: "ai_field", field: "fixture_action", appliesTo: "context_role", contextId: "FX-CONTEXT-2" },
+  ].map((row) => ({ ...row, claimId: "FX-CLAIM-1", valueHash: "a".repeat(64), evidenceId: "FX-EVIDENCE-1", fieldEvidenceId: "FX-FIELD-1" })) as MuscleAction["sourceRefs"],
+};
+const definition: MotionDefinition = {
+  id: "FX-DEFINITION-1", actionId: action.id, instanceId: "FX-INSTANCE-R", side: "right", targetJointIds: ["FX-JOINT-1"],
+  movingStructureIds: ["FX-BONE-MOVING"], fixedStructureIds: ["FX-BONE-FIXED"],
+  staticReference: { sceneId: "FX-SCENE-1", sceneRevision: "fixture-rev", modelId: "FX-MODEL-1", sourceAssetSha256: "b".repeat(64), frameId: "FX-FRAME", units: "m", poseId: "FX-STATIC-POSE" },
+  startPoseId: "FX-STATIC-POSE", endPoseId: "FX-MOTION-POSE", poseSourceRefs: [{ layer: "ai_field", field: "fixture_pose", appliesTo: "motion_pose_range", contextId: null, claimId: "FX-POSE-CLAIM", valueHash: "c".repeat(64), evidenceId: "FX-POSE-EVIDENCE", fieldEvidenceId: "FX-POSE-FIELD" }],
+};
+const asset: MotionAsset = {
+  id: "FX-ASSET-1", motionDefinitionId: definition.id, uri: "fixture://assets/fixture-motion.bin", revision: "fixture-asset-rev", sha256: "d".repeat(64), sourceId: "FX-SOURCE-1",
+  licenseId: "FX-LICENSE-1", representationType: "rigged_mesh",
+  staticBinding: { sceneId: definition.staticReference.sceneId, sceneRevision: definition.staticReference.sceneRevision, modelId: definition.staticReference.modelId, sourceAssetSha256: definition.staticReference.sourceAssetSha256, frameId: definition.staticReference.frameId, units: "m", side: "right", referencePoseId: definition.staticReference.poseId },
+  rig: { id: "FX-RIG-1", nodeBindings: [{ structureId: "FX-BONE-MOVING", nodeId: "node-1" }] },
+  illustration: null,
+  clip: { id: "FX-CLIP-1", durationSeconds: 1, startPoseId: definition.startPoseId, endPoseId: definition.endPoseId },
+  technicalStatus: "binding_verified",
+};
+
+test("production action/motion bundle stays empty until source-backed reviewed content exists", () => {
+  assert.deepEqual(production, { schemaVersion: "1.0.0", revision: "T20-empty-production-contract-v1", muscleActions: [], motionDefinitions: [], motionAssets: [] });
+});
+
+test("text can be present while there is no compatible motion clip", () => {
+  assert.deepEqual(projectLearnerActionText(action)?.explanation, action.explanation);
+  assert.deepEqual(assessMotionCapability(action, undefined, undefined), { hasActionText: true, hasTechnicallyCompatibleClip: false });
+  const textOnlyUnmapped = { ...action, jointBindingState: "unmapped" as const, jointBindingNote: "fixture-only; canonical joint unavailable", targetJointIds: [] };
+  assert.deepEqual(assessMotionCapability(textOnlyUnmapped, undefined, undefined), { hasActionText: true, hasTechnicallyCompatibleClip: false });
+});
+
+test("clip capability requires exact static scene, side, frame, reference pose, and rig-node binding", () => {
+  assert.deepEqual(assessMotionCapability(action, definition, asset), { hasActionText: true, hasTechnicallyCompatibleClip: true });
+  const pathAsset: MotionAsset = { ...asset, representationType: "illustrative_path", rig: null, illustration: { id: "FX-ILLUSTRATION-1", trajectoryBindings: [{ structureId: "FX-BONE-MOVING", trajectoryId: "trajectory-1" }] } };
+  assert.deepEqual(assessMotionCapability(action, definition, pathAsset), { hasActionText: true, hasTechnicallyCompatibleClip: true });
+  const wrongPose = { ...asset, staticBinding: { ...asset.staticBinding, referencePoseId: "FX-OTHER-POSE" } };
+  assert.equal(assessMotionCapability(action, definition, wrongPose).hasTechnicallyCompatibleClip, false);
+  const wrongSide = { ...asset, staticBinding: { ...asset.staticBinding, side: "left" as const } };
+  assert.equal(assessMotionCapability(action, definition, wrongSide).hasTechnicallyCompatibleClip, false);
+  const wrongFrame = { ...asset, staticBinding: { ...asset.staticBinding, frameId: "FX-OTHER-FRAME" } };
+  assert.equal(assessMotionCapability(action, definition, wrongFrame).hasTechnicallyCompatibleClip, false);
+  const wrongSceneRevision = { ...asset, staticBinding: { ...asset.staticBinding, sceneRevision: "FX-OTHER-REVISION" } };
+  assert.equal(assessMotionCapability(action, definition, wrongSceneRevision).hasTechnicallyCompatibleClip, false);
+  const missingRigNode = { ...asset, rig: { id: asset.rig!.id, nodeBindings: [] } };
+  assert.equal(assessMotionCapability(action, definition, missingRigNode).hasTechnicallyCompatibleClip, false);
+});
+
+test("runtime session is resettable state and exposes no persisted content/review fields", () => {
+  assert.deepEqual(createIdleMotionSession(["FX-BONE-MOVING"]), {
+    status: "idle", definitionId: null, assetId: null, currentTimeSeconds: 0, playbackSpeed: 1,
+    selectedStructureIds: ["FX-BONE-MOVING"], errorMessage: null,
+  });
+  assert.equal("humanReviewed" in createIdleMotionSession(), false);
+  assert.equal("reviewState" in createIdleMotionSession(), false);
+});
+
+test("learner text projection omits authoring IDs, JSON, task codes, and review states", () => {
+  const output = JSON.stringify(projectLearnerActionText(action));
+  assert.doesNotMatch(output, /FX-|reviewed|needs_review|T20|JSON/);
+});

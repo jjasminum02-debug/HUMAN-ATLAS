@@ -1,0 +1,95 @@
+{
+  "fixtureMode": true,
+  "subjects": [
+    "FX-MUSCLE-1"
+  ],
+  "structures": {
+    "FX-JOINT-1": {
+      "id": "FX-JOINT-1",
+      "kind": "joint"
+    },
+    "FX-BONE-MOVING": {
+      "id": "FX-BONE-MOVING",
+      "kind": "bone"
+    },
+    "FX-BONE-FIXED": {
+      "id": "FX-BONE-FIXED",
+      "kind": "bone"
+    }
+  },
+  "instances": {
+    "FX-INSTANCE-R": {
+      "id": "FX-INSTANCE-R",
+      "conceptId": "FX-MUSCLE-1",
+      "side": "right"
+    }
+  },
+  "claims": {},
+  "evidence": {},
+  "aiFields": {
+    "FX-FIELD-ACTION": {
+      "id": "FX-FIELD-ACTION",
+      "claims": [
+        {
+          "id": "FX-CLAIM-ACTION",
+          "valueHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "evidenceIds": [
+            "FX-EVIDENCE-ACTION"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "FX-EVIDENCE-ACTION"
+        }
+      ],
+      "field": "fixture_action"
+    },
+    "FX-FIELD-POSE": {
+      "id": "FX-FIELD-POSE",
+      "claims": [
+        {
+          "id": "FX-CLAIM-POSE",
+          "valueHash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "evidenceIds": [
+            "FX-EVIDENCE-POSE"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "FX-EVIDENCE-POSE"
+        }
+      ],
+      "field": "fixture_pose"
+    }
+  },
+  "licenses": [
+    "FX-LICENSE-1"
+  ],
+  "scenes": {
+    "FX-SCENE-1": {
+      "sceneId": "FX-SCENE-1",
+      "sceneRevision": "fixture-rev",
+      "modelId": "FX-MODEL-1",
+      "sourceAssetSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "frameId": "FX-FRAME",
+      "units": "m",
+      "poseId": "FX-STATIC-POSE",
+      "assetUri": "fixture://static"
+    }
+  },
+  "legacyJointActions": {},
+  "fixtureAssets": {
+    "fixture://assets/fixture-motion.bin": "work/evidence/T20/fixtures/assets/fixture-motion.bin",
+    "fixture://assets/missing.bin": "work/evidence/T20/fixtures/assets/missing.bin"
+  },
+  "sourceIds": [
+    "FX-SOURCE-1"
+  ],
+  "sourceLicenses": {
+    "FX-SOURCE-1": [
+      "FX-LICENSE-1"
+    ]
+  }
+}

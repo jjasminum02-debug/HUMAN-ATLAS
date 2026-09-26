@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://human-atlas.local/schemas/motion-learning.schema.json",
+  "title": "HUMAN ATLAS muscle action and motion contract",
+  "description": "Source-linked action text, motion definitions, and technically bound motion assets. This contract contains no human approval state.",
+  "type": "object",
+  "required": ["schemaVersion", "revision", "muscleActions", "motionDefinitions", "motionAssets"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "revision": { "$ref": "#/$defs/NonEmptyString" },
+    "muscleActions": { "type": "array", "items": { "$ref": "#/$defs/MuscleAction" }, "uniqueItems": true },
+    "motionDefinitions": { "type": "array", "items": { "$ref": "#/$defs/MotionDefinition" }, "uniqueItems": true },
+    "motionAssets": { "type": "array", "items": { "$ref": "#/$defs/MotionAsset" }, "uniqueItems": true }
+  },
+  "$defs": {
+    "Id": { "type": "string", "minLength": 1, "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$" },
+    "NonEmptyString": { "type": "string", "minLength": 1 },
+    "Sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "Side": { "type": "string", "enum": ["right", "left", "bilateral", "midline", "not_applicable"] },
+    "EvidenceRef": {
+      "type": "object",
+      "required": ["layer", "field", "appliesTo", "contextId", "claimId", "valueHash", "evidenceId", "fieldEvidenceId"],
+      "additionalProperties": false,
+      "properties": {
+        "layer": { "type": "string", "enum": ["canonical_claim", "ai_field"] },
+        "field": { "$ref": "#/$defs/NonEmptyString" },
+        "appliesTo": { "type": "string", "enum": ["action_explanation", "posture_condition", "stabilization_condition", "context_role", "motion_pose_range"] },
+        "contextId": { "type": ["string", "null"] },
+        "claimId": { "$ref": "#/$defs/Id" },
+        "valueHash": { "$ref": "#/$defs/Sha256" },
+        "evidenceId": { "$ref": "#/$defs/Id" },
+        "fieldEvidenceId": { "type": ["string", "null"] }
+      }
+    },
+    "Condition": {
+      "type": "object",
+      "required": ["description", "structureIds"],
+      "additionalProperties": false,
+      "properties": {
+        "description": { "$ref": "#/$defs/NonEmptyString" },
+        "structureIds": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/Id" }, "uniqueItems": true }
+      }
+    },
+    "ContextRole": {
+      "type": "object",
+      "required": ["contextId", "role", "contractionRole", "explanation"],
+      "additionalProperties": false,
+      "properties": {
+        "contextId": { "$ref": "#/$defs/Id" },
+        "role": { "type": "string", "enum": ["agonist", "antagonist", "synergist", "fixator", "stabilizer", "unspecified"] },
+        "contractionRole": { "type": "string", "enum": ["concentric", "eccentric", "isometric", "stabilizing", "unspecified"] },
+        "explanation": { "$ref": "#/$defs/NonEmptyString" }
+      }
+    },
+    "MuscleAction": {
+      "type": "object",
+      "required": [
+        "id", "subjectIds", "sideApplicability", "jointBindingState", "jointBindingNote", "targetJointIds",
+        "actionLabel", "explanation", "postureConditions", "stabilizationConditions", "stabilizationNote", "contextRoles", "sourceRefs"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/Id" },
+        "subjectIds": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/Id" }, "uniqueItems": true },
+        "sideApplicability": { "$ref": "#/$defs/Side" },
+        "jointBindingState": { "type": "string", "enum": ["canonical_bound", "unmapped"] },
+        "jointBindingNote": { "type": ["string", "null"] },
+        "targetJointIds": { "type": "array", "items": { "$ref": "#/$defs/Id" }, "uniqueItems": true },
+        "actionLabel": { "$ref": "#/$defs/NonEmptyString" },
+        "explanation": { "$ref": "#/$defs/NonEmptyString" },
+        "postureConditions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/NonEmptyString" } },
+        "stabilizationConditions": { "type": "array", "items": { "$ref": "#/$defs/Condition" } },
+        "stabilizationNote": { "type": ["string", "null"] },
+        "contextRoles": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/ContextRole" }, "uniqueItems": true },
+        "sourceRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/EvidenceRef" }, "uniqueItems": true },
+        "legacyJointActionId": { "type": ["string", "null"] }
+      }
+    },
+    "StaticReference": {
+      "type": "object",
+      "required": ["sceneId", "sceneRevision", "modelId", "sourceAssetSha256", "frameId", "units", "poseId"],
+      "additionalProperties": false,
+      "properties": {
+        "sceneId": { "$ref": "#/$defs/Id" },
+        "sceneRevision": { "$ref": "#/$defs/NonEmptyString" },
+        "modelId": { "$ref": "#/$defs/Id" },
+        "sourceAssetSha256": { "$ref": "#/$defs/Sha256" },
+        "frameId": { "$ref": "#/$defs/NonEmptyString" },
+        "units": { "type": "string", "enum": ["m", "mm"] },
+        "poseId": { "$ref": "#/$defs/Id" }
+      }
+    },
+    "MotionDefinition": {
+      "type": "object",
+      "required": [
+        "id", "actionId", "instanceId", "side", "targetJointIds", "movingStructureIds", "fixedStructureIds",
+        "staticReference", "startPoseId", "endPoseId", "poseSourceRefs"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/Id" },
+        "actionId": { "$ref": "#/$defs/Id" },
+        "instanceId": { "$ref": "#/$defs/Id" },
+        "side": { "$ref": "#/$defs/Side" },
+        "targetJointIds": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/Id" }, "uniqueItems": true },
+        "movingStructureIds": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/Id" }, "uniqueItems": true },
+        "fixedStructureIds": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/Id" }, "uniqueItems": true },
+        "staticReference": { "$ref": "#/$defs/StaticReference" },
+        "startPoseId": { "$ref": "#/$defs/Id" },
+        "endPoseId": { "$ref": "#/$defs/Id" },
+        "poseSourceRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/EvidenceRef" }, "uniqueItems": true }
+      }
+    },
+    "RigNodeBinding": {
+      "type": "object",
+      "required": ["structureId", "nodeId"],
+      "additionalProperties": false,
+      "properties": {
+        "structureId": { "$ref": "#/$defs/Id" },
+        "nodeId": { "$ref": "#/$defs/NonEmptyString" }
+      }
+    },
+    "TrajectoryBinding": {
+      "type": "object",
+      "required": ["structureId", "trajectoryId"],
+      "additionalProperties": false,
+      "properties": {
+        "structureId": { "$ref": "#/$defs/Id" },
+        "trajectoryId": { "$ref": "#/$defs/NonEmptyString" }
+      }
+    },
+    "MotionAsset": {
+      "type": "object",
+      "required": [
+        "id", "motionDefinitionId", "uri", "revision", "sha256", "sourceId", "licenseId", "representationType",
+        "staticBinding", "rig", "illustration", "clip", "technicalStatus"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/Id" },
+        "motionDefinitionId": { "$ref": "#/$defs/Id" },
+        "uri": { "$ref": "#/$defs/NonEmptyString" },
+        "revision": { "$ref": "#/$defs/NonEmptyString" },
+        "sha256": { "$ref": "#/$defs/Sha256" },
+        "sourceId": { "$ref": "#/$defs/Id" },
+        "licenseId": { "$ref": "#/$defs/Id" },
+        "representationType": { "type": "string", "enum": ["rigged_mesh", "illustrative_path"] },
+        "staticBinding": {
+          "type": "object",
+          "required": ["sceneId", "sceneRevision", "modelId", "sourceAssetSha256", "frameId", "units", "side", "referencePoseId"],
+          "additionalProperties": false,
+          "properties": {
+            "sceneId": { "$ref": "#/$defs/Id" },
+            "sceneRevision": { "$ref": "#/$defs/NonEmptyString" },
+            "modelId": { "$ref": "#/$defs/Id" },
+            "sourceAssetSha256": { "$ref": "#/$defs/Sha256" },
+            "frameId": { "$ref": "#/$defs/NonEmptyString" },
+            "units": { "type": "string", "enum": ["m", "mm"] },
+            "side": { "$ref": "#/$defs/Side" },
+            "referencePoseId": { "$ref": "#/$defs/Id" }
+          }
+        },
+        "rig": {
+          "type": ["object", "null"],
+          "required": ["id", "nodeBindings"],
+          "additionalProperties": false,
+          "properties": {
+            "id": { "$ref": "#/$defs/NonEmptyString" },
+            "nodeBindings": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/RigNodeBinding" }, "uniqueItems": true }
+          }
+        },
+        "illustration": {
+          "type": ["object", "null"],
+          "required": ["id", "trajectoryBindings"],
+          "additionalProperties": false,
+          "properties": {
+            "id": { "$ref": "#/$defs/NonEmptyString" },
+            "trajectoryBindings": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/TrajectoryBinding" }, "uniqueItems": true }
+          }
+        },
+        "clip": {
+          "type": "object",
+          "required": ["id", "durationSeconds", "startPoseId", "endPoseId"],
+          "additionalProperties": false,
+          "properties": {
+            "id": { "$ref": "#/$defs/NonEmptyString" },
+            "durationSeconds": { "type": "number", "minimum": 0 },
+            "startPoseId": { "$ref": "#/$defs/Id" },
+            "endPoseId": { "$ref": "#/$defs/Id" }
+          }
+        },
+        "technicalStatus": { "type": "string", "enum": ["candidate", "binding_verified"] }
+      }
+    }
+  }
+}

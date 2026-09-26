@@ -1,0 +1,127 @@
+{
+  "notice": "All fixture IDs, text, context, and payload bytes are synthetic test-only data. They are not anatomical claims or learner assets.",
+  "context": "work/evidence/T20/fixtures/context.json",
+  "cases": [
+    {
+      "id": "valid-bound-synthetic-contract",
+      "bundle": "work/evidence/T20/fixtures/positive-valid-motion.json",
+      "expectPass": true
+    },
+    {
+      "id": "text-only-does-not-require-or-imply-clip",
+      "bundle": "work/evidence/T20/fixtures/positive-text-only.json",
+      "expectPass": true
+    },
+    {
+      "id": "valid-illustrative-path-binding",
+      "bundle": "work/evidence/T20/fixtures/positive-illustrative-path.json",
+      "expectPass": true
+    },
+    {
+      "id": "static-motion-pose-mismatch",
+      "bundle": "work/evidence/T20/fixtures/negative-static-motion-pose-mismatch.json",
+      "expectPass": false,
+      "expectedIssueCodes": [
+        "asset_static_pose_mismatch"
+      ]
+    },
+    {
+      "id": "missing-rig-binding",
+      "bundle": "work/evidence/T20/fixtures/negative-missing-rig.json",
+      "expectPass": false,
+      "expectedIssueCodes": [
+        "missing_rig_binding"
+      ]
+    },
+    {
+      "id": "missing-asset-file",
+      "bundle": "work/evidence/T20/fixtures/negative-missing-asset-file.json",
+      "expectPass": false,
+      "expectedIssueCodes": [
+        "motion_asset_file_missing"
+      ]
+    },
+    {
+      "id": "invalid-muscle-action-references",
+      "bundle": "work/evidence/T20/fixtures/negative-invalid-muscle-action-binding.json",
+      "expectPass": false,
+      "expectedIssueCodes": [
+        "orphan_action_subject",
+        "invalid_action_joint_binding"
+      ]
+    },
+    {
+      "id": "invalid-clip-definition-binding",
+      "bundle": "work/evidence/T20/fixtures/negative-invalid-clip-definition-binding.json",
+      "expectPass": false,
+      "expectedIssueCodes": [
+        "orphan_motion_definition"
+      ]
+    },
+    {
+      "id": "left-right-mismatch",
+      "bundle": "work/evidence/T20/fixtures/negative-left-right-mismatch.json",
+      "expectPass": false,
+      "expectedIssueCodes": [
+        "motion_instance_side_mismatch",
+        "asset_frame_side_revision_mismatch"
+      ]
+    },
+    {
+      "id": "frame-mismatch",
+      "bundle": "work/evidence/T20/fixtures/negative-frame-mismatch.json",
+      "expectPass": false,
+      "expectedIssueCodes": [
+        "asset_frame_side_revision_mismatch"
+      ]
+    },
+    {
+      "id": "source-claim-value-hash-mismatch",
+      "bundle": "work/evidence/T20/fixtures/negative-source-claim-hash.json",
+      "expectPass": false,
+      "expectedIssueCodes": [
+        "ai_claim_value_hash_mismatch"
+      ]
+    },
+    {
+      "id": "motion-asset-content-hash-mismatch",
+      "bundle": "work/evidence/T20/fixtures/negative-motion-asset-hash.json",
+      "expectPass": false,
+      "expectedIssueCodes": [
+        "motion_asset_hash_mismatch"
+      ]
+    },
+    {
+      "id": "static-scene-revision-mismatch",
+      "bundle": "work/evidence/T20/fixtures/negative-static-scene-revision.json",
+      "expectPass": false,
+      "expectedIssueCodes": [
+        "static_scene_binding_mismatch"
+      ]
+    },
+    {
+      "id": "unmapped-text-action-cannot-bind-motion",
+      "bundle": "work/evidence/T20/fixtures/negative-unmapped-action-motion-definition.json",
+      "expectPass": false,
+      "expectedIssueCodes": [
+        "motion_action_joint_unmapped"
+      ]
+    },
+    {
+      "id": "source-field-reference-mismatch",
+      "bundle": "work/evidence/T20/fixtures/negative-source-field-mismatch.json",
+      "expectPass": false,
+      "expectedIssueCodes": [
+        "ai_field_name_mismatch"
+      ]
+    },
+    {
+      "id": "motion-source-license-mismatch",
+      "bundle": "work/evidence/T20/fixtures/negative-source-license-mismatch.json",
+      "expectPass": false,
+      "expectedIssueCodes": [
+        "motion_source_license_mismatch"
+      ]
+    }
+  ]
+}
