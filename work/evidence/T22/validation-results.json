@@ -1,0 +1,19 @@
+{
+  "taskId": "T22",
+  "validatedAt": "2026-09-27",
+  "results": [
+    { "name": "animation-loader", "command": "cd atlas-web && pnpm run test:animation-loader", "passed": true, "nodeTests": { "passed": 7, "failed": 0 }, "representationFixtures": { "passed": 3, "failed": 0 }, "sourceCandidates": 2, "productionMotionAssets": 0 },
+    { "name": "motion-learning", "command": "cd atlas-web && pnpm run test:motion-learning", "passed": true, "nodeTests": { "passed": 7, "failed": 0 }, "contractFixtures": { "passed": 16, "failed": 0 } },
+    { "name": "scene-lifecycle-static-regression", "command": "cd atlas-web && pnpm run test:scene-lifecycle", "passed": true, "nodeTests": { "passed": 9, "failed": 0 } },
+    { "name": "typecheck", "command": "cd atlas-web && pnpm run typecheck", "passed": true },
+    { "name": "production-build", "command": "cd atlas-web && pnpm run build", "passed": true, "includes": ["learning validator", "AI evidence validator", "motion learning validator", "T22 motion source validator", "static scene decoder QA", "TypeScript", "Vite production build"], "warning": "Existing App chunk is 1507.24 kB and exceeds the 500 kB advisory threshold." },
+    { "name": "diff-check", "command": "git diff --check", "passed": true }
+  ],
+  "browserVerification": { "required": false, "reason": "No learner UI was changed; implementation is an isolated loader/data contract." },
+  "scopeLimits": [
+    "Synthetic rig/clip is test-only and is not production anatomy data.",
+    "No production motion assets, canonical joint IDs, or MotionDefinitions were created.",
+    "No human anatomy review or learner-release approval was performed."
+  ],
+  "initialWrongDirectoryInvocation": "A first test invocation from repository root could not find atlas-web/package.json; identical commands were rerun from atlas-web and all passed. This was an invocation-path issue, not a product/test failure."
+}

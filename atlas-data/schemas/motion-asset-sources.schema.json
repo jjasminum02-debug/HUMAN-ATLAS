@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://human-atlas.local/schemas/motion-asset-sources.schema.json",
+  "title": "Motion asset source and derivation manifest",
+  "description": "Source eligibility and reproducible import requirements; this manifest is not a learner motion asset or human review record.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "revision", "coordinateContract", "firstAnkleDemonstration", "assetPipeline", "productionMotionAssetIds", "candidateSources"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "revision": { "$ref": "#/$defs/NonEmptyString" },
+    "coordinateContract": {
+      "type": "object", "additionalProperties": false,
+      "required": ["format", "handedness", "upAxis", "forwardAxis", "linearUnits", "angularUnits", "compatibleFrameId", "conversionPolicy"],
+      "properties": {
+        "format": { "const": "glTF 2.0" }, "handedness": { "const": "right" }, "upAxis": { "const": "+Y" },
+        "forwardAxis": { "const": "+Z" }, "linearUnits": { "const": "m" }, "angularUnits": { "const": "rad" },
+        "compatibleFrameId": { "$ref": "#/$defs/NonEmptyString" }, "conversionPolicy": { "$ref": "#/$defs/NonEmptyString" }
+      }
+    },
+    "firstAnkleDemonstration": {
+      "type": "object", "additionalProperties": false,
+      "required": ["candidateAction", "representation", "muscleShape", "status", "holdReasons", "notPatientExerciseInstruction"],
+      "properties": {
+        "candidateAction": { "$ref": "#/$defs/NonEmptyString" }, "representation": { "enum": ["bone_motion_with_illustrative_path", "rigged_mesh"] },
+        "muscleShape": { "$ref": "#/$defs/NonEmptyString" }, "status": { "enum": ["method_selected_asset_held", "asset_candidate"] },
+        "holdReasons": { "type": "array", "items": { "$ref": "#/$defs/NonEmptyString" } },
+        "notPatientExerciseInstruction": { "const": true }
+      }
+    },
+    "assetPipeline": {
+      "type": "object", "additionalProperties": false,
+      "required": ["sourceGate", "derivationGate", "rigGate", "learnerGate", "outputFormat", "productionAssetsAreMotionLearningEntries"],
+      "properties": {
+        "sourceGate": { "$ref": "#/$defs/Checklist" }, "derivationGate": { "$ref": "#/$defs/Checklist" },
+        "rigGate": { "$ref": "#/$defs/Checklist" }, "learnerGate": { "$ref": "#/$defs/Checklist" },
+        "outputFormat": { "$ref": "#/$defs/NonEmptyString" }, "productionAssetsAreMotionLearningEntries": { "const": true }
+      }
+    },
+    "productionMotionAssetIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/Id" } },
+    "candidateSources": { "type": "array", "items": { "$ref": "#/$defs/CandidateSource" } }
+  },
+  "$defs": {
+    "Id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$" },
+    "NonEmptyString": { "type": "string", "minLength": 1 },
+    "Sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "Checklist": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/NonEmptyString" } },
+    "CandidateSource": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "sourceId", "sourceRevision", "sourceLocator", "localPath", "sha256", "format", "licenseId", "licenseUrl", "requiredAttribution", "observed", "disposition", "motionEligible", "reason"],
+      "properties": {
+        "id": { "$ref": "#/$defs/Id" }, "sourceId": { "$ref": "#/$defs/Id" }, "sourceRevision": { "$ref": "#/$defs/NonEmptyString" },
+        "sourceLocator": { "type": "string", "format": "uri" }, "localPath": { "$ref": "#/$defs/NonEmptyString" }, "sha256": { "$ref": "#/$defs/Sha256" },
+        "format": { "enum": ["glb", "osim"] }, "licenseId": { "$ref": "#/$defs/Id" }, "licenseUrl": { "type": "string", "format": "uri" },
+        "requiredAttribution": { "$ref": "#/$defs/NonEmptyString" }, "observed": { "type": "object", "minProperties": 1 },
+        "disposition": { "$ref": "#/$defs/NonEmptyString" }, "motionEligible": { "const": false }, "reason": { "$ref": "#/$defs/NonEmptyString" }
+      }
+    }
+  }
+}

@@ -323,7 +323,7 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
                 issues.append(issue("duplicate_rig_binding", f"{path}.rig.nodeBindings", "Rig node bindings must be unique by structure and node."))
             if set(structure_ids) != set(definition["movingStructureIds"]):
                 issues.append(issue("rig_moving_structure_binding_mismatch", f"{path}.rig.nodeBindings", "A rigged asset must bind exactly the moving structures declared by its definition."))
-        else:
+        elif asset["representationType"] == "illustrative_path":
             if asset["rig"] is not None:
                 issues.append(issue("conflicting_representation_binding", f"{path}.rig", "An illustrative path cannot declare a rigged mesh binding."))
             illustration = asset["illustration"]
@@ -337,6 +337,27 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
                     issues.append(issue("duplicate_trajectory_binding", f"{path}.illustration.trajectoryBindings", "Trajectory bindings must be unique by structure and trajectory."))
                 if set(structure_ids) != set(definition["movingStructureIds"]):
                     issues.append(issue("illustration_moving_structure_binding_mismatch", f"{path}.illustration.trajectoryBindings", "An illustrative path must bind exactly the moving structures declared by its definition."))
+        else:
+            rig_bindings = asset["rig"]["nodeBindings"] if asset["rig"] is not None else []
+            trajectory_bindings = asset["illustration"]["trajectoryBindings"] if asset["illustration"] is not None else []
+            rig_structure_ids = [row["structureId"] for row in rig_bindings]
+            rig_node_ids = [row["nodeId"] for row in rig_bindings]
+            path_structure_ids = [row["structureId"] for row in trajectory_bindings]
+            trajectory_ids = [row["trajectoryId"] for row in trajectory_bindings]
+            if not rig_bindings:
+                issues.append(issue("missing_bone_node_binding", f"{path}.rig.nodeBindings", "Bone motion with an illustrative path requires animated structure-to-node bindings."))
+            if not trajectory_bindings:
+                issues.append(issue("missing_muscle_trajectory_binding", f"{path}.illustration.trajectoryBindings", "Bone motion with an illustrative path requires separate path bindings."))
+            if len(set(rig_structure_ids)) != len(rig_structure_ids) or len(set(rig_node_ids)) != len(rig_node_ids):
+                issues.append(issue("duplicate_rig_binding", f"{path}.rig.nodeBindings", "Rig node bindings must be unique by structure and node."))
+            if len(set(path_structure_ids)) != len(path_structure_ids) or len(set(trajectory_ids)) != len(trajectory_ids):
+                issues.append(issue("duplicate_trajectory_binding", f"{path}.illustration.trajectoryBindings", "Trajectory bindings must be unique by structure and trajectory."))
+            if set(rig_structure_ids) != set(definition["movingStructureIds"]):
+                issues.append(issue("combined_bone_binding_mismatch", f"{path}.rig.nodeBindings", "Bone-node bindings must cover exactly the definition's moving bones."))
+            bound_action = actions.get(definition["actionId"])
+            expected_path_subjects = set(bound_action["subjectIds"]) if bound_action else set()
+            if set(path_structure_ids) != expected_path_subjects:
+                issues.append(issue("combined_path_subject_binding_mismatch", f"{path}.illustration.trajectoryBindings", "Illustrative paths must bind the action's muscle/part subjects separately from moving bones."))
         if asset["technicalStatus"] == "binding_verified" and len(issues) > asset_issue_start:
             issues.append(issue("false_binding_verified_status", f"{path}.technicalStatus", "Technical binding status cannot be verified while required asset, pose, frame, side, or revision checks fail."))
 

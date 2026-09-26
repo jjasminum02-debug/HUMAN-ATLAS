@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "python3 scripts/validate-learning-content.py && python3 ../atlas-data/schemas/validate_ai_evidence.py --check && python3 ../atlas-data/schemas/validate_motion_learning.py --check && node scripts/check-scene-decoders.mjs && tsc -b && vite build",
+    "build": "python3 scripts/validate-learning-content.py && python3 ../atlas-data/schemas/validate_ai_evidence.py --check && python3 ../atlas-data/schemas/validate_motion_learning.py --check && python3 ../atlas-data/schemas/validate_motion_asset_sources.py && node scripts/check-scene-decoders.mjs && tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "typecheck": "tsc -b --pretty false",
     "test:annotations": "node --experimental-strip-types --test src/viewer/annotationDrafts.test.ts && python3 scripts/validate-annotation-exchange-schema.py",
@@ -16,6 +16,7 @@
     "test:attachment-crosschecks": "node --experimental-strip-types --test src/domain/attachmentCrosschecks.test.ts",
     "test:ai-evidence": "node --experimental-strip-types --test src/domain/aiEvidence.test.ts src/domain/legacyEvidenceAdapter.test.ts src/domain/t18Evidence.integration.test.ts && python3 ../atlas-data/schemas/validate_ai_evidence.py --fixtures && python3 ../atlas-data/schemas/build_ai_evidence_overlay.py --check",
     "test:motion-learning": "node --experimental-strip-types --test src/domain/motionLearning.test.ts src/domain/legacyJointActionAdapter.test.ts && python3 ../atlas-data/schemas/validate_motion_learning.py --fixtures",
+    "test:animation-loader": "node --experimental-strip-types --test src/viewer/animationSceneAdapter.test.ts && python3 ../atlas-data/schemas/test_motion_asset_representation_t22.py && python3 ../atlas-data/schemas/validate_motion_asset_sources.py",
     "qa:scene-decoders": "node scripts/check-scene-decoders.mjs",
     "migrate:navigation:dry-run": "python3 ../atlas-data/navigation/build_navigation.py --dry-run",
     "check:navigation-migration": "python3 ../atlas-data/navigation/build_navigation.py --check",

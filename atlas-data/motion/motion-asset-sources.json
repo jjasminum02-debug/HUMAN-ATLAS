@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0.0",
+  "revision": "T22-2026-09-27-motion-asset-sources-v1",
+  "coordinateContract": {
+    "format": "glTF 2.0",
+    "handedness": "right",
+    "upAxis": "+Y",
+    "forwardAxis": "+Z",
+    "linearUnits": "m",
+    "angularUnits": "rad",
+    "compatibleFrameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+    "conversionPolicy": "loader_does_not_rescale_or_reorient; normalize_and_record_in_derivation"
+  },
+  "firstAnkleDemonstration": {
+    "candidateAction": "발목 발바닥굽힘의 교육용 시범",
+    "representation": "bone_motion_with_illustrative_path",
+    "muscleShape": "simple explanatory path; no contraction or quantitative deformation",
+    "status": "method_selected_asset_held",
+    "holdReasons": [
+      "canonical targetJointIds are empty and MotionDefinition count is zero",
+      "source-backed joint frame, pivot, moving/fixed structures, and pose range are not yet recorded",
+      "no license-cleared, frame-compatible motion clip exists in the current checkout"
+    ],
+    "notPatientExerciseInstruction": true
+  },
+  "assetPipeline": {
+    "sourceGate": ["exact source file and revision", "file SHA-256", "asset-specific reuse license", "required attribution"],
+    "derivationGate": ["tool and version", "reproducible command/settings", "source-to-output mapping", "coordinate/unit conversion record", "output SHA-256"],
+    "rigGate": ["stable node map", "skin index/weight validation when rigged_mesh", "clip and track binding", "duration", "static binding source hash and pose"],
+    "learnerGate": ["manifest validation", "loader regression", "anatomy/source review remains separate", "no AI-to-human-review promotion"],
+    "outputFormat": "self-contained GLB preferred; external resources require explicit hashes and licenses",
+    "productionAssetsAreMotionLearningEntries": true
+  },
+  "productionMotionAssetIds": [],
+  "candidateSources": [
+    {
+      "id": "T22-CANDIDATE-BP3D4-RIGHT-LEG-STATIC",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceRevision": "BodyParts3D Release 4.0; T07 derived revision BP3D-R4-OBJ-TO-GLB-V1",
+      "sourceLocator": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "localPath": "atlas-data/assets/derived-glb/bodyparts3d-r4-right-lower-leg/right-lower-leg.glb",
+      "sha256": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341",
+      "format": "glb",
+      "licenseId": "LIC-BP3D-LSDB-ARCHIVE-CC-BY-4.0",
+      "licenseUrl": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "observed": { "scenes": 1, "nodes": 11, "meshes": 11, "skins": 0, "animations": 0, "morphTargets": 0 },
+      "disposition": "static_geometry_only",
+      "motionEligible": false,
+      "reason": "The licensed static geometry contains no skeleton, skin, animation clip, or morph targets. It remains a source/reference mesh, not an animated asset."
+    },
+    {
+      "id": "T22-CANDIDATE-OPENSIM-GAIT2392-MODEL",
+      "sourceId": "OPENSIM_OFFICIAL_MODEL_DOCUMENTATION",
+      "sourceRevision": "OpenSim_Models checkout at d9b05d470b1a481c222372c85b75772faf8f7792; Gait2392 Simbody Thelen model file",
+      "sourceLocator": "https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim/pages/53090607",
+      "localPath": "OpenSim_Models/Models/Gait2392_Simbody/gait2392_thelen2003muscle.osim",
+      "sha256": "3af1ca20aa87bc88b0b8cd54f2504331afa2aa03537cc868f1175fa1f50f3c0f",
+      "format": "osim",
+      "licenseId": "MODEL-GAIT2392-CC-BY-3.0-INFILE-CREDIT",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "requiredAttribution": "See the exact .osim model credits and OpenSim Gait2392 documentation; local model credits list Delp S.L., Loan J.P., Hoy M.G., Zajac F.E., Topp E.L., Rosen J.M., Thelen D.G., Anderson F.C., and Seth A.",
+      "observed": { "motionSamplesInCheckout": 0, "glbExportsInCheckout": 0 },
+      "disposition": "simulation_model_requires_separate_conversion_and_frame_review",
+      "motionEligible": false,
+      "reason": "The exact local model file states CC BY 3.0 and OpenSim's model table identifies the Gait2392 model with that license; this does not establish rights for every file in OpenSim_Models. No .mot/.sto/.trc motion samples or converted GLB are present in the checkout, the OpenSim/Blender authoring tools are not installed, and no Atlas frame/pose binding has been validated."
+    }
+  ]
+}

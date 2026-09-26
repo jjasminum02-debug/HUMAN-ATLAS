@@ -61,6 +61,14 @@ test("clip capability requires exact static scene, side, frame, reference pose, 
   assert.deepEqual(assessMotionCapability(action, definition, asset), { hasActionText: true, hasTechnicallyCompatibleClip: true });
   const pathAsset: MotionAsset = { ...asset, representationType: "illustrative_path", rig: null, illustration: { id: "FX-ILLUSTRATION-1", trajectoryBindings: [{ structureId: "FX-BONE-MOVING", trajectoryId: "trajectory-1" }] } };
   assert.deepEqual(assessMotionCapability(action, definition, pathAsset), { hasActionText: true, hasTechnicallyCompatibleClip: true });
+  const boneAndPathDefinition: MotionDefinition = { ...definition, movingStructureIds: ["FX-BONE-MOVING"] };
+  const boneAndPathAsset: MotionAsset = {
+    ...asset,
+    representationType: "bone_motion_with_illustrative_path",
+    illustration: { id: "FX-ILLUSTRATION-2", trajectoryBindings: [{ structureId: action.subjectIds[0], trajectoryId: "path-node-1" }] },
+  };
+  assert.deepEqual(assessMotionCapability(action, boneAndPathDefinition, boneAndPathAsset), { hasActionText: true, hasTechnicallyCompatibleClip: true });
+  assert.equal(assessMotionCapability(action, boneAndPathDefinition, { ...boneAndPathAsset, illustration: null }).hasTechnicallyCompatibleClip, false);
   const wrongPose = { ...asset, staticBinding: { ...asset.staticBinding, referencePoseId: "FX-OTHER-POSE" } };
   assert.equal(assessMotionCapability(action, definition, wrongPose).hasTechnicallyCompatibleClip, false);
   const wrongSide = { ...asset, staticBinding: { ...asset.staticBinding, side: "left" as const } };

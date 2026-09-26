@@ -145,7 +145,11 @@
         "sha256": { "$ref": "#/$defs/Sha256" },
         "sourceId": { "$ref": "#/$defs/Id" },
         "licenseId": { "$ref": "#/$defs/Id" },
-        "representationType": { "type": "string", "enum": ["rigged_mesh", "illustrative_path"] },
+        "representationType": {
+          "type": "string",
+          "description": "rigged_mesh is skin-deformed geometry; illustrative_path is the legacy path-only form; bone_motion_with_illustrative_path binds moving bones and muscle/part paths separately.",
+          "enum": ["rigged_mesh", "illustrative_path", "bone_motion_with_illustrative_path"]
+        },
         "staticBinding": {
           "type": "object",
           "required": ["sceneId", "sceneRevision", "modelId", "sourceAssetSha256", "frameId", "units", "side", "referencePoseId"],

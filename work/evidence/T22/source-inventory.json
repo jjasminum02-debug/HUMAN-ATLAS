@@ -1,0 +1,84 @@
+{
+  "recordedAt": "2026-09-27",
+  "installedRuntime": {
+    "nodeExecutable": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "nodeVersion": "v24.19.0",
+    "threePackageVersion": "0.186.1",
+    "blenderCommand": null,
+    "opensimCommand": null,
+    "notes": "The local dependency runtime is used by absolute path; no Blender/OpenSim authoring CLI was found on PATH."
+  },
+  "pythonModules": {
+    "bpy": "unavailable: ModuleNotFoundError",
+    "opensim": "unavailable: ModuleNotFoundError"
+  },
+  "openSimCheckout": {
+    "head": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "status": [
+      "## master...origin/master"
+    ],
+    "selectedModelPath": "OpenSim_Models/Models/Gait2392_Simbody/gait2392_thelen2003muscle.osim",
+    "selectedModelSha256": "3af1ca20aa87bc88b0b8cd54f2504331afa2aa03537cc868f1175fa1f50f3c0f",
+    "modelFileCredit": "In-file credits state Creative Commons (CCBY 3.0).",
+    "matchingFileCounts": {
+      ".mot": 0,
+      ".sto": 0,
+      ".trc": 0,
+      ".c3d": 0,
+      ".glb": 0,
+      ".gltf": 0,
+      ".fbx": 0,
+      ".osim": 34
+    }
+  },
+  "productionMotionContent": {
+    "muscleActions": 6,
+    "motionDefinitions": 0,
+    "motionAssets": 0,
+    "canonicalJointStructures": 0
+  },
+  "licenseSourcePages": [
+    {
+      "title": "BodyParts3D LSDB Archive license",
+      "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+      "accessedOn": "2026-09-27",
+      "observed": "Archive license page states CC BY 4.0, provides exact attribution, updated 2025-02-27."
+    },
+    {
+      "title": "OpenSim Gait2392 model page",
+      "url": "https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim/pages/53086215",
+      "accessedOn": "2026-09-27",
+      "observed": "Documentation describes the model and its associated .mot/.sto result files in OpenSim installations; these result files are absent in this local checkout."
+    },
+    {
+      "title": "OpenSim musculoskeletal model table",
+      "url": "https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim/pages/53090607",
+      "accessedOn": "2026-09-27",
+      "observed": "Gait2392 row lists CC BY 3.0. This is not treated as permission for every model/file in OpenSim_Models."
+    },
+    {
+      "title": "Three.js GLTFLoader",
+      "url": "https://threejs.org/docs/pages/GLTFLoader.html",
+      "accessedOn": "2026-09-27",
+      "observed": "parseAsync returns scenes, animations, and the default scene."
+    },
+    {
+      "title": "Three.js SkinnedMesh",
+      "url": "https://threejs.org/docs/pages/SkinnedMesh.html",
+      "accessedOn": "2026-09-27",
+      "observed": "SkinnedMesh uses a skeleton plus skinIndex and skinWeight attributes."
+    },
+    {
+      "title": "Khronos glTF 2.0 specification",
+      "url": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc",
+      "accessedOn": "2026-09-27",
+      "observed": "glTF is right-handed; +Y up, +Z front, +X left; distances meters and angles radians."
+    },
+    {
+      "title": "Three.js resource disposal guide",
+      "url": "https://threejs.org/manual/pages/how-to-dispose-of-objects.html",
+      "accessedOn": "2026-09-27",
+      "observed": "Geometry, material, texture, skeleton resources need explicit disposal; shared resources require ownership-aware deduplication."
+    }
+  ]
+}

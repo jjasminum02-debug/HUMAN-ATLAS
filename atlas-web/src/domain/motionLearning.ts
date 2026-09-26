@@ -75,7 +75,7 @@ export interface MotionAsset {
   sha256: string;
   sourceId: string;
   licenseId: string;
-  representationType: "rigged_mesh" | "illustrative_path";
+  representationType: "rigged_mesh" | "illustrative_path" | "bone_motion_with_illustrative_path";
   staticBinding: {
     sceneId: string;
     sceneRevision: string;
@@ -199,7 +199,11 @@ export function assessMotionCapability(
   const expectedMoving = [...definition.movingStructureIds].sort();
   const actualMoving = asset.representationType === "rigged_mesh"
     ? asset.rig?.nodeBindings.map((row) => row.structureId).sort() ?? []
-    : asset.illustration?.trajectoryBindings.map((row) => row.structureId).sort() ?? [];
+    : asset.representationType === "bone_motion_with_illustrative_path"
+      ? asset.rig?.nodeBindings.map((row) => row.structureId).sort() ?? []
+      : asset.illustration?.trajectoryBindings.map((row) => row.structureId).sort() ?? [];
+  const pathSubjects = asset.illustration?.trajectoryBindings.map((row) => row.structureId).sort() ?? [];
+  const expectedPathSubjects = [...action.subjectIds].sort();
   const compatible = definition.actionId === action.id
     && asset.motionDefinitionId === definition.id
     && definition.side === asset.staticBinding.side
@@ -210,6 +214,8 @@ export function assessMotionCapability(
     && binding.frameId === ref.frameId
     && binding.units === ref.units
     && binding.referencePoseId === ref.poseId
+    && (asset.representationType !== "bone_motion_with_illustrative_path"
+      || JSON.stringify(pathSubjects) === JSON.stringify(expectedPathSubjects))
     && definition.startPoseId === ref.poseId
     && asset.clip.startPoseId === definition.startPoseId
     && asset.clip.endPoseId === definition.endPoseId
