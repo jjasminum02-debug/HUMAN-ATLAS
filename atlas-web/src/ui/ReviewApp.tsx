@@ -10,10 +10,11 @@ import {
   type AtlasRecord,
   type PilotCatalog,
 } from "../data/catalog";
+import { learnerVisibleTerms, withoutHanScript } from "../domain/search";
 import { GLBViewer } from "../viewer/GLBViewer";
 
 const languageNames: Record<string, string> = { en: "English", la: "Latin", ko: "한국어" };
-const scriptNames: Record<string, string> = { Hang: "한글", Hani: "한자", Latn: "로마자" };
+const scriptNames: Record<string, string> = { Hang: "한글", Latn: "로마자" };
 const roleNames: Record<string, string> = { origin: "기시", insertion: "정지" };
 const typeNames: Record<string, string> = { individual_muscle: "개별 근육", muscle_part: "근육 부분" };
 const stateNames: Record<string, string> = { needs_review: "검토 대기", held: "미확인", reviewed: "검토 완료" };
@@ -45,7 +46,7 @@ function sourceName(source: AtlasRecord | undefined): string {
 }
 
 function TermList({ catalog, conceptId }: { catalog: PilotCatalog; conceptId: string }) {
-  const terms = displayTerms(catalog, conceptId);
+  const terms = learnerVisibleTerms(displayTerms(catalog, conceptId));
   if (terms.length === 0) return <p className="muted">등록된 용어가 없습니다.</p>;
 
   return (
@@ -67,17 +68,17 @@ function TermList({ catalog, conceptId }: { catalog: PilotCatalog; conceptId: st
               </span>
             </div>
             <p className={text(term.text) ? "term-value" : "term-value missing-value"}>
-              {text(term.text) ?? "용어 미확인"}
+              {withoutHanScript(text(term.text) ?? "용어 미확인")}
             </p>
-            {missingReason && <p className="missing-reason">{missingReason}</p>}
+            {missingReason && <p className="missing-reason">{withoutHanScript(missingReason)}</p>}
             {linked.length > 0 && (
               <div className="term-evidence">
                 {linked.map((item) => {
                   const source = sourceForEvidence(catalog, item);
                   return (
                     <div className="evidence-line" key={item.id}>
-                      <span>{sourceName(source)}</span>
-                      <span>{rowValue(item, "locator") ?? item.id}</span>
+                      <span>{withoutHanScript(sourceName(source))}</span>
+                      <span>{withoutHanScript(rowValue(item, "locator") ?? item.id)}</span>
                       {source && text(source.urlOrLocalRef) && (
                         <a href={text(source.urlOrLocalRef)!} target="_blank" rel="noreferrer">
                           출처 열기
@@ -107,8 +108,8 @@ function ClaimCard({ catalog, claim }: { catalog: PilotCatalog; claim: AtlasReco
         <span>{field === "attachment_description" ? "부착 설명" : field === "tendon_course_related_structures" ? "건 주행 기록" : field}</span>
         <span className="badge badge-review">{termState(claim)}</span>
       </div>
-      <p className="claim-summary">{summary ?? "기록된 요약이 없습니다."}</p>
-      {edition && <p className="claim-edition">판본: {edition}</p>}
+      <p className="claim-summary">{summary ? withoutHanScript(summary) : "기록된 요약이 없습니다."}</p>
+      {edition && <p className="claim-edition">판본: {withoutHanScript(edition)}</p>}
       {evidence.length > 0 ? (
         <ul className="claim-sources">
           {evidence.map((item) => {
@@ -116,8 +117,8 @@ function ClaimCard({ catalog, claim }: { catalog: PilotCatalog; claim: AtlasReco
             const url = text(source?.urlOrLocalRef);
             return (
               <li key={item.id}>
-                <span className="source-title">{sourceName(source)}</span>
-                <span>{rowValue(item, "locator") ?? item.id}</span>
+                <span className="source-title">{withoutHanScript(sourceName(source))}</span>
+                <span>{withoutHanScript(rowValue(item, "locator") ?? item.id)}</span>
                 {url && <a href={url} target="_blank" rel="noreferrer">원문</a>}
               </li>
             );
@@ -244,7 +245,7 @@ function App() {
     ? catalog?.claims.filter((claim) => claim.subjectId === selected.id) ?? []
     : [];
   const missingTerms = selected && catalog
-    ? displayTerms(catalog, selected.id).filter((term) => !text(term.text))
+    ? learnerVisibleTerms(displayTerms(catalog, selected.id)).filter((term) => !text(term.text))
     : [];
   const catalogPartial = Boolean(catalog && catalog.catalogStatus.catalogComplete !== true);
 

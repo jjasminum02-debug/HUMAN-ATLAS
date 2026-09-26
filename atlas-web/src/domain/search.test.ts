@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { mergeLearningConcepts, searchEntries } from './search.ts';
+import { learnerNameProjection, learnerSearchEntry, learnerVisibleTerms, mergeLearningConcepts, searchEntries, withoutHanScript } from './search.ts';
 const names = JSON.parse(readFileSync(new URL('../../../atlas-data/terminology/learning-names.json', import.meta.url),'utf8')).entries;
 const entries = names.map((n: { id:string; label:string; korean:string;english:string;hanja:string;aliases:string[] }) => ({id:n.id,label:n.label,aliases:[n.korean,n.english,n.hanja,...n.aliases].filter(Boolean)}));
 const catalog = JSON.parse(readFileSync(new URL('../../../atlas-data/catalog/canonical-catalog.json', import.meta.url),'utf8')).entities;
@@ -163,6 +163,37 @@ test('T11-B05 attested customary Korean names, current Korean names and source H
  ] as [string,string][]){
   assert.equal(searchEntries(b05SearchEntries,query)[0]?.entry.id,id,query);
  }
+});
+test('T15a projects the three display names and Korean/English aliases to the existing deltoid ID without indexing Hanja',()=>{
+ const row=names.find((name:{id:string})=>name.id==='HA-M-000030') as {id:string;label:string;korean:string;english:string;hanja:string;aliases:string[];sourceIds:string[]}|undefined;
+ assert.ok(row);
+ const projected=learnerNameProjection(row.id,row);
+ assert.equal(projected.label,'삼각근');
+ assert.equal(projected.koTraditional,'삼각근');
+ assert.equal(projected.koModern,'어깨세모근');
+ assert.equal(projected.en,'Deltoid muscle');
+ const entry=learnerSearchEntry(row.id,projected.label,[projected.koModern,projected.en,...row.aliases,row.hanja]);
+ for(const query of ['삼각근','어깨세모근','Deltoid','deltoids']) assert.equal(searchEntries([entry],query)[0]?.entry.id,row.id,query);
+ assert.equal(searchEntries([entry],'三角筋').length,0,'actual Hanja is kept as evidence but excluded from learner search');
+ assert.equal(withoutHanScript('KMLE exact row: 三角筋'), 'KMLE exact row: [출처 한자 생략]');
+ assert.equal(row.hanja,'三角筋','legacy source-backed Hanja remains in the source overlay');
+ assert.ok(row.sourceIds.includes('kmle-deltoid'));
+});
+test('T15a does not require Hanja and hides missing or populated Hani term rows from learner projection',()=>{
+ const row=names.find((name:{id:string})=>name.id==='HA-M-000036') as {id:string;label:string;korean:string|null;english:string;hanja:string|null}|undefined;
+ assert.ok(row);
+ const projected=learnerNameProjection(row.id,row,{korean:'부리위팔근',english:'Coracobrachialis'});
+ assert.equal(projected.koTraditional,row.label);
+ assert.equal(projected.koModern,'부리위팔근');
+ assert.equal(projected.en,'Coracobrachialis muscle');
+ assert.equal(row.hanja,null,'a missing legacy Hanja value remains valid');
+ const terms=learnerVisibleTerms([
+  {id:'ko-modern',language:'ko',script:'Hang',text:'어깨세모근'},
+  {id:'hanja-null',language:'ko',script:'Hani',text:null},
+  {id:'hanja-value',language:'ko',script:'Hani',text:'三角筋'},
+  {id:'unlabeled-han',language:'ko',text:'三角筋'},
+ ]);
+ assert.deepEqual(terms.map(term=>term.id),['ko-modern']);
 });
 const b06Ids = Array.from({length:10},(_,i)=>`HA-M-${String(i+32).padStart(6,'0')}`);
 const b06Names = names.filter((name:{id:string})=>b06Ids.includes(name.id));

@@ -39,14 +39,14 @@ export default function App() {
     <a className="skip-link" href="#study-details">근육 설명으로 이동</a>
     <header className="study-header">
       <a className="brand" href="/"><span className="brand-dot"/> HUMAN ATLAS <small>구조를 보고, 움직임을 이해하다</small></a>
-      <label className="global-search"><span aria-hidden="true">⌕</span><input type="search" aria-label="근육 검색" placeholder="근육 검색 · 한글, 한자, English" value={query} onChange={e => setQuery(e.target.value)} autoComplete="off"/>{query && <button aria-label="검색 지우기" onClick={() => setQuery('')}>×</button>}</label>
+      <label className="global-search"><span aria-hidden="true">⌕</span><input type="search" aria-label="구조 검색" placeholder="구조 이름 · 한글, English" value={query} onChange={e => setQuery(e.target.value)} autoComplete="off"/>{query && <button aria-label="검색 지우기" onClick={() => setQuery('')}>×</button>}</label>
     </header>
     <div className="study-layout">
       <aside className="study-sidebar">
         <div className="sidebar-heading"><span className="eyebrow">EXPLORE ANATOMY</span><h1>근육 탐색</h1><p>이름이 달라도, 같은 근육으로.</p></div>
         <div className="scope-control" aria-label="목록 범위"><button aria-pressed={scope === 'model'} onClick={() => setScope('model')}>3D 근육</button><button aria-pressed={scope === 'all'} onClick={() => setScope('all')}>전체 목록</button></div>
         <p className="result-count" role="status">{query ? `검색 결과 ${results.length}` : scope === 'model' ? '오른쪽 종아리 · 6개 근육' : `${results.length}개 항목 · 부분 목록`}</p>
-        <nav className="study-list" aria-label="근육 목록">{results.map(({entry, approximate}) => <button key={entry.id} className={entry.id === selectedId || entry.id === parent ? 'selected' : ''} aria-pressed={entry.id === selectedId} onClick={() => choose(entry.id)}><span>{entry.label}</span><small>{nameFor(catalog, entry.id).english}</small>{approximate && <em>비슷한 이름</em>}</button>)}{results.length === 0 && <p className="quiet-note">찾는 이름이 아직 등록되지 않았습니다. 다른 언어 이름으로도 검색해 보세요.</p>}</nav>
+        <nav className="study-list" aria-label="근육 목록">{results.map(({entry, approximate}) => <button key={entry.id} className={entry.id === selectedId || entry.id === parent ? 'selected' : ''} aria-pressed={entry.id === selectedId} onClick={() => choose(entry.id)}><span>{entry.label}</span><small>{nameFor(catalog, entry.id).en}</small>{approximate && <em>비슷한 이름</em>}</button>)}{results.length === 0 && <p className="quiet-note">찾는 이름이 아직 등록되지 않았습니다. 다른 언어 이름으로도 검색해 보세요.</p>}</nav>
         <div className="sidebar-bottom"><span className="small-dot"/> 구조부터 차근차근<small>현재 3D 범위는 오른쪽 종아리입니다.</small></div>
       </aside>
       <div className="study-stage">
@@ -57,8 +57,8 @@ export default function App() {
       <main className="study-details" id="study-details" tabIndex={-1}>
         {selected ? <>
           <div className="detail-top"><span className="eyebrow">MUSCLE ATLAS</span><span className="status-dot">학습 초안</span></div>
-          <h2>{name.label}</h2><p className="english-name">{name.english}</p>
-          <div className="names-card"><div><span>우리말</span><strong>{name.korean || '자료 준비 중'}</strong></div><div><span>한자</span><strong>{name.hanja || '표기 대조 중'}</strong></div></div>
+          <h2>{name.label}</h2><p className="english-name"><span>영어명</span> {name.en || '—'}</p>
+          <div className="names-card" aria-label="이름"><div><span>우리말명</span><strong>{name.koModern || '—'}</strong></div><div><span>한자어명 (한글 표기)</span><strong>{name.koTraditional || '—'}</strong></div></div>
           <div className="study-tabs" role="tablist" aria-label="학습 내용">{(['구조','기능','평가'] as TabName[]).map(t => <button key={t} role="tab" id={`tab-${t}`} aria-controls="study-tab-panel" aria-selected={tab === t} onClick={() => setTab(t)}>{t}</button>)}</div>
           <section id="study-tab-panel" role="tabpanel" aria-labelledby={`tab-${tab}`}>
           {tab === '구조' ? <>

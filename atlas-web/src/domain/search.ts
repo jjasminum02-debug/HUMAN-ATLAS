@@ -1,5 +1,50 @@
 export interface SearchEntry { id: string; label: string; aliases: string[] }
 export interface LearningConceptRecord { id: string; entityType?: string; lookupOnly?: boolean }
+
+const hanScript = /\p{Script=Han}/u;
+
+export function hasHanScript(value: string): boolean {
+  return hanScript.test(value);
+}
+
+export function withoutHanScript(value: unknown): string {
+  return typeof value === 'string' ? value.replace(/\p{Script=Han}+/gu, '[출처 한자 생략]') : '';
+}
+
+export function learnerVisibleTerms<T extends Record<string, unknown>>(terms: T[]): T[] {
+  return terms.filter((term) => term.script !== 'Hani' &&
+    !(typeof term.text === 'string' && hasHanScript(term.text)));
+}
+
+function hangulName(value: unknown): string | null {
+  return typeof value === 'string' && /[\uac00-\ud7af]/u.test(value) && !hasHanScript(value)
+    ? value : null;
+}
+
+export function learnerNameProjection(
+  id: string,
+  fields: { label?: unknown; korean?: unknown; english?: unknown },
+  fallback: { korean?: unknown; english?: unknown; latin?: unknown } = {},
+) {
+  const koTraditional = hangulName(fields.label);
+  const koModern = hangulName(fields.korean);
+  const en = typeof fields.english === 'string' && fields.english.length > 0 && !hasHanScript(fields.english)
+    ? fields.english
+    : typeof fallback.english === 'string' && !hasHanScript(fallback.english) ? fallback.english : '';
+  const fallbackKorean = hangulName(fallback.korean);
+  const latin = typeof fallback.latin === 'string' && fallback.latin.length > 0 && !hasHanScript(fallback.latin)
+    ? fallback.latin : '';
+  const label = koTraditional ?? koModern ?? fallbackKorean ?? (en || latin || id);
+  return { label, koTraditional, koModern, en };
+}
+
+export function learnerSearchEntry(id: string, label: string, candidates: unknown[]): SearchEntry {
+  const safeLabel = hasHanScript(label) ? id : label;
+  const aliases = candidates.filter((value): value is string =>
+    typeof value === 'string' && value.trim().length > 0 && !hasHanScript(value));
+  return { id, label: safeLabel, aliases };
+}
+
 export function mergeLearningConcepts<T extends { id: string }, O extends LearningConceptRecord>(
   canonical: T[], overlay: O[],
 ): (T | O)[] {
