@@ -1,0 +1,30 @@
+{
+  "task": "T18",
+  "checkedAt": "2026-09-27",
+  "overall": "pass_with_documented_gaps",
+  "checks": [
+    {"name": "T03 schema and canonical catalog", "result": "pass", "evidence": "t03-validation.log"},
+    {"name": "T17 source research manifest", "result": "pass", "subjects": 6, "openedFullTextAccesses": 24, "fieldExtractions": 24, "comparisons": 12, "rerun": "cache miss followed by deterministic cache hit", "evidence": "source-research-rerun.json and run-2026-09-27/"},
+    {"name": "T17 source workflow unit tests", "result": "pass", "passed": 18, "evidence": "source-workflow-tests.log"},
+    {"name": "T16 AI evidence fixtures", "result": "pass", "passed": 8, "evidence": "ai-evidence-fixtures.log"},
+    {"name": "AI evidence adapter and T18 integration tests", "result": "pass", "passed": 9, "evidence": "ai-evidence-tests.log"},
+    {"name": "Production overlay and separate legacy preview", "result": "pass", "productionRowsValidated": 16, "legacyTestPreviewRows": 14, "evidence": "ai-evidence-check.log and overlay-build-check.log"},
+    {"name": "Integrated search regression", "result": "pass", "passed": 40, "evidence": "search-tests.log"},
+    {"name": "Learner content validation", "result": "pass", "names": 81, "summaries": 14, "evidence": "learning-validation.log"},
+    {"name": "TypeScript typecheck", "result": "pass", "evidence": "typecheck.log"},
+    {"name": "Production build", "result": "pass_with_existing_large_chunk_warning", "evidence": "build.log"},
+    {"name": "Actual learner browser", "result": "pass_with_evidence_limitations", "structures": 8, "viewport": "active in-app browser viewport; dimensions not recorded", "limitations": ["No screenshot file persisted", "Browser console messages not captured"], "evidence": "browser-ui-check.json"},
+    {"name": "Source and asset preservation", "result": "pass", "protectedFilesUnchanged": 100, "protectedBaselineFiles": 101, "authorizedProductionOverlayChange": 1, "preexistingUserFilesUnchanged": 47, "openSimModelsClean": true, "evidence": "preservation-after.json"},
+    {"name": "Patch whitespace", "result": "pass", "command": "git diff --check"}
+  ],
+  "nonPromotionState": {
+    "humanAnatomyReviewPerformed": false,
+    "surfaceCandidates": "0/41",
+    "geometry": "absent",
+    "motion": "absent",
+    "wholeBodyDenominatorFrozen": false,
+    "wholeBodyIndividualMuscleCount": null,
+    "coveragePercent": null,
+    "T14b": "needs_human_review"
+  }
+}

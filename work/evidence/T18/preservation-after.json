@@ -1,0 +1,41 @@
+{
+  "task": "T18",
+  "checkedAt": "2026-09-27",
+  "startHead": "6e7e96195628ff6aaf475733b19dbc9265c7a792",
+  "currentHeadBeforeCommit": "6e7e96195628ff6aaf475733b19dbc9265c7a792",
+  "pass": true,
+  "checks": [
+    {
+      "name": "protected_files_unchanged_except_authorized_ai_overlay",
+      "pass": true,
+      "unchangedCount": 100,
+      "baselineProtectedCount": 101,
+      "authorizedOverlayExclusion": "atlas-data/terminology/ai-evidence-overlay.json",
+      "changedOrMissing": []
+    },
+    {
+      "name": "preexisting_untracked_user_files_preserved",
+      "pass": true,
+      "preservedCount": 47,
+      "baselineCount": 47,
+      "changedOrMissing": []
+    },
+    {
+      "name": "opensim_models_read_only_and_clean",
+      "pass": true,
+      "baselineHead": "d9b05d470b1a481c222372c85b75772faf8f7792",
+      "currentHead": "d9b05d470b1a481c222372c85b75772faf8f7792",
+      "statusPorcelain": ""
+    },
+    {
+      "name": "ai_overlay_scope_and_independent_readiness_states",
+      "pass": true,
+      "t18RowCount": 16,
+      "subjectCount": 8,
+      "geometryMotionOrHumanReviewPromotion": [],
+      "denominatorFrozen": false,
+      "wholeBodyIndividualMuscleCount": null,
+      "coveragePercent": null
+    }
+  ]
+}

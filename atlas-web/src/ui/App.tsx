@@ -329,7 +329,7 @@ export default function App() {
                     return <>
                       {fieldView.text && <p>{fieldView.text}</p>}
                       {fieldView.note && <p className="quiet-note">{fieldView.note}</p>}
-                      {fieldView.alternatives.length > 0 && <ul className="field-evidence-alternatives">{fieldView.alternatives.map((alternative, index) => <li key={`${role}-alternative-${index}`}><p>{alternative.text}</p></li>)}</ul>}
+                      {fieldView.alternatives.length > 0 && <ul className="field-evidence-alternatives">{fieldView.alternatives.map((alternative, index) => <li key={`${role}-alternative-${index}`}><p>{alternative.text}</p>{alternative.sources.length > 0 && <div className="field-evidence-alternative-sources"><small>이 설명의 근거</small><ul>{alternative.sources.map((source, sourceIndex) => <li key={`${source.url}-${source.locator}-${sourceIndex}`}><a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a>{source.edition && <small>{source.edition}</small>}<small>{source.locator}</small></li>)}</ul></div>}</li>)}</ul>}
                       {fieldView.sources.length > 0 && <details className="field-evidence-sources"><summary>이 문장의 근거</summary><ul>{fieldView.sources.map((source, index) => <li key={`${source.url}-${source.locator}-${index}`}>
                         <a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a>
                         {source.edition && <small>{source.edition}</small>}

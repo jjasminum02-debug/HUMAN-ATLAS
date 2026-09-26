@@ -14,7 +14,7 @@
     "test:navigation": "node --experimental-strip-types --test src/domain/navigation.test.ts && python3 ../atlas-data/navigation/test_navigation.py",
     "test:scene-lifecycle": "node --experimental-strip-types --test src/viewer/sceneCache.test.ts src/viewer/scenePlan.test.ts",
     "test:attachment-crosschecks": "node --experimental-strip-types --test src/domain/attachmentCrosschecks.test.ts",
-    "test:ai-evidence": "node --experimental-strip-types --test src/domain/aiEvidence.test.ts src/domain/legacyEvidenceAdapter.test.ts && python3 ../atlas-data/schemas/validate_ai_evidence.py --fixtures && python3 ../atlas-data/schemas/build_ai_evidence_overlay.py --check",
+    "test:ai-evidence": "node --experimental-strip-types --test src/domain/aiEvidence.test.ts src/domain/legacyEvidenceAdapter.test.ts src/domain/t18Evidence.integration.test.ts && python3 ../atlas-data/schemas/validate_ai_evidence.py --fixtures && python3 ../atlas-data/schemas/build_ai_evidence_overlay.py --check",
     "qa:scene-decoders": "node scripts/check-scene-decoders.mjs",
     "migrate:navigation:dry-run": "python3 ../atlas-data/navigation/build_navigation.py --dry-run",
     "check:navigation-migration": "python3 ../atlas-data/navigation/build_navigation.py --check",

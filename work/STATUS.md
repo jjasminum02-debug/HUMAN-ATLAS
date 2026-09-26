@@ -2,17 +2,17 @@
 
 - LAST_UPDATED: 2026-09-27
 - PLAN_REVISION: R13-2026-09-26 — R12 유지 + AI 원문 대조/작용 설명/교육용 움직임/독립 T16–40
-- CURRENT_TASK: T17 — complete_with_gaps; 원문 접근·필드 추출·비교·예외를 기록하는 오프라인 로컬 도구 구현. 실제 해부학 자료 수집은 하지 않음.
-- NEXT_TASK: T18 — Luna Max (planned_not_started); 종아리 6근육 기시·정지 AI 대조표. T17 도구를 사용하되 실제 열린 원문만 입력.
-- LAST_REPORT: work/reports/T17.md
+- CURRENT_TASK: T18 — complete_with_gaps; 종아리 6근육 origin/insertion 실제 문헌 대조, 긴종아리근 기시 충돌은 보류. 이름 대조·사람 검토·표면/움직임 자료는 미완.
+- NEXT_TASK: T19 — Luna Max (planned_not_started); 선택 근육 집중 보기/흐림/격리·복원 및 키보드/모바일 접근성.
+- LAST_REPORT: work/reports/T18.md
 - CATALOG: partial85 (individual48/group16/part21); 전신 분모 미동결
 - LEARNING_OVERLAY: entries81; current canonical overlap 79/85, six group IDs lack overlay entries, two lookup-only IDs are extra; T11 B01-B09 field work covered the current partial catalog with gaps; humanReviewed=false
-- AI_EVIDENCE_OVERLAY: schema/types/validator/learner adapter ready; production field items 0; 14 legacy rows validated only in test-only migration preview; canonical human review unchanged
+- AI_EVIDENCE_OVERLAY: T16 schema/types/validator/learner adapter + T18 source-bound origin/insertion rows 16; 14 legacy rows remain test-only preview; canonical human review unchanged; geometry/motion absent
 - GEOMETRY: 오른쪽 종아리 6근육, 근육메시 7+뼈 13. T15b navigation overlay에 기존 source crosswalk의 우측 뼈 instance/mapping 9개를 needs_review로 연결, 미확정 mesh 4개는 unbound context. canonical spatialAnnotation 0; T13c-B01/B02/B03 context_only geometry:null draft 3건 보존; T05 표면 후보 0/41, text_only 28/41, matching target mesh missing 13/41, human_review_pending 41/41
 - FUNCTION_AND_ASSESSMENT: 미구현, 학습 탭은 준비 중
-- TECHNICAL_GATE: T17 source workflow tests 18/18, T16 AI evidence fixtures 8/8 및 adapter 7/7, attachment crosschecks 2/2, T03 schema/catalog, learning validator, typecheck/build와 preservation pass. 실제 browser 검증은 UI 변경이 없어 해당 없음. production overlay 0 rows, T15g denominator false/null/null, T14b human review pending. 기존 production App chunk >500 kB 경고 유지.
+- TECHNICAL_GATE: T18 source workflow 18/18, T16 fixtures 8/8, AI evidence tests 9/9, search 40/40, learning validator 81 names/14 summaries, typecheck/build, actual learner browser 및 preservation pass. Production AI overlay 16 T18 rows. T15g denominator false/null/null, T14b human review pending, geometry 0/41. 기존 production App chunk >500 kB 경고 유지.
 - ANATOMY_GATE: needs_human_review; 전신 구조 완성 아님
-- DEV_URL: none (temporary T15f local production preview stopped after verification)
+- DEV_URL: none (T18 temporary local production preview stopped after learner browser verification)
 
 | task | 상태 | 산출물/보고서 | 차단 조건 |
 |---|---|---|---|
@@ -56,6 +56,7 @@
 | T15g | complete_with_gaps | work/tasks/T15g.md; partial whole-body inventory, 18-region candidate crosswalk, bounded expansion plan; work/evidence/T15g/; work/reports/T15g.md | authoritative whole-body denominator, missing concept IDs, per-concept product memberships, 11 regional scenes/assets, terminology and human review remain open; T15f-FU01 remains prerequisite before T33 runtime expansion |
 | T16 | complete_with_gaps | work/tasks/T16.md; AI evidence schema/types/validator/learner adapter; empty production overlay; work/evidence/T16/; work/reports/T16.md | Actual field-by-field AI evidence rows remain unpopulated; legacy migration was preview-only; human review and whole-body denominator remain open |
 | T17 | complete_with_gaps | work/tasks/T17.md; atlas-data/schemas/source-research-manifest.schema.json; atlas-data/sources/source_research.py; work/evidence/T17/; work/reports/T17.md | Tool is tested only with synthetic fixture data; no actual anatomy source was researched or written to production overlay |
+| T18 | complete_with_gaps | work/tasks/T18.md; 16 field-level origin/insertion AI evidence rows; source comparison, learner citations and browser QA; work/evidence/T18/; work/reports/T18.md | fibularis longus origin conflict unresolved; name comparison not performed per T17 handoff; human review, exact surface, motion and external redistribution rights remain open |
 
 ## 실제 현재 상태와 원본 보존
 
@@ -300,3 +301,14 @@ T17은 manifest schema, offline/manual-entry source workflow CLI, 비교표·예
 Production AI evidence overlay는 0 rows, canonical claims/reviews/source hashes는 보존, T13 spatial draft evidence 48개 hash와 기존 untracked 사용자 파일 47개 hash는 시작과 동일하다. OpenSim_Models는 같은 HEAD/clean이며 T15g denominator는 `false/null/null`이다. 사람 해부학 검토/승인은 기록하지 않았고 도구 출력도 승인 자료가 아니다. 상세 결과는 `work/reports/T17.md`, 검증 및 기준선은 `work/evidence/T17/`에 있다.
 
 현재 다음은 **T18 / Luna Max / planned_not_started**이며 자동으로 시작하지 않는다. T18에서 실제 열린 출처를 사용해 종아리 여섯 근육의 기시·정지 필드만 조사하고, 결측·충돌을 추정으로 메우지 않는다. 붙여 넣을 전체 프롬프트는 `work/reports/T17.md`의 마지막 섹션에 있다.
+
+
+## T18 결과 및 현재 인계 — 2026-09-27
+
+T18은 실제로 연 두 문헌의 locator를 이용해 현재 여섯 개인 근육의 기시·정지와 비복근 두 근두의 출처가 뒷받침하는 head-specific origin/shared insertion 제한을 16개 AI evidence field로 기록했다. 24 field accesses/extractions와 12 comparisons를 재현했다. 11건은 표현·상세도 차이, 긴종아리근 기시 1건은 위쪽 종아리뼈 범위의 실질 충돌로 남겼다. 충돌 해결, 새 name claim, canonical claim/review 수정은 없다. T17 handoff가 기시·정지 조사로 제한했기 때문에 task 템플릿의 이름 대조 요구는 미완으로 명시했다.
+
+검증: source workflow 18/18, T16 fixtures 8/8, AI evidence/adapter/T18 node tests 9/9, search 40/40, learning validator 81 names/14 summaries, typecheck/build, learner browser 및 보존 대조 pass. 요약·출처 표시는 실제 browser에서 봤다. 빌드의 기존 >500 kB App chunk 경고는 유지된다. 보호 입력 101개 중 AI overlay를 제외한 100개, 선행 user snapshots 47개, OpenSim_Models는 보존됐다. StatPearls CC BY-NC-ND 요약의 외부 배포 권한은 이 작업에서 부여하지 않았으며 별도 권리 검토 전에는 공개 배포하지 않는다.
+
+사람 해부학 검토는 계속 `needs_human_review`; exact attachment geometry는 0/41; motion은 absent; T15g 전신 denominator는 `false/null/null`이다. 자세한 제한은 `work/reports/T18.md`에 있다.
+
+다음은 **T19 / Luna Max / planned_not_started**다. 이번 작업에서 T19를 시작하지 않았다. 붙여 넣을 구체 prompt는 `work/reports/T18.md`의 `다음 작업` 섹션에 있다.

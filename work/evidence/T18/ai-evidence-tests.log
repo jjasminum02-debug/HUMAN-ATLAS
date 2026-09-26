@@ -1,0 +1,118 @@
+$ node --experimental-strip-types --test src/domain/aiEvidence.test.ts src/domain/legacyEvidenceAdapter.test.ts src/domain/t18Evidence.integration.test.ts && python3 ../atlas-data/schemas/validate_ai_evidence.py --fixtures && python3 ../atlas-data/schemas/build_ai_evidence_overlay.py --check
+✔ cross-check display allows a basic quiz without implying human approval (0.51925ms)
+✔ single-source display carries a caveat and is not quiz eligible (0.061ms)
+✔ conflicted fields render alternatives without a single answer (0.068458ms)
+✔ unavailable and unresearched fields have distinct learner messages (0.056417ms)
+✔ geometry and motion values do not alter evidence projection (0.30025ms)
+✔ legacy summary fallback preserves exact learner text without changing its approval or source contract (0.392209ms)
+✔ empty legacy summaries remain unavailable (0.050417ms)
+✔ T18 adds only origin/insertion fields for the six calf muscles and two existing gastrocnemius heads (1.801584ms)
+✔ T18 source field projections distinguish cross-check, single-source head mapping, and the fibularis-longus extent conflict (0.2625ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 73.049666
+{
+  "task": "T16",
+  "mode": "fixtures",
+  "pass": true,
+  "fixtures": [
+    {
+      "fixture": "work/evidence/T16/fixtures/same-work-two-sites-single-source.json",
+      "expectedValid": true,
+      "actualValid": true,
+      "expectedIssue": null,
+      "expectedIssueFound": true,
+      "issueCodes": [],
+      "passed": true
+    },
+    {
+      "fixture": "work/evidence/T16/fixtures/same-work-two-sites-false-cross-check.json",
+      "expectedValid": false,
+      "actualValid": false,
+      "expectedIssue": "cross_checked_not_independent",
+      "expectedIssueFound": true,
+      "issueCodes": [
+        "cross_checked_not_independent",
+        "cross_checked_source_not_opened"
+      ],
+      "passed": true
+    },
+    {
+      "fixture": "work/evidence/T16/fixtures/independent-cross-check.json",
+      "expectedValid": true,
+      "actualValid": true,
+      "expectedIssue": null,
+      "expectedIssueFound": true,
+      "issueCodes": [],
+      "passed": true
+    },
+    {
+      "fixture": "work/evidence/T16/fixtures/conflicted-field.json",
+      "expectedValid": true,
+      "actualValid": true,
+      "expectedIssue": null,
+      "expectedIssueFound": true,
+      "issueCodes": [],
+      "passed": true
+    },
+    {
+      "fixture": "work/evidence/T16/fixtures/orthogonal-evidence-geometry-motion.json",
+      "expectedValid": true,
+      "actualValid": true,
+      "expectedIssue": null,
+      "expectedIssueFound": true,
+      "issueCodes": [],
+      "passed": true
+    },
+    {
+      "fixture": "work/evidence/T16/fixtures/invalid-refs-and-hashes.json",
+      "expectedValid": false,
+      "actualValid": false,
+      "expectedIssue": "claim_hash_mismatch",
+      "expectedIssueFound": true,
+      "issueCodes": [
+        "source_hash_mismatch",
+        "orphan_evidence_source",
+        "evidence_hash_mismatch",
+        "claim_hash_mismatch",
+        "orphan_claim_evidence",
+        "claim_evidence_link_not_reciprocal",
+        "single_source_evidence_missing",
+        "single_source_multiple_works"
+      ],
+      "passed": true
+    },
+    {
+      "fixture": "work/evidence/T16/fixtures/cross-check-cannot-set-review.json",
+      "expectedValid": false,
+      "actualValid": false,
+      "expectedIssue": "schema_additional_property",
+      "expectedIssueFound": true,
+      "issueCodes": [
+        "schema_additional_property",
+        "schema_additional_property"
+      ],
+      "passed": true
+    },
+    {
+      "fixture": "work/evidence/T16/fixtures/index-only-cannot-support-single-source.json",
+      "expectedValid": false,
+      "actualValid": false,
+      "expectedIssue": "single_source_text_not_opened",
+      "expectedIssueFound": true,
+      "issueCodes": [
+        "single_source_text_not_opened"
+      ],
+      "passed": true
+    }
+  ],
+  "fixtureCount": 8,
+  "passed": 8,
+  "failed": 0
+}
+{"pass": true, "productionRowsValidated": 16, "legacyMigrationPreviewRowsChecked": 14, "legacyMigrationIsPreviewOnly": true}

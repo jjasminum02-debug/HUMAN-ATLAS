@@ -349,8 +349,6 @@ def main() -> int:
             migration_issues = validate_overlay(migration_preview, schema, context)
             for issue in migration_issues:
                 issues.append({**issue, "path": f"migrationPreview{issue['path'][1:]}"})
-            if payload.get("items") != []:
-                issues.append({"code": "production_overlay_must_remain_empty", "path": "$.items", "message": "T16 exercises migration against an in-memory preview; no legacy claims are imported into learner data."})
             if payload.get("denominatorFrozen") is not False or payload.get("wholeBodyIndividualMuscleCount") is not None or payload.get("coveragePercent") is not None:
                 issues.append({"code": "t15g_denominator_changed", "path": "$.denominatorFrozen", "message": "T16 must preserve the unfrozen T15g denominator and null coverage."})
             report.update({"legacyRowsCheckedInTestOnlyMigrationPreview": len(migration_items), "productionFieldItems": len(payload.get("items", [])), "migrationPreviewIssues": migration_issues, "issues": issues, "pass": not issues})

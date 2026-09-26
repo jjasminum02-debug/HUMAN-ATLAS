@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Build and check a test-only migration preview from exact legacy summaries.
+"""Check production AI evidence and a separate test-only legacy migration preview.
 
-T16 deliberately leaves the production overlay empty. This preview exercises the
-mapping and hash contract without importing legacy material into learner data.
-It never changes canonical claims, terms, reviews, drafts, or source assets.
+The preview exercises the mapping and hash contract without importing legacy
+material into learner data. It never changes canonical claims, terms, reviews,
+drafts, or source assets.
 """
 from __future__ import annotations
 
@@ -175,7 +175,7 @@ def validate_migration_preview(expected_items: list[dict[str, Any]]) -> list[dic
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--check", action="store_true", help="confirm the production overlay is empty and validate a legacy migration preview in memory")
+    parser.add_argument("--check", action="store_true", help="validate the current production overlay and a separate legacy migration preview in memory")
     parser.add_argument("--preview", type=Path, help="write a test-only migration preview outside production data")
     args = parser.parse_args()
     catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
@@ -204,14 +204,15 @@ def main() -> int:
         if not OVERLAY_PATH.exists():
             raise SystemExit(f"Missing production overlay: {OVERLAY_PATH}")
         current = json.loads(OVERLAY_PATH.read_text(encoding="utf-8"))
-        issues = []
-        if current.get("items") != []:
-            issues.append("production_overlay_must_remain_empty_in_T16")
-        issues.extend(f"migration_preview_invalid:{row['code']}:{row['path']}" for row in validate_migration_preview(expected_items))
+        from validate_ai_evidence import load_context, load_schema, validate_overlay
+        production_issues = validate_overlay(current, load_schema(), load_context())
+        preview_issues = validate_migration_preview(expected_items)
+        issues = [f"production_overlay_invalid:{row['code']}:{row['path']}" for row in production_issues]
+        issues.extend(f"migration_preview_invalid:{row['code']}:{row['path']}" for row in preview_issues)
         if issues:
             print(json.dumps({"pass": False, "issues": issues}, ensure_ascii=False, indent=2))
             return 1
-        print(json.dumps({"pass": True, "productionRows": 0, "legacyMigrationPreviewRowsChecked": len(expected_items), "previewOnly": True}, ensure_ascii=False))
+        print(json.dumps({"pass": True, "productionRowsValidated": len(current.get("items", [])), "legacyMigrationPreviewRowsChecked": len(expected_items), "legacyMigrationIsPreviewOnly": True}, ensure_ascii=False))
         return 0
 
     parser.error("choose --check or --preview PATH")
