@@ -13,6 +13,7 @@
     "test:search": "node --experimental-strip-types --test src/domain/search.test.ts",
     "test:navigation": "node --experimental-strip-types --test src/domain/navigation.test.ts && python3 ../atlas-data/navigation/test_navigation.py",
     "test:scene-lifecycle": "node --experimental-strip-types --test src/viewer/sceneCache.test.ts src/viewer/scenePlan.test.ts",
+    "test:attachment-crosschecks": "node --experimental-strip-types --test src/domain/attachmentCrosschecks.test.ts",
     "qa:scene-decoders": "node scripts/check-scene-decoders.mjs",
     "migrate:navigation:dry-run": "python3 ../atlas-data/navigation/build_navigation.py --dry-run",
     "check:navigation-migration": "python3 ../atlas-data/navigation/build_navigation.py --check",

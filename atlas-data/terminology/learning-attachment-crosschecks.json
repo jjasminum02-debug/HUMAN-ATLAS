@@ -1,0 +1,218 @@
+{
+  "schemaVersion": "T15f-learning-attachment-crosschecks-v1",
+  "checkedOn": "2026-09-26",
+  "policy": "Each comparison is tied to the exact displayed historical-summary row by conceptId, role, and SHA-256. A literature comparison is not human anatomy review, approval, or a surface annotation.",
+  "humanAnatomyReview": "not_performed",
+  "sources": [
+    {
+      "id": "gastrocnemius-2024",
+      "title": "A Detailed Anatomical Description of the Gastrocnemius Muscle",
+      "citation": "Thomas K, Peeler J. Anatomia. 2024;3(4):244–255. DOI: 10.3390/anatomia3040021.",
+      "url": "https://www.mdpi.com/2813-0545/3/4/21",
+      "edition": "2024 journal article; publisher page dates publication 2024-10-16.",
+      "locator": "Methods §2.2; Results, Table 6; Discussion §4.4.",
+      "accessDate": "2026-09-26",
+      "accessMethod": "T14a records publisher full HTML opened. This task rechecked the publisher search-index excerpt; direct page fetch returned HTTP 429.",
+      "textAccess": "prior_full_text_opened_current_recheck_index_excerpt"
+    },
+    {
+      "id": "soleus-architecture-2018",
+      "title": "Three-dimensional architecture of the whole human soleus muscle in vivo",
+      "citation": "Bolsterlee B, et al. PeerJ. 2018;6:e4610. DOI: 10.7717/peerj.4610.",
+      "url": "https://peerj.com/articles/4610/",
+      "edition": "PeerJ volume 6, article e4610 (2018); published 2018-04-18.",
+      "locator": "Abstract, Methods, Results; architecture measurements and two cadaveric dissections.",
+      "accessDate": "2026-09-26",
+      "accessMethod": "T14a records publisher full HTML opened. This task rechecked the indexed article PDF text; direct HTML fetch returned HTTP 403.",
+      "textAccess": "prior_full_text_opened_current_recheck_pdf_text"
+    },
+    {
+      "id": "tibialis-anterior-2022",
+      "title": "Relationship between attachment site of tibialis anterior muscle and shape of tibia: anatomical study of cadavers",
+      "citation": "Kimata K, et al. Journal of Foot and Ankle Research. 2022;15:54. DOI: 10.1186/s13047-022-00559-y.",
+      "url": "https://link.springer.com/article/10.1186/s13047-022-00559-y",
+      "edition": "Version of record, volume 15, article 54 (2022); published 2022-07-12.",
+      "locator": "Methods §§2–3; Results; Discussion, especially tibial attachment endpoints.",
+      "accessDate": "2026-09-26",
+      "accessMethod": "Springer Nature publisher full HTML directly opened and read.",
+      "textAccess": "full_text_opened"
+    },
+    {
+      "id": "tibialis-posterior-2020",
+      "title": "The tibialis posterior tendon footprint: an anatomical dissection study",
+      "citation": "Willegger M, et al. Journal of Foot and Ankle Research. 2020;13:25. DOI: 10.1186/s13047-020-00392-1.",
+      "url": "https://link.springer.com/article/10.1186/s13047-020-00392-1",
+      "edition": "Version of record, volume 13, article 25 (2020); published 2020-05-19.",
+      "locator": "Abstract; Methods §§2–3; Results on the main navicular and additional bony footprints.",
+      "accessDate": "2026-09-26",
+      "accessMethod": "Springer Nature publisher full HTML directly opened and read.",
+      "textAccess": "full_text_opened"
+    },
+    {
+      "id": "peroneal-insertions-2019",
+      "title": "Insertional anatomy of peroneal brevis and longus tendon — a cadaveric study",
+      "citation": "da Rocha Gomes M, et al. Foot and Ankle Surgery. 2019;25(5):636–639. DOI: 10.1016/j.fas.2018.07.005.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30321932/",
+      "edition": "Journal article, volume 25 issue 5 (2019); epub 2018-07-23. Publisher full text was not opened.",
+      "locator": "PubMed indexed abstract, Methods/Results.",
+      "accessDate": "2026-09-26",
+      "accessMethod": "T14a records PubMed abstract HTML opened. Current browser fetch returned no readable page text; no full text is claimed.",
+      "textAccess": "abstract_only_full_text_not_opened"
+    },
+    {
+      "id": "fibularis-brevis-insertion-2022",
+      "title": "Morphological Study of the Fibularis Brevis Tendon and Plantar Aponeurosis Lateral Band Insertion on the Fifth Metatarsal Base in Korean Cadavers",
+      "citation": "Kim D, et al. Anatomy & Biological Anthropology. 2022;35(3):75–83. DOI: 10.11637/aba.2022.35.3.75.",
+      "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002879102",
+      "edition": "KCI article record, volume 35 issue 3 (2022), pages 75–83.",
+      "locator": "KCI record and Korean/English abstract, study sample and insertion morphology results.",
+      "accessDate": "2026-09-26",
+      "accessMethod": "KCI record/abstract HTML directly opened. Journal full-text PDF was not opened.",
+      "textAccess": "abstract_opened_full_text_not_opened"
+    }
+  ],
+  "items": [
+    {
+      "conceptId": "HA-M-000001",
+      "role": "origin",
+      "sourceIds": [
+        "gastrocnemius-2024"
+      ],
+      "directness": "partial_and_head_specific",
+      "comparison": "The cadaveric study directly examines both femoral head attachments. It describes the lateral head at the posterior-superior lateral femoral condyle, while the medial head has a thick tendinous region wrapping around the posterior condyle to an anterior-superior attachment. The displayed sentence bundles both heads; the modern comparison therefore qualifies rather than uniformly confirms it. No project-mesh boundary is supplied.",
+      "displayedSummarySha256": "2e046aedb7f9a0bfbe4e910d893f2998e98143e80ae3f6d7dd5c63c2dede42e5"
+    },
+    {
+      "conceptId": "HA-M-000001",
+      "role": "insertion",
+      "sourceIds": [
+        "gastrocnemius-2024"
+      ],
+      "directness": "not_measured",
+      "comparison": "The selected study examines proximal femoral attachments and does not measure the displayed distal shared Achilles/calcaneal insertion. This is not a direct modern comparison for this sentence.",
+      "displayedSummarySha256": "00fc1b71a5ea2d2e8a83fee8a14e5c8e6c4c30fdea6eb10342de3bb641267611"
+    },
+    {
+      "conceptId": "HA-P-000001",
+      "role": "origin",
+      "sourceIds": [
+        "gastrocnemius-2024"
+      ],
+      "directness": "direct_lateral_head_only",
+      "comparison": "The study's lateral-head dissection describes attachment at the posterior-superior surface of the lateral femoral condyle. It does not define a reproducible boundary on the project's femur mesh or approve a surface annotation.",
+      "displayedSummarySha256": "c6a6c47df12d3f956775e2bed2609e222330342e2330d0719866d729b96c5315"
+    },
+    {
+      "conceptId": "HA-P-000002",
+      "role": "origin",
+      "sourceIds": [
+        "gastrocnemius-2024"
+      ],
+      "directness": "direct_with_anatomical_difference",
+      "comparison": "The study describes a thick medial-head tendinous region wrapping around the posterior medial condyle to an anterior-superior attachment. This is a material detail beyond a simple posterior-superior description; it does not define project-mesh coordinates.",
+      "displayedSummarySha256": "f533011790eecf953b7e7b4c30d94eaf7e742c2654e1c07a416755747e202df1"
+    },
+    {
+      "conceptId": "HA-M-000002",
+      "role": "origin",
+      "sourceIds": [
+        "soleus-architecture-2018"
+      ],
+      "directness": "not_measured",
+      "comparison": "The article measures in-vivo soleus fascicle architecture and uses two cadaveric muscles for corroborating architecture. It does not experimentally measure the displayed tibial/fibular origin footprint.",
+      "displayedSummarySha256": "9e547e1ee0f2581c8480ceef5f3898f529b4b87b0adbe120c1aca1b819ca18b7"
+    },
+    {
+      "conceptId": "HA-M-000002",
+      "role": "insertion",
+      "sourceIds": [
+        "soleus-architecture-2018"
+      ],
+      "directness": "not_measured",
+      "comparison": "The article does not measure the displayed shared Achilles-tendon/calcaneal insertion footprint.",
+      "displayedSummarySha256": "8f3be85f3e700d5db2ca427c461338d54a10aa0880185af59f08e355f5dcd7f9"
+    },
+    {
+      "conceptId": "HA-M-000003",
+      "role": "origin",
+      "sourceIds": [
+        "tibialis-anterior-2022"
+      ],
+      "directness": "partial_tibial_attachment_measured",
+      "comparison": "The cadaver study directly examines tibial attachment endpoints and reports different levels for anterior and posterior fibers, including sex-related variation. It does not experimentally assess every fascia/septum clause in the displayed sentence and supplies no project-mesh surface boundary.",
+      "displayedSummarySha256": "e22b35d4eecff47c9fea900fb5a4df5cfe449236575da48b8c5123a7c2da6fce"
+    },
+    {
+      "conceptId": "HA-M-000003",
+      "role": "insertion",
+      "sourceIds": [
+        "tibialis-anterior-2022"
+      ],
+      "directness": "background_not_experimentally_measured",
+      "comparison": "The paper mentions the medial-cuneiform/first-metatarsal insertion in its discussion of prior descriptions, but its measurements focus on the tibial origin. It does not experimentally measure the displayed distal tendon footprint.",
+      "displayedSummarySha256": "9473ac4a098ddfd9d5b7cd59dca9a883f1db76c8344e838bba974fea81319f24"
+    },
+    {
+      "conceptId": "HA-M-000004",
+      "role": "origin",
+      "sourceIds": [
+        "tibialis-posterior-2020"
+      ],
+      "directness": "background_only_for_origin",
+      "comparison": "The paper's study is about distal tibialis-posterior tendon footprints. Its proximal origin sentence appears as background and is not a result of this dissection study.",
+      "displayedSummarySha256": "c1845d8ed9dee6af55f9af9e4ae88682c0c3ed4ce2caceee5dfff59a64e0cbd7"
+    },
+    {
+      "conceptId": "HA-M-000004",
+      "role": "insertion",
+      "sourceIds": [
+        "tibialis-posterior-2020"
+      ],
+      "directness": "direct_distal_footprint_with_variation",
+      "comparison": "The dissection found a main navicular insertion in 41/41 specimens and variable additional mid/hindfoot footprints. It supports the displayed sentence's main navicular and expanded-insertion context at a broad level; the exact attachment wording and any location on the project's mesh remain unapproved.",
+      "displayedSummarySha256": "ecedfb4f9ace9c905276ca38c735752403fab2a4387e6fd04e2059222a47b4a6"
+    },
+    {
+      "conceptId": "HA-M-000005",
+      "role": "origin",
+      "sourceIds": [
+        "peroneal-insertions-2019"
+      ],
+      "directness": "not_studied",
+      "comparison": "The study investigates distal peroneal tendon insertions, not the displayed fibularis-longus origin. Its abstract is not direct support for this sentence.",
+      "displayedSummarySha256": "17043d4a1e7212361cb42653dfe235ff05008bc748143391d615531dca417305"
+    },
+    {
+      "conceptId": "HA-M-000005",
+      "role": "insertion",
+      "sourceIds": [
+        "peroneal-insertions-2019"
+      ],
+      "directness": "abstract_only_partial_and_variant",
+      "comparison": "The abstract reports first-metatarsal insertion in 13 of 20 feet and variants in 7 of 20. It does not verify the displayed first-cuneiform extension, and the full text was not opened.",
+      "displayedSummarySha256": "391227ed9f6ce709662e293609e09c0fe9fb686557bc3fbd23fa119f40e35d79"
+    },
+    {
+      "conceptId": "HA-M-000006",
+      "role": "origin",
+      "sourceIds": [
+        "fibularis-brevis-insertion-2022",
+        "peroneal-insertions-2019"
+      ],
+      "directness": "not_studied",
+      "comparison": "Both linked studies concern distal tendon insertion, not the displayed fibularis-brevis origin. The KCI full-text PDF and the Foot and Ankle Surgery full text were not opened.",
+      "displayedSummarySha256": "baa0cd2a9a7130d5e989945c830ee563de206f812a312c98e728c262d7421dee"
+    },
+    {
+      "conceptId": "HA-M-000006",
+      "role": "insertion",
+      "sourceIds": [
+        "fibularis-brevis-insertion-2022",
+        "peroneal-insertions-2019"
+      ],
+      "directness": "abstract_only_direct_with_variation",
+      "comparison": "The KCI abstract reports three insertion morphologies among 96 Korean feet and a mean insertion length; it is an abstract-level check. The other abstract reports a fifth-metatarsal insertion in 11 of 20 feet and variants in 9 of 20. Neither abstract defines a boundary on the project's fifth-metatarsal mesh.",
+      "displayedSummarySha256": "b109ec66a9d0a50000e343eb5be6a0c10cd1ca3456b8079ed3179ce21bf2975e"
+    }
+  ]
+}

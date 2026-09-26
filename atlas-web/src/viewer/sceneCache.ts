@@ -41,6 +41,7 @@ export class SceneRequestCache<T> {
           current.controller.abort();
           if (this.entries.get(key) === current) this.entries.delete(key);
         }
+        this.trim();
         return true;
       };
       const onAbort = () => {

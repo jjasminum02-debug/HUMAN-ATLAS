@@ -20,7 +20,7 @@ const sceneCache = new SceneRequestCache<T07ViewerBundle>();
 
 type Visibility = "visible" | "transparent" | "hidden";
 type CameraPreset = "front" | "back" | "lateral";
-type Concept = { id: string; entityType?: unknown; parentId?: unknown };
+type Concept = { id: string; entityType?: unknown; parentId?: unknown; displayLabel?: string };
 
 interface Props {
   studyMode?: boolean;
@@ -42,12 +42,12 @@ interface Props {
 
 function targetNames(mesh: ViewerMesh, conceptById: Map<string, Concept>): { label: string; mapped: boolean } {
   if (mesh.targetEntityId && conceptById.has(mesh.targetEntityId)) {
-    return { label: mesh.targetEntityId, mapped: true };
+    return { label: conceptById.get(mesh.targetEntityId)?.displayLabel ?? "연결된 구조", mapped: true };
   }
   if (mesh.targetEntityType === "structure" && mesh.targetEntityId) {
-    return { label: mesh.targetEntityId, mapped: false };
+    return { label: "뼈 연결 확인 중", mapped: false };
   }
-  return { label: mesh.targetEntityId ?? "catalog ID 미확인", mapped: false };
+  return { label: "구조 연결 확인 중", mapped: false };
 }
 
 function errorText(error: unknown): string {
@@ -148,6 +148,10 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
       const pendingMesh = unmappedMeshId && bundle?.meshes.some((mesh) => mesh.meshAssetId === unmappedMeshId) ? unmappedMeshId : null;
       renderer.selectMeshes(pendingMesh ? [pendingMesh] : [], false);
       setPickedMeshId(pendingMesh);
+      if (!selectedSelection && !selectedEntityId && !unmappedMeshId) {
+        renderer.setIsolation(null);
+        setIsolating(false);
+      }
       return;
     }
     renderer.selectMeshes(selectedMeshIds, !studyMode);
@@ -248,7 +252,7 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
       onSelectBone(boneSelection);
       return;
     }
-    onSelectUnmappedMesh({ meshAssetId: mesh.meshAssetId, sourceName: mesh.sourceName });
+    onSelectUnmappedMesh({ meshAssetId: mesh.meshAssetId, sourceName: studyMode ? "연결 확인이 필요한 모델 구성요소" : mesh.sourceName });
   }
   onMeshPickRef.current = (mesh) => chooseMesh(mesh, true);
 
@@ -362,7 +366,7 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
             />
             <canvas ref={overlayCanvasRef} className="viewer-overlay" aria-hidden="true" />
             {!bundle && <div className="viewer-loading" role="status">GLB와 manifest를 확인하고 있습니다…</div>}
-            {bundle && <span className="viewer-axis">RH · m · +X 좌 / +Y 머리 / +Z 앞</span>}
+            {bundle && !studyMode && <span className="viewer-axis">RH · m · +X 좌 / +Y 머리 / +Z 앞</span>}
             {studyMode && learnerOverlay.syntheticTest && <span className="learner-overlay-warning" role="status">합성 검증 미리보기 · 학습 자료가 아닙니다</span>}
             {studyMode && !learnerOverlay.syntheticTest && learnerOverlay.count > 0 && <span className="learner-overlay-warning" role="status">미검토 표면 후보가 읽기 전용으로 표시됩니다</span>}
             {studyMode && learnerOverlay.error && <span className="learner-overlay-warning" role="status">공간 초안을 확인하지 못해 표시를 보류했습니다</span>}
@@ -393,30 +397,34 @@ export function GLBViewer({ selectedEntityId, selectedSelection, unmappedMeshId 
             {pickedMesh ? (
               <>
                 <span className="eyebrow">선택 메시</span>
-                <strong>{pickedMesh.sourceName}</strong>
-                <code>{pickedMesh.meshAssetId}</code>
-                <span>{targetNames(pickedMesh, conceptById).mapped ? `연결 ID ${pickedMesh.targetEntityId}` : `파일럿 카드 연결 없음 · ${targetNames(pickedMesh, conceptById).label}`}</span>
+                <strong>{studyMode ? targetNames(pickedMesh, conceptById).label : pickedMesh.sourceName}</strong>
+                {!studyMode && <code>{pickedMesh.meshAssetId}</code>}
+                <span>{studyMode
+                  ? targetNames(pickedMesh, conceptById).mapped ? "선택한 학습 구조" : "학습 카드 연결을 확인하지 못했습니다."
+                  : targetNames(pickedMesh, conceptById).mapped ? `연결 ID ${pickedMesh.targetEntityId}` : `파일럿 카드 연결 없음 · ${targetNames(pickedMesh, conceptById).label}`}</span>
               </>
             ) : <span className="muted">카드 또는 목록에서 구조를 선택해 보세요.</span>}
           </div>
 
           <div className="mesh-list-wrap">
             <div className="section-heading mesh-list-heading">
-              <div><p className="eyebrow">SOURCE MESHES</p><h3>이 영역에 확보된 메시</h3></div>
-              <span className="section-count">{bundle?.meshes.length ?? 0}</span>
+              <div><p className="eyebrow">{studyMode ? "학습 구조" : "SOURCE MESHES"}</p><h3>{studyMode ? "선택 가능한 구조" : "이 영역에 확보된 메시"}</h3></div>
+              <span className="section-count">{bundle?.meshes.filter((mesh) => !studyMode || (mesh.targetEntityId !== null && conceptById.has(mesh.targetEntityId))).length ?? 0}</span>
             </div>
-            <div className="mesh-list" role="list" aria-label="원본 mesh 목록">
-              {bundle?.meshes.map((mesh) => {
+            {studyMode && <p className="learner-mesh-note">연결이 확인되지 않은 일부 모델 구성요소는 선택 카드에 표시하지 않습니다.</p>}
+            <div className="mesh-list" role="list" aria-label={studyMode ? "선택 가능한 학습 구조" : "원본 mesh 목록"}>
+              {bundle?.meshes.filter((mesh) => !studyMode || (mesh.targetEntityId !== null && conceptById.has(mesh.targetEntityId))).map((mesh) => {
                 const state = visibility[mesh.meshAssetId] ?? "visible";
                 const isolatedOut = isolating && !reviewFocusIds.includes(mesh.meshAssetId);
+                const displayName = studyMode ? targetNames(mesh, conceptById).label : mesh.sourceName;
                 return (
-                  <div className={`mesh-row ${pickedMeshId === mesh.meshAssetId ? "is-current" : ""} ${state === "hidden" || isolatedOut ? "is-hidden" : ""}`} key={mesh.meshAssetId} role="listitem" data-mesh-id={mesh.meshAssetId}>
-                    <button className="mesh-select" type="button" aria-pressed={pickedMeshId === mesh.meshAssetId} onClick={() => chooseMesh(mesh, true)}>
-                      <span className="mesh-source-name">{mesh.sourceName}</span>
-                      <code>{mesh.meshAssetId}</code>
-                      <span className="mesh-link-state">{isolatedOut ? "격리 중 제외" : targetNames(mesh, conceptById).mapped ? `대상 ${mesh.targetEntityId}` : mesh.targetEntityId ? `구조 후보 ${mesh.targetEntityId}` : "대상 ID 미확인"}</span>
+                  <div className={`mesh-row ${pickedMeshId === mesh.meshAssetId ? "is-current" : ""} ${state === "hidden" || isolatedOut ? "is-hidden" : ""}`} key={mesh.meshAssetId} role="listitem" {...(!studyMode ? { "data-mesh-id": mesh.meshAssetId } : {})}>
+                    <button className="mesh-select" type="button" aria-pressed={pickedMeshId === mesh.meshAssetId} aria-label={`${displayName} 선택`} onClick={() => chooseMesh(mesh, true)}>
+                      <span className="mesh-source-name">{displayName}</span>
+                      {!studyMode && <code>{mesh.meshAssetId}</code>}
+                      <span className="mesh-link-state">{studyMode ? "확인된 학습 구조" : isolatedOut ? "격리 중 제외" : targetNames(mesh, conceptById).mapped ? `대상 ${mesh.targetEntityId}` : mesh.targetEntityId ? `구조 후보 ${mesh.targetEntityId}` : "대상 ID 미확인"}</span>
                     </button>
-                    <div className="mesh-controls" aria-label={`${mesh.meshAssetId} 표시 상태`}>
+                    <div className="mesh-controls" aria-label={`${displayName} 표시 상태`}>
                       <button type="button" aria-pressed={state === "transparent"} onClick={() => applyVisibility(mesh.meshAssetId, state === "transparent" ? "visible" : "transparent")}>
                         {state === "transparent" ? "불투명" : "투명"}
                       </button>

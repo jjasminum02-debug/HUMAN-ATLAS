@@ -65,3 +65,23 @@ test("resolved CPU cache evicts the oldest revision at capacity", async () => {
   await cache.acquire("c", request, signal);
   assert.equal(await cache.acquire("a", request, signal), "version-4");
 });
+
+test("capacity is enforced after five different in-flight requests resolve together", async () => {
+  const cache = new SceneRequestCache<string>(2);
+  const keys = ["a", "b", "c", "d", "e"];
+  const jobs = new Map(keys.map((key) => [key, deferred<string>()]));
+  const calls = new Map(keys.map((key) => [key, 0]));
+  const controllers = keys.map(() => new AbortController());
+  const pending = keys.map((key, index) => cache.acquire(key, (signal) => {
+    calls.set(key, calls.get(key)! + 1);
+    signal.addEventListener("abort", () => jobs.get(key)!.reject(new DOMException("aborted", "AbortError")), { once: true });
+    return jobs.get(key)!.promise;
+  }, controllers[index].signal));
+
+  for (const key of keys) jobs.get(key)!.resolve(`first-${key}`);
+  assert.deepEqual(await Promise.all(pending), keys.map((key) => `first-${key}`));
+
+  // The oldest resolved entries must be evicted after their final subscribers leave.
+  assert.equal(await cache.acquire("a", async () => { calls.set("a", calls.get("a")! + 1); return "second-a"; }, new AbortController().signal), "second-a");
+  assert.equal(calls.get("a"), 2);
+});

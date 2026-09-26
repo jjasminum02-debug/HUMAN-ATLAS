@@ -1,0 +1,102 @@
+{
+  "task": "T15f",
+  "date": "2026-09-26",
+  "headAtStart": "0bf1d3af95ac38db2d99c20a8ea3d7a5616842fa",
+  "checks": [
+    {
+      "command": "pnpm run test:scene-lifecycle",
+      "passed": true,
+      "tests": "9/9"
+    },
+    {
+      "command": "pnpm run test:attachment-crosschecks",
+      "passed": true,
+      "tests": "2/2",
+      "coverage": "14 displayed summary rows; 6 source records"
+    },
+    {
+      "command": "pnpm run test:navigation",
+      "passed": true,
+      "tests": "Node 14/14; Python 12/12"
+    },
+    {
+      "command": "pnpm run test:search",
+      "passed": true,
+      "tests": "40/40"
+    },
+    {
+      "command": "pnpm run test:annotations",
+      "passed": true,
+      "tests": "12/12; schema validator passed"
+    },
+    {
+      "command": "pnpm run test:spatial-drafts",
+      "passed": true,
+      "tests": "8/8; schema validator passed"
+    },
+    {
+      "command": "pnpm run validate:navigation",
+      "passed": true,
+      "counts": {
+        "categories": 12,
+        "memberships": 6,
+        "structureInstances": 9,
+        "structureMeshMappings": 9,
+        "unmappedMeshContexts": 4,
+        "sceneManifests": 2,
+        "issues": 0
+      }
+    },
+    {
+      "command": "pnpm run validate:learning",
+      "passed": true,
+      "counts": {
+        "nameEntries": 81,
+        "summaries": 14
+      }
+    },
+    {
+      "command": "pnpm run check:navigation-migration",
+      "passed": true
+    },
+    {
+      "command": "pnpm run typecheck",
+      "passed": true
+    },
+    {
+      "command": "pnpm run build",
+      "passed": true,
+      "warning": "Existing >500 kB App chunk warning"
+    },
+    {
+      "command": "git diff --check",
+      "passed": true
+    }
+  ],
+  "browser": {
+    "realBrowser": true,
+    "sequence": [
+      "isolate selected only",
+      "clear selection",
+      "select tibialis anterior",
+      "browser back",
+      "reset view"
+    ],
+    "result": "URL, card, selected list row, isolation checkbox and front/back/side reset state agreed at each checkpoint",
+    "viewports": [
+      "1440x900",
+      "1024x768",
+      "390x844"
+    ],
+    "mobileHorizontalOverflow": false,
+    "boneTypedCardsChecked": 9,
+    "muscleCardsChecked": 6,
+    "learnerInternalIdsOrJsonVisible": false
+  },
+  "anatomyState": {
+    "sourceLinkedBoneMappings": "9 needs_review/not_reviewed",
+    "unboundMeshes": 4,
+    "surfaceCandidates": "0/41",
+    "humanAnatomyReview": "pending; no promotion"
+  }
+}
