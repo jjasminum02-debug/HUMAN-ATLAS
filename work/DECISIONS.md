@@ -96,3 +96,13 @@ T05의 41개 부착을 근육/근두·대상 구조·원문 claim/evidence·우�
 ## 2026-09-26 R13 — AI 자료 대조와 교육용 움직임
 
 기본 이름·기시정지·작용 표는 AI가 원문을 찾아 필드별 대조한다. T14b의 실제 사람 검토 상태는 보존하되 전항목 학습/개발의 필수 조건에서 제외한다. 정확한 3D footprint와 교육용 clip은 별도 검증한다. T15 흐름 유지, 이후 T16–40의 독립 task와 필요 시 T41 이후 번호를 사용한다. 버튼은 움직임으로 이해하기, 기본 주변 흐림은 켜되 원복 가능. 근육/뼈 카드 분리, 함수 설명과 시범의 동기화, 현재 정적 GLB의 rig 부재를 전제로 한다. 누적 체크포인트 후 task마다 검증·선별 로컬 커밋; push/배포 별도 요청. 07/08/09 및 task-registry-r13.json이 상세 근거다.
+
+## T15b-D01 — 2026-09-26 product navigation 및 구조 instance migration
+
+- 06의 12개 NavigationCategory를 source `region-tree.json`과 분리된 `atlas-data/navigation/atlas-navigation.json` overlay로 구현한다. source region ID·parent·muscleConcept.regionIds를 복사·개명·수정하지 않는다.
+- 신규 runtime/data 계약은 근육 인스턴스 계약을 넓혀 깨지 않는 별도 `StructureInstance`와 `StructureMeshMapping`을 사용한다. 뼈 instance ID는 `HA-SI-{side-prefix}-{StructureId}` 규칙으로 안정화한다.
+- 제품 부위 membership은 현재 T12 오른쪽 종아리 파일럿이 `leg` 탐색 입구라는 명시적 설계 결정으로 한정한다. 기존 T12 `muscleLinks`가 가리키는 여섯 canonical 개별근 ID만 `decision_only`로 연결한다. 이는 source taxonomy나 해부학적 단일 소속의 판정이 아니다. 테스트 전용 내폐쇄근 예시가 실제 데이터로 들어가서는 안 된다.
+- 뼈 mesh mapping은 T12/T13의 기존 mesh/structure 연결 중 canonical `Structure(kind=bone)`가 실제 존재하고 source side가 right인 경우에만 overlay로 이관한다. T12 talus와 T13 제2–4중족골은 기존 canonical target 부재를 보존해 unbound context에 둔다. 골성 landmark를 whole bone으로 바꾸지 않는다.
+- `legacy T07/T12/T13` 자산, 좌표계·pose·hash는 변환하지 않는다. 한 `SceneManifest`에는 단일 model/frame/unit/pose만 담고 T12 오른쪽 종아리 모델만 partial pilot로 연결한다. T13 별도 모델을 임의 병합하지 않는다.
+- source crosswalk, human anatomy review, static geometry, attachment location, motion은 개별 state dimension으로 남긴다. 이 task의 mesh는 기존 source mapping/candidate 또는 whole-bone context이며 사람 검토 0건, attachment location `none`, motion `absent`다. 기술 연결을 reviewed나 기능 완성으로 승격하지 않는다.
+- `build_navigation.py --dry-run/--write/--check`는 legacy 원본을 쓰지 않는 재현 가능한 overlay migration이다. spatial draft, private source, `OpenSim_Models`에는 접근하지 않는다.

@@ -1,0 +1,49 @@
+$ node --experimental-strip-types --test src/domain/search.test.ts
+✔ same muscle: 승모근 (5.910291ms)
+✔ same muscle: 등세모근 (0.213833ms)
+✔ same muscle: 僧帽筋 (0.157042ms)
+✔ same muscle: TRAPEZIUS (3.353625ms)
+✔ same muscle:   등 세모근   (0.171709ms)
+✔ tibialis: 전경골근 (0.163792ms)
+✔ tibialis: 앞정강근 (0.120459ms)
+✔ tibialis: 前脛骨筋 (0.126917ms)
+✔ tibialis: tibialis anterior (2.048125ms)
+✔ transposed typo returns both splenius muscles, never a false single identity (1.301417ms)
+✔ deltoid portion stays separate (0.15425ms)
+✔ user Korean name lateral deltoid maps to the acromial part (0.128584ms)
+✔ named acromial part is included in the learner search projection (0.209542ms)
+✔ splenius capitis names share one lookup candidate (4.681417ms)
+✔ splenius cervicis and colli names share one lookup candidate (4.561ms)
+✔ short Korean typo does not fuzzily match unrelated muscles (0.160584ms)
+✔ unrelated query has no results (1.49ms)
+✔ historical peroneus synonym resolves to fibularis (1.861834ms)
+✔ T11-B02 learner catalog English and Latin terms stay attached to their ten existing group IDs (6.05925ms)
+✔ T11-B02 attested Korean/Hanja names resolve to existing groups and unresolved near-matches stay withheld (0.620209ms)
+✔ T11-B03 English and Latin index terms stay attached to the ten assigned existing IDs (3.903916ms)
+✔ T11-B03 attested Korean and source Hanja resolve to their same existing IDs (0.344083ms)
+✔ T11-B03 generic or narrower gluteal/foot candidates remain unlinked to the three withheld groups (0.261083ms)
+✔ T11-B04 English and Latin TA2 observations stay attached to the ten assigned existing muscle IDs (3.829292ms)
+✔ T11-B04 attested Korean names and source Hanja resolve to the same existing IDs; incomplete Hanja stays withheld (0.469334ms)
+✔ T11-B05 direct TA2 English and Latin observations resolve to their ten assigned existing IDs (4.049958ms)
+✔ T11-B05 attested customary Korean names, current Korean names and source Hanja stay on their assigned IDs (0.604375ms)
+✔ T15a projects the three display names and Korean/English aliases to the existing deltoid ID without indexing Hanja (0.36025ms)
+✔ T15a does not require Hanja and hides missing or populated Hani term rows from learner projection (0.078458ms)
+✔ T11-B06 opened TA2 English/Latin terms and sourced synonyms stay on their ten existing IDs (6.285458ms)
+✔ T11-B06 attested Korean names/Hanja resolve to their assigned IDs; conflicting and unverified forms stay withheld (0.89975ms)
+✔ T11-B07 TA2 direct English/Latin preferred cells and synonyms resolve to their ten existing IDs (22.888791ms)
+✔ T11-B07 attested customary Korean/current Korean/source Hanja stay on the assigned ID (0.475083ms)
+✔ T11-B07 conflicting Hanja and unsupported part translations remain unlinked (0.208625ms)
+✔ T11-B08 direct TA2 English/Latin terms and recorded synonyms resolve to the ten assigned part IDs (15.507584ms)
+✔ T11-B08 source-attested Korean customary and current names remain attached to their existing part IDs (0.312541ms)
+✔ T11-B08 missing medial-pterygoid Korean/Hanja and inherited parent Hanja remain unlinked (0.221958ms)
+✔ T11-B09 direct TA2 English/Latin cells and synonyms resolve to their seven existing part IDs (7.594458ms)
+✔ T11-B09 attested Korean terms resolve to their exact existing part IDs, while the generic long-head term stays contextual (0.619625ms)
+✔ T11-B09 unsupported deltoid wording, misleading legacy lateral-head mapping, and parent Hanja stay withheld (0.478458ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 40
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 200.556334

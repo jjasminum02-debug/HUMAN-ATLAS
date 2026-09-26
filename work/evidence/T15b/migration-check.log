@@ -1,0 +1,85 @@
+{
+  "check": "passed",
+  "path": "atlas-data/navigation/atlas-navigation.json",
+  "sha256": "c8f8a574101cfe053cfd94b60c06fc410c5275c1c2f350d2a8f8aea838f635e5",
+  "summary": {
+    "status": "partial_pilot_contract",
+    "inputHashes": {
+      "design/2026-09-25-muscle-atlas/region12-navigation.design.json": "fd4c48209eb07694052e75aed01c70d783c10cd6e970a13336ff8ed5a8f6d00c",
+      "atlas-data/catalog/canonical-catalog.json": "6b10da0388b06f24d9bfb6b0852d88196cb7064835741360ee15a91b6abaf873",
+      "atlas-data/manifests/canonical-geometry-t12.json": "02f4cb6ff99008207a62c4590acd030192453031f94eeb0f67c4a607e1630507",
+      "atlas-data/manifests/derived-bones-t13.json": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e",
+      "atlas-data/manifests/assets.json": "44100f374337d527531bcadae13f1b9293cfa54ead96b1ef970fcf14349fdb4a"
+    },
+    "sourceInventoryBefore": {
+      "sourceRegionNodesExcludingRoot": 18,
+      "sourceRegionRootId": "HA-R-ROOT",
+      "sourceRegionRecordsIncludingRoot": 19,
+      "canonicalMuscleConcepts": 85,
+      "canonicalMuscleInstances": 6,
+      "canonicalMeshMappings": 7,
+      "canonicalBoneStructures": 10,
+      "canonicalSpatialAnnotations": 0,
+      "T12PilotMeshes": 11,
+      "T12PilotMuscleInstances": 6,
+      "T13BoneMeshes": 9
+    },
+    "counts": {
+      "categories": 12,
+      "productDecisionMemberships": 6,
+      "boneStructureInstances": 9,
+      "boneMeshMappings": 9,
+      "unmappedSourceContexts": 4,
+      "sceneManifests": 1,
+      "sceneSelectableBindings": 10,
+      "sceneContextBindings": 1
+    },
+    "migrationDelta": {
+      "writeTarget": "atlas-data/navigation/atlas-navigation.json",
+      "canonicalFilesAddedOrChanged": [],
+      "sourceRegionRecordsAddedOrChanged": 0,
+      "sourceMembershipsInferred": 0,
+      "productDecisionMembershipsAdded": 6,
+      "structureInstancesAddedInOverlay": 9,
+      "boneMeshMappingsAddedInOverlay": 9,
+      "unconfirmedMeshesLeftUnbound": 4,
+      "unconfirmedMeshTargets": [
+        {
+          "meshAssetId": "HA-MESH-BP3D4-FJ3385",
+          "modelId": "HA-MODEL-BP3D4-R4-RIGHT-LOWER-LEG-STATIC",
+          "reasonCode": "canonical_target_unconfirmed"
+        },
+        {
+          "meshAssetId": "HA-MESH-BP3D4-FJ3353",
+          "modelId": "HA-MODEL-BP3D4-R4-T13-RIGHT-BONES-STATIC",
+          "reasonCode": "canonical_target_unconfirmed"
+        },
+        {
+          "meshAssetId": "HA-MESH-BP3D4-FJ3355",
+          "modelId": "HA-MODEL-BP3D4-R4-T13-RIGHT-BONES-STATIC",
+          "reasonCode": "canonical_target_unconfirmed"
+        },
+        {
+          "meshAssetId": "HA-MESH-BP3D4-FJ3357",
+          "modelId": "HA-MODEL-BP3D4-R4-T13-RIGHT-BONES-STATIC",
+          "reasonCode": "canonical_target_unconfirmed"
+        }
+      ],
+      "sceneAvailability": {
+        "leg": "partial"
+      }
+    },
+    "preservation": {
+      "canonicalCatalogMutation": false,
+      "legacyMuscleInstancesPreserved": true,
+      "legacyMeshMappingsPreserved": true,
+      "userSpatialDraftsReadOrChanged": false,
+      "humanApprovalCreated": false,
+      "anatomicalClaimsCreated": false,
+      "sourceRegionsCopiedOrRenamed": false,
+      "motionAssetsCreated": false,
+      "unresolvedSourceMeshesRemainUnbound": true
+    },
+    "generatedSha256": "c8f8a574101cfe053cfd94b60c06fc410c5275c1c2f350d2a8f8aea838f635e5"
+  }
+}

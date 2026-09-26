@@ -1,0 +1,802 @@
+{
+  "schemaVersion": "T15b-navigation-v1",
+  "status": "partial_pilot_contract",
+  "sourceClassification": {
+    "path": "atlas-data/catalog/region-tree.json",
+    "policy": "source regions remain unchanged; product categories and memberships are a separate overlay"
+  },
+  "categories": [
+    {
+      "id": "head",
+      "order": 1,
+      "labelKo": "머리",
+      "labelEn": "Head"
+    },
+    {
+      "id": "neck",
+      "order": 2,
+      "labelKo": "목",
+      "labelEn": "Neck"
+    },
+    {
+      "id": "back",
+      "order": 3,
+      "labelKo": "등",
+      "labelEn": "Back"
+    },
+    {
+      "id": "shoulder-scapular",
+      "order": 4,
+      "labelKo": "어깨·어깨뼈",
+      "labelEn": "Shoulder/Scapular"
+    },
+    {
+      "id": "thorax",
+      "order": 5,
+      "labelKo": "가슴우리",
+      "labelEn": "Thorax"
+    },
+    {
+      "id": "abdomen-lumbar",
+      "order": 6,
+      "labelKo": "배·허리",
+      "labelEn": "Abdomen/Lumbar"
+    },
+    {
+      "id": "pelvis-perineum",
+      "order": 7,
+      "labelKo": "골반·샅",
+      "labelEn": "Pelvis/Perineum"
+    },
+    {
+      "id": "gluteal-hip",
+      "order": 8,
+      "labelKo": "볼기·깊은엉덩이",
+      "labelEn": "Gluteal/Hip"
+    },
+    {
+      "id": "thigh",
+      "order": 9,
+      "labelKo": "넙다리",
+      "labelEn": "Thigh"
+    },
+    {
+      "id": "leg",
+      "order": 10,
+      "labelKo": "종아리",
+      "labelEn": "Leg"
+    },
+    {
+      "id": "foot",
+      "order": 11,
+      "labelKo": "발",
+      "labelEn": "Foot"
+    },
+    {
+      "id": "upper-limb",
+      "order": 12,
+      "labelKo": "팔·손",
+      "labelEn": "Upper limb"
+    }
+  ],
+  "memberships": [
+    {
+      "id": "HA-RM-LEG-HA-M-000001",
+      "categoryId": "leg",
+      "entityKind": "muscle",
+      "entityId": "HA-M-000001",
+      "reason": "Existing right lower-leg pilot is the product entry for the leg category; source regionIds remain unchanged.",
+      "productDecisionRef": "T15b-D01",
+      "status": "decision_only"
+    },
+    {
+      "id": "HA-RM-LEG-HA-M-000002",
+      "categoryId": "leg",
+      "entityKind": "muscle",
+      "entityId": "HA-M-000002",
+      "reason": "Existing right lower-leg pilot is the product entry for the leg category; source regionIds remain unchanged.",
+      "productDecisionRef": "T15b-D01",
+      "status": "decision_only"
+    },
+    {
+      "id": "HA-RM-LEG-HA-M-000003",
+      "categoryId": "leg",
+      "entityKind": "muscle",
+      "entityId": "HA-M-000003",
+      "reason": "Existing right lower-leg pilot is the product entry for the leg category; source regionIds remain unchanged.",
+      "productDecisionRef": "T15b-D01",
+      "status": "decision_only"
+    },
+    {
+      "id": "HA-RM-LEG-HA-M-000004",
+      "categoryId": "leg",
+      "entityKind": "muscle",
+      "entityId": "HA-M-000004",
+      "reason": "Existing right lower-leg pilot is the product entry for the leg category; source regionIds remain unchanged.",
+      "productDecisionRef": "T15b-D01",
+      "status": "decision_only"
+    },
+    {
+      "id": "HA-RM-LEG-HA-M-000005",
+      "categoryId": "leg",
+      "entityKind": "muscle",
+      "entityId": "HA-M-000005",
+      "reason": "Existing right lower-leg pilot is the product entry for the leg category; source regionIds remain unchanged.",
+      "productDecisionRef": "T15b-D01",
+      "status": "decision_only"
+    },
+    {
+      "id": "HA-RM-LEG-HA-M-000006",
+      "categoryId": "leg",
+      "entityKind": "muscle",
+      "entityId": "HA-M-000006",
+      "reason": "Existing right lower-leg pilot is the product entry for the leg category; source regionIds remain unchanged.",
+      "productDecisionRef": "T15b-D01",
+      "status": "decision_only"
+    }
+  ],
+  "structureInstances": [
+    {
+      "id": "HA-SI-R-HA-S-CALCANEUS",
+      "structureId": "HA-S-CALCANEUS",
+      "side": "right",
+      "variantId": null,
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/canonical-geometry-t12.json",
+          "jsonPointer": "/unmappedStructureAssets/0",
+          "manifestSha256": "02f4cb6ff99008207a62c4590acd030192453031f94eeb0f67c4a607e1630507"
+        }
+      ]
+    },
+    {
+      "id": "HA-SI-R-HA-S-CUBOID",
+      "structureId": "HA-S-CUBOID",
+      "side": "right",
+      "variantId": null,
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/derived-bones-t13.json",
+          "jsonPointer": "/viewerNodes/6",
+          "manifestSha256": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e"
+        }
+      ]
+    },
+    {
+      "id": "HA-SI-R-HA-S-FEMUR",
+      "structureId": "HA-S-FEMUR",
+      "side": "right",
+      "variantId": null,
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/derived-bones-t13.json",
+          "jsonPointer": "/viewerNodes/7",
+          "manifestSha256": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e"
+        }
+      ]
+    },
+    {
+      "id": "HA-SI-R-HA-S-FIBULA",
+      "structureId": "HA-S-FIBULA",
+      "side": "right",
+      "variantId": null,
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/canonical-geometry-t12.json",
+          "jsonPointer": "/unmappedStructureAssets/1",
+          "manifestSha256": "02f4cb6ff99008207a62c4590acd030192453031f94eeb0f67c4a607e1630507"
+        }
+      ]
+    },
+    {
+      "id": "HA-SI-R-HA-S-MEDIAL-CUNEIFORM",
+      "structureId": "HA-S-MEDIAL-CUNEIFORM",
+      "side": "right",
+      "variantId": null,
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/derived-bones-t13.json",
+          "jsonPointer": "/viewerNodes/8",
+          "manifestSha256": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e"
+        }
+      ]
+    },
+    {
+      "id": "HA-SI-R-HA-S-METATARSAL-1",
+      "structureId": "HA-S-METATARSAL-1",
+      "side": "right",
+      "variantId": null,
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/derived-bones-t13.json",
+          "jsonPointer": "/viewerNodes/1",
+          "manifestSha256": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e"
+        }
+      ]
+    },
+    {
+      "id": "HA-SI-R-HA-S-METATARSAL-5",
+      "structureId": "HA-S-METATARSAL-5",
+      "side": "right",
+      "variantId": null,
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/derived-bones-t13.json",
+          "jsonPointer": "/viewerNodes/5",
+          "manifestSha256": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e"
+        }
+      ]
+    },
+    {
+      "id": "HA-SI-R-HA-S-NAVICULAR",
+      "structureId": "HA-S-NAVICULAR",
+      "side": "right",
+      "variantId": null,
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/derived-bones-t13.json",
+          "jsonPointer": "/viewerNodes/0",
+          "manifestSha256": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e"
+        }
+      ]
+    },
+    {
+      "id": "HA-SI-R-HA-S-TIBIA",
+      "structureId": "HA-S-TIBIA",
+      "side": "right",
+      "variantId": null,
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/canonical-geometry-t12.json",
+          "jsonPointer": "/unmappedStructureAssets/3",
+          "manifestSha256": "02f4cb6ff99008207a62c4590acd030192453031f94eeb0f67c4a607e1630507"
+        }
+      ]
+    }
+  ],
+  "structureMeshMappings": [
+    {
+      "id": "HA-SMAP-BP3D4-FJ3360",
+      "structureInstanceId": "HA-SI-R-HA-S-CALCANEUS",
+      "meshIds": [
+        "HA-MESH-BP3D4-FJ3360"
+      ],
+      "representationType": "whole_bone_context_only",
+      "evidenceIds": [],
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/canonical-geometry-t12.json",
+          "jsonPointer": "/unmappedStructureAssets/0",
+          "manifestSha256": "02f4cb6ff99008207a62c4590acd030192453031f94eeb0f67c4a607e1630507"
+        }
+      ],
+      "sourceLinkageState": "inherited_t12_source_manifest",
+      "reviewState": "needs_review",
+      "humanReviewState": "not_reviewed",
+      "geometryState": "whole_structure_context_only",
+      "attachmentLocationState": "none",
+      "motionState": "absent"
+    },
+    {
+      "id": "HA-SMAP-BP3D4-FJ3364",
+      "structureInstanceId": "HA-SI-R-HA-S-CUBOID",
+      "meshIds": [
+        "HA-MESH-BP3D4-FJ3364"
+      ],
+      "representationType": "whole_bone_context_only",
+      "evidenceIds": [
+        "EV-BP3D4-FJ3364-T13-ASSET"
+      ],
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/derived-bones-t13.json",
+          "jsonPointer": "/viewerNodes/6",
+          "manifestSha256": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e"
+        }
+      ],
+      "sourceLinkageState": "inherited_t13_source_crosswalk",
+      "reviewState": "needs_review",
+      "humanReviewState": "not_reviewed",
+      "geometryState": "whole_structure_context_only",
+      "attachmentLocationState": "none",
+      "motionState": "absent"
+    },
+    {
+      "id": "HA-SMAP-BP3D4-FJ3365",
+      "structureInstanceId": "HA-SI-R-HA-S-FEMUR",
+      "meshIds": [
+        "HA-MESH-BP3D4-FJ3365"
+      ],
+      "representationType": "whole_bone_context_only",
+      "evidenceIds": [
+        "EV-BP3D4-FJ3365-T13-ASSET"
+      ],
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/derived-bones-t13.json",
+          "jsonPointer": "/viewerNodes/7",
+          "manifestSha256": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e"
+        }
+      ],
+      "sourceLinkageState": "inherited_t13_source_crosswalk",
+      "reviewState": "needs_review",
+      "humanReviewState": "not_reviewed",
+      "geometryState": "whole_structure_context_only",
+      "attachmentLocationState": "none",
+      "motionState": "absent"
+    },
+    {
+      "id": "HA-SMAP-BP3D4-FJ3366",
+      "structureInstanceId": "HA-SI-R-HA-S-FIBULA",
+      "meshIds": [
+        "HA-MESH-BP3D4-FJ3366"
+      ],
+      "representationType": "whole_bone_context_only",
+      "evidenceIds": [],
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/canonical-geometry-t12.json",
+          "jsonPointer": "/unmappedStructureAssets/1",
+          "manifestSha256": "02f4cb6ff99008207a62c4590acd030192453031f94eeb0f67c4a607e1630507"
+        }
+      ],
+      "sourceLinkageState": "inherited_t12_source_manifest",
+      "reviewState": "needs_review",
+      "humanReviewState": "not_reviewed",
+      "geometryState": "whole_structure_context_only",
+      "attachmentLocationState": "none",
+      "motionState": "absent"
+    },
+    {
+      "id": "HA-SMAP-BP3D4-FJ3377",
+      "structureInstanceId": "HA-SI-R-HA-S-MEDIAL-CUNEIFORM",
+      "meshIds": [
+        "HA-MESH-BP3D4-FJ3377"
+      ],
+      "representationType": "whole_bone_context_only",
+      "evidenceIds": [
+        "EV-BP3D4-FJ3377-T13-ASSET"
+      ],
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/derived-bones-t13.json",
+          "jsonPointer": "/viewerNodes/8",
+          "manifestSha256": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e"
+        }
+      ],
+      "sourceLinkageState": "inherited_t13_source_crosswalk",
+      "reviewState": "needs_review",
+      "humanReviewState": "not_reviewed",
+      "geometryState": "whole_structure_context_only",
+      "attachmentLocationState": "none",
+      "motionState": "absent"
+    },
+    {
+      "id": "HA-SMAP-BP3D4-FJ3351",
+      "structureInstanceId": "HA-SI-R-HA-S-METATARSAL-1",
+      "meshIds": [
+        "HA-MESH-BP3D4-FJ3351"
+      ],
+      "representationType": "whole_bone_context_only",
+      "evidenceIds": [
+        "EV-BP3D4-FJ3351-T13-ASSET"
+      ],
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/derived-bones-t13.json",
+          "jsonPointer": "/viewerNodes/1",
+          "manifestSha256": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e"
+        }
+      ],
+      "sourceLinkageState": "inherited_t13_source_crosswalk",
+      "reviewState": "needs_review",
+      "humanReviewState": "not_reviewed",
+      "geometryState": "whole_structure_context_only",
+      "attachmentLocationState": "none",
+      "motionState": "absent"
+    },
+    {
+      "id": "HA-SMAP-BP3D4-FJ3359",
+      "structureInstanceId": "HA-SI-R-HA-S-METATARSAL-5",
+      "meshIds": [
+        "HA-MESH-BP3D4-FJ3359"
+      ],
+      "representationType": "whole_bone_context_only",
+      "evidenceIds": [
+        "EV-BP3D4-FJ3359-T13-ASSET"
+      ],
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/derived-bones-t13.json",
+          "jsonPointer": "/viewerNodes/5",
+          "manifestSha256": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e"
+        }
+      ],
+      "sourceLinkageState": "inherited_t13_source_crosswalk",
+      "reviewState": "needs_review",
+      "humanReviewState": "not_reviewed",
+      "geometryState": "whole_structure_context_only",
+      "attachmentLocationState": "none",
+      "motionState": "absent"
+    },
+    {
+      "id": "HA-SMAP-BP3D4-FJ3308",
+      "structureInstanceId": "HA-SI-R-HA-S-NAVICULAR",
+      "meshIds": [
+        "HA-MESH-BP3D4-FJ3308"
+      ],
+      "representationType": "whole_bone_context_only",
+      "evidenceIds": [
+        "EV-BP3D4-FJ3308-T13-ASSET"
+      ],
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/derived-bones-t13.json",
+          "jsonPointer": "/viewerNodes/0",
+          "manifestSha256": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e"
+        }
+      ],
+      "sourceLinkageState": "inherited_t13_source_crosswalk",
+      "reviewState": "needs_review",
+      "humanReviewState": "not_reviewed",
+      "geometryState": "whole_structure_context_only",
+      "attachmentLocationState": "none",
+      "motionState": "absent"
+    },
+    {
+      "id": "HA-SMAP-BP3D4-FJ3387",
+      "structureInstanceId": "HA-SI-R-HA-S-TIBIA",
+      "meshIds": [
+        "HA-MESH-BP3D4-FJ3387"
+      ],
+      "representationType": "whole_bone_context_only",
+      "evidenceIds": [],
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/canonical-geometry-t12.json",
+          "jsonPointer": "/unmappedStructureAssets/3",
+          "manifestSha256": "02f4cb6ff99008207a62c4590acd030192453031f94eeb0f67c4a607e1630507"
+        }
+      ],
+      "sourceLinkageState": "inherited_t12_source_manifest",
+      "reviewState": "needs_review",
+      "humanReviewState": "not_reviewed",
+      "geometryState": "whole_structure_context_only",
+      "attachmentLocationState": "none",
+      "motionState": "absent"
+    }
+  ],
+  "unmappedMeshContexts": [
+    {
+      "meshAssetId": "HA-MESH-BP3D4-FJ3385",
+      "modelId": "HA-MODEL-BP3D4-R4-RIGHT-LOWER-LEG-STATIC",
+      "sourceName": "Right talus",
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/canonical-geometry-t12.json",
+          "jsonPointer": "/unmappedStructureAssets/2",
+          "manifestSha256": "02f4cb6ff99008207a62c4590acd030192453031f94eeb0f67c4a607e1630507"
+        }
+      ],
+      "evidenceIds": [],
+      "selection": null,
+      "reasonCode": "canonical_target_unconfirmed",
+      "humanReviewState": "not_reviewed",
+      "geometryState": "unlinked_source_mesh_context",
+      "motionState": "absent"
+    },
+    {
+      "meshAssetId": "HA-MESH-BP3D4-FJ3353",
+      "modelId": "HA-MODEL-BP3D4-R4-T13-RIGHT-BONES-STATIC",
+      "sourceName": "right second metatarsal bone",
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/derived-bones-t13.json",
+          "jsonPointer": "/viewerNodes/2",
+          "manifestSha256": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e"
+        }
+      ],
+      "evidenceIds": [
+        "EV-BP3D4-FJ3353-T13-ASSET"
+      ],
+      "selection": null,
+      "reasonCode": "canonical_target_unconfirmed",
+      "humanReviewState": "not_reviewed",
+      "geometryState": "unlinked_source_mesh_context",
+      "motionState": "absent"
+    },
+    {
+      "meshAssetId": "HA-MESH-BP3D4-FJ3355",
+      "modelId": "HA-MODEL-BP3D4-R4-T13-RIGHT-BONES-STATIC",
+      "sourceName": "right third metatarsal bone",
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/derived-bones-t13.json",
+          "jsonPointer": "/viewerNodes/3",
+          "manifestSha256": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e"
+        }
+      ],
+      "evidenceIds": [
+        "EV-BP3D4-FJ3355-T13-ASSET"
+      ],
+      "selection": null,
+      "reasonCode": "canonical_target_unconfirmed",
+      "humanReviewState": "not_reviewed",
+      "geometryState": "unlinked_source_mesh_context",
+      "motionState": "absent"
+    },
+    {
+      "meshAssetId": "HA-MESH-BP3D4-FJ3357",
+      "modelId": "HA-MODEL-BP3D4-R4-T13-RIGHT-BONES-STATIC",
+      "sourceName": "right fourth metatarsal bone",
+      "sourceRefs": [
+        {
+          "path": "atlas-data/manifests/derived-bones-t13.json",
+          "jsonPointer": "/viewerNodes/4",
+          "manifestSha256": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e"
+        }
+      ],
+      "evidenceIds": [
+        "EV-BP3D4-FJ3357-T13-ASSET"
+      ],
+      "selection": null,
+      "reasonCode": "canonical_target_unconfirmed",
+      "humanReviewState": "not_reviewed",
+      "geometryState": "unlinked_source_mesh_context",
+      "motionState": "absent"
+    }
+  ],
+  "sceneManifests": [
+    {
+      "id": "HA-SCENE-LEG-RIGHT-PILOT-T12B",
+      "categoryId": "leg",
+      "revision": "T15b-navigation-v1",
+      "availability": "partial",
+      "assetRefs": [
+        {
+          "modelId": "HA-MODEL-BP3D4-R4-RIGHT-LOWER-LEG-STATIC",
+          "uri": "atlas-data/assets/derived-glb/bodyparts3d-r4-right-lower-leg/right-lower-leg.glb",
+          "sha256": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341",
+          "meshAssetIds": [
+            "HA-MESH-BP3D4-FJ1394",
+            "HA-MESH-BP3D4-FJ1397",
+            "HA-MESH-BP3D4-FJ1409",
+            "HA-MESH-BP3D4-FJ1410",
+            "HA-MESH-BP3D4-FJ1437",
+            "HA-MESH-BP3D4-FJ1439",
+            "HA-MESH-BP3D4-FJ1440",
+            "HA-MESH-BP3D4-FJ3360",
+            "HA-MESH-BP3D4-FJ3366",
+            "HA-MESH-BP3D4-FJ3385",
+            "HA-MESH-BP3D4-FJ3387"
+          ]
+        }
+      ],
+      "selectableBindings": [
+        {
+          "meshAssetId": "HA-MESH-BP3D4-FJ1394",
+          "sourceMappingId": "HA-MAP-BP3D4-FJ1394",
+          "reviewState": "needs_review",
+          "selection": {
+            "kind": "muscle",
+            "conceptId": "HA-M-000001",
+            "instanceId": "HA-I-R-HA-M-000001",
+            "meshId": "HA-MESH-BP3D4-FJ1394",
+            "partId": "HA-P-000001"
+          },
+          "stateDimensions": {
+            "sourceRelation": "inherited_crosswalk_only",
+            "humanAnatomyReview": "not_reviewed",
+            "staticGeometry": "mesh_candidate_or_context_only",
+            "attachmentLocation": "none",
+            "motion": "absent"
+          }
+        },
+        {
+          "meshAssetId": "HA-MESH-BP3D4-FJ1397",
+          "sourceMappingId": "HA-MAP-BP3D4-FJ1397",
+          "reviewState": "needs_review",
+          "selection": {
+            "kind": "muscle",
+            "conceptId": "HA-M-000001",
+            "instanceId": "HA-I-R-HA-M-000001",
+            "meshId": "HA-MESH-BP3D4-FJ1397",
+            "partId": "HA-P-000002"
+          },
+          "stateDimensions": {
+            "sourceRelation": "inherited_crosswalk_only",
+            "humanAnatomyReview": "not_reviewed",
+            "staticGeometry": "mesh_candidate_or_context_only",
+            "attachmentLocation": "none",
+            "motion": "absent"
+          }
+        },
+        {
+          "meshAssetId": "HA-MESH-BP3D4-FJ1409",
+          "sourceMappingId": "HA-MAP-BP3D4-FJ1409",
+          "reviewState": "needs_review",
+          "selection": {
+            "kind": "muscle",
+            "conceptId": "HA-M-000006",
+            "instanceId": "HA-I-R-HA-M-000006",
+            "meshId": "HA-MESH-BP3D4-FJ1409"
+          },
+          "stateDimensions": {
+            "sourceRelation": "inherited_crosswalk_only",
+            "humanAnatomyReview": "not_reviewed",
+            "staticGeometry": "mesh_candidate_or_context_only",
+            "attachmentLocation": "none",
+            "motion": "absent"
+          }
+        },
+        {
+          "meshAssetId": "HA-MESH-BP3D4-FJ1410",
+          "sourceMappingId": "HA-MAP-BP3D4-FJ1410",
+          "reviewState": "needs_review",
+          "selection": {
+            "kind": "muscle",
+            "conceptId": "HA-M-000005",
+            "instanceId": "HA-I-R-HA-M-000005",
+            "meshId": "HA-MESH-BP3D4-FJ1410"
+          },
+          "stateDimensions": {
+            "sourceRelation": "inherited_crosswalk_only",
+            "humanAnatomyReview": "not_reviewed",
+            "staticGeometry": "mesh_candidate_or_context_only",
+            "attachmentLocation": "none",
+            "motion": "absent"
+          }
+        },
+        {
+          "meshAssetId": "HA-MESH-BP3D4-FJ1437",
+          "sourceMappingId": "HA-MAP-BP3D4-FJ1437",
+          "reviewState": "needs_review",
+          "selection": {
+            "kind": "muscle",
+            "conceptId": "HA-M-000002",
+            "instanceId": "HA-I-R-HA-M-000002",
+            "meshId": "HA-MESH-BP3D4-FJ1437"
+          },
+          "stateDimensions": {
+            "sourceRelation": "inherited_crosswalk_only",
+            "humanAnatomyReview": "not_reviewed",
+            "staticGeometry": "mesh_candidate_or_context_only",
+            "attachmentLocation": "none",
+            "motion": "absent"
+          }
+        },
+        {
+          "meshAssetId": "HA-MESH-BP3D4-FJ1439",
+          "sourceMappingId": "HA-MAP-BP3D4-FJ1439",
+          "reviewState": "needs_review",
+          "selection": {
+            "kind": "muscle",
+            "conceptId": "HA-M-000003",
+            "instanceId": "HA-I-R-HA-M-000003",
+            "meshId": "HA-MESH-BP3D4-FJ1439"
+          },
+          "stateDimensions": {
+            "sourceRelation": "inherited_crosswalk_only",
+            "humanAnatomyReview": "not_reviewed",
+            "staticGeometry": "mesh_candidate_or_context_only",
+            "attachmentLocation": "none",
+            "motion": "absent"
+          }
+        },
+        {
+          "meshAssetId": "HA-MESH-BP3D4-FJ1440",
+          "sourceMappingId": "HA-MAP-BP3D4-FJ1440",
+          "reviewState": "needs_review",
+          "selection": {
+            "kind": "muscle",
+            "conceptId": "HA-M-000004",
+            "instanceId": "HA-I-R-HA-M-000004",
+            "meshId": "HA-MESH-BP3D4-FJ1440"
+          },
+          "stateDimensions": {
+            "sourceRelation": "inherited_crosswalk_only",
+            "humanAnatomyReview": "not_reviewed",
+            "staticGeometry": "mesh_candidate_or_context_only",
+            "attachmentLocation": "none",
+            "motion": "absent"
+          }
+        },
+        {
+          "meshAssetId": "HA-MESH-BP3D4-FJ3360",
+          "sourceMappingId": "HA-SMAP-BP3D4-FJ3360",
+          "reviewState": "needs_review",
+          "selection": {
+            "kind": "bone",
+            "conceptId": "HA-S-CALCANEUS",
+            "instanceId": "HA-SI-R-HA-S-CALCANEUS",
+            "meshId": "HA-MESH-BP3D4-FJ3360"
+          },
+          "stateDimensions": {
+            "sourceRelation": "inherited_crosswalk_only",
+            "humanAnatomyReview": "not_reviewed",
+            "staticGeometry": "mesh_candidate_or_context_only",
+            "attachmentLocation": "none",
+            "motion": "absent"
+          }
+        },
+        {
+          "meshAssetId": "HA-MESH-BP3D4-FJ3366",
+          "sourceMappingId": "HA-SMAP-BP3D4-FJ3366",
+          "reviewState": "needs_review",
+          "selection": {
+            "kind": "bone",
+            "conceptId": "HA-S-FIBULA",
+            "instanceId": "HA-SI-R-HA-S-FIBULA",
+            "meshId": "HA-MESH-BP3D4-FJ3366"
+          },
+          "stateDimensions": {
+            "sourceRelation": "inherited_crosswalk_only",
+            "humanAnatomyReview": "not_reviewed",
+            "staticGeometry": "mesh_candidate_or_context_only",
+            "attachmentLocation": "none",
+            "motion": "absent"
+          }
+        },
+        {
+          "meshAssetId": "HA-MESH-BP3D4-FJ3387",
+          "sourceMappingId": "HA-SMAP-BP3D4-FJ3387",
+          "reviewState": "needs_review",
+          "selection": {
+            "kind": "bone",
+            "conceptId": "HA-S-TIBIA",
+            "instanceId": "HA-SI-R-HA-S-TIBIA",
+            "meshId": "HA-MESH-BP3D4-FJ3387"
+          },
+          "stateDimensions": {
+            "sourceRelation": "inherited_crosswalk_only",
+            "humanAnatomyReview": "not_reviewed",
+            "staticGeometry": "mesh_candidate_or_context_only",
+            "attachmentLocation": "none",
+            "motion": "absent"
+          }
+        }
+      ],
+      "contextBindings": [
+        {
+          "meshAssetId": "HA-MESH-BP3D4-FJ3385",
+          "modelId": "HA-MODEL-BP3D4-R4-RIGHT-LOWER-LEG-STATIC",
+          "selection": null,
+          "reasonCode": "canonical_target_unconfirmed",
+          "stateDimensions": {
+            "sourceRelation": "source_identity_without_canonical_structure_id",
+            "humanAnatomyReview": "not_reviewed",
+            "staticGeometry": "unlinked_source_mesh_context",
+            "attachmentLocation": "none",
+            "motion": "absent"
+          }
+        }
+      ],
+      "defaultView": {
+        "side": "right",
+        "selection": null
+      },
+      "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "units": "m",
+      "poseId": "bodyparts3d-r4-static-reference",
+      "modelId": "HA-MODEL-BP3D4-R4-RIGHT-LOWER-LEG-STATIC",
+      "stateDimensions": {
+        "sourceRelation": "inherited_t07_t12_source_crosswalks",
+        "humanAnatomyReview": "not_reviewed",
+        "staticGeometry": "partial_static_mesh_candidates",
+        "attachmentLocation": "none",
+        "motion": "absent"
+      }
+    }
+  ],
+  "migrationNotes": {
+    "canonicalCatalogMutation": false,
+    "legacyMuscleInstancesPreserved": true,
+    "legacyMeshMappingsPreserved": true,
+    "userSpatialDraftsReadOrChanged": false,
+    "humanApprovalCreated": false,
+    "anatomicalClaimsCreated": false,
+    "sourceRegionsCopiedOrRenamed": false,
+    "motionAssetsCreated": false,
+    "unresolvedSourceMeshesRemainUnbound": true
+  }
+}

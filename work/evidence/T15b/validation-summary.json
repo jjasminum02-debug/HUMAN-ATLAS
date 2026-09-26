@@ -1,0 +1,94 @@
+{
+  "task": "T15b",
+  "passed": true,
+  "validationScope": "navigation contract, migration, source preservation, and existing regression suites",
+  "results": [
+    {
+      "name": "navigation node regression",
+      "command": "pnpm run test:navigation",
+      "result": "passed",
+      "counts": { "passed": 6, "failed": 0 },
+      "log": "work/evidence/T15b/navigation-tests.log"
+    },
+    {
+      "name": "navigation Python negative/reference regression",
+      "command": "pnpm run test:navigation",
+      "result": "passed",
+      "counts": { "passed": 12, "failed": 0 },
+      "log": "work/evidence/T15b/navigation-tests.log"
+    },
+    {
+      "name": "existing project regressions",
+      "result": "passed",
+      "counts": { "search": "40/40", "annotations": "12/12", "spatialDrafts": "8/8" },
+      "logs": [
+        "work/evidence/T15b/search-regression.log",
+        "work/evidence/T15b/annotation-regression.log",
+        "work/evidence/T15b/spatial-draft-regression.log"
+      ]
+    },
+    {
+      "name": "T03 canonical contract and fixtures",
+      "command": "python3 atlas-data/schemas/validate.py --check-schemas --fixtures --dataset atlas-data/catalog/canonical-catalog.json",
+      "result": "passed",
+      "counts": { "fixtures": 17 },
+      "log": "work/evidence/T15b/canonical-validation.log"
+    },
+    {
+      "name": "navigation Draft 2020-12 and referential validator",
+      "command": "python3 atlas-data/navigation/validate_navigation.py",
+      "result": "passed",
+      "issues": 0,
+      "log": "work/evidence/T15b/navigation-validation.json"
+    },
+    {
+      "name": "migration dry-run determinism",
+      "commands": [
+        "python3 atlas-data/navigation/build_navigation.py --dry-run",
+        "python3 atlas-data/navigation/build_navigation.py --check"
+      ],
+      "result": "passed",
+      "outputMatchesGeneratedOverlay": true,
+      "log": "work/evidence/T15b/migration-dry-run.json"
+    },
+    {
+      "name": "learning content validation",
+      "command": "pnpm run validate:learning",
+      "result": "passed",
+      "counts": { "nameEntries": 81, "summaries": 14 },
+      "log": "work/evidence/T15b/learning-validation.log"
+    },
+    {
+      "name": "TypeScript typecheck",
+      "command": "pnpm run typecheck",
+      "result": "passed",
+      "log": "work/evidence/T15b/typecheck.log"
+    },
+    {
+      "name": "production build",
+      "command": "pnpm run build",
+      "result": "passed_with_existing_chunk_warning",
+      "warning": "The minified App chunk remains above 500 kB.",
+      "log": "work/evidence/T15b/build.log"
+    },
+    {
+      "name": "patch formatting",
+      "command": "git diff --check",
+      "result": "passed",
+      "log": "work/evidence/T15b/diff-check.log"
+    },
+    {
+      "name": "OpenSim/input preservation",
+      "result": "passed",
+      "details": "OpenSim HEAD/status, 11 protected project input hashes, all 22 atlas asset hashes, and the pre-existing 47 untracked snapshot entries match the task start baseline.",
+      "log": "work/evidence/T15b/preservation-after.json"
+    }
+  ],
+  "browser": {
+    "result": "not_run",
+    "reason": "T15b changed domain/data contracts only; learner and review UI files were not changed. Route and pick behavior were covered by domain tests."
+  },
+  "humanReview": "not_performed",
+  "attachmentGeometry": "none_added",
+  "motionAssets": "none_added"
+}

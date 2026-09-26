@@ -1,0 +1,25 @@
+$ node --experimental-strip-types --test src/viewer/spatialDraftLayer.test.ts && python3 scripts/validate-spatial-draft-schema.py
+✔ positive synthetic layer validates a source-linked surface while remaining fixture-only (6.263875ms)
+✔ context-only and pending states never contain geometry (1.217666ms)
+✔ source, instance, mesh, laterality, claim, revision, frame, unit, and pose mismatches are rejected (1.692334ms)
+✔ a changed topology retains the record as stale and does not mark it reviewed (0.472458ms)
+✔ reviewed state requires a current approved human review for the exact content hash (0.547375ms)
+✔ new review drafts bind current source claim hash and canonical instance (0.65575ms)
+✔ serialization reloads and a failed import leaves the prior stored document unchanged (1.353625ms)
+✔ legacy drafts are copied to pending without adding a source claim hash or altering the source record (0.714458ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 90.263833
+{
+  "passed": true,
+  "schema": "atlas-data/schemas/spatial-draft-layer.schema.json",
+  "positiveFixtureErrors": [],
+  "unknownFieldRejected": true,
+  "invalidStatusRejected": true,
+  "schemaErrors": []
+}

@@ -1,0 +1,28 @@
+$ node --experimental-strip-types --test src/viewer/annotationDrafts.test.ts && python3 scripts/validate-annotation-exchange-schema.py
+✔ positive synthetic fixture accepts point, polyline, and surface patch (0.983583ms)
+✔ side mismatch is rejected (0.440083ms)
+✔ asset revision mismatch is rejected (0.285667ms)
+✔ review promotion and duplicate stable IDs are rejected (0.679334ms)
+✔ topology hash change preserves a stale draft without rendering it as current (0.296084ms)
+✔ current topology rejects triangle IDs outside the indexed mesh (0.130083ms)
+✔ ordinary import rejects fixture mode unless the explicit fixture path is enabled (0.056375ms)
+✔ JSON export/import round trip keeps coordinates and draft-only state (0.161791ms)
+✔ source-linked manual drafts may remain instance-less until a real instance exists (0.130083ms)
+✔ asset revision hash mismatch is rejected (0.349625ms)
+✔ source attachment owner must match a known mesh target (0.198458ms)
+✔ T13 permits only a provenance-linked target-bone review draft (0.150833ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 76.4865
+{
+  "passed": true,
+  "schemaErrors": [],
+  "positiveErrors": [],
+  "reviewedStateRejected": true,
+  "unknownFieldRejected": true
+}
