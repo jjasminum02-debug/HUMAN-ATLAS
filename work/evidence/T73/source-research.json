@@ -1,0 +1,115 @@
+{
+  "accessedOn": "2026-09-28",
+  "alternateSourceCandidate": {
+    "archiveDownloaded": false,
+    "commonFrameAndRestPoseVerified": false,
+    "componentLicenseResolved": false,
+    "decision": "candidate_only; T93 must pin a version/revision and locate the exact object and per-component rights/frame evidence before any acquisition or registration task.",
+    "latissimusExactFilePath": null,
+    "latissimusExactFileSha256": null,
+    "latissimusExactObjectId": null,
+    "name": "Z-Anatomy Models of Human Anatomy",
+    "officialLicenseFile": "https://github.com/Z-Anatomy/Models-of-human-anatomy/blob/master/License.txt",
+    "officialReadme": "https://github.com/Z-Anatomy/Models-of-human-anatomy/blob/master/Readme.md",
+    "officialRepository": "https://github.com/Z-Anatomy/Models-of-human-anatomy",
+    "repositoryReadmeClaims": "Blender template includes models derived from BodyParts3D; code/content CC BY-SA 4.0; explicit third-party models include NC items."
+  },
+  "humanAnatomyReview": "not_performed; AI metadata/source identification does not approve anatomy",
+  "primarySource": {
+    "downloadPage": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html",
+    "historicLocalMeshHeaderCaveat": "T51 recorded legacy OBJ headers claiming CC BY-SA 2.1 Japan while current official database page says CC BY 4.0; existing file-level redistribution hold remains in force.",
+    "licensePage": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+    "meshArchiveAcquired": false,
+    "meshArchiveFullDownloads": [
+      {
+        "advertisedCompressedBytesApprox": 136000000,
+        "localArchiveAcquired": false,
+        "polygonReductionRate": "99%",
+        "tree": "IS-A",
+        "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip"
+      },
+      {
+        "advertisedCompressedBytesApprox": 62000000,
+        "localArchiveAcquired": false,
+        "polygonReductionRate": "99%",
+        "tree": "PART-OF",
+        "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/partof_BP3D_4.0_obj_99.zip"
+      }
+    ],
+    "metadataAccess": "Six official TSVs are present in the project cache and hashed; no mesh archive/download was attempted in T73.",
+    "metadataEditionNote": "The endpoints use /LATEST/; archived local TSVs are the exact six hashes listed below. The version text is BodyParts3D R4.0; LATEST label itself is not treated as a new release number.",
+    "metadataFiles": [
+      {
+        "bytes": 128086,
+        "edition": "BodyParts3D Release 4.0 metadata; official endpoint path is LATEST",
+        "logicalName": "isaConcepts",
+        "openedSource": true,
+        "path": "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_parts_list_e.txt",
+        "retrievedOn": "2026-09-27",
+        "rowsExcludingHeader": 2905,
+        "sha256": "ab7796deedd49205e77f3609a1cb8c53e2bbee14ecb5c9a6ca05227469780513",
+        "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_parts_list_e.txt"
+      },
+      {
+        "bytes": 59351,
+        "edition": "BodyParts3D Release 4.0 metadata; official endpoint path is LATEST",
+        "logicalName": "partofConcepts",
+        "openedSource": true,
+        "path": "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_parts_list_e.txt",
+        "retrievedOn": "2026-09-27",
+        "rowsExcludingHeader": 1368,
+        "sha256": "9224080557053e6f1322f1e13ab27f0ecde0db19bb3b505f0631afad230eeebd",
+        "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/partof_parts_list_e.txt"
+      },
+      {
+        "bytes": 207664,
+        "edition": "BodyParts3D Release 4.0 metadata; official endpoint path is LATEST",
+        "logicalName": "isaInclusion",
+        "openedSource": true,
+        "path": "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_inclusion_relation_list.txt",
+        "retrievedOn": "2026-09-27",
+        "rowsExcludingHeader": 2904,
+        "sha256": "26e7d818e03a8c909fe09c561f38d0d513423c87681f9450a803bc38f5b07564",
+        "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_inclusion_relation_list.txt"
+      },
+      {
+        "bytes": 91241,
+        "edition": "BodyParts3D Release 4.0 metadata; official endpoint path is LATEST",
+        "logicalName": "partofInclusion",
+        "openedSource": true,
+        "path": "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_inclusion_relation_list.txt",
+        "retrievedOn": "2026-09-27",
+        "rowsExcludingHeader": 1367,
+        "sha256": "1b40738270931e3c1d955ce34e0fce0d8d10d8c5ad543463e40b4b4c0243007c",
+        "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/partof_inclusion_relation_list.txt"
+      },
+      {
+        "bytes": 1142159,
+        "edition": "BodyParts3D Release 4.0 metadata; official endpoint path is LATEST",
+        "logicalName": "isaCompoundElements",
+        "openedSource": true,
+        "path": "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_element_parts.txt",
+        "retrievedOn": "2026-09-27",
+        "rowsExcludingHeader": 29549,
+        "sha256": "a3de74423f943b0d724ae8f59b3a817f87c423a544f8db98113b1980817cbeaf",
+        "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_element_parts.txt"
+      },
+      {
+        "bytes": 651179,
+        "edition": "BodyParts3D Release 4.0 metadata; official endpoint path is LATEST",
+        "logicalName": "partofCompoundElements",
+        "openedSource": true,
+        "path": "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_element_parts.txt",
+        "retrievedOn": "2026-09-27",
+        "rowsExcludingHeader": 17943,
+        "sha256": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea",
+        "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/partof_element_parts.txt"
+      }
+    ],
+    "officialDatabaseLicense": "CC BY 4.0 per official license page last updated 2025-02-27",
+    "readme": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/README_e.html",
+    "releaseDate": "2013-06-19 (official R4 update history)",
+    "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+    "version": "BodyParts3D Release 4.0; LATEST README updated 2025-02-27"
+  }
+}

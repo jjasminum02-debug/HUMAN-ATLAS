@@ -1,0 +1,998 @@
+{
+  "T71T72Supplements": {
+    "T71AddedSourceNodes": 9,
+    "T71DefaultVisible": 0,
+    "T71SourceOnlyUnbound": 9,
+    "T72AddedSourceNodes": 11,
+    "T72DefaultVisible": 0,
+    "T72SourceOnlyUnbound": 11,
+    "interpretation": "These supplements are historic source packages; the task-specific manifests retain opt-in/hidden display and rights/human-review holds. They are not added to T70 regional denominator counts."
+  },
+  "auditDate": "2026-09-28",
+  "historicT70Denominators": {
+    "T52toT55PackageMemberships": 495,
+    "T70BoneRootGapRemainingAfterT71T72": 26,
+    "T70FirstPassOriginalSourceCandidateCount": 20,
+    "T70OriginalBoneClosureMissingSourceElements": 35,
+    "T70ProductFirstPassMinimumOriginalConceptTargetCount": 10,
+    "T71FirstPassResidual": {
+      "basis": "T71 coverage recalculation after its 9-member package",
+      "of": 20,
+      "value": 11
+    },
+    "T72FirstPassResidual": {
+      "basis": "read from T72's recorded validation against its exact residual batch; not recomputed as whole-body coverage",
+      "of": 11,
+      "value": 0
+    },
+    "separation": "The T70 bone-root gap list and the first-pass 0/11 residual are independent historical counts and are not combined.",
+    "uniqueT52toT55SourceNodes": 493
+  },
+  "officialSourceVsProductRootRouting": {
+    "interpretation": "These are source hierarchy rows/unique FJ counts under current routing roots, not canonical anatomy denominators or whole-body coverage percentages.",
+    "officialBoneConceptsOutsideAll12Roots": 152,
+    "officialMuscleConceptsOutsideAll12Roots": 43,
+    "officialR4BoneOrganDescendantConceptCount": 320,
+    "officialR4BoneOrganDescendantFjCount": 203,
+    "officialR4MuscleOrganDescendantConceptCount": 535,
+    "officialR4MuscleOrganDescendantFjCount": 323,
+    "uniqueBoneConceptsIn12ConfiguredRoots": 168,
+    "uniqueBoneFjIn12ConfiguredRoots": 168,
+    "uniqueMuscleConceptsIn12ConfiguredRoots": 492,
+    "uniqueMuscleFjIn12ConfiguredRoots": 323
+  },
+  "regionCount": 12,
+  "regions": [
+    {
+      "CurrentRootCandidateNotAssignedByT70": [],
+      "CurrentRootCandidateNotAssignedByT70Count": 0,
+      "T51ExistingBindingSourceElementSupplementCount": 0,
+      "T51FrozenExpectedUniqueFjIncludingExistingBindingSupplement": 24,
+      "T51RootExpectedUniqueFj": 24,
+      "T70AssignedAndDefaultVisible": 24,
+      "T70AssignedButHidden": 0,
+      "T70AssignedOutsideCurrentRootCandidateCount": 0,
+      "T70AssignedOutsideCurrentRootCandidateSet": [],
+      "T70AssignedWithAnyHold": 0,
+      "T70HistoricalRegionAssignedUniqueFj": 24,
+      "T70HumanReviewPending": 24,
+      "T70PublicRedistributionHeld": 24,
+      "T70SourceOnlyUnbound": 24,
+      "T70WithLearnerBinding": 0,
+      "denominatorInterpretation": "package/routing inventory only; not canonical anatomy or whole-body coverage",
+      "labelKo": "머리",
+      "regionId": "head",
+      "rootCandidateCachedT50T72": 24,
+      "rootCandidateFj": {
+        "bone": 1,
+        "muscle": 23,
+        "uniqueUnion": 24
+      },
+      "rootCandidateNotInT50T72Packages": 0,
+      "routingRoots": {
+        "bone": [
+          {
+            "id": "FMA7154",
+            "name": "head",
+            "tree": "PART-OF"
+          }
+        ],
+        "muscle": [
+          {
+            "id": "FMA9616",
+            "name": "muscle of head",
+            "tree": "IS-A"
+          }
+        ]
+      },
+      "sourceConceptCounts": {
+        "bone": 1,
+        "muscle": 40
+      }
+    },
+    {
+      "CurrentRootCandidateNotAssignedByT70": [],
+      "CurrentRootCandidateNotAssignedByT70Count": 0,
+      "T51ExistingBindingSourceElementSupplementCount": 0,
+      "T51FrozenExpectedUniqueFjIncludingExistingBindingSupplement": 61,
+      "T51RootExpectedUniqueFj": 61,
+      "T70AssignedAndDefaultVisible": 59,
+      "T70AssignedButHidden": 2,
+      "T70AssignedOutsideCurrentRootCandidateCount": 0,
+      "T70AssignedOutsideCurrentRootCandidateSet": [],
+      "T70AssignedWithAnyHold": 2,
+      "T70HistoricalRegionAssignedUniqueFj": 61,
+      "T70HumanReviewPending": 61,
+      "T70PublicRedistributionHeld": 61,
+      "T70SourceOnlyUnbound": 59,
+      "T70WithLearnerBinding": 0,
+      "denominatorInterpretation": "package/routing inventory only; not canonical anatomy or whole-body coverage",
+      "labelKo": "목",
+      "regionId": "neck",
+      "rootCandidateCachedT50T72": 61,
+      "rootCandidateFj": {
+        "bone": 7,
+        "muscle": 54,
+        "uniqueUnion": 61
+      },
+      "rootCandidateNotInT50T72Packages": 0,
+      "routingRoots": {
+        "bone": [
+          {
+            "id": "FMA7155",
+            "name": "neck",
+            "tree": "PART-OF"
+          }
+        ],
+        "muscle": [
+          {
+            "id": "FMA9617",
+            "name": "muscle of neck",
+            "tree": "IS-A"
+          }
+        ]
+      },
+      "sourceConceptCounts": {
+        "bone": 7,
+        "muscle": 44
+      }
+    },
+    {
+      "CurrentRootCandidateNotAssignedByT70": [],
+      "CurrentRootCandidateNotAssignedByT70Count": 0,
+      "T51ExistingBindingSourceElementSupplementCount": 0,
+      "T51FrozenExpectedUniqueFjIncludingExistingBindingSupplement": 58,
+      "T51RootExpectedUniqueFj": 58,
+      "T70AssignedAndDefaultVisible": 54,
+      "T70AssignedButHidden": 4,
+      "T70AssignedOutsideCurrentRootCandidateCount": 0,
+      "T70AssignedOutsideCurrentRootCandidateSet": [],
+      "T70AssignedWithAnyHold": 4,
+      "T70HistoricalRegionAssignedUniqueFj": 58,
+      "T70HumanReviewPending": 58,
+      "T70PublicRedistributionHeld": 58,
+      "T70SourceOnlyUnbound": 54,
+      "T70WithLearnerBinding": 0,
+      "denominatorInterpretation": "package/routing inventory only; not canonical anatomy or whole-body coverage",
+      "labelKo": "등",
+      "regionId": "back",
+      "rootCandidateCachedT50T72": 58,
+      "rootCandidateFj": {
+        "bone": 0,
+        "muscle": 58,
+        "uniqueUnion": 58
+      },
+      "rootCandidateNotInT50T72Packages": 0,
+      "routingRoots": {
+        "bone": [
+          {
+            "id": "FMA24189",
+            "name": "back of neck",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA24217",
+            "name": "back of thorax",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA61681",
+            "name": "back of abdomen",
+            "tree": "PART-OF"
+          }
+        ],
+        "muscle": [
+          {
+            "id": "FMA22594",
+            "name": "muscle of vertebral column",
+            "tree": "IS-A"
+          }
+        ]
+      },
+      "sourceConceptCounts": {
+        "bone": 0,
+        "muscle": 96
+      }
+    },
+    {
+      "CurrentRootCandidateNotAssignedByT70": [],
+      "CurrentRootCandidateNotAssignedByT70Count": 0,
+      "T51ExistingBindingSourceElementSupplementCount": 0,
+      "T51FrozenExpectedUniqueFjIncludingExistingBindingSupplement": 24,
+      "T51RootExpectedUniqueFj": 24,
+      "T70AssignedAndDefaultVisible": 26,
+      "T70AssignedButHidden": 0,
+      "T70AssignedOutsideCurrentRootCandidateCount": 2,
+      "T70AssignedOutsideCurrentRootCandidateSet": [
+        "FJ3237",
+        "FJ3279"
+      ],
+      "T70AssignedWithAnyHold": 0,
+      "T70HistoricalRegionAssignedUniqueFj": 26,
+      "T70HumanReviewPending": 26,
+      "T70PublicRedistributionHeld": 26,
+      "T70SourceOnlyUnbound": 26,
+      "T70WithLearnerBinding": 0,
+      "denominatorInterpretation": "package/routing inventory only; not canonical anatomy or whole-body coverage",
+      "labelKo": "어깨·어깨뼈",
+      "regionId": "shoulder-scapular",
+      "rootCandidateCachedT50T72": 24,
+      "rootCandidateFj": {
+        "bone": 2,
+        "muscle": 22,
+        "uniqueUnion": 24
+      },
+      "rootCandidateNotInT50T72Packages": 0,
+      "routingRoots": {
+        "bone": [
+          {
+            "id": "FMA23218",
+            "name": "right pectoral girdle",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA23219",
+            "name": "left pectoral girdle",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA33642",
+            "name": "right shoulder",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA33644",
+            "name": "pectoral part of right pectoral girdle",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA33645",
+            "name": "pectoral part of left pectoral girdle",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA33646",
+            "name": "scapular part of right pectoral girdle",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA33647",
+            "name": "scapular part of left pectoral girdle",
+            "tree": "PART-OF"
+          }
+        ],
+        "muscle": [
+          {
+            "id": "FMA37347",
+            "name": "muscle of pectoral girdle",
+            "tree": "IS-A"
+          }
+        ]
+      },
+      "sourceConceptCounts": {
+        "bone": 2,
+        "muscle": 39
+      }
+    },
+    {
+      "CurrentRootCandidateNotAssignedByT70": [],
+      "CurrentRootCandidateNotAssignedByT70Count": 0,
+      "T51ExistingBindingSourceElementSupplementCount": 0,
+      "T51FrozenExpectedUniqueFjIncludingExistingBindingSupplement": 47,
+      "T51RootExpectedUniqueFj": 47,
+      "T70AssignedAndDefaultVisible": 44,
+      "T70AssignedButHidden": 3,
+      "T70AssignedOutsideCurrentRootCandidateCount": 0,
+      "T70AssignedOutsideCurrentRootCandidateSet": [],
+      "T70AssignedWithAnyHold": 3,
+      "T70HistoricalRegionAssignedUniqueFj": 47,
+      "T70HumanReviewPending": 47,
+      "T70PublicRedistributionHeld": 47,
+      "T70SourceOnlyUnbound": 44,
+      "T70WithLearnerBinding": 0,
+      "denominatorInterpretation": "package/routing inventory only; not canonical anatomy or whole-body coverage",
+      "labelKo": "가슴우리",
+      "regionId": "thorax",
+      "rootCandidateCachedT50T72": 47,
+      "rootCandidateFj": {
+        "bone": 38,
+        "muscle": 9,
+        "uniqueUnion": 47
+      },
+      "rootCandidateNotInT50T72Packages": 0,
+      "routingRoots": {
+        "bone": [
+          {
+            "id": "FMA9576",
+            "name": "thorax",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA7481",
+            "name": "skeletal system of thorax",
+            "tree": "PART-OF"
+          }
+        ],
+        "muscle": [
+          {
+            "id": "FMA9619",
+            "name": "muscle of thorax",
+            "tree": "IS-A"
+          }
+        ]
+      },
+      "sourceConceptCounts": {
+        "bone": 38,
+        "muscle": 9
+      }
+    },
+    {
+      "CurrentRootCandidateNotAssignedByT70": [],
+      "CurrentRootCandidateNotAssignedByT70Count": 0,
+      "T51ExistingBindingSourceElementSupplementCount": 0,
+      "T51FrozenExpectedUniqueFjIncludingExistingBindingSupplement": 2,
+      "T51RootExpectedUniqueFj": 2,
+      "T70AssignedAndDefaultVisible": 2,
+      "T70AssignedButHidden": 0,
+      "T70AssignedOutsideCurrentRootCandidateCount": 0,
+      "T70AssignedOutsideCurrentRootCandidateSet": [],
+      "T70AssignedWithAnyHold": 0,
+      "T70HistoricalRegionAssignedUniqueFj": 2,
+      "T70HumanReviewPending": 2,
+      "T70PublicRedistributionHeld": 2,
+      "T70SourceOnlyUnbound": 2,
+      "T70WithLearnerBinding": 0,
+      "denominatorInterpretation": "package/routing inventory only; not canonical anatomy or whole-body coverage",
+      "labelKo": "배·허리",
+      "regionId": "abdomen-lumbar",
+      "rootCandidateCachedT50T72": 2,
+      "rootCandidateFj": {
+        "bone": 0,
+        "muscle": 2,
+        "uniqueUnion": 2
+      },
+      "rootCandidateNotInT50T72Packages": 0,
+      "routingRoots": {
+        "bone": [
+          {
+            "id": "FMA9577",
+            "name": "abdomen",
+            "tree": "PART-OF"
+          }
+        ],
+        "muscle": [
+          {
+            "id": "FMA9620",
+            "name": "muscle of abdomen",
+            "tree": "IS-A"
+          }
+        ]
+      },
+      "sourceConceptCounts": {
+        "bone": 0,
+        "muscle": 5
+      }
+    },
+    {
+      "CurrentRootCandidateNotAssignedByT70": [],
+      "CurrentRootCandidateNotAssignedByT70Count": 0,
+      "T51ExistingBindingSourceElementSupplementCount": 0,
+      "T51FrozenExpectedUniqueFjIncludingExistingBindingSupplement": 7,
+      "T51RootExpectedUniqueFj": 7,
+      "T70AssignedAndDefaultVisible": 6,
+      "T70AssignedButHidden": 1,
+      "T70AssignedOutsideCurrentRootCandidateCount": 0,
+      "T70AssignedOutsideCurrentRootCandidateSet": [],
+      "T70AssignedWithAnyHold": 1,
+      "T70HistoricalRegionAssignedUniqueFj": 7,
+      "T70HumanReviewPending": 7,
+      "T70PublicRedistributionHeld": 7,
+      "T70SourceOnlyUnbound": 6,
+      "T70WithLearnerBinding": 0,
+      "denominatorInterpretation": "package/routing inventory only; not canonical anatomy or whole-body coverage",
+      "labelKo": "골반·샅",
+      "regionId": "pelvis-perineum",
+      "rootCandidateCachedT50T72": 7,
+      "rootCandidateFj": {
+        "bone": 0,
+        "muscle": 7,
+        "uniqueUnion": 7
+      },
+      "rootCandidateNotInT50T72Packages": 0,
+      "routingRoots": {
+        "bone": [
+          {
+            "id": "FMA9578",
+            "name": "pelvis",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA9579",
+            "name": "perineum",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA16580",
+            "name": "bony pelvis",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA20226",
+            "name": "right side of bony pelvis",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA20227",
+            "name": "left side of bony pelvis",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA20347",
+            "name": "anal part of perineum",
+            "tree": "PART-OF"
+          }
+        ],
+        "muscle": [
+          {
+            "id": "FMA9623",
+            "name": "perineal muscle",
+            "tree": "IS-A"
+          },
+          {
+            "id": "FMA19086",
+            "name": "muscle of pelvis",
+            "tree": "IS-A"
+          }
+        ]
+      },
+      "sourceConceptCounts": {
+        "bone": 0,
+        "muscle": 7
+      }
+    },
+    {
+      "CurrentRootCandidateNotAssignedByT70": [],
+      "CurrentRootCandidateNotAssignedByT70Count": 0,
+      "T51ExistingBindingSourceElementSupplementCount": 0,
+      "T51FrozenExpectedUniqueFjIncludingExistingBindingSupplement": 24,
+      "T51RootExpectedUniqueFj": 24,
+      "T70AssignedAndDefaultVisible": 24,
+      "T70AssignedButHidden": 0,
+      "T70AssignedOutsideCurrentRootCandidateCount": 0,
+      "T70AssignedOutsideCurrentRootCandidateSet": [],
+      "T70AssignedWithAnyHold": 0,
+      "T70HistoricalRegionAssignedUniqueFj": 24,
+      "T70HumanReviewPending": 24,
+      "T70PublicRedistributionHeld": 24,
+      "T70SourceOnlyUnbound": 24,
+      "T70WithLearnerBinding": 0,
+      "denominatorInterpretation": "package/routing inventory only; not canonical anatomy or whole-body coverage",
+      "labelKo": "볼기·깊은엉덩이",
+      "regionId": "gluteal-hip",
+      "rootCandidateCachedT50T72": 24,
+      "rootCandidateFj": {
+        "bone": 2,
+        "muscle": 22,
+        "uniqueUnion": 24
+      },
+      "rootCandidateNotInT50T72Packages": 0,
+      "routingRoots": {
+        "bone": [
+          {
+            "id": "FMA24965",
+            "name": "right hip",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA24966",
+            "name": "left hip",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA16581",
+            "name": "pelvic girdle",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA16582",
+            "name": "right pelvic girdle",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA16583",
+            "name": "left pelvic girdle",
+            "tree": "PART-OF"
+          }
+        ],
+        "muscle": [
+          {
+            "id": "FMA37367",
+            "name": "muscle of pelvic girdle",
+            "tree": "IS-A"
+          }
+        ]
+      },
+      "sourceConceptCounts": {
+        "bone": 2,
+        "muscle": 37
+      }
+    },
+    {
+      "CurrentRootCandidateNotAssignedByT70": [],
+      "CurrentRootCandidateNotAssignedByT70Count": 0,
+      "T51ExistingBindingSourceElementSupplementCount": 0,
+      "T51FrozenExpectedUniqueFjIncludingExistingBindingSupplement": 20,
+      "T51RootExpectedUniqueFj": 20,
+      "T70AssignedAndDefaultVisible": 20,
+      "T70AssignedButHidden": 0,
+      "T70AssignedOutsideCurrentRootCandidateCount": 0,
+      "T70AssignedOutsideCurrentRootCandidateSet": [],
+      "T70AssignedWithAnyHold": 0,
+      "T70HistoricalRegionAssignedUniqueFj": 20,
+      "T70HumanReviewPending": 20,
+      "T70PublicRedistributionHeld": 20,
+      "T70SourceOnlyUnbound": 20,
+      "T70WithLearnerBinding": 0,
+      "denominatorInterpretation": "package/routing inventory only; not canonical anatomy or whole-body coverage",
+      "labelKo": "넙다리",
+      "regionId": "thigh",
+      "rootCandidateCachedT50T72": 20,
+      "rootCandidateFj": {
+        "bone": 2,
+        "muscle": 18,
+        "uniqueUnion": 20
+      },
+      "rootCandidateNotInT50T72Packages": 0,
+      "routingRoots": {
+        "bone": [
+          {
+            "id": "FMA24968",
+            "name": "right thigh",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA24969",
+            "name": "left thigh",
+            "tree": "PART-OF"
+          }
+        ],
+        "muscle": [
+          {
+            "id": "FMA22470",
+            "name": "muscle of thigh",
+            "tree": "IS-A"
+          }
+        ]
+      },
+      "sourceConceptCounts": {
+        "bone": 2,
+        "muscle": 31
+      }
+    },
+    {
+      "CurrentRootCandidateNotAssignedByT70": [],
+      "CurrentRootCandidateNotAssignedByT70Count": 0,
+      "T51ExistingBindingSourceElementSupplementCount": 2,
+      "T51FrozenExpectedUniqueFjIncludingExistingBindingSupplement": 30,
+      "T51RootExpectedUniqueFj": 28,
+      "T70AssignedAndDefaultVisible": 30,
+      "T70AssignedButHidden": 0,
+      "T70AssignedOutsideCurrentRootCandidateCount": 2,
+      "T70AssignedOutsideCurrentRootCandidateSet": [
+        "FJ1394",
+        "FJ1397"
+      ],
+      "T70AssignedWithAnyHold": 0,
+      "T70HistoricalRegionAssignedUniqueFj": 30,
+      "T70HumanReviewPending": 30,
+      "T70PublicRedistributionHeld": 30,
+      "T70SourceOnlyUnbound": 21,
+      "T70WithLearnerBinding": 9,
+      "denominatorInterpretation": "package/routing inventory only; not canonical anatomy or whole-body coverage",
+      "labelKo": "종아리",
+      "regionId": "leg",
+      "rootCandidateCachedT50T72": 28,
+      "rootCandidateFj": {
+        "bone": 4,
+        "muscle": 24,
+        "uniqueUnion": 28
+      },
+      "rootCandidateNotInT50T72Packages": 0,
+      "routingRoots": {
+        "bone": [
+          {
+            "id": "FMA24980",
+            "name": "right leg",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA24981",
+            "name": "left leg",
+            "tree": "PART-OF"
+          }
+        ],
+        "muscle": [
+          {
+            "id": "FMA22471",
+            "name": "muscle of leg",
+            "tree": "IS-A"
+          }
+        ]
+      },
+      "sourceConceptCounts": {
+        "bone": 4,
+        "muscle": 42
+      }
+    },
+    {
+      "CurrentRootCandidateNotAssignedByT70": [],
+      "CurrentRootCandidateNotAssignedByT70Count": 0,
+      "T51ExistingBindingSourceElementSupplementCount": 0,
+      "T51FrozenExpectedUniqueFjIncludingExistingBindingSupplement": 80,
+      "T51RootExpectedUniqueFj": 80,
+      "T70AssignedAndDefaultVisible": 80,
+      "T70AssignedButHidden": 0,
+      "T70AssignedOutsideCurrentRootCandidateCount": 0,
+      "T70AssignedOutsideCurrentRootCandidateSet": [],
+      "T70AssignedWithAnyHold": 0,
+      "T70HistoricalRegionAssignedUniqueFj": 80,
+      "T70HumanReviewPending": 80,
+      "T70PublicRedistributionHeld": 80,
+      "T70SourceOnlyUnbound": 79,
+      "T70WithLearnerBinding": 1,
+      "denominatorInterpretation": "package/routing inventory only; not canonical anatomy or whole-body coverage",
+      "labelKo": "발",
+      "regionId": "foot",
+      "rootCandidateCachedT50T72": 80,
+      "rootCandidateFj": {
+        "bone": 52,
+        "muscle": 28,
+        "uniqueUnion": 80
+      },
+      "rootCandidateNotInT50T72Packages": 0,
+      "routingRoots": {
+        "bone": [
+          {
+            "id": "FMA11343",
+            "name": "right foot",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA11344",
+            "name": "left foot",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA73086",
+            "name": "right foot proper",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA73087",
+            "name": "left foot proper",
+            "tree": "PART-OF"
+          }
+        ],
+        "muscle": [
+          {
+            "id": "FMA37369",
+            "name": "muscle of foot",
+            "tree": "IS-A"
+          }
+        ]
+      },
+      "sourceConceptCounts": {
+        "bone": 52,
+        "muscle": 49
+      }
+    },
+    {
+      "CurrentRootCandidateNotAssignedByT70": [],
+      "CurrentRootCandidateNotAssignedByT70Count": 0,
+      "T51ExistingBindingSourceElementSupplementCount": 0,
+      "T51FrozenExpectedUniqueFjIncludingExistingBindingSupplement": 118,
+      "T51RootExpectedUniqueFj": 118,
+      "T70AssignedAndDefaultVisible": 116,
+      "T70AssignedButHidden": 2,
+      "T70AssignedOutsideCurrentRootCandidateCount": 0,
+      "T70AssignedOutsideCurrentRootCandidateSet": [],
+      "T70AssignedWithAnyHold": 2,
+      "T70HistoricalRegionAssignedUniqueFj": 118,
+      "T70HumanReviewPending": 118,
+      "T70PublicRedistributionHeld": 118,
+      "T70SourceOnlyUnbound": 116,
+      "T70WithLearnerBinding": 0,
+      "denominatorInterpretation": "package/routing inventory only; not canonical anatomy or whole-body coverage",
+      "labelKo": "팔·손",
+      "regionId": "upper-limb",
+      "rootCandidateCachedT50T72": 118,
+      "rootCandidateFj": {
+        "bone": 62,
+        "muscle": 56,
+        "uniqueUnion": 118
+      },
+      "rootCandidateNotInT50T72Packages": 0,
+      "routingRoots": {
+        "bone": [
+          {
+            "id": "FMA7185",
+            "name": "right upper limb",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA7186",
+            "name": "left upper limb",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA24880",
+            "name": "right free upper limb",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA24881",
+            "name": "left free upper limb",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA9713",
+            "name": "right hand",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA9714",
+            "name": "left hand",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA11345",
+            "name": "right forearm",
+            "tree": "PART-OF"
+          },
+          {
+            "id": "FMA11346",
+            "name": "left forearm",
+            "tree": "PART-OF"
+          }
+        ],
+        "muscle": [
+          {
+            "id": "FMA37348",
+            "name": "muscle of free upper limb",
+            "tree": "IS-A"
+          }
+        ]
+      },
+      "sourceConceptCounts": {
+        "bone": 62,
+        "muscle": 93
+      }
+    }
+  ],
+  "rootReproduction": {
+    "causeSummary": [
+      "Configured source-root closures are narrow routing rules, not anatomical product-region memberships.",
+      "A concept can be outside a configured region root even when exact source concept/ELEMENT rows exist elsewhere in the official source tree.",
+      "An exact source row does not mean the corresponding FJ was acquired; missing cached members are not download failures because no full archive acquisition was attempted.",
+      "One required target (latissimus dorsi) has no matching entry in this frozen R4 metadata edition; this is distinct from an uncached FJ."
+    ],
+    "deltoid": {
+      "conceptTargetIds": [
+        "FMA34676",
+        "FMA34680",
+        "FMA34681",
+        "FMA34682",
+        "FMA34683",
+        "FMA34684",
+        "FMA34685"
+      ],
+      "intersectingExistingRegionRoots": [],
+      "missedByAll12ExistingMuscleRoots": [
+        "FMA34676",
+        "FMA34680",
+        "FMA34681",
+        "FMA34682",
+        "FMA34683",
+        "FMA34684",
+        "FMA34685"
+      ]
+    },
+    "head": {
+      "configuredRoot": "FMA7154 (head), PART-OF",
+      "intersectingBoneFj": [
+        "FJ3380"
+      ],
+      "intersectingBoneOrganConceptIds": [
+        "FMA52788"
+      ],
+      "intersectingBoneOrganConcepts": 1,
+      "leftParietalPresent": false,
+      "rightParietalPresent": true,
+      "skullRootUsedForComparison": "FMA46565 (skull), PART-OF; comparison only, not a silent route replacement",
+      "skullSubtreeBoneConceptCount": 22,
+      "skullSubtreeFjCount": 23
+    },
+    "latissimus": {
+      "conceptAndElementMatches": 0,
+      "exactSubstringSearchResultsByTable": {
+        "isaCompoundElements": [],
+        "isaConcepts": [],
+        "isaInclusion": [],
+        "partofCompoundElements": [],
+        "partofConcepts": [],
+        "partofInclusion": []
+      },
+      "interpretation": "Edition metadata gap, not mesh-download failure; alternate source unresolved."
+    },
+    "method": "Imported atlas-data/tools/ingest_bodyparts3d_r4.py and invoked its region_map() against the six frozen official TSVs; no alternate root algorithm was substituted.",
+    "pelvicFloor": {
+      "specificMissedBranch": "FMA19089 levator ani -> FMA19090 pubococcygeus / FMA19092 iliococcygeus and side-specific descendants; the configured pelvis roots include FMA19086 coccygeus but not the FMA19089 branch.",
+      "targetConceptIds": [
+        "FMA19088",
+        "FMA19089",
+        "FMA19090",
+        "FMA19092",
+        "FMA45854",
+        "FMA45855",
+        "FMA45858",
+        "FMA45859",
+        "FMA46443",
+        "FMA46444"
+      ],
+      "targetConceptsInsidePelvisRootClosure": [
+        "FMA19088",
+        "FMA46443",
+        "FMA46444"
+      ],
+      "targetConceptsOutsidePelvisRootClosure": [
+        "FMA19089",
+        "FMA19090",
+        "FMA19092",
+        "FMA45854",
+        "FMA45855",
+        "FMA45858",
+        "FMA45859"
+      ]
+    },
+    "trapezius": {
+      "conceptTargetIds": [
+        "FMA32529",
+        "FMA32555",
+        "FMA32556",
+        "FMA32557",
+        "FMA33581",
+        "FMA33583",
+        "FMA33584",
+        "FMA33585",
+        "FMA33586",
+        "FMA33587"
+      ],
+      "intersectingExistingRegionRoots": [],
+      "missedByAll12ExistingMuscleRoots": [
+        "FMA32529",
+        "FMA32555",
+        "FMA32556",
+        "FMA32557",
+        "FMA33581",
+        "FMA33583",
+        "FMA33584",
+        "FMA33585",
+        "FMA33586",
+        "FMA33587"
+      ]
+    }
+  },
+  "sourceInventory": "BodyParts3D Release 4.0 six cached metadata files",
+  "targetCountPolicy": "Counts are bounded visual source targets only, not a whole-body muscle/bone denominator.",
+  "targetSets": {
+    "bilateral-skull-visual-silhouette": {
+      "acquiredInT50T72": 1,
+      "conceptTargetCount": 10,
+      "memberIds": [
+        "FJ3269",
+        "FJ3272",
+        "FJ3274",
+        "FJ3281",
+        "FJ3287",
+        "FJ3375",
+        "FJ3378",
+        "FJ3380",
+        "FJ3386",
+        "FJ3392"
+      ],
+      "membersDefaultHidden": 0,
+      "membersHeldForRights": 1,
+      "membersHumanReviewPending": 1,
+      "membersLearnerLinked": 0,
+      "membersSourceOnlyUnbound": 1,
+      "notAcquiredInT50T72": 9,
+      "sourceAvailability": "metadata_members_present",
+      "task": "T74",
+      "uniqueExactFjCount": 10
+    },
+    "deltoid-side-specific-parts": {
+      "acquiredInT50T72": 0,
+      "conceptTargetCount": 6,
+      "memberIds": [
+        "FJ1467",
+        "FJ1467M",
+        "FJ1468",
+        "FJ1468M",
+        "FJ1513",
+        "FJ1513M"
+      ],
+      "membersDefaultHidden": 0,
+      "membersHeldForRights": 0,
+      "membersHumanReviewPending": 0,
+      "membersLearnerLinked": 0,
+      "membersSourceOnlyUnbound": 0,
+      "notAcquiredInT50T72": 6,
+      "sourceAvailability": "metadata_members_present",
+      "task": "T75",
+      "uniqueExactFjCount": 6
+    },
+    "latissimus-dorsi-alternate-source-gap": {
+      "acquiredInT50T72": 0,
+      "conceptTargetCount": 1,
+      "memberIds": [],
+      "membersDefaultHidden": 0,
+      "membersHeldForRights": 0,
+      "membersHumanReviewPending": 0,
+      "membersLearnerLinked": 0,
+      "membersSourceOnlyUnbound": 0,
+      "notAcquiredInT50T72": null,
+      "sourceAvailability": "no_matching_source_in_R4_metadata",
+      "task": "T75",
+      "uniqueExactFjCount": 0
+    },
+    "pelvic-floor-muscle-group-and-side-parts": {
+      "acquiredInT50T72": 3,
+      "conceptTargetCount": 10,
+      "memberIds": [
+        "FJ1449M",
+        "FJ1453M",
+        "FJ1457M",
+        "FJ1458M",
+        "FJ2542",
+        "FJ2544",
+        "FJ2545",
+        "FJ2546",
+        "FJ2547",
+        "FJ2549",
+        "FJ2550",
+        "FJ2551"
+      ],
+      "membersDefaultHidden": 0,
+      "membersHeldForRights": 3,
+      "membersHumanReviewPending": 3,
+      "membersLearnerLinked": 0,
+      "membersSourceOnlyUnbound": 3,
+      "notAcquiredInT50T72": 9,
+      "sourceAvailability": "metadata_members_present",
+      "task": "T76",
+      "uniqueExactFjCount": 12
+    },
+    "trapezius-region-visual-context": {
+      "acquiredInT50T72": 0,
+      "conceptTargetCount": 10,
+      "memberIds": [
+        "FJ1520",
+        "FJ1520M",
+        "FJ1521",
+        "FJ1521M",
+        "FJ1554",
+        "FJ1554M"
+      ],
+      "membersDefaultHidden": 0,
+      "membersHeldForRights": 0,
+      "membersHumanReviewPending": 0,
+      "membersLearnerLinked": 0,
+      "membersSourceOnlyUnbound": 0,
+      "notAcquiredInT50T72": 6,
+      "sourceAvailability": "metadata_members_present",
+      "task": "T92",
+      "uniqueExactFjCount": 6
+    }
+  },
+  "task": "T73"
+}

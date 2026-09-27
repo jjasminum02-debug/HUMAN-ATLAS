@@ -1,0 +1,120 @@
+{
+  "registrySha256": "9cb7f7dd1d9edd8c9e08ca3a662dacfd44ca3db94aa5aee265f4c4b5aeb2cad1",
+  "statusSha256": "5afaade5d0b1ac965280d8f12e876d9ebd3c02012cb6f3877fdaf697cc7569b4",
+  "nextTask": "T74",
+  "nextUnallocatedNumericId": 94,
+  "activeQueue": [
+    "T50",
+    "T51",
+    "T52",
+    "T69",
+    "T53",
+    "T54",
+    "T55",
+    "T70",
+    "T71",
+    "T72",
+    "T56",
+    "T57",
+    "T73",
+    "T74",
+    "T75",
+    "T76",
+    "T92",
+    "T93",
+    "T77",
+    "T78",
+    "T79",
+    "T80",
+    "T58",
+    "T81",
+    "T82",
+    "T83",
+    "T84",
+    "T35",
+    "T59",
+    "T60",
+    "T25",
+    "T27",
+    "T28",
+    "T45",
+    "T46",
+    "T29",
+    "T31",
+    "T66",
+    "T47",
+    "T85",
+    "T61",
+    "T86",
+    "T62",
+    "T87",
+    "T88",
+    "T63",
+    "T89",
+    "T90",
+    "T64",
+    "T91",
+    "T65",
+    "T40"
+  ],
+  "taskStatuses": {
+    "T73": "passed_with_gaps",
+    "T74": "planned_not_started",
+    "T75": "planned_not_started",
+    "T76": "planned_not_started",
+    "T77": "planned_not_started",
+    "T79": "planned_not_started",
+    "T80": "planned_not_started",
+    "T92": "planned_not_started",
+    "T93": "planned_not_started"
+  },
+  "T76": {
+    "defaultNext": "T92",
+    "prerequisiteIds": [
+      "T73",
+      "T75"
+    ]
+  },
+  "T77": {
+    "prerequisite": "T73–76 plus inserted T92/T93 outcomes; any conditional T94 from T93 must also finish before T77",
+    "prerequisiteIds": [
+      "T73",
+      "T74",
+      "T75",
+      "T76",
+      "T92",
+      "T93"
+    ],
+    "coverageGateAmendment": "T73 mandatory visual targets include exact bilateral skull subset, side-specific deltoid, pelvic-floor source set, trapezius visual-context source package (T92), and a resolved latissimus source decision (T93). If T93 inserts a bounded T94 acquisition/registration task, T77 waits for it; unresolved source/rights/frame keeps T77 partial."
+  },
+  "historicalCoverageRepairAmendment": {
+    "date": "2026-09-28",
+    "design": "design/2026-09-25-muscle-atlas/17-VISUAL-COVERAGE-REPAIR.md",
+    "prompts": "design/2026-09-25-muscle-atlas/18-SERIAL-PROMPTS-AFTER-T58.md",
+    "status": "planning_only",
+    "historicalT58": "partial; preserve report and implementation",
+    "queue": "T73 → T74 → T75 → T76 → T92 → T93 → conditional T93 follow-up if inserted → T77 → T78 → T58 recheck → T59",
+    "gates": "Separate target/source/display/binding/content/motion coverage; no first-pass subset as whole-body denominator",
+    "insertedTasks": [
+      {
+        "id": "T92",
+        "position": "after T76 before T77",
+        "purpose": "bounded trapezius source package; 10 source concepts / 6 unique FJ members",
+        "status": "planned_not_started"
+      },
+      {
+        "id": "T93",
+        "position": "after T92 before T77",
+        "purpose": "metadata-only alternate-source identity/rights/frame investigation for latissimus dorsi",
+        "status": "planned_not_started"
+      }
+    ]
+  },
+  "statusCurrentLine": "- CURRENT_TASK: T73 - passed_with_gaps; 12-region source-root audit and exact visual target freeze complete. T58 learner graphic gate remains partial until inserted source tasks and later integrated QA.",
+  "statusNextLine": "- NEXT_TASK: T74 / Luna Max. Live R15 queue inserts T92 (trapezius source batch) and T93 (latissimus alternate-source research) before T77; any T93 conditional follow-up must also precede T77.",
+  "statusLastReportLine": "- LAST_REPORT: work/reports/T73.md",
+  "sharedFilesToRemainUnstaged": [
+    "work/STATUS.md",
+    "work/task-registry-r15.json"
+  ]
+}
