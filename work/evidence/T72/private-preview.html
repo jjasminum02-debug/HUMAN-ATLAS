@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T72 same-frame source QA</title>
+<style>
+:root{color-scheme:dark;font:14px/1.45 system-ui,sans-serif;background:#10151b;color:#e7ebef}*{box-sizing:border-box}body{margin:0;width:100vw;height:100vh;display:grid;grid-template-columns:300px minmax(0,1fr);overflow:hidden}aside{border-right:1px solid #34404b;padding:14px;overflow:auto}main{min-width:0;min-height:0;height:100vh;display:grid;grid-template-rows:auto minmax(0,1fr) auto}#toolbar{display:flex;gap:8px;padding:10px;flex-wrap:wrap;border-bottom:1px solid #34404b}button{color:inherit;background:#202a34;border:1px solid #536372;border-radius:4px;padding:8px 10px;min-height:40px;cursor:pointer}button[aria-pressed=true]{outline:2px solid #84c5ff}button:focus-visible{outline:3px solid #ffd76a;outline-offset:2px}#stage{position:relative;min-height:0;min-width:0}canvas{display:block;width:100%;height:100%;outline:none}#status{padding:8px 12px;border-top:1px solid #34404b;color:#bdc9d4}.legend{color:#bac6d1;font-size:12px}#list{display:grid;gap:4px;margin-top:8px}#list button{text-align:left;font-size:12px}.selected{padding:10px;border:1px solid #536372;min-height:66px;margin-top:10px;white-space:pre-wrap}
+@media(max-width:700px){body{grid-template-columns:1fr;grid-template-rows:44vh 56vh}aside{border-right:0;border-bottom:1px solid #34404b;max-height:44vh}main{height:56vh}#stage,canvas{min-height:0}}
+</style>
+</head>
+<body>
+<aside><strong>내부 정적 자산 검증</strong><p class="legend">T72 local QA only · BodyParts3D R4 · 제품 학습 화면이 아닙니다. 공개 배포·사람 검토 승인이 아닙니다.</p><p class="legend">T52 head/neck, T53 trunk, T54 shoulder, T55 limb, T71 skeleton, T72 target meshes를 원본 공유 frame의 하나의 AnatomySceneRoot/canvas에 로드합니다.</p><div id="selected" class="selected" aria-live="polite">구조 선택 없음</div><div id="list" aria-label="T72 exact source targets"></div><p class="legend">↑/↓ 선택 · 1 정면 · 2 후면 · 3 측면 · Esc 전체 보기</p></aside>
+<main><div id="toolbar" role="toolbar" aria-label="정적 QA 카메라"><button data-view="front" aria-pressed="true">정면 (+Z)</button><button data-view="back" aria-pressed="false">후면 (-Z)</button><button data-view="side" aria-pressed="false">측면 (+X)</button><button id="fit">전체 보기</button></div><div id="stage"><canvas id="canvas" tabindex="0" aria-label="T72 same-frame regional static source QA"></canvas></div><div id="status" role="status">정적 패키지를 불러오는 중</div></main>
+<script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.js"}}</script>
+<script type="module" src="./private-preview.mjs"></script>
+</body></html>

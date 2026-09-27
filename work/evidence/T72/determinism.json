@@ -1,0 +1,23 @@
+{
+  "buildCommand": "python3 atlas-data/tools/build_bodyparts3d_r4_t72.py",
+  "byteIdenticalAcrossTwoBuilds": true,
+  "fullArchiveDownloaded": false,
+  "revision": "T72-REPRODUCIBLE-BUILD-v1",
+  "runs": [
+    {
+      "atlas-data/manifests/bodyparts3d-r4-t72/integration-extension.json": "0f03ab6e00cdd37179a6af32a377b19b776cce044f3224478d4c062655e00c70",
+      "atlas-data/manifests/bodyparts3d-r4-t72/source-manifest.json": "f1ee55b06e66d51aeae1539732150071c887a0b8c4519a1b18db4e28f04f18cf",
+      "atlas-data/source-cache/bodyparts3d-r4/converted/t72/T72-first-pass-residual-static-source.glb": "56162acae94485b603d4d888347951733a0501b586c0400e065061ac14e02104"
+    },
+    {
+      "atlas-data/manifests/bodyparts3d-r4-t72/integration-extension.json": "0f03ab6e00cdd37179a6af32a377b19b776cce044f3224478d4c062655e00c70",
+      "atlas-data/manifests/bodyparts3d-r4-t72/source-manifest.json": "f1ee55b06e66d51aeae1539732150071c887a0b8c4519a1b18db4e28f04f18cf",
+      "atlas-data/source-cache/bodyparts3d-r4/converted/t72/T72-first-pass-residual-static-source.glb": "56162acae94485b603d4d888347951733a0501b586c0400e065061ac14e02104"
+    }
+  ],
+  "sourceAcquisitionCheck": "pass",
+  "sourceAcquisitionCheckCommand": "python3 atlas-data/tools/acquire_bodyparts3d_r4_t72.py --check",
+  "task": "T72",
+  "unitTestCommand": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest atlas-data/tools/test_bodyparts3d_r4_t72.py -v",
+  "unitTestResult": "7 tests passed"
+}

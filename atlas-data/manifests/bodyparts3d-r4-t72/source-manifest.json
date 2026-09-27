@@ -1,0 +1,2954 @@
+{
+  "aabbPolicy": "AABB is broadphase only; no surface contact/joint fit/collision claim is made.",
+  "batchIds": [
+    "T72-B01",
+    "T72-B02"
+  ],
+  "humanAnatomyReviewed": false,
+  "identityPolicy": "T70 candidate FMA, exact OBJ header FMA, BP representation ID, FJ source ID, and canonical HA ID remain distinct. No canonical learner binding is created.",
+  "inputs": {
+    "acquisitionManifest": "work/evidence/T72/source-acquisition.json",
+    "acquisitionManifestSha256": "816ab4913912a75fc331634b274c56149cea5dc8dd556e3fb67a713a7e866894",
+    "frozenMembershipSha256": "5714c5b2988200ce0a276b627a1af047914eaf377e8b1b62c3141f2a2852995c",
+    "frozenSourceSet": "work/evidence/T72/frozen-source-set.json",
+    "frozenSourceSetSha256": "0ca12d3b8fbcef08e96d93eee374c1b25c9ea2a40ac953c35c7cb687d6e9924f",
+    "officialMetadataSha256": {
+      "isa_element_parts.txt": "a3de74423f943b0d724ae8f59b3a817f87c423a544f8db98113b1980817cbeaf",
+      "isa_inclusion_relation_list.txt": "26e7d818e03a8c909fe09c561f38d0d513423c87681f9450a803bc38f5b07564",
+      "isa_parts_list_e.txt": "ab7796deedd49205e77f3609a1cb8c53e2bbee14ecb5c9a6ca05227469780513",
+      "partof_element_parts.txt": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea",
+      "partof_inclusion_relation_list.txt": "1b40738270931e3c1d955ce34e0fce0d8d10d8c5ad543463e40b4b4c0243007c",
+      "partof_parts_list_e.txt": "9224080557053e6f1322f1e13ab27f0ecde0db19bb3b505f0631afad230eeebd"
+    },
+    "t70IntegrationManifestSha256": "cc3730f241716ae753a99e9210fbbc77a1f0bef0f4982efbc69837393124cc4f",
+    "t70ScopeInventorySha256": "edae7afa21f953e78f2a19c6137cbf13bb3a509b6fc4bb5726cd697ab855a355",
+    "t71HistoricalIntegrationManifestSha256": "5bf22cd9dbd9adee4f7e3fe7f7e6b653b60314c018c007e2790bdf7bf167a654",
+    "t71HistoricalSourceManifestSha256": "a21b453350996c6545cd15aef405faf22678761ef613ca45064a01f426c1ed36"
+  },
+  "lateralityPolicy": "Side assignments use explicit side-specific FMA rows in official R4 relations plus the exact OBJ header concept/name. FJ suffix and coordinate sign are not evidence; all transforms preserve x sign.",
+  "manifestSha256": "2f1866728bdf3e7f5e4601cb45c692c64a1dec2b9b578d700dbd9429b1655dbb",
+  "meshRecords": [
+    {
+      "atlasBoundsM": {
+        "max": [
+          -0.06291449815034866,
+          0.8711040019989014,
+          0.15246599912643433
+        ],
+        "min": [
+          -0.154449000954628,
+          0.31470799446105957,
+          0.08389980345964432
+        ]
+      },
+      "externalConceptId": "FMA38928",
+      "geometrySha256": "97a1c111c977390766a69d8a9b1063a53028fbc46bf3d8d278553bfbbe63fe51",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1433",
+      "meshIndex": 0,
+      "modelId": "HA-MODEL-BP3D4-T72-FIRST-PASS-RESIDUAL-QA",
+      "nodeIndex": 0,
+      "nodeName": "HA-MESH-BP3D4-FJ1433",
+      "normalCount": 3326,
+      "normalSha256": "b13665e79653295a1e674cf12add2dda950aa1e6a0ada6225948c6d1ba28cacc",
+      "productCandidateRegion": "thigh",
+      "representationId": "BP5598",
+      "sourceBoundsMm": {
+        "max": [
+          -62.9145,
+          -83.8998,
+          871.104
+        ],
+        "min": [
+          -154.449,
+          -152.466,
+          314.708
+        ]
+      },
+      "sourceBytes": 389745,
+      "sourceElementFileId": "FJ1433",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ1433.obj",
+      "sourceFileId": "FJ1433",
+      "sourceFmaConceptId": "FMA38928",
+      "sourceRepresentationId": "BP5598",
+      "sourceSha256": "a5f75907d784dd2a44d7efa96cb31009aba2afe43465336b105561751b19f8ef",
+      "topologySha256": "420baff6807bb70a7ffee7c9e4bd504b32009cd6f03c6ccfcdbff3fc77595c47",
+      "triangleCount": 5688,
+      "vertexCount": 3326
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.154449000954628,
+          0.8711040019989014,
+          0.15246599912643433
+        ],
+        "min": [
+          0.06291449815034866,
+          0.31470799446105957,
+          0.08389980345964432
+        ]
+      },
+      "externalConceptId": "FMA38929",
+      "geometrySha256": "0dbede59b46fa9287d2abcdef60b6019ab2199bcadc302707709ccbd4b331ef7",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1433M",
+      "meshIndex": 1,
+      "modelId": "HA-MODEL-BP3D4-T72-FIRST-PASS-RESIDUAL-QA",
+      "nodeIndex": 1,
+      "nodeName": "HA-MESH-BP3D4-FJ1433M",
+      "normalCount": 3326,
+      "normalSha256": "8153b6dc2fc8ca221c9515cc831f9c2f012d805478a1f1f2aa2304de2dcb3c59",
+      "productCandidateRegion": "thigh",
+      "representationId": "BP8094",
+      "sourceBoundsMm": {
+        "max": [
+          154.449,
+          -83.8998,
+          871.104
+        ],
+        "min": [
+          62.9145,
+          -152.466,
+          314.708
+        ]
+      },
+      "sourceBytes": 386385,
+      "sourceElementFileId": "FJ1433M",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ1433M.obj",
+      "sourceFileId": "FJ1433M",
+      "sourceFmaConceptId": "FMA38929",
+      "sourceRepresentationId": "BP8094",
+      "sourceSha256": "3871310f1c1f76ca55cfa4fe043d2e3a25488903fe695674a87c7c893cdc99ae",
+      "topologySha256": "591eb42fda2e6faf4af0c334319a42338682235bf1539fbe6c508e5c5f88785c",
+      "triangleCount": 5688,
+      "vertexCount": 3326
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          -0.04800000041723251,
+          1.277940034866333,
+          0.21362799406051636
+        ],
+        "min": [
+          -0.18089599907398224,
+          1.1047799587249756,
+          0.08175639808177948
+        ]
+      },
+      "externalConceptId": "FMA45874",
+      "geometrySha256": "cfa36d726ba8a10e1725fd95bb010d73c034402b21855fc8594862bac4b9d713",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1446",
+      "meshIndex": 2,
+      "modelId": "HA-MODEL-BP3D4-T72-FIRST-PASS-RESIDUAL-QA",
+      "nodeIndex": 2,
+      "nodeName": "HA-MESH-BP3D4-FJ1446",
+      "normalCount": 1019,
+      "normalSha256": "2dde33610648d1b5ebdba1febca9bf19af081b75f857580942467e31154b1c10",
+      "productCandidateRegion": "thorax",
+      "representationId": "BP5615",
+      "sourceBoundsMm": {
+        "max": [
+          -48.0,
+          -81.7564,
+          1277.94
+        ],
+        "min": [
+          -180.896,
+          -213.628,
+          1104.78
+        ]
+      },
+      "sourceBytes": 105002,
+      "sourceElementFileId": "FJ1446",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ1446.obj",
+      "sourceFileId": "FJ1446",
+      "sourceFmaConceptId": "FMA45874",
+      "sourceRepresentationId": "BP5615",
+      "sourceSha256": "7a0d77a63b06d4212998bec86f84853287c3a21696ec7afc92c7767c987a726d",
+      "topologySha256": "10b4a8025052d54c4f84407d99df11c0e42b6ea6c1aa38f1d44017de1775f987",
+      "triangleCount": 1536,
+      "vertexCount": 1019
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.18089599907398224,
+          1.277940034866333,
+          0.21362799406051636
+        ],
+        "min": [
+          0.04800000041723251,
+          1.1047799587249756,
+          0.08175639808177948
+        ]
+      },
+      "externalConceptId": "FMA45875",
+      "geometrySha256": "19f391bf89e50d5dffa1ba3902c566edbfc2c4f245df0f998f666ab247a1245f",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1446M",
+      "meshIndex": 3,
+      "modelId": "HA-MODEL-BP3D4-T72-FIRST-PASS-RESIDUAL-QA",
+      "nodeIndex": 3,
+      "nodeName": "HA-MESH-BP3D4-FJ1446M",
+      "normalCount": 1019,
+      "normalSha256": "3d7cb5c965bbf5cc92d2b361bd40b70b18fa8e9c9f580e26192b35003ea5c1e3",
+      "productCandidateRegion": "thorax",
+      "representationId": "BP7862",
+      "sourceBoundsMm": {
+        "max": [
+          180.896,
+          -81.7564,
+          1277.94
+        ],
+        "min": [
+          48.0,
+          -213.628,
+          1104.78
+        ]
+      },
+      "sourceBytes": 103977,
+      "sourceElementFileId": "FJ1446M",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ1446M.obj",
+      "sourceFileId": "FJ1446M",
+      "sourceFmaConceptId": "FMA45875",
+      "sourceRepresentationId": "BP7862",
+      "sourceSha256": "3f9dbd5c3f6fdf043454f251d69ea96547dca4bc1efbf7bffd85315fc1a9fd34",
+      "topologySha256": "a514a7d49d8a74e0a9f88155e1704fd15be2e44e20fd71ef8b5222737e9ced6f",
+      "triangleCount": 1536,
+      "vertexCount": 1019
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          -0.026413900777697563,
+          1.3358999490737915,
+          0.14509600400924683
+        ],
+        "min": [
+          -0.19426199793815613,
+          1.2345099449157715,
+          0.0820000022649765
+        ]
+      },
+      "externalConceptId": "FMA34690",
+      "geometrySha256": "c845fd8744386dd7c076145832bcbc6cd1e309896d1b3e6ebd6cf73eee6c9a80",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1447",
+      "meshIndex": 4,
+      "modelId": "HA-MODEL-BP3D4-T72-FIRST-PASS-RESIDUAL-QA",
+      "nodeIndex": 4,
+      "nodeName": "HA-MESH-BP3D4-FJ1447",
+      "normalCount": 1492,
+      "normalSha256": "a3e0e0f7a402c59ec503e4dc378780e5912eb092031b2cd981952ec9d4a38c46",
+      "productCandidateRegion": "thorax",
+      "representationId": "BP5582",
+      "sourceBoundsMm": {
+        "max": [
+          -26.4139,
+          -82.0,
+          1335.9
+        ],
+        "min": [
+          -194.262,
+          -145.096,
+          1234.51
+        ]
+      },
+      "sourceBytes": 141480,
+      "sourceElementFileId": "FJ1447",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ1447.obj",
+      "sourceFileId": "FJ1447",
+      "sourceFmaConceptId": "FMA34690",
+      "sourceRepresentationId": "BP5582",
+      "sourceSha256": "e239a63adf99dfc094ece7efcd91ec7cd9ac802e9d7581141b311a7842fbbbe6",
+      "topologySha256": "983dec55d4b2e32fb7e3437e4af826d75e6e547b4bf187af17c2ec628f130e16",
+      "triangleCount": 1846,
+      "vertexCount": 1492
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.19426199793815613,
+          1.3358999490737915,
+          0.14509600400924683
+        ],
+        "min": [
+          0.026413900777697563,
+          1.2345099449157715,
+          0.0820000022649765
+        ]
+      },
+      "externalConceptId": "FMA34691",
+      "geometrySha256": "521ab8acb27ab95305af9e569390b716b3db2e3bfb695cc083e401866abdcbbd",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1447M",
+      "meshIndex": 5,
+      "modelId": "HA-MODEL-BP3D4-T72-FIRST-PASS-RESIDUAL-QA",
+      "nodeIndex": 5,
+      "nodeName": "HA-MESH-BP3D4-FJ1447M",
+      "normalCount": 1495,
+      "normalSha256": "c685f0c08b97598679696d69ba21545adc562347ebe153a069134008cd87267b",
+      "productCandidateRegion": "thorax",
+      "representationId": "BP9095",
+      "sourceBoundsMm": {
+        "max": [
+          194.262,
+          -82.0,
+          1335.9
+        ],
+        "min": [
+          26.4139,
+          -145.096,
+          1234.51
+        ]
+      },
+      "sourceBytes": 140158,
+      "sourceElementFileId": "FJ1447M",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ1447M.obj",
+      "sourceFileId": "FJ1447M",
+      "sourceFmaConceptId": "FMA34691",
+      "sourceRepresentationId": "BP9095",
+      "sourceSha256": "aab8ea03eed46a79b3f765ef539df785deb333e5079c21f8c7bec14444768a18",
+      "topologySha256": "3eb2451756b3d5a70ff9b0c68602397aa30a231e5cbe2190fc8e906cb4d4e8d1",
+      "triangleCount": 1846,
+      "vertexCount": 1495
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          -0.004815570078790188,
+          1.3137999773025513,
+          0.21935300529003143
+        ],
+        "min": [
+          -0.18784800171852112,
+          1.1406099796295166,
+          0.08100000023841858
+        ]
+      },
+      "externalConceptId": "FMA79979",
+      "geometrySha256": "79ee75b000beeee22aa040411b19bd42183bcea59b9b2647d7a7916fd1034a32",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1464",
+      "meshIndex": 6,
+      "modelId": "HA-MODEL-BP3D4-T72-FIRST-PASS-RESIDUAL-QA",
+      "nodeIndex": 6,
+      "nodeName": "HA-MESH-BP3D4-FJ1464",
+      "normalCount": 5480,
+      "normalSha256": "a4633ef80fe85e2263099fb203e16d8fa903172e0fbbdb09c8f896d09029f868",
+      "productCandidateRegion": "thorax",
+      "representationId": "BP5613",
+      "sourceBoundsMm": {
+        "max": [
+          -4.81557,
+          -81.0,
+          1313.8
+        ],
+        "min": [
+          -187.848,
+          -219.353,
+          1140.61
+        ]
+      },
+      "sourceBytes": 556794,
+      "sourceElementFileId": "FJ1464",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ1464.obj",
+      "sourceFileId": "FJ1464",
+      "sourceFmaConceptId": "FMA79979",
+      "sourceRepresentationId": "BP5613",
+      "sourceSha256": "f446df845d19385cdbd5b86457c8690981cbc914f8f9595b50bdc4a44505aab7",
+      "topologySha256": "1ae23aeb5846e8290235e02736b49418fbb65351a3ab56e91260fa44851eed1f",
+      "triangleCount": 7114,
+      "vertexCount": 5480
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.18784800171852112,
+          1.3137999773025513,
+          0.21935300529003143
+        ],
+        "min": [
+          0.004815570078790188,
+          1.1406099796295166,
+          0.08100000023841858
+        ]
+      },
+      "externalConceptId": "FMA79980",
+      "geometrySha256": "c2d80ae23d76cc78279b4a542a3882bd211f39c0bb5acba6299894bd61f6b4aa",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1464M",
+      "meshIndex": 7,
+      "modelId": "HA-MODEL-BP3D4-T72-FIRST-PASS-RESIDUAL-QA",
+      "nodeIndex": 7,
+      "nodeName": "HA-MESH-BP3D4-FJ1464M",
+      "normalCount": 5466,
+      "normalSha256": "1bd54951fb1d7e46224d8e8d6af3ef198263c94f39e86b374444edc3d54b5464",
+      "productCandidateRegion": "thorax",
+      "representationId": "BP8323",
+      "sourceBoundsMm": {
+        "max": [
+          187.848,
+          -81.0,
+          1313.8
+        ],
+        "min": [
+          4.81557,
+          -219.353,
+          1140.61
+        ]
+      },
+      "sourceBytes": 551361,
+      "sourceElementFileId": "FJ1464M",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ1464M.obj",
+      "sourceFileId": "FJ1464M",
+      "sourceFmaConceptId": "FMA79980",
+      "sourceRepresentationId": "BP8323",
+      "sourceSha256": "a2ffa047e9cff27df3ed7cb5f305491ce921f236cfe60ee90334cc5fead271c3",
+      "topologySha256": "7cdc9f352201642cff62a3bb9f832e79ffb3b460ae3c50756c01638325246fa5",
+      "triangleCount": 7114,
+      "vertexCount": 5466
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.0619921013712883,
+          1.6299400329589844,
+          0.17738500237464905
+        ],
+        "min": [
+          -0.06330250203609467,
+          1.5208899974822998,
+          0.10663899779319763
+        ]
+      },
+      "externalConceptId": "FMA52734",
+      "geometrySha256": "ae39f83761801bf157c42fed21f4bb5bf76168105705f039c1e772932010fa9a",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ3200",
+      "meshIndex": 8,
+      "modelId": "HA-MODEL-BP3D4-T72-FIRST-PASS-RESIDUAL-QA",
+      "nodeIndex": 8,
+      "nodeName": "HA-MESH-BP3D4-FJ3200",
+      "normalCount": 8472,
+      "normalSha256": "b5f46b151e9a9969c34716767e5877234bcab2418748c605b568607a0a4e97e1",
+      "productCandidateRegion": "head",
+      "representationId": "BP8209",
+      "sourceBoundsMm": {
+        "max": [
+          61.9921,
+          -106.639,
+          1629.94
+        ],
+        "min": [
+          -63.3025,
+          -177.385,
+          1520.89
+        ]
+      },
+      "sourceBytes": 1005988,
+      "sourceElementFileId": "FJ3200",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ3200.obj",
+      "sourceFileId": "FJ3200",
+      "sourceFmaConceptId": "FMA52734",
+      "sourceRepresentationId": "BP8209",
+      "sourceSha256": "48583dbbeab8ae243aa4c266b44ca5b26b9c4e1e79976819cfdf5dcb59ec5772",
+      "topologySha256": "d4a5b473cec5021f1f90b0a416a9fb669bb0c89fdef48f1659381d5bc5987a06",
+      "triangleCount": 14510,
+      "vertexCount": 8472
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.05255410075187683,
+          1.506100058555603,
+          0.1738319993019104
+        ],
+        "min": [
+          -0.05384590104222298,
+          1.4216300249099731,
+          0.0898536965250969
+        ]
+      },
+      "externalConceptId": "FMA52748",
+      "geometrySha256": "defe197e87440236e5603b88ee8078e69ce2ce96f04265cc6e1f54f0dc2d2306",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ3289",
+      "meshIndex": 9,
+      "modelId": "HA-MODEL-BP3D4-T72-FIRST-PASS-RESIDUAL-QA",
+      "nodeIndex": 9,
+      "nodeName": "HA-MESH-BP3D4-FJ3289",
+      "normalCount": 2845,
+      "normalSha256": "7c2c3e552ea13d3488951f6f0d02d9c343c95ef0a1a9d34438d642004c092e19",
+      "productCandidateRegion": "head",
+      "representationId": "BP8107",
+      "sourceBoundsMm": {
+        "max": [
+          52.5541,
+          -89.8537,
+          1506.1
+        ],
+        "min": [
+          -53.8459,
+          -173.832,
+          1421.63
+        ]
+      },
+      "sourceBytes": 355295,
+      "sourceElementFileId": "FJ3289",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ3289.obj",
+      "sourceFileId": "FJ3289",
+      "sourceFmaConceptId": "FMA52748",
+      "sourceRepresentationId": "BP8107",
+      "sourceSha256": "c38102c34660e2b767a7b95a341380bf4a52c754c6235fcd322be5c7b8cb1745",
+      "topologySha256": "82177a83800547153c067c1934906beab03ef16eeaf639e4ab711ac27fb1420f",
+      "triangleCount": 5576,
+      "vertexCount": 2845
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.06070530042052269,
+          1.5845099687576294,
+          0.10095900297164917
+        ],
+        "min": [
+          -0.06196120008826256,
+          1.4777699708938599,
+          -0.018000999465584755
+        ]
+      },
+      "externalConceptId": "FMA52735",
+      "geometrySha256": "7cd9f4da464aa67e00530998865d5961ee2221f31461f05d1ba1cba7312c6893",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ3309",
+      "meshIndex": 10,
+      "modelId": "HA-MODEL-BP3D4-T72-FIRST-PASS-RESIDUAL-QA",
+      "nodeIndex": 10,
+      "nodeName": "HA-MESH-BP3D4-FJ3309",
+      "normalCount": 6995,
+      "normalSha256": "b70184e29af1b9a6dc379a61391161ddf69f582b836dcb97bfb3e614251cf251",
+      "productCandidateRegion": "head",
+      "representationId": "BP9177",
+      "sourceBoundsMm": {
+        "max": [
+          60.7053,
+          18.001,
+          1584.51
+        ],
+        "min": [
+          -61.9612,
+          -100.959,
+          1477.77
+        ]
+      },
+      "sourceBytes": 843673,
+      "sourceElementFileId": "FJ3309",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ3309.obj",
+      "sourceFileId": "FJ3309",
+      "sourceFmaConceptId": "FMA52735",
+      "sourceRepresentationId": "BP9177",
+      "sourceSha256": "c0262a08591e48504c8a53302525377e0c4ad1c165456475f3bb80aab6202d44",
+      "topologySha256": "b28f30c5ce7b3204e664057c592747a7de1553335b3a484623f52afa7d796f7f",
+      "triangleCount": 12450,
+      "vertexCount": 6995
+    }
+  ],
+  "revision": "BodyParts3D-R4-T72-static-source-package-v1",
+  "rights": {
+    "officialCurrentLicense": "CC BY 4.0 per official README; individual acquired OBJ headers state legacy CC BY-SA 2.1 Japan",
+    "publicRelease": false,
+    "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+    "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+    "sourceHeaderLicenseObservations": [
+      "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\"."
+    ]
+  },
+  "sceneContract": {
+    "contract": "T50 shared AnatomySceneRoot frame/pose contract; T72 local static source QA package, not learner scene",
+    "integratedGlbLocalCachePath": "atlas-data/source-cache/bodyparts3d-r4/converted/t72/T72-first-pass-residual-static-source.glb",
+    "integratedGlbSha256": "56162acae94485b603d4d888347951733a0501b586c0400e065061ac14e02104",
+    "meshNodeCount": 11,
+    "modelId": "HA-MODEL-BP3D4-T72-FIRST-PASS-RESIDUAL-QA",
+    "rendererCount": 0,
+    "rendererPolicy": "T72 local QA composes T53/T55/T71/T72 source packages in one local preview root/renderer; this sibling package does not replace T70 or T71"
+  },
+  "scope": {
+    "canonicalLearnerMembershipCreated": false,
+    "internalBatchSizeMaximum": 10,
+    "internalBatches": [
+      {
+        "batchId": "T72-B01",
+        "sourceElementFileCount": 10
+      },
+      {
+        "batchId": "T72-B02",
+        "sourceElementFileCount": 1
+      }
+    ],
+    "oneNodePerUniqueFj": true,
+    "regionCandidateCounts": {
+      "head": 3,
+      "thigh": 2,
+      "thorax": 6
+    },
+    "sourceElementFileCount": 11,
+    "sourceMembershipCount": 11,
+    "uniqueSourceNodeCount": 11,
+    "wholeBodyCanonicalDenominator": null
+  },
+  "source": {
+    "archiveEtag": "\"8848a5a-4dd48ec9df000\"",
+    "archiveLastModified": "Wed, 22 May 2013 06:46:24 GMT",
+    "archiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+    "lod": "official 99%-reduced bundle; no multilevel LOD chain advertised",
+    "officialReadme": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/README_e.html",
+    "officialReleaseNote": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/release_4.0_e.html",
+    "pose": "bodyparts3d-r4-static-reference",
+    "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+    "projectUnit": "m",
+    "sourceFrame": "BodyParts3D Release 4.0 static reference",
+    "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+    "sourceUnit": "mm evidenced by exact OBJ Bounds(mm) header",
+    "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+    "version": "BodyParts3D Release 4.0"
+  },
+  "sourceAssets": [
+    {
+      "candidateProductRegion": "thigh",
+      "candidateProductRole": "major_muscle_surface_candidate",
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExplicitOfficialRelation": "right",
+      "lateralityNotInferredFromFjSuffixOrCoordinates": true,
+      "officialCurrentLicense": "CC BY 4.0 per BodyParts3D README; file-level redistribution held against legacy OBJ header",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          -0.06291449815034866,
+          0.8711040019989014,
+          0.15246599912643433
+        ],
+        "min": [
+          -0.154449000954628,
+          0.31470799446105957,
+          0.08389980345964432
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveLastModified": "Wed, 22 May 2013 06:46:24 GMT",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsDiscrepancyPolicy": "recorded without editing source vertices or treating bounds as surface/contact evidence",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 0.1998999999999853,
+      "sourceBoundsHeaderMinusVertexExtremaMm": [
+        -0.0003999999999848569,
+        -0.1998999999999853,
+        -0.06820000000004711,
+        0.03169999999999362,
+        0.0,
+        0.0
+      ],
+      "sourceBoundsHeaderWithin001Mm": false,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          -62.9145,
+          -83.8998,
+          871.104
+        ],
+        "min": [
+          -154.449,
+          -152.466,
+          314.708
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          -62.8828,
+          -83.8998,
+          871.104
+        ],
+        "min": [
+          -154.4494,
+          -152.6659,
+          314.6398
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 389745,
+      "sourceClassificationFromT70": [
+        "outside_bone_and_muscle_organ_roots"
+      ],
+      "sourceCrc32": "56a6fcb6",
+      "sourceElementFileId": "FJ1433",
+      "sourceFmaConceptId": "FMA38928",
+      "sourceFrame": "BodyParts3D Release 4.0 static reference",
+      "sourceGeometryTopologyComparisonSha256": "81a30d724bb16bd633ab54092da7eacef4a181a07612e16cc4b45442c52d436d",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "official_archive_crc_sha_obj_header_and_relation_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; one source LOD observed",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ1433.obj",
+      "sourceNameEnglishExactHeader": "Right rectus femoris",
+      "sourceNormalCount": 3326,
+      "sourceOfficialHeaderRelation": {
+        "sourceFmaConceptId": "FMA38928",
+        "sourceNameEnglish": "right rectus femoris",
+        "tree": "IS-A"
+      },
+      "sourceOfficialLateralityEvidence": {
+        "basis": "official FMA relation name matches T70 candidate name after removing the explicit left/right token; FJ suffix and coordinates are not used",
+        "relationRows": [
+          {
+            "sourceFmaConceptId": "FMA38928",
+            "sourceNameEnglish": "right rectus femoris",
+            "tree": "IS-A"
+          }
+        ],
+        "side": "right",
+        "state": "explicit_side_specific_source_relation"
+      },
+      "sourceOfficialRelationContexts": [
+        {
+          "sourceFmaConceptId": "FMA10474",
+          "sourceNameEnglish": "zone of muscle organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA22429",
+          "sourceNameEnglish": "zone of quadriceps femoris",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA22430",
+          "sourceNameEnglish": "rectus femoris",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA38928",
+          "sourceNameEnglish": "right rectus femoris",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55268",
+          "sourceNameEnglish": "organ zone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67619",
+          "sourceNameEnglish": "organ region",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA82472",
+          "sourceNameEnglish": "cardinal organ part",
+          "tree": "IS-A"
+        }
+      ],
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP5598",
+      "sourceSha256": "a5f75907d784dd2a44d7efa96cb31009aba2afe43465336b105561751b19f8ef",
+      "sourceTriangleCount": 5688,
+      "sourceUnit": "mm from exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 3326,
+      "sourceZipCompressionMethod": 8,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ1433",
+      "t70CandidateFmaConceptId": "FMA22430",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "4df8113bd8308256b84e4680a853a2cc444582703b76139ebff05e85c67fc109"
+    },
+    {
+      "candidateProductRegion": "thigh",
+      "candidateProductRole": "major_muscle_surface_candidate",
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExplicitOfficialRelation": "left",
+      "lateralityNotInferredFromFjSuffixOrCoordinates": true,
+      "officialCurrentLicense": "CC BY 4.0 per BodyParts3D README; file-level redistribution held against legacy OBJ header",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          0.154449000954628,
+          0.8711040019989014,
+          0.15246599912643433
+        ],
+        "min": [
+          0.06291449815034866,
+          0.31470799446105957,
+          0.08389980345964432
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveLastModified": "Wed, 22 May 2013 06:46:24 GMT",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsDiscrepancyPolicy": "recorded without editing source vertices or treating bounds as surface/contact evidence",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 0.0,
+      "sourceBoundsHeaderMinusVertexExtremaMm": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sourceBoundsHeaderWithin001Mm": true,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          154.449,
+          -83.8998,
+          871.104
+        ],
+        "min": [
+          62.9145,
+          -152.466,
+          314.708
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          154.449,
+          -83.8998,
+          871.104
+        ],
+        "min": [
+          62.9145,
+          -152.466,
+          314.708
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 386385,
+      "sourceClassificationFromT70": [
+        "outside_bone_and_muscle_organ_roots"
+      ],
+      "sourceCrc32": "880a13c5",
+      "sourceElementFileId": "FJ1433M",
+      "sourceFmaConceptId": "FMA38929",
+      "sourceFrame": "BodyParts3D Release 4.0 static reference",
+      "sourceGeometryTopologyComparisonSha256": "c39b72fb252fda64cfb83c5b956d6d9ad05afc9d5a383aed19ddae3a3ae1ee71",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "official_archive_crc_sha_obj_header_and_relation_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; one source LOD observed",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ1433M.obj",
+      "sourceNameEnglishExactHeader": "Left rectus femoris",
+      "sourceNormalCount": 3326,
+      "sourceOfficialHeaderRelation": {
+        "sourceFmaConceptId": "FMA38929",
+        "sourceNameEnglish": "left rectus femoris",
+        "tree": "IS-A"
+      },
+      "sourceOfficialLateralityEvidence": {
+        "basis": "official FMA relation name matches T70 candidate name after removing the explicit left/right token; FJ suffix and coordinates are not used",
+        "relationRows": [
+          {
+            "sourceFmaConceptId": "FMA38929",
+            "sourceNameEnglish": "left rectus femoris",
+            "tree": "IS-A"
+          }
+        ],
+        "side": "left",
+        "state": "explicit_side_specific_source_relation"
+      },
+      "sourceOfficialRelationContexts": [
+        {
+          "sourceFmaConceptId": "FMA10474",
+          "sourceNameEnglish": "zone of muscle organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA22429",
+          "sourceNameEnglish": "zone of quadriceps femoris",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA22430",
+          "sourceNameEnglish": "rectus femoris",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA38929",
+          "sourceNameEnglish": "left rectus femoris",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55268",
+          "sourceNameEnglish": "organ zone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67619",
+          "sourceNameEnglish": "organ region",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA82472",
+          "sourceNameEnglish": "cardinal organ part",
+          "tree": "IS-A"
+        }
+      ],
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8094",
+      "sourceSha256": "3871310f1c1f76ca55cfa4fe043d2e3a25488903fe695674a87c7c893cdc99ae",
+      "sourceTriangleCount": 5688,
+      "sourceUnit": "mm from exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 3326,
+      "sourceZipCompressionMethod": 8,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ1433M",
+      "t70CandidateFmaConceptId": "FMA22430",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "033f96c82b84d4b41df427e1b7b51524944abf3bb04ffd0c65d41a8014d5ae8a"
+    },
+    {
+      "candidateProductRegion": "thorax",
+      "candidateProductRole": "pectoral_part_surface_candidate",
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExplicitOfficialRelation": "right",
+      "lateralityNotInferredFromFjSuffixOrCoordinates": true,
+      "officialCurrentLicense": "CC BY 4.0 per BodyParts3D README; file-level redistribution held against legacy OBJ header",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          -0.04800000041723251,
+          1.277940034866333,
+          0.21362799406051636
+        ],
+        "min": [
+          -0.18089599907398224,
+          1.1047799587249756,
+          0.08175639808177948
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveLastModified": "Wed, 22 May 2013 06:46:24 GMT",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsDiscrepancyPolicy": "recorded without editing source vertices or treating bounds as surface/contact evidence",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 0.12749999999999773,
+      "sourceBoundsHeaderMinusVertexExtremaMm": [
+        -0.00030000000000995897,
+        -0.11810000000002674,
+        0.0020999999999276042,
+        0.0,
+        0.12749999999999773,
+        -0.0036000000000058208
+      ],
+      "sourceBoundsHeaderWithin001Mm": false,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          -48.0,
+          -81.7564,
+          1277.94
+        ],
+        "min": [
+          -180.896,
+          -213.628,
+          1104.78
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          -48.0,
+          -81.6289,
+          1277.9364
+        ],
+        "min": [
+          -180.8963,
+          -213.7461,
+          1104.7821
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 105002,
+      "sourceClassificationFromT70": [
+        "outside_bone_and_muscle_organ_roots"
+      ],
+      "sourceCrc32": "fa9ed04a",
+      "sourceElementFileId": "FJ1446",
+      "sourceFmaConceptId": "FMA45874",
+      "sourceFrame": "BodyParts3D Release 4.0 static reference",
+      "sourceGeometryTopologyComparisonSha256": "0a0a58b2374ac838a3b43bc9b5ae24e0d2fef32bcb2b6bff0e998f1d8b82dac6",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "official_archive_crc_sha_obj_header_and_relation_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; one source LOD observed",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ1446.obj",
+      "sourceNameEnglishExactHeader": "Abdominal part of right pectoralis major",
+      "sourceNormalCount": 1019,
+      "sourceOfficialHeaderRelation": {
+        "sourceFmaConceptId": "FMA45874",
+        "sourceNameEnglish": "abdominal part of right pectoralis major",
+        "tree": "IS-A"
+      },
+      "sourceOfficialLateralityEvidence": {
+        "basis": "official FMA relation name matches T70 candidate name after removing the explicit left/right token; FJ suffix and coordinates are not used",
+        "relationRows": [
+          {
+            "sourceFmaConceptId": "FMA45874",
+            "sourceNameEnglish": "abdominal part of right pectoralis major",
+            "tree": "IS-A"
+          },
+          {
+            "sourceFmaConceptId": "FMA45874",
+            "sourceNameEnglish": "abdominal part of right pectoralis major",
+            "tree": "PART-OF"
+          }
+        ],
+        "side": "right",
+        "state": "explicit_side_specific_source_relation"
+      },
+      "sourceOfficialRelationContexts": [
+        {
+          "sourceFmaConceptId": "FMA10474",
+          "sourceNameEnglish": "zone of muscle organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA34686",
+          "sourceNameEnglish": "zone of pectoralis major",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA34699",
+          "sourceNameEnglish": "abdominal part of pectoralis major",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA45874",
+          "sourceNameEnglish": "abdominal part of right pectoralis major",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55268",
+          "sourceNameEnglish": "organ zone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67619",
+          "sourceNameEnglish": "organ region",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA82472",
+          "sourceNameEnglish": "cardinal organ part",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA13373",
+          "sourceNameEnglish": "right pectoralis major",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA20394",
+          "sourceNameEnglish": "human body",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA231424",
+          "sourceNameEnglish": "body proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23218",
+          "sourceNameEnglish": "right pectoral girdle",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA24816",
+          "sourceNameEnglish": "anterior chest",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259209",
+          "sourceNameEnglish": "thoracic segment of trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA33644",
+          "sourceNameEnglish": "pectoral part of right pectoral girdle",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA45874",
+          "sourceNameEnglish": "abdominal part of right pectoralis major",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA50060",
+          "sourceNameEnglish": "chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA50061",
+          "sourceNameEnglish": "superficial chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA50063",
+          "sourceNameEnglish": "anterior superficial chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA61472",
+          "sourceNameEnglish": "right pectoral part of chest",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7181",
+          "sourceNameEnglish": "trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7185",
+          "sourceNameEnglish": "right upper limb",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA87543",
+          "sourceNameEnglish": "anterior chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA9576",
+          "sourceNameEnglish": "thorax",
+          "tree": "PART-OF"
+        }
+      ],
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP5615",
+      "sourceSha256": "7a0d77a63b06d4212998bec86f84853287c3a21696ec7afc92c7767c987a726d",
+      "sourceTriangleCount": 1536,
+      "sourceUnit": "mm from exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 1019,
+      "sourceZipCompressionMethod": 8,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ1446",
+      "t70CandidateFmaConceptId": "FMA34699",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "164567b14bd6c04b4311fb9d3158c9cade1d92a6aa928abb0647d865f5d3cd56"
+    },
+    {
+      "candidateProductRegion": "thorax",
+      "candidateProductRole": "pectoral_part_surface_candidate",
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExplicitOfficialRelation": "left",
+      "lateralityNotInferredFromFjSuffixOrCoordinates": true,
+      "officialCurrentLicense": "CC BY 4.0 per BodyParts3D README; file-level redistribution held against legacy OBJ header",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          0.18089599907398224,
+          1.277940034866333,
+          0.21362799406051636
+        ],
+        "min": [
+          0.04800000041723251,
+          1.1047799587249756,
+          0.08175639808177948
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveLastModified": "Wed, 22 May 2013 06:46:24 GMT",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsDiscrepancyPolicy": "recorded without editing source vertices or treating bounds as surface/contact evidence",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 9.999999997489795e-05,
+      "sourceBoundsHeaderMinusVertexExtremaMm": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -9.999999997489795e-05
+      ],
+      "sourceBoundsHeaderWithin001Mm": true,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          180.896,
+          -81.7564,
+          1277.94
+        ],
+        "min": [
+          48.0,
+          -213.628,
+          1104.78
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          180.896,
+          -81.7564,
+          1277.9399
+        ],
+        "min": [
+          48.0,
+          -213.628,
+          1104.78
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 103977,
+      "sourceClassificationFromT70": [
+        "outside_bone_and_muscle_organ_roots"
+      ],
+      "sourceCrc32": "669f8c36",
+      "sourceElementFileId": "FJ1446M",
+      "sourceFmaConceptId": "FMA45875",
+      "sourceFrame": "BodyParts3D Release 4.0 static reference",
+      "sourceGeometryTopologyComparisonSha256": "52f0d8bd090bf50599934246209eefefeb1615e9f520d3bec1dc325f319af4e8",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "official_archive_crc_sha_obj_header_and_relation_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; one source LOD observed",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ1446M.obj",
+      "sourceNameEnglishExactHeader": "Abdominal part of left pectoralis major",
+      "sourceNormalCount": 1019,
+      "sourceOfficialHeaderRelation": {
+        "sourceFmaConceptId": "FMA45875",
+        "sourceNameEnglish": "abdominal part of left pectoralis major",
+        "tree": "IS-A"
+      },
+      "sourceOfficialLateralityEvidence": {
+        "basis": "official FMA relation name matches T70 candidate name after removing the explicit left/right token; FJ suffix and coordinates are not used",
+        "relationRows": [
+          {
+            "sourceFmaConceptId": "FMA45875",
+            "sourceNameEnglish": "abdominal part of left pectoralis major",
+            "tree": "IS-A"
+          },
+          {
+            "sourceFmaConceptId": "FMA45875",
+            "sourceNameEnglish": "abdominal part of left pectoralis major",
+            "tree": "PART-OF"
+          }
+        ],
+        "side": "left",
+        "state": "explicit_side_specific_source_relation"
+      },
+      "sourceOfficialRelationContexts": [
+        {
+          "sourceFmaConceptId": "FMA10474",
+          "sourceNameEnglish": "zone of muscle organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA34686",
+          "sourceNameEnglish": "zone of pectoralis major",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA34699",
+          "sourceNameEnglish": "abdominal part of pectoralis major",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA45875",
+          "sourceNameEnglish": "abdominal part of left pectoralis major",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55268",
+          "sourceNameEnglish": "organ zone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67619",
+          "sourceNameEnglish": "organ region",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA82472",
+          "sourceNameEnglish": "cardinal organ part",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA13374",
+          "sourceNameEnglish": "left pectoralis major",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA20394",
+          "sourceNameEnglish": "human body",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA231424",
+          "sourceNameEnglish": "body proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23219",
+          "sourceNameEnglish": "left pectoral girdle",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA24816",
+          "sourceNameEnglish": "anterior chest",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259209",
+          "sourceNameEnglish": "thoracic segment of trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA33645",
+          "sourceNameEnglish": "pectoral part of left pectoral girdle",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA45875",
+          "sourceNameEnglish": "abdominal part of left pectoralis major",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA50060",
+          "sourceNameEnglish": "chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA50061",
+          "sourceNameEnglish": "superficial chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA50063",
+          "sourceNameEnglish": "anterior superficial chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA61473",
+          "sourceNameEnglish": "left pectoral part of chest",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7181",
+          "sourceNameEnglish": "trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7186",
+          "sourceNameEnglish": "left upper limb",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA87543",
+          "sourceNameEnglish": "anterior chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA9576",
+          "sourceNameEnglish": "thorax",
+          "tree": "PART-OF"
+        }
+      ],
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP7862",
+      "sourceSha256": "3f9dbd5c3f6fdf043454f251d69ea96547dca4bc1efbf7bffd85315fc1a9fd34",
+      "sourceTriangleCount": 1536,
+      "sourceUnit": "mm from exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 1019,
+      "sourceZipCompressionMethod": 8,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ1446M",
+      "t70CandidateFmaConceptId": "FMA34699",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "e2d04c49011ae6868cea6449f2e91705fe57ed1a0d3c659970a9effe8ee6e85e"
+    },
+    {
+      "candidateProductRegion": "thorax",
+      "candidateProductRole": "pectoral_part_surface_candidate",
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExplicitOfficialRelation": "right",
+      "lateralityNotInferredFromFjSuffixOrCoordinates": true,
+      "officialCurrentLicense": "CC BY 4.0 per BodyParts3D README; file-level redistribution held against legacy OBJ header",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          -0.026413900777697563,
+          1.3358999490737915,
+          0.14509600400924683
+        ],
+        "min": [
+          -0.19426199793815613,
+          1.2345099449157715,
+          0.0820000022649765
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveLastModified": "Wed, 22 May 2013 06:46:24 GMT",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsDiscrepancyPolicy": "recorded without editing source vertices or treating bounds as surface/contact evidence",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 0.09539999999998372,
+      "sourceBoundsHeaderMinusVertexExtremaMm": [
+        0.00030000000000995897,
+        -0.09539999999998372,
+        0.0028999999999541615,
+        0.0,
+        0.0,
+        -0.0038000000001829903
+      ],
+      "sourceBoundsHeaderWithin001Mm": false,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          -26.4139,
+          -82.0,
+          1335.9
+        ],
+        "min": [
+          -194.262,
+          -145.096,
+          1234.51
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          -26.4139,
+          -82.0,
+          1335.8962
+        ],
+        "min": [
+          -194.2617,
+          -145.1914,
+          1234.5129
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 141480,
+      "sourceClassificationFromT70": [
+        "outside_bone_and_muscle_organ_roots"
+      ],
+      "sourceCrc32": "fd22010e",
+      "sourceElementFileId": "FJ1447",
+      "sourceFmaConceptId": "FMA34690",
+      "sourceFrame": "BodyParts3D Release 4.0 static reference",
+      "sourceGeometryTopologyComparisonSha256": "a4458237fbf825ceb0d5f7de55cfcd94d18b9a13b3c431b1bb101013d8cbd79e",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "official_archive_crc_sha_obj_header_and_relation_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; one source LOD observed",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ1447.obj",
+      "sourceNameEnglishExactHeader": "Clavicular part of right pectoralis major",
+      "sourceNormalCount": 1492,
+      "sourceOfficialHeaderRelation": {
+        "sourceFmaConceptId": "FMA34690",
+        "sourceNameEnglish": "clavicular part of right pectoralis major",
+        "tree": "IS-A"
+      },
+      "sourceOfficialLateralityEvidence": {
+        "basis": "official FMA relation name matches T70 candidate name after removing the explicit left/right token; FJ suffix and coordinates are not used",
+        "relationRows": [
+          {
+            "sourceFmaConceptId": "FMA34690",
+            "sourceNameEnglish": "clavicular part of right pectoralis major",
+            "tree": "IS-A"
+          }
+        ],
+        "side": "right",
+        "state": "explicit_side_specific_source_relation"
+      },
+      "sourceOfficialRelationContexts": [
+        {
+          "sourceFmaConceptId": "FMA34687",
+          "sourceNameEnglish": "clavicular part of pectoralis major",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA34690",
+          "sourceNameEnglish": "clavicular part of right pectoralis major",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA45729",
+          "sourceNameEnglish": "head of organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55268",
+          "sourceNameEnglish": "organ zone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67619",
+          "sourceNameEnglish": "organ region",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA82472",
+          "sourceNameEnglish": "cardinal organ part",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA85453",
+          "sourceNameEnglish": "head of muscle organ",
+          "tree": "IS-A"
+        }
+      ],
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP5582",
+      "sourceSha256": "e239a63adf99dfc094ece7efcd91ec7cd9ac802e9d7581141b311a7842fbbbe6",
+      "sourceTriangleCount": 1846,
+      "sourceUnit": "mm from exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 1492,
+      "sourceZipCompressionMethod": 8,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ1447",
+      "t70CandidateFmaConceptId": "FMA34687",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "3a9666128b0a1a823f0f0b162165be84283d9bae5dd7b331bf3c220fcf97793e"
+    },
+    {
+      "candidateProductRegion": "thorax",
+      "candidateProductRole": "pectoral_part_surface_candidate",
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExplicitOfficialRelation": "left",
+      "lateralityNotInferredFromFjSuffixOrCoordinates": true,
+      "officialCurrentLicense": "CC BY 4.0 per BodyParts3D README; file-level redistribution held against legacy OBJ header",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          0.19426199793815613,
+          1.3358999490737915,
+          0.14509600400924683
+        ],
+        "min": [
+          0.026413900777697563,
+          1.2345099449157715,
+          0.0820000022649765
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveLastModified": "Wed, 22 May 2013 06:46:24 GMT",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsDiscrepancyPolicy": "recorded without editing source vertices or treating bounds as surface/contact evidence",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 0.0,
+      "sourceBoundsHeaderMinusVertexExtremaMm": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sourceBoundsHeaderWithin001Mm": true,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          194.262,
+          -82.0,
+          1335.9
+        ],
+        "min": [
+          26.4139,
+          -145.096,
+          1234.51
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          194.262,
+          -82.0,
+          1335.9
+        ],
+        "min": [
+          26.4139,
+          -145.096,
+          1234.51
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 140158,
+      "sourceClassificationFromT70": [
+        "outside_bone_and_muscle_organ_roots"
+      ],
+      "sourceCrc32": "550ff5c7",
+      "sourceElementFileId": "FJ1447M",
+      "sourceFmaConceptId": "FMA34691",
+      "sourceFrame": "BodyParts3D Release 4.0 static reference",
+      "sourceGeometryTopologyComparisonSha256": "0ced246bc49b8535d60343a1ee92e0438f10417c04ddd82759927e1fa0c26dc4",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "official_archive_crc_sha_obj_header_and_relation_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; one source LOD observed",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ1447M.obj",
+      "sourceNameEnglishExactHeader": "Clavicular part of left pectoralis major",
+      "sourceNormalCount": 1495,
+      "sourceOfficialHeaderRelation": {
+        "sourceFmaConceptId": "FMA34691",
+        "sourceNameEnglish": "clavicular part of left pectoralis major",
+        "tree": "IS-A"
+      },
+      "sourceOfficialLateralityEvidence": {
+        "basis": "official FMA relation name matches T70 candidate name after removing the explicit left/right token; FJ suffix and coordinates are not used",
+        "relationRows": [
+          {
+            "sourceFmaConceptId": "FMA34691",
+            "sourceNameEnglish": "clavicular part of left pectoralis major",
+            "tree": "IS-A"
+          }
+        ],
+        "side": "left",
+        "state": "explicit_side_specific_source_relation"
+      },
+      "sourceOfficialRelationContexts": [
+        {
+          "sourceFmaConceptId": "FMA34687",
+          "sourceNameEnglish": "clavicular part of pectoralis major",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA34691",
+          "sourceNameEnglish": "clavicular part of left pectoralis major",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA45729",
+          "sourceNameEnglish": "head of organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55268",
+          "sourceNameEnglish": "organ zone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67619",
+          "sourceNameEnglish": "organ region",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA82472",
+          "sourceNameEnglish": "cardinal organ part",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA85453",
+          "sourceNameEnglish": "head of muscle organ",
+          "tree": "IS-A"
+        }
+      ],
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP9095",
+      "sourceSha256": "aab8ea03eed46a79b3f765ef539df785deb333e5079c21f8c7bec14444768a18",
+      "sourceTriangleCount": 1846,
+      "sourceUnit": "mm from exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 1495,
+      "sourceZipCompressionMethod": 8,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ1447M",
+      "t70CandidateFmaConceptId": "FMA34687",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "45ec6f9ccee07a7e4a53e9aec866054ff3f454bdc2eff58c16f300963dc59ca2"
+    },
+    {
+      "candidateProductRegion": "thorax",
+      "candidateProductRole": "pectoral_part_surface_candidate",
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExplicitOfficialRelation": "right",
+      "lateralityNotInferredFromFjSuffixOrCoordinates": true,
+      "officialCurrentLicense": "CC BY 4.0 per BodyParts3D README; file-level redistribution held against legacy OBJ header",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          -0.004815570078790188,
+          1.3137999773025513,
+          0.21935300529003143
+        ],
+        "min": [
+          -0.18784800171852112,
+          1.1406099796295166,
+          0.08100000023841858
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveLastModified": "Wed, 22 May 2013 06:46:24 GMT",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsDiscrepancyPolicy": "recorded without editing source vertices or treating bounds as surface/contact evidence",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 0.228999999999985,
+      "sourceBoundsHeaderMinusVertexExtremaMm": [
+        -0.0003999999999848569,
+        -0.228999999999985,
+        0.004100000000107684,
+        -2.9999999999752447e-05,
+        0.0,
+        0.14229999999997744
+      ],
+      "sourceBoundsHeaderWithin001Mm": false,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          -4.81557,
+          -81.0,
+          1313.8
+        ],
+        "min": [
+          -187.848,
+          -219.353,
+          1140.61
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          -4.8156,
+          -81.0,
+          1313.9423
+        ],
+        "min": [
+          -187.8484,
+          -219.582,
+          1140.6141
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 556794,
+      "sourceClassificationFromT70": [
+        "outside_bone_and_muscle_organ_roots"
+      ],
+      "sourceCrc32": "38907963",
+      "sourceElementFileId": "FJ1464",
+      "sourceFmaConceptId": "FMA79979",
+      "sourceFrame": "BodyParts3D Release 4.0 static reference",
+      "sourceGeometryTopologyComparisonSha256": "948546f6334cd3f90ce97dac208291f6bdba482afcc71cb4f58a8e074caea1ad",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "official_archive_crc_sha_obj_header_and_relation_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; one source LOD observed",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ1464.obj",
+      "sourceNameEnglishExactHeader": "Sternocostal part of right pectoralis major",
+      "sourceNormalCount": 5480,
+      "sourceOfficialHeaderRelation": {
+        "sourceFmaConceptId": "FMA79979",
+        "sourceNameEnglish": "sternocostal part of right pectoralis major",
+        "tree": "IS-A"
+      },
+      "sourceOfficialLateralityEvidence": {
+        "basis": "official FMA relation name matches T70 candidate name after removing the explicit left/right token; FJ suffix and coordinates are not used",
+        "relationRows": [
+          {
+            "sourceFmaConceptId": "FMA79979",
+            "sourceNameEnglish": "sternocostal part of right pectoralis major",
+            "tree": "IS-A"
+          },
+          {
+            "sourceFmaConceptId": "FMA79979",
+            "sourceNameEnglish": "sternocostal part of right pectoralis major",
+            "tree": "PART-OF"
+          }
+        ],
+        "side": "right",
+        "state": "explicit_side_specific_source_relation"
+      },
+      "sourceOfficialRelationContexts": [
+        {
+          "sourceFmaConceptId": "FMA10474",
+          "sourceNameEnglish": "zone of muscle organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA34686",
+          "sourceNameEnglish": "zone of pectoralis major",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA34696",
+          "sourceNameEnglish": "sternocostal part of pectoralis major",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55268",
+          "sourceNameEnglish": "organ zone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67619",
+          "sourceNameEnglish": "organ region",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA79979",
+          "sourceNameEnglish": "sternocostal part of right pectoralis major",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA82472",
+          "sourceNameEnglish": "cardinal organ part",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA13373",
+          "sourceNameEnglish": "right pectoralis major",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA20394",
+          "sourceNameEnglish": "human body",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA231424",
+          "sourceNameEnglish": "body proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23218",
+          "sourceNameEnglish": "right pectoral girdle",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA24816",
+          "sourceNameEnglish": "anterior chest",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259209",
+          "sourceNameEnglish": "thoracic segment of trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA33644",
+          "sourceNameEnglish": "pectoral part of right pectoral girdle",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA50060",
+          "sourceNameEnglish": "chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA50061",
+          "sourceNameEnglish": "superficial chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA50063",
+          "sourceNameEnglish": "anterior superficial chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA61472",
+          "sourceNameEnglish": "right pectoral part of chest",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7181",
+          "sourceNameEnglish": "trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7185",
+          "sourceNameEnglish": "right upper limb",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA79979",
+          "sourceNameEnglish": "sternocostal part of right pectoralis major",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA87543",
+          "sourceNameEnglish": "anterior chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA9576",
+          "sourceNameEnglish": "thorax",
+          "tree": "PART-OF"
+        }
+      ],
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP5613",
+      "sourceSha256": "f446df845d19385cdbd5b86457c8690981cbc914f8f9595b50bdc4a44505aab7",
+      "sourceTriangleCount": 7114,
+      "sourceUnit": "mm from exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 5480,
+      "sourceZipCompressionMethod": 8,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ1464",
+      "t70CandidateFmaConceptId": "FMA34696",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "29f6f92f08dc85fc8135f780a9f188fc69f4b08c49aa009832605c8d632a4852"
+    },
+    {
+      "candidateProductRegion": "thorax",
+      "candidateProductRole": "pectoral_part_surface_candidate",
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExplicitOfficialRelation": "left",
+      "lateralityNotInferredFromFjSuffixOrCoordinates": true,
+      "officialCurrentLicense": "CC BY 4.0 per BodyParts3D README; file-level redistribution held against legacy OBJ header",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          0.18784800171852112,
+          1.3137999773025513,
+          0.21935300529003143
+        ],
+        "min": [
+          0.004815570078790188,
+          1.1406099796295166,
+          0.08100000023841858
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveLastModified": "Wed, 22 May 2013 06:46:24 GMT",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsDiscrepancyPolicy": "recorded without editing source vertices or treating bounds as surface/contact evidence",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 9.999999997489795e-05,
+      "sourceBoundsHeaderMinusVertexExtremaMm": [
+        2.9999999999752447e-05,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        9.999999997489795e-05
+      ],
+      "sourceBoundsHeaderWithin001Mm": true,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          187.848,
+          -81.0,
+          1313.8
+        ],
+        "min": [
+          4.81557,
+          -219.353,
+          1140.61
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          187.848,
+          -81.0,
+          1313.8001
+        ],
+        "min": [
+          4.8156,
+          -219.353,
+          1140.61
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 551361,
+      "sourceClassificationFromT70": [
+        "outside_bone_and_muscle_organ_roots"
+      ],
+      "sourceCrc32": "786356e6",
+      "sourceElementFileId": "FJ1464M",
+      "sourceFmaConceptId": "FMA79980",
+      "sourceFrame": "BodyParts3D Release 4.0 static reference",
+      "sourceGeometryTopologyComparisonSha256": "bd39b412428d83c6bdb4ff15823a9130b04527d3bbef02a51bdb6f54980510df",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "official_archive_crc_sha_obj_header_and_relation_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; one source LOD observed",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ1464M.obj",
+      "sourceNameEnglishExactHeader": "Sternocostal part of left pectoralis major",
+      "sourceNormalCount": 5466,
+      "sourceOfficialHeaderRelation": {
+        "sourceFmaConceptId": "FMA79980",
+        "sourceNameEnglish": "sternocostal part of left pectoralis major",
+        "tree": "IS-A"
+      },
+      "sourceOfficialLateralityEvidence": {
+        "basis": "official FMA relation name matches T70 candidate name after removing the explicit left/right token; FJ suffix and coordinates are not used",
+        "relationRows": [
+          {
+            "sourceFmaConceptId": "FMA79980",
+            "sourceNameEnglish": "sternocostal part of left pectoralis major",
+            "tree": "IS-A"
+          },
+          {
+            "sourceFmaConceptId": "FMA79980",
+            "sourceNameEnglish": "sternocostal part of left pectoralis major",
+            "tree": "PART-OF"
+          }
+        ],
+        "side": "left",
+        "state": "explicit_side_specific_source_relation"
+      },
+      "sourceOfficialRelationContexts": [
+        {
+          "sourceFmaConceptId": "FMA10474",
+          "sourceNameEnglish": "zone of muscle organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA34686",
+          "sourceNameEnglish": "zone of pectoralis major",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA34696",
+          "sourceNameEnglish": "sternocostal part of pectoralis major",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55268",
+          "sourceNameEnglish": "organ zone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67619",
+          "sourceNameEnglish": "organ region",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA79980",
+          "sourceNameEnglish": "sternocostal part of left pectoralis major",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA82472",
+          "sourceNameEnglish": "cardinal organ part",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA13374",
+          "sourceNameEnglish": "left pectoralis major",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA20394",
+          "sourceNameEnglish": "human body",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA231424",
+          "sourceNameEnglish": "body proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23219",
+          "sourceNameEnglish": "left pectoral girdle",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA24816",
+          "sourceNameEnglish": "anterior chest",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259209",
+          "sourceNameEnglish": "thoracic segment of trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA33645",
+          "sourceNameEnglish": "pectoral part of left pectoral girdle",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA50060",
+          "sourceNameEnglish": "chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA50061",
+          "sourceNameEnglish": "superficial chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA50063",
+          "sourceNameEnglish": "anterior superficial chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA61473",
+          "sourceNameEnglish": "left pectoral part of chest",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7181",
+          "sourceNameEnglish": "trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7186",
+          "sourceNameEnglish": "left upper limb",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA79980",
+          "sourceNameEnglish": "sternocostal part of left pectoralis major",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA87543",
+          "sourceNameEnglish": "anterior chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA9576",
+          "sourceNameEnglish": "thorax",
+          "tree": "PART-OF"
+        }
+      ],
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8323",
+      "sourceSha256": "a2ffa047e9cff27df3ed7cb5f305491ce921f236cfe60ee90334cc5fead271c3",
+      "sourceTriangleCount": 7114,
+      "sourceUnit": "mm from exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 5466,
+      "sourceZipCompressionMethod": 8,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ1464M",
+      "t70CandidateFmaConceptId": "FMA34696",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "b0bfd5d1ff5ae34d17cc60e80c8b667bbf9cbd9718d989d4ce2abadeac1b03f3"
+    },
+    {
+      "candidateProductRegion": "head",
+      "candidateProductRole": "skull_visual_anchor",
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExplicitOfficialRelation": "not_lateralized_by_official_relations",
+      "lateralityNotInferredFromFjSuffixOrCoordinates": true,
+      "officialCurrentLicense": "CC BY 4.0 per BodyParts3D README; file-level redistribution held against legacy OBJ header",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          0.0619921013712883,
+          1.6299400329589844,
+          0.17738500237464905
+        ],
+        "min": [
+          -0.06330250203609467,
+          1.5208899974822998,
+          0.10663899779319763
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveLastModified": "Wed, 22 May 2013 06:46:24 GMT",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsDiscrepancyPolicy": "recorded without editing source vertices or treating bounds as surface/contact evidence",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 9.999999997489795e-05,
+      "sourceBoundsHeaderMinusVertexExtremaMm": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -9.999999997489795e-05
+      ],
+      "sourceBoundsHeaderWithin001Mm": true,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          61.9921,
+          -106.639,
+          1629.94
+        ],
+        "min": [
+          -63.3025,
+          -177.385,
+          1520.89
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          61.9921,
+          -106.639,
+          1629.9399
+        ],
+        "min": [
+          -63.3025,
+          -177.385,
+          1520.89
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 1005988,
+      "sourceClassificationFromT70": [
+        "bone_root_closure"
+      ],
+      "sourceCrc32": "f04c5894",
+      "sourceElementFileId": "FJ3200",
+      "sourceFmaConceptId": "FMA52734",
+      "sourceFrame": "BodyParts3D Release 4.0 static reference",
+      "sourceGeometryTopologyComparisonSha256": "84e8cbe3d357e4e82839dfceed59e439713b81db57ebc72c56b3b0b2f3525eb7",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "official_archive_crc_sha_obj_header_and_relation_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; one source LOD observed",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ3200.obj",
+      "sourceNameEnglishExactHeader": "Frontal bone",
+      "sourceNormalCount": 8472,
+      "sourceOfficialHeaderRelation": {
+        "sourceFmaConceptId": "FMA52734",
+        "sourceNameEnglish": "frontal bone",
+        "tree": "IS-A"
+      },
+      "sourceOfficialLateralityEvidence": {
+        "basis": "official FMA relation name matches T70 candidate name after removing the explicit left/right token; FJ suffix and coordinates are not used",
+        "relationRows": [],
+        "side": null,
+        "state": "official_relations_not_lateralized"
+      },
+      "sourceOfficialRelationContexts": [
+        {
+          "sourceFmaConceptId": "FMA5018",
+          "sourceNameEnglish": "bone organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA52734",
+          "sourceNameEnglish": "frontal bone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55671",
+          "sourceNameEnglish": "cavitated organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55673",
+          "sourceNameEnglish": "organ with cavitated organ parts",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67498",
+          "sourceNameEnglish": "organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA7476",
+          "sourceNameEnglish": "flat bone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA20394",
+          "sourceNameEnglish": "human body",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23876",
+          "sourceNameEnglish": "skeleton (in vivo)",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23881",
+          "sourceNameEnglish": "skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA46565",
+          "sourceNameEnglish": "skull",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA52734",
+          "sourceNameEnglish": "frontal bone",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA53672",
+          "sourceNameEnglish": "neurocranium",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA54545",
+          "sourceNameEnglish": "head proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7154",
+          "sourceNameEnglish": "head",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7482",
+          "sourceNameEnglish": "musculoskeletal system",
+          "tree": "PART-OF"
+        }
+      ],
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8209",
+      "sourceSha256": "48583dbbeab8ae243aa4c266b44ca5b26b9c4e1e79976819cfdf5dcb59ec5772",
+      "sourceTriangleCount": 14510,
+      "sourceUnit": "mm from exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 8472,
+      "sourceZipCompressionMethod": 8,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ3200",
+      "t70CandidateFmaConceptId": "FMA52734",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "a2fea9d48b748de1512083488027cbdbe0551b8b7f5aa3e07966e634b10a33e1"
+    },
+    {
+      "candidateProductRegion": "head",
+      "candidateProductRole": "jaw_visual_anchor",
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExplicitOfficialRelation": "not_lateralized_by_official_relations",
+      "lateralityNotInferredFromFjSuffixOrCoordinates": true,
+      "officialCurrentLicense": "CC BY 4.0 per BodyParts3D README; file-level redistribution held against legacy OBJ header",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          0.05255410075187683,
+          1.506100058555603,
+          0.1738319993019104
+        ],
+        "min": [
+          -0.05384590104222298,
+          1.4216300249099731,
+          0.0898536965250969
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveLastModified": "Wed, 22 May 2013 06:46:24 GMT",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsDiscrepancyPolicy": "recorded without editing source vertices or treating bounds as surface/contact evidence",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 0.0,
+      "sourceBoundsHeaderMinusVertexExtremaMm": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sourceBoundsHeaderWithin001Mm": true,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          52.5541,
+          -89.8537,
+          1506.1
+        ],
+        "min": [
+          -53.8459,
+          -173.832,
+          1421.63
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          52.5541,
+          -89.8537,
+          1506.1
+        ],
+        "min": [
+          -53.8459,
+          -173.832,
+          1421.63
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 355295,
+      "sourceClassificationFromT70": [
+        "bone_root_closure"
+      ],
+      "sourceCrc32": "1a0d4fb5",
+      "sourceElementFileId": "FJ3289",
+      "sourceFmaConceptId": "FMA52748",
+      "sourceFrame": "BodyParts3D Release 4.0 static reference",
+      "sourceGeometryTopologyComparisonSha256": "aa2cc30cff07d554afa469343ef6ab8952f80843257249b2e1362d8346194cb7",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "official_archive_crc_sha_obj_header_and_relation_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; one source LOD observed",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ3289.obj",
+      "sourceNameEnglishExactHeader": "Mandible",
+      "sourceNormalCount": 2845,
+      "sourceOfficialHeaderRelation": {
+        "sourceFmaConceptId": "FMA52748",
+        "sourceNameEnglish": "mandible",
+        "tree": "IS-A"
+      },
+      "sourceOfficialLateralityEvidence": {
+        "basis": "official FMA relation name matches T70 candidate name after removing the explicit left/right token; FJ suffix and coordinates are not used",
+        "relationRows": [],
+        "side": null,
+        "state": "official_relations_not_lateralized"
+      },
+      "sourceOfficialRelationContexts": [
+        {
+          "sourceFmaConceptId": "FMA5018",
+          "sourceNameEnglish": "bone organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA52748",
+          "sourceNameEnglish": "mandible",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55671",
+          "sourceNameEnglish": "cavitated organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55673",
+          "sourceNameEnglish": "organ with cavitated organ parts",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67498",
+          "sourceNameEnglish": "organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA7477",
+          "sourceNameEnglish": "irregular bone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA20394",
+          "sourceNameEnglish": "human body",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23876",
+          "sourceNameEnglish": "skeleton (in vivo)",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23881",
+          "sourceNameEnglish": "skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA24728",
+          "sourceNameEnglish": "face",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA46565",
+          "sourceNameEnglish": "skull",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA49184",
+          "sourceNameEnglish": "mouth",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA52748",
+          "sourceNameEnglish": "mandible",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA53673",
+          "sourceNameEnglish": "viscerocranium",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA54398",
+          "sourceNameEnglish": "lower jaw",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA59398",
+          "sourceNameEnglish": "mandibular part of mouth",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA61670",
+          "sourceNameEnglish": "skeleton of mouth",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7152",
+          "sourceNameEnglish": "alimentary system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7154",
+          "sourceNameEnglish": "head",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7482",
+          "sourceNameEnglish": "musculoskeletal system",
+          "tree": "PART-OF"
+        }
+      ],
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8107",
+      "sourceSha256": "c38102c34660e2b767a7b95a341380bf4a52c754c6235fcd322be5c7b8cb1745",
+      "sourceTriangleCount": 5576,
+      "sourceUnit": "mm from exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 2845,
+      "sourceZipCompressionMethod": 8,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ3289",
+      "t70CandidateFmaConceptId": "FMA52748",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "a5ff93769639922c80acf74687fef0770030c4bb067165481ddc1604343940f3"
+    },
+    {
+      "candidateProductRegion": "head",
+      "candidateProductRole": "skull_visual_anchor",
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExplicitOfficialRelation": "not_lateralized_by_official_relations",
+      "lateralityNotInferredFromFjSuffixOrCoordinates": true,
+      "officialCurrentLicense": "CC BY 4.0 per BodyParts3D README; file-level redistribution held against legacy OBJ header",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          0.06070530042052269,
+          1.5845099687576294,
+          0.10095900297164917
+        ],
+        "min": [
+          -0.06196120008826256,
+          1.4777699708938599,
+          -0.018000999465584755
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveLastModified": "Wed, 22 May 2013 06:46:24 GMT",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsDiscrepancyPolicy": "recorded without editing source vertices or treating bounds as surface/contact evidence",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 0.0,
+      "sourceBoundsHeaderMinusVertexExtremaMm": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sourceBoundsHeaderWithin001Mm": true,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          60.7053,
+          18.001,
+          1584.51
+        ],
+        "min": [
+          -61.9612,
+          -100.959,
+          1477.77
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          60.7053,
+          18.001,
+          1584.51
+        ],
+        "min": [
+          -61.9612,
+          -100.959,
+          1477.77
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 843673,
+      "sourceClassificationFromT70": [
+        "bone_root_closure"
+      ],
+      "sourceCrc32": "a455500f",
+      "sourceElementFileId": "FJ3309",
+      "sourceFmaConceptId": "FMA52735",
+      "sourceFrame": "BodyParts3D Release 4.0 static reference",
+      "sourceGeometryTopologyComparisonSha256": "5947a315a89592981a9914326ac2466f8ca94e33ad3fbaea40d8460aa67e0799",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "official_archive_crc_sha_obj_header_and_relation_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; one source LOD observed",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ3309.obj",
+      "sourceNameEnglishExactHeader": "Occipital bone",
+      "sourceNormalCount": 6995,
+      "sourceOfficialHeaderRelation": {
+        "sourceFmaConceptId": "FMA52735",
+        "sourceNameEnglish": "occipital bone",
+        "tree": "IS-A"
+      },
+      "sourceOfficialLateralityEvidence": {
+        "basis": "official FMA relation name matches T70 candidate name after removing the explicit left/right token; FJ suffix and coordinates are not used",
+        "relationRows": [],
+        "side": null,
+        "state": "official_relations_not_lateralized"
+      },
+      "sourceOfficialRelationContexts": [
+        {
+          "sourceFmaConceptId": "FMA5018",
+          "sourceNameEnglish": "bone organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA52735",
+          "sourceNameEnglish": "occipital bone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55671",
+          "sourceNameEnglish": "cavitated organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55673",
+          "sourceNameEnglish": "organ with cavitated organ parts",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67498",
+          "sourceNameEnglish": "organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA7476",
+          "sourceNameEnglish": "flat bone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA20394",
+          "sourceNameEnglish": "human body",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23876",
+          "sourceNameEnglish": "skeleton (in vivo)",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23881",
+          "sourceNameEnglish": "skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA46565",
+          "sourceNameEnglish": "skull",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA49187",
+          "sourceNameEnglish": "occipital part of head",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA52735",
+          "sourceNameEnglish": "occipital bone",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA53672",
+          "sourceNameEnglish": "neurocranium",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA54545",
+          "sourceNameEnglish": "head proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7154",
+          "sourceNameEnglish": "head",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7482",
+          "sourceNameEnglish": "musculoskeletal system",
+          "tree": "PART-OF"
+        }
+      ],
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP9177",
+      "sourceSha256": "c0262a08591e48504c8a53302525377e0c4ad1c165456475f3bb80aab6202d44",
+      "sourceTriangleCount": 12450,
+      "sourceUnit": "mm from exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 6995,
+      "sourceZipCompressionMethod": 8,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ3309",
+      "t70CandidateFmaConceptId": "FMA52735",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "78aa12f5f9425df224ceb54f4d1701ab6716f72d17b8bc32ae11e255e0012b9b"
+    }
+  ],
+  "status": "local_static_source_package_complete_first_pass_candidate_set_rights_human_review_and_learner_binding_held",
+  "task": "T72"
+}

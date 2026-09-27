@@ -1,0 +1,135 @@
+{
+  "revision": "T72-REAL-BROWSER-SAME-FRAME-QA-v1",
+  "task": "T72",
+  "verifiedAtLocalDate": "2026-09-27",
+  "browser": "Codex in-app browser via CUA",
+  "qaPage": "work/evidence/T72/private-preview.html",
+  "productLearnerPage": false,
+  "serverExposure": {
+    "serverRoot": "work/evidence/T72/private-preview-host",
+    "allowlistedPreviewAssetsOnly": true,
+    "projectRootServed": false,
+    "OpenSimModelsServed": false,
+    "internetTransmission": false
+  },
+  "scene": {
+    "loaded": true,
+    "packages": [
+      "T52-B01",
+      "T52-B02",
+      "T52-B03",
+      "T52-B04",
+      "T52-B05",
+      "T52-B06",
+      "T52-B07",
+      "T52-B08",
+      "T52-B09",
+      "T53",
+      "T54",
+      "T55",
+      "T71",
+      "T72"
+    ],
+    "meshNodeCount": 515,
+    "targetIdCount": 11,
+    "targetSourceIdsExact": [
+      "FJ1433",
+      "FJ1433M",
+      "FJ1446",
+      "FJ1446M",
+      "FJ1447",
+      "FJ1447M",
+      "FJ1464",
+      "FJ1464M",
+      "FJ3200",
+      "FJ3289",
+      "FJ3309"
+    ],
+    "AnatomySceneRootCount": 1,
+    "WebGLRendererCount": 1,
+    "frame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+    "pose": "bodyparts3d-r4-static-reference",
+    "selectionCardButtonAndHighlightSynchronized": true
+  },
+  "defaultViewport": {
+    "width": 817,
+    "height": 759,
+    "canvasWidth": 517,
+    "canvasHeight": 640,
+    "documentScrollWidth": 817,
+    "documentScrollHeight": 759,
+    "documentOverflow": false
+  },
+  "actualRenderedSelections": [
+    {
+      "sourceElementFileId": "FJ1433",
+      "region": "thigh",
+      "viewsInspected": [
+        "front",
+        "side"
+      ]
+    },
+    {
+      "sourceElementFileId": "FJ1446",
+      "region": "thorax",
+      "viewsInspected": [
+        "front"
+      ]
+    },
+    {
+      "sourceElementFileId": "FJ1447",
+      "region": "thorax",
+      "viewsInspected": [
+        "front",
+        "back"
+      ]
+    },
+    {
+      "sourceElementFileId": "FJ3200",
+      "region": "head",
+      "viewsInspected": [
+        "front"
+      ]
+    },
+    {
+      "sourceElementFileId": "FJ3289",
+      "region": "head",
+      "viewsInspected": [
+        "side"
+      ]
+    },
+    {
+      "sourceElementFileId": "FJ3309",
+      "region": "head",
+      "viewsInspected": [
+        "back"
+      ]
+    }
+  ],
+  "keyboard": {
+    "arrowDownFromFJ3200": "FJ3289",
+    "cardAndPressedButtonAfterArrowDownMatch": true,
+    "key2SelectsBackView": true,
+    "key3SelectsSideView": true
+  },
+  "console": {
+    "errors": 0,
+    "warnings": 0,
+    "messages": []
+  },
+  "visualInspectionLimits": {
+    "sameFrameRenderPerformed": true,
+    "aabbUsedAsSurfaceOrContactProof": false,
+    "humanAnatomyReviewPerformed": false,
+    "surfaceContactOrNoPenetrationClaim": false,
+    "screenshotsStoredAsRepositoryBitmaps": false,
+    "visualEvidenceRetention": "repeatable private preview source and inspected live browser views are recorded; no bitmap was exported"
+  },
+  "postQaCleanup": {
+    "localhostServerStopped": true,
+    "allowlistedPreviewHardlinksRemoved": true,
+    "privatePreviewHostDirectoryRemoved": true,
+    "projectRootServed": false,
+    "openSimModelsServed": false
+  }
+}
