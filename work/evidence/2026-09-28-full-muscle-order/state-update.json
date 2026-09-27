@@ -1,0 +1,1932 @@
+{
+  "sharedFilesExcludedFromCommit": true,
+  "registryChanges": {
+    "taskStatuses": {
+      "before": {
+        "T50": "passed_with_gaps",
+        "T51": "passed_with_gaps",
+        "T52": "partial_pending_human_laterality_review",
+        "T53": "partial",
+        "T54": "partial",
+        "T55": "passed_with_gaps",
+        "T70": "passed_with_gaps",
+        "T71": "passed_with_gaps",
+        "T56": "passed_with_gaps",
+        "T57": "passed",
+        "T58": "partial",
+        "T59": "planned_not_started",
+        "T60": "planned_not_started",
+        "T61": "planned_not_started",
+        "T62": "planned_not_started",
+        "T63": "planned_not_started",
+        "T64": "planned_not_started",
+        "T65": "planned_not_started",
+        "T66": "planned_not_started",
+        "T67": "deferred_not_started",
+        "T68": "deferred_not_started",
+        "T25": "planned_not_started",
+        "T26": "planned_not_started",
+        "T27": "planned_not_started",
+        "T28": "planned_not_started",
+        "T45": "planned_not_started",
+        "T46": "planned_not_started",
+        "T29": "planned_not_started",
+        "T30": "planned_not_started",
+        "T31": "planned_not_started",
+        "T32": "planned_not_started",
+        "T33": "planned_not_started",
+        "T34": "planned_not_started",
+        "T35": "planned_not_started",
+        "T47": "planned_not_started",
+        "T40": "planned_not_started",
+        "T36": "deferred_not_started",
+        "T37": "deferred_not_started",
+        "T48": "deferred_not_started",
+        "T49": "deferred_not_started",
+        "T38": "deferred_not_started",
+        "T39": "deferred_not_started",
+        "T69": "passed_with_gaps",
+        "T72": "passed_with_gaps",
+        "T73": "planned_not_started",
+        "T74": "planned_not_started",
+        "T75": "planned_not_started",
+        "T76": "planned_not_started",
+        "T77": "planned_not_started",
+        "T78": "planned_not_started"
+      },
+      "after": {
+        "T50": "passed_with_gaps",
+        "T51": "passed_with_gaps",
+        "T52": "partial_pending_human_laterality_review",
+        "T53": "partial",
+        "T54": "partial",
+        "T55": "passed_with_gaps",
+        "T70": "passed_with_gaps",
+        "T71": "passed_with_gaps",
+        "T56": "passed_with_gaps",
+        "T57": "passed",
+        "T58": "partial",
+        "T59": "planned_not_started",
+        "T60": "planned_not_started",
+        "T61": "planned_not_started",
+        "T62": "planned_not_started",
+        "T63": "planned_not_started",
+        "T64": "planned_not_started",
+        "T65": "planned_not_started",
+        "T66": "planned_not_started",
+        "T67": "deferred_not_started",
+        "T68": "deferred_not_started",
+        "T25": "planned_not_started",
+        "T26": "planned_not_started",
+        "T27": "planned_not_started",
+        "T28": "planned_not_started",
+        "T45": "planned_not_started",
+        "T46": "planned_not_started",
+        "T29": "planned_not_started",
+        "T30": "planned_not_started",
+        "T31": "planned_not_started",
+        "T32": "planned_not_started",
+        "T33": "planned_not_started",
+        "T34": "planned_not_started",
+        "T35": "planned_not_started",
+        "T47": "planned_not_started",
+        "T40": "planned_not_started",
+        "T36": "deferred_not_started",
+        "T37": "deferred_not_started",
+        "T48": "deferred_not_started",
+        "T49": "deferred_not_started",
+        "T38": "deferred_not_started",
+        "T39": "deferred_not_started",
+        "T69": "passed_with_gaps",
+        "T72": "passed_with_gaps",
+        "T73": "planned_not_started",
+        "T74": "planned_not_started",
+        "T75": "planned_not_started",
+        "T76": "planned_not_started",
+        "T77": "planned_not_started",
+        "T78": "planned_not_started",
+        "T79": "planned_not_started",
+        "T80": "planned_not_started",
+        "T81": "planned_not_started",
+        "T82": "planned_not_started",
+        "T83": "planned_not_started",
+        "T84": "planned_not_started",
+        "T85": "planned_not_started",
+        "T86": "planned_not_started",
+        "T87": "planned_not_started",
+        "T88": "planned_not_started",
+        "T89": "planned_not_started",
+        "T90": "planned_not_started",
+        "T91": "planned_not_started"
+      }
+    },
+    "fullMuscleOrderAmendment": {
+      "before": null,
+      "after": {
+        "date": "2026-09-28",
+        "status": "planning_only",
+        "T73_T76": "unchanged",
+        "design": "design/2026-09-25-muscle-atlas/19-ALL-MUSCLES-BEFORE-NERVES.md",
+        "prompts": "design/2026-09-25-muscle-atlas/20-SERIAL-PROMPTS-FULL-SCOPE.md",
+        "dynamicBatchGates": {
+          "T79": "all structure batches before T80",
+          "T81": "all origin/insertion batches before T82",
+          "T83": "all function batches before T84",
+          "T66": "all muscle animation batches before T47/T85",
+          "T87": "all nerve evidence batches before T88",
+          "T89": "all nerve geometry batches before T90",
+          "T91": "all nerve dysfunction explanation batches before T65"
+        },
+        "rule": "No nerve execution before all muscle motion target gate T85; no pilot as global completion"
+      }
+    },
+    "tasks": {
+      "before": [
+        {
+          "id": "T50",
+          "title": "전신 모형·동일 장면 운동의 자산 기준 확정",
+          "model": "Sol High",
+          "spec": "work/tasks/T50.md",
+          "prerequisite": "T24/T43 actual artifacts (not T24 product pass)",
+          "prerequisiteIds": [],
+          "defaultNext": "T51",
+          "mode": "active"
+        },
+        {
+          "id": "T51",
+          "title": "전신 자산 수집·변환 도구와 실제 inventory",
+          "model": "Sol High",
+          "spec": "work/tasks/T51.md",
+          "prerequisite": "T50",
+          "prerequisiteIds": [
+            "T50"
+          ],
+          "defaultNext": "T52",
+          "mode": "active"
+        },
+        {
+          "id": "T52",
+          "title": "머리·목 전신 기반 패키지",
+          "model": "Luna Max",
+          "spec": "work/tasks/T52.md",
+          "prerequisite": "T51",
+          "prerequisiteIds": [
+            "T51"
+          ],
+          "defaultNext": "T69",
+          "mode": "active"
+        },
+        {
+          "id": "T69",
+          "title": "T52 좌우 진단 재검증과 후속 진행 게이트 수정",
+          "model": "Luna Max",
+          "spec": "work/tasks/T69.md",
+          "prerequisite": "T52 actual partial artifacts; completion not required",
+          "prerequisiteIds": [
+            "T52"
+          ],
+          "defaultNext": "T53",
+          "mode": "active",
+          "scopeOverride": "Revalidated all 17 historic T52 laterality flags using source IDs, actual OBJ surface, official bilateral relations and OBJ→GLB vertices. No AABB-only error/human gate; preserve unresolved FJ2742/FJ2754 source-label pairing and T52 history. T53 may proceed after shared frame passes; no T53 execution in T69."
+        },
+        {
+          "id": "T53",
+          "title": "몸통·골반 전신 기반 패키지",
+          "model": "Luna Max",
+          "spec": "work/tasks/T53.md",
+          "prerequisite": "T52 actual package + T69 evidence-based shared frame and continuation gate",
+          "prerequisiteIds": [
+            "T52",
+            "T69"
+          ],
+          "defaultNext": "T54",
+          "mode": "active",
+          "continuationRule": "T69 verifies shared frame and isolates local head/neck exceptions; unresolved global frame/transform errors block dependent acquisition. Individual T52 holds do not automatically block independent T53."
+        },
+        {
+          "id": "T54",
+          "title": "어깨·팔·손 전신 기반 패키지",
+          "model": "Luna Max",
+          "spec": "work/tasks/T54.md",
+          "prerequisite": "T53",
+          "prerequisiteIds": [
+            "T53"
+          ],
+          "defaultNext": "T55",
+          "mode": "active"
+        },
+        {
+          "id": "T55",
+          "title": "넙다리·종아리·발 전신 기반 패키지",
+          "model": "Luna Max",
+          "spec": "work/tasks/T55.md",
+          "prerequisite": "T54",
+          "prerequisiteIds": [
+            "T54"
+          ],
+          "defaultNext": "T70",
+          "mode": "active"
+        },
+        {
+          "id": "T70",
+          "title": "전신 source 후보 범위와 최소 통합 계약 보완",
+          "model": "Sol High",
+          "spec": "work/tasks/T70.md",
+          "prerequisite": "T55/T69 actual reports and T50–T55/T69 review",
+          "prerequisiteIds": [
+            "T55",
+            "T69"
+          ],
+          "defaultNext": "T71",
+          "mode": "active",
+          "result": "new source-scope/integration revision; no OBJ acquisition or product scene"
+        },
+        {
+          "id": "T71",
+          "title": "몸통 골격 source 9개 선택 취득 및 정적 연결 QA",
+          "model": "Luna Max",
+          "spec": "work/tasks/T71.md",
+          "prerequisite": "T70 source-scope/integration revision",
+          "prerequisiteIds": [
+            "T70"
+          ],
+          "defaultNext": "T72",
+          "continuationRule": "T70 first-pass minimum has 11 additional missing source IDs after this nine-element batch. T71 must insert bounded acquisition tasks before T56 unless it proves the product input gate with actual assets; no automatic T56 start.",
+          "mode": "active",
+          "result": "9 selected official source members plus a static QA package; rights, human review, and canonical binding held; 11 first-pass IDs remain"
+        },
+        {
+          "id": "T72",
+          "title": "First-pass residual source 11 selected acquisition",
+          "model": "Luna Max",
+          "spec": "work/tasks/T72.md",
+          "prerequisite": "T71 technical partial package; exact residual source IDs acquired and verified in bounded batches",
+          "prerequisiteIds": [
+            "T71"
+          ],
+          "defaultNext": "T56",
+          "mode": "active",
+          "continuationRule": "T72 closes the exact 11-member first-pass source acquisition gate (0/11 residual). T70 bone-root gaps remain 26. T56 is next but must preserve source-only, rights, human-review, and whole-body denominator holds."
+        },
+        {
+          "id": "T56",
+          "title": "하나의 전신 장면과 점진 로딩 통합",
+          "model": "Astra · 현재 대화 직접 구현",
+          "spec": "work/tasks/T56.md",
+          "prerequisite": "T55 + T70 scope/integration contract + T71 and T72 source-only sibling packages; first-pass source residual 0/11",
+          "prerequisiteIds": [
+            "T55",
+            "T70",
+            "T71",
+            "T72"
+          ],
+          "defaultNext": "T57",
+          "mode": "active",
+          "continuationRule": "T72 exact first-pass subset is acquired; this does not establish whole-body coverage. Consume T70 holds and T71/T72 siblings in one scene contract. Preserve 26 bone-root gaps, rights/human-review holds, and single-source LOD limits. No product or public-release pass follows automatically.",
+          "executionLocation": "current_conversation_user_requested"
+        },
+        {
+          "id": "T57",
+          "title": "앱 시작·전신 홈·레이어 조작",
+          "model": "Astra · 현재 대화 직접 구현",
+          "spec": "work/tasks/T57.md",
+          "prerequisite": "T56",
+          "prerequisiteIds": [
+            "T56"
+          ],
+          "defaultNext": "T73",
+          "mode": "active",
+          "executionLocation": "current_conversation_user_requested"
+        },
+        {
+          "id": "T58",
+          "title": "전신 그래픽 품질·연속성 합격",
+          "model": "Astra · 현재 대화 직접 구현",
+          "spec": "work/tasks/T58.md",
+          "prerequisite": "T57",
+          "prerequisiteIds": [
+            "T57"
+          ],
+          "defaultNext": "T59",
+          "mode": "active",
+          "executionLocation": "current_conversation_user_requested",
+          "resumePrerequisiteIds": [
+            "T77",
+            "T78"
+          ],
+          "continuationRule": "Historical partial preserved; resume only after coverage repair packages; do not rerun initial implementation. Visual gate before T59."
+        },
+        {
+          "id": "T59",
+          "title": "같은 앞정강근 표면의 교육용 수축 변형",
+          "model": "Sol High",
+          "spec": "work/tasks/T59.md",
+          "prerequisite": "T58",
+          "prerequisiteIds": [
+            "T58"
+          ],
+          "defaultNext": "T60",
+          "mode": "active"
+        },
+        {
+          "id": "T60",
+          "title": "동일 viewport에서 운동 재생 연결",
+          "model": "Sol High",
+          "spec": "work/tasks/T60.md",
+          "prerequisite": "T59",
+          "prerequisiteIds": [
+            "T59"
+          ],
+          "defaultNext": "T25",
+          "mode": "active"
+        },
+        {
+          "id": "T61",
+          "title": "신경 레이어·선택·관계 데이터 계약",
+          "model": "Sol High",
+          "spec": "work/tasks/T61.md",
+          "prerequisite": "T25",
+          "prerequisiteIds": [
+            "T25"
+          ],
+          "defaultNext": "T62",
+          "mode": "active"
+        },
+        {
+          "id": "T62",
+          "title": "첫 하지 신경 자료 패키지",
+          "model": "Luna Max",
+          "spec": "work/tasks/T62.md",
+          "prerequisite": "T61",
+          "prerequisiteIds": [
+            "T61"
+          ],
+          "defaultNext": "T63",
+          "mode": "active"
+        },
+        {
+          "id": "T63",
+          "title": "첫 신경 3D 주행과 지배근 강조",
+          "model": "Sol High",
+          "spec": "work/tasks/T63.md",
+          "prerequisite": "T62",
+          "prerequisiteIds": [
+            "T62"
+          ],
+          "defaultNext": "T64",
+          "mode": "active"
+        },
+        {
+          "id": "T64",
+          "title": "신경 포착·기능 변화의 접힌 설명 UI",
+          "model": "Luna Max",
+          "spec": "work/tasks/T64.md",
+          "prerequisite": "T63",
+          "prerequisiteIds": [
+            "T63"
+          ],
+          "defaultNext": "T65",
+          "mode": "active"
+        },
+        {
+          "id": "T65",
+          "title": "전신·같은 모형 운동·신경 파일럿 통합 검증",
+          "model": "Luna Max",
+          "spec": "work/tasks/T65.md",
+          "prerequisite": "T64",
+          "prerequisiteIds": [
+            "T64"
+          ],
+          "defaultNext": "T26",
+          "mode": "active"
+        },
+        {
+          "id": "T66",
+          "title": "첫 기능 확장 batch 하나",
+          "model": "Luna Max",
+          "spec": "work/tasks/T66.md",
+          "prerequisite": "T35",
+          "prerequisiteIds": [
+            "T35"
+          ],
+          "defaultNext": "T47",
+          "mode": "active"
+        },
+        {
+          "id": "T67",
+          "title": "주요 근육 평가법 선정 목록",
+          "model": "Luna Max",
+          "spec": "work/tasks/T67.md",
+          "prerequisite": "T65 + evaluation start request",
+          "prerequisiteIds": [],
+          "defaultNext": "T36",
+          "mode": "deferred"
+        },
+        {
+          "id": "T68",
+          "title": "경혈·경락 영역 및 중재 지식의 후속 설계",
+          "model": "Sol High",
+          "spec": "work/tasks/T68.md",
+          "prerequisite": "separate user request",
+          "prerequisiteIds": [],
+          "defaultNext": null,
+          "mode": "deferred"
+        },
+        {
+          "id": "T25",
+          "title": "같은 전신 모형의 앞정강근 제품 합격",
+          "model": "Luna Max",
+          "spec": "work/tasks/T25.md",
+          "prerequisite": "T60",
+          "prerequisiteIds": [
+            "T60"
+          ],
+          "defaultNext": "T61",
+          "mode": "active",
+          "scopeOverride": "T59/T60의 실제 같은 모형 mesh 변형을 main learner에서 검증한다. 별도 T24 bone/path 기술 후보는 pass 근거가 아니다. 전신 탐색→앞정강근→기시정지/기능→CTA→표면 수축과 발 움직임→복원을 시험한다. T24 역사 보고서는 blocked 그대로 보존하고 해결 증거를 새 보고서에 연결한다. 다음은 신경 기반 T61이다."
+        },
+        {
+          "id": "T26",
+          "title": "소흉근 구조·작용 학습 자료",
+          "model": "Luna Max",
+          "spec": "work/tasks/T26.md",
+          "prerequisite": "T65",
+          "prerequisiteIds": [
+            "T65"
+          ],
+          "defaultNext": "T27",
+          "mode": "active",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T27",
+          "title": "전신 안의 소흉근 상세 보강",
+          "model": "Luna Max",
+          "spec": "work/tasks/T27.md",
+          "prerequisite": "T26",
+          "prerequisiteIds": [
+            "T26"
+          ],
+          "defaultNext": "T28",
+          "mode": "active",
+          "scopeOverride": "T52–56에서 이미 조립한 전신 모델의 소흉근/흉곽/견갑대 high LOD·이름/설명/선택만 보강한다. 새 독립 정적 장면으로 전환하지 않는다. 필요한 local binding·관련 뼈를 같은 body frame에 둔다."
+        },
+        {
+          "id": "T28",
+          "title": "견갑대 운동 기반과 전인 시범 하나",
+          "model": "Sol High",
+          "spec": "work/tasks/T28.md",
+          "prerequisite": "T27",
+          "prerequisiteIds": [
+            "T27"
+          ],
+          "defaultNext": "T45",
+          "mode": "active",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T45",
+          "title": "소흉근 관련 견갑골 하강 시범",
+          "model": "Sol High",
+          "spec": "work/tasks/T45.md",
+          "prerequisite": "T28",
+          "prerequisiteIds": [
+            "T28"
+          ],
+          "defaultNext": "T46",
+          "mode": "active",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T46",
+          "title": "소흉근 관련 견갑골 하방회전 시범",
+          "model": "Sol High",
+          "spec": "work/tasks/T46.md",
+          "prerequisite": "T45",
+          "prerequisiteIds": [
+            "T45"
+          ],
+          "defaultNext": "T29",
+          "mode": "active",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T29",
+          "title": "소흉근 구조·기능 사용자 흐름 통합",
+          "model": "Luna Max",
+          "spec": "work/tasks/T29.md",
+          "prerequisite": "T46",
+          "prerequisiteIds": [
+            "T46"
+          ],
+          "defaultNext": "T30",
+          "mode": "active",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T30",
+          "title": "모형 중심 화면과 성능 정리",
+          "model": "Luna Max",
+          "spec": "work/tasks/T30.md",
+          "prerequisite": "T29",
+          "prerequisiteIds": [
+            "T29"
+          ],
+          "defaultNext": "T31",
+          "mode": "active",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T31",
+          "title": "두 부위 구조·기능 파일럿 합격 검증",
+          "model": "Luna Max",
+          "spec": "work/tasks/T31.md",
+          "prerequisite": "T30",
+          "prerequisiteIds": [
+            "T30"
+          ],
+          "defaultNext": "T32",
+          "mode": "active",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T32",
+          "title": "전신 목표 목록 동결과 부위 패키지 배정",
+          "model": "Luna Max",
+          "spec": "work/tasks/T32.md",
+          "prerequisite": "T31",
+          "prerequisiteIds": [
+            "T31"
+          ],
+          "defaultNext": "T33",
+          "mode": "active",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T33",
+          "title": "첫 지역 구조·기능 텍스트 패키지",
+          "model": "Luna Max",
+          "spec": "work/tasks/T33.md",
+          "prerequisite": "T32",
+          "prerequisiteIds": [
+            "T32"
+          ],
+          "defaultNext": "T34",
+          "mode": "active",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T34",
+          "title": "구조 범위 감사만 수행",
+          "model": "Luna Max",
+          "spec": "work/tasks/T34.md",
+          "prerequisite": "T33",
+          "prerequisiteIds": [
+            "T33"
+          ],
+          "defaultNext": "T35",
+          "mode": "active",
+          "scopeOverride": "동결한 분모와 실제 패키지 결과를 자동 집계·대조하는 read-only audit다. 전신 자료 입력/대규모 UI 수정/누락 mesh 제작을 이 task에서 하지 않는다. 지역별 누락/오류를 재현하고 대상 ID·담당·합격 기준을 가진 별도 수정 task로 배정한다. 집계 오류의 작은 감사 도구 수정만 허용한다. 누락이 없을 때만 structure gate pass."
+        },
+        {
+          "id": "T35",
+          "title": "작용군 목록과 확장 queue만 확정",
+          "model": "Luna Max",
+          "spec": "work/tasks/T35.md",
+          "prerequisite": "T34",
+          "prerequisiteIds": [
+            "T34"
+          ],
+          "defaultNext": "T66",
+          "mode": "active",
+          "scopeOverride": "planning-only task다. 현재 모델에서 재사용 가능한 action-family·고정 조건·모델/frame/pose·clip 지원을 정리하고 bounded 작업으로 나눈다. 첫 clip 제작/전신 기능 자료 입력까지 같이 하지 않는다. 실제 첫 batch는 T66이다. T66 이후 필요한 작업을 T47 앞에 넣는다."
+        },
+        {
+          "id": "T47",
+          "title": "전신 구조·기능 완료 판정",
+          "model": "Luna Max",
+          "spec": "work/tasks/T47.md",
+          "prerequisite": "T66",
+          "prerequisiteIds": [
+            "T66"
+          ],
+          "defaultNext": "T40",
+          "mode": "active",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T40",
+          "title": "구조·기능 로컬 전달과 Git 체크포인트",
+          "model": "Luna Max",
+          "spec": "work/tasks/T40.md",
+          "prerequisite": "T47",
+          "prerequisiteIds": [
+            "T47"
+          ],
+          "defaultNext": null,
+          "mode": "active",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T36",
+          "title": "주요 평가 시범에 한정한 계약",
+          "model": "Sol High",
+          "spec": "work/tasks/T36.md",
+          "prerequisite": "T67",
+          "prerequisiteIds": [
+            "T67"
+          ],
+          "defaultNext": "T37",
+          "mode": "deferred",
+          "scopeOverride": "T67이 선정한 주요 근육/기능 목록과 첫 검사1개만 위한 두 actor/단계/관찰 계약을 만든다. 전신 모든 근육 검사 schema 콘텐츠를 채우지 않는다. 구조·기능·신경 scene core를 재사용하고 환자 자동 판정은 만들지 않는다."
+        },
+        {
+          "id": "T37",
+          "title": "주요 근육의 첫 검사 하나만 정리",
+          "model": "Luna Max",
+          "spec": "work/tasks/T37.md",
+          "prerequisite": "T36",
+          "prerequisiteIds": [
+            "T36"
+          ],
+          "defaultNext": "T48",
+          "mode": "deferred",
+          "scopeOverride": "T67에서 고른 검사 한 개를 원문 대조해 검사자/피검사자의 자세·손 위치·고정·저항 방향·관찰/한계 storyboard로 만든다. 모든 근육 평가나 서로 다른 검사들을 한 batch에 넣지 않는다. 후속 주요 검사도 한 검사 또는 작은 묶음씩 배정한다."
+        },
+        {
+          "id": "T48",
+          "title": "검사자·피검사자 2인 애니메이션 기반",
+          "model": "Sol High",
+          "spec": "work/tasks/T48.md",
+          "prerequisite": "T37",
+          "prerequisiteIds": [
+            "T37"
+          ],
+          "defaultNext": "T49",
+          "mode": "deferred",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T49",
+          "title": "첫 기능검사 2인 교육용 시범 제작",
+          "model": "Sol High",
+          "spec": "work/tasks/T49.md",
+          "prerequisite": "T48",
+          "prerequisiteIds": [
+            "T48"
+          ],
+          "defaultNext": "T38",
+          "mode": "deferred",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T38",
+          "title": "평가 단계 UI와 검사 시범 통합",
+          "model": "Luna Max",
+          "spec": "work/tasks/T38.md",
+          "prerequisite": "T49",
+          "prerequisiteIds": [
+            "T49"
+          ],
+          "defaultNext": null,
+          "mode": "deferred",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T39",
+          "title": "선택적 학습 문제",
+          "model": "Luna Max",
+          "spec": "work/tasks/T39.md",
+          "prerequisite": "separate user request",
+          "prerequisiteIds": [],
+          "defaultNext": null,
+          "mode": "deferred",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T73",
+          "title": "전신 시각 목표·누락 원인·취득 범위 확정",
+          "model": "Astra · 현재 대화 직접 구현",
+          "spec": "work/tasks/T73.md",
+          "prerequisite": "existing T58 partial report/artifacts; does not depend on future T58 pass",
+          "prerequisiteIds": [],
+          "defaultNext": "T74",
+          "mode": "active",
+          "continuationRule": "T73 scope freeze; local source holds do not globally block independent regions. T77 requires all frozen visual necessities or remains partial. T58 visual pass still required before T59.",
+          "inputArtifactTaskIds": [
+            "T58"
+          ]
+        },
+        {
+          "id": "T74",
+          "title": "양측 두개골 시각 기반 보완",
+          "model": "Luna Max",
+          "spec": "work/tasks/T74.md",
+          "prerequisite": "T73",
+          "prerequisiteIds": [
+            "T73"
+          ],
+          "defaultNext": "T75",
+          "mode": "active",
+          "continuationRule": "T73 scope freeze; local source holds do not globally block independent regions. T77 requires all frozen visual necessities or remains partial. T58 visual pass still required before T59."
+        },
+        {
+          "id": "T75",
+          "title": "삼각근·광배근 양측 source 보완",
+          "model": "Luna Max",
+          "spec": "work/tasks/T75.md",
+          "prerequisite": "T74",
+          "prerequisiteIds": [
+            "T73",
+            "T74"
+          ],
+          "defaultNext": "T76",
+          "mode": "active",
+          "continuationRule": "T73 scope freeze; local source holds do not globally block independent regions. T77 requires all frozen visual necessities or remains partial. T58 visual pass still required before T59."
+        },
+        {
+          "id": "T76",
+          "title": "골반·샅 시각 범위 보완",
+          "model": "Luna Max",
+          "spec": "work/tasks/T76.md",
+          "prerequisite": "T75",
+          "prerequisiteIds": [
+            "T73",
+            "T75"
+          ],
+          "defaultNext": "T77",
+          "mode": "active",
+          "continuationRule": "T73 scope freeze; local source holds do not globally block independent regions. T77 requires all frozen visual necessities or remains partial. T58 visual pass still required before T59."
+        },
+        {
+          "id": "T77",
+          "title": "보완 패키지 통합·표시 정책 분리",
+          "model": "Astra · 현재 대화 직접 구현",
+          "spec": "work/tasks/T77.md",
+          "prerequisite": "T73 frozen visual target plus all mandatory acquisition packages; local partial history alone is not the gate",
+          "prerequisiteIds": [
+            "T73",
+            "T74",
+            "T75",
+            "T76"
+          ],
+          "defaultNext": "T78",
+          "mode": "active",
+          "continuationRule": "T73 scope freeze; local source holds do not globally block independent regions. T77 requires all frozen visual necessities or remains partial. T58 visual pass still required before T59."
+        },
+        {
+          "id": "T78",
+          "title": "주요 근육·뼈 선택과 세 이름 연결 파일럿",
+          "model": "Luna Max",
+          "spec": "work/tasks/T78.md",
+          "prerequisite": "T77",
+          "prerequisiteIds": [
+            "T77"
+          ],
+          "defaultNext": "T58",
+          "mode": "active",
+          "continuationRule": "T73 scope freeze; local source holds do not globally block independent regions. T77 requires all frozen visual necessities or remains partial. T58 visual pass still required before T59."
+        }
+      ],
+      "after": [
+        {
+          "id": "T50",
+          "title": "전신 모형·동일 장면 운동의 자산 기준 확정",
+          "model": "Sol High",
+          "spec": "work/tasks/T50.md",
+          "prerequisite": "T24/T43 actual artifacts (not T24 product pass)",
+          "prerequisiteIds": [],
+          "defaultNext": "T51",
+          "mode": "active"
+        },
+        {
+          "id": "T51",
+          "title": "전신 자산 수집·변환 도구와 실제 inventory",
+          "model": "Sol High",
+          "spec": "work/tasks/T51.md",
+          "prerequisite": "T50",
+          "prerequisiteIds": [
+            "T50"
+          ],
+          "defaultNext": "T52",
+          "mode": "active"
+        },
+        {
+          "id": "T52",
+          "title": "머리·목 전신 기반 패키지",
+          "model": "Luna Max",
+          "spec": "work/tasks/T52.md",
+          "prerequisite": "T51",
+          "prerequisiteIds": [
+            "T51"
+          ],
+          "defaultNext": "T69",
+          "mode": "active"
+        },
+        {
+          "id": "T69",
+          "title": "T52 좌우 진단 재검증과 후속 진행 게이트 수정",
+          "model": "Luna Max",
+          "spec": "work/tasks/T69.md",
+          "prerequisite": "T52 actual partial artifacts; completion not required",
+          "prerequisiteIds": [
+            "T52"
+          ],
+          "defaultNext": "T53",
+          "mode": "active",
+          "scopeOverride": "Revalidated all 17 historic T52 laterality flags using source IDs, actual OBJ surface, official bilateral relations and OBJ→GLB vertices. No AABB-only error/human gate; preserve unresolved FJ2742/FJ2754 source-label pairing and T52 history. T53 may proceed after shared frame passes; no T53 execution in T69."
+        },
+        {
+          "id": "T53",
+          "title": "몸통·골반 전신 기반 패키지",
+          "model": "Luna Max",
+          "spec": "work/tasks/T53.md",
+          "prerequisite": "T52 actual package + T69 evidence-based shared frame and continuation gate",
+          "prerequisiteIds": [
+            "T52",
+            "T69"
+          ],
+          "defaultNext": "T54",
+          "mode": "active",
+          "continuationRule": "T69 verifies shared frame and isolates local head/neck exceptions; unresolved global frame/transform errors block dependent acquisition. Individual T52 holds do not automatically block independent T53."
+        },
+        {
+          "id": "T54",
+          "title": "어깨·팔·손 전신 기반 패키지",
+          "model": "Luna Max",
+          "spec": "work/tasks/T54.md",
+          "prerequisite": "T53",
+          "prerequisiteIds": [
+            "T53"
+          ],
+          "defaultNext": "T55",
+          "mode": "active"
+        },
+        {
+          "id": "T55",
+          "title": "넙다리·종아리·발 전신 기반 패키지",
+          "model": "Luna Max",
+          "spec": "work/tasks/T55.md",
+          "prerequisite": "T54",
+          "prerequisiteIds": [
+            "T54"
+          ],
+          "defaultNext": "T70",
+          "mode": "active"
+        },
+        {
+          "id": "T70",
+          "title": "전신 source 후보 범위와 최소 통합 계약 보완",
+          "model": "Sol High",
+          "spec": "work/tasks/T70.md",
+          "prerequisite": "T55/T69 actual reports and T50–T55/T69 review",
+          "prerequisiteIds": [
+            "T55",
+            "T69"
+          ],
+          "defaultNext": "T71",
+          "mode": "active",
+          "result": "new source-scope/integration revision; no OBJ acquisition or product scene"
+        },
+        {
+          "id": "T71",
+          "title": "몸통 골격 source 9개 선택 취득 및 정적 연결 QA",
+          "model": "Luna Max",
+          "spec": "work/tasks/T71.md",
+          "prerequisite": "T70 source-scope/integration revision",
+          "prerequisiteIds": [
+            "T70"
+          ],
+          "defaultNext": "T72",
+          "continuationRule": "T70 first-pass minimum has 11 additional missing source IDs after this nine-element batch. T71 must insert bounded acquisition tasks before T56 unless it proves the product input gate with actual assets; no automatic T56 start.",
+          "mode": "active",
+          "result": "9 selected official source members plus a static QA package; rights, human review, and canonical binding held; 11 first-pass IDs remain"
+        },
+        {
+          "id": "T72",
+          "title": "First-pass residual source 11 selected acquisition",
+          "model": "Luna Max",
+          "spec": "work/tasks/T72.md",
+          "prerequisite": "T71 technical partial package; exact residual source IDs acquired and verified in bounded batches",
+          "prerequisiteIds": [
+            "T71"
+          ],
+          "defaultNext": "T56",
+          "mode": "active",
+          "continuationRule": "T72 closes the exact 11-member first-pass source acquisition gate (0/11 residual). T70 bone-root gaps remain 26. T56 is next but must preserve source-only, rights, human-review, and whole-body denominator holds."
+        },
+        {
+          "id": "T56",
+          "title": "하나의 전신 장면과 점진 로딩 통합",
+          "model": "Astra · 현재 대화 직접 구현",
+          "spec": "work/tasks/T56.md",
+          "prerequisite": "T55 + T70 scope/integration contract + T71 and T72 source-only sibling packages; first-pass source residual 0/11",
+          "prerequisiteIds": [
+            "T55",
+            "T70",
+            "T71",
+            "T72"
+          ],
+          "defaultNext": "T57",
+          "mode": "active",
+          "continuationRule": "T72 exact first-pass subset is acquired; this does not establish whole-body coverage. Consume T70 holds and T71/T72 siblings in one scene contract. Preserve 26 bone-root gaps, rights/human-review holds, and single-source LOD limits. No product or public-release pass follows automatically.",
+          "executionLocation": "current_conversation_user_requested"
+        },
+        {
+          "id": "T57",
+          "title": "앱 시작·전신 홈·레이어 조작",
+          "model": "Astra · 현재 대화 직접 구현",
+          "spec": "work/tasks/T57.md",
+          "prerequisite": "T56",
+          "prerequisiteIds": [
+            "T56"
+          ],
+          "defaultNext": "T73",
+          "mode": "active",
+          "executionLocation": "current_conversation_user_requested"
+        },
+        {
+          "id": "T58",
+          "title": "전신 그래픽 재검증",
+          "model": "Astra · 현재 대화 직접 구현",
+          "spec": "work/tasks/T58.md",
+          "prerequisite": "T80 pass",
+          "prerequisiteIds": [
+            "T57"
+          ],
+          "defaultNext": "T81",
+          "mode": "active",
+          "executionLocation": "current_conversation_user_requested",
+          "resumePrerequisiteIds": [
+            "T80"
+          ],
+          "continuationRule": "Historical partial preserved; resume only after coverage repair packages; do not rerun initial implementation. Visual gate before T59.",
+          "scopeOverride": "기존 T58 코드와 역사 보고서를 보존하고 전체 동결 구조의 준비 상태를 확인한 뒤 전신/머리/손/종아리 및 새 필수 부위 캡처·단일 scene·camera·패널·390/1024/1440 성능을 재검증한다. 보완자산 UI가 사라지고 요추/엉치뼈 등 맥락 뼈가 기본 표시되는지 확인한다. 실제 필수 누락이 남으면 partial이고 T81로 넘어가지 않는다. 새 재검증 보고서를 남기며 초기 구현을 재작성하지 않는다.",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T59",
+          "title": "같은 앞정강근 표면의 교육용 수축 변형",
+          "model": "Sol High",
+          "spec": "work/tasks/T59.md",
+          "prerequisite": "실행 queue의 직전 필수 gate",
+          "prerequisiteIds": [
+            "T35"
+          ],
+          "defaultNext": "T60",
+          "mode": "active",
+          "scopeOverride": "T55 전신 모델의 실제 앞정강근과 부착·발목 bone에 대해 model-local 좌표/endpoint·rest pose를 검증하고 skinning 또는 morph/shape-key 기반 변형을 제작한다. 목표 근육의 형태 변화와 발 움직임을 같은 모델에서 결속한다. 주변 근육은 사용자가 숨기지 않았다면 유지하고 관절을 지나는 주변 구조의 수동 변형/관통도 처리한다. 근육 전체 scale이나 선 길이 감소만으로 대체하지 않는다.\n ",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T60",
+          "title": "동일 viewport에서 운동 재생 연결",
+          "model": "Sol High",
+          "spec": "work/tasks/T60.md",
+          "prerequisite": "실행 queue의 직전 필수 gate",
+          "prerequisiteIds": [
+            "T59"
+          ],
+          "defaultNext": "T25",
+          "mode": "active",
+          "scopeOverride": "MotionLearningPanel의 독립 asset/mixer 소유를 AnatomySceneController 명령으로 연결한다. 실제 main renderer가 가진 T59 target node를 애니메이션하고 UI는 play/pause/seek/reset 명령과 상태만 가진다. 사용자 CTA 클릭 전에는 움직이지 않는다. 기존 camera/background/layers/selection을 snapshot해 보존하고 종료 시 pose/가시성만 정확히 복원한다.\n ",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T61",
+          "title": "신경 레이어·선택·관계 데이터 계약",
+          "model": "Sol High",
+          "spec": "work/tasks/T61.md",
+          "prerequisite": "T85 pass",
+          "prerequisiteIds": [
+            "T85"
+          ],
+          "defaultNext": "T86",
+          "mode": "active",
+          "scopeOverride": "전신 근육 기능/animation 합격 후 신경의 typed selection, branch graph, 다중 지배근 관계, source/frame/pose/registration, 레이어와 카드 계약만 구현한다. 전신 조사/3D는 T86 이후다. 같은 scene에 확장하며 감각분포·피부분절·경락을 혼합하지 않는다.",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T62",
+          "title": "첫 하지 신경 자료 패키지",
+          "model": "Luna Max",
+          "spec": "work/tasks/T62.md",
+          "prerequisite": "T86",
+          "prerequisiteIds": [
+            "T86"
+          ],
+          "defaultNext": "T87",
+          "mode": "active",
+          "scopeOverride": "T86 전신 조사 queue의 첫 하지 신경 trunk1개/branch최대2개 자료를 조사한다. 기존 명세의 상세 근거·검증은 유지하고 이 pilot 하나로 전체 신경 조사 완료를 선언하지 않는다. 다음 T87과 나머지 전체 조사 batch다.",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T63",
+          "title": "첫 신경 3D 주행과 지배근 강조",
+          "model": "Sol High",
+          "spec": "work/tasks/T63.md",
+          "prerequisite": "T88 pass 및 필요한 registration task",
+          "prerequisiteIds": [
+            "T88"
+          ],
+          "defaultNext": "T89",
+          "mode": "active",
+          "scopeOverride": "전체 신경 조사·통합 후 첫 검증된 신경 주행을 같은 scene에 구현한다. 원래 명세의 실제 주행/좌표/pose 검증을 유지한다. 클릭 시 근거 있는 지배근을 강조하고 다른 근육을 흐리며 복원 가능하게 한다. 신경 기본 설명 카드와 세 이름을 연결한다. 다음 나머지 전신 nerve 3D batch이며 포착 설명을 먼저 구현하지 않는다.",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T64",
+          "title": "신경 포착·기능 변화의 접힌 설명 UI",
+          "model": "Luna Max",
+          "spec": "work/tasks/T64.md",
+          "prerequisite": "T90 pass",
+          "prerequisiteIds": [
+            "T90"
+          ],
+          "defaultNext": "T91",
+          "mode": "active",
+          "scopeOverride": "신경 3D와 지배근 그래픽 완성 후 첫 trunk1/branch≤2의 포착 가능 구간과 병변 수준별 기능 변화 설명을 실제 근거로 작성한다. 처음부터 모든 정보를 펼치지 않는다. T91/후속 batch로 전신 내용 범위를 확장하고 치료/자침 추천은 넣지 않는다.",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T65",
+          "title": "전신 근육·신경·기능이상 설명 최종 통합 검증",
+          "model": "Luna Max",
+          "spec": "work/tasks/T65.md",
+          "prerequisite": "T91 및 모든 기능이상 설명 batch",
+          "prerequisiteIds": [
+            "T91"
+          ],
+          "defaultNext": "T40",
+          "mode": "active",
+          "scopeOverride": "동결한 전신 근육 구조/기시정지/기능/대표 움직임과 전신 신경 조사/주행/지배근/포착·수준별 설명의 연결을 통합 감사한다. coverage 수치와 실제 지역별 화면을 모두 검증한다. 미해결/근거 없음은 정확히 표시하고 전신 완료로 과장하지 않는다. 평가/경혈/치료 기능은 별도 보류한다.",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T66",
+          "title": "첫 기능 확장 batch 하나",
+          "model": "Luna Max",
+          "spec": "work/tasks/T66.md",
+          "prerequisite": "실행 queue의 직전 필수 gate",
+          "prerequisiteIds": [
+            "T31"
+          ],
+          "defaultNext": "T47",
+          "mode": "active",
+          "scopeOverride": "T35에서 동결한 단일 action-family를 대상으로 검증된 동일 rig의 공유 clip 연결 최대10관계 또는 기존 rig 기반 clip1개만 구현한다. 새 관절/rig 정합이 필요하면 Sol task로 따로 배정하고 이 task를 확장하지 않는다.\n ",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T67",
+          "title": "주요 근육 평가법 선정 목록",
+          "model": "Luna Max",
+          "spec": "work/tasks/T67.md",
+          "prerequisite": "T65 + evaluation start request",
+          "prerequisiteIds": [],
+          "defaultNext": "T36",
+          "mode": "deferred"
+        },
+        {
+          "id": "T68",
+          "title": "경혈·경락 영역 및 중재 지식의 후속 설계",
+          "model": "Sol High",
+          "spec": "work/tasks/T68.md",
+          "prerequisite": "separate user request",
+          "prerequisiteIds": [],
+          "defaultNext": null,
+          "mode": "deferred"
+        },
+        {
+          "id": "T25",
+          "title": "같은 전신 모형의 앞정강근 제품 합격",
+          "model": "Luna Max",
+          "spec": "work/tasks/T25.md",
+          "prerequisite": "실행 queue의 직전 필수 gate",
+          "prerequisiteIds": [
+            "T60"
+          ],
+          "defaultNext": "T27",
+          "mode": "active",
+          "scopeOverride": "T42 공통 카드와 T24 실제 clip을 연결한다. 근육 선택→세 이름/기시·정지→눈에 보이는 '움직임으로 이해하기'→실제 몸 움직임→작용 설명을 연결한다. 클릭은 명시적 재생 요청으로 취급하되 reduced-motion은 정지 자세/수동 단계 선택을 기본으로 한다.\n\n기능 탭 전환과 작용 선택을 동기화하고 pause/resume/처음 자세/느리게/진행 막대를 제공한다. camera reset과 pose reset을 분리한다. 모형 전환이 있으면 학습용 시범 모형임을 짧게 알린다.\n\n선택/부위/탭 전환·로드 실패·unmount 시 loop·mixer·강조를 정리한다. CTA 클릭 전에는 자동 재생하지 않는다.\n T59/T60의 실제 같은 모형 mesh 변형을 main learner에서 검증한다. 별도 T24 bone/path 기술 후보는 pass 근거가 아니다. 전신 탐색→앞정강근→기시정지/기능→CTA→표면 수축과 발 움직임→복원을 시험한다. T24 역사 보고서는 blocked 그대로 보존하고 해결 증거를 새 보고서에 연결한다. 다음은 같은 전신 모형의 소흉근 사례 T27이며, 신경은 전신 근육 시범 gate T85 이후다.",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T26",
+          "title": "소흉근 구조·작용 학습 자료",
+          "model": "Luna Max",
+          "spec": "work/tasks/T26.md",
+          "prerequisite": "T65",
+          "prerequisiteIds": [
+            "T65"
+          ],
+          "defaultNext": "T27",
+          "mode": "superseded_plan",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다.",
+          "supersededBy": [
+            "T81",
+            "T83"
+          ]
+        },
+        {
+          "id": "T27",
+          "title": "소흉근 동일 모형 변형 준비",
+          "model": "Sol High",
+          "spec": "work/tasks/T27.md",
+          "prerequisite": "T25 pass",
+          "prerequisiteIds": [
+            "T25"
+          ],
+          "defaultNext": "T28",
+          "mode": "active",
+          "scopeOverride": "전신 구조 단계에서 준비된 소흉근/흉곽/견갑대와 완료된 기능 설명을 재사용한다. rig/부착/주변 구조 변형 준비만 검증하고 필요할 때만 근거 있는 상세 자산을 보완한다. 다른 모델/고해상도 LOD가 있다고 가정하지 않는다. T28의 동일 모델 운동을 준비한다.",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T28",
+          "title": "견갑대 운동 기반과 전인 시범 하나",
+          "model": "Sol High",
+          "spec": "work/tasks/T28.md",
+          "prerequisite": "실행 queue의 직전 필수 gate",
+          "prerequisiteIds": [
+            "T27"
+          ],
+          "defaultNext": "T45",
+          "mode": "active",
+          "scopeOverride": "T81–84의 전신 내용 batch에서 확정한 조건의 소흉근 관련 견갑골 전인 시범 1개를 제작한다. 흉곽에 대한 견갑대의 이동/회전과 고정 조건을 모델링하고 T45/T46에서 재사용할 골격·경로 제작 도구를 만든다.\n\n단일 임의 hinge 또는 상완골만 움직이는 것으로 견갑골 작용을 대신하지 않는다. 근육 endpoint/변형 또는 표시된 설명 경로를 함께 제공한다. T44의 좌표 정합 원칙을 재사용하되 발목 좌표를 복제하지 않는다.\n 기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다.",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T45",
+          "title": "소흉근 관련 견갑골 하강 시범",
+          "model": "Sol High",
+          "spec": "work/tasks/T45.md",
+          "prerequisite": "실행 queue의 직전 필수 gate",
+          "prerequisiteIds": [
+            "T28"
+          ],
+          "defaultNext": "T46",
+          "mode": "active",
+          "scopeOverride": "T28 기반을 재사용해 T81–84의 전신 내용 batch에서 근거/조건이 확인된 하강 시범 clip1개를 만든다. 단순 전인 clip의 축값을 바꿔 해부학 근거 대신 쓰지 않는다. moving/fixed structures·근육 경로와 설명을 연결한다.\n 기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다.",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T46",
+          "title": "소흉근 관련 견갑골 하방회전 시범",
+          "model": "Sol High",
+          "spec": "work/tasks/T46.md",
+          "prerequisite": "실행 queue의 직전 필수 gate",
+          "prerequisiteIds": [
+            "T45"
+          ],
+          "defaultNext": "T29",
+          "mode": "active",
+          "scopeOverride": "T28 기반으로 T81–84의 전신 내용 batch에서 근거/조건이 확인된 하방회전 시범 clip1개를 만든다. 회전 방향과 흉곽 정합을 검증하며 전인/하강과 작용 ID를 구분한다. 대표 시범을 생체 운동의 정량 재현으로 주장하지 않는다.\n 기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다.",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T29",
+          "title": "소흉근 구조·기능 사용자 흐름 통합",
+          "model": "Luna Max",
+          "spec": "work/tasks/T29.md",
+          "prerequisite": "실행 queue의 직전 필수 gate",
+          "prerequisiteIds": [
+            "T46"
+          ],
+          "defaultNext": "T31",
+          "mode": "active",
+          "scopeOverride": "소흉근 선택→주변 흐림→구조 설명→CTA→전인/하강/하방회전 작용 선택→해당 실제 clip과 설명으로 연결한다. 지원하지 않는 작용은 다른 clip으로 대체하지 않는다. 뼈 카드의 세 이름과 근육으로 돌아오는 흐름을 검증한다.\n 기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다.",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T30",
+          "title": "모형 중심 화면과 성능 정리",
+          "model": "Luna Max",
+          "spec": "work/tasks/T30.md",
+          "prerequisite": "T29",
+          "prerequisiteIds": [
+            "T29"
+          ],
+          "defaultNext": "T31",
+          "mode": "superseded_plan",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다.",
+          "supersededBy": [
+            "T58",
+            "T85"
+          ]
+        },
+        {
+          "id": "T31",
+          "title": "두 부위 구조·기능 파일럿 합격 검증",
+          "model": "Luna Max",
+          "spec": "work/tasks/T31.md",
+          "prerequisite": "실행 queue의 직전 필수 gate",
+          "prerequisiteIds": [
+            "T29"
+          ],
+          "defaultNext": "T66",
+          "mode": "active",
+          "scopeOverride": "종아리와 소흉근의 실제 data/scene/clip을 전체 사용자 흐름으로 검사한다. 세 이름·기시정지·뼈 카드·클릭·흐림·움직임·설명·복원을 함께 확인한다. 데이터 검증과 실제 화면 검증을 분리 기록한다.\n 기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다.",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T32",
+          "title": "전신 목표 목록 동결과 부위 패키지 배정",
+          "model": "Luna Max",
+          "spec": "work/tasks/T32.md",
+          "prerequisite": "T31",
+          "prerequisiteIds": [
+            "T31"
+          ],
+          "defaultNext": "T33",
+          "mode": "superseded_plan",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다.",
+          "supersededBy": [
+            "T78"
+          ]
+        },
+        {
+          "id": "T33",
+          "title": "첫 지역 구조·기능 텍스트 패키지",
+          "model": "Luna Max",
+          "spec": "work/tasks/T33.md",
+          "prerequisite": "T32",
+          "prerequisiteIds": [
+            "T32"
+          ],
+          "defaultNext": "T34",
+          "mode": "superseded_plan",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다.",
+          "supersededBy": [
+            "T81"
+          ]
+        },
+        {
+          "id": "T34",
+          "title": "구조 범위 감사만 수행",
+          "model": "Luna Max",
+          "spec": "work/tasks/T34.md",
+          "prerequisite": "T33",
+          "prerequisiteIds": [
+            "T33"
+          ],
+          "defaultNext": "T35",
+          "mode": "superseded_plan",
+          "scopeOverride": "동결한 분모와 실제 패키지 결과를 자동 집계·대조하는 read-only audit다. 전신 자료 입력/대규모 UI 수정/누락 mesh 제작을 이 task에서 하지 않는다. 지역별 누락/오류를 재현하고 대상 ID·담당·합격 기준을 가진 별도 수정 task로 배정한다. 집계 오류의 작은 감사 도구 수정만 허용한다. 누락이 없을 때만 structure gate pass.",
+          "supersededBy": [
+            "T80"
+          ]
+        },
+        {
+          "id": "T35",
+          "title": "전신 근육 animation 목표와 제작 queue",
+          "model": "Sol High",
+          "spec": "work/tasks/T35.md",
+          "prerequisite": "T84 pass",
+          "prerequisiteIds": [
+            "T84"
+          ],
+          "defaultNext": "T59",
+          "mode": "active",
+          "scopeOverride": "모든 근육이 하나 이상의 자기 기능을 학습할 수 있는 시범을 갖도록 target→근거 있는 작용/고정조건→변형 방식→관련 뼈/주변 구조→clip support를 정의한다. 근육당 대표 시범 최소1개와 추가 작용 미지원 목록을 구분하여 모든 작용 구현이라고 과장하지 않는다. 얼굴/혀/눈/호흡/괄약근 등 비사지 motion family를 누락하지 않는다. 같은 rig를 재사용할 수 있어도 근육별 설명/선택/작용의 검증을 생략하지 않는다. 첫 앞정강근 T59–60/T25와 소흉근 기존 task를 첫 실제 사례로 보존하고 T66 및 나머지 bounded clip/rig 제작 task를 모두 정수 ID로 T47 감사 앞에 배정한다. 계획만 작성, clip 제작 미실행.",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T47",
+          "title": "전신 구조·기능·운동 자료 감사",
+          "model": "Luna Max",
+          "spec": "work/tasks/T47.md",
+          "prerequisite": "모든 근육 animation batch",
+          "prerequisiteIds": [
+            "T66"
+          ],
+          "defaultNext": "T85",
+          "mode": "active",
+          "scopeOverride": "전체 구조/기시정지/기능/대표 motion 분모를 데이터/파일/실제 binding으로 전수 감사한다. 첫 batch/pilot 완료를 전신 완료로 쓰지 않는다. 필수 누락은 수정 작업으로 배정하고 T85 시각·사용자 흐름 합격과 분리한다.",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T40",
+          "title": "구조·기능 로컬 전달과 Git 체크포인트",
+          "model": "Luna Max",
+          "spec": "work/tasks/T40.md",
+          "prerequisite": "실행 queue의 직전 필수 gate",
+          "prerequisiteIds": [
+            "T65"
+          ],
+          "defaultNext": null,
+          "mode": "active",
+          "scopeOverride": "T47 실제 결과 기준으로 실행/설치/자료 추가/검증/복구 안내와 로컬 전달 빌드를 만든다. 평가·퀴즈 구현을 이번 전달의 필수 선행으로 두지 않는다. 재현 가능한 checkout과 asset 확보 방법을 검증한다.\n 기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다.",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T36",
+          "title": "주요 평가 시범에 한정한 계약",
+          "model": "Sol High",
+          "spec": "work/tasks/T36.md",
+          "prerequisite": "T67",
+          "prerequisiteIds": [
+            "T67"
+          ],
+          "defaultNext": "T37",
+          "mode": "deferred",
+          "scopeOverride": "T67이 선정한 주요 근육/기능 목록과 첫 검사1개만 위한 두 actor/단계/관찰 계약을 만든다. 전신 모든 근육 검사 schema 콘텐츠를 채우지 않는다. 구조·기능·신경 scene core를 재사용하고 환자 자동 판정은 만들지 않는다."
+        },
+        {
+          "id": "T37",
+          "title": "주요 근육의 첫 검사 하나만 정리",
+          "model": "Luna Max",
+          "spec": "work/tasks/T37.md",
+          "prerequisite": "T36",
+          "prerequisiteIds": [
+            "T36"
+          ],
+          "defaultNext": "T48",
+          "mode": "deferred",
+          "scopeOverride": "T67에서 고른 검사 한 개를 원문 대조해 검사자/피검사자의 자세·손 위치·고정·저항 방향·관찰/한계 storyboard로 만든다. 모든 근육 평가나 서로 다른 검사들을 한 batch에 넣지 않는다. 후속 주요 검사도 한 검사 또는 작은 묶음씩 배정한다."
+        },
+        {
+          "id": "T48",
+          "title": "검사자·피검사자 2인 애니메이션 기반",
+          "model": "Sol High",
+          "spec": "work/tasks/T48.md",
+          "prerequisite": "T37",
+          "prerequisiteIds": [
+            "T37"
+          ],
+          "defaultNext": "T49",
+          "mode": "deferred",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T49",
+          "title": "첫 기능검사 2인 교육용 시범 제작",
+          "model": "Sol High",
+          "spec": "work/tasks/T49.md",
+          "prerequisite": "T48",
+          "prerequisiteIds": [
+            "T48"
+          ],
+          "defaultNext": "T38",
+          "mode": "deferred",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T38",
+          "title": "평가 단계 UI와 검사 시범 통합",
+          "model": "Luna Max",
+          "spec": "work/tasks/T38.md",
+          "prerequisite": "T49",
+          "prerequisiteIds": [
+            "T49"
+          ],
+          "defaultNext": null,
+          "mode": "deferred",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T39",
+          "title": "선택적 학습 문제",
+          "model": "Luna Max",
+          "spec": "work/tasks/T39.md",
+          "prerequisite": "separate user request",
+          "prerequisiteIds": [],
+          "defaultNext": null,
+          "mode": "deferred",
+          "scopeOverride": "기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다."
+        },
+        {
+          "id": "T73",
+          "title": "전신 시각 목표·누락 원인·취득 범위 확정",
+          "model": "Astra · 현재 대화 직접 구현",
+          "spec": "work/tasks/T73.md",
+          "prerequisite": "existing T58 partial report/artifacts; does not depend on future T58 pass",
+          "prerequisiteIds": [],
+          "defaultNext": "T74",
+          "mode": "active",
+          "continuationRule": "T73 scope freeze; local source holds do not globally block independent regions. T77 requires all frozen visual necessities or remains partial. T58 visual pass still required before T59.",
+          "inputArtifactTaskIds": [
+            "T58"
+          ]
+        },
+        {
+          "id": "T74",
+          "title": "양측 두개골 시각 기반 보완",
+          "model": "Luna Max",
+          "spec": "work/tasks/T74.md",
+          "prerequisite": "T73",
+          "prerequisiteIds": [
+            "T73"
+          ],
+          "defaultNext": "T75",
+          "mode": "active",
+          "continuationRule": "T73 scope freeze; local source holds do not globally block independent regions. T77 requires all frozen visual necessities or remains partial. T58 visual pass still required before T59."
+        },
+        {
+          "id": "T75",
+          "title": "삼각근·광배근 양측 source 보완",
+          "model": "Luna Max",
+          "spec": "work/tasks/T75.md",
+          "prerequisite": "T74",
+          "prerequisiteIds": [
+            "T73",
+            "T74"
+          ],
+          "defaultNext": "T76",
+          "mode": "active",
+          "continuationRule": "T73 scope freeze; local source holds do not globally block independent regions. T77 requires all frozen visual necessities or remains partial. T58 visual pass still required before T59."
+        },
+        {
+          "id": "T76",
+          "title": "골반·샅 시각 범위 보완",
+          "model": "Luna Max",
+          "spec": "work/tasks/T76.md",
+          "prerequisite": "T75",
+          "prerequisiteIds": [
+            "T73",
+            "T75"
+          ],
+          "defaultNext": "T77",
+          "mode": "active",
+          "continuationRule": "T73 scope freeze; local source holds do not globally block independent regions. T77 requires all frozen visual necessities or remains partial. T58 visual pass still required before T59."
+        },
+        {
+          "id": "T77",
+          "title": "기본 전신 장면 통합과 보완자산 UI 제거",
+          "model": "Astra · 현재 대화 직접 구현",
+          "spec": "work/tasks/T77.md",
+          "prerequisite": "T73–76 실제 산출물",
+          "prerequisiteIds": [
+            "T73",
+            "T74",
+            "T75",
+            "T76"
+          ],
+          "defaultNext": "T78",
+          "mode": "active",
+          "continuationRule": "T73 scope freeze; local source holds do not globally block independent regions. T77 requires all frozen visual necessities or remains partial. T58 visual pass still required before T59.",
+          "scopeOverride": "기존 T77 통합 계약을 유지하되 learner의 보완 모형 보기 및 보완자산 구분을 제거한다. 취득 경로는 내부 provenance이며 학생용 layer가 아니다. 요추 L1–L5/엉치뼈와 모든 로컬 표시 적격 뼈·근육은 기본 scene에서 함께 보이도록 새 manifest 정책을 만든다. 기존 supplement 20개를 출신만으로 숨기지 않되 identity/좌우/frame/local rights 보류는 임의 해제하지 않는다. 항목별 표시 근거와 before/after를 기록하고 source-only는 binding 승격 없이 맥락 모형으로 보인다. 이두근·삼두근 10개 source 후보 및 다른 주요 근육의 missing/hidden/occluded/unbound 원인을 전체 inventory에서 확인한다. 새 geometry 누락은 T78–79 보완 queue에 연결하며 이번 통합을 전신 완성으로 부르지 않는다. 하나의 root/renderer/camera, 기존 미니멀 로딩, 12부위와 보기 옵션의 선택만 보기/맞춤은 유지한다. 사용자 layer-off나 깊이 가림을 asset 부재와 구분한다.",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T78",
+          "title": "전신 근육·뼈 목표 분모와 실제 확장 queue",
+          "model": "Astra · 현재 대화 직접 구현",
+          "spec": "work/tasks/T78.md",
+          "prerequisite": "T77 실제 결과 및 T73 inventory",
+          "prerequisiteIds": [
+            "T77"
+          ],
+          "defaultNext": "T79",
+          "mode": "active",
+          "continuationRule": "T73 scope freeze; local source holds do not globally block independent regions. T77 requires all frozen visual necessities or remains partial. T58 visual pass still required before T59.",
+          "scopeOverride": "주요10개 연결 파일럿이라는 이전 범위를 전신 구조 target inventory와 bounded 실행 queue 설계로 교체한다. 사용자 12부위의 골격근과 맥락 뼈를 정의하고 개별근/갈래/근육군/양측/중선/변이를 분리한다. 작은 머리·손·발·골반 근육을 누락해 분모를 줄이지 않는다. 기존 catalog와 공식 source tree, 독립 해부학 목록을 대조하여 concept 단위 분모와 source ELEMENT 분모를 동결한다. source 미제공 항목도 target에서 삭제하지 않는다. 각 target에 geometry/side/frame/region/binding/세 이름/기시정지/기능/animation의 독립 상태를 둔다. 이두근·삼두근과 나머지 부위별 누락·미연결을 exact IDs로 배정한다. T79 첫 batch 최대10개 개념을 동결하고 나머지 모든 구조 batch도 미사용 정수 ID로 task 명세와 프롬프트를 발급하여 T80 앞에 삽입한다. 자료 대안은 실제 조사하고 다른 model 혼합은 별도 registration task로 분리한다. 사용자가 수동으로 근육 목록/출처를 채울 필요가 없다.",
+          "executionAmendment": "2026-09-28 full muscles before nerves"
+        },
+        {
+          "id": "T79",
+          "title": "첫 전신 구조 보완·선택 연결 batch",
+          "model": "Luna Max",
+          "spec": "work/tasks/T79.md",
+          "mode": "active",
+          "defaultNext": "T80",
+          "scopeOverride": "동결한 최대10개 개념의 실제 geometry 취득/검증/변환/scene extension 및 source→canonical mapping/세 이름을 완성한다. 기존 도구/cache를 재사용하고 source member는 내부5–10개 단위로 처리한다. 이두근/삼두근 양측 갈래가 우선 후보이며 정확한 batch는 T78이 정한다. 미확보·held에는 가짜 모형이나 이름 연결을 만들지 않는다. 기본 표시 적격 구조는 같은 learner scene에, source-only와 기존 hold는 근거 없이 선택으로 승격하지 않는다. old freeze 불변, 새 revision을 검증한다. 세 이름 검색/클릭/깊은 구조 접근 및 실제 브라우저를 확인한다. 다음은 T78이 발급한 다음 구조 batch이며 전부 마친 뒤 T80이다.",
+          "prerequisite": "T78 동결 batch",
+          "executionAmendment": "2026-09-28 full muscles before nerves",
+          "prerequisiteIds": [
+            "T78"
+          ]
+        },
+        {
+          "id": "T80",
+          "title": "전신 구조·선택 coverage 감사",
+          "model": "Luna Max",
+          "spec": "work/tasks/T80.md",
+          "mode": "active",
+          "defaultNext": "T58",
+          "scopeOverride": "T78의 전체 target을 exact source/node/side/binding/세 이름/부위로 대조한다. 모든 target의 표시 가능성과 클릭 설명 연결, 깊은 구조의 격리/회전 접근, 요추·엉치뼈 기본 표시를 확인한다. 모든 근육을 같은 시점에 투명하게 겹쳐 보여야 한다는 뜻은 아니다. 누락/미연결/미해결 필수 hold가 남으면 partial이며 기시정지 전신 완료 단계로 넘어가지 않는다. 추가 수정 task를 exact 대상/종료조건으로 배정한다. 분모를 줄이거나 subset 100%를 전신 완료로 쓰지 않는다. 통과 후 Astra T58 실제 그래픽 재검증.",
+          "prerequisite": "T79 및 모든 구조 batch",
+          "executionAmendment": "2026-09-28 full muscles before nerves",
+          "prerequisiteIds": [
+            "T79"
+          ]
+        },
+        {
+          "id": "T81",
+          "title": "첫 전신 기시·정지 조사 batch",
+          "model": "Luna Max",
+          "spec": "work/tasks/T81.md",
+          "mode": "active",
+          "defaultNext": "T82",
+          "scopeOverride": "T78 전체 근육 target을 대상으로 최대10개 개념의 첫 기시·정지 batch를 실행한다. AI가 해부학 원문/공식 교육 자료를 찾아 교차 검증하고 기존 근거를 재사용한다. 갈래별 차이/비골성 부착/근막·피부·건막과 변이를 구조화하고 충돌은 기록한다. 텍스트 기시정지와 검증된 3D 부착 좌표는 분리하며 좌표를 추정하지 않는다. 모든 batch의 명세와 정수 ID를 T82 앞에 발급하고 첫 batch는 실제 learner 카드에 연결한다. 사용자에게 수동 조사 숙제를 요구하지 않는다. 출처는 내부 evidence/app attribution에 두고 학생 기시정지 칸에는 붙이지 않는다.",
+          "prerequisite": "T80 및 T58 pass",
+          "executionAmendment": "2026-09-28 full muscles before nerves",
+          "prerequisiteIds": [
+            "T58"
+          ]
+        },
+        {
+          "id": "T82",
+          "title": "전신 기시·정지 프로토타입 합격",
+          "model": "Luna Max",
+          "spec": "work/tasks/T82.md",
+          "mode": "active",
+          "defaultNext": "T83",
+          "scopeOverride": "전체 동결 근육의 기시정지/갈래/세 이름/카드 연결과 근거 충돌을 감사한다. 기존 placeholder를 조사 완료로 세지 않는다. 필수 내용 미완은 partial이며 해당 batch를 마무리한 뒤 다음 기능 단계로 간다. 사람 검토는 별도 사실이고 모든 기본 텍스트의 일괄 human approval을 기다리게 하지 않는다. 지식 prototype 완료와 정확한 부착 surface 완성은 구분한다.",
+          "prerequisite": "T81 및 모든 기시정지 batch",
+          "executionAmendment": "2026-09-28 full muscles before nerves",
+          "prerequisiteIds": [
+            "T81"
+          ]
+        },
+        {
+          "id": "T83",
+          "title": "첫 전신 근육 기능 조사 batch",
+          "model": "Luna Max",
+          "spec": "work/tasks/T83.md",
+          "mode": "active",
+          "defaultNext": "T84",
+          "scopeOverride": "최대10개 근육의 첫 기능 batch를 실제 조사/교차 검증하고 카드에 연결한다. T78 전체 target에 대해 나머지 batch 명세/ID를 T84 앞에 발급한다. 작용·움직이는 구조·고정 조건·관절/분절·갈래별 차이·주동/보조 역할을 구분한다. 얼굴/눈/혀/괄약근 등도 관절 회전 모델에 억지로 넣지 않는다. 텍스트 근거와 motion clip 지원 상태를 별도로 저장한다. 모든 근육 기능 연구가 끝나기 전에 clip 제작을 시작하지 않는다.",
+          "prerequisite": "T82 pass",
+          "executionAmendment": "2026-09-28 full muscles before nerves",
+          "prerequisiteIds": [
+            "T82"
+          ]
+        },
+        {
+          "id": "T84",
+          "title": "전신 근육 기능 설명 합격",
+          "model": "Luna Max",
+          "spec": "work/tasks/T84.md",
+          "mode": "active",
+          "defaultNext": "T35",
+          "scopeOverride": "전체 target의 기능 설명과 원문 근거/조건/갈래/기시정지와의 일관성을 대조한다. 누락된 근육이 있으면 부분 완료로 남기고 보완한다. animation이 없다고 기능 텍스트까지 미작성 상태로 두지 않고 설명을 먼저 완성한다. 통과 후 전신 animation 범위/작용군 계획 T35로 간다.",
+          "prerequisite": "T83 및 모든 기능 batch",
+          "executionAmendment": "2026-09-28 full muscles before nerves",
+          "prerequisiteIds": [
+            "T83"
+          ]
+        },
+        {
+          "id": "T85",
+          "title": "모든 근육 움직임 학습 coverage 합격",
+          "model": "Astra · 현재 대화 직접 구현",
+          "spec": "work/tasks/T85.md",
+          "mode": "active",
+          "defaultNext": "T61",
+          "scopeOverride": "T78/T35의 모든 근육 target이 기시정지·기능 설명과 실제 같은 model surface 시범 최소1개를 갖는지 검사한다. 전신→근육→움직임으로 이해하기→수축/관련 신체 운동→복원을 실제 scene에서 검증한다. scale-only/뼈만/다른 viewer/근육 숨김 대체는 실패다. 주변 구조의 수동 변형과 부착·관통·camera/layer/선택 연속성, 설명 동기를 확인한다. 미지원 근육/형상이 남으면 partial이며 신경 단계로 자동 진입하지 않는다. 모든 가능한 작용/정량 생리 시뮬레이션 완료로 과장하지 않는다.",
+          "prerequisite": "모든 동결 animation batch 및 T47 감사",
+          "executionAmendment": "2026-09-28 full muscles before nerves",
+          "prerequisiteIds": [
+            "T47"
+          ]
+        },
+        {
+          "id": "T86",
+          "title": "전신 신경 목표·복수 원문 모델 조사",
+          "model": "Sol High",
+          "spec": "work/tasks/T86.md",
+          "mode": "active",
+          "defaultNext": "T62",
+          "scopeOverride": "전신 신경 target 분모를 명시한다. 뇌신경·척수신경/신경총·말초 분지·관련 자율신경을 항목별로 포함/별도 scope 판정하고 이름 없는 미세 말단을 유한한 모두 목록으로 위장하지 않는다. 사용자 전신 목표를 하지 pilot로 축소하지 않는다. 복수의 공식/원문 해부학 모델과 자료에서 source identity/분지/좌우/주행/지배/감각/pose/frame/권리를 비교하고 차이/변이를 보존한다. 모델 자료의 기본 mesh와 여러 자료의 관계 근거를 분리해 통합 전략을 정한다. 좌표를 눈대중으로 포개거나 평균해 주행을 만들지 않는다. 모든 조사 batch를 최대10개 nerve concept, trunk/branch별로 정수 task 배정하고 T62/T87부터 시작해 T88 전에 완료하도록 한다.",
+          "prerequisite": "T85 pass 및 T61 계약",
+          "executionAmendment": "2026-09-28 full muscles before nerves",
+          "prerequisiteIds": [
+            "T61"
+          ]
+        },
+        {
+          "id": "T87",
+          "title": "전신 신경 조사 확장 첫 batch",
+          "model": "Luna Max",
+          "spec": "work/tasks/T87.md",
+          "mode": "active",
+          "defaultNext": "T88",
+          "scopeOverride": "T86이 정한 다음 최대10개 신경 개념의 이름/분지/주행/좌우/지배근/감각/원문 차이를 조사하고 source 모델 간 대조표를 실제 작성한다. 다음 조사 batch들을 순차 진행하며 T88 전에 전체 동결 target을 채운다. geometry 획득과 교육 설명의 출처/허가를 독립 기록하고 아직 learner 3D를 구현하지 않는다.",
+          "prerequisite": "T86 분모·조사 queue 및 T62 첫 패키지",
+          "executionAmendment": "2026-09-28 full muscles before nerves",
+          "prerequisiteIds": [
+            "T62"
+          ]
+        },
+        {
+          "id": "T88",
+          "title": "전신 신경 자료 통합·등록 검증",
+          "model": "Sol High",
+          "spec": "work/tasks/T88.md",
+          "mode": "active",
+          "defaultNext": "T63",
+          "scopeOverride": "전체 target의 조사 결과를 공통 graph에 통합하고 중복/동의어/좌우/branch/지배근 mapping/출처 차이를 검증한다. 모델별 registration과 변형/pose 차이에 대한 정량 기준을 명시한다. registration이 필요한 경우 작은 별도 기술 task를 T63 앞에 넣는다. 실제 source surface/path가 없으면 두 endpoint 직선으로 대체하지 않는다. 충분한 조사/통합이 끝난 뒤에만 3D 구현 단계로 이동한다.",
+          "prerequisite": "모든 T86 신경 조사 batch",
+          "executionAmendment": "2026-09-28 full muscles before nerves",
+          "prerequisiteIds": [
+            "T87"
+          ]
+        },
+        {
+          "id": "T89",
+          "title": "전신 신경 3D 확장 첫 batch",
+          "model": "Luna Max",
+          "spec": "work/tasks/T89.md",
+          "mode": "active",
+          "defaultNext": "T90",
+          "scopeOverride": "T63에서 검증한 adapter로 다음 한 nerve trunk/제한된 branch package를 같은 AnatomySceneRoot에 구현한다. 새로운 복잡한 registration/rig가 필요한 항목은 Sol High의 별도 task로 나눈다. 전체 target의 나머지 3D 작업을 작은 정수 task로 T90 앞에 배정한다. 클릭한 신경과 지배근을 강조하고 나머지 근육은 은은하게 흐리며 복원 토글을 제공한다. 지배근은 실제 relation 근거로 선택하고 단순 근접거리로 추정하지 않는다. 카드에는 해당 신경 설명을 보여주고 아직 포착/기능이상 설명은 후속 단계로 둔다.",
+          "prerequisite": "T88 통합 gate 및 T63 첫 실제 주행",
+          "executionAmendment": "2026-09-28 full muscles before nerves",
+          "prerequisiteIds": [
+            "T63"
+          ]
+        },
+        {
+          "id": "T90",
+          "title": "전신 신경 주행·지배근 그래픽 합격",
+          "model": "Astra · 현재 대화 직접 구현",
+          "spec": "work/tasks/T90.md",
+          "mode": "active",
+          "defaultNext": "T64",
+          "scopeOverride": "동결 신경 target의 실제 주행/선택/지배근 강조/카드/복원/pose를 전수 데이터 감사하고 region별 화면을 검증한다. 모든 muscle motion 중 정적 신경을 잘못 고정해 표시하지 않는다. pose 지원이 없으면 사용자에게 명확히 알리고 rest pose 탐색으로 복원한다. 자료 부족을 전신 완료로 세지 않는다. 신경 기본 설명과 그래픽 통합이 합격한 뒤 T64/T91 포착·기능이상 내용으로 간다.",
+          "prerequisite": "전체 신경 3D batch",
+          "executionAmendment": "2026-09-28 full muscles before nerves",
+          "prerequisiteIds": [
+            "T89"
+          ]
+        },
+        {
+          "id": "T91",
+          "title": "신경 포착·기능이상 설명 확장 첫 batch",
+          "model": "Luna Max",
+          "spec": "work/tasks/T91.md",
+          "mode": "active",
+          "defaultNext": "T65",
+          "scopeOverride": "전체 신경 target 중 근거가 있는 포착/병변 수준별 내용에 대해 다음 최대10개 개념 batch를 조사·검증·연결한다. 가능한 구간/주변 구조·운동/감각 변화·분지/병변 수준·조건·변이/감별 한계를 분리한다. 모든 신경에 알려진 포착점이 반드시 있다고 가정하지 않고 근거 미확인은 명시적인 내용 상태로 둔다. 남은 batch를 정수 ID로 T65 앞에 배정한다. 신경 클릭 때 기본 주행/지배 설명만 보이고 포착과 기능 변화는 접힌 항목으로 표시한다. 환자 자동진단/자침점·깊이·치료 추천은 만들지 않는다.",
+          "prerequisite": "T90 및 T64 첫 설명 패키지",
+          "executionAmendment": "2026-09-28 full muscles before nerves",
+          "prerequisiteIds": [
+            "T64"
+          ]
+        }
+      ]
+    },
+    "historicalCoverageRepairAmendment": {
+      "before": null,
+      "after": {
+        "date": "2026-09-28",
+        "design": "design/2026-09-25-muscle-atlas/17-VISUAL-COVERAGE-REPAIR.md",
+        "prompts": "design/2026-09-25-muscle-atlas/18-SERIAL-PROMPTS-AFTER-T58.md",
+        "status": "planning_only",
+        "historicalT58": "partial; preserve report and implementation",
+        "queue": "T73 → T74 → T75 → T76 → required additional source packages if any → T77 → T78 → T58 recheck → T59",
+        "gates": "Separate target/source/display/binding/content/motion coverage; no first-pass subset as whole-body denominator"
+      }
+    },
+    "coverageRepairAmendment": {
+      "before": {
+        "date": "2026-09-28",
+        "design": "design/2026-09-25-muscle-atlas/17-VISUAL-COVERAGE-REPAIR.md",
+        "prompts": "design/2026-09-25-muscle-atlas/18-SERIAL-PROMPTS-AFTER-T58.md",
+        "status": "planning_only",
+        "historicalT58": "partial; preserve report and implementation",
+        "queue": "T73 → T74 → T75 → T76 → required additional source packages if any → T77 → T78 → T58 recheck → T59",
+        "gates": "Separate target/source/display/binding/content/motion coverage; no first-pass subset as whole-body denominator"
+      },
+      "after": null
+    },
+    "activeQueue": {
+      "before": [
+        "T50",
+        "T51",
+        "T52",
+        "T69",
+        "T53",
+        "T54",
+        "T55",
+        "T70",
+        "T71",
+        "T72",
+        "T56",
+        "T57",
+        "T73",
+        "T74",
+        "T75",
+        "T76",
+        "T77",
+        "T78",
+        "T58",
+        "T59",
+        "T60",
+        "T25",
+        "T61",
+        "T62",
+        "T63",
+        "T64",
+        "T65",
+        "T26",
+        "T27",
+        "T28",
+        "T45",
+        "T46",
+        "T29",
+        "T30",
+        "T31",
+        "T32",
+        "T33",
+        "T34",
+        "T35",
+        "T66",
+        "T47",
+        "T40"
+      ],
+      "after": [
+        "T50",
+        "T51",
+        "T52",
+        "T69",
+        "T53",
+        "T54",
+        "T55",
+        "T70",
+        "T71",
+        "T72",
+        "T56",
+        "T57",
+        "T73",
+        "T74",
+        "T75",
+        "T76",
+        "T77",
+        "T78",
+        "T79",
+        "T80",
+        "T58",
+        "T81",
+        "T82",
+        "T83",
+        "T84",
+        "T35",
+        "T59",
+        "T60",
+        "T25",
+        "T27",
+        "T28",
+        "T45",
+        "T46",
+        "T29",
+        "T31",
+        "T66",
+        "T47",
+        "T85",
+        "T61",
+        "T86",
+        "T62",
+        "T87",
+        "T88",
+        "T63",
+        "T89",
+        "T90",
+        "T64",
+        "T91",
+        "T65",
+        "T40"
+      ]
+    },
+    "productGates": {
+      "before": {
+        "T24GapResolution": "T59 actual mesh deformation + T60 same-scene playback + T25 product acceptance; keep historical T24 report",
+        "assessmentPriority": "major muscles only, after nerve pilot and explicit assessment start",
+        "acupointAndNeedling": "deferred separate design; no entrapment-to-needling inference"
+      },
+      "after": {
+        "T24GapResolution": "T59 actual mesh deformation + T60 same-scene playback + T25 product acceptance; keep historical T24 report",
+        "assessmentPriority": "major muscles only, after nerve pilot and explicit assessment start",
+        "acupointAndNeedling": "deferred separate design; no entrapment-to-needling inference",
+        "nerveStart": "T85 full muscle motion target pass, then T61/T86"
+      }
+    },
+    "nextUnallocatedNumericId": {
+      "before": 79,
+      "after": 92
+    }
+  },
+  "status": {
+    "beforeNext": "- NEXT_TASK: T73 / Astra · 현재 대화 - visual target/source audit and bounded repair scope; then T74–78/required source batches, T58 recheck, T59. Planning only; new tasks not started.",
+    "afterNext": "- NEXT_TASK: T73 / Astra · 현재 대화 - T73–76 unchanged. T77+ follow 19/20 full structure → all muscle attachments → functions → animations → nerves. New plan only.",
+    "append": "\n## 2026-09-28 — 모든 근육 단계 완료 후 신경으로 진행\n\nT73–76 유지. T77 이후는 19/20 문서와 개정 queue 우선. 상완이두근/상완삼두근 source 후보 10개는 현재 scene에 없고 요추1–5/엉치뼈는 확보됐지만 기본 숨김임을 확인. T77에서 보완자산 UI 제거/표시 정책 정리, T78–80 전체 구조와 선택, T81–82 전체 기시정지, T83–84 전체 기능, T35/실제 animation batches/T47/T85 모든 근육 시범 뒤 T61부터 전신 신경 조사·통합·3D·포착 설명으로 간다. T79–91은 계획이며 구현 미착수. first batch가 global pass를 뜻하지 않는다. T58 partial 역사/코드는 보존했다.\n"
+  },
+  "filePrepends": {
+    "work/tasks/T77.md": {
+      "beforeSha256": "c00e32148d17483ff0a4923a82607bc182dcad382e1a31bea36cc02be91754f0",
+      "prepend": "# T77 — 기본 전신 장면 통합과 보완자산 UI 제거\n\n2026-09-28 개정 · 담당 Astra · 현재 대화 직접 구현 · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: T73–76 실제 산출물.\n\n기존 T77 통합 계약을 유지하되 learner의 보완 모형 보기 및 보완자산 구분을 제거한다. 취득 경로는 내부 provenance이며 학생용 layer가 아니다. 요추 L1–L5/엉치뼈와 모든 로컬 표시 적격 뼈·근육은 기본 scene에서 함께 보이도록 새 manifest 정책을 만든다. 기존 supplement 20개를 출신만으로 숨기지 않되 identity/좌우/frame/local rights 보류는 임의 해제하지 않는다. 항목별 표시 근거와 before/after를 기록하고 source-only는 binding 승격 없이 맥락 모형으로 보인다. 이두근·삼두근 10개 source 후보 및 다른 주요 근육의 missing/hidden/occluded/unbound 원인을 전체 inventory에서 확인한다. 새 geometry 누락은 T78–79 보완 queue에 연결하며 이번 통합을 전신 완성으로 부르지 않는다. 하나의 root/renderer/camera, 기존 미니멀 로딩, 12부위와 보기 옵션의 선택만 보기/맞춤은 유지한다. 사용자 layer-off나 깊이 가림을 asset 부재와 구분한다.\n\n## 필수 산출물·검증\n\nwork/reports/T77.md와 work/evidence/T77/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T78. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T78.md": {
+      "beforeSha256": "fc13c2255f742acb7c3836d7b9dbadf4a39bae5074af8ce8baec812783ae3a34",
+      "prepend": "# T78 — 전신 근육·뼈 목표 분모와 실제 확장 queue\n\n2026-09-28 개정 · 담당 Astra · 현재 대화 직접 구현 · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: T77 실제 결과 및 T73 inventory.\n\n주요10개 연결 파일럿이라는 이전 범위를 전신 구조 target inventory와 bounded 실행 queue 설계로 교체한다. 사용자 12부위의 골격근과 맥락 뼈를 정의하고 개별근/갈래/근육군/양측/중선/변이를 분리한다. 작은 머리·손·발·골반 근육을 누락해 분모를 줄이지 않는다. 기존 catalog와 공식 source tree, 독립 해부학 목록을 대조하여 concept 단위 분모와 source ELEMENT 분모를 동결한다. source 미제공 항목도 target에서 삭제하지 않는다. 각 target에 geometry/side/frame/region/binding/세 이름/기시정지/기능/animation의 독립 상태를 둔다. 이두근·삼두근과 나머지 부위별 누락·미연결을 exact IDs로 배정한다. T79 첫 batch 최대10개 개념을 동결하고 나머지 모든 구조 batch도 미사용 정수 ID로 task 명세와 프롬프트를 발급하여 T80 앞에 삽입한다. 자료 대안은 실제 조사하고 다른 model 혼합은 별도 registration task로 분리한다. 사용자가 수동으로 근육 목록/출처를 채울 필요가 없다.\n\n## 필수 산출물·검증\n\nwork/reports/T78.md와 work/evidence/T78/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T79. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T58.md": {
+      "beforeSha256": "69fd2ff7c0165da81024476a6bbc913a722b38fab7c2a8004aa228104a5f0d8d",
+      "prepend": "# T58 — 전신 그래픽 재검증\n\n2026-09-28 개정 · 담당 Astra · 현재 대화 직접 구현 · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: T80 pass.\n\n기존 T58 코드와 역사 보고서를 보존하고 전체 동결 구조의 준비 상태를 확인한 뒤 전신/머리/손/종아리 및 새 필수 부위 캡처·단일 scene·camera·패널·390/1024/1440 성능을 재검증한다. 보완자산 UI가 사라지고 요추/엉치뼈 등 맥락 뼈가 기본 표시되는지 확인한다. 실제 필수 누락이 남으면 partial이고 T81로 넘어가지 않는다. 새 재검증 보고서를 남기며 초기 구현을 재작성하지 않는다.\n\n## 필수 산출물·검증\n\nwork/reports/T58.md와 work/evidence/T58/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T81. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T35.md": {
+      "beforeSha256": "5715605908f7b891f6f8b70492f02259b74377ada36d4b95b17cecd6f5b6bd9f",
+      "prepend": "# T35 — 전신 근육 animation 목표와 제작 queue\n\n2026-09-28 개정 · 담당 Sol High · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: T84 pass.\n\n모든 근육이 하나 이상의 자기 기능을 학습할 수 있는 시범을 갖도록 target→근거 있는 작용/고정조건→변형 방식→관련 뼈/주변 구조→clip support를 정의한다. 근육당 대표 시범 최소1개와 추가 작용 미지원 목록을 구분하여 모든 작용 구현이라고 과장하지 않는다. 얼굴/혀/눈/호흡/괄약근 등 비사지 motion family를 누락하지 않는다. 같은 rig를 재사용할 수 있어도 근육별 설명/선택/작용의 검증을 생략하지 않는다. 첫 앞정강근 T59–60/T25와 소흉근 기존 task를 첫 실제 사례로 보존하고 T66 및 나머지 bounded clip/rig 제작 task를 모두 정수 ID로 T47 감사 앞에 배정한다. 계획만 작성, clip 제작 미실행.\n\n## 필수 산출물·검증\n\nwork/reports/T35.md와 work/evidence/T35/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T59. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T59.md": {
+      "beforeSha256": "c6390caf1c77bed8283866db2407eaeceb1533a52eb5ecfee91a82e241bbd22f",
+      "prepend": "# T59 — 같은 앞정강근 표면의 교육용 수축 변형\n\n2026-09-28 개정 · 담당 Sol High · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: 실행 queue의 직전 필수 gate.\n\nT55 전신 모델의 실제 앞정강근과 부착·발목 bone에 대해 model-local 좌표/endpoint·rest pose를 검증하고 skinning 또는 morph/shape-key 기반 변형을 제작한다. 목표 근육의 형태 변화와 발 움직임을 같은 모델에서 결속한다. 주변 근육은 사용자가 숨기지 않았다면 유지하고 관절을 지나는 주변 구조의 수동 변형/관통도 처리한다. 근육 전체 scale이나 선 길이 감소만으로 대체하지 않는다.\n \n\n## 필수 산출물·검증\n\nwork/reports/T59.md와 work/evidence/T59/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T60. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T60.md": {
+      "beforeSha256": "57f31786fbd3d161657486d1d688ffaf6ef752174edd2af391a7e9c520eaa8b7",
+      "prepend": "# T60 — 동일 viewport에서 운동 재생 연결\n\n2026-09-28 개정 · 담당 Sol High · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: 실행 queue의 직전 필수 gate.\n\nMotionLearningPanel의 독립 asset/mixer 소유를 AnatomySceneController 명령으로 연결한다. 실제 main renderer가 가진 T59 target node를 애니메이션하고 UI는 play/pause/seek/reset 명령과 상태만 가진다. 사용자 CTA 클릭 전에는 움직이지 않는다. 기존 camera/background/layers/selection을 snapshot해 보존하고 종료 시 pose/가시성만 정확히 복원한다.\n \n\n## 필수 산출물·검증\n\nwork/reports/T60.md와 work/evidence/T60/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T25. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T25.md": {
+      "beforeSha256": "9e04bbac544c194326963d68042b94c5a8894ed7a8a2a5341cadd79e6ee6bd46",
+      "prepend": "# T25 — 같은 전신 모형의 앞정강근 제품 합격\n\n2026-09-28 개정 · 담당 Luna Max · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: 실행 queue의 직전 필수 gate.\n\nT42 공통 카드와 T24 실제 clip을 연결한다. 근육 선택→세 이름/기시·정지→눈에 보이는 '움직임으로 이해하기'→실제 몸 움직임→작용 설명을 연결한다. 클릭은 명시적 재생 요청으로 취급하되 reduced-motion은 정지 자세/수동 단계 선택을 기본으로 한다.\n\n기능 탭 전환과 작용 선택을 동기화하고 pause/resume/처음 자세/느리게/진행 막대를 제공한다. camera reset과 pose reset을 분리한다. 모형 전환이 있으면 학습용 시범 모형임을 짧게 알린다.\n\n선택/부위/탭 전환·로드 실패·unmount 시 loop·mixer·강조를 정리한다. CTA 클릭 전에는 자동 재생하지 않는다.\n T59/T60의 실제 같은 모형 mesh 변형을 main learner에서 검증한다. 별도 T24 bone/path 기술 후보는 pass 근거가 아니다. 전신 탐색→앞정강근→기시정지/기능→CTA→표면 수축과 발 움직임→복원을 시험한다. T24 역사 보고서는 blocked 그대로 보존하고 해결 증거를 새 보고서에 연결한다. 다음은 같은 전신 모형의 소흉근 사례 T27이며, 신경은 전신 근육 시범 gate T85 이후다.\n\n## 필수 산출물·검증\n\nwork/reports/T25.md와 work/evidence/T25/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T27. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T27.md": {
+      "beforeSha256": "919f4d6406ea0b30af225d1ff90c58fa246285e362570e1fe300581f45fa6f47",
+      "prepend": "# T27 — 소흉근 동일 모형 변형 준비\n\n2026-09-28 개정 · 담당 Sol High · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: T25 pass.\n\n전신 구조 단계에서 준비된 소흉근/흉곽/견갑대와 완료된 기능 설명을 재사용한다. rig/부착/주변 구조 변형 준비만 검증하고 필요할 때만 근거 있는 상세 자산을 보완한다. 다른 모델/고해상도 LOD가 있다고 가정하지 않는다. T28의 동일 모델 운동을 준비한다.\n\n## 필수 산출물·검증\n\nwork/reports/T27.md와 work/evidence/T27/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T28. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T28.md": {
+      "beforeSha256": "9ba96f4274e0b4be7de8a3d7b2ba4e3213253fa3ba91430e77c6b8f896275e25",
+      "prepend": "# T28 — 견갑대 운동 기반과 전인 시범 하나\n\n2026-09-28 개정 · 담당 Sol High · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: 실행 queue의 직전 필수 gate.\n\nT81–84의 전신 내용 batch에서 확정한 조건의 소흉근 관련 견갑골 전인 시범 1개를 제작한다. 흉곽에 대한 견갑대의 이동/회전과 고정 조건을 모델링하고 T45/T46에서 재사용할 골격·경로 제작 도구를 만든다.\n\n단일 임의 hinge 또는 상완골만 움직이는 것으로 견갑골 작용을 대신하지 않는다. 근육 endpoint/변형 또는 표시된 설명 경로를 함께 제공한다. T44의 좌표 정합 원칙을 재사용하되 발목 좌표를 복제하지 않는다.\n 기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다.\n\n## 필수 산출물·검증\n\nwork/reports/T28.md와 work/evidence/T28/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T45. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T45.md": {
+      "beforeSha256": "b718eac54f0ba29e2705a462e7101fa5490b05252f9f98d946790f6d6f1b7fb5",
+      "prepend": "# T45 — 소흉근 관련 견갑골 하강 시범\n\n2026-09-28 개정 · 담당 Sol High · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: 실행 queue의 직전 필수 gate.\n\nT28 기반을 재사용해 T81–84의 전신 내용 batch에서 근거/조건이 확인된 하강 시범 clip1개를 만든다. 단순 전인 clip의 축값을 바꿔 해부학 근거 대신 쓰지 않는다. moving/fixed structures·근육 경로와 설명을 연결한다.\n 기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다.\n\n## 필수 산출물·검증\n\nwork/reports/T45.md와 work/evidence/T45/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T46. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T46.md": {
+      "beforeSha256": "e00dccd5807725cef2d45f9b740f357ee21fb1ee664ea9acf2b4ac29e8e04b2d",
+      "prepend": "# T46 — 소흉근 관련 견갑골 하방회전 시범\n\n2026-09-28 개정 · 담당 Sol High · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: 실행 queue의 직전 필수 gate.\n\nT28 기반으로 T81–84의 전신 내용 batch에서 근거/조건이 확인된 하방회전 시범 clip1개를 만든다. 회전 방향과 흉곽 정합을 검증하며 전인/하강과 작용 ID를 구분한다. 대표 시범을 생체 운동의 정량 재현으로 주장하지 않는다.\n 기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다.\n\n## 필수 산출물·검증\n\nwork/reports/T46.md와 work/evidence/T46/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T29. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T29.md": {
+      "beforeSha256": "f42e6036bae056f3a6775910bcbdd288146a54e20484e6285d21cafaf3d40933",
+      "prepend": "# T29 — 소흉근 구조·기능 사용자 흐름 통합\n\n2026-09-28 개정 · 담당 Luna Max · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: 실행 queue의 직전 필수 gate.\n\n소흉근 선택→주변 흐림→구조 설명→CTA→전인/하강/하방회전 작용 선택→해당 실제 clip과 설명으로 연결한다. 지원하지 않는 작용은 다른 clip으로 대체하지 않는다. 뼈 카드의 세 이름과 근육으로 돌아오는 흐름을 검증한다.\n 기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다.\n\n## 필수 산출물·검증\n\nwork/reports/T29.md와 work/evidence/T29/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T31. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T31.md": {
+      "beforeSha256": "33a80bdbc582d2561d8a69fdb78dc7a09d6dfc3f09fc9fc34526347b681a4973",
+      "prepend": "# T31 — 두 부위 구조·기능 파일럿 합격 검증\n\n2026-09-28 개정 · 담당 Luna Max · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: 실행 queue의 직전 필수 gate.\n\n종아리와 소흉근의 실제 data/scene/clip을 전체 사용자 흐름으로 검사한다. 세 이름·기시정지·뼈 카드·클릭·흐림·움직임·설명·복원을 함께 확인한다. 데이터 검증과 실제 화면 검증을 분리 기록한다.\n 기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다.\n\n## 필수 산출물·검증\n\nwork/reports/T31.md와 work/evidence/T31/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T66. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T66.md": {
+      "beforeSha256": "7ab8d007a60e3cb9823f59001abe0f1c8263c0b25343ac4ec0aea816fce95514",
+      "prepend": "# T66 — 첫 기능 확장 batch 하나\n\n2026-09-28 개정 · 담당 Luna Max · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: 실행 queue의 직전 필수 gate.\n\nT35에서 동결한 단일 action-family를 대상으로 검증된 동일 rig의 공유 clip 연결 최대10관계 또는 기존 rig 기반 clip1개만 구현한다. 새 관절/rig 정합이 필요하면 Sol task로 따로 배정하고 이 task를 확장하지 않는다.\n \n\n## 필수 산출물·검증\n\nwork/reports/T66.md와 work/evidence/T66/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T47. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T47.md": {
+      "beforeSha256": "3c08f6366850ba1c89ca66525d6ac79e4ad1811b34a81e9329346ad205a0f7bb",
+      "prepend": "# T47 — 전신 구조·기능·운동 자료 감사\n\n2026-09-28 개정 · 담당 Luna Max · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: 모든 근육 animation batch.\n\n전체 구조/기시정지/기능/대표 motion 분모를 데이터/파일/실제 binding으로 전수 감사한다. 첫 batch/pilot 완료를 전신 완료로 쓰지 않는다. 필수 누락은 수정 작업으로 배정하고 T85 시각·사용자 흐름 합격과 분리한다.\n\n## 필수 산출물·검증\n\nwork/reports/T47.md와 work/evidence/T47/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T85. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T61.md": {
+      "beforeSha256": "bd9a9fd8e062a1e7f5d0c54e5a765af3e256ed6528e6bbbbd635626ec5695809",
+      "prepend": "# T61 — 신경 레이어·선택·관계 데이터 계약\n\n2026-09-28 개정 · 담당 Sol High · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: T85 pass.\n\n전신 근육 기능/animation 합격 후 신경의 typed selection, branch graph, 다중 지배근 관계, source/frame/pose/registration, 레이어와 카드 계약만 구현한다. 전신 조사/3D는 T86 이후다. 같은 scene에 확장하며 감각분포·피부분절·경락을 혼합하지 않는다.\n\n## 필수 산출물·검증\n\nwork/reports/T61.md와 work/evidence/T61/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T86. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T62.md": {
+      "beforeSha256": "509f6f8693961699d6da702eb77cf01b2b706abb9b24276a098eb7dcdb4abd0f",
+      "prepend": "# T62 — 첫 하지 신경 자료 패키지\n\n2026-09-28 개정 · 담당 Luna Max · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: T86.\n\nT86 전신 조사 queue의 첫 하지 신경 trunk1개/branch최대2개 자료를 조사한다. 기존 명세의 상세 근거·검증은 유지하고 이 pilot 하나로 전체 신경 조사 완료를 선언하지 않는다. 다음 T87과 나머지 전체 조사 batch다.\n\n## 필수 산출물·검증\n\nwork/reports/T62.md와 work/evidence/T62/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T87. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T63.md": {
+      "beforeSha256": "9272febe6722751630ee445f07bca74bb01b90c4883f48ad5fe7953e404367da",
+      "prepend": "# T63 — 첫 신경 3D 주행과 지배근 강조\n\n2026-09-28 개정 · 담당 Sol High · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: T88 pass 및 필요한 registration task.\n\n전체 신경 조사·통합 후 첫 검증된 신경 주행을 같은 scene에 구현한다. 원래 명세의 실제 주행/좌표/pose 검증을 유지한다. 클릭 시 근거 있는 지배근을 강조하고 다른 근육을 흐리며 복원 가능하게 한다. 신경 기본 설명 카드와 세 이름을 연결한다. 다음 나머지 전신 nerve 3D batch이며 포착 설명을 먼저 구현하지 않는다.\n\n## 필수 산출물·검증\n\nwork/reports/T63.md와 work/evidence/T63/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T89. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T64.md": {
+      "beforeSha256": "242b1d58476f9a030c858fbb9f0e96d33ccd428086817a1132d7bc86405e01ed",
+      "prepend": "# T64 — 신경 포착·기능 변화의 접힌 설명 UI\n\n2026-09-28 개정 · 담당 Luna Max · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: T90 pass.\n\n신경 3D와 지배근 그래픽 완성 후 첫 trunk1/branch≤2의 포착 가능 구간과 병변 수준별 기능 변화 설명을 실제 근거로 작성한다. 처음부터 모든 정보를 펼치지 않는다. T91/후속 batch로 전신 내용 범위를 확장하고 치료/자침 추천은 넣지 않는다.\n\n## 필수 산출물·검증\n\nwork/reports/T64.md와 work/evidence/T64/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T91. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T65.md": {
+      "beforeSha256": "db2d81cdb43c9753032bc0a85b4cb4e76f1611c80df47565662b622d8653c60c",
+      "prepend": "# T65 — 전신 근육·신경·기능이상 설명 최종 통합 검증\n\n2026-09-28 개정 · 담당 Luna Max · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: T91 및 모든 기능이상 설명 batch.\n\n동결한 전신 근육 구조/기시정지/기능/대표 움직임과 전신 신경 조사/주행/지배근/포착·수준별 설명의 연결을 통합 감사한다. coverage 수치와 실제 지역별 화면을 모두 검증한다. 미해결/근거 없음은 정확히 표시하고 전신 완료로 과장하지 않는다. 평가/경혈/치료 기능은 별도 보류한다.\n\n## 필수 산출물·검증\n\nwork/reports/T65.md와 work/evidence/T65/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: T40. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "work/tasks/T40.md": {
+      "beforeSha256": "9bf736d61bb8c7292a620f26480ee4a792c06fbf6b580b372dbbbfb5c4376a5f",
+      "prepend": "# T40 — 구조·기능 로컬 전달과 Git 체크포인트\n\n2026-09-28 개정 · 담당 Luna Max · 계획/재검증 (실행 상태는 taskStatuses)\n\n## 현행 수행 범위 — 이전 충돌 문구보다 우선\n\n선행: 실행 queue의 직전 필수 gate.\n\nT47 실제 결과 기준으로 실행/설치/자료 추가/검증/복구 안내와 로컬 전달 빌드를 만든다. 평가·퀴즈 구현을 이번 전달의 필수 선행으로 두지 않는다. 재현 가능한 checkout과 asset 확보 방법을 검증한다.\n 기존 세부 수행 범위는 유지하되 R15 동일 전신 scene/근육 표면 변형/명확한 CTA/신경 우선 순서를 적용한다. 이전 별도 시범 모델 허용은 폐기하며 아래 이전 next/prerequisite 문구는 R15 queue로 대체한다.\n\n## 필수 산출물·검증\n\nwork/reports/T40.md와 work/evidence/T40/. 계획 문서는 구현 증거가 아니다. batch task는 exact target IDs/최대10개 개념(clip은1개/동일 작용군)을 시작에 동결하고 실제 결과를 만든다. 전체 batch 완료 전 audit/gate에 자동 진입하지 않는다.\n\nAGENTS.md와 R15 13/14/15, 16-ASTRA-UI-HANDOFF.md, 최신 19-ALL-MUSCLES-BEFORE-NERVES.md 및 20-SERIAL-PROMPTS-FULL-SCOPE.md(설계 폴더 design/2026-09-25-muscle-atlas/), STATUS/R15 registry, 해당 task 명세와 선행 실제 report/manifest/evidence를 읽어라. 19/20의 T77 이후 순서가 이전 프롬프트보다 우선한다. 정확히 요청된 ID만 수행하고 자동 다음 실행은 하지 마라. 시작 HEAD/status/source hash를 기록하고 기존 WIP·원본/OpenSim_Models·역사 freeze를 보존해라. 실제 source/근거 없이 이름·좌표·형상·승인을 만들지 마라. AI가 조사/대조/표 작성을 수행하며 사용자에게 기본 해부학 조사 숙제를 넘기지 마라. source provenance와 license/human-review는 내부에 보존하고 learner에 JSON/task/보완자산 구분을 노출하지 마라. 로딩의 로고·인체 그림·슬로건을 복구하지 말고 단일 scene/camera와 미니멀 UI를 유지해라. 모든 target coverage gate는 동결한 전체 분모로 판정하고 필수 누락을 passed_with_gaps로 덮지 마라. 실제 의존 gate가 미달이면 해당 후속 단계를 시작하지 말고 bounded 수정 task와 해소 조건을 남겨라. 범위에 맞는 검사·실제 화면 검증과 report/evidence/STATUS/taskStatuses를 남겨라. 소유 변경만 staged diff 확인 후 로컬 커밋하며 혼합 WIP는 소유 hunk 또는 상태 delta만 포함해라. 해시·제외·잔여 WIP·다음 ID/담당/프롬프트를 남기고 멈춰라. push·배포·환자 자동진단·치료·자침 추천/시뮬레이션은 금지한다.\n\n다음 기본 ID: 없음. 삽입된 실제 batch queue가 우선한다.\n\n---\n\n## 이전 명세 (충돌 시 이력)\n\n"
+    },
+    "design/2026-09-25-muscle-atlas/00-START-HERE.md": {
+      "beforeSha256": "7fb3e3d44b8dc195a9d1979b590d2cb41f0c46e50debb4beb2d7eacfa0ea553f",
+      "prepend": "> **2026-09-28 전신 범위 개정:** T73–76 내용/프롬프트는 그대로다. T77 이후는 19-ALL-MUSCLES-BEFORE-NERVES.md와 20-SERIAL-PROMPTS-FULL-SCOPE.md 우선. 전신 구조→모든 근육 기시정지→기능→모든 근육 대표 움직임→전신 신경 조사/통합→3D→포착 설명 순서. 아래 충돌하는 순서는 이력이다.\n\n"
+    },
+    "design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md": {
+      "beforeSha256": "9c1311757c46dddd2b78c54a52801a2cc410648195927e44a727d7e798108bc2",
+      "prepend": "> **2026-09-28 전신 범위 개정:** T73–76 내용/프롬프트는 그대로다. T77 이후는 19-ALL-MUSCLES-BEFORE-NERVES.md와 20-SERIAL-PROMPTS-FULL-SCOPE.md 우선. 전신 구조→모든 근육 기시정지→기능→모든 근육 대표 움직임→전신 신경 조사/통합→3D→포착 설명 순서. 아래 충돌하는 순서는 이력이다.\n\n"
+    },
+    "design/2026-09-25-muscle-atlas/13-CONTINUOUS-WHOLE-BODY-EXPERIENCE-R15.md": {
+      "beforeSha256": "d40fdb85454bfcf4fd73883b55bad0bf3a6b9620452e2a5fcd6e0cc621ddfaa2",
+      "prepend": "> **2026-09-28 전신 범위 개정:** T73–76 내용/프롬프트는 그대로다. T77 이후는 19-ALL-MUSCLES-BEFORE-NERVES.md와 20-SERIAL-PROMPTS-FULL-SCOPE.md 우선. 전신 구조→모든 근육 기시정지→기능→모든 근육 대표 움직임→전신 신경 조사/통합→3D→포착 설명 순서. 아래 충돌하는 순서는 이력이다.\n\n"
+    },
+    "design/2026-09-25-muscle-atlas/14-TASK-PROMPTS-R15.md": {
+      "beforeSha256": "f2f094f38f428faf27fb517b6f83ed0acf42a971bdbcd1254a6222251e9f2bbf",
+      "prepend": "> **2026-09-28 전신 범위 개정:** T73–76 내용/프롬프트는 그대로다. T77 이후는 19-ALL-MUSCLES-BEFORE-NERVES.md와 20-SERIAL-PROMPTS-FULL-SCOPE.md 우선. 전신 구조→모든 근육 기시정지→기능→모든 근육 대표 움직임→전신 신경 조사/통합→3D→포착 설명 순서. 아래 충돌하는 순서는 이력이다.\n\n"
+    },
+    "design/2026-09-25-muscle-atlas/15-NERVE-AND-ASSESSMENT-SCOPE-R15.md": {
+      "beforeSha256": "29ab677d3efca252325e555e1b7aadb20cca213b014676b9a195c7a27324a492",
+      "prepend": "> **2026-09-28 전신 범위 개정:** T73–76 내용/프롬프트는 그대로다. T77 이후는 19-ALL-MUSCLES-BEFORE-NERVES.md와 20-SERIAL-PROMPTS-FULL-SCOPE.md 우선. 전신 구조→모든 근육 기시정지→기능→모든 근육 대표 움직임→전신 신경 조사/통합→3D→포착 설명 순서. 아래 충돌하는 순서는 이력이다.\n\n"
+    },
+    "design/2026-09-25-muscle-atlas/16-ASTRA-UI-HANDOFF.md": {
+      "beforeSha256": "5ceff37c68ee780bf8372ddfe0d1c379a15acb9a4c69faeeec6c977897e33b2f",
+      "prepend": "> **2026-09-28 전신 범위 개정:** T73–76 내용/프롬프트는 그대로다. T77 이후는 19-ALL-MUSCLES-BEFORE-NERVES.md와 20-SERIAL-PROMPTS-FULL-SCOPE.md 우선. 전신 구조→모든 근육 기시정지→기능→모든 근육 대표 움직임→전신 신경 조사/통합→3D→포착 설명 순서. 아래 충돌하는 순서는 이력이다.\n\n"
+    },
+    "design/2026-09-25-muscle-atlas/17-VISUAL-COVERAGE-REPAIR.md": {
+      "beforeSha256": "d4f376a4df97f0cd345d3c1f14bd9f0af8c2096202e39202c993b985f91abff2",
+      "prepend": "> **2026-09-28 전신 범위 개정:** T73–76 내용/프롬프트는 그대로다. T77 이후는 19-ALL-MUSCLES-BEFORE-NERVES.md와 20-SERIAL-PROMPTS-FULL-SCOPE.md 우선. 전신 구조→모든 근육 기시정지→기능→모든 근육 대표 움직임→전신 신경 조사/통합→3D→포착 설명 순서. 아래 충돌하는 순서는 이력이다.\n\n"
+    },
+    "design/2026-09-25-muscle-atlas/18-SERIAL-PROMPTS-AFTER-T58.md": {
+      "beforeSha256": "9cb4a4518eeb3bdf33ec05de3d2efd5eee0e1806423168a86dde7ecea1f42e35",
+      "prepend": "> **2026-09-28 전신 범위 개정:** T73–76 내용/프롬프트는 그대로다. T77 이후는 19-ALL-MUSCLES-BEFORE-NERVES.md와 20-SERIAL-PROMPTS-FULL-SCOPE.md 우선. 전신 구조→모든 근육 기시정지→기능→모든 근육 대표 움직임→전신 신경 조사/통합→3D→포착 설명 순서. 아래 충돌하는 순서는 이력이다.\n\n"
+    }
+  }
+}
