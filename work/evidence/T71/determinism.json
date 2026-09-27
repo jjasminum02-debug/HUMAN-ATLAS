@@ -1,0 +1,24 @@
+{
+  "task": "T71",
+  "revision": "T71-REPRODUCIBILITY-v1",
+  "commands": [
+    "python3 atlas-data/tools/acquire_bodyparts3d_r4_t71.py --check",
+    "python3 atlas-data/tools/build_bodyparts3d_r4_t71.py (run twice)",
+    "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest atlas-data/tools/test_bodyparts3d_r4_t71.py -v",
+    "git diff --check"
+  ],
+  "acquisitionCheck": {
+    "result": "pass",
+    "sourceElementFileCount": 9,
+    "sourcePayloadBytes": 2354298
+  },
+  "buildSha256BeforeAndAfterEachRunIdentical": true,
+  "outputs": {
+    "atlas-data/manifests/bodyparts3d-r4-t71/source-manifest.json": "a21b453350996c6545cd15aef405faf22678761ef613ca45064a01f426c1ed36",
+    "atlas-data/manifests/bodyparts3d-r4-t71/integration-manifest.json": "5bf22cd9dbd9adee4f7e3fe7f7e6b653b60314c018c007e2790bdf7bf167a654",
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t71/T71-trunk-skeleton-static-source.glb": "cd9f9ba1f0274a2b1a903fed06ca8dc714e8dd9d49ced6b4ea4500cfa0320f72"
+  },
+  "testCount": 6,
+  "testFailures": 0,
+  "gitDiffCheck": "pass"
+}

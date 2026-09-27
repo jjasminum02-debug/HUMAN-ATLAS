@@ -1,0 +1,2649 @@
+{
+  "aabbPolicy": "AABB proximity is broadphase only; it is not surface contact, joint fit, or collision proof. Boundary observations require actual surface geometry/render review.",
+  "batchId": "T71-B01-TRUNK-SKELETON",
+  "humanAnatomyReviewed": false,
+  "identityPolicy": "FMA concept IDs, BP representation IDs, FJ source element IDs, and canonical HA IDs remain distinct. No source element has a canonical learner binding. Source IDs/names in this file are exact acquisition/header/index observations only.",
+  "inputs": {
+    "acquisitionManifest": "work/evidence/T71/source-acquisition.json",
+    "acquisitionManifestSha256": "1e576d858b47aed1fcb64e342fe7380c8357173b25624723c1b910d93eee1d27",
+    "frozenMembershipSha256": "66e6332ab27160f31f236ecebb440606ba04a8c4af57a10351bcc1302aa98d44",
+    "frozenSourceSet": "work/evidence/T71/frozen-source-set.json",
+    "frozenSourceSetSha256": "6a6ca966a3315895f75309ac83b9fb32709eeafcabdfd270ebcb6f401f3a94a3",
+    "t70IntegrationManifestSha256": "cc3730f241716ae753a99e9210fbbc77a1f0bef0f4982efbc69837393124cc4f",
+    "t70ScopeInventorySha256": "edae7afa21f953e78f2a19c6137cbf13bb3a509b6fc4bb5726cd697ab855a355"
+  },
+  "lateralityPolicy": "All nine selected source names are non-lateralized axial structures. No side is inferred from x bounds or surface position; the transform preserves x sign and does not mirror.",
+  "manifestSha256": "389de9cab63068f333d215ca1dd58a10927b00db8dd52b45c69bfd9a063052b8",
+  "meshRecords": [
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.01060390006750822,
+          1.184499979019165,
+          0.2133529931306839
+        ],
+        "min": [
+          -0.010337799787521362,
+          1.1640199422836304,
+          0.19850899279117584
+        ]
+      },
+      "externalConceptId": "FMA7488",
+      "geometrySha256": "7cb77f5ff96499f1e06c7388e4a33ae9914a92478ae2dcf9d5d44f85cd797f5d",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ3153",
+      "meshIndex": 0,
+      "modelId": "HA-MODEL-BP3D4-T71-TRUNK-SKELETON-QA",
+      "nodeIndex": 0,
+      "nodeName": "HA-MESH-BP3D4-FJ3153",
+      "normalCount": 495,
+      "normalSha256": "156c634621882477d628cdfc4cb603a3fa6d672391457c02545a0b5f57c2a412",
+      "productCandidateRegion": "thorax",
+      "representationId": "BP7865",
+      "sourceBoundsMm": {
+        "max": [
+          10.6039,
+          -198.509,
+          1184.5
+        ],
+        "min": [
+          -10.3378,
+          -213.353,
+          1164.02
+        ]
+      },
+      "sourceBytes": 56262,
+      "sourceElementFileId": "FJ3153",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t71/FJ3153.obj",
+      "sourceFileId": "FJ3153",
+      "sourceFmaConceptId": "FMA7488",
+      "sourceRepresentationId": "BP7865",
+      "sourceSha256": "371573a43e28506d674bf4999ee4c50c0497014aa8d69865f450a078d493a495",
+      "topologySha256": "20aad95994aed023cc14a229bd253c9b769e8bfeb833e80d81939b89c23d4024",
+      "triangleCount": 922,
+      "vertexCount": 495
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.03446140140295029,
+          1.0719799995422363,
+          0.10948000103235245
+        ],
+        "min": [
+          -0.03577980026602745,
+          1.0152000188827515,
+          0.0292224008589983
+        ]
+      },
+      "externalConceptId": "FMA13072",
+      "geometrySha256": "e1ac2c738d3afc4705a0d37991ddd00421c1da5f00b45ada49645f4c1e3f7d19",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ3157",
+      "meshIndex": 1,
+      "modelId": "HA-MODEL-BP3D4-T71-TRUNK-SKELETON-QA",
+      "nodeIndex": 1,
+      "nodeName": "HA-MESH-BP3D4-FJ3157",
+      "normalCount": 1682,
+      "normalSha256": "8ebca07edacee2c3c246f1e6f8739eb74b50f8f65857b3466e9392c4fea86355",
+      "productCandidateRegion": "back",
+      "representationId": "BP8948",
+      "sourceBoundsMm": {
+        "max": [
+          34.4614,
+          -29.2224,
+          1071.98
+        ],
+        "min": [
+          -35.7798,
+          -109.48,
+          1015.2
+        ]
+      },
+      "sourceBytes": 193798,
+      "sourceElementFileId": "FJ3157",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t71/FJ3157.obj",
+      "sourceFileId": "FJ3157",
+      "sourceFmaConceptId": "FMA13072",
+      "sourceRepresentationId": "BP8948",
+      "sourceSha256": "67940f16382935851ebeb7a86c926dbf922070f390c438fdbbb56f7b7fb76057",
+      "topologySha256": "a6caafe00fa15f4a05702aca66e65b6264a2d5bb8bf8e82fd8891679bce02176",
+      "triangleCount": 2972,
+      "vertexCount": 1682
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.0390608012676239,
+          1.0397599935531616,
+          0.11472000181674957
+        ],
+        "min": [
+          -0.04035089910030365,
+          0.9923160076141357,
+          0.03434880077838898
+        ]
+      },
+      "externalConceptId": "FMA13073",
+      "geometrySha256": "09b7415e90c48b717a1f22bdd0d7a6496d1688bb148abc952bc7f77c0eaea2ed",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ3159",
+      "meshIndex": 2,
+      "modelId": "HA-MODEL-BP3D4-T71-TRUNK-SKELETON-QA",
+      "nodeIndex": 2,
+      "nodeName": "HA-MESH-BP3D4-FJ3159",
+      "normalCount": 1875,
+      "normalSha256": "c9bae1b37d4c77f434a22c55296627511d290e097cbf9e180be23f3f3c2798ac",
+      "productCandidateRegion": "back",
+      "representationId": "BP8995",
+      "sourceBoundsMm": {
+        "max": [
+          39.0608,
+          -34.3488,
+          1039.76
+        ],
+        "min": [
+          -40.3509,
+          -114.72,
+          992.316
+        ]
+      },
+      "sourceBytes": 214016,
+      "sourceElementFileId": "FJ3159",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t71/FJ3159.obj",
+      "sourceFileId": "FJ3159",
+      "sourceFmaConceptId": "FMA13073",
+      "sourceRepresentationId": "BP8995",
+      "sourceSha256": "5e6301d2020ba73167e71c274848ddcbec0f7936d9f26a78f2de8ffa82f095c7",
+      "topologySha256": "ebc2cbbfba316396b66571fec94a071031138b9f25e0e8be5e2d75ff7dac6bc1",
+      "triangleCount": 3214,
+      "vertexCount": 1875
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.03884100168943405,
+          1.0097299814224243,
+          0.11535300314426422
+        ],
+        "min": [
+          -0.040202900767326355,
+          0.9676929712295532,
+          0.029513999819755554
+        ]
+      },
+      "externalConceptId": "FMA13074",
+      "geometrySha256": "e66028783cd87d1e55e9f72a79b32af0c470bb5bda8a35d9e1c2363f536cf2a3",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ3162",
+      "meshIndex": 3,
+      "modelId": "HA-MODEL-BP3D4-T71-TRUNK-SKELETON-QA",
+      "nodeIndex": 3,
+      "nodeName": "HA-MESH-BP3D4-FJ3162",
+      "normalCount": 1849,
+      "normalSha256": "0f9882d576bc44e6c0a5defffb4354ec4f254a50daae1b5befded0309fb8745d",
+      "productCandidateRegion": "back",
+      "representationId": "BP8227",
+      "sourceBoundsMm": {
+        "max": [
+          38.841,
+          -29.514,
+          1009.73
+        ],
+        "min": [
+          -40.2029,
+          -115.353,
+          967.693
+        ]
+      },
+      "sourceBytes": 214360,
+      "sourceElementFileId": "FJ3162",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t71/FJ3162.obj",
+      "sourceFileId": "FJ3162",
+      "sourceFmaConceptId": "FMA13074",
+      "sourceRepresentationId": "BP8227",
+      "sourceSha256": "aa58bbebf75e858d5258926b3f85ef6bc27f765464e87bfc828baf24156bf155",
+      "topologySha256": "502879bca4e425721bcfe94d156e95bab951ea28a66ba36db0f2ac676105452a",
+      "triangleCount": 3272,
+      "vertexCount": 1849
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.04141540080308914,
+          0.9834020137786865,
+          0.11040499806404114
+        ],
+        "min": [
+          -0.04276610165834427,
+          0.9386640191078186,
+          0.026156200096011162
+        ]
+      },
+      "externalConceptId": "FMA13075",
+      "geometrySha256": "1c2306acca63a167d0da9ba5d8841a6cd18476e212f663fc9690aa65b738da6f",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ3165",
+      "meshIndex": 4,
+      "modelId": "HA-MODEL-BP3D4-T71-TRUNK-SKELETON-QA",
+      "nodeIndex": 4,
+      "nodeName": "HA-MESH-BP3D4-FJ3165",
+      "normalCount": 1968,
+      "normalSha256": "24e257098ed3fb55ba648a8b3b4d1a048cb9f65d3d9ae09d745f5bb34ee0d4ec",
+      "productCandidateRegion": "back",
+      "representationId": "BP8133",
+      "sourceBoundsMm": {
+        "max": [
+          41.4154,
+          -26.1562,
+          983.402
+        ],
+        "min": [
+          -42.7661,
+          -110.405,
+          938.664
+        ]
+      },
+      "sourceBytes": 229803,
+      "sourceElementFileId": "FJ3165",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t71/FJ3165.obj",
+      "sourceFileId": "FJ3165",
+      "sourceFmaConceptId": "FMA13075",
+      "sourceRepresentationId": "BP8133",
+      "sourceSha256": "2b02ea3874d39295b15a7de2a2b2dd1367cf5a00a5ba5f87519f2a7064b2286f",
+      "topologySha256": "205f548aa24630852477b818953faa5468b77f3924e09b2e29f1326af762e920",
+      "triangleCount": 3512,
+      "vertexCount": 1968
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.04957360029220581,
+          0.9548329710960388,
+          0.09907650202512741
+        ],
+        "min": [
+          -0.051000699400901794,
+          0.9045950174331665,
+          0.018245000392198563
+        ]
+      },
+      "externalConceptId": "FMA13076",
+      "geometrySha256": "78cbbc9168e1a6c2a53450e8d7e7992454315b20705d3a8bb4200416d16252e7",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ3168",
+      "meshIndex": 5,
+      "modelId": "HA-MODEL-BP3D4-T71-TRUNK-SKELETON-QA",
+      "nodeIndex": 5,
+      "nodeName": "HA-MESH-BP3D4-FJ3168",
+      "normalCount": 2115,
+      "normalSha256": "5001e2d0f7b3ba1fa30f98a26310a1cb84f89d05a2577c66235da6669838061b",
+      "productCandidateRegion": "back",
+      "representationId": "BP8280",
+      "sourceBoundsMm": {
+        "max": [
+          49.5736,
+          -18.245,
+          954.833
+        ],
+        "min": [
+          -51.0007,
+          -99.0765,
+          904.595
+        ]
+      },
+      "sourceBytes": 252134,
+      "sourceElementFileId": "FJ3168",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t71/FJ3168.obj",
+      "sourceFileId": "FJ3168",
+      "sourceFmaConceptId": "FMA13076",
+      "sourceRepresentationId": "BP8280",
+      "sourceSha256": "0b8d0317800abd7c7cb66473cfa23bcecf2b2a8060a4434f32eb9f6ea93c1cc4",
+      "topologySha256": "073263423b68930c2c1ef25e121c7ff5301202b85663e98b6a47480e0b817e04",
+      "triangleCount": 3892,
+      "vertexCount": 2115
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.02395560033619404,
+          1.289639949798584,
+          0.21383200585842133
+        ],
+        "min": [
+          -0.023614900186657906,
+          1.1796499490737915,
+          0.1651660054922104
+        ]
+      },
+      "externalConceptId": "FMA7487",
+      "geometrySha256": "b6ee7ddd0c2522b76af85f1374ed0cac542b170ac3fb08d3a558eb7269f7e5c4",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ3178",
+      "meshIndex": 6,
+      "modelId": "HA-MODEL-BP3D4-T71-TRUNK-SKELETON-QA",
+      "nodeIndex": 6,
+      "nodeName": "HA-MESH-BP3D4-FJ3178",
+      "normalCount": 3691,
+      "normalSha256": "3ed55fb77f67d78937f7c96bee220ff8195bfe95220f76b3ef8330d089b944ef",
+      "productCandidateRegion": "thorax",
+      "representationId": "BP8989",
+      "sourceBoundsMm": {
+        "max": [
+          23.9556,
+          -165.166,
+          1289.64
+        ],
+        "min": [
+          -23.6149,
+          -213.832,
+          1179.65
+        ]
+      },
+      "sourceBytes": 374292,
+      "sourceElementFileId": "FJ3178",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t71/FJ3178.obj",
+      "sourceFileId": "FJ3178",
+      "sourceFmaConceptId": "FMA7487",
+      "sourceRepresentationId": "BP8989",
+      "sourceSha256": "ec90f03f2ce1edebc8793a9e9973229b198d6367eb5eab1dff6e238110e94d9d",
+      "topologySha256": "2be2ad56a72e8f032e5a5625579ee2e9c43420a86756247cf22b58bfb9d51c94",
+      "triangleCount": 4646,
+      "vertexCount": 3691
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.027449699118733406,
+          1.3252500295639038,
+          0.17858800292015076
+        ],
+        "min": [
+          -0.027449699118733406,
+          1.280269980430603,
+          0.1308010071516037
+        ]
+      },
+      "externalConceptId": "FMA7486",
+      "geometrySha256": "793131f95d3bbbe473f1ba0c32d566ac9dc29e2d020d31aad3263ff3f8665daf",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ3290",
+      "meshIndex": 7,
+      "modelId": "HA-MODEL-BP3D4-T71-TRUNK-SKELETON-QA",
+      "nodeIndex": 7,
+      "nodeName": "HA-MESH-BP3D4-FJ3290",
+      "normalCount": 1446,
+      "normalSha256": "9c1ad7aad38357385e272b8aa0fa2f932f5f332ada7ed38acca444e2ad133b4c",
+      "productCandidateRegion": "thorax",
+      "representationId": "BP8562",
+      "sourceBoundsMm": {
+        "max": [
+          27.4497,
+          -130.801,
+          1325.25
+        ],
+        "min": [
+          -27.4497,
+          -178.588,
+          1280.27
+        ]
+      },
+      "sourceBytes": 164755,
+      "sourceElementFileId": "FJ3290",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t71/FJ3290.obj",
+      "sourceFileId": "FJ3290",
+      "sourceFmaConceptId": "FMA7486",
+      "sourceRepresentationId": "BP8562",
+      "sourceSha256": "e94f731d044131260947146ab79fa7c4712865e1aac36a1410003358b96e0692",
+      "topologySha256": "9ae64af38c6c6eae11aa0f9535d1dd8026e84406ae1faa8534c45f291f1b6230",
+      "triangleCount": 2546,
+      "vertexCount": 1446
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.05820289999246597,
+          0.9272000193595886,
+          0.08139640092849731
+        ],
+        "min": [
+          -0.059591200202703476,
+          0.7828369736671448,
+          -0.00725375022739172
+        ]
+      },
+      "externalConceptId": "FMA16202",
+      "geometrySha256": "8f855b2b93d189fe5c266dadac69860296fd6d6a4d5e42f55d58f978719b630c",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ3393",
+      "meshIndex": 8,
+      "modelId": "HA-MODEL-BP3D4-T71-TRUNK-SKELETON-QA",
+      "nodeIndex": 8,
+      "nodeName": "HA-MESH-BP3D4-FJ3393",
+      "normalCount": 5293,
+      "normalSha256": "ab207ac7925e95815c8d452bcb04173af79fd09f27adebb436cbb6e519902fb8",
+      "productCandidateRegion": "pelvis-perineum",
+      "representationId": "BP9174",
+      "sourceBoundsMm": {
+        "max": [
+          58.2029,
+          7.25375,
+          927.2
+        ],
+        "min": [
+          -59.5912,
+          -81.3964,
+          782.837
+        ]
+      },
+      "sourceBytes": 654878,
+      "sourceElementFileId": "FJ3393",
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t71/FJ3393.obj",
+      "sourceFileId": "FJ3393",
+      "sourceFmaConceptId": "FMA16202",
+      "sourceRepresentationId": "BP9174",
+      "sourceSha256": "cd04cc9f78d758ba34e92896914f647d22d257b9e7e51b97764670f694033489",
+      "topologySha256": "c658325f97e4ed231696d6658e8a5a8f62da2f739c5c14d56197430cf24ebf0f",
+      "triangleCount": 9922,
+      "vertexCount": 5293
+    }
+  ],
+  "revision": "BodyParts3D-R4-T71-static-source-package-v1",
+  "rights": {
+    "officialCurrentLicense": "CC BY 4.0; attribution required per official README updated 2025-02-27",
+    "publicRelease": false,
+    "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+    "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+    "sourceHeaderLicenseObservations": [
+      "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\"."
+    ]
+  },
+  "sceneContract": {
+    "contract": "T50 shared AnatomySceneRoot, frame and reference-pose contract; T71 is source-only static QA, not learner scene",
+    "integratedGlbLocalCachePath": "atlas-data/source-cache/bodyparts3d-r4/converted/t71/T71-trunk-skeleton-static-source.glb",
+    "integratedGlbSha256": "cd9f9ba1f0274a2b1a903fed06ca8dc714e8dd9d49ced6b4ea4500cfa0320f72",
+    "meshNodeCount": 9,
+    "modelId": "HA-MODEL-BP3D4-T71-TRUNK-SKELETON-QA",
+    "rendererCount": 0,
+    "rendererPolicy": "QA browser loads this package with T53/T55 source packages inside one scene root and one canvas; no product runtime is created"
+  },
+  "scope": {
+    "canonicalLearnerMembershipCreated": false,
+    "internalBatchCount": 1,
+    "internalBatchSizeMaximum": 10,
+    "oneNodePerUniqueFj": true,
+    "regionCandidateCounts": {
+      "back": 5,
+      "pelvis-perineum": 1,
+      "thorax": 3
+    },
+    "sourceElementFileCount": 9,
+    "sourceMembershipCount": 9,
+    "uniqueSourceNodeCount": 9,
+    "wholeBodyCanonicalDenominator": null
+  },
+  "source": {
+    "archiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+    "lod": "official 99%-reduced bundle; no multilevel LOD chain advertised",
+    "officialReadme": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/README_e.html",
+    "officialReleaseNote": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/release_4.0_e.html",
+    "officialVersionMetadataLastModified": "Wed, 22 May 2013 06:46:24 GMT",
+    "pose": "bodyparts3d-r4-static-reference",
+    "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+    "projectUnit": "m",
+    "sourceFrame": "BodyParts3D Release 4.0 static reference",
+    "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+    "sourceUnit": "mm from each exact OBJ Bounds(mm) header",
+    "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+    "version": "BodyParts3D Release 4.0"
+  },
+  "sourceAssets": [
+    {
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExactSourceName": "not_lateralized_by_exact_source_name",
+      "lateralitySourceLabelObservation": "no left/right token in exact OBJ English name; no side inferred from coordinates",
+      "officialCurrentLicense": "CC BY 4.0; attribution required according to official README dated 2025-02-27",
+      "productCandidateRegion": "thorax",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          0.01060390006750822,
+          1.184499979019165,
+          0.2133529931306839
+        ],
+        "min": [
+          -0.010337799787521362,
+          1.1640199422836304,
+          0.19850899279117584
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceAcquisitionMethod": "official_HTTP_206_selected_member_range",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 0.0,
+      "sourceBoundsHeaderWithin001Mm": true,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          10.6039,
+          -198.509,
+          1184.5
+        ],
+        "min": [
+          -10.3378,
+          -213.353,
+          1164.02
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          10.6039,
+          -198.509,
+          1184.5
+        ],
+        "min": [
+          -10.3378,
+          -213.353,
+          1164.02
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 56262,
+      "sourceContextRows": [
+        {
+          "sourceFmaConceptId": "FMA7488",
+          "sourceNameEnglish": "xiphoid process",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67601",
+          "sourceNameEnglish": "process of organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67619",
+          "sourceNameEnglish": "organ region",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA82472",
+          "sourceNameEnglish": "cardinal organ part",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA86140",
+          "sourceNameEnglish": "organ segment",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA7181",
+          "sourceNameEnglish": "trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7480",
+          "sourceNameEnglish": "rib cage",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7481",
+          "sourceNameEnglish": "skeletal system of thorax",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7482",
+          "sourceNameEnglish": "musculoskeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7483",
+          "sourceNameEnglish": "axial skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7485",
+          "sourceNameEnglish": "sternum",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7488",
+          "sourceNameEnglish": "xiphoid process",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA9576",
+          "sourceNameEnglish": "thorax",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA10427",
+          "sourceNameEnglish": "body wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA10428",
+          "sourceNameEnglish": "thoracic wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA20394",
+          "sourceNameEnglish": "human body",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23876",
+          "sourceNameEnglish": "skeleton (in vivo)",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23881",
+          "sourceNameEnglish": "skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA24816",
+          "sourceNameEnglish": "anterior chest",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA24866",
+          "sourceNameEnglish": "sternal part of chest",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA50060",
+          "sourceNameEnglish": "chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA87543",
+          "sourceNameEnglish": "anterior chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA87598",
+          "sourceNameEnglish": "skeletal system of trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA231424",
+          "sourceNameEnglish": "body proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259209",
+          "sourceNameEnglish": "thoracic segment of trunk",
+          "tree": "PART-OF"
+        }
+      ],
+      "sourceCrc32": "1202b77d",
+      "sourceElementFileId": "FJ3153",
+      "sourceFmaConceptId": "FMA7488",
+      "sourceFrame": "BodyParts3D Release 4.0 native static reference",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "header_and_official_index_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; no multilevel LOD chain advertised",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ3153.obj",
+      "sourceNameEnglishExactHeader": "Xiphoid process",
+      "sourceNormalCount": 495,
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP7865",
+      "sourceSha256": "371573a43e28506d674bf4999ee4c50c0497014aa8d69865f450a078d493a495",
+      "sourceTriangleCount": 922,
+      "sourceUnit": "mm, evidenced by exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 495,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ3153",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "eeb153e7e4106f7efc4613677503564e1daff087e7efe4b2a19fa59f0882d71a"
+    },
+    {
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExactSourceName": "not_lateralized_by_exact_source_name",
+      "lateralitySourceLabelObservation": "no left/right token in exact OBJ English name; no side inferred from coordinates",
+      "officialCurrentLicense": "CC BY 4.0; attribution required according to official README dated 2025-02-27",
+      "productCandidateRegion": "back",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          0.03446140140295029,
+          1.0719799995422363,
+          0.10948000103235245
+        ],
+        "min": [
+          -0.03577980026602745,
+          1.0152000188827515,
+          0.0292224008589983
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceAcquisitionMethod": "official_HTTP_206_selected_member_range",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 0.0,
+      "sourceBoundsHeaderWithin001Mm": true,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          34.4614,
+          -29.2224,
+          1071.98
+        ],
+        "min": [
+          -35.7798,
+          -109.48,
+          1015.2
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          34.4614,
+          -29.2224,
+          1071.98
+        ],
+        "min": [
+          -35.7798,
+          -109.48,
+          1015.2
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 193798,
+      "sourceContextRows": [
+        {
+          "sourceFmaConceptId": "FMA5018",
+          "sourceNameEnglish": "bone organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA7477",
+          "sourceNameEnglish": "irregular bone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA9914",
+          "sourceNameEnglish": "vertebra",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA9921",
+          "sourceNameEnglish": "lumbar vertebra",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA13072",
+          "sourceNameEnglish": "first lumbar vertebra",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55671",
+          "sourceNameEnglish": "cavitated organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55673",
+          "sourceNameEnglish": "organ with cavitated organ parts",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67498",
+          "sourceNameEnglish": "organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA7181",
+          "sourceNameEnglish": "trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7482",
+          "sourceNameEnglish": "musculoskeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7483",
+          "sourceNameEnglish": "axial skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA9577",
+          "sourceNameEnglish": "abdomen",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA10427",
+          "sourceNameEnglish": "body wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA10429",
+          "sourceNameEnglish": "wall of abdomen proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA13072",
+          "sourceNameEnglish": "first lumbar vertebra",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA13478",
+          "sourceNameEnglish": "vertebral column",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA14628",
+          "sourceNameEnglish": "posterior abdominal wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA16203",
+          "sourceNameEnglish": "lumbar vertebral column",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA20394",
+          "sourceNameEnglish": "human body",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23876",
+          "sourceNameEnglish": "skeleton (in vivo)",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23881",
+          "sourceNameEnglish": "skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA61680",
+          "sourceNameEnglish": "abdomen proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA61681",
+          "sourceNameEnglish": "back of abdomen",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA71221",
+          "sourceNameEnglish": "axial skeleton",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA72065",
+          "sourceNameEnglish": "set of lumbar vertebrae",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA87598",
+          "sourceNameEnglish": "skeletal system of trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA231424",
+          "sourceNameEnglish": "body proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259054",
+          "sourceNameEnglish": "wall of abdomen",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259211",
+          "sourceNameEnglish": "abdominal segment of trunk",
+          "tree": "PART-OF"
+        }
+      ],
+      "sourceCrc32": "48de129d",
+      "sourceElementFileId": "FJ3157",
+      "sourceFmaConceptId": "FMA13072",
+      "sourceFrame": "BodyParts3D Release 4.0 native static reference",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "header_and_official_index_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; no multilevel LOD chain advertised",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ3157.obj",
+      "sourceNameEnglishExactHeader": "First lumbar vertebra",
+      "sourceNormalCount": 1682,
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8948",
+      "sourceSha256": "67940f16382935851ebeb7a86c926dbf922070f390c438fdbbb56f7b7fb76057",
+      "sourceTriangleCount": 2972,
+      "sourceUnit": "mm, evidenced by exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 1682,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ3157",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "9383d17102f852e881f0d431c1ade5dd0b43d28dc0e0effd44c7728239f92d69"
+    },
+    {
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExactSourceName": "not_lateralized_by_exact_source_name",
+      "lateralitySourceLabelObservation": "no left/right token in exact OBJ English name; no side inferred from coordinates",
+      "officialCurrentLicense": "CC BY 4.0; attribution required according to official README dated 2025-02-27",
+      "productCandidateRegion": "back",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          0.0390608012676239,
+          1.0397599935531616,
+          0.11472000181674957
+        ],
+        "min": [
+          -0.04035089910030365,
+          0.9923160076141357,
+          0.03434880077838898
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceAcquisitionMethod": "official_HTTP_206_selected_member_range",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 0.0,
+      "sourceBoundsHeaderWithin001Mm": true,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          39.0608,
+          -34.3488,
+          1039.76
+        ],
+        "min": [
+          -40.3509,
+          -114.72,
+          992.316
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          39.0608,
+          -34.3488,
+          1039.76
+        ],
+        "min": [
+          -40.3509,
+          -114.72,
+          992.316
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 214016,
+      "sourceContextRows": [
+        {
+          "sourceFmaConceptId": "FMA5018",
+          "sourceNameEnglish": "bone organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA7477",
+          "sourceNameEnglish": "irregular bone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA9914",
+          "sourceNameEnglish": "vertebra",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA9921",
+          "sourceNameEnglish": "lumbar vertebra",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA13073",
+          "sourceNameEnglish": "second lumbar vertebra",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55671",
+          "sourceNameEnglish": "cavitated organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55673",
+          "sourceNameEnglish": "organ with cavitated organ parts",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67498",
+          "sourceNameEnglish": "organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA7181",
+          "sourceNameEnglish": "trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7482",
+          "sourceNameEnglish": "musculoskeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7483",
+          "sourceNameEnglish": "axial skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA9577",
+          "sourceNameEnglish": "abdomen",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA10427",
+          "sourceNameEnglish": "body wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA10429",
+          "sourceNameEnglish": "wall of abdomen proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA13073",
+          "sourceNameEnglish": "second lumbar vertebra",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA13478",
+          "sourceNameEnglish": "vertebral column",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA14628",
+          "sourceNameEnglish": "posterior abdominal wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA16203",
+          "sourceNameEnglish": "lumbar vertebral column",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA20394",
+          "sourceNameEnglish": "human body",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23876",
+          "sourceNameEnglish": "skeleton (in vivo)",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23881",
+          "sourceNameEnglish": "skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA61680",
+          "sourceNameEnglish": "abdomen proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA61681",
+          "sourceNameEnglish": "back of abdomen",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA71221",
+          "sourceNameEnglish": "axial skeleton",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA72065",
+          "sourceNameEnglish": "set of lumbar vertebrae",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA87598",
+          "sourceNameEnglish": "skeletal system of trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA231424",
+          "sourceNameEnglish": "body proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259054",
+          "sourceNameEnglish": "wall of abdomen",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259211",
+          "sourceNameEnglish": "abdominal segment of trunk",
+          "tree": "PART-OF"
+        }
+      ],
+      "sourceCrc32": "74c53e01",
+      "sourceElementFileId": "FJ3159",
+      "sourceFmaConceptId": "FMA13073",
+      "sourceFrame": "BodyParts3D Release 4.0 native static reference",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "header_and_official_index_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; no multilevel LOD chain advertised",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ3159.obj",
+      "sourceNameEnglishExactHeader": "Second lumbar vertebra",
+      "sourceNormalCount": 1875,
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8995",
+      "sourceSha256": "5e6301d2020ba73167e71c274848ddcbec0f7936d9f26a78f2de8ffa82f095c7",
+      "sourceTriangleCount": 3214,
+      "sourceUnit": "mm, evidenced by exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 1875,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ3159",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "81ba4f9af49ba4da7645de706cf6097391b6e586c5ecd61b90c535b45db9fe23"
+    },
+    {
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExactSourceName": "not_lateralized_by_exact_source_name",
+      "lateralitySourceLabelObservation": "no left/right token in exact OBJ English name; no side inferred from coordinates",
+      "officialCurrentLicense": "CC BY 4.0; attribution required according to official README dated 2025-02-27",
+      "productCandidateRegion": "back",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          0.03884100168943405,
+          1.0097299814224243,
+          0.11535300314426422
+        ],
+        "min": [
+          -0.040202900767326355,
+          0.9676929712295532,
+          0.029513999819755554
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceAcquisitionMethod": "official_HTTP_206_selected_member_range",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 0.0,
+      "sourceBoundsHeaderWithin001Mm": true,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          38.841,
+          -29.514,
+          1009.73
+        ],
+        "min": [
+          -40.2029,
+          -115.353,
+          967.693
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          38.841,
+          -29.514,
+          1009.73
+        ],
+        "min": [
+          -40.2029,
+          -115.353,
+          967.693
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 214360,
+      "sourceContextRows": [
+        {
+          "sourceFmaConceptId": "FMA5018",
+          "sourceNameEnglish": "bone organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA7477",
+          "sourceNameEnglish": "irregular bone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA9914",
+          "sourceNameEnglish": "vertebra",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA9921",
+          "sourceNameEnglish": "lumbar vertebra",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA13074",
+          "sourceNameEnglish": "third lumbar vertebra",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55671",
+          "sourceNameEnglish": "cavitated organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55673",
+          "sourceNameEnglish": "organ with cavitated organ parts",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67498",
+          "sourceNameEnglish": "organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA7181",
+          "sourceNameEnglish": "trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7482",
+          "sourceNameEnglish": "musculoskeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7483",
+          "sourceNameEnglish": "axial skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA9577",
+          "sourceNameEnglish": "abdomen",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA10427",
+          "sourceNameEnglish": "body wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA10429",
+          "sourceNameEnglish": "wall of abdomen proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA13074",
+          "sourceNameEnglish": "third lumbar vertebra",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA13478",
+          "sourceNameEnglish": "vertebral column",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA14628",
+          "sourceNameEnglish": "posterior abdominal wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA16203",
+          "sourceNameEnglish": "lumbar vertebral column",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA20394",
+          "sourceNameEnglish": "human body",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23876",
+          "sourceNameEnglish": "skeleton (in vivo)",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23881",
+          "sourceNameEnglish": "skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA61680",
+          "sourceNameEnglish": "abdomen proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA61681",
+          "sourceNameEnglish": "back of abdomen",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA71221",
+          "sourceNameEnglish": "axial skeleton",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA72065",
+          "sourceNameEnglish": "set of lumbar vertebrae",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA87598",
+          "sourceNameEnglish": "skeletal system of trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA231424",
+          "sourceNameEnglish": "body proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259054",
+          "sourceNameEnglish": "wall of abdomen",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259211",
+          "sourceNameEnglish": "abdominal segment of trunk",
+          "tree": "PART-OF"
+        }
+      ],
+      "sourceCrc32": "7ba71599",
+      "sourceElementFileId": "FJ3162",
+      "sourceFmaConceptId": "FMA13074",
+      "sourceFrame": "BodyParts3D Release 4.0 native static reference",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "header_and_official_index_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; no multilevel LOD chain advertised",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ3162.obj",
+      "sourceNameEnglishExactHeader": "Third lumbar vertebra",
+      "sourceNormalCount": 1849,
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8227",
+      "sourceSha256": "aa58bbebf75e858d5258926b3f85ef6bc27f765464e87bfc828baf24156bf155",
+      "sourceTriangleCount": 3272,
+      "sourceUnit": "mm, evidenced by exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 1849,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ3162",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "90ee100701544e9c7ad7986eac1c96d3fd04a3c900d09f0ab14692aa87df3dc2"
+    },
+    {
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExactSourceName": "not_lateralized_by_exact_source_name",
+      "lateralitySourceLabelObservation": "no left/right token in exact OBJ English name; no side inferred from coordinates",
+      "officialCurrentLicense": "CC BY 4.0; attribution required according to official README dated 2025-02-27",
+      "productCandidateRegion": "back",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          0.04141540080308914,
+          0.9834020137786865,
+          0.11040499806404114
+        ],
+        "min": [
+          -0.04276610165834427,
+          0.9386640191078186,
+          0.026156200096011162
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceAcquisitionMethod": "official_HTTP_206_selected_member_range",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 0.0,
+      "sourceBoundsHeaderWithin001Mm": true,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          41.4154,
+          -26.1562,
+          983.402
+        ],
+        "min": [
+          -42.7661,
+          -110.405,
+          938.664
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          41.4154,
+          -26.1562,
+          983.402
+        ],
+        "min": [
+          -42.7661,
+          -110.405,
+          938.664
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 229803,
+      "sourceContextRows": [
+        {
+          "sourceFmaConceptId": "FMA5018",
+          "sourceNameEnglish": "bone organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA7477",
+          "sourceNameEnglish": "irregular bone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA9914",
+          "sourceNameEnglish": "vertebra",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA9921",
+          "sourceNameEnglish": "lumbar vertebra",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA13075",
+          "sourceNameEnglish": "fourth lumbar vertebra",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55671",
+          "sourceNameEnglish": "cavitated organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55673",
+          "sourceNameEnglish": "organ with cavitated organ parts",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67498",
+          "sourceNameEnglish": "organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA7181",
+          "sourceNameEnglish": "trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7482",
+          "sourceNameEnglish": "musculoskeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7483",
+          "sourceNameEnglish": "axial skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA9577",
+          "sourceNameEnglish": "abdomen",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA10427",
+          "sourceNameEnglish": "body wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA10429",
+          "sourceNameEnglish": "wall of abdomen proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA13075",
+          "sourceNameEnglish": "fourth lumbar vertebra",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA13478",
+          "sourceNameEnglish": "vertebral column",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA14628",
+          "sourceNameEnglish": "posterior abdominal wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA16203",
+          "sourceNameEnglish": "lumbar vertebral column",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA20394",
+          "sourceNameEnglish": "human body",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23876",
+          "sourceNameEnglish": "skeleton (in vivo)",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23881",
+          "sourceNameEnglish": "skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA61680",
+          "sourceNameEnglish": "abdomen proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA61681",
+          "sourceNameEnglish": "back of abdomen",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA71221",
+          "sourceNameEnglish": "axial skeleton",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA72065",
+          "sourceNameEnglish": "set of lumbar vertebrae",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA87598",
+          "sourceNameEnglish": "skeletal system of trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA231424",
+          "sourceNameEnglish": "body proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259054",
+          "sourceNameEnglish": "wall of abdomen",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259211",
+          "sourceNameEnglish": "abdominal segment of trunk",
+          "tree": "PART-OF"
+        }
+      ],
+      "sourceCrc32": "ba47ef1d",
+      "sourceElementFileId": "FJ3165",
+      "sourceFmaConceptId": "FMA13075",
+      "sourceFrame": "BodyParts3D Release 4.0 native static reference",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "header_and_official_index_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; no multilevel LOD chain advertised",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ3165.obj",
+      "sourceNameEnglishExactHeader": "Fourth lumbar vertebra",
+      "sourceNormalCount": 1968,
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8133",
+      "sourceSha256": "2b02ea3874d39295b15a7de2a2b2dd1367cf5a00a5ba5f87519f2a7064b2286f",
+      "sourceTriangleCount": 3512,
+      "sourceUnit": "mm, evidenced by exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 1968,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ3165",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "30dd5b0c6a6acbc33690cfaf6f307962fe04a1d32364735cb6b61dc756eec5d0"
+    },
+    {
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExactSourceName": "not_lateralized_by_exact_source_name",
+      "lateralitySourceLabelObservation": "no left/right token in exact OBJ English name; no side inferred from coordinates",
+      "officialCurrentLicense": "CC BY 4.0; attribution required according to official README dated 2025-02-27",
+      "productCandidateRegion": "back",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          0.04957360029220581,
+          0.9548329710960388,
+          0.09907650202512741
+        ],
+        "min": [
+          -0.051000699400901794,
+          0.9045950174331665,
+          0.018245000392198563
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceAcquisitionMethod": "official_HTTP_206_selected_member_range",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 0.0,
+      "sourceBoundsHeaderWithin001Mm": true,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          49.5736,
+          -18.245,
+          954.833
+        ],
+        "min": [
+          -51.0007,
+          -99.0765,
+          904.595
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          49.5736,
+          -18.245,
+          954.833
+        ],
+        "min": [
+          -51.0007,
+          -99.0765,
+          904.595
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 252134,
+      "sourceContextRows": [
+        {
+          "sourceFmaConceptId": "FMA5018",
+          "sourceNameEnglish": "bone organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA7477",
+          "sourceNameEnglish": "irregular bone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA9914",
+          "sourceNameEnglish": "vertebra",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA9921",
+          "sourceNameEnglish": "lumbar vertebra",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA13076",
+          "sourceNameEnglish": "fifth lumbar vertebra",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55671",
+          "sourceNameEnglish": "cavitated organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55673",
+          "sourceNameEnglish": "organ with cavitated organ parts",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67498",
+          "sourceNameEnglish": "organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA7181",
+          "sourceNameEnglish": "trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7482",
+          "sourceNameEnglish": "musculoskeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7483",
+          "sourceNameEnglish": "axial skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA9577",
+          "sourceNameEnglish": "abdomen",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA10427",
+          "sourceNameEnglish": "body wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA10429",
+          "sourceNameEnglish": "wall of abdomen proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA13076",
+          "sourceNameEnglish": "fifth lumbar vertebra",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA13478",
+          "sourceNameEnglish": "vertebral column",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA14628",
+          "sourceNameEnglish": "posterior abdominal wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA16203",
+          "sourceNameEnglish": "lumbar vertebral column",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA20394",
+          "sourceNameEnglish": "human body",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23876",
+          "sourceNameEnglish": "skeleton (in vivo)",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23881",
+          "sourceNameEnglish": "skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA61680",
+          "sourceNameEnglish": "abdomen proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA61681",
+          "sourceNameEnglish": "back of abdomen",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA71221",
+          "sourceNameEnglish": "axial skeleton",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA72065",
+          "sourceNameEnglish": "set of lumbar vertebrae",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA87598",
+          "sourceNameEnglish": "skeletal system of trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA231424",
+          "sourceNameEnglish": "body proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259054",
+          "sourceNameEnglish": "wall of abdomen",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259211",
+          "sourceNameEnglish": "abdominal segment of trunk",
+          "tree": "PART-OF"
+        }
+      ],
+      "sourceCrc32": "b9da0417",
+      "sourceElementFileId": "FJ3168",
+      "sourceFmaConceptId": "FMA13076",
+      "sourceFrame": "BodyParts3D Release 4.0 native static reference",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "header_and_official_index_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; no multilevel LOD chain advertised",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ3168.obj",
+      "sourceNameEnglishExactHeader": "Fifth lumbar vertebra",
+      "sourceNormalCount": 2115,
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8280",
+      "sourceSha256": "0b8d0317800abd7c7cb66473cfa23bcecf2b2a8060a4434f32eb9f6ea93c1cc4",
+      "sourceTriangleCount": 3892,
+      "sourceUnit": "mm, evidenced by exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 2115,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ3168",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "5f3a999b886320c715874c90f72215005e9221bdb5db515a5d721f8f9d210e70"
+    },
+    {
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExactSourceName": "not_lateralized_by_exact_source_name",
+      "lateralitySourceLabelObservation": "no left/right token in exact OBJ English name; no side inferred from coordinates",
+      "officialCurrentLicense": "CC BY 4.0; attribution required according to official README dated 2025-02-27",
+      "productCandidateRegion": "thorax",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          0.02395560033619404,
+          1.289639949798584,
+          0.21383200585842133
+        ],
+        "min": [
+          -0.023614900186657906,
+          1.1796499490737915,
+          0.1651660054922104
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceAcquisitionMethod": "official_HTTP_206_selected_member_range",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 0.0,
+      "sourceBoundsHeaderWithin001Mm": true,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          23.9556,
+          -165.166,
+          1289.64
+        ],
+        "min": [
+          -23.6149,
+          -213.832,
+          1179.65
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          23.9556,
+          -165.166,
+          1289.64
+        ],
+        "min": [
+          -23.6149,
+          -213.832,
+          1179.65
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 374292,
+      "sourceContextRows": [
+        {
+          "sourceFmaConceptId": "FMA7487",
+          "sourceNameEnglish": "body of sternum",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA45734",
+          "sourceNameEnglish": "body of organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55268",
+          "sourceNameEnglish": "organ zone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67619",
+          "sourceNameEnglish": "organ region",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA82472",
+          "sourceNameEnglish": "cardinal organ part",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA7181",
+          "sourceNameEnglish": "trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7480",
+          "sourceNameEnglish": "rib cage",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7481",
+          "sourceNameEnglish": "skeletal system of thorax",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7482",
+          "sourceNameEnglish": "musculoskeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7483",
+          "sourceNameEnglish": "axial skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7485",
+          "sourceNameEnglish": "sternum",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7487",
+          "sourceNameEnglish": "body of sternum",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA9576",
+          "sourceNameEnglish": "thorax",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA10427",
+          "sourceNameEnglish": "body wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA10428",
+          "sourceNameEnglish": "thoracic wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA20394",
+          "sourceNameEnglish": "human body",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23876",
+          "sourceNameEnglish": "skeleton (in vivo)",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23881",
+          "sourceNameEnglish": "skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA24816",
+          "sourceNameEnglish": "anterior chest",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA24866",
+          "sourceNameEnglish": "sternal part of chest",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA50060",
+          "sourceNameEnglish": "chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA87543",
+          "sourceNameEnglish": "anterior chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA87598",
+          "sourceNameEnglish": "skeletal system of trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA231424",
+          "sourceNameEnglish": "body proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259209",
+          "sourceNameEnglish": "thoracic segment of trunk",
+          "tree": "PART-OF"
+        }
+      ],
+      "sourceCrc32": "fa10cdd3",
+      "sourceElementFileId": "FJ3178",
+      "sourceFmaConceptId": "FMA7487",
+      "sourceFrame": "BodyParts3D Release 4.0 native static reference",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "header_and_official_index_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; no multilevel LOD chain advertised",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ3178.obj",
+      "sourceNameEnglishExactHeader": "Body of sternum",
+      "sourceNormalCount": 3691,
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8989",
+      "sourceSha256": "ec90f03f2ce1edebc8793a9e9973229b198d6367eb5eab1dff6e238110e94d9d",
+      "sourceTriangleCount": 4646,
+      "sourceUnit": "mm, evidenced by exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 3691,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ3178",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "44000f9d88b9c18fb01ca2dab6d2b391be724e8b0931c941b8524e3dbfdfdd29"
+    },
+    {
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExactSourceName": "not_lateralized_by_exact_source_name",
+      "lateralitySourceLabelObservation": "no left/right token in exact OBJ English name; no side inferred from coordinates",
+      "officialCurrentLicense": "CC BY 4.0; attribution required according to official README dated 2025-02-27",
+      "productCandidateRegion": "thorax",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          0.027449699118733406,
+          1.3252500295639038,
+          0.17858800292015076
+        ],
+        "min": [
+          -0.027449699118733406,
+          1.280269980430603,
+          0.1308010071516037
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceAcquisitionMethod": "official_HTTP_206_selected_member_range",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 0.0,
+      "sourceBoundsHeaderWithin001Mm": true,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          27.4497,
+          -130.801,
+          1325.25
+        ],
+        "min": [
+          -27.4497,
+          -178.588,
+          1280.27
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          27.4497,
+          -130.801,
+          1325.25
+        ],
+        "min": [
+          -27.4497,
+          -178.588,
+          1280.27
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 164755,
+      "sourceContextRows": [
+        {
+          "sourceFmaConceptId": "FMA7486",
+          "sourceNameEnglish": "manubrium",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA10483",
+          "sourceNameEnglish": "zone of bone organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA12215",
+          "sourceNameEnglish": "zone of sternum",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55268",
+          "sourceNameEnglish": "organ zone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67619",
+          "sourceNameEnglish": "organ region",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA82472",
+          "sourceNameEnglish": "cardinal organ part",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA7181",
+          "sourceNameEnglish": "trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7480",
+          "sourceNameEnglish": "rib cage",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7481",
+          "sourceNameEnglish": "skeletal system of thorax",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7482",
+          "sourceNameEnglish": "musculoskeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7483",
+          "sourceNameEnglish": "axial skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7485",
+          "sourceNameEnglish": "sternum",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7486",
+          "sourceNameEnglish": "manubrium",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA9576",
+          "sourceNameEnglish": "thorax",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA10427",
+          "sourceNameEnglish": "body wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA10428",
+          "sourceNameEnglish": "thoracic wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA20394",
+          "sourceNameEnglish": "human body",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23876",
+          "sourceNameEnglish": "skeleton (in vivo)",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23881",
+          "sourceNameEnglish": "skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA24816",
+          "sourceNameEnglish": "anterior chest",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA24866",
+          "sourceNameEnglish": "sternal part of chest",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA50060",
+          "sourceNameEnglish": "chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA87543",
+          "sourceNameEnglish": "anterior chest wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA87598",
+          "sourceNameEnglish": "skeletal system of trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA231424",
+          "sourceNameEnglish": "body proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259209",
+          "sourceNameEnglish": "thoracic segment of trunk",
+          "tree": "PART-OF"
+        }
+      ],
+      "sourceCrc32": "c6336876",
+      "sourceElementFileId": "FJ3290",
+      "sourceFmaConceptId": "FMA7486",
+      "sourceFrame": "BodyParts3D Release 4.0 native static reference",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "header_and_official_index_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; no multilevel LOD chain advertised",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ3290.obj",
+      "sourceNameEnglishExactHeader": "Manubrium",
+      "sourceNormalCount": 1446,
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8562",
+      "sourceSha256": "e94f731d044131260947146ab79fa7c4712865e1aac36a1410003358b96e0692",
+      "sourceTriangleCount": 2546,
+      "sourceUnit": "mm, evidenced by exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 1446,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ3290",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "a04672b7cfc99f1d697ad3b6281a4c2a118f66021d7e15d4ebc490ded25dca1d"
+    },
+    {
+      "canonicalLearnerIds": [],
+      "humanAnatomyReviewed": false,
+      "lateralityFromExactSourceName": "not_lateralized_by_exact_source_name",
+      "lateralitySourceLabelObservation": "no left/right token in exact OBJ English name; no side inferred from coordinates",
+      "officialCurrentLicense": "CC BY 4.0; attribution required according to official README dated 2025-02-27",
+      "productCandidateRegion": "pelvis-perineum",
+      "productSelectionState": "T70_first_pass_candidate_only_not_canonical_membership_or_release_approval",
+      "projectBoundsM": {
+        "max": [
+          0.05820289999246597,
+          0.9272000193595886,
+          0.08139640092849731
+        ],
+        "min": [
+          -0.059591200202703476,
+          0.7828369736671448,
+          -0.00725375022739172
+        ]
+      },
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "redistributionStatus": "held_pending_file_level_license_reconciliation_with_legacy_OBJ_headers",
+      "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "reviewState": "source_only_not_human_anatomy_reviewed",
+      "sourceAcquisitionMethod": "official_HTTP_206_selected_member_range",
+      "sourceArchiveEtag": "\"8848a5a-4dd48ec9df000\"",
+      "sourceArchiveTree": "IS-A",
+      "sourceArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "sourceBoundsHeaderMaxAbsDeltaMm": 4.999999999988347e-05,
+      "sourceBoundsHeaderWithin001Mm": true,
+      "sourceBoundsMmActualVertices": {
+        "max": [
+          58.2029,
+          7.25375,
+          927.2
+        ],
+        "min": [
+          -59.5912,
+          -81.3964,
+          782.837
+        ]
+      },
+      "sourceBoundsMmHeader": {
+        "max": [
+          58.2029,
+          7.2538,
+          927.2
+        ],
+        "min": [
+          -59.5912,
+          -81.3964,
+          782.837
+        ]
+      },
+      "sourceBuildUpLogic": "FMA 3.0 is_a",
+      "sourceBytes": 654878,
+      "sourceContextRows": [
+        {
+          "sourceFmaConceptId": "FMA5018",
+          "sourceNameEnglish": "bone organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA7477",
+          "sourceNameEnglish": "irregular bone",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA16202",
+          "sourceNameEnglish": "sacrum",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55671",
+          "sourceNameEnglish": "cavitated organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA55673",
+          "sourceNameEnglish": "organ with cavitated organ parts",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA61775",
+          "sourceNameEnglish": "physical anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA62955",
+          "sourceNameEnglish": "anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67135",
+          "sourceNameEnglish": "anatomical structure",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67165",
+          "sourceNameEnglish": "material anatomical entity",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA67498",
+          "sourceNameEnglish": "organ",
+          "tree": "IS-A"
+        },
+        {
+          "sourceFmaConceptId": "FMA7181",
+          "sourceNameEnglish": "trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7184",
+          "sourceNameEnglish": "lower limb",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7482",
+          "sourceNameEnglish": "musculoskeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA7483",
+          "sourceNameEnglish": "axial skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA9577",
+          "sourceNameEnglish": "abdomen",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA9578",
+          "sourceNameEnglish": "pelvis",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA10427",
+          "sourceNameEnglish": "body wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA10430",
+          "sourceNameEnglish": "pelvic wall",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA13478",
+          "sourceNameEnglish": "vertebral column",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA16202",
+          "sourceNameEnglish": "sacrum",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA16580",
+          "sourceNameEnglish": "bony pelvis",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA16581",
+          "sourceNameEnglish": "pelvic girdle",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA20394",
+          "sourceNameEnglish": "human body",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23876",
+          "sourceNameEnglish": "skeleton (in vivo)",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA23881",
+          "sourceNameEnglish": "skeletal system",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA24228",
+          "sourceNameEnglish": "posterior part of pelvis",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA71221",
+          "sourceNameEnglish": "axial skeleton",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA72062",
+          "sourceNameEnglish": "pelvic skeleton",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA87598",
+          "sourceNameEnglish": "skeletal system of trunk",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA231424",
+          "sourceNameEnglish": "body proper",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259054",
+          "sourceNameEnglish": "wall of abdomen",
+          "tree": "PART-OF"
+        },
+        {
+          "sourceFmaConceptId": "FMA259211",
+          "sourceNameEnglish": "abdominal segment of trunk",
+          "tree": "PART-OF"
+        }
+      ],
+      "sourceCrc32": "56537369",
+      "sourceElementFileId": "FJ3393",
+      "sourceFmaConceptId": "FMA16202",
+      "sourceFrame": "BodyParts3D Release 4.0 native static reference",
+      "sourceHeaderLicenseObservation": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+      "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+      "sourceIdentityState": "header_and_official_index_exactly_validated",
+      "sourceLod": "official 99%-reduced OBJ bundle; no multilevel LOD chain advertised",
+      "sourceMemberPath": "isa_BP3D_4.0_obj_99/FJ3393.obj",
+      "sourceNameEnglishExactHeader": "Sacrum",
+      "sourceNormalCount": 5293,
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP9174",
+      "sourceSha256": "cd04cc9f78d758ba34e92896914f647d22d257b9e7e51b97764670f694033489",
+      "sourceTriangleCount": 9922,
+      "sourceUnit": "mm, evidenced by exact OBJ Bounds(mm) header",
+      "sourceVersion": "BodyParts3D Release 4.0",
+      "sourceVertexCount": 5293,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ3393",
+      "transform": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+      "transformedPositionFloat32Sha256": "bf2486f386fb5241707eeda2c657bf8dd4c76ed93a53583fc32f8707adb69846"
+    }
+  ],
+  "status": "local_static_source_package_partial_product_coverage_and_rights_held",
+  "task": "T71"
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>T71 source integration QA</title>
+  <style>
+    :root { color-scheme: dark; font: 14px/1.45 system-ui, sans-serif; background: #10151b; color: #e7ebef; }
+    * { box-sizing: border-box; }
+    body { margin: 0; width: 100vw; height: 100vh; min-height: 0; display: grid; grid-template-columns: 290px minmax(0, 1fr); overflow: hidden; }
+    aside { border-right: 1px solid #34404b; padding: 14px; overflow: auto; max-height: 100vh; }
+    main { width: 100%; min-width: 0; height: 100vh; min-height: 0; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
+    #toolbar { display: flex; gap: 8px; padding: 10px; flex-wrap: wrap; border-bottom: 1px solid #34404b; }
+    button { color: inherit; background: #202a34; border: 1px solid #536372; border-radius: 4px; padding: 8px 10px; min-height: 38px; cursor: pointer; }
+    button[aria-pressed="true"] { outline: 2px solid #84c5ff; }
+    button:focus-visible { outline: 3px solid #ffd76a; outline-offset: 2px; }
+    #stage { position: relative; min-height: 0; min-width: 0; }
+    canvas { display: block; width: 100%; height: 100%; min-height: 0; outline: none; }
+    #status { padding: 8px 12px; border-top: 1px solid #34404b; color: #bdc9d4; }
+    #list { display: grid; gap: 4px; margin-top: 8px; }
+    #list button { text-align: left; font-size: 12px; }
+    #selected { padding: 10px; border: 1px solid #536372; min-height: 70px; margin-top: 10px; white-space: pre-wrap; }
+    .legend { color: #bac6d1; font-size: 12px; }
+    @media (max-width: 700px) {
+      body { grid-template-columns: 1fr; grid-template-rows: 42vh 58vh; }
+      aside { border-right: 0; border-bottom: 1px solid #34404b; max-height: 42vh; }
+      main { height: 58vh; min-height: 0; grid-template-rows: auto minmax(0, 1fr) auto; }
+      #stage, canvas { min-height: 0; }
+    }
+  </style>
+  <script type="importmap">
+    {"imports":{"three":"../../../atlas-web/node_modules/three/build/three.module.js"}}
+  </script>
+</head>
+<body>
+  <aside>
+    <strong>T71 내부 정적 자산 검증</strong>
+    <p class="legend">제품 학습 화면이 아님 · BodyParts3D R4 · 정적 QA · source only · 공개 및 사람 검토 승인 아님</p>
+    <p class="legend">T71 선택 9개, T53 몸통/골반과 T55 양측 다리 문맥을 하나의 AnatomySceneRoot에서 로드합니다.</p>
+    <div id="selected" aria-live="polite">구조 선택 없음</div>
+    <div id="list" aria-label="T71 선택 가능한 내부 검증 구조"></div>
+    <p class="legend">키보드: ↑/↓ 구조 선택 · 1 정면 · 2 후면 · 3 측면</p>
+  </aside>
+  <main>
+    <div id="toolbar" role="toolbar" aria-label="QA 시점">
+      <button data-view="front" aria-pressed="true">정면 (+Z)</button>
+      <button data-view="back" aria-pressed="false">후면 (-Z)</button>
+      <button data-view="side" aria-pressed="false">측면 (+X)</button>
+    </div>
+    <div id="stage"><canvas id="canvas" tabindex="0" aria-label="T53/T55/T71 same-frame integrated QA render"></canvas></div>
+    <div id="status" role="status">세 패키지 로딩 중</div>
+  </main>
+  <script type="module" src="./private-preview.mjs"></script>
+</body>
+</html>

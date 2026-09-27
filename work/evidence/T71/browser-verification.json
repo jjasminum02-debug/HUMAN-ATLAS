@@ -1,0 +1,87 @@
+{
+  "task": "T71",
+  "revision": "T71-REAL-BROWSER-QA-v1",
+  "qaPage": "work/evidence/T71/private-preview.html",
+  "productLearnerPage": false,
+  "verifiedAtLocalDate": "2026-09-27",
+  "sourcePackages": [
+    "T53",
+    "T55",
+    "T71"
+  ],
+  "sharedScene": {
+    "rootCount": 1,
+    "rendererCount": 1,
+    "renderedMeshNodeCount": 277,
+    "targetIdCount": 9,
+    "frame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+    "pose": "bodyparts3d-r4-static-reference"
+  },
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 900,
+      "canvasWidth": 1150,
+      "canvasHeight": 804,
+      "documentScrollWidth": 1440,
+      "documentScrollHeight": 900,
+      "views": [
+        "front",
+        "back",
+        "side"
+      ],
+      "visualInspection": "front/back/side captures inspected; sternum parts and lumbar-sacral chain visible in T53/T55 context"
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "canvasWidth": 734,
+      "canvasHeight": 672,
+      "documentScrollWidth": 1024,
+      "documentScrollHeight": 768,
+      "views": [
+        "front",
+        "back",
+        "side"
+      ],
+      "visualInspection": "front/back/side controls and viewport fit inspected"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "canvasWidth": 390,
+      "canvasHeight": 373,
+      "documentScrollWidth": 390,
+      "documentScrollHeight": 844,
+      "views": [
+        "front",
+        "back",
+        "side"
+      ],
+      "visualInspection": "mobile stacked list/scene inspected; no horizontal or vertical document overflow"
+    }
+  ],
+  "selection": {
+    "initialSourceElementFileId": "FJ3153",
+    "initialButtonPressedMatchesCard": true,
+    "keyboardArrowDownFromFJ3153": "FJ3157",
+    "keyboardButtonPressedMatchesCard": true,
+    "keyboardCameraKeys": [
+      "1=front",
+      "2=back",
+      "3=side"
+    ],
+    "nineTargetButtonsAllMapToExactManifestRows": true
+  },
+  "console": {
+    "errors": 0,
+    "warnings": 0,
+    "messages": []
+  },
+  "boundaryAssessment": {
+    "grossPlacementDiscontinuityObserved": false,
+    "surfaceContactProven": false,
+    "aabbUsedAsContactProof": false,
+    "notes": "Static visual integration check only; muscle occlusion and screen scale do not establish anatomical surface contact, collision freedom, or human-approved placement."
+  }
+}
