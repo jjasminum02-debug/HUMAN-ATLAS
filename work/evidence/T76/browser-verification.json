@@ -1,0 +1,254 @@
+{
+  "task": "T76",
+  "date": "2026-09-28",
+  "result": "pass",
+  "browser": "Codex In-app Browser",
+  "url": "http://127.0.0.1:4176/",
+  "pageTitle": "T76 local geometry QA",
+  "viewportCssPx": [
+    1280,
+    720
+  ],
+  "canvasCssPx": [
+    970,
+    660
+  ],
+  "scene": {
+    "rendererCount": 1,
+    "sceneRootCount": 1,
+    "canvasCount": 1,
+    "uniqueNodes": 147,
+    "t53ContextNodes": 138,
+    "t76NewNodes": 9,
+    "uniqueTargetSourceFjCount": 12,
+    "duplicateFjLoaded": false,
+    "frame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+    "pose": "bodyparts3d-r4-static-reference",
+    "unit": "m",
+    "reuseOnlyIds": [
+      "FJ1449M",
+      "FJ2542",
+      "FJ2547"
+    ],
+    "newIds": [
+      "FJ1453M",
+      "FJ1457M",
+      "FJ1458M",
+      "FJ2544",
+      "FJ2545",
+      "FJ2546",
+      "FJ2549",
+      "FJ2550",
+      "FJ2551"
+    ],
+    "relatedExistingBoneContext": [
+      "FJ3152",
+      "FJ3288"
+    ],
+    "heldUnknownContext": "FJ1450",
+    "heldUnknownSelectable": false
+  },
+  "views": [
+    {
+      "view": "external/anterior",
+      "contextMode": "bones",
+      "canvasCssPx": [
+        970,
+        660
+      ],
+      "actualRenderInspected": true,
+      "observation": "paired existing hip-bone context and bilateral source surfaces visible; no attachment/contact claim"
+    },
+    {
+      "view": "inferior",
+      "contextMode": "bones",
+      "canvasCssPx": [
+        970,
+        660
+      ],
+      "actualRenderInspected": true,
+      "observation": "bilateral source surfaces visible with existing hip context"
+    },
+    {
+      "view": "lateral",
+      "contextMode": "bones",
+      "canvasCssPx": [
+        970,
+        660
+      ],
+      "actualRenderInspected": true,
+      "observation": "one side surface and existing hip-bone context visible; overlapping source surfaces remain separate FJ identities"
+    },
+    {
+      "view": "deep/posterior",
+      "contextMode": "targets",
+      "canvasCssPx": [
+        970,
+        660
+      ],
+      "actualRenderInspected": true,
+      "observation": "source surfaces visible with all surrounding context hidden in QA only; not a learner visibility change"
+    },
+    {
+      "view": "external/anterior",
+      "contextMode": "all",
+      "canvasCssPx": [
+        513,
+        699
+      ],
+      "actualRenderInspected": true,
+      "observation": "full surrounding context substantially occludes target surfaces; focused QA uses existing hip-only context. Product learner policy unchanged."
+    }
+  ],
+  "selectionChecks": [
+    {
+      "clickedId": "FJ1449M",
+      "selectedId": "FJ1449M",
+      "sourceName": "Left coccygeus",
+      "sourceFmaHeader": "FMA46444",
+      "sourceSide": "left",
+      "cardMatchesIdNameSide": true,
+      "exactlyOnePressedRow": true,
+      "highlightApplied": true,
+      "origin": "T53 reuse-only"
+    },
+    {
+      "clickedId": "FJ1453M",
+      "selectedId": "FJ1453M",
+      "sourceName": "Left iliococcygeus",
+      "sourceFmaHeader": "FMA45859",
+      "sourceSide": "left",
+      "cardMatchesIdNameSide": true,
+      "exactlyOnePressedRow": true,
+      "highlightApplied": true,
+      "origin": "T76 new"
+    },
+    {
+      "clickedId": "FJ1457M",
+      "selectedId": "FJ1457M",
+      "sourceName": "Left pubococcygeus",
+      "sourceFmaHeader": "FMA45855",
+      "sourceSide": "left",
+      "cardMatchesIdNameSide": true,
+      "exactlyOnePressedRow": true,
+      "highlightApplied": true,
+      "origin": "T76 new"
+    },
+    {
+      "clickedId": "FJ1458M",
+      "selectedId": "FJ1458M",
+      "sourceName": "Left puborectalis",
+      "sourceFmaHeader": "FMA45857",
+      "sourceSide": "left",
+      "cardMatchesIdNameSide": true,
+      "exactlyOnePressedRow": true,
+      "highlightApplied": true,
+      "origin": "T76 new; exact header identity is recorded as a member of frozen levator-ani zone, not an added target concept"
+    },
+    {
+      "clickedId": "FJ2542",
+      "selectedId": "FJ2542",
+      "sourceName": "Left coccygeus",
+      "sourceFmaHeader": "FMA46444",
+      "sourceSide": "left",
+      "cardMatchesIdNameSide": true,
+      "exactlyOnePressedRow": true,
+      "highlightApplied": true,
+      "origin": "T53 reuse-only"
+    },
+    {
+      "clickedId": "FJ2544",
+      "selectedId": "FJ2544",
+      "sourceName": "Left iliococcygeus",
+      "sourceFmaHeader": "FMA45859",
+      "sourceSide": "left",
+      "cardMatchesIdNameSide": true,
+      "exactlyOnePressedRow": true,
+      "highlightApplied": true,
+      "origin": "T76 new"
+    },
+    {
+      "clickedId": "FJ2545",
+      "selectedId": "FJ2545",
+      "sourceName": "Left pubococcygeus",
+      "sourceFmaHeader": "FMA45855",
+      "sourceSide": "left",
+      "cardMatchesIdNameSide": true,
+      "exactlyOnePressedRow": true,
+      "highlightApplied": true,
+      "origin": "T76 new"
+    },
+    {
+      "clickedId": "FJ2546",
+      "selectedId": "FJ2546",
+      "sourceName": "Left puborectalis",
+      "sourceFmaHeader": "FMA45857",
+      "sourceSide": "left",
+      "cardMatchesIdNameSide": true,
+      "exactlyOnePressedRow": true,
+      "highlightApplied": true,
+      "origin": "T76 new; exact header identity is recorded as a member of frozen levator-ani zone, not an added target concept"
+    },
+    {
+      "clickedId": "FJ2547",
+      "selectedId": "FJ2547",
+      "sourceName": "Right coccygeus",
+      "sourceFmaHeader": "FMA46443",
+      "sourceSide": "right",
+      "cardMatchesIdNameSide": true,
+      "exactlyOnePressedRow": true,
+      "highlightApplied": true,
+      "origin": "T53 reuse-only"
+    },
+    {
+      "clickedId": "FJ2549",
+      "selectedId": "FJ2549",
+      "sourceName": "Right iliococcygeus",
+      "sourceFmaHeader": "FMA45858",
+      "sourceSide": "right",
+      "cardMatchesIdNameSide": true,
+      "exactlyOnePressedRow": true,
+      "highlightApplied": true,
+      "origin": "T76 new"
+    },
+    {
+      "clickedId": "FJ2550",
+      "selectedId": "FJ2550",
+      "sourceName": "Right pubococcygeus",
+      "sourceFmaHeader": "FMA45854",
+      "sourceSide": "right",
+      "cardMatchesIdNameSide": true,
+      "exactlyOnePressedRow": true,
+      "highlightApplied": true,
+      "origin": "T76 new"
+    },
+    {
+      "clickedId": "FJ2551",
+      "selectedId": "FJ2551",
+      "sourceName": "Right puborectalis",
+      "sourceFmaHeader": "FMA45856",
+      "sourceSide": "right",
+      "cardMatchesIdNameSide": true,
+      "exactlyOnePressedRow": true,
+      "highlightApplied": true,
+      "origin": "T76 new; exact header identity is recorded as a member of frozen levator-ani zone, not an added target concept"
+    }
+  ],
+  "unidentifiedHoldCheck": {
+    "id": "FJ1450",
+    "inT53Context": true,
+    "listedAsTarget": false,
+    "selectable": false,
+    "identityPromoted": false
+  },
+  "consoleErrorsWarnings": [],
+  "appUncaughtErrorCount": 0,
+  "browserConsoleLogAfterCleanTab": [],
+  "firstLocalHarnessAttempt": {
+    "result": "recovered_before_final_verification",
+    "cause": "missing import map for local Three.js bare module specifier",
+    "action": "added import map; closed failed tab; repeated all checks on a clean new local browser tab"
+  },
+  "screenshots": "Views were captured by the browser and visually inspected; screenshot images were not separately persisted.",
+  "scopeLimit": "local geometry/frame/context QA only; no human anatomy review, attachment/contact/penetration proof, learner binding, rights clearance, canonical denominator, or product UI change."
+}
