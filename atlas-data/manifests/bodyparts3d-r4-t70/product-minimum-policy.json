@@ -1,0 +1,24 @@
+{
+  "revision": "BodyParts3D-R4-T70-first-pass-product-minimum-v1",
+  "meaning": "A bounded first-pass visual acquisition target selected for the learner scene. It is not a BodyParts3D source taxonomy, a canonical whole-body denominator, an anatomy approval, or a release license.",
+  "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+  "conceptTargets": [
+    {"sourceFmaConceptId": "FMA9921", "expectedElementFileIds": ["FJ3157", "FJ3159", "FJ3162", "FJ3165", "FJ3168"], "productRegionId": "back", "productRole": "vertebral_visual_anchor", "requiredSourceParentId": "FMA9914", "requiredSourceRelationTree": "IS-A"},
+    {"sourceFmaConceptId": "FMA16202", "expectedElementFileIds": ["FJ3393"], "productRegionId": "pelvis-perineum", "productRole": "pelvis_visual_anchor", "requiredSourceParentId": "FMA13478", "requiredSourceRelationTree": "PART-OF"},
+    {"sourceFmaConceptId": "FMA7485", "expectedElementFileIds": ["FJ3153", "FJ3178", "FJ3290"], "productRegionId": "thorax", "productRole": "sternum_compound_visual_anchor", "requiredSourceParentId": "FMA24866", "requiredSourceRelationTree": "PART-OF"},
+    {"sourceFmaConceptId": "FMA52734", "expectedElementFileIds": ["FJ3200"], "productRegionId": "head", "productRole": "skull_visual_anchor", "requiredSourceParentId": "FMA7476", "requiredSourceRelationTree": "IS-A"},
+    {"sourceFmaConceptId": "FMA52735", "expectedElementFileIds": ["FJ3309"], "productRegionId": "head", "productRole": "skull_visual_anchor", "requiredSourceParentId": "FMA7476", "requiredSourceRelationTree": "IS-A"},
+    {"sourceFmaConceptId": "FMA52748", "expectedElementFileIds": ["FJ3289"], "productRegionId": "head", "productRole": "jaw_visual_anchor", "requiredSourceParentId": "FMA7477", "requiredSourceRelationTree": "IS-A"},
+    {"sourceFmaConceptId": "FMA22430", "expectedElementFileIds": ["FJ1433", "FJ1433M"], "productRegionId": "thigh", "productRole": "major_muscle_surface_candidate", "requiredSourceParentId": "FMA22429", "requiredSourceRelationTree": "IS-A"},
+    {"sourceFmaConceptId": "FMA34687", "expectedElementFileIds": ["FJ1447", "FJ1447M"], "productRegionId": "thorax", "productRole": "pectoral_part_surface_candidate", "requiredSourceParentId": "FMA85453", "requiredSourceRelationTree": "IS-A"},
+    {"sourceFmaConceptId": "FMA34696", "expectedElementFileIds": ["FJ1464", "FJ1464M"], "productRegionId": "thorax", "productRole": "pectoral_part_surface_candidate", "requiredSourceParentId": "FMA34686", "requiredSourceRelationTree": "IS-A"},
+    {"sourceFmaConceptId": "FMA34699", "expectedElementFileIds": ["FJ1446", "FJ1446M"], "productRegionId": "thorax", "productRole": "pectoral_part_surface_candidate", "requiredSourceParentId": "FMA34686", "requiredSourceRelationTree": "IS-A"}
+  ],
+  "nextAcquisitionBatch": {
+    "taskId": "T71",
+    "batchId": "T71-B01-TRUNK-SKELETON",
+    "sourceElementFileIds": ["FJ3153", "FJ3157", "FJ3159", "FJ3162", "FJ3165", "FJ3168", "FJ3178", "FJ3290", "FJ3393"],
+    "maxSourceElements": 10,
+    "intendedProductRegions": ["back", "thorax", "pelvis-perineum"]
+  }
+}

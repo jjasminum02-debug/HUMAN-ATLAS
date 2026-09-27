@@ -1,0 +1,140 @@
+{
+  "task": "T70",
+  "result": "passed",
+  "checks": [
+    {
+      "name": "t70_build_check",
+      "command": [
+        "python3",
+        "atlas-data/tools/build_bodyparts3d_r4_t70_scope.py",
+        "--check",
+        "--verify-local-glb",
+        "--verify-local-source-obj"
+      ],
+      "exitCode": 0,
+      "seconds": 0.39,
+      "log": "work/evidence/T70/t70_build_check.log",
+      "logSha256": "71fdf3f4aed94009d4f5afc8830d5d5986d1c01b209ae0f74cfc07cd8f1c1f1e",
+      "tail": "{\"boneSource\": 203, \"boneRegionAssigned\": 168, \"boneMissing\": 35, \"firstPassTargetMissing\": 20, \"integratedSourceMeshes\": 493, \"lateralityHeld\": 4, \"identityHeld\": 8, \"localSourceObjVerified\": 495, \"nextBatch\": \"T71\"}\n"
+    },
+    {
+      "name": "t70_tests",
+      "command": [
+        "python3",
+        "atlas-data/tools/test_bodyparts3d_r4_t70_scope.py",
+        "-q"
+      ],
+      "exitCode": 0,
+      "seconds": 0.185,
+      "log": "work/evidence/T70/t70_tests.log",
+      "logSha256": "4999f1ea08fe018b52368c968a1163fc01953872aedebfc7977aa7389b1c8386",
+      "tail": "----------------------------------------------------------------------\nRan 8 tests in 0.147s\n\nOK\n"
+    },
+    {
+      "name": "t51_ingest_tests",
+      "command": [
+        "python3",
+        "atlas-data/tools/test_bodyparts3d_r4_ingest.py",
+        "-q"
+      ],
+      "exitCode": 0,
+      "seconds": 1.587,
+      "log": "work/evidence/T70/t51_ingest_tests.log",
+      "logSha256": "b0377780b4a3eca8a2f9640a97bbb1d5a1fa2e6378ed1215cf9d04e9baf2e21a",
+      "tail": "----------------------------------------------------------------------\nRan 10 tests in 1.544s\n\nOK\n"
+    },
+    {
+      "name": "range_extract_tests",
+      "command": [
+        "python3",
+        "atlas-data/tools/test_extract_bodyparts3d_r4_selected_zip_members.py",
+        "-q"
+      ],
+      "exitCode": 0,
+      "seconds": 0.068,
+      "log": "work/evidence/T70/range_extract_tests.log",
+      "logSha256": "3171e016dc5e3a55669c67aa4824a5ac8e6e96969dd0744ca7263f601dc92323",
+      "tail": "----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "name": "t69_tests",
+      "command": [
+        "python3",
+        "atlas-data/tools/test_diagnose_bodyparts3d_r4_t52_laterality.py",
+        "-q"
+      ],
+      "exitCode": 0,
+      "seconds": 0.043,
+      "log": "work/evidence/T70/t69_tests.log",
+      "logSha256": "4b4403d9edcdc8ffa4867749627e8d21f14e7b22a12249af21b56caeb2f49b90",
+      "tail": "----------------------------------------------------------------------\nRan 10 tests in 0.003s\n\nOK\n"
+    },
+    {
+      "name": "t53_tests",
+      "command": [
+        "python3",
+        "atlas-data/tools/test_bodyparts3d_r4_t53.py",
+        "-q"
+      ],
+      "exitCode": 0,
+      "seconds": 0.054,
+      "log": "work/evidence/T70/t53_tests.log",
+      "logSha256": "0a374b809a376d0125b4a3fc65f62c910c923a20e131d13a14e67fd67e03cfde",
+      "tail": "----------------------------------------------------------------------\nRan 8 tests in 0.022s\n\nOK\n"
+    },
+    {
+      "name": "t54_tests",
+      "command": [
+        "python3",
+        "atlas-data/tools/test_bodyparts3d_r4_t54.py",
+        "-q"
+      ],
+      "exitCode": 0,
+      "seconds": 0.075,
+      "log": "work/evidence/T70/t54_tests.log",
+      "logSha256": "ae958154ff6c482e0ea1236c47636511f48a5e68b80d460f1d67f34607795f39",
+      "tail": "----------------------------------------------------------------------\nRan 6 tests in 0.041s\n\nOK\n"
+    },
+    {
+      "name": "t55_tests",
+      "command": [
+        "python3",
+        "atlas-data/tools/test_bodyparts3d_r4_t55.py",
+        "-q"
+      ],
+      "exitCode": 0,
+      "seconds": 0.066,
+      "log": "work/evidence/T70/t55_tests.log",
+      "logSha256": "b94f27dc0d4f511f85862057713b1b064c70fb744f6e4a5279012ea4397524c5",
+      "tail": "----------------------------------------------------------------------\nRan 7 tests in 0.027s\n\nOK\n"
+    },
+    {
+      "name": "web_typecheck",
+      "command": [
+        "pnpm",
+        "--dir",
+        "atlas-web",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "seconds": 1.562,
+      "log": "work/evidence/T70/web_typecheck.log",
+      "logSha256": "5cfb036289d819b2a87e947d65f4532031dd37753f3cf2def0f77d398eea1737",
+      "tail": "$ tsc -b --pretty false\n"
+    },
+    {
+      "name": "web_build",
+      "command": [
+        "pnpm",
+        "--dir",
+        "atlas-web",
+        "build"
+      ],
+      "exitCode": 0,
+      "seconds": 1.96,
+      "log": "work/evidence/T70/web_build.log",
+      "logSha256": "9d12a23200a91e1a99c5c12c2c9927cfdce5bd59e3936ddc76e2b94d4c514479",
+      "tail": "\n✓ built in 129ms\n$ python3 scripts/validate-learning-content.py && python3 ../atlas-data/schemas/validate_ai_evidence.py --check && python3 ../atlas-data/schemas/validate_bone_name_overlay.py --check && python3 ../atlas-data/schemas/validate_motion_learning.py --check && python3 ../atlas-data/schemas/validate_motion_asset_sources.py && node scripts/check-scene-decoders.mjs && tsc -b && vite build\n[plugin builtin:vite-reporter]\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n"
+    }
+  ]
+}
