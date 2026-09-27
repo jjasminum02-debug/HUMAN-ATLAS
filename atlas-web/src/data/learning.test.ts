@@ -3,6 +3,11 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 import type { AiEvidenceField } from "../domain/aiEvidence.ts";
 import { projectLearnerActionCard, projectLearnerMotionActionOptions, type MotionLearningBundle } from "../domain/motionLearning.ts";
+import { learnerStructureText } from "../domain/learnerStructureText.ts";
+import { learnerActionExplanation } from "../domain/learnerActionText.ts";
+import type { LegacyLearningSummary } from "../domain/legacyEvidenceAdapter.ts";
+const evidenceFields = JSON.parse(readFileSync(new URL("../../../atlas-data/terminology/ai-evidence-overlay.json", import.meta.url), "utf8")).items as AiEvidenceField[];
+const structureSummaries = JSON.parse(readFileSync(new URL("../../../atlas-data/terminology/learning-structure-summaries.json", import.meta.url), "utf8")) as LegacyLearningSummary[];
 
 const bundle = JSON.parse(readFileSync(new URL("../../../atlas-data/motion/motion-learning.json", import.meta.url), "utf8")) as MotionLearningBundle;
 const fields = JSON.parse(readFileSync(new URL("../../../atlas-data/terminology/ai-evidence-overlay.json", import.meta.url), "utf8")) as { items: AiEvidenceField[] };
@@ -39,4 +44,33 @@ test("learner motion options come only from authored action rows and report no a
     assert.deepEqual(options[0].subjectIds, [id]);
   }
   assert.deepEqual(projectLearnerMotionActionOptions("HA-M-NOT-ASSIGNED", bundle, fields.items), []);
+});
+
+test("learner action copy omits source-scope disclosure while preserving underlying source claim", () => {
+  const action = bundle.muscleActions.find((row) => row.subjectIds.includes("HA-M-000003"));
+  assert.ok(action);
+  assert.match(action.explanation, /출처에 한정되며/);
+  assert.equal(learnerActionExplanation(action.explanation), "해당 근육은 발목 등쪽굽힘과 발 안쪽번짐에 관여합니다. 이 근육 하나가 움직임 전체를 단독으로 만든다는 뜻은 아닙니다.");
+  assert.doesNotMatch(learnerActionExplanation(action.explanation), /출처|https?:\/\/|\[\d+\]|\b(?:19|20)\d{2}\b|현대 연구|사람 검토|AI 대조/);
+});
+
+test("origin and insertion learner text hides source disclosures while retaining the original evidence projection", () => {
+  const original = evidenceFields.find((row) => row.subjectId === "HA-M-000001" && row.field === "origin");
+  assert.ok(original);
+  assert.equal(learnerStructureText(original, undefined), "비복근은 대퇴골 안쪽관절융기와 가쪽관절융기에서 시작합니다.");
+  const insertion = evidenceFields.find((row) => row.subjectId === "HA-M-000001" && row.field === "insertion");
+  assert.equal(learnerStructureText(insertion, undefined), "비복근은 발꿈치뼈(종골)에 정지합니다.");
+});
+
+test("conflicted attachment claims project only the short learner notice", () => {
+  const original = evidenceFields.find((row) => row.subjectId === "HA-M-000005" && row.field === "origin");
+  assert.ok(original);
+  assert.equal(original.claims.length, 2);
+  assert.equal(learnerStructureText(original, undefined), "설명 정리 중");
+});
+
+test("legacy structure summaries remain visible without adding evidence disclosures", () => {
+  const summary = structureSummaries.find((row) => row.summary.trim());
+  if (!summary) return;
+  assert.equal(learnerStructureText(undefined, summary), summary.summary);
 });

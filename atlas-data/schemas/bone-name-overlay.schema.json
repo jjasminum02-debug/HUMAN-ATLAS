@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://human-atlas.local/schemas/bone-name-overlay-t42.schema.json",
+  "title": "HUMAN ATLAS T42 bone name overlay",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "preparedOn", "policy", "sources", "entries"],
+  "properties": {
+    "schemaVersion": { "const": "T42-bone-name-overlay-v1" },
+    "preparedOn": { "type": "string", "format": "date" },
+    "policy": { "type": "string", "minLength": 1 },
+    "sources": {
+      "type": "array", "minItems": 2, "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "title", "url", "editionStatus", "edition", "accessedOn", "accessMethod", "textAccess"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "title": { "type": "string", "minLength": 1 },
+          "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+          "editionStatus": { "enum": ["verified", "not_exposed"] },
+          "edition": { "type": "string", "minLength": 1 },
+          "accessedOn": { "type": "string", "format": "date" },
+          "accessMethod": { "type": "string", "minLength": 1 },
+          "textAccess": { "const": "full_text_opened" }
+        }
+      }
+    },
+    "entries": {
+      "type": "array", "minItems": 1, "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "displayTitle", "koModern", "koTraditional", "english", "humanAnatomyReview", "fieldEvidence", "aliases"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^HA-S-[A-Z0-9-]+$" },
+          "displayTitle": { "type": "string", "minLength": 1 },
+          "koModern": { "type": "string", "minLength": 1 },
+          "koTraditional": { "type": "string", "minLength": 1 },
+          "english": { "type": "string", "minLength": 1 },
+          "humanAnatomyReview": { "const": "not_reviewed" },
+          "fieldEvidence": {
+            "type": "object", "additionalProperties": false,
+            "required": ["koModern", "koTraditional", "english"],
+            "properties": {
+              "koModern": { "$ref": "#/$defs/evidence" },
+              "koTraditional": { "$ref": "#/$defs/evidence" },
+              "english": { "$ref": "#/$defs/evidence" }
+            }
+          },
+          "aliases": {
+            "type": "array", "items": {
+              "type": "object", "additionalProperties": false,
+              "required": ["text", "sourceIds", "locator"],
+              "properties": {
+                "text": { "type": "string", "minLength": 1 },
+                "sourceIds": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+                "locator": { "type": "string", "minLength": 1 }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "evidence": {
+      "type": "array", "minItems": 1, "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["sourceId", "locator"],
+        "properties": {
+          "sourceId": { "type": "string", "minLength": 1 },
+          "locator": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

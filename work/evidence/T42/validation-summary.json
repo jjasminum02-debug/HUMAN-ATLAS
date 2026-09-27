@@ -1,0 +1,63 @@
+{
+  "task": "T42",
+  "checkedOn": "2026-09-27",
+  "status": "passed_with_documented_content_limits",
+  "commands": [
+    {
+      "command": "pnpm run test:search",
+      "status": "passed",
+      "tests": 44
+    },
+    {
+      "command": "pnpm run test:motion-player",
+      "status": "passed",
+      "tests": 20
+    },
+    {
+      "command": "pnpm run typecheck",
+      "status": "passed"
+    },
+    {
+      "command": "pnpm run build",
+      "status": "passed",
+      "checks": [
+        "learning content validator",
+        "AI evidence overlay validator",
+        "bone-name overlay validator",
+        "motion learning validator",
+        "motion asset source validator",
+        "scene decoder QA",
+        "TypeScript build",
+        "Vite production build"
+      ]
+    },
+    {
+      "command": "python3 atlas-data/schemas/validate_bone_name_overlay.py --check",
+      "status": "passed",
+      "entries": 9,
+      "selectableBones": 9,
+      "sourceRecords": 9,
+      "humanAnatomyReview": "not_reviewed",
+      "actualHanjaCollected": false
+    },
+    {
+      "command": "python3 atlas-data/schemas/validate_ai_evidence.py --check",
+      "status": "passed",
+      "evidenceBytesModified": false
+    },
+    {
+      "command": "python3 atlas-data/schemas/validate_motion_asset_sources.py",
+      "status": "passed",
+      "productionMotionAssets": 0,
+      "sourceBytesUnchanged": true
+    }
+  ],
+  "browser": "See browser-checks.json; actual local app at 1440x900, 1024x768, and 390x844; console errors/warnings none.",
+  "buildWarning": "Existing Vite warning: App bundle exceeds 500 kB (final App chunk 1,505.49 kB). Build otherwise passed.",
+  "knownLimits": [
+    "KMLE underlying edition is not exposed.",
+    "Human anatomy review remains not_reviewed.",
+    "Untranslated English bone landmark phrases are hidden from learner cards; internal records are preserved.",
+    "No production motion definition or clip exists; the disabled CTA is the expected learner state."
+  ]
+}

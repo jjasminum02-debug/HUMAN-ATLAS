@@ -1,12 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
-import { loadPilotCatalog, linkedEvidence, recordLabel, sourceForEvidence, type PilotCatalog } from '../data/catalog';
-import { findMuscles, learningConcepts, motionActionOptionsForLearner, nameFor, nameSources, structureFieldForLearner } from '../data/learning';
-import { attachmentCrosscheckFor } from '../domain/attachmentCrosschecks';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { loadPilotCatalog, recordLabel, type PilotCatalog } from '../data/catalog';
+import { findMuscles, learningConcepts, motionActionOptionsForLearner, nameFor, structureTextForLearner } from '../data/learning';
+import { boneNameForLearner, searchSelectableBones } from '../data/boneNames';
 import { GLBViewer } from '../viewer/GLBViewer';
 import { sceneRevision } from '../viewer/scenePlan';
-import { attachmentContextById } from '../viewer/attachmentContext';
-import { boneSourceLabel, buildBoneCardData } from '../domain/boneCard';
-import { MotionLearningPanel } from './MotionLearningPanel';
+import { buildBoneCardData } from '../domain/boneCard';
 import {
   serializeAtlasRoute,
   type AtlasRouteState,
@@ -26,24 +24,21 @@ import {
 import rawNavigation from '../../../atlas-data/navigation/atlas-navigation.json';
 import './styles.css';
 
-type TabName = '구조' | '기능' | '평가';
-type StandardReference = { uri: string; edition: string; identifier: string };
+type TabName = '구조' | '기능';
 type LearnerConcept = ReturnType<typeof learningConcepts>[number];
 type UnmappedMeshNotice = { meshAssetId: string; sourceName: string };
+type LearnerName = { label: string; koTraditional: string | null; koModern: string | null; en: string };
+type SearchListItem =
+  | { id: string; label: string; approximate: boolean; kind: 'muscle' }
+  | { id: string; label: string; approximate: boolean; kind: 'bone'; selection: Extract<Selection, { kind: 'bone' }> };
 const navigation = rawNavigation as NavigationContract;
 
-function standardReferences(value: unknown): StandardReference[] {
-  if (!Array.isArray(value)) return [];
-  return value.flatMap((candidate) => {
-    if (typeof candidate !== 'object' || candidate === null || Array.isArray(candidate)) return [];
-    const reference = candidate as Record<string, unknown>;
-    if (typeof reference.uri !== 'string') return [];
-    return [{
-      uri: reference.uri,
-      edition: typeof reference.edition === 'string' ? reference.edition : '',
-      identifier: typeof reference.identifier === 'string' ? reference.identifier : '',
-    }];
-  });
+function LearnerNameRows({ name }: { name: LearnerName }) {
+  return <div className="names-card" aria-label="이름">
+    <div><span>우리말명</span><strong>{name.koModern || '설명 정리 중'}</strong></div>
+    <div><span>한자어명 (한글 표기)</span><strong>{name.koTraditional || '설명 정리 중'}</strong></div>
+    <div><span>영어명</span><strong>{name.en || '설명 정리 중'}</strong></div>
+  </div>;
 }
 
 function routeUrl(route: AtlasRouteState) {
@@ -73,6 +68,7 @@ export default function App() {
   const [selectedActionId, setSelectedActionId] = useState<string | null>(null);
   const [activeAttachmentId, setActiveAttachmentId] = useState<string | null>(null);
   const [unmappedMeshNotice, setUnmappedMeshNotice] = useState<UnmappedMeshNotice | null>(null);
+  const appInfoDialog = useRef<HTMLDialogElement>(null);
   const [detailsOpen, setDetailsOpen] = useState(() => typeof window === 'undefined' || window.matchMedia('(min-width: 761px)').matches);
 
   useEffect(() => {
@@ -155,23 +151,30 @@ export default function App() {
   const selectedBoneCard = catalog && route.selection?.kind === 'bone'
     ? buildBoneCardData(catalog, navigation, route.selection)
     : null;
-  const standardRefs = standardReferences(selected && 'standardRefs' in selected ? selected.standardRefs : undefined);
+  const selectedBoneName = selectedBoneCard ? boneNameForLearner(selectedBoneCard.conceptId) : null;
   const parentId = selected?.entityType === 'muscle_part' && typeof selected.parentId === 'string' ? selected.parentId : selectedId;
   const actionOptions = useMemo(() => selectedId && parentId ? motionActionOptionsForLearner(parentId) : [], [selectedId, parentId]);
   const activeAction = actionOptions.find((action) => action.id === selectedActionId) ?? actionOptions[0] ?? null;
   const actionCard = activeAction?.text ?? null;
   const parts = concepts.filter((concept) => concept.entityType === 'muscle_part' && concept.parentId === parentId);
-  const owners = new Set([selectedId, ...concepts.filter((concept) => concept.parentId === selectedId).map((concept) => concept.id)]);
-  const attachments = catalog ? catalog.attachments.filter((attachment) => owners.has(String(attachment.muscleOrPartId))) : [];
   const regionRows = region ? categoryMemberships(navigation, region.id) : [];
   const regionMuscles = regionRows.flatMap((row) => {
     const concept = concepts.find((candidate) => candidate.id === row.entityId);
     return concept ? [concept] : [];
   });
-  const searchResults = catalog && query.trim() ? findMuscles(catalog, query) : [];
-  const listItems = query.trim()
-    ? searchResults.map(({ entry, approximate }) => ({ id: entry.id, label: entry.label, approximate }))
-    : regionMuscles.map((concept) => ({ id: concept.id, label: nameFor(catalog!, concept.id).label, approximate: false }));
+  const searchResults = catalog && query.trim()
+    ? [
+      ...findMuscles(catalog, query).map((row) => ({ ...row, kind: 'muscle' as const })),
+      ...searchSelectableBones(catalog, navigation, query).map((row) => ({ ...row, kind: 'bone' as const })),
+    ].sort((a, b) => a.score - b.score || a.entry.label.localeCompare(b.entry.label, 'ko'))
+    : [];
+  const listItems: SearchListItem[] = query.trim()
+    ? searchResults.reduce<SearchListItem[]>((items, result) => {
+      if (result.kind === 'bone') items.push({ id: result.entry.id, label: result.entry.label, approximate: result.approximate, kind: 'bone', selection: result.selection });
+      else items.push({ id: result.entry.id, label: result.entry.label, approximate: result.approximate, kind: 'muscle' });
+      return items;
+    }, [])
+    : regionMuscles.map((concept) => ({ id: concept.id, label: nameFor(catalog!, concept.id).label, approximate: false, kind: 'muscle' as const }));
   const regionScenes = navigation.sceneManifests.filter((scene) => scene.categoryId === route.regionId);
   const activeScenes = regionScenes.filter((scene) => scene.availability !== 'unavailable' && scene.assetRefs.length > 0 &&
     (!route.side || scene.defaultView.side === route.side));
@@ -210,6 +213,11 @@ export default function App() {
     commitRoute(routeForBoneSelection(navigation, selection));
   }
 
+  function chooseSearchItem(item: SearchListItem) {
+    if (item.kind === 'bone') chooseBone(item.selection);
+    else chooseEntity(item.id);
+  }
+
   function chooseUnmappedMesh(mesh: UnmappedMeshNotice) {
     commitRoute({ regionId: route.regionId, side: route.side, selection: null, legacyRoute: false });
     setUnmappedMeshNotice(mesh);
@@ -237,9 +245,21 @@ export default function App() {
   return <div className="study-shell">
     <a className="skip-link" href="#study-details">선택한 구조 설명으로 이동</a>
     <header className="study-header">
-      <a className="brand" href="/"><span className="brand-dot"/> HUMAN ATLAS <small>구조를 보고, 움직임을 이해하다</small></a>
+      <div className="header-brand-group">
+        <a className="brand" href="/"><span className="brand-dot"/> HUMAN ATLAS <small>구조를 보고, 움직임을 이해하다</small></a>
+        <button type="button" className="app-info-trigger" onClick={() => appInfoDialog.current?.showModal()}>앱 정보</button>
+      </div>
       <label className="global-search"><span aria-hidden="true">⌕</span><input type="search" aria-label="구조 검색" placeholder="구조 이름 · 한글, English" value={query} onChange={(event) => setQuery(event.target.value)} autoComplete="off"/>{query && <button aria-label="검색 지우기" onClick={() => setQuery('')}>×</button>}</label>
     </header>
+    <dialog className="app-info-dialog" ref={appInfoDialog} aria-labelledby="app-info-title">
+      <div className="app-info-content">
+        <button type="button" className="app-info-close" aria-label="앱 정보 닫기" onClick={() => appInfoDialog.current?.close()}>닫기</button>
+        <h2 id="app-info-title">모형·자료 정보</h2>
+        <p>3D 모형 자료: BodyParts3D Release 4.0.</p>
+        <p className="model-attribution">BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International</p>
+        <a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html" target="_blank" rel="noreferrer">이용 조건 보기 ↗</a>
+      </div>
+    </dialog>
     <div className="study-layout">
       <aside className="study-sidebar">
         <div className="sidebar-heading"><span className="eyebrow">EXPLORE ANATOMY</span><h1>부위 탐색</h1><p>12개 부위와 확인된 구조 연결을 살펴봅니다.</p></div>
@@ -261,24 +281,22 @@ export default function App() {
           {listItems.map((item) => {
             const itemConcept = concepts.find((concept) => concept.id === item.id);
             const baseId = muscleConceptId(itemConcept, item.id);
-            const itemRegions = categoriesForMuscleConcept(navigation, baseId)
+            const itemRegions = item.kind === 'muscle' ? categoriesForMuscleConcept(navigation, baseId)
               .map((id) => navigation.categories.find((category) => category.id === id)?.labelKo)
-              .filter((value): value is string => Boolean(value));
-            return <button key={item.id} type="button" className={item.id === selectedId ? 'selected' : ''} aria-pressed={item.id === selectedId} onClick={() => chooseEntity(item.id)}>
+              .filter((value): value is string => Boolean(value)) : [];
+            const itemSelected = item.kind === 'bone'
+              ? route.selection?.kind === 'bone' && route.selection.conceptId === item.id
+              : item.id === selectedId;
+            const itemName = item.kind === 'bone' ? boneNameForLearner(item.id) : catalog && nameFor(catalog, item.id);
+            return <button key={item.id} type="button" className={itemSelected ? 'selected' : ''} aria-pressed={itemSelected} onClick={() => chooseSearchItem(item)}>
               <span>{item.label}</span>
-              <small>{nameFor(catalog, item.id).en || '영어 이름 확인 중'}</small>
-              {query.trim() && <em>{itemRegions.length ? itemRegions.join(' · ') : '부위 연결 준비 중'}</em>}
+              <small>{itemName?.en || '영어 이름 확인 중'}</small>
+              {query.trim() && <em>{item.kind === 'bone' ? '뼈 정보' : itemRegions.length ? itemRegions.join(' · ') : '부위 연결 준비 중'}</em>}
               {item.approximate && <em>비슷한 이름</em>}
             </button>;
           })}
           {listItems.length === 0 && <p className="quiet-note">{query.trim() ? '찾는 이름이 아직 등록되지 않았습니다. 다른 언어 이름으로도 검색해 보세요.' : '이 부위의 구조 연결은 준비 중입니다. 미확인 구조를 추정해 채우지 않았습니다.'}</p>}
         </nav>
-        {region?.id === 'leg' && !query.trim() && <div className="region-source-note">
-          <strong>현재 확인된 종아리 파일럿</strong>
-          <span>오른쪽 종아리의 여섯 근육만 목록에 연결되어 있습니다.</span>
-          <a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html" target="_blank" rel="noreferrer">BodyParts3D Release 4.0 · CC BY 4.0 ↗</a>
-          <small>모형 연결 출처이며, 해부학 검토·부착 위치 승인을 뜻하지 않습니다.</small>
-        </div>}
       </aside>
       <section className={`study-stage ${sceneAvailable ? '' : 'is-unavailable'}`} aria-label={`${stageTitle} 학습 장면`}>
         <div className="stage-caption"><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{stageTitle}</h2><p>{stageDescription}</p></div>
@@ -291,148 +309,56 @@ export default function App() {
             </div>}
       </section>
       <details className="study-details" id="study-details" open={detailsOpen} onToggle={(event) => setDetailsOpen(event.currentTarget.open)}>
-        <summary className="mobile-detail-summary">{selected && name ? `${name.label} 설명` : '선택한 구조 설명'}</summary>
+        <summary className="mobile-detail-summary">{selectedBoneName?.label ?? (selected && name ? name.label : '선택한 구조 설명')}</summary>
         <div className="study-detail-content">
-          {selectedBoneCard ? <>
-            <div className="detail-top"><span className="eyebrow">BONE STRUCTURE</span><span className="status-dot">출처 요약 · 사람 검토 전</span></div>
-            <h2>{selectedBoneCard.label ?? '이 뼈의 이름은 확인 중입니다'}</h2>
-            <p className="english-name"><span>뼈 표기</span> {selectedBoneCard.label ?? '이름 자료 준비 중'}</p>
+          {selectedBoneCard && selectedBoneName ? <>
+            <h2>{selectedBoneName.label || '설명 정리 중'}</h2>
+            <LearnerNameRows name={selectedBoneName}/>
             <div className="names-card bone-side-card"><div><span>좌우</span><strong>{selectedBoneCard.side === 'right' ? '오른쪽' : selectedBoneCard.side === 'left' ? '왼쪽' : selectedBoneCard.side === 'midline' ? '정중' : '좌우 구분 없음'}</strong></div></div>
-            <section className="attachment-section bone-card-section"><h3>근거가 연결된 주요 표지</h3>
-              {selectedBoneCard.landmarks.length > 0 ? <ul>{selectedBoneCard.landmarks.map((landmark) => <li key={landmark.id}><span>{landmark.label}</span>{landmark.sources.map((source) => <small key={source.id}>{boneSourceLabel(source.id)}</small>)}</li>)}</ul> : <p className="quiet-note">이 뼈에 연결된 주요 표지는 아직 표시할 근거가 없습니다.</p>}
+            <section className="attachment-section bone-card-section"><h3>주요 표지</h3>
+              <p className="quiet-note">표지 정보는 준비하고 있습니다.</p>
             </section>
-            <section className="attachment-section bone-card-section"><h3>근거가 연결된 근육</h3>
+            <section className="attachment-section bone-card-section"><h3>관련 근육</h3>
               {selectedBoneCard.relations.length > 0 ? <ul>{selectedBoneCard.relations.map((relation) => <li key={relation.muscleOrPartId}>
                 <button type="button" className="bone-related-muscle" onClick={() => chooseEntity(relation.muscleOrPartId)}>{nameFor(catalog, relation.muscleOrPartId).label}</button>
                 <span>{relation.roles.map((role) => role === 'origin' ? '기시' : role === 'insertion' ? '정지' : '그 외 부착').join(' · ')}</span>
-                {relation.landmarks.length > 0 && <small>{relation.landmarks.map((id) => selectedBoneCard.landmarks.find((landmark) => landmark.id === id)?.label).filter(Boolean).join(' · ')}</small>}
-                {relation.sources.map((source) => <small key={source.id}>{boneSourceLabel(source.id)}</small>)}
-              </li>)}</ul> : <p className="quiet-note">이 뼈와 근육을 연결하는 출처 근거가 아직 없습니다.</p>}
+              </li>)}</ul> : <p className="quiet-note">연결된 근육 정보는 준비하고 있습니다.</p>}
             </section>
-            <details className="study-sources"><summary>이름과 연결의 출처</summary>
-              {[...selectedBoneCard.nameSources, ...selectedBoneCard.assetSources].filter((source, index, rows) => rows.findIndex((other) => other.id === source.id) === index).map((source) => <p key={source.id}>{source.url ? <a href={source.url} target="_blank" rel="noreferrer">{boneSourceLabel(source.id)} ↗</a> : boneSourceLabel(source.id)}{source.edition && <small>{source.edition}</small>}</p>)}
-              <p>표시한 이름과 부착 관계는 기존 출처 요약을 연결한 것입니다. mesh의 선택 상태나 표시가 사람 해부학 검토, 정확한 부착 위치 승인 또는 `reviewed` 상태를 뜻하지 않습니다.</p>
-            </details>
           </> : unmappedMeshNotice ? <>
-            <div className="detail-top"><span className="eyebrow">STRUCTURE INFORMATION</span><span className="status-dot">자료 연결 준비 중</span></div>
-            <h2>이 메시의 뼈 연결은 확인되지 않았습니다</h2>
-            <p>{unmappedMeshNotice.sourceName}에 대한 안정된 전체 뼈 ID와 출처 crosswalk를 확인하지 못했습니다. 이전에 선택한 근육 설명은 닫았습니다.</p>
+            <h2>이 구조 정보는 준비하고 있습니다</h2>
+            <p>선택한 구조에 연결된 설명을 준비하고 있습니다.</p>
           </> : route.selection?.kind === 'bone' ? <>
-            <div className="detail-top"><span className="eyebrow">BONE STRUCTURE</span><span className="status-dot">자료 연결 준비 중</span></div>
-            <h2>뼈 정보를 불러올 수 없습니다</h2><p>선택된 뼈의 이름 또는 근거 자료를 확인할 수 없습니다.</p>
+            <h2>뼈 정보 준비 중</h2><p>선택한 뼈의 이름과 설명을 준비하고 있습니다.</p>
           </> : selected && name ? <>
-            <div className="detail-top"><span className="eyebrow">MUSCLE ATLAS</span><span className="status-dot">학습 초안</span></div>
-            <h2>{name.label}</h2><p className="english-name"><span>영어명</span> {name.en || '—'}</p>
-            <div className="names-card" aria-label="이름"><div><span>우리말명</span><strong>{name.koModern || '—'}</strong></div><div><span>한자어명 (한글 표기)</span><strong>{name.koTraditional || '—'}</strong></div></div>
-            <div className="study-tabs" role="tablist" aria-label="학습 내용">{(['구조','기능','평가'] as TabName[]).map((entry) => <button key={entry} role="tab" id={`tab-${entry}`} aria-controls="study-tab-panel" aria-selected={tab === entry} onClick={() => setTab(entry)}>{entry}</button>)}</div>
+            <h2>{name.label}</h2>
+            <LearnerNameRows name={name}/>
+            <div className="movement-cta-block">
+              <button type="button" className="movement-cta" disabled aria-describedby="movement-unavailable-note">움직임으로 이해하기</button>
+              <p id="movement-unavailable-note" className="quiet-note">움직임 시범 자료는 준비 중입니다.</p>
+            </div>
+            <div className="study-tabs" role="tablist" aria-label="학습 내용">{(['구조','기능'] as TabName[]).map((entry) => <button key={entry} role="tab" id={`tab-${entry}`} aria-controls="study-tab-panel" aria-selected={tab === entry} onClick={() => setTab(entry)}>{entry}</button>)}</div>
             <section id="study-tab-panel" key={selectedId} role="tabpanel" aria-labelledby={`tab-${tab}`}>
               {tab === '구조' ? <>
                 {parts.length > 0 && <div className="part-pills" aria-label="근육 부분"><button aria-pressed={selectedId === parentId} onClick={() => chooseEntity(parentId!)}>전체</button>{parts.map((part) => <button key={part.id} aria-pressed={part.id === selectedId} onClick={() => chooseEntity(part.id)}>{nameFor(catalog, part.id).label.split(' · ').at(-1)}</button>)}</div>}
                 {(['origin','insertion'] as const).map((role) => <section className="attachment-section attachment-summary-block" key={role}>
                   <h3><i className={role}/>{role === 'origin' ? '기시' : '정지'}<span>{role === 'origin' ? 'ORIGIN' : 'INSERTION'}</span></h3>
-                  {(() => {
-                    const fieldView = structureFieldForLearner(selectedId!, role);
-                    if (!fieldView) return <p className="quiet-note">이 근육의 {role === 'origin' ? '기시' : '정지'} 설명은 준비 중입니다.</p>;
-                    return <>
-                      {fieldView.text && <p>{fieldView.text}</p>}
-                      {fieldView.note && <p className="quiet-note">{fieldView.note}</p>}
-                      {fieldView.alternatives.length > 0 && <ul className="field-evidence-alternatives">{fieldView.alternatives.map((alternative, index) => <li key={`${role}-alternative-${index}`}><p>{alternative.text}</p>{alternative.sources.length > 0 && <div className="field-evidence-alternative-sources"><small>이 설명의 근거</small><ul>{alternative.sources.map((source, sourceIndex) => <li key={`${source.url}-${source.locator}-${sourceIndex}`}><a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a>{source.edition && <small>{source.edition}</small>}<small>{source.locator}</small></li>)}</ul></div>}</li>)}</ul>}
-                      {fieldView.sources.length > 0 && <details className="field-evidence-sources"><summary>이 문장의 근거</summary><ul>{fieldView.sources.map((source, index) => <li key={`${source.url}-${source.locator}-${index}`}>
-                        <a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a>
-                        {source.edition && <small>{source.edition}</small>}
-                        <small>{source.locator}</small>
-                      </li>)}</ul></details>}
-                    </>;
-                  })()}
-                  {attachmentCrosscheckFor(selectedId!, role) && <details className="attachment-crosscheck">
-                    <summary>현대 연구와 비교하기</summary>
-                    <p>{attachmentCrosscheckFor(selectedId!, role)!.item.comparison}</p>
-                    <ul>{attachmentCrosscheckFor(selectedId!, role)!.sources.map((source) => <li key={source.id}>
-                      <a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a>
-                      <small>{source.citation}</small>
-                      <small>{source.edition} · {source.locator}</small>
-                      <small>접근: {source.accessMethod}</small>
-                    </li>)}</ul>
-                    <p className="quiet-note">문헌 대조와 사람 해부학 검토는 별도입니다. 이 비교는 메시 표면 좌표나 승인 상태를 만들지 않습니다.</p>
-                  </details>}
+                  {structureTextForLearner(selectedId!, role)
+                    ? <p>{structureTextForLearner(selectedId!, role)}</p>
+                    : <p className="quiet-note">설명 자료는 준비하고 있습니다.</p>}
                 </section>)}
-                {attachments.length > 0 && <details className="attachment-context-disclosure">
-                  <summary>부착별 관련 뼈와 영문 근거 보기</summary>
-                  {(['origin','insertion','other_attachment'] as const).filter((role) => attachments.some((attachment) => attachment.role === role)).map((role) => {
-                    const roleAttachments = attachments.filter((attachment) => attachment.role === role);
-                    return <section className="attachment-section" key={role}>
-                      <h3><i className={role}/>{role === 'origin' ? '기시 문맥' : role === 'insertion' ? '정지 문맥' : '그 외 부착'}</h3>
-                      <div className="attachment-candidates">{roleAttachments.map((attachment) => {
-                        const context = attachmentContextById.get(attachment.id);
-                        return <button key={attachment.id} type="button" aria-pressed={activeAttachmentId === attachment.id} aria-label={`${role === 'origin' ? '기시' : role === 'insertion' ? '정지' : '부착'} 설명 선택`} onClick={() => setActiveAttachmentId(attachment.id)}>
-                          <span>{context?.contextMeshAssetId ? '관련 뼈 강조' : '3D 위치 표시 보류'}</span>
-                          <small>{context?.contextMeshAssetId ? '정확한 부착면은 미지정' : '표적 구조 3D 미확보 · 위치 표시 보류'}</small>
-                        </button>;
-                      })}</div>
-                      <details className="attachment-source-detail">
-                        <summary>영문 상세 설명과 판본 펼치기</summary>
-                        {roleAttachments.map((attachment) => {
-                          const claim = catalog.claims.find((item) => item.id === attachment.descriptionClaimId);
-                          const value = claim?.value as { summary?: string; edition?: string } | undefined;
-                          return <div className="attachment-source-item" key={attachment.id}>
-                            {value?.summary && <p lang="en">{value.summary}</p>}
-                            {value?.edition && <small>{value.edition}</small>}
-                          </div>;
-                        })}
-                      </details>
-                    </section>;
-                  })}
-                  <p className="quiet-note">부착 설명은 Gray 1918년판에 근거한 검토 전 요약입니다. 강조된 뼈 전체는 표면 검토 대상이며 정확한 부착 영역은 아직 연결되지 않았습니다.</p>
-                </details>}
-              </> : tab === '기능' ? actionCard ? <div className="muscle-action-learning">
+              </> : actionCard ? <div className="muscle-action-learning">
                 <section className="muscle-action-summary" aria-labelledby="action-summary-title">
                   <h3 id="action-summary-title">이 근육이 하는 일</h3>
                   <p className="action-label">{actionCard.label}</p>
                   <p>{actionCard.explanation}</p>
                 </section>
-                <section className="action-context-card" aria-labelledby="action-context-title">
-                  <h4 id="action-context-title">문헌에 나온 검사 자세 예시</h4>
-                  <ul>{actionCard.postureConditions.map((condition, index) => <li key={`${index}-${condition}`}>{condition}</li>)}</ul>
-                  <p className="quiet-note">이는 한 문헌의 검사 맥락이며, 일상 움직임에 필요한 자세나 검사 지침을 뜻하지 않습니다.</p>
-                </section>
-                {actionCard.contextNotes.length > 0 && <section className="action-context-card" aria-labelledby="action-role-title">
-                  <h4 id="action-role-title">문헌에서 확인한 역할과 맥락</h4>
-                  <ul>{actionCard.contextNotes.map((context, index) => <li key={`${index}-${context.label}`}><small>{context.label}</small><p>{context.explanation}</p></li>)}</ul>
-                </section>}
-                <section className="action-context-card" aria-labelledby="action-boundary-title">
-                  <h4 id="action-boundary-title">안정화와 수축 형태</h4>
-                  {actionCard.stabilizationConditions.length > 0 && <ul>{actionCard.stabilizationConditions.map((condition, index) => <li key={`${index}-${condition}`}>{condition}</li>)}</ul>}
-                  {actionCard.stabilizationNote && <p>{actionCard.stabilizationNote}</p>}
-                  {actionCard.contractionNote && <p className="quiet-note">{actionCard.contractionNote}</p>}
-                </section>
-                <details className="field-evidence-sources action-source-details">
-                  <summary>이 설명의 출처</summary>
-                  {(['action', 'posture', 'role', 'stabilization'] as const).map((section) => {
-                    const rows = actionCard.citations.filter((citation) => citation.section === section);
-                    if (!rows.length) return null;
-                    const title = section === 'action' ? '작용 요약' : section === 'posture' ? '검사 자세' : section === 'role' ? '역할과 맥락' : '안정화 범위';
-                    return <section key={section}><h4>{title}</h4><ul>{rows.map((citation, index) => <li key={`${citation.url}-${citation.locator}-${index}`}>
-                      <a href={citation.url} target="_blank" rel="noreferrer">{citation.title} ↗</a>
-                      {citation.edition && <small>{citation.edition}</small>}
-                      <small>{citation.locator}</small>
-                      <small>원문 확인 · {citation.accessedOn}</small>
-                    </li>)}</ul></section>;
-                  })}
-                  <p className="quiet-note">문헌 대조는 사람의 해부학 검토와 별도입니다. 이 설명으로 3D 부착 위치나 움직임 자산을 확정하지 않습니다.</p>
-                </details>
-                <details className="motion-learning-entry">
-                  <summary>움직임으로 이해하기</summary>
-                  <p>현재는 출처가 연결된 글 설명만 확인할 수 있습니다.</p>
-                  <MotionLearningPanel
-                    key={`${route.regionId}:${selectedId}:${activeAction?.id ?? ''}`}
-                    actions={actionOptions}
-                    selectedActionId={activeAction?.id ?? null}
-                    onSelectAction={setSelectedActionId}
-                  />
-                </details>
-              </div> : <div className="upcoming"><span>↗</span><h3>작용 설명을 준비하고 있습니다</h3><p>출처가 확인된 기능 자료가 연결되면 이곳에 표시합니다.</p></div> : <div className="upcoming"><span>◎</span><h3>평가 자료를 준비하고 있습니다</h3><p>검사 목적, 시행 방법과 결과 해석은 별도의 학습 범위에서 다룹니다.</p></div>}
+                <fieldset className="learner-action-picker" aria-label="작용 선택">
+                  <legend>작용 선택</legend>
+                  {actionOptions.length ? actionOptions.map((action) => <button key={action.id} type="button" aria-pressed={action.id === activeAction?.id} onClick={() => setSelectedActionId(action.id)}>{action.label}</button>)
+                    : <p className="quiet-note">작용 정보를 준비하고 있습니다.</p>}
+                </fieldset>
+              </div> : <div className="upcoming"><h3>작용 정보를 준비하고 있습니다</h3></div>}
             </section>
-            <details className="study-sources"><summary>출처와 자료 상태</summary><p>용어 출처와 Gray 1918년판의 역사적 부착 설명을 구분했습니다. 현대 연구 대조는 각 기시·정지 문장 옆에서 열 수 있으며, 직접 측정·배경 설명·미측정 범위를 구별합니다. 사람 해부학 검토와 3D 부착면 승인은 별도입니다.</p>{name.sources.map((id) => { const source = nameSources[id]; return source && <p key={id}>{source.url ? <a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a> : source.title}<small>{source.locator}</small></p>; })}{standardRefs.map((reference, index) => <p key={`standard-reference-${index}`}><a href={reference.uri} target="_blank" rel="noreferrer">FIPAT · Terminologia Anatomica, Part 2 ↗</a><small>{reference.edition}{reference.identifier ? ` · ${reference.identifier}` : ''}</small></p>)}{Array.from(new Set(attachments.flatMap((attachment) => { const claim = catalog.claims.find((item) => item.id === attachment.descriptionClaimId); return linkedEvidence(catalog, claim?.evidenceIds).map((evidence) => evidence.sourceId); }))).map((id) => { const evidence = catalog.evidence.find((item) => item.sourceId === id); const source = evidence && sourceForEvidence(catalog, evidence); return source && <p key={String(id)}><a href={String(source.urlOrLocalRef)} target="_blank" rel="noreferrer">{String(source.title)} ↗</a></p>; })}</details>
           </> : <div className="upcoming"><h2>{routeNotice ? '주소의 구조 연결을 확인해 주세요' : '구조를 선택해 주세요'}</h2><p>{routeNotice ?? (region ? `${region.labelKo}의 구조 자료는 준비 중입니다.` : '검색하거나 부위를 선택해 학습할 구조를 찾을 수 있습니다.')}</p></div>}
         </div>
       </details>

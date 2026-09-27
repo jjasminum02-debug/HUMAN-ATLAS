@@ -7,6 +7,8 @@ import { learnerNameProjection, learnerSearchEntry, learnerVisibleTerms, mergeLe
 import { projectAiEvidenceField, type AiEvidenceField, type LearnerFieldProjection } from '../domain/aiEvidence';
 import { projectLegacySummary, type LegacyLearningSummary } from '../domain/legacyEvidenceAdapter';
 import { projectLearnerActionCard, projectLearnerMotionActionOptions, type MotionLearningBundle } from '../domain/motionLearning';
+import { learnerStructureText } from '../domain/learnerStructureText';
+import { learnerActionExplanation } from '../domain/learnerActionText';
 const rawNameSources = names.sources as Record<string, { title: string; url: string | null; locator: string }>;
 export const nameSources = Object.fromEntries(Object.entries(rawNameSources).map(([id, source]) => [id, {
   ...source, title: withoutHanScript(source.title), locator: withoutHanScript(source.locator),
@@ -46,12 +48,16 @@ const motionBundle = motionLearningBundle as MotionLearningBundle;
 /** Project a source-bound muscle action without exposing evidence, task, or authoring identifiers. */
 export function actionCardForLearner(conceptId: string) {
   const action = motionBundle.muscleActions.find((row) => row.subjectIds.includes(conceptId));
-  return projectLearnerActionCard(action, aiFieldItems);
+  const card = projectLearnerActionCard(action, aiFieldItems);
+  return card ? { ...card, explanation: learnerActionExplanation(card.explanation) } : null;
 }
 
 /** Return only authored action rows and their exactly compatible, technically bound clip, if any. */
 export function motionActionOptionsForLearner(conceptId: string) {
-  return projectLearnerMotionActionOptions(conceptId, motionBundle, aiFieldItems);
+  return projectLearnerMotionActionOptions(conceptId, motionBundle, aiFieldItems).map((option) => ({
+    ...option,
+    text: { ...option.text, explanation: learnerActionExplanation(option.text.explanation) },
+  }));
 }
 
 /** Prefer the current field overlay; keep an exact-text legacy fallback for older fields.
@@ -62,6 +68,13 @@ export function structureFieldForLearner(conceptId: string, field: string): Lear
   if (aiField) return projectAiEvidenceField(aiField);
   const legacy = legacySummaryRows.find((row) => row.conceptId === conceptId && row.role === field);
   return projectLegacySummary(legacy);
+}
+
+/** Plain learner sentence only. Source, alternative, and review details stay internal. */
+export function structureTextForLearner(conceptId: string, field: string): string | null {
+  const aiField = aiFieldItems.find((row) => row.subjectId === conceptId && row.field === field);
+  const legacy = legacySummaryRows.find((row) => row.conceptId === conceptId && row.role === field);
+  return learnerStructureText(aiField, legacy);
 }
 
 export function structureSummary(conceptId: string, role: string) {

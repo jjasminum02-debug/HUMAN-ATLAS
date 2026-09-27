@@ -2,17 +2,17 @@
 
 - LAST_UPDATED: 2026-09-27
 - PLAN_REVISION: R14-2026-09-27 — 구조·기능 우선; 실행 순서는 work/task-registry-r14.json
-- CURRENT_TASK: T41 — passed; R1/R2/R3 수정·검증 완료. T23 WIP는 미커밋으로 보존.
-- NEXT_TASK: T23 재개 / Luna Max (R14 registry 기준). T42 이상 미착수.
-- LAST_REPORT: work/reports/T41.md
+- CURRENT_TASK: T42 — passed_with_gaps; T23 선행 완료 확인. 학습 출처 문구·9개 선택 뼈 세 이름·모바일 CTA 검증 완료. 원자료 hash와 사용자 변경 보존.
+- NEXT_TASK: T43 / Luna Max — 전신 자료 확보 가능성 metadata 조사. 이 인계만 기록했으며 자동 시작하지 않음.
+- LAST_REPORT: work/reports/T42.md
 - CATALOG: partial85 (individual48/group16/part21); 전신 분모 미동결
-- LEARNING_OVERLAY: entries81; current canonical overlap 79/85, six group IDs lack overlay entries, two lookup-only IDs are extra; T11 B01-B09 field work covered the current partial catalog with gaps; humanReviewed=false
+- LEARNING_OVERLAY: entries81; current canonical overlap 79/85, six group IDs lack overlay entries, two lookup-only IDs are extra; T11 B01-B09 field work covered the current partial catalog with gaps; humanReviewed=false. T42 bone-name overlay adds names/search for the 9 currently selectable bones; actual Hanja not collected; humanAnatomyReview=not_reviewed.
 - AI_EVIDENCE_OVERLAY: T16 schema/types/validator/learner adapter + T18 origin/insertion rows 16 + T21 action/context rows 35; 14 legacy rows remain test-only preview; canonical human review unchanged; T21 claims remain source-derived and geometry absent
 - GEOMETRY: 오른쪽 종아리 6근육, 근육메시 7+뼈 13. T15b navigation overlay에 기존 source crosswalk의 우측 뼈 instance/mapping 9개를 needs_review로 연결, 미확정 mesh 4개는 unbound context. canonical spatialAnnotation 0; T13c-B01/B02/B03 context_only geometry:null draft 3건 보존; T05 표면 후보 0/41, text_only 28/41, matching target mesh missing 13/41, human_review_pending 41/41
-- FUNCTION_AND_ASSESSMENT: T21 오른쪽 종아리 pilot 6개 ID에 출처 연결 text action card 구현. T22 별도 GLTFLoader animation adapter와 source gate 추가. joint binding 0, MotionDefinition 0, MotionAsset/clip 0; 개별 수축 형태·사람 검토는 미확인/대기
-- TECHNICAL_GATE: T41 loader 10/10, real-catalog scene subset 3/3, T23 player WIP 16/16, scene lifecycle 9/9, source/data validation and build pass. 실제 브라우저에서 정적 종아리 scene·선택·부위 전환·뒤로가기·선택 해제 확인, console error 0. Production MotionDefinition/MotionAsset 0; 실제 clip 재생 미검증. T14b 사람 검토 및 표면 0/41 유지.
+- FUNCTION_AND_ASSESSMENT: T21 오른쪽 종아리 pilot 6개 ID에 출처 연결 text action card 구현. T22 별도 GLTFLoader animation adapter와 source gate 추가. T42 학습 투영은 action의 출처 범위 문장을 숨기되 원본 action/evidence/hash를 보존. joint binding 0, MotionDefinition 0, MotionAsset/clip 0; 개별 수축 형태·사람 검토는 미확인/대기.
+- TECHNICAL_GATE: T41 loader 10/10, real-catalog scene subset 3/3, T23 player 16/16, scene lifecycle 9/9; T42 search 44/44, motion-player 20/20, typecheck/build/data validator 통과. 실제 브라우저 1440/1024/390에서 CTA 첫 화면·출처 없는 구조/기능·9개 뼈 alias/route·키보드 확인, console error/warning 0. Production MotionDefinition/MotionAsset 0; 재생은 비활성 상태. T14b 사람 검토 및 표면 0/41 유지. Build 기존 App >500 kB 경고 있음.
 - ANATOMY_GATE: needs_human_review; 전신 구조 완성 아님
-- DEV_URL: none (T41 localhost preview는 검증 후 종료)
+- DEV_URL: none (T42 localhost preview는 검증 후 종료)
 
 | task | 상태 | 산출물/보고서 | 차단 조건 |
 |---|---|---|---|
@@ -63,6 +63,7 @@
 | T22 | complete_with_gaps | `work/tasks/T22.md`; animation GLTFLoader adapter; representation/source manifest schema and validator; `work/evidence/T22/`; `work/reports/T22.md` | canonical joint binding, MotionDefinition, compatible licensed clip, joint frame/pivot/pose range, real motion asset and human review remain unavailable; production assets 0 |
 | T41 | passed | `work/tasks/T41.md`; loader/static-scene corrective; `work/evidence/T41/`; `work/reports/T41.md` | R2 수정 검증 통과; T23 의존 완료. 실제 관절 좌표·motion clip은 후속 T44/T24 |
 | T23 | passed | `work/tasks/T23.md`; motion player/UI WIP; `work/evidence/T23/`; `work/reports/T23.md` | player 필수 상태·빈 자산 경계 통과. production MotionDefinition/MotionAsset 0건으로 실제 clip 재생은 미검증이며 T24 자산 경로에서 다룸; 다음 R14 task T42 |
+| T42 | passed_with_gaps | `atlas-data/terminology/bone-name-overlay-t42.json`; 학습 카드/search 정리; `work/evidence/T42/`; `work/reports/T42.md` | 9 selectable bones와 6 calf learner paths 검증. KMLE 판본 미노출, 사람 해부학 검토 미수행, Korean landmark data 미확보라 해당 영문 표지는 UI에서 보류; 실제 clip 0은 요구대로 CTA disabled |
 
 ## 실제 현재 상태와 원본 보존
 
@@ -362,3 +363,11 @@ T22 감사 R1/R2/R3를 수정했다. 반환 `gltf.scene` 밖 rig/path/skin 및 c
 검증: loader 10/10, 실제 종아리 catalog 변형 scene subset 3/3, T23 player WIP 16/16, scene/cache 9/9, 표현 fixture 3/3, data/source 검증, typecheck/build 통과. 실제 브라우저에서 종아리 GLB 표시·전경골근 선택·자산 없는 머리 부위·뒤로가기·선택 해제와 console error 0을 확인했다. 실제 clip은 0건이므로 실재생을 주장하지 않는다. 상세는 `work/reports/T41.md`, `work/evidence/T41/`에 있다.
 
 당시 다음은 R14 registry의 T23 재개 / Luna Max였다. 이후 위 T23 재개 완료 기록으로 끝났고 현재 next는 T42다. 해당 T23 재개 prompt의 과거 사본은 `work/tasks/T23-R14-RESUME.md`에 보존한다.
+
+## T42 결과 및 현재 인계 — 2026-09-27
+
+T42는 learner 표시와 선택 가능한 9개 뼈 이름 overlay/search를 구현하고 acceptance를 통과했다. 기시·정지 source disclosure와 기능 문장 안의 source-scope 설명을 learner 투영에서만 숨겼다. 원본 motion/action text, canonical claim/evidence/source/hash는 보존했다. 근육·뼈 카드는 우리말명/한자어명(한글)/영어명 3행을 공유한다. 실제 Hanja는 수집하지 않았다. KMLE 판본 미노출, anatomy review 대기와 bone landmark Korean source gap은 분리해 기록했다. 영문 landmark는 한국어를 추정하지 않고 학습 화면에서 보류했다.
+
+검증은 search 44/44, motion-player 20/20, typecheck/build/data validators와 실제 브라우저 1440×900/1024×768/390×844에서 통과했다. 9개 bone alias→stable ID/카드 세 이름/right selection, generic 중족골 ambiguity 2 results, keyboard Enter 선택, origin/insertion/function disclosure 부재, disabled no-clip CTA, 평가 탭 부재, console error/warning 0을 확인했다. Build의 기존 >500 kB App chunk warning은 남는다. 보호 입력 18개 hash와 `OpenSim_Models` HEAD/clean 상태는 시작 기준선과 동일하다. 세부 결과는 `work/reports/T42.md`, 증거는 `work/evidence/T42/`에 있다.
+
+다음은 **T43 / Luna Max / planned_not_started**다. T15g inventory 기반 12부위 metadata 조사, 공식 asset/source/license/rig 확보 가능성 matrix, 누락 및 분모 후보, 종아리 외 한 부위 확보 경로만 조사한다. 대용량 다운로드·전신 canonical 생성·새 장면 구현은 하지 않는다. 붙여 넣을 전체 prompt는 `work/reports/T42.md` 마지막 섹션 및 `work/tasks/T43.md`에 있다. T43은 시작하지 않았다.

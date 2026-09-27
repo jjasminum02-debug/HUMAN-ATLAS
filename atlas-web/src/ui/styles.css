@@ -723,6 +723,38 @@
 .learner-mesh-note{margin:0 0 8px;color:#7b888c;font-size:11px}
 @media(max-width:760px){.attachment-crosscheck{font-size:11px;padding:9px}.attachment-crosscheck small{font-size:9px}}
 
+/* T42: keep three names, a disabled no-clip CTA, and source attribution in distinct surfaces. */
+.header-brand-group{display:flex;align-items:center;justify-content:space-between;gap:18px;min-width:0}
+.app-info-trigger{flex:none;padding:9px 12px;border:1px solid #dfe8e6;border-radius:10px;background:#fff;color:#466866;font-size:12px;font-weight:600}
+.app-info-dialog{width:min(520px,calc(100vw - 28px));max-width:none;padding:0;border:1px solid #dce5e3;border-radius:18px;background:#fff;color:#33464b;box-shadow:0 24px 80px #14252b35}
+.app-info-dialog::backdrop{background:#13272b72;backdrop-filter:blur(3px)}
+.app-info-content{padding:25px;line-height:1.65}
+.app-info-content h2{margin:0 0 14px;font-size:20px;color:#29494d}
+.app-info-content p{margin:8px 0}
+.app-info-content .model-attribution{overflow-wrap:anywhere;font-size:12px;color:#516367}
+.app-info-content a{color:#35696a;text-decoration:underline;text-underline-offset:2px}
+.app-info-close{float:right;padding:6px 9px;border:1px solid #e0e7e7;border-radius:8px;background:#fff;color:#596a6d;font-size:12px}
+.movement-cta-block{display:grid;gap:5px;margin:8px 0 16px}
+.movement-cta{justify-self:start;padding:11px 15px;border:1px solid #dce8e6;border-radius:11px;background:#eff5f4;color:#456766;font-size:13px;font-weight:650}
+.movement-cta:disabled{cursor:not-allowed;opacity:.82}
+.movement-cta-block p{margin:0}
+.names-card>div{min-width:0}
+.names-card strong{overflow-wrap:anywhere;text-align:right}
+.learner-action-picker{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:12px;border:1px solid #e3eae8;border-radius:12px;background:#fbfcfc}
+.learner-action-picker legend{padding:0 5px;color:#45686a;font-size:12px;font-weight:650}
+.learner-action-picker button{padding:8px 11px;border:1px solid #dce7e5;border-radius:9px;background:#fff;color:#405d62;font-size:12px}
+.learner-action-picker button[aria-pressed=true]{border-color:#7ea19d;background:#edf5f3;color:#315e5d;font-weight:650}
+.study-detail-content>.movement-cta-block{max-width:100%}
+@media(max-width:760px){
+  .study-header{align-items:center}
+  .header-brand-group{width:100%}
+  .header-brand-group .brand{min-width:0}
+  .header-brand-group .app-info-trigger{padding:8px 10px}
+  .study-details{order:2}
+  .study-stage{order:3}
+  .movement-cta{max-width:100%;white-space:normal}
+}
+
 /* T21: keep source-bound action text readable and the animation boundary explicit. */
 .muscle-action-learning{display:grid;gap:10px;max-width:760px;margin:8px 0 20px}
 .muscle-action-summary,.action-context-card,.motion-learning-entry{border:1px solid #e3eae8;border-radius:12px;background:#fbfcfc;padding:12px 14px;color:#52666b;font-size:13px;line-height:1.6}

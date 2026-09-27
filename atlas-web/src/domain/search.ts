@@ -1,5 +1,6 @@
 export interface SearchEntry { id: string; label: string; aliases: string[] }
 export interface LearningConceptRecord { id: string; entityType?: string; lookupOnly?: boolean }
+export interface SearchMatch { entry: SearchEntry; approximate: boolean; score: number }
 
 const hanScript = /\p{Script=Han}/u;
 
@@ -67,9 +68,9 @@ export function distance(a: string, b: string): number {
   }
   return d[a.length][b.length];
 }
-export function searchEntries(entries: SearchEntry[], query: string): { entry: SearchEntry; approximate: boolean }[] {
+export function searchEntries(entries: SearchEntry[], query: string): SearchMatch[] {
   const q = normalize(query);
-  if (!q) return entries.map(entry => ({ entry, approximate: false }));
+  if (!q) return entries.map(entry => ({ entry, approximate: false, score: 0 }));
   return entries.flatMap(entry => {
     const terms = [entry.label, ...entry.aliases].map(normalize);
     const score = terms.some(t => t === q) ? 0 : terms.some(t => t.startsWith(q)) ? 1 : terms.some(t => t.includes(q)) ? 2 :
