@@ -1,0 +1,55 @@
+{
+  "asymmetryPolicy": "R4 source identity and laterality are taken from exact official FMA/BP/ELEMENT relation and OBJ name; M suffix or coordinates alone are not used to infer side",
+  "checkedAt": "2026-09-28 Asia/Seoul",
+  "humanAnatomyReview": "not performed",
+  "officialPagesOpenedAsPrimarySources": true,
+  "sourceEvidenceFiles": [
+    "work/evidence/T75/frozen-source-set.json",
+    "work/evidence/T75/source-acquisition-attempt-03.json",
+    "work/evidence/T75/source-audit.json"
+  ],
+  "sources": [
+    {
+      "accessMethod": "official HTML page opened; six exact member entries acquired from official ZIP central-directory/member HTTP Range responses",
+      "edition": "BodyParts3D Release 4.0; archive isa_BP3D_4.0_obj_99.zip",
+      "field": "99% reduced IS-A polygon mesh archive",
+      "locator": "Data description lines 22-32; DOI 10.18908/lsdba.nbdc00837-007",
+      "observed": "page specifies Wavefront OBJ, 2,234 entries and archive; selected-range acquisition succeeded for six frozen IDs (20 HTTP 206 ranges); full archive not downloaded",
+      "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/data-7.html",
+      "urlFile": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip"
+    },
+    {
+      "accessMethod": "official HTML page opened; official R4 metadata locally hash-checked against T73 freeze; each selected OBJ header cross-checked",
+      "edition": "BodyParts3D Release 4.0 IS-A metadata",
+      "field": "IS-A concept/ELEMENT crosswalk",
+      "locator": "Data description lines 22-36; DOI 10.18908/lsdba.nbdc00837-005; local isa_element_parts.txt rows and exact FMA/BP/FJ values in frozen-source-set.json",
+      "observed": "page states atomic ELEMENT organs are meshes and COMPOUND concepts map to ELEMENT file IDs",
+      "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/data-5.html"
+    },
+    {
+      "accessMethod": "official release note opened",
+      "edition": "Release 4.0, 2013-05-16",
+      "field": "Release identity/IDs/canonical caution",
+      "locator": "Release note lines 2, 24-30, 47-55",
+      "observed": "FJxxxx denotes unique polygon file IDs, distinct from concept identity; page warns source may contain errors when used as a canonical human-body model",
+      "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/release_4.0_e.html"
+    },
+    {
+      "accessMethod": "official license page opened",
+      "edition": "current license page last updated 2025-02-27",
+      "field": "Current database license",
+      "locator": "License lines 25-40",
+      "observed": "CC BY 4.0 notice and attribution required; page describes redistribution/derivatives with conditions; it also directs users to contact licensor for content outside the license",
+      "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html"
+    },
+    {
+      "accessMethod": "read from exact acquired OBJ bytes and preserved as literal source observations",
+      "edition": "exact six OBJ header observations in source-audit.json",
+      "field": "Per-file legacy license headers",
+      "locator": "each selected member header; archive path plus FJ ID",
+      "observed": "selected OBJ headers state CC BY-SA 2.1 Japan while current DB page states CC BY 4.0; scope/applicability not reconciled, so redistribution remains held",
+      "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip"
+    }
+  ],
+  "task": "T75"
+}

@@ -1,0 +1,23 @@
+T75 verification record — 2026-09-28 (Asia/Seoul)
+
+Predecessor gate (read-only recheck)
+- `python3 atlas-data/tools/acquire_bodyparts3d_r4_t74.py --check`: PASS, 9/9 selected members.
+- `python3 atlas-data/tools/test_bodyparts3d_r4_t74.py`: PASS, 5/5.
+- T74 report status: passed_with_gaps; no blocked prerequisite.
+
+T75
+- `python3 atlas-data/tools/acquire_bodyparts3d_r4_t75.py --check`: PASS, exact frozen/acquired 6/6, 20 HTTP 206 ranges, full archive false.
+- `python3 atlas-data/tools/build_bodyparts3d_r4_t75.py`: PASS; exact FMA/BP/FJ/side/header, source CRC/SHA, nonempty vertices/normals/triangles, GLB position transform, stable node IDs, two-region membership and non-promotion holds.
+- `python3 atlas-data/tools/test_bodyparts3d_r4_t75.py`: PASS, 7/7.
+- In-memory Python syntax compile: PASS, 5/5 owned scripts.
+- Actual in-app browser: PASS; 284 unique same-frame nodes, one AnatomySceneRoot, one renderer, target IDs/selection/card agreement 6/6, front/back/side at canvas 990x622, ArrowDown selection, page uncaught errors 0, console errors/warnings 0. Full evidence: browser-verification.json.
+- Product typecheck/build not run: T75 added no learner/product code or UI; private geometry QA used local HTML/module files only.
+
+Transparent intermediate attempts
+- Initial range retrieval did not produce a successful acquisition record; first partial records remain preserved and are not counted as success. The shared historical parser did not recognize FJ IDs ending in `M`; T75 added a bounded parser without modifying the shared parser. Attempt 03 is the only passing six-member acquisition.
+- First temporary QA tab stopped on an over-strict unit-extras assertion: T53/T54 extras omit `unit` while their frozen source manifests and converter establish the shared mm-to-m contract. The QA harness was corrected to accept absent optional extras only for those manifest-verified packages. A fresh tab then loaded all packages and produced the recorded zero-error result. The failed tab was closed and is not the final browser evidence.
+- First regression run had one test-only lookup error because transformed position hashes are recorded on sourceAssets, not meshRecords. The assertion was corrected; final regression is 7/7. No product or historical source file was changed by either harness correction.
+
+Known validation observations
+- Source header Bounds differ from actual vertex extrema by 0.1022, 0.4658, and 0.3248 mm for FJ1468, FJ1467, and FJ1513. These are recorded as metadata differences and not treated as proof of contact, collision, or anatomical error.
+- Current official database license notice and legacy per-OBJ CC BY-SA 2.1 Japan header wording remain unreconciled; redistribution stays held.
