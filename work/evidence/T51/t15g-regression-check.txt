@@ -1,0 +1,19 @@
+command: python3 atlas-data/catalog/test_t15g_inventory.py -v
+exit_code: 1
+
+ERROR
+
+======================================================================
+ERROR: setUpClass (__main__.T15gInventoryTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/catalog/test_t15g_inventory.py", line 15, in setUpClass
+    cls.artifacts = t15g.build()
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/catalog/build_t15g_inventory.py", line 547, in build
+    assert len(bone_structures) == 10 and len(navigation["structureMeshMappings"]) == 9
+AssertionError
+
+----------------------------------------------------------------------
+Ran 0 tests in 0.015s
+
+FAILED (errors=1)
