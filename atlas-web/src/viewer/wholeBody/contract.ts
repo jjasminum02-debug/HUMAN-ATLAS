@@ -6,9 +6,10 @@ export interface BodyAsset {
 }
 export interface BodyChunk { id: string; url: string; sha256: string; bytes: number; assets: BodyAsset[] }
 export interface BodyManifest { version: number; localOnly: boolean; publicRedistribution: string; frame: string; unit: string; lodLevels: number; chunks: BodyChunk[] }
-export interface BodyView { region: string | null; bones: boolean; muscles: boolean; supplements: boolean; selectedId: string | null; selectedIds?: string[]; dim: boolean }
+export interface BodyView { region: string | null; bones: boolean; muscles: boolean; supplements: boolean; selectedId: string | null; selectedIds?: string[]; dim: boolean; isolate?: boolean }
 export function visible(a: BodyAsset, view: BodyView): boolean {
   return (a.defaultVisible || (a.supplement && view.supplements && a.pickState === 'source_only_unbound'))
+    && (!view.isolate || !view.selectedId || selected(a, view))
     && (a.layer === 'bone' ? view.bones : view.muscles)
     && (!view.region || a.regions.includes(view.region));
 }
@@ -26,4 +27,9 @@ export function validateManifest(m: BodyManifest): void {
       ids.add(a.id);
     }
   }
+}
+
+/** Presentation isolation cannot grant a source-only/held asset a learner binding. */
+export function selected(a: BodyAsset, view: BodyView): boolean {
+  return pickable(a) && a.stableIds.some(id => (view.selectedIds ?? [view.selectedId]).includes(id));
 }

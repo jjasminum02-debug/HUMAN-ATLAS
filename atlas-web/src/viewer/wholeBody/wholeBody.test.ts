@@ -28,3 +28,12 @@ test('dispose releases completed and late resources exactly once',async()=>{
  let finish:(v:string)=>void=()=>{};const released:string[]=[];
  const q=new ResourceQueue<string>(()=>new Promise(r=>finish=r),v=>released.push(v),()=>{});q.demand(['a']);q.dispose();finish('late');await tick();assert.deepEqual(released,['late']);assert.equal(q.loaded.size,0);
 });
+test('isolation never promotes source-only or held nodes and respects layer switches', () => {
+  const bound = {...asset,pickState:'existing_binding_unreviewed',stableIds:['known']};
+  const isolated = {...view,selectedId:'known',isolate:true};
+  assert(visible(bound,isolated)); assert(!visible(asset,isolated));
+  assert(!visible({...bound,pickState:'held',defaultVisible:false,holdReasons:['identity']},isolated));
+  assert(!visible(bound,{...isolated,muscles:false}));
+  assert(!visible(bound,{...isolated,selectedIds:[]}));
+  assert(visible(asset,{...isolated,selectedId:null}));
+});

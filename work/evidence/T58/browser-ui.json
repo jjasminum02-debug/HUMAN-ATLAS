@@ -1,0 +1,64 @@
+{
+  "checks": [
+    {
+      "check": "explicit_isolation",
+      "sameRoot": true,
+      "sameCamera": true,
+      "visible": [
+        "HA-MESH-BP3D4-FJ1440"
+      ]
+    },
+    {
+      "check": "mobile_panel",
+      "sameRoot": true,
+      "sameCamera": true,
+      "dimensions": {
+        "scrollWidth": 390,
+        "width": 390
+      }
+    },
+    {
+      "check": "mobile_panel_reserved_canvas_space",
+      "sameRoot": true,
+      "sameCamera": true,
+      "noOverlap": true,
+      "rect": {
+        "canvas": {
+          "bottom": 524.9609375,
+          "height": 292.9609375,
+          "left": 0,
+          "right": 390,
+          "top": 232,
+          "width": 390,
+          "x": 0,
+          "y": 232
+        },
+        "panel": {
+          "bottom": 834,
+          "height": 299.0390625,
+          "left": 12,
+          "right": 378,
+          "top": 534.9609375,
+          "width": 366,
+          "x": 12,
+          "y": 534.9609375
+        },
+        "scroll": 390,
+        "width": 390
+      }
+    },
+    {
+      "check": "isolation_restore_latest",
+      "isolatedCount": 1,
+      "restoredCount": 30,
+      "sameRoot": true,
+      "sameCamera": true
+    },
+    {
+      "check": "keyboard_rotation",
+      "sameRoot": true,
+      "cameraChanged": true
+    }
+  ],
+  "console": []
+}

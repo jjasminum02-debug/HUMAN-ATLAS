@@ -1,0 +1,30 @@
+{
+  "statusBeforeSha256": "1b32aa37462aea8f16e936903207aba667c162f03a6025d5e7a1617d65782782",
+  "registryBeforeSha256": "acb5d3e12dad0ba07c3f3a5cd1a77b33eeed5554182f6a878ca737693445e2e9",
+  "statusHeaderChanges": {
+    "CURRENT_TASK": {
+      "before": "- CURRENT_TASK: T57 - passed (local UI scope); minimal HUMAN ATLAS startup, actual whole-body home, continuous single scene, responsive exploration/cards and layer controls verified. Source-only/rights/human-review holds and whole-body gaps unchanged. See work/reports/T57.md.",
+      "after": "- CURRENT_TASK: T58 - partial; local rendering/framing/deep-selection controls and desktop responsive performance verified. Whole/head source geometry gaps prevent full graphic gate acceptance. See work/reports/T58.md."
+    },
+    "NEXT_TASK": {
+      "before": "- NEXT_TASK: T58 / Astra · 현재 대화 - visual fidelity/framing/performance gate after a new explicit request. T58 has not started.",
+      "after": "- NEXT_TASK: T58 / Astra - gate remains open; bounded source-gap remediation must be scoped before T59. T59 and later not started."
+    },
+    "LAST_REPORT": {
+      "before": "- LAST_REPORT: work/reports/T57.md",
+      "after": "- LAST_REPORT: work/reports/T58.md"
+    }
+  },
+  "registryChanges": {
+    "taskStatuses.T58": {
+      "before": "planned_not_started",
+      "after": "partial"
+    },
+    "nextTask": {
+      "before": "T58",
+      "after": "T58"
+    }
+  },
+  "sharedFilesExcludedFromCommitBecauseExistingWip": true,
+  "statusAppendedBlock": "\n## T58 — 그래픽·framing·성능 검증 (2026-09-27)\n\n`partial`: 밝은 재질/조명, 선택만 보기·선택 맞춤, 모바일 설명 패널과 canvas 공간 분리 구현. 회귀 32/32·실제 GLB lifecycle 12/12·type/build 통과, desktop 390/1024/1440 p95 16.9–17.7ms. 전신/머리/손/종아리 캡처와 실제 단일 LOD 예산을 기록했다. 머리·전신 source 형상 누락으로 전체 그래픽 gate는 미합격이다. T70 bone-root gap 26, 분모 미동결과 모든 hold 유지. T59 새 운동 통합 미착수. `work/reports/T58.md`, `work/evidence/T58/quality-budget.json`의 G58-01 해결 후 T58 재검증 필요.\n"
+}

@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { type BodyAsset, type BodyManifest, type BodyView, visible, pickable } from './contract';
+import { type BodyAsset, type BodyManifest, type BodyView, visible, pickable, selected } from './contract';
 import { ResourceQueue } from './resources';
 
 export interface BodyProgress { loaded: number; total: number; failed: number; contextLost: boolean; selectedAvailable: boolean; calls: number; triangles: number; geometries: number }
@@ -23,6 +23,8 @@ export class AnatomySceneController {
   private previous = 0;
   private pointer = { x: 0, y: 0 };
   private lastReport = 0;
+  private hoverId: string | null = null;
+  private hoverPoint: { x: number; y: number } | null = null;
   private size = { width: 1, height: 1 };
   private manifest: BodyManifest;
   private notify: (progress: BodyProgress) => void;
@@ -34,14 +36,14 @@ export class AnatomySceneController {
     this.assets = new Map(manifest.chunks.flatMap(c => c.assets.map(a => [a.nodeId, a] as const)));
     this.root.name = 'AnatomySceneRoot'; this.scene.add(this.root);
     this.scene.background = new THREE.Color('#eff1ef');
-    this.scene.add(new THREE.HemisphereLight(0xffffff, 0xa4a79e, 2.1));
-    const light = new THREE.DirectionalLight(0xffffff, 2.5); light.position.set(-2, 3, 4); this.scene.add(light);
-    const rim = new THREE.DirectionalLight(0xd3e6e5, 1.2); rim.position.set(2, 1, -3); this.scene.add(rim);
+    this.scene.add(new THREE.HemisphereLight(0xffffff, 0xa4a79e, 1.7));
+    const light = new THREE.DirectionalLight(0xffffff, 2.0); light.position.set(-2, 3, 4); this.scene.add(light);
+    const rim = new THREE.DirectionalLight(0xd3e6e5, 0.9); rim.position.set(2, 1, -3); this.scene.add(rim);
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.2;
+    this.renderer.toneMappingExposure = 1.05;
     const canvas = this.renderer.domElement;
     canvas.id = `anatomy-${this.root.uuid}`;
     canvas.tabIndex = 0; canvas.setAttribute('aria-label', '해부학 모형. 방향키로 회전, 더하기와 빼기로 확대, Home으로 전체 보기');
@@ -66,6 +68,8 @@ export class AnatomySceneController {
     canvas.addEventListener('focus', this.invalidate);
     canvas.addEventListener('webglcontextlost', this.onLost);
     canvas.addEventListener('webglcontextrestored', this.onRestored);
+    canvas.addEventListener('pointermove', this.onMove);
+    canvas.addEventListener('pointerleave', this.onLeave);
     canvas.addEventListener('pointerdown', this.onDown);
     canvas.addEventListener('pointerup', this.onUp);
     canvas.addEventListener('keydown', this.onKey);
@@ -81,6 +85,7 @@ export class AnatomySceneController {
     const dt = Math.min((time - this.previous) / 1000, 0.05); this.previous = time;
     for (const update of this.updates) update(dt);
     this.controls.update();
+    if (this.hoverPoint) { const p = this.hoverPoint; this.hoverPoint = null; this.setHover(this.pick(p.x, p.y)?.nodeId ?? null); }
     if (this.dirty || this.updates.size) { this.renderer.render(this.scene, this.camera); this.dirty = false; }
     if (time - this.lastReport > 500) { this.report(); this.lastReport = time; }
   };
@@ -98,6 +103,18 @@ export class AnatomySceneController {
     for (const a of this.assets.values()) if ((a.defaultVisible || (a.supplement && this.view.supplements)) && (!region || a.regions.includes(region))) {
       box.expandByPoint(new THREE.Vector3().fromArray(a.bounds[0])); box.expandByPoint(new THREE.Vector3().fromArray(a.bounds[1]));
     }
+    this.fitBounds(box);
+  }
+  /** Explicit user framing command; never invoked by a pick or panel change. */
+  focusSelection() {
+    const box = new THREE.Box3();
+    for (const a of this.assets.values()) if (visible(a, this.view) && selected(a, this.view)) {
+      box.expandByPoint(new THREE.Vector3().fromArray(a.bounds[0]));
+      box.expandByPoint(new THREE.Vector3().fromArray(a.bounds[1]));
+    }
+    this.fitBounds(box);
+  }
+  private fitBounds(box: THREE.Box3) {
     if (box.isEmpty()) return;
     const center = box.getCenter(new THREE.Vector3()); const extent = box.getSize(new THREE.Vector3());
     const aspect = this.size.width / this.size.height;
@@ -123,7 +140,7 @@ export class AnatomySceneController {
         if (!a || found.has(obj.name) || obj.userData.sourceSha256 !== a.sourceSha256) throw new Error('Node identity mismatch');
         found.add(obj.name);
         const old = Array.isArray(obj.material) ? obj.material : [obj.material]; old.forEach(m => m.dispose());
-        obj.material = new THREE.MeshStandardMaterial({ color: a.layer === 'bone' ? '#e2d9bb' : '#af7161', roughness: 0.68, metalness: 0 });
+        obj.material = new THREE.MeshStandardMaterial({ color: a.layer === 'bone' ? '#e7dec7' : '#b87969', roughness: 0.76, metalness: 0 });
       });
       if (found.size !== chunk.assets.length) throw new Error('Missing scene nodes');
     } catch (error) { this.release(group); throw error; }
@@ -137,11 +154,13 @@ export class AnatomySceneController {
         if (!(obj instanceof THREE.Mesh)) return;
         const a = this.assets.get(obj.name)!;
         obj.visible = visible(a, this.view);
-        const selected = pickable(a) && a.stableIds.some(id => (this.view.selectedIds ?? [this.view.selectedId]).includes(id));
+        const isSelected = selected(a, this.view);
         const material = obj.material as THREE.MeshStandardMaterial;
-        material.color.set(selected ? '#3c9188' : a.layer === 'bone' ? '#e2d9bb' : '#af7161');
+        material.color.set(isSelected ? '#398b80' : a.layer === 'bone' ? '#e7dec7' : '#b87969');
+        material.emissive.set(a.nodeId === this.hoverId && !isSelected ? '#68897e' : '#000000');
+        material.emissiveIntensity = 0.22;
         // Opaque context avoids transparency sorting artifacts and excessive mobile overdraw.
-        if (this.view.selectedId && this.view.dim && !selected) material.color.lerp(new THREE.Color('#e5e5dd'), 0.55);
+        if (this.view.selectedId && this.view.dim && !isSelected) material.color.lerp(new THREE.Color('#e5e5dd'), 0.38);
       });
     }
     this.dirty = true; this.report();
@@ -167,13 +186,26 @@ export class AnatomySceneController {
   private onDown = (event: PointerEvent) => { this.pointer = { x: event.clientX, y: event.clientY }; };
   private onUp = (event: PointerEvent) => {
     if (Math.hypot(event.clientX - this.pointer.x, event.clientY - this.pointer.y) > 5 || event.button !== 0) return;
+    const asset = this.pick(event.clientX, event.clientY);
+    if (asset) this.select(asset.stableIds[0], asset.side);
+  };
+  private pick(x: number, y: number): BodyAsset | undefined {
     const rect = this.renderer.domElement.getBoundingClientRect();
     const ray = new THREE.Raycaster();
-    ray.setFromCamera(new THREE.Vector2((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1), this.camera);
+    ray.setFromCamera(new THREE.Vector2((x - rect.left) / rect.width * 2 - 1, -(y - rect.top) / rect.height * 2 + 1), this.camera);
     const hit = ray.intersectObject(this.root, true).find(h => h.object.visible);
     const asset = hit && this.assets.get(hit.object.name);
-    if (asset && pickable(asset)) this.select(asset.stableIds[0], asset.side);
+    return asset && pickable(asset) ? asset : undefined;
+  }
+  private setHover(id: string | null) {
+    if (this.hoverId === id) return;
+    this.hoverId = id; this.renderer.domElement.style.cursor = id ? 'pointer' : 'grab'; this.sync();
+  }
+  private onMove = (event: PointerEvent) => {
+    if (event.buttons || event.pointerType === 'touch') { this.onLeave(); return; }
+    this.hoverPoint = { x: event.clientX, y: event.clientY };
   };
+  private onLeave = () => { this.hoverPoint = null; this.setHover(null); };
   private onKey = (event: KeyboardEvent) => {
     const offset = this.camera.position.clone().sub(this.controls.target);
     const spherical = new THREE.Spherical().setFromVector3(offset);
@@ -201,6 +233,7 @@ export class AnatomySceneController {
     window.removeEventListener('pageshow', this.invalidate);
     canvas.removeEventListener('focus', this.invalidate);
     canvas.removeEventListener('webglcontextlost', this.onLost); canvas.removeEventListener('webglcontextrestored', this.onRestored);
+    canvas.removeEventListener('pointermove', this.onMove); canvas.removeEventListener('pointerleave', this.onLeave);
     canvas.removeEventListener('pointerdown', this.onDown); canvas.removeEventListener('pointerup', this.onUp); canvas.removeEventListener('keydown', this.onKey);
     this.renderer.dispose(); canvas.remove();
   }

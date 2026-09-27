@@ -12,6 +12,8 @@ export function WholeBodyViewer({ region, selectedId, selectedIds, onSelect, who
   const [muscles, setMuscles] = useState(true);
   const [supplements, setSupplements] = useState(false);
   const [dim, setDim] = useState(true);
+  const [isolated, setIsolated] = useState(false);
+  useEffect(() => { setIsolated(false); }, [selectedId]);
   const [revision, setRevision] = useState(0);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState(false);
@@ -36,8 +38,8 @@ export function WholeBodyViewer({ region, selectedId, selectedIds, onSelect, who
     return () => { window.clearTimeout(timeout); abort.abort(); current?.dispose(); controller.current = null; };
   }, [revision]);
   useEffect(() => {
-    if (ready) controller.current?.setView({ region: whole ? null : region, selectedId, selectedIds, bones, muscles, supplements, dim });
-  }, [ready, region, whole, selectedId, selectedIds, bones, muscles, supplements, dim]);
+    if (ready) controller.current?.setView({ region: whole ? null : region, selectedId, selectedIds, bones, muscles, supplements, dim, isolate: isolated && Boolean(selectedId) });
+  }, [ready, region, whole, selectedId, selectedIds, bones, muscles, supplements, dim, isolated]);
   return <div className="whole-body-viewer">
     <div className="whole-body-canvas" inert={!entered} aria-hidden={!entered} ref={host}/>
     {!entered && <AtlasLoading failed={error || Boolean(progress?.failed)} loaded={progress?.loaded} total={progress?.total} onRetry={() => error ? setRevision(r => r + 1) : controller.current?.retry()}/> }
@@ -47,7 +49,11 @@ export function WholeBodyViewer({ region, selectedId, selectedIds, onSelect, who
       <button aria-pressed={bones} onClick={() => setBones(!bones)}>뼈</button>
       <button aria-pressed={muscles} onClick={() => setMuscles(!muscles)}>근육</button>
       {selectedId && <button aria-pressed={dim} onClick={() => setDim(!dim)}>선택 강조</button>}
-      <details><summary>보기 옵션</summary><label><input type="checkbox" checked={supplements} onChange={e => setSupplements(e.target.checked)}/>보완 모형 보기</label><p>설명 연결 전인 모형을 함께 봅니다. 선택과 학습 설명은 제공하지 않습니다.</p></details>
+      <details data-isolated={isolated}><summary aria-label={isolated ? '보기 옵션 · 선택만 표시 중' : '보기 옵션'}>보기 옵션{isolated && ' · 단독'}</summary>
+        {selectedId && <div className="selection-view-options">
+          <button disabled={!progress?.selectedAvailable && !isolated} aria-pressed={isolated} onClick={() => setIsolated(!isolated)}>선택만 보기</button>
+          <button disabled={!progress?.selectedAvailable} onClick={() => controller.current?.focusSelection()}>선택 부위 맞춤</button>
+        </div>}<label><input type="checkbox" checked={supplements} onChange={e => setSupplements(e.target.checked)}/>보완 모형 보기</label><p>설명 연결 전인 모형을 함께 봅니다. 선택과 학습 설명은 제공하지 않습니다.</p></details>
     </div>
     <div className="body-status" inert={!entered} aria-hidden={!entered} role="status" aria-live="polite">
       {error ? <><span>이 환경에서 모형 자료를 열 수 없습니다.</span><button onClick={() => setRevision(r => r + 1)}>다시 시도</button></>

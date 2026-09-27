@@ -50,10 +50,13 @@
 .atlas-shell .body-tools button, .atlas-shell .body-tools summary { min-height: 42px; padding: 10px 14px; border-radius: 12px; font-size: 12px; border-color: #e0e6df; }
 .atlas-shell .body-tools button[aria-pressed=true] { background: #47796b; color: white; }
 .atlas-shell .body-tools details { position: relative; }
-.atlas-shell .body-tools details[open] { position: relative; padding: 0; background: none; box-shadow: none; max-width: none; }
-.atlas-shell .body-tools details[open] label, .atlas-shell .body-tools details[open] p { position: absolute; right: 0; width: 245px; background: white; padding: 15px; box-shadow: 0 15px 30px #35493f15; z-index: 5; }
-.atlas-shell .body-tools details[open] label { top: 46px; border-radius: 14px 14px 0 0; }
-.atlas-shell .body-tools details[open] p { top: 93px; border-radius: 0 0 14px 14px; font-size: 11px; }
+/* One anchored popover: options must not overlap each other or the detail card. */
+.atlas-shell .body-tools details[open] { background: white; border: 1px solid #e0e6df; border-radius: 14px; padding: 0 10px 12px; width: 245px; box-shadow: 0 12px 30px #35493f15; }
+.atlas-shell .body-tools details[open] summary { border: 0; }
+.atlas-shell .body-tools details[open] label { padding: 12px 0; font-size: 12px; }
+.atlas-shell .body-tools details[open] p { font-size: 11px; line-height: 1.7; }
+.atlas-shell .selection-view-options { display: grid; gap: 6px; border-bottom: 1px solid #edf0ed; padding: 6px 0 12px; }
+.atlas-shell .body-tools:has(details[open]) { z-index: 5; }
 .atlas-shell .body-status { bottom: 14px; padding: 6px 12px; border-radius: 10px; background: transparent; max-width: 420px; font-size: 11px; }
 .atlas-shell .body-status small { font-size: 10px; }
 @media(max-width:1100px) and (min-width:761px) {
@@ -103,3 +106,22 @@
 .atlas-shell .study-sidebar[data-searching=true] .sidebar-heading { display: none; }
 .atlas-shell .study-sidebar[data-searching=true] .region-list-heading { border: 0; margin: 0; padding-top: 4px; }
 @media(max-width:760px) { .atlas-shell .study-details > .mobile-detail-summary { position: sticky; top: 0; z-index: 1; background: #fff; } }
+
+.atlas-shell .region-grid button { font-size: 13px; }
+.atlas-shell .names-card span { font-size: 11px; }
+.atlas-shell .names-card strong { font-size: 13px; }
+.atlas-shell .whole-body-canvas canvas { cursor: grab; }
+.atlas-shell .whole-body-canvas canvas:active { cursor: grabbing; }
+@media(max-width:760px) {
+  .atlas-shell .study-details[open] { max-height: 42%; }
+  .atlas-shell .study-detail-content > .bone-related-muscle { float: right; font-size: 11px; }
+  .atlas-shell .study-detail-content > h2 { font-size: 22px; margin: 4px 0 12px; }
+  .atlas-shell .movement-cta-block { margin: 14px 0; }
+}
+
+.atlas-shell .body-tools details[data-isolated=true] > summary { background: #e5efeb; border-color: #669588; }
+@media(max-width:760px) {
+  /* Give the open card its own space without remounting or refitting the camera. */
+  .atlas-shell:has(.study-details[open]) .whole-body-canvas { bottom: calc(42% + 20px); }
+  .atlas-shell:has(.study-details[open]) .body-status { bottom: calc(42% + 13px); padding: 0; }
+}
