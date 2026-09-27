@@ -1,0 +1,368 @@
+{
+  "schemaVersion": "T44-1",
+  "generatorVersion": "t44-stdlib-v1",
+  "generatorScript": {
+    "path": "atlas-data/tools/build_t44_ankle_scene.py",
+    "sha256": "7c2f48d2afc3ebc920a43bbbe853a1135ee92f4efb6c14f1bd167b258419151c"
+  },
+  "status": "static_input_needs_review",
+  "model": "OpenSim Gait2392 Simbody, Thelen2003 muscle",
+  "sourceModel": {
+    "path": "OpenSim_Models/Models/Gait2392_Simbody/gait2392_thelen2003muscle.osim",
+    "sha256": "3af1ca20aa87bc88b0b8cd54f2504331afa2aa03537cc868f1175fa1f50f3c0f"
+  },
+  "sourceGeometry": {
+    "tibia_r.vtp": {
+      "sourceBody": "tibia_r",
+      "vertexCount": 145,
+      "triangleCount": 286,
+      "sha256": "b6659ff17e79f85493047499d218bbb3677b0e80ca259953d74a332457779fd4"
+    },
+    "fibula.vtp": {
+      "sourceBody": "tibia_r",
+      "vertexCount": 122,
+      "triangleCount": 240,
+      "sha256": "640f87b7e3ecdc8c8efd092b571fea40a01e24b645d6c5036cd89086dbc56ed5"
+    },
+    "talus.vtp": {
+      "sourceBody": "talus_r",
+      "vertexCount": 99,
+      "triangleCount": 194,
+      "sha256": "9a24dff87d3bbeb523fc813acde53dbdb44ebf48f8f92ee1250afe267fd48008"
+    },
+    "foot.vtp": {
+      "sourceBody": "calcn_r",
+      "vertexCount": 1000,
+      "triangleCount": 1955,
+      "sha256": "7a8768387702064d85375e9902b6181575d2cfe69f41a7170824039ea83c20c8"
+    },
+    "bofoot.vtp": {
+      "sourceBody": "toes_r",
+      "vertexCount": 958,
+      "triangleCount": 1860,
+      "sha256": "9f7184c162d3681abb46ca58e1591493cbf97b029d55622905db14b6b3e414ad"
+    }
+  },
+  "license": {
+    "id": "CC-BY-3.0",
+    "basis": "Exact .osim credits line 42 and OpenSim Gait2392 model catalog",
+    "attribution": "Delp, Loan, Hoy, Zajac, Topp, Rosen, Thelen, Anderson, Seth / OpenSim Gait2392. Derived static geometry; CC BY 3.0."
+  },
+  "sourceFrame": {
+    "id": "OpenSim_Gait2392_tibia_r_local_q0",
+    "unit": "m",
+    "axes": [
+      "anterior",
+      "superior",
+      "patient_right"
+    ]
+  },
+  "sceneFrame": {
+    "id": "HA_OSIM_GAIT2392_TIBIA_LOCAL_XLEFT_YHEAD_ZANTERIOR_M",
+    "unit": "m",
+    "axes": [
+      "patient_left",
+      "head",
+      "anterior"
+    ]
+  },
+  "sourceToSceneMatrixColumnMajor": [
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    -1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+  ],
+  "matrixDescription": "scene=(-source_z, source_y, source_x), scale 1, no BP3D registration",
+  "demoSceneSwitchNoticeKo": "움직임 시범은 별도 OpenSim 모형으로 전환됩니다.",
+  "canonicalJointId": "HA-S-JOINT-R-ANKLE-TALOCRURAL",
+  "canonicalActionId": "HA-JA-T44-R-TIBANT-ANKLE-DF",
+  "jointBinding": {
+    "sourceJoint": "ankle_r",
+    "sourceCoordinate": "ankle_angle_r",
+    "defaultRadians": 0,
+    "coordinateFunction": "rotation1 = 1*ankle_angle_r + 0; other rotation/translation axes Constant(0)",
+    "fixedBody": "tibia_r",
+    "movingBody": "talus_r",
+    "movingSubtree": [
+      "talus_r",
+      "calcn_r",
+      "toes_r"
+    ],
+    "pivotSourceTibiaLocalM": [
+      0.0,
+      -0.43,
+      0.0
+    ],
+    "pivotSceneTibiaLocalM": [
+      -0.0,
+      -0.43,
+      0.0
+    ],
+    "axisSourceJointFrame": [
+      -0.10501355,
+      -0.17402245,
+      0.97912632
+    ],
+    "axisSceneJointFrame": [
+      -0.97912632,
+      -0.17402245,
+      -0.10501355
+    ],
+    "positiveDirection": "source model positive rotation1; dorsiflexion interpretation from right foot anterior lever direction; needs human anatomy review",
+    "scenePivotNode": "ankle_r_pivot_q0"
+  },
+  "restPose": {
+    "coordinateRadians": {
+      "ankle_angle_r": 0,
+      "subtalar_angle_r": 0,
+      "mtp_angle_r": 0
+    },
+    "bodyOriginsSourceTibiaLocalM": {
+      "tibia_r": [
+        0,
+        0,
+        0
+      ],
+      "talus_r": [
+        0.0,
+        -0.43,
+        0.0
+      ],
+      "calcn_r": [
+        -0.04877,
+        -0.47195,
+        0.00792
+      ],
+      "toes_r": [
+        0.13002999999999998,
+        -0.47395,
+        0.009
+      ]
+    },
+    "bodyOriginsSceneTibiaLocalM": {
+      "tibia_r": [
+        0,
+        0,
+        0
+      ],
+      "talus_r": [
+        -0.0,
+        -0.43,
+        0.0
+      ],
+      "calcn_r": [
+        -0.00792,
+        -0.47195,
+        -0.04877
+      ],
+      "toes_r": [
+        -0.009,
+        -0.47395,
+        0.13002999999999998
+      ]
+    },
+    "notNeutralClinicalClaim": true
+  },
+  "otherSourceJoints": {
+    "subtalar_r": {
+      "pivotSourceTalusLocalM": [
+        -0.04877,
+        -0.04195,
+        0.00792
+      ],
+      "axisSource": [
+        0.78717961,
+        0.60474746,
+        -0.12094949
+      ]
+    },
+    "mtp_r": {
+      "pivotSourceCalcnLocalM": [
+        0.1788,
+        -0.002,
+        0.00108
+      ],
+      "axisSource": [
+        -0.5809544,
+        0.0,
+        0.81393611
+      ]
+    }
+  },
+  "modelPath": {
+    "id": "tib_ant_r",
+    "kind": "simplified_source_model_line_not_attachment_surface",
+    "points": [
+      {
+        "id": "tib_ant_r-P1",
+        "body": "tibia_r",
+        "localM": [
+          0.0179,
+          -0.1624,
+          0.0115
+        ],
+        "restWorldSourceM": [
+          0.0179,
+          -0.1624,
+          0.0115
+        ],
+        "restWorldSceneM": [
+          -0.0115,
+          -0.1624,
+          0.0179
+        ]
+      },
+      {
+        "id": "tib_ant_r-P2",
+        "body": "tibia_r",
+        "localM": [
+          0.0329,
+          -0.3951,
+          -0.0177
+        ],
+        "restWorldSourceM": [
+          0.0329,
+          -0.3951,
+          -0.0177
+        ],
+        "restWorldSceneM": [
+          0.0177,
+          -0.3951,
+          0.0329
+        ]
+      },
+      {
+        "id": "tib_ant_r-P3",
+        "body": "calcn_r",
+        "localM": [
+          0.1166,
+          0.0178,
+          -0.0305
+        ],
+        "restWorldSourceM": [
+          0.06783,
+          -0.45415,
+          -0.02258
+        ],
+        "restWorldSceneM": [
+          0.02258,
+          -0.45415,
+          0.06783
+        ]
+      }
+    ],
+    "boneLocalEndpointIds": [
+      "tib_ant_r-P1",
+      "tib_ant_r-P3"
+    ]
+  },
+  "validationLandmarks": [
+    {
+      "name": "ankle pivot",
+      "sourceM": [
+        0.0,
+        -0.43,
+        0.0
+      ],
+      "sceneM": [
+        -0.0,
+        -0.43,
+        0.0
+      ],
+      "residualM": 0
+    },
+    {
+      "name": "subtalar pivot",
+      "sourceM": [
+        -0.04877,
+        -0.47195,
+        0.00792
+      ],
+      "sceneM": [
+        -0.00792,
+        -0.47195,
+        -0.04877
+      ],
+      "residualM": 0
+    },
+    {
+      "name": "mtp pivot",
+      "sourceM": [
+        0.13002999999999998,
+        -0.47395,
+        0.009
+      ],
+      "sceneM": [
+        -0.009,
+        -0.47395,
+        0.13002999999999998
+      ],
+      "residualM": 0
+    },
+    {
+      "name": "tib_ant_r-P1",
+      "sourceM": [
+        0.0179,
+        -0.1624,
+        0.0115
+      ],
+      "sceneM": [
+        -0.0115,
+        -0.1624,
+        0.0179
+      ],
+      "residualM": 0
+    },
+    {
+      "name": "tib_ant_r-P2",
+      "sourceM": [
+        0.0329,
+        -0.3951,
+        -0.0177
+      ],
+      "sceneM": [
+        0.0177,
+        -0.3951,
+        0.0329
+      ],
+      "residualM": 0
+    },
+    {
+      "name": "tib_ant_r-P3",
+      "sourceM": [
+        0.06783,
+        -0.45415,
+        -0.02258
+      ],
+      "sceneM": [
+        0.02258,
+        -0.45415,
+        0.06783
+      ],
+      "residualM": 0
+    }
+  ],
+  "residualAcceptance": {
+    "sameSourceAlgebraToleranceM": 1e-06,
+    "crossModelRegistration": "not_attempted_no_shared_landmarks"
+  },
+  "staticScene": {
+    "path": "atlas-data/assets/derived-glb/opensim-gait2392-t44-right-ankle/right-ankle-rest.glb",
+    "sha256": "a33f043be46c7b628bc649777e190c9e7d7cba345f07795e080820545261bed0",
+    "selfContained": true,
+    "hasAnimation": false
+  },
+  "provenanceNote": "All bone meshes and path points derive from the same OpenSim model; BodyParts3D FJ3385 is not identified or mapped."
+}

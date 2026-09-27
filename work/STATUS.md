@@ -2,17 +2,17 @@
 
 - LAST_UPDATED: 2026-09-27
 - PLAN_REVISION: R14-2026-09-27 — 구조·기능 우선; 실행 순서는 work/task-registry-r14.json
-- CURRENT_TASK: T43 — passed_with_gaps; 12부위 metadata 취득 matrix와 T32 준비자료를 작성. 기존 T15g 분모 null 유지. 기존 T15g generated artifact freshness check 불일치는 별도 gap으로 보존.
-- NEXT_TASK: T44 / Sol High — R14 registry의 현재 다음 task. T43만 완료했고 T44는 시작하지 않음.
-- LAST_REPORT: work/reports/T43.md
+- CURRENT_TASK: T44 — passed_with_gaps; OpenSim Gait2392의 오른쪽 발목 정적 입력 scene, source→scene 좌표·관절 binding, canonical joint/action migration과 기준 자세 QA 완료. 실제 clip/UI 연결·사람 해부학 검토는 미완.
+- NEXT_TASK: T24 / Sol High — R14 registry의 현재 다음 task. T44 정적 입력을 사용한 실제 배측굴곡 clip 제작은 시작하지 않음.
+- LAST_REPORT: work/reports/T44.md
 - CATALOG: partial85 (individual48/group16/part21); 전신 분모 미동결
 - LEARNING_OVERLAY: entries81; current canonical overlap 79/85, six group IDs lack overlay entries, two lookup-only IDs are extra; T11 B01-B09 field work covered the current partial catalog with gaps; humanReviewed=false. T42 bone-name overlay adds names/search for the 9 currently selectable bones; actual Hanja not collected; humanAnatomyReview=not_reviewed.
 - AI_EVIDENCE_OVERLAY: T16 schema/types/validator/learner adapter + T18 origin/insertion rows 16 + T21 action/context rows 35; 14 legacy rows remain test-only preview; canonical human review unchanged; T21 claims remain source-derived and geometry absent
-- GEOMETRY: 오른쪽 종아리 6근육, 근육메시 7+뼈 13. T15b navigation overlay에 기존 source crosswalk의 우측 뼈 instance/mapping 9개를 needs_review로 연결, 미확정 mesh 4개는 unbound context. canonical spatialAnnotation 0; T13c-B01/B02/B03 context_only geometry:null draft 3건 보존; T05 표면 후보 0/41, text_only 28/41, matching target mesh missing 13/41, human_review_pending 41/41
-- FUNCTION_AND_ASSESSMENT: T21 오른쪽 종아리 pilot 6개 ID에 출처 연결 text action card 구현. T22 별도 GLTFLoader animation adapter와 source gate 추가. T42 학습 투영은 action의 출처 범위 문장을 숨기되 원본 action/evidence/hash를 보존. joint binding 0, MotionDefinition 0, MotionAsset/clip 0; 개별 수축 형태·사람 검토는 미확인/대기.
-- TECHNICAL_GATE: T43 region matrix validator 통과; navigation tests 12/12, 12-category navigation validator, T03 schema/17 fixtures, canonical catalog validator, typecheck/build, diff check 통과. T15g inventory dedicated `--check`는 generated artifact/input drift로 실패하여 그대로 기록했고 원본은 보존. UI 변경이 없어 브라우저 QA 미적용. Build의 기존 App >500 kB 경고 있음.
+- GEOMETRY: 기존 오른쪽 종아리 6근육, 근육메시 7+뼈 13 및 9개 needs_review bone mapping 유지. T44는 OpenSim Gait2392의 별도 오른쪽 tibia/talus/foot/toes 정적 GLB 1개를 생성했고 BodyParts3D 장면과 좌표를 섞지 않음. canonical spatialAnnotation 0; T13c-B01/B02/B03 context_only geometry:null draft 3건 보존; T05 표면 후보 0/41, text_only 28/41, matching target mesh missing 13/41, human_review_pending 41/41
+- FUNCTION_AND_ASSESSMENT: T21 pilot 6개 text action card와 T22 player adapter 유지. T44 canonical 오른쪽 발목 joint 1건과 전경골근 배측굴곡 needs_review action 1건, 정적 joint-binding manifest 1건 생성. 기존 양측 T21 action은 unmapped 유지. MotionDefinition 0, MotionAsset/clip 0; 개별 수축 형태·사람 검토는 미확인/대기.
+- TECHNICAL_GATE: T44 생성기 재실행 hash 일치, 정적 GLB/관절/경로/잔차 검증, canonical schema+17 fixtures, typecheck/build 및 분리 브라우저 기준 자세 렌더 통과. 기존 T15g inventory generated artifact/input drift는 T43에서 기록한 gap으로 유지. Build의 기존 App >500 kB 경고 있음.
 - ANATOMY_GATE: needs_human_review; 전신 구조 완성 아님
-- DEV_URL: none (T43 metadata-only)
+- DEV_URL: none (T44 제품 UI 미변경; 검증용 임시 localhost preview만 사용)
 
 | task | 상태 | 산출물/보고서 | 차단 조건 |
 |---|---|---|---|
@@ -65,6 +65,7 @@
 | T23 | passed | `work/tasks/T23.md`; motion player/UI WIP; `work/evidence/T23/`; `work/reports/T23.md` | player 필수 상태·빈 자산 경계 통과. production MotionDefinition/MotionAsset 0건으로 실제 clip 재생은 미검증이며 T24 자산 경로에서 다룸; 다음 R14 task T42 |
 | T42 | passed_with_gaps | `atlas-data/terminology/bone-name-overlay-t42.json`; 학습 카드/search 정리; `work/evidence/T42/`; `work/reports/T42.md` | 9 selectable bones와 6 calf learner paths 검증. KMLE 판본 미노출, 사람 해부학 검토 미수행, Korean landmark data 미확보라 해당 영문 표지는 UI에서 보류; 실제 clip 0은 요구대로 CTA disabled |
 | T43 | passed_with_gaps | `work/review-queue/region-acquisition-matrix-t43.json/.md`; gaps/T32 input; `work/evidence/T43/`; `work/reports/T43.md` | 12부위 metadata 행과 공식 index/model 접근 경로 완료; T15g generator `--check`는 시작 입력과 기존 snapshot 간 drift로 실패. 분모·자산·사람 검토는 미완 |
+| T44 | passed_with_gaps | `atlas-data/assets/derived-glb/opensim-gait2392-t44-right-ankle/`; canonical joint/action migration; `work/evidence/T44/`; `work/reports/T44.md` | 별도 OpenSim 정적 입력·원본 대응·렌더 검증 완료. 실제 clip/제품 UI 전환·사람 해부학 검토는 T24/T25 이후; BodyParts3D 교차 정합·FJ3385 ID는 보류 |
 
 ## 실제 현재 상태와 원본 보존
 
@@ -382,3 +383,11 @@ BodyParts3D 원문 README, IS-A index, download inventory와 license를 확인�
 검증 결과는 `work/evidence/T43/verification-results.json`, 구조 검사는 `validation-results.json`, 보존 대조는 `preservation-after.json`에 있다. T15g의 `build_t15g_inventory.py --check`는 generated artifact/input drift로 실패했으며 T43은 해당 inventory나 입력을 수정하지 않았다. Typecheck/build와 범위별 schema/navigation validation은 통과했다. 사람 해부학 검토는 수행하지 않았다.
 
 현재 다음 task는 **T44 / Sol High / planned_not_started**이며 T43 보고서 마지막의 붙여 넣기 프롬프트를 따른다. T44를 시작하지 않았다. T43은 전신 구현 완료나 coverage 완료가 아니다.
+
+## T44 결과 및 현재 인계 — 2026-09-27
+
+T44는 `OpenSim_Models` Gait2392 `.osim`의 오른쪽 `ankle_r`·`subtalar_r`·`mtp_r`와 tibia/talus/foot/toes VTP, `tib_ant_r` 모델 경로를 읽어 별도 q=0 정적 GLB를 생성했다. Source→scene 행렬은 `(-z,y,x)`이며 m 단위를 유지한다. 이 같은 원모델 내부 변환의 6개 표지 잔차는 0 m, GLB float32 경로 잔차 최댓값은 9.47e-9 m다. BodyParts3D와 정합됐다는 주장은 하지 않는다. 변환 스크립트·모델/geometry·산출물 hash, 피벗/축/계층, rest pose와 경로점은 joint-binding manifest 및 `work/evidence/T44/ADR-001-coherent-opensim-scene.md`에 있다.
+
+Canonical 오른쪽 발목 joint와 전경골근 오른쪽 배측굴곡 action을 `needs_review`로 migration했다. T21의 양측 등쪽굽힘·안쪽번짐 레코드는 그대로 unmapped이며, FJ3385 ID는 추정하지 않았다. 새 경로선은 원본 모델의 설명용 경로이지 부착 표면이 아니다. 제품 UI/clip은 변경하지 않았다. 별도 OpenSim 기준 자세 preview는 실제 브라우저에서 로드·시각 확인했고 console error/warning이 없었다. 입력 검증·catalog schema/17 fixtures·typecheck/build가 통과했다. 모델 수준 CC BY 3.0 귀속은 남겼으나 VTP 개별 권리 표기가 없어 공개 배포 전 파일별 권리 확인이 필요하다.
+
+현재 다음 task는 **T24 / Sol High / planned_not_started**다. T44 정적 입력을 사용해 실제 교육용 clip을 만들고 세 자세/재생·정지·복원/경로 결속을 검증하는 것은 T24 범위다. T44의 결과만으로 motion-ready나 해부학 승인으로 올리지 않는다. 붙여 넣을 T24 프롬프트는 `work/reports/T44.md` 마지막 섹션에 있다.

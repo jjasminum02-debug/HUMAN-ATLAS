@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ko"><meta charset="utf-8"><title>T44 OpenSim rest pose QA</title>
+<style>body{margin:0;background:#111927;color:#e9edf5;font:15px system-ui}#label{position:absolute;left:16px;top:12px;padding:12px;background:#142032d9;border-radius:8px}canvas{display:block}small{color:#b4c0d0}</style>
+<div id="label"><b>T44 · 오른쪽 발목 기준 자세</b><br><small>별도 OpenSim 모형 · q=0 · T44 검증용 정적 장면</small><br><small>주황: 거골 · 파랑: 발 몸체 · 연두: 발가락 · 빨강: 모델 경로</small></div>
+<script type="importmap">{"imports":{"three":"/three/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from '/three/examples/loaders/GLTFLoader.js';
+import {OrbitControls} from '/three/examples/controls/OrbitControls.js';
+const renderer=new THREE.WebGLRenderer({antialias:true}); renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(devicePixelRatio);document.body.append(renderer.domElement);
+const scene=new THREE.Scene();scene.background=new THREE.Color('#111927');scene.add(new THREE.HemisphereLight(0xffffff,0x48627f,3));
+const camera=new THREE.PerspectiveCamera(48,innerWidth/innerHeight,.01,20);camera.position.set(.45,-.17,.82);
+const controls=new OrbitControls(camera,renderer.domElement);controls.target.set(0,-.22,.055);controls.update();
+new GLTFLoader().load('/scene/right-ankle-rest.glb',g=>{scene.add(g.scene);window.t44Scene=g.scene;document.title='T44 OpenSim rest pose loaded';},undefined,e=>{document.title='T44 load failed';document.body.insertAdjacentHTML('beforeend',`<pre>${String(e)}</pre>`)});
+function loop(){requestAnimationFrame(loop);renderer.render(scene,camera)}loop();
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
+</script></html>

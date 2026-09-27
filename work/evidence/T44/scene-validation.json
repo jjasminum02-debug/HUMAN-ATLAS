@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "sourceModelSha256": "3af1ca20aa87bc88b0b8cd54f2504331afa2aa03537cc868f1175fa1f50f3c0f",
+  "glbSha256": "a33f043be46c7b628bc649777e190c9e7d7cba345f07795e080820545261bed0",
+  "geometryFiles": [
+    "tibia_r.vtp",
+    "fibula.vtp",
+    "talus.vtp",
+    "foot.vtp",
+    "bofoot.vtp"
+  ],
+  "rightSideChecks": [
+    "model Body names tibia_r/talus_r/calcn_r/toes_r",
+    "ankle_r parent tibia_r, child talus_r",
+    "no left source geometry in output",
+    "no mirror of local vertices"
+  ],
+  "boneCorrespondence": {
+    "tibia_r.vtp": "tibia_r",
+    "fibula.vtp": "tibia_r",
+    "talus.vtp": "talus_r",
+    "foot.vtp": "calcn_r",
+    "bofoot.vtp": "toes_r"
+  },
+  "landmarkChecks": [
+    {
+      "name": "ankle pivot",
+      "residualM": 0.0
+    },
+    {
+      "name": "subtalar pivot",
+      "residualM": 0.0
+    },
+    {
+      "name": "mtp pivot",
+      "residualM": 0.0
+    },
+    {
+      "name": "tib_ant_r-P1",
+      "residualM": 0.0
+    },
+    {
+      "name": "tib_ant_r-P2",
+      "residualM": 0.0
+    },
+    {
+      "name": "tib_ant_r-P3",
+      "residualM": 0.0
+    }
+  ],
+  "maxPathF32ResidualM": 9.466553588507101e-09,
+  "coordinateAcceptanceM": 1e-06,
+  "sourceModelToBP3DRegistration": "not attempted; separate scene",
+  "canonicalPriorRowsPreserved": true,
+  "hasAnimation": false,
+  "selfContainedGlb": true
+}

@@ -1,0 +1,18 @@
+{
+  "date": "2026-09-27",
+  "result": "passed_with_gaps",
+  "checks": [
+    {"command": "python3 atlas-data/tools/build_t44_ankle_scene.py --check", "passed": true, "detail": "byte-identical GLB and joint manifest"},
+    {"command": "python3 atlas-data/catalog/migrate_t44_ankle_joint.py --check", "passed": true, "detail": "idempotent canonical migration"},
+    {"command": "python3 atlas-data/tools/verify_t44_ankle_scene.py", "passed": true, "detail": "self-contained GLB, exact source hashes, right-body hierarchy, path endpoint and six landmark checks"},
+    {"command": "python3 atlas-data/schemas/validate.py --dataset atlas-data/catalog/canonical-catalog.json", "passed": true, "detail": "canonical schema/reference/review validation"},
+    {"command": "python3 atlas-data/schemas/validate.py --check-schemas --fixtures", "passed": true, "detail": "17/17 fixtures"},
+    {"command": "pnpm run test:motion-learning", "passed": true, "detail": "7 TypeScript tests and 16 validator fixtures"},
+    {"command": "pnpm run build (bundled Node on PATH)", "passed": true, "detail": "data validators, decoder QA, tsc -b, Vite build; pre-existing App chunk size warning"},
+    {"command": "PYTHONPYCACHEPREFIX=/private/tmp/t44-pycache python3 -m py_compile ...", "passed": true, "detail": "four T44 Python scripts compile"},
+    {"command": "python3 atlas-data/tools/prepare_t44_preview.py", "passed": true, "detail": "fresh narrowly scoped temporary preview folder generated"},
+    {"command": "git diff --check", "passed": true},
+    {"command": "isolated localhost actual-browser rest preview", "passed": true, "detail": "scene loaded, visible q=0 source bones/path, canvas 1, console error/warning 0"}
+  ],
+  "gaps": ["no product motion clip or three-pose playback: T24", "no learner UI scene-switch integration: T25", "geometry-specific public redistribution review pending", "no BodyParts3D/OpenSim registration or surface approval"]
+}

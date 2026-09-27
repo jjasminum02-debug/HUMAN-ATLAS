@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "revision": "T13-attachment-context-v2",
+  "revision": "T44-right-ankle-input-v1",
   "entities": {
     "regions": [
       {
@@ -6973,6 +6973,19 @@
           "EV-GRAY1918-TA-COURSE"
         ],
         "reviewState": "needs_review"
+      },
+      {
+        "id": "HA-T-T44-R-ANKLE-EN",
+        "conceptId": "HA-S-JOINT-R-ANKLE-TALOCRURAL",
+        "language": "en",
+        "script": "Latn",
+        "text": "Right ankle joint",
+        "termRole": "preferred",
+        "edition": "Gait2392 ankle_r model designation",
+        "evidenceIds": [
+          "EV-T44-OSIM-ANKLE-R"
+        ],
+        "reviewState": "needs_review"
       }
     ],
     "structures": [
@@ -7378,6 +7391,13 @@
         "kind": "fascia",
         "termIds": [
           "HA-T-T05-S-CRUCIATE-CRURAL-LIGAMENT"
+        ]
+      },
+      {
+        "id": "HA-S-JOINT-R-ANKLE-TALOCRURAL",
+        "kind": "joint",
+        "termIds": [
+          "HA-T-T44-R-ANKLE-EN"
         ]
       }
     ],
@@ -8326,7 +8346,27 @@
         "reviewState": "needs_review"
       }
     ],
-    "jointActions": [],
+    "jointActions": [
+      {
+        "id": "HA-JA-T44-R-TIBANT-ANKLE-DF",
+        "muscleOrPartIds": [
+          "HA-M-000003"
+        ],
+        "jointIds": [
+          "HA-S-JOINT-R-ANKLE-TALOCRURAL"
+        ],
+        "action": "Right ankle dorsiflexion",
+        "postureConditions": [],
+        "contractionRole": "unspecified",
+        "taskContext": "T44 static model input only; no motion clip or measured contribution",
+        "roleInTask": null,
+        "evidenceIds": [
+          "EV-T44-MJMS-TIBANT-DF",
+          "EV-T44-OSIM-ANKLE-R"
+        ],
+        "reviewState": "needs_review"
+      }
+    ],
     "innervations": [],
     "assessments": [],
     "sources": [
@@ -8399,6 +8439,74 @@
           ],
           "attributionRequired": true,
           "attributionText": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+          "derivativesAllowed": true,
+          "redistributionAllowed": true
+        }
+      },
+      {
+        "id": "OPENSIM_GAIT2392_T44",
+        "title": "OpenSim Gait2392 Simbody Thelen2003 model",
+        "authors": [
+          "Delp SL",
+          "Loan JP",
+          "Hoy MG",
+          "Zajac FE",
+          "Topp EL",
+          "Rosen JM",
+          "Thelen DG",
+          "Anderson FC",
+          "Seth A"
+        ],
+        "edition": "Local OpenSim_Models Gait2392_Simbody/gait2392_thelen2003muscle.osim",
+        "year": null,
+        "urlOrLocalRef": "OpenSim_Models/Models/Gait2392_Simbody/gait2392_thelen2003muscle.osim",
+        "accessDate": "2026-09-27",
+        "license": {
+          "id": "LIC-OPENSIM-GAIT2392-CC-BY-3.0",
+          "name": "Creative Commons Attribution 3.0",
+          "spdxId": "CC-BY-3.0",
+          "allowedUses": [
+            "internal",
+            "research",
+            "learning",
+            "derivative",
+            "redistribute"
+          ],
+          "attributionRequired": true,
+          "attributionText": "OpenSim Gait2392 model: Delp, Loan, Hoy, Zajac, Topp, Rosen, Thelen, Anderson, Seth; CC BY 3.0.",
+          "derivativesAllowed": true,
+          "redistributionAllowed": true
+        }
+      },
+      {
+        "id": "MJMS_MMT_T44",
+        "title": "Structured Manual Muscle Testing of the Lower Limbs",
+        "authors": [
+          "Lim XY",
+          "Wong JKC",
+          "Idris Z",
+          "Ghani ARI",
+          "Abdul Halim S",
+          "Abdullah JM"
+        ],
+        "edition": "Malays J Med Sci. 2023;30(5):206-220; doi:10.21315/mjms2023.30.5.17",
+        "year": 2023,
+        "urlOrLocalRef": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10624435/",
+        "accessDate": "2026-09-27",
+        "license": {
+          "id": "LIC-MJMS-MMT-CC-BY-4.0",
+          "name": "Creative Commons Attribution 4.0",
+          "spdxId": "CC-BY-4.0",
+          "allowedUses": [
+            "internal",
+            "research",
+            "learning",
+            "public_learning",
+            "derivative",
+            "redistribute"
+          ],
+          "attributionRequired": true,
+          "attributionText": "Lim XY et al., Structured Manual Muscle Testing of the Lower Limbs, Malays J Med Sci 2023; CC BY 4.0.",
           "derivativesAllowed": true,
           "redistributionAllowed": true
         }
@@ -9246,6 +9354,20 @@
         "locator": "LSDB Archive Release 4.0 IS-A: isa_parts_list_e.txt line 1221; isa_element_parts.txt line 4492; OBJ FJ3364 SHA-256 d5ac55e9aa466b0e14d8d7760f7ef2a6edb0d95cfea56205557f647c451a8079; provisional structure context, no attachment-surface review.",
         "supportedClaimIds": [],
         "evidenceKind": "dataset"
+      },
+      {
+        "id": "EV-T44-OSIM-ANKLE-R",
+        "sourceId": "OPENSIM_GAIT2392_T44",
+        "locator": "CustomJoint ankle_r: tibia_r_offset translation, talus_r_offset, ankle_angle_r default_value, SpatialTransform rotation1 axis; associated tib_ant_r GeometryPath and model credits",
+        "supportedClaimIds": [],
+        "evidenceKind": "dataset"
+      },
+      {
+        "id": "EV-T44-MJMS-TIBANT-DF",
+        "sourceId": "MJMS_MMT_T44",
+        "locator": "Ankle > Foot dorsiflexion and inversion: test movement and primary muscle; T21-E-HA-M-000003-action-2 previously opened full text and linked to T21-C-HA-M-000003-action",
+        "supportedClaimIds": [],
+        "evidenceKind": "primary"
       }
     ],
     "claims": [
