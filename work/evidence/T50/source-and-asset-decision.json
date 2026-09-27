@@ -1,0 +1,178 @@
+{
+  "task": "T50",
+  "recordedOn": "2026-09-27",
+  "decision": {
+    "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+    "version": "BodyParts3D Release 4.0; archive README last updated 2025-02-27; Release Note header says 2013-05-16 while README update history says 2013-06-19",
+    "selectionStatus": "provisional_same-frame_static_whole-body_reference_geometry",
+    "selectedFor": [
+      "single-source whole-body coordinate/reference-geometry basis for the future unified learner scene",
+      "mesh identity and side-by-side rest-geometry inventory after T51 has acquired/verified the missing elements"
+    ],
+    "notSelectedFor": [
+      "reviewed anatomical claims or attachments",
+      "standardized articulated neutral/anatomical pose",
+      "ready-to-play animation or a pre-rigged muscle surface",
+      "clinical, diagnostic, treatment, or needling use"
+    ],
+    "reason": "The official Release 4.0 materials describe a whole-body adult-male model and atomic ELEMENT polygon meshes representing anatomy in one reference geometry. The actual local tibialis-anterior and ankle-bone samples decode in one self-contained scene with one node per mesh, but contain no hierarchy, skin, animation, or morph target. No standardized joint posture is declared. Thus the candidate is suitable only as a provisional shared static geometry source, not an animation-ready model or a complete body delivered in this checkout."
+  },
+  "rights": {
+    "officialCurrentArchiveTerms": "CC BY 4.0; attribution required: BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+    "observedLegacyObjComments": "Several preserved 2013 OBJ headers state CC BY-SA 2.1 Japan and the same archive license URL. Do not strip or rewrite those headers; release/distribution of each selected file or derivative remains subject to a file-level rights review.",
+    "distribution": "No complete archive was downloaded or published by T50; local private render QA only."
+  },
+  "assetProperties": {
+    "sourceIds": "BodyParts3D FJxxxx element file IDs; canonical FMA concept IDs are separate from representation/file IDs",
+    "localSamples": [
+      {
+        "structure": "right tibialis anterior",
+        "bodyParts3dElementId": "FJ1439",
+        "sourceFile": "atlas-data/assets/bodyparts3d-v4-pilot/FJ1439.obj",
+        "sha256": "b03d2f54644969d153d3dfe4025ee629858e72c1e5ee3b0e7d5f16f54dc505b3",
+        "vertices": 2204,
+        "polygons": 2510,
+        "bytes": 213354,
+        "laterality": "right, as represented by the existing source crosswalk; anatomical identity remains needs_review"
+      },
+      {
+        "structure": "right tibia",
+        "bodyParts3dElementId": "FJ3387",
+        "sourceFile": "atlas-data/assets/bodyparts3d-v4-pilot/FJ3387.obj",
+        "sha256": "01879d7310938e82eecc02e1115332497e94085ff5cc1fa8eeee47ad1f5d3578",
+        "vertices": 857,
+        "polygons": 1664,
+        "bytes": 100137,
+        "laterality": "right, project crosswalk; human anatomy approval absent"
+      },
+      {
+        "structure": "right fibula",
+        "bodyParts3dElementId": "FJ3366",
+        "sourceFile": "atlas-data/assets/bodyparts3d-v4-pilot/FJ3366.obj",
+        "sha256": "d03fee02cf8eefad1ecfcb9246e3f43ad3c4615c21ce08dc5e2b6901c6395a86",
+        "vertices": 593,
+        "polygons": 1142,
+        "bytes": 69197,
+        "laterality": "right, project crosswalk; human anatomy approval absent"
+      },
+      {
+        "structure": "right talus",
+        "bodyParts3dElementId": "FJ3385",
+        "sourceFile": "atlas-data/assets/bodyparts3d-v4-pilot/FJ3385.obj",
+        "sha256": "8b35f0132c1a05b64f26746fdd0496a2495280cd0c2ac90dbf637fd74f79f54f",
+        "vertices": 812,
+        "polygons": 1380,
+        "bytes": 89820,
+        "laterality": "right, project crosswalk; human anatomy approval absent"
+      },
+      {
+        "structure": "right calcaneus",
+        "bodyParts3dElementId": "FJ3360",
+        "sourceFile": "atlas-data/assets/bodyparts3d-v4-pilot/FJ3360.obj",
+        "sha256": "b53e7970e822e997e1b05f94f42514d07a3f98edcc63ec7dd7219354ce1d8176",
+        "vertices": 739,
+        "polygons": 1262,
+        "bytes": 81782,
+        "laterality": "right, project crosswalk; human anatomy approval absent"
+      }
+    ],
+    "sceneSamples": [
+      {
+        "asset": "atlas-data/assets/derived-glb/bodyparts3d-r4-right-lower-leg/right-lower-leg.glb",
+        "sha256": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341",
+        "bytes": 712192,
+        "nodes": 11,
+        "meshes": 11,
+        "skins": 0,
+        "animations": 0,
+        "morphTargets": 0,
+        "externalUris": 0,
+        "contents": "7 right lower-leg muscles + 4 right-side bones in the existing pilot"
+      },
+      {
+        "asset": "atlas-data/assets/derived-glb/bodyparts3d-r4-t13-right-bones/right-bones.glb",
+        "sha256": "a5b16cf1e6991b52f66706dee7cf3c77d9832b1a3bde0e3dffd5de5619db6662",
+        "bytes": 205392,
+        "nodes": 9,
+        "meshes": 9,
+        "skins": 0,
+        "animations": 0,
+        "morphTargets": 0,
+        "externalUris": 0,
+        "contents": "additional right-side bone sample; same BodyParts3D release/frame, not full-body inventory"
+      }
+    ],
+    "coordinateAndPose": {
+      "source": "BodyParts3D Release 4.0 source reference coordinate; the project conversion is documented in atlas-data/manifests/assets.json",
+      "frameConversion": "[x_atlas,y_atlas,z_atlas]m = [x_source,z_source,-y_source]mm / 1000",
+      "referencePose": "fixed whole-body reference geometry; source documentation does not declare a standardized articulated rest/joint posture",
+      "crossSourceRegistration": "none; OpenSim Gait2392 T24/T44 frame remains separate"
+    },
+    "lod": {
+      "available": "Official 99%-polygon-reduced IS-A and PART-OF archive bundles (136 MB and 62 MB respectively, per official README/download page)",
+      "interpretation": "one reduced data product per tree, not a multilevel runtime LOD chain; exact per-mesh original-vs-reduced detail tradeoff is not quantified by T50",
+      "downloaded": false
+    },
+    "unsupportedOrUnverified": [
+      "left-side counterparts have not been exhaustively inventoried in this checkout",
+      "the full-body archive has not been acquired; only the pre-existing right calf subset and selected right-bone samples are local",
+      "variant and demographic coverage beyond adult male is not represented by this source",
+      "no skinning, rig, joint hierarchy, animation clips, or muscle-specific morphs in the BodyParts3D sample",
+      "material/UV/texture and visual fidelity review is limited to the local rendered sample; no source-wide quality claim",
+      "no canonical project-wide file-ID to mesh-node binding inventory is established by this task"
+    ]
+  },
+  "comparison": {
+    "BodyParts3D Release 4.0": {
+      "staticWholeBodyGeometry": "yes, source describes adult-male whole-body model; T50 local sample is partial",
+      "sharedCoordinateReference": "yes for one release/source reference; conversion is documented in project asset manifest",
+      "separateAtomicMeshes": "yes; only atomic ELEMENT structures are polygon meshes; compound concepts map to one or more element file IDs",
+      "animationReady": "no evidence; sample has no skin/joint hierarchy/animation/morph targets",
+      "decision": "preferred provisional static/rest-reference source; T51 must inventory and acquire a minimal body sample and validate all mesh IDs, side and rights"
+    },
+    "OpenSim Gait2392 (T24/T44)": {
+      "staticWholeBodyGeometry": "the existing T44 deliverable is a right-ankle scene; source project includes a musculoskeletal model, but T24/T44 local scene is partial",
+      "sharedCoordinateReference": "yes inside the Gait2392 derivation only; not registered to BodyParts3D",
+      "separateAtomicMeshes": "source model bodies/visual geometries and muscle-tendon paths are model-specific; not an anatomical whole-body segmented muscle surface dataset",
+      "animationReady": "T24 has one Gait2392-based motion clip candidate and the animated morph targets are on a 3-point line path, not tibialis-anterior surface geometry",
+      "decision": "retain T24/T44 as separate regression/reference assets; not the single body-surface source"
+    }
+  },
+  "sourceRecords": [
+    {
+      "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/README_e.html",
+      "version": "page dated 2025-02-27; describes adult human male whole-body model; Release 4.0 polygon data update listed 2013-06-19",
+      "locator": "lines 0-5, 97-123, 126-142, 150-176",
+      "checkedOn": "2026-09-27",
+      "accessMethod": "official HTML opened and read; actual local mesh files separately hashed and parsed"
+    },
+    {
+      "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/release_4.0_e.html",
+      "version": "Release 4.0; page heading date 2013-05-16",
+      "locator": "lines 2-26; coordinate changes and FJxxxx unique representation file IDs",
+      "checkedOn": "2026-09-27",
+      "accessMethod": "official release note opened and read"
+    },
+    {
+      "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html",
+      "version": "current archive page opened 2026-09-27; official Release 4.0 reduced bundle names",
+      "locator": "lines 24-51; archive warns downloadable descriptions might not correspond to original database contents",
+      "checkedOn": "2026-09-27",
+      "accessMethod": "official download inventory opened and read; no full archive link followed"
+    },
+    {
+      "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+      "version": "license page last updated 2025-02-27",
+      "locator": "lines 25-40",
+      "checkedOn": "2026-09-27",
+      "accessMethod": "official license page opened and read"
+    },
+    {
+      "url": "https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim/pages/53090607",
+      "version": "official project license varies by model/project row; see prior T43 source-access record",
+      "locator": "T43 source-access.json OpenSim model matrix record; T44 Gait2392 file-specific hash and license note",
+      "checkedOn": "2026-09-27",
+      "accessMethod": "reused T43 official model matrix access and T44 actual local sample; no blanket OpenSim license inferred"
+    }
+  ]
+}

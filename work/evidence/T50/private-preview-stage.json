@@ -1,0 +1,35 @@
+{
+  "task": "T50",
+  "createdOn": "2026-09-27T04:33:33.555828+00:00",
+  "privateTempDirectory": "<ephemeral /private/tmp preview; removed after QA>",
+  "bindHost": "127.0.0.1",
+  "learnerProduct": false,
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 14041,
+      "sha256": "f9703be5b64301e875a7b8e8cb703165293dfd997b8712fe07e7d25768831cc3"
+    },
+    {
+      "path": "three/three.module.js",
+      "bytes": 662772,
+      "sha256": "9052042d676cb0fdc1ddfefe193053f34b7ac0513a616fdac4535d49987812ea"
+    },
+    {
+      "path": "three/three.core.js",
+      "bytes": 1458113,
+      "sha256": "9edde002b066a9a05676a6127f67735b62baf399bdea529f2f7e31657da769e6"
+    },
+    {
+      "path": "scene/right-lower-leg.glb",
+      "bytes": 712192,
+      "sha256": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341"
+    }
+  ],
+  "threeExamplesModuleTreeCopied": true,
+  "notes": [
+    "No repository-wide server; only this preview, Three.js local runtime modules, and one existing derived GLB are staged.",
+    "All geometry edits happen in browser memory and are restored before exit; original OBJ/GLB files are read-only inputs.",
+    "The temp directory is disposable QA material and is not a product asset or evidence payload."
+  ]
+}

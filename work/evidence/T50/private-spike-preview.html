@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T50 private asset spike — loading</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; overflow: hidden; background: #141b27; color: #eff3f8; font: 14px/1.45 system-ui, sans-serif; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  #panel { position: fixed; z-index: 3; left: 14px; top: 14px; width: min(440px, calc(100vw - 28px)); padding: 14px; background: #111a27e8; border: 1px solid #526176; border-radius: 10px; box-shadow: 0 8px 28px #0008; }
+  h1 { font-size: 15px; margin: 0 0 5px; }
+  p { margin: 5px 0 9px; color: #c8d3df; }
+  .warn { color: #ffd37a; font-weight: 700; }
+  button { min-height: 38px; margin: 4px 5px 2px 0; padding: 7px 10px; color: #fff; background: #273d59; border: 1px solid #7289a5; border-radius: 7px; cursor: pointer; }
+  button:hover, button:focus-visible { outline: 2px solid #89c7ff; outline-offset: 2px; }
+  #status { padding: 6px 8px; margin-top: 6px; border-radius: 6px; background: #263343; }
+  #result { max-height: 180px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 11px; color: #d1dfed; }
+</style>
+</head>
+<body>
+<section id="panel" aria-label="Internal geometry spike test">
+  <h1>T50 내부 제작 spike · BodyParts3D R4 실제 표본</h1>
+  <p class="warn">기술 시험 전용 — 비해부학적 변형·임시 중심이며 학습 자료가 아닙니다.</p>
+  <p>한 WebGL renderer와 한 AnatomySceneRoot에서 전경골근 표면 정점 일부와 거골 변환 행렬을 시험합니다. 부착점·관절축·수축 동작을 표현하지 않습니다.</p>
+  <button id="deform" disabled>국소 정점 변형 시험</button>
+  <button id="bone" disabled>임시 중심 뼈 회전 시험</button>
+  <button id="reset" disabled>기준 기하 복원</button>
+  <div id="status" role="status">실제 GLB 로딩 중…</div>
+  <pre id="result" aria-live="polite"></pre>
+</section>
+<script type="importmap">{"imports":{"three":"/three/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from '/three/examples/loaders/GLTFLoader.js';
+import { OrbitControls } from '/three/examples/controls/OrbitControls.js';
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+const rendererIdentity = crypto.randomUUID();
+renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;
+document.body.append(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color('#141b27');
+const camera = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, 0.001, 100);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+scene.add(new THREE.HemisphereLight(0xe8f3ff, 0x4d5362, 2.3));
+const key = new THREE.DirectionalLight(0xffefd9, 2.6); key.position.set(1.2, 1.7, 1.4); scene.add(key);
+const fill = new THREE.DirectionalLight(0x9bc4ff, 1.1); fill.position.set(-1.2, 0.4, -1.0); scene.add(fill);
+
+const anatomySceneRoot = new THREE.Group();
+anatomySceneRoot.name = 'AnatomySceneRoot';
+scene.add(anatomySceneRoot);
+const objectsByNodeName = new Map();
+let sourceScene;
+let taMesh;
+let talusMesh;
+let taRest = null;
+let talusRestMatrix = null;
+let talusRestMatrixAutoUpdate = true;
+let talusGeometryRestHash = null;
+let cameraRest;
+let rootRest;
+let baseGeometryRestHash;
+const statusNode = document.querySelector('#status');
+const resultNode = document.querySelector('#result');
+const buttons = [...document.querySelectorAll('button')];
+
+function numericHash(floatArray) {
+  const bytes = new Uint8Array(floatArray.buffer, floatArray.byteOffset, floatArray.byteLength);
+  let hash = 2166136261;
+  for (const byte of bytes) { hash ^= byte; hash = Math.imul(hash, 16777619); }
+  return (hash >>> 0).toString(16).padStart(8, '0');
+}
+
+function setQaMaterial(mesh, color) {
+  const old = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+  mesh.userData.t50OriginalMaterials = old;
+  mesh.material = new THREE.MeshStandardMaterial({ color, roughness: 0.78, metalness: 0.02 });
+}
+
+function updateQa() {
+  if (!taMesh || !talusMesh) return;
+  const taPos = taMesh.geometry.getAttribute('position');
+  const bonePos = talusMesh.geometry.getAttribute('position');
+  rootRest = anatomySceneRoot.matrixWorld.clone();
+  cameraRest = { position: camera.position.clone(), quaternion: camera.quaternion.clone(), target: controls.target.clone() };
+  taRest = taPos.array.slice();
+  talusRestMatrix = talusMesh.matrix.clone();
+  talusRestMatrixAutoUpdate = talusMesh.matrixAutoUpdate;
+  baseGeometryRestHash = numericHash(taRest);
+  talusGeometryRestHash = numericHash(bonePos.array);
+  window.t50QA = {
+    source: 'BodyParts3D Release 4.0 right lower-leg pilot GLB',
+    rootName: anatomySceneRoot.name,
+    rendererCanvasCount: document.querySelectorAll('canvas').length,
+    rendererId: rendererIdentity,
+    taNode: taMesh.name,
+    talusNode: talusMesh.name,
+    taVertexCount: taPos.count,
+    talusVertexCount: bonePos.count,
+    taSourceGeometryHashFNV1a: baseGeometryRestHash,
+    rootMatrixRestElements: rootRest.elements.slice(),
+    cameraPositionRest: cameraRest.position.toArray(),
+    cameraTargetRest: cameraRest.target.toArray(),
+    state: 'loaded'
+  };
+  for (const button of buttons) button.disabled = false;
+  statusNode.textContent = '실제 BodyParts3D 표본 표시됨 · GLB·출처 표본, 단일 canvas/root';
+}
+
+function localizedVertexPerturbation() {
+  const position = taMesh.geometry.getAttribute('position');
+  const bounds = taMesh.geometry.boundingBox || (taMesh.geometry.computeBoundingBox(), taMesh.geometry.boundingBox);
+  const size = bounds.getSize(new THREE.Vector3());
+  const amp = size.length() * 0.035;
+  const center = new THREE.Vector3(bounds.min.x + size.x * 0.48, bounds.min.y + size.y * 0.57, bounds.min.z + size.z * 0.52);
+  const sigma = Math.max(size.length() * 0.18, 1e-5);
+  const direction = new THREE.Vector3(0.55, -0.2, 0.81).normalize();
+  let changed = 0;
+  let minWeight = 1;
+  let maxWeight = 0;
+  const weightThreshold = 0.14;
+  for (let i = 0; i < position.count; i++) {
+    const x = taRest[i * 3], y = taRest[i * 3 + 1], z = taRest[i * 3 + 2];
+    const dx = x - center.x, dy = y - center.y, dz = z - center.z;
+    const weight = Math.exp(-(dx * dx + dy * dy + dz * dz) / (2 * sigma * sigma));
+    minWeight = Math.min(minWeight, weight); maxWeight = Math.max(maxWeight, weight);
+    if (weight < weightThreshold) continue;
+    const delta = amp * weight;
+    position.setXYZ(i, x + direction.x * delta, y + direction.y * delta, z + direction.z * delta);
+    changed++;
+  }
+  position.needsUpdate = true;
+  taMesh.geometry.computeVertexNormals();
+  taMesh.geometry.computeBoundingBox(); taMesh.geometry.computeBoundingSphere();
+  window.t50QA.vertexSpike = {
+    changedVertexCount: changed,
+    totalVertexCount: position.count,
+    localizedNotWholeMesh: changed > 0 && changed < position.count,
+    nonUniformPerVertexWeights: maxWeight - minWeight > 0.25,
+    maxTestOnlyDisplacement: amp,
+    minimumAppliedWeight: weightThreshold,
+    weightWindow: [minWeight, maxWeight],
+    mutatedGeometryHashFNV1a: numericHash(position.array),
+    anatomicalClaim: false,
+    attachmentClaim: false,
+    productionMotion: false
+  };
+  window.t50QA.state = 'localized_vertex_spike_applied';
+  statusNode.textContent = `국소 정점 시험: ${changed}/${position.count} vertices 변형 · 임의 시험 weight`;
+  resultNode.textContent = JSON.stringify(window.t50QA, null, 2);
+}
+
+function syntheticBonePivotTransform() {
+  talusMesh.updateMatrixWorld(true);
+  anatomySceneRoot.updateMatrixWorld(true);
+  const originalWorld = talusMesh.matrixWorld.clone();
+  const bounds = new THREE.Box3().setFromObject(talusMesh);
+  const boxSize = bounds.getSize(new THREE.Vector3());
+  // The offset is a deterministic test pivot, deliberately NOT an ankle joint center.
+  const pivot = bounds.getCenter(new THREE.Vector3()).add(new THREE.Vector3(0, boxSize.y * 0.32, 0));
+  const testRotation = new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(0, 0, 1), 0.18);
+  const pivotTransform = new THREE.Matrix4().makeTranslation(pivot.x, pivot.y, pivot.z)
+    .multiply(testRotation)
+    .multiply(new THREE.Matrix4().makeTranslation(-pivot.x, -pivot.y, -pivot.z));
+  const desiredWorld = pivotTransform.multiply(originalWorld);
+  const parentWorld = talusMesh.parent.matrixWorld.clone();
+  const desiredLocal = parentWorld.invert().multiply(desiredWorld);
+  talusMesh.matrixAutoUpdate = false;
+  talusMesh.matrix.copy(desiredLocal);
+  talusMesh.matrixWorldNeedsUpdate = true;
+  talusMesh.updateMatrixWorld(true);
+  const movedWorld = talusMesh.matrixWorld.clone();
+  window.t50QA.bonePivotSpike = {
+    transformedNode: talusMesh.name,
+    syntheticPivot: pivot.toArray(),
+    syntheticRotationRadians: 0.18,
+    transformMatrixChanged: movedWorld.elements.some((v, i) => Math.abs(v - originalWorld.elements[i]) > 1e-7),
+    geometryUnchanged: numericHash(talusMesh.geometry.getAttribute('position').array) === talusGeometryRestHash,
+    anatomicalJointCenter: false,
+    anatomicalMotion: false
+  };
+  // Keep a direct source geometry hash for the meaningful invariant.
+  window.t50QA.bonePivotSpike.sourceGeometryHashFNV1a = numericHash(talusMesh.geometry.getAttribute('position').array);
+  window.t50QA.bonePivotSpike.sourceGeometryRestHashFNV1a = talusGeometryRestHash;
+  window.t50QA.state = 'synthetic_bone_pivot_applied';
+  statusNode.textContent = '뼈 행렬 시험: 실제 거골 mesh를 임시 중심으로 회전 · 관절 중심이 아님';
+  resultNode.textContent = JSON.stringify(window.t50QA, null, 2);
+}
+
+function restore() {
+  if (!taMesh || !talusMesh) return;
+  const position = taMesh.geometry.getAttribute('position');
+  position.array.set(taRest); position.needsUpdate = true;
+  taMesh.geometry.computeVertexNormals(); taMesh.geometry.computeBoundingBox(); taMesh.geometry.computeBoundingSphere();
+  talusMesh.matrixAutoUpdate = talusRestMatrixAutoUpdate;
+  talusMesh.matrix.copy(talusRestMatrix);
+  if (talusMesh.matrixAutoUpdate) talusMesh.updateMatrix();
+  talusMesh.matrixWorldNeedsUpdate = true;
+  anatomySceneRoot.updateMatrixWorld(true);
+  const currentRootHash = JSON.stringify(anatomySceneRoot.matrixWorld.elements);
+  window.t50QA.reset = {
+    taGeometryRestoredExactly: numericHash(position.array) === baseGeometryRestHash,
+    talusLocalMatrixRestoredExactly: talusMesh.matrix.elements.every((v, i) => Math.abs(v - talusRestMatrix.elements[i]) < 1e-12),
+    talusGeometryRestoredExactly: numericHash(talusMesh.geometry.getAttribute('position').array) === talusGeometryRestHash,
+    rootUnchanged: currentRootHash === JSON.stringify(rootRest.elements),
+    cameraUnchanged: camera.position.distanceTo(cameraRest.position) < 1e-12 && camera.quaternion.angleTo(cameraRest.quaternion) < 1e-12 && controls.target.distanceTo(cameraRest.target) < 1e-12,
+    oneRoot: anatomySceneRoot.name === 'AnatomySceneRoot' && scene.children.filter(child => child.name === 'AnatomySceneRoot').length === 1,
+    oneRendererAndCanvas: rendererIdentity === window.t50QA.rendererId && document.querySelectorAll('canvas').length === 1,
+    differentViewportCreated: false
+  };
+  window.t50QA.state = 'restored';
+  window.t50QA.finalResult = Object.entries(window.t50QA.reset).every(([key, value]) => key === 'differentViewportCreated' ? value === false : value === true);
+  statusNode.textContent = window.t50QA.finalResult ? '기준 mesh·pose·camera 복원 확인' : '복원 불일치';
+  resultNode.textContent = JSON.stringify(window.t50QA, null, 2);
+}
+
+document.querySelector('#deform').addEventListener('click', localizedVertexPerturbation);
+document.querySelector('#bone').addEventListener('click', syntheticBonePivotTransform);
+document.querySelector('#reset').addEventListener('click', restore);
+
+new GLTFLoader().load('/scene/right-lower-leg.glb', (gltf) => {
+  sourceScene = gltf.scene;
+  anatomySceneRoot.add(sourceScene);
+  sourceScene.traverse((object) => {
+    if (!object.isMesh) return;
+    objectsByNodeName.set(object.name, object);
+    object.frustumCulled = true;
+    if (object.name === 'HA-MESH-BP3D4-FJ1439') setQaMaterial(object, '#db7955');
+    else if (object.name === 'HA-MESH-BP3D4-FJ3385') setQaMaterial(object, '#f3be65');
+    else if (/FJ33\d\d/.test(object.name)) setQaMaterial(object, '#879bb2');
+    else setQaMaterial(object, '#b574a2');
+  });
+  taMesh = objectsByNodeName.get('HA-MESH-BP3D4-FJ1439');
+  talusMesh = objectsByNodeName.get('HA-MESH-BP3D4-FJ3385');
+  if (!taMesh || !talusMesh) throw new Error('Expected source-ID-bound sample nodes were not present');
+  const bounds = new THREE.Box3().setFromObject(anatomySceneRoot);
+  const center = bounds.getCenter(new THREE.Vector3());
+  const radius = bounds.getSize(new THREE.Vector3()).length() * 1.4;
+  controls.target.copy(center);
+  camera.position.copy(center).add(new THREE.Vector3(radius * 0.7, radius * 0.15, radius * 1.1));
+  camera.near = Math.max(radius / 1000, 0.001); camera.far = radius * 50; camera.updateProjectionMatrix(); controls.update();
+  anatomySceneRoot.updateMatrixWorld(true);
+  updateQa();
+  document.title = 'T50 private asset spike — BodyParts3D sample loaded';
+}, undefined, (error) => {
+  console.error(error); statusNode.textContent = `실제 자산 로딩 실패: ${error}`; document.title = 'T50 private asset spike — failed';
+});
+
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight);
+});
+function render() { requestAnimationFrame(render); controls.update(); renderer.render(scene, camera); }
+render();
+</script>
+</body>
+</html>

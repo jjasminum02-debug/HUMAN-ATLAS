@@ -1,0 +1,74 @@
+{
+  "task": "T50",
+  "checkedOn": "2026-09-27",
+  "method": "Codex In-app Browser (CUA) opened the private localhost preview; actual render screenshots were inspected and test controls were operated by browser locators.",
+  "page": {
+    "url": "http://127.0.0.1:8765/",
+    "title": "T50 private asset spike — BodyParts3D sample loaded",
+    "viewportCssPx": [817, 817],
+    "devicePixelRatio": 2,
+    "canvasCount": 1,
+    "rendererIdentity": "eb1f4cd9-bdab-42a1-8a71-db8f6a6963e5",
+    "anatomySceneRootCount": 1,
+    "asset": "atlas-data/assets/derived-glb/bodyparts3d-r4-right-lower-leg/right-lower-leg.glb",
+    "assetSha256": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341",
+    "sceneNodes": 11,
+    "meshNodes": 11,
+    "sourceIdsVerified": ["HA-MESH-BP3D4-FJ1439", "HA-MESH-BP3D4-FJ3385"]
+  },
+  "operations": [
+    {
+      "operation": "initial render",
+      "result": "real BodyParts3D right lower-leg mesh visible; one canvas, one persistent root, camera fit shows sampled region"
+    },
+    {
+      "operation": "synthetic localized vertex-buffer perturbation on FJ1439",
+      "changedVertices": 808,
+      "totalVertices": 2204,
+      "localizedSubset": true,
+      "perVertexWeightsNonUniform": true,
+      "maximumTestDisplacementSceneUnits": 0.01415970110139734,
+      "uniformWholeMuscleScaling": false,
+      "anatomicalClaim": false,
+      "attachmentClaim": false,
+      "productionMotion": false
+    },
+    {
+      "operation": "synthetic talus node matrix rotation",
+      "node": "HA-MESH-BP3D4-FJ3385",
+      "rotationRadians": 0.18,
+      "temporaryPivotScenePosition": [-0.06987045146524906, -0.0030571353854611516, 0.07716149836778641],
+      "pivotIsAnatomicalJointCenter": false,
+      "matrixChanged": true,
+      "talusGeometryUnchanged": true,
+      "anatomicalMotion": false
+    },
+    {
+      "operation": "reset to source/reference geometry",
+      "passed": true,
+      "tibialisAnteriorVertexBufferExactHashRestored": true,
+      "talusGeometryHashRestored": true,
+      "talusLocalMatrixRestored": true,
+      "rootMatrixUnchanged": true,
+      "cameraPositionQuaternionAndTargetUnchanged": true,
+      "sameRendererAndOneCanvas": true,
+      "sameAnatomySceneRoot": true,
+      "secondViewportCreated": false
+    }
+  ],
+  "console": {"errors": 0, "warnings": 0},
+  "visualInspection": {
+    "initialAssetView": "captured and visually inspected via the CUA screenshot stream",
+    "deformationAndBoneTransform": "visually inspected during operation",
+    "restoredView": "captured and visually inspected via the CUA screenshot stream",
+    "screenshotFileSaved": false,
+    "note": "The CUA screenshot was reviewed during the task; the browser API returned an in-memory screenshot only. Numerical page, node, reset and console evidence is persisted in this JSON."
+  },
+  "scope": {
+    "privatePreviewOnly": true,
+    "learnerProductChanged": false,
+    "sourceFilesWritten": false,
+    "separateDemonstrationModel": false,
+    "anatomicalPivotOrAttachmentInferred": false
+  }
+}

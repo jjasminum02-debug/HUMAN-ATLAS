@@ -1,0 +1,45 @@
+{
+  "task": "T50",
+  "checkedOn": "2026-09-27",
+  "status": "passed_with_gaps",
+  "commands": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 work/evidence/T50/inspect_samples.py",
+      "result": "passed; real OBJ/GLB bytes, SHA-256, primitive/node counts, skin/animation/morph/URI and raw/quantized topology metrics written"
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 work/evidence/T50/validate_t50_evidence.py",
+      "result": "passed; 25 source, file-hash, render, browser reset, rights, R15-state and preservation checks (see validation-results.json)"
+    },
+    {
+      "command": "pnpm test:scene-lifecycle",
+      "result": "passed; 9/9"
+    },
+    {
+      "command": "pnpm test:animation-loader",
+      "result": "passed; 10/10 plus source representation fixtures 3/3 and motion asset source validation"
+    },
+    {
+      "command": "pnpm test:motion-player",
+      "result": "passed; 21/21"
+    },
+    {
+      "command": "pnpm typecheck",
+      "result": "passed; tsc -b --pretty false"
+    },
+    {
+      "command": "pnpm build",
+      "result": "passed; learning/evidence/bone-name/motion validators, scene decoder check and Vite build. Existing App chunk warning remains at 1515.52 kB; no T50 app source was changed."
+    },
+    {
+      "command": "actual CUA browser private localhost spike",
+      "result": "passed; real BodyParts3D mesh visible, 1 canvas/root, localized vertex change, synthetic bone matrix, exact reset, console 0 errors/0 warnings"
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 work/evidence/T50/check_preservation.py",
+      "result": "passed; 172/174 pre-existing path hashes unchanged; the other two are the intentional STATUS/registry edits; 38/40 protected file hashes unchanged and the remaining two are those same state files; OpenSim_Models same HEAD/clean/tree hash"
+    }
+  ],
+  "environmentNote": "The first bare pnpm test invocations could not find node in the default shell PATH. Re-ran using the workspace bundled Node.js and pnpm, and all specified test/type/build commands passed.",
+  "interpretation": "Test and build passes protect existing app behavior and validate T50 tooling; they do not establish anatomical review, whole-body asset completeness, source pose standardization, or production animation readiness."
+}
