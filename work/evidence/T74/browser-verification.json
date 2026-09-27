@@ -1,0 +1,33 @@
+{
+  "task": "T74",
+  "verifiedAtLocal": "2026-09-28",
+  "target": "http://127.0.0.1:8765/?t74=final1",
+  "testSurface": "strictly allowlisted temporary local QA page; not the learner application",
+  "actualBrowserRender": true,
+  "rendererCount": 1,
+  "anatomySceneRootCount": 1,
+  "canvasCssPixels": [1000, 622],
+  "frame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+  "pose": "bodyparts3d-r4-static-reference",
+  "cameraViewsRenderedAndVisuallyChecked": ["front", "back", "side"],
+  "visibleSourceElementFileIds": ["FJ3200", "FJ3269", "FJ3272", "FJ3274", "FJ3281", "FJ3287", "FJ3289", "FJ3309", "FJ3375", "FJ3378", "FJ3380", "FJ3386", "FJ3392"],
+  "newT74TargetCount": 9,
+  "reusedContextCount": 4,
+  "targetIdsExactlyMatchFrozenSet": true,
+  "intermediateQaFixtureRejections": [
+    {"routeVariant": "default", "reason": "T72 context IDs differed from the QA reuse/target allowlist; rejected before render"},
+    {"routeVariant": "fix1", "reason": "T74 target IDs/order differed from frozen allowlist; rejected before render"}
+  ],
+  "correctedFixtureRoutesPassed": ["fix2", "fit1", "final1"],
+  "reuseReferencesAreContextOnly": true,
+  "allSourceTargetsSelectableInLocalQa": true,
+  "reusedMeshesAndNewTargetsShareOneSceneAndRenderer": true,
+  "consoleErrorCount": 0,
+  "browserScreenshotFilesPersisted": false,
+  "screenshotNote": "The front, rear, and side renders were inspected in the interactive browser during this run; screenshots were not exported as files.",
+  "serverRootAllowlistedOnly": true,
+  "openSimExposed": false,
+  "privateDataExposed": false,
+  "learnerDefaultVisibilityOrSelectionPolicyChanged": false,
+  "humanAnatomyReviewPerformed": false
+}

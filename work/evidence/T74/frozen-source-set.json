@@ -1,0 +1,675 @@
+{
+  "archiveTree": "PART-OF",
+  "archiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/partof_BP3D_4.0_obj_99.zip",
+  "frozenMembershipSha256": "31c1334440570a63ec1769e1b1f80f7863219916aece2e6e281b8a7262f1a8b9",
+  "frozenSourceVersion": "BodyParts3D Release 4.0",
+  "inputHashes": {
+    "atlas-data/manifests/bodyparts3d-r4-t52/head.json": "903991d237d04bab28fd67bfc2616c0b98f8523be2cb040f1a30f6cf362771aa",
+    "atlas-data/manifests/bodyparts3d-r4-t72/source-manifest.json": "f1ee55b06e66d51aeae1539732150071c887a0b8c4519a1b18db4e28f04f18cf",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_element_parts.txt": "a3de74423f943b0d724ae8f59b3a817f87c423a544f8db98113b1980817cbeaf",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_inclusion_relation_list.txt": "26e7d818e03a8c909fe09c561f38d0d513423c87681f9450a803bc38f5b07564",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_parts_list_e.txt": "ab7796deedd49205e77f3609a1cb8c53e2bbee14ecb5c9a6ca05227469780513",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_element_parts.txt": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_inclusion_relation_list.txt": "1b40738270931e3c1d955ce34e0fce0d8d10d8c5ad543463e40b4b4c0243007c",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_parts_list_e.txt": "9224080557053e6f1322f1e13ab27f0ecde0db19bb3b505f0631afad230eeebd",
+    "work/evidence/T73/target-source-matrix.json": "a49504016e80bf02b075a8f8e525930860318c34461b8f8e0b9b9c1fd8d7be46"
+  },
+  "internalBatchSizeMaximum": 10,
+  "internalBatches": [
+    {
+      "batchId": "T74-B01",
+      "sourceElementFileIds": [
+        "FJ3274",
+        "FJ3386",
+        "FJ3281",
+        "FJ3392",
+        "FJ3287"
+      ]
+    },
+    {
+      "batchId": "T74-B02",
+      "sourceElementFileIds": [
+        "FJ3375",
+        "FJ3269",
+        "FJ3378",
+        "FJ3272"
+      ]
+    }
+  ],
+  "policy": {
+    "humanAnatomyReview": "not_performed",
+    "lateralityFromExplicitSourceRelationOnly": true,
+    "noCanonicalBindingOrLearnerPolicyChange": true,
+    "noMirroring": true,
+    "reuseOnlyIds": [
+      "FJ3380",
+      "FJ3200",
+      "FJ3289",
+      "FJ3309"
+    ],
+    "rightsHold": "held_pending_file_level_reconciliation_with_legacy_OBJ_headers",
+    "scope": "T73's ten-concept bilateral skull silhouette target only; nine exact new FJ members plus FJ3380 reuse"
+  },
+  "reuseOnly": {
+    "FJ3200": {
+      "mustNotReacquire": true,
+      "package": "T72",
+      "renderNodeId": "HA-MESH-BP3D4-FJ3200",
+      "reuseEvidencePath": "atlas-data/manifests/bodyparts3d-r4-t72/source-manifest.json",
+      "side": null,
+      "sourceConceptId": "FMA52734",
+      "sourceManifestPath": "atlas-data/manifests/bodyparts3d-r4-t72/source-manifest.json",
+      "sourceSha256": "48583dbbeab8ae243aa4c266b44ca5b26b9c4e1e79976819cfdf5dcb59ec5772"
+    },
+    "FJ3289": {
+      "mustNotReacquire": true,
+      "package": "T72",
+      "renderNodeId": "HA-MESH-BP3D4-FJ3289",
+      "reuseEvidencePath": "atlas-data/manifests/bodyparts3d-r4-t72/source-manifest.json",
+      "side": null,
+      "sourceConceptId": "FMA52748",
+      "sourceManifestPath": "atlas-data/manifests/bodyparts3d-r4-t72/source-manifest.json",
+      "sourceSha256": "c38102c34660e2b767a7b95a341380bf4a52c754c6235fcd322be5c7b8cb1745"
+    },
+    "FJ3309": {
+      "mustNotReacquire": true,
+      "package": "T72",
+      "renderNodeId": "HA-MESH-BP3D4-FJ3309",
+      "reuseEvidencePath": "atlas-data/manifests/bodyparts3d-r4-t72/source-manifest.json",
+      "side": null,
+      "sourceConceptId": "FMA52735",
+      "sourceManifestPath": "atlas-data/manifests/bodyparts3d-r4-t72/source-manifest.json",
+      "sourceSha256": "c0262a08591e48504c8a53302525377e0c4ad1c165456475f3bb80aab6202d44"
+    },
+    "FJ3380": {
+      "mustNotReacquire": true,
+      "package": "T52",
+      "renderNodeId": "HA-MESH-BP3D4-FJ3380",
+      "reuseEvidencePath": "work/evidence/T73/target-source-matrix.json",
+      "side": "right",
+      "sourceConceptId": "FMA52788",
+      "sourceManifestPath": "atlas-data/manifests/bodyparts3d-r4-t52/head.json",
+      "sourceSha256": "b6874589f3ddcbeae7153c2d499c23d0083eb18e95d139759529c901384758c8"
+    }
+  },
+  "revision": "BodyParts3D-R4-T74-FROZEN-EXACT-SOURCE-SET-v1",
+  "sourceConceptCount": 10,
+  "sourceElementFileCount": 9,
+  "sourceElementFileIds": [
+    "FJ3274",
+    "FJ3386",
+    "FJ3281",
+    "FJ3392",
+    "FJ3287",
+    "FJ3375",
+    "FJ3269",
+    "FJ3378",
+    "FJ3272"
+  ],
+  "status": "frozen_before_mesh_acquisition",
+  "task": "T74",
+  "uniqueNewSourceAssets": [
+    {
+      "acquisitionStateAtFreeze": "not_yet_attempted",
+      "metadataIdentityBasis": "exact FMA/name/FJ row plus exact FMA/BP/name concept row; source left/right token, not FJ suffix",
+      "officialConceptRow": [
+        "FMA52789",
+        "BP10199",
+        "left parietal bone"
+      ],
+      "officialElementRow": [
+        "FMA52789",
+        "left parietal bone",
+        "FJ3274"
+      ],
+      "otherPartOfRowsForSameFJ": [
+        {
+          "fmaConceptId": "FMA20394",
+          "nameEnglish": "human body"
+        },
+        {
+          "fmaConceptId": "FMA23876",
+          "nameEnglish": "skeleton (in vivo)"
+        },
+        {
+          "fmaConceptId": "FMA23881",
+          "nameEnglish": "skeletal system"
+        },
+        {
+          "fmaConceptId": "FMA46565",
+          "nameEnglish": "skull"
+        },
+        {
+          "fmaConceptId": "FMA53672",
+          "nameEnglish": "neurocranium"
+        },
+        {
+          "fmaConceptId": "FMA54545",
+          "nameEnglish": "head proper"
+        },
+        {
+          "fmaConceptId": "FMA61733",
+          "nameEnglish": "left parietal part of head"
+        },
+        {
+          "fmaConceptId": "FMA7154",
+          "nameEnglish": "head"
+        },
+        {
+          "fmaConceptId": "FMA7482",
+          "nameEnglish": "musculoskeletal system"
+        }
+      ],
+      "selectedArchiveTree": "PART-OF",
+      "side": "left",
+      "sourceConceptId": "FMA52789",
+      "sourceElementFileId": "FJ3274",
+      "sourceNameEnglish": "left parietal bone",
+      "sourceRepresentationId": "BP10199"
+    },
+    {
+      "acquisitionStateAtFreeze": "not_yet_attempted",
+      "metadataIdentityBasis": "exact FMA/name/FJ row plus exact FMA/BP/name concept row; source left/right token, not FJ suffix",
+      "officialConceptRow": [
+        "FMA52738",
+        "BP10032",
+        "right temporal bone"
+      ],
+      "officialElementRow": [
+        "FMA52738",
+        "right temporal bone",
+        "FJ3386"
+      ],
+      "otherPartOfRowsForSameFJ": [
+        {
+          "fmaConceptId": "FMA20394",
+          "nameEnglish": "human body"
+        },
+        {
+          "fmaConceptId": "FMA23876",
+          "nameEnglish": "skeleton (in vivo)"
+        },
+        {
+          "fmaConceptId": "FMA23881",
+          "nameEnglish": "skeletal system"
+        },
+        {
+          "fmaConceptId": "FMA24728",
+          "nameEnglish": "face"
+        },
+        {
+          "fmaConceptId": "FMA46565",
+          "nameEnglish": "skull"
+        },
+        {
+          "fmaConceptId": "FMA53672",
+          "nameEnglish": "neurocranium"
+        },
+        {
+          "fmaConceptId": "FMA53673",
+          "nameEnglish": "viscerocranium"
+        },
+        {
+          "fmaConceptId": "FMA54545",
+          "nameEnglish": "head proper"
+        },
+        {
+          "fmaConceptId": "FMA7154",
+          "nameEnglish": "head"
+        },
+        {
+          "fmaConceptId": "FMA7482",
+          "nameEnglish": "musculoskeletal system"
+        }
+      ],
+      "selectedArchiveTree": "PART-OF",
+      "side": "right",
+      "sourceConceptId": "FMA52738",
+      "sourceElementFileId": "FJ3386",
+      "sourceNameEnglish": "right temporal bone",
+      "sourceRepresentationId": "BP10032"
+    },
+    {
+      "acquisitionStateAtFreeze": "not_yet_attempted",
+      "metadataIdentityBasis": "exact FMA/name/FJ row plus exact FMA/BP/name concept row; source left/right token, not FJ suffix",
+      "officialConceptRow": [
+        "FMA52739",
+        "BP9536",
+        "left temporal bone"
+      ],
+      "officialElementRow": [
+        "FMA52739",
+        "left temporal bone",
+        "FJ3281"
+      ],
+      "otherPartOfRowsForSameFJ": [
+        {
+          "fmaConceptId": "FMA20394",
+          "nameEnglish": "human body"
+        },
+        {
+          "fmaConceptId": "FMA23876",
+          "nameEnglish": "skeleton (in vivo)"
+        },
+        {
+          "fmaConceptId": "FMA23881",
+          "nameEnglish": "skeletal system"
+        },
+        {
+          "fmaConceptId": "FMA24728",
+          "nameEnglish": "face"
+        },
+        {
+          "fmaConceptId": "FMA46565",
+          "nameEnglish": "skull"
+        },
+        {
+          "fmaConceptId": "FMA53672",
+          "nameEnglish": "neurocranium"
+        },
+        {
+          "fmaConceptId": "FMA53673",
+          "nameEnglish": "viscerocranium"
+        },
+        {
+          "fmaConceptId": "FMA54545",
+          "nameEnglish": "head proper"
+        },
+        {
+          "fmaConceptId": "FMA7154",
+          "nameEnglish": "head"
+        },
+        {
+          "fmaConceptId": "FMA7482",
+          "nameEnglish": "musculoskeletal system"
+        }
+      ],
+      "selectedArchiveTree": "PART-OF",
+      "side": "left",
+      "sourceConceptId": "FMA52739",
+      "sourceElementFileId": "FJ3281",
+      "sourceNameEnglish": "left temporal bone",
+      "sourceRepresentationId": "BP9536"
+    },
+    {
+      "acquisitionStateAtFreeze": "not_yet_attempted",
+      "metadataIdentityBasis": "exact FMA/name/FJ row plus exact FMA/BP/name concept row; source left/right token, not FJ suffix",
+      "officialConceptRow": [
+        "FMA52892",
+        "BP9965",
+        "right zygomatic bone"
+      ],
+      "officialElementRow": [
+        "FMA52892",
+        "right zygomatic bone",
+        "FJ3392"
+      ],
+      "otherPartOfRowsForSameFJ": [
+        {
+          "fmaConceptId": "FMA20394",
+          "nameEnglish": "human body"
+        },
+        {
+          "fmaConceptId": "FMA23876",
+          "nameEnglish": "skeleton (in vivo)"
+        },
+        {
+          "fmaConceptId": "FMA23881",
+          "nameEnglish": "skeletal system"
+        },
+        {
+          "fmaConceptId": "FMA24728",
+          "nameEnglish": "face"
+        },
+        {
+          "fmaConceptId": "FMA46565",
+          "nameEnglish": "skull"
+        },
+        {
+          "fmaConceptId": "FMA53637",
+          "nameEnglish": "right cheek"
+        },
+        {
+          "fmaConceptId": "FMA53673",
+          "nameEnglish": "viscerocranium"
+        },
+        {
+          "fmaConceptId": "FMA7154",
+          "nameEnglish": "head"
+        },
+        {
+          "fmaConceptId": "FMA7482",
+          "nameEnglish": "musculoskeletal system"
+        }
+      ],
+      "selectedArchiveTree": "PART-OF",
+      "side": "right",
+      "sourceConceptId": "FMA52892",
+      "sourceElementFileId": "FJ3392",
+      "sourceNameEnglish": "right zygomatic bone",
+      "sourceRepresentationId": "BP9965"
+    },
+    {
+      "acquisitionStateAtFreeze": "not_yet_attempted",
+      "metadataIdentityBasis": "exact FMA/name/FJ row plus exact FMA/BP/name concept row; source left/right token, not FJ suffix",
+      "officialConceptRow": [
+        "FMA52893",
+        "BP9801",
+        "left zygomatic bone"
+      ],
+      "officialElementRow": [
+        "FMA52893",
+        "left zygomatic bone",
+        "FJ3287"
+      ],
+      "otherPartOfRowsForSameFJ": [
+        {
+          "fmaConceptId": "FMA20394",
+          "nameEnglish": "human body"
+        },
+        {
+          "fmaConceptId": "FMA23876",
+          "nameEnglish": "skeleton (in vivo)"
+        },
+        {
+          "fmaConceptId": "FMA23881",
+          "nameEnglish": "skeletal system"
+        },
+        {
+          "fmaConceptId": "FMA24728",
+          "nameEnglish": "face"
+        },
+        {
+          "fmaConceptId": "FMA46565",
+          "nameEnglish": "skull"
+        },
+        {
+          "fmaConceptId": "FMA53638",
+          "nameEnglish": "left cheek"
+        },
+        {
+          "fmaConceptId": "FMA53673",
+          "nameEnglish": "viscerocranium"
+        },
+        {
+          "fmaConceptId": "FMA7154",
+          "nameEnglish": "head"
+        },
+        {
+          "fmaConceptId": "FMA7482",
+          "nameEnglish": "musculoskeletal system"
+        }
+      ],
+      "selectedArchiveTree": "PART-OF",
+      "side": "left",
+      "sourceConceptId": "FMA52893",
+      "sourceElementFileId": "FJ3287",
+      "sourceNameEnglish": "left zygomatic bone",
+      "sourceRepresentationId": "BP9801"
+    },
+    {
+      "acquisitionStateAtFreeze": "not_yet_attempted",
+      "metadataIdentityBasis": "exact FMA/name/FJ row plus exact FMA/BP/name concept row; source left/right token, not FJ suffix",
+      "officialConceptRow": [
+        "FMA53649",
+        "BP9705",
+        "right maxilla"
+      ],
+      "officialElementRow": [
+        "FMA53649",
+        "right maxilla",
+        "FJ3375"
+      ],
+      "otherPartOfRowsForSameFJ": [
+        {
+          "fmaConceptId": "FMA20394",
+          "nameEnglish": "human body"
+        },
+        {
+          "fmaConceptId": "FMA23876",
+          "nameEnglish": "skeleton (in vivo)"
+        },
+        {
+          "fmaConceptId": "FMA23881",
+          "nameEnglish": "skeletal system"
+        },
+        {
+          "fmaConceptId": "FMA24728",
+          "nameEnglish": "face"
+        },
+        {
+          "fmaConceptId": "FMA46565",
+          "nameEnglish": "skull"
+        },
+        {
+          "fmaConceptId": "FMA53673",
+          "nameEnglish": "viscerocranium"
+        },
+        {
+          "fmaConceptId": "FMA7154",
+          "nameEnglish": "head"
+        },
+        {
+          "fmaConceptId": "FMA7482",
+          "nameEnglish": "musculoskeletal system"
+        }
+      ],
+      "selectedArchiveTree": "PART-OF",
+      "side": "right",
+      "sourceConceptId": "FMA53649",
+      "sourceElementFileId": "FJ3375",
+      "sourceNameEnglish": "right maxilla",
+      "sourceRepresentationId": "BP9705"
+    },
+    {
+      "acquisitionStateAtFreeze": "not_yet_attempted",
+      "metadataIdentityBasis": "exact FMA/name/FJ row plus exact FMA/BP/name concept row; source left/right token, not FJ suffix",
+      "officialConceptRow": [
+        "FMA53650",
+        "BP10118",
+        "left maxilla"
+      ],
+      "officialElementRow": [
+        "FMA53650",
+        "left maxilla",
+        "FJ3269"
+      ],
+      "otherPartOfRowsForSameFJ": [
+        {
+          "fmaConceptId": "FMA20394",
+          "nameEnglish": "human body"
+        },
+        {
+          "fmaConceptId": "FMA23876",
+          "nameEnglish": "skeleton (in vivo)"
+        },
+        {
+          "fmaConceptId": "FMA23881",
+          "nameEnglish": "skeletal system"
+        },
+        {
+          "fmaConceptId": "FMA24728",
+          "nameEnglish": "face"
+        },
+        {
+          "fmaConceptId": "FMA46565",
+          "nameEnglish": "skull"
+        },
+        {
+          "fmaConceptId": "FMA53673",
+          "nameEnglish": "viscerocranium"
+        },
+        {
+          "fmaConceptId": "FMA7154",
+          "nameEnglish": "head"
+        },
+        {
+          "fmaConceptId": "FMA7482",
+          "nameEnglish": "musculoskeletal system"
+        }
+      ],
+      "selectedArchiveTree": "PART-OF",
+      "side": "left",
+      "sourceConceptId": "FMA53650",
+      "sourceElementFileId": "FJ3269",
+      "sourceNameEnglish": "left maxilla",
+      "sourceRepresentationId": "BP10118"
+    },
+    {
+      "acquisitionStateAtFreeze": "not_yet_attempted",
+      "metadataIdentityBasis": "exact FMA/name/FJ row plus exact FMA/BP/name concept row; source left/right token, not FJ suffix",
+      "officialConceptRow": [
+        "FMA53647",
+        "BP10124",
+        "right nasal bone"
+      ],
+      "officialElementRow": [
+        "FMA53647",
+        "right nasal bone",
+        "FJ3378"
+      ],
+      "otherPartOfRowsForSameFJ": [
+        {
+          "fmaConceptId": "FMA20394",
+          "nameEnglish": "human body"
+        },
+        {
+          "fmaConceptId": "FMA23876",
+          "nameEnglish": "skeleton (in vivo)"
+        },
+        {
+          "fmaConceptId": "FMA23881",
+          "nameEnglish": "skeletal system"
+        },
+        {
+          "fmaConceptId": "FMA24728",
+          "nameEnglish": "face"
+        },
+        {
+          "fmaConceptId": "FMA46472",
+          "nameEnglish": "nose"
+        },
+        {
+          "fmaConceptId": "FMA46565",
+          "nameEnglish": "skull"
+        },
+        {
+          "fmaConceptId": "FMA53673",
+          "nameEnglish": "viscerocranium"
+        },
+        {
+          "fmaConceptId": "FMA59515",
+          "nameEnglish": "external nose"
+        },
+        {
+          "fmaConceptId": "FMA59516",
+          "nameEnglish": "root of nose"
+        },
+        {
+          "fmaConceptId": "FMA59654",
+          "nameEnglish": "osseous skeleton of nose"
+        },
+        {
+          "fmaConceptId": "FMA59655",
+          "nameEnglish": "osseous skeleton of external nose"
+        },
+        {
+          "fmaConceptId": "FMA60116",
+          "nameEnglish": "nasal skeleton"
+        },
+        {
+          "fmaConceptId": "FMA7154",
+          "nameEnglish": "head"
+        },
+        {
+          "fmaConceptId": "FMA7482",
+          "nameEnglish": "musculoskeletal system"
+        }
+      ],
+      "selectedArchiveTree": "PART-OF",
+      "side": "right",
+      "sourceConceptId": "FMA53647",
+      "sourceElementFileId": "FJ3378",
+      "sourceNameEnglish": "right nasal bone",
+      "sourceRepresentationId": "BP10124"
+    },
+    {
+      "acquisitionStateAtFreeze": "not_yet_attempted",
+      "metadataIdentityBasis": "exact FMA/name/FJ row plus exact FMA/BP/name concept row; source left/right token, not FJ suffix",
+      "officialConceptRow": [
+        "FMA53648",
+        "BP9837",
+        "left nasal bone"
+      ],
+      "officialElementRow": [
+        "FMA53648",
+        "left nasal bone",
+        "FJ3272"
+      ],
+      "otherPartOfRowsForSameFJ": [
+        {
+          "fmaConceptId": "FMA20394",
+          "nameEnglish": "human body"
+        },
+        {
+          "fmaConceptId": "FMA23876",
+          "nameEnglish": "skeleton (in vivo)"
+        },
+        {
+          "fmaConceptId": "FMA23881",
+          "nameEnglish": "skeletal system"
+        },
+        {
+          "fmaConceptId": "FMA24728",
+          "nameEnglish": "face"
+        },
+        {
+          "fmaConceptId": "FMA46472",
+          "nameEnglish": "nose"
+        },
+        {
+          "fmaConceptId": "FMA46565",
+          "nameEnglish": "skull"
+        },
+        {
+          "fmaConceptId": "FMA53673",
+          "nameEnglish": "viscerocranium"
+        },
+        {
+          "fmaConceptId": "FMA59515",
+          "nameEnglish": "external nose"
+        },
+        {
+          "fmaConceptId": "FMA59516",
+          "nameEnglish": "root of nose"
+        },
+        {
+          "fmaConceptId": "FMA59654",
+          "nameEnglish": "osseous skeleton of nose"
+        },
+        {
+          "fmaConceptId": "FMA59655",
+          "nameEnglish": "osseous skeleton of external nose"
+        },
+        {
+          "fmaConceptId": "FMA60116",
+          "nameEnglish": "nasal skeleton"
+        },
+        {
+          "fmaConceptId": "FMA7154",
+          "nameEnglish": "head"
+        },
+        {
+          "fmaConceptId": "FMA7482",
+          "nameEnglish": "musculoskeletal system"
+        }
+      ],
+      "selectedArchiveTree": "PART-OF",
+      "side": "left",
+      "sourceConceptId": "FMA53648",
+      "sourceElementFileId": "FJ3272",
+      "sourceNameEnglish": "left nasal bone",
+      "sourceRepresentationId": "BP9837"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "task": "T74",
+  "checkedAt": "2026-09-28",
+  "accessMethod": "Opened official LSDB Archive pages in browser; downloaded only nine frozen OBJ members through the recorded HTTP 206 selected byte ranges.",
+  "sources": [
+    {
+      "role": "official download index",
+      "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html",
+      "edition": "BodyParts3D R4 archive listing; current page",
+      "locator": "table rows 7–9: PART-OF compound definition, IS-A 99% OBJ, PART-OF 99% OBJ",
+      "observed": "The listing distinguishes IS-A and PART-OF trees; PART-OF R4 99%-reduced OBJ is the 62 MB archive selected here.",
+      "doi": null
+    },
+    {
+      "role": "selected PART-OF polygon mesh archive description",
+      "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/data-8.html",
+      "edition": "BodyParts3D Release 4.0 PART-OF polygon mesh data; official page",
+      "locator": "Data name, DOI, description, data file, entry count",
+      "observed": "Names partof_BP3D_4.0_obj_99.zip, describes ELEMENT-specific OBJ mesh files, and reports 1,258 entries.",
+      "doi": "10.18908/lsdba.nbdc00837-008"
+    },
+    {
+      "role": "PART-OF compound-to-ELEMENT relation metadata",
+      "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/data-6.html",
+      "edition": "BodyParts3D PART-OF compound definition metadata; official page",
+      "locator": "Description and data-file rows",
+      "observed": "partof_element_parts.txt records which ELEMENT file IDs compose each COMPOUND concept; this is distinct from the polygon mesh archive.",
+      "doi": "10.18908/lsdba.nbdc00837-006"
+    },
+    {
+      "role": "R4 release note",
+      "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/release_4.0_e.html",
+      "edition": "Release 4.0, 2013-05-16; page also states 3D data update on 2013-06-19",
+      "locator": "File Names; Attentions in use; release history",
+      "observed": "R4 uses unique FJ file IDs linked to concepts by tables and warns that the data may contain errors as a canonical model.",
+      "doi": null
+    },
+    {
+      "role": "official current database license and attribution",
+      "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+      "edition": "License page last updated 2025-02-27",
+      "locator": "License to Use This Database",
+      "observed": "The database page specifies CC BY 4.0 and required attribution. The selected OBJ headers retain legacy CC BY-SA 2.1 Japan wording; the project therefore keeps file-level redistribution/public release held pending reconciliation.",
+      "doi": null
+    },
+    {
+      "role": "official metadata README",
+      "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/README_e.html",
+      "edition": "README current page dated 2025-02-27; R4 data update history 2013-06-19",
+      "locator": "Sections 2.3, 2.7, 2.9, 3, and 4",
+      "observed": "Separates IS-A from PART-OF metadata and OBJ archive, describes FMA/concept IDs and FJ ELEMENT file IDs, and documents the current license/update history.",
+      "doi": null
+    }
+  ],
+  "scopeBoundary": "Official metadata and rights statements are not human anatomy review, canonical learner binding, or proof that the bounded skull subset is complete.",
+  "rightsDecision": "held_pending_file_level_reconciliation_with_legacy_OBJ_headers"
+}
