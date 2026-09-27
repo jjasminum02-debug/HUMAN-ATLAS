@@ -1,0 +1,59 @@
+{
+  "revision": "HUMAN-ATLAS-T52-VERIFICATION-SUMMARY-v1",
+  "capturedAt": "2026-09-27T06:43:18.182346+00:00",
+  "taskStatus": "partial_pending_human_laterality_review",
+  "baseline": {
+    "head": "737fb79e673a944038e7a8e7e80633827b1056cd",
+    "branch": "main",
+    "preexistingPorcelainEntryCount": 190,
+    "openSimHead": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "openSimTrackedFileCount": 1037,
+    "openSimCleanAtStart": true
+  },
+  "source": {
+    "revision": "BodyParts3D Release 4.0",
+    "fullArchiveDownloaded": false,
+    "frozenFJCount": 85,
+    "headFJCount": 24,
+    "neckFJCount": 61,
+    "membershipSha256": "b9b16ff6c8e724b7040a0dc074f98187a310b55c2b519cd460aaf75605e18da1",
+    "uncompressedSourceBytes": 34836124,
+    "rangeBytesForSelectedOBJ": 10199119,
+    "rangeBytesForZipDirectory": 235582,
+    "emptyOrInvalidMeshes": 0,
+    "duplicateFJIds": [],
+    "sourceNameConflicts": 0,
+    "sourceNameBoundsOppositionsHeld": 3,
+    "boundsDirectionInconclusive": 14,
+    "totalMedianCrossingAABBs": 16,
+    "canonicalLearnerBindings": 0,
+    "redistributionStatus": "held_until_current_database_terms_and_legacy_OBJ_header_scope_are_reconciled"
+  },
+  "checks": {
+    "selectedZipExtractor": "passed 4/4 tests",
+    "packageValidator": "pass",
+    "packageValidatorCheckCount": 1034,
+    "rebuildDeterminism": "passed 12/12 generated files unchanged",
+    "atlasWebTypecheck": "passed",
+    "atlasWebProductionBuild": "passed with existing >500 kB chunk warning",
+    "gitDiffCheck": "passed",
+    "browser": {
+      "status": "passed for requested render/layout/selection checks; task remains partial for human laterality review",
+      "evidence": "work/evidence/T52/browser-verification.json",
+      "consoleErrors": 0,
+      "consoleWarnings": 0
+    }
+  },
+  "preservation": {
+    "OpenSimUnchanged": true,
+    "canonicalCatalogAndNavigationChanged": false,
+    "userChangesRevertedOrDeleted": false,
+    "sourceAndDerivedMeshesCommitted": false,
+    "denominatorInvented": false
+  },
+  "unresolved": [
+    "FJ2742/FJ2754/FJ2780 need human anatomy/laterality adjudication.",
+    "Fourteen bounds rows are direction-inconclusive; two opposition cases also cross the median plane, sixteen crossing AABBs total.",
+    "Legacy OBJ header CC BY-SA 2.1 Japan and current database CC BY 4.0 scope reconciliation keeps redistribution held."
+  ]
+}

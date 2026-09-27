@@ -1,0 +1,1229 @@
+{
+  "revision": "BodyParts3D-R4-T52-FROZEN-ATOMIC-SOURCE-SET-v1",
+  "status": "frozen_before_mesh_acquisition",
+  "frozenAt": "2026-09-27T05:56:34.897447+00:00",
+  "baselineHead": "737fb79e673a944038e7a8e7e80633827b1056cd",
+  "source": {
+    "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+    "release": "4.0",
+    "sourceIndexManifest": "atlas-data/manifests/bodyparts3d-r4-source-manifest-t51.json",
+    "sourceIndexManifestSha256": "fd804d31dfcfa121b69458affbd3cfb126dd97fafdfebf21cd00458a86176aea",
+    "officialArchiveUrls": {
+      "IS-A": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+      "PART-OF": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/partof_BP3D_4.0_obj_99.zip"
+    },
+    "officialLicenseUrl": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+    "archiveAccess": "HTTP byte ranges only; do not fetch complete archives"
+  },
+  "scope": {
+    "regions": [
+      "head",
+      "neck"
+    ],
+    "menuSubcategoriesCreated": false,
+    "sourceAtomicUniqueFJCount": 85,
+    "headCandidateFJCount": 24,
+    "neckCandidateFJCount": 61,
+    "crossRegionDuplicateFJIds": [],
+    "stableLearnerMappingsOnlyFromExistingExplicitCrosswalk": true,
+    "unmappedSourceStructuresRemainSourceOnly": true,
+    "wholeBodyDenominator": null
+  },
+  "frozenMembershipSha256": "b9b16ff6c8e724b7040a0dc074f98187a310b55c2b519cd460aaf75605e18da1",
+  "frozenMembershipCanonicalRows": "FJ1294|head|IS-A,PART-OF\nFJ1295|head|IS-A,PART-OF\nFJ1304|head|IS-A,PART-OF\nFJ1306|head|IS-A,PART-OF\nFJ1308|head|IS-A,PART-OF\nFJ1322|head|IS-A,PART-OF\nFJ1323|head|IS-A,PART-OF\nFJ1345|head|IS-A,PART-OF\nFJ1346|head|IS-A,PART-OF\nFJ1355|head|IS-A,PART-OF\nFJ1357|head|IS-A,PART-OF\nFJ1359|head|IS-A,PART-OF\nFJ1373|head|IS-A,PART-OF\nFJ1374|head|IS-A,PART-OF\nFJ1555|neck|IS-A\nFJ1556|neck|IS-A\nFJ1558|neck|IS-A\nFJ1559|neck|IS-A\nFJ1560|neck|IS-A\nFJ1562|neck|IS-A\nFJ1565|neck|IS-A\nFJ1570|neck|IS-A\nFJ1571|neck|IS-A\nFJ1572|neck|IS-A\nFJ1573|neck|IS-A\nFJ1574|neck|IS-A\nFJ1575|neck|IS-A\nFJ1576|neck|IS-A\nFJ1577|neck|IS-A\nFJ1578|neck|IS-A\nFJ1579|neck|IS-A\nFJ1580|neck|IS-A\nFJ1583|neck|IS-A\nFJ1586|neck|IS-A\nFJ1587|neck|IS-A\nFJ1592|neck|IS-A\nFJ1593|neck|IS-A\nFJ1594|neck|IS-A\nFJ1595|neck|IS-A\nFJ1596|neck|IS-A\nFJ1597|neck|IS-A\nFJ1598|neck|IS-A\nFJ1599|neck|IS-A\nFJ2738|head|IS-A\nFJ2739|head|IS-A\nFJ2740|neck|IS-A\nFJ2741|head|IS-A,PART-OF\nFJ2742|neck|IS-A\nFJ2743|neck|IS-A\nFJ2745|neck|IS-A\nFJ2746|neck|IS-A\nFJ2747|neck|IS-A\nFJ2748|head|IS-A,PART-OF\nFJ2750|head|IS-A\nFJ2751|head|IS-A\nFJ2752|neck|IS-A\nFJ2753|head|IS-A,PART-OF\nFJ2754|neck|IS-A\nFJ2755|neck|IS-A\nFJ2757|neck|IS-A\nFJ2758|neck|IS-A\nFJ2759|neck|IS-A\nFJ2760|head|IS-A,PART-OF\nFJ2762|head|IS-A,PART-OF\nFJ2778|neck|IS-A\nFJ2780|neck|IS-A\nFJ2782|neck|IS-A\nFJ2784|neck|IS-A\nFJ2785|neck|IS-A\nFJ2788|neck|IS-A\nFJ2796|neck|IS-A\nFJ2798|neck|IS-A\nFJ2800|neck|IS-A\nFJ2802|neck|IS-A\nFJ2803|neck|IS-A\nFJ2806|neck|IS-A\nFJ2809|neck|IS-A\nFJ3161|neck|IS-A,PART-OF\nFJ3164|neck|IS-A,PART-OF\nFJ3167|neck|IS-A,PART-OF\nFJ3170|neck|IS-A,PART-OF\nFJ3172|neck|IS-A,PART-OF\nFJ3176|neck|IS-A,PART-OF\nFJ3177|neck|IS-A,PART-OF\nFJ3380|head|IS-A,PART-OF\n",
+  "atomicSourceFiles": [
+    {
+      "sourceElementFileId": "FJ1294",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 18,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1295",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 18,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1304",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 18,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1306",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 19,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1308",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 18,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1322",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 18,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1323",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 18,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1345",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 18,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1346",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 18,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1355",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 18,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1357",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 19,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1359",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 18,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1373",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 18,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1374",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 18,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1555",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1556",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1558",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1559",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1560",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1562",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1565",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1570",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1571",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1572",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1573",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1574",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1575",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1576",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1577",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1578",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1579",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1580",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1583",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1586",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1587",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1592",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1593",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1594",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1595",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1596",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1597",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1598",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ1599",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2738",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2739",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2740",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2741",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 19,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2742",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2743",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2745",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2746",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2747",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2748",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 19,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2750",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2751",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2752",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2753",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 19,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2754",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2755",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2757",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2758",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2759",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2760",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 19,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2762",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 20,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2778",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2780",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2782",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2784",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2785",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2788",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2796",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2798",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2800",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2802",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2803",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2806",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 13,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ2809",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A"
+      ],
+      "sourceContextRowCount": 12,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ3161",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 25,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ3164",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 25,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ3167",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 25,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ3170",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 25,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ3172",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 25,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ3176",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 25,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ3177",
+      "regionCandidates": [
+        "neck"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 25,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    },
+    {
+      "sourceElementFileId": "FJ3380",
+      "regionCandidates": [
+        "head"
+      ],
+      "expectedArchiveTrees": [
+        "IS-A",
+        "PART-OF"
+      ],
+      "sourceContextRowCount": 21,
+      "existingHACrosswalk": null,
+      "preferredArchiveTree": "IS-A"
+    }
+  ],
+  "internalBatches": [
+    {
+      "batchId": "T52-B01",
+      "sourceElementFileIds": [
+        "FJ1294",
+        "FJ1295",
+        "FJ1304",
+        "FJ1306",
+        "FJ1308",
+        "FJ1322",
+        "FJ1323",
+        "FJ1345",
+        "FJ1346",
+        "FJ1355"
+      ],
+      "count": 10
+    },
+    {
+      "batchId": "T52-B02",
+      "sourceElementFileIds": [
+        "FJ1357",
+        "FJ1359",
+        "FJ1373",
+        "FJ1374",
+        "FJ1555",
+        "FJ1556",
+        "FJ1558",
+        "FJ1559",
+        "FJ1560",
+        "FJ1562"
+      ],
+      "count": 10
+    },
+    {
+      "batchId": "T52-B03",
+      "sourceElementFileIds": [
+        "FJ1565",
+        "FJ1570",
+        "FJ1571",
+        "FJ1572",
+        "FJ1573",
+        "FJ1574",
+        "FJ1575",
+        "FJ1576",
+        "FJ1577",
+        "FJ1578"
+      ],
+      "count": 10
+    },
+    {
+      "batchId": "T52-B04",
+      "sourceElementFileIds": [
+        "FJ1579",
+        "FJ1580",
+        "FJ1583",
+        "FJ1586",
+        "FJ1587",
+        "FJ1592",
+        "FJ1593",
+        "FJ1594",
+        "FJ1595",
+        "FJ1596"
+      ],
+      "count": 10
+    },
+    {
+      "batchId": "T52-B05",
+      "sourceElementFileIds": [
+        "FJ1597",
+        "FJ1598",
+        "FJ1599",
+        "FJ2738",
+        "FJ2739",
+        "FJ2740",
+        "FJ2741",
+        "FJ2742",
+        "FJ2743",
+        "FJ2745"
+      ],
+      "count": 10
+    },
+    {
+      "batchId": "T52-B06",
+      "sourceElementFileIds": [
+        "FJ2746",
+        "FJ2747",
+        "FJ2748",
+        "FJ2750",
+        "FJ2751",
+        "FJ2752",
+        "FJ2753",
+        "FJ2754",
+        "FJ2755",
+        "FJ2757"
+      ],
+      "count": 10
+    },
+    {
+      "batchId": "T52-B07",
+      "sourceElementFileIds": [
+        "FJ2758",
+        "FJ2759",
+        "FJ2760",
+        "FJ2762",
+        "FJ2778",
+        "FJ2780",
+        "FJ2782",
+        "FJ2784",
+        "FJ2785",
+        "FJ2788"
+      ],
+      "count": 10
+    },
+    {
+      "batchId": "T52-B08",
+      "sourceElementFileIds": [
+        "FJ2796",
+        "FJ2798",
+        "FJ2800",
+        "FJ2802",
+        "FJ2803",
+        "FJ2806",
+        "FJ2809",
+        "FJ3161",
+        "FJ3164",
+        "FJ3167"
+      ],
+      "count": 10
+    },
+    {
+      "batchId": "T52-B09",
+      "sourceElementFileIds": [
+        "FJ3170",
+        "FJ3172",
+        "FJ3176",
+        "FJ3177",
+        "FJ3380"
+      ],
+      "count": 5
+    }
+  ],
+  "regionInputSha256": {
+    "atlas-data/manifests/bodyparts3d-r4-regions-t51/head.json": "ddc2a09941e5e5f041a14e8ba3b6e15daa911b96ed9a6cb58f5d3a6df69e29f3",
+    "atlas-data/manifests/bodyparts3d-r4-regions-t51/neck.json": "3aee3b13f7abf1cf70bcca28f632b1eff609d06281501f584234053c5f35c8db"
+  },
+  "note": "T51 source-root membership is acquisition routing, not canonical anatomy membership. The frozen list is the exact T52 acquisition/work set. Contexts do not create additional mesh assets."
+}

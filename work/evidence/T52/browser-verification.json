@@ -1,0 +1,128 @@
+{
+  "revision": "HUMAN-ATLAS-T52-BROWSER-QA-v1",
+  "capturedAt": "2026-09-27T06:31:37.222394+00:00",
+  "browser": "Codex In-app Browser / actual WebGL browser tab",
+  "url": "http://127.0.0.1:4175/work/evidence/T52/private-preview.html",
+  "purpose": "private source-only QA preview; not learner product UI",
+  "viewports": [
+    {
+      "requested": [
+        1440,
+        900
+      ],
+      "observed": [
+        1440,
+        900
+      ],
+      "canvasCount": 1,
+      "canvasCss": [
+        1102,
+        816
+      ],
+      "panelCss": [
+        1104,
+        818
+      ],
+      "renderedViews": [
+        "front",
+        "back",
+        "side"
+      ],
+      "visualCheck": "all three complete source bounds visible in actual screenshot captures",
+      "horizontalOverflow": false,
+      "bodyScroll": [
+        1440,
+        900
+      ]
+    },
+    {
+      "requested": [
+        1024,
+        768
+      ],
+      "observed": [
+        1024,
+        768
+      ],
+      "canvasCount": 1,
+      "canvasCss": [
+        686,
+        684
+      ],
+      "panelCss": [
+        688,
+        686
+      ],
+      "renderedViews": [
+        "side"
+      ],
+      "visualCheck": "head/neck scene visible; selection/filter and one-column side panel fit",
+      "horizontalOverflow": false,
+      "bodyScroll": [
+        1024,
+        768
+      ]
+    },
+    {
+      "requested": [
+        390,
+        844
+      ],
+      "observed": [
+        390,
+        844
+      ],
+      "canvasCount": 1,
+      "canvasCss": [
+        364,
+        523
+      ],
+      "panelCss": [
+        366,
+        523
+      ],
+      "renderedViews": [
+        "side",
+        "back"
+      ],
+      "visualCheck": "mobile canvas precedes flat source asset list; page scrolls vertically without horizontal overflow",
+      "horizontalOverflow": false,
+      "bodyScroll": [
+        390,
+        998
+      ]
+    }
+  ],
+  "scene": {
+    "sourceMeshCount": 85,
+    "headCount": 24,
+    "neckCount": 61,
+    "canvasCount": 1,
+    "sceneRootContract": "one AnatomySceneRoot added to one Three.js Scene in private preview implementation",
+    "flatSourceListNoSubcategoryMenu": true
+  },
+  "selection": {
+    "sourceElementFileId": "FJ2754",
+    "stableMeshAssetId": "HA-MESH-BP3D4-FJ2754",
+    "ariaSelectedMatchesSelectionText": true,
+    "warning": "좌우 대조 필요",
+    "canonicalLearnerId": "unbound"
+  },
+  "keyboard": {
+    "shortcut": "3",
+    "result": "side view pressed at 1440px",
+    "mobileShortcut": "2",
+    "resultMobile": "back view pressed at 390px"
+  },
+  "console": {
+    "errors": 0,
+    "warnings": 0,
+    "capturedEntries": []
+  },
+  "screenshotsSavedAsFiles": false,
+  "caveats": [
+    "Browser preview is internal QA, not the learner application.",
+    "Source names/declared laterality remain unreviewed against anatomy in three geometry/name opposition cases.",
+    "Fourteen bounds are direction-inconclusive; two opposition cases also cross the median plane, sixteen AABBs in total."
+  ]
+}
