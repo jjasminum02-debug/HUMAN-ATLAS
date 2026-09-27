@@ -1,0 +1,59 @@
+{
+  "revision": "T24-2026-09-27-v1",
+  "script": "atlas-data/motion/scripts/build_t24_ankle_clip.py",
+  "scriptVersion": "t24-stdlib-glb-v1",
+  "scriptSha256": "01edb4c3e9c85ecd38f20e9f90cc6291e313743e83ebdddd97e0e7a4fab538f4",
+  "sourceStaticGlb": "atlas-data/assets/derived-glb/opensim-gait2392-t44-right-ankle/right-ankle-rest.glb",
+  "sourceStaticSha256": "a33f043be46c7b628bc649777e190c9e7d7cba345f07795e080820545261bed0",
+  "jointBinding": "atlas-data/assets/derived-glb/opensim-gait2392-t44-right-ankle/joint-binding-t44.json",
+  "jointBindingSha256": "6625cd421275c421c21a8de747f7e8ee0976f794d244b33ede57d706016a4315",
+  "sourceModel": "OpenSim_Models/Models/Gait2392_Simbody/gait2392_thelen2003muscle.osim",
+  "sourceModelSha256": "3af1ca20aa87bc88b0b8cd54f2504331afa2aa03537cc868f1175fa1f50f3c0f",
+  "outputGlb": "atlas-data/assets/motion/t24-right-tibialis-anterior/ankle-dorsiflexion.glb",
+  "outputSha256": "956bb0e3664f325157e116a539aa9d8ea6db7c812dcc963d34d73fef1473596a",
+  "clipId": "HA-CLIP-T24-R-TIBANT-ANKLE-DF-V1",
+  "timesSeconds": [
+    0.0,
+    1.0,
+    2.0
+  ],
+  "anglesRadians": [
+    0.0,
+    0.06,
+    0.12
+  ],
+  "jointPivotSceneM": [
+    -0.0,
+    -0.43,
+    0.0
+  ],
+  "jointAxisScene": [
+    -0.9791263154449342,
+    -0.17402244919041732,
+    -0.10501354951145872
+  ],
+  "endpointSceneM": [
+    [
+      0.02258,
+      -0.45415,
+      0.06783
+    ],
+    [
+      0.021723581879856846,
+      -0.45025843447482805,
+      0.06936619942694175
+    ],
+    [
+      0.02087717979814823,
+      -0.4462782849150748,
+      0.07066221482446923
+    ]
+  ],
+  "interpretation": "Illustrative positive ankle_r coordinate from the T44 OpenSim model; not a normal angle, force, isolated-muscle movement, surface attachment or human review.",
+  "annotationPolicy": {
+    "verifiedBoneLocalBindings": [],
+    "hideAllSpatialAnnotationsDuringMotion": true
+  },
+  "sourceLicenseId": "LIC-OPENSIM-GAIT2392-CC-BY-3.0",
+  "sourceGeometryReuseNote": "T44 model-derived GLB. Verify per-file VTP redistribution rights before public deployment."
+}

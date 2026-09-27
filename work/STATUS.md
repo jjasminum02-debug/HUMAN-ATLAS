@@ -2,17 +2,17 @@
 
 - LAST_UPDATED: 2026-09-27
 - PLAN_REVISION: R14-2026-09-27 — 구조·기능 우선; 실행 순서는 work/task-registry-r14.json
-- CURRENT_TASK: T44 — passed_with_gaps; OpenSim Gait2392의 오른쪽 발목 정적 입력 scene, source→scene 좌표·관절 binding, canonical joint/action migration과 기준 자세 QA 완료. 실제 clip/UI 연결·사람 해부학 검토는 미완.
-- NEXT_TASK: T24 / Sol High — R14 registry의 현재 다음 task. T44 정적 입력을 사용한 실제 배측굴곡 clip 제작은 시작하지 않음.
-- LAST_REPORT: work/reports/T44.md
+- CURRENT_TASK: T24 — blocked; T44 기반 오른쪽 발목 clip·설명용 경로의 기술 후보는 생성·검증했으나 사용자 요구인 원래 앞정강근 그래픽의 CTA 기반 연속 수축 시범은 미달. 초기 별도 모형 메인 전환은 되돌림.
+- NEXT_TASK: T24 해결 작업 / Sol High. R14 후속 T25 / Luna Max는 T24 실제 합격 전 실행 금지.
+- LAST_REPORT: work/reports/T24.md
 - CATALOG: partial85 (individual48/group16/part21); 전신 분모 미동결
 - LEARNING_OVERLAY: entries81; current canonical overlap 79/85, six group IDs lack overlay entries, two lookup-only IDs are extra; T11 B01-B09 field work covered the current partial catalog with gaps; humanReviewed=false. T42 bone-name overlay adds names/search for the 9 currently selectable bones; actual Hanja not collected; humanAnatomyReview=not_reviewed.
 - AI_EVIDENCE_OVERLAY: T16 schema/types/validator/learner adapter + T18 origin/insertion rows 16 + T21 action/context rows 35; 14 legacy rows remain test-only preview; canonical human review unchanged; T21 claims remain source-derived and geometry absent
 - GEOMETRY: 기존 오른쪽 종아리 6근육, 근육메시 7+뼈 13 및 9개 needs_review bone mapping 유지. T44는 OpenSim Gait2392의 별도 오른쪽 tibia/talus/foot/toes 정적 GLB 1개를 생성했고 BodyParts3D 장면과 좌표를 섞지 않음. canonical spatialAnnotation 0; T13c-B01/B02/B03 context_only geometry:null draft 3건 보존; T05 표면 후보 0/41, text_only 28/41, matching target mesh missing 13/41, human_review_pending 41/41
-- FUNCTION_AND_ASSESSMENT: T21 pilot 6개 text action card와 T22 player adapter 유지. T44 canonical 오른쪽 발목 joint 1건과 전경골근 배측굴곡 needs_review action 1건, 정적 joint-binding manifest 1건 생성. 기존 양측 T21 action은 unmapped 유지. MotionDefinition 0, MotionAsset/clip 0; 개별 수축 형태·사람 검토는 미확인/대기.
-- TECHNICAL_GATE: T44 생성기 재실행 hash 일치, 정적 GLB/관절/경로/잔차 검증, canonical schema+17 fixtures, typecheck/build 및 분리 브라우저 기준 자세 렌더 통과. 기존 T15g inventory generated artifact/input drift는 T43에서 기록한 gap으로 유지. Build의 기존 App >500 kB 경고 있음.
+- FUNCTION_AND_ASSESSMENT: 기존 T21 pilot 6개 text action card와 T22/T23 player 유지. T44 joint/action과 별도로 T24 오른쪽 앞정강근 배측굴곡 action 1건, MotionDefinition 1건, MotionAsset/clip 기술 후보 1건(`candidate`) 등록. OpenSim 경로 길이 감소는 확인했지만 기존 BodyParts3D 근육 mesh 수축 형태나 메인 CTA 시범은 없음. 기존 양측 T21 action unmapped 및 사람 검토 대기 유지.
+- TECHNICAL_GATE: T24 GLB source/output 재현 hash, 3자세 관절·endpoint·새 교차 0, 실제 로더/플레이어, schema/참조/source/타입검사/빌드, 격리 브라우저 렌더/재생 통과. 메인 학습 화면은 기존 그래픽으로 복원·콘솔 error/warn 0 확인. 사용자 요구의 메인 그래픽 연속 수축 시범은 blocked. 기존 T15g drift와 App >500 kB 경고 유지.
 - ANATOMY_GATE: needs_human_review; 전신 구조 완성 아님
-- DEV_URL: none (T44 제품 UI 미변경; 검증용 임시 localhost preview만 사용)
+- DEV_URL: none (T24 제품 UI 전환을 되돌렸고 임시 localhost QA만 사용)
 
 | task | 상태 | 산출물/보고서 | 차단 조건 |
 |---|---|---|---|
@@ -66,6 +66,7 @@
 | T42 | passed_with_gaps | `atlas-data/terminology/bone-name-overlay-t42.json`; 학습 카드/search 정리; `work/evidence/T42/`; `work/reports/T42.md` | 9 selectable bones와 6 calf learner paths 검증. KMLE 판본 미노출, 사람 해부학 검토 미수행, Korean landmark data 미확보라 해당 영문 표지는 UI에서 보류; 실제 clip 0은 요구대로 CTA disabled |
 | T43 | passed_with_gaps | `work/review-queue/region-acquisition-matrix-t43.json/.md`; gaps/T32 input; `work/evidence/T43/`; `work/reports/T43.md` | 12부위 metadata 행과 공식 index/model 접근 경로 완료; T15g generator `--check`는 시작 입력과 기존 snapshot 간 drift로 실패. 분모·자산·사람 검토는 미완 |
 | T44 | passed_with_gaps | `atlas-data/assets/derived-glb/opensim-gait2392-t44-right-ankle/`; canonical joint/action migration; `work/evidence/T44/`; `work/reports/T44.md` | 별도 OpenSim 정적 입력·원본 대응·렌더 검증 완료. 실제 clip/제품 UI 전환·사람 해부학 검토는 T24/T25 이후; BodyParts3D 교차 정합·FJ3385 ID는 보류 |
+| T24 | blocked | `atlas-data/assets/motion/t24-right-tibialis-anterior/`; motion bundle/scene/scripts; `work/evidence/T24/`; `work/reports/T24.md` | 기술 clip은 있으나 원래 BodyParts3D 앞정강근 그래픽의 검증된 수축 변형·CTA 연속 재생 없음. 모델 간 정합 또는 coherent muscle surface input 필요; T25 gate 닫힘 |
 
 ## 실제 현재 상태와 원본 보존
 
@@ -391,3 +392,11 @@ T44는 `OpenSim_Models` Gait2392 `.osim`의 오른쪽 `ankle_r`·`subtalar_r`·`
 Canonical 오른쪽 발목 joint와 전경골근 오른쪽 배측굴곡 action을 `needs_review`로 migration했다. T21의 양측 등쪽굽힘·안쪽번짐 레코드는 그대로 unmapped이며, FJ3385 ID는 추정하지 않았다. 새 경로선은 원본 모델의 설명용 경로이지 부착 표면이 아니다. 제품 UI/clip은 변경하지 않았다. 별도 OpenSim 기준 자세 preview는 실제 브라우저에서 로드·시각 확인했고 console error/warning이 없었다. 입력 검증·catalog schema/17 fixtures·typecheck/build가 통과했다. 모델 수준 CC BY 3.0 귀속은 남겼으나 VTP 개별 권리 표기가 없어 공개 배포 전 파일별 권리 확인이 필요하다.
 
 현재 다음 task는 **T24 / Sol High / planned_not_started**다. T44 정적 입력을 사용해 실제 교육용 clip을 만들고 세 자세/재생·정지·복원/경로 결속을 검증하는 것은 T24 범위다. T44의 결과만으로 motion-ready나 해부학 승인으로 올리지 않는다. 붙여 넣을 T24 프롬프트는 `work/reports/T44.md` 마지막 섹션에 있다.
+
+## T24 결과 및 현재 인계 — 2026-09-27
+
+T44 정적 GLB에서 발목 node 회전과 전경골근 설명용 경로 morph를 가진 2초 clip을 생성했다. 파생 GLB와 stable ID/hash/license를 motion bundle에 `candidate`로 등록했고, 동일 source 내부의 0/1/2초 발 앞쪽 상승·경로 끝점 일치·경로 길이 감소·신규 주요 관통 0건을 검증했다. 격리된 개발 브라우저에서 실제 로드·렌더·재생·정지·복원을 확인했다.
+
+초기 메인 페이지 실험은 선택만으로 기존 BodyParts3D 근육 그래픽을 별도 검은 OpenSim 발목 장면으로 바꿨다. 사용자가 원한 것은 원래 근육 그래픽에서 **움직임으로 이해하기 CTA를 눌렀을 때 앞정강근의 수축과 몸 움직임을 연속 표시**하는 것이다. 초기 실험은 해당 요구에 맞지 않아 전부 되돌렸다. T44에는 검증된 근육 표면 변형이나 BodyParts3D 간 registration이 없으므로 원래 mesh 수축처럼 위장하지 않는다. 메인 페이지는 기존 그래픽과 비활성 CTA로 유지하고 T24를 **blocked**로 기록한다. 상세 gap·재현·검증·보존 대조는 `work/reports/T24.md`, `work/evidence/T24/`에 있다.
+
+R14 registry의 형식상 후속은 T25 / Luna Max지만 `previous_actual_acceptance`가 충족되지 않아 실행할 수 없다. T24 해결 작업 / Sol High가 먼저 필요하다. 다음 프롬프트는 T24 보고서 끝에 남겼으며 자동 실행하지 않는다.

@@ -16,7 +16,8 @@ const pilotCalfIds = [
 ];
 
 test("the six pilot calf action cards have field-linked citations and no authoring status", () => {
-  assert.equal(bundle.muscleActions.length, 6);
+  assert.equal(bundle.muscleActions.length, 7);
+  assert.equal(bundle.muscleActions.filter((row) => row.id.startsWith("T21-ACTION-")).length, 6);
   for (const id of pilotCalfIds) {
     const action = bundle.muscleActions.find((row) => row.subjectIds.includes(id));
     const card = projectLearnerActionCard(action, fields.items);
@@ -35,13 +36,12 @@ test("unassigned concepts do not receive inferred action cards", () => {
   assert.equal(projectLearnerActionCard(undefined, fields.items), null);
 });
 
-test("learner motion options come only from authored action rows and report no absent production clip", () => {
+test("learner motion options retain six authored rows and keep the T24 candidate unplayable", () => {
   for (const id of pilotCalfIds) {
     const options = projectLearnerMotionActionOptions(id, bundle, fields.items);
-    assert.equal(options.length, 1);
-    assert.ok(options[0].label.length > 0);
-    assert.equal(options[0].candidate, null);
-    assert.deepEqual(options[0].subjectIds, [id]);
+    assert.equal(options.length, id === "HA-M-000003" ? 2 : 1);
+    assert.ok(options.every((option) => option.label.length > 0 && option.candidate === null));
+    assert.ok(options.every((option) => JSON.stringify(option.subjectIds) === JSON.stringify([id])));
   }
   assert.deepEqual(projectLearnerMotionActionOptions("HA-M-NOT-ASSIGNED", bundle, fields.items), []);
 });

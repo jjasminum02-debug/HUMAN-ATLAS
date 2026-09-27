@@ -1,0 +1,7 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>앞정강근 오른쪽 발목 등쪽굽힘 시범</title>
+<style>body{margin:0;background:#101b29;color:#eff7f8;font-family:system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:16px}h1{font-size:1.4rem}p{line-height:1.5}canvas{display:block;width:100%;height:clamp(420px,65vh,700px);background:#19293a;border-radius:12px}section{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}button{font:inherit;background:#2b617e;color:white;border:1px solid #87bad2;border-radius:8px;padding:8px 14px;cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #ffd65e}input{flex:1;min-width:130px}#status{min-height:1.5em}</style>
+</head><body><main><h1>앞정강근 · 오른쪽 발목 등쪽굽힘</h1><p>발과 발목이 위쪽으로 움직이는 방향을 보여 줍니다. 앞정강근은 이 움직임에 관여합니다. 움직임 시범은 별도 모형으로 전환됩니다.</p>
+<canvas id="scene" aria-label="오른쪽 발목 뼈 움직임 시범"></canvas><section><button id="play" type="button">재생</button><button id="pause" type="button">정지</button><button id="reset" type="button">처음</button><label for="time">자세</label><input id="time" type="range" min="0" max="2" step="0.01" value="0"><output id="readout" for="time">0.00초</output></section><p id="status" role="status">불러오는 중</p></main>
+<script type="module" src="/src/t24MotionPreview.ts"></script></body></html>

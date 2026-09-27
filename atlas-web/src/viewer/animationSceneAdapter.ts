@@ -11,8 +11,12 @@ import {
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import type { MotionAsset } from "../domain/motionLearning.ts";
 
-/** The only glTF frame currently compatible with the static calf pilot. */
+/** Explicitly retained, source-specific motion frames. No cross-frame alignment is implied. */
 export const SUPPORTED_MOTION_FRAME = "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR";
+export const SUPPORTED_MOTION_FRAMES = new Set([
+  SUPPORTED_MOTION_FRAME,
+  "HA_OSIM_GAIT2392_TIBIA_LOCAL_XLEFT_YHEAD_ZANTERIOR_M",
+]);
 
 export interface AnimationSceneLoadOptions {
   /** Retained for caller compatibility; external GLB dependencies are never resolved. */
@@ -53,7 +57,7 @@ function assertAssetContract(asset: MotionAsset): void {
   if (!asset.id || !asset.uri || !asset.revision || !/^[a-f0-9]{64}$/.test(asset.sha256)) {
     throw new Error("motion asset 식별자, revision, URI 또는 SHA-256이 유효하지 않습니다.");
   }
-  if (asset.staticBinding.frameId !== SUPPORTED_MOTION_FRAME) {
+  if (!SUPPORTED_MOTION_FRAMES.has(asset.staticBinding.frameId)) {
     throw new Error(`지원하지 않는 motion frame입니다: ${asset.staticBinding.frameId}`);
   }
   // glTF 2.0 linear values are meters. Do not silently scale millimeter assets here.

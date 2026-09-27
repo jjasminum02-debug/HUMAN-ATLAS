@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "revision": "T44-right-ankle-input-v1",
+  "revision": "T24-2026-09-27-motion-pose-v1",
   "entities": {
     "regions": [
       {
@@ -6986,6 +6986,45 @@
           "EV-T44-OSIM-ANKLE-R"
         ],
         "reviewState": "needs_review"
+      },
+      {
+        "id": "HA-T-T24-TALUS-KO",
+        "conceptId": "HA-S-TALUS",
+        "language": "ko",
+        "script": "Hang",
+        "text": "목말뼈",
+        "termRole": "preferred",
+        "edition": "KMLE talus terminology lookup / OpenSim talus_r model",
+        "evidenceIds": [
+          "EV-T24-KMLE-TALUS-TERMS"
+        ],
+        "reviewState": "needs_review"
+      },
+      {
+        "id": "HA-T-T24-TALUS-HANJA",
+        "conceptId": "HA-S-TALUS",
+        "language": "ko",
+        "script": "Hang",
+        "text": "거골",
+        "termRole": "synonym",
+        "edition": "KMLE talus terminology lookup / OpenSim talus_r model",
+        "evidenceIds": [
+          "EV-T24-KMLE-TALUS-TERMS"
+        ],
+        "reviewState": "needs_review"
+      },
+      {
+        "id": "HA-T-T24-TALUS-EN",
+        "conceptId": "HA-S-TALUS",
+        "language": "en",
+        "script": "Latn",
+        "text": "Talus",
+        "termRole": "synonym",
+        "edition": "KMLE talus terminology lookup / OpenSim talus_r model",
+        "evidenceIds": [
+          "EV-T44-OSIM-ANKLE-R"
+        ],
+        "reviewState": "needs_review"
       }
     ],
     "structures": [
@@ -7398,6 +7437,15 @@
         "kind": "joint",
         "termIds": [
           "HA-T-T44-R-ANKLE-EN"
+        ]
+      },
+      {
+        "id": "HA-S-TALUS",
+        "kind": "bone",
+        "termIds": [
+          "HA-T-T24-TALUS-KO",
+          "HA-T-T24-TALUS-HANJA",
+          "HA-T-T24-TALUS-EN"
         ]
       }
     ],
@@ -8510,6 +8558,29 @@
           "derivativesAllowed": true,
           "redistributionAllowed": true
         }
+      },
+      {
+        "id": "KMLE-TALUS-TERMINOLOGY-T24",
+        "title": "KMLE Korean medical terminology: talus",
+        "authors": [
+          "KMLE"
+        ],
+        "edition": "KMLE terminology lookup, talus entry",
+        "year": null,
+        "urlOrLocalRef": "https://m.kmle.co.kr/search.php?Page=1&Search=talus&SpecialSearch=DictKma",
+        "accessDate": "2026-09-27",
+        "license": {
+          "id": "LIC-KMLE-TERM-INTERNAL-UNRESOLVED",
+          "name": "Reuse terms unverified; internal terminology reference only",
+          "spdxId": null,
+          "allowedUses": [
+            "internal"
+          ],
+          "attributionRequired": true,
+          "attributionText": "KMLE talus terminology lookup, accessed 2026-09-27.",
+          "derivativesAllowed": false,
+          "redistributionAllowed": false
+        }
       }
     ],
     "evidence": [
@@ -9368,6 +9439,13 @@
         "locator": "Ankle > Foot dorsiflexion and inversion: test movement and primary muscle; T21-E-HA-M-000003-action-2 previously opened full text and linked to T21-C-HA-M-000003-action",
         "supportedClaimIds": [],
         "evidenceKind": "primary"
+      },
+      {
+        "id": "EV-T24-KMLE-TALUS-TERMS",
+        "sourceId": "KMLE-TALUS-TERMINOLOGY-T24",
+        "locator": "talus: 목말뼈, 거골; terminology only; no mapping to BodyParts3D FJ3385",
+        "supportedClaimIds": [],
+        "evidenceKind": "secondary"
       }
     ],
     "claims": [
@@ -10063,6 +10141,27 @@
           "EV-GRAY1918-FB-COURSE"
         ],
         "attribution": "source_summary",
+        "reviewState": "needs_review"
+      },
+      {
+        "id": "HA-C-T24-R-ANKLE-DEMO-POSE",
+        "subjectId": "HA-S-JOINT-R-ANKLE-TALOCRURAL",
+        "field": "motion_pose_range",
+        "value": {
+          "sourceCoordinate": "OpenSim Gait2392 ankle_angle_r",
+          "sourceRestRadians": 0,
+          "illustrativeSamplesRadians": [
+            0,
+            0.06,
+            0.12
+          ],
+          "durationSeconds": 2,
+          "meaning": "T24 author-selected positive direction demonstration within the source joint coordinate; not clinical normal range, measured force or observed human movement"
+        },
+        "evidenceIds": [
+          "EV-T44-OSIM-ANKLE-R"
+        ],
+        "attribution": "ai_interpretation",
         "reviewState": "needs_review"
       }
     ],

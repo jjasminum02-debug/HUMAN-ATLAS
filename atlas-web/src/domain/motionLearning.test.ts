@@ -39,15 +39,18 @@ const asset: MotionAsset = {
   technicalStatus: "binding_verified",
 };
 
-test("production bundle has six source-bound action texts and no joint or motion asset bindings", () => {
-  assert.equal(production.muscleActions.length, 6);
-  assert.equal(production.motionDefinitions.length, 0);
-  assert.equal(production.motionAssets.length, 0);
+test("production bundle retains six original texts and adds one right ankle source-bound clip", () => {
+  assert.equal(production.muscleActions.length, 7);
+  assert.equal(production.motionDefinitions.length, 1);
+  assert.equal(production.motionAssets.length, 1);
   const actions = production.muscleActions as MuscleAction[];
-  assert.deepEqual(actions.map((row) => row.subjectIds[0]), [
+  assert.deepEqual(actions.slice(0, 6).map((row) => row.subjectIds[0]), [
     "HA-M-000001", "HA-M-000002", "HA-M-000003", "HA-M-000004", "HA-M-000005", "HA-M-000006",
   ]);
-  assert.ok(actions.every((row) => row.jointBindingState === "unmapped" && row.targetJointIds.length === 0 && row.sourceRefs.length > 0));
+  assert.ok(actions.slice(0, 6).every((row) => row.jointBindingState === "unmapped" && row.targetJointIds.length === 0 && row.sourceRefs.length > 0));
+  assert.equal(actions[6].sideApplicability, "right");
+  assert.deepEqual(actions[6].targetJointIds, ["HA-S-JOINT-R-ANKLE-TALOCRURAL"]);
+  assert.equal((production.motionAssets[0] as MotionAsset).representationType, "bone_motion_with_illustrative_path");
 });
 
 test("text can be present while there is no compatible motion clip", () => {

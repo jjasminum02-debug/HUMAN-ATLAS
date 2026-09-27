@@ -57,6 +57,26 @@ test("single RAF loop updates speed without making a second chain and ignores la
   assert.equal(loop.isRunning, false);
 });
 
+test("repeating playback wraps continuously and reset restores the rest pose", () => {
+  const frames = new FakeFrames();
+  const disposed = { count: 0 };
+  const resource = syntheticResource(disposed);
+  const player = new AnimationPlaybackController(resource, "SyntheticMotion", { scheduler: frames, repeat: true });
+  player.play();
+  frames.frame(0);
+  frames.frame(1000);
+  assert.equal(player.isPlaying, true);
+  assert.equal(player.currentTime, 0);
+  frames.frame(1500);
+  assert.ok(Math.abs(player.currentTime - 0.5) < 1e-6);
+  assert.ok(Math.abs(resource.bone.position.y - 0.5) < 1e-6);
+  player.resetPose();
+  assert.equal(player.isPlaying, false);
+  assert.equal(player.currentTime, 0);
+  assert.ok(Math.abs(resource.bone.position.y) < 1e-6);
+  player.dispose();
+});
+
 function syntheticResource(disposeCalls: { count: number }) {
   const scene = new Object3D();
   const bone = new Object3D();

@@ -1,0 +1,24 @@
+{
+  "task": "T24",
+  "status": "blocked",
+  "date": "2026-09-27",
+  "sourceStaticSha256": "a33f043be46c7b628bc649777e190c9e7d7cba345f07795e080820545261bed0",
+  "clipSha256": "956bb0e3664f325157e116a539aa9d8ea6db7c812dcc963d34d73fef1473596a",
+  "commands": [
+    { "command": "python3 atlas-data/motion/scripts/build_t24_ankle_clip.py", "result": "pass_reproducible_hash" },
+    { "command": "python3 atlas-data/motion/scripts/register_t24_motion.py", "result": "pass_idempotent" },
+    { "command": "python3 atlas-data/motion/scripts/validate_t24_geometry.py", "result": "pass_three_poses_zero_new_intersections_endpoint_and_path_length" },
+    { "command": "python3 atlas-data/schemas/validate.py", "result": "pass_schema_and_17_fixtures" },
+    { "command": "python3 atlas-data/schemas/validate_motion_learning.py --check", "result": "pass_7_actions_1_definition_1_asset_zero_issues" },
+    { "command": "atlas-web: pnpm test:motion-learning", "result": "pass_7_node_tests_16_schema_fixtures" },
+    { "command": "atlas-web: pnpm test:motion-player", "result": "pass_21_tests" },
+    { "command": "atlas-web: pnpm test:animation-loader", "result": "pass_10_loader_tests_3_representation_fixtures_source_registry" },
+    { "command": "atlas-web: node --experimental-strip-types --test src/viewer/t24ProductionMotion.test.ts", "result": "pass_real_glb_three_poses_and_repeat" },
+    { "command": "atlas-web: pnpm build", "result": "pass_with_existing_large_chunk_warning" },
+    { "command": "git diff --check", "result": "pass" }
+  ],
+  "browser": "work/evidence/T24/browser-qa.md",
+  "geometry": "work/evidence/T24/geometry-qa.json",
+  "preservation": "work/evidence/T24/preservation-after.json",
+  "blockingAcceptance": "Original BodyParts3D muscle graphic lacks verified muscle deformation and cross-model registration; the rejected automatic separate-model UI was reverted."
+}

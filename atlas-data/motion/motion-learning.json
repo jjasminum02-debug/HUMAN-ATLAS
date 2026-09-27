@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "revision": "T21-2026-09-27-calf-actions-v1",
+  "revision": "T24-2026-09-27-right-ankle-demo-v1",
   "muscleActions": [
     {
       "id": "T21-ACTION-HA-M-000001",
@@ -543,8 +543,173 @@
           "fieldEvidenceId": "T21-FIELD-HA-M-000006-stabilization_note"
         }
       ]
+    },
+    {
+      "id": "T24-ACTION-HA-M-000003-R-ANKLE-DF",
+      "subjectIds": [
+        "HA-M-000003"
+      ],
+      "sideApplicability": "right",
+      "jointBindingState": "canonical_bound",
+      "jointBindingNote": null,
+      "targetJointIds": [
+        "HA-S-JOINT-R-ANKLE-TALOCRURAL"
+      ],
+      "actionLabel": "오른쪽 발목 등쪽굽힘",
+      "explanation": "앞정강근은 오른쪽 발목을 등쪽으로 굽히는 데 관여합니다. 이 시범은 발과 발목의 작용 방향을 보여 주며, 한 근육이 움직임 전체를 단독으로 만든다는 뜻은 아닙니다.",
+      "postureConditions": [
+        "문헌의 검사 예시: 반듯이 누워 뒤꿈치를 지지면에 댄 자세."
+      ],
+      "stabilizationConditions": [],
+      "stabilizationNote": "문헌의 자세 설정과 검사자 손/지지면은 검사 방법으로만 남겼습니다. 이를 이 근육이 고정하는 해부학적 구조나 일반 안정화 작용으로 바꾸지 않았습니다.",
+      "contextRoles": [
+        {
+          "contextId": "T21-CONTEXT-HA-M-000003-MANUAL-TEST",
+          "role": "unspecified",
+          "contractionRole": "unspecified",
+          "explanation": "이 문헌은 해당 근육을 발목 등쪽굽힘과 발 안쪽번짐 검사에서 주 검사 근육으로 지정합니다. 이는 검사 맥락의 지정이며, 일반 움직임에서 작용근·협력근 역할이나 기여 비중을 따로 분류하지 않습니다."
+        }
+      ],
+      "sourceRefs": [
+        {
+          "layer": "ai_field",
+          "field": "action",
+          "appliesTo": "action_explanation",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000003-action",
+          "valueHash": "41e329961eb4417a9bf9a6a93eb0e6a499225af24fa7a4345fc782029838d7cc",
+          "evidenceId": "T21-E-HA-M-000003-action-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000003-action"
+        },
+        {
+          "layer": "ai_field",
+          "field": "action",
+          "appliesTo": "action_explanation",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000003-action",
+          "valueHash": "41e329961eb4417a9bf9a6a93eb0e6a499225af24fa7a4345fc782029838d7cc",
+          "evidenceId": "T21-E-HA-M-000003-action-2",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000003-action"
+        },
+        {
+          "layer": "ai_field",
+          "field": "action_context",
+          "appliesTo": "posture_condition",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000003-action_context",
+          "valueHash": "626707a2003c72f4b77bada14ca980fd24a25fceb5f01369a47225734fdd3e75",
+          "evidenceId": "T21-E-HA-M-000003-action_context-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000003-action_context"
+        },
+        {
+          "layer": "ai_field",
+          "field": "context_role",
+          "appliesTo": "context_role",
+          "contextId": "T21-CONTEXT-HA-M-000003-MANUAL-TEST",
+          "claimId": "T21-C-HA-M-000003-context_role",
+          "valueHash": "45d6436738802296e3cdc6627a4bd61208ab03711c798a2b98bb9b9ae034eb07",
+          "evidenceId": "T21-E-HA-M-000003-context_role-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000003-context_role"
+        },
+        {
+          "layer": "ai_field",
+          "field": "stabilization_note",
+          "appliesTo": "stabilization_condition",
+          "contextId": null,
+          "claimId": "T21-C-HA-M-000003-stabilization_note",
+          "valueHash": "291f9c83cfb2e5bd64a491bdea4a221142f28411b3514c7f4a9d0839484a75a0",
+          "evidenceId": "T21-E-HA-M-000003-stabilization_note-1",
+          "fieldEvidenceId": "T21-FIELD-HA-M-000003-stabilization_note"
+        }
+      ],
+      "legacyJointActionId": "HA-JA-T44-R-TIBANT-ANKLE-DF"
     }
   ],
-  "motionDefinitions": [],
-  "motionAssets": []
+  "motionDefinitions": [
+    {
+      "id": "HA-MOTION-T24-R-TIBANT-ANKLE-DF",
+      "actionId": "T24-ACTION-HA-M-000003-R-ANKLE-DF",
+      "instanceId": "HA-I-R-HA-M-000003",
+      "side": "right",
+      "targetJointIds": [
+        "HA-S-JOINT-R-ANKLE-TALOCRURAL"
+      ],
+      "movingStructureIds": [
+        "HA-S-TALUS"
+      ],
+      "fixedStructureIds": [
+        "HA-S-TIBIA"
+      ],
+      "staticReference": {
+        "sceneId": "HA-SCENE-OSIM-GAIT2392-R-ANKLE-T44",
+        "sceneRevision": "T44-rest-v1",
+        "modelId": "HA-MODEL-OSIM-GAIT2392-R-ANKLE",
+        "sourceAssetSha256": "a33f043be46c7b628bc649777e190c9e7d7cba345f07795e080820545261bed0",
+        "frameId": "HA_OSIM_GAIT2392_TIBIA_LOCAL_XLEFT_YHEAD_ZANTERIOR_M",
+        "units": "m",
+        "poseId": "HA-POSE-OSIM-R-ANKLE-Q0"
+      },
+      "startPoseId": "HA-POSE-OSIM-R-ANKLE-Q0",
+      "endPoseId": "HA-POSE-OSIM-R-ANKLE-Q012",
+      "poseSourceRefs": [
+        {
+          "layer": "canonical_claim",
+          "field": "motion_pose_range",
+          "appliesTo": "motion_pose_range",
+          "contextId": null,
+          "claimId": "HA-C-T24-R-ANKLE-DEMO-POSE",
+          "valueHash": "1a76546ac848da018138a7d3f740d2f6b7319b6de5b5e1e0e6639a4f44bd517f",
+          "evidenceId": "EV-T44-OSIM-ANKLE-R",
+          "fieldEvidenceId": null
+        }
+      ]
+    }
+  ],
+  "motionAssets": [
+    {
+      "id": "HA-ASSET-T24-R-TIBANT-ANKLE-DF-V1",
+      "motionDefinitionId": "HA-MOTION-T24-R-TIBANT-ANKLE-DF",
+      "uri": "atlas-data/assets/motion/t24-right-tibialis-anterior/ankle-dorsiflexion.glb",
+      "revision": "T24-2026-09-27-v1",
+      "sha256": "956bb0e3664f325157e116a539aa9d8ea6db7c812dcc963d34d73fef1473596a",
+      "sourceId": "OPENSIM_GAIT2392_T44",
+      "licenseId": "LIC-OPENSIM-GAIT2392-CC-BY-3.0",
+      "representationType": "bone_motion_with_illustrative_path",
+      "staticBinding": {
+        "sceneId": "HA-SCENE-OSIM-GAIT2392-R-ANKLE-T44",
+        "sceneRevision": "T44-rest-v1",
+        "modelId": "HA-MODEL-OSIM-GAIT2392-R-ANKLE",
+        "sourceAssetSha256": "a33f043be46c7b628bc649777e190c9e7d7cba345f07795e080820545261bed0",
+        "frameId": "HA_OSIM_GAIT2392_TIBIA_LOCAL_XLEFT_YHEAD_ZANTERIOR_M",
+        "units": "m",
+        "side": "right",
+        "referencePoseId": "HA-POSE-OSIM-R-ANKLE-Q0"
+      },
+      "rig": {
+        "id": "HA-RIG-T24-ANKLE-R",
+        "nodeBindings": [
+          {
+            "structureId": "HA-S-TALUS",
+            "nodeId": "ankle_r_pivot_q0"
+          }
+        ]
+      },
+      "illustration": {
+        "id": "HA-PATH-T24-TIBANT-R",
+        "trajectoryBindings": [
+          {
+            "structureId": "HA-M-000003",
+            "trajectoryId": "tib_ant_r_model_path_q0"
+          }
+        ]
+      },
+      "clip": {
+        "id": "HA-CLIP-T24-R-TIBANT-ANKLE-DF-V1",
+        "durationSeconds": 2.0,
+        "startPoseId": "HA-POSE-OSIM-R-ANKLE-Q0",
+        "endPoseId": "HA-POSE-OSIM-R-ANKLE-Q012"
+      },
+      "technicalStatus": "candidate"
+    }
+  ]
 }

@@ -16,6 +16,7 @@ DATA_PATH = ROOT / "atlas-data/motion/motion-learning.json"
 CATALOG_PATH = ROOT / "atlas-data/catalog/canonical-catalog.json"
 AI_OVERLAY_PATH = ROOT / "atlas-data/terminology/ai-evidence-overlay.json"
 NAVIGATION_PATH = ROOT / "atlas-data/navigation/atlas-navigation.json"
+MOTION_SCENES_PATH = ROOT / "atlas-data/motion/motion-scenes.json"
 FIXTURE_INDEX_PATH = ROOT / "work/evidence/T20/fixtures/index.json"
 
 _T03_SPEC = importlib.util.spec_from_file_location("human_atlas_t03_validator", Path(__file__).with_name("validate.py"))
@@ -74,6 +75,23 @@ def load_production_context() -> dict[str, Any]:
             "poseId": scene.get("poseId"),
             "assetUri": ref.get("uri"),
         }
+    if MOTION_SCENES_PATH.exists():
+        motion_scenes = json.loads(MOTION_SCENES_PATH.read_text(encoding="utf-8"))
+        for scene in motion_scenes.get("sceneManifests", []):
+            if scene["id"] in scene_contexts:
+                raise ValueError(f"Duplicate motion scene ID: {scene['id']}")
+            uri = scene["assetUri"]
+            path = (ROOT / uri).resolve()
+            if not uri.startswith("atlas-data/assets/derived-glb/") or not path.is_relative_to(ROOT) or not path.is_file():
+                raise ValueError(f"Motion static scene path missing or unsafe: {uri}")
+            if sha256_bytes(path.read_bytes()) != scene["sourceAssetSha256"]:
+                raise ValueError(f"Motion static scene hash mismatch: {uri}")
+            scene_contexts[scene["id"]] = {
+                "sceneId": scene["id"], "sceneRevision": scene["revision"],
+                "modelId": scene["modelId"], "sourceAssetSha256": scene["sourceAssetSha256"],
+                "frameId": scene["frameId"], "units": scene["units"],
+                "poseId": scene["poseId"], "assetUri": uri,
+            }
     return {
         "subjects": subjects,
         "structures": structures,

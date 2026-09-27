@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "revision": "T41-2026-09-27-motion-asset-sources-v2",
+  "revision": "T24-2026-09-27-motion-assets-v1",
   "coordinateContract": {
     "format": "glTF 2.0",
     "handedness": "right",
@@ -26,14 +26,38 @@
     "notPatientExerciseInstruction": true
   },
   "assetPipeline": {
-    "sourceGate": ["exact source file and revision", "file SHA-256", "asset-specific reuse license", "required attribution"],
-    "derivationGate": ["tool and version", "reproducible command/settings", "source-to-output mapping", "coordinate/unit conversion record", "output SHA-256"],
-    "rigGate": ["stable node map", "skin index/weight validation when rigged_mesh", "clip and track binding", "duration", "static binding source hash and pose"],
-    "learnerGate": ["manifest validation", "loader regression", "anatomy/source review remains separate", "no AI-to-human-review promotion"],
+    "sourceGate": [
+      "exact source file and revision",
+      "file SHA-256",
+      "asset-specific reuse license",
+      "required attribution"
+    ],
+    "derivationGate": [
+      "tool and version",
+      "reproducible command/settings",
+      "source-to-output mapping",
+      "coordinate/unit conversion record",
+      "output SHA-256"
+    ],
+    "rigGate": [
+      "stable node map",
+      "skin index/weight validation when rigged_mesh",
+      "clip and track binding",
+      "duration",
+      "static binding source hash and pose"
+    ],
+    "learnerGate": [
+      "manifest validation",
+      "loader regression",
+      "anatomy/source review remains separate",
+      "no AI-to-human-review promotion"
+    ],
     "outputFormat": "self-contained GLB only; external buffer/image URI rejected",
     "productionAssetsAreMotionLearningEntries": true
   },
-  "productionMotionAssetIds": [],
+  "productionMotionAssetIds": [
+    "HA-ASSET-T24-R-TIBANT-ANKLE-DF-V1"
+  ],
   "candidateSources": [
     {
       "id": "T22-CANDIDATE-BP3D4-RIGHT-LEG-STATIC",
@@ -46,7 +70,14 @@
       "licenseId": "LIC-BP3D-LSDB-ARCHIVE-CC-BY-4.0",
       "licenseUrl": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
       "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
-      "observed": { "scenes": 1, "nodes": 11, "meshes": 11, "skins": 0, "animations": 0, "morphTargets": 0 },
+      "observed": {
+        "scenes": 1,
+        "nodes": 11,
+        "meshes": 11,
+        "skins": 0,
+        "animations": 0,
+        "morphTargets": 0
+      },
       "disposition": "static_geometry_only",
       "motionEligible": false,
       "reason": "The licensed static geometry contains no skeleton, skin, animation clip, or morph targets. It remains a source/reference mesh, not an animated asset."
@@ -62,7 +93,10 @@
       "licenseId": "MODEL-GAIT2392-CC-BY-3.0-INFILE-CREDIT",
       "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
       "requiredAttribution": "See the exact .osim model credits and OpenSim Gait2392 documentation; local model credits list Delp S.L., Loan J.P., Hoy M.G., Zajac F.E., Topp E.L., Rosen J.M., Thelen D.G., Anderson F.C., and Seth A.",
-      "observed": { "motionSamplesInCheckout": 0, "glbExportsInCheckout": 0 },
+      "observed": {
+        "motionSamplesInCheckout": 0,
+        "glbExportsInCheckout": 0
+      },
       "disposition": "simulation_model_requires_separate_conversion_and_frame_review",
       "motionEligible": false,
       "reason": "The exact local model file states CC BY 3.0 and OpenSim's model table identifies the Gait2392 model with that license; this does not establish rights for every file in OpenSim_Models. No .mot/.sto/.trc motion samples or converted GLB are present in the checkout, the OpenSim/Blender authoring tools are not installed, and no Atlas frame/pose binding has been validated."

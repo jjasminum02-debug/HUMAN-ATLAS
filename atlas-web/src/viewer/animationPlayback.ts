@@ -1,4 +1,4 @@
-import { AnimationMixer, LoopOnce, type AnimationAction, type AnimationClip, type Object3D } from "three";
+import { AnimationMixer, LoopOnce, LoopRepeat, type AnimationAction, type AnimationClip, type Object3D } from "three";
 import type { AnimationSceneResource } from "./animationSceneAdapter.ts";
 
 export interface AnimationFrameScheduler {
@@ -76,6 +76,7 @@ export class SingleAnimationFrameLoop {
 export interface AnimationPlaybackOptions {
   onTimeChange?: (timeSeconds: number, completed: boolean) => void;
   scheduler?: AnimationFrameScheduler;
+  repeat?: boolean;
 }
 
 /** Playback owns only animation pose/time. It has no camera or view-reset dependency. */
@@ -106,8 +107,8 @@ export class AnimationPlaybackController {
     this.durationSeconds = clip.duration;
     this.mixer = new AnimationMixer(this.root);
     this.action = this.mixer.clipAction(clip);
-    this.action.setLoop(LoopOnce, 0);
-    this.action.clampWhenFinished = true;
+    this.action.setLoop(options.repeat ? LoopRepeat : LoopOnce, options.repeat ? Infinity : 0);
+    this.action.clampWhenFinished = !options.repeat;
     this.action.play();
     this.action.paused = true;
     this.action.time = 0;
@@ -166,7 +167,13 @@ export class AnimationPlaybackController {
   private step(deltaSeconds: number): boolean {
     if (this.disposed) return false;
     if (deltaSeconds > 0) this.mixer.update(deltaSeconds);
-    this.currentTimeSeconds = Math.min(this.durationSeconds, this.currentTimeSeconds + deltaSeconds);
+    this.currentTimeSeconds = this.options.repeat
+      ? (this.currentTimeSeconds + deltaSeconds) % this.durationSeconds
+      : Math.min(this.durationSeconds, this.currentTimeSeconds + deltaSeconds);
+    if (this.options.repeat) {
+      this.options.onTimeChange?.(this.currentTimeSeconds, false);
+      return true;
+    }
     const completed = this.currentTimeSeconds >= this.durationSeconds;
     if (completed) {
       this.action.paused = false;
