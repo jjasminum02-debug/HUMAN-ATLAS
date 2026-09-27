@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import type { Plugin } from "vite";
 import { defineConfig } from "vite";
+import { wholeBodyPlugin } from "./plugins/wholeBody.ts";
 
 type AnyRecord = Record<string, unknown>;
 type EntityCollections = Record<string, AnyRecord[]>;
@@ -220,7 +221,7 @@ function meshManifestPlugin(): Plugin {
 
 export default defineConfig({
   root: projectRoot + "atlas-web",
-  plugins: [catalogPlugin(), meshManifestPlugin()],
+  plugins: [catalogPlugin(), meshManifestPlugin(), wholeBodyPlugin(projectRoot)],
   server: { strictPort: true, fs: { allow: [projectRoot] } },
   preview: { strictPort: true },
 });

@@ -1,0 +1,39 @@
+✔ current partial navigation contract resolves all typed references without promoting review (0.914125ms)
+✔ mesh picks resolve through one typed mapping into a bone selection (0.118ms)
+✔ sourced bone mesh selection round-trips through an explicit typed URL and stays separate from landmarks (0.236542ms)
+✔ all nine source-linked bone mappings can be typed while the four unconfirmed meshes stay unbound (0.181875ms)
+✔ unconfirmed and absent scene bindings do not retain the previous typed selection (0.050375ms)
+✔ T13 scene keeps six sourced bones selectable and three source meshes unbound (0.049084ms)
+✔ explicit empty typed selection survives URL normalization and reload (0.053792ms)
+✔ muscle, whole bone, and landmark selections reject cross-kind references (0.052208ms)
+✔ region, typed selection, and legacy muscle URL adapters preserve explicit user choice (0.097708ms)
+✔ learner category routes expose twelve regions but only the six sourced leg memberships (0.119959ms)
+✔ category switching clears nonmember selection and never carries the calf scene into another region (0.148ms)
+✔ legacy pilot links canonicalize to leg, while unassigned search selections stay unassigned (0.059417ms)
+✔ search selection routes parts through their existing parent without inventing a region (0.048291ms)
+✔ synthetic obturator internus membership is multi-region only in this test fixture (0.22275ms)
+✔ same revision shares one request, a changed revision fetches again (0.489708ms)
+✔ abandoned response cannot enter cache or replace the current scene (0.521917ms)
+✔ one caller may cancel a shared request without cancelling the other (0.179833ms)
+✔ failed request is removed so reselection can retry (0.121667ms)
+✔ resolved CPU cache evicts the oldest revision at capacity (0.199875ms)
+✔ capacity is enforced after five different in-flight requests resolve together (0.861416ms)
+✔ both source model scenes share only the verified leg frame and pose (0.844084ms)
+✔ frame, pose, region, side, missing asset, and duplicate model fail closed (0.393875ms)
+✔ asset revision changes the cache key without changing anatomy IDs (0.099084ms)
+✔ source-only context never becomes selectable (2.184417ms)
+✔ supplements require explicit opt-in, stay unbound (0.080542ms)
+✔ held identity cannot be revealed through layer/opt-in (0.045209ms)
+✔ region/layer demand excludes unrelated geometry (0.043833ms)
+✔ reject conflicting duplicate IDs and source-only binding promotion (0.299875ms)
+✔ late parse after cancellation is disposed; same-id new demand can recover (3.577542ms)
+✔ failure retains successful resources; explicit retry only failed asset (2.60175ms)
+✔ dispose releases completed and late resources exactly once (1.410917ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 72.281667

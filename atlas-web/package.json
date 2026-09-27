@@ -26,7 +26,9 @@
     "validate:learning": "python3 scripts/validate-learning-content.py",
     "validate:ai-evidence": "python3 ../atlas-data/schemas/validate_ai_evidence.py --check",
     "validate:motion-learning": "python3 ../atlas-data/schemas/validate_motion_learning.py --check",
-    "validate:spatial-drafts": "python3 scripts/validate-spatial-draft-schema.py"
+    "validate:spatial-drafts": "python3 scripts/validate-spatial-draft-schema.py",
+    "prepare:whole-body": "python3 scripts/build-whole-body.py && python3 scripts/check-whole-body.py",
+    "test:whole-body": "node --experimental-strip-types --test src/viewer/wholeBody/wholeBody.test.ts && python3 scripts/check-whole-body.py"
   },
   "dependencies": {
     "react": "19.3.0",

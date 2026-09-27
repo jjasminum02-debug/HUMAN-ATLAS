@@ -1,0 +1,30 @@
+{
+  "statusBeforeSha256": "62f1230e36fa973538ca518760e2287e06496e49560b5d5138eb7d75ca2d3598",
+  "registryBeforeSha256": "941d1983b7afd36e91bc54f758c24b8c430af1184572d5458ed5ee9bb386b68f",
+  "statusHeaderChanges": {
+    "CURRENT_TASK": {
+      "before": "- CURRENT_TASK: T72 - passed_with_gaps; exact 11 official BodyParts3D R4 first-pass residual sources acquired/validated in batches 10+1, deterministic source-only GLB and T70-based integration extension created. First-pass residual is 0/11; T70 bone-root source gap is 26. Canonical learner binding/human review remain zero and redistribution remains held. See work/reports/T72.md.",
+      "after": "- CURRENT_TASK: T56 - passed_with_gaps; local static single AnatomySceneRoot/renderer integration verified. T70 parent + T71/T72 siblings = 513 unique source ELEMENTs; 481 default visible, 20 opt-in supplements, 12 held hidden, existing learner bindings 10. First-pass residual 0/11, bone-root gaps 26, whole-body denominator and rights/human-review holds unchanged. See work/reports/T56.md."
+    },
+    "NEXT_TASK": {
+      "before": "- NEXT_TASK: T56 / Astra · 현재 대화 - review T70/T71/T72 actual artifacts and perform only after a new explicit task start; T56 has not started.",
+      "after": "- NEXT_TASK: T57 / Astra · 현재 대화 - app startup/full-body home/layer UI after a new explicit request. T57 has not started."
+    },
+    "LAST_REPORT": {
+      "before": "- LAST_REPORT: work/reports/T72.md",
+      "after": "- LAST_REPORT: work/reports/T56.md"
+    }
+  },
+  "statusAppendedBlock": "\n## T56 — 로컬 정적 전신 장면 통합 (2026-09-27)\n\n`passed_with_gaps`. T70 parent와 T71/T72 sibling을 513개 고유 source ID로 합쳤고, 원래 geometry bytes/IDs/hashes를 보존한 27개 지역·레이어 chunk로 단일 controller/root/renderer에 연결했다. 기본 481개, 명시적 보완 보기 시 501개 표시; 12개 held는 숨김/선택 차단, 기존 learner binding은 10개다. 지역·레이어 demand, 실패 재시도, context restore, stale parse disposal과 실제 390/1024/1440px를 검증했다. 상세 수치/한계/후속 프롬프트는 `work/reports/T56.md`, `work/evidence/T56/`. 전신 분모 미동결, bone-root gap 26, source-only/human-review/공개 재배포 hold를 유지한다. 깊이별 근육 분류·high LOD·운동·홈 리디자인은 완료로 표시하지 않는다. 다음 T57은 시작하지 않았다.\n",
+  "registryChanges": {
+    "taskStatuses.T56": {
+      "before": "planned_not_started",
+      "after": "passed_with_gaps"
+    },
+    "nextTask": {
+      "before": "T56",
+      "after": "T57"
+    }
+  },
+  "sharedFilesExcludedFromCommitBecauseExistingWip": true
+}

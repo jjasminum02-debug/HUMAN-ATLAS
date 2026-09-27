@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { loadPilotCatalog, recordLabel, type PilotCatalog } from '../data/catalog';
+import { loadPilotCatalog, type PilotCatalog } from '../data/catalog';
 import { findMuscles, learningConcepts, motionActionOptionsForLearner, nameFor, structureTextForLearner } from '../data/learning';
 import { boneNameForLearner, searchSelectableBones } from '../data/boneNames';
-import { GLBViewer } from '../viewer/GLBViewer';
-import { sceneRevision } from '../viewer/scenePlan';
+import { WholeBodyViewer } from '../viewer/wholeBody/WholeBodyViewer';
 import { buildBoneCardData } from '../domain/boneCard';
 import {
   serializeAtlasRoute,
@@ -62,11 +61,11 @@ export default function App() {
   const [error, setError] = useState('');
   const [route, setRoute] = useState<AtlasRouteState>(() => defaultLearnerRoute(navigation));
   const [routeReady, setRouteReady] = useState(false);
+  const [wholeView, setWholeView] = useState(false);
   const [routeNotice, setRouteNotice] = useState<string | null>(null);
   const [query, setQuery] = useState('');
   const [tab, setTab] = useState<TabName>('구조');
   const [selectedActionId, setSelectedActionId] = useState<string | null>(null);
-  const [activeAttachmentId, setActiveAttachmentId] = useState<string | null>(null);
   const [unmappedMeshNotice, setUnmappedMeshNotice] = useState<UnmappedMeshNotice | null>(null);
   const appInfoDialog = useRef<HTMLDialogElement>(null);
   const [detailsOpen, setDetailsOpen] = useState(() => typeof window === 'undefined' || window.matchMedia('(min-width: 761px)').matches);
@@ -131,7 +130,6 @@ export default function App() {
       setUnmappedMeshNotice(null);
       setTab('구조');
       setSelectedActionId(null);
-      setActiveAttachmentId(null);
       if (resolved.canonicalize) {
         const nextUrl = routeUrl(resolved.route);
         if (nextUrl !== `${location.pathname}${location.search}${location.hash}`) {
@@ -175,11 +173,6 @@ export default function App() {
       return items;
     }, [])
     : regionMuscles.map((concept) => ({ id: concept.id, label: nameFor(catalog!, concept.id).label, approximate: false, kind: 'muscle' as const }));
-  const regionScenes = navigation.sceneManifests.filter((scene) => scene.categoryId === route.regionId);
-  const activeScenes = regionScenes.filter((scene) => scene.availability !== 'unavailable' && scene.assetRefs.length > 0 &&
-    (!route.side || scene.defaultView.side === route.side));
-  const sceneAvailable = activeScenes.length > 0;
-
   function commitRoute(nextRoute: AtlasRouteState, replace = false) {
     const nextUrl = routeUrl(nextRoute);
     const currentUrl = `${location.pathname}${location.search}${location.hash}`;
@@ -192,7 +185,6 @@ export default function App() {
     setUnmappedMeshNotice(null);
     setTab('구조');
     setSelectedActionId(null);
-    setActiveAttachmentId(null);
     setDetailsOpen(true);
   }
 
@@ -218,10 +210,6 @@ export default function App() {
     else chooseEntity(item.id);
   }
 
-  function chooseUnmappedMesh(mesh: UnmappedMeshNotice) {
-    commitRoute({ regionId: route.regionId, side: route.side, selection: null, legacyRoute: false });
-    setUnmappedMeshNotice(mesh);
-  }
 
   function clearSelection() {
     commitRoute({ regionId: route.regionId, side: route.side, selection: null, legacyRoute: false });
@@ -230,17 +218,8 @@ export default function App() {
   if (error) return <main className="load-state"><h1>자료를 불러오지 못했습니다</h1><p>{error}</p><button onClick={() => location.reload()}>다시 시도</button></main>;
   if (!catalog || !routeReady) return <main className="load-state" role="status">Human Atlas를 준비하고 있습니다…</main>;
 
-  const stageTitle = region?.labelKo ?? (selected ? '구조 사전' : '부위 선택');
-  const selectedSideLabel = route.side === 'left' ? '왼쪽' : route.side === 'right' ? '오른쪽' : null;
-  const sideScenePending = Boolean(selectedSideLabel) && regionScenes.length > 0 && activeScenes.length === 0;
-  const stageDescription = sceneAvailable
-    ? '현재 확보된 부위 장면입니다. 출처 연결이 확인된 근육과 뼈를 선택할 수 있습니다.'
-    : sideScenePending
-      ? `${selectedSideLabel} ${region?.labelKo ?? '해당 부위'} 장면은 준비 중입니다. 다른 좌우의 모형을 대신 표시하지 않습니다.`
-    : region
-      ? `${region.labelKo} 자료를 준비하고 있습니다. 현재 종아리 장면을 다른 부위 자료처럼 표시하지 않습니다.`
-      : '아직 부위 연결이 확인되지 않은 구조입니다. 3D 장면은 표시하지 않습니다.';
-  const sceneMembershipSources = new Set(regionRows.map((row) => row.entityId));
+  const stageTitle = wholeView ? '전체 모형' : region?.labelKo ?? (selected ? '구조 사전' : '부위 선택');
+  const stageDescription = '회전하고 확대하며 구조를 살펴보세요.';
 
   return <div className="study-shell">
     <a className="skip-link" href="#study-details">선택한 구조 설명으로 이동</a>
@@ -298,19 +277,20 @@ export default function App() {
           {listItems.length === 0 && <p className="quiet-note">{query.trim() ? '찾는 이름이 아직 등록되지 않았습니다. 다른 언어 이름으로도 검색해 보세요.' : '이 부위의 구조 연결은 준비 중입니다. 미확인 구조를 추정해 채우지 않았습니다.'}</p>}
         </nav>
       </aside>
-      <section className={`study-stage ${sceneAvailable ? '' : 'is-unavailable'}`} aria-label={`${stageTitle} 학습 장면`}>
+      <section className="study-stage" aria-label={`${stageTitle} 학습 장면`}>
         <div className="stage-caption"><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{stageTitle}</h2><p>{stageDescription}</p></div>
-        {sceneAvailable
-          ? <GLBViewer key={`${route.regionId}:${route.side}:${sceneRevision(activeScenes)}`} selectedEntityId={route.selection?.kind === 'muscle' ? routeEntityId(route.selection) : null} selectedSelection={route.selection} unmappedMeshId={unmappedMeshNotice?.meshAssetId ?? null} navigation={navigation} scenes={activeScenes} activeAttachmentId={activeAttachmentId} concepts={[...concepts.map((concept) => ({ id: concept.id, entityType: concept.entityType, parentId: concept.parentId ?? null, displayLabel: nameFor(catalog, concept.id).label })), ...catalog.structures.filter((structure) => structure.kind === 'bone').map((structure) => ({ id: structure.id, entityType: 'bone', parentId: null, displayLabel: recordLabel(catalog, structure.id) }))]} attachments={catalog.attachments} claims={catalog.claims} onSelectEntity={chooseEntity} onSelectBone={chooseBone} onSelectUnmappedMesh={chooseUnmappedMesh} onClearSelection={clearSelection} onClearAttachment={() => setActiveAttachmentId(null)} studyMode/>
-          : <div className="region-empty-scene" role="status">
-              <span className="empty-scene-mark" aria-hidden="true">◎</span>
-              <h3>{region ? `${region.labelKo} 장면은 준비 중입니다` : selected ? '이 구조의 부위 연결은 준비 중입니다' : '부위를 선택해 주세요'}</h3>
-              <p>{routeNotice ?? (sideScenePending ? '선택한 좌우의 장면은 준비 중입니다.' : region && sceneMembershipSources.size === 0 ? '아직 확인된 구조 목록이 없습니다. 다른 부위 자료를 대신 보여주지 않습니다.' : '이 화면에서는 확인된 자료가 있는 장면만 표시합니다.')}</p>
-            </div>}
+        <WholeBodyViewer whole={wholeView} onWholeChange={setWholeView} region={route.regionId} selectedId={selectedId} selectedIds={route.side === 'left' ? [] : [...(selectedId ? [selectedId] : []), ...(!route.selection || route.selection.kind !== 'muscle' || route.selection.partId ? [] : parts.map(part => part.id))]} onSelect={(id, side) => {
+          if (id.startsWith('HA-S-')) {
+            const instance = navigation.structureInstances.find(row => row.structureId === id && row.side === side);
+            if (instance) chooseBone({ kind: 'bone', conceptId: id, instanceId: instance.id });
+          } else chooseEntity(id);
+        }}/>
+
       </section>
       <details className="study-details" id="study-details" open={detailsOpen} onToggle={(event) => setDetailsOpen(event.currentTarget.open)}>
         <summary className="mobile-detail-summary">{selectedBoneName?.label ?? (selected && name ? name.label : '선택한 구조 설명')}</summary>
         <div className="study-detail-content">
+          {route.selection && <button type="button" className="bone-related-muscle" onClick={clearSelection}>선택 해제</button>}
           {selectedBoneCard && selectedBoneName ? <>
             <h2>{selectedBoneName.label || '설명 정리 중'}</h2>
             <LearnerNameRows name={selectedBoneName}/>
@@ -359,7 +339,7 @@ export default function App() {
                 </fieldset>
               </div> : <div className="upcoming"><h3>작용 정보를 준비하고 있습니다</h3></div>}
             </section>
-          </> : <div className="upcoming"><h2>{routeNotice ? '주소의 구조 연결을 확인해 주세요' : '구조를 선택해 주세요'}</h2><p>{routeNotice ?? (region ? `${region.labelKo}의 구조 자료는 준비 중입니다.` : '검색하거나 부위를 선택해 학습할 구조를 찾을 수 있습니다.')}</p></div>}
+          </> : <div className="upcoming"><h2>{routeNotice ? '주소의 구조 연결을 확인해 주세요' : '구조를 선택해 주세요'}</h2><p>{routeNotice ?? (region ? `${region.labelKo} 목록 또는 설명이 연결된 모형을 선택해 주세요.` : '검색하거나 부위를 선택해 학습할 구조를 찾을 수 있습니다.')}</p></div>}
         </div>
       </details>
     </div>

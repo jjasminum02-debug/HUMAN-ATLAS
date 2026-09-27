@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "checks": [
+    "partial failure retains loaded bones",
+    "retry preserves camera",
+    "bound tibialis selection survives retry",
+    "context restore same root and canvas",
+    "context restore preserves camera/target",
+    "context restore preserves selection",
+    "all regional demands use one root/renderer",
+    "501 visible when 20 supplements opted in; 12 held hidden",
+    "only original 10 bindings selectable",
+    "supplements remain source-only",
+    "no duplicated shared geometry nodes",
+    "dispose removes canvas and releases loaded groups"
+  ],
+  "evidence": {
+    "legReadyMs": 102.30000007152557,
+    "contextRestoreMs": 354.5,
+    "wholeBodyReadyMs": 428.39999997615814,
+    "metrics": {
+      "loaded": 27,
+      "total": 27,
+      "failed": 0,
+      "contextLost": false,
+      "selectedAvailable": true,
+      "calls": 501,
+      "triangles": 2249888,
+      "geometries": 501,
+      "bytes": 64784624,
+      "nodes": 513
+    },
+    "frameIntervalsMs": {
+      "count": 72,
+      "median": 16.699999928474426,
+      "p95": 17.299999952316284
+    }
+  }
+}
