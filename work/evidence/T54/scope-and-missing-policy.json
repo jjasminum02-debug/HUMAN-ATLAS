@@ -1,0 +1,44 @@
+{
+  "revision": "T54-SCOPE-AND-MISSING-POLICY-v1",
+  "task": "T54",
+  "frozenSourceSetPath": "work/evidence/T54/frozen-source-set.json",
+  "frozenSourceSetSha256": "9d8e395f2748aa3b5e45ac093761a6e7f8ebc39a4fa9b1e8b0be4b1a764c693f",
+  "frozenMembershipSha256": "f68a069dad40990933362bbcfaf24393be3a16f85bed97139d90996186f31f48",
+  "selectedUniqueSourceCount": 142,
+  "selectedRegionMembershipCount": 144,
+  "policyRecordedAtStage": "post_acquisition_package_validation; selected source membership was already frozen and 142/142 selected payloads had been acquired; this note documents fail-closed behavior and scope exclusions without changing the frozen set",
+  "regionCandidateCounts": {
+    "shoulder-scapular": {
+      "t51RoutingCandidates": 24,
+      "t53BoundaryConnectorSupplement": 2,
+      "frozenMemberships": 26
+    },
+    "upper-limb": {
+      "t51RoutingCandidates": 118,
+      "t53BoundaryConnectorSupplement": 0,
+      "frozenMemberships": 118
+    }
+  },
+  "scopeBoundary": {
+    "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+    "sourceVersion": "BodyParts3D Release 4.0",
+    "regionIds": ["shoulder-scapular", "upper-limb"],
+    "included": "Exact atomic FJ source IDs routed in the frozen T51 shoulder-scapular and upper-limb chunks, plus FJ3237 and FJ3279 as verified same-source T53 thorax boundary nodes.",
+    "excluded": "Every other source FJ outside the two frozen region memberships is outside T54 scope. It is not counted as a download failure, absent anatomy, or whole-body inventory denominator.",
+    "crossTaskBoundaryNodes": ["FJ3237", "FJ3279"],
+    "crossRegionRepeatedMembershipIds": ["FJ3362", "FJ3384"],
+    "wholeBodyCanonicalDenominator": null
+  },
+  "missingFrozenSourceElementFileIds": [],
+  "acquisitionFailures": [],
+  "policies": {
+    "frozenSet": "The 142 unique source IDs and 144 memberships are frozen before T54 mesh acquisition. Do not add a discovered source ID to this set during acquisition or build.",
+    "missingOrFailedFrozenMember": "If a frozen FJ member is absent from the pre-recorded official archive tree, unavailable by range, CRC/hash mismatched, empty, or fails OBJ header/identity validation, retain its exact ID and failure reason and withhold the combined package. Do not silently substitute another tree or infer a replacement ID.",
+    "sourceIdentity": "Blank or partial OBJ header fields stay null/held. T51 context text does not replace missing source header identity; parent names do not replace a small hand bone or hand muscle.",
+    "membership": "Repeated region membership points to one HA-MESH-BP3D4-FJ source node. It does not duplicate the source mesh or create canonical learner membership.",
+    "handPickingAndLod": "Each small hand source mesh retains its own stable source ID and pickingTargetId, independent from lod.lodAssignmentId. The source offers one 99%-reduced level; no alternate source LOD or generated proxy/decimation is available. Filename suffix M is not an LOD signal.",
+    "laterality": "Preserve source header labels, coordinates, and the T50 frame transform. Record opposite-side surface observations as held; never swap labels, mirror, or reinterpret coordinates to make a pair agree.",
+    "rights": "Retain the per-file legacy OBJ license header. Local technical QA only; public redistribution remains held until file-level rights reconciliation."
+  },
+  "status": "scope_and_omission_policy_bound_to_frozen_set; all_frozen_members_acquired"
+}

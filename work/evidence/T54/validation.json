@@ -1,0 +1,117 @@
+{
+  "T53ConnectorBytesAndIdsUnchanged": true,
+  "aabbIsNotSurfaceProof": true,
+  "allFrozenItemsAcquired": true,
+  "alternateSourceLodCount": 0,
+  "batchCount": 15,
+  "canonicalLearnerBindings": 0,
+  "crossRegionSharedFjReuseStableNode": true,
+  "downloadFailureCount": 0,
+  "emptySourceMeshes": 0,
+  "exactDuplicateGeometryGroups": [],
+  "explicitMissingPolicyBoundToFrozenSet": true,
+  "frozenIdsMatchAcquisition": true,
+  "frozenMembershipSha256": "f68a069dad40990933362bbcfaf24393be3a16f85bed97139d90996186f31f48",
+  "frozenSetSha256": "9d8e395f2748aa3b5e45ac093761a6e7f8ebc39a4fa9b1e8b0be4b1a764c693f",
+  "fullArchivesDownloaded": false,
+  "generatedLodCount": 0,
+  "handBonePickLateralityCounts": {
+    "left": 19,
+    "right": 19
+  },
+  "handBonePickTargets": 38,
+  "handMusclePickLateralityCounts": {
+    "left": 6,
+    "right": 6
+  },
+  "handMusclePickTargets": 12,
+  "headerBoundsMismatchCount": 35,
+  "humanReviewPromotions": 0,
+  "integratedGlb": {
+    "bytes": 9579756,
+    "nodeCount": 142,
+    "path": "atlas-data/source-cache/bodyparts3d-r4/converted/t54/T54-shoulder-upper-limb-static-source.glb",
+    "sha256": "b114fc8644ea8de0f7d213262ebc02eb23b0e8b51d419516c0f52f03d4cf04cd"
+  },
+  "lodAndPickingAreSeparateFields": true,
+  "manifest": {
+    "path": "atlas-data/manifests/bodyparts3d-r4-t54/source-manifest.json",
+    "sha256": "a27630c0bd6da1664caa4b416f84d990aff6c8c4deab816b6d374a7c0eece01a"
+  },
+  "maxBatchSize": 10,
+  "midlineCrossingCount": 4,
+  "missingFrozenSourceElementFileIds": [],
+  "noDuplicateFjWithinRegion": true,
+  "oneNodePerUniqueFj": true,
+  "pairwiseAabbCandidateCount": 1360,
+  "regionCounts": {
+    "shoulder-scapular": 26,
+    "upper-limb": 118
+  },
+  "result": "source_package_built; learner/anatomy review and alternate LOD remain pending",
+  "revision": "T54-PACKAGE-VALIDATION-v1",
+  "rightAndLeftLabelsPresent": true,
+  "selectedAssetCount": 142,
+  "smallHandTargetsKeepExactFjNamesAndIds": true,
+  "sourceHeaderIdentityValidatedCount": 142,
+  "sourceLabelSurfaceConflictHeldWithoutEdit": true,
+  "sourceLodLevelCount": 1,
+  "sourceMembershipCount": 144,
+  "sourcePositionHashesMatchGlbAccessors": true,
+  "sourceRightsHeldForFileLevelReconciliation": true,
+  "sourceSetFrozenBeforeAcquisition": true,
+  "sourceSideSwapMirrorOrRelabelPerformed": false,
+  "task": "T54",
+  "triangleIntersectionSolverRun": false,
+  "wholeBodyDenominator": null,
+  "whollyOppositeSourceLabelCount": 2,
+  "whollyOppositeSourceLabelIds": [
+    "FJ1469",
+    "FJ1469M"
+  ],
+  "verificationRerun": {
+    "capturedAt": "2026-09-27T10:19:25Z",
+    "assetRebuild": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 atlas-data/tools/build_bodyparts3d_r4_t54.py --build",
+      "exitCode": 0,
+      "meshNodes": 142,
+      "glbBytes": 9579756,
+      "glbSha256": "b114fc8644ea8de0f7d213262ebc02eb23b0e8b51d419516c0f52f03d4cf04cd"
+    },
+    "tests": [
+      {
+        "command": "PYTHONDONTWRITEBYTECODE=1 python3 atlas-data/tools/test_bodyparts3d_r4_t54.py -v",
+        "exitCode": 0,
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "command": "PYTHONDONTWRITEBYTECODE=1 python3 atlas-data/tools/test_bodyparts3d_r4_t53.py -v",
+        "exitCode": 0,
+        "passed": 8,
+        "failed": 0
+      }
+    ],
+    "typecheck": {
+      "command": "pnpm --dir atlas-web typecheck (bundled Node/pnpm runtime)",
+      "exitCode": 0
+    },
+    "webBuild": {
+      "command": "pnpm --dir atlas-web build (bundled Node/pnpm runtime)",
+      "exitCode": 0,
+      "existingLargeChunkWarning": "App-Bu2sL75i.js 1515.52 kB"
+    },
+    "browser": {
+      "evidence": "work/evidence/T54/browser-verification.json",
+      "pass": true,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "viewports": [
+        1440,
+        1024,
+        390
+      ]
+    },
+    "acceptanceStatus": "partial; FJ1469/FJ1469M source-label versus surface laterality conflict remains held"
+  }
+}

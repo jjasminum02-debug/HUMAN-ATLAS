@@ -1,0 +1,81 @@
+{
+  "revision": "T54-BROWSER-VERIFICATION-v1",
+  "task": "T54",
+  "capturedAt": "2026-09-27T10:07:56Z",
+  "browser": "Codex In-app Browser",
+  "preview": "work/evidence/T54/private-preview.html",
+  "localUrl": "http://127.0.0.1:4175/work/evidence/T54/private-preview.html",
+  "previewOnly": true,
+  "sourceGlbs": [
+    {
+      "task": "T53",
+      "path": "atlas-data/source-cache/bodyparts3d-r4/converted/t53/T53-trunk-pelvis-static-source.glb",
+      "sha256": "25b9850ded5fe6e8c38e48578ba6a4d4e617dca1169cd1c6d63dfda52814709b",
+      "loadedMeshNodes": 138
+    },
+    {
+      "task": "T54",
+      "path": "atlas-data/source-cache/bodyparts3d-r4/converted/t54/T54-shoulder-upper-limb-static-source.glb",
+      "sha256": "b114fc8644ea8de0f7d213262ebc02eb23b0e8b51d419516c0f52f03d4cf04cd",
+      "loadedMeshNodes": 142
+    }
+  ],
+  "runtime": {
+    "loaded": true,
+    "canvasCount": 1,
+    "rendererCount": 1,
+    "anatomySceneRootCount": 1,
+    "rawLoadedMeshNodes": 280,
+    "sameSourceT53NodesDeduplicated": ["FJ3237", "FJ3279"],
+    "uniqueVisibleSourceNodes": 278,
+    "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+    "sourcePose": "bodyparts3d-r4-static-reference",
+    "sourceLevels": 1,
+    "alternateSourceLevels": 0,
+    "generatedDecimationLevels": 0,
+    "independentHandPickingTargets": 50,
+    "consoleErrors": 0,
+    "consoleWarnings": 0
+  },
+  "cameraViews": [
+    {"control": "front (+Z)", "selected": true, "rendered": true, "imageObserved": true},
+    {"control": "back (-Z)", "selected": true, "rendered": true, "imageObserved": true},
+    {"control": "side (+X)", "selected": true, "rendered": true, "imageObserved": true}
+  ],
+  "viewportChecks": [
+    {"width": 1440, "height": 900, "documentWidth": 1440, "documentHeight": 900, "canvasCount": 1, "canvasWidth": 1130, "canvasHeight": 810, "meshCount": 278, "rootCount": 1, "horizontalOverflow": false},
+    {"width": 1024, "height": 768, "documentWidth": 1024, "documentHeight": 768, "canvasCount": 1, "canvasWidth": 714, "canvasHeight": 657, "meshCount": 278, "rootCount": 1, "horizontalOverflow": false},
+    {"width": 390, "height": 844, "documentWidth": 390, "documentHeight": 844, "canvasCount": 1, "canvasWidth": 390, "canvasHeight": 379, "meshCount": 278, "rootCount": 1, "horizontalOverflow": false}
+  ],
+  "regionFilters": [
+    {"regionId": "all", "expectedNodes": 278, "visibleNodes": 278},
+    {"regionId": "shoulder-scapular", "expectedNodes": 26, "visibleNodes": 26},
+    {"regionId": "upper-limb", "expectedNodes": 118, "visibleNodes": 118},
+    {"regionId": "thorax", "expectedNodes": 47, "visibleNodes": 47},
+    {"regionId": "hand-bone", "expectedNodes": 38, "visibleNodes": 38},
+    {"regionId": "hand-muscle", "expectedNodes": 12, "visibleNodes": 12}
+  ],
+  "selectionAndKeyboard": {
+    "leftHandBone": {"sourceElementFileId": "FJ3243", "sourceName": "Left second metacarpal bone", "sourceLaterality": "left", "pickingTargetId": "HA-MESH-BP3D4-FJ3243", "keyboardEnter": true, "cardAndSelectionMatched": true},
+    "rightHandBone": {"sourceElementFileId": "FJ3352", "sourceName": "Right second metacarpal bone", "sourceLaterality": "right", "pickingTargetId": "HA-MESH-BP3D4-FJ3352", "keyboardEnter": true, "cardAndSelectionMatched": true},
+    "rightHandMuscle": {"sourceElementFileId": "FJ1466", "sourceName": "Abductor digiti minimi of right hand", "sourceLaterality": "right", "pickingTargetId": "HA-MESH-BP3D4-FJ1466", "keyboardEnter": true, "cardAndSelectionMatched": true},
+    "leftHandMuscle": {"sourceElementFileId": "FJ1466M", "sourceName": "Abductor digiti minimi of left hand", "sourceLaterality": "left", "pickingTargetId": "HA-MESH-BP3D4-FJ1466M", "keyboardEnter": true, "cardAndSelectionMatched": true},
+    "sharedLeftClavicle": {"sourceElementFileId": "FJ3237", "sourceName": "Left clavicle", "sourceLaterality": "left", "T53RegionMembership": "thorax", "T54RegionMembership": "shoulder-scapular", "sameSourceNodeId": "HA-MESH-BP3D4-FJ3237", "visibleWithThorax": true}
+  },
+  "lateralityObservation": {
+    "status": "held_source_header_surface_conflict",
+    "sourceElementFileIds": ["FJ1469", "FJ1469M"],
+    "sourceHeaderLabels": {"FJ1469": "left", "FJ1469M": "right"},
+    "frameSideRule": "x positive means left",
+    "surfaceXBoundsMm": {"FJ1469": [-301.25, -256.014], "FJ1469M": [256.014, 301.25]},
+    "browserObservation": "Both exact source mesh candidates were visible in the hand-muscle filter; selection/card retained each source name and label. Their source-coordinate side diagnostics remain reciprocal to those labels.",
+    "labelsOrGeometryChanged": false
+  },
+  "visualObservations": {
+    "shoulderThorax": "The actual T53 thorax and T54 shoulder meshes shared one source frame and one root. FJ3237/FJ3279 use the same source bytes and node IDs as T53; selected FJ3237 carried both thorax and shoulder-scapular QA memberships without duplicate rendering.",
+    "smallHandStructures": "Phalanges/metacarpals and intrinsic hand muscle source meshes were separately listed and selectable under their own source IDs; no parent-name substitution was used.",
+    "sourceSideConflict": "The FJ1469/FJ1469M opposite-side observations were retained as a hold; no side swap, mirror, or relabel was performed.",
+    "scopeBoundary": "Private static QA only; no learner route, canonical membership, human review, alternate LOD, motion clip, or public redistribution.",
+    "screenshots": "Front, back, side, shoulder boundary, and keyboard-selected hand structures were inspected in-browser. Screenshots were not stored as binary files."
+  }
+}
