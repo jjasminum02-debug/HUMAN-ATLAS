@@ -1,0 +1,84 @@
+{
+  "revision": "T69-VALIDATION-v1",
+  "task": "T69",
+  "capturedAt": "2026-09-27",
+  "baseline": {
+    "head": "d3e237aae81cc84d84a2b41399224ca618838ffc",
+    "branch": "main",
+    "preExistingStatusEntries": 194
+  },
+  "automated": {
+    "unitTests": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 atlas-data/tools/test_diagnose_bodyparts3d_r4_t52_laterality.py -v",
+      "status": "pass",
+      "tests": 10
+    },
+    "diagnostic": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 atlas-data/tools/diagnose_bodyparts3d_r4_t52_laterality.py",
+      "status": "technically_consistent",
+      "targetCount": 17,
+      "all85BoundsAgreeWithTransform": true,
+      "all85SourceObjHashesAndSizesMatch": true,
+      "all9InternalQaGlbChecksPass": true,
+      "all17ObjToGlbVertexChecksPass": true,
+      "targetGlbMaxDeltaM": 0.0,
+      "identityMismatches": []
+    },
+    "historicalT52Validator": {
+      "revision": "T69-HISTORICAL-T52-VALIDATOR-INVOCATION-v1",
+      "status": "blocked_at_historic_protected_input_guard",
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -c import validate_bodyparts3d_r4_t52_head_neck; call validate() read-only",
+      "firstFailure": "pre-existing protected input unchanged: design/2026-09-25-muscle-atlas/14-TASK-PROMPTS-R15.md",
+      "protectedPath": "design/2026-09-25-muscle-atlas/14-TASK-PROMPTS-R15.md",
+      "t52BaselineExpectedSha256": "aa676ecb655636fc38bb89921c61ae070e6cb1d57678c1de92c47d31eaf944cd",
+      "currentSha256": "fd5c4d7b06b09dc0e20d7af58d371492fa93b45a8b7f3eba2098aee1f28ca0ec",
+      "pathAlreadyDirtyOrUntrackedAtT69Start": true,
+      "t52EvidenceWasNotOverwritten": true,
+      "interpretation": "This legacy validator stopped at a path that was already modified/untracked before T69. T69-specific raw OBJ/QA GLB integrity checks were run independently; this is not recorded as a T52 source-package failure."
+    },
+    "browser": {
+      "status": "pass",
+      "path": "work/evidence/T69/browser-verification.json"
+    },
+    "diffCheck": {
+      "command": "git diff --cached --check",
+      "status": "pass",
+      "scope": "24 staged T69-owned paths; no whitespace errors"
+    },
+    "preservation": {
+      "status": "pass",
+      "path": "work/evidence/T69/preservation-after.json",
+      "unexpectedProtectedInputChanges": 0,
+      "all85T52ObjHashesAndSizesUnchanged": true,
+      "all9T52GlbHashesAndNodeSetsPass": true,
+      "openSimHeadAndCleanStatusPreserved": true
+    }
+  },
+  "acceptance": {
+    "revalidatedThreeHistoricalOppositionFlags": true,
+    "revalidatedFourteenAdditionalAabbCrossings": true,
+    "noAabbOnlyErrorOrHumanReviewRule": true,
+    "sourceLabelsAndVerticesPreserved": true,
+    "noHumanReviewPromotion": true,
+    "sharedFrameVerified": true,
+    "T53MayProceed": true,
+    "T52StillPartial": true,
+    "publicRedistributionHeld": true,
+    "OpenSimPreserved": true
+  },
+  "scope": {
+    "T53Started": false,
+    "T56Started": false,
+    "sourceCacheOrOpenSimFilesModified": false,
+    "learnerCanonicalBindingsAdded": 0,
+    "publicRelease": false
+  },
+  "preservation": {
+    "status": "pass",
+    "path": "work/evidence/T69/preservation-after.json",
+    "unexpectedProtectedInputChanges": 0,
+    "all85T52ObjHashesAndSizesUnchanged": true,
+    "all9T52GlbHashesAndNodeSetsPass": true,
+    "openSimHeadAndCleanStatusPreserved": true
+  }
+}

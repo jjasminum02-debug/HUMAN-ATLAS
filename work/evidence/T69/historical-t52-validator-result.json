@@ -1,0 +1,12 @@
+{
+  "revision": "T69-HISTORICAL-T52-VALIDATOR-INVOCATION-v1",
+  "status": "blocked_at_historic_protected_input_guard",
+  "command": "PYTHONDONTWRITEBYTECODE=1 python3 -c import validate_bodyparts3d_r4_t52_head_neck; call validate() read-only",
+  "firstFailure": "pre-existing protected input unchanged: design/2026-09-25-muscle-atlas/14-TASK-PROMPTS-R15.md",
+  "protectedPath": "design/2026-09-25-muscle-atlas/14-TASK-PROMPTS-R15.md",
+  "t52BaselineExpectedSha256": "aa676ecb655636fc38bb89921c61ae070e6cb1d57678c1de92c47d31eaf944cd",
+  "currentSha256": "fd5c4d7b06b09dc0e20d7af58d371492fa93b45a8b7f3eba2098aee1f28ca0ec",
+  "pathAlreadyDirtyOrUntrackedAtT69Start": true,
+  "t52EvidenceWasNotOverwritten": true,
+  "interpretation": "This legacy validator stopped at a path that was already modified/untracked before T69. T69-specific raw OBJ/QA GLB integrity checks were run independently; this is not recorded as a T52 source-package failure."
+}

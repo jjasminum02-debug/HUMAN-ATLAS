@@ -1,0 +1,266 @@
+{
+  "revision": "T69-SOURCE-VS-GEOMETRY-ASSESSMENT-v1",
+  "accessedOn": "2026-09-27",
+  "sourceLineagePolicy": "BodyParts3D FJ/OBJ header, FMA/BP indexes, element relations, and same-dataset sibling mappings are source-lineage checks, not independent anatomical corroboration. Human review was not performed.",
+  "sources": [
+    {
+      "id": "bodyparts3d_r4_release",
+      "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/release_4.0_e.html",
+      "version": "Release 4.0, 2013-05-16",
+      "locator": "Coordinates; File Names; Attentions in use; coordinate-system diagram",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "Official release note opened in browser; coordinate diagram visually inspected",
+      "sourceRole": "Primary source/version and coordinate convention; says some parts shifted and warns data can contain errors when used as canonical model.",
+      "independence": "same source family as OBJ/metadata; not independent anatomy corroboration"
+    },
+    {
+      "id": "bodyparts3d_r4_readme",
+      "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/README_e.html",
+      "version": "README page updated 2025-02-27; mesh data Release 4.0",
+      "locator": "2.2 ID/name table; 2.4 inclusion relations; 2.6 compound-to-element mapping; 2.8 polygon mesh; License",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "Official HTML opened in browser",
+      "sourceRole": "Defines concept, representation and element file roles; says only atomic ELEMENT entries are polygon meshes.",
+      "independence": "same source family as OBJ/metadata; not independent anatomy corroboration"
+    },
+    {
+      "id": "bodyparts3d_r4_license",
+      "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+      "version": "License page updated 2025-02-27",
+      "locator": "License to Use This Database, paragraphs 28-40",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "Official license HTML opened in browser",
+      "sourceRole": "Current page states CC BY 4.0 and notes that some data may require contacting the licensor; frozen OBJ headers retain legacy CC BY-SA 2.1 Japan text.",
+      "independence": "license record, not anatomy evidence"
+    },
+    {
+      "id": "ncbi_pharynx",
+      "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK544271/",
+      "version": "NCBI Bookshelf/StatPearls chapter; exact page revision date not exposed in the opened view",
+      "locator": "Muscles, especially lines 72-81 in the opened page: constrictor insertions at pharyngeal raphe and palatopharyngeus attachments",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "Original NCBI Bookshelf page opened; text rendered",
+      "sourceRole": "Independent anatomical context for constrictor/raphe contact; does not validate BodyParts3D mesh identity.",
+      "independence": "independent modern anatomy reference"
+    },
+    {
+      "id": "ncbi_arytenoid",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK513252/?report=printable",
+      "version": "NCBI Bookshelf/StatPearls chapter; exact page revision date not exposed in the opened view",
+      "locator": "Muscles, lines 43-52 in the opened page: oblique arytenoid runs from one muscular process to the opposite superior pole; thyroarytenoid attaches anteriorly on the midsagittal plane",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "Original NCBI Bookshelf page opened; text rendered",
+      "sourceRole": "Independent modern anatomical context for paired oblique crossing and medial thyroarytenoid attachment; does not validate a particular mesh identity.",
+      "independence": "independent modern anatomy reference"
+    },
+    {
+      "id": "ncbi_mylohyoid",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK545293/",
+      "version": "StatPearls chapter Last Update 2023-06-05 in retrieved page excerpt",
+      "locator": "Structure and Function: paired mylohyoid halves meet at the median mylohyoid raphe; geniohyoid originates from mental spine and inserts on hyoid body",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "Search-index page excerpt; direct open was blocked by the source site, so full text was not treated as opened",
+      "sourceRole": "Limited independent context for central mylohyoid/geniohyoid attachments.",
+      "independence": "independent modern anatomy reference; excerpt-only access"
+    },
+    {
+      "id": "ncbi_mandible",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK532292/",
+      "version": "NCBI Bookshelf/StatPearls chapter; exact page revision date not exposed in retrieved excerpt",
+      "locator": "Muscles: geniohyoid from inferior mental spine, genioglossus from superior mental spine, platysma insertion on inferior mandible",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "Search-index excerpt; direct open was blocked, so full text was not treated as opened",
+      "sourceRole": "Limited independent context for central mental-spine origins and mandibular attachment.",
+      "independence": "independent modern anatomy reference; excerpt-only access"
+    },
+    {
+      "id": "ncbi_platysma",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK545294/",
+      "version": "StatPearls chapter Last Update 2023-08-07 in retrieved page excerpt",
+      "locator": "Structure and Function: anterior thin fibers attach behind the mandibular symphysis; opposite-side medial fibers may interdigitate variably",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "Search-index reader excerpt; direct open was blocked, so full text was not treated as opened",
+      "sourceRole": "Limited independent context for platysma's variable central meeting/crossing.",
+      "independence": "independent modern anatomy reference; excerpt-only access"
+    },
+    {
+      "id": "ncbi_skull",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK499834/?report=printable",
+      "version": "NCBI Bookshelf/StatPearls chapter; exact page revision date not exposed in retrieved excerpt",
+      "locator": "Calvaria: sagittal suture is the articulation of the two parietal bones",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "Search-index excerpt; direct open was blocked, so full text was not treated as opened",
+      "sourceRole": "Limited independent anatomical context for a small medial parietal margin.",
+      "independence": "independent modern anatomy reference; excerpt-only access"
+    },
+    {
+      "id": "palatopharyngeus_cadaver_abstract",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/25669143/",
+      "version": "2015 cadaver study; PMID 25669143",
+      "locator": "Abstract: spatial relation of palatopharyngeus and superior constrictor, 28 Japanese cadavers; overlapping insertions into pharyngeal raphe",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "PubMed abstract excerpt from search result; full article not opened",
+      "sourceRole": "Additional but excerpt-only anatomical context for PP/SC interface; not used to clear any source-ID conflict.",
+      "independence": "independent cadaver study; abstract-only access"
+    },
+    {
+      "id": "mental_spine_review",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10968188/",
+      "version": "Review page; exact issue/version date not exposed in retrieved excerpt",
+      "locator": "Introduction: mental spines lie at mandibular symphysis midline and occur as paired attachment sites",
+      "accessedOn": "2026-09-27",
+      "accessMethod": "PMC search-index excerpt; direct open was blocked, full text not treated as opened",
+      "sourceRole": "Limited independent context for paired medial genioglossus/geniohyoid origins.",
+      "independence": "independent modern anatomy review; excerpt-only access"
+    }
+  ],
+  "records": [
+    {
+      "sourceElementFileId": "FJ1558",
+      "aiConclusion": {"code": "paired_medial_surface_context_consistent", "text": "AABB crosses x=0, but 98.94% of triangle surface area lies on the named left side. Independent platysma descriptions report medial fibers approaching the mandibular symphysis and variable interdigitation; crossing is not evidence of a label fault.", "correctionAction": "none"},
+      "unresolvedReason": null,
+      "humanReview": {"status": "not_performed", "promoted": false, "requiredForT69Finding": false, "note": "No special human review is triggered by this AABB/surface crossing alone; source mesh remains held under T52's overall review boundary."},
+      "learnerUse": {"status": "source_only_held", "canonicalBinding": null, "redistribution": "held"},
+      "evidenceRefs": ["bodyparts3d_r4_release", "bodyparts3d_r4_readme", "ncbi_platysma"]
+    },
+    {
+      "sourceElementFileId": "FJ1559",
+      "aiConclusion": {"code": "near_midline_attachment_context", "text": "The left geniohyoid surface reaches only 0.549 mm into negative X and 86.92% of surface area is on its named side. A medial mental-spine origin is anatomically described; the plane contact is plausible but is not a mesh-identity proof.", "correctionAction": "none"},
+      "unresolvedReason": null,
+      "humanReview": {"status": "not_performed", "promoted": false, "requiredForT69Finding": false, "note": "No label conflict established; no automatic human-review requirement from the crossing."},
+      "learnerUse": {"status": "source_only_held", "canonicalBinding": null, "redistribution": "held"},
+      "evidenceRefs": ["bodyparts3d_r4_release", "bodyparts3d_r4_readme", "ncbi_mandible", "ncbi_mylohyoid"]
+    },
+    {
+      "sourceElementFileId": "FJ1562",
+      "aiConclusion": {"code": "median_raphe_contact_context", "text": "The left mylohyoid surface crosses by 0.655 mm and 92.30% of its surface area is on its named side. An independent source describes the paired mylohyoid halves meeting at a median raphe; this crossing does not establish an error.", "correctionAction": "none"},
+      "unresolvedReason": null,
+      "humanReview": {"status": "not_performed", "promoted": false, "requiredForT69Finding": false, "note": "No special review requirement from crossing alone; no anatomy approval is claimed."},
+      "learnerUse": {"status": "source_only_held", "canonicalBinding": null, "redistribution": "held"},
+      "evidenceRefs": ["bodyparts3d_r4_release", "bodyparts3d_r4_readme", "ncbi_mylohyoid"]
+    },
+    {
+      "sourceElementFileId": "FJ1587",
+      "aiConclusion": {"code": "paired_medial_surface_context_consistent", "text": "AABB crosses x=0, while 99.11% of surface area is on the named right side. The small opposite-side surface and medial course are compatible with the described variable central platysma fibers; no wrong-side label is shown.", "correctionAction": "none"},
+      "unresolvedReason": null,
+      "humanReview": {"status": "not_performed", "promoted": false, "requiredForT69Finding": false, "note": "No special review is triggered by the crossing alone; source mesh remains held under T52's overall review boundary."},
+      "learnerUse": {"status": "source_only_held", "canonicalBinding": null, "redistribution": "held"},
+      "evidenceRefs": ["bodyparts3d_r4_release", "bodyparts3d_r4_readme", "ncbi_platysma"]
+    },
+    {
+      "sourceElementFileId": "FJ1595",
+      "aiConclusion": {"code": "aabb_false_positive_tiny_surface_fragments", "text": "The main connected component spans only negative X; it accounts for 99.79% of total area. The opposite-side AABB reach is caused by very small disconnected surface components, together under 0.001% of area. This is not a laterality fault signal by itself.", "correctionAction": "none"},
+      "unresolvedReason": null,
+      "humanReview": {"status": "not_performed", "promoted": false, "requiredForT69Finding": false, "note": "AABB-only direction was a false-positive diagnostic for the dominant surface; tiny components are preserved, not deleted."},
+      "learnerUse": {"status": "source_only_held", "canonicalBinding": null, "redistribution": "held"},
+      "evidenceRefs": ["bodyparts3d_r4_release", "bodyparts3d_r4_readme"]
+    },
+    {
+      "sourceElementFileId": "FJ1599",
+      "aiConclusion": {"code": "aabb_false_positive_tiny_surface_fragments", "text": "The main connected component spans only negative X and accounts for 99.69% of area. Positive-X fragments contribute about 0.0033% of area; the box crossing is not evidence of an incorrect source label.", "correctionAction": "none"},
+      "unresolvedReason": null,
+      "humanReview": {"status": "not_performed", "promoted": false, "requiredForT69Finding": false, "note": "AABB is not used as a verdict; no small component was removed or relabeled."},
+      "learnerUse": {"status": "source_only_held", "canonicalBinding": null, "redistribution": "held"},
+      "evidenceRefs": ["bodyparts3d_r4_release", "bodyparts3d_r4_readme"]
+    },
+    {
+      "sourceElementFileId": "FJ2738",
+      "aiConclusion": {"code": "midline_origin_context_not_mesh_partition_proof", "text": "The left genioglossus mesh reaches 1.506 mm across x=0; 68.00% of area lies on the named side. Its mental-spine origin is a medial attachment, so the small physical cross-plane reach does not establish a label error. The source does not define an exact left/right surface boundary at that attachment.", "correctionAction": "none"},
+      "unresolvedReason": "The source's paired concept and medial attachment do not define an exact mesh ownership boundary around the midline; retain the source-only mesh identity if that boundary becomes material.",
+      "humanReview": {"status": "not_performed", "promoted": false, "requiredForT69Finding": false, "note": "No fault or mandatory review is inferred from crossing alone; anatomy was not approved."},
+      "learnerUse": {"status": "source_only_held", "canonicalBinding": null, "redistribution": "held"},
+      "evidenceRefs": ["bodyparts3d_r4_release", "bodyparts3d_r4_readme", "ncbi_mandible", "mental_spine_review"]
+    },
+    {
+      "sourceElementFileId": "FJ2740",
+      "aiConclusion": {"code": "pharyngeal_raphe_contact_context", "text": "The named-left inferior constrictor has 89.57% surface area on its named side; its opposite-side bound reach is under 0.85 mm. An opened modern pharynx source places constrictor insertions at the pharyngeal raphe, consistent with near-midline contact.", "correctionAction": "none"},
+      "unresolvedReason": null,
+      "humanReview": {"status": "not_performed", "promoted": false, "requiredForT69Finding": false, "note": "No label mismatch is established; a median attachment is not treated as an error."},
+      "learnerUse": {"status": "source_only_held", "canonicalBinding": null, "redistribution": "held"},
+      "evidenceRefs": ["bodyparts3d_r4_release", "bodyparts3d_r4_readme", "ncbi_pharynx"]
+    },
+    {
+      "sourceElementFileId": "FJ2742",
+      "aiConclusion": {"code": "opposite_side_reciprocal_pair_conflict", "text": "Only 8.12% of surface area is on the source-labeled right side; 91.88% is on positive X. Its official same-parent left sibling FJ2754 has 0% on its source-labeled left side and its full surface on negative X. Source IDs and headers agree with the official index, while the two observed surfaces localize reciprocally opposite their labels. The responsible label-to-geometry assignment cannot be resolved from this same-source lineage.", "correctionAction": "hold_for_source_identity_adjudication"},
+      "unresolvedReason": "Resolve the frozen FJ2742/FJ2754 label-to-geometry assignment against an independent source-owner mapping or anatomist's source-level review. Preserve both FJ/FMA/BP labels and vertices unchanged; do not swap or mirror.",
+      "humanReview": {"status": "not_performed", "promoted": false, "requiredForT69Finding": true, "note": "This is a paired source-identity conflict, not an AABB-crossing rule; adjudicate only this pair before any laterality-dependent use."},
+      "learnerUse": {"status": "source_only_held", "canonicalBinding": null, "redistribution": "held"},
+      "evidenceRefs": ["bodyparts3d_r4_release", "bodyparts3d_r4_readme", "ncbi_pharynx"]
+    },
+    {
+      "sourceElementFileId": "FJ2743",
+      "aiConclusion": {"code": "minor_median_margin_no_label_conflict", "text": "The left palatopharyngeus has 98.83% of surface area on positive X; the opposite-side edge reaches 1.99 mm. The reciprocal right mesh is 99.72% on negative X. A raphe/overlap cadaver-study abstract is supportive context only; the small crossing is not a source-label conflict.", "correctionAction": "none"},
+      "unresolvedReason": "The cited cadaver study was available only as an abstract excerpt; the exact PP mesh boundary at the median is not independently verified. No error or automatic review requirement follows from the crossing.",
+      "humanReview": {"status": "not_performed", "promoted": false, "requiredForT69Finding": false, "note": "Source-only held; abstract-only context is not a human anatomy approval."},
+      "learnerUse": {"status": "source_only_held", "canonicalBinding": null, "redistribution": "held"},
+      "evidenceRefs": ["bodyparts3d_r4_release", "bodyparts3d_r4_readme", "ncbi_pharynx", "palatopharyngeus_cadaver_abstract"]
+    },
+    {
+      "sourceElementFileId": "FJ2747",
+      "aiConclusion": {"code": "pharyngeal_raphe_contact_context", "text": "The left superior constrictor has 93.47% surface area on the named side and only a 0.65 mm opposite-side bound reach. The opened modern pharynx source describes posterior insertion at the midline pharyngeal raphe, so this crossing is not a label fault indicator.", "correctionAction": "none"},
+      "unresolvedReason": null,
+      "humanReview": {"status": "not_performed", "promoted": false, "requiredForT69Finding": false, "note": "No label mismatch is established; no human review is inferred from the cross-plane bound."},
+      "learnerUse": {"status": "source_only_held", "canonicalBinding": null, "redistribution": "held"},
+      "evidenceRefs": ["bodyparts3d_r4_release", "bodyparts3d_r4_readme", "ncbi_pharynx"]
+    },
+    {
+      "sourceElementFileId": "FJ2754",
+      "aiConclusion": {"code": "opposite_side_reciprocal_pair_conflict", "text": "The entire face-referenced surface is on negative X despite the source label 'Left'. Its official same-parent right sibling FJ2742 has 91.88% of area on positive X despite the source label 'Right'. The OBJ header and official index match their recorded FJ/FMA/BP IDs, but that same-source agreement cannot determine which label-to-geometry assignment is responsible.", "correctionAction": "hold_for_source_identity_adjudication"},
+      "unresolvedReason": "Resolve the frozen FJ2742/FJ2754 label-to-geometry assignment against an independent source-owner mapping or anatomist's source-level review. Preserve both FJ/FMA/BP labels and vertices unchanged; do not swap or mirror.",
+      "humanReview": {"status": "not_performed", "promoted": false, "requiredForT69Finding": true, "note": "This is a paired source-identity conflict, not a generic center-plane rule; do not use either mesh for laterality-dependent learner content before adjudication."},
+      "learnerUse": {"status": "source_only_held", "canonicalBinding": null, "redistribution": "held"},
+      "evidenceRefs": ["bodyparts3d_r4_release", "bodyparts3d_r4_readme", "ncbi_pharynx"]
+    },
+    {
+      "sourceElementFileId": "FJ2755",
+      "aiConclusion": {"code": "minor_median_margin_no_label_conflict", "text": "The named-right palatopharyngeus has 99.72% surface area on negative X and reaches only 0.682 mm into positive X. Its counterpart FJ2743 is 98.83% on its named-left side. Crossing alone does not show a label fault.", "correctionAction": "none"},
+      "unresolvedReason": "The PP-to-raphe details are supported only by an abstract excerpt here; the precise mesh edge partition remains unverified, with no current contradictory pair evidence.",
+      "humanReview": {"status": "not_performed", "promoted": false, "requiredForT69Finding": false, "note": "Source-only held; no human anatomy sign-off is claimed."},
+      "learnerUse": {"status": "source_only_held", "canonicalBinding": null, "redistribution": "held"},
+      "evidenceRefs": ["bodyparts3d_r4_release", "bodyparts3d_r4_readme", "ncbi_pharynx", "palatopharyngeus_cadaver_abstract"]
+    },
+    {
+      "sourceElementFileId": "FJ2780",
+      "aiConclusion": {"code": "paired_oblique_course_crossing_not_fault", "text": "The left oblique arytenoid is nearly evenly distributed across x=0; the right counterpart is also bilateral. An opened modern source explicitly describes fibers from one arytenoid muscular process crossing to the opposite superior pole. This is expected course context, not evidence of wrong-side labeling.", "correctionAction": "none"},
+      "unresolvedReason": null,
+      "humanReview": {"status": "not_performed", "promoted": false, "requiredForT69Finding": false, "note": "The cross-plane pattern is anatomically supported; no mesh approval or human review is claimed."},
+      "learnerUse": {"status": "source_only_held", "canonicalBinding": null, "redistribution": "held"},
+      "evidenceRefs": ["bodyparts3d_r4_release", "bodyparts3d_r4_readme", "ncbi_arytenoid"]
+    },
+    {
+      "sourceElementFileId": "FJ2785",
+      "aiConclusion": {"code": "medial_attachment_context", "text": "The left thyroarytenoid has 97.58% of surface area on positive X and reaches only 1.05 mm across x=0. An opened modern source places its anterior attachment on the midsagittal thyroid cartilage; no source-label conflict is shown.", "correctionAction": "none"},
+      "unresolvedReason": null,
+      "humanReview": {"status": "not_performed", "promoted": false, "requiredForT69Finding": false, "note": "No special review from this near-median edge; anatomy is not approved."},
+      "learnerUse": {"status": "source_only_held", "canonicalBinding": null, "redistribution": "held"},
+      "evidenceRefs": ["bodyparts3d_r4_release", "bodyparts3d_r4_readme", "ncbi_arytenoid"]
+    },
+    {
+      "sourceElementFileId": "FJ2798",
+      "aiConclusion": {"code": "paired_oblique_course_crossing_not_fault", "text": "The right oblique arytenoid has 57.34% surface area on its named side, while the left counterpart has 51.80% on the opposite side. The opened modern source describes each oblique muscle crossing to the opposite arytenoid; crossing is consistent with that course.", "correctionAction": "none"},
+      "unresolvedReason": null,
+      "humanReview": {"status": "not_performed", "promoted": false, "requiredForT69Finding": false, "note": "The cross-plane pattern is anatomically supported; no mesh approval or human review is claimed."},
+      "learnerUse": {"status": "source_only_held", "canonicalBinding": null, "redistribution": "held"},
+      "evidenceRefs": ["bodyparts3d_r4_release", "bodyparts3d_r4_readme", "ncbi_arytenoid"]
+    },
+    {
+      "sourceElementFileId": "FJ3380",
+      "aiConclusion": {"code": "small_sagittal_margin_contact_context", "text": "The right parietal surface has 99.04% area on negative X; 0.96% reaches positive X. The sagittal suture is the midline articulation of the two parietal bones, consistent with a small medial margin. The left companion FJ3274 is in the official index but outside T52's frozen 85-mesh set and was not downloaded.", "correctionAction": "none"},
+      "unresolvedReason": "A surface-to-surface pair comparison is unavailable because left FJ3274 is outside the frozen T52 package. This is a scope limit, not a laterality error claim.",
+      "humanReview": {"status": "not_performed", "promoted": false, "requiredForT69Finding": false, "note": "No companion was acquired; no mesh identity or anatomy approval is claimed."},
+      "learnerUse": {"status": "source_only_held", "canonicalBinding": null, "redistribution": "held"},
+      "evidenceRefs": ["bodyparts3d_r4_release", "bodyparts3d_r4_readme", "ncbi_skull"]
+    }
+  ],
+  "rightsBoundary": {
+    "localTechnicalValidation": "allowed_for_this_private_local_QA_task",
+    "publicRedistribution": "held",
+    "reason": "Current archive license page states CC BY 4.0, while these frozen OBJ headers state legacy CC BY-SA 2.1 Japan; file-level scope/reconciliation is unresolved. Technical validation is not redistribution approval."
+  },
+  "humanReviewBoundary": {
+    "performed": false,
+    "promotionAllowed": false,
+    "pairAdjudicationRequiredForLateralityDependentUse": ["FJ2742", "FJ2754"],
+    "crossingAloneRequiresReview": false
+  }
+}

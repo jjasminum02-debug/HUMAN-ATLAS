@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>T69 source mesh comparison — private QA</title>
+  <script type="importmap">
+    {"imports":{"three":"/atlas-web/node_modules/three/build/three.module.js"}}
+  </script>
+  <style>
+    :root { color-scheme: light; font: 14px/1.45 system-ui,-apple-system,sans-serif; color: #162232; background: #edf1f5; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    header { display: flex; gap: 16px; align-items: center; justify-content: space-between; padding: 12px 18px; background: #fff; border-bottom: 1px solid #d3dce6; }
+    h1 { margin: 0; font-size: 18px; }
+    .private { color: #76491d; font-size: 12px; font-weight: 650; }
+    main { display: grid; grid-template-columns: minmax(290px,360px) minmax(0,1fr); gap: 12px; height: calc(100vh - 56px); min-height: 560px; padding: 12px; }
+    aside, #viewport { background: #fff; border: 1px solid #d3dce6; border-radius: 10px; min-width: 0; min-height: 0; }
+    aside { display: flex; flex-direction: column; gap: 10px; padding: 12px; overflow: auto; }
+    label { display: grid; gap: 4px; font-weight: 600; }
+    select, button { font: inherit; }
+    select, button { border: 1px solid #bac6d4; border-radius: 7px; color: #213149; background: #f8fafc; padding: 7px 9px; }
+    button { cursor: pointer; }
+    button:hover, button[aria-pressed="true"] { border-color: #4c7199; background: #e9f1f8; }
+    button:focus-visible, select:focus-visible { outline: 3px solid #7aa8d0; outline-offset: 2px; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 6px; }
+    .card { border: 1px solid #d9e0e8; border-radius: 8px; background: #f8fafc; padding: 8px; font-size: 12px; }
+    .card strong { display: block; margin-bottom: 3px; }
+    .legend { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .swatch { display: inline-block; width: 10px; height: 10px; margin-right: 5px; border-radius: 3px; vertical-align: -1px; }
+    .hint { margin: 0; color: #5d6e82; font-size: 12px; }
+    #status { padding: 7px 9px; border-radius: 6px; background: #edf2f7; font-size: 12px; }
+    #viewport { position: relative; overflow: hidden; background: #e6ebf0; }
+    #viewport canvas { display: block; width: 100%; height: 100%; }
+    .orientation { position: absolute; top: 10px; left: 10px; max-width: calc(100% - 20px); padding: 6px 8px; color: #23364c; background: rgba(255,255,255,.93); border: 1px solid #d3dce6; border-radius: 6px; font-size: 11px; pointer-events: none; }
+    #statusView { position: absolute; right: 10px; top: 10px; padding: 6px 8px; color: #24374e; background: rgba(255,255,255,.93); border: 1px solid #d3dce6; border-radius: 6px; font-size: 11px; }
+    .foot { color: #69798c; font-size: 11px; }
+    @media (max-width: 720px) {
+      header { align-items: flex-start; flex-direction: column; gap: 2px; }
+      main { grid-template-columns: minmax(0,1fr); grid-template-rows: minmax(52vh,1fr) auto; height: auto; min-height: 0; }
+      #viewport { grid-row: 1; height: 55vh; min-height: 360px; }
+      aside { grid-row: 2; max-height: 54vh; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>T52 원본 좌우 비교</h1>
+    <div class="private">비공개 로컬 QA · BodyParts3D Release 4.0 · 제품 학습 화면 아님</div>
+  </header>
+  <main>
+    <aside aria-label="T69 좌우 비교 선택">
+      <label for="target">재검증 항목 (17개)
+        <select id="target"></select>
+      </label>
+      <div class="toolbar" aria-label="카메라 방향">
+        <button data-view="front" aria-pressed="true" type="button">정면</button>
+        <button data-view="back" aria-pressed="false" type="button">후면</button>
+        <button data-view="side" aria-pressed="false" type="button">측면</button>
+      </div>
+      <div class="legend">
+        <div><span class="swatch" style="background:#d47720"></span>선택한 원본 FJ</div>
+        <div><span class="swatch" style="background:#13858d"></span>공식 좌우 대응 FJ</div>
+        <div><span class="swatch" style="background:#a8b1bc"></span>주변 원본 구조</div>
+        <div><span class="swatch" style="background:#e0b84c"></span>x=0 기준면</div>
+      </div>
+      <div class="card" id="selected"></div>
+      <div class="card" id="counterpart"></div>
+      <div class="card" id="measure"></div>
+      <div id="status" role="status">T52 실제 GLB 9개 batch 불러오는 중…</div>
+      <label for="capture">저장할 실제 WebGL 비교 캡처
+        <select id="capture">
+          <option value="pair-2742-2754">FJ2742 / FJ2754 source 충돌 쌍</option>
+          <option value="pair-2780-2798">FJ2780 / FJ2798 교차 경로 쌍</option>
+          <option value="pair-1595-1573">FJ1595 / FJ1573 우측 목 기준 쌍</option>
+          <option value="pair-2738-2750">FJ2738 / FJ2750 중앙 기시 쌍</option>
+        </select>
+      </label>
+      <button id="save" type="button">현재 정면·후면·측면 캡처 저장</button>
+      <p class="hint">키보드: 1 정면 · 2 후면 · 3 측면. 카메라 방향은 원본 프레임을 유지합니다. 각 면적 비율은 OBJ triangle 면적 관찰값이며 좌우 승인값이 아닙니다.</p>
+      <p class="foot">x&gt;0 = 사람의 왼쪽 · x&lt;0 = 사람의 오른쪽 · y&gt;0 = 머리쪽 · z&gt;0 = 앞쪽. 원본 라벨·좌표는 변경하지 않습니다.</p>
+    </aside>
+    <section id="viewport" aria-label="하나의 실제 T52 WebGL 장면">
+      <div class="orientation" id="axisText">x&gt;0 사람 왼쪽 · x&lt;0 사람 오른쪽 · y&gt;0 머리 · z&gt;0 앞</div>
+      <div id="statusView">정면 · +Z에서 앞쪽을 봄</div>
+    </section>
+  </main>
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from '/atlas-web/node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+
+    const manifestUrl = '/atlas-data/manifests/bodyparts3d-r4-t52/head-neck.json';
+    const diagnosticUrl = '/work/evidence/T69/diagnostic.json';
+    const viewNames = { front: '정면 · +Z에서 앞쪽을 봄', back: '후면 · −Z에서 뒤쪽을 봄', side: '우측면 · −X에서 오른쪽을 봄' };
+    const colorSelected = new THREE.MeshStandardMaterial({ color: '#d47720', roughness: .78, metalness: .02 });
+    const colorCounterpart = new THREE.MeshStandardMaterial({ color: '#13858d', roughness: .78, metalness: .02 });
+    const colorContext = new THREE.MeshStandardMaterial({ color: '#a8b1bc', roughness: .9, transparent: true, opacity: .19, depthWrite: false });
+    const meshes = new Map();
+    const manifestAssets = new Map();
+    const diagnostics = new Map();
+    const measurements = new Map();
+    let activeFj = null;
+    let activeView = 'front';
+    let renderer;
+    let scene;
+    let camera;
+    let root;
+    let medianPlane;
+    let loaded = false;
+    window.t69QA = { loaded: false, meshCount: 0, canvasCount: 0, rootCount: 0, view: 'front', activeFj: null, errors: [] };
+    const viewport = document.querySelector('#viewport');
+    const status = document.querySelector('#status');
+
+    function fitCamera(view) {
+      activeView = view;
+      const active = meshes.get(activeFj);
+      const counterpartFj = getCounterpartFj(activeFj);
+      const counterpart = counterpartFj ? meshes.get(counterpartFj) : null;
+      const box = new THREE.Box3();
+      if (active) box.expandByObject(active);
+      if (counterpart) box.expandByObject(counterpart);
+      if (box.isEmpty()) box.setFromObject(root);
+      const baseSize = box.getSize(new THREE.Vector3());
+      const span = Math.max(baseSize.length(), 0.035);
+      box.expandByScalar(span * 0.4);
+      const center = box.getCenter(new THREE.Vector3());
+      const radius = Math.max(box.getSize(new THREE.Vector3()).length() * 0.5, 0.025);
+      const halfFovV = THREE.MathUtils.degToRad(camera.fov / 2);
+      const limitFov = Math.atan(Math.tan(halfFovV) * Math.min(1, camera.aspect));
+      const distance = radius / Math.sin(limitFov) * 1.2 + radius * .2;
+      const offsets = { front: new THREE.Vector3(0, 0, distance), back: new THREE.Vector3(0, 0, -distance), side: new THREE.Vector3(-distance, 0, 0) };
+      camera.position.copy(center).add(offsets[view]);
+      camera.up.set(0, 1, 0);
+      camera.lookAt(center);
+      camera.near = Math.max(radius / 10000, .0001);
+      camera.far = radius * 20;
+      camera.updateProjectionMatrix();
+      if (medianPlane) {
+        scene.remove(medianPlane);
+        medianPlane.geometry.dispose();
+      }
+      const size = box.getSize(new THREE.Vector3());
+      const geometry = new THREE.PlaneGeometry(Math.max(size.z, .01), Math.max(size.y, .01));
+      medianPlane = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: '#e0b84c', side: THREE.DoubleSide, transparent: true, opacity: .035, depthWrite: false }));
+      medianPlane.name = 'T69SourceMedianPlaneX0';
+      medianPlane.rotation.y = Math.PI / 2;
+      medianPlane.position.set(0, center.y, center.z);
+      scene.add(medianPlane);
+      document.querySelector('#statusView').textContent = viewNames[view];
+      viewport.dataset.view = view;
+      document.querySelectorAll('[data-view]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
+      window.t69QA.view = view;
+      window.t69QA.cameraPosition = camera.position.toArray();
+      render();
+    }
+
+    function render() {
+      if (!renderer || !scene || !camera) return;
+      renderer.render(scene, camera);
+      window.t69QA.canvasCount = document.querySelectorAll('#viewport canvas').length;
+      window.t69QA.rootCount = scene.children.filter((n) => n.name === 'AnatomySceneRoot').length;
+      window.t69QA.rendererIdentity = renderer.domElement.dataset.rendererIdentity ||= 'T69-single-renderer';
+      window.t69QA.rootName = root?.name;
+      viewport.dataset.canvasCount = String(document.querySelectorAll('#viewport canvas').length);
+      viewport.dataset.rootCount = String(scene.children.filter((n) => n.name === 'AnatomySceneRoot').length);
+      viewport.dataset.rendererCount = '1';
+      viewport.dataset.meshCount = String(meshes.size);
+      viewport.dataset.activeSourceFj = activeFj ?? '';
+      viewport.dataset.counterpartFj = getCounterpartFj(activeFj) ?? '';
+    }
+
+    function counterpartFor(fj) {
+      const d = diagnostics.get(fj);
+      return d?.bilateralComparison?.concepts?.[0] ?? null;
+    }
+    function getCounterpartFj(fj) {
+      const relation = counterpartFor(fj);
+      const measured = relation?.measuredFjElements?.find((r) => r.availability === 'measured_from_existing_t52_frozen_mesh');
+      return measured?.sourceElementFileId ?? null;
+    }
+    function nameOf(fj) {
+      return manifestAssets.get(fj)?.sourceName ?? fj;
+    }
+    function showSelection(fj) {
+      activeFj = fj;
+      document.querySelector('#target').value = fj;
+      const counterpartFj = getCounterpartFj(fj);
+      for (const [id, mesh] of meshes) mesh.material = id === fj ? colorSelected : id === counterpartFj ? colorCounterpart : colorContext;
+      const diag = diagnostics.get(fj);
+      const label = manifestAssets.get(fj);
+      const cp = counterpartFor(fj);
+      document.querySelector('#selected').innerHTML = `<strong>주 선택 · 주황색</strong>${esc(fj)} · ${esc(label?.sourceName ?? '이름 미상')}<br>FMA ${esc(label?.sourceConceptId ?? '—')} · BP ${esc(label?.sourceRepresentationId ?? '—')}<br>source label: ${esc(label?.laterality ?? 'unlabeled')} · face-referenced surface: ${percent(diag?.geometryObservation?.surfaceAreaOnSourceLabeledSideFraction)} named-side`;
+      let counterpartText = '공식 대응 mesh 없음';
+      if (counterpartFj) {
+        const cpData = manifestAssets.get(counterpartFj);
+        const cpMeasurement = measurements.get(counterpartFj);
+        counterpartText = `${counterpartFj} · ${cpData?.sourceName ?? ''}<br>FMA ${cpData?.sourceConceptId ?? '—'} · ${percent(cpMeasurement?.surfaceAreaOnSourceLabeledSideFraction)} named-side`;
+      } else if (cp) {
+        const notAcquired = cp?.counterpartFjElementIds?.[0] ?? '확인 안 됨';
+        counterpartText = `${cp.counterpartConceptName ?? '공식 개념'} · ${notAcquired} (T52 동결 집합 밖; 취득하지 않음)`;
+      }
+      document.querySelector('#counterpart').innerHTML = `<strong>공식 좌우 대응 · 청록색</strong>${counterpartText}<br><span class="foot">동일 source FMA/FJ 계보 대조; 독립 근거로 세지 않음</span>`;
+      document.querySelector('#measure').innerHTML = `<strong>이번 판정 경계</strong>${esc(diag?.aiConclusion?.code ?? 'source record')}<br>${esc(diag?.aiConclusion?.text ?? 'AI assessment not available')}<br><span class="foot">사람 검토: ${diag?.humanReview?.status ?? 'unknown'} · 학습 바인딩 없음 · 재배포 보류</span>`;
+      status.textContent = `실제 장면: mesh ${meshes.size}/85 · 선택 ${fj}${counterpartFj ? ` ↔ ${counterpartFj}` : ''} · 수정/미러 0`;
+      window.t69QA.activeFj = fj;
+      window.t69QA.counterpartFj = counterpartFj;
+      window.t69QA.selectionLabelMatchesFj = label?.sourceElementFileId === fj;
+      window.t69QA.loadedPairIds = [fj, counterpartFj].filter(Boolean);
+      fitCamera(activeView);
+    }
+    function percent(value) { return Number.isFinite(value) ? `${(value * 100).toFixed(2)}%` : '측정불가'; }
+    function esc(value) { return String(value).replace(/[&<>"']/g, (ch) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch])); }
+
+    async function saveCurrentCapture(view) {
+      fitCamera(view);
+      await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      const captureChoice = document.querySelector('#capture').value;
+      const label = manifestAssets.get(activeFj)?.sourceName ?? activeFj;
+      const counterpartFj = getCounterpartFj(activeFj);
+      const cpLabel = counterpartFj ? manifestAssets.get(counterpartFj)?.sourceName ?? counterpartFj : 'counterpart not acquired';
+      const overlay = document.createElement('canvas');
+      overlay.width = renderer.domElement.width;
+      overlay.height = renderer.domElement.height;
+      const ctx = overlay.getContext('2d');
+      ctx.drawImage(renderer.domElement, 0, 0);
+      const scale = overlay.width / 1440;
+      const fontPx = Math.max(13, Math.round(18 * scale));
+      const pad = Math.round(18 * scale);
+      ctx.fillStyle = 'rgba(255,255,255,.94)';
+      ctx.fillRect(0, 0, overlay.width, Math.round(124 * scale));
+      ctx.fillStyle = '#142437';
+      ctx.font = `700 ${fontPx}px system-ui,sans-serif`;
+      ctx.fillText(`T69 private QA · ${captureChoice} · ${viewNames[view]}`, pad, Math.round(28 * scale));
+      ctx.font = `${Math.round(14 * scale)}px system-ui,sans-serif`;
+      ctx.fillStyle = '#d47720';
+      ctx.fillText(`ORANGE  ${activeFj} · ${label}`, pad, Math.round(58 * scale));
+      ctx.fillStyle = '#13858d';
+      ctx.fillText(`TEAL  ${counterpartFj ?? '—'} · ${cpLabel}`, pad, Math.round(82 * scale));
+      ctx.fillStyle = '#26394d';
+      ctx.fillText('BodyParts3D R4 source frame · x>0 subject left · x<0 subject right · x=0 shown as reference only', pad, Math.round(106 * scale));
+      const allowedPrefix = captureChoice;
+      const fileName = `${allowedPrefix}-${view}.png`;
+      const blob = await new Promise((resolve) => overlay.toBlob(resolve, 'image/png'));
+      if (!blob) throw new Error('PNG capture failed');
+      const response = await fetch(`/__capture/${fileName}`, { method: 'POST', headers: { 'Content-Type': 'image/png' }, body: blob });
+      if (!response.ok) throw new Error(`capture save failed HTTP ${response.status}`);
+      const saved = await response.json();
+      window.t69QA.savedCaptures ||= [];
+      window.t69QA.savedCaptures.push({ fileName, bytes: blob.size, view, activeFj, counterpartFj });
+      status.textContent = `PNG 저장: ${saved.path} (${blob.size} bytes)`;
+      return saved;
+    }
+
+    document.querySelector('#target').addEventListener('change', (event) => showSelection(event.target.value));
+    document.querySelectorAll('[data-view]').forEach((button) => button.addEventListener('click', () => fitCamera(button.dataset.view)));
+    window.addEventListener('keydown', (event) => {
+      if (event.target instanceof HTMLInputElement || event.target instanceof HTMLSelectElement) return;
+      if (event.key === '1') fitCamera('front');
+      if (event.key === '2') fitCamera('back');
+      if (event.key === '3') fitCamera('side');
+    });
+    window.addEventListener('resize', () => {
+      if (!renderer) return;
+      const rect = viewport.getBoundingClientRect();
+      camera.aspect = Math.max(1, rect.width) / Math.max(1, rect.height);
+      camera.updateProjectionMatrix();
+      renderer.setSize(Math.max(1, rect.width), Math.max(1, rect.height), false);
+      fitCamera(activeView);
+    });
+    window.addEventListener('error', (event) => window.t69QA.errors.push(String(event.message || event.error || 'window error')));
+    window.addEventListener('unhandledrejection', (event) => window.t69QA.errors.push(String(event.reason || 'unhandled rejection')));
+    document.querySelector('#save').addEventListener('click', async () => {
+      try {
+        const selected = document.querySelector('#capture').value;
+        const targetForPreset = { 'pair-2742-2754': 'FJ2742', 'pair-2780-2798': 'FJ2780', 'pair-1595-1573': 'FJ1595', 'pair-2738-2750': 'FJ2738' }[selected];
+        if (targetForPreset) {
+          document.querySelector('#target').value = targetForPreset;
+          showSelection(targetForPreset);
+        }
+        for (const view of ['front','back','side']) await saveCurrentCapture(view);
+      } catch (error) {
+        window.t69QA.errors.push(String(error));
+        status.textContent = `캡처 실패: ${String(error)}`;
+        console.error(error);
+      }
+    });
+    window.t69QA.selectFj = (fj) => { document.querySelector('#target').value = fj; showSelection(fj); };
+    window.t69QA.setView = (view) => fitCamera(view);
+    window.t69QA.captureAllViews = async (fj) => { window.t69QA.selectFj(fj); for (const view of ['front','back','side']) await saveCurrentCapture(view); };
+
+    try {
+      const [manifestResponse, diagnosticResponse] = await Promise.all([fetch(manifestUrl), fetch(diagnosticUrl)]);
+      if (!manifestResponse.ok || !diagnosticResponse.ok) throw new Error(`input HTTP ${manifestResponse.status}/${diagnosticResponse.status}`);
+      const manifest = await manifestResponse.json();
+      const diagnostic = await diagnosticResponse.json();
+      for (const asset of manifest.sourceAssets) manifestAssets.set(asset.sourceElementFileId, asset);
+      for (const item of diagnostic.diagnostics) diagnostics.set(item.sourceLabel.sourceElementFileId, item);
+      for (const item of diagnostic.diagnostics) {
+        measurements.set(item.sourceLabel.sourceElementFileId, item.geometryObservation);
+        for (const concept of item.bilateralComparison?.concepts ?? []) {
+          for (const measured of concept.measuredFjElements ?? []) {
+            if (measured.availability === 'measured_from_existing_t52_frozen_mesh') measurements.set(measured.sourceElementFileId, measured);
+          }
+        }
+      }
+      const targetSelect = document.querySelector('#target');
+      for (const item of diagnostic.diagnostics) {
+        const asset = manifestAssets.get(item.sourceLabel.sourceElementFileId);
+        const option = document.createElement('option');
+        option.value = item.sourceLabel.sourceElementFileId;
+        option.textContent = `${option.value} · ${asset?.sourceName ?? ''}`;
+        targetSelect.append(option);
+      }
+
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, preserveDrawingBuffer: true });
+      renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.05;
+      renderer.domElement.dataset.rendererIdentity = 'T69-single-renderer';
+      viewport.prepend(renderer.domElement);
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color('#e6ebf0');
+      camera = new THREE.PerspectiveCamera(36, 1, .0001, 100);
+      root = new THREE.Group(); root.name = 'AnatomySceneRoot'; scene.add(root);
+      scene.add(new THREE.HemisphereLight(0xf3f7ff, 0x77808a, 2.1));
+      const key = new THREE.DirectionalLight(0xfff1dc, 2.3); key.position.set(1.4,1.8,2.2); scene.add(key);
+      const fill = new THREE.DirectionalLight(0xa6cfff, 1.15); fill.position.set(-1.5,.5,-1.3); scene.add(fill);
+      const loader = new GLTFLoader();
+      for (const batch of manifest.internalBatches) {
+        const gltf = await new Promise((resolve,reject) => loader.load(`/${batch.glbPath}`,resolve,undefined,reject));
+        for (const child of [...gltf.scene.children]) root.add(child);
+      }
+      root.updateMatrixWorld(true);
+      root.traverse((node) => {
+        if (!node.isMesh) return;
+        const fj = node.userData.sourceFileId;
+        if (!fj || meshes.has(fj)) throw new Error(`missing or duplicate source ID ${fj}`);
+        meshes.set(fj,node);
+        node.material = colorContext;
+      });
+      if (meshes.size !== manifest.sourceAssets.length || meshes.size !== 85) throw new Error(`loaded ${meshes.size} of expected 85 source meshes`);
+      viewport.dataset.rootName = root.name;
+      const rect = viewport.getBoundingClientRect();
+      camera.aspect = Math.max(1,rect.width)/Math.max(1,rect.height);
+      camera.updateProjectionMatrix(); renderer.setSize(Math.max(1,rect.width),Math.max(1,rect.height),false);
+      window.t69QA = { ...window.t69QA, loaded: true, meshCount: meshes.size, sourceMeshCount: manifest.sourceAssets.length, targetCount: diagnostics.size, manifestSha256: diagnostic.scope.historicalT52ManifestSha256, rendererCount: 1, regionCounts: { head: manifest.regionPackages.head.sourceMeshCount, neck: manifest.regionPackages.neck.sourceMeshCount }, sourceFileIds: [...meshes.keys()].sort(), errors: [] };
+      loaded = true;
+      status.textContent = `실제 T52 GLB 로드 완료 · head 24 + neck 61 = ${meshes.size} mesh · 단일 renderer/root`;
+      showSelection('FJ2742');
+      window.t69QA.loaded = loaded;
+    } catch (error) {
+      window.t69QA.errors.push(String(error));
+      status.textContent = `불러오기 실패: ${String(error)}`;
+      console.error(error);
+    }
+  </script>
+</body>
+</html>
