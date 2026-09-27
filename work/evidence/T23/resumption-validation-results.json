@@ -1,0 +1,172 @@
+{
+  "task": "T23",
+  "phase": "resumed_after_T41",
+  "date": "2026-09-27",
+  "startingHead": "6425a0fe37b76d5a18f74d6cff496d78323bc54b",
+  "originalWipHead": "dbbe64d0f799cc0f12a72c4b181cf5413b75551f",
+  "prerequisite": {
+    "task": "T41",
+    "result": "passed",
+    "evidence": "work/evidence/T41/validation-results.json",
+    "loaderTests": {
+      "passed": 10,
+      "failed": 0,
+      "checks": [
+        "off-scene rig/path/skin/clip binding rejected",
+        "valid active single scene accepted",
+        "external buffer/image URI rejected"
+      ]
+    }
+  },
+  "commands": [
+    {
+      "command": "pnpm run test:motion-player",
+      "result": "pass",
+      "passed": 16,
+      "failed": 0,
+      "covers": [
+        "explicit playback state",
+        "single RAF chain",
+        "late responses",
+        "hidden page cleanup",
+        "reduced motion",
+        "seek/progress",
+        "pose reset independent from camera",
+        "empty asset boundary"
+      ]
+    },
+    {
+      "command": "pnpm run test:motion-learning",
+      "result": "pass",
+      "nodePassed": 7,
+      "nodeFailed": 0,
+      "pythonFixturesPassed": 16,
+      "pythonFixturesFailed": 0
+    },
+    {
+      "command": "pnpm run test:animation-loader",
+      "result": "pass",
+      "nodePassed": 10,
+      "nodeFailed": 0,
+      "representationFixturesPassed": 3,
+      "sourceCandidatesValidated": 2,
+      "productionMotionAssets": 0,
+      "sourceBytesUnchanged": true
+    },
+    {
+      "command": "pnpm run test:scene-lifecycle",
+      "result": "pass",
+      "passed": 9,
+      "failed": 0,
+      "includes": "capacity=2, five concurrent distinct requests resolve and cache remains bounded"
+    },
+    {
+      "command": "pnpm run typecheck",
+      "result": "pass"
+    },
+    {
+      "command": "pnpm run build",
+      "result": "pass",
+      "validators": [
+        "learning content",
+        "AI evidence",
+        "motion learning",
+        "motion source manifest",
+        "GLB decoder QA"
+      ],
+      "decoderQa": [
+        {
+          "meshes": 11,
+          "bytes": 712192
+        },
+        {
+          "meshes": 9,
+          "bytes": 205392
+        }
+      ],
+      "appChunkBytes": 1623720,
+      "warning": "pre-existing Vite >500 kB chunk warning"
+    },
+    {
+      "command": "git diff --check",
+      "result": "pass"
+    }
+  ],
+  "browser": {
+    "url": "http://127.0.0.1:5187/",
+    "viewports": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "documentWidth": 1440,
+        "horizontalOverflow": false,
+        "motionPanelVisible": true,
+        "motionPanelWidth": 268,
+        "playPausePoseResetSlowAndRangeDisabledWithoutAsset": true
+      },
+      {
+        "width": 1024,
+        "height": 900,
+        "documentWidth": 1024,
+        "horizontalOverflow": false,
+        "motionPanelVisible": true,
+        "motionPanelWidth": 212,
+        "playPausePoseResetSlowAndRangeDisabledWithoutAsset": true
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "documentWidth": 390,
+        "horizontalOverflow": false,
+        "mobileDetailDisclosureOpened": true,
+        "motionDisclosureOpened": true,
+        "motionPanelVisible": true,
+        "motionPanelWidth": 316,
+        "playPausePoseResetSlowAndRangeDisabledWithoutAsset": true
+      }
+    ],
+    "keyboard": {
+      "enterOpensMotionDisclosure": true,
+      "tabMovesFocusToActionOption": true
+    },
+    "muscleChange": {
+      "from": "HA-M-000001",
+      "to": "HA-M-000003",
+      "urlMatchesSelection": true,
+      "actionLabel": "발목 등쪽굽힘과 발 안쪽번짐",
+      "status": "이 작용에 연결된 3D 시범 자료가 아직 없습니다. 글 설명으로 작용을 확인할 수 있습니다."
+    },
+    "regionAndHistory": {
+      "neckUrl": "?region=neck",
+      "neckConnectedMuscles": 0,
+      "neckShowsOwnEmptyState": true,
+      "calfSceneShownForNeck": false,
+      "backRestores": "HA-M-000003"
+    },
+    "cameraReset": {
+      "viewerResetButtonClicked": true,
+      "routeUnchanged": true,
+      "selectedTibialisRemainsAriaPressed": true,
+      "motionPoseResetButton": "disabled because no production clip"
+    },
+    "console": {
+      "errors": 0,
+      "warnings": 0,
+      "entries": []
+    },
+    "liveReducedMotion": {
+      "systemPreferenceMatched": false,
+      "browserEmulationAvailable": false,
+      "coveredByUnitTest": true
+    }
+  },
+  "assetBoundary": {
+    "productionMotionDefinitions": 0,
+    "productionMotionAssets": 0,
+    "syntheticFixtures": "tests only",
+    "actualAnatomicalClipPlayback": "not available and not claimed",
+    "playerRequiredDefectsRemaining": false
+  },
+  "anatomyOrReleaseApproval": false,
+  "result": "passed"
+}

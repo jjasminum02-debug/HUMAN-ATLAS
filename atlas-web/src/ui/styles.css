@@ -742,6 +742,26 @@
 .motion-learning-entry p{margin:8px 0 0}
 @media(max-width:760px){.muscle-action-learning{gap:8px;margin-top:6px}.muscle-action-summary,.action-context-card,.motion-learning-entry{padding:10px 11px;font-size:12px}.muscle-action-summary h3{font-size:16px}.muscle-action-summary .action-label{font-size:14px}}
 
+/* T23: playback controls are a runtime panel and show a truthful empty state until a compatible clip exists. */
+.motion-player{display:grid;gap:10px;margin-top:12px;padding:13px;border:1px solid #dfe9e6;border-radius:12px;background:#f7faf9;color:#52666b;font-size:12px;line-height:1.55}
+.motion-player h4{margin:0;color:#365d60;font-size:14px}
+.motion-action-picker{display:flex;flex-wrap:wrap;gap:7px;margin:0;padding:8px;border:1px solid #e1e9e6;border-radius:9px}
+.motion-action-picker legend{padding:0 4px;color:#667a7b;font-size:11px;font-weight:650}
+.motion-action-picker button,.motion-player-controls button,.motion-player>button{min-height:36px;padding:7px 11px;border:1px solid #cedbd7;border-radius:8px;background:#fff;color:#38565a;font:inherit;cursor:pointer}
+.motion-action-picker button[aria-pressed=true]{border-color:#65958a;background:#eaf4f0;color:#234e47;font-weight:700}
+.motion-player button:disabled{color:#9ba8a6;background:#f1f4f3;cursor:not-allowed}
+.motion-player button:focus-visible,.motion-player input:focus-visible{outline:3px solid #d49a36;outline-offset:2px}
+.motion-player-status{margin:0;padding:9px 10px;border-radius:8px;background:#edf4f1;color:#355b57}
+.motion-player-controls{display:flex;flex-wrap:wrap;gap:7px}
+.motion-player-controls button[aria-pressed=true]{border-color:#6c9a8e;background:#eef6f2}
+.motion-progress-label{color:#50696b;font-size:11px;font-weight:700}
+.motion-progress-row{display:grid;grid-template-columns:minmax(0,1fr) 44px;align-items:center;gap:10px}
+.motion-progress-row input{width:100%;accent-color:#4c8277}
+.motion-progress-row input:disabled{opacity:.55}
+.motion-progress-row output{text-align:right;color:#51686a;font-variant-numeric:tabular-nums}
+.motion-player-note{margin:0;color:#728182;font-size:10px}
+@media(max-width:420px){.motion-player{padding:10px}.motion-player-controls button{flex:1 1 calc(50% - 7px);min-width:0;padding:7px 6px}}
+
 /* T19: wrap the viewer toolbar inside the narrow canvas instead of widening the page. */
 @media(max-width:760px){
   .study-view-tools{left:8px;right:8px;width:auto;max-width:none;transform:none;flex-wrap:wrap;justify-content:center;box-sizing:border-box;white-space:normal}

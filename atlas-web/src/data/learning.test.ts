@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import type { AiEvidenceField } from "../domain/aiEvidence.ts";
-import { projectLearnerActionCard, type MotionLearningBundle } from "../domain/motionLearning.ts";
+import { projectLearnerActionCard, projectLearnerMotionActionOptions, type MotionLearningBundle } from "../domain/motionLearning.ts";
 
 const bundle = JSON.parse(readFileSync(new URL("../../../atlas-data/motion/motion-learning.json", import.meta.url), "utf8")) as MotionLearningBundle;
 const fields = JSON.parse(readFileSync(new URL("../../../atlas-data/terminology/ai-evidence-overlay.json", import.meta.url), "utf8")) as { items: AiEvidenceField[] };
@@ -28,4 +28,15 @@ test("the six pilot calf action cards have field-linked citations and no authori
 
 test("unassigned concepts do not receive inferred action cards", () => {
   assert.equal(projectLearnerActionCard(undefined, fields.items), null);
+});
+
+test("learner motion options come only from authored action rows and report no absent production clip", () => {
+  for (const id of pilotCalfIds) {
+    const options = projectLearnerMotionActionOptions(id, bundle, fields.items);
+    assert.equal(options.length, 1);
+    assert.ok(options[0].label.length > 0);
+    assert.equal(options[0].candidate, null);
+    assert.deepEqual(options[0].subjectIds, [id]);
+  }
+  assert.deepEqual(projectLearnerMotionActionOptions("HA-M-NOT-ASSIGNED", bundle, fields.items), []);
 });

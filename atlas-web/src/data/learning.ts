@@ -6,7 +6,7 @@ import { displayTerms, termText, type PilotCatalog } from './catalog';
 import { learnerNameProjection, learnerSearchEntry, learnerVisibleTerms, mergeLearningConcepts, searchEntries, withoutHanScript, type SearchEntry } from '../domain/search';
 import { projectAiEvidenceField, type AiEvidenceField, type LearnerFieldProjection } from '../domain/aiEvidence';
 import { projectLegacySummary, type LegacyLearningSummary } from '../domain/legacyEvidenceAdapter';
-import { projectLearnerActionCard, type MotionLearningBundle } from '../domain/motionLearning';
+import { projectLearnerActionCard, projectLearnerMotionActionOptions, type MotionLearningBundle } from '../domain/motionLearning';
 const rawNameSources = names.sources as Record<string, { title: string; url: string | null; locator: string }>;
 export const nameSources = Object.fromEntries(Object.entries(rawNameSources).map(([id, source]) => [id, {
   ...source, title: withoutHanScript(source.title), locator: withoutHanScript(source.locator),
@@ -47,6 +47,11 @@ const motionBundle = motionLearningBundle as MotionLearningBundle;
 export function actionCardForLearner(conceptId: string) {
   const action = motionBundle.muscleActions.find((row) => row.subjectIds.includes(conceptId));
   return projectLearnerActionCard(action, aiFieldItems);
+}
+
+/** Return only authored action rows and their exactly compatible, technically bound clip, if any. */
+export function motionActionOptionsForLearner(conceptId: string) {
+  return projectLearnerMotionActionOptions(conceptId, motionBundle, aiFieldItems);
 }
 
 /** Prefer the current field overlay; keep an exact-text legacy fallback for older fields.

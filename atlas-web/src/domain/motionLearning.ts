@@ -223,6 +223,42 @@ export function assessMotionCapability(
   return { hasActionText, hasTechnicallyCompatibleClip: compatible };
 }
 
+export interface LearnerMotionActionOption {
+  /** Internal key for in-memory selection; do not project it into learner-facing text. */
+  id: string;
+  label: string;
+  text: LearnerActionText;
+  subjectIds: string[];
+  candidate: { definition: MotionDefinition; asset: MotionAsset } | null;
+}
+
+/** Project only authored actions and exactly compatible, technically bound clips. */
+export function projectLearnerMotionActionOptions(
+  conceptId: string,
+  bundle: MotionLearningBundle,
+  fields: readonly ActionCitationEvidenceField[],
+): LearnerMotionActionOption[] {
+  return bundle.muscleActions.flatMap((action) => {
+    if (!action.subjectIds.includes(conceptId)) return [];
+    const text = projectLearnerActionCard(action, fields);
+    if (!text) return [];
+    const compatible = bundle.motionDefinitions.flatMap((definition) => {
+      if (definition.actionId !== action.id) return [];
+      return bundle.motionAssets.flatMap((asset) => asset.motionDefinitionId === definition.id &&
+        assessMotionCapability(action, definition, asset).hasTechnicallyCompatibleClip
+        ? [{ definition, asset }]
+        : []);
+    });
+    return [{
+      id: action.id,
+      label: text.label,
+      text,
+      subjectIds: [...action.subjectIds],
+      candidate: compatible.length === 1 ? compatible[0] : null,
+    }];
+  });
+}
+
 export type MotionSessionStatus = "idle" | "loading" | "ready" | "playing" | "paused" | "error";
 
 /** Runtime state only; never serialize this interface into content data. */

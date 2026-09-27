@@ -1,0 +1,50 @@
+{
+  "taskId": "T23",
+  "status": "blocked_by_prior_task_defect",
+  "recordedAt": "2026-09-27",
+  "startingHead": "dbbe64d0f799cc0f12a72c4b181cf5413b75551f",
+  "upstreamBlocker": {
+    "task": "T22",
+    "finding": "R2",
+    "source": "work/reviews/T22-2026-09-27/REVIEW.md",
+    "reproduction": "work/reviews/T22-2026-09-27/edge-repro.patch",
+    "verification": "work/reviews/T22-2026-09-27/verification.json",
+    "confirmedBy": "Current adapter collects binding nodes from all gltf.scenes but returns only gltf.scene as the playback scene. A rig binding may therefore point outside the rendered scene.",
+    "effect": "T22 acceptance criterion for preserving rig hierarchy and clip binding is not satisfied; stop before T23 completion/commit and before T24."
+  },
+  "partialT23Validation": {
+    "unitTests": {
+      "motionPlayer": {"passed": 16, "failed": 0},
+      "motionLearning": {"passed": 7, "failed": 0},
+      "motionLearningPythonFixtures": {"passed": 16, "failed": 0},
+      "animationLoader": {"passed": 7, "failed": 0},
+      "animationRepresentationFixtures": {"passed": 3, "failed": 0},
+      "sceneLifecycle": {"passed": 9, "failed": 0}
+    },
+    "typecheck": "pass",
+    "productionBuild": "pass_with_existing_chunk_warning",
+    "buildAppChunkBytes": 1622770,
+    "productionMotionDefinitions": 0,
+    "productionMotionAssets": 0,
+    "browser": {
+      "viewports": [
+        {"width": 1440, "height": 1000, "result": "learner layout and disabled empty player visually checked"},
+        {"width": 1024, "height": 900, "result": "learner layout and disabled empty player visually checked"},
+        {"width": 390, "height": 844, "result": "mobile layout and two-column disabled controls visually checked"}
+      ],
+      "interactions": [
+        "Space collapsed and reopened the movement disclosure while keyboard focus remained on it.",
+        "Selecting tibialis anterior changed the route and action summary from plantarflexion to dorsiflexion/inversion; its player remained in the no-clip state.",
+        "Selecting neck showed zero connected structures and the explicit empty-scene message instead of reusing the calf scene.",
+        "With no production candidate, playback, pause, first-pose, slow-play and progress controls were disabled; progress remained 0% and was labeled as playback position, not force or strength."
+      ],
+      "internalTaskJsonOrReviewCodesVisibleInPlayer": false,
+      "consoleLogsQueried": false,
+      "screenshotsPersistedAsFiles": false,
+      "notes": "Screenshots were inspected through the computer-use browser tool. The temporary viewport override was reset and the local test tab/server were closed."
+    },
+    "taskStatus": "not_complete; validation is partial because the T22 adapter defect blocks the required upstream contract"
+  },
+  "commit": "none; current T23 changes remain uncommitted WIP",
+  "pushOrDeployment": "not performed"
+}

@@ -61,7 +61,8 @@
 | T20 | complete_with_gaps | work/tasks/T20.md; motion-learning schema/types/validator; empty production bundle; preview-only JointAction adapter; work/evidence/T20/; work/reports/T20.md | canonical joint IDs and source-backed action rows absent; real motion assets/playback and human review remain open |
 | T21 | complete_with_gaps | `work/tasks/T21.md`; six source-linked calf action cards; `atlas-data/motion/motion-learning.json`; 35 AI evidence overlay rows; `work/evidence/T21/`; `work/reports/T21.md` | canonical joint ID/clip 0; contraction type unavailable; human anatomy review pending; no 3D motion; action summaries do not establish individual contribution or clinical guidance |
 | T22 | complete_with_gaps | `work/tasks/T22.md`; animation GLTFLoader adapter; representation/source manifest schema and validator; `work/evidence/T22/`; `work/reports/T22.md` | canonical joint binding, MotionDefinition, compatible licensed clip, joint frame/pivot/pose range, real motion asset and human review remain unavailable; production assets 0 |
-| T41 | passed | `work/tasks/T41.md`; loader/static-scene corrective; `work/evidence/T41/`; `work/reports/T41.md` | 실제 관절 좌표·motion clip은 후속 T44/T24; T23 WIP 재개 대기 |
+| T41 | passed | `work/tasks/T41.md`; loader/static-scene corrective; `work/evidence/T41/`; `work/reports/T41.md` | R2 수정 검증 통과; T23 의존 완료. 실제 관절 좌표·motion clip은 후속 T44/T24 |
+| T23 | passed | `work/tasks/T23.md`; motion player/UI WIP; `work/evidence/T23/`; `work/reports/T23.md` | player 필수 상태·빈 자산 경계 통과. production MotionDefinition/MotionAsset 0건으로 실제 clip 재생은 미검증이며 T24 자산 경로에서 다룸; 다음 R14 task T42 |
 
 ## 실제 현재 상태와 원본 보존
 
@@ -336,18 +337,28 @@ T20은 `MuscleAction`, `MotionDefinition`, `MotionAsset` 계약/검증과 runtim
 
 다음은 **T21 / Luna Max / planned_not_started**다. 종아리 6근육의 source-backed action text와 learner card만 다룬다. canonical joint ID가 없으면 텍스트는 source ref와 `unmapped` reason을 연결하고 구조 ID·MotionDefinition·clip을 추정하지 않는다. 전체 붙여 넣기 prompt는 `work/reports/T20.md` 마지막 섹션에 있다. T21 이상은 시작하지 않았다.
 
-## T22 결과 및 현재 인계 — 2026-09-27
+## T22 결과 및 이전 인계 — 2026-09-27
 
 T22는 별도 `GLTFLoader` adapter와 asset source/derivation gate를 구현해 **complete_with_gaps**로 마쳤다. 기존 static decoder는 변경하지 않았다. rigged mesh, path-only, bone-motion+illustrative-path 표현을 분리하고 합성 fixture에서 hierarchy/skin/clip binding, frame·meter·hash reject, 공유 자원 dispose를 검증했다. BodyParts3D GLB는 정적 자산이며, 로컬 Gait2392 model 파일에는 motion sample/export가 없다. 첫 demo method는 ankle plantarflexion bone motion + illustrative path로 정했지만 source-backed joint ID/frame/pivot/pose와 적합 clip이 없어 생산 자산은 만들지 않았다. motionAssets는 0건이고 사람 검토/학습 release 승인도 없다.
 
 검증: loader 7/7, representation fixtures 3/3, motion-learning 7/7 + Python 16/16, scene lifecycle 9/9, typecheck/build, preservation, diff check 통과. UI 변경이 없어 browser 검증은 해당 없다. 시작 시 선행 미추적 snapshot 47개와 보호 입력/자산 21개, OpenSim_Models 같은 HEAD/clean을 보존했다. Build의 기존 1,507.24 kB chunk 경고는 남는다. 전체 근거는 `work/reports/T22.md`, `work/evidence/T22/`에 있다.
 
-다음 task는 **T23 / Luna Max / planned_not_started**다. 실제 motion asset이 아직 없으므로 학습 패널은 자산 부재 상태를 표시하고 합성 fixture를 학습 자료로 사용하지 않아야 한다. 자동으로 시작하지 않는다. 구체적인 붙여 넣기 prompt는 `work/reports/T22.md` 마지막 섹션에 있다.
+당시 다음 task는 **T23 / Luna Max / planned_not_started**였다. 아래의 T23 중단 기록이 현재 상태다.
 
-## T41 결과 및 현재 인계 — 2026-09-27
+## T23 재개 완료 및 현재 인계 — 2026-09-27
+
+기존 T23 미커밋 WIP를 삭제하거나 다시 만들지 않고 T41 이후 HEAD `6425a0fe37b76d5a18f74d6cff496d78323bc54b`에서 재개했다. T41 보고서와 실제 validation 결과에서 R2 active-scene 결함 수정이 통과했고, 재실행한 animation-loader 회귀도 10/10 통과했다. 이전 중단 사유는 해결됐다.
+
+player/state·단일 RAF·늦은 응답 무효화·reduced-motion·pose/camera reset 분리 및 합성 전용 경계가 통과했다. 실제 production `MotionDefinition`/`MotionAsset`은 0건이다. 브라우저에서 1440×1000, 1024×900, 390×844 폭에 가로 넘침 없이 빈 시범 메시지와 비활성 재생 조작을 확인했다. 키보드로 움직임 disclosure를 열고 다음 action control에 포커스할 수 있었다. 전경골근 전환과 URL, 목 부위의 0개 구조·빈 상태 및 종아리 장면 비표시, 뒤로 가기 복원을 확인했으며 console error/warning은 0건이다. 실제 clip 재생은 확인하지 않았다. 브라우저 reduced-motion emulation은 제공되지 않아 해당 전이는 테스트로 확인했다.
+
+검증: motion player 16/16, motion learning 7/7 + Python fixture 16/16, animation loader 10/10 + 표현 fixture 3/3, scene/cache 9/9, typecheck, build, `git diff --check` 통과. Build의 기존 큰 chunk 경고(App 1,623.72 kB)는 남는다. OpenSim_Models는 HEAD `d9b05d470b1a481c222372c85b75772faf8f7792`/clean, GLB 및 T13 자료 hash는 재개 기준과 일치한다. 전체 결과는 `work/reports/T23.md`, 재개 검증·보존 근거는 `work/evidence/T23/resumption-validation-results.json`과 `resume-preservation.json`에 있다.
+
+**현재 다음 task는 T42 / Luna Max**다. T24는 T44 이후 작업이며 자동으로 시작하지 않는다. T42의 학습 출처 문구·뼈 이름·CTA 개편은 이번 범위에서 구현하지 않았다. 붙여 넣을 T42 prompt는 `work/reports/T23.md` 마지막 섹션에 있다.
+
+## T41 결과 및 당시 인계 — 2026-09-27
 
 T22 감사 R1/R2/R3를 수정했다. 반환 `gltf.scene` 밖 rig/path/skin 및 clip track target, 외부 buffer/image URI를 거부하고 정상 단일 scene을 유지한다. 정적 종아리 로더는 해당 scene의 일곱 근육 mesh mapping만 검증하며 전역 canonical 개수와 모든 mapping의 우측/needs_review 고정을 제거했다. 원본 hash/revision/frame/pose와 FJ3385 보류는 유지한다. 현행 첫 시범 후보는 `HA-M-000003` 전경골근/앞정강근/Tibialis anterior 오른쪽 발목 배측굴곡이다. T22 역사 보고서는 변경하지 않았다.
 
 검증: loader 10/10, 실제 종아리 catalog 변형 scene subset 3/3, T23 player WIP 16/16, scene/cache 9/9, 표현 fixture 3/3, data/source 검증, typecheck/build 통과. 실제 브라우저에서 종아리 GLB 표시·전경골근 선택·자산 없는 머리 부위·뒤로가기·선택 해제와 console error 0을 확인했다. 실제 clip은 0건이므로 실재생을 주장하지 않는다. 상세는 `work/reports/T41.md`, `work/evidence/T41/`에 있다.
 
-**다음은 R14 registry의 T23 재개 / Luna Max**다. 기존 미커밋 player/UI를 보존하여 이어서 검증한다. T42 이상은 시작하지 않았다. 전체 프롬프트는 `work/tasks/T23-R14-RESUME.md`에 있다.
+당시 다음은 R14 registry의 T23 재개 / Luna Max였다. 이후 위 T23 재개 완료 기록으로 끝났고 현재 next는 T42다. 해당 T23 재개 prompt의 과거 사본은 `work/tasks/T23-R14-RESUME.md`에 보존한다.

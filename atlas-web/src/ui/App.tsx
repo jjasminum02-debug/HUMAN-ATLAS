@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { loadPilotCatalog, linkedEvidence, recordLabel, sourceForEvidence, type PilotCatalog } from '../data/catalog';
-import { actionCardForLearner, findMuscles, learningConcepts, nameFor, nameSources, structureFieldForLearner } from '../data/learning';
+import { findMuscles, learningConcepts, motionActionOptionsForLearner, nameFor, nameSources, structureFieldForLearner } from '../data/learning';
 import { attachmentCrosscheckFor } from '../domain/attachmentCrosschecks';
 import { GLBViewer } from '../viewer/GLBViewer';
 import { sceneRevision } from '../viewer/scenePlan';
 import { attachmentContextById } from '../viewer/attachmentContext';
 import { boneSourceLabel, buildBoneCardData } from '../domain/boneCard';
+import { MotionLearningPanel } from './MotionLearningPanel';
 import {
   serializeAtlasRoute,
   type AtlasRouteState,
@@ -69,6 +70,7 @@ export default function App() {
   const [routeNotice, setRouteNotice] = useState<string | null>(null);
   const [query, setQuery] = useState('');
   const [tab, setTab] = useState<TabName>('구조');
+  const [selectedActionId, setSelectedActionId] = useState<string | null>(null);
   const [activeAttachmentId, setActiveAttachmentId] = useState<string | null>(null);
   const [unmappedMeshNotice, setUnmappedMeshNotice] = useState<UnmappedMeshNotice | null>(null);
   const [detailsOpen, setDetailsOpen] = useState(() => typeof window === 'undefined' || window.matchMedia('(min-width: 761px)').matches);
@@ -132,6 +134,7 @@ export default function App() {
       setRouteNotice(resolved.notice);
       setUnmappedMeshNotice(null);
       setTab('구조');
+      setSelectedActionId(null);
       setActiveAttachmentId(null);
       if (resolved.canonicalize) {
         const nextUrl = routeUrl(resolved.route);
@@ -154,7 +157,9 @@ export default function App() {
     : null;
   const standardRefs = standardReferences(selected && 'standardRefs' in selected ? selected.standardRefs : undefined);
   const parentId = selected?.entityType === 'muscle_part' && typeof selected.parentId === 'string' ? selected.parentId : selectedId;
-  const actionCard = selectedId && parentId ? actionCardForLearner(parentId) : null;
+  const actionOptions = useMemo(() => selectedId && parentId ? motionActionOptionsForLearner(parentId) : [], [selectedId, parentId]);
+  const activeAction = actionOptions.find((action) => action.id === selectedActionId) ?? actionOptions[0] ?? null;
+  const actionCard = activeAction?.text ?? null;
   const parts = concepts.filter((concept) => concept.entityType === 'muscle_part' && concept.parentId === parentId);
   const owners = new Set([selectedId, ...concepts.filter((concept) => concept.parentId === selectedId).map((concept) => concept.id)]);
   const attachments = catalog ? catalog.attachments.filter((attachment) => owners.has(String(attachment.muscleOrPartId))) : [];
@@ -183,6 +188,7 @@ export default function App() {
     setRouteNotice(null);
     setUnmappedMeshNotice(null);
     setTab('구조');
+    setSelectedActionId(null);
     setActiveAttachmentId(null);
     setDetailsOpen(true);
   }
@@ -417,7 +423,12 @@ export default function App() {
                 <details className="motion-learning-entry">
                   <summary>움직임으로 이해하기</summary>
                   <p>현재는 출처가 연결된 글 설명만 확인할 수 있습니다.</p>
-                  <p className="quiet-note">움직이는 3D 자료는 아직 준비 중입니다. 이 항목은 애니메이션을 재생하지 않습니다.</p>
+                  <MotionLearningPanel
+                    key={`${route.regionId}:${selectedId}:${activeAction?.id ?? ''}`}
+                    actions={actionOptions}
+                    selectedActionId={activeAction?.id ?? null}
+                    onSelectAction={setSelectedActionId}
+                  />
                 </details>
               </div> : <div className="upcoming"><span>↗</span><h3>작용 설명을 준비하고 있습니다</h3><p>출처가 확인된 기능 자료가 연결되면 이곳에 표시합니다.</p></div> : <div className="upcoming"><span>◎</span><h3>평가 자료를 준비하고 있습니다</h3><p>검사 목적, 시행 방법과 결과 해석은 별도의 학습 범위에서 다룹니다.</p></div>}
             </section>

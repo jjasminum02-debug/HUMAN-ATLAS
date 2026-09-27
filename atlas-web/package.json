@@ -16,6 +16,7 @@
     "test:attachment-crosschecks": "node --experimental-strip-types --test src/domain/attachmentCrosschecks.test.ts",
     "test:ai-evidence": "node --experimental-strip-types --test src/domain/aiEvidence.test.ts src/domain/legacyEvidenceAdapter.test.ts src/domain/t18Evidence.integration.test.ts && python3 ../atlas-data/schemas/validate_ai_evidence.py --fixtures && python3 ../atlas-data/schemas/build_ai_evidence_overlay.py --check",
     "test:motion-learning": "node --experimental-strip-types --test src/domain/motionLearning.test.ts src/domain/legacyJointActionAdapter.test.ts && python3 ../atlas-data/schemas/validate_motion_learning.py --fixtures",
+    "test:motion-player": "node --experimental-strip-types --test src/domain/motionPlayer.test.ts src/viewer/animationPlayback.test.ts src/data/learning.test.ts",
     "test:animation-loader": "node --experimental-strip-types --test src/viewer/animationSceneAdapter.test.ts && python3 ../atlas-data/schemas/test_motion_asset_representation_t22.py && python3 ../atlas-data/schemas/validate_motion_asset_sources.py",
     "qa:scene-decoders": "node scripts/check-scene-decoders.mjs",
     "migrate:navigation:dry-run": "python3 ../atlas-data/navigation/build_navigation.py --dry-run",
