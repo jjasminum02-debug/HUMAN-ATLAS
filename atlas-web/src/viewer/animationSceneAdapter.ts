@@ -15,7 +15,7 @@ import type { MotionAsset } from "../domain/motionLearning.ts";
 export const SUPPORTED_MOTION_FRAME = "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR";
 
 export interface AnimationSceneLoadOptions {
-  /** External resources are resolved relative to this URL. Bundled self-contained GLB is preferred. */
+  /** Retained for caller compatibility; external GLB dependencies are never resolved. */
   basePath?: string;
   signal?: AbortSignal;
 }
@@ -74,10 +74,10 @@ function assertAssetContract(asset: MotionAsset): void {
   }
 }
 
-function collectNodes(scenes: readonly Object3D[]): { names: Map<string, Object3D>; duplicates: Set<string> } {
+function collectNodes(scene: Object3D): { names: Map<string, Object3D>; duplicates: Set<string> } {
   const names = new Map<string, Object3D>();
   const duplicates = new Set<string>();
-  for (const scene of scenes) scene.traverse((object) => {
+  scene.traverse((object) => {
     if (!object.name) return;
     if (names.has(object.name)) duplicates.add(object.name);
     else names.set(object.name, object);
@@ -85,11 +85,11 @@ function collectNodes(scenes: readonly Object3D[]): { names: Map<string, Object3
   return { names, duplicates };
 }
 
-function validateSkinnedMeshes(scenes: readonly Object3D[]): SkinnedMesh[] {
+function validateSkinnedMeshes(scene: Object3D): SkinnedMesh[] {
   const skinned: SkinnedMesh[] = [];
   const sceneObjects = new Set<Object3D>();
-  for (const root of scenes) root.traverse((object) => sceneObjects.add(object));
-  for (const root of scenes) root.traverse((object) => {
+  scene.traverse((object) => sceneObjects.add(object));
+  scene.traverse((object) => {
     if (!(object as SkinnedMesh).isSkinnedMesh) return;
     const mesh = object as SkinnedMesh;
     const joints = mesh.geometry.getAttribute("skinIndex");
@@ -104,6 +104,29 @@ function validateSkinnedMeshes(scenes: readonly Object3D[]): SkinnedMesh[] {
     skinned.push(mesh);
   });
   return skinned;
+}
+
+/** Inspect the GLB container before GLTFLoader can resolve a URI or issue a request. */
+function assertSelfContainedGlb(bytes: ArrayBuffer): void {
+  if (bytes.byteLength < 20) throw new Error("motion 입력은 self-contained GLB여야 합니다.");
+  const view = new DataView(bytes);
+  if (view.getUint32(0, true) !== 0x46546c67 || view.getUint32(4, true) !== 2 ||
+      view.getUint32(8, true) !== bytes.byteLength || view.getUint32(16, true) !== 0x4e4f534a) {
+    throw new Error("motion 입력은 유효한 GLB 2.0이어야 합니다.");
+  }
+  const jsonLength = view.getUint32(12, true);
+  if (jsonLength === 0 || jsonLength > bytes.byteLength - 20) throw new Error("GLB JSON chunk가 유효하지 않습니다.");
+  let document: { buffers?: Array<{ uri?: unknown }>; images?: Array<{ uri?: unknown }> };
+  try {
+    document = JSON.parse(new TextDecoder().decode(new Uint8Array(bytes, 20, jsonLength)));
+  } catch {
+    throw new Error("GLB JSON chunk를 읽을 수 없습니다.");
+  }
+  if (!document || !Array.isArray(document.buffers) || document.buffers.length !== 1 ||
+      document.buffers.some((buffer) => !buffer || buffer.uri !== undefined) ||
+      (document.images !== undefined && (!Array.isArray(document.images) || document.images.some((image) => !image || image.uri !== undefined)))) {
+    throw new Error("motion GLB의 외부 buffer/image URI는 허용하지 않습니다.");
+  }
 }
 
 function collectTextures(value: unknown, textures: Set<Texture>, visited: Set<object>): void {
@@ -175,9 +198,10 @@ export async function loadAnimationScene(
   if (options.signal?.aborted) throw abortError();
   if (await sha256(bytes) !== asset.sha256) throw new Error(`motion GLB SHA-256이 manifest와 다릅니다: ${asset.id}`);
   if (options.signal?.aborted) throw abortError();
+  assertSelfContainedGlb(bytes);
 
   const loader = new GLTFLoader();
-  const gltf = await loader.parseAsync(bytes, options.basePath ?? "");
+  const gltf = await loader.parseAsync(bytes, "");
   const scenes = gltf.scenes.length ? gltf.scenes : [gltf.scene];
   try {
     if (options.signal?.aborted) throw abortError();
@@ -189,7 +213,10 @@ export async function loadAnimationScene(
       throw new Error(`manifest와 GLB clip duration이 다릅니다: ${asset.clip.durationSeconds} != ${clip.duration}`);
     }
 
-    const { names, duplicates } = collectNodes(scenes);
+    // The playback root is gltf.scene. Other glTF scenes are retained for disposal only.
+    const activeObjects = new Set<Object3D>();
+    gltf.scene.traverse((object) => activeObjects.add(object));
+    const { names, duplicates } = collectNodes(gltf.scene);
     const rigBindings = asset.rig?.nodeBindings ?? [];
     const pathBindings = asset.illustration?.trajectoryBindings.map(({ structureId, trajectoryId }) => ({ structureId, nodeId: trajectoryId })) ?? [];
     const allStructureIds = [...rigBindings.map((row) => row.structureId), ...pathBindings.map((row) => row.structureId)];
@@ -213,12 +240,13 @@ export async function loadAnimationScene(
       pathNodes.set(binding.structureId, node);
     }
 
-    for (const track of clip.tracks) {
+    for (const animation of gltf.animations) for (const track of animation.tracks) {
       const { nodeName } = PropertyBinding.parseTrackName(track.name);
-      if (!PropertyBinding.findNode(gltf.scene, nodeName)) throw new Error(`animation track target node가 scene에 없습니다: ${track.name}`);
+      const target = PropertyBinding.findNode(gltf.scene, nodeName);
+      if (!(target instanceof Object3D) || !activeObjects.has(target)) throw new Error(`animation track target node가 active scene에 없습니다: ${track.name}`);
     }
 
-    const skinnedMeshes = validateSkinnedMeshes(scenes);
+    const skinnedMeshes = validateSkinnedMeshes(gltf.scene);
     if (asset.representationType === "rigged_mesh" && skinnedMeshes.length === 0) {
       throw new Error("rigged_mesh manifest인데 GLB에 유효한 SkinnedMesh가 없습니다.");
     }

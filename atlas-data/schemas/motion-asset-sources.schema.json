@@ -20,8 +20,9 @@
     },
     "firstAnkleDemonstration": {
       "type": "object", "additionalProperties": false,
-      "required": ["candidateAction", "representation", "muscleShape", "status", "holdReasons", "notPatientExerciseInstruction"],
+      "required": ["subjectMuscleId", "side", "candidateAction", "representation", "muscleShape", "status", "holdReasons", "notPatientExerciseInstruction"],
       "properties": {
+        "subjectMuscleId": { "const": "HA-M-000003" }, "side": { "const": "right" },
         "candidateAction": { "$ref": "#/$defs/NonEmptyString" }, "representation": { "enum": ["bone_motion_with_illustrative_path", "rigged_mesh"] },
         "muscleShape": { "$ref": "#/$defs/NonEmptyString" }, "status": { "enum": ["method_selected_asset_held", "asset_candidate"] },
         "holdReasons": { "type": "array", "items": { "$ref": "#/$defs/NonEmptyString" } },

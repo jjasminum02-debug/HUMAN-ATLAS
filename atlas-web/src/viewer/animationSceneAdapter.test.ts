@@ -151,6 +151,25 @@ async function assetFor(bytes: ArrayBuffer, representation: FixtureRepresentatio
   };
 }
 
+function editGlb(bytes: ArrayBuffer, edit: (document: any) => void): ArrayBuffer {
+  const original = new DataView(bytes);
+  const jsonLength = original.getUint32(12, true);
+  const document = JSON.parse(new TextDecoder().decode(new Uint8Array(bytes, 20, jsonLength)));
+  edit(document);
+  const jsonBytes = encoder.encode(JSON.stringify(document));
+  const paddedLength = Math.ceil(jsonBytes.length / 4) * 4;
+  const binaryTail = new Uint8Array(bytes, 20 + jsonLength);
+  const result = new Uint8Array(20 + paddedLength + binaryTail.byteLength);
+  result.set(new Uint8Array(bytes, 0, 20));
+  result.fill(0x20, 20, 20 + paddedLength);
+  result.set(jsonBytes, 20);
+  result.set(binaryTail, 20 + paddedLength);
+  const view = new DataView(result.buffer);
+  view.setUint32(8, result.byteLength, true);
+  view.setUint32(12, paddedLength, true);
+  return result.buffer;
+}
+
 test("GLTFLoader import keeps hierarchy, skin attributes, named node bindings and original clip tracks", async () => {
   const bytes = syntheticGlb("rigged_mesh");
   const asset = await assetFor(bytes);
@@ -279,4 +298,52 @@ test("disposal helper deduplicates resources shared across independent roots", (
   disposeAnimationScenes([rootA, rootB]);
   assert.equal(geometryDisposals, 1);
   assert.equal(materialDisposals, 1);
+});
+
+test("off-scene rig and path bindings are rejected while the active single scene still loads", async () => {
+  const representation = "bone_motion_with_illustrative_path";
+  const original = syntheticGlb(representation);
+  const bytes = editGlb(original, (document) => {
+    document.nodes.push({ name: "OffSceneBone" }, { name: "OffScenePath" });
+    document.scenes.push({ nodes: [document.nodes.length - 2, document.nodes.length - 1] });
+  });
+  const asset = await assetFor(bytes, representation);
+  await assert.rejects(loadAnimationScene(bytes, {
+    ...asset, rig: { ...asset.rig!, nodeBindings: [{ structureId: "SYNTHETIC-BONE", nodeId: "OffSceneBone" }] },
+  }), /node binding/);
+  await assert.rejects(loadAnimationScene(bytes, {
+    ...asset, illustration: { ...asset.illustration!, trajectoryBindings: [{ structureId: "SYNTHETIC-MUSCLE-PATH", trajectoryId: "OffScenePath" }] },
+  }), /path binding/);
+  const loaded = await loadAnimationScene(bytes, asset);
+  try { assert.equal(loaded.scene.getObjectByName("OffSceneBone"), undefined); }
+  finally { loaded.dispose(); }
+});
+
+test("off-scene skin joints and clip targets cannot accompany the returned active scene", async () => {
+  const skinBytes = editGlb(syntheticGlb("rigged_mesh"), (document) => {
+    document.nodes[0].children = [3];
+    document.scenes.push({ nodes: [1] });
+    document.animations[0].channels[0].target.node = 3;
+  });
+  const skinAsset = await assetFor(skinBytes);
+  await assert.rejects(loadAnimationScene(skinBytes, {
+    ...skinAsset, rig: { ...skinAsset.rig!, nodeBindings: [{ structureId: "SYNTHETIC-BONE", nodeId: "SyntheticSurface" }] },
+  }), /SkinnedMesh의 joint/);
+  const trackBytes = editGlb(syntheticGlb("illustrative_path"), (document) => {
+    document.nodes.push({ name: "OffSceneTrack" });
+    document.scenes.push({ nodes: [document.nodes.length - 1] });
+    document.animations[0].channels[0].target.node = document.nodes.length - 1;
+  });
+  await assert.rejects(loadAnimationScene(trackBytes, await assetFor(trackBytes, "illustrative_path")), /track target node가 active scene/);
+});
+
+test("external buffer and image URI are rejected before GLTFLoader can resolve them", async () => {
+  for (const edit of [
+    (document: any) => { document.buffers[0].uri = "https://example.invalid/external.bin"; },
+    (document: any) => { document.images = [{ uri: "external.png" }]; },
+    (document: any) => { document.images = [{ uri: "data:image/png;base64,AA==" }]; },
+  ]) {
+    const bytes = editGlb(syntheticGlb(), edit);
+    await assert.rejects(loadAnimationScene(bytes, await assetFor(bytes), { basePath: "https://example.invalid/" }), /외부 buffer\/image URI/);
+  }
 });

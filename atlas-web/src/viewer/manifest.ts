@@ -5,6 +5,7 @@ import { decodeT07Glb, type ExpectedNode, type ViewerMesh } from "./glb";
 import type { AnnotationAssetContext } from "./annotationDrafts";
 import type { SceneManifest } from "../domain/navigation";
 import { assertCompatibleSceneGroup, sceneRevision } from "./scenePlan";
+import { sceneMappingTargets } from "./sceneMappingContract";
 import canonicalData from "../../../atlas-data/catalog/canonical-catalog.json";
 import bridgeData from "../../../atlas-data/manifests/canonical-geometry-t12.json";
 import boneManifest from "../../../atlas-data/manifests/derived-bones-t13.json";
@@ -42,48 +43,37 @@ function expectedNodes(manifest: T07Manifest): ExpectedNode[] {
   if (manifest.task !== "T07" || manifest.manifestVersion !== "T07-derived-assets-v1") {
     throw new Error("현재 viewer는 확인된 T07-derived-assets-v1 manifest만 읽습니다.");
   }
-  if (manifest.modelId !== "HA-MODEL-BP3D4-R4-RIGHT-LOWER-LEG-STATIC" || manifest.status !== "local_candidate_needs_review") {
-    throw new Error("T07 model ID 또는 검토 대기 상태가 예상과 다릅니다.");
+  if (manifest.modelId !== "HA-MODEL-BP3D4-R4-RIGHT-LOWER-LEG-STATIC") {
+    throw new Error("T07 model ID가 예상과 다릅니다.");
   }
   if (!manifest.glb || !Number.isInteger(manifest.glb.bytes) || manifest.glb.bytes !== 712192 || manifest.glb.meshCount !== 11 ||
     manifest.glb.sha256 !== "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341") {
     throw new Error("T07 GLB의 크기/hash/mesh count가 고정 manifest 값과 다릅니다.");
   }
-  if (manifest.validation?.anatomyIdentityReviewed !== false || manifest.validation?.attachmentAnnotationsCreated !== false || manifest.validation?.reviewState !== "needs_review") {
-    throw new Error("T07의 anatomy review/annotation 경계가 예상과 다릅니다.");
+  if (!manifest.validation || typeof manifest.validation.anatomyIdentityReviewed !== "boolean" ||
+    typeof manifest.validation.attachmentAnnotationsCreated !== "boolean" || typeof manifest.validation.reviewState !== "string") {
+    throw new Error("T07의 anatomy review/annotation metadata가 불완전합니다.");
   }
   const nodes = manifest.meshNodes;
   const crosswalk = manifest.meshCrosswalk;
   if (!nodes || !crosswalk || nodes.length !== 11 || crosswalk.length !== 11) throw new Error("T07 manifest에 예상한 11개 node/crosswalk가 없습니다.");
   const canonical = canonicalData.entities;
   const canonicalAssets = new Map(canonical.meshAssets.map((row) => [row.id, row]));
-  const instances = new Map(canonical.instances.map((row) => [row.id, row]));
-  const mappings = canonical.meshMappings;
-  if (canonicalAssets.size !== 20 || instances.size !== 6 || mappings.length !== 7 ||
-    bridgeData.coverage.meshAssets !== 11 || bridgeData.coverage.rightMuscleInstances !== 6 || bridgeData.coverage.muscleMeshMappings !== 7 ||
-    bridgeData.sourceGlbSha256 !== manifest.glb.sha256 || bridgeData.poseId !== manifest.poseId ||
+  if (bridgeData.sourceGlbSha256 !== manifest.glb.sha256 || bridgeData.poseId !== manifest.poseId ||
     bridgeData.frameId !== "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR" || bridgeData.units !== "m" ||
     bridgeData.unmappedStructureAssets.length !== 4 ||
     !bridgeData.unmappedStructureAssets.some((row) => row.fileId === "FJ3385" && row.structureId === null)) {
     throw new Error("T12b canonical geometry bridge의 coverage/frame/talus 제외가 예상과 다릅니다.");
   }
-  const mappingTarget = new Map<string, string>();
-  for (const mapping of mappings) {
-    if (mapping.reviewState !== "needs_review" || mapping.meshIds.length !== 1 || mapping.instanceIds.length !== 1 || mapping.evidenceIds.length < 1) {
-      throw new Error(`T12b canonical mesh mapping이 미검토 단일 관계가 아닙니다: ${mapping.id}`);
-    }
-    const instance = instances.get(mapping.instanceIds[0]);
-    if (!instance || instance.side !== "right" || !canonicalAssets.has(mapping.meshIds[0])) throw new Error(`T12b mapping 참조가 없습니다: ${mapping.id}`);
-    const target = mapping.partIds.length === 1 ? mapping.partIds[0] : instance.conceptId;
-    if (mappingTarget.has(mapping.meshIds[0])) throw new Error(`T12b mesh mapping 중복: ${mapping.meshIds[0]}`);
-    mappingTarget.set(mapping.meshIds[0], target);
-  }
+  const sceneMuscleMeshIds = nodes.filter((node) => node.targetEntityType === "individual_muscle" || node.targetEntityType === "muscle_part")
+    .map((node) => node.meshAssetId).filter((id): id is string => typeof id === "string");
+  const mappingTarget = sceneMappingTargets(sceneMuscleMeshIds, canonical.meshAssets, canonical.instances, canonical.meshMappings, "right");
   const crosswalkById = new Map(crosswalk.map((row) => [row.meshAssetId, row]));
   const mapped = nodes.map((node) => {
     const id = node.meshAssetId;
     const relation = typeof id === "string" ? crosswalkById.get(id) : undefined;
-    if (!relation || typeof id !== "string" || relation.reviewState !== "needs_review" || relation.meshAssetId !== id) {
-      throw new Error(`T07 manifest crosswalk 또는 needs_review 상태가 mesh와 맞지 않습니다: ${String(id)}`);
+    if (!relation || typeof id !== "string" || typeof relation.reviewState !== "string" || relation.meshAssetId !== id) {
+      throw new Error(`T07 manifest crosswalk가 mesh와 맞지 않습니다: ${String(id)}`);
     }
     const sourceName = node.sourceName;
     const sourceFileId = node.sourceFileId;
@@ -110,7 +100,7 @@ function expectedNodes(manifest: T07Manifest): ExpectedNode[] {
       if (mappingTarget.has(id) || !bridgeData.unmappedStructureAssets.some((row) => row.meshAssetId === id && row.structureId === targetEntityId)) {
         throw new Error(`T12b 구조물 mesh 제외 기록이 다릅니다: ${id}`);
       }
-    } else if (mappingTarget.get(id) !== targetEntityId || !bridgeData.muscleLinks.some((row) => row.meshAssetId === id && row.reviewState === "needs_review")) {
+    } else if (mappingTarget.get(id) !== targetEntityId || !bridgeData.muscleLinks.some((row) => row.meshAssetId === id)) {
       throw new Error(`T12b canonical muscle mapping이 T07 crosswalk와 다릅니다: ${id}`);
     }
     return {
@@ -122,7 +112,7 @@ function expectedNodes(manifest: T07Manifest): ExpectedNode[] {
       targetEntityId: targetEntityId as string | null,
       targetEntityType,
       relationStatus,
-      reviewState: "needs_review",
+      reviewState: relation.reviewState,
     } satisfies ExpectedNode;
   });
   if (new Set(mapped.map((node) => node.meshAssetId)).size !== 11 || new Set(mapped.map((node) => node.nodeIndex)).size !== 11 || new Set(mapped.map((node) => node.meshIndex)).size !== 11) {
@@ -132,7 +122,7 @@ function expectedNodes(manifest: T07Manifest): ExpectedNode[] {
 }
 
 function expectedBoneNodes(): ExpectedNode[] {
-  if (boneManifest.manifestVersion !== "T13-derived-bones-v2" || boneManifest.reviewState !== "needs_review" ||
+  if (boneManifest.manifestVersion !== "T13-derived-bones-v2" || typeof boneManifest.reviewState !== "string" ||
     boneManifest.glb.meshCount !== 9 || boneManifest.meshAssets.length !== 9 || boneManifest.viewerNodes.length !== 9 ||
     boneManifest.transform.frameId !== bridgeData.frameId || boneManifest.transform.targetUnits !== bridgeData.units ||
     boneManifest.transform.poseId !== bridgeData.poseId || boneManifest.sourceId !== bridgeData.sourceId ||
@@ -150,7 +140,7 @@ function expectedBoneNodes(): ExpectedNode[] {
       asset.axes.frameId !== bridgeData.frameId || asset.pose.id !== bridgeData.poseId ||
       node.targetEntityType !== "structure" || (node.targetEntityId !== null && !structures.has(node.targetEntityId)) ||
       (node.targetEntityId === null && !["FJ3353", "FJ3355", "FJ3357"].includes(node.sourceFileId)) ||
-      node.reviewState !== "needs_review") {
+      typeof node.reviewState !== "string") {
       throw new Error(`T13 뼈 mesh 계약/구조 후보가 맞지 않습니다: ${node.meshAssetId}`);
     }
     return node satisfies ExpectedNode;

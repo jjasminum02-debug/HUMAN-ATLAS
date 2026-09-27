@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "revision": "T22-2026-09-27-motion-asset-sources-v1",
+  "revision": "T41-2026-09-27-motion-asset-sources-v2",
   "coordinateContract": {
     "format": "glTF 2.0",
     "handedness": "right",
@@ -12,7 +12,9 @@
     "conversionPolicy": "loader_does_not_rescale_or_reorient; normalize_and_record_in_derivation"
   },
   "firstAnkleDemonstration": {
-    "candidateAction": "발목 발바닥굽힘의 교육용 시범",
+    "subjectMuscleId": "HA-M-000003",
+    "side": "right",
+    "candidateAction": "오른쪽 발목 배측굴곡의 교육용 시범",
     "representation": "bone_motion_with_illustrative_path",
     "muscleShape": "simple explanatory path; no contraction or quantitative deformation",
     "status": "method_selected_asset_held",
@@ -28,7 +30,7 @@
     "derivationGate": ["tool and version", "reproducible command/settings", "source-to-output mapping", "coordinate/unit conversion record", "output SHA-256"],
     "rigGate": ["stable node map", "skin index/weight validation when rigged_mesh", "clip and track binding", "duration", "static binding source hash and pose"],
     "learnerGate": ["manifest validation", "loader regression", "anatomy/source review remains separate", "no AI-to-human-review promotion"],
-    "outputFormat": "self-contained GLB preferred; external resources require explicit hashes and licenses",
+    "outputFormat": "self-contained GLB only; external buffer/image URI rejected",
     "productionAssetsAreMotionLearningEntries": true
   },
   "productionMotionAssetIds": [],

@@ -41,3 +41,9 @@ Three.js manual에 따라 공유 geometry/material/texture/skeleton은 imported 
 - [BodyParts3D archive license](https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html) — 2025-02-27 갱신 CC BY 4.0, 요구 attribution.
 - [OpenSim Gait2392 model page](https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim/pages/53086215) — model file/result files 범위, Gait2392 joint/frame 배경.
 - [OpenSim model table](https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim/pages/53090607) — Gait2392 모델 행의 CC BY 3.0 표시.
+
+## T41 후속 결정 (2026-09-27)
+
+T22 당시 첫 후보였던 발바닥굽힘은 역사적 결정으로 위에 보존한다. 현행 첫 시범 대상은 `HA-M-000003` 전경골근/앞정강근/Tibialis anterior의 **오른쪽 발목 배측굴곡**이다. 현행 source manifest의 후보만 이에 맞춰 갱신했으며 joint 좌표나 clip은 생성하지 않았다.
+
+첫 운영 입력은 self-contained GLB로 한정한다. GLB JSON의 buffer/image URI는 parse 전에 거부한다. 재생 root는 `gltf.scene`이며 rig/path binding, 모든 clip track target, active skin skeleton의 bone은 이 root 아래에 있어야 한다. `gltf.scenes`의 다른 root는 소유 자원 해제를 위해 보관할 뿐 재생 binding으로 인정하지 않는다. 외부 의존 자산을 지원하려면 별도 출처/hash/license 및 취소·정리 계약을 후속 설계에서 먼저 정의한다.

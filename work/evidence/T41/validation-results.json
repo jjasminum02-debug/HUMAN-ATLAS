@@ -1,0 +1,22 @@
+{
+  "task": "T41",
+  "date": "2026-09-27",
+  "startingHead": "dbbe64d0f799cc0f12a72c4b181cf5413b75551f",
+  "loaderNodeTests": { "passed": 10, "failed": 0, "offSceneBone": "rejected", "offScenePath": "rejected", "offSceneSkinJoint": "rejected", "offSceneClipTarget": "rejected", "singleScene": "accepted", "externalBufferUri": "rejected", "externalImageUri": "rejected" },
+  "sceneMappingTests": { "passed": 3, "failed": 0, "actualCalfMeshMappings": 7, "otherRegionLeftReviewProgression": "accepted", "t07AndBoneReviewStateRuntimeGate": "removed; original review data unchanged" },
+  "sceneCacheAndPlanTests": { "passed": 9, "failed": 0 },
+  "t23PlayerWipTests": { "passed": 16, "failed": 0, "ownership": "preexisting uncommitted WIP unchanged" },
+  "representationFixtures": { "passed": 3, "failed": 0 },
+  "sourceCandidates": { "validated": 2, "productionMotionAssets": 0 },
+  "canonicalDataValidator": "pass including 17 fixtures",
+  "typecheck": "pass",
+  "productionBuild": "pass with preexisting >500 kB App chunk warning",
+  "browser": {
+    "builtPreview": "http://127.0.0.1:4189/",
+    "actualStaticGlbs": "11 muscle/context meshes plus 9 derived bone meshes loaded",
+    "checked": ["visible calf 3D", "HA-M-000003 selection and URL", "empty head region", "back navigation restores calf", "clear selection retains scene"],
+    "consoleErrors": 0,
+    "actualMotionClipPlayback": "unavailable: production MotionDefinition and MotionAsset are both zero"
+  },
+  "releaseAndAnatomyApproval": false
+}

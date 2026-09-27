@@ -48,6 +48,12 @@ def main() -> int:
     require(manifest.get("coordinateContract", {}).get("angularUnits") == "rad", "glTF angular unit must be radians")
     require(manifest.get("firstAnkleDemonstration", {}).get("notPatientExerciseInstruction") is True, "first demo scope flag missing")
     require(manifest.get("firstAnkleDemonstration", {}).get("status") == "method_selected_asset_held", "T22 must not claim an authored asset")
+    demo = manifest.get("firstAnkleDemonstration", {})
+    require(set(demo) == set(schema["properties"]["firstAnkleDemonstration"]["required"]), "first demo fields differ from schema")
+    require(demo.get("subjectMuscleId") == "HA-M-000003" and demo.get("side") == "right" and
+            demo.get("candidateAction") == "오른쪽 발목 배측굴곡의 교육용 시범", "first demo target is not right tibialis anterior dorsiflexion")
+    require(manifest.get("assetPipeline", {}).get("outputFormat") == "self-contained GLB only; external buffer/image URI rejected",
+            "first motion input must be self-contained GLB")
 
     entries = manifest.get("candidateSources", [])
     ids = [row.get("id") for row in entries]
