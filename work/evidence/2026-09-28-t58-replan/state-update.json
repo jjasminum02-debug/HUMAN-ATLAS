@@ -1,0 +1,288 @@
+{
+  "sharedFilesExcludedFromCommit": true,
+  "registryBefore": {
+    "nextTask": "T58",
+    "activeQueue": [
+      "T50",
+      "T51",
+      "T52",
+      "T69",
+      "T53",
+      "T54",
+      "T55",
+      "T70",
+      "T71",
+      "T72",
+      "T56",
+      "T57",
+      "T58",
+      "T59",
+      "T60",
+      "T25",
+      "T61",
+      "T62",
+      "T63",
+      "T64",
+      "T65",
+      "T26",
+      "T27",
+      "T28",
+      "T45",
+      "T46",
+      "T29",
+      "T30",
+      "T31",
+      "T32",
+      "T33",
+      "T34",
+      "T35",
+      "T66",
+      "T47",
+      "T40"
+    ],
+    "nextUnallocatedNumericId": 73
+  },
+  "registryAfter": {
+    "nextTask": "T73",
+    "activeQueue": [
+      "T50",
+      "T51",
+      "T52",
+      "T69",
+      "T53",
+      "T54",
+      "T55",
+      "T70",
+      "T71",
+      "T72",
+      "T56",
+      "T57",
+      "T73",
+      "T74",
+      "T75",
+      "T76",
+      "T77",
+      "T78",
+      "T58",
+      "T59",
+      "T60",
+      "T25",
+      "T61",
+      "T62",
+      "T63",
+      "T64",
+      "T65",
+      "T26",
+      "T27",
+      "T28",
+      "T45",
+      "T46",
+      "T29",
+      "T30",
+      "T31",
+      "T32",
+      "T33",
+      "T34",
+      "T35",
+      "T66",
+      "T47",
+      "T40"
+    ],
+    "nextUnallocatedNumericId": 79,
+    "coverageRepairAmendment": {
+      "date": "2026-09-28",
+      "design": "design/2026-09-25-muscle-atlas/17-VISUAL-COVERAGE-REPAIR.md",
+      "prompts": "design/2026-09-25-muscle-atlas/18-SERIAL-PROMPTS-AFTER-T58.md",
+      "status": "planning_only",
+      "historicalT58": "partial; preserve report and implementation",
+      "queue": "T73 → T74 → T75 → T76 → required additional source packages if any → T77 → T78 → T58 recheck → T59",
+      "gates": "Separate target/source/display/binding/content/motion coverage; no first-pass subset as whole-body denominator"
+    }
+  },
+  "newTaskEntries": [
+    {
+      "id": "T73",
+      "title": "전신 시각 목표·누락 원인·취득 범위 확정",
+      "model": "Astra · 현재 대화 직접 구현",
+      "spec": "work/tasks/T73.md",
+      "prerequisite": "existing T58 partial report/artifacts; does not depend on future T58 pass",
+      "prerequisiteIds": [],
+      "defaultNext": "T74",
+      "mode": "active",
+      "continuationRule": "T73 scope freeze; local source holds do not globally block independent regions. T77 requires all frozen visual necessities or remains partial. T58 visual pass still required before T59.",
+      "inputArtifactTaskIds": [
+        "T58"
+      ]
+    },
+    {
+      "id": "T74",
+      "title": "양측 두개골 시각 기반 보완",
+      "model": "Luna Max",
+      "spec": "work/tasks/T74.md",
+      "prerequisite": "T73",
+      "prerequisiteIds": [
+        "T73"
+      ],
+      "defaultNext": "T75",
+      "mode": "active",
+      "continuationRule": "T73 scope freeze; local source holds do not globally block independent regions. T77 requires all frozen visual necessities or remains partial. T58 visual pass still required before T59."
+    },
+    {
+      "id": "T75",
+      "title": "삼각근·광배근 양측 source 보완",
+      "model": "Luna Max",
+      "spec": "work/tasks/T75.md",
+      "prerequisite": "T74",
+      "prerequisiteIds": [
+        "T73",
+        "T74"
+      ],
+      "defaultNext": "T76",
+      "mode": "active",
+      "continuationRule": "T73 scope freeze; local source holds do not globally block independent regions. T77 requires all frozen visual necessities or remains partial. T58 visual pass still required before T59."
+    },
+    {
+      "id": "T76",
+      "title": "골반·샅 시각 범위 보완",
+      "model": "Luna Max",
+      "spec": "work/tasks/T76.md",
+      "prerequisite": "T75",
+      "prerequisiteIds": [
+        "T73",
+        "T75"
+      ],
+      "defaultNext": "T77",
+      "mode": "active",
+      "continuationRule": "T73 scope freeze; local source holds do not globally block independent regions. T77 requires all frozen visual necessities or remains partial. T58 visual pass still required before T59."
+    },
+    {
+      "id": "T77",
+      "title": "보완 패키지 통합·표시 정책 분리",
+      "model": "Astra · 현재 대화 직접 구현",
+      "spec": "work/tasks/T77.md",
+      "prerequisite": "T73 frozen visual target plus all mandatory acquisition packages; local partial history alone is not the gate",
+      "prerequisiteIds": [
+        "T73",
+        "T74",
+        "T75",
+        "T76"
+      ],
+      "defaultNext": "T78",
+      "mode": "active",
+      "continuationRule": "T73 scope freeze; local source holds do not globally block independent regions. T77 requires all frozen visual necessities or remains partial. T58 visual pass still required before T59."
+    },
+    {
+      "id": "T78",
+      "title": "주요 근육·뼈 선택과 세 이름 연결 파일럿",
+      "model": "Luna Max",
+      "spec": "work/tasks/T78.md",
+      "prerequisite": "T77",
+      "prerequisiteIds": [
+        "T77"
+      ],
+      "defaultNext": "T58",
+      "mode": "active",
+      "continuationRule": "T73 scope freeze; local source holds do not globally block independent regions. T77 requires all frozen visual necessities or remains partial. T58 visual pass still required before T59."
+    }
+  ],
+  "newTaskStatuses": {
+    "T73": "planned_not_started",
+    "T74": "planned_not_started",
+    "T75": "planned_not_started",
+    "T76": "planned_not_started",
+    "T77": "planned_not_started",
+    "T78": "planned_not_started"
+  },
+  "existingTaskChanges": {
+    "T57": {
+      "before": {
+        "id": "T57",
+        "title": "앱 시작·전신 홈·레이어 조작",
+        "model": "Astra · 현재 대화 직접 구현",
+        "spec": "work/tasks/T57.md",
+        "prerequisite": "T56",
+        "prerequisiteIds": [
+          "T56"
+        ],
+        "defaultNext": "T58",
+        "mode": "active",
+        "executionLocation": "current_conversation_user_requested"
+      },
+      "after": {
+        "id": "T57",
+        "title": "앱 시작·전신 홈·레이어 조작",
+        "model": "Astra · 현재 대화 직접 구현",
+        "spec": "work/tasks/T57.md",
+        "prerequisite": "T56",
+        "prerequisiteIds": [
+          "T56"
+        ],
+        "defaultNext": "T73",
+        "mode": "active",
+        "executionLocation": "current_conversation_user_requested"
+      }
+    },
+    "T58": {
+      "before": {
+        "id": "T58",
+        "title": "전신 그래픽 품질·연속성 합격",
+        "model": "Astra · 현재 대화 직접 구현",
+        "spec": "work/tasks/T58.md",
+        "prerequisite": "T57",
+        "prerequisiteIds": [
+          "T57"
+        ],
+        "defaultNext": "T59",
+        "mode": "active",
+        "executionLocation": "current_conversation_user_requested"
+      },
+      "after": {
+        "id": "T58",
+        "title": "전신 그래픽 품질·연속성 합격",
+        "model": "Astra · 현재 대화 직접 구현",
+        "spec": "work/tasks/T58.md",
+        "prerequisite": "T57",
+        "prerequisiteIds": [
+          "T57"
+        ],
+        "defaultNext": "T59",
+        "mode": "active",
+        "executionLocation": "current_conversation_user_requested",
+        "resumePrerequisiteIds": [
+          "T77",
+          "T78"
+        ],
+        "continuationRule": "Historical partial preserved; resume only after coverage repair packages; do not rerun initial implementation. Visual gate before T59."
+      }
+    }
+  },
+  "statusChange": {
+    "beforeNext": "- NEXT_TASK: T58 / Astra - gate remains open; bounded source-gap remediation must be scoped before T59. T59 and later not started.",
+    "afterNext": "- NEXT_TASK: T73 / Astra · 현재 대화 - visual target/source audit and bounded repair scope; then T74–78/required source batches, T58 recheck, T59. Planning only; new tasks not started.",
+    "date": "2026-09-28",
+    "append": "\n## 2026-09-28 — T58 후속 시각 범위 계획 개정\n\nT58 partial 이력과 코드는 보존한다. 현재 상태는 미착수가 아니다. 주요 구조 미확보와 확보됐지만 기본 숨김인 구조, source-only와 learner binding을 분리한다. 다음 T73부터 시각 목표/누락원인 확인→T74 두개골/T75 삼각근·광배근/T76 골반샅→필수 추가 배치→T77 통합 표시 정책→T78 주요 이름/선택→T58 재검증 순서로 계획했다. 17/18 설계·프롬프트와 T73–78 명세는 계획이며 구현·취득을 실행하지 않았다. 이후 T59부터 기존 motion/nerve queue 유지.\n"
+  },
+  "designHeaderPrepends": {
+    "design/2026-09-25-muscle-atlas/00-START-HERE.md": {
+      "beforeSha256": "72f3d7e09e66318da4b55e46a2c143b253dd8fa81b6de5b469340113765d198c",
+      "prepend": "> **2026-09-28 T58 후속 우선:** T58은 partial이며 다음은 T73(Astra)이다. 17-VISUAL-COVERAGE-REPAIR.md와 18-SERIAL-PROMPTS-AFTER-T58.md 및 live STATUS/R15 registry를 따른다. T73–78/필수 추가 자료 작업 후 T58 재검증, 그 뒤 T59. 아래 이전 next 문구는 이력이다.\n\n"
+    },
+    "design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md": {
+      "beforeSha256": "40d2c294679ae4529c1be0e7c40686c46a25831972ae54b490e24de7a999bb70",
+      "prepend": "> **2026-09-28 T58 후속 우선:** T58은 partial이며 다음은 T73(Astra)이다. 17-VISUAL-COVERAGE-REPAIR.md와 18-SERIAL-PROMPTS-AFTER-T58.md 및 live STATUS/R15 registry를 따른다. T73–78/필수 추가 자료 작업 후 T58 재검증, 그 뒤 T59. 아래 이전 next 문구는 이력이다.\n\n"
+    },
+    "design/2026-09-25-muscle-atlas/13-CONTINUOUS-WHOLE-BODY-EXPERIENCE-R15.md": {
+      "beforeSha256": "53ea2a3512d1b811ad6a86863aedfac97e0ee5d92eae21068ae5231bd1321ec7",
+      "prepend": "> **2026-09-28 T58 후속 우선:** T58은 partial이며 다음은 T73(Astra)이다. 17-VISUAL-COVERAGE-REPAIR.md와 18-SERIAL-PROMPTS-AFTER-T58.md 및 live STATUS/R15 registry를 따른다. T73–78/필수 추가 자료 작업 후 T58 재검증, 그 뒤 T59. 아래 이전 next 문구는 이력이다.\n\n"
+    },
+    "design/2026-09-25-muscle-atlas/14-TASK-PROMPTS-R15.md": {
+      "beforeSha256": "fd5c4d7b06b09dc0e20d7af58d371492fa93b45a8b7f3eba2098aee1f28ca0ec",
+      "prepend": "> **2026-09-28 T58 후속 우선:** T58은 partial이며 다음은 T73(Astra)이다. 17-VISUAL-COVERAGE-REPAIR.md와 18-SERIAL-PROMPTS-AFTER-T58.md 및 live STATUS/R15 registry를 따른다. T73–78/필수 추가 자료 작업 후 T58 재검증, 그 뒤 T59. 아래 이전 next 문구는 이력이다.\n\n"
+    },
+    "design/2026-09-25-muscle-atlas/16-ASTRA-UI-HANDOFF.md": {
+      "beforeSha256": "ef6296ba7f3230d78ac09735e991744e335fad17e51942bfb9f14706de06cc6f",
+      "prepend": "> **2026-09-28 T58 후속 우선:** T58은 partial이며 다음은 T73(Astra)이다. 17-VISUAL-COVERAGE-REPAIR.md와 18-SERIAL-PROMPTS-AFTER-T58.md 및 live STATUS/R15 registry를 따른다. T73–78/필수 추가 자료 작업 후 T58 재검증, 그 뒤 T59. 아래 이전 next 문구는 이력이다.\n\n"
+    }
+  },
+  "registryBeforeNormalizedJsonSha256": "8eaa37bf3ec2b324dc865f5fc5d82671afe3d88f9833ed76aee3c68e2edf1d7c"
+}
