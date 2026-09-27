@@ -1,0 +1,60 @@
+{
+  "revision": "T53-BROWSER-VERIFICATION-v1",
+  "task": "T53",
+  "browser": "Codex In-app Browser",
+  "preview": "work/evidence/T53/private-preview.html",
+  "sourceGlb": "atlas-data/source-cache/bodyparts3d-r4/converted/t53/T53-trunk-pelvis-static-source.glb",
+  "sourceGlbSha256": "25b9850ded5fe6e8c38e48578ba6a4d4e617dca1169cd1c6d63dfda52814709b",
+  "runtime": {
+    "loaded": true,
+    "canvasCount": 1,
+    "rendererCount": 1,
+    "anatomySceneRootCount": 1,
+    "uniqueMeshCount": 138,
+    "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+    "sourcePose": "bodyparts3d-r4-static-reference",
+    "consoleErrors": 0,
+    "consoleWarnings": 0
+  },
+  "cameraViews": [
+    {"control": "front (+Z, frame anterior)", "selected": true, "rendered": true, "imageObserved": true},
+    {"control": "back (-Z, frame posterior)", "selected": true, "rendered": true, "imageObserved": true},
+    {"control": "side (+X)", "selected": true, "rendered": true, "imageObserved": true}
+  ],
+  "viewportChecks": [
+    {"width": 1440, "height": 900, "canvasCount": 1, "meshCount": 138, "rootCount": 1, "horizontalOverflow": false},
+    {"width": 1024, "height": 768, "canvasCount": 1, "meshCount": 138, "rootCount": 1, "horizontalOverflow": false},
+    {"width": 390, "height": 844, "canvasCount": 1, "meshCount": 138, "rootCount": 1, "horizontalOverflow": false}
+  ],
+  "regionFilterChecks": [
+    {"regionId": "back", "expectedNodes": 58, "visibleNodes": 58, "listedNodes": 58},
+    {"regionId": "thorax", "expectedNodes": 47, "visibleNodes": 47, "listedNodes": 47},
+    {"regionId": "abdomen-lumbar", "expectedNodes": 2, "visibleNodes": 2, "listedNodes": 2},
+    {"regionId": "pelvis-perineum", "expectedNodes": 7, "visibleNodes": 7, "listedNodes": 7},
+    {"regionId": "gluteal-hip", "expectedNodes": 24, "visibleNodes": 24, "listedNodes": 24},
+    {"regionId": "all", "expectedNodes": 138, "visibleNodes": 138, "listedNodes": 138}
+  ],
+  "selectionAndKeyboard": {
+    "sourceElementFileId": "FJ3152",
+    "stableMeshAssetId": "HA-MESH-BP3D4-FJ3152",
+    "sourceName": "Right hip bone",
+    "sourceLaterality": "right",
+    "regionId": "gluteal-hip",
+    "learnerBinding": false,
+    "cardAndSelectionMatched": true,
+    "enterOnBackViewButtonChangedCamera": true,
+    "changingToThoraxClearedPriorSelection": true,
+    "anatomySceneRootCountAfterFilter": 1
+  },
+  "visualObservations": {
+    "relativePlacement": "one BodyParts3D Release 4.0 source, one frame, actual source vertices, and a single integrated GLB were visually checked in three camera directions; no cross-source visual registration was performed",
+    "grossFloatingOrDuplicateRenderObserved": false,
+    "exactDuplicateGeometryGroups": 0,
+    "aabbOverlapPairs": 1751,
+    "surfacePenetrationConclusion": "not resolved by AABB or visual inspection alone; no triangle-level intersection solver was run",
+    "torsoLimbContinuity": "partial: only two hip-bone meshes are in the frozen gluteal-hip package; no sacrum/femur nodes in this T53 package, and the thorax package has one-sided clavicle/scapula candidate bones",
+    "laterality": "source labels and frame x-sign were preserved; 27 surfaces cross x=0, none is wholly opposite its source label, and no label or geometry was edited",
+    "scopeBoundary": "static internal source QA only; not learner release, full torso/skeleton, deep-muscle coverage, human review, or rights approval"
+  },
+  "evidenceNote": "Three camera screenshots were inspected in the browser during verification; the temporary preview screenshots were not saved as binary files. Machine-readable view, viewport, filter, selection, and console observations are recorded here."
+}

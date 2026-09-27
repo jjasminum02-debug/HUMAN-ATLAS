@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>T53 private static source QA</title>
+  <style>
+    :root { color-scheme: dark; font: 14px/1.45 system-ui, sans-serif; background: #10151b; color: #e7ebef; }
+    body { margin: 0; display: grid; grid-template-columns: 300px 1fr; min-height: 100vh; }
+    aside { border-right: 1px solid #34404b; padding: 14px; overflow: auto; max-height: 100vh; box-sizing: border-box; }
+    main { min-width: 0; display: grid; grid-template-rows: auto 1fr auto; }
+    #toolbar { display: flex; gap: 8px; padding: 10px; flex-wrap: wrap; border-bottom: 1px solid #34404b; }
+    button, select, input { color: inherit; background: #202a34; border: 1px solid #536372; border-radius: 4px; padding: 7px 9px; }
+    button[aria-pressed="true"] { outline: 2px solid #84c5ff; }
+    #stage { position: relative; min-height: 520px; }
+    canvas { display: block; width: 100%; height: 100%; min-height: 520px; }
+    #status { padding: 8px 12px; border-top: 1px solid #34404b; color: #bdc9d4; }
+    #list { display: grid; gap: 3px; margin-top: 8px; }
+    #list button { text-align: left; font-size: 12px; }
+    #selected { padding: 10px; border: 1px solid #536372; min-height: 58px; margin-top: 10px; white-space: pre-wrap; }
+    .legend { color: #bac6d1; font-size: 12px; }
+    @media (max-width: 700px) { body { grid-template-columns: 1fr; grid-template-rows: 42vh 1fr; } aside { border-right: 0; border-bottom: 1px solid #34404b; max-height: 42vh; } #stage, canvas { min-height: 50vh; } }
+  </style>
+  <script type="importmap">
+    {"imports":{"three":"../../../atlas-web/node_modules/three/build/three.module.js"}}
+  </script>
+</head>
+<body>
+  <aside>
+    <strong>T53 내부 자산 검증</strong>
+    <p class="legend">제품 UI 아님 · BodyParts3D R4 원본 참조 · 정적 mesh · 공개/사람 검토 승인 아님</p>
+    <label for="region">동결 지역</label><br>
+    <select id="region">
+      <option value="all">통합 5개 지역</option>
+      <option value="back">등</option><option value="thorax">가슴우리</option>
+      <option value="abdomen-lumbar">배·허리</option><option value="pelvis-perineum">골반·샅</option>
+      <option value="gluteal-hip">볼기·깊은엉덩이</option>
+    </select>
+    <div id="selected">구조 선택 없음</div>
+    <input id="filter" type="search" placeholder="Source ID 또는 원문명">
+    <div id="list"></div>
+  </aside>
+  <main>
+    <div id="toolbar">
+      <button data-view="front" aria-pressed="true">정면 (+Z)</button>
+      <button data-view="back" aria-pressed="false">후면 (-Z)</button>
+      <button data-view="side" aria-pressed="false">측면 (+X)</button>
+      <button id="showAll">모두 표시</button>
+    </div>
+    <div id="stage"><canvas id="canvas" aria-label="T53 integrated source asset QA render"></canvas></div>
+    <div id="status">GLB 로딩 중</div>
+  </main>
+  <script type="module" src="./private-preview.mjs"></script>
+</body>
+</html>

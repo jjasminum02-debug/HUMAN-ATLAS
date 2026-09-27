@@ -1,0 +1,2282 @@
+{
+  "revision": "T53-START-BASELINE-v1",
+  "capturedAt": "2026-09-27T08:12:51.850942+00:00",
+  "head": "681ae2b3ec6fe6a505c29d7b6e96cfe54351304d",
+  "branch": "main",
+  "stagedDiffEmpty": true,
+  "preexistingWorktreeEntries": [
+    {
+      "status": " M",
+      "path": "AGENTS.md",
+      "kind": "file",
+      "bytes": 9114,
+      "sha256": "3be36175d2200f7d22cc29672e4af0f1f3b6da6105000c1922f229413b1fd396"
+    },
+    {
+      "status": " M",
+      "path": "design/2026-09-25-muscle-atlas/00-START-HERE.md",
+      "kind": "file",
+      "bytes": 7137,
+      "sha256": "72f3d7e09e66318da4b55e46a2c143b253dd8fa81b6de5b469340113765d198c"
+    },
+    {
+      "status": " M",
+      "path": "design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+      "kind": "file",
+      "bytes": 22964,
+      "sha256": "40d2c294679ae4529c1be0e7c40686c46a25831972ae54b490e24de7a999bb70"
+    },
+    {
+      "status": " M",
+      "path": "design/2026-09-25-muscle-atlas/07-AI-EVIDENCE-AND-MOTION-DESIGN.md",
+      "kind": "file",
+      "bytes": 15287,
+      "sha256": "2760275e0a45c78768615ba6c6aa8348eb92848543df1c6e3f69cc598ad86185"
+    },
+    {
+      "status": " M",
+      "path": "design/2026-09-25-muscle-atlas/08-SERIAL-ROADMAP-AND-GIT.md",
+      "kind": "file",
+      "bytes": 10363,
+      "sha256": "97ef138107428bbed4e96f3969e32c3587ed643a552a1a78f67748275c5575fc"
+    },
+    {
+      "status": " M",
+      "path": "work/STATUS.md",
+      "kind": "file",
+      "bytes": 75440,
+      "sha256": "f523976612009a11de807abdb15a595c5085ec293ed6e86a0ce8b41ececc1ed2"
+    },
+    {
+      "status": " M",
+      "path": "work/task-registry-r13.json",
+      "kind": "file",
+      "bytes": 7170,
+      "sha256": "80ba59e7a9d7323a4fc115da37c4fe1ebdc4ca6e4206a9a6f07fb42ed5833258"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T24.md",
+      "kind": "file",
+      "bytes": 6776,
+      "sha256": "1c5ba88feb180ba78cf04c2d146257b10369e691354adbea87886fbfe920f7a6"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T25.md",
+      "kind": "file",
+      "bytes": 7757,
+      "sha256": "9e04bbac544c194326963d68042b94c5a8894ed7a8a2a5341cadd79e6ee6bd46"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T26.md",
+      "kind": "file",
+      "bytes": 7290,
+      "sha256": "3e77c66831f3790d000af28605ff85901de1b805c2d1b203647c2bf8b564ba8a"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T27.md",
+      "kind": "file",
+      "bytes": 7133,
+      "sha256": "919f4d6406ea0b30af225d1ff90c58fa246285e362570e1fe300581f45fa6f47"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T28.md",
+      "kind": "file",
+      "bytes": 6862,
+      "sha256": "9ba96f4274e0b4be7de8a3d7b2ba4e3213253fa3ba91430e77c6b8f896275e25"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T29.md",
+      "kind": "file",
+      "bytes": 6561,
+      "sha256": "f42e6036bae056f3a6775910bcbdd288146a54e20484e6285d21cafaf3d40933"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T30.md",
+      "kind": "file",
+      "bytes": 7118,
+      "sha256": "6fc18624d4438813d928174bad58de59f463c2c064837dbbc5af32f3ed8a6b66"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T31.md",
+      "kind": "file",
+      "bytes": 6489,
+      "sha256": "33a80bdbc582d2561d8a69fdb78dc7a09d6dfc3f09fc9fc34526347b681a4973"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T32.md",
+      "kind": "file",
+      "bytes": 7487,
+      "sha256": "2d73b738568855e08bd89fd467a84736052bc9cf0303022e34ebe661e62076cf"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T33.md",
+      "kind": "file",
+      "bytes": 7004,
+      "sha256": "78c208e9744218d8ee48ee88e137bcc1afbdc67f43041a25259674f47290ac35"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T34.md",
+      "kind": "file",
+      "bytes": 6932,
+      "sha256": "2a149e9b10ca16a1f53016d2a8f870ce9887cfdb8edbdda8339867769e830c46"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T35.md",
+      "kind": "file",
+      "bytes": 7094,
+      "sha256": "5715605908f7b891f6f8b70492f02259b74377ada36d4b95b17cecd6f5b6bd9f"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T36.md",
+      "kind": "file",
+      "bytes": 7102,
+      "sha256": "c24ec711a974c39feccdf4c8383a09e40e52109cc6b3a5efc3285ee0650cd337"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T37.md",
+      "kind": "file",
+      "bytes": 7081,
+      "sha256": "ae622a4a4d62a53b4f27ca8e38fdea149ebc676e4ec04292e71ce0a322c78b8f"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T38.md",
+      "kind": "file",
+      "bytes": 6543,
+      "sha256": "e709736a79806e309c1abebcb8813f3be7bb4fddf119b9ac713fb54d111a7979"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T39.md",
+      "kind": "file",
+      "bytes": 6385,
+      "sha256": "89ffe23d3fd9c17484d5e41ee0f8eaacb5c05f3b45b75e417b0e98125a241ec1"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T40.md",
+      "kind": "file",
+      "bytes": 6658,
+      "sha256": "9bf736d61bb8c7292a620f26480ee4a792c06fbf6b580b372dbbbfb5c4376a5f"
+    },
+    {
+      "status": "??",
+      "path": "design/2026-09-25-muscle-atlas/10-STRUCTURE-FUNCTION-DELIVERY-PLAN.md",
+      "kind": "file",
+      "bytes": 16338,
+      "sha256": "6114aac294eae13fd5c5fa80b5602c2f322d1aa84dfe2a55b479c9b3af3a8160"
+    },
+    {
+      "status": "??",
+      "path": "design/2026-09-25-muscle-atlas/11-TASK-PROMPTS-R14.md",
+      "kind": "file",
+      "bytes": 70419,
+      "sha256": "5c1bc681ebcb85ed8a3f7559418c64d450e3317c99b678ea20594212947ba6a8"
+    },
+    {
+      "status": "??",
+      "path": "design/2026-09-25-muscle-atlas/12-ASSESSMENT-ANIMATION-FUTURE.md",
+      "kind": "file",
+      "bytes": 6556,
+      "sha256": "c3a433841bc1e90af1f694d20dd841bca68c70d1c1cb8ae65d88d2034071c593"
+    },
+    {
+      "status": "??",
+      "path": "design/2026-09-25-muscle-atlas/13-CONTINUOUS-WHOLE-BODY-EXPERIENCE-R15.md",
+      "kind": "file",
+      "bytes": 14807,
+      "sha256": "53ea2a3512d1b811ad6a86863aedfac97e0ee5d92eae21068ae5231bd1321ec7"
+    },
+    {
+      "status": "??",
+      "path": "design/2026-09-25-muscle-atlas/14-TASK-PROMPTS-R15.md",
+      "kind": "file",
+      "bytes": 83994,
+      "sha256": "fd5c4d7b06b09dc0e20d7af58d371492fa93b45a8b7f3eba2098aee1f28ca0ec"
+    },
+    {
+      "status": "??",
+      "path": "design/2026-09-25-muscle-atlas/15-NERVE-AND-ASSESSMENT-SCOPE-R15.md",
+      "kind": "file",
+      "bytes": 5937,
+      "sha256": "29ab677d3efca252325e555e1b7aadb20cca213b014676b9a195c7a27324a492"
+    },
+    {
+      "status": "??",
+      "path": "design/2026-09-25-muscle-atlas/16-ASTRA-UI-HANDOFF.md",
+      "kind": "file",
+      "bytes": 6784,
+      "sha256": "ef6296ba7f3230d78ac09735e991744e335fad17e51942bfb9f14706de06cc6f"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/AGENTS.md",
+      "kind": "file",
+      "bytes": 3078,
+      "sha256": "845392c2715f267cdf5d9e69124d79ba4e20c3dfeb86d87659f6ca52c45f9095"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+      "kind": "file",
+      "bytes": 5062,
+      "sha256": "fa1c10d18ebd247ef94de7708d648e8740a984dc7534b7ad19304e2f3e114b8b"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/01-PRODUCT-AND-ARCHITECTURE.md",
+      "kind": "file",
+      "bytes": 17058,
+      "sha256": "72888d4f53086b3c8e340c08e4ed63279a056b1d66df0939c6db4109b2c87268"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/02-DATA-CONTRACT.md",
+      "kind": "file",
+      "bytes": 14633,
+      "sha256": "cc5dd908115d3c8941fb679d225d123d8646b65304dbd639ed155e64a8bc5759"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+      "kind": "file",
+      "bytes": 26605,
+      "sha256": "334d016f22d56e9cd7e82c712d193663f8a80855cb752dc9546b5a9c60a33d58"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/04-SOURCES-AND-DECISIONS.md",
+      "kind": "file",
+      "bytes": 8890,
+      "sha256": "e9a6395a04284b8fe22fd6cae4fdd866f6f5eb7696baf17eed956e887f30f670"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/06-REGION12-MUSCLE-BONE-REVISION.md",
+      "kind": "file",
+      "bytes": 12382,
+      "sha256": "d04e61336d820221bcfe969643b8a84cc50b158b156e52ef7335162e9e0fcf04"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/DECISIONS.md",
+      "kind": "file",
+      "bytes": 16525,
+      "sha256": "24c8288c5d8ea6bb02f42790c31cf9e1dd89faf5b3b88cf0c92352468516fec7"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/STATUS.md",
+      "kind": "file",
+      "bytes": 16706,
+      "sha256": "88608d44eea16939fe072077b26afd0f161bc5b08a75ed1e85147e589f0d24aa"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14.md",
+      "kind": "file",
+      "bytes": 2219,
+      "sha256": "a38dbe238f476840db54119bf45ca4944c56c82360f3bd36ae8eef8cc0505c19"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14a.md",
+      "kind": "file",
+      "bytes": 5932,
+      "sha256": "4bfacd76775d63c942334e8bc9f82fbab8883f6ecf0407fead1e3694590671f7"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14b.md",
+      "kind": "file",
+      "bytes": 3341,
+      "sha256": "c199a1d5d5da80e49c0135ee3475718414644c5cfa506ccc512141169e5a1672"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15.md",
+      "kind": "file",
+      "bytes": 999,
+      "sha256": "e30313942aacd8875cfa59ecd187c47dc730f441c7d0982341dc2c2d251d7d2e"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15a.md",
+      "kind": "file",
+      "bytes": 2499,
+      "sha256": "2844e1e8df234eb582420813c3fc3bbf91dcbdf3ffd907690dca81bf5f441609"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15b.md",
+      "kind": "file",
+      "bytes": 2429,
+      "sha256": "416cc2f3c0ae5505d2ee04e9d89aa14bab7af14257a165dc451dd4a958412c31"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15c.md",
+      "kind": "file",
+      "bytes": 2531,
+      "sha256": "88843a6fc6c4c83b118c469e4e3c7520c86065e9be431e947a6bc7b2c0bd8b58"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15d.md",
+      "kind": "file",
+      "bytes": 2293,
+      "sha256": "b0112b805ca0aa31231fd26b09231bbb0c6c77812a13e5dda2c4e51aa597807f"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15e.md",
+      "kind": "file",
+      "bytes": 2365,
+      "sha256": "d798fa5b1bfd5b42ae2f5cccaed32a53955fc0bed677d305c4bc6fca201a0eea"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15f.md",
+      "kind": "file",
+      "bytes": 2194,
+      "sha256": "216e5aac3748fd8b13e31ba680c00368ac0b71bf0300db595ebf835bb17206e2"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15g.md",
+      "kind": "file",
+      "bytes": 2687,
+      "sha256": "0f73ad9e7483bacd7c20fde72191d2d51b5c40ce3eed9b43e01ced9c72dae2c1"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T16.md",
+      "kind": "file",
+      "bytes": 3207,
+      "sha256": "dd6b6e6acc9be8e15c77d1181dd6b186fd42cc22482fa59ba5ece0eeedc83d88"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T17.md",
+      "kind": "file",
+      "bytes": 2536,
+      "sha256": "350b1121a09dc999417b334d27ecfd60bffc51eeb31c1cdac13b3105c9158726"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T18.md",
+      "kind": "file",
+      "bytes": 2424,
+      "sha256": "85ef5b9bb7603698018fa99751eb65279882f010db457f9b769efe2a7d4f1b78"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T19.md",
+      "kind": "file",
+      "bytes": 2297,
+      "sha256": "f6731ffdb4ab1a1a0fb1ef04b42e28e3bd47be5fce0b2746ed7f76429be29b09"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T20.md",
+      "kind": "file",
+      "bytes": 2220,
+      "sha256": "aa50ee570d3ca724445ea1151ba8c5b2cb7e0c781056c3a55fe37f5c0658aed2"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T21.md",
+      "kind": "file",
+      "bytes": 2280,
+      "sha256": "f2d742daa5f12f8e610030db668594c8a055c067c96a98482c56bd6c801070cf"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T22.md",
+      "kind": "file",
+      "bytes": 2262,
+      "sha256": "921059a331054f6521cd2baa3095def016f958700b962b52d135f7113587da25"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T23.md",
+      "kind": "file",
+      "bytes": 2369,
+      "sha256": "d12f796f42c3cbc342a3377378a2acb4304ae2eecc6f8f9d74dc335ac813e64f"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T24.md",
+      "kind": "file",
+      "bytes": 2621,
+      "sha256": "3c11f46003af45d2f27df83c4a47575dedc5126d9528a156d32e2fefe0576fb4"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/AGENTS.md",
+      "kind": "file",
+      "bytes": 1969,
+      "sha256": "02073a30e3eb9a076ce0288249a2713e37d08d96dca8b07c1783757bbaf150a1"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+      "kind": "file",
+      "bytes": 5529,
+      "sha256": "d97455d414b9967fd5f37d7bb6fa940a06350888595129dd4f7faa630b7bf9e0"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/01-PRODUCT-AND-ARCHITECTURE.md",
+      "kind": "file",
+      "bytes": 16673,
+      "sha256": "751bbbe3735700fc2302d7df2bcb222f4e25f69ec71f85518a961abbbc87c682"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/02-DATA-CONTRACT.md",
+      "kind": "file",
+      "bytes": 14264,
+      "sha256": "7f7f6326ceff91fe87c4fc5ad55a4b0b4ce315ad5d76a0eac3881fccf0df9722"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+      "kind": "file",
+      "bytes": 25807,
+      "sha256": "d32a8bc37cdbfe6223c9452b59446fffcb2fba9ba3592710cec10b5c556069fe"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/04-SOURCES-AND-DECISIONS.md",
+      "kind": "file",
+      "bytes": 8505,
+      "sha256": "e0457353ac0ede1b551b1f64984b4cd13e2edf280471af3d83b91d0ad086cef8"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/DECISIONS.md",
+      "kind": "file",
+      "bytes": 16006,
+      "sha256": "84861ecf0a6a5b71bb8a93ff979917020b789e31bf0cebe1c9be406e334484bb"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/STATUS.md",
+      "kind": "file",
+      "bytes": 14624,
+      "sha256": "1f360ecd6be2d84044233a3555ea2471fefe88eb0a1c7491c6ab322846bafec0"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T15.md",
+      "kind": "file",
+      "bytes": 2224,
+      "sha256": "ae25cf1c45a59a6976dbaa011fee5527424c6824d47427b1a183830d28788a7d"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T16.md",
+      "kind": "file",
+      "bytes": 2245,
+      "sha256": "6001911a86d18749086b1e3d976cdbf4249c883dc5f82c4ae4e15cfcdb033d14"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T17.md",
+      "kind": "file",
+      "bytes": 2095,
+      "sha256": "4b67ca4750c15284e0a1efe1205ca2648a2ab089453e30d23a64bd11e1627594"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T18.md",
+      "kind": "file",
+      "bytes": 2013,
+      "sha256": "3bde931a91c6308909787da09faaa659e83dd0c333f973becae299d1f86d9ca4"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T19.md",
+      "kind": "file",
+      "bytes": 2006,
+      "sha256": "2699a2cd7738fcb2c87eafef1927ea94d52a9eb577a619fe8397c6f53f32f468"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T20.md",
+      "kind": "file",
+      "bytes": 1931,
+      "sha256": "a6b06e83baae4cce672b74881a2a7a9cd8eaad84ae8357dd146ee8bb80cec7c2"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T21.md",
+      "kind": "file",
+      "bytes": 1932,
+      "sha256": "bf48f8ed6940e9afefb1e1bcd803769838a50876f9269b532a39eeb44ceb161c"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T22.md",
+      "kind": "file",
+      "bytes": 1969,
+      "sha256": "60f062fc423b480d6b21639e3542081ec857200137d8f11b9a2459373bdce23e"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T23.md",
+      "kind": "file",
+      "bytes": 2023,
+      "sha256": "2cbdd7d9b71d5cb15bd8b19a3bd0a65aef11bf494baef9332e0cb944afc63983"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T24.md",
+      "kind": "file",
+      "bytes": 2169,
+      "sha256": "83db470d63b79d80a4397c56904621dc47da6db7ffce0a74b876109827f808e2"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/AGENTS.md",
+      "kind": "file",
+      "bytes": 8269,
+      "sha256": "1dfcd3ea7640484e2784f6bde50040a62bf3664f69ec19c0432e2627eb755ede"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+      "kind": "file",
+      "bytes": 6839,
+      "sha256": "3bc2e1a5f026b64b59b3ce9cd3fcb5fd2e54f92c0d59f152ad0ca40167e8e20d"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/design/2026-09-25-muscle-atlas/13-CONTINUOUS-WHOLE-BODY-EXPERIENCE-R15.md",
+      "kind": "file",
+      "bytes": 14476,
+      "sha256": "2e5ed9c998f8ca286b30b33e15d083dd70148686e9c74d80a696689dca0eaa0e"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/design/2026-09-25-muscle-atlas/14-TASK-PROMPTS-R15.md",
+      "kind": "file",
+      "bytes": 79878,
+      "sha256": "8fa8fef702dea89e246794982a88fbb29ae87a80b655b7d089d451ca6a0e9e87"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/work/task-registry-r15.json",
+      "kind": "file",
+      "bytes": 21467,
+      "sha256": "fbc5d693e6835bb92d276816c1207e9a939ae3b28a02d39a8e1a36d44fc95dd4"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T51.md",
+      "kind": "file",
+      "bytes": 5075,
+      "sha256": "22489641a314bdce888b639a1206cb00fbda8d2600faa3dd9e6843dd247a2964"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T52.md",
+      "kind": "file",
+      "bytes": 4847,
+      "sha256": "664726abe9ba12136b5b596df510e6d8ba7891a2ff213c244b07ba8b6e484d27"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T53.md",
+      "kind": "file",
+      "bytes": 4876,
+      "sha256": "302cc8e6d7d8ab7551d3578f064f213308ecd2c179aa0e3238a4c331b5ce797c"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T54.md",
+      "kind": "file",
+      "bytes": 4430,
+      "sha256": "9878eeb9626c5b8a432e6e435aa4545d4a723f64cfaf0ab90449e7b6ddec114d"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T55.md",
+      "kind": "file",
+      "bytes": 4731,
+      "sha256": "4b4223fe82fc09cdfb77823016632c86a73f7a154a1c853dfa8829cf131fe5d8"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T56.md",
+      "kind": "file",
+      "bytes": 5067,
+      "sha256": "c9da569e523a71f12ac9da4c1765fe475ea20288e75db9502dc245974e16b837"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T57.md",
+      "kind": "file",
+      "bytes": 5064,
+      "sha256": "dda8d4810db77ef718ea221b930d8bee08658d36654860acbb756a03ac714c4c"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T58.md",
+      "kind": "file",
+      "bytes": 4971,
+      "sha256": "d0b88d532e4f47fa8c19f7254b1c3e04947360e49cd05577d239cf9a57c8f428"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/changed-paths.json",
+      "kind": "file",
+      "bytes": 426,
+      "sha256": "7c08508e68e045a51797fa56441f0afb30cebd50b22ad42be3a11020a88ab149"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/validation.json",
+      "kind": "file",
+      "bytes": 335,
+      "sha256": "210073cbd0ee44943c89ad7c1f013252aaac49ca7b3e2d09f366fd9193ab1fd7"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/before-plan-docs/AGENTS.md",
+      "kind": "file",
+      "bytes": 4524,
+      "sha256": "6091b2d259d9e54351b1fff20ce05ea7376281552073eafe10f705134d155b6a"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+      "kind": "file",
+      "bytes": 5854,
+      "sha256": "cddf8ca11aa177170927822c1781c4610ee8a468fac3ca640ca7fcaf2f335684"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+      "kind": "file",
+      "bytes": 21979,
+      "sha256": "965405ea06d966378824fa91ebb30570351ce9ee23e1f0579a70d585f55a17f0"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/07-AI-EVIDENCE-AND-MOTION-DESIGN.md",
+      "kind": "file",
+      "bytes": 14726,
+      "sha256": "221da9d69d65e3deca0c7f074f3feb650d30aa591ae91fd736452781391dd06a"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/08-SERIAL-ROADMAP-AND-GIT.md",
+      "kind": "file",
+      "bytes": 9802,
+      "sha256": "18d5ea1b7a9c6fce8c1a41d129c865b8c92fc01254463a05a6f52cba76a7ac66"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/git-status-before.txt",
+      "kind": "file",
+      "bytes": 697,
+      "sha256": "d7d2fb7fba6a6f37a4753834d2e4f7ddf512b6ad7f10021615336d33ddf41481"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/head.txt",
+      "kind": "file",
+      "bytes": 41,
+      "sha256": "f39e10488920afb6b773dc1c30276739c787a444ae3463b8727e767dbe19153b"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/owned-files.json",
+      "kind": "file",
+      "bytes": 2518,
+      "sha256": "23ddb07a2260f349cbbc0a48b1c7fe45302f960d46de1d3a73d143eb4eb6e0fa"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/protected-before.json",
+      "kind": "file",
+      "bytes": 14417,
+      "sha256": "f03c21e7ea357f977b45f59a0f8d115048c1f91bf430a05619d39c02326ae06b"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/validation.json",
+      "kind": "file",
+      "bytes": 827,
+      "sha256": "013837e3c4cd278110102b3af3ae420645a6956579744d7dd1c9b55ecae79664"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/AGENTS.md",
+      "kind": "file",
+      "bytes": 6273,
+      "sha256": "72b8cf3eb4a26e0119760015c2fdac52a4c88feed94c4d35b0f30f5d36403e32"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+      "kind": "file",
+      "bytes": 6415,
+      "sha256": "e80c72db725a89a6fbbd127c42c607c73f5df5cd3237676b063d075eb66b0ee2"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+      "kind": "file",
+      "bytes": 22540,
+      "sha256": "c89d267e5e1c8c9abf0d67c06100dadaa12fd6010c623e2a55dd842e76b3614c"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/10-STRUCTURE-FUNCTION-DELIVERY-PLAN.md",
+      "kind": "file",
+      "bytes": 15914,
+      "sha256": "6ff5ca23b647cc0c233f6ccc898790fb364df14fd059f94389832c0274061bbc"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/11-TASK-PROMPTS-R14.md",
+      "kind": "file",
+      "bytes": 69995,
+      "sha256": "62d976ee47ed8a826c0b8ec68b431f777d78769358e7550c2009dd9b9bcba63e"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/12-ASSESSMENT-ANIMATION-FUTURE.md",
+      "kind": "file",
+      "bytes": 6132,
+      "sha256": "feb32f537eb027e43bc2b57fbae2e85b2a3441ccfbe9ac2d1a02fd5d5a8ad702"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/STATUS.md",
+      "kind": "file",
+      "bytes": 66438,
+      "sha256": "5b14ed78028d291900ea25eaddaff2f12d79d8ad323ace13aee5d954d7a189dd"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T25.md",
+      "kind": "file",
+      "bytes": 6567,
+      "sha256": "ade6e543f591901615b96ab2f8515a398e0f6da09c79d5df69f824e128af95e3"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T26.md",
+      "kind": "file",
+      "bytes": 6249,
+      "sha256": "ec5ecdfb39215cdb8e44404ce28aba0eb17c5aea5fc1a22cde6c6b60d316bcae"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T27.md",
+      "kind": "file",
+      "bytes": 6107,
+      "sha256": "4067c4dfe7ddaf6b528ef373e12e718cccd9b3ce48d29e793c5cb66d8d27f9c6"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T28.md",
+      "kind": "file",
+      "bytes": 5812,
+      "sha256": "c52511be6d063f8fa45bbc2c3dee0ae22955b764079c11da429e48c8dcce477c"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T29.md",
+      "kind": "file",
+      "bytes": 5510,
+      "sha256": "f474d754d57155823eb4479c000bae52366953b3d40e7299a2c9bc1dc5d4a04c"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T30.md",
+      "kind": "file",
+      "bytes": 6078,
+      "sha256": "b9f1a1165ef7bea2f79177227640b22cc570ed250fe592ccfd211dc03a5b5e32"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T31.md",
+      "kind": "file",
+      "bytes": 5437,
+      "sha256": "8fdf46bf7135957b9bc01e12d4390af2972b66e6943db7fe09083fe39da11866"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T32.md",
+      "kind": "file",
+      "bytes": 6430,
+      "sha256": "bfe8ed10087216dcef035da1428b3759563b8669e32b9d1394a716ffe0e03e43"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T33.md",
+      "kind": "file",
+      "bytes": 5956,
+      "sha256": "7d4c1f60a8431e5d8cdbe92079b4d91e7b99602201aff6af1512f92b87c632e0"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T34.md",
+      "kind": "file",
+      "bytes": 5743,
+      "sha256": "ee55715e942d96ffc5bf4b4eb8e1f851480584183b2691a28862894290b00d0c"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T35.md",
+      "kind": "file",
+      "bytes": 5979,
+      "sha256": "4b9f22f0f2c5a549e01c82a9cb7e9d5b9323d318daa962986cbb103ae1bb19d0"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T36.md",
+      "kind": "file",
+      "bytes": 6035,
+      "sha256": "eb2fa864347cc650445d765e71d2b0a7162ca477bbe184255cf983e5a570ef99"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T37.md",
+      "kind": "file",
+      "bytes": 5980,
+      "sha256": "73afef071945d0f13e04252dcb34c1ffcc1b9a2be3d7f09bed23cde2c7a3544d"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T38.md",
+      "kind": "file",
+      "bytes": 5473,
+      "sha256": "ec7e6e068e6c9bddd708344ad4beae705be7cad56cd4b21259b938c161d8136b"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T39.md",
+      "kind": "file",
+      "bytes": 5314,
+      "sha256": "30a9a70ca9205a72c8be2cd4c9192bb6d8dc655754fa78a8e810d43ff5650e0e"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T40.md",
+      "kind": "file",
+      "bytes": 5577,
+      "sha256": "975be0864ee16c3855224a9afe7ddb54b6702d2901b31c78e671e30a564265af"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T45.md",
+      "kind": "file",
+      "bytes": 5314,
+      "sha256": "96532d88ac5c36026ce4e70c6feeebc6415dd5534873c9831d1a1274e63e0eb7"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T46.md",
+      "kind": "file",
+      "bytes": 5332,
+      "sha256": "859aa0bf31e8078b0bb2b9fd4318fdaa4ad98626ed7ee80a2a0e097ac6efbd63"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T47.md",
+      "kind": "file",
+      "bytes": 6482,
+      "sha256": "ec2da47a9e2a259b640c127b86183ce83eebb553c4a9fe4797ddc54b19478a9c"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T48.md",
+      "kind": "file",
+      "bytes": 5855,
+      "sha256": "654f6a48b84bf55420aa51166a810ebe1de0a6f9013e17b103dbe1515ca53b0a"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T49.md",
+      "kind": "file",
+      "bytes": 5961,
+      "sha256": "1004218e3a495b91e58585fa2d239f249d6d7c42788d9e56295e92830e7ea635"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/head.txt",
+      "kind": "file",
+      "bytes": 41,
+      "sha256": "86d459da97da3ee2f1c674998360d80ee3f6ead2f07978ee204989ac02687e2c"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/owned-paths.json",
+      "kind": "file",
+      "bytes": 1897,
+      "sha256": "c70b5193b7f4a91bee123972e13d6ecbdf337967903a6c4dc40290ede7323582"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/protected-before.json",
+      "kind": "file",
+      "bytes": 18648,
+      "sha256": "767650973fd2f653861f86a1cb8f3e64370b93bd6069f55ccf0bd36c24b5f513"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/status-before.txt",
+      "kind": "file",
+      "bytes": 1347,
+      "sha256": "b6c8599411dfae3c3b5bf280eb23921518b665fabdd0a21361e2f50b11a1790b"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/validation.json",
+      "kind": "file",
+      "bytes": 624,
+      "sha256": "9a7eb48cb93cab9d931af8db0d6a11e2e66b00c138913f14e8ca282a193ce17e"
+    },
+    {
+      "status": "??",
+      "path": "work/reports/R14-2026-09-27-PLAN.md",
+      "kind": "file",
+      "bytes": 3258,
+      "sha256": "b38d03d8fa9fd2adf034401d33bf3ffd56e48364db3db8929077184d08a228d2"
+    },
+    {
+      "status": "??",
+      "path": "work/reports/R15-2026-09-27-PLAN.md",
+      "kind": "file",
+      "bytes": 2644,
+      "sha256": "ae88d5f62ba309c795101c07d7da366f274889a2fa78c7dac369ba58f287d01d"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T22-2026-09-27/REVIEW.md",
+      "kind": "file",
+      "bytes": 15308,
+      "sha256": "3db5a5872a6635ca7de156ae473285366a967a33a3e8ef6e360a733d12ebf6b0"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T22-2026-09-27/edge-repro.patch",
+      "kind": "file",
+      "bytes": 1682,
+      "sha256": "70b8f7d7b1754b7c58d267385d974e67447a35a95716a6693e227a2157fbb383"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T22-2026-09-27/node-tests.log",
+      "kind": "file",
+      "bytes": 10832,
+      "sha256": "3289b313ddad0a3e9468cf99a46069690b2fdbe0d60de3354df9ad4c5215c90a"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T22-2026-09-27/validation.log",
+      "kind": "file",
+      "bytes": 19919,
+      "sha256": "165dc027fe6e073e5e28efaed5a7b166194be9b324ecc3a3b5e2f46b586ba825"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T22-2026-09-27/verification.json",
+      "kind": "file",
+      "bytes": 658,
+      "sha256": "9ea45e5d638bca108fd522e30ee5cb19129f0889698d32498ddaafecdc452531"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T52-2026-09-27/REVIEW-AND-NEXT.md",
+      "kind": "file",
+      "bytes": 7937,
+      "sha256": "9f86eb14a5176715631fb983407fd5faffabd80f4a65b3b0b7cffa29abd628b1"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T52-2026-09-27/baseline.json",
+      "kind": "file",
+      "bytes": 144945,
+      "sha256": "eb94e33f9a07c6b577eeb35654e2c0282fc10115fc32143d59eeb69221ec5e7f"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T52-2026-09-27/verification.json",
+      "kind": "file",
+      "bytes": 871,
+      "sha256": "da55f452972935f4138a0c990b7497477a7665f02009df370b9c1da11b8c9020"
+    },
+    {
+      "status": "??",
+      "path": "work/task-registry-r14.json",
+      "kind": "file",
+      "bytes": 14297,
+      "sha256": "9fc3d7ad1fe60c30425492800af5bbf2404649fef34d4db4f80c83379d6caae6"
+    },
+    {
+      "status": "??",
+      "path": "work/task-registry-r15.json",
+      "kind": "file",
+      "bytes": 24003,
+      "sha256": "19719d13eefd1d9851dce88577b1f4548edce67fed097e1d5e8b439b485caf24"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T23-R14-RESUME.md",
+      "kind": "file",
+      "bytes": 1964,
+      "sha256": "3fa1335a92d0ff883315b6f5fb4fb5d4529c8fafc31f06ffd750788947ba5bee"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T41.md",
+      "kind": "file",
+      "bytes": 6874,
+      "sha256": "62dcf6ea30673f17e268b9062346dd92794620edfdb7a15bebf024084c21d33d"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T43.md",
+      "kind": "file",
+      "bytes": 7171,
+      "sha256": "571e17c376a185ad35b4bba046975570a71cb28efab52f8660fe809978de80e6"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T44.md",
+      "kind": "file",
+      "bytes": 7800,
+      "sha256": "904cfa0d3137fc6b9236f520b98d9449c6397639992795c58924e84d91bd8fb6"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T45.md",
+      "kind": "file",
+      "bytes": 6357,
+      "sha256": "b718eac54f0ba29e2705a462e7101fa5490b05252f9f98d946790f6d6f1b7fb5"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T46.md",
+      "kind": "file",
+      "bytes": 6381,
+      "sha256": "e00dccd5807725cef2d45f9b740f357ee21fb1ee664ea9acf2b4ac29e8e04b2d"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T47.md",
+      "kind": "file",
+      "bytes": 7520,
+      "sha256": "3c08f6366850ba1c89ca66525d6ac79e4ad1811b34a81e9329346ad205a0f7bb"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T48.md",
+      "kind": "file",
+      "bytes": 6909,
+      "sha256": "80b1e62369599f7000fcb67e7dc8eda5967513e1880fae5878fea7cf4683ebd7"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T49.md",
+      "kind": "file",
+      "bytes": 7009,
+      "sha256": "fa44dcd228e31dc43731c1ff558ba0dfb74ab74cf0b9c242af7bfa020cd2478b"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T50.md",
+      "kind": "file",
+      "bytes": 5949,
+      "sha256": "c8369d6c5de9f62a0b8b90042e5b9d036fd74d05f2cca398eab631476e577b1a"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T51.md",
+      "kind": "file",
+      "bytes": 5864,
+      "sha256": "f1695b2bc05f65c96a1065d411ea6abbd5bf3f18cde6f012d9911e240f7163ae"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T52.md",
+      "kind": "file",
+      "bytes": 5636,
+      "sha256": "4f4d6b6c8c3ca40657edfcf3fd397560b235b7c4a870d552c893662fbfcdd52d"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T53.md",
+      "kind": "file",
+      "bytes": 6183,
+      "sha256": "5beef30569a36a2886e86ce4cb01b12bd7bc556c08a1be5c94bdcaa8342e5ee0"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T54.md",
+      "kind": "file",
+      "bytes": 5219,
+      "sha256": "f20d1ec651d6dd49ed5673d9c31fe3e5a928bcf1d6d94396496a53cc1d5eaee8"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T55.md",
+      "kind": "file",
+      "bytes": 5638,
+      "sha256": "933ef02e87bc716171e9e573d5aa59d9417d9af8dc60abeb864971e1997a2ee1"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T56.md",
+      "kind": "file",
+      "bytes": 5640,
+      "sha256": "dcd7478e4c487628a2a9b722f023be9285ede4ec1ac5d2551cb4cd0c491f8457"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T57.md",
+      "kind": "file",
+      "bytes": 5637,
+      "sha256": "b9ca0a69ce6e4b13e40376047ba7b8952794cb7ef8a309dd20668eeed3e84215"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T58.md",
+      "kind": "file",
+      "bytes": 5544,
+      "sha256": "69fd2ff7c0165da81024476a6bbc913a722b38fab7c2a8004aa228104a5f0d8d"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T59.md",
+      "kind": "file",
+      "bytes": 5305,
+      "sha256": "c6390caf1c77bed8283866db2407eaeceb1533a52eb5ecfee91a82e241bbd22f"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T60.md",
+      "kind": "file",
+      "bytes": 4966,
+      "sha256": "57f31786fbd3d161657486d1d688ffaf6ef752174edd2af391a7e9c520eaa8b7"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T61.md",
+      "kind": "file",
+      "bytes": 5103,
+      "sha256": "bd9a9fd8e062a1e7f5d0c54e5a765af3e256ed6528e6bbbbd635626ec5695809"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T62.md",
+      "kind": "file",
+      "bytes": 5046,
+      "sha256": "509f6f8693961699d6da702eb77cf01b2b706abb9b24276a098eb7dcdb4abd0f"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T63.md",
+      "kind": "file",
+      "bytes": 5256,
+      "sha256": "9272febe6722751630ee445f07bca74bb01b90c4883f48ad5fe7953e404367da"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T64.md",
+      "kind": "file",
+      "bytes": 4936,
+      "sha256": "242b1d58476f9a030c858fbb9f0e96d33ccd428086817a1132d7bc86405e01ed"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T65.md",
+      "kind": "file",
+      "bytes": 4842,
+      "sha256": "db2d81cdb43c9753032bc0a85b4cb4e76f1611c80df47565662b622d8653c60c"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T66.md",
+      "kind": "file",
+      "bytes": 4478,
+      "sha256": "7ab8d007a60e3cb9823f59001abe0f1c8263c0b25343ac4ec0aea816fce95514"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T67.md",
+      "kind": "file",
+      "bytes": 4668,
+      "sha256": "bc2b0b2818de969205918b032b8d36f007f310552e512b78df125e66e19bcaaa"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T68.md",
+      "kind": "file",
+      "bytes": 5091,
+      "sha256": "2bedd92cbf388c8dc00a4519bbd8de765e5c25239708839da7663a084d499a8d"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T69.md",
+      "kind": "file",
+      "bytes": 8151,
+      "sha256": "4df8b40b60bd3bdcca0c909c9479771ada162a58f955da832725f63a3c1ed00d"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T24.md",
+      "kind": "file",
+      "bytes": 2847,
+      "sha256": "fb4f81c4215050b63b2763c5b05bbe0daa8127a65322b6566bf24cfa4909c9ae"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T25.md",
+      "kind": "file",
+      "bytes": 2741,
+      "sha256": "e9d9c3b773b0b055be1b89026f914e09a49fcddcb85fdc2b31c20011b0513505"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T26.md",
+      "kind": "file",
+      "bytes": 2784,
+      "sha256": "a83742961c85d341896ab4df33bf663d845158eaaf0abec163995feaaddc8cc1"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T27.md",
+      "kind": "file",
+      "bytes": 2762,
+      "sha256": "09a59a3ed8e2ee2e9efeae5a4be6d9b98a5645418156b85cf6b97da4ef5b1e02"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T28.md",
+      "kind": "file",
+      "bytes": 2801,
+      "sha256": "1af32dcd785f63f8fd25e982b6c1d24312ee07a73fa2dd4b65bc1541a28c981d"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T29.md",
+      "kind": "file",
+      "bytes": 2725,
+      "sha256": "1f47d41e0b5998fd42859b1826d22c2f498e260efda3901eac8351a8efd000ad"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T30.md",
+      "kind": "file",
+      "bytes": 2750,
+      "sha256": "8916c9fcbe050410b85d059c766980b37c91b3cf07511be0abf0911be4998321"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T31.md",
+      "kind": "file",
+      "bytes": 2773,
+      "sha256": "3fd80126f5abaefadff987c1342dc3021f450e139c98af4d069631178d429cf6"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T32.md",
+      "kind": "file",
+      "bytes": 2765,
+      "sha256": "ad754570e01140b405d421a9ecb821fff68a15b82771b25a35599874a2cfaba0"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T33.md",
+      "kind": "file",
+      "bytes": 2645,
+      "sha256": "487e8dbc5ab56d3acd2ca1d059e289c2c48964a0e446e85caf7bfcd5c70003ff"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T34.md",
+      "kind": "file",
+      "bytes": 2651,
+      "sha256": "61c87d696d10b11b98f05d8b781f822a2c2fb870bf89b2939951ee0752a87c7f"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T35.md",
+      "kind": "file",
+      "bytes": 2788,
+      "sha256": "8fd5e55cbe12513f7e0b03e3df6b5d266ddb14c1b2721da635290fd4c1b3d7ba"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T36.md",
+      "kind": "file",
+      "bytes": 2714,
+      "sha256": "0ab92843dbe5fe0699e2ad4a463ddb32f1ef60a8aa45d3b179e19a1aa8f70a9b"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T37.md",
+      "kind": "file",
+      "bytes": 2655,
+      "sha256": "4e9b72cc1d13e81f096f3f9e3a31fcb83b19136da8e60731c992e6dc04e7606b"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T38.md",
+      "kind": "file",
+      "bytes": 2595,
+      "sha256": "765218f86d36df1b1aa3e7a9251b081a55ca22e95a8632754f6a98dfc8593635"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T39.md",
+      "kind": "file",
+      "bytes": 2680,
+      "sha256": "73b0d8183da43b0142228581e93bd859cc76deecf93b89ba9d091abff68cb972"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T40.md",
+      "kind": "file",
+      "bytes": 2743,
+      "sha256": "fbfe2b71f9c58cb3ebc23b61386aab7e688ed0be53f6b525a99b71fdcf751864"
+    }
+  ],
+  "preexistingEntryCount": 194,
+  "protectedInputHashes": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 9114,
+      "sha256": "3be36175d2200f7d22cc29672e4af0f1f3b6da6105000c1922f229413b1fd396"
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/13-CONTINUOUS-WHOLE-BODY-EXPERIENCE-R15.md",
+      "bytes": 14807,
+      "sha256": "53ea2a3512d1b811ad6a86863aedfac97e0ee5d92eae21068ae5231bd1321ec7"
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/14-TASK-PROMPTS-R15.md",
+      "bytes": 83994,
+      "sha256": "fd5c4d7b06b09dc0e20d7af58d371492fa93b45a8b7f3eba2098aee1f28ca0ec"
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/15-NERVE-AND-ASSESSMENT-SCOPE-R15.md",
+      "bytes": 5937,
+      "sha256": "29ab677d3efca252325e555e1b7aadb20cca213b014676b9a195c7a27324a492"
+    },
+    {
+      "path": "work/STATUS.md",
+      "bytes": 75440,
+      "sha256": "f523976612009a11de807abdb15a595c5085ec293ed6e86a0ce8b41ececc1ed2"
+    },
+    {
+      "path": "work/task-registry-r15.json",
+      "bytes": 24003,
+      "sha256": "19719d13eefd1d9851dce88577b1f4548edce67fed097e1d5e8b439b485caf24"
+    },
+    {
+      "path": "work/tasks/T53.md",
+      "bytes": 6183,
+      "sha256": "5beef30569a36a2886e86ce4cb01b12bd7bc556c08a1be5c94bdcaa8342e5ee0"
+    },
+    {
+      "path": "work/reports/T52.md",
+      "bytes": 10943,
+      "sha256": "91bfa30c72b9251da74bd33c22786149b78ce9d4e9be55c9ecbc65c034412ccc"
+    },
+    {
+      "path": "work/reports/T69.md",
+      "bytes": 20081,
+      "sha256": "0caa2ef5fc50cf5aa8139e87c0a8171cc3f66dda9a4acf9fe3ad3360d58c3e21"
+    },
+    {
+      "path": "work/evidence/T52/browser-verification.json",
+      "bytes": 2985,
+      "sha256": "7950ee6fd1b0ec75e45b87a3bd52c956a19a160788379c219e3d6f3607f1ec46"
+    },
+    {
+      "path": "work/evidence/T52/frozen-source-set.json",
+      "bytes": 29381,
+      "sha256": "32c75edc42d8bd371c7912c94025668a98157a93c74aa12f00aa47b7e98cfdb6"
+    },
+    {
+      "path": "work/evidence/T52/package-validator-result.json",
+      "bytes": 60354,
+      "sha256": "5bb012f62d4b4f3f3200dd285ce72c81fbab190c5b870725d7737abe30bf2eb4"
+    },
+    {
+      "path": "work/evidence/T52/package-verification.json",
+      "bytes": 9997,
+      "sha256": "9b4f6c354582f8d2f62cbd6d79cfe5fb125da4e094e066664b4f6f27b8fdca22"
+    },
+    {
+      "path": "work/evidence/T52/private-preview.html",
+      "bytes": 13861,
+      "sha256": "832914b1427302b85c0e98771db1d4856dcf8797cf8d3ed114490c7e637464f5"
+    },
+    {
+      "path": "work/evidence/T52/source-acquisition.json",
+      "bytes": 55557,
+      "sha256": "9a0e4c3cdc79fbca4e1e48ebecb36e47baf2fd0a99b167cb545d7d4420c49e16"
+    },
+    {
+      "path": "work/evidence/T52/start-baseline.json",
+      "bytes": 22762,
+      "sha256": "aaa223822d8831c1bf9f579d5d12751f658bf041619cd6ee4f2fa6c8d5874804"
+    },
+    {
+      "path": "work/evidence/T52/verification-summary.json",
+      "bytes": 2368,
+      "sha256": "5278ed9349deda08f1f111b54f66371808afa3830ef155a8ab307fda8febbfc4"
+    },
+    {
+      "path": "work/evidence/T69/assessment.json",
+      "bytes": 24438,
+      "sha256": "e421057aae319d9eefcd0f84ee811de7caf532e5019a8a7d6bad0dd99b77cf34"
+    },
+    {
+      "path": "work/evidence/T69/browser-verification.json",
+      "bytes": 4823,
+      "sha256": "55519a67914b955cad9b09da45207952c51b607e4260855ebc0b2d318400d645"
+    },
+    {
+      "path": "work/evidence/T69/diagnostic.json",
+      "bytes": 764346,
+      "sha256": "39f8086df7042349633e3c19e7e60e81669ca49be63b0d4e3be88d15cfd93cca"
+    },
+    {
+      "path": "work/evidence/T69/historical-t52-validator-result.json",
+      "bytes": 945,
+      "sha256": "d11c3b633a53d5e9662a221e7925ddb38c454adb65d8752d30a9a59ae52000de"
+    },
+    {
+      "path": "work/evidence/T69/preservation-after.json",
+      "bytes": 33130,
+      "sha256": "9908fcf9ecac406b1784648d72d0d6729f8dac4fdda90dc6278428dd3bdd11ca"
+    },
+    {
+      "path": "work/evidence/T69/private-comparison.html",
+      "bytes": 22589,
+      "sha256": "9327ae76a1c61ee46cdba1a5c09a2f8f858da91d6fd441026fccc7005711b154"
+    },
+    {
+      "path": "work/evidence/T69/screenshots/pair-1595-1573-back.jpg",
+      "bytes": 21601,
+      "sha256": "4eb0b35573ee907ca02f926aa1e274c5b31b9d66fcae894c32b5de0026b914cd"
+    },
+    {
+      "path": "work/evidence/T69/screenshots/pair-1595-1573-front.jpg",
+      "bytes": 20987,
+      "sha256": "a36f237af7ddc948ea5f87109e481ceab1ba16d981165cab58d6c9b01d1f00d1"
+    },
+    {
+      "path": "work/evidence/T69/screenshots/pair-1595-1573-side.jpg",
+      "bytes": 20806,
+      "sha256": "e64d1b9d85ec33d92d07e0460899c142e31ecf03d02eb8f8c758ac7e80fdc147"
+    },
+    {
+      "path": "work/evidence/T69/screenshots/pair-2738-2750-back.jpg",
+      "bytes": 66320,
+      "sha256": "6ec5ff727a31431720a1def8cd19ec7f637366c5447f7e40d42cbeef394ab565"
+    },
+    {
+      "path": "work/evidence/T69/screenshots/pair-2738-2750-front.jpg",
+      "bytes": 54871,
+      "sha256": "0675d030f6d79ef31c5becdd1d601f452ef64a0c00f48493311e4ab3cc13109d"
+    },
+    {
+      "path": "work/evidence/T69/screenshots/pair-2738-2750-side.jpg",
+      "bytes": 52670,
+      "sha256": "0b8a299475f91a93da3dbba2fe4e2d5b7d82bb6787238f125d35a0bbd56fa6b4"
+    },
+    {
+      "path": "work/evidence/T69/screenshots/pair-2742-2754-back.jpg",
+      "bytes": 56620,
+      "sha256": "1492c735088e3b83d0e59be64657b499a59aa27be5952469dd5f3f8f419b8f0c"
+    },
+    {
+      "path": "work/evidence/T69/screenshots/pair-2742-2754-front.jpg",
+      "bytes": 53783,
+      "sha256": "51b9f46393b202140241d6cd3232028041a5384f2208e17708b07a1ef565534f"
+    },
+    {
+      "path": "work/evidence/T69/screenshots/pair-2742-2754-side.jpg",
+      "bytes": 52512,
+      "sha256": "7403b835f29f5a2d18707d1290e9c08f9c513c604864884f173a02cd11d0afbb"
+    },
+    {
+      "path": "work/evidence/T69/screenshots/pair-2780-2798-back.jpg",
+      "bytes": 81719,
+      "sha256": "fd01fb16bb9021bb876cbf2e0810498f4dcd5e72a2ce5d7f2c0a07f67288a8c4"
+    },
+    {
+      "path": "work/evidence/T69/screenshots/pair-2780-2798-front.jpg",
+      "bytes": 78646,
+      "sha256": "f9ce91f9431e202784bb00c49fe223b8f75209a49c4cc4523a97f09818de5693"
+    },
+    {
+      "path": "work/evidence/T69/screenshots/pair-2780-2798-side.jpg",
+      "bytes": 79145,
+      "sha256": "45e6ac08f4040379b2d39da3a40c5a7b0229c3fbf825eda21f64c050280aace9"
+    },
+    {
+      "path": "work/evidence/T69/start-baseline.json",
+      "bytes": 42944,
+      "sha256": "001a248115bb9bc6226fb19a47048a6e4cfd3ad4b4afbc5e5e564ef54e42da9b"
+    },
+    {
+      "path": "work/evidence/T69/validation.json",
+      "bytes": 3361,
+      "sha256": "1560500efa205557f1380d97dbfa00acf2dedf06cd929844f8fa8faccd417cb1"
+    },
+    {
+      "path": "work/evidence/T50/scene-contract.md",
+      "bytes": 5128,
+      "sha256": "2697496d18bd1fc58adca557d95364092f7c7189bff4218277882142c8b26fa4"
+    },
+    {
+      "path": "work/evidence/T51/converted-sample.json",
+      "bytes": 44235,
+      "sha256": "89d8dbf0952e7a48adb92fe2e50f994ad45260c76c8558a0322756754e78f79f"
+    },
+    {
+      "path": "work/evidence/T51/private-preview.html",
+      "bytes": 5574,
+      "sha256": "aa8d985c9691d84aa7f0a743faeebbaaa4c5e5b829a002b222156bfcde723b67"
+    },
+    {
+      "path": "work/evidence/T51/source-cache-file-inventory.json",
+      "bytes": 19766,
+      "sha256": "deb7b9246a50378f74f72243b00b6ba48f19971e299c57303b7d16eea6cdf3f3"
+    },
+    {
+      "path": "work/evidence/T51/start-baseline.json",
+      "bytes": 41095,
+      "sha256": "5b7845a908984941189357623b16bed4bbc6b88581594778275a274bac91028f"
+    },
+    {
+      "path": "work/evidence/T51/t15g-regression-check.txt",
+      "bytes": 786,
+      "sha256": "e6fdb0035fcbb4c1ce5bf2838b45662e74af64fbebea7fb4c398120947111252"
+    },
+    {
+      "path": "work/evidence/T51/verification.json",
+      "bytes": 53136,
+      "sha256": "2d06b8ca847a1ef5f9d14118e7339917c51777634f2184da3dedaffa7f97b5a2"
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-source-manifest-t51.json",
+      "bytes": 6163930,
+      "sha256": "fd804d31dfcfa121b69458affbd3cfb126dd97fafdfebf21cd00458a86176aea"
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-regions-t51/abdomen-lumbar.json",
+      "bytes": 2264,
+      "sha256": "ad77b7673a847d14f40f3c70ee3a0fcf2f7745ed42e459086d413ed964aff60f"
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-regions-t51/back.json",
+      "bytes": 21220,
+      "sha256": "7a34267a586b0abb5e80b87482f852832d4e8d648b03b2a2bac58b57807f4aab"
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-regions-t51/foot.json",
+      "bytes": 28338,
+      "sha256": "bf3e8ee7f483faeaa95a1f1c134c14033905faa50363c70562973160ad652984"
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-regions-t51/gluteal-hip.json",
+      "bytes": 10044,
+      "sha256": "39d11a14818afeb967bfafd2220d85231c05ae183ecf34b171f86deb94bb677d"
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-regions-t51/head.json",
+      "bytes": 9599,
+      "sha256": "ddc2a09941e5e5f041a14e8ba3b6e15daa911b96ed9a6cb58f5d3a6df69e29f3"
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-regions-t51/leg.json",
+      "bytes": 14364,
+      "sha256": "e175ee6344d1d69689d8ef1f387dcbf8adc330cda9182db3c67ae6e5c2cf4152"
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-regions-t51/neck.json",
+      "bytes": 21185,
+      "sha256": "3aee3b13f7abf1cf70bcca28f632b1eff609d06281501f584234053c5f35c8db"
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-regions-t51/pelvis-perineum.json",
+      "bytes": 4471,
+      "sha256": "05e1c306cae56083a30a08176de1cd937470e0d15e9f9da673c0451b8da36149"
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-regions-t51/shoulder-scapular.json",
+      "bytes": 10393,
+      "sha256": "f4f7083128a5da4dbb167f7eee3f11175e78091e94b11c3c0ca2e3e5be3aa6f5"
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-regions-t51/thigh.json",
+      "bytes": 8397,
+      "sha256": "9fdb02f6b76559a9e5f03865ab33f7061184e6ff1712e37f7534faf082b79ac3"
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-regions-t51/thorax.json",
+      "bytes": 16874,
+      "sha256": "324699918b18b7a45d20152fb16376900e2eebe3917d94cf902dfd81324a4cdf"
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-regions-t51/upper-limb.json",
+      "bytes": 41188,
+      "sha256": "3be9700d58013dd8a36e26b0a801162c89de95cb278f4c75fdc321f4daed78ad"
+    },
+    {
+      "path": "atlas-data/tools/ingest_bodyparts3d_r4.py",
+      "bytes": 59833,
+      "sha256": "05a3681fc3cc45aecd810a8dfdff8de8d9ea0e65fc10ffc473773815d5905e3e"
+    },
+    {
+      "path": "atlas-data/tools/extract_bodyparts3d_r4_selected_zip_members.py",
+      "bytes": 16213,
+      "sha256": "0eef7ef163371f6e965a2644a401228412e5a988de5ca324bd74c6be7b1ca94e"
+    },
+    {
+      "path": "atlas-data/tools/build_bodyparts3d_r4_t52_head_neck.py",
+      "bytes": 31068,
+      "sha256": "d2024afcbc8869e614e882fc9bf8a396004a48959c4f2b14f9699c5a7826aee8"
+    },
+    {
+      "path": "atlas-data/tools/convert_bodyparts3d_obj_to_glb.py",
+      "bytes": 29749,
+      "sha256": "05c1216fce695885386d026e4b51419a92e22e2114964e303520fcfa0e409756"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_element_parts.txt",
+      "bytes": 1142159,
+      "sha256": "a3de74423f943b0d724ae8f59b3a817f87c423a544f8db98113b1980817cbeaf"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_inclusion_relation_list.txt",
+      "bytes": 207664,
+      "sha256": "26e7d818e03a8c909fe09c561f38d0d513423c87681f9450a803bc38f5b07564"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_parts_list_e.txt",
+      "bytes": 128086,
+      "sha256": "ab7796deedd49205e77f3609a1cb8c53e2bbee14ecb5c9a6ca05227469780513"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_element_parts.txt",
+      "bytes": 651179,
+      "sha256": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_inclusion_relation_list.txt",
+      "bytes": 91241,
+      "sha256": "1b40738270931e3c1d955ce34e0fce0d8d10d8c5ad543463e40b4b4c0243007c"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_parts_list_e.txt",
+      "bytes": 59351,
+      "sha256": "9224080557053e6f1322f1e13ab27f0ecde0db19bb3b505f0631afad230eeebd"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ1394.obj",
+      "bytes": 201640,
+      "sha256": "621dc10e974bcc1c53a8843bf1db3a1c322c8327d279010c58533bd28952bf08"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ1397.obj",
+      "bytes": 260975,
+      "sha256": "d7f3aa44801171baade1a59c40a8f8bda72097bec07047f93f24ebaac4546cb4"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ1409.obj",
+      "bytes": 151020,
+      "sha256": "ba330adc0128b26a50b4a5bd0a0cedcd3f32dbf09ae25f4e0587949dbd9d3d11"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ1410.obj",
+      "bytes": 304555,
+      "sha256": "40c36bc4dc24e161c84daf6e96017f9d78b4cf964579a873e267d2619be4aa2c"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ1437.obj",
+      "bytes": 307036,
+      "sha256": "c9c62b720ffe375a8eddf390608684a796f1ea54880a5c34fa440404addc399e"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ1439.obj",
+      "bytes": 213354,
+      "sha256": "b03d2f54644969d153d3dfe4025ee629858e72c1e5ee3b0e7d5f16f54dc505b3"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ1440.obj",
+      "bytes": 476926,
+      "sha256": "6fc367885524fc416139372b55c64d8e1e4bc9010bee64020a72ad8e6f34a57d"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3308.obj",
+      "bytes": 48252,
+      "sha256": "0e08f1570755a9675e2556013eda861f00f31fe7ae2139e24584129dfe78d2c2"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3351.obj",
+      "bytes": 69311,
+      "sha256": "b70e565ec8ad8c09264ae66159415ca4f0cf639598812aac6fcf7b761c3758d3"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3353.obj",
+      "bytes": 53148,
+      "sha256": "f6c034b6b18aee623f510ee40e4171346c084e8bdd092354d634c87fc9af6acf"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3355.obj",
+      "bytes": 45924,
+      "sha256": "90b28dbcd11e3d3a6f253adb1ddaa33f30040a08c71bb3a86242372ea9b6170e"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3357.obj",
+      "bytes": 43587,
+      "sha256": "a5fd57a36b7525de383809bbbb37ff6a56a08ed0fb25af1684085418cc6e8202"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3359.obj",
+      "bytes": 49445,
+      "sha256": "cc75b866a2d5ac0317eb3a1d64cef41a65231fab975613d108a4fcdcbc2c58b1"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3360.obj",
+      "bytes": 81782,
+      "sha256": "b53e7970e822e997e1b05f94f42514d07a3f98edcc63ec7dd7219354ce1d8176"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3364.obj",
+      "bytes": 60077,
+      "sha256": "d5ac55e9aa466b0e14d8d7760f7ef2a6edb0d95cfea56205557f647c451a8079"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3365.obj",
+      "bytes": 192114,
+      "sha256": "5eff0f92905dd45bd0e79b1de0144dc15988c73c683468163255ba1452d58037"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3366.obj",
+      "bytes": 69197,
+      "sha256": "d03fee02cf8eefad1ecfcb9246e3f43ad3c4615c21ce08dc5e2b6901c6395a86"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3377.obj",
+      "bytes": 65003,
+      "sha256": "7ae757be0a8a55129816045c2e92b32576e2c96fe3b047f7841807092b5bf8f4"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3385.obj",
+      "bytes": 89820,
+      "sha256": "8b35f0132c1a05b64f26746fdd0496a2495280cd0c2ac90dbf637fd74f79f54f"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3387.obj",
+      "bytes": 100137,
+      "sha256": "01879d7310938e82eecc02e1115332497e94085ff5cc1fa8eeee47ad1f5d3578"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1294.obj",
+      "bytes": 143313,
+      "sha256": "fc7dd40ee970cbbeae8ee147d0e7638e94fb166d28d4b1e1e62314f19395d6a8"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1295.obj",
+      "bytes": 224110,
+      "sha256": "7e5c20a2e78d0d606c370a626b299d6fa9183c5be487a04dd5c760ee6ec8d801"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1304.obj",
+      "bytes": 209042,
+      "sha256": "214943158bb5b523bd981c0040f49df1210e7d3afa6a5df861dac2b5d4436549"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1306.obj",
+      "bytes": 281893,
+      "sha256": "114bfa94da75435db3d4afadafe060c57e0345c78e2174068ef4698a61d72e49"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1308.obj",
+      "bytes": 159703,
+      "sha256": "98d6d7cb6842243dceacbea4c494b1554d719b7fbb76e2c90020f126beb4defe"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1322.obj",
+      "bytes": 227279,
+      "sha256": "3a84379998b92f3c359c41426dba02b79c9fe648cfb9e3e835ce63677c9f8e9a"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1323.obj",
+      "bytes": 179094,
+      "sha256": "e79c60ca4e54078df13c609d739a09f8e83c7fddebcc79a4f03f785c006423a1"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1345.obj",
+      "bytes": 145259,
+      "sha256": "b5508969b711e3c7bbfff0fdffc7567157326ee0e88b28416326513e06263c41"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1346.obj",
+      "bytes": 224609,
+      "sha256": "f961776090739a493c006f8933c8ded45365a86a92bdbfee2fb8dc0e35b651bc"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1355.obj",
+      "bytes": 206490,
+      "sha256": "0e1019c51724d672a6673e97f81f3e57f41f568d5ef5d68cf024096215165797"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1357.obj",
+      "bytes": 290489,
+      "sha256": "430068a4d8fc68e5e96b725c8e09849f757ccdc090ab6cec84341d945c22b9c5"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1359.obj",
+      "bytes": 159884,
+      "sha256": "ad4c08e84c570715c5cdc24faf0bdb9bc54030b7fe6131a10e27e0c43e0588a1"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1373.obj",
+      "bytes": 226350,
+      "sha256": "90d01a639fd51a3cb956e17dbb581f6d51e037cfacdcfccf21716e8a57f50c6e"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1374.obj",
+      "bytes": 180066,
+      "sha256": "ae2a718964765d9492e871dd9d2d41246bf8b9f9f01b3c2e4f612bd72e165013"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ2738.obj",
+      "bytes": 560586,
+      "sha256": "01720dc4715ab927b4878ab787f6b9f99e70466417a3aa7525f35dae3d44abb2"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ2739.obj",
+      "bytes": 191687,
+      "sha256": "3bdb38f42551b391c855b23593bd14ca02d7f7aa54f874fff52396db07dee2c0"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ2741.obj",
+      "bytes": 828321,
+      "sha256": "a7d1e90a0757aa53530521cd25ee855da0cc1e774dbe2c6bcaf372ab9e654259"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ2748.obj",
+      "bytes": 922698,
+      "sha256": "d6bca501cda0201b5221acbee58f2a58eff4784886825f72a0c40b1e1f7cbf97"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ2750.obj",
+      "bytes": 515381,
+      "sha256": "68a3eb51f3fc48813b643b4b9d449730c55842291091cc573f3c0e0a3eb9bd07"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ2751.obj",
+      "bytes": 189531,
+      "sha256": "40ddd17c29df45a42b11f75fc6a89e1d85c10ca7850f9094c2b264da9385b998"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ2753.obj",
+      "bytes": 835932,
+      "sha256": "84b856010832db82451e940a172f175d3a753c08e7284663bd40de6ef427fbcc"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ2760.obj",
+      "bytes": 927859,
+      "sha256": "ceddb3e852a795354bf31e6151dd9d2feaacb9f4612e3f0376d980dc063fc33a"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ2762.obj",
+      "bytes": 101559,
+      "sha256": "09d6a3c375d3ea9536e325a86996c521f647b1c31ee58ae2b99de6ea9cbca3bb"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ3380.obj",
+      "bytes": 928866,
+      "sha256": "b6874589f3ddcbeae7153c2d499c23d0083eb18e95d139759529c901384758c8"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1555.obj",
+      "bytes": 42800,
+      "sha256": "de61ba665a21727587c77ec819ca6606b4aacd2a43fa228a59a0c2b91db4c0a0"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1556.obj",
+      "bytes": 47157,
+      "sha256": "ceca25da24cfae6460cf682de4c080bd165b22ec413773c19ed7f631ec8abcb7"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1558.obj",
+      "bytes": 896681,
+      "sha256": "21711ac424696b6bc9a08ed225405228a26eef29beb237b7d9d8ed5a0a65d394"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1559.obj",
+      "bytes": 46065,
+      "sha256": "f774104354835d3d5347d323642f305cb439d861d9c979227948239309be41dc"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1560.obj",
+      "bytes": 32825,
+      "sha256": "8e001c787d59c211017d574330a4a475088452bd997e858c74ed69c4d4627463"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1562.obj",
+      "bytes": 133298,
+      "sha256": "33970bf53e3065f79e3600c6b2bf2f99c2d02e56fe75ac085b1a5615993afda3"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1565.obj",
+      "bytes": 367436,
+      "sha256": "1552449f945343885869b8495474e44963c906ce559abf2f508506f784357b59"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1570.obj",
+      "bytes": 179909,
+      "sha256": "7cffc2140b07a8966c1bf36937f3e260b4b565b8151ecfa2f683b72bcd5f546d"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1571.obj",
+      "bytes": 309508,
+      "sha256": "87f401434568a449ee7ac71d8d372998611f5eed4190e8273e31cf252fccfbcd"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1572.obj",
+      "bytes": 200162,
+      "sha256": "227a19a0ccceb88b370c8fe5af637ccb491bcb2c1f1898cd101c24e93fa82ae7"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1573.obj",
+      "bytes": 718388,
+      "sha256": "2035124d82e26f8e2ba9985925a746d0fd1fd94535d6ca7eed4b622f60bf5363"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1574.obj",
+      "bytes": 204287,
+      "sha256": "ea466d41ef524b945f5e4e50620b74d8c493288c36a3d0207922f514364a5c65"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1575.obj",
+      "bytes": 172843,
+      "sha256": "2b6162444c2c9447e9f0d2bb0947d9f95d76498ddf71a3277e96dabfef550f5f"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1576.obj",
+      "bytes": 89944,
+      "sha256": "2c6d6a6008f602842ab36c6738960da0fcc2a1e9bb7ffb4b127f7bfd20ddc057"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1577.obj",
+      "bytes": 96410,
+      "sha256": "f342f7656d7164fc8bf24f3690f3ba1b2ac029beea0ad435347809476c7f8d81"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1578.obj",
+      "bytes": 149166,
+      "sha256": "2135567871f49ec25abbe3f9e12875ab9fa011216d9f0389a28e89ac33c4bbc8"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1579.obj",
+      "bytes": 160591,
+      "sha256": "42e2244e314cb9095ba8e4261e0c413a6693bee02f8f41e897998904f908560b"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1580.obj",
+      "bytes": 45501,
+      "sha256": "848229dad5d1cee4765c43edcf577e02bb901737cd58afc0cb41f6271a121346"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1583.obj",
+      "bytes": 135100,
+      "sha256": "1a12e34cd47b7c713e9e01509fd5bfadddfcf6b58e38617484f37298d345fb9d"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1586.obj",
+      "bytes": 383387,
+      "sha256": "2ec30a6720efb6eaf451bc141c61d2419b33027b2f10c5b00378f54861be0605"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1587.obj",
+      "bytes": 950590,
+      "sha256": "6b7deb39529e4ae7aeb013bdcbca4d7c773035d75d4d2e7c821bb1bdc1852790"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1592.obj",
+      "bytes": 183341,
+      "sha256": "a8e09cc9dcc353437edeafeb78873c3f4d9727fcd9187d0f43dd57a3e72efb83"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1593.obj",
+      "bytes": 314596,
+      "sha256": "d601c1bf83da406115bc5605305b04ef8f4a37518e3d8528ca35e93fde0f4140"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1594.obj",
+      "bytes": 205887,
+      "sha256": "babdc76481ea863c4f1d5599fbc843da667780a2d7a5abe2c30a4c82374c9f11"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1595.obj",
+      "bytes": 755824,
+      "sha256": "287ce88ff3321e41d83b34bb0c30f66ab273aceac9fd0a6c693af4532d0e0681"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1596.obj",
+      "bytes": 213915,
+      "sha256": "262225d820e3b09f05a269a23f32eb1d97ce29dfa569d569c73e88c0a106708c"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1597.obj",
+      "bytes": 176101,
+      "sha256": "82534889c09ad8efb043e374fdedb9af25dbffa59299d425f233c17173182c11"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1598.obj",
+      "bytes": 86582,
+      "sha256": "4011f33b0992f727c3468fd2aa50dbb1a9f0eb3ef4667cb0cb60aa04b3c98486"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1599.obj",
+      "bytes": 107757,
+      "sha256": "fe3834ea88fcbf9d0140df58928bd7df22e00c8b602ef47a92102e507af2266c"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2740.obj",
+      "bytes": 517948,
+      "sha256": "345877a821866cb8f0fa6c6ca353f28385b5a4a35e0c9e9bd5601a08211a1097"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2742.obj",
+      "bytes": 406874,
+      "sha256": "b242673d67bc4abc71432268d4fb03df4bb6e707ccdf890829b7544d14d87d26"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2743.obj",
+      "bytes": 2823330,
+      "sha256": "e2a82119db68aa8db6022c78ce9bb7efef468ac6c776f5493ec8b6a1596ae015"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2745.obj",
+      "bytes": 600633,
+      "sha256": "81c70a6f8ab2de5d20a715cdf5339d756ca7171c473adc645231929b2732bf31"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2746.obj",
+      "bytes": 221214,
+      "sha256": "8cea3d6b0e2d0e864be7d11d919ee63d73aee5532db36cd3943a305fedd03751"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2747.obj",
+      "bytes": 750899,
+      "sha256": "3282d0f49da840abfea2e8ac276e4d780c71041cba4fbe4a2853ebc1c8bb1f22"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2752.obj",
+      "bytes": 518366,
+      "sha256": "3fb68e999835bcbe32995db8a0b8a2a4cd592441583f89c07f8897fdd20e4ec4"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2754.obj",
+      "bytes": 406587,
+      "sha256": "9583ea54a06a4d8d52aa9f3578a0f97931634c86db01aa2f37059f9974fdab39"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2755.obj",
+      "bytes": 2838412,
+      "sha256": "c3fbea74a7567588f83c9856be8305cc4b8cffe9f7157a9e41b8c53c5bd989be"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2757.obj",
+      "bytes": 605640,
+      "sha256": "b10e40d550d6208c907df65d844403071233d8088a109b2be5f925cd5d9e6c36"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2758.obj",
+      "bytes": 1743179,
+      "sha256": "dcea7bd8d13fff1ca83eea7605fbb399b0ab34983ddd8632613690a1be70c377"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2759.obj",
+      "bytes": 754081,
+      "sha256": "85d82b26595b6e782fe3bdc9dc2b99bb2127ea84da709e01a6e31672179cdf60"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2778.obj",
+      "bytes": 417703,
+      "sha256": "15d694d60ddab28b19aa0ca2017c86ac82ccc3fda58d257a240f56c363d4271a"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2780.obj",
+      "bytes": 467428,
+      "sha256": "9ad13a6a95301607fa5968e68ae47efc458ebc67f9582f6fc0861672b7b4de17"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2782.obj",
+      "bytes": 314508,
+      "sha256": "eb100ad68f9201832f5fa15c7e802c175fb813302c8983f13b6f3d3dfdb3d4ef"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2784.obj",
+      "bytes": 416547,
+      "sha256": "6b0698f8b6a6cb877d3610dc959abe0b9c4691bb6e746fd85c8e523fcebc74a9"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2785.obj",
+      "bytes": 669573,
+      "sha256": "a785608978d62c2c14f2057cfe2606fe183523dbf92fc587801234bc0be41e2a"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2788.obj",
+      "bytes": 73831,
+      "sha256": "dd26f669e127e5c5fae7ff796da0f516887f8c3834bbde1f2881d3a222cc2375"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2796.obj",
+      "bytes": 418817,
+      "sha256": "d0a4730aeb6f0bafdf53eced4954a0ccfaf31ba8f3d08aa90e0c18d9c8928cb3"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2798.obj",
+      "bytes": 451755,
+      "sha256": "706e265f99131c2bde1b61c4bc2cdfab7ae384ed2c84f10c8cbff91a295ca22c"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2800.obj",
+      "bytes": 312671,
+      "sha256": "917fb9e8667c4d179c0f86ec06c27dc2d0537e4f81d1319aa21fe5a0e237d891"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2802.obj",
+      "bytes": 418916,
+      "sha256": "68d5990536538ba707bd1b1b967b7ab14266ed74e5f0d1e33230a5922181c322"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2803.obj",
+      "bytes": 773134,
+      "sha256": "fd38f2f5befd554ba19bd4fbab0d0a4ae137a59bb24d3dd0852eb5caa910d3e2"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2806.obj",
+      "bytes": 73039,
+      "sha256": "f4b83790f1c6364785f6ec6a8428443e7f20cfe48ed9a14234bb8aff1d80f2a9"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2809.obj",
+      "bytes": 509099,
+      "sha256": "1ece0839b43392b090d5e4b5bf96448a10935f1d3637487cd526d0fff8251f32"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ3161.obj",
+      "bytes": 139572,
+      "sha256": "8f0de55a4feef85c256501a8afff7bb5aa3f77f4681af4c91801da87b54db103"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ3164.obj",
+      "bytes": 161492,
+      "sha256": "a883dd5929817f87eb366a32ca9d82463fd0db40286c49b8adc9e9d1a8cecc34"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ3167.obj",
+      "bytes": 158857,
+      "sha256": "b2485c3707b04f1fd455ee4d3a7b69670ec9c85d4ef9a54463e5c6089f1a69a7"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ3170.obj",
+      "bytes": 162032,
+      "sha256": "ac100888f7e271851c138e8d41a52168070e4fe5c63e8876a4bcfba08f3b59aa"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ3172.obj",
+      "bytes": 133359,
+      "sha256": "43bc0a1f9b3adffd5f45256b61f75affa15b56c85b387fa733b59de310216104"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ3176.obj",
+      "bytes": 148677,
+      "sha256": "8ac9ee6d7631edc066a322af278ed508eab4d9c0919e9a77657ead17c14c8a79"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ3177.obj",
+      "bytes": 161899,
+      "sha256": "ae446bbf47561c5ff2a2c0a03bfb158ba2581477ae5078ac89cc95b92637adab"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/converted/t52/T52-B01.glb",
+      "bytes": 628884,
+      "sha256": "e1fbf7a32584e05ccf28374c4735493dae456071184da80c3f318a8de3e4a5fc"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/converted/t52/T52-B02.glb",
+      "bytes": 640780,
+      "sha256": "261623dcc1987bf6eb36e3614623cb0ccd1e79818a902984686f5bf8a0a5e1cf"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/converted/t52/T52-B03.glb",
+      "bytes": 792424,
+      "sha256": "f54d017ad9ecc06a8357555a3903819c729d28895f75ebc0e8c2e5fca7768dbd"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/converted/t52/T52-B04.glb",
+      "bytes": 1031440,
+      "sha256": "7ec6a605efefd6b97c4ce9206325f75311c6f8c1245a0918fec12adca1039b62"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/converted/t52/T52-B05.glb",
+      "bytes": 1798796,
+      "sha256": "53cb61f31ff47c4f0a15f5033f1a23d23c288d66da59fe7721f9a4085e093fec"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/converted/t52/T52-B06.glb",
+      "bytes": 2214320,
+      "sha256": "60032f995f0e3c57ed76ab3601a3df01a7211b17235a655b35aef178fa96591d"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/converted/t52/T52-B07.glb",
+      "bytes": 1722860,
+      "sha256": "b0d566d9a5483b7f7881e6b260d11d51b06b23e9ff78733f617d031d38a816a9"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/converted/t52/T52-B08.glb",
+      "bytes": 1057068,
+      "sha256": "e8a2263868eeb873fa4a9b93fa0e358cd58f8a26953a3f10cff6ce2776971a79"
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/converted/t52/T52-B09.glb",
+      "bytes": 479996,
+      "sha256": "2d6cd1a1da4594e19d9993799e1247c21f88907cc79e3b18f4edf9c789b40cf5"
+    }
+  ],
+  "openSimModels": {
+    "head": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "status": [],
+    "trackedFileCount": 1037,
+    "trackedFilesSha256": "72c4e9e589d593a44af66eb53b23a0dea8de623c5a2cf98ad5ef529e30e052fc",
+    "unchangedAtStart": true
+  }
+}
