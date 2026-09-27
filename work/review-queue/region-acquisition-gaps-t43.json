@@ -1,0 +1,215 @@
+{
+  "task": "T43",
+  "revision": "R14-T43-gaps-v1",
+  "recordedOn": "2026-09-27",
+  "status": "open_gaps_for_T32_and_future_region_packages",
+  "wholeBodyDenominator": {
+    "gapId": "T43-G-DENOMINATOR",
+    "status": "open",
+    "evidence": "T15g denominatorFrozen=false; count=null; coverage=null; 85 current rows are partial extraction.",
+    "owner": "T32 / Luna Max after T31 prerequisite",
+    "resolution": "Complete authoritative section enumeration, inclusion/exclusion decision ledger, and per-concept table/page locators; freeze only after unresolved exceptions have explicit held states."
+  },
+  "authorityText": {
+    "gapId": "T43-G-TA2-ACCESS",
+    "status": "blocked_by_access_and_locator_audit",
+    "evidence": "TA2 Part 2 direct official PDF open returned 502; existing source-crosswalk term cell role is unverified. Search index is not an opened source.",
+    "owner": "T32 and region data batches",
+    "resolution": "Open official Part 2 source or legitimate local copy; inspect table columns and validate each exact row/page locator. Keep existing rows provisional."
+  },
+  "geometry": {
+    "gapId": "T43-G-MESH-ACQUISITION",
+    "status": "candidate_inventory_only",
+    "evidence": "BodyParts3D table candidates are open; full polygon bundles are 136MB/62MB and were not downloaded. Existing local OBJ/GLB are right-calf subset only.",
+    "owner": "T32 package planner; later bounded structure package owner",
+    "resolution": "For selected IDs resolve representation→ELEMENT file ID, request only permitted needed OBJ files, record hash/license/side/unit/frame/topology, inspect, and map only after evidence."
+  },
+  "laterality": {
+    "gapId": "T43-G-BILATERAL-COVERAGE",
+    "status": "partial",
+    "evidence": "Index contains explicit right/left examples but no complete side audit; product scene is right-sided only.",
+    "owner": "T32",
+    "resolution": "List authority and model entries by side for every included concept; never mirror a unilateral source mesh without transformation evidence."
+  },
+  "regionCrosswalk": {
+    "gapId": "T43-G-LOWER-EXTREMITY-BOUNDARY",
+    "status": "open",
+    "evidence": "T15g crosswalk forbids auto-copying lower_extremity into thigh/leg/foot; six current leg individuals have existing product decisions; four groups and two muscle parts remain unassigned.",
+    "owner": "T32 / anatomy crosswalk reviewer",
+    "resolution": "Decide each stable ID's evidence-backed memberships; permit multi-membership without duplicating stable ID."
+  },
+  "regionalText": {
+    "gapId": "T43-G-LEARNER-CONTENT",
+    "status": "not_created",
+    "evidence": "This survey lists terms and source-candidate rows only. No origin/insertion/function learner text was authored.",
+    "owner": "Future source-backed structure/function packages",
+    "resolution": "Extract only exact supported field text with per-field source references and keep AI evidence/human review states independent."
+  },
+  "rigMotion": {
+    "gapId": "T43-G-RIG-CLIP",
+    "status": "candidate_models_only",
+    "evidence": "OpenSim docs list disparate research/example models with different frames, sides, licenses and limitations; no compatible learner rig/production MotionDefinition/clip was validated.",
+    "owner": "T44 and later motion package owners",
+    "resolution": "Choose one coherent source per demonstration; verify source archive, license, topology, frames, units, pose and motion data before any import."
+  },
+  "license": {
+    "gapId": "T43-G-MODEL-RIGHTS",
+    "status": "partial",
+    "evidence": "BodyParts3D database CC BY 4.0 attribution identified. OpenSim doc rows have per-model rights (including CC BY, MIT, Custom, None); local files are not fully itemized for redistribution.",
+    "owner": "Selected regional package owner",
+    "resolution": "Audit each specific source asset and derivative obligations; no blanket project license inference."
+  },
+  "humanReview": {
+    "gapId": "T43-G-HUMAN-ANATOMY",
+    "status": "not_reviewed",
+    "evidence": "No anatomical reviewer participated in T43.",
+    "owner": "Human reviewer when package review is scheduled",
+    "resolution": "Review source terms/mapping/content and any geometry/motion as separate review targets; do not promote automatically."
+  },
+  "perRegion": [
+    {
+      "categoryId": "head",
+      "labelKo": "머리",
+      "productStatus": "additional_build_needed",
+      "candidateCount": 22,
+      "currentMuscleMembershipRows": 0,
+      "sceneAvailability": "unavailable",
+      "knownRegionGaps": [
+        "BodyParts3D index lookup for literal “masseter” and “temporalis” returned no match (L0, no matching text); this is a bounded index-search gap, not proof of model absence.",
+        "T15g head pool merges source head/face/mastication/eye/tongue only as routing candidates."
+      ]
+    },
+    {
+      "categoryId": "neck",
+      "labelKo": "목",
+      "productStatus": "additional_build_needed",
+      "candidateCount": 0,
+      "currentMuscleMembershipRows": 0,
+      "sceneAvailability": "unavailable",
+      "knownRegionGaps": [
+        "No neck source rows in the current T15g crosswalk; official index entries do not create project canonical IDs or memberships.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence."
+      ]
+    },
+    {
+      "categoryId": "back",
+      "labelKo": "등",
+      "productStatus": "additional_build_needed",
+      "candidateCount": 9,
+      "currentMuscleMembershipRows": 0,
+      "sceneAvailability": "unavailable",
+      "knownRegionGaps": [
+        "T15g has 9 source-index rows but not exhaustive enumeration.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence."
+      ]
+    },
+    {
+      "categoryId": "shoulder-scapular",
+      "labelKo": "어깨·어깨뼈",
+      "productStatus": "additional_build_needed",
+      "candidateCount": 10,
+      "currentMuscleMembershipRows": 0,
+      "sceneAvailability": "unavailable",
+      "knownRegionGaps": [
+        "Recommended first non-calf expansion input: T15g has 10 partial source IDs here; official index provides explicit right/left scapula/clavicle rows and deltoid-part entries; no local shoulder mesh or scene is currently inventoried.",
+        "Concrete acquisition route: query FMA/BP IDs in the opened IS-A metadata list; resolve compound concepts to ELEMENT file IDs using the documented isa_element_parts.txt table; select only required OBJ members from the official 99%-reduced IS-A archive after recording hashes and CC BY attribution. Do not use representation ID as an OBJ filename without the element mapping."
+      ]
+    },
+    {
+      "categoryId": "thorax",
+      "labelKo": "가슴우리",
+      "productStatus": "additional_build_needed",
+      "candidateCount": 7,
+      "currentMuscleMembershipRows": 0,
+      "sceneAvailability": "unavailable",
+      "knownRegionGaps": [
+        "T15g has 7 source-index rows, not an exhaustive thorax or respiratory-muscle list.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence."
+      ]
+    },
+    {
+      "categoryId": "abdomen-lumbar",
+      "labelKo": "배·허리",
+      "productStatus": "additional_build_needed",
+      "candidateCount": 2,
+      "currentMuscleMembershipRows": 0,
+      "sceneAvailability": "unavailable",
+      "knownRegionGaps": [
+        "T15g has 2 abdominal-wall rows only; no full abdominal or lumbar muscle list is available. “rectus abdominis” no-hit in this exact table lookup is not an absence claim.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence."
+      ]
+    },
+    {
+      "categoryId": "pelvis-perineum",
+      "labelKo": "골반·샅",
+      "productStatus": "additional_build_needed",
+      "candidateCount": 0,
+      "currentMuscleMembershipRows": 0,
+      "sceneAvailability": "unavailable",
+      "knownRegionGaps": [
+        "T15g source crosswalk has zero rows here; official BodyParts3D candidate rows are an acquisition lead, not membership decisions.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence."
+      ]
+    },
+    {
+      "categoryId": "gluteal-hip",
+      "labelKo": "볼기·깊은엉덩이",
+      "productStatus": "additional_build_needed",
+      "candidateCount": 10,
+      "currentMuscleMembershipRows": 0,
+      "sceneAvailability": "unavailable",
+      "knownRegionGaps": [
+        "T15g has 10 gluteal source rows, not a complete hip or gluteal list.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence."
+      ]
+    },
+    {
+      "categoryId": "thigh",
+      "labelKo": "넙다리",
+      "productStatus": "additional_build_needed",
+      "candidateCount": 0,
+      "currentMuscleMembershipRows": 0,
+      "sceneAvailability": "unavailable",
+      "knownRegionGaps": [
+        "No separate thigh sourceRegion in T15g; lower_extremity records are not auto-routed to thigh. B3D rows are external acquisition candidates only.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence."
+      ]
+    },
+    {
+      "categoryId": "leg",
+      "labelKo": "종아리",
+      "productStatus": "static_only",
+      "candidateCount": 6,
+      "currentMuscleMembershipRows": 6,
+      "sceneAvailability": "partial",
+      "knownRegionGaps": [
+        "Current right calf pilot only: 6 muscle product membership rows, 2 static scenes; 9 right scene-bound bone IDs are context/selection bindings, not bone RegionMembership rows. Static partial scene is not a full leg catalog.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence."
+      ]
+    },
+    {
+      "categoryId": "foot",
+      "labelKo": "발",
+      "productStatus": "additional_build_needed",
+      "candidateCount": 3,
+      "currentMuscleMembershipRows": 0,
+      "sceneAvailability": "unavailable",
+      "knownRegionGaps": [
+        "T15g includes only 3 foot source rows (one group, two individual muscles); not exhaustive. 3 other T13 right metatarsal mesh contexts are unbound, and are not foot membership.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence."
+      ]
+    },
+    {
+      "categoryId": "upper-limb",
+      "labelKo": "팔·손",
+      "productStatus": "additional_build_needed",
+      "candidateCount": 10,
+      "currentMuscleMembershipRows": 0,
+      "sceneAvailability": "unavailable",
+      "knownRegionGaps": [
+        "T15g has 10 upper_extremity source rows and zero hand rows. The BodyParts3D hand group entry does not imply hand member enumeration.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3758 @@
+{
+  "task": "T43",
+  "revision": "R14-T43-region-acquisition-matrix-v1",
+  "recordedOn": "2026-09-27",
+  "status": "metadata_survey_complete_with_gaps",
+  "scope": "Metadata acquisition survey only; no full-body catalog generation, large model download, scene implementation, claim authoring, or anatomy review.",
+  "productTaxonomy": {
+    "source": "atlas-data/navigation/atlas-navigation.json",
+    "categoryCount": 12,
+    "categoryIds": [
+      "head",
+      "neck",
+      "back",
+      "shoulder-scapular",
+      "thorax",
+      "abdomen-lumbar",
+      "pelvis-perineum",
+      "gluteal-hip",
+      "thigh",
+      "leg",
+      "foot",
+      "upper-limb"
+    ],
+    "addedSubcategories": false,
+    "allowMultipleMembershipsForOneStableId": true,
+    "currentMultiCategoryMuscleStableIds": []
+  },
+  "inventorySnapshot": {
+    "path": "atlas-data/catalog/whole-body-inventory-t15g.json",
+    "sha256": "b878522e346b5f285ea450fd7194ed0b7a5043e21e702370bb9702c790e7a238",
+    "status": "planning_only_partial_inventory",
+    "denominatorFrozen": false,
+    "wholeBodyIndividualMuscleCount": null,
+    "coveragePercent": null,
+    "uniqueStableMuscleConceptIds": 85,
+    "individualMuscleConcepts": 48,
+    "muscleGroups": 16,
+    "muscleParts": 21,
+    "variants": 0,
+    "productMuscleMembershipRows": 6,
+    "productBoneMembershipRows": 0,
+    "rightSideMuscleInstances": 6,
+    "rightSceneBoundBoneIds": 9,
+    "surfaceAnnotations": 0,
+    "attachmentsAwaitingSurfaceReview": 41,
+    "productionMotionRecords": 0
+  },
+  "denominatorFreezeInputs": {
+    "status": "candidate_rules_not_approved",
+    "targetEntity": "named skeletal muscle concept",
+    "candidateStandard": "FIPAT Terminologia Anatomica, 2nd edition (2019) label inherited from T04 source crosswalk; underlying Part 2 PDF direct-open currently 502 and term cell roles not visually verified.",
+    "proposedInclusionExclusionRules": [
+      "Count each stable named individual skeletal-muscle concept once in the unique denominator.",
+      "Do not count muscle groups, parts/heads, side instances, meshes, scene bindings or product memberships as additional individual-muscle concepts.",
+      "Record left/right as instances unless the authoritative source defines a distinct concept; do not duplicate canonical IDs by side.",
+      "Keep variants as separate records and decide whether each belongs in the denominator based on the frozen authority-level rule.",
+      "Exclude cardiac/smooth muscle and non-muscle tissue from the skeletal-muscle target; document boundary decisions for pharynx/larynx, facial/masticatory/ocular/tongue muscle groups, pelvic floor, accessory/variant muscles.",
+      "Allow one stable concept ID to have multiple evidence-backed product memberships; sum unique stable IDs separately from membership rows."
+    ],
+    "sourceCoverageRulesToFreeze": [
+      "Complete authority table/section inventory with edition and exact table/page locator for every included or excluded term.",
+      "Maintain a per-concept inclusion/exclusion decision and unresolved boundary queue; no uncited gap filling.",
+      "List group, individual, part/head, variant, side-instance, mesh and membership counts separately.",
+      "Keep product category taxonomy at these 12 categories; no new visible subcategories.",
+      "Coverage remains null until all relevant authority sections are enumerated and exception decisions are closed or explicitly held."
+    ],
+    "currentPartialStableIdCandidates": [
+      {
+        "id": "HA-G-000001",
+        "entityType": "muscle_group",
+        "sourceRegionIds": [
+          "head"
+        ]
+      },
+      {
+        "id": "HA-G-000002",
+        "entityType": "muscle_group",
+        "sourceRegionIds": [
+          "eye"
+        ]
+      },
+      {
+        "id": "HA-G-000003",
+        "entityType": "muscle_group",
+        "sourceRegionIds": [
+          "mastication"
+        ]
+      },
+      {
+        "id": "HA-G-000004",
+        "entityType": "muscle_group",
+        "sourceRegionIds": [
+          "tongue"
+        ]
+      },
+      {
+        "id": "HA-G-000005",
+        "entityType": "muscle_group",
+        "sourceRegionIds": [
+          "back"
+        ]
+      },
+      {
+        "id": "HA-G-000006",
+        "entityType": "muscle_group",
+        "sourceRegionIds": [
+          "thorax_respiratory"
+        ]
+      },
+      {
+        "id": "HA-G-000007",
+        "entityType": "muscle_group",
+        "sourceRegionIds": [
+          "upper_extremity"
+        ]
+      },
+      {
+        "id": "HA-G-000008",
+        "entityType": "muscle_group",
+        "sourceRegionIds": [
+          "shoulder"
+        ]
+      },
+      {
+        "id": "HA-G-000009",
+        "entityType": "muscle_group",
+        "sourceRegionIds": [
+          "shoulder"
+        ]
+      },
+      {
+        "id": "HA-G-000010",
+        "entityType": "muscle_group",
+        "sourceRegionIds": [
+          "lower_extremity"
+        ]
+      },
+      {
+        "id": "HA-G-000011",
+        "entityType": "muscle_group",
+        "sourceRegionIds": [
+          "gluteal"
+        ]
+      },
+      {
+        "id": "HA-G-000012",
+        "entityType": "muscle_group",
+        "sourceRegionIds": [
+          "gluteal"
+        ]
+      },
+      {
+        "id": "HA-G-000013",
+        "entityType": "muscle_group",
+        "sourceRegionIds": [
+          "lower_extremity"
+        ]
+      },
+      {
+        "id": "HA-G-000014",
+        "entityType": "muscle_group",
+        "sourceRegionIds": [
+          "lower_extremity"
+        ]
+      },
+      {
+        "id": "HA-G-000015",
+        "entityType": "muscle_group",
+        "sourceRegionIds": [
+          "lower_extremity"
+        ]
+      },
+      {
+        "id": "HA-G-000016",
+        "entityType": "muscle_group",
+        "sourceRegionIds": [
+          "foot"
+        ]
+      },
+      {
+        "id": "HA-M-000001",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "lower_extremity"
+        ]
+      },
+      {
+        "id": "HA-M-000002",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "lower_extremity"
+        ]
+      },
+      {
+        "id": "HA-M-000003",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "lower_extremity"
+        ]
+      },
+      {
+        "id": "HA-M-000004",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "lower_extremity"
+        ]
+      },
+      {
+        "id": "HA-M-000005",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "lower_extremity"
+        ]
+      },
+      {
+        "id": "HA-M-000006",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "lower_extremity"
+        ]
+      },
+      {
+        "id": "HA-M-000007",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "eye"
+        ]
+      },
+      {
+        "id": "HA-M-000008",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "eye"
+        ]
+      },
+      {
+        "id": "HA-M-000009",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "eye"
+        ]
+      },
+      {
+        "id": "HA-M-000010",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "eye"
+        ]
+      },
+      {
+        "id": "HA-M-000011",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "eye"
+        ]
+      },
+      {
+        "id": "HA-M-000012",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "mastication"
+        ]
+      },
+      {
+        "id": "HA-M-000013",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "mastication"
+        ]
+      },
+      {
+        "id": "HA-M-000014",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "mastication"
+        ]
+      },
+      {
+        "id": "HA-M-000015",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "mastication"
+        ]
+      },
+      {
+        "id": "HA-M-000016",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "tongue"
+        ]
+      },
+      {
+        "id": "HA-M-000017",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "tongue"
+        ]
+      },
+      {
+        "id": "HA-M-000018",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "tongue"
+        ]
+      },
+      {
+        "id": "HA-M-000019",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "back"
+        ]
+      },
+      {
+        "id": "HA-M-000020",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "back"
+        ]
+      },
+      {
+        "id": "HA-M-000021",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "back"
+        ]
+      },
+      {
+        "id": "HA-M-000022",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "back"
+        ]
+      },
+      {
+        "id": "HA-M-000023",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "back"
+        ]
+      },
+      {
+        "id": "HA-M-000024",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "thorax_respiratory"
+        ]
+      },
+      {
+        "id": "HA-M-000025",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "thorax_respiratory"
+        ]
+      },
+      {
+        "id": "HA-M-000026",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "thorax_respiratory"
+        ]
+      },
+      {
+        "id": "HA-M-000027",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "thorax_respiratory"
+        ]
+      },
+      {
+        "id": "HA-M-000028",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "abdominal_wall"
+        ]
+      },
+      {
+        "id": "HA-M-000029",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "abdominal_wall"
+        ]
+      },
+      {
+        "id": "HA-M-000030",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "shoulder"
+        ]
+      },
+      {
+        "id": "HA-M-000031",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "shoulder"
+        ]
+      },
+      {
+        "id": "HA-M-000032",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "shoulder"
+        ]
+      },
+      {
+        "id": "HA-M-000033",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "shoulder"
+        ]
+      },
+      {
+        "id": "HA-M-000034",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "shoulder"
+        ]
+      },
+      {
+        "id": "HA-M-000035",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "upper_extremity"
+        ]
+      },
+      {
+        "id": "HA-M-000036",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "upper_extremity"
+        ]
+      },
+      {
+        "id": "HA-M-000037",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "upper_extremity"
+        ]
+      },
+      {
+        "id": "HA-M-000038",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "upper_extremity"
+        ]
+      },
+      {
+        "id": "HA-M-000039",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "gluteal"
+        ]
+      },
+      {
+        "id": "HA-M-000040",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "gluteal"
+        ]
+      },
+      {
+        "id": "HA-M-000041",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "gluteal"
+        ]
+      },
+      {
+        "id": "HA-M-000042",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "gluteal"
+        ]
+      },
+      {
+        "id": "HA-M-000043",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "gluteal"
+        ]
+      },
+      {
+        "id": "HA-M-000044",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "gluteal"
+        ]
+      },
+      {
+        "id": "HA-M-000045",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "gluteal"
+        ]
+      },
+      {
+        "id": "HA-M-000046",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "gluteal"
+        ]
+      },
+      {
+        "id": "HA-M-000047",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "foot"
+        ]
+      },
+      {
+        "id": "HA-M-000048",
+        "entityType": "individual_muscle",
+        "sourceRegionIds": [
+          "foot"
+        ]
+      },
+      {
+        "id": "HA-P-000001",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "lower_extremity"
+        ]
+      },
+      {
+        "id": "HA-P-000002",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "lower_extremity"
+        ]
+      },
+      {
+        "id": "HA-P-000003",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "mastication"
+        ]
+      },
+      {
+        "id": "HA-P-000004",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "mastication"
+        ]
+      },
+      {
+        "id": "HA-P-000005",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "mastication"
+        ]
+      },
+      {
+        "id": "HA-P-000006",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "mastication"
+        ]
+      },
+      {
+        "id": "HA-P-000007",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "mastication"
+        ]
+      },
+      {
+        "id": "HA-P-000008",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "mastication"
+        ]
+      },
+      {
+        "id": "HA-P-000009",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "back"
+        ]
+      },
+      {
+        "id": "HA-P-000010",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "back"
+        ]
+      },
+      {
+        "id": "HA-P-000011",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "back"
+        ]
+      },
+      {
+        "id": "HA-P-000012",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "thorax_respiratory"
+        ]
+      },
+      {
+        "id": "HA-P-000013",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "thorax_respiratory"
+        ]
+      },
+      {
+        "id": "HA-P-000014",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "shoulder"
+        ]
+      },
+      {
+        "id": "HA-P-000015",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "shoulder"
+        ]
+      },
+      {
+        "id": "HA-P-000016",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "shoulder"
+        ]
+      },
+      {
+        "id": "HA-P-000017",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "upper_extremity"
+        ]
+      },
+      {
+        "id": "HA-P-000018",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "upper_extremity"
+        ]
+      },
+      {
+        "id": "HA-P-000019",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "upper_extremity"
+        ]
+      },
+      {
+        "id": "HA-P-000020",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "upper_extremity"
+        ]
+      },
+      {
+        "id": "HA-P-000021",
+        "entityType": "muscle_part",
+        "sourceRegionIds": [
+          "upper_extremity"
+        ]
+      }
+    ],
+    "currentPartialCandidateCount": 85,
+    "notAWholeBodyDenominator": true,
+    "unassignedLowerExtremitySourceIds": [
+      "HA-G-000010",
+      "HA-G-000013",
+      "HA-G-000014",
+      "HA-G-000015",
+      "HA-P-000001",
+      "HA-P-000002"
+    ],
+    "sourceRoutingCandidateOnly": true
+  },
+  "regionRows": [
+    {
+      "categoryId": "head",
+      "order": 1,
+      "labelKo": "머리",
+      "labelEn": "Head",
+      "visibleSubcategoriesAdded": false,
+      "sourceRegions": [
+        "head",
+        "face",
+        "mastication",
+        "eye",
+        "tongue"
+      ],
+      "partialSourceInventory": {
+        "capturedRows": 22,
+        "entityTypeCounts": {
+          "muscle_group": 4,
+          "individual_muscle": 12,
+          "muscle_part": 6
+        },
+        "wholeRegionEnumerationStatus": "not_established_by_partial_source_extract",
+        "candidateStableIds": [
+          "HA-G-000001",
+          "HA-G-000002",
+          "HA-G-000003",
+          "HA-G-000004",
+          "HA-M-000007",
+          "HA-M-000008",
+          "HA-M-000009",
+          "HA-M-000010",
+          "HA-M-000011",
+          "HA-M-000012",
+          "HA-M-000013",
+          "HA-M-000014",
+          "HA-M-000015",
+          "HA-M-000016",
+          "HA-M-000017",
+          "HA-M-000018",
+          "HA-P-000003",
+          "HA-P-000004",
+          "HA-P-000005",
+          "HA-P-000006",
+          "HA-P-000007",
+          "HA-P-000008"
+        ],
+        "candidateUniqueStableIdCount": 22,
+        "existingT04CrosswalkLocators": [
+          {
+            "stableId": "HA-G-000001",
+            "entityType": "muscle_group",
+            "sourceRegionIds": [
+              "head"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 74,
+            "tableRow": 2040,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-G-000002",
+            "entityType": "muscle_group",
+            "sourceRegionIds": [
+              "eye"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 74,
+            "tableRow": 2041,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-G-000003",
+            "entityType": "muscle_group",
+            "sourceRegionIds": [
+              "mastication"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 77,
+            "tableRow": 2104,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-G-000004",
+            "entityType": "muscle_group",
+            "sourceRegionIds": [
+              "tongue"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 77,
+            "tableRow": 2116,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000007",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "eye"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 74,
+            "tableRow": 2042,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000008",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "eye"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 74,
+            "tableRow": 2043,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000009",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "eye"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 74,
+            "tableRow": 2044,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000010",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "eye"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 74,
+            "tableRow": 2045,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000011",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "eye"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 74,
+            "tableRow": 2048,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000012",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "mastication"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 77,
+            "tableRow": 2105,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000013",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "mastication"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 77,
+            "tableRow": 2108,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000014",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "mastication"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 77,
+            "tableRow": 2109,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000015",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "mastication"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 77,
+            "tableRow": 2113,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000016",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "tongue"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 77,
+            "tableRow": 2117,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000017",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "tongue"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 77,
+            "tableRow": 2118,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000018",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "tongue"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 77,
+            "tableRow": 2121,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000003",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "mastication"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 77,
+            "tableRow": 2106,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000004",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "mastication"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 77,
+            "tableRow": 2107,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000005",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "mastication"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 77,
+            "tableRow": 2110,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000006",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "mastication"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 77,
+            "tableRow": 2111,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000007",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "mastication"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 77,
+            "tableRow": 2114,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000008",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "mastication"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 77,
+            "tableRow": 2115,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          }
+        ],
+        "note": "Source-region rows are routing candidates only, not product memberships; counts can overlap if multiple source regions or memberships are approved."
+      },
+      "currentDisplayNameOverlay": {
+        "path": "atlas-data/terminology/learning-names.json",
+        "status": "partial_existing_overlay_only",
+        "candidateStableIdsWithOverlay": [
+          "HA-G-000001",
+          "HA-G-000002",
+          "HA-G-000003",
+          "HA-G-000004",
+          "HA-M-000007",
+          "HA-M-000008",
+          "HA-M-000009",
+          "HA-M-000010",
+          "HA-M-000011",
+          "HA-M-000012",
+          "HA-M-000013",
+          "HA-M-000014",
+          "HA-M-000015",
+          "HA-M-000016",
+          "HA-M-000017",
+          "HA-M-000018",
+          "HA-P-000003",
+          "HA-P-000004",
+          "HA-P-000005",
+          "HA-P-000006",
+          "HA-P-000007",
+          "HA-P-000008"
+        ],
+        "candidateOverlayCount": 22,
+        "candidateStableIdsMissingOverlay": [],
+        "missingOverlayCount": 0,
+        "existingTriplets": {
+          "HA-G-000001": {
+            "koModern": "머리근육",
+            "koTraditional": "두부근",
+            "en": "Muscles of head",
+            "humanReviewed": false
+          },
+          "HA-G-000002": {
+            "koModern": "바깥눈근육",
+            "koTraditional": "외안근",
+            "en": "Extraocular muscles",
+            "humanReviewed": false
+          },
+          "HA-G-000003": {
+            "koModern": "씹기근육",
+            "koTraditional": "저작근",
+            "en": "Masticatory muscles",
+            "humanReviewed": false
+          },
+          "HA-G-000004": {
+            "koModern": "혀근육",
+            "koTraditional": "혀근육",
+            "en": "Muscles of tongue",
+            "humanReviewed": false
+          },
+          "HA-M-000007": {
+            "koModern": "위곧은근",
+            "koTraditional": "상직근",
+            "en": "Superior rectus muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000008": {
+            "koModern": "아래곧은근",
+            "koTraditional": "하직근",
+            "en": "Inferior rectus muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000009": {
+            "koModern": "안쪽곧은근",
+            "koTraditional": "내직근",
+            "en": "Medial rectus muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000010": {
+            "koModern": "가쪽곧은근",
+            "koTraditional": "외직근",
+            "en": "Lateral rectus muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000011": {
+            "koModern": "위빗근",
+            "koTraditional": "상사근",
+            "en": "Superior oblique muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000012": {
+            "koModern": "깨물근",
+            "koTraditional": "교근",
+            "en": "Masseter muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000013": {
+            "koModern": "관자근",
+            "koTraditional": "측두근",
+            "en": "Temporalis muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000014": {
+            "koModern": "가쪽날개근",
+            "koTraditional": "외측익돌근",
+            "en": "Lateral pterygoid muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000015": {
+            "koModern": "안쪽날개근",
+            "koTraditional": "내측익돌근",
+            "en": "Medial pterygoid muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000016": {
+            "koModern": "턱끝혀근",
+            "koTraditional": "이설근",
+            "en": "Genioglossus muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000017": {
+            "koModern": "목뿔혀근",
+            "koTraditional": "설골설근",
+            "en": "Hyoglossus muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000018": {
+            "koModern": "붓혀근",
+            "koTraditional": "경돌설근",
+            "en": "Styloglossus muscle",
+            "humanReviewed": false
+          },
+          "HA-P-000003": {
+            "koModern": null,
+            "koTraditional": "교근의 천부",
+            "en": "Superficial part of masseter",
+            "humanReviewed": false
+          },
+          "HA-P-000004": {
+            "koModern": null,
+            "koTraditional": "심부 교근",
+            "en": "Deep part of masseter",
+            "humanReviewed": false
+          },
+          "HA-P-000005": {
+            "koModern": null,
+            "koTraditional": "외익돌근 상두",
+            "en": "Superior head of lateral pterygoid muscle",
+            "humanReviewed": false
+          },
+          "HA-P-000006": {
+            "koModern": null,
+            "koTraditional": "외익돌근 하두",
+            "en": "Inferior head of lateral pterygoid muscle",
+            "humanReviewed": false
+          },
+          "HA-P-000007": {
+            "koModern": null,
+            "koTraditional": "Deep head of medial pterygoid muscle",
+            "en": "Deep head of medial pterygoid muscle",
+            "humanReviewed": false
+          },
+          "HA-P-000008": {
+            "koModern": null,
+            "koTraditional": "Superficial head of medial pterygoid muscle",
+            "en": "Superficial head of medial pterygoid muscle",
+            "humanReviewed": false
+          }
+        },
+        "note": "Values are current projection observations, not newly sourced or human-approved in T43."
+      },
+      "currentProductInventory": {
+        "sceneAvailability": "unavailable",
+        "sceneIds": [],
+        "muscleMembershipRows": 0,
+        "uniqueMuscleStableIds": [],
+        "boneMembershipRows": 0,
+        "uniqueBoneStableIds": [],
+        "membershipState": "none"
+      },
+      "structureText": {
+        "status": "partial_source_index_only",
+        "termsAndNameCandidatesInB3DIndex": [
+          "FMA46751 BP4926 muscle of face",
+          "FMA49033 BP4927 extra-ocular muscle"
+        ],
+        "fullOriginInsertionFunctionText": "not surveyed/created by T43",
+        "TA2AuthorityAccess": "official_pdf_direct_open_failed_502; inherited T04 locator rows remain table_role_unverified",
+        "humanAnatomyReview": "not_performed"
+      },
+      "muscleGeometry": {
+        "officialMetadataCandidates": [
+          "FMA46751 BP4926 muscle of face",
+          "FMA49033 BP4927 extra-ocular muscle"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L1764-L1774; head bone candidate FMA52748 BP8107 mandible at L2055; right/left maxilla L2068-L2069",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "boneGeometry": {
+        "officialMetadataCandidates": [
+          "FMA52748 BP8107 mandible",
+          "FMA53649 BP8309 right maxilla",
+          "FMA53650 BP9046 left maxilla"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L2055-L2069",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "productBoneMembershipRows": 0,
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "laterality": {
+        "observedOfficialIndexExamples": [
+          "FMA46751 BP4926 muscle of face",
+          "FMA49033 BP4927 extra-ocular muscle",
+          "FMA52748 BP8107 mandible",
+          "FMA53649 BP8309 right maxilla",
+          "FMA53650 BP9046 left maxilla"
+        ],
+        "indexContainsExplicitSideLabelsInExamples": true,
+        "regionWideBilateralCompletenessAudited": false,
+        "currentProductSceneSides": [],
+        "mirroringAssumed": false
+      },
+      "licenseAndRights": {
+        "bodyParts3d": "CC BY 4.0 at database level; required credit recorded in source-access.json; source model quality/identity not certified by license",
+        "openSimModels": [
+          "Oculomotor Model: 3 DOF, 6 muscles, CC BY 4.0; covers eye movement only, not full head/face/jaw"
+        ],
+        "perFileRedistributionAudit": "not performed for project-local source model files"
+      },
+      "rigAndMotion": {
+        "sourceModelCandidates": [
+          "Oculomotor Model: 3 DOF, 6 muscles, CC BY 4.0; covers eye movement only, not full head/face/jaw"
+        ],
+        "movementGroupCandidates": [
+          "ocular rotations / saccade-fixation candidate; no head/face product clip"
+        ],
+        "viewerReadyRig": "none verified for this category",
+        "productionMotionDefinitions": 0,
+        "productionMotionAssetsOrClips": 0
+      },
+      "productAcquisitionStatus": "additional_build_needed",
+      "gapsAndNextActions": [
+        "BodyParts3D index lookup for literal “masseter” and “temporalis” returned no match (L0, no matching text); this is a bounded index-search gap, not proof of model absence.",
+        "T15g head pool merges source head/face/mastication/eye/tongue only as routing candidates.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "neck",
+      "order": 2,
+      "labelKo": "목",
+      "labelEn": "Neck",
+      "visibleSubcategoriesAdded": false,
+      "sourceRegions": [
+        "neck"
+      ],
+      "partialSourceInventory": {
+        "capturedRows": 0,
+        "entityTypeCounts": {},
+        "wholeRegionEnumerationStatus": "not_established_by_partial_source_extract",
+        "candidateStableIds": [],
+        "candidateUniqueStableIdCount": 0,
+        "existingT04CrosswalkLocators": [],
+        "note": "Source-region rows are routing candidates only, not product memberships; counts can overlap if multiple source regions or memberships are approved."
+      },
+      "currentDisplayNameOverlay": {
+        "path": "atlas-data/terminology/learning-names.json",
+        "status": "partial_existing_overlay_only",
+        "candidateStableIdsWithOverlay": [],
+        "candidateOverlayCount": 0,
+        "candidateStableIdsMissingOverlay": [],
+        "missingOverlayCount": 0,
+        "existingTriplets": {},
+        "note": "Values are current projection observations, not newly sourced or human-approved in T43."
+      },
+      "currentProductInventory": {
+        "sceneAvailability": "unavailable",
+        "sceneIds": [],
+        "muscleMembershipRows": 0,
+        "uniqueMuscleStableIds": [],
+        "boneMembershipRows": 0,
+        "uniqueBoneStableIds": [],
+        "membershipState": "none"
+      },
+      "structureText": {
+        "status": "not_in_current_partial_project_extract",
+        "termsAndNameCandidatesInB3DIndex": [
+          "FMA13385 BP4879 scalenus anterior",
+          "FMA13386 BP4877 scalenus medius",
+          "FMA13407 BP4908 sternocleidomastoid"
+        ],
+        "fullOriginInsertionFunctionText": "not surveyed/created by T43",
+        "TA2AuthorityAccess": "official_pdf_direct_open_failed_502; inherited T04 locator rows remain table_role_unverified",
+        "humanAnatomyReview": "not_performed"
+      },
+      "muscleGeometry": {
+        "officialMetadataCandidates": [
+          "FMA13385 BP4879 scalenus anterior",
+          "FMA13386 BP4877 scalenus medius",
+          "FMA13407 BP4908 sternocleidomastoid"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L431-L439 and L453-L455",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "boneGeometry": {
+        "officialMetadataCandidates": [
+          "FMA9915 BP7846 cervical vertebra",
+          "FMA12519 BP8831 atlas",
+          "FMA12520 BP8459 axis"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L320-L321 and L365-L372",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "productBoneMembershipRows": 0,
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "laterality": {
+        "observedOfficialIndexExamples": [
+          "FMA13385 BP4879 scalenus anterior",
+          "FMA13386 BP4877 scalenus medius",
+          "FMA13407 BP4908 sternocleidomastoid",
+          "FMA9915 BP7846 cervical vertebra",
+          "FMA12519 BP8831 atlas",
+          "FMA12520 BP8459 axis"
+        ],
+        "indexContainsExplicitSideLabelsInExamples": false,
+        "regionWideBilateralCompletenessAudited": false,
+        "currentProductSceneSides": [],
+        "mirroringAssumed": false
+      },
+      "licenseAndRights": {
+        "bodyParts3d": "CC BY 4.0 at database level; required credit recorded in source-access.json; source model quality/identity not certified by license",
+        "openSimModels": [
+          "OpenSim 2.4 Human Neck Model page: 19 individual muscles; flexion, extension, axial rotation and lateral bending; model download link listed, not fetched; license not resolved in this documentation page"
+        ],
+        "perFileRedistributionAudit": "not performed for project-local source model files"
+      },
+      "rigAndMotion": {
+        "sourceModelCandidates": [
+          "OpenSim 2.4 Human Neck Model page: 19 individual muscles; flexion, extension, axial rotation and lateral bending; model download link listed, not fetched; license not resolved in this documentation page"
+        ],
+        "movementGroupCandidates": [
+          "cervical flexion-extension / axial rotation / lateral bending candidate"
+        ],
+        "viewerReadyRig": "none verified for this category",
+        "productionMotionDefinitions": 0,
+        "productionMotionAssetsOrClips": 0
+      },
+      "productAcquisitionStatus": "additional_build_needed",
+      "gapsAndNextActions": [
+        "No neck source rows in the current T15g crosswalk; official index entries do not create project canonical IDs or memberships.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "back",
+      "order": 3,
+      "labelKo": "등",
+      "labelEn": "Back",
+      "visibleSubcategoriesAdded": false,
+      "sourceRegions": [
+        "back"
+      ],
+      "partialSourceInventory": {
+        "capturedRows": 9,
+        "entityTypeCounts": {
+          "muscle_group": 1,
+          "individual_muscle": 5,
+          "muscle_part": 3
+        },
+        "wholeRegionEnumerationStatus": "not_established_by_partial_source_extract",
+        "candidateStableIds": [
+          "HA-G-000005",
+          "HA-M-000019",
+          "HA-M-000020",
+          "HA-M-000021",
+          "HA-M-000022",
+          "HA-M-000023",
+          "HA-P-000009",
+          "HA-P-000010",
+          "HA-P-000011"
+        ],
+        "candidateUniqueStableIdCount": 9,
+        "existingT04CrosswalkLocators": [
+          {
+            "stableId": "HA-G-000005",
+            "entityType": "muscle_group",
+            "sourceRegionIds": [
+              "back"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 81,
+            "tableRow": 2225,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000019",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "back"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 81,
+            "tableRow": 2226,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000020",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "back"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 81,
+            "tableRow": 2231,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000021",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "back"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 81,
+            "tableRow": 2232,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000022",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "back"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 81,
+            "tableRow": 2233,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000023",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "back"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 81,
+            "tableRow": 2234,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000009",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "back"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 81,
+            "tableRow": 2227,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000010",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "back"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 81,
+            "tableRow": 2228,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000011",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "back"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 81,
+            "tableRow": 2229,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          }
+        ],
+        "note": "Source-region rows are routing candidates only, not product memberships; counts can overlap if multiple source regions or memberships are approved."
+      },
+      "currentDisplayNameOverlay": {
+        "path": "atlas-data/terminology/learning-names.json",
+        "status": "partial_existing_overlay_only",
+        "candidateStableIdsWithOverlay": [
+          "HA-M-000019",
+          "HA-M-000020",
+          "HA-M-000021",
+          "HA-M-000022",
+          "HA-M-000023",
+          "HA-P-000009",
+          "HA-P-000010",
+          "HA-P-000011"
+        ],
+        "candidateOverlayCount": 8,
+        "candidateStableIdsMissingOverlay": [
+          "HA-G-000005"
+        ],
+        "missingOverlayCount": 1,
+        "existingTriplets": {
+          "HA-M-000019": {
+            "koModern": "등세모근",
+            "koTraditional": "승모근",
+            "en": "Trapezius",
+            "humanReviewed": false
+          },
+          "HA-M-000020": {
+            "koModern": "넓은등근",
+            "koTraditional": "광배근",
+            "en": "Latissimus dorsi muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000021": {
+            "koModern": "큰마름근",
+            "koTraditional": "대능형근",
+            "en": "Rhomboid major muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000022": {
+            "koModern": "작은마름근",
+            "koTraditional": "소능형근",
+            "en": "Rhomboid minor muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000023": {
+            "koModern": "어깨올림근",
+            "koTraditional": "견갑거근",
+            "en": "Levator scapulae muscle",
+            "humanReviewed": false
+          },
+          "HA-P-000009": {
+            "koModern": "등세모근 위부분",
+            "koTraditional": "승모근 상부",
+            "en": "Descending part of trapezius muscle",
+            "humanReviewed": false
+          },
+          "HA-P-000010": {
+            "koModern": "등세모근 중간부분",
+            "koTraditional": "승모근 중부",
+            "en": "Transverse part of trapezius muscle",
+            "humanReviewed": false
+          },
+          "HA-P-000011": {
+            "koModern": "등세모근 아래부분",
+            "koTraditional": "승모근 하부",
+            "en": "Ascending part of trapezius muscle",
+            "humanReviewed": false
+          }
+        },
+        "note": "Values are current projection observations, not newly sourced or human-approved in T43."
+      },
+      "currentProductInventory": {
+        "sceneAvailability": "unavailable",
+        "sceneIds": [],
+        "muscleMembershipRows": 0,
+        "uniqueMuscleStableIds": [],
+        "boneMembershipRows": 0,
+        "uniqueBoneStableIds": [],
+        "membershipState": "none"
+      },
+      "structureText": {
+        "status": "partial_source_index_only",
+        "termsAndNameCandidatesInB3DIndex": [
+          "FMA33581 BP5638 ascending part of right trapezius",
+          "FMA33583 BP8225 ascending part of left trapezius",
+          "FMA13379 BP9246 rhomboid major",
+          "FMA13380 BP8586 rhomboid minor"
+        ],
+        "fullOriginInsertionFunctionText": "not surveyed/created by T43",
+        "TA2AuthorityAccess": "official_pdf_direct_open_failed_502; inherited T04 locator rows remain table_role_unverified",
+        "humanAnatomyReview": "not_performed"
+      },
+      "muscleGeometry": {
+        "officialMetadataCandidates": [
+          "FMA33581 BP5638 ascending part of right trapezius",
+          "FMA33583 BP8225 ascending part of left trapezius",
+          "FMA13379 BP9246 rhomboid major",
+          "FMA13380 BP8586 rhomboid minor"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L425-L430 and L1262-L1320",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "boneGeometry": {
+        "officialMetadataCandidates": [
+          "FMA9139 BP8044 thoracic vertebra",
+          "FMA9921 BP8134 lumbar vertebra"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L262-L265 and L320-L322",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "productBoneMembershipRows": 0,
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "laterality": {
+        "observedOfficialIndexExamples": [
+          "FMA33581 BP5638 ascending part of right trapezius",
+          "FMA33583 BP8225 ascending part of left trapezius",
+          "FMA13379 BP9246 rhomboid major",
+          "FMA13380 BP8586 rhomboid minor",
+          "FMA9139 BP8044 thoracic vertebra",
+          "FMA9921 BP8134 lumbar vertebra"
+        ],
+        "indexContainsExplicitSideLabelsInExamples": true,
+        "regionWideBilateralCompletenessAudited": false,
+        "currentProductSceneSides": [],
+        "mirroringAssumed": false
+      },
+      "licenseAndRights": {
+        "bodyParts3d": "CC BY 4.0 at database level; required credit recorded in source-access.json; source model quality/identity not certified by license",
+        "openSimModels": [
+          "Thoracolumbar spine and rib cage: T1-L5/rib cage and adjacent modeled segments; 93 DOF / 552 muscle-tendon actuators; MIT, July 2017; model files not fetched"
+        ],
+        "perFileRedistributionAudit": "not performed for project-local source model files"
+      },
+      "rigAndMotion": {
+        "sourceModelCandidates": [
+          "Thoracolumbar spine and rib cage: T1-L5/rib cage and adjacent modeled segments; 93 DOF / 552 muscle-tendon actuators; MIT, July 2017; model files not fetched"
+        ],
+        "movementGroupCandidates": [
+          "thoracolumbar segment motion candidate; exact shared clip not identified"
+        ],
+        "viewerReadyRig": "none verified for this category",
+        "productionMotionDefinitions": 0,
+        "productionMotionAssetsOrClips": 0
+      },
+      "productAcquisitionStatus": "additional_build_needed",
+      "gapsAndNextActions": [
+        "T15g has 9 source-index rows but not exhaustive enumeration.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "shoulder-scapular",
+      "order": 4,
+      "labelKo": "어깨·어깨뼈",
+      "labelEn": "Shoulder/Scapular",
+      "visibleSubcategoriesAdded": false,
+      "sourceRegions": [
+        "shoulder"
+      ],
+      "partialSourceInventory": {
+        "capturedRows": 10,
+        "entityTypeCounts": {
+          "muscle_group": 2,
+          "individual_muscle": 5,
+          "muscle_part": 3
+        },
+        "wholeRegionEnumerationStatus": "not_established_by_partial_source_extract",
+        "candidateStableIds": [
+          "HA-G-000008",
+          "HA-G-000009",
+          "HA-M-000030",
+          "HA-M-000031",
+          "HA-M-000032",
+          "HA-M-000033",
+          "HA-M-000034",
+          "HA-P-000014",
+          "HA-P-000015",
+          "HA-P-000016"
+        ],
+        "candidateUniqueStableIdCount": 10,
+        "existingT04CrosswalkLocators": [
+          {
+            "stableId": "HA-G-000008",
+            "entityType": "muscle_group",
+            "sourceRegionIds": [
+              "shoulder"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2451,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-G-000009",
+            "entityType": "muscle_group",
+            "sourceRegionIds": [
+              "shoulder"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2456,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000030",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "shoulder"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2452,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000031",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "shoulder"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2457,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000032",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "shoulder"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2458,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000033",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "shoulder"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2459,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000034",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "shoulder"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2460,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000014",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "shoulder"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2453,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000015",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "shoulder"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2454,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000016",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "shoulder"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2455,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          }
+        ],
+        "note": "Source-region rows are routing candidates only, not product memberships; counts can overlap if multiple source regions or memberships are approved."
+      },
+      "currentDisplayNameOverlay": {
+        "path": "atlas-data/terminology/learning-names.json",
+        "status": "partial_existing_overlay_only",
+        "candidateStableIdsWithOverlay": [
+          "HA-M-000030",
+          "HA-M-000031",
+          "HA-M-000032",
+          "HA-M-000033",
+          "HA-M-000034",
+          "HA-P-000014",
+          "HA-P-000015",
+          "HA-P-000016"
+        ],
+        "candidateOverlayCount": 8,
+        "candidateStableIdsMissingOverlay": [
+          "HA-G-000008",
+          "HA-G-000009"
+        ],
+        "missingOverlayCount": 2,
+        "existingTriplets": {
+          "HA-M-000030": {
+            "koModern": "어깨세모근",
+            "koTraditional": "삼각근",
+            "en": "Deltoid muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000031": {
+            "koModern": "가시위근",
+            "koTraditional": "극상근",
+            "en": "Supraspinatus muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000032": {
+            "koModern": "가시아래근",
+            "koTraditional": "극하근",
+            "en": "Infraspinatus muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000033": {
+            "koModern": "작은원근",
+            "koTraditional": "소원근",
+            "en": "Teres minor muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000034": {
+            "koModern": "어깨밑근",
+            "koTraditional": "견갑하근",
+            "en": "Subscapularis muscle",
+            "humanReviewed": false
+          },
+          "HA-P-000014": {
+            "koModern": "빗장부분",
+            "koTraditional": "쇄골부",
+            "en": "Clavicular part of deltoid muscle",
+            "humanReviewed": false
+          },
+          "HA-P-000015": {
+            "koModern": "어깨세모근 · 견봉부분",
+            "koTraditional": "삼각근 · 견봉부",
+            "en": "Acromial part of deltoid",
+            "humanReviewed": false
+          },
+          "HA-P-000016": {
+            "koModern": null,
+            "koTraditional": "Scapular spinal part of deltoid muscle",
+            "en": "Scapular spinal part of deltoid muscle",
+            "humanReviewed": false
+          }
+        },
+        "note": "Values are current projection observations, not newly sourced or human-approved in T43."
+      },
+      "currentProductInventory": {
+        "sceneAvailability": "unavailable",
+        "sceneIds": [],
+        "muscleMembershipRows": 0,
+        "uniqueMuscleStableIds": [],
+        "boneMembershipRows": 0,
+        "uniqueBoneStableIds": [],
+        "membershipState": "none"
+      },
+      "structureText": {
+        "status": "partial_source_index_only",
+        "termsAndNameCandidatesInB3DIndex": [
+          "FMA34680 BP7573 clavicular part of right deltoid",
+          "FMA34682 BP7571 acromial part of right deltoid",
+          "FMA34684 BP5607 spinal part of right deltoid",
+          "FMA13109 BP9039 pectoralis minor",
+          "FMA13413 BP8215 subscapularis"
+        ],
+        "fullOriginInsertionFunctionText": "not surveyed/created by T43",
+        "TA2AuthorityAccess": "official_pdf_direct_open_failed_502; inherited T04 locator rows remain table_role_unverified",
+        "humanAnatomyReview": "not_performed"
+      },
+      "muscleGeometry": {
+        "officialMetadataCandidates": [
+          "FMA34680 BP7573 clavicular part of right deltoid",
+          "FMA34682 BP7571 acromial part of right deltoid",
+          "FMA34684 BP5607 spinal part of right deltoid",
+          "FMA13109 BP9039 pectoralis minor",
+          "FMA13413 BP8215 subscapularis"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L383-L384, L440-L442, and L1321-L1330",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "boneGeometry": {
+        "officialMetadataCandidates": [
+          "FMA13395 BP9101 right scapula",
+          "FMA13396 BP9121 left scapula",
+          "FMA13322 BP9271 right clavicle",
+          "FMA13323 BP8841 left clavicle"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L396-L398 and L440-L442",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "productBoneMembershipRows": 0,
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "laterality": {
+        "observedOfficialIndexExamples": [
+          "FMA34680 BP7573 clavicular part of right deltoid",
+          "FMA34682 BP7571 acromial part of right deltoid",
+          "FMA34684 BP5607 spinal part of right deltoid",
+          "FMA13109 BP9039 pectoralis minor",
+          "FMA13413 BP8215 subscapularis",
+          "FMA13395 BP9101 right scapula",
+          "FMA13396 BP9121 left scapula",
+          "FMA13322 BP9271 right clavicle",
+          "FMA13323 BP8841 left clavicle"
+        ],
+        "indexContainsExplicitSideLabelsInExamples": true,
+        "regionWideBilateralCompletenessAudited": false,
+        "currentProductSceneSides": [],
+        "mirroringAssumed": false
+      },
+      "licenseAndRights": {
+        "bodyParts3d": "CC BY 4.0 at database level; required credit recorded in source-access.json; source model quality/identity not certified by license",
+        "openSimModels": [
+          "Upper Extremity Dynamic Model: right upper extremity, 50th-percentile male, shoulder/arm movement, MIT, July 2014; model file/geometry/coordinate mapping not verified"
+        ],
+        "perFileRedistributionAudit": "not performed for project-local source model files"
+      },
+      "rigAndMotion": {
+        "sourceModelCandidates": [
+          "Upper Extremity Dynamic Model: right upper extremity, 50th-percentile male, shoulder/arm movement, MIT, July 2014; model file/geometry/coordinate mapping not verified"
+        ],
+        "movementGroupCandidates": [
+          "shoulder/arm movement candidate; a clip may be shared with upper-limb only after scene/frame/pose compatibility is demonstrated"
+        ],
+        "viewerReadyRig": "none verified for this category",
+        "productionMotionDefinitions": 0,
+        "productionMotionAssetsOrClips": 0
+      },
+      "productAcquisitionStatus": "additional_build_needed",
+      "gapsAndNextActions": [
+        "Recommended first non-calf expansion input: T15g has 10 partial source IDs here; official index provides explicit right/left scapula/clavicle rows and deltoid-part entries; no local shoulder mesh or scene is currently inventoried.",
+        "Concrete acquisition route: query FMA/BP IDs in the opened IS-A metadata list; resolve compound concepts to ELEMENT file IDs using the documented isa_element_parts.txt table; select only required OBJ members from the official 99%-reduced IS-A archive after recording hashes and CC BY attribution. Do not use representation ID as an OBJ filename without the element mapping.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "thorax",
+      "order": 5,
+      "labelKo": "가슴우리",
+      "labelEn": "Thorax",
+      "visibleSubcategoriesAdded": false,
+      "sourceRegions": [
+        "thorax_respiratory"
+      ],
+      "partialSourceInventory": {
+        "capturedRows": 7,
+        "entityTypeCounts": {
+          "muscle_group": 1,
+          "individual_muscle": 4,
+          "muscle_part": 2
+        },
+        "wholeRegionEnumerationStatus": "not_established_by_partial_source_extract",
+        "candidateStableIds": [
+          "HA-G-000006",
+          "HA-M-000024",
+          "HA-M-000025",
+          "HA-M-000026",
+          "HA-M-000027",
+          "HA-P-000012",
+          "HA-P-000013"
+        ],
+        "candidateUniqueStableIdCount": 7,
+        "existingT04CrosswalkLocators": [
+          {
+            "stableId": "HA-G-000006",
+            "entityType": "muscle_group",
+            "sourceRegionIds": [
+              "thorax_respiratory"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 83,
+            "tableRow": 2299,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000024",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "thorax_respiratory"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 83,
+            "tableRow": 2301,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000025",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "thorax_respiratory"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 83,
+            "tableRow": 2305,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000026",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "thorax_respiratory"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 83,
+            "tableRow": 2306,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000027",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "thorax_respiratory"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 83,
+            "tableRow": 2307,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000012",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "thorax_respiratory"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 83,
+            "tableRow": 2302,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000013",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "thorax_respiratory"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 83,
+            "tableRow": 2303,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          }
+        ],
+        "note": "Source-region rows are routing candidates only, not product memberships; counts can overlap if multiple source regions or memberships are approved."
+      },
+      "currentDisplayNameOverlay": {
+        "path": "atlas-data/terminology/learning-names.json",
+        "status": "partial_existing_overlay_only",
+        "candidateStableIdsWithOverlay": [
+          "HA-G-000006",
+          "HA-M-000024",
+          "HA-M-000025",
+          "HA-M-000026",
+          "HA-M-000027",
+          "HA-P-000012",
+          "HA-P-000013"
+        ],
+        "candidateOverlayCount": 7,
+        "candidateStableIdsMissingOverlay": [],
+        "missingOverlayCount": 0,
+        "existingTriplets": {
+          "HA-G-000006": {
+            "koModern": "",
+            "koTraditional": "흉부근",
+            "en": "Muscles of thorax",
+            "humanReviewed": false
+          },
+          "HA-M-000024": {
+            "koModern": "큰가슴근",
+            "koTraditional": "대흉근",
+            "en": "Pectoralis major muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000025": {
+            "koModern": "작은가슴근",
+            "koTraditional": "소흉근",
+            "en": "Pectoralis minor muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000026": {
+            "koModern": "빗장밑근",
+            "koTraditional": "쇄골하근",
+            "en": "Subclavius muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000027": {
+            "koModern": "앞톱니근",
+            "koTraditional": "전거근",
+            "en": "Serratus anterior muscle",
+            "humanReviewed": false
+          },
+          "HA-P-000012": {
+            "koModern": "큰가슴근 빗장부분",
+            "koTraditional": "대흉근 쇄골부",
+            "en": "Clavicular head of pectoralis major muscle",
+            "humanReviewed": false
+          },
+          "HA-P-000013": {
+            "koModern": "큰가슴근 복장갈비부분",
+            "koTraditional": "대흉근 흉늑부",
+            "en": "Sternocostal head of pectoralis major muscle",
+            "humanReviewed": false
+          }
+        },
+        "note": "Values are current projection observations, not newly sourced or human-approved in T43."
+      },
+      "currentProductInventory": {
+        "sceneAvailability": "unavailable",
+        "sceneIds": [],
+        "muscleMembershipRows": 0,
+        "uniqueMuscleStableIds": [],
+        "boneMembershipRows": 0,
+        "uniqueBoneStableIds": [],
+        "membershipState": "none"
+      },
+      "structureText": {
+        "status": "partial_source_index_only",
+        "termsAndNameCandidatesInB3DIndex": [
+          "FMA9756 BP8306 external intercostal muscle",
+          "FMA9757 BP8018 internal intercostal muscle",
+          "FMA9758 BP9146 innermost intercostal muscle",
+          "FMA13354 BP8019 intercostal muscle"
+        ],
+        "fullOriginInsertionFunctionText": "not surveyed/created by T43",
+        "TA2AuthorityAccess": "official_pdf_direct_open_failed_502; inherited T04 locator rows remain table_role_unverified",
+        "humanAnatomyReview": "not_performed"
+      },
+      "muscleGeometry": {
+        "officialMetadataCandidates": [
+          "FMA9756 BP8306 external intercostal muscle",
+          "FMA9757 BP8018 internal intercostal muscle",
+          "FMA9758 BP9146 innermost intercostal muscle",
+          "FMA13354 BP8019 intercostal muscle"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L314-L321 and L421",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "boneGeometry": {
+        "officialMetadataCandidates": [
+          "FMA7486 BP8562 manubrium",
+          "FMA7487 BP8989 body of sternum",
+          "FMA7574 BP8085 rib"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L159-L175",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "productBoneMembershipRows": 0,
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "laterality": {
+        "observedOfficialIndexExamples": [
+          "FMA9756 BP8306 external intercostal muscle",
+          "FMA9757 BP8018 internal intercostal muscle",
+          "FMA9758 BP9146 innermost intercostal muscle",
+          "FMA13354 BP8019 intercostal muscle",
+          "FMA7486 BP8562 manubrium",
+          "FMA7487 BP8989 body of sternum",
+          "FMA7574 BP8085 rib"
+        ],
+        "indexContainsExplicitSideLabelsInExamples": false,
+        "regionWideBilateralCompletenessAudited": false,
+        "currentProductSceneSides": [],
+        "mirroringAssumed": false
+      },
+      "licenseAndRights": {
+        "bodyParts3d": "CC BY 4.0 at database level; required credit recorded in source-access.json; source model quality/identity not certified by license",
+        "openSimModels": [
+          "Thoracolumbar spine and rib cage model: ribs and articulated T1-L5; MIT, July 2017; documented model files include example motion but no respiratory-action clip was inspected"
+        ],
+        "perFileRedistributionAudit": "not performed for project-local source model files"
+      },
+      "rigAndMotion": {
+        "sourceModelCandidates": [
+          "Thoracolumbar spine and rib cage model: ribs and articulated T1-L5; MIT, July 2017; documented model files include example motion but no respiratory-action clip was inspected"
+        ],
+        "movementGroupCandidates": [
+          "thoracic/rib-cage articulated motion candidate; not evidence of a respiratory muscle demonstration"
+        ],
+        "viewerReadyRig": "none verified for this category",
+        "productionMotionDefinitions": 0,
+        "productionMotionAssetsOrClips": 0
+      },
+      "productAcquisitionStatus": "additional_build_needed",
+      "gapsAndNextActions": [
+        "T15g has 7 source-index rows, not an exhaustive thorax or respiratory-muscle list.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "abdomen-lumbar",
+      "order": 6,
+      "labelKo": "배·허리",
+      "labelEn": "Abdomen/Lumbar",
+      "visibleSubcategoriesAdded": false,
+      "sourceRegions": [
+        "abdominal_wall"
+      ],
+      "partialSourceInventory": {
+        "capturedRows": 2,
+        "entityTypeCounts": {
+          "individual_muscle": 2
+        },
+        "wholeRegionEnumerationStatus": "not_established_by_partial_source_extract",
+        "candidateStableIds": [
+          "HA-M-000028",
+          "HA-M-000029"
+        ],
+        "candidateUniqueStableIdCount": 2,
+        "existingT04CrosswalkLocators": [
+          {
+            "stableId": "HA-M-000028",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "abdominal_wall"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 86,
+            "tableRow": 2373,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000029",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "abdominal_wall"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 86,
+            "tableRow": 2375,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          }
+        ],
+        "note": "Source-region rows are routing candidates only, not product memberships; counts can overlap if multiple source regions or memberships are approved."
+      },
+      "currentDisplayNameOverlay": {
+        "path": "atlas-data/terminology/learning-names.json",
+        "status": "partial_existing_overlay_only",
+        "candidateStableIdsWithOverlay": [
+          "HA-M-000028",
+          "HA-M-000029"
+        ],
+        "candidateOverlayCount": 2,
+        "candidateStableIdsMissingOverlay": [],
+        "missingOverlayCount": 0,
+        "existingTriplets": {
+          "HA-M-000028": {
+            "koModern": "배속빗근",
+            "koTraditional": "내복사근",
+            "en": "Internal abdominal oblique muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000029": {
+            "koModern": "배가로근",
+            "koTraditional": "복횡근",
+            "en": "Transversus abdominis muscle",
+            "humanReviewed": false
+          }
+        },
+        "note": "Values are current projection observations, not newly sourced or human-approved in T43."
+      },
+      "currentProductInventory": {
+        "sceneAvailability": "unavailable",
+        "sceneIds": [],
+        "muscleMembershipRows": 0,
+        "uniqueMuscleStableIds": [],
+        "boneMembershipRows": 0,
+        "uniqueBoneStableIds": [],
+        "membershipState": "none"
+      },
+      "structureText": {
+        "status": "partial_source_index_only",
+        "termsAndNameCandidatesInB3DIndex": [
+          "FMA13335 BP8155 external oblique",
+          "FMA13336 BP4967 right external oblique"
+        ],
+        "fullOriginInsertionFunctionText": "not surveyed/created by T43",
+        "TA2AuthorityAccess": "official_pdf_direct_open_failed_502; inherited T04 locator rows remain table_role_unverified",
+        "humanAnatomyReview": "not_performed"
+      },
+      "muscleGeometry": {
+        "officialMetadataCandidates": [
+          "FMA13335 BP8155 external oblique",
+          "FMA13336 BP4967 right external oblique"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L405-L407; literal “rectus abdominis” lookup had no matching text",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "boneGeometry": {
+        "officialMetadataCandidates": [
+          "FMA9921 BP8134 lumbar vertebra",
+          "FMA13072 BP8948 first lumbar vertebra",
+          "FMA13076 BP8280 fifth lumbar vertebra"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L322 and L377-L381",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "productBoneMembershipRows": 0,
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "laterality": {
+        "observedOfficialIndexExamples": [
+          "FMA13335 BP8155 external oblique",
+          "FMA13336 BP4967 right external oblique",
+          "FMA9921 BP8134 lumbar vertebra",
+          "FMA13072 BP8948 first lumbar vertebra",
+          "FMA13076 BP8280 fifth lumbar vertebra"
+        ],
+        "indexContainsExplicitSideLabelsInExamples": true,
+        "regionWideBilateralCompletenessAudited": false,
+        "currentProductSceneSides": [],
+        "mirroringAssumed": false
+      },
+      "licenseAndRights": {
+        "bodyParts3d": "CC BY 4.0 at database level; required credit recorded in source-access.json; source model quality/identity not certified by license",
+        "openSimModels": [
+          "Thoracolumbar spine/rib cage model (MIT, July 2017); separate Lumbar Spine Model lists 3 DOF/238 muscle fascicles but documentation warns it lacks inertial body properties and is inappropriate for dynamics; CC BY 3.0 as listed"
+        ],
+        "perFileRedistributionAudit": "not performed for project-local source model files"
+      },
+      "rigAndMotion": {
+        "sourceModelCandidates": [
+          "Thoracolumbar spine/rib cage model (MIT, July 2017); separate Lumbar Spine Model lists 3 DOF/238 muscle fascicles but documentation warns it lacks inertial body properties and is inappropriate for dynamics; CC BY 3.0 as listed"
+        ],
+        "movementGroupCandidates": [
+          "lumbar/trunk motion candidate; exact shared clip and abdominal muscle actuation not verified"
+        ],
+        "viewerReadyRig": "none verified for this category",
+        "productionMotionDefinitions": 0,
+        "productionMotionAssetsOrClips": 0
+      },
+      "productAcquisitionStatus": "additional_build_needed",
+      "gapsAndNextActions": [
+        "T15g has 2 abdominal-wall rows only; no full abdominal or lumbar muscle list is available. “rectus abdominis” no-hit in this exact table lookup is not an absence claim.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "pelvis-perineum",
+      "order": 7,
+      "labelKo": "골반·샅",
+      "labelEn": "Pelvis/Perineum",
+      "visibleSubcategoriesAdded": false,
+      "sourceRegions": [
+        "pelvic_floor_perineum"
+      ],
+      "partialSourceInventory": {
+        "capturedRows": 0,
+        "entityTypeCounts": {},
+        "wholeRegionEnumerationStatus": "not_established_by_partial_source_extract",
+        "candidateStableIds": [],
+        "candidateUniqueStableIdCount": 0,
+        "existingT04CrosswalkLocators": [],
+        "note": "Source-region rows are routing candidates only, not product memberships; counts can overlap if multiple source regions or memberships are approved."
+      },
+      "currentDisplayNameOverlay": {
+        "path": "atlas-data/terminology/learning-names.json",
+        "status": "partial_existing_overlay_only",
+        "candidateStableIdsWithOverlay": [],
+        "candidateOverlayCount": 0,
+        "candidateStableIdsMissingOverlay": [],
+        "missingOverlayCount": 0,
+        "existingTriplets": {},
+        "note": "Values are current projection observations, not newly sourced or human-approved in T43."
+      },
+      "currentProductInventory": {
+        "sceneAvailability": "unavailable",
+        "sceneIds": [],
+        "muscleMembershipRows": 0,
+        "uniqueMuscleStableIds": [],
+        "boneMembershipRows": 0,
+        "uniqueBoneStableIds": [],
+        "membershipState": "none"
+      },
+      "structureText": {
+        "status": "not_in_current_partial_project_extract",
+        "termsAndNameCandidatesInB3DIndex": [
+          "FMA19090 BP7792 pubococcygeus",
+          "FMA19091 BP8203 puborectalis",
+          "FMA19092 BP8008 iliococcygeus",
+          "FMA9623 BP8936 perineal muscle"
+        ],
+        "fullOriginInsertionFunctionText": "not surveyed/created by T43",
+        "TA2AuthorityAccess": "official_pdf_direct_open_failed_502; inherited T04 locator rows remain table_role_unverified",
+        "humanAnatomyReview": "not_performed"
+      },
+      "muscleGeometry": {
+        "officialMetadataCandidates": [
+          "FMA19090 BP7792 pubococcygeus",
+          "FMA19091 BP8203 puborectalis",
+          "FMA19092 BP8008 iliococcygeus",
+          "FMA9623 BP8936 perineal muscle"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L300, L700-L707, and L1627-L1632",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "boneGeometry": {
+        "officialMetadataCandidates": [
+          "FMA16202 BP9174 sacrum",
+          "FMA16585 BP8769 hip bone",
+          "FMA16586 BP8768 right hip bone",
+          "FMA16587 BP8950 left hip bone"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L654-L658",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "productBoneMembershipRows": 0,
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "laterality": {
+        "observedOfficialIndexExamples": [
+          "FMA19090 BP7792 pubococcygeus",
+          "FMA19091 BP8203 puborectalis",
+          "FMA19092 BP8008 iliococcygeus",
+          "FMA9623 BP8936 perineal muscle",
+          "FMA16202 BP9174 sacrum",
+          "FMA16585 BP8769 hip bone",
+          "FMA16586 BP8768 right hip bone",
+          "FMA16587 BP8950 left hip bone"
+        ],
+        "indexContainsExplicitSideLabelsInExamples": true,
+        "regionWideBilateralCompletenessAudited": false,
+        "currentProductSceneSides": [],
+        "mirroringAssumed": false
+      },
+      "licenseAndRights": {
+        "bodyParts3d": "CC BY 4.0 at database level; required credit recorded in source-access.json; source model quality/identity not certified by license",
+        "openSimModels": [
+          "No perineal/pelvic-floor muscle-actuated model located in the opened OpenSim model matrix; Thoracolumbar model includes pelvis context but that is not perineum coverage"
+        ],
+        "perFileRedistributionAudit": "not performed for project-local source model files"
+      },
+      "rigAndMotion": {
+        "sourceModelCandidates": [
+          "No perineal/pelvic-floor muscle-actuated model located in the opened OpenSim model matrix; Thoracolumbar model includes pelvis context but that is not perineum coverage"
+        ],
+        "movementGroupCandidates": [
+          "pelvic-floor/perineum motion group: no source-backed clip candidate located in this metadata pass"
+        ],
+        "viewerReadyRig": "none verified for this category",
+        "productionMotionDefinitions": 0,
+        "productionMotionAssetsOrClips": 0
+      },
+      "productAcquisitionStatus": "additional_build_needed",
+      "gapsAndNextActions": [
+        "T15g source crosswalk has zero rows here; official BodyParts3D candidate rows are an acquisition lead, not membership decisions.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "gluteal-hip",
+      "order": 8,
+      "labelKo": "볼기·깊은엉덩이",
+      "labelEn": "Gluteal/Hip",
+      "visibleSubcategoriesAdded": false,
+      "sourceRegions": [
+        "gluteal"
+      ],
+      "partialSourceInventory": {
+        "capturedRows": 10,
+        "entityTypeCounts": {
+          "muscle_group": 2,
+          "individual_muscle": 8
+        },
+        "wholeRegionEnumerationStatus": "not_established_by_partial_source_extract",
+        "candidateStableIds": [
+          "HA-G-000011",
+          "HA-G-000012",
+          "HA-M-000039",
+          "HA-M-000040",
+          "HA-M-000041",
+          "HA-M-000042",
+          "HA-M-000043",
+          "HA-M-000044",
+          "HA-M-000045",
+          "HA-M-000046"
+        ],
+        "candidateUniqueStableIdCount": 10,
+        "existingT04CrosswalkLocators": [
+          {
+            "stableId": "HA-G-000011",
+            "entityType": "muscle_group",
+            "sourceRegionIds": [
+              "gluteal"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 94,
+            "tableRow": 2597,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-G-000012",
+            "entityType": "muscle_group",
+            "sourceRegionIds": [
+              "gluteal"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 94,
+            "tableRow": 2603,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000039",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "gluteal"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 94,
+            "tableRow": 2598,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000040",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "gluteal"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 94,
+            "tableRow": 2599,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000041",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "gluteal"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 94,
+            "tableRow": 2600,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000042",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "gluteal"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 94,
+            "tableRow": 2604,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000043",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "gluteal"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 94,
+            "tableRow": 2605,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000044",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "gluteal"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 94,
+            "tableRow": 2606,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000045",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "gluteal"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 94,
+            "tableRow": 2607,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000046",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "gluteal"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 94,
+            "tableRow": 2608,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          }
+        ],
+        "note": "Source-region rows are routing candidates only, not product memberships; counts can overlap if multiple source regions or memberships are approved."
+      },
+      "currentDisplayNameOverlay": {
+        "path": "atlas-data/terminology/learning-names.json",
+        "status": "partial_existing_overlay_only",
+        "candidateStableIdsWithOverlay": [
+          "HA-M-000039",
+          "HA-M-000040",
+          "HA-M-000041",
+          "HA-M-000042",
+          "HA-M-000043",
+          "HA-M-000044",
+          "HA-M-000045",
+          "HA-M-000046"
+        ],
+        "candidateOverlayCount": 8,
+        "candidateStableIdsMissingOverlay": [
+          "HA-G-000011",
+          "HA-G-000012"
+        ],
+        "missingOverlayCount": 2,
+        "existingTriplets": {
+          "HA-M-000039": {
+            "koModern": "큰볼기근",
+            "koTraditional": "대둔근",
+            "en": "Gluteus maximus muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000040": {
+            "koModern": "중간볼기근",
+            "koTraditional": "중둔근",
+            "en": "Gluteus medius muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000041": {
+            "koModern": "작은볼기근",
+            "koTraditional": "소둔근",
+            "en": "Gluteus minimus muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000042": {
+            "koModern": "궁둥구멍근",
+            "koTraditional": "이상근",
+            "en": "Piriformis muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000043": {
+            "koModern": "속폐쇄근",
+            "koTraditional": "내폐쇄근",
+            "en": "Obturator internus",
+            "humanReviewed": false
+          },
+          "HA-M-000044": {
+            "koModern": "위쌍동이근",
+            "koTraditional": "상쌍자근",
+            "en": "Superior gemellus muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000045": {
+            "koModern": "아래쌍동이근",
+            "koTraditional": "하쌍자근",
+            "en": "Inferior gemellus muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000046": {
+            "koModern": "넙다리네모근",
+            "koTraditional": "대퇴방형근",
+            "en": "Quadratus femoris muscle",
+            "humanReviewed": false
+          }
+        },
+        "note": "Values are current projection observations, not newly sourced or human-approved in T43."
+      },
+      "currentProductInventory": {
+        "sceneAvailability": "unavailable",
+        "sceneIds": [],
+        "muscleMembershipRows": 0,
+        "uniqueMuscleStableIds": [],
+        "boneMembershipRows": 0,
+        "uniqueBoneStableIds": [],
+        "membershipState": "none"
+      },
+      "structureText": {
+        "status": "partial_source_index_only",
+        "termsAndNameCandidatesInB3DIndex": [
+          "FMA22314 BP8402 gluteus maximus",
+          "FMA22315 BP9214 gluteus medius",
+          "FMA22317 BP8624 gluteus minimus",
+          "FMA22340 BP5076 right piriformis"
+        ],
+        "fullOriginInsertionFunctionText": "not surveyed/created by T43",
+        "TA2AuthorityAccess": "official_pdf_direct_open_failed_502; inherited T04 locator rows remain table_role_unverified",
+        "humanAnatomyReview": "not_performed"
+      },
+      "muscleGeometry": {
+        "officialMetadataCandidates": [
+          "FMA22314 BP8402 gluteus maximus",
+          "FMA22315 BP9214 gluteus medius",
+          "FMA22317 BP8624 gluteus minimus",
+          "FMA22340 BP5076 right piriformis"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L768-L789",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "boneGeometry": {
+        "officialMetadataCandidates": [
+          "FMA16585 BP8769 hip bone",
+          "FMA16586 BP8768 right hip bone",
+          "FMA24474 BP8920 right femur"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L656-L658 and L1172-L1173",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "productBoneMembershipRows": 0,
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "laterality": {
+        "observedOfficialIndexExamples": [
+          "FMA22314 BP8402 gluteus maximus",
+          "FMA22315 BP9214 gluteus medius",
+          "FMA22317 BP8624 gluteus minimus",
+          "FMA22340 BP5076 right piriformis",
+          "FMA16585 BP8769 hip bone",
+          "FMA16586 BP8768 right hip bone",
+          "FMA24474 BP8920 right femur"
+        ],
+        "indexContainsExplicitSideLabelsInExamples": true,
+        "regionWideBilateralCompletenessAudited": false,
+        "currentProductSceneSides": [],
+        "mirroringAssumed": false
+      },
+      "licenseAndRights": {
+        "bodyParts3d": "CC BY 4.0 at database level; required credit recorded in source-access.json; source model quality/identity not certified by license",
+        "openSimModels": [
+          "OpenSim Custom Hip Model (based on Gait2392; CC BY 3.0 as listed); Full Body Running Model has lower-body muscles but torque-actuated arms; downloads not inspected"
+        ],
+        "perFileRedistributionAudit": "not performed for project-local source model files"
+      },
+      "rigAndMotion": {
+        "sourceModelCandidates": [
+          "OpenSim Custom Hip Model (based on Gait2392; CC BY 3.0 as listed); Full Body Running Model has lower-body muscles but torque-actuated arms; downloads not inspected"
+        ],
+        "movementGroupCandidates": [
+          "hip/gait movement candidate; link with thigh/leg/foot clip only after compatible source frames and pose are proven"
+        ],
+        "viewerReadyRig": "none verified for this category",
+        "productionMotionDefinitions": 0,
+        "productionMotionAssetsOrClips": 0
+      },
+      "productAcquisitionStatus": "additional_build_needed",
+      "gapsAndNextActions": [
+        "T15g has 10 gluteal source rows, not a complete hip or gluteal list.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "thigh",
+      "order": 9,
+      "labelKo": "넙다리",
+      "labelEn": "Thigh",
+      "visibleSubcategoriesAdded": false,
+      "sourceRegions": [],
+      "partialSourceInventory": {
+        "capturedRows": 0,
+        "entityTypeCounts": {},
+        "wholeRegionEnumerationStatus": "not_established_by_partial_source_extract",
+        "candidateStableIds": [],
+        "candidateUniqueStableIdCount": 0,
+        "existingT04CrosswalkLocators": [],
+        "note": "Source-region rows are routing candidates only, not product memberships; counts can overlap if multiple source regions or memberships are approved."
+      },
+      "currentDisplayNameOverlay": {
+        "path": "atlas-data/terminology/learning-names.json",
+        "status": "partial_existing_overlay_only",
+        "candidateStableIdsWithOverlay": [],
+        "candidateOverlayCount": 0,
+        "candidateStableIdsMissingOverlay": [],
+        "missingOverlayCount": 0,
+        "existingTriplets": {},
+        "note": "Values are current projection observations, not newly sourced or human-approved in T43."
+      },
+      "currentProductInventory": {
+        "sceneAvailability": "unavailable",
+        "sceneIds": [],
+        "muscleMembershipRows": 0,
+        "uniqueMuscleStableIds": [],
+        "boneMembershipRows": 0,
+        "uniqueBoneStableIds": [],
+        "membershipState": "none"
+      },
+      "structureText": {
+        "status": "not_in_current_partial_project_extract",
+        "termsAndNameCandidatesInB3DIndex": [
+          "FMA22430 BP8095 rectus femoris",
+          "FMA22431 BP8755 vastus lateralis",
+          "FMA22432 BP9129 vastus medialis",
+          "FMA22433 BP9208 vastus intermedius"
+        ],
+        "fullOriginInsertionFunctionText": "not surveyed/created by T43",
+        "TA2AuthorityAccess": "official_pdf_direct_open_failed_502; inherited T04 locator rows remain table_role_unverified",
+        "humanAnatomyReview": "not_performed"
+      },
+      "muscleGeometry": {
+        "officialMetadataCandidates": [
+          "FMA22430 BP8095 rectus femoris",
+          "FMA22431 BP8755 vastus lateralis",
+          "FMA22432 BP9129 vastus medialis",
+          "FMA22433 BP9208 vastus intermedius"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L807-L815 and L1506-L1513",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "boneGeometry": {
+        "officialMetadataCandidates": [
+          "FMA24474 BP8920 right femur",
+          "FMA24475 BP9042 left femur",
+          "FMA24485 BP8379 patella"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L1172-L1184",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "productBoneMembershipRows": 0,
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "laterality": {
+        "observedOfficialIndexExamples": [
+          "FMA22430 BP8095 rectus femoris",
+          "FMA22431 BP8755 vastus lateralis",
+          "FMA22432 BP9129 vastus medialis",
+          "FMA22433 BP9208 vastus intermedius",
+          "FMA24474 BP8920 right femur",
+          "FMA24475 BP9042 left femur",
+          "FMA24485 BP8379 patella"
+        ],
+        "indexContainsExplicitSideLabelsInExamples": true,
+        "regionWideBilateralCompletenessAudited": false,
+        "currentProductSceneSides": [],
+        "mirroringAssumed": false
+      },
+      "licenseAndRights": {
+        "bodyParts3d": "CC BY 4.0 at database level; required credit recorded in source-access.json; source model quality/identity not certified by license",
+        "openSimModels": [
+          "gait2392_simbody: bilateral lower limbs + lumped torso, 23 DOF/92 muscle-tendon actuators, CC BY 3.0 as listed; model files not freshly acquired"
+        ],
+        "perFileRedistributionAudit": "not performed for project-local source model files"
+      },
+      "rigAndMotion": {
+        "sourceModelCandidates": [
+          "gait2392_simbody: bilateral lower limbs + lumped torso, 23 DOF/92 muscle-tendon actuators, CC BY 3.0 as listed; model files not freshly acquired"
+        ],
+        "movementGroupCandidates": [
+          "hip/knee gait-cycle candidate shared with adjacent leg only if compatible clip/body pose is proven"
+        ],
+        "viewerReadyRig": "none verified for this category",
+        "productionMotionDefinitions": 0,
+        "productionMotionAssetsOrClips": 0
+      },
+      "productAcquisitionStatus": "additional_build_needed",
+      "gapsAndNextActions": [
+        "No separate thigh sourceRegion in T15g; lower_extremity records are not auto-routed to thigh. B3D rows are external acquisition candidates only.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "leg",
+      "order": 10,
+      "labelKo": "종아리",
+      "labelEn": "Leg",
+      "visibleSubcategoriesAdded": false,
+      "sourceRegions": [],
+      "partialSourceInventory": {
+        "capturedRows": 0,
+        "entityTypeCounts": {},
+        "wholeRegionEnumerationStatus": "not_established_by_partial_source_extract",
+        "candidateStableIds": [
+          "HA-M-000001",
+          "HA-M-000002",
+          "HA-M-000003",
+          "HA-M-000004",
+          "HA-M-000005",
+          "HA-M-000006"
+        ],
+        "candidateUniqueStableIdCount": 6,
+        "existingT04CrosswalkLocators": [],
+        "note": "Source-region rows are routing candidates only, not product memberships; counts can overlap if multiple source regions or memberships are approved."
+      },
+      "currentDisplayNameOverlay": {
+        "path": "atlas-data/terminology/learning-names.json",
+        "status": "partial_existing_overlay_only",
+        "candidateStableIdsWithOverlay": [
+          "HA-M-000001",
+          "HA-M-000002",
+          "HA-M-000003",
+          "HA-M-000004",
+          "HA-M-000005",
+          "HA-M-000006"
+        ],
+        "candidateOverlayCount": 6,
+        "candidateStableIdsMissingOverlay": [],
+        "missingOverlayCount": 0,
+        "existingTriplets": {
+          "HA-M-000001": {
+            "koModern": "장딴지근",
+            "koTraditional": "비복근",
+            "en": "Gastrocnemius",
+            "humanReviewed": false
+          },
+          "HA-M-000002": {
+            "koModern": "가자미근",
+            "koTraditional": "가자미근",
+            "en": "Soleus",
+            "humanReviewed": false
+          },
+          "HA-M-000003": {
+            "koModern": "앞정강근",
+            "koTraditional": "전경골근",
+            "en": "Tibialis anterior",
+            "humanReviewed": false
+          },
+          "HA-M-000004": {
+            "koModern": "뒤정강근",
+            "koTraditional": "후경골근",
+            "en": "Tibialis posterior",
+            "humanReviewed": false
+          },
+          "HA-M-000005": {
+            "koModern": "긴종아리근",
+            "koTraditional": "장비골근",
+            "en": "Fibularis longus",
+            "humanReviewed": false
+          },
+          "HA-M-000006": {
+            "koModern": "짧은종아리근",
+            "koTraditional": "단비골근",
+            "en": "Fibularis brevis",
+            "humanReviewed": false
+          }
+        },
+        "note": "Values are current projection observations, not newly sourced or human-approved in T43."
+      },
+      "currentProductInventory": {
+        "sceneAvailability": "partial",
+        "sceneIds": [
+          "HA-SCENE-LEG-RIGHT-PILOT-T12B",
+          "HA-SCENE-LEG-RIGHT-BONES-T13"
+        ],
+        "muscleMembershipRows": 6,
+        "uniqueMuscleStableIds": [
+          "HA-M-000001",
+          "HA-M-000002",
+          "HA-M-000003",
+          "HA-M-000004",
+          "HA-M-000005",
+          "HA-M-000006"
+        ],
+        "boneMembershipRows": 0,
+        "uniqueBoneStableIds": [],
+        "membershipState": "partial_pilot_decisions_only"
+      },
+      "structureText": {
+        "status": "partial_source_index_only",
+        "termsAndNameCandidatesInB3DIndex": [
+          "FMA22544 BP5018 right tibialis anterior",
+          "FMA22558 BP4999 right soleus",
+          "FMA22552 BP5013 right fibularis longus",
+          "FMA45957 BP5539 medial head of right gastrocnemius",
+          "FMA45960 BP5541 lateral head of right gastrocnemius"
+        ],
+        "fullOriginInsertionFunctionText": "not surveyed/created by T43",
+        "TA2AuthorityAccess": "official_pdf_direct_open_failed_502; inherited T04 locator rows remain table_role_unverified",
+        "humanAnatomyReview": "not_performed"
+      },
+      "muscleGeometry": {
+        "officialMetadataCandidates": [
+          "FMA22544 BP5018 right tibialis anterior",
+          "FMA22558 BP4999 right soleus",
+          "FMA22552 BP5013 right fibularis longus",
+          "FMA45957 BP5539 medial head of right gastrocnemius",
+          "FMA45960 BP5541 lateral head of right gastrocnemius"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L840-L865 and L1642-L1648",
+        "localProductAssetStatus": "right_calf_subset_only",
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "boneGeometry": {
+        "officialMetadataCandidates": [
+          "FMA24477 BP8031 right tibia",
+          "FMA24480 BP8009 right fibula",
+          "FMA24482 BP8033 right talus"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L1174-L1182",
+        "localProductAssetStatus": "right_lower_leg_context_only",
+        "productBoneMembershipRows": 0,
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "laterality": {
+        "observedOfficialIndexExamples": [
+          "FMA22544 BP5018 right tibialis anterior",
+          "FMA22558 BP4999 right soleus",
+          "FMA22552 BP5013 right fibularis longus",
+          "FMA45957 BP5539 medial head of right gastrocnemius",
+          "FMA45960 BP5541 lateral head of right gastrocnemius",
+          "FMA24477 BP8031 right tibia",
+          "FMA24480 BP8009 right fibula",
+          "FMA24482 BP8033 right talus"
+        ],
+        "indexContainsExplicitSideLabelsInExamples": true,
+        "regionWideBilateralCompletenessAudited": false,
+        "currentProductSceneSides": [
+          "right"
+        ],
+        "mirroringAssumed": false
+      },
+      "licenseAndRights": {
+        "bodyParts3d": "CC BY 4.0 at database level; required credit recorded in source-access.json; source model quality/identity not certified by license",
+        "openSimModels": [
+          "gait2392/gait2354 and leg6dof9musc models are bilateral or unilateral lower-limb simulation candidates; specific included rights/contents/licenses vary by model as listed; no T43 motion package imported"
+        ],
+        "perFileRedistributionAudit": "not performed for project-local source model files"
+      },
+      "rigAndMotion": {
+        "sourceModelCandidates": [
+          "gait2392/gait2354 and leg6dof9musc models are bilateral or unilateral lower-limb simulation candidates; specific included rights/contents/licenses vary by model as listed; no T43 motion package imported"
+        ],
+        "movementGroupCandidates": [
+          "gait / ankle / knee lower-limb joint-group candidate; no production MotionDefinition or clip"
+        ],
+        "viewerReadyRig": "none verified for this category",
+        "productionMotionDefinitions": 0,
+        "productionMotionAssetsOrClips": 0
+      },
+      "productAcquisitionStatus": "static_only",
+      "gapsAndNextActions": [
+        "Current right calf pilot only: 6 muscle product membership rows, 2 static scenes; 9 right scene-bound bone IDs are context/selection bindings, not bone RegionMembership rows. Static partial scene is not a full leg catalog.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "foot",
+      "order": 11,
+      "labelKo": "발",
+      "labelEn": "Foot",
+      "visibleSubcategoriesAdded": false,
+      "sourceRegions": [
+        "foot"
+      ],
+      "partialSourceInventory": {
+        "capturedRows": 3,
+        "entityTypeCounts": {
+          "muscle_group": 1,
+          "individual_muscle": 2
+        },
+        "wholeRegionEnumerationStatus": "not_established_by_partial_source_extract",
+        "candidateStableIds": [
+          "HA-G-000016",
+          "HA-M-000047",
+          "HA-M-000048"
+        ],
+        "candidateUniqueStableIdCount": 3,
+        "existingT04CrosswalkLocators": [
+          {
+            "stableId": "HA-G-000016",
+            "entityType": "muscle_group",
+            "sourceRegionIds": [
+              "foot"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 96,
+            "tableRow": 2669,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000047",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "foot"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 96,
+            "tableRow": 2673,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000048",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "foot"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 96,
+            "tableRow": 2676,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          }
+        ],
+        "note": "Source-region rows are routing candidates only, not product memberships; counts can overlap if multiple source regions or memberships are approved."
+      },
+      "currentDisplayNameOverlay": {
+        "path": "atlas-data/terminology/learning-names.json",
+        "status": "partial_existing_overlay_only",
+        "candidateStableIdsWithOverlay": [
+          "HA-M-000047",
+          "HA-M-000048"
+        ],
+        "candidateOverlayCount": 2,
+        "candidateStableIdsMissingOverlay": [
+          "HA-G-000016"
+        ],
+        "missingOverlayCount": 1,
+        "existingTriplets": {
+          "HA-M-000047": {
+            "koModern": "짧은엄지굽힘근",
+            "koTraditional": "단무지굴근",
+            "en": "Flexor hallucis brevis",
+            "humanReviewed": false
+          },
+          "HA-M-000048": {
+            "koModern": "엄지모음근",
+            "koTraditional": "무지내전근",
+            "en": "Adductor hallucis",
+            "humanReviewed": false
+          }
+        },
+        "note": "Values are current projection observations, not newly sourced or human-approved in T43."
+      },
+      "currentProductInventory": {
+        "sceneAvailability": "unavailable",
+        "sceneIds": [],
+        "muscleMembershipRows": 0,
+        "uniqueMuscleStableIds": [],
+        "boneMembershipRows": 0,
+        "uniqueBoneStableIds": [],
+        "membershipState": "none"
+      },
+      "structureText": {
+        "status": "partial_source_index_only",
+        "termsAndNameCandidatesInB3DIndex": [
+          "FMA37450 BP9216 flexor digitorum brevis",
+          "FMA37461 BP5048 right flexor digitorum brevis",
+          "FMA37448 BP9194 abductor hallucis"
+        ],
+        "fullOriginInsertionFunctionText": "not surveyed/created by T43",
+        "TA2AuthorityAccess": "official_pdf_direct_open_failed_502; inherited T04 locator rows remain table_role_unverified",
+        "humanAnatomyReview": "not_performed"
+      },
+      "muscleGeometry": {
+        "officialMetadataCandidates": [
+          "FMA37450 BP9216 flexor digitorum brevis",
+          "FMA37461 BP5048 right flexor digitorum brevis",
+          "FMA37448 BP9194 abductor hallucis"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L1372-L1383",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "boneGeometry": {
+        "officialMetadataCandidates": [
+          "FMA24491 BP8035 tarsal bone",
+          "FMA24492 BP7914 metatarsal bone",
+          "FMA24496 BP8534 calcaneus"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L1185-L1189 and L1194-L1212",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "productBoneMembershipRows": 0,
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "laterality": {
+        "observedOfficialIndexExamples": [
+          "FMA37450 BP9216 flexor digitorum brevis",
+          "FMA37461 BP5048 right flexor digitorum brevis",
+          "FMA37448 BP9194 abductor hallucis",
+          "FMA24491 BP8035 tarsal bone",
+          "FMA24492 BP7914 metatarsal bone",
+          "FMA24496 BP8534 calcaneus"
+        ],
+        "indexContainsExplicitSideLabelsInExamples": true,
+        "regionWideBilateralCompletenessAudited": false,
+        "currentProductSceneSides": [],
+        "mirroringAssumed": false
+      },
+      "licenseAndRights": {
+        "bodyParts3d": "CC BY 4.0 at database level; required credit recorded in source-access.json; source model quality/identity not certified by license",
+        "openSimModels": [
+          "lower-limb OpenSim candidates contain a foot segment, but the opened model matrix did not provide a complete intrinsic-foot muscle/clip package; local mesh pilot includes only right-foot bone context, no foot membership rows"
+        ],
+        "perFileRedistributionAudit": "not performed for project-local source model files"
+      },
+      "rigAndMotion": {
+        "sourceModelCandidates": [
+          "lower-limb OpenSim candidates contain a foot segment, but the opened model matrix did not provide a complete intrinsic-foot muscle/clip package; local mesh pilot includes only right-foot bone context, no foot membership rows"
+        ],
+        "movementGroupCandidates": [
+          "gait/ankle/foot segment candidate; intrinsic foot motion and muscle-specific clip not identified"
+        ],
+        "viewerReadyRig": "none verified for this category",
+        "productionMotionDefinitions": 0,
+        "productionMotionAssetsOrClips": 0
+      },
+      "productAcquisitionStatus": "additional_build_needed",
+      "gapsAndNextActions": [
+        "T15g includes only 3 foot source rows (one group, two individual muscles); not exhaustive. 3 other T13 right metatarsal mesh contexts are unbound, and are not foot membership.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "upper-limb",
+      "order": 12,
+      "labelKo": "팔·손",
+      "labelEn": "Upper limb",
+      "visibleSubcategoriesAdded": false,
+      "sourceRegions": [
+        "upper_extremity",
+        "hand"
+      ],
+      "partialSourceInventory": {
+        "capturedRows": 10,
+        "entityTypeCounts": {
+          "muscle_group": 1,
+          "individual_muscle": 4,
+          "muscle_part": 5
+        },
+        "wholeRegionEnumerationStatus": "not_established_by_partial_source_extract",
+        "candidateStableIds": [
+          "HA-G-000007",
+          "HA-M-000035",
+          "HA-M-000036",
+          "HA-M-000037",
+          "HA-M-000038",
+          "HA-P-000017",
+          "HA-P-000018",
+          "HA-P-000019",
+          "HA-P-000020",
+          "HA-P-000021"
+        ],
+        "candidateUniqueStableIdCount": 10,
+        "existingT04CrosswalkLocators": [
+          {
+            "stableId": "HA-G-000007",
+            "entityType": "muscle_group",
+            "sourceRegionIds": [
+              "upper_extremity"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2450,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000035",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "upper_extremity"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2464,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000036",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "upper_extremity"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2468,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000037",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "upper_extremity"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2469,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-M-000038",
+            "entityType": "individual_muscle",
+            "sourceRegionIds": [
+              "upper_extremity"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2471,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000017",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "upper_extremity"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2465,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000018",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "upper_extremity"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2466,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000019",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "upper_extremity"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2472,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000020",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "upper_extremity"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2473,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          },
+          {
+            "stableId": "HA-P-000021",
+            "entityType": "muscle_part",
+            "sourceRegionIds": [
+              "upper_extremity"
+            ],
+            "sourceId": "FIPAT_TA2",
+            "edition": "Terminologia Anatomica, 2nd edition (TA2), Part 2; online edition published 2019",
+            "part": "Part 2, Muscular System",
+            "printedPage": 89,
+            "tableRow": 2474,
+            "termCellRoleStatus": "unverified_without_local_visual_review_of_the_source_table"
+          }
+        ],
+        "note": "Source-region rows are routing candidates only, not product memberships; counts can overlap if multiple source regions or memberships are approved."
+      },
+      "currentDisplayNameOverlay": {
+        "path": "atlas-data/terminology/learning-names.json",
+        "status": "partial_existing_overlay_only",
+        "candidateStableIdsWithOverlay": [
+          "HA-G-000007",
+          "HA-M-000035",
+          "HA-M-000036",
+          "HA-M-000037",
+          "HA-M-000038",
+          "HA-P-000017",
+          "HA-P-000018",
+          "HA-P-000019",
+          "HA-P-000020",
+          "HA-P-000021"
+        ],
+        "candidateOverlayCount": 10,
+        "candidateStableIdsMissingOverlay": [],
+        "missingOverlayCount": 0,
+        "existingTriplets": {
+          "HA-G-000007": {
+            "koModern": "팔근육",
+            "koTraditional": "팔근육",
+            "en": "Muscles of upper limb",
+            "humanReviewed": false
+          },
+          "HA-M-000035": {
+            "koModern": "위팔두갈래근",
+            "koTraditional": "상완이두근",
+            "en": "Biceps brachii muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000036": {
+            "koModern": "부리위팔근",
+            "koTraditional": "오훼완근",
+            "en": "Coracobrachialis muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000037": {
+            "koModern": "위팔근",
+            "koTraditional": "상완근",
+            "en": "Brachialis muscle",
+            "humanReviewed": false
+          },
+          "HA-M-000038": {
+            "koModern": "위팔세갈래근",
+            "koTraditional": "상완삼두근",
+            "en": "Triceps brachii muscle",
+            "humanReviewed": false
+          },
+          "HA-P-000017": {
+            "koModern": "긴갈래",
+            "koTraditional": "상완이두근장두",
+            "en": "Long head of biceps brachii",
+            "humanReviewed": false
+          },
+          "HA-P-000018": {
+            "koModern": "위팔 두 갈래근 짧은 갈래",
+            "koTraditional": "상완두갈래근짧은갈래",
+            "en": "Short head of biceps brachii",
+            "humanReviewed": false
+          },
+          "HA-P-000019": {
+            "koModern": "긴갈래",
+            "koTraditional": "상완삼두근장두",
+            "en": "Long head of triceps brachii",
+            "humanReviewed": false
+          },
+          "HA-P-000020": {
+            "koModern": "위팔 세 갈래 근 가쪽 갈래",
+            "koTraditional": "상완 삼두근 외측두",
+            "en": "Lateral head of triceps brachii",
+            "humanReviewed": false
+          },
+          "HA-P-000021": {
+            "koModern": "안쪽갈래",
+            "koTraditional": "안쪽갈래",
+            "en": "Medial head of triceps brachii",
+            "humanReviewed": false
+          }
+        },
+        "note": "Values are current projection observations, not newly sourced or human-approved in T43."
+      },
+      "currentProductInventory": {
+        "sceneAvailability": "unavailable",
+        "sceneIds": [],
+        "muscleMembershipRows": 0,
+        "uniqueMuscleStableIds": [],
+        "boneMembershipRows": 0,
+        "uniqueBoneStableIds": [],
+        "membershipState": "none"
+      },
+      "structureText": {
+        "status": "partial_source_index_only",
+        "termsAndNameCandidatesInB3DIndex": [
+          "FMA37683 BP8817 long head of biceps brachii",
+          "FMA37686 BP5566 long head of right biceps brachii",
+          "FMA37372 BP8208 muscle of hand"
+        ],
+        "fullOriginInsertionFunctionText": "not surveyed/created by T43",
+        "TA2AuthorityAccess": "official_pdf_direct_open_failed_502; inherited T04 locator rows remain table_role_unverified",
+        "humanAnatomyReview": "not_performed"
+      },
+      "muscleGeometry": {
+        "officialMetadataCandidates": [
+          "FMA37683 BP8817 long head of biceps brachii",
+          "FMA37686 BP5566 long head of right biceps brachii",
+          "FMA37372 BP8208 muscle of hand"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L1351-L1353 and L1404-L1409",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "boneGeometry": {
+        "officialMetadataCandidates": [
+          "FMA23130 BP9206 right humerus",
+          "FMA23131 BP9191 left humerus",
+          "FMA23464 BP8464 right radius",
+          "FMA23467 BP8233 right ulna"
+        ],
+        "indexLocator": "isa_parts_list_e.txt L1078-L1088",
+        "localProductAssetStatus": "none_in_T15g_local_asset_inventory",
+        "productBoneMembershipRows": 0,
+        "meshDownloadedInT43": false,
+        "identityQualityReviewed": false
+      },
+      "laterality": {
+        "observedOfficialIndexExamples": [
+          "FMA37683 BP8817 long head of biceps brachii",
+          "FMA37686 BP5566 long head of right biceps brachii",
+          "FMA37372 BP8208 muscle of hand",
+          "FMA23130 BP9206 right humerus",
+          "FMA23131 BP9191 left humerus",
+          "FMA23464 BP8464 right radius",
+          "FMA23467 BP8233 right ulna"
+        ],
+        "indexContainsExplicitSideLabelsInExamples": true,
+        "regionWideBilateralCompletenessAudited": false,
+        "currentProductSceneSides": [],
+        "mirroringAssumed": false
+      },
+      "licenseAndRights": {
+        "bodyParts3d": "CC BY 4.0 at database level; required credit recorded in source-access.json; source model quality/identity not certified by license",
+        "openSimModels": [
+          "Arm26: right upper extremity, 2 DOF/6 muscles, CC BY 3.0 as listed; Upper Extremity Dynamic Model: right shoulder/arm, MIT; Kinematic Arm with Articulated Hand: 20 hand DOF, no muscles and license listed as None. These are distinct models; no one is a full bilateral viewer rig."
+        ],
+        "perFileRedistributionAudit": "not performed for project-local source model files"
+      },
+      "rigAndMotion": {
+        "sourceModelCandidates": [
+          "Arm26: right upper extremity, 2 DOF/6 muscles, CC BY 3.0 as listed; Upper Extremity Dynamic Model: right shoulder/arm, MIT; Kinematic Arm with Articulated Hand: 20 hand DOF, no muscles and license listed as None. These are distinct models; no one is a full bilateral viewer rig."
+        ],
+        "movementGroupCandidates": [
+          "shoulder/elbow/wrist/hand kinematics candidate groups; exact muscle actuation and license depend on chosen source model"
+        ],
+        "viewerReadyRig": "none verified for this category",
+        "productionMotionDefinitions": 0,
+        "productionMotionAssetsOrClips": 0
+      },
+      "productAcquisitionStatus": "additional_build_needed",
+      "gapsAndNextActions": [
+        "T15g has 10 upper_extremity source rows and zero hand rows. The BodyParts3D hand group entry does not imply hand member enumeration.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    }
+  ],
+  "sharedMotionGroupCandidates": [
+    {
+      "groupId": "ocular-movement",
+      "regions": [
+        "head"
+      ],
+      "model": "Oculomotor Model",
+      "source": "OPENSIM-model-catalog",
+      "locator": "Lines 201-203",
+      "licenseAsListed": "CC BY 4.0",
+      "status": "candidate_only_not_viewer_ready"
+    },
+    {
+      "groupId": "cervical-movement",
+      "regions": [
+        "neck"
+      ],
+      "model": "Human Neck Model",
+      "source": "OPENSIM-human-neck-model",
+      "locator": "Lines 89-118",
+      "licenseAsListed": "not stated in opened page",
+      "status": "candidate_only_archive_not_downloaded"
+    },
+    {
+      "groupId": "thoracolumbar-trunk",
+      "regions": [
+        "back",
+        "thorax",
+        "abdomen-lumbar"
+      ],
+      "model": "Thoracolumbar spine and rib cage",
+      "source": "OPENSIM-model-catalog",
+      "locator": "Lines 193-194",
+      "licenseAsListed": "MIT",
+      "status": "candidate_only_separate model frame/pose validation required"
+    },
+    {
+      "groupId": "shoulder-upper-limb",
+      "regions": [
+        "shoulder-scapular",
+        "upper-limb"
+      ],
+      "model": "Upper Extremity Dynamic Model / Arm26 / Kinematic Arm with Articulated Hand",
+      "source": "OPENSIM-model-catalog",
+      "locator": "Lines 158, 180-181, 204-205",
+      "licenseAsListed": "per model row; CC BY 3.0, MIT, or None",
+      "status": "different models; do not merge or assume shared clip"
+    },
+    {
+      "groupId": "lower-limb-gait",
+      "regions": [
+        "gluteal-hip",
+        "thigh",
+        "leg",
+        "foot"
+      ],
+      "model": "gait2392/gait2354/leg6dof9musc/Full Body Running",
+      "source": "OPENSIM-model-catalog",
+      "locator": "Lines 146-157 and 185-187",
+      "licenseAsListed": "CC BY 3.0 for core models; Custom for Full Body Running",
+      "status": "candidate only; product production clip remains zero"
+    },
+    {
+      "groupId": "pelvic-floor",
+      "regions": [
+        "pelvis-perineum"
+      ],
+      "model": null,
+      "source": "OPENSIM-model-catalog",
+      "locator": "opened full model matrix, no pelvic-floor/perineal actuator model located",
+      "licenseAsListed": null,
+      "status": "no candidate located in this bounded source"
+    }
+  ],
+  "firstExpansionRecommendation": {
+    "categoryId": "shoulder-scapular",
+    "status": "recommendation_for_T32_evaluation_only",
+    "why": [
+      "10 T15g partial source concepts provide a concrete, bounded input set without assigning lower_extremity concepts.",
+      "BodyParts3D index rows expose right and left scapula/clavicle and deltoid-part candidate representations.",
+      "OpenSim documentation lists a right upper-extremity shoulder/arm dynamic model with model-specific MIT license.",
+      "This region is outside the current calf scene and has a traceable metadata→ELEMENT ID→OBJ acquisition path."
+    ],
+    "notProven": [
+      "No local shoulder mesh/scene exists in T15g.",
+      "No project canonical mapping or regional membership is approved.",
+      "No exact frame/pose/mesh quality or learner clip is verified.",
+      "License is a candidate source license, not distribution clearance for a derivative scene."
+    ],
+    "recommendedNextInput": "After T31 actual acceptance, T32 may choose a bounded shoulder-scapular package; first resolve TA2 access/locators, per-concept membership, name triplets, and BodyParts3D ELEMENT-ID expansion/license/hash."
+  },
+  "sourceAccessFile": "work/evidence/T43/source-access.json",
+  "gapFile": "work/review-queue/region-acquisition-gaps-t43.json",
+  "t32InputFile": "work/review-queue/t32-input-t43.json",
+  "humanReview": "not_performed",
+  "wholeBodyComplete": false
+}

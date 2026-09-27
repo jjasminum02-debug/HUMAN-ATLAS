@@ -1,0 +1,425 @@
+{
+  "task": "T32",
+  "inputRevision": "T43-to-T32-input-v1",
+  "preparedOn": "2026-09-27",
+  "status": "preparatory_input_only_T32_not_started",
+  "registryGate": {
+    "taskRegistry": "work/task-registry-r14.json",
+    "T31Status": "planned_not_started",
+    "T32Status": "planned_not_started",
+    "T32Prerequisite": "T31",
+    "currentQueueNextAfterT43": "T44 / Sol High",
+    "note": "T43 is a R14-inserted survey before T44; this input does not change queue or authorize T32."
+  },
+  "reuseInputs": {
+    "regionMatrix": "work/review-queue/region-acquisition-matrix-t43.json",
+    "regionMatrixSha256": "72f8370afe065730f85e45a53491d75f215a0d5ff02c9708dedece623a7eb1e4",
+    "gapList": "work/review-queue/region-acquisition-gaps-t43.json",
+    "inventory": "atlas-data/catalog/whole-body-inventory-t15g.json",
+    "inventorySha256": "b878522e346b5f285ea450fd7194ed0b7a5043e21e702370bb9702c790e7a238",
+    "regionCrosswalk": "work/review-queue/region-crosswalk-t15g.json",
+    "regionCrosswalkSha256": "6e21430f32d7284d3a59e887b9deb9fee874683059d98645a4f9b77c19bdacbc",
+    "T31ReportExpected": "work/reports/T31.md",
+    "T31ReportCurrentState": "not_present; registry task remains planned_not_started"
+  },
+  "denominatorCandidate": {
+    "status": "not_frozen",
+    "targetEntity": "named skeletal muscle concept",
+    "wholeBodyIndividualMuscleCount": null,
+    "currentPartialUniqueStableIdCandidates": 85,
+    "currentPartialIndividualMuscleConcepts": 48,
+    "currentPartialGroups": 16,
+    "currentPartialParts": 21,
+    "variants": 0,
+    "productMembershipRows": 6,
+    "productBoneMembershipRows": 0,
+    "suggestedRules": [
+      "Count each stable named individual skeletal-muscle concept once in the unique denominator.",
+      "Do not count muscle groups, parts/heads, side instances, meshes, scene bindings or product memberships as additional individual-muscle concepts.",
+      "Record left/right as instances unless the authoritative source defines a distinct concept; do not duplicate canonical IDs by side.",
+      "Keep variants as separate records and decide whether each belongs in the denominator based on the frozen authority-level rule.",
+      "Exclude cardiac/smooth muscle and non-muscle tissue from the skeletal-muscle target; document boundary decisions for pharynx/larynx, facial/masticatory/ocular/tongue muscle groups, pelvic floor, accessory/variant muscles.",
+      "Allow one stable concept ID to have multiple evidence-backed product memberships; sum unique stable IDs separately from membership rows."
+    ],
+    "requiredOpenDecisions": [
+      "TA2 Part 2 full authority rows and exact column role",
+      "whole-body inclusion/exclusion policy",
+      "source-to-product region membership decisions",
+      "lower_extremity 4 group + 2 part ID routing or held reason",
+      "variant/duplicated muscle and bilateral instance treatment"
+    ]
+  },
+  "regionPackagingCandidates": [
+    {
+      "categoryId": "head",
+      "labelKo": "머리",
+      "candidateUniqueStableIds": [
+        "HA-G-000001",
+        "HA-G-000002",
+        "HA-G-000003",
+        "HA-G-000004",
+        "HA-M-000007",
+        "HA-M-000008",
+        "HA-M-000009",
+        "HA-M-000010",
+        "HA-M-000011",
+        "HA-M-000012",
+        "HA-M-000013",
+        "HA-M-000014",
+        "HA-M-000015",
+        "HA-M-000016",
+        "HA-M-000017",
+        "HA-M-000018",
+        "HA-P-000003",
+        "HA-P-000004",
+        "HA-P-000005",
+        "HA-P-000006",
+        "HA-P-000007",
+        "HA-P-000008"
+      ],
+      "productMembershipStableIds": [],
+      "sceneIds": [],
+      "targetStatus": "additional_build_needed",
+      "textGeometryMotionGaps": [
+        "BodyParts3D index lookup for literal “masseter” and “temporalis” returned no match (L0, no matching text); this is a bounded index-search gap, not proof of model absence.",
+        "T15g head pool merges source head/face/mastication/eye/tongue only as routing candidates.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "neck",
+      "labelKo": "목",
+      "candidateUniqueStableIds": [],
+      "productMembershipStableIds": [],
+      "sceneIds": [],
+      "targetStatus": "additional_build_needed",
+      "textGeometryMotionGaps": [
+        "No neck source rows in the current T15g crosswalk; official index entries do not create project canonical IDs or memberships.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "back",
+      "labelKo": "등",
+      "candidateUniqueStableIds": [
+        "HA-G-000005",
+        "HA-M-000019",
+        "HA-M-000020",
+        "HA-M-000021",
+        "HA-M-000022",
+        "HA-M-000023",
+        "HA-P-000009",
+        "HA-P-000010",
+        "HA-P-000011"
+      ],
+      "productMembershipStableIds": [],
+      "sceneIds": [],
+      "targetStatus": "additional_build_needed",
+      "textGeometryMotionGaps": [
+        "T15g has 9 source-index rows but not exhaustive enumeration.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "shoulder-scapular",
+      "labelKo": "어깨·어깨뼈",
+      "candidateUniqueStableIds": [
+        "HA-G-000008",
+        "HA-G-000009",
+        "HA-M-000030",
+        "HA-M-000031",
+        "HA-M-000032",
+        "HA-M-000033",
+        "HA-M-000034",
+        "HA-P-000014",
+        "HA-P-000015",
+        "HA-P-000016"
+      ],
+      "productMembershipStableIds": [],
+      "sceneIds": [],
+      "targetStatus": "additional_build_needed",
+      "textGeometryMotionGaps": [
+        "Recommended first non-calf expansion input: T15g has 10 partial source IDs here; official index provides explicit right/left scapula/clavicle rows and deltoid-part entries; no local shoulder mesh or scene is currently inventoried.",
+        "Concrete acquisition route: query FMA/BP IDs in the opened IS-A metadata list; resolve compound concepts to ELEMENT file IDs using the documented isa_element_parts.txt table; select only required OBJ members from the official 99%-reduced IS-A archive after recording hashes and CC BY attribution. Do not use representation ID as an OBJ filename without the element mapping.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "thorax",
+      "labelKo": "가슴우리",
+      "candidateUniqueStableIds": [
+        "HA-G-000006",
+        "HA-M-000024",
+        "HA-M-000025",
+        "HA-M-000026",
+        "HA-M-000027",
+        "HA-P-000012",
+        "HA-P-000013"
+      ],
+      "productMembershipStableIds": [],
+      "sceneIds": [],
+      "targetStatus": "additional_build_needed",
+      "textGeometryMotionGaps": [
+        "T15g has 7 source-index rows, not an exhaustive thorax or respiratory-muscle list.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "abdomen-lumbar",
+      "labelKo": "배·허리",
+      "candidateUniqueStableIds": [
+        "HA-M-000028",
+        "HA-M-000029"
+      ],
+      "productMembershipStableIds": [],
+      "sceneIds": [],
+      "targetStatus": "additional_build_needed",
+      "textGeometryMotionGaps": [
+        "T15g has 2 abdominal-wall rows only; no full abdominal or lumbar muscle list is available. “rectus abdominis” no-hit in this exact table lookup is not an absence claim.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "pelvis-perineum",
+      "labelKo": "골반·샅",
+      "candidateUniqueStableIds": [],
+      "productMembershipStableIds": [],
+      "sceneIds": [],
+      "targetStatus": "additional_build_needed",
+      "textGeometryMotionGaps": [
+        "T15g source crosswalk has zero rows here; official BodyParts3D candidate rows are an acquisition lead, not membership decisions.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "gluteal-hip",
+      "labelKo": "볼기·깊은엉덩이",
+      "candidateUniqueStableIds": [
+        "HA-G-000011",
+        "HA-G-000012",
+        "HA-M-000039",
+        "HA-M-000040",
+        "HA-M-000041",
+        "HA-M-000042",
+        "HA-M-000043",
+        "HA-M-000044",
+        "HA-M-000045",
+        "HA-M-000046"
+      ],
+      "productMembershipStableIds": [],
+      "sceneIds": [],
+      "targetStatus": "additional_build_needed",
+      "textGeometryMotionGaps": [
+        "T15g has 10 gluteal source rows, not a complete hip or gluteal list.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "thigh",
+      "labelKo": "넙다리",
+      "candidateUniqueStableIds": [],
+      "productMembershipStableIds": [],
+      "sceneIds": [],
+      "targetStatus": "additional_build_needed",
+      "textGeometryMotionGaps": [
+        "No separate thigh sourceRegion in T15g; lower_extremity records are not auto-routed to thigh. B3D rows are external acquisition candidates only.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "leg",
+      "labelKo": "종아리",
+      "candidateUniqueStableIds": [
+        "HA-M-000001",
+        "HA-M-000002",
+        "HA-M-000003",
+        "HA-M-000004",
+        "HA-M-000005",
+        "HA-M-000006"
+      ],
+      "productMembershipStableIds": [
+        "HA-M-000001",
+        "HA-M-000002",
+        "HA-M-000003",
+        "HA-M-000004",
+        "HA-M-000005",
+        "HA-M-000006"
+      ],
+      "sceneIds": [
+        "HA-SCENE-LEG-RIGHT-PILOT-T12B",
+        "HA-SCENE-LEG-RIGHT-BONES-T13"
+      ],
+      "targetStatus": "static_only",
+      "textGeometryMotionGaps": [
+        "Current right calf pilot only: 6 muscle product membership rows, 2 static scenes; 9 right scene-bound bone IDs are context/selection bindings, not bone RegionMembership rows. Static partial scene is not a full leg catalog.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "foot",
+      "labelKo": "발",
+      "candidateUniqueStableIds": [
+        "HA-G-000016",
+        "HA-M-000047",
+        "HA-M-000048"
+      ],
+      "productMembershipStableIds": [],
+      "sceneIds": [],
+      "targetStatus": "additional_build_needed",
+      "textGeometryMotionGaps": [
+        "T15g includes only 3 foot source rows (one group, two individual muscles); not exhaustive. 3 other T13 right metatarsal mesh contexts are unbound, and are not foot membership.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    },
+    {
+      "categoryId": "upper-limb",
+      "labelKo": "팔·손",
+      "candidateUniqueStableIds": [
+        "HA-G-000007",
+        "HA-M-000035",
+        "HA-M-000036",
+        "HA-M-000037",
+        "HA-M-000038",
+        "HA-P-000017",
+        "HA-P-000018",
+        "HA-P-000019",
+        "HA-P-000020",
+        "HA-P-000021"
+      ],
+      "productMembershipStableIds": [],
+      "sceneIds": [],
+      "targetStatus": "additional_build_needed",
+      "textGeometryMotionGaps": [
+        "T15g has 10 upper_extremity source rows and zero hand rows. The BodyParts3D hand group entry does not imply hand member enumeration.",
+        "Resolve source terminology rows and name triplets without guessing; preserve original English/Latin evidence.",
+        "Map FMA concept → BodyParts3D representation → ELEMENT file ID → local hash; independently inspect mesh identity, side, topology and pose before scene inclusion.",
+        "Record model-specific rights, frame/unit/pose and movement clip compatibility before any viewer rig or clip is created."
+      ]
+    }
+  ],
+  "firstExpansionRecommendation": {
+    "categoryId": "shoulder-scapular",
+    "status": "recommendation_for_T32_evaluation_only",
+    "why": [
+      "10 T15g partial source concepts provide a concrete, bounded input set without assigning lower_extremity concepts.",
+      "BodyParts3D index rows expose right and left scapula/clavicle and deltoid-part candidate representations.",
+      "OpenSim documentation lists a right upper-extremity shoulder/arm dynamic model with model-specific MIT license.",
+      "This region is outside the current calf scene and has a traceable metadata→ELEMENT ID→OBJ acquisition path."
+    ],
+    "notProven": [
+      "No local shoulder mesh/scene exists in T15g.",
+      "No project canonical mapping or regional membership is approved.",
+      "No exact frame/pose/mesh quality or learner clip is verified.",
+      "License is a candidate source license, not distribution clearance for a derivative scene."
+    ],
+    "recommendedNextInput": "After T31 actual acceptance, T32 may choose a bounded shoulder-scapular package; first resolve TA2 access/locators, per-concept membership, name triplets, and BodyParts3D ELEMENT-ID expansion/license/hash."
+  },
+  "movementGroups": [
+    {
+      "groupId": "ocular-movement",
+      "regions": [
+        "head"
+      ],
+      "model": "Oculomotor Model",
+      "source": "OPENSIM-model-catalog",
+      "locator": "Lines 201-203",
+      "licenseAsListed": "CC BY 4.0",
+      "status": "candidate_only_not_viewer_ready"
+    },
+    {
+      "groupId": "cervical-movement",
+      "regions": [
+        "neck"
+      ],
+      "model": "Human Neck Model",
+      "source": "OPENSIM-human-neck-model",
+      "locator": "Lines 89-118",
+      "licenseAsListed": "not stated in opened page",
+      "status": "candidate_only_archive_not_downloaded"
+    },
+    {
+      "groupId": "thoracolumbar-trunk",
+      "regions": [
+        "back",
+        "thorax",
+        "abdomen-lumbar"
+      ],
+      "model": "Thoracolumbar spine and rib cage",
+      "source": "OPENSIM-model-catalog",
+      "locator": "Lines 193-194",
+      "licenseAsListed": "MIT",
+      "status": "candidate_only_separate model frame/pose validation required"
+    },
+    {
+      "groupId": "shoulder-upper-limb",
+      "regions": [
+        "shoulder-scapular",
+        "upper-limb"
+      ],
+      "model": "Upper Extremity Dynamic Model / Arm26 / Kinematic Arm with Articulated Hand",
+      "source": "OPENSIM-model-catalog",
+      "locator": "Lines 158, 180-181, 204-205",
+      "licenseAsListed": "per model row; CC BY 3.0, MIT, or None",
+      "status": "different models; do not merge or assume shared clip"
+    },
+    {
+      "groupId": "lower-limb-gait",
+      "regions": [
+        "gluteal-hip",
+        "thigh",
+        "leg",
+        "foot"
+      ],
+      "model": "gait2392/gait2354/leg6dof9musc/Full Body Running",
+      "source": "OPENSIM-model-catalog",
+      "locator": "Lines 146-157 and 185-187",
+      "licenseAsListed": "CC BY 3.0 for core models; Custom for Full Body Running",
+      "status": "candidate only; product production clip remains zero"
+    },
+    {
+      "groupId": "pelvic-floor",
+      "regions": [
+        "pelvis-perineum"
+      ],
+      "model": null,
+      "source": "OPENSIM-model-catalog",
+      "locator": "opened full model matrix, no pelvic-floor/perineal actuator model located",
+      "licenseAsListed": null,
+      "status": "no candidate located in this bounded source"
+    }
+  ],
+  "packageFieldsT32MustFreeze": [
+    "stable ID list and ID upper bound",
+    "included group/individual/part/variant counts",
+    "product memberships (same IDs can occur in multiple categories)",
+    "target scene/source revision",
+    "name triplets per item",
+    "origin/insertion and action text availability separately",
+    "movement/clip references separately",
+    "mesh/laterality/license/hash/frame/pose status",
+    "explicit exception list and pass criteria"
+  ],
+  "notAnImplementationOrApproval": true
+}

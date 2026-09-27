@@ -1,0 +1,379 @@
+{
+  "task": "T43",
+  "checkedOn": "2026-09-27",
+  "accessMethodPolicy": "search index, opened source, existing local crosswalk, and human review are separate evidence states.",
+  "sources": [
+    {
+      "id": "BODYParts3D-LATEST-ISA",
+      "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_parts_list_e.txt",
+      "editionOrVersion": "Archive README dated 2025-02-27; mesh content Release 4.0 last updated 2013-06-19",
+      "locator": "IS-A text index: 2,906 lines, columns concept ID / representation ID / English label; region-specific matching rows and 0-based line locators are embedded in each matrix row.",
+      "checkedOn": "2026-09-27",
+      "accessMethod": "official text/plain URL opened and find queries; no downloaded copy retained",
+      "accessStatus": "opened_successfully_metadata_only",
+      "limits": [
+        "Adult human male whole-body model.",
+        "Metadata hit is only a candidate mapping. The README says compound organs are assembled from atomic ELEMENT records; exact element file expansion must use isa_element_parts.txt.",
+        "No geometry archive downloaded or new output files created."
+      ]
+    },
+    {
+      "id": "BODYParts3D-README",
+      "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/README_e.html",
+      "editionOrVersion": "README page dated 2025-02-27; Release 4.0 polygon update 2013-06-19",
+      "locator": "Lines 0-5 adult male model; lines 35-42 IS-A table semantics; lines 97-123 compound-to-ELEMENT mapping; lines 126-142 OBJ bundles; lines 150-176 CC BY 4.0/attribution and history.",
+      "checkedOn": "2026-09-27",
+      "accessMethod": "official HTML opened and read",
+      "accessStatus": "opened_successfully",
+      "rights": "CC BY 4.0; attribution: BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International."
+    },
+    {
+      "id": "BODYParts3D-download-inventory",
+      "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html",
+      "editionOrVersion": "Archive download inventory currently exposes Release 4.0 OBJ bundle names",
+      "locator": "Rows 2-3 metadata tables; rows 8-9 99%-reduced OBJ zip sizes (136 MB IS-A; 62 MB PART-OF).",
+      "checkedOn": "2026-09-27",
+      "accessMethod": "official download page opened and read; bundle links not followed/downloaded",
+      "accessStatus": "opened_successfully_inventory_only",
+      "excludedAction": "No full mesh archive downloaded, as instructed."
+    },
+    {
+      "id": "BODYParts3D-license",
+      "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+      "editionOrVersion": "License page last updated 2025-02-27",
+      "locator": "Lines 25-40 CC BY 4.0, attribution and conditions.",
+      "checkedOn": "2026-09-27",
+      "accessMethod": "official HTML opened and read",
+      "accessStatus": "opened_successfully"
+    },
+    {
+      "id": "OPENSIM-model-catalog",
+      "url": "https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim/pages/53090607",
+      "editionOrVersion": "OpenSim documentation page updated 2022-10-04; individual catalog entries specify their own model dates/versions",
+      "locator": "Core models lines 141-160; Upper Extremity Dynamic Model lines 180-181; Full Body Running lines 185-187; Thoracolumbar and Lumbar models lines 193-196; Oculomotor lines 201-203; Kinematic Hand model lines 204-205.",
+      "checkedOn": "2026-09-27",
+      "accessMethod": "official OpenSim model matrix opened and read",
+      "accessStatus": "opened_successfully_metadata_only",
+      "rights": "Varies by individual row: examples include CC BY 3.0, CC BY 4.0, MIT, Custom and None; no single license is inferred for OpenSim_Models or all projects.",
+      "limits": [
+        "Model archives were not downloaded or opened in this survey.",
+        "Documentation entries describe different models and cannot be merged as one rig or coordinate system."
+      ]
+    },
+    {
+      "id": "OPENSIM-human-neck-model",
+      "url": "https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim24/pages/54002303/Human%2BNeck%2BModel",
+      "editionOrVersion": "OpenSim 2.4 documentation; page published 2012-08-15",
+      "locator": "Lines 89-110 identifies model and states 19 individual muscles and motion ranges; lines 114-118 has model link/publication.",
+      "checkedOn": "2026-09-27",
+      "accessMethod": "official historical documentation opened and read; link target not downloaded",
+      "accessStatus": "opened_successfully_documentation_only",
+      "rights": "Not stated on the opened page; verify at the model archive before reuse."
+    },
+    {
+      "id": "FIPAT-TA2-Part-2",
+      "url": "https://fipat.library.dal.ca/wp-content/uploads/2020/09/FIPAT-TA2-Part-2.pdf",
+      "editionOrVersion": "Existing T04 crosswalk labels it TA2 Second Edition, online edition 2019; this bibliographic label is inherited, not reverified from opened PDF during T43.",
+      "locator": "Existing source-crosswalk catalogItems contain printedPage/tableRow per current 85 partial IDs. termCellRoleStatus remains unverified_without_local_visual_review_of_the_source_table. Search index showed a TA2 table excerpt around rows 2053-2074, but that is not a direct PDF read.",
+      "checkedOn": "2026-09-27",
+      "accessMethod": "direct official PDF open attempted and returned HTTP 502; search index result inspected separately",
+      "accessStatus": "direct_open_failed_502_search_index_only",
+      "alternative": "Keep current locators as provisional; do not replace TA2 with BodyParts3D labels. Retry official PDF or use a legitimate accessible edition copy and visually audit column roles before term-level use."
+    },
+    {
+      "id": "T15g-local-inventory",
+      "url": "local://atlas-data/catalog/whole-body-inventory-t15g.json",
+      "editionOrVersion": "T15g-planning-inventory-v1; sourceCatalogStatus partial_source_index_extract",
+      "locator": "JSON sections counts/sourceRegionCounts/currentMuscleConceptInventory/currentCanonicalBoneInventory/knownGaps; exact SHA256 stored below.",
+      "checkedOn": "2026-09-27",
+      "accessMethod": "local JSON read; not treated as externally verified authority",
+      "accessStatus": "opened_successfully_existing_internal_inventory",
+      "rights": "Original project asset rights retained; no file copied or modified."
+    }
+  ],
+  "regionIndexLookups": {
+    "head": {
+      "bodyParts3dIsATable": "BODYParts3D-LATEST-ISA",
+      "muscleLocator": "isa_parts_list_e.txt L1764-L1774; head bone candidate FMA52748 BP8107 mandible at L2055; right/left maxilla L2068-L2069",
+      "muscleHits": [
+        "FMA46751 BP4926 muscle of face",
+        "FMA49033 BP4927 extra-ocular muscle"
+      ],
+      "boneLocator": "isa_parts_list_e.txt L2055-L2069",
+      "boneHits": [
+        "FMA52748 BP8107 mandible",
+        "FMA53649 BP8309 right maxilla",
+        "FMA53650 BP9046 left maxilla"
+      ],
+      "accessInterpretation": "Opened official index candidates only; not local assets, canonical membership, or human anatomical validation."
+    },
+    "neck": {
+      "bodyParts3dIsATable": "BODYParts3D-LATEST-ISA",
+      "muscleLocator": "isa_parts_list_e.txt L431-L439 and L453-L455",
+      "muscleHits": [
+        "FMA13385 BP4879 scalenus anterior",
+        "FMA13386 BP4877 scalenus medius",
+        "FMA13407 BP4908 sternocleidomastoid"
+      ],
+      "boneLocator": "isa_parts_list_e.txt L320-L321 and L365-L372",
+      "boneHits": [
+        "FMA9915 BP7846 cervical vertebra",
+        "FMA12519 BP8831 atlas",
+        "FMA12520 BP8459 axis"
+      ],
+      "accessInterpretation": "Opened official index candidates only; not local assets, canonical membership, or human anatomical validation."
+    },
+    "back": {
+      "bodyParts3dIsATable": "BODYParts3D-LATEST-ISA",
+      "muscleLocator": "isa_parts_list_e.txt L425-L430 and L1262-L1320",
+      "muscleHits": [
+        "FMA33581 BP5638 ascending part of right trapezius",
+        "FMA33583 BP8225 ascending part of left trapezius",
+        "FMA13379 BP9246 rhomboid major",
+        "FMA13380 BP8586 rhomboid minor"
+      ],
+      "boneLocator": "isa_parts_list_e.txt L262-L265 and L320-L322",
+      "boneHits": [
+        "FMA9139 BP8044 thoracic vertebra",
+        "FMA9921 BP8134 lumbar vertebra"
+      ],
+      "accessInterpretation": "Opened official index candidates only; not local assets, canonical membership, or human anatomical validation."
+    },
+    "shoulder-scapular": {
+      "bodyParts3dIsATable": "BODYParts3D-LATEST-ISA",
+      "muscleLocator": "isa_parts_list_e.txt L383-L384, L440-L442, and L1321-L1330",
+      "muscleHits": [
+        "FMA34680 BP7573 clavicular part of right deltoid",
+        "FMA34682 BP7571 acromial part of right deltoid",
+        "FMA34684 BP5607 spinal part of right deltoid",
+        "FMA13109 BP9039 pectoralis minor",
+        "FMA13413 BP8215 subscapularis"
+      ],
+      "boneLocator": "isa_parts_list_e.txt L396-L398 and L440-L442",
+      "boneHits": [
+        "FMA13395 BP9101 right scapula",
+        "FMA13396 BP9121 left scapula",
+        "FMA13322 BP9271 right clavicle",
+        "FMA13323 BP8841 left clavicle"
+      ],
+      "accessInterpretation": "Opened official index candidates only; not local assets, canonical membership, or human anatomical validation."
+    },
+    "thorax": {
+      "bodyParts3dIsATable": "BODYParts3D-LATEST-ISA",
+      "muscleLocator": "isa_parts_list_e.txt L314-L321 and L421",
+      "muscleHits": [
+        "FMA9756 BP8306 external intercostal muscle",
+        "FMA9757 BP8018 internal intercostal muscle",
+        "FMA9758 BP9146 innermost intercostal muscle",
+        "FMA13354 BP8019 intercostal muscle"
+      ],
+      "boneLocator": "isa_parts_list_e.txt L159-L175",
+      "boneHits": [
+        "FMA7486 BP8562 manubrium",
+        "FMA7487 BP8989 body of sternum",
+        "FMA7574 BP8085 rib"
+      ],
+      "accessInterpretation": "Opened official index candidates only; not local assets, canonical membership, or human anatomical validation."
+    },
+    "abdomen-lumbar": {
+      "bodyParts3dIsATable": "BODYParts3D-LATEST-ISA",
+      "muscleLocator": "isa_parts_list_e.txt L405-L407; literal “rectus abdominis” lookup had no matching text",
+      "muscleHits": [
+        "FMA13335 BP8155 external oblique",
+        "FMA13336 BP4967 right external oblique"
+      ],
+      "boneLocator": "isa_parts_list_e.txt L322 and L377-L381",
+      "boneHits": [
+        "FMA9921 BP8134 lumbar vertebra",
+        "FMA13072 BP8948 first lumbar vertebra",
+        "FMA13076 BP8280 fifth lumbar vertebra"
+      ],
+      "accessInterpretation": "Opened official index candidates only; not local assets, canonical membership, or human anatomical validation."
+    },
+    "pelvis-perineum": {
+      "bodyParts3dIsATable": "BODYParts3D-LATEST-ISA",
+      "muscleLocator": "isa_parts_list_e.txt L300, L700-L707, and L1627-L1632",
+      "muscleHits": [
+        "FMA19090 BP7792 pubococcygeus",
+        "FMA19091 BP8203 puborectalis",
+        "FMA19092 BP8008 iliococcygeus",
+        "FMA9623 BP8936 perineal muscle"
+      ],
+      "boneLocator": "isa_parts_list_e.txt L654-L658",
+      "boneHits": [
+        "FMA16202 BP9174 sacrum",
+        "FMA16585 BP8769 hip bone",
+        "FMA16586 BP8768 right hip bone",
+        "FMA16587 BP8950 left hip bone"
+      ],
+      "accessInterpretation": "Opened official index candidates only; not local assets, canonical membership, or human anatomical validation."
+    },
+    "gluteal-hip": {
+      "bodyParts3dIsATable": "BODYParts3D-LATEST-ISA",
+      "muscleLocator": "isa_parts_list_e.txt L768-L789",
+      "muscleHits": [
+        "FMA22314 BP8402 gluteus maximus",
+        "FMA22315 BP9214 gluteus medius",
+        "FMA22317 BP8624 gluteus minimus",
+        "FMA22340 BP5076 right piriformis"
+      ],
+      "boneLocator": "isa_parts_list_e.txt L656-L658 and L1172-L1173",
+      "boneHits": [
+        "FMA16585 BP8769 hip bone",
+        "FMA16586 BP8768 right hip bone",
+        "FMA24474 BP8920 right femur"
+      ],
+      "accessInterpretation": "Opened official index candidates only; not local assets, canonical membership, or human anatomical validation."
+    },
+    "thigh": {
+      "bodyParts3dIsATable": "BODYParts3D-LATEST-ISA",
+      "muscleLocator": "isa_parts_list_e.txt L807-L815 and L1506-L1513",
+      "muscleHits": [
+        "FMA22430 BP8095 rectus femoris",
+        "FMA22431 BP8755 vastus lateralis",
+        "FMA22432 BP9129 vastus medialis",
+        "FMA22433 BP9208 vastus intermedius"
+      ],
+      "boneLocator": "isa_parts_list_e.txt L1172-L1184",
+      "boneHits": [
+        "FMA24474 BP8920 right femur",
+        "FMA24475 BP9042 left femur",
+        "FMA24485 BP8379 patella"
+      ],
+      "accessInterpretation": "Opened official index candidates only; not local assets, canonical membership, or human anatomical validation."
+    },
+    "leg": {
+      "bodyParts3dIsATable": "BODYParts3D-LATEST-ISA",
+      "muscleLocator": "isa_parts_list_e.txt L840-L865 and L1642-L1648",
+      "muscleHits": [
+        "FMA22544 BP5018 right tibialis anterior",
+        "FMA22558 BP4999 right soleus",
+        "FMA22552 BP5013 right fibularis longus",
+        "FMA45957 BP5539 medial head of right gastrocnemius",
+        "FMA45960 BP5541 lateral head of right gastrocnemius"
+      ],
+      "boneLocator": "isa_parts_list_e.txt L1174-L1182",
+      "boneHits": [
+        "FMA24477 BP8031 right tibia",
+        "FMA24480 BP8009 right fibula",
+        "FMA24482 BP8033 right talus"
+      ],
+      "accessInterpretation": "Opened official index candidates only; not local assets, canonical membership, or human anatomical validation."
+    },
+    "foot": {
+      "bodyParts3dIsATable": "BODYParts3D-LATEST-ISA",
+      "muscleLocator": "isa_parts_list_e.txt L1372-L1383",
+      "muscleHits": [
+        "FMA37450 BP9216 flexor digitorum brevis",
+        "FMA37461 BP5048 right flexor digitorum brevis",
+        "FMA37448 BP9194 abductor hallucis"
+      ],
+      "boneLocator": "isa_parts_list_e.txt L1185-L1189 and L1194-L1212",
+      "boneHits": [
+        "FMA24491 BP8035 tarsal bone",
+        "FMA24492 BP7914 metatarsal bone",
+        "FMA24496 BP8534 calcaneus"
+      ],
+      "accessInterpretation": "Opened official index candidates only; not local assets, canonical membership, or human anatomical validation."
+    },
+    "upper-limb": {
+      "bodyParts3dIsATable": "BODYParts3D-LATEST-ISA",
+      "muscleLocator": "isa_parts_list_e.txt L1351-L1353 and L1404-L1409",
+      "muscleHits": [
+        "FMA37683 BP8817 long head of biceps brachii",
+        "FMA37686 BP5566 long head of right biceps brachii",
+        "FMA37372 BP8208 muscle of hand"
+      ],
+      "boneLocator": "isa_parts_list_e.txt L1078-L1088",
+      "boneHits": [
+        "FMA23130 BP9206 right humerus",
+        "FMA23131 BP9191 left humerus",
+        "FMA23464 BP8464 right radius",
+        "FMA23467 BP8233 right ulna"
+      ],
+      "accessInterpretation": "Opened official index candidates only; not local assets, canonical membership, or human anatomical validation."
+    }
+  },
+  "movementModelCandidates": [
+    {
+      "groupId": "ocular-movement",
+      "regions": [
+        "head"
+      ],
+      "model": "Oculomotor Model",
+      "source": "OPENSIM-model-catalog",
+      "locator": "Lines 201-203",
+      "licenseAsListed": "CC BY 4.0",
+      "status": "candidate_only_not_viewer_ready"
+    },
+    {
+      "groupId": "cervical-movement",
+      "regions": [
+        "neck"
+      ],
+      "model": "Human Neck Model",
+      "source": "OPENSIM-human-neck-model",
+      "locator": "Lines 89-118",
+      "licenseAsListed": "not stated in opened page",
+      "status": "candidate_only_archive_not_downloaded"
+    },
+    {
+      "groupId": "thoracolumbar-trunk",
+      "regions": [
+        "back",
+        "thorax",
+        "abdomen-lumbar"
+      ],
+      "model": "Thoracolumbar spine and rib cage",
+      "source": "OPENSIM-model-catalog",
+      "locator": "Lines 193-194",
+      "licenseAsListed": "MIT",
+      "status": "candidate_only_separate model frame/pose validation required"
+    },
+    {
+      "groupId": "shoulder-upper-limb",
+      "regions": [
+        "shoulder-scapular",
+        "upper-limb"
+      ],
+      "model": "Upper Extremity Dynamic Model / Arm26 / Kinematic Arm with Articulated Hand",
+      "source": "OPENSIM-model-catalog",
+      "locator": "Lines 158, 180-181, 204-205",
+      "licenseAsListed": "per model row; CC BY 3.0, MIT, or None",
+      "status": "different models; do not merge or assume shared clip"
+    },
+    {
+      "groupId": "lower-limb-gait",
+      "regions": [
+        "gluteal-hip",
+        "thigh",
+        "leg",
+        "foot"
+      ],
+      "model": "gait2392/gait2354/leg6dof9musc/Full Body Running",
+      "source": "OPENSIM-model-catalog",
+      "locator": "Lines 146-157 and 185-187",
+      "licenseAsListed": "CC BY 3.0 for core models; Custom for Full Body Running",
+      "status": "candidate only; product production clip remains zero"
+    },
+    {
+      "groupId": "pelvic-floor",
+      "regions": [
+        "pelvis-perineum"
+      ],
+      "model": null,
+      "source": "OPENSIM-model-catalog",
+      "locator": "opened full model matrix, no pelvic-floor/perineal actuator model located",
+      "licenseAsListed": null,
+      "status": "no candidate located in this bounded source"
+    }
+  ],
+  "localInputHashes": {
+    "atlas-data/catalog/whole-body-inventory-t15g.json": "b878522e346b5f285ea450fd7194ed0b7a5043e21e702370bb9702c790e7a238",
+    "work/review-queue/region-crosswalk-t15g.json": "6e21430f32d7284d3a59e887b9deb9fee874683059d98645a4f9b77c19bdacbc",
+    "atlas-data/navigation/atlas-navigation.json": "d5a32d9a350cfaa0888d38be39a3bcc070c2413a9b99a421a9ce38601d7a9e4d",
+    "atlas-data/catalog/source-crosswalk.json": "26891c9c301b79911220d491201d639cbe4a78e5d3b1fdf3df6373cd4d68238b",
+    "work/task-registry-r14.json": "9fc3d7ad1fe60c30425492800af5bbf2404649fef34d4db4f80c83379d6caae6"
+  },
+  "humanReview": "not_performed; open-source reading and index search are not anatomy approval."
+}

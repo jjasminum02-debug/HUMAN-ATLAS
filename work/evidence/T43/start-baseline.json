@@ -1,0 +1,942 @@
+{
+  "task": "T43",
+  "recordedOn": "2026-09-27",
+  "startingHead": "fccb4be958da9226a7859964784545baac46795a",
+  "initialGitStatus": [
+    " M AGENTS.md",
+    " M design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    " M design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+    " M design/2026-09-25-muscle-atlas/07-AI-EVIDENCE-AND-MOTION-DESIGN.md",
+    " M design/2026-09-25-muscle-atlas/08-SERIAL-ROADMAP-AND-GIT.md",
+    " M work/task-registry-r13.json",
+    " M work/tasks/T24.md",
+    " M work/tasks/T25.md",
+    " M work/tasks/T26.md",
+    " M work/tasks/T27.md",
+    " M work/tasks/T28.md",
+    " M work/tasks/T29.md",
+    " M work/tasks/T30.md",
+    " M work/tasks/T31.md",
+    " M work/tasks/T32.md",
+    " M work/tasks/T33.md",
+    " M work/tasks/T34.md",
+    " M work/tasks/T35.md",
+    " M work/tasks/T36.md",
+    " M work/tasks/T37.md",
+    " M work/tasks/T38.md",
+    " M work/tasks/T39.md",
+    " M work/tasks/T40.md",
+    "?? design/2026-09-25-muscle-atlas/10-STRUCTURE-FUNCTION-DELIVERY-PLAN.md",
+    "?? design/2026-09-25-muscle-atlas/11-TASK-PROMPTS-R14.md",
+    "?? design/2026-09-25-muscle-atlas/12-ASSESSMENT-ANIMATION-FUTURE.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/AGENTS.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/01-PRODUCT-AND-ARCHITECTURE.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/02-DATA-CONTRACT.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/04-SOURCES-AND-DECISIONS.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/06-REGION12-MUSCLE-BONE-REVISION.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/DECISIONS.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/STATUS.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14a.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14b.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15a.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15b.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15c.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15d.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15e.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15f.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15g.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T16.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T17.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T18.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T19.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T20.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T21.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T22.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T23.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T24.md",
+    "?? work/evidence/2026-09-26-region12-design/before/AGENTS.md",
+    "?? work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    "?? work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/01-PRODUCT-AND-ARCHITECTURE.md",
+    "?? work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/02-DATA-CONTRACT.md",
+    "?? work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+    "?? work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/04-SOURCES-AND-DECISIONS.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/DECISIONS.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/STATUS.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T15.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T16.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T17.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T18.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T19.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T20.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T21.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T22.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T23.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T24.md",
+    "?? work/evidence/2026-09-27-r14-plan/before-plan-docs/AGENTS.md",
+    "?? work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    "?? work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+    "?? work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/07-AI-EVIDENCE-AND-MOTION-DESIGN.md",
+    "?? work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/08-SERIAL-ROADMAP-AND-GIT.md",
+    "?? work/evidence/2026-09-27-r14-plan/git-status-before.txt",
+    "?? work/evidence/2026-09-27-r14-plan/head.txt",
+    "?? work/evidence/2026-09-27-r14-plan/owned-files.json",
+    "?? work/evidence/2026-09-27-r14-plan/protected-before.json",
+    "?? work/evidence/2026-09-27-r14-plan/validation.json",
+    "?? work/reports/R14-2026-09-27-PLAN.md",
+    "?? work/reviews/T22-2026-09-27/REVIEW.md",
+    "?? work/reviews/T22-2026-09-27/edge-repro.patch",
+    "?? work/reviews/T22-2026-09-27/node-tests.log",
+    "?? work/reviews/T22-2026-09-27/validation.log",
+    "?? work/reviews/T22-2026-09-27/verification.json",
+    "?? work/task-registry-r14.json",
+    "?? work/tasks/T23-R14-RESUME.md",
+    "?? work/tasks/T41.md",
+    "?? work/tasks/T43.md",
+    "?? work/tasks/T44.md",
+    "?? work/tasks/T45.md",
+    "?? work/tasks/T46.md",
+    "?? work/tasks/T47.md",
+    "?? work/tasks/T48.md",
+    "?? work/tasks/T49.md",
+    "?? work/tasks/archive/R13-before-R14/T24.md",
+    "?? work/tasks/archive/R13-before-R14/T25.md",
+    "?? work/tasks/archive/R13-before-R14/T26.md",
+    "?? work/tasks/archive/R13-before-R14/T27.md",
+    "?? work/tasks/archive/R13-before-R14/T28.md",
+    "?? work/tasks/archive/R13-before-R14/T29.md",
+    "?? work/tasks/archive/R13-before-R14/T30.md",
+    "?? work/tasks/archive/R13-before-R14/T31.md",
+    "?? work/tasks/archive/R13-before-R14/T32.md",
+    "?? work/tasks/archive/R13-before-R14/T33.md",
+    "?? work/tasks/archive/R13-before-R14/T34.md",
+    "?? work/tasks/archive/R13-before-R14/T35.md",
+    "?? work/tasks/archive/R13-before-R14/T36.md",
+    "?? work/tasks/archive/R13-before-R14/T37.md",
+    "?? work/tasks/archive/R13-before-R14/T38.md",
+    "?? work/tasks/archive/R13-before-R14/T39.md",
+    "?? work/tasks/archive/R13-before-R14/T40.md"
+  ],
+  "trackedModifiedPaths": [
+    "AGENTS.md",
+    "design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    "design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+    "design/2026-09-25-muscle-atlas/07-AI-EVIDENCE-AND-MOTION-DESIGN.md",
+    "design/2026-09-25-muscle-atlas/08-SERIAL-ROADMAP-AND-GIT.md",
+    "work/task-registry-r13.json",
+    "work/tasks/T24.md",
+    "work/tasks/T25.md",
+    "work/tasks/T26.md",
+    "work/tasks/T27.md",
+    "work/tasks/T28.md",
+    "work/tasks/T29.md",
+    "work/tasks/T30.md",
+    "work/tasks/T31.md",
+    "work/tasks/T32.md",
+    "work/tasks/T33.md",
+    "work/tasks/T34.md",
+    "work/tasks/T35.md",
+    "work/tasks/T36.md",
+    "work/tasks/T37.md",
+    "work/tasks/T38.md",
+    "work/tasks/T39.md",
+    "work/tasks/T40.md"
+  ],
+  "untrackedPaths": [
+    "design/2026-09-25-muscle-atlas/10-STRUCTURE-FUNCTION-DELIVERY-PLAN.md",
+    "design/2026-09-25-muscle-atlas/11-TASK-PROMPTS-R14.md",
+    "design/2026-09-25-muscle-atlas/12-ASSESSMENT-ANIMATION-FUTURE.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/AGENTS.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/01-PRODUCT-AND-ARCHITECTURE.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/02-DATA-CONTRACT.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/04-SOURCES-AND-DECISIONS.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/06-REGION12-MUSCLE-BONE-REVISION.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/DECISIONS.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/STATUS.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14a.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14b.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15a.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15b.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15c.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15d.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15e.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15f.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15g.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T16.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T17.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T18.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T19.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T20.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T21.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T22.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T23.md",
+    "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T24.md",
+    "work/evidence/2026-09-26-region12-design/before/AGENTS.md",
+    "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/01-PRODUCT-AND-ARCHITECTURE.md",
+    "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/02-DATA-CONTRACT.md",
+    "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+    "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/04-SOURCES-AND-DECISIONS.md",
+    "work/evidence/2026-09-26-region12-design/before/work/DECISIONS.md",
+    "work/evidence/2026-09-26-region12-design/before/work/STATUS.md",
+    "work/evidence/2026-09-26-region12-design/before/work/tasks/T15.md",
+    "work/evidence/2026-09-26-region12-design/before/work/tasks/T16.md",
+    "work/evidence/2026-09-26-region12-design/before/work/tasks/T17.md",
+    "work/evidence/2026-09-26-region12-design/before/work/tasks/T18.md",
+    "work/evidence/2026-09-26-region12-design/before/work/tasks/T19.md",
+    "work/evidence/2026-09-26-region12-design/before/work/tasks/T20.md",
+    "work/evidence/2026-09-26-region12-design/before/work/tasks/T21.md",
+    "work/evidence/2026-09-26-region12-design/before/work/tasks/T22.md",
+    "work/evidence/2026-09-26-region12-design/before/work/tasks/T23.md",
+    "work/evidence/2026-09-26-region12-design/before/work/tasks/T24.md",
+    "work/evidence/2026-09-27-r14-plan/before-plan-docs/AGENTS.md",
+    "work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    "work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+    "work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/07-AI-EVIDENCE-AND-MOTION-DESIGN.md",
+    "work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/08-SERIAL-ROADMAP-AND-GIT.md",
+    "work/evidence/2026-09-27-r14-plan/git-status-before.txt",
+    "work/evidence/2026-09-27-r14-plan/head.txt",
+    "work/evidence/2026-09-27-r14-plan/owned-files.json",
+    "work/evidence/2026-09-27-r14-plan/protected-before.json",
+    "work/evidence/2026-09-27-r14-plan/validation.json",
+    "work/reports/R14-2026-09-27-PLAN.md",
+    "work/reviews/T22-2026-09-27/REVIEW.md",
+    "work/reviews/T22-2026-09-27/edge-repro.patch",
+    "work/reviews/T22-2026-09-27/node-tests.log",
+    "work/reviews/T22-2026-09-27/validation.log",
+    "work/reviews/T22-2026-09-27/verification.json",
+    "work/task-registry-r14.json",
+    "work/tasks/T23-R14-RESUME.md",
+    "work/tasks/T41.md",
+    "work/tasks/T43.md",
+    "work/tasks/T44.md",
+    "work/tasks/T45.md",
+    "work/tasks/T46.md",
+    "work/tasks/T47.md",
+    "work/tasks/T48.md",
+    "work/tasks/T49.md",
+    "work/tasks/archive/R13-before-R14/T24.md",
+    "work/tasks/archive/R13-before-R14/T25.md",
+    "work/tasks/archive/R13-before-R14/T26.md",
+    "work/tasks/archive/R13-before-R14/T27.md",
+    "work/tasks/archive/R13-before-R14/T28.md",
+    "work/tasks/archive/R13-before-R14/T29.md",
+    "work/tasks/archive/R13-before-R14/T30.md",
+    "work/tasks/archive/R13-before-R14/T31.md",
+    "work/tasks/archive/R13-before-R14/T32.md",
+    "work/tasks/archive/R13-before-R14/T33.md",
+    "work/tasks/archive/R13-before-R14/T34.md",
+    "work/tasks/archive/R13-before-R14/T35.md",
+    "work/tasks/archive/R13-before-R14/T36.md",
+    "work/tasks/archive/R13-before-R14/T37.md",
+    "work/tasks/archive/R13-before-R14/T38.md",
+    "work/tasks/archive/R13-before-R14/T39.md",
+    "work/tasks/archive/R13-before-R14/T40.md"
+  ],
+  "preexistingChangedAndUntrackedFiles": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 6273,
+      "sha256": "72b8cf3eb4a26e0119760015c2fdac52a4c88feed94c4d35b0f30f5d36403e32"
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/00-START-HERE.md",
+      "bytes": 6415,
+      "sha256": "e80c72db725a89a6fbbd127c42c607c73f5df5cd3237676b063d075eb66b0ee2"
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+      "bytes": 22540,
+      "sha256": "c89d267e5e1c8c9abf0d67c06100dadaa12fd6010c623e2a55dd842e76b3614c"
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/07-AI-EVIDENCE-AND-MOTION-DESIGN.md",
+      "bytes": 15287,
+      "sha256": "2760275e0a45c78768615ba6c6aa8348eb92848543df1c6e3f69cc598ad86185"
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/08-SERIAL-ROADMAP-AND-GIT.md",
+      "bytes": 10363,
+      "sha256": "97ef138107428bbed4e96f3969e32c3587ed643a552a1a78f67748275c5575fc"
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/10-STRUCTURE-FUNCTION-DELIVERY-PLAN.md",
+      "bytes": 15914,
+      "sha256": "6ff5ca23b647cc0c233f6ccc898790fb364df14fd059f94389832c0274061bbc"
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/11-TASK-PROMPTS-R14.md",
+      "bytes": 69995,
+      "sha256": "62d976ee47ed8a826c0b8ec68b431f777d78769358e7550c2009dd9b9bcba63e"
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/12-ASSESSMENT-ANIMATION-FUTURE.md",
+      "bytes": 6132,
+      "sha256": "feb32f537eb027e43bc2b57fbae2e85b2a3441ccfbe9ac2d1a02fd5d5a8ad702"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/AGENTS.md",
+      "bytes": 3078,
+      "sha256": "845392c2715f267cdf5d9e69124d79ba4e20c3dfeb86d87659f6ca52c45f9095"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+      "bytes": 5062,
+      "sha256": "fa1c10d18ebd247ef94de7708d648e8740a984dc7534b7ad19304e2f3e114b8b"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/01-PRODUCT-AND-ARCHITECTURE.md",
+      "bytes": 17058,
+      "sha256": "72888d4f53086b3c8e340c08e4ed63279a056b1d66df0939c6db4109b2c87268"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/02-DATA-CONTRACT.md",
+      "bytes": 14633,
+      "sha256": "cc5dd908115d3c8941fb679d225d123d8646b65304dbd639ed155e64a8bc5759"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+      "bytes": 26605,
+      "sha256": "334d016f22d56e9cd7e82c712d193663f8a80855cb752dc9546b5a9c60a33d58"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/04-SOURCES-AND-DECISIONS.md",
+      "bytes": 8890,
+      "sha256": "e9a6395a04284b8fe22fd6cae4fdd866f6f5eb7696baf17eed956e887f30f670"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/06-REGION12-MUSCLE-BONE-REVISION.md",
+      "bytes": 12382,
+      "sha256": "d04e61336d820221bcfe969643b8a84cc50b158b156e52ef7335162e9e0fcf04"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/DECISIONS.md",
+      "bytes": 16525,
+      "sha256": "24c8288c5d8ea6bb02f42790c31cf9e1dd89faf5b3b88cf0c92352468516fec7"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/STATUS.md",
+      "bytes": 16706,
+      "sha256": "88608d44eea16939fe072077b26afd0f161bc5b08a75ed1e85147e589f0d24aa"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14.md",
+      "bytes": 2219,
+      "sha256": "a38dbe238f476840db54119bf45ca4944c56c82360f3bd36ae8eef8cc0505c19"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14a.md",
+      "bytes": 5932,
+      "sha256": "4bfacd76775d63c942334e8bc9f82fbab8883f6ecf0407fead1e3694590671f7"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14b.md",
+      "bytes": 3341,
+      "sha256": "c199a1d5d5da80e49c0135ee3475718414644c5cfa506ccc512141169e5a1672"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15.md",
+      "bytes": 999,
+      "sha256": "e30313942aacd8875cfa59ecd187c47dc730f441c7d0982341dc2c2d251d7d2e"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15a.md",
+      "bytes": 2499,
+      "sha256": "2844e1e8df234eb582420813c3fc3bbf91dcbdf3ffd907690dca81bf5f441609"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15b.md",
+      "bytes": 2429,
+      "sha256": "416cc2f3c0ae5505d2ee04e9d89aa14bab7af14257a165dc451dd4a958412c31"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15c.md",
+      "bytes": 2531,
+      "sha256": "88843a6fc6c4c83b118c469e4e3c7520c86065e9be431e947a6bc7b2c0bd8b58"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15d.md",
+      "bytes": 2293,
+      "sha256": "b0112b805ca0aa31231fd26b09231bbb0c6c77812a13e5dda2c4e51aa597807f"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15e.md",
+      "bytes": 2365,
+      "sha256": "d798fa5b1bfd5b42ae2f5cccaed32a53955fc0bed677d305c4bc6fca201a0eea"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15f.md",
+      "bytes": 2194,
+      "sha256": "216e5aac3748fd8b13e31ba680c00368ac0b71bf0300db595ebf835bb17206e2"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15g.md",
+      "bytes": 2687,
+      "sha256": "0f73ad9e7483bacd7c20fde72191d2d51b5c40ce3eed9b43e01ced9c72dae2c1"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T16.md",
+      "bytes": 3207,
+      "sha256": "dd6b6e6acc9be8e15c77d1181dd6b186fd42cc22482fa59ba5ece0eeedc83d88"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T17.md",
+      "bytes": 2536,
+      "sha256": "350b1121a09dc999417b334d27ecfd60bffc51eeb31c1cdac13b3105c9158726"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T18.md",
+      "bytes": 2424,
+      "sha256": "85ef5b9bb7603698018fa99751eb65279882f010db457f9b769efe2a7d4f1b78"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T19.md",
+      "bytes": 2297,
+      "sha256": "f6731ffdb4ab1a1a0fb1ef04b42e28e3bd47be5fce0b2746ed7f76429be29b09"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T20.md",
+      "bytes": 2220,
+      "sha256": "aa50ee570d3ca724445ea1151ba8c5b2cb7e0c781056c3a55fe37f5c0658aed2"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T21.md",
+      "bytes": 2280,
+      "sha256": "f2d742daa5f12f8e610030db668594c8a055c067c96a98482c56bd6c801070cf"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T22.md",
+      "bytes": 2262,
+      "sha256": "921059a331054f6521cd2baa3095def016f958700b962b52d135f7113587da25"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T23.md",
+      "bytes": 2369,
+      "sha256": "d12f796f42c3cbc342a3377378a2acb4304ae2eecc6f8f9d74dc335ac813e64f"
+    },
+    {
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T24.md",
+      "bytes": 2621,
+      "sha256": "3c11f46003af45d2f27df83c4a47575dedc5126d9528a156d32e2fefe0576fb4"
+    },
+    {
+      "path": "work/evidence/2026-09-26-region12-design/before/AGENTS.md",
+      "bytes": 1969,
+      "sha256": "02073a30e3eb9a076ce0288249a2713e37d08d96dca8b07c1783757bbaf150a1"
+    },
+    {
+      "path": "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+      "bytes": 5529,
+      "sha256": "d97455d414b9967fd5f37d7bb6fa940a06350888595129dd4f7faa630b7bf9e0"
+    },
+    {
+      "path": "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/01-PRODUCT-AND-ARCHITECTURE.md",
+      "bytes": 16673,
+      "sha256": "751bbbe3735700fc2302d7df2bcb222f4e25f69ec71f85518a961abbbc87c682"
+    },
+    {
+      "path": "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/02-DATA-CONTRACT.md",
+      "bytes": 14264,
+      "sha256": "7f7f6326ceff91fe87c4fc5ad55a4b0b4ce315ad5d76a0eac3881fccf0df9722"
+    },
+    {
+      "path": "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+      "bytes": 25807,
+      "sha256": "d32a8bc37cdbfe6223c9452b59446fffcb2fba9ba3592710cec10b5c556069fe"
+    },
+    {
+      "path": "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/04-SOURCES-AND-DECISIONS.md",
+      "bytes": 8505,
+      "sha256": "e0457353ac0ede1b551b1f64984b4cd13e2edf280471af3d83b91d0ad086cef8"
+    },
+    {
+      "path": "work/evidence/2026-09-26-region12-design/before/work/DECISIONS.md",
+      "bytes": 16006,
+      "sha256": "84861ecf0a6a5b71bb8a93ff979917020b789e31bf0cebe1c9be406e334484bb"
+    },
+    {
+      "path": "work/evidence/2026-09-26-region12-design/before/work/STATUS.md",
+      "bytes": 14624,
+      "sha256": "1f360ecd6be2d84044233a3555ea2471fefe88eb0a1c7491c6ab322846bafec0"
+    },
+    {
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T15.md",
+      "bytes": 2224,
+      "sha256": "ae25cf1c45a59a6976dbaa011fee5527424c6824d47427b1a183830d28788a7d"
+    },
+    {
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T16.md",
+      "bytes": 2245,
+      "sha256": "6001911a86d18749086b1e3d976cdbf4249c883dc5f82c4ae4e15cfcdb033d14"
+    },
+    {
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T17.md",
+      "bytes": 2095,
+      "sha256": "4b67ca4750c15284e0a1efe1205ca2648a2ab089453e30d23a64bd11e1627594"
+    },
+    {
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T18.md",
+      "bytes": 2013,
+      "sha256": "3bde931a91c6308909787da09faaa659e83dd0c333f973becae299d1f86d9ca4"
+    },
+    {
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T19.md",
+      "bytes": 2006,
+      "sha256": "2699a2cd7738fcb2c87eafef1927ea94d52a9eb577a619fe8397c6f53f32f468"
+    },
+    {
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T20.md",
+      "bytes": 1931,
+      "sha256": "a6b06e83baae4cce672b74881a2a7a9cd8eaad84ae8357dd146ee8bb80cec7c2"
+    },
+    {
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T21.md",
+      "bytes": 1932,
+      "sha256": "bf48f8ed6940e9afefb1e1bcd803769838a50876f9269b532a39eeb44ceb161c"
+    },
+    {
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T22.md",
+      "bytes": 1969,
+      "sha256": "60f062fc423b480d6b21639e3542081ec857200137d8f11b9a2459373bdce23e"
+    },
+    {
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T23.md",
+      "bytes": 2023,
+      "sha256": "2cbdd7d9b71d5cb15bd8b19a3bd0a65aef11bf494baef9332e0cb944afc63983"
+    },
+    {
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T24.md",
+      "bytes": 2169,
+      "sha256": "83db470d63b79d80a4397c56904621dc47da6db7ffce0a74b876109827f808e2"
+    },
+    {
+      "path": "work/evidence/2026-09-27-r14-plan/before-plan-docs/AGENTS.md",
+      "bytes": 4524,
+      "sha256": "6091b2d259d9e54351b1fff20ce05ea7376281552073eafe10f705134d155b6a"
+    },
+    {
+      "path": "work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+      "bytes": 5854,
+      "sha256": "cddf8ca11aa177170927822c1781c4610ee8a468fac3ca640ca7fcaf2f335684"
+    },
+    {
+      "path": "work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+      "bytes": 21979,
+      "sha256": "965405ea06d966378824fa91ebb30570351ce9ee23e1f0579a70d585f55a17f0"
+    },
+    {
+      "path": "work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/07-AI-EVIDENCE-AND-MOTION-DESIGN.md",
+      "bytes": 14726,
+      "sha256": "221da9d69d65e3deca0c7f074f3feb650d30aa591ae91fd736452781391dd06a"
+    },
+    {
+      "path": "work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/08-SERIAL-ROADMAP-AND-GIT.md",
+      "bytes": 9802,
+      "sha256": "18d5ea1b7a9c6fce8c1a41d129c865b8c92fc01254463a05a6f52cba76a7ac66"
+    },
+    {
+      "path": "work/evidence/2026-09-27-r14-plan/git-status-before.txt",
+      "bytes": 697,
+      "sha256": "d7d2fb7fba6a6f37a4753834d2e4f7ddf512b6ad7f10021615336d33ddf41481"
+    },
+    {
+      "path": "work/evidence/2026-09-27-r14-plan/head.txt",
+      "bytes": 41,
+      "sha256": "f39e10488920afb6b773dc1c30276739c787a444ae3463b8727e767dbe19153b"
+    },
+    {
+      "path": "work/evidence/2026-09-27-r14-plan/owned-files.json",
+      "bytes": 2518,
+      "sha256": "23ddb07a2260f349cbbc0a48b1c7fe45302f960d46de1d3a73d143eb4eb6e0fa"
+    },
+    {
+      "path": "work/evidence/2026-09-27-r14-plan/protected-before.json",
+      "bytes": 14417,
+      "sha256": "f03c21e7ea357f977b45f59a0f8d115048c1f91bf430a05619d39c02326ae06b"
+    },
+    {
+      "path": "work/evidence/2026-09-27-r14-plan/validation.json",
+      "bytes": 827,
+      "sha256": "013837e3c4cd278110102b3af3ae420645a6956579744d7dd1c9b55ecae79664"
+    },
+    {
+      "path": "work/reports/R14-2026-09-27-PLAN.md",
+      "bytes": 3258,
+      "sha256": "b38d03d8fa9fd2adf034401d33bf3ffd56e48364db3db8929077184d08a228d2"
+    },
+    {
+      "path": "work/reviews/T22-2026-09-27/REVIEW.md",
+      "bytes": 15308,
+      "sha256": "3db5a5872a6635ca7de156ae473285366a967a33a3e8ef6e360a733d12ebf6b0"
+    },
+    {
+      "path": "work/reviews/T22-2026-09-27/edge-repro.patch",
+      "bytes": 1682,
+      "sha256": "70b8f7d7b1754b7c58d267385d974e67447a35a95716a6693e227a2157fbb383"
+    },
+    {
+      "path": "work/reviews/T22-2026-09-27/node-tests.log",
+      "bytes": 10832,
+      "sha256": "3289b313ddad0a3e9468cf99a46069690b2fdbe0d60de3354df9ad4c5215c90a"
+    },
+    {
+      "path": "work/reviews/T22-2026-09-27/validation.log",
+      "bytes": 19919,
+      "sha256": "165dc027fe6e073e5e28efaed5a7b166194be9b324ecc3a3b5e2f46b586ba825"
+    },
+    {
+      "path": "work/reviews/T22-2026-09-27/verification.json",
+      "bytes": 658,
+      "sha256": "9ea45e5d638bca108fd522e30ee5cb19129f0889698d32498ddaafecdc452531"
+    },
+    {
+      "path": "work/task-registry-r13.json",
+      "bytes": 7170,
+      "sha256": "80ba59e7a9d7323a4fc115da37c4fe1ebdc4ca6e4206a9a6f07fb42ed5833258"
+    },
+    {
+      "path": "work/task-registry-r14.json",
+      "bytes": 14297,
+      "sha256": "9fc3d7ad1fe60c30425492800af5bbf2404649fef34d4db4f80c83379d6caae6"
+    },
+    {
+      "path": "work/tasks/T23-R14-RESUME.md",
+      "bytes": 1964,
+      "sha256": "3fa1335a92d0ff883315b6f5fb4fb5d4529c8fafc31f06ffd750788947ba5bee"
+    },
+    {
+      "path": "work/tasks/T24.md",
+      "bytes": 6776,
+      "sha256": "1c5ba88feb180ba78cf04c2d146257b10369e691354adbea87886fbfe920f7a6"
+    },
+    {
+      "path": "work/tasks/T25.md",
+      "bytes": 6567,
+      "sha256": "ade6e543f591901615b96ab2f8515a398e0f6da09c79d5df69f824e128af95e3"
+    },
+    {
+      "path": "work/tasks/T26.md",
+      "bytes": 6249,
+      "sha256": "ec5ecdfb39215cdb8e44404ce28aba0eb17c5aea5fc1a22cde6c6b60d316bcae"
+    },
+    {
+      "path": "work/tasks/T27.md",
+      "bytes": 6107,
+      "sha256": "4067c4dfe7ddaf6b528ef373e12e718cccd9b3ce48d29e793c5cb66d8d27f9c6"
+    },
+    {
+      "path": "work/tasks/T28.md",
+      "bytes": 5812,
+      "sha256": "c52511be6d063f8fa45bbc2c3dee0ae22955b764079c11da429e48c8dcce477c"
+    },
+    {
+      "path": "work/tasks/T29.md",
+      "bytes": 5510,
+      "sha256": "f474d754d57155823eb4479c000bae52366953b3d40e7299a2c9bc1dc5d4a04c"
+    },
+    {
+      "path": "work/tasks/T30.md",
+      "bytes": 6078,
+      "sha256": "b9f1a1165ef7bea2f79177227640b22cc570ed250fe592ccfd211dc03a5b5e32"
+    },
+    {
+      "path": "work/tasks/T31.md",
+      "bytes": 5437,
+      "sha256": "8fdf46bf7135957b9bc01e12d4390af2972b66e6943db7fe09083fe39da11866"
+    },
+    {
+      "path": "work/tasks/T32.md",
+      "bytes": 6430,
+      "sha256": "bfe8ed10087216dcef035da1428b3759563b8669e32b9d1394a716ffe0e03e43"
+    },
+    {
+      "path": "work/tasks/T33.md",
+      "bytes": 5956,
+      "sha256": "7d4c1f60a8431e5d8cdbe92079b4d91e7b99602201aff6af1512f92b87c632e0"
+    },
+    {
+      "path": "work/tasks/T34.md",
+      "bytes": 5743,
+      "sha256": "ee55715e942d96ffc5bf4b4eb8e1f851480584183b2691a28862894290b00d0c"
+    },
+    {
+      "path": "work/tasks/T35.md",
+      "bytes": 5979,
+      "sha256": "4b9f22f0f2c5a549e01c82a9cb7e9d5b9323d318daa962986cbb103ae1bb19d0"
+    },
+    {
+      "path": "work/tasks/T36.md",
+      "bytes": 6035,
+      "sha256": "eb2fa864347cc650445d765e71d2b0a7162ca477bbe184255cf983e5a570ef99"
+    },
+    {
+      "path": "work/tasks/T37.md",
+      "bytes": 5980,
+      "sha256": "73afef071945d0f13e04252dcb34c1ffcc1b9a2be3d7f09bed23cde2c7a3544d"
+    },
+    {
+      "path": "work/tasks/T38.md",
+      "bytes": 5473,
+      "sha256": "ec7e6e068e6c9bddd708344ad4beae705be7cad56cd4b21259b938c161d8136b"
+    },
+    {
+      "path": "work/tasks/T39.md",
+      "bytes": 5314,
+      "sha256": "30a9a70ca9205a72c8be2cd4c9192bb6d8dc655754fa78a8e810d43ff5650e0e"
+    },
+    {
+      "path": "work/tasks/T40.md",
+      "bytes": 5577,
+      "sha256": "975be0864ee16c3855224a9afe7ddb54b6702d2901b31c78e671e30a564265af"
+    },
+    {
+      "path": "work/tasks/T41.md",
+      "bytes": 6874,
+      "sha256": "62dcf6ea30673f17e268b9062346dd92794620edfdb7a15bebf024084c21d33d"
+    },
+    {
+      "path": "work/tasks/T43.md",
+      "bytes": 7171,
+      "sha256": "571e17c376a185ad35b4bba046975570a71cb28efab52f8660fe809978de80e6"
+    },
+    {
+      "path": "work/tasks/T44.md",
+      "bytes": 7800,
+      "sha256": "904cfa0d3137fc6b9236f520b98d9449c6397639992795c58924e84d91bd8fb6"
+    },
+    {
+      "path": "work/tasks/T45.md",
+      "bytes": 5314,
+      "sha256": "96532d88ac5c36026ce4e70c6feeebc6415dd5534873c9831d1a1274e63e0eb7"
+    },
+    {
+      "path": "work/tasks/T46.md",
+      "bytes": 5332,
+      "sha256": "859aa0bf31e8078b0bb2b9fd4318fdaa4ad98626ed7ee80a2a0e097ac6efbd63"
+    },
+    {
+      "path": "work/tasks/T47.md",
+      "bytes": 6482,
+      "sha256": "ec2da47a9e2a259b640c127b86183ce83eebb553c4a9fe4797ddc54b19478a9c"
+    },
+    {
+      "path": "work/tasks/T48.md",
+      "bytes": 5855,
+      "sha256": "654f6a48b84bf55420aa51166a810ebe1de0a6f9013e17b103dbe1515ca53b0a"
+    },
+    {
+      "path": "work/tasks/T49.md",
+      "bytes": 5961,
+      "sha256": "1004218e3a495b91e58585fa2d239f249d6d7c42788d9e56295e92830e7ea635"
+    },
+    {
+      "path": "work/tasks/archive/R13-before-R14/T24.md",
+      "bytes": 2847,
+      "sha256": "fb4f81c4215050b63b2763c5b05bbe0daa8127a65322b6566bf24cfa4909c9ae"
+    },
+    {
+      "path": "work/tasks/archive/R13-before-R14/T25.md",
+      "bytes": 2741,
+      "sha256": "e9d9c3b773b0b055be1b89026f914e09a49fcddcb85fdc2b31c20011b0513505"
+    },
+    {
+      "path": "work/tasks/archive/R13-before-R14/T26.md",
+      "bytes": 2784,
+      "sha256": "a83742961c85d341896ab4df33bf663d845158eaaf0abec163995feaaddc8cc1"
+    },
+    {
+      "path": "work/tasks/archive/R13-before-R14/T27.md",
+      "bytes": 2762,
+      "sha256": "09a59a3ed8e2ee2e9efeae5a4be6d9b98a5645418156b85cf6b97da4ef5b1e02"
+    },
+    {
+      "path": "work/tasks/archive/R13-before-R14/T28.md",
+      "bytes": 2801,
+      "sha256": "1af32dcd785f63f8fd25e982b6c1d24312ee07a73fa2dd4b65bc1541a28c981d"
+    },
+    {
+      "path": "work/tasks/archive/R13-before-R14/T29.md",
+      "bytes": 2725,
+      "sha256": "1f47d41e0b5998fd42859b1826d22c2f498e260efda3901eac8351a8efd000ad"
+    },
+    {
+      "path": "work/tasks/archive/R13-before-R14/T30.md",
+      "bytes": 2750,
+      "sha256": "8916c9fcbe050410b85d059c766980b37c91b3cf07511be0abf0911be4998321"
+    },
+    {
+      "path": "work/tasks/archive/R13-before-R14/T31.md",
+      "bytes": 2773,
+      "sha256": "3fd80126f5abaefadff987c1342dc3021f450e139c98af4d069631178d429cf6"
+    },
+    {
+      "path": "work/tasks/archive/R13-before-R14/T32.md",
+      "bytes": 2765,
+      "sha256": "ad754570e01140b405d421a9ecb821fff68a15b82771b25a35599874a2cfaba0"
+    },
+    {
+      "path": "work/tasks/archive/R13-before-R14/T33.md",
+      "bytes": 2645,
+      "sha256": "487e8dbc5ab56d3acd2ca1d059e289c2c48964a0e446e85caf7bfcd5c70003ff"
+    },
+    {
+      "path": "work/tasks/archive/R13-before-R14/T34.md",
+      "bytes": 2651,
+      "sha256": "61c87d696d10b11b98f05d8b781f822a2c2fb870bf89b2939951ee0752a87c7f"
+    },
+    {
+      "path": "work/tasks/archive/R13-before-R14/T35.md",
+      "bytes": 2788,
+      "sha256": "8fd5e55cbe12513f7e0b03e3df6b5d266ddb14c1b2721da635290fd4c1b3d7ba"
+    },
+    {
+      "path": "work/tasks/archive/R13-before-R14/T36.md",
+      "bytes": 2714,
+      "sha256": "0ab92843dbe5fe0699e2ad4a463ddb32f1ef60a8aa45d3b179e19a1aa8f70a9b"
+    },
+    {
+      "path": "work/tasks/archive/R13-before-R14/T37.md",
+      "bytes": 2655,
+      "sha256": "4e9b72cc1d13e81f096f3f9e3a31fcb83b19136da8e60731c992e6dc04e7606b"
+    },
+    {
+      "path": "work/tasks/archive/R13-before-R14/T38.md",
+      "bytes": 2595,
+      "sha256": "765218f86d36df1b1aa3e7a9251b081a55ca22e95a8632754f6a98dfc8593635"
+    },
+    {
+      "path": "work/tasks/archive/R13-before-R14/T39.md",
+      "bytes": 2680,
+      "sha256": "73b0d8183da43b0142228581e93bd859cc76deecf93b89ba9d091abff68cb972"
+    },
+    {
+      "path": "work/tasks/archive/R13-before-R14/T40.md",
+      "bytes": 2743,
+      "sha256": "fbfe2b71f9c58cb3ebc23b61386aab7e688ed0be53f6b525a99b71fdcf751864"
+    }
+  ],
+  "protectedInputHashes": {
+    "AGENTS.md": "72b8cf3eb4a26e0119760015c2fdac52a4c88feed94c4d35b0f30f5d36403e32",
+    "atlas-data/assets/bodyparts3d-v4-pilot/FJ1394.obj": "621dc10e974bcc1c53a8843bf1db3a1c322c8327d279010c58533bd28952bf08",
+    "atlas-data/assets/bodyparts3d-v4-pilot/FJ1397.obj": "d7f3aa44801171baade1a59c40a8f8bda72097bec07047f93f24ebaac4546cb4",
+    "atlas-data/assets/bodyparts3d-v4-pilot/FJ1409.obj": "ba330adc0128b26a50b4a5bd0a0cedcd3f32dbf09ae25f4e0587949dbd9d3d11",
+    "atlas-data/assets/bodyparts3d-v4-pilot/FJ1410.obj": "40c36bc4dc24e161c84daf6e96017f9d78b4cf964579a873e267d2619be4aa2c",
+    "atlas-data/assets/bodyparts3d-v4-pilot/FJ1437.obj": "c9c62b720ffe375a8eddf390608684a796f1ea54880a5c34fa440404addc399e",
+    "atlas-data/assets/bodyparts3d-v4-pilot/FJ1439.obj": "b03d2f54644969d153d3dfe4025ee629858e72c1e5ee3b0e7d5f16f54dc505b3",
+    "atlas-data/assets/bodyparts3d-v4-pilot/FJ1440.obj": "6fc367885524fc416139372b55c64d8e1e4bc9010bee64020a72ad8e6f34a57d",
+    "atlas-data/assets/bodyparts3d-v4-pilot/FJ3360.obj": "b53e7970e822e997e1b05f94f42514d07a3f98edcc63ec7dd7219354ce1d8176",
+    "atlas-data/assets/bodyparts3d-v4-pilot/FJ3366.obj": "d03fee02cf8eefad1ecfcb9246e3f43ad3c4615c21ce08dc5e2b6901c6395a86",
+    "atlas-data/assets/bodyparts3d-v4-pilot/FJ3385.obj": "8b35f0132c1a05b64f26746fdd0496a2495280cd0c2ac90dbf637fd74f79f54f",
+    "atlas-data/assets/bodyparts3d-v4-pilot/FJ3387.obj": "01879d7310938e82eecc02e1115332497e94085ff5cc1fa8eeee47ad1f5d3578",
+    "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3308.obj": "0e08f1570755a9675e2556013eda861f00f31fe7ae2139e24584129dfe78d2c2",
+    "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3351.obj": "b70e565ec8ad8c09264ae66159415ca4f0cf639598812aac6fcf7b761c3758d3",
+    "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3353.obj": "f6c034b6b18aee623f510ee40e4171346c084e8bdd092354d634c87fc9af6acf",
+    "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3355.obj": "90b28dbcd11e3d3a6f253adb1ddaa33f30040a08c71bb3a86242372ea9b6170e",
+    "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3357.obj": "a5fd57a36b7525de383809bbbb37ff6a56a08ed0fb25af1684085418cc6e8202",
+    "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3359.obj": "cc75b866a2d5ac0317eb3a1d64cef41a65231fab975613d108a4fcdcbc2c58b1",
+    "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3364.obj": "d5ac55e9aa466b0e14d8d7760f7ef2a6edb0d95cfea56205557f647c451a8079",
+    "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3365.obj": "5eff0f92905dd45bd0e79b1de0144dc15988c73c683468163255ba1452d58037",
+    "atlas-data/assets/bodyparts3d-v4-t13-bones/FJ3377.obj": "7ae757be0a8a55129816045c2e92b32576e2c96fe3b047f7841807092b5bf8f4",
+    "atlas-data/assets/derived-glb/bodyparts3d-r4-right-lower-leg/right-lower-leg.glb": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341",
+    "atlas-data/assets/derived-glb/bodyparts3d-r4-t13-right-bones/right-bones.glb": "a5b16cf1e6991b52f66706dee7cf3c77d9832b1a3bde0e3dffd5de5619db6662",
+    "atlas-data/catalog/canonical-catalog.json": "6b10da0388b06f24d9bfb6b0852d88196cb7064835741360ee15a91b6abaf873",
+    "atlas-data/catalog/region-tree.json": "7eba5ef7825a385596a7cdb41ecc476daa508f98bdf2c2aedcbbb74a2d70dbd5",
+    "atlas-data/catalog/source-crosswalk.json": "26891c9c301b79911220d491201d639cbe4a78e5d3b1fdf3df6373cd4d68238b",
+    "atlas-data/catalog/whole-body-inventory-t15g.json": "b878522e346b5f285ea450fd7194ed0b7a5043e21e702370bb9702c790e7a238",
+    "atlas-data/manifests/assets.json": "44100f374337d527531bcadae13f1b9293cfa54ead96b1ef970fcf14349fdb4a",
+    "atlas-data/manifests/attachment-context-t13.json": "3cb4cffd3b74e56784383dab6a77717e4ac82127451b2a0b02dce2d3e492a943",
+    "atlas-data/manifests/derived-assets-t07.json": "b37692ab56f3024e49425663643271274e2351c6cedd4191871508f810c1744b",
+    "atlas-data/manifests/derived-bones-t13.json": "74c593b70c70cde113c0364474a84ac83ae7c75511fc8ef13434202b3889961e",
+    "atlas-data/manifests/scope.json": "7baffcdabac92f73f54014e59b084cf3ef8f3cd3f2a6bbd7e527ce92422ac920",
+    "atlas-data/motion/motion-learning.json": "7f3335e673b4cfee169dd8691e68f3a8709c35debba1648e80de3bd5b9f85bc5",
+    "atlas-data/navigation/atlas-navigation.json": "d5a32d9a350cfaa0888d38be39a3bcc070c2413a9b99a421a9ce38601d7a9e4d",
+    "atlas-data/terminology/ai-evidence-overlay.json": "0a46e544f595179f8bfdaf307ea718d0a804f4d42dc9c3d8221ced554757f20f",
+    "atlas-data/terminology/learning-attachment-crosschecks.json": "371f520887a17795528f072765360e83af229f3429956ef055a30e196663f0fd",
+    "atlas-data/terminology/learning-names.json": "6f78fbce22d999aff95ba10fb835f137ba1dfdb2a9c790bb90fef18e580b776e",
+    "atlas-data/terminology/learning-structure-summaries.json": "3fd23284b9515411378fbf07036022bd717ca6e2c0f2755dd3b63785c6fb4b4e",
+    "design/2026-09-25-muscle-atlas/00-START-HERE.md": "e80c72db725a89a6fbbd127c42c607c73f5df5cd3237676b063d075eb66b0ee2",
+    "design/2026-09-25-muscle-atlas/10-STRUCTURE-FUNCTION-DELIVERY-PLAN.md": "6ff5ca23b647cc0c233f6ccc898790fb364df14fd059f94389832c0274061bbc",
+    "design/2026-09-25-muscle-atlas/11-TASK-PROMPTS-R14.md": "62d976ee47ed8a826c0b8ec68b431f777d78769358e7550c2009dd9b9bcba63e",
+    "work/STATUS.md": "40e850f367cb6a475f044fe52098effb49ee8c10f23c939a9257ac9e0ce3eacd",
+    "work/evidence/T15g/validation-results.json": "be080af1e3f24daafb73bd61fa81d57be43753fa8587d14d72ca642779ef23b8",
+    "work/evidence/T42/preservation-check.json": "f108ae940c39d6c0d90f987c3f043465e068ac4ab1d8dd8230592568a36e98a5",
+    "work/evidence/T42/start-baseline.json": "cb9f063ea691c7eb515b5e0611e37b9c1db5773e9b6a1b6b68d6cc05e438752e",
+    "work/reports/T15g.md": "062420fd35bfe8021491ddebfe7b5bb5fc53dc7c3648f17609f6839541bafe37",
+    "work/reports/T42.md": "8094e8e7bb0f25413e16ff24af4b9bb59293cb8e7768c4de0ecc886c0cb02da2",
+    "work/review-queue/expansion-batches-t15g.json": "74f6b2e5509f45044a2d8a79a5ff1616fef9a06857f436d2e250134d8edc19d9",
+    "work/review-queue/region-crosswalk-t15g.json": "6e21430f32d7284d3a59e887b9deb9fee874683059d98645a4f9b77c19bdacbc",
+    "work/task-registry-r14.json": "9fc3d7ad1fe60c30425492800af5bbf2404649fef34d4db4f80c83379d6caae6",
+    "work/tasks/T43.md": "571e17c376a185ad35b4bba046975570a71cb28efab52f8660fe809978de80e6",
+    "work/tasks/T44.md": "904cfa0d3137fc6b9236f520b98d9449c6397639992795c58924e84d91bd8fb6"
+  },
+  "openSimModels": {
+    "path": "OpenSim_Models",
+    "head": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "status": [],
+    "modelFilePaths": [
+      "Models/Arm26/arm26.osim",
+      "Models/BouncingBlock/bouncing_block.osim",
+      "Models/BouncingBlock/bouncing_block_weak_spring.osim",
+      "Models/DoublePendulum/double_pendulum.osim",
+      "Models/Gait10dof18musc/gait10dof18musc.osim",
+      "Models/Gait10dof18musc/subject01.osim",
+      "Models/Gait10dof18musc/subject01_metabolics.osim",
+      "Models/Gait10dof18musc/subject01_metabolics_path_actuator.osim",
+      "Models/Gait10dof18musc/subject01_metabolics_path_spring.osim",
+      "Models/Gait10dof18musc/subject01_metabolics_spring.osim",
+      "Models/Gait2354_Simbody/gait2354_simbody.osim",
+      "Models/Gait2354_Simbody/subject01_simbody.osim",
+      "Models/Gait2392_Simbody/gait2392_millard2012muscle.osim",
+      "Models/Gait2392_Simbody/gait2392_thelen2003muscle.osim",
+      "Models/Gait2392_Simbody/subject01.osim",
+      "Models/Gait2392_Simbody/subject01_adjusted.osim",
+      "Models/Gait2392_Simbody/subject01_simbody_adjusted.osim",
+      "Models/Hamner/FullBodyModel_Hamner2010_v2_0.osim",
+      "Models/Jumper/DynamicJumperModel.osim",
+      "Models/Leg39/leg39.osim",
+      "Models/Leg6Dof9Musc/leg6dof9musc.osim",
+      "Models/Pendulum/double_pendulum.osim",
+      "Models/Rajagopal/Geometry/l_femur.vtp",
+      "Models/Rajagopal/Geometry/l_fibula.vtp",
+      "Models/Rajagopal/Geometry/l_pelvis.vtp",
+      "Models/Rajagopal/Geometry/l_tibia.vtp",
+      "Models/Rajagopal/Geometry/r_femur.vtp",
+      "Models/Rajagopal/Geometry/r_fibula.vtp",
+      "Models/Rajagopal/Geometry/r_pelvis.vtp",
+      "Models/Rajagopal/Geometry/r_tibia.vtp",
+      "Models/Rajagopal/Geometry/sacrum.vtp",
+      "Models/Rajagopal/Rajagopal2016.osim",
+      "Models/Rajagopal/RajagopalLaiUhlrich2023.osim",
+      "Models/Rajagopal_OpenSense/Rajagopal2015_opensense.osim",
+      "Models/SoccerKick/Geometry/goalie.obj",
+      "Models/SoccerKick/Geometry/goalie_smooth.obj",
+      "Models/SoccerKick/Geometry/hat_jaw.vtp",
+      "Models/SoccerKick/Geometry/hat_skull.vtp",
+      "Models/SoccerKick/Geometry/hat_spine.vtp",
+      "Models/SoccerKick/Geometry/plane.vtp",
+      "Models/SoccerKick/Geometry/soccer_ball.obj",
+      "Models/SoccerKick/Geometry/soccer_ball_seg_Holes.obj",
+      "Models/SoccerKick/SoccerKickingModel.osim",
+      "Models/ToyLanding/ToyLandingModel.osim",
+      "Models/ToyLanding/ToyLandingModel_AFO.osim",
+      "Models/ToyLanding/ToyLandingModel_activeAFO.osim",
+      "Models/Tug_of_War/Tug_of_War.osim",
+      "Models/Tug_of_War/Tug_of_War_Millard.osim",
+      "Models/WalkerModel/WalkerModel.osim",
+      "Models/WalkerModel/WalkerModelTerrain.osim",
+      "Models/WristModel/wrist.osim"
+    ],
+    "modelFilePathCount": 51
+  },
+  "notes": [
+    "No project implementation or inventory source file has been edited at baseline.",
+    "No .git lock file was present at inspection."
+  ]
+}

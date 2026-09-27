@@ -1,0 +1,88 @@
+{
+  "task": "T43",
+  "checkedOn": "2026-09-27",
+  "overall": "passed_with_gaps",
+  "checks": [
+    {
+      "name": "T43 region acquisition matrix validator",
+      "command": "python3 work/evidence/T43/validate_region_acquisition_matrix.py",
+      "status": "passed",
+      "evidence": "work/evidence/T43/validation-results.json"
+    },
+    {
+      "name": "Navigation contract regression",
+      "command": "python3 atlas-data/navigation/test_navigation.py",
+      "status": "passed",
+      "result": "12/12"
+    },
+    {
+      "name": "Navigation data/provenance validator",
+      "command": "python3 atlas-data/navigation/validate_navigation.py --report work/evidence/T43/navigation-validation.json",
+      "status": "passed",
+      "counts": {
+        "categories": 12,
+        "memberships": 6,
+        "structureInstances": 9,
+        "structureMeshMappings": 9,
+        "unmappedMeshContexts": 4,
+        "sceneManifests": 2
+      }
+    },
+    {
+      "name": "T03 schema constraints and fixture suite",
+      "command": "python3 atlas-data/schemas/validate.py --check-schemas --fixtures",
+      "status": "passed",
+      "fixtureCount": 17
+    },
+    {
+      "name": "Canonical catalog schema/data validation",
+      "command": "python3 atlas-data/schemas/validate.py --dataset atlas-data/catalog/canonical-catalog.json",
+      "status": "passed"
+    },
+    {
+      "name": "T15g inventory reproducibility check",
+      "command": "python3 atlas-data/catalog/build_t15g_inventory.py --check",
+      "status": "failed_preexisting_generated_artifact_input_drift",
+      "detail": "generated artifact differs from current inputs: atlas-data/catalog/whole-body-inventory-t15g.json",
+      "preservationEvidence": "The T15g inventory and its protected source inputs match the T43 start baseline; T43 did not regenerate or modify them.",
+      "requiredFollowUp": "Reconcile the T15g generator inputs and saved artifact in an authorized task before relying on reproducible regeneration."
+    },
+    {
+      "name": "TypeScript typecheck",
+      "command": "pnpm --dir atlas-web typecheck",
+      "status": "passed"
+    },
+    {
+      "name": "Production build",
+      "command": "pnpm --dir atlas-web build",
+      "status": "passed",
+      "warning": "Existing App chunk exceeds 500 kB after minification."
+    },
+    {
+      "name": "Browser verification",
+      "status": "not_applicable",
+      "detail": "T43 changed metadata/review artifacts only; no learner UI or clip behavior changed."
+    },
+    {
+      "name": "Whitespace/diff check",
+      "command": "git diff --check",
+      "status": "passed"
+    },
+    {
+      "name": "Preservation comparison",
+      "command": "python3 work/evidence/T43/check_preservation.py",
+      "status": "passed",
+      "detail": "All 116 pre-existing changed/untracked files and 51/51 non-STATUS protected hashes are unchanged; work/STATUS.md is the sole intentional protected-input update; OpenSim_Models remains at its starting HEAD and clean."
+    }
+  ],
+  "notApplicableAttempt": {
+    "command": "python3 atlas-data/schemas/validate.py --dataset atlas-data/catalog/whole-body-inventory-t15g.json",
+    "status": "not_applicable_schema_contract",
+    "detail": "This generic dataset validator expects schemaVersion/entities/publicationManifests; the T15g whole-body planning snapshot has a separate inventory contract. The dedicated T15g --check above is the relevant freshness test."
+  },
+  "limitations": [
+    "No human anatomy review was performed.",
+    "T15g denominator remains denominatorFrozen=false, wholeBodyIndividualMuscleCount=null, coveragePercent=null.",
+    "Official asset metadata candidates do not establish local mesh availability, quality, project membership, or motion compatibility."
+  ]
+}
