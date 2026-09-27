@@ -1,0 +1,92 @@
+{
+  "taskId": "T55",
+  "verifiedOn": "2026-09-27",
+  "browser": "Codex in-app browser",
+  "preview": {
+    "path": "work/evidence/T55/private-preview.html",
+    "purpose": "temporary local static-source QA; not learner product UI",
+    "scene": "single integrated T53 + T54 + T55 static scene",
+    "rendererCount": 1,
+    "anatomySceneRootCount": 1,
+    "uniqueMeshes": 408,
+    "sourceRegionCounts": {
+      "T53": 138,
+      "T54": 140,
+      "T55": 130
+    },
+    "sharedNodeDedupe": 2
+  },
+  "viewportChecks": [
+    {
+      "width": 1440,
+      "height": 900,
+      "filter": "all integrated regions",
+      "views": [
+        "front",
+        "back",
+        "side"
+      ],
+      "fitAllUsed": true,
+      "result": "full body rendered; pelvis-to-thigh, knee-to-leg and leg-to-foot static continuity visually inspected; no offset introduced"
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "filter": "all integrated regions",
+      "views": [
+        "front"
+      ],
+      "fitAllUsed": true,
+      "result": "full body remained visible in the same renderer/root"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "filter": "T55 calf",
+      "views": [
+        "front"
+      ],
+      "result": "mobile layout showed selection card, controls and leg meshes; rendered muscles and bones were both visible"
+    }
+  ],
+  "keyboardSelection": {
+    "steps": [
+      "filter to T55 calf",
+      "search FJ1439",
+      "Tab from search to first result",
+      "Return to select"
+    ],
+    "sourceId": "FJ1439",
+    "stableSourceMeshId": "HA-MESH-BP3D4-FJ1439",
+    "sourceName": "Right tibialis anterior",
+    "side": "right",
+    "existingCanonicalMuscleId": "HA-M-000003",
+    "existingT07TopologySha256": "17aa54b23b003e253001abc360b19ad35d0ca004a1716e120be0e339895da1eb",
+    "result": "selected card and yellow surface highlight agreed; existing stable ID preserved; no review-state promotion",
+    "sourceElementFileId": "FJ1439",
+    "stableSourceMeshNodeId": "HA-MESH-BP3D4-FJ1439",
+    "canonicalLearnerId": "HA-M-000003"
+  },
+  "runtimeSignals": {
+    "pageErrorEvents": 0,
+    "sourceGlbRequests": "T53, T54 and T55 GLBs loaded with HTTP 200/304 in the local server trace",
+    "otherRequest": "favicon.ico returned 404; no scene, module or source asset request failed",
+    "browserConsoleDirectlyInspected": false
+  },
+  "captureNote": "Screenshots were captured and visually inspected in the CUA session but were not persisted as binary artifacts. Viewport and AX status evidence is recorded here.",
+  "result": "passed_static_source_browser_review",
+  "uniqueMeshCount": 408,
+  "testedViewportWidths": [
+    1440,
+    1024,
+    390
+  ],
+  "verifiedCameraViews": [
+    "front",
+    "back",
+    "side"
+  ],
+  "uncaughtPageErrorEvents": 0,
+  "rendererCount": 1,
+  "anatomySceneRootCount": 1
+}

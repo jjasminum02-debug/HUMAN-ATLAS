@@ -1,0 +1,496 @@
+{
+  "revision": "T55-PRESERVATION-AFTER-v1",
+  "task": "T55",
+  "baselineHead": "c3bea91abbb34462c4564fe5940b6150810c5c24",
+  "headAtPreservationCheck": "c3bea91abbb34462c4564fe5940b6150810c5c24",
+  "worktreeEntriesBefore": 194,
+  "preexistingWorktreeEntriesCompared": 194,
+  "preexistingEntriesWithContentChanges": 3,
+  "intentionalT55StateFiles": [
+    "work/STATUS.md",
+    "work/task-registry-r15.json",
+    "work/tasks/T55.md"
+  ],
+  "unexpectedPreexistingContentChanges": [],
+  "protectedInputsCompared": 32,
+  "unexpectedProtectedInputChanges": [],
+  "protectedInputs": [
+    {
+      "path": "AGENTS.md",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 9114,
+        "sha256": "3be36175d2200f7d22cc29672e4af0f1f3b6da6105000c1922f229413b1fd396"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 9114,
+        "sha256": "3be36175d2200f7d22cc29672e4af0f1f3b6da6105000c1922f229413b1fd396"
+      }
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/00-START-HERE.md",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 7137,
+        "sha256": "72f3d7e09e66318da4b55e46a2c143b253dd8fa81b6de5b469340113765d198c"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 7137,
+        "sha256": "72f3d7e09e66318da4b55e46a2c143b253dd8fa81b6de5b469340113765d198c"
+      }
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/13-CONTINUOUS-WHOLE-BODY-EXPERIENCE-R15.md",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 14807,
+        "sha256": "53ea2a3512d1b811ad6a86863aedfac97e0ee5d92eae21068ae5231bd1321ec7"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 14807,
+        "sha256": "53ea2a3512d1b811ad6a86863aedfac97e0ee5d92eae21068ae5231bd1321ec7"
+      }
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/14-TASK-PROMPTS-R15.md",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 83994,
+        "sha256": "fd5c4d7b06b09dc0e20d7af58d371492fa93b45a8b7f3eba2098aee1f28ca0ec"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 83994,
+        "sha256": "fd5c4d7b06b09dc0e20d7af58d371492fa93b45a8b7f3eba2098aee1f28ca0ec"
+      }
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/15-NERVE-AND-ASSESSMENT-SCOPE-R15.md",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 5937,
+        "sha256": "29ab677d3efca252325e555e1b7aadb20cca213b014676b9a195c7a27324a492"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 5937,
+        "sha256": "29ab677d3efca252325e555e1b7aadb20cca213b014676b9a195c7a27324a492"
+      }
+    },
+    {
+      "path": "work/task-registry-r15.json",
+      "matchedBaseline": false,
+      "intentionalT55StateUpdate": true,
+      "before": {
+        "bytes": 23979,
+        "sha256": "8c43bf1e9b4c1da9542394b3b7ea427a04ba0ffbde2c42c431f86b5f01422e77"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 23976,
+        "sha256": "f28237233c458f07fecc566fb5c20b02642329ee43a135f56c7c2581e7bd11d0"
+      }
+    },
+    {
+      "path": "work/STATUS.md",
+      "matchedBaseline": false,
+      "intentionalT55StateUpdate": true,
+      "before": {
+        "bytes": 82014,
+        "sha256": "ea2bb610dc634880a2d438c91ec79ad9f562006885e573e067a77565ecfb8957"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 84731,
+        "sha256": "80ee51af04a129dd0cca638875b405dd9b388a0f4d445113fa9ee73960beb968"
+      }
+    },
+    {
+      "path": "work/tasks/T55.md",
+      "matchedBaseline": false,
+      "intentionalT55StateUpdate": true,
+      "before": {
+        "bytes": 5638,
+        "sha256": "933ef02e87bc716171e9e573d5aa59d9417d9af8dc60abeb864971e1997a2ee1"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 6866,
+        "sha256": "595caff706d59349a101e3e7cf3c375ea7e60a8c63689e12281ecf00f797e85b"
+      }
+    },
+    {
+      "path": "work/reports/T54.md",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 15261,
+        "sha256": "41c13889b68814714a1ed3b6bc85130008982b281b7e8f5612c45e1bad5392d8"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 15261,
+        "sha256": "41c13889b68814714a1ed3b6bc85130008982b281b7e8f5612c45e1bad5392d8"
+      }
+    },
+    {
+      "path": "work/reports/T53.md",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 16180,
+        "sha256": "dbe3a60aa7ad1857c04a79f042c94f4cf21c183cfef14c59c62b44023a647093"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 16180,
+        "sha256": "dbe3a60aa7ad1857c04a79f042c94f4cf21c183cfef14c59c62b44023a647093"
+      }
+    },
+    {
+      "path": "work/reports/T51.md",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 13529,
+        "sha256": "4fa7818daea34988310f6bd6eb3f6a0565b99af65e2b0f7a798059ed19d8e179"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 13529,
+        "sha256": "4fa7818daea34988310f6bd6eb3f6a0565b99af65e2b0f7a798059ed19d8e179"
+      }
+    },
+    {
+      "path": "work/reports/T50.md",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 16421,
+        "sha256": "b9cc73083de6443d14d2d86be29d64abf415e17eea707521b994f20b4a217121"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 16421,
+        "sha256": "b9cc73083de6443d14d2d86be29d64abf415e17eea707521b994f20b4a217121"
+      }
+    },
+    {
+      "path": "work/reports/T44.md",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 9314,
+        "sha256": "153c7547ef01a260eb0db462b4d129035010d7131269b8e4ea36d55ff6eafb77"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 9314,
+        "sha256": "153c7547ef01a260eb0db462b4d129035010d7131269b8e4ea36d55ff6eafb77"
+      }
+    },
+    {
+      "path": "work/reports/T24.md",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 7623,
+        "sha256": "7e24b7d988e99e2ee81e6d87708538d50f7837dbd1b42c0ab355a402ad2b9616"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 7623,
+        "sha256": "7e24b7d988e99e2ee81e6d87708538d50f7837dbd1b42c0ab355a402ad2b9616"
+      }
+    },
+    {
+      "path": "work/evidence/T50/scene-contract.md",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 5128,
+        "sha256": "2697496d18bd1fc58adca557d95364092f7c7189bff4218277882142c8b26fa4"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 5128,
+        "sha256": "2697496d18bd1fc58adca557d95364092f7c7189bff4218277882142c8b26fa4"
+      }
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-source-manifest-t51.json",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 6163930,
+        "sha256": "fd804d31dfcfa121b69458affbd3cfb126dd97fafdfebf21cd00458a86176aea"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 6163930,
+        "sha256": "fd804d31dfcfa121b69458affbd3cfb126dd97fafdfebf21cd00458a86176aea"
+      }
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-regions-t51/thigh.json",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 8397,
+        "sha256": "9fdb02f6b76559a9e5f03865ab33f7061184e6ff1712e37f7534faf082b79ac3"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 8397,
+        "sha256": "9fdb02f6b76559a9e5f03865ab33f7061184e6ff1712e37f7534faf082b79ac3"
+      }
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-regions-t51/leg.json",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 14364,
+        "sha256": "e175ee6344d1d69689d8ef1f387dcbf8adc330cda9182db3c67ae6e5c2cf4152"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 14364,
+        "sha256": "e175ee6344d1d69689d8ef1f387dcbf8adc330cda9182db3c67ae6e5c2cf4152"
+      }
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-regions-t51/foot.json",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 28338,
+        "sha256": "bf3e8ee7f483faeaa95a1f1c134c14033905faa50363c70562973160ad652984"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 28338,
+        "sha256": "bf3e8ee7f483faeaa95a1f1c134c14033905faa50363c70562973160ad652984"
+      }
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-t53/source-manifest.json",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 2108788,
+        "sha256": "88e8b4369073fb38b82686827109bbe9302d9a79357ddaad711ae1104d83ef4e"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 2108788,
+        "sha256": "88e8b4369073fb38b82686827109bbe9302d9a79357ddaad711ae1104d83ef4e"
+      }
+    },
+    {
+      "path": "atlas-data/manifests/bodyparts3d-r4-t54/source-manifest.json",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 1887536,
+        "sha256": "a27630c0bd6da1664caa4b416f84d990aff6c8c4deab816b6d374a7c0eece01a"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 1887536,
+        "sha256": "a27630c0bd6da1664caa4b416f84d990aff6c8c4deab816b6d374a7c0eece01a"
+      }
+    },
+    {
+      "path": "atlas-data/manifests/derived-assets-t07.json",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 41045,
+        "sha256": "b37692ab56f3024e49425663643271274e2351c6cedd4191871508f810c1744b"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 41045,
+        "sha256": "b37692ab56f3024e49425663643271274e2351c6cedd4191871508f810c1744b"
+      }
+    },
+    {
+      "path": "atlas-data/manifests/mesh-crosswalk-t07.json",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 3025,
+        "sha256": "d9f173a80cc243e189ee21e460ce10d500a411ffbd003be470e2bd1ef64954d9"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 3025,
+        "sha256": "d9f173a80cc243e189ee21e460ce10d500a411ffbd003be470e2bd1ef64954d9"
+      }
+    },
+    {
+      "path": "atlas-data/catalog/canonical-catalog.json",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 373651,
+        "sha256": "c8caf2c9e87f1149bebdd4b6a748145b04156cf69667352c9a5d747ce6f802dd"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 373651,
+        "sha256": "c8caf2c9e87f1149bebdd4b6a748145b04156cf69667352c9a5d747ce6f802dd"
+      }
+    },
+    {
+      "path": "atlas-data/manifests/assets.json",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 28392,
+        "sha256": "44100f374337d527531bcadae13f1b9293cfa54ead96b1ef970fcf14349fdb4a"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 28392,
+        "sha256": "44100f374337d527531bcadae13f1b9293cfa54ead96b1ef970fcf14349fdb4a"
+      }
+    },
+    {
+      "path": "atlas-data/assets/derived-glb/bodyparts3d-r4-right-lower-leg/right-lower-leg.glb",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 712192,
+        "sha256": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 712192,
+        "sha256": "044450c3230bd23869a099d545151cb3d7518da3240a6e59f911f82786edc341"
+      }
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/converted/t51-right-lower-limb-sample.glb",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 961888,
+        "sha256": "81e1f72a2a630ae2e259ccdd2a020fb86f08c551cfaa076fbde36353a434f382"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 961888,
+        "sha256": "81e1f72a2a630ae2e259ccdd2a020fb86f08c551cfaa076fbde36353a434f382"
+      }
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/converted/t53/T53-trunk-pelvis-static-source.glb",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 37179596,
+        "sha256": "25b9850ded5fe6e8c38e48578ba6a4d4e617dca1169cd1c6d63dfda52814709b"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 37179596,
+        "sha256": "25b9850ded5fe6e8c38e48578ba6a4d4e617dca1169cd1c6d63dfda52814709b"
+      }
+    },
+    {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/converted/t54/T54-shoulder-upper-limb-static-source.glb",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 9579756,
+        "sha256": "b114fc8644ea8de0f7d213262ebc02eb23b0e8b51d419516c0f52f03d4cf04cd"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 9579756,
+        "sha256": "b114fc8644ea8de0f7d213262ebc02eb23b0e8b51d419516c0f52f03d4cf04cd"
+      }
+    },
+    {
+      "path": "atlas-data/assets/derived-glb/opensim-gait2392-t44-right-ankle/right-ankle.glb",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "missing": true
+      },
+      "after": {
+        "exists": false
+      }
+    },
+    {
+      "path": "atlas-data/assets/motion/t24-right-tibialis-anterior/ankle-dorsiflexion.glb",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 88160,
+        "sha256": "956bb0e3664f325157e116a539aa9d8ea6db7c812dcc963d34d73fef1473596a"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 88160,
+        "sha256": "956bb0e3664f325157e116a539aa9d8ea6db7c812dcc963d34d73fef1473596a"
+      }
+    },
+    {
+      "path": "atlas-data/assets/motion/t24-right-tibialis-anterior/ankle-dorsiflexion.json",
+      "matchedBaseline": true,
+      "intentionalT55StateUpdate": false,
+      "before": {
+        "bytes": 2050,
+        "sha256": "f12bd0551378630373a0924d72f9c7417d89db7fb27f4fab524d02b36c71928d"
+      },
+      "after": {
+        "exists": true,
+        "bytes": 2050,
+        "sha256": "f12bd0551378630373a0924d72f9c7417d89db7fb27f4fab524d02b36c71928d"
+      }
+    }
+  ],
+  "preexistingSourceAssetsCompared": 411,
+  "preexistingSourceAssetMismatchCount": 0,
+  "sourceAssetMismatches": [],
+  "T51RoutingChunks": {
+    "thigh": {
+      "matchesBaseline": true,
+      "sha256Now": "9fdb02f6b76559a9e5f03865ab33f7061184e6ff1712e37f7534faf082b79ac3"
+    },
+    "leg": {
+      "matchesBaseline": true,
+      "sha256Now": "e175ee6344d1d69689d8ef1f387dcbf8adc330cda9182db3c67ae6e5c2cf4152"
+    },
+    "foot": {
+      "matchesBaseline": true,
+      "sha256Now": "bf3e8ee7f483faeaa95a1f1c134c14033905faa50363c70562973160ad652984"
+    }
+  },
+  "openSimModels": {
+    "headBefore": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "headAfter": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "trackedFilesBefore": 1037,
+    "trackedFilesAfter": 1037,
+    "cleanBefore": true,
+    "cleanAfter": true,
+    "statusEntryCountAfter": 0
+  },
+  "untrackedIgnoredT55LargeAssets": {
+    "meshObjDir": "atlas-data/source-cache/bodyparts3d-r4/mesh/t55",
+    "convertedGlbPath": "atlas-data/source-cache/bodyparts3d-r4/converted/t55/T55-bilateral-lower-limb-static-source.glb",
+    "trackedInGit": false,
+    "sha256": "7012f34696d1156a529d6dad3bad8313af674cc4e13630a9e2fd6a325ce932b7"
+  }
+}

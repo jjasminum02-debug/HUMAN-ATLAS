@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>T55 private static source QA</title>
+  <style>
+    :root { color-scheme: dark; font: 14px/1.45 system-ui, sans-serif; background: #10151b; color: #e7ebef; }
+    * { box-sizing: border-box; }
+    body { margin: 0; display: grid; grid-template-columns: 310px minmax(0,1fr); width: 100vw; height: 100vh; overflow: hidden; }
+    aside { border-right: 1px solid #34404b; padding: 14px; overflow: auto; min-height: 0; min-width: 0; }
+    main { min-width: 0; min-height: 0; display: grid; grid-template-rows: auto minmax(0,1fr) auto; }
+    #toolbar { display: flex; gap: 8px; padding: 10px; flex-wrap: wrap; border-bottom: 1px solid #34404b; }
+    button, select, input { max-width: 100%; color: inherit; background: #202a34; border: 1px solid #536372; border-radius: 4px; padding: 7px 9px; }
+    button[aria-pressed="true"] { outline: 2px solid #84c5ff; }
+    #stage { position: relative; min-height: 0; min-width: 0; }
+    canvas { display: block; width: 100%; height: 100%; min-height: 0; }
+    #status { padding: 8px 12px; border-top: 1px solid #34404b; color: #bdc9d4; overflow-wrap: anywhere; }
+    #list { display: grid; gap: 3px; margin-top: 8px; }
+    #list button { text-align: left; font-size: 12px; overflow-wrap: anywhere; }
+    #selected { padding: 10px; border: 1px solid #536372; min-height: 58px; margin-top: 10px; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .legend { color: #bac6d1; font-size: 12px; }
+    @media (max-width: 700px) { body { grid-template-columns: minmax(0,1fr); grid-template-rows: minmax(190px,40vh) minmax(0,1fr); } aside { border-right: 0; border-bottom: 1px solid #34404b; } main { min-height: 0; } }
+  </style>
+  <script type="importmap">
+    {"imports":{"three":"../../../atlas-web/node_modules/three/build/three.module.js"}}
+  </script>
+</head>
+<body>
+  <aside>
+    <strong>T55 내부 정적 자산 QA</strong>
+    <p class="legend">제품 UI 아님 · BodyParts3D R4 정적 참조 · 한 scene/root/renderer · 공개 또는 사람 검토 승인 아님</p>
+    <label for="region">검증 필터</label><br>
+    <select id="region">
+      <option value="all">T53 몸통·골반 + T54 어깨·팔 + T55 양측 다리</option>
+      <option value="pelvis">T53 골반·볼기</option>
+      <option value="thigh">T55 넙다리</option>
+      <option value="leg">T55 종아리</option>
+      <option value="foot">T55 발</option>
+      <option value="right-calf">오른쪽 종아리 선택</option>
+    </select>
+    <div id="selected">구조 선택 없음</div>
+    <label for="filter">원본 ID 또는 원문명</label><br>
+    <input id="filter" type="search" placeholder="FJ ID / source name">
+    <div id="list"></div>
+  </aside>
+  <main>
+    <div id="toolbar">
+      <button data-view="front" aria-pressed="true">정면 (+Z)</button>
+      <button data-view="back" aria-pressed="false">후면 (-Z)</button>
+      <button data-view="side" aria-pressed="false">측면 (+X)</button>
+      <button id="showAll">전체 장면</button>
+    </div>
+    <div id="stage"><canvas id="canvas" aria-label="T55 T53 T54 same source integration render"></canvas></div>
+    <div id="status">GLB 로딩 중</div>
+  </main>
+  <script type="module" src="./private-preview.mjs"></script>
+</body>
+</html>
