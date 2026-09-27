@@ -39,15 +39,9 @@ function defaultSide(navigation: LearnerNavigationData, categoryId: string | nul
 }
 
 export function defaultLearnerRoute(navigation: LearnerNavigationData): AtlasRouteState {
-  const scene = navigation.sceneManifests.find((candidate) => candidate.availability !== "unavailable" && categoryMemberships(navigation, candidate.categoryId).length > 0);
-  const categoryId = scene?.categoryId ?? navigation.categories[0]?.id ?? null;
-  const first = categoryId ? categoryMemberships(navigation, categoryId)[0] : undefined;
-  return {
-    regionId: categoryId,
-    side: defaultSide(navigation, categoryId),
-    selection: first ? muscleSelection(first.entityId) : null,
-    legacyRoute: false,
-  };
+  // The home is a durable empty route, never an implicitly selected pilot muscle.
+  void navigation;
+  return { regionId: null, side: null, selection: null, legacyRoute: false };
 }
 
 export function routeForCategory(
@@ -59,7 +53,7 @@ export function routeForCategory(
   const memberships = categoryMemberships(navigation, categoryId);
   const currentId = currentSelection?.kind === "muscle" ? currentSelection.conceptId : null;
   const retained = currentId && memberships.some((row) => row.entityId === currentId) ? currentSelection : null;
-  const selected = retained ?? (memberships[0] ? muscleSelection(memberships[0].entityId) : null);
+  const selected = retained;
   return { regionId: categoryId, side: selected ? defaultSide(navigation, categoryId) : null, selection: selected, legacyRoute: false };
 }
 

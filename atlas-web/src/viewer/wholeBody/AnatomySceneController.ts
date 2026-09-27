@@ -52,12 +52,14 @@ export class AnatomySceneController {
     this.controls.addEventListener('change', this.invalidate);
     // Fetch cancellation must reach both the network and the late parse guard.
     this.queue = new ResourceQueue((id, signal) => this.load(id, signal), group => this.release(group), () => this.sync());
-    this.observer = new ResizeObserver(() => {
+    const resize = () => {
       const { width, height } = host.getBoundingClientRect();
       if (!width || !height) return;
       this.size = { width, height }; this.camera.aspect = width / height; this.camera.updateProjectionMatrix();
       this.renderer.setSize(width, height); this.dirty = true;
-    });
+    };
+    resize(); // Measure the mounted host before the initial fit, not the old 1:1 placeholder.
+    this.observer = new ResizeObserver(resize);
     this.observer.observe(host);
     document.addEventListener('visibilitychange', this.invalidate);
     window.addEventListener('pageshow', this.invalidate);

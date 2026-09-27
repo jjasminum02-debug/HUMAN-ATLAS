@@ -1,0 +1,105 @@
+/* Learner shell only. The authoring surface retains its own layout. */
+.atlas-shell { background: #eff1ef; height: 100dvh; min-height: 560px; overflow: hidden; }
+.atlas-shell .study-header { height: 100px; padding: 22px 30px; gap: 16px; z-index: 4; background: #eff1ef; }
+.atlas-shell .header-brand-group { gap: 18px; }
+.atlas-shell .brand { text-align: left; padding: 0; font-size: 19px; letter-spacing: .08em; }
+.atlas-shell .brand small { font-size: 11px; margin-top: 7px; }
+.atlas-shell .global-search { width: 310px; height: 48px; border-radius: 16px; box-shadow: none; }
+.atlas-shell .global-search input { min-width: 0; font-size: 13px; }
+.atlas-shell .app-info-trigger { font-size: 11px; min-height: 44px; }
+.atlas-shell .study-layout { display: block; position: relative; flex: 1; min-height: 0; padding: 0; }
+.atlas-shell .study-stage { position: absolute; inset: 0; height: auto; min-height: 0; border: 0; border-radius: 0; overflow: hidden; }
+.atlas-shell .study-stage > .stage-caption { left: 300px; top: 14px; right: auto; width: auto; max-width: none; padding: 0; }
+.atlas-shell .stage-caption h2 { font-size: 25px; margin: 7px 0 0; font-weight: 600; letter-spacing: -.04em; }
+.atlas-shell .stage-caption p { font-size: 11px; margin: 6px 0 0; }
+.atlas-shell .eyebrow { font-size: 9px; letter-spacing: .17em; color: #7b8e87; }
+.atlas-shell .study-sidebar { position: absolute; z-index: 3; top: 14px; left: 24px; bottom: 26px; width: 240px; max-height: none; padding: 24px 16px; border-radius: 22px; background: #ffffffed; box-shadow: 0 6px 30px #314b3a06; border: 1px solid #fff; overflow: auto; display: block; }
+.atlas-shell .sidebar-heading { padding: 0 6px; }
+.atlas-shell .sidebar-heading h1 { margin: 8px 0; font-size: 20px; font-weight: 600; }
+.atlas-shell .sidebar-heading p { font-size: 12px; margin: 0 0 16px; color: #87948e; }
+.atlas-shell .region-grid { display: grid; grid-template-columns: 1fr; gap: 3px; padding: 0; }
+.atlas-shell .region-grid button { padding: 10px 12px; min-height: 40px; border: 0; border-radius: 10px; font-size: 12px; color: #65766f; }
+.atlas-shell .region-grid button[aria-pressed=true] { background: #e5efeb; color: #356b5e; }
+.atlas-shell .region-list-heading { border-top: 1px solid #edf0ed; margin-top: 18px; padding: 19px 8px 0; }
+.atlas-shell .region-list-heading h2 { font-size: 15px; }
+.atlas-shell .region-list-heading .result-count { font-size: 11px; color: #8a9791; }
+.atlas-shell .region-structure-list { min-height: 0; max-height: none; overflow: visible; padding: 0; }
+.atlas-shell .region-structure-list button { min-height: 50px; padding: 10px; border-radius: 12px; }
+.atlas-shell .region-structure-list button small { font-size: 10px; margin-top: 4px; }
+.atlas-shell .quiet-note { font-size: 12px; line-height: 1.8; color: #8a948f; }
+.atlas-shell .study-details { position: absolute; z-index: 3; top: 105px; right: 24px; width: 310px; max-height: calc(100% - 130px); border-radius: 22px; border: 1px solid #fff; background: #fffffff5; box-shadow: 0 12px 45px #334b4010; padding: 0; overflow: auto; }
+.atlas-shell .study-detail-content { padding: 24px; }
+.atlas-shell .study-detail-content > h2 { font-size: 26px; letter-spacing: -.04em; margin: 12px 0 18px; }
+.atlas-shell .names-card { padding: 0; border: 0; background: none; gap: 10px; }
+.atlas-shell .names-card > div { gap: 12px; }
+.atlas-shell .names-card span { font-size: 10px; color: #93a099; }
+.atlas-shell .names-card strong { font-size: 12px; font-weight: 500; }
+.atlas-shell .movement-cta-block { margin: 22px 0 18px; }
+.atlas-shell .movement-cta { width: 100%; min-height: 46px; border-radius: 12px; font-size: 13px; background: #d8e7e0; color: #40685c; opacity: 1; }
+.atlas-shell .movement-cta-block .quiet-note { font-size: 10px; margin: 7px 0 0; }
+.atlas-shell .study-tabs { margin: 0 0 20px; padding: 4px; background: #f0f3f0; border-radius: 12px; gap: 4px; }
+.atlas-shell .study-tabs button { min-height: 40px; border: 0; border-radius: 9px; font-size: 12px; }
+.atlas-shell .study-tabs button[aria-selected=true] { background: #fff; box-shadow: 0 2px 8px #244b3410; color: #3f7363; }
+.atlas-shell .attachment-section h3 { font-size: 13px; }
+.atlas-shell .attachment-section p { font-size: 13px; line-height: 1.9; color: #66726b; }
+.atlas-shell .bone-related-muscle { min-height: 40px; }
+.atlas-shell .mobile-region-picker, .atlas-shell .explore-trigger, .atlas-shell .explore-close { display: none; }
+.atlas-shell .whole-body-viewer { height: 100%; min-height: 0; border-radius: 0; }
+.atlas-shell .whole-body-canvas { inset: 95px 0 65px; }
+.atlas-shell .body-tools { top: 14px; left: auto; right: 24px; gap: 6px; z-index: 2; max-width: 390px; justify-content: flex-end; }
+.atlas-shell .body-tools button, .atlas-shell .body-tools summary { min-height: 42px; padding: 10px 14px; border-radius: 12px; font-size: 12px; border-color: #e0e6df; }
+.atlas-shell .body-tools button[aria-pressed=true] { background: #47796b; color: white; }
+.atlas-shell .body-tools details { position: relative; }
+.atlas-shell .body-tools details[open] { position: relative; padding: 0; background: none; box-shadow: none; max-width: none; }
+.atlas-shell .body-tools details[open] label, .atlas-shell .body-tools details[open] p { position: absolute; right: 0; width: 245px; background: white; padding: 15px; box-shadow: 0 15px 30px #35493f15; z-index: 5; }
+.atlas-shell .body-tools details[open] label { top: 46px; border-radius: 14px 14px 0 0; }
+.atlas-shell .body-tools details[open] p { top: 93px; border-radius: 0 0 14px 14px; font-size: 11px; }
+.atlas-shell .body-status { bottom: 14px; padding: 6px 12px; border-radius: 10px; background: transparent; max-width: 420px; font-size: 11px; }
+.atlas-shell .body-status small { font-size: 10px; }
+@media(max-width:1100px) and (min-width:761px) {
+  .atlas-shell .study-sidebar { width: 205px; left: 18px; padding: 20px 12px; }
+  .atlas-shell .study-stage > .stage-caption { left: 250px; }
+  .atlas-shell .study-details { right: 18px; width: 275px; }
+  .atlas-shell .study-detail-content { padding: 20px; }
+  .atlas-shell .body-tools { max-width: 295px; }
+  .atlas-shell .body-tools button, .atlas-shell .body-tools summary { padding: 10px; }
+  .atlas-shell .body-status { max-width: 310px; }
+}
+@media(max-width:760px) {
+  .atlas-shell { min-height: 500px; }
+  .atlas-shell .study-header { height: 132px; padding: 18px 18px 12px; display: grid; grid-template-columns: 1fr auto; gap: 12px; }
+  .atlas-shell .header-brand-group { min-width: 0; gap: 10px; }
+  .atlas-shell .brand { font-size: 15px; }
+  .atlas-shell .brand small { display: none; }
+  .atlas-shell .app-info-trigger { min-height: 32px; font-size: 10px; padding: 5px; }
+  .atlas-shell .global-search { grid-column: 1 / -1; width: 100%; height: 42px; border-radius: 12px; }
+  .atlas-shell .explore-trigger { display: block; padding: 10px; background: #fff; border-radius: 12px; font-size: 11px; min-height: 40px; }
+  .atlas-shell .study-sidebar { display: none; top: 0; left: 12px; right: 12px; bottom: auto; width: auto; max-height: 65%; padding: 18px; box-shadow: 0 15px 40px #314b3a22; }
+  .atlas-shell .study-sidebar.is-open { display: block; }
+  .atlas-shell .explore-close { display: block; float: right; padding: 10px; min-height: 40px; color: #547669; }
+  .atlas-shell .region-grid { grid-template-columns: 1fr 1fr; gap: 3px; }
+  .atlas-shell .region-grid button { font-size: 12px; min-height: 42px; }
+  .atlas-shell .region-structure-list { display: block; }
+  .atlas-shell .region-structure-list button { width: 100%; text-align: left; }
+  .atlas-shell .study-stage { height: auto; min-height: 0; }
+  .atlas-shell .study-stage > .stage-caption { top: 10px; left: 20px; right: auto; }
+  .atlas-shell .stage-caption h2 { font-size: 21px; }
+  .atlas-shell .stage-caption p, .atlas-shell .stage-caption .eyebrow { display: none; }
+  .atlas-shell .body-tools { top: 52px; left: 18px; right: 18px; max-width: none; justify-content: flex-start; gap: 5px; }
+  .atlas-shell .body-tools button, .atlas-shell .body-tools summary { min-height: 38px; padding: 8px 10px; font-size: 11px; }
+  .atlas-shell .whole-body-canvas { inset: 100px 0 90px; }
+  .atlas-shell .body-status { bottom: 40px; width: calc(100% - 30px); max-width: none; font-size: 10px; }
+  .atlas-shell .body-status small { display: none; }
+  .atlas-shell .study-details { top: auto; right: 12px; left: 12px; bottom: 10px; width: auto; max-height: 48%; border-radius: 20px; }
+  .atlas-shell .study-details > .mobile-detail-summary { display: block; min-height: 48px; padding: 15px 20px; font-size: 13px; color: #42675b; cursor: pointer; }
+  .atlas-shell .study-details > .mobile-detail-summary::after { content: '접기 / 펼치기'; float: right; font-size: 10px; color: #839389; }
+  .atlas-shell .study-details .study-detail-content { padding: 0 20px 20px; }
+  .atlas-shell .study-details:not([open]) .study-detail-content { display: none; }
+  .atlas-shell .study-detail-content > h2 { margin-top: 6px; font-size: 24px; }
+}
+@media(prefers-reduced-motion:reduce) { .atlas-shell *, .atlas-shell *::before, .atlas-shell *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+
+.atlas-shell .study-sidebar[data-searching=true] .region-grid,
+.atlas-shell .study-sidebar[data-searching=true] .sidebar-heading { display: none; }
+.atlas-shell .study-sidebar[data-searching=true] .region-list-heading { border: 0; margin: 0; padding-top: 4px; }
+@media(max-width:760px) { .atlas-shell .study-details > .mobile-detail-summary { position: sticky; top: 0; z-index: 1; background: #fff; } }

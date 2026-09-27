@@ -1,0 +1,30 @@
+{
+  "statusBeforeSha256": "2285f7033b9eb64dc2112535b783f736836374dffc2778a03d102dcd35490cef",
+  "registryBeforeSha256": "8ba76a769f0fac28653ff1cd93a2be3e2c3bf9b65bd5b0a4811c137b504897e0",
+  "statusHeaderChanges": {
+    "CURRENT_TASK": {
+      "before": "- CURRENT_TASK: T56 - passed_with_gaps; local static single AnatomySceneRoot/renderer integration verified. T70 parent + T71/T72 siblings = 513 unique source ELEMENTs; 481 default visible, 20 opt-in supplements, 12 held hidden, existing learner bindings 10. First-pass residual 0/11, bone-root gaps 26, whole-body denominator and rights/human-review holds unchanged. See work/reports/T56.md.",
+      "after": "- CURRENT_TASK: T57 - passed (local UI scope); minimal HUMAN ATLAS startup, actual whole-body home, continuous single scene, responsive exploration/cards and layer controls verified. Source-only/rights/human-review holds and whole-body gaps unchanged. See work/reports/T57.md."
+    },
+    "NEXT_TASK": {
+      "before": "- NEXT_TASK: T57 / Astra · 현재 대화 - app startup/full-body home/layer UI after a new explicit request. T57 has not started.",
+      "after": "- NEXT_TASK: T58 / Astra · 현재 대화 - visual fidelity/framing/performance gate after a new explicit request. T58 has not started."
+    },
+    "LAST_REPORT": {
+      "before": "- LAST_REPORT: work/reports/T56.md",
+      "after": "- LAST_REPORT: work/reports/T57.md"
+    }
+  },
+  "statusAppendedBlock": "\n## T57 — 미니멀 시작 화면·전신 홈·레이어 UI (2026-09-27)\n\n`passed`는 로컬 UI task의 합격이다. 실제 모델 로딩 후 선택 없는 전신 홈, 같은 AnatomySceneRoot/renderer를 유지하는 탐색·카드·레이어 조작, URL/history/deep link와 390/1024/1440px를 검증했다. 사용자 후속 요청으로 로딩의 HA 로고·인체 그림과 로딩/헤더의 슬로건은 모두 제거했다. 회귀 31/31, 타입·빌드, 실제 브라우저 18개 확인 기록과 0 console error/warning. source-only/20개 기본 숨김 보완/12개 held/기존 10개 binding/권리·사람 검토 hold를 바꾸지 않았다. 기본 표시 481 source ELEMENTs는 전신 coverage나 완성 근육 수가 아니다. 전신 분모 미동결·bone-root gap 26·같은 모델 운동 미완은 유지한다. 보고서 `work/reports/T57.md`, 증거 `work/evidence/T57/`. 다음 T58은 미착수다.\n",
+  "registryChanges": {
+    "taskStatuses.T57": {
+      "before": "planned_not_started",
+      "after": "passed"
+    },
+    "nextTask": {
+      "before": "T57",
+      "after": "T58"
+    }
+  },
+  "sharedFilesExcludedFromCommitBecauseExistingWip": true
+}

@@ -155,15 +155,16 @@ test("learner category routes expose twelve regions but only the six sourced leg
   assert.deepEqual(categoriesForMuscleConcept(navigation, "HA-M-000030"), []);
 });
 
-test("category switching clears nonmember selection and never carries the calf scene into another region", () => {
+test("home and category navigation never implicitly select a muscle", () => {
   assert.deepEqual(defaultLearnerRoute(navigation), {
-    regionId: "leg", side: "right", selection: { kind: "muscle", conceptId: "HA-M-000001" }, legacyRoute: false,
+    regionId: null, side: null, selection: null, legacyRoute: false,
   });
+  assert.deepEqual(resolveLearnerRoute("", navigation, refs).route, defaultLearnerRoute(navigation));
   assert.deepEqual(routeForCategory(navigation, "head", { kind: "muscle", conceptId: "HA-M-000001" }), {
     regionId: "head", side: null, selection: null, legacyRoute: false,
   });
   assert.deepEqual(routeForCategory(navigation, "leg", null), {
-    regionId: "leg", side: "right", selection: { kind: "muscle", conceptId: "HA-M-000001" }, legacyRoute: false,
+    regionId: "leg", side: null, selection: null, legacyRoute: false,
   });
   const unsupported = resolveLearnerRoute("?region=foot", navigation, refs);
   assert.equal(unsupported.route.regionId, "foot");

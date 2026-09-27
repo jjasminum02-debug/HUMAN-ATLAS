@@ -22,6 +22,8 @@ import {
 } from '../domain/regionNavigation';
 import rawNavigation from '../../../atlas-data/navigation/atlas-navigation.json';
 import './styles.css';
+import './atlasShell.css';
+import { AtlasLoading } from './AtlasLoading';
 
 type TabName = '구조' | '기능';
 type LearnerConcept = ReturnType<typeof learningConcepts>[number];
@@ -40,8 +42,10 @@ function LearnerNameRows({ name }: { name: LearnerName }) {
   </div>;
 }
 
-function routeUrl(route: AtlasRouteState) {
-  const query = serializeAtlasRoute(location.search, route);
+function routeUrl(route: AtlasRouteState, whole: boolean) {
+  const params = new URLSearchParams(serializeAtlasRoute(location.search, route));
+  if (whole && route.regionId) params.set('view', 'whole'); else params.delete('view');
+  const query = params.toString();
   return `${location.pathname}${query ? `?${query}` : ''}${location.hash}`;
 }
 
@@ -61,7 +65,9 @@ export default function App() {
   const [error, setError] = useState('');
   const [route, setRoute] = useState<AtlasRouteState>(() => defaultLearnerRoute(navigation));
   const [routeReady, setRouteReady] = useState(false);
-  const [wholeView, setWholeView] = useState(false);
+  const [sceneEntered, setSceneEntered] = useState(false);
+  const [wholeView, setWholeView] = useState(true);
+  const [exploreOpen, setExploreOpen] = useState(false);
   const [routeNotice, setRouteNotice] = useState<string | null>(null);
   const [query, setQuery] = useState('');
   const [tab, setTab] = useState<TabName>('구조');
@@ -125,13 +131,17 @@ export default function App() {
     const sync = () => {
       const resolved = resolveLearnerRoute(location.search, navigation, routeRefs);
       setRoute(resolved.route);
+      const whole = !resolved.route.regionId || new URLSearchParams(location.search).get("view") === "whole";
+      setWholeView(whole);
+      setDetailsOpen(Boolean(resolved.route.selection));
+      setQuery('');
       setRouteReady(true);
       setRouteNotice(resolved.notice);
       setUnmappedMeshNotice(null);
       setTab('구조');
       setSelectedActionId(null);
       if (resolved.canonicalize) {
-        const nextUrl = routeUrl(resolved.route);
+        const nextUrl = routeUrl(resolved.route, whole);
         if (nextUrl !== `${location.pathname}${location.search}${location.hash}`) {
           history.replaceState(null, '', nextUrl);
         }
@@ -145,6 +155,9 @@ export default function App() {
   const region = navigation.categories.find((candidate) => candidate.id === route.regionId) ?? null;
   const selectedId = routeEntityId(route.selection);
   const selected = selectedId ? concepts.find((concept) => concept.id === selectedId) : undefined;
+  useEffect(() => {
+    if (selectedId && window.matchMedia('(max-width: 760px)').matches) document.querySelector<HTMLElement>('.mobile-detail-summary')?.focus();
+  }, [selectedId]);
   const name = catalog && selectedId ? nameFor(catalog, selectedId) : null;
   const selectedBoneCard = catalog && route.selection?.kind === 'bone'
     ? buildBoneCardData(catalog, navigation, route.selection)
@@ -173,14 +186,15 @@ export default function App() {
       return items;
     }, [])
     : regionMuscles.map((concept) => ({ id: concept.id, label: nameFor(catalog!, concept.id).label, approximate: false, kind: 'muscle' as const }));
-  function commitRoute(nextRoute: AtlasRouteState, replace = false) {
-    const nextUrl = routeUrl(nextRoute);
+  function commitRoute(nextRoute: AtlasRouteState, whole = wholeView) {
+    const nextUrl = routeUrl(nextRoute, whole);
     const currentUrl = `${location.pathname}${location.search}${location.hash}`;
     if (nextUrl !== currentUrl) {
-      if (replace) history.replaceState(null, '', nextUrl);
-      else history.pushState(null, '', nextUrl);
+      history.pushState(null, '', nextUrl);
     }
     setRoute(nextRoute);
+    setWholeView(whole);
+    setExploreOpen(false);
     setRouteNotice(null);
     setUnmappedMeshNotice(null);
     setTab('구조');
@@ -190,7 +204,7 @@ export default function App() {
 
   function chooseRegion(categoryId: string) {
     setQuery('');
-    commitRoute(routeForCategory(navigation, categoryId, route.selection));
+    commitRoute(routeForCategory(navigation, categoryId, null), false);
   }
 
   function chooseEntity(entityId: string) {
@@ -215,20 +229,21 @@ export default function App() {
     commitRoute({ regionId: route.regionId, side: route.side, selection: null, legacyRoute: false });
   }
 
-  if (error) return <main className="load-state"><h1>자료를 불러오지 못했습니다</h1><p>{error}</p><button onClick={() => location.reload()}>다시 시도</button></main>;
-  if (!catalog || !routeReady) return <main className="load-state" role="status">Human Atlas를 준비하고 있습니다…</main>;
+  if (error) return <AtlasLoading failed onRetry={() => location.reload()}/>;
+  if (!catalog || !routeReady) return <AtlasLoading/>;
 
-  const stageTitle = wholeView ? '전체 모형' : region?.labelKo ?? (selected ? '구조 사전' : '부위 선택');
+  const stageTitle = wholeView ? '전신 살펴보기' : region?.labelKo ?? '전신 살펴보기';
   const stageDescription = '회전하고 확대하며 구조를 살펴보세요.';
 
-  return <div className="study-shell">
-    <a className="skip-link" href="#study-details">선택한 구조 설명으로 이동</a>
-    <header className="study-header">
+  return <div className="study-shell atlas-shell">
+    <a className="skip-link" inert={!sceneEntered} href={route.selection ? "#study-details" : "#atlas-stage"}>{route.selection ? "선택한 구조 설명으로 이동" : "모형으로 이동"}</a>
+    <header className="study-header" inert={!sceneEntered}>
       <div className="header-brand-group">
-        <a className="brand" href="/"><span className="brand-dot"/> HUMAN ATLAS <small>구조를 보고, 움직임을 이해하다</small></a>
+        <button className="brand" aria-label="Human Atlas 전신 홈" onClick={() => { setQuery(''); commitRoute(defaultLearnerRoute(navigation), true); }}><span className="brand-dot"/> HUMAN ATLAS</button>
         <button type="button" className="app-info-trigger" onClick={() => appInfoDialog.current?.showModal()}>앱 정보</button>
       </div>
-      <label className="global-search"><span aria-hidden="true">⌕</span><input type="search" aria-label="구조 검색" placeholder="구조 이름 · 한글, English" value={query} onChange={(event) => setQuery(event.target.value)} autoComplete="off"/>{query && <button aria-label="검색 지우기" onClick={() => setQuery('')}>×</button>}</label>
+      <button className="explore-trigger" aria-expanded={exploreOpen} aria-controls="atlas-explorer" onClick={() => setExploreOpen(!exploreOpen)}>부위 탐색</button>
+      <label className="global-search"><span aria-hidden="true">⌕</span><input type="search" aria-label="구조 검색" placeholder="근육·뼈 이름 검색" value={query} onChange={(event) => { setQuery(event.target.value); setExploreOpen(true); }} autoComplete="off"/>{query && <button aria-label="검색 지우기" onClick={() => setQuery('')}>×</button>}</label>
     </header>
     <dialog className="app-info-dialog" ref={appInfoDialog} aria-labelledby="app-info-title">
       <div className="app-info-content">
@@ -236,12 +251,14 @@ export default function App() {
         <h2 id="app-info-title">모형·자료 정보</h2>
         <p>3D 모형 자료: BodyParts3D Release 4.0.</p>
         <p className="model-attribution">BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International</p>
+        <p>현재 확보된 모형과 설명을 표시합니다. 일부 구조의 연결과 검토는 진행 중이며, 전체 인체 구조의 완성을 뜻하지 않습니다. 원본 파일별 이용 조건 확인 전까지 공개 재배포는 보류합니다.</p>
         <a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html" target="_blank" rel="noreferrer">이용 조건 보기 ↗</a>
       </div>
     </dialog>
     <div className="study-layout">
-      <aside className="study-sidebar">
-        <div className="sidebar-heading"><span className="eyebrow">EXPLORE ANATOMY</span><h1>부위 탐색</h1><p>12개 부위와 확인된 구조 연결을 살펴봅니다.</p></div>
+      <aside inert={!sceneEntered} id="atlas-explorer" data-searching={Boolean(query.trim())} onKeyDown={event => { if (event.key === 'Escape') { setExploreOpen(false); document.querySelector<HTMLElement>('.explore-trigger')?.focus(); } }} className={`study-sidebar ${exploreOpen ? "is-open" : ""}`} aria-label="부위 탐색">
+        <button className="explore-close" onClick={() => setExploreOpen(false)}>탐색 닫기</button>
+        <div className="sidebar-heading"><span className="eyebrow">EXPLORE ANATOMY</span><h1>부위 탐색</h1><p>어디부터 살펴볼까요?</p></div>
         <label className="mobile-region-picker">부위 선택
           <select aria-label="부위 선택" value={region?.id ?? ''} onChange={(event) => event.target.value && chooseRegion(event.target.value)}>
             <option value="" disabled>부위를 선택해 주세요</option>
@@ -253,7 +270,7 @@ export default function App() {
         </nav>
         <div className="region-list-heading">
           <span className="eyebrow">{query.trim() ? 'SEARCH RESULTS' : 'STRUCTURES'}</span>
-          <h2>{query.trim() ? '검색 결과' : region?.labelKo ?? '연결된 부위 없음'}</h2>
+          <h2>{query.trim() ? '검색 결과' : region?.labelKo ?? '모형에서 시작하세요'}</h2>
           <p className="result-count" role="status">{query.trim() ? `검색 결과 ${listItems.length}` : region ? `${listItems.length}개 연결된 근육` : '부위를 선택해 주세요'}</p>
         </div>
         <nav className="study-list region-structure-list" aria-label={query.trim() ? '검색 구조 목록' : `${region?.labelKo ?? '선택한 부위'} 구조 목록`}>
@@ -274,12 +291,12 @@ export default function App() {
               {item.approximate && <em>비슷한 이름</em>}
             </button>;
           })}
-          {listItems.length === 0 && <p className="quiet-note">{query.trim() ? '찾는 이름이 아직 등록되지 않았습니다. 다른 언어 이름으로도 검색해 보세요.' : '이 부위의 구조 연결은 준비 중입니다. 미확인 구조를 추정해 채우지 않았습니다.'}</p>}
+          {listItems.length === 0 && <p className="quiet-note">{query.trim() ? '찾는 이름이 아직 등록되지 않았습니다. 다른 언어 이름으로도 검색해 보세요.' : region ? '이 부위의 설명 연결은 준비 중입니다. 모형은 자유롭게 둘러볼 수 있습니다.' : '부위를 고르거나 이름을 검색하세요. 설명이 연결된 근육과 뼈는 모형에서도 선택할 수 있습니다.'}</p>}
         </nav>
       </aside>
-      <section className="study-stage" aria-label={`${stageTitle} 학습 장면`}>
-        <div className="stage-caption"><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{stageTitle}</h2><p>{stageDescription}</p></div>
-        <WholeBodyViewer whole={wholeView} onWholeChange={setWholeView} region={route.regionId} selectedId={selectedId} selectedIds={route.side === 'left' ? [] : [...(selectedId ? [selectedId] : []), ...(!route.selection || route.selection.kind !== 'muscle' || route.selection.partId ? [] : parts.map(part => part.id))]} onSelect={(id, side) => {
+      <section id="atlas-stage" tabIndex={-1} className="study-stage" aria-label={`${stageTitle} 학습 장면`}>
+        <div className="stage-caption" aria-hidden={!sceneEntered}><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{stageTitle}</h2><p>{stageDescription}</p></div>
+        <WholeBodyViewer onEntered={setSceneEntered} whole={wholeView} onWholeChange={() => { setQuery(''); commitRoute(defaultLearnerRoute(navigation), true); }} region={route.regionId} selectedId={selectedId} selectedIds={route.side === 'left' ? [] : [...(selectedId ? [selectedId] : []), ...(!route.selection || route.selection.kind !== 'muscle' || route.selection.partId ? [] : parts.map(part => part.id))]} onSelect={(id, side) => {
           if (id.startsWith('HA-S-')) {
             const instance = navigation.structureInstances.find(row => row.structureId === id && row.side === side);
             if (instance) chooseBone({ kind: 'bone', conceptId: id, instanceId: instance.id });
@@ -287,7 +304,7 @@ export default function App() {
         }}/>
 
       </section>
-      <details className="study-details" id="study-details" open={detailsOpen} onToggle={(event) => setDetailsOpen(event.currentTarget.open)}>
+      {(route.selection || routeNotice) && <details inert={!sceneEntered} className="study-details" id="study-details" open={detailsOpen} onToggle={(event) => setDetailsOpen(event.currentTarget.open)}>
         <summary className="mobile-detail-summary">{selectedBoneName?.label ?? (selected && name ? name.label : '선택한 구조 설명')}</summary>
         <div className="study-detail-content">
           {route.selection && <button type="button" className="bone-related-muscle" onClick={clearSelection}>선택 해제</button>}
@@ -316,7 +333,12 @@ export default function App() {
               <button type="button" className="movement-cta" disabled aria-describedby="movement-unavailable-note">움직임으로 이해하기</button>
               <p id="movement-unavailable-note" className="quiet-note">움직임 시범 자료는 준비 중입니다.</p>
             </div>
-            <div className="study-tabs" role="tablist" aria-label="학습 내용">{(['구조','기능'] as TabName[]).map((entry) => <button key={entry} role="tab" id={`tab-${entry}`} aria-controls="study-tab-panel" aria-selected={tab === entry} onClick={() => setTab(entry)}>{entry}</button>)}</div>
+            <div className="study-tabs" role="tablist" aria-label="학습 내용">{(['구조','기능'] as TabName[]).map((entry) => <button key={entry} role="tab" id={`tab-${entry}`} aria-controls="study-tab-panel" aria-selected={tab === entry} tabIndex={tab === entry ? 0 : -1} onKeyDown={event => {
+              if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+              event.preventDefault();
+              const next = event.key === 'Home' ? '구조' : event.key === 'End' ? '기능' : tab === '구조' ? '기능' : '구조';
+              setTab(next); document.getElementById(`tab-${next}`)?.focus();
+            }} onClick={() => setTab(entry)}>{entry}</button>)}</div>
             <section id="study-tab-panel" key={selectedId} role="tabpanel" aria-labelledby={`tab-${tab}`}>
               {tab === '구조' ? <>
                 {parts.length > 0 && <div className="part-pills" aria-label="근육 부분"><button aria-pressed={selectedId === parentId} onClick={() => chooseEntity(parentId!)}>전체</button>{parts.map((part) => <button key={part.id} aria-pressed={part.id === selectedId} onClick={() => chooseEntity(part.id)}>{nameFor(catalog, part.id).label.split(' · ').at(-1)}</button>)}</div>}
@@ -341,7 +363,7 @@ export default function App() {
             </section>
           </> : <div className="upcoming"><h2>{routeNotice ? '주소의 구조 연결을 확인해 주세요' : '구조를 선택해 주세요'}</h2><p>{routeNotice ?? (region ? `${region.labelKo} 목록 또는 설명이 연결된 모형을 선택해 주세요.` : '검색하거나 부위를 선택해 학습할 구조를 찾을 수 있습니다.')}</p></div>}
         </div>
-      </details>
+      </details>}
     </div>
   </div>;
 }
