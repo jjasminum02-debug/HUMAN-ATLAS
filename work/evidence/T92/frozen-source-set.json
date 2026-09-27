@@ -1,0 +1,1085 @@
+{
+  "archiveTree": "IS-A",
+  "conceptToElementRelationCount": 14,
+  "historicalContract": {
+    "T50SceneContractSha256": "2697496d18bd1fc58adca557d95364092f7c7189bff4218277882142c8b26fa4",
+    "T71SiblingPackagePreserved": "a21b453350996c6545cd15aef405faf22678761ef613ca45064a01f426c1ed36",
+    "T72SiblingPackagePreserved": "f1ee55b06e66d51aeae1539732150071c887a0b8c4519a1b18db4e28f04f18cf",
+    "parentIntegrationManifest": {
+      "path": "atlas-data/manifests/bodyparts3d-r4-t70/integration-manifest.json",
+      "sha256": "cc3730f241716ae753a99e9210fbbc77a1f0bef0f4982efbc69837393124cc4f"
+    }
+  },
+  "inputSha256": {
+    "atlas-data/manifests/bodyparts3d-r4-t53/back.json": "b303803862b4df454eb69f7b7bda6936f59acd9f82a77d9a3ab0ad5e3544e18d",
+    "atlas-data/manifests/bodyparts3d-r4-t53/source-manifest.json": "88e8b4369073fb38b82686827109bbe9302d9a79357ddaad711ae1104d83ef4e",
+    "atlas-data/manifests/bodyparts3d-r4-t54/shoulder-scapular.json": "c20b5abb19d2f97cef54e00b77d113f031def0244bab8296c6935231617a2cee",
+    "atlas-data/manifests/bodyparts3d-r4-t54/source-manifest.json": "a27630c0bd6da1664caa4b416f84d990aff6c8c4deab816b6d374a7c0eece01a",
+    "atlas-data/manifests/bodyparts3d-r4-t70/integration-manifest.json": "cc3730f241716ae753a99e9210fbbc77a1f0bef0f4982efbc69837393124cc4f",
+    "atlas-data/manifests/bodyparts3d-r4-t70/scope-inventory.json": "edae7afa21f953e78f2a19c6137cbf13bb3a509b6fc4bb5726cd697ab855a355",
+    "atlas-data/manifests/bodyparts3d-r4-t71/integration-manifest.json": "5bf22cd9dbd9adee4f7e3fe7f7e6b653b60314c018c007e2790bdf7bf167a654",
+    "atlas-data/manifests/bodyparts3d-r4-t71/source-manifest.json": "a21b453350996c6545cd15aef405faf22678761ef613ca45064a01f426c1ed36",
+    "atlas-data/manifests/bodyparts3d-r4-t72/integration-extension.json": "0f03ab6e00cdd37179a6af32a377b19b776cce044f3224478d4c062655e00c70",
+    "atlas-data/manifests/bodyparts3d-r4-t72/source-manifest.json": "f1ee55b06e66d51aeae1539732150071c887a0b8c4519a1b18db4e28f04f18cf",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_element_parts.txt": "a3de74423f943b0d724ae8f59b3a817f87c423a544f8db98113b1980817cbeaf",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_inclusion_relation_list.txt": "26e7d818e03a8c909fe09c561f38d0d513423c87681f9450a803bc38f5b07564",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_parts_list_e.txt": "ab7796deedd49205e77f3609a1cb8c53e2bbee14ecb5c9a6ca05227469780513",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_element_parts.txt": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_inclusion_relation_list.txt": "1b40738270931e3c1d955ce34e0fce0d8d10d8c5ad543463e40b4b4c0243007c",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_parts_list_e.txt": "9224080557053e6f1322f1e13ab27f0ecde0db19bb3b505f0631afad230eeebd",
+    "work/evidence/T50/scene-contract.md": "2697496d18bd1fc58adca557d95364092f7c7189bff4218277882142c8b26fa4",
+    "work/evidence/T70/validation.json": "23ab3bc123a3d42c337ce52ec8e72260580893a0b25c07b668591b8499a6c58d",
+    "work/evidence/T71/validation.json": "de790656f7d4363888fbd8285e37efae04445f7480d6a5062b6704411f621b99",
+    "work/evidence/T72/validation.json": "68bb7d3983c1ab584fca36491f4c3994b0dc53d9e48309bb9f5f1a5dc35917e0",
+    "work/evidence/T73/region-coverage.json": "0fcdc03a9a9033746d9de51c75dc7c08c7dd0d4e750449d875f368e8c6b7a636",
+    "work/evidence/T73/target-source-matrix.json": "a49504016e80bf02b075a8f8e525930860318c34461b8f8e0b9b9c1fd8d7be46",
+    "work/evidence/T73/validation.json": "1b626480a4177ab7c9108121663ba0aa35d97d56e83df75250010e06e5967059"
+  },
+  "internalBatches": [
+    {
+      "batchId": "T92-B01-TRAPEZIUS-SOURCE",
+      "count": 6,
+      "sourceElementFileIds": [
+        "FJ1520",
+        "FJ1520M",
+        "FJ1554",
+        "FJ1554M",
+        "FJ1521",
+        "FJ1521M"
+      ]
+    }
+  ],
+  "officialDownloadPage": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html",
+  "officialReadme": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/README_e.html",
+  "oneNodePerUniqueFj": true,
+  "policy": {
+    "candidateRegionContextsAreNotCanonicalMemberships": true,
+    "canonicalLearnerBindingsCreated": false,
+    "humanAnatomyReviewed": false,
+    "learnerPolicyChanged": false,
+    "neverInferSideFromFjSuffixOrCoordinates": true,
+    "noMirroringOrRecentering": true,
+    "publicRedistributionHeldPendingFileLevelLicenseReconciliation": true,
+    "sameStableSourceNodeAcrossConceptAndRegionContext": true,
+    "sideMustComeFromExactOfficialConceptNameAndRelation": true,
+    "wholeBodyCanonicalDenominator": null
+  },
+  "revision": "BodyParts3D-R4-T92-FROZEN-TRAPEZIUS-SOURCE-SET-v1",
+  "selectedArchiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+  "sourceAssetMembershipSha256": "3f6abbadb66d9ce7f5088f24bd951375fc0bfac81923f8867bdc62ffef1ec3af",
+  "sourceConceptCount": 10,
+  "sourceConceptMembershipSha256": "30ce22da644cf28c3cc7a3ea5bbfeb3fa806c87343bdaea8acf11e81a8e16d2b",
+  "sourceConcepts": [
+    {
+      "declaredSourceContextCandidates": [
+        "back",
+        "shoulder-scapular"
+      ],
+      "meshInterpretation": "COMPOUND source concepts share atomic ELEMENT meshes; concept count does not create mesh nodes or canonical memberships",
+      "officialConceptRow": [
+        "FMA32529",
+        "BP8254",
+        "zone of trapezius"
+      ],
+      "officialElementRows": [
+        [
+          "FMA32529",
+          "zone of trapezius",
+          "FJ1554"
+        ],
+        [
+          "FMA32529",
+          "zone of trapezius",
+          "FJ1554M"
+        ]
+      ],
+      "sourceConceptId": "FMA32529",
+      "sourceNameEnglish": "zone of trapezius",
+      "sourceParentRelations": [
+        [
+          "FMA10474",
+          "zone of muscle organ",
+          "FMA32529",
+          "zone of trapezius"
+        ],
+        [
+          "FMA32529",
+          "zone of trapezius",
+          "FMA32556",
+          "transverse part of trapezius"
+        ]
+      ],
+      "sourceRepresentationId": "BP8254",
+      "sourceSemanticLabel": "group_or_zone",
+      "sourceTree": "IS-A"
+    },
+    {
+      "declaredSourceContextCandidates": [
+        "back",
+        "shoulder-scapular"
+      ],
+      "meshInterpretation": "COMPOUND source concepts share atomic ELEMENT meshes; concept count does not create mesh nodes or canonical memberships",
+      "officialConceptRow": [
+        "FMA32555",
+        "BP8226",
+        "ascending part of trapezius"
+      ],
+      "officialElementRows": [
+        [
+          "FMA32555",
+          "ascending part of trapezius",
+          "FJ1520"
+        ],
+        [
+          "FMA32555",
+          "ascending part of trapezius",
+          "FJ1520M"
+        ]
+      ],
+      "sourceConceptId": "FMA32555",
+      "sourceNameEnglish": "ascending part of trapezius",
+      "sourceParentRelations": [
+        [
+          "FMA32555",
+          "ascending part of trapezius",
+          "FMA33581",
+          "ascending part of right trapezius"
+        ],
+        [
+          "FMA32555",
+          "ascending part of trapezius",
+          "FMA33583",
+          "ascending part of left trapezius"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FMA32555",
+          "ascending part of trapezius"
+        ]
+      ],
+      "sourceRepresentationId": "BP8226",
+      "sourceSemanticLabel": "part_concept",
+      "sourceTree": "IS-A"
+    },
+    {
+      "declaredSourceContextCandidates": [
+        "back",
+        "shoulder-scapular"
+      ],
+      "meshInterpretation": "COMPOUND source concepts share atomic ELEMENT meshes; concept count does not create mesh nodes or canonical memberships",
+      "officialConceptRow": [
+        "FMA32556",
+        "BP8253",
+        "transverse part of trapezius"
+      ],
+      "officialElementRows": [
+        [
+          "FMA32556",
+          "transverse part of trapezius",
+          "FJ1554"
+        ],
+        [
+          "FMA32556",
+          "transverse part of trapezius",
+          "FJ1554M"
+        ]
+      ],
+      "sourceConceptId": "FMA32556",
+      "sourceNameEnglish": "transverse part of trapezius",
+      "sourceParentRelations": [
+        [
+          "FMA32529",
+          "zone of trapezius",
+          "FMA32556",
+          "transverse part of trapezius"
+        ],
+        [
+          "FMA32556",
+          "transverse part of trapezius",
+          "FMA33584",
+          "transverse part of right trapezius"
+        ],
+        [
+          "FMA32556",
+          "transverse part of trapezius",
+          "FMA33585",
+          "transverse part of left trapezius"
+        ]
+      ],
+      "sourceRepresentationId": "BP8253",
+      "sourceSemanticLabel": "part_concept",
+      "sourceTree": "IS-A"
+    },
+    {
+      "declaredSourceContextCandidates": [
+        "back",
+        "shoulder-scapular"
+      ],
+      "meshInterpretation": "COMPOUND source concepts share atomic ELEMENT meshes; concept count does not create mesh nodes or canonical memberships",
+      "officialConceptRow": [
+        "FMA32557",
+        "BP8268",
+        "descending part of trapezius"
+      ],
+      "officialElementRows": [
+        [
+          "FMA32557",
+          "descending part of trapezius",
+          "FJ1521"
+        ],
+        [
+          "FMA32557",
+          "descending part of trapezius",
+          "FJ1521M"
+        ]
+      ],
+      "sourceConceptId": "FMA32557",
+      "sourceNameEnglish": "descending part of trapezius",
+      "sourceParentRelations": [
+        [
+          "FMA32557",
+          "descending part of trapezius",
+          "FMA33586",
+          "descending part of right trapezius"
+        ],
+        [
+          "FMA32557",
+          "descending part of trapezius",
+          "FMA33587",
+          "descending part of left trapezius"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FMA32557",
+          "descending part of trapezius"
+        ]
+      ],
+      "sourceRepresentationId": "BP8268",
+      "sourceSemanticLabel": "part_concept",
+      "sourceTree": "IS-A"
+    },
+    {
+      "declaredSourceContextCandidates": [
+        "back",
+        "shoulder-scapular"
+      ],
+      "meshInterpretation": "COMPOUND source concepts share atomic ELEMENT meshes; concept count does not create mesh nodes or canonical memberships",
+      "officialConceptRow": [
+        "FMA33581",
+        "BP5638",
+        "ascending part of right trapezius"
+      ],
+      "officialElementRows": [
+        [
+          "FMA33581",
+          "ascending part of right trapezius",
+          "FJ1520"
+        ]
+      ],
+      "sourceConceptId": "FMA33581",
+      "sourceNameEnglish": "ascending part of right trapezius",
+      "sourceParentRelations": [
+        [
+          "FMA32555",
+          "ascending part of trapezius",
+          "FMA33581",
+          "ascending part of right trapezius"
+        ]
+      ],
+      "sourceRepresentationId": "BP5638",
+      "sourceSemanticLabel": "side_specific_part_concept",
+      "sourceTree": "IS-A"
+    },
+    {
+      "declaredSourceContextCandidates": [
+        "back",
+        "shoulder-scapular"
+      ],
+      "meshInterpretation": "COMPOUND source concepts share atomic ELEMENT meshes; concept count does not create mesh nodes or canonical memberships",
+      "officialConceptRow": [
+        "FMA33583",
+        "BP8225",
+        "ascending part of left trapezius"
+      ],
+      "officialElementRows": [
+        [
+          "FMA33583",
+          "ascending part of left trapezius",
+          "FJ1520M"
+        ]
+      ],
+      "sourceConceptId": "FMA33583",
+      "sourceNameEnglish": "ascending part of left trapezius",
+      "sourceParentRelations": [
+        [
+          "FMA32555",
+          "ascending part of trapezius",
+          "FMA33583",
+          "ascending part of left trapezius"
+        ]
+      ],
+      "sourceRepresentationId": "BP8225",
+      "sourceSemanticLabel": "side_specific_part_concept",
+      "sourceTree": "IS-A"
+    },
+    {
+      "declaredSourceContextCandidates": [
+        "back",
+        "shoulder-scapular"
+      ],
+      "meshInterpretation": "COMPOUND source concepts share atomic ELEMENT meshes; concept count does not create mesh nodes or canonical memberships",
+      "officialConceptRow": [
+        "FMA33584",
+        "BP5610",
+        "transverse part of right trapezius"
+      ],
+      "officialElementRows": [
+        [
+          "FMA33584",
+          "transverse part of right trapezius",
+          "FJ1554"
+        ]
+      ],
+      "sourceConceptId": "FMA33584",
+      "sourceNameEnglish": "transverse part of right trapezius",
+      "sourceParentRelations": [
+        [
+          "FMA32556",
+          "transverse part of trapezius",
+          "FMA33584",
+          "transverse part of right trapezius"
+        ]
+      ],
+      "sourceRepresentationId": "BP5610",
+      "sourceSemanticLabel": "side_specific_part_concept",
+      "sourceTree": "IS-A"
+    },
+    {
+      "declaredSourceContextCandidates": [
+        "back",
+        "shoulder-scapular"
+      ],
+      "meshInterpretation": "COMPOUND source concepts share atomic ELEMENT meshes; concept count does not create mesh nodes or canonical memberships",
+      "officialConceptRow": [
+        "FMA33585",
+        "BP8252",
+        "transverse part of left trapezius"
+      ],
+      "officialElementRows": [
+        [
+          "FMA33585",
+          "transverse part of left trapezius",
+          "FJ1554M"
+        ]
+      ],
+      "sourceConceptId": "FMA33585",
+      "sourceNameEnglish": "transverse part of left trapezius",
+      "sourceParentRelations": [
+        [
+          "FMA32556",
+          "transverse part of trapezius",
+          "FMA33585",
+          "transverse part of left trapezius"
+        ]
+      ],
+      "sourceRepresentationId": "BP8252",
+      "sourceSemanticLabel": "side_specific_part_concept",
+      "sourceTree": "IS-A"
+    },
+    {
+      "declaredSourceContextCandidates": [
+        "back",
+        "shoulder-scapular"
+      ],
+      "meshInterpretation": "COMPOUND source concepts share atomic ELEMENT meshes; concept count does not create mesh nodes or canonical memberships",
+      "officialConceptRow": [
+        "FMA33586",
+        "BP5636",
+        "descending part of right trapezius"
+      ],
+      "officialElementRows": [
+        [
+          "FMA33586",
+          "descending part of right trapezius",
+          "FJ1521"
+        ]
+      ],
+      "sourceConceptId": "FMA33586",
+      "sourceNameEnglish": "descending part of right trapezius",
+      "sourceParentRelations": [
+        [
+          "FMA32557",
+          "descending part of trapezius",
+          "FMA33586",
+          "descending part of right trapezius"
+        ]
+      ],
+      "sourceRepresentationId": "BP5636",
+      "sourceSemanticLabel": "side_specific_part_concept",
+      "sourceTree": "IS-A"
+    },
+    {
+      "declaredSourceContextCandidates": [
+        "back",
+        "shoulder-scapular"
+      ],
+      "meshInterpretation": "COMPOUND source concepts share atomic ELEMENT meshes; concept count does not create mesh nodes or canonical memberships",
+      "officialConceptRow": [
+        "FMA33587",
+        "BP8267",
+        "descending part of left trapezius"
+      ],
+      "officialElementRows": [
+        [
+          "FMA33587",
+          "descending part of left trapezius",
+          "FJ1521M"
+        ]
+      ],
+      "sourceConceptId": "FMA33587",
+      "sourceNameEnglish": "descending part of left trapezius",
+      "sourceParentRelations": [
+        [
+          "FMA32557",
+          "descending part of trapezius",
+          "FMA33587",
+          "descending part of left trapezius"
+        ]
+      ],
+      "sourceRepresentationId": "BP8267",
+      "sourceSemanticLabel": "side_specific_part_concept",
+      "sourceTree": "IS-A"
+    }
+  ],
+  "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+  "sourceMetadata": {
+    "editionLocator": "Official BodyParts3D R4 download page: IS-A concepts, inclusion relation and compound-to-ELEMENT table; rows keyed by FMA/BP/FJ in the six pinned TSVs.",
+    "fileHashes": {
+      "isa_element_parts.txt": "a3de74423f943b0d724ae8f59b3a817f87c423a544f8db98113b1980817cbeaf",
+      "isa_inclusion_relation_list.txt": "26e7d818e03a8c909fe09c561f38d0d513423c87681f9450a803bc38f5b07564",
+      "isa_parts_list_e.txt": "ab7796deedd49205e77f3609a1cb8c53e2bbee14ecb5c9a6ca05227469780513",
+      "partof_element_parts.txt": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea",
+      "partof_inclusion_relation_list.txt": "1b40738270931e3c1d955ce34e0fce0d8d10d8c5ad543463e40b4b4c0243007c",
+      "partof_parts_list_e.txt": "9224080557053e6f1322f1e13ab27f0ecde0db19bb3b505f0631afad230eeebd"
+    },
+    "retrievedOn": "2026-09-27; pinned T51 cache, rechecked at T92 start"
+  },
+  "sourceVersion": "BodyParts3D Release 4.0; official endpoints use /LATEST/; 3D release date 2013-06-19",
+  "status": "frozen_before_mesh_acquisition",
+  "task": "T92",
+  "uniqueSourceAssets": [
+    {
+      "acquisitionStateAtFreeze": "not_attempted",
+      "allOfficialIsAElementRowsForFj": [
+        [
+          "FMA32555",
+          "ascending part of trapezius",
+          "FJ1520"
+        ],
+        [
+          "FMA33581",
+          "ascending part of right trapezius",
+          "FJ1520"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1520"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1520"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1520"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1520"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1520"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1520"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1520"
+        ]
+      ],
+      "archiveMemberPathExpectation": "isa_BP3D_4.0_obj_99/FJ1520.obj",
+      "archiveTree": "IS-A",
+      "exactSideFromSourceConceptNames": "right",
+      "humanAnatomyReviewedAtFreeze": false,
+      "learnerDefaultVisibleAtFreeze": false,
+      "matrixSourceNameObservations": [
+        "ascending part of right trapezius",
+        "ascending part of trapezius"
+      ],
+      "officialTargetElementRows": [
+        [
+          "FMA32555",
+          "ascending part of trapezius",
+          "FJ1520"
+        ],
+        [
+          "FMA33581",
+          "ascending part of right trapezius",
+          "FJ1520"
+        ]
+      ],
+      "publicRedistributionHeldAtFreeze": true,
+      "sourceConceptMemberships": [
+        {
+          "sourceConceptId": "FMA32555",
+          "sourceNameEnglish": "ascending part of trapezius",
+          "sourceRepresentationId": "BP8226",
+          "sourceSemanticLabel": "part_concept"
+        },
+        {
+          "sourceConceptId": "FMA33581",
+          "sourceNameEnglish": "ascending part of right trapezius",
+          "sourceRepresentationId": "BP5638",
+          "sourceSemanticLabel": "side_specific_part_concept"
+        }
+      ],
+      "sourceContextCandidates": [
+        "back",
+        "shoulder-scapular"
+      ],
+      "sourceElementFileId": "FJ1520",
+      "sourceOnlyAtFreeze": true,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ1520"
+    },
+    {
+      "acquisitionStateAtFreeze": "not_attempted",
+      "allOfficialIsAElementRowsForFj": [
+        [
+          "FMA32555",
+          "ascending part of trapezius",
+          "FJ1520M"
+        ],
+        [
+          "FMA33583",
+          "ascending part of left trapezius",
+          "FJ1520M"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1520M"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1520M"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1520M"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1520M"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1520M"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1520M"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1520M"
+        ]
+      ],
+      "archiveMemberPathExpectation": "isa_BP3D_4.0_obj_99/FJ1520M.obj",
+      "archiveTree": "IS-A",
+      "exactSideFromSourceConceptNames": "left",
+      "humanAnatomyReviewedAtFreeze": false,
+      "learnerDefaultVisibleAtFreeze": false,
+      "matrixSourceNameObservations": [
+        "ascending part of left trapezius",
+        "ascending part of trapezius"
+      ],
+      "officialTargetElementRows": [
+        [
+          "FMA32555",
+          "ascending part of trapezius",
+          "FJ1520M"
+        ],
+        [
+          "FMA33583",
+          "ascending part of left trapezius",
+          "FJ1520M"
+        ]
+      ],
+      "publicRedistributionHeldAtFreeze": true,
+      "sourceConceptMemberships": [
+        {
+          "sourceConceptId": "FMA32555",
+          "sourceNameEnglish": "ascending part of trapezius",
+          "sourceRepresentationId": "BP8226",
+          "sourceSemanticLabel": "part_concept"
+        },
+        {
+          "sourceConceptId": "FMA33583",
+          "sourceNameEnglish": "ascending part of left trapezius",
+          "sourceRepresentationId": "BP8225",
+          "sourceSemanticLabel": "side_specific_part_concept"
+        }
+      ],
+      "sourceContextCandidates": [
+        "back",
+        "shoulder-scapular"
+      ],
+      "sourceElementFileId": "FJ1520M",
+      "sourceOnlyAtFreeze": true,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ1520M"
+    },
+    {
+      "acquisitionStateAtFreeze": "not_attempted",
+      "allOfficialIsAElementRowsForFj": [
+        [
+          "FMA10474",
+          "zone of muscle organ",
+          "FJ1554"
+        ],
+        [
+          "FMA32529",
+          "zone of trapezius",
+          "FJ1554"
+        ],
+        [
+          "FMA32556",
+          "transverse part of trapezius",
+          "FJ1554"
+        ],
+        [
+          "FMA33584",
+          "transverse part of right trapezius",
+          "FJ1554"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1554"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1554"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1554"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1554"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1554"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1554"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1554"
+        ]
+      ],
+      "archiveMemberPathExpectation": "isa_BP3D_4.0_obj_99/FJ1554.obj",
+      "archiveTree": "IS-A",
+      "exactSideFromSourceConceptNames": "right",
+      "humanAnatomyReviewedAtFreeze": false,
+      "learnerDefaultVisibleAtFreeze": false,
+      "matrixSourceNameObservations": [
+        "transverse part of right trapezius",
+        "transverse part of trapezius",
+        "zone of trapezius"
+      ],
+      "officialTargetElementRows": [
+        [
+          "FMA32529",
+          "zone of trapezius",
+          "FJ1554"
+        ],
+        [
+          "FMA32556",
+          "transverse part of trapezius",
+          "FJ1554"
+        ],
+        [
+          "FMA33584",
+          "transverse part of right trapezius",
+          "FJ1554"
+        ]
+      ],
+      "publicRedistributionHeldAtFreeze": true,
+      "sourceConceptMemberships": [
+        {
+          "sourceConceptId": "FMA32529",
+          "sourceNameEnglish": "zone of trapezius",
+          "sourceRepresentationId": "BP8254",
+          "sourceSemanticLabel": "group_or_zone"
+        },
+        {
+          "sourceConceptId": "FMA32556",
+          "sourceNameEnglish": "transverse part of trapezius",
+          "sourceRepresentationId": "BP8253",
+          "sourceSemanticLabel": "part_concept"
+        },
+        {
+          "sourceConceptId": "FMA33584",
+          "sourceNameEnglish": "transverse part of right trapezius",
+          "sourceRepresentationId": "BP5610",
+          "sourceSemanticLabel": "side_specific_part_concept"
+        }
+      ],
+      "sourceContextCandidates": [
+        "back",
+        "shoulder-scapular"
+      ],
+      "sourceElementFileId": "FJ1554",
+      "sourceOnlyAtFreeze": true,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ1554"
+    },
+    {
+      "acquisitionStateAtFreeze": "not_attempted",
+      "allOfficialIsAElementRowsForFj": [
+        [
+          "FMA10474",
+          "zone of muscle organ",
+          "FJ1554M"
+        ],
+        [
+          "FMA32529",
+          "zone of trapezius",
+          "FJ1554M"
+        ],
+        [
+          "FMA32556",
+          "transverse part of trapezius",
+          "FJ1554M"
+        ],
+        [
+          "FMA33585",
+          "transverse part of left trapezius",
+          "FJ1554M"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1554M"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1554M"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1554M"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1554M"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1554M"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1554M"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1554M"
+        ]
+      ],
+      "archiveMemberPathExpectation": "isa_BP3D_4.0_obj_99/FJ1554M.obj",
+      "archiveTree": "IS-A",
+      "exactSideFromSourceConceptNames": "left",
+      "humanAnatomyReviewedAtFreeze": false,
+      "learnerDefaultVisibleAtFreeze": false,
+      "matrixSourceNameObservations": [
+        "transverse part of left trapezius",
+        "transverse part of trapezius",
+        "zone of trapezius"
+      ],
+      "officialTargetElementRows": [
+        [
+          "FMA32529",
+          "zone of trapezius",
+          "FJ1554M"
+        ],
+        [
+          "FMA32556",
+          "transverse part of trapezius",
+          "FJ1554M"
+        ],
+        [
+          "FMA33585",
+          "transverse part of left trapezius",
+          "FJ1554M"
+        ]
+      ],
+      "publicRedistributionHeldAtFreeze": true,
+      "sourceConceptMemberships": [
+        {
+          "sourceConceptId": "FMA32529",
+          "sourceNameEnglish": "zone of trapezius",
+          "sourceRepresentationId": "BP8254",
+          "sourceSemanticLabel": "group_or_zone"
+        },
+        {
+          "sourceConceptId": "FMA32556",
+          "sourceNameEnglish": "transverse part of trapezius",
+          "sourceRepresentationId": "BP8253",
+          "sourceSemanticLabel": "part_concept"
+        },
+        {
+          "sourceConceptId": "FMA33585",
+          "sourceNameEnglish": "transverse part of left trapezius",
+          "sourceRepresentationId": "BP8252",
+          "sourceSemanticLabel": "side_specific_part_concept"
+        }
+      ],
+      "sourceContextCandidates": [
+        "back",
+        "shoulder-scapular"
+      ],
+      "sourceElementFileId": "FJ1554M",
+      "sourceOnlyAtFreeze": true,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ1554M"
+    },
+    {
+      "acquisitionStateAtFreeze": "not_attempted",
+      "allOfficialIsAElementRowsForFj": [
+        [
+          "FMA32557",
+          "descending part of trapezius",
+          "FJ1521"
+        ],
+        [
+          "FMA33586",
+          "descending part of right trapezius",
+          "FJ1521"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1521"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1521"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1521"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1521"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1521"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1521"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1521"
+        ]
+      ],
+      "archiveMemberPathExpectation": "isa_BP3D_4.0_obj_99/FJ1521.obj",
+      "archiveTree": "IS-A",
+      "exactSideFromSourceConceptNames": "right",
+      "humanAnatomyReviewedAtFreeze": false,
+      "learnerDefaultVisibleAtFreeze": false,
+      "matrixSourceNameObservations": [
+        "descending part of right trapezius",
+        "descending part of trapezius"
+      ],
+      "officialTargetElementRows": [
+        [
+          "FMA32557",
+          "descending part of trapezius",
+          "FJ1521"
+        ],
+        [
+          "FMA33586",
+          "descending part of right trapezius",
+          "FJ1521"
+        ]
+      ],
+      "publicRedistributionHeldAtFreeze": true,
+      "sourceConceptMemberships": [
+        {
+          "sourceConceptId": "FMA32557",
+          "sourceNameEnglish": "descending part of trapezius",
+          "sourceRepresentationId": "BP8268",
+          "sourceSemanticLabel": "part_concept"
+        },
+        {
+          "sourceConceptId": "FMA33586",
+          "sourceNameEnglish": "descending part of right trapezius",
+          "sourceRepresentationId": "BP5636",
+          "sourceSemanticLabel": "side_specific_part_concept"
+        }
+      ],
+      "sourceContextCandidates": [
+        "back",
+        "shoulder-scapular"
+      ],
+      "sourceElementFileId": "FJ1521",
+      "sourceOnlyAtFreeze": true,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ1521"
+    },
+    {
+      "acquisitionStateAtFreeze": "not_attempted",
+      "allOfficialIsAElementRowsForFj": [
+        [
+          "FMA32557",
+          "descending part of trapezius",
+          "FJ1521M"
+        ],
+        [
+          "FMA33587",
+          "descending part of left trapezius",
+          "FJ1521M"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1521M"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1521M"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1521M"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1521M"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1521M"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1521M"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1521M"
+        ]
+      ],
+      "archiveMemberPathExpectation": "isa_BP3D_4.0_obj_99/FJ1521M.obj",
+      "archiveTree": "IS-A",
+      "exactSideFromSourceConceptNames": "left",
+      "humanAnatomyReviewedAtFreeze": false,
+      "learnerDefaultVisibleAtFreeze": false,
+      "matrixSourceNameObservations": [
+        "descending part of left trapezius",
+        "descending part of trapezius"
+      ],
+      "officialTargetElementRows": [
+        [
+          "FMA32557",
+          "descending part of trapezius",
+          "FJ1521M"
+        ],
+        [
+          "FMA33587",
+          "descending part of left trapezius",
+          "FJ1521M"
+        ]
+      ],
+      "publicRedistributionHeldAtFreeze": true,
+      "sourceConceptMemberships": [
+        {
+          "sourceConceptId": "FMA32557",
+          "sourceNameEnglish": "descending part of trapezius",
+          "sourceRepresentationId": "BP8268",
+          "sourceSemanticLabel": "part_concept"
+        },
+        {
+          "sourceConceptId": "FMA33587",
+          "sourceNameEnglish": "descending part of left trapezius",
+          "sourceRepresentationId": "BP8267",
+          "sourceSemanticLabel": "side_specific_part_concept"
+        }
+      ],
+      "sourceContextCandidates": [
+        "back",
+        "shoulder-scapular"
+      ],
+      "sourceElementFileId": "FJ1521M",
+      "sourceOnlyAtFreeze": true,
+      "stableMeshAssetId": "HA-MESH-BP3D4-FJ1521M"
+    }
+  ],
+  "uniqueSourceElementFileCount": 6,
+  "uniqueSourceElementFileIds": [
+    "FJ1520",
+    "FJ1520M",
+    "FJ1554",
+    "FJ1554M",
+    "FJ1521",
+    "FJ1521M"
+  ]
+}

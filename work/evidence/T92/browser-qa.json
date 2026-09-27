@@ -1,0 +1,68 @@
+{
+  "revision": "T92-PRIVATE-BROWSER-QA-v1",
+  "verifiedAtLocal": "2026-09-28T08:35:25+09:00",
+  "browser": "Codex In-app Browser",
+  "url": "http://127.0.0.1:8765/work/evidence/T92/private-preview.html",
+  "viewport": {
+    "width": 1280,
+    "height": 720,
+    "devicePixelRatio": 2,
+    "canvasWidth": 970,
+    "canvasHeight": 634
+  },
+  "scene": {
+    "rendererCount": 1,
+    "canvasCount": 1,
+    "anatomySceneRootCount": 1,
+    "uniqueSourceNodeCount": 284,
+    "sourceFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+    "staticPose": "bodyparts3d-r4-static-reference",
+    "packageSummary": [
+      {"package": "T53", "meshCount": 138, "addedUniqueNodes": 138, "deduplicatedSourceIds": []},
+      {"package": "T54", "meshCount": 142, "addedUniqueNodes": 140, "deduplicatedSourceIds": ["FJ3237", "FJ3279"]},
+      {"package": "T92", "meshCount": 6, "addedUniqueNodes": 6, "deduplicatedSourceIds": []}
+    ]
+  },
+  "targetIds": ["FJ1520", "FJ1520M", "FJ1554", "FJ1554M", "FJ1521", "FJ1521M"],
+  "views": [
+    {
+      "view": "front",
+      "cameraPosition": [0, 1.479058, 1.695833],
+      "lookAt": [0, 1.280125, 0.038057],
+      "allSixTargetsVisible": true,
+      "anatomySceneRootCount": 1,
+      "screenshotCapturedAndVisuallyInspected": true
+    },
+    {
+      "view": "back",
+      "cameraPosition": [0, 1.479058, -1.61972],
+      "lookAt": [0, 1.280125, 0.038057],
+      "allSixTargetsVisible": true,
+      "anatomySceneRootCount": 1,
+      "screenshotCapturedAndVisuallyInspected": true
+    },
+    {
+      "view": "side",
+      "cameraPosition": [1.657777, 1.479058, 0.038057],
+      "lookAt": [0, 1.280125, 0.038057],
+      "allSixTargetsVisible": true,
+      "anatomySceneRootCount": 1,
+      "screenshotCapturedAndVisuallyInspected": true
+    }
+  ],
+  "selectionCheck": {
+    "sourceElementFileId": "FJ1520M",
+    "displayedSourceEnglishName": "Ascending part of left trapezius",
+    "sourceFmaConceptId": "FMA33583",
+    "sideFromExactOfficialNamedRelation": "left",
+    "stableSourceMeshNodeId": "HA-MESH-BP3D4-FJ1520M",
+    "contexts": ["back", "shoulder-scapular"],
+    "highlightAppliedAndVisuallyInspected": true
+  },
+  "console": {"errors": 0, "warnings": 0},
+  "notes": [
+    "Private technical QA preview only; not learner UI, not public release, and not human anatomy review.",
+    "Screenshots were captured and visually inspected in the browser session; PNG files are not stored in this evidence directory.",
+    "No source geometry was translated, mirrored, or recentered. Camera aim is view-only. AABB/header bounds are not asserted as surface-contact evidence."
+  ]
+}

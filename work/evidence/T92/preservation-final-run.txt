@@ -1,0 +1,64 @@
+{
+  "revision": "T92-PRESERVATION-CHECK-v1",
+  "task": "T92",
+  "result": "pass",
+  "baselineHead": "8256697fcaeb34011cad5c8c23b0253ab09148c8",
+  "baselineInputCount": 735,
+  "unchangedBaselineInputCount": 733,
+  "allowedSharedStatusDeltas": [
+    {
+      "path": "work/STATUS.md",
+      "baselineSha256": "f52b3de077d00a49ffe1fe6909faaad913a567d9340a268b71a5c24393a719e9",
+      "currentSha256": "068b7a034d5974c037fb10ed9750513a73f1bf2eaf822cd7a0f14a724cc88209",
+      "allowed": true
+    },
+    {
+      "path": "work/task-registry-r15.json",
+      "baselineSha256": "7e76ba7ca588525edce07f824ff7ed4a553a06e3f9775ca8b9c10d1e4e716352",
+      "currentSha256": "1a90aae4038e418ddfa2221555f1ecd923e01da9342b9e363ac37c8146d6d458",
+      "allowed": true
+    }
+  ],
+  "missingBaselineInputs": [],
+  "unexpectedChangedBaselineInputs": [],
+  "openSimModels": {
+    "baselineHead": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "currentHead": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "baselineClean": true,
+    "currentClean": true,
+    "statusPorcelain": []
+  },
+  "newT92RawCacheMatchesAcquisition": [
+    {
+      "sourceElementFileId": "FJ1520",
+      "sha256": "6bb3d13198991bda4d0aae27561976b9ba53b0d21d817f180098307c7b99deb1",
+      "matchesAcquisition": true
+    },
+    {
+      "sourceElementFileId": "FJ1520M",
+      "sha256": "5ca485d5bfe97fd5a9e17d76d2a77077577e13f19584f5634a8eb1bbc6d7da3d",
+      "matchesAcquisition": true
+    },
+    {
+      "sourceElementFileId": "FJ1554",
+      "sha256": "f7683d77a5bfe9ac6d07fdc913c46cf41db20298c087e71df73fab18192e90a4",
+      "matchesAcquisition": true
+    },
+    {
+      "sourceElementFileId": "FJ1554M",
+      "sha256": "a08a23c17d20a120eebe96a9c8db1bb86672529fb8f34868d5f7cd28f5df98d5",
+      "matchesAcquisition": true
+    },
+    {
+      "sourceElementFileId": "FJ1521",
+      "sha256": "19bd9d1cbbb84e10826eb770068f6e271cd79dde960bca62ac71da24120fc354",
+      "matchesAcquisition": true
+    },
+    {
+      "sourceElementFileId": "FJ1521M",
+      "sha256": "fe756252f820a47e9c757f67de4ca37adf44837dbe0d10c6d2e5df3a5a6a0751",
+      "matchesAcquisition": true
+    }
+  ],
+  "scopeNote": "New T92 evidence/package files are outside the start inventory. The only permitted edits to pre-existing files are the requested shared STATUS and R15 registry state deltas."
+}
