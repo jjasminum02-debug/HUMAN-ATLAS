@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0.0",
+  "scope": "T98 follow-up audit: Blender factory-startup only; no anatomy source opened or exported",
+  "date": "2026-09-28",
+  "baselineHead": "1bc050cf5687ddeb5582db487988a3e2ab8d38c4",
+  "binary": {
+    "path": "/Volumes/Blender/Blender.app/Contents/MacOS/Blender",
+    "architecture": "arm64",
+    "bundleVersion": "3.5.0",
+    "runtimeVersion": "3.5.0",
+    "buildHash": "1be25cfff18b",
+    "bytes": 249256048,
+    "sha256": "23171ca8704539b44c94cb370894cb3b38908530c012267bed079326d7be95b0"
+  },
+  "command": "'/Volumes/Blender/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec --python-exit-code 23 --python-expr 'import bpy; print(\"ATLAS_T98_STARTUP_OK\", bpy.app.version_string, len(bpy.data.objects))'",
+  "cwd": "/private/tmp",
+  "attempts": [
+    {
+      "order": 1,
+      "permissionMode": "require_escalated",
+      "approval": "tool approval succeeded",
+      "exitCode": 0,
+      "output": "ATLAS_T98_STARTUP_OK 3.5.0 3\nBlender 3.5.0 (hash 1be25cfff18b built 2023-03-29 06:34:18)\nDevice with name Apple M5 supports metal minimum requirements\n\nBlender quit"
+    },
+    {
+      "order": 2,
+      "permissionMode": "use_default",
+      "exitCode": 139,
+      "output": "ArchWarn: ARCH_CACHE_LINE_SIZE != Arch_ObtainCacheLineSize()\nFunction: Arch_ValidateAssumptions\nFile: /Users/brecht/dev/build_darwin/deps/build/usd/src/external_usd/pxr/base/arch/assumptions.cpp\nLine: 155\nBlender 3.5.0 (hash 1be25cfff18b built 2023-03-29 06:34:18)\nWriting: /var/folders/f7/6khft5014fz_y80frpn49tvh0000gn/T/blender.crash.txt"
+    }
+  ],
+  "systemProbe": {
+    "command": "/usr/sbin/sysctl hw.cachelinesize",
+    "permissionMode": "use_default",
+    "output": "sysctl: sysctl fmt -1 1024 1: Operation not permitted"
+  },
+  "interpretation": {
+    "startup": "same binary and command succeeds under approved execution and fails under restricted execution",
+    "preciseCrashRootCause": "not established; controlled comparison shows execution context affects startup",
+    "historicalVersion": "T98 report labels the mounted executable 5.2.2; current bundle/runtime are 3.5.0. Historical mount identity at attempt time cannot be inferred from current mount.",
+    "sourceOpened": false,
+    "evaluatedExportVerified": false,
+    "previewVerified": false,
+    "canonicalMappingVerified": false,
+    "baseSelected": false,
+    "action": "Resume the existing T98 evaluated-export unit using an approved execution context, verify current binary identity first, and preserve all source/rights/review holds."
+  },
+  "references": [
+    {
+      "url": "https://raw.githubusercontent.com/PixarAnimationStudios/OpenUSD/release/pxr/base/arch/assumptions.cpp",
+      "use": "Current upstream implementation reads hw.cachelinesize via sysctlbyname. This is explanatory corroboration, not proof of the exact bundled USD revision or the full crash cause."
+    },
+    {
+      "url": "https://docs.blender.org/manual/en/4.2/advanced/command_line/arguments.html",
+      "use": "Official documentation of background, factory-startup and disable-autoexec flags."
+    }
+  ],
+  "preservation": {
+    "headAtAudit": "1bc050cf5687ddeb5582db487988a3e2ab8d38c4",
+    "protectedHashesUnchanged": {
+      "work/EXECUTION.json": "540ad422747a8cbe426498aea0a166fda10d08c443d5c37ef1537103a6e347f9",
+      "work/reports/T98.md": "1f482ce083749043dbf88e18dbe4bc6bc30968b74e9a67e0dddc8b50b8b8b8b8",
+      "work/evidence/T98/representative-sample-freeze.json": "a8b744ca878fded345f5e5be8a4154094bd050c97fcc028c296197f5501928d6",
+      "work/evidence/T98/exporter-attempts.json": "114d7d232a656f6d49089a5f7d33eb4913d61d61ab36201fdbed019b9803446b",
+      "atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Startup.blend": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd"
+    },
+    "openSimHeadUnchanged": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "openSimClean": true,
+    "otherWorktreeStatusUnchanged": true,
+    "applicationOrExecutionStateChanged": false
+  }
+}
