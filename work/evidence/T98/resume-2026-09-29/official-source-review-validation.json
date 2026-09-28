@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "1.0.0",
+  "task": "T98",
+  "checkedAt": "2026-09-29T05:29:03+09:00",
+  "result": "passed_partial_gates_remain",
+  "taskStatus": "in_progress/partial",
+  "checks": [
+    {
+      "name": "official source review records the primary Blender listing and exact Z-Anatomy commit",
+      "passed": true,
+      "evidence": {
+        "checks": 3
+      }
+    },
+    {
+      "name": "checksum sidecar remained unreadable and runtime gate is not promoted",
+      "passed": true,
+      "evidence": {
+        "gate": "Blender 3.5.0 official publisher/package integrity",
+        "primarySourceUrl": "https://download.blender.org/release/Blender3.5/",
+        "access": "official release directory opened/read; it lists blender-3.5.0-macos-arm64.dmg (247656372 bytes) and blender-3.5.0.sha256",
+        "sidecarUrl": "https://download.blender.org/release/Blender3.5/blender-3.5.0.sha256",
+        "sidecarRetrieval": "direct page open returned HTTP 402 from the browsing tool; in-app browser navigation was blocked by client (ERR_BLOCKED_BY_CLIENT); sidecar contents/hash were not obtained",
+        "comparisonToExistingLocalDmgSha256": "not possible; official checksum bytes unavailable",
+        "result": "unresolved; listing and filename existence do not verify the local DMG publisher or package integrity",
+        "existingInvalidCodeSignatureAndBlender522ReceiptMismatch": "retained"
+      }
+    },
+    {
+      "name": "object identity/rights and frame/pose remain unresolved",
+      "passed": true,
+      "evidence": {
+        "gate": "Z-Anatomy exact-object identity, per-object rights, and frame registration",
+        "primarySourceUrl": "https://github.com/Z-Anatomy/Models-of-human-anatomy/blob/c7010a903b75a2fd24a13b1c2c4c3546a9223780/Readme.md",
+        "pinnedRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+        "access": "official pinned repository README opened/read; it describes BodyParts3D derivation and lists additional source/model families, but supplies no exact per-object ancestry/license-family table for the frozen 12 objects and no physical unit/frame/reference-pose declaration",
+        "result": "unresolved; no side/laterality, exact FJ/FMA/BP3D ID, object-level rights, or T50/T69 frame transform inferred"
+      }
+    },
+    {
+      "name": "whole-body comparable coverage/cost remains unresolved",
+      "passed": true,
+      "evidence": {
+        "gate": "542-target identity-backed whole-body coverage and equivalent pipeline cost",
+        "access": "no new source, archive, full inventory, exporter, or scene execution; prior T96/T98 evidence re-read only",
+        "result": "unresolved; existing regional labels are lexical candidates (430 Z-Anatomy / 236 BodyParts3D, 0 exact target joins); 12-object sample metrics are not whole-body comparable cost"
+      }
+    },
+    {
+      "name": "production and learner/review holds were preserved",
+      "passed": true,
+      "evidence": {
+        "sourceArchiveDownloaded": false,
+        "blenderLaunched": false,
+        "startupBlendReexecuted": false,
+        "fullInventoryRepeated": false,
+        "sampleExporterRepeated": false,
+        "sourceBytesChanged": false,
+        "OpenSimModelsChanged": false,
+        "canonicalMappingOrLearnerUIChanged": false,
+        "sourceOnly": true,
+        "localUseRights": "held_pending_file_level_reconciliation",
+        "publicRedistribution": "held",
+        "humanReview": "not_performed",
+        "productionBase": null,
+        "T99Started": false
+      }
+    },
+    {
+      "name": "T98 stays partial at the same unit and T99 is not started",
+      "passed": true,
+      "evidence": {
+        "acceptance": "partial",
+        "executionStatus": "in_progress",
+        "nextUnit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison"
+      }
+    },
+    {
+      "name": "progress mirror and report point to the new evidence",
+      "passed": true,
+      "evidence": {
+        "historyCount": 3
+      }
+    },
+    {
+      "name": "only the T98 execution task row differs from starting HEAD",
+      "passed": true,
+      "evidence": {
+        "startHead": "1d014ef0f90270b04ad5f6858aa54ec865ce5626",
+        "nonT98RowsEqual": true
+      }
+    },
+    {
+      "name": "all pre-existing user WIP status paths remain present",
+      "passed": true,
+      "evidence": {
+        "baselineCount": 72,
+        "missing": []
+      }
+    },
+    {
+      "name": "prior T98 runtime-chain validation artifact is unchanged",
+      "passed": true,
+      "evidence": {
+        "path": "work/evidence/T98/resume-2026-09-29/runtime-chain-validation.json",
+        "sha256": "e5bf6951552af27f1beaf59a8907d752dabd2538d3a29ee30a3c0145a7ace779"
+      }
+    },
+    {
+      "name": "source archive and Startup.blend bytes remain unchanged",
+      "passed": true,
+      "evidence": {
+        "archiveSha256": "e029688545627bd0214b269e1063143abb580aad72b2c2445d6d8a9a0d9da736",
+        "startupBlendSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd"
+      }
+    },
+    {
+      "name": "OpenSim_Models remains clean at recorded HEAD",
+      "passed": true,
+      "evidence": {
+        "head": "d9b05d470b1a481c222372c85b75772faf8f7792",
+        "status": ""
+      }
+    },
+    {
+      "name": "generated execution projections pass sync check",
+      "passed": true,
+      "evidence": {
+        "exit": 0,
+        "stdout": "Execution projections match; no writes.",
+        "stderr": ""
+      }
+    }
+  ],
+  "summary": {
+    "checkCount": 13,
+    "passedCount": 13,
+    "failedCount": 0,
+    "nextUnit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
+    "nextId": "T98",
+    "nextTaskStarted": false
+  }
+}

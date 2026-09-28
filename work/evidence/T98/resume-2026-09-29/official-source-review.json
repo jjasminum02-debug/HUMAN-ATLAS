@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0.0",
+  "task": "T98",
+  "unit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
+  "checkedAt": "2026-09-29T05:29:03+09:00",
+  "startBaseline": {
+    "head": "1d014ef0f90270b04ad5f6858aa54ec865ce5626",
+    "porcelainStatusPathCount": 72,
+    "porcelainStatusSha256": "bc356d2d792f772d9b75ce32b3a71b7bf78573d7fae38eb3d129c73e40feaff0",
+    "preexistingPathsUnchangedFromT98ResumeBaseline": true,
+    "stagedCount": 0,
+    "openSimModels": {
+      "head": "d9b05d470b1a481c222372c85b75772faf8f7792",
+      "status": ""
+    }
+  },
+  "checks": [
+    {
+      "gate": "Blender 3.5.0 official publisher/package integrity",
+      "primarySourceUrl": "https://download.blender.org/release/Blender3.5/",
+      "access": "official release directory opened/read; it lists blender-3.5.0-macos-arm64.dmg (247656372 bytes) and blender-3.5.0.sha256",
+      "sidecarUrl": "https://download.blender.org/release/Blender3.5/blender-3.5.0.sha256",
+      "sidecarRetrieval": "direct page open returned HTTP 402 from the browsing tool; in-app browser navigation was blocked by client (ERR_BLOCKED_BY_CLIENT); sidecar contents/hash were not obtained",
+      "comparisonToExistingLocalDmgSha256": "not possible; official checksum bytes unavailable",
+      "result": "unresolved; listing and filename existence do not verify the local DMG publisher or package integrity",
+      "existingInvalidCodeSignatureAndBlender522ReceiptMismatch": "retained"
+    },
+    {
+      "gate": "Z-Anatomy exact-object identity, per-object rights, and frame registration",
+      "primarySourceUrl": "https://github.com/Z-Anatomy/Models-of-human-anatomy/blob/c7010a903b75a2fd24a13b1c2c4c3546a9223780/Readme.md",
+      "pinnedRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+      "access": "official pinned repository README opened/read; it describes BodyParts3D derivation and lists additional source/model families, but supplies no exact per-object ancestry/license-family table for the frozen 12 objects and no physical unit/frame/reference-pose declaration",
+      "result": "unresolved; no side/laterality, exact FJ/FMA/BP3D ID, object-level rights, or T50/T69 frame transform inferred"
+    },
+    {
+      "gate": "542-target identity-backed whole-body coverage and equivalent pipeline cost",
+      "access": "no new source, archive, full inventory, exporter, or scene execution; prior T96/T98 evidence re-read only",
+      "result": "unresolved; existing regional labels are lexical candidates (430 Z-Anatomy / 236 BodyParts3D, 0 exact target joins); 12-object sample metrics are not whole-body comparable cost"
+    }
+  ],
+  "preservation": {
+    "sourceArchiveDownloaded": false,
+    "blenderLaunched": false,
+    "startupBlendReexecuted": false,
+    "fullInventoryRepeated": false,
+    "sampleExporterRepeated": false,
+    "sourceBytesChanged": false,
+    "OpenSimModelsChanged": false,
+    "canonicalMappingOrLearnerUIChanged": false,
+    "sourceOnly": true,
+    "localUseRights": "held_pending_file_level_reconciliation",
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "productionBase": null,
+    "T99Started": false
+  },
+  "conclusion": "official source documentation was checked, but the required runtime-integrity, exact object lineage/rights, physical frame/unit/pose, and whole-body comparable coverage/cost gates remain unresolved; T98 stays in_progress/partial at the same nextUnit."
+}

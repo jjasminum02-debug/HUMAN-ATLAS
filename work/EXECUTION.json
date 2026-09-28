@@ -140,7 +140,8 @@
           "link-mounted-Blender-3.5.0-to-existing-T97-DMG-receipt-by-hdiutil-mount-path-and-matching-local-SHA256",
           "compare-Z-Anatomy-declared-unit-frame-and-reference-pose-evidence-against-T50-T69-without-applying-BP3D-transform",
           "review-exact-12-frozen-object-locators-and-existing-source-metadata-for-upstream-ID-and-license-family-crosswalk",
-          "compare-T96-regional-target-candidate-counts-and-existing-Z-Anatomy-versus-BP3D-subset-cost-evidence"
+          "compare-T96-regional-target-candidate-counts-and-existing-Z-Anatomy-versus-BP3D-subset-cost-evidence",
+          "review-official-release-index-and-pinned-source-readme-without-promoting-unverified-gates"
         ],
         "pendingUnits": [
           "establish-official-publisher-and-integrity-evidence-for-mounted-Blender-3.5.0-despite-matched-local-T97-DMG-lineage",
@@ -158,7 +159,7 @@
           "representativeSurfacePreview": true,
           "runtimePublisherProvenanceVerified": false,
           "productionBaseSelected": false,
-          "whyPartial": "The existing hdiutil mount path and local SHA link Blender 3.5.0 to the T97-recorded 3.5.0 DMG download, but its recorded official checksum is absent and the app signature verification failed; the separate official 5.2.2 receipt remains a mismatch. Existing source metadata contains no exact upstream object IDs or object-to-rights-family links for the 12 frozen locators. Z-Anatomy physical unit/frame/reference pose and side mapping remain unregistered to T50/T69. T96 counts 430/542 Z-Anatomy and 236/542 BodyParts3D name candidates but zero exact source joins; sample export costs cannot be compared to whole-body costs. Production base remains undecided.",
+          "whyPartial": "The official Blender 3.5 release directory lists the DMG and checksum sidecar, but the sidecar body could not be retrieved for hash comparison; prior invalid signature and Blender 5.2.2 receipt mismatch remain. The pinned Z-Anatomy README gives no exact source ID/per-object rights-family crosswalk for the frozen 12 or physical unit/frame/reference-pose registration to T50/T69. T96 still has 430/542 and 236/542 lexical candidates with zero exact joins; sample costs are not comparable whole-body costs. Production base remains undecided.",
           "newTaskNumberIssued": false,
           "nextTaskExecutionStarted": false,
           "runtimeArtifactLineageEstablishedToT97Dmg": true,
@@ -182,6 +183,15 @@
             "unit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
             "result": "no_new_source_or_hash_bound_evidence_since_previous_T98_resume",
             "evidence": "work/evidence/T98/resume-2026-09-29/reentry-no-new-evidence.json",
+            "nextUnit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
+            "nextId": "T98"
+          },
+          {
+            "date": "2026-09-29",
+            "checkedAt": "2026-09-29T05:29:03+09:00",
+            "unit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
+            "result": "official Blender release listing and pinned Z-Anatomy README reviewed; checksum body inaccessible and required identity/frame/rights/coverage gates remain unresolved",
+            "evidence": "work/evidence/T98/resume-2026-09-29/official-source-review.json",
             "nextUnit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
             "nextId": "T98"
           }
