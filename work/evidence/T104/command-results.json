@@ -1,0 +1,46 @@
+{
+  "revision": "T104-validation-commands-v1",
+  "task": "T104",
+  "commands": [
+    {
+      "command": "python3 atlas-data/tools/freeze_bodyparts3d_r4_t104.py --check",
+      "exitCode": 0,
+      "result": "pass",
+      "summary": "Exact frozen ten source IDs; membership SHA-256 2ad64a609a66e7868e6ba30444ba26b8ffa6441b50a6818f225a443646a327f6."
+    },
+    {
+      "command": "python3 atlas-data/tools/acquire_bodyparts3d_r4_t104.py --check",
+      "exitCode": 0,
+      "result": "pass",
+      "summary": "Offline check verified all ten acquired source files and hashes."
+    },
+    {
+      "command": "python3 atlas-data/tools/build_bodyparts3d_r4_t104.py --check",
+      "exitCode": 0,
+      "result": "pass",
+      "summary": "Deterministic check passed; six task outputs matched; ten source IDs."
+    },
+    {
+      "command": "pnpm --dir atlas-web test:whole-body",
+      "runtime": "bundled Node.js 24.10.1 and bundled pnpm",
+      "exitCode": 0,
+      "result": "pass",
+      "summary": "23 whole-body JS tests passed, selected ZIP extractor 6/6, T77/T79/T101/T102/T103/T104 deterministic checks and T95 overlay validation passed."
+    },
+    {
+      "command": "pnpm --dir atlas-web typecheck",
+      "runtime": "bundled Node.js 24.10.1 and bundled pnpm",
+      "exitCode": 0,
+      "result": "pass",
+      "summary": "TypeScript project build passed."
+    },
+    {
+      "command": "pnpm --dir atlas-web build",
+      "runtime": "bundled Node.js 24.10.1 and bundled pnpm",
+      "exitCode": 0,
+      "result": "pass_with_existing_warning",
+      "summary": "Learning/data validators, AI evidence, bone names, motion source validation, scene decoder check and Vite build passed. Existing >500 kB minified app chunk warning remains."
+    }
+  ],
+  "environmentNote": "The first pnpm test invocation used the sandbox PATH without Node.js and stopped before test discovery (node: command not found). Retrying with the bundled runtime PATH completed successfully; no code changes were made in response to the environment-only failure."
+}

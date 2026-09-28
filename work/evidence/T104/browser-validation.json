@@ -1,0 +1,93 @@
+{
+  "revision": "T104-live-browser-validation-v1",
+  "task": "T104",
+  "result": "pass",
+  "browser": {
+    "surface": "Codex In-app Browser",
+    "learnerUrl": "http://127.0.0.1:5174/",
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "screenshotExported": false,
+    "visualReview": "Live screenshots were inspected in the browser; no screenshot files were persisted."
+  },
+  "scene": {
+    "revision": "BodyParts3D-R4-T104-SAME-SCENE-EXTENSION-v1",
+    "parentRevision": "BodyParts3D-R4-T103-SAME-SCENE-EXTENSION-v1",
+    "fullBodyLoadedChunkCount": 36,
+    "canvasCount": 1,
+    "rootUuidAtFinalFullBodyCheck": "e1744268-80d3-4834-81c9-da5affda0be8",
+    "rendererIdAtFinalFullBodyCheck": "anatomy-e1744268-80d3-4834-81c9-da5affda0be8",
+    "visibleNodeCount": 581,
+    "uniqueVisibleNodeCount": 581,
+    "t104IdsVisibleExactlyOnce": true,
+    "t104VisibleNodeIds": [
+      "HA-MESH-BP3D4-FJ1516",
+      "HA-MESH-BP3D4-FJ1516M",
+      "HA-MESH-BP3D4-FJ1518",
+      "HA-MESH-BP3D4-FJ1518M",
+      "HA-MESH-BP3D4-FJ1557",
+      "HA-MESH-BP3D4-FJ1600",
+      "HA-MESH-BP3D4-FJ1601",
+      "HA-MESH-BP3D4-FJ2774",
+      "HA-MESH-BP3D4-FJ2781",
+      "HA-MESH-BP3D4-FJ2783"
+    ],
+    "learnerVisibleDevelopmentIds": false
+  },
+  "viewportChecks": [
+    {
+      "viewportCssPx": [1440, 900],
+      "region": "upper-limb",
+      "url": "http://127.0.0.1:5174/?region=upper-limb",
+      "visibleCount": 147,
+      "t104VisibleNodeIds": ["HA-MESH-BP3D4-FJ1516", "HA-MESH-BP3D4-FJ1516M", "HA-MESH-BP3D4-FJ1518", "HA-MESH-BP3D4-FJ1518M"],
+      "oneCanvas": true,
+      "sameRootAndRendererWithinTab": true,
+      "visual": "Bilateral upper limb surfaces were visible in the existing whole-body scene."
+    },
+    {
+      "viewportCssPx": [1024, 768],
+      "region": "neck",
+      "url": "http://127.0.0.1:5174/?region=neck",
+      "visibleCount": 65,
+      "t104VisibleNodeIds": ["HA-MESH-BP3D4-FJ1557", "HA-MESH-BP3D4-FJ1600", "HA-MESH-BP3D4-FJ1601", "HA-MESH-BP3D4-FJ2774", "HA-MESH-BP3D4-FJ2781", "HA-MESH-BP3D4-FJ2783"],
+      "oneCanvas": true,
+      "sameRootAndRendererWithinTab": true,
+      "visual": "Neck region rendered in the existing scene."
+    },
+    {
+      "viewportCssPx": [390, 844],
+      "region": "upper-limb",
+      "url": "http://127.0.0.1:5174/?region=upper-limb",
+      "visibleCount": 147,
+      "t104VisibleNodeIds": ["HA-MESH-BP3D4-FJ1516", "HA-MESH-BP3D4-FJ1516M", "HA-MESH-BP3D4-FJ1518", "HA-MESH-BP3D4-FJ1518M"],
+      "regionPickerOpenedAndClosed": true,
+      "muscleLayerOffT104Ids": [],
+      "muscleLayerOnRestoredT104Ids": ["HA-MESH-BP3D4-FJ1516", "HA-MESH-BP3D4-FJ1516M", "HA-MESH-BP3D4-FJ1518", "HA-MESH-BP3D4-FJ1518M"],
+      "sameRootAndRendererWithinTab": true,
+      "visual": "Mobile picker and existing scene remained usable; layer toggle removed then restored the exact upper-limb subset."
+    }
+  ],
+  "cameraCloseAndFull": {
+    "viewportCssPx": [823, 499],
+    "closeAction": "wheel up over canvas",
+    "fullViewAction": "전체 보기",
+    "cameraZFull": 3.434144729891477,
+    "cameraZAfterClose": 3.1013051221503836,
+    "cameraZAfterRestore": 3.434144729891477,
+    "restoredToSameFullCamera": true
+  },
+  "fullBodyFinal": {
+    "viewportCssPx": [1440, 900],
+    "loadedChunkCount": 36,
+    "visibleCount": 581,
+    "uniqueVisibleNodeCount": 581,
+    "t104VisibleExactlyOnce": true,
+    "rootCount": 1,
+    "rendererCount": 1
+  },
+  "limitations": [
+    "Browser screenshots were inspected live and not stored as local PNG evidence.",
+    "Source meshes remain source-only/unbound; this browser check is not human anatomy approval or public redistribution clearance."
+  ]
+}

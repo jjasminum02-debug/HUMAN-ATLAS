@@ -1,0 +1,30 @@
+{
+  "task": "T104",
+  "revision": "T104-status-registry-delta-v1",
+  "status": "worktree_only_uncommitted_shared_file_delta",
+  "statusPath": {
+    "path": "work/STATUS.md",
+    "beforeSha256": "e03b8d14c32483a8448ba37b1d23a50b9844e3c2e59eacb42fda6a8da3736e44",
+    "afterSha256": "4cdcc1df6d7c5a6e9218577187f4b2449b3e359c63a90a7a7c18700f68be05f9",
+    "fields": [
+      "CURRENT_TASK T103 -> T104 passed_with_gaps",
+      "NEXT_TASK T104 -> T105",
+      "LAST_REPORT T103 -> T104",
+      "append T104 actual scope/result/holds"
+    ]
+  },
+  "registryPath": {
+    "path": "work/task-registry-r15.json",
+    "beforeSha256": "5f992a6446d5fb4bdf430c2e31a618823831b3315a82daf7be4d04d3038f365b",
+    "afterSha256": "c5a04b455de864f7341f7b1c1f22a9ed7b881206f660ebe3b4c72e21ccd176c9",
+    "fields": [
+      "nextTask T104 -> T105",
+      "taskStatuses.T104 planned_not_started -> passed_with_gaps"
+    ]
+  },
+  "excludedFromT104Commit": [
+    "work/STATUS.md",
+    "work/task-registry-r15.json"
+  ],
+  "reason": "Both files already contained broad pre-existing user/plan WIP at the T104 baseline; only the exact T104 state delta was applied and recorded here. No whole-file staging."
+}

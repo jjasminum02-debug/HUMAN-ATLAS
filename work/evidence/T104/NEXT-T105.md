@@ -1,0 +1,6 @@
+HUMAN ATLAS에서 T105만 수행해라. 담당 Luna Max.
+design/2026-09-25-muscle-atlas/23-PROMPTS-AFTER-T95.md의 공통 실행 규칙과 T105 절, 24-WORKBOOK-FACE-AND-OBSERVATION.md, 22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, 최신 STATUS/R15 registry, work/tasks/T105.md와 T104의 실제 report/evidence/manifest를 읽어라.
+T105의 동결 source IDs `FJ2791`, `FJ2799`, `FJ2801`만 기존 BodyParts3D R4 선택 취득·검증·변환 도구로 취득해라. FJ/OBJ header, 공식 FMA/BP/ELEMENT source relation, CRC/SHA, side/part, 단위/frame/bounds와 T50/T69 변환을 개별 검증하고 T104 뒤에 실제 GLB surface를 같은 scene manifest revision으로 추가해라. 전체 archive는 다운로드하지 말고 기존 root·renderer·camera와 source 원본을 보존해라.
+whole-muscle/part 실제 표면 중첩은 geometry를 비교하고 원본은 보존해라. ancestor 이름만으로 binding하지 마라. local display 적격성, 공개 재배포 권리, human review를 서로 분리하고 source-only/default-visible 및 rights/human-review hold를 개별 근거 없이 승격하지 마라. 화면에서는 정확한 subset, side, 근접/전신, 근육 layer off/on, 중복 node 0, 단일 renderer와 실제 console을 확인해라. 화면 변경이 있으면 실제 1440/1024/390px 조작도 검증해라.
+시작 HEAD/status/hash 및 사용자 WIP·OpenSim_Models/T13 drafts/history freeze 보존을 기록해라. 관련 데이터 검사·회귀·typecheck·build와 필요한 실제 브라우저 결과를 work/reports/T105.md, work/evidence/T105/, STATUS/R15 taskStatuses에 기록해라. 혼합 STATUS/registry 변경은 소유 delta만 갱신하고 임의로 stage하지 마라. T105 소유 변경만 stage해 diff를 확인한 뒤 local commit하고 hash·포함/제외·남은 변경을 보고해라.
+미완이면 T105 안에서 재개할 조건과 nextUnit을 기록하고 다음 task를 시작하지 마라. 다음 기본 ID는 T106이다. push·배포·환자 진단·치료·침 시뮬레이션은 범위 밖이다.

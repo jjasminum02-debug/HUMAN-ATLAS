@@ -1,0 +1,678 @@
+{
+  "task": "T104",
+  "capturedAtLocalDate": "2026-09-28",
+  "startHead": "4aae13588820a530f1ee42ecd6e33fa07566e27c",
+  "startStatusPathCount": 209,
+  "startStatusSha256": "c02259feb4c60804b478084d7e5cbb42ba6f3fedcbaa154587979b855a81803f",
+  "stagedBaselineSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "preexistingStagedPathCount": 0,
+  "inputSha256": {
+    "AGENTS.md": "3be36175d2200f7d22cc29672e4af0f1f3b6da6105000c1922f229413b1fd396",
+    "design/2026-09-25-muscle-atlas/00-START-HERE.md": "51a9204b1c3647125dd8c39d4ff18f0f28a8aef6b4153b165fdf9e0f78e4bfa9",
+    "design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md": "5c2889cb88680f4a98f496668a2c627f822d9fa7628e36d8eaa0c2694e2201cd",
+    "design/2026-09-25-muscle-atlas/13-CONTINUOUS-WHOLE-BODY-EXPERIENCE-R15.md": "523311c9d527ee5aa808e0bd04778b1bdcd44c2180a151944d2f96e40e3829d5",
+    "design/2026-09-25-muscle-atlas/14-TASK-PROMPTS-R15.md": "a3d81d1ee92e278eadddfb1dd958fa6d914655bfc2bc13b13f6fcc5962d99526",
+    "design/2026-09-25-muscle-atlas/15-NERVE-AND-ASSESSMENT-SCOPE-R15.md": "4b8cbca36637776724a3b4eda0b1f9613ac6169c61baeff1f709d1edd2840c95",
+    "design/2026-09-25-muscle-atlas/16-ASTRA-UI-HANDOFF.md": "584d395dbaa8c006e03088e62c0ff4cd477605f3cb5d876b52da34f7d4302457",
+    "design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md": "f00480a1a880eb95fee742f2a02c0f05922059153888c5a3201d57ae5993538d",
+    "design/2026-09-25-muscle-atlas/23-PROMPTS-AFTER-T95.md": "a05e0245fff2d114a1b6a5aa414ddfa6a797e67929d3337acab294f484a21595",
+    "design/2026-09-25-muscle-atlas/24-WORKBOOK-FACE-AND-OBSERVATION.md": "53752b89704916394eecc68c486b1b9669ddab420d6d08e9f8366decd7cd2525",
+    "work/STATUS.md": "e03b8d14c32483a8448ba37b1d23a50b9844e3c2e59eacb42fda6a8da3736e44",
+    "work/task-registry-r15.json": "5f992a6446d5fb4bdf430c2e31a618823831b3315a82daf7be4d04d3038f365b",
+    "work/tasks/T104.md": "db4803515697942ced63a7ba406f789b45344dd3ef98eb3499269ca0ae7ed14b",
+    "work/reports/T103.md": "c684e2f7b8b706a2c7621a792228da4032865063ca1237ac953fd4ea67270839",
+    "work/evidence/T103/validation.json": "e698a0de1fe21b430e41e36db5be12c44ec9e3281df66b871140b00a6226d640",
+    "work/evidence/T103/preservation.json": "c4ba069bb588b03d200144808c137f2f9aeb7e676d9bc0cafafb17c1e7fff9f9",
+    "work/evidence/T103/browser-validation.json": "51dd4ea02709ad3230796e81b4c1aa6f3fd6d09af8b9883848b1163bce8c28a9",
+    "work/evidence/T103/frozen-source-set.json": "3f6f78b91aca8990baa97c16c50603eedadd1b94e9792df8fd30e93298595b89",
+    "work/evidence/T103/source-acquisition.json": "e7c66b33ec6f6f8612af68f263768c4a29107f7229e3913384fa28249d955510",
+    "work/evidence/T103/start-baseline.json": "28ef8c329bb72a630750411794bd8c7607274cd52e11c9ed2e7a6101cb2a4f72",
+    "work/evidence/T78/execution-queue.json": "d8361931866f132a70172db2042dcdce004d79f048e5be13603934ac43783937",
+    "work/evidence/T78/target-task-map.json": "d6e200c2c8bcef16d42f8060759face78511990e198ab3d6934e3a66e71de9d7",
+    "work/evidence/T50/scene-contract.md": "2697496d18bd1fc58adca557d95364092f7c7189bff4218277882142c8b26fa4",
+    "work/evidence/T69/assessment.json": "e421057aae319d9eefcd0f84ee811de7caf532e5019a8a7d6bad0dd99b77cf34",
+    "work/evidence/T69/diagnostic.json": "39f8086df7042349633e3c19e7e60e81669ca49be63b0d4e3be88d15cfd93cca",
+    "atlas-data/manifests/bodyparts3d-r4-t77/display-policy.json": "eeea154883f4887c4d4c8bd75ddca98ab0767db3bb486bc4e511f03d363fb19d",
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/manifest.json": "67a2f79b9248d18a754a6567e1b0bb4b1fce698ad0e3100a172b428ee58341f8",
+    "atlas-data/manifests/bodyparts3d-r4-t79/source-manifest.json": "a7cf32bb9281b181152e54574d71db46c51c2a0e3ac22e22ca2065d2adf55546",
+    "atlas-data/manifests/bodyparts3d-r4-t79/integration-extension.json": "fea29a0d062656118d53345e445395568f34f9ec429f6bc82d78e3a0bc2749bf",
+    "atlas-data/manifests/bodyparts3d-r4-t101/source-manifest.json": "f7ccc1a0ef9c9f8d8483c48276ef6aafabd49d69fe8323c237d940864c0e93ef",
+    "atlas-data/manifests/bodyparts3d-r4-t101/integration-extension.json": "536f878da9f10d002b3feabcd28a14fe617ac620f3dbe2c2183b2f4619471c06",
+    "atlas-data/manifests/bodyparts3d-r4-t102/source-manifest.json": "6c008b98a8d666b1895075b6f0e6c1598507a5a1cdc53fe5b3a454d4630dfb88",
+    "atlas-data/manifests/bodyparts3d-r4-t102/integration-extension.json": "7280e050b4b0ce81e68ce6096bba007949ad56cebabfab7319a582d6157113d8",
+    "atlas-data/manifests/bodyparts3d-r4-t103/source-manifest.json": "ccfd771e561b885770ab38a529c50c3e6b2ff2ddfc63a86a7877e34f3c1e6ec6",
+    "atlas-data/manifests/bodyparts3d-r4-t103/integration-extension.json": "7381138c4be139c8089c6e5371d2bd95285a5f1a0eb55950a7ec35a349a4bdd8",
+    "atlas-data/manifests/bodyparts3d-r4-t54/source-manifest.json": "a27630c0bd6da1664caa4b416f84d990aff6c8c4deab816b6d374a7c0eece01a",
+    "atlas-data/manifests/bodyparts3d-r4-t54/upper-limb.json": "a0861c3657ef2f39969c242a971a789af827c6ce24d4d46ab6ed4f03e7f58fbd",
+    "atlas-data/tools/acquire_bodyparts3d_r4_t103.py": "743cb6813143fb7599b494e31d7e4ea3ada75e29d3a2b27094064dedeb515ee5",
+    "atlas-data/tools/freeze_bodyparts3d_r4_t103.py": "37c7c85617cd047419fd2258fd85f2123ef5232e2f877d737eb2d0472615c11a",
+    "atlas-data/tools/build_bodyparts3d_r4_t103.py": "c1a51006b5f9edc90fb1f62345efbd418ddf3cce4560155ce17387c64f433c23",
+    "atlas-data/tools/extract_bodyparts3d_r4_selected_zip_members.py": "8c0d26cdf38f98d270982cedd501d013261bd7e77b23ad9e00c86da8c2d97ef0",
+    "atlas-data/tools/convert_bodyparts3d_obj_to_glb.py": "05c1216fce695885386d026e4b51419a92e22e2114964e303520fcfa0e409756",
+    "atlas-web/src/viewer/wholeBody/t103SceneExtension.ts": "0836adcec4c612dc624bc82882d3633a72c21fb80669117d0b2e947416e00ea6",
+    "atlas-web/plugins/wholeBody.ts": "8f21c6c98e1b5fb42fcda14a8880e0b767884166b754f6636cf81b2938a3cb2d",
+    "atlas-web/src/viewer/wholeBody/WholeBodyViewer.tsx": "695ebc3c07f40e36aa4ac1372f62e760668bbaae248e9f84de91272369122c6e",
+    "atlas-web/package.json": "fb1207d0a696bd37696c6adb58485e227d1ccbad02e3d5f8288725f160b168d9"
+  },
+  "openSim": {
+    "path": "OpenSim_Models",
+    "head": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "status": "",
+    "statusSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "protectedT13SpatialFiles": [
+    {
+      "path": "work/evidence/T13/additional-transfer.json",
+      "sha256": "6b9184d2ed9ebb3c2522d57f9e6220a0a45d0c29f26389021b5bf5fd475224cb",
+      "bytes": 4435
+    },
+    {
+      "path": "work/evidence/T13/browser-qa.md",
+      "sha256": "f16800e0edc0325013f010b226459d7023a85428b187acf3d1418fcb709720f6",
+      "bytes": 2218
+    },
+    {
+      "path": "work/evidence/T13/build_attachment_context.py",
+      "sha256": "812aa2d9c05bc39f89c7864688e32e7c1594fe16dff6a602c589a0b710bf0e93",
+      "bytes": 7844
+    },
+    {
+      "path": "work/evidence/T13/build_review_packet.py",
+      "sha256": "f11bfa48eada100bc956cbd93f7797f242db649971c4a254cfa9ddd7b6c5ec60",
+      "bytes": 4298
+    },
+    {
+      "path": "work/evidence/T13/build_t13_bones.py",
+      "sha256": "d06ba2b1f922a45c2298f16c13dc51574052fd8d7b35ea9bc347b02229a9a3db",
+      "bytes": 6123
+    },
+    {
+      "path": "work/evidence/T13/fetch_additional_foot_bones.py",
+      "sha256": "50c9d948d8874ae4f1ac557efec1dc712ac9d1aab3dfed771147dc7485ae28d0",
+      "bytes": 3962
+    },
+    {
+      "path": "work/evidence/T13/fetch_bone_subset.py",
+      "sha256": "155ec456ee358a48a4463a1c114806feb181cb6778a7c84e7715db29a419e36d",
+      "bytes": 3694
+    },
+    {
+      "path": "work/evidence/T13/isa_element_parts.txt",
+      "sha256": "a3de74423f943b0d724ae8f59b3a817f87c423a544f8db98113b1980817cbeaf",
+      "bytes": 1142159
+    },
+    {
+      "path": "work/evidence/T13/isa_parts_list_e.txt",
+      "sha256": "ab7796deedd49205e77f3609a1cb8c53e2bbee14ecb5c9a6ca05227469780513",
+      "bytes": 128086
+    },
+    {
+      "path": "work/evidence/T13/review-packet.md",
+      "sha256": "97200639f89a89becc18d67d804f4abcc19be2b5192af51c968794ef1bc4a1f4",
+      "bytes": 32837
+    },
+    {
+      "path": "work/evidence/T13/source-transfer.json",
+      "sha256": "e61cc2e8d3b9a52e7000269f5ac5c9b49757e233ce226df27fb879e892a838c2",
+      "bytes": 4753
+    },
+    {
+      "path": "work/evidence/T13/validate_t13.py",
+      "sha256": "c6f0fdb385ff3137acc106f03fb3e88f6d715baced4a44f3e8a8a7c37af32e87",
+      "bytes": 10293
+    },
+    {
+      "path": "work/evidence/T13/validation.json",
+      "sha256": "1322b3fd6e21260c84cb4f2ae09fae44fc0533fe8daddb3b41bf06b34e795211",
+      "bytes": 2801
+    },
+    {
+      "path": "work/evidence/T13a/browser-validation.json",
+      "sha256": "15ee264b1b6228b7eb0aa2569c063ae71326e64e8a6ca6560fb8d2e8fe4d28e8",
+      "bytes": 3908
+    },
+    {
+      "path": "work/evidence/T13a/commands.json",
+      "sha256": "d73f3c7d839b15d79906281024128b09c6cf9a14dbed72c323e444661bc01fac",
+      "bytes": 829
+    },
+    {
+      "path": "work/evidence/T13a/preservation-after.json",
+      "sha256": "d92c25e1e6d5547f3e6aa39fc67c3da6d0006a5cb11ff4224466ce7385adc94b",
+      "bytes": 5124
+    },
+    {
+      "path": "work/evidence/T13a/preservation-before.json",
+      "sha256": "c23a47dd667e2b17dfce407bca13928b4233a01f1bda0d5971fb267e42ab2e85",
+      "bytes": 13511
+    },
+    {
+      "path": "work/evidence/T13b/browser-validation.json",
+      "sha256": "163a20d712eaa02744e37d5c661a991a812d876c442a93d48e4517cfbddd559e",
+      "bytes": 2741
+    },
+    {
+      "path": "work/evidence/T13b/capture_preservation.py",
+      "sha256": "70e7c707b2371485bf6342a399fd3ce8dcc98778076376b885637248cb5ae832",
+      "bytes": 2525
+    },
+    {
+      "path": "work/evidence/T13b/commands.json",
+      "sha256": "bde7d17b5a492d30b4431bb2df234349c62c160b29542c9cd62265d74eecef74",
+      "bytes": 17260
+    },
+    {
+      "path": "work/evidence/T13b/compare_preservation.py",
+      "sha256": "91b4035bc5857d268d090c9759558a485a4497a80aaf7a24bbf5a1c9723a6db0",
+      "bytes": 2010
+    },
+    {
+      "path": "work/evidence/T13b/fixtures/context.json",
+      "sha256": "c74c1551dfc2a2b065b726420cb0f056e3303cd6700e2f177d5e49497398e122",
+      "bytes": 1592
+    },
+    {
+      "path": "work/evidence/T13b/fixtures/negative-status.json",
+      "sha256": "d0bcd05b18a3c44dd2057df2f2c587a0fb6e0a122af7f151e4b73e09d0bf577f",
+      "bytes": 729
+    },
+    {
+      "path": "work/evidence/T13b/fixtures/negative-unknown-field.json",
+      "sha256": "7fe9203da6964f920cabb1fb832265979de568f6f90d187d08d98a80a15acd5a",
+      "bytes": 178
+    },
+    {
+      "path": "work/evidence/T13b/fixtures/positive-spatial-layer.json",
+      "sha256": "3f57d573624ad3c92d2fbd2698d23ec2147fec6c75508eb2cb2032d8188230ec",
+      "bytes": 1180
+    },
+    {
+      "path": "work/evidence/T13b/preexisting-target-diffs.patch",
+      "sha256": "188afb72fd20d3080c58895b8649cc796c469b42f0da82b98fe4b1c46b60fa32",
+      "bytes": 170727
+    },
+    {
+      "path": "work/evidence/T13b/preservation-after.json",
+      "sha256": "f0381b943162a07691bb53602413a35fe8c16572fd009d0638f455123d33f8d9",
+      "bytes": 12081
+    },
+    {
+      "path": "work/evidence/T13b/preservation-before.json",
+      "sha256": "ae68ef836c26e258c7d7aa320c8a3459a94cfbc04825416173c850d4e1638c6e",
+      "bytes": 11264
+    },
+    {
+      "path": "work/evidence/T13b/preservation-comparison.json",
+      "sha256": "82924557094cc4d5d4dc8fd5d96e9a63ed7ea134d5f7bb977b992cc718052a10",
+      "bytes": 1276
+    },
+    {
+      "path": "work/evidence/T13b/run_validations.py",
+      "sha256": "6a39c9a057c5bc524c620100954737b729289c9c7f5247812b3f1c9f567692b0",
+      "bytes": 2366
+    },
+    {
+      "path": "work/evidence/T13c-B01/browser-mesh-review.json",
+      "sha256": "d226bff83abb6dc09f25686259dcdd983933257b45b2c521d5be2f0eff54f432",
+      "bytes": 2405
+    },
+    {
+      "path": "work/evidence/T13c-B01/browser-validation.json",
+      "sha256": "b2886fc2d15425bbf2e2406afd8f333b897e2511495f5f8aadfe210d7e15c633",
+      "bytes": 1791
+    },
+    {
+      "path": "work/evidence/T13c-B01/build.log",
+      "sha256": "41bb5840495e6fa9400096672110dd7dfad71a4c3f22933465b866706c2e7c12",
+      "bytes": 1112
+    },
+    {
+      "path": "work/evidence/T13c-B01/check_preservation.py",
+      "sha256": "247cc15c151920d5c6b9133222c350c526624553933606a7cd20a07f808817db",
+      "bytes": 2303
+    },
+    {
+      "path": "work/evidence/T13c-B01/preservation-after.json",
+      "sha256": "0d807addbc84a54376f226faa43a76dc6153d3f7b327469587f74ea320f0b207",
+      "bytes": 7835
+    },
+    {
+      "path": "work/evidence/T13c-B01/preservation-before.json",
+      "sha256": "40c74badee414c19e48527e9da187d8c38892ea78d1a9d02c8380db083e97f3a",
+      "bytes": 5609
+    },
+    {
+      "path": "work/evidence/T13c-B01/source-evidence.json",
+      "sha256": "04f2dd6db2900b6160de8ac0634fab4f5c5f647e73f8a85388e95fef1439010f",
+      "bytes": 2889
+    },
+    {
+      "path": "work/evidence/T13c-B01/spatial-draft-layer.json",
+      "sha256": "fcc9f3929996e1b8b5853eee3897b310f1a396ec7b9b0b73b68fe2b25b4143fd",
+      "bytes": 1243
+    },
+    {
+      "path": "work/evidence/T13c-B01/spatial-draft-tests.log",
+      "sha256": "280e24845a17cc5e1393c5e589a32802ad587b9a25334b4683f0002c2bd19e35",
+      "bytes": 1244
+    },
+    {
+      "path": "work/evidence/T13c-B01/typecheck.log",
+      "sha256": "5cfb036289d819b2a87e947d65f4532031dd37753f3cf2def0f77d398eea1737",
+      "bytes": 24
+    },
+    {
+      "path": "work/evidence/T13c-B01/validate_record.py",
+      "sha256": "2590b99de6d97ab7636a66ce72f68feefa03473dffb854be391e186fe7843eaa",
+      "bytes": 4401
+    },
+    {
+      "path": "work/evidence/T13c-B02/browser-baseline.json",
+      "sha256": "10c5399df04f5d5211be157eb60075c2e634762a11db7c900b65b87d2a1f4d5d",
+      "bytes": 1070
+    },
+    {
+      "path": "work/evidence/T13c-B02/browser-mesh-review.json",
+      "sha256": "9e93c72b59cd1a4ea6f8a6da76e2e51892f4d7298d3c85fbc4fe7609edcbb2d6",
+      "bytes": 2320
+    },
+    {
+      "path": "work/evidence/T13c-B02/browser-validation.json",
+      "sha256": "52654d7a8b5f96be02d55748c8fc59e30613994d1a777a9bd973ec9afd1f0b7e",
+      "bytes": 2055
+    },
+    {
+      "path": "work/evidence/T13c-B02/build.log",
+      "sha256": "a8a3303bd1db2a34825d88d31d6b097342e256c985c312e44be00bb14a624b8b",
+      "bytes": 1112
+    },
+    {
+      "path": "work/evidence/T13c-B02/check_preservation.py",
+      "sha256": "41ba0a3aa80d47c3e826458b13479e7531b386c3249cef6ae2c511a71c61c5d8",
+      "bytes": 2637
+    },
+    {
+      "path": "work/evidence/T13c-B02/preservation-after.json",
+      "sha256": "30ac1e8e6c50199c429e99c98791701729a39fdf6f460ecc16b95af7aafdc839",
+      "bytes": 13594
+    },
+    {
+      "path": "work/evidence/T13c-B02/preservation-before.json",
+      "sha256": "90055c75c1ff7da94b842ac395ea6c825bbab035e8ad8137f5ca9bb1cfe7429b",
+      "bytes": 7686
+    },
+    {
+      "path": "work/evidence/T13c-B02/preservation-check.log",
+      "sha256": "c783232bec5f47515ca631202cb22dd29cd5472a7f11b2f0aece8e8e4a7b0267",
+      "bytes": 202
+    },
+    {
+      "path": "work/evidence/T13c-B02/source-evidence.json",
+      "sha256": "d074204e91387af7954e725ab91a2a77e0adecfcabbeedc1d1827d8efcb205ac",
+      "bytes": 4089
+    },
+    {
+      "path": "work/evidence/T13c-B02/spatial-draft-layer.json",
+      "sha256": "67b51cf9bf5216e750a42da3038371cca77d201792d46962cf9c3f06e9b12d93",
+      "bytes": 1251
+    },
+    {
+      "path": "work/evidence/T13c-B02/spatial-draft-tests.log",
+      "sha256": "b7bddf88705cc2fbcf4db084b379395f5adef6e7068119bf99006b89eef5ab01",
+      "bytes": 1240
+    },
+    {
+      "path": "work/evidence/T13c-B02/t03-schema-validation.log",
+      "sha256": "2621645aa5ba5511c262dfb7044152f105faaea5be3fe275ba0757521b866e21",
+      "bytes": 6463
+    },
+    {
+      "path": "work/evidence/T13c-B02/typecheck.log",
+      "sha256": "5cfb036289d819b2a87e947d65f4532031dd37753f3cf2def0f77d398eea1737",
+      "bytes": 24
+    },
+    {
+      "path": "work/evidence/T13c-B02/validate_record.py",
+      "sha256": "51ef16e3101a147334a92fb7b9bb51e18be44620f6f2ee1603e075907379605c",
+      "bytes": 7109
+    },
+    {
+      "path": "work/evidence/T13c-B02/validator-result.json",
+      "sha256": "8aacc858b4f32bfbe3d19bcf5bab056feb5930a202c24edf93e2eb2c44ffcf48",
+      "bytes": 584
+    },
+    {
+      "path": "work/evidence/T13c-B02/validator-result.log",
+      "sha256": "8aacc858b4f32bfbe3d19bcf5bab056feb5930a202c24edf93e2eb2c44ffcf48",
+      "bytes": 584
+    },
+    {
+      "path": "work/evidence/T13c-B03/browser-baseline.json",
+      "sha256": "e38637330292c00d03cd28283ce34cfe453b3818be58566e4eb0f85ec5f845e5",
+      "bytes": 985
+    },
+    {
+      "path": "work/evidence/T13c-B03/browser-mesh-review.json",
+      "sha256": "1d302a7f402bb37105953c4838585ed88477b8cc19837b42e4bcf7a83955bcba",
+      "bytes": 2735
+    },
+    {
+      "path": "work/evidence/T13c-B03/browser-validation.json",
+      "sha256": "463deefab2f9c6ba1e265cbb411b1c0e380060ea1ae16553763c868a013cf912",
+      "bytes": 3087
+    },
+    {
+      "path": "work/evidence/T13c-B03/build.log",
+      "sha256": "a25f7b59cb825014dc37d9c87d3b2e1b87cd6abab9a7f6923985ee02275d0a06",
+      "bytes": 1122
+    },
+    {
+      "path": "work/evidence/T13c-B03/build_spatial_draft.py",
+      "sha256": "309c86f703ef438eda8869157b498dbbd8ac6b7c21480cbce08a90250a72598a",
+      "bytes": 3655
+    },
+    {
+      "path": "work/evidence/T13c-B03/capture_preservation.py",
+      "sha256": "a3a738a0e9ed59520badc432c0ab10fb47ed2a993a57626acb3f3e3a6032e0ce",
+      "bytes": 3254
+    },
+    {
+      "path": "work/evidence/T13c-B03/check_preservation.py",
+      "sha256": "52024bc6831a90684c78a5214e8bd253be96b12caa335e082690c978dff3d253",
+      "bytes": 2908
+    },
+    {
+      "path": "work/evidence/T13c-B03/git-diff-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "work/evidence/T13c-B03/handoff-check.json",
+      "sha256": "1086f0aaf1f019895038667f163900978f030f6c181c2f6b2d9f6830cc4bb052",
+      "bytes": 149
+    },
+    {
+      "path": "work/evidence/T13c-B03/preservation-after.json",
+      "sha256": "043f220ce92bbb3743309c7fa8db38e78a92a212989aedcd70abfa3b174f7c0f",
+      "bytes": 22040
+    },
+    {
+      "path": "work/evidence/T13c-B03/preservation-before.json",
+      "sha256": "e1f26576f75384090d8e528e1726cffce1cba474ac929c620cecc1d7e6a341aa",
+      "bytes": 13978
+    },
+    {
+      "path": "work/evidence/T13c-B03/record-validator.log",
+      "sha256": "d396ebc62e50d1dd4ea3d290d9096690be06d12b36ee9627568533f21dc24099",
+      "bytes": 604
+    },
+    {
+      "path": "work/evidence/T13c-B03/run_checks.py",
+      "sha256": "da209249ddc532f9b8968f1b4f61736bf30e68bb2463190519c2d1dc9a3b5f59",
+      "bytes": 2075
+    },
+    {
+      "path": "work/evidence/T13c-B03/source-evidence.json",
+      "sha256": "dddef00da127eeeb3afb52dc2e3967cb0a0665547d7dff18af386bdc37643ae7",
+      "bytes": 5632
+    },
+    {
+      "path": "work/evidence/T13c-B03/spatial-draft-layer.json",
+      "sha256": "d634cc00781fb46d84ee8e18b2c271c4a378b2656b2674b05611b5c202504714",
+      "bytes": 1251
+    },
+    {
+      "path": "work/evidence/T13c-B03/spatial-draft-tests.log",
+      "sha256": "d6c356685b32085f05a32dde1226ff8abf11e33bb137a25345de01e3afa49fdf",
+      "bytes": 1255
+    },
+    {
+      "path": "work/evidence/T13c-B03/t03-schema-fixtures.log",
+      "sha256": "2621645aa5ba5511c262dfb7044152f105faaea5be3fe275ba0757521b866e21",
+      "bytes": 6463
+    },
+    {
+      "path": "work/evidence/T13c-B03/typecheck.log",
+      "sha256": "40b435412feb2dc8c30904f8d10e8064dad8f04f6636ddedcc607bfbde9e2cf2",
+      "bytes": 34
+    },
+    {
+      "path": "work/evidence/T13c-B03/validate_record.py",
+      "sha256": "c01c1ebd3cf9520bae1b3ca483f32ec16f77b3432f1356bdbdec9ce813a6342e",
+      "bytes": 6930
+    },
+    {
+      "path": "work/evidence/T13c-B03/validation-summary.json",
+      "sha256": "626ddb3dcb5d78150690dfdf9ae09fce5e5aa46a683a594b751d5da111e7a32e",
+      "bytes": 1693
+    },
+    {
+      "path": "work/evidence/T13c-B03/validator-result.json",
+      "sha256": "d396ebc62e50d1dd4ea3d290d9096690be06d12b36ee9627568533f21dc24099",
+      "bytes": 604
+    },
+    {
+      "path": "atlas-data/schemas/spatial-draft-layer.schema.json",
+      "sha256": "961400792f5b63806ba484b7d223163f678b2446ad00d75f83f239df31257aec",
+      "bytes": 4384
+    },
+    {
+      "path": "atlas-data/schemas/annotation-draft-exchange.schema.json",
+      "sha256": "8b9ad4c5fb68b152106d67b2473b642c5184e558b89b1e8e263c58c9b71543a9",
+      "bytes": 3688
+    }
+  ],
+  "existingUserStatusPorcelain": "work/evidence/T104/start-status-porcelain.txt",
+  "statusCapturedBeforeEvidenceScaffold": true,
+  "startUserWipPaths": [
+    " M AGENTS.md",
+    " M design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    " M design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+    " M design/2026-09-25-muscle-atlas/07-AI-EVIDENCE-AND-MOTION-DESIGN.md",
+    " M design/2026-09-25-muscle-atlas/08-SERIAL-ROADMAP-AND-GIT.md",
+    " M work/STATUS.md",
+    " M work/task-registry-r13.json",
+    " M work/tasks/T24.md",
+    " M work/tasks/T25.md",
+    " M work/tasks/T26.md",
+    " M work/tasks/T27.md",
+    " M work/tasks/T28.md",
+    " M work/tasks/T29.md",
+    " M work/tasks/T30.md",
+    " M work/tasks/T31.md",
+    " M work/tasks/T32.md",
+    " M work/tasks/T33.md",
+    " M work/tasks/T34.md",
+    " M work/tasks/T35.md",
+    " M work/tasks/T36.md",
+    " M work/tasks/T37.md",
+    " M work/tasks/T38.md",
+    " M work/tasks/T39.md",
+    " M work/tasks/T40.md",
+    "?? design/2026-09-25-muscle-atlas/10-STRUCTURE-FUNCTION-DELIVERY-PLAN.md",
+    "?? design/2026-09-25-muscle-atlas/11-TASK-PROMPTS-R14.md",
+    "?? design/2026-09-25-muscle-atlas/12-ASSESSMENT-ANIMATION-FUTURE.md",
+    "?? design/2026-09-25-muscle-atlas/13-CONTINUOUS-WHOLE-BODY-EXPERIENCE-R15.md",
+    "?? design/2026-09-25-muscle-atlas/14-TASK-PROMPTS-R15.md",
+    "?? design/2026-09-25-muscle-atlas/15-NERVE-AND-ASSESSMENT-SCOPE-R15.md",
+    "?? design/2026-09-25-muscle-atlas/16-ASTRA-UI-HANDOFF.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/AGENTS.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/01-PRODUCT-AND-ARCHITECTURE.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/02-DATA-CONTRACT.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/04-SOURCES-AND-DECISIONS.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/06-REGION12-MUSCLE-BONE-REVISION.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/DECISIONS.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/STATUS.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14a.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14b.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15a.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15b.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15c.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15d.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15e.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15f.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15g.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T16.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T17.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T18.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T19.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T20.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T21.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T22.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T23.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T24.md",
+    "?? work/evidence/2026-09-26-region12-design/before/AGENTS.md",
+    "?? work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    "?? work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/01-PRODUCT-AND-ARCHITECTURE.md",
+    "?? work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/02-DATA-CONTRACT.md",
+    "?? work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+    "?? work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/04-SOURCES-AND-DECISIONS.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/DECISIONS.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/STATUS.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T15.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T16.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T17.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T18.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T19.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T20.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T21.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T22.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T23.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T24.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/AGENTS.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/design/2026-09-25-muscle-atlas/13-CONTINUOUS-WHOLE-BODY-EXPERIENCE-R15.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/design/2026-09-25-muscle-atlas/14-TASK-PROMPTS-R15.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/work/task-registry-r15.json",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T51.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T52.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T53.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T54.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T55.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T56.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T57.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T58.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/changed-paths.json",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/validation.json",
+    "?? work/evidence/2026-09-27-r14-plan/before-plan-docs/AGENTS.md",
+    "?? work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    "?? work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+    "?? work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/07-AI-EVIDENCE-AND-MOTION-DESIGN.md",
+    "?? work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/08-SERIAL-ROADMAP-AND-GIT.md",
+    "?? work/evidence/2026-09-27-r14-plan/git-status-before.txt",
+    "?? work/evidence/2026-09-27-r14-plan/head.txt",
+    "?? work/evidence/2026-09-27-r14-plan/owned-files.json",
+    "?? work/evidence/2026-09-27-r14-plan/protected-before.json",
+    "?? work/evidence/2026-09-27-r14-plan/validation.json",
+    "?? work/evidence/2026-09-27-r15-plan/before/AGENTS.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/10-STRUCTURE-FUNCTION-DELIVERY-PLAN.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/11-TASK-PROMPTS-R14.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/12-ASSESSMENT-ANIMATION-FUTURE.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/STATUS.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T25.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T26.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T27.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T28.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T29.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T30.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T31.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T32.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T33.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T34.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T35.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T36.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T37.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T38.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T39.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T40.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T45.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T46.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T47.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T48.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T49.md",
+    "?? work/evidence/2026-09-27-r15-plan/head.txt",
+    "?? work/evidence/2026-09-27-r15-plan/owned-paths.json",
+    "?? work/evidence/2026-09-27-r15-plan/protected-before.json",
+    "?? work/evidence/2026-09-27-r15-plan/status-before.txt",
+    "?? work/evidence/2026-09-27-r15-plan/validation.json",
+    "?? work/reports/R14-2026-09-27-PLAN.md",
+    "?? work/reports/R15-2026-09-27-PLAN.md",
+    "?? work/reviews/T22-2026-09-27/REVIEW.md",
+    "?? work/reviews/T22-2026-09-27/edge-repro.patch",
+    "?? work/reviews/T22-2026-09-27/node-tests.log",
+    "?? work/reviews/T22-2026-09-27/validation.log",
+    "?? work/reviews/T22-2026-09-27/verification.json",
+    "?? work/reviews/T50-T55-T69-2026-09-27/REVIEW.md",
+    "?? work/reviews/T50-T55-T69-2026-09-27/audit_sources.py",
+    "?? work/reviews/T50-T55-T69-2026-09-27/baseline.json",
+    "?? work/reviews/T50-T55-T69-2026-09-27/build.log",
+    "?? work/reviews/T50-T55-T69-2026-09-27/historical-t52-validator.json",
+    "?? work/reviews/T50-T55-T69-2026-09-27/preservation.json",
+    "?? work/reviews/T50-T55-T69-2026-09-27/source-audit.json",
+    "?? work/reviews/T50-T55-T69-2026-09-27/t52-integrity.json",
+    "?? work/reviews/T50-T55-T69-2026-09-27/test_bodyparts3d_r4_ingest.py.log",
+    "?? work/reviews/T50-T55-T69-2026-09-27/test_bodyparts3d_r4_t53.py.log",
+    "?? work/reviews/T50-T55-T69-2026-09-27/test_bodyparts3d_r4_t54.py.log",
+    "?? work/reviews/T50-T55-T69-2026-09-27/test_bodyparts3d_r4_t55.py.log",
+    "?? work/reviews/T50-T55-T69-2026-09-27/test_diagnose_bodyparts3d_r4_t52_laterality.py.log",
+    "?? work/reviews/T50-T55-T69-2026-09-27/test_extract_bodyparts3d_r4_selected_zip_members.py.log",
+    "?? work/reviews/T50-T55-T69-2026-09-27/typecheck.log",
+    "?? work/reviews/T50-T55-T69-2026-09-27/web-checks.json",
+    "?? work/reviews/T52-2026-09-27/REVIEW-AND-NEXT.md",
+    "?? work/reviews/T52-2026-09-27/baseline.json",
+    "?? work/reviews/T52-2026-09-27/verification.json",
+    "?? work/task-registry-r14.json",
+    "?? work/task-registry-r15.json",
+    "?? work/tasks/T23-R14-RESUME.md",
+    "?? work/tasks/T41.md",
+    "?? work/tasks/T43.md",
+    "?? work/tasks/T44.md",
+    "?? work/tasks/T45.md",
+    "?? work/tasks/T46.md",
+    "?? work/tasks/T47.md",
+    "?? work/tasks/T48.md",
+    "?? work/tasks/T49.md",
+    "?? work/tasks/T50.md",
+    "?? work/tasks/T51.md",
+    "?? work/tasks/T52.md",
+    "?? work/tasks/T53.md",
+    "?? work/tasks/T54.md",
+    "?? work/tasks/T56.md",
+    "?? work/tasks/T57.md",
+    "?? work/tasks/T58.md",
+    "?? work/tasks/T59.md",
+    "?? work/tasks/T60.md",
+    "?? work/tasks/T61.md",
+    "?? work/tasks/T62.md",
+    "?? work/tasks/T63.md",
+    "?? work/tasks/T64.md",
+    "?? work/tasks/T65.md",
+    "?? work/tasks/T66.md",
+    "?? work/tasks/T67.md",
+    "?? work/tasks/T68.md",
+    "?? work/tasks/T69.md",
+    "?? work/tasks/archive/R13-before-R14/T24.md",
+    "?? work/tasks/archive/R13-before-R14/T25.md",
+    "?? work/tasks/archive/R13-before-R14/T26.md",
+    "?? work/tasks/archive/R13-before-R14/T27.md",
+    "?? work/tasks/archive/R13-before-R14/T28.md",
+    "?? work/tasks/archive/R13-before-R14/T29.md",
+    "?? work/tasks/archive/R13-before-R14/T30.md",
+    "?? work/tasks/archive/R13-before-R14/T31.md",
+    "?? work/tasks/archive/R13-before-R14/T32.md",
+    "?? work/tasks/archive/R13-before-R14/T33.md",
+    "?? work/tasks/archive/R13-before-R14/T34.md",
+    "?? work/tasks/archive/R13-before-R14/T35.md",
+    "?? work/tasks/archive/R13-before-R14/T36.md",
+    "?? work/tasks/archive/R13-before-R14/T37.md",
+    "?? work/tasks/archive/R13-before-R14/T38.md",
+    "?? work/tasks/archive/R13-before-R14/T39.md",
+    "?? work/tasks/archive/R13-before-R14/T40.md"
+  ]
+}
