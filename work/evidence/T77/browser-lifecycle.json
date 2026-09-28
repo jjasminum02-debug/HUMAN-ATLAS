@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "checks": [
+    "partial failure retains loaded bones",
+    "retry preserves camera",
+    "bound tibialis selection survives retry",
+    "context restore same root and canvas",
+    "context restore preserves camera/target",
+    "context restore preserves selection",
+    "all regional demands use one root/renderer",
+    "531 default visible; 12 held hidden",
+    "only original 10 bindings selectable",
+    "supplements remain source-only",
+    "no duplicated shared geometry nodes",
+    "bone layer-off hides original and newly integrated bones",
+    "layer toggle preserves camera",
+    "FJ3157 visible without supplement opt-in",
+    "FJ3159 visible without supplement opt-in",
+    "FJ3162 visible without supplement opt-in",
+    "FJ3165 visible without supplement opt-in",
+    "FJ3168 visible without supplement opt-in",
+    "FJ3393 visible without supplement opt-in",
+    "all integrity held nodes remain hidden",
+    "dispose removes canvas and releases loaded groups"
+  ],
+  "evidence": {
+    "legReadyMs": 103.59999990463257,
+    "contextRestoreMs": 352.7999999523163,
+    "wholeBodyReadyMs": 425.19999980926514,
+    "metrics": {
+      "loaded": 30,
+      "total": 30,
+      "failed": 0,
+      "contextLost": false,
+      "selectedAvailable": true,
+      "calls": 531,
+      "triangles": 2378700,
+      "geometries": 531,
+      "bytes": 68126860,
+      "nodes": 543
+    },
+    "frameIntervalsMs": {
+      "count": 73,
+      "median": 16.699999809265137,
+      "p95": 17
+    }
+  }
+}

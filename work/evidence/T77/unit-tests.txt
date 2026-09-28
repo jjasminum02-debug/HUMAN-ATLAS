@@ -1,0 +1,58 @@
+$ node --experimental-strip-types --test src/viewer/wholeBody/wholeBody.test.ts && python3 scripts/check-whole-body-t77.py
+✔ source-only context never becomes selectable (0.323833ms)
+✔ supplements require explicit opt-in, stay unbound (0.046209ms)
+✔ held identity cannot be revealed through layer/opt-in (0.034542ms)
+✔ region/layer demand excludes unrelated geometry (0.034541ms)
+✔ reject conflicting duplicate IDs and source-only binding promotion (0.213042ms)
+✔ late parse after cancellation is disposed; same-id new demand can recover (3.122209ms)
+✔ failure retains successful resources; explicit retry only failed asset (2.617ms)
+✔ dispose releases completed and late resources exactly once (1.510625ms)
+✔ isolation never promotes source-only or held nodes and respects layer switches (0.1395ms)
+✔ v2 local display is independent from learner binding, rights and review holds (0.176666ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 62.954917
+{
+  "status": "passed",
+  "lockedInputs": 55,
+  "uniqueNodes": 543,
+  "defaultVisible": 531,
+  "heldHidden": [
+    "FJ1525",
+    "FJ1543",
+    "FJ1547",
+    "FJ1548",
+    "FJ2742",
+    "FJ2754",
+    "FJ1450",
+    "FJ1451",
+    "FJ1454",
+    "FJ1455",
+    "FJ1469",
+    "FJ1469M"
+  ],
+  "unchangedBindings": [
+    "FJ3360",
+    "FJ3366",
+    "FJ3387",
+    "FJ1394",
+    "FJ1397",
+    "FJ1409",
+    "FJ1410",
+    "FJ1437",
+    "FJ1439",
+    "FJ1440"
+  ],
+  "newSourceNodes": 30,
+  "explicitDisplayChanges": 50,
+  "trianglesIncludingHeld": 2683648,
+  "geometryBytesUnchanged": true,
+  "historicalFieldsUnchanged": true,
+  "visualCoverage": "partial",
+  "wholeBodyDenominator": null
+}

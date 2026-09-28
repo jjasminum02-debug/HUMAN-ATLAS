@@ -37,3 +37,18 @@ test('isolation never promotes source-only or held nodes and respects layer swit
   assert(!visible(bound,{...isolated,selectedIds:[]}));
   assert(visible(asset,{...isolated,selectedId:null}));
 });
+
+test('v2 local display is independent from learner binding, rights and review holds', () => {
+ const reasons=['not_canonical_learner_binding','human_anatomy_review_not_performed','public_redistribution_held'];
+ const a:BodyAsset={...asset,supplement:true,holdReasons:reasons,publicRedistribution:'held',localDisplay:{beforeDefaultVisible:false,afterDefaultVisible:true,state:'allowed',sourceSha256:asset.sourceSha256,integrityHolds:[],evidenceIds:['source','validation'],retainedHoldReasons:reasons,bindingState:'source_only_unbound',publicRedistribution:'held',humanReviewed:false,basis:'verified_local_source_context_only'}};
+ const m={version:2,localOnly:true,publicRedistribution:'held',frame:'HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR',unit:'m',lodLevels:1,chunks:[{id:'a',url:'/__atlas/body/a.glb',sha256:'a'.repeat(64),bytes:10,assets:[a]}]};
+ validateManifest(m); assert(visible(a,view));assert(!pickable(a));assert(!visible(a,{...view,muscles:false}));
+ const reject=(modified:BodyAsset)=>assert.throws(()=>validateManifest({...m,chunks:[{...m.chunks[0],assets:[modified]}]}));
+ reject({...a,localDisplay:undefined});
+ reject({...a,localDisplay:{...a.localDisplay!,evidenceIds:[]}});
+ reject({...a,holdReasons:[...reasons,'identity_conflict']});
+ reject({...a,stableIds:['invented']});
+ reject({...a,publicRedistribution:undefined});
+ const hidden={...a,defaultVisible:false,localDisplay:{...a.localDisplay!,afterDefaultVisible:false,state:'held' as const}};
+ assert(!visible(hidden,{...view,supplements:true}));
+});

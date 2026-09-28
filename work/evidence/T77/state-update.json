@@ -1,0 +1,43 @@
+{
+  "task": "T77",
+  "sharedFilesNotStaged": true,
+  "before": {
+    "nextTask": "T77",
+    "taskStatuses.T77": "planned_not_started",
+    "T77ExecutionResult": null
+  },
+  "after": {
+    "nextTask": "T78",
+    "taskStatuses.T77": "partial",
+    "T77ExecutionResult": {
+      "status": "partial",
+      "technicalIntegration": "passed",
+      "visualCoverage": "partial",
+      "wholeBodyDenominator": null,
+      "sourceNodes": 543,
+      "defaultVisible": 531,
+      "heldHidden": 12,
+      "unchangedBindingNodes": 10,
+      "humanReviewPerformed": false,
+      "publicRedistribution": "held",
+      "latissimus": {
+        "state": "missing",
+        "geometry": null,
+        "binding": null,
+        "priorDecision": "T94:no_exact_source_found",
+        "futureImplementationRequested": true,
+        "handoff": "work/evidence/T77/NEXT-T78.md"
+      },
+      "nextTask": "T78",
+      "independentNextScope": "target inventory and bounded implementation queue only",
+      "report": "work/reports/T77.md",
+      "evidence": "work/evidence/T77/"
+    }
+  },
+  "statusPatch": "work/evidence/T77/status-owned.patch",
+  "statusBeforeSha256": "b16c6013ff8a54ce89ec27fe3777487752b87f0bb95fc6f00d4687881c243568",
+  "statusAfterSha256": "801f21f10c06c86b8242084c6cf2b52d21e5b18ad8a54e93edb79ad508957915",
+  "registryBeforeSha256": "e4a6733ea6fff1d006c6ab8c6507ecda2a4bb9168c0ac92c23c419621f09a0e6",
+  "registryAfterSha256": "a4472636285128bacdd6bacb38f2d66c30e961c5f992140521b932163f35bd6d",
+  "statusPatchApplyOptions": "git apply --unidiff-zero (only on matching statusBeforeSha256; already applied in this checkout)"
+}

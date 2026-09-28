@@ -4,7 +4,7 @@ import type { Plugin } from 'vite';
 
 /** Local engineering only. Intentionally no preview hook or production asset emission. */
 export function wholeBodyPlugin(root: string): Plugin {
-  const directory = `${root}atlas-data/source-cache/bodyparts3d-r4/converted/t56/`;
+  const directory = `${root}atlas-data/source-cache/bodyparts3d-r4/converted/t77/`;
   return {
     name: 'local-whole-body-held-assets',
     configureServer(server) {
