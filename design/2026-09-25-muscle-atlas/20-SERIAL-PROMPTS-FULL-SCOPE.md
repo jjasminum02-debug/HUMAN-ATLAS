@@ -1,3 +1,5 @@
+> **2026-09-28 T78 개정:** 현재 다음은 T95(Luna Max). 21-WHOLE-BODY-ACQUISITION-T78.md와 work/evidence/T78/PROMPTS-IN-ORDER.md / execution-queue.json을 우선한다. 부위 복수 선택·견갑골 수정 → 실제 누락 표면 취득·광배근 객체/권리/정합/통합 → 전체 target 의미/선택 연결 → T80/T58. 아래 T79→T80 직행 및 취득과 전체 콘텐츠 동시 완료 문구는 새 queue로 대체한다. T78 target 의미 분모는 아직 partial이며 개별근 분모 null, 원래 후반 기시정지→작용→모션→신경 순서는 유지한다.
+
 # T77 이후 새 순서·실행 프롬프트
 
 2026-09-28 · 계획. T73–76은 18 문서 그대로. 아래는 한 task씩 실행한다. 첫 batch 뒤의 전신 잔여 batch는 동적 발급하여 해당 global gate 앞에 넣는다. **모든 근육 기능/움직임 합격 전 신경 착수 금지.**
