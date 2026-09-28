@@ -13,7 +13,7 @@ export interface BodyAsset {
   bounds: [number[], number[]];
 }
 export interface BodyChunk { id: string; url: string; sha256: string; bytes: number; assets: BodyAsset[] }
-export interface BodyManifest { version: number; localOnly: boolean; publicRedistribution: string; frame: string; unit: string; lodLevels: number; chunks: BodyChunk[] }
+export interface BodyManifest { version: number; revision?: string; localOnly: boolean; publicRedistribution: string; frame: string; unit: string; lodLevels: number; chunks: BodyChunk[] }
 export interface BodyView { region: string | null; regionIds?: string[]; bones: boolean; muscles: boolean; supplements: boolean; selectedId: string | null; selectedIds?: string[]; dim: boolean; isolate?: boolean }
 export function visible(a: BodyAsset, view: BodyView): boolean {
   const regionIds = view.regionIds ?? (view.region ? [view.region] : []);

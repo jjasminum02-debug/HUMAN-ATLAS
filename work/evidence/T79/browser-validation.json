@@ -1,0 +1,89 @@
+{
+  "task": "T79",
+  "status": "passed",
+  "testedAtLocal": "2026-09-28 Asia/Seoul",
+  "method": "actual Codex in-app browser using the local Vite application; visual screenshots were inspected but not persisted as image files",
+  "url": "http://127.0.0.1:5173/",
+  "viewport": {
+    "width": 1280,
+    "height": 720,
+    "devicePixelRatio": 2
+  },
+  "continuity": {
+    "canvasCount": 1,
+    "anatomySceneRootUuid": "8d7a8fd7-7795-436a-a1fa-474ac9d49d1b",
+    "rendererCanvasId": "anatomy-8d7a8fd7-7795-436a-a1fa-474ac9d49d1b",
+    "sameRootAndRendererAcrossViews": true,
+    "loadedChunkCount": 31,
+    "t79ChunkId": "t79-upper-limb-muscle"
+  },
+  "beforeT79BrowserSnapshot": {
+    "calls": 531,
+    "triangles": 2378700,
+    "geometries": 531,
+    "note": "Earlier in this task, the same browser session measured the existing full-body scene before the T79 extension was served."
+  },
+  "fullBodyAfterT79": {
+    "calls": 541,
+    "triangles": 2395316,
+    "geometries": 541,
+    "loadedPending": 0,
+    "cameraPosition": [
+      0.000010505318641662598,
+      0.7817299738526347,
+      3.434144729891477
+    ],
+    "t79VisibleIds": [
+      "HA-MESH-BP3D4-FJ1512",
+      "HA-MESH-BP3D4-FJ1512M",
+      "HA-MESH-BP3D4-FJ1478",
+      "HA-MESH-BP3D4-FJ1478M",
+      "HA-MESH-BP3D4-FJ1479",
+      "HA-MESH-BP3D4-FJ1479M",
+      "HA-MESH-BP3D4-FJ1480",
+      "HA-MESH-BP3D4-FJ1480M",
+      "HA-MESH-BP3D4-FJ1477",
+      "HA-MESH-BP3D4-FJ1477M"
+    ],
+    "eachTargetVisibleExactlyOnce": true
+  },
+  "upperLimbCloseAfterRegionAndFit": {
+    "calls": 133,
+    "triangles": 227154,
+    "geometries": 541,
+    "cameraPosition": [
+      0.000010505318641662598,
+      1.0042535066604614,
+      1.5097371590346953
+    ],
+    "t79VisibleCount": 10,
+    "t79EachVisibleExactlyOnce": true,
+    "visualInspection": "bilateral arm surfaces and shoulder context visible in the close view"
+  },
+  "muscleLayerOff": {
+    "calls": 63,
+    "triangles": 85962,
+    "geometries": 541,
+    "t79VisibleCount": 0,
+    "rootAndRendererUnchanged": true
+  },
+  "muscleLayerRestoredAndWholeBody": {
+    "calls": 541,
+    "triangles": 2395316,
+    "geometries": 541,
+    "t79VisibleCount": 10,
+    "eachTargetVisibleExactlyOnce": true,
+    "rootAndRendererUnchanged": true
+  },
+  "observedSceneDeltaAtFullBody": {
+    "calls": 10,
+    "triangles": 16616,
+    "geometries": 10,
+    "matchesTenNewSourceNodes": true
+  },
+  "consoleErrorsAndWarnings": [],
+  "limits": [
+    "Only the 1280x720 browser viewport was measured; this task changes scene data/runtime integration, not responsive UI layout.",
+    "The inspected screenshots were not saved as standalone image evidence."
+  ]
+}

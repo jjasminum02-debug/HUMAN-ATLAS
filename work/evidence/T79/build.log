@@ -1,0 +1,47 @@
+$ python3 scripts/validate-learning-content.py && python3 ../atlas-data/schemas/validate_ai_evidence.py --check && python3 ../atlas-data/schemas/validate_bone_name_overlay.py --check && python3 ../atlas-data/schemas/validate_motion_learning.py --check && python3 ../atlas-data/schemas/validate_motion_asset_sources.py && node scripts/check-scene-decoders.mjs && tsc -b && vite build
+{"pass": true, "nameEntries": 81, "summaries": 14, "scope": "references and stale hashes, not anatomy approval"}
+{
+  "task": "T16",
+  "mode": "check",
+  "pass": true,
+  "legacyRowsCheckedInTestOnlyMigrationPreview": 14,
+  "productionFieldItems": 51,
+  "migrationPreviewIssues": [],
+  "issues": []
+}
+{
+  "status": "passed",
+  "entryCount": 9,
+  "selectableBoneCount": 9,
+  "sourceCount": 9,
+  "humanAnatomyReview": "not_reviewed",
+  "actualHanjaCollected": false
+}
+{
+  "production": {
+    "valid": true,
+    "actionCount": 7,
+    "definitionCount": 1,
+    "assetCount": 1,
+    "issues": []
+  }
+}
+PASS: 2 source candidates verified; production motion assets=1; source bytes unchanged
+Scene decoder QA passed: 11 meshes/712192 bytes, 9 meshes/205392 bytes
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 50 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     0.54 kB │ gzip:   0.36 kB
+dist/assets/index-UUYMvEqZ.css      0.74 kB │ gzip:   0.44 kB
+dist/assets/App-BzHjGoPX.css       36.98 kB │ gzip:   7.90 kB
+dist/assets/index-D9z1iWCn.js     222.37 kB │ gzip:  69.95 kB
+dist/assets/App-CHPrSMiT.js     1,203.27 kB │ gzip: 235.93 kB
+
+✓ built in 130ms
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
