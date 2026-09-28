@@ -1,3 +1,5 @@
+> **현행 효율화 개정:** 22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md와 work/evidence/2026-09-28-efficient-plan/의 queue/프롬프트 우선. T96을 앞당기고 T110–121은12부위 package, T122–165는 superseded_not_executed다.10개당 새 task 발급은 폐기, 검증 단위로만 유지. T78의 실제 결과/미완은 바뀌지 않는다. 다음 T95 → T96.
+
 # T78 개정 — 전신 모형 확보 우선, 부위 복수 선택, 실제 광배근 구현 경로
 
 2026-09-28 · 사용자 요청 반영 · Astra 설계 / 후속 구현 Luna Max. 이 문서는 계획이며 모형·UI 구현 완료를 뜻하지 않는다. 이번 변경 범위에서 19/20 및 이전 프롬프트보다 우선한다. T73–77/T92–94 결과는 수정하지 않는다.

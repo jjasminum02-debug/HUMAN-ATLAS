@@ -1,0 +1,643 @@
+{
+  "revision": "R15-efficient-2026-09-28",
+  "kind": "plan_only_not_implementation",
+  "nextTask": "T95",
+  "order": [
+    "T95",
+    "T96",
+    "T79",
+    "T97",
+    "T101",
+    "T102",
+    "T103",
+    "T104",
+    "T105",
+    "T106",
+    "T107",
+    "T98",
+    "T99",
+    "T100",
+    "T108",
+    "T109",
+    "T110",
+    "T111",
+    "T112",
+    "T113",
+    "T114",
+    "T115",
+    "T116",
+    "T117",
+    "T118",
+    "T119",
+    "T120",
+    "T121"
+  ],
+  "jobs": [
+    {
+      "id": "T95",
+      "title": "부위 복수 선택과 양측 견갑골 맥락 표시",
+      "model": "Luna Max",
+      "kind": "ui",
+      "targetIds": [],
+      "scope": "selectedRegionIds를 중복 없는 집합으로 관리한다. 목+머리는 합집합만 보이고 같은 버튼 재클릭은 해제, 빈 집합은 전신이다. layer-off/held는 지역 선택보다 우선하며 영역이 겹쳐도 node는 1개다. 기존 region 단일 URL을 읽고 복수 값은 반복 region 파라미터로 직렬화한다. back/forward/reload와 검색/카드 선택을 구분한다. 외부 지역 검색 결과를 선택하면 해당 지역을 명시적으로 필터에 추가하되 기존 선택을 보존한다. 선택 근육이 필터에서 빠지면 카드 선택을 해제하고 카메라는 불필요하게 초기화하지 않는다. 모바일도 접근 가능한 toggle 목록, aria-pressed/키보드 제공. 전체 버튼은 집합을 비운다. source regions는 수정하지 않고 product context overlay로 FJ3279/FJ3384 양측 견갑골을 upper-limb에 포함한다. FJ3237/FJ3362 쇄골도 양측 맥락으로 대조한다. 현재 요추/엉치뼈 표시와 근육/뼈 레이어 유지. region-diagnostic.json의 실제 hash/정책을 확인한다. 새 geometry/권리 변경 없음. 목→머리→목 해제→전체, 팔 양측견갑골, layer-off, held, URL, 모바일, 단일renderer/중복node 회귀와 실제 화면이 합격 조건.",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "status": "planned_not_started",
+      "spec": "work/tasks/T95.md",
+      "defaultNext": "T96",
+      "prompt": "HUMAN ATLAS에서 T95만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: selectedRegionIds를 중복 없는 집합으로 관리한다. 목+머리는 합집합만 보이고 같은 버튼 재클릭은 해제, 빈 집합은 전신이다. layer-off/held는 지역 선택보다 우선하며 영역이 겹쳐도 node는 1개다. 기존 region 단일 URL을 읽고 복수 값은 반복 region 파라미터로 직렬화한다. back/forward/reload와 검색/카드 선택을 구분한다. 외부 지역 검색 결과를 선택하면 해당 지역을 명시적으로 필터에 추가하되 기존 선택을 보존한다. 선택 근육이 필터에서 빠지면 카드 선택을 해제하고 카메라는 불필요하게 초기화하지 않는다. 모바일도 접근 가능한 toggle 목록, aria-pressed/키보드 제공. 전체 버튼은 집합을 비운다. source regions는 수정하지 않고 product context overlay로 FJ3279/FJ3384 양측 견갑골을 upper-limb에 포함한다. FJ3237/FJ3362 쇄골도 양측 맥락으로 대조한다. 현재 요추/엉치뼈 표시와 근육/뼈 레이어 유지. region-diagnostic.json의 실제 hash/정책을 확인한다. 새 geometry/권리 변경 없음. 목→머리→목 해제→전체, 팔 양측견갑골, layer-off, held, URL, 모바일, 단일renderer/중복node 회귀와 실제 화면이 합격 조건.\n다음 기본 ID는 T96이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T96",
+      "title": "전체 목표 분류·반복근·뼈 분모 의미 검증",
+      "model": "Luna Max",
+      "kind": "target_semantics",
+      "targetIds": [],
+      "scope": "T78의 provisional target 556개 및 supporting ledger를 의미 검증하고 포함/제외/군/부분/변이/반복근/양측 규칙을 확정한다. 기존 source-element613 및 미통합70개의 역사 freeze는 보존한다. 확정 target 전체를 T110–T121의 12부위 package에 exactly-one primary owner로 배정하고 제품 소속은 다중 regionIds로 둔다. 제외/병합/추가의 근거와 전후 대응을 기록하여 어떤 후보도 조용히 사라지지 않게 한다. 각 package에 exact IDs/input hashes/최대10 target workUnits/nextUnit manifest를 만든다. 이미 확보된 geometry·canonical·세 이름/기시정지/기능/animation 상태를 독립 대조한다. 부위 구조 연결과 무관한 신규 앱 구현은 하지 않는다. 새10개마다 정수 task를 발급하지 않는다. 모든 target 배정과 중복/누락/보류 유지가 검증되기 전 package 실행은 차단한다. 확정하지 못한 것은 unresolved이며 전체 분모 합격을 선언하지 않는다.",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "status": "planned_not_started",
+      "spec": "work/tasks/T96.md",
+      "defaultNext": "T79",
+      "prompt": "HUMAN ATLAS에서 T96만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: T78의 provisional target 556개 및 supporting ledger를 의미 검증하고 포함/제외/군/부분/변이/반복근/양측 규칙을 확정한다. 기존 source-element613 및 미통합70개의 역사 freeze는 보존한다. 확정 target 전체를 T110–T121의 12부위 package에 exactly-one primary owner로 배정하고 제품 소속은 다중 regionIds로 둔다. 제외/병합/추가의 근거와 전후 대응을 기록하여 어떤 후보도 조용히 사라지지 않게 한다. 각 package에 exact IDs/input hashes/최대10 target workUnits/nextUnit manifest를 만든다. 이미 확보된 geometry·canonical·세 이름/기시정지/기능/animation 상태를 독립 대조한다. 부위 구조 연결과 무관한 신규 앱 구현은 하지 않는다. 새10개마다 정수 task를 발급하지 않는다. 모든 target 배정과 중복/누락/보류 유지가 검증되기 전 package 실행은 차단한다. 확정하지 못한 것은 unresolved이며 전체 분모 합격을 선언하지 않는다.\n다음 기본 ID는 T79이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T79",
+      "title": "양측 이두근·삼두근 10개 표면 확보·장면 통합",
+      "model": "Luna Max",
+      "kind": "source_acquisition",
+      "targetIds": [
+        "FJ1512",
+        "FJ1512M",
+        "FJ1478",
+        "FJ1478M",
+        "FJ1479",
+        "FJ1479M",
+        "FJ1480",
+        "FJ1480M",
+        "FJ1477",
+        "FJ1477M"
+      ],
+      "scope": "동결한 source IDs만 기존 R4 취득·검증·변환 도구로 취득한다. ID/OBJ header/hash/side/part/units/frame/bounds와 T50/T69 변환을 개별 검증하고 실제 GLB surface를 같은 장면의 새 manifest revision에 통합한다. 기존 root/renderer를 재사용한다. parent whole-muscle surface와 part의 중첩이 있으면 geometry 범위를 확인해 product representation 정책으로 중복 표면을 막고 원본은 보존한다. ancestor 이름만으로 동일 개념 binding을 만들지 않는다. local display 적격성과 공개 재배포 권리를 별도 판정한다. source-only 기본 정책 유지, 보류는 항목별 격리. 새 전체 취득/archive 금지. 정확한 task subset의 정상 표시·좌우·근접/전신·layer-off·중복node·실제 브라우저가 필수. 3이름/canonical 연결은 뒤의 target batch에 맡겨 먼저 모형 외형을 확보한다.",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "status": "planned_not_started",
+      "spec": "work/tasks/T79.md",
+      "defaultNext": "T97",
+      "prompt": "HUMAN ATLAS에서 T79만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: 동결한 source IDs만 기존 R4 취득·검증·변환 도구로 취득한다. ID/OBJ header/hash/side/part/units/frame/bounds와 T50/T69 변환을 개별 검증하고 실제 GLB surface를 같은 장면의 새 manifest revision에 통합한다. 기존 root/renderer를 재사용한다. parent whole-muscle surface와 part의 중첩이 있으면 geometry 범위를 확인해 product representation 정책으로 중복 표면을 막고 원본은 보존한다. ancestor 이름만으로 동일 개념 binding을 만들지 않는다. local display 적격성과 공개 재배포 권리를 별도 판정한다. source-only 기본 정책 유지, 보류는 항목별 격리. 새 전체 취득/archive 금지. 정확한 task subset의 정상 표시·좌우·근접/전신·layer-off·중복node·실제 브라우저가 필수. 3이름/canonical 연결은 뒤의 target batch에 맡겨 먼저 모형 외형을 확보한다.\n다음 기본 ID는 T97이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T97",
+      "title": "광배근 공식 aggregate 실제 객체 확인",
+      "model": "Luna Max",
+      "kind": "latissimus_object",
+      "targetIds": [
+        "TA2:2231"
+      ],
+      "scope": "T93/T94 no_exact_source_found를 보존한다. Z-Anatomy/Models-of-human-anatomy commit c7010a903b75a2fd24a13b1c2c4c3546a9223780의 Z-Anatomy.zip 단일 후보를 먼저 실제 취득·격리 검사한다. 전송 상한120MB, 해제 누적1GB, 파일10000개, 경로 탈출/symlink 금지; 예상 초과는 멈추고 별도 bounded 계획을 남긴다. 정확한 URL/commit/응답/크기/SHA256과 내부 파일·Blender object/data-block 이름 및 객체 경로 목록을 저장한다. Blender 자동실행 스크립트/드라이버 실행을 끈다. 최대 양측 광배근 객체/부분만 별도 추출하여 source ancestry, 오브젝트 ID/path, geometry hash, 좌우·부분 근거와 실제 표면 preview를 남긴다. 명칭 일치만으로 승인하지 않는다. 없으면 실제 archive 전체 객체 inventory와 부재 범위를 남기고 1개의 다음 실제 파일 후보에 대한 새로운 bounded 취득 task를 발급한다. 이름 검색을 반복하고 종료하는 대체는 불합격이다. 전체 archive/대용량 source는 ignore cache에 두고 이번 task는 장면/선택/권리를 승인하지 않는다.",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "status": "planned_not_started",
+      "spec": "work/tasks/T97.md",
+      "defaultNext": "T101",
+      "prompt": "HUMAN ATLAS에서 T97만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: T93/T94 no_exact_source_found를 보존한다. Z-Anatomy/Models-of-human-anatomy commit c7010a903b75a2fd24a13b1c2c4c3546a9223780의 Z-Anatomy.zip 단일 후보를 먼저 실제 취득·격리 검사한다. 전송 상한120MB, 해제 누적1GB, 파일10000개, 경로 탈출/symlink 금지; 예상 초과는 멈추고 별도 bounded 계획을 남긴다. 정확한 URL/commit/응답/크기/SHA256과 내부 파일·Blender object/data-block 이름 및 객체 경로 목록을 저장한다. Blender 자동실행 스크립트/드라이버 실행을 끈다. 최대 양측 광배근 객체/부분만 별도 추출하여 source ancestry, 오브젝트 ID/path, geometry hash, 좌우·부분 근거와 실제 표면 preview를 남긴다. 명칭 일치만으로 승인하지 않는다. 없으면 실제 archive 전체 객체 inventory와 부재 범위를 남기고 1개의 다음 실제 파일 후보에 대한 새로운 bounded 취득 task를 발급한다. 이름 검색을 반복하고 종료하는 대체는 불합격이다. 전체 archive/대용량 source는 ignore cache에 두고 이번 task는 장면/선택/권리를 승인하지 않는다.\n다음 기본 ID는 T101이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T101",
+      "title": "근육 부분 누락 표면 1 취득·통합",
+      "model": "Luna Max",
+      "kind": "source_acquisition",
+      "targetIds": [
+        "FJ1393",
+        "FJ1393M",
+        "FJ1394M",
+        "FJ1395",
+        "FJ1395M",
+        "FJ1396",
+        "FJ1396M",
+        "FJ1397M",
+        "FJ1398",
+        "FJ1398M"
+      ],
+      "scope": "동결한 source IDs만 기존 R4 취득·검증·변환 도구로 취득한다. ID/OBJ header/hash/side/part/units/frame/bounds와 T50/T69 변환을 개별 검증하고 실제 GLB surface를 같은 장면의 새 manifest revision에 통합한다. 기존 root/renderer를 재사용한다. parent whole-muscle surface와 part의 중첩이 있으면 geometry 범위를 확인해 product representation 정책으로 중복 표면을 막고 원본은 보존한다. ancestor 이름만으로 동일 개념 binding을 만들지 않는다. local display 적격성과 공개 재배포 권리를 별도 판정한다. source-only 기본 정책 유지, 보류는 항목별 격리. 새 전체 취득/archive 금지. 정확한 task subset의 정상 표시·좌우·근접/전신·layer-off·중복node·실제 브라우저가 필수. 3이름/canonical 연결은 뒤의 target batch에 맡겨 먼저 모형 외형을 확보한다.",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "status": "planned_not_started",
+      "spec": "work/tasks/T101.md",
+      "defaultNext": "T102",
+      "prompt": "HUMAN ATLAS에서 T101만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: 동결한 source IDs만 기존 R4 취득·검증·변환 도구로 취득한다. ID/OBJ header/hash/side/part/units/frame/bounds와 T50/T69 변환을 개별 검증하고 실제 GLB surface를 같은 장면의 새 manifest revision에 통합한다. 기존 root/renderer를 재사용한다. parent whole-muscle surface와 part의 중첩이 있으면 geometry 범위를 확인해 product representation 정책으로 중복 표면을 막고 원본은 보존한다. ancestor 이름만으로 동일 개념 binding을 만들지 않는다. local display 적격성과 공개 재배포 권리를 별도 판정한다. source-only 기본 정책 유지, 보류는 항목별 격리. 새 전체 취득/archive 금지. 정확한 task subset의 정상 표시·좌우·근접/전신·layer-off·중복node·실제 브라우저가 필수. 3이름/canonical 연결은 뒤의 target batch에 맡겨 먼저 모형 외형을 확보한다.\n다음 기본 ID는 T102이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T102",
+      "title": "근육 부분 누락 표면 2 취득·통합",
+      "model": "Luna Max",
+      "kind": "source_acquisition",
+      "targetIds": [
+        "FJ1441",
+        "FJ1441M",
+        "FJ1442",
+        "FJ1442M",
+        "FJ1443",
+        "FJ1443M",
+        "FJ1444",
+        "FJ1444M",
+        "FJ1445",
+        "FJ1445M"
+      ],
+      "scope": "동결한 source IDs만 기존 R4 취득·검증·변환 도구로 취득한다. ID/OBJ header/hash/side/part/units/frame/bounds와 T50/T69 변환을 개별 검증하고 실제 GLB surface를 같은 장면의 새 manifest revision에 통합한다. 기존 root/renderer를 재사용한다. parent whole-muscle surface와 part의 중첩이 있으면 geometry 범위를 확인해 product representation 정책으로 중복 표면을 막고 원본은 보존한다. ancestor 이름만으로 동일 개념 binding을 만들지 않는다. local display 적격성과 공개 재배포 권리를 별도 판정한다. source-only 기본 정책 유지, 보류는 항목별 격리. 새 전체 취득/archive 금지. 정확한 task subset의 정상 표시·좌우·근접/전신·layer-off·중복node·실제 브라우저가 필수. 3이름/canonical 연결은 뒤의 target batch에 맡겨 먼저 모형 외형을 확보한다.",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "status": "planned_not_started",
+      "spec": "work/tasks/T102.md",
+      "defaultNext": "T103",
+      "prompt": "HUMAN ATLAS에서 T102만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: 동결한 source IDs만 기존 R4 취득·검증·변환 도구로 취득한다. ID/OBJ header/hash/side/part/units/frame/bounds와 T50/T69 변환을 개별 검증하고 실제 GLB surface를 같은 장면의 새 manifest revision에 통합한다. 기존 root/renderer를 재사용한다. parent whole-muscle surface와 part의 중첩이 있으면 geometry 범위를 확인해 product representation 정책으로 중복 표면을 막고 원본은 보존한다. ancestor 이름만으로 동일 개념 binding을 만들지 않는다. local display 적격성과 공개 재배포 권리를 별도 판정한다. source-only 기본 정책 유지, 보류는 항목별 격리. 새 전체 취득/archive 금지. 정확한 task subset의 정상 표시·좌우·근접/전신·layer-off·중복node·실제 브라우저가 필수. 3이름/canonical 연결은 뒤의 target batch에 맡겨 먼저 모형 외형을 확보한다.\n다음 기본 ID는 T103이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T103",
+      "title": "근육 부분 누락 표면 3 취득·통합",
+      "model": "Luna Max",
+      "kind": "source_acquisition",
+      "targetIds": [
+        "FJ1473",
+        "FJ1473M",
+        "FJ1474",
+        "FJ1474M",
+        "FJ1481",
+        "FJ1481M",
+        "FJ1514",
+        "FJ1514M",
+        "FJ1515",
+        "FJ1515M"
+      ],
+      "scope": "동결한 source IDs만 기존 R4 취득·검증·변환 도구로 취득한다. ID/OBJ header/hash/side/part/units/frame/bounds와 T50/T69 변환을 개별 검증하고 실제 GLB surface를 같은 장면의 새 manifest revision에 통합한다. 기존 root/renderer를 재사용한다. parent whole-muscle surface와 part의 중첩이 있으면 geometry 범위를 확인해 product representation 정책으로 중복 표면을 막고 원본은 보존한다. ancestor 이름만으로 동일 개념 binding을 만들지 않는다. local display 적격성과 공개 재배포 권리를 별도 판정한다. source-only 기본 정책 유지, 보류는 항목별 격리. 새 전체 취득/archive 금지. 정확한 task subset의 정상 표시·좌우·근접/전신·layer-off·중복node·실제 브라우저가 필수. 3이름/canonical 연결은 뒤의 target batch에 맡겨 먼저 모형 외형을 확보한다.",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "status": "planned_not_started",
+      "spec": "work/tasks/T103.md",
+      "defaultNext": "T104",
+      "prompt": "HUMAN ATLAS에서 T103만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: 동결한 source IDs만 기존 R4 취득·검증·변환 도구로 취득한다. ID/OBJ header/hash/side/part/units/frame/bounds와 T50/T69 변환을 개별 검증하고 실제 GLB surface를 같은 장면의 새 manifest revision에 통합한다. 기존 root/renderer를 재사용한다. parent whole-muscle surface와 part의 중첩이 있으면 geometry 범위를 확인해 product representation 정책으로 중복 표면을 막고 원본은 보존한다. ancestor 이름만으로 동일 개념 binding을 만들지 않는다. local display 적격성과 공개 재배포 권리를 별도 판정한다. source-only 기본 정책 유지, 보류는 항목별 격리. 새 전체 취득/archive 금지. 정확한 task subset의 정상 표시·좌우·근접/전신·layer-off·중복node·실제 브라우저가 필수. 3이름/canonical 연결은 뒤의 target batch에 맡겨 먼저 모형 외형을 확보한다.\n다음 기본 ID는 T104이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T104",
+      "title": "근육 부분 누락 표면 4 취득·통합",
+      "model": "Luna Max",
+      "kind": "source_acquisition",
+      "targetIds": [
+        "FJ1516",
+        "FJ1516M",
+        "FJ1518",
+        "FJ1518M",
+        "FJ1557",
+        "FJ1600",
+        "FJ1601",
+        "FJ2774",
+        "FJ2781",
+        "FJ2783"
+      ],
+      "scope": "동결한 source IDs만 기존 R4 취득·검증·변환 도구로 취득한다. ID/OBJ header/hash/side/part/units/frame/bounds와 T50/T69 변환을 개별 검증하고 실제 GLB surface를 같은 장면의 새 manifest revision에 통합한다. 기존 root/renderer를 재사용한다. parent whole-muscle surface와 part의 중첩이 있으면 geometry 범위를 확인해 product representation 정책으로 중복 표면을 막고 원본은 보존한다. ancestor 이름만으로 동일 개념 binding을 만들지 않는다. local display 적격성과 공개 재배포 권리를 별도 판정한다. source-only 기본 정책 유지, 보류는 항목별 격리. 새 전체 취득/archive 금지. 정확한 task subset의 정상 표시·좌우·근접/전신·layer-off·중복node·실제 브라우저가 필수. 3이름/canonical 연결은 뒤의 target batch에 맡겨 먼저 모형 외형을 확보한다.",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "status": "planned_not_started",
+      "spec": "work/tasks/T104.md",
+      "defaultNext": "T105",
+      "prompt": "HUMAN ATLAS에서 T104만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: 동결한 source IDs만 기존 R4 취득·검증·변환 도구로 취득한다. ID/OBJ header/hash/side/part/units/frame/bounds와 T50/T69 변환을 개별 검증하고 실제 GLB surface를 같은 장면의 새 manifest revision에 통합한다. 기존 root/renderer를 재사용한다. parent whole-muscle surface와 part의 중첩이 있으면 geometry 범위를 확인해 product representation 정책으로 중복 표면을 막고 원본은 보존한다. ancestor 이름만으로 동일 개념 binding을 만들지 않는다. local display 적격성과 공개 재배포 권리를 별도 판정한다. source-only 기본 정책 유지, 보류는 항목별 격리. 새 전체 취득/archive 금지. 정확한 task subset의 정상 표시·좌우·근접/전신·layer-off·중복node·실제 브라우저가 필수. 3이름/canonical 연결은 뒤의 target batch에 맡겨 먼저 모형 외형을 확보한다.\n다음 기본 ID는 T105이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T105",
+      "title": "근육 부분 누락 표면 5 취득·통합",
+      "model": "Luna Max",
+      "kind": "source_acquisition",
+      "targetIds": [
+        "FJ2791",
+        "FJ2799",
+        "FJ2801"
+      ],
+      "scope": "동결한 source IDs만 기존 R4 취득·검증·변환 도구로 취득한다. ID/OBJ header/hash/side/part/units/frame/bounds와 T50/T69 변환을 개별 검증하고 실제 GLB surface를 같은 장면의 새 manifest revision에 통합한다. 기존 root/renderer를 재사용한다. parent whole-muscle surface와 part의 중첩이 있으면 geometry 범위를 확인해 product representation 정책으로 중복 표면을 막고 원본은 보존한다. ancestor 이름만으로 동일 개념 binding을 만들지 않는다. local display 적격성과 공개 재배포 권리를 별도 판정한다. source-only 기본 정책 유지, 보류는 항목별 격리. 새 전체 취득/archive 금지. 정확한 task subset의 정상 표시·좌우·근접/전신·layer-off·중복node·실제 브라우저가 필수. 3이름/canonical 연결은 뒤의 target batch에 맡겨 먼저 모형 외형을 확보한다.",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "status": "planned_not_started",
+      "spec": "work/tasks/T105.md",
+      "defaultNext": "T106",
+      "prompt": "HUMAN ATLAS에서 T105만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: 동결한 source IDs만 기존 R4 취득·검증·변환 도구로 취득한다. ID/OBJ header/hash/side/part/units/frame/bounds와 T50/T69 변환을 개별 검증하고 실제 GLB surface를 같은 장면의 새 manifest revision에 통합한다. 기존 root/renderer를 재사용한다. parent whole-muscle surface와 part의 중첩이 있으면 geometry 범위를 확인해 product representation 정책으로 중복 표면을 막고 원본은 보존한다. ancestor 이름만으로 동일 개념 binding을 만들지 않는다. local display 적격성과 공개 재배포 권리를 별도 판정한다. source-only 기본 정책 유지, 보류는 항목별 격리. 새 전체 취득/archive 금지. 정확한 task subset의 정상 표시·좌우·근접/전신·layer-off·중복node·실제 브라우저가 필수. 3이름/canonical 연결은 뒤의 target batch에 맡겨 먼저 모형 외형을 확보한다.\n다음 기본 ID는 T106이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T106",
+      "title": "뼈 누락 표면 1 취득·통합",
+      "model": "Luna Max",
+      "kind": "source_acquisition",
+      "targetIds": [
+        "FJ2772",
+        "FJ3199",
+        "FJ3201",
+        "FJ3263",
+        "FJ3265",
+        "FJ3266",
+        "FJ3270",
+        "FJ3273",
+        "FJ3275",
+        "FJ3369"
+      ],
+      "scope": "동결한 source IDs만 기존 R4 취득·검증·변환 도구로 취득한다. ID/OBJ header/hash/side/part/units/frame/bounds와 T50/T69 변환을 개별 검증하고 실제 GLB surface를 같은 장면의 새 manifest revision에 통합한다. 기존 root/renderer를 재사용한다. parent whole-muscle surface와 part의 중첩이 있으면 geometry 범위를 확인해 product representation 정책으로 중복 표면을 막고 원본은 보존한다. ancestor 이름만으로 동일 개념 binding을 만들지 않는다. local display 적격성과 공개 재배포 권리를 별도 판정한다. source-only 기본 정책 유지, 보류는 항목별 격리. 새 전체 취득/archive 금지. 정확한 task subset의 정상 표시·좌우·근접/전신·layer-off·중복node·실제 브라우저가 필수. 3이름/canonical 연결은 뒤의 target batch에 맡겨 먼저 모형 외형을 확보한다.",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "status": "planned_not_started",
+      "spec": "work/tasks/T106.md",
+      "defaultNext": "T107",
+      "prompt": "HUMAN ATLAS에서 T106만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: 동결한 source IDs만 기존 R4 취득·검증·변환 도구로 취득한다. ID/OBJ header/hash/side/part/units/frame/bounds와 T50/T69 변환을 개별 검증하고 실제 GLB surface를 같은 장면의 새 manifest revision에 통합한다. 기존 root/renderer를 재사용한다. parent whole-muscle surface와 part의 중첩이 있으면 geometry 범위를 확인해 product representation 정책으로 중복 표면을 막고 원본은 보존한다. ancestor 이름만으로 동일 개념 binding을 만들지 않는다. local display 적격성과 공개 재배포 권리를 별도 판정한다. source-only 기본 정책 유지, 보류는 항목별 격리. 새 전체 취득/archive 금지. 정확한 task subset의 정상 표시·좌우·근접/전신·layer-off·중복node·실제 브라우저가 필수. 3이름/canonical 연결은 뒤의 target batch에 맡겨 먼저 모형 외형을 확보한다.\n다음 기본 ID는 T107이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T107",
+      "title": "뼈 누락 표면 2 취득·통합",
+      "model": "Luna Max",
+      "kind": "source_acquisition",
+      "targetIds": [
+        "FJ3371",
+        "FJ3372",
+        "FJ3376",
+        "FJ3379",
+        "FJ3381",
+        "FJ3394",
+        "FJ3395"
+      ],
+      "scope": "동결한 source IDs만 기존 R4 취득·검증·변환 도구로 취득한다. ID/OBJ header/hash/side/part/units/frame/bounds와 T50/T69 변환을 개별 검증하고 실제 GLB surface를 같은 장면의 새 manifest revision에 통합한다. 기존 root/renderer를 재사용한다. parent whole-muscle surface와 part의 중첩이 있으면 geometry 범위를 확인해 product representation 정책으로 중복 표면을 막고 원본은 보존한다. ancestor 이름만으로 동일 개념 binding을 만들지 않는다. local display 적격성과 공개 재배포 권리를 별도 판정한다. source-only 기본 정책 유지, 보류는 항목별 격리. 새 전체 취득/archive 금지. 정확한 task subset의 정상 표시·좌우·근접/전신·layer-off·중복node·실제 브라우저가 필수. 3이름/canonical 연결은 뒤의 target batch에 맡겨 먼저 모형 외형을 확보한다.",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "status": "planned_not_started",
+      "spec": "work/tasks/T107.md",
+      "defaultNext": "T98",
+      "prompt": "HUMAN ATLAS에서 T107만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: 동결한 source IDs만 기존 R4 취득·검증·변환 도구로 취득한다. ID/OBJ header/hash/side/part/units/frame/bounds와 T50/T69 변환을 개별 검증하고 실제 GLB surface를 같은 장면의 새 manifest revision에 통합한다. 기존 root/renderer를 재사용한다. parent whole-muscle surface와 part의 중첩이 있으면 geometry 범위를 확인해 product representation 정책으로 중복 표면을 막고 원본은 보존한다. ancestor 이름만으로 동일 개념 binding을 만들지 않는다. local display 적격성과 공개 재배포 권리를 별도 판정한다. source-only 기본 정책 유지, 보류는 항목별 격리. 새 전체 취득/archive 금지. 정확한 task subset의 정상 표시·좌우·근접/전신·layer-off·중복node·실제 브라우저가 필수. 3이름/canonical 연결은 뒤의 target batch에 맡겨 먼저 모형 외형을 확보한다.\n다음 기본 ID는 T98이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T98",
+      "title": "광배근 객체 권리·좌표·정적 자세 검증",
+      "model": "Luna Max",
+      "kind": "latissimus_eligibility",
+      "targetIds": [
+        "TA2:2231"
+      ],
+      "scope": "T97 실제 객체가 있어야 한다. exact object별 BodyParts3D ancestry와 수정자/라이선스 적용을 공식 repo 기록·포함 LICENSE/객체 metadata로 추적하고 로컬 사용/변형/공개재배포를 각각 판정한다. 단위, 축/handedness, object와parent transform, rest pose, 좌우/부분, bounding box·좌표표지·거울변환 여부를 실제 vertex로 검증한다. TA2 2231나 일반 README만으로 개별 권리를 승인하지 않는다. rights 불명확하면 해당 gate held와 필요한 증거를 기록한다. 다른 모델 정합 필요 여부를 실제 비교로 판정한다. 기술 검증은 humanReviewed=true가 아니다. 다른 모델이면 T99 전에는 scene에 넣지 않는다.",
+      "prerequisiteIds": [
+        "T97"
+      ],
+      "status": "planned_not_started",
+      "spec": "work/tasks/T98.md",
+      "defaultNext": "T99",
+      "prompt": "HUMAN ATLAS에서 T98만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: T97 실제 객체가 있어야 한다. exact object별 BodyParts3D ancestry와 수정자/라이선스 적용을 공식 repo 기록·포함 LICENSE/객체 metadata로 추적하고 로컬 사용/변형/공개재배포를 각각 판정한다. 단위, 축/handedness, object와parent transform, rest pose, 좌우/부분, bounding box·좌표표지·거울변환 여부를 실제 vertex로 검증한다. TA2 2231나 일반 README만으로 개별 권리를 승인하지 않는다. rights 불명확하면 해당 gate held와 필요한 증거를 기록한다. 다른 모델 정합 필요 여부를 실제 비교로 판정한다. 기술 검증은 humanReviewed=true가 아니다. 다른 모델이면 T99 전에는 scene에 넣지 않는다.\n다음 기본 ID는 T99이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T99",
+      "title": "광배근 실제 모형 정합",
+      "model": "Luna Max",
+      "kind": "latissimus_registration",
+      "targetIds": [
+        "TA2:2231"
+      ],
+      "scope": "T98에서 파생/정합에 필요한 사용 권리와 객체 identity/frame이 확인된 부분만 처리한다. T50 현재 해부학적 정적 자세와 공통 landmark의 의미·좌표를 대조한다. fitting 전 기준 landmark, 독립 평가 landmark, mm 오차 한계와 시각 허용 기준을 근거와 함께 동결한다. 실제 좌표계 변환 및 필요한 registration 결과·잔차·좌우·shape 보존·몸통/상완 관계를 검증한다. min/max 크기맞춤, 좌우 임의복제, 이름/ancestry 기반 호환 추정 금지. 부적합 affine/nonrigid로 해부구조가 망가지면 통합하지 말고 구체적인 수정 범위를 남긴다. 결과 transform/derivation hash 및 before/after preview를 저장한다. 동일 frame 증명이 있으면 identity transform도 검증 artifact로 남기며 그냥 생략 완료하지 않는다. rig/animation 없음.",
+      "prerequisiteIds": [
+        "T98"
+      ],
+      "status": "planned_not_started",
+      "spec": "work/tasks/T99.md",
+      "defaultNext": "T100",
+      "prompt": "HUMAN ATLAS에서 T99만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: T98에서 파생/정합에 필요한 사용 권리와 객체 identity/frame이 확인된 부분만 처리한다. T50 현재 해부학적 정적 자세와 공통 landmark의 의미·좌표를 대조한다. fitting 전 기준 landmark, 독립 평가 landmark, mm 오차 한계와 시각 허용 기준을 근거와 함께 동결한다. 실제 좌표계 변환 및 필요한 registration 결과·잔차·좌우·shape 보존·몸통/상완 관계를 검증한다. min/max 크기맞춤, 좌우 임의복제, 이름/ancestry 기반 호환 추정 금지. 부적합 affine/nonrigid로 해부구조가 망가지면 통합하지 말고 구체적인 수정 범위를 남긴다. 결과 transform/derivation hash 및 before/after preview를 저장한다. 동일 frame 증명이 있으면 identity transform도 검증 artifact로 남기며 그냥 생략 완료하지 않는다. rig/animation 없음.\n다음 기본 ID는 T100이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T100",
+      "title": "광배근 단일 장면 통합",
+      "model": "Luna Max",
+      "kind": "latissimus_integration",
+      "targetIds": [
+        "TA2:2231"
+      ],
+      "scope": "T97–99의 실제 객체·권리·좌표·정합 통과 subset만 기존 root/renderer/camera에 통합한다. 기존 source ID 불변, 신규 object instance ID와 hash/ancestry를 별도 저장한다. back/shoulder 맥락 membership, layer-off, 양측/후면/상완과의 경계·깊은 구조·중복표면을 실제 브라우저 검증한다. 정확한 canonical identity와 검증된 이름 overlay가 있을 때만 선택 연결하며 없으면 source_only_unbound. 광배근 표면이 등장한 것과 기시정지/작용/모션 완성은 별개다. 한쪽만 있으면 양측 완료 금지. held는 유지하고 새 전신 denominator를 주장하지 않는다.",
+      "prerequisiteIds": [
+        "T99"
+      ],
+      "status": "planned_not_started",
+      "spec": "work/tasks/T100.md",
+      "defaultNext": "T108",
+      "prompt": "HUMAN ATLAS에서 T100만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: T97–99의 실제 객체·권리·좌표·정합 통과 subset만 기존 root/renderer/camera에 통합한다. 기존 source ID 불변, 신규 object instance ID와 hash/ancestry를 별도 저장한다. back/shoulder 맥락 membership, layer-off, 양측/후면/상완과의 경계·깊은 구조·중복표면을 실제 브라우저 검증한다. 정확한 canonical identity와 검증된 이름 overlay가 있을 때만 선택 연결하며 없으면 source_only_unbound. 광배근 표면이 등장한 것과 기시정지/작용/모션 완성은 별개다. 한쪽만 있으면 양측 완료 금지. held는 유지하고 새 전신 denominator를 주장하지 않는다.\n다음 기본 ID는 T108이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T108",
+      "title": "기존 보류 표면 개별 재검증 1",
+      "model": "Luna Max",
+      "kind": "held_review",
+      "targetIds": [
+        "FJ1450",
+        "FJ1451",
+        "FJ1454",
+        "FJ1455",
+        "FJ1469",
+        "FJ1469M"
+      ],
+      "scope": "지정 source ID의 기존 hold 원인과 실제 source header/양측 geometry/공식 관계를 대조한다. AABB 중앙면 교차만으로 잘못된 좌우라 단정하지 않는다. 항목별 해소 증거가 있으면 별도 versioned overlay로 정정·표시하고 역사 freeze는 보존한다. 증거 없는 human approval/자동좌우교체 금지. 해결되지 않은 것은 held 유지, 실제 geometry 검사 결과와 추가로 필요한 자료를 명확히 남긴다. identity가 불명인 표면에 근육명을 만들어 붙이지 않는다. 해결된 항목이 있으면 실제 장면/정책 회귀가 필수.",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "status": "planned_not_started",
+      "spec": "work/tasks/T108.md",
+      "defaultNext": "T109",
+      "prompt": "HUMAN ATLAS에서 T108만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: 지정 source ID의 기존 hold 원인과 실제 source header/양측 geometry/공식 관계를 대조한다. AABB 중앙면 교차만으로 잘못된 좌우라 단정하지 않는다. 항목별 해소 증거가 있으면 별도 versioned overlay로 정정·표시하고 역사 freeze는 보존한다. 증거 없는 human approval/자동좌우교체 금지. 해결되지 않은 것은 held 유지, 실제 geometry 검사 결과와 추가로 필요한 자료를 명확히 남긴다. identity가 불명인 표면에 근육명을 만들어 붙이지 않는다. 해결된 항목이 있으면 실제 장면/정책 회귀가 필수.\n다음 기본 ID는 T109이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T109",
+      "title": "기존 보류 표면 개별 재검증 2",
+      "model": "Luna Max",
+      "kind": "held_review",
+      "targetIds": [
+        "FJ1525",
+        "FJ1543",
+        "FJ1547",
+        "FJ1548",
+        "FJ2742",
+        "FJ2754"
+      ],
+      "scope": "지정 source ID의 기존 hold 원인과 실제 source header/양측 geometry/공식 관계를 대조한다. AABB 중앙면 교차만으로 잘못된 좌우라 단정하지 않는다. 항목별 해소 증거가 있으면 별도 versioned overlay로 정정·표시하고 역사 freeze는 보존한다. 증거 없는 human approval/자동좌우교체 금지. 해결되지 않은 것은 held 유지, 실제 geometry 검사 결과와 추가로 필요한 자료를 명확히 남긴다. identity가 불명인 표면에 근육명을 만들어 붙이지 않는다. 해결된 항목이 있으면 실제 장면/정책 회귀가 필수.",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "status": "planned_not_started",
+      "spec": "work/tasks/T109.md",
+      "defaultNext": "T110",
+      "prompt": "HUMAN ATLAS에서 T109만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: 지정 source ID의 기존 hold 원인과 실제 source header/양측 geometry/공식 관계를 대조한다. AABB 중앙면 교차만으로 잘못된 좌우라 단정하지 않는다. 항목별 해소 증거가 있으면 별도 versioned overlay로 정정·표시하고 역사 freeze는 보존한다. 증거 없는 human approval/자동좌우교체 금지. 해결되지 않은 것은 held 유지, 실제 geometry 검사 결과와 추가로 필요한 자료를 명확히 남긴다. identity가 불명인 표면에 근육명을 만들어 붙이지 않는다. 해결된 항목이 있으면 실제 장면/정책 회귀가 필수.\n다음 기본 ID는 T110이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T110",
+      "title": "머리 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "kind": "regional_structure_package",
+      "targetIds": null,
+      "scope": "T96 region-packages.json의 head primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 머리 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "status": "planned_pending_T96_freeze",
+      "spec": "work/tasks/T110.md",
+      "defaultNext": "T111",
+      "regionId": "head",
+      "targetManifest": "work/evidence/T96/region-packages.json",
+      "targetFreezeState": "pending_T96",
+      "prompt": "HUMAN ATLAS에서 T110만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: T96 region-packages.json의 head primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 머리 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.\n다음 기본 ID는 T111이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T111",
+      "title": "목 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "kind": "regional_structure_package",
+      "targetIds": null,
+      "scope": "T96 region-packages.json의 neck primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 목 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "status": "planned_pending_T96_freeze",
+      "spec": "work/tasks/T111.md",
+      "defaultNext": "T112",
+      "regionId": "neck",
+      "targetManifest": "work/evidence/T96/region-packages.json",
+      "targetFreezeState": "pending_T96",
+      "prompt": "HUMAN ATLAS에서 T111만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: T96 region-packages.json의 neck primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 목 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.\n다음 기본 ID는 T112이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T112",
+      "title": "등 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "kind": "regional_structure_package",
+      "targetIds": null,
+      "scope": "T96 region-packages.json의 back primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 등 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "status": "planned_pending_T96_freeze",
+      "spec": "work/tasks/T112.md",
+      "defaultNext": "T113",
+      "regionId": "back",
+      "targetManifest": "work/evidence/T96/region-packages.json",
+      "targetFreezeState": "pending_T96",
+      "prompt": "HUMAN ATLAS에서 T112만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: T96 region-packages.json의 back primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 등 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.\n다음 기본 ID는 T113이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T113",
+      "title": "어깨·어깨뼈 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "kind": "regional_structure_package",
+      "targetIds": null,
+      "scope": "T96 region-packages.json의 shoulder-scapular primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 어깨·어깨뼈 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "status": "planned_pending_T96_freeze",
+      "spec": "work/tasks/T113.md",
+      "defaultNext": "T114",
+      "regionId": "shoulder-scapular",
+      "targetManifest": "work/evidence/T96/region-packages.json",
+      "targetFreezeState": "pending_T96",
+      "prompt": "HUMAN ATLAS에서 T113만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: T96 region-packages.json의 shoulder-scapular primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 어깨·어깨뼈 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.\n다음 기본 ID는 T114이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T114",
+      "title": "가슴우리 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "kind": "regional_structure_package",
+      "targetIds": null,
+      "scope": "T96 region-packages.json의 thorax primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 가슴우리 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "status": "planned_pending_T96_freeze",
+      "spec": "work/tasks/T114.md",
+      "defaultNext": "T115",
+      "regionId": "thorax",
+      "targetManifest": "work/evidence/T96/region-packages.json",
+      "targetFreezeState": "pending_T96",
+      "prompt": "HUMAN ATLAS에서 T114만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: T96 region-packages.json의 thorax primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 가슴우리 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.\n다음 기본 ID는 T115이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T115",
+      "title": "배·허리 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "kind": "regional_structure_package",
+      "targetIds": null,
+      "scope": "T96 region-packages.json의 abdomen-lumbar primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 배·허리 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "status": "planned_pending_T96_freeze",
+      "spec": "work/tasks/T115.md",
+      "defaultNext": "T116",
+      "regionId": "abdomen-lumbar",
+      "targetManifest": "work/evidence/T96/region-packages.json",
+      "targetFreezeState": "pending_T96",
+      "prompt": "HUMAN ATLAS에서 T115만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: T96 region-packages.json의 abdomen-lumbar primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 배·허리 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.\n다음 기본 ID는 T116이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T116",
+      "title": "골반·샅 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "kind": "regional_structure_package",
+      "targetIds": null,
+      "scope": "T96 region-packages.json의 pelvis-perineum primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 골반·샅 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "status": "planned_pending_T96_freeze",
+      "spec": "work/tasks/T116.md",
+      "defaultNext": "T117",
+      "regionId": "pelvis-perineum",
+      "targetManifest": "work/evidence/T96/region-packages.json",
+      "targetFreezeState": "pending_T96",
+      "prompt": "HUMAN ATLAS에서 T116만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: T96 region-packages.json의 pelvis-perineum primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 골반·샅 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.\n다음 기본 ID는 T117이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T117",
+      "title": "볼기·깊은엉덩이 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "kind": "regional_structure_package",
+      "targetIds": null,
+      "scope": "T96 region-packages.json의 gluteal-hip primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 볼기·깊은엉덩이 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "status": "planned_pending_T96_freeze",
+      "spec": "work/tasks/T117.md",
+      "defaultNext": "T118",
+      "regionId": "gluteal-hip",
+      "targetManifest": "work/evidence/T96/region-packages.json",
+      "targetFreezeState": "pending_T96",
+      "prompt": "HUMAN ATLAS에서 T117만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: T96 region-packages.json의 gluteal-hip primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 볼기·깊은엉덩이 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.\n다음 기본 ID는 T118이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T118",
+      "title": "넙다리 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "kind": "regional_structure_package",
+      "targetIds": null,
+      "scope": "T96 region-packages.json의 thigh primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 넙다리 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "status": "planned_pending_T96_freeze",
+      "spec": "work/tasks/T118.md",
+      "defaultNext": "T119",
+      "regionId": "thigh",
+      "targetManifest": "work/evidence/T96/region-packages.json",
+      "targetFreezeState": "pending_T96",
+      "prompt": "HUMAN ATLAS에서 T118만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: T96 region-packages.json의 thigh primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 넙다리 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.\n다음 기본 ID는 T119이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T119",
+      "title": "종아리 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "kind": "regional_structure_package",
+      "targetIds": null,
+      "scope": "T96 region-packages.json의 leg primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 종아리 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "status": "planned_pending_T96_freeze",
+      "spec": "work/tasks/T119.md",
+      "defaultNext": "T120",
+      "regionId": "leg",
+      "targetManifest": "work/evidence/T96/region-packages.json",
+      "targetFreezeState": "pending_T96",
+      "prompt": "HUMAN ATLAS에서 T119만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: T96 region-packages.json의 leg primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 종아리 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.\n다음 기본 ID는 T120이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T120",
+      "title": "발 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "kind": "regional_structure_package",
+      "targetIds": null,
+      "scope": "T96 region-packages.json의 foot primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 발 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "status": "planned_pending_T96_freeze",
+      "spec": "work/tasks/T120.md",
+      "defaultNext": "T121",
+      "regionId": "foot",
+      "targetManifest": "work/evidence/T96/region-packages.json",
+      "targetFreezeState": "pending_T96",
+      "prompt": "HUMAN ATLAS에서 T120만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: T96 region-packages.json의 foot primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 발 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.\n다음 기본 ID는 T121이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    },
+    {
+      "id": "T121",
+      "title": "팔·손 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "kind": "regional_structure_package",
+      "targetIds": null,
+      "scope": "T96 region-packages.json의 upper-limb primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 팔·손 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "status": "planned_pending_T96_freeze",
+      "spec": "work/tasks/T121.md",
+      "defaultNext": "T80",
+      "regionId": "upper-limb",
+      "targetManifest": "work/evidence/T96/region-packages.json",
+      "targetFreezeState": "pending_T96",
+      "prompt": "HUMAN ATLAS에서 T121만 수행해라. 담당 Luna Max.\nAGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.\n이번 범위: T96 region-packages.json의 upper-limb primary-owner subset만 수행한다. 실행 전에 exact target IDs/버전/hash와 내부 최대10개 workUnits를 확인한다. T96 manifest가 없거나 누락/중복 owner가 있으면 임의 분류로 시작하지 않는다. 기존 geometry를 우선 재사용하여 각 target의 실제 object/side/part identity, 세 이름과 alias, typed card/검색/선택을 공통 adapter로 연결한다. source-only/held 승격은 항목별 증거가 있어야 한다. missing은 exact 실제 파일/객체 검사와 권리/frame 근거로 처리하며 다른 source family 정합이 필요하면 별도 의존 gate로 남겨 추정 통합하지 않는다. 이 package는 팔·손 구조 단계이며 기시정지 신규 집필·기능·모션은 후반 단계다. 전체 package를 완료하지 못하면 같은 ID와 nextUnit으로 재개하고 새 번호를 만들지 않는다. 기존 공통 도구를 재사용하고 부위별 엔진을 복제하지 않는다. 모든 필수 subset 결과·누락·최종 화면·성능을 기록한다. 이전 이 파일의 TA2순서10개 scope는 역사 계획이다.\n다음 기본 ID는 T80이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라."
+    }
+  ],
+  "supersededTaskIds": [
+    "T122",
+    "T123",
+    "T124",
+    "T125",
+    "T126",
+    "T127",
+    "T128",
+    "T129",
+    "T130",
+    "T131",
+    "T132",
+    "T133",
+    "T134",
+    "T135",
+    "T136",
+    "T137",
+    "T138",
+    "T139",
+    "T140",
+    "T141",
+    "T142",
+    "T143",
+    "T144",
+    "T145",
+    "T146",
+    "T147",
+    "T148",
+    "T149",
+    "T150",
+    "T151",
+    "T152",
+    "T153",
+    "T154",
+    "T155",
+    "T156",
+    "T157",
+    "T158",
+    "T159",
+    "T160",
+    "T161",
+    "T162",
+    "T163",
+    "T164",
+    "T165"
+  ],
+  "noNewNumericIds": true,
+  "nextUnallocatedNumericId": 166,
+  "progressRule": "Small validated units inside fixed region packages; no automatic new task per 10 targets. Unfinished task resumes same ID. New architecture/source risks require bounded explicit plan, no silent scope expansion.",
+  "coverageRule": "T96 mapping must account for every T78 candidate and any additional true target. 12 packages are not confirmed anatomically complete yet. No runtime claim."
+}

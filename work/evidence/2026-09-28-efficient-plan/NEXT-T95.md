@@ -1,0 +1,8 @@
+# 다음 T95 / Luna Max
+
+```text
+HUMAN ATLAS에서 T95만 수행해라. 담당 Luna Max.
+AGENTS.md, 최신 STATUS/R15 registry, design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md, work/evidence/2026-09-28-efficient-plan/execution-queue.json, 해당 task의 최신 명세와 선행 실제 report/evidence/manifest를 읽어라. 22 설계가 충돌하는 이전 자동 batch/task 발급 문구보다 우선한다. 정확히 요청한 task만 수행한다. 원본/OpenSim_Models/사용자 WIP/역사 freeze를 보존한다. 한 장면·renderer·카메라와 미니멀 UI, source-only/rights/human-review hold를 유지한다. 기존 공통 도구와 runtime을 재사용하고 근육/task별 별도 loader/컴포넌트를 복제하지 마라. 검증 work-unit은 최대10개 target이며 지역 package 안의 체크포인트로 기록하고 같은 task로 재개한다. 범위가 다른 새 위험은 근거와 제한된 해결안을 남기되 동일 자료 반복이나10개 증가마다 새 번호를 만들지 마라. task 소유 범위의 실제 결과, 화면 변경 시 실제 브라우저, 자산 변경 시 전후 성능과 resource 보존을 검증한다. 완료/부분/미확보를 구분하고 progress manifest·report·evidence·STATUS/registry에 다음 미완 unit 또는 다음 실행 가능한 ID를 적어라. 소유 변경만 선별 로컬 커밋하고 해시/포함/제외/잔여 변경을 보고한 뒤 멈춰라. 다음 task 자동 실행·push·배포·환자 진단/치료/침 시뮬레이션은 하지 마라.
+이번 범위: selectedRegionIds를 중복 없는 집합으로 관리한다. 목+머리는 합집합만 보이고 같은 버튼 재클릭은 해제, 빈 집합은 전신이다. layer-off/held는 지역 선택보다 우선하며 영역이 겹쳐도 node는 1개다. 기존 region 단일 URL을 읽고 복수 값은 반복 region 파라미터로 직렬화한다. back/forward/reload와 검색/카드 선택을 구분한다. 외부 지역 검색 결과를 선택하면 해당 지역을 명시적으로 필터에 추가하되 기존 선택을 보존한다. 선택 근육이 필터에서 빠지면 카드 선택을 해제하고 카메라는 불필요하게 초기화하지 않는다. 모바일도 접근 가능한 toggle 목록, aria-pressed/키보드 제공. 전체 버튼은 집합을 비운다. source regions는 수정하지 않고 product context overlay로 FJ3279/FJ3384 양측 견갑골을 upper-limb에 포함한다. FJ3237/FJ3362 쇄골도 양측 맥락으로 대조한다. 현재 요추/엉치뼈 표시와 근육/뼈 레이어 유지. region-diagnostic.json의 실제 hash/정책을 확인한다. 새 geometry/권리 변경 없음. 목→머리→목 해제→전체, 팔 양측견갑골, layer-off, held, URL, 모바일, 단일renderer/중복node 회귀와 실제 화면이 합격 조건.
+다음 기본 ID는 T96이며 실제 미완/의존 gate를 확인하고 자동 실행하지 마라.
+```

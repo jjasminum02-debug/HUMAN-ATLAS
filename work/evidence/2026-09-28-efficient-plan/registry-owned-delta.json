@@ -1,0 +1,1155 @@
+{
+  "replaceFields": {
+    "activeQueue": [
+      "T50",
+      "T51",
+      "T52",
+      "T69",
+      "T53",
+      "T54",
+      "T55",
+      "T70",
+      "T71",
+      "T72",
+      "T56",
+      "T57",
+      "T73",
+      "T74",
+      "T75",
+      "T76",
+      "T92",
+      "T93",
+      "T94",
+      "T77",
+      "T78",
+      "T95",
+      "T96",
+      "T79",
+      "T97",
+      "T101",
+      "T102",
+      "T103",
+      "T104",
+      "T105",
+      "T106",
+      "T107",
+      "T98",
+      "T99",
+      "T100",
+      "T108",
+      "T109",
+      "T110",
+      "T111",
+      "T112",
+      "T113",
+      "T114",
+      "T115",
+      "T116",
+      "T117",
+      "T118",
+      "T119",
+      "T120",
+      "T121",
+      "T80",
+      "T58",
+      "T81",
+      "T82",
+      "T83",
+      "T84",
+      "T35",
+      "T59",
+      "T60",
+      "T25",
+      "T27",
+      "T28",
+      "T45",
+      "T46",
+      "T29",
+      "T31",
+      "T66",
+      "T47",
+      "T85",
+      "T61",
+      "T86",
+      "T62",
+      "T87",
+      "T88",
+      "T63",
+      "T89",
+      "T90",
+      "T64",
+      "T91",
+      "T65",
+      "T40"
+    ],
+    "efficiencyAmendment": {
+      "design": "design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md",
+      "evidence": "work/evidence/2026-09-28-efficient-plan/",
+      "status": "planning_only",
+      "oldStructureTaskCount": 72,
+      "activeStructureTaskCount": 28,
+      "newTaskIds": [],
+      "retiredTaskIds": [
+        "T122",
+        "T123",
+        "T124",
+        "T125",
+        "T126",
+        "T127",
+        "T128",
+        "T129",
+        "T130",
+        "T131",
+        "T132",
+        "T133",
+        "T134",
+        "T135",
+        "T136",
+        "T137",
+        "T138",
+        "T139",
+        "T140",
+        "T141",
+        "T142",
+        "T143",
+        "T144",
+        "T145",
+        "T146",
+        "T147",
+        "T148",
+        "T149",
+        "T150",
+        "T151",
+        "T152",
+        "T153",
+        "T154",
+        "T155",
+        "T156",
+        "T157",
+        "T158",
+        "T159",
+        "T160",
+        "T161",
+        "T162",
+        "T163",
+        "T164",
+        "T165"
+      ],
+      "oldT78Evidence": "historical_preserved",
+      "wholeBodyCompletion": false,
+      "nextTask": "T95"
+    }
+  },
+  "tasksUpsert": [
+    {
+      "id": "T79",
+      "title": "양측 이두근·삼두근 10개 표면 확보·장면 통합",
+      "model": "Luna Max",
+      "spec": "work/tasks/T79.md",
+      "mode": "active",
+      "defaultNext": "T97",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks",
+      "prerequisite": "T78 동결 batch",
+      "executionAmendment": "2026-09-28 full muscles before nerves",
+      "prerequisiteIds": [
+        "T78"
+      ]
+    },
+    {
+      "id": "T95",
+      "title": "부위 복수 선택과 양측 견갑골 맥락 표시",
+      "model": "Luna Max",
+      "spec": "work/tasks/T95.md",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "defaultNext": "T96",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T97",
+      "title": "광배근 공식 aggregate 실제 객체 확인",
+      "model": "Luna Max",
+      "spec": "work/tasks/T97.md",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "defaultNext": "T101",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T98",
+      "title": "광배근 객체 권리·좌표·정적 자세 검증",
+      "model": "Luna Max",
+      "spec": "work/tasks/T98.md",
+      "prerequisiteIds": [
+        "T97"
+      ],
+      "defaultNext": "T99",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T99",
+      "title": "광배근 실제 모형 정합",
+      "model": "Luna Max",
+      "spec": "work/tasks/T99.md",
+      "prerequisiteIds": [
+        "T98"
+      ],
+      "defaultNext": "T100",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T100",
+      "title": "광배근 단일 장면 통합",
+      "model": "Luna Max",
+      "spec": "work/tasks/T100.md",
+      "prerequisiteIds": [
+        "T99"
+      ],
+      "defaultNext": "T108",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T101",
+      "title": "근육 부분 누락 표면 1 취득·통합",
+      "model": "Luna Max",
+      "spec": "work/tasks/T101.md",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "defaultNext": "T102",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T102",
+      "title": "근육 부분 누락 표면 2 취득·통합",
+      "model": "Luna Max",
+      "spec": "work/tasks/T102.md",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "defaultNext": "T103",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T103",
+      "title": "근육 부분 누락 표면 3 취득·통합",
+      "model": "Luna Max",
+      "spec": "work/tasks/T103.md",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "defaultNext": "T104",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T104",
+      "title": "근육 부분 누락 표면 4 취득·통합",
+      "model": "Luna Max",
+      "spec": "work/tasks/T104.md",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "defaultNext": "T105",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T105",
+      "title": "근육 부분 누락 표면 5 취득·통합",
+      "model": "Luna Max",
+      "spec": "work/tasks/T105.md",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "defaultNext": "T106",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T106",
+      "title": "뼈 누락 표면 1 취득·통합",
+      "model": "Luna Max",
+      "spec": "work/tasks/T106.md",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "defaultNext": "T107",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T107",
+      "title": "뼈 누락 표면 2 취득·통합",
+      "model": "Luna Max",
+      "spec": "work/tasks/T107.md",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "defaultNext": "T98",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T96",
+      "title": "전체 목표 분류·반복근·뼈 분모 의미 검증",
+      "model": "Luna Max",
+      "spec": "work/tasks/T96.md",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "defaultNext": "T79",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T108",
+      "title": "기존 보류 표면 개별 재검증 1",
+      "model": "Luna Max",
+      "spec": "work/tasks/T108.md",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "defaultNext": "T109",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T109",
+      "title": "기존 보류 표면 개별 재검증 2",
+      "model": "Luna Max",
+      "spec": "work/tasks/T109.md",
+      "prerequisiteIds": [
+        "T78"
+      ],
+      "defaultNext": "T110",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T110",
+      "title": "머리 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "spec": "work/tasks/T110.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": "T111",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T111",
+      "title": "목 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "spec": "work/tasks/T111.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": "T112",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T112",
+      "title": "등 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "spec": "work/tasks/T112.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": "T113",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T113",
+      "title": "어깨·어깨뼈 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "spec": "work/tasks/T113.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": "T114",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T114",
+      "title": "가슴우리 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "spec": "work/tasks/T114.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": "T115",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T115",
+      "title": "배·허리 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "spec": "work/tasks/T115.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": "T116",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T116",
+      "title": "골반·샅 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "spec": "work/tasks/T116.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": "T117",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T117",
+      "title": "볼기·깊은엉덩이 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "spec": "work/tasks/T117.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": "T118",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T118",
+      "title": "넙다리 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "spec": "work/tasks/T118.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": "T119",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T119",
+      "title": "종아리 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "spec": "work/tasks/T119.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": "T120",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T120",
+      "title": "발 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "spec": "work/tasks/T120.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": "T121",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T121",
+      "title": "팔·손 구조 식별·이름·선택 연결 패키지",
+      "model": "Luna Max",
+      "spec": "work/tasks/T121.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": "T80",
+      "mode": "active",
+      "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+    },
+    {
+      "id": "T122",
+      "title": "구조 목표 대조·선택 연결 batch 13",
+      "model": "Luna Max",
+      "spec": "work/tasks/T122.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T123",
+      "title": "구조 목표 대조·선택 연결 batch 14",
+      "model": "Luna Max",
+      "spec": "work/tasks/T123.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T124",
+      "title": "구조 목표 대조·선택 연결 batch 15",
+      "model": "Luna Max",
+      "spec": "work/tasks/T124.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T125",
+      "title": "구조 목표 대조·선택 연결 batch 16",
+      "model": "Luna Max",
+      "spec": "work/tasks/T125.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T126",
+      "title": "구조 목표 대조·선택 연결 batch 17",
+      "model": "Luna Max",
+      "spec": "work/tasks/T126.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T127",
+      "title": "구조 목표 대조·선택 연결 batch 18",
+      "model": "Luna Max",
+      "spec": "work/tasks/T127.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T128",
+      "title": "구조 목표 대조·선택 연결 batch 19",
+      "model": "Luna Max",
+      "spec": "work/tasks/T128.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T129",
+      "title": "구조 목표 대조·선택 연결 batch 20",
+      "model": "Luna Max",
+      "spec": "work/tasks/T129.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T130",
+      "title": "구조 목표 대조·선택 연결 batch 21",
+      "model": "Luna Max",
+      "spec": "work/tasks/T130.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T131",
+      "title": "구조 목표 대조·선택 연결 batch 22",
+      "model": "Luna Max",
+      "spec": "work/tasks/T131.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T132",
+      "title": "구조 목표 대조·선택 연결 batch 23",
+      "model": "Luna Max",
+      "spec": "work/tasks/T132.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T133",
+      "title": "구조 목표 대조·선택 연결 batch 24",
+      "model": "Luna Max",
+      "spec": "work/tasks/T133.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T134",
+      "title": "구조 목표 대조·선택 연결 batch 25",
+      "model": "Luna Max",
+      "spec": "work/tasks/T134.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T135",
+      "title": "구조 목표 대조·선택 연결 batch 26",
+      "model": "Luna Max",
+      "spec": "work/tasks/T135.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T136",
+      "title": "구조 목표 대조·선택 연결 batch 27",
+      "model": "Luna Max",
+      "spec": "work/tasks/T136.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T137",
+      "title": "구조 목표 대조·선택 연결 batch 28",
+      "model": "Luna Max",
+      "spec": "work/tasks/T137.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T138",
+      "title": "구조 목표 대조·선택 연결 batch 29",
+      "model": "Luna Max",
+      "spec": "work/tasks/T138.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T139",
+      "title": "구조 목표 대조·선택 연결 batch 30",
+      "model": "Luna Max",
+      "spec": "work/tasks/T139.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T140",
+      "title": "구조 목표 대조·선택 연결 batch 31",
+      "model": "Luna Max",
+      "spec": "work/tasks/T140.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T141",
+      "title": "구조 목표 대조·선택 연결 batch 32",
+      "model": "Luna Max",
+      "spec": "work/tasks/T141.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T142",
+      "title": "구조 목표 대조·선택 연결 batch 33",
+      "model": "Luna Max",
+      "spec": "work/tasks/T142.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T143",
+      "title": "구조 목표 대조·선택 연결 batch 34",
+      "model": "Luna Max",
+      "spec": "work/tasks/T143.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T144",
+      "title": "구조 목표 대조·선택 연결 batch 35",
+      "model": "Luna Max",
+      "spec": "work/tasks/T144.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T145",
+      "title": "구조 목표 대조·선택 연결 batch 36",
+      "model": "Luna Max",
+      "spec": "work/tasks/T145.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T146",
+      "title": "구조 목표 대조·선택 연결 batch 37",
+      "model": "Luna Max",
+      "spec": "work/tasks/T146.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T147",
+      "title": "구조 목표 대조·선택 연결 batch 38",
+      "model": "Luna Max",
+      "spec": "work/tasks/T147.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T148",
+      "title": "구조 목표 대조·선택 연결 batch 39",
+      "model": "Luna Max",
+      "spec": "work/tasks/T148.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T149",
+      "title": "구조 목표 대조·선택 연결 batch 40",
+      "model": "Luna Max",
+      "spec": "work/tasks/T149.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T150",
+      "title": "구조 목표 대조·선택 연결 batch 41",
+      "model": "Luna Max",
+      "spec": "work/tasks/T150.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T151",
+      "title": "구조 목표 대조·선택 연결 batch 42",
+      "model": "Luna Max",
+      "spec": "work/tasks/T151.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T152",
+      "title": "구조 목표 대조·선택 연결 batch 43",
+      "model": "Luna Max",
+      "spec": "work/tasks/T152.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T153",
+      "title": "구조 목표 대조·선택 연결 batch 44",
+      "model": "Luna Max",
+      "spec": "work/tasks/T153.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T154",
+      "title": "구조 목표 대조·선택 연결 batch 45",
+      "model": "Luna Max",
+      "spec": "work/tasks/T154.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T155",
+      "title": "구조 목표 대조·선택 연결 batch 46",
+      "model": "Luna Max",
+      "spec": "work/tasks/T155.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T156",
+      "title": "구조 목표 대조·선택 연결 batch 47",
+      "model": "Luna Max",
+      "spec": "work/tasks/T156.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T157",
+      "title": "구조 목표 대조·선택 연결 batch 48",
+      "model": "Luna Max",
+      "spec": "work/tasks/T157.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T158",
+      "title": "구조 목표 대조·선택 연결 batch 49",
+      "model": "Luna Max",
+      "spec": "work/tasks/T158.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T159",
+      "title": "구조 목표 대조·선택 연결 batch 50",
+      "model": "Luna Max",
+      "spec": "work/tasks/T159.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T160",
+      "title": "구조 목표 대조·선택 연결 batch 51",
+      "model": "Luna Max",
+      "spec": "work/tasks/T160.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T161",
+      "title": "구조 목표 대조·선택 연결 batch 52",
+      "model": "Luna Max",
+      "spec": "work/tasks/T161.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T162",
+      "title": "구조 목표 대조·선택 연결 batch 53",
+      "model": "Luna Max",
+      "spec": "work/tasks/T162.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T163",
+      "title": "구조 목표 대조·선택 연결 batch 54",
+      "model": "Luna Max",
+      "spec": "work/tasks/T163.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T164",
+      "title": "구조 목표 대조·선택 연결 batch 55",
+      "model": "Luna Max",
+      "spec": "work/tasks/T164.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T165",
+      "title": "구조 목표 대조·선택 연결 batch 56",
+      "model": "Luna Max",
+      "spec": "work/tasks/T165.md",
+      "prerequisiteIds": [
+        "T96"
+      ],
+      "defaultNext": null,
+      "mode": "superseded",
+      "scopeOverride": "T78 queue and 21 design; geometry first, target semantics/binding later",
+      "supersededBy": "T96 frozen regional allocation to T110–T121"
+    },
+    {
+      "id": "T80",
+      "title": "전신 구조·선택 coverage 감사",
+      "model": "Luna Max",
+      "spec": "work/tasks/T80.md",
+      "mode": "active",
+      "defaultNext": "T58",
+      "scopeOverride": "T78의 전체 target을 exact source/node/side/binding/세 이름/부위로 대조한다. 모든 target의 표시 가능성과 클릭 설명 연결, 깊은 구조의 격리/회전 접근, 요추·엉치뼈 기본 표시를 확인한다. 모든 근육을 같은 시점에 투명하게 겹쳐 보여야 한다는 뜻은 아니다. 누락/미연결/미해결 필수 hold가 남으면 partial이며 기시정지 전신 완료 단계로 넘어가지 않는다. 추가 수정 task를 exact 대상/종료조건으로 배정한다. 분모를 줄이거나 subset 100%를 전신 완료로 쓰지 않는다. 통과 후 Astra T58 실제 그래픽 재검증.",
+      "prerequisite": "Actual results for all 28 structure tasks plus T96 all-target allocation/mandatory coverage; no skipped or superseded task as completion evidence",
+      "executionAmendment": "2026-09-28 full muscles before nerves",
+      "prerequisiteIds": [
+        "T95",
+        "T96",
+        "T79",
+        "T97",
+        "T101",
+        "T102",
+        "T103",
+        "T104",
+        "T105",
+        "T106",
+        "T107",
+        "T98",
+        "T99",
+        "T100",
+        "T108",
+        "T109",
+        "T110",
+        "T111",
+        "T112",
+        "T113",
+        "T114",
+        "T115",
+        "T116",
+        "T117",
+        "T118",
+        "T119",
+        "T120",
+        "T121"
+      ]
+    }
+  ],
+  "taskStatusesPatch": {
+    "T110": "planned_pending_T96_freeze",
+    "T111": "planned_pending_T96_freeze",
+    "T112": "planned_pending_T96_freeze",
+    "T113": "planned_pending_T96_freeze",
+    "T114": "planned_pending_T96_freeze",
+    "T115": "planned_pending_T96_freeze",
+    "T116": "planned_pending_T96_freeze",
+    "T117": "planned_pending_T96_freeze",
+    "T118": "planned_pending_T96_freeze",
+    "T119": "planned_pending_T96_freeze",
+    "T120": "planned_pending_T96_freeze",
+    "T121": "planned_pending_T96_freeze",
+    "T122": "superseded_not_executed",
+    "T123": "superseded_not_executed",
+    "T124": "superseded_not_executed",
+    "T125": "superseded_not_executed",
+    "T126": "superseded_not_executed",
+    "T127": "superseded_not_executed",
+    "T128": "superseded_not_executed",
+    "T129": "superseded_not_executed",
+    "T130": "superseded_not_executed",
+    "T131": "superseded_not_executed",
+    "T132": "superseded_not_executed",
+    "T133": "superseded_not_executed",
+    "T134": "superseded_not_executed",
+    "T135": "superseded_not_executed",
+    "T136": "superseded_not_executed",
+    "T137": "superseded_not_executed",
+    "T138": "superseded_not_executed",
+    "T139": "superseded_not_executed",
+    "T140": "superseded_not_executed",
+    "T141": "superseded_not_executed",
+    "T142": "superseded_not_executed",
+    "T143": "superseded_not_executed",
+    "T144": "superseded_not_executed",
+    "T145": "superseded_not_executed",
+    "T146": "superseded_not_executed",
+    "T147": "superseded_not_executed",
+    "T148": "superseded_not_executed",
+    "T149": "superseded_not_executed",
+    "T150": "superseded_not_executed",
+    "T151": "superseded_not_executed",
+    "T152": "superseded_not_executed",
+    "T153": "superseded_not_executed",
+    "T154": "superseded_not_executed",
+    "T155": "superseded_not_executed",
+    "T156": "superseded_not_executed",
+    "T157": "superseded_not_executed",
+    "T158": "superseded_not_executed",
+    "T159": "superseded_not_executed",
+    "T160": "superseded_not_executed",
+    "T161": "superseded_not_executed",
+    "T162": "superseded_not_executed",
+    "T163": "superseded_not_executed",
+    "T164": "superseded_not_executed",
+    "T165": "superseded_not_executed"
+  },
+  "preserveOtherUserFields": true
+}

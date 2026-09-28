@@ -1,3 +1,5 @@
+> **현행 효율화 개정:** 22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md와 work/evidence/2026-09-28-efficient-plan/의 queue/프롬프트 우선. T96을 앞당기고 T110–121은12부위 package, T122–165는 superseded_not_executed다.10개당 새 task 발급은 폐기, 검증 단위로만 유지. T78의 실제 결과/미완은 바뀌지 않는다. 다음 T95 → T96.
+
 > **2026-09-28 T78 개정:** 현재 다음은 T95(Luna Max). 21-WHOLE-BODY-ACQUISITION-T78.md와 work/evidence/T78/PROMPTS-IN-ORDER.md / execution-queue.json을 우선한다. 부위 복수 선택·견갑골 수정 → 실제 누락 표면 취득·광배근 객체/권리/정합/통합 → 전체 target 의미/선택 연결 → T80/T58. 아래 T79→T80 직행 및 취득과 전체 콘텐츠 동시 완료 문구는 새 queue로 대체한다. T78 target 의미 분모는 아직 partial이며 개별근 분모 null, 원래 후반 기시정지→작용→모션→신경 순서는 유지한다.
 
 # T77 이후 새 순서·실행 프롬프트
