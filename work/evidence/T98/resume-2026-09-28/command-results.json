@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0.0",
+  "task": "T98",
+  "unit": "resume-evaluated-exporter",
+  "source": "work/reviews/T98-2026-09-28-exporter-runtime/NEXT-T98-RESUME.md",
+  "finalInvocation": "'/Volumes/Blender/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec --python-exit-code 23 --python '<repo>/work/evidence/T98/resume-2026-09-28/export_evaluated_t98.py' -- --repo-root '<repo>' --freeze-json '<repo>/work/evidence/T98/representative-sample-freeze.json' --output-dir '<repo>/work/evidence/T98/resume-2026-09-28' --source-blend '<repo>/atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Startup.blend>'",
+  "scriptSha256": "e5b30fffc0af88c1765c62165f6f95ca99314f653576b14e70e4f69831b9d61a",
+  "sourceBlendSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+  "archiveSha256": "e029688545627bd0214b269e1063143abb580aad72b2c2445d6d8a9a0d9da736",
+  "attempts": [
+    {
+      "id": "T98-resume-argument-parser",
+      "exitCode": 23,
+      "sourceOpened": false,
+      "output": "The reviewed script rejected named arguments before opening the .blend; no exported artifact accepted."
+    },
+    {
+      "id": "T98-resume-first-evaluated-export",
+      "exitCode": 0,
+      "sourceOpened": true,
+      "sourceScriptsDisabled": true,
+      "exported": true,
+      "preview": "Rendered but source scene outline settings contaminated the first visual QA; replaced by final isolated-scene capture."
+    },
+    {
+      "id": "T98-resume-preview-workbench-diagnostic",
+      "exitCode": 0,
+      "sourceOpened": true,
+      "exported": true,
+      "preview": "Blank image detected by visual review; not accepted and outputs replaced."
+    },
+    {
+      "id": "T98-resume-preview-engine-selection-diagnostic",
+      "exitCode": 0,
+      "sourceOpened": true,
+      "exported": true,
+      "preview": "Blank image detected by visual review; not accepted and outputs replaced."
+    },
+    {
+      "id": "T98-resume-final-isolated-eevee-preview",
+      "exitCode": 0,
+      "sourceOpened": true,
+      "sourceScriptsDisabled": true,
+      "sourceDriversAutoexecDisabled": true,
+      "exported": true,
+      "preview": "Three nonblank 1100x1100 EEVEE renders from an isolated temporary scene; accepted current outputs."
+    }
+  ],
+  "observedWarnings": [
+    "Dependency cycle in unrelated OBOesophagus-profile/OBOesophagus curve-follow-parent and modifier graph; no frozen sample object appears in the reported cycle.",
+    "Blender reported 322 unfreed memory blocks totaling 0.002457 MB at process exit."
+  ],
+  "sourceEdits": false,
+  "sourceSaved": false,
+  "temporaryPreviewSceneSaved": false,
+  "learnerRuntimeChanged": false,
+  "baseSelected": false
+}

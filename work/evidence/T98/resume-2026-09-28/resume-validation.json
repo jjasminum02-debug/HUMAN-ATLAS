@@ -1,0 +1,452 @@
+{
+  "schemaVersion": "1.0.0",
+  "task": "T98",
+  "unit": "resume-evaluated-exporter",
+  "result": "passed_with_remaining_gates",
+  "status": "partial",
+  "checks": [
+    {
+      "name": "pinned archive and Startup.blend bytes unchanged",
+      "passed": true,
+      "evidence": {
+        "atlas-data/source-cache/z-anatomy/t97/Z-Anatomy.zip": {
+          "expected": "e029688545627bd0214b269e1063143abb580aad72b2c2445d6d8a9a0d9da736",
+          "actual": "e029688545627bd0214b269e1063143abb580aad72b2c2445d6d8a9a0d9da736",
+          "matches": true
+        },
+        "atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Startup.blend": {
+          "expected": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "actual": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "matches": true
+        }
+      }
+    },
+    {
+      "name": "runtime binary path and hash match resume baseline",
+      "passed": true,
+      "evidence": {
+        "path": "/Volumes/Blender/Blender.app/Contents/MacOS/Blender",
+        "version": "3.5.0",
+        "sha256": "23171ca8704539b44c94cb370894cb3b38908530c012267bed079326d7be95b0",
+        "baselineSha256": "23171ca8704539b44c94cb370894cb3b38908530c012267bed079326d7be95b0",
+        "packageReceiptMatchesRuntimeBinary": false
+      }
+    },
+    {
+      "name": "all 12 frozen name/data/parent/collection locators reconciled",
+      "passed": true,
+      "evidence": {
+        "frozen": 12,
+        "evaluated": 12,
+        "missing": [],
+        "extra": []
+      }
+    },
+    {
+      "name": "11 anatomy candidates and helper are counted separately",
+      "passed": true,
+      "evidence": {
+        "anatomicalObjectCount": 11,
+        "helper": "Cross Section X",
+        "helperTriangles": 0,
+        "glbNames": null
+      }
+    },
+    {
+      "name": "GLB container, 11 named meshes, accessors, indices, size and SHA-256 valid",
+      "passed": true,
+      "evidence": {
+        "sha256": "2808f3b414d50c15d7e3f94db66579c02dc210653123a1f229fbf060addefdc4",
+        "bytes": 10650376,
+        "meshes": [
+          {
+            "name": "Frontalis muscle.l",
+            "positionCount": 17622,
+            "normalCount": 17622,
+            "indexCount": 17622,
+            "indicesInRange": true,
+            "triangleCount": 5874
+          },
+          {
+            "name": "Latissimus dorsi muscle.l",
+            "positionCount": 64740,
+            "normalCount": 64740,
+            "indexCount": 64740,
+            "indicesInRange": true,
+            "triangleCount": 21580
+          },
+          {
+            "name": "Latissimus dorsi muscle.r",
+            "positionCount": 64740,
+            "normalCount": 64740,
+            "indexCount": 64740,
+            "indicesInRange": true,
+            "triangleCount": 21580
+          },
+          {
+            "name": "Clavicular part of deltoid muscle.l",
+            "positionCount": 8706,
+            "normalCount": 8706,
+            "indexCount": 8706,
+            "indicesInRange": true,
+            "triangleCount": 2902
+          },
+          {
+            "name": "Clavicular part of deltoid muscle.r",
+            "positionCount": 8706,
+            "normalCount": 8706,
+            "indexCount": 8706,
+            "indicesInRange": true,
+            "triangleCount": 2902
+          },
+          {
+            "name": "Tibialis anterior muscle.l",
+            "positionCount": 10578,
+            "normalCount": 10578,
+            "indexCount": 10578,
+            "indicesInRange": true,
+            "triangleCount": 3526
+          },
+          {
+            "name": "Scapula.l",
+            "positionCount": 75978,
+            "normalCount": 75978,
+            "indexCount": 75978,
+            "indicesInRange": true,
+            "triangleCount": 25326
+          },
+          {
+            "name": "Scapula.r",
+            "positionCount": 75978,
+            "normalCount": 75978,
+            "indexCount": 75978,
+            "indicesInRange": true,
+            "triangleCount": 25326
+          },
+          {
+            "name": "Vertebra L5",
+            "positionCount": 12096,
+            "normalCount": 12096,
+            "indexCount": 12096,
+            "indicesInRange": true,
+            "triangleCount": 4032
+          },
+          {
+            "name": "Sacrum",
+            "positionCount": 35028,
+            "normalCount": 35028,
+            "indexCount": 35028,
+            "indicesInRange": true,
+            "triangleCount": 11676
+          },
+          {
+            "name": "Clavicular part of deltoid muscle.ol",
+            "positionCount": 5772,
+            "normalCount": 5772,
+            "indexCount": 5772,
+            "indicesInRange": true,
+            "triangleCount": 1924
+          }
+        ],
+        "glbNodes": [
+          "Clavicular part of deltoid muscle.l",
+          "Clavicular part of deltoid muscle.ol",
+          "Clavicular part of deltoid muscle.r",
+          "Frontalis muscle.l",
+          "Latissimus dorsi muscle.l",
+          "Latissimus dorsi muscle.r",
+          "Sacrum",
+          "Scapula.l",
+          "Scapula.r",
+          "Tibialis anterior muscle.l",
+          "Vertebra L5"
+        ],
+        "expected": [
+          "Clavicular part of deltoid muscle.l",
+          "Clavicular part of deltoid muscle.ol",
+          "Clavicular part of deltoid muscle.r",
+          "Frontalis muscle.l",
+          "Latissimus dorsi muscle.l",
+          "Latissimus dorsi muscle.r",
+          "Sacrum",
+          "Scapula.l",
+          "Scapula.r",
+          "Tibialis anterior muscle.l",
+          "Vertebra L5"
+        ]
+      }
+    },
+    {
+      "name": "three axis previews are real nonblank renders with matching hashes",
+      "passed": true,
+      "evidence": [
+        {
+          "path": "work/evidence/T98/resume-2026-09-28/normal-x-positive.png",
+          "fileHashAndBytesMatch": true,
+          "pixels": {
+            "width": 1100,
+            "height": 1100,
+            "uniquePixelColors": 342,
+            "nonBackgroundPixels": 511914,
+            "backgroundColor": [
+              62,
+              66,
+              73,
+              255
+            ]
+          },
+          "nonBlank": true
+        },
+        {
+          "path": "work/evidence/T98/resume-2026-09-28/normal-y-positive.png",
+          "fileHashAndBytesMatch": true,
+          "pixels": {
+            "width": 1100,
+            "height": 1100,
+            "uniquePixelColors": 335,
+            "nonBackgroundPixels": 529040,
+            "backgroundColor": [
+              62,
+              66,
+              73,
+              255
+            ]
+          },
+          "nonBlank": true
+        },
+        {
+          "path": "work/evidence/T98/resume-2026-09-28/normal-z-positive.png",
+          "fileHashAndBytesMatch": true,
+          "pixels": {
+            "width": 1100,
+            "height": 1100,
+            "uniquePixelColors": 267,
+            "nonBackgroundPixels": 509555,
+            "backgroundColor": [
+              62,
+              66,
+              73,
+              255
+            ]
+          },
+          "nonBlank": true
+        }
+      ]
+    },
+    {
+      "name": "Solidify/Subsurf evaluation, shared meshes, negative transforms, constraint helper and depsgraph instances observed",
+      "passed": true,
+      "evidence": {
+        "olModifierTypes": [
+          "SOLIDIFY",
+          "SUBSURF"
+        ],
+        "olBaseEvaluatedCounts": {
+          "vertices": [
+            90,
+            964
+          ],
+          "polygons": [
+            125,
+            962
+          ]
+        },
+        "sharedGroups": [
+          [
+            "Clavicular part of deltoid muscle.l",
+            "Clavicular part of deltoid muscle.r"
+          ],
+          [
+            "Latissimus dorsi muscle.l",
+            "Latissimus dorsi muscle.r"
+          ],
+          [
+            "Scapula.l",
+            "Scapula.r"
+          ]
+        ],
+        "negativeDeterminantCount": 6,
+        "constraintHelper": {
+          "name": "Cross Section X",
+          "constraint": [
+            {
+              "name": "Limit Location",
+              "type": "LIMIT_LOCATION",
+              "mute": false
+            }
+          ],
+          "matrixDelta": 0.0,
+          "triangles": 0
+        },
+        "depsgraphInstanceCount": 5312,
+        "generatedInstances": 1090,
+        "sampleReferences": {
+          "Frontalis muscle.l": 0,
+          "Latissimus dorsi muscle.l": 0,
+          "Latissimus dorsi muscle.r": 0,
+          "Clavicular part of deltoid muscle.l": 0,
+          "Clavicular part of deltoid muscle.r": 0,
+          "Tibialis anterior muscle.l": 0,
+          "Scapula.l": 0,
+          "Scapula.r": 0,
+          "Vertebra L5": 0,
+          "Sacrum": 0,
+          "Clavicular part of deltoid muscle.ol": 0,
+          "Cross Section X": 0
+        }
+      }
+    },
+    {
+      "name": "frame/unit/rest pose, rights, human review and product status remain held or unresolved",
+      "passed": true,
+      "evidence": {
+        "frame": "unresolved",
+        "unit": {
+          "system": "METRIC",
+          "scaleLength": 1.0,
+          "lengthUnit": "CENTIMETERS",
+          "sourceDeclaredPhysicalUnit": null
+        },
+        "pose": null,
+        "rights": {
+          "sourceOnly": true,
+          "localUseRights": "held_pending_file_level_reconciliation",
+          "publicRedistribution": "held",
+          "humanAnatomyReview": "not_performed",
+          "objectToUpstreamFamilyLineage": "unresolved"
+        },
+        "productAsset": false
+      }
+    },
+    {
+      "name": "EXECUTION remains at same partial T98 unit and does not start T99",
+      "passed": true,
+      "evidence": {
+        "executionStatus": "in_progress",
+        "acceptance": "partial",
+        "progress": {
+          "nextUnit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
+          "completedUnits": [
+            "read-and-hash-pinned-inputs-and-prior-work",
+            "inventory-all-serialized-source-objects-meshes-curves-collections-and-links",
+            "freeze-all-12-t96-regions-and-542-target-records-with-563-memberships",
+            "record-z-anatomy-and-bodyparts3d-rights-families-and-exceptions",
+            "freeze-exact-12-object-export-candidate-set-with-source-hash-and-locators",
+            "verify-approved-execution-runtime-path-and-current-binary-identity",
+            "evaluate-export-exact-frozen-12-locators-with-scripts-and-autoexec-disabled",
+            "export-eleven-anatomical-meshes-and-separate-nonanatomical-constraint-helper",
+            "measure-modifier-shared-mesh-negative-transform-constraint-and-depsgraph-instance-results",
+            "render-and-visually-inspect-three-nonblank-source-axis-preview-views"
+          ],
+          "pendingUnits": [
+            "resolve-current-Blender-3.5.0-provenance-versus-official-5.2.2-receipt-and-invalid-signature-check",
+            "validate-source-physical-unit-frame-and-reference-pose-against-T50-T69-without-inferred-transform",
+            "compare-literal-side-labels-and-evaluated-space-observations-with-exact-source-lineage",
+            "resolve-per-object-upstream-source-and-rights-exception-family",
+            "compare-whole-body-target-coverage-and-cost-across-eligible-sources",
+            "select-production-base-only-after-coverage-frame-rights-and-quality-gates-pass"
+          ],
+          "nextId": "T98",
+          "nextOwner": "Luna Max",
+          "nextPromptPath": "work/evidence/T98/resume-2026-09-28/NEXT-T98-RESUME.md",
+          "gate": {
+            "evaluatedExportVerified": true,
+            "representativeSurfacePreview": true,
+            "runtimePublisherProvenanceVerified": false,
+            "productionBaseSelected": false,
+            "whyPartial": "The exact frozen sample now has evaluated geometry, a reproducible 11-mesh GLB, helper observation, and visually inspected three-axis renders. T98 remains partial because the mounted Blender 3.5.0 executable is not proven by the official 5.2.2 DMG receipt and its app signature verification failed; source physical units/frame/rest pose and exact laterality mapping are unresolved; object-to-upstream license-family lineage, full target coverage, and comparable whole-body cost are unresolved.",
+            "newTaskNumberIssued": false,
+            "nextTaskExecutionStarted": false
+          },
+          "runtimeAndRightsHold": {
+            "sourceOnly": true,
+            "localUseRights": "held_pending_file_level_reconciliation",
+            "redistributionRights": "held",
+            "humanReview": "not_performed",
+            "canonicalBindingAdded": false,
+            "learnerVisibilityChanged": false,
+            "webRuntimeChanged": false
+          }
+        }
+      }
+    },
+    {
+      "name": "all resume inputs preserved except declared T98/generated projections",
+      "passed": true,
+      "evidence": {
+        "protectedInputs": 18,
+        "allowedTaskDeltas": [
+          "work/EXECUTION.json",
+          "work/NEXT.md",
+          "work/STATUS.md",
+          "work/evidence/T98/progress.json",
+          "work/reports/T98.md",
+          "work/task-registry-r15.json"
+        ],
+        "preservedOrAuthorized": 18,
+        "unexpected": []
+      }
+    },
+    {
+      "name": "all pre-existing WIP paths still exist",
+      "passed": true,
+      "evidence": {
+        "baselineStatusPathCount": 209,
+        "missing": []
+      }
+    },
+    {
+      "name": "OpenSim_Models HEAD and clean state unchanged",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "head": "d9b05d470b1a481c222372c85b75772faf8f7792",
+          "status": ""
+        },
+        "after": {
+          "head": "d9b05d470b1a481c222372c85b75772faf8f7792",
+          "status": ""
+        }
+      }
+    },
+    {
+      "name": "generated EXECUTION projections synchronized",
+      "passed": true,
+      "evidence": {
+        "exitCode": 0,
+        "stdout": "Execution projections match; no writes.",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "T98 script and validator syntax",
+      "passed": true,
+      "evidence": [
+        {
+          "path": "export_evaluated_t98.py",
+          "passed": true
+        },
+        {
+          "path": "validate_t98_resume.py",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "no other EXECUTION task record changed",
+      "passed": true,
+      "evidence": {
+        "nonT98TaskRecordsMatchBaselineHead": true
+      }
+    }
+  ],
+  "summary": {
+    "checkCount": 15,
+    "passedCount": 15,
+    "failedCount": 0,
+    "evaluatedExportVerified": true,
+    "representativeSurfacePreview": true,
+    "productionBaseSelected": false,
+    "nextTaskStarted": false
+  }
+}

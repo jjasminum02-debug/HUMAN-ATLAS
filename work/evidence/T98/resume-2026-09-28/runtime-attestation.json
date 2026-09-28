@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "task": "T98",
+  "checkedAt": "2026-09-28T23:54:24.026694+09:00",
+  "mountedRuntime": {
+    "path": "/Volumes/Blender/Blender.app/Contents/MacOS/Blender",
+    "version": "3.5.0",
+    "buildHash": "1be25cfff18b",
+    "bytes": 249256048,
+    "sha256": "23171ca8704539b44c94cb370894cb3b38908530c012267bed079326d7be95b0",
+    "versionCommandExitCode": 0,
+    "startupApprovalEvidence": "work/reviews/T98-2026-09-28-exporter-runtime/runtime-startup.json"
+  },
+  "officialPackageReceipt": {
+    "path": "work/evidence/T97/blender-tool-current.json",
+    "version": "5.2.2 LTS",
+    "dmgSha256": "dc4125399b8bfefe283cc1624d6cfc7809d1cac20ace51072127eb371f31f210",
+    "officialDmgChecksumMatched": true
+  },
+  "relationship": {
+    "receiptProvesMountedExecutable": false,
+    "mountedExecutableVersionMatchesReceipt": false,
+    "reason": "Receipt authenticates the official 5.2.2 LTS DMG; the mounted path executes Blender 3.5.0. The executable hash is a different artifact and no package lineage was established."
+  },
+  "codeSignature": {
+    "command": "codesign --verify --deep --strict --verbose=2 /Volumes/Blender/Blender.app",
+    "exitCode": 1,
+    "result": "invalid signature (code or signature have been modified), arm64",
+    "impact": "runtime publisher/signature provenance remains unresolved; technical export is retained as local QA only, not a production-base approval"
+  },
+  "execution": {
+    "permissionMode": "require_escalated",
+    "toolApproval": "accepted for bounded T98 runs",
+    "factoryStartup": true,
+    "disableAutoexec": true,
+    "blendOpenUseScripts": false,
+    "sourceSaved": false
+  }
+}

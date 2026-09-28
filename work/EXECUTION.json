@@ -123,16 +123,50 @@
       "executionStatus": "in_progress",
       "acceptance": "partial",
       "spec": "work/tasks/T98.md",
-      "scope": "T97 pinned archive/BP3D metadata/cache/T96 전체 target 및 T104까지 최신 WIP·evidence를 읽는다. 25 설계 3절의 전체 Object/Mesh/Collection/curve/helper/instance와 source 권리 상속·예외를 대조한다. canonical concept·geometry·instance·file 분모를 구분하고12부위 필수 전체 목록을 freeze한다. Z-Anatomy는 우선 후보이며 actual evaluated geometry 변환/좌우·pose/권리/포괄성/비용으로 주 베이스를 선택한다. 정확히 동결한8–12개 대표 object의 실제 exporter spike와 preview/hash를 남긴다. T97 Metal 실패를 같은 방식으로 반복하지 않고 검증된 headless/export 경로를 확인한다. raw 배열을 modifier/instance 결과로 오인하지 않는다. 모든 source를 다시 다운로드하거나 광배근만 검사하고 완료하지 않는다. source inventory만 있고 exporter가 미검증이면 partial. 웹 runtime/다음 task를 구현하지 않는다.",
+      "scope": "T97 pinned archive/BP3D metadata/cache/T96 전체 target 및 T104까지 최신 WIP·evidence를 읽는다. 25 설계 3절의 전체 Object/Mesh/Collection/curve/helper/instance와 source 권리 상속·예외를 대조한다. canonical concept·geometry·instance·file 분모를 구분하고12부위 필수 전체 목록을 freeze한다. Z-Anatomy는 우선 후보이며 actual evaluated geometry 변환/좌우·pose/권리/포괄성/비용으로 주 베이스를 선택한다. 정확히 동결한8–12개 대표 object의 실제 exporter spike와 preview/hash를 남긴다. T97 Metal 실패를 같은 방식으로 반복하지 않고 검증된 headless/export 경로를 확인한다. raw 배열을 modifier/instance 결과로 오인하지 않는다. 모든 source를 다시 다운로드하거나 광배근만 검사하고 완료하지 않는다. source inventory만 있고 exporter가 미검증이면 partial. 웹 runtime/다음 task를 구현하지 않는다. Resume boundary (2026-09-28): the initial raw datablock inventory, T96 542-target/563-membership freeze, rights-family comparison, and exact 12-object locator freeze are completed and must not be repeated. The frozen 12-object set has now been evaluated and exported with a local three-axis preview. Continue only at nextUnit: reconcile source unit/frame/rest pose/laterality and runtime provenance against T50/T69, resolve exact object-to-rights-family ancestry, compare whole-body coverage and measured costs, then select a base only if all gates are supported; otherwise keep it undecided. Do not redownload or repeat inventory/export.",
       "progress": {
-        "nextUnit": "verified-evaluated-exporter-and-12-object-preview",
+        "nextUnit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
         "completedUnits": [
           "read-and-hash-pinned-inputs-and-prior-work",
           "inventory-all-serialized-source-objects-meshes-curves-collections-and-links",
           "freeze-all-12-t96-regions-and-542-target-records-with-563-memberships",
           "record-z-anatomy-and-bodyparts3d-rights-families-and-exceptions",
-          "freeze-exact-12-object-export-candidate-set-with-source-hash-and-locators"
-        ]
+          "freeze-exact-12-object-export-candidate-set-with-source-hash-and-locators",
+          "verify-approved-execution-runtime-path-and-current-binary-identity",
+          "evaluate-export-exact-frozen-12-locators-with-scripts-and-autoexec-disabled",
+          "export-eleven-anatomical-meshes-and-separate-nonanatomical-constraint-helper",
+          "measure-modifier-shared-mesh-negative-transform-constraint-and-depsgraph-instance-results",
+          "render-and-visually-inspect-three-nonblank-source-axis-preview-views"
+        ],
+        "pendingUnits": [
+          "resolve-current-Blender-3.5.0-provenance-versus-official-5.2.2-receipt-and-invalid-signature-check",
+          "validate-source-physical-unit-frame-and-reference-pose-against-T50-T69-without-inferred-transform",
+          "compare-literal-side-labels-and-evaluated-space-observations-with-exact-source-lineage",
+          "resolve-per-object-upstream-source-and-rights-exception-family",
+          "compare-whole-body-target-coverage-and-cost-across-eligible-sources",
+          "select-production-base-only-after-coverage-frame-rights-and-quality-gates-pass"
+        ],
+        "nextId": "T98",
+        "nextOwner": "Luna Max",
+        "nextPromptPath": "work/evidence/T98/resume-2026-09-28/NEXT-T98-RESUME.md",
+        "gate": {
+          "evaluatedExportVerified": true,
+          "representativeSurfacePreview": true,
+          "runtimePublisherProvenanceVerified": false,
+          "productionBaseSelected": false,
+          "whyPartial": "The exact frozen sample now has evaluated geometry, a reproducible 11-mesh GLB, helper observation, and visually inspected three-axis renders. T98 remains partial because the mounted Blender 3.5.0 executable is not proven by the official 5.2.2 DMG receipt and its app signature verification failed; source physical units/frame/rest pose and exact laterality mapping are unresolved; object-to-upstream license-family lineage, full target coverage, and comparable whole-body cost are unresolved.",
+          "newTaskNumberIssued": false,
+          "nextTaskExecutionStarted": false
+        },
+        "runtimeAndRightsHold": {
+          "sourceOnly": true,
+          "localUseRights": "held_pending_file_level_reconciliation",
+          "redistributionRights": "held",
+          "humanReview": "not_performed",
+          "canonicalBindingAdded": false,
+          "learnerVisibilityChanged": false,
+          "webRuntimeChanged": false
+        }
       },
       "report": "work/reports/T98.md"
     },
