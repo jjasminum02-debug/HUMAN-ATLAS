@@ -1,0 +1,27 @@
+{
+  "revision": "T93-validation-v1",
+  "task": "T93",
+  "result": "passed",
+  "checks": {
+    "decision_is_allowed_and_expected": true,
+    "no_mesh_or_archive_was_downloaded": true,
+    "no_identity_binding_ui_or_review_promotion": true,
+    "no_exact_mesh_locator_or_object_hash_is_invented": true,
+    "frame_and_component_rights_remain_unverified": true,
+    "T94_is_registered_once_immediately_before_T77": true,
+    "next_task_and_status_are_consistent": true,
+    "shared_status_registry_delta_is_recorded_and_unstaged": true,
+    "followup_is_bounded_and_does_not_acquire_mesh": true,
+    "baseline_commit_is_current_head": true,
+    "protected_input_hashes_unchanged_except_documented_shared_state": true,
+    "OpenSim_Models_head_clean_and_unchanged": true
+  },
+  "protectedInputCount": 61,
+  "protectedInputPassed": 61,
+  "protectedInputFailures": [],
+  "sharedStateFilesExpectedToChangeAndRemainUnstaged": [
+    "work/STATUS.md",
+    "work/task-registry-r15.json"
+  ],
+  "sourceDownloadPerformed": false
+}

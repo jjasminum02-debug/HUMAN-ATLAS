@@ -1,0 +1,48 @@
+{
+  "revision": "T93-state-update-before-v1",
+  "capturedAtLocal": "2026-09-28T10:10:57+09:00",
+  "head": "4ef19534f5e132d8449290ae353d0463be4b61f1",
+  "statusSha256": "068b7a034d5974c037fb10ed9750513a73f1bf2eaf822cd7a0f14a724cc88209",
+  "registrySha256": "1a90aae4038e418ddfa2221555f1ecd923e01da9342b9e363ac37c8146d6d458",
+  "registryPointers": {
+    "nextTask": "T93",
+    "nextUnallocatedNumericId": 94,
+    "T93Status": "planned_not_started",
+    "T77Status": "planned_not_started",
+    "T93QueueIndex": 17,
+    "T77QueueIndex": 18,
+    "T93Task": {
+      "id": "T93",
+      "title": "광배근 alternate-source identity·권리·frame 조사",
+      "model": "Sol High",
+      "spec": "work/tasks/T93.md",
+      "prerequisite": "T73 source-gap finding, T75, and T92",
+      "prerequisiteIds": [
+        "T73",
+        "T75",
+        "T92"
+      ],
+      "defaultNext": "T77",
+      "mode": "active",
+      "continuationRule": "Metadata/source research only. If a candidate is found, insert a bounded unused-ID acquisition or registration task before T77; no mesh or scene work in T93."
+    },
+    "T77PrerequisiteIds": [
+      "T73",
+      "T74",
+      "T75",
+      "T76",
+      "T92",
+      "T93"
+    ],
+    "T77Prerequisite": "T73–76 plus inserted T92/T93 outcomes; any conditional T94 from T93 must also finish before T77",
+    "T77CoverageGateAmendment": "T73 mandatory visual targets include exact bilateral skull subset, side-specific deltoid, pelvic-floor source set, trapezius visual-context source package (T92), and a resolved latissimus source decision (T93). If T93 inserts a bounded T94 acquisition/registration task, T77 waits for it; unresolved source/rights/frame keeps T77 partial."
+  },
+  "expectedChange": {
+    "insert": "T94 immediately after T93 and before T77",
+    "T93Status": "passed_with_gaps",
+    "T94Status": "planned_not_started",
+    "nextTask": "T94",
+    "nextUnallocatedNumericId": 95
+  },
+  "note": "STATUS.md and work/task-registry-r15.json were dirty/untracked shared user WIP at T93 start; their T93 delta will be left unstaged."
+}

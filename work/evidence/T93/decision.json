@@ -1,0 +1,24 @@
+{
+  "revision": "T93-decision-v1",
+  "task": "T93",
+  "result": "no_exact_source_found",
+  "taskStatus": "passed_with_gaps",
+  "visualGate": "partial; T77 must not describe latissimus surface coverage as resolved until bounded follow-up reaches an exact source/rights/frame disposition.",
+  "basis": [
+    "BodyParts3D R4 official metadata gap is confirmed by T73 actual six-table search and matrix.",
+    "Z-Anatomy official metadata confirms the generic anatomical term TA2ID 2231 but opened source inventory does not identify a corresponding mesh object, path, member hash, source-side/part, unit, frame, or rest pose.",
+    "Z-Anatomy license is stated generally as CC BY-SA 4.0 while its attribution file separately lists BodyParts3D CC BY-SA 2.1 Japan and other mixed third-party components; there is no object-specific license/ancestry association.",
+    "The official first-party MuscularSystem100.fbx inventory is aggregate-only at the opened level; no internal object locator or per-object rights/frame fields are exposed.",
+    "The opened HRA CCF 3D reference inventory does not list a latissimus muscle."
+  ],
+  "candidateRemains": "Yes, at package level only: pinned Z-Anatomy repository/archive and the first-party app’s aggregate MuscularSystem100.fbx distribution remain candidates for exact-member resolution. Neither is an exact source object finding.",
+  "followUpTask": "T94",
+  "registryPosition": "after T93 and before T77",
+  "followUpKind": "bounded exact-component/source-rights/frame registration-feasibility; no body-wide ingest",
+  "downloadedArchiveOrMesh": false,
+  "newAnatomyOrMeshOrCanonicalIdOrBindingOrUi": false,
+  "humanReviewPromoted": false,
+  "rightsHoldPromoted": false,
+  "t50FrameCompatibility": "unverified",
+  "attribution": "Per-object attribution unresolved; preserve repository-level source acknowledgements as internal metadata only."
+}

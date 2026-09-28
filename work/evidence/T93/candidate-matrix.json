@@ -1,0 +1,138 @@
+{
+  "revision": "T93-candidate-matrix-v1",
+  "targetScope": "T73-frozen bilateral visual target “latissimus dorsi”; no canonical ID, side-specific concept, geometry, or binding is created here.",
+  "accessedAtLocal": "2026-09-28T10:07:20+09:00",
+  "candidates": [
+    {
+      "candidateId": "ZA-MODELS-PINNED",
+      "source": "Z-Anatomy official Models-of-human-anatomy repository",
+      "primarySource": true,
+      "urls": [
+        "https://github.com/Z-Anatomy/Models-of-human-anatomy/tree/c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+        "https://github.com/Z-Anatomy/Models-of-human-anatomy/blob/c7010a903b75a2fd24a13b1c2c4c3546a9223780/License.txt",
+        "https://raw.githubusercontent.com/Z-Anatomy/Models-of-human-anatomy/master/TA2.csv",
+        "https://github.com/Z-Anatomy/Models-of-human-anatomy/blob/master/Z-Anatomy.zip"
+      ],
+      "releaseOrVersion": "No release/tag/version exposed in reviewed repository pages. Repository-history page showed full commit c7010a903b75a2fd24a13b1c2c4c3546a9223780 dated 2026-09-08. Commit is recorded as a pinned snapshot; current master == that commit was not asserted.",
+      "exactSourceTerm": {
+        "id": "TA2ID 2231",
+        "english": "Latissimus dorsi muscle",
+        "latin": "Musculus latissimus dorsi",
+        "locator": "opened raw TA2.csv line 2329 on mutable master",
+        "notAnFmaOrMeshId": true
+      },
+      "exactGeometryObject": {
+        "archivePath": "Z-Anatomy.zip at repository root",
+        "listedSize": "82.7 MB on opened master file page",
+        "internalMemberPath": null,
+        "objectId": null,
+        "officialPerObjectHash": null,
+        "exactTargetMeshDirectlyEstablished": false,
+        "reason": "Opened first-party metadata exposes a nomenclature row and a whole atlas archive, but no target-to-mesh locator or archive-member inventory. The commit-pinned archive page request was unavailable to the web reader; no archive was fetched."
+      },
+      "sourceAncestry": {
+        "packageLevel": "README says repository models derive from BodyParts3D and its definitions rely heavily on Wikipedia.",
+        "targetObjectLevel": "Unknown; no target mesh was located, so neither exact upstream BODY PARTS object relation nor an independent underlying work is established."
+      },
+      "sideAndPart": {
+        "sourceLabelSide": null,
+        "partOrHead": null,
+        "targetCoverage": "T73 requests bilateral latissimus dorsi visual target; the source metadata row is generic, not side-specific. No mirroring or bilateral source representation is inferred."
+      },
+      "unitFrameRestPose": {
+        "unit": null,
+        "coordinateFrame": null,
+        "restPose": null,
+        "compatibleWithT50": false,
+        "compatibilityState": "unverified; shared BodyParts3D ancestry at repository level does not prove unchanged transforms, scale, frame, or pose for a derived/re-exported object."
+      },
+      "geometryGranularity": "Whole atlas archive is listed; separate object granularity and target topology are unavailable from inspected metadata.",
+      "rights": {
+        "repositoryStatement": "General repository content is stated CC BY-SA 4.0 with attribution and share-alike terms.",
+        "namedModelAncestry": "License file separately attributes BodyParts3D as CC BY-SA 2.1 Japan and Z-Anatomy as CC BY-SA 4.0; it also lists other third-party sources including CC BY 4.0, CC BY-NC-SA 4.0, and CC BY-NC 4.0.",
+        "targetComponentLicense": null,
+        "localTechnicalUse": "No target component-specific determination; existing project rights hold remains unchanged.",
+        "redistribution": "held; no per-object lineage/license/attribution match."
+      },
+      "officialHashes": {
+        "repositoryCommit": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+        "archiveOrMeshHash": null,
+        "reason": "Git commit pins repository state only; no official object/archive-member content digest was shown in inspected source pages."
+      },
+      "attribution": "Repository-level attribution names BodyParts3D/DBCLS and Z-Anatomy plus other component sources. Exact attribution for a latissimus object is unresolved."
+    },
+    {
+      "candidateId": "ZA-MUSCULARSYSTEM-FBX",
+      "source": "Z-Anatomy app repository model distribution",
+      "primarySource": true,
+      "urls": [
+        "https://github.com/LluisV/Z-Anatomy",
+        "https://github.com/LluisV/Z-Anatomy/tree/PC-Version/Resources/Models/FBX"
+      ],
+      "releaseOrVersion": "The opened directory is branch PC-Version; exact commit/release not exposed by the directory view.",
+      "exactAssetPath": "Resources/Models/FBX/MuscularSystem100.fbx",
+      "assetHash": null,
+      "exactInternalObjectNameOrId": null,
+      "exactLatissimusObjectEstablished": false,
+      "sourceAncestry": "Official app repository describes Z-Anatomy project model distribution; no per-object source mapping opened. Do not count this as independent geometry from the official Z-Anatomy atlas.",
+      "sidePartUnitFramePose": {
+        "side": null,
+        "part": null,
+        "unit": null,
+        "frame": null,
+        "restPose": null
+      },
+      "rights": {
+        "repositoryReadme": "CC BY-SA 4.0 statement for the work/app.",
+        "assetSpecificLicense": null,
+        "underlyingComponentLicense": "not exposed at object level; upstream Z-Anatomy license file cites mixed source ancestry."
+      },
+      "access": "Directory listing only; the FBX binary was not opened or downloaded."
+    },
+    {
+      "candidateId": "HRA-CCF-3D-REFERENCE-LIBRARY",
+      "source": "HuBMAP CCF/Human Reference Atlas 3D Reference Object Library",
+      "primarySource": true,
+      "url": "https://hubmapconsortium.github.io/ccf/pages/ccf-3d-reference-library.html",
+      "edition": "v1.0/v1.1/v1.2 references are listed; original library page dates first 11 GLB organs to 2021-03-12.",
+      "exactLatissimusObject": false,
+      "reason": "Opened inventory lists organs/organ systems and extraction-site references, not an isolated skeletal muscle/latissimus entry. No candidate geometry path or target object was found in the listed inventory.",
+      "sourceAncestry": "Visible Human male/female data are named as initial bases; this is a separate inventory but no target-specific member exists here.",
+      "sidePartUnitFramePose": {
+        "side": null,
+        "part": null,
+        "unit": null,
+        "frame": null,
+        "restPose": null
+      },
+      "rights": {
+        "libraryLevel": "CC BY 4.0 for CCF reference objects",
+        "targetComponentLicense": null
+      },
+      "hash": null,
+      "access": "Opened official inventory page only; no model downloaded."
+    },
+    {
+      "candidateId": "BODYparts3d-R4-OFFICIAL-INVENTORY",
+      "source": "Official BodyParts3D Release 4.0 metadata already cached and audited in T73",
+      "primarySource": true,
+      "evidence": [
+        "work/evidence/T73/source-research.json",
+        "work/evidence/T73/target-source-matrix.json"
+      ],
+      "edition": "BodyParts3D R4; source metadata table hashes and the zero string-match result are in T73 evidence.",
+      "exactTargetConceptOrFj": false,
+      "reason": "All six official cached R4 metadata tables contain zero latissimus/dorsi matches. T73 matrix explicitly records no FMA/FJ/member/hash. This is a metadata absence, not an acquisition failure.",
+      "candidateForAlternateSource": false
+    },
+    {
+      "candidateId": "LIFTLAB-SEARCH-SNIPPET",
+      "source": "Third-party derivative result surfaced by search indexing only",
+      "primarySource": false,
+      "url": "https://github.com/Schmiedey/liftlab/blob/main/public/models/ATTRIBUTION.md",
+      "status": "unopened_index_only",
+      "use": "Not used as source evidence. It cannot establish the upstream exact object/path/hash/license or anatomical independence."
+    }
+  ],
+  "interpretation": "The official Z-Anatomy atlas is a verifiable package-level lead, but not an exact target mesh candidate from its opened inventories. No primary source exposed an isolated target object, object ID/path, per-object hash, source-side/part, unit/frame/rest pose, or component-specific rights."
+}

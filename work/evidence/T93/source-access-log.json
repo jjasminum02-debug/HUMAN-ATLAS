@@ -1,0 +1,86 @@
+{
+  "revision": "T93-primary-source-access-v1",
+  "accessedAtLocal": "2026-09-28T10:07:20+09:00",
+  "accessBoundary": "Search/index results were discovery only. The facts below marked opened_primary were read from the original first-party repository or official inventory page. No archive, mesh, FBX, or model download was made.",
+  "events": [
+    {
+      "id": "search-z-anatomy-repository",
+      "kind": "search_index_only",
+      "query": "Z-Anatomy official GitHub repository anatomy 3D model license latissimus dorsi",
+      "url": "https://github.com/Z-Anatomy/Models-of-human-anatomy",
+      "resultUse": "Discovery only; followed to the official repository and opened its README/license pages."
+    },
+    {
+      "id": "za-models-repository-pinned",
+      "kind": "opened_primary",
+      "url": "https://github.com/Z-Anatomy/Models-of-human-anatomy/tree/c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+      "locator": "repository root, README section describing model ancestry, asset files, license and attributions; commit c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+      "edition": "No release/tag/version label exposed in inspected tree. Accessible repository history listed commit c7010a9 (full SHA above), dated 2026-09-08. Treat that SHA as a pinned snapshot, not an asserted current branch HEAD.",
+      "method": "Opened GitHub HTML repository tree and README at the explicit commit URL; accessed 2026-09-28 local time."
+    },
+    {
+      "id": "za-license-pinned",
+      "kind": "opened_primary",
+      "url": "https://github.com/Z-Anatomy/Models-of-human-anatomy/blob/c7010a903b75a2fd24a13b1c2c4c3546a9223780/License.txt",
+      "locator": "MODELS, DEFINITIONS and CODE OF APP attribution sections; license section",
+      "method": "Opened official source file at exact commit. It states a general CC BY-SA 4.0 license and separately attributes BodyParts3D CC BY-SA 2.1 Japan, Z-Anatomy CC BY-SA 4.0, and other component sources including CC BY and NC licenses."
+    },
+    {
+      "id": "za-ta2-term",
+      "kind": "opened_primary_metadata",
+      "url": "https://raw.githubusercontent.com/Z-Anatomy/Models-of-human-anatomy/master/TA2.csv",
+      "locator": "line 2329 in opened raw view: TA2ID 2231, English “Latissimus dorsi muscle”, Latin “Musculus latissimus dorsi”",
+      "edition": "The commit-specific GitHub view request was not served by the web reader (cache miss); the opened file URL uses mutable master. Repository history separately exposed pinned c7010a9 but exact file-to-commit association could not be re-read from a commit-pinned CSV view. Do not treat TA2ID as FMA/FJ or mesh object ID.",
+      "method": "Opened the raw first-party CSV page and inspected the exact line; no CSV download."
+    },
+    {
+      "id": "za-archive-root",
+      "kind": "opened_primary_asset_listing",
+      "url": "https://github.com/Z-Anatomy/Models-of-human-anatomy/blob/master/Z-Anatomy.zip",
+      "locator": "repository-root file listing “Z-Anatomy.zip”; GitHub page lists 82.7 MB and says the file is too large to display",
+      "edition": "Master file page. Pinned blob URL at c7010a9 was requested, but the web reader returned cache miss.",
+      "objectLocator": "Only archive path is exposed. Internal file/object/mesh path, ID, per-object hash and object list are not exposed on the opened page.",
+      "method": "Opened GitHub HTML metadata page only. Did not click Raw/Download and did not fetch the archive."
+    },
+    {
+      "id": "za-app-fbx-inventory",
+      "kind": "opened_first_party_distribution_inventory",
+      "url": "https://github.com/LluisV/Z-Anatomy/tree/PC-Version/Resources/Models/FBX",
+      "locator": "FBX directory listing, entry MuscularSystem100.fbx",
+      "edition": "Branch PC-Version; exact commit/release is not exposed by the opened directory page.",
+      "objectLocator": "An aggregate muscular-system FBX filename is exposed; internal object names/IDs and per-object paths are not listed.",
+      "method": "Opened the directory listing reached from the Z-Anatomy app repository README. Did not open/download the FBX."
+    },
+    {
+      "id": "hra-3d-reference-library",
+      "kind": "opened_primary_inventory",
+      "url": "https://hubmapconsortium.github.io/ccf/pages/ccf-3d-reference-library.html",
+      "locator": "Overview lines 13–22, model inventory lines 23 onward, licenses/citations lines 659–689",
+      "edition": "CCF 3D Reference Object Library v1.0, v1.1, v1.2 citations are exposed; original description says 11 reference organs available in GLB from 2021-03-12.",
+      "result": "Listed inventory consists of reference organs/organ systems and extraction sites. No latissimus dorsi or skeletal-muscle standalone model is listed. CC BY 4.0 applies to CCF reference objects; no target component exists here to assign that license to.",
+      "method": "Opened first-party HuBMAP CCF library page; no GLB downloaded."
+    },
+    {
+      "id": "bodyparts3d-r4-gap",
+      "kind": "reopened_local_prior_primary-evidence",
+      "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/README_e.html",
+      "locator": "work/evidence/T73/source-research.json and target-source-matrix.json; six cached official R4 metadata tables searched; zero latissimus/dorsi matches",
+      "edition": "BodyParts3D Release 4.0 (historical 3D data date 2013-06-19; present README/license page updates are distinct)",
+      "method": "Read actual project evidence and hashes; no new source request or download. This confirms an edition metadata gap, not a failed download."
+    },
+    {
+      "id": "search-third-party-liftlab",
+      "kind": "search_index_only_unopened_secondary",
+      "query": "site:github.com Z-Anatomy latissimus dorsi FMA",
+      "url": "https://github.com/Schmiedey/liftlab/blob/main/public/models/ATTRIBUTION.md",
+      "resultUse": "Search snippet describes downstream supplementary meshes attributed to Z-Anatomy. This is a derivative inventory, not a primary source; not opened and not used to establish target identity, ancestry, rights, or object path."
+    },
+    {
+      "id": "search-third-party-guide",
+      "kind": "search_index_only_unopened_secondary",
+      "query": "Z-Anatomy official GitHub repository anatomy 3D model license latissimus dorsi",
+      "url": "https://github.com/pedram-fm/human-anatomy/blob/main/MODEL_SETUP.md",
+      "resultUse": "Search snippet lists latissimus among desired muscles for a downstream app. Not opened and not used as source evidence."
+    }
+  ]
+}
