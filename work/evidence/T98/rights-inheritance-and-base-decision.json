@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0.0",
+  "task": "T98",
+  "status": "source_family_rights_documented_file_lineage_unresolved",
+  "retrievedDate": "2026-09-28",
+  "sources": [
+    {
+      "sourceFamily": "Z-Anatomy model/content",
+      "url": "https://github.com/Z-Anatomy/Models-of-human-anatomy/blob/c7010a903b75a2fd24a13b1c2c4c3546a9223780/Readme.md",
+      "version": "commit c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+      "locator": "Readme.md, LICENSE and ATTRIBUTIONS > MODELS",
+      "access": "pinned GitHub source page opened; pinned archive bytes already held locally from T97",
+      "claim": "README states Z-Anatomy code and content are CC BY-SA 4.0 and identifies BodyParts3D as an original model source; it lists additional included/adapted models separately.",
+      "sourceObjectAncestryResolved": false,
+      "fileLevelRights": "not individually resolved",
+      "localUseRights": "not promoted",
+      "redistributionRights": "held"
+    },
+    {
+      "sourceFamily": "BodyParts3D R4 metadata/cache",
+      "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+      "version": "official page last updated 2025-02-27; current retrieval 2026-09-28",
+      "locator": "License to Use This Database, lines 25-40",
+      "access": "official LSDB page opened; local R4 source cache and legacy OBJ headers separately read",
+      "claim": "Current database page states CC BY 4.0 and its attribution; the local R4 OBJ headers retain a CC BY-SA 2.1 Japan statement, as already recorded by T104.",
+      "sourceObjectAncestryResolved": false,
+      "fileLevelRights": "header/current database terms conflict retained",
+      "localUseRights": "existing T104 subset result only; no T98 promotion",
+      "redistributionRights": "held_pending_file_level_reconciliation"
+    }
+  ],
+  "zAnatomyReadmeRightsGroups": [
+    {
+      "sourceGroup": "general Z-Anatomy content and code per README",
+      "statedLicense": "CC BY-SA 4.0",
+      "objectMembership": "not derived from names; requires object-to-upstream source lineage",
+      "status": "source-family statement only"
+    },
+    {
+      "sourceGroup": "BodyParts3D original model attribution cited by Z-Anatomy",
+      "statedLicenseInZAnatomyREADME": "CC BY-SA 2.1 Japan",
+      "separateCurrentDatabasePage": "CC BY 4.0",
+      "objectMembership": "per-object source ID/crosswalk not recovered from .blend inventory",
+      "status": "hold; preserve both observations"
+    },
+    {
+      "sourceGroup": "Brainder and White matter from University of Washington",
+      "statedLicenseInZAnatomyREADME": "none stated in attribution bullet",
+      "status": "no object lineage or separate license review; held"
+    },
+    {
+      "sourceGroup": "Cranial Nerves and Foramina, University of Dundee CAHID",
+      "statedLicenseInZAnatomyREADME": "CC BY 4.0",
+      "objectMembership": "must be tied to exact source object, not lexical name alone",
+      "status": "exception family; held until object lineage is linked"
+    },
+    {
+      "sourceGroup": "Anatomy of the Inner Ear, University of Dundee School of Medicine",
+      "statedLicenseInZAnatomyREADME": "CC BY-NC-SA 4.0",
+      "objectMembership": "must be tied to exact source object, not lexical name alone",
+      "status": "noncommercial exception family; held"
+    },
+    {
+      "sourceGroup": "Kidney, Lissie Cowley",
+      "statedLicenseInZAnatomyREADME": "CC BY-NC 4.0",
+      "objectMembership": "must be tied to exact source object, not lexical name alone",
+      "status": "noncommercial exception family; held"
+    },
+    {
+      "sourceGroup": "Wikipedia definitions",
+      "statedLicenseInZAnatomyREADME": "CC BY-SA 3.0",
+      "applicationScope": "definitions/text attribution; not a 3D model license",
+      "status": "not applied to geometry"
+    },
+    {
+      "sourceGroup": "Z-Anatomy template code member __init__.py",
+      "memberSha256": "bd4df0dd92872bd07d9d883d7c724584b72640a016df8d067fc7c5c3d5d85306",
+      "localHeader": "GPL version 3 or later",
+      "READMEStatement": "general code/content CC BY-SA 4.0",
+      "status": "code member license wording conflict; code is not geometry and was not executed"
+    }
+  ],
+  "baseDecision": {
+    "productionBase": null,
+    "status": "undecided_evaluated_conversion_gate_failed",
+    "leadCandidate": "Z-Anatomy pinned model",
+    "leadCandidateReason": "single source package has a broad named Object/Collection tree (7,184 Objects, 2,910 Mesh datablocks); 430/542 target records have at least one lexical-name candidate, but every such candidate remains unconfirmed and exact TA2-to-object joins are 0. Evaluated surface, transform/frame/pose and export cost are unverified",
+    "comparisonCandidate": "BodyParts3D R4 plus existing project extensions",
+    "comparisonCandidateReason": "has an existing validated subset conversion/scene path and 721 cached files, but T96 candidate crosswalk is lexical only and no whole-body evaluator/base completeness comparison exists",
+    "notComparedAsEquivalent": ["source geometry resource counts", "evaluated triangles", "units/frame/rest pose", "laterality after evaluation", "license membership per object", "render cost", "whole-body surface coverage"],
+    "animationReadiness": "not_established; serialized animation pointers do not prove a usable rig or deformations",
+    "nextUnit": "verified-evaluated-exporter-and-12-object-preview"
+  }
+}

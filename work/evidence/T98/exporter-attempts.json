@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "task": "T98",
+  "status": "no_trusted_evaluated_exporter_verified",
+  "sourceOpenedBySuccessfulBlenderProcess": false,
+  "embeddedScriptsAddonsDriversExecuted": false,
+  "sourceReacquired": false,
+  "environmentProbe": {
+    "method": "shutil.which and importlib.util.find_spec; read-only",
+    "executables": {"blender": null, "blender-launcher": null, "docker": null, "podman": null, "assimp": null},
+    "pythonModules": {"bpy": false, "trimesh": false, "assimp_py": false, "open3d": false},
+    "existingMountedBinaryFileType": "Mach-O 64-bit arm64 at /Volumes/Blender/Blender.app/Contents/MacOS/Blender"
+  },
+  "attempts": [
+    {
+      "attemptId": "T98-BLENDER-5.2.2-DIRECT-APP-OPEN",
+      "tool": "Blender 5.2.2 LTS macOS arm64",
+      "binaryPath": "/Volumes/Blender/Blender.app/Contents/MacOS/Blender",
+      "toolReceipt": "work/evidence/T97/blender-tool-current.json",
+      "dmgSha256": "dc4125399b8bfefe283cc1624d6cfc7809d1cac20ace51072127eb371f31f210",
+      "command": "\"/Volumes/Blender/Blender.app/Contents/MacOS/Blender\" --factory-startup --disable-autoexec \"atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Startup.blend\"",
+      "backgroundMode": false,
+      "autoexecDisabled": true,
+      "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+      "exitCode": 134,
+      "capturedOutput": "ArchWarn: ARCH_CACHE_LINE_SIZE != Arch_ObtainCacheLineSize()\nFunction: Arch_ValidateAssumptions\nFile: /Users/brecht/dev/build_darwin/deps/build/usd/src/external_usd/pxr/base/arch/assumptions.cpp\nLine: 155",
+      "result": "process abort before successful scene load or exporter execution; no output surface",
+      "followupRetries": 0
+    },
+    {
+      "attemptId": "T97-PREVIOUS-OFFICIAL-BLENDER-STARTUP-ATTEMPTS",
+      "sourceEvidence": "work/evidence/T97/blender-load-attempts.json",
+      "versions": ["3.5.0", "3.5.1", "5.2.2 LTS"],
+      "backgroundFactoryAutoexecDisabledExitCodes": [139, 139, 139],
+      "5_2_2CleanScenePreviewExitCode": 139,
+      "failureTrace": "Metal GPU backend support detection from wm_homefile_read before Python output",
+      "classification": "historical attempts reused; not rerun"
+    }
+  ],
+  "packageEvidence": {
+    "archivePath": "atlas-data/source-cache/z-anatomy/t97/Z-Anatomy.zip",
+    "archiveSha256": "e029688545627bd0214b269e1063143abb580aad72b2c2445d6d8a9a0d9da736",
+    "internalEntryCount": 7,
+    "internalFileCount": 6,
+    "sourceBlendCount": 1,
+    "separateObjOrFbxExporterMember": false,
+    "note": "Package contains Startup.blend, template scripts, appearance XML, and image; no trusted pre-exported evaluated geometry source was found in the pinned package inventory."
+  },
+  "rawArrayPreview": {
+    "t97Evidence": "work/evidence/T97/surface-preview.json",
+    "classification": "serialized raw mesh arrays and saved object matrices only; not evaluated modifier/dependency-graph export; not accepted for the T98 evaluated-surface gate"
+  },
+  "decision": {
+    "evaluatedExportVerified": false,
+    "representativePreviewGenerated": false,
+    "baseSelectionAllowed": false,
+    "nextUnit": "verified-evaluated-exporter-and-12-object-preview"
+  }
+}

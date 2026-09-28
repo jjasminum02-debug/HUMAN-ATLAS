@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "task": "T98",
+  "commands": [
+    {
+      "command": "python3 work/evidence/T98/inspect_t98_blend.py",
+      "exitCode": 0,
+      "result": "7184 serialized Object rows, exact 12-object candidate set; no Blender load/evaluated export",
+      "rawInventorySha256": "f2e87b76af094d899a5e7591920143589f8c13747edd25d01bc490c1142be038",
+      "candidateFreezePath": "work/evidence/T98/representative-sample-freeze.json"
+    },
+    {
+      "command": "python3 work/evidence/T98/reconcile_t96_targets.py",
+      "exitCode": 0,
+      "result": "542 targets, 563 memberships, 12 regions reconciled; 430 Z-Anatomy name candidate target records, 236 prior BP3D lexical candidate target records, zero exact source joins",
+      "outputPath": "work/evidence/T98/target-reconciliation-t98.json",
+      "outputSha256": "d0144ad90335fd40b4403946064fb9ac2d5585cef230783a52418f9dbde651f1"
+    },
+    {
+      "command": "python3 work/evidence/T98/validate_t98.py",
+      "exitCode": 0,
+      "result": "17/17 checks passed; exporter/base gate remains false",
+      "outputPath": "work/evidence/T98/validation.json"
+    },
+    {
+      "command": "python3 work/tools/sync_execution.py",
+      "exitCode": 0,
+      "result": "Updated 2 execution views from 540ad422747a"
+    },
+    {
+      "command": "python3 work/tools/sync_execution.py --check",
+      "exitCode": 0,
+      "result": "Execution projections match; no writes."
+    },
+    {
+      "command": "direct official Blender 5.2.2 app binary with --factory-startup --disable-autoexec and pinned Startup.blend path",
+      "exitCode": 134,
+      "result": "abort at USD Arch_ValidateAssumptions before scene load/export; captured in exporter-attempts.json"
+    }
+  ],
+  "applicationBuildOrBrowser": {
+    "run": false,
+    "reason": "T98 changes no application/runtime code; the only Blender exporter attempt did not load the source, so no fabricated geometry preview or browser claim was made."
+  }
+}

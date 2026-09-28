@@ -1,0 +1,3787 @@
+{
+  "task": "T98",
+  "revision": "T98-start-baseline-v1",
+  "capturedAtLocalDate": "2026-09-28",
+  "head": "703655a31e74bd509dc2d0992b43f7d99c867520",
+  "statusPathCount": 209,
+  "statusPorcelainSha256": "c02259feb4c60804b478084d7e5cbb42ba6f3fedcbaa154587979b855a81803f",
+  "stagedPathCount": 0,
+  "protectedInputs": {
+    "AGENTS.md": {
+      "bytes": 9579,
+      "sha256": "2881ad91a3a2bdcfea5753137334f7ae66a92941f4682bf1efd6566cd003dea7"
+    },
+    "atlas-data/catalog/target-scope-t96.json": {
+      "bytes": 1771036,
+      "sha256": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24"
+    },
+    "atlas-data/manifests/bodyparts3d-r4-t101/integration-extension.json": {
+      "bytes": 26715,
+      "sha256": "536f878da9f10d002b3feabcd28a14fe617ac620f3dbe2c2183b2f4619471c06"
+    },
+    "atlas-data/manifests/bodyparts3d-r4-t101/source-manifest.json": {
+      "bytes": 67526,
+      "sha256": "f7ccc1a0ef9c9f8d8483c48276ef6aafabd49d69fe8323c237d940864c0e93ef"
+    },
+    "atlas-data/manifests/bodyparts3d-r4-t102/integration-extension.json": {
+      "bytes": 27263,
+      "sha256": "7280e050b4b0ce81e68ce6096bba007949ad56cebabfab7319a582d6157113d8"
+    },
+    "atlas-data/manifests/bodyparts3d-r4-t102/source-manifest.json": {
+      "bytes": 72419,
+      "sha256": "6c008b98a8d666b1895075b6f0e6c1598507a5a1cdc53fe5b3a454d4630dfb88"
+    },
+    "atlas-data/manifests/bodyparts3d-r4-t103/integration-extension.json": {
+      "bytes": 28226,
+      "sha256": "7381138c4be139c8089c6e5371d2bd95285a5f1a0eb55950a7ec35a349a4bdd8"
+    },
+    "atlas-data/manifests/bodyparts3d-r4-t103/source-manifest.json": {
+      "bytes": 82250,
+      "sha256": "ccfd771e561b885770ab38a529c50c3e6b2ff2ddfc63a86a7877e34f3c1e6ec6"
+    },
+    "atlas-data/manifests/bodyparts3d-r4-t104/integration-extension.json": {
+      "bytes": 26438,
+      "sha256": "703dafddbcdbece1825b7d79a6c05e801a86c4b466877aac90bf45b2f7cad22d"
+    },
+    "atlas-data/manifests/bodyparts3d-r4-t104/source-manifest.json": {
+      "bytes": 64099,
+      "sha256": "da51da196fc6300eebcd03a5147a078edf717be3b6dbd46a76cb17361b0f18de"
+    },
+    "atlas-data/manifests/bodyparts3d-r4-t77/display-policy.json": {
+      "bytes": 294269,
+      "sha256": "eeea154883f4887c4d4c8bd75ddca98ab0767db3bb486bc4e511f03d363fb19d"
+    },
+    "atlas-data/manifests/bodyparts3d-r4-t77/input-lock.json": {
+      "bytes": 7026,
+      "sha256": "61db2b8983821a276d78922ae481db31d532ef15f7bbd4407395543a1b240c99"
+    },
+    "atlas-data/manifests/bodyparts3d-r4-t79/integration-extension.json": {
+      "bytes": 25720,
+      "sha256": "fea29a0d062656118d53345e445395568f34f9ec429f6bc82d78e3a0bc2749bf"
+    },
+    "atlas-data/manifests/bodyparts3d-r4-t79/source-manifest.json": {
+      "bytes": 66490,
+      "sha256": "a7cf32bb9281b181152e54574d71db46c51c2a0e3ac22e22ca2065d2adf55546"
+    },
+    "atlas-data/manifests/region-packages-t96.json": {
+      "bytes": 8640,
+      "sha256": "fd0c05378a9284efec6b5197b1c37bae5dad7f7540b0d40af5c3634612372766"
+    },
+    "atlas-data/manifests/region-target-packages-t96/T110.json": {
+      "bytes": 11328,
+      "sha256": "1ab48395b7e040b1bf6abbb26c0d52f1bf67411cf1113af6ebfed5602fe805e6"
+    },
+    "atlas-data/manifests/region-target-packages-t96/T111.json": {
+      "bytes": 8308,
+      "sha256": "168fb2000ed921a3c07d6fe489be290a58b439159b25c55181b3409f34637f75"
+    },
+    "atlas-data/manifests/region-target-packages-t96/T112.json": {
+      "bytes": 8597,
+      "sha256": "48272963ed6e9ef7d01a5c0988c650a275ec6e47ddf518eba4ba45ef13abfd59"
+    },
+    "atlas-data/manifests/region-target-packages-t96/T113.json": {
+      "bytes": 5406,
+      "sha256": "3380ade0b20aeaf08f0b4a80e01ebc2148b79a6882634f437c481114d5261343"
+    },
+    "atlas-data/manifests/region-target-packages-t96/T114.json": {
+      "bytes": 7183,
+      "sha256": "f108ce894be3209081fbef4b35080520f63e93f6956c5ba3c1209d9f2036370a"
+    },
+    "atlas-data/manifests/region-target-packages-t96/T115.json": {
+      "bytes": 4931,
+      "sha256": "96c92d1234dc041be24df33497a04da5827bdd01c7a9b055f96a9af5247f6d84"
+    },
+    "atlas-data/manifests/region-target-packages-t96/T116.json": {
+      "bytes": 6563,
+      "sha256": "dfaf2843baf01015ca25c1ef523722d9e4c24cb9895dfdd9411ce9bb1c9d5401"
+    },
+    "atlas-data/manifests/region-target-packages-t96/T117.json": {
+      "bytes": 5441,
+      "sha256": "1189ad177ad3c00f5b15e14b40350fec307aaeb9e8a724801b5b553f5325f744"
+    },
+    "atlas-data/manifests/region-target-packages-t96/T118.json": {
+      "bytes": 6185,
+      "sha256": "1a121cc6b3c0f8b0a37917e447d5f3f55f67120d6ce97e87c9b477aef574a255"
+    },
+    "atlas-data/manifests/region-target-packages-t96/T119.json": {
+      "bytes": 5928,
+      "sha256": "f77fd9316e2549c59fa915df3f1ceb9068dbb895bc0a17c7c22825df340654b5"
+    },
+    "atlas-data/manifests/region-target-packages-t96/T120.json": {
+      "bytes": 6782,
+      "sha256": "c897264541685078eeaef4c9e95b497910fcb37140cdb848cf21c99401cfd0f8"
+    },
+    "atlas-data/manifests/region-target-packages-t96/T121.json": {
+      "bytes": 9824,
+      "sha256": "c4f3757f7c87fac27cc7f3df8b23d413d50e6f34bf23cb549e07b47b4663ebbf"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/README.md": {
+      "bytes": 2458,
+      "sha256": "259ae0dfed5611bd961133c75045efb251efb8d7209bce409ccda60bb68c43f3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/cache-index.json": {
+      "bytes": 19769,
+      "sha256": "c39e6a7a7f18660bfcbff65b88788cbbcd149f3e6bccde0567c275f9f99856df"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t101/manifest.json": {
+      "bytes": 23918,
+      "sha256": "6a4038bbb4ef97e867b3f5d554196f09d2cff5cd50cbcf7ae1e3904bbe3a8893"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t101/t101-lower-limb-muscle.glb": {
+      "bytes": 629336,
+      "sha256": "bffce0beacad6feede926b5de0e81c773cfc51ae1aca45e367c3868b638ab859"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t102/manifest.json": {
+      "bytes": 23819,
+      "sha256": "9d887a88b9e0519bd59664c447ddd6a061ef7461c70508a9986f7b832ff1e9a7"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t102/t102-lower-limb-muscle.glb": {
+      "bytes": 812256,
+      "sha256": "64c42361163c9e1f50f0a0b700436526f4253f2c84a8407e1cd2478448656759"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t103/manifest.json": {
+      "bytes": 24115,
+      "sha256": "c891515d921eadffa7c021aa78e249135f497fcea2d004af731ebe5080c9ff49"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t103/t103-upper-limb-muscle-parts.glb": {
+      "bytes": 391484,
+      "sha256": "4e3e72520c9332357502e2a01ae9bb4a39391f51870e053be30a90dfd5f434d3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t104/t104-neck-muscle-parts.glb": {
+      "bytes": 523268,
+      "sha256": "746c0ba933b6e01cbfc32a778f11c7e6a9edc1876a0a9c6252a2fc61f166b76f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t104/t104-upper-limb-muscle-parts.glb": {
+      "bytes": 157540,
+      "sha256": "8fb6e392b16f1f4935e3a139a8213abe69e0229d9c8380331f26409ac991ed6c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t51-right-lower-limb-sample.glb": {
+      "bytes": 961888,
+      "sha256": "81e1f72a2a630ae2e259ccdd2a020fb86f08c551cfaa076fbde36353a434f382"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t52/T52-B01.glb": {
+      "bytes": 628884,
+      "sha256": "e1fbf7a32584e05ccf28374c4735493dae456071184da80c3f318a8de3e4a5fc"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t52/T52-B02.glb": {
+      "bytes": 640780,
+      "sha256": "261623dcc1987bf6eb36e3614623cb0ccd1e79818a902984686f5bf8a0a5e1cf"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t52/T52-B03.glb": {
+      "bytes": 792424,
+      "sha256": "f54d017ad9ecc06a8357555a3903819c729d28895f75ebc0e8c2e5fca7768dbd"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t52/T52-B04.glb": {
+      "bytes": 1031440,
+      "sha256": "7ec6a605efefd6b97c4ce9206325f75311c6f8c1245a0918fec12adca1039b62"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t52/T52-B05.glb": {
+      "bytes": 1798796,
+      "sha256": "53cb61f31ff47c4f0a15f5033f1a23d23c288d66da59fe7721f9a4085e093fec"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t52/T52-B06.glb": {
+      "bytes": 2214320,
+      "sha256": "60032f995f0e3c57ed76ab3601a3df01a7211b17235a655b35aef178fa96591d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t52/T52-B07.glb": {
+      "bytes": 1722860,
+      "sha256": "b0d566d9a5483b7f7881e6b260d11d51b06b23e9ff78733f617d031d38a816a9"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t52/T52-B08.glb": {
+      "bytes": 1057068,
+      "sha256": "e8a2263868eeb873fa4a9b93fa0e358cd58f8a26953a3f10cff6ce2776971a79"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t52/T52-B09.glb": {
+      "bytes": 479996,
+      "sha256": "2d6cd1a1da4594e19d9993799e1247c21f88907cc79e3b18f4edf9c789b40cf5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t53/T53-trunk-pelvis-static-source.glb": {
+      "bytes": 37179596,
+      "sha256": "25b9850ded5fe6e8c38e48578ba6a4d4e617dca1169cd1c6d63dfda52814709b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t54/T54-shoulder-upper-limb-static-source.glb": {
+      "bytes": 9579756,
+      "sha256": "b114fc8644ea8de0f7d213262ebc02eb23b0e8b51d419516c0f52f03d4cf04cd"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t55/T55-bilateral-lower-limb-static-source.glb": {
+      "bytes": 5876784,
+      "sha256": "7012f34696d1156a529d6dad3bad8313af674cc4e13630a9e2fd6a325ce932b7"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/00-abdomen-lumbar-muscle-0.glb": {
+      "bytes": 4425064,
+      "sha256": "bcbfe94d450b197ea25052b7c2ab93f02c83d95349da82369157c3c3c7da003f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/01-back-bone-1.glb": {
+      "bytes": 396396,
+      "sha256": "aeea6b8a84ce38279e3f20525f0303a9d51ccfb04ad4d2a1bd7cd38d16ae9319"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/02-back-muscle-0.glb": {
+      "bytes": 7575744,
+      "sha256": "71d1428b6a7e88b100835d24542cfd6c811da29dc62fd737a5e93f1f3520cfdc"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/03-foot-bone-0.glb": {
+      "bytes": 1080644,
+      "sha256": "1dfe5c1fa5048da46454ed61a7a8d9ffadafb4bcd916711c0fac908ed4761ecc"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/04-foot-muscle-0.glb": {
+      "bytes": 956400,
+      "sha256": "3e6fdc15206363209f367293bfca8ccd8908025580d62c4677bf5f2f366e9880"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/05-gluteal-hip-bone-0.glb": {
+      "bytes": 105976,
+      "sha256": "bfb7989b87e40f425574e2888119d449efb2b44954846054d100c388baae595b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/06-gluteal-hip-muscle-0.glb": {
+      "bytes": 1214024,
+      "sha256": "4c663e7e87d6b809e0758a8b563aa7cff053cf30e6908a2275761fbcc28802b4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/07-head-bone-0.glb": {
+      "bytes": 274488,
+      "sha256": "8b6e0b68435d42eef637d5e5292db31fef0ec671e31adc5b295adc66b430d345"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/08-head-bone-1.glb": {
+      "bytes": 673436,
+      "sha256": "97bc9093fb72f9fcc05ba4b05f77ff47f9b610c121d64df027c9038c1f1cde4e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/09-head-muscle-0.glb": {
+      "bytes": 2385972,
+      "sha256": "b7eaa896da4a53326ec0c008316f8d385c9c0d5e032013f8f9900c7aa6c5ccea"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/10-leg-bone-0.glb": {
+      "bytes": 146916,
+      "sha256": "e1c683879f98f2aaf6030bddd361a76906bc7f8adcdf525a00a5b1e5a06acf1c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/11-leg-muscle-0.glb": {
+      "bytes": 2172948,
+      "sha256": "d0e3d24456085c37f8dfd5994465418ea6d49b4f99bf927ab265c75e20d8a1b5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/12-neck-bone-0.glb": {
+      "bytes": 360108,
+      "sha256": "eb793a5a92daebdbc58a5f2781d14a9eab44f7e9eb62f91d31ecd7483395bf34"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/13-neck-muscle-0.glb": {
+      "bytes": 7341968,
+      "sha256": "8c010df02b1f7beca80889b1d908cf1589491e2c93fdc973295025a0720045a3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/14-pelvis-perineum-bone-1.glb": {
+      "bytes": 199948,
+      "sha256": "3654deeba530282c206bed11e5b31586bbbbb59e4f2ce986643045d3fcf4f8d2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/15-pelvis-perineum-muscle-0.glb": {
+      "bytes": 246956,
+      "sha256": "5ef2662fb3419df8f7ef207334e6c319dad8b60f61ea3048bf6702a820b96fe8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/16-shoulder-scapular-bone-0.glb": {
+      "bytes": 1057060,
+      "sha256": "d0251207399c0ff815c5e0e2f304229b734ffd20f7c33f9cc836c991a64c8d9a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/17-shoulder-scapular-muscle-0.glb": {
+      "bytes": 3667904,
+      "sha256": "1cc956ab84e3b867d931fcdc0f1b5b10977824031eb3d507521c30da53552298"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/18-thigh-bone-0.glb": {
+      "bytes": 131992,
+      "sha256": "7be02c53820bba11d287e3987e5b4c2fc14508fc840abceb19f124ed9db2ad60"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/19-thigh-muscle-0.glb": {
+      "bytes": 1387400,
+      "sha256": "7a5aefe1d38c7dc3e6ca35bf8ddad2152222eb8d7b05980f3af262c1ea8c50d1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/20-thigh-muscle-1.glb": {
+      "bytes": 251008,
+      "sha256": "5448f594c3890bb6d32a6e36e805a24d5d4832fcdefb58fdd9de58741a1ab729"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/21-thorax-bone-0.glb": {
+      "bytes": 3932464,
+      "sha256": "c7a58c75ee759bfa2d5dfaeb9101e443eb387d69194f54955bedce82b1088b9b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/22-thorax-bone-1.glb": {
+      "bytes": 222140,
+      "sha256": "0aa5c2af238aab1561d1dd2883cc747b0181cb1465b775edfb9332f26817ae0b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/23-thorax-muscle-0.glb": {
+      "bytes": 19135448,
+      "sha256": "bff0c847cf899aa5535ccd3741802d6c637242d4b1eee30bcf93ce09d4773ed8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/24-thorax-muscle-1.glb": {
+      "bytes": 592532,
+      "sha256": "6688ae7f843515f58e2982b0223e20add5b6e8c443ab1756b143dcabb491ceb5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/25-upper-limb-bone-0.glb": {
+      "bytes": 1274260,
+      "sha256": "db6da5b530f0a5a77726dc80aea8353f5c3015b34dadc9c6b1ee0d4f0a9653a1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/26-upper-limb-muscle-0.glb": {
+      "bytes": 3575428,
+      "sha256": "3cb23fb185e06216d038307849b29a398594d1d9a281d9f3d8dafe9eefc7e6e4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t56/manifest.json": {
+      "bytes": 421216,
+      "sha256": "0b0d9867612d0b5a0b997be29654479c282719c3bfd7f0b3a53156814fb2ed7a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t71/T71-trunk-skeleton-static-source.glb": {
+      "bytes": 818652,
+      "sha256": "cd9f9ba1f0274a2b1a903fed06ca8dc714e8dd9d49ced6b4ea4500cfa0320f72"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t72/T72-first-pass-residual-static-source.glb": {
+      "bytes": 1517176,
+      "sha256": "56162acae94485b603d4d888347951733a0501b586c0400e065061ac14e02104"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t74/T74-bilateral-skull-static-source.glb": {
+      "bytes": 880992,
+      "sha256": "acf809b37410ed1e56ec2e5630bf080ac92db445a1cb0d76600315baca8c3c88"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t75/T75-deltoid-bilateral-static-source.glb": {
+      "bytes": 368224,
+      "sha256": "28784b979e83576a00ca9f67cc613d01fe4a593df4ef38b9a18b5f91511b73b5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t76/T76-pelvic-floor-static-source.glb": {
+      "bytes": 1042712,
+      "sha256": "4bde4e632ba82c17977736f0ca12dbd24b08fca86f95e71d15be6e50d2b80d7f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/00-abdomen-lumbar-muscle-0.glb": {
+      "bytes": 4425064,
+      "sha256": "bbedb32e0897fe8f09f72e4c56d29a1b75a1e788da1262d42b7eed841dabb057"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/01-back-bone-1.glb": {
+      "bytes": 396396,
+      "sha256": "c5caefb8da090f755bdc64fa8a126f08a2370b111028e2b47015718863a7675a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/02-back-muscle-0.glb": {
+      "bytes": 7575744,
+      "sha256": "cd4b4a211649281d628a040ad9dc1d9f598fa552e37e8cd4bf83abfa46a93acd"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/03-back-muscle-1.glb": {
+      "bytes": 1052564,
+      "sha256": "f94d1a7252f7f1b68411113cb6892a0f1edde25dcbc13b8df034c2371fcbf450"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/04-foot-bone-0.glb": {
+      "bytes": 1080644,
+      "sha256": "071b2bd117964711d2b082bfa7020facdaca191b3a17c1fd784593a541cacfda"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/05-foot-muscle-0.glb": {
+      "bytes": 956400,
+      "sha256": "228a35c08bcd6172094a69438c1d3a3776816153fe33e3fb20107b0882089c32"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/06-gluteal-hip-bone-0.glb": {
+      "bytes": 105976,
+      "sha256": "a38810d8b018177a6e99e37d65957c7bce5a2f5a95105ed7bc37034e50ad6d21"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/07-gluteal-hip-muscle-0.glb": {
+      "bytes": 1214024,
+      "sha256": "6b3d03454f6f9d623ce0d07428ebff334e98504b1e2fe37b4d6f39c8df4ad829"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/08-head-bone-0.glb": {
+      "bytes": 274488,
+      "sha256": "2268c124e189f302c7e88fb7538dfc17a01cccabdb11bbe00c0954ab571873c3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/09-head-bone-1.glb": {
+      "bytes": 1553636,
+      "sha256": "92238ba9e71b4a5e6dedf6dc3b78c541d8f28af2969fbb9cd4447031dc737fd2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/10-head-muscle-0.glb": {
+      "bytes": 2385972,
+      "sha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/11-leg-bone-0.glb": {
+      "bytes": 146916,
+      "sha256": "9e8e3a250afa832dcc0a21842c7e7f91a2b8be831c737abc708331c19b87ea59"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/12-leg-muscle-0.glb": {
+      "bytes": 2172948,
+      "sha256": "a2dc2c60e9fc034474b1058fb9b8924f3c27e0d2054144898d5478d59c6062b4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/13-neck-bone-0.glb": {
+      "bytes": 360108,
+      "sha256": "8058979feaf48f231e1f3f5de641d0e70aa4a93dfd4cdb27c18f9d36b34804d4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/14-neck-muscle-0.glb": {
+      "bytes": 7341968,
+      "sha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/15-pelvis-perineum-bone-1.glb": {
+      "bytes": 199948,
+      "sha256": "0fa92ba735b8a17bffda7aac43a4409d5a8d7b981941da36ceaff1fc79b5e986"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/16-pelvis-perineum-muscle-0.glb": {
+      "bytes": 246956,
+      "sha256": "4224ff1c80af3ab1bf8a99dcf795b09d138faa5ae99992e34c3af18ed2af9868"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/17-pelvis-perineum-muscle-1.glb": {
+      "bytes": 1042012,
+      "sha256": "7d00f16b933989828ba5a292be58f0bf566ee39dd141fc6b6ac1f8c11bbb7c06"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/18-shoulder-scapular-bone-0.glb": {
+      "bytes": 1057060,
+      "sha256": "c0c4bb6dcb6ec8cdbe1ead703266d8cc1798e6aefb754203328258a86fac135f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/19-shoulder-scapular-muscle-0.glb": {
+      "bytes": 3667904,
+      "sha256": "27f395d98c3f65b66478d870f45de835bbf446cbe8e478310cdc276310c4765c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/20-shoulder-scapular-muscle-1.glb": {
+      "bytes": 367460,
+      "sha256": "2cc0575971f6b4cc61b1cb452b413ddf5c7ca8a5f878299a14f166645fdf81df"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/21-thigh-bone-0.glb": {
+      "bytes": 131992,
+      "sha256": "6a7686a5eb7a4ee47be3ba4ae144ddb15b986b959cce395254d3d798ee65a1f1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/22-thigh-muscle-0.glb": {
+      "bytes": 1387400,
+      "sha256": "b3b136730a158585400be9bb1ed94de80f0a99e493d435c31084053048b75b73"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/23-thigh-muscle-1.glb": {
+      "bytes": 251008,
+      "sha256": "bd61899438436663a7bad1bfb1ec981a08f7fac1d81573c824c76917b51a672b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/24-thorax-bone-0.glb": {
+      "bytes": 3932464,
+      "sha256": "db3dca8234961a0909faa43cd1e6f5b0c9944b1de886caa86e5e5f84124e3431"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/25-thorax-bone-1.glb": {
+      "bytes": 222140,
+      "sha256": "b17e017900ae01dced43ab0679c892bf1a46485f5e6863354df8adf635902ae3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/26-thorax-muscle-0.glb": {
+      "bytes": 19135448,
+      "sha256": "5ac35caacbd632b99d44005446e3ab6f1dbade04963418ac4bf66c05a7da5590"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/27-thorax-muscle-1.glb": {
+      "bytes": 592532,
+      "sha256": "cd1bc124b663fe8a3d2cbe59776784fe933185f34a75a96c52d369fc5e271771"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/28-upper-limb-bone-0.glb": {
+      "bytes": 1274260,
+      "sha256": "7a93416e79eb28009c57bc0893ad65a39acad55879867489ff7f045907487074"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/29-upper-limb-muscle-0.glb": {
+      "bytes": 3575428,
+      "sha256": "5102fe0a1b2493f0105a35bc350882afacedcdb95188383446653ce8fade8c1b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/manifest.json": {
+      "bytes": 847446,
+      "sha256": "67a2f79b9248d18a754a6567e1b0bb4b1fce698ad0e3100a172b428ee58341f8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t79/manifest.json": {
+      "bytes": 23631,
+      "sha256": "90def72d17e9783c95f15482a9acd4676d8fe0354ad811e2ec0aa7de37204a5d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t79/t79-upper-limb-muscle.glb": {
+      "bytes": 425096,
+      "sha256": "8752f069bbfa01c8812266bd8c00f93f1076df0dbba367fa9364b660063d7b87"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t92/T92-trapezius-static-source.glb": {
+      "bytes": 1053252,
+      "sha256": "cb370f1f578017ef587e1bc859c0b4bf8c815cdcfaa0c051451e8b59ce18435d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ1394.obj": {
+      "bytes": 201640,
+      "sha256": "621dc10e974bcc1c53a8843bf1db3a1c322c8327d279010c58533bd28952bf08"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ1397.obj": {
+      "bytes": 260975,
+      "sha256": "d7f3aa44801171baade1a59c40a8f8bda72097bec07047f93f24ebaac4546cb4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ1409.obj": {
+      "bytes": 151020,
+      "sha256": "ba330adc0128b26a50b4a5bd0a0cedcd3f32dbf09ae25f4e0587949dbd9d3d11"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ1410.obj": {
+      "bytes": 304555,
+      "sha256": "40c36bc4dc24e161c84daf6e96017f9d78b4cf964579a873e267d2619be4aa2c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ1437.obj": {
+      "bytes": 307036,
+      "sha256": "c9c62b720ffe375a8eddf390608684a796f1ea54880a5c34fa440404addc399e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ1439.obj": {
+      "bytes": 213354,
+      "sha256": "b03d2f54644969d153d3dfe4025ee629858e72c1e5ee3b0e7d5f16f54dc505b3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ1440.obj": {
+      "bytes": 476926,
+      "sha256": "6fc367885524fc416139372b55c64d8e1e4bc9010bee64020a72ad8e6f34a57d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3308.obj": {
+      "bytes": 48252,
+      "sha256": "0e08f1570755a9675e2556013eda861f00f31fe7ae2139e24584129dfe78d2c2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3351.obj": {
+      "bytes": 69311,
+      "sha256": "b70e565ec8ad8c09264ae66159415ca4f0cf639598812aac6fcf7b761c3758d3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3353.obj": {
+      "bytes": 53148,
+      "sha256": "f6c034b6b18aee623f510ee40e4171346c084e8bdd092354d634c87fc9af6acf"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3355.obj": {
+      "bytes": 45924,
+      "sha256": "90b28dbcd11e3d3a6f253adb1ddaa33f30040a08c71bb3a86242372ea9b6170e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3357.obj": {
+      "bytes": 43587,
+      "sha256": "a5fd57a36b7525de383809bbbb37ff6a56a08ed0fb25af1684085418cc6e8202"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3359.obj": {
+      "bytes": 49445,
+      "sha256": "cc75b866a2d5ac0317eb3a1d64cef41a65231fab975613d108a4fcdcbc2c58b1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3360.obj": {
+      "bytes": 81782,
+      "sha256": "b53e7970e822e997e1b05f94f42514d07a3f98edcc63ec7dd7219354ce1d8176"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3364.obj": {
+      "bytes": 60077,
+      "sha256": "d5ac55e9aa466b0e14d8d7760f7ef2a6edb0d95cfea56205557f647c451a8079"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3365.obj": {
+      "bytes": 192114,
+      "sha256": "5eff0f92905dd45bd0e79b1de0144dc15988c73c683468163255ba1452d58037"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3366.obj": {
+      "bytes": 69197,
+      "sha256": "d03fee02cf8eefad1ecfcb9246e3f43ad3c4615c21ce08dc5e2b6901c6395a86"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3377.obj": {
+      "bytes": 65003,
+      "sha256": "7ae757be0a8a55129816045c2e92b32576e2c96fe3b047f7841807092b5bf8f4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3385.obj": {
+      "bytes": 89820,
+      "sha256": "8b35f0132c1a05b64f26746fdd0496a2495280cd0c2ac90dbf637fd74f79f54f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/IS-A/FJ3387.obj": {
+      "bytes": 100137,
+      "sha256": "01879d7310938e82eecc02e1115332497e94085ff5cc1fa8eeee47ad1f5d3578"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/foot/FJ1393.obj": {
+      "bytes": 188933,
+      "sha256": "4403ddd8a9fffab7fdf1cbb28fd9b90f461913bd9c28cfea23fc512844668985"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/foot/FJ1393M.obj": {
+      "bytes": 186587,
+      "sha256": "70464799f8eb4602132a0c94d955779e5a817d96dce207c7777a7e3a969eb858"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/foot/FJ1396.obj": {
+      "bytes": 102539,
+      "sha256": "778a43d6a1540626e4e13f29c75a4ec75d335abd37ee9c7fdee4eea8188116e1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/foot/FJ1396M.obj": {
+      "bytes": 101150,
+      "sha256": "9c20236d9fc8b34638f313248ec940dfa08c67718324d9cd21fed6beda989411"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/foot/FJ1398.obj": {
+      "bytes": 102344,
+      "sha256": "346020de3eb54e85a76fed52b2742fb86c596db4a413a717ce93d55a6d589b34"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/foot/FJ1398M.obj": {
+      "bytes": 101039,
+      "sha256": "b5ac05430038cb79e795e8f957219f2cb1c4a7f5c30139745a8d44f7cd562bd9"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/foot/FJ1445.obj": {
+      "bytes": 92285,
+      "sha256": "b62f353790db0c2b504f502e6fadd1be4f951290dc76bd39a8019fe202ef36c9"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/foot/FJ1445M.obj": {
+      "bytes": 90875,
+      "sha256": "35d51d3af78f7bbb4bf1bf10292f66a3c82485d66c0cdab1a38d3b0bb329b8c2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/leg/FJ1394M.obj": {
+      "bytes": 200155,
+      "sha256": "18df6c6fe718aa0d60f4a98ad9ed3dab7d95c1da0aacd641a498b97ddf31ceb6"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/leg/FJ1397M.obj": {
+      "bytes": 258641,
+      "sha256": "43545b226adb517579273570e6bcb30943c5f22a1687aba6e11d6e1634175f05"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/thigh/FJ1395.obj": {
+      "bytes": 341489,
+      "sha256": "0c22806bfd2a0f8745023a7d438250411f9d013f3d966c5c75335f5b57f8e142"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/thigh/FJ1395M.obj": {
+      "bytes": 338042,
+      "sha256": "f9b7a8bc5db9ff1c7a6dc25fb15cdac175c96d4a52ec9304709dff5468e8a11b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/thigh/FJ1441.obj": {
+      "bytes": 305079,
+      "sha256": "c609da3e64f0fc6c295b66b575503e61cacc8bfd9a5e5ec9b79e4eb476da5bab"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/thigh/FJ1441M.obj": {
+      "bytes": 302163,
+      "sha256": "5245d285eb09ba0364a1b4ad8a21a6621183310c544c412bb39542e1517815db"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/thigh/FJ1442.obj": {
+      "bytes": 464679,
+      "sha256": "f67be78d7d0ddc6e78c0683ce4bd5be7492e4137f8661bc54039cbf535a88880"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/thigh/FJ1442M.obj": {
+      "bytes": 460942,
+      "sha256": "507caa464730c508c2fd2f6958f9a5660fb6ca188bc38fafb5c9b5556ac6732b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/thigh/FJ1443.obj": {
+      "bytes": 317804,
+      "sha256": "5bdb79f52849241e20ff2280332f20efd38f1b4bda1fb1337e10a5c3e466002b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/thigh/FJ1443M.obj": {
+      "bytes": 315070,
+      "sha256": "8ca4d66734150402401722e8a82f52ada8af9d6973592e127431b742dfe46ad4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/thigh/FJ1444.obj": {
+      "bytes": 124350,
+      "sha256": "c071097501796cee5ff2a011b3d84c7bea4cb153241fce0f8b0a73d070bd990f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t101/thigh/FJ1444M.obj": {
+      "bytes": 123463,
+      "sha256": "2794a3899545d9b66f61fb9de3459132b577939c63b527fae101d497e28b154e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/foot/FJ1445.obj": {
+      "bytes": 92285,
+      "sha256": "b62f353790db0c2b504f502e6fadd1be4f951290dc76bd39a8019fe202ef36c9"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/foot/FJ1445M.obj": {
+      "bytes": 90875,
+      "sha256": "35d51d3af78f7bbb4bf1bf10292f66a3c82485d66c0cdab1a38d3b0bb329b8c2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/thigh/FJ1441.obj": {
+      "bytes": 305079,
+      "sha256": "c609da3e64f0fc6c295b66b575503e61cacc8bfd9a5e5ec9b79e4eb476da5bab"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/thigh/FJ1441M.obj": {
+      "bytes": 302163,
+      "sha256": "5245d285eb09ba0364a1b4ad8a21a6621183310c544c412bb39542e1517815db"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/thigh/FJ1442.obj": {
+      "bytes": 464679,
+      "sha256": "f67be78d7d0ddc6e78c0683ce4bd5be7492e4137f8661bc54039cbf535a88880"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/thigh/FJ1442M.obj": {
+      "bytes": 460942,
+      "sha256": "507caa464730c508c2fd2f6958f9a5660fb6ca188bc38fafb5c9b5556ac6732b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/thigh/FJ1443.obj": {
+      "bytes": 317804,
+      "sha256": "5bdb79f52849241e20ff2280332f20efd38f1b4bda1fb1337e10a5c3e466002b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/thigh/FJ1443M.obj": {
+      "bytes": 315070,
+      "sha256": "8ca4d66734150402401722e8a82f52ada8af9d6973592e127431b742dfe46ad4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/thigh/FJ1444.obj": {
+      "bytes": 124350,
+      "sha256": "c071097501796cee5ff2a011b3d84c7bea4cb153241fce0f8b0a73d070bd990f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/thigh/FJ1444M.obj": {
+      "bytes": 123463,
+      "sha256": "2794a3899545d9b66f61fb9de3459132b577939c63b527fae101d497e28b154e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1473.obj": {
+      "bytes": 196103,
+      "sha256": "ccab7efb32e7b3cfc21039a138811f2972df5f2d91d23bbdbe63f13354774795"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1473M.obj": {
+      "bytes": 194033,
+      "sha256": "d5f425f4b708deeed63146f31f6e399d7acb180c685df4bee45204154c8fb00f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1474.obj": {
+      "bytes": 151318,
+      "sha256": "589e18d8dd9eac471404fae1035b01476ed0021af1cb2822c8c759164a2a45ba"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1474M.obj": {
+      "bytes": 150642,
+      "sha256": "441ab2758c6c7f27fc5835edc070c02b2355e5222bf3a65c728853c38b424aa7"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1481.obj": {
+      "bytes": 63101,
+      "sha256": "7f95a0d24a061eefc13bbef6c842b7e685798dfd16e767b955015dafde1f858d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1481M.obj": {
+      "bytes": 62352,
+      "sha256": "6aae43f5745e133cfb7a1659dcc6d8e42e94d8772b984f1ad33d79c6a0f8397c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1514.obj": {
+      "bytes": 77954,
+      "sha256": "af5d19e0450559eaeacd54e6d332c507acc9b0dc4675311094c6c3b9c9715a71"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1514M.obj": {
+      "bytes": 77027,
+      "sha256": "f0db75e6d23cd0cf9642ae4bc28012713314678a92fc9cff7b0ce16a281990d9"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1515.obj": {
+      "bytes": 60440,
+      "sha256": "75f0a7b8130a70da1efb175638927868a2eb8d1f79916916666d100ec92190f2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1515M.obj": {
+      "bytes": 59872,
+      "sha256": "b280fa41da96bb2db519cb055f6ecaea6fe0786586db3f5d695da07a77395924"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t104/neck/FJ1557.obj": {
+      "bytes": 124773,
+      "sha256": "fbef1ad6ba831d68d0f6e51269896e5c0275193cc41b7bb4a1321257bd56e27f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t104/neck/FJ1600.obj": {
+      "bytes": 151215,
+      "sha256": "246c0e197149700a407255282bed9549927ebbad029169a936d1fe12289effe0"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t104/neck/FJ1601.obj": {
+      "bytes": 211566,
+      "sha256": "c16d1ec48c40b6f810b4ee7b81bd9af7d5a804b04eba95e6df83953e8eb1a5a3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t104/neck/FJ2774.obj": {
+      "bytes": 482718,
+      "sha256": "a7922984f588cdb61a10fd9d6bc901cf843db3520ce0a5a38ba8edfb51e05bab"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t104/neck/FJ2781.obj": {
+      "bytes": 396827,
+      "sha256": "d7b4c77ccec1ec98530377fdbac423bffda9535e39192b11442566118a63a198"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t104/neck/FJ2783.obj": {
+      "bytes": 244094,
+      "sha256": "4df0efbaea3fbb676eafc3add4a1cdd772fac352950501389f39e16f0c90e98c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t104/upper-limb/FJ1516.obj": {
+      "bytes": 77585,
+      "sha256": "62058afdb37b3637c21f7ad15fe681acced1e36c986190a692f1733cb0a79760"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t104/upper-limb/FJ1516M.obj": {
+      "bytes": 76834,
+      "sha256": "f4e663154e28ab0ad13e6c4facce145b50460bf5f2bbdb7d0199867a6d735b84"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t104/upper-limb/FJ1518.obj": {
+      "bytes": 149622,
+      "sha256": "22abf242ce9d43dd9c6e02ef297b8e5982227a7ec1c7ead965674b92b476bad2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t104/upper-limb/FJ1518M.obj": {
+      "bytes": 148069,
+      "sha256": "d3e731fc29ac9b42f06eb0a7c49979c7568813587c2b982e6c948163c02dccb8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1294.obj": {
+      "bytes": 143313,
+      "sha256": "fc7dd40ee970cbbeae8ee147d0e7638e94fb166d28d4b1e1e62314f19395d6a8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1295.obj": {
+      "bytes": 224110,
+      "sha256": "7e5c20a2e78d0d606c370a626b299d6fa9183c5be487a04dd5c760ee6ec8d801"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1304.obj": {
+      "bytes": 209042,
+      "sha256": "214943158bb5b523bd981c0040f49df1210e7d3afa6a5df861dac2b5d4436549"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1306.obj": {
+      "bytes": 281893,
+      "sha256": "114bfa94da75435db3d4afadafe060c57e0345c78e2174068ef4698a61d72e49"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1308.obj": {
+      "bytes": 159703,
+      "sha256": "98d6d7cb6842243dceacbea4c494b1554d719b7fbb76e2c90020f126beb4defe"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1322.obj": {
+      "bytes": 227279,
+      "sha256": "3a84379998b92f3c359c41426dba02b79c9fe648cfb9e3e835ce63677c9f8e9a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1323.obj": {
+      "bytes": 179094,
+      "sha256": "e79c60ca4e54078df13c609d739a09f8e83c7fddebcc79a4f03f785c006423a1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1345.obj": {
+      "bytes": 145259,
+      "sha256": "b5508969b711e3c7bbfff0fdffc7567157326ee0e88b28416326513e06263c41"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1346.obj": {
+      "bytes": 224609,
+      "sha256": "f961776090739a493c006f8933c8ded45365a86a92bdbfee2fb8dc0e35b651bc"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1355.obj": {
+      "bytes": 206490,
+      "sha256": "0e1019c51724d672a6673e97f81f3e57f41f568d5ef5d68cf024096215165797"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1357.obj": {
+      "bytes": 290489,
+      "sha256": "430068a4d8fc68e5e96b725c8e09849f757ccdc090ab6cec84341d945c22b9c5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1359.obj": {
+      "bytes": 159884,
+      "sha256": "ad4c08e84c570715c5cdc24faf0bdb9bc54030b7fe6131a10e27e0c43e0588a1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1373.obj": {
+      "bytes": 226350,
+      "sha256": "90d01a639fd51a3cb956e17dbb581f6d51e037cfacdcfccf21716e8a57f50c6e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ1374.obj": {
+      "bytes": 180066,
+      "sha256": "ae2a718964765d9492e871dd9d2d41246bf8b9f9f01b3c2e4f612bd72e165013"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ2738.obj": {
+      "bytes": 560586,
+      "sha256": "01720dc4715ab927b4878ab787f6b9f99e70466417a3aa7525f35dae3d44abb2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ2739.obj": {
+      "bytes": 191687,
+      "sha256": "3bdb38f42551b391c855b23593bd14ca02d7f7aa54f874fff52396db07dee2c0"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ2741.obj": {
+      "bytes": 828321,
+      "sha256": "a7d1e90a0757aa53530521cd25ee855da0cc1e774dbe2c6bcaf372ab9e654259"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ2748.obj": {
+      "bytes": 922698,
+      "sha256": "d6bca501cda0201b5221acbee58f2a58eff4784886825f72a0c40b1e1f7cbf97"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ2750.obj": {
+      "bytes": 515381,
+      "sha256": "68a3eb51f3fc48813b643b4b9d449730c55842291091cc573f3c0e0a3eb9bd07"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ2751.obj": {
+      "bytes": 189531,
+      "sha256": "40ddd17c29df45a42b11f75fc6a89e1d85c10ca7850f9094c2b264da9385b998"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ2753.obj": {
+      "bytes": 835932,
+      "sha256": "84b856010832db82451e940a172f175d3a753c08e7284663bd40de6ef427fbcc"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ2760.obj": {
+      "bytes": 927859,
+      "sha256": "ceddb3e852a795354bf31e6151dd9d2feaacb9f4612e3f0376d980dc063fc33a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ2762.obj": {
+      "bytes": 101559,
+      "sha256": "09d6a3c375d3ea9536e325a86996c521f647b1c31ee58ae2b99de6ea9cbca3bb"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/head/FJ3380.obj": {
+      "bytes": 928866,
+      "sha256": "b6874589f3ddcbeae7153c2d499c23d0083eb18e95d139759529c901384758c8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1555.obj": {
+      "bytes": 42800,
+      "sha256": "de61ba665a21727587c77ec819ca6606b4aacd2a43fa228a59a0c2b91db4c0a0"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1556.obj": {
+      "bytes": 47157,
+      "sha256": "ceca25da24cfae6460cf682de4c080bd165b22ec413773c19ed7f631ec8abcb7"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1558.obj": {
+      "bytes": 896681,
+      "sha256": "21711ac424696b6bc9a08ed225405228a26eef29beb237b7d9d8ed5a0a65d394"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1559.obj": {
+      "bytes": 46065,
+      "sha256": "f774104354835d3d5347d323642f305cb439d861d9c979227948239309be41dc"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1560.obj": {
+      "bytes": 32825,
+      "sha256": "8e001c787d59c211017d574330a4a475088452bd997e858c74ed69c4d4627463"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1562.obj": {
+      "bytes": 133298,
+      "sha256": "33970bf53e3065f79e3600c6b2bf2f99c2d02e56fe75ac085b1a5615993afda3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1565.obj": {
+      "bytes": 367436,
+      "sha256": "1552449f945343885869b8495474e44963c906ce559abf2f508506f784357b59"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1570.obj": {
+      "bytes": 179909,
+      "sha256": "7cffc2140b07a8966c1bf36937f3e260b4b565b8151ecfa2f683b72bcd5f546d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1571.obj": {
+      "bytes": 309508,
+      "sha256": "87f401434568a449ee7ac71d8d372998611f5eed4190e8273e31cf252fccfbcd"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1572.obj": {
+      "bytes": 200162,
+      "sha256": "227a19a0ccceb88b370c8fe5af637ccb491bcb2c1f1898cd101c24e93fa82ae7"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1573.obj": {
+      "bytes": 718388,
+      "sha256": "2035124d82e26f8e2ba9985925a746d0fd1fd94535d6ca7eed4b622f60bf5363"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1574.obj": {
+      "bytes": 204287,
+      "sha256": "ea466d41ef524b945f5e4e50620b74d8c493288c36a3d0207922f514364a5c65"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1575.obj": {
+      "bytes": 172843,
+      "sha256": "2b6162444c2c9447e9f0d2bb0947d9f95d76498ddf71a3277e96dabfef550f5f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1576.obj": {
+      "bytes": 89944,
+      "sha256": "2c6d6a6008f602842ab36c6738960da0fcc2a1e9bb7ffb4b127f7bfd20ddc057"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1577.obj": {
+      "bytes": 96410,
+      "sha256": "f342f7656d7164fc8bf24f3690f3ba1b2ac029beea0ad435347809476c7f8d81"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1578.obj": {
+      "bytes": 149166,
+      "sha256": "2135567871f49ec25abbe3f9e12875ab9fa011216d9f0389a28e89ac33c4bbc8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1579.obj": {
+      "bytes": 160591,
+      "sha256": "42e2244e314cb9095ba8e4261e0c413a6693bee02f8f41e897998904f908560b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1580.obj": {
+      "bytes": 45501,
+      "sha256": "848229dad5d1cee4765c43edcf577e02bb901737cd58afc0cb41f6271a121346"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1583.obj": {
+      "bytes": 135100,
+      "sha256": "1a12e34cd47b7c713e9e01509fd5bfadddfcf6b58e38617484f37298d345fb9d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1586.obj": {
+      "bytes": 383387,
+      "sha256": "2ec30a6720efb6eaf451bc141c61d2419b33027b2f10c5b00378f54861be0605"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1587.obj": {
+      "bytes": 950590,
+      "sha256": "6b7deb39529e4ae7aeb013bdcbca4d7c773035d75d4d2e7c821bb1bdc1852790"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1592.obj": {
+      "bytes": 183341,
+      "sha256": "a8e09cc9dcc353437edeafeb78873c3f4d9727fcd9187d0f43dd57a3e72efb83"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1593.obj": {
+      "bytes": 314596,
+      "sha256": "d601c1bf83da406115bc5605305b04ef8f4a37518e3d8528ca35e93fde0f4140"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1594.obj": {
+      "bytes": 205887,
+      "sha256": "babdc76481ea863c4f1d5599fbc843da667780a2d7a5abe2c30a4c82374c9f11"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1595.obj": {
+      "bytes": 755824,
+      "sha256": "287ce88ff3321e41d83b34bb0c30f66ab273aceac9fd0a6c693af4532d0e0681"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1596.obj": {
+      "bytes": 213915,
+      "sha256": "262225d820e3b09f05a269a23f32eb1d97ce29dfa569d569c73e88c0a106708c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1597.obj": {
+      "bytes": 176101,
+      "sha256": "82534889c09ad8efb043e374fdedb9af25dbffa59299d425f233c17173182c11"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1598.obj": {
+      "bytes": 86582,
+      "sha256": "4011f33b0992f727c3468fd2aa50dbb1a9f0eb3ef4667cb0cb60aa04b3c98486"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ1599.obj": {
+      "bytes": 107757,
+      "sha256": "fe3834ea88fcbf9d0140df58928bd7df22e00c8b602ef47a92102e507af2266c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2740.obj": {
+      "bytes": 517948,
+      "sha256": "345877a821866cb8f0fa6c6ca353f28385b5a4a35e0c9e9bd5601a08211a1097"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2742.obj": {
+      "bytes": 406874,
+      "sha256": "b242673d67bc4abc71432268d4fb03df4bb6e707ccdf890829b7544d14d87d26"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2743.obj": {
+      "bytes": 2823330,
+      "sha256": "e2a82119db68aa8db6022c78ce9bb7efef468ac6c776f5493ec8b6a1596ae015"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2745.obj": {
+      "bytes": 600633,
+      "sha256": "81c70a6f8ab2de5d20a715cdf5339d756ca7171c473adc645231929b2732bf31"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2746.obj": {
+      "bytes": 221214,
+      "sha256": "8cea3d6b0e2d0e864be7d11d919ee63d73aee5532db36cd3943a305fedd03751"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2747.obj": {
+      "bytes": 750899,
+      "sha256": "3282d0f49da840abfea2e8ac276e4d780c71041cba4fbe4a2853ebc1c8bb1f22"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2752.obj": {
+      "bytes": 518366,
+      "sha256": "3fb68e999835bcbe32995db8a0b8a2a4cd592441583f89c07f8897fdd20e4ec4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2754.obj": {
+      "bytes": 406587,
+      "sha256": "9583ea54a06a4d8d52aa9f3578a0f97931634c86db01aa2f37059f9974fdab39"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2755.obj": {
+      "bytes": 2838412,
+      "sha256": "c3fbea74a7567588f83c9856be8305cc4b8cffe9f7157a9e41b8c53c5bd989be"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2757.obj": {
+      "bytes": 605640,
+      "sha256": "b10e40d550d6208c907df65d844403071233d8088a109b2be5f925cd5d9e6c36"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2758.obj": {
+      "bytes": 1743179,
+      "sha256": "dcea7bd8d13fff1ca83eea7605fbb399b0ab34983ddd8632613690a1be70c377"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2759.obj": {
+      "bytes": 754081,
+      "sha256": "85d82b26595b6e782fe3bdc9dc2b99bb2127ea84da709e01a6e31672179cdf60"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2778.obj": {
+      "bytes": 417703,
+      "sha256": "15d694d60ddab28b19aa0ca2017c86ac82ccc3fda58d257a240f56c363d4271a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2780.obj": {
+      "bytes": 467428,
+      "sha256": "9ad13a6a95301607fa5968e68ae47efc458ebc67f9582f6fc0861672b7b4de17"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2782.obj": {
+      "bytes": 314508,
+      "sha256": "eb100ad68f9201832f5fa15c7e802c175fb813302c8983f13b6f3d3dfdb3d4ef"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2784.obj": {
+      "bytes": 416547,
+      "sha256": "6b0698f8b6a6cb877d3610dc959abe0b9c4691bb6e746fd85c8e523fcebc74a9"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2785.obj": {
+      "bytes": 669573,
+      "sha256": "a785608978d62c2c14f2057cfe2606fe183523dbf92fc587801234bc0be41e2a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2788.obj": {
+      "bytes": 73831,
+      "sha256": "dd26f669e127e5c5fae7ff796da0f516887f8c3834bbde1f2881d3a222cc2375"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2796.obj": {
+      "bytes": 418817,
+      "sha256": "d0a4730aeb6f0bafdf53eced4954a0ccfaf31ba8f3d08aa90e0c18d9c8928cb3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2798.obj": {
+      "bytes": 451755,
+      "sha256": "706e265f99131c2bde1b61c4bc2cdfab7ae384ed2c84f10c8cbff91a295ca22c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2800.obj": {
+      "bytes": 312671,
+      "sha256": "917fb9e8667c4d179c0f86ec06c27dc2d0537e4f81d1319aa21fe5a0e237d891"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2802.obj": {
+      "bytes": 418916,
+      "sha256": "68d5990536538ba707bd1b1b967b7ab14266ed74e5f0d1e33230a5922181c322"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2803.obj": {
+      "bytes": 773134,
+      "sha256": "fd38f2f5befd554ba19bd4fbab0d0a4ae137a59bb24d3dd0852eb5caa910d3e2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2806.obj": {
+      "bytes": 73039,
+      "sha256": "f4b83790f1c6364785f6ec6a8428443e7f20cfe48ed9a14234bb8aff1d80f2a9"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ2809.obj": {
+      "bytes": 509099,
+      "sha256": "1ece0839b43392b090d5e4b5bf96448a10935f1d3637487cd526d0fff8251f32"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ3161.obj": {
+      "bytes": 139572,
+      "sha256": "8f0de55a4feef85c256501a8afff7bb5aa3f77f4681af4c91801da87b54db103"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ3164.obj": {
+      "bytes": 161492,
+      "sha256": "a883dd5929817f87eb366a32ca9d82463fd0db40286c49b8adc9e9d1a8cecc34"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ3167.obj": {
+      "bytes": 158857,
+      "sha256": "b2485c3707b04f1fd455ee4d3a7b69670ec9c85d4ef9a54463e5c6089f1a69a7"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ3170.obj": {
+      "bytes": 162032,
+      "sha256": "ac100888f7e271851c138e8d41a52168070e4fe5c63e8876a4bcfba08f3b59aa"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ3172.obj": {
+      "bytes": 133359,
+      "sha256": "43bc0a1f9b3adffd5f45256b61f75affa15b56c85b387fa733b59de310216104"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ3176.obj": {
+      "bytes": 148677,
+      "sha256": "8ac9ee6d7631edc066a322af278ed508eab4d9c0919e9a77657ead17c14c8a79"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t52/neck/FJ3177.obj": {
+      "bytes": 161899,
+      "sha256": "ae446bbf47561c5ff2a2c0a03bfb158ba2581477ae5078ac89cc95b92637adab"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1416.obj": {
+      "bytes": 48712,
+      "sha256": "4479931f789d919fe352532a1b377f88c48914d461d5bd68ffd008082e7e92c7"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1416M.obj": {
+      "bytes": 48307,
+      "sha256": "9fc9803d6dc438dfccb5a12e8644927cefae78db28975a8e864f16bd3ac19d77"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1417.obj": {
+      "bytes": 42970,
+      "sha256": "57a2cec17f38fe60323d68942a7458512f0fe836a6e9ace69cf5fe6535e64365"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1417M.obj": {
+      "bytes": 42601,
+      "sha256": "b703d944a851871af8f4aab31d567e328a2b73e4709bc5703531faf7e9d6681d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1418.obj": {
+      "bytes": 197385,
+      "sha256": "e576dd907b8bb9b373beda7ba9cb14cce4c958def4b782ad6563b6e2fbe71d46"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1418M.obj": {
+      "bytes": 195419,
+      "sha256": "abde060eaa4c4e1b3da0a865a804a2c8b7790d2994cc1fe8c133dd541c92d90e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1419.obj": {
+      "bytes": 246651,
+      "sha256": "e2e06899b8a61640b32086432ec4b577b2bf2db6f044d469c01bdceb38bd3831"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1419M.obj": {
+      "bytes": 244392,
+      "sha256": "37f92300b952b93099dd8dd417b154b1af7484fd28780d990ff21e0e7684af84"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1420.obj": {
+      "bytes": 321500,
+      "sha256": "61ebd1c4cd97adb69324aa74325c05425dbf37f83862a34c6a2f7400c3c017cd"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1420M.obj": {
+      "bytes": 318764,
+      "sha256": "d4fd7a31338758607094164c2d8e3a39f8cd1f5baee7624a0391a7ddd8168272"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1422.obj": {
+      "bytes": 238318,
+      "sha256": "e7201ed4264a06a3689592625a20abcc9aed26435f0797a1e8e41b68335d1e24"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1422M.obj": {
+      "bytes": 236600,
+      "sha256": "0f8dc9b412a3f0095a86db8aeca0bd80edf0a80b75d92f5edb5e0c4e1186e164"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1425.obj": {
+      "bytes": 65272,
+      "sha256": "ccf94b03dc0f4c669c2ac96441127c17ad9287edc0001b5923879df99c75f3ae"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1425M.obj": {
+      "bytes": 64765,
+      "sha256": "706257705ecc5fd6b12fa106eceea754e1200a68745e1d474ab4098e186c402a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1426.obj": {
+      "bytes": 189554,
+      "sha256": "977a261dc98ce11a53282b2400b4b1f89160000c5e254bbd1755b26bbbab8ed4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1426M.obj": {
+      "bytes": 187902,
+      "sha256": "48e688da5e4d5ce01ff70dbedcf4b6232a4a2f64295ee5c8d89f8b4ee7b3889c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1428.obj": {
+      "bytes": 79475,
+      "sha256": "b5420d081245d8f0dd276625a3c96fb5180dd2fcc4c0dc6a3f7990869090a23f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1428M.obj": {
+      "bytes": 78577,
+      "sha256": "358d903b3d4f530e4219cfc7e6a64e24afda7e544d74aea5df42e89b8ae543bc"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1431.obj": {
+      "bytes": 379043,
+      "sha256": "b66009da13d6241d66de3c0242288abfe0c90ce1c76b38000f9a92b02e2f1e0f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1431M.obj": {
+      "bytes": 376391,
+      "sha256": "6ab42a645723e66a32b2c64e72be87e0a13fb497cbbf2ff29d26bc827fbaa0ce"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1432.obj": {
+      "bytes": 96117,
+      "sha256": "3c1121d358ea50cfb88fe829c5128ecc3470309e3de5d7f642bc8cf35555fdb1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1432M.obj": {
+      "bytes": 94874,
+      "sha256": "50f5a96e1a54247754748700a75f30f65936e639da558845cdb73a4665a5c5cf"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1438.obj": {
+      "bytes": 102407,
+      "sha256": "181553f080c8fad285e54ebca81432a691442a44d2e23d2dde6c21e000bc9ab0"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1438M.obj": {
+      "bytes": 101378,
+      "sha256": "4a1bf02b6a7b3574d60f61ed9bbd264e9e52693b9b4a68dbfb6ac6474245f272"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1449M.obj": {
+      "bytes": 159532,
+      "sha256": "9ef81d97ab697662e5701385dd7a92a3528612f7a98ef042bbaafde2f1426d24"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1450.obj": {
+      "bytes": 25260,
+      "sha256": "ebf4da720df6e6245d8f7347d8517a5a0371249f2841db0f54fcb7decb117445"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1450M.obj": {
+      "bytes": 25107,
+      "sha256": "39c0f4dd34d4548ce828b96167127b30d5369adca1cbc74eb0eae3e986a5801e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1451.obj": {
+      "bytes": 9118989,
+      "sha256": "588de751687a05ae711f9b8d65f78ddac891994158fa4a94ea2ca48d36dc1b61"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1451M.obj": {
+      "bytes": 9040548,
+      "sha256": "d4c021ba00dbe2bd3c7e722cb5982df7659d7d68fe6f4ec980588bfd65d31214"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1452.obj": {
+      "bytes": 8308376,
+      "sha256": "8fb254f196b1e249b1aea667d195f00c355f901f5fa89e37f586a8316c2fcdcd"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1452M.obj": {
+      "bytes": 8250599,
+      "sha256": "2f0ba9782cf27bd57446c6f9f44a399bfb98e88a67136c7304e47098838fce1f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1454.obj": {
+      "bytes": 7720469,
+      "sha256": "8e9a5c48482ba61dfe2ed19ced05121093a7bf3f8c6e0ac7d0c0b8ebe8bce45d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1454M.obj": {
+      "bytes": 7642908,
+      "sha256": "7458ea18bdf836da68b0220da5421cddb1bb653da909d998dea14db3d5ef00c5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1455.obj": {
+      "bytes": 7706472,
+      "sha256": "aa71a14eb5d50c91569fb348ccf3747438bf0e5a4a8cd73784f7ae9ad2f801e3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1455M.obj": {
+      "bytes": 7632850,
+      "sha256": "d92760297b5c8ceacf1013460e372abcb05f97192ffc514758d74ac0b73af373"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1461.obj": {
+      "bytes": 421855,
+      "sha256": "bce9619bd5a8afcd77e28139313dd3d4c553127fc8832ecc2412931308bac390"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1461M.obj": {
+      "bytes": 417104,
+      "sha256": "be04d1b4da0f157e45053496c8581dbc62f0b31ef20c576249d4debb54a75042"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1522.obj": {
+      "bytes": 468269,
+      "sha256": "b0abdbd9843028107af0e4519e2013dc1c367c8ae70a4ed3aaffa3b18340fc4e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1522M.obj": {
+      "bytes": 462787,
+      "sha256": "6f0ac20f65a34e08cfe0097662326ba1e4521747b0d58a67b5396f5e067b0b49"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1524.obj": {
+      "bytes": 388160,
+      "sha256": "65ffae80089c7adf5b8fb9c050dfbb038faf8b4bec72d1a1534c1df2ab855386"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1524M.obj": {
+      "bytes": 382604,
+      "sha256": "de39b8c105f9b7be9cbae71352c3531eee620e4486ca97111a38b9879b8fa8d9"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1525.obj": {
+      "bytes": 1041654,
+      "sha256": "b5f46d530a91ebdc474f9ed8072b4af9bdbb15ba0009f38fd8a3b0cb317ccca4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1525M.obj": {
+      "bytes": 1031392,
+      "sha256": "35fbf235786f21571a30cde8bf3145790bdf623a6c3dfc50e17b5173e6d88e5a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1526.obj": {
+      "bytes": 237546,
+      "sha256": "0d2b4b780dd191b9e6518dc3a71ad8c032da0db3631a2a582969faf7dfdbb96b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1526M.obj": {
+      "bytes": 235971,
+      "sha256": "edb4c7f871b6cee0ab8de9d31ad428b779a087a7b66dccf4421a806bfb11812d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1527.obj": {
+      "bytes": 1189971,
+      "sha256": "8a15295f08faac150ee5f16fe1035398dcfa60d3cba8b42b504b53764032b718"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1527M.obj": {
+      "bytes": 1178614,
+      "sha256": "1c7f20b34a9639d1996e3ec18873beb6dc114169ae1d310e88e2c3d8b1ff2133"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1528.obj": {
+      "bytes": 618808,
+      "sha256": "0ee5ad819949cd4197dd96b00373547b42f7e1831b2add6baea4baf3661f38fa"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1528M.obj": {
+      "bytes": 613804,
+      "sha256": "02a7addd5329689094506095570a458982b6dfc2f9509392bf310807183e3df7"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1533.obj": {
+      "bytes": 179817,
+      "sha256": "845e65ab735bc49c5026fab485f8dd2eb9624ac7c2519927578d7d7508e644cd"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1533M.obj": {
+      "bytes": 178291,
+      "sha256": "900be066826b7ac1f38f92a243b28474694c42a1fafa2934d55db020820c7178"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1534.obj": {
+      "bytes": 229177,
+      "sha256": "d89596561e6d76dc5d5e6895711d598201056b1c7a834ee0c593702ef9382608"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1534M.obj": {
+      "bytes": 227947,
+      "sha256": "4d8e49d6e29673284fc79376aafb0baec2cc1999b6440b19a5310c550828a8ac"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1535.obj": {
+      "bytes": 1319188,
+      "sha256": "b555761d298a4bea88a05d2067b0cfff507522546bfc0dcb9b3bad576a3449fa"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1535M.obj": {
+      "bytes": 1306680,
+      "sha256": "d238f10400abb5754b2ef1e920eacc720b69835cd31a229ef3d68468f4064a57"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1538.obj": {
+      "bytes": 219002,
+      "sha256": "189e16f70c49bc3465f5216fcb0e0b0ffb114458fde427eaf5406ddd1a1bd315"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1538M.obj": {
+      "bytes": 215105,
+      "sha256": "8f587a9a50e0ca6555ffb086e60445a499904ce55a5664340cce8ed12d86bb77"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1539.obj": {
+      "bytes": 294969,
+      "sha256": "b8deb92bb40d683fc3dc88ef08c49143ecf123d3ab4bcfd5ec18a576095cfbc2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1539M.obj": {
+      "bytes": 291523,
+      "sha256": "bb9bac24392c7578e7ef6cc096e871fc1b24191b0c37eb2eda4b9e46c54f78ea"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1540.obj": {
+      "bytes": 448376,
+      "sha256": "91211e5154f7ee9191e807ec3e33f6d3ec734aefd6db83f6777c5b2d1b2afc44"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1540M.obj": {
+      "bytes": 444404,
+      "sha256": "b2d28afd1fb9b2d08da28f10a13a042d3aba7defbd2ee27b22816a5cda1e2ca8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1541.obj": {
+      "bytes": 977758,
+      "sha256": "cc8b7d9461278c3d3a1270277fc656159ee47bd9eed290a0d5aa1c15d5c2c006"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1541M.obj": {
+      "bytes": 969175,
+      "sha256": "819635eb6027fc8434ef0966a06efbb1d34bbe4798127729081c0eeefcaf87e0"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1542.obj": {
+      "bytes": 685962,
+      "sha256": "5731a87fd7b629112dc376ce82570c8662618a1f6256f7b7d54384c363f6f6fd"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1542M.obj": {
+      "bytes": 679307,
+      "sha256": "61070b6f1cb48d0e08434711f12d5a535867520ca16adb20e5cf70f7bd2f29a1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1543.obj": {
+      "bytes": 103745,
+      "sha256": "3dc2e6367ead09b94da4551212a36692ecf56586be7c27d8b5e834d4c32e1fcb"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1543M.obj": {
+      "bytes": 102979,
+      "sha256": "44647555062b70a3535586a83fae2cfc38441870a29e6b8f95bd5ffdd1af2af9"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1544.obj": {
+      "bytes": 598901,
+      "sha256": "d269ffdde57349435a3cfcc3c53c3b2532acf4ddaabfc7fdc8b0e3df66b15232"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1544M.obj": {
+      "bytes": 594041,
+      "sha256": "b9a3a13c4b797eb8f3115dac3e80b5a83b03b9b34c25f7f2ef721810fa0c52d2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1545.obj": {
+      "bytes": 556499,
+      "sha256": "1d1361ff53074dc46a3a372cfd754121afb7a24511fee225b06b312e3277efa8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1545M.obj": {
+      "bytes": 554265,
+      "sha256": "a80ad7dd892450090022cd108216c21a55dd70872c7cfa832c604c040c79cd98"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1546.obj": {
+      "bytes": 486722,
+      "sha256": "d1d911084f09a997efd08c69b15885cb20fe2fe849c5f8652bc6f46c1ca62fe5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1546M.obj": {
+      "bytes": 483632,
+      "sha256": "ead6661905f5316bb3865c7127d40eeda72feae4ec2abaa46b3e7679cfc6dc9a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1547.obj": {
+      "bytes": 139328,
+      "sha256": "56bd2f0fe3c36acfd7c72e772c153f3beec50e78a6e336bce0cad5f414c533bf"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1547M.obj": {
+      "bytes": 137754,
+      "sha256": "2c894820e6b92ede6de83a878398021d98c8556f160a0254f5ee7d7fb28cfc5e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1548.obj": {
+      "bytes": 137074,
+      "sha256": "6ec899cf7d149464fb54c6df704a955151194d91b15a6f163e7024798ccd3d07"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1548M.obj": {
+      "bytes": 135455,
+      "sha256": "d6c6ae4153a890dc215c73b1cac7f7561fac4a2b70565d40471903699acdc2d1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1551.obj": {
+      "bytes": 37133,
+      "sha256": "9e16b2dd79e3da3c43afae531deb69faf3f0e59d547b72cfcda73e58073feae4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1551M.obj": {
+      "bytes": 36945,
+      "sha256": "392e9215469be48fbd56a29ce14e7d649d3eb693b6ce996adc0bac0b88a920dd"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1561.obj": {
+      "bytes": 262624,
+      "sha256": "a805c03e24aadb8da137abb8533543f4561db28e050b7bc6bb6f7ba70a0f1ac0"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1563.obj": {
+      "bytes": 71856,
+      "sha256": "4845c2796223f82863a14b58a10c080921f49b03286846d0fdc37fa8230ba11a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1564.obj": {
+      "bytes": 127978,
+      "sha256": "21133c79db7dd82d244fdffb4febaad660e54d6825dcbfcc1581e85fcea53cc5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1566.obj": {
+      "bytes": 61793,
+      "sha256": "f063c76b3d4b1b6ebdd8f7504fa7a0d1d8f3b8d2e1e3bb45da9fb46ff42db15e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1567.obj": {
+      "bytes": 107211,
+      "sha256": "3927c8dbbf3773f46ad344d919b13716692ce2e045a125d3647344975b83eaa7"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1568.obj": {
+      "bytes": 65082,
+      "sha256": "9aa18031ab7d1e868b05739a043eea20391f89437919c75f2f7a982868e05b48"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1569.obj": {
+      "bytes": 56282,
+      "sha256": "d5cee1b4060b42602f81ab57e0fe7ae8da4288e8dd215928d2f369715524ee1d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1582.obj": {
+      "bytes": 278756,
+      "sha256": "2b0def59b27f6f6c654983b04daf3401997517a7c93bfff5bf70d0d0eb875ac9"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1584.obj": {
+      "bytes": 71500,
+      "sha256": "76e6b88bd952d938d18c4e23f50083f8b4071071947ccf2f67d4800d25353dfa"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1585.obj": {
+      "bytes": 135599,
+      "sha256": "6b255f0276f6f0ed75afd64ff35d333bc83d29d6825ea868b5e2498d0887a390"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1588.obj": {
+      "bytes": 68249,
+      "sha256": "b7ad7dca09e8946a29dbcabf3cd2a01e724df5b4a2e5da0d67eadd5017eb736b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1589.obj": {
+      "bytes": 110635,
+      "sha256": "bd2e4e6cfb363bfdbe9b1cdc22115e5099de3ac10daa14210caf38fe771346da"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1590.obj": {
+      "bytes": 69750,
+      "sha256": "96eb4ad812cc9f9864f811327b30168153a6d681c93bc00ead8204e137010809"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ1591.obj": {
+      "bytes": 52646,
+      "sha256": "7c7266e6c06e8b74784c92b7be97c2bef843252fbb8a493d21db31e6c226b828"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ2542.obj": {
+      "bytes": 150292,
+      "sha256": "c2599aa898ecec192abe6441c4764e04cd25642255175ac4f676424be2fe5846"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ2543.obj": {
+      "bytes": 24485,
+      "sha256": "eef8699f111ab0d53ed84d4a9748574e4527451ca0c673801a2d1add14fff31c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ2547.obj": {
+      "bytes": 159594,
+      "sha256": "d35abd27f997258397ede969ad78b9943c1f7f52bf7dd564d106cfc32af6eb5b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ2548.obj": {
+      "bytes": 25320,
+      "sha256": "bfeda8dbd502a9dc9835b8c38fdb580d7cc1655a8847aa7f8cbab6f8f8cec408"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3131.obj": {
+      "bytes": 4828611,
+      "sha256": "db97e5f8f8d46928ea54b42fb50789e8f5523ef973cc744b2c2f17930fc33dc8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3152.obj": {
+      "bytes": 149387,
+      "sha256": "99de26e5435a8397b6f39b44ada75319d5e8fa1433e1ea38fdd8de9e079ed9a9"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3154.obj": {
+      "bytes": 181674,
+      "sha256": "abf073c0206696c3baa5cb389831b28a6ce2c6770091065e834b8e4ef50676b1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3155.obj": {
+      "bytes": 178070,
+      "sha256": "1f9c9f6dfcd5585e09abc2cf9a8f54ba1c33df399c6d4dad1a92301d85cd88b3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3156.obj": {
+      "bytes": 181653,
+      "sha256": "ffeebd0dead6ed95395e35c0843888b079acf67543e2820437e99978c69642a0"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3158.obj": {
+      "bytes": 114175,
+      "sha256": "aa69c48def3434d6a3e1c56fc78af45f01545931fde5422af17d5f98ce9ed8a3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3160.obj": {
+      "bytes": 126573,
+      "sha256": "20c1322be138314f42bbd1be3e69f3f6b590bbca7a8a3cd3414476f207721300"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3163.obj": {
+      "bytes": 130537,
+      "sha256": "3080ed603c54120fa5201816d77695354c81ea57275c599e68543bfb6ecb89c1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3166.obj": {
+      "bytes": 133878,
+      "sha256": "cbd60a450a8b2f3ee90ccc655f79a63b090d8a3abf5e6849cf288a7b2d4207f2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3169.obj": {
+      "bytes": 147914,
+      "sha256": "20c3b1dfed3a2ac5e631838ae924379672dac2047186711cfaa819b9a1db6e5b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3171.obj": {
+      "bytes": 149091,
+      "sha256": "ebee2a07751de0aa0b33974eea0a9228fed9980f740c619776003d5a38c370c5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3173.obj": {
+      "bytes": 167615,
+      "sha256": "3b66eb6444bc7b6ced9e32eacf2518861531b1296eff0e24db41a85bfdbaff66"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3174.obj": {
+      "bytes": 157442,
+      "sha256": "531253894a89d60c78a5235bfba826e0c30c21003267258fe1fca244d9090c1a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3175.obj": {
+      "bytes": 166118,
+      "sha256": "34bd592e9f0282eea561a680697beeac655584ca9e4db9232b013535c57e7e61"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3225.obj": {
+      "bytes": 432176,
+      "sha256": "40680b5a3556b5984a5006e01649ff20cb4c88d9d3a7fef79cbad0648a972d54"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3226.obj": {
+      "bytes": 304274,
+      "sha256": "24a27d42732af55ad1e7142179f2dd4f906de78b701fbe5c459d8884a026f250"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3227.obj": {
+      "bytes": 170991,
+      "sha256": "3b7e5d6673a1be5bc14d72a4ea659d361b143f3fda5bca3ec758c176daba16c5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3228.obj": {
+      "bytes": 200847,
+      "sha256": "803a7134c1e69f640b87f9c6c4a846c869379446e771a1a7c9d18914c331a603"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3229.obj": {
+      "bytes": 355230,
+      "sha256": "631b4f63625fa6cc89ad83961b2156abe5878d1baf4a8cb2b2acbaa06bc97f58"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3230.obj": {
+      "bytes": 460032,
+      "sha256": "8c097e93d79c610bed49d6c027d25c8439447c20bfb94fa64009b9c4db4d8f5b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3231.obj": {
+      "bytes": 564534,
+      "sha256": "c1259fcdaf463bdecfc0868a3acc964edd4901ab03eb539b28e40462671be1fb"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3232.obj": {
+      "bytes": 622387,
+      "sha256": "c40bbcd5c2b98bb94161819a2cf824296289ce68eb62b37f3b175af4aadfd351"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3233.obj": {
+      "bytes": 657309,
+      "sha256": "8160b28fd649aadd705a05cc3e6e9cfd7035c44d8258b5a50977ec89fe8e7414"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3234.obj": {
+      "bytes": 642407,
+      "sha256": "372c650b2b7bc3f6767aa50a0f5b7e5dac6a15a17aeea5f5017166ba5d328757"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3235.obj": {
+      "bytes": 532783,
+      "sha256": "7d9525200958a9545391a2e135649580282108d77f7ae88a34003a56f48f4c8b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3236.obj": {
+      "bytes": 481787,
+      "sha256": "ec09e201beaaa70c24a41eedcef4671118b453361f827be02fb73fc361208db8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3237.obj": {
+      "bytes": 69709,
+      "sha256": "2491009d53eaed99ccb2a802b29402eec715eb8d207fb819fad67b0720195cf2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3279.obj": {
+      "bytes": 1865738,
+      "sha256": "e63a5675c6cdbe942322305920241b4a63762d7a65879572400f444fa3d42739"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3288.obj": {
+      "bytes": 144965,
+      "sha256": "bfc8b489fee0945cd1d387cf64bd3691af8e033fa72f9fccae45cfd55ac88694"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3330.obj": {
+      "bytes": 434806,
+      "sha256": "9e62a17a2ea9dc16797beec97bd0925c9692c2a4764391cbc1e289b0120e7aa4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3331.obj": {
+      "bytes": 306720,
+      "sha256": "1fdce776ea65919bf9aa418ec91c872b3eb835daca57dc69a7caa40bb02707d7"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3332.obj": {
+      "bytes": 172391,
+      "sha256": "50dd4dac4ebb45fa245d700f7ceac89edd7503cb4caab154b644b0a808da2ecc"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3334.obj": {
+      "bytes": 202343,
+      "sha256": "3831c5c578d45fc491e7e72417cc436e04a1a3a1916138e51528ad0b0b212a54"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3336.obj": {
+      "bytes": 358347,
+      "sha256": "57084a626a91aa88782f2e836c75450cd90bf19717dfd3f31602b4c674b70c0c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3338.obj": {
+      "bytes": 463525,
+      "sha256": "b239419743f7320b8b1d4f4d96ab41c1ff7fccdc921fa3a99c700a9d6dbd2a6c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3340.obj": {
+      "bytes": 567435,
+      "sha256": "ffca17251de4f457c4952e9d913070eb7a6f767493925ac3d8c3c744941b5dbd"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3342.obj": {
+      "bytes": 627173,
+      "sha256": "b2d1f3bc9478c51524628f4e79524290add55800ae85b06ff657f17f4c0c6f1f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3344.obj": {
+      "bytes": 661844,
+      "sha256": "5e45ea5a527d3b7df56c508213020265ed1c8a0d9a99f31454b92059f4f1a95f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3346.obj": {
+      "bytes": 647429,
+      "sha256": "86cc62c1a0a754f2e01a30b5d7179c745f3c2404ef4031ae43568667c4041996"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3347.obj": {
+      "bytes": 535781,
+      "sha256": "388e8f3dd5c308fe1454daed2aa3a2fced280d4ec60f97b547b476ca6b0da930"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t53/FJ3348.obj": {
+      "bytes": 485199,
+      "sha256": "4ef4af4eb8a7ea76479b2d4a1b2973c7d950f6e3aa5593eca4377258222bdaf6"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1456.obj": {
+      "bytes": 719480,
+      "sha256": "65831afdc2f80bf5fca581f196de727aa30c3adcc682ac4506a4a5d6cc71db05"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1456M.obj": {
+      "bytes": 712349,
+      "sha256": "3fddf544e2ec4cf4f403cba3efe864a9aa6697ec75db0e12ca7589eb3229055b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1459.obj": {
+      "bytes": 3600341,
+      "sha256": "33f4ae8c7a84785e2bc5f4f21432d13de0805e485a29f3e6762bac6f85cb61d5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1459M.obj": {
+      "bytes": 3571896,
+      "sha256": "cb0e133829295b809e7dccc072318f335e34ccb3c33c80fbc68b8d6da327b7cb"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1460.obj": {
+      "bytes": 117571,
+      "sha256": "39c2b495c92f2603b5df5cf4ae18e25ef9a34bf583c6e8657b667596d238c28e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1460M.obj": {
+      "bytes": 116823,
+      "sha256": "c35b0e090826dec2b6ce70de4f1e119e5791b171e2ae9737ce3e15f2af3309ac"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1466.obj": {
+      "bytes": 52161,
+      "sha256": "f43244169de921a1209484246543bec594bc3b282c647eaf6249f2320f10bfc0"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1466M.obj": {
+      "bytes": 51150,
+      "sha256": "c863e99b725f694e708b560b9bf848ce4249bc512dd4d0284a79de20402f0c5f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1469.obj": {
+      "bytes": 64473,
+      "sha256": "090600879d9395564824bedc16918c66b8fac325cf7fb2bac6c062bdb62560aa"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1469M.obj": {
+      "bytes": 63714,
+      "sha256": "dbab9fdb424e8370bed0229f47af76209ab5f61613fc1c910d427a73e6ee8bd7"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1470.obj": {
+      "bytes": 28038,
+      "sha256": "a0320cbafea76dae73ef8b8e44bd716507e496fd07adacdb9c3f7530e3e10f0f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1470M.obj": {
+      "bytes": 27733,
+      "sha256": "8ff63d0bd489a325491ec40b4bff2bf591d04746c8122d7d707c899723e24856"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1472.obj": {
+      "bytes": 248132,
+      "sha256": "f6aadd5b1df9440ec0c4fabf21641f72447d5190bcaf58f357e8b5a76b3f5889"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1472M.obj": {
+      "bytes": 245801,
+      "sha256": "6c47a0290d3c5952e858227ed655b6ef1caac88661a13d15618a8364d0af765f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1475.obj": {
+      "bytes": 664548,
+      "sha256": "9b3877dcb9838ac4e37f2a1fbf0542fca888a32650285bb07278d6ba9fa968e1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1475M.obj": {
+      "bytes": 657945,
+      "sha256": "9174a210f8b7ce149355545208551a4d001f6c78570256a8596d3410023fb1ec"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1482.obj": {
+      "bytes": 51290,
+      "sha256": "ac36154c8b29c5037e853509c15ecdb0ce778f83b8956b615a57a15b6897eff5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1482M.obj": {
+      "bytes": 50465,
+      "sha256": "73e7e15ed5f07af78166d6090cd0d2d60e953e1b46e668fb947e46cc19783b30"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1483.obj": {
+      "bytes": 64157,
+      "sha256": "e8fae19efda4874793724ff541efd7d9ead31b50fbb343254e3f8effd8aa734d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1483M.obj": {
+      "bytes": 63468,
+      "sha256": "89f420938e9140ba1b2a97c6d386897131f5f2423b4a24c42ea37a92bf75b493"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1484.obj": {
+      "bytes": 143120,
+      "sha256": "35a1077de93e2bdcaaa68e688f4f31a371c3c61e35d629314507e549e5241d14"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1484M.obj": {
+      "bytes": 141889,
+      "sha256": "330a078635dd13630811d8725ab5919c0fae5b001071a6cb3b7282bcf955fc4e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1485.obj": {
+      "bytes": 104059,
+      "sha256": "5c2e838a39547c4cdbb799cd5a54258d4ff76ab54b2859aecbfae2ba4588c5d4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1485M.obj": {
+      "bytes": 102969,
+      "sha256": "4ca0901654d56656e4da354560abefb85bb958b3d786c148b5bb510fea106abf"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1486.obj": {
+      "bytes": 127901,
+      "sha256": "be5f40b153fd6ce0c8c274eb4c26be8d1a29b4bbe75dd0e4a0dfe5c4d251fa03"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1486M.obj": {
+      "bytes": 126069,
+      "sha256": "cedf106a4917deab99f86f077dde7d34d0672dbbb74f30652a4f81f75d7ef180"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1487.obj": {
+      "bytes": 359055,
+      "sha256": "0ff651a5417f240c6a5205bef5218336a61fe3474752cca1b483d02aae0b92ad"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1487M.obj": {
+      "bytes": 356074,
+      "sha256": "04555d88efe99e68a2b07441c4deffa4d1e7ebafb8d3f60995dd28c0ff42f147"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1488.obj": {
+      "bytes": 39761,
+      "sha256": "7eb9835056883a0e35954d39ff930c4c8c32d41db000e9f0d656e3c663401e56"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1488M.obj": {
+      "bytes": 39186,
+      "sha256": "4004a378ca0d8be2924ce0b614fa19a4819804977e374e7cebcd5faa1cd7aa6b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1489.obj": {
+      "bytes": 158039,
+      "sha256": "31ccd9ec738252ec2eae88cf68068679d0663425c98b8d90dcbca18b3cbd1988"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1489M.obj": {
+      "bytes": 156376,
+      "sha256": "8c6a0274a546389ad6a4f615379ff0e9a020a7fb054cfd5e1e20401d4ecb06f7"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1490.obj": {
+      "bytes": 179061,
+      "sha256": "8b6ec821491a2eafaee8c813cfad4532beae94c354595cc3e922d8cdbb36fb32"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1490M.obj": {
+      "bytes": 177891,
+      "sha256": "f0ed6a659b2a1fd0d9138d2b7ca91535f62b70b9bc16f862173fdd85f69372d2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1491.obj": {
+      "bytes": 102700,
+      "sha256": "2717a761854ba7fe50d12f5ec4eca0f0728795777ae9a7ec87e019f01e3b8267"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1491M.obj": {
+      "bytes": 102082,
+      "sha256": "f4126e4115bf25e98e13d5e646304ab526d500f5de28aef9167c72f7360fe702"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1492.obj": {
+      "bytes": 342296,
+      "sha256": "31f528b3ba6a8fb26177c9f1455692be3acfbb173b4c4cbf9dc3d597acb5c5ff"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1492M.obj": {
+      "bytes": 338663,
+      "sha256": "c2fa9cb48e9d70d9a180553623df0e8be92c507f323074b8b5bed41b266f47f2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1493.obj": {
+      "bytes": 62068,
+      "sha256": "b23d7087dbe581fa03e316dfed18f73ba4ccb54b16091d442ac057f9aa9c7b60"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1493M.obj": {
+      "bytes": 61518,
+      "sha256": "67cc3af9eeaf1eecc32d6816dc86f2b7343fdec0be413a9e32313ca49b846d75"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1494.obj": {
+      "bytes": 79961,
+      "sha256": "61cfb7481e1f7dea291cf59208719b08c27191156e38ffd25e744918836d957b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1494M.obj": {
+      "bytes": 79160,
+      "sha256": "13f92c6f30687f4b796bb9f449903d20f46b05a09418005baa8ce730cfd76352"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1495.obj": {
+      "bytes": 110183,
+      "sha256": "99a201417061edb3b2adc54fcd2b41eefa81c0e9e31027b43c41c328d1ade4f5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1495M.obj": {
+      "bytes": 109022,
+      "sha256": "b60c5e22a80aaab2f77c88357babc1ae22bdec2d51ee7a4eef8413ffd73b0a8e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1496.obj": {
+      "bytes": 82751,
+      "sha256": "8e83c638e2353bb8ba65547f4b846d89a1f393c4761806faf8e09970c9b6b6bf"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1496M.obj": {
+      "bytes": 82024,
+      "sha256": "3ee91fd59707361cb9fd6c55fa51c677df1744a779965c987e789e2be52758a2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1497.obj": {
+      "bytes": 392489,
+      "sha256": "e62f8adfa454bee523974952500aa32a16f086b249a434b4bbeabc333878ac39"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1497M.obj": {
+      "bytes": 387918,
+      "sha256": "c3d1710b4b9465ab35cd53d18a3f00f38b37340d084c57fed2cb011d585a5013"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1498.obj": {
+      "bytes": 151641,
+      "sha256": "e0fc87382350f38acb2a5197e83dabb450ba6d823222388c8e169e30c0bbfb94"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1498M.obj": {
+      "bytes": 149795,
+      "sha256": "bca0645db90f8718edda9562da5ef5432d6df06dd4fdf7d5f5ef042d31ed8ca9"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1499.obj": {
+      "bytes": 63323,
+      "sha256": "7f148f7db90d9723dcfe6742c55afc2100b712c00992d83356373ca27a2b0dc0"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1499M.obj": {
+      "bytes": 62744,
+      "sha256": "471bfecbbe7dc3b66fc843daddcac42cd12e76e4df9f982d6b779a516433c083"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1500.obj": {
+      "bytes": 69844,
+      "sha256": "28f61376a3a88a28d14c44e1c20e9b7a34129772c130afa003daceac801455b1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1500M.obj": {
+      "bytes": 69046,
+      "sha256": "9013158a3c598eb6dbf95dcaf72da439721dec4d3ebc37f660db9c2748f1e42e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1501.obj": {
+      "bytes": 88703,
+      "sha256": "abbd7e3223c7aae817ecd4e613e24c7dcd2aff20d56ea35a1517c73f6bae7a9e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1501M.obj": {
+      "bytes": 87812,
+      "sha256": "11f813334eaaed8e9502bfa9afaea44aec5c7cdd01e8acf038aeadac2bb13e25"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1502.obj": {
+      "bytes": 435055,
+      "sha256": "2e033c8fbc77aa1922179eeae6d90075df9360d00882beb9b45b148074f91f8a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1502M.obj": {
+      "bytes": 430061,
+      "sha256": "0a10cb9a85663e719c4ae3536e7d514a1d09c66115656427bad5348da7fe13a8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1503.obj": {
+      "bytes": 192602,
+      "sha256": "04adea4b7060a08c9d734ea78156525b3d3983fc1da0601ac151198985e78cfd"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1503M.obj": {
+      "bytes": 190457,
+      "sha256": "906e88ed35688a080946d565f157c89fcc50dd6fb0c4304c473cfc1800132266"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1504.obj": {
+      "bytes": 231733,
+      "sha256": "fdcbfd01f93e2d24bd73f5cb259a311c9f9e90de08c41573439844eef5f605dd"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1504M.obj": {
+      "bytes": 228104,
+      "sha256": "926fe07c8cf1056aa3aedda2f3a02a5027f4ef24cc5d41ba1359c53eedce1bc6"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1505.obj": {
+      "bytes": 241649,
+      "sha256": "83c5940f2c6516ecf5b0eb69de5dc0a056177b29f7bc046b94cc20c85460ae46"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1505M.obj": {
+      "bytes": 240547,
+      "sha256": "bfc240c7d0db047b5defe13bad862115bfcd7ec3cb426c40630ed1738c3cd3d5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1506.obj": {
+      "bytes": 76172,
+      "sha256": "793771eceb64385269ddeeb09245e8c53b67499194f6fa98049b5e17aafa8e0c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1506M.obj": {
+      "bytes": 75068,
+      "sha256": "6d6741ab840272a59d50c59cd87ccfa676e1f72fa9b600bba06bf9c24d1e01fe"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1507.obj": {
+      "bytes": 93150,
+      "sha256": "217aa2d39fdaa682998c8a1a1ffe9c8b37fed881edbbeb8ed5c633fa1541eaac"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1507M.obj": {
+      "bytes": 92508,
+      "sha256": "967a771f0d2e0950adfe251ac14b4878f9b12a3aacb16cbf472dac94db38519d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1508.obj": {
+      "bytes": 38012,
+      "sha256": "f56e595b86cea659891664706cd4443acddd8dc69e4e5bb3855445eef302641a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1508M.obj": {
+      "bytes": 37682,
+      "sha256": "4b07345bef6658a27bac6b2c7c2c52307bc769a804a80e7e657ce40e03427a17"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1517.obj": {
+      "bytes": 102287,
+      "sha256": "e6a4cec704d3601a33704b40ee1f3f7bce484017dd563d1f4d2da43331b3ffce"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1517M.obj": {
+      "bytes": 101397,
+      "sha256": "dad2acf99146ad290d327a6d3e9e0c8fa214c26880d9f85292d4c4eb4554500f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1532.obj": {
+      "bytes": 355503,
+      "sha256": "ee7897cbc5cde540e9cc29b03617d90f1b3caaebee4489f6590ee9c4632dcd42"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1532M.obj": {
+      "bytes": 353007,
+      "sha256": "cd98c83bc88a183c77b3eb10ce396f805843444d6f31053b1e3fb04f34647372"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1536.obj": {
+      "bytes": 549548,
+      "sha256": "81b84d6d2e7c859004ee2d71f8fef2768ec422fbace3967d54e3f3b2965bdb89"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1536M.obj": {
+      "bytes": 544456,
+      "sha256": "89601e72c95415990585118c08e0fb1b9c388f5bfa2b45ac1de116759f663701"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1537.obj": {
+      "bytes": 157909,
+      "sha256": "acbd2dcd51879085bb2ec7d12b45c0ba2514ce3a2a1bb680bcf78732a1f688ff"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ1537M.obj": {
+      "bytes": 156319,
+      "sha256": "c1708ef88207aef30c32673af54b7c3b8cad2863a29a17f1f7a54859f96232a4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3183.obj": {
+      "bytes": 21250,
+      "sha256": "53cd2e02023923e93f7651aed2b7b198fdaa9e0c8c8e83167b7ba371a2467396"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3184.obj": {
+      "bytes": 14522,
+      "sha256": "56799202f865a5f250cf43da0619baebccde1dae3ee6cd3295e8e8171b4b6158"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3186.obj": {
+      "bytes": 17608,
+      "sha256": "52a6da87eb85141fbfc47457b45704fbb360a64d30a9fe13b44edbfcdfcc7a8a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3187.obj": {
+      "bytes": 13637,
+      "sha256": "30fde420c59b5e151de258f9c358c4cc1463de8b85c60e7c4b0a4d7ff573b9ad"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3188.obj": {
+      "bytes": 18734,
+      "sha256": "cafb49c4af872d990b2cd7a3ea279e088ea596cea25ee2fdce16b8ebbb04d37c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3193.obj": {
+      "bytes": 17148,
+      "sha256": "00d90373136e996def72c45bb2de42630f7533014b622d36bbf56c4121355e4b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3194.obj": {
+      "bytes": 13601,
+      "sha256": "0edc751d14c5260c93fcde78f868ce49521eec95085a613417a96ddfd6a8965d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3196.obj": {
+      "bytes": 13452,
+      "sha256": "901e109df6e4a98b88dae7cdddda416c4cdd91e58093f1dc51d80ccc7c4e9b34"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3197.obj": {
+      "bytes": 10108,
+      "sha256": "4fece0e70293449e99a1b27a0d40c9d4fedd548ff0471fa7c783e5d973cbfba3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3198.obj": {
+      "bytes": 17971,
+      "sha256": "bfae0f42c3cffa63b93403bf6fe1b446dcf0f8fc3e1f8994544ac256830a7b3e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3237.obj": {
+      "bytes": 69709,
+      "sha256": "2491009d53eaed99ccb2a802b29402eec715eb8d207fb819fad67b0720195cf2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3240.obj": {
+      "bytes": 34523,
+      "sha256": "f512f1433a67003297c3ca0fca775c94372313cf3c3de28774a1cd7556e08362"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3243.obj": {
+      "bytes": 47129,
+      "sha256": "728fb5278b0e3d2ac9fb0af78ade721c5cb8764144e318a85f07ff9cdb9d7f7d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3246.obj": {
+      "bytes": 43628,
+      "sha256": "fa86f28ff85a3a1e3ac6872a05912deece4d3f8489e08ea4d21b432db304938b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3249.obj": {
+      "bytes": 33761,
+      "sha256": "c5f7a10a04542437ff52fde75f81c5b0b2cba6a4a68c56b829c9e0de2fe1b72f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3252.obj": {
+      "bytes": 30808,
+      "sha256": "ca8db2999ff2d7a14a61e9cbeb83a01011a3557df844ff1c47bb7ac3eaeccdb8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3257.obj": {
+      "bytes": 25347,
+      "sha256": "d229f9418122099af72721ebeee60b15b68604f3da3532c0625909dc2ac9520c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3261.obj": {
+      "bytes": 29391,
+      "sha256": "665e0be6779b9bc398e0947eaf190cc4d942e030a05d1a4cfe3ce4270bf8ddbf"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3262.obj": {
+      "bytes": 247429,
+      "sha256": "4a07066d7c7f17dfeb61797dc31c529d0d6fd3fda8136912ebd8a92ccc1ac6fc"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3268.obj": {
+      "bytes": 19793,
+      "sha256": "3d4a712f4ee30883f8967d15e8ac70e707d524213814bc7e2fbd51a123619b83"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3276.obj": {
+      "bytes": 12490,
+      "sha256": "6162726ac4bcb29a9ba8489570650ba8a323576b03423fb16b27bcd1e55c0658"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3277.obj": {
+      "bytes": 39875,
+      "sha256": "c41a7de7eddf5b91543fb22cf34c7dcad50241ffe1faae6ae22e1be30ca9390a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3278.obj": {
+      "bytes": 19052,
+      "sha256": "5389b07855a3273ac4646092eaf667466eb3f00cf5f78ed90993e82200f550ab"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3279.obj": {
+      "bytes": 1865738,
+      "sha256": "e63a5675c6cdbe942322305920241b4a63762d7a65879572400f444fa3d42739"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3283.obj": {
+      "bytes": 23451,
+      "sha256": "50006736c04d10ad0af5c94054c9cf64eac6e55fb0cdde25eefcad1170492f93"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3284.obj": {
+      "bytes": 27726,
+      "sha256": "e4378dd24f9206c580457f09b75cc05a36f0a1b4049fc2c2ce57da51a2ebd7c5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3285.obj": {
+      "bytes": 19111,
+      "sha256": "3561c1648197f5c2f44c577e2b54c1fbf76b36bbcab207f8b67286ba134cea2c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3286.obj": {
+      "bytes": 53061,
+      "sha256": "0e3c48a4b664ffc37ef11eb4754c6c7f4adc8fd1d3e54d1286307432c7d04bfc"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3291.obj": {
+      "bytes": 22300,
+      "sha256": "5c352c5c4329997419f731995176a2e293c749bc4896de37e6feb9d8b122cfac"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3292.obj": {
+      "bytes": 22023,
+      "sha256": "11af3f3453af291b20b0f4a9002c3e0906535acdc0004bd175876ddeecb9a094"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3296.obj": {
+      "bytes": 19633,
+      "sha256": "a2f1986d020da3ec013aeefb14b11223b18ab4181f0e7f2e56d54faee672e34f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3297.obj": {
+      "bytes": 18370,
+      "sha256": "536be862531dc82ab85bc0f7a49f1492574a39d613db552a1dc98b535e2c83f5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3299.obj": {
+      "bytes": 24416,
+      "sha256": "f0404230992ffcf77f1d3834c6015305abe10c2c40a84e2e920a21d9cc0743f2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3303.obj": {
+      "bytes": 18663,
+      "sha256": "af5955d21314bf58ed06fc28f28467e56ce366b658372b37a5e21936ed9f2c8b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3304.obj": {
+      "bytes": 15915,
+      "sha256": "4cd1972167a669afb93f288cf994101bb32083b95efbfc1696b1781560586ca0"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3306.obj": {
+      "bytes": 23303,
+      "sha256": "60a6197d8d7dedcb1039f82613c3c9e968109a9588b89a767ba6a44202f7c830"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3313.obj": {
+      "bytes": 24151,
+      "sha256": "3eb71ace606cc3271523e30a405c061290d9da661b59310a682c9d50d9c0ddf1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3314.obj": {
+      "bytes": 17248,
+      "sha256": "8b824d96eed3bc1325665fa99592d58ebd43346b436154fefae6a3c2a98753af"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3316.obj": {
+      "bytes": 28623,
+      "sha256": "5dccce5f8ff2f9152fb6b758b8cdd0bcf9fd73cc01a78464a965f69e90994bb6"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3317.obj": {
+      "bytes": 22679,
+      "sha256": "099ccb27cdafeb169ffeb8bc73804910f30a6cefccf830d4dbfa6855bfebf46c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3318.obj": {
+      "bytes": 21619,
+      "sha256": "3b327f7169609c03540967f7f8ceba810afda27a427cb5f16ea6641ef429837a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3322.obj": {
+      "bytes": 24435,
+      "sha256": "03cb38d378f7eb94046e45a6fcc214c48b1081b6a35c37a491bde356cb948764"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3323.obj": {
+      "bytes": 20010,
+      "sha256": "c3aaebcb7e86e3610f6d7a6896b33a60d7f544f924bdf0c4b639f8dae8c62e55"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3325.obj": {
+      "bytes": 29291,
+      "sha256": "ea76430375e036eea61a11c3edcbece711496563e5f2d35e6bee7f1a1cb49569"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3326.obj": {
+      "bytes": 23130,
+      "sha256": "5bb35c193650c9e390ad18d2e9ca834c19ab32d478a12446380d8cd50b9b0ca2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3327.obj": {
+      "bytes": 20711,
+      "sha256": "84d3df498603c91935ae8edfc341c17ad3e46b910249a98e1e3edd4ccf309e71"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3349.obj": {
+      "bytes": 42701,
+      "sha256": "0f824e639b13ea02959734a0d9bd8d7ca67d0b51f531a138d769e1d3b22e0c98"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3350.obj": {
+      "bytes": 34551,
+      "sha256": "92ef27746cf2c5b317b88558b42e171128f980ea16414ca6e3647d19d1594382"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3352.obj": {
+      "bytes": 46637,
+      "sha256": "6d4e9874925f542124ced9e041f340de5b9c8f872d6ad7e2d483e9d0ab159980"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3354.obj": {
+      "bytes": 44438,
+      "sha256": "98a26b8f08e6cd3578706a65d83c2e1e432d7a206202294cd525aa287b75072b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3356.obj": {
+      "bytes": 35725,
+      "sha256": "3bb88e2a98ce1cb0ab8af411397e5edc5777546c394b25d4d4ee585493ee3718"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3358.obj": {
+      "bytes": 31190,
+      "sha256": "23d26888c325fd6a2de2688e948de72057afaf383db13875445fe597bd2a8bfd"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3361.obj": {
+      "bytes": 27465,
+      "sha256": "982098ff86ccc18075bd4ecf422c4bca732f4d691d249c8f381bac574287c59b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3362.obj": {
+      "bytes": 68321,
+      "sha256": "9a111cac8351e79dd1315aea90108fe56f78e4bf0159473e6ad727ba91b60e6d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3367.obj": {
+      "bytes": 34994,
+      "sha256": "9c27cf5b75dd149f2469403af7ad68263e1eff29307864ae10481ac647262eba"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3368.obj": {
+      "bytes": 256564,
+      "sha256": "85f5445a11ecb029b027db0b9b34933982836d442b19ff531d1ca35a3bc3a237"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3374.obj": {
+      "bytes": 21068,
+      "sha256": "82da5ab98cc4f4e311eba2ee20b811bfa392a05d65d9f8c4ed0b9c7fd62880a1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3382.obj": {
+      "bytes": 11689,
+      "sha256": "c5b1ce6020acc6e1feff8f44a3f0b5ec717e3cb3218701fbe86644975d981684"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3383.obj": {
+      "bytes": 20596,
+      "sha256": "e96e60d6c03b0581caa5733e3ab65aca6dc3671a476d78f123dcd48ecbee0050"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3384.obj": {
+      "bytes": 1743768,
+      "sha256": "1641b04e55f9d75bdd6f1f4f07ea596e5dea0a8cb6b348bff47281b8a0bc6e5d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3388.obj": {
+      "bytes": 28949,
+      "sha256": "3b2475587f9ca59d43cb48c7275999f795f97f8b0ed6c68d5b37ff582382d81f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3389.obj": {
+      "bytes": 26443,
+      "sha256": "6823c47b6593463e65b85861e51026b06b76e0196dde1e8fae8b902a32f2a0e8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3390.obj": {
+      "bytes": 13086,
+      "sha256": "aa1d02ab7a2b7e2d87125a43fc92f497d9d35323de3d1a8b25185dbb7dd5cc09"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t54/FJ3391.obj": {
+      "bytes": 54174,
+      "sha256": "0aad73148e036c980ab24dfa675fcc1f109e5c60d82c12f3696420cf93cb4a98"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1383.obj": {
+      "bytes": 69503,
+      "sha256": "d7bce4728ada3797b2ada290797ee98aeaf1d43d0279d83401c9d54ff72add3f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1383M.obj": {
+      "bytes": 68454,
+      "sha256": "9da478797a43866ef3b3e4750b76d37de5d35b3fd3fe659935200cb2426dd139"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1384.obj": {
+      "bytes": 53768,
+      "sha256": "76db533b5ef8f3d4a85d142e0e5f7297c8996d0a75efcc4c5124d7643857e3a5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1384M.obj": {
+      "bytes": 53026,
+      "sha256": "66543fc74c686eb86051f82c9b7ed3931c0a5b72ebb14ff2e90ccbf65a70b522"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1385.obj": {
+      "bytes": 23781,
+      "sha256": "76ad80b70d292c181e8947d623ddee8f373a20813e4d0fc8842c9b29800234a6"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1385M.obj": {
+      "bytes": 23468,
+      "sha256": "7b8bad4fbf9ab385a923da194a35a1fb06c42d7301d4977e736f8da0f6f7db0a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1386.obj": {
+      "bytes": 50098,
+      "sha256": "aa653c971e6d50e27f0b0aa90e5a6bdf453038bc4c63c51395425d4e0f4bfa26"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1386M.obj": {
+      "bytes": 49624,
+      "sha256": "f426c6d272285a14f588a479e91093b56f39862b90b7c614ca37c6d2b68a9f8f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1387.obj": {
+      "bytes": 41535,
+      "sha256": "11b4051e92be3f915e1ca7be08be43f1d8fc360d391903e6b0a83cda69b0a00f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1387M.obj": {
+      "bytes": 41173,
+      "sha256": "31a1eeffb990dc0f73817c3d53459bf3ef41b764a4c77eb04734f9d7e341c065"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1388.obj": {
+      "bytes": 77768,
+      "sha256": "9b38a442bc6c67ecf339aa16a98f0c1aa3b83ec0f664cd6a443eed3ce381b464"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1388M.obj": {
+      "bytes": 76646,
+      "sha256": "ab3cd072c60f5f08f8b02866569b99e4050d52b3da1e0c3585630278863b6e6a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1389.obj": {
+      "bytes": 34476,
+      "sha256": "86b7a17497e4efde3030ec8e542178caba1c875a7af62d491ef8c89e42528444"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1389M.obj": {
+      "bytes": 34068,
+      "sha256": "56b4b576426370d783dbf71f4e37922411644b3146fea22c6cde7c7800e061e9"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1390.obj": {
+      "bytes": 129388,
+      "sha256": "3053f68fa151832744775c9aa012e13ef575657ffc2638fcd466e49defcc86ad"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1390M.obj": {
+      "bytes": 128161,
+      "sha256": "c10d0f8d9c56f95701d695be297c228e679d5929076a577cef82073d1be5e773"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1391.obj": {
+      "bytes": 72945,
+      "sha256": "82b364ba67142432c00427d87596e82fafa4524929273e20a75aa6062f553d52"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1391M.obj": {
+      "bytes": 71983,
+      "sha256": "bca42e734f25c397d2be5bee832c1abb263ba2c0263f8fb9c1fc3b961d31d183"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1394.obj": {
+      "bytes": 201640,
+      "sha256": "621dc10e974bcc1c53a8843bf1db3a1c322c8327d279010c58533bd28952bf08"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1397.obj": {
+      "bytes": 260975,
+      "sha256": "d7f3aa44801171baade1a59c40a8f8bda72097bec07047f93f24ebaac4546cb4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1399.obj": {
+      "bytes": 22037,
+      "sha256": "fbe4139cda56df2fe947b59c6e09e20d6b0384760d3425056f48ff5f7aa6a84d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1399M.obj": {
+      "bytes": 21783,
+      "sha256": "c563ffeca1d282cf206accf4bc8f6052ede6e50089b04e8018704bf20e012c60"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1400.obj": {
+      "bytes": 90303,
+      "sha256": "e09959b4180b40e4272430e9cd7bd1fbfce954cd9c39236a3acca1a4fc495553"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1400M.obj": {
+      "bytes": 89074,
+      "sha256": "d598846d1738e708a810a4a1b621fddce3f0b170ccb8e9905cf1720108018567"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1401.obj": {
+      "bytes": 109236,
+      "sha256": "388e7598162d73b22c18d198b9fa4abb5359eb95ffbbfbf0941740df85e0a4f6"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1401M.obj": {
+      "bytes": 107666,
+      "sha256": "0d4bbe6e641e42b29c32bee8e8e9ad627ff8ed52c1eb6daf805e4661aab3c14f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1402.obj": {
+      "bytes": 174040,
+      "sha256": "f5165be945dbae2a81a1261b5f5c169c9ba677e80c70af263a08efc2f57f3f53"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1402M.obj": {
+      "bytes": 172318,
+      "sha256": "6b2f97b45dddd3045655cd1495f09db6baa4d3b9c19a84af5e00f0745c193d88"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1403.obj": {
+      "bytes": 478061,
+      "sha256": "e9a3ed2907b10d8f4d93c78f04eb0c4b3b96a44230958b90979a0d7142695fdd"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1403M.obj": {
+      "bytes": 471924,
+      "sha256": "e4c650b3ce2ede4c4a4203a90bd553c1bcc82b0c7931180ec54251d744142759"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1404.obj": {
+      "bytes": 155895,
+      "sha256": "04351a6f38fcadfe953f5e4bc7ab2c0bf568363bfc5f7985bfa51ea24bb85ee2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1404M.obj": {
+      "bytes": 153342,
+      "sha256": "548a7daab9c9609d01d7f7b6173c594cd6b782a362066770dd63a5f4bb48ed52"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1406.obj": {
+      "bytes": 390176,
+      "sha256": "cb5acc498691b7718bb7de1bada794e789687f2d91de9717c53e27cbeacceef8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1406M.obj": {
+      "bytes": 386321,
+      "sha256": "72a1f9f39600f04830b4639330d8503f4af27f358cb45177b3335d594b8cbb92"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1407.obj": {
+      "bytes": 113557,
+      "sha256": "cbef129a1fd217b80efe9688ec6b4e0dbf7471d81b5f15a20e12ef7f04f42d17"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1407M.obj": {
+      "bytes": 112408,
+      "sha256": "d2a516bfd3720c481ca3e8410729117d527c0d9af08d031d643d51554284e031"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1408.obj": {
+      "bytes": 133596,
+      "sha256": "5d04387c23d30f567bd43765a7eb860bb5844bd67a16e8ddf3c571eaaad9facc"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1408M.obj": {
+      "bytes": 132515,
+      "sha256": "e97e27e52e6bb56cf3dac144bb7e16bdb86ff9783b664b6ac1df12ce3d395807"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1409.obj": {
+      "bytes": 151020,
+      "sha256": "ba330adc0128b26a50b4a5bd0a0cedcd3f32dbf09ae25f4e0587949dbd9d3d11"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1409M.obj": {
+      "bytes": 149364,
+      "sha256": "00da03d824ec49bb50df14bf8f75af06e9fa095694ee215ae4ade2e42dd529cd"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1410.obj": {
+      "bytes": 304555,
+      "sha256": "40c36bc4dc24e161c84daf6e96017f9d78b4cf964579a873e267d2619be4aa2c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1410M.obj": {
+      "bytes": 301944,
+      "sha256": "6a1b953dd854c4b09c59f52752ec38c38d5784c40d7da2bbbce94c713f52b8f4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1411.obj": {
+      "bytes": 132819,
+      "sha256": "e6e64e705d75002d677c0483c9c39a80ea3759ff1408e730ab9a5abc2d28e4cb"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1411M.obj": {
+      "bytes": 131318,
+      "sha256": "767074f1747e3dccb4480a2375dc2cfa0b35e8a44fe49415cbc91f3c7c818757"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1412.obj": {
+      "bytes": 67952,
+      "sha256": "861d6da24530c840934d94591e7f769d1b3298adb32ba7bb0ecbb78963cf6657"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1412M.obj": {
+      "bytes": 67233,
+      "sha256": "376adf52d61b1f0e96e54d83084a4300d1f204c3d8e4484c5edceae146a1fa05"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1413.obj": {
+      "bytes": 227620,
+      "sha256": "4910cc83a0e1558971c95ce4b73a4845e3ab63a19cd3e92769aaf46f0bd41333"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1413M.obj": {
+      "bytes": 225781,
+      "sha256": "77dc59309567b31f6842f30c45f24fccb2a3e9b17fbde558d1ce036c640bfcca"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1414.obj": {
+      "bytes": 316264,
+      "sha256": "532d7f590f1997884f6307408173068414857a6d7d1a576cdb8828946bf427af"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1414M.obj": {
+      "bytes": 312760,
+      "sha256": "48b91d56ae11ea60d7ae335f6b89110de4e3cbe06a3774dbc6420fe3725831b3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1415.obj": {
+      "bytes": 198872,
+      "sha256": "b00ad979e807617650ab158b609e9c2c1032a9483be5e9c9ec5a4796455c809c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1415M.obj": {
+      "bytes": 196608,
+      "sha256": "2cbe6f64ab578445284e188c89f454feb8a3a986e5460639720384e8269e6421"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1421.obj": {
+      "bytes": 227763,
+      "sha256": "82d12d8359e66303a7e5a21c2b9b24b26d33b8bbeab55f8f97c87881e25e5fa7"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1421M.obj": {
+      "bytes": 225310,
+      "sha256": "1c760938cc531c810758cf5f9fb25ff3a6a0cfd7798d102da95b3269f6741b00"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1427.obj": {
+      "bytes": 97969,
+      "sha256": "8dfb6a8868ddbf1e72679a821fb79ed49573ed6ceab40108bd0d5b8c109171ba"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1427M.obj": {
+      "bytes": 97171,
+      "sha256": "47b3318cda125c5ecb82ebace21dd8841c46af48b4f0eb9e568e9e0aa0275c36"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1429.obj": {
+      "bytes": 166143,
+      "sha256": "49fdbe0ba556419a9c29efca287a944630275fb55b75f93168af254efaa777b7"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1429M.obj": {
+      "bytes": 164531,
+      "sha256": "58b6f6b7d9707a72e660ca54b526b93a207ab549dd995ebc896588e8aaa3adad"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1430.obj": {
+      "bytes": 60206,
+      "sha256": "78f5d5b80867116a0bbf59575efb8de3ed681030875a577bc00d310012df80fd"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1430M.obj": {
+      "bytes": 59674,
+      "sha256": "96ece008a2edf30338e1b53611c86de64f2cc329af84fe5d54e9375469c3babd"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1434.obj": {
+      "bytes": 270306,
+      "sha256": "670d0351a8f017d4792ee7c5780557b5468a298e128cf44da9443d2712d24eb7"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1434M.obj": {
+      "bytes": 267711,
+      "sha256": "4c32d96cf9113542f135a32f8a709505fee10796b9b076cc16c7efe665778bc8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1435.obj": {
+      "bytes": 307942,
+      "sha256": "1fdce0f7db538e4731207af06a293e41037c2474192f61ca2cb5b0d663b16894"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1435M.obj": {
+      "bytes": 305370,
+      "sha256": "27c6f7bdf85a103b4247153f4ca08c846ef0037b92d5032af542496822647cad"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1436.obj": {
+      "bytes": 195220,
+      "sha256": "a9351992df5093e761784b73ca3f4a7d09d0c997e3cef2f840a45b863eb7097d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1436M.obj": {
+      "bytes": 192790,
+      "sha256": "e97560023348e6d7aa6d1586862a9717b6ae6ffb72f8ceee8ecf43f3f63c567f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1437.obj": {
+      "bytes": 307036,
+      "sha256": "c9c62b720ffe375a8eddf390608684a796f1ea54880a5c34fa440404addc399e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1437M.obj": {
+      "bytes": 303662,
+      "sha256": "66d10b2e0d114158a9b2aa8751b5967ca24f1231f2e2905ebde4755cab62902c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1439.obj": {
+      "bytes": 213354,
+      "sha256": "b03d2f54644969d153d3dfe4025ee629858e72c1e5ee3b0e7d5f16f54dc505b3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1439M.obj": {
+      "bytes": 211659,
+      "sha256": "948b094bcc119ddbfcfeec4cd27cf21125f27d2d3c25c5344091fbc05833e971"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1440.obj": {
+      "bytes": 476926,
+      "sha256": "6fc367885524fc416139372b55c64d8e1e4bc9010bee64020a72ad8e6f34a57d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ1440M.obj": {
+      "bytes": 471162,
+      "sha256": "889b43062ffa5bc75a7acd866f8a9cc5a6296413c5d0fcefd2f5cb144c82ac9a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3179.obj": {
+      "bytes": 16797,
+      "sha256": "99c76669f09d0758cd2baadbba001728458615370705ef255b933f184689941b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3180.obj": {
+      "bytes": 20679,
+      "sha256": "4b3b06a548ec2cf7eec686f9314dc0fb10fd7a72afc216b88d0b2bf857bb7bf1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3181.obj": {
+      "bytes": 15002,
+      "sha256": "71e7e83288bde730b7f2c04b3150de2d27236f0ed8e9db6a88704f6c1b9c9721"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3182.obj": {
+      "bytes": 26065,
+      "sha256": "aa0a98125fc8e3cfafa4eb1a4a00df9f21b7eefbd6d66327561a70be6f15c5d9"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3185.obj": {
+      "bytes": 15693,
+      "sha256": "5978ed3c7d728bc03a558c5fe2a7db6fd272d02dc6ed67a1fbb21ce1693d659f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3189.obj": {
+      "bytes": 15966,
+      "sha256": "82657ea63694cff41a774da0ad28110e80ea4951e0ddaafcb2e2646275a22702"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3190.obj": {
+      "bytes": 17108,
+      "sha256": "b31499b63bc1798909b2c8cec77b7ebbb422cf2e0f715381601aa7c136b32aa9"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3191.obj": {
+      "bytes": 15459,
+      "sha256": "24a38431aa67546c25d938f7c5a572fb1206ffcf6bb6a14281c0322fc3d03bac"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3192.obj": {
+      "bytes": 30067,
+      "sha256": "aa15fa88eb0a4643efca0763a8088091f970ae510003dcc78c63e9a3dece5b03"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3195.obj": {
+      "bytes": 16659,
+      "sha256": "8053dcba2724d596cd66546934df05d04e5019b3b95ed6ec46795dff1b9abfde"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3241.obj": {
+      "bytes": 70975,
+      "sha256": "1bb41c84fddb65d6394a55c1f534102794942541212702008a6316f93ba08e16"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3244.obj": {
+      "bytes": 51577,
+      "sha256": "4992101f55b96d8fe47abca6e441c902ba1e60429ee41576a1d3a9fc17e4f22a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3247.obj": {
+      "bytes": 47147,
+      "sha256": "84d0c310fd1448e753ac7ed2bda2d62d9dfb8fbe78f749111aaae3a7281ac5cc"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3250.obj": {
+      "bytes": 48548,
+      "sha256": "e1656035430f9bf5c5b5bb3de96fabfd18e3d78c6e47c39a403a47bd80dfa61b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3253.obj": {
+      "bytes": 51785,
+      "sha256": "29642383bc5c2d96f7025b2da0b8139f5b71d5d0e1470622745fd9b606575010"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3256.obj": {
+      "bytes": 80416,
+      "sha256": "5424e3e394e233213071fbf46f178ed9123da4763d6b64125f32e7b8af1803d8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3258.obj": {
+      "bytes": 55263,
+      "sha256": "1d9269949005e15c6a39fc30cbe5499468e99c074d5ccf48e1032c8689e12664"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3259.obj": {
+      "bytes": 197175,
+      "sha256": "d291cc3619c32c68edb9d29e0b755634c2cb85e3db89f0d0b63a316f879ef86d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3260.obj": {
+      "bytes": 67079,
+      "sha256": "b5fbb694e1d881033ec8318b97c41e9d9bedc89a8df9845573b1aac528829331"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3264.obj": {
+      "bytes": 31578,
+      "sha256": "6770594a46c236c3585febbea87f2e19ce4e27e83def3f37d2a653888c7e60dc"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3267.obj": {
+      "bytes": 43877,
+      "sha256": "60757ac856520feaac072a47e77d7fffb98571d099838a9c628ccad8fba28bbc"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3271.obj": {
+      "bytes": 63715,
+      "sha256": "0924246c1693b45623469428ccc7dd86688078edbf7d3e43471f3b8d37e3644d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3280.obj": {
+      "bytes": 85959,
+      "sha256": "56b40cfe8944df25ebed250dbcc80794ee5435e6ab667edddabf4324553bdb3c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3282.obj": {
+      "bytes": 101389,
+      "sha256": "40e55d7d28f060be61815603ee5eb1c0ba4c2e93af6fed6b5db7ca88d4ed82ef"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3293.obj": {
+      "bytes": 20887,
+      "sha256": "72afe21185eed25dbab98a1bb7cb28e64012f672bfb3a76d81fdbf5b531f4958"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3294.obj": {
+      "bytes": 19296,
+      "sha256": "036f7e9bca027b8b7e6075976249ba90178a9639591878a1b5954d0f7d237c17"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3295.obj": {
+      "bytes": 18898,
+      "sha256": "cffbba99a2d64e833cac9545d91dc21092b2d7ecef35dd276a80ff7d35157239"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3298.obj": {
+      "bytes": 14800,
+      "sha256": "140d41e53c49bbbaea54972b738b215d3c3ef6bb9c5284f9f7e0516a25e2f68c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3300.obj": {
+      "bytes": 19079,
+      "sha256": "505ff6d5185c0cec018be5a18206a2ccbcc8822f09b9282b9ad2586716d3a3d9"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3301.obj": {
+      "bytes": 19742,
+      "sha256": "1da31f6465a4767ab9dc18df433e5e0df0da4e9578d2864b02e5a71e785b5d8c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3302.obj": {
+      "bytes": 23226,
+      "sha256": "dd69a8df55e8ff34f55fe2b906507aac2659be0d2784833b6a0c2046258929e3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3305.obj": {
+      "bytes": 10016,
+      "sha256": "e1a4698c0de159b1851711084ddb96ccaf85022d941f305d670789444d6395bf"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3307.obj": {
+      "bytes": 48953,
+      "sha256": "a9608a209e96492213275d1592554855a6acbf0d3a5ec8b05fb5fadfceb5df6c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3308.obj": {
+      "bytes": 48252,
+      "sha256": "0e08f1570755a9675e2556013eda861f00f31fe7ae2139e24584129dfe78d2c2"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3310.obj": {
+      "bytes": 30988,
+      "sha256": "bb72eb8ed4cedf8ad2ab9a0ee2de9c80232ab6bd0e8840259beb59b8bac3bd07"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3311.obj": {
+      "bytes": 26453,
+      "sha256": "4787599e0e9fefaa45c40736f38ccacc8ec7e7e867cde692c5ea4f775e97364b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3312.obj": {
+      "bytes": 27741,
+      "sha256": "32b171c096dfe9993503b4f14e58d5b2996dadf73352efc506c04d1098370a5b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3315.obj": {
+      "bytes": 25033,
+      "sha256": "4488ac24e66f25118feb375fbdf19e6e123595cbd26c726c3df1604bec59c7f8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3319.obj": {
+      "bytes": 26105,
+      "sha256": "f8f7d8f026953233fd9412b80ba897fdd329a48108cbfd11578b56dcf9edcc1e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3320.obj": {
+      "bytes": 28697,
+      "sha256": "49b6fc5fe03ba23422e852d1fcd419b94bafbdf69fd20552eca0620e1ed62e6e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3321.obj": {
+      "bytes": 27850,
+      "sha256": "87949e88d498df13a376db05c0b094bae55ade09d5dec4ebd1557a5022d4f8ea"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3324.obj": {
+      "bytes": 25996,
+      "sha256": "deeabcf2bf83d7b9f77acf1c1634650805d467188f05505a6898aa3cbbdcea2b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3328.obj": {
+      "bytes": 24728,
+      "sha256": "fd7064f417423cb6224e68867b0f3c5fd46c165a76fba035199e4db235d0616b"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3329.obj": {
+      "bytes": 33793,
+      "sha256": "3b6770f4dd2bfc54fea30468a90eafd63c21aea8381688ce0912f85502f86f25"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3351.obj": {
+      "bytes": 69311,
+      "sha256": "b70e565ec8ad8c09264ae66159415ca4f0cf639598812aac6fcf7b761c3758d3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3353.obj": {
+      "bytes": 53148,
+      "sha256": "f6c034b6b18aee623f510ee40e4171346c084e8bdd092354d634c87fc9af6acf"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3355.obj": {
+      "bytes": 45924,
+      "sha256": "90b28dbcd11e3d3a6f253adb1ddaa33f30040a08c71bb3a86242372ea9b6170e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3357.obj": {
+      "bytes": 43587,
+      "sha256": "a5fd57a36b7525de383809bbbb37ff6a56a08ed0fb25af1684085418cc6e8202"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3359.obj": {
+      "bytes": 49445,
+      "sha256": "cc75b866a2d5ac0317eb3a1d64cef41a65231fab975613d108a4fcdcbc2c58b1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3360.obj": {
+      "bytes": 81782,
+      "sha256": "b53e7970e822e997e1b05f94f42514d07a3f98edcc63ec7dd7219354ce1d8176"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3364.obj": {
+      "bytes": 60077,
+      "sha256": "d5ac55e9aa466b0e14d8d7760f7ef2a6edb0d95cfea56205557f647c451a8079"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3365.obj": {
+      "bytes": 192114,
+      "sha256": "5eff0f92905dd45bd0e79b1de0144dc15988c73c683468163255ba1452d58037"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3366.obj": {
+      "bytes": 69197,
+      "sha256": "d03fee02cf8eefad1ecfcb9246e3f43ad3c4615c21ce08dc5e2b6901c6395a86"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3370.obj": {
+      "bytes": 30366,
+      "sha256": "3501e34aec7f81bd12b237c9bdccf2c8185d05895637427a92b210edc8423c33"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3373.obj": {
+      "bytes": 41983,
+      "sha256": "628c8da7294f477a1c8c50d6445159bbff0ecda91d35dde48f780eec9eb9657c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3377.obj": {
+      "bytes": 65003,
+      "sha256": "7ae757be0a8a55129816045c2e92b32576e2c96fe3b047f7841807092b5bf8f4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3385.obj": {
+      "bytes": 89820,
+      "sha256": "8b35f0132c1a05b64f26746fdd0496a2495280cd0c2ac90dbf637fd74f79f54f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t55/FJ3387.obj": {
+      "bytes": 100137,
+      "sha256": "01879d7310938e82eecc02e1115332497e94085ff5cc1fa8eeee47ad1f5d3578"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t71/FJ3153.obj": {
+      "bytes": 56262,
+      "sha256": "371573a43e28506d674bf4999ee4c50c0497014aa8d69865f450a078d493a495"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t71/FJ3157.obj": {
+      "bytes": 193798,
+      "sha256": "67940f16382935851ebeb7a86c926dbf922070f390c438fdbbb56f7b7fb76057"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t71/FJ3159.obj": {
+      "bytes": 214016,
+      "sha256": "5e6301d2020ba73167e71c274848ddcbec0f7936d9f26a78f2de8ffa82f095c7"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t71/FJ3162.obj": {
+      "bytes": 214360,
+      "sha256": "aa58bbebf75e858d5258926b3f85ef6bc27f765464e87bfc828baf24156bf155"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t71/FJ3165.obj": {
+      "bytes": 229803,
+      "sha256": "2b02ea3874d39295b15a7de2a2b2dd1367cf5a00a5ba5f87519f2a7064b2286f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t71/FJ3168.obj": {
+      "bytes": 252134,
+      "sha256": "0b8d0317800abd7c7cb66473cfa23bcecf2b2a8060a4434f32eb9f6ea93c1cc4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t71/FJ3178.obj": {
+      "bytes": 374292,
+      "sha256": "ec90f03f2ce1edebc8793a9e9973229b198d6367eb5eab1dff6e238110e94d9d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t71/FJ3290.obj": {
+      "bytes": 164755,
+      "sha256": "e94f731d044131260947146ab79fa7c4712865e1aac36a1410003358b96e0692"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t71/FJ3393.obj": {
+      "bytes": 654878,
+      "sha256": "cd04cc9f78d758ba34e92896914f647d22d257b9e7e51b97764670f694033489"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ1433.obj": {
+      "bytes": 389745,
+      "sha256": "a5f75907d784dd2a44d7efa96cb31009aba2afe43465336b105561751b19f8ef"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ1433M.obj": {
+      "bytes": 386385,
+      "sha256": "3871310f1c1f76ca55cfa4fe043d2e3a25488903fe695674a87c7c893cdc99ae"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ1446.obj": {
+      "bytes": 105002,
+      "sha256": "7a0d77a63b06d4212998bec86f84853287c3a21696ec7afc92c7767c987a726d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ1446M.obj": {
+      "bytes": 103977,
+      "sha256": "3f9dbd5c3f6fdf043454f251d69ea96547dca4bc1efbf7bffd85315fc1a9fd34"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ1447.obj": {
+      "bytes": 141480,
+      "sha256": "e239a63adf99dfc094ece7efcd91ec7cd9ac802e9d7581141b311a7842fbbbe6"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ1447M.obj": {
+      "bytes": 140158,
+      "sha256": "aab8ea03eed46a79b3f765ef539df785deb333e5079c21f8c7bec14444768a18"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ1464.obj": {
+      "bytes": 556794,
+      "sha256": "f446df845d19385cdbd5b86457c8690981cbc914f8f9595b50bdc4a44505aab7"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ1464M.obj": {
+      "bytes": 551361,
+      "sha256": "a2ffa047e9cff27df3ed7cb5f305491ce921f236cfe60ee90334cc5fead271c3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ3200.obj": {
+      "bytes": 1005988,
+      "sha256": "48583dbbeab8ae243aa4c266b44ca5b26b9c4e1e79976819cfdf5dcb59ec5772"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ3289.obj": {
+      "bytes": 355295,
+      "sha256": "c38102c34660e2b767a7b95a341380bf4a52c754c6235fcd322be5c7b8cb1745"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t72/FJ3309.obj": {
+      "bytes": 843673,
+      "sha256": "c0262a08591e48504c8a53302525377e0c4ad1c165456475f3bb80aab6202d44"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t74/head/FJ3269.obj": {
+      "bytes": 384818,
+      "sha256": "a56eeb3723f4b3cd1d96b113eaba8f253ed49ff76220ba48ac0d1d086b80ff60"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t74/head/FJ3272.obj": {
+      "bytes": 28146,
+      "sha256": "cc03a0b61102415dfa66cc55210f65c71ca9466e6e043d350449eac71b414a24"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t74/head/FJ3274.obj": {
+      "bytes": 956860,
+      "sha256": "df63a28fa604ff67828d8f382c66cfa46f40306b1b4c17a8062029764047d0e3"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t74/head/FJ3281.obj": {
+      "bytes": 341132,
+      "sha256": "47cc46f1480c54fe14a2d22361c3b93fcb964538f23d5b425ac718854cff2673"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t74/head/FJ3287.obj": {
+      "bytes": 96711,
+      "sha256": "9cfd8fd359816b5fa5ed9758f26d942c7ada0900aa7f614aff39949fdad3ddee"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t74/head/FJ3375.obj": {
+      "bytes": 388581,
+      "sha256": "a1be9480b632355859507e590be68146a591d343ad671ca85c43d7be50d8b43c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t74/head/FJ3378.obj": {
+      "bytes": 27685,
+      "sha256": "1acb8f803fb2cd9679eccd1634768b1bbee0714ebef7cf2de041d9332da88acf"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t74/head/FJ3386.obj": {
+      "bytes": 349972,
+      "sha256": "cae2e4dc5211d50b06e70893eef3bdaf19564ab8ae7923260e800c3498f65f88"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t74/head/FJ3392.obj": {
+      "bytes": 101102,
+      "sha256": "e2c25d922162e3a76131e40ddf0356709947fa554b46640fa1880c381bb749c7"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t75/deltoid/FJ1467.obj": {
+      "bytes": 92591,
+      "sha256": "2f69f1a13c836539abca85d9b77f55f96319ad3fdd75c62f498eabe49b266bfe"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t75/deltoid/FJ1467M.obj": {
+      "bytes": 91869,
+      "sha256": "a523b5f2ab862ad6505787f4936098fbcfe3f28a3742b57aac34307fe752f8eb"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t75/deltoid/FJ1468.obj": {
+      "bytes": 223657,
+      "sha256": "09eebb4a8d72c91936b0bfde7f35829a58f56103ac158f559186698458bcc616"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t75/deltoid/FJ1468M.obj": {
+      "bytes": 222006,
+      "sha256": "75340ac9157ea6c64baaa74c0bbfd6173114dcff0d30ea814702c288b002f104"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t75/deltoid/FJ1513.obj": {
+      "bytes": 157136,
+      "sha256": "ef8308c92fd0d01d8c0d7ffd9238305eefc2f28710d7bb58f451512abdc08e99"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t75/deltoid/FJ1513M.obj": {
+      "bytes": 156732,
+      "sha256": "a806a9a20b68009f0071c22411b009f4baef3de118f00a37cc4a3be8cdf7ce2e"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t76/pelvic-floor/FJ1453M.obj": {
+      "bytes": 321290,
+      "sha256": "32c66e9739f2a0074be36918181d288dad7c79e781d0ca680212d10e85a01429"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t76/pelvic-floor/FJ1457M.obj": {
+      "bytes": 348032,
+      "sha256": "8ed11be992637e9e9a13c19191767cdda90f0f822444c3571e8f3784c7c43940"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t76/pelvic-floor/FJ1458M.obj": {
+      "bytes": 342998,
+      "sha256": "9a1b0ccb5c9221adc38d914567bf9ec7ca060787e923bced5aa608040c21926a"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t76/pelvic-floor/FJ2544.obj": {
+      "bytes": 296272,
+      "sha256": "9f6862a86ca831359adb98d87ef2b051433827727f2c4b51c4fbf59c8212b84c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t76/pelvic-floor/FJ2545.obj": {
+      "bytes": 327718,
+      "sha256": "1ef611b58e0beba262d31c1015ade4a5e5ad0bd6cdbc08d3fd68be8d3444d393"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t76/pelvic-floor/FJ2546.obj": {
+      "bytes": 304204,
+      "sha256": "c128924a00c0eb58eb0ee74249cf9a63a1b962e5e91133c0f958d268f019fb72"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t76/pelvic-floor/FJ2549.obj": {
+      "bytes": 325824,
+      "sha256": "b5733ded901a2785ed87a12451f77118f4ca3e72abba87d1900a5fd758f23ccc"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t76/pelvic-floor/FJ2550.obj": {
+      "bytes": 364094,
+      "sha256": "7621e58ec06b0bd01e66d84e8d3f9d7245c1a892bdf44e514cc7a8694df8d574"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t76/pelvic-floor/FJ2551.obj": {
+      "bytes": 367735,
+      "sha256": "e6fd6ceaabdfdab3c0af96815aede5e76d16bc59c52da4dd393c5b6f42239a81"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t79/FJ1477.obj": {
+      "bytes": 182250,
+      "sha256": "1d1c3b42eec0dffe696bd25cffa81784c87c15f16c9605050fdf1cb2f47698dd"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t79/FJ1477M.obj": {
+      "bytes": 180451,
+      "sha256": "96d9859e983736f53864e53fa0579b8f6a18006067967df42e4fe7ea2d2b9e6f"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t79/FJ1478.obj": {
+      "bytes": 105386,
+      "sha256": "2442d2b5ac30c5da42e72eeff83d143df51c7617001cbc6552096a504f29bc07"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t79/FJ1478M.obj": {
+      "bytes": 103260,
+      "sha256": "10189f1d7b5220df3baef2b259ae9855ed301c1afaadfc2de25af3222c5a08fc"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t79/FJ1479.obj": {
+      "bytes": 113287,
+      "sha256": "acc48f746bd07a117357a9c49a1a9850c96b85d7c63cf90a662a45717875a315"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t79/FJ1479M.obj": {
+      "bytes": 112468,
+      "sha256": "4b8315f9134a213f45c3af830270f4526e705d0a149894516d3f5fba98878f15"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t79/FJ1480.obj": {
+      "bytes": 61608,
+      "sha256": "1ea653667afa5ff0bf0e01d71ac648819655241c130e8dd1778ed2f9561c34c5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t79/FJ1480M.obj": {
+      "bytes": 60584,
+      "sha256": "fc35854102a057ca85a201eeff4c18f03722b1ceab52c311ce1b87abf4fa2ff8"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t79/FJ1512.obj": {
+      "bytes": 161507,
+      "sha256": "2173b7cce29f11036907b80e068e9bd6c16f22359d6e7994af9684454b99b4d5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t79/FJ1512M.obj": {
+      "bytes": 159783,
+      "sha256": "6b0ed7b70973b3a2e08de4ea5ce59c05a4ddce2b90212ff734326be2726d1293"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t92/FJ1520.obj": {
+      "bytes": 812371,
+      "sha256": "6bb3d13198991bda4d0aae27561976b9ba53b0d21d817f180098307c7b99deb1"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t92/FJ1520M.obj": {
+      "bytes": 807078,
+      "sha256": "5ca485d5bfe97fd5a9e17d76d2a77077577e13f19584f5634a8eb1bbc6d7da3d"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t92/FJ1521.obj": {
+      "bytes": 537515,
+      "sha256": "19bd9d1cbbb84e10826eb770068f6e271cd79dde960bca62ac71da24120fc354"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t92/FJ1521M.obj": {
+      "bytes": 532693,
+      "sha256": "fe756252f820a47e9c757f67de4ca37adf44837dbe0d10c6d2e5df3a5a6a0751"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t92/FJ1554.obj": {
+      "bytes": 351869,
+      "sha256": "f7683d77a5bfe9ac6d07fdc913c46cf41db20298c087e71df73fab18192e90a4"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/mesh/t92/FJ1554M.obj": {
+      "bytes": 348493,
+      "sha256": "a08a23c17d20a120eebe96a9c8db1bb86672529fb8f34868d5f7cd28f5df98d5"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_element_parts.txt": {
+      "bytes": 1142159,
+      "sha256": "a3de74423f943b0d724ae8f59b3a817f87c423a544f8db98113b1980817cbeaf"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_inclusion_relation_list.txt": {
+      "bytes": 207664,
+      "sha256": "26e7d818e03a8c909fe09c561f38d0d513423c87681f9450a803bc38f5b07564"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_parts_list_e.txt": {
+      "bytes": 128086,
+      "sha256": "ab7796deedd49205e77f3609a1cb8c53e2bbee14ecb5c9a6ca05227469780513"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_element_parts.txt": {
+      "bytes": 651179,
+      "sha256": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_inclusion_relation_list.txt": {
+      "bytes": 91241,
+      "sha256": "1b40738270931e3c1d955ce34e0fce0d8d10d8c5ad543463e40b4b4c0243007c"
+    },
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_parts_list_e.txt": {
+      "bytes": 59351,
+      "sha256": "9224080557053e6f1322f1e13ab27f0ecde0db19bb3b505f0631afad230eeebd"
+    },
+    "atlas-data/source-cache/z-anatomy/t97/Z-Anatomy.zip": {
+      "bytes": 86734957,
+      "sha256": "e029688545627bd0214b269e1063143abb580aad72b2c2445d6d8a9a0d9da736"
+    },
+    "atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Anatomy-shortcuts.py": {
+      "bytes": 299242,
+      "sha256": "c1b723cee484758598e88ac11714ef8126d51915999d9ceea06fa88fef8b17ff"
+    },
+    "atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Anatomy_Bright.xml": {
+      "bytes": 47831,
+      "sha256": "be7c634e3f195f7ed253afd0e457936823396bfa72af2c66368557c8e6f87f86"
+    },
+    "atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Anatomy_Dark.xml": {
+      "bytes": 47797,
+      "sha256": "7daf14f7225f89d5025dbc6bdb8ec4a99e8ccac1e7b9f208bb82de3296c3f07b"
+    },
+    "atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Startup.blend": {
+      "bytes": 306838281,
+      "sha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd"
+    },
+    "atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/__init__.py": {
+      "bytes": 61600,
+      "sha256": "bd4df0dd92872bd07d9d883d7c724584b72640a016df8d067fc7c5c3d5d85306"
+    },
+    "atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/splash.png": {
+      "bytes": 706133,
+      "sha256": "3ffe1b89130e7164561051fbcebe5ccfcbcdfc1f0be87bdb1d419c54250c27a1"
+    },
+    "atlas-data/source-cache/z-anatomy/t97/latissimus-obj/Latissimus_dorsi_muscle.el.obj": {
+      "bytes": 8450,
+      "sha256": "57c3e37f30e85d1124874e158382ccf21671a1e0721ada8cea3b01b759844e34"
+    },
+    "atlas-data/source-cache/z-anatomy/t97/latissimus-obj/Latissimus_dorsi_muscle.er.obj": {
+      "bytes": 8598,
+      "sha256": "21ba72f134d936d09fe13c9315339f4758be7e101e7084dabb9fe854b842c6ac"
+    },
+    "atlas-data/source-cache/z-anatomy/t97/latissimus-obj/Latissimus_dorsi_muscle.l.obj": {
+      "bytes": 780652,
+      "sha256": "b6adcbfbd06679c897cff1dd26e8fbe622a003ec7d5ccdfa078b9a64feb36889"
+    },
+    "atlas-data/source-cache/z-anatomy/t97/latissimus-obj/Latissimus_dorsi_muscle.ol.obj": {
+      "bytes": 3071,
+      "sha256": "751fbdb342f68d65870c0b901206200c21150a2c5e3c12a124d513161a137b06"
+    },
+    "atlas-data/source-cache/z-anatomy/t97/latissimus-obj/Latissimus_dorsi_muscle.or.obj": {
+      "bytes": 3129,
+      "sha256": "5623bda6ddc0318706150eafd0f1d6b42feb2a87e595c49cd278c24add8a6f1b"
+    },
+    "atlas-data/source-cache/z-anatomy/t97/latissimus-obj/Latissimus_dorsi_muscle.r.obj": {
+      "bytes": 790780,
+      "sha256": "3192902a157099af776e68a175b3d926394bc9e6e88ff92f69e3a9959501a5e0"
+    },
+    "atlas-data/tools/acquire_bodyparts3d_r4_t104.py": {
+      "bytes": 11886,
+      "sha256": "1724cad57840344dfdc0f598c8cb447dab9f43e2aab455c9bc2dfa34c22c0027"
+    },
+    "atlas-data/tools/build_bodyparts3d_r4_t104.py": {
+      "bytes": 30910,
+      "sha256": "9a69b01d9aece75a9750cad417311f14a4cd2d28f1718a6e19ed99f49de284d3"
+    },
+    "atlas-data/tools/freeze_bodyparts3d_r4_t104.py": {
+      "bytes": 15301,
+      "sha256": "8e899eed461d39681541e893d8fee607c10cdc4c3db2d42d23ac94eb97de07d1"
+    },
+    "atlas-web/package.json": {
+      "bytes": 4536,
+      "sha256": "6cb5b80192a0948789b0dfb04c052a0c153e36577e17476138606b4dbcddab1d"
+    },
+    "atlas-web/plugins/wholeBody.ts": {
+      "bytes": 11790,
+      "sha256": "a720a0b1ed3e70f65e25a6a8b17a5fb2783d810d03b1032f9923e26e8ba0eb61"
+    },
+    "atlas-web/src/viewer/wholeBody/t104SceneExtension.ts": {
+      "bytes": 6523,
+      "sha256": "936f54f61e447ad4fbcbee256ed680c04931e1a6a57894dc96beb2a1bc49b868"
+    },
+    "design/2026-09-25-muscle-atlas/25-WHOLE-BODY-BASE-RESET.md": {
+      "bytes": 22136,
+      "sha256": "7dadf846cc570adab119bc7cc3ecddc4553ac1dee563f8a8e4ef2c88e721a2d3"
+    },
+    "work/EXECUTION.json": {
+      "bytes": 42824,
+      "sha256": "0c78d5a57096cfe3eb563bcefaed74f3ae01dd2222c3a01c0c2cc371caaec62c"
+    },
+    "work/NEXT.md": {
+      "bytes": 2753,
+      "sha256": "ba57792784904472ced1c46800f9546e3e5062d9ed85da3e38a7f35234e566ca"
+    },
+    "work/STATUS.md": {
+      "bytes": 115922,
+      "sha256": "ef056937bacc6efd045d63415e6774493b657d44e9b3a21c2c4c39db94ecf021"
+    },
+    "work/evidence/2026-09-26-T13-audit/browser.json": {
+      "bytes": 1087,
+      "sha256": "182a5281d8ff27a52515b81f4890b798761029cc3f7d22cad13616456729279d"
+    },
+    "work/evidence/2026-09-26-T13-audit/commands.json": {
+      "bytes": 15053,
+      "sha256": "2d4d1a3824b12a867505bf498fd39133ed09bd9d18609adbeeb80b63ff7413b4"
+    },
+    "work/evidence/2026-09-26-T13-audit/counts.json": {
+      "bytes": 528,
+      "sha256": "902402b37272abde2a80640ee1e20a59ed7194ec8e090db2fe4a9e8787df25d5"
+    },
+    "work/evidence/T104/NEXT-T105.md": {
+      "bytes": 2056,
+      "sha256": "d7cd2cc9bfe67d71ac81d1d5ab64fe0fc9e050cae840b1da4204d30d2db7be48"
+    },
+    "work/evidence/T104/browser-validation.json": {
+      "bytes": 3632,
+      "sha256": "5d64911c6a16cc022f144c6a98c7356cc9ef27f44f16912af351d64686e182e2"
+    },
+    "work/evidence/T104/command-results.json": {
+      "bytes": 2043,
+      "sha256": "593c65fff68e2d51482ca6036111fa0da79c3f8cd8ee781b6c9f878febc5b446"
+    },
+    "work/evidence/T104/frozen-source-set.json": {
+      "bytes": 46864,
+      "sha256": "bb91bc7c2189fc36854b3f4fd37c5002cd5d1d8cfa36388af590a27a89db0dfb"
+    },
+    "work/evidence/T104/performance-comparison.json": {
+      "bytes": 2697,
+      "sha256": "4a568b9fc0dbefa345ea5e3ffaae4db6da24be69ce0f414cc501ff5c6ab2ad9b"
+    },
+    "work/evidence/T104/preservation.json": {
+      "bytes": 52341,
+      "sha256": "8068c65e6c1457ef0f492012ac4abfecfbddc6ed8a486d474fec43c0bc0280ed"
+    },
+    "work/evidence/T104/progress.json": {
+      "bytes": 795,
+      "sha256": "795be4c4686b0a1bbd1893b243729e0939cb09ca7c3f6b101943013136ea879f"
+    },
+    "work/evidence/T104/source-acquisition.json": {
+      "bytes": 18466,
+      "sha256": "6df20f3c8be431ac70c157ddbc72d20a0976da0e5e116ce76a1e66cbb193eca9"
+    },
+    "work/evidence/T104/start-baseline.json": {
+      "bytes": 33933,
+      "sha256": "1dcb4f0fadccd3ccf55e21bd12ac615ce36a19e093d2fcb3eeba696258f12678"
+    },
+    "work/evidence/T104/start-status-porcelain.txt": {
+      "bytes": 11770,
+      "sha256": "c02259feb4c60804b478084d7e5cbb42ba6f3fedcbaa154587979b855a81803f"
+    },
+    "work/evidence/T104/status-registry-delta.json": {
+      "bytes": 1179,
+      "sha256": "0bf0484508f54974aaf1cee8f8977f71d1272a93f0c0d263c809d39f8a1f6cce"
+    },
+    "work/evidence/T104/surface-comparisons.json": {
+      "bytes": 15434,
+      "sha256": "4f87592989d7df919e2b26585c6ec588f77bb1621fd0c38cd1fe22d1be0337ef"
+    },
+    "work/evidence/T104/validation.json": {
+      "bytes": 23194,
+      "sha256": "a549b5e6b11baf86e4e8404fc23a2d0a6d867bbce25fc53f810e3a6f6ab2f34f"
+    },
+    "work/evidence/T13/additional-transfer.json": {
+      "bytes": 4435,
+      "sha256": "6b9184d2ed9ebb3c2522d57f9e6220a0a45d0c29f26389021b5bf5fd475224cb"
+    },
+    "work/evidence/T13/browser-qa.md": {
+      "bytes": 2218,
+      "sha256": "f16800e0edc0325013f010b226459d7023a85428b187acf3d1418fcb709720f6"
+    },
+    "work/evidence/T13/build_attachment_context.py": {
+      "bytes": 7844,
+      "sha256": "812aa2d9c05bc39f89c7864688e32e7c1594fe16dff6a602c589a0b710bf0e93"
+    },
+    "work/evidence/T13/build_review_packet.py": {
+      "bytes": 4298,
+      "sha256": "f11bfa48eada100bc956cbd93f7797f242db649971c4a254cfa9ddd7b6c5ec60"
+    },
+    "work/evidence/T13/build_t13_bones.py": {
+      "bytes": 6123,
+      "sha256": "d06ba2b1f922a45c2298f16c13dc51574052fd8d7b35ea9bc347b02229a9a3db"
+    },
+    "work/evidence/T13/fetch_additional_foot_bones.py": {
+      "bytes": 3962,
+      "sha256": "50c9d948d8874ae4f1ac557efec1dc712ac9d1aab3dfed771147dc7485ae28d0"
+    },
+    "work/evidence/T13/fetch_bone_subset.py": {
+      "bytes": 3694,
+      "sha256": "155ec456ee358a48a4463a1c114806feb181cb6778a7c84e7715db29a419e36d"
+    },
+    "work/evidence/T13/isa_element_parts.txt": {
+      "bytes": 1142159,
+      "sha256": "a3de74423f943b0d724ae8f59b3a817f87c423a544f8db98113b1980817cbeaf"
+    },
+    "work/evidence/T13/isa_parts_list_e.txt": {
+      "bytes": 128086,
+      "sha256": "ab7796deedd49205e77f3609a1cb8c53e2bbee14ecb5c9a6ca05227469780513"
+    },
+    "work/evidence/T13/review-packet.md": {
+      "bytes": 32837,
+      "sha256": "97200639f89a89becc18d67d804f4abcc19be2b5192af51c968794ef1bc4a1f4"
+    },
+    "work/evidence/T13/source-transfer.json": {
+      "bytes": 4753,
+      "sha256": "e61cc2e8d3b9a52e7000269f5ac5c9b49757e233ce226df27fb879e892a838c2"
+    },
+    "work/evidence/T13/validate_t13.py": {
+      "bytes": 10293,
+      "sha256": "c6f0fdb385ff3137acc106f03fb3e88f6d715baced4a44f3e8a8a7c37af32e87"
+    },
+    "work/evidence/T13/validation.json": {
+      "bytes": 2801,
+      "sha256": "1322b3fd6e21260c84cb4f2ae09fae44fc0533fe8daddb3b41bf06b34e795211"
+    },
+    "work/evidence/T13a/browser-validation.json": {
+      "bytes": 3908,
+      "sha256": "15ee264b1b6228b7eb0aa2569c063ae71326e64e8a6ca6560fb8d2e8fe4d28e8"
+    },
+    "work/evidence/T13a/commands.json": {
+      "bytes": 829,
+      "sha256": "d73f3c7d839b15d79906281024128b09c6cf9a14dbed72c323e444661bc01fac"
+    },
+    "work/evidence/T13a/preservation-after.json": {
+      "bytes": 5124,
+      "sha256": "d92c25e1e6d5547f3e6aa39fc67c3da6d0006a5cb11ff4224466ce7385adc94b"
+    },
+    "work/evidence/T13a/preservation-before.json": {
+      "bytes": 13511,
+      "sha256": "c23a47dd667e2b17dfce407bca13928b4233a01f1bda0d5971fb267e42ab2e85"
+    },
+    "work/evidence/T13b/browser-validation.json": {
+      "bytes": 2741,
+      "sha256": "163a20d712eaa02744e37d5c661a991a812d876c442a93d48e4517cfbddd559e"
+    },
+    "work/evidence/T13b/capture_preservation.py": {
+      "bytes": 2525,
+      "sha256": "70e7c707b2371485bf6342a399fd3ce8dcc98778076376b885637248cb5ae832"
+    },
+    "work/evidence/T13b/commands.json": {
+      "bytes": 17260,
+      "sha256": "bde7d17b5a492d30b4431bb2df234349c62c160b29542c9cd62265d74eecef74"
+    },
+    "work/evidence/T13b/compare_preservation.py": {
+      "bytes": 2010,
+      "sha256": "91b4035bc5857d268d090c9759558a485a4497a80aaf7a24bbf5a1c9723a6db0"
+    },
+    "work/evidence/T13b/fixtures/context.json": {
+      "bytes": 1592,
+      "sha256": "c74c1551dfc2a2b065b726420cb0f056e3303cd6700e2f177d5e49497398e122"
+    },
+    "work/evidence/T13b/fixtures/negative-status.json": {
+      "bytes": 729,
+      "sha256": "d0bcd05b18a3c44dd2057df2f2c587a0fb6e0a122af7f151e4b73e09d0bf577f"
+    },
+    "work/evidence/T13b/fixtures/negative-unknown-field.json": {
+      "bytes": 178,
+      "sha256": "7fe9203da6964f920cabb1fb832265979de568f6f90d187d08d98a80a15acd5a"
+    },
+    "work/evidence/T13b/fixtures/positive-spatial-layer.json": {
+      "bytes": 1180,
+      "sha256": "3f57d573624ad3c92d2fbd2698d23ec2147fec6c75508eb2cb2032d8188230ec"
+    },
+    "work/evidence/T13b/preexisting-target-diffs.patch": {
+      "bytes": 170727,
+      "sha256": "188afb72fd20d3080c58895b8649cc796c469b42f0da82b98fe4b1c46b60fa32"
+    },
+    "work/evidence/T13b/preservation-after.json": {
+      "bytes": 12081,
+      "sha256": "f0381b943162a07691bb53602413a35fe8c16572fd009d0638f455123d33f8d9"
+    },
+    "work/evidence/T13b/preservation-before.json": {
+      "bytes": 11264,
+      "sha256": "ae68ef836c26e258c7d7aa320c8a3459a94cfbc04825416173c850d4e1638c6e"
+    },
+    "work/evidence/T13b/preservation-comparison.json": {
+      "bytes": 1276,
+      "sha256": "82924557094cc4d5d4dc8fd5d96e9a63ed7ea134d5f7bb977b992cc718052a10"
+    },
+    "work/evidence/T13b/run_validations.py": {
+      "bytes": 2366,
+      "sha256": "6a39c9a057c5bc524c620100954737b729289c9c7f5247812b3f1c9f567692b0"
+    },
+    "work/evidence/T13c-B01/browser-mesh-review.json": {
+      "bytes": 2405,
+      "sha256": "d226bff83abb6dc09f25686259dcdd983933257b45b2c521d5be2f0eff54f432"
+    },
+    "work/evidence/T13c-B01/browser-validation.json": {
+      "bytes": 1791,
+      "sha256": "b2886fc2d15425bbf2e2406afd8f333b897e2511495f5f8aadfe210d7e15c633"
+    },
+    "work/evidence/T13c-B01/build.log": {
+      "bytes": 1112,
+      "sha256": "41bb5840495e6fa9400096672110dd7dfad71a4c3f22933465b866706c2e7c12"
+    },
+    "work/evidence/T13c-B01/check_preservation.py": {
+      "bytes": 2303,
+      "sha256": "247cc15c151920d5c6b9133222c350c526624553933606a7cd20a07f808817db"
+    },
+    "work/evidence/T13c-B01/preservation-after.json": {
+      "bytes": 7835,
+      "sha256": "0d807addbc84a54376f226faa43a76dc6153d3f7b327469587f74ea320f0b207"
+    },
+    "work/evidence/T13c-B01/preservation-before.json": {
+      "bytes": 5609,
+      "sha256": "40c74badee414c19e48527e9da187d8c38892ea78d1a9d02c8380db083e97f3a"
+    },
+    "work/evidence/T13c-B01/source-evidence.json": {
+      "bytes": 2889,
+      "sha256": "04f2dd6db2900b6160de8ac0634fab4f5c5f647e73f8a85388e95fef1439010f"
+    },
+    "work/evidence/T13c-B01/spatial-draft-layer.json": {
+      "bytes": 1243,
+      "sha256": "fcc9f3929996e1b8b5853eee3897b310f1a396ec7b9b0b73b68fe2b25b4143fd"
+    },
+    "work/evidence/T13c-B01/spatial-draft-tests.log": {
+      "bytes": 1244,
+      "sha256": "280e24845a17cc5e1393c5e589a32802ad587b9a25334b4683f0002c2bd19e35"
+    },
+    "work/evidence/T13c-B01/typecheck.log": {
+      "bytes": 24,
+      "sha256": "5cfb036289d819b2a87e947d65f4532031dd37753f3cf2def0f77d398eea1737"
+    },
+    "work/evidence/T13c-B01/validate_record.py": {
+      "bytes": 4401,
+      "sha256": "2590b99de6d97ab7636a66ce72f68feefa03473dffb854be391e186fe7843eaa"
+    },
+    "work/evidence/T13c-B02/browser-baseline.json": {
+      "bytes": 1070,
+      "sha256": "10c5399df04f5d5211be157eb60075c2e634762a11db7c900b65b87d2a1f4d5d"
+    },
+    "work/evidence/T13c-B02/browser-mesh-review.json": {
+      "bytes": 2320,
+      "sha256": "9e93c72b59cd1a4ea6f8a6da76e2e51892f4d7298d3c85fbc4fe7609edcbb2d6"
+    },
+    "work/evidence/T13c-B02/browser-validation.json": {
+      "bytes": 2055,
+      "sha256": "52654d7a8b5f96be02d55748c8fc59e30613994d1a777a9bd973ec9afd1f0b7e"
+    },
+    "work/evidence/T13c-B02/build.log": {
+      "bytes": 1112,
+      "sha256": "a8a3303bd1db2a34825d88d31d6b097342e256c985c312e44be00bb14a624b8b"
+    },
+    "work/evidence/T13c-B02/check_preservation.py": {
+      "bytes": 2637,
+      "sha256": "41ba0a3aa80d47c3e826458b13479e7531b386c3249cef6ae2c511a71c61c5d8"
+    },
+    "work/evidence/T13c-B02/preservation-after.json": {
+      "bytes": 13594,
+      "sha256": "30ac1e8e6c50199c429e99c98791701729a39fdf6f460ecc16b95af7aafdc839"
+    },
+    "work/evidence/T13c-B02/preservation-before.json": {
+      "bytes": 7686,
+      "sha256": "90055c75c1ff7da94b842ac395ea6c825bbab035e8ad8137f5ca9bb1cfe7429b"
+    },
+    "work/evidence/T13c-B02/preservation-check.log": {
+      "bytes": 202,
+      "sha256": "c783232bec5f47515ca631202cb22dd29cd5472a7f11b2f0aece8e8e4a7b0267"
+    },
+    "work/evidence/T13c-B02/source-evidence.json": {
+      "bytes": 4089,
+      "sha256": "d074204e91387af7954e725ab91a2a77e0adecfcabbeedc1d1827d8efcb205ac"
+    },
+    "work/evidence/T13c-B02/spatial-draft-layer.json": {
+      "bytes": 1251,
+      "sha256": "67b51cf9bf5216e750a42da3038371cca77d201792d46962cf9c3f06e9b12d93"
+    },
+    "work/evidence/T13c-B02/spatial-draft-tests.log": {
+      "bytes": 1240,
+      "sha256": "b7bddf88705cc2fbcf4db084b379395f5adef6e7068119bf99006b89eef5ab01"
+    },
+    "work/evidence/T13c-B02/t03-schema-validation.log": {
+      "bytes": 6463,
+      "sha256": "2621645aa5ba5511c262dfb7044152f105faaea5be3fe275ba0757521b866e21"
+    },
+    "work/evidence/T13c-B02/typecheck.log": {
+      "bytes": 24,
+      "sha256": "5cfb036289d819b2a87e947d65f4532031dd37753f3cf2def0f77d398eea1737"
+    },
+    "work/evidence/T13c-B02/validate_record.py": {
+      "bytes": 7109,
+      "sha256": "51ef16e3101a147334a92fb7b9bb51e18be44620f6f2ee1603e075907379605c"
+    },
+    "work/evidence/T13c-B02/validator-result.json": {
+      "bytes": 584,
+      "sha256": "8aacc858b4f32bfbe3d19bcf5bab056feb5930a202c24edf93e2eb2c44ffcf48"
+    },
+    "work/evidence/T13c-B02/validator-result.log": {
+      "bytes": 584,
+      "sha256": "8aacc858b4f32bfbe3d19bcf5bab056feb5930a202c24edf93e2eb2c44ffcf48"
+    },
+    "work/evidence/T13c-B03/browser-baseline.json": {
+      "bytes": 985,
+      "sha256": "e38637330292c00d03cd28283ce34cfe453b3818be58566e4eb0f85ec5f845e5"
+    },
+    "work/evidence/T13c-B03/browser-mesh-review.json": {
+      "bytes": 2735,
+      "sha256": "1d302a7f402bb37105953c4838585ed88477b8cc19837b42e4bcf7a83955bcba"
+    },
+    "work/evidence/T13c-B03/browser-validation.json": {
+      "bytes": 3087,
+      "sha256": "463deefab2f9c6ba1e265cbb411b1c0e380060ea1ae16553763c868a013cf912"
+    },
+    "work/evidence/T13c-B03/build.log": {
+      "bytes": 1122,
+      "sha256": "a25f7b59cb825014dc37d9c87d3b2e1b87cd6abab9a7f6923985ee02275d0a06"
+    },
+    "work/evidence/T13c-B03/build_spatial_draft.py": {
+      "bytes": 3655,
+      "sha256": "309c86f703ef438eda8869157b498dbbd8ac6b7c21480cbce08a90250a72598a"
+    },
+    "work/evidence/T13c-B03/capture_preservation.py": {
+      "bytes": 3254,
+      "sha256": "a3a738a0e9ed59520badc432c0ab10fb47ed2a993a57626acb3f3e3a6032e0ce"
+    },
+    "work/evidence/T13c-B03/check_preservation.py": {
+      "bytes": 2908,
+      "sha256": "52024bc6831a90684c78a5214e8bd253be96b12caa335e082690c978dff3d253"
+    },
+    "work/evidence/T13c-B03/git-diff-check.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "work/evidence/T13c-B03/handoff-check.json": {
+      "bytes": 149,
+      "sha256": "1086f0aaf1f019895038667f163900978f030f6c181c2f6b2d9f6830cc4bb052"
+    },
+    "work/evidence/T13c-B03/preservation-after.json": {
+      "bytes": 22040,
+      "sha256": "043f220ce92bbb3743309c7fa8db38e78a92a212989aedcd70abfa3b174f7c0f"
+    },
+    "work/evidence/T13c-B03/preservation-before.json": {
+      "bytes": 13978,
+      "sha256": "e1f26576f75384090d8e528e1726cffce1cba474ac929c620cecc1d7e6a341aa"
+    },
+    "work/evidence/T13c-B03/record-validator.log": {
+      "bytes": 604,
+      "sha256": "d396ebc62e50d1dd4ea3d290d9096690be06d12b36ee9627568533f21dc24099"
+    },
+    "work/evidence/T13c-B03/run_checks.py": {
+      "bytes": 2075,
+      "sha256": "da209249ddc532f9b8968f1b4f61736bf30e68bb2463190519c2d1dc9a3b5f59"
+    },
+    "work/evidence/T13c-B03/source-evidence.json": {
+      "bytes": 5632,
+      "sha256": "dddef00da127eeeb3afb52dc2e3967cb0a0665547d7dff18af386bdc37643ae7"
+    },
+    "work/evidence/T13c-B03/spatial-draft-layer.json": {
+      "bytes": 1251,
+      "sha256": "d634cc00781fb46d84ee8e18b2c271c4a378b2656b2674b05611b5c202504714"
+    },
+    "work/evidence/T13c-B03/spatial-draft-tests.log": {
+      "bytes": 1255,
+      "sha256": "d6c356685b32085f05a32dde1226ff8abf11e33bb137a25345de01e3afa49fdf"
+    },
+    "work/evidence/T13c-B03/t03-schema-fixtures.log": {
+      "bytes": 6463,
+      "sha256": "2621645aa5ba5511c262dfb7044152f105faaea5be3fe275ba0757521b866e21"
+    },
+    "work/evidence/T13c-B03/typecheck.log": {
+      "bytes": 34,
+      "sha256": "40b435412feb2dc8c30904f8d10e8064dad8f04f6636ddedcc607bfbde9e2cf2"
+    },
+    "work/evidence/T13c-B03/validate_record.py": {
+      "bytes": 6930,
+      "sha256": "c01c1ebd3cf9520bae1b3ca483f32ec16f77b3432f1356bdbdec9ce813a6342e"
+    },
+    "work/evidence/T13c-B03/validation-summary.json": {
+      "bytes": 1693,
+      "sha256": "626ddb3dcb5d78150690dfdf9ae09fce5e5aa46a683a594b751d5da111e7a32e"
+    },
+    "work/evidence/T13c-B03/validator-result.json": {
+      "bytes": 604,
+      "sha256": "d396ebc62e50d1dd4ea3d290d9096690be06d12b36ee9627568533f21dc24099"
+    },
+    "work/evidence/T96/NEXT-T79.md": {
+      "bytes": 2634,
+      "sha256": "ae07540bad89c71e2c163d1fc7647119b688eb628bc2f29cb4020715bbdd85b6"
+    },
+    "work/evidence/T96/build_target_freeze.py": {
+      "bytes": 52297,
+      "sha256": "04faba0b3dc908bbab202ba8eab02279b31c984db427ae118b471b08e9f9e74b"
+    },
+    "work/evidence/T96/content-state-crosscheck.json": {
+      "bytes": 452230,
+      "sha256": "d3acbb0d11e64905ab1b759bc80767cda1bd1539db7c669a141f5d6e2068301a"
+    },
+    "work/evidence/T96/decision-rules.json": {
+      "bytes": 8849,
+      "sha256": "f3d6a9f89ed5cb98340680c2fa36dd347dd2689f15f3665a5b961a50b6259eb8"
+    },
+    "work/evidence/T96/freeze-summary.json": {
+      "bytes": 1208,
+      "sha256": "6b985577f31ecca1daeccdb93315c2b4f627653e4ec88a81099632f0f4500418"
+    },
+    "work/evidence/T96/input-hashes.json": {
+      "bytes": 3791,
+      "sha256": "aaf6f37e139aa6c29d293042bbe93fc065cc8be05f48f4d4b7fac1209c2a1522"
+    },
+    "work/evidence/T96/preservation-after.json": {
+      "bytes": 1264,
+      "sha256": "52e7d2660390b010e1115159c28c0e9ff21bb8952cdc902e37bf42ce883236c0"
+    },
+    "work/evidence/T96/references.json": {
+      "bytes": 5488,
+      "sha256": "69b83a49ce5ddf7aa54809dc683444e1b613249f9dddddd3dde603d26d8dc7c8"
+    },
+    "work/evidence/T96/semantic-classification-ledger.json": {
+      "bytes": 2158255,
+      "sha256": "4236f7d7aef2d60527b8eef45d5eb0095acdce8d9b0a9f836b2a6eec9655af87"
+    },
+    "work/evidence/T96/semantic-exception-review.json": {
+      "bytes": 39626,
+      "sha256": "0a16b24ec4e3118f025bbead7fee27614fbe079ceab2a4465aa9e37a72dcff96"
+    },
+    "work/evidence/T96/start-baseline.json": {
+      "bytes": 909,
+      "sha256": "94c7ca61bce1b16200e37e7b7511f06cb9da4eedada8ed890c348b4ab318e05c"
+    },
+    "work/evidence/T96/start-status-porcelain.txt": {
+      "bytes": 2142,
+      "sha256": "1d685761e8ba141c26bca22755b0054c186f6ef4d26fbdd7d453e4af8b8260ad"
+    },
+    "work/evidence/T96/status-registry-owned-delta.json": {
+      "bytes": 1806,
+      "sha256": "dc05c9ae6691f80b24639a959ba608e7701becce9f34f5b6e03cd510fa5882ee"
+    },
+    "work/evidence/T96/supporting-muscle-reverse-scan.json": {
+      "bytes": 66877,
+      "sha256": "e96d35dd8067d2dccd0359cef7729dea719a2f1826f533b4dab5e6944263712a"
+    },
+    "work/evidence/T96/ta2-usage-aliases.json": {
+      "bytes": 3433,
+      "sha256": "e94888b4f58700b93e4d176f82c1bfb570971334a259e603139280dfe89c63c6"
+    },
+    "work/evidence/T96/validate_target_freeze.py": {
+      "bytes": 29822,
+      "sha256": "02890818ff7a59f3c0f2b0ee2558bbd2d3b2c9ea1dfff566065abd3ae1565d86"
+    },
+    "work/evidence/T96/validation-result.json": {
+      "bytes": 1566,
+      "sha256": "3e4bc3e535120769e54ea8c57d5529e17bccd2d04cc58048adc695cace5a7f07"
+    },
+    "work/evidence/T96/verification-log.json": {
+      "bytes": 4267,
+      "sha256": "a50d0998be9d32405170d0e19d6ef7b14e6eff8c68170fd5471db840513eaa12"
+    },
+    "work/evidence/T97/acquire_pinned_archive.py": {
+      "bytes": 6116,
+      "sha256": "0c7d629e5adbe6255fc65ec93710cc9a1d250a51f56a426e78c43af42fd1d7a8"
+    },
+    "work/evidence/T97/archive-acquisition.json": {
+      "bytes": 1305,
+      "sha256": "ab487e931091d8ba2c15d0888d1b92f8023d01828e750c6b6976dc1db859b7ed"
+    },
+    "work/evidence/T97/archive-member-inventory.json": {
+      "bytes": 2827,
+      "sha256": "ca775ecc3030d4cd754b4c10f6d499276c64e4e62527e1fdc60568b7725725e7"
+    },
+    "work/evidence/T97/blender-load-attempts.json": {
+      "bytes": 2434,
+      "sha256": "d1b9fdc70894b84942f317d561cac5d813eb3a4c31a1aa05791d435086e7f8b1"
+    },
+    "work/evidence/T97/blender-object-inventory.json": {
+      "bytes": 619867,
+      "sha256": "d94209dec8928fbc13aae5b1d286033183f2c487fd4a36aa1f8637b6fe886f8e"
+    },
+    "work/evidence/T97/blender-tool-current.json": {
+      "bytes": 1756,
+      "sha256": "0b5683911dab10b90a0656825c4a16d1d4d7c01fe3074014977ca2ea61ec083f"
+    },
+    "work/evidence/T97/blender-tool-retry.json": {
+      "bytes": 1532,
+      "sha256": "6a4ca051608e9e8d6f8be507f92e54715fa65d70db4ef9070871a82f596b8ea9"
+    },
+    "work/evidence/T97/blender-tool.json": {
+      "bytes": 742,
+      "sha256": "30eae2e8eb01d2a97af73f83f1f91a64709d12c14a7b76983e929d1c28e31f29"
+    },
+    "work/evidence/T97/extract_latissimus_objects.py": {
+      "bytes": 15840,
+      "sha256": "a33ec89f1ce70e44cacf89032dc59a1590bf8158d1491348dd658360defc0e98"
+    },
+    "work/evidence/T97/inspect_and_extract_archive.py": {
+      "bytes": 9640,
+      "sha256": "aa040f699b3fd619408a79b29381c5f4198261e8476becf94ace214d442e1456"
+    },
+    "work/evidence/T97/inspect_blend_datablocks.py": {
+      "bytes": 8253,
+      "sha256": "0c7f9a9b398bd31394be267c31edf7635d350cde7f460a06c7dbc7704b7af3d7"
+    },
+    "work/evidence/T97/latissimus-extraction.json": {
+      "bytes": 33038,
+      "sha256": "930f1e289e3cbc0f4172b4525592d80da0036f7df77cc4dfb998678514e7b157"
+    },
+    "work/evidence/T97/parse_blend_datablocks.py": {
+      "bytes": 26261,
+      "sha256": "ebda20edfff737d5841a1f4b726715d3da50eb92f3dcfa58803ed96a3e6a6ee4"
+    },
+    "work/evidence/T97/preservation.json": {
+      "bytes": 627,
+      "sha256": "6067d769fa25dfa181c81b7bc9fe5b0da7993d376c65a5e55bdc6cea2133340d"
+    },
+    "work/evidence/T97/render_surface_preview.py": {
+      "bytes": 3761,
+      "sha256": "f687a1126113d8029fb69a8eb9a8cd98021af4b75c7788250f0cf733f64c2c1f"
+    },
+    "work/evidence/T97/render_surface_preview_stdlib.py": {
+      "bytes": 6725,
+      "sha256": "c9367575a6c159b0c439af5221c5b549de53e0de14b481c6807b41190189e8c4"
+    },
+    "work/evidence/T97/reproduce_t97.py": {
+      "bytes": 2539,
+      "sha256": "25ad4f9b504f801b6e3c1d0ae54e62d07fca12fdc9d50efcee319f60a1c20106"
+    },
+    "work/evidence/T97/reproducibility.json": {
+      "bytes": 7167,
+      "sha256": "9600198bad574f417f397259576c6031e57b9cab7988807a525fd0595002b042"
+    },
+    "work/evidence/T97/start-baseline.json": {
+      "bytes": 7864,
+      "sha256": "db9f58dd0ed759e93ee3825c22f774a8b1bb776e7835512559cf84396948b61f"
+    },
+    "work/evidence/T97/start-status-porcelain.txt": {
+      "bytes": 2142,
+      "sha256": "1d685761e8ba141c26bca22755b0054c186f6ef4d26fbdd7d453e4af8b8260ad"
+    },
+    "work/evidence/T97/status-registry-delta.json": {
+      "bytes": 1319,
+      "sha256": "a7c0acd5a0883e842460024b70a25f0eba4596acbda382e8f1b3d402108d5e59"
+    },
+    "work/evidence/T97/surface-preview.json": {
+      "bytes": 2814,
+      "sha256": "de0bad9054e685395e762f0e244293a23aca31456690f8bf5bbbb5cbec84c09e"
+    },
+    "work/evidence/T97/surface-x-plus.png": {
+      "bytes": 33746,
+      "sha256": "baadda95f5984bf6f507ec0b6a443cbf227051b1867a3aa11af2545e6a70da58"
+    },
+    "work/evidence/T97/surface-y-minus.png": {
+      "bytes": 109483,
+      "sha256": "b8de992df03abfd55f15bdf2ec67abcdc106c37200d4856bdccc0e75524c4754"
+    },
+    "work/evidence/T97/surface-y-plus.png": {
+      "bytes": 98907,
+      "sha256": "9f1ce599fb897d8922813b3d9b30e4d62810f7350f78ddb22231bb4a8a2e8479"
+    },
+    "work/evidence/T97/validate_t97.py": {
+      "bytes": 16481,
+      "sha256": "64cc1fa15ece7d395a928a41d3ad5254a854c019a2a89260d3c79545864e66f8"
+    },
+    "work/evidence/T97/validation.json": {
+      "bytes": 1538,
+      "sha256": "4a4d09e55e792a41611241715f9d66f03670b0fcb76d763a09ff9555e3e50fbf"
+    },
+    "work/reports/T104.md": {
+      "bytes": 7511,
+      "sha256": "c71960db43e7141ec24739c83b2efa6649af583631f8c517026ce988d00f1e45"
+    },
+    "work/reports/T13-AUDIT-2026-09-26.md": {
+      "bytes": 9282,
+      "sha256": "9c7dfe3a1b7db0576d80f349fde5c7e38da0df0eae7307262d37a15facec37fc"
+    },
+    "work/reports/T13-AUDIT-NEXT-PLAN-2026-09-26.md": {
+      "bytes": 6807,
+      "sha256": "cd667a1ce47f2664d3fd5c4fa09bc96714db936b5c5c9968ac7110cdd622c7d3"
+    },
+    "work/reports/T13.md": {
+      "bytes": 5562,
+      "sha256": "de74ea4821ef310f0ffb1338de09f5be8a29f498fcdf505ebc10646463d92389"
+    },
+    "work/reports/T13a.md": {
+      "bytes": 6424,
+      "sha256": "de40df3e8d0c6200ae6988430910c73a799ae903f9683eca775c2674ec5d7faf"
+    },
+    "work/reports/T13b.md": {
+      "bytes": 9135,
+      "sha256": "dc1114c3a1662d5058d8525dc2ee3a69cb93a9891fa8d0a93b2bee8f68c828f6"
+    },
+    "work/reports/T13c-B01.md": {
+      "bytes": 8907,
+      "sha256": "71c0c9263f0aef074d24280d2f2be4da962e81063523e02764931ff307d9aa6e"
+    },
+    "work/reports/T13c-B02.md": {
+      "bytes": 10262,
+      "sha256": "02b24fbdb4c8527ff2e6fa0c51b7cd142b159bb066aae4c9abe6c1ed3b895076"
+    },
+    "work/reports/T13c-B03.md": {
+      "bytes": 8218,
+      "sha256": "5edc6277f5e837569495ca0db4e846c0958b596cbbdc3ca7837236f27b02128d"
+    },
+    "work/reports/T96.md": {
+      "bytes": 9192,
+      "sha256": "bd05c37f938c6d78fab471a48ab6ab40ce07a9f834085769122f8ae9cffb290e"
+    },
+    "work/reports/T97.md": {
+      "bytes": 13489,
+      "sha256": "15b29f80d2ac1a376d7f677dfaa35b017cf5c8d136efc32f7dbe80d7a93ce0cc"
+    },
+    "work/review-queue/attachment-surfaces-t13.md": {
+      "bytes": 4550,
+      "sha256": "5e41277b28b29494a595e4b6390341adf5df082bf70ae844f87704f5908c8944"
+    },
+    "work/tasks/T13.md": {
+      "bytes": 2306,
+      "sha256": "85f07d5b8babc9235bcefb345f258432d08a4550fccf4ad50e27a932c5ad2f54"
+    },
+    "work/tasks/T130.md": {
+      "bytes": 5599,
+      "sha256": "4ea2758eccdd52aa44dcbc3c384911c561508994d7d556695a7df2ea9d9c9976"
+    },
+    "work/tasks/T131.md": {
+      "bytes": 5599,
+      "sha256": "17df5c24f201a19569e45b052ff0202abb8af70682db52f004ddd1b8f0f3c559"
+    },
+    "work/tasks/T132.md": {
+      "bytes": 5599,
+      "sha256": "38795a85aa26f1830e80befe01c48748d0ed445291bd31fd08b933d422f06c54"
+    },
+    "work/tasks/T133.md": {
+      "bytes": 5599,
+      "sha256": "a1327f577b3bab9f7d58522310feae1de7c41d26ed3f3670aaad811ed86c2be0"
+    },
+    "work/tasks/T134.md": {
+      "bytes": 5599,
+      "sha256": "51e627a6b03e465feedd4f9e3e16ac73f9c288b2d906c20f0389ffb0c157eed5"
+    },
+    "work/tasks/T135.md": {
+      "bytes": 5599,
+      "sha256": "e6117b20539a40966a5d8a6d756b01c290dc11f3d8354ad6a1e0f1a00bf7905a"
+    },
+    "work/tasks/T136.md": {
+      "bytes": 5599,
+      "sha256": "7992acf6411013b805111bce8d75eb7ead5328dd3370e8c249de955c412381df"
+    },
+    "work/tasks/T137.md": {
+      "bytes": 5599,
+      "sha256": "0b464cda4c4ec68ecc21471991e74da5fa059f7039c650f6b97d0a5f2855fc1e"
+    },
+    "work/tasks/T138.md": {
+      "bytes": 5599,
+      "sha256": "18c2751209f2d7c90732de21bfbd99725331978cd5bd75cd9ba8b8fa66170a85"
+    },
+    "work/tasks/T139.md": {
+      "bytes": 5599,
+      "sha256": "5d0c8a70bc818a83fdce0e46448c0f979716f02d949515f763c2c4c9649b8ebb"
+    },
+    "work/tasks/T13a.md": {
+      "bytes": 5100,
+      "sha256": "b8a826ff24d32637dd54f1b283e41de73190aaaa3c1b8cd0236c4cfbffabc60e"
+    },
+    "work/tasks/T13b.md": {
+      "bytes": 5670,
+      "sha256": "531cf757b8cfe3fe3428a426657bdbf0d32be0dbae1c3a9d0acb6d222196227f"
+    },
+    "work/tasks/T13c-B01.md": {
+      "bytes": 6081,
+      "sha256": "34667b376f599c435d12208008c999a8dca14b99686d3000b059dbc7b32f332d"
+    },
+    "work/tasks/T13c-B02.md": {
+      "bytes": 5116,
+      "sha256": "4be099a1415208bc8b56c13db7921be33acd80c99dfd80a8b233067256289008"
+    },
+    "work/tasks/T13c-B03.md": {
+      "bytes": 5340,
+      "sha256": "0502ee85425ed5622732fc7efbbf4c6263abfdab18b62a85d2d0119a4f8c424c"
+    },
+    "work/tasks/T98.md": {
+      "bytes": 2343,
+      "sha256": "adce1fd79f54a2528da5b8e274b429ca1d8966d74aacb03e0ea281a849fb24ca"
+    }
+  },
+  "protectedInputCount": 939,
+  "sourceCaches": {
+    "bodyparts3dR4": {
+      "path": "atlas-data/source-cache/bodyparts3d-r4",
+      "fileCount": 721,
+      "bytes": 430204718
+    },
+    "zAnatomyPinned": {
+      "path": "atlas-data/source-cache/z-anatomy/t97",
+      "fileCount": 13,
+      "bytes": 396330521
+    }
+  },
+  "openSimModels": {
+    "head": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "status": "",
+    "clean": true
+  },
+  "sourceArchiveSha256": "e029688545627bd0214b269e1063143abb580aad72b2c2445d6d8a9a0d9da736",
+  "note": "Captured before T98 source edits; ignores are hashed but remain untracked/excluded from commit. No remote source archive was fetched during baseline capture."
+}

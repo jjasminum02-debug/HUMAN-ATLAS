@@ -1,0 +1,45 @@
+{
+  "task": "T98",
+  "sourcePath": "work/EXECUTION.json",
+  "beforeFileSha256": "0c78d5a57096cfe3eb563bcefaed74f3ae01dd2222c3a01c0c2cc371caaec62c",
+  "afterFileSha256": "540ad422747a8cbe426498aea0a166fda10d08c443d5c37ef1537103a6e347f9",
+  "beforeT98Row": {
+    "title": "전신 source inventory·변환 검증·주 베이스 선택",
+    "owner": "Luna Max",
+    "phase": "G1",
+    "executionStatus": "planned_not_started",
+    "acceptance": "pending",
+    "spec": "work/tasks/T98.md",
+    "scope": "T97 pinned archive/BP3D metadata/cache/T96 전체 target 및 T104까지 최신 WIP·evidence를 읽는다. 25 설계 3절의 전체 Object/Mesh/Collection/curve/helper/instance와 source 권리 상속·예외를 대조한다. canonical concept·geometry·instance·file 분모를 구분하고12부위 필수 전체 목록을 freeze한다. Z-Anatomy는 우선 후보이며 actual evaluated geometry 변환/좌우·pose/권리/포괄성/비용으로 주 베이스를 선택한다. 정확히 동결한8–12개 대표 object의 실제 exporter spike와 preview/hash를 남긴다. T97 Metal 실패를 같은 방식으로 반복하지 않고 검증된 headless/export 경로를 확인한다. raw 배열을 modifier/instance 결과로 오인하지 않는다. 모든 source를 다시 다운로드하거나 광배근만 검사하고 완료하지 않는다. source inventory만 있고 exporter가 미검증이면 partial. 웹 runtime/다음 task를 구현하지 않는다.",
+    "progress": {
+      "nextUnit": null,
+      "completedUnits": []
+    },
+    "report": "work/reports/T98.md"
+  },
+  "afterT98Row": {
+    "title": "전신 source inventory·변환 검증·주 베이스 선택",
+    "owner": "Luna Max",
+    "phase": "G1",
+    "executionStatus": "in_progress",
+    "acceptance": "partial",
+    "spec": "work/tasks/T98.md",
+    "scope": "T97 pinned archive/BP3D metadata/cache/T96 전체 target 및 T104까지 최신 WIP·evidence를 읽는다. 25 설계 3절의 전체 Object/Mesh/Collection/curve/helper/instance와 source 권리 상속·예외를 대조한다. canonical concept·geometry·instance·file 분모를 구분하고12부위 필수 전체 목록을 freeze한다. Z-Anatomy는 우선 후보이며 actual evaluated geometry 변환/좌우·pose/권리/포괄성/비용으로 주 베이스를 선택한다. 정확히 동결한8–12개 대표 object의 실제 exporter spike와 preview/hash를 남긴다. T97 Metal 실패를 같은 방식으로 반복하지 않고 검증된 headless/export 경로를 확인한다. raw 배열을 modifier/instance 결과로 오인하지 않는다. 모든 source를 다시 다운로드하거나 광배근만 검사하고 완료하지 않는다. source inventory만 있고 exporter가 미검증이면 partial. 웹 runtime/다음 task를 구현하지 않는다.",
+    "progress": {
+      "nextUnit": "verified-evaluated-exporter-and-12-object-preview",
+      "completedUnits": [
+        "read-and-hash-pinned-inputs-and-prior-work",
+        "inventory-all-serialized-source-objects-meshes-curves-collections-and-links",
+        "freeze-all-12-t96-regions-and-542-target-records-with-563-memberships",
+        "record-z-anatomy-and-bodyparts3d-rights-families-and-exceptions",
+        "freeze-exact-12-object-export-candidate-set-with-source-hash-and-locators"
+      ]
+    },
+    "report": "work/reports/T98.md"
+  },
+  "unchangedOtherTaskRecordsSha256": "920b8c2ea98d8c2d93f95cb6834cf792f643a58a6ebf4f1186fded0e00e6e797",
+  "onlyTaskRecordChanged": true,
+  "acceptance": "partial",
+  "executionStatus": "in_progress",
+  "nextUnit": "verified-evaluated-exporter-and-12-object-preview"
+}

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0.0",
+  "task": "T98",
+  "sourceOfTruth": "work/EXECUTION.json",
+  "sourceExecutionSha256": "540ad422747a8cbe426498aea0a166fda10d08c443d5c37ef1537103a6e347f9",
+  "commands": [
+    {
+      "command": "python3 work/tools/sync_execution.py",
+      "exitCode": 0,
+      "stdout": "Updated 2 execution views from 540ad422747a"
+    },
+    {
+      "command": "python3 work/tools/sync_execution.py --check",
+      "exitCode": 0,
+      "stdout": "Execution projections match; no writes."
+    }
+  ],
+  "updatedGeneratedViews": [
+    "work/STATUS.md#generated-execution",
+    "work/task-registry-r15.json currentTaskStates/nextTask projection"
+  ],
+  "mixedOrPreexistingWipNotStaged": [
+    "work/STATUS.md",
+    "work/task-registry-r15.json"
+  ],
+  "statusFile": {
+    "startSha256": "ef056937bacc6efd045d63415e6774493b657d44e9b3a21c2c4c39db94ecf021",
+    "afterSha256": "87e8893e7a292855e8cb6016c1416f2d5a4a274e92d7972d6bd2860b202b3aac",
+    "note": "STATUS was already modified user WIP at T98 start. The generated projection was refreshed as requested; mixed file will not be staged wholesale."
+  },
+  "registryFile": {
+    "startState": "untracked preexisting WIP, content hash not captured by start baseline",
+    "afterSha256": "4fc8dcf5fffd3cb028a0f82daf90900393dfaba2433de7a38d4736a049f82c04",
+    "note": "sync_execution updates generated currentTaskStates and nextTask while retaining unrelated keys/rows; file remains unstaged because it is preexisting untracked WIP."
+  },
+  "unchangedGeneratedViews": [
+    {
+      "path": "work/NEXT.md",
+      "startSha256": "ba57792784904472ced1c46800f9546e3e5062d9ed85da3e38a7f35234e566ca",
+      "afterSha256": "ba57792784904472ced1c46800f9546e3e5062d9ed85da3e38a7f35234e566ca",
+      "matchesStart": true
+    }
+  ],
+  "nextId": "T98",
+  "nextUnit": "verified-evaluated-exporter-and-12-object-preview",
+  "nextTaskStarted": false
+}

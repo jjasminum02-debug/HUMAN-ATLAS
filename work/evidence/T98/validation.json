@@ -1,0 +1,361 @@
+{
+  "schemaVersion": "1.0.0",
+  "task": "T98",
+  "result": "partial",
+  "validationScope": "source inventory and preservation/data contract only; actual evaluated export, preview and production base are intentionally not marked passed",
+  "checks": [
+    {
+      "name": "frozen T96 denominator",
+      "passed": true,
+      "details": {
+        "targets": 542,
+        "primaryOwners": 542,
+        "memberships": 563,
+        "individualMuscleDenominator": null
+      }
+    },
+    {
+      "name": "all 12 T96 region packages exact",
+      "passed": true,
+      "details": [
+        [
+          "head",
+          113,
+          113
+        ],
+        [
+          "neck",
+          62,
+          65
+        ],
+        [
+          "back",
+          70,
+          71
+        ],
+        [
+          "shoulder-scapular",
+          14,
+          16
+        ],
+        [
+          "thorax",
+          44,
+          44
+        ],
+        [
+          "abdomen-lumbar",
+          8,
+          10
+        ],
+        [
+          "pelvis-perineum",
+          33,
+          34
+        ],
+        [
+          "gluteal-hip",
+          15,
+          15
+        ],
+        [
+          "thigh",
+          30,
+          30
+        ],
+        [
+          "leg",
+          23,
+          23
+        ],
+        [
+          "foot",
+          40,
+          40
+        ],
+        [
+          "upper-limb",
+          90,
+          102
+        ]
+      ]
+    },
+    {
+      "name": "target candidate and identity states separated",
+      "passed": true,
+      "details": {
+        "targetsWithPriorT96Bp3dLexicalCandidate": 236,
+        "targetsWithZAnatomyObjectNameCandidates": 430,
+        "candidateMeaning": "search/reconciliation leads only; no identity, laterality, geometry, frame, rights, or learner binding conclusion"
+      }
+    },
+    {
+      "name": "raw datablock denominators match T97 source inventory",
+      "passed": true,
+      "details": {
+        "objects": true,
+        "meshDatablocks": true,
+        "curves": true,
+        "collections": true,
+        "scenes": true,
+        "archiveEntries": true,
+        "archiveFiles": true,
+        "sourceBlendFiles": true
+      }
+    },
+    {
+      "name": "exact 12-object sample is locatable and covers serialized edge cases",
+      "passed": true,
+      "details": {
+        "names": [
+          "Frontalis muscle.l",
+          "Latissimus dorsi muscle.l",
+          "Latissimus dorsi muscle.r",
+          "Clavicular part of deltoid muscle.l",
+          "Clavicular part of deltoid muscle.r",
+          "Tibialis anterior muscle.l",
+          "Scapula.l",
+          "Scapula.r",
+          "Vertebra L5",
+          "Sacrum",
+          "Clavicular part of deltoid muscle.ol",
+          "Cross Section X"
+        ],
+        "caseCoverage": {
+          "serializedModifierObjectNames": [
+            "Clavicular part of deltoid muscle.ol"
+          ],
+          "serializedConstraintObjectNames": [
+            "Cross Section X"
+          ],
+          "sharedMeshPointersInSample": [
+            "0x18b67294108",
+            "0x18b67432408",
+            "0x18b67bf4f08"
+          ],
+          "negativeSerializedMatrixDeterminantObjects": [
+            "Frontalis muscle.l",
+            "Latissimus dorsi muscle.l",
+            "Clavicular part of deltoid muscle.l",
+            "Tibialis anterior muscle.l",
+            "Scapula.l",
+            "Clavicular part of deltoid muscle.ol"
+          ],
+          "collectionInstanceInSource": false,
+          "collectionInstanceCandidateInSample": []
+        }
+      }
+    },
+    {
+      "name": "sample locator freeze matches inventory and remains unevaluated",
+      "passed": true,
+      "details": {
+        "frozenCount": 12,
+        "geometryHash": null,
+        "previewPath": null,
+        "evaluatedExportVerified": false
+      }
+    },
+    {
+      "name": "legacy collection instance absence is not misreported as evaluated instance coverage",
+      "passed": true,
+      "details": {
+        "legacyCollectionInstancePointerObjects": 0,
+        "evaluatedInstanceCount": null,
+        "nodesModifierCount": 6
+      }
+    },
+    {
+      "name": "exporter and evaluated preview gate remains open",
+      "passed": true,
+      "details": {
+        "attempt": {
+          "attemptId": "T98-BLENDER-5.2.2-DIRECT-APP-OPEN",
+          "tool": "Blender 5.2.2 LTS macOS arm64",
+          "binaryPath": "/Volumes/Blender/Blender.app/Contents/MacOS/Blender",
+          "toolReceipt": "work/evidence/T97/blender-tool-current.json",
+          "dmgSha256": "dc4125399b8bfefe283cc1624d6cfc7809d1cac20ace51072127eb371f31f210",
+          "command": "\"/Volumes/Blender/Blender.app/Contents/MacOS/Blender\" --factory-startup --disable-autoexec \"atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Startup.blend\"",
+          "backgroundMode": false,
+          "autoexecDisabled": true,
+          "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "exitCode": 134,
+          "capturedOutput": "ArchWarn: ARCH_CACHE_LINE_SIZE != Arch_ObtainCacheLineSize()\nFunction: Arch_ValidateAssumptions\nFile: /Users/brecht/dev/build_darwin/deps/build/usd/src/external_usd/pxr/base/arch/assumptions.cpp\nLine: 155",
+          "result": "process abort before successful scene load or exporter execution; no output surface",
+          "followupRetries": 0
+        },
+        "decision": {
+          "evaluatedExportVerified": false,
+          "representativePreviewGenerated": false,
+          "baseSelectionAllowed": false,
+          "nextUnit": "verified-evaluated-exporter-and-12-object-preview"
+        }
+      }
+    },
+    {
+      "name": "source rights and human review holds preserved",
+      "passed": true,
+      "details": {
+        "base": "undecided_evaluated_conversion_gate_failed",
+        "groups": 8,
+        "sourceRights": [
+          "held",
+          "held_pending_file_level_reconciliation"
+        ]
+      }
+    },
+    {
+      "name": "EXECUTION T98 row only changed",
+      "passed": true,
+      "details": {
+        "task": "T98",
+        "sourcePath": "work/EXECUTION.json",
+        "beforeFileSha256": "0c78d5a57096cfe3eb563bcefaed74f3ae01dd2222c3a01c0c2cc371caaec62c",
+        "afterFileSha256": "540ad422747a8cbe426498aea0a166fda10d08c443d5c37ef1537103a6e347f9",
+        "beforeT98Row": {
+          "title": "전신 source inventory·변환 검증·주 베이스 선택",
+          "owner": "Luna Max",
+          "phase": "G1",
+          "executionStatus": "planned_not_started",
+          "acceptance": "pending",
+          "spec": "work/tasks/T98.md",
+          "scope": "T97 pinned archive/BP3D metadata/cache/T96 전체 target 및 T104까지 최신 WIP·evidence를 읽는다. 25 설계 3절의 전체 Object/Mesh/Collection/curve/helper/instance와 source 권리 상속·예외를 대조한다. canonical concept·geometry·instance·file 분모를 구분하고12부위 필수 전체 목록을 freeze한다. Z-Anatomy는 우선 후보이며 actual evaluated geometry 변환/좌우·pose/권리/포괄성/비용으로 주 베이스를 선택한다. 정확히 동결한8–12개 대표 object의 실제 exporter spike와 preview/hash를 남긴다. T97 Metal 실패를 같은 방식으로 반복하지 않고 검증된 headless/export 경로를 확인한다. raw 배열을 modifier/instance 결과로 오인하지 않는다. 모든 source를 다시 다운로드하거나 광배근만 검사하고 완료하지 않는다. source inventory만 있고 exporter가 미검증이면 partial. 웹 runtime/다음 task를 구현하지 않는다.",
+          "progress": {
+            "nextUnit": null,
+            "completedUnits": []
+          },
+          "report": "work/reports/T98.md"
+        },
+        "afterT98Row": {
+          "title": "전신 source inventory·변환 검증·주 베이스 선택",
+          "owner": "Luna Max",
+          "phase": "G1",
+          "executionStatus": "in_progress",
+          "acceptance": "partial",
+          "spec": "work/tasks/T98.md",
+          "scope": "T97 pinned archive/BP3D metadata/cache/T96 전체 target 및 T104까지 최신 WIP·evidence를 읽는다. 25 설계 3절의 전체 Object/Mesh/Collection/curve/helper/instance와 source 권리 상속·예외를 대조한다. canonical concept·geometry·instance·file 분모를 구분하고12부위 필수 전체 목록을 freeze한다. Z-Anatomy는 우선 후보이며 actual evaluated geometry 변환/좌우·pose/권리/포괄성/비용으로 주 베이스를 선택한다. 정확히 동결한8–12개 대표 object의 실제 exporter spike와 preview/hash를 남긴다. T97 Metal 실패를 같은 방식으로 반복하지 않고 검증된 headless/export 경로를 확인한다. raw 배열을 modifier/instance 결과로 오인하지 않는다. 모든 source를 다시 다운로드하거나 광배근만 검사하고 완료하지 않는다. source inventory만 있고 exporter가 미검증이면 partial. 웹 runtime/다음 task를 구현하지 않는다.",
+          "progress": {
+            "nextUnit": "verified-evaluated-exporter-and-12-object-preview",
+            "completedUnits": [
+              "read-and-hash-pinned-inputs-and-prior-work",
+              "inventory-all-serialized-source-objects-meshes-curves-collections-and-links",
+              "freeze-all-12-t96-regions-and-542-target-records-with-563-memberships",
+              "record-z-anatomy-and-bodyparts3d-rights-families-and-exceptions",
+              "freeze-exact-12-object-export-candidate-set-with-source-hash-and-locators"
+            ]
+          },
+          "report": "work/reports/T98.md"
+        },
+        "unchangedOtherTaskRecordsSha256": "920b8c2ea98d8c2d93f95cb6834cf792f643a58a6ebf4f1186fded0e00e6e797",
+        "onlyTaskRecordChanged": true,
+        "acceptance": "partial",
+        "executionStatus": "in_progress",
+        "nextUnit": "verified-evaluated-exporter-and-12-object-preview"
+      }
+    },
+    {
+      "name": "progress keeps same task for resume",
+      "passed": true,
+      "details": {
+        "executionStatus": "in_progress",
+        "acceptance": "partial",
+        "nextId": "T98",
+        "nextUnit": "verified-evaluated-exporter-and-12-object-preview",
+        "nextPromptPath": "work/evidence/T98/NEXT-T98-RESUME.md"
+      }
+    },
+    {
+      "name": "protected inputs preserved except T98 and generated STATUS deltas",
+      "passed": true,
+      "details": {
+        "baselineProtectedCount": 939,
+        "unchanged": 937,
+        "authorizedTaskDeltas": [
+          "work/EXECUTION.json",
+          "work/STATUS.md"
+        ],
+        "changedUnexpectedly": [],
+        "missing": []
+      }
+    },
+    {
+      "name": "existing user WIP paths preserved",
+      "passed": true,
+      "details": {
+        "baselinePathCount": 209,
+        "missing": []
+      }
+    },
+    {
+      "name": "source cache inventories preserved without redownload",
+      "passed": true,
+      "details": {
+        "bodyparts3dR4": {
+          "fileCount": 721,
+          "bytes": 430204718,
+          "matchesStart": true
+        },
+        "zAnatomyPinned": {
+          "fileCount": 13,
+          "bytes": 396330521,
+          "matchesStart": true
+        }
+      }
+    },
+    {
+      "name": "OpenSim_Models preserved read-only",
+      "passed": true,
+      "details": {
+        "expectedHead": "d9b05d470b1a481c222372c85b75772faf8f7792",
+        "actualHead": "d9b05d470b1a481c222372c85b75772faf8f7792",
+        "status": ""
+      }
+    },
+    {
+      "name": "T98 Python tools syntax",
+      "passed": true,
+      "details": [
+        {
+          "path": "inspect_t98_blend.py",
+          "passed": true
+        },
+        {
+          "path": "reconcile_t96_targets.py",
+          "passed": true
+        },
+        {
+          "path": "update_execution_record.py",
+          "passed": true
+        },
+        {
+          "path": "validate_t98.py",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "generated execution projections in sync",
+      "passed": true,
+      "details": {
+        "exitCode": 0,
+        "stdout": "Execution projections match; no writes.",
+        "stderr": ""
+      }
+    }
+  ],
+  "summary": {
+    "checkCount": 17,
+    "passedCount": 17,
+    "failedCount": 0,
+    "protectedInputsUnchanged": 937,
+    "authorizedTaskDeltas": [
+      "work/EXECUTION.json",
+      "work/STATUS.md"
+    ],
+    "targetRecords": 542,
+    "regionMemberships": 563,
+    "representativeObjectCount": 12,
+    "evaluatedExportVerified": false,
+    "productionBaseSelected": false
+  }
+}
