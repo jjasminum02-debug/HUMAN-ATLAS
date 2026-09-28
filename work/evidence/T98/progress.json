@@ -14,29 +14,37 @@
     "evaluate-export-exact-frozen-12-locators-with-scripts-and-autoexec-disabled",
     "export-eleven-anatomical-meshes-and-separate-nonanatomical-constraint-helper",
     "measure-modifier-shared-mesh-negative-transform-constraint-and-depsgraph-instance-results",
-    "render-and-visually-inspect-three-nonblank-source-axis-preview-views"
+    "render-and-visually-inspect-three-nonblank-source-axis-preview-views",
+    "link-mounted-Blender-3.5.0-to-existing-T97-DMG-receipt-by-hdiutil-mount-path-and-matching-local-SHA256",
+    "compare-Z-Anatomy-declared-unit-frame-and-reference-pose-evidence-against-T50-T69-without-applying-BP3D-transform",
+    "review-exact-12-frozen-object-locators-and-existing-source-metadata-for-upstream-ID-and-license-family-crosswalk",
+    "compare-T96-regional-target-candidate-counts-and-existing-Z-Anatomy-versus-BP3D-subset-cost-evidence"
   ],
   "nextUnit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
   "nextId": "T98",
   "nextOwner": "Luna Max",
   "afterT98GatesPass": "T99",
-  "nextPromptPath": "work/evidence/T98/resume-2026-09-28/NEXT-T98-RESUME.md",
+  "nextPromptPath": "work/evidence/T98/resume-2026-09-29/NEXT-T98-RESUME.md",
   "pendingUnits": [
-    "resolve-current-Blender-3.5.0-provenance-versus-official-5.2.2-receipt-and-invalid-signature-check",
-    "validate-source-physical-unit-frame-and-reference-pose-against-T50-T69-without-inferred-transform",
-    "compare-literal-side-labels-and-evaluated-space-observations-with-exact-source-lineage",
-    "resolve-per-object-upstream-source-and-rights-exception-family",
-    "compare-whole-body-target-coverage-and-cost-across-eligible-sources",
-    "select-production-base-only-after-coverage-frame-rights-and-quality-gates-pass"
+    "establish-official-publisher-and-integrity-evidence-for-mounted-Blender-3.5.0-despite-matched-local-T97-DMG-lineage",
+    "obtain-source-declared-Z-Anatomy-physical-unit-frame-and-reference-pose-or-validated-registration-to-T50-T69",
+    "resolve-exact-source-laterality-for-frozen-objects-with-source-identity-not-name-or-coordinate-inference",
+    "resolve-exact-upstream-source-ID-and-license-exception-family-for-each-frozen-object",
+    "compare-identity-backed-whole-body-target-surface-coverage-quality-and-equivalent-pipeline-cost-across-eligible-bases",
+    "select-production-base-only-after-runtime-source-identity-frame-rights-coverage-and-cost-gates-pass"
   ],
   "gate": {
     "evaluatedExportVerified": true,
     "representativeSurfacePreview": true,
     "runtimePublisherProvenanceVerified": false,
     "productionBaseSelected": false,
-    "whyPartial": "The exact frozen sample now has evaluated geometry, a reproducible 11-mesh GLB, helper observation, and visually inspected three-axis renders. T98 remains partial because the mounted Blender 3.5.0 executable is not proven by the official 5.2.2 DMG receipt and its app signature verification failed; source physical units/frame/rest pose and exact laterality mapping are unresolved; object-to-upstream license-family lineage, full target coverage, and comparable whole-body cost are unresolved.",
+    "whyPartial": "The existing hdiutil mount path and local SHA link Blender 3.5.0 to the T97-recorded 3.5.0 DMG download, but its recorded official checksum is absent and the app signature verification failed; the separate official 5.2.2 receipt remains a mismatch. Existing source metadata contains no exact upstream object IDs or object-to-rights-family links for the 12 frozen locators. Z-Anatomy physical unit/frame/reference pose and side mapping remain unregistered to T50/T69. T96 counts 430/542 Z-Anatomy and 236/542 BodyParts3D name candidates but zero exact source joins; sample export costs cannot be compared to whole-body costs. Production base remains undecided.",
     "newTaskNumberIssued": false,
-    "nextTaskExecutionStarted": false
+    "nextTaskExecutionStarted": false,
+    "runtimeArtifactLineageEstablishedToT97Dmg": true,
+    "sourceIdentityAndRightsResolved": false,
+    "sourceFrameUnitPoseResolved": false,
+    "wholeBodyComparableCostAvailable": false
   },
   "holdState": {
     "sourceOnly": true,
@@ -54,5 +62,15 @@
     "facial-expression motion",
     "web runtime and learner UI",
     "T99/T100 or any historical nextTask"
+  ],
+  "resumeHistory": [
+    {
+      "date": "2026-09-29",
+      "unit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
+      "result": "existing metadata assessed; runtime container lineage linked to T97 Blender 3.5.0 DMG, but publisher integrity, source frame/pose, exact object IDs and rights-family membership remain unresolved",
+      "evidence": "work/evidence/T98/resume-2026-09-29/existing-metadata-assessment.json",
+      "nextUnit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
+      "nextId": "T98"
+    }
   ]
 }

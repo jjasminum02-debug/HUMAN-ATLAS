@@ -1,0 +1,1461 @@
+{
+  "schemaVersion": "1.0.0",
+  "task": "T98",
+  "unit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
+  "observedAt": "2026-09-29T00:16:26.335327+09:00",
+  "status": "partial_existing_metadata_gate_unresolved",
+  "priorInventoryAndExportReused": true,
+  "noBlenderLaunchSourceDownloadInventoryRerunOrExporterRerun": true,
+  "runtimeProvenance": {
+    "mountedRuntime": {
+      "path": "/Volumes/Blender/Blender.app/Contents/MacOS/Blender",
+      "bundleVersion": "3.5.0",
+      "bundleBuildVersion": "3.5.0 2023-03-29",
+      "priorObservedRuntimeVersion": "3.5.0",
+      "bytes": 249256048,
+      "sha256": "23171ca8704539b44c94cb370894cb3b38908530c012267bed079326d7be95b0",
+      "matchesPriorT98ExecutableReceipt": true
+    },
+    "mountedImageObservation": {
+      "imagePath": "/private/tmp/t97-blender-3.5.0-arm64.dmg",
+      "mountPoint": "/Volumes/Blender",
+      "deviceEntries": [
+        "/dev/disk5",
+        "/dev/disk5s1"
+      ]
+    },
+    "T97Blender350DownloadReceipt": {
+      "receiptPath": "work/evidence/T97/blender-tool.json",
+      "version": "3.5.0",
+      "url": "https://download.blender.org/release/Blender3.5/blender-3.5.0-macos-arm64.dmg",
+      "finalUrl": "https://download.blender.org/release/Blender3.5/blender-3.5.0-macos-arm64.dmg",
+      "downloadedAt": "2026-09-28T16:22:05.492025+09:00",
+      "temporaryPath": "/private/tmp/t97-blender-3.5.0-arm64.dmg",
+      "recordedBytes": 247656372,
+      "recordedSha256": "5941f450f90b8db6a1bde459db4d9248fc67f022c7cb5f662c9e0818a3725457",
+      "currentImageExists": true,
+      "currentImageBytes": 247656372,
+      "currentImageSha256": "5941f450f90b8db6a1bde459db4d9248fc67f022c7cb5f662c9e0818a3725457",
+      "mountedImagePathMatchesReceiptPath": true,
+      "currentImageHashMatchesReceipt": true,
+      "official3_5_0ChecksumPresentInExistingReceipt": false
+    },
+    "T97Blender522OfficialReceipt": {
+      "receiptPath": "work/evidence/T97/blender-tool-current.json",
+      "version": "5.2.2 LTS",
+      "dmgSha256": "dc4125399b8bfefe283cc1624d6cfc7809d1cac20ace51072127eb371f31f210",
+      "officialDmgChecksumMatched": true,
+      "matchesMountedBlenderVersion": false,
+      "authenticatesMountedBlender350Image": false
+    },
+    "codeSignature": {
+      "command": "codesign --verify --deep --strict --verbose=2 /Volumes/Blender/Blender.app",
+      "exitCode": 1,
+      "result": "invalid signature (code or signature have been modified), arm64",
+      "impact": "runtime publisher/signature provenance remains unresolved; technical export is retained as local QA only, not a production-base approval"
+    },
+    "assessment": {
+      "artifactLineageToRecordedT97Blender350Download": "established_by_mount_path_and_matching_local_dmg_hash",
+      "officialPublisherAndPackageIntegrity": "unresolved; the existing Blender 3.5.0 receipt has no recorded official checksum and the existing codesign verification failed",
+      "runtimePublisherProvenanceVerified": false,
+      "retain5_2_2MismatchFact": true,
+      "retainInvalidSignatureFact": true,
+      "productionBasePermissionGranted": false
+    }
+  },
+  "frameUnitPoseAndLaterality": {
+    "zAnatomySourceFrame": "native Blender scene coordinates; not registered to T50/T69",
+    "sourceSceneUnitPreferences": {
+      "system": "METRIC",
+      "scaleLength": 1.0,
+      "lengthUnit": "CENTIMETERS",
+      "sourceDeclaredPhysicalUnit": null
+    },
+    "sourceDeclaredPhysicalUnit": null,
+    "sourceFrameRegistration": "unresolved",
+    "sourceFrameStartEndAndCurrent": {
+      "start": 0,
+      "end": 100,
+      "current": 0
+    },
+    "referenceRestPoseId": null,
+    "armatureDatablockCount": 0,
+    "T50T69FrameContract": {
+      "source": "BodyParts3D Release 4 only",
+      "transform": "[x,y,z] mm -> [x,z,-y] m; x sign preserved; no mirroring",
+      "T69Scope": "85/85 BodyParts3D bounds and 17 target OBJ-to-GLB vertex values validated internally; not a Z-Anatomy registration or anatomy approval"
+    },
+    "compatibilityConclusion": "no source-backed Z-Anatomy-to-BodyParts3D frame or unit transform is present in the reviewed evidence; the T50/T69 transform was not applied",
+    "lateralityConclusion": "literal object suffixes and Left/Right collection labels are observations only; T69's x-sign rule applies to BodyParts3D R4 and cannot validate Z-Anatomy laterality"
+  },
+  "exactObjectLineageAndRights": {
+    "frozenObjectCount": 12,
+    "anatomicalObjectCount": 11,
+    "helperObjectCount": 1,
+    "exactUpstreamObjectIdsFoundInExistingT98Records": 0,
+    "exactFMAFJBp3dSourceIdsFoundInExistingT98Records": 0,
+    "exactObjectToRightsFamilyLinksFound": 0,
+    "recordsExamined": [
+      "T98 representative-sample-freeze.json",
+      "T98 blender-raw-object-inventory.json representativeSample.objects",
+      "T98 evaluated-export-manifest.json sample.objects",
+      "T98 target-reconciliation-t98.json target name candidates",
+      "T97 archive-member-inventory.json",
+      "T97 pinned local addon/theme text files (read-only static search)"
+    ],
+    "scopeLimit": "No Startup.blend re-open, custom-property reparse, full inventory rerun or exporter rerun. Existing records expose file offsets, names, parents and classification collections, but not an exact upstream source ID or rights-family member crosswalk.",
+    "archiveMembers": [
+      {
+        "path": "Z-Anatomy/Anatomy-shortcuts.py",
+        "kind": "file",
+        "sha256": "c1b723cee484758598e88ac11714ef8126d51915999d9ceea06fa88fef8b17ff",
+        "crc32": "7c66146a"
+      },
+      {
+        "path": "Z-Anatomy/Anatomy_Bright.xml",
+        "kind": "file",
+        "sha256": "be7c634e3f195f7ed253afd0e457936823396bfa72af2c66368557c8e6f87f86",
+        "crc32": "65fb39b4"
+      },
+      {
+        "path": "Z-Anatomy/Anatomy_Dark.xml",
+        "kind": "file",
+        "sha256": "7daf14f7225f89d5025dbc6bdb8ec4a99e8ccac1e7b9f208bb82de3296c3f07b",
+        "crc32": "d03550df"
+      },
+      {
+        "path": "Z-Anatomy/splash.png",
+        "kind": "file",
+        "sha256": "3ffe1b89130e7164561051fbcebe5ccfcbcdfc1f0be87bdb1d419c54250c27a1",
+        "crc32": "d83f1728"
+      },
+      {
+        "path": "Z-Anatomy/Startup.blend",
+        "kind": "file",
+        "sha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+        "crc32": "164e62ca"
+      },
+      {
+        "path": "Z-Anatomy/__init__.py",
+        "kind": "file",
+        "sha256": "bd4df0dd92872bd07d9d883d7c724584b72640a016df8d067fc7c5c3d5d85306",
+        "crc32": "36812dc0"
+      }
+    ],
+    "pinnedReadmeRightsEvidence": {
+      "source": {
+        "sourceFamily": "Z-Anatomy model/content",
+        "url": "https://github.com/Z-Anatomy/Models-of-human-anatomy/blob/c7010a903b75a2fd24a13b1c2c4c3546a9223780/Readme.md",
+        "version": "commit c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+        "locator": "Readme.md, LICENSE and ATTRIBUTIONS > MODELS",
+        "access": "pinned GitHub source page opened; pinned archive bytes already held locally from T97",
+        "claim": "README states Z-Anatomy code and content are CC BY-SA 4.0 and identifies BodyParts3D as an original model source; it lists additional included/adapted models separately.",
+        "sourceObjectAncestryResolved": false,
+        "fileLevelRights": "not individually resolved",
+        "localUseRights": "not promoted",
+        "redistributionRights": "held"
+      },
+      "groups": [
+        {
+          "sourceGroup": "general Z-Anatomy content and code per README",
+          "statedLicense": "CC BY-SA 4.0",
+          "objectMembership": "not derived from names; requires object-to-upstream source lineage",
+          "status": "source-family statement only"
+        },
+        {
+          "sourceGroup": "BodyParts3D original model attribution cited by Z-Anatomy",
+          "statedLicenseInZAnatomyREADME": "CC BY-SA 2.1 Japan",
+          "separateCurrentDatabasePage": "CC BY 4.0",
+          "objectMembership": "per-object source ID/crosswalk not recovered from .blend inventory",
+          "status": "hold; preserve both observations"
+        },
+        {
+          "sourceGroup": "Brainder and White matter from University of Washington",
+          "statedLicenseInZAnatomyREADME": "none stated in attribution bullet",
+          "status": "no object lineage or separate license review; held"
+        },
+        {
+          "sourceGroup": "Cranial Nerves and Foramina, University of Dundee CAHID",
+          "statedLicenseInZAnatomyREADME": "CC BY 4.0",
+          "objectMembership": "must be tied to exact source object, not lexical name alone",
+          "status": "exception family; held until object lineage is linked"
+        },
+        {
+          "sourceGroup": "Anatomy of the Inner Ear, University of Dundee School of Medicine",
+          "statedLicenseInZAnatomyREADME": "CC BY-NC-SA 4.0",
+          "objectMembership": "must be tied to exact source object, not lexical name alone",
+          "status": "noncommercial exception family; held"
+        },
+        {
+          "sourceGroup": "Kidney, Lissie Cowley",
+          "statedLicenseInZAnatomyREADME": "CC BY-NC 4.0",
+          "objectMembership": "must be tied to exact source object, not lexical name alone",
+          "status": "noncommercial exception family; held"
+        },
+        {
+          "sourceGroup": "Wikipedia definitions",
+          "statedLicenseInZAnatomyREADME": "CC BY-SA 3.0",
+          "applicationScope": "definitions/text attribution; not a 3D model license",
+          "status": "not applied to geometry"
+        },
+        {
+          "sourceGroup": "Z-Anatomy template code member __init__.py",
+          "memberSha256": "bd4df0dd92872bd07d9d883d7c724584b72640a016df8d067fc7c5c3d5d85306",
+          "localHeader": "GPL version 3 or later",
+          "READMEStatement": "general code/content CC BY-SA 4.0",
+          "status": "code member license wording conflict; code is not geometry and was not executed"
+        }
+      ],
+      "perObjectMembershipConclusion": "none of the 12 exact sample objects can be assigned to the general or exception families from the reviewed object/collection metadata; all remain held"
+    },
+    "staticTextMetadataSearch": [
+      {
+        "path": "atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/__init__.py",
+        "sha256": "bd4df0dd92872bd07d9d883d7c724584b72640a016df8d067fc7c5c3d5d85306",
+        "fmaOrFjIdentifierTokenCount": 0,
+        "fmaOrFjIdentifierTokens": [],
+        "frozenObjectLabelStringMatches": [],
+        "interpretation": "local script/theme search only; not an inspection or reparse of Startup.blend and not proof that the binary contains no custom properties"
+      },
+      {
+        "path": "atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Anatomy-shortcuts.py",
+        "sha256": "c1b723cee484758598e88ac11714ef8126d51915999d9ceea06fa88fef8b17ff",
+        "fmaOrFjIdentifierTokenCount": 0,
+        "fmaOrFjIdentifierTokens": [],
+        "frozenObjectLabelStringMatches": [],
+        "interpretation": "local script/theme search only; not an inspection or reparse of Startup.blend and not proof that the binary contains no custom properties"
+      },
+      {
+        "path": "atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Anatomy_Bright.xml",
+        "sha256": "be7c634e3f195f7ed253afd0e457936823396bfa72af2c66368557c8e6f87f86",
+        "fmaOrFjIdentifierTokenCount": 0,
+        "fmaOrFjIdentifierTokens": [],
+        "frozenObjectLabelStringMatches": [],
+        "interpretation": "local script/theme search only; not an inspection or reparse of Startup.blend and not proof that the binary contains no custom properties"
+      },
+      {
+        "path": "atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Anatomy_Dark.xml",
+        "sha256": "7daf14f7225f89d5025dbc6bdb8ec4a99e8ccac1e7b9f208bb82de3296c3f07b",
+        "fmaOrFjIdentifierTokenCount": 0,
+        "fmaOrFjIdentifierTokens": [],
+        "frozenObjectLabelStringMatches": [],
+        "interpretation": "local script/theme search only; not an inspection or reparse of Startup.blend and not proof that the binary contains no custom properties"
+      }
+    ],
+    "objects": [
+      {
+        "objectName": "Frontalis muscle.l",
+        "role": "unapproved_anatomical_sample",
+        "frozenLocator": {
+          "archivePath": "Z-Anatomy/Startup.blend",
+          "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "objectDataBlockPointer": "0x18b630b7208",
+          "objectIdName": "Frontalis muscle.l",
+          "serializedFileBlockOffset": 44131636
+        },
+        "dataKind": "Mesh",
+        "dataBlockName": "Frontalis muscle",
+        "parentObjectName": "Epicranius muscle.g",
+        "collectionPaths": [
+          [
+            "Scene Collection",
+            "4: Muscular system"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Superficial muscles"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Muscles"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Cranial part of muscular system",
+            "Muscles of head"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Nervous system",
+            "Peripheral nervous system",
+            "Cranial nerves",
+            "Facial nerve (VII)"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Head"
+          ]
+        ],
+        "literalNameSuffix": "l",
+        "sideCollectionLabels": [],
+        "sideConclusion": "unresolved; source labels/collection tags and transform signs are observations, not an independently linked side record",
+        "serializedWorldLinearDeterminant": -0.9999989271167121,
+        "sharedMeshDataGroupByExistingInventory": [],
+        "evaluatedTrianglesFromPriorT98Export": 5874,
+        "evaluatedGeometrySha256FromPriorT98Export": "22c6d95ef985a9701eeff03721a25e1ba911d0a941c47cc118b9f5c77d98c285",
+        "exactUpstreamObjectId": null,
+        "exactUpstreamFmaFjBp3dId": null,
+        "exactUpstreamSourceFamily": null,
+        "objectToRightsFamilyMembership": "unresolved; collection hierarchy is not source/license ancestry",
+        "lexicalTa2TargetCandidatesOnly": [
+          {
+            "targetId": "TA2:2056",
+            "semanticKind": "named_muscle",
+            "latin": "musculus frontalis",
+            "english": "frontalis muscle",
+            "identityStatus": "unresolved_no_exact_target_to_source_object_crosswalk",
+            "note": "TA2 target ID is a terminology target, not a mesh/member ID; this row is name matching only."
+          }
+        ],
+        "localUseRights": "held_pending_file_level_reconciliation",
+        "publicRedistributionRights": "held",
+        "humanReview": "not_performed",
+        "learnerBinding": "none"
+      },
+      {
+        "objectName": "Latissimus dorsi muscle.l",
+        "role": "unapproved_anatomical_sample",
+        "frozenLocator": {
+          "archivePath": "Z-Anatomy/Startup.blend",
+          "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "objectDataBlockPointer": "0x18b63c61d08",
+          "objectIdName": "Latissimus dorsi muscle.l",
+          "serializedFileBlockOffset": 48262532
+        },
+        "dataKind": "Mesh",
+        "dataBlockName": "Latissimus dorsi muscle",
+        "parentObjectName": "Hypaxial muscles of back.g",
+        "collectionPaths": [
+          [
+            "Scene Collection",
+            "4: Muscular system"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Superficial muscles"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Muscles"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Dorsal part of muscular system",
+            "Hypaxial muscles of back"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Trunk"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Trunk",
+            "Back"
+          ]
+        ],
+        "literalNameSuffix": "l",
+        "sideCollectionLabels": [],
+        "sideConclusion": "unresolved; source labels/collection tags and transform signs are observations, not an independently linked side record",
+        "serializedWorldLinearDeterminant": -1.0000005960465472,
+        "sharedMeshDataGroupByExistingInventory": [
+          "Latissimus dorsi muscle.l",
+          "Latissimus dorsi muscle.r"
+        ],
+        "evaluatedTrianglesFromPriorT98Export": 21580,
+        "evaluatedGeometrySha256FromPriorT98Export": "6690ae5a55c88cc60818d1a6ed661fe22d9096f06b3100df2f77d95cfd2d66ba",
+        "exactUpstreamObjectId": null,
+        "exactUpstreamFmaFjBp3dId": null,
+        "exactUpstreamSourceFamily": null,
+        "objectToRightsFamilyMembership": "unresolved; collection hierarchy is not source/license ancestry",
+        "lexicalTa2TargetCandidatesOnly": [
+          {
+            "targetId": "TA2:2231",
+            "semanticKind": "named_muscle",
+            "latin": "musculus latissimus dorsi",
+            "english": "latissimus dorsi muscle",
+            "identityStatus": "unresolved_no_exact_target_to_source_object_crosswalk",
+            "note": "TA2 target ID is a terminology target, not a mesh/member ID; this row is name matching only."
+          }
+        ],
+        "localUseRights": "held_pending_file_level_reconciliation",
+        "publicRedistributionRights": "held",
+        "humanReview": "not_performed",
+        "learnerBinding": "none"
+      },
+      {
+        "objectName": "Latissimus dorsi muscle.r",
+        "role": "unapproved_anatomical_sample",
+        "frozenLocator": {
+          "archivePath": "Z-Anatomy/Startup.blend",
+          "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "objectDataBlockPointer": "0x18b63c60808",
+          "objectIdName": "Latissimus dorsi muscle.r",
+          "serializedFileBlockOffset": 48274088
+        },
+        "dataKind": "Mesh",
+        "dataBlockName": "Latissimus dorsi muscle",
+        "parentObjectName": "Hypaxial muscles of back.g",
+        "collectionPaths": [
+          [
+            "Scene Collection",
+            "4: Muscular system"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Superficial muscles"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Muscles"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Dorsal part of muscular system",
+            "Hypaxial muscles of back"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Trunk"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Trunk",
+            "Back"
+          ]
+        ],
+        "literalNameSuffix": "r",
+        "sideCollectionLabels": [],
+        "sideConclusion": "unresolved; source labels/collection tags and transform signs are observations, not an independently linked side record",
+        "serializedWorldLinearDeterminant": 1.0000005960465472,
+        "sharedMeshDataGroupByExistingInventory": [
+          "Latissimus dorsi muscle.l",
+          "Latissimus dorsi muscle.r"
+        ],
+        "evaluatedTrianglesFromPriorT98Export": 21580,
+        "evaluatedGeometrySha256FromPriorT98Export": "8f029c4bd8f4cac7fb139f12c44d4d1c44f53f68744ee3787626e5a7266cba91",
+        "exactUpstreamObjectId": null,
+        "exactUpstreamFmaFjBp3dId": null,
+        "exactUpstreamSourceFamily": null,
+        "objectToRightsFamilyMembership": "unresolved; collection hierarchy is not source/license ancestry",
+        "lexicalTa2TargetCandidatesOnly": [
+          {
+            "targetId": "TA2:2231",
+            "semanticKind": "named_muscle",
+            "latin": "musculus latissimus dorsi",
+            "english": "latissimus dorsi muscle",
+            "identityStatus": "unresolved_no_exact_target_to_source_object_crosswalk",
+            "note": "TA2 target ID is a terminology target, not a mesh/member ID; this row is name matching only."
+          }
+        ],
+        "localUseRights": "held_pending_file_level_reconciliation",
+        "publicRedistributionRights": "held",
+        "humanReview": "not_performed",
+        "learnerBinding": "none"
+      },
+      {
+        "objectName": "Clavicular part of deltoid muscle.l",
+        "role": "unapproved_anatomical_sample",
+        "frozenLocator": {
+          "archivePath": "Z-Anatomy/Startup.blend",
+          "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "objectDataBlockPointer": "0x18b6249dd08",
+          "objectIdName": "Clavicular part of deltoid muscle.l",
+          "serializedFileBlockOffset": 40465584
+        },
+        "dataKind": "Mesh",
+        "dataBlockName": "Clavicular part of deltoid muscle",
+        "parentObjectName": "Deltoid muscle.g",
+        "collectionPaths": [
+          [
+            "Scene Collection",
+            "4: Muscular system"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Superficial muscles"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Muscles"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Muscular system of upper limb",
+            "Muscles of upper limb"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Muscular system of upper limb",
+            "Muscles of upper limb",
+            "Scapulohumeral muscles",
+            "Deltoid muscle"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Nervous system",
+            "Peripheral nervous system",
+            "Spinal nerves",
+            "Brachial plexus",
+            "Branches of posterior cord of brachial plexus",
+            "Axillary nerve"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Left upper limb"
+          ]
+        ],
+        "literalNameSuffix": "l",
+        "sideCollectionLabels": [
+          "Left upper limb"
+        ],
+        "sideConclusion": "unresolved; source labels/collection tags and transform signs are observations, not an independently linked side record",
+        "serializedWorldLinearDeterminant": -0.9999999999999893,
+        "sharedMeshDataGroupByExistingInventory": [
+          "Clavicular part of deltoid muscle.l",
+          "Clavicular part of deltoid muscle.r"
+        ],
+        "evaluatedTrianglesFromPriorT98Export": 2902,
+        "evaluatedGeometrySha256FromPriorT98Export": "8d1defcb72111e2aff83e4f0f970ebb878f1d34929c5c2a52759ecf62858664e",
+        "exactUpstreamObjectId": null,
+        "exactUpstreamFmaFjBp3dId": null,
+        "exactUpstreamSourceFamily": null,
+        "objectToRightsFamilyMembership": "unresolved; collection hierarchy is not source/license ancestry",
+        "lexicalTa2TargetCandidatesOnly": [
+          {
+            "targetId": "TA2:2452",
+            "semanticKind": "named_muscle",
+            "latin": "musculus deltoideus",
+            "english": "deltoid muscle",
+            "identityStatus": "unresolved_no_exact_target_to_source_object_crosswalk",
+            "note": "TA2 target ID is a terminology target, not a mesh/member ID; this row is name matching only."
+          },
+          {
+            "targetId": "TA2:2453",
+            "semanticKind": "muscle_part",
+            "latin": "pars clavicularis musculi deltoidei",
+            "english": "clavicular part of deltoid muscle",
+            "identityStatus": "unresolved_no_exact_target_to_source_object_crosswalk",
+            "note": "TA2 target ID is a terminology target, not a mesh/member ID; this row is name matching only."
+          }
+        ],
+        "localUseRights": "held_pending_file_level_reconciliation",
+        "publicRedistributionRights": "held",
+        "humanReview": "not_performed",
+        "learnerBinding": "none"
+      },
+      {
+        "objectName": "Clavicular part of deltoid muscle.r",
+        "role": "unapproved_anatomical_sample",
+        "frozenLocator": {
+          "archivePath": "Z-Anatomy/Startup.blend",
+          "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "objectDataBlockPointer": "0x18b6249c808",
+          "objectIdName": "Clavicular part of deltoid muscle.r",
+          "serializedFileBlockOffset": 40478420
+        },
+        "dataKind": "Mesh",
+        "dataBlockName": "Clavicular part of deltoid muscle",
+        "parentObjectName": "Deltoid muscle.g",
+        "collectionPaths": [
+          [
+            "Scene Collection",
+            "4: Muscular system"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Superficial muscles"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Muscles"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Muscular system of upper limb",
+            "Muscles of upper limb"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Muscular system of upper limb",
+            "Muscles of upper limb",
+            "Scapulohumeral muscles",
+            "Deltoid muscle"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Nervous system",
+            "Peripheral nervous system",
+            "Spinal nerves",
+            "Brachial plexus",
+            "Branches of posterior cord of brachial plexus",
+            "Axillary nerve"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Right upper limb"
+          ]
+        ],
+        "literalNameSuffix": "r",
+        "sideCollectionLabels": [
+          "Right upper limb"
+        ],
+        "sideConclusion": "unresolved; source labels/collection tags and transform signs are observations, not an independently linked side record",
+        "serializedWorldLinearDeterminant": 0.9999995231628986,
+        "sharedMeshDataGroupByExistingInventory": [
+          "Clavicular part of deltoid muscle.l",
+          "Clavicular part of deltoid muscle.r"
+        ],
+        "evaluatedTrianglesFromPriorT98Export": 2902,
+        "evaluatedGeometrySha256FromPriorT98Export": "b76aeb5a615d46a73a7a0400fcfd2a875fcd814d30d4e22f87d8b269c9e315c9",
+        "exactUpstreamObjectId": null,
+        "exactUpstreamFmaFjBp3dId": null,
+        "exactUpstreamSourceFamily": null,
+        "objectToRightsFamilyMembership": "unresolved; collection hierarchy is not source/license ancestry",
+        "lexicalTa2TargetCandidatesOnly": [
+          {
+            "targetId": "TA2:2452",
+            "semanticKind": "named_muscle",
+            "latin": "musculus deltoideus",
+            "english": "deltoid muscle",
+            "identityStatus": "unresolved_no_exact_target_to_source_object_crosswalk",
+            "note": "TA2 target ID is a terminology target, not a mesh/member ID; this row is name matching only."
+          },
+          {
+            "targetId": "TA2:2453",
+            "semanticKind": "muscle_part",
+            "latin": "pars clavicularis musculi deltoidei",
+            "english": "clavicular part of deltoid muscle",
+            "identityStatus": "unresolved_no_exact_target_to_source_object_crosswalk",
+            "note": "TA2 target ID is a terminology target, not a mesh/member ID; this row is name matching only."
+          }
+        ],
+        "localUseRights": "held_pending_file_level_reconciliation",
+        "publicRedistributionRights": "held",
+        "humanReview": "not_performed",
+        "learnerBinding": "none"
+      },
+      {
+        "objectName": "Tibialis anterior muscle.l",
+        "role": "unapproved_anatomical_sample",
+        "frozenLocator": {
+          "archivePath": "Z-Anatomy/Startup.blend",
+          "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "objectDataBlockPointer": "0x18b63fed608",
+          "objectIdName": "Tibialis anterior muscle.l",
+          "serializedFileBlockOffset": 59988988
+        },
+        "dataKind": "Mesh",
+        "dataBlockName": "Tibialis anterior muscle",
+        "parentObjectName": "Anterior compartment of leg.g",
+        "collectionPaths": [
+          [
+            "Scene Collection",
+            "4: Muscular system"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Superficial muscles"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Muscles"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Muscular system of lower limb",
+            "Muscles of lower limb"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Muscular system",
+            "Muscular system of lower limb",
+            "Muscles of lower limb",
+            "Anterior compartment of leg"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Nervous system",
+            "Peripheral nervous system",
+            "Spinal nerves",
+            "Lumbosacral plexus",
+            "Sacral plexus",
+            "Sciatic nerve"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Nervous system",
+            "Peripheral nervous system",
+            "Spinal nerves",
+            "Lumbosacral plexus",
+            "Sacral plexus",
+            "Sciatic nerve",
+            "Common fibular nerve",
+            "Deep fibular nerve"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Left lower limb"
+          ]
+        ],
+        "literalNameSuffix": "l",
+        "sideCollectionLabels": [
+          "Left lower limb"
+        ],
+        "sideConclusion": "unresolved; source labels/collection tags and transform signs are observations, not an independently linked side record",
+        "serializedWorldLinearDeterminant": -1.0,
+        "sharedMeshDataGroupByExistingInventory": [],
+        "evaluatedTrianglesFromPriorT98Export": 3526,
+        "evaluatedGeometrySha256FromPriorT98Export": "ad44521d97562b07fa47cf1f770fc76acbb4a237b097bdba21a0b15a22788e87",
+        "exactUpstreamObjectId": null,
+        "exactUpstreamFmaFjBp3dId": null,
+        "exactUpstreamSourceFamily": null,
+        "objectToRightsFamilyMembership": "unresolved; collection hierarchy is not source/license ancestry",
+        "lexicalTa2TargetCandidatesOnly": [
+          {
+            "targetId": "TA2:2644",
+            "semanticKind": "named_muscle",
+            "latin": "musculus tibialis anterior",
+            "english": "tibialis anterior muscle",
+            "identityStatus": "unresolved_no_exact_target_to_source_object_crosswalk",
+            "note": "TA2 target ID is a terminology target, not a mesh/member ID; this row is name matching only."
+          }
+        ],
+        "localUseRights": "held_pending_file_level_reconciliation",
+        "publicRedistributionRights": "held",
+        "humanReview": "not_performed",
+        "learnerBinding": "none"
+      },
+      {
+        "objectName": "Scapula.l",
+        "role": "unapproved_anatomical_sample",
+        "frozenLocator": {
+          "archivePath": "Z-Anatomy/Startup.blend",
+          "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "objectDataBlockPointer": "0x18b6436a408",
+          "objectIdName": "Scapula.l",
+          "serializedFileBlockOffset": 56691804
+        },
+        "dataKind": "Mesh",
+        "dataBlockName": "Scapula",
+        "parentObjectName": "Bones of pectoral girdle.g",
+        "collectionPaths": [
+          [
+            "Scene Collection",
+            "1: Skeletal system"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Skeletal system",
+            "Appendicular skeleton"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Skeletal system",
+            "Bones of upper limb"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Skeletal system",
+            "Bones of upper limb",
+            "Bones of pectoral girdle"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Trunk"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Left upper limb"
+          ]
+        ],
+        "literalNameSuffix": "l",
+        "sideCollectionLabels": [
+          "Left upper limb"
+        ],
+        "sideConclusion": "unresolved; source labels/collection tags and transform signs are observations, not an independently linked side record",
+        "serializedWorldLinearDeterminant": -0.999998867512101,
+        "sharedMeshDataGroupByExistingInventory": [
+          "Scapula.l",
+          "Scapula.r"
+        ],
+        "evaluatedTrianglesFromPriorT98Export": 25326,
+        "evaluatedGeometrySha256FromPriorT98Export": "627dd715fdadb6c850769fc038ee5593b2b319108164eae7818b93983041afc9",
+        "exactUpstreamObjectId": null,
+        "exactUpstreamFmaFjBp3dId": null,
+        "exactUpstreamSourceFamily": null,
+        "objectToRightsFamilyMembership": "unresolved; collection hierarchy is not source/license ancestry",
+        "lexicalTa2TargetCandidatesOnly": [
+          {
+            "targetId": "TA2:1143",
+            "semanticKind": "bone",
+            "latin": "scapula",
+            "english": "scapula",
+            "identityStatus": "unresolved_no_exact_target_to_source_object_crosswalk",
+            "note": "TA2 target ID is a terminology target, not a mesh/member ID; this row is name matching only."
+          }
+        ],
+        "localUseRights": "held_pending_file_level_reconciliation",
+        "publicRedistributionRights": "held",
+        "humanReview": "not_performed",
+        "learnerBinding": "none"
+      },
+      {
+        "objectName": "Scapula.r",
+        "role": "unapproved_anatomical_sample",
+        "frozenLocator": {
+          "archivePath": "Z-Anatomy/Startup.blend",
+          "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "objectDataBlockPointer": "0x18b64369d08",
+          "objectIdName": "Scapula.r",
+          "serializedFileBlockOffset": 56696248
+        },
+        "dataKind": "Mesh",
+        "dataBlockName": "Scapula",
+        "parentObjectName": "Bones of pectoral girdle.g",
+        "collectionPaths": [
+          [
+            "Scene Collection",
+            "1: Skeletal system"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Skeletal system",
+            "Appendicular skeleton"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Skeletal system",
+            "Bones of upper limb"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Skeletal system",
+            "Bones of upper limb",
+            "Bones of pectoral girdle"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Trunk"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Right upper limb"
+          ]
+        ],
+        "literalNameSuffix": "r",
+        "sideCollectionLabels": [
+          "Right upper limb"
+        ],
+        "sideConclusion": "unresolved; source labels/collection tags and transform signs are observations, not an independently linked side record",
+        "serializedWorldLinearDeterminant": 0.999998867512101,
+        "sharedMeshDataGroupByExistingInventory": [
+          "Scapula.l",
+          "Scapula.r"
+        ],
+        "evaluatedTrianglesFromPriorT98Export": 25326,
+        "evaluatedGeometrySha256FromPriorT98Export": "e45be38a666182e0226d3016e72ad368d60c1fdd73498511c7a5724a2b0bd926",
+        "exactUpstreamObjectId": null,
+        "exactUpstreamFmaFjBp3dId": null,
+        "exactUpstreamSourceFamily": null,
+        "objectToRightsFamilyMembership": "unresolved; collection hierarchy is not source/license ancestry",
+        "lexicalTa2TargetCandidatesOnly": [
+          {
+            "targetId": "TA2:1143",
+            "semanticKind": "bone",
+            "latin": "scapula",
+            "english": "scapula",
+            "identityStatus": "unresolved_no_exact_target_to_source_object_crosswalk",
+            "note": "TA2 target ID is a terminology target, not a mesh/member ID; this row is name matching only."
+          }
+        ],
+        "localUseRights": "held_pending_file_level_reconciliation",
+        "publicRedistributionRights": "held",
+        "humanReview": "not_performed",
+        "learnerBinding": "none"
+      },
+      {
+        "objectName": "Vertebra L5",
+        "role": "unapproved_anatomical_sample",
+        "frozenLocator": {
+          "archivePath": "Z-Anatomy/Startup.blend",
+          "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "objectDataBlockPointer": "0x18b64e96b08",
+          "objectIdName": "Vertebra L5",
+          "serializedFileBlockOffset": 61201676
+        },
+        "dataKind": "Mesh",
+        "dataBlockName": "Vertebra L5",
+        "parentObjectName": "Lumbar vertebrae.g",
+        "collectionPaths": [
+          [
+            "Scene Collection",
+            "1: Skeletal system"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Skeletal system",
+            "Axial skeleton"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Skeletal system",
+            "Vertebral column"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Skeletal system",
+            "Vertebral column",
+            "Bones of vertebral column",
+            "Lumbar vertebrae"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Trunk"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Trunk",
+            "Abdomen"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Trunk",
+            "Back"
+          ]
+        ],
+        "literalNameSuffix": null,
+        "sideCollectionLabels": [],
+        "sideConclusion": "unresolved; source labels/collection tags and transform signs are observations, not an independently linked side record",
+        "serializedWorldLinearDeterminant": 0.9999995231627956,
+        "sharedMeshDataGroupByExistingInventory": [],
+        "evaluatedTrianglesFromPriorT98Export": 4032,
+        "evaluatedGeometrySha256FromPriorT98Export": "ce519df9fea322cde3817972870aa1d5fc0749f13630588efc998fb580f94ab8",
+        "exactUpstreamObjectId": null,
+        "exactUpstreamFmaFjBp3dId": null,
+        "exactUpstreamSourceFamily": null,
+        "objectToRightsFamilyMembership": "unresolved; collection hierarchy is not source/license ancestry",
+        "lexicalTa2TargetCandidatesOnly": [],
+        "localUseRights": "held_pending_file_level_reconciliation",
+        "publicRedistributionRights": "held",
+        "humanReview": "not_performed",
+        "learnerBinding": "none"
+      },
+      {
+        "objectName": "Sacrum",
+        "role": "unapproved_anatomical_sample",
+        "frozenLocator": {
+          "archivePath": "Z-Anatomy/Startup.blend",
+          "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "objectDataBlockPointer": "0x18b63399608",
+          "objectIdName": "Sacrum",
+          "serializedFileBlockOffset": 56560992
+        },
+        "dataKind": "Mesh",
+        "dataBlockName": "Sacrum",
+        "parentObjectName": "Vertebral column.g",
+        "collectionPaths": [
+          [
+            "Scene Collection",
+            "1: Skeletal system"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Skeletal system",
+            "Axial skeleton"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Skeletal system",
+            "Vertebral column"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Skeletal system",
+            "Bony pelvis"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Trunk"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Trunk",
+            "Abdomen"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Trunk",
+            "Pelvis"
+          ],
+          [
+            "Scene Collection",
+            "Bonus collection",
+            "Regions of human body",
+            "Main divisions",
+            "Trunk",
+            "Back"
+          ]
+        ],
+        "literalNameSuffix": null,
+        "sideCollectionLabels": [],
+        "sideConclusion": "unresolved; source labels/collection tags and transform signs are observations, not an independently linked side record",
+        "serializedWorldLinearDeterminant": 1.000000238418579,
+        "sharedMeshDataGroupByExistingInventory": [],
+        "evaluatedTrianglesFromPriorT98Export": 11676,
+        "evaluatedGeometrySha256FromPriorT98Export": "cd00ad3ea62418a63e3b2ad216b40ac715f59e7ddffafa7eaadd27732a3cdb2f",
+        "exactUpstreamObjectId": null,
+        "exactUpstreamFmaFjBp3dId": null,
+        "exactUpstreamSourceFamily": null,
+        "objectToRightsFamilyMembership": "unresolved; collection hierarchy is not source/license ancestry",
+        "lexicalTa2TargetCandidatesOnly": [
+          {
+            "targetId": "TA2:1071",
+            "semanticKind": "bone",
+            "latin": "os sacrum",
+            "english": "sacrum",
+            "identityStatus": "unresolved_no_exact_target_to_source_object_crosswalk",
+            "note": "TA2 target ID is a terminology target, not a mesh/member ID; this row is name matching only."
+          }
+        ],
+        "localUseRights": "held_pending_file_level_reconciliation",
+        "publicRedistributionRights": "held",
+        "humanReview": "not_performed",
+        "learnerBinding": "none"
+      },
+      {
+        "objectName": "Clavicular part of deltoid muscle.ol",
+        "role": "unapproved_anatomical_sample",
+        "frozenLocator": {
+          "archivePath": "Z-Anatomy/Startup.blend",
+          "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "objectDataBlockPointer": "0x18b6249d608",
+          "objectIdName": "Clavicular part of deltoid muscle.ol",
+          "serializedFileBlockOffset": 40469068
+        },
+        "dataKind": "Mesh",
+        "dataBlockName": "Clavicular part of deltoid muscle.o",
+        "parentObjectName": "Clavicle.l",
+        "collectionPaths": [
+          [
+            "Scene Collection",
+            "2: Muscular insertions"
+          ]
+        ],
+        "literalNameSuffix": "ol",
+        "sideCollectionLabels": [],
+        "sideConclusion": "unresolved; source labels/collection tags and transform signs are observations, not an independently linked side record",
+        "serializedWorldLinearDeterminant": -0.999999880790714,
+        "sharedMeshDataGroupByExistingInventory": [],
+        "evaluatedTrianglesFromPriorT98Export": 1924,
+        "evaluatedGeometrySha256FromPriorT98Export": "3f80c61a1420ea01d25986403d748c81b4dd5b1120527cd6e002766f446e9d68",
+        "exactUpstreamObjectId": null,
+        "exactUpstreamFmaFjBp3dId": null,
+        "exactUpstreamSourceFamily": null,
+        "objectToRightsFamilyMembership": "unresolved; collection hierarchy is not source/license ancestry",
+        "lexicalTa2TargetCandidatesOnly": [
+          {
+            "targetId": "TA2:2452",
+            "semanticKind": "named_muscle",
+            "latin": "musculus deltoideus",
+            "english": "deltoid muscle",
+            "identityStatus": "unresolved_no_exact_target_to_source_object_crosswalk",
+            "note": "TA2 target ID is a terminology target, not a mesh/member ID; this row is name matching only."
+          },
+          {
+            "targetId": "TA2:2453",
+            "semanticKind": "muscle_part",
+            "latin": "pars clavicularis musculi deltoidei",
+            "english": "clavicular part of deltoid muscle",
+            "identityStatus": "unresolved_no_exact_target_to_source_object_crosswalk",
+            "note": "TA2 target ID is a terminology target, not a mesh/member ID; this row is name matching only."
+          }
+        ],
+        "localUseRights": "held_pending_file_level_reconciliation",
+        "publicRedistributionRights": "held",
+        "humanReview": "not_performed",
+        "learnerBinding": "none"
+      },
+      {
+        "objectName": "Cross Section X",
+        "role": "non_anatomical_helper",
+        "frozenLocator": {
+          "archivePath": "Z-Anatomy/Startup.blend",
+          "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "objectDataBlockPointer": "0x18b623cdd08",
+          "objectIdName": "Cross Section X",
+          "serializedFileBlockOffset": 41253516
+        },
+        "dataKind": "Mesh",
+        "dataBlockName": "Cross Section X",
+        "parentObjectName": null,
+        "collectionPaths": [
+          [
+            "Scene Collection",
+            "Cross section planes"
+          ]
+        ],
+        "literalNameSuffix": null,
+        "sideCollectionLabels": [],
+        "sideConclusion": "unresolved; source labels/collection tags and transform signs are observations, not an independently linked side record",
+        "serializedWorldLinearDeterminant": 1.0,
+        "sharedMeshDataGroupByExistingInventory": [],
+        "evaluatedTrianglesFromPriorT98Export": 0,
+        "evaluatedGeometrySha256FromPriorT98Export": "417cd91eddf9087e3346cbb5ffbc6d2c26ba2089a77ea8a98c3e41bd10cc39e8",
+        "exactUpstreamObjectId": null,
+        "exactUpstreamFmaFjBp3dId": null,
+        "exactUpstreamSourceFamily": null,
+        "objectToRightsFamilyMembership": "unresolved; collection hierarchy is not source/license ancestry",
+        "lexicalTa2TargetCandidatesOnly": [],
+        "localUseRights": "held_pending_file_level_reconciliation",
+        "publicRedistributionRights": "held",
+        "humanReview": "not_performed",
+        "learnerBinding": "none"
+      }
+    ],
+    "rightsState": {
+      "sourceOnly": true,
+      "localUseRights": "held_pending_file_level_reconciliation",
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "canonicalMappingAdded": false,
+      "learnerBindingAdded": false
+    }
+  },
+  "wholeBodyCoverageCandidateComparison": {
+    "targetDenominator": {
+      "canonicalConceptTargetRecords": 542,
+      "regionMembershipRows": 563,
+      "wholeBodyIndividualMuscleDenominator": null,
+      "targetKinds": {
+        "bone": 80,
+        "bone_group": 21,
+        "bone_series": 12,
+        "muscle_complex": 6,
+        "muscle_group": 58,
+        "muscle_part": 94,
+        "named_muscle": 245,
+        "repeated_muscle_family": 26
+      }
+    },
+    "ZAnatomy": {
+      "archiveEntries": 7,
+      "files": 6,
+      "blendFiles": 1,
+      "serializedObjects": 7184,
+      "meshDatablocks": 2910,
+      "collections": 1945,
+      "curves": 1898,
+      "lexicalNameCandidates": 430,
+      "lexicalCandidateRate": 0.7934,
+      "exactTargetObjectJoins": 0,
+      "exactTargetGeometryMappings": 0,
+      "sampleTechnicalQuality": {
+        "evaluatedAnatomicalObjects": 11,
+        "triangles": 126648,
+        "outputBytes": 10650376,
+        "outputSha256": "2808f3b414d50c15d7e3f94db66579c02dc210653123a1f229fbf060addefdc4",
+        "elapsedSecondsForSampleOpenExportAndPreview": 9.4577,
+        "maxRssBytesForSampleProcess": 5132976128,
+        "qualityLimit": "sample-level evaluated export; no full-body coverage/quality/cost conclusion"
+      }
+    },
+    "BodyParts3dR4": {
+      "existingCacheFiles": 721,
+      "existingCacheBytes": 430204718,
+      "lexicalCandidates": 236,
+      "lexicalCandidateRate": 0.4354,
+      "exactTa2ToFmaFjJoins": 0,
+      "frameQuality": "T50/T69 verified BodyParts3D R4 subset frame/transform only; not whole-body coverage and not a Z-Anatomy transform",
+      "fileAndRightsLimit": "current DB page and legacy OBJ headers differ in stated license; T98 does not resolve per-file scope"
+    },
+    "byRegion": [
+      {
+        "regionId": "head",
+        "regionLabelKo": "머리",
+        "primaryTargets": 113,
+        "membershipTargets": 113,
+        "zAnatomyNameCandidates": 75,
+        "bodyParts3dLexicalCandidates": 29,
+        "exactTargetSourceJoins": 0,
+        "targetGeometryMappedBeforeExactIdentity": 0
+      },
+      {
+        "regionId": "neck",
+        "regionLabelKo": "목",
+        "primaryTargets": 62,
+        "membershipTargets": 65,
+        "zAnatomyNameCandidates": 47,
+        "bodyParts3dLexicalCandidates": 34,
+        "exactTargetSourceJoins": 0,
+        "targetGeometryMappedBeforeExactIdentity": 0
+      },
+      {
+        "regionId": "back",
+        "regionLabelKo": "등",
+        "primaryTargets": 70,
+        "membershipTargets": 71,
+        "zAnatomyNameCandidates": 59,
+        "bodyParts3dLexicalCandidates": 31,
+        "exactTargetSourceJoins": 0,
+        "targetGeometryMappedBeforeExactIdentity": 0
+      },
+      {
+        "regionId": "shoulder-scapular",
+        "regionLabelKo": "어깨·어깨뼈",
+        "primaryTargets": 14,
+        "membershipTargets": 16,
+        "zAnatomyNameCandidates": 14,
+        "bodyParts3dLexicalCandidates": 10,
+        "exactTargetSourceJoins": 0,
+        "targetGeometryMappedBeforeExactIdentity": 0
+      },
+      {
+        "regionId": "thorax",
+        "regionLabelKo": "가슴우리",
+        "primaryTargets": 44,
+        "membershipTargets": 44,
+        "zAnatomyNameCandidates": 25,
+        "bodyParts3dLexicalCandidates": 12,
+        "exactTargetSourceJoins": 0,
+        "targetGeometryMappedBeforeExactIdentity": 0
+      },
+      {
+        "regionId": "abdomen-lumbar",
+        "regionLabelKo": "배·허리",
+        "primaryTargets": 8,
+        "membershipTargets": 10,
+        "zAnatomyNameCandidates": 7,
+        "bodyParts3dLexicalCandidates": 2,
+        "exactTargetSourceJoins": 0,
+        "targetGeometryMappedBeforeExactIdentity": 0
+      },
+      {
+        "regionId": "pelvis-perineum",
+        "regionLabelKo": "골반·샅",
+        "primaryTargets": 33,
+        "membershipTargets": 34,
+        "zAnatomyNameCandidates": 20,
+        "bodyParts3dLexicalCandidates": 9,
+        "exactTargetSourceJoins": 0,
+        "targetGeometryMappedBeforeExactIdentity": 0
+      },
+      {
+        "regionId": "gluteal-hip",
+        "regionLabelKo": "볼기·깊은엉덩이",
+        "primaryTargets": 15,
+        "membershipTargets": 15,
+        "zAnatomyNameCandidates": 14,
+        "bodyParts3dLexicalCandidates": 10,
+        "exactTargetSourceJoins": 0,
+        "targetGeometryMappedBeforeExactIdentity": 0
+      },
+      {
+        "regionId": "thigh",
+        "regionLabelKo": "넙다리",
+        "primaryTargets": 30,
+        "membershipTargets": 30,
+        "zAnatomyNameCandidates": 26,
+        "bodyParts3dLexicalCandidates": 17,
+        "exactTargetSourceJoins": 0,
+        "targetGeometryMappedBeforeExactIdentity": 0
+      },
+      {
+        "regionId": "leg",
+        "regionLabelKo": "종아리",
+        "primaryTargets": 23,
+        "membershipTargets": 23,
+        "zAnatomyNameCandidates": 23,
+        "bodyParts3dLexicalCandidates": 16,
+        "exactTargetSourceJoins": 0,
+        "targetGeometryMappedBeforeExactIdentity": 0
+      },
+      {
+        "regionId": "foot",
+        "regionLabelKo": "발",
+        "primaryTargets": 40,
+        "membershipTargets": 40,
+        "zAnatomyNameCandidates": 37,
+        "bodyParts3dLexicalCandidates": 22,
+        "exactTargetSourceJoins": 0,
+        "targetGeometryMappedBeforeExactIdentity": 0
+      },
+      {
+        "regionId": "upper-limb",
+        "regionLabelKo": "팔·손",
+        "primaryTargets": 90,
+        "membershipTargets": 102,
+        "zAnatomyNameCandidates": 83,
+        "bodyParts3dLexicalCandidates": 44,
+        "exactTargetSourceJoins": 0,
+        "targetGeometryMappedBeforeExactIdentity": 0
+      }
+    ],
+    "comparisonResult": "candidate-count advantage is lexical only (Z-Anatomy 430/542; BodyParts3D 236/542). Both exact TA2-to-source target join counts remain 0. T96 remains 542 target records / 563 memberships with individual-muscle denominator null. No whole-body production coverage is evidenced."
+  },
+  "costAndBaseDecision": {
+    "ZAnatomyObserved": {
+      "scope": "frozen 11-anatomy-object sample only",
+      "sourceArchiveBytes": 86734957,
+      "sourceBlendUncompressedBytes": 306838281,
+      "sourceBlendCompressedMemberBytes": 85988108,
+      "evaluatedGlbBytes": 10650376,
+      "evaluatedTriangles": 126648,
+      "sampleElapsedSeconds": 9.4577,
+      "sampleMaxRssBytes": 5132976128,
+      "armatureDatablocks": 0,
+      "animationReadiness": "not_established; no verified rest pose or rig and sample is static"
+    },
+    "BodyParts3dObserved": {
+      "scope": "existing cache aggregate and previously validated subsets only",
+      "rawCacheFiles": 721,
+      "rawCacheBytes": 430204718,
+      "equivalentWholeBodyExportTimingOrRenderCost": null,
+      "equivalentWholeBodyTriangleCount": null
+    },
+    "costsDirectlyComparable": false,
+    "reason": "one measure is a Z-Anatomy 11-object Blender source-open/export/preview run; the other is a BodyParts3D cache byte/file total and selected-subset validation. They do not measure the same scope or pipeline stage.",
+    "productionBase": null,
+    "baseStatus": "undecided",
+    "selectionReason": "runtime publisher integrity, declared unit/frame/reference pose, exact object identity and rights ancestry, whole-body surface coverage and comparable cost remain unresolved",
+    "motionStatus": "not_ready"
+  },
+  "inputHashes": {
+    "work/evidence/T50/scene-contract.md": "2697496d18bd1fc58adca557d95364092f7c7189bff4218277882142c8b26fa4",
+    "work/reports/T69.md": "0caa2ef5fc50cf5aa8139e87c0a8171cc3f66dda9a4acf9fe3ad3360d58c3e21",
+    "work/evidence/T69/assessment.json": "e421057aae319d9eefcd0f84ee811de7caf532e5019a8a7d6bad0dd99b77cf34",
+    "work/evidence/T69/diagnostic.json": "39f8086df7042349633e3c19e7e60e81669ca49be63b0d4e3be88d15cfd93cca",
+    "work/evidence/T96/freeze-summary.json": "6b985577f31ecca1daeccdb93315c2b4f627653e4ec88a81099632f0f4500418",
+    "work/evidence/T97/archive-acquisition.json": "ab487e931091d8ba2c15d0888d1b92f8023d01828e750c6b6976dc1db859b7ed",
+    "work/evidence/T97/archive-member-inventory.json": "ca775ecc3030d4cd754b4c10f6d499276c64e4e62527e1fdc60568b7725725e7",
+    "work/evidence/T97/blender-tool.json": "30eae2e8eb01d2a97af73f83f1f91a64709d12c14a7b76983e929d1c28e31f29",
+    "work/evidence/T97/blender-tool-current.json": "0b5683911dab10b90a0656825c4a16d1d4d7c01fe3074014977ca2ea61ec083f",
+    "work/evidence/T98/representative-sample-freeze.json": "a8b744ca878fded345f5e5be8a4154094bd050c97fcc028c296197f5501928d6",
+    "work/evidence/T98/blender-raw-object-inventory.json": "f2e87b76af094d899a5e7591920143589f8c13747edd25d01bc490c1142be038",
+    "work/evidence/T98/target-reconciliation-t98.json": "d0144ad90335fd40b4403946064fb9ac2d5585cef230783a52418f9dbde651f1",
+    "work/evidence/T98/rights-inheritance-and-base-decision.json": "dc5e56a9ac1e221659dafca4b789daafc2c9c14ad5e65c30871d7f4ee07dfee0",
+    "work/evidence/T98/resume-2026-09-28/evaluated-export-manifest.json": "293fda77f8fb049d804bf88053d401d3c20e845ffa7fbdfddccb52207b1a1432",
+    "work/evidence/T98/resume-2026-09-28/runtime-attestation.json": "a91a0fd7a1db75349c8f788efc82c6292fcfd2d3fab7b345fe629e2582f539bd"
+  },
+  "nextUnit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
+  "nextTaskStarted": false
+}
