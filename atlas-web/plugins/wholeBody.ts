@@ -6,6 +6,7 @@ import type { BodyManifest } from '../src/viewer/wholeBody/contract.ts';
 import { appendT79SceneExtension, type SourceOnlySceneExtension } from '../src/viewer/wholeBody/taskExtension.ts';
 import { appendT101SceneExtension, type T101SceneExtension } from '../src/viewer/wholeBody/t101SceneExtension.ts';
 import { appendT102SceneExtension, type T102SceneExtension } from '../src/viewer/wholeBody/t102SceneExtension.ts';
+import { appendT103SceneExtension, type T103SceneExtension } from '../src/viewer/wholeBody/t103SceneExtension.ts';
 
 /** Local engineering only. Intentionally no preview hook or production asset emission. */
 export function wholeBodyPlugin(root: string): Plugin {
@@ -17,13 +18,15 @@ export function wholeBodyPlugin(root: string): Plugin {
   const t101SourceManifestPath = `${root}atlas-data/manifests/bodyparts3d-r4-t101/source-manifest.json`;
   const t102ExtensionPath = `${root}atlas-data/manifests/bodyparts3d-r4-t102/integration-extension.json`;
   const t102SourceManifestPath = `${root}atlas-data/manifests/bodyparts3d-r4-t102/source-manifest.json`;
+  const t103ExtensionPath = `${root}atlas-data/manifests/bodyparts3d-r4-t103/integration-extension.json`;
+  const t103SourceManifestPath = `${root}atlas-data/manifests/bodyparts3d-r4-t103/source-manifest.json`;
   return {
     name: 'local-whole-body-held-assets',
     configureServer(server) {
       server.middlewares.use('/__atlas/body', async (req, res) => {
         res.setHeader('Cache-Control', 'no-store');
         try {
-          const [raw, overlayRaw, extensionRaw, sourceRaw, t101ExtensionRaw, t101SourceRaw, t102ExtensionRaw, t102SourceRaw] = await Promise.all([
+          const [raw, overlayRaw, extensionRaw, sourceRaw, t101ExtensionRaw, t101SourceRaw, t102ExtensionRaw, t102SourceRaw, t103ExtensionRaw, t103SourceRaw] = await Promise.all([
             readFile(`${directory}manifest.json`),
             readFile(overlayPath),
             readFile(extensionPath),
@@ -32,6 +35,8 @@ export function wholeBodyPlugin(root: string): Plugin {
             readFile(t101SourceManifestPath),
             readFile(t102ExtensionPath),
             readFile(t102SourceManifestPath),
+            readFile(t103ExtensionPath),
+            readFile(t103SourceManifestPath),
           ]);
           const sourceManifest = JSON.parse(raw.toString()) as BodyManifest;
           const overlay = JSON.parse(overlayRaw.toString()) as ProductContextOverlay;
@@ -41,6 +46,8 @@ export function wholeBodyPlugin(root: string): Plugin {
           const t101Source = JSON.parse(t101SourceRaw.toString()) as { task: string; revision: string };
           const t102Extension = JSON.parse(t102ExtensionRaw.toString()) as T102SceneExtension;
           const t102Source = JSON.parse(t102SourceRaw.toString()) as { task: string; revision: string };
+          const t103Extension = JSON.parse(t103ExtensionRaw.toString()) as T103SceneExtension;
+          const t103Source = JSON.parse(t103SourceRaw.toString()) as { task: string; revision: string };
           if (createHash('sha256').update(raw).digest('hex') !== overlay.sourceManifestSha256) throw new Error('source manifest hash');
           if (!sourceManifest.localOnly || sourceManifest.publicRedistribution !== 'held') throw new Error('license gate');
           if (createHash('sha256').update(raw).digest('hex') !== extension.parentSourceManifestSha256) throw new Error('T79 parent manifest hash');
@@ -58,9 +65,19 @@ export function wholeBodyPlugin(root: string): Plugin {
             || t102Extension.parentT79IntegrationExtensionSha256 !== createHash('sha256').update(extensionRaw).digest('hex')
             || t102Extension.parentT101SourceManifestSha256 !== createHash('sha256').update(t101SourceRaw).digest('hex')
             || t102Extension.parentT101IntegrationExtensionSha256 !== createHash('sha256').update(t101ExtensionRaw).digest('hex')) throw new Error('T102 parent chain hash');
+          if (createHash('sha256').update(t103SourceRaw).digest('hex') !== t103Extension.sourceManifestSha256 || t103Source.task !== 'T103') throw new Error('T103 source manifest hash');
+          if (t103Extension.parentSourceManifestSha256 !== createHash('sha256').update(raw).digest('hex')
+            || t103Extension.parentProductContextOverlaySha256 !== createHash('sha256').update(overlayRaw).digest('hex')
+            || t103Extension.parentT79SourceManifestSha256 !== createHash('sha256').update(sourceRaw).digest('hex')
+            || t103Extension.parentT79IntegrationExtensionSha256 !== createHash('sha256').update(extensionRaw).digest('hex')
+            || t103Extension.parentT101SourceManifestSha256 !== createHash('sha256').update(t101SourceRaw).digest('hex')
+            || t103Extension.parentT101IntegrationExtensionSha256 !== createHash('sha256').update(t101ExtensionRaw).digest('hex')
+            || t103Extension.parentT102SourceManifestSha256 !== createHash('sha256').update(t102SourceRaw).digest('hex')
+            || t103Extension.parentT102IntegrationExtensionSha256 !== createHash('sha256').update(t102ExtensionRaw).digest('hex')) throw new Error('T103 parent chain hash');
           const t79Manifest = appendT79SceneExtension(applyProductContextOverlay(sourceManifest, overlay), extension);
           const manifest = appendT101SceneExtension(t79Manifest, t101Extension);
-          const completeManifest = appendT102SceneExtension(manifest, t102Extension);
+          const t102Manifest = appendT102SceneExtension(manifest, t102Extension);
+          const completeManifest = appendT103SceneExtension(t102Manifest, t103Extension);
           const path = req.url?.split('?')[0];
           if (path === '/manifest.json') {
             res.setHeader('Content-Type', 'application/json'); res.end(JSON.stringify(completeManifest)); return;
@@ -70,7 +87,10 @@ export function wholeBodyPlugin(root: string): Plugin {
           const t79Chunk = chunk.assets.length > 0 && chunk.assets.every(asset => asset.sourcePackage === 'T79');
           const t101Chunk = chunk.assets.length > 0 && chunk.assets.every(asset => asset.sourcePackage === 'T101');
           const t102Chunk = chunk.assets.length > 0 && chunk.assets.every(asset => asset.sourcePackage === 'T102');
-          const chunkDirectory = t102Chunk
+          const t103Chunk = chunk.assets.length > 0 && chunk.assets.every(asset => asset.sourcePackage === 'T103');
+          const chunkDirectory = t103Chunk
+            ? `${root}atlas-data/source-cache/bodyparts3d-r4/converted/t103/`
+            : t102Chunk
             ? `${root}atlas-data/source-cache/bodyparts3d-r4/converted/t102/`
             : t101Chunk
             ? `${root}atlas-data/source-cache/bodyparts3d-r4/converted/t101/`

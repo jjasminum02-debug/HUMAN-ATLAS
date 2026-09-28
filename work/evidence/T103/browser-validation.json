@@ -1,0 +1,123 @@
+{
+  "revision": "T103-actual-browser-validation-v1",
+  "task": "T103",
+  "result": "pass",
+  "browser": {
+    "surface": "Codex In-app Browser",
+    "url": "http://127.0.0.1:5174/",
+    "viewportCssPx": [823, 499],
+    "rendererPixelRatio": 1.75,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "screenshotExported": false,
+    "visualReview": "Actual upper-limb close view and full-body view were visually inspected in the browser."
+  },
+  "runtimeManifest": {
+    "t103Chunk": {
+      "id": "t103-upper-limb-muscle-parts",
+      "ids": ["FJ1473", "FJ1473M", "FJ1474", "FJ1474M", "FJ1481", "FJ1481M", "FJ1514", "FJ1514M", "FJ1515", "FJ1515M"],
+      "visibleNodeIdsInUpperLimbAndFullBody": [
+        "HA-MESH-BP3D4-FJ1473", "HA-MESH-BP3D4-FJ1473M", "HA-MESH-BP3D4-FJ1474", "HA-MESH-BP3D4-FJ1474M",
+        "HA-MESH-BP3D4-FJ1481", "HA-MESH-BP3D4-FJ1481M", "HA-MESH-BP3D4-FJ1514", "HA-MESH-BP3D4-FJ1514M",
+        "HA-MESH-BP3D4-FJ1515", "HA-MESH-BP3D4-FJ1515M"
+      ],
+      "uniqueNodeCount": 10,
+      "visibleExactlyOnce": true,
+      "sourceOnlyUnbound": true,
+      "defaultVisible": true,
+      "publicRedistribution": "held",
+      "humanAnatomyReview": "not_performed"
+    },
+    "rootCount": 1,
+    "rendererCount": 1,
+    "rootUuid": "a23dafe9-98dc-41b0-84df-ea94dd6642b1",
+    "rendererCanvasId": "anatomy-a23dafe9-98dc-41b0-84df-ea94dd6642b1",
+    "heldT54WholeFpbCandidates": {
+      "ids": ["FJ1469", "FJ1469M"],
+      "sourceChunkLoaded": true,
+      "visible": [],
+      "existingHoldPreserved": true
+    }
+  },
+  "checks": {
+    "fullBody": true,
+    "upperLimbClose": true,
+    "lateralityPairs": true,
+    "muscleLayerOffOn": true,
+    "exactSubsetAllTenVisibleOnce": true,
+    "heldWholeFpbCandidatesStayHidden": true,
+    "oneRootAndRendererAcrossViews": true,
+    "consoleClean": true
+  },
+  "observations": {
+    "upperLimbClose": {
+      "url": "http://127.0.0.1:5174/?region=upper-limb",
+      "canvasCount": 1,
+      "rootUuid": "a23dafe9-98dc-41b0-84df-ea94dd6642b1",
+      "rendererCanvasId": "anatomy-a23dafe9-98dc-41b0-84df-ea94dd6642b1",
+      "cameraZ": 1.5097371590346953,
+      "targetY": 1.0042535066604614,
+      "visibleT103Count": 10,
+      "loadedT103Chunk": true,
+      "visibleMeshes": 143,
+      "drawCalls": 143,
+      "triangles": 240434
+    },
+    "muscleLayerOff": {
+      "url": "http://127.0.0.1:5174/?region=upper-limb",
+      "canvasCount": 1,
+      "rootUuid": "a23dafe9-98dc-41b0-84df-ea94dd6642b1",
+      "rendererCanvasId": "anatomy-a23dafe9-98dc-41b0-84df-ea94dd6642b1",
+      "visibleT103Ids": [],
+      "loadedT103ChunkRetained": true,
+      "visibleMeshes": 63,
+      "drawCalls": 63,
+      "triangles": 85962
+    },
+    "muscleLayerRestored": {
+      "canvasCount": 1,
+      "rootUuid": "a23dafe9-98dc-41b0-84df-ea94dd6642b1",
+      "rendererCanvasId": "anatomy-a23dafe9-98dc-41b0-84df-ea94dd6642b1",
+      "visibleT103Count": 10,
+      "visibleMeshes": 143,
+      "drawCalls": 143,
+      "triangles": 240434
+    },
+    "fullBody": {
+      "url": "http://127.0.0.1:5174/",
+      "canvasCount": 1,
+      "rootUuid": "a23dafe9-98dc-41b0-84df-ea94dd6642b1",
+      "rendererCanvasId": "anatomy-a23dafe9-98dc-41b0-84df-ea94dd6642b1",
+      "cameraZ": 3.434144729891477,
+      "targetY": 0.7817299738526347,
+      "visibleT103Count": 10,
+      "visibleT103Ids": [
+        "HA-MESH-BP3D4-FJ1473", "HA-MESH-BP3D4-FJ1473M", "HA-MESH-BP3D4-FJ1474", "HA-MESH-BP3D4-FJ1474M",
+        "HA-MESH-BP3D4-FJ1481", "HA-MESH-BP3D4-FJ1481M", "HA-MESH-BP3D4-FJ1514", "HA-MESH-BP3D4-FJ1514M",
+        "HA-MESH-BP3D4-FJ1515", "HA-MESH-BP3D4-FJ1515M"
+      ],
+      "visibleExactlyOnce": true,
+      "visibleMeshes": 571,
+      "drawCalls": 571,
+      "triangles": 2469378,
+      "geometries": 571,
+      "materials": 583,
+      "geometryBufferBytes": 65701812,
+      "frameSamples": 240,
+      "frameIntervalP50Ms": 16.69999999999709,
+      "frameIntervalP95Ms": 18.60000000000582,
+      "heldT54FpbNodesVisible": []
+    }
+  },
+  "interactionSequence": [
+    "Open full-body learner scene.",
+    "Select 팔·손 region; wait for T103 chunk; inspect actual close view.",
+    "Turn muscle layer off; confirm no T103 node is visible.",
+    "Turn muscle layer on; confirm ten T103 nodes return.",
+    "Return to full-body view; confirm same canvas/root/renderer and ten unique visible T103 nodes."
+  ],
+  "limitations": [
+    "The browser exposed no durable screenshot export in this run; visual inspection was performed live and the runtime observations are recorded here.",
+    "The source meshes are static and unbound. This verifies local technical rendering only, not anatomical review, learner identity, or public redistribution permission."
+  ]
+}

@@ -1,0 +1,188 @@
+$ node --experimental-strip-types --test src/viewer/wholeBody/wholeBody.test.ts src/viewer/wholeBody/productContext.test.ts src/viewer/wholeBody/taskExtension.test.ts src/viewer/wholeBody/t101SceneExtension.test.ts src/viewer/wholeBody/t102SceneExtension.test.ts src/viewer/wholeBody/t103SceneExtension.test.ts && python3 ../atlas-data/tools/test_extract_bodyparts3d_r4_selected_zip_members.py && python3 scripts/check-whole-body-t77.py && python3 ../atlas-data/tools/build_bodyparts3d_r4_t79.py --check && python3 ../atlas-data/tools/build_bodyparts3d_r4_t101.py --check && python3 ../atlas-data/tools/build_bodyparts3d_r4_t102.py --check && python3 ../atlas-data/tools/build_bodyparts3d_r4_t103.py --check && python3 ../work/evidence/T95/validate-overlay.py
+✔ T95 product context adds left scapula membership without editing source or duplicating nodes (1.333334ms)
+✔ T95 context overlay rejects source identity, laterality, region, policy, and duplicate drift (2.084417ms)
+✔ T101 appends its exact ten source-only surfaces into the existing scene (1.915791ms)
+✔ T101 extension rejects changed IDs, collisions, frame, side, owner, binding, review, or rights (2.234792ms)
+✔ T102 appends its exact ten source-only surfaces once into the existing scene (2.578459ms)
+✔ T102 extension rejects changed IDs, collisions, frame, parent order, side, owner, binding, review, or rights (1.871625ms)
+✔ T103 appends its exact ten source-only nodes once after T102 and retains held T54 parents (2.996709ms)
+✔ T103 rejects changed IDs, duplicates, wrong side/frame/parent, visible whole-FPB parent, binding, review, or rights (1.161667ms)
+✔ T79 appends ten source-only nodes to the same manifest without mutating parent (1.722291ms)
+✔ T79 extension rejects missing/extra IDs, source collisions, frame drift, binding and review promotion (0.25825ms)
+✔ source-only context never becomes selectable (0.364167ms)
+✔ supplements require explicit opt-in, stay unbound (0.056167ms)
+✔ held identity cannot be revealed through layer/opt-in (0.042125ms)
+✔ region/layer demand excludes unrelated geometry (0.042292ms)
+✔ T95 overlapping region union keeps one asset visible and empty filters mean whole body (0.060333ms)
+✔ reject conflicting duplicate IDs and source-only binding promotion (0.2285ms)
+✔ late parse after cancellation is disposed; same-id new demand can recover (4.655833ms)
+✔ failure retains successful resources; explicit retry only failed asset (2.865ms)
+✔ dispose releases completed and late resources exactly once (1.750583ms)
+✔ isolation never promotes source-only or held nodes and respects layer switches (0.14375ms)
+✔ v2 local display is independent from learner binding, rights and review holds (0.1405ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 120.357083
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.003s
+
+OK
+{
+  "status": "passed",
+  "lockedInputs": 55,
+  "uniqueNodes": 543,
+  "defaultVisible": 531,
+  "heldHidden": [
+    "FJ1525",
+    "FJ1543",
+    "FJ1547",
+    "FJ1548",
+    "FJ2742",
+    "FJ2754",
+    "FJ1450",
+    "FJ1451",
+    "FJ1454",
+    "FJ1455",
+    "FJ1469",
+    "FJ1469M"
+  ],
+  "unchangedBindings": [
+    "FJ3360",
+    "FJ3366",
+    "FJ3387",
+    "FJ1394",
+    "FJ1397",
+    "FJ1409",
+    "FJ1410",
+    "FJ1437",
+    "FJ1439",
+    "FJ1440"
+  ],
+  "newSourceNodes": 30,
+  "explicitDisplayChanges": 50,
+  "trianglesIncludingHeld": 2683648,
+  "geometryBytesUnchanged": true,
+  "historicalFieldsUnchanged": true,
+  "visualCoverage": "partial",
+  "wholeBodyDenominator": null
+}
+{
+  "status": "passed_local_technical_validation",
+  "members": 10,
+  "glbSha256": "8752f069bbfa01c8812266bd8c00f93f1076df0dbba367fa9364b660063d7b87",
+  "report": "work/evidence/T79/validation.json"
+}
+{
+  "status": "passed_local_technical_validation",
+  "members": 10,
+  "glbSha256": "bffce0beacad6feede926b5de0e81c773cfc51ae1aca45e367c3868b638ab859",
+  "evidence": "work/evidence/T101/validation.json"
+}
+{
+  "status": "passed_local_technical_validation",
+  "members": 10,
+  "glbSha256": "64c42361163c9e1f50f0a0b700436526f4253f2c84a8407e1cd2478448656759",
+  "evidence": "work/evidence/T102/validation.json"
+}
+{
+  "status": "passed_local_technical_validation",
+  "sourceMembers": 10,
+  "glbSha256": "4e3e72520c9332357502e2a01ae9bb4a39391f51870e053be30a90dfd5f434d3",
+  "evidence": "work/evidence/T103/validation.json"
+}
+{
+  "task": "T95",
+  "status": "passed",
+  "manifestSha256": "67a2f79b9248d18a754a6567e1b0bb4b1fce698ad0e3100a172b428ee58341f8",
+  "overlaySha256": "59624356f1afc113c6bce8421453831d2dc6540c9003f05196ccf3ddcb9e0b34",
+  "sourceAssetCount": 543,
+  "sourceBytesMutated": false,
+  "sourceRegionsMutated": false,
+  "effectiveManifestChanges": {
+    "regionMembershipOnly": true,
+    "addedRegionBySourceId": {
+      "FJ3279": [
+        "upper-limb"
+      ]
+    }
+  },
+  "checked": [
+    {
+      "id": "FJ3237",
+      "side": "left",
+      "sourceRegions": [
+        "shoulder-scapular",
+        "thorax"
+      ],
+      "productRegions": [],
+      "newProductRegions": [],
+      "sourceSha256": "2491009d53eaed99ccb2a802b29402eec715eb8d207fb819fad67b0720195cf2",
+      "sourceOnlyUnbound": true,
+      "humanReviewed": false,
+      "publicRedistribution": "held"
+    },
+    {
+      "id": "FJ3279",
+      "side": "left",
+      "sourceRegions": [
+        "shoulder-scapular",
+        "thorax"
+      ],
+      "productRegions": [
+        "upper-limb"
+      ],
+      "newProductRegions": [
+        "upper-limb"
+      ],
+      "sourceSha256": "e63a5675c6cdbe942322305920241b4a63762d7a65879572400f444fa3d42739",
+      "sourceOnlyUnbound": true,
+      "humanReviewed": false,
+      "publicRedistribution": "held"
+    },
+    {
+      "id": "FJ3362",
+      "side": "right",
+      "sourceRegions": [
+        "shoulder-scapular",
+        "upper-limb"
+      ],
+      "productRegions": [],
+      "newProductRegions": [],
+      "sourceSha256": "9a111cac8351e79dd1315aea90108fe56f78e4bf0159473e6ad727ba91b60e6d",
+      "sourceOnlyUnbound": true,
+      "humanReviewed": false,
+      "publicRedistribution": "held"
+    },
+    {
+      "id": "FJ3384",
+      "side": "right",
+      "sourceRegions": [
+        "shoulder-scapular",
+        "upper-limb"
+      ],
+      "productRegions": [
+        "upper-limb"
+      ],
+      "newProductRegions": [],
+      "sourceSha256": "1641b04e55f9d75bdd6f1f4f07ea596e5dea0a8cb6b348bff47281b8a0bc6e5d",
+      "sourceOnlyUnbound": true,
+      "humanReviewed": false,
+      "publicRedistribution": "held"
+    }
+  ],
+  "invariants": {
+    "exactlyFourFrozenSourceRows": true,
+    "sideMatchesT78": true,
+    "sourceOnlyAndNoStableId": true,
+    "humanReviewNotPromoted": true,
+    "publicRedistributionHeld": true,
+    "claviclesComparisonOnly": true,
+    "uniqueNodePerSourceAsset": true
+  }
+}

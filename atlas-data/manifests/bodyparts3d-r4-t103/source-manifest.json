@@ -1,0 +1,2551 @@
+{
+  "derivedChunk": {
+    "bytes": 391484,
+    "id": "t103-upper-limb-muscle-parts",
+    "nodeCount": 10,
+    "path": "atlas-data/source-cache/bodyparts3d-r4/converted/t103/t103-upper-limb-muscle-parts.glb",
+    "sha256": "4e3e72520c9332357502e2a01ae9bb4a39391f51870e053be30a90dfd5f434d3"
+  },
+  "frozenMembershipSha256": "f1b8cb9b5f3afdcef4b9698a441ba7371bb01315f1eb706b49b0f3290df23bca",
+  "frozenSourceSetSha256": "3f6f78b91aca8990baa97c16c50603eedadd1b94e9792df8fd30e93298595b89",
+  "inputs": {
+    "AGENTS.md": "3be36175d2200f7d22cc29672e4af0f1f3b6da6105000c1922f229413b1fd396",
+    "atlas-data/manifests/bodyparts3d-r4-t101/integration-extension.json": "536f878da9f10d002b3feabcd28a14fe617ac620f3dbe2c2183b2f4619471c06",
+    "atlas-data/manifests/bodyparts3d-r4-t101/source-manifest.json": "f7ccc1a0ef9c9f8d8483c48276ef6aafabd49d69fe8323c237d940864c0e93ef",
+    "atlas-data/manifests/bodyparts3d-r4-t102/integration-extension.json": "7280e050b4b0ce81e68ce6096bba007949ad56cebabfab7319a582d6157113d8",
+    "atlas-data/manifests/bodyparts3d-r4-t102/source-manifest.json": "6c008b98a8d666b1895075b6f0e6c1598507a5a1cdc53fe5b3a454d4630dfb88",
+    "atlas-data/manifests/bodyparts3d-r4-t54/source-manifest.json": "a27630c0bd6da1664caa4b416f84d990aff6c8c4deab816b6d374a7c0eece01a",
+    "atlas-data/manifests/bodyparts3d-r4-t54/upper-limb.json": "a0861c3657ef2f39969c242a971a789af827c6ce24d4d46ab6ed4f03e7f58fbd",
+    "atlas-data/manifests/bodyparts3d-r4-t79/integration-extension.json": "fea29a0d062656118d53345e445395568f34f9ec429f6bc82d78e3a0bc2749bf",
+    "atlas-data/manifests/bodyparts3d-r4-t79/source-manifest.json": "a7cf32bb9281b181152e54574d71db46c51c2a0e3ac22e22ca2065d2adf55546",
+    "atlas-data/manifests/bodyparts3d-r4-t95/product-context-overlay.json": "59624356f1afc113c6bce8421453831d2dc6540c9003f05196ccf3ddcb9e0b34",
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/manifest.json": "67a2f79b9248d18a754a6567e1b0bb4b1fce698ad0e3100a172b428ee58341f8",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_element_parts.txt": "a3de74423f943b0d724ae8f59b3a817f87c423a544f8db98113b1980817cbeaf",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_inclusion_relation_list.txt": "26e7d818e03a8c909fe09c561f38d0d513423c87681f9450a803bc38f5b07564",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_parts_list_e.txt": "ab7796deedd49205e77f3609a1cb8c53e2bbee14ecb5c9a6ca05227469780513",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_element_parts.txt": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_inclusion_relation_list.txt": "1b40738270931e3c1d955ce34e0fce0d8d10d8c5ad543463e40b4b4c0243007c",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_parts_list_e.txt": "9224080557053e6f1322f1e13ab27f0ecde0db19bb3b505f0631afad230eeebd",
+    "atlas-data/tools/acquire_bodyparts3d_r4_t103.py": "743cb6813143fb7599b494e31d7e4ea3ada75e29d3a2b27094064dedeb515ee5",
+    "atlas-data/tools/convert_bodyparts3d_obj_to_glb.py": "05c1216fce695885386d026e4b51419a92e22e2114964e303520fcfa0e409756",
+    "atlas-data/tools/extract_bodyparts3d_r4_selected_zip_members.py": "8c0d26cdf38f98d270982cedd501d013261bd7e77b23ad9e00c86da8c2d97ef0",
+    "atlas-data/tools/freeze_bodyparts3d_r4_t103.py": "37c7c85617cd047419fd2258fd85f2123ef5232e2f877d737eb2d0472615c11a",
+    "atlas-data/tools/ingest_bodyparts3d_r4.py": "05a3681fc3cc45aecd810a8dfdff8de8d9ea0e65fc10ffc473773815d5905e3e",
+    "frozenSourceSetSha256": "3f6f78b91aca8990baa97c16c50603eedadd1b94e9792df8fd30e93298595b89",
+    "sourceAcquisitionSha256": "e7c66b33ec6f6f8612af68f263768c4a29107f7229e3913384fa28249d955510",
+    "work/evidence/T102/browser-validation.json": "d8881b7e01955ab7f9fd87d0464ae1b811ca499ab25ad3093bb77f81eb862da8",
+    "work/evidence/T102/validation.json": "8c3ec838fbf9168615f561c4f2c657dca8474a1aabe41e8091780c576f092a5c",
+    "work/evidence/T50/scene-contract.md": "2697496d18bd1fc58adca557d95364092f7c7189bff4218277882142c8b26fa4",
+    "work/evidence/T69/assessment.json": "e421057aae319d9eefcd0f84ee811de7caf532e5019a8a7d6bad0dd99b77cf34",
+    "work/evidence/T69/diagnostic.json": "39f8086df7042349633e3c19e7e60e81669ca49be63b0d4e3be88d15cfd93cca",
+    "work/evidence/T78/execution-queue.json": "d8361931866f132a70172db2042dcdce004d79f048e5be13603934ac43783937",
+    "work/evidence/T78/target-task-map.json": "d6e200c2c8bcef16d42f8060759face78511990e198ab3d6934e3a66e71de9d7",
+    "work/reports/T102.md": "e229d5f73d64c980735c37c83412fda8d74034418cace6c9716f5cbe04962da5",
+    "work/tasks/T103.md": "060e5f4a530a7282aee257e27ebf6b5ae310e6d8c0ae14c523a4f95e2e3017b3"
+  },
+  "meshRecords": [
+    {
+      "atlasBoundsM": {
+        "max": [
+          -0.17782899737358093,
+          1.0483399629592896,
+          0.13657400012016296
+        ],
+        "min": [
+          -0.24645200371742249,
+          0.7815539836883545,
+          0.061169300228357315
+        ]
+      },
+      "externalConceptId": "FMA38617",
+      "geometrySha256": "3eb7aa435f840b4763574b8808cb766af14f803d705d7c85db92f4a887723c1b",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1473",
+      "meshIndex": 0,
+      "modelId": "HA-MODEL-BP3D4-T103-UPPER-LIMB-PARTS-SOURCE",
+      "nodeIndex": 0,
+      "normalCount": 1887,
+      "normalSha256": "e0003d101b3513938a0553d65fa1d94a1b49029d837786714de146907c4bb44a",
+      "representationId": "BP5570",
+      "sourceBoundsMm": {
+        "max": [
+          -177.829,
+          -61.1693,
+          1048.34
+        ],
+        "min": [
+          -246.452,
+          -136.574,
+          781.554
+        ]
+      },
+      "sourceBytes": 196103,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1473.obj",
+      "sourceFileId": "FJ1473",
+      "sourceSha256": "ccab7efb32e7b3cfc21039a138811f2972df5f2d91d23bbdbe63f13354774795",
+      "topologySha256": "d09b96234e8054cafa45ff99d740db12efa5425fbc0160236afe985c3ac21e5c",
+      "triangleCount": 2656,
+      "vertexCount": 1887
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.24645200371742249,
+          1.0483399629592896,
+          0.13657400012016296
+        ],
+        "min": [
+          0.17782899737358093,
+          0.7815539836883545,
+          0.061169300228357315
+        ]
+      },
+      "externalConceptId": "FMA38618",
+      "geometrySha256": "3000dc95fdb04c923680b40fe08e0a3acbd353f7dd2d925fccd88f694a8e9c7c",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1473M",
+      "meshIndex": 1,
+      "modelId": "HA-MODEL-BP3D4-T103-UPPER-LIMB-PARTS-SOURCE",
+      "nodeIndex": 1,
+      "normalCount": 1884,
+      "normalSha256": "3def047372711d6efd3f159bd3ec9cf5042d8a78cb4a82a040cb5d049d0aa929",
+      "representationId": "BP8144",
+      "sourceBoundsMm": {
+        "max": [
+          246.452,
+          -61.1693,
+          1048.34
+        ],
+        "min": [
+          177.829,
+          -136.574,
+          781.554
+        ]
+      },
+      "sourceBytes": 194033,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1473M.obj",
+      "sourceFileId": "FJ1473M",
+      "sourceSha256": "d5f425f4b708deeed63146f31f6e399d7acb180c685df4bee45204154c8fb00f",
+      "topologySha256": "3b0b1c4e639af8f1b8f24553688f3397daea08a67c5216cf621e2958c5596953",
+      "triangleCount": 2656,
+      "vertexCount": 1884
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          -0.18741799890995026,
+          1.0653799772262573,
+          0.10255300253629684
+        ],
+        "min": [
+          -0.25732100009918213,
+          0.9166520237922668,
+          0.0676887035369873
+        ]
+      },
+      "externalConceptId": "FMA38560",
+      "geometrySha256": "d08aadcb0c3e5b2a0369545914bfff49de41ed242fca5ca7fdb4bd89eddbb6e8",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1474",
+      "meshIndex": 2,
+      "modelId": "HA-MODEL-BP3D4-T103-UPPER-LIMB-PARTS-SOURCE",
+      "nodeIndex": 2,
+      "normalCount": 1588,
+      "normalSha256": "b97e8c6b3f855f7bc7ce1aa6ede21f0f559426f64ea42b468c396ce17806e292",
+      "representationId": "BP5568",
+      "sourceBoundsMm": {
+        "max": [
+          -187.418,
+          -67.6887,
+          1065.38
+        ],
+        "min": [
+          -257.321,
+          -102.553,
+          916.652
+        ]
+      },
+      "sourceBytes": 151318,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1474.obj",
+      "sourceFileId": "FJ1474",
+      "sourceSha256": "589e18d8dd9eac471404fae1035b01476ed0021af1cb2822c8c759164a2a45ba",
+      "topologySha256": "e8c118fd69d0c7132a29eb7be591e2a21ae891ec4fe2d86a50e34f128c1161c6",
+      "triangleCount": 1846,
+      "vertexCount": 1588
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.25732100009918213,
+          1.0653799772262573,
+          0.10255300253629684
+        ],
+        "min": [
+          0.18741799890995026,
+          0.9166520237922668,
+          0.0676887035369873
+        ]
+      },
+      "externalConceptId": "FMA38561",
+      "geometrySha256": "7ecefe6239a33830bf754ab2e6ed6623292e8081cdb8d92a7a1cd46da7c3a511",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1474M",
+      "meshIndex": 3,
+      "modelId": "HA-MODEL-BP3D4-T103-UPPER-LIMB-PARTS-SOURCE",
+      "nodeIndex": 3,
+      "normalCount": 1599,
+      "normalSha256": "92fb167399efcd1881c0db2a42138f6017afdbb40511fe2d0e039a559b5fff5e",
+      "representationId": "BP8015",
+      "sourceBoundsMm": {
+        "max": [
+          257.321,
+          -67.6887,
+          1065.38
+        ],
+        "min": [
+          187.418,
+          -102.553,
+          916.652
+        ]
+      },
+      "sourceBytes": 150642,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1474M.obj",
+      "sourceFileId": "FJ1474M",
+      "sourceSha256": "441ab2758c6c7f27fc5835edc070c02b2355e5222bf3a65c728853c38b424aa7",
+      "topologySha256": "8dd9e50cff6726b0a89db76af5acf699ce82b645d609b899a3e238bc64dce0bc",
+      "triangleCount": 1846,
+      "vertexCount": 1599
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          -0.25653401017189026,
+          0.7897840142250061,
+          0.1470700055360794
+        ],
+        "min": [
+          -0.2993359863758087,
+          0.7597489953041077,
+          0.12316200137138367
+        ]
+      },
+      "externalConceptId": "FMA46121",
+      "geometrySha256": "0b1f50fce4d2f72f77640988c8379a30e6027679d01e4415d328c2e55beb023e",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1481",
+      "meshIndex": 4,
+      "modelId": "HA-MODEL-BP3D4-T103-UPPER-LIMB-PARTS-SOURCE",
+      "nodeIndex": 4,
+      "normalCount": 734,
+      "normalSha256": "5646f9f8311e3100c2e196d0145a272a9975f55df1e0eddf2040c1adc0628380",
+      "representationId": "BP5560",
+      "sourceBoundsMm": {
+        "max": [
+          -256.534,
+          -123.162,
+          789.784
+        ],
+        "min": [
+          -299.336,
+          -147.07,
+          759.749
+        ]
+      },
+      "sourceBytes": 63101,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1481.obj",
+      "sourceFileId": "FJ1481",
+      "sourceSha256": "7f95a0d24a061eefc13bbef6c842b7e685798dfd16e767b955015dafde1f858d",
+      "topologySha256": "f9ce63ec2374ddc0b57e2907d9e37d6f4e1eecdf91638230ff92754a07c25412",
+      "triangleCount": 658,
+      "vertexCount": 734
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.2993359863758087,
+          0.7897840142250061,
+          0.1470700055360794
+        ],
+        "min": [
+          0.25653401017189026,
+          0.7597489953041077,
+          0.12316200137138367
+        ]
+      },
+      "externalConceptId": "FMA46122",
+      "geometrySha256": "6fc36e6be48febee3192cc6342066796bb62d598e365cc235f85e9050db79d6d",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1481M",
+      "meshIndex": 5,
+      "modelId": "HA-MODEL-BP3D4-T103-UPPER-LIMB-PARTS-SOURCE",
+      "nodeIndex": 5,
+      "normalCount": 733,
+      "normalSha256": "610319d67cdd6ddc45aa44f60563203b80b69c8f8739167ebc0fe46858acafff",
+      "representationId": "BP8248",
+      "sourceBoundsMm": {
+        "max": [
+          299.336,
+          -123.162,
+          789.784
+        ],
+        "min": [
+          256.534,
+          -147.07,
+          759.749
+        ]
+      },
+      "sourceBytes": 62352,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1481M.obj",
+      "sourceFileId": "FJ1481M",
+      "sourceSha256": "6aae43f5745e133cfb7a1659dcc6d8e42e94d8772b984f1ad33d79c6a0f8397c",
+      "topologySha256": "ffbbe508e4e60f99ee790e34ef64215e523f4d04a73c536c93f786e0a0e669db",
+      "triangleCount": 658,
+      "vertexCount": 733
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          -0.259782999753952,
+          0.7968130111694336,
+          0.15420199930667877
+        ],
+        "min": [
+          -0.30199500918388367,
+          0.7668790221214294,
+          0.13663700222969055
+        ]
+      },
+      "externalConceptId": "FMA65198",
+      "geometrySha256": "014a2658a2ce6007085fb85d7749bf94aa0d569e7846af3be6fca15183754159",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1514",
+      "meshIndex": 6,
+      "modelId": "HA-MODEL-BP3D4-T103-UPPER-LIMB-PARTS-SOURCE",
+      "nodeIndex": 6,
+      "normalCount": 954,
+      "normalSha256": "00b87abb734b4bee484e6f5bc581fab8d05abb7ad78e531b51525524761ed201",
+      "representationId": "BP5556",
+      "sourceBoundsMm": {
+        "max": [
+          -259.783,
+          -136.637,
+          796.813
+        ],
+        "min": [
+          -301.995,
+          -154.202,
+          766.879
+        ]
+      },
+      "sourceBytes": 77954,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1514.obj",
+      "sourceFileId": "FJ1514",
+      "sourceSha256": "af5d19e0450559eaeacd54e6d332c507acc9b0dc4675311094c6c3b9c9715a71",
+      "topologySha256": "3c6a3a652b8ff7dc46db325799341df8a67d86b064223b8e5ae5e8fb8a34f803",
+      "triangleCount": 726,
+      "vertexCount": 954
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.30199500918388367,
+          0.7968130111694336,
+          0.15420199930667877
+        ],
+        "min": [
+          0.259782999753952,
+          0.7668790221214294,
+          0.13663700222969055
+        ]
+      },
+      "externalConceptId": "FMA65199",
+      "geometrySha256": "e76d763c524a066a88ecff6fcbad87cb1cebc29fbd8d83953af34e08a4fba263",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1514M",
+      "meshIndex": 7,
+      "modelId": "HA-MODEL-BP3D4-T103-UPPER-LIMB-PARTS-SOURCE",
+      "nodeIndex": 7,
+      "normalCount": 954,
+      "normalSha256": "57b8c996c8375093d7f038a9e62c3d28c85e96b08b2eea60206fb17a53812317",
+      "representationId": "BP8722",
+      "sourceBoundsMm": {
+        "max": [
+          301.995,
+          -136.637,
+          796.813
+        ],
+        "min": [
+          259.783,
+          -154.202,
+          766.879
+        ]
+      },
+      "sourceBytes": 77027,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1514M.obj",
+      "sourceFileId": "FJ1514M",
+      "sourceSha256": "f0db75e6d23cd0cf9642ae4bc28012713314678a92fc9cff7b0ce16a281990d9",
+      "topologySha256": "ca612374730ae5e5bdb20ffbebd58f755e2b68b43660eff215dfe1cda21712f4",
+      "triangleCount": 726,
+      "vertexCount": 954
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          -0.25863900780677795,
+          0.7767059803009033,
+          0.1467210054397583
+        ],
+        "min": [
+          -0.2997649908065796,
+          0.7386339902877808,
+          0.124208003282547
+        ]
+      },
+      "externalConceptId": "FMA46123",
+      "geometrySha256": "8ce282cb477f6e52b48878ef8dfda7086519dfb9e902d358b26d125d535ef401",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1515",
+      "meshIndex": 8,
+      "modelId": "HA-MODEL-BP3D4-T103-UPPER-LIMB-PARTS-SOURCE",
+      "nodeIndex": 8,
+      "normalCount": 645,
+      "normalSha256": "2bf3afc38e4d10dd56055607909424bbbbefbc4c8646cc4a95a3bea48fe74d97",
+      "representationId": "BP5543",
+      "sourceBoundsMm": {
+        "max": [
+          -258.639,
+          -124.208,
+          776.706
+        ],
+        "min": [
+          -299.765,
+          -146.721,
+          738.634
+        ]
+      },
+      "sourceBytes": 60440,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1515.obj",
+      "sourceFileId": "FJ1515",
+      "sourceSha256": "75f0a7b8130a70da1efb175638927868a2eb8d1f79916916666d100ec92190f2",
+      "topologySha256": "e0c3f3c22dd1818d14d85fddc198d2f114dc06473f9c2c6eb6ed028a4f9ad1cf",
+      "triangleCount": 754,
+      "vertexCount": 645
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.2997649908065796,
+          0.7767059803009033,
+          0.1467210054397583
+        ],
+        "min": [
+          0.25863900780677795,
+          0.7386339902877808,
+          0.124208003282547
+        ]
+      },
+      "externalConceptId": "FMA46124",
+      "geometrySha256": "bb9312858145cb5edc450a6eb8a337e5bad5537f742c4448eb67347657bf3a63",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1515M",
+      "meshIndex": 9,
+      "modelId": "HA-MODEL-BP3D4-T103-UPPER-LIMB-PARTS-SOURCE",
+      "nodeIndex": 9,
+      "normalCount": 645,
+      "normalSha256": "8482c97eb8f8eeb29947662d67d471f3e87b5c3121e8ba0f47a9ee944df16f4e",
+      "representationId": "BP8885",
+      "sourceBoundsMm": {
+        "max": [
+          299.765,
+          -124.208,
+          776.706
+        ],
+        "min": [
+          258.639,
+          -146.721,
+          738.634
+        ]
+      },
+      "sourceBytes": 59872,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t103/upper-limb/FJ1515M.obj",
+      "sourceFileId": "FJ1515M",
+      "sourceSha256": "b280fa41da96bb2db519cb055f6ecaea6fe0786586db3f5d695da07a77395924",
+      "topologySha256": "b61bf53748629826bc9fd6119b58a3bd228aa21d1d8e7d2403ba44674ce545f6",
+      "triangleCount": 754,
+      "vertexCount": 645
+    }
+  ],
+  "revision": "BodyParts3D-R4-T103-SOURCE-MANIFEST-v1",
+  "rights": {
+    "humanAnatomyReview": "not_performed",
+    "localDisplay": "allowed only for this exact technical subset after item identity, frame, GLB, duplicate-node and actual-browser validation",
+    "publicRedistribution": "held; exact OBJ headers state CC BY-SA 2.1 Japan; no file-level/current-terms reconciliation or approval is claimed"
+  },
+  "sceneContract": {
+    "cameraOwner": "existing AnatomySceneController",
+    "extensionMode": "append T103 exact source-only meshes after the T102 extension in the same T77/T95/T79/T101/T102 scene",
+    "oneAnatomySceneRoot": true,
+    "oneRenderer": true,
+    "pose": "bodyparts3d-r4-static-reference",
+    "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+    "projectUnit": "m",
+    "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+    "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+  },
+  "source": {
+    "archiveEtag": "\"8848a5a-4dd48ec9df000\"",
+    "archiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+    "fullArchiveDownloaded": false,
+    "selectedMemberRangeTransferBytes": 565911,
+    "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+    "tree": "IS-A",
+    "version": "BodyParts3D Release 4.0"
+  },
+  "sourceAssets": [
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA38615",
+          "humeral head of flexor carpi ulnaris",
+          "FJ1473"
+        ],
+        [
+          "FMA38617",
+          "humeral head of right flexor carpi ulnaris",
+          "FJ1473"
+        ],
+        [
+          "FMA45729",
+          "head of organ",
+          "FJ1473"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1473"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1473"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1473"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1473"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1473"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1473"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1473"
+        ],
+        [
+          "FMA85453",
+          "head of muscle organ",
+          "FJ1473"
+        ]
+      ],
+      "archiveMemberCrc32": "e2f50f7c",
+      "geometry": {
+        "headerActualMaxDeltaMm": 0.09770000000000323,
+        "projectBoundsM": [
+          [
+            -0.246452,
+            0.781554,
+            0.0611693
+          ],
+          [
+            -0.17782900000000001,
+            1.04834,
+            0.13657400000000003
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "exactNamedSourceSide": "right"
+        },
+        "sourceActualVertexBoundsMm": [
+          -246.452,
+          -136.574,
+          781.554,
+          -177.829,
+          -61.1693,
+          1048.34
+        ],
+        "sourceHeaderBoundsMm": [
+          -246.4524,
+          -136.574,
+          781.5544,
+          -177.7404,
+          -61.0716,
+          1048.3665
+        ],
+        "sourceNormalCount": 1887,
+        "sourceTriangleCount": 2656,
+        "sourceVertexCount": 1887
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA38617",
+        "BP5570",
+        "humeral head of right flexor carpi ulnaris"
+      ],
+      "officialGenericPartElementRowSameFj": [
+        "FMA38615",
+        "humeral head of flexor carpi ulnaris",
+        "FJ1473"
+      ],
+      "officialGenericToSideRelationRow": [
+        "FMA38615",
+        "humeral head of flexor carpi ulnaris",
+        "FMA38617",
+        "humeral head of right flexor carpi ulnaris"
+      ],
+      "officialSideSpecificElementRow": [
+        "FMA38617",
+        "humeral head of right flexor carpi ulnaris",
+        "FJ1473"
+      ],
+      "oneFjOneNodePolicy": true,
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1473.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 196103,
+      "sourceConceptEnglishName": "humeral head of right flexor carpi ulnaris",
+      "sourceConceptId": "FMA38617",
+      "sourceElementFileId": "FJ1473",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          -246.4524,
+          -136.574,
+          781.5544,
+          -177.7404,
+          -61.0716,
+          1048.3665
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA38617",
+        "englishNameExact": "Humeral head of right flexor carpi ulnaris",
+        "fileId": "FJ1473",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP5570"
+      },
+      "sourceObjEnglishHeader": "Humeral head of right flexor carpi ulnaris",
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP5570",
+      "sourceSha256": "ccab7efb32e7b3cfc21039a138811f2972df5f2d91d23bbdbe63f13354774795",
+      "sourceSide": "right",
+      "sourceSideEvidence": {
+        "genericSameFjRow": [
+          "FMA38615",
+          "humeral head of flexor carpi ulnaris",
+          "FJ1473"
+        ],
+        "notInferredFromFjSuffixOrBounds": true,
+        "sourceConceptRow": [
+          "FMA38617",
+          "BP5570",
+          "humeral head of right flexor carpi ulnaris"
+        ],
+        "sourceElementRow": [
+          "FMA38617",
+          "humeral head of right flexor carpi ulnaris",
+          "FJ1473"
+        ]
+      },
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    },
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA38615",
+          "humeral head of flexor carpi ulnaris",
+          "FJ1473M"
+        ],
+        [
+          "FMA38618",
+          "humeral head of left flexor carpi ulnaris",
+          "FJ1473M"
+        ],
+        [
+          "FMA45729",
+          "head of organ",
+          "FJ1473M"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1473M"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1473M"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1473M"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1473M"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1473M"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1473M"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1473M"
+        ],
+        [
+          "FMA85453",
+          "head of muscle organ",
+          "FJ1473M"
+        ]
+      ],
+      "archiveMemberCrc32": "eede1780",
+      "geometry": {
+        "headerActualMaxDeltaMm": 0.0,
+        "projectBoundsM": [
+          [
+            0.17782900000000001,
+            0.781554,
+            0.0611693
+          ],
+          [
+            0.246452,
+            1.04834,
+            0.13657400000000003
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "exactNamedSourceSide": "left"
+        },
+        "sourceActualVertexBoundsMm": [
+          177.829,
+          -136.574,
+          781.554,
+          246.452,
+          -61.1693,
+          1048.34
+        ],
+        "sourceHeaderBoundsMm": [
+          177.829,
+          -136.574,
+          781.554,
+          246.452,
+          -61.1693,
+          1048.34
+        ],
+        "sourceNormalCount": 1884,
+        "sourceTriangleCount": 2656,
+        "sourceVertexCount": 1884
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA38618",
+        "BP8144",
+        "humeral head of left flexor carpi ulnaris"
+      ],
+      "officialGenericPartElementRowSameFj": [
+        "FMA38615",
+        "humeral head of flexor carpi ulnaris",
+        "FJ1473M"
+      ],
+      "officialGenericToSideRelationRow": [
+        "FMA38615",
+        "humeral head of flexor carpi ulnaris",
+        "FMA38618",
+        "humeral head of left flexor carpi ulnaris"
+      ],
+      "officialSideSpecificElementRow": [
+        "FMA38618",
+        "humeral head of left flexor carpi ulnaris",
+        "FJ1473M"
+      ],
+      "oneFjOneNodePolicy": true,
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1473M.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 194033,
+      "sourceConceptEnglishName": "humeral head of left flexor carpi ulnaris",
+      "sourceConceptId": "FMA38618",
+      "sourceElementFileId": "FJ1473M",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          177.829,
+          -136.574,
+          781.554,
+          246.452,
+          -61.1693,
+          1048.34
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA38618",
+        "englishNameExact": "Humeral head of left flexor carpi ulnaris",
+        "fileId": "FJ1473M",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP8144"
+      },
+      "sourceObjEnglishHeader": "Humeral head of left flexor carpi ulnaris",
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8144",
+      "sourceSha256": "d5f425f4b708deeed63146f31f6e399d7acb180c685df4bee45204154c8fb00f",
+      "sourceSide": "left",
+      "sourceSideEvidence": {
+        "genericSameFjRow": [
+          "FMA38615",
+          "humeral head of flexor carpi ulnaris",
+          "FJ1473M"
+        ],
+        "notInferredFromFjSuffixOrBounds": true,
+        "sourceConceptRow": [
+          "FMA38618",
+          "BP8144",
+          "humeral head of left flexor carpi ulnaris"
+        ],
+        "sourceElementRow": [
+          "FMA38618",
+          "humeral head of left flexor carpi ulnaris",
+          "FJ1473M"
+        ]
+      },
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    },
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA38558",
+          "humeral head of pronator teres",
+          "FJ1474"
+        ],
+        [
+          "FMA38560",
+          "humeral head of right pronator teres",
+          "FJ1474"
+        ],
+        [
+          "FMA45729",
+          "head of organ",
+          "FJ1474"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1474"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1474"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1474"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1474"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1474"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1474"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1474"
+        ],
+        [
+          "FMA85453",
+          "head of muscle organ",
+          "FJ1474"
+        ]
+      ],
+      "archiveMemberCrc32": "a866e7e6",
+      "geometry": {
+        "headerActualMaxDeltaMm": 0.03769999999997253,
+        "projectBoundsM": [
+          [
+            -0.257321,
+            0.916652,
+            0.0676887
+          ],
+          [
+            -0.187418,
+            1.0653800000000002,
+            0.102553
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "exactNamedSourceSide": "right"
+        },
+        "sourceActualVertexBoundsMm": [
+          -257.321,
+          -102.553,
+          916.652,
+          -187.418,
+          -67.6887,
+          1065.38
+        ],
+        "sourceHeaderBoundsMm": [
+          -257.3587,
+          -102.5855,
+          916.6519,
+          -187.4177,
+          -67.6887,
+          1065.3837
+        ],
+        "sourceNormalCount": 1588,
+        "sourceTriangleCount": 1846,
+        "sourceVertexCount": 1588
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA38560",
+        "BP5568",
+        "humeral head of right pronator teres"
+      ],
+      "officialGenericPartElementRowSameFj": [
+        "FMA38558",
+        "humeral head of pronator teres",
+        "FJ1474"
+      ],
+      "officialGenericToSideRelationRow": [
+        "FMA38558",
+        "humeral head of pronator teres",
+        "FMA38560",
+        "humeral head of right pronator teres"
+      ],
+      "officialSideSpecificElementRow": [
+        "FMA38560",
+        "humeral head of right pronator teres",
+        "FJ1474"
+      ],
+      "oneFjOneNodePolicy": true,
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1474.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 151318,
+      "sourceConceptEnglishName": "humeral head of right pronator teres",
+      "sourceConceptId": "FMA38560",
+      "sourceElementFileId": "FJ1474",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          -257.3587,
+          -102.5855,
+          916.6519,
+          -187.4177,
+          -67.6887,
+          1065.3837
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA38560",
+        "englishNameExact": "Humeral head of right pronator teres",
+        "fileId": "FJ1474",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP5568"
+      },
+      "sourceObjEnglishHeader": "Humeral head of right pronator teres",
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP5568",
+      "sourceSha256": "589e18d8dd9eac471404fae1035b01476ed0021af1cb2822c8c759164a2a45ba",
+      "sourceSide": "right",
+      "sourceSideEvidence": {
+        "genericSameFjRow": [
+          "FMA38558",
+          "humeral head of pronator teres",
+          "FJ1474"
+        ],
+        "notInferredFromFjSuffixOrBounds": true,
+        "sourceConceptRow": [
+          "FMA38560",
+          "BP5568",
+          "humeral head of right pronator teres"
+        ],
+        "sourceElementRow": [
+          "FMA38560",
+          "humeral head of right pronator teres",
+          "FJ1474"
+        ]
+      },
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    },
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA38558",
+          "humeral head of pronator teres",
+          "FJ1474M"
+        ],
+        [
+          "FMA38561",
+          "humeral head of left pronator teres",
+          "FJ1474M"
+        ],
+        [
+          "FMA45729",
+          "head of organ",
+          "FJ1474M"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1474M"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1474M"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1474M"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1474M"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1474M"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1474M"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1474M"
+        ],
+        [
+          "FMA85453",
+          "head of muscle organ",
+          "FJ1474M"
+        ]
+      ],
+      "archiveMemberCrc32": "ce88fbf8",
+      "geometry": {
+        "headerActualMaxDeltaMm": 0.0,
+        "projectBoundsM": [
+          [
+            0.187418,
+            0.916652,
+            0.0676887
+          ],
+          [
+            0.257321,
+            1.0653800000000002,
+            0.102553
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "exactNamedSourceSide": "left"
+        },
+        "sourceActualVertexBoundsMm": [
+          187.418,
+          -102.553,
+          916.652,
+          257.321,
+          -67.6887,
+          1065.38
+        ],
+        "sourceHeaderBoundsMm": [
+          187.418,
+          -102.553,
+          916.652,
+          257.321,
+          -67.6887,
+          1065.38
+        ],
+        "sourceNormalCount": 1599,
+        "sourceTriangleCount": 1846,
+        "sourceVertexCount": 1599
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA38561",
+        "BP8015",
+        "humeral head of left pronator teres"
+      ],
+      "officialGenericPartElementRowSameFj": [
+        "FMA38558",
+        "humeral head of pronator teres",
+        "FJ1474M"
+      ],
+      "officialGenericToSideRelationRow": [
+        "FMA38558",
+        "humeral head of pronator teres",
+        "FMA38561",
+        "humeral head of left pronator teres"
+      ],
+      "officialSideSpecificElementRow": [
+        "FMA38561",
+        "humeral head of left pronator teres",
+        "FJ1474M"
+      ],
+      "oneFjOneNodePolicy": true,
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1474M.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 150642,
+      "sourceConceptEnglishName": "humeral head of left pronator teres",
+      "sourceConceptId": "FMA38561",
+      "sourceElementFileId": "FJ1474M",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          187.418,
+          -102.553,
+          916.652,
+          257.321,
+          -67.6887,
+          1065.38
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA38561",
+        "englishNameExact": "Humeral head of left pronator teres",
+        "fileId": "FJ1474M",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP8015"
+      },
+      "sourceObjEnglishHeader": "Humeral head of left pronator teres",
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8015",
+      "sourceSha256": "441ab2758c6c7f27fc5835edc070c02b2355e5222bf3a65c728853c38b424aa7",
+      "sourceSide": "left",
+      "sourceSideEvidence": {
+        "genericSameFjRow": [
+          "FMA38558",
+          "humeral head of pronator teres",
+          "FJ1474M"
+        ],
+        "notInferredFromFjSuffixOrBounds": true,
+        "sourceConceptRow": [
+          "FMA38561",
+          "BP8015",
+          "humeral head of left pronator teres"
+        ],
+        "sourceElementRow": [
+          "FMA38561",
+          "humeral head of left pronator teres",
+          "FJ1474M"
+        ]
+      },
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    },
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA45729",
+          "head of organ",
+          "FJ1481"
+        ],
+        [
+          "FMA46119",
+          "oblique head of adductor pollicis",
+          "FJ1481"
+        ],
+        [
+          "FMA46121",
+          "oblique head of right adductor pollicis",
+          "FJ1481"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1481"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1481"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1481"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1481"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1481"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1481"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1481"
+        ],
+        [
+          "FMA85453",
+          "head of muscle organ",
+          "FJ1481"
+        ]
+      ],
+      "archiveMemberCrc32": "154439f5",
+      "geometry": {
+        "headerActualMaxDeltaMm": 0.0004999999999881766,
+        "projectBoundsM": [
+          [
+            -0.29933600000000005,
+            0.759749,
+            0.12316200000000001
+          ],
+          [
+            -0.256534,
+            0.789784,
+            0.14707
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "exactNamedSourceSide": "right"
+        },
+        "sourceActualVertexBoundsMm": [
+          -299.336,
+          -147.07,
+          759.749,
+          -256.534,
+          -123.162,
+          789.784
+        ],
+        "sourceHeaderBoundsMm": [
+          -299.3356,
+          -147.0701,
+          759.749,
+          -256.534,
+          -123.1617,
+          789.7845
+        ],
+        "sourceNormalCount": 734,
+        "sourceTriangleCount": 658,
+        "sourceVertexCount": 734
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA46121",
+        "BP5560",
+        "oblique head of right adductor pollicis"
+      ],
+      "officialGenericPartElementRowSameFj": [
+        "FMA46119",
+        "oblique head of adductor pollicis",
+        "FJ1481"
+      ],
+      "officialGenericToSideRelationRow": [
+        "FMA46119",
+        "oblique head of adductor pollicis",
+        "FMA46121",
+        "oblique head of right adductor pollicis"
+      ],
+      "officialSideSpecificElementRow": [
+        "FMA46121",
+        "oblique head of right adductor pollicis",
+        "FJ1481"
+      ],
+      "oneFjOneNodePolicy": true,
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1481.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 63101,
+      "sourceConceptEnglishName": "oblique head of right adductor pollicis",
+      "sourceConceptId": "FMA46121",
+      "sourceElementFileId": "FJ1481",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          -299.3356,
+          -147.0701,
+          759.749,
+          -256.534,
+          -123.1617,
+          789.7845
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA46121",
+        "englishNameExact": "Oblique head of right adductor pollicis",
+        "fileId": "FJ1481",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP5560"
+      },
+      "sourceObjEnglishHeader": "Oblique head of right adductor pollicis",
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP5560",
+      "sourceSha256": "7f95a0d24a061eefc13bbef6c842b7e685798dfd16e767b955015dafde1f858d",
+      "sourceSide": "right",
+      "sourceSideEvidence": {
+        "genericSameFjRow": [
+          "FMA46119",
+          "oblique head of adductor pollicis",
+          "FJ1481"
+        ],
+        "notInferredFromFjSuffixOrBounds": true,
+        "sourceConceptRow": [
+          "FMA46121",
+          "BP5560",
+          "oblique head of right adductor pollicis"
+        ],
+        "sourceElementRow": [
+          "FMA46121",
+          "oblique head of right adductor pollicis",
+          "FJ1481"
+        ]
+      },
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    },
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA45729",
+          "head of organ",
+          "FJ1481M"
+        ],
+        [
+          "FMA46119",
+          "oblique head of adductor pollicis",
+          "FJ1481M"
+        ],
+        [
+          "FMA46122",
+          "oblique head of left adductor pollicis",
+          "FJ1481M"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1481M"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1481M"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1481M"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1481M"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1481M"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1481M"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1481M"
+        ],
+        [
+          "FMA85453",
+          "head of muscle organ",
+          "FJ1481M"
+        ]
+      ],
+      "archiveMemberCrc32": "c6da628b",
+      "geometry": {
+        "headerActualMaxDeltaMm": 0.0,
+        "projectBoundsM": [
+          [
+            0.256534,
+            0.759749,
+            0.12316200000000001
+          ],
+          [
+            0.29933600000000005,
+            0.789784,
+            0.14707
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "exactNamedSourceSide": "left"
+        },
+        "sourceActualVertexBoundsMm": [
+          256.534,
+          -147.07,
+          759.749,
+          299.336,
+          -123.162,
+          789.784
+        ],
+        "sourceHeaderBoundsMm": [
+          256.534,
+          -147.07,
+          759.749,
+          299.336,
+          -123.162,
+          789.784
+        ],
+        "sourceNormalCount": 733,
+        "sourceTriangleCount": 658,
+        "sourceVertexCount": 733
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA46122",
+        "BP8248",
+        "oblique head of left adductor pollicis"
+      ],
+      "officialGenericPartElementRowSameFj": [
+        "FMA46119",
+        "oblique head of adductor pollicis",
+        "FJ1481M"
+      ],
+      "officialGenericToSideRelationRow": [
+        "FMA46119",
+        "oblique head of adductor pollicis",
+        "FMA46122",
+        "oblique head of left adductor pollicis"
+      ],
+      "officialSideSpecificElementRow": [
+        "FMA46122",
+        "oblique head of left adductor pollicis",
+        "FJ1481M"
+      ],
+      "oneFjOneNodePolicy": true,
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1481M.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 62352,
+      "sourceConceptEnglishName": "oblique head of left adductor pollicis",
+      "sourceConceptId": "FMA46122",
+      "sourceElementFileId": "FJ1481M",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          256.534,
+          -147.07,
+          759.749,
+          299.336,
+          -123.162,
+          789.784
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA46122",
+        "englishNameExact": "Oblique head of left adductor pollicis",
+        "fileId": "FJ1481M",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP8248"
+      },
+      "sourceObjEnglishHeader": "Oblique head of left adductor pollicis",
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8248",
+      "sourceSha256": "6aae43f5745e133cfb7a1659dcc6d8e42e94d8772b984f1ad33d79c6a0f8397c",
+      "sourceSide": "left",
+      "sourceSideEvidence": {
+        "genericSameFjRow": [
+          "FMA46119",
+          "oblique head of adductor pollicis",
+          "FJ1481M"
+        ],
+        "notInferredFromFjSuffixOrBounds": true,
+        "sourceConceptRow": [
+          "FMA46122",
+          "BP8248",
+          "oblique head of left adductor pollicis"
+        ],
+        "sourceElementRow": [
+          "FMA46122",
+          "oblique head of left adductor pollicis",
+          "FJ1481M"
+        ]
+      },
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    },
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA45729",
+          "head of organ",
+          "FJ1514"
+        ],
+        [
+          "FMA46104",
+          "superficial head of flexor pollicis brevis",
+          "FJ1514"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1514"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1514"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1514"
+        ],
+        [
+          "FMA65198",
+          "superficial head of right flexor pollicis brevis",
+          "FJ1514"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1514"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1514"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1514"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1514"
+        ],
+        [
+          "FMA85453",
+          "head of muscle organ",
+          "FJ1514"
+        ]
+      ],
+      "archiveMemberCrc32": "2f41023c",
+      "geometry": {
+        "headerActualMaxDeltaMm": 0.037299999999987676,
+        "projectBoundsM": [
+          [
+            -0.301995,
+            0.7668790000000001,
+            0.136637
+          ],
+          [
+            -0.25978300000000004,
+            0.796813,
+            0.154202
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "exactNamedSourceSide": "right"
+        },
+        "sourceActualVertexBoundsMm": [
+          -301.995,
+          -154.202,
+          766.879,
+          -259.783,
+          -136.637,
+          796.813
+        ],
+        "sourceHeaderBoundsMm": [
+          -301.9946,
+          -154.2393,
+          766.8789,
+          -259.7829,
+          -136.6366,
+          796.8129
+        ],
+        "sourceNormalCount": 954,
+        "sourceTriangleCount": 726,
+        "sourceVertexCount": 954
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA65198",
+        "BP5556",
+        "superficial head of right flexor pollicis brevis"
+      ],
+      "officialGenericPartElementRowSameFj": [
+        "FMA46104",
+        "superficial head of flexor pollicis brevis",
+        "FJ1514"
+      ],
+      "officialGenericToSideRelationRow": [
+        "FMA46104",
+        "superficial head of flexor pollicis brevis",
+        "FMA65198",
+        "superficial head of right flexor pollicis brevis"
+      ],
+      "officialSideSpecificElementRow": [
+        "FMA65198",
+        "superficial head of right flexor pollicis brevis",
+        "FJ1514"
+      ],
+      "oneFjOneNodePolicy": true,
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1514.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 77954,
+      "sourceConceptEnglishName": "superficial head of right flexor pollicis brevis",
+      "sourceConceptId": "FMA65198",
+      "sourceElementFileId": "FJ1514",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          -301.9946,
+          -154.2393,
+          766.8789,
+          -259.7829,
+          -136.6366,
+          796.8129
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA65198",
+        "englishNameExact": "Superficial head of right flexor pollicis brevis",
+        "fileId": "FJ1514",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP5556"
+      },
+      "sourceObjEnglishHeader": "Superficial head of right flexor pollicis brevis",
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP5556",
+      "sourceSha256": "af5d19e0450559eaeacd54e6d332c507acc9b0dc4675311094c6c3b9c9715a71",
+      "sourceSide": "right",
+      "sourceSideEvidence": {
+        "genericSameFjRow": [
+          "FMA46104",
+          "superficial head of flexor pollicis brevis",
+          "FJ1514"
+        ],
+        "notInferredFromFjSuffixOrBounds": true,
+        "sourceConceptRow": [
+          "FMA65198",
+          "BP5556",
+          "superficial head of right flexor pollicis brevis"
+        ],
+        "sourceElementRow": [
+          "FMA65198",
+          "superficial head of right flexor pollicis brevis",
+          "FJ1514"
+        ]
+      },
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    },
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA45729",
+          "head of organ",
+          "FJ1514M"
+        ],
+        [
+          "FMA46104",
+          "superficial head of flexor pollicis brevis",
+          "FJ1514M"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1514M"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1514M"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1514M"
+        ],
+        [
+          "FMA65199",
+          "superficial head of left flexor pollicis brevis",
+          "FJ1514M"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1514M"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1514M"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1514M"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1514M"
+        ],
+        [
+          "FMA85453",
+          "head of muscle organ",
+          "FJ1514M"
+        ]
+      ],
+      "archiveMemberCrc32": "3a32a7bc",
+      "geometry": {
+        "headerActualMaxDeltaMm": 0.0,
+        "projectBoundsM": [
+          [
+            0.25978300000000004,
+            0.7668790000000001,
+            0.136637
+          ],
+          [
+            0.301995,
+            0.796813,
+            0.154202
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "exactNamedSourceSide": "left"
+        },
+        "sourceActualVertexBoundsMm": [
+          259.783,
+          -154.202,
+          766.879,
+          301.995,
+          -136.637,
+          796.813
+        ],
+        "sourceHeaderBoundsMm": [
+          259.783,
+          -154.202,
+          766.879,
+          301.995,
+          -136.637,
+          796.813
+        ],
+        "sourceNormalCount": 954,
+        "sourceTriangleCount": 726,
+        "sourceVertexCount": 954
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA65199",
+        "BP8722",
+        "superficial head of left flexor pollicis brevis"
+      ],
+      "officialGenericPartElementRowSameFj": [
+        "FMA46104",
+        "superficial head of flexor pollicis brevis",
+        "FJ1514M"
+      ],
+      "officialGenericToSideRelationRow": [
+        "FMA46104",
+        "superficial head of flexor pollicis brevis",
+        "FMA65199",
+        "superficial head of left flexor pollicis brevis"
+      ],
+      "officialSideSpecificElementRow": [
+        "FMA65199",
+        "superficial head of left flexor pollicis brevis",
+        "FJ1514M"
+      ],
+      "oneFjOneNodePolicy": true,
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1514M.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 77027,
+      "sourceConceptEnglishName": "superficial head of left flexor pollicis brevis",
+      "sourceConceptId": "FMA65199",
+      "sourceElementFileId": "FJ1514M",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          259.783,
+          -154.202,
+          766.879,
+          301.995,
+          -136.637,
+          796.813
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA65199",
+        "englishNameExact": "Superficial head of left flexor pollicis brevis",
+        "fileId": "FJ1514M",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP8722"
+      },
+      "sourceObjEnglishHeader": "Superficial head of left flexor pollicis brevis",
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8722",
+      "sourceSha256": "f0db75e6d23cd0cf9642ae4bc28012713314678a92fc9cff7b0ce16a281990d9",
+      "sourceSide": "left",
+      "sourceSideEvidence": {
+        "genericSameFjRow": [
+          "FMA46104",
+          "superficial head of flexor pollicis brevis",
+          "FJ1514M"
+        ],
+        "notInferredFromFjSuffixOrBounds": true,
+        "sourceConceptRow": [
+          "FMA65199",
+          "BP8722",
+          "superficial head of left flexor pollicis brevis"
+        ],
+        "sourceElementRow": [
+          "FMA65199",
+          "superficial head of left flexor pollicis brevis",
+          "FJ1514M"
+        ]
+      },
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    },
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA45729",
+          "head of organ",
+          "FJ1515"
+        ],
+        [
+          "FMA46120",
+          "transverse head of adductor pollicis",
+          "FJ1515"
+        ],
+        [
+          "FMA46123",
+          "transverse head of right adductor pollicis",
+          "FJ1515"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1515"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1515"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1515"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1515"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1515"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1515"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1515"
+        ],
+        [
+          "FMA85453",
+          "head of muscle organ",
+          "FJ1515"
+        ]
+      ],
+      "archiveMemberCrc32": "6423ee5c",
+      "geometry": {
+        "headerActualMaxDeltaMm": 0.0004000000000132786,
+        "projectBoundsM": [
+          [
+            -0.299765,
+            0.738634,
+            0.124208
+          ],
+          [
+            -0.258639,
+            0.776706,
+            0.14672100000000002
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "exactNamedSourceSide": "right"
+        },
+        "sourceActualVertexBoundsMm": [
+          -299.765,
+          -146.721,
+          738.634,
+          -258.639,
+          -124.208,
+          776.706
+        ],
+        "sourceHeaderBoundsMm": [
+          -299.7653,
+          -146.7211,
+          738.6338,
+          -258.6394,
+          -124.2076,
+          776.7057
+        ],
+        "sourceNormalCount": 645,
+        "sourceTriangleCount": 754,
+        "sourceVertexCount": 645
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA46123",
+        "BP5543",
+        "transverse head of right adductor pollicis"
+      ],
+      "officialGenericPartElementRowSameFj": [
+        "FMA46120",
+        "transverse head of adductor pollicis",
+        "FJ1515"
+      ],
+      "officialGenericToSideRelationRow": [
+        "FMA46120",
+        "transverse head of adductor pollicis",
+        "FMA46123",
+        "transverse head of right adductor pollicis"
+      ],
+      "officialSideSpecificElementRow": [
+        "FMA46123",
+        "transverse head of right adductor pollicis",
+        "FJ1515"
+      ],
+      "oneFjOneNodePolicy": true,
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1515.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 60440,
+      "sourceConceptEnglishName": "transverse head of right adductor pollicis",
+      "sourceConceptId": "FMA46123",
+      "sourceElementFileId": "FJ1515",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          -299.7653,
+          -146.7211,
+          738.6338,
+          -258.6394,
+          -124.2076,
+          776.7057
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA46123",
+        "englishNameExact": "Transverse head of right adductor pollicis",
+        "fileId": "FJ1515",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP5543"
+      },
+      "sourceObjEnglishHeader": "Transverse head of right adductor pollicis",
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP5543",
+      "sourceSha256": "75f0a7b8130a70da1efb175638927868a2eb8d1f79916916666d100ec92190f2",
+      "sourceSide": "right",
+      "sourceSideEvidence": {
+        "genericSameFjRow": [
+          "FMA46120",
+          "transverse head of adductor pollicis",
+          "FJ1515"
+        ],
+        "notInferredFromFjSuffixOrBounds": true,
+        "sourceConceptRow": [
+          "FMA46123",
+          "BP5543",
+          "transverse head of right adductor pollicis"
+        ],
+        "sourceElementRow": [
+          "FMA46123",
+          "transverse head of right adductor pollicis",
+          "FJ1515"
+        ]
+      },
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    },
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA45729",
+          "head of organ",
+          "FJ1515M"
+        ],
+        [
+          "FMA46120",
+          "transverse head of adductor pollicis",
+          "FJ1515M"
+        ],
+        [
+          "FMA46124",
+          "transverse head of left adductor pollicis",
+          "FJ1515M"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1515M"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1515M"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1515M"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1515M"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1515M"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1515M"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1515M"
+        ],
+        [
+          "FMA85453",
+          "head of muscle organ",
+          "FJ1515M"
+        ]
+      ],
+      "archiveMemberCrc32": "ce0cac71",
+      "geometry": {
+        "headerActualMaxDeltaMm": 0.0,
+        "projectBoundsM": [
+          [
+            0.258639,
+            0.738634,
+            0.124208
+          ],
+          [
+            0.299765,
+            0.776706,
+            0.14672100000000002
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "exactNamedSourceSide": "left"
+        },
+        "sourceActualVertexBoundsMm": [
+          258.639,
+          -146.721,
+          738.634,
+          299.765,
+          -124.208,
+          776.706
+        ],
+        "sourceHeaderBoundsMm": [
+          258.639,
+          -146.721,
+          738.634,
+          299.765,
+          -124.208,
+          776.706
+        ],
+        "sourceNormalCount": 645,
+        "sourceTriangleCount": 754,
+        "sourceVertexCount": 645
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA46124",
+        "BP8885",
+        "transverse head of left adductor pollicis"
+      ],
+      "officialGenericPartElementRowSameFj": [
+        "FMA46120",
+        "transverse head of adductor pollicis",
+        "FJ1515M"
+      ],
+      "officialGenericToSideRelationRow": [
+        "FMA46120",
+        "transverse head of adductor pollicis",
+        "FMA46124",
+        "transverse head of left adductor pollicis"
+      ],
+      "officialSideSpecificElementRow": [
+        "FMA46124",
+        "transverse head of left adductor pollicis",
+        "FJ1515M"
+      ],
+      "oneFjOneNodePolicy": true,
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1515M.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 59872,
+      "sourceConceptEnglishName": "transverse head of left adductor pollicis",
+      "sourceConceptId": "FMA46124",
+      "sourceElementFileId": "FJ1515M",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          258.639,
+          -146.721,
+          738.634,
+          299.765,
+          -124.208,
+          776.706
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA46124",
+        "englishNameExact": "Transverse head of left adductor pollicis",
+        "fileId": "FJ1515M",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP8885"
+      },
+      "sourceObjEnglishHeader": "Transverse head of left adductor pollicis",
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8885",
+      "sourceSha256": "b280fa41da96bb2db519cb055f6ecaea6fe0786586db3f5d695da07a77395924",
+      "sourceSide": "left",
+      "sourceSideEvidence": {
+        "genericSameFjRow": [
+          "FMA46120",
+          "transverse head of adductor pollicis",
+          "FJ1515M"
+        ],
+        "notInferredFromFjSuffixOrBounds": true,
+        "sourceConceptRow": [
+          "FMA46124",
+          "BP8885",
+          "transverse head of left adductor pollicis"
+        ],
+        "sourceElementRow": [
+          "FMA46124",
+          "transverse head of left adductor pollicis",
+          "FJ1515M"
+        ]
+      },
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    }
+  ],
+  "sourceOnlyPolicy": {
+    "canonicalLearnerBinding": "none",
+    "humanReviewed": false,
+    "learnerPickable": false,
+    "threeNameOverlay": "deferred to the later target batch; no canonical ID or learner label created"
+  },
+  "task": "T103",
+  "wholeMusclePartRepresentation": {
+    "T54FlexorPollicisBrevisParents": [
+      {
+        "activeParentDefaultVisible": false,
+        "activeParentHoldReasons": [
+          "T54_source_label_surface_pair_conflict"
+        ],
+        "activeParentPickState": "held",
+        "preserved": true,
+        "sourceElementFileId": "FJ1469",
+        "sourceHeaderSide": "left",
+        "sourceNameExact": "Left flexor pollicis brevis",
+        "sourceSha256": "090600879d9395564824bedc16918c66b8fac325cf7fb2bac6c062bdb62560aa",
+        "sourceXBoundsMm": [
+          -301.25,
+          -256.014
+        ]
+      },
+      {
+        "activeParentDefaultVisible": false,
+        "activeParentHoldReasons": [
+          "T54_source_label_surface_pair_conflict"
+        ],
+        "activeParentPickState": "held",
+        "preserved": true,
+        "sourceElementFileId": "FJ1469M",
+        "sourceHeaderSide": "right",
+        "sourceNameExact": "Right flexor pollicis brevis",
+        "sourceSha256": "dbab9fdb424e8370bed0229f47af76209ab5f61613fc1c910d427a73e6ee8bd7",
+        "sourceXBoundsMm": [
+          256.014,
+          301.25
+        ]
+      }
+    ],
+    "actualTriangleSurfaceSampleComparisons": [
+      {
+        "interpretation": "sampled distances use actual mesh triangles; they estimate near-surface overlap but do not prove continuous surface intersection. Held whole candidates remain hidden regardless.",
+        "pairwiseSameSourceXSide": "same",
+        "parentHeaderName": "Left flexor pollicis brevis",
+        "parentSourceIdentityConflictRetained": true,
+        "parentToPartSurfaceSamples": {
+          "aabbUsedAsOverlapProof": false,
+          "continuousIntersectionProven": false,
+          "maximumSampleDistanceMm": 3.6084877146466554,
+          "medianDistanceMm": 3.006564813993487,
+          "nearestDistanceMm": 0.02800662172422068,
+          "p95DistanceMm": 3.5004439519674246,
+          "sampleFractionsWithinMm": {
+            "0.1": 0.003341687552213868,
+            "0.5": 0.04650515176830966,
+            "1.0": 0.10219994430520746,
+            "2.0": 0.17599554441659704
+          },
+          "sampleMethod": "every_source_vertex_plus_each_triangle_centroid_and_edge_midpoint; exact point-to-target-triangle nearest distance; bidirectional calls are reported separately",
+          "sourceSurfaceSampleCount": 3591,
+          "targetTriangleCount": 726
+        },
+        "parentWholeCandidateFj": "FJ1469",
+        "partHeadFj": "FJ1514",
+        "partHeaderName": "superficial head of right flexor pollicis brevis",
+        "partToParentSurfaceSamples": {
+          "aabbUsedAsOverlapProof": false,
+          "continuousIntersectionProven": false,
+          "maximumSampleDistanceMm": 3.1340494096775164,
+          "medianDistanceMm": 2.562852989398412,
+          "nearestDistanceMm": 0.07324104199113479,
+          "p95DistanceMm": 3.0489587807428964,
+          "sampleFractionsWithinMm": {
+            "0.1": 0.0007776049766718507,
+            "0.5": 0.030326594090202177,
+            "1.0": 0.08812856402280975,
+            "2.0": 0.20917573872472783
+          },
+          "sampleMethod": "every_source_vertex_plus_each_triangle_centroid_and_edge_midpoint; exact point-to-target-triangle nearest distance; bidirectional calls are reported separately",
+          "sourceSurfaceSampleCount": 3858,
+          "targetTriangleCount": 714
+        }
+      },
+      {
+        "interpretation": "sampled distances use actual mesh triangles; they estimate near-surface overlap but do not prove continuous surface intersection. Held whole candidates remain hidden regardless.",
+        "pairwiseSameSourceXSide": "opposite",
+        "parentHeaderName": "Left flexor pollicis brevis",
+        "parentSourceIdentityConflictRetained": true,
+        "parentToPartSurfaceSamples": {
+          "aabbUsedAsOverlapProof": false,
+          "continuousIntersectionProven": false,
+          "maximumSampleDistanceMm": 23.696449086688556,
+          "medianDistanceMm": 23.002082509436825,
+          "nearestDistanceMm": 22.714654801035064,
+          "p95DistanceMm": 23.672054777235847,
+          "sampleFractionsWithinMm": {
+            "0.1": 0.0,
+            "0.5": 0.0,
+            "1.0": 0.0,
+            "2.0": 0.0
+          },
+          "sampleMethod": "every_source_vertex_plus_each_triangle_centroid_and_edge_midpoint; exact point-to-target-triangle nearest distance; bidirectional calls are reported separately",
+          "sourceSurfaceSampleCount": 3591,
+          "targetTriangleCount": 726
+        },
+        "parentWholeCandidateFj": "FJ1469",
+        "partHeadFj": "FJ1514M",
+        "partHeaderName": "superficial head of left flexor pollicis brevis",
+        "partToParentSurfaceSamples": {
+          "aabbUsedAsOverlapProof": false,
+          "continuousIntersectionProven": false,
+          "maximumSampleDistanceMm": 23.646324526240832,
+          "medianDistanceMm": 22.78811966523788,
+          "nearestDistanceMm": 22.714654801035064,
+          "p95DistanceMm": 23.600570593625836,
+          "sampleFractionsWithinMm": {
+            "0.1": 0.0,
+            "0.5": 0.0,
+            "1.0": 0.0,
+            "2.0": 0.0
+          },
+          "sampleMethod": "every_source_vertex_plus_each_triangle_centroid_and_edge_midpoint; exact point-to-target-triangle nearest distance; bidirectional calls are reported separately",
+          "sourceSurfaceSampleCount": 3858,
+          "targetTriangleCount": 714
+        }
+      },
+      {
+        "interpretation": "sampled distances use actual mesh triangles; they estimate near-surface overlap but do not prove continuous surface intersection. Held whole candidates remain hidden regardless.",
+        "pairwiseSameSourceXSide": "opposite",
+        "parentHeaderName": "Right flexor pollicis brevis",
+        "parentSourceIdentityConflictRetained": true,
+        "parentToPartSurfaceSamples": {
+          "aabbUsedAsOverlapProof": false,
+          "continuousIntersectionProven": false,
+          "maximumSampleDistanceMm": 23.696449086688556,
+          "medianDistanceMm": 23.00208280092499,
+          "nearestDistanceMm": 22.714654801035064,
+          "p95DistanceMm": 23.672054777235847,
+          "sampleFractionsWithinMm": {
+            "0.1": 0.0,
+            "0.5": 0.0,
+            "1.0": 0.0,
+            "2.0": 0.0
+          },
+          "sampleMethod": "every_source_vertex_plus_each_triangle_centroid_and_edge_midpoint; exact point-to-target-triangle nearest distance; bidirectional calls are reported separately",
+          "sourceSurfaceSampleCount": 3591,
+          "targetTriangleCount": 726
+        },
+        "parentWholeCandidateFj": "FJ1469M",
+        "partHeadFj": "FJ1514",
+        "partHeaderName": "superficial head of right flexor pollicis brevis",
+        "partToParentSurfaceSamples": {
+          "aabbUsedAsOverlapProof": false,
+          "continuousIntersectionProven": false,
+          "maximumSampleDistanceMm": 23.646324526240832,
+          "medianDistanceMm": 22.78811966523788,
+          "nearestDistanceMm": 22.714654801035064,
+          "p95DistanceMm": 23.600570593625836,
+          "sampleFractionsWithinMm": {
+            "0.1": 0.0,
+            "0.5": 0.0,
+            "1.0": 0.0,
+            "2.0": 0.0
+          },
+          "sampleMethod": "every_source_vertex_plus_each_triangle_centroid_and_edge_midpoint; exact point-to-target-triangle nearest distance; bidirectional calls are reported separately",
+          "sourceSurfaceSampleCount": 3858,
+          "targetTriangleCount": 714
+        }
+      },
+      {
+        "interpretation": "sampled distances use actual mesh triangles; they estimate near-surface overlap but do not prove continuous surface intersection. Held whole candidates remain hidden regardless.",
+        "pairwiseSameSourceXSide": "same",
+        "parentHeaderName": "Right flexor pollicis brevis",
+        "parentSourceIdentityConflictRetained": true,
+        "parentToPartSurfaceSamples": {
+          "aabbUsedAsOverlapProof": false,
+          "continuousIntersectionProven": false,
+          "maximumSampleDistanceMm": 3.6084877146466554,
+          "medianDistanceMm": 3.006603528908604,
+          "nearestDistanceMm": 0.03118927497626904,
+          "p95DistanceMm": 3.5004349364132707,
+          "sampleFractionsWithinMm": {
+            "0.1": 0.003341687552213868,
+            "0.5": 0.04650515176830966,
+            "1.0": 0.10219994430520746,
+            "2.0": 0.17599554441659704
+          },
+          "sampleMethod": "every_source_vertex_plus_each_triangle_centroid_and_edge_midpoint; exact point-to-target-triangle nearest distance; bidirectional calls are reported separately",
+          "sourceSurfaceSampleCount": 3591,
+          "targetTriangleCount": 726
+        },
+        "parentWholeCandidateFj": "FJ1469M",
+        "partHeadFj": "FJ1514M",
+        "partHeaderName": "superficial head of left flexor pollicis brevis",
+        "partToParentSurfaceSamples": {
+          "aabbUsedAsOverlapProof": false,
+          "continuousIntersectionProven": false,
+          "maximumSampleDistanceMm": 3.1340494096775164,
+          "medianDistanceMm": 2.5629675289036693,
+          "nearestDistanceMm": 0.07311819142781911,
+          "p95DistanceMm": 3.0489587807428964,
+          "sampleFractionsWithinMm": {
+            "0.1": 0.0007776049766718507,
+            "0.5": 0.030326594090202177,
+            "1.0": 0.08812856402280975,
+            "2.0": 0.20917573872472783
+          },
+          "sampleMethod": "every_source_vertex_plus_each_triangle_centroid_and_edge_midpoint; exact point-to-target-triangle nearest distance; bidirectional calls are reported separately",
+          "sourceSurfaceSampleCount": 3858,
+          "targetTriangleCount": 714
+        }
+      }
+    ],
+    "ancestorOnlyBindingOrSurface": "none",
+    "exactWholeMuscleCandidates": [
+      {
+        "activeParentSceneFjs": [
+          "FJ1469",
+          "FJ1469M"
+        ],
+        "activeParentState": {
+          "FJ1469": {
+            "defaultVisible": false,
+            "holdReasons": [
+              "T54_source_label_surface_pair_conflict"
+            ],
+            "pickState": "held"
+          },
+          "FJ1469M": {
+            "defaultVisible": false,
+            "holdReasons": [
+              "T54_source_label_surface_pair_conflict"
+            ],
+            "pickState": "held"
+          }
+        },
+        "fma": "FMA37378",
+        "memberFjs": [
+          "FJ1469",
+          "FJ1469M"
+        ],
+        "name": "flexor pollicis brevis",
+        "officialConceptRow": [
+          "FMA37378",
+          "BP8959",
+          "flexor pollicis brevis"
+        ]
+      }
+    ],
+    "noExactWholeCandidatesForOtherTargetFamilies": [
+      {
+        "result": "R4 source rows identify this part/head; no separate exact whole-muscle concept/member row was found for this named target set; ancestor concept rows are not used as replacements",
+        "sourceRows": [
+          [
+            "FMA38615",
+            "humeral head of flexor carpi ulnaris",
+            "FJ1473"
+          ],
+          [
+            "FMA38615",
+            "humeral head of flexor carpi ulnaris",
+            "FJ1473M"
+          ]
+        ],
+        "targetGenericPartFma": "FMA38615",
+        "targetName": "humeral head of flexor carpi ulnaris"
+      },
+      {
+        "result": "R4 source rows identify this part/head; no separate exact whole-muscle concept/member row was found for this named target set; ancestor concept rows are not used as replacements",
+        "sourceRows": [
+          [
+            "FMA38558",
+            "humeral head of pronator teres",
+            "FJ1474"
+          ],
+          [
+            "FMA38558",
+            "humeral head of pronator teres",
+            "FJ1474M"
+          ]
+        ],
+        "targetGenericPartFma": "FMA38558",
+        "targetName": "humeral head of pronator teres"
+      },
+      {
+        "result": "R4 source rows identify this part/head; no separate exact whole-muscle concept/member row was found for this named target set; ancestor concept rows are not used as replacements",
+        "sourceRows": [
+          [
+            "FMA46119",
+            "oblique head of adductor pollicis",
+            "FJ1481"
+          ],
+          [
+            "FMA46119",
+            "oblique head of adductor pollicis",
+            "FJ1481M"
+          ]
+        ],
+        "targetGenericPartFma": "FMA46119",
+        "targetName": "oblique head of adductor pollicis"
+      },
+      {
+        "result": "R4 source rows identify this part/head; no separate exact whole-muscle concept/member row was found for this named target set; ancestor concept rows are not used as replacements",
+        "sourceRows": [
+          [
+            "FMA46120",
+            "transverse head of adductor pollicis",
+            "FJ1515"
+          ],
+          [
+            "FMA46120",
+            "transverse head of adductor pollicis",
+            "FJ1515M"
+          ]
+        ],
+        "targetGenericPartFma": "FMA46120",
+        "targetName": "transverse head of adductor pollicis"
+      }
+    ],
+    "productRepresentationPolicy": "T103 contributes only its ten distinct head/part FJs. T54 whole-FPB candidates remain hidden and held because their exact source labels conflict with frame laterality. The T103 superficial-head surfaces can therefore never co-render with those held whole candidates in the default scene. No T54 source/manifests are changed. Surface comparisons use actual parent/part triangles and bidirectional mesh vertex/triangle-centroid/edge-midpoint samples; distance fractions are evidence about sampled proximity only, not proof of continuous intersection. AABB is not used to infer overlap.",
+    "sameFjSemanticRowsPolicy": "an exact FJ is a source mesh identity; generic-head and side-specific semantic rows reusing one FJ produce one node only"
+  }
+}

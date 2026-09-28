@@ -1,0 +1,62 @@
+{
+  "task": "T103",
+  "runtime": {
+    "node": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "pnpm": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback/pnpm"
+  },
+  "checks": [
+    {
+      "command": "python3 atlas-data/tools/acquire_bodyparts3d_r4_t103.py --check",
+      "exitCode": 0,
+      "log": "work/evidence/T103/acquisition-check.log"
+    },
+    {
+      "command": "PYTHONPYCACHEPREFIX=/tmp/human-atlas-python-cache python3 atlas-data/tools/freeze_bodyparts3d_r4_t103.py --check",
+      "exitCode": 0,
+      "log": "work/evidence/T103/freeze-check.log"
+    },
+    {
+      "command": "python3 atlas-data/tools/build_bodyparts3d_r4_t103.py --build",
+      "exitCode": 0,
+      "log": "work/evidence/T103/t103-build.log"
+    },
+    {
+      "command": "python3 atlas-data/tools/build_bodyparts3d_r4_t103.py --check",
+      "exitCode": 0,
+      "log": "work/evidence/T103/t103-build-check.log"
+    },
+    {
+      "command": "pnpm --dir atlas-web test:whole-body",
+      "exitCode": 0,
+      "log": "work/evidence/T103/test-whole-body.log",
+      "summary": "21 JavaScript tests passed; selected ZIP extractor tests 6/6 passed; T77/T79/T101/T102/T103 integrity and T95 overlay checks passed."
+    },
+    {
+      "command": "pnpm --dir atlas-web typecheck",
+      "exitCode": 0,
+      "log": "work/evidence/T103/typecheck.log"
+    },
+    {
+      "command": "pnpm --dir atlas-web build",
+      "exitCode": 0,
+      "log": "work/evidence/T103/build.log",
+      "note": "Existing >500 kB application bundle warning remains."
+    },
+    {
+      "command": "python3 work/evidence/T103/verify_preservation.py",
+      "exitCode": 0,
+      "log": "work/evidence/T103/preservation-check.log"
+    },
+    {
+      "command": "Compare T103 report table with source-manifest exact name/side/FMA/BP rows",
+      "exitCode": 0,
+      "log": "work/evidence/T103/report-table-check.log"
+    }
+  ],
+  "browser": {
+    "evidence": "work/evidence/T103/browser-validation.json",
+    "result": "pass",
+    "consoleErrors": 0,
+    "consoleWarnings": 0
+  }
+}

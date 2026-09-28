@@ -44,7 +44,12 @@ HOLDS = ["no_canonical_learner_binding", "human_anatomy_review_not_performed", "
 # bounded task records its result. Keep its freeze-time hashes in the manifest
 # as provenance; do not treat these two mutable project-management files as
 # geometry/scene inputs that must remain byte-identical forever.
-MUTABLE_WORKFLOW_CONTEXT_HASHES = {"work/STATUS.md", "work/task-registry-r15.json"}
+# The shared selected-member extractor received an additive T103 M-suffix path.
+# T102's original freeze-time hash remains recorded in its source manifest, while
+# this compatible helper revision is excluded from the old geometry-input gate.
+# T102 output and all immutable mesh/scene inputs remain byte-hash checked.
+MUTABLE_WORKFLOW_CONTEXT_HASHES = {"work/STATUS.md", "work/task-registry-r15.json",
+                                   "atlas-data/tools/extract_bodyparts3d_r4_selected_zip_members.py"}
 BOUNDS = re.compile(r"^#\s*Bounds\(mm\):\s*\(([^)]+)\)-\(([^)]+)\)\s*$")
 
 
