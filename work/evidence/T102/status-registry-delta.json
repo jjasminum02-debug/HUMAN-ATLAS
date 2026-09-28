@@ -1,0 +1,29 @@
+{
+  "task": "T102",
+  "startHead": "9612c7582c473e5e62943b948245db8daac1f094",
+  "sharedFilesArePreexistingWip": true,
+  "files": {
+    "work/STATUS.md": {
+      "sha256BeforeT102Delta": "f7d1a64ab5f338f1c5380d27c1deecf76e5cd6d8e97df1c929737c9485d74082",
+      "sha256AfterT102Delta": "607dd9f187230103516bf865310660ede6af4cdafaad365f75170c7f076f1483",
+      "fieldsUpdated": [
+        "CURRENT_TASK=T102 passed_with_gaps",
+        "NEXT_TASK=T103 / Luna Max",
+        "T101 handoff now references the completed T102 report and T103 prompt",
+        "T102 result/holds/evidence paths appended"
+      ],
+      "staged": false
+    },
+    "work/task-registry-r15.json": {
+      "sha256BeforeT102Delta": "36821221348f38447d53bc87208cb7d5fcf2d2b74bfd18c44451624dfdd54e80",
+      "sha256AfterT102Delta": "a03b5e06a8b151c2e3ed0aaa32fb800b64756f24a68b8a0871f95addd4990739",
+      "fieldsUpdated": [
+        "nextTask=T103",
+        "taskStatuses.T102=passed_with_gaps"
+      ],
+      "staged": false
+    }
+  },
+  "reasonExcludedFromCommit": "STATUS.md contains shared project history and concurrent workbook-plan WIP; the untracked R15 registry is a broader planning artifact. Staging either whole file would include unrelated changes. Their T102-only delta is retained and reviewed here.",
+  "nextTask": "T103"
+}

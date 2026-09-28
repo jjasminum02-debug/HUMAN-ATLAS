@@ -1,0 +1,57 @@
+{
+  "task": "T102",
+  "revision": "T102-source-family-review-v1",
+  "targetFjs": [
+    "FJ1441", "FJ1441M", "FJ1442", "FJ1442M", "FJ1443", "FJ1443M",
+    "FJ1444", "FJ1444M", "FJ1445", "FJ1445M"
+  ],
+  "families": [
+    {
+      "targetFjs": ["FJ1441", "FJ1441M", "FJ1442", "FJ1442M", "FJ1443", "FJ1443M"],
+      "targetConcepts": ["vastus intermedius", "vastus lateralis", "vastus medialis"],
+      "officialBroaderRelation": ["FMA22429", "zone of quadriceps femoris"],
+      "parentSceneNodes": ["FJ1433", "FJ1433M"],
+      "parentExactSourceNames": ["right rectus femoris", "left rectus femoris"],
+      "decision": "The parent nodes are the distinct rectus femoris source pair, not a whole-quadriceps aggregate. The broader IS-A row is another semantic row for those exact source FJs, not an additional surface. No same-concept parent aggregate was found."
+    },
+    {
+      "targetFjs": ["FJ1444", "FJ1444M"],
+      "targetConcepts": ["short head of biceps femoris"],
+      "officialBroaderRelation": ["FMA45881", "head of biceps femoris"],
+      "parentSceneNodes": ["FJ1395", "FJ1395M"],
+      "parentExactSourceNames": ["long head of right biceps femoris", "long head of left biceps femoris"],
+      "decision": "The existing parent nodes are the distinct long heads; T102 contributes the short heads. No exact short-head aggregate or duplicate FJ surface was found."
+    },
+    {
+      "targetFjs": ["FJ1445", "FJ1445M"],
+      "targetConcepts": ["transverse head of adductor hallucis"],
+      "officialBroaderRelation": ["FMA46012", "head of adductor hallucis"],
+      "parentSceneNodes": ["FJ1398", "FJ1398M"],
+      "parentExactSourceNames": ["oblique head of right adductor hallucis", "oblique head of left adductor hallucis"],
+      "decision": "The existing parent nodes are the distinct oblique heads; T102 contributes the transverse heads. No exact transverse-head aggregate or duplicate FJ surface was found."
+    }
+  ],
+  "geometryReview": {
+    "perTargetObjHeaderAndVertexExtremaCompared": true,
+    "perTargetTransformedVertexBoundsRecorded": true,
+    "aabbTreatedAsSurfaceIntersectionProof": false,
+    "pairwiseTriangleIntersectionRun": false,
+    "reason": "Official exact source/member rows and the frozen T72/T101 parent manifests identify each active parent surface as a different sibling concept; no exact whole-muscle aggregate surface corresponding to a T102 target is present to compare as a duplicate. Bounds remain location/range checks only.",
+    "sourceGeometryModified": false
+  },
+  "productRepresentationPolicy": {
+    "oneSceneNodePerExactFj": true,
+    "genericAndSideSpecificRowsCreateOneNode": true,
+    "ancestorOnlyNodeOrBindingAdded": false,
+    "sourceOnlyUnboundRetained": true,
+    "noParentSurfaceSuppressionNeededForTheseExactTargets": true,
+    "publicRedistribution": "held",
+    "humanAnatomyReview": "not_performed"
+  },
+  "evidenceRefs": {
+    "T72ParentRectusFemoriSource": "atlas-data/manifests/bodyparts3d-r4-t72/source-manifest.json",
+    "T101ParentSiblingHeads": "atlas-data/manifests/bodyparts3d-r4-t101/source-manifest.json",
+    "T102OfficialRowsAndRanges": "atlas-data/manifests/bodyparts3d-r4-t102/source-manifest.json",
+    "T102RuntimeUniqueNodes": "work/evidence/T102/browser-validation.json"
+  }
+}

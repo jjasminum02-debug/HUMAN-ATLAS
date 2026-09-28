@@ -1,0 +1,2385 @@
+{
+  "derivedChunk": {
+    "bytes": 812256,
+    "id": "t102-lower-limb-muscle",
+    "nodeCount": 10,
+    "path": "atlas-data/source-cache/bodyparts3d-r4/converted/t102/t102-lower-limb-muscle.glb",
+    "sha256": "64c42361163c9e1f50f0a0b700436526f4253f2c84a8407e1cd2478448656759"
+  },
+  "frozenMembershipSha256": "19a1863bfba19d6f991ce4b25dc04e76a626d00dac9b548fd301988ec235cb73",
+  "frozenSourceSetSha256": "bee46cf991ae1c5e825b0550302b0f2dc1cdf185e0a4e48b01dddd5dadd448cb",
+  "inputs": {
+    "AGENTS.md": "3be36175d2200f7d22cc29672e4af0f1f3b6da6105000c1922f229413b1fd396",
+    "atlas-data/catalog/target-scope-t96.json": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
+    "atlas-data/manifests/bodyparts3d-r4-t101/integration-extension.json": "536f878da9f10d002b3feabcd28a14fe617ac620f3dbe2c2183b2f4619471c06",
+    "atlas-data/manifests/bodyparts3d-r4-t101/source-manifest.json": "f7ccc1a0ef9c9f8d8483c48276ef6aafabd49d69fe8323c237d940864c0e93ef",
+    "atlas-data/manifests/bodyparts3d-r4-t79/integration-extension.json": "fea29a0d062656118d53345e445395568f34f9ec429f6bc82d78e3a0bc2749bf",
+    "atlas-data/manifests/bodyparts3d-r4-t79/source-manifest.json": "a7cf32bb9281b181152e54574d71db46c51c2a0e3ac22e22ca2065d2adf55546",
+    "atlas-data/manifests/bodyparts3d-r4-t95/product-context-overlay.json": "59624356f1afc113c6bce8421453831d2dc6540c9003f05196ccf3ddcb9e0b34",
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/manifest.json": "67a2f79b9248d18a754a6567e1b0bb4b1fce698ad0e3100a172b428ee58341f8",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_element_parts.txt": "a3de74423f943b0d724ae8f59b3a817f87c423a544f8db98113b1980817cbeaf",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_inclusion_relation_list.txt": "26e7d818e03a8c909fe09c561f38d0d513423c87681f9450a803bc38f5b07564",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/isa_parts_list_e.txt": "ab7796deedd49205e77f3609a1cb8c53e2bbee14ecb5c9a6ca05227469780513",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_element_parts.txt": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_inclusion_relation_list.txt": "1b40738270931e3c1d955ce34e0fce0d8d10d8c5ad543463e40b4b4c0243007c",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_parts_list_e.txt": "9224080557053e6f1322f1e13ab27f0ecde0db19bb3b505f0631afad230eeebd",
+    "atlas-data/tools/acquire_bodyparts3d_r4_t101.py": "b6ffb5a86d00a7120d3ced09e9156e12da40bc151d441cb8dd2e954e41c84bfd",
+    "atlas-data/tools/build_bodyparts3d_r4_t101.py": "a0af7babb400b549d17828e858f38c98cc193e9f08463be590198c33bedd0521",
+    "atlas-data/tools/convert_bodyparts3d_obj_to_glb.py": "05c1216fce695885386d026e4b51419a92e22e2114964e303520fcfa0e409756",
+    "atlas-data/tools/extract_bodyparts3d_r4_selected_zip_members.py": "0eef7ef163371f6e965a2644a401228412e5a988de5ca324bd74c6be7b1ca94e",
+    "atlas-data/tools/ingest_bodyparts3d_r4.py": "05a3681fc3cc45aecd810a8dfdff8de8d9ea0e65fc10ffc473773815d5905e3e",
+    "design/2026-09-25-muscle-atlas/00-START-HERE.md": "51a9204b1c3647125dd8c39d4ff18f0f28a8aef6b4153b165fdf9e0f78e4bfa9",
+    "design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md": "5c2889cb88680f4a98f496668a2c627f822d9fa7628e36d8eaa0c2694e2201cd",
+    "design/2026-09-25-muscle-atlas/22-EFFICIENT-DELIVERY-AND-PERFORMANCE.md": "f00480a1a880eb95fee742f2a02c0f05922059153888c5a3201d57ae5993538d",
+    "design/2026-09-25-muscle-atlas/23-PROMPTS-AFTER-T95.md": "a05e0245fff2d114a1b6a5aa414ddfa6a797e67929d3337acab294f484a21595",
+    "frozenSourceSetSha256": "bee46cf991ae1c5e825b0550302b0f2dc1cdf185e0a4e48b01dddd5dadd448cb",
+    "sourceAcquisitionSha256": "d47a0edf10d2dc884070765a23adbb1c4e6daeac4ae3dbfe94d94015115b5883",
+    "work/STATUS.md": "f7d1a64ab5f338f1c5380d27c1deecf76e5cd6d8e97df1c929737c9485d74082",
+    "work/evidence/T101/browser-validation.json": "4468ea946b299d70c5576cb3ab26bdae48a96ef26fd7f906e1a58876e1a212ef",
+    "work/evidence/T101/validation.json": "eb4c8f552c8eeb37de882b5866a455bc314d618d2f0e093b7cf4647c0847b5ce",
+    "work/evidence/T50/scene-contract.md": "2697496d18bd1fc58adca557d95364092f7c7189bff4218277882142c8b26fa4",
+    "work/evidence/T69/assessment.json": "e421057aae319d9eefcd0f84ee811de7caf532e5019a8a7d6bad0dd99b77cf34",
+    "work/evidence/T69/diagnostic.json": "39f8086df7042349633e3c19e7e60e81669ca49be63b0d4e3be88d15cfd93cca",
+    "work/evidence/T78/execution-queue.json": "d8361931866f132a70172db2042dcdce004d79f048e5be13603934ac43783937",
+    "work/evidence/T78/source-elements.json": "4be2aa589705081d28e2c2ce31389f9ec7a2b025def41dfbeb6c02f96e268789",
+    "work/evidence/T78/target-task-map.json": "d6e200c2c8bcef16d42f8060759face78511990e198ab3d6934e3a66e71de9d7",
+    "work/evidence/T78/targets.json": "ad00d234b59d7f2879c266eeafda75880bdf16679dcd7b1d3ceba539cfdff6c4",
+    "work/task-registry-r15.json": "36821221348f38447d53bc87208cb7d5fcf2d2b74bfd18c44451624dfdd54e80",
+    "work/tasks/T102.md": "7090c1e416c8dc84bcf081a18d526d7bdc1ee43e254f3b8f265766d4bc5686a0"
+  },
+  "meshRecords": [
+    {
+      "atlasBoundsM": {
+        "max": [
+          -0.07620710134506226,
+          0.7697439789772034,
+          0.13513900339603424
+        ],
+        "min": [
+          -0.13309499621391296,
+          0.3424850106239319,
+          0.07626079767942429
+        ]
+      },
+      "externalConceptId": "FMA38934",
+      "geometrySha256": "95758d92406029724504e35c95531dbb4104f4504ad9e14a6e66bef78f5cca50",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1441",
+      "meshIndex": 0,
+      "modelId": "HA-MODEL-BP3D4-T102-LOWER-LIMB-SOURCE",
+      "nodeIndex": 0,
+      "normalCount": 2748,
+      "normalSha256": "81fce2b2e683bd738e7fd54a6e5fdfa26d0874c6eef4ff64073b81ff8ba49389",
+      "representationId": "BP5604",
+      "sourceBoundsMm": {
+        "max": [
+          -76.2071,
+          -76.2608,
+          769.744
+        ],
+        "min": [
+          -133.095,
+          -135.139,
+          342.485
+        ]
+      },
+      "sourceBytes": 305079,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/thigh/FJ1441.obj",
+      "sourceFileId": "FJ1441",
+      "sourceSha256": "c609da3e64f0fc6c295b66b575503e61cacc8bfd9a5e5ec9b79e4eb476da5bab",
+      "topologySha256": "1f57c2304d7a120e19aa145383187915110cb30015711eeaddabecf71a5eb063",
+      "triangleCount": 4260,
+      "vertexCount": 2748
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.13309599459171295,
+          0.7697439789772034,
+          0.13513900339603424
+        ],
+        "min": [
+          0.07620710134506226,
+          0.3424850106239319,
+          0.07626079767942429
+        ]
+      },
+      "externalConceptId": "FMA38935",
+      "geometrySha256": "fa9378c95c1d2ff1ddbabd54a5b0fc13f102a793a6038c51112ddc7557470bb5",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1441M",
+      "meshIndex": 1,
+      "modelId": "HA-MODEL-BP3D4-T102-LOWER-LIMB-SOURCE",
+      "nodeIndex": 1,
+      "normalCount": 2744,
+      "normalSha256": "650a30d8b0a6fcefa07ce268b958697462a48e4507b277f3170a665f41bbb01a",
+      "representationId": "BP9207",
+      "sourceBoundsMm": {
+        "max": [
+          133.096,
+          -76.2608,
+          769.744
+        ],
+        "min": [
+          76.2071,
+          -135.139,
+          342.485
+        ]
+      },
+      "sourceBytes": 302163,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/thigh/FJ1441M.obj",
+      "sourceFileId": "FJ1441M",
+      "sourceSha256": "5245d285eb09ba0364a1b4ad8a21a6621183310c544c412bb39542e1517815db",
+      "topologySha256": "a047704b85a1099f76f6b7f595ae1754e6569c01d87e295edbe54d3a18d86f37",
+      "triangleCount": 4260,
+      "vertexCount": 2744
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          -0.08405649662017822,
+          0.7881669998168945,
+          0.13705100119113922
+        ],
+        "min": [
+          -0.15963199734687805,
+          0.31793200969696045,
+          0.05750320106744766
+        ]
+      },
+      "externalConceptId": "FMA38930",
+      "geometrySha256": "f3cb3ab9caa8ae90453d57c67c9e3e2f50186441ab8b42be15e92d5d932cf0a0",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1442",
+      "meshIndex": 2,
+      "modelId": "HA-MODEL-BP3D4-T102-LOWER-LIMB-SOURCE",
+      "nodeIndex": 2,
+      "normalCount": 3975,
+      "normalSha256": "2225e735471a9355dbb9321b99e6b3b3d5b1321ee5e36198a179d312036d3c72",
+      "representationId": "BP5602",
+      "sourceBoundsMm": {
+        "max": [
+          -84.0565,
+          -57.5032,
+          788.167
+        ],
+        "min": [
+          -159.632,
+          -137.051,
+          317.932
+        ]
+      },
+      "sourceBytes": 464679,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/thigh/FJ1442.obj",
+      "sourceFileId": "FJ1442",
+      "sourceSha256": "f67be78d7d0ddc6e78c0683ce4bd5be7492e4137f8661bc54039cbf535a88880",
+      "topologySha256": "31d7148de81f26854d02eac86a1c7b104eb930825a9b0312b309166f2296a323",
+      "triangleCount": 6688,
+      "vertexCount": 3975
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.15963299572467804,
+          0.7881669998168945,
+          0.13705100119113922
+        ],
+        "min": [
+          0.08405649662017822,
+          0.31793200969696045,
+          0.05750320106744766
+        ]
+      },
+      "externalConceptId": "FMA38931",
+      "geometrySha256": "76561c9f6454d74a2fab3f91dfe2ece4800d2010b25cd4631e6888a9ed4a665f",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1442M",
+      "meshIndex": 3,
+      "modelId": "HA-MODEL-BP3D4-T102-LOWER-LIMB-SOURCE",
+      "nodeIndex": 3,
+      "normalCount": 3974,
+      "normalSha256": "f942be5a34631f7bd37d00078fcdd377db67d70ebb52f3978044c39d4399f242",
+      "representationId": "BP8754",
+      "sourceBoundsMm": {
+        "max": [
+          159.633,
+          -57.5032,
+          788.167
+        ],
+        "min": [
+          84.0565,
+          -137.051,
+          317.932
+        ]
+      },
+      "sourceBytes": 460942,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/thigh/FJ1442M.obj",
+      "sourceFileId": "FJ1442M",
+      "sourceSha256": "507caa464730c508c2fd2f6958f9a5660fb6ca188bc38fafb5c9b5556ac6732b",
+      "topologySha256": "522b6ac203f9dfed3f47a6c90876fa3c68e03026097a0568c715b3dc97529013",
+      "triangleCount": 6688,
+      "vertexCount": 3974
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          -0.034939199686050415,
+          0.7381790280342102,
+          0.1469009965658188
+        ],
+        "min": [
+          -0.1056009978055954,
+          0.34054800868034363,
+          0.08913200348615646
+        ]
+      },
+      "externalConceptId": "FMA38932",
+      "geometrySha256": "4ed4e88d2a85f633b787ec846db3dcd180d6f93a75b5ce3631b3ab95c5ac4a75",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1443",
+      "meshIndex": 4,
+      "modelId": "HA-MODEL-BP3D4-T102-LOWER-LIMB-SOURCE",
+      "nodeIndex": 4,
+      "normalCount": 2773,
+      "normalSha256": "6e8af249bd28265eab636db8b3b3d312087a8a4bc9d6a294a97de4965c882219",
+      "representationId": "BP5600",
+      "sourceBoundsMm": {
+        "max": [
+          -34.9392,
+          -89.132,
+          738.179
+        ],
+        "min": [
+          -105.601,
+          -146.901,
+          340.548
+        ]
+      },
+      "sourceBytes": 317804,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/thigh/FJ1443.obj",
+      "sourceFileId": "FJ1443",
+      "sourceSha256": "5bdb79f52849241e20ff2280332f20efd38f1b4bda1fb1337e10a5c3e466002b",
+      "topologySha256": "8552cf94798e2f1f76b8007abcc9bf64dd8214aeb7ea425df6cdcc579dcb5b1b",
+      "triangleCount": 4552,
+      "vertexCount": 2773
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.1056009978055954,
+          0.7381790280342102,
+          0.1469009965658188
+        ],
+        "min": [
+          0.034939300268888474,
+          0.34054800868034363,
+          0.08913200348615646
+        ]
+      },
+      "externalConceptId": "FMA38933",
+      "geometrySha256": "476d463e6d2c5952d8692193fac22b9d64556b3b0eb24c6b6450b1c69b08405f",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1443M",
+      "meshIndex": 5,
+      "modelId": "HA-MODEL-BP3D4-T102-LOWER-LIMB-SOURCE",
+      "nodeIndex": 5,
+      "normalCount": 2772,
+      "normalSha256": "85e799e18a4af9c363893d9b78a923a48fe40a11431fd34c7fd03bf86cc5e069",
+      "representationId": "BP9128",
+      "sourceBoundsMm": {
+        "max": [
+          105.601,
+          -89.132,
+          738.179
+        ],
+        "min": [
+          34.9393,
+          -146.901,
+          340.548
+        ]
+      },
+      "sourceBytes": 315070,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/thigh/FJ1443M.obj",
+      "sourceFileId": "FJ1443M",
+      "sourceSha256": "8ca4d66734150402401722e8a82f52ada8af9d6973592e127431b742dfe46ad4",
+      "topologySha256": "244c11ac9f4c3577f8fd185480296ba0a8b87edb6db252b3a6e2e71f47bb737b",
+      "triangleCount": 4552,
+      "vertexCount": 2772
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          -0.08067119866609573,
+          0.646619975566864,
+          0.08747869729995728
+        ],
+        "min": [
+          -0.11740899831056595,
+          0.32818999886512756,
+          0.050881799310445786
+        ]
+      },
+      "externalConceptId": "FMA45891",
+      "geometrySha256": "01d8f72ffab277f601c2902101d123124d5359aa60204ad95fbcc59e1a98fd41",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1444",
+      "meshIndex": 6,
+      "modelId": "HA-MODEL-BP3D4-T102-LOWER-LIMB-SOURCE",
+      "nodeIndex": 6,
+      "normalCount": 1211,
+      "normalSha256": "c9df6e05c5c607b96beea757660f341ca0aa1dca231c48d36d642574a9c598bb",
+      "representationId": "BP5573",
+      "sourceBoundsMm": {
+        "max": [
+          -80.6712,
+          -50.8818,
+          646.62
+        ],
+        "min": [
+          -117.409,
+          -87.4787,
+          328.19
+        ]
+      },
+      "sourceBytes": 124350,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/thigh/FJ1444.obj",
+      "sourceFileId": "FJ1444",
+      "sourceSha256": "c071097501796cee5ff2a011b3d84c7bea4cb153241fce0f8b0a73d070bd990f",
+      "topologySha256": "8db869d5e7a2dd0edaa1e701f39719c72cdc33910bafd161835f124f86b1386d",
+      "triangleCount": 1728,
+      "vertexCount": 1211
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.11740899831056595,
+          0.646619975566864,
+          0.08747869729995728
+        ],
+        "min": [
+          0.08067119866609573,
+          0.32818999886512756,
+          0.050881799310445786
+        ]
+      },
+      "externalConceptId": "FMA45892",
+      "geometrySha256": "a2cd6455c9b2105b7f555dde3f05c4b882c7bdf026cbb91ac3706eec7b319cb5",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1444M",
+      "meshIndex": 7,
+      "modelId": "HA-MODEL-BP3D4-T102-LOWER-LIMB-SOURCE",
+      "nodeIndex": 7,
+      "normalCount": 1215,
+      "normalSha256": "7d386e5c02341dd201e0e1a960abd9a0740ecabf002ddaa820e4c5879cb9938e",
+      "representationId": "BP8616",
+      "sourceBoundsMm": {
+        "max": [
+          117.409,
+          -50.8818,
+          646.62
+        ],
+        "min": [
+          80.6712,
+          -87.4787,
+          328.19
+        ]
+      },
+      "sourceBytes": 123463,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/thigh/FJ1444M.obj",
+      "sourceFileId": "FJ1444M",
+      "sourceSha256": "2794a3899545d9b66f61fb9de3459132b577939c63b527fae101d497e28b154e",
+      "topologySha256": "fa13f77d1ce9f379b22f0a1c23a62e02517de6a984112247e9133d41168b0f26",
+      "triangleCount": 1728,
+      "vertexCount": 1215
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          -0.09830909967422485,
+          -0.05836160108447075,
+          0.17895199358463287
+        ],
+        "min": [
+          -0.14013299345970154,
+          -0.06557679921388626,
+          0.14792899787425995
+        ]
+      },
+      "externalConceptId": "FMA46020",
+      "geometrySha256": "6ac3171f4025f34fe846a085b86fb67af6af8dd5b108003725fbb464cae1b056",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1445",
+      "meshIndex": 8,
+      "modelId": "HA-MODEL-BP3D4-T102-LOWER-LIMB-SOURCE",
+      "nodeIndex": 8,
+      "normalCount": 1115,
+      "normalSha256": "2022d3c28f412903d61ea54d56f8996a89b00dd82e15cd1b704ff66bab8be316",
+      "representationId": "BP5580",
+      "sourceBoundsMm": {
+        "max": [
+          -98.3091,
+          -147.929,
+          -58.3616
+        ],
+        "min": [
+          -140.133,
+          -178.952,
+          -65.5768
+        ]
+      },
+      "sourceBytes": 92285,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/foot/FJ1445.obj",
+      "sourceFileId": "FJ1445",
+      "sourceSha256": "b62f353790db0c2b504f502e6fadd1be4f951290dc76bd39a8019fe202ef36c9",
+      "topologySha256": "1e5a298a7acba45a9823ac5e38a345ac7e17ccff59916620518cb4596a8d1cc1",
+      "triangleCount": 818,
+      "vertexCount": 1115
+    },
+    {
+      "atlasBoundsM": {
+        "max": [
+          0.14013299345970154,
+          -0.05836160108447075,
+          0.17895199358463287
+        ],
+        "min": [
+          0.09830909967422485,
+          -0.06557679921388626,
+          0.14792899787425995
+        ]
+      },
+      "externalConceptId": "FMA46021",
+      "geometrySha256": "342651e74547345ba3709d020113a156b3141cddceff05cdbf0a3134031e8f73",
+      "indexComponentType": 5123,
+      "meshAssetId": "HA-MESH-BP3D4-FJ1445M",
+      "meshIndex": 9,
+      "modelId": "HA-MODEL-BP3D4-T102-LOWER-LIMB-SOURCE",
+      "nodeIndex": 9,
+      "normalCount": 1115,
+      "normalSha256": "fcc5dc7d8968aa13e04a5a20817d67185aa56905494de24da6f7247c4b918c07",
+      "representationId": "BP8394",
+      "sourceBoundsMm": {
+        "max": [
+          140.133,
+          -147.929,
+          -58.3616
+        ],
+        "min": [
+          98.3091,
+          -178.952,
+          -65.5768
+        ]
+      },
+      "sourceBytes": 90875,
+      "sourceFile": "atlas-data/source-cache/bodyparts3d-r4/mesh/t102/foot/FJ1445M.obj",
+      "sourceFileId": "FJ1445M",
+      "sourceSha256": "35d51d3af78f7bbb4bf1bf10292f66a3c82485d66c0cdab1a38d3b0bb329b8c2",
+      "topologySha256": "f9bd8c330310223aded6f5ccfa68cf1c0d709796ad51e983648baae8fbeddc70",
+      "triangleCount": 818,
+      "vertexCount": 1115
+    }
+  ],
+  "revision": "BodyParts3D-R4-T102-SOURCE-MANIFEST-v1",
+  "rights": {
+    "humanAnatomyReview": "not_performed",
+    "localDisplay": "allowed only for this exact technical subset after item-level identity/transform/scene/browser validation",
+    "publicRedistribution": "held; each raw header retains legacy CC BY-SA 2.1 Japan wording and current terms are not reconciled here"
+  },
+  "sceneContract": {
+    "cameraOwner": "existing AnatomySceneController",
+    "extensionMode": "append the T102 source-only chunk to the existing T77+T95+T79+T101 scene revision",
+    "oneAnatomySceneRoot": true,
+    "oneRenderer": true,
+    "pose": "bodyparts3d-r4-static-reference",
+    "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+    "projectUnit": "m",
+    "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+    "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+  },
+  "source": {
+    "archiveBytes": 142903898,
+    "archiveEtag": "\"8848a5a-4dd48ec9df000\"",
+    "archiveUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_BP3D_4.0_obj_99.zip",
+    "fullArchiveDownloaded": false,
+    "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+    "tree": "IS-A",
+    "version": "BodyParts3D Release 4.0"
+  },
+  "sourceAssets": [
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA10474",
+          "zone of muscle organ",
+          "FJ1441"
+        ],
+        [
+          "FMA22429",
+          "zone of quadriceps femoris",
+          "FJ1441"
+        ],
+        [
+          "FMA22433",
+          "vastus intermedius",
+          "FJ1441"
+        ],
+        [
+          "FMA38934",
+          "right vastus intermedius",
+          "FJ1441"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1441"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1441"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1441"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1441"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1441"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1441"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1441"
+        ]
+      ],
+      "archiveMemberCrc32": "8e024bcf",
+      "genericAndSideRowsShareOneFjNode": true,
+      "geometry": {
+        "headerActualBoundsMaxDeltaMm": 0.11889999999999645,
+        "headerMinusActualBoundsMm": [
+          -0.11889999999999645,
+          -0.09299999999998931,
+          -0.00010000000003174137,
+          0.0,
+          0.0,
+          -0.00020000000006348273
+        ],
+        "projectBoundsM": [
+          [
+            -0.133095,
+            0.34248500000000004,
+            0.0762608
+          ],
+          [
+            -0.0762071,
+            0.7697440000000001,
+            0.135139
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "sideFromExactOfficialName": "right"
+        },
+        "sourceActualVertexBoundsMm": [
+          -133.095,
+          -135.139,
+          342.485,
+          -76.2071,
+          -76.2608,
+          769.744
+        ],
+        "sourceHeaderBoundsMm": [
+          -133.2139,
+          -135.232,
+          342.4849,
+          -76.2071,
+          -76.2608,
+          769.7438
+        ],
+        "sourceNormalCount": 2748,
+        "sourceTriangleCount": 4260,
+        "sourceVertexCount": 2748
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA38934",
+        "BP5604",
+        "right vastus intermedius"
+      ],
+      "officialExactSidePartElementRow": [
+        "FMA38934",
+        "right vastus intermedius",
+        "FJ1441"
+      ],
+      "officialPartParentRelationRow": [
+        "FMA22433",
+        "vastus intermedius",
+        "FMA38934",
+        "right vastus intermedius"
+      ],
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1441.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 305079,
+      "sourceConceptEnglishName": "right vastus intermedius",
+      "sourceConceptId": "FMA38934",
+      "sourceCrc32": "8e024bcf",
+      "sourceElementFileId": "FJ1441",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          -133.2139,
+          -135.232,
+          342.4849,
+          -76.2071,
+          -76.2608,
+          769.7438
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA38934",
+        "englishNameExact": "Right vastus intermedius",
+        "fileId": "FJ1441",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP5604"
+      },
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP5604",
+      "sourceSha256": "c609da3e64f0fc6c295b66b575503e61cacc8bfd9a5e5ec9b79e4eb476da5bab",
+      "sourceSide": "right",
+      "sourceSideEvidence": "Exact BodyParts3D R4 IS-A concept/name FMA38934 'right vastus intermedius' and exact FJ element row; not inferred from suffix or coordinates.",
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    },
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA10474",
+          "zone of muscle organ",
+          "FJ1441M"
+        ],
+        [
+          "FMA22429",
+          "zone of quadriceps femoris",
+          "FJ1441M"
+        ],
+        [
+          "FMA22433",
+          "vastus intermedius",
+          "FJ1441M"
+        ],
+        [
+          "FMA38935",
+          "left vastus intermedius",
+          "FJ1441M"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1441M"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1441M"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1441M"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1441M"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1441M"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1441M"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1441M"
+        ]
+      ],
+      "archiveMemberCrc32": "54c7617a",
+      "genericAndSideRowsShareOneFjNode": true,
+      "geometry": {
+        "headerActualBoundsMaxDeltaMm": 0.0,
+        "headerMinusActualBoundsMm": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "projectBoundsM": [
+          [
+            0.0762071,
+            0.34248500000000004,
+            0.0762608
+          ],
+          [
+            0.13309600000000002,
+            0.7697440000000001,
+            0.135139
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "sideFromExactOfficialName": "left"
+        },
+        "sourceActualVertexBoundsMm": [
+          76.2071,
+          -135.139,
+          342.485,
+          133.096,
+          -76.2608,
+          769.744
+        ],
+        "sourceHeaderBoundsMm": [
+          76.2071,
+          -135.139,
+          342.485,
+          133.096,
+          -76.2608,
+          769.744
+        ],
+        "sourceNormalCount": 2744,
+        "sourceTriangleCount": 4260,
+        "sourceVertexCount": 2744
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA38935",
+        "BP9207",
+        "left vastus intermedius"
+      ],
+      "officialExactSidePartElementRow": [
+        "FMA38935",
+        "left vastus intermedius",
+        "FJ1441M"
+      ],
+      "officialPartParentRelationRow": [
+        "FMA22433",
+        "vastus intermedius",
+        "FMA38935",
+        "left vastus intermedius"
+      ],
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1441M.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 302163,
+      "sourceConceptEnglishName": "left vastus intermedius",
+      "sourceConceptId": "FMA38935",
+      "sourceCrc32": "54c7617a",
+      "sourceElementFileId": "FJ1441M",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          76.2071,
+          -135.139,
+          342.485,
+          133.096,
+          -76.2608,
+          769.744
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA38935",
+        "englishNameExact": "Left vastus intermedius",
+        "fileId": "FJ1441M",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP9207"
+      },
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP9207",
+      "sourceSha256": "5245d285eb09ba0364a1b4ad8a21a6621183310c544c412bb39542e1517815db",
+      "sourceSide": "left",
+      "sourceSideEvidence": "Exact BodyParts3D R4 IS-A concept/name FMA38935 'left vastus intermedius' and exact FJ element row; not inferred from suffix or coordinates.",
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    },
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA10474",
+          "zone of muscle organ",
+          "FJ1442"
+        ],
+        [
+          "FMA22429",
+          "zone of quadriceps femoris",
+          "FJ1442"
+        ],
+        [
+          "FMA22431",
+          "vastus lateralis",
+          "FJ1442"
+        ],
+        [
+          "FMA38930",
+          "right vastus lateralis",
+          "FJ1442"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1442"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1442"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1442"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1442"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1442"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1442"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1442"
+        ]
+      ],
+      "archiveMemberCrc32": "1d2236a4",
+      "genericAndSideRowsShareOneFjNode": true,
+      "geometry": {
+        "headerActualBoundsMaxDeltaMm": 0.14470000000000027,
+        "headerMinusActualBoundsMm": [
+          -0.14470000000000027,
+          -0.0004000000000132786,
+          0.0,
+          0.0,
+          0.136099999999999,
+          9.999999997489795e-05
+        ],
+        "projectBoundsM": [
+          [
+            -0.159632,
+            0.31793200000000005,
+            0.057503200000000004
+          ],
+          [
+            -0.0840565,
+            0.7881670000000001,
+            0.13705099999999998
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "sideFromExactOfficialName": "right"
+        },
+        "sourceActualVertexBoundsMm": [
+          -159.632,
+          -137.051,
+          317.932,
+          -84.0565,
+          -57.5032,
+          788.167
+        ],
+        "sourceHeaderBoundsMm": [
+          -159.7767,
+          -137.0514,
+          317.932,
+          -84.0565,
+          -57.3671,
+          788.1671
+        ],
+        "sourceNormalCount": 3975,
+        "sourceTriangleCount": 6688,
+        "sourceVertexCount": 3975
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA38930",
+        "BP5602",
+        "right vastus lateralis"
+      ],
+      "officialExactSidePartElementRow": [
+        "FMA38930",
+        "right vastus lateralis",
+        "FJ1442"
+      ],
+      "officialPartParentRelationRow": [
+        "FMA22431",
+        "vastus lateralis",
+        "FMA38930",
+        "right vastus lateralis"
+      ],
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1442.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 464679,
+      "sourceConceptEnglishName": "right vastus lateralis",
+      "sourceConceptId": "FMA38930",
+      "sourceCrc32": "1d2236a4",
+      "sourceElementFileId": "FJ1442",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          -159.7767,
+          -137.0514,
+          317.932,
+          -84.0565,
+          -57.3671,
+          788.1671
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA38930",
+        "englishNameExact": "Right vastus lateralis",
+        "fileId": "FJ1442",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP5602"
+      },
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP5602",
+      "sourceSha256": "f67be78d7d0ddc6e78c0683ce4bd5be7492e4137f8661bc54039cbf535a88880",
+      "sourceSide": "right",
+      "sourceSideEvidence": "Exact BodyParts3D R4 IS-A concept/name FMA38930 'right vastus lateralis' and exact FJ element row; not inferred from suffix or coordinates.",
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    },
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA10474",
+          "zone of muscle organ",
+          "FJ1442M"
+        ],
+        [
+          "FMA22429",
+          "zone of quadriceps femoris",
+          "FJ1442M"
+        ],
+        [
+          "FMA22431",
+          "vastus lateralis",
+          "FJ1442M"
+        ],
+        [
+          "FMA38931",
+          "left vastus lateralis",
+          "FJ1442M"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1442M"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1442M"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1442M"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1442M"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1442M"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1442M"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1442M"
+        ]
+      ],
+      "archiveMemberCrc32": "4c021fed",
+      "genericAndSideRowsShareOneFjNode": true,
+      "geometry": {
+        "headerActualBoundsMaxDeltaMm": 0.0,
+        "headerMinusActualBoundsMm": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "projectBoundsM": [
+          [
+            0.0840565,
+            0.31793200000000005,
+            0.057503200000000004
+          ],
+          [
+            0.15963300000000002,
+            0.7881670000000001,
+            0.13705099999999998
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "sideFromExactOfficialName": "left"
+        },
+        "sourceActualVertexBoundsMm": [
+          84.0565,
+          -137.051,
+          317.932,
+          159.633,
+          -57.5032,
+          788.167
+        ],
+        "sourceHeaderBoundsMm": [
+          84.0565,
+          -137.051,
+          317.932,
+          159.633,
+          -57.5032,
+          788.167
+        ],
+        "sourceNormalCount": 3974,
+        "sourceTriangleCount": 6688,
+        "sourceVertexCount": 3974
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA38931",
+        "BP8754",
+        "left vastus lateralis"
+      ],
+      "officialExactSidePartElementRow": [
+        "FMA38931",
+        "left vastus lateralis",
+        "FJ1442M"
+      ],
+      "officialPartParentRelationRow": [
+        "FMA22431",
+        "vastus lateralis",
+        "FMA38931",
+        "left vastus lateralis"
+      ],
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1442M.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 460942,
+      "sourceConceptEnglishName": "left vastus lateralis",
+      "sourceConceptId": "FMA38931",
+      "sourceCrc32": "4c021fed",
+      "sourceElementFileId": "FJ1442M",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          84.0565,
+          -137.051,
+          317.932,
+          159.633,
+          -57.5032,
+          788.167
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA38931",
+        "englishNameExact": "Left vastus lateralis",
+        "fileId": "FJ1442M",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP8754"
+      },
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8754",
+      "sourceSha256": "507caa464730c508c2fd2f6958f9a5660fb6ca188bc38fafb5c9b5556ac6732b",
+      "sourceSide": "left",
+      "sourceSideEvidence": "Exact BodyParts3D R4 IS-A concept/name FMA38931 'left vastus lateralis' and exact FJ element row; not inferred from suffix or coordinates.",
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    },
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA10474",
+          "zone of muscle organ",
+          "FJ1443"
+        ],
+        [
+          "FMA22429",
+          "zone of quadriceps femoris",
+          "FJ1443"
+        ],
+        [
+          "FMA22432",
+          "vastus medialis",
+          "FJ1443"
+        ],
+        [
+          "FMA38932",
+          "right vastus medialis",
+          "FJ1443"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1443"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1443"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1443"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1443"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1443"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1443"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1443"
+        ]
+      ],
+      "archiveMemberCrc32": "c4e375dc",
+      "genericAndSideRowsShareOneFjNode": true,
+      "geometry": {
+        "headerActualBoundsMaxDeltaMm": 0.11220000000000141,
+        "headerMinusActualBoundsMm": [
+          -0.0002000000000066393,
+          -0.07579999999998677,
+          -0.00029999999998153726,
+          0.11220000000000141,
+          0.0,
+          9.999999997489795e-05
+        ],
+        "projectBoundsM": [
+          [
+            -0.105601,
+            0.340548,
+            0.089132
+          ],
+          [
+            -0.034939200000000004,
+            0.738179,
+            0.146901
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "sideFromExactOfficialName": "right"
+        },
+        "sourceActualVertexBoundsMm": [
+          -105.601,
+          -146.901,
+          340.548,
+          -34.9392,
+          -89.132,
+          738.179
+        ],
+        "sourceHeaderBoundsMm": [
+          -105.6012,
+          -146.9768,
+          340.5477,
+          -34.827,
+          -89.132,
+          738.1791
+        ],
+        "sourceNormalCount": 2773,
+        "sourceTriangleCount": 4552,
+        "sourceVertexCount": 2773
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA38932",
+        "BP5600",
+        "right vastus medialis"
+      ],
+      "officialExactSidePartElementRow": [
+        "FMA38932",
+        "right vastus medialis",
+        "FJ1443"
+      ],
+      "officialPartParentRelationRow": [
+        "FMA22432",
+        "vastus medialis",
+        "FMA38932",
+        "right vastus medialis"
+      ],
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1443.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 317804,
+      "sourceConceptEnglishName": "right vastus medialis",
+      "sourceConceptId": "FMA38932",
+      "sourceCrc32": "c4e375dc",
+      "sourceElementFileId": "FJ1443",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          -105.6012,
+          -146.9768,
+          340.5477,
+          -34.827,
+          -89.132,
+          738.1791
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA38932",
+        "englishNameExact": "Right vastus medialis",
+        "fileId": "FJ1443",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP5600"
+      },
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP5600",
+      "sourceSha256": "5bdb79f52849241e20ff2280332f20efd38f1b4bda1fb1337e10a5c3e466002b",
+      "sourceSide": "right",
+      "sourceSideEvidence": "Exact BodyParts3D R4 IS-A concept/name FMA38932 'right vastus medialis' and exact FJ element row; not inferred from suffix or coordinates.",
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    },
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA10474",
+          "zone of muscle organ",
+          "FJ1443M"
+        ],
+        [
+          "FMA22429",
+          "zone of quadriceps femoris",
+          "FJ1443M"
+        ],
+        [
+          "FMA22432",
+          "vastus medialis",
+          "FJ1443M"
+        ],
+        [
+          "FMA38933",
+          "left vastus medialis",
+          "FJ1443M"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1443M"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1443M"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1443M"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1443M"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1443M"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1443M"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1443M"
+        ]
+      ],
+      "archiveMemberCrc32": "c50c7990",
+      "genericAndSideRowsShareOneFjNode": true,
+      "geometry": {
+        "headerActualBoundsMaxDeltaMm": 0.0,
+        "headerMinusActualBoundsMm": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "projectBoundsM": [
+          [
+            0.034939300000000006,
+            0.340548,
+            0.089132
+          ],
+          [
+            0.105601,
+            0.738179,
+            0.146901
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "sideFromExactOfficialName": "left"
+        },
+        "sourceActualVertexBoundsMm": [
+          34.9393,
+          -146.901,
+          340.548,
+          105.601,
+          -89.132,
+          738.179
+        ],
+        "sourceHeaderBoundsMm": [
+          34.9393,
+          -146.901,
+          340.548,
+          105.601,
+          -89.132,
+          738.179
+        ],
+        "sourceNormalCount": 2772,
+        "sourceTriangleCount": 4552,
+        "sourceVertexCount": 2772
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA38933",
+        "BP9128",
+        "left vastus medialis"
+      ],
+      "officialExactSidePartElementRow": [
+        "FMA38933",
+        "left vastus medialis",
+        "FJ1443M"
+      ],
+      "officialPartParentRelationRow": [
+        "FMA22432",
+        "vastus medialis",
+        "FMA38933",
+        "left vastus medialis"
+      ],
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1443M.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 315070,
+      "sourceConceptEnglishName": "left vastus medialis",
+      "sourceConceptId": "FMA38933",
+      "sourceCrc32": "c50c7990",
+      "sourceElementFileId": "FJ1443M",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          34.9393,
+          -146.901,
+          340.548,
+          105.601,
+          -89.132,
+          738.179
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA38933",
+        "englishNameExact": "Left vastus medialis",
+        "fileId": "FJ1443M",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP9128"
+      },
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP9128",
+      "sourceSha256": "8ca4d66734150402401722e8a82f52ada8af9d6973592e127431b742dfe46ad4",
+      "sourceSide": "left",
+      "sourceSideEvidence": "Exact BodyParts3D R4 IS-A concept/name FMA38933 'left vastus medialis' and exact FJ element row; not inferred from suffix or coordinates.",
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    },
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA45729",
+          "head of organ",
+          "FJ1444"
+        ],
+        [
+          "FMA45881",
+          "head of biceps femoris",
+          "FJ1444"
+        ],
+        [
+          "FMA45890",
+          "short head of biceps femoris",
+          "FJ1444"
+        ],
+        [
+          "FMA45891",
+          "short head of right biceps femoris",
+          "FJ1444"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1444"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1444"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1444"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1444"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1444"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1444"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1444"
+        ],
+        [
+          "FMA85453",
+          "head of muscle organ",
+          "FJ1444"
+        ]
+      ],
+      "archiveMemberCrc32": "e3ce7913",
+      "genericAndSideRowsShareOneFjNode": true,
+      "geometry": {
+        "headerActualBoundsMaxDeltaMm": 0.16929999999999268,
+        "headerMinusActualBoundsMm": [
+          -0.16929999999999268,
+          -0.047100000000000364,
+          -0.0004000000000132786,
+          0.0,
+          0.059799999999995634,
+          -0.0003000000000383807
+        ],
+        "projectBoundsM": [
+          [
+            -0.11740900000000001,
+            0.32819,
+            0.0508818
+          ],
+          [
+            -0.0806712,
+            0.64662,
+            0.0874787
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "sideFromExactOfficialName": "right"
+        },
+        "sourceActualVertexBoundsMm": [
+          -117.409,
+          -87.4787,
+          328.19,
+          -80.6712,
+          -50.8818,
+          646.62
+        ],
+        "sourceHeaderBoundsMm": [
+          -117.5783,
+          -87.5258,
+          328.1896,
+          -80.6712,
+          -50.822,
+          646.6197
+        ],
+        "sourceNormalCount": 1211,
+        "sourceTriangleCount": 1728,
+        "sourceVertexCount": 1211
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA45891",
+        "BP5573",
+        "short head of right biceps femoris"
+      ],
+      "officialExactSidePartElementRow": [
+        "FMA45891",
+        "short head of right biceps femoris",
+        "FJ1444"
+      ],
+      "officialPartParentRelationRow": [
+        "FMA45890",
+        "short head of biceps femoris",
+        "FMA45891",
+        "short head of right biceps femoris"
+      ],
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1444.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 124350,
+      "sourceConceptEnglishName": "short head of right biceps femoris",
+      "sourceConceptId": "FMA45891",
+      "sourceCrc32": "e3ce7913",
+      "sourceElementFileId": "FJ1444",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          -117.5783,
+          -87.5258,
+          328.1896,
+          -80.6712,
+          -50.822,
+          646.6197
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA45891",
+        "englishNameExact": "Short head of right biceps femoris",
+        "fileId": "FJ1444",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP5573"
+      },
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP5573",
+      "sourceSha256": "c071097501796cee5ff2a011b3d84c7bea4cb153241fce0f8b0a73d070bd990f",
+      "sourceSide": "right",
+      "sourceSideEvidence": "Exact BodyParts3D R4 IS-A concept/name FMA45891 'short head of right biceps femoris' and exact FJ element row; not inferred from suffix or coordinates.",
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    },
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA45729",
+          "head of organ",
+          "FJ1444M"
+        ],
+        [
+          "FMA45881",
+          "head of biceps femoris",
+          "FJ1444M"
+        ],
+        [
+          "FMA45890",
+          "short head of biceps femoris",
+          "FJ1444M"
+        ],
+        [
+          "FMA45892",
+          "short head of left biceps femoris",
+          "FJ1444M"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1444M"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1444M"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1444M"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1444M"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1444M"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1444M"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1444M"
+        ],
+        [
+          "FMA85453",
+          "head of muscle organ",
+          "FJ1444M"
+        ]
+      ],
+      "archiveMemberCrc32": "8ba350d6",
+      "genericAndSideRowsShareOneFjNode": true,
+      "geometry": {
+        "headerActualBoundsMaxDeltaMm": 0.0,
+        "headerMinusActualBoundsMm": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "projectBoundsM": [
+          [
+            0.0806712,
+            0.32819,
+            0.0508818
+          ],
+          [
+            0.11740900000000001,
+            0.64662,
+            0.0874787
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "sideFromExactOfficialName": "left"
+        },
+        "sourceActualVertexBoundsMm": [
+          80.6712,
+          -87.4787,
+          328.19,
+          117.409,
+          -50.8818,
+          646.62
+        ],
+        "sourceHeaderBoundsMm": [
+          80.6712,
+          -87.4787,
+          328.19,
+          117.409,
+          -50.8818,
+          646.62
+        ],
+        "sourceNormalCount": 1215,
+        "sourceTriangleCount": 1728,
+        "sourceVertexCount": 1215
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA45892",
+        "BP8616",
+        "short head of left biceps femoris"
+      ],
+      "officialExactSidePartElementRow": [
+        "FMA45892",
+        "short head of left biceps femoris",
+        "FJ1444M"
+      ],
+      "officialPartParentRelationRow": [
+        "FMA45890",
+        "short head of biceps femoris",
+        "FMA45892",
+        "short head of left biceps femoris"
+      ],
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1444M.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 123463,
+      "sourceConceptEnglishName": "short head of left biceps femoris",
+      "sourceConceptId": "FMA45892",
+      "sourceCrc32": "8ba350d6",
+      "sourceElementFileId": "FJ1444M",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          80.6712,
+          -87.4787,
+          328.19,
+          117.409,
+          -50.8818,
+          646.62
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA45892",
+        "englishNameExact": "Short head of left biceps femoris",
+        "fileId": "FJ1444M",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP8616"
+      },
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8616",
+      "sourceSha256": "2794a3899545d9b66f61fb9de3459132b577939c63b527fae101d497e28b154e",
+      "sourceSide": "left",
+      "sourceSideEvidence": "Exact BodyParts3D R4 IS-A concept/name FMA45892 'short head of left biceps femoris' and exact FJ element row; not inferred from suffix or coordinates.",
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    },
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA45729",
+          "head of organ",
+          "FJ1445"
+        ],
+        [
+          "FMA46012",
+          "head of adductor hallucis",
+          "FJ1445"
+        ],
+        [
+          "FMA46015",
+          "transverse head of adductor hallucis",
+          "FJ1445"
+        ],
+        [
+          "FMA46020",
+          "transverse head of right adductor hallucis",
+          "FJ1445"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1445"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1445"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1445"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1445"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1445"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1445"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1445"
+        ],
+        [
+          "FMA85453",
+          "head of muscle organ",
+          "FJ1445"
+        ]
+      ],
+      "archiveMemberCrc32": "8ff1c805",
+      "genericAndSideRowsShareOneFjNode": true,
+      "geometry": {
+        "headerActualBoundsMaxDeltaMm": 0.08450000000000557,
+        "headerMinusActualBoundsMm": [
+          0.0004000000000132786,
+          0.0,
+          0.0,
+          0.08450000000000557,
+          0.021600000000006503,
+          0.0
+        ],
+        "projectBoundsM": [
+          [
+            -0.140133,
+            -0.0655768,
+            0.147929
+          ],
+          [
+            -0.0983091,
+            -0.058361600000000007,
+            0.178952
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "sideFromExactOfficialName": "right"
+        },
+        "sourceActualVertexBoundsMm": [
+          -140.133,
+          -178.952,
+          -65.5768,
+          -98.3091,
+          -147.929,
+          -58.3616
+        ],
+        "sourceHeaderBoundsMm": [
+          -140.1326,
+          -178.952,
+          -65.5768,
+          -98.2246,
+          -147.9074,
+          -58.3616
+        ],
+        "sourceNormalCount": 1115,
+        "sourceTriangleCount": 818,
+        "sourceVertexCount": 1115
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA46020",
+        "BP5580",
+        "transverse head of right adductor hallucis"
+      ],
+      "officialExactSidePartElementRow": [
+        "FMA46020",
+        "transverse head of right adductor hallucis",
+        "FJ1445"
+      ],
+      "officialPartParentRelationRow": [
+        "FMA46015",
+        "transverse head of adductor hallucis",
+        "FMA46020",
+        "transverse head of right adductor hallucis"
+      ],
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1445.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 92285,
+      "sourceConceptEnglishName": "transverse head of right adductor hallucis",
+      "sourceConceptId": "FMA46020",
+      "sourceCrc32": "8ff1c805",
+      "sourceElementFileId": "FJ1445",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          -140.1326,
+          -178.952,
+          -65.5768,
+          -98.2246,
+          -147.9074,
+          -58.3616
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA46020",
+        "englishNameExact": "Transverse head of right adductor hallucis",
+        "fileId": "FJ1445",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP5580"
+      },
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP5580",
+      "sourceSha256": "b62f353790db0c2b504f502e6fadd1be4f951290dc76bd39a8019fe202ef36c9",
+      "sourceSide": "right",
+      "sourceSideEvidence": "Exact BodyParts3D R4 IS-A concept/name FMA46020 'transverse head of right adductor hallucis' and exact FJ element row; not inferred from suffix or coordinates.",
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    },
+    {
+      "allOfficialSemanticRowsForSameFj": [
+        [
+          "FMA45729",
+          "head of organ",
+          "FJ1445M"
+        ],
+        [
+          "FMA46012",
+          "head of adductor hallucis",
+          "FJ1445M"
+        ],
+        [
+          "FMA46015",
+          "transverse head of adductor hallucis",
+          "FJ1445M"
+        ],
+        [
+          "FMA46021",
+          "transverse head of left adductor hallucis",
+          "FJ1445M"
+        ],
+        [
+          "FMA55268",
+          "organ zone",
+          "FJ1445M"
+        ],
+        [
+          "FMA61775",
+          "physical anatomical entity",
+          "FJ1445M"
+        ],
+        [
+          "FMA62955",
+          "anatomical entity",
+          "FJ1445M"
+        ],
+        [
+          "FMA67135",
+          "anatomical structure",
+          "FJ1445M"
+        ],
+        [
+          "FMA67165",
+          "material anatomical entity",
+          "FJ1445M"
+        ],
+        [
+          "FMA67619",
+          "organ region",
+          "FJ1445M"
+        ],
+        [
+          "FMA82472",
+          "cardinal organ part",
+          "FJ1445M"
+        ],
+        [
+          "FMA85453",
+          "head of muscle organ",
+          "FJ1445M"
+        ]
+      ],
+      "archiveMemberCrc32": "3cbd9ca9",
+      "genericAndSideRowsShareOneFjNode": true,
+      "geometry": {
+        "headerActualBoundsMaxDeltaMm": 0.0,
+        "headerMinusActualBoundsMm": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "projectBoundsM": [
+          [
+            0.0983091,
+            -0.0655768,
+            0.147929
+          ],
+          [
+            0.140133,
+            -0.058361600000000007,
+            0.178952
+          ]
+        ],
+        "sideXAxisSanityCheckOnly": {
+          "consistent": true,
+          "sideFromExactOfficialName": "left"
+        },
+        "sourceActualVertexBoundsMm": [
+          98.3091,
+          -178.952,
+          -65.5768,
+          140.133,
+          -147.929,
+          -58.3616
+        ],
+        "sourceHeaderBoundsMm": [
+          98.3091,
+          -178.952,
+          -65.5768,
+          140.133,
+          -147.929,
+          -58.3616
+        ],
+        "sourceNormalCount": 1115,
+        "sourceTriangleCount": 818,
+        "sourceVertexCount": 1115
+      },
+      "humanAnatomyReviewed": false,
+      "officialConceptRow": [
+        "FMA46021",
+        "BP8394",
+        "transverse head of left adductor hallucis"
+      ],
+      "officialExactSidePartElementRow": [
+        "FMA46021",
+        "transverse head of left adductor hallucis",
+        "FJ1445M"
+      ],
+      "officialPartParentRelationRow": [
+        "FMA46015",
+        "transverse head of adductor hallucis",
+        "FMA46021",
+        "transverse head of left adductor hallucis"
+      ],
+      "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+      "projectUnit": "m",
+      "publicRedistribution": "held",
+      "sourceArchiveMemberPath": "isa_BP3D_4.0_obj_99/FJ1445M.obj",
+      "sourceArchiveTree": "IS-A",
+      "sourceBytes": 90875,
+      "sourceConceptEnglishName": "transverse head of left adductor hallucis",
+      "sourceConceptId": "FMA46021",
+      "sourceCrc32": "3cbd9ca9",
+      "sourceElementFileId": "FJ1445M",
+      "sourceHeader": {
+        "boundsHeaderMm": [
+          98.3091,
+          -178.952,
+          -65.5768,
+          140.133,
+          -147.929,
+          -58.3616
+        ],
+        "boundsHeaderUnit": "mm",
+        "buildUpLogic": "FMA 3.0 is_a",
+        "conceptId": "FMA46021",
+        "englishNameExact": "Transverse head of left adductor hallucis",
+        "fileId": "FJ1445M",
+        "legacyLicenseHeaderExact": "The license for this database is specified in the Creative Commons Attribution-Share Alike 2.1 Japan. If you use data from this database, please be sure attribute this database as follows: \"BodyParts3D, (c)  The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan\".",
+        "representationId": "BP8394"
+      },
+      "sourcePose": "bodyparts3d-r4-static-reference",
+      "sourceRepresentationId": "BP8394",
+      "sourceSha256": "35d51d3af78f7bbb4bf1bf10292f66a3c82485d66c0cdab1a38d3b0bb329b8c2",
+      "sourceSide": "left",
+      "sourceSideEvidence": "Exact BodyParts3D R4 IS-A concept/name FMA46021 'transverse head of left adductor hallucis' and exact FJ element row; not inferred from suffix or coordinates.",
+      "sourceUnit": "mm_from_exact_OBJ_Bounds_header",
+      "transform": "[x,y,z] source mm -> [x,z,-y] HUMAN ATLAS m; preserve x sign; no mirror/recenter"
+    }
+  ],
+  "sourceOnlyPolicy": {
+    "canonicalLearnerBinding": "none",
+    "humanReviewed": false,
+    "learnerPickable": false,
+    "threeNameOverlay": "deferred to the later target batch; no canonical ID/name created"
+  },
+  "task": "T102",
+  "wholeMusclePartRepresentation": {
+    "candidateFjs": [
+      "FJ1395",
+      "FJ1395M",
+      "FJ1398",
+      "FJ1398M",
+      "FJ1441",
+      "FJ1441M",
+      "FJ1442",
+      "FJ1442M",
+      "FJ1443",
+      "FJ1443M",
+      "FJ1444",
+      "FJ1444M",
+      "FJ1445",
+      "FJ1445M"
+    ],
+    "candidateFjsAlreadyInParentScene": [
+      "FJ1395",
+      "FJ1395M",
+      "FJ1398",
+      "FJ1398M"
+    ],
+    "exactConceptAndAncestorCandidates": [
+      {
+        "englishName": "vastus lateralis",
+        "fjs": [
+          "FJ1442",
+          "FJ1442M"
+        ],
+        "fma": "FMA22431"
+      },
+      {
+        "englishName": "vastus medialis",
+        "fjs": [
+          "FJ1443",
+          "FJ1443M"
+        ],
+        "fma": "FMA22432"
+      },
+      {
+        "englishName": "vastus intermedius",
+        "fjs": [
+          "FJ1441",
+          "FJ1441M"
+        ],
+        "fma": "FMA22433"
+      },
+      {
+        "englishName": "head of biceps femoris",
+        "fjs": [
+          "FJ1395",
+          "FJ1395M",
+          "FJ1444",
+          "FJ1444M"
+        ],
+        "fma": "FMA45881"
+      },
+      {
+        "englishName": "short head of biceps femoris",
+        "fjs": [
+          "FJ1444",
+          "FJ1444M"
+        ],
+        "fma": "FMA45890"
+      },
+      {
+        "englishName": "head of adductor hallucis",
+        "fjs": [
+          "FJ1398",
+          "FJ1398M",
+          "FJ1445",
+          "FJ1445M"
+        ],
+        "fma": "FMA46012"
+      },
+      {
+        "englishName": "transverse head of adductor hallucis",
+        "fjs": [
+          "FJ1445",
+          "FJ1445M"
+        ],
+        "fma": "FMA46015"
+      }
+    ],
+    "familyGeometryComparison": "per-source OBJ bounds/vertex ranges and exact source side were checked. Parent matches are interpreted from official FMA/FJ semantic rows and active node IDs; no standalone whole-muscle aggregate FJ for the five target concepts was found in the active parent scene. T102 FJs are emitted once each; sibling parts remain separately identified and are not treated as aggregate meshes. AABB ranges are not used as surface-overlap proof.",
+    "productRepresentationPolicy": "The exact BodyParts3D FJ is the mesh identity: generic, side-specific, and enclosing IS-A semantic rows that reuse an FJ create one node only. Exact candidate/ancestor concepts and their member FJs are recorded; active parent-scene intersections are listed above. No ancestor-only concept is emitted as a second surface; no source bytes are modified.",
+    "sameFjSemanticRowsPolicy": "the FJ is the mesh identity; generic and side-specific IS-A semantic rows that reference one FJ map to one scene node, never one mesh per row",
+    "sourceGroupsByExactGenericPartFma": [
+      {
+        "broaderConceptRelations": [
+          {
+            "activeParentSceneMatches": [
+              "FJ1433",
+              "FJ1433M"
+            ],
+            "ancestorMemberFjs": [
+              "FJ1433",
+              "FJ1433M",
+              "FJ1441",
+              "FJ1441M",
+              "FJ1442",
+              "FJ1442M",
+              "FJ1443",
+              "FJ1443M"
+            ],
+            "officialRelationRow": [
+              "FMA22429",
+              "zone of quadriceps femoris",
+              "FMA22431",
+              "vastus lateralis"
+            ]
+          }
+        ],
+        "genericPartEnglishName": "vastus lateralis",
+        "genericPartFma": "FMA22431",
+        "officialMemberFjs": [
+          "FJ1442",
+          "FJ1442M"
+        ],
+        "sameOrSiblingPartFjsAlreadyInT77T79T101": [],
+        "t102SelectedFjs": [
+          "FJ1442",
+          "FJ1442M"
+        ]
+      },
+      {
+        "broaderConceptRelations": [
+          {
+            "activeParentSceneMatches": [
+              "FJ1433",
+              "FJ1433M"
+            ],
+            "ancestorMemberFjs": [
+              "FJ1433",
+              "FJ1433M",
+              "FJ1441",
+              "FJ1441M",
+              "FJ1442",
+              "FJ1442M",
+              "FJ1443",
+              "FJ1443M"
+            ],
+            "officialRelationRow": [
+              "FMA22429",
+              "zone of quadriceps femoris",
+              "FMA22432",
+              "vastus medialis"
+            ]
+          }
+        ],
+        "genericPartEnglishName": "vastus medialis",
+        "genericPartFma": "FMA22432",
+        "officialMemberFjs": [
+          "FJ1443",
+          "FJ1443M"
+        ],
+        "sameOrSiblingPartFjsAlreadyInT77T79T101": [],
+        "t102SelectedFjs": [
+          "FJ1443",
+          "FJ1443M"
+        ]
+      },
+      {
+        "broaderConceptRelations": [
+          {
+            "activeParentSceneMatches": [
+              "FJ1433",
+              "FJ1433M"
+            ],
+            "ancestorMemberFjs": [
+              "FJ1433",
+              "FJ1433M",
+              "FJ1441",
+              "FJ1441M",
+              "FJ1442",
+              "FJ1442M",
+              "FJ1443",
+              "FJ1443M"
+            ],
+            "officialRelationRow": [
+              "FMA22429",
+              "zone of quadriceps femoris",
+              "FMA22433",
+              "vastus intermedius"
+            ]
+          }
+        ],
+        "genericPartEnglishName": "vastus intermedius",
+        "genericPartFma": "FMA22433",
+        "officialMemberFjs": [
+          "FJ1441",
+          "FJ1441M"
+        ],
+        "sameOrSiblingPartFjsAlreadyInT77T79T101": [],
+        "t102SelectedFjs": [
+          "FJ1441",
+          "FJ1441M"
+        ]
+      },
+      {
+        "broaderConceptRelations": [
+          {
+            "activeParentSceneMatches": [
+              "FJ1395",
+              "FJ1395M"
+            ],
+            "ancestorMemberFjs": [
+              "FJ1395",
+              "FJ1395M",
+              "FJ1444",
+              "FJ1444M"
+            ],
+            "officialRelationRow": [
+              "FMA45881",
+              "head of biceps femoris",
+              "FMA45890",
+              "short head of biceps femoris"
+            ]
+          }
+        ],
+        "genericPartEnglishName": "short head of biceps femoris",
+        "genericPartFma": "FMA45890",
+        "officialMemberFjs": [
+          "FJ1444",
+          "FJ1444M"
+        ],
+        "sameOrSiblingPartFjsAlreadyInT77T79T101": [],
+        "t102SelectedFjs": [
+          "FJ1444",
+          "FJ1444M"
+        ]
+      },
+      {
+        "broaderConceptRelations": [
+          {
+            "activeParentSceneMatches": [
+              "FJ1398",
+              "FJ1398M"
+            ],
+            "ancestorMemberFjs": [
+              "FJ1398",
+              "FJ1398M",
+              "FJ1445",
+              "FJ1445M"
+            ],
+            "officialRelationRow": [
+              "FMA46012",
+              "head of adductor hallucis",
+              "FMA46015",
+              "transverse head of adductor hallucis"
+            ]
+          }
+        ],
+        "genericPartEnglishName": "transverse head of adductor hallucis",
+        "genericPartFma": "FMA46015",
+        "officialMemberFjs": [
+          "FJ1445",
+          "FJ1445M"
+        ],
+        "sameOrSiblingPartFjsAlreadyInT77T79T101": [],
+        "t102SelectedFjs": [
+          "FJ1445",
+          "FJ1445M"
+        ]
+      }
+    ]
+  }
+}

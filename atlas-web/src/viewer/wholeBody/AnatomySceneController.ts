@@ -21,6 +21,7 @@ export class AnatomySceneController {
   private dead = false;
   private dirty = true;
   private previous = 0;
+  private readonly frameIntervalsMs: number[] = [];
   private pointer = { x: 0, y: 0 };
   private lastReport = 0;
   private hoverId: string | null = null;
@@ -82,7 +83,12 @@ export class AnatomySceneController {
   addUpdate(update: (seconds: number) => void) { this.updates.add(update); return () => { this.updates.delete(update); this.dirty = true; }; }
   private frame = (time: number) => {
     if (this.dead || this.lost) return;
-    const dt = Math.min((time - this.previous) / 1000, 0.05); this.previous = time;
+    const intervalMs = this.previous ? time - this.previous : 0;
+    if (import.meta.env.DEV && intervalMs > 0) {
+      this.frameIntervalsMs.push(intervalMs);
+      if (this.frameIntervalsMs.length > 240) this.frameIntervalsMs.shift();
+    }
+    const dt = Math.min(intervalMs / 1000, 0.05); this.previous = time;
     for (const update of this.updates) update(dt);
     this.controls.update();
     if (this.hoverPoint) { const p = this.hoverPoint; this.hoverPoint = null; this.setHover(this.pick(p.x, p.y)?.nodeId ?? null); }
@@ -169,14 +175,38 @@ export class AnatomySceneController {
   private report() {
     if (this.dead) return;
     const wanted = [...this.queue.wanted];
-    if (import.meta.env.DEV) this.renderer.domElement.dataset.scene = JSON.stringify({
-      root: this.root.uuid, renderer: this.renderer.domElement.id, selectedId: this.view.selectedId,
-      camera: this.camera.position.toArray(), target: this.controls.target.toArray(),
-      loaded: [...this.queue.loaded.keys()], pending: [...this.queue.pending.keys()],
-      visible: [...this.root.children].flatMap(g => g.children.filter(o => o.visible).map(o => o.name)),
-      calls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles,
-      geometries: this.renderer.info.memory.geometries,
-    });
+    if (import.meta.env.DEV) {
+      const intervals = [...this.frameIntervalsMs].sort((a, b) => a - b);
+      const percentile = (fraction: number) => intervals.length
+        ? intervals[Math.min(intervals.length - 1, Math.ceil(fraction * (intervals.length - 1)))]
+        : null;
+      const geometries = new Set<THREE.BufferGeometry>();
+      const materials = new Set<THREE.Material>();
+      let visibleMeshes = 0;
+      let geometryBuffersBytes = 0;
+      this.root.traverse(object => {
+        if (!(object instanceof THREE.Mesh)) return;
+        if (object.visible) visibleMeshes += 1;
+        if (!geometries.has(object.geometry)) {
+          geometries.add(object.geometry);
+          for (const attribute of Object.values(object.geometry.attributes) as THREE.BufferAttribute[]) {
+            geometryBuffersBytes += attribute.array.byteLength;
+          }
+          if (object.geometry.index) geometryBuffersBytes += object.geometry.index.array.byteLength;
+        }
+        for (const material of Array.isArray(object.material) ? object.material : [object.material]) materials.add(material);
+      });
+      this.renderer.domElement.dataset.scene = JSON.stringify({
+        root: this.root.uuid, renderer: this.renderer.domElement.id, selectedId: this.view.selectedId,
+        camera: this.camera.position.toArray(), target: this.controls.target.toArray(),
+        loaded: [...this.queue.loaded.keys()], pending: [...this.queue.pending.keys()],
+        visible: [...this.root.children].flatMap(g => g.children.filter(o => o.visible).map(o => o.name)),
+        calls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles,
+        geometries: this.renderer.info.memory.geometries, visibleMeshes, materials: materials.size, geometryBuffersBytes,
+        frameSampleCount: intervals.length, frameIntervalP50Ms: percentile(0.5), frameIntervalP95Ms: percentile(0.95),
+        canvasWidth: this.size.width, canvasHeight: this.size.height, pixelRatio: this.renderer.getPixelRatio(),
+      });
+    }
     this.notify({ loaded: wanted.filter(id => this.queue.loaded.has(id)).length, total: wanted.length,
       failed: wanted.filter(id => this.queue.failed.has(id)).length, contextLost: this.lost,
       selectedAvailable: !this.view.selectedId || [...this.queue.loaded.values()].some(g => g.children.some(obj => obj.visible && this.assets.get(obj.name)?.stableIds.some(id => (this.view.selectedIds ?? [this.view.selectedId]).includes(id)))),

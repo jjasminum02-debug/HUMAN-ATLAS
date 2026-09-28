@@ -1,0 +1,187 @@
+{
+  "task": "T102",
+  "date": "2026-09-28",
+  "result": "pass",
+  "browser": {
+    "name": "Codex In-app Browser",
+    "browserId": "1",
+    "url": "http://127.0.0.1:5174/",
+    "title": "Human Atlas · 근육 학습",
+    "canvasCount": 1,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "defaultViewport": {
+      "innerWidth": 823,
+      "innerHeight": 759,
+      "devicePixelRatio": 2,
+      "canvasWidth": 823,
+      "canvasHeight": 499,
+      "rendererPixelRatio": 1.75
+    },
+    "temporaryViewportCheck": {
+      "width": 1280,
+      "height": 720,
+      "result": "scene remained interactive and one canvas/root/renderer persisted; override reset after check"
+    },
+    "screenshots": "Whole-body, thigh-close, and foot-close browser renders were visually inspected in-session; screenshot files were not exported.",
+    "postBuildSmoke": {
+      "freshLocalhostReload": true,
+      "regionRoute": "?region=thigh",
+      "thighTargetSurfacesVisuallyPresent": true,
+      "structureListRemainsUnbound": "0개 연결된 근육",
+      "combinedRegionTransition": "thigh + foot; expected 10 T102 nodes from the recorded runtime integration evidence",
+      "muscleLayerOff": "visible muscle surfaces removed while bilateral bone context remained visible",
+      "muscleLayerRestored": true,
+      "returnedToWholeBodyRoute": true,
+      "singleExistingCanvasAndScene": true,
+      "checksAfterFinalDeterministicBuild": true
+    }
+  },
+  "runtimeManifest": {
+    "responseStatus": 200,
+    "revision": "BodyParts3D-R4-T102-SAME-SCENE-EXTENSION-v1",
+    "t102Chunk": {
+      "id": "t102-lower-limb-muscle",
+      "bytes": 812256,
+      "sha256": "64c42361163c9e1f50f0a0b700436526f4253f2c84a8407e1cd2478448656759",
+      "ids": [
+        "FJ1441",
+        "FJ1441M",
+        "FJ1442",
+        "FJ1442M",
+        "FJ1443",
+        "FJ1443M",
+        "FJ1444",
+        "FJ1444M",
+        "FJ1445",
+        "FJ1445M"
+      ],
+      "sourceOnly": true,
+      "uniqueNodeCount": 10,
+      "owners": {
+        "thigh": 8,
+        "foot": 2
+      },
+      "sidesFromExactOfficialNames": {
+        "right": 5,
+        "left": 5
+      },
+      "localDisplayAllowedCount": 10,
+      "canonicalBindings": 0,
+      "humanAnatomyReview": "not_performed",
+      "publicRedistribution": "held",
+      "loadAndHashVerification": "runtime loaded this exact chunk; client chunk SHA-256 verification passed before parsing"
+    }
+  },
+  "checks": {
+    "wholeBody": true,
+    "closeViews": true,
+    "leftRightFromExactNames": true,
+    "thighFilterShowsEightTargetNodes": true,
+    "footFilterShowsTwoTargetNodes": true,
+    "layerOff": true,
+    "layerRestored": true,
+    "noDuplicateTargetNodeIDs": true,
+    "oneCanvasRootRenderer": true,
+    "sourceLabelsNotPromoted": true,
+    "consoleClean": true,
+    "twentyOrMoreRegionLayerTransitions": true
+  },
+  "screens": [
+    {
+      "route": "/",
+      "state": "whole-body",
+      "camera": [
+        0.000010505318641662598,
+        0.7817299738526347,
+        3.434144729891477
+      ],
+      "targetNodes": 10,
+      "visual": "One existing full-body model in the existing central scene; no T102 labels or authoring metadata appear."
+    },
+    {
+      "route": "/?region=thigh",
+      "state": "thigh close view",
+      "camera": [
+        4.991888999938965e-7,
+        0.5879909992218018,
+        1.326860516158042
+      ],
+      "targetNodes": 8,
+      "visual": "The bilateral thigh source surfaces are visible in the existing scene. The structure list remains unbound (0 connected muscles)."
+    },
+    {
+      "route": "/?region=foot",
+      "state": "foot close view",
+      "camera": [
+        0.000015497207641601562,
+        0.4144909456372262,
+        2.0597593260182476
+      ],
+      "targetNodes": 2,
+      "visual": "The bilateral transverse-head source surfaces appear with the existing foot scene."
+    }
+  ],
+  "transitionStability": {
+    "cycles": 5,
+    "verifiedTransitions": 30,
+    "sequence": [
+      "thigh: 8 target nodes",
+      "thigh plus foot: 10 target nodes",
+      "foot: 2 target nodes",
+      "whole body: 10 target nodes",
+      "muscle layer off: 0 target nodes",
+      "muscle layer on: 10 target nodes"
+    ],
+    "beforeAndAfterWholeBody": {
+      "drawCalls": 561,
+      "triangles": 2456098,
+      "geometries": 561,
+      "materials": 573,
+      "geometryBuffersBytes": 65343180,
+      "visibleMeshes": 561
+    },
+    "duringAllStates": {
+      "geometries": 561,
+      "materials": 573,
+      "geometryBuffersBytes": 65343180,
+      "rootUuid": "f76e090d-e171-442f-90ce-7ea550f57b44",
+      "rendererCanvasId": "anatomy-f76e090d-e171-442f-90ce-7ea550f57b44"
+    },
+    "interpretation": "Region/layer visibility changes update expected draw/triangle counts; cached geometries/materials do not accumulate and the same root/renderer returns to its original full-scene counters."
+  },
+  "performance": {
+    "t101Reference": {
+      "drawCalls": 551,
+      "triangles": 2420006,
+      "geometries": 551,
+      "materials": 563,
+      "geometryBuffersBytes": 64559220,
+      "rendererPixelRatio": 1.75,
+      "provenance": "Derived from the current same-scene runtime counters by subtracting the exact T102 GLB accessor/draw contribution. This is an object-level parent-scene comparison, not a separate cold page load."
+    },
+    "t102Observed": {
+      "drawCalls": 561,
+      "triangles": 2456098,
+      "geometries": 561,
+      "materials": 573,
+      "geometryBuffersBytes": 65343180,
+      "rendererPixelRatio": 1.75,
+      "frameIntervalP50Ms": 16.7,
+      "frameIntervalP95Ms": 17.2,
+      "sampleCount": 240
+    },
+    "t102Contribution": {
+      "coldChunkPayloadBytes": 812256,
+      "decodedGeometryBytes": 783960,
+      "triangles": 36092,
+      "drawCalls": 10,
+      "geometries": 10,
+      "materials": 10
+    },
+    "warmTransitionReuse": "Across 30 region/layer transitions, the T102 chunk remained in the loaded set and geometry/material/CPU-byte counts remained constant; revisits reused the resident scene. No separate browser transfer-timing API was exposed in the CUA read-only page scope.",
+    "frameMetricDefinition": "frameIntervalP50/P95 are requestAnimationFrame cadence intervals, not measured GPU render duration.",
+    "comparisonLimit": "Object, decoded-byte, draw-call, and triangle deltas are exact from the current runtime plus T102 GLB accessors. No separate T101 timing baseline or network transfer timing was available; do not interpret RAF cadence as GPU render time."
+  },
+  "task": "T102"
+}
