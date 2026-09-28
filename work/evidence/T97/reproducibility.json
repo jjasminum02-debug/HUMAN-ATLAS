@@ -1,0 +1,66 @@
+{
+  "task": "T97",
+  "result": "reproducible",
+  "sourceCodeOnly": true,
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "parse_blend_datablocks.py",
+        "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Startup.blend",
+        "--output",
+        "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T97/blender-object-inventory.json"
+      ],
+      "exitCode": 0,
+      "stdoutTail": "{\n  \"format\": {\n    \"header\": \"BLENDER-v305\",\n    \"pointerSize\": 8,\n    \"endian\": \"<\",\n    \"formatVersion\": \"305\"\n  },\n  \"blockCount\": 756968,\n  \"dataBlockCountsByType\": {\n    \"Brush\": 73,\n    \"Camera\": 1,\n    \"Collection\": 1945,\n    \"Curve\": 1898,\n    \"DrawDataList\": 1,\n    \"FreestyleLineStyle\": 12,\n    \"Image\": 3,\n    \"Lamp\": 3,\n    \"Material\": 188,\n    \"Mesh\": 2910,\n    \"Object\": 7184,\n    \"Palette\": 1,\n    \"Scene\": 1,\n    \"Text\": 3839,\n    \"VFont\": 8,\n    \"WorkSpace\": 2,\n    \"World\": 1,\n    \"bGPdata\": 1,\n    \"bNodeTree\": 42,\n    \"bScreen\": 5,\n    \"wmWindowManager\": 1\n  },\n  \"layoutMismatchCount\": 8,\n  \"objectCount\": 7184,\n  \"meshDataBlockCount\": 2910,\n  \"collectionCount\": 1945,\n  \"sceneCount\": 1,\n  \"candidateSearchCount\": 6,\n  \"candidateObjectNames\": [\n    \"Latissimus dorsi muscle.el\",\n    \"Latissimus dorsi muscle.er\",\n    \"Latissimus dorsi muscle.l\",\n    \"Latissimus dorsi muscle.ol\",\n    \"Latissimus dorsi muscle.or\",\n    \"Latissimus dorsi muscle.r\"\n  ],\n  \"output\": \"/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T97/blender-object-inventory.json\"\n}\n",
+      "stderrTail": ""
+    },
+    {
+      "command": [
+        "python3",
+        "extract_latissimus_objects.py"
+      ],
+      "exitCode": 0,
+      "stdoutTail": "{\n  \"output\": \"/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T97/latissimus-extraction.json\",\n  \"objects\": 6,\n  \"distinctMeshDataBlocks\": [\n    \"Latissimus dorsi muscle.e\",\n    \"Latissimus dorsi muscle\",\n    \"Latissimus dorsi muscle.o\"\n  ],\n  \"objFiles\": 6,\n  \"totalObjBytes\": 1594680\n}\n",
+      "stderrTail": ""
+    },
+    {
+      "command": [
+        "python3",
+        "render_surface_preview_stdlib.py"
+      ],
+      "exitCode": 0,
+      "stdoutTail": "{\n  \"out\": \"/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T97/surface-preview.json\",\n  \"renders\": {\n    \"y-minus\": {\n      \"file\": \"surface-y-minus.png\",\n      \"sha256\": \"b8de992df03abfd55f15bdf2ec67abcdc106c37200d4856bdccc0e75524c4754\",\n      \"trianglesSubmitted\": 43762,\n      \"depthBufferWrites\": 216735,\n      \"cameraPosition\": [\n        0.0,\n        -2.7,\n        1.15\n      ],\n      \"target\": [\n        0.0,\n        0.07,\n        1.14\n      ],\n      \"orthographicScale\": 0.56\n    },\n    \"y-plus\": {\n      \"file\": \"surface-y-plus.png\",\n      \"sha256\": \"9f1ce599fb897d8922813b3d9b30e4d62810f7350f78ddb22231bb4a8a2e8479\",\n      \"trianglesSubmitted\": 43762,\n      \"depthBufferWrites\": 220448,\n      \"cameraPosition\": [\n        0.0,\n        2.7,\n        1.15\n      ],\n      \"target\": [\n        0.0,\n        0.07,\n        1.14\n      ],\n      \"orthographicScale\": 0.56\n    },\n    \"x-plus\": {\n      \"file\": \"surface-x-plus.png\",\n      \"sha256\": \"baadda95f5984bf6f507ec0b6a443cbf227051b1867a3aa11af2545e6a70da58\",\n      \"trianglesSubmitted\": 43762,\n      \"depthBufferWrites\": 38843,\n      \"cameraPosition\": [\n        2.7,\n        0.07,\n        1.15\n      ],\n      \"target\": [\n        0.0,\n        0.07,\n        1.14\n      ],\n      \"orthographicScale\": 0.56\n    }\n  }\n}\n",
+      "stderrTail": ""
+    }
+  ],
+  "outputSha256Before": {
+    "work/evidence/T97/blender-object-inventory.json": "d94209dec8928fbc13aae5b1d286033183f2c487fd4a36aa1f8637b6fe886f8e",
+    "work/evidence/T97/latissimus-extraction.json": "930f1e289e3cbc0f4172b4525592d80da0036f7df77cc4dfb998678514e7b157",
+    "work/evidence/T97/surface-preview.json": "de0bad9054e685395e762f0e244293a23aca31456690f8bf5bbbb5cbec84c09e",
+    "atlas-data/source-cache/z-anatomy/t97/latissimus-obj/Latissimus_dorsi_muscle.el.obj": "57c3e37f30e85d1124874e158382ccf21671a1e0721ada8cea3b01b759844e34",
+    "atlas-data/source-cache/z-anatomy/t97/latissimus-obj/Latissimus_dorsi_muscle.er.obj": "21ba72f134d936d09fe13c9315339f4758be7e101e7084dabb9fe854b842c6ac",
+    "atlas-data/source-cache/z-anatomy/t97/latissimus-obj/Latissimus_dorsi_muscle.l.obj": "b6adcbfbd06679c897cff1dd26e8fbe622a003ec7d5ccdfa078b9a64feb36889",
+    "atlas-data/source-cache/z-anatomy/t97/latissimus-obj/Latissimus_dorsi_muscle.ol.obj": "751fbdb342f68d65870c0b901206200c21150a2c5e3c12a124d513161a137b06",
+    "atlas-data/source-cache/z-anatomy/t97/latissimus-obj/Latissimus_dorsi_muscle.or.obj": "5623bda6ddc0318706150eafd0f1d6b42feb2a87e595c49cd278c24add8a6f1b",
+    "atlas-data/source-cache/z-anatomy/t97/latissimus-obj/Latissimus_dorsi_muscle.r.obj": "3192902a157099af776e68a175b3d926394bc9e6e88ff92f69e3a9959501a5e0",
+    "work/evidence/T97/surface-x-plus.png": "baadda95f5984bf6f507ec0b6a443cbf227051b1867a3aa11af2545e6a70da58",
+    "work/evidence/T97/surface-y-minus.png": "b8de992df03abfd55f15bdf2ec67abcdc106c37200d4856bdccc0e75524c4754",
+    "work/evidence/T97/surface-y-plus.png": "9f1ce599fb897d8922813b3d9b30e4d62810f7350f78ddb22231bb4a8a2e8479"
+  },
+  "outputSha256After": {
+    "work/evidence/T97/blender-object-inventory.json": "d94209dec8928fbc13aae5b1d286033183f2c487fd4a36aa1f8637b6fe886f8e",
+    "work/evidence/T97/latissimus-extraction.json": "930f1e289e3cbc0f4172b4525592d80da0036f7df77cc4dfb998678514e7b157",
+    "work/evidence/T97/surface-preview.json": "de0bad9054e685395e762f0e244293a23aca31456690f8bf5bbbb5cbec84c09e",
+    "atlas-data/source-cache/z-anatomy/t97/latissimus-obj/Latissimus_dorsi_muscle.el.obj": "57c3e37f30e85d1124874e158382ccf21671a1e0721ada8cea3b01b759844e34",
+    "atlas-data/source-cache/z-anatomy/t97/latissimus-obj/Latissimus_dorsi_muscle.er.obj": "21ba72f134d936d09fe13c9315339f4758be7e101e7084dabb9fe854b842c6ac",
+    "atlas-data/source-cache/z-anatomy/t97/latissimus-obj/Latissimus_dorsi_muscle.l.obj": "b6adcbfbd06679c897cff1dd26e8fbe622a003ec7d5ccdfa078b9a64feb36889",
+    "atlas-data/source-cache/z-anatomy/t97/latissimus-obj/Latissimus_dorsi_muscle.ol.obj": "751fbdb342f68d65870c0b901206200c21150a2c5e3c12a124d513161a137b06",
+    "atlas-data/source-cache/z-anatomy/t97/latissimus-obj/Latissimus_dorsi_muscle.or.obj": "5623bda6ddc0318706150eafd0f1d6b42feb2a87e595c49cd278c24add8a6f1b",
+    "atlas-data/source-cache/z-anatomy/t97/latissimus-obj/Latissimus_dorsi_muscle.r.obj": "3192902a157099af776e68a175b3d926394bc9e6e88ff92f69e3a9959501a5e0",
+    "work/evidence/T97/surface-x-plus.png": "baadda95f5984bf6f507ec0b6a443cbf227051b1867a3aa11af2545e6a70da58",
+    "work/evidence/T97/surface-y-minus.png": "b8de992df03abfd55f15bdf2ec67abcdc106c37200d4856bdccc0e75524c4754",
+    "work/evidence/T97/surface-y-plus.png": "9f1ce599fb897d8922813b3d9b30e4d62810f7350f78ddb22231bb4a8a2e8479"
+  },
+  "allOutputHashesIdentical": true
+}

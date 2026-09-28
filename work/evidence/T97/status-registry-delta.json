@@ -1,0 +1,32 @@
+{
+  "task": "T97",
+  "sharedFileOwnership": "Both files contained broader pre-existing user WIP at T97 start; worktree state is updated but neither entire file is safe to stage as a task-owned change.",
+  "statusFile": {
+    "path": "work/STATUS.md",
+    "startingSha256": "6fd6527cb58dfb3f1ebed8964cc90384fbb4f324901cc436ad9801dfde1ba342",
+    "currentSha256": "a87fc078ae1636aa9c6b902a5734c97ac737888a04b12f140724e152bf0cd32a",
+    "ownedDelta": [
+      "CURRENT_TASK is now T97 passed_with_gaps",
+      "NEXT_TASK is T101 per explicit T97 defaultNext",
+      "LAST_REPORT points to work/reports/T97.md",
+      "append-only T97 result/handoff section"
+    ]
+  },
+  "registryFile": {
+    "path": "work/task-registry-r15.json",
+    "startingSha256": "fb500c80b9f6cba3405cba9d11ee6ab554c731447439c066ba42617eb732e6a8",
+    "currentSha256": "3a8c08ba34285da1f41aca18e191cf8591c4f9fb4891ed4550b97677e6392a39",
+    "ownedDelta": {
+      "taskStatuses.T97": {
+        "before": "planned_not_started",
+        "after": "passed_with_gaps"
+      }
+    }
+  },
+  "preservedStatuses": {
+    "T93": "passed_with_gaps",
+    "T94": "passed_with_gaps",
+    "T101": "planned_not_started"
+  },
+  "commitPolicy": "exclude these mixed/pre-existing shared files; commit T97 report/evidence and the T97-owned .gitignore cache rule only."
+}

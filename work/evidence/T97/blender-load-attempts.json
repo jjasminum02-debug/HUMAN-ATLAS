@@ -1,0 +1,46 @@
+{
+  "task": "T97",
+  "scope": "isolated object inventory and internal surface preview only",
+  "embeddedArchiveScriptsOrDriversExecuted": false,
+  "startupBlendOpenedBySuccessfulBlenderProcess": false,
+  "attempts": [
+    {
+      "version": "3.5.0",
+      "officialPackageReceipt": "work/evidence/T97/blender-tool.json",
+      "sha256OfOfficialDmg": "5941f450f90b8db6a1bde459db4d9248fc67f022c7cb5f662c9e0818a3725457",
+      "commandFlags": ["--background", "--factory-startup", "--disable-autoexec"],
+      "target": "pinned Startup.blend read-only inspection",
+      "exitCode": 139,
+      "failureStage": "not isolated; process crashed before output"
+    },
+    {
+      "version": "3.5.1",
+      "officialPackageReceipt": "work/evidence/T97/blender-tool-retry.json",
+      "sha256OfOfficialDmg": "d283f12b36830c4c30bbf5253c50b99750288a19111b307cc5e884a4c69d9d60",
+      "commandFlags": ["--background", "--factory-startup", "--disable-autoexec"],
+      "target": "pinned Startup.blend read-only inspection",
+      "exitCode": 139,
+      "failureStage": "not isolated; process crashed before output"
+    },
+    {
+      "version": "5.2.2 LTS",
+      "officialPackageReceipt": "work/evidence/T97/blender-tool-current.json",
+      "sha256OfOfficialDmg": "dc4125399b8bfefe283cc1624d6cfc7809d1cac20ace51072127eb371f31f210",
+      "commandFlags": ["--background", "--factory-startup", "--disable-autoexec"],
+      "target": "pinned Startup.blend read-only inspection",
+      "exitCode": 139,
+      "failureStage": "not isolated; process crashed before output"
+    },
+    {
+      "version": "5.2.2 LTS",
+      "officialPackageReceipt": "work/evidence/T97/blender-tool-current.json",
+      "commandFlags": ["--background", "--factory-startup", "--disable-autoexec", "--python work/evidence/T97/render_surface_preview.py"],
+      "target": "fresh factory scene with only T97-generated OBJ QA copies; source blend not opened",
+      "exitCode": 139,
+      "failureStage": "startup before Python output; crash trace enters Metal GPU support detection from wm_homefile_read",
+      "crashLogPath": "/var/folders/f7/6khft5014fz_y80frpn49tvh0000gn/T/blender.crash.txt",
+      "crashLogSha256": "a194c6b5eb211b8b74afd0ae1c987af0954d2dd6bb73c6ddf8b28539c0e3bb21"
+    }
+  ],
+  "fallback": "work/evidence/T97/render_surface_preview_stdlib.py rasterizes the source arrays and saved object transforms without loading Blender or executing source code"
+}
