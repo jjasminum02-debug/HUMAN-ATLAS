@@ -1,3 +1,5 @@
+> **현재 실행 기준:** `work/EXECUTION.json`과 `design/2026-09-25-muscle-atlas/25-WHOLE-BODY-BASE-RESET.md`가 현재 순서·범위의 유일한 기준이다. 실행 전에 `work/NEXT.md`를 읽고, absorbed/retired task나 역사 evidence의 nextTask를 실행하지 않는다. 종료 시 EXECUTION의 해당 record를 갱신하고 `python3 work/tools/sync_execution.py` 및 `--check`를 수행한다. 원본/기존 WIP와 역사 evidence를 보존한다.
+
 > R13 현행 안내: 07-AI-EVIDENCE-AND-MOTION-DESIGN.md → 08-SERIAL-ROADMAP-AND-GIT.md → 09-ATLAS-REFERENCE-RESEARCH.md를 먼저 읽는다. T15 순서는 유지하고 이후는 T16–40 및 필요한 추가 숫자 task로 진행한다. AI 원문 대조로 기본 자료를 작성하며 모든 항목의 사람 승인을 요구하지 않는다. 실제 진도는 STATUS를 따른다.
 
 # 근육·뼈 Atlas — 현재 시작 안내

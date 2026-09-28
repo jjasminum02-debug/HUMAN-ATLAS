@@ -1,3 +1,5 @@
+> **현재 실행 기준:** `work/EXECUTION.json`과 `design/2026-09-25-muscle-atlas/25-WHOLE-BODY-BASE-RESET.md`가 현재 순서·범위의 유일한 기준이다. 실행 전에 `work/NEXT.md`를 읽고, absorbed/retired task나 역사 evidence의 nextTask를 실행하지 않는다. 종료 시 EXECUTION의 해당 record를 갱신하고 `python3 work/tools/sync_execution.py` 및 `--check`를 수행한다. 원본/기존 WIP와 역사 evidence를 보존한다.
+
 > R13 우선: T15 흐름 유지. 기본 자료의 AI 출처 대조를 허용하며 사람 검토는 독립 기록이다. T16 이후는 07/08의 새 계획을 사용한다.
 
 # Luna 직렬 실행서

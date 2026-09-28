@@ -1,0 +1,13 @@
+{
+  "scope": "execution synchronization only; not app anatomy validation",
+  "checks": {
+    "initial_check_passes": true,
+    "sync_idempotent": true,
+    "stale_next_rejected": true,
+    "sync_repairs_projection": true,
+    "pass_without_report_rejected": true,
+    "absorbed_task_reactivation_rejected": true
+  },
+  "status": "pass",
+  "fixtures": "temporary isolated copies; production state not mutated"
+}
