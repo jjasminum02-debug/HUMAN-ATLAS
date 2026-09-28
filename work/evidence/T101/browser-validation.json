@@ -1,0 +1,109 @@
+{
+  "browser": {
+    "canvasCount": 1,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "name": "Codex In-app Browser",
+    "notes": "Real browser UI interaction and screenshots were inspected; screenshot bytes were not exported as repository files.",
+    "url": "http://127.0.0.1:5173/",
+    "viewport": {
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "checks": {
+    "T101ChunkAndServedBytesHashMatch": true,
+    "closeViews": true,
+    "layerOff": true,
+    "layerRestored": true,
+    "leftRightMatchesExactR4NamesAndXSignSanity": true,
+    "noDuplicateSourceNodeIDs": true,
+    "oneCanvasAfterRegionSwitches": true,
+    "sourceLabelsNotPromoted": true,
+    "wholeBody": true
+  },
+  "chunkDelivery": {
+    "bytes": 629336,
+    "localServerPath": "/__atlas/body/t101-lower-limb-muscle.glb",
+    "matchesRuntimeManifest": true,
+    "sha256": "bffce0beacad6feede926b5de0e81c773cfc51ae1aca45e367c3868b638ab859",
+    "status": "200"
+  },
+  "date": "2026-09-28",
+  "learnerBoundary": {
+    "canonicalBindings": 0,
+    "humanAnatomyReview": "not_performed",
+    "localTechnicalDisplay": "allowed only for this exact verified subset",
+    "publicRedistribution": "held",
+    "stableIds": 0
+  },
+  "result": "pass",
+  "runtimeManifest": {
+    "responseStatus": 200,
+    "revision": "BodyParts3D-R4-T101-SAME-SCENE-EXTENSION-v1",
+    "t101Chunk": {
+      "bytes": 629336,
+      "defaultVisibleCount": 10,
+      "id": "t101-lower-limb-muscle",
+      "ids": [
+        "FJ1393",
+        "FJ1393M",
+        "FJ1394M",
+        "FJ1395",
+        "FJ1395M",
+        "FJ1396",
+        "FJ1396M",
+        "FJ1397M",
+        "FJ1398",
+        "FJ1398M"
+      ],
+      "localDisplayAllowedCount": 10,
+      "owners": {
+        "foot": 6,
+        "leg": 2,
+        "thigh": 2
+      },
+      "publicRedistribution": "held",
+      "sha256": "bffce0beacad6feede926b5de0e81c773cfc51ae1aca45e367c3868b638ab859",
+      "sides": {
+        "left": 6,
+        "right": 4
+      },
+      "sourceOnly": true,
+      "uniqueNodeCount": 10
+    }
+  },
+  "screens": [
+    {
+      "route": "/",
+      "state": "whole-body",
+      "visual": "One existing full-body figure was shown in the same central scene."
+    },
+    {
+      "route": "/?region=leg",
+      "state": "calf close view",
+      "visual": "Both lower limbs remained in the common frame; the existing right gastrocnemius heads and added left lateral/medial heads appeared as static muscle surfaces."
+    },
+    {
+      "route": "/?region=foot",
+      "state": "foot close view",
+      "visual": "Bilateral plantar intrinsic-muscle surfaces were visible. Learner structure count stayed 0 because T101 adds no canonical binding."
+    },
+    {
+      "route": "/?region=thigh",
+      "state": "thigh close view",
+      "visual": "Bilateral posterior thigh surfaces were visible; no new learner labels were introduced."
+    },
+    {
+      "route": "/?region=foot",
+      "state": "muscles off",
+      "visual": "Muscle layer off left bone surfaces; T101 muscles disappeared."
+    },
+    {
+      "route": "/?region=foot",
+      "state": "muscles restored",
+      "visual": "Restoring the muscle layer returned the foot muscle surfaces."
+    }
+  ],
+  "task": "T101"
+}

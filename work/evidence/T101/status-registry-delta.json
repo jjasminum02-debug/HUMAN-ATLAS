@@ -1,0 +1,38 @@
+{
+  "baselineHead": "359dabb6090dca960038d2cd24c35213c599f980",
+  "files": {
+    "work/STATUS.md": {
+      "baselineSha256": "a87fc078ae1636aa9c6b902a5734c97ac737888a04b12f140724e152bf0cd32a",
+      "currentSha256": "eb954af4449ee8585045c65bb2ecc9e1cd3d09ae9cd99d53bbd7462ae1bb6300",
+      "delta": {
+        "CURRENT_TASK": "T97 passed_with_gaps -> T101 passed_with_gaps",
+        "LAST_REPORT": "work/reports/T97.md -> work/reports/T101.md",
+        "NEXT_TASK": "T101 / Luna Max -> T102 / Luna Max",
+        "appendedSection": "T101 technical outcome, holds, evidence, and next handoff"
+      }
+    },
+    "work/task-registry-r15.json": {
+      "baselineSha256": "3a8c08ba34285da1f41aca18e191cf8591c4f9fb4891ed4550b97677e6392a39",
+      "currentSha256": "fcdecd62a9c0a94417f62a49bd342a79c8564ad1035174892b1e3a0f886f8ed1",
+      "delta": {
+        "nextTask": {
+          "after": "T102",
+          "before": "T97"
+        },
+        "taskStatuses.T101": {
+          "after": "passed_with_gaps",
+          "before": "planned_not_started"
+        },
+        "taskStatuses.T102": "planned_not_started"
+      }
+    }
+  },
+  "finalValues": {
+    "currentTask": "T101",
+    "nextTask": "T102",
+    "nextTaskStatus": "planned_not_started",
+    "statusContainsT101Report": true
+  },
+  "sharedFilePolicy": "Updated task-owned values in the shared current-status files. They contained broad pre-existing T97/R15 WIP at T101 start, so neither file is included in the T101 commit; exact task-owned state delta is preserved here.",
+  "task": "T101"
+}
