@@ -23,7 +23,7 @@ add(checks,'whole-body comparable coverage/cost remains unresolved',ledger['chec
 add(checks,'production and learner/review holds were preserved',ledger['preservation']['productionBase'] is None and ledger['preservation']['sourceOnly'] is True and ledger['preservation']['localUseRights'].startswith('held') and ledger['preservation']['publicRedistribution']=='held' and ledger['preservation']['humanReview']=='not_performed' and not ledger['preservation']['canonicalMappingOrLearnerUIChanged'],ledger['preservation'])
 add(checks,'T98 stays partial at the same unit and T99 is not started',row['acceptance']=='partial' and row['executionStatus']=='in_progress' and row['progress']['nextUnit']==unit and row['progress']['nextId']=='T98' and not row['progress']['gate']['nextTaskExecutionStarted'] and ledger['preservation']['T99Started'] is False,{'acceptance':row['acceptance'],'executionStatus':row['executionStatus'],'nextUnit':row['progress']['nextUnit']})
 add(checks,'progress mirror and report point to the new evidence',progress['acceptance']=='partial' and progress['nextUnit']==unit and any(x.get('evidence','').endswith('official-source-review.json') for x in progress['resumeHistory']) and 'official-source-review.json' in report,{'historyCount':len(progress.get('resumeHistory',[]))})
-head=git('rev-parse','HEAD')
+head=ledger['startBaseline']['head']
 old_exec=json.loads(subprocess.check_output(['git','show',f'{head}:work/EXECUTION.json'],cwd=ROOT,text=True))
 others_old={k:v for k,v in old_exec['tasks'].items() if k!='T98'}
 others_now={k:v for k,v in execution['tasks'].items() if k!='T98'}
