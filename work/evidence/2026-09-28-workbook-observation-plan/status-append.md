@@ -1,0 +1,5 @@
+
+
+## Workbook / face / observation plan — 2026-09-28
+
+Astra completed a read-only workbook/code/source-inventory audit and a plan amendment, not runtime implementation. See design/2026-09-25-muscle-atlas/24-WORKBOOK-FACE-AND-OBSERVATION.md and the updated 23 prompt book. Original workbook: 257 rows, 53 action cells with Han characters; full anatomy verification not performed. Existing T101/current next-task state is preserved. T102–107 scopes remain unchanged; T107 hands off to new planned T166 (common observation selection/fade/hide/restore), then T98–100, T110 facial-first head package, T108–109 and T111–121. T81/T83 absorb workbook verification; no separate import task. Exact facial-expression motion is deferred_by_user; structure and explanations remain required. T80/T58 require actual face/full structure coverage, not source inventory counts. No app/source files were changed by this plan. Shared STATUS/registry retain pre-existing WIP and are excluded from this plan commit; owned delta/evidence lives in work/evidence/2026-09-28-workbook-observation-plan/.

@@ -1,0 +1,771 @@
+{
+  "kind": "owned_plan_delta_not_full_mixed_files",
+  "registryChanges": [
+    {
+      "key": "activeQueue",
+      "before": [
+        "T50",
+        "T51",
+        "T52",
+        "T69",
+        "T53",
+        "T54",
+        "T55",
+        "T70",
+        "T71",
+        "T72",
+        "T56",
+        "T57",
+        "T73",
+        "T74",
+        "T75",
+        "T76",
+        "T92",
+        "T93",
+        "T94",
+        "T77",
+        "T78",
+        "T95",
+        "T96",
+        "T79",
+        "T97",
+        "T101",
+        "T102",
+        "T103",
+        "T104",
+        "T105",
+        "T106",
+        "T107",
+        "T98",
+        "T99",
+        "T100",
+        "T108",
+        "T109",
+        "T110",
+        "T111",
+        "T112",
+        "T113",
+        "T114",
+        "T115",
+        "T116",
+        "T117",
+        "T118",
+        "T119",
+        "T120",
+        "T121",
+        "T80",
+        "T58",
+        "T81",
+        "T82",
+        "T83",
+        "T84",
+        "T35",
+        "T59",
+        "T60",
+        "T25",
+        "T27",
+        "T28",
+        "T45",
+        "T46",
+        "T29",
+        "T31",
+        "T66",
+        "T47",
+        "T85",
+        "T61",
+        "T86",
+        "T62",
+        "T87",
+        "T88",
+        "T63",
+        "T89",
+        "T90",
+        "T64",
+        "T91",
+        "T65",
+        "T40"
+      ],
+      "after": [
+        "T50",
+        "T51",
+        "T52",
+        "T69",
+        "T53",
+        "T54",
+        "T55",
+        "T70",
+        "T71",
+        "T72",
+        "T56",
+        "T57",
+        "T73",
+        "T74",
+        "T75",
+        "T76",
+        "T92",
+        "T93",
+        "T94",
+        "T77",
+        "T78",
+        "T95",
+        "T96",
+        "T79",
+        "T97",
+        "T101",
+        "T102",
+        "T103",
+        "T104",
+        "T105",
+        "T106",
+        "T107",
+        "T166",
+        "T98",
+        "T99",
+        "T100",
+        "T110",
+        "T108",
+        "T109",
+        "T111",
+        "T112",
+        "T113",
+        "T114",
+        "T115",
+        "T116",
+        "T117",
+        "T118",
+        "T119",
+        "T120",
+        "T121",
+        "T80",
+        "T58",
+        "T81",
+        "T82",
+        "T83",
+        "T84",
+        "T35",
+        "T59",
+        "T60",
+        "T25",
+        "T27",
+        "T28",
+        "T45",
+        "T46",
+        "T29",
+        "T31",
+        "T66",
+        "T47",
+        "T85",
+        "T61",
+        "T86",
+        "T62",
+        "T87",
+        "T88",
+        "T63",
+        "T89",
+        "T90",
+        "T64",
+        "T91",
+        "T65",
+        "T40"
+      ]
+    },
+    {
+      "key": "nextUnallocatedNumericId",
+      "before": 166,
+      "after": 167
+    },
+    {
+      "key": "productGates",
+      "before": {
+        "T24GapResolution": "T59 actual mesh deformation + T60 same-scene playback + T25 product acceptance; keep historical T24 report",
+        "assessmentPriority": "major muscles only, after nerve pilot and explicit assessment start",
+        "acupointAndNeedling": "deferred separate design; no entrapment-to-needling inference",
+        "nerveStart": "T85 full muscle motion target pass, then T61/T86"
+      },
+      "after": {
+        "T24GapResolution": "T59 actual mesh deformation + T60 same-scene playback + T25 product acceptance; keep historical T24 report",
+        "assessmentPriority": "major muscles only, after nerve pilot and explicit assessment start",
+        "acupointAndNeedling": "deferred separate design; no entrapment-to-needling inference",
+        "nerveStart": "T85 required-motion subset pass per 24/T35; exact facial-expression deferred_by_user is not a blocker or motion completion; then T61/T86"
+      }
+    },
+    {
+      "key": "workbookObservationAmendment",
+      "before": null,
+      "after": {
+        "design": "design/2026-09-25-muscle-atlas/24-WORKBOOK-FACE-AND-OBSERVATION.md",
+        "plan": "work/evidence/2026-09-28-workbook-observation-plan/plan.json",
+        "newTaskIds": [
+          "T166"
+        ],
+        "status": "plan_only_not_implementation",
+        "sourceWorkbookSha256": "8e10e00e76f5da8e6d1be6a0f9dcab6039d9a3f81d8a3808c0fe28545802ab3c",
+        "motionDeferral": "facial_expression_exact_ids_to_be_verified_in_T110_and_frozen_in_T35",
+        "originalWorkbookCopied": false,
+        "currentTaskStatusPreserved": true
+      }
+    },
+    {
+      "key": "taskStatuses.T166",
+      "before": null,
+      "after": "planned_not_started"
+    },
+    {
+      "taskId": "T58",
+      "before": {
+        "id": "T58",
+        "title": "전신 그래픽 재검증",
+        "model": "Astra · 현재 대화 직접 구현",
+        "spec": "work/tasks/T58.md",
+        "prerequisite": "T80 pass",
+        "prerequisiteIds": [
+          "T57"
+        ],
+        "defaultNext": "T81",
+        "mode": "active",
+        "executionLocation": "current_conversation_user_requested",
+        "resumePrerequisiteIds": [
+          "T80"
+        ],
+        "continuationRule": "Historical partial preserved; resume only after coverage repair packages; do not rerun initial implementation. Visual gate before T59.",
+        "scopeOverride": "기존 T58 코드와 역사 보고서를 보존하고 전체 동결 구조의 준비 상태를 확인한 뒤 전신/머리/손/종아리 및 새 필수 부위 캡처·단일 scene·camera·패널·390/1024/1440 성능을 재검증한다. 보완자산 UI가 사라지고 요추/엉치뼈 등 맥락 뼈가 기본 표시되는지 확인한다. 실제 필수 누락이 남으면 partial이고 T81로 넘어가지 않는다. 새 재검증 보고서를 남기며 초기 구현을 재작성하지 않는다.",
+        "executionAmendment": "2026-09-28 full muscles before nerves"
+      },
+      "after": {
+        "id": "T58",
+        "title": "전신 그래픽 재검증",
+        "model": "Astra · 현재 대화 직접 구현",
+        "spec": "work/tasks/T58.md",
+        "prerequisite": "T80 pass",
+        "prerequisiteIds": [
+          "T57"
+        ],
+        "defaultNext": "T81",
+        "mode": "active",
+        "executionLocation": "current_conversation_user_requested",
+        "resumePrerequisiteIds": [
+          "T80"
+        ],
+        "continuationRule": "Historical partial preserved; resume only after coverage repair packages; do not rerun initial implementation. Visual gate before T59.",
+        "scopeOverride": "T80 pass 뒤 기존 T58 WIP/역사 보고서를 보존하여 전체 실제 그래픽/패널/카메라/성능을 재검증한다. T166 관찰 도구가 canonical과 source-only 실제 표면에서 접근 가능하고 반투명·숨김·격리·복원·다중 선택이 정확한지 1440/1024/390px에서 확인한다. 표정근의 정면/좌우/비스듬한 외형과 광배근, 모든 필수 부위를 확인한다. 새 source-only는 canonical 카드 완료가 아니다. 최종 미니멀 UI와 로딩의 로고·인체 그림·슬로건 제거를 유지한다. 필수 geometry/관찰 기능/성능 실패는 partial이다. 구현 재작성 대신 공통 경로의 필요한 수정만 수행한다.",
+        "executionAmendment": "2026-09-28 workbook face observation; 24 design takes precedence",
+        "amendmentDesign": "design/2026-09-25-muscle-atlas/24-WORKBOOK-FACE-AND-OBSERVATION.md"
+      }
+    },
+    {
+      "taskId": "T66",
+      "before": {
+        "id": "T66",
+        "title": "첫 기능 확장 batch 하나",
+        "model": "Luna Max",
+        "spec": "work/tasks/T66.md",
+        "prerequisite": "실행 queue의 직전 필수 gate",
+        "prerequisiteIds": [
+          "T31"
+        ],
+        "defaultNext": "T47",
+        "mode": "active",
+        "scopeOverride": "T35에서 동결한 단일 action-family를 대상으로 검증된 동일 rig의 공유 clip 연결 최대10관계 또는 기존 rig 기반 clip1개만 구현한다. 새 관절/rig 정합이 필요하면 Sol task로 따로 배정하고 이 task를 확장하지 않는다.\n ",
+        "executionAmendment": "2026-09-28 full muscles before nerves"
+      },
+      "after": {
+        "id": "T66",
+        "title": "첫 기능 확장 batch 하나",
+        "model": "Luna Max",
+        "spec": "work/tasks/T66.md",
+        "prerequisite": "실행 queue의 직전 필수 gate",
+        "prerequisiteIds": [
+          "T31"
+        ],
+        "defaultNext": "T47",
+        "mode": "active",
+        "scopeOverride": "T35의 required motion family와 exact 대상만 기존 rig/공통 재생 경로로 확장한다. clip1개 또는 검증된 family의 최대10관계 검증 상한과 같은 T66 progress 재개를 유지한다. 24에서 exact ID로 deferred_by_user인 표정근의 clip은 만들지 않는다. 그 근육의 구조/기능 데이터는 유지한다. 나머지 필수 운동 누락을 제외 목록에 추가하지 않는다. scale-only/다른 viewer 대체 금지.",
+        "executionAmendment": "2026-09-28 workbook face observation; 24 design takes precedence",
+        "amendmentDesign": "design/2026-09-25-muscle-atlas/24-WORKBOOK-FACE-AND-OBSERVATION.md"
+      }
+    },
+    {
+      "taskId": "T35",
+      "before": {
+        "id": "T35",
+        "title": "전신 근육 animation 목표와 제작 queue",
+        "model": "Sol High",
+        "spec": "work/tasks/T35.md",
+        "prerequisite": "T84 pass",
+        "prerequisiteIds": [
+          "T84"
+        ],
+        "defaultNext": "T59",
+        "mode": "active",
+        "scopeOverride": "모든 근육이 하나 이상의 자기 기능을 학습할 수 있는 시범을 갖도록 target→근거 있는 작용/고정조건→변형 방식→관련 뼈/주변 구조→clip support를 정의한다. 근육당 대표 시범 최소1개와 추가 작용 미지원 목록을 구분하여 모든 작용 구현이라고 과장하지 않는다. 얼굴/혀/눈/호흡/괄약근 등 비사지 motion family를 누락하지 않는다. 같은 rig를 재사용할 수 있어도 근육별 설명/선택/작용의 검증을 생략하지 않는다. 첫 앞정강근 T59–60/T25와 소흉근 기존 task를 첫 실제 사례로 보존하고 T66 및 나머지 bounded clip/rig 제작 task를 모두 정수 ID로 T47 감사 앞에 배정한다. 계획만 작성, clip 제작 미실행.",
+        "executionAmendment": "2026-09-28 full muscles before nerves"
+      },
+      "after": {
+        "id": "T35",
+        "title": "전신 근육 animation 목표와 제작 queue",
+        "model": "Sol High",
+        "spec": "work/tasks/T35.md",
+        "prerequisite": "T84 pass",
+        "prerequisiteIds": [
+          "T84"
+        ],
+        "defaultNext": "T59",
+        "mode": "active",
+        "scopeOverride": "24 설계 6절에 따라 전체 구조/설명 target을 유지하고 requiredMotionTargetIds와 exact facial-expression deferred_by_user targetIds/part 관계/근거를 따로 동결한다. region=head를 전부 제외하지 말고 씹기/외안/혀/그 외 비사지 근육은 이전 범위를 유지한다. 애매한 얼굴 subset은 자동 제외하지 않는다. 필수 target→작용/조건→실제 변형 family/주변 구조/clip support를 정의하고 앞정강근/소흉근 사례와 기존 T66 재개 queue를 재사용한다. 첫 사례/표정근 제외를 모든 근육 운동 완료라 부르지 않는다. 반복마다 새 task를 만들지 말고 새 rig 등 독립 위험만 제한된 해결안으로 분리한다. 이번에는 계획만 작성한다.",
+        "executionAmendment": "2026-09-28 workbook face observation; 24 design takes precedence",
+        "amendmentDesign": "design/2026-09-25-muscle-atlas/24-WORKBOOK-FACE-AND-OBSERVATION.md"
+      }
+    },
+    {
+      "taskId": "T47",
+      "before": {
+        "id": "T47",
+        "title": "전신 구조·기능·운동 자료 감사",
+        "model": "Luna Max",
+        "spec": "work/tasks/T47.md",
+        "prerequisite": "모든 근육 animation batch",
+        "prerequisiteIds": [
+          "T66"
+        ],
+        "defaultNext": "T85",
+        "mode": "active",
+        "scopeOverride": "전체 구조/기시정지/기능/대표 motion 분모를 데이터/파일/실제 binding으로 전수 감사한다. 첫 batch/pilot 완료를 전신 완료로 쓰지 않는다. 필수 누락은 수정 작업으로 배정하고 T85 시각·사용자 흐름 합격과 분리한다.",
+        "executionAmendment": "2026-09-28 full muscles before nerves"
+      },
+      "after": {
+        "id": "T47",
+        "title": "전신 구조·기능·운동 자료 감사",
+        "model": "Luna Max",
+        "spec": "work/tasks/T47.md",
+        "prerequisite": "모든 근육 animation batch",
+        "prerequisiteIds": [
+          "T66"
+        ],
+        "defaultNext": "T85",
+        "mode": "active",
+        "scopeOverride": "T96/T35의 전체 구조/기시정지/기능/운동 mapping을 감사한다. 24의 exact 표정근 deferred_by_user와 필수 운동을 분리하고 지원+명시 제외+미지원=전체 동결 대상을 대조한다. 제외는 완료 수가 아니다. 비제외 필수 근육의 실제 같은 surface/rig/clip 및 설명을 전수 확인한다. T66 첫 unit/상태 문자열만으로 T85 gate 합격을 예고하지 않는다.",
+        "executionAmendment": "2026-09-28 workbook face observation; 24 design takes precedence",
+        "amendmentDesign": "design/2026-09-25-muscle-atlas/24-WORKBOOK-FACE-AND-OBSERVATION.md"
+      }
+    },
+    {
+      "taskId": "T80",
+      "before": {
+        "id": "T80",
+        "title": "전신 구조·선택 coverage 감사",
+        "model": "Luna Max",
+        "spec": "work/tasks/T80.md",
+        "mode": "active",
+        "defaultNext": "T58",
+        "scopeOverride": "T78의 전체 target을 exact source/node/side/binding/세 이름/부위로 대조한다. 모든 target의 표시 가능성과 클릭 설명 연결, 깊은 구조의 격리/회전 접근, 요추·엉치뼈 기본 표시를 확인한다. 모든 근육을 같은 시점에 투명하게 겹쳐 보여야 한다는 뜻은 아니다. 누락/미연결/미해결 필수 hold가 남으면 partial이며 기시정지 전신 완료 단계로 넘어가지 않는다. 추가 수정 task를 exact 대상/종료조건으로 배정한다. 분모를 줄이거나 subset 100%를 전신 완료로 쓰지 않는다. 통과 후 Astra T58 실제 그래픽 재검증.",
+        "prerequisite": "Actual results for all 28 structure tasks plus T96 all-target allocation/mandatory coverage; no skipped or superseded task as completion evidence",
+        "executionAmendment": "2026-09-28 full muscles before nerves",
+        "prerequisiteIds": [
+          "T95",
+          "T96",
+          "T79",
+          "T97",
+          "T101",
+          "T102",
+          "T103",
+          "T104",
+          "T105",
+          "T106",
+          "T107",
+          "T98",
+          "T99",
+          "T100",
+          "T108",
+          "T109",
+          "T110",
+          "T111",
+          "T112",
+          "T113",
+          "T114",
+          "T115",
+          "T116",
+          "T117",
+          "T118",
+          "T119",
+          "T120",
+          "T121"
+        ]
+      },
+      "after": {
+        "id": "T80",
+        "title": "전신 구조·선택 coverage 감사",
+        "model": "Luna Max",
+        "spec": "work/tasks/T80.md",
+        "mode": "active",
+        "defaultNext": "T58",
+        "scopeOverride": "전체 T96 target→실제 geometry/side/part→세 이름/정확한 canonical binding→12부위 선택 흐름을 전수 감사한다. 표정근과 광배근 누락, source-only 후보만 있고 학생에게 보이거나 선택되지 않는 상태를 전신 완성으로 세지 않는다. T166 관찰 선택과 learner binding을 구분하고 총 term/node/개별 근육 분모를 혼동하지 않는다. 필수 누락은 해당 기존 package에서 수정하며 새 반복 task를 발급하지 않는다. 24의 얼굴 애니메이션 제외는 구조 누락을 허용하지 않는다.",
+        "prerequisite": "Actual results for all 28 structure tasks plus T96 all-target allocation/mandatory coverage; no skipped or superseded task as completion evidence",
+        "executionAmendment": "2026-09-28 workbook face observation; 24 design takes precedence",
+        "prerequisiteIds": [
+          "T95",
+          "T96",
+          "T79",
+          "T97",
+          "T101",
+          "T102",
+          "T103",
+          "T104",
+          "T105",
+          "T106",
+          "T107",
+          "T98",
+          "T99",
+          "T100",
+          "T108",
+          "T109",
+          "T110",
+          "T111",
+          "T112",
+          "T113",
+          "T114",
+          "T115",
+          "T116",
+          "T117",
+          "T118",
+          "T119",
+          "T120",
+          "T121"
+        ],
+        "amendmentDesign": "design/2026-09-25-muscle-atlas/24-WORKBOOK-FACE-AND-OBSERVATION.md"
+      }
+    },
+    {
+      "taskId": "T81",
+      "before": {
+        "id": "T81",
+        "title": "첫 전신 기시·정지 조사 batch",
+        "model": "Luna Max",
+        "spec": "work/tasks/T81.md",
+        "mode": "active",
+        "defaultNext": "T82",
+        "scopeOverride": "T78 전체 근육 target을 대상으로 최대10개 개념의 첫 기시·정지 batch를 실행한다. AI가 해부학 원문/공식 교육 자료를 찾아 교차 검증하고 기존 근거를 재사용한다. 갈래별 차이/비골성 부착/근막·피부·건막과 변이를 구조화하고 충돌은 기록한다. 텍스트 기시정지와 검증된 3D 부착 좌표는 분리하며 좌표를 추정하지 않는다. 모든 batch의 명세와 정수 ID를 T82 앞에 발급하고 첫 batch는 실제 learner 카드에 연결한다. 사용자에게 수동 조사 숙제를 요구하지 않는다. 출처는 내부 evidence/app attribution에 두고 학생 기시정지 칸에는 붙이지 않는다.",
+        "prerequisite": "T80 및 T58 pass",
+        "executionAmendment": "2026-09-28 full muscles before nerves",
+        "prerequisiteIds": [
+          "T58"
+        ]
+      },
+      "after": {
+        "id": "T81",
+        "title": "전체 기시·정지 및 짧은 신경 표기 검증·카드 연결",
+        "model": "Luna Max",
+        "spec": "work/tasks/T81.md",
+        "mode": "active",
+        "defaultNext": "T82",
+        "scopeOverride": "24 설계 3절에 따라 사용자 엑셀을 원본 hash/시트/셀 위치와 함께 한 번 import한다. 근육표 A6:H262 257행을 T96/T80의 전체 학습 target과 매핑하고 원문·정규화 후보·검증 claim을 분리한다. private 원본/전체 staging은 ignore 경로, 공개 근거로 검증한 필요한 overlay만 제품/저장소에 반영한다. 첫 내부 단위는 6,12,22,23,44,133,139,229,186,246행이며 표본 합격을 전체 검증으로 세지 않는다. 이후 전체 근육의 기시정지와 workbook의 운동/감각 신경란을 기존 근거 재사용·독립 대조로 조사한다. 운동과 감각을 구분하고 모호한 가지/신경근은 생략, 미확인은 미기재/빈칸, 검증된 상위 신경명만 간결하게 쓴다. 감각 단일 이름 부재를 운동신경 미확인 대체값으로 쓰지 않는다. 동명 손/발·전체/갈래·8개 원본 영역 대12제품 지역을 정확히 구분한다. 엑셀 밖 target도 빠뜨리지 않는다. 내부 ≤10개 workUnits/같은 T81 재개, 모든 행 처리 상태와 claim별 근거/충돌/채택을 남긴다. 기시정지 칸의 출처 노출 금지, 3D 부착좌표/애니메이션/신경3D 추정 금지. 기능 H열은 원본/후보만 보관하며 최종 검증/공개는 T83에서 수행한다.",
+        "prerequisite": "T80 및 T58 pass",
+        "executionAmendment": "2026-09-28 workbook face observation; 24 design takes precedence",
+        "prerequisiteIds": [
+          "T58"
+        ],
+        "amendmentDesign": "design/2026-09-25-muscle-atlas/24-WORKBOOK-FACE-AND-OBSERVATION.md"
+      }
+    },
+    {
+      "taskId": "T82",
+      "before": {
+        "id": "T82",
+        "title": "전신 기시·정지 프로토타입 합격",
+        "model": "Luna Max",
+        "spec": "work/tasks/T82.md",
+        "mode": "active",
+        "defaultNext": "T83",
+        "scopeOverride": "전체 동결 근육의 기시정지/갈래/세 이름/카드 연결과 근거 충돌을 감사한다. 기존 placeholder를 조사 완료로 세지 않는다. 필수 내용 미완은 partial이며 해당 batch를 마무리한 뒤 다음 기능 단계로 간다. 사람 검토는 별도 사실이고 모든 기본 텍스트의 일괄 human approval을 기다리게 하지 않는다. 지식 prototype 완료와 정확한 부착 surface 완성은 구분한다.",
+        "prerequisite": "T81 및 모든 기시정지 batch",
+        "executionAmendment": "2026-09-28 full muscles before nerves",
+        "prerequisiteIds": [
+          "T81"
+        ]
+      },
+      "after": {
+        "id": "T82",
+        "title": "전신 기시·정지 프로토타입 합격",
+        "model": "Luna Max",
+        "spec": "work/tasks/T82.md",
+        "mode": "active",
+        "defaultNext": "T83",
+        "scopeOverride": "24 설계의 T81 전체 target 기시정지/명칭/카드 및 257행 mapping/처리 상태를 감사한다. 표본10행만으로 전체를 승인하지 않는다. 운동신경/감각 분리, 미확인 short/null, 기존 출처 내부 보존과 private 원본 bundle 제외를 확인한다. 검증 못한 신경 세부 가지는 짧은 상위명 또는 미기재로 허용하되 이를 검증된 지배 관계로 세지 않고 후반 신경 조사 queue에 명시한다. 얼굴 포함 필수 기시정지 누락은 실패, human review는 독립 상태다.",
+        "prerequisite": "T81 및 모든 기시정지 batch",
+        "executionAmendment": "2026-09-28 workbook face observation; 24 design takes precedence",
+        "prerequisiteIds": [
+          "T81"
+        ],
+        "amendmentDesign": "design/2026-09-25-muscle-atlas/24-WORKBOOK-FACE-AND-OBSERVATION.md"
+      }
+    },
+    {
+      "taskId": "T83",
+      "before": {
+        "id": "T83",
+        "title": "첫 전신 근육 기능 조사 batch",
+        "model": "Luna Max",
+        "spec": "work/tasks/T83.md",
+        "mode": "active",
+        "defaultNext": "T84",
+        "scopeOverride": "최대10개 근육의 첫 기능 batch를 실제 조사/교차 검증하고 카드에 연결한다. T78 전체 target에 대해 나머지 batch 명세/ID를 T84 앞에 발급한다. 작용·움직이는 구조·고정 조건·관절/분절·갈래별 차이·주동/보조 역할을 구분한다. 얼굴/눈/혀/괄약근 등도 관절 회전 모델에 억지로 넣지 않는다. 텍스트 근거와 motion clip 지원 상태를 별도로 저장한다. 모든 근육 기능 연구가 끝나기 전에 clip 제작을 시작하지 않는다.",
+        "prerequisite": "T82 pass",
+        "executionAmendment": "2026-09-28 full muscles before nerves",
+        "prerequisiteIds": [
+          "T82"
+        ]
+      },
+      "after": {
+        "id": "T83",
+        "title": "전체 한글 기능 설명 검증·카드 연결",
+        "model": "Luna Max",
+        "spec": "work/tasks/T83.md",
+        "mode": "active",
+        "defaultNext": "T84",
+        "scopeOverride": "24 설계 3/6절에 따라 T81의 workbook staging/매핑/검증 기록을 재사용하고 전체 target의 기능을 조사·교차 검증한다. H열 한자 포함53셀은 한글만으로 정규화하되 의미/방향/고정 조건/괄호 설명을 보존한다. 한자 제거만으로 정확성 확인이라 하지 않는다. 손/발 동명 근육과 부분별 작용을 대조한다. 표정근도 기능 설명은 필수이며 버튼은 움직임으로 이해하기 위치에 disabled 현재 미지원으로 둔다. 지원하지 않는 얼굴 clip/가짜 움직임/별도 scene는 만들지 않는다. 엑셀 밖 근육도 조사하고 기존 검증 claim은 재사용한다. CJK 한자 0건, claim 출처와 UI 채택 상태 분리, 전체 카드 표시를 검증한다. 내부 ≤10개 workUnits로 같은 T83 재개, 전체 설명 완료 전 T84로 넘기지 않는다.",
+        "prerequisite": "T82 pass",
+        "executionAmendment": "2026-09-28 workbook face observation; 24 design takes precedence",
+        "prerequisiteIds": [
+          "T82"
+        ],
+        "amendmentDesign": "design/2026-09-25-muscle-atlas/24-WORKBOOK-FACE-AND-OBSERVATION.md"
+      }
+    },
+    {
+      "taskId": "T84",
+      "before": {
+        "id": "T84",
+        "title": "전신 근육 기능 설명 합격",
+        "model": "Luna Max",
+        "spec": "work/tasks/T84.md",
+        "mode": "active",
+        "defaultNext": "T35",
+        "scopeOverride": "전체 target의 기능 설명과 원문 근거/조건/갈래/기시정지와의 일관성을 대조한다. 누락된 근육이 있으면 부분 완료로 남기고 보완한다. animation이 없다고 기능 텍스트까지 미작성 상태로 두지 않고 설명을 먼저 완성한다. 통과 후 전신 animation 범위/작용군 계획 T35로 간다.",
+        "prerequisite": "T83 및 모든 기능 batch",
+        "executionAmendment": "2026-09-28 full muscles before nerves",
+        "prerequisiteIds": [
+          "T83"
+        ]
+      },
+      "after": {
+        "id": "T84",
+        "title": "전신 근육 기능 설명 합격",
+        "model": "Luna Max",
+        "spec": "work/tasks/T84.md",
+        "mode": "active",
+        "defaultNext": "T35",
+        "scopeOverride": "전체 target의 한글 기능 설명/갈래/조건과 구조의 일관성을 감사한다. 53개 한자 포함 action cell의 의미 보존 및 runtime action 한자0건, 검증 원문과 짧은 UI 분리를 확인한다. 표정근은 설명/구조 필수, 애니메이션만 사용자 제외임을 확인한다. 단순 문자 변환이나 첫 batch를 전수 해부학 검증으로 세지 않는다. 필수 내용 미완이면 해당 unit을 보완하고 T35로 자동 진입하지 않는다.",
+        "prerequisite": "T83 및 모든 기능 batch",
+        "executionAmendment": "2026-09-28 workbook face observation; 24 design takes precedence",
+        "prerequisiteIds": [
+          "T83"
+        ],
+        "amendmentDesign": "design/2026-09-25-muscle-atlas/24-WORKBOOK-FACE-AND-OBSERVATION.md"
+      }
+    },
+    {
+      "taskId": "T85",
+      "before": {
+        "id": "T85",
+        "title": "모든 근육 움직임 학습 coverage 합격",
+        "model": "Astra · 현재 대화 직접 구현",
+        "spec": "work/tasks/T85.md",
+        "mode": "active",
+        "defaultNext": "T61",
+        "scopeOverride": "T78/T35의 모든 근육 target이 기시정지·기능 설명과 실제 같은 model surface 시범 최소1개를 갖는지 검사한다. 전신→근육→움직임으로 이해하기→수축/관련 신체 운동→복원을 실제 scene에서 검증한다. scale-only/뼈만/다른 viewer/근육 숨김 대체는 실패다. 주변 구조의 수동 변형과 부착·관통·camera/layer/선택 연속성, 설명 동기를 확인한다. 미지원 근육/형상이 남으면 partial이며 신경 단계로 자동 진입하지 않는다. 모든 가능한 작용/정량 생리 시뮬레이션 완료로 과장하지 않는다.",
+        "prerequisite": "모든 동결 animation batch 및 T47 감사",
+        "executionAmendment": "2026-09-28 full muscles before nerves",
+        "prerequisiteIds": [
+          "T47"
+        ]
+      },
+      "after": {
+        "id": "T85",
+        "title": "필수 근육 움직임 합격 — 표정근 사용자 제외 별도",
+        "model": "Astra · 현재 대화 직접 구현",
+        "spec": "work/tasks/T85.md",
+        "mode": "active",
+        "defaultNext": "T61",
+        "scopeOverride": "24/T35에서 동결한 필수 motion target 전부가 검증된 같은 model surface의 대표 시범과 기시정지/한글 기능 설명을 갖는지 실제 scene에서 확인한다. exact 표정근 deferred_by_user는 clip 합격 분모에서만 제외하며 구조/설명/세 이름/선택은 필수다. 해당 버튼은 disabled 현재 미지원이며 재생 명령/로더/새 scene를 호출하지 않아야 한다. 전신→근육 선택→움직임→설명→복원을 카메라/레이어/관찰 override 연속성까지 검증한다. 다른 viewer/뼈만/scale-only/숨김 대체는 실패. 비제외 필수 미지원이 남으면 partial; 표정근 명시 제외만 남으면 개정 gate pass 가능하나 모든 근육 animation 완료라 부르지 않는다. 이 gate 통과 후에만 신경 단계를 제시한다.",
+        "prerequisite": "모든 동결 animation batch 및 T47 감사",
+        "executionAmendment": "2026-09-28 workbook face observation; 24 design takes precedence",
+        "prerequisiteIds": [
+          "T47"
+        ],
+        "amendmentDesign": "design/2026-09-25-muscle-atlas/24-WORKBOOK-FACE-AND-OBSERVATION.md"
+      }
+    },
+    {
+      "taskId": "T100",
+      "before": {
+        "id": "T100",
+        "title": "광배근 단일 장면 통합",
+        "model": "Luna Max",
+        "spec": "work/tasks/T100.md",
+        "prerequisiteIds": [
+          "T99"
+        ],
+        "defaultNext": "T108",
+        "mode": "active",
+        "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+      },
+      "after": {
+        "id": "T100",
+        "title": "광배근 단일 장면 통합",
+        "model": "Luna Max",
+        "spec": "work/tasks/T100.md",
+        "prerequisiteIds": [
+          "T99"
+        ],
+        "defaultNext": "T110",
+        "mode": "active",
+        "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks",
+        "amendmentDesign": "design/2026-09-25-muscle-atlas/24-WORKBOOK-FACE-AND-OBSERVATION.md"
+      }
+    },
+    {
+      "taskId": "T107",
+      "before": {
+        "id": "T107",
+        "title": "뼈 누락 표면 2 취득·통합",
+        "model": "Luna Max",
+        "spec": "work/tasks/T107.md",
+        "prerequisiteIds": [
+          "T78"
+        ],
+        "defaultNext": "T98",
+        "mode": "active",
+        "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+      },
+      "after": {
+        "id": "T107",
+        "title": "뼈 누락 표면 2 취득·통합",
+        "model": "Luna Max",
+        "spec": "work/tasks/T107.md",
+        "prerequisiteIds": [
+          "T78"
+        ],
+        "defaultNext": "T166",
+        "mode": "active",
+        "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks",
+        "amendmentDesign": "design/2026-09-25-muscle-atlas/24-WORKBOOK-FACE-AND-OBSERVATION.md"
+      }
+    },
+    {
+      "taskId": "T109",
+      "before": {
+        "id": "T109",
+        "title": "기존 보류 표면 개별 재검증 2",
+        "model": "Luna Max",
+        "spec": "work/tasks/T109.md",
+        "prerequisiteIds": [
+          "T78"
+        ],
+        "defaultNext": "T110",
+        "mode": "active",
+        "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+      },
+      "after": {
+        "id": "T109",
+        "title": "기존 보류 표면 개별 재검증 2",
+        "model": "Luna Max",
+        "spec": "work/tasks/T109.md",
+        "prerequisiteIds": [
+          "T78"
+        ],
+        "defaultNext": "T111",
+        "mode": "active",
+        "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks",
+        "amendmentDesign": "design/2026-09-25-muscle-atlas/24-WORKBOOK-FACE-AND-OBSERVATION.md"
+      }
+    },
+    {
+      "taskId": "T110",
+      "before": {
+        "id": "T110",
+        "title": "머리 구조 식별·이름·선택 연결 패키지",
+        "model": "Luna Max",
+        "spec": "work/tasks/T110.md",
+        "prerequisiteIds": [
+          "T96"
+        ],
+        "defaultNext": "T111",
+        "mode": "active",
+        "scopeOverride": "22 efficiency design and current execution-queue; internal work units are not separate tasks"
+      },
+      "after": {
+        "id": "T110",
+        "title": "머리 구조 식별·이름·선택 연결 패키지",
+        "model": "Luna Max",
+        "spec": "work/tasks/T110.md",
+        "prerequisiteIds": [
+          "T96"
+        ],
+        "defaultNext": "T108",
+        "mode": "active",
+        "scopeOverride": "24 설계 5–6절을 적용한다. T96의 머리 113개 exact target와 역사 hash는 보존하고 표정근을 첫 내부 최대10-target 단위로 앞당기는 work-order overlay만 만든다. 원본 T97 archive/object index와 검증된 공통 취득·정합 도구를 재사용해 표정근의 실제 object/mesh/hash/side/part/rights/unit/frame/rest pose를 확인하고 실제 표면을 같은 scene에 통합한다. 다른 모델 transform을 증거 없이 복사하지 않는다. canonical 이름/선택은 exact mapping 후, source-only 관찰은 T166 경로로 구분한다. 나머지 머리 target도 모두 대조하고 미완이면 같은 T110/nextUnit으로 재개한다. 정면·좌우·비스듬한 얼굴/전신 실제 화면과 가림·선택·반투명·숨김·복원·성능을 검증한다. 표정근 exact ID/part 관계를 motion-policy overlay의 deferred_by_user 후보로 기록하고 검증된 얼굴 카드의 움직임으로 이해하기 버튼은 disabled 현재 미지원 상태로 유지한다. clip/변형은 만들지 않는다. 엑셀 이름은 미검증 보조자료이며 geometry identity의 근거가 아니다. 필수 표면 부재를 문서로 덮지 않는다.",
+        "executionAmendment": "2026-09-28 workbook face observation; 24 design takes precedence",
+        "amendmentDesign": "design/2026-09-25-muscle-atlas/24-WORKBOOK-FACE-AND-OBSERVATION.md"
+      }
+    },
+    {
+      "taskId": "T166",
+      "before": null,
+      "after": {
+        "id": "T166",
+        "title": "전신 모형 관찰 선택·반투명·숨김·복원",
+        "model": "Luna Max",
+        "spec": "work/tasks/T166.md",
+        "prerequisiteIds": [
+          "T107"
+        ],
+        "prerequisite": "T101–T107의 해당 source scope 검증/장면 통합. 전체 geometry 완성이나 canonical 전수 binding은 전제하지 않음.",
+        "defaultNext": "T98",
+        "mode": "active",
+        "scopeOverride": "24 설계 4절 전체 범위의 공통 관찰 도구만 구현한다. 실제 표시 적격 node의 inspectionSelection과 기존 canonical learningSelection을 분리하고 source-only도 정체성 승격 없이 관찰 선택할 수 있게 한다. 주변 흐리게/선택 반투명/선택 숨기기, 옵션의 격리/맞춤/다중 선택/단계 숨김, undo/redo/보기 복원을 구현한다. 단일 root/renderer/camera와 공통 reducer/controller를 재사용한다. held/default hidden/layer-off/region-filter는 어떤 선택·복원보다 우선한다. 희소 node 상태와 최대50개 표시 상태 history만 보관하며 geometry/원본 manifest는 수정하지 않는다. 실제 반투명과 깊이/가림, 숨김 후 뒤쪽 선택, 늦은 로딩, 카드/검색/region/레이어/키보드 회귀를 검증한다. 1440/1024/390px 실제 화면·console 및 전후 성능, 20회 전환 resource 안정성·renderer1/중복0/표시 변경 재취득0을 확인한다. 새 geometry/학습 claim/신경/모션을 구현하지 않는다.",
+        "executionAmendment": "2026-09-28 workbook face observation; 24 design takes precedence",
+        "amendmentDesign": "design/2026-09-25-muscle-atlas/24-WORKBOOK-FACE-AND-OBSERVATION.md"
+      }
+    },
+    {
+      "key": "fullMuscleOrderAmendment",
+      "before": {
+        "date": "2026-09-28",
+        "status": "planning_only",
+        "T73_T76": "unchanged",
+        "design": "design/2026-09-25-muscle-atlas/19-ALL-MUSCLES-BEFORE-NERVES.md",
+        "prompts": "design/2026-09-25-muscle-atlas/20-SERIAL-PROMPTS-FULL-SCOPE.md",
+        "dynamicBatchGates": {
+          "T79": "all structure batches before T80",
+          "T81": "all origin/insertion batches before T82",
+          "T83": "all function batches before T84",
+          "T66": "all muscle animation batches before T47/T85",
+          "T87": "all nerve evidence batches before T88",
+          "T89": "all nerve geometry batches before T90",
+          "T91": "all nerve dysfunction explanation batches before T65"
+        },
+        "rule": "No nerve execution before all muscle motion target gate T85; no pilot as global completion"
+      },
+      "after": {
+        "date": "2026-09-28",
+        "status": "planning_only",
+        "T73_T76": "unchanged",
+        "design": "design/2026-09-25-muscle-atlas/19-ALL-MUSCLES-BEFORE-NERVES.md",
+        "prompts": "design/2026-09-25-muscle-atlas/20-SERIAL-PROMPTS-FULL-SCOPE.md",
+        "dynamicBatchGates": {
+          "T79": "all structure batches before T80",
+          "T81": "all origin/insertion batches before T82",
+          "T83": "all function batches before T84",
+          "T66": "all muscle animation batches before T47/T85",
+          "T87": "all nerve evidence batches before T88",
+          "T89": "all nerve geometry batches before T90",
+          "T91": "all nerve dysfunction explanation batches before T65"
+        },
+        "rule": "No nerve execution before all muscle motion target gate T85; no pilot as global completion",
+        "motionScopeSupersededBy": "24-WORKBOOK-FACE-AND-OBSERVATION.md section 6: exact facial-expression animations deferred_by_user; all other required motion gates retained."
+      }
+    }
+  ],
+  "preservedSnapshotNextTask": "T102",
+  "preservedExistingTaskStatuses": true,
+  "statusAppendHeading": "Workbook / face / observation plan — 2026-09-28"
+}
