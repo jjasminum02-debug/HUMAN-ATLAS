@@ -8,6 +8,14 @@ test('source-only context never becomes selectable', () => { assert(visible(asse
 test('supplements require explicit opt-in, stay unbound', () => { const a = {...asset, defaultVisible:false, supplement:true}; assert(!visible(a, view)); assert(visible(a, {...view,supplements:true})); assert(!pickable(a)); });
 test('held identity cannot be revealed through layer/opt-in', () => { const a = {...asset, defaultVisible:false, pickState:'held', holdReasons:['identity']}; assert(!visible(a, {...view,supplements:true})); assert(!pickable(a)); });
 test('region/layer demand excludes unrelated geometry', () => { assert(!visible(asset, {...view,region:'head'})); assert(!visible(asset,{...view,muscles:false})); });
+test('T95 overlapping region union keeps one asset visible and empty filters mean whole body', () => {
+ const shared = {...asset,regions:['head','neck']};
+ assert(visible(shared,{...view,region:null,regionIds:['head','neck']}));
+ assert(visible(shared,{...view,region:null,regionIds:[]}));
+ assert(!visible(shared,{...view,region:null,regionIds:['foot']}));
+ assert(!visible({...shared,layer:'bone'},{...view,regionIds:['head','neck'],bones:false}));
+ assert(!visible({...shared,defaultVisible:false,localDisplay:{beforeDefaultVisible:false,afterDefaultVisible:false,state:'held',sourceSha256:asset.sourceSha256,integrityHolds:['identity'],evidenceIds:[],retainedHoldReasons:['identity'],bindingState:'held',publicRedistribution:'held',humanReviewed:false,basis:'preserved_historical_policy'}},{...view,regionIds:['head','neck'],supplements:true}));
+});
 test('reject conflicting duplicate IDs and source-only binding promotion', () => {
  const m = { version:1,localOnly:true,publicRedistribution:'held',frame:'HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR',unit:'m',lodLevels:1,chunks:[{id:'a',url:'/__atlas/body/a.glb',sha256:'a'.repeat(64),bytes:10,assets:[asset]}] };
  validateManifest(m); assert.throws(()=>validateManifest({...m,unit:'mm'})); assert.throws(()=>validateManifest({...m,chunks:[m.chunks[0],m.chunks[0]]}));

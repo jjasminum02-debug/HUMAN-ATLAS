@@ -299,10 +299,12 @@ export function parseAtlasRoute(search: string, validCategoryIds: ReadonlySet<st
   return { regionId, side, selection, legacyRoute: false };
 }
 
-export function serializeAtlasRoute(search: string, state: AtlasRouteState): string {
+export function serializeAtlasRoute(search: string, state: AtlasRouteState, selectedRegionIds?: readonly string[]): string {
   const params = new URLSearchParams(search);
   params.delete("muscle");
-  if (state.regionId) params.set("region", state.regionId); else params.delete("region");
+  params.delete("region");
+  const regions = selectedRegionIds ?? (state.regionId ? [state.regionId] : []);
+  for (const regionId of [...new Set(regions)]) params.append("region", regionId);
   if (state.selection) {
     params.set("kind", state.selection.kind);
     params.set("id", state.selection.conceptId);

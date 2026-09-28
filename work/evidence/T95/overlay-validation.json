@@ -1,0 +1,90 @@
+{
+  "task": "T95",
+  "status": "passed",
+  "manifestSha256": "67a2f79b9248d18a754a6567e1b0bb4b1fce698ad0e3100a172b428ee58341f8",
+  "overlaySha256": "59624356f1afc113c6bce8421453831d2dc6540c9003f05196ccf3ddcb9e0b34",
+  "sourceAssetCount": 543,
+  "sourceBytesMutated": false,
+  "sourceRegionsMutated": false,
+  "effectiveManifestChanges": {
+    "regionMembershipOnly": true,
+    "addedRegionBySourceId": {
+      "FJ3279": [
+        "upper-limb"
+      ]
+    }
+  },
+  "checked": [
+    {
+      "id": "FJ3237",
+      "side": "left",
+      "sourceRegions": [
+        "shoulder-scapular",
+        "thorax"
+      ],
+      "productRegions": [],
+      "newProductRegions": [],
+      "sourceSha256": "2491009d53eaed99ccb2a802b29402eec715eb8d207fb819fad67b0720195cf2",
+      "sourceOnlyUnbound": true,
+      "humanReviewed": false,
+      "publicRedistribution": "held"
+    },
+    {
+      "id": "FJ3279",
+      "side": "left",
+      "sourceRegions": [
+        "shoulder-scapular",
+        "thorax"
+      ],
+      "productRegions": [
+        "upper-limb"
+      ],
+      "newProductRegions": [
+        "upper-limb"
+      ],
+      "sourceSha256": "e63a5675c6cdbe942322305920241b4a63762d7a65879572400f444fa3d42739",
+      "sourceOnlyUnbound": true,
+      "humanReviewed": false,
+      "publicRedistribution": "held"
+    },
+    {
+      "id": "FJ3362",
+      "side": "right",
+      "sourceRegions": [
+        "shoulder-scapular",
+        "upper-limb"
+      ],
+      "productRegions": [],
+      "newProductRegions": [],
+      "sourceSha256": "9a111cac8351e79dd1315aea90108fe56f78e4bf0159473e6ad727ba91b60e6d",
+      "sourceOnlyUnbound": true,
+      "humanReviewed": false,
+      "publicRedistribution": "held"
+    },
+    {
+      "id": "FJ3384",
+      "side": "right",
+      "sourceRegions": [
+        "shoulder-scapular",
+        "upper-limb"
+      ],
+      "productRegions": [
+        "upper-limb"
+      ],
+      "newProductRegions": [],
+      "sourceSha256": "1641b04e55f9d75bdd6f1f4f07ea596e5dea0a8cb6b348bff47281b8a0bc6e5d",
+      "sourceOnlyUnbound": true,
+      "humanReviewed": false,
+      "publicRedistribution": "held"
+    }
+  ],
+  "invariants": {
+    "exactlyFourFrozenSourceRows": true,
+    "sideMatchesT78": true,
+    "sourceOnlyAndNoStableId": true,
+    "humanReviewNotPromoted": true,
+    "publicRedistributionHeld": true,
+    "claviclesComparisonOnly": true,
+    "uniqueNodePerSourceAsset": true
+  }
+}

@@ -143,6 +143,40 @@ test("region, typed selection, and legacy muscle URL adapters preserve explicit 
   assert.equal(serializeAtlasRoute("", part!), "region=leg&kind=muscle&id=HA-M-000001&part=HA-P-000001");
 });
 
+test("T95 repeated region parameters normalize to a unique union and keep old single-region URLs", () => {
+  const multi = resolveLearnerRoute("?region=neck&region=head&region=neck", navigation, refs);
+  assert.deepEqual(multi.selectedRegionIds, ["head", "neck"]);
+  assert.equal(multi.route.regionId, "head");
+  assert.equal(multi.canonicalize, true, "duplicate and non-canonical order are normalized");
+  assert.equal(serializeAtlasRoute("?tab=structure", multi.route, multi.selectedRegionIds), "tab=structure&region=head&region=neck");
+  assert.deepEqual(resolveLearnerRoute("?region=neck", navigation, refs).selectedRegionIds, ["neck"]);
+  assert.deepEqual(resolveLearnerRoute("?", navigation, refs).selectedRegionIds, []);
+  const malformed = resolveLearnerRoute("?region=neck&region=not-a-region", navigation, refs);
+  assert.deepEqual(malformed.selectedRegionIds, []);
+  assert.match(malformed.notice ?? "", /부위/);
+});
+
+test("T95 route validation preserves a card covered by any selected region and clears an excluded card", () => {
+  const covered = resolveLearnerRoute("?region=neck&region=leg&kind=muscle&id=HA-M-000001", navigation, refs);
+  assert.deepEqual(covered.selectedRegionIds, ["neck", "leg"]);
+  assert.equal(covered.route.selection?.kind, "muscle");
+  const excluded = resolveLearnerRoute("?region=head&kind=muscle&id=HA-M-000001", navigation, refs);
+  assert.deepEqual(excluded.selectedRegionIds, ["head"]);
+  assert.equal(excluded.route.selection, null);
+  assert.match(excluded.notice ?? "", /연결되어 있지 않습니다/);
+});
+
+test("T95 explicit whole-body card URLs keep an empty filter across reload", () => {
+  const muscle = resolveLearnerRoute("?kind=muscle&id=HA-M-000001&view=whole", navigation, refs);
+  assert.deepEqual(muscle.selectedRegionIds, []);
+  assert.equal(muscle.route.regionId, null);
+  assert.equal(muscle.route.selection?.kind, "muscle");
+  const bone = resolveLearnerRoute("?kind=bone&id=HA-S-TIBIA&instance=HA-SI-R-HA-S-TIBIA&mesh=HA-MESH-BP3D4-FJ3387&side=right&view=whole", navigation, refs);
+  assert.deepEqual(bone.selectedRegionIds, []);
+  assert.equal(bone.route.regionId, null);
+  assert.equal(bone.route.selection?.kind, "bone");
+});
+
 test("learner category routes expose twelve regions but only the six sourced leg memberships", () => {
   assert.equal(navigation.categories.length, 12);
   assert.deepEqual(categoryMemberships(navigation, "leg").map((row) => row.entityId), [

@@ -1,0 +1,93 @@
+{
+  "task": "T95",
+  "testedAt": "2026-09-28T05:25:49Z",
+  "browser": "Codex in-app browser with local Vite app at 127.0.0.1:4175",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844,
+      "documentScrollWidth": 390,
+      "canvasCount": 1,
+      "regionToggleCount": 12,
+      "legacyMobileSelectCount": 0,
+      "explorerToggleBehavior": "opens and remains open after keyboard toggles"
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "documentScrollWidth": 1024,
+      "canvasCount": 1,
+      "regionToggleCount": 12
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "documentScrollWidth": 1440,
+      "canvasCount": 1,
+      "regionToggleCount": 12
+    }
+  ],
+  "interactions": {
+    "mobileKeyboard": [
+      {
+        "action": "Space on 목 while 머리 was active",
+        "url": "?kind=muscle&id=HA-M-000003&side=right&region=head&region=neck&region=leg&region=upper-limb",
+        "activeRegions": ["head", "neck", "leg", "upper-limb"],
+        "explorerStayedOpen": true
+      },
+      {
+        "action": "Space on 머리",
+        "url": "?kind=muscle&id=HA-M-000003&side=right&region=neck&region=leg&region=upper-limb",
+        "activeRegions": ["neck", "leg", "upper-limb"],
+        "explorerStayedOpen": true
+      },
+      {
+        "action": "Space on 전신",
+        "url": "?kind=muscle&id=HA-M-000003&side=right&view=whole",
+        "activeRegions": [],
+        "explorerClosed": true
+      }
+    ],
+    "desktopSelectionAndHistory": {
+      "singleRegionThenSecondRegion": "?region=head&region=neck",
+      "toggleExistingRegionOff": "?region=head",
+      "clearToWhole": "root URL with an empty region set",
+      "history": "back and forward restored each active region set; reload restored the URL set"
+    },
+    "crossRegionSearch": {
+      "before": "?region=head",
+      "selectedResult": "HA-M-000003 Tibialis anterior",
+      "after": "?region=head&region=leg&kind=muscle&id=HA-M-000003&side=right",
+      "preservedExistingRegion": true
+    },
+    "filteredSelectionClear": {
+      "action": "remove leg while tibialis anterior was selected under head+leg",
+      "after": "?region=head",
+      "cardCleared": true,
+      "cameraRefit": false,
+      "visualComparison": "head framing remained at approximately the same size and position"
+    },
+    "layerControls": {
+      "bonesOffOn": "bone layer toggle turned off and restored in the real browser without changing the selected-region URL",
+      "musclesOffOn": "muscle layer toggle turned off and restored in the real browser; selected region filters remained active",
+      "heldAndLayerPriority": "unit tests confirm region/opt-in cannot reveal held identity and layer-off remains a visibility gate"
+    }
+  },
+  "accessibility": {
+    "toggleSemantics": "12 region buttons expose pressed state and are keyboard operable",
+    "wholeBodyControl": "separate pressed toggle clears the region set",
+    "singleRegionSelect": "not present at 390px"
+  },
+  "console": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "scene": {
+    "canvasCountAcrossViewports": 1,
+    "rendererAndRoot": "one existing scene; no parallel viewport created"
+  },
+  "notes": [
+    "Rendered anatomy remains limited to the currently available T77 package; this UI test does not claim full-body coverage.",
+    "Clavicles were retained as comparison-only overlay rows; no source membership, mesh, binding, rights, or review state was changed."
+  ]
+}

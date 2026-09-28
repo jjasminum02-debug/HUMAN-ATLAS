@@ -16,7 +16,6 @@ import {
   categoryMemberships,
   defaultLearnerRoute,
   resolveLearnerRoute,
-  routeForCategory,
   routeForBoneSelection,
   routeForMuscleSelection,
 } from '../domain/regionNavigation';
@@ -42,11 +41,16 @@ function LearnerNameRows({ name }: { name: LearnerName }) {
   </div>;
 }
 
-function routeUrl(route: AtlasRouteState, whole: boolean) {
-  const params = new URLSearchParams(serializeAtlasRoute(location.search, route));
-  if (whole && route.regionId) params.set('view', 'whole'); else params.delete('view');
+function routeUrl(route: AtlasRouteState, whole: boolean, selectedRegionIds: readonly string[]) {
+  const params = new URLSearchParams(serializeAtlasRoute(location.search, route, selectedRegionIds));
+  if (whole && (selectedRegionIds.length > 0 || route.selection)) params.set('view', 'whole'); else params.delete('view');
   const query = params.toString();
   return `${location.pathname}${query ? `?${query}` : ''}${location.hash}`;
+}
+
+function orderedRegionIds(ids: readonly string[]) {
+  const selected = new Set(ids);
+  return navigation.categories.filter((category) => selected.has(category.id)).map((category) => category.id);
 }
 
 function routeEntityId(selection: Selection | null): string | null {
@@ -64,6 +68,7 @@ export default function App() {
   const [catalog, setCatalog] = useState<PilotCatalog | null>(null);
   const [error, setError] = useState('');
   const [route, setRoute] = useState<AtlasRouteState>(() => defaultLearnerRoute(navigation));
+  const [selectedRegionIds, setSelectedRegionIds] = useState<string[]>([]);
   const [routeReady, setRouteReady] = useState(false);
   const [sceneEntered, setSceneEntered] = useState(false);
   const [wholeView, setWholeView] = useState(true);
@@ -131,7 +136,8 @@ export default function App() {
     const sync = () => {
       const resolved = resolveLearnerRoute(location.search, navigation, routeRefs);
       setRoute(resolved.route);
-      const whole = !resolved.route.regionId || new URLSearchParams(location.search).get("view") === "whole";
+      setSelectedRegionIds(resolved.selectedRegionIds);
+      const whole = resolved.selectedRegionIds.length === 0 || new URLSearchParams(location.search).get("view") === "whole";
       setWholeView(whole);
       setDetailsOpen(Boolean(resolved.route.selection));
       setQuery('');
@@ -141,7 +147,7 @@ export default function App() {
       setTab('구조');
       setSelectedActionId(null);
       if (resolved.canonicalize) {
-        const nextUrl = routeUrl(resolved.route, whole);
+        const nextUrl = routeUrl(resolved.route, whole, resolved.selectedRegionIds);
         if (nextUrl !== `${location.pathname}${location.search}${location.hash}`) {
           history.replaceState(null, '', nextUrl);
         }
@@ -152,7 +158,8 @@ export default function App() {
     return () => window.removeEventListener('popstate', sync);
   }, [catalog, routeRefs]);
 
-  const region = navigation.categories.find((candidate) => candidate.id === route.regionId) ?? null;
+  const selectedRegions = selectedRegionIds.map((id) => navigation.categories.find((candidate) => candidate.id === id)).filter((value): value is NonNullable<typeof value> => Boolean(value));
+  const regionLabel = selectedRegions.map((row) => row.labelKo).join(' · ');
   const selectedId = routeEntityId(route.selection);
   const selected = selectedId ? concepts.find((concept) => concept.id === selectedId) : undefined;
   useEffect(() => {
@@ -168,11 +175,11 @@ export default function App() {
   const activeAction = actionOptions.find((action) => action.id === selectedActionId) ?? actionOptions[0] ?? null;
   const actionCard = activeAction?.text ?? null;
   const parts = concepts.filter((concept) => concept.entityType === 'muscle_part' && concept.parentId === parentId);
-  const regionRows = region ? categoryMemberships(navigation, region.id) : [];
-  const regionMuscles = regionRows.flatMap((row) => {
+  const regionRows = selectedRegionIds.flatMap((regionId) => categoryMemberships(navigation, regionId));
+  const regionMuscles = [...new Map(regionRows.flatMap((row) => {
     const concept = concepts.find((candidate) => candidate.id === row.entityId);
-    return concept ? [concept] : [];
-  });
+    return concept ? [[concept.id, concept] as const] : [];
+  })).values()];
   const searchResults = catalog && query.trim()
     ? [
       ...findMuscles(catalog, query).map((row) => ({ ...row, kind: 'muscle' as const })),
@@ -186,15 +193,18 @@ export default function App() {
       return items;
     }, [])
     : regionMuscles.map((concept) => ({ id: concept.id, label: nameFor(catalog!, concept.id).label, approximate: false, kind: 'muscle' as const }));
-  function commitRoute(nextRoute: AtlasRouteState, whole = wholeView) {
-    const nextUrl = routeUrl(nextRoute, whole);
+  function commitRoute(nextRoute: AtlasRouteState, whole = wholeView, nextRegionIds = selectedRegionIds, keepExploreOpen = false) {
+    const canonicalRegions = orderedRegionIds(nextRegionIds);
+    const normalizedRoute = { ...nextRoute, regionId: canonicalRegions[0] ?? nextRoute.regionId };
+    const nextUrl = routeUrl(normalizedRoute, whole, canonicalRegions);
     const currentUrl = `${location.pathname}${location.search}${location.hash}`;
     if (nextUrl !== currentUrl) {
       history.pushState(null, '', nextUrl);
     }
-    setRoute(nextRoute);
+    setRoute(normalizedRoute);
+    setSelectedRegionIds(canonicalRegions);
     setWholeView(whole);
-    setExploreOpen(false);
+    if (!keepExploreOpen) setExploreOpen(false);
     setRouteNotice(null);
     setUnmappedMeshNotice(null);
     setTab('구조');
@@ -204,7 +214,18 @@ export default function App() {
 
   function chooseRegion(categoryId: string) {
     setQuery('');
-    commitRoute(routeForCategory(navigation, categoryId, null), false);
+    const nextRegionIds = orderedRegionIds(selectedRegionIds.includes(categoryId)
+      ? selectedRegionIds.filter((id) => id !== categoryId)
+      : [...selectedRegionIds, categoryId]);
+    let selection = route.selection;
+    let side = route.side;
+    if (nextRegionIds.length > 0 && route.selection?.kind === 'muscle'
+        && !nextRegionIds.some((id) => categoriesForMuscleConcept(navigation, route.selection!.conceptId).includes(id))) {
+      selection = null; side = null;
+    } else if (nextRegionIds.length > 0 && selection?.kind === 'bone' && !nextRegionIds.includes('leg')) {
+      selection = null; side = null;
+    }
+    commitRoute({ regionId: nextRegionIds[0] ?? null, side, selection, legacyRoute: false }, nextRegionIds.length === 0, nextRegionIds, true);
   }
 
   function chooseEntity(entityId: string) {
@@ -212,11 +233,27 @@ export default function App() {
     if (!concept) return;
     const conceptId = muscleConceptId(concept, entityId);
     const partId = concept.entityType === 'muscle_part' ? entityId : undefined;
-    commitRoute(routeForMuscleSelection(navigation, conceptId, partId, route.regionId));
+    const memberships = categoriesForMuscleConcept(navigation, conceptId);
+    let nextRegionIds = selectedRegionIds;
+    const alreadyCovered = nextRegionIds.some((id) => memberships.includes(id));
+    if (memberships.length > 0 && (nextRegionIds.length === 0 || !alreadyCovered)) {
+      nextRegionIds = orderedRegionIds([...nextRegionIds, memberships[0]]);
+    }
+    const matchedRegion = nextRegionIds.find((id) => memberships.includes(id)) ?? route.regionId;
+    const nextRoute = routeForMuscleSelection(navigation, conceptId, partId, matchedRegion);
+    nextRoute.regionId = nextRegionIds[0] ?? nextRoute.regionId;
+    const whole = nextRegionIds.length === 0 ? true
+      : nextRegionIds.length === selectedRegionIds.length ? wholeView : false;
+    commitRoute(nextRoute, whole, nextRegionIds);
   }
 
   function chooseBone(selection: Extract<Selection, { kind: 'bone' }>) {
-    commitRoute(routeForBoneSelection(navigation, selection));
+    let nextRegionIds = selectedRegionIds;
+    if (!nextRegionIds.includes('leg')) nextRegionIds = orderedRegionIds([...nextRegionIds, 'leg']);
+    const nextRoute = routeForBoneSelection(navigation, selection);
+    nextRoute.regionId = nextRegionIds[0] ?? nextRoute.regionId;
+    const whole = nextRegionIds.length === selectedRegionIds.length ? wholeView : false;
+    commitRoute(nextRoute, whole, nextRegionIds);
   }
 
   function chooseSearchItem(item: SearchListItem) {
@@ -226,20 +263,25 @@ export default function App() {
 
 
   function clearSelection() {
-    commitRoute({ regionId: route.regionId, side: route.side, selection: null, legacyRoute: false });
+    commitRoute({ regionId: selectedRegionIds[0] ?? route.regionId, side: route.side, selection: null, legacyRoute: false });
+  }
+
+  function clearRegionFilter() {
+    setQuery('');
+    commitRoute({ ...route, regionId: null, legacyRoute: false }, true, []);
   }
 
   if (error) return <AtlasLoading failed onRetry={() => location.reload()}/>;
   if (!catalog || !routeReady) return <AtlasLoading/>;
 
-  const stageTitle = wholeView ? '전신 살펴보기' : region?.labelKo ?? '전신 살펴보기';
+  const stageTitle = selectedRegions.length === 0 ? '전신 살펴보기' : selectedRegions.map((row) => row.labelKo).join(' · ');
   const stageDescription = '회전하고 확대하며 구조를 살펴보세요.';
 
   return <div className="study-shell atlas-shell">
     <a className="skip-link" inert={!sceneEntered} href={route.selection ? "#study-details" : "#atlas-stage"}>{route.selection ? "선택한 구조 설명으로 이동" : "모형으로 이동"}</a>
     <header className="study-header" inert={!sceneEntered}>
       <div className="header-brand-group">
-        <button className="brand" aria-label="Human Atlas 전신 홈" onClick={() => { setQuery(''); commitRoute(defaultLearnerRoute(navigation), true); }}><span className="brand-dot"/> HUMAN ATLAS</button>
+        <button className="brand" aria-label="Human Atlas 전신 홈" onClick={() => { setQuery(''); commitRoute(defaultLearnerRoute(navigation), true, []); }}><span className="brand-dot"/> HUMAN ATLAS</button>
         <button type="button" className="app-info-trigger" onClick={() => appInfoDialog.current?.showModal()}>앱 정보</button>
       </div>
       <button className="explore-trigger" aria-expanded={exploreOpen} aria-controls="atlas-explorer" onClick={() => setExploreOpen(!exploreOpen)}>부위 탐색</button>
@@ -259,21 +301,16 @@ export default function App() {
       <aside inert={!sceneEntered} id="atlas-explorer" data-searching={Boolean(query.trim())} onKeyDown={event => { if (event.key === 'Escape') { setExploreOpen(false); document.querySelector<HTMLElement>('.explore-trigger')?.focus(); } }} className={`study-sidebar ${exploreOpen ? "is-open" : ""}`} aria-label="부위 탐색">
         <button className="explore-close" onClick={() => setExploreOpen(false)}>탐색 닫기</button>
         <div className="sidebar-heading"><span className="eyebrow">EXPLORE ANATOMY</span><h1>부위 탐색</h1><p>어디부터 살펴볼까요?</p></div>
-        <label className="mobile-region-picker">부위 선택
-          <select aria-label="부위 선택" value={region?.id ?? ''} onChange={(event) => event.target.value && chooseRegion(event.target.value)}>
-            <option value="" disabled>부위를 선택해 주세요</option>
-            {navigation.categories.map((category) => <option key={category.id} value={category.id}>{category.labelKo}</option>)}
-          </select>
-        </label>
+        <button type="button" className="region-all-toggle" aria-pressed={selectedRegionIds.length === 0} onClick={clearRegionFilter}>전신</button>
         <nav className="region-grid" aria-label="12개 해부학 부위">
-          {navigation.categories.map((category) => <button key={category.id} type="button" className={category.id === route.regionId ? 'is-current' : ''} aria-pressed={category.id === route.regionId} onClick={() => chooseRegion(category.id)}>{category.labelKo}</button>)}
+          {navigation.categories.map((category) => <button key={category.id} type="button" className={selectedRegionIds.includes(category.id) ? 'is-current' : ''} aria-pressed={selectedRegionIds.includes(category.id)} onClick={() => chooseRegion(category.id)}>{category.labelKo}</button>)}
         </nav>
         <div className="region-list-heading">
           <span className="eyebrow">{query.trim() ? 'SEARCH RESULTS' : 'STRUCTURES'}</span>
-          <h2>{query.trim() ? '검색 결과' : region?.labelKo ?? '모형에서 시작하세요'}</h2>
-          <p className="result-count" role="status">{query.trim() ? `검색 결과 ${listItems.length}` : region ? `${listItems.length}개 연결된 근육` : '부위를 선택해 주세요'}</p>
+          <h2>{query.trim() ? '검색 결과' : regionLabel || '전신 구조 목록'}</h2>
+          <p className="result-count" role="status">{query.trim() ? `검색 결과 ${listItems.length}` : selectedRegions.length ? `${listItems.length}개 연결된 근육` : '부위 제한 없음'}</p>
         </div>
-        <nav className="study-list region-structure-list" aria-label={query.trim() ? '검색 구조 목록' : `${region?.labelKo ?? '선택한 부위'} 구조 목록`}>
+        <nav className="study-list region-structure-list" aria-label={query.trim() ? '검색 구조 목록' : `${regionLabel || '전신'} 구조 목록`}>
           {listItems.map((item) => {
             const itemConcept = concepts.find((concept) => concept.id === item.id);
             const baseId = muscleConceptId(itemConcept, item.id);
@@ -291,12 +328,12 @@ export default function App() {
               {item.approximate && <em>비슷한 이름</em>}
             </button>;
           })}
-          {listItems.length === 0 && <p className="quiet-note">{query.trim() ? '찾는 이름이 아직 등록되지 않았습니다. 다른 언어 이름으로도 검색해 보세요.' : region ? '이 부위의 설명 연결은 준비 중입니다. 모형은 자유롭게 둘러볼 수 있습니다.' : '부위를 고르거나 이름을 검색하세요. 설명이 연결된 근육과 뼈는 모형에서도 선택할 수 있습니다.'}</p>}
+          {listItems.length === 0 && <p className="quiet-note">{query.trim() ? '찾는 이름이 아직 등록되지 않았습니다. 다른 언어 이름으로도 검색해 보세요.' : selectedRegions.length ? '이 부위의 설명 연결은 준비 중입니다. 모형은 자유롭게 둘러볼 수 있습니다.' : '이름을 검색하거나 부위를 선택해 구조 목록을 좁혀 보세요.'}</p>}
         </nav>
       </aside>
       <section id="atlas-stage" tabIndex={-1} className="study-stage" aria-label={`${stageTitle} 학습 장면`}>
         <div className="stage-caption" aria-hidden={!sceneEntered}><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{stageTitle}</h2><p>{stageDescription}</p></div>
-        <WholeBodyViewer onEntered={setSceneEntered} whole={wholeView} onWholeChange={() => { setQuery(''); commitRoute(defaultLearnerRoute(navigation), true); }} region={route.regionId} selectedId={selectedId} selectedIds={route.side === 'left' ? [] : [...(selectedId ? [selectedId] : []), ...(!route.selection || route.selection.kind !== 'muscle' || route.selection.partId ? [] : parts.map(part => part.id))]} onSelect={(id, side) => {
+        <WholeBodyViewer onEntered={setSceneEntered} whole={selectedRegionIds.length === 0} onWholeChange={clearRegionFilter} regionIds={selectedRegionIds} selectedId={selectedId} selectedIds={route.side === 'left' ? [] : [...(selectedId ? [selectedId] : []), ...(!route.selection || route.selection.kind !== 'muscle' || route.selection.partId ? [] : parts.map(part => part.id))]} onSelect={(id, side) => {
           if (id.startsWith('HA-S-')) {
             const instance = navigation.structureInstances.find(row => row.structureId === id && row.side === side);
             if (instance) chooseBone({ kind: 'bone', conceptId: id, instanceId: instance.id });
@@ -361,7 +398,7 @@ export default function App() {
                 </fieldset>
               </div> : <div className="upcoming"><h3>작용 정보를 준비하고 있습니다</h3></div>}
             </section>
-          </> : <div className="upcoming"><h2>{routeNotice ? '주소의 구조 연결을 확인해 주세요' : '구조를 선택해 주세요'}</h2><p>{routeNotice ?? (region ? `${region.labelKo} 목록 또는 설명이 연결된 모형을 선택해 주세요.` : '검색하거나 부위를 선택해 학습할 구조를 찾을 수 있습니다.')}</p></div>}
+          </> : <div className="upcoming"><h2>{routeNotice ? '주소의 구조 연결을 확인해 주세요' : '구조를 선택해 주세요'}</h2><p>{routeNotice ?? (regionLabel ? `${regionLabel} 목록 또는 설명이 연결된 모형을 선택해 주세요.` : '검색하거나 부위를 선택해 학습할 구조를 찾을 수 있습니다.')}</p></div>}
         </div>
       </details>}
     </div>

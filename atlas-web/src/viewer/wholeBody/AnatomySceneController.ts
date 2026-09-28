@@ -90,17 +90,18 @@ export class AnatomySceneController {
     if (time - this.lastReport > 500) { this.report(); this.lastReport = time; }
   };
   setView(view: BodyView) {
-    const regionChanged = view.region !== this.view.region;
-    this.view = view; this.sync(); this.demand();
-    if (regionChanged) this.focus(view.region);
+    this.view = { ...view, ...(view.regionIds ? { regionIds: [...view.regionIds] } : {}) };
+    this.sync(); this.demand();
   }
   private demand() {
     this.queue.demand(this.lost ? [] : this.manifest.chunks.filter(c => c.assets.some(a => visible(a, this.view))).map(c => c.id));
   }
   retry() { this.queue.retry(); this.demand(); }
-  focus(region: string | null) {
+  focus(regionIds: readonly string[] | string | null = []) {
+    const selectedRegions = typeof regionIds === 'string' ? [regionIds] : regionIds ?? [];
     const box = new THREE.Box3();
-    for (const a of this.assets.values()) if ((a.defaultVisible || (a.supplement && this.view.supplements)) && (!region || a.regions.includes(region))) {
+    for (const a of this.assets.values()) if ((a.defaultVisible || (a.supplement && this.view.supplements))
+      && (selectedRegions.length === 0 || selectedRegions.some((regionId) => a.regions.includes(regionId)))) {
       box.expandByPoint(new THREE.Vector3().fromArray(a.bounds[0])); box.expandByPoint(new THREE.Vector3().fromArray(a.bounds[1]));
     }
     this.fitBounds(box);
@@ -216,7 +217,7 @@ export class AnatomySceneController {
       case 'ArrowDown': spherical.phi += 0.12; break;
       case '+': case '=': spherical.radius *= 0.9; break;
       case '-': spherical.radius *= 1.1; break;
-      case 'Home': this.focus(this.view.region); event.preventDefault(); return;
+      case 'Home': this.focus(this.view.regionIds ?? (this.view.region ? [this.view.region] : [])); event.preventDefault(); return;
       default: return;
     }
     event.preventDefault(); spherical.makeSafe(); spherical.radius = THREE.MathUtils.clamp(spherical.radius, 0.06, 8);

@@ -11,6 +11,7 @@ export type LearnerNavigationData = Pick<NavigationContract, "categories" | "mem
 
 export interface ResolvedLearnerRoute {
   route: AtlasRouteState;
+  selectedRegionIds: string[];
   notice: string | null;
   canonicalize: boolean;
 }
@@ -136,30 +137,48 @@ export function resolveLearnerRoute(
 ): ResolvedLearnerRoute {
   const params = new URLSearchParams(search);
   const hasAtlasState = ["region", "kind", "id", "part", "muscle", "side"].some((key) => params.has(key));
-  if (!hasAtlasState) return { route: defaultLearnerRoute(navigation), notice: null, canonicalize: true };
+  if (!hasAtlasState) return { route: defaultLearnerRoute(navigation), selectedRegionIds: [], notice: null, canonicalize: true };
+
+  const categoryOrder = navigation.categories.map((row) => row.id);
+  const requestedRegions = params.getAll("region");
+  if (requestedRegions.some((regionId) => !categoryOrder.includes(regionId))) {
+    return {
+      route: defaultLearnerRoute(navigation), selectedRegionIds: [],
+      notice: "이 주소의 부위를 확인할 수 없습니다. 목록에서 다시 선택해 주세요.", canonicalize: false,
+    };
+  }
+  const uniqueRequested = [...new Set(requestedRegions)];
+  let selectedRegionIds = categoryOrder.filter((regionId) => uniqueRequested.includes(regionId));
+  const normalizedRegionQuery = selectedRegionIds.length === requestedRegions.length
+    && selectedRegionIds.every((regionId, index) => regionId === requestedRegions[index]);
 
   const parsed = parseAtlasRoute(search, new Set(navigation.categories.map((row) => row.id)), refs);
   if (!parsed) {
     return {
-      route: { regionId: null, side: null, selection: null, legacyRoute: false },
+      route: defaultLearnerRoute(navigation), selectedRegionIds: [],
       notice: "이 주소의 부위 또는 구조를 확인할 수 없습니다. 목록에서 다시 선택해 주세요.",
       canonicalize: false,
     };
   }
 
   let route = parsed;
+  if (selectedRegionIds.length > 0 && route.regionId !== selectedRegionIds[0]) {
+    route = { ...route, regionId: selectedRegionIds[0] };
+  }
   let notice: string | null = null;
-  let canonicalize = parsed.legacyRoute;
+  let canonicalize = parsed.legacyRoute || !normalizedRegionQuery;
   const selection = parsed.selection;
+  const explicitWhole = params.get("view") === "whole";
 
   if (selection?.kind === "muscle") {
     const categoryIds = categoriesForMuscleConcept(navigation, selection.conceptId);
-    if (route.regionId && !categoryIds.includes(route.regionId)) {
-      route = { ...route, side: null, selection: null, legacyRoute: false };
+    if (selectedRegionIds.length > 0 && !selectedRegionIds.some((regionId) => categoryIds.includes(regionId))) {
+      route = { ...route, regionId: selectedRegionIds[0] ?? null, side: null, selection: null, legacyRoute: false };
       notice = "이 근육은 선택한 부위의 구조 목록에 연결되어 있지 않습니다.";
       canonicalize = true;
-    } else if (!route.regionId && categoryIds.length === 1) {
+    } else if (selectedRegionIds.length === 0 && !explicitWhole && !route.regionId && categoryIds.length === 1) {
       route = { ...route, regionId: categoryIds[0], side: defaultSide(navigation, categoryIds[0]), legacyRoute: false };
+      selectedRegionIds = [categoryIds[0]];
       canonicalize = true;
     }
   }
@@ -170,15 +189,21 @@ export function resolveLearnerRoute(
       route = { regionId: route.regionId, side: null, selection: null, legacyRoute: false };
       notice = "이 뼈의 출처 연결을 확인할 수 없습니다. 확인된 구조만 선택할 수 있습니다.";
       canonicalize = true;
-    } else if (route.regionId !== normalized.regionId || route.side !== normalized.side ||
+    } else if (selectedRegionIds.length === 0) {
+      route = explicitWhole ? { ...normalized, regionId: null } : normalized;
+      selectedRegionIds = explicitWhole ? [] : normalized.regionId ? [normalized.regionId] : [];
+      canonicalize = canonicalize || !explicitWhole || route.side !== parsed.side ||
+        route.selection?.kind !== "bone" || route.selection.instanceId !== parsed.selection?.instanceId ||
+        route.selection.meshId !== parsed.selection?.meshId;
+    } else if (route.regionId !== selectedRegionIds[0] || route.side !== normalized.side ||
       route.selection?.kind !== "bone" || route.selection.instanceId !== normalized.selection?.instanceId ||
       route.selection.meshId !== normalized.selection?.meshId) {
-      route = normalized;
+      route = { ...normalized, regionId: selectedRegionIds[0] ?? null };
       canonicalize = true;
     }
   }
 
   // An explicit empty selection is a durable URL state (clear/back/forward).
 
-  return { route, notice, canonicalize };
+  return { route, selectedRegionIds, notice, canonicalize };
 }
