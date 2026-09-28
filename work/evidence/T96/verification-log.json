@@ -1,0 +1,79 @@
+{
+  "task": "T96",
+  "date": "2026-09-28",
+  "result": "passed_with_gaps",
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "work/evidence/T96/build_target_freeze.py",
+        "--check"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "python3",
+        "work/evidence/T96/validate_target_freeze.py"
+      ],
+      "exitCode": 0,
+      "stdout": "{\n  \"task\": \"T96\",\n  \"revision\": \"T96-2026-09-28-semantic-freeze-v1\",\n  \"status\": \"passed_with_gaps\",\n  \"checks\": \"passed\",\n  \"sourceRowsAndExactProjection\": 2422,\n  \"priorCandidateReconciliation\": {\n    \"prior\": 556,\n    \"explicitlyExcluded\": 20,\n    \"promotedFromSupport\": 6,\n    \"frozenTargetRecords\": 542\n  },\n  \"targetKinds\": {\n    \"bone\": 80,\n    \"bone_group\": 21,\n    \"bone_series\": 12,\n    \"muscle_complex\": 6,\n    \"muscle_group\": 58,\n    \"muscle_part\": 94,\n    \"named_muscle\": 245,\n    \"repeated_muscle_family\": 26\n  },\n  \"primaryOwners\": {\n    \"T110\": 113,\n    \"T111\": 62,\n    \"T112\": 70,\n    \"T113\": 14,\n    \"T114\": 44,\n    \"T115\": 8,\n    \"T116\": 33,\n    \"T117\": 15,\n    \"T118\": 30,\n    \"T119\": 23,\n    \"T120\": 40,\n    \"T121\": 90\n  },\n  \"productRegionMembershipsIncludingSecondaryContexts\": 563,\n  \"targetVariantAndSideCounts\": {\n    \"ta2Inconstant\": 24,\n    \"sexSpecific\": 7,\n    \"sourceExplicitSide\": 12,\n    \"bilateralIndividualMuscleInstanceCount\": null,\n    \"midlineIndividualMuscleInstanceCount\": null,\n    \"repeatedFamilyMemberCounts\": null\n  },\n  \"packageCount\": 12,\n  \"workUnitCount\": 59,\n  \"maxTargetsPerWorkUnit\": 10,\n  \"aliasEdgesNotTargets\": 33,\n  \"exactCanonicalCrosswalkRows\": 85,\n  \"exactCanonicalTargetJoins\": 83,\n  \"humanReviewPromotions\": 0,\n  \"rightsPromotions\": 0,\n  \"canonicalClaimsCreated\": 0,\n  \"bindingsCreated\": 0,\n  \"wholeBodyIndividualMuscleDenominator\": null,\n  \"allPackagesNotStarted\": true,\n  \"OpenSimModelsHead\": \"d9b05d470b1a481c222372c85b75772faf8f7792\",\n  \"OpenSimModelsClean\": true,\n  \"downstreamTasksStarted\": false\n}",
+      "stderr": "",
+      "stdoutSha256": "3e4bc3e535120769e54ea8c57d5529e17bccd2d04cc58048adc695cace5a7f07",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "OpenSim_Models",
+        "status",
+        "--porcelain=v1"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "OpenSim_Models",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "stdout": "d9b05d470b1a481c222372c85b75772faf8f7792",
+      "stderr": "",
+      "stdoutSha256": "c494eecb27c3aac03214607fe9f2c297af1160acbb1cead65ce64ef479ea4430",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "dataValidationResult": "work/evidence/T96/validation-result.json",
+  "preservationResult": "work/evidence/T96/preservation-after.json",
+  "inputHashManifest": "work/evidence/T96/input-hashes.json",
+  "uiBrowserTypecheckBuild": "not_run_data_only_task_no_app_or_geometry_change",
+  "notes": [
+    "Generation reproducibility and semantic/package/data-state validator passed.",
+    "Shared mixed STATUS/R15 files are worktree-updated but not staged; task-owned before/after field delta is in status-registry-owned-delta.json.",
+    "OpenSim_Models remained at its baseline HEAD and clean."
+  ]
+}

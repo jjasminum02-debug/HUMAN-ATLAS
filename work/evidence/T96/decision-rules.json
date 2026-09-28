@@ -1,0 +1,311 @@
+{
+  "task": "T96",
+  "revision": "T96-2026-09-28-semantic-freeze-v1",
+  "sourceEdition": {
+    "vocab": "2.07",
+    "viewer": "2.0"
+  },
+  "sourceUrl": "https://ta2viewer.openanatomy.org/",
+  "scopePrinciples": [
+    "Keep every source row in the all-row ledger; target selection never deletes or rewrites TA2 source terms.",
+    "Target means a region-locatable named bone/bone series or muscle/group/complex/part/repeated family in the twelve product categories.",
+    "Morphologic bone classes 367-376 classify bone form and are not located structures; retain as source context, not regional targets.",
+    "Cross-region roll-ups 1010, 1141, 1305, 1359, 2450 and 2592 summarize children spanning multiple packages; children remain and the roll-up is not counted again.",
+    "Parts 2370-2371 are crura of superficial inguinal ring; 2504/2647 are aponeurotic expansion bands, not muscle tissue parts.",
+    "Every TA2 inconstant flag and explicit sex/side term is preserved on its own row; it does not create inferred bilateral copies or repetition counts.",
+    "A repeated-family concept is one target record; member counts remain null unless the source explicitly fixes them, and no aggregate becomes an individual-muscle denominator.",
+    "A source group/complex and its named children may both remain targets for semantic navigation; count fields keep those kinds disjoint from single named muscles.",
+    "Exactly one internal primary owner is assigned; only explicit T78/T95 cross-region rules add secondary product region memberships.",
+    "TA2 primary_usage/secondary_usage links are aliases, never extra targets. No fuzzy crosswalk is used.",
+    "Lexical source candidates, geometry, side, frame, canonical binding, three-name state, origin/insertion, function, animation, human review and rights remain independent."
+  ],
+  "explicitCandidateExclusions": [
+    {
+      "id": "TA2:367",
+      "reason": "bone_morphology_taxonomy_not_a_located_bone_target"
+    },
+    {
+      "id": "TA2:368",
+      "reason": "bone_morphology_taxonomy_not_a_located_bone_target"
+    },
+    {
+      "id": "TA2:369",
+      "reason": "bone_morphology_taxonomy_not_a_located_bone_target"
+    },
+    {
+      "id": "TA2:370",
+      "reason": "bone_morphology_taxonomy_not_a_located_bone_target"
+    },
+    {
+      "id": "TA2:371",
+      "reason": "bone_morphology_taxonomy_not_a_located_bone_target"
+    },
+    {
+      "id": "TA2:372",
+      "reason": "bone_morphology_taxonomy_not_a_located_bone_target"
+    },
+    {
+      "id": "TA2:373",
+      "reason": "bone_morphology_taxonomy_not_a_located_bone_target"
+    },
+    {
+      "id": "TA2:374",
+      "reason": "bone_morphology_taxonomy_not_a_located_bone_target"
+    },
+    {
+      "id": "TA2:375",
+      "reason": "bone_morphology_taxonomy_not_a_located_bone_target"
+    },
+    {
+      "id": "TA2:376",
+      "reason": "bone_morphology_taxonomy_not_a_located_bone_target"
+    },
+    {
+      "id": "TA2:1010",
+      "reason": "cross_region_vertebral_column_aggregate"
+    },
+    {
+      "id": "TA2:1141",
+      "reason": "cross_region_upper_limb_bone_aggregate"
+    },
+    {
+      "id": "TA2:1305",
+      "reason": "cross_region_lower_limb_bone_aggregate"
+    },
+    {
+      "id": "TA2:1359",
+      "reason": "cross_region_free_lower_limb_bone_aggregate"
+    },
+    {
+      "id": "TA2:2370",
+      "reason": "inguinal_ring_crus_not_muscle_part"
+    },
+    {
+      "id": "TA2:2371",
+      "reason": "inguinal_ring_crus_not_muscle_part"
+    },
+    {
+      "id": "TA2:2450",
+      "reason": "cross_region_upper_limb_muscle_aggregate"
+    },
+    {
+      "id": "TA2:2504",
+      "reason": "aponeurotic_extensor_expansion_band_not_muscle_part"
+    },
+    {
+      "id": "TA2:2592",
+      "reason": "cross_region_lower_limb_muscle_aggregate"
+    },
+    {
+      "id": "TA2:2647",
+      "reason": "aponeurotic_extensor_expansion_band_not_muscle_part"
+    }
+  ],
+  "promotionsFromSupport": [
+    {
+      "id": "TA2:880",
+      "kind": "bone_group",
+      "reason": "named auditory-ossicle collection, exact skeletal-system row"
+    },
+    {
+      "id": "TA2:1105",
+      "kind": "bone_series",
+      "reason": "named rib series, exact child of bones of thorax"
+    },
+    {
+      "id": "TA2:1118",
+      "kind": "bone",
+      "reason": "named generic rib concept, exact child of ribs"
+    },
+    {
+      "id": "TA2:1282",
+      "kind": "bone_group",
+      "reason": "named bony pelvis concept, exact skeletal-system row"
+    },
+    {
+      "id": "TA2:2605",
+      "kind": "named_muscle",
+      "reason": "named deep gluteal muscle, exact TA2 child of deep gluteal muscles"
+    },
+    {
+      "id": "TA2:2636",
+      "kind": "named_muscle",
+      "reason": "named medial thigh muscle, exact TA2 child of medial thigh compartment"
+    }
+  ],
+  "semanticKindOverrides": {
+    "repeatFamilies": [
+      "TA2:2237",
+      "TA2:2238",
+      "TA2:2239",
+      "TA2:2284",
+      "TA2:2285",
+      "TA2:2286",
+      "TA2:2287",
+      "TA2:2288",
+      "TA2:2289",
+      "TA2:2290",
+      "TA2:2291",
+      "TA2:2292",
+      "TA2:2293",
+      "TA2:2294",
+      "TA2:2295",
+      "TA2:2296",
+      "TA2:2297",
+      "TA2:2308",
+      "TA2:2309",
+      "TA2:2310",
+      "TA2:2311",
+      "TA2:2312",
+      "TA2:2313",
+      "TA2:2314",
+      "TA2:2532",
+      "TA2:2533",
+      "TA2:2534",
+      "TA2:2685",
+      "TA2:2686",
+      "TA2:2687"
+    ],
+    "otherOldSerialFamilyRowsBecomeMuscleGroups": true,
+    "compoundComplexes": [
+      "TA2:2054",
+      "TA2:2254",
+      "TA2:2403",
+      "TA2:2593",
+      "TA2:2613",
+      "TA2:2656"
+    ],
+    "TA2_2055_is_named_muscle": true,
+    "TA2_2632_and_2680_are_hierarchical_muscle_parts": true
+  },
+  "primaryOwnerRoots": {
+    "muscle": {
+      "2039": "head",
+      "2145": "neck",
+      "2224": "back",
+      "2298": "thorax",
+      "2355": "abdomen-lumbar",
+      "2396": "pelvis-perineum",
+      "2451": "shoulder-scapular",
+      "2449": "upper-limb",
+      "2591": "gluteal-hip",
+      "2609": "thigh",
+      "2626": "thigh",
+      "2637": "thigh",
+      "2643": "leg",
+      "2651": "leg",
+      "2654": "leg",
+      "2669": "foot"
+    },
+    "bone": {
+      "406": "head",
+      "834": "head",
+      "880": "head",
+      "1031": "neck",
+      "1058": "back",
+      "1067": "back",
+      "1071": "pelvis-perineum",
+      "1092": "pelvis-perineum",
+      "1096": "thorax",
+      "1142": "shoulder-scapular",
+      "1179": "upper-limb",
+      "1282": "pelvis-perineum",
+      "1306": "pelvis-perineum",
+      "1307": "pelvis-perineum",
+      "1359": null,
+      "1360": "thigh",
+      "1389": "thigh",
+      "1397": "leg",
+      "1427": "leg",
+      "1446": "foot",
+      "353": "head"
+    },
+    "regionOrder": [
+      "head",
+      "neck",
+      "back",
+      "shoulder-scapular",
+      "thorax",
+      "abdomen-lumbar",
+      "pelvis-perineum",
+      "gluteal-hip",
+      "thigh",
+      "leg",
+      "foot",
+      "upper-limb"
+    ]
+  },
+  "secondaryRegionOverrides": {
+    "TA2:1116": {
+      "add": [
+        "neck"
+      ],
+      "basis": "TA2 exact term cervical rib; source marks it as an inconstant rib variant"
+    },
+    "TA2:1117": {
+      "add": [
+        "back"
+      ],
+      "basis": "TA2 exact term lumbar rib; source marks it as an inconstant rib variant"
+    },
+    "TA2:1143": {
+      "add": [
+        "upper-limb"
+      ],
+      "basis": "T95 overlay-validation.json; left FJ3279 product context plus existing right FJ3384"
+    },
+    "TA2:2230": {
+      "add": [
+        "neck"
+      ],
+      "remove": [
+        "shoulder-scapular"
+      ],
+      "basis": "TA2 name transversus nuchae; posterior neck context; reject inherited heuristic shoulder tag"
+    },
+    "TA2:2231": {
+      "add": [
+        "shoulder-scapular"
+      ],
+      "basis": "T78 exact cross-region decision and T75 latissimus source target; no new mesh binding"
+    },
+    "TA2:2234": {
+      "add": [
+        "neck",
+        "shoulder-scapular"
+      ],
+      "basis": "T78 exact cross-region decision; TA2 levator scapulae term"
+    },
+    "TA2:2451": {
+      "add": [
+        "upper-limb"
+      ],
+      "basis": "exact TA2 scapulohumeral branch nested under upper-limb system"
+    },
+    "TA2:2593": {
+      "add": [
+        "abdomen-lumbar"
+      ],
+      "basis": "T78 explicit iliopsoas cross-region context"
+    },
+    "TA2:2595": {
+      "add": [
+        "abdomen-lumbar"
+      ],
+      "basis": "T78 explicit psoas-major cross-region context"
+    },
+    "TA2:2605": {
+      "add": [
+        "pelvis-perineum"
+      ],
+      "basis": "T78 planned deep-hip/pelvis context retained after promotion"
+    }
+  },
+  "identityAndApprovalBoundary": {
+    "canonicalJoin": "exact FIPAT tableRow only",
+    "bodyParts3dNameMatch": "lexical candidate only",
+    "humanReview": false,
+    "publicRedistributionRights": "not promoted",
+    "claimGeometryBindingCreated": false
+  }
+}

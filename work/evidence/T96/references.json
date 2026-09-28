@@ -1,0 +1,113 @@
+{
+  "task": "T96",
+  "frozenSource": {
+    "title": "Terminologia Anatomica, 2nd edition, online vocabulary 2.07",
+    "sourceUrl": "https://ta2viewer.openanatomy.org/",
+    "viewerDataUrl": "https://ta2viewer.openanatomy.org/static/js/main.0f36751c.chunk.js",
+    "retrievedOn": "2026-09-28",
+    "viewerVersion": "2.0",
+    "vocabularyVersion": "2.07",
+    "rawViewerJsSha256": "978835a2f698efc11653a2d20f10c934ca73bf938abba69913e7785e488b52c7",
+    "snapshotPath": "work/evidence/T78/reference/ta2-scope.json",
+    "snapshotSha256": "f789725cf0206d6096abfffbc2657e309bd62bab0f89451f413468d8738da983",
+    "accessMethod": "Official viewer data bundle read as text and parsed from embedded vocabulary rows; JavaScript was not executed. The 2,422-row snapshot is the exact hierarchy/term input.",
+    "limitation": "The published PDF was not downloaded or visually checked locally for every table row; selected candidate corrections have publisher-index evidence below."
+  },
+  "publisherEvidence": [
+    {
+      "url": "https://fipat.library.dal.ca/wp-content/uploads/2020/09/FIPAT-TA2-Part-2.pdf",
+      "edition": "FIPAT TA2 2nd edition, Part 2; official-hosted PDF; online revision 2.07",
+      "locator": "Printed page 37, table row 880",
+      "observedRows": [
+        {
+          "ta2Id": 880,
+          "latin": "Ossicula auditus",
+          "english": "Auditory ossicles"
+        }
+      ],
+      "accessedOn": "2026-09-28",
+      "accessMethod": "Official publisher-hosted PDF search index; exact table row returned. The PDF binary was not locally downloaded/visually audited.",
+      "use": "Confirms the auditory-ossicle collection is a named skeletal target; its primary/secondary usage edge remains an alias, not a second target."
+    },
+    {
+      "url": "https://fipat.library.dal.ca/wp-content/uploads/2020/09/FIPAT-TA2-Part-2.pdf",
+      "edition": "FIPAT TA2 2nd edition, Part 2; official-hosted PDF; online revision 2.07",
+      "locator": "Printed page 44, table rows 1105 and 1118",
+      "observedRows": [
+        {
+          "ta2Id": 1105,
+          "latin": "Costae",
+          "english": "Ribs",
+          "sourceSynonyms": [
+            "Costae I-XII",
+            "Ribs 1-12"
+          ]
+        },
+        {
+          "ta2Id": 1118,
+          "latin": "Costa",
+          "english": "Rib",
+          "sourceSynonyms": [
+            "Os costale",
+            "Rib bone"
+          ]
+        }
+      ],
+      "accessedOn": "2026-09-28",
+      "accessMethod": "Official publisher-hosted PDF search index; exact table rows returned. The PDF binary was not locally downloaded/visually audited.",
+      "use": "Confirms the rib series and generic rib concept are separate named hierarchy rows; they are not multiplied into individual rib instances."
+    },
+    {
+      "url": "https://fipat.library.dal.ca/wp-content/uploads/2020/09/FIPAT-TA2-Part-2.pdf",
+      "edition": "FIPAT TA2 2nd edition, Part 2; official-hosted PDF; online revision 2.07",
+      "locator": "Printed page 49, table row 1282",
+      "observedRows": [
+        {
+          "ta2Id": 1282,
+          "latin": "Pelvis ossea",
+          "english": "Bony pelvis"
+        }
+      ],
+      "accessedOn": "2026-09-28",
+      "accessMethod": "Official publisher-hosted PDF search index; exact table row returned. The PDF binary was not locally downloaded/visually audited.",
+      "use": "Confirms a named bony-pelvis skeletal collection row; it remains a concept/group rather than an extra bone instance."
+    },
+    {
+      "url": "https://fipat.library.dal.ca/wp-content/uploads/2020/09/FIPAT-TA2-Part-2.pdf",
+      "edition": "FIPAT TA2 2nd edition, Part 2; official-hosted PDF; online revision 2.07",
+      "locator": "Printed page 94, table rows 2605 and 2636",
+      "observedRows": [
+        {
+          "ta2Id": 2605,
+          "term": "Obturator internus / Obturator internus muscle",
+          "latin": "Musculus obturatorius internus"
+        },
+        {
+          "ta2Id": 2636,
+          "term": "Obturator externus / Obturator externus muscle",
+          "latin": "Musculus obturatorius externus"
+        }
+      ],
+      "accessedOn": "2026-09-28",
+      "accessMethod": "Official PDF search index exposed exact table rows and printed-page locator; the PDF binary was not locally downloaded/visually audited.",
+      "use": "Confirms two named muscles omitted from the T78 support-to-target heuristic; ownership follows exact TA2 parent hierarchy."
+    },
+    {
+      "url": "https://fipat.library.dal.ca/wp-content/uploads/2021/08/FIPAT-TA2-Errata.pdf",
+      "edition": "FIPAT TA2 official errata overview",
+      "locator": "Version table, row 2.07; dated 16 August 2021 and Part II marked corrected",
+      "accessedOn": "2026-09-28",
+      "accessMethod": "Official-hosted PDF search-index text; not locally downloaded/visually checked.",
+      "use": "Records the online vocabulary edition alignment; the snapshot names 2.07 explicitly."
+    },
+    {
+      "url": "https://fipat.library.dal.ca/",
+      "edition": "FIPAT terminology landing page",
+      "locator": "TA2 publication and errata links",
+      "accessedOn": "2026-09-28",
+      "accessMethod": "Official FIPAT page opened in browser.",
+      "use": "Publisher authority and source navigation."
+    }
+  ],
+  "semanticLimit": "The freeze audits terminology and task ownership. It is not independent human anatomy review, tissue-source coverage proof, geometry identity approval, or redistribution-license approval."
+}

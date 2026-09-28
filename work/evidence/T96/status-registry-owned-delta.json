@@ -1,0 +1,40 @@
+{
+  "task": "T96",
+  "sharedFilesUpdatedButExcludedFromTaskCommit": [
+    {
+      "path": "work/STATUS.md",
+      "beforeSha256": "b5491ead78ec408a67b6eb6b6a6445d20e450aa6b805185efee49127ca4b019d",
+      "afterSha256": "0eff52d6a49b696f523b0219b1ec50577a6ecbe127b8414109bbfb8c37c51177",
+      "ownedFieldChanges": {
+        "CURRENT_TASK": "T78 partial_target_semantics_pending",
+        "NEXT_TASK": "T95 then T96",
+        "LAST_REPORT": "work/reports/T78.md"
+      },
+      "ownedFieldValues": {
+        "CURRENT_TASK": "T96 passed_with_gaps",
+        "NEXT_TASK": "T79 / Luna Max",
+        "LAST_REPORT": "work/reports/T96.md"
+      },
+      "append": "T96 result summary and next-task link"
+    },
+    {
+      "path": "work/task-registry-r15.json",
+      "beforeSha256": "f2493e17eadc87cba85e83adfd2773d3d64b07519c1ff0480122ff94c03ce257",
+      "afterSha256": "2f8c8f01223dfa69ca469a1547b2972437bd98a1c0d8ce582aee0eb4ea3f2d59",
+      "ownedFieldChanges": {
+        "taskStatuses.T96": "planned_not_started",
+        "taskStatuses.T110-T121": "planned_pending_T96_freeze",
+        "nextTask": "T95",
+        "efficiencyAmendment.nextTask": "T95"
+      },
+      "ownedFieldValues": {
+        "taskStatuses.T96": "passed_with_gaps",
+        "taskStatuses.T110-T121": "planned_not_started",
+        "nextTask": "T79",
+        "efficiencyAmendment.nextTask": "T79"
+      },
+      "outOfScopePreserved": "taskStatuses.T95 remains planned_not_started although work/reports/T95.md records a pass; no T95 status repair was made inside T96."
+    }
+  ],
+  "reasonNotStaged": "Both files were already modified/untracked at T96 start (70 pre-existing porcelain entries); only this task-owned delta is represented here. The shared documents are left in the worktree to avoid staging prior user/planning changes."
+}
