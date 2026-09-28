@@ -1,0 +1,30 @@
+{
+  "revision": "T94-decision-v1",
+  "task": "T94",
+  "result": "no_exact_source_found",
+  "taskStatus": "passed_with_gaps",
+  "visualGate": "T77 remains partial for the unresolved latissimus dorsi visual target; it may not report that target as covered.",
+  "basis": [
+    "T73/T75 local frozen BodyParts3D R4 evidence contains no latissimus/dorsi concept or exact FJ member; this was metadata absence, not failed mesh download.",
+    "The pinned official Z-Anatomy repository has a generic TA2 term and whole-atlas archive but no opened target-to-mesh mapping or archive-member inventory.",
+    "The official Z-Anatomy PC app repository exposes only the aggregate Resources/Models/FBX/MuscularSystem100.fbx at the opened level; the file page reports 35.6 MB and cannot display internals.",
+    "The official app model Readme says model files may not be up to date and gives no source release/commit for the aggregate FBX; app release metadata was not linked to the FBX file.",
+    "Official repository/resource licenses state general and mixed component attributions, but no latissimus-specific upstream work or object-level license mapping was exposed.",
+    "No official target object ID/path/hash, side/part, unit/frame/rest pose, or T50 transform relation was established."
+  ],
+  "exactTargetObjectLocated": false,
+  "officialObjectOrMemberHash": null,
+  "sourceSideOrPart": null,
+  "sourceUnitFrameRestPose": null,
+  "t50FrameCompatibility": "unverified",
+  "localTechnicalUseRights": "unresolved/held",
+  "redistributionRights": "held",
+  "archiveAggregateOrMeshDownloaded": false,
+  "anatomyIdGeometryBindingUiAdded": false,
+  "humanReviewOrRightsHoldPromoted": false,
+  "latissimusStatus": "missing; no replacement geometry inferred",
+  "followUp": "T77 / Astra may integrate only eligible existing evidence-backed packages and must leave latissimus coverage unresolved, recording the required visual gate as partial. No additional source task is justified by currently accessible official metadata; revisiting the hidden aggregate/archive requires a separately authorized acquisition boundary or newly published official object-level inventory.",
+  "nextTask": "T77",
+  "nextOwner": "Astra · current conversation; direct implementation",
+  "nextTaskStarted": false
+}

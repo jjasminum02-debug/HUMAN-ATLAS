@@ -1,0 +1,56 @@
+{
+  "revision": "T94-state-update-before-v1",
+  "capturedAtLocal": "2026-09-28T11:02:52+09:00",
+  "head": "f3d8c20b483fa4a0d03bf8d2451a9639f42af09b",
+  "statusSha256": "2aa8d6b57c0279e1955537b56c1c6f63197afa4a30772322d7a50ddbe3e4a226",
+  "registrySha256": "3123a8f791e1e0efa4183dae81d36881607e4a99efafa660227569aa6fbad7b1",
+  "pointers": {
+    "nextTask": "T94",
+    "nextUnallocatedNumericId": 95,
+    "T93Status": "passed_with_gaps",
+    "T94Status": "planned_not_started",
+    "T77Status": "planned_not_started",
+    "queueSlice": [
+      "T93",
+      "T94",
+      "T77"
+    ],
+    "T94Task": {
+      "id": "T94",
+      "title": "광배근 Z-Anatomy exact-component·권리·frame gate",
+      "model": "Sol High",
+      "spec": "work/tasks/T94.md",
+      "prerequisite": "T93 no_exact_source_found package-level candidate and unresolved object/rights/frame gap",
+      "prerequisiteIds": [
+        "T73",
+        "T75",
+        "T92",
+        "T93"
+      ],
+      "defaultNext": "T77",
+      "mode": "active",
+      "continuationRule": "One latissimus target only. Inspect official exact-component inventory, lineage, object-level rights, side/part, unit/frame/rest pose. Do not fetch full archive or aggregate FBX, create geometry/binding, or promote rights/human-review holds; unresolved exact source keeps T77 partial."
+    },
+    "T77PrerequisiteIds": [
+      "T73",
+      "T74",
+      "T75",
+      "T76",
+      "T92",
+      "T93",
+      "T94"
+    ],
+    "T77CoverageGateAmendment": "T73 mandatory visual targets include exact bilateral skull subset, side-specific deltoid, pelvic-floor source set, trapezius visual-context source package (T92), and a resolved latissimus source decision. T93 returned no_exact_source_found; bounded T94 exact-component/rights/frame feasibility is inserted before T77. Unresolved object identity, rights, or frame keeps T77 partial."
+  },
+  "statusPointers": {
+    "CURRENT_TASK": "- CURRENT_TASK: T93 - passed_with_gaps; exact alternate latissimus mesh object not found in opened official inventories. Package-level Z-Anatomy candidate remains; no mesh downloaded, and object identity/rights/frame remain unverified. Whole-body denominator remains null.",
+    "NEXT_TASK": "- NEXT_TASK: T94 / Sol High (planned_not_started), inserted after T93 and before T77 for bounded exact-component/rights/frame feasibility; T77 remains partial until the disposition is resolved. No subsequent task has started.",
+    "LAST_REPORT": "- LAST_REPORT: work/reports/T93.md"
+  },
+  "expectedChange": {
+    "T94": "passed_with_gaps",
+    "nextTask": "T77",
+    "T77": "planned_not_started; latissimus coverage remains partial"
+  },
+  "note": "STATUS.md was already modified and R15 registry already untracked shared user WIP before T94. Their T94 state delta will remain unstaged."
+}

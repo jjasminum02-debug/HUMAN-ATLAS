@@ -1,0 +1,130 @@
+{
+  "revision": "T94-source-access-log-v1",
+  "task": "T94",
+  "accessedAtLocal": "2026-09-28",
+  "scope": "One T73-frozen bilateral latissimus-dorsi visual target; source inventory/metadata only.",
+  "downloadBoundary": "No Z-Anatomy.zip, MuscularSystem100.fbx, model, or mesh bytes were downloaded. The official app FBX file page itself reports 35.6 MB and cannot display its contents.",
+  "events": [
+    {
+      "id": "search-zanatomy-official-inventory",
+      "kind": "search_index_only",
+      "query": "site:github.com/Z-Anatomy latissimus dorsi FMA mesh object ID",
+      "url": "https://github.com/Z-Anatomy/Models-of-human-anatomy",
+      "use": "Discovery only; followed by opening the official repository at a pinned commit. Search result did not expose a component locator."
+    },
+    {
+      "id": "search-liftlab-derivative",
+      "kind": "search_index_only_secondary",
+      "query": "site:github.com/Z-Anatomy latissimus dorsi source mapping object",
+      "url": "https://github.com/Schmiedey/liftlab/blob/main/public/models/ATTRIBUTION.md",
+      "snippetObservation": "Search index describes four supplementary latissimus/rectus-abdominis meshes and a downstream per-component mapping.",
+      "use": "Discovery only. The derivative was not used as anatomical/source-rights evidence and was not opened as a source of Z-Anatomy object identity."
+    },
+    {
+      "id": "official-zanatomy-models-pinned-tree",
+      "kind": "opened_primary_repository_inventory",
+      "url": "https://github.com/Z-Anatomy/Models-of-human-anatomy/tree/c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+      "locator": "Root files at the pinned commit: Readme.md, License.txt, TA2.csv, Z-Anatomy.zip, Z-Biomechanics.7z and other repository files.",
+      "version": "Pinned repository commit c7010a903b75a2fd24a13b1c2c4c3546a9223780; the opened tree exposed no release/tag label. This is a repository revision, not a mesh/member hash.",
+      "observation": "Readme says the atlas includes models derived from BodyParts3D and definitions heavily rely on Wikipedia. The root inventory exposes the complete Z-Anatomy.zip archive but no per-muscle member manifest or isolated latissimus object.",
+      "method": "Opened the official GitHub HTML tree at the explicit commit. No archive or mesh was opened."
+    },
+    {
+      "id": "official-zanatomy-license-pinned",
+      "kind": "opened_primary_license",
+      "url": "https://github.com/Z-Anatomy/Models-of-human-anatomy/blob/c7010a903b75a2fd24a13b1c2c4c3546a9223780/License.txt",
+      "locator": "MODELS/DEFINITIONS/CODE OF APP attribution sections and license terms.",
+      "observation": "Repository-level CC BY-SA 4.0 statement; separate BodyParts3D CC BY-SA 2.1 Japan and Z-Anatomy attributions; other included/adapted components include CC BY 4.0, CC BY-NC-SA 4.0 and CC BY-NC 4.0.",
+      "limit": "No latissimus-object-to-license or object-to-underlying-work mapping is exposed. No local-use or redistribution permission was assigned to a target object."
+    },
+    {
+      "id": "official-zanatomy-ta2-row",
+      "kind": "opened_primary_metadata",
+      "url": "https://raw.githubusercontent.com/Z-Anatomy/Models-of-human-anatomy/master/TA2.csv",
+      "locator": "Line 2329: TA2ID 2231, English Latissimus dorsi muscle; Latin Musculus latissimus dorsi.",
+      "version": "Mutable master URL; commit-pinned TA2.csv view request returned cache miss. Exact row-to-commit association was not confirmed.",
+      "limit": "A nomenclature identifier only; not an FMA/FJ, FBX object, Blender object, or archive-member ID. The row is generic and provides no side/part or geometry locator."
+    },
+    {
+      "id": "official-app-readme-pc-version",
+      "kind": "opened_first_party_repository_document",
+      "url": "https://github.com/LluisV/Z-Anatomy/blob/PC-Version/README.md",
+      "locator": "README sections describing the Unity PC application, model downloads and CC BY-SA 4.0 work license.",
+      "version": "Branch PC-Version; the opened page did not expose the branch commit. The repository lists an app release separately, but no evidence links that release to the PC-Version FBX contents.",
+      "observation": "The official app repository is a distribution/application project featuring Z-Anatomy models and links to separate .blend/FBX downloads."
+    },
+    {
+      "id": "official-app-model-readme",
+      "kind": "opened_first_party_model_document",
+      "url": "https://github.com/LluisV/Z-Anatomy/blob/PC-Version/Resources/Models/Readme.txt",
+      "locator": "The two-line resource note.",
+      "observation": "It says these model files may not be up to date and points to https://www.z-anatomy.com/atlas for the latest version.",
+      "limit": "No exact current model edition or commit is given for the FBX inventory. The official atlas URL could not be opened by the available web reader."
+    },
+    {
+      "id": "official-app-model-license",
+      "kind": "opened_first_party_model_license",
+      "url": "https://github.com/LluisV/Z-Anatomy/blob/PC-Version/Resources/Models/License.txt",
+      "locator": "Lines 264-299 in the opened file view.",
+      "observation": "The model collection is described as derived from BodyParts3D and made by Z-Anatomy; attributions list these separately and also list other included/adapted sources, including noncommercial components.",
+      "limit": "The license file gives no mapping from Latissimus dorsi to a specific underlying model/license."
+    },
+    {
+      "id": "official-app-fbx-directory",
+      "kind": "opened_first_party_asset_inventory",
+      "url": "https://github.com/LluisV/Z-Anatomy/tree/PC-Version/Resources/Models/FBX",
+      "locator": "Directory entry MuscularSystem100.fbx among system-level FBX files.",
+      "version": "Branch PC-Version; exact branch commit/release is not displayed on the opened directory page.",
+      "observation": "Only an aggregate muscular-system file is listed; no isolated latissimus FBX or per-object member inventory appears."
+    },
+    {
+      "id": "official-app-aggregate-fbx-page",
+      "kind": "opened_first_party_asset_listing",
+      "url": "https://github.com/LluisV/Z-Anatomy/blob/PC-Version/Resources/Models/FBX/MuscularSystem100.fbx",
+      "locator": "GitHub file page metadata for MuscularSystem100.fbx.",
+      "version": "PC-Version branch; exact commit/release and content hash not shown in the opened file page.",
+      "observation": "File size shown as 35.6 MB; page says it cannot display files of this size.",
+      "limit": "The binary and its internal object names, IDs, transforms and member hashes were not opened or downloaded."
+    },
+    {
+      "id": "official-description-inventory",
+      "kind": "opened_first_party_description_inventory",
+      "url": "https://github.com/LluisV/Z-Anatomy/tree/PC-Version/Resources/Descriptions/OriginalDescriptions",
+      "locator": "OriginalDescriptions directory listing.",
+      "observation": "The listing reports 2,764 entries and omits 1,000 entries due to truncation. It is a description inventory, not an asset-member index.",
+      "followUpAttempt": "Direct official Latissimus dorsi muscle.txt URL and raw URL were requested; web reader returned cache miss. No content was treated as opened."
+    },
+    {
+      "id": "official-app-github-api-attempt",
+      "kind": "primary_metadata_access_attempt_failed",
+      "urls": [
+        "https://api.github.com/repos/LluisV/Z-Anatomy/branches/PC-Version",
+        "https://api.github.com/repos/LluisV/Z-Anatomy/contents/Resources/Models/FBX/MuscularSystem100.fbx?ref=PC-Version"
+      ],
+      "result": "The web reader reported these API URLs were not accessible. The attempt did not fetch file content.",
+      "meaning": "Record the hash/commit as not exposed in the accessible official page; do not claim the official GitHub API has no such metadata."
+    },
+    {
+      "id": "official-app-release-separation",
+      "kind": "opened_first_party_release_listing",
+      "url": "https://github.com/LluisV/Z-Anatomy/releases",
+      "locator": "Latest app release shown as Z-Anatomy v0.9.9.7.5 Win x64; commit prefix 38e3049 shown on the release page.",
+      "limit": "This is an application release listing. No opened evidence ties it to the PC-Version branch or MuscularSystem100.fbx asset bytes, so it is not used as the asset version."
+    },
+    {
+      "id": "bodyparts3d-r4-prior-primary-evidence",
+      "kind": "reopened_local_official-evidence",
+      "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/release_4.0_e.html",
+      "locator": "T73 target-source-matrix latissimus target row and T75 frozen source/validation evidence.",
+      "edition": "BodyParts3D Release 4.0.",
+      "observation": "The six official R4 metadata tables contain zero latissimus/dorsi rows. T75 marks it unavailable in R4; this is an edition metadata gap, not a failed download."
+    },
+    {
+      "id": "hra-ccf-prior-primary-inventory",
+      "kind": "reopened_local_official-inventory-evidence",
+      "url": "https://hubmapconsortium.github.io/ccf/pages/ccf-3d-reference-library.html",
+      "locator": "T93 source-access-log and candidate matrix.",
+      "observation": "The opened CCF reference-object inventory has no standalone latissimus/skeletal-muscle entry; no model was downloaded."
+    }
+  ]
+}

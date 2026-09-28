@@ -1,0 +1,103 @@
+{
+  "revision": "T94-candidate-matrix-v1",
+  "task": "T94",
+  "target": "Only the bilateral latissimus dorsi visual target frozen by T73.",
+  "decision": "no_exact_source_found",
+  "candidates": [
+    {
+      "id": "ZA-MODELS-PINNED-REPOSITORY",
+      "source": "Z-Anatomy/Models-of-human-anatomy",
+      "primary": true,
+      "repositoryVersion": "Pinned commit c7010a903b75a2fd24a13b1c2c4c3546a9223780; no release/tag label exposed in the opened root tree.",
+      "officialRepositoryCommitSha": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+      "targetTerm": {
+        "id": "TA2ID 2231",
+        "name": "Latissimus dorsi muscle / Musculus latissimus dorsi",
+        "locator": "TA2.csv line 2329 on mutable master, carried forward from T93; commit-pinned view returned cache miss.",
+        "isMeshObjectId": false,
+        "sideOrPart": null
+      },
+      "packageAsset": {
+        "path": "Z-Anatomy.zip (repository root)",
+        "listedSizeAtT93": "82.7 MB",
+        "internalObjectId": null,
+        "internalMemberPath": null,
+        "officialMemberHash": null,
+        "targetMeshDirectlyLocated": false,
+        "reason": "Official repository listing exposes the whole archive and nomenclature table, not an object-level member manifest. Full archive download is outside the task boundary."
+      },
+      "sourceAncestry": {
+        "packageLevel": "Official README says repository models are derived from BodyParts3D and definitions rely heavily on Wikipedia.",
+        "targetObjectLevel": null,
+        "independentUnderlyingWorkEstablished": false
+      },
+      "sidePart": {"sourceSide": null, "sourcePart": null, "status": "unavailable; do not infer bilateral geometry from the generic term"},
+      "unitsFramePose": {"unit": null, "frame": null, "restPose": null, "t50Compatibility": "unverified"},
+      "rights": {
+        "repositoryLevel": "CC BY-SA 4.0 statement with separate BodyParts3D/Z-Anatomy attribution and other listed third-party licenses, including NC variants.",
+        "targetComponentLicense": null,
+        "localTechnicalUse": "held/unresolved for a target object",
+        "redistribution": "held"
+      },
+      "officialObjectOrArchiveHash": null,
+      "access": "Opened pinned repository root and license HTML; no archive/mesh bytes downloaded."
+    },
+    {
+      "id": "ZA-PC-APP-MUSCULARSYSTEM-AGGREGATE",
+      "source": "LluisV/Z-Anatomy first-party PC application repository",
+      "primary": true,
+      "repositoryLocator": "Resources/Models/FBX/MuscularSystem100.fbx",
+      "repositoryVersion": "Branch PC-Version; exact commit/release not exposed in the opened directory/file page. The app release v0.9.9.7.5 was not tied to this branch/file, and model Readme.txt says these model files may not be up to date.",
+      "fileSizeOnOfficialPage": "35.6 MB",
+      "officialFileOrObjectHash": null,
+      "internalObjectId": null,
+      "internalObjectPath": null,
+      "exactLatissimusObjectLocated": false,
+      "sourceAncestry": {
+        "appRepositoryLevel": "Official README says the Unity app features models from the Z-Anatomy project.",
+        "modelCollectionLevel": "Resource License.txt attributes BodyParts3D and Z-Anatomy, plus other included/adapted models.",
+        "targetObjectLevel": null,
+        "independentUnderlyingWorkEstablished": false
+      },
+      "sidePart": {"sourceSide": null, "sourcePart": null},
+      "unitsFramePose": {"unit": null, "frame": null, "restPose": null, "t50Compatibility": "unverified"},
+      "rights": {
+        "appWorkLicense": "Repository README states CC BY-SA 4.0 for the work.",
+        "modelCollectionAttributions": "BodyParts3D and Z-Anatomy are named separately; other listed components include NC licenses.",
+        "targetComponentLicense": null,
+        "localTechnicalUse": "unresolved for target object",
+        "redistribution": "held"
+      },
+      "access": "Opened official directory, aggregate file metadata page, README, resource Readme.txt and License.txt. Binary was not opened/downloaded; GitHub API metadata URL was inaccessible through the web reader."
+    },
+    {
+      "id": "BODYparts3d-R4-LOCAL-FROZEN-INVENTORY",
+      "source": "Official BodyParts3D Release 4.0 metadata already audited in T73/T75",
+      "primary": true,
+      "edition": "Release 4.0",
+      "exactTargetConceptOrMember": false,
+      "reason": "T73 searched six official metadata tables and found zero latissimus/dorsi rows. T75 kept the target unavailable; no archive download failure is involved.",
+      "exactFmaFjHash": null,
+      "sidePartUnitsFramePose": null,
+      "rights": "T75's source/license holds remain unchanged; no target member exists in the audited R4 inventory."
+    },
+    {
+      "id": "HRA-CCF-3D-REFERENCE-LIBRARY",
+      "source": "HuBMAP CCF/Human Reference Atlas 3D Reference Object Library",
+      "primary": true,
+      "exactTargetListed": false,
+      "reason": "T93 opened inventory lists organs/organ systems and extraction-site references, with no standalone latissimus or skeletal-muscle model.",
+      "hash": null,
+      "sidePartUnitsFramePose": null,
+      "targetComponentRights": null
+    },
+    {
+      "id": "LIFTLAB-DERIVATIVE-SEARCH-RESULT",
+      "source": "Search index only; secondary derivative",
+      "primary": false,
+      "exactTargetEvidence": false,
+      "use": "Lead only. Not opened or relied on for target identity, source ancestry, rights, frame, or exact component path."
+    }
+  ],
+  "conclusion": "Accessible official metadata confirms a generic term and package/aggregate candidates, but not an exact latissimus mesh object. Official target object identity, object-level source ancestry, side/part, unit/frame/rest pose, target hash and component-specific rights remain unknown."
+}
