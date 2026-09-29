@@ -1,0 +1,84 @@
+{
+  "task": "T98",
+  "decision": "select_Z_Anatomy_as_primary_local_offline_compilation_base",
+  "selectionScope": "source engineering feasibility and input freeze; NOT complete anatomy, learner binding, rig, public rights, or production release approval",
+  "selectedSourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+  "selectedSourceMemberSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+  "exactSourceObjects": 960,
+  "corePreviewObjects": 786,
+  "coreKindCounts": {
+    "muscle_surface_or_part": 509,
+    "musculoskeletal_accessory": 174,
+    "skeletal_surface": 277
+  },
+  "corePreviewPolicy": "277 skeletal surfaces plus 509 source Muscles collection surfaces/parts; associated fascia/bursae etc retained in catalog but excluded from core QA view, not deleted.",
+  "cost": {
+    "ZAAllEvaluatedCandidates": {
+      "vertices": 1518153,
+      "triangles": 3025614,
+      "indexedPositionNormalIndexBytes": 72743040,
+      "flatPositionNormalIndexBytes": 254151576
+    },
+    "ZACoreQA": {
+      "vertices": 1348577,
+      "triangles": 2695199,
+      "indexedPositionNormalIndexBytes": 64708236,
+      "flatPositionNormalIndexBytes": 226396716
+    },
+    "BP3DCurrentSubset": {
+      "source": "work/evidence/2026-09-28-whole-body-reset/audit-metrics.json",
+      "scope": "existing partial app subset; not equivalent complete anatomy coverage",
+      "vertices": 1927301,
+      "triangles": 2800004,
+      "actualGlbBytes": 71065840,
+      "samePositionNormalIndexLayoutBytes": 79855272
+    },
+    "interpretation": "Compare counts and identical uncompressed vertex/index layouts only. ZA byte values are estimates, BP3D GLB is measured. No whole-body download, mobile FPS or GPU-memory pass."
+  },
+  "whySelected": [
+    "One consistent evaluated static pose contains visible head/face, limbs, bilateral scapulae, lumbar/sacral structures and latissimus candidates.",
+    "960 exact source objects evaluated with finite geometry; all 12 frozen hashes reproduced.",
+    "Source coordinate convention and source metric scale verified; no per-muscle fitting required to preserve this single-source pose.",
+    "The current BP3D app subset is retained as a regression/reference source, not blindly overlaid on ZA.",
+    "The technical input is usable for a generic compiler while distinct anatomy/rights release checks remain enforced."
+  ],
+  "targetReconciliation": {
+    "lexical_group_or_other_representation_needs_reconciliation": 91,
+    "lexical_candidate_with_evaluated_geometry": 339,
+    "no_ZA_lexical_candidate": 112
+  },
+  "remainingResponsibilities": {
+    "T99": [
+      "generic source namespace/compiler",
+      "indexed geometry, smoothing, LOD/chunks/cache",
+      "do not use flat expanded QA GLB as product",
+      "enforce held/visibility source state",
+      "retain all 542 target dispositions"
+    ],
+    "T100": [
+      "canonical names/group/part/region crosswalk",
+      "missing target source resolution",
+      "per-item display eligibility",
+      "cross-source fitting only for verified gaps"
+    ],
+    "T80": [
+      "all required target coverage and laterality audit"
+    ],
+    "T58": [
+      "final visual and measured runtime performance"
+    ]
+  },
+  "publicRedistribution": "held",
+  "humanReview": "not_performed",
+  "learnerBindingsAdded": 0,
+  "wholeBodyCoverageComplete": false,
+  "productionReleaseApproved": false,
+  "T99Started": false,
+  "inputHashes": {
+    "evaluated-base-probe.json": "adf52087b24b34c909dbf8926e7643cc08a86ade2640980307cfd492ea23aaa9",
+    "source-catalog.json": "f2f1e98d22fe585b7943ddc0d7963af61cf18cced08b76be6984328a59e12ab7",
+    "frame-contract.json": "bd2029cbbcfe3a63ad693fac41b3a5e7492822030d822074ba2d5c751e89542d",
+    "rights-scope.json": "ee6c6617b97faca4f4ba8d45717cbc141ca7c65fec11b42694c9c92c57fa40d2",
+    "runtime-integrity.json": "d961b243053c22306fb6760ca127ace3e5998f9beb7416e9b28c45613948989b"
+  }
+}

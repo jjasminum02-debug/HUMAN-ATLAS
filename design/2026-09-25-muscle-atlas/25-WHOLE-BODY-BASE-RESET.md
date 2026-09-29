@@ -44,6 +44,19 @@ G1 이후: T81→T82→T83→T84(전체 설명과 검증된 짧은 운동신경)
 
 ## 3. T98 — 먼저 전신 베이스를 결정
 
+### 2026-09-29 Astra 정정 — 소스 선택과 제품 합격을 구분
+
+T98 재개 지침이 원래의 소스 타당성 검증을 넘어, T100의 canonical 연결과 T80의 전신 제품 점검까지 선행 조건으로 요구하면서 반복 중단됐다. 아래 해석을 명확히 한다. 과거 실패 기록과 검사는 그대로 보존한다.
+
+- T98의 exact identity는 **고정한 Z-Anatomy 파일 안의 실제 Object locator, data, parent, collection, evaluated geometry hash**로 검증한다. 원본에 없는 BP3D FJ ID를 새로 찾거나 만들어야만 Z-Anatomy 객체가 식별되는 것은 아니다. TA2 학습 개념 연결과 upstream 저작자별 계보는 별도 미확인 상태로 유지한다.
+- 단위는 Blender의 실제 `METRIC / scale_length` 설정과 공식 구현, 좌우·축은 실제 평가된 좌표와 전신 이미지로 확인한다. 독립된 모델을 기존 BP3D의 정확한 형상·자세에 이미 정합했다고 요구하지 않는다. source→project **축 규약 변환**과 두 모델의 **형상 정합**은 다르다. 정합되지 않은 두 모델을 겹쳐 기본 표시하면 안 된다.
+- rest pose는 이 단계에서 hash로 고정한 source frame 0의 **정적 기준 자세**다. 원본에 없는 rig bind pose나 외부 pose ID를 발명하지 않는다. motion의 rig 계약은 이후 별도 검증한다.
+- 소스 접근·변환의 권리 근거와 공개 재배포/앱 표시 권리는 분리한다. package의 명시적 접근·파생 허용과 예외를 기록한 로컬 비배포 검토가 가능하더라도 기존 app-display/redistribution hold를 승격하지 않는다. T99는 held source를 로컬에서 변환할 수 있지만 제품 공개나 기본 표시로 승격할 수 없다.
+- 합격은 전수 inventory/542-target disposition 보존, 신뢰할 수 있는 실제 exporter, 12개 frozen 표본의 재현, source 좌표·정적 자세, 검토된 권리 그룹과 한계, 전체 source-system의 실측 비용, **로컬 일괄 변환용 주 베이스 결정**이다. 전신 target의 canonical 학습 연결·필수 누락 0건·최종 표시·성능은 여전히 T100/T80/T58의 필수 합격 기준이며 낮추지 않는다.
+- 이미 실패한 명령의 무근거 반복은 금지하지만, 권한·검증 방법·입력·가설이 바뀐 한정 검증까지 금지하지 않는다. 단순히 기존 기록을 읽고 `no_new_evidence` 커밋만 반복하지 말고, 남은 문제를 해결할 구체적 검증을 실행하거나 외부 장애를 정확히 밝힌다.
+
+실제 결론과 입력: `work/evidence/T98/astra-resolution-2026-09-29/base-selection.json`. 이는 T99 기술 입력 선택이지 production release/전신 학습 완료 승인이 아니다. 원본/기존 앱의 hidden/source-only/held 상태를 유지한다.
+
 입력은 T97의 pinned archive/Startup.blend/hash와 BP3D 공식 metadata/실제 cache, T96의542개 의미 분류 target, 기존 runtime/hold, T104까지 실제 산출물이다. 원본은 읽기 전용. 이미 가진 archive를 다시 받지 않는다. T104 완료는 사용자 보고와 파일 증거 상태를 구분하고, 아직 report/commit이 없다면 해당 WIP를 무시하거나 T104 완료 보고서를 대신 쓰지 않는다. T98의 독립 source 검토는 진행할 수 있다.
 
 ### 전수 인벤토리와 target 대조

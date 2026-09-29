@@ -1,0 +1,39 @@
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T98/astra-resolution-2026-09-29/inspect_base.py:80: RuntimeWarning: divide by zero encountered in matmul
+  points = positions.astype(np.float64) @ matrix[:3, :3].T + matrix[:3, 3]
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T98/astra-resolution-2026-09-29/inspect_base.py:80: RuntimeWarning: overflow encountered in matmul
+  points = positions.astype(np.float64) @ matrix[:3, :3].T + matrix[:3, 3]
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T98/astra-resolution-2026-09-29/inspect_base.py:80: RuntimeWarning: invalid value encountered in matmul
+  points = positions.astype(np.float64) @ matrix[:3, :3].T + matrix[:3, 3]
+T98_PROBE 100
+T98_PROBE 200
+T98_PROBE 300
+T98_PROBE 400
+T98_PROBE 500
+T98_PROBE 600
+T98_PROBE 700
+T98_PROBE 800
+T98_PROBE 900
+Blender 3.5.0 (hash 1be25cfff18b built 2023-03-29 06:34:18)
+Device with name Apple M5 supports metal minimum requirements
+Read blend: /Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Startup.blend
+scripts disabled for "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Startup.blend", skipping 'z-anatomy.py'
+Dependency cycle detected:
+  OBOesophagus-profile/TRANSFORM_INIT() depends on
+  OBOesophagus/GEOMETRY_EVAL() via 'Curve Follow Parent'
+  OBOesophagus/MODIFIER(Solidify) via 'modifier stack order'
+  OBOesophagus/GEOMETRY_EVAL_INIT() via 'Modifier'
+  CUOesophagus/GEOMETRY_EVAL_DONE() via 'Object Geometry Base Data'
+  CUOesophagus/GEOMETRY_EVAL() via 'ObData Geom Eval Done'
+  OBOesophagus-profile/TRANSFORM_FINAL() via 'Curve Bevel Transform'
+  OBOesophagus-profile/TRANSFORM_SIMULATION_INIT() via 'Simulation -> Final Transform'
+  OBOesophagus-profile/TRANSFORM_EVAL() via 'Transform Eval -> Simulation Init'
+  OBOesophagus-profile/TRANSFORM_PARENT() via 'Eval'
+  OBOesophagus-profile/TRANSFORM_LOCAL() via 'ObLocal -> ObParent'
+  OBOesophagus-profile/TRANSFORM_INIT() via 'Transform Init'
+Detected 1 dependency cycles
+Error: Python: Traceback (most recent call last):
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T98/astra-resolution-2026-09-29/inspect_base.py", line 185, in <module>
+    row=rows_by_name[obj.name.removeprefix('QA:')]
+KeyError: 'Dorsal parts of lateral intertransversarii lumborum muscles.'
+
+Error: script failed, file: 'work/evidence/T98/astra-resolution-2026-09-29/inspect_base.py', exiting.

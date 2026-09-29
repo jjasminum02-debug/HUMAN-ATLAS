@@ -1,0 +1,27 @@
+{
+  "officialChecksumUrl": "https://download.blender.org/release/Blender3.5/blender-3.5.0.sha256",
+  "officialDmgSha256": "5941f450f90b8db6a1bde459db4d9248fc67f022c7cb5f662c9e0818a3725457",
+  "localDmgSha256": "5941f450f90b8db6a1bde459db4d9248fc67f022c7cb5f662c9e0818a3725457",
+  "matches": true,
+  "mountImagePath": "/private/tmp/t97-blender-3.5.0-arm64.dmg",
+  "mountImageType": "UDIF read-only compressed (zlib)",
+  "mountEntities": [
+    {
+      "content-hint": "GUID_partition_scheme",
+      "dev-entry": "/dev/disk5"
+    },
+    {
+      "content-hint": "48465300-0000-11AA-AA11-00306543ECAC",
+      "dev-entry": "/dev/disk5s1",
+      "mount-point": "/Volumes/Blender"
+    }
+  ],
+  "binarySha256": "23171ca8704539b44c94cb370894cb3b38908530c012267bed079326d7be95b0",
+  "codeSignature": {
+    "permissionMode": "require_escalated",
+    "command": "codesign --verify --deep --strict --verbose=2 /Volumes/Blender/Blender.app",
+    "exitCode": 0,
+    "output": "/Volumes/Blender/Blender.app: valid on disk\n/Volumes/Blender/Blender.app: satisfies its Designated Requirement"
+  },
+  "historicalFailuresPreserved": true
+}

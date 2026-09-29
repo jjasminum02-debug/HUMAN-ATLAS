@@ -1,0 +1,87 @@
+{
+  "task": "T98",
+  "scope": "Astra source-feasibility resolution",
+  "attempts": [
+    {
+      "operation": "official SHA sidecar curl, default sandbox",
+      "exitCode": 6,
+      "result": "DNS unavailable"
+    },
+    {
+      "operation": "same official SHA sidecar curl, require_escalated",
+      "exitCode": 0,
+      "result": "576 bytes retrieved; existing DMG matched"
+    },
+    {
+      "operation": "codesign --verify --deep --strict --verbose=2 /Volumes/Blender/Blender.app, require_escalated",
+      "exitCode": 0,
+      "result": "valid on disk; satisfies Designated Requirement"
+    },
+    {
+      "operation": "probe attempt 1",
+      "log": "base-probe.log",
+      "exitCode": 2,
+      "result": "imported historical unguarded CLI consumed arguments; replaced with explicit hash-contract functions"
+    },
+    {
+      "operation": "probe attempt 2",
+      "log": "base-probe-2.log",
+      "exitCode": 0,
+      "result": "960 evaluated objects, 12 hashes reproduced, initial source-system previews"
+    },
+    {
+      "operation": "core QA preview attempt",
+      "log": "base-probe-final.log",
+      "exitCode": 23,
+      "result": "Blender copy-name truncation detected; fixed using explicit source-object-name property"
+    },
+    {
+      "operation": "final source/core/bone QA probe",
+      "log": "base-probe-verified.log",
+      "exitCode": 0,
+      "result": "960 evaluated objects, 12 hashes reproduced, six PNG views"
+    },
+    {
+      "operation": "build_decision.py",
+      "exitCode": 0
+    },
+    {
+      "operation": "validate_resolution.py",
+      "exitCode": 0,
+      "checksPassed": 40
+    },
+    {
+      "operation": "sync_execution.py --check",
+      "exitCode": 0
+    }
+  ],
+  "finalProbeScriptSha256": "0c44660391a939383a2eabc167064b509de96b375fb705d8b429f52c35e74c17",
+  "finalLogSha256": "7bccb00b3a750d60b5b6978ec88bb7272f1415b205482cc3fef4b03c695ad770",
+  "newAnatomyArchiveDownloaded": false,
+  "sourceSaved": false,
+  "appRuntimeChanged": false,
+  "T99Started": false,
+  "visualReview": {
+    "method": "Astra viewed the actual PNGs with view_image",
+    "views": [
+      "source-minus-y.png",
+      "source-plus-y.png",
+      "source-plus-x.png",
+      "muscle-bone-front.png",
+      "muscle-bone-back.png",
+      "bone-front.png"
+    ],
+    "finding": "front/back/side orientation coherent; face, bilateral limbs, spine and scapula visible in corresponding isolated views; fascia overlay masks muscle detail so source Muscles membership used for separate core QA. No all-target completeness or human anatomy approval."
+  },
+  "whitespaceCheck": {
+    "scope": "owned authored code, JSON and documents",
+    "verbatimExceptions": [
+      "base-probe.log",
+      "base-probe-2.log",
+      "base-probe-final.log",
+      "base-probe-verified.log",
+      "source-readme.md"
+    ],
+    "reason": "Preserve original captured output and pinned source bytes, including Blender progress and Markdown hard-break whitespace; no normalization."
+  }
+}

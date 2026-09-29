@@ -10,7 +10,7 @@
 
 | ID | 담당 | 결과 |
 |---|---|---|
-| [T98](#t98) | Luna Max | 전신 source inventory·변환 검증·주 베이스 선택 |
+| [T98](#t98) | Astra · current conversation (user-requested resolution) | 전신 source inventory·변환 검증·주 베이스 선택 |
 | [T99](#t99) | Sol High | 공통 dataset compiler·일괄 변환·경량 로더 |
 | [T100](#t100) | Luna Max | 전신 근육·뼈 통합·지역/좌우·선택·핵심 관찰 |
 | [T80](#t80) | Luna Max | 전신 구조·선택 전수 감사와 누락 보완 |
@@ -71,11 +71,11 @@
 ### T98 — 전신 source inventory·변환 검증·주 베이스 선택
 
 ```text
-HUMAN ATLAS에서 T98만 수행해라. 담당 Luna Max.
+HUMAN ATLAS에서 T98만 수행해라. 담당 Astra · current conversation (user-requested resolution).
 AGENTS.md, work/EXECUTION.json, work/NEXT.md, 최신 STATUS의 generated execution 블록,
 design/2026-09-25-muscle-atlas/25-WHOLE-BODY-BASE-RESET.md와 해당 task 명세, 실제 선행 report/evidence/manifest를 읽어라.
 EXECUTION이 현재 범위/순서의 유일한 원본이다. 역사 queue의 nextTask를 실행하지 마라. 24의 엑셀 검증·한글 기능·짧은 신경·표정근 motion 제외는 유지한다.
-이번 범위: T97 pinned archive/BP3D metadata/cache/T96 전체 target 및 T104까지 최신 WIP·evidence를 읽는다. 25 설계 3절의 전체 Object/Mesh/Collection/curve/helper/instance와 source 권리 상속·예외를 대조한다. canonical concept·geometry·instance·file 분모를 구분하고12부위 필수 전체 목록을 freeze한다. Z-Anatomy는 우선 후보이며 actual evaluated geometry 변환/좌우·pose/권리/포괄성/비용으로 주 베이스를 선택한다. 정확히 동결한8–12개 대표 object의 실제 exporter spike와 preview/hash를 남긴다. T97 Metal 실패를 같은 방식으로 반복하지 않고 검증된 headless/export 경로를 확인한다. raw 배열을 modifier/instance 결과로 오인하지 않는다. 모든 source를 다시 다운로드하거나 광배근만 검사하고 완료하지 않는다. source inventory만 있고 exporter가 미검증이면 partial. 웹 runtime/다음 task를 구현하지 않는다. Resume boundary (2026-09-28): the initial raw datablock inventory, T96 542-target/563-membership freeze, rights-family comparison, and exact 12-object locator freeze are completed and must not be repeated. The frozen 12-object set has now been evaluated and exported with a local three-axis preview. Continue only at nextUnit: reconcile source unit/frame/rest pose/laterality and runtime provenance against T50/T69, resolve exact object-to-rights-family ancestry, compare whole-body coverage and measured costs, then select a base only if all gates are supported; otherwise keep it undecided. Do not redownload or repeat inventory/export. Resume boundary (2026-09-29): existing local mount metadata links the current Blender 3.5.0 executable through /private/tmp/t97-blender-3.5.0-arm64.dmg to the matching T97 download record; this is artifact lineage, not publisher/integrity verification because the saved 3.5.0 receipt lacks an official checksum and the saved codesign result is invalid. Existing exact-object records add no upstream ID or license-family mapping. Z-Anatomy units/frame/pose/side remain unregistered to the BodyParts3D-only T50/T69 contract; compare target candidate and sample-cost evidence without promoting lexical matches or sample metrics to whole-body coverage. Do not repeat inventory, archive acquisition, evaluated export, or preview. Continue only in this same nextUnit when new evidence exists; otherwise keep all holds and T98 partial.
+이번 범위: 25 설계 3절의 2026-09-29 Astra 정정을 따른다. T98은 전신 소스 inventory/목표 분모를 보존하고, 신뢰 가능한 exporter와 frozen 12개 표본 재현, exact Z-Anatomy source object, 단위·좌표 규약·정적 기준 자세, 권리 그룹과 보류 범위, 전체 source-system 비용으로 로컬 일괄 변환용 베이스를 선택한다. canonical 학습 연결·BP3D 형상 정합·앱 표시/공개 재배포·전신 제품 완료를 이 소스 선택과 혼동하지 않는다. 실제 입력은 work/evidence/T98/astra-resolution-2026-09-29/base-selection.json 및 validation.json이다. source-only/held/hidden/원본/사용자 WIP를 보존한다. 이 task에서 웹 runtime 또는 T99를 구현하지 않는다.
 시작 HEAD/status/hash를 기록하고 원본/OpenSim_Models/사용자 WIP/T13 drafts/역사 freeze를 보존한다. source-only/권리/사람검토를 추정 승격하지 않는다.
 공통 도구와 단일 scene/renderer/camera를 재사용한다. 자동 전수처리와 내부 의미검증 unit을 구분하며 미완이면 같은 task/nextUnit으로 재개한다. 새 번호를 반복 발급하지 마라.
 관련 실제 검증·progress·report/evidence를 남기고 EXECUTION의 해당 task record만 갱신한다. python3 work/tools/sync_execution.py와 --check로 투영 문서를 동기화한다.

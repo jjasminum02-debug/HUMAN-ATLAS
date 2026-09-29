@@ -118,14 +118,14 @@
   "tasks": {
     "T98": {
       "title": "전신 source inventory·변환 검증·주 베이스 선택",
-      "owner": "Luna Max",
+      "owner": "Astra · current conversation (user-requested resolution)",
       "phase": "G1",
-      "executionStatus": "in_progress",
-      "acceptance": "partial",
+      "executionStatus": "complete",
+      "acceptance": "passed",
       "spec": "work/tasks/T98.md",
-      "scope": "T97 pinned archive/BP3D metadata/cache/T96 전체 target 및 T104까지 최신 WIP·evidence를 읽는다. 25 설계 3절의 전체 Object/Mesh/Collection/curve/helper/instance와 source 권리 상속·예외를 대조한다. canonical concept·geometry·instance·file 분모를 구분하고12부위 필수 전체 목록을 freeze한다. Z-Anatomy는 우선 후보이며 actual evaluated geometry 변환/좌우·pose/권리/포괄성/비용으로 주 베이스를 선택한다. 정확히 동결한8–12개 대표 object의 실제 exporter spike와 preview/hash를 남긴다. T97 Metal 실패를 같은 방식으로 반복하지 않고 검증된 headless/export 경로를 확인한다. raw 배열을 modifier/instance 결과로 오인하지 않는다. 모든 source를 다시 다운로드하거나 광배근만 검사하고 완료하지 않는다. source inventory만 있고 exporter가 미검증이면 partial. 웹 runtime/다음 task를 구현하지 않는다. Resume boundary (2026-09-28): the initial raw datablock inventory, T96 542-target/563-membership freeze, rights-family comparison, and exact 12-object locator freeze are completed and must not be repeated. The frozen 12-object set has now been evaluated and exported with a local three-axis preview. Continue only at nextUnit: reconcile source unit/frame/rest pose/laterality and runtime provenance against T50/T69, resolve exact object-to-rights-family ancestry, compare whole-body coverage and measured costs, then select a base only if all gates are supported; otherwise keep it undecided. Do not redownload or repeat inventory/export. Resume boundary (2026-09-29): existing local mount metadata links the current Blender 3.5.0 executable through /private/tmp/t97-blender-3.5.0-arm64.dmg to the matching T97 download record; this is artifact lineage, not publisher/integrity verification because the saved 3.5.0 receipt lacks an official checksum and the saved codesign result is invalid. Existing exact-object records add no upstream ID or license-family mapping. Z-Anatomy units/frame/pose/side remain unregistered to the BodyParts3D-only T50/T69 contract; compare target candidate and sample-cost evidence without promoting lexical matches or sample metrics to whole-body coverage. Do not repeat inventory, archive acquisition, evaluated export, or preview. Continue only in this same nextUnit when new evidence exists; otherwise keep all holds and T98 partial.",
+      "scope": "25 설계 3절의 2026-09-29 Astra 정정을 따른다. T98은 전신 소스 inventory/목표 분모를 보존하고, 신뢰 가능한 exporter와 frozen 12개 표본 재현, exact Z-Anatomy source object, 단위·좌표 규약·정적 기준 자세, 권리 그룹과 보류 범위, 전체 source-system 비용으로 로컬 일괄 변환용 베이스를 선택한다. canonical 학습 연결·BP3D 형상 정합·앱 표시/공개 재배포·전신 제품 완료를 이 소스 선택과 혼동하지 않는다. 실제 입력은 work/evidence/T98/astra-resolution-2026-09-29/base-selection.json 및 validation.json이다. source-only/held/hidden/원본/사용자 WIP를 보존한다. 이 task에서 웹 runtime 또는 T99를 구현하지 않는다.",
       "progress": {
-        "nextUnit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
+        "nextUnit": null,
         "completedUnits": [
           "read-and-hash-pinned-inputs-and-prior-work",
           "inventory-all-serialized-source-objects-meshes-curves-collections-and-links",
@@ -141,31 +141,33 @@
           "compare-Z-Anatomy-declared-unit-frame-and-reference-pose-evidence-against-T50-T69-without-applying-BP3D-transform",
           "review-exact-12-frozen-object-locators-and-existing-source-metadata-for-upstream-ID-and-license-family-crosswalk",
           "compare-T96-regional-target-candidate-counts-and-existing-Z-Anatomy-versus-BP3D-subset-cost-evidence",
-          "review-official-release-index-and-pinned-source-readme-without-promoting-unverified-gates"
+          "review-official-release-index-and-pinned-source-readme-without-promoting-unverified-gates",
+          "official-checksum-and-approved-signature-validation",
+          "960-source-surface-cost-probe-and-12-hash-reproduction",
+          "source-object-identity-frame-static-snapshot-rights-scope",
+          "local-whole-body-compilation-base-selection"
         ],
-        "pendingUnits": [
-          "establish-official-publisher-and-integrity-evidence-for-mounted-Blender-3.5.0-despite-matched-local-T97-DMG-lineage",
-          "obtain-source-declared-Z-Anatomy-physical-unit-frame-and-reference-pose-or-validated-registration-to-T50-T69",
-          "resolve-exact-source-laterality-for-frozen-objects-with-source-identity-not-name-or-coordinate-inference",
-          "resolve-exact-upstream-source-ID-and-license-exception-family-for-each-frozen-object",
-          "compare-identity-backed-whole-body-target-surface-coverage-quality-and-equivalent-pipeline-cost-across-eligible-bases",
-          "select-production-base-only-after-runtime-source-identity-frame-rights-coverage-and-cost-gates-pass"
-        ],
-        "nextId": "T98",
-        "nextOwner": "Luna Max",
-        "nextPromptPath": "work/evidence/T98/resume-2026-09-29/NEXT-T98-RESUME.md",
+        "pendingUnits": [],
+        "nextId": "T99",
+        "nextOwner": "Sol High",
+        "nextPromptPath": "work/evidence/T98/astra-resolution-2026-09-29/NEXT-T99.md",
         "gate": {
           "evaluatedExportVerified": true,
           "representativeSurfacePreview": true,
-          "runtimePublisherProvenanceVerified": false,
-          "productionBaseSelected": false,
-          "whyPartial": "The official Blender 3.5 release directory lists the DMG and checksum sidecar, but the sidecar body could not be retrieved for hash comparison; prior invalid signature and Blender 5.2.2 receipt mismatch remain. The pinned Z-Anatomy README gives no exact source ID/per-object rights-family crosswalk for the frozen 12 or physical unit/frame/reference-pose registration to T50/T69. T96 still has 430/542 and 236/542 lexical candidates with zero exact joins; sample costs are not comparable whole-body costs. Production base remains undecided.",
-          "newTaskNumberIssued": false,
-          "nextTaskExecutionStarted": false,
-          "runtimeArtifactLineageEstablishedToT97Dmg": true,
-          "sourceIdentityAndRightsResolved": false,
-          "sourceFrameUnitPoseResolved": false,
-          "wholeBodyComparableCostAvailable": false
+          "runtimePublisherProvenanceVerified": true,
+          "exactSourceObjectsVerified": true,
+          "sourceFrameConventionAndStaticSnapshotVerified": true,
+          "localTechnicalRightsScopeDocumented": true,
+          "wholeSourceSystemCostMeasured": true,
+          "localCompilationBaseSelected": true,
+          "productionReleaseApproved": false,
+          "wholeBodyCoverageComplete": false,
+          "canonicalBindingsAdded": 0,
+          "publicRedistribution": "held",
+          "humanReview": "not_performed",
+          "T99Started": false,
+          "acceptanceScope": "T98 source feasibility and local technical input selection only",
+          "evidence": "work/evidence/T98/astra-resolution-2026-09-29/base-selection.json"
         },
         "runtimeAndRightsHold": {
           "sourceOnly": true,
@@ -174,9 +176,20 @@
           "humanReview": "not_performed",
           "canonicalBindingAdded": false,
           "learnerVisibilityChanged": false,
-          "webRuntimeChanged": false
+          "webRuntimeChanged": false,
+          "localTechnicalEvaluation": "supported_by_pinned_package_terms",
+          "appDisplayRights": "held",
+          "note": "Existing app/source-only visibility and redistribution holds remain; local technical evaluation is a separate documented state."
         },
         "resumeHistory": [
+          {
+            "date": "2026-09-29",
+            "unit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
+            "result": "existing metadata assessed; runtime container lineage linked to T97 Blender 3.5.0 DMG, but publisher integrity, source frame/pose, exact object IDs and rights-family membership remain unresolved",
+            "evidence": "work/evidence/T98/resume-2026-09-29/existing-metadata-assessment.json",
+            "nextUnit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
+            "nextId": "T98"
+          },
           {
             "date": "2026-09-29",
             "checkedAt": "2026-09-29T05:20:34+09:00",
@@ -203,10 +216,59 @@
             "evidence": "work/evidence/T98/resume-2026-09-29/reentry-no-new-official-materials.json",
             "nextUnit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
             "nextId": "T98"
+          },
+          {
+            "date": "2026-09-29",
+            "checkedAt": "2026-09-29T09:39:46.663624+09:00",
+            "unit": "astra-source-feasibility-resolution",
+            "result": "official checksum and signature verified; 960 surfaces evaluated; 12 hashes reproduced; source frame and cost verified; bounded local base selected",
+            "previousGate": {
+              "evaluatedExportVerified": true,
+              "representativeSurfacePreview": true,
+              "runtimePublisherProvenanceVerified": false,
+              "productionBaseSelected": false,
+              "whyPartial": "The existing hdiutil mount path and local SHA link Blender 3.5.0 to the T97-recorded 3.5.0 DMG download, but its recorded official checksum is absent and the app signature verification failed; the separate official 5.2.2 receipt remains a mismatch. Existing source metadata contains no exact upstream object IDs or object-to-rights-family links for the 12 frozen locators. Z-Anatomy physical unit/frame/reference pose and side mapping remain unregistered to T50/T69. T96 counts 430/542 Z-Anatomy and 236/542 BodyParts3D name candidates but zero exact source joins; sample export costs cannot be compared to whole-body costs. Production base remains undecided.",
+              "newTaskNumberIssued": false,
+              "nextTaskExecutionStarted": false,
+              "runtimeArtifactLineageEstablishedToT97Dmg": true,
+              "sourceIdentityAndRightsResolved": false,
+              "sourceFrameUnitPoseResolved": false,
+              "wholeBodyComparableCostAvailable": false
+            },
+            "evidence": "work/evidence/T98/astra-resolution-2026-09-29/validation.json",
+            "nextId": "T99"
           }
-        ]
+        ],
+        "downstreamResponsibilities": {
+          "T99": [
+            "generic source namespace/compiler",
+            "indexed geometry, smoothing, LOD/chunks/cache",
+            "do not use flat expanded QA GLB as product",
+            "enforce held/visibility source state",
+            "retain all 542 target dispositions"
+          ],
+          "T100": [
+            "canonical names/group/part/region crosswalk",
+            "missing target source resolution",
+            "per-item display eligibility",
+            "cross-source fitting only for verified gaps"
+          ],
+          "T80": [
+            "all required target coverage and laterality audit"
+          ],
+          "T58": [
+            "final visual and measured runtime performance"
+          ]
+        }
       },
-      "report": "work/reports/T98.md"
+      "report": "work/reports/T98.md",
+      "scopeHistory": [
+        {
+          "asOfBefore": "2026-09-29T09:39:46.663624+09:00",
+          "scope": "T97 pinned archive/BP3D metadata/cache/T96 전체 target 및 T104까지 최신 WIP·evidence를 읽는다. 25 설계 3절의 전체 Object/Mesh/Collection/curve/helper/instance와 source 권리 상속·예외를 대조한다. canonical concept·geometry·instance·file 분모를 구분하고12부위 필수 전체 목록을 freeze한다. Z-Anatomy는 우선 후보이며 actual evaluated geometry 변환/좌우·pose/권리/포괄성/비용으로 주 베이스를 선택한다. 정확히 동결한8–12개 대표 object의 실제 exporter spike와 preview/hash를 남긴다. T97 Metal 실패를 같은 방식으로 반복하지 않고 검증된 headless/export 경로를 확인한다. raw 배열을 modifier/instance 결과로 오인하지 않는다. 모든 source를 다시 다운로드하거나 광배근만 검사하고 완료하지 않는다. source inventory만 있고 exporter가 미검증이면 partial. 웹 runtime/다음 task를 구현하지 않는다. Resume boundary (2026-09-28): the initial raw datablock inventory, T96 542-target/563-membership freeze, rights-family comparison, and exact 12-object locator freeze are completed and must not be repeated. The frozen 12-object set has now been evaluated and exported with a local three-axis preview. Continue only at nextUnit: reconcile source unit/frame/rest pose/laterality and runtime provenance against T50/T69, resolve exact object-to-rights-family ancestry, compare whole-body coverage and measured costs, then select a base only if all gates are supported; otherwise keep it undecided. Do not redownload or repeat inventory/export. Resume boundary (2026-09-29): existing local mount metadata links the current Blender 3.5.0 executable through /private/tmp/t97-blender-3.5.0-arm64.dmg to the matching T97 download record; this is artifact lineage, not publisher/integrity verification because the saved 3.5.0 receipt lacks an official checksum and the saved codesign result is invalid. Existing exact-object records add no upstream ID or license-family mapping. Z-Anatomy units/frame/pose/side remain unregistered to the BodyParts3D-only T50/T69 contract; compare target candidate and sample-cost evidence without promoting lexical matches or sample metrics to whole-body coverage. Do not repeat inventory, archive acquisition, evaluated export, or preview. Continue only in this same nextUnit when new evidence exists; otherwise keep all holds and T98 partial.",
+          "reason": "Preserve prior resume boundary; new evidence resolves runtime and source feasibility, and separates source identity from product canonical/release gates."
+        }
+      ]
     },
     "T99": {
       "title": "공통 dataset compiler·일괄 변환·경량 로더",

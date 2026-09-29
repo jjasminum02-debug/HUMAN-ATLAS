@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "task": "T98",
   "startedAt": "2026-09-28",
-  "executionStatus": "in_progress",
-  "acceptance": "partial",
+  "executionStatus": "complete",
+  "acceptance": "passed",
   "completedUnits": [
     "read-and-hash-pinned-inputs-and-prior-work",
     "inventory-all-serialized-source-objects-meshes-curves-collections-and-links",
@@ -19,33 +19,35 @@
     "compare-Z-Anatomy-declared-unit-frame-and-reference-pose-evidence-against-T50-T69-without-applying-BP3D-transform",
     "review-exact-12-frozen-object-locators-and-existing-source-metadata-for-upstream-ID-and-license-family-crosswalk",
     "compare-T96-regional-target-candidate-counts-and-existing-Z-Anatomy-versus-BP3D-subset-cost-evidence",
-    "review-official-release-index-and-pinned-source-readme-without-promoting-unverified-gates"
+    "review-official-release-index-and-pinned-source-readme-without-promoting-unverified-gates",
+    "official-checksum-and-approved-signature-validation",
+    "960-source-surface-cost-probe-and-12-hash-reproduction",
+    "source-object-identity-frame-static-snapshot-rights-scope",
+    "local-whole-body-compilation-base-selection"
   ],
-  "nextUnit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
-  "nextId": "T98",
-  "nextOwner": "Luna Max",
+  "nextUnit": null,
+  "nextId": "T99",
+  "nextOwner": "Sol High",
   "afterT98GatesPass": "T99",
-  "nextPromptPath": "work/evidence/T98/resume-2026-09-29/NEXT-T98-RESUME.md",
-  "pendingUnits": [
-    "establish-official-publisher-and-integrity-evidence-for-mounted-Blender-3.5.0-despite-matched-local-T97-DMG-lineage",
-    "obtain-source-declared-Z-Anatomy-physical-unit-frame-and-reference-pose-or-validated-registration-to-T50-T69",
-    "resolve-exact-source-laterality-for-frozen-objects-with-source-identity-not-name-or-coordinate-inference",
-    "resolve-exact-upstream-source-ID-and-license-exception-family-for-each-frozen-object",
-    "compare-identity-backed-whole-body-target-surface-coverage-quality-and-equivalent-pipeline-cost-across-eligible-bases",
-    "select-production-base-only-after-runtime-source-identity-frame-rights-coverage-and-cost-gates-pass"
-  ],
+  "nextPromptPath": "work/evidence/T98/astra-resolution-2026-09-29/NEXT-T99.md",
+  "pendingUnits": [],
   "gate": {
     "evaluatedExportVerified": true,
     "representativeSurfacePreview": true,
-    "runtimePublisherProvenanceVerified": false,
-    "productionBaseSelected": false,
-    "whyPartial": "The existing hdiutil mount path and local SHA link Blender 3.5.0 to the T97-recorded 3.5.0 DMG download, but its recorded official checksum is absent and the app signature verification failed; the separate official 5.2.2 receipt remains a mismatch. Existing source metadata contains no exact upstream object IDs or object-to-rights-family links for the 12 frozen locators. Z-Anatomy physical unit/frame/reference pose and side mapping remain unregistered to T50/T69. T96 counts 430/542 Z-Anatomy and 236/542 BodyParts3D name candidates but zero exact source joins; sample export costs cannot be compared to whole-body costs. Production base remains undecided.",
-    "newTaskNumberIssued": false,
-    "nextTaskExecutionStarted": false,
-    "runtimeArtifactLineageEstablishedToT97Dmg": true,
-    "sourceIdentityAndRightsResolved": false,
-    "sourceFrameUnitPoseResolved": false,
-    "wholeBodyComparableCostAvailable": false
+    "runtimePublisherProvenanceVerified": true,
+    "exactSourceObjectsVerified": true,
+    "sourceFrameConventionAndStaticSnapshotVerified": true,
+    "localTechnicalRightsScopeDocumented": true,
+    "wholeSourceSystemCostMeasured": true,
+    "localCompilationBaseSelected": true,
+    "productionReleaseApproved": false,
+    "wholeBodyCoverageComplete": false,
+    "canonicalBindingsAdded": 0,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "T99Started": false,
+    "acceptanceScope": "T98 source feasibility and local technical input selection only",
+    "evidence": "work/evidence/T98/astra-resolution-2026-09-29/base-selection.json"
   },
   "holdState": {
     "sourceOnly": true,
@@ -54,7 +56,10 @@
     "humanReview": "not_performed",
     "canonicalBindingAdded": false,
     "learnerVisibilityChanged": false,
-    "webRuntimeChanged": false
+    "webRuntimeChanged": false,
+    "localTechnicalEvaluation": "supported_by_pinned_package_terms",
+    "appDisplayRights": "held",
+    "note": "Existing app/source-only visibility and redistribution holds remain; local technical evaluation is a separate documented state."
   },
   "excludedByDesign": [
     "24 workbook/Excel verification",
@@ -99,7 +104,49 @@
       "evidence": "work/evidence/T98/resume-2026-09-29/reentry-no-new-official-materials.json",
       "nextUnit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
       "nextId": "T98"
+    },
+    {
+      "date": "2026-09-29",
+      "checkedAt": "2026-09-29T09:39:46.663624+09:00",
+      "unit": "astra-source-feasibility-resolution",
+      "result": "official checksum and signature verified; 960 surfaces evaluated; 12 hashes reproduced; source frame and cost verified; bounded local base selected",
+      "previousGate": {
+        "evaluatedExportVerified": true,
+        "representativeSurfacePreview": true,
+        "runtimePublisherProvenanceVerified": false,
+        "productionBaseSelected": false,
+        "whyPartial": "The existing hdiutil mount path and local SHA link Blender 3.5.0 to the T97-recorded 3.5.0 DMG download, but its recorded official checksum is absent and the app signature verification failed; the separate official 5.2.2 receipt remains a mismatch. Existing source metadata contains no exact upstream object IDs or object-to-rights-family links for the 12 frozen locators. Z-Anatomy physical unit/frame/reference pose and side mapping remain unregistered to T50/T69. T96 counts 430/542 Z-Anatomy and 236/542 BodyParts3D name candidates but zero exact source joins; sample export costs cannot be compared to whole-body costs. Production base remains undecided.",
+        "newTaskNumberIssued": false,
+        "nextTaskExecutionStarted": false,
+        "runtimeArtifactLineageEstablishedToT97Dmg": true,
+        "sourceIdentityAndRightsResolved": false,
+        "sourceFrameUnitPoseResolved": false,
+        "wholeBodyComparableCostAvailable": false
+      },
+      "evidence": "work/evidence/T98/astra-resolution-2026-09-29/validation.json",
+      "nextId": "T99"
     }
   ],
-  "lastUpdatedAt": "2026-09-29T09:17:58+09:00"
+  "lastUpdatedAt": "2026-09-29T09:39:46.663624+09:00",
+  "downstreamResponsibilities": {
+    "T99": [
+      "generic source namespace/compiler",
+      "indexed geometry, smoothing, LOD/chunks/cache",
+      "do not use flat expanded QA GLB as product",
+      "enforce held/visibility source state",
+      "retain all 542 target dispositions"
+    ],
+    "T100": [
+      "canonical names/group/part/region crosswalk",
+      "missing target source resolution",
+      "per-item display eligibility",
+      "cross-source fitting only for verified gaps"
+    ],
+    "T80": [
+      "all required target coverage and laterality audit"
+    ],
+    "T58": [
+      "final visual and measured runtime performance"
+    ]
+  }
 }
