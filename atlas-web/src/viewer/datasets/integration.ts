@@ -74,6 +74,8 @@ export interface StructureRecord {
         relationKind?: 'direct_exact_name' | 'qualified_target_synonym' | 'class_member';
         matchedTargetSynonym?: string | null;
         sourceSegmentCode?: string | null;
+        /** Stable member key for a bounded class-member crosswalk; not a learner or upstream ID. */
+        memberCode?: string | null;
         matchEvidenceSourceIds?: string[];
     }[];
     searchApproximate?: boolean;
@@ -107,8 +109,8 @@ export interface TargetTerminologyEvidence {
     semanticKind: string;
     primaryOwner: string;
     regionIds: string[];
-    sourceParentId: string | null;
-    sourceAncestryIds: string[];
+    sourceParentId: number | null;
+    sourceAncestryIds: number[];
     sourceFlags: Record<string, unknown>;
     classification: Record<string, unknown>;
     names: { koModern: string | null; koTraditional: string | null; en: string };
@@ -133,6 +135,7 @@ export interface Integration {
     revision: string;
     datasetRevision: string;
     sourceHash: string;
+    scope: { targets: number; memberships: number; regions: number };
     policy: {
         localOnly: boolean;
         publicRedistribution: string;
@@ -182,6 +185,8 @@ export function validateIntegration(value: unknown, dataset: Dataset): Integrati
             const value = field === 'latin' ? term.latin : term.names[field];
             if (!evidence || evidence.value !== value || !['evidence_backed', 'missing'].includes(evidence.status))
                 throw Error('target terminology field shape');
+            if (evidence.sourceIds.some(id => !evidenceSources.has(id)))
+                throw Error('target terminology field references missing source');
             if (evidence.status === 'evidence_backed') {
                 if (!value || !evidence.locator?.trim() || !evidence.sourceIds.length
                     || evidence.sourceIds.some(id => !evidenceSources.has(id)))
@@ -250,9 +255,11 @@ export function validateIntegration(value: unknown, dataset: Dataset): Integrati
         }
         for (const relation of row.targetRelationEvidence ?? []) {
             const baseName = row.sourceName.replace(/\.[lr]$/i, '').trim().toLocaleLowerCase();
+            const allowedClassTargetKind = relation.relationKind === 'class_member'
+                && relation.targetId === 'TA2:1249' && relation.targetSemanticKind === 'bone_group';
             if (relation.sourceKey !== row.sourceKey || relation.sourceObjectName !== row.sourceName
                 || !row.targetIds.includes(relation.targetId)
-                || relation.targetSemanticKind !== 'bone' && relation.targetSemanticKind !== 'muscle'
+                || relation.targetSemanticKind !== 'bone' && relation.targetSemanticKind !== 'muscle' && !allowedClassTargetKind
                 || relation.ancestorNameAloneUsed || relation.upstreamFjOrTa2IdClaim
                 || relation.canonicalHaBindingCreated || relation.humanReview !== 'not_performed'
                 || !/^[a-f0-9]{64}$/.test(relation.evaluatedGeometrySha256)
@@ -264,7 +271,7 @@ export function validateIntegration(value: unknown, dataset: Dataset): Integrati
                     throw Error('target relation exact name mismatch');
             } else {
                 const term = targetTerms.get(relation.targetId);
-                if (!term || !relation.matchEvidenceSourceIds?.length || !relation.sourceSegmentCode)
+                if (!term || !relation.matchEvidenceSourceIds?.length || (!relation.sourceSegmentCode && !relation.memberCode))
                     throw Error('target relation missing target/member evidence');
                 if (relation.relationKind === 'qualified_target_synonym') {
                     const exact = (relation.targetId === 'TA2:1038' && relation.sourceObjectName === 'Atlas (C1)' && relation.matchedTargetSynonym === 'vertebra C1' && relation.sourceSegmentCode === 'C1')
@@ -280,8 +287,38 @@ export function validateIntegration(value: unknown, dataset: Dataset): Integrati
                         && relation.sourceSegmentCode === relation.sourceObjectName.match(/T(?:[1-9]|1[0-2])$/)?.[0]
                         && relation.sourceParent === 'Thoracic vertebrae.g'
                         && relation.sourceCollections.some(x => /thoracic vertebrae/i.test(x));
-                    if (!cervical && !thoracic)
-                        throw Error('target relation class member mismatch');
+                    const lumbar = relation.targetId === 'TA2:1068' && relation.targetSemanticKind === 'bone'
+                        && /^Vertebra L[1-5]$/.test(relation.sourceObjectName)
+                        && relation.sourceSegmentCode === relation.sourceObjectName.match(/L[1-5]$/)?.[0]
+                        && relation.memberCode === 'lumbar:' + relation.sourceSegmentCode
+                        && relation.sourceParent === 'Lumbar vertebrae.g'
+                        && relation.sourceSide === null
+                        && ['Back', 'Lumbar vertebrae', 'Vertebral column'].every(x => relation.sourceCollections.includes(x));
+                    const ribOrdinals = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth',
+                        'Seventh', 'Eighth', 'Ninth', 'Tenth', 'Eleventh', 'Twelfth'];
+                    const ribMatch = relation.sourceObjectName.match(/^(First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|Eleventh|Twelfth) rib\.([lr])$/);
+                    const ribIndex = ribMatch ? ribOrdinals.indexOf(ribMatch[1]) + 1 : 0;
+                    const ribSide = ribMatch?.[2] === 'l' ? 'left' : ribMatch?.[2] === 'r' ? 'right' : null;
+                    const ribParent = ribIndex >= 1 && ribIndex <= 7 ? 'True ribs.g'
+                        : ribIndex >= 8 && ribIndex <= 10 ? 'False ribs.g'
+                            : ribIndex >= 11 && ribIndex <= 12 ? 'Floating ribs.g' : null;
+                    const ordinaryRib = relation.targetId === 'TA2:1118' && relation.targetSemanticKind === 'bone'
+                        && !!ribMatch && relation.sourceSegmentCode === null
+                        && relation.memberCode === 'rib:' + String(ribIndex).padStart(2, '0')
+                        && relation.sourceParent === ribParent && relation.sourceSide === ribSide
+                        && ['Ribs', 'Thorax'].every(x => relation.sourceCollections.includes(x));
+                    const carpalMatch = relation.sourceObjectName.match(/^(Scaphoid|Lunate|Triquetrum|Pisiform|Trapezium|Trapezoid|Capitate|Hamate) bone\.([lr])$/);
+                    const carpalSide = carpalMatch?.[2] === 'l' ? 'left' : carpalMatch?.[2] === 'r' ? 'right' : null;
+                    const limbCollection = carpalSide === 'left' ? 'Left upper limb' : 'Right upper limb';
+                    const carpal = relation.targetId === 'TA2:1249' && relation.targetSemanticKind === 'bone_group'
+                        && !!carpalMatch && relation.sourceSegmentCode === null
+                        && relation.memberCode === 'carpal:' + carpalMatch[1].toLocaleLowerCase()
+                        && relation.sourceParent === 'Bones of free part of upper limb.g'
+                        && relation.sourceSide === carpalSide
+                        && relation.sourceCollections.includes(limbCollection)
+                        && relation.sourceCollections.includes('Right hand');
+                    if (!cervical && !thoracic && !lumbar && !ordinaryRib && !carpal)
+                        throw Error('target relation class member mismatch: ' + relation.targetId + ' / ' + relation.sourceObjectName);
                 } else {
                     throw Error('target relation unsupported non-name match');
                 }

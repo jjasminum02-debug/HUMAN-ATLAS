@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "batchId": "T100-B03-lumbar-ribs-hand-groups",
+  "capturedAt": "2026-09-29 Asia/Seoul",
+  "browser": "Codex in-app browser",
+  "url": "http://127.0.0.1:5173/",
+  "title": "Human Atlas · 근육 학습",
+  "initialRenderedState": {
+    "heading": "전신 살펴보기",
+    "structureCountText": "355 개 이름 · 좌우 모형 함께 보기",
+    "visibleRegionCount": 12,
+    "singleWholeBodyStageVisible": true,
+    "newInternalEvidenceOrTaskMetadataVisible": false,
+    "screenshotObservation": "816x768 viewport; overview model centered, 12 regions listed; no internal JSON/source/task labels in learner controls."
+  },
+  "searchChecks": [
+    {
+      "query": "경늑골",
+      "visibleResultCount": 0,
+      "result": "등록된 이름을 찾지 못했습니다. 다른 이름으로 검색해 보세요.",
+      "interpretation": "B03-only cervical-rib terminology evidence is not exposed through learner search."
+    },
+    {
+      "query": "TA2:1068",
+      "visibleResultCount": 0,
+      "result": "등록된 이름을 찾지 못했습니다. 다른 이름으로 검색해 보세요.",
+      "interpretation": "internal target identifier is not exposed as a learner result."
+    },
+    {
+      "query": "허리뼈",
+      "visibleResultCount": 2,
+      "visibleResults": [
+        "중족골 · Fifth metatarsal bone",
+        "중족골 · First metatarsal bone"
+      ],
+      "interpretation": "existing broad/fuzzy search noise; neither result is a lumbar vertebra nor a B03 internal target-evidence row. No target name or new synonym surfaced."
+    }
+  ],
+  "afterChecks": {
+    "searchCleared": true,
+    "overviewRestored": true,
+    "taskIdsJsonAndSourceMetadataVisible": false
+  },
+  "console": {
+    "inspection": "not exposed by the current CUA target API used for this capture",
+    "errorsClaimed": false
+  },
+  "limitation": "This verifies learner non-leakage and the existing overview state; it does not claim anatomy review, new selection bindings, or console-log inspection."
+}

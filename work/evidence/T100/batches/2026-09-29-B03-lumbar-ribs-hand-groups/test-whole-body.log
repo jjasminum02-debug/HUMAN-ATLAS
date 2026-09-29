@@ -1,0 +1,43 @@
+$ node --experimental-strip-types --test src/viewer/wholeBody/wholeBody.test.ts src/viewer/wholeBody/productContext.test.ts src/viewer/datasets/*.test.ts && node --experimental-strip-types scripts/verifyCompiledDatasets.ts
+✔ 960 preserved instances, separate kinds, no rights/binding promotions (2.181834ms)
+✔ reject changed unit, duplicate instance, missing LOD, hold promotion and oversized chunk (42.3175ms)
+✔ all-detail demand retains every surface and stays within triangles and bytes (1.694458ms)
+✔ LRU evicts oldest unwanted only; twenty cycles stay bounded and release once (112.779791ms)
+✔ late cancelled decode is released; re-demand can subsequently load same key (17.739ms)
+✔ oversized load fails once without retry loop, disposal cancels pending (5.543167ms)
+✔ whole-source overlay retains records and independent release/review status (2.111ms)
+✔ historical non-approval, public hold and human review do not block evidenced local rendering (0.082125ms)
+✔ revision, duplicate/missing keys, local decision mismatch and invented binding fail closed (17.999375ms)
+✔ all three names search a source pair and regional filters use union (9.375166ms)
+✔ T100 B01 maps ten exact skull targets to fourteen existing source surfaces with field provenance (39.018958ms)
+✔ T100 B01 evidence refs and direct crosswalk proof fail closed when altered (5.752708ms)
+✔ T100 B02 classifies ten exact vertebral/variant targets and links only nineteen verified source members (2.655333ms)
+✔ T100 B02 rejects unsupported segment/member relations and target-name evidence without provenance (6.516708ms)
+✔ T100 B03 adds only ten terminology dispositions and 45 exact lumbar, ordinary-rib and carpal class members (5.886917ms)
+✔ T100 B03 rejects wrong sides, parents, member keys, unsupported variants and missing field provenance (20.401708ms)
+✔ both scapulae belong to arm context and sacrum to lumbar context (0.160583ms)
+✔ accessories remain retained without masquerading as muscle/bone (0.169875ms)
+✔ stable source route roundtrips, old bound HA route resolves side, invalid/filtered keys stay unselected (0.257083ms)
+✔ T95 product context adds left scapula membership without editing source or duplicating nodes (1.041667ms)
+✔ T95 context overlay rejects source identity, laterality, region, policy, and duplicate drift (0.242458ms)
+✔ source-only context never becomes selectable (0.369833ms)
+✔ supplements require explicit opt-in, stay unbound (0.049709ms)
+✔ held identity cannot be revealed through layer/opt-in (0.038ms)
+✔ region/layer demand excludes unrelated geometry (0.03975ms)
+✔ T95 overlapping region union keeps one asset visible and empty filters mean whole body (0.059042ms)
+✔ reject conflicting duplicate IDs and source-only binding promotion (0.225625ms)
+✔ late parse after cancellation is disposed; same-id new demand can recover (4.941084ms)
+✔ failure retains successful resources; explicit retry only failed asset (2.878583ms)
+✔ dispose releases completed and late resources exactly once (1.876333ms)
+✔ isolation never promotes source-only or held nodes and respects layer switches (0.531291ms)
+✔ selected transparency preserves eligibility and selection; hide only hides the selected eligible asset (0.103709ms)
+✔ v2 local display is independent from learner binding, rights and review holds (0.15175ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 33
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 288.133417
+Current compiled dataset contracts/dependencies/content hashes verified: 46 chunks. Historical plan/document freezes are tested separately.

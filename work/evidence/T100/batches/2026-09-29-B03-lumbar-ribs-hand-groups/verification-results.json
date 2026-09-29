@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "task": "T100-B03-lumbar-ribs-hand-groups",
+  "capturedAt": "2026-09-29 Asia/Seoul",
+  "checks": [
+    {
+      "command": "python3 work/evidence/T100/batches/2026-09-29-B03-lumbar-ribs-hand-groups/apply_t100_b03.py",
+      "status": "pass",
+      "log": "apply-overlay.log"
+    },
+    {
+      "command": "python3 work/evidence/T100/batches/2026-09-29-B03-lumbar-ribs-hand-groups/validate_t100_b03.py",
+      "status": "pass",
+      "evidence": "validation.json",
+      "log": "validator.log"
+    },
+    {
+      "command": "pnpm --dir atlas-web run test:whole-body",
+      "status": "pass",
+      "tests": 33,
+      "failed": 0,
+      "compiledChunkCount": 46,
+      "log": "test-whole-body.log"
+    },
+    {
+      "command": "pnpm --dir atlas-web run typecheck",
+      "status": "pass",
+      "log": "typecheck.log"
+    },
+    {
+      "command": "pnpm --dir atlas-web run build",
+      "status": "pass",
+      "log": "build.log",
+      "warning": "existing main app chunk 958.12 kB minified exceeds 500 kB advisory threshold"
+    },
+    {
+      "check": "actual learner browser search non-leakage",
+      "status": "pass",
+      "evidence": "browser-validation.json"
+    },
+    {
+      "check": "frozen input and OpenSim preservation",
+      "status": "pass",
+      "evidence": "preservation-after.json"
+    },
+    {
+      "command": "python3 work/tools/sync_execution.py",
+      "status": "pass",
+      "result": "Updated 0 generated views; execution projections already current."
+    },
+    {
+      "command": "python3 work/tools/sync_execution.py --check",
+      "status": "pass",
+      "result": "Execution projections match; no writes."
+    }
+  ],
+  "overall": "pass_for_B03_batch; T100_remains_in_progress_partial",
+  "limitations": [
+    "No anatomy approval, human review, public redistribution approval, canonical binding, learner name/alias update, geometry or whole-body completion is claimed.",
+    "Browser console messages were not accessible from the CUA Target capture API."
+  ]
+}
