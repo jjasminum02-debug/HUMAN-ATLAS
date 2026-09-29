@@ -44,6 +44,19 @@ export function wholeBodyPlugin(root: string): Plugin {
       }
       server.middlewares.use(async (req,res,next) => {
         const path=req.url?.split('?')[0] ?? '';
+        if(path==='/__atlas/integration.json') {
+          try {
+            const bytes=await readFile(`${root}atlas-data/overlays/za-local-integration.json`);
+            const overlay=JSON.parse(bytes.toString());
+            const decisionPath=await realpath(resolve(root,overlay.policy.rightsEvidence));
+            if(!decisionPath.startsWith(resolve(root,'work/evidence')+sep))throw Error('decision containment');
+            if(sha(await readFile(decisionPath))!==overlay.policy.rightsEvidenceSha256)throw Error('changed local-use decision');
+            const compiled=await snapshot('za-c7010a9');
+            if((compiled.manifest as {revision:string}).revision!==overlay.datasetRevision)throw Error('stale integration');
+            res.setHeader('Cache-Control','no-store');res.setHeader('Content-Type','application/json');res.end(JSON.stringify(overlay));
+          }catch{res.statusCode=503;res.end('Local integration unavailable');}
+          return;
+        }
         let namespace='', file='';
         if(path.startsWith('/__atlas/body/')) {namespace='bp3d-r4';file=path.slice('/__atlas/body/'.length);}
         else if(path.startsWith('/__atlas/datasets/')) {

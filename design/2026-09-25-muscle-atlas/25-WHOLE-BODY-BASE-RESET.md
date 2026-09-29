@@ -137,3 +137,25 @@ T80은 전체 누락·중복·side/part·held·세 이름·선택을 전수 감�
 모든 실제 보고서는 범위/검증/미완을 담고 task 종료 시 같은 task 미완 재개인지 다음 ID인지를 기록한다. 사용자 완료 보고와 실제 report/commit 상태가 어긋나면 둘 다 적고, 확인 없이 과거 task pass를 만들지 않는다. 초기 감사 시 T104의 보고서/브라우저 evidence/커밋은 없었으나, 감사 도중 로컬 커밋67d8b79와 해당 보고서/검증 기록이 확인됐다. T104는 exact10 표면의 passed_with_gaps이며 전신 완료가 아니다. 이 문서가 T104를 다시 실행하거나 자체 완료 처리한 것은 아니다. 당시 T105 handoff는 새 EXECUTION의 T98로 대체한다.
 
 진행 중 사용자 WIP와 T13 drafts, OpenSim 원본, 모든 과거 freeze/실제 evidence는 보존한다. 관련 검증을 마친 소유 변경만 로컬 체크포인트에 넣는다. 원본 archive/개인 엑셀/임시 파일은 제외. push/배포/진단·치료·침 시뮬레이션/신규 task 자동 실행 없음. 이번에는 계획·감사·문서 동기화 도구만 만들고 T98의 source 구현을 시작하지 않는다.
+
+## 2026-09-29 T100 정정 — 미실행 표시를 영구 금지로 상속하지 않는다
+
+사용자가 T98 이후 `승인하지 않음` 때문에 Luna가 중단되는 원인을 교정하도록 요청했다. T98/T99의 `held_not_approved_by_this_task`는 **그 task가 표시 결정을 하지 않았다는 역사 상태**다. T100에서 근거를 검토하고 현재 표시 결정을 만드는 것을 금지하는 상태가 아니다. 기존 freeze는 그대로 두고 현재 decision overlay로 결정을 기록한다.
+
+| 축 | 진행 가능한 조건 | 실제로 해당 항목만 막는 조건 |
+|---|---|---|
+| 원본 객체 식별 | source release/member hash + Object/data/parent/collection + evaluated geometry hash | 객체 불일치, hash 변조, 정체 충돌 |
+| 로컬 표시·관찰 | 위 객체 식별, frame/geometry 검증, 문서화된 source-family 로컬 이용 근거와 예외 검토 | 확인된 이용 금지, unresolved 예외 계보, 깨진 geometry/frame, 명시적 source viewport hide |
+| 이름·교육 개념 연결 | AI가 exact term, system/region, side/part 및 원본 객체·계층을 교차 확인한 project crosswalk | 모호한 이름, parent 전체를 part로 대체, 좌우/위치 충돌. 해당 연결만 보류 |
+| 사람 검토 | 별도 `not_performed/reviewed` 기록 | 기본 이름·로컬 렌더의 일괄 선행 조건이 아님 |
+| 공개 재배포 | 추후 별도 배포 권리 검토 | 현재 held 유지. 이 held는 로컬 개발·표시를 차단하지 않음 |
+
+- **공식 FJ/TA2 ID가 source 안에 없다는 사실 자체는 중단 사유가 아니다.** upstream ID를 발명하지 않고, 검증한 프로젝트 의미 대응을 `ai_crosschecked`로 기록한다. 같은 이름만 비교하거나 fuzzy match만 한 후보는 binding으로 세지 않는다.
+- 원본 family/collection이 입증되면 공통 권리 근거를 상속하고 실제 예외만 분리한다. 모든 객체에 별도 허가서를 받아야 한다는 규칙을 만들지 않는다. 공개 라이선스 호환/재배포 결론은 별도다.
+- 현재 로컬 결정은 `work/evidence/T100/resolution-2026-09-29/local-display-review.json`, 객체별 적용은 `atlas-data/overlays/za-local-integration.json`이다. 각 row의 decision basis/hard hold를 검증한다. 역사 T98/T99 manifest의 상태를 고쳐 승인한 척하지 않는다.
+- **미확정 canonical 연결은 검증된 source 표면 관찰까지 막지 않는다.** 영어 원문 이름과 typed source card를 제공할 수 있으며, 이름/학습 연결/완전 coverage의 수치는 따로 센다.
+- 아직 조사하지 않았음은 수행할 작업이다. `no_new_evidence`나 `사람 승인 대기`로 중단하기 전에 담당 AI가 적용 근거와 실제 충돌을 조사·기록한다. 사용자 승인이 필요한 실제 법적 동의/비용/범위 변경이 없는 한 일괄 확인을 요구하지 않는다.
+- source 이름 부재는 형상 부재의 증명이 아니다. synonym, part/group, 변이, 실제 누락을 나눠 남은 target을 처리한다. 새로운 task 번호나 반복 전체 취득 없이 해당 unit을 재개한다.
+- 이 교정은 542 targets/563 memberships를 줄이거나 모든 근육 완료를 선언하는 예외가 아니다. 실제 필수 구조/명칭 누락은 T100의 남은 구현 항목으로 유지한다. T80/T58을 이번에 실행하지 않는다.
+
+현재 코드 검사는 실제 compiled registry의 dependency·chunk hash와 runtime 회귀를 검사한다(`test:whole-body`). 과거 T102가 당시의 AGENTS.md를 고정한 검사는 `test:whole-body:historical`에 그대로 남긴다. 현재 설계 정정 때문에 바뀐 지침 문서를 과거 hash로 되돌리거나, 과거 freeze 값을 새 값으로 덮어써 통과시키지 않는다. 과거 재현 실패와 현재 모델 손상은 다른 결과다.

@@ -1,0 +1,26 @@
+✔ 960 preserved instances, separate kinds, no rights/binding promotions (1.953542ms)
+✔ reject changed unit, duplicate instance, missing LOD, hold promotion and oversized chunk (37.243666ms)
+✔ all-detail demand retains every surface and stays within triangles and bytes (1.401209ms)
+✔ LRU evicts oldest unwanted only; twenty cycles stay bounded and release once (114.648166ms)
+✔ late cancelled decode is released; re-demand can subsequently load same key (16.900417ms)
+✔ oversized load fails once without retry loop, disposal cancels pending (6.001875ms)
+✔ source-only context never becomes selectable (0.410875ms)
+✔ supplements require explicit opt-in, stay unbound (0.047708ms)
+✔ held identity cannot be revealed through layer/opt-in (0.035917ms)
+✔ region/layer demand excludes unrelated geometry (0.042959ms)
+✔ T95 overlapping region union keeps one asset visible and empty filters mean whole body (0.065ms)
+✔ reject conflicting duplicate IDs and source-only binding promotion (0.214541ms)
+✔ late parse after cancellation is disposed; same-id new demand can recover (4.153209ms)
+✔ failure retains successful resources; explicit retry only failed asset (1.430917ms)
+✔ dispose releases completed and late resources exactly once (1.503917ms)
+✔ isolation never promotes source-only or held nodes and respects layer switches (0.216958ms)
+✔ selected transparency preserves eligibility and selection; hide only hides the selected eligible asset (0.115834ms)
+✔ v2 local display is independent from learner binding, rights and review holds (0.184834ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 251.365625

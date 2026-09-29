@@ -2,11 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 import { AnatomySceneController, type BodyProgress } from './AnatomySceneController';
 import { type BodyManifest, validateManifest } from './contract';
 import './wholeBody.css';
+import { DatasetSceneAdapter } from '../datasets/DatasetSceneAdapter';
+import type { Dataset } from '../datasets/schema';
+import type { Integration } from '../datasets/integration';
 import { AtlasLoading } from '../../ui/AtlasLoading';
 
-export function WholeBodyViewer({ regionIds, selectedId, selectedIds, onSelect, whole, onWholeChange, onEntered }: { onEntered?: (value: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
+export function WholeBodyViewer({ homeRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, whole, onWholeChange, onEntered }: { homeRevision?: number; datasetSource?: { dataset: Dataset; integration: Integration }; onEntered?: (value: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
   const host = useRef<HTMLDivElement>(null);
-  const controller = useRef<AnatomySceneController | null>(null);
+  const controller = useRef<AnatomySceneController | DatasetSceneAdapter | null>(null);
   const previousView = useRef<{ regionKey: string; selectedId: string | null } | null>(null);
   const select = useRef(onSelect); select.current = onSelect;
   const [bones, setBones] = useState(true);
@@ -44,9 +47,15 @@ export function WholeBodyViewer({ regionIds, selectedId, selectedIds, onSelect, 
     if (progress && progress.calls > 0 && (progress.loaded === progress.total || progress.failed > 0)) setEntered(true);
   }, [progress]);
   useEffect(() => {
-    const abort = new AbortController(); let current: AnatomySceneController | null = null;
+    const abort = new AbortController(); let current: AnatomySceneController | DatasetSceneAdapter | null = null;
     setError(false); setReady(false); setProgress(null);
     const timeout = window.setTimeout(() => { abort.abort(); setError(true); }, 20000);
+    if (datasetSource && host.current) {
+      window.clearTimeout(timeout);
+      current = new DatasetSceneAdapter(host.current, datasetSource.dataset, datasetSource.integration, setProgress, (id, side) => select.current(id, side));
+      controller.current = current; setReady(true);
+      return () => { abort.abort(); current?.dispose(); controller.current = null; };
+    }
     void fetch('/__atlas/body/manifest.json', { signal: abort.signal }).then(async response => {
       if (!response.ok) throw new Error('Unavailable');
       const manifest = await response.json() as BodyManifest; validateManifest(manifest);
@@ -56,7 +65,7 @@ export function WholeBodyViewer({ regionIds, selectedId, selectedIds, onSelect, 
       controller.current = current; setReady(true);
     }).catch(() => { window.clearTimeout(timeout); if (!abort.signal.aborted) setError(true); });
     return () => { window.clearTimeout(timeout); abort.abort(); current?.dispose(); controller.current = null; };
-  }, [revision]);
+  }, [revision, datasetSource]);
   useEffect(() => {
     if (!ready) return;
     const regionKey = JSON.stringify(regionIds);
@@ -70,6 +79,7 @@ export function WholeBodyViewer({ regionIds, selectedId, selectedIds, onSelect, 
     }
     previousView.current = { regionKey, selectedId };
   }, [ready, regionIds, selectedId, selectedIds, bones, muscles, presentation]);
+  useEffect(() => { if (ready && homeRevision > 0) controller.current?.focus([]); }, [ready, homeRevision]);
   return <div className="whole-body-viewer">
     <div className="whole-body-canvas" inert={!entered} aria-hidden={!entered} ref={host}/>
     {!entered && <AtlasLoading failed={error || Boolean(progress?.failed)} loaded={progress?.loaded} total={progress?.total} onRetry={() => error ? setRevision(r => r + 1) : controller.current?.retry()}/> }

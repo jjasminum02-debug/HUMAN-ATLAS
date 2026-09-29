@@ -22,6 +22,7 @@ export class AnatomySceneController {
   private dirty = true;
   private previous = 0;
   private readonly frameIntervalsMs: number[] = [];
+  private readonly renderDurationsMs: number[] = [];
   private pointer = { x: 0, y: 0 };
   private lastReport = 0;
   private hoverId: string | null = null;
@@ -97,7 +98,14 @@ export class AnatomySceneController {
     for (const update of this.updates) update(dt);
     this.controls.update();
     if (this.hoverPoint) { const p = this.hoverPoint; this.hoverPoint = null; this.setHover(this.pick(p.x, p.y)?.nodeId ?? null); }
-    if (this.dirty || this.updates.size) { this.renderer.render(this.scene, this.camera); this.dirty = false; }
+    if (this.dirty || this.updates.size) {
+      const started = import.meta.env.DEV ? performance.now() : 0;
+      this.renderer.render(this.scene, this.camera); this.dirty = false;
+      if (import.meta.env.DEV) {
+        this.renderDurationsMs.push(performance.now() - started);
+        if (this.renderDurationsMs.length > 240) this.renderDurationsMs.shift();
+      }
+    }
     if (time - this.lastReport > 500) { this.report(); this.lastReport = time; }
   };
   setView(view: BodyView) {
@@ -190,6 +198,9 @@ export class AnatomySceneController {
       const percentile = (fraction: number) => intervals.length
         ? intervals[Math.min(intervals.length - 1, Math.ceil(fraction * (intervals.length - 1)))]
         : null;
+      const renderTimes = [...this.renderDurationsMs].sort((a, b) => a - b);
+      const renderPercentile = (fraction: number) => renderTimes.length
+        ? renderTimes[Math.ceil(fraction * (renderTimes.length - 1))] : null;
       const geometries = new Set<THREE.BufferGeometry>();
       const materials = new Set<THREE.Material>();
       let visibleMeshes = 0;
@@ -213,6 +224,7 @@ export class AnatomySceneController {
         visible: [...this.root.children].flatMap(g => g.children.filter(o => o.visible).map(o => o.name)),
         calls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles,
         geometries: this.renderer.info.memory.geometries, visibleMeshes, materials: materials.size, geometryBuffersBytes,
+        renderSampleCount: renderTimes.length, renderCpuP50Ms: renderPercentile(0.5), renderCpuP95Ms: renderPercentile(0.95),
         frameSampleCount: intervals.length, frameIntervalP50Ms: percentile(0.5), frameIntervalP95Ms: percentile(0.95),
         canvasWidth: this.size.width, canvasHeight: this.size.height, pixelRatio: this.renderer.getPixelRatio(),
       });
@@ -231,6 +243,7 @@ export class AnatomySceneController {
     if (asset) this.select(asset.stableIds[0], asset.side);
   };
   private pick(x: number, y: number): BodyAsset | undefined {
+    if (this.assets.size === 0) return undefined; // A dataset adapter owns eligible picking on this root.
     const rect = this.renderer.domElement.getBoundingClientRect();
     const ray = new THREE.Raycaster();
     ray.setFromCamera(new THREE.Vector2((x - rect.left) / rect.width * 2 - 1, -(y - rect.top) / rect.height * 2 + 1), this.camera);

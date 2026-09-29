@@ -1,406 +1,120 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { loadPilotCatalog, type PilotCatalog } from '../data/catalog';
-import { findMuscles, learningConcepts, motionActionOptionsForLearner, nameFor, structureTextForLearner } from '../data/learning';
-import { boneNameForLearner, searchSelectableBones } from '../data/boneNames';
 import { WholeBodyViewer } from '../viewer/wholeBody/WholeBodyViewer';
-import { buildBoneCardData } from '../domain/boneCard';
-import {
-  serializeAtlasRoute,
-  type AtlasRouteState,
-  type NavigationContract,
-  type Selection,
-  type SelectionReferences,
-} from '../domain/navigation';
-import {
-  categoriesForMuscleConcept,
-  categoryMemberships,
-  defaultLearnerRoute,
-  resolveLearnerRoute,
-  routeForBoneSelection,
-  routeForMuscleSelection,
-} from '../domain/regionNavigation';
-import rawNavigation from '../../../atlas-data/navigation/atlas-navigation.json';
+import { validateDataset, type Dataset } from '../viewer/datasets/schema';
+import { validateIntegration, searchStructures, readDatasetRoute, datasetRouteQuery, type Integration, type DatasetRoute, type StructureRecord } from '../viewer/datasets/integration';
+import { structureTextForLearner, motionActionOptionsForLearner } from '../data/learning';
+import navigation from '../../../atlas-data/navigation/atlas-navigation.json';
+import { AtlasLoading } from './AtlasLoading';
 import './styles.css';
 import './atlasShell.css';
-import { AtlasLoading } from './AtlasLoading';
-
-type TabName = '구조' | '기능';
-type LearnerConcept = ReturnType<typeof learningConcepts>[number];
-type UnmappedMeshNotice = { meshAssetId: string; sourceName: string };
-type LearnerName = { label: string; koTraditional: string | null; koModern: string | null; en: string };
-type SearchListItem =
-  | { id: string; label: string; approximate: boolean; kind: 'muscle' }
-  | { id: string; label: string; approximate: boolean; kind: 'bone'; selection: Extract<Selection, { kind: 'bone' }> };
-const navigation = rawNavigation as NavigationContract;
-
-function LearnerNameRows({ name }: { name: LearnerName }) {
-  return <div className="names-card" aria-label="이름">
-    <div><span>우리말명</span><strong>{name.koModern || '설명 정리 중'}</strong></div>
-    <div><span>한자어명 (한글 표기)</span><strong>{name.koTraditional || '설명 정리 중'}</strong></div>
-    <div><span>영어명</span><strong>{name.en || '설명 정리 중'}</strong></div>
-  </div>;
+const regionIds = navigation.categories.map(c => c.id);
+function NameRows({ row }: {
+    row: StructureRecord;
+}) {
+    return <div className="names-card" aria-label="이름">{[['우리말명', row.names.koModern], ['한자어명 (한글 표기)', row.names.koTraditional], ['영어명', row.names.en]].map(([label, value]) => <div key={label}><span>{label}</span><strong>{value || '이름 정리 중'}</strong></div>)}</div>;
 }
-
-function routeUrl(route: AtlasRouteState, whole: boolean, selectedRegionIds: readonly string[]) {
-  const params = new URLSearchParams(serializeAtlasRoute(location.search, route, selectedRegionIds));
-  if (whole && (selectedRegionIds.length > 0 || route.selection)) params.set('view', 'whole'); else params.delete('view');
-  const query = params.toString();
-  return `${location.pathname}${query ? `?${query}` : ''}${location.hash}`;
-}
-
-function orderedRegionIds(ids: readonly string[]) {
-  const selected = new Set(ids);
-  return navigation.categories.filter((category) => selected.has(category.id)).map((category) => category.id);
-}
-
-function routeEntityId(selection: Selection | null): string | null {
-  if (!selection) return null;
-  return selection.kind === 'muscle' ? selection.partId ?? selection.conceptId : selection.conceptId;
-}
-
-function muscleConceptId(concept: LearnerConcept | undefined, fallbackId: string): string {
-  return concept?.entityType === 'muscle_part' && typeof concept.parentId === 'string'
-    ? concept.parentId
-    : fallbackId;
-}
-
+/** One data-driven atlas: source observation remains usable independently of optional content bindings. */
 export default function App() {
-  const [catalog, setCatalog] = useState<PilotCatalog | null>(null);
-  const [error, setError] = useState('');
-  const [route, setRoute] = useState<AtlasRouteState>(() => defaultLearnerRoute(navigation));
-  const [selectedRegionIds, setSelectedRegionIds] = useState<string[]>([]);
-  const [routeReady, setRouteReady] = useState(false);
-  const [sceneEntered, setSceneEntered] = useState(false);
-  const [wholeView, setWholeView] = useState(true);
-  const [exploreOpen, setExploreOpen] = useState(false);
-  const [routeNotice, setRouteNotice] = useState<string | null>(null);
-  const [query, setQuery] = useState('');
-  const [tab, setTab] = useState<TabName>('구조');
-  const [selectedActionId, setSelectedActionId] = useState<string | null>(null);
-  const [unmappedMeshNotice, setUnmappedMeshNotice] = useState<UnmappedMeshNotice | null>(null);
-  const appInfoDialog = useRef<HTMLDialogElement>(null);
-  const [detailsOpen, setDetailsOpen] = useState(() => typeof window === 'undefined' || window.matchMedia('(min-width: 761px)').matches);
-
-  useEffect(() => {
-    let active = true;
-    loadPilotCatalog().then((loaded) => { if (active) setCatalog(loaded); })
-      .catch((loadError: unknown) => { if (active) setError(String(loadError)); });
-    return () => { active = false; };
-  }, []);
-
-  useEffect(() => {
-    const media = window.matchMedia('(min-width: 761px)');
-    const sync = () => setDetailsOpen(media.matches);
-    media.addEventListener('change', sync);
-    return () => media.removeEventListener('change', sync);
-  }, []);
-
-  const concepts = useMemo(() => catalog ? learningConcepts(catalog) : [], [catalog]);
-  const routeRefs = useMemo<SelectionReferences>(() => {
-    const muscles = new Map<string, { entityType: string }>();
-    const muscleParts = new Map<string, { parentId: string }>();
-    const structures = new Map<string, { kind: string; parentId?: string }>();
-    for (const concept of concepts) {
-      if (concept.entityType === 'individual_muscle' || concept.entityType === 'muscle_group') {
-        muscles.set(concept.id, { entityType: String(concept.entityType) });
-      }
-      if (concept.entityType === 'muscle_part' && typeof concept.parentId === 'string') {
-        muscleParts.set(concept.id, { parentId: concept.parentId });
-      }
+    const [data, setData] = useState<{
+        dataset: Dataset;
+        integration: Integration;
+    } | null>(null);
+    const [homeRevision, setHomeRevision] = useState(0);
+    const [error, setError] = useState(false);
+    const [entered, setEntered] = useState(false);
+    const [route, setRoute] = useState<DatasetRoute>({ regions: [], selected: null });
+    const [query, setQuery] = useState('');
+    const [exploreOpen, setExploreOpen] = useState(false);
+    const [detailsOpen, setDetailsOpen] = useState(true);
+    const [tab, setTab] = useState<'구조' | '기능'>('구조');
+    const [actionId, setActionId] = useState<string | null>(null);
+    const info = useRef<HTMLDialogElement>(null);
+    useEffect(() => {
+        const abort = new AbortController();
+        const timer = setTimeout(() => { abort.abort(); setError(true); }, 20000);
+        void Promise.all(['/__atlas/datasets/za-c7010a9/manifest.json', '/__atlas/integration.json'].map(async (url) => { const response = await fetch(url, { signal: abort.signal }); if (!response.ok)
+            throw Error('자료 연결 실패'); return response.json(); }))
+            .then(([raw, overlay]) => { if (abort.signal.aborted)
+            return; const dataset = validateDataset(raw); const integration = validateIntegration(overlay, dataset); setData({ dataset, integration }); setRoute(readDatasetRoute(location.search, integration.objects, regionIds)); })
+            .catch(() => { if (!abort.signal.aborted)
+            setError(true); }).finally(() => clearTimeout(timer));
+        return () => { clearTimeout(timer); abort.abort(); };
+    }, []);
+    useEffect(() => { if (!data)
+        return; const pop = () => { setRoute(readDatasetRoute(location.search, data.integration.objects, regionIds)); setDetailsOpen(true); }; window.addEventListener('popstate', pop); return () => window.removeEventListener('popstate', pop); }, [data]);
+    const rows = useMemo(() => data ? searchStructures(data.integration.objects, query, route.regions) : [], [data, query, route.regions]);
+    const selected = data?.integration.objects.find(r => r.sourceKey === route.selected);
+    const actions = useMemo(() => selected?.haConceptId ? motionActionOptionsForLearner(selected.haConceptId).filter(a => !a.candidate || !selected.side || a.candidate.definition.side === selected.side) : [], [selected?.haConceptId, selected?.side]);
+    const action = actions.find(a => a.id === actionId) ?? actions[0];
+    const title = route.regions.length ? navigation.categories.filter(c => route.regions.includes(c.id)).map(c => c.labelKo).join(' · ') : '전신 살펴보기';
+    function navigate(next: DatasetRoute, keepExplore = false) {
+        const query = datasetRouteQuery(next);
+        const url = location.pathname + (query ? '?' + query : '');
+        if (url !== location.pathname + location.search)
+            history.pushState(null, '', url);
+        setRoute(next);
+        setDetailsOpen(true);
+        setTab('구조');
+        setActionId(null);
+        if (!keepExplore)
+            setExploreOpen(false);
     }
-    for (const structure of catalog?.structures ?? []) {
-      if (typeof structure.kind !== 'string') continue;
-      structures.set(structure.id, { kind: structure.kind, ...(typeof structure.parentId === 'string' ? { parentId: structure.parentId } : {}) });
+    function toggleRegion(id: string) {
+        const regions = route.regions.includes(id) ? route.regions.filter(r => r !== id) : [...route.regions, id];
+        setQuery('');
+        navigate({ regions, selected: selected && (!regions.length || selected.regionIds.some(r => regions.includes(r))) ? selected.sourceKey : null }, true);
     }
-    const structureInstances = new Map(navigation.structureInstances.map((row) => [row.id, { structureId: row.structureId, side: row.side }]));
-    const structureMeshMappings = new Map(navigation.structureMeshMappings.map((row) => [row.id, { structureInstanceId: row.structureInstanceId, meshIds: row.meshIds }]));
-    const meshAssets = new Map<string, { laterality?: string }>();
-    for (const mapping of navigation.structureMeshMappings) {
-      const instance = structureInstances.get(mapping.structureInstanceId);
-      for (const meshId of mapping.meshIds) meshAssets.set(meshId, { laterality: instance?.side });
+    function select(id: string) {
+        const row = data?.integration.objects.find(r => r.sourceKey === id && r.inspectionEligible && r.localDisplayEligible);
+        if (!row)
+            return;
+        // Search can reach outside a regional filter; whole-body selection never narrows the user's scene.
+        const regions = route.regions.length && !row.regionIds.some(r => route.regions.includes(r)) ? [] : route.regions;
+        navigate({ regions, selected: id });
     }
-    return {
-      muscles,
-      muscleInstances: new Map(),
-      muscleParts,
-      structures,
-      structureInstances,
-      meshAssets,
-      muscleMeshMappings: new Map(),
-      structureMeshMappings,
-    };
-  }, [catalog, concepts]);
-
-  useEffect(() => {
-    if (!catalog) return;
-    const sync = () => {
-      const resolved = resolveLearnerRoute(location.search, navigation, routeRefs);
-      setRoute(resolved.route);
-      setSelectedRegionIds(resolved.selectedRegionIds);
-      const whole = resolved.selectedRegionIds.length === 0 || new URLSearchParams(location.search).get("view") === "whole";
-      setWholeView(whole);
-      setDetailsOpen(Boolean(resolved.route.selection));
-      setQuery('');
-      setRouteReady(true);
-      setRouteNotice(resolved.notice);
-      setUnmappedMeshNotice(null);
-      setTab('구조');
-      setSelectedActionId(null);
-      if (resolved.canonicalize) {
-        const nextUrl = routeUrl(resolved.route, whole, resolved.selectedRegionIds);
-        if (nextUrl !== `${location.pathname}${location.search}${location.hash}`) {
-          history.replaceState(null, '', nextUrl);
-        }
-      }
-    };
-    sync();
-    window.addEventListener('popstate', sync);
-    return () => window.removeEventListener('popstate', sync);
-  }, [catalog, routeRefs]);
-
-  const selectedRegions = selectedRegionIds.map((id) => navigation.categories.find((candidate) => candidate.id === id)).filter((value): value is NonNullable<typeof value> => Boolean(value));
-  const regionLabel = selectedRegions.map((row) => row.labelKo).join(' · ');
-  const selectedId = routeEntityId(route.selection);
-  const selected = selectedId ? concepts.find((concept) => concept.id === selectedId) : undefined;
-  useEffect(() => {
-    if (selectedId && window.matchMedia('(max-width: 760px)').matches) document.querySelector<HTMLElement>('.mobile-detail-summary')?.focus();
-  }, [selectedId]);
-  const name = catalog && selectedId ? nameFor(catalog, selectedId) : null;
-  const selectedBoneCard = catalog && route.selection?.kind === 'bone'
-    ? buildBoneCardData(catalog, navigation, route.selection)
-    : null;
-  const selectedBoneName = selectedBoneCard ? boneNameForLearner(selectedBoneCard.conceptId) : null;
-  const parentId = selected?.entityType === 'muscle_part' && typeof selected.parentId === 'string' ? selected.parentId : selectedId;
-  const actionOptions = useMemo(() => selectedId && parentId ? motionActionOptionsForLearner(parentId) : [], [selectedId, parentId]);
-  const activeAction = actionOptions.find((action) => action.id === selectedActionId) ?? actionOptions[0] ?? null;
-  const actionCard = activeAction?.text ?? null;
-  const parts = concepts.filter((concept) => concept.entityType === 'muscle_part' && concept.parentId === parentId);
-  const regionRows = selectedRegionIds.flatMap((regionId) => categoryMemberships(navigation, regionId));
-  const regionMuscles = [...new Map(regionRows.flatMap((row) => {
-    const concept = concepts.find((candidate) => candidate.id === row.entityId);
-    return concept ? [[concept.id, concept] as const] : [];
-  })).values()];
-  const searchResults = catalog && query.trim()
-    ? [
-      ...findMuscles(catalog, query).map((row) => ({ ...row, kind: 'muscle' as const })),
-      ...searchSelectableBones(catalog, navigation, query).map((row) => ({ ...row, kind: 'bone' as const })),
-    ].sort((a, b) => a.score - b.score || a.entry.label.localeCompare(b.entry.label, 'ko'))
-    : [];
-  const listItems: SearchListItem[] = query.trim()
-    ? searchResults.reduce<SearchListItem[]>((items, result) => {
-      if (result.kind === 'bone') items.push({ id: result.entry.id, label: result.entry.label, approximate: result.approximate, kind: 'bone', selection: result.selection });
-      else items.push({ id: result.entry.id, label: result.entry.label, approximate: result.approximate, kind: 'muscle' });
-      return items;
-    }, [])
-    : regionMuscles.map((concept) => ({ id: concept.id, label: nameFor(catalog!, concept.id).label, approximate: false, kind: 'muscle' as const }));
-  function commitRoute(nextRoute: AtlasRouteState, whole = wholeView, nextRegionIds = selectedRegionIds, keepExploreOpen = false) {
-    const canonicalRegions = orderedRegionIds(nextRegionIds);
-    const normalizedRoute = { ...nextRoute, regionId: canonicalRegions[0] ?? nextRoute.regionId };
-    const nextUrl = routeUrl(normalizedRoute, whole, canonicalRegions);
-    const currentUrl = `${location.pathname}${location.search}${location.hash}`;
-    if (nextUrl !== currentUrl) {
-      history.pushState(null, '', nextUrl);
-    }
-    setRoute(normalizedRoute);
-    setSelectedRegionIds(canonicalRegions);
-    setWholeView(whole);
-    if (!keepExploreOpen) setExploreOpen(false);
-    setRouteNotice(null);
-    setUnmappedMeshNotice(null);
-    setTab('구조');
-    setSelectedActionId(null);
-    setDetailsOpen(true);
-  }
-
-  function chooseRegion(categoryId: string) {
-    setQuery('');
-    const nextRegionIds = orderedRegionIds(selectedRegionIds.includes(categoryId)
-      ? selectedRegionIds.filter((id) => id !== categoryId)
-      : [...selectedRegionIds, categoryId]);
-    let selection = route.selection;
-    let side = route.side;
-    if (nextRegionIds.length > 0 && route.selection?.kind === 'muscle'
-        && !nextRegionIds.some((id) => categoriesForMuscleConcept(navigation, route.selection!.conceptId).includes(id))) {
-      selection = null; side = null;
-    } else if (nextRegionIds.length > 0 && selection?.kind === 'bone' && !nextRegionIds.includes('leg')) {
-      selection = null; side = null;
-    }
-    commitRoute({ regionId: nextRegionIds[0] ?? null, side, selection, legacyRoute: false }, nextRegionIds.length === 0, nextRegionIds, true);
-  }
-
-  function chooseEntity(entityId: string) {
-    const concept = concepts.find((candidate) => candidate.id === entityId);
-    if (!concept) return;
-    const conceptId = muscleConceptId(concept, entityId);
-    const partId = concept.entityType === 'muscle_part' ? entityId : undefined;
-    const memberships = categoriesForMuscleConcept(navigation, conceptId);
-    let nextRegionIds = selectedRegionIds;
-    const alreadyCovered = nextRegionIds.some((id) => memberships.includes(id));
-    if (memberships.length > 0 && (nextRegionIds.length === 0 || !alreadyCovered)) {
-      nextRegionIds = orderedRegionIds([...nextRegionIds, memberships[0]]);
-    }
-    const matchedRegion = nextRegionIds.find((id) => memberships.includes(id)) ?? route.regionId;
-    const nextRoute = routeForMuscleSelection(navigation, conceptId, partId, matchedRegion);
-    nextRoute.regionId = nextRegionIds[0] ?? nextRoute.regionId;
-    const whole = nextRegionIds.length === 0 ? true
-      : nextRegionIds.length === selectedRegionIds.length ? wholeView : false;
-    commitRoute(nextRoute, whole, nextRegionIds);
-  }
-
-  function chooseBone(selection: Extract<Selection, { kind: 'bone' }>) {
-    let nextRegionIds = selectedRegionIds;
-    if (!nextRegionIds.includes('leg')) nextRegionIds = orderedRegionIds([...nextRegionIds, 'leg']);
-    const nextRoute = routeForBoneSelection(navigation, selection);
-    nextRoute.regionId = nextRegionIds[0] ?? nextRoute.regionId;
-    const whole = nextRegionIds.length === selectedRegionIds.length ? wholeView : false;
-    commitRoute(nextRoute, whole, nextRegionIds);
-  }
-
-  function chooseSearchItem(item: SearchListItem) {
-    if (item.kind === 'bone') chooseBone(item.selection);
-    else chooseEntity(item.id);
-  }
-
-
-  function clearSelection() {
-    commitRoute({ regionId: selectedRegionIds[0] ?? route.regionId, side: route.side, selection: null, legacyRoute: false });
-  }
-
-  function clearRegionFilter() {
-    setQuery('');
-    commitRoute({ ...route, regionId: null, legacyRoute: false }, true, []);
-  }
-
-  if (error) return <AtlasLoading failed onRetry={() => location.reload()}/>;
-  if (!catalog || !routeReady) return <AtlasLoading/>;
-
-  const stageTitle = selectedRegions.length === 0 ? '전신 살펴보기' : selectedRegions.map((row) => row.labelKo).join(' · ');
-  const stageDescription = '회전하고 확대하며 구조를 살펴보세요.';
-
-  return <div className="study-shell atlas-shell">
-    <a className="skip-link" inert={!sceneEntered} href={route.selection ? "#study-details" : "#atlas-stage"}>{route.selection ? "선택한 구조 설명으로 이동" : "모형으로 이동"}</a>
-    <header className="study-header" inert={!sceneEntered}>
-      <div className="header-brand-group">
-        <button className="brand" aria-label="Human Atlas 전신 홈" onClick={() => { setQuery(''); commitRoute(defaultLearnerRoute(navigation), true, []); }}><span className="brand-dot"/> HUMAN ATLAS</button>
-        <button type="button" className="app-info-trigger" onClick={() => appInfoDialog.current?.showModal()}>앱 정보</button>
-      </div>
-      <button className="explore-trigger" aria-expanded={exploreOpen} aria-controls="atlas-explorer" onClick={() => setExploreOpen(!exploreOpen)}>부위 탐색</button>
-      <label className="global-search"><span aria-hidden="true">⌕</span><input type="search" aria-label="구조 검색" placeholder="근육·뼈 이름 검색" value={query} onChange={(event) => { setQuery(event.target.value); setExploreOpen(true); }} autoComplete="off"/>{query && <button aria-label="검색 지우기" onClick={() => setQuery('')}>×</button>}</label>
-    </header>
-    <dialog className="app-info-dialog" ref={appInfoDialog} aria-labelledby="app-info-title">
-      <div className="app-info-content">
-        <button type="button" className="app-info-close" aria-label="앱 정보 닫기" onClick={() => appInfoDialog.current?.close()}>닫기</button>
-        <h2 id="app-info-title">모형·자료 정보</h2>
-        <p>3D 모형 자료: BodyParts3D Release 4.0.</p>
-        <p className="model-attribution">BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International</p>
-        <p>현재 확보된 모형과 설명을 표시합니다. 일부 구조의 연결과 검토는 진행 중이며, 전체 인체 구조의 완성을 뜻하지 않습니다. 원본 파일별 이용 조건 확인 전까지 공개 재배포는 보류합니다.</p>
-        <a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html" target="_blank" rel="noreferrer">이용 조건 보기 ↗</a>
-      </div>
-    </dialog>
-    <div className="study-layout">
-      <aside inert={!sceneEntered} id="atlas-explorer" data-searching={Boolean(query.trim())} onKeyDown={event => { if (event.key === 'Escape') { setExploreOpen(false); document.querySelector<HTMLElement>('.explore-trigger')?.focus(); } }} className={`study-sidebar ${exploreOpen ? "is-open" : ""}`} aria-label="부위 탐색">
-        <button className="explore-close" onClick={() => setExploreOpen(false)}>탐색 닫기</button>
-        <div className="sidebar-heading"><span className="eyebrow">EXPLORE ANATOMY</span><h1>부위 탐색</h1><p>어디부터 살펴볼까요?</p></div>
-        <button type="button" className="region-all-toggle" aria-pressed={selectedRegionIds.length === 0} onClick={clearRegionFilter}>전신</button>
-        <nav className="region-grid" aria-label="12개 해부학 부위">
-          {navigation.categories.map((category) => <button key={category.id} type="button" className={selectedRegionIds.includes(category.id) ? 'is-current' : ''} aria-pressed={selectedRegionIds.includes(category.id)} onClick={() => chooseRegion(category.id)}>{category.labelKo}</button>)}
-        </nav>
-        <div className="region-list-heading">
-          <span className="eyebrow">{query.trim() ? 'SEARCH RESULTS' : 'STRUCTURES'}</span>
-          <h2>{query.trim() ? '검색 결과' : regionLabel || '전신 구조 목록'}</h2>
-          <p className="result-count" role="status">{query.trim() ? `검색 결과 ${listItems.length}` : selectedRegions.length ? `${listItems.length}개 연결된 근육` : '부위 제한 없음'}</p>
-        </div>
-        <nav className="study-list region-structure-list" aria-label={query.trim() ? '검색 구조 목록' : `${regionLabel || '전신'} 구조 목록`}>
-          {listItems.map((item) => {
-            const itemConcept = concepts.find((concept) => concept.id === item.id);
-            const baseId = muscleConceptId(itemConcept, item.id);
-            const itemRegions = item.kind === 'muscle' ? categoriesForMuscleConcept(navigation, baseId)
-              .map((id) => navigation.categories.find((category) => category.id === id)?.labelKo)
-              .filter((value): value is string => Boolean(value)) : [];
-            const itemSelected = item.kind === 'bone'
-              ? route.selection?.kind === 'bone' && route.selection.conceptId === item.id
-              : item.id === selectedId;
-            const itemName = item.kind === 'bone' ? boneNameForLearner(item.id) : catalog && nameFor(catalog, item.id);
-            return <button key={item.id} type="button" className={itemSelected ? 'selected' : ''} aria-pressed={itemSelected} onClick={() => chooseSearchItem(item)}>
-              <span>{item.label}</span>
-              <small>{itemName?.en || '영어 이름 확인 중'}</small>
-              {query.trim() && <em>{item.kind === 'bone' ? '뼈 정보' : itemRegions.length ? itemRegions.join(' · ') : '부위 연결 준비 중'}</em>}
-              {item.approximate && <em>비슷한 이름</em>}
-            </button>;
-          })}
-          {listItems.length === 0 && <p className="quiet-note">{query.trim() ? '찾는 이름이 아직 등록되지 않았습니다. 다른 언어 이름으로도 검색해 보세요.' : selectedRegions.length ? '이 부위의 설명 연결은 준비 중입니다. 모형은 자유롭게 둘러볼 수 있습니다.' : '이름을 검색하거나 부위를 선택해 구조 목록을 좁혀 보세요.'}</p>}
-        </nav>
-      </aside>
-      <section id="atlas-stage" tabIndex={-1} className="study-stage" aria-label={`${stageTitle} 학습 장면`}>
-        <div className="stage-caption" aria-hidden={!sceneEntered}><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{stageTitle}</h2><p>{stageDescription}</p></div>
-        <WholeBodyViewer onEntered={setSceneEntered} whole={selectedRegionIds.length === 0} onWholeChange={clearRegionFilter} regionIds={selectedRegionIds} selectedId={selectedId} selectedIds={route.side === 'left' ? [] : [...(selectedId ? [selectedId] : []), ...(!route.selection || route.selection.kind !== 'muscle' || route.selection.partId ? [] : parts.map(part => part.id))]} onSelect={(id, side) => {
-          if (id.startsWith('HA-S-')) {
-            const instance = navigation.structureInstances.find(row => row.structureId === id && row.side === side);
-            if (instance) chooseBone({ kind: 'bone', conceptId: id, instanceId: instance.id });
-          } else chooseEntity(id);
-        }}/>
-
-      </section>
-      {(route.selection || routeNotice) && <details inert={!sceneEntered} className="study-details" id="study-details" open={detailsOpen} onToggle={(event) => setDetailsOpen(event.currentTarget.open)}>
-        <summary className="mobile-detail-summary">{selectedBoneName?.label ?? (selected && name ? name.label : '선택한 구조 설명')}</summary>
-        <div className="study-detail-content">
-          {route.selection && <button type="button" className="bone-related-muscle" onClick={clearSelection}>선택 해제</button>}
-          {selectedBoneCard && selectedBoneName ? <>
-            <h2>{selectedBoneName.label || '설명 정리 중'}</h2>
-            <LearnerNameRows name={selectedBoneName}/>
-            <div className="names-card bone-side-card"><div><span>좌우</span><strong>{selectedBoneCard.side === 'right' ? '오른쪽' : selectedBoneCard.side === 'left' ? '왼쪽' : selectedBoneCard.side === 'midline' ? '정중' : '좌우 구분 없음'}</strong></div></div>
-            <section className="attachment-section bone-card-section"><h3>주요 표지</h3>
-              <p className="quiet-note">표지 정보는 준비하고 있습니다.</p>
-            </section>
-            <section className="attachment-section bone-card-section"><h3>관련 근육</h3>
-              {selectedBoneCard.relations.length > 0 ? <ul>{selectedBoneCard.relations.map((relation) => <li key={relation.muscleOrPartId}>
-                <button type="button" className="bone-related-muscle" onClick={() => chooseEntity(relation.muscleOrPartId)}>{nameFor(catalog, relation.muscleOrPartId).label}</button>
-                <span>{relation.roles.map((role) => role === 'origin' ? '기시' : role === 'insertion' ? '정지' : '그 외 부착').join(' · ')}</span>
-              </li>)}</ul> : <p className="quiet-note">연결된 근육 정보는 준비하고 있습니다.</p>}
-            </section>
-          </> : unmappedMeshNotice ? <>
-            <h2>이 구조 정보는 준비하고 있습니다</h2>
-            <p>선택한 구조에 연결된 설명을 준비하고 있습니다.</p>
-          </> : route.selection?.kind === 'bone' ? <>
-            <h2>뼈 정보 준비 중</h2><p>선택한 뼈의 이름과 설명을 준비하고 있습니다.</p>
-          </> : selected && name ? <>
-            <h2>{name.label}</h2>
-            <LearnerNameRows name={name}/>
-            <div className="movement-cta-block">
-              <button type="button" className="movement-cta" disabled aria-describedby="movement-unavailable-note">움직임으로 이해하기</button>
-              <p id="movement-unavailable-note" className="quiet-note">움직임 시범 자료는 준비 중입니다.</p>
-            </div>
-            <div className="study-tabs" role="tablist" aria-label="학습 내용">{(['구조','기능'] as TabName[]).map((entry) => <button key={entry} role="tab" id={`tab-${entry}`} aria-controls="study-tab-panel" aria-selected={tab === entry} tabIndex={tab === entry ? 0 : -1} onKeyDown={event => {
-              if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-              event.preventDefault();
-              const next = event.key === 'Home' ? '구조' : event.key === 'End' ? '기능' : tab === '구조' ? '기능' : '구조';
-              setTab(next); document.getElementById(`tab-${next}`)?.focus();
-            }} onClick={() => setTab(entry)}>{entry}</button>)}</div>
-            <section id="study-tab-panel" key={selectedId} role="tabpanel" aria-labelledby={`tab-${tab}`}>
-              {tab === '구조' ? <>
-                {parts.length > 0 && <div className="part-pills" aria-label="근육 부분"><button aria-pressed={selectedId === parentId} onClick={() => chooseEntity(parentId!)}>전체</button>{parts.map((part) => <button key={part.id} aria-pressed={part.id === selectedId} onClick={() => chooseEntity(part.id)}>{nameFor(catalog, part.id).label.split(' · ').at(-1)}</button>)}</div>}
-                {(['origin','insertion'] as const).map((role) => <section className="attachment-section attachment-summary-block" key={role}>
-                  <h3><i className={role}/>{role === 'origin' ? '기시' : '정지'}<span>{role === 'origin' ? 'ORIGIN' : 'INSERTION'}</span></h3>
-                  {structureTextForLearner(selectedId!, role)
-                    ? <p>{structureTextForLearner(selectedId!, role)}</p>
-                    : <p className="quiet-note">설명 자료는 준비하고 있습니다.</p>}
-                </section>)}
-              </> : actionCard ? <div className="muscle-action-learning">
-                <section className="muscle-action-summary" aria-labelledby="action-summary-title">
-                  <h3 id="action-summary-title">이 근육이 하는 일</h3>
-                  <p className="action-label">{actionCard.label}</p>
-                  <p>{actionCard.explanation}</p>
-                </section>
-                <fieldset className="learner-action-picker" aria-label="작용 선택">
-                  <legend>작용 선택</legend>
-                  {actionOptions.length ? actionOptions.map((action) => <button key={action.id} type="button" aria-pressed={action.id === activeAction?.id} onClick={() => setSelectedActionId(action.id)}>{action.label}</button>)
-                    : <p className="quiet-note">작용 정보를 준비하고 있습니다.</p>}
-                </fieldset>
-              </div> : <div className="upcoming"><h3>작용 정보를 준비하고 있습니다</h3></div>}
-            </section>
-          </> : <div className="upcoming"><h2>{routeNotice ? '주소의 구조 연결을 확인해 주세요' : '구조를 선택해 주세요'}</h2><p>{routeNotice ?? (regionLabel ? `${regionLabel} 목록 또는 설명이 연결된 모형을 선택해 주세요.` : '검색하거나 부위를 선택해 학습할 구조를 찾을 수 있습니다.')}</p></div>}
-        </div>
-      </details>}
-    </div>
-  </div>;
+    if (error)
+        return <AtlasLoading failed onRetry={() => location.reload()}/>;
+    if (!data)
+        return <AtlasLoading />;
+    return <div className="study-shell atlas-shell">
+  <a className="skip-link" inert={!entered} href={selected ? '#study-details' : '#atlas-stage'}>{selected ? '선택한 구조 설명으로 이동' : '모형으로 이동'}</a>
+  <header className="study-header" inert={!entered}>
+   <div className="header-brand-group"><button className="brand" aria-label="Human Atlas 전신 홈" onClick={() => { setQuery(''); navigate({ regions: [], selected: null }); setHomeRevision(v => v + 1); }}><span className="brand-dot"/> HUMAN ATLAS</button><button className="app-info-trigger" onClick={() => info.current?.showModal()}>앱 정보</button></div>
+   <button className="explore-trigger" aria-expanded={exploreOpen} aria-controls="atlas-explorer" onClick={() => setExploreOpen(!exploreOpen)}>부위 탐색</button>
+   <label className="global-search"><span aria-hidden="true">⌕</span><input type="search" aria-label="구조 검색" placeholder="근육·뼈 이름 검색" autoComplete="off" value={query} onChange={e => { setQuery(e.target.value); setExploreOpen(true); }}/>{query && <button aria-label="검색 지우기" onClick={() => setQuery('')}>×</button>}</label>
+  </header>
+  <dialog className="app-info-dialog" ref={info} aria-labelledby="app-info-title"><div className="app-info-content"><button className="app-info-close" aria-label="앱 정보 닫기" onClick={() => info.current?.close()}>닫기</button><h2 id="app-info-title">모형·자료 정보</h2>
+   <p>Z-Anatomy — The libre 3D atlas of anatomy — CC BY-SA 4.0</p><p>BodyParts3D — The Database Center for Life Science — CC BY-SA 2.1 Japan</p><p>고정한 Z-Anatomy 모형을 웹용으로 변환하고 상세 단계를 조정했습니다. 로컬 학습용 시제품이며 일부 구조와 이름·설명은 준비 중입니다. 원본의 별도 출처와 이용 조건을 보존하며 공개 재배포는 보류합니다.</p>
+   <a href="https://github.com/Z-Anatomy/Models-of-human-anatomy/blob/c7010a903b75a2fd24a13b1c2c4c3546a9223780/Readme.md" target="_blank" rel="noreferrer">원본·제작자·이용 조건 ↗</a>
+  </div></dialog>
+  <div className="study-layout">
+   <aside id="atlas-explorer" inert={!entered} data-searching={Boolean(query.trim())} className={`study-sidebar ${exploreOpen ? 'is-open' : ''}`} aria-label="부위 탐색" onKeyDown={e => { if (e.key === 'Escape') {
+        setExploreOpen(false);
+        document.querySelector<HTMLElement>('.explore-trigger')?.focus();
+    } }}>
+    <button className="explore-close" onClick={() => setExploreOpen(false)}>탐색 닫기</button><div className="sidebar-heading"><span className="eyebrow">EXPLORE ANATOMY</span><h1>부위 탐색</h1><p>어디부터 살펴볼까요?</p></div>
+    <button className="region-all-toggle" aria-pressed={!route.regions.length} onClick={() => { setQuery(''); navigate({ regions: [], selected: route.selected }, true); }}>전신</button>
+    <nav className="region-grid" aria-label="12개 해부학 부위">{navigation.categories.map(c => <button key={c.id} aria-pressed={route.regions.includes(c.id)} className={route.regions.includes(c.id) ? 'is-current' : ''} onClick={() => toggleRegion(c.id)}>{c.labelKo}</button>)}</nav>
+    <div className="region-list-heading"><span className="eyebrow">{query.trim() ? 'SEARCH RESULTS' : 'STRUCTURES'}</span><h2>{query.trim() ? '검색 결과' : title}</h2><p className="result-count" role="status">{rows.length}개 이름 · 좌우 모형 함께 보기</p></div>
+    <nav className="study-list region-structure-list" aria-label="구조 목록">{rows.map(r => <button key={r.sourceKey} className={selected?.names.en === r.names.en ? 'selected' : ''} aria-pressed={selected?.names.en === r.names.en} onClick={() => select(r.sourceKey)}><span>{r.label}</span>{r.label !== r.names.en && <small>{r.names.en}</small>}{r.searchApproximate && <em>비슷한 이름</em>}</button>)}{!rows.length && <p className="quiet-note">등록된 이름을 찾지 못했습니다. 다른 이름으로 검색해 보세요.</p>}</nav>
+   </aside>
+   <section id="atlas-stage" tabIndex={-1} className="study-stage" aria-label={`${title} 학습 장면`}><div className="stage-caption" aria-hidden={!entered}><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{title}</h2><p>회전하고 확대하며 구조를 살펴보세요.</p></div>
+    <WholeBodyViewer homeRevision={homeRevision} datasetSource={data} onEntered={setEntered} regionIds={route.regions} selectedId={route.selected} selectedIds={route.selected ? [route.selected] : []} whole={!route.regions.length} onWholeChange={() => navigate({ regions: [], selected: route.selected })} onSelect={select}/>
+   </section>
+   {selected && <details inert={!entered} className="study-details" id="study-details" open={detailsOpen} onToggle={e => setDetailsOpen(e.currentTarget.open)}><summary className="mobile-detail-summary">{selected.label}</summary><div className="study-detail-content">
+    <button className="bone-related-muscle" onClick={() => navigate({ ...route, selected: null })}>선택 해제</button><h2>{selected.label}</h2><NameRows row={selected}/>
+    <div className="names-card"><div><span>{selected.kind === 'bone' ? '뼈' : '근육'}</span><strong>{selected.side === 'left' ? '왼쪽' : selected.side === 'right' ? '오른쪽' : '좌우 구분 없음'}</strong></div></div>
+    <div className="part-pills" aria-label="좌우 모형">{data.integration.objects.filter(r => r.localDisplayEligible && r.names.en === selected.names.en && r.side).map(r => <button key={r.sourceKey} aria-pressed={r.sourceKey === selected.sourceKey} onClick={() => select(r.sourceKey)}>{r.side === 'left' ? '왼쪽' : '오른쪽'}</button>)}</div>
+    {selected.kind === 'muscle' ? <><div className="movement-cta-block"><button className="movement-cta" disabled aria-describedby="movement-unavailable-note">움직임으로 이해하기</button><p id="movement-unavailable-note" className="quiet-note">움직임 시범 자료는 준비 중입니다.</p></div>
+    <div className="study-tabs" role="tablist" aria-label="학습 내용">{(['구조', '기능'] as const).map(t => <button key={t} role="tab" id={`tab-${t}`} aria-controls="study-tab-panel" aria-selected={tab === t} tabIndex={tab === t ? 0 : -1} onClick={() => setTab(t)} onKeyDown={e => { if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) {
+                e.preventDefault();
+                const next = e.key === 'Home' ? '구조' : e.key === 'End' ? '기능' : tab === '구조' ? '기능' : '구조';
+                setTab(next);
+                document.getElementById(`tab-${next}`)?.focus();
+            } }}>{t}</button>)}</div>
+    <section id="study-tab-panel" role="tabpanel" aria-labelledby={`tab-${tab}`}>{tab === '구조' ? (['origin', 'insertion'] as const).map(role => <section className="attachment-section attachment-summary-block" key={role}><h3><i className={role}/>{role === 'origin' ? '기시' : '정지'}<span>{role === 'origin' ? 'ORIGIN' : 'INSERTION'}</span></h3><p>{selected.haConceptId && structureTextForLearner(selected.haConceptId, role) || '설명 자료는 준비하고 있습니다.'}</p></section>) : action ? <div className="muscle-action-learning"><h3>이 근육이 하는 일</h3><p>{action.text.label}</p><p>{action.text.explanation}</p><fieldset className="learner-action-picker"><legend>작용 선택</legend>{actions.map(a => <button key={a.id} aria-pressed={action.id === a.id} onClick={() => setActionId(a.id)}>{a.label}</button>)}</fieldset></div> : <p className="quiet-note">작용 정보를 준비하고 있습니다.</p>}</section>
+    </> : <section className="attachment-section"><h3>관련 근육</h3>{selected.relatedMuscles?.length ? <ul>{selected.relatedMuscles.map(r => <li key={r.sourceKey}><button className="bone-related-muscle" onClick={() => select(r.sourceKey)}>{r.label}</button><span>{r.roles.map(role => role === 'origin' ? '기시' : role === 'insertion' ? '정지' : '부착').join(' · ')}</span></li>)}</ul> : <p className="quiet-note">주요 표지와 관련 근육 설명을 준비하고 있습니다.</p>}</section>}
+   </div></details>}
+  </div>
+ </div>;
 }

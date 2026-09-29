@@ -32,3 +32,10 @@
 - Use distinct whole-number task IDs after T15; registry is work/task-registry-r13.json. Additional tasks receive unused IDs T41 onward with explicit queue links. A task number or design is never a completion claim.
 - Implement educational muscle/bone movements only in their assigned tasks. Keep action text, clip support and human review separate. Default selected muscle focus fades other muscles with a reversible toggle. Main action label: 움직임으로 이해하기.
 - Preserve stable IDs, frames and source assets. Future muscles need an animation-capable rig/adapter; do not fake contraction by scaling a static mesh. Acupoints, Pro mode, patient diagnosis and treatment remain deferred.
+
+## 2026-09-29 T100 — user-authorized approval-state correction
+
+- Read the T100 correction at the end of design/2026-09-25-muscle-atlas/25-WHOLE-BODY-BASE-RESET.md. Historical `held_not_approved_by_this_task` means that task did not decide; it does not prohibit a later evidence-backed local-use decision.
+- Keep source identity, local rendering/observation, semantic binding, optional human review and public redistribution independent. Public-release holds and `humanReview=not_performed` are not global local-development blockers.
+- The assigned AI must resolve source-family rights and exception evidence and exact term/system/region/side/part correspondence within its task. Upstream FJ/TA2 IDs are not mandatory when the source has none; never fabricate them. A documented AI project crosswalk is distinct from provider identity and human approval.
+- Preserve historical freezes. Apply current decisions through a versioned overlay, retain real per-object hard holds and user layer-off, and report genuine missing geometry/names honestly. Do not repeat approval-wait reports instead of performing the investigation.

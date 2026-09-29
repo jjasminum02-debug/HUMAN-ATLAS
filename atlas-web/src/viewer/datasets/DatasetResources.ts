@@ -8,16 +8,17 @@ export class DatasetResources {
   readonly dataset:Dataset;readonly root:THREE.Group;readonly queue:ResourceQueue<Resource>;
   readonly nodes=new Map<string,THREE.Mesh>(); readonly materials=new Map<string,THREE.MeshStandardMaterial>();
   readonly inspection:boolean;readonly invalidate:()=>void;private visible=new Set<string>();private detail=new Set<string>();
-  private disposed=false;
-  constructor(dataset:Dataset,root:THREE.Group,inspection=false,invalidate:()=>void=()=>{}) {
-    this.dataset=dataset;this.root=root;this.inspection=inspection;this.invalidate=invalidate;
+  private disposed=false;readonly localDisplayKeys:ReadonlySet<string>;
+  constructor(dataset:Dataset,root:THREE.Group,inspection=false,invalidate:()=>void=()=>{},localDisplayKeys:ReadonlySet<string>=new Set()) {
+    this.dataset=dataset;this.root=root;this.inspection=inspection;this.invalidate=invalidate;this.localDisplayKeys=localDisplayKeys;
     this.queue=new ResourceQueue((id,signal)=>this.load(id,signal),r=>{for(const g of new Set(r.meshes.values()))g.dispose();},()=>this.sync(),2,
       {maxBytes:DATASET_BUDGET.geometryBytes,measure:r=>r.bytes});
   }
   demand(sourceKeys:string[],details:string[]=[]) {
     if(this.disposed)return;
     // Local engineering inspection is explicit and never modifies catalog policy.
-    this.visible=new Set(this.dataset.instances.filter(i=>sourceKeys.includes(i.sourceKey)&&(this.inspection||i.defaultLearnerVisible&&i.appDisplayRights==='approved')).map(i=>i.sourceKey));
+    const requested=new Set(sourceKeys);
+    this.visible=new Set(this.dataset.instances.filter(i=>requested.has(i.sourceKey)&&(this.inspection||this.localDisplayKeys.has(i.sourceKey)||i.defaultLearnerVisible&&i.appDisplayRights==='approved')).map(i=>i.sourceKey));
     this.detail=new Set(details);
     this.sync(); // Remove obsolete meshes before queue eviction can dispose their geometries.
     const plan=planLods(this.dataset,this.visible,this.detail);
