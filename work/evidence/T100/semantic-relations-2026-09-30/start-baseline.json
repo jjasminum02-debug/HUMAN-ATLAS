@@ -1,0 +1,5586 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "workUnit": "semantic-relation repair continuation",
+  "capturedAtLocal": "2026-09-30",
+  "startHead": "63cee1868b62bcf3590339f9c2c2283500f4a8ae",
+  "projectStatusBefore": [
+    " M AGENTS.md",
+    " M design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    " M design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+    " M design/2026-09-25-muscle-atlas/07-AI-EVIDENCE-AND-MOTION-DESIGN.md",
+    " M design/2026-09-25-muscle-atlas/08-SERIAL-ROADMAP-AND-GIT.md",
+    " M work/STATUS.md",
+    " M work/task-registry-r13.json",
+    " M work/tasks/T24.md",
+    " M work/tasks/T25.md",
+    " M work/tasks/T26.md",
+    " M work/tasks/T27.md",
+    " M work/tasks/T28.md",
+    " M work/tasks/T29.md",
+    " M work/tasks/T30.md",
+    " M work/tasks/T31.md",
+    " M work/tasks/T32.md",
+    " M work/tasks/T33.md",
+    " M work/tasks/T34.md",
+    " M work/tasks/T35.md",
+    " M work/tasks/T36.md",
+    " M work/tasks/T37.md",
+    " M work/tasks/T38.md",
+    " M work/tasks/T39.md",
+    " M work/tasks/T40.md",
+    "?? design/2026-09-25-muscle-atlas/10-STRUCTURE-FUNCTION-DELIVERY-PLAN.md",
+    "?? design/2026-09-25-muscle-atlas/11-TASK-PROMPTS-R14.md",
+    "?? design/2026-09-25-muscle-atlas/12-ASSESSMENT-ANIMATION-FUTURE.md",
+    "?? design/2026-09-25-muscle-atlas/13-CONTINUOUS-WHOLE-BODY-EXPERIENCE-R15.md",
+    "?? design/2026-09-25-muscle-atlas/14-TASK-PROMPTS-R15.md",
+    "?? design/2026-09-25-muscle-atlas/15-NERVE-AND-ASSESSMENT-SCOPE-R15.md",
+    "?? design/2026-09-25-muscle-atlas/16-ASTRA-UI-HANDOFF.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/AGENTS.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/01-PRODUCT-AND-ARCHITECTURE.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/02-DATA-CONTRACT.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/04-SOURCES-AND-DECISIONS.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/06-REGION12-MUSCLE-BONE-REVISION.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/DECISIONS.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/STATUS.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14a.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14b.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15a.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15b.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15c.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15d.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15e.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15f.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15g.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T16.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T17.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T18.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T19.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T20.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T21.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T22.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T23.md",
+    "?? work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T24.md",
+    "?? work/evidence/2026-09-26-region12-design/before/AGENTS.md",
+    "?? work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    "?? work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/01-PRODUCT-AND-ARCHITECTURE.md",
+    "?? work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/02-DATA-CONTRACT.md",
+    "?? work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+    "?? work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/04-SOURCES-AND-DECISIONS.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/DECISIONS.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/STATUS.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T15.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T16.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T17.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T18.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T19.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T20.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T21.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T22.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T23.md",
+    "?? work/evidence/2026-09-26-region12-design/before/work/tasks/T24.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/AGENTS.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/design/2026-09-25-muscle-atlas/13-CONTINUOUS-WHOLE-BODY-EXPERIENCE-R15.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/design/2026-09-25-muscle-atlas/14-TASK-PROMPTS-R15.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/work/task-registry-r15.json",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T51.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T52.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T53.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T54.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T55.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T56.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T57.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T58.md",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/changed-paths.json",
+    "?? work/evidence/2026-09-27-astra-ui-handoff/validation.json",
+    "?? work/evidence/2026-09-27-r14-plan/before-plan-docs/AGENTS.md",
+    "?? work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    "?? work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+    "?? work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/07-AI-EVIDENCE-AND-MOTION-DESIGN.md",
+    "?? work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/08-SERIAL-ROADMAP-AND-GIT.md",
+    "?? work/evidence/2026-09-27-r14-plan/git-status-before.txt",
+    "?? work/evidence/2026-09-27-r14-plan/head.txt",
+    "?? work/evidence/2026-09-27-r14-plan/owned-files.json",
+    "?? work/evidence/2026-09-27-r14-plan/protected-before.json",
+    "?? work/evidence/2026-09-27-r14-plan/validation.json",
+    "?? work/evidence/2026-09-27-r15-plan/before/AGENTS.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/00-START-HERE.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/10-STRUCTURE-FUNCTION-DELIVERY-PLAN.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/11-TASK-PROMPTS-R14.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/12-ASSESSMENT-ANIMATION-FUTURE.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/STATUS.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T25.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T26.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T27.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T28.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T29.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T30.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T31.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T32.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T33.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T34.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T35.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T36.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T37.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T38.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T39.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T40.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T45.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T46.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T47.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T48.md",
+    "?? work/evidence/2026-09-27-r15-plan/before/work/tasks/T49.md",
+    "?? work/evidence/2026-09-27-r15-plan/head.txt",
+    "?? work/evidence/2026-09-27-r15-plan/owned-paths.json",
+    "?? work/evidence/2026-09-27-r15-plan/protected-before.json",
+    "?? work/evidence/2026-09-27-r15-plan/status-before.txt",
+    "?? work/evidence/2026-09-27-r15-plan/validation.json",
+    "?? work/evidence/T100/resolution-2026-09-29/commit-receipt.json",
+    "?? work/evidence/T99/commit-receipt.json",
+    "?? work/evidence/T99/server.log",
+    "?? work/reports/R14-2026-09-27-PLAN.md",
+    "?? work/reports/R15-2026-09-27-PLAN.md",
+    "?? work/reviews/T22-2026-09-27/REVIEW.md",
+    "?? work/reviews/T22-2026-09-27/edge-repro.patch",
+    "?? work/reviews/T22-2026-09-27/node-tests.log",
+    "?? work/reviews/T22-2026-09-27/validation.log",
+    "?? work/reviews/T22-2026-09-27/verification.json",
+    "?? work/reviews/T50-T55-T69-2026-09-27/REVIEW.md",
+    "?? work/reviews/T50-T55-T69-2026-09-27/audit_sources.py",
+    "?? work/reviews/T50-T55-T69-2026-09-27/baseline.json",
+    "?? work/reviews/T50-T55-T69-2026-09-27/build.log",
+    "?? work/reviews/T50-T55-T69-2026-09-27/historical-t52-validator.json",
+    "?? work/reviews/T50-T55-T69-2026-09-27/preservation.json",
+    "?? work/reviews/T50-T55-T69-2026-09-27/source-audit.json",
+    "?? work/reviews/T50-T55-T69-2026-09-27/t52-integrity.json",
+    "?? work/reviews/T50-T55-T69-2026-09-27/test_bodyparts3d_r4_ingest.py.log",
+    "?? work/reviews/T50-T55-T69-2026-09-27/test_bodyparts3d_r4_t53.py.log",
+    "?? work/reviews/T50-T55-T69-2026-09-27/test_bodyparts3d_r4_t54.py.log",
+    "?? work/reviews/T50-T55-T69-2026-09-27/test_bodyparts3d_r4_t55.py.log",
+    "?? work/reviews/T50-T55-T69-2026-09-27/test_diagnose_bodyparts3d_r4_t52_laterality.py.log",
+    "?? work/reviews/T50-T55-T69-2026-09-27/test_extract_bodyparts3d_r4_selected_zip_members.py.log",
+    "?? work/reviews/T50-T55-T69-2026-09-27/typecheck.log",
+    "?? work/reviews/T50-T55-T69-2026-09-27/web-checks.json",
+    "?? work/reviews/T52-2026-09-27/REVIEW-AND-NEXT.md",
+    "?? work/reviews/T52-2026-09-27/baseline.json",
+    "?? work/reviews/T52-2026-09-27/verification.json",
+    "?? work/task-registry-r14.json",
+    "?? work/task-registry-r15.json",
+    "?? work/tasks/T23-R14-RESUME.md",
+    "?? work/tasks/T41.md",
+    "?? work/tasks/T43.md",
+    "?? work/tasks/T44.md",
+    "?? work/tasks/T45.md",
+    "?? work/tasks/T46.md",
+    "?? work/tasks/T47.md",
+    "?? work/tasks/T48.md",
+    "?? work/tasks/T49.md",
+    "?? work/tasks/T50.md",
+    "?? work/tasks/T51.md",
+    "?? work/tasks/T52.md",
+    "?? work/tasks/T53.md",
+    "?? work/tasks/T54.md",
+    "?? work/tasks/T56.md",
+    "?? work/tasks/T57.md",
+    "?? work/tasks/T58.md",
+    "?? work/tasks/T59.md",
+    "?? work/tasks/T60.md",
+    "?? work/tasks/T61.md",
+    "?? work/tasks/T62.md",
+    "?? work/tasks/T63.md",
+    "?? work/tasks/T64.md",
+    "?? work/tasks/T65.md",
+    "?? work/tasks/T66.md",
+    "?? work/tasks/T67.md",
+    "?? work/tasks/T68.md",
+    "?? work/tasks/T69.md",
+    "?? work/tasks/archive/R13-before-R14/T24.md",
+    "?? work/tasks/archive/R13-before-R14/T25.md",
+    "?? work/tasks/archive/R13-before-R14/T26.md",
+    "?? work/tasks/archive/R13-before-R14/T27.md",
+    "?? work/tasks/archive/R13-before-R14/T28.md",
+    "?? work/tasks/archive/R13-before-R14/T29.md",
+    "?? work/tasks/archive/R13-before-R14/T30.md",
+    "?? work/tasks/archive/R13-before-R14/T31.md",
+    "?? work/tasks/archive/R13-before-R14/T32.md",
+    "?? work/tasks/archive/R13-before-R14/T33.md",
+    "?? work/tasks/archive/R13-before-R14/T34.md",
+    "?? work/tasks/archive/R13-before-R14/T35.md",
+    "?? work/tasks/archive/R13-before-R14/T36.md",
+    "?? work/tasks/archive/R13-before-R14/T37.md",
+    "?? work/tasks/archive/R13-before-R14/T38.md",
+    "?? work/tasks/archive/R13-before-R14/T39.md",
+    "?? work/tasks/archive/R13-before-R14/T40.md"
+  ],
+  "protectedInputSha256": {
+    "atlas-data/overlays/za-local-integration.json": "e99a3169ff424b494003f885aebce437f3fa7258522b69719dd8fe27ca2affab",
+    "atlas-data/catalog/target-scope-t96.json": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
+    "atlas-data/source-cache/datasets/za/compiled/manifest.json": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42",
+    "atlas-data/catalog/canonical-catalog.json": "c8caf2c9e87f1149bebdd4b6a748145b04156cf69667352c9a5d747ce6f802dd",
+    "atlas-data/terminology/learning-names.json": "6f78fbce22d999aff95ba10fb835f137ba1dfdb2a9c790bb90fef18e580b776e",
+    "work/EXECUTION.json": "2ced4231a9870d3656eeb8dedc1675496bd63827ec9e3a04f2df43dd9c0b7691",
+    "work/STATUS.md": "64b6b1541e7431b49f6995168bc3c19efad0be1a492cbbdf058397c2d6182fed",
+    "work/reports/T100.md": "18631f3d2a7530d85505bc11518d3057fb8c7fe63c6187661a37303184e8378e"
+  },
+  "openSimModels": {
+    "head": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "status": []
+  },
+  "denominators": {
+    "frozenTargets": 542,
+    "regionMemberships": 563,
+    "regions": 12,
+    "sourceObjects": 960,
+    "localDisplayEligible": 672,
+    "unnamedModernKoreanSurfaces": 226,
+    "unnamedConceptGroups": 113,
+    "candidateFreeTargets": 163
+  },
+  "notes": [
+    "Read-only baseline; no source mesh/archive was changed.",
+    "Existing project WIP listed in projectStatusBefore is preserved."
+  ],
+  "preexistingHaConceptBindings": [
+    {
+      "sourceKey": "ZA-c7010a9-2d15cee81610b0809f565954",
+      "haConceptId": "HA-P-000015"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-587d9e8125e466b1fbb94246",
+      "haConceptId": "HA-P-000015"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-e07069f3efea3d66c4e25ac2",
+      "haConceptId": "HA-P-000009"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-951e9d95076ad0635ead80e3",
+      "haConceptId": "HA-P-000009"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-00530e1e4b8caef86998c5d6",
+      "haConceptId": "HA-M-000037"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-473fdc6b9e23d3126417455a",
+      "haConceptId": "HA-M-000037"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b02fc376db8d3471a9573ce6",
+      "haConceptId": "HA-S-CALCANEUS"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-26d57a52182af4b4475cef42",
+      "haConceptId": "HA-S-CALCANEUS"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-9648fd79baf7b216be0e8c91",
+      "haConceptId": "HA-P-000012"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-72ab84e76cdf041dd9425609",
+      "haConceptId": "HA-P-000012"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-2825ee09cf08074eadd0331a",
+      "haConceptId": "HA-P-000014"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-81df363f916894757ff12e15",
+      "haConceptId": "HA-P-000014"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-96692432d9927f078c729658",
+      "haConceptId": "HA-M-000036"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-2fdcd4158044f6df77ab9f98",
+      "haConceptId": "HA-M-000036"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-218747dce51991298714aa42",
+      "haConceptId": "HA-S-CUBOID"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ab881618a17c726a5d4072c2",
+      "haConceptId": "HA-S-CUBOID"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-3f8d0e3bf228c26495c8a56c",
+      "haConceptId": "HA-P-000004"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-53c9c86e1e2c4d44256a6422",
+      "haConceptId": "HA-P-000004"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-949cdee8e7b16d22f295af1e",
+      "haConceptId": "HA-P-000011"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-935a4aed2c3c6c262ba36166",
+      "haConceptId": "HA-P-000011"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-fd0168c8488ff1aa5ec47694",
+      "haConceptId": "HA-S-FEMUR"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-881dc33c5537a4e0e28b151c",
+      "haConceptId": "HA-S-FEMUR"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-e343f75d5e118b8ecc0c8446",
+      "haConceptId": "HA-S-FIBULA"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-cffb7aa7dcf415f6e999dea3",
+      "haConceptId": "HA-S-FIBULA"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-bb9c30b5db19ec33b36c8405",
+      "haConceptId": "HA-M-000006"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-660f1d894dac4eaaac8cda4c",
+      "haConceptId": "HA-M-000006"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4f96bdd8fb89eeb10b302e4a",
+      "haConceptId": "HA-M-000005"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-8a4afe3bad15949b534d7395",
+      "haConceptId": "HA-M-000005"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-fd640a9cdef24ed895b51edd",
+      "haConceptId": "HA-S-METATARSAL-5"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-440e8f3a5e420fb40740e2fa",
+      "haConceptId": "HA-S-METATARSAL-5"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-548857f5036c69604415aff7",
+      "haConceptId": "HA-S-METATARSAL-1"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-48acd9f4e0949932aafb2354",
+      "haConceptId": "HA-S-METATARSAL-1"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-cae0d85859a3967e00b1ba4f",
+      "haConceptId": "HA-M-000016"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d62ef2a945a690cc66949e90",
+      "haConceptId": "HA-M-000016"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-3187c1586d91928e82784eb1",
+      "haConceptId": "HA-M-000039"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-e6af50f96f8eed2f0d328ad4",
+      "haConceptId": "HA-M-000039"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-e634759f21e47328d2c6bc85",
+      "haConceptId": "HA-M-000040"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-62e9915b5a9ef24262a7710a",
+      "haConceptId": "HA-M-000040"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-5e69962a572f318e5ceae516",
+      "haConceptId": "HA-M-000041"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-5ae8daffca250ccf3620edb4",
+      "haConceptId": "HA-M-000041"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-9391b3a44b02af5cae493a77",
+      "haConceptId": "HA-M-000017"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-9205fb3dfeb7a40b44468bd0",
+      "haConceptId": "HA-M-000017"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-358022dd87335cfbf93a9df8",
+      "haConceptId": "HA-M-000045"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-2bb08f81e4a4de3e27270fda",
+      "haConceptId": "HA-M-000045"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-934dfc238ea1e76aae96a5b1",
+      "haConceptId": "HA-P-000006"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ee998d7af96fbe4b0e6c0e80",
+      "haConceptId": "HA-P-000006"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-1be72b7b74167a82591c960c",
+      "haConceptId": "HA-M-000008"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-57c8e4fe6e9b99dfafd87242",
+      "haConceptId": "HA-M-000008"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-901c320243f0ebc6310893b4",
+      "haConceptId": "HA-M-000032"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-7c93dca09ae32c18933f996c",
+      "haConceptId": "HA-M-000032"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-62a4fba42674f5d453c6e277",
+      "haConceptId": "HA-M-000028"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-bef3937bee85a8c7bcc77d9c",
+      "haConceptId": "HA-M-000028"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-09c6b1c0b14247d7765a362b",
+      "haConceptId": "HA-P-000001"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-3b0f2c0e246db270d7983fc6",
+      "haConceptId": "HA-P-000001"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-505051b13ee828677f13ac14",
+      "haConceptId": "HA-P-000020"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-bf6e26baae088726b8447ff6",
+      "haConceptId": "HA-P-000020"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4217ef5d74b72fb97abf9a68",
+      "haConceptId": "HA-M-000010"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a74965560e389cd8fe0eef14",
+      "haConceptId": "HA-M-000010"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-dcb9686379b7fe039bdff5b9",
+      "haConceptId": "HA-M-000020"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-0e5ec93bf7f9f017a39d57fe",
+      "haConceptId": "HA-M-000020"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-efabaac8183789cad65a55e6",
+      "haConceptId": "HA-M-000023"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-93bf352448accd9e7356fc10",
+      "haConceptId": "HA-M-000023"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-31252d028a346dedb2eeff85",
+      "haConceptId": "HA-P-000017"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b79c7d0ed5f3e42439fa6d34",
+      "haConceptId": "HA-P-000017"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-055ff873f6ec9d65dd860ed6",
+      "haConceptId": "HA-P-000019"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ddd0739dc68aed55736c4cd0",
+      "haConceptId": "HA-P-000019"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-e144179785452e10c1713beb",
+      "haConceptId": "HA-S-MEDIAL-CUNEIFORM"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a994664b35bbf32521094e7f",
+      "haConceptId": "HA-S-MEDIAL-CUNEIFORM"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-cccd38ff033ad2834f12217a",
+      "haConceptId": "HA-P-000002"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-eafc9174265a4bbc41581e2a",
+      "haConceptId": "HA-P-000002"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4159b92819d36934712521b6",
+      "haConceptId": "HA-P-000021"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-77ca3218f8529b2ca6d2b501",
+      "haConceptId": "HA-P-000021"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-3d45a9b85dab1fc2840b8af9",
+      "haConceptId": "HA-M-000015"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-37aa0fc00d38dab7b02d48e8",
+      "haConceptId": "HA-M-000015"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-e59c2fa20022909910b16d8a",
+      "haConceptId": "HA-M-000009"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-53ab97075daa0d4bfedfc418",
+      "haConceptId": "HA-M-000009"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-f457ff24e90bcfa00f84b490",
+      "haConceptId": "HA-S-NAVICULAR"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b0783f8644612ab1d31b51ae",
+      "haConceptId": "HA-S-NAVICULAR"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a7fe2bb81f0aa35853a581a2",
+      "haConceptId": "HA-M-000043"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-e54c31805832972adf162e5c",
+      "haConceptId": "HA-M-000043"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-1781361a2a1cb8855c04c9ae",
+      "haConceptId": "HA-M-000025"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-78090abae792386f7a52a1f3",
+      "haConceptId": "HA-M-000025"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d97c06c72ad39b70ed99e395",
+      "haConceptId": "HA-M-000042"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-3a1d27e7968ff434c7d4f453",
+      "haConceptId": "HA-M-000042"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-55395174e0caf5c3a86ecf61",
+      "haConceptId": "HA-M-000046"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d542bd5d76a83108319855d4",
+      "haConceptId": "HA-M-000046"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-bc1b5e5fc64c6cbbbab9c03e",
+      "haConceptId": "HA-M-000021"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-96cb4db8fde040d91dd1119e",
+      "haConceptId": "HA-M-000021"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-fc7b5ebec6fab48ae5ae8ebf",
+      "haConceptId": "HA-M-000022"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-0f9baaa60e90f20ca5ccb7e8",
+      "haConceptId": "HA-M-000022"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d5dc0a457c96c60ef5dfbe1e",
+      "haConceptId": "HA-P-000016"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-2e5cd9571677b6718aa51e97",
+      "haConceptId": "HA-P-000016"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-0bb829c1053a80f6ef177bcd",
+      "haConceptId": "HA-M-000027"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-6bc46621886fbf8f62657278",
+      "haConceptId": "HA-M-000027"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b20b574e456449c5d571c7a1",
+      "haConceptId": "HA-P-000018"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a0c2ea00609e874a7faa926d",
+      "haConceptId": "HA-P-000018"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4ba10c2a893f801be7b970f7",
+      "haConceptId": "HA-M-000002"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ca930d96bd1ebb900eec15b1",
+      "haConceptId": "HA-M-000002"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-e4a7d3329f606e0541166646",
+      "haConceptId": "HA-P-000013"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-2ea5931bed7570848730b3f4",
+      "haConceptId": "HA-P-000013"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-42897cc9428939917b4bbb33",
+      "haConceptId": "HA-M-000026"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-3f1d1eb1278c05c2ce3b1cb6",
+      "haConceptId": "HA-M-000026"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-1eb688e68b2da36dae95b731",
+      "haConceptId": "HA-M-000034"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a62f97760e73212de24b809e",
+      "haConceptId": "HA-M-000034"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ffa2fd1605a4f639b94319bd",
+      "haConceptId": "HA-P-000003"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ae6e75e33b22fd5b51566e42",
+      "haConceptId": "HA-P-000003"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b9235898df3eba971f4be22a",
+      "haConceptId": "HA-M-000044"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-93fb86ba217a59495b9707ad",
+      "haConceptId": "HA-M-000044"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-f8ce629af707aeb824c6a055",
+      "haConceptId": "HA-P-000005"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-f84ec7f00a0d0bbab3018401",
+      "haConceptId": "HA-P-000005"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-1f03d80f6804aceea9565b08",
+      "haConceptId": "HA-M-000011"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-3121b8e1c0fa8cf6d75a8c24",
+      "haConceptId": "HA-M-000011"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-1b0b2682032f29beeaf28d33",
+      "haConceptId": "HA-M-000007"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-db532c20a96abde8f20738c9",
+      "haConceptId": "HA-M-000007"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-e5db63c82b770f5c1aa27afc",
+      "haConceptId": "HA-M-000031"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-dcb91a88c9a6861bc8f615c3",
+      "haConceptId": "HA-M-000031"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-72908a3c136935a9202143d3",
+      "haConceptId": "HA-M-000013"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-6b0005fc3438647b5300ea44",
+      "haConceptId": "HA-M-000013"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-6a3b39de37d72ca69105debf",
+      "haConceptId": "HA-M-000033"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-6fac2e434e98bf12637d777b",
+      "haConceptId": "HA-M-000033"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-9e1f8c25b52feb1eba6c0541",
+      "haConceptId": "HA-S-TIBIA"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4e2855b7618ac050900a1b0c",
+      "haConceptId": "HA-S-TIBIA"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-74ced50ada635db761f807e4",
+      "haConceptId": "HA-M-000003"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-54ae5266082b61f48ed8e83e",
+      "haConceptId": "HA-M-000003"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b5a9149ee8d274ed2fafa50b",
+      "haConceptId": "HA-M-000004"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4aedd051afdad37d616d1994",
+      "haConceptId": "HA-M-000004"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-73f25af37e4c49d660be9ca2",
+      "haConceptId": "HA-P-000010"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b2c4a8a8818e3a136f3250f7",
+      "haConceptId": "HA-P-000010"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-98148d5380ab1abd5154e41c",
+      "haConceptId": "HA-M-000029"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-6d200091f5d75fd817af12ad",
+      "haConceptId": "HA-M-000029"
+    }
+  ],
+  "preexistingHaConceptBindingCount": 130,
+  "preservedUnnamedSurfaceState": [
+    {
+      "sourceKey": "ZA-c7010a9-07d4e851bc713a1c5bb0b8f9",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "thorax"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "(Abdominal part of pectoralis major muscle)"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-3a414d5573f8ef7250596305",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "thorax"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "(Abdominal part of pectoralis major muscle)"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b9a79eff505522ae1bf9205d",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "thigh"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "(Adductor minimus)"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d41a0962e98cd78ecbcf911e",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "thigh"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "(Adductor minimus)"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-8636f47448dbd2711af99c90",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "(Opponens digiti minimi muscle of foot)"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-f1b8f017f065ca519bd77a72",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "(Opponens digiti minimi muscle of foot)"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-14008ccad78ce56854ac4662",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Abductor digiti minimi of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a10f307fc95f872b62897168",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Abductor digiti minimi of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d3839cec2e0626a3881b2d21",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Abductor digiti minimi of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ae5d77d291f383b3bf2cdf55",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Abductor digiti minimi of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-539e1a45e0e562f3ee8d92b7",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Ary-epiglottic part of oblique arytenoid muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-9974b47ca8a42000b39b253e",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Ary-epiglottic part of oblique arytenoid muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-04b9aa236b4d795160c54db8",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Bucinator"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-acd8cac3c62b4ce86edb51be",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Bucinator"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-02ac6352ef10131de2a12bf8",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Deep head of flexor pollicis brevis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-f474ab989624ebe8c12e189a",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Deep head of flexor pollicis brevis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-633c52da4b8baf98dcf7c630",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Deep head of pronator teres"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-56d2a832b94cd47795d2382f",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Deep head of pronator teres"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-3f8d0e3bf228c26495c8a56c",
+      "haConceptId": "HA-P-000004",
+      "sourceOnly": false,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": "심부 교근",
+        "koModern": null,
+        "en": "Deep part of masseter"
+      },
+      "aliases": [
+        "Pars profunda masseteris"
+      ],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-53c9c86e1e2c4d44256a6422",
+      "haConceptId": "HA-P-000004",
+      "sourceOnly": false,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": "심부 교근",
+        "koModern": null,
+        "en": "Deep part of masseter"
+      },
+      "aliases": [
+        "Pars profunda masseteris"
+      ],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-5bfbdf2805a72bd77413b093",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Depressor septi nasi"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-61fa8db89776082d92f5b1d9",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Depressor septi nasi"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-3ef3969d3040f9434dca1ab6",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of fifth finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-7fdc346491c401fafbbde592",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of fifth finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-0e655a17b4dd00a4d206bb71",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of fifth finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d3353be863db9afeed612a43",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of fifth finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-20ca0726a44ab036405dd976",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of first finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-21ebc5730330e4150d9a21c3",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of first finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-8453962881fde35f696f083a",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of first finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-8c24a0f1f803f36f80a205f3",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of first finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-485332cf50a4c56009d6deab",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of fourth finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-403941ce03486160854a2e7e",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of fourth finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-560d1cbfce94550708048e1e",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of fourth finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-72286b743c35c3d279594565",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of fourth finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-84f1edbaa160c729a1e1f4b2",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of second finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-c956642614a1502da28310f7",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of second finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-527e7d4d0a4899d82f23f146",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of second finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-3de90a01261b8752e8388fcd",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of second finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-89b42c08f1be78e7706de602",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of third finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-fd30572856dff59afa6b19a0",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of third finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a16440fa0ab5419ea7228cf3",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of third finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-845e2d7a100370cf779827af",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Distal phalanx of third finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-dda38970a5f41e4f2f5aa1ba",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Dorsal interossei muscles of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-43fa07db75bcfd51cdd6bdac",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Dorsal interossei muscles of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-512feee2bcf3c58b440cc29e",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Dorsal interossei muscles of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-797eeab0e43eb1f0e6034b65",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Dorsal interossei muscles of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-136297c30c138538f1cb3586",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Dorsal parts of lateral intertransversarii lumborum muscles"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-36458588114c0db7bfa8a021",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Dorsal parts of lateral intertransversarii lumborum muscles"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d75abb958e1463ceecb5430b",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "abdomen-lumbar"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "External abdominal oblique muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-eb0bd1853a90acada85e9177",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "abdomen-lumbar"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "External abdominal oblique muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-8dd74a625b4d0ea102d2b057",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "External part of thyro-arytenoid muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-6a1b4056d714712f6bea1db9",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "External part of thyro-arytenoid muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-0135812b1dc565461839942e",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Fifth metacarpal bone"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4b6edb2890b1e6c1f3e79af4",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Fifth metacarpal bone"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ba16e7dc87a0cf6fe1ea76c2",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "First metacarpal bone"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-5b89f3e4a8a3e6cc035c25f9",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "First metacarpal bone"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-482b430cd15a8a85ca48faed",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Flexor carpi radialis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-e65b8c86027df88000cfa861",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Flexor carpi radialis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-283cf3f0d4e212bb78170d73",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Flexor digiti minimi of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-833efde9c3258375fcebb1df",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Flexor digiti minimi of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-961942c3537b8a434267a8b9",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Flexor digiti minimi of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-38fd3807c5ebc354eb98cb97",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Flexor digiti minimi of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-476b3f77e6c1f250408a37aa",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Fourth metacarpal bone"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-94865725478318ef3189dfe6",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Fourth metacarpal bone"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-452803023ef7e6415eec7e29",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": "전두근",
+        "koModern": null,
+        "en": "Frontalis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-87401ac0e10b65dbca11538f",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": "전두근",
+        "koModern": null,
+        "en": "Frontalis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-9f452191aceeebc02b06f6aa",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Humeral head of extensor carpi ulnaris"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-9b2fb0d7d31b3f2eaf86c2d7",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Humeral head of extensor carpi ulnaris"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b41902a8f92b26aba09a116c",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Humeral head of flexor carpi ulnaris"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-3c7b3093d649d54598f0deed",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Humeral head of flexor carpi ulnaris"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-9e5c3efa530741ae8f0595ec",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Humero-ulnar head of flexor digitorum superficialis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-f04b81d9566c227fb9805995",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Humero-ulnar head of flexor digitorum superficialis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-f1c445f6efa7d889f9c6ffaa",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": null,
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Iliocostalis colli muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-31e68de95beec69e94a14dc7",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Iliocostalis colli muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-934dfc238ea1e76aae96a5b1",
+      "haConceptId": "HA-P-000006",
+      "sourceOnly": false,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": "외익돌근 하두",
+        "koModern": null,
+        "en": "Inferior head of lateral pterygoid muscle"
+      },
+      "aliases": [
+        "Caput inferius musculi pterygoidei lateralis",
+        "Lower head of lateral pterygoid muscle"
+      ],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ee998d7af96fbe4b0e6c0e80",
+      "haConceptId": "HA-P-000006",
+      "sourceOnly": false,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": "외익돌근 하두",
+        "koModern": null,
+        "en": "Inferior head of lateral pterygoid muscle"
+      },
+      "aliases": [
+        "Caput inferius musculi pterygoidei lateralis",
+        "Lower head of lateral pterygoid muscle"
+      ],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-7ef9d8dc370f24c1ee064bb5",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Inferior nasal concha bone"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4b2de4a6ee48fc57354f40e8",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Inferior nasal concha bone"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-0b70d2ba6152730d14d56464",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Interspinales colli muscles"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4909abe626494c2fbc4c9717",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Interspinales colli muscles"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-fffbd633a2b005f7f0f8b636",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Lateral crico-arytenoid muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-dff877ef6483ee8c6e97f183",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Lateral crico-arytenoid muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-2edd689b59b6e27d2ccd08f5",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Lateral head of flexor hallucis brevis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-778db9df1432e547dd5858a1",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Lateral head of flexor hallucis brevis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-09c6b1c0b14247d7765a362b",
+      "haConceptId": "HA-P-000001",
+      "sourceOnly": false,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "leg"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": "비복근 · 외측두",
+        "koModern": null,
+        "en": "Lateral head of gastrocnemius"
+      },
+      "aliases": [
+        "Caput laterale musculi gastrocnemii",
+        "Caput fibulare musculi gastrocnemii"
+      ],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-3b0f2c0e246db270d7983fc6",
+      "haConceptId": "HA-P-000001",
+      "sourceOnly": false,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "leg"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": "비복근 · 외측두",
+        "koModern": null,
+        "en": "Lateral head of gastrocnemius"
+      },
+      "aliases": [
+        "Caput laterale musculi gastrocnemii",
+        "Caput fibulare musculi gastrocnemii"
+      ],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4fcfcf34f83d1a80973e50d1",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Levator nasolabialis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-267006e3bb16978a503e215c",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Levator nasolabialis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-07a9c94fb36ca1ef52c113ea",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "thorax"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Levatores breves costarum"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4d440b06111f1aa3181363f5",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "thorax"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Levatores breves costarum"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-7308dd016e7ec8371b751e06",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "thorax"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Levatores longi costarum"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ef0b4292145c1f53b47cd485",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "thorax"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Levatores longi costarum"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d9e3485ab60f3f99a1a8780c",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "thigh"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Long head of biceps femoris"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-da17fca9886014ed6ca805ee",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "thigh"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Long head of biceps femoris"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-fd6a2b5be5a2e54cb6cfc81c",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Longissimus colli muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-416f0f24db20d13eeb311985",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Longissimus colli muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-58e5e475c2179e0c38ed2af3",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Lumbrical muscles of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-1ca813fe3948ac17ce76a4d1",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Lumbrical muscles of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b4929d00ab0a2fcf081a009a",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": "손의 충양근",
+        "koModern": null,
+        "en": "Lumbrical muscles of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-8c15eaf1238e70f4cbedc7fa",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": "손의 충양근",
+        "koModern": null,
+        "en": "Lumbrical muscles of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-f7dc0c4a424866e695410ff4",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Medial head of flexor hallucis brevis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a7333213cf75ff3e8cb3b376",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Medial head of flexor hallucis brevis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-cccd38ff033ad2834f12217a",
+      "haConceptId": "HA-P-000002",
+      "sourceOnly": false,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "leg"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": "비복근 · 내측두",
+        "koModern": null,
+        "en": "Medial head of gastrocnemius"
+      },
+      "aliases": [
+        "Caput mediale musculi gastrocnemii",
+        "Caput tibiale musculi gastrocnemii"
+      ],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-eafc9174265a4bbc41581e2a",
+      "haConceptId": "HA-P-000002",
+      "sourceOnly": false,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "leg"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": "비복근 · 내측두",
+        "koModern": null,
+        "en": "Medial head of gastrocnemius"
+      },
+      "aliases": [
+        "Caput mediale musculi gastrocnemii",
+        "Caput tibiale musculi gastrocnemii"
+      ],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-80906728dc848d37bd0792e8",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Middle phalanx of fifth finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-e825e809355cd4bd211e3d17",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Middle phalanx of fifth finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b060077a8b5a06edc04a5560",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Middle phalanx of fifth finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4aa7983709d06566ddf84538",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Middle phalanx of fifth finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d2309871264389a61a22975f",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Middle phalanx of fourth finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4f7f7141218bf7dde81de1df",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Middle phalanx of fourth finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-efa9150f298147a1725b77a2",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Middle phalanx of fourth finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-3ad88f42bd48aa490a844d5b",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Middle phalanx of fourth finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-1433005e31c5f6f3c3374b77",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Middle phalanx of second finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-8b97ca16ecd81d34c3ed3f5e",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Middle phalanx of second finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b28bdc35eb879131a32d5144",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Middle phalanx of second finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d682fd2e62fbcd0ee8d7f60e",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Middle phalanx of second finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-09318c82f2cbe361bafb628b",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Middle phalanx of third finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ea763997ca960e971a10328a",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Middle phalanx of third finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-7f6917aa91a9f94c6eab678a",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Middle phalanx of third finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-2f9cd42c569ab0af3b15886b",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Middle phalanx of third finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-6baf7cc69d5f9a8a707f7f1b",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Multifidus colli muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-8dc91e97e979950448eb75d1",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Multifidus colli muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-f981466588cab66b0ca123f0",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Multifidus lumborum muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-0032489e5062440b0fa49b28",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Multifidus lumborum muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-5ab9f2a4f8350d4754714f82",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Multifidus thoracis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-fc9f08daa4e1564c227dce06",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Multifidus thoracis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-2f127171f53c7675965eebe9",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Oblique head of adductor hallucis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-1297af1a4a6874ec11e6e9e0",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Oblique head of adductor hallucis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-0f597c0162991a94135b1564",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Oblique head of adductor pollicis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-17ab8a421ebb575ebcc8ac2b",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Oblique head of adductor pollicis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-f27c704553e5ab3f5ccc490c",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Oblique part of cricothyroid muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-9f477cd1cbf453c1bd05cbd3",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Oblique part of cricothyroid muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-8fcc4502a4bc867498b04579",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Obliquus inferior capitis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-7a3ca0715d275f4c0a2ff78d",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Obliquus inferior capitis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-8c6def755fa19de954e3ebb3",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Obliquus superior capitis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-9b0034544256e0803e3bf7e6",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Obliquus superior capitis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-bd7b96137304ccd2c09685fe",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Occipitalis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d4d20127ca49ce1bc113c550",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Occipitalis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-40af30b900e1ead0c939c419",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Opponens digiti minimi muscle of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-26124c56fa182f947dbb6dbd",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Opponens digiti minimi muscle of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-8134654f9814f6d7b7938faa",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Orbital part of orbicularis oculi"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a7787c4405179bf9f20c40c1",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Orbital part of orbicularis oculi"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-43f48b8384f56a4dc1cd4777",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Palmar interossei muscles"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-e3bf9cdaa3f5e54585e75139",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Palmar interossei muscles"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-2440948090b89423518bf02f",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Palpebral part of orbicularis oculi"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-e641b4ab0a60d2011fd88e82",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Palpebral part of orbicularis oculi"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-f76959fbf46e029fa1a8e671",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Plantar interossei muscles"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-665732009b163a77ce0486a2",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Plantar interossei muscles"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-31c308f704eaed2344683f62",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Posterior crico-arytenoid muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-669167331cb6d48152f00205",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Posterior crico-arytenoid muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-1d2d5827d0e42beabe76c5b3",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of fifth finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-da68304526f8c9bbc61306da",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of fifth finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b69a7cf2affbb79e6a42b4aa",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of fifth finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-9f8a2390ddab6922d00eb2aa",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of fifth finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d6d67715909efffac67ac1fc",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of first finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-811c52b6b45c12323e057e8b",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of first finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-7f7d4fefab6b75c36f33c257",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of first finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a08c643f935fa64cd300eea3",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of first finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a13e02fe704324bd6d722ff2",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of fourth finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-1e2eb56fc4a54025f43abbfa",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of fourth finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-f2d3d8166dd0cc55dc474428",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of fourth finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ca37b4836776e1fe34763cbd",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of fourth finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-fcaceb97d4a4a4747d169e81",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of second finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-28354d907ed0c43cd1f22ae9",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of second finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-009c40d5b1d0fa5da5a1b2a8",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of second finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-40a68155c101130047207945",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of second finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-f9e4c279cb62fe4076429976",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of third finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-00354e48f55a2b440735eece",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of third finger of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-085325fc4921f3e06966f51e",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of third finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-10b7309931bbd6425bfe14b0",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Proximal phalanx of third finger of hand"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-9f38f285dabec98662d9ad76",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Pubo-analis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-15d98951b62ec44af55da39d",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Pubo-analis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d291b577fd8cafb2ad7fca70",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Radial head of flexor digitorum superficialis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ebd7f99e4124271e3ec2de0f",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Radial head of flexor digitorum superficialis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-e6524b4755c87c4a82f1aa3f",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Rectus anterior capitis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-2d347b3e105edd7ebb040e73",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Rectus anterior capitis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-42f62ea5be4e7b778c181c31",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Rectus lateralis capitis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-82758eeb694061ac839185a5",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Rectus lateralis capitis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4c34f824dc8a4e8b25991f9b",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Rectus posterior major capitis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-5359c276dc0c91188f5b0966",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Rectus posterior major capitis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-bb87536ca8d5db00fe4885c5",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Rectus posterior minor capitis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-757405c12bf8af7687f0c1e8",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Rectus posterior minor capitis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d5dc0a457c96c60ef5dfbe1e",
+      "haConceptId": "HA-P-000016",
+      "sourceOnly": false,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "shoulder-scapular",
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": "Scapular spinal part of deltoid muscle",
+        "koModern": null,
+        "en": "Scapular spinal part of deltoid muscle"
+      },
+      "aliases": [
+        "Pars spinalis scapularis musculi deltoidei",
+        "Pars spinalis musculi deltoidei",
+        "Spinal part of deltoid muscle"
+      ],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-2e5cd9571677b6718aa51e97",
+      "haConceptId": "HA-P-000016",
+      "sourceOnly": false,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "shoulder-scapular",
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": "Scapular spinal part of deltoid muscle",
+        "koModern": null,
+        "en": "Scapular spinal part of deltoid muscle"
+      },
+      "aliases": [
+        "Pars spinalis scapularis musculi deltoidei",
+        "Pars spinalis musculi deltoidei",
+        "Spinal part of deltoid muscle"
+      ],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d25b13c59f7a674c5dead509",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Second metacarpal bone"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-e207a640c7ebfd752b462adc",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Second metacarpal bone"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-9de5bdb88bc887beb0a84a31",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Semispinalis colli muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-37a1bc717ba0b60ba4002d46",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Semispinalis colli muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4018c439a303a4d6e4bae76c",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Sesamoid bones of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-fc07a02a3e10ba2f2748c60d",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Sesamoid bones of foot"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-6e106d28c3f91c9a67749697",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "thigh"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Short head of biceps femoris"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-68dd1fc0c2c7802ec3eff24e",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "thigh"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Short head of biceps femoris"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-40c298f8049d6e9daddffe34",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Spinalis colli muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-68fe787172ebeb0559303951",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Spinalis colli muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-95de2ba5395d03f603b84e38",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Splenius colli muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-7fce6d14bd3d6c943a60dc80",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back",
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Splenius colli muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-f577d9c46a478c9857e77ac0",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Straight part of cricothyroid muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b0e40b714ce4d36c51e6fc53",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Straight part of cricothyroid muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-fcddf29dce99542a5af381bf",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Stylopharyngeus muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a4e55e9e7152279281d1eb64",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Stylopharyngeus muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-5b04846f827bc78ccfa0f6c3",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Superficial head of flexor pollicis brevis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-cea24fd712502d454bc5d542",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Superficial head of flexor pollicis brevis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a43ee8628da555b5ec9a56d1",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Superficial head of pronator teres"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b61125f680db2d3b4ad80fdd",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Superficial head of pronator teres"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ffa2fd1605a4f639b94319bd",
+      "haConceptId": "HA-P-000003",
+      "sourceOnly": false,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": "교근의 천부",
+        "koModern": null,
+        "en": "Superficial part of masseter"
+      },
+      "aliases": [
+        "Pars superficialis masseteris"
+      ],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ae6e75e33b22fd5b51566e42",
+      "haConceptId": "HA-P-000003",
+      "sourceOnly": false,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": "교근의 천부",
+        "koModern": null,
+        "en": "Superficial part of masseter"
+      },
+      "aliases": [
+        "Pars superficialis masseteris"
+      ],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-f8ce629af707aeb824c6a055",
+      "haConceptId": "HA-P-000005",
+      "sourceOnly": false,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": "외익돌근 상두",
+        "koModern": null,
+        "en": "Superior head of lateral pterygoid muscle"
+      },
+      "aliases": [
+        "Caput superius musculi pterygoidei lateralis",
+        "Upper head of lateral pterygoid muscle",
+        "Sphenomeniscus muscle"
+      ],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-f84ec7f00a0d0bbab3018401",
+      "haConceptId": "HA-P-000005",
+      "sourceOnly": false,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "head"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": "외익돌근 상두",
+        "koModern": null,
+        "en": "Superior head of lateral pterygoid muscle"
+      },
+      "aliases": [
+        "Caput superius musculi pterygoidei lateralis",
+        "Upper head of lateral pterygoid muscle",
+        "Sphenomeniscus muscle"
+      ],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-e969768f61022bf07e8e5b5e",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Thyro-epiglottic part of thyro-arytenoid muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-54ef90215ecab2d6beebbabc",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "neck"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Thyro-epiglottic part of thyro-arytenoid muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-5d58dba94f43467ed7b22643",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Transverse head of adductor hallucis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-56453688481eb47b17c98b50",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "foot"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Transverse head of adductor hallucis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-19c36d977635496cebb1c60e",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Transverse head of adductor pollicis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-5ffc8a5ca60b04b08fcbb7a5",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Transverse head of adductor pollicis"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-fbe4db64d98941ad43817b05",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "thorax"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Transversus thoracis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-9df807c78e8956ac8759dd6c",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "thorax"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Transversus thoracis muscle"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-aaac277449372418da1f3086",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": "대능형골",
+        "koModern": null,
+        "en": "Trapezium bone"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-c6d6b23207899fda94f78fb8",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": "대능형골",
+        "koModern": null,
+        "en": "Trapezium bone"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-08c5b85ed820b56896bd41c1",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Triquetrum bone"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-95f1740a873c84a61135a340",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Triquetrum bone"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-9363754544f023cf13f192cf",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Ulnar head of extensor carpi ulnaris"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-98314e1089cf654426b9aeef",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Ulnar head of extensor carpi ulnaris"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-28cd9da98154c1615092d958",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Ulnar head of flexor carpi ulnaris"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-6128f2699ae77753bc6015f9",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Ulnar head of flexor carpi ulnaris"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4ab9026121346c07a1a49590",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back"
+      ],
+      "side": "left",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Ventral parts of lateral intertransversarii lumborum muscles"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-7099bd7bc2d099935ed31603",
+      "haConceptId": null,
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "mappingStatus": "source_taxonomy_correspondence",
+      "regionIds": [
+        "back"
+      ],
+      "side": "right",
+      "names": {
+        "koTraditional": null,
+        "koModern": null,
+        "en": "Ventral parts of lateral intertransversarii lumborum muscles"
+      },
+      "aliases": [],
+      "localDisplayEligible": true,
+      "inspectionEligible": true,
+      "defaultVisible": true
+    }
+  ]
+}

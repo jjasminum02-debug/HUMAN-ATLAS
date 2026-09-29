@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "status": "pass_partial",
+  "capturedAtLocal": "2026-09-30",
+  "checks": {
+    "deterministicSemanticBuilder": {
+      "command": "python3 work/evidence/T100/semantic-relations-2026-09-30/apply_semantic_relations.py --check",
+      "status": "passed"
+    },
+    "strictSemanticAndPreservationValidator": {
+      "command": "python3 work/evidence/T100/semantic-relations-2026-09-30/validate_semantic_relations.py",
+      "status": "pass_partial",
+      "226Rows": true,
+      "113Groups": true,
+      "163CandidateFreeTargets": true
+    },
+    "wholeBody": {
+      "command": "pnpm run test:whole-body",
+      "status": "passed",
+      "tests": 45,
+      "compiledChunks": 46
+    },
+    "search": {
+      "command": "pnpm run test:search",
+      "status": "passed",
+      "tests": 44
+    },
+    "delivery": {
+      "command": "pnpm run test:delivery",
+      "status": "passed",
+      "tests": 3
+    },
+    "typecheck": {
+      "command": "pnpm run typecheck",
+      "status": "passed"
+    },
+    "productionBuild": {
+      "command": "pnpm run build",
+      "status": "passed",
+      "warning": "existing App JavaScript chunk is 954.06 kB, over the 500 kB advisory threshold"
+    },
+    "currentPayloadAndProcessingMeasurement": {
+      "path": "runtime-projection-measurement.json",
+      "status": "measured",
+      "sourceOverlaySha256": "80cf8797c2b7844a9f7efa25a4f8425d9d7dc572e4220cd9de016d9499378b77",
+      "rawOverlayFileBytes": 5728472,
+      "rawCompactResponseBytes": 4124318,
+      "runtimeProjectionResponseBytes": 841074,
+      "reductionPercent": 79.61,
+      "rawLedgerParseMedianMs": 4.475,
+      "runtimeProjectionParseMedianMs": 1.088,
+      "builderAndFullLedgerValidationMedianMs": 5.414,
+      "repeatedSearchBenchmark": {
+        "sourceConceptLabels": 113,
+        "frozenTargets": 542,
+        "rounds": 9,
+        "fullScanQueryMedianMs": 216.737,
+        "indexedLookupMedianMs": 0.12,
+        "relativeSpeedup": 1802.38,
+        "exactResultsMatch": true,
+        "method": "same 113 labels and 542 target terms; one normalized exact index reused vs scanning all target terms for each label; no fuzzy matching"
+      },
+      "gzip": "estimate only; local Vite serves uncompressed JSON"
+    },
+    "liveBrowser": {
+      "path": "browser-validation.json",
+      "status": "sample_pass_not_full_coverage"
+    },
+    "activeSceneFpsGpuMemory": "not_measured; full D gate open"
+  },
+  "preservation": {
+    "T96ScopeSha256": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
+    "compiledManifestSha256": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915c35d4b6111f1b7f42",
+    "preexistingHaBindings": 130,
+    "sourceObjects": 960,
+    "localDisplayEligibleRows": 672,
+    "sourceOnlyRows": 830,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "newGeometry": 0,
+    "OpenSim_Models": "read-only; unchanged"
+  },
+  "remainingGates": [
+    "159 of 672 display-eligible surfaces still lack modern Korean names.",
+    "163 of 542 targets remain without a current direct overlay candidate: 6 exact-label observations, 20 descendant representations, 135 ancestor representations, 2 with no exact/descendant/ancestor representation in the frozen package. No category proves absence across all sources.",
+    "Full 542 target/member exact visual selection and active-scene FPS/GPU/memory/device acceptance remain unverified."
+  ]
+}

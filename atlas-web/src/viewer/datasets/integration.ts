@@ -48,6 +48,18 @@ export interface StructureRecord {
         sourceIds: string[];
         locator: string;
     }>>;
+    /** Opaque learner/source concept links. They do not create a canonical HA binding. */
+    learnerConceptLinks?: {
+        conceptKey: string | null;
+        relationKind: 'verified_class_member' | 'normalized_exact_target_term' | 'paired_source_concept' | 'side_or_source_identity_conflict';
+        targetIds: string[];
+        memberCode: string | null;
+        targetTermMatches: { targetId: string; matchedValues: string[] }[];
+        matchRule: string;
+        evidenceIds: string[];
+        identityStatus: 'evidence_backed' | 'source_label_pair_only' | 'side_conflicted' | 'held';
+        humanReview: 'not_performed';
+    }[];
     targetRelationEvidence?: {
         targetId: string;
         targetEnglish: string;
@@ -137,6 +149,16 @@ export interface TargetTerminologyEvidence {
     publicRedistribution: 'held';
     newGeometryCreated: false;
 }
+/** Frozen T96 lexical authority supplied to the local validator, never emitted to learner runtime. */
+export interface FrozenTargetLexicon {
+    sha256: string;
+    targets: {
+        id: string;
+        term: { english: string; latin: string; sourceSynonyms: Record<string, string[]> };
+        semanticKind: string;
+        regionIds: string[];
+    }[];
+}
 export interface Integration {
     schemaVersion: 1;
     revision: string;
@@ -168,6 +190,8 @@ export interface RuntimeStructureRecord {
     names: { koTraditional: string | null; koModern: string | null; en: string };
     aliases: string[];
     haConceptId: string | null;
+    /** Opaque, side-deduplicated concept handles only; no TA2 IDs or evidence. */
+    learnerConceptKeys: string[];
     localDisplayEligible: boolean;
     inspectionEligible: boolean;
     defaultVisible: boolean;
@@ -183,7 +207,7 @@ export interface RuntimeStructureRecord {
 }
 export interface RuntimeIntegration {
     schemaVersion: 1;
-    projectionSchema: 'za-local-runtime-v1';
+    projectionSchema: 'za-local-runtime-v2';
     revision: string;
     datasetRevision: string;
     sourceOverlaySha256: string;
@@ -205,12 +229,36 @@ export function canDisplayLocally(row: StructureRecord, policy: Integration['pol
         && row.hardHoldReasons.length === 0 && !row.sourceHiddenStatePreserved.hideViewport
         && row.kind !== 'accessory' && row.regionIds.length > 0;
 }
-export function validateIntegration(value: unknown, dataset: Dataset): Integration {
+function normalizeConceptTerm(value: string) {
+    return Array.from(value.normalize('NFKC').toLocaleLowerCase()).filter(char => /[\p{L}\p{N}]/u.test(char)).join('');
+}
+export function validateIntegration(value: unknown, dataset: Dataset, frozenTargetLexicon: FrozenTargetLexicon): Integration {
     const i = value as Integration;
     if (i?.schemaVersion !== 1 || i.datasetRevision !== dataset.revision || !i.policy.localOnly || i.policy.publicRedistribution !== 'held'
         || i.policy.humanReview !== 'not_performed' || i.policy.localUseRights !== 'supported_local_prototype'
         || !/^[a-f0-9]{64}$/.test(i.policy.rightsEvidenceSha256))
         throw Error('integration provenance');
+    if (!frozenTargetLexicon || !/^[a-f0-9]{64}$/.test(frozenTargetLexicon.sha256)
+        || frozenTargetLexicon.targets.length !== FROZEN_T100_SCOPE.targets)
+        throw Error('frozen target lexicon provenance');
+    const frozenTargets = new Map(frozenTargetLexicon.targets.map(target => [target.id, target]));
+    if (frozenTargets.size !== frozenTargetLexicon.targets.length
+        || [...frozenTargets.values()].some(target => !/^TA2:\d+$/.test(target.id) || !target.term?.english
+            || typeof target.term.latin !== 'string' || !target.semanticKind || !Array.isArray(target.regionIds)))
+        throw Error('frozen target lexicon shape');
+    // Build the frozen vocabulary index once per validation run; never rescan 542 targets for each surface.
+    const exactLexiconIndex = new Map<string, Map<string, Set<string>>>();
+    for (const target of frozenTargetLexicon.targets) {
+        const values = [target.term.english, target.term.latin, ...Object.values(target.term.sourceSynonyms).flat()];
+        for (const value of new Set(values.filter(Boolean))) {
+            const key = normalizeConceptTerm(value);
+            const byTarget = exactLexiconIndex.get(key) ?? new Map<string, Set<string>>();
+            const matchedValues = byTarget.get(target.id) ?? new Set<string>();
+            matchedValues.add(value);
+            byTarget.set(target.id, matchedValues);
+            exactLexiconIndex.set(key, byTarget);
+        }
+    }
     const keys = new Set(dataset.instances.map(x => x.sourceKey));
     const instances = new Map(dataset.instances.map(x => [x.sourceKey, x]));
     const evidenceSources = new Map<string, IntegrationEvidenceSource>();
@@ -305,6 +353,70 @@ export function validateIntegration(value: unknown, dataset: Dataset): Integrati
                 if (!evidence || !fieldValue || evidence.value !== fieldValue || !evidence.locator.trim()
                     || !evidence.sourceIds.length || evidence.sourceIds.some(id => !evidenceSources.has(id)))
                     throw Error('name field provenance');
+            }
+        }
+        for (const link of row.learnerConceptLinks ?? []) {
+            exactKeys(link, ['conceptKey', 'relationKind', 'targetIds', 'memberCode', 'targetTermMatches', 'matchRule', 'evidenceIds', 'identityStatus', 'humanReview'], 'learner concept link fields');
+            if (link.conceptKey !== null && !/^LC-[a-f0-9]{20}$/.test(link.conceptKey)
+                || !['verified_class_member', 'normalized_exact_target_term', 'paired_source_concept', 'side_or_source_identity_conflict'].includes(link.relationKind)
+                || !Array.isArray(link.targetIds) || link.targetIds.some(id => !/^TA2:\d+$/.test(id))
+                || new Set(link.targetIds).size !== link.targetIds.length
+                || !Array.isArray(link.targetTermMatches) || !Array.isArray(link.evidenceIds)
+                || link.evidenceIds.some(id => !evidenceSources.has(id))
+                || typeof link.matchRule !== 'string' || !link.matchRule
+                || link.humanReview !== 'not_performed')
+                throw Error('learner concept link shape/provenance');
+            for (const match of link.targetTermMatches) {
+                exactKeys(match, ['targetId', 'matchedValues'], 'learner target-term match fields');
+                if (!link.targetIds.includes(match.targetId) || !Array.isArray(match.matchedValues) || !match.matchedValues.length
+                    || match.matchedValues.some(value => normalizeConceptTerm(value) !== normalizeConceptTerm(row.sourceName.replace(/\.[lr]$/i, ''))))
+                    throw Error('learner exact target-term relation');
+            }
+            if (link.relationKind === 'normalized_exact_target_term') {
+                if (link.targetIds.length !== 1 || !link.targetTermMatches.length
+                    || link.identityStatus !== 'evidence_backed' && link.identityStatus !== 'side_conflicted'
+                    || !link.evidenceIds.includes('fipat-ta2-t96-full-target-catalog')
+                    || !link.matchRule.includes('punctuation_fold_exact'))
+                    throw Error('learner exact-term link unsupported');
+                const sourceLabel = row.sourceName.replace(/\.[lr]$/i, '');
+                const lexicalMatches = [...(exactLexiconIndex.get(normalizeConceptTerm(sourceLabel)) ?? new Map())]
+                    .map(([targetId, values]) => ({ targetId, values: [...values].sort() }))
+                    .sort((left, right) => left.targetId.localeCompare(right.targetId));
+                if (lexicalMatches.length !== 1 || lexicalMatches[0].targetId !== link.targetIds[0]
+                    || link.targetTermMatches.length !== 1 || link.targetTermMatches[0].targetId !== lexicalMatches[0].targetId
+                    || JSON.stringify([...link.targetTermMatches[0].matchedValues].sort()) !== JSON.stringify(lexicalMatches[0].values))
+                    throw Error('learner exact-term relation differs from frozen target lexicon');
+                const target = frozenTargets.get(link.targetIds[0])!;
+                if (!target.semanticKind.includes(row.kind) || !target.regionIds.some(region => row.regionIds.includes(region)))
+                    throw Error('learner exact-term kind/region mismatch');
+            } else if (link.relationKind === 'verified_class_member') {
+                if (!link.conceptKey || !link.targetIds.length || link.targetIds.some(id => !frozenTargets.has(id)) || !link.memberCode
+                    || link.targetTermMatches.length || !['left', 'right'].includes(row.side ?? ''))
+                    throw Error('learner class-member link shape');
+                if (!link.matchRule.startsWith('exact frozen T96 class_member'))
+                    throw Error('learner class-member rule provenance');
+                const sideCode = link.memberCode + ':' + row.side;
+                const rows = row.targetRelationEvidence ?? [];
+                const matching = rows.filter(relation => link.targetIds.includes(relation.targetId)
+                    && relation.relationKind === 'class_member'
+                    && (relation.memberCode === sideCode || relation.memberCode === link.memberCode && relation.sourceSide === row.side));
+                if (!matching.length || link.evidenceIds.some(id => !matching.some(relation => relation.matchEvidenceSourceIds?.includes(id))))
+                    throw Error('learner class-member proof mismatch');
+                if (link.targetIds.some(id => {
+                    const target = frozenTargets.get(id)!;
+                    return !target.semanticKind.includes(row.kind) || !target.regionIds.some(region => row.regionIds.includes(region));
+                }))
+                    throw Error('learner class-member kind/region mismatch');
+            } else if (link.relationKind === 'paired_source_concept') {
+                const sideSuffix = row.sourceName.match(/\.([lr])$/i)?.[1]?.toLocaleLowerCase();
+                if (!link.conceptKey || link.targetIds.length || link.memberCode !== null || link.targetTermMatches.length
+                    || !link.evidenceIds.includes('za-t99-frozen-source-objects') || link.identityStatus !== 'source_label_pair_only'
+                    || !link.matchRule.startsWith('exact source base label')
+                    || !sideSuffix || (sideSuffix === 'l' ? 'left' : 'right') !== row.side)
+                    throw Error('learner source-pair link unsupported');
+            } else if (link.conceptKey !== null || link.memberCode !== null || link.targetTermMatches.length
+                || link.identityStatus !== 'held') {
+                throw Error('learner identity conflict must stay held');
             }
         }
         for (const relation of row.targetRelationEvidence ?? []) {
@@ -443,16 +555,31 @@ export function validateIntegration(value: unknown, dataset: Dataset): Integrati
     }
     if (seen.size !== keys.size)
         throw Error('missing source records');
+    const sourcePairGroups = new Map<string, StructureRecord[]>();
+    for (const row of i.objects) {
+        for (const link of row.learnerConceptLinks ?? []) {
+            if (link.relationKind === 'paired_source_concept' && link.conceptKey) {
+                const group = sourcePairGroups.get(link.conceptKey) ?? [];
+                group.push(row);
+                sourcePairGroups.set(link.conceptKey, group);
+            }
+        }
+    }
+    for (const rows of sourcePairGroups.values()) {
+        if (rows.length !== 2 || new Set(rows.map(row => row.side)).size !== 2
+            || rows.some(row => row.sourceName.replace(/\.[lr]$/i, '') !== rows[0].sourceName.replace(/\.[lr]$/i, '')))
+            throw Error('learner source-pair must be one explicit bilateral source label');
+    }
     const trapeziusCorrections = i.objects.filter(row => row.surfaceAssignmentCorrection?.correctionId === 'T100-TRAPEZIUS-SURFACE-ASSIGNMENT-2026-09-29-v1');
     if (trapeziusCorrections.length && (trapeziusCorrections.length !== 4
         || ['left', 'right'].some(side => !['superior', 'inferior'].every(part => trapeziusCorrections.some(row => row.side === side && row.surfaceAssignmentCorrection?.displayedPart === part)))))
         throw Error('incomplete trapezius surface-assignment correction pair');
     return i;
 }
-const RUNTIME_SCHEMA = 'za-local-runtime-v1' as const;
+const RUNTIME_SCHEMA = 'za-local-runtime-v2' as const;
 const FROZEN_T100_SCOPE = { targets: 542, memberships: 563, regions: 12 } as const;
 const projectionKeys = ['schemaVersion', 'projectionSchema', 'revision', 'datasetRevision', 'sourceOverlaySha256', 'rightsEvidenceSha256', 'scope', 'policy', 'objects'];
-const runtimeRowKeys = ['sourceKey', 'searchGroupKey', 'kind', 'regionIds', 'side', 'label', 'names', 'aliases', 'haConceptId', 'localDisplayEligible', 'inspectionEligible', 'defaultVisible', 'sourceOnly', 'humanReview', 'publicRedistribution', 'sourceHiddenStatePreserved', 'localUseRights', 'displayDecisionBasis', 'hardHoldReasons', 'bounds', 'relatedMuscles'];
+const runtimeRowKeys = ['sourceKey', 'searchGroupKey', 'kind', 'regionIds', 'side', 'label', 'names', 'aliases', 'haConceptId', 'learnerConceptKeys', 'localDisplayEligible', 'inspectionEligible', 'defaultVisible', 'sourceOnly', 'humanReview', 'publicRedistribution', 'sourceHiddenStatePreserved', 'localUseRights', 'displayDecisionBasis', 'hardHoldReasons', 'bounds', 'relatedMuscles'];
 const runtimePolicyKeys = ['localOnly', 'publicRedistribution', 'humanReview', 'localUseRights', 'rightsDecisionId'];
 function exactKeys(value: unknown, expected: string[], message: string): asserts value is Record<string, unknown> {
     if (!value || typeof value !== 'object' || Array.isArray(value)
@@ -471,8 +598,8 @@ function runtimeKindForDataset(kind: string): RuntimeStructureRecord['kind'] | n
             : kind === 'musculoskeletal_accessory' ? 'accessory' : null;
 }
 /** Strictly validate the developer ledger first, then emit one allowlisted learner projection. */
-export function buildRuntimeIntegration(value: unknown, dataset: Dataset, sourceOverlaySha256: string, rightsEvidenceSha256: string): RuntimeIntegration {
-    const full = validateIntegration(value, dataset);
+export function buildRuntimeIntegration(value: unknown, dataset: Dataset, sourceOverlaySha256: string, rightsEvidenceSha256: string, frozenTargetLexicon: FrozenTargetLexicon): RuntimeIntegration {
+    const full = validateIntegration(value, dataset, frozenTargetLexicon);
     if (!/^[a-f0-9]{64}$/.test(sourceOverlaySha256) || rightsEvidenceSha256 !== full.policy.rightsEvidenceSha256)
         throw Error('runtime projection source hashes');
     const projection: RuntimeIntegration = {
@@ -500,6 +627,7 @@ export function buildRuntimeIntegration(value: unknown, dataset: Dataset, source
             names: { ...row.names },
             aliases: [...row.aliases],
             haConceptId: row.haConceptId,
+            learnerConceptKeys: [...new Set((row.learnerConceptLinks ?? []).flatMap(link => link.conceptKey ? [link.conceptKey] : []))].sort(),
             localDisplayEligible: row.localDisplayEligible,
             inspectionEligible: row.inspectionEligible,
             defaultVisible: row.defaultVisible,
@@ -544,6 +672,8 @@ export function validateRuntimeIntegration(value: unknown, dataset: Dataset): Ru
             || !['bone', 'muscle', 'accessory'].includes(row.kind) || !row.searchGroupKey || !row.label
             || !Array.isArray(row.regionIds) || row.regionIds.some(id => typeof id !== 'string' || !id)
             || !Array.isArray(row.aliases) || row.aliases.some(alias => typeof alias !== 'string')
+            || !Array.isArray(row.learnerConceptKeys) || row.learnerConceptKeys.some(key => typeof key !== 'string' || !/^LC-[a-f0-9]{20}$/.test(key))
+            || new Set(row.learnerConceptKeys).size !== row.learnerConceptKeys.length
             || row.side !== null && typeof row.side !== 'string'
             || row.haConceptId !== null && (typeof row.haConceptId !== 'string' || !/^HA-[A-Z]-[A-Z0-9-]+$/.test(row.haConceptId)))
             throw Error('runtime row identity: ' + JSON.stringify({ sourceKey: row.sourceKey, geometryKind, kind: row.kind,
@@ -576,13 +706,14 @@ export function validateRuntimeIntegration(value: unknown, dataset: Dataset): Ru
         throw Error('runtime missing source record or region');
     return i;
 }
-type SearchableStructure = Pick<StructureRecord, 'sourceKey' | 'label' | 'names' | 'aliases' | 'localDisplayEligible' | 'regionIds' | 'haConceptId' | 'side'> & { sourceName?: string; searchGroupKey?: string; searchApproximate?: boolean };
+type SearchableStructure = Pick<StructureRecord, 'sourceKey' | 'label' | 'names' | 'aliases' | 'localDisplayEligible' | 'regionIds' | 'haConceptId' | 'side'> & { sourceName?: string; searchGroupKey?: string; searchApproximate?: boolean; learnerConceptKeys?: string[]; learnerConceptLinks?: StructureRecord['learnerConceptLinks'] };
 export function searchStructures<T extends SearchableStructure>(rows: T[], query: string, regions: string[]) {
     const candidates = rows.filter(r => r.localDisplayEligible && (query.trim() || !regions.length || r.regionIds.some(x => regions.includes(x))));
     const unique = new Map<string, T>();
     for (const r of candidates) {
         const key = r.searchGroupKey ?? r.sourceName?.replace(/\.[lr]$/, '') ?? r.sourceKey;
-        if (!unique.has(key))
+        const previous = unique.get(key);
+        if (!previous || (!previous.names.koModern && r.names.koModern))
             unique.set(key, r);
     }
     const byKey = new Map([...unique.values()].map(r => [r.sourceKey, r]));
@@ -598,7 +729,17 @@ export function readDatasetRoute(search: string, rows: SearchableStructure[], re
     const regions = (p.get('regions') ?? p.get('region') ?? '').split(',').filter(id => regionIds.includes(id));
     const id = p.get('source') ?? p.get('id');
     const side = p.get('side');
-    const row = id ? rows.find(r => r.localDisplayEligible && (r.sourceKey === id || r.haConceptId === id) && (!side || r.side === side)) : undefined;
+    let row = id ? rows.find(r => r.localDisplayEligible && (r.sourceKey === id || r.haConceptId === id) && (!side || r.side === side)) : undefined;
+    if (!id) {
+        const concept = p.get('concept');
+        if (concept && /^LC-[a-f0-9]{20}$/.test(concept)) {
+            const matches = rows.filter(r => r.localDisplayEligible
+                && (r.learnerConceptKeys?.includes(concept) || r.learnerConceptLinks?.some(link => link.conceptKey === concept))
+                && (!side || r.side === side));
+            if (matches.length === 1)
+                row = matches[0];
+        }
+    }
     return { regions: [...new Set(regions)], selected: row && (!regions.length || row.regionIds.some(r => regions.includes(r))) ? row.sourceKey : null };
 }
 export function datasetRouteQuery(route: DatasetRoute) { const p = new URLSearchParams(); if (route.regions.length)

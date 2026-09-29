@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "capturedAtLocal": "2026-09-30",
+  "status": "in_progress",
+  "acceptance": "partial",
+  "nextUnit": "bulk-verified-korean-naming-and-repeated-structures",
+  "nextId": "T100",
+  "nextOwner": "Luna Max",
+  "completedDelta": [
+    "226 unnamed surfaces classified into 113 side-deduplicated concept groups",
+    "67 evidence-backed Korean modern name applications",
+    "226 target/source/learner concept relation records applied",
+    "163 candidate-free target hierarchy triage",
+    "current runtime payload and processing measurement",
+    "one real browser route/card/side integration sample"
+  ],
+  "pending": [
+    "159 eligible surfaces lack a modern Korean name",
+    "75 target term gaps and recorded exact-query/identity exceptions remain",
+    "163 candidate-free targets remain unresolved as target-specific geometry/member relationships",
+    "full 542-target/member visual selection and active-scene FPS/GPU/memory remain open"
+  ],
+  "counts": {
+    "frozenTargetDenominators": {
+      "targets": 542,
+      "memberships": 563,
+      "regions": 12
+    },
+    "sourceObjects": 960,
+    "eligibleSurfaceRows": 672,
+    "previouslyUnnamedRowsClassified": 226,
+    "sideDeduplicatedConceptGroups": 113,
+    "explicitBilateralGroups": 111,
+    "conflictGroupsHeld": 2,
+    "sourceAndTargetLearnerRelations": {
+      "normalized_exact_target_term": 154,
+      "verified_class_member": 67,
+      "side_or_source_identity_conflict": 1,
+      "paired_source_concept": 4
+    },
+    "newEvidenceBackedModernKoreanSurfaceNames": 67,
+    "modernKoreanNameCoverageAfter": 513,
+    "candidateFreeTargetsClassified": 163,
+    "candidateFreeTriage": {
+      "no_exact_descendant_or_ancestor_surface_evidence_in_frozen_package": 2,
+      "ancestor_surface_representation_present_target_specific_surface_unresolved": 135,
+      "descendant_surface_representation_present_target_specific_surface_unresolved": 20,
+      "exact_source_label_observation_identity_crosswalk_needed": 6
+    },
+    "candidateFreeTargetsWithMappedAncestorSurfaceOnly": 135,
+    "candidateFreeTargetsWithoutExactDescendantOrAncestorSurface": 2,
+    "preexistingCanonicalHaBindingsPreserved": 130,
+    "sourceOnlyAndHumanReviewState": "preserved per original row; no human review added",
+    "publicRedistribution": "held",
+    "newGeometry": 0
+  },
+  "runtimeProjectionMeasurement": {
+    "sourceOverlaySha256": "80cf8797c2b7844a9f7efa25a4f8425d9d7dc572e4220cd9de016d9499378b77",
+    "rawOverlayFileBytes": 5728472,
+    "rawLedgerCompactResponseBytes": 4124318,
+    "runtimeProjectionResponseBytes": 841074,
+    "responseByteReductionPercent": 79.61,
+    "rawLedgerParseMedianMs": 4.475,
+    "runtimeProjectionParseMedianMs": 1.088,
+    "builderAndFullLedgerValidationMedianMs": 5.414,
+    "repeatedSearchBenchmark": {
+      "sourceConceptLabels": 113,
+      "frozenTargets": 542,
+      "rounds": 9,
+      "fullScanQueryMedianMs": 216.737,
+      "indexedLookupMedianMs": 0.12,
+      "relativeSpeedup": 1802.38,
+      "exactResultsMatch": true,
+      "method": "same 113 labels and 542 target terms; one normalized exact index reused vs scanning all target terms for each label; no fuzzy matching"
+    }
+  },
+  "evidence": [
+    "unnamed-concept-classification.json",
+    "target-gap-classification.json",
+    "candidate-free-triage-summary.md",
+    "semantic-validation.json",
+    "runtime-projection-measurement.json",
+    "browser-validation.json",
+    "verification-results.json",
+    "preservation-after.json"
+  ],
+  "scopeNote": "No T80/T58 execution; T100 remains partial."
+}

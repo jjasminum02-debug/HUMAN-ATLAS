@@ -17,7 +17,7 @@ export function wholeBodyPlugin(root: string): Plugin {
     name: 'local-compiled-datasets',
     configureServer(server) {
       // A new immutable snapshot or changed frozen dependency must be revalidated, never mixed.
-      server.watcher.add([`${cache}/datasets`, `${root}atlas-data/manifests`, `${cache}/bodyparts3d-r4/converted`]);
+      server.watcher.add([`${cache}/datasets`, `${root}atlas-data/manifests`, `${root}atlas-data/catalog/target-scope-t96.json`, `${cache}/bodyparts3d-r4/converted`]);
       const invalidate = (path: string) => { if(path.includes('atlas-data/')) { snapshots.clear(); runtimeProjections.clear(); } };
       server.watcher.on('change', invalidate).on('unlink', invalidate).on('add', invalidate);
       server.httpServer?.once('close', () => {
@@ -52,6 +52,15 @@ export function wholeBodyPlugin(root: string): Plugin {
             const bytes=await readFile(resolve(root,'atlas-data/overlays/za-local-integration.json'));
             const overlaySha256=sha(bytes);
             const overlay=JSON.parse(bytes.toString());
+            const targetScopeBytes=await readFile(resolve(root,'atlas-data/catalog/target-scope-t96.json'));
+            const targetScope=JSON.parse(targetScopeBytes.toString());
+            const targetScopeSha256=sha(targetScopeBytes);
+            const frozenTargetLexicon={
+              sha256:targetScopeSha256,
+              targets:targetScope.targets.map((target:{id:string;term:{english:string;latin:string;sourceSynonyms:Record<string,string[]>};semanticKind:string;regionIds:string[]})=>({
+                id:target.id,term:target.term,semanticKind:target.semanticKind,regionIds:target.regionIds,
+              })),
+            };
             const decisionPath=await realpath(resolve(root,overlay.policy.rightsEvidence));
             if(!decisionPath.startsWith(resolve(root,'work/evidence')+sep))throw Error('decision containment');
             const rightsEvidenceSha256=sha(await readFile(decisionPath));
@@ -59,10 +68,10 @@ export function wholeBodyPlugin(root: string): Plugin {
             const compiled=await snapshot('za-c7010a9');
             const dataset=validateDataset(compiled.manifest);
             if(dataset.revision!==overlay.datasetRevision)throw Error('stale integration');
-            const cacheKey=sha(Buffer.from([overlaySha256,dataset.revision,rightsEvidenceSha256].join('\n')));
+            const cacheKey=sha(Buffer.from([overlaySha256,dataset.revision,rightsEvidenceSha256,targetScopeSha256].join('\n')));
             let cached=runtimeProjections.get('za-c7010a9');
             if(!cached||cached.key!==cacheKey) {
-              const projection=buildRuntimeIntegration(overlay,dataset,overlaySha256,rightsEvidenceSha256);
+              const projection=buildRuntimeIntegration(overlay,dataset,overlaySha256,rightsEvidenceSha256,frozenTargetLexicon);
               cached={key:cacheKey,body:Buffer.from(JSON.stringify(projection))};
               runtimeProjections.set('za-c7010a9',cached);
             }

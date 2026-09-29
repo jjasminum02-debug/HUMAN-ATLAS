@@ -3,10 +3,25 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { gzipSync } from 'node:zlib';
 import { readFileSync } from 'node:fs';
-import { buildRuntimeIntegration, validateRuntimeIntegration, validateIntegration, searchStructures, canDisplayLocally, readDatasetRoute, datasetRouteQuery, type Integration } from './integration.ts';
+import { buildRuntimeIntegration, validateRuntimeIntegration, validateIntegration as validateIntegrationWithCatalog, searchStructures, canDisplayLocally, readDatasetRoute, datasetRouteQuery, type Integration, type FrozenTargetLexicon } from './integration.ts';
 import type { Dataset } from './schema.ts';
 const overlayBytes = readFileSync(new URL('../../../../atlas-data/overlays/za-local-integration.json', import.meta.url));
 const raw = JSON.parse(overlayBytes.toString('utf8')) as Integration;
+const targetScopeBytes = readFileSync(new URL('../../../../atlas-data/catalog/target-scope-t96.json', import.meta.url));
+const targetScope = JSON.parse(targetScopeBytes.toString('utf8')) as {
+    targets: Array<{ id: string; term: { english: string; latin: string; sourceSynonyms: Record<string, string[]> }; semanticKind: string; regionIds: string[] }>;
+};
+const frozenTargetLexicon: FrozenTargetLexicon = {
+    sha256: createHash('sha256').update(targetScopeBytes).digest('hex'),
+    targets: targetScope.targets,
+};
+const validateIntegration = (value: unknown, dataset: Dataset) => validateIntegrationWithCatalog(value, dataset, frozenTargetLexicon);
+const semanticBaseline = JSON.parse(readFileSync(new URL('../../../../work/evidence/T100/semantic-relations-2026-09-30/start-baseline.json', import.meta.url), 'utf8')) as {
+    preexistingHaConceptBindings: Array<{ sourceKey: string; haConceptId: string }>;
+    preservedUnnamedSurfaceState: Array<{ sourceKey: string; [key: string]: unknown }>;
+};
+const preexistingHaBySource = new Map(semanticBaseline.preexistingHaConceptBindings.map(binding => [binding.sourceKey, binding.haConceptId]));
+const preservedUnnamedBySource = new Map(semanticBaseline.preservedUnnamedSurfaceState.map(row => [row.sourceKey, row]));
 const compiled = JSON.parse(readFileSync(new URL('../../../../atlas-data/source-cache/datasets/za/compiled/manifest.json', import.meta.url), 'utf8')) as {
     revision: string;
     instances: Array<{ sourceKey: string; kind: string; lods: { detail: { resource: string } } }>;
@@ -50,7 +65,7 @@ const fixture = {
     })),
 } as Dataset;
 const runtimeOverlaySha256 = createHash('sha256').update(overlayBytes).digest('hex');
-const runtime = buildRuntimeIntegration(raw, fixture, runtimeOverlaySha256, raw.policy.rightsEvidenceSha256);
+const runtime = buildRuntimeIntegration(raw, fixture, runtimeOverlaySha256, raw.policy.rightsEvidenceSha256, frozenTargetLexicon);
 test('whole-source overlay retains records and independent release/review status', () => {
     const overlay = validateIntegration(raw, fixture);
     assert.equal(overlay.objects.length, 960);
@@ -107,7 +122,7 @@ test('common search and stable routes match the full validated ledger across nam
     assert.equal(searchStructures(runtime.objects, '승모근 하부', []).map(row => row.names.en).filter(name => /Ascending/.test(name)).length, 1);
 });
 test('runtime projection fails closed on stale inputs, policy drift, forbidden fields and incomplete identity', () => {
-    assert.throws(() => buildRuntimeIntegration(raw, fixture, runtimeOverlaySha256, '0'.repeat(64)));
+    assert.throws(() => buildRuntimeIntegration(raw, fixture, runtimeOverlaySha256, '0'.repeat(64), frozenTargetLexicon));
     assert.throws(() => validateRuntimeIntegration(runtime, { ...fixture, revision: 'stale' } as Dataset));
     for (const mutate of [
         (value: any) => { value.objects.pop(); },
@@ -424,8 +439,14 @@ test('T100 B04 records hand-bone members without leaking internal target termino
                 // Its exact English locator is distinct from projecting the internal target term.
                 assert.equal(row.nameEvidence?.koModern?.value, row.names.koModern,
                     `B04 terminology was projected without surface-level name evidence: ${term.targetId}:${query}`);
-                assert(row.names.en && row.nameEvidence?.koModern?.locator.includes(row.names.en),
-                    `B04 query matched a surface without its own exact English locator: ${term.targetId}:${query}:${row.sourceName}`);
+                if (row.nameEvidence?.koModern?.sourceIds.some(id => id.startsWith('kli-t100-'))) {
+                    assert(row.nameEvidence.koModern.locator.includes('구성명')
+                        && row.learnerConceptLinks?.some(link => link.relationKind === 'verified_class_member'),
+                    `T100 composed source name lacks member relation evidence: ${term.targetId}:${query}:${row.sourceName}`);
+                } else {
+                    assert(row.names.en && row.nameEvidence?.koModern?.locator.includes(row.names.en),
+                        `B04 query matched a surface without its own exact English locator: ${term.targetId}:${query}:${row.sourceName}`);
+                }
             }
         }
     }
@@ -629,4 +650,99 @@ test('stable source route roundtrips, old bound HA route resolves side, invalid/
     assert.equal(readDatasetRoute('?id=' + row.haConceptId + '&side=right', raw.objects, ids).selected, row.sourceKey);
     assert.equal(readDatasetRoute('?source=unknown', raw.objects, ids).selected, null);
     assert.deepEqual(readDatasetRoute('', raw.objects, ids), { regions: [], selected: null });
+});
+
+test('T100 semantic continuation groups the 226 unnamed surfaces without side duplicates and keeps unresolved identities held', () => {
+    const linked = raw.objects.filter(row => row.learnerConceptLinks?.length);
+    assert.equal(linked.length, 226);
+    const groups = new Map<string, typeof linked>();
+    for (const row of linked) {
+        const label = row.sourceName.replace(/\.[lr]$/i, '');
+        const group = groups.get(label) ?? [];
+        group.push(row);
+        groups.set(label, group);
+        assert.equal(row.learnerConceptLinks!.length, 1);
+        const link = row.learnerConceptLinks![0];
+        assert.equal(link.humanReview, 'not_performed');
+        if (link.relationKind === 'paired_source_concept')
+            assert(link.evidenceIds.includes('za-t99-frozen-source-objects'));
+        assert.equal(row.haConceptId ?? null, preexistingHaBySource.get(row.sourceKey) ?? null,
+            `T100 must preserve pre-existing HA binding for ${row.sourceName}`);
+        assert(!link.conceptKey || !/^HA-/.test(link.conceptKey));
+        const baseline = preservedUnnamedBySource.get(row.sourceKey)!;
+        for (const key of ['sourceOnly', 'publicRedistribution', 'humanReview', 'mappingStatus', 'regionIds', 'side',
+            'aliases', 'localDisplayEligible', 'inspectionEligible', 'defaultVisible'])
+            assert.deepEqual((row as unknown as Record<string, unknown>)[key], baseline[key], `${key} changed for ${row.sourceName}`);
+        assert.deepEqual({ koTraditional: row.names.koTraditional, en: row.names.en },
+            { koTraditional: (baseline.names as any).koTraditional, en: (baseline.names as any).en },
+            `non-modern names changed for ${row.sourceName}`);
+        assert(!/\p{Script=Han}/u.test(row.names.koModern ?? ''));
+    }
+    assert.equal(groups.size, 113);
+    const explicitPairs = [...groups.values()].filter(rows => rows.length === 2
+        && rows.some(row => row.side === 'left') && rows.some(row => row.side === 'right')
+        && !rows.some(row => row.sourceKey === 'ZA-c7010a9-0e655a17b4dd00a4d206bb71'));
+    assert.equal(explicitPairs.length, 111);
+    const kinds = linked.reduce((counts, row) => {
+        const relation = row.learnerConceptLinks![0].relationKind;
+        counts.set(relation, (counts.get(relation) ?? 0) + 1);
+        return counts;
+    }, new Map<string, number>());
+    assert.equal(kinds.get('verified_class_member'), 67);
+    assert.equal(kinds.get('normalized_exact_target_term'), 154);
+    assert.equal(kinds.get('paired_source_concept'), 4);
+    assert.equal(kinds.get('side_or_source_identity_conflict'), 1);
+
+    const handConflict = raw.objects.find(row => row.sourceName === 'Distal phalanx of fifth finger of hand.l')!;
+    assert.equal(handConflict.names.koModern, null);
+    assert.equal(handConflict.learnerConceptLinks![0].conceptKey, null);
+    assert.equal(handConflict.learnerConceptLinks![0].identityStatus, 'held');
+    const iliocostalis = groups.get('Iliocostalis colli muscle')!;
+    assert(iliocostalis.every(row => row.learnerConceptLinks![0].conceptKey === null));
+    assert(iliocostalis.every(row => row.learnerConceptLinks![0].identityStatus === 'side_conflicted'));
+
+    const modernNames = linked.filter(row => row.nameEvidence?.koModern?.sourceIds.some(id => id.startsWith('kli-t100-')));
+    assert.equal(modernNames.length, 67);
+    assert.equal(modernNames.filter(row => /phalanx of/.test(row.sourceName)).length, 55);
+    assert.equal(modernNames.filter(row => /metacarpal bone/.test(row.sourceName)).length, 8);
+    assert.equal(modernNames.filter(row => /(?:Triquetrum|Trapezium) bone/.test(row.sourceName)).length, 4);
+    for (const row of modernNames) {
+        assert.equal(row.names.koModern, row.nameEvidence!.koModern!.value);
+        assert(row.nameEvidence!.koModern!.sourceIds.every(id => raw.evidenceSources!.some(source => source.id === id)));
+    }
+    assert.equal(raw.objects.length, 960);
+    assert.equal(raw.objects.filter(row => row.localDisplayEligible).length, 672);
+    assert.equal(raw.objects.filter(row => row.haConceptId).length, 130);
+    assert.equal(raw.scope.targets, 542);
+    assert.equal(raw.scope.memberships, 563);
+    assert.equal(raw.scope.regions, 12);
+});
+test('opaque learner concept links resolve a selected side and fail closed when a bilateral side is omitted', () => {
+    const pair = raw.objects.find(row => row.learnerConceptLinks?.some(link => link.conceptKey && link.relationKind === 'verified_class_member'))!;
+    const key = pair.learnerConceptLinks!.find(link => link.conceptKey)!.conceptKey!;
+    const sibling = raw.objects.find(row => row !== pair && row.learnerConceptLinks?.some(link => link.conceptKey === key))!;
+    assert.notEqual(pair.side, sibling.side);
+    const regionIds = [...new Set(raw.objects.flatMap(row => row.regionIds))];
+    const left = pair.side === 'left' ? pair : sibling;
+    const right = pair.side === 'right' ? pair : sibling;
+    assert.equal(readDatasetRoute(`?concept=${key}&side=left`, raw.objects, regionIds).selected, left.sourceKey);
+    assert.equal(readDatasetRoute(`?concept=${key}&side=right`, raw.objects, regionIds).selected, right.sourceKey);
+    assert.equal(readDatasetRoute(`?concept=${key}`, raw.objects, regionIds).selected, null);
+    assert.equal(readDatasetRoute('?concept=LC-00000000000000000000&side=left', raw.objects, regionIds).selected, null);
+
+    const runtimePair = runtime.objects.find(row => row.sourceKey === left.sourceKey)!;
+    assert.deepEqual(runtimePair.learnerConceptKeys, [key]);
+    assert.equal(JSON.stringify(runtimePair).includes('TA2:'), false);
+    assert.equal(JSON.stringify(runtimePair).includes('targetRelationEvidence'), false);
+    assert.equal(readDatasetRoute(`?concept=${key}&side=left`, runtime.objects, regionIds).selected, left.sourceKey);
+});
+test('composed Korean phalanx and named carpal terms search to one source concept', () => {
+    for (const query of ['엄지손가락 끝마디뼈', '둘째발가락 첫마디뼈', '세모뼈', '큰마름뼈']) {
+        const results = searchStructures(runtime.objects, query, []);
+        assert.equal(results.length, 1, query);
+        assert.equal(results[0].searchApproximate, false, query);
+    }
+    const conflictResult = searchStructures(runtime.objects, '다섯째손가락 끝마디뼈', []);
+    assert.equal(conflictResult.length, 1);
+    assert.equal(conflictResult[0].side, 'right');
 });

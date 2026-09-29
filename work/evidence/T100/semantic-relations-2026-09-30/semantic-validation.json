@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "status": "pass_partial",
+  "checks": {
+    "frozenTargetDenominators": {
+      "targets": 542,
+      "memberships": 563,
+      "regions": 12
+    },
+    "sourceObjects": 960,
+    "eligibleSurfaceRows": 672,
+    "previouslyUnnamedRowsClassified": 226,
+    "sideDeduplicatedConceptGroups": 113,
+    "explicitBilateralGroups": 111,
+    "conflictGroupsHeld": 2,
+    "sourceAndTargetLearnerRelations": {
+      "normalized_exact_target_term": 154,
+      "verified_class_member": 67,
+      "side_or_source_identity_conflict": 1,
+      "paired_source_concept": 4
+    },
+    "newEvidenceBackedModernKoreanSurfaceNames": 67,
+    "modernKoreanNameCoverageAfter": 513,
+    "candidateFreeTargetsClassified": 163,
+    "candidateFreeTriage": {
+      "no_exact_descendant_or_ancestor_surface_evidence_in_frozen_package": 2,
+      "ancestor_surface_representation_present_target_specific_surface_unresolved": 135,
+      "descendant_surface_representation_present_target_specific_surface_unresolved": 20,
+      "exact_source_label_observation_identity_crosswalk_needed": 6
+    },
+    "candidateFreeTargetsWithMappedAncestorSurfaceOnly": 135,
+    "candidateFreeTargetsWithoutExactDescendantOrAncestorSurface": 2,
+    "preexistingCanonicalHaBindingsPreserved": 130,
+    "sourceOnlyAndHumanReviewState": "preserved per original row; no human review added",
+    "publicRedistribution": "held",
+    "newGeometry": 0
+  },
+  "inputSha256": {
+    "baselineOverlay": "e99a3169ff424b494003f885aebce437f3fa7258522b69719dd8fe27ca2affab",
+    "currentOverlay": "80cf8797c2b7844a9f7efa25a4f8425d9d7dc572e4220cd9de016d9499378b77",
+    "targetScopeT96": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
+    "compiledManifest": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42",
+    "conceptClassification": "d992849573f9e74bd53ed1fdf3cdc586b8182222d48ad5d7563e4dfd1426f4a6",
+    "candidateFreeTargetTriage": "d0f758749e722740011ab188467dbdf3fc1952f11d21aafe20abbf137854ddd8"
+  },
+  "remaining": [
+    "159/672 eligible surfaces still lack a modern Korean name.",
+    "163 candidate-free targets are classified within the frozen package, not resolved as anatomical absence; ancestor surfaces are not target-specific geometry.",
+    "Whole-body exact visual/member coverage and active scene FPS/GPU/memory acceptance are still open."
+  ]
+}

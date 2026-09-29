@@ -37,7 +37,7 @@ test('local integration route serves the validated compact allowlist, never the 
  const value=JSON.parse(response.body);
  const rawBytes=await readFile(root+'atlas-data/overlays/za-local-integration.json');
  const raw=JSON.parse(rawBytes.toString());
- assert.equal(value.projectionSchema,'za-local-runtime-v1');
+ assert.equal(value.projectionSchema,'za-local-runtime-v2');
  assert.equal(value.sourceOverlaySha256,createHash('sha256').update(rawBytes).digest('hex'));
  assert.equal(value.rightsEvidenceSha256,raw.policy.rightsEvidenceSha256);
  assert.equal(value.objects.length,960);
