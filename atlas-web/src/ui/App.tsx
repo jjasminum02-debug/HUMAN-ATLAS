@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { WholeBodyViewer } from '../viewer/wholeBody/WholeBodyViewer';
 import { validateDataset, type Dataset } from '../viewer/datasets/schema';
-import { validateIntegration, searchStructures, readDatasetRoute, datasetRouteQuery, type Integration, type DatasetRoute, type StructureRecord } from '../viewer/datasets/integration';
+import { validateRuntimeIntegration, searchStructures, readDatasetRoute, datasetRouteQuery, type RuntimeIntegration, type DatasetRoute, type RuntimeStructureRecord } from '../viewer/datasets/integration';
 import { structureTextForLearner, motionActionOptionsForLearner } from '../data/learning';
 import navigation from '../../../atlas-data/navigation/atlas-navigation.json';
 import { AtlasLoading } from './AtlasLoading';
@@ -9,7 +9,7 @@ import './styles.css';
 import './atlasShell.css';
 const regionIds = navigation.categories.map(c => c.id);
 function NameRows({ row }: {
-    row: StructureRecord;
+    row: RuntimeStructureRecord;
 }) {
     return <div className="names-card" aria-label="이름">{[['우리말명', row.names.koModern], ['한자어명 (한글 표기)', row.names.koTraditional], ['영어명', row.names.en]].map(([label, value]) => <div key={label}><span>{label}</span><strong>{value || '이름 정리 중'}</strong></div>)}</div>;
 }
@@ -17,7 +17,7 @@ function NameRows({ row }: {
 export default function App() {
     const [data, setData] = useState<{
         dataset: Dataset;
-        integration: Integration;
+        integration: RuntimeIntegration;
     } | null>(null);
     const [homeRevision, setHomeRevision] = useState(0);
     const [error, setError] = useState(false);
@@ -35,7 +35,7 @@ export default function App() {
         void Promise.all(['/__atlas/datasets/za-c7010a9/manifest.json', '/__atlas/integration.json'].map(async (url) => { const response = await fetch(url, { signal: abort.signal }); if (!response.ok)
             throw Error('자료 연결 실패'); return response.json(); }))
             .then(([raw, overlay]) => { if (abort.signal.aborted)
-            return; const dataset = validateDataset(raw); const integration = validateIntegration(overlay, dataset); setData({ dataset, integration }); setRoute(readDatasetRoute(location.search, integration.objects, regionIds)); })
+            return; const dataset = validateDataset(raw); const integration = validateRuntimeIntegration(overlay, dataset); setData({ dataset, integration }); setRoute(readDatasetRoute(location.search, integration.objects, regionIds)); })
             .catch(() => { if (!abort.signal.aborted)
             setError(true); }).finally(() => clearTimeout(timer));
         return () => { clearTimeout(timer); abort.abort(); };

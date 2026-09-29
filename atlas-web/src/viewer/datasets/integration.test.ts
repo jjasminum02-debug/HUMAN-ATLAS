@@ -1,12 +1,15 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { gzipSync } from 'node:zlib';
 import { readFileSync } from 'node:fs';
-import { validateIntegration, searchStructures, canDisplayLocally, readDatasetRoute, datasetRouteQuery, type Integration } from './integration.ts';
+import { buildRuntimeIntegration, validateRuntimeIntegration, validateIntegration, searchStructures, canDisplayLocally, readDatasetRoute, datasetRouteQuery, type Integration } from './integration.ts';
 import type { Dataset } from './schema.ts';
-const raw = JSON.parse(readFileSync(new URL('../../../../atlas-data/overlays/za-local-integration.json', import.meta.url), 'utf8')) as Integration;
+const overlayBytes = readFileSync(new URL('../../../../atlas-data/overlays/za-local-integration.json', import.meta.url));
+const raw = JSON.parse(overlayBytes.toString('utf8')) as Integration;
 const compiled = JSON.parse(readFileSync(new URL('../../../../atlas-data/source-cache/datasets/za/compiled/manifest.json', import.meta.url), 'utf8')) as {
     revision: string;
-    instances: Array<{ sourceKey: string; lods: { detail: { resource: string } } }>;
+    instances: Array<{ sourceKey: string; kind: string; lods: { detail: { resource: string } } }>;
 };
 const skullBatch = JSON.parse(readFileSync(new URL('../../../../work/evidence/T100/batches/2026-09-29-B01-skull-names/term-and-correspondence-ledger.json', import.meta.url), 'utf8')) as {
     targets: Array<{ targetId: string; sourceMembers: string[]; sourceObjectNames: string[]; koModern: string; koTraditional: string; latin: string; kmleSourceId: string }>;
@@ -42,15 +45,85 @@ const fixture = {
     revision: raw.datasetRevision,
     instances: raw.objects.map(row => ({
         sourceKey: row.sourceKey,
+        kind: datasetInstances.get(row.sourceKey)?.kind,
         lods: { detail: { resource: datasetInstances.get(row.sourceKey)?.lods.detail.resource } },
     })),
 } as Dataset;
+const runtimeOverlaySha256 = createHash('sha256').update(overlayBytes).digest('hex');
+const runtime = buildRuntimeIntegration(raw, fixture, runtimeOverlaySha256, raw.policy.rightsEvidenceSha256);
 test('whole-source overlay retains records and independent release/review status', () => {
     const overlay = validateIntegration(raw, fixture);
     assert.equal(overlay.objects.length, 960);
     assert.equal(overlay.objects.filter(r => r.localDisplayEligible).length, 672);
     assert(overlay.objects.every(r => r.publicRedistribution === 'held' && r.humanReview === 'not_performed'));
     assert.equal(new Set(overlay.objects.flatMap(r => r.regionIds)).size, 12);
+});
+test('common projection preserves learner/search/selection fields and strips the developer evidence ledger', () => {
+    const projected = validateRuntimeIntegration(runtime, fixture);
+    assert.equal(projected.objects.length, 960);
+    assert.deepEqual(projected.scope, { targets: 542, memberships: 563, regions: 12 });
+    assert.equal(projected.objects.filter(r => r.localDisplayEligible).length, 672);
+    assert.equal(projected.objects.filter(r => r.haConceptId).length, 130);
+    assert(projected.objects.every(r => r.publicRedistribution === 'held' && r.humanReview === 'not_performed'));
+    assert.deepEqual(projected.objects.map(r => r.sourceKey), raw.objects.map(r => r.sourceKey));
+    for (let index = 0; index < raw.objects.length; index++) {
+        const source = raw.objects[index], output = projected.objects[index];
+        assert.deepEqual({ label: output.label, names: output.names, aliases: output.aliases, kind: output.kind, regionIds: output.regionIds,
+            side: output.side, haConceptId: output.haConceptId, localDisplayEligible: output.localDisplayEligible,
+            inspectionEligible: output.inspectionEligible, defaultVisible: output.defaultVisible, sourceOnly: output.sourceOnly,
+            hidden: output.sourceHiddenStatePreserved, localUseRights: output.localUseRights, displayDecisionBasis: output.displayDecisionBasis,
+            hardHoldReasons: output.hardHoldReasons, bounds: output.bounds, relatedMuscles: output.relatedMuscles },
+        { label: source.label, names: source.names, aliases: source.aliases, kind: source.kind, regionIds: source.regionIds,
+            side: source.side, haConceptId: source.haConceptId, localDisplayEligible: source.localDisplayEligible,
+            inspectionEligible: source.inspectionEligible, defaultVisible: source.defaultVisible, sourceOnly: source.sourceOnly,
+            hidden: source.sourceHiddenStatePreserved, localUseRights: source.localUseRights, displayDecisionBasis: source.displayDecisionBasis,
+            hardHoldReasons: source.hardHoldReasons, bounds: source.bounds, relatedMuscles: source.relatedMuscles ?? [] });
+        assert.equal(output.searchGroupKey, source.sourceName.replace(/\.[lr]$/, ''));
+    }
+    const forbidden = /TA2:\d+|targetTerminologyEvidence|targetRelationEvidence|evidenceSources|nameEvidence|locator|work\/evidence|https?:\/\//;
+    const serialized = JSON.stringify(projected);
+    assert.equal(forbidden.test(serialized), false);
+    assert(!('targetId' in projected.objects[0]) && !('sourceName' in projected.objects[0]));
+    assert(Buffer.byteLength(serialized) < Math.floor(Buffer.byteLength(JSON.stringify(raw)) * .6));
+    assert(gzipSync(serialized).byteLength < Buffer.byteLength(serialized));
+});
+test('common search and stable routes match the full validated ledger across names, sides and all regions', () => {
+    const queries = ['이마뼈', '마루뼈', '고리뼈', '중쇠뼈', '허리뼈', '갈비뼈', '손목뼈', '손허리뼈', '첫째 발허리뼈',
+        '승모근 상부', '승모근 하부', '광배근', '넓은등근', 'latissimus', 'spleinus'];
+    for (const query of queries) {
+        assert.deepEqual(searchStructures(runtime.objects, query, []).map(r => [r.sourceKey, r.searchApproximate]),
+            searchStructures(raw.objects, query, []).map(r => [r.sourceKey, r.searchApproximate]), query);
+    }
+    for (const region of [...new Set(raw.objects.flatMap(row => row.regionIds))]) {
+        assert.deepEqual(searchStructures(runtime.objects, '', [region]).map(r => r.sourceKey),
+            searchStructures(raw.objects, '', [region]).map(r => r.sourceKey), region);
+    }
+    for (const row of raw.objects.filter(row => row.localDisplayEligible)) {
+        const query = '?source=' + encodeURIComponent(row.sourceKey);
+        assert.deepEqual(readDatasetRoute(query, runtime.objects, [...new Set(raw.objects.flatMap(x => x.regionIds))]),
+            readDatasetRoute(query, raw.objects, [...new Set(raw.objects.flatMap(x => x.regionIds))]));
+    }
+    assert.equal(searchStructures(runtime.objects, '승모근 상부', []).map(row => row.names.en).filter(name => /Descending/.test(name)).length, 1);
+    assert.equal(searchStructures(runtime.objects, '승모근 하부', []).map(row => row.names.en).filter(name => /Ascending/.test(name)).length, 1);
+});
+test('runtime projection fails closed on stale inputs, policy drift, forbidden fields and incomplete identity', () => {
+    assert.throws(() => buildRuntimeIntegration(raw, fixture, runtimeOverlaySha256, '0'.repeat(64)));
+    assert.throws(() => validateRuntimeIntegration(runtime, { ...fixture, revision: 'stale' } as Dataset));
+    for (const mutate of [
+        (value: any) => { value.objects.pop(); },
+        (value: any) => { value.objects[1] = value.objects[0]; },
+        (value: any) => { value.policy.localOnly = false; },
+        (value: any) => { value.policy.publicRedistribution = 'allowed'; },
+        (value: any) => { value.policy.humanReview = 'reviewed'; },
+        (value: any) => { value.objects[0].localDisplayEligible = !value.objects[0].localDisplayEligible; },
+        (value: any) => { value.objects[0].targetRelationEvidence = []; },
+        (value: any) => { value.objects[0].relatedMuscles = [{ sourceKey: 'missing', label: '근육', roles: ['origin'] }]; },
+        (value: any) => { value.rightsEvidenceSha256 = 'bad'; },
+    ]) {
+        const bad = structuredClone(runtime);
+        mutate(bad);
+        assert.throws(() => validateRuntimeIntegration(bad, fixture));
+    }
 });
 test('historical non-approval, public hold and human review do not block evidenced local rendering', () => {
     const row = raw.objects.find(r => r.localDisplayEligible)!;

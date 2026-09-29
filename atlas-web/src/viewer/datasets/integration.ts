@@ -157,6 +157,47 @@ export interface Integration {
     targetTerminologyEvidence?: TargetTerminologyEvidence[];
     objects: StructureRecord[];
 }
+/** Learner/runtime rows intentionally exclude developer evidence, target IDs, locators and local paths. */
+export interface RuntimeStructureRecord {
+    sourceKey: string;
+    searchGroupKey: string;
+    kind: 'bone' | 'muscle' | 'accessory';
+    regionIds: string[];
+    side: string | null;
+    label: string;
+    names: { koTraditional: string | null; koModern: string | null; en: string };
+    aliases: string[];
+    haConceptId: string | null;
+    localDisplayEligible: boolean;
+    inspectionEligible: boolean;
+    defaultVisible: boolean;
+    sourceOnly: boolean;
+    humanReview: 'not_performed';
+    publicRedistribution: 'held';
+    sourceHiddenStatePreserved: { hideRender: boolean; hideViewport: boolean };
+    localUseRights: string;
+    displayDecisionBasis: string;
+    hardHoldReasons: string[];
+    bounds: [[number, number, number], [number, number, number]];
+    relatedMuscles: { sourceKey: string; label: string; roles: string[] }[];
+}
+export interface RuntimeIntegration {
+    schemaVersion: 1;
+    projectionSchema: 'za-local-runtime-v1';
+    revision: string;
+    datasetRevision: string;
+    sourceOverlaySha256: string;
+    rightsEvidenceSha256: string;
+    scope: { targets: number; memberships: number; regions: number };
+    policy: {
+        localOnly: true;
+        publicRedistribution: 'held';
+        humanReview: 'not_performed';
+        localUseRights: 'supported_local_prototype';
+        rightsDecisionId: string;
+    };
+    objects: RuntimeStructureRecord[];
+}
 /** Historical non-approval, public-release holds and optional human review are NOT local display gates. */
 export function canDisplayLocally(row: StructureRecord, policy: Integration['policy']) {
     return policy.localOnly && policy.localUseRights === 'supported_local_prototype'
@@ -166,7 +207,9 @@ export function canDisplayLocally(row: StructureRecord, policy: Integration['pol
 }
 export function validateIntegration(value: unknown, dataset: Dataset): Integration {
     const i = value as Integration;
-    if (i?.schemaVersion !== 1 || i.datasetRevision !== dataset.revision || !i.policy.localOnly || i.policy.publicRedistribution !== 'held' || !/^[a-f0-9]{64}$/.test(i.policy.rightsEvidenceSha256))
+    if (i?.schemaVersion !== 1 || i.datasetRevision !== dataset.revision || !i.policy.localOnly || i.policy.publicRedistribution !== 'held'
+        || i.policy.humanReview !== 'not_performed' || i.policy.localUseRights !== 'supported_local_prototype'
+        || !/^[a-f0-9]{64}$/.test(i.policy.rightsEvidenceSha256))
         throw Error('integration provenance');
     const keys = new Set(dataset.instances.map(x => x.sourceKey));
     const instances = new Map(dataset.instances.map(x => [x.sourceKey, x]));
@@ -402,11 +445,139 @@ export function validateIntegration(value: unknown, dataset: Dataset): Integrati
         throw Error('incomplete trapezius surface-assignment correction pair');
     return i;
 }
-export function searchStructures(rows: StructureRecord[], query: string, regions: string[]) {
+const RUNTIME_SCHEMA = 'za-local-runtime-v1' as const;
+const FROZEN_T100_SCOPE = { targets: 542, memberships: 563, regions: 12 } as const;
+const projectionKeys = ['schemaVersion', 'projectionSchema', 'revision', 'datasetRevision', 'sourceOverlaySha256', 'rightsEvidenceSha256', 'scope', 'policy', 'objects'];
+const runtimeRowKeys = ['sourceKey', 'searchGroupKey', 'kind', 'regionIds', 'side', 'label', 'names', 'aliases', 'haConceptId', 'localDisplayEligible', 'inspectionEligible', 'defaultVisible', 'sourceOnly', 'humanReview', 'publicRedistribution', 'sourceHiddenStatePreserved', 'localUseRights', 'displayDecisionBasis', 'hardHoldReasons', 'bounds', 'relatedMuscles'];
+const runtimePolicyKeys = ['localOnly', 'publicRedistribution', 'humanReview', 'localUseRights', 'rightsDecisionId'];
+function exactKeys(value: unknown, expected: string[], message: string): asserts value is Record<string, unknown> {
+    if (!value || typeof value !== 'object' || Array.isArray(value)
+        || Object.keys(value).sort().join('\u0000') !== [...expected].sort().join('\u0000'))
+        throw Error(message);
+}
+function runtimeCanDisplayLocally(row: RuntimeStructureRecord, policy: RuntimeIntegration['policy']) {
+    return policy.localOnly && policy.localUseRights === 'supported_local_prototype'
+        && row.localUseRights === 'supported_local_prototype' && row.displayDecisionBasis === policy.rightsDecisionId
+        && row.hardHoldReasons.length === 0 && !row.sourceHiddenStatePreserved.hideViewport
+        && row.kind !== 'accessory' && row.regionIds.length > 0;
+}
+function runtimeKindForDataset(kind: string): RuntimeStructureRecord['kind'] | null {
+    return kind === 'skeletal_surface' ? 'bone'
+        : kind === 'muscle_surface_or_part' ? 'muscle'
+            : kind === 'musculoskeletal_accessory' ? 'accessory' : null;
+}
+/** Strictly validate the developer ledger first, then emit one allowlisted learner projection. */
+export function buildRuntimeIntegration(value: unknown, dataset: Dataset, sourceOverlaySha256: string, rightsEvidenceSha256: string): RuntimeIntegration {
+    const full = validateIntegration(value, dataset);
+    if (!/^[a-f0-9]{64}$/.test(sourceOverlaySha256) || rightsEvidenceSha256 !== full.policy.rightsEvidenceSha256)
+        throw Error('runtime projection source hashes');
+    const projection: RuntimeIntegration = {
+        schemaVersion: 1,
+        projectionSchema: RUNTIME_SCHEMA,
+        revision: full.revision,
+        datasetRevision: full.datasetRevision,
+        sourceOverlaySha256,
+        rightsEvidenceSha256,
+        scope: { ...full.scope },
+        policy: {
+            localOnly: full.policy.localOnly as true,
+            publicRedistribution: full.policy.publicRedistribution as 'held',
+            humanReview: full.policy.humanReview as 'not_performed',
+            localUseRights: full.policy.localUseRights as 'supported_local_prototype',
+            rightsDecisionId: full.policy.rightsDecisionId,
+        },
+        objects: full.objects.map(row => ({
+            sourceKey: row.sourceKey,
+            searchGroupKey: row.sourceName.replace(/\.[lr]$/, ''),
+            kind: row.kind,
+            regionIds: [...row.regionIds],
+            side: row.side,
+            label: row.label,
+            names: { ...row.names },
+            aliases: [...row.aliases],
+            haConceptId: row.haConceptId,
+            localDisplayEligible: row.localDisplayEligible,
+            inspectionEligible: row.inspectionEligible,
+            defaultVisible: row.defaultVisible,
+            sourceOnly: row.sourceOnly,
+            humanReview: row.humanReview as 'not_performed',
+            publicRedistribution: row.publicRedistribution as 'held',
+            sourceHiddenStatePreserved: { ...row.sourceHiddenStatePreserved },
+            localUseRights: row.localUseRights,
+            displayDecisionBasis: row.displayDecisionBasis,
+            hardHoldReasons: [...row.hardHoldReasons],
+            bounds: [[...row.bounds[0]], [...row.bounds[1]]] as RuntimeStructureRecord['bounds'],
+            relatedMuscles: (row.relatedMuscles ?? []).map(related => ({ sourceKey: related.sourceKey, label: related.label, roles: [...related.roles] })),
+        })),
+    };
+    return validateRuntimeIntegration(projection, dataset);
+}
+/** Client-side defense for the compact endpoint: exact field allowlist, fixed denominator and display policy. */
+export function validateRuntimeIntegration(value: unknown, dataset: Dataset): RuntimeIntegration {
+    exactKeys(value, projectionKeys, 'runtime projection shape');
+    const i = value as unknown as RuntimeIntegration;
+    if (i.schemaVersion !== 1 || i.projectionSchema !== RUNTIME_SCHEMA || !i.revision
+        || i.datasetRevision !== dataset.revision || !/^[a-f0-9]{64}$/.test(i.sourceOverlaySha256)
+        || !/^[a-f0-9]{64}$/.test(i.rightsEvidenceSha256))
+        throw Error('runtime projection provenance');
+    exactKeys(i.scope, ['targets', 'memberships', 'regions'], 'runtime scope shape');
+    if (i.scope.targets !== FROZEN_T100_SCOPE.targets || i.scope.memberships !== FROZEN_T100_SCOPE.memberships || i.scope.regions !== FROZEN_T100_SCOPE.regions)
+        throw Error('runtime frozen scope');
+    exactKeys(i.policy, runtimePolicyKeys, 'runtime policy shape');
+    if (i.policy.localOnly !== true || i.policy.publicRedistribution !== 'held' || i.policy.humanReview !== 'not_performed'
+        || i.policy.localUseRights !== 'supported_local_prototype' || !i.policy.rightsDecisionId)
+        throw Error('runtime global policy');
+    const instances = new Map(dataset.instances.map(instance => [instance.sourceKey, instance]));
+    if (!Array.isArray(i.objects) || i.objects.length !== dataset.instances.length || instances.size !== dataset.instances.length)
+        throw Error('runtime object cardinality');
+    const seen = new Set<string>();
+    const regions = new Set<string>();
+    for (const row of i.objects) {
+        exactKeys(row, runtimeRowKeys, 'runtime row shape');
+        const instance = instances.get(row.sourceKey);
+        const geometryKind = instance ? runtimeKindForDataset(instance.kind) : null;
+        if (!row.sourceKey || !instance || seen.has(row.sourceKey) || !geometryKind || (row.kind !== 'accessory' && geometryKind !== row.kind)
+            || !['bone', 'muscle', 'accessory'].includes(row.kind) || !row.searchGroupKey || !row.label
+            || !Array.isArray(row.regionIds) || row.regionIds.some(id => typeof id !== 'string' || !id)
+            || !Array.isArray(row.aliases) || row.aliases.some(alias => typeof alias !== 'string')
+            || row.side !== null && typeof row.side !== 'string'
+            || row.haConceptId !== null && (typeof row.haConceptId !== 'string' || !/^HA-[A-Z]-[A-Z0-9-]+$/.test(row.haConceptId)))
+            throw Error('runtime row identity: ' + JSON.stringify({ sourceKey: row.sourceKey, geometryKind, kind: row.kind,
+                searchGroupKey: row.searchGroupKey, regionIds: row.regionIds, side: row.side, haConceptId: row.haConceptId }));
+        row.regionIds.forEach(region => regions.add(region));
+        exactKeys(row.names, ['koTraditional', 'koModern', 'en'], 'runtime names shape');
+        if (typeof row.names.en !== 'string' || ['koTraditional', 'koModern'].some(key => row.names[key as 'koTraditional' | 'koModern'] !== null && typeof row.names[key as 'koTraditional' | 'koModern'] !== 'string'))
+            throw Error('runtime names');
+        exactKeys(row.sourceHiddenStatePreserved, ['hideRender', 'hideViewport'], 'runtime hidden-state shape');
+        if (typeof row.sourceHiddenStatePreserved.hideRender !== 'boolean' || typeof row.sourceHiddenStatePreserved.hideViewport !== 'boolean'
+            || typeof row.localDisplayEligible !== 'boolean' || typeof row.inspectionEligible !== 'boolean' || typeof row.defaultVisible !== 'boolean'
+            || typeof row.sourceOnly !== 'boolean' || row.humanReview !== 'not_performed' || row.publicRedistribution !== 'held'
+            || typeof row.localUseRights !== 'string' || typeof row.displayDecisionBasis !== 'string'
+            || !Array.isArray(row.hardHoldReasons) || row.hardHoldReasons.some(reason => typeof reason !== 'string')
+            || !Array.isArray(row.bounds) || row.bounds.length !== 2 || row.bounds.some(bound => !Array.isArray(bound) || bound.length !== 3 || bound.some(value => !Number.isFinite(value))))
+            throw Error('runtime row policy/geometry');
+        if (row.localDisplayEligible !== runtimeCanDisplayLocally(row, i.policy) || row.defaultVisible !== row.localDisplayEligible
+            || row.inspectionEligible && !row.localDisplayEligible)
+            throw Error('runtime local display decision mismatch');
+        if (!Array.isArray(row.relatedMuscles))
+            throw Error('runtime related-muscle shape');
+        for (const related of row.relatedMuscles) {
+            exactKeys(related, ['sourceKey', 'label', 'roles'], 'runtime related-muscle fields');
+            if (!related.sourceKey || !instances.has(related.sourceKey) || !related.label || !Array.isArray(related.roles) || related.roles.some(role => typeof role !== 'string'))
+                throw Error('runtime related-muscle reference');
+        }
+        seen.add(row.sourceKey);
+    }
+    if (seen.size !== instances.size || regions.size !== FROZEN_T100_SCOPE.regions)
+        throw Error('runtime missing source record or region');
+    return i;
+}
+type SearchableStructure = Pick<StructureRecord, 'sourceKey' | 'label' | 'names' | 'aliases' | 'localDisplayEligible' | 'regionIds' | 'haConceptId' | 'side'> & { sourceName?: string; searchGroupKey?: string; searchApproximate?: boolean };
+export function searchStructures<T extends SearchableStructure>(rows: T[], query: string, regions: string[]) {
     const candidates = rows.filter(r => r.localDisplayEligible && (query.trim() || !regions.length || r.regionIds.some(x => regions.includes(x))));
-    const unique = new Map<string, StructureRecord>();
+    const unique = new Map<string, T>();
     for (const r of candidates) {
-        const key = r.sourceName.replace(/\.[lr]$/, '');
+        const key = r.searchGroupKey ?? r.sourceName?.replace(/\.[lr]$/, '') ?? r.sourceKey;
         if (!unique.has(key))
             unique.set(key, r);
     }
@@ -418,7 +589,7 @@ export interface DatasetRoute {
     regions: string[];
     selected: string | null;
 }
-export function readDatasetRoute(search: string, rows: StructureRecord[], regionIds: string[]): DatasetRoute {
+export function readDatasetRoute(search: string, rows: SearchableStructure[], regionIds: string[]): DatasetRoute {
     const p = new URLSearchParams(search);
     const regions = (p.get('regions') ?? p.get('region') ?? '').split(',').filter(id => regionIds.includes(id));
     const id = p.get('source') ?? p.get('id');

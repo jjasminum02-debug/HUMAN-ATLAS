@@ -318,7 +318,7 @@
       "spec": "work/tasks/T100.md",
       "scope": "T98 전체 target와 T99 실제 전체dataset 산출물을 사용한다. 25 설계5절에 따라 하나의 scene에 전신bones/muscles를 넣고12부위/복수region/좌우/세 이름/검색/typed card를 전체coverage matrix로 연결한다. T105–121의 exact 대상/보류/지역자료를 내부workUnits로 흡수하고 historical source나 ID를 삭제하지 않는다. 얼굴표정근/광배근/양측상완/견갑골/요추·엉치뼈/손발·골반바닥을 빠뜨리지 않는다. source-only 관찰과 canonical 학습 선택은 별도이며 이름만으로binding을 만들지 않는다. 기존controller를 재사용해 주변흐림·선택반투명·숨김·격리·맞춤·undo/복원 핵심을 함께 구현한다. held/layer-off를 복원으로 노출하지 않는다. 전체overview에서 시작하고 camera연속성/미니멀UI를 지킨다. 표정근motion은disabled, 새애니메이션·신경3D·검증전엑셀본문은 넣지 않는다. 고정 10개 종료 대신 26 설계의 공통 전수처리와 예외 의미검증을 사용하고 같은 T100을 재개하며 첫부위를 전신완료로 부르지 않는다. 실제12부위·선택·성능evidence가필수다. 2026-09-29 사용자 정정: 과거 not_approved_by_this_task/공개 재배포 held/사람검토 미수행은 일괄 차단 조건이 아니다. 25 설계 마지막 상태 교정과 T100 resolution-2026-09-29 현재 decision overlay를 적용하고, 남은 의미/이름/형상 누락만 처리한다. 2026-09-29 효율화: design/2026-09-25-muscle-atlas/26-T100-BULK-DELIVERY-PLAN.md를 읽고 A 공통 builder/validator 및 경량 runtime projection → B 전체 명칭/반복 구조 일괄 연결 → C 실제 예외/누락 해결 → D 최종 통합 검증 순서로 수행한다. B01–B04와 승모근 교정을 보존한다. 10개마다 종료·전체 빌드·브라우저 검증·전용 코드를 반복하지 않는다. 상세 evidence는 개발 원장에 두고 앱에는 필수 필드만 전달하되 policy 검사를 보존한다. 필수 gap이 남으면 완료로 세지 않는다.",
       "progress": {
-        "nextUnit": "build-common-data-pipeline-and-compact-runtime-projection",
+        "nextUnit": "bulk-verified-korean-naming-and-repeated-structures",
         "completedUnits": [
           "audit-frozen-inputs-and-actual-compiled-chunks",
           "build-12-region-542-target-563-membership-coverage-matrix",
@@ -346,10 +346,10 @@
           "T100-B05: add only 58 exact class-member relations across 40 existing source objects; retain five no-direct-surface targets and partial knee sesamoid group",
           "T100-B05: verify internal TA2/name evidence is not newly exposed in learner search while preserving pre-existing first/fifth metatarsal learner rows",
           "T100-B05: run strict provenance, exact-member, laterality, search, fixed-denominator, rights/review, and source-preservation checks",
-          "T100-B05: pass whole-body regression 37/37, typecheck, production build, compiled dataset hash checks, and actual browser overview/search validation"
+          "T100-B05: pass whole-body regression 37/37, typecheck, production build, compiled dataset hash checks, and actual browser overview/search validation",
+          "build-common-data-pipeline-and-compact-runtime-projection"
         ],
         "pendingUnits": [
-          "A: common data-driven builder/validator and compact runtime projection with policy/semantic equivalence; plan only, not implemented",
           "B: bulk verified Korean naming and repeated-structure relations across remaining targets and all unnamed visible structures",
           "C: resolve actual geometry/identity/terminology exceptions without repeating unchanged searches or fabricating completion",
           "D: final full coverage, selection, runtime budget and responsive validation; preserve all mandatory gates"
@@ -429,9 +429,29 @@
           "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/verification-results.json",
           "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/preservation-after.json",
           "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/execution-record-delta.json",
-          "work/tasks/T100-B05.md"
+          "work/tasks/T100-B05.md",
+          "work/evidence/T100/runtime-projection-a-2026-09-29/start-baseline.json",
+          "work/evidence/T100/runtime-projection-a-2026-09-29/projection-validation.json",
+          "work/evidence/T100/runtime-projection-a-2026-09-29/browser-validation.json",
+          "work/evidence/T100/runtime-projection-a-2026-09-29/verification-results.json"
         ],
-        "result": "B05 classified ten frozen targets; added 58 exact class-member relations across 40 existing source objects. Five targets retain no direct surface and knee sesamoids remain partial. Historical remainder is 142; T100 stays in_progress/partial. The current execution authority retains nextUnit=build-common-data-pipeline-and-compact-runtime-projection; no following unit was started."
+        "result": "T100 A completed: shared strict ledger builder/validator emits the allowlisted compact runtime projection; 40/40 whole-body, 3/3 delivery, typecheck, build, and actual local browser checks passed. T100 remains in_progress/partial with 542 targets / 563 memberships / 12 regions unchanged; nextUnit=bulk-verified-korean-naming-and-repeated-structures.",
+        "runtimeProjection": {
+          "schema": "za-local-runtime-v1",
+          "sourceObjects": 960,
+          "locallyDisplayable": 672,
+          "scope": {
+            "targets": 542,
+            "memberships": 563,
+            "regions": 12
+          },
+          "oldCompactResponseBytes": 1870585,
+          "projectionResponseBytes": 806222,
+          "reductionPercent": 56.9,
+          "rightsAndReviewPreserved": true,
+          "developerEvidenceProjected": false,
+          "wholeBodyCompletion": false
+        }
       },
       "report": "work/reports/T100.md"
     },

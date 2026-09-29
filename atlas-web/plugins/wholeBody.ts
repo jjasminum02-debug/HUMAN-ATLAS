@@ -2,6 +2,8 @@ import { readFile, realpath } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { createHash } from 'node:crypto';
 import type { Plugin } from 'vite';
+import { buildRuntimeIntegration } from '../src/viewer/datasets/integration.ts';
+import { validateDataset } from '../src/viewer/datasets/schema.ts';
 
 type FileEntry = { id: string; path: string; sha256: string; bytes: number };
 type Snapshot = { manifest: unknown; dependencies: {path: string; sha256: string}[]; files: FileEntry[] };
@@ -10,15 +12,16 @@ const sha = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 export function wholeBodyPlugin(root: string): Plugin {
   const cache = resolve(root, 'atlas-data/source-cache');
   const snapshots = new Map<string, Promise<Snapshot>>();
+  const runtimeProjections = new Map<string, { key: string; body: Buffer }>();
   return {
     name: 'local-compiled-datasets',
     configureServer(server) {
       // A new immutable snapshot or changed frozen dependency must be revalidated, never mixed.
       server.watcher.add([`${cache}/datasets`, `${root}atlas-data/manifests`, `${cache}/bodyparts3d-r4/converted`]);
-      const invalidate = (path: string) => { if(path.includes('atlas-data/')) snapshots.clear(); };
+      const invalidate = (path: string) => { if(path.includes('atlas-data/')) { snapshots.clear(); runtimeProjections.clear(); } };
       server.watcher.on('change', invalidate).on('unlink', invalidate).on('add', invalidate);
       server.httpServer?.once('close', () => {
-        server.watcher.off('change', invalidate).off('unlink', invalidate).off('add', invalidate); snapshots.clear();
+        server.watcher.off('change', invalidate).off('unlink', invalidate).off('add', invalidate); snapshots.clear(); runtimeProjections.clear();
       });
       async function snapshot(namespace: string): Promise<Snapshot> {
         let pending = snapshots.get(namespace);
@@ -46,14 +49,24 @@ export function wholeBodyPlugin(root: string): Plugin {
         const path=req.url?.split('?')[0] ?? '';
         if(path==='/__atlas/integration.json') {
           try {
-            const bytes=await readFile(`${root}atlas-data/overlays/za-local-integration.json`);
+            const bytes=await readFile(resolve(root,'atlas-data/overlays/za-local-integration.json'));
+            const overlaySha256=sha(bytes);
             const overlay=JSON.parse(bytes.toString());
             const decisionPath=await realpath(resolve(root,overlay.policy.rightsEvidence));
             if(!decisionPath.startsWith(resolve(root,'work/evidence')+sep))throw Error('decision containment');
-            if(sha(await readFile(decisionPath))!==overlay.policy.rightsEvidenceSha256)throw Error('changed local-use decision');
+            const rightsEvidenceSha256=sha(await readFile(decisionPath));
+            if(rightsEvidenceSha256!==overlay.policy.rightsEvidenceSha256)throw Error('changed local-use decision');
             const compiled=await snapshot('za-c7010a9');
-            if((compiled.manifest as {revision:string}).revision!==overlay.datasetRevision)throw Error('stale integration');
-            res.setHeader('Cache-Control','no-store');res.setHeader('Content-Type','application/json');res.end(JSON.stringify(overlay));
+            const dataset=validateDataset(compiled.manifest);
+            if(dataset.revision!==overlay.datasetRevision)throw Error('stale integration');
+            const cacheKey=sha(Buffer.from([overlaySha256,dataset.revision,rightsEvidenceSha256].join('\n')));
+            let cached=runtimeProjections.get('za-c7010a9');
+            if(!cached||cached.key!==cacheKey) {
+              const projection=buildRuntimeIntegration(overlay,dataset,overlaySha256,rightsEvidenceSha256);
+              cached={key:cacheKey,body:Buffer.from(JSON.stringify(projection))};
+              runtimeProjections.set('za-c7010a9',cached);
+            }
+            res.setHeader('Cache-Control','no-store');res.setHeader('Content-Type','application/json');res.setHeader('Content-Length',String(cached.body.byteLength));res.end(cached.body);
           }catch{res.statusCode=503;res.end('Local integration unavailable');}
           return;
         }

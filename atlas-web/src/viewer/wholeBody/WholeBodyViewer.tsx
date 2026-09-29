@@ -4,10 +4,10 @@ import { type BodyManifest, validateManifest } from './contract';
 import './wholeBody.css';
 import { DatasetSceneAdapter } from '../datasets/DatasetSceneAdapter';
 import type { Dataset } from '../datasets/schema';
-import type { Integration } from '../datasets/integration';
+import type { RuntimeIntegration } from '../datasets/integration';
 import { AtlasLoading } from '../../ui/AtlasLoading';
 
-export function WholeBodyViewer({ homeRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, whole, onWholeChange, onEntered }: { homeRevision?: number; datasetSource?: { dataset: Dataset; integration: Integration }; onEntered?: (value: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
+export function WholeBodyViewer({ homeRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, whole, onWholeChange, onEntered }: { homeRevision?: number; datasetSource?: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
   const host = useRef<HTMLDivElement>(null);
   const controller = useRef<AnatomySceneController | DatasetSceneAdapter | null>(null);
   const previousView = useRef<{ regionKey: string; selectedId: string | null } | null>(null);

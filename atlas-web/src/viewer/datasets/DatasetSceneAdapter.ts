@@ -3,12 +3,12 @@ import { AnatomySceneController, type BodyProgress } from '../wholeBody/AnatomyS
 import type { BodyManifest, BodyView } from '../wholeBody/contract.ts';
 import { DatasetResources } from './DatasetResources.ts';
 import type { Dataset } from './schema.ts';
-import { validateIntegration, type Integration, type StructureRecord } from './integration.ts';
+import { validateRuntimeIntegration, type RuntimeIntegration, type RuntimeStructureRecord } from './integration.ts';
 /** Dataset selection/presentation adapter; renderer, camera and lifecycle remain owned by the existing controller. */
 export class DatasetSceneAdapter {
     readonly scene: AnatomySceneController;
     readonly resources: DatasetResources;
-    readonly records: Map<string, StructureRecord>;
+    readonly records: Map<string, RuntimeStructureRecord>;
     private view: BodyView = { region: null, regionIds: [], bones: true, muscles: true, supplements: false, selectedId: null, dim: true };
     private materials = new Map<string, THREE.MeshStandardMaterial>();
     private down = { x: 0, y: 0 };
@@ -16,8 +16,8 @@ export class DatasetSceneAdapter {
     private contextLost = false;
     private notify: (p: BodyProgress) => void;
     private select: (id: string, side: string | null) => void;
-    constructor(host: HTMLElement, dataset: Dataset, integration: Integration, notify: (p: BodyProgress) => void, select: (id: string, side: string | null) => void) {
-        validateIntegration(integration, dataset);
+    constructor(host: HTMLElement, dataset: Dataset, integration: RuntimeIntegration, notify: (p: BodyProgress) => void, select: (id: string, side: string | null) => void) {
+        validateRuntimeIntegration(integration, dataset);
         this.notify = notify;
         this.select = select;
         this.records = new Map(integration.objects.map(r => [r.sourceKey, r]));
@@ -72,7 +72,7 @@ export class DatasetSceneAdapter {
             visible: [...this.resources.nodes].filter(([, n]) => n.visible).map(([key]) => key), selected: this.view.selectedId, bytes: q.bytes, pending: q.pending.size, failed: [...q.failed],
             camera: this.scene.camera.position.toArray(), calls: this.scene.renderer.info.render.calls, triangles: this.scene.renderer.info.render.triangles });
     }
-    private fit(rows: StructureRecord[]) {
+    private fit(rows: RuntimeStructureRecord[]) {
         const box = new THREE.Box3();
         for (const r of rows) {
             box.expandByPoint(new THREE.Vector3().fromArray(r.bounds[0]));

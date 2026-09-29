@@ -1,0 +1,54 @@
+{
+  "schema": "t100-runtime-projection-verification-v1",
+  "dateLocal": "2026-09-29",
+  "unit": "A common builder/validator and compact app runtime projection",
+  "checks": [
+    {
+      "command": "pnpm run typecheck",
+      "status": "passed"
+    },
+    {
+      "command": "pnpm run test:whole-body",
+      "status": "passed",
+      "tests": 40,
+      "failed": 0,
+      "compiledDatasetChunksVerified": 46
+    },
+    {
+      "command": "pnpm run test:delivery",
+      "status": "passed",
+      "tests": 3,
+      "failed": 0,
+      "integrationEndpointContentLengthEqualsBodyBytes": true
+    },
+    {
+      "command": "pnpm run build",
+      "status": "passed",
+      "learningAndEvidenceValidators": "passed",
+      "sceneDecoderQa": "passed",
+      "minifiedAppBundleBytes": 953579,
+      "minifiedAppBundleGzipBytes": 216460,
+      "existingChunkWarning": "App bundle exceeds 500 kB advisory"
+    },
+    {
+      "command": "actual browser overview/search/selection/card/console check",
+      "status": "passed",
+      "evidence": "work/evidence/T100/runtime-projection-a-2026-09-29/browser-validation.json"
+    }
+  ],
+  "projectionMetrics": "work/evidence/T100/runtime-projection-a-2026-09-29/projection-validation.json",
+  "policy": {
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "sourceOnlyRows": 830,
+    "existingHaBoundRows": 130,
+    "newBindings": 0,
+    "newGeometry": 0
+  },
+  "scopeUnchanged": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12
+  },
+  "wholeBodyCompletion": false
+}
