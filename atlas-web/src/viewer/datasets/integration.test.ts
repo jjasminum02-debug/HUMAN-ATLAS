@@ -4,6 +4,9 @@ import { readFileSync } from 'node:fs';
 import { validateIntegration, searchStructures, canDisplayLocally, readDatasetRoute, datasetRouteQuery, type Integration } from './integration.ts';
 import type { Dataset } from './schema.ts';
 const raw = JSON.parse(readFileSync(new URL('../../../../atlas-data/overlays/za-local-integration.json', import.meta.url), 'utf8')) as Integration;
+const skullBatch = JSON.parse(readFileSync(new URL('../../../../work/evidence/T100/batches/2026-09-29-B01-skull-names/term-and-correspondence-ledger.json', import.meta.url), 'utf8')) as {
+    targets: Array<{ targetId: string; sourceMembers: string[]; sourceObjectNames: string[]; koModern: string; koTraditional: string; latin: string; kmleSourceId: string }>;
+};
 const fixture = { revision: raw.datasetRevision, instances: raw.objects.map(r => ({ sourceKey: r.sourceKey })) } as Dataset;
 test('whole-source overlay retains records and independent release/review status', () => {
     const overlay = validateIntegration(raw, fixture);
@@ -34,6 +37,61 @@ test('all three names search a source pair and regional filters use union', () =
         assert(searchStructures(raw.objects, q, []).some(r => r.names.en.includes('Latissimus')));
     const head = searchStructures(raw.objects, '', ['head']), neck = searchStructures(raw.objects, '', ['neck']), both = searchStructures(raw.objects, '', ['head', 'neck']);
     assert.equal(both.length, new Set([...head, ...neck].map(r => r.sourceKey)).size);
+});
+test('T100 B01 maps ten exact skull targets to fourteen existing source surfaces with field provenance', () => {
+    const targets = new Set(skullBatch.targets.map(target => target.targetId));
+    const members = raw.objects.filter(row => row.targetRelationEvidence?.some(relation => targets.has(relation.targetId)));
+    assert.equal(skullBatch.targets.length, 10);
+    assert.equal(new Set([...skullBatch.targets.flatMap(target => target.sourceMembers)]).size, 14);
+    assert.equal(members.length, 14);
+    assert.equal(new Set(members.map(row => row.sourceKey)).size, 14);
+    for (const target of skullBatch.targets) {
+        const rows = raw.objects.filter(row => target.sourceMembers.includes(row.sourceKey));
+        assert.equal(rows.length, target.sourceMembers.length);
+        for (const row of rows) {
+            const relation = row.targetRelationEvidence?.[0];
+            assert(relation);
+            assert.equal(relation.targetId, target.targetId);
+            assert.equal(relation.sourceKey, row.sourceKey);
+            assert.equal(relation.sourceObjectName, row.sourceName);
+            assert.equal(relation.sourceSide, row.side);
+            assert.equal(relation.directObjectNameMatch, true);
+            assert.equal(relation.ancestorNameAloneUsed, false);
+            assert.equal(relation.upstreamFjOrTa2IdClaim, false);
+            assert.equal(relation.canonicalHaBindingCreated, false);
+            assert.equal(row.haConceptId, null);
+            assert.equal(row.sourceOnly, true);
+            assert.equal(row.humanReview, 'not_performed');
+            assert.equal(row.publicRedistribution, 'held');
+            assert.equal(row.names.koModern, target.koModern);
+            assert.equal(row.names.koTraditional, target.koTraditional);
+            assert.equal(row.names.en.toLocaleLowerCase(), relation.targetEnglish);
+            assert(row.aliases.includes(target.latin));
+            assert(!/\p{Script=Han}/u.test(row.names.koModern!));
+            assert(!/\p{Script=Han}/u.test(row.names.koTraditional!));
+            for (const field of ['koModern', 'koTraditional', 'en'] as const) {
+                const fieldEvidence = row.nameEvidence?.[field];
+                assert(fieldEvidence);
+                assert.equal(fieldEvidence.value, row.names[field]);
+                assert(fieldEvidence.sourceIds.length > 0);
+            }
+        }
+        for (const query of [target.koModern, target.koTraditional, target.latin])
+            assert(searchStructures(raw.objects, query, []).some(row => row.targetId === target.targetId), `${target.targetId}:${query}`);
+    }
+    assert.equal(raw.objects.length, 960);
+    assert.equal(raw.objects.filter(row => row.localDisplayEligible).length, 672);
+    assert.equal(raw.objects.filter(row => row.haConceptId).length, 130);
+});
+test('T100 B01 evidence refs and direct crosswalk proof fail closed when altered', () => {
+    const badName = structuredClone(raw);
+    const named = badName.objects.find(row => row.nameEvidence)!;
+    named.nameEvidence!.koModern!.sourceIds = ['missing-source'];
+    assert.throws(() => validateIntegration(badName, fixture));
+    const badRelation = structuredClone(raw);
+    const mapped = badRelation.objects.find(row => row.targetRelationEvidence)!;
+    mapped.targetRelationEvidence![0].ancestorNameAloneUsed = true;
+    assert.throws(() => validateIntegration(badRelation, fixture));
 });
 test('both scapulae belong to arm context and sacrum to lumbar context', () => {
     const scap = raw.objects.filter(r => r.names.en === 'Scapula');

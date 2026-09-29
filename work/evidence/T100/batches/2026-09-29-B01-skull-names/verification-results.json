@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "task": "T100",
+  "batchId": "T100-B01-skull-names",
+  "capturedOn": "2026-09-29",
+  "commands": [
+    {
+      "command": "python3 work/evidence/T100/batches/2026-09-29-B01-skull-names/validate_skull_batch.py",
+      "status": "passed",
+      "details": "10 targets; 14 existing source objects; 4 exact bilateral target pairs; 6 exact midline/unpaired objects; three-name surface rows 123 -> 137; 960 objects/672 local display/130 existing HA-bound/182 unresolved unchanged."
+    },
+    {
+      "command": "pnpm run test:whole-body",
+      "status": "passed",
+      "details": "29 tests passed; 46 compiled chunks/dependencies verified."
+    },
+    {
+      "command": "pnpm run typecheck",
+      "status": "passed",
+      "details": "tsc -b --pretty false; exit 0."
+    },
+    {
+      "command": "pnpm run build",
+      "status": "passed_with_warning",
+      "details": "Content/schema/scene decoder checks and Vite production build passed; existing App JS chunk exceeds 500 kB warning."
+    },
+    {
+      "command": "live browser: search/select Korean alias and inspect selected card",
+      "status": "passed",
+      "details": "두정골 -> 마루뼈 Parietal bone (left); 이마뼈 -> 이마뼈 Frontal bone (midline); three names on card matched the selected source."
+    },
+    {
+      "command": "python3 work/tools/sync_execution.py --check",
+      "status": "passed",
+      "details": "Execution projections match; no generated file needed a write."
+    },
+    {
+      "command": "git diff --check (owned paths)",
+      "status": "passed",
+      "details": "No whitespace errors in T100-owned tracked changes."
+    }
+  ],
+  "preservation": {
+    "sourceArchiveSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+    "sourceGeometryChanged": false,
+    "sourceFreezeChanged": false,
+    "T98T99HistoricalInputsChanged": false,
+    "OpenSimModelsChanged": false,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "canonicalHALearnerBindingCreated": false,
+    "newGeometryCreated": false
+  },
+  "status": "passed_for_B01_only; T100 remains in_progress/partial"
+}

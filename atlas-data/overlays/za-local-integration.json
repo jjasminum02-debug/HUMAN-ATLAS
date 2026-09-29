@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "T100-source-taxonomy-local-display-v1",
+  "revision": "T100-source-taxonomy-local-display-v1-B01-skull-names",
   "datasetRevision": "7a337bd05380da5790cb64d4d62247590e29c1b73e2989daeb419c8173d0e982",
   "sourceCatalogSha256": "f2f1e98d22fe585b7943ddc0d7963af61cf18cced08b76be6984328a59e12ab7",
   "targetScopeSha256": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
@@ -9127,14 +9127,20 @@
         "head"
       ],
       "side": null,
-      "label": "Ethmoid bone",
+      "label": "벌집뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "사골",
+        "koModern": "벌집뼈",
         "en": "Ethmoid bone"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "os ethmoideum"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t96-frozen-target-terms",
+        "kmle-association-ethmoid-bone",
+        "za-t99-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:721",
       "targetIds": [
@@ -9169,6 +9175,63 @@
           1.6053110570423457,
           0.0759464576840401
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "벌집뼈",
+          "sourceIds": [
+            "kmle-association-ethmoid-bone"
+          ],
+          "locator": "Search index result for ethmo; exact ethmoid bone entry in 대한의협 dictionary excerpt gives 벌집뼈, 사골. Do not treat as opened original page."
+        },
+        "koTraditional": {
+          "value": "사골",
+          "sourceIds": [
+            "kmle-association-ethmoid-bone"
+          ],
+          "locator": "Search index result for ethmo; exact ethmoid bone entry in 대한의협 dictionary excerpt gives 벌집뼈, 사골. Do not treat as opened original page."
+        },
+        "en": {
+          "value": "Ethmoid bone",
+          "sourceIds": [
+            "za-t99-frozen-source-objects",
+            "fipat-ta2-t96-frozen-target-terms"
+          ],
+          "locator": "Exact source object Ethmoid bone; sourceKey ZA-c7010a9-ab6bee11150641b1d176c6e0; evaluated geometry SHA256 668c7973c2df465ecf2859c5685bdfaa612ac2b0f8f95a68297ba2c39debb3b3; exact frozen target TA2:721 English term ethmoid bone."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:721",
+          "targetEnglish": "ethmoid bone",
+          "targetLatin": "os ethmoideum",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "head",
+          "targetRegionIds": [
+            "head"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-ab6bee11150641b1d176c6e0",
+          "sourceObjectName": "Ethmoid bone",
+          "sourceDataName": "Ethmoid bone",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "668c7973c2df465ecf2859c5685bdfaa612ac2b0f8f95a68297ba2c39debb3b3",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "exact source object base-name equals frozen target English term; only exact .l/.r source suffix is removed",
+          "directObjectNameMatch": true,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed"
+        }
       ]
     },
     {
@@ -13533,14 +13596,20 @@
         "head"
       ],
       "side": null,
-      "label": "Frontal bone",
+      "label": "이마뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "전두골",
+        "koModern": "이마뼈",
         "en": "Frontal bone"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "os frontale"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t96-frozen-target-terms",
+        "kmle-kaa-frontal-bone",
+        "za-t99-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:520",
       "targetIds": [
@@ -13575,6 +13644,63 @@
           1.6991924451861895,
           0.08711200207471856
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "이마뼈",
+          "sourceIds": [
+            "kmle-kaa-frontal-bone"
+          ],
+          "locator": "KMLE page query frontal; 대한해부학회 맞춤 결과, Frontal bone entry at lines 430-433 in opened HTML"
+        },
+        "koTraditional": {
+          "value": "전두골",
+          "sourceIds": [
+            "kmle-kaa-frontal-bone"
+          ],
+          "locator": "KMLE page query frontal; 대한해부학회 맞춤 결과, Frontal bone entry at lines 430-433 in opened HTML"
+        },
+        "en": {
+          "value": "Frontal bone",
+          "sourceIds": [
+            "za-t99-frozen-source-objects",
+            "fipat-ta2-t96-frozen-target-terms"
+          ],
+          "locator": "Exact source object Frontal bone; sourceKey ZA-c7010a9-78bbaa2bb395956fc914364b; evaluated geometry SHA256 1d8c95515aabd9d303bc4b5e6d7deef64f761d7c69c15bfd8519e7c5395a2cf2; exact frozen target TA2:520 English term frontal bone."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:520",
+          "targetEnglish": "frontal bone",
+          "targetLatin": "os frontale",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "head",
+          "targetRegionIds": [
+            "head"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-78bbaa2bb395956fc914364b",
+          "sourceObjectName": "Frontal bone",
+          "sourceDataName": "Frontal bone",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "1d8c95515aabd9d303bc4b5e6d7deef64f761d7c69c15bfd8519e7c5395a2cf2",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "exact source object base-name equals frozen target English term; only exact .l/.r source suffix is removed",
+          "directObjectNameMatch": true,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed"
+        }
       ]
     },
     {
@@ -15122,14 +15248,20 @@
         "neck"
       ],
       "side": null,
-      "label": "Hyoid bone",
+      "label": "목뿔뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "설골",
+        "koModern": "목뿔뼈",
         "en": "Hyoid bone"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "os hyoideum"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t96-frozen-target-terms",
+        "kmle-kaa-hyoid-bone",
+        "za-t99-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:876",
       "targetIds": [
@@ -15164,6 +15296,65 @@
           1.511031190714244,
           0.03899827837051771
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "목뿔뼈",
+          "sourceIds": [
+            "kmle-kaa-hyoid-bone"
+          ],
+          "locator": "KMLE page query hyoid; 대한해부학회 맞춤 결과, Hyoid bone entry at lines 217-227 in opened HTML"
+        },
+        "koTraditional": {
+          "value": "설골",
+          "sourceIds": [
+            "kmle-kaa-hyoid-bone"
+          ],
+          "locator": "KMLE page query hyoid; 대한해부학회 맞춤 결과, Hyoid bone entry at lines 217-227 in opened HTML"
+        },
+        "en": {
+          "value": "Hyoid bone",
+          "sourceIds": [
+            "za-t99-frozen-source-objects",
+            "fipat-ta2-t96-frozen-target-terms"
+          ],
+          "locator": "Exact source object Hyoid bone; sourceKey ZA-c7010a9-84a9666722e3a3f1bc5e5c7b; evaluated geometry SHA256 72568f2e91caea38374303dcef9da100a7f2679b8e6ee9e23d4558144d288888; exact frozen target TA2:876 English term hyoid bone."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:876",
+          "targetEnglish": "hyoid bone",
+          "targetLatin": "os hyoideum",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "head",
+          "targetRegionIds": [
+            "head"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-84a9666722e3a3f1bc5e5c7b",
+          "sourceObjectName": "Hyoid bone",
+          "sourceDataName": "Hyoid bone",
+          "sourceParent": "Extracranial bones of head.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Extracranial bones of head",
+            "Head",
+            "Neck",
+            "Trunk"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "72568f2e91caea38374303dcef9da100a7f2679b8e6ee9e23d4558144d288888",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "exact source object base-name equals frozen target English term; only exact .l/.r source suffix is removed",
+          "directObjectNameMatch": true,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed"
+        }
       ]
     },
     {
@@ -22841,14 +23032,20 @@
         "head"
       ],
       "side": null,
-      "label": "Mandible",
+      "label": "아래턱뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "하악골",
+        "koModern": "아래턱뼈",
         "en": "Mandible"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "mandibula"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t96-frozen-target-terms",
+        "kmle-kaa-mandible",
+        "za-t99-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:835",
       "targetIds": [
@@ -22883,6 +23080,64 @@
           1.5786473737655804,
           0.08370993838359919
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "아래턱뼈",
+          "sourceIds": [
+            "kmle-kaa-mandible"
+          ],
+          "locator": "Search index excerpt headed 대한해부학회 의학용어 사전 맞춤 검색 결과; Mandible entry gives 아래턱뼈 and old term 하악골. Original page was not opened."
+        },
+        "koTraditional": {
+          "value": "하악골",
+          "sourceIds": [
+            "kmle-kaa-mandible"
+          ],
+          "locator": "Search index excerpt headed 대한해부학회 의학용어 사전 맞춤 검색 결과; Mandible entry gives 아래턱뼈 and old term 하악골. Original page was not opened."
+        },
+        "en": {
+          "value": "Mandible",
+          "sourceIds": [
+            "za-t99-frozen-source-objects",
+            "fipat-ta2-t96-frozen-target-terms"
+          ],
+          "locator": "Exact source object Mandible; sourceKey ZA-c7010a9-179fa204ccffef5f88aa335f; evaluated geometry SHA256 e5e39703885dc3423fc3c76ef40bfcd870e7ea10d2299dc0dec261c288c03fa9; exact frozen target TA2:835 English term mandible."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:835",
+          "targetEnglish": "mandible",
+          "targetLatin": "mandibula",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "head",
+          "targetRegionIds": [
+            "head"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-179fa204ccffef5f88aa335f",
+          "sourceObjectName": "Mandible",
+          "sourceDataName": "Mandible",
+          "sourceParent": "Extracranial bones of head.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Extracranial bones of head",
+            "Head",
+            "Mandible"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "e5e39703885dc3423fc3c76ef40bfcd870e7ea10d2299dc0dec261c288c03fa9",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "exact source object base-name equals frozen target English term; only exact .l/.r source suffix is removed",
+          "directObjectNameMatch": true,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed"
+        }
       ]
     },
     {
@@ -23048,14 +23303,20 @@
         "head"
       ],
       "side": "left",
-      "label": "Maxilla",
+      "label": "위턱뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "상악골",
+        "koModern": "위턱뼈",
         "en": "Maxilla"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "maxilla"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t96-frozen-target-terms",
+        "kmle-kaa-maxilla",
+        "za-t99-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:756",
       "targetIds": [
@@ -23090,6 +23351,65 @@
           1.6052191064737562,
           0.09387255273759354
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "위턱뼈",
+          "sourceIds": [
+            "kmle-kaa-maxilla"
+          ],
+          "locator": "Search index excerpt headed 대한해부학회 의학용어 사전 맞춤 검색 결과; Maxilla entry gives 위턱뼈 and old term 상악골. Original page was not opened."
+        },
+        "koTraditional": {
+          "value": "상악골",
+          "sourceIds": [
+            "kmle-kaa-maxilla"
+          ],
+          "locator": "Search index excerpt headed 대한해부학회 의학용어 사전 맞춤 검색 결과; Maxilla entry gives 위턱뼈 and old term 상악골. Original page was not opened."
+        },
+        "en": {
+          "value": "Maxilla",
+          "sourceIds": [
+            "za-t99-frozen-source-objects",
+            "fipat-ta2-t96-frozen-target-terms"
+          ],
+          "locator": "Exact source object Maxilla.l; sourceKey ZA-c7010a9-059c838d9075e42461b27ccb; evaluated geometry SHA256 76047a0bfedbe3bfc9f5d51d0e4e5e445653657d5f05bfce8d56aeb740edcdc3; exact frozen target TA2:756 English term maxilla."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:756",
+          "targetEnglish": "maxilla",
+          "targetLatin": "maxilla",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "head",
+          "targetRegionIds": [
+            "head"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-059c838d9075e42461b27ccb",
+          "sourceObjectName": "Maxilla.l",
+          "sourceDataName": "Maxilla",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Bonus collection",
+            "Cranium",
+            "Head",
+            "Right maxilla"
+          ],
+          "sourceSide": "left",
+          "evaluatedGeometrySha256": "76047a0bfedbe3bfc9f5d51d0e4e5e445653657d5f05bfce8d56aeb740edcdc3",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "exact source object base-name equals frozen target English term; only exact .l/.r source suffix is removed",
+          "directObjectNameMatch": true,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed"
+        }
       ]
     },
     {
@@ -23100,14 +23420,20 @@
         "head"
       ],
       "side": "right",
-      "label": "Maxilla",
+      "label": "위턱뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "상악골",
+        "koModern": "위턱뼈",
         "en": "Maxilla"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "maxilla"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t96-frozen-target-terms",
+        "kmle-kaa-maxilla",
+        "za-t99-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:756",
       "targetIds": [
@@ -23142,6 +23468,65 @@
           1.6052191064737562,
           0.09387255273759354
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "위턱뼈",
+          "sourceIds": [
+            "kmle-kaa-maxilla"
+          ],
+          "locator": "Search index excerpt headed 대한해부학회 의학용어 사전 맞춤 검색 결과; Maxilla entry gives 위턱뼈 and old term 상악골. Original page was not opened."
+        },
+        "koTraditional": {
+          "value": "상악골",
+          "sourceIds": [
+            "kmle-kaa-maxilla"
+          ],
+          "locator": "Search index excerpt headed 대한해부학회 의학용어 사전 맞춤 검색 결과; Maxilla entry gives 위턱뼈 and old term 상악골. Original page was not opened."
+        },
+        "en": {
+          "value": "Maxilla",
+          "sourceIds": [
+            "za-t99-frozen-source-objects",
+            "fipat-ta2-t96-frozen-target-terms"
+          ],
+          "locator": "Exact source object Maxilla.r; sourceKey ZA-c7010a9-798e4f9251fb53176412b9b1; evaluated geometry SHA256 76047a0bfedbe3bfc9f5d51d0e4e5e445653657d5f05bfce8d56aeb740edcdc3; exact frozen target TA2:756 English term maxilla."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:756",
+          "targetEnglish": "maxilla",
+          "targetLatin": "maxilla",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "head",
+          "targetRegionIds": [
+            "head"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-798e4f9251fb53176412b9b1",
+          "sourceObjectName": "Maxilla.r",
+          "sourceDataName": "Maxilla",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Bonus collection",
+            "Cranium",
+            "Head",
+            "Right maxilla"
+          ],
+          "sourceSide": "right",
+          "evaluatedGeometrySha256": "76047a0bfedbe3bfc9f5d51d0e4e5e445653657d5f05bfce8d56aeb740edcdc3",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "exact source object base-name equals frozen target English term; only exact .l/.r source suffix is removed",
+          "directObjectNameMatch": true,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed"
+        }
       ]
     },
     {
@@ -25940,14 +26325,20 @@
         "head"
       ],
       "side": "left",
-      "label": "Nasal bone",
+      "label": "코뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "비골",
+        "koModern": "코뼈",
         "en": "Nasal bone"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "os nasale"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t96-frozen-target-terms",
+        "kmle-kaa-nasal-bone",
+        "za-t99-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:748",
       "targetIds": [
@@ -25982,6 +26373,64 @@
           1.605079619476134,
           0.10027167201042181
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "코뼈",
+          "sourceIds": [
+            "kmle-kaa-nasal-bone"
+          ],
+          "locator": "KMLE page query nasal; 대한해부학회 맞춤 결과, Nasal bone entry at lines 555-564 in opened HTML"
+        },
+        "koTraditional": {
+          "value": "비골",
+          "sourceIds": [
+            "kmle-kaa-nasal-bone"
+          ],
+          "locator": "KMLE page query nasal; 대한해부학회 맞춤 결과, Nasal bone entry at lines 555-564 in opened HTML"
+        },
+        "en": {
+          "value": "Nasal bone",
+          "sourceIds": [
+            "za-t99-frozen-source-objects",
+            "fipat-ta2-t96-frozen-target-terms"
+          ],
+          "locator": "Exact source object Nasal bone.l; sourceKey ZA-c7010a9-2af07410041b271c5299818d; evaluated geometry SHA256 f13618eb021b0f391330e3e1af939acf61fab4ac7a2da1b5eba5b177148a4cba; exact frozen target TA2:748 English term nasal bone."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:748",
+          "targetEnglish": "nasal bone",
+          "targetLatin": "os nasale",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "head",
+          "targetRegionIds": [
+            "head"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-2af07410041b271c5299818d",
+          "sourceObjectName": "Nasal bone.l",
+          "sourceDataName": "Nasal bone",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Bonus collection",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": "left",
+          "evaluatedGeometrySha256": "f13618eb021b0f391330e3e1af939acf61fab4ac7a2da1b5eba5b177148a4cba",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "exact source object base-name equals frozen target English term; only exact .l/.r source suffix is removed",
+          "directObjectNameMatch": true,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed"
+        }
       ]
     },
     {
@@ -25992,14 +26441,20 @@
         "head"
       ],
       "side": "right",
-      "label": "Nasal bone",
+      "label": "코뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "비골",
+        "koModern": "코뼈",
         "en": "Nasal bone"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "os nasale"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t96-frozen-target-terms",
+        "kmle-kaa-nasal-bone",
+        "za-t99-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:748",
       "targetIds": [
@@ -26034,6 +26489,64 @@
           1.605079619476134,
           0.10027167201042181
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "코뼈",
+          "sourceIds": [
+            "kmle-kaa-nasal-bone"
+          ],
+          "locator": "KMLE page query nasal; 대한해부학회 맞춤 결과, Nasal bone entry at lines 555-564 in opened HTML"
+        },
+        "koTraditional": {
+          "value": "비골",
+          "sourceIds": [
+            "kmle-kaa-nasal-bone"
+          ],
+          "locator": "KMLE page query nasal; 대한해부학회 맞춤 결과, Nasal bone entry at lines 555-564 in opened HTML"
+        },
+        "en": {
+          "value": "Nasal bone",
+          "sourceIds": [
+            "za-t99-frozen-source-objects",
+            "fipat-ta2-t96-frozen-target-terms"
+          ],
+          "locator": "Exact source object Nasal bone.r; sourceKey ZA-c7010a9-8bb057dbbdd2c1c790ce1215; evaluated geometry SHA256 f13618eb021b0f391330e3e1af939acf61fab4ac7a2da1b5eba5b177148a4cba; exact frozen target TA2:748 English term nasal bone."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:748",
+          "targetEnglish": "nasal bone",
+          "targetLatin": "os nasale",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "head",
+          "targetRegionIds": [
+            "head"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-8bb057dbbdd2c1c790ce1215",
+          "sourceObjectName": "Nasal bone.r",
+          "sourceDataName": "Nasal bone",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Bonus collection",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": "right",
+          "evaluatedGeometrySha256": "f13618eb021b0f391330e3e1af939acf61fab4ac7a2da1b5eba5b177148a4cba",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "exact source object base-name equals frozen target English term; only exact .l/.r source suffix is removed",
+          "directObjectNameMatch": true,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed"
+        }
       ]
     },
     {
@@ -27187,14 +27700,20 @@
         "head"
       ],
       "side": null,
-      "label": "Occipital bone",
+      "label": "뒤통수뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "후두골",
+        "koModern": "뒤통수뼈",
         "en": "Occipital bone"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "os occipitale"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t96-frozen-target-terms",
+        "kmle-kaa-occipital-bone",
+        "za-t99-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:552",
       "targetIds": [
@@ -27229,6 +27748,63 @@
           1.6551929716027778,
           0.012472253292799121
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "뒤통수뼈",
+          "sourceIds": [
+            "kmle-kaa-occipital-bone"
+          ],
+          "locator": "KMLE page query occipital bone; 대한해부학회 맞춤 결과, Occipital bone entry at lines 414-423 in opened HTML"
+        },
+        "koTraditional": {
+          "value": "후두골",
+          "sourceIds": [
+            "kmle-kaa-occipital-bone"
+          ],
+          "locator": "KMLE page query occipital bone; 대한해부학회 맞춤 결과, Occipital bone entry at lines 414-423 in opened HTML"
+        },
+        "en": {
+          "value": "Occipital bone",
+          "sourceIds": [
+            "za-t99-frozen-source-objects",
+            "fipat-ta2-t96-frozen-target-terms"
+          ],
+          "locator": "Exact source object Occipital bone; sourceKey ZA-c7010a9-06ebb84f8a0406bd37b531c1; evaluated geometry SHA256 dad5d46158e6230dfa31cb8491de777b822697558b073b1208ac81aa16b54bc7; exact frozen target TA2:552 English term occipital bone."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:552",
+          "targetEnglish": "occipital bone",
+          "targetLatin": "os occipitale",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "head",
+          "targetRegionIds": [
+            "head"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-06ebb84f8a0406bd37b531c1",
+          "sourceObjectName": "Occipital bone",
+          "sourceDataName": "Occipital bone",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "dad5d46158e6230dfa31cb8491de777b822697558b073b1208ac81aa16b54bc7",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "exact source object base-name equals frozen target English term; only exact .l/.r source suffix is removed",
+          "directObjectNameMatch": true,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed"
+        }
       ]
     },
     {
@@ -28507,14 +29083,20 @@
         "head"
       ],
       "side": "left",
-      "label": "Parietal bone",
+      "label": "마루뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "두정골",
+        "koModern": "마루뼈",
         "en": "Parietal bone"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "os parietale"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t96-frozen-target-terms",
+        "kmle-kaa-parietal-bone",
+        "za-t99-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:504",
       "targetIds": [
@@ -28549,6 +29131,63 @@
           1.7053675985653385,
           0.042743049561977664
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "마루뼈",
+          "sourceIds": [
+            "kmle-kaa-parietal-bone"
+          ],
+          "locator": "KMLE page query parietal bone; 대한해부학회 맞춤 결과, Parietal bone entry at lines 408-417 in opened HTML"
+        },
+        "koTraditional": {
+          "value": "두정골",
+          "sourceIds": [
+            "kmle-kaa-parietal-bone"
+          ],
+          "locator": "KMLE page query parietal bone; 대한해부학회 맞춤 결과, Parietal bone entry at lines 408-417 in opened HTML"
+        },
+        "en": {
+          "value": "Parietal bone",
+          "sourceIds": [
+            "za-t99-frozen-source-objects",
+            "fipat-ta2-t96-frozen-target-terms"
+          ],
+          "locator": "Exact source object Parietal bone.l; sourceKey ZA-c7010a9-7348a4a0eb0146122ff8c127; evaluated geometry SHA256 921552acb7ada4dfd8ce17e6735e6e8a489ed753e3e70b88dc10fded8402f554; exact frozen target TA2:504 English term parietal bone."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:504",
+          "targetEnglish": "parietal bone",
+          "targetLatin": "os parietale",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "head",
+          "targetRegionIds": [
+            "head"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-7348a4a0eb0146122ff8c127",
+          "sourceObjectName": "Parietal bone.l",
+          "sourceDataName": "Parietal bone.l",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": "left",
+          "evaluatedGeometrySha256": "921552acb7ada4dfd8ce17e6735e6e8a489ed753e3e70b88dc10fded8402f554",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "exact source object base-name equals frozen target English term; only exact .l/.r source suffix is removed",
+          "directObjectNameMatch": true,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed"
+        }
       ]
     },
     {
@@ -28559,14 +29198,20 @@
         "head"
       ],
       "side": "right",
-      "label": "Parietal bone",
+      "label": "마루뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "두정골",
+        "koModern": "마루뼈",
         "en": "Parietal bone"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "os parietale"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t96-frozen-target-terms",
+        "kmle-kaa-parietal-bone",
+        "za-t99-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:504",
       "targetIds": [
@@ -28601,6 +29246,63 @@
           1.7054541366687572,
           0.03906109184026743
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "마루뼈",
+          "sourceIds": [
+            "kmle-kaa-parietal-bone"
+          ],
+          "locator": "KMLE page query parietal bone; 대한해부학회 맞춤 결과, Parietal bone entry at lines 408-417 in opened HTML"
+        },
+        "koTraditional": {
+          "value": "두정골",
+          "sourceIds": [
+            "kmle-kaa-parietal-bone"
+          ],
+          "locator": "KMLE page query parietal bone; 대한해부학회 맞춤 결과, Parietal bone entry at lines 408-417 in opened HTML"
+        },
+        "en": {
+          "value": "Parietal bone",
+          "sourceIds": [
+            "za-t99-frozen-source-objects",
+            "fipat-ta2-t96-frozen-target-terms"
+          ],
+          "locator": "Exact source object Parietal bone.r; sourceKey ZA-c7010a9-14af796b9320888b063abc50; evaluated geometry SHA256 00e6e8b3cb7e01b21d34bb0b6812fc9b2c11391128b80a218abe74627650634f; exact frozen target TA2:504 English term parietal bone."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:504",
+          "targetEnglish": "parietal bone",
+          "targetLatin": "os parietale",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "head",
+          "targetRegionIds": [
+            "head"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-14af796b9320888b063abc50",
+          "sourceObjectName": "Parietal bone.r",
+          "sourceDataName": "Parietal bone.r",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": "right",
+          "evaluatedGeometrySha256": "00e6e8b3cb7e01b21d34bb0b6812fc9b2c11391128b80a218abe74627650634f",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "exact source object base-name equals frozen target English term; only exact .l/.r source suffix is removed",
+          "directObjectNameMatch": true,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed"
+        }
       ]
     },
     {
@@ -36776,14 +37478,20 @@
         "head"
       ],
       "side": null,
-      "label": "Sphenoid bone",
+      "label": "나비뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "접형골",
+        "koModern": "나비뼈",
         "en": "Sphenoid bone"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "os sphenoideum"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t96-frozen-target-terms",
+        "kmle-kaa-sphenoid-bone",
+        "za-t99-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:584",
       "targetIds": [
@@ -36818,6 +37526,63 @@
           1.6202486405918504,
           0.05545402299446405
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "나비뼈",
+          "sourceIds": [
+            "kmle-kaa-sphenoid-bone"
+          ],
+          "locator": "Search index excerpt headed 대한해부학회 의학용어 사전 유사 검색 결과; Sphenoid bone entry gives 나비뼈 [접형골] and old term 접형골. Original page was not opened."
+        },
+        "koTraditional": {
+          "value": "접형골",
+          "sourceIds": [
+            "kmle-kaa-sphenoid-bone"
+          ],
+          "locator": "Search index excerpt headed 대한해부학회 의학용어 사전 유사 검색 결과; Sphenoid bone entry gives 나비뼈 [접형골] and old term 접형골. Original page was not opened."
+        },
+        "en": {
+          "value": "Sphenoid bone",
+          "sourceIds": [
+            "za-t99-frozen-source-objects",
+            "fipat-ta2-t96-frozen-target-terms"
+          ],
+          "locator": "Exact source object Sphenoid bone; sourceKey ZA-c7010a9-7241fdabc9aed10c0e5caa4b; evaluated geometry SHA256 4e1dcf79681ff686882eed89f9b3beb375c86afd5df675589069b916620dccc6; exact frozen target TA2:584 English term sphenoid bone."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:584",
+          "targetEnglish": "sphenoid bone",
+          "targetLatin": "os sphenoideum",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "head",
+          "targetRegionIds": [
+            "head"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-7241fdabc9aed10c0e5caa4b",
+          "sourceObjectName": "Sphenoid bone",
+          "sourceDataName": "Sphenoid bone.l",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "4e1dcf79681ff686882eed89f9b3beb375c86afd5df675589069b916620dccc6",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "exact source object base-name equals frozen target English term; only exact .l/.r source suffix is removed",
+          "directObjectNameMatch": true,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed"
+        }
       ]
     },
     {
@@ -42798,14 +43563,20 @@
         "head"
       ],
       "side": "left",
-      "label": "Temporal bone",
+      "label": "관자뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "측두골",
+        "koModern": "관자뼈",
         "en": "Temporal bone"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "os temporale"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t96-frozen-target-terms",
+        "kmle-kaa-temporal-bone",
+        "za-t99-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:641",
       "targetIds": [
@@ -42840,6 +43611,64 @@
           1.6231455544154192,
           0.04478308465331795
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "관자뼈",
+          "sourceIds": [
+            "kmle-kaa-temporal-bone"
+          ],
+          "locator": "KMLE page query temporal bone; 대한해부학회 맞춤 결과, Temporal bone entry at lines 418-427 in opened HTML"
+        },
+        "koTraditional": {
+          "value": "측두골",
+          "sourceIds": [
+            "kmle-kaa-temporal-bone"
+          ],
+          "locator": "KMLE page query temporal bone; 대한해부학회 맞춤 결과, Temporal bone entry at lines 418-427 in opened HTML"
+        },
+        "en": {
+          "value": "Temporal bone",
+          "sourceIds": [
+            "za-t99-frozen-source-objects",
+            "fipat-ta2-t96-frozen-target-terms"
+          ],
+          "locator": "Exact source object Temporal bone.l; sourceKey ZA-c7010a9-4af546464df710a24eeb2db8; evaluated geometry SHA256 7fb8f6310ad6e048c1eeea29feff3a2109654cf058ed91e4d78e6a922dd897cf; exact frozen target TA2:641 English term temporal bone."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:641",
+          "targetEnglish": "temporal bone",
+          "targetLatin": "os temporale",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "head",
+          "targetRegionIds": [
+            "head"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-4af546464df710a24eeb2db8",
+          "sourceObjectName": "Temporal bone.l",
+          "sourceDataName": "Temporal bone",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Bonus collection",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": "left",
+          "evaluatedGeometrySha256": "7fb8f6310ad6e048c1eeea29feff3a2109654cf058ed91e4d78e6a922dd897cf",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "exact source object base-name equals frozen target English term; only exact .l/.r source suffix is removed",
+          "directObjectNameMatch": true,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed"
+        }
       ]
     },
     {
@@ -42850,14 +43679,20 @@
         "head"
       ],
       "side": "right",
-      "label": "Temporal bone",
+      "label": "관자뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "측두골",
+        "koModern": "관자뼈",
         "en": "Temporal bone"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "os temporale"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t96-frozen-target-terms",
+        "kmle-kaa-temporal-bone",
+        "za-t99-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:641",
       "targetIds": [
@@ -42892,6 +43727,64 @@
           1.6231455544154192,
           0.04478308465331795
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "관자뼈",
+          "sourceIds": [
+            "kmle-kaa-temporal-bone"
+          ],
+          "locator": "KMLE page query temporal bone; 대한해부학회 맞춤 결과, Temporal bone entry at lines 418-427 in opened HTML"
+        },
+        "koTraditional": {
+          "value": "측두골",
+          "sourceIds": [
+            "kmle-kaa-temporal-bone"
+          ],
+          "locator": "KMLE page query temporal bone; 대한해부학회 맞춤 결과, Temporal bone entry at lines 418-427 in opened HTML"
+        },
+        "en": {
+          "value": "Temporal bone",
+          "sourceIds": [
+            "za-t99-frozen-source-objects",
+            "fipat-ta2-t96-frozen-target-terms"
+          ],
+          "locator": "Exact source object Temporal bone.r; sourceKey ZA-c7010a9-1f1045a6ac7ef29880d36695; evaluated geometry SHA256 7fb8f6310ad6e048c1eeea29feff3a2109654cf058ed91e4d78e6a922dd897cf; exact frozen target TA2:641 English term temporal bone."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:641",
+          "targetEnglish": "temporal bone",
+          "targetLatin": "os temporale",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "head",
+          "targetRegionIds": [
+            "head"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-1f1045a6ac7ef29880d36695",
+          "sourceObjectName": "Temporal bone.r",
+          "sourceDataName": "Temporal bone",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Bonus collection",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": "right",
+          "evaluatedGeometrySha256": "7fb8f6310ad6e048c1eeea29feff3a2109654cf058ed91e4d78e6a922dd897cf",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "exact source object base-name equals frozen target English term; only exact .l/.r source suffix is removed",
+          "directObjectNameMatch": true,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed"
+        }
       ]
     },
     {
@@ -50645,6 +51538,164 @@
           0.08466287866963502
         ]
       ]
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "kmle-kaa-frontal-bone",
+      "url": "https://m.kmle.co.kr/search.php?Page=1&Search=frontal",
+      "sourceLabel": "KMLE aggregation, 대한해부학회 의학용어 사전 section",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed",
+      "accessDate": "2026-09-29",
+      "accessMethod": "opened_html",
+      "locator": "KMLE page query frontal; 대한해부학회 맞춤 결과, Frontal bone entry at lines 430-433 in opened HTML",
+      "term": "Frontal bone",
+      "koModern": "이마뼈",
+      "koTraditional": "전두골"
+    },
+    {
+      "id": "kmle-kaa-parietal-bone",
+      "url": "https://m.kmle.co.kr/search.php?Page=1&Search=parietal+bone",
+      "sourceLabel": "KMLE aggregation, 대한해부학회 의학용어 사전 section",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed",
+      "accessDate": "2026-09-29",
+      "accessMethod": "opened_html",
+      "locator": "KMLE page query parietal bone; 대한해부학회 맞춤 결과, Parietal bone entry at lines 408-417 in opened HTML",
+      "term": "Parietal bone",
+      "koModern": "마루뼈",
+      "koTraditional": "두정골"
+    },
+    {
+      "id": "kmle-kaa-occipital-bone",
+      "url": "https://m.kmle.co.kr/search.php?Search=occipital+bone",
+      "sourceLabel": "KMLE aggregation, 대한해부학회 의학용어 사전 section",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed",
+      "accessDate": "2026-09-29",
+      "accessMethod": "opened_html",
+      "locator": "KMLE page query occipital bone; 대한해부학회 맞춤 결과, Occipital bone entry at lines 414-423 in opened HTML",
+      "term": "Occipital bone",
+      "koModern": "뒤통수뼈",
+      "koTraditional": "후두골"
+    },
+    {
+      "id": "kmle-kaa-temporal-bone",
+      "url": "https://m.kmle.co.kr/search.php?Search=temporal+bone",
+      "sourceLabel": "KMLE aggregation, 대한해부학회 의학용어 사전 section",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed",
+      "accessDate": "2026-09-29",
+      "accessMethod": "opened_html",
+      "locator": "KMLE page query temporal bone; 대한해부학회 맞춤 결과, Temporal bone entry at lines 418-427 in opened HTML",
+      "term": "Temporal bone",
+      "koModern": "관자뼈",
+      "koTraditional": "측두골"
+    },
+    {
+      "id": "kmle-association-ethmoid-bone",
+      "url": "https://m.kmle.co.kr/search.php?Search=ethmo",
+      "sourceLabel": "KMLE aggregation, 대한의협 의학용어 사전 indexed result",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed; association-specific exact entry not surfaced in the index excerpt",
+      "accessDate": "2026-09-29",
+      "accessMethod": "search_index_excerpt",
+      "locator": "Search index result for ethmo; exact ethmoid bone entry in 대한의협 dictionary excerpt gives 벌집뼈, 사골. Do not treat as opened original page.",
+      "term": "ethmoid bone",
+      "koModern": "벌집뼈",
+      "koTraditional": "사골"
+    },
+    {
+      "id": "kmle-kaa-sphenoid-bone",
+      "url": "https://m.kmle.co.kr/search.php?Search=spine+of+sphenoid",
+      "sourceLabel": "KMLE aggregation, 대한해부학회 의학용어 사전 indexed result",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed",
+      "accessDate": "2026-09-29",
+      "accessMethod": "search_index_excerpt",
+      "locator": "Search index excerpt headed 대한해부학회 의학용어 사전 유사 검색 결과; Sphenoid bone entry gives 나비뼈 [접형골] and old term 접형골. Original page was not opened.",
+      "term": "Sphenoid bone",
+      "koModern": "나비뼈",
+      "koTraditional": "접형골"
+    },
+    {
+      "id": "kmle-kaa-mandible",
+      "url": "https://m.kmle.co.kr/search.php?Page=1&Search=mandible",
+      "sourceLabel": "KMLE aggregation, 대한해부학회 의학용어 사전 indexed result",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed",
+      "accessDate": "2026-09-29",
+      "accessMethod": "search_index_excerpt",
+      "locator": "Search index excerpt headed 대한해부학회 의학용어 사전 맞춤 검색 결과; Mandible entry gives 아래턱뼈 and old term 하악골. Original page was not opened.",
+      "term": "Mandible",
+      "koModern": "아래턱뼈",
+      "koTraditional": "하악골"
+    },
+    {
+      "id": "kmle-kaa-hyoid-bone",
+      "url": "https://m.kmle.co.kr/search.php?Search=hyoid",
+      "sourceLabel": "KMLE aggregation, 대한해부학회 의학용어 사전 section",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed",
+      "accessDate": "2026-09-29",
+      "accessMethod": "opened_html",
+      "locator": "KMLE page query hyoid; 대한해부학회 맞춤 결과, Hyoid bone entry at lines 217-227 in opened HTML",
+      "term": "Hyoid bone",
+      "koModern": "목뿔뼈",
+      "koTraditional": "설골"
+    },
+    {
+      "id": "kmle-kaa-maxilla",
+      "url": "https://m.kmle.co.kr/search.php?Search=max",
+      "sourceLabel": "KMLE aggregation, 대한해부학회 의학용어 사전 indexed result",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed",
+      "accessDate": "2026-09-29",
+      "accessMethod": "search_index_excerpt",
+      "locator": "Search index excerpt headed 대한해부학회 의학용어 사전 맞춤 검색 결과; Maxilla entry gives 위턱뼈 and old term 상악골. Original page was not opened.",
+      "term": "Maxilla",
+      "koModern": "위턱뼈",
+      "koTraditional": "상악골"
+    },
+    {
+      "id": "kmle-kaa-nasal-bone",
+      "url": "https://m.kmle.co.kr/search.php?Search=nasal",
+      "sourceLabel": "KMLE aggregation, 대한해부학회 의학용어 사전 section",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed",
+      "accessDate": "2026-09-29",
+      "accessMethod": "opened_html",
+      "locator": "KMLE page query nasal; 대한해부학회 맞춤 결과, Nasal bone entry at lines 555-564 in opened HTML",
+      "term": "Nasal bone",
+      "koModern": "코뼈",
+      "koTraditional": "비골"
+    },
+    {
+      "id": "za-t99-frozen-source-objects",
+      "url": "https://github.com/z-anatomy/Models-of-human-anatomy/tree/c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+      "sourceLabel": "T99 derived source object catalog, pinned Z-Anatomy source revision",
+      "exactEdition": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+      "editionExposure": "pinned source commit exposed by frozen source manifest",
+      "accessDate": "2026-09-29",
+      "accessMethod": "local_frozen_metadata",
+      "locator": "work/evidence/T98/astra-resolution-2026-09-29/source-catalog.json object records: exact object name/data/parent/collections/source locator/evaluatedGeometrySha256; sourceHash 9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+      "term": null,
+      "koModern": null,
+      "koTraditional": null
+    },
+    {
+      "id": "fipat-ta2-t96-frozen-target-terms",
+      "url": "https://ta2viewer.openanatomy.org/",
+      "sourceLabel": "FIPAT Terminologia Anatomica, 2nd edition, online TA2 vocabulary 2.07, frozen T96 scope",
+      "exactEdition": "Terminologia Anatomica 2nd edition, vocabulary 2.07",
+      "editionExposure": "exact online vocabulary version and source hash recorded in frozen T96 scope",
+      "accessDate": "2026-09-29",
+      "accessMethod": "local_frozen_metadata",
+      "locator": "atlas-data/catalog/target-scope-t96.json target records; target IDs TA2:504, 520, 552, 584, 641, 721, 748, 756, 835, 876 with English/Latin terms and semanticKind",
+      "term": null,
+      "koModern": null,
+      "koTraditional": null
     }
   ]
 }
