@@ -159,3 +159,7 @@ T80은 전체 누락·중복·side/part·held·세 이름·선택을 전수 감�
 - 이 교정은 542 targets/563 memberships를 줄이거나 모든 근육 완료를 선언하는 예외가 아니다. 실제 필수 구조/명칭 누락은 T100의 남은 구현 항목으로 유지한다. T80/T58을 이번에 실행하지 않는다.
 
 현재 코드 검사는 실제 compiled registry의 dependency·chunk hash와 runtime 회귀를 검사한다(`test:whole-body`). 과거 T102가 당시의 AGENTS.md를 고정한 검사는 `test:whole-body:historical`에 그대로 남긴다. 현재 설계 정정 때문에 바뀐 지침 문서를 과거 hash로 되돌리거나, 과거 freeze 값을 새 값으로 덮어써 통과시키지 않는다. 과거 재현 실패와 현재 모델 손상은 다른 결과다.
+
+## 2026-09-29 T100 배치 운영 정정
+
+[26-T100-BULK-DELIVERY-PLAN.md](26-T100-BULK-DELIVERY-PLAN.md)를 현재 처리 방식으로 적용한다. 최대 10개 규칙은 모호한 의미 검토의 선택적 묶음이며 전수 자동처리 제한이나 매번 종료·전체 검증을 뜻하지 않는다. T100은 공통 처리/경량 projection, 전체 명칭, 실제 예외, 최종 합격 순으로 진행한다. 역사 batch와 원본을 보존하고 완료 기준·분모·실제 권리/충돌 검사는 낮추지 않는다. 후속 자료 task도 같은 공통 처리 원칙을 사용하되 실제 rig/animation 제작은 별도 검증한다.

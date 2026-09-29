@@ -39,3 +39,9 @@
 - Keep source identity, local rendering/observation, semantic binding, optional human review and public redistribution independent. Public-release holds and `humanReview=not_performed` are not global local-development blockers.
 - The assigned AI must resolve source-family rights and exception evidence and exact term/system/region/side/part correspondence within its task. Upstream FJ/TA2 IDs are not mandatory when the source has none; never fabricate them. A documented AI project crosswalk is distinct from provider identity and human approval.
 - Preserve historical freezes. Apply current decisions through a versioned overlay, retain real per-object hard holds and user layer-off, and report genuine missing geometry/names honestly. Do not repeat approval-wait reports instead of performing the investigation.
+
+## 2026-09-29 user-requested bulk-delivery amendment
+
+- Follow design/2026-09-25-muscle-atlas/26-T100-BULK-DELIVERY-PLAN.md for current T100 execution and subsequent data-processing cadence. It supersedes mandatory ten-item stopping/repeated full-suite rules, not evidence or completion requirements.
+- Batch is an internal recovery/review unit. Use one data-driven pipeline, bulk verified regular cases, and bounded review of real exceptions. Preserve historical scripts but do not add a runtime/test branch per batch.
+- Separate compact learner runtime data from full development evidence; retain policy enforcement, source hashes, originals, user WIP and actual unresolved gaps. This amendment is planning, not implementation acceptance.
