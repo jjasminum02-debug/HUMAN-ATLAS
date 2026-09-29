@@ -1,0 +1,63 @@
+[
+  {
+    "command": [
+      "python3",
+      "scripts/validate-learning-content.py"
+    ],
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "python3",
+      "../atlas-data/schemas/validate_ai_evidence.py",
+      "--check"
+    ],
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "python3",
+      "../atlas-data/schemas/validate_bone_name_overlay.py",
+      "--check"
+    ],
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "python3",
+      "../atlas-data/schemas/validate_motion_learning.py",
+      "--check"
+    ],
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "python3",
+      "../atlas-data/schemas/validate_motion_asset_sources.py"
+    ],
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "scripts/check-scene-decoders.mjs"
+    ],
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "node_modules/typescript/bin/tsc",
+      "-b"
+    ],
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "node_modules/vite/bin/vite.js",
+      "build"
+    ],
+    "exitCode": 0
+  }
+]

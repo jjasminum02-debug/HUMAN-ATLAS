@@ -274,13 +274,38 @@
       "title": "공통 dataset compiler·일괄 변환·경량 로더",
       "owner": "Sol High",
       "phase": "G1",
-      "executionStatus": "planned_not_started",
-      "acceptance": "pending",
+      "executionStatus": "complete",
+      "acceptance": "passed",
       "spec": "work/tasks/T99.md",
       "scope": "T98 실제 exporter와 선택된 source snapshot이 선행이다. 25 설계4절대로 source adapter→공통 schema/검증→overview/detail chunk와compact catalog를 생성한다. 기존 BP3D subset 재현과 전체 frozen dataset 변환을 같은 파이프라인으로 검증한다. task별 TypeScript extension/parent-chain/plugin 분기를 추가하지 말고 revision당 검증한 generic manifest로 바꾼다. source namespace/object instance/shared geometry/개념 binding/frame/rest pose와hold를 독립 보존한다. 전신overview와 상세LOD, byte-budget LRU/pin/해제/취소를 구현하고 geometry추가당 runtime 코드0을 검증한다. 원본/역사 cache·freeze는 변경하지 않는다. T98 대표12개만 변환하고 전체compile 완료라 하지 않는다. 새 기준은 manifest·resource·정합·품질·성능 회귀로 검증하며 learner의 전체 이름/선택 연결은 T100에 맡긴다.",
       "progress": {
         "nextUnit": null,
-        "completedUnits": []
+        "completedUnits": [
+          "pinned-source-baseline",
+          "960-indexed-two-lod-adapter",
+          "shared-resource-chunk-compiler",
+          "bp3d-offline-compatibility-and-generic-delivery",
+          "bounded-cache-cancel-and-lod-fallback",
+          "960-full-validation-and-browser-cycles",
+          "owned-local-checkpoint"
+        ],
+        "pendingUnits": [],
+        "nextId": "T100",
+        "nextOwner": "Luna Max",
+        "nextPromptPath": "work/evidence/T99/NEXT-T100.md",
+        "evidence": "work/evidence/T99/validation.json",
+        "gate": {
+          "localCompilerLoaderPassed": true,
+          "sourceSurfaceInstances": 960,
+          "musclePartSurfaces": 509,
+          "skeletalSurfaces": 277,
+          "accessorySurfaces": 174,
+          "canonicalTargetCount": 542,
+          "regionMembershipCount": 563,
+          "learnerWholeBodyComplete": false,
+          "appDisplayApproved": false,
+          "publicRedistributionApproved": false
+        }
       },
       "report": "work/reports/T99.md"
     },

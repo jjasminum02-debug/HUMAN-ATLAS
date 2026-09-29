@@ -54,7 +54,11 @@ export class AnatomySceneController {
     this.controls.minDistance = 0.06; this.controls.maxDistance = 8;
     this.controls.addEventListener('change', this.invalidate);
     // Fetch cancellation must reach both the network and the late parse guard.
-    this.queue = new ResourceQueue((id, signal) => this.load(id, signal), group => this.release(group), () => this.sync());
+    this.queue = new ResourceQueue((id, signal) => this.load(id, signal), group => this.release(group), () => this.sync(), 2, {maxBytes:96*1024*1024,measure:group=>{
+      const buffers=new Set<ArrayBufferLike>();
+      group.traverse(o=>{if(o instanceof THREE.Mesh){for(const a of Object.values(o.geometry.attributes) as THREE.BufferAttribute[])buffers.add(a.array.buffer);if(o.geometry.index)buffers.add(o.geometry.index.array.buffer);}});
+      return [...buffers].reduce((n,b)=>n+b.byteLength,0);
+    }});
     const resize = () => {
       const { width, height } = host.getBoundingClientRect();
       if (!width || !height) return;
@@ -78,6 +82,7 @@ export class AnatomySceneController {
     this.renderer.setAnimationLoop(this.frame);
   }
 
+  requestRender() { this.dirty = true; }
   private invalidate = () => { this.dirty = true; };
   /** Future pose controllers register updates here, never create a second RAF/renderer. */
   addUpdate(update: (seconds: number) => void) { this.updates.add(update); return () => { this.updates.delete(update); this.dirty = true; }; }

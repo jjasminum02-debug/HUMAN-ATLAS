@@ -1,0 +1,53 @@
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/tools/datasets/compile_za.py:102: RuntimeWarning: divide by zero encountered in matmul
+  world=p.astype('f8')@matrix[:3,:3].T+matrix[:3,3]
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/tools/datasets/compile_za.py:102: RuntimeWarning: overflow encountered in matmul
+  world=p.astype('f8')@matrix[:3,:3].T+matrix[:3,3]
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/tools/datasets/compile_za.py:102: RuntimeWarning: invalid value encountered in matmul
+  world=p.astype('f8')@matrix[:3,:3].T+matrix[:3,3]
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/tools/datasets/compile_za.py:52: RuntimeWarning: divide by zero encountered in matmul
+  def world(p): return p.astype('f8') @ matrix[:3,:3].T + matrix[:3,3]
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/tools/datasets/compile_za.py:52: RuntimeWarning: overflow encountered in matmul
+  def world(p): return p.astype('f8') @ matrix[:3,:3].T + matrix[:3,3]
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/tools/datasets/compile_za.py:52: RuntimeWarning: invalid value encountered in matmul
+  def world(p): return p.astype('f8') @ matrix[:3,:3].T + matrix[:3,3]
+COMPILER 50 ok 0 failed
+COMPILER 100 ok 0 failed
+COMPILER 150 ok 0 failed
+COMPILER 200 ok 0 failed
+COMPILER 250 ok 0 failed
+COMPILER 300 ok 0 failed
+COMPILER 350 ok 0 failed
+COMPILER 400 ok 0 failed
+COMPILER 450 ok 0 failed
+COMPILER 500 ok 0 failed
+COMPILER 550 ok 0 failed
+COMPILER 600 ok 0 failed
+COMPILER 650 ok 0 failed
+COMPILER 700 ok 0 failed
+COMPILER 750 ok 0 failed
+COMPILER 800 ok 0 failed
+COMPILER 850 ok 0 failed
+COMPILER 900 ok 0 failed
+COMPILER 950 ok 0 failed
+COMPILER_DONE 960 0
+Blender 3.5.0 (hash 1be25cfff18b built 2023-03-29 06:34:18)
+Device with name Apple M5 supports metal minimum requirements
+Read blend: /Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Startup.blend
+scripts disabled for "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Startup.blend", skipping 'z-anatomy.py'
+Dependency cycle detected:
+  OBOesophagus-profile/TRANSFORM_INIT() depends on
+  OBOesophagus/GEOMETRY_EVAL() via 'Curve Follow Parent'
+  OBOesophagus/MODIFIER(Solidify) via 'modifier stack order'
+  OBOesophagus/GEOMETRY_EVAL_INIT() via 'Modifier'
+  CUOesophagus/GEOMETRY_EVAL_DONE() via 'Object Geometry Base Data'
+  CUOesophagus/GEOMETRY_EVAL() via 'ObData Geom Eval Done'
+  OBOesophagus-profile/TRANSFORM_FINAL() via 'Curve Bevel Transform'
+  OBOesophagus-profile/TRANSFORM_SIMULATION_INIT() via 'Simulation -> Final Transform'
+  OBOesophagus-profile/TRANSFORM_EVAL() via 'Transform Eval -> Simulation Init'
+  OBOesophagus-profile/TRANSFORM_PARENT() via 'Eval'
+  OBOesophagus-profile/TRANSFORM_LOCAL() via 'ObLocal -> ObParent'
+  OBOesophagus-profile/TRANSFORM_INIT() via 'Transform Init'
+Detected 1 dependency cycles
+
+Blender quit
+Error: Not freed memory blocks: 322, total unfreed memory 0.002457 MB

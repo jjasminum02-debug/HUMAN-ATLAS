@@ -1,0 +1,39 @@
+✔ offline BP3D snapshot exactly matches original runtime composition (59.670209ms)
+✔ delivery rejects path traversal, stale dependency, and changed derived chunk bytes (25.762125ms)
+✔ 960 preserved instances, separate kinds, no rights/binding promotions (1.723833ms)
+✔ reject changed unit, duplicate instance, missing LOD, hold promotion and oversized chunk (37.674792ms)
+✔ all-detail demand retains every surface and stays within triangles and bytes (3.5965ms)
+✔ LRU evicts oldest unwanted only; twenty cycles stay bounded and release once (121.522875ms)
+✔ late cancelled decode is released; re-demand can subsequently load same key (19.258459ms)
+✔ oversized load fails once without retry loop, disposal cancels pending (6.5435ms)
+✔ T95 product context adds left scapula membership without editing source or duplicating nodes (0.808417ms)
+✔ T95 context overlay rejects source identity, laterality, region, policy, and duplicate drift (0.226708ms)
+✔ T101 appends its exact ten source-only surfaces into the existing scene (1.882459ms)
+✔ T101 extension rejects changed IDs, collisions, frame, side, owner, binding, review, or rights (0.618375ms)
+✔ T102 appends its exact ten source-only surfaces once into the existing scene (1.9755ms)
+✔ T102 extension rejects changed IDs, collisions, frame, parent order, side, owner, binding, review, or rights (1.511417ms)
+✔ T103 appends its exact ten source-only nodes once after T102 and retains held T54 parents (1.599667ms)
+✔ T103 rejects changed IDs, duplicates, wrong side/frame/parent, visible whole-FPB parent, binding, review, or rights (2.978125ms)
+✔ T104 appends its exact ten source-only meshes after T103 in the same scene (1.078042ms)
+✔ T104 rejects changed membership, duplicate IDs, wrong side/region/frame/parent, binding, review, or rights (5.122458ms)
+✔ T79 appends ten source-only nodes to the same manifest without mutating parent (1.00525ms)
+✔ T79 extension rejects missing/extra IDs, source collisions, frame drift, binding and review promotion (0.24875ms)
+✔ source-only context never becomes selectable (0.354ms)
+✔ supplements require explicit opt-in, stay unbound (0.052916ms)
+✔ held identity cannot be revealed through layer/opt-in (0.042708ms)
+✔ region/layer demand excludes unrelated geometry (0.042584ms)
+✔ T95 overlapping region union keeps one asset visible and empty filters mean whole body (0.061125ms)
+✔ reject conflicting duplicate IDs and source-only binding promotion (0.214166ms)
+✔ late parse after cancellation is disposed; same-id new demand can recover (6.795333ms)
+✔ failure retains successful resources; explicit retry only failed asset (4.090375ms)
+✔ dispose releases completed and late resources exactly once (1.961083ms)
+✔ isolation never promotes source-only or held nodes and respects layer switches (0.260792ms)
+✔ v2 local display is independent from learner binding, rights and review holds (0.170958ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 290.789209

@@ -1,0 +1,65 @@
+✔ T95 product context adds left scapula membership without editing source or duplicating nodes (1.604375ms)
+✔ T95 context overlay rejects source identity, laterality, region, policy, and duplicate drift (0.4825ms)
+✔ T101 appends its exact ten source-only surfaces into the existing scene (0.936625ms)
+✔ T101 extension rejects changed IDs, collisions, frame, side, owner, binding, review, or rights (0.657667ms)
+✔ T102 appends its exact ten source-only surfaces once into the existing scene (0.973541ms)
+✔ T102 extension rejects changed IDs, collisions, frame, parent order, side, owner, binding, review, or rights (1.323458ms)
+✔ T103 appends its exact ten source-only nodes once after T102 and retains held T54 parents (1.0195ms)
+✔ T103 rejects changed IDs, duplicates, wrong side/frame/parent, visible whole-FPB parent, binding, review, or rights (0.856083ms)
+✔ T104 appends its exact ten source-only meshes after T103 in the same scene (1.0345ms)
+✔ T104 rejects changed membership, duplicate IDs, wrong side/region/frame/parent, binding, review, or rights (0.791833ms)
+✔ T79 appends ten source-only nodes to the same manifest without mutating parent (1.846417ms)
+✔ T79 extension rejects missing/extra IDs, source collisions, frame drift, binding and review promotion (0.2735ms)
+✔ source-only context never becomes selectable (0.348208ms)
+✔ supplements require explicit opt-in, stay unbound (0.046708ms)
+✔ held identity cannot be revealed through layer/opt-in (0.040041ms)
+✔ region/layer demand excludes unrelated geometry (0.04225ms)
+✔ T95 overlapping region union keeps one asset visible and empty filters mean whole body (0.061459ms)
+✔ reject conflicting duplicate IDs and source-only binding promotion (0.202333ms)
+✖ late parse after cancellation is disposed; same-id new demand can recover (0.183292ms)
+✔ failure retains successful resources; explicit retry only failed asset (3.854916ms)
+✖ dispose releases completed and late resources exactly once (2.027958ms)
+✔ isolation never promotes source-only or held nodes and respects layer switches (0.161291ms)
+✔ v2 local display is independent from learner binding, rights and review holds (0.119292ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 21
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 84.392417
+
+✖ failing tests:
+
+test at atlas-web/src/viewer/wholeBody/wholeBody.test.ts:25:1
+✖ late parse after cancellation is disposed; same-id new demand can recover (0.183292ms)
+  TypeError: completions[0] is not a function
+      at TestContext.<anonymous> (file:///Users/daniel/Downloads/SIM%20/HUMAN%20ATLAS/atlas-web/src/viewer/wholeBody/wholeBody.test.ts:28:64)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at atlas-web/src/viewer/wholeBody/wholeBody.test.ts:35:1
+✖ dispose releases completed and late resources exactly once (2.027958ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + []
+  - [
+  -   'late'
+  - ]
+  
+      at TestContext.<anonymous> (file:///Users/daniel/Downloads/SIM%20/HUMAN%20ATLAS/atlas-web/src/viewer/wholeBody/wholeBody.test.ts:37:156)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [],
+    expected: [ 'late' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
