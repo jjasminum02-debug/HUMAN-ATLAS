@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "T100-source-taxonomy-local-display-v1-B01-skull-names",
+  "revision": "T100-source-taxonomy-local-display-v1-B02-vertebral-variant-coverage",
   "datasetRevision": "7a337bd05380da5790cb64d4d62247590e29c1b73e2989daeb419c8173d0e982",
   "sourceCatalogSha256": "f2f1e98d22fe585b7943ddc0d7963af61cf18cced08b76be6984328a59e12ab7",
   "targetScopeSha256": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
@@ -2444,18 +2444,27 @@
         "neck"
       ],
       "side": null,
-      "label": "Atlas (C1)",
+      "label": "고리뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "환추골",
+        "koModern": "고리뼈",
         "en": "Atlas (C1)"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Atlas",
+        "atlas",
+        "환추골"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-atlas-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1031",
       "targetIds": [
-        "TA2:1031"
+        "TA2:1031",
+        "TA2:1038"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -2485,6 +2494,75 @@
           1.5527560795170425,
           0.003114234850487594
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "고리뼈",
+          "sourceIds": [
+            "kmle-t100-atlas-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Atlas (C1)`; sourceKey ZA-c7010a9-d6c3cdfe939e4d46b75ce9b6; target TA2:1038; evaluated geometry sha256 e640d2d52fa2a62484468382bdb245a28eb3aa3c919cf0d859d580e1f0daca6b."
+        },
+        "koTraditional": {
+          "value": "환추골",
+          "sourceIds": [
+            "kmle-t100-atlas-opened"
+          ],
+          "locator": "KMLE exact terminology entry for atlas; source object `Atlas (C1)` is the matching segment; T96 target TA2:1038."
+        },
+        "en": {
+          "value": "Atlas (C1)",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Atlas (C1)`; sourceKey ZA-c7010a9-d6c3cdfe939e4d46b75ce9b6; parent `Cervical vertebrae.g`; neck collection; evaluated geometry sha256 e640d2d52fa2a62484468382bdb245a28eb3aa3c919cf0d859d580e1f0daca6b; target TA2:1038 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1038",
+          "targetEnglish": "atlas",
+          "targetLatin": "atlas",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "neck",
+          "targetRegionIds": [
+            "neck"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-d6c3cdfe939e4d46b75ce9b6",
+          "sourceObjectName": "Atlas (C1)",
+          "sourceDataName": "Atlas (C1)",
+          "sourceParent": "Cervical vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Cervical vertebrae",
+            "Neck",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "e640d2d52fa2a62484468382bdb245a28eb3aa3c919cf0d859d580e1f0daca6b",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact frozen TA2 synonym `vertebra C1` plus exact Z-Anatomy object name `Atlas (C1)` and C1/C2 level; parent/collection corroborate cervical region.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "qualified_target_synonym",
+          "matchedTargetSynonym": "vertebra C1",
+          "sourceSegmentCode": "C1",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-atlas-opened"
+          ]
+        }
       ]
     },
     {
@@ -2496,18 +2574,27 @@
         "neck"
       ],
       "side": null,
-      "label": "Axis (C2)",
+      "label": "중쇠뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "축추골",
+        "koModern": "중쇠뼈",
         "en": "Axis (C2)"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Axis",
+        "axis",
+        "축추골"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-axis-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1031",
       "targetIds": [
-        "TA2:1031"
+        "TA2:1031",
+        "TA2:1050"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -2537,6 +2624,75 @@
           1.5514352430191372,
           0.0003565475969296364
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "중쇠뼈",
+          "sourceIds": [
+            "kmle-t100-axis-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Axis (C2)`; sourceKey ZA-c7010a9-adbf8d3a03914592274e51ea; target TA2:1050; evaluated geometry sha256 46e87ad19c7ce2c9e6c9dc81489c04883a79a6ef243de4ebee3292d8d3762f66."
+        },
+        "koTraditional": {
+          "value": "축추골",
+          "sourceIds": [
+            "kmle-t100-axis-opened"
+          ],
+          "locator": "KMLE exact terminology entry for axis; source object `Axis (C2)` is the matching segment; T96 target TA2:1050."
+        },
+        "en": {
+          "value": "Axis (C2)",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Axis (C2)`; sourceKey ZA-c7010a9-adbf8d3a03914592274e51ea; parent `Cervical vertebrae.g`; neck collection; evaluated geometry sha256 46e87ad19c7ce2c9e6c9dc81489c04883a79a6ef243de4ebee3292d8d3762f66; target TA2:1050 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1050",
+          "targetEnglish": "axis",
+          "targetLatin": "axis",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "neck",
+          "targetRegionIds": [
+            "neck"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-adbf8d3a03914592274e51ea",
+          "sourceObjectName": "Axis (C2)",
+          "sourceDataName": "Axis (C2)",
+          "sourceParent": "Cervical vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Cervical vertebrae",
+            "Neck",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "46e87ad19c7ce2c9e6c9dc81489c04883a79a6ef243de4ebee3292d8d3762f66",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact frozen TA2 synonym `vertebra C2` plus exact Z-Anatomy object name `Axis (C2)` and C1/C2 level; parent/collection corroborate cervical region.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "qualified_target_synonym",
+          "matchedTargetSynonym": "vertebra C2",
+          "sourceSegmentCode": "C2",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-axis-opened"
+          ]
+        }
       ]
     },
     {
@@ -49977,18 +50133,28 @@
         "neck"
       ],
       "side": null,
-      "label": "Vertebra C3",
+      "label": "셋째 목뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "경추",
+        "koModern": "셋째 목뼈",
         "en": "Vertebra C3"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Vertebra C3",
+        "cervical vertebra",
+        "vertebra cervicalis",
+        "경추"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-cervical-vertebra-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1031",
       "targetIds": [
-        "TA2:1031"
+        "TA2:1031",
+        "TA2:1032"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -50018,6 +50184,75 @@
           1.519705879248494,
           0.000201008823946712
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "셋째 목뼈",
+          "sourceIds": [
+            "kmle-t100-cervical-vertebra-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Vertebra C3`; sourceKey ZA-c7010a9-ba233b3437c11ebd1878bb33; target TA2:1032; evaluated geometry sha256 278a43d2ab9cf229c3eaf6360dde1dadd2042d7dce3cf950e6384a1ba524d874."
+        },
+        "koTraditional": {
+          "value": "경추",
+          "sourceIds": [
+            "kmle-t100-cervical-vertebra-opened"
+          ],
+          "locator": "KMLE exact terminology entry for cervical vertebra; source object `Vertebra C3` is the matching segment; T96 target TA2:1032."
+        },
+        "en": {
+          "value": "Vertebra C3",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Vertebra C3`; sourceKey ZA-c7010a9-ba233b3437c11ebd1878bb33; parent `Cervical vertebrae.g`; neck collection; evaluated geometry sha256 278a43d2ab9cf229c3eaf6360dde1dadd2042d7dce3cf950e6384a1ba524d874; target TA2:1032 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1032",
+          "targetEnglish": "cervical vertebra",
+          "targetLatin": "vertebra cervicalis",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "neck",
+          "targetRegionIds": [
+            "neck"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-ba233b3437c11ebd1878bb33",
+          "sourceObjectName": "Vertebra C3",
+          "sourceDataName": "Vertebra C3",
+          "sourceParent": "Cervical vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Cervical vertebrae",
+            "Neck",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "278a43d2ab9cf229c3eaf6360dde1dadd2042d7dce3cf950e6384a1ba524d874",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact named source member `Vertebra C3` in parent `Cervical vertebrae.g` and explicit skeletal collection `Cervical vertebrae`; the frozen target is the matching vertebra type.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": "C3",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-cervical-vertebra-opened"
+          ]
+        }
       ]
     },
     {
@@ -50029,18 +50264,28 @@
         "neck"
       ],
       "side": null,
-      "label": "Vertebra C4",
+      "label": "넷째 목뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "경추",
+        "koModern": "넷째 목뼈",
         "en": "Vertebra C4"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Vertebra C4",
+        "cervical vertebra",
+        "vertebra cervicalis",
+        "경추"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-cervical-vertebra-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1031",
       "targetIds": [
-        "TA2:1031"
+        "TA2:1031",
+        "TA2:1032"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -50070,6 +50315,75 @@
           1.5055945543052935,
           -0.00029171918149241416
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "넷째 목뼈",
+          "sourceIds": [
+            "kmle-t100-cervical-vertebra-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Vertebra C4`; sourceKey ZA-c7010a9-79fdb2da04a91feede8dc361; target TA2:1032; evaluated geometry sha256 51d7a556a5558bcf845bb2c5f077fc0d123256cdc3b5b05fbd342a4b0ebc6be2."
+        },
+        "koTraditional": {
+          "value": "경추",
+          "sourceIds": [
+            "kmle-t100-cervical-vertebra-opened"
+          ],
+          "locator": "KMLE exact terminology entry for cervical vertebra; source object `Vertebra C4` is the matching segment; T96 target TA2:1032."
+        },
+        "en": {
+          "value": "Vertebra C4",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Vertebra C4`; sourceKey ZA-c7010a9-79fdb2da04a91feede8dc361; parent `Cervical vertebrae.g`; neck collection; evaluated geometry sha256 51d7a556a5558bcf845bb2c5f077fc0d123256cdc3b5b05fbd342a4b0ebc6be2; target TA2:1032 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1032",
+          "targetEnglish": "cervical vertebra",
+          "targetLatin": "vertebra cervicalis",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "neck",
+          "targetRegionIds": [
+            "neck"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-79fdb2da04a91feede8dc361",
+          "sourceObjectName": "Vertebra C4",
+          "sourceDataName": "Vertebra C4",
+          "sourceParent": "Cervical vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Cervical vertebrae",
+            "Neck",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "51d7a556a5558bcf845bb2c5f077fc0d123256cdc3b5b05fbd342a4b0ebc6be2",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact named source member `Vertebra C4` in parent `Cervical vertebrae.g` and explicit skeletal collection `Cervical vertebrae`; the frozen target is the matching vertebra type.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": "C4",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-cervical-vertebra-opened"
+          ]
+        }
       ]
     },
     {
@@ -50081,18 +50395,28 @@
         "neck"
       ],
       "side": null,
-      "label": "Vertebra C5",
+      "label": "다섯째 목뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "경추",
+        "koModern": "다섯째 목뼈",
         "en": "Vertebra C5"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Vertebra C5",
+        "cervical vertebra",
+        "vertebra cervicalis",
+        "경추"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-cervical-vertebra-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1031",
       "targetIds": [
-        "TA2:1031"
+        "TA2:1031",
+        "TA2:1032"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -50122,6 +50446,75 @@
           1.4913939875824747,
           -0.0015562522200270532
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "다섯째 목뼈",
+          "sourceIds": [
+            "kmle-t100-cervical-vertebra-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Vertebra C5`; sourceKey ZA-c7010a9-10fbd529e96cb0d19ef8752b; target TA2:1032; evaluated geometry sha256 8e41a3a6ca8e8193ab2123ba0f6700a88b31683baaa37dcdc9d5c2225dde084e."
+        },
+        "koTraditional": {
+          "value": "경추",
+          "sourceIds": [
+            "kmle-t100-cervical-vertebra-opened"
+          ],
+          "locator": "KMLE exact terminology entry for cervical vertebra; source object `Vertebra C5` is the matching segment; T96 target TA2:1032."
+        },
+        "en": {
+          "value": "Vertebra C5",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Vertebra C5`; sourceKey ZA-c7010a9-10fbd529e96cb0d19ef8752b; parent `Cervical vertebrae.g`; neck collection; evaluated geometry sha256 8e41a3a6ca8e8193ab2123ba0f6700a88b31683baaa37dcdc9d5c2225dde084e; target TA2:1032 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1032",
+          "targetEnglish": "cervical vertebra",
+          "targetLatin": "vertebra cervicalis",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "neck",
+          "targetRegionIds": [
+            "neck"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-10fbd529e96cb0d19ef8752b",
+          "sourceObjectName": "Vertebra C5",
+          "sourceDataName": "Vertebra C5",
+          "sourceParent": "Cervical vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Cervical vertebrae",
+            "Neck",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "8e41a3a6ca8e8193ab2123ba0f6700a88b31683baaa37dcdc9d5c2225dde084e",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact named source member `Vertebra C5` in parent `Cervical vertebrae.g` and explicit skeletal collection `Cervical vertebrae`; the frozen target is the matching vertebra type.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": "C5",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-cervical-vertebra-opened"
+          ]
+        }
       ]
     },
     {
@@ -50133,19 +50526,29 @@
         "neck"
       ],
       "side": null,
-      "label": "Vertebra C6",
+      "label": "여섯째 목뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "경추",
+        "koModern": "여섯째 목뼈",
         "en": "Vertebra C6"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Vertebra C6",
+        "cervical vertebra",
+        "vertebra cervicalis",
+        "경추"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-cervical-vertebra-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1055",
       "targetIds": [
         "TA2:1055",
-        "TA2:1031"
+        "TA2:1031",
+        "TA2:1032"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -50175,6 +50578,75 @@
           1.4783262240346309,
           -0.0031452268402919654
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "여섯째 목뼈",
+          "sourceIds": [
+            "kmle-t100-cervical-vertebra-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Vertebra C6`; sourceKey ZA-c7010a9-d1a470dc79c9ce82d1cca60c; target TA2:1032; evaluated geometry sha256 cecb216b7fe2ac8259e3669790c00198bedd735467c17713945eff88f21cce28."
+        },
+        "koTraditional": {
+          "value": "경추",
+          "sourceIds": [
+            "kmle-t100-cervical-vertebra-opened"
+          ],
+          "locator": "KMLE exact terminology entry for cervical vertebra; source object `Vertebra C6` is the matching segment; T96 target TA2:1032."
+        },
+        "en": {
+          "value": "Vertebra C6",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Vertebra C6`; sourceKey ZA-c7010a9-d1a470dc79c9ce82d1cca60c; parent `Cervical vertebrae.g`; neck collection; evaluated geometry sha256 cecb216b7fe2ac8259e3669790c00198bedd735467c17713945eff88f21cce28; target TA2:1032 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1032",
+          "targetEnglish": "cervical vertebra",
+          "targetLatin": "vertebra cervicalis",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "neck",
+          "targetRegionIds": [
+            "neck"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-d1a470dc79c9ce82d1cca60c",
+          "sourceObjectName": "Vertebra C6",
+          "sourceDataName": "Vertebra C6",
+          "sourceParent": "Cervical vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Cervical vertebrae",
+            "Neck",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "cecb216b7fe2ac8259e3669790c00198bedd735467c17713945eff88f21cce28",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact named source member `Vertebra C6` in parent `Cervical vertebrae.g` and explicit skeletal collection `Cervical vertebrae`; the frozen target is the matching vertebra type.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": "C6",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-cervical-vertebra-opened"
+          ]
+        }
       ]
     },
     {
@@ -50186,19 +50658,29 @@
         "neck"
       ],
       "side": null,
-      "label": "Vertebra C7",
+      "label": "일곱째 목뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "경추",
+        "koModern": "일곱째 목뼈",
         "en": "Vertebra C7"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Vertebra C7",
+        "cervical vertebra",
+        "vertebra cervicalis",
+        "경추"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-cervical-vertebra-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1057",
       "targetIds": [
         "TA2:1057",
-        "TA2:1031"
+        "TA2:1031",
+        "TA2:1032"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -50228,6 +50710,75 @@
           1.4655272220582911,
           -0.006920285921977874
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "일곱째 목뼈",
+          "sourceIds": [
+            "kmle-t100-cervical-vertebra-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Vertebra C7`; sourceKey ZA-c7010a9-b2ebff66eb1792f6e8e32080; target TA2:1032; evaluated geometry sha256 d5abfb20fb6523b2a399538c5f5d665d3209d1ddd9d104140528b0e6facb47f3."
+        },
+        "koTraditional": {
+          "value": "경추",
+          "sourceIds": [
+            "kmle-t100-cervical-vertebra-opened"
+          ],
+          "locator": "KMLE exact terminology entry for cervical vertebra; source object `Vertebra C7` is the matching segment; T96 target TA2:1032."
+        },
+        "en": {
+          "value": "Vertebra C7",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Vertebra C7`; sourceKey ZA-c7010a9-b2ebff66eb1792f6e8e32080; parent `Cervical vertebrae.g`; neck collection; evaluated geometry sha256 d5abfb20fb6523b2a399538c5f5d665d3209d1ddd9d104140528b0e6facb47f3; target TA2:1032 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1032",
+          "targetEnglish": "cervical vertebra",
+          "targetLatin": "vertebra cervicalis",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "neck",
+          "targetRegionIds": [
+            "neck"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-b2ebff66eb1792f6e8e32080",
+          "sourceObjectName": "Vertebra C7",
+          "sourceDataName": "Vertebra C7",
+          "sourceParent": "Cervical vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Cervical vertebrae",
+            "Neck",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "d5abfb20fb6523b2a399538c5f5d665d3209d1ddd9d104140528b0e6facb47f3",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact named source member `Vertebra C7` in parent `Cervical vertebrae.g` and explicit skeletal collection `Cervical vertebrae`; the frozen target is the matching vertebra type.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": "C7",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-cervical-vertebra-opened"
+          ]
+        }
       ]
     },
     {
@@ -50499,19 +51050,29 @@
         "thorax"
       ],
       "side": null,
-      "label": "Vertebra T1",
+      "label": "첫째 등뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "흉추골",
+        "koModern": "첫째 등뼈",
         "en": "Vertebra T1"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Vertebra T1",
+        "thoracic vertebra",
+        "vertebra thoracica",
+        "흉추골"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-thoracic-vertebra-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1063",
       "targetIds": [
         "TA2:1063",
-        "TA2:1058"
+        "TA2:1058",
+        "TA2:1059"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -50541,6 +51102,75 @@
           1.4533796117572106,
           -0.011261823842022171
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "첫째 등뼈",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Vertebra T1`; sourceKey ZA-c7010a9-76e5da8886205c6c995b337d; target TA2:1059; evaluated geometry sha256 b8b335663b09afedabe7f1521cbcbeee457e14a3279b270c6cc48ea05b7e1f0f."
+        },
+        "koTraditional": {
+          "value": "흉추골",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened"
+          ],
+          "locator": "KMLE exact terminology entry for thoracic vertebra; source object `Vertebra T1` is the matching segment; T96 target TA2:1059."
+        },
+        "en": {
+          "value": "Vertebra T1",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Vertebra T1`; sourceKey ZA-c7010a9-76e5da8886205c6c995b337d; parent `Thoracic vertebrae.g`; back collection; evaluated geometry sha256 b8b335663b09afedabe7f1521cbcbeee457e14a3279b270c6cc48ea05b7e1f0f; target TA2:1059 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1059",
+          "targetEnglish": "thoracic vertebra",
+          "targetLatin": "vertebra thoracica",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "back",
+          "targetRegionIds": [
+            "back"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-76e5da8886205c6c995b337d",
+          "sourceObjectName": "Vertebra T1",
+          "sourceDataName": "Vertebra T1",
+          "sourceParent": "Thoracic vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Thoracic skeleton",
+            "Thoracic vertebrae",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "b8b335663b09afedabe7f1521cbcbeee457e14a3279b270c6cc48ea05b7e1f0f",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact named source member `Vertebra T1` in parent `Thoracic vertebrae.g` and explicit skeletal collection `Thoracic vertebrae`; the frozen target is the matching vertebra type.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": "T1",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-thoracic-vertebra-opened"
+          ]
+        }
       ]
     },
     {
@@ -50552,18 +51182,28 @@
         "thorax"
       ],
       "side": null,
-      "label": "Vertebra T10",
+      "label": "열째 등뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "흉추골",
+        "koModern": "열째 등뼈",
         "en": "Vertebra T10"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Vertebra T10",
+        "thoracic vertebra",
+        "vertebra thoracica",
+        "흉추골"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-thoracic-vertebra-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1058",
       "targetIds": [
-        "TA2:1058"
+        "TA2:1058",
+        "TA2:1059"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -50593,6 +51233,75 @@
           1.227171386811904,
           -0.014319471489852409
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "열째 등뼈",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Vertebra T10`; sourceKey ZA-c7010a9-ec06f162cb073e506509724d; target TA2:1059; evaluated geometry sha256 2b53ba3c3ee4eab6781da6776d70fd9f4a6ab1cdbcd892db9318f968272b5b16."
+        },
+        "koTraditional": {
+          "value": "흉추골",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened"
+          ],
+          "locator": "KMLE exact terminology entry for thoracic vertebra; source object `Vertebra T10` is the matching segment; T96 target TA2:1059."
+        },
+        "en": {
+          "value": "Vertebra T10",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Vertebra T10`; sourceKey ZA-c7010a9-ec06f162cb073e506509724d; parent `Thoracic vertebrae.g`; back collection; evaluated geometry sha256 2b53ba3c3ee4eab6781da6776d70fd9f4a6ab1cdbcd892db9318f968272b5b16; target TA2:1059 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1059",
+          "targetEnglish": "thoracic vertebra",
+          "targetLatin": "vertebra thoracica",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "back",
+          "targetRegionIds": [
+            "back"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-ec06f162cb073e506509724d",
+          "sourceObjectName": "Vertebra T10",
+          "sourceDataName": "Vertebra T10",
+          "sourceParent": "Thoracic vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Thoracic skeleton",
+            "Thoracic vertebrae",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "2b53ba3c3ee4eab6781da6776d70fd9f4a6ab1cdbcd892db9318f968272b5b16",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact named source member `Vertebra T10` in parent `Thoracic vertebrae.g` and explicit skeletal collection `Thoracic vertebrae`; the frozen target is the matching vertebra type.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": "T10",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-thoracic-vertebra-opened"
+          ]
+        }
       ]
     },
     {
@@ -50604,18 +51313,28 @@
         "thorax"
       ],
       "side": null,
-      "label": "Vertebra T11",
+      "label": "열한째 등뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "흉추골",
+        "koModern": "열한째 등뼈",
         "en": "Vertebra T11"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Vertebra T11",
+        "thoracic vertebra",
+        "vertebra thoracica",
+        "흉추골"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-thoracic-vertebra-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1058",
       "targetIds": [
-        "TA2:1058"
+        "TA2:1058",
+        "TA2:1059"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -50645,6 +51364,75 @@
           1.1968158070873216,
           -0.005754912478445909
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "열한째 등뼈",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Vertebra T11`; sourceKey ZA-c7010a9-01d3b746fffced72073c9cf4; target TA2:1059; evaluated geometry sha256 72010e2d76ea1fcf534087c0b4b8430fdc46ba36126c5556c64b97e60031ec45."
+        },
+        "koTraditional": {
+          "value": "흉추골",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened"
+          ],
+          "locator": "KMLE exact terminology entry for thoracic vertebra; source object `Vertebra T11` is the matching segment; T96 target TA2:1059."
+        },
+        "en": {
+          "value": "Vertebra T11",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Vertebra T11`; sourceKey ZA-c7010a9-01d3b746fffced72073c9cf4; parent `Thoracic vertebrae.g`; back collection; evaluated geometry sha256 72010e2d76ea1fcf534087c0b4b8430fdc46ba36126c5556c64b97e60031ec45; target TA2:1059 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1059",
+          "targetEnglish": "thoracic vertebra",
+          "targetLatin": "vertebra thoracica",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "back",
+          "targetRegionIds": [
+            "back"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-01d3b746fffced72073c9cf4",
+          "sourceObjectName": "Vertebra T11",
+          "sourceDataName": "Vertebra T11",
+          "sourceParent": "Thoracic vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Thoracic skeleton",
+            "Thoracic vertebrae",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "72010e2d76ea1fcf534087c0b4b8430fdc46ba36126c5556c64b97e60031ec45",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact named source member `Vertebra T11` in parent `Thoracic vertebrae.g` and explicit skeletal collection `Thoracic vertebrae`; the frozen target is the matching vertebra type.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": "T11",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-thoracic-vertebra-opened"
+          ]
+        }
       ]
     },
     {
@@ -50656,18 +51444,28 @@
         "thorax"
       ],
       "side": null,
-      "label": "Vertebra T12",
+      "label": "열두째 등뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "흉추골",
+        "koModern": "열두째 등뼈",
         "en": "Vertebra T12"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Vertebra T12",
+        "thoracic vertebra",
+        "vertebra thoracica",
+        "흉추골"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-thoracic-vertebra-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1058",
       "targetIds": [
-        "TA2:1058"
+        "TA2:1058",
+        "TA2:1059"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -50697,6 +51495,75 @@
           1.1661007227151527,
           0.0036214440993279223
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "열두째 등뼈",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Vertebra T12`; sourceKey ZA-c7010a9-9f03a59b82316afbeea1b631; target TA2:1059; evaluated geometry sha256 e143a08b262074cbbb623981d96418de68980f1ad9ed75e17ccec1cb9b6c13c1."
+        },
+        "koTraditional": {
+          "value": "흉추골",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened"
+          ],
+          "locator": "KMLE exact terminology entry for thoracic vertebra; source object `Vertebra T12` is the matching segment; T96 target TA2:1059."
+        },
+        "en": {
+          "value": "Vertebra T12",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Vertebra T12`; sourceKey ZA-c7010a9-9f03a59b82316afbeea1b631; parent `Thoracic vertebrae.g`; back collection; evaluated geometry sha256 e143a08b262074cbbb623981d96418de68980f1ad9ed75e17ccec1cb9b6c13c1; target TA2:1059 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1059",
+          "targetEnglish": "thoracic vertebra",
+          "targetLatin": "vertebra thoracica",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "back",
+          "targetRegionIds": [
+            "back"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-9f03a59b82316afbeea1b631",
+          "sourceObjectName": "Vertebra T12",
+          "sourceDataName": "Vertebra T12",
+          "sourceParent": "Thoracic vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Thoracic skeleton",
+            "Thoracic vertebrae",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "e143a08b262074cbbb623981d96418de68980f1ad9ed75e17ccec1cb9b6c13c1",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact named source member `Vertebra T12` in parent `Thoracic vertebrae.g` and explicit skeletal collection `Thoracic vertebrae`; the frozen target is the matching vertebra type.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": "T12",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-thoracic-vertebra-opened"
+          ]
+        }
       ]
     },
     {
@@ -50708,18 +51575,28 @@
         "thorax"
       ],
       "side": null,
-      "label": "Vertebra T2",
+      "label": "둘째 등뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "흉추골",
+        "koModern": "둘째 등뼈",
         "en": "Vertebra T2"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Vertebra T2",
+        "thoracic vertebra",
+        "vertebra thoracica",
+        "흉추골"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-thoracic-vertebra-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1058",
       "targetIds": [
-        "TA2:1058"
+        "TA2:1058",
+        "TA2:1059"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -50749,6 +51626,75 @@
           1.4375724860507213,
           -0.01628349800502709
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "둘째 등뼈",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Vertebra T2`; sourceKey ZA-c7010a9-b152318736adaa2906689dd4; target TA2:1059; evaluated geometry sha256 bb95ce1b1f7f1438ab2cb3e15f798048765b898b1bd8ba294d3765f99a9480e4."
+        },
+        "koTraditional": {
+          "value": "흉추골",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened"
+          ],
+          "locator": "KMLE exact terminology entry for thoracic vertebra; source object `Vertebra T2` is the matching segment; T96 target TA2:1059."
+        },
+        "en": {
+          "value": "Vertebra T2",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Vertebra T2`; sourceKey ZA-c7010a9-b152318736adaa2906689dd4; parent `Thoracic vertebrae.g`; back collection; evaluated geometry sha256 bb95ce1b1f7f1438ab2cb3e15f798048765b898b1bd8ba294d3765f99a9480e4; target TA2:1059 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1059",
+          "targetEnglish": "thoracic vertebra",
+          "targetLatin": "vertebra thoracica",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "back",
+          "targetRegionIds": [
+            "back"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-b152318736adaa2906689dd4",
+          "sourceObjectName": "Vertebra T2",
+          "sourceDataName": "Vertebra T2",
+          "sourceParent": "Thoracic vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Thoracic skeleton",
+            "Thoracic vertebrae",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "bb95ce1b1f7f1438ab2cb3e15f798048765b898b1bd8ba294d3765f99a9480e4",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact named source member `Vertebra T2` in parent `Thoracic vertebrae.g` and explicit skeletal collection `Thoracic vertebrae`; the frozen target is the matching vertebra type.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": "T2",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-thoracic-vertebra-opened"
+          ]
+        }
       ]
     },
     {
@@ -50760,18 +51706,28 @@
         "thorax"
       ],
       "side": null,
-      "label": "Vertebra T3",
+      "label": "셋째 등뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "흉추골",
+        "koModern": "셋째 등뼈",
         "en": "Vertebra T3"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Vertebra T3",
+        "thoracic vertebra",
+        "vertebra thoracica",
+        "흉추골"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-thoracic-vertebra-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1058",
       "targetIds": [
-        "TA2:1058"
+        "TA2:1058",
+        "TA2:1059"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -50801,6 +51757,75 @@
           1.4194360486530295,
           -0.02255815018632614
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "셋째 등뼈",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Vertebra T3`; sourceKey ZA-c7010a9-762ce47ecb86b812a16aeaef; target TA2:1059; evaluated geometry sha256 d0b68844ae015a9aa22456bcf4ffc809afc7ce129ba877bd36e91269e0a0d60b."
+        },
+        "koTraditional": {
+          "value": "흉추골",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened"
+          ],
+          "locator": "KMLE exact terminology entry for thoracic vertebra; source object `Vertebra T3` is the matching segment; T96 target TA2:1059."
+        },
+        "en": {
+          "value": "Vertebra T3",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Vertebra T3`; sourceKey ZA-c7010a9-762ce47ecb86b812a16aeaef; parent `Thoracic vertebrae.g`; back collection; evaluated geometry sha256 d0b68844ae015a9aa22456bcf4ffc809afc7ce129ba877bd36e91269e0a0d60b; target TA2:1059 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1059",
+          "targetEnglish": "thoracic vertebra",
+          "targetLatin": "vertebra thoracica",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "back",
+          "targetRegionIds": [
+            "back"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-762ce47ecb86b812a16aeaef",
+          "sourceObjectName": "Vertebra T3",
+          "sourceDataName": "Vertebra T3",
+          "sourceParent": "Thoracic vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Thoracic skeleton",
+            "Thoracic vertebrae",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "d0b68844ae015a9aa22456bcf4ffc809afc7ce129ba877bd36e91269e0a0d60b",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact named source member `Vertebra T3` in parent `Thoracic vertebrae.g` and explicit skeletal collection `Thoracic vertebrae`; the frozen target is the matching vertebra type.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": "T3",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-thoracic-vertebra-opened"
+          ]
+        }
       ]
     },
     {
@@ -50812,18 +51837,28 @@
         "thorax"
       ],
       "side": null,
-      "label": "Vertebra T4",
+      "label": "넷째 등뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "흉추골",
+        "koModern": "넷째 등뼈",
         "en": "Vertebra T4"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Vertebra T4",
+        "thoracic vertebra",
+        "vertebra thoracica",
+        "흉추골"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-thoracic-vertebra-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1058",
       "targetIds": [
-        "TA2:1058"
+        "TA2:1058",
+        "TA2:1059"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -50853,6 +51888,75 @@
           1.3967604572258883,
           -0.029590390181986198
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "넷째 등뼈",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Vertebra T4`; sourceKey ZA-c7010a9-70797c869b775802950660dd; target TA2:1059; evaluated geometry sha256 88906126a0a18935753ec8f59da33684372eed87d4b1dc0000252aca9b5b13c3."
+        },
+        "koTraditional": {
+          "value": "흉추골",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened"
+          ],
+          "locator": "KMLE exact terminology entry for thoracic vertebra; source object `Vertebra T4` is the matching segment; T96 target TA2:1059."
+        },
+        "en": {
+          "value": "Vertebra T4",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Vertebra T4`; sourceKey ZA-c7010a9-70797c869b775802950660dd; parent `Thoracic vertebrae.g`; back collection; evaluated geometry sha256 88906126a0a18935753ec8f59da33684372eed87d4b1dc0000252aca9b5b13c3; target TA2:1059 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1059",
+          "targetEnglish": "thoracic vertebra",
+          "targetLatin": "vertebra thoracica",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "back",
+          "targetRegionIds": [
+            "back"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-70797c869b775802950660dd",
+          "sourceObjectName": "Vertebra T4",
+          "sourceDataName": "Vertebra T4",
+          "sourceParent": "Thoracic vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Thoracic skeleton",
+            "Thoracic vertebrae",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "88906126a0a18935753ec8f59da33684372eed87d4b1dc0000252aca9b5b13c3",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact named source member `Vertebra T4` in parent `Thoracic vertebrae.g` and explicit skeletal collection `Thoracic vertebrae`; the frozen target is the matching vertebra type.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": "T4",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-thoracic-vertebra-opened"
+          ]
+        }
       ]
     },
     {
@@ -50864,18 +51968,28 @@
         "thorax"
       ],
       "side": null,
-      "label": "Vertebra T5",
+      "label": "다섯째 등뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "흉추골",
+        "koModern": "다섯째 등뼈",
         "en": "Vertebra T5"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Vertebra T5",
+        "thoracic vertebra",
+        "vertebra thoracica",
+        "흉추골"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-thoracic-vertebra-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1058",
       "targetIds": [
-        "TA2:1058"
+        "TA2:1058",
+        "TA2:1059"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -50905,6 +52019,75 @@
           1.3739286005440392,
           -0.032791462755343226
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "다섯째 등뼈",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Vertebra T5`; sourceKey ZA-c7010a9-2efd0d84f3e7cb96e0dfe800; target TA2:1059; evaluated geometry sha256 2911255c2d6a4b6720e65d272dc688dc112eabb17b68679c50eac8fa2b8dd8e4."
+        },
+        "koTraditional": {
+          "value": "흉추골",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened"
+          ],
+          "locator": "KMLE exact terminology entry for thoracic vertebra; source object `Vertebra T5` is the matching segment; T96 target TA2:1059."
+        },
+        "en": {
+          "value": "Vertebra T5",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Vertebra T5`; sourceKey ZA-c7010a9-2efd0d84f3e7cb96e0dfe800; parent `Thoracic vertebrae.g`; back collection; evaluated geometry sha256 2911255c2d6a4b6720e65d272dc688dc112eabb17b68679c50eac8fa2b8dd8e4; target TA2:1059 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1059",
+          "targetEnglish": "thoracic vertebra",
+          "targetLatin": "vertebra thoracica",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "back",
+          "targetRegionIds": [
+            "back"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-2efd0d84f3e7cb96e0dfe800",
+          "sourceObjectName": "Vertebra T5",
+          "sourceDataName": "Vertebra T5",
+          "sourceParent": "Thoracic vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Thoracic skeleton",
+            "Thoracic vertebrae",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "2911255c2d6a4b6720e65d272dc688dc112eabb17b68679c50eac8fa2b8dd8e4",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact named source member `Vertebra T5` in parent `Thoracic vertebrae.g` and explicit skeletal collection `Thoracic vertebrae`; the frozen target is the matching vertebra type.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": "T5",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-thoracic-vertebra-opened"
+          ]
+        }
       ]
     },
     {
@@ -50916,18 +52099,28 @@
         "thorax"
       ],
       "side": null,
-      "label": "Vertebra T6",
+      "label": "여섯째 등뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "흉추골",
+        "koModern": "여섯째 등뼈",
         "en": "Vertebra T6"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Vertebra T6",
+        "thoracic vertebra",
+        "vertebra thoracica",
+        "흉추골"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-thoracic-vertebra-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1058",
       "targetIds": [
-        "TA2:1058"
+        "TA2:1058",
+        "TA2:1059"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -50957,6 +52150,75 @@
           1.3452819398178737,
           -0.03337339922639267
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "여섯째 등뼈",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Vertebra T6`; sourceKey ZA-c7010a9-ec9ce75a05c7aa34a500f02d; target TA2:1059; evaluated geometry sha256 b692cdbc6613c9eb481c2b495c6456516d3b19199ef0bb4d4c4c34bea8979211."
+        },
+        "koTraditional": {
+          "value": "흉추골",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened"
+          ],
+          "locator": "KMLE exact terminology entry for thoracic vertebra; source object `Vertebra T6` is the matching segment; T96 target TA2:1059."
+        },
+        "en": {
+          "value": "Vertebra T6",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Vertebra T6`; sourceKey ZA-c7010a9-ec9ce75a05c7aa34a500f02d; parent `Thoracic vertebrae.g`; back collection; evaluated geometry sha256 b692cdbc6613c9eb481c2b495c6456516d3b19199ef0bb4d4c4c34bea8979211; target TA2:1059 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1059",
+          "targetEnglish": "thoracic vertebra",
+          "targetLatin": "vertebra thoracica",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "back",
+          "targetRegionIds": [
+            "back"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-ec9ce75a05c7aa34a500f02d",
+          "sourceObjectName": "Vertebra T6",
+          "sourceDataName": "Vertebra T6",
+          "sourceParent": "Thoracic vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Thoracic skeleton",
+            "Thoracic vertebrae",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "b692cdbc6613c9eb481c2b495c6456516d3b19199ef0bb4d4c4c34bea8979211",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact named source member `Vertebra T6` in parent `Thoracic vertebrae.g` and explicit skeletal collection `Thoracic vertebrae`; the frozen target is the matching vertebra type.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": "T6",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-thoracic-vertebra-opened"
+          ]
+        }
       ]
     },
     {
@@ -50968,18 +52230,28 @@
         "thorax"
       ],
       "side": null,
-      "label": "Vertebra T7",
+      "label": "일곱째 등뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "흉추골",
+        "koModern": "일곱째 등뼈",
         "en": "Vertebra T7"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Vertebra T7",
+        "thoracic vertebra",
+        "vertebra thoracica",
+        "흉추골"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-thoracic-vertebra-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1058",
       "targetIds": [
-        "TA2:1058"
+        "TA2:1058",
+        "TA2:1059"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -51009,6 +52281,75 @@
           1.3169531784951694,
           -0.03165012993781874
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "일곱째 등뼈",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Vertebra T7`; sourceKey ZA-c7010a9-59914ec5337c1ea4beb6e18b; target TA2:1059; evaluated geometry sha256 98a20b877e2fce856dabe8dfa406d243111131c81333ae15e7b60c3342bb12a0."
+        },
+        "koTraditional": {
+          "value": "흉추골",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened"
+          ],
+          "locator": "KMLE exact terminology entry for thoracic vertebra; source object `Vertebra T7` is the matching segment; T96 target TA2:1059."
+        },
+        "en": {
+          "value": "Vertebra T7",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Vertebra T7`; sourceKey ZA-c7010a9-59914ec5337c1ea4beb6e18b; parent `Thoracic vertebrae.g`; back collection; evaluated geometry sha256 98a20b877e2fce856dabe8dfa406d243111131c81333ae15e7b60c3342bb12a0; target TA2:1059 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1059",
+          "targetEnglish": "thoracic vertebra",
+          "targetLatin": "vertebra thoracica",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "back",
+          "targetRegionIds": [
+            "back"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-59914ec5337c1ea4beb6e18b",
+          "sourceObjectName": "Vertebra T7",
+          "sourceDataName": "Vertebra T7",
+          "sourceParent": "Thoracic vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Thoracic skeleton",
+            "Thoracic vertebrae",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "98a20b877e2fce856dabe8dfa406d243111131c81333ae15e7b60c3342bb12a0",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact named source member `Vertebra T7` in parent `Thoracic vertebrae.g` and explicit skeletal collection `Thoracic vertebrae`; the frozen target is the matching vertebra type.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": "T7",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-thoracic-vertebra-opened"
+          ]
+        }
       ]
     },
     {
@@ -51020,18 +52361,28 @@
         "thorax"
       ],
       "side": null,
-      "label": "Vertebra T8",
+      "label": "여덟째 등뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "흉추골",
+        "koModern": "여덟째 등뼈",
         "en": "Vertebra T8"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Vertebra T8",
+        "thoracic vertebra",
+        "vertebra thoracica",
+        "흉추골"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-thoracic-vertebra-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1058",
       "targetIds": [
-        "TA2:1058"
+        "TA2:1058",
+        "TA2:1059"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -51061,6 +52412,75 @@
           1.285947443758464,
           -0.026566167624408797
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "여덟째 등뼈",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Vertebra T8`; sourceKey ZA-c7010a9-62001811337e87a684394eaa; target TA2:1059; evaluated geometry sha256 10761202fcdf1a230e49cc748966413d3d4ca0bb4e3165e091fbfe0d9b2b8f98."
+        },
+        "koTraditional": {
+          "value": "흉추골",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened"
+          ],
+          "locator": "KMLE exact terminology entry for thoracic vertebra; source object `Vertebra T8` is the matching segment; T96 target TA2:1059."
+        },
+        "en": {
+          "value": "Vertebra T8",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Vertebra T8`; sourceKey ZA-c7010a9-62001811337e87a684394eaa; parent `Thoracic vertebrae.g`; back collection; evaluated geometry sha256 10761202fcdf1a230e49cc748966413d3d4ca0bb4e3165e091fbfe0d9b2b8f98; target TA2:1059 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1059",
+          "targetEnglish": "thoracic vertebra",
+          "targetLatin": "vertebra thoracica",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "back",
+          "targetRegionIds": [
+            "back"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-62001811337e87a684394eaa",
+          "sourceObjectName": "Vertebra T8",
+          "sourceDataName": "Vertebra T8",
+          "sourceParent": "Thoracic vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Thoracic skeleton",
+            "Thoracic vertebrae",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "10761202fcdf1a230e49cc748966413d3d4ca0bb4e3165e091fbfe0d9b2b8f98",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact named source member `Vertebra T8` in parent `Thoracic vertebrae.g` and explicit skeletal collection `Thoracic vertebrae`; the frozen target is the matching vertebra type.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": "T8",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-thoracic-vertebra-opened"
+          ]
+        }
       ]
     },
     {
@@ -51072,18 +52492,28 @@
         "thorax"
       ],
       "side": null,
-      "label": "Vertebra T9",
+      "label": "아홉째 등뼈",
       "names": {
-        "koTraditional": null,
-        "koModern": null,
+        "koTraditional": "흉추골",
+        "koModern": "아홉째 등뼈",
         "en": "Vertebra T9"
       },
-      "aliases": [],
-      "nameSourceIds": [],
+      "aliases": [
+        "Vertebra T9",
+        "thoracic vertebra",
+        "vertebra thoracica",
+        "흉추골"
+      ],
+      "nameSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms",
+        "kmle-t100-thoracic-vertebra-opened",
+        "za-t99-t100-b02-frozen-source-objects"
+      ],
       "haConceptId": null,
       "targetId": "TA2:1058",
       "targetIds": [
-        "TA2:1058"
+        "TA2:1058",
+        "TA2:1059"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -51113,6 +52543,75 @@
           1.2568003594931685,
           -0.020759084163087957
         ]
+      ],
+      "nameEvidence": {
+        "koModern": {
+          "value": "아홉째 등뼈",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened",
+            "za-t99-t100-b02-frozen-source-objects"
+          ],
+          "locator": "KMLE exact range/name entry plus exact source object `Vertebra T9`; sourceKey ZA-c7010a9-b5c1560b12a491a31ba15b7c; target TA2:1059; evaluated geometry sha256 79e72c9b41aad6fd157650d40ed81fcc73d34813be94ae7c07540d9b24d22045."
+        },
+        "koTraditional": {
+          "value": "흉추골",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened"
+          ],
+          "locator": "KMLE exact terminology entry for thoracic vertebra; source object `Vertebra T9` is the matching segment; T96 target TA2:1059."
+        },
+        "en": {
+          "value": "Vertebra T9",
+          "sourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "Exact source object `Vertebra T9`; sourceKey ZA-c7010a9-b5c1560b12a491a31ba15b7c; parent `Thoracic vertebrae.g`; back collection; evaluated geometry sha256 79e72c9b41aad6fd157650d40ed81fcc73d34813be94ae7c07540d9b24d22045; target TA2:1059 frozen English/Latin term."
+        }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:1059",
+          "targetEnglish": "thoracic vertebra",
+          "targetLatin": "vertebra thoracica",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "back",
+          "targetRegionIds": [
+            "back"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-b5c1560b12a491a31ba15b7c",
+          "sourceObjectName": "Vertebra T9",
+          "sourceDataName": "Vertebra T9",
+          "sourceParent": "Thoracic vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Thoracic skeleton",
+            "Thoracic vertebrae",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "79e72c9b41aad6fd157650d40ed81fcc73d34813be94ae7c07540d9b24d22045",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact named source member `Vertebra T9` in parent `Thoracic vertebrae.g` and explicit skeletal collection `Thoracic vertebrae`; the frozen target is the matching vertebra type.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": "T9",
+          "matchEvidenceSourceIds": [
+            "za-t99-t100-b02-frozen-source-objects",
+            "fipat-ta2-t100-b02-frozen-target-terms",
+            "kmle-t100-thoracic-vertebra-opened"
+          ]
+        }
       ]
     },
     {
@@ -51696,6 +53195,2161 @@
       "term": null,
       "koModern": null,
       "koTraditional": null
+    },
+    {
+      "id": "fipat-ta2-t100-b02-frozen-target-terms",
+      "url": "https://ta2viewer.openanatomy.org/",
+      "sourceLabel": "FIPAT Terminologia Anatomica, 2nd edition, online vocabulary 2.07; T96 frozen target rows",
+      "exactEdition": "Terminologia Anatomica 2nd edition, vocabulary 2.07",
+      "editionExposure": "exact vocabulary/version and source hash recorded in frozen T96 scope",
+      "accessDate": "2026-09-29",
+      "accessMethod": "local_frozen_metadata",
+      "locator": "atlas-data/catalog/target-scope-t96.json; TA2 IDs 356, 819, 830-832, 1032, 1038, 1050, 1059, 1065; English/Latin term, source synonym/related-term flags, parent, semantic kind and cardinality frozen; scope sha256 dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
+      "term": null,
+      "koModern": null,
+      "koTraditional": null
+    },
+    {
+      "id": "za-t99-t100-b02-frozen-source-objects",
+      "url": "https://github.com/z-anatomy/Models-of-human-anatomy/tree/c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+      "sourceLabel": "T98/T99 local frozen Z-Anatomy source object catalogue and evaluated scene manifest",
+      "exactEdition": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+      "editionExposure": "exact source commit pinned; object upstream IDs are not declared by this catalogue",
+      "accessDate": "2026-09-29",
+      "accessMethod": "local_frozen_metadata",
+      "locator": "work/evidence/T98/astra-resolution-2026-09-29/source-catalog.json and atlas-data/manifests/za-c7010a9/compiled-manifest.json; exact sourceKey/name/dataName/parent/collections/evaluatedGeometrySha256; archive sha256 9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+      "term": null,
+      "koModern": null,
+      "koTraditional": null
+    },
+    {
+      "id": "kmle-t100-facial-bones-opened",
+      "url": "https://m.kmle.co.kr/search.php?Search=facial",
+      "sourceLabel": "KMLE aggregation, KI 의학용어 사전 section (opened HTML)",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed by KMLE",
+      "accessDate": "2026-09-29",
+      "accessMethod": "opened_html",
+      "locator": "Opened KMLE Search=facial HTML: KI dictionary result `facial bone` → 얼굴뼈, 안면골 (tool page lines 674-677); the same opened page's facial-bones definition says source dictionaries differ on group members (lines 933-937).",
+      "term": "facial bone(s)",
+      "koModern": "얼굴뼈",
+      "koTraditional": "안면골"
+    },
+    {
+      "id": "kmle-t100-sutural-bone-index",
+      "url": "https://m.kmle.co.kr/search.php?Search=sutural+bone",
+      "sourceLabel": "KMLE aggregation, 대한의협 의학용어 사전 검색 유사결과 excerpt (not opened)",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed by KMLE",
+      "accessDate": "2026-09-29",
+      "accessMethod": "search_index_excerpt",
+      "locator": "Search index excerpt for the KMLE query `sutural bone` gives `sutural bone` → 봉합뼈. The original result page was not opened; no edition/revision is exposed.",
+      "term": "sutural bone",
+      "koModern": "봉합뼈",
+      "koTraditional": null
+    },
+    {
+      "id": "kmle-t100-interparietal-bone-opened",
+      "url": "https://m.kmle.co.kr/search.php?Search=bone",
+      "sourceLabel": "KMLE aggregation, 대한해부학회 의학용어 사전 유사결과 section (opened HTML)",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed by KMLE",
+      "accessDate": "2026-09-29",
+      "accessMethod": "opened_html",
+      "locator": "Opened KMLE Search=bone HTML, lines 780-784: `(Interparietal bone)` → `(마루사이뼈)`, old term 두정간골.",
+      "term": "interparietal bone",
+      "koModern": "마루사이뼈",
+      "koTraditional": "두정간골"
+    },
+    {
+      "id": "kmle-t100-cervical-vertebra-opened",
+      "url": "https://m.kmle.co.kr/search.php?Search=thoracic+vertebra",
+      "sourceLabel": "KMLE aggregation, 대한의협 의학용어 사전 유사결과 section (opened HTML)",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed by KMLE",
+      "accessDate": "2026-09-29",
+      "accessMethod": "opened_html",
+      "locator": "Opened KMLE Search=thoracic+vertebra HTML, lines 53-55: `cervical vertebra` → 목뼈, 경추; lines 332-341 show the Korean Anatomical Society range term Cervical/Thoracic vertebrae.",
+      "term": "cervical vertebra",
+      "koModern": "목뼈",
+      "koTraditional": "경추"
+    },
+    {
+      "id": "kmle-t100-atlas-opened",
+      "url": "https://m.kmle.co.kr/search.php?Search=atlas",
+      "sourceLabel": "KMLE aggregation, 대한해부학회 의학용어 사전 맞춤결과 section (opened HTML)",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed by KMLE",
+      "accessDate": "2026-09-29",
+      "accessMethod": "opened_html",
+      "locator": "Opened KMLE Search=atlas HTML, lines 83-91: `Atlas [First cervical vertebra]` → 고리뼈 [환추골], old term 환추(제1경추).",
+      "term": "Atlas [First cervical vertebra]",
+      "koModern": "고리뼈",
+      "koTraditional": "환추골"
+    },
+    {
+      "id": "kmle-t100-axis-opened",
+      "url": "https://m.kmle.co.kr/search.php?Search=thoracic+vertebra",
+      "sourceLabel": "KMLE aggregation, 대한해부학회 의학용어 사전 맞춤결과 section (opened HTML)",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed by KMLE",
+      "accessDate": "2026-09-29",
+      "accessMethod": "opened_html",
+      "locator": "Opened KMLE Search=thoracic+vertebra HTML, lines 378-381: `Axis [Second cervical vertebra]` → 중쇠뼈 [축추골], old term 축추(제2경추).",
+      "term": "Axis [Second cervical vertebra]",
+      "koModern": "중쇠뼈",
+      "koTraditional": "축추골"
+    },
+    {
+      "id": "kmle-t100-thoracic-vertebra-opened",
+      "url": "https://m.kmle.co.kr/search.php?Search=thoracic+vertebra",
+      "sourceLabel": "KMLE aggregation, 대한의협/Korean Anatomical Society sections (opened HTML)",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed by KMLE",
+      "accessDate": "2026-09-29",
+      "accessMethod": "opened_html",
+      "locator": "Opened KMLE Search=thoracic+vertebra HTML, lines 73-81: `thoracic vertebra` → 등뼈, 흉추; lines 332-341: `Thoracic vertebrae(first-twelfth)` → 등(척추)뼈(첫째-열두째) [흉추골], old term 흉추골.",
+      "term": "thoracic vertebra(s), first-twelfth",
+      "koModern": "등뼈",
+      "koTraditional": "흉추골"
+    },
+    {
+      "id": "kmle-t100-os-japonicum-index",
+      "url": "https://m.kmle.co.kr/search.php?Search=os+japonicum",
+      "sourceLabel": "KMLE aggregation, KMLE search index check (exact entry not found; no page opened)",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed by KMLE",
+      "accessDate": "2026-09-29",
+      "accessMethod": "search_index_excerpt",
+      "locator": "Exact KMLE index query for `os japonicum` did not surface a Korean terminology entry; FIPAT's frozen synonym `bipartite zygomatic bone` is retained separately and is not translated here.",
+      "term": "os japonicum",
+      "koModern": null,
+      "koTraditional": null
+    },
+    {
+      "id": "kmle-t100-accessory-cranium-index",
+      "url": "https://m.kmle.co.kr/search.php?Search=accessory+bones+of+cranium",
+      "sourceLabel": "KMLE aggregation, KMLE search index check (no exact group entry; no page opened)",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed by KMLE",
+      "accessDate": "2026-09-29",
+      "accessMethod": "search_index_excerpt",
+      "locator": "KMLE index checks for `accessory bones of cranium/skull` surfaced a generic `accessory bone`/extra-ossicle result, not an exact cranial group entry; no Korean group label is inferred.",
+      "term": "accessory bones of cranium",
+      "koModern": null,
+      "koTraditional": null
+    },
+    {
+      "id": "kmle-t100-lower-thoracic-index",
+      "url": "https://m.kmle.co.kr/search.php?Search=lower+thoracic+vertebra",
+      "sourceLabel": "KMLE aggregation, KMLE search index check (no exact lower-thoracic term found; page retrieval failed)",
+      "exactEdition": null,
+      "editionExposure": "underlying dictionary edition/revision not exposed by KMLE",
+      "accessDate": "2026-09-29",
+      "accessMethod": "search_index_excerpt",
+      "locator": "Exact KMLE query produced no exact Korean lower-thoracic vertebra term in available search output; direct open of this URL was inaccessible through the retrieval tool. No T9-T12 subset boundary inferred.",
+      "term": "lower thoracic vertebra",
+      "koModern": null,
+      "koTraditional": null
+    }
+  ],
+  "targetTerminologyEvidence": [
+    {
+      "targetId": "TA2:356",
+      "targetTermSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms"
+      ],
+      "english": "facial bones",
+      "latin": "ossa faciei",
+      "sourceSynonyms": {},
+      "relatedTerms": [
+        "cranium faciale",
+        "skeleton faciei",
+        "skeleton faciale",
+        "facial skeleton"
+      ],
+      "semanticKind": "bone_group",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "sourceParentId": 353,
+      "sourceAncestryIds": [
+        356,
+        353,
+        352
+      ],
+      "sourceFlags": {
+        "inconstant": null,
+        "sex": null,
+        "primaryUsage": null,
+        "secondaryUsage": null,
+        "relatedTerms": [
+          "cranium faciale",
+          "skeleton faciei",
+          "skeleton faciale",
+          "facial skeleton"
+        ],
+        "noteReferences": [],
+        "seeAlso": [],
+        "disambiguationTerm": null
+      },
+      "classification": {
+        "meaningType": "bone group",
+        "groupPartVariant": "group; source/KMLE definitions disagree on constituent membership",
+        "laterality": "not specified; no side expansion"
+      },
+      "names": {
+        "koModern": "얼굴뼈",
+        "koTraditional": "안면골",
+        "en": "facial bones"
+      },
+      "fieldEvidence": {
+        "koModern": {
+          "value": "얼굴뼈",
+          "sourceIds": [
+            "kmle-t100-facial-bones-opened"
+          ],
+          "locator": "Opened KMLE Search=facial HTML, KI result facial bone → 얼굴뼈, 안면골; retrieved page lines 674-677.",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "koTraditional": {
+          "value": "안면골",
+          "sourceIds": [
+            "kmle-t100-facial-bones-opened"
+          ],
+          "locator": "Opened KMLE Search=facial HTML, KI result facial bone → 얼굴뼈, 안면골; retrieved page lines 674-677.",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "en": {
+          "value": "facial bones",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:356 exact English term: facial bones",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "latin": {
+          "value": "ossa faciei",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:356 exact Latin term: ossa faciei",
+          "status": "evidence_backed",
+          "missingReason": null
+        }
+      },
+      "existingSurface": {
+        "status": "group_surface_missing_composition_conflicted",
+        "exactAggregateSourceObject": null,
+        "exactMemberCrosswalkAdded": false,
+        "note": "Individual face-bone surfaces exist, but the opened KMLE definition gives differing member lists; no universal group geometry is claimed."
+      },
+      "observedSurfacesNotBound": [
+        {
+          "sourceKey": "ZA-c7010a9-2af07410041b271c5299818d",
+          "sourceObjectName": "Nasal bone.l",
+          "sourceDataName": "Nasal bone",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Bonus collection",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": "left",
+          "evaluatedGeometrySha256": "f13618eb021b0f391330e3e1af939acf61fab4ac7a2da1b5eba5b177148a4cba",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "sourceLocator": {
+            "archivePath": "Z-Anatomy/Startup.blend",
+            "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "objectDataBlockPointer": "0x18b63959608",
+            "objectIdName": "Nasal bone.l",
+            "serializedFileBlockOffset": 51130732
+          }
+        },
+        {
+          "sourceKey": "ZA-c7010a9-8bb057dbbdd2c1c790ce1215",
+          "sourceObjectName": "Nasal bone.r",
+          "sourceDataName": "Nasal bone",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Bonus collection",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": "right",
+          "evaluatedGeometrySha256": "f13618eb021b0f391330e3e1af939acf61fab4ac7a2da1b5eba5b177148a4cba",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "sourceLocator": {
+            "archivePath": "Z-Anatomy/Startup.blend",
+            "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "objectDataBlockPointer": "0x18b63958f08",
+            "objectIdName": "Nasal bone.r",
+            "serializedFileBlockOffset": 51134232
+          }
+        },
+        {
+          "sourceKey": "ZA-c7010a9-059c838d9075e42461b27ccb",
+          "sourceObjectName": "Maxilla.l",
+          "sourceDataName": "Maxilla",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Bonus collection",
+            "Cranium",
+            "Head",
+            "Right maxilla"
+          ],
+          "sourceSide": "left",
+          "evaluatedGeometrySha256": "76047a0bfedbe3bfc9f5d51d0e4e5e445653657d5f05bfce8d56aeb740edcdc3",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "sourceLocator": {
+            "archivePath": "Z-Anatomy/Startup.blend",
+            "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "objectDataBlockPointer": "0x18b63ac1608",
+            "objectIdName": "Maxilla.l",
+            "serializedFileBlockOffset": 49756944
+          }
+        },
+        {
+          "sourceKey": "ZA-c7010a9-798e4f9251fb53176412b9b1",
+          "sourceObjectName": "Maxilla.r",
+          "sourceDataName": "Maxilla",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Bonus collection",
+            "Cranium",
+            "Head",
+            "Right maxilla"
+          ],
+          "sourceSide": "right",
+          "evaluatedGeometrySha256": "76047a0bfedbe3bfc9f5d51d0e4e5e445653657d5f05bfce8d56aeb740edcdc3",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "sourceLocator": {
+            "archivePath": "Z-Anatomy/Startup.blend",
+            "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "objectDataBlockPointer": "0x18b63ac0f08",
+            "objectIdName": "Maxilla.r",
+            "serializedFileBlockOffset": 49760480
+          }
+        },
+        {
+          "sourceKey": "ZA-c7010a9-179fa204ccffef5f88aa335f",
+          "sourceObjectName": "Mandible",
+          "sourceDataName": "Mandible",
+          "sourceParent": "Extracranial bones of head.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Extracranial bones of head",
+            "Head",
+            "Mandible"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "e5e39703885dc3423fc3c76ef40bfcd870e7ea10d2299dc0dec261c288c03fa9",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "sourceLocator": {
+            "archivePath": "Z-Anatomy/Startup.blend",
+            "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "objectDataBlockPointer": "0x18b63add608",
+            "objectIdName": "Mandible",
+            "serializedFileBlockOffset": 49628192
+          }
+        },
+        {
+          "sourceKey": "ZA-c7010a9-50c34b30aaa7def0fbbe1b50",
+          "sourceObjectName": "Zygomatic bone.l",
+          "sourceDataName": "Zygomatic bone",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Bonus collection",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": "left",
+          "evaluatedGeometrySha256": "c54fa7288671e958a69d07202878719353d41376691eb02ec50c4447e2257b6a",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "sourceLocator": {
+            "archivePath": "Z-Anatomy/Startup.blend",
+            "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "objectDataBlockPointer": "0x18b64e51d08",
+            "objectIdName": "Zygomatic bone.l",
+            "serializedFileBlockOffset": 61492196
+          }
+        },
+        {
+          "sourceKey": "ZA-c7010a9-bd8ae60d169ec92c17d9d83d",
+          "sourceObjectName": "Zygomatic bone.r",
+          "sourceDataName": "Zygomatic bone",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Bonus collection",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": "right",
+          "evaluatedGeometrySha256": "c54fa7288671e958a69d07202878719353d41376691eb02ec50c4447e2257b6a",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "sourceLocator": {
+            "archivePath": "Z-Anatomy/Startup.blend",
+            "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "objectDataBlockPointer": "0x18b64e51608",
+            "objectIdName": "Zygomatic bone.r",
+            "serializedFileBlockOffset": 61495868
+          }
+        },
+        {
+          "sourceKey": "ZA-c7010a9-4956f16bc13e696a65de1978",
+          "sourceObjectName": "Lacrimal bone.l",
+          "sourceDataName": "Lacrimal bone",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Bonus collection",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": "left",
+          "evaluatedGeometrySha256": "24783dc7b44fce97cbde0e45e630fb615c8fc05a339c038d9dc0059d1964781d",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "sourceLocator": {
+            "archivePath": "Z-Anatomy/Startup.blend",
+            "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "objectDataBlockPointer": "0x18b63d6b208",
+            "objectIdName": "Lacrimal bone.l",
+            "serializedFileBlockOffset": 47303620
+          }
+        },
+        {
+          "sourceKey": "ZA-c7010a9-1593fe77354a78d2c23f1f86",
+          "sourceObjectName": "Lacrimal bone.r",
+          "sourceDataName": "Lacrimal bone",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Bonus collection",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": "right",
+          "evaluatedGeometrySha256": "24783dc7b44fce97cbde0e45e630fb615c8fc05a339c038d9dc0059d1964781d",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "sourceLocator": {
+            "archivePath": "Z-Anatomy/Startup.blend",
+            "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "objectDataBlockPointer": "0x18b63d6ab08",
+            "objectIdName": "Lacrimal bone.r",
+            "serializedFileBlockOffset": 47307140
+          }
+        },
+        {
+          "sourceKey": "ZA-c7010a9-fb435068a3b622aba6057492",
+          "sourceObjectName": "Vomer",
+          "sourceDataName": "Vomer",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Bonus collection",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "ed21d5fe2138e36531e9022c6bb8ff084e22966145257a11d8e16ef2a9f5b726",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "sourceLocator": {
+            "archivePath": "Z-Anatomy/Startup.blend",
+            "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "objectDataBlockPointer": "0x18b64e64808",
+            "objectIdName": "Vomer",
+            "serializedFileBlockOffset": 61409320
+          }
+        }
+      ],
+      "learnerBindingCreated": false,
+      "canonicalHaConceptId": null,
+      "sourceOnly": true,
+      "humanReview": "not_performed",
+      "publicRedistribution": "held",
+      "newGeometryCreated": false
+    },
+    {
+      "targetId": "TA2:819",
+      "targetTermSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms"
+      ],
+      "english": "os japonicum",
+      "latin": "os japonicum",
+      "sourceSynonyms": {
+        "en": [
+          "bipartite zygomatic bone"
+        ]
+      },
+      "relatedTerms": [],
+      "semanticKind": "bone",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "sourceParentId": 818,
+      "sourceAncestryIds": [
+        819,
+        818,
+        503,
+        406,
+        352
+      ],
+      "sourceFlags": {
+        "inconstant": "true",
+        "sex": null,
+        "primaryUsage": null,
+        "secondaryUsage": null,
+        "relatedTerms": [],
+        "noteReferences": [
+          115
+        ],
+        "seeAlso": [],
+        "disambiguationTerm": null
+      },
+      "classification": {
+        "meaningType": "individual bone variant",
+        "groupPartVariant": "inconstant variant of zygomatic bone; TA2 exact English synonym bipartite zygomatic bone",
+        "laterality": "not specified"
+      },
+      "names": {
+        "koModern": null,
+        "koTraditional": null,
+        "en": "os japonicum"
+      },
+      "fieldEvidence": {
+        "koModern": {
+          "value": null,
+          "sourceIds": [],
+          "locator": null,
+          "status": "missing",
+          "missingReason": "No exact Korean entry found in the KMLE index; do not translate the variant name by composition."
+        },
+        "koTraditional": {
+          "value": null,
+          "sourceIds": [],
+          "locator": null,
+          "status": "missing",
+          "missingReason": "No source-backed Sino-Korean Hangul name found."
+        },
+        "en": {
+          "value": "os japonicum",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:819 exact English term: os japonicum",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "latin": {
+          "value": "os japonicum",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:819 exact Latin term: os japonicum",
+          "status": "evidence_backed",
+          "missingReason": null
+        }
+      },
+      "existingSurface": {
+        "status": "variant_surface_missing",
+        "exactSourceObject": null,
+        "exactMemberCrosswalkAdded": false,
+        "note": "Ordinary left/right zygomatic bone surfaces are present, but no split/bipartite variant object is named or evaluated."
+      },
+      "observedSurfacesNotBound": [
+        {
+          "sourceKey": "ZA-c7010a9-50c34b30aaa7def0fbbe1b50",
+          "sourceObjectName": "Zygomatic bone.l",
+          "sourceDataName": "Zygomatic bone",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Bonus collection",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": "left",
+          "evaluatedGeometrySha256": "c54fa7288671e958a69d07202878719353d41376691eb02ec50c4447e2257b6a",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "sourceLocator": {
+            "archivePath": "Z-Anatomy/Startup.blend",
+            "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "objectDataBlockPointer": "0x18b64e51d08",
+            "objectIdName": "Zygomatic bone.l",
+            "serializedFileBlockOffset": 61492196
+          }
+        },
+        {
+          "sourceKey": "ZA-c7010a9-bd8ae60d169ec92c17d9d83d",
+          "sourceObjectName": "Zygomatic bone.r",
+          "sourceDataName": "Zygomatic bone",
+          "sourceParent": "Bones of cranium.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Bonus collection",
+            "Cranium",
+            "Head"
+          ],
+          "sourceSide": "right",
+          "evaluatedGeometrySha256": "c54fa7288671e958a69d07202878719353d41376691eb02ec50c4447e2257b6a",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "sourceLocator": {
+            "archivePath": "Z-Anatomy/Startup.blend",
+            "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "objectDataBlockPointer": "0x18b64e51608",
+            "objectIdName": "Zygomatic bone.r",
+            "serializedFileBlockOffset": 61495868
+          }
+        }
+      ],
+      "learnerBindingCreated": false,
+      "canonicalHaConceptId": null,
+      "sourceOnly": true,
+      "humanReview": "not_performed",
+      "publicRedistribution": "held",
+      "newGeometryCreated": false
+    },
+    {
+      "targetId": "TA2:830",
+      "targetTermSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms"
+      ],
+      "english": "accessory bones of cranium",
+      "latin": "ossa accessoria cranii",
+      "sourceSynonyms": {
+        "en": [
+          "accessory bones of skull"
+        ]
+      },
+      "relatedTerms": [],
+      "semanticKind": "bone_group",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "sourceParentId": 503,
+      "sourceAncestryIds": [
+        830,
+        503,
+        406,
+        352
+      ],
+      "sourceFlags": {
+        "inconstant": null,
+        "sex": null,
+        "primaryUsage": null,
+        "secondaryUsage": null,
+        "relatedTerms": [],
+        "noteReferences": [],
+        "seeAlso": [],
+        "disambiguationTerm": null
+      },
+      "classification": {
+        "meaningType": "bone group",
+        "groupPartVariant": "accessory cranium bone group; no frozen member enumeration in this batch",
+        "laterality": "not specified"
+      },
+      "names": {
+        "koModern": null,
+        "koTraditional": null,
+        "en": "accessory bones of cranium"
+      },
+      "fieldEvidence": {
+        "koModern": {
+          "value": null,
+          "sourceIds": [],
+          "locator": null,
+          "status": "missing",
+          "missingReason": "KMLE index checks did not surface an exact cranial group entry; generic accessory bone is not substituted."
+        },
+        "koTraditional": {
+          "value": null,
+          "sourceIds": [],
+          "locator": null,
+          "status": "missing",
+          "missingReason": "No source-backed group label found."
+        },
+        "en": {
+          "value": "accessory bones of cranium",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:830 exact English term: accessory bones of cranium",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "latin": {
+          "value": "ossa accessoria cranii",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:830 exact Latin term: ossa accessoria cranii",
+          "status": "evidence_backed",
+          "missingReason": null
+        }
+      },
+      "existingSurface": {
+        "status": "group_surface_missing",
+        "exactAggregateSourceObject": null,
+        "exactMemberCrosswalkAdded": false,
+        "note": "No exact aggregate source object or stable group member list was found."
+      },
+      "observedSurfacesNotBound": [],
+      "learnerBindingCreated": false,
+      "canonicalHaConceptId": null,
+      "sourceOnly": true,
+      "humanReview": "not_performed",
+      "publicRedistribution": "held",
+      "newGeometryCreated": false
+    },
+    {
+      "targetId": "TA2:831",
+      "targetTermSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms"
+      ],
+      "english": "sutural bone",
+      "latin": "os suturale",
+      "sourceSynonyms": {},
+      "relatedTerms": [
+        "wormian bone"
+      ],
+      "semanticKind": "bone",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "sourceParentId": 830,
+      "sourceAncestryIds": [
+        831,
+        830,
+        503,
+        406,
+        352
+      ],
+      "sourceFlags": {
+        "inconstant": "true",
+        "sex": null,
+        "primaryUsage": null,
+        "secondaryUsage": null,
+        "relatedTerms": [
+          "wormian bone"
+        ],
+        "noteReferences": [
+          118
+        ],
+        "seeAlso": [],
+        "disambiguationTerm": null
+      },
+      "classification": {
+        "meaningType": "individual bone variation",
+        "groupPartVariant": "inconstant sutural bone; TA2 related term wormian bone is retained as related, not promoted to an exact synonym",
+        "laterality": "not specified"
+      },
+      "names": {
+        "koModern": "봉합뼈",
+        "koTraditional": null,
+        "en": "sutural bone"
+      },
+      "fieldEvidence": {
+        "koModern": {
+          "value": "봉합뼈",
+          "sourceIds": [
+            "kmle-t100-sutural-bone-index"
+          ],
+          "locator": "KMLE search-index excerpt: sutural bone → 봉합뼈; original result page not opened.",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "koTraditional": {
+          "value": null,
+          "sourceIds": [],
+          "locator": null,
+          "status": "missing",
+          "missingReason": "No older/Sino-Korean Hangul form was verified."
+        },
+        "en": {
+          "value": "sutural bone",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:831 exact English term: sutural bone",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "latin": {
+          "value": "os suturale",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:831 exact Latin term: os suturale",
+          "status": "evidence_backed",
+          "missingReason": null
+        }
+      },
+      "existingSurface": {
+        "status": "exact_surface_missing",
+        "exactSourceObject": null,
+        "exactMemberCrosswalkAdded": false,
+        "note": "No exact evaluated source object named sutural/Wormian bone."
+      },
+      "observedSurfacesNotBound": [],
+      "learnerBindingCreated": false,
+      "canonicalHaConceptId": null,
+      "sourceOnly": true,
+      "humanReview": "not_performed",
+      "publicRedistribution": "held",
+      "newGeometryCreated": false
+    },
+    {
+      "targetId": "TA2:832",
+      "targetTermSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms"
+      ],
+      "english": "interparietal bone",
+      "latin": "os interparietale",
+      "sourceSynonyms": {
+        "la": [
+          "os incae"
+        ],
+        "en": [
+          "inca bone"
+        ]
+      },
+      "relatedTerms": [
+        "os inca"
+      ],
+      "semanticKind": "bone",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "sourceParentId": 830,
+      "sourceAncestryIds": [
+        832,
+        830,
+        503,
+        406,
+        352
+      ],
+      "sourceFlags": {
+        "inconstant": "true",
+        "sex": null,
+        "primaryUsage": null,
+        "secondaryUsage": null,
+        "relatedTerms": [
+          "os inca"
+        ],
+        "noteReferences": [],
+        "seeAlso": [],
+        "disambiguationTerm": null
+      },
+      "classification": {
+        "meaningType": "individual bone variation",
+        "groupPartVariant": "inconstant accessory interparietal bone; TA2 synonyms os incae/inca bone and related term os inca are kept in their distinct source fields",
+        "laterality": "not specified"
+      },
+      "names": {
+        "koModern": "마루사이뼈",
+        "koTraditional": "두정간골",
+        "en": "interparietal bone"
+      },
+      "fieldEvidence": {
+        "koModern": {
+          "value": "마루사이뼈",
+          "sourceIds": [
+            "kmle-t100-interparietal-bone-opened"
+          ],
+          "locator": "Opened KMLE Search=bone HTML, Korean Anatomical Society similar result, lines 780-784.",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "koTraditional": {
+          "value": "두정간골",
+          "sourceIds": [
+            "kmle-t100-interparietal-bone-opened"
+          ],
+          "locator": "Opened KMLE Search=bone HTML, Korean Anatomical Society similar result, lines 780-784.",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "en": {
+          "value": "interparietal bone",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:832 exact English term: interparietal bone",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "latin": {
+          "value": "os interparietale",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:832 exact Latin term: os interparietale",
+          "status": "evidence_backed",
+          "missingReason": null
+        }
+      },
+      "existingSurface": {
+        "status": "exact_surface_missing",
+        "exactSourceObject": null,
+        "exactMemberCrosswalkAdded": false,
+        "note": "No exact interparietal/inca evaluated surface; nearby parietal/occipital surfaces are not a substitute."
+      },
+      "observedSurfacesNotBound": [],
+      "learnerBindingCreated": false,
+      "canonicalHaConceptId": null,
+      "sourceOnly": true,
+      "humanReview": "not_performed",
+      "publicRedistribution": "held",
+      "newGeometryCreated": false
+    },
+    {
+      "targetId": "TA2:1032",
+      "targetTermSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms"
+      ],
+      "english": "cervical vertebra",
+      "latin": "vertebra cervicalis",
+      "sourceSynonyms": {},
+      "relatedTerms": [],
+      "semanticKind": "bone",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "sourceParentId": 1031,
+      "sourceAncestryIds": [
+        1032,
+        1031,
+        1010,
+        1001,
+        352
+      ],
+      "sourceFlags": {
+        "inconstant": null,
+        "sex": null,
+        "primaryUsage": null,
+        "secondaryUsage": null,
+        "relatedTerms": [],
+        "noteReferences": [],
+        "seeAlso": [],
+        "disambiguationTerm": null
+      },
+      "classification": {
+        "meaningType": "named bone type",
+        "groupPartVariant": "general cervical vertebra concept; C3-C7 are exact class members in this source, while C1/C2 have separately named target rows",
+        "laterality": "midline/nonpaired source labels; no side expansion"
+      },
+      "names": {
+        "koModern": "목뼈",
+        "koTraditional": "경추",
+        "en": "cervical vertebra"
+      },
+      "fieldEvidence": {
+        "koModern": {
+          "value": "목뼈",
+          "sourceIds": [
+            "kmle-t100-cervical-vertebra-opened"
+          ],
+          "locator": "Opened KMLE Search=thoracic+vertebra HTML, `cervical vertebra` entry lines 53-55.",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "koTraditional": {
+          "value": "경추",
+          "sourceIds": [
+            "kmle-t100-cervical-vertebra-opened"
+          ],
+          "locator": "Opened KMLE Search=thoracic+vertebra HTML, `cervical vertebra` entry lines 53-55.",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "en": {
+          "value": "cervical vertebra",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:1032 exact English term: cervical vertebra",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "latin": {
+          "value": "vertebra cervicalis",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:1032 exact Latin term: vertebra cervicalis",
+          "status": "evidence_backed",
+          "missingReason": null
+        }
+      },
+      "existingSurface": {
+        "status": "five_exact_class_member_surfaces",
+        "exactSourceObject": null,
+        "relationKind": "class_member",
+        "sourceMembers": [
+          {
+            "sourceKey": "ZA-c7010a9-ba233b3437c11ebd1878bb33",
+            "sourceObjectName": "Vertebra C3",
+            "sourceDataName": "Vertebra C3",
+            "sourceParent": "Cervical vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Cervical vertebrae",
+              "Neck",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "278a43d2ab9cf229c3eaf6360dde1dadd2042d7dce3cf950e6384a1ba524d874",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e9eb08",
+              "objectIdName": "Vertebra C3",
+              "serializedFileBlockOffset": 61165904
+            }
+          },
+          {
+            "sourceKey": "ZA-c7010a9-79fdb2da04a91feede8dc361",
+            "sourceObjectName": "Vertebra C4",
+            "sourceDataName": "Vertebra C4",
+            "sourceParent": "Cervical vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Cervical vertebrae",
+              "Neck",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "51d7a556a5558bcf845bb2c5f077fc0d123256cdc3b5b05fbd342a4b0ebc6be2",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e9e408",
+              "objectIdName": "Vertebra C4",
+              "serializedFileBlockOffset": 61169676
+            }
+          },
+          {
+            "sourceKey": "ZA-c7010a9-10fbd529e96cb0d19ef8752b",
+            "sourceObjectName": "Vertebra C5",
+            "sourceDataName": "Vertebra C5",
+            "sourceParent": "Cervical vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Cervical vertebrae",
+              "Neck",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "8e41a3a6ca8e8193ab2123ba0f6700a88b31683baaa37dcdc9d5c2225dde084e",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e9dd08",
+              "objectIdName": "Vertebra C5",
+              "serializedFileBlockOffset": 61173960
+            }
+          },
+          {
+            "sourceKey": "ZA-c7010a9-d1a470dc79c9ce82d1cca60c",
+            "sourceObjectName": "Vertebra C6",
+            "sourceDataName": "Vertebra C6",
+            "sourceParent": "Cervical vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Cervical vertebrae",
+              "Neck",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "cecb216b7fe2ac8259e3669790c00198bedd735467c17713945eff88f21cce28",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e9d608",
+              "objectIdName": "Vertebra C6",
+              "serializedFileBlockOffset": 61177732
+            }
+          },
+          {
+            "sourceKey": "ZA-c7010a9-b2ebff66eb1792f6e8e32080",
+            "sourceObjectName": "Vertebra C7",
+            "sourceDataName": "Vertebra C7",
+            "sourceParent": "Cervical vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Cervical vertebrae",
+              "Neck",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "d5abfb20fb6523b2a399538c5f5d665d3209d1ddd9d104140528b0e6facb47f3",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e9cf08",
+              "objectIdName": "Vertebra C7",
+              "serializedFileBlockOffset": 61181664
+            }
+          }
+        ],
+        "note": "C1/C2 are recorded under their exact TA2:1038/1050 concepts, not duplicated into this generic row."
+      },
+      "observedSurfacesNotBound": [],
+      "learnerBindingCreated": false,
+      "canonicalHaConceptId": null,
+      "sourceOnly": true,
+      "humanReview": "not_performed",
+      "publicRedistribution": "held",
+      "newGeometryCreated": false
+    },
+    {
+      "targetId": "TA2:1038",
+      "targetTermSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms"
+      ],
+      "english": "atlas",
+      "latin": "atlas",
+      "sourceSynonyms": {
+        "la": [
+          "vertebra cervicalis I",
+          "vertebra C1"
+        ],
+        "en": [
+          "vertebra C1"
+        ]
+      },
+      "relatedTerms": [
+        "os atlanticum",
+        "atlas bone"
+      ],
+      "semanticKind": "bone",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "sourceParentId": 1031,
+      "sourceAncestryIds": [
+        1038,
+        1031,
+        1010,
+        1001,
+        352
+      ],
+      "sourceFlags": {
+        "inconstant": null,
+        "sex": null,
+        "primaryUsage": null,
+        "secondaryUsage": null,
+        "relatedTerms": [
+          "os atlanticum",
+          "atlas bone"
+        ],
+        "noteReferences": [],
+        "seeAlso": [],
+        "disambiguationTerm": null
+      },
+      "classification": {
+        "meaningType": "individual bone",
+        "groupPartVariant": "named first cervical vertebra (atlas); exact TA2 synonym vertebra C1",
+        "laterality": "midline/nonpaired source label"
+      },
+      "names": {
+        "koModern": "고리뼈",
+        "koTraditional": "환추골",
+        "en": "atlas"
+      },
+      "fieldEvidence": {
+        "koModern": {
+          "value": "고리뼈",
+          "sourceIds": [
+            "kmle-t100-atlas-opened"
+          ],
+          "locator": "Opened KMLE Search=atlas HTML, Korean Anatomical Society result, lines 83-91.",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "koTraditional": {
+          "value": "환추골",
+          "sourceIds": [
+            "kmle-t100-atlas-opened"
+          ],
+          "locator": "Opened KMLE Search=atlas HTML, Korean Anatomical Society result, lines 83-91.",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "en": {
+          "value": "atlas",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:1038 exact English term: atlas",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "latin": {
+          "value": "atlas",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:1038 exact Latin term: atlas",
+          "status": "evidence_backed",
+          "missingReason": null
+        }
+      },
+      "existingSurface": {
+        "status": "one_exact_qualified_source_object",
+        "exactSourceObject": "Atlas (C1)",
+        "relationKind": "qualified_target_synonym",
+        "sourceMembers": [
+          {
+            "sourceKey": "ZA-c7010a9-d6c3cdfe939e4d46b75ce9b6",
+            "sourceObjectName": "Atlas (C1)",
+            "sourceDataName": "Atlas (C1)",
+            "sourceParent": "Cervical vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Cervical vertebrae",
+              "Neck",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "e640d2d52fa2a62484468382bdb245a28eb3aa3c919cf0d859d580e1f0daca6b",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b62636b08",
+              "objectIdName": "Atlas (C1)",
+              "serializedFileBlockOffset": 38950076
+            }
+          }
+        ],
+        "note": "Exact object name plus target's exact synonym vertebra C1; parent and cervical collection corroborate region."
+      },
+      "observedSurfacesNotBound": [],
+      "learnerBindingCreated": false,
+      "canonicalHaConceptId": null,
+      "sourceOnly": true,
+      "humanReview": "not_performed",
+      "publicRedistribution": "held",
+      "newGeometryCreated": false
+    },
+    {
+      "targetId": "TA2:1050",
+      "targetTermSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms"
+      ],
+      "english": "axis",
+      "latin": "axis",
+      "sourceSynonyms": {
+        "la": [
+          "vertebra cervicalis II",
+          "vertebra C2"
+        ],
+        "en": [
+          "vertebra C2"
+        ]
+      },
+      "relatedTerms": [
+        "os axiale",
+        "axis bone",
+        "epistropheus"
+      ],
+      "semanticKind": "bone",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "sourceParentId": 1031,
+      "sourceAncestryIds": [
+        1050,
+        1031,
+        1010,
+        1001,
+        352
+      ],
+      "sourceFlags": {
+        "inconstant": null,
+        "sex": null,
+        "primaryUsage": null,
+        "secondaryUsage": null,
+        "relatedTerms": [
+          "os axiale",
+          "axis bone",
+          "epistropheus"
+        ],
+        "noteReferences": [
+          140
+        ],
+        "seeAlso": [],
+        "disambiguationTerm": null
+      },
+      "classification": {
+        "meaningType": "individual bone",
+        "groupPartVariant": "named second cervical vertebra (axis); exact TA2 synonym vertebra C2",
+        "laterality": "midline/nonpaired source label"
+      },
+      "names": {
+        "koModern": "중쇠뼈",
+        "koTraditional": "축추골",
+        "en": "axis"
+      },
+      "fieldEvidence": {
+        "koModern": {
+          "value": "중쇠뼈",
+          "sourceIds": [
+            "kmle-t100-axis-opened"
+          ],
+          "locator": "Opened KMLE Search=thoracic+vertebra HTML, Korean Anatomical Society result, lines 378-381.",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "koTraditional": {
+          "value": "축추골",
+          "sourceIds": [
+            "kmle-t100-axis-opened"
+          ],
+          "locator": "Opened KMLE Search=thoracic+vertebra HTML, Korean Anatomical Society result, lines 378-381.",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "en": {
+          "value": "axis",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:1050 exact English term: axis",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "latin": {
+          "value": "axis",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:1050 exact Latin term: axis",
+          "status": "evidence_backed",
+          "missingReason": null
+        }
+      },
+      "existingSurface": {
+        "status": "one_exact_qualified_source_object",
+        "exactSourceObject": "Axis (C2)",
+        "relationKind": "qualified_target_synonym",
+        "sourceMembers": [
+          {
+            "sourceKey": "ZA-c7010a9-adbf8d3a03914592274e51ea",
+            "sourceObjectName": "Axis (C2)",
+            "sourceDataName": "Axis (C2)",
+            "sourceParent": "Cervical vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Cervical vertebrae",
+              "Neck",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "46e87ad19c7ce2c9e6c9dc81489c04883a79a6ef243de4ebee3292d8d3762f66",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b62620f08",
+              "objectIdName": "Axis (C2)",
+              "serializedFileBlockOffset": 39056400
+            }
+          }
+        ],
+        "note": "Exact object name plus target's exact synonym vertebra C2; parent and cervical collection corroborate region."
+      },
+      "observedSurfacesNotBound": [],
+      "learnerBindingCreated": false,
+      "canonicalHaConceptId": null,
+      "sourceOnly": true,
+      "humanReview": "not_performed",
+      "publicRedistribution": "held",
+      "newGeometryCreated": false
+    },
+    {
+      "targetId": "TA2:1059",
+      "targetTermSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms"
+      ],
+      "english": "thoracic vertebra",
+      "latin": "vertebra thoracica",
+      "sourceSynonyms": {},
+      "relatedTerms": [],
+      "semanticKind": "bone",
+      "primaryOwner": "back",
+      "regionIds": [
+        "back"
+      ],
+      "sourceParentId": 1058,
+      "sourceAncestryIds": [
+        1059,
+        1058,
+        1010,
+        1001,
+        352
+      ],
+      "sourceFlags": {
+        "inconstant": null,
+        "sex": null,
+        "primaryUsage": null,
+        "secondaryUsage": null,
+        "relatedTerms": [],
+        "noteReferences": [],
+        "seeAlso": [],
+        "disambiguationTerm": null
+      },
+      "classification": {
+        "meaningType": "named bone type",
+        "groupPartVariant": "general thoracic vertebra concept; 12 source objects T1-T12 are exact class members; distinct series target TA2:1058 is not replaced",
+        "laterality": "midline/nonpaired source labels"
+      },
+      "names": {
+        "koModern": "등뼈",
+        "koTraditional": "흉추골",
+        "en": "thoracic vertebra"
+      },
+      "fieldEvidence": {
+        "koModern": {
+          "value": "등뼈",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened"
+          ],
+          "locator": "Opened KMLE Search=thoracic+vertebra HTML, lines 73-81 and Korean Anatomical Society range entry lines 332-341.",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "koTraditional": {
+          "value": "흉추골",
+          "sourceIds": [
+            "kmle-t100-thoracic-vertebra-opened"
+          ],
+          "locator": "Opened KMLE Search=thoracic+vertebra HTML, lines 73-81 and Korean Anatomical Society range entry lines 332-341.",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "en": {
+          "value": "thoracic vertebra",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:1059 exact English term: thoracic vertebra",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "latin": {
+          "value": "vertebra thoracica",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:1059 exact Latin term: vertebra thoracica",
+          "status": "evidence_backed",
+          "missingReason": null
+        }
+      },
+      "existingSurface": {
+        "status": "twelve_exact_class_member_surfaces",
+        "exactSourceObject": null,
+        "relationKind": "class_member",
+        "sourceMembers": [
+          {
+            "sourceKey": "ZA-c7010a9-76e5da8886205c6c995b337d",
+            "sourceObjectName": "Vertebra T1",
+            "sourceDataName": "Vertebra T1",
+            "sourceParent": "Thoracic vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Thoracic skeleton",
+              "Thoracic vertebrae",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "b8b335663b09afedabe7f1521cbcbeee457e14a3279b270c6cc48ea05b7e1f0f",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e96408",
+              "objectIdName": "Vertebra T1",
+              "serializedFileBlockOffset": 61205448
+            }
+          },
+          {
+            "sourceKey": "ZA-c7010a9-b152318736adaa2906689dd4",
+            "sourceObjectName": "Vertebra T2",
+            "sourceDataName": "Vertebra T2",
+            "sourceParent": "Thoracic vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Thoracic skeleton",
+              "Thoracic vertebrae",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "bb95ce1b1f7f1438ab2cb3e15f798048765b898b1bd8ba294d3765f99a9480e4",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e94808",
+              "objectIdName": "Vertebra T2",
+              "serializedFileBlockOffset": 61221176
+            }
+          },
+          {
+            "sourceKey": "ZA-c7010a9-762ce47ecb86b812a16aeaef",
+            "sourceObjectName": "Vertebra T3",
+            "sourceDataName": "Vertebra T3",
+            "sourceParent": "Thoracic vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Thoracic skeleton",
+              "Thoracic vertebrae",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "d0b68844ae015a9aa22456bcf4ffc809afc7ce129ba877bd36e91269e0a0d60b",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e94108",
+              "objectIdName": "Vertebra T3",
+              "serializedFileBlockOffset": 61225108
+            }
+          },
+          {
+            "sourceKey": "ZA-c7010a9-70797c869b775802950660dd",
+            "sourceObjectName": "Vertebra T4",
+            "sourceDataName": "Vertebra T4",
+            "sourceParent": "Thoracic vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Thoracic skeleton",
+              "Thoracic vertebrae",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "88906126a0a18935753ec8f59da33684372eed87d4b1dc0000252aca9b5b13c3",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e93908",
+              "objectIdName": "Vertebra T4",
+              "serializedFileBlockOffset": 61229040
+            }
+          },
+          {
+            "sourceKey": "ZA-c7010a9-2efd0d84f3e7cb96e0dfe800",
+            "sourceObjectName": "Vertebra T5",
+            "sourceDataName": "Vertebra T5",
+            "sourceParent": "Thoracic vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Thoracic skeleton",
+              "Thoracic vertebrae",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "2911255c2d6a4b6720e65d272dc688dc112eabb17b68679c50eac8fa2b8dd8e4",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e93208",
+              "objectIdName": "Vertebra T5",
+              "serializedFileBlockOffset": 61232972
+            }
+          },
+          {
+            "sourceKey": "ZA-c7010a9-ec9ce75a05c7aa34a500f02d",
+            "sourceObjectName": "Vertebra T6",
+            "sourceDataName": "Vertebra T6",
+            "sourceParent": "Thoracic vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Thoracic skeleton",
+              "Thoracic vertebrae",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "b692cdbc6613c9eb481c2b495c6456516d3b19199ef0bb4d4c4c34bea8979211",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e92b08",
+              "objectIdName": "Vertebra T6",
+              "serializedFileBlockOffset": 61236904
+            }
+          },
+          {
+            "sourceKey": "ZA-c7010a9-59914ec5337c1ea4beb6e18b",
+            "sourceObjectName": "Vertebra T7",
+            "sourceDataName": "Vertebra T7",
+            "sourceParent": "Thoracic vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Thoracic skeleton",
+              "Thoracic vertebrae",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "98a20b877e2fce856dabe8dfa406d243111131c81333ae15e7b60c3342bb12a0",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e92408",
+              "objectIdName": "Vertebra T7",
+              "serializedFileBlockOffset": 61240836
+            }
+          },
+          {
+            "sourceKey": "ZA-c7010a9-62001811337e87a684394eaa",
+            "sourceObjectName": "Vertebra T8",
+            "sourceDataName": "Vertebra T8",
+            "sourceParent": "Thoracic vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Thoracic skeleton",
+              "Thoracic vertebrae",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "10761202fcdf1a230e49cc748966413d3d4ca0bb4e3165e091fbfe0d9b2b8f98",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e91d08",
+              "objectIdName": "Vertebra T8",
+              "serializedFileBlockOffset": 61244768
+            }
+          },
+          {
+            "sourceKey": "ZA-c7010a9-b5c1560b12a491a31ba15b7c",
+            "sourceObjectName": "Vertebra T9",
+            "sourceDataName": "Vertebra T9",
+            "sourceParent": "Thoracic vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Thoracic skeleton",
+              "Thoracic vertebrae",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "79e72c9b41aad6fd157650d40ed81fcc73d34813be94ae7c07540d9b24d22045",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e91608",
+              "objectIdName": "Vertebra T9",
+              "serializedFileBlockOffset": 61249212
+            }
+          },
+          {
+            "sourceKey": "ZA-c7010a9-ec06f162cb073e506509724d",
+            "sourceObjectName": "Vertebra T10",
+            "sourceDataName": "Vertebra T10",
+            "sourceParent": "Thoracic vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Thoracic skeleton",
+              "Thoracic vertebrae",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "2b53ba3c3ee4eab6781da6776d70fd9f4a6ab1cdbcd892db9318f968272b5b16",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e95d08",
+              "objectIdName": "Vertebra T10",
+              "serializedFileBlockOffset": 61209380
+            }
+          },
+          {
+            "sourceKey": "ZA-c7010a9-01d3b746fffced72073c9cf4",
+            "sourceObjectName": "Vertebra T11",
+            "sourceDataName": "Vertebra T11",
+            "sourceParent": "Thoracic vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Thoracic skeleton",
+              "Thoracic vertebrae",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "72010e2d76ea1fcf534087c0b4b8430fdc46ba36126c5556c64b97e60031ec45",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e95608",
+              "objectIdName": "Vertebra T11",
+              "serializedFileBlockOffset": 61213312
+            }
+          },
+          {
+            "sourceKey": "ZA-c7010a9-9f03a59b82316afbeea1b631",
+            "sourceObjectName": "Vertebra T12",
+            "sourceDataName": "Vertebra T12",
+            "sourceParent": "Thoracic vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Thoracic skeleton",
+              "Thoracic vertebrae",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "e143a08b262074cbbb623981d96418de68980f1ad9ed75e17ccec1cb9b6c13c1",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e94f08",
+              "objectIdName": "Vertebra T12",
+              "serializedFileBlockOffset": 61217244
+            }
+          }
+        ],
+        "note": "All 12 source names are explicit; the KMLE range term independently names first through twelfth thoracic vertebrae."
+      },
+      "observedSurfacesNotBound": [],
+      "learnerBindingCreated": false,
+      "canonicalHaConceptId": null,
+      "sourceOnly": true,
+      "humanReview": "not_performed",
+      "publicRedistribution": "held",
+      "newGeometryCreated": false
+    },
+    {
+      "targetId": "TA2:1065",
+      "targetTermSourceIds": [
+        "fipat-ta2-t100-b02-frozen-target-terms"
+      ],
+      "english": "lower thoracic vertebra",
+      "latin": "vertebra thoracica inferior",
+      "sourceSynonyms": {},
+      "relatedTerms": [],
+      "semanticKind": "bone",
+      "primaryOwner": "back",
+      "regionIds": [
+        "back"
+      ],
+      "sourceParentId": 1058,
+      "sourceAncestryIds": [
+        1065,
+        1058,
+        1010,
+        1001,
+        352
+      ],
+      "sourceFlags": {
+        "inconstant": null,
+        "sex": null,
+        "primaryUsage": null,
+        "secondaryUsage": null,
+        "relatedTerms": [],
+        "noteReferences": [],
+        "seeAlso": [],
+        "disambiguationTerm": null
+      },
+      "classification": {
+        "meaningType": "individual lower-thoracic vertebra concept",
+        "groupPartVariant": "lower subset boundary/member enumeration not fixed by this target row; T9-T12 are candidates only",
+        "laterality": "midline/nonpaired source labels"
+      },
+      "names": {
+        "koModern": null,
+        "koTraditional": null,
+        "en": "lower thoracic vertebra"
+      },
+      "fieldEvidence": {
+        "koModern": {
+          "value": null,
+          "sourceIds": [],
+          "locator": null,
+          "status": "missing",
+          "missingReason": "No exact KMLE Korean term for lower thoracic vertebra was found; do not infer `아래등뼈`."
+        },
+        "koTraditional": {
+          "value": null,
+          "sourceIds": [],
+          "locator": null,
+          "status": "missing",
+          "missingReason": "No source-backed older/Sino-Korean Hangul term was verified."
+        },
+        "en": {
+          "value": "lower thoracic vertebra",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:1065 exact English term: lower thoracic vertebra",
+          "status": "evidence_backed",
+          "missingReason": null
+        },
+        "latin": {
+          "value": "vertebra thoracica inferior",
+          "sourceIds": [
+            "fipat-ta2-t100-b02-frozen-target-terms"
+          ],
+          "locator": "T96 target TA2:1065 exact Latin term: vertebra thoracica inferior",
+          "status": "evidence_backed",
+          "missingReason": null
+        }
+      },
+      "existingSurface": {
+        "status": "subset_membership_unresolved",
+        "exactSourceObject": null,
+        "exactMemberCrosswalkAdded": false,
+        "candidateSurfaces": [
+          {
+            "sourceKey": "ZA-c7010a9-b5c1560b12a491a31ba15b7c",
+            "sourceObjectName": "Vertebra T9",
+            "sourceDataName": "Vertebra T9",
+            "sourceParent": "Thoracic vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Thoracic skeleton",
+              "Thoracic vertebrae",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "79e72c9b41aad6fd157650d40ed81fcc73d34813be94ae7c07540d9b24d22045",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e91608",
+              "objectIdName": "Vertebra T9",
+              "serializedFileBlockOffset": 61249212
+            }
+          },
+          {
+            "sourceKey": "ZA-c7010a9-ec06f162cb073e506509724d",
+            "sourceObjectName": "Vertebra T10",
+            "sourceDataName": "Vertebra T10",
+            "sourceParent": "Thoracic vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Thoracic skeleton",
+              "Thoracic vertebrae",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "2b53ba3c3ee4eab6781da6776d70fd9f4a6ab1cdbcd892db9318f968272b5b16",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e95d08",
+              "objectIdName": "Vertebra T10",
+              "serializedFileBlockOffset": 61209380
+            }
+          },
+          {
+            "sourceKey": "ZA-c7010a9-01d3b746fffced72073c9cf4",
+            "sourceObjectName": "Vertebra T11",
+            "sourceDataName": "Vertebra T11",
+            "sourceParent": "Thoracic vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Thoracic skeleton",
+              "Thoracic vertebrae",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "72010e2d76ea1fcf534087c0b4b8430fdc46ba36126c5556c64b97e60031ec45",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e95608",
+              "objectIdName": "Vertebra T11",
+              "serializedFileBlockOffset": 61213312
+            }
+          },
+          {
+            "sourceKey": "ZA-c7010a9-9f03a59b82316afbeea1b631",
+            "sourceObjectName": "Vertebra T12",
+            "sourceDataName": "Vertebra T12",
+            "sourceParent": "Thoracic vertebrae.g",
+            "sourceCollections": [
+              "1: Skeletal system",
+              "Axial skeleton",
+              "Back",
+              "Thoracic skeleton",
+              "Thoracic vertebrae",
+              "Trunk",
+              "Vertebral column"
+            ],
+            "sourceSide": null,
+            "evaluatedGeometrySha256": "e143a08b262074cbbb623981d96418de68980f1ad9ed75e17ccec1cb9b6c13c1",
+            "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+            "sourceLocator": {
+              "archivePath": "Z-Anatomy/Startup.blend",
+              "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+              "objectDataBlockPointer": "0x18b64e94f08",
+              "objectIdName": "Vertebra T12",
+              "serializedFileBlockOffset": 61217244
+            }
+          }
+        ],
+        "note": "T9-T12 surfaces exist, but no authoritative lower-thoracic subset boundary was located; no target relation is written."
+      },
+      "observedSurfacesNotBound": [
+        {
+          "sourceKey": "ZA-c7010a9-b5c1560b12a491a31ba15b7c",
+          "sourceObjectName": "Vertebra T9",
+          "sourceDataName": "Vertebra T9",
+          "sourceParent": "Thoracic vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Thoracic skeleton",
+            "Thoracic vertebrae",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "79e72c9b41aad6fd157650d40ed81fcc73d34813be94ae7c07540d9b24d22045",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "sourceLocator": {
+            "archivePath": "Z-Anatomy/Startup.blend",
+            "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "objectDataBlockPointer": "0x18b64e91608",
+            "objectIdName": "Vertebra T9",
+            "serializedFileBlockOffset": 61249212
+          }
+        },
+        {
+          "sourceKey": "ZA-c7010a9-ec06f162cb073e506509724d",
+          "sourceObjectName": "Vertebra T10",
+          "sourceDataName": "Vertebra T10",
+          "sourceParent": "Thoracic vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Thoracic skeleton",
+            "Thoracic vertebrae",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "2b53ba3c3ee4eab6781da6776d70fd9f4a6ab1cdbcd892db9318f968272b5b16",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "sourceLocator": {
+            "archivePath": "Z-Anatomy/Startup.blend",
+            "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "objectDataBlockPointer": "0x18b64e95d08",
+            "objectIdName": "Vertebra T10",
+            "serializedFileBlockOffset": 61209380
+          }
+        },
+        {
+          "sourceKey": "ZA-c7010a9-01d3b746fffced72073c9cf4",
+          "sourceObjectName": "Vertebra T11",
+          "sourceDataName": "Vertebra T11",
+          "sourceParent": "Thoracic vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Thoracic skeleton",
+            "Thoracic vertebrae",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "72010e2d76ea1fcf534087c0b4b8430fdc46ba36126c5556c64b97e60031ec45",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "sourceLocator": {
+            "archivePath": "Z-Anatomy/Startup.blend",
+            "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "objectDataBlockPointer": "0x18b64e95608",
+            "objectIdName": "Vertebra T11",
+            "serializedFileBlockOffset": 61213312
+          }
+        },
+        {
+          "sourceKey": "ZA-c7010a9-9f03a59b82316afbeea1b631",
+          "sourceObjectName": "Vertebra T12",
+          "sourceDataName": "Vertebra T12",
+          "sourceParent": "Thoracic vertebrae.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Axial skeleton",
+            "Back",
+            "Thoracic skeleton",
+            "Thoracic vertebrae",
+            "Trunk",
+            "Vertebral column"
+          ],
+          "sourceSide": null,
+          "evaluatedGeometrySha256": "e143a08b262074cbbb623981d96418de68980f1ad9ed75e17ccec1cb9b6c13c1",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "sourceLocator": {
+            "archivePath": "Z-Anatomy/Startup.blend",
+            "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+            "objectDataBlockPointer": "0x18b64e94f08",
+            "objectIdName": "Vertebra T12",
+            "serializedFileBlockOffset": 61217244
+          }
+        }
+      ],
+      "learnerBindingCreated": false,
+      "canonicalHaConceptId": null,
+      "sourceOnly": true,
+      "humanReview": "not_performed",
+      "publicRedistribution": "held",
+      "newGeometryCreated": false
     }
   ]
 }

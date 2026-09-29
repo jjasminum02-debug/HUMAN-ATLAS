@@ -7,6 +7,10 @@ const raw = JSON.parse(readFileSync(new URL('../../../../atlas-data/overlays/za-
 const skullBatch = JSON.parse(readFileSync(new URL('../../../../work/evidence/T100/batches/2026-09-29-B01-skull-names/term-and-correspondence-ledger.json', import.meta.url), 'utf8')) as {
     targets: Array<{ targetId: string; sourceMembers: string[]; sourceObjectNames: string[]; koModern: string; koTraditional: string; latin: string; kmleSourceId: string }>;
 };
+const vertebralBatch = JSON.parse(readFileSync(new URL('../../../../work/evidence/T100/batches/2026-09-29-B02-vertebral-variant-coverage/term-and-correspondence-ledger.json', import.meta.url), 'utf8')) as {
+    targets: Array<{ targetId: string; names: { koModern: string | null; koTraditional: string | null; en: string }; existingSurface: { status: string } }>;
+    crosswalkRelations: Array<{ targetId: string; sourceKey: string; sourceObjectName: string; relationKind: string; sourceSegmentCode: string; matchedTargetSynonym: string | null }>;
+};
 const fixture = { revision: raw.datasetRevision, instances: raw.objects.map(r => ({ sourceKey: r.sourceKey })) } as Dataset;
 test('whole-source overlay retains records and independent release/review status', () => {
     const overlay = validateIntegration(raw, fixture);
@@ -92,6 +96,62 @@ test('T100 B01 evidence refs and direct crosswalk proof fail closed when altered
     const mapped = badRelation.objects.find(row => row.targetRelationEvidence)!;
     mapped.targetRelationEvidence![0].ancestorNameAloneUsed = true;
     assert.throws(() => validateIntegration(badRelation, fixture));
+});
+test('T100 B02 classifies ten exact vertebral/variant targets and links only nineteen verified source members', () => {
+    const terms = raw.targetTerminologyEvidence ?? [];
+    const batchIds = new Set(vertebralBatch.targets.map(target => target.targetId));
+    const relations = raw.objects.flatMap(row => (row.targetRelationEvidence ?? []).filter(relation => batchIds.has(relation.targetId)).map(relation => ({ row, relation })));
+    assert.equal(vertebralBatch.targets.length, 10);
+    assert.equal(terms.length, 10);
+    assert.equal(vertebralBatch.crosswalkRelations.length, 19);
+    assert.equal(relations.length, 19);
+    assert.deepEqual([...new Set(relations.map(x => x.relation.targetId))].sort(), ['TA2:1032', 'TA2:1038', 'TA2:1050', 'TA2:1059']);
+    assert.equal(relations.filter(x => x.relation.targetId === 'TA2:1032').length, 5);
+    assert.equal(relations.filter(x => x.relation.targetId === 'TA2:1038').length, 1);
+    assert.equal(relations.filter(x => x.relation.targetId === 'TA2:1050').length, 1);
+    assert.equal(relations.filter(x => x.relation.targetId === 'TA2:1059').length, 12);
+    for (const { row, relation } of relations) {
+        assert.equal(relation.sourceKey, row.sourceKey);
+        assert.equal(relation.sourceObjectName, row.sourceName);
+        assert.equal(relation.directObjectNameMatch, false);
+        assert.equal(relation.ancestorNameAloneUsed, false);
+        assert.equal(relation.canonicalHaBindingCreated, false);
+        assert.equal(row.haConceptId, null);
+        assert.equal(row.sourceOnly, true);
+        assert.equal(row.humanReview, 'not_performed');
+        assert.equal(row.publicRedistribution, 'held');
+        assert(relation.matchEvidenceSourceIds?.length);
+        assert(/^[CT](?:[1-9]|1[0-2])$/.test(relation.sourceSegmentCode ?? ''));
+    }
+    const byId = new Map(terms.map(term => [term.targetId, term]));
+    assert.deepEqual([...batchIds].filter(id => !byId.has(id)), []);
+    assert.equal(byId.get('TA2:356')?.existingSurface.status, 'group_surface_missing_composition_conflicted');
+    assert.equal(byId.get('TA2:819')?.existingSurface.status, 'variant_surface_missing');
+    assert.equal(byId.get('TA2:830')?.existingSurface.status, 'group_surface_missing');
+    assert.equal(byId.get('TA2:831')?.existingSurface.status, 'exact_surface_missing');
+    assert.equal(byId.get('TA2:832')?.existingSurface.status, 'exact_surface_missing');
+    assert.equal(byId.get('TA2:1065')?.existingSurface.status, 'subset_membership_unresolved');
+    assert.equal(byId.get('TA2:831')?.names.koModern, '봉합뼈'); // evidence only; no source surface binding.
+    for (const query of ['고리뼈', '환추골', '셋째 목뼈', '중쇠뼈', '열두째 등뼈']) {
+        const results = searchStructures(raw.objects, query, []);
+        assert(results.some(row => ['TA2:1032', 'TA2:1038', 'TA2:1050', 'TA2:1059'].some(id => row.targetIds.includes(id))), query);
+    }
+    assert(!searchStructures(raw.objects, '봉합뼈', []).some(row => row.targetIds.includes('TA2:831')));
+    assert.equal(raw.policy.publicRedistribution, 'held');
+    assert(terms.every(term => term.sourceOnly && term.learnerBindingCreated === false && term.canonicalHaConceptId === null
+        && term.humanReview === 'not_performed' && term.publicRedistribution === 'held' && term.newGeometryCreated === false));
+    assert.equal(raw.objects.length, 960);
+    assert.equal(raw.objects.filter(row => row.localDisplayEligible).length, 672);
+    assert.equal(raw.objects.filter(row => row.haConceptId).length, 130);
+});
+test('T100 B02 rejects unsupported segment/member relations and target-name evidence without provenance', () => {
+    const badMember = structuredClone(raw);
+    const member = badMember.objects.find(row => row.sourceName === 'Vertebra C3')!;
+    member.targetRelationEvidence![0].sourceSegmentCode = 'C8';
+    assert.throws(() => validateIntegration(badMember, fixture));
+    const badTerm = structuredClone(raw);
+    badTerm.targetTerminologyEvidence![0].fieldEvidence.koModern.sourceIds = ['missing-source'];
+    assert.throws(() => validateIntegration(badTerm, fixture));
 });
 test('both scapulae belong to arm context and sacrum to lumbar context', () => {
     const scap = raw.objects.filter(r => r.names.en === 'Scapula');

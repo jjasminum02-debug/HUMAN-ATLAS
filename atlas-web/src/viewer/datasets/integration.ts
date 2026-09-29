@@ -60,6 +60,10 @@ export interface StructureRecord {
         upstreamFjOrTa2IdClaim: boolean;
         canonicalHaBindingCreated: boolean;
         humanReview: string;
+        relationKind?: 'direct_exact_name' | 'qualified_target_synonym' | 'class_member';
+        matchedTargetSynonym?: string | null;
+        sourceSegmentCode?: string | null;
+        matchEvidenceSourceIds?: string[];
     }[];
     searchApproximate?: boolean;
     bounds: [
@@ -82,6 +86,37 @@ export interface IntegrationEvidenceSource {
     accessMethod: 'opened_html' | 'search_index_excerpt' | 'local_frozen_metadata';
     locator: string;
 }
+export interface TargetTerminologyEvidence {
+    targetId: string;
+    targetTermSourceIds: string[];
+    english: string;
+    latin: string;
+    sourceSynonyms: Record<string, string[]>;
+    relatedTerms: string[];
+    semanticKind: string;
+    primaryOwner: string;
+    regionIds: string[];
+    sourceParentId: string | null;
+    sourceAncestryIds: string[];
+    sourceFlags: Record<string, unknown>;
+    classification: Record<string, unknown>;
+    names: { koModern: string | null; koTraditional: string | null; en: string };
+    fieldEvidence: Record<'koModern' | 'koTraditional' | 'en' | 'latin', {
+        value: string | null;
+        sourceIds: string[];
+        locator: string | null;
+        status: 'evidence_backed' | 'missing';
+        missingReason?: string | null;
+    }>;
+    existingSurface: Record<string, unknown>;
+    observedSurfacesNotBound: Record<string, unknown>[];
+    learnerBindingCreated: false;
+    canonicalHaConceptId: null;
+    sourceOnly: true;
+    humanReview: 'not_performed';
+    publicRedistribution: 'held';
+    newGeometryCreated: false;
+}
 export interface Integration {
     schemaVersion: 1;
     revision: string;
@@ -97,6 +132,8 @@ export interface Integration {
         localUseRights: string;
     };
     evidenceSources?: IntegrationEvidenceSource[];
+    /** Internal target-name and unresolved-surface evidence; never projected to learner UI/search. */
+    targetTerminologyEvidence?: TargetTerminologyEvidence[];
     objects: StructureRecord[];
 }
 /** Historical non-approval, public-release holds and optional human review are NOT local display gates. */
@@ -118,6 +155,33 @@ export function validateIntegration(value: unknown, dataset: Dataset): Integrati
             || !['opened_html', 'search_index_excerpt', 'local_frozen_metadata'].includes(source.accessMethod))
             throw Error('integration evidence source');
         evidenceSources.set(source.id, source);
+    }
+    const targetTerms = new Map<string, TargetTerminologyEvidence>();
+    for (const term of i.targetTerminologyEvidence ?? []) {
+        if (!/^TA2:\d+$/.test(term.targetId) || targetTerms.has(term.targetId)
+            || !term.targetTermSourceIds.length || term.targetTermSourceIds.some(id => !evidenceSources.has(id))
+            || !term.english.trim() || !term.latin.trim() || !term.semanticKind.trim()
+            || term.learnerBindingCreated !== false || term.canonicalHaConceptId !== null
+            || term.sourceOnly !== true || term.humanReview !== 'not_performed'
+            || term.publicRedistribution !== 'held' || term.newGeometryCreated !== false)
+            throw Error('target terminology evidence identity/policy');
+        for (const field of ['koModern', 'koTraditional', 'en', 'latin'] as const) {
+            const evidence = term.fieldEvidence[field];
+            const value = field === 'latin' ? term.latin : term.names[field];
+            if (!evidence || evidence.value !== value || !['evidence_backed', 'missing'].includes(evidence.status))
+                throw Error('target terminology field shape');
+            if (evidence.status === 'evidence_backed') {
+                if (!value || !evidence.locator?.trim() || !evidence.sourceIds.length
+                    || evidence.sourceIds.some(id => !evidenceSources.has(id)))
+                    throw Error('target terminology field provenance');
+            } else if (value !== null || evidence.locator !== null || !evidence.missingReason?.trim()) {
+                throw Error('target terminology missing field');
+            }
+        }
+        if (term.names.en !== term.english || term.names.koModern && /\p{Script=Han}/u.test(term.names.koModern)
+            || term.names.koTraditional && /\p{Script=Han}/u.test(term.names.koTraditional))
+            throw Error('target terminology learner-safe names');
+        targetTerms.set(term.targetId, term);
     }
     const seen = new Set<string>();
     for (const row of i.objects) {
@@ -143,14 +207,41 @@ export function validateIntegration(value: unknown, dataset: Dataset): Integrati
         for (const relation of row.targetRelationEvidence ?? []) {
             const baseName = row.sourceName.replace(/\.[lr]$/i, '').trim().toLocaleLowerCase();
             if (relation.sourceKey !== row.sourceKey || relation.sourceObjectName !== row.sourceName
-                || relation.targetId !== row.targetId || !row.targetIds.includes(relation.targetId)
+                || !row.targetIds.includes(relation.targetId)
                 || relation.targetSemanticKind !== 'bone' && relation.targetSemanticKind !== 'muscle'
-                || !relation.directObjectNameMatch || relation.ancestorNameAloneUsed || relation.upstreamFjOrTa2IdClaim
+                || relation.ancestorNameAloneUsed || relation.upstreamFjOrTa2IdClaim
                 || relation.canonicalHaBindingCreated || relation.humanReview !== 'not_performed'
-                || baseName !== relation.targetEnglish.trim().toLocaleLowerCase()
                 || !/^[a-f0-9]{64}$/.test(relation.evaluatedGeometrySha256)
-                || !/^[a-f0-9]{64}$/.test(relation.sourceHash) || !relation.sourceRevision)
+                || !/^[a-f0-9]{64}$/.test(relation.sourceHash) || !relation.sourceRevision
+                || relation.matchEvidenceSourceIds?.some(id => !evidenceSources.has(id)))
                 throw Error('target relation evidence');
+            if (relation.directObjectNameMatch) {
+                if (baseName !== relation.targetEnglish.trim().toLocaleLowerCase())
+                    throw Error('target relation exact name mismatch');
+            } else {
+                const term = targetTerms.get(relation.targetId);
+                if (!term || !relation.matchEvidenceSourceIds?.length || !relation.sourceSegmentCode)
+                    throw Error('target relation missing target/member evidence');
+                if (relation.relationKind === 'qualified_target_synonym') {
+                    const exact = (relation.targetId === 'TA2:1038' && relation.sourceObjectName === 'Atlas (C1)' && relation.matchedTargetSynonym === 'vertebra C1' && relation.sourceSegmentCode === 'C1')
+                        || (relation.targetId === 'TA2:1050' && relation.sourceObjectName === 'Axis (C2)' && relation.matchedTargetSynonym === 'vertebra C2' && relation.sourceSegmentCode === 'C2');
+                    if (!exact || !relation.sourceCollections.some(x => /cervical vertebrae/i.test(x)) || relation.sourceParent !== 'Cervical vertebrae.g')
+                        throw Error('target relation qualified synonym mismatch');
+                } else if (relation.relationKind === 'class_member') {
+                    const cervical = relation.targetId === 'TA2:1032' && /^Vertebra C[3-7]$/.test(relation.sourceObjectName)
+                        && relation.sourceSegmentCode === relation.sourceObjectName.match(/C[3-7]$/)?.[0]
+                        && relation.sourceParent === 'Cervical vertebrae.g'
+                        && relation.sourceCollections.some(x => /cervical vertebrae/i.test(x));
+                    const thoracic = relation.targetId === 'TA2:1059' && /^Vertebra T(?:[1-9]|1[0-2])$/.test(relation.sourceObjectName)
+                        && relation.sourceSegmentCode === relation.sourceObjectName.match(/T(?:[1-9]|1[0-2])$/)?.[0]
+                        && relation.sourceParent === 'Thoracic vertebrae.g'
+                        && relation.sourceCollections.some(x => /thoracic vertebrae/i.test(x));
+                    if (!cervical && !thoracic)
+                        throw Error('target relation class member mismatch');
+                } else {
+                    throw Error('target relation unsupported non-name match');
+                }
+            }
         }
         seen.add(row.sourceKey);
     }

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "task": "T100-B02",
+  "checkedAtLocal": "2026-09-29",
+  "commands": [
+    {
+      "command": "python3 work/evidence/T100/batches/2026-09-29-B02-vertebral-variant-coverage/apply_t100_b02.py",
+      "status": "passed",
+      "summary": "10 exact targets classified; 19 exact source-object relations emitted; stable overlay SHA."
+    },
+    {
+      "command": "python3 work/evidence/T100/batches/2026-09-29-B02-vertebral-variant-coverage/validate_t100_b02.py",
+      "status": "passed",
+      "summary": "Scope, hashes, source hierarchy, exact subset, status holds, and preservation checks passed."
+    },
+    {
+      "command": "PATH=<bundled-node-and-pnpm> pnpm --dir atlas-web test:whole-body",
+      "status": "passed",
+      "summary": "31/31 tests passed; 46 compiled dataset chunks verified."
+    },
+    {
+      "command": "PATH=<bundled-node-and-pnpm> pnpm --dir atlas-web typecheck",
+      "status": "passed",
+      "summary": "tsc -b --pretty false passed."
+    },
+    {
+      "command": "PATH=<bundled-node-and-pnpm> pnpm --dir atlas-web build",
+      "status": "passed_with_warning",
+      "summary": "Vite build passed. Existing App bundle exceeds the 500 kB advisory threshold (954.05 kB minified); no build failure."
+    },
+    {
+      "command": "python3 work/tools/sync_execution.py --check",
+      "status": "passed",
+      "summary": "Generated NEXT/STATUS/R15 views match the updated T100 execution record; sync_execution.py reported no projection drift."
+    }
+  ],
+  "browserEvidence": "work/evidence/T100/batches/2026-09-29-B02-vertebral-variant-coverage/browser-validation.json",
+  "overlaySha256": "212d9db3154a003d3108931609f60a72c8f08d66f1a1ac6647299c81533e3a79",
+  "denominators": {
+    "targets": 542,
+    "regionMemberships": 563,
+    "regions": 12
+  },
+  "preservedStatus": {
+    "sourceObjects": 960,
+    "locallyDisplayableRows": 672,
+    "existingHaBoundRows": 130,
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "wholeBodyCompletion": false
+  }
+}

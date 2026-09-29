@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "task": "T100-B02",
+  "checkedAtLocal": "2026-09-29",
+  "browser": "Codex In-app Browser / Chromium",
+  "url": "http://127.0.0.1:5173/",
+  "overlaySha256": "212d9db3154a003d3108931609f60a72c8f08d66f1a1ac6647299c81533e3a79",
+  "reloadedAfterFinalOverlayBuild": true,
+  "viewport": {"width": 823, "height": 759, "devicePixelRatio": 2},
+  "checks": [
+    {"query": "고리뼈", "resultCount": 1, "selectedCard": {"korean": "고리뼈", "traditionalHangul": "환추골", "english": "Atlas (C1)"}, "selectionAndCardMatch": true},
+    {"query": "중쇠뼈", "resultCount": 1, "selectedCard": {"korean": "중쇠뼈", "traditionalHangul": "축추골", "english": "Axis (C2)"}, "selectionAndCardMatch": true},
+    {"query": "셋째 목뼈", "resultCount": 1, "selectedCard": {"korean": "셋째 목뼈", "traditionalHangul": "경추", "english": "Vertebra C3"}, "selectionAndCardMatch": true},
+    {"query": "열두째 등뼈", "resultCount": 1, "selectedCard": {"korean": "열두째 등뼈", "traditionalHangul": "흉추골", "english": "Vertebra T12"}, "selectionAndCardMatch": true},
+    {"query": "봉합뼈", "resultCount": 0, "targetOnlyEvidenceEnteredLearnerSearch": false},
+    {"query": "lower thoracic vertebra", "resultCount": 0, "unresolvedSubsetNotBound": true},
+    {"query": "Descending part of trapezius", "resultCount": 2, "selectedCard": {"korean": "승모근 상부", "modern": "등세모근 위부분", "english": "Descending part of trapezius muscle"}, "selectionAndCardMatch": true},
+    {"query": "Ascending part of trapezius", "resultCount": 2, "selectedCard": {"korean": "승모근 하부", "modern": "등세모근 아래부분", "english": "Ascending part of trapezius muscle"}, "selectionAndCardMatch": true}
+  ],
+  "visibleScene": "The existing whole-body anatomy scene and single viewer remain present while the selected cards change.",
+  "uiDisclosure": "No task IDs, source keys, JSON, or authoring controls appeared in the learner view.",
+  "screenshots": {"capturedAndVisuallyInspectedInBrowserTool": true, "savedAsFile": false},
+  "console": {"errors": 0, "warnings": 0, "observedEntries": []},
+  "notes": [
+    "Target-only terminology evidence does not create a surface relation or learner search result.",
+    "Selected cards expose Korean customary name, Korean Hangul form of Sino-Korean name, and English source object name.",
+    "Trapezius UI spot check during user clarification shows descending=upper and ascending=lower; it is outside B02 data edits and unchanged.",
+    "Runtime remains source-only for B02; public redistribution held; human anatomy review not performed."
+  ]
+}
