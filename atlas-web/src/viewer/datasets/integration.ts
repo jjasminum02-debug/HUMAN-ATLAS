@@ -31,6 +31,17 @@ export interface StructureRecord {
     displayDecisionBasis: string;
     hardHoldReasons: string[];
     semanticReview?: string;
+    /** Explicit local semantic reassignment when the source object label conflicts with the evaluated surface location. */
+    surfaceAssignmentCorrection?: {
+        correctionId: string;
+        sourceNameObservation: string;
+        sourceLabelConflict: true;
+        displayedPart: 'superior' | 'inferior';
+        evaluatedGeometrySha256: string;
+        detailResourceSha256: string;
+        worldYBoundsMetres: [number, number];
+        evidencePath: string;
+    };
     /** Name and taxonomy evidence for an AI project crosswalk; never an HA learner binding. */
     nameEvidence?: Partial<Record<'koModern' | 'koTraditional' | 'en', {
         value: string;
@@ -148,6 +159,7 @@ export function validateIntegration(value: unknown, dataset: Dataset): Integrati
     if (i?.schemaVersion !== 1 || i.datasetRevision !== dataset.revision || !i.policy.localOnly || i.policy.publicRedistribution !== 'held' || !/^[a-f0-9]{64}$/.test(i.policy.rightsEvidenceSha256))
         throw Error('integration provenance');
     const keys = new Set(dataset.instances.map(x => x.sourceKey));
+    const instances = new Map(dataset.instances.map(x => [x.sourceKey, x]));
     const evidenceSources = new Map<string, IntegrationEvidenceSource>();
     for (const source of i.evidenceSources ?? []) {
         if (!source.id || evidenceSources.has(source.id) || !/^https?:\/\//.test(source.url)
@@ -189,8 +201,40 @@ export function validateIntegration(value: unknown, dataset: Dataset): Integrati
             throw Error('integration identity/policy');
         if (row.localDisplayEligible !== Boolean(canDisplayLocally(row, i.policy)) || row.defaultVisible !== row.localDisplayEligible)
             throw Error('local decision mismatch');
-        if (row.haConceptId && row.semanticReview !== 'ai_crosschecked_exact_term_system_region_side_and_source_identity')
+        if (row.haConceptId && row.semanticReview !== 'ai_crosschecked_exact_term_system_region_side_and_source_identity'
+            && !(row.surfaceAssignmentCorrection && row.semanticReview === 'ai_crosschecked_geometry_location_with_upstream_source_label_conflict'))
             throw Error('unreviewed concept binding');
+        if (row.surfaceAssignmentCorrection) {
+            const correction = row.surfaceAssignmentCorrection;
+            const instance = instances.get(row.sourceKey);
+            const isAscendingSource = row.sourceName.startsWith('Ascending part of trapezius muscle.');
+            const isDescendingSource = row.sourceName.startsWith('Descending part of trapezius muscle.');
+            const expected = isAscendingSource ? {
+                displayedPart: 'superior', label: '승모근 상부', koModern: '등세모근 위부분',
+                english: 'Descending part of trapezius muscle', concept: 'HA-P-000009', target: 'TA2:2227',
+                geometry: '576353abfdb0fd286ce49a9ca454da5ff5f4d6d1ef03a33955ebcc901593846b',
+                region: 'neck',
+            } : isDescendingSource ? {
+                displayedPart: 'inferior', label: '승모근 하부', koModern: '등세모근 아래부분',
+                english: 'Ascending part of trapezius muscle', concept: 'HA-P-000011', target: 'TA2:2229',
+                geometry: 'bba204c6fac7acb06200db7ad8eef4e88ec8694c32c0ab60b2147bbbeed3df43',
+                region: null,
+            } : null;
+            if (!expected || !instance || correction.correctionId !== 'T100-TRAPEZIUS-SURFACE-ASSIGNMENT-2026-09-29-v1'
+                || correction.sourceNameObservation !== row.sourceName || correction.sourceLabelConflict !== true
+                || correction.displayedPart !== expected.displayedPart || correction.evaluatedGeometrySha256 !== expected.geometry
+                || correction.detailResourceSha256 !== instance.lods.detail.resource
+                || correction.worldYBoundsMetres.length !== 2 || correction.worldYBoundsMetres.some((v, index) => Math.abs(v - row.bounds[index][1]) > 1e-6)
+                || !correction.evidencePath.startsWith('work/evidence/T100/geometry-corrections/2026-09-29-trapezius-assignment/')
+                || row.semanticReview !== 'ai_crosschecked_geometry_location_with_upstream_source_label_conflict'
+                || row.mappingStatus !== 'source_name_geometry_conflict_resolved_for_local_display'
+                || row.label !== expected.label || row.names.koTraditional !== expected.label
+                || row.names.koModern !== expected.koModern || row.names.en !== expected.english
+                || row.haConceptId !== expected.concept || row.targetId !== expected.target
+                || !row.targetIds.includes(expected.target) || (expected.region ? !row.regionIds.includes(expected.region) : row.regionIds.includes('neck'))
+                || !['left', 'right'].includes(row.side ?? ''))
+                throw Error('trapezius surface-assignment correction');
+        }
         if (row.inspectionEligible && (row.sourceHiddenStatePreserved.hideViewport || row.kind === 'accessory' || !row.regionIds.length))
             throw Error('held inspection');
         if (row.bounds.length !== 2 || row.bounds.some(b => b.length !== 3 || !b.every(Number.isFinite)))
@@ -247,6 +291,10 @@ export function validateIntegration(value: unknown, dataset: Dataset): Integrati
     }
     if (seen.size !== keys.size)
         throw Error('missing source records');
+    const trapeziusCorrections = i.objects.filter(row => row.surfaceAssignmentCorrection?.correctionId === 'T100-TRAPEZIUS-SURFACE-ASSIGNMENT-2026-09-29-v1');
+    if (trapeziusCorrections.length && (trapeziusCorrections.length !== 4
+        || ['left', 'right'].some(side => !['superior', 'inferior'].every(part => trapeziusCorrections.some(row => row.side === side && row.surfaceAssignmentCorrection?.displayedPart === part)))))
+        throw Error('incomplete trapezius surface-assignment correction pair');
     return i;
 }
 export function searchStructures(rows: StructureRecord[], query: string, regions: string[]) {

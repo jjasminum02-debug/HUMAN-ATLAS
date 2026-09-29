@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "unit": "correct-trapezius-upper-lower-source-label-geometry-conflict",
+  "result": "passed_for_local_display_assignment",
+  "notAClaimOf": [
+    "human_anatomy_review",
+    "public_redistribution_approval",
+    "source_label_correction",
+    "new_geometry"
+  ],
+  "checks": {
+    "four_exact_source_instances": true,
+    "both_sides_have_superior_and_inferior": true,
+    "card_label_and_displayed_surface_assignment": true,
+    "raw_source_name_conflict_preserved": true,
+    "source_and_detail_chunk_hashes": true,
+    "source_hash_and_dataset_revision_preserved": true,
+    "geometry_transform_and_coordinates_unchanged": true,
+    "public_redistribution_held": true,
+    "human_review_not_performed": true
+  },
+  "overlay": {
+    "path": "atlas-data/overlays/za-local-integration.json",
+    "sha256": "26539e5f0e8f238bbf88c40c497c5465ac374a3058d137161d226a1acd15a997",
+    "revision": "T100-source-taxonomy-local-display-v1-B02-trapezius-surface-correction"
+  },
+  "compiledManifest": {
+    "path": "atlas-data/source-cache/datasets/za/compiled/manifest.json",
+    "sha256": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42",
+    "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+    "revision": "7a337bd05380da5790cb64d4d62247590e29c1b73e2989daeb419c8173d0e982",
+    "instanceCount": 960
+  },
+  "sourceRows": [
+    {
+      "sourceKey": "ZA-c7010a9-e07069f3efea3d66c4e25ac2",
+      "side": "left",
+      "displayedPart": "superior",
+      "cardLabel": "승모근 상부",
+      "sourceNameObservation": "Ascending part of trapezius muscle.l",
+      "evaluatedGeometrySha256": "576353abfdb0fd286ce49a9ca454da5ff5f4d6d1ef03a33955ebcc901593846b",
+      "detailResourceSha256": "0a73a18b7b053a733a2940132f77bc8e24fab67dd344cbdec6588b93755714fd",
+      "worldYBoundsMetres": [
+        1.4154925046074687,
+        1.5747380518717493
+      ],
+      "sourceGeometryAndTransformModified": false
+    },
+    {
+      "sourceKey": "ZA-c7010a9-951e9d95076ad0635ead80e3",
+      "side": "right",
+      "displayedPart": "superior",
+      "cardLabel": "승모근 상부",
+      "sourceNameObservation": "Ascending part of trapezius muscle.r",
+      "evaluatedGeometrySha256": "576353abfdb0fd286ce49a9ca454da5ff5f4d6d1ef03a33955ebcc901593846b",
+      "detailResourceSha256": "33c5524356333882dd885bd7f42762ca7421b809dd4473c464b0767193e6b78e",
+      "worldYBoundsMetres": [
+        1.4154925046074678,
+        1.5747380518717498
+      ],
+      "sourceGeometryAndTransformModified": false
+    },
+    {
+      "sourceKey": "ZA-c7010a9-949cdee8e7b16d22f295af1e",
+      "side": "left",
+      "displayedPart": "inferior",
+      "cardLabel": "승모근 하부",
+      "sourceNameObservation": "Descending part of trapezius muscle.l",
+      "evaluatedGeometrySha256": "bba204c6fac7acb06200db7ad8eef4e88ec8694c32c0ab60b2147bbbeed3df43",
+      "detailResourceSha256": "0da3a85d966cda8aabc0c4ee7b3a5443e6fa72bf4eee1eb23fb584a97a6bb99f",
+      "worldYBoundsMetres": [
+        1.1200791815298081,
+        1.4143072562864352
+      ],
+      "sourceGeometryAndTransformModified": false
+    },
+    {
+      "sourceKey": "ZA-c7010a9-935a4aed2c3c6c262ba36166",
+      "side": "right",
+      "displayedPart": "inferior",
+      "cardLabel": "승모근 하부",
+      "sourceNameObservation": "Descending part of trapezius muscle.r",
+      "evaluatedGeometrySha256": "bba204c6fac7acb06200db7ad8eef4e88ec8694c32c0ab60b2147bbbeed3df43",
+      "detailResourceSha256": "968ed6d01a9220c9e0892a366d08a87f333634cdeb862f092308beeb748d711b",
+      "worldYBoundsMetres": [
+        1.120079181529809,
+        1.414307256286436
+      ],
+      "sourceGeometryAndTransformModified": false
+    }
+  ],
+  "compiledDetailChunks": [
+    {
+      "path": "atlas-data/source-cache/datasets/za/compiled/15dea1bfd32063424b5c75fee685fb149aaf329bc1f3194aedbdc0450e49ae09.glb",
+      "sha256": "15dea1bfd32063424b5c75fee685fb149aaf329bc1f3194aedbdc0450e49ae09",
+      "bytes": 8027348
+    },
+    {
+      "path": "atlas-data/source-cache/datasets/za/compiled/45f96f1f16b4c20f5bbf89839540ce34071a89bc7281bbf6f0d6fb6ad4aa3f8b.glb",
+      "sha256": "45f96f1f16b4c20f5bbf89839540ce34071a89bc7281bbf6f0d6fb6ad4aa3f8b",
+      "bytes": 8262796
+    },
+    {
+      "path": "atlas-data/source-cache/datasets/za/compiled/ecaefb3496aca83362536c412b6ffdd61f0214eecbe4232b0ee88f56836d5e69.glb",
+      "sha256": "ecaefb3496aca83362536c412b6ffdd61f0214eecbe4232b0ee88f56836d5e69",
+      "bytes": 8371420
+    }
+  ]
+}
