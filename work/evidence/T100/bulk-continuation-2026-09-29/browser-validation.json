@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "workUnit": "D partial actual-browser integrated validation",
+  "checkedAtLocal": "2026-09-29",
+  "browser": "Codex In-app Browser QA tab 24; local app http://127.0.0.1:5173/; agent-created QA tab, not the user source tab",
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "innerWidth": 1440,
+      "documentWidth": 1440,
+      "bodyWidth": 1440,
+      "canvasWidth": 1440,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 1024,
+      "height": 900,
+      "innerWidth": 1024,
+      "documentWidth": 1024,
+      "bodyWidth": 1024,
+      "canvasWidth": 1024,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "innerWidth": 390,
+      "documentWidth": 390,
+      "bodyWidth": 390,
+      "canvasWidth": 390,
+      "horizontalOverflow": false
+    }
+  ],
+  "isolatedRegionSwitches": [
+    {
+      "label": "머리",
+      "slug": "head",
+      "listedNames": 54
+    },
+    {
+      "label": "목",
+      "slug": "neck",
+      "listedNames": 55
+    },
+    {
+      "label": "등",
+      "slug": "back",
+      "listedNames": 62
+    },
+    {
+      "label": "어깨·어깨뼈",
+      "slug": "shoulder-scapular",
+      "listedNames": 13
+    },
+    {
+      "label": "가슴우리",
+      "slug": "thorax",
+      "listedNames": 40
+    },
+    {
+      "label": "배·허리",
+      "slug": "abdomen-lumbar",
+      "listedNames": 14
+    },
+    {
+      "label": "골반·샅",
+      "slug": "pelvis-perineum",
+      "listedNames": 9
+    },
+    {
+      "label": "볼기·깊은엉덩이",
+      "slug": "gluteal-hip",
+      "listedNames": 12
+    },
+    {
+      "label": "넙다리",
+      "slug": "thigh",
+      "listedNames": 18
+    },
+    {
+      "label": "종아리",
+      "slug": "leg",
+      "listedNames": 16
+    },
+    {
+      "label": "발",
+      "slug": "foot",
+      "listedNames": 42
+    },
+    {
+      "label": "팔·손",
+      "slug": "upper-limb",
+      "listedNames": 83
+    }
+  ],
+  "searchAndSelection": {
+    "query": "넷째발허리뼈",
+    "results": 1,
+    "selectedSourceName": "Fourth metatarsal bone.l then .r",
+    "leftRoute": "/?source=ZA-c7010a9-e5a491a9cb0f6f9056d4fa59",
+    "rightRoute": "/?source=ZA-c7010a9-db3c281e1a7f7318cae95b1b",
+    "cardModern": "넷째발허리뼈",
+    "cardLegacy": "unavailable placeholder only; no Hanja collected",
+    "cardEnglish": "Fourth metatarsal bone",
+    "leftCardMatchesRoute": true,
+    "rightCardMatchesRoute": true,
+    "backRestoredLeft": true,
+    "forwardRestoredRight": true,
+    "newCanonicalBindingCreated": false
+  },
+  "learnerNonleakage": {
+    "query": "가슴우리뼈",
+    "visibleResultCount": 0,
+    "meaning": "Internal group terminology was not projected to individual learner search."
+  },
+  "searchException": {
+    "query": "허리뼈",
+    "visibleResultCount": 10,
+    "lumbarOrdinalRows": 5,
+    "metatarsalRows": 5,
+    "status": "recorded in exceptions.json; verified names/IDs retained; no aliases invented"
+  },
+  "viewControls": {
+    "selectedOnlyActivatedAndCleared": true,
+    "selectedTransparencyActivated": true,
+    "selectedHideActivated": true,
+    "undoRestoredHiddenState": true,
+    "restoreClearedTransparencyAndHide": true,
+    "cardRemainedConsistent": true
+  },
+  "console": {
+    "errors": 0,
+    "warnings": 0,
+    "captured": []
+  },
+  "limitations": [
+    "This validates navigation/list/search/card behavior and view controls, not exact visual surface coverage or FPS/active triangle/mobile GPU budgets.",
+    "Per-region listed-name count is not a unique-target, canonical coverage, or membership denominator."
+  ]
+}

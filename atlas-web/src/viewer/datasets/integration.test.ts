@@ -203,6 +203,18 @@ test('T100 B01 evidence refs and direct crosswalk proof fail closed when altered
     mapped.targetRelationEvidence![0].ancestorNameAloneUsed = true;
     assert.throws(() => validateIntegration(badRelation, fixture));
 });
+test('T100 ordinal-composed modern-only names accept field-scoped evidence without inventing legacy or Latin fields', () => {
+    const modernOnly = structuredClone(raw);
+    const rib = modernOnly.objects.find(row => row.sourceName === 'Eighth rib.l')!;
+    assert.equal(rib.names.koModern, '여덟째갈비뼈');
+    assert.equal(rib.names.koTraditional, null);
+    assert.deepEqual(Object.keys(rib.nameEvidence ?? {}), ['koModern']);
+    assert.doesNotThrow(() => validateIntegration(modernOnly, fixture));
+
+    const mismatched = structuredClone(modernOnly);
+    mismatched.objects.find(row => row.sourceName === 'Eighth rib.l')!.nameEvidence!.koModern!.value = '오른쪽갈비뼈';
+    assert.throws(() => validateIntegration(mismatched, fixture));
+});
 test('T100 B02 classifies ten exact vertebral/variant targets and links only nineteen verified source members', () => {
     const batchIds = new Set(vertebralBatch.targets.map(target => target.targetId));
     const terms = (raw.targetTerminologyEvidence ?? []).filter(term => batchIds.has(term.targetId));
@@ -288,8 +300,12 @@ test('T100 B03 adds only ten terminology dispositions and 45 exact lumbar, ordin
         assert.equal(row.sourceOnly, true);
         assert.equal(row.humanReview, 'not_performed');
         assert.equal(row.publicRedistribution, 'held');
-        assert(!row.nameEvidence);
         assert.equal(row.names.en, relation.sourceDataName);
+        if (/^(Vertebra L[1-5]|(?:First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|Eleventh|Twelfth) rib\.[lr])$/i.test(row.sourceName)) {
+            assert(row.nameEvidence?.koModern, `later T100 ordinal naming evidence missing: ${row.sourceName}`);
+            assert.equal(row.nameEvidence!.koModern!.value, row.names.koModern);
+            assert.equal(row.names.koTraditional, null);
+        }
     }
     for (const target of terms) {
         assert.equal(target.sourceOnly, true);
@@ -320,8 +336,17 @@ test('T100 B03 adds only ten terminology dispositions and 45 exact lumbar, ordin
     assert.equal(raw.scope.regions, 12);
     for (const target of lumbarRibHandBatch.targets) {
         for (const query of [target.names.koModern, target.names.koTraditional].filter(Boolean) as string[]) {
-            assert(!searchStructures(raw.objects, query, []).some(row => row.targetIds.includes(target.targetId)),
-                'internal B03 terminology leaked into learner search: ' + target.targetId + ':' + query);
+            const matches = searchStructures(raw.objects, query, []);
+            const targetMemberMatches = matches.filter(row => row.targetIds.includes(target.targetId));
+            if ((target.targetId === 'TA2:1068' || target.targetId === 'TA2:1118') && query === target.names.koModern) {
+                assert(targetMemberMatches.length > 0,
+                    'later T100 exact ordinal member names should search through the existing B03 class-member surfaces');
+                assert(targetMemberMatches.every(row => row.nameEvidence?.koModern?.value === row.names.koModern
+                    && row.nameEvidence.koModern.sourceIds.length > 0));
+            } else {
+                assert.equal(targetMemberMatches.length, 0,
+                    'target-only B03 terminology or unsupported target names must not create a learner search row: ' + target.targetId + ':' + query);
+            }
         }
     }
 });
@@ -497,10 +522,61 @@ test('T100 B05 records ten pelvis/knee/foot targets and exact existing class mem
         assert.equal(searchStructures(raw.objects, term.targetId, []).length, 0,
             `internal B05 target id leaked into learner search: ${term.targetId}`);
     }
-    const existingMetatarsalSearch = searchStructures(raw.objects, '발허리뼈', []);
-    assert.deepEqual(existingMetatarsalSearch.map(row => row.sourceName).sort(), ['Fifth metatarsal bone.l', 'First metatarsal bone.l']);
-    assert(existingMetatarsalSearch.every(row => ['HA-S-METATARSAL-1', 'HA-S-METATARSAL-5'].includes(row.haConceptId ?? '')),
-        'B05 term ledger must not be the source of pre-existing metatarsal learner labels');
+    const metatarsalSearch = searchStructures(raw.objects, '발허리뼈', []);
+    assert.deepEqual(metatarsalSearch.map(row => row.sourceName).sort(), [
+        'Fifth metatarsal bone.l', 'First metatarsal bone.l', 'Fourth metatarsal bone.l',
+        'Second metatarsal bone.l', 'Third metatarsal bone.l',
+    ]);
+    const metatarsalByName = new Map(raw.objects.filter(row => /^(First|Second|Third|Fourth|Fifth) metatarsal bone\.[lr]$/i.test(row.sourceName)).map(row => [row.sourceName, row]));
+    for (const [sourceName, stableId] of [['First metatarsal bone.l', 'HA-S-METATARSAL-1'], ['Fifth metatarsal bone.l', 'HA-S-METATARSAL-5']] as const)
+        assert.equal(metatarsalSearch.find(row => row.sourceName === sourceName)?.haConceptId, stableId,
+            'B05 must preserve the pre-existing first/fifth learner rows');
+    for (const sourceName of ['Second metatarsal bone.l', 'Third metatarsal bone.l', 'Fourth metatarsal bone.l']) {
+        const row = metatarsalByName.get(sourceName)!;
+        assert(metatarsalSearch.some(result => result.sourceName === sourceName));
+        assert.equal(row.haConceptId, null, 'ordinal display composition must not create a learner binding');
+        const rightName = sourceName.replace('.l', '.r');
+        assert.equal(metatarsalByName.get(rightName)?.names.koModern, row.names.koModern, 'the same exact ordinal term should stay bilateral on existing source mates');
+    }
+});
+test('T100 B bulk exact group terms and ordinal compositions preserve semantic scope and field-level holds', () => {
+    const exactGroups = new Map((raw.targetTerminologyEvidence ?? []).filter(row => [
+        'TA2:1067', 'TA2:1104', 'TA2:1106', 'TA2:1113', 'TA2:1114', 'TA2:1495', 'TA2:2192',
+    ].includes(row.targetId)).map(row => [row.targetId, row]));
+    const expectedGroups = new Map([
+        ['TA2:1067', ['lumbar vertebrae', '허리(척추)뼈(첫째-다섯째)', 5]],
+        ['TA2:1104', ['bones of thorax', '가슴우리뼈', 27]],
+        ['TA2:1106', ['true ribs', '참갈비뼈(첫째-일곱째)', 14]],
+        ['TA2:1113', ['false ribs', '거짓갈비뼈(여덟째-열두째)', 10]],
+        ['TA2:1114', ['floating ribs', '뜬갈비뼈(열한째-열두째)', 4]],
+        ['TA2:1495', ['metatarsal bones', '발허리뼈(첫째-다섯째)', 10]],
+        ['TA2:2192', ['laryngeal muscles', '후두근육', 15]],
+    ]);
+    assert.equal(exactGroups.size, expectedGroups.size);
+    for (const [targetId, [english, modern, count]] of expectedGroups) {
+        const term = exactGroups.get(targetId)!;
+        assert.equal(term.english, english);
+        assert.equal(term.names.koModern, modern);
+        assert.equal(term.names.koTraditional !== null, true);
+        assert.equal((term.existingSurface as { exactSourceObjects?: unknown[] }).exactSourceObjects?.length, count);
+        assert.equal(term.learnerBindingCreated, false);
+        assert.equal(term.humanReview, 'not_performed');
+        assert.equal(term.publicRedistribution, 'held');
+        assert.equal(searchStructures(raw.objects, targetId, []).length, 0);
+    }
+
+    const ordinalIds = ['kmle-t100-bulk-lumbar-vertebra-opened', 'kmle-t100-bulk-rib-opened', 'kmle-t100-bulk-metatarsal-bones-opened'];
+    const ordinalRows = raw.objects.filter(row => row.nameEvidence?.koModern?.sourceIds.some(id => ordinalIds.includes(id)));
+    assert.equal(ordinalRows.length, 35);
+    assert(ordinalRows.every(row => row.names.koModern === row.nameEvidence?.koModern?.value
+        && row.names.koTraditional === null && row.haConceptId === null
+        && row.sourceOnly && row.humanReview === 'not_performed' && row.publicRedistribution === 'held'));
+    const laryngealMembers = raw.objects.filter(row => row.targetIds.includes('TA2:2192'));
+    assert.equal(laryngealMembers.length, 15);
+    assert(laryngealMembers.every(row => !ordinalRows.includes(row) && row.names.koModern !== '후두근육'));
+    const rangeObservation = raw.evidenceSources?.find(row => row.id === 'kmle-t100-bulk-rib-opened');
+    assert(rangeObservation);
+    assert.equal(rangeObservation.openedOriginalDictionaryRecord, false);
 });
 test('T100 B05 rejects wrong laterality, foot part, member key, and parent', () => {
     const wrongSide = structuredClone(raw);

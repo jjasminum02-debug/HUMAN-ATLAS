@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "workUnit": "B/C preservation and provenance validation",
+  "status": "pass_partial",
+  "checkedAtLocal": "2026-09-29",
+  "baselineHead": "c757c2d9e870c8c403025868024872c1710d56a2",
+  "checks": {
+    "sourceObjectInventory960AndT96Denominators542_563_12": true,
+    "only102ExistingSurfaceNameFieldsChanged": true,
+    "allOtherObjectFieldsAnd893OtherRowsPreserved": true,
+    "prior42Terminology57SourcesAndHistoricalRelationsPreserved": true,
+    "exactly50TermRowsAnd51QuerySourcesAdded": true,
+    "sevenExactRepeatedGroupTermsAndThreeExplicitNoExactGroupTermsRecorded": true,
+    "35OrdinalMemberNamesComposedFromExactKaaRangeAndFrozenMembership": true,
+    "noCanonicalBindingsGeometryOrPolicyPromotion": true,
+    "sourceCatalogAndCompiledGeometryHashesPresent": true,
+    "noHanjaCollected": true,
+    "eligibleNamingCoverageReconciled": true,
+    "exceptionAndBacklogLedgersGenerated": true,
+    "liveSearchAmbiguityRecordedWithoutChangingVerifiedNames": true
+  },
+  "counts": {
+    "sourceObjects": 960,
+    "eligible": 672,
+    "named": 262,
+    "unnamed": 410,
+    "newSurfaceNames": 102,
+    "newTerminologyRows": 50,
+    "newEvidenceSources": 51,
+    "backlogGroups": 410,
+    "gapRows": 8
+  },
+  "holds": {
+    "wholeBodyCompletion": false,
+    "sourceOnly": true,
+    "rights": "held",
+    "humanReview": "not_performed",
+    "canonicalBindingsAdded": 0,
+    "geometryChanged": false
+  },
+  "remainingWork": [
+    "Continue B evidence-backed naming/repeated-structure processing for 410 eligible unnamed surfaces and additional unnamed exact source groups; this verified continuation is not an exhaustive B pass.",
+    "Resolve eight exact-query term gaps, one legacy-field conflict, four existing homonym cases, and the live 허리뼈 substring ambiguity only with exact source-backed resolution.",
+    "D whole-body visual/selection/performance coverage remains partial; this browser run covers 12 region transitions, 3 viewports, one new-name selection, controls, and search exception behavior."
+  ]
+}

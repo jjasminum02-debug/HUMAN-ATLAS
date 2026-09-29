@@ -295,8 +295,12 @@ export function validateIntegration(value: unknown, dataset: Dataset): Integrati
         if (row.bounds.length !== 2 || row.bounds.some(b => b.length !== 3 || !b.every(Number.isFinite)))
             throw Error('bounds');
         if (row.nameEvidence) {
+            if (!Object.keys(row.nameEvidence).length)
+                throw Error('empty name evidence');
             for (const field of ['koModern', 'koTraditional', 'en'] as const) {
                 const evidence = row.nameEvidence[field];
+                if (!evidence)
+                    continue;
                 const fieldValue = row.names[field];
                 if (!evidence || !fieldValue || evidence.value !== fieldValue || !evidence.locator.trim()
                     || !evidence.sourceIds.length || evidence.sourceIds.some(id => !evidenceSources.has(id)))

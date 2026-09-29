@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "workUnit": "C evidence-backed exceptions only",
+  "status": "open",
+  "editionPolicy": "KMLE aggregate page displays a KAA terminology section but no exact edition/revision; original KAA records were not opened.",
+  "termGaps": [
+    {
+      "query": "Depressor septi nasi",
+      "targetId": "TA2:2065",
+      "status": "no_exact_named_dictionary_row",
+      "exactSourceKeySurfaces": 2,
+      "similarResultNotAccepted": null,
+      "reason": "No exact KAA named term row was observed; no fuzzy substitute applied."
+    },
+    {
+      "query": "Flexor carpi radialis",
+      "targetId": "TA2:2481",
+      "status": "no_exact_named_dictionary_row",
+      "exactSourceKeySurfaces": 2,
+      "similarResultNotAccepted": "Similar result only: `Fiexor carpi radialis m.`; misspelling is not accepted.",
+      "reason": "No exact KAA named term row was observed; no fuzzy substitute applied."
+    },
+    {
+      "query": "Levator palpebrae superioris",
+      "targetId": "TA2:2052",
+      "status": "no_exact_named_dictionary_row",
+      "exactSourceKeySurfaces": 2,
+      "similarResultNotAccepted": "Similar result only: `Levator palpebrae muscle`; exact headword row is absent.",
+      "reason": "No exact KAA named term row was observed; no fuzzy substitute applied."
+    },
+    {
+      "query": "Platysma",
+      "targetId": "TA2:2147",
+      "status": "no_exact_named_dictionary_row",
+      "exactSourceKeySurfaces": 2,
+      "similarResultNotAccepted": null,
+      "reason": "No exact KAA named term row was observed; no fuzzy substitute applied."
+    },
+    {
+      "query": "Adductor minimus",
+      "targetId": "TA2:2632",
+      "status": "no_exact_named_dictionary_row",
+      "exactSourceKeySurfaces": 2,
+      "similarResultNotAccepted": "Existing source objects are parenthesized `(Adductor minimus).l/.r`; no exact Korean Association of Anatomists term row was found.",
+      "reason": "No exact KAA named term row was observed; no fuzzy substitute applied."
+    },
+    {
+      "query": "bones of free part of upper limb",
+      "targetId": "TA2:1179",
+      "status": "no_exact_named_dictionary_row",
+      "exactSourceKeySurfaces": 60,
+      "similarResultNotAccepted": null,
+      "reason": "No exact KAA named term row was observed; no fuzzy substitute applied."
+    },
+    {
+      "query": "phalanges of foot",
+      "targetId": "TA2:1504",
+      "status": "no_exact_named_dictionary_row",
+      "exactSourceKeySurfaces": 28,
+      "similarResultNotAccepted": null,
+      "reason": "No exact KAA named term row was observed; no fuzzy substitute applied."
+    },
+    {
+      "query": "sesamoid bones of foot",
+      "targetId": "TA2:1514",
+      "status": "no_exact_named_dictionary_row",
+      "exactSourceKeySurfaces": 2,
+      "similarResultNotAccepted": null,
+      "reason": "No exact KAA named term row was observed; no fuzzy substitute applied."
+    }
+  ],
+  "fieldConflicts": [
+    {
+      "targetId": "TA2:2650",
+      "english": "Extensor hallucis longus",
+      "field": "koTraditional",
+      "observedButNotApplied": "장무지싱근",
+      "status": "sourceTextConflict_unresolved",
+      "resolution": "Modern term may be shown with evidence. Legacy spelling remains null until a direct authoritative correction is confirmed."
+    }
+  ],
+  "parentPartBoundaries": [
+    {
+      "targetId": "TA2:2673",
+      "parentEnglish": "Flexor hallucis brevis",
+      "childTargetIds": [
+        "TA2:2669",
+        "TA2:2674",
+        "TA2:2675"
+      ],
+      "status": "parentTerm_only",
+      "resolution": "Parent terminology is recorded; medial/lateral head surface rows are not named with the whole-muscle term."
+    }
+  ],
+  "searchHomonyms": [
+    {
+      "targetEnglish": [
+        "Extensor hallucis brevis",
+        "Extensor pollicis brevis"
+      ],
+      "koModern": "짧은엄지폄근",
+      "status": "accurate_terms_search_disambiguation_needed",
+      "resolution": "Do not invent differentiating Korean aliases; retain distinct English/Latin and anatomy context."
+    },
+    {
+      "targetEnglish": [
+        "Extensor hallucis longus",
+        "Extensor pollicis longus"
+      ],
+      "koModern": "긴엄지폄근",
+      "status": "accurate_terms_search_disambiguation_needed",
+      "resolution": "Do not invent differentiating Korean aliases; retain distinct English/Latin and anatomy context."
+    },
+    {
+      "targetEnglish": [
+        "Flexor hallucis longus",
+        "Flexor pollicis longus"
+      ],
+      "koModern": "긴엄지굽힘근",
+      "status": "accurate_terms_search_disambiguation_needed",
+      "resolution": "Do not invent differentiating Korean aliases; retain distinct English/Latin and anatomy context."
+    },
+    {
+      "targetEnglish": [
+        "Depressor anguli oris",
+        "deltoid"
+      ],
+      "koModern": "구각하체근(삼각근)",
+      "status": "parenthetical-search-collision_review",
+      "resolution": "The full observed KAA legacy string remains preserved as evidence; never register the parenthetical substring as an alias."
+    }
+  ],
+  "searchAmbiguities": [
+    {
+      "query": "허리뼈",
+      "resultCount": 10,
+      "lumbarVertebraResults": 5,
+      "metatarsalResults": 5,
+      "status": "substring-overlap-observed-in-live-app",
+      "resolution": "The exact query is a meaningful lumbar name but also matches `발허리뼈` and the pre-existing generic `중족골` first/fifth rows. Keep all verified names and IDs; do not invent an alias. Track a future token-boundary search rule separately from this T100 naming evidence."
+    }
+  ],
+  "historicalMetricDiscrepancy": "The prior 137/101/201 figures do not reproduce from the same workbook hash and original T100 B-start overlay with the explicit exact-name normalization above. Keep the historical report intact; do not count the metric difference as completed anatomy. The validated B candidate set is the 39 unnamed exact-source-name concepts / 77 surface rows, of which this continuation applied 34 direct KAA term rows to 67 exact side/midline surfaces and retained five exact-query misses for C.",
+  "notCountedComplete": {
+    "remainingEligibleUnnamedRows": 410,
+    "unresolvedExactKaaQueries": 8,
+    "unresolvedLegacyFieldConflicts": 1,
+    "unresolvedHomonymSearchCases": 4,
+    "unresolvedSubstringSearchAmbiguities": 1,
+    "wholeBodyCompletion": false
+  }
+}

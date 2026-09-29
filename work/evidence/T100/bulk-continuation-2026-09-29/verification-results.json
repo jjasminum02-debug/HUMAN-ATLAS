@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "workUnit": "B bulk naming + C exceptions + D partial integrated verification",
+  "checkedAtLocal": "2026-09-29",
+  "baselineHead": "c757c2d9e870c8c403025868024872c1710d56a2",
+  "checks": [
+    {
+      "name": "builder determinism/check",
+      "command": "python3 work/evidence/T100/bulk-continuation-2026-09-29/build_t100_bulk_continuation.py --check",
+      "status": "pass",
+      "summary": "960 source objects, 102 new existing-surface modern-name fields, 50 target term rows, 34 direct concepts, 7 repeated exact groups, 8 unresolved exact queries."
+    },
+    {
+      "name": "bulk continuation strict validator",
+      "command": "python3 work/evidence/T100/bulk-continuation-2026-09-29/validate_t100_bulk_continuation.py",
+      "status": "pass_partial",
+      "summary": "42 invariant checks; denominators 542/563/12 preserved; 672 eligible surfaces = 262 named + 410 unnamed; holds unchanged."
+    },
+    {
+      "name": "Python syntax",
+      "command": "PYTHONPYCACHEPREFIX=/private/tmp/ha-t100-pycache python3 -m py_compile work/evidence/T100/bulk-continuation-2026-09-29/{build_t100_bulk_continuation,validate_t100_bulk_continuation}.py",
+      "status": "pass",
+      "note": "Initial default py_compile attempted to create cache under the restricted home cache; rerun with task-specific temporary cache passed."
+    },
+    {
+      "name": "whole-body regressions and compiled chunk integrity",
+      "command": "pnpm run test:whole-body",
+      "status": "pass",
+      "passed": 42,
+      "compiledChunksVerified": 46
+    },
+    {
+      "name": "learner search regressions",
+      "command": "pnpm run test:search",
+      "status": "pass",
+      "passed": 44
+    },
+    {
+      "name": "local delivery regressions",
+      "command": "pnpm run test:delivery",
+      "status": "pass",
+      "passed": 3
+    },
+    {
+      "name": "TypeScript typecheck",
+      "command": "pnpm run typecheck",
+      "status": "pass"
+    },
+    {
+      "name": "production build",
+      "command": "pnpm run build",
+      "status": "pass",
+      "warning": "Existing App JS chunk 953.57 kB exceeds Vite 500 kB advisory; no release/deploy performed."
+    },
+    {
+      "name": "actual local browser",
+      "status": "pass_partial",
+      "evidence": "work/evidence/T100/bulk-continuation-2026-09-29/browser-validation.json",
+      "summary": "12 isolated regions, 1440/1024/390 with no horizontal overflow; exact new-name search/card/left-right route/back-forward and selected isolate/transparency/hide/undo/restore passed; 0 console errors/warnings; 410 eligible unnamed surfaces and active-render/FPS budgets remain."
+    },
+    {
+      "name": "execution projection",
+      "command": "python3 work/tools/sync_execution.py && python3 work/tools/sync_execution.py --check",
+      "status": "pass",
+      "summary": "python3 work/tools/sync_execution.py was a no-op because projections were current; --check confirmed EXECUTION, STATUS, NEXT and generated prompt projections match."
+    }
+  ],
+  "overall": "pass_partial",
+  "notWholeBodyComplete": true
+}

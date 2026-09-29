@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "unit": "B candidate metric correction",
+  "checkedAtLocal": "2026-09-29",
+  "workbook": {
+    "sha256": "8e10e00e76f5da8e6d1be6a0f9dcab6039d9a3f81d8a3808c0fe28545802ab3c",
+    "sheet": "근육표",
+    "fieldsRead": [
+      "B",
+      "C"
+    ],
+    "rawValuesRetained": false,
+    "modified": false
+  },
+  "normalization": {
+    "workbookAndTarget": "trim, collapse whitespace, casefold; no singular/plural, suffix, synonym or fuzzy rewrite",
+    "workbookAndSourceBase": "trim terminal `.l`/`.r` only from source object name, then trim/collapse whitespace/casefold"
+  },
+  "historicalMetric": {
+    "source": "T100 B start ledger",
+    "exactNormalizedSourceLabelMatches": 137,
+    "unnamedCandidateLabels": 101,
+    "unnamedCandidateSurfaceRows": 201,
+    "reproduced": false
+  },
+  "reproducedAtOriginalBStart": {
+    "head": "1a45ee5e84d921ce88c279b7226cb249723c9673",
+    "uniqueWorkbookEnglishLabels": 255,
+    "exactLocalSourceNameBaseMatches": 41,
+    "unnamedCandidateLabels": 39,
+    "unnamedCandidateSurfaceRows": 77,
+    "fullyNamedMatchedLabels": 2,
+    "notFoundByExactRule": 214
+  },
+  "strictT96Join": {
+    "uniqueWorkbookEnglishLabels": 255,
+    "exactT96EnglishTargetMatches": 51,
+    "targetsWithoutPriorTargetTerminologyEvidence": 50,
+    "directTargetEligibleSurfaceRows": 83,
+    "directTargetRowsMissingKoModern": 77,
+    "matchedTargetsWithAtLeastOneExactSourceNameBase": 41
+  },
+  "interpretation": "The prior 137/101/201 figures do not reproduce from the same workbook hash and original T100 B-start overlay with the explicit exact-name normalization above. Keep the historical report intact; do not count the metric difference as completed anatomy. The validated B candidate set is the 39 unnamed exact-source-name concepts / 77 surface rows, of which this continuation applied 34 direct KAA term rows to 67 exact side/midline surfaces and retained five exact-query misses for C.",
+  "privacy": "No private workbook path, raw name list, non-name column, cell values, or workbook copy is retained."
+}
