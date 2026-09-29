@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "workUnit": "B",
+  "checkedAtLocal": "2026-09-29",
+  "status": "pass_partial_unit",
+  "checks": [
+    {
+      "command": "python3 work/evidence/T100/bulk-b-2026-09-29/apply_t100_bulk_b.py --check",
+      "result": "pass",
+      "note": "Deterministic overlay regeneration matched the recorded T100 B data."
+    },
+    {
+      "command": "python3 work/evidence/T100/bulk-b-2026-09-29/validate_t100_bulk_b.py",
+      "result": "pass",
+      "note": "Exact 2 concepts / 4 side-specific source objects; fixed denominators and all holds preserved."
+    },
+    {
+      "command": "pnpm run test:whole-body",
+      "result": "pass",
+      "count": "40/40 tests; 46 compiled chunks verified",
+      "note": "Common runtime projection, source-only selection, exact target evidence, dataset identities and policy gates passed."
+    },
+    {
+      "command": "pnpm run test:search",
+      "result": "pass",
+      "count": "44/44 tests",
+      "note": "Existing Korean-name, alias, side, and region search regressions passed."
+    },
+    {
+      "command": "pnpm run test:delivery",
+      "result": "pass",
+      "count": "3/3 tests",
+      "note": "Local integration route serves validated compact data and excludes the developer ledger."
+    },
+    {
+      "command": "actual local browser checks on http://127.0.0.1:5173/",
+      "result": "pass_for_changed_terms",
+      "note": "12-region overview loaded; both new Korean queries returned one concept; left/right source selection and three-name cards agreed; single-scene highlight rendered. Console capture was unavailable through the exposed UI API."
+    }
+  ],
+  "recoveredIssue": "The first integration run caught a non-contract accessMethod label for the two opened aggregate KMLE pages. It was normalized to opened_html, while preserving explicit statements that neither original dictionary record nor an original publisher page was opened. All rerun validators/tests passed.",
+  "not_run": [
+    "full typecheck and full production build: no TypeScript or runtime UI source was changed in this B increment; common A integration and build evidence remain in the earlier T100 report",
+    "whole B/C/D completion tests: incomplete target naming and genuine missing/conflicted structures remain"
+  ],
+  "holds": {
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "canonicalBindingAdded": false,
+    "newGeometry": false,
+    "wholeBodyComplete": false
+  }
+}

@@ -32,7 +32,12 @@
     "T100-B05: verify internal TA2/name evidence is not newly exposed in learner search while preserving pre-existing first/fifth metatarsal learner rows",
     "T100-B05: run strict provenance, exact-member, laterality, search, fixed-denominator, rights/review, and source-preservation checks",
     "T100-B05: pass whole-body regression 37/37, typecheck, production build, compiled dataset hash checks, and actual browser overview/search validation",
-    "build-common-data-pipeline-and-compact-runtime-projection"
+    "build-common-data-pipeline-and-compact-runtime-projection",
+    "T100 B: audited exact normalized workbook-label candidates read-only; retained all workbook terms as candidates until direct source verification",
+    "T100 B: record field-level Korean modern and legacy names for TA2:2071 and TA2:2412 from opened KMLE aggregate result pages",
+    "T100 B: share each verified concept name across its two independently identified left/right source objects without creating canonical bindings",
+    "T100 B: verify Korean search, three-name cards, bilateral selection, single-scene highlight, and trapezius upper/lower display in the live learner browser",
+    "T100 B: pass strict evidence validation, 40/40 whole-body tests, 44/44 search tests, and 3/3 local delivery tests; keep B partial"
   ],
   "nextUnit": "bulk-verified-korean-naming-and-repeated-structures",
   "pendingUnits": [
@@ -140,13 +145,24 @@
       "rightsAndReviewPreserved": true,
       "developerEvidenceProjected": false,
       "wholeBodyCompletion": false
-    }
+    },
+    "BFirstVerifiedConcepts": 2,
+    "BFirstVerifiedSideSpecificSourceObjects": 4,
+    "BFirstVerifiedTargetIds": [
+      "TA2:2071",
+      "TA2:2412"
+    ],
+    "BEligibleSurfaceRowsStillWithoutKoreanModernName": 512,
+    "BExactWorkbookNameCandidatesStillUnverified": 100,
+    "BExactCandidateSurfaceRowsStillUnverified": 199,
+    "BPartialCheckpoint": true,
+    "BWholeUnitComplete": false
   },
   "nextId": "T100",
   "nextOwner": "Luna Max",
   "nextTaskStarted": false,
   "lastResumedAtLocal": "2026-09-29",
-  "resumeBaselineHead": "a5a528c2a75a67188fc8236763e3885ea47e1f7c",
+  "resumeBaselineHead": "1a45ee5e84d921ce88c279b7226cb249723c9673",
   "evidence": [
     "work/evidence/T100/batches/2026-09-29-B01-skull-names/start-baseline.json",
     "work/evidence/T100/batches/2026-09-29-B01-skull-names/term-and-correspondence-ledger.json",
@@ -201,7 +217,17 @@
     "work/evidence/T100/runtime-projection-a-2026-09-29/start-baseline.json",
     "work/evidence/T100/runtime-projection-a-2026-09-29/projection-validation.json",
     "work/evidence/T100/runtime-projection-a-2026-09-29/browser-validation.json",
-    "work/evidence/T100/runtime-projection-a-2026-09-29/verification-results.json"
+    "work/evidence/T100/runtime-projection-a-2026-09-29/verification-results.json",
+    "work/evidence/T100/bulk-b-2026-09-29/start-baseline.json",
+    "work/evidence/T100/bulk-b-2026-09-29/apply_t100_bulk_b.py",
+    "work/evidence/T100/bulk-b-2026-09-29/source-query-observations.json",
+    "work/evidence/T100/bulk-b-2026-09-29/term-and-repetition-ledger.json",
+    "work/evidence/T100/bulk-b-2026-09-29/validate_t100_bulk_b.py",
+    "work/evidence/T100/bulk-b-2026-09-29/validation.json",
+    "work/evidence/T100/bulk-b-2026-09-29/browser-validation.json",
+    "work/evidence/T100/bulk-b-2026-09-29/verification-results.json",
+    "work/evidence/T100/bulk-b-2026-09-29/preservation-after.json",
+    "work/evidence/T100/bulk-b-2026-09-29/execution-record-delta.json"
   ],
-  "result": "T100 A completed: strict developer-ledger validation now feeds one allowlisted compact runtime projection; actual local app retained 12-region/search/card/selection behavior. Whole-body T100 remains in_progress/partial; nextUnit=bulk-verified-korean-naming-and-repeated-structures."
+  "result": "T100 B started and is in_progress/partial: two exact target concepts (four side-specific source surfaces) now have source-backed Korean modern/legacy names; bilateral search/card behavior and selected scene surface passed browser checks. Remaining B naming/repetition work and C/D gates remain; nextUnit=bulk-verified-korean-naming-and-repeated-structures."
 }
