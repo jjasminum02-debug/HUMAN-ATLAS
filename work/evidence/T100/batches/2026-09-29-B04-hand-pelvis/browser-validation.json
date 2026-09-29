@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "batchId": "T100-B04-hand-pelvis",
+  "validatedAtLocal": "2026-09-29",
+  "browser": "Codex in-app browser through CUA",
+  "tab": {
+    "id": "11",
+    "url": "http://127.0.0.1:5173/",
+    "title": "Human Atlas · 근육 학습",
+    "agentCreatedTemporaryTab": true,
+    "userTabClosedOrNavigated": false
+  },
+  "initialRenderedState": {
+    "home": "전신 살펴보기",
+    "regionMenuCount": 12,
+    "visibleStructureNameCount": 355,
+    "selection": null,
+    "cameraAndScene": "single existing whole-body learning scene visible",
+    "consoleErrors": "not read through the available CUA surface"
+  },
+  "searchLeakageChecks": [
+    {
+      "query": "손허리뼈",
+      "visibleResultCount": 0,
+      "emptyState": "등록된 이름을 찾지 못했습니다. 다른 이름으로 검색해 보세요.",
+      "selectedStructure": null
+    },
+    {
+      "query": "중수골",
+      "visibleResultCount": 0,
+      "emptyState": "등록된 이름을 찾지 못했습니다. 다른 이름으로 검색해 보세요.",
+      "selectedStructure": null
+    },
+    {
+      "query": "TA2:1264",
+      "visibleResultCount": 0,
+      "emptyState": "등록된 이름을 찾지 못했습니다. 다른 이름으로 검색해 보세요.",
+      "selectedStructure": null
+    }
+  ],
+  "afterChecks": {
+    "searchCleared": true,
+    "selection": null,
+    "sceneAndStructureCountRestored": true
+  },
+  "result": "pass: B04 terminology and internal TA2 identifiers do not appear in learner search; existing full-body scene remains available. This is a non-leakage check, not anatomical or visual approval of hand geometry."
+}

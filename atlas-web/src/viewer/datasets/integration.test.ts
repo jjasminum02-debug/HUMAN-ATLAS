@@ -21,6 +21,12 @@ const lumbarRibHandBatch = JSON.parse(readFileSync(new URL('../../../../work/evi
     crosswalkRelations: Array<{ targetId: string; sourceKey: string; sourceObjectName: string; sourceDataName: string | null; sourceSide: string | null; sourceParent: string; sourceCollections: string[]; relationKind: string; memberCode: string; sourceSegmentCode: string | null }>;
     memberCountsByTarget: Record<string, number>;
 };
+const handPelvisBatch = JSON.parse(readFileSync(new URL('../../../../work/evidence/T100/batches/2026-09-29-B04-hand-pelvis/term-and-correspondence-ledger.json', import.meta.url), 'utf8')) as {
+    scope: { targetCount: number };
+    targets: Array<{ targetId: string; names: { koModern: string | null; koTraditional: string | null; en: string }; fieldEvidence: Record<string, { status: string }>; existingSurface: { status: string } }>;
+    crosswalkRelations: Array<{ targetId: string; sourceKey: string; sourceObjectName: string; sourceDataName: string; sourceSide: string | null; sourceParent: string; sourceCollections: string[]; relationKind: string; memberCode: string; sourceSegmentCode: string | null }>;
+    memberCountsByTarget: Record<string, number>;
+};
 const datasetInstances = new Map(compiled.instances.map(instance => [instance.sourceKey, instance]));
 const fixture = {
     revision: raw.datasetRevision,
@@ -257,6 +263,92 @@ test('T100 B03 rejects wrong sides, parents, member keys, unsupported variants a
     const missingRef = structuredClone(raw);
     missingRef.targetTerminologyEvidence!.find(term => term.targetId === 'TA2:1117')!.fieldEvidence.koModern.sourceIds = ['not-a-source'];
     assert.throws(() => validateIntegration(missingRef, fixture));
+});
+test('T100 B04 records hand-bone members without leaking internal target terminology to learner search', () => {
+    const batchIds = new Set(handPelvisBatch.targets.map(target => target.targetId));
+    const terms = (raw.targetTerminologyEvidence ?? []).filter(term => batchIds.has(term.targetId));
+    const relations = raw.objects.flatMap(row => (row.targetRelationEvidence ?? [])
+        .filter(relation => batchIds.has(relation.targetId)).map(relation => ({ row, relation })));
+    assert.equal(handPelvisBatch.scope.targetCount, 10);
+    assert.equal(terms.length, 10);
+    assert.equal(handPelvisBatch.crosswalkRelations.length, 101);
+    assert.equal(relations.length, 101);
+    assert.equal(new Set(relations.map(x => x.relation.sourceKey)).size, 37);
+    assert.deepEqual(handPelvisBatch.memberCountsByTarget, {
+        'TA2:1263': 0, 'TA2:1264': 10, 'TA2:1265': 10, 'TA2:1271': 27, 'TA2:1272': 27,
+        'TA2:1277': 10, 'TA2:1278': 8, 'TA2:1279': 9, 'TA2:1281': 0, 'TA2:1282': 0,
+    });
+    const bySourceTarget = new Set(handPelvisBatch.crosswalkRelations.map(r => `${r.targetId}:${r.sourceKey}`));
+    for (const { row, relation } of relations) {
+        assert.equal(relation.sourceKey, row.sourceKey);
+        assert.equal(relation.sourceObjectName, row.sourceName);
+        assert.equal(relation.sourceSide, row.side);
+        assert.equal(relation.relationKind, 'class_member');
+        assert.equal(relation.directObjectNameMatch, false);
+        assert.equal(relation.ancestorNameAloneUsed, false);
+        assert.equal(relation.upstreamFjOrTa2IdClaim, false);
+        assert.equal(relation.canonicalHaBindingCreated, false);
+        assert.equal(row.haConceptId, null);
+        assert.equal(row.sourceOnly, true);
+        assert.equal(row.humanReview, 'not_performed');
+        assert.equal(row.publicRedistribution, 'held');
+        assert(bySourceTarget.has(`${relation.targetId}:${relation.sourceKey}`));
+        assert(relation.memberCode);
+    }
+    const byId = new Map(terms.map(term => [term.targetId, term]));
+    assert.equal(byId.get('TA2:1264')?.names.koModern, '손허리뼈(첫째-다섯째)');
+    assert.equal(byId.get('TA2:1265')?.names.koModern, '손허리뼈');
+    for (const targetId of ['TA2:1263', 'TA2:1271', 'TA2:1272', 'TA2:1277', 'TA2:1278', 'TA2:1279', 'TA2:1281', 'TA2:1282']) {
+        assert.equal(byId.get(targetId)?.names.koModern, null);
+        assert.equal(byId.get(targetId)?.names.koTraditional, null);
+    }
+    assert.equal(byId.get('TA2:1279')?.existingSurface.status, 'nine_exact_members_one_identity_conflict_excluded');
+    assert.equal(byId.get('TA2:1282')?.existingSurface.status, 'candidate_collection_members_observed_not_crosswalked');
+    assert.equal(byId.get('TA2:1281')?.existingSurface.status, 'hand_group_surface_missing');
+    assert.equal(terms.every(term => term.learnerBindingCreated === false && term.canonicalHaConceptId === null
+        && term.sourceOnly && term.humanReview === 'not_performed' && term.publicRedistribution === 'held'
+        && term.newGeometryCreated === false), true);
+    for (const term of terms) {
+        for (const query of [term.names.koModern, term.names.koTraditional].filter(Boolean) as string[]) {
+            assert(!searchStructures(raw.objects, query, []).some(row => row.targetIds.some(id => batchIds.has(id))),
+                `internal B04 terminology leaked into learner search: ${term.targetId}:${query}`);
+        }
+    }
+});
+test('T100 B04 rejects the fifth distal data-name conflict and wrong side/member evidence', () => {
+    const knownConflict = structuredClone(raw);
+    const conflictRow = knownConflict.objects.find(row => row.sourceName === 'Distal phalanx of fifth finger of hand.l')!;
+    assert(!conflictRow.targetRelationEvidence?.some(relation => ['TA2:1271', 'TA2:1272', 'TA2:1279'].includes(relation.targetId)));
+
+    const wronglyLinkedConflict = structuredClone(raw);
+    const badConflictRow = wronglyLinkedConflict.objects.find(row => row.sourceName === 'Distal phalanx of fifth finger of hand.l')!;
+    const rightDistal = wronglyLinkedConflict.objects.find(row => row.sourceName === 'Distal phalanx of fifth finger of hand.r')!;
+    const fakeConflictRelation = structuredClone(rightDistal.targetRelationEvidence!.find(relation => relation.targetId === 'TA2:1279')!);
+    fakeConflictRelation.sourceKey = badConflictRow.sourceKey;
+    fakeConflictRelation.sourceObjectName = badConflictRow.sourceName;
+    fakeConflictRelation.sourceDataName = 'Distal phalanx of fifth finger of hand.r';
+    fakeConflictRelation.sourceCollections = ['1: Skeletal system', 'Appendicular skeleton', 'Bonus collection', 'Left upper limb', 'Right hand'];
+    fakeConflictRelation.sourceSide = 'left';
+    fakeConflictRelation.evaluatedGeometrySha256 = rightDistal.targetRelationEvidence!.find(relation => relation.targetId === 'TA2:1279')!.evaluatedGeometrySha256;
+    fakeConflictRelation.memberCode = 'distal:fifth:left';
+    badConflictRow.targetIds.push('TA2:1279');
+    badConflictRow.targetRelationEvidence = [...(badConflictRow.targetRelationEvidence ?? []), fakeConflictRelation];
+    assert.throws(() => validateIntegration(wronglyLinkedConflict, fixture));
+
+    const wrongSide = structuredClone(raw);
+    const member = wrongSide.objects.find(row => row.sourceName === 'First metacarpal bone.l')!;
+    member.targetRelationEvidence!.find(relation => relation.targetId === 'TA2:1264')!.sourceSide = 'right';
+    assert.throws(() => validateIntegration(wrongSide, fixture));
+
+    const wrongMember = structuredClone(raw);
+    const middle = wrongMember.objects.find(row => row.sourceName === 'Middle phalanx of second finger of hand.l')!;
+    middle.targetRelationEvidence!.find(relation => relation.targetId === 'TA2:1278')!.memberCode = 'middle:first:left';
+    assert.throws(() => validateIntegration(wrongMember, fixture));
+
+    const wrongLevel = structuredClone(raw);
+    const proximal = wrongLevel.objects.find(row => row.sourceName === 'Proximal phalanx of second finger of hand.l')!;
+    proximal.targetRelationEvidence!.find(relation => relation.targetId === 'TA2:1277')!.memberCode = 'distal:second:left';
+    assert.throws(() => validateIntegration(wrongLevel, fixture));
 });
 test('both scapulae belong to arm context and sacrum to lumbar context', () => {
     const scap = raw.objects.filter(r => r.names.en === 'Scapula');

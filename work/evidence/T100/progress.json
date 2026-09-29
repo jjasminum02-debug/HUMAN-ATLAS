@@ -22,12 +22,16 @@
     "T100-B03: classify the ten frozen lumbar/rib/hand targets and record field-provenanced Korean terms",
     "T100-B03: connect only L1-L5, ordinary ribs, and eight carpal bone classes to 45 exact source members",
     "T100-B03: leave seven targets without direct source relation; preserve rights/review/source-only holds and fixed denominators",
-    "T100-B03: confirm learner search does not expose B03-only target terminology or TA2 identifiers in a live browser"
+    "T100-B03: confirm learner search does not expose B03-only target terminology or TA2 identifiers in a live browser",
+    "T100-B04: classify ten frozen hand/pelvis targets and record field-level Korean terminology provenance",
+    "T100-B04: link 101 exact class-member relations to 37 existing hand-bone source objects; exclude one left fifth distal data-name conflict",
+    "T100-B04: retain four bony-pelvis collection observations as candidates only and exclude foot sesamoid surfaces from hand target",
+    "T100-B04: verify target-only terminology non-leakage in live learner browser and preserve fixed whole-body gates"
   ],
   "nextUnit": "resolve-remaining-target-part-synonym-coverage-and-korean-name-gaps",
   "pendingUnits": [
-    "continue bounded dispositions for 162 of the original 182 historical remainder entries after B01/B02/B03; preserve all exact-surface gaps",
-    "add evidenced Korean terminology for further eligible structures only in bounded batches",
+    "classify and evidence the remaining 152 entries from the frozen 182-target remainder after B01/B02/B03/B04 dispositions; retain all unresolved source-surface gaps explicitly",
+    "extend field-provenanced Korean names for further eligible structures only in bounded batches",
     "complete integrated 12-region target/side/selection and whole-body runtime validation without claiming G1 complete"
   ],
   "gate": {
@@ -41,7 +45,7 @@
     "existingHaBoundSurfaceRows": 130,
     "surfaceRowsWithThreeNamesBeforeB01": 123,
     "surfaceRowsWithThreeNamesAfterB01": 137,
-    "unresolvedTargets": 162,
+    "unresolvedTargets": 152,
     "publicRedistribution": "held",
     "humanReview": "not_performed",
     "sourceOnlyForB01Rows": true,
@@ -76,7 +80,23 @@
       "TA2:1262"
     ],
     "B03CanonicalHaLearnerBindingsCreated": 0,
-    "B03NewGeometryCreated": 0
+    "B03NewGeometryCreated": 0,
+    "historicalRemainingSnapshotAtB04Start": 182,
+    "B04TargetsClassified": 10,
+    "B04TargetsWithExactSurfaceRelations": 7,
+    "B04ExactSourceObjectRelations": 101,
+    "B04UniqueSourceObjects": 37,
+    "B04TargetsWithoutExactSurfaceRelations": [
+      "TA2:1263",
+      "TA2:1281",
+      "TA2:1282"
+    ],
+    "B04PhalanxIdentityConflictsExcluded": 1,
+    "B04PelvisCandidateMembersNotCrosswalked": 4,
+    "B04WrongRegionSesamoidMeshesExcluded": 2,
+    "B04RightsAndReviewPromotions": 0,
+    "B04CanonicalHaLearnerBindingsCreated": 0,
+    "B04NewGeometryCreated": 0
   },
   "nextId": "T100",
   "nextOwner": "Luna Max",
@@ -107,7 +127,20 @@
     "work/evidence/T100/batches/2026-09-29-B03-lumbar-ribs-hand-groups/validation.json",
     "work/evidence/T100/batches/2026-09-29-B03-lumbar-ribs-hand-groups/browser-validation.json",
     "work/evidence/T100/batches/2026-09-29-B03-lumbar-ribs-hand-groups/verification-results.json",
-    "work/evidence/T100/batches/2026-09-29-B03-lumbar-ribs-hand-groups/preservation-after.json"
+    "work/evidence/T100/batches/2026-09-29-B03-lumbar-ribs-hand-groups/preservation-after.json",
+    "work/evidence/T100/batches/2026-09-29-B04-hand-pelvis/start-baseline.json",
+    "work/evidence/T100/batches/2026-09-29-B04-hand-pelvis/batch-scope.json",
+    "work/evidence/T100/batches/2026-09-29-B04-hand-pelvis/source-query-observations.json",
+    "work/evidence/T100/batches/2026-09-29-B04-hand-pelvis/apply_t100_b04.py",
+    "work/evidence/T100/batches/2026-09-29-B04-hand-pelvis/validate_t100_b04.py",
+    "work/evidence/T100/batches/2026-09-29-B04-hand-pelvis/term-and-correspondence-ledger.json",
+    "work/evidence/T100/batches/2026-09-29-B04-hand-pelvis/structure-correspondence.json",
+    "work/evidence/T100/batches/2026-09-29-B04-hand-pelvis/validation.json",
+    "work/evidence/T100/batches/2026-09-29-B04-hand-pelvis/browser-validation.json",
+    "work/evidence/T100/batches/2026-09-29-B04-hand-pelvis/verification-results.json",
+    "work/evidence/T100/batches/2026-09-29-B04-hand-pelvis/preservation-after.json",
+    "work/evidence/T100/batches/2026-09-29-B04-hand-pelvis/execution-record-delta.json",
+    "work/reports/T100.md"
   ],
-  "result": "B03_dispositioned_10_targets_with_45_exact_source_surface_relations; seven target relationships remain unresolved; 162 historical remainder entries remain; T100_partial"
+  "result": "B04 classified ten frozen targets with 101 exact hand-bone class-member relations across 37 unique source objects; one data-name conflict excluded; three targets retain no exact direct relation; T100 remains partial with 152 historical remainder entries"
 }

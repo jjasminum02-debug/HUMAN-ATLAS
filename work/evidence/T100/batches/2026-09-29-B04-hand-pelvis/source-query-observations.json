@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "batchId": "T100-B04-hand-pelvis",
+  "capturedOn": "2026-09-29",
+  "accessContext": "Codex in-app browser; each KMLE aggregate query HTML page was opened and its accessibility result tree inspected. These are not direct source-dictionary edition pages.",
+  "editionPolicy": "KMLE does not expose the underlying dictionary edition/revision for these result rows. Exact edition is therefore null. Query index sections, opened aggregate HTML, and separately frozen FIPAT rows are identified independently.",
+  "observations": [
+    {
+      "id": "kmle-b04-metacarpal-bones",
+      "url": "https://m.kmle.co.kr/search.php?Search=metacarpal+bones",
+      "accessMethod": "opened_html",
+      "edition": null,
+      "retrievalLayer": "opened aggregate HTML containing exact/similar index result sections",
+      "openedOriginalDictionaryRecord": false,
+      "locator": "Accessibility result tree, 대한해부학회 exact-result row nodes 119-120: Metacarpal bones(first-fifth) -> 손허리뼈(첫째-다섯째), old term 중수(장)골. The exact source dictionary edition is not exposed.",
+      "observedEntries": ["Metacarpal bones(first-fifth) -> 손허리뼈(첫째-다섯째)", "old term -> 중수(장)골"]
+    },
+    {
+      "id": "kmle-b04-metacarpal-bone",
+      "url": "https://m.kmle.co.kr/search.php?Search=metacarpal+bone",
+      "accessMethod": "opened_html",
+      "edition": null,
+      "retrievalLayer": "opened aggregate HTML containing exact/similar index result sections",
+      "openedOriginalDictionaryRecord": false,
+      "locator": "Accessibility result tree, current 대한의협 exact-result node 109: metacarpal bone -> 손허리뼈, 중수골; older 대한의협 exact-result node 196: 손허리뼈; older 대한의협 3 exact-result node 284: 중수골. Hanja glyphs were not collected.",
+      "observedEntries": ["current 대한의협 exact row -> 손허리뼈, 중수골", "older exact rows -> 손허리뼈 / 중수골"]
+    },
+    {
+      "id": "kmle-b04-phalanges-hand",
+      "url": "https://m.kmle.co.kr/search.php?Search=phalanges+of+hand",
+      "accessMethod": "opened_html",
+      "edition": null,
+      "retrievalLayer": "opened aggregate HTML; exact and fuzzy dictionary/index sections both inspected",
+      "openedOriginalDictionaryRecord": false,
+      "locator": "The current 대한해부학회 exact hand-specific row was absent. Older 대한의협 2/3 fuzzy-result rows (AX nodes 117 and 164 in the captured page) returned generic phalanges -> 손가락뼈. Generic KAS proximal/middle/distal rows identify level terms but omit the hand qualifier. Underlying editions are not exposed.",
+      "observedEntries": ["current hand-specific exact row: absent", "older fuzzy generic row -> 손가락뼈", "level-term rows do not name hand-specific target"]
+    },
+    {
+      "id": "kmle-b04-phalanx",
+      "url": "https://m.kmle.co.kr/search.php?Search=phalanx",
+      "accessMethod": "opened_html",
+      "edition": null,
+      "retrievalLayer": "opened aggregate HTML containing dictionary-labelled exact/similar index result sections",
+      "openedOriginalDictionaryRecord": false,
+      "locator": "Accessibility result tree, current 대한의협 exact-result node 35: phalanx -> 가락뼈 / 마디뼈; 대한의협 필수용어집 exact node 61 -> 손발가락뼈; older exact rows nodes 108-110 and 139-141 -> 지골 with a general finger/toe scope. KAS exact-result section for this query reports 0. Hanja glyphs were not copied.",
+      "observedEntries": ["current generic exact rows -> 가락뼈 / 마디뼈", "current required glossary -> 손발가락뼈", "older generic exact rows -> 지골", "hand-specific current row: absent"]
+    },
+    {
+      "id": "kmle-b04-sesamoid-hand",
+      "url": "https://m.kmle.co.kr/search.php?Search=sesamoid+bones+of+hand",
+      "accessMethod": "opened_html",
+      "edition": null,
+      "retrievalLayer": "opened aggregate HTML; generic exact/similar index rows inspected",
+      "openedOriginalDictionaryRecord": false,
+      "locator": "No exact hand-specific compound result. Current generic 대한의협 rows identify sesamoid bone -> 종자뼈; 대한해부학회 generic Sesamoid bones row shows 종자뼈 and old term 종자골. The generic rows do not establish a hand-specific target label or member set.",
+      "observedEntries": ["hand-specific exact compound: absent", "generic sesamoid bone -> 종자뼈", "generic old term -> 종자골"]
+    },
+    {
+      "id": "kmle-b04-os-centrale",
+      "url": "https://m.kmle.co.kr/search.php?Search=os+centrale+carpi",
+      "accessMethod": "opened_html",
+      "edition": null,
+      "retrievalLayer": "opened aggregate HTML; dictionary/index exactness distinguished from fuzzy result sections",
+      "openedOriginalDictionaryRecord": false,
+      "locator": "No exact current Korean KAS headword for os centrale appeared. Older 대한의협 3 similar-result node 54 gives os centrale / central bone -> 중심골. CancerWEB result nodes 240-244 describe an occasional carpal accessory bone between named wrist bones. The page's suggested os centrale tarsi result is a different foot concept and is excluded.",
+      "observedEntries": ["older generic os centrale row -> 중심골", "CancerWEB definition describes occasional carpal accessory bone", "os centrale tarsi is a distinct foot term and excluded"]
+    },
+    {
+      "id": "kmle-b04-bony-pelvis",
+      "url": "https://m.kmle.co.kr/search.php?Search=bony+pelvis",
+      "accessMethod": "opened_html",
+      "edition": null,
+      "retrievalLayer": "opened aggregate HTML containing exact/similar index result sections",
+      "openedOriginalDictionaryRecord": false,
+      "locator": "Exact-result section for bony pelvis returned no exact Korean headword. Similar-result KAS nodes 225-226 show Pelvis -> 골반 (old term 골반); required glossary node 72 also shows pelvis -> 골반. The modifier bony is not part of that Korean row, so 골반뼈 is not inferred.",
+      "observedEntries": ["exact bony pelvis Korean row: absent", "generic Pelvis -> 골반", "generic row is not promoted to an exact bony-pelvis label"]
+    }
+  ],
+  "sourceKindSeparation": {
+    "fipatTa2": "Local T96 frozen metadata with exact Terminologia Anatomica 2nd edition vocabulary 2.07 and SHA-256; not a fresh page read in this batch.",
+    "kmle": "Opened aggregate query HTML. Its exact/similar result sections are indexed dictionary outputs; the underlying dictionary records and edition/revision were not individually exposed.",
+    "za": "Pinned local T98/T99 source-object catalogue and evaluated-geometry metadata at the recorded commit; no upstream FJ identity is claimed.",
+    "humanAnatomyReview": "not performed; lexical/source catalogue work is not human review."
+  },
+  "hanjaCopied": false
+}

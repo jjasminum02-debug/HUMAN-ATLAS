@@ -98,6 +98,8 @@ export interface IntegrationEvidenceSource {
     accessDate: string;
     accessMethod: 'opened_html' | 'search_index_excerpt' | 'local_frozen_metadata';
     locator: string;
+    retrievalLayer?: string;
+    openedOriginalDictionaryRecord?: boolean;
 }
 export interface TargetTerminologyEvidence {
     targetId: string;
@@ -120,7 +122,11 @@ export interface TargetTerminologyEvidence {
         locator: string | null;
         status: 'evidence_backed' | 'missing';
         missingReason?: string | null;
-    }>;
+    }> & {
+        sourceSynonyms?: { language: string; value: string; sourceIds: string[]; locator: string; status: 'evidence_backed' }[];
+        hanja?: { value: null; sourceIds: string[]; locator: null; status: 'not_collected'; missingReason: string };
+    };
+    unappliedTermCandidates?: { value: string; sourceId: string; locator: string; status: string; reason: string }[];
     existingSurface: Record<string, unknown>;
     observedSurfacesNotBound: Record<string, unknown>[];
     learnerBindingCreated: false;
@@ -256,7 +262,8 @@ export function validateIntegration(value: unknown, dataset: Dataset): Integrati
         for (const relation of row.targetRelationEvidence ?? []) {
             const baseName = row.sourceName.replace(/\.[lr]$/i, '').trim().toLocaleLowerCase();
             const allowedClassTargetKind = relation.relationKind === 'class_member'
-                && relation.targetId === 'TA2:1249' && relation.targetSemanticKind === 'bone_group';
+                && ((relation.targetId === 'TA2:1249' && relation.targetSemanticKind === 'bone_group')
+                    || (['TA2:1264', 'TA2:1271'].includes(relation.targetId) && relation.targetSemanticKind === 'bone_series'));
             if (relation.sourceKey !== row.sourceKey || relation.sourceObjectName !== row.sourceName
                 || !row.targetIds.includes(relation.targetId)
                 || relation.targetSemanticKind !== 'bone' && relation.targetSemanticKind !== 'muscle' && !allowedClassTargetKind
@@ -317,7 +324,35 @@ export function validateIntegration(value: unknown, dataset: Dataset): Integrati
                         && relation.sourceSide === carpalSide
                         && relation.sourceCollections.includes(limbCollection)
                         && relation.sourceCollections.includes('Right hand');
-                    if (!cervical && !thoracic && !lumbar && !ordinaryRib && !carpal)
+                    const metacarpalMatch = relation.sourceObjectName.match(/^(First|Second|Third|Fourth|Fifth) metacarpal bone\.([lr])$/);
+                    const metacarpalSide = metacarpalMatch?.[2] === 'l' ? 'left' : metacarpalMatch?.[2] === 'r' ? 'right' : null;
+                    const metacarpalLimb = metacarpalSide === 'left' ? 'Left upper limb' : 'Right upper limb';
+                    const metacarpal = ['TA2:1264', 'TA2:1265'].includes(relation.targetId)
+                        && (relation.targetId !== 'TA2:1264' || relation.targetSemanticKind === 'bone_series')
+                        && (relation.targetId !== 'TA2:1265' || relation.targetSemanticKind === 'bone')
+                        && !!metacarpalMatch && relation.memberCode === 'metacarpal:' + metacarpalMatch[1].toLocaleLowerCase() + ':' + metacarpalSide
+                        && relation.sourceParent === 'Bones of free part of upper limb.g'
+                        && relation.sourceSide === metacarpalSide && relation.sourceCollections.includes(metacarpalLimb)
+                        && relation.sourceCollections.includes('Right hand');
+                    const phalanxMatch = relation.sourceObjectName.match(/^(Proximal|Middle|Distal) phalanx of (first|second|third|fourth|fifth) finger of hand\.([lr])$/);
+                    const phalanxSide = phalanxMatch?.[3] === 'l' ? 'left' : phalanxMatch?.[3] === 'r' ? 'right' : null;
+                    const phalanxLimb = phalanxSide === 'left' ? 'Left upper limb' : 'Right upper limb';
+                    const phalanxClass = relation.targetId === 'TA2:1271' || relation.targetId === 'TA2:1272';
+                    const expectedPhalanxLevel = relation.targetId === 'TA2:1277' ? 'Proximal'
+                        : relation.targetId === 'TA2:1278' ? 'Middle'
+                            : relation.targetId === 'TA2:1279' ? 'Distal' : null;
+                    const phalanx = (phalanxClass || !!expectedPhalanxLevel)
+                        && (relation.targetId !== 'TA2:1271' || relation.targetSemanticKind === 'bone_series')
+                        && (relation.targetId !== 'TA2:1272' && relation.targetId !== 'TA2:1277' && relation.targetId !== 'TA2:1278' && relation.targetId !== 'TA2:1279' || relation.targetSemanticKind === 'bone')
+                        && !!phalanxMatch && (phalanxClass || phalanxMatch[1] === expectedPhalanxLevel)
+                        && relation.sourceObjectName !== 'Distal phalanx of fifth finger of hand.l'
+                        && relation.memberCode === phalanxMatch[1].toLocaleLowerCase() + ':' + phalanxMatch[2].toLocaleLowerCase() + ':' + phalanxSide
+                        && relation.sourceParent === 'Bones of free part of upper limb.g'
+                        && relation.sourceSide === phalanxSide && relation.sourceCollections.includes(phalanxLimb)
+                        && relation.sourceCollections.includes('Right hand')
+                        && !(relation.sourceObjectName === 'Distal phalanx of fifth finger of hand.l'
+                            && relation.sourceDataName === 'Distal phalanx of fifth finger of hand.r');
+                    if (!cervical && !thoracic && !lumbar && !ordinaryRib && !carpal && !metacarpal && !phalanx)
                         throw Error('target relation class member mismatch: ' + relation.targetId + ' / ' + relation.sourceObjectName);
                 } else {
                     throw Error('target relation unsupported non-name match');
