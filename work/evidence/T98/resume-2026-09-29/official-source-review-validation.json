@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "task": "T98",
-  "checkedAt": "2026-09-29T05:29:03+09:00",
+  "checkedAt": "2026-09-29T09:17:58+09:00",
   "result": "passed_partial_gates_remain",
   "taskStatus": "in_progress/partial",
   "checks": [
@@ -79,7 +79,51 @@
       "name": "progress mirror and report point to the new evidence",
       "passed": true,
       "evidence": {
-        "historyCount": 3
+        "historyCount": 4
+      }
+    },
+    {
+      "name": "no new official or hash-bound source material appeared since the previous review",
+      "passed": true,
+      "evidence": {
+        "assessmentInputCount": 15,
+        "shaMismatches": [],
+        "officialSourceReviewSha256": "f9066cb2c290f194007a3525b7bb4e99274b8507d4e2d75820c4372a1cc08583",
+        "officialSourceReviewValidationSha256": "154cd2ed1c78d24b705615c2b6beffa78c20463e12272a968454ec20c54eb056",
+        "newOfficialSourceFilesOrReceiptsFound": false
+      }
+    },
+    {
+      "name": "concrete missing source material is recorded without resolving any gate by inference",
+      "passed": true,
+      "evidence": {
+        "missingMaterials": [
+          "Blender 3.5.0 official checksum bytes or another direct official publisher/package-integrity receipt that can be compared to the mounted artifact.",
+          "Z-Anatomy source-level physical unit, coordinate frame, reference/rest-pose declaration, and source-backed registration to the T50/T69 project frame.",
+          "Exact upstream source ID and per-object rights/license-family evidence for each of the frozen 12 object locators, including laterality support.",
+          "Identity-backed exact geometry membership for all 542 frozen target concepts plus quality and cost measurements for candidate bases under equivalent scope and pipeline conditions."
+        ],
+        "preservation": {
+          "noChecksumRetry": true,
+          "noArchiveDownload": true,
+          "noBlenderLaunch": true,
+          "noBlendReexecution": true,
+          "noInventoryOrExporterRerun": true,
+          "sourceOnly": true,
+          "productionBase": null,
+          "localAndPublicRights": "held",
+          "humanReview": "not_performed",
+          "canonicalMappingOrLearnerUIChanged": false,
+          "T99Started": false
+        }
+      }
+    },
+    {
+      "name": "latest T98 resume history retains the same nextUnit and does not start T99",
+      "passed": true,
+      "evidence": {
+        "nextUnit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
+        "nextId": "T98"
       }
     },
     {
@@ -133,8 +177,8 @@
     }
   ],
   "summary": {
-    "checkCount": 13,
-    "passedCount": 13,
+    "checkCount": 16,
+    "passedCount": 16,
     "failedCount": 0,
     "nextUnit": "resolve-frame-unit-pose-side-rights-lineage-and-base-comparison",
     "nextId": "T98",
