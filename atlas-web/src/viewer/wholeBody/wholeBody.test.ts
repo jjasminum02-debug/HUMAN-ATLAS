@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { visible, pickable, validateManifest, type BodyAsset, type BodyView } from './contract.ts';
+import { visible, pickable, selected, validateManifest, type BodyAsset, type BodyView } from './contract.ts';
 import { ResourceQueue } from './resources.ts';
 const asset: BodyAsset = { id: 'FJ1', nodeId: 'HA-MESH-BP3D4-FJ1', sourceSha256: 'a'.repeat(64), regions: ['leg'], side: 'right', layer: 'muscle', defaultVisible: true, supplement: false, pickState: 'source_only_unbound', stableIds: [], holdReasons: [], humanReviewed: false, bounds: [[0,0,0],[1,1,1]] };
 const view: BodyView = { region: null, bones: true, muscles: true, supplements: false, selectedId: null, dim: true };
@@ -44,6 +44,18 @@ test('isolation never promotes source-only or held nodes and respects layer swit
   assert(!visible(bound,{...isolated,muscles:false}));
   assert(!visible(bound,{...isolated,selectedIds:[]}));
   assert(visible(asset,{...isolated,selectedId:null}));
+});
+
+test('selected transparency preserves eligibility and selection; hide only hides the selected eligible asset', () => {
+  const bound = {...asset,pickState:'existing_binding_unreviewed',stableIds:['known']};
+  const selectedView = {...view,selectedId:'known'};
+  assert(visible(bound,{...selectedView,selectedPresentation:'translucent'}));
+  assert(selected(bound,{...selectedView,selectedPresentation:'translucent'}));
+  assert(!visible(bound,{...selectedView,selectedPresentation:'hidden'}));
+  assert(visible(asset,{...selectedView,selectedPresentation:'hidden'}));
+  assert(!visible({...bound,defaultVisible:false,pickState:'held',holdReasons:['identity']},{...selectedView,selectedPresentation:'hidden'}));
+  assert(!visible(bound,{...selectedView,muscles:false,selectedPresentation:'translucent'}));
+  assert(!visible(bound,{...selectedView,regionIds:['head'],selectedPresentation:'hidden'}));
 });
 
 test('v2 local display is independent from learner binding, rights and review holds', () => {

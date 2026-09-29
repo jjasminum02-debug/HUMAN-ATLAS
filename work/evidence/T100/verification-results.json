@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "task": "T100",
+  "results": [
+    {
+      "command": "python3 work/evidence/T100/build_coverage_matrix.py",
+      "result": "passed_with_gaps",
+      "checksPassed": 15,
+      "checksFailed": 0,
+      "details": "Frozen 542/563 denominators, 12 package hashes, 91/339/112 candidate classes, 960 held objects, 10 actual chunk SHA/byte pairs and <=10-target work units validated."
+    },
+    {
+      "command": "node --experimental-strip-types --test src/viewer/wholeBody/wholeBody.test.ts",
+      "result": "passed",
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "command": "pnpm run typecheck",
+      "result": "passed"
+    },
+    {
+      "command": "pnpm run build",
+      "result": "passed_with_existing_bundle_size_warning",
+      "details": "Validation, decoder checks, TypeScript and Vite production build passed; App bundle 1,205.82 kB minified, existing >500 kB warning."
+    },
+    {
+      "command": "pnpm run test:whole-body",
+      "result": "blocked_by_preexisting_frozen_input_mismatch_after_partial_pass",
+      "passedBeforeBlock": [
+        "24 whole-body/controller/domain tests",
+        "6 selected BodyParts3D extraction tests",
+        "T77 validator",
+        "T79 local builder check",
+        "T101 local builder check"
+      ],
+      "blockedAt": "T102 builder --check",
+      "failure": "frozen T102 input hash changed: AGENTS.md",
+      "baselineEvidence": "work/evidence/T100/start-baseline.json shows AGENTS.md was already modified in the 74-path user working tree before T100 started.",
+      "interpretation": "T100 did not edit AGENTS.md; do not rewrite T102 history or refresh its frozen input hash in T100."
+    },
+    {
+      "command": "actual browser on http://127.0.0.1:5192/",
+      "result": "existing learner flow and T100 observation-control interactions verified; ZA integration gate remains blocked",
+      "evidence": "work/evidence/T100/browser-cycles.json"
+    }
+  ],
+  "performance": {
+    "T99CompilerBudget": "passed_by_T99_evidence_only",
+    "T100IntegratedLearnerDrawCost": "not_measured_because_T99_dataset_is_not_integrated",
+    "T58FinalPerformanceAcceptance": "not_started"
+  }
+}

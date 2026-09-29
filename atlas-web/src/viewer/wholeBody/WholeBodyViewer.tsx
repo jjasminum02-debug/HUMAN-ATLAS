@@ -11,9 +11,29 @@ export function WholeBodyViewer({ regionIds, selectedId, selectedIds, onSelect, 
   const select = useRef(onSelect); select.current = onSelect;
   const [bones, setBones] = useState(true);
   const [muscles, setMuscles] = useState(true);
-  const [dim, setDim] = useState(true);
-  const [isolated, setIsolated] = useState(false);
-  useEffect(() => { setIsolated(false); }, [selectedId]);
+  type Presentation = { dim: boolean; isolated: boolean; selected: 'normal' | 'translucent' | 'hidden' };
+  const [presentation, setPresentation] = useState<Presentation>({ dim: true, isolated: false, selected: 'normal' });
+  const presentationRef = useRef(presentation);
+  const presentationHistory = useRef<Presentation[]>([]);
+  const [canUndoPresentation, setCanUndoPresentation] = useState(false);
+  const updatePresentation = (next: Presentation, remember = true) => {
+    if (remember) {
+      presentationHistory.current = [...presentationHistory.current, presentationRef.current].slice(-12);
+      setCanUndoPresentation(presentationHistory.current.length > 0);
+    }
+    presentationRef.current = next;
+    setPresentation(next);
+  };
+  const undoPresentation = () => {
+    const previous = presentationHistory.current.pop();
+    if (previous) updatePresentation(previous, false);
+    setCanUndoPresentation(presentationHistory.current.length > 0);
+  };
+  useEffect(() => {
+    presentationHistory.current = [];
+    setCanUndoPresentation(false);
+    updatePresentation({ dim: true, isolated: false, selected: 'normal' }, false);
+  }, [selectedId]);
   const [revision, setRevision] = useState(0);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState(false);
@@ -41,7 +61,7 @@ export function WholeBodyViewer({ regionIds, selectedId, selectedIds, onSelect, 
     if (!ready) return;
     const regionKey = JSON.stringify(regionIds);
     const previous = previousView.current;
-    controller.current?.setView({ region: null, regionIds, selectedId, selectedIds, bones, muscles, supplements: false, dim, isolate: isolated && Boolean(selectedId) });
+    controller.current?.setView({ region: null, regionIds, selectedId, selectedIds, bones, muscles, supplements: false, dim: presentation.dim, isolate: presentation.isolated && Boolean(selectedId), selectedPresentation: presentation.selected });
     const selectionWasFilteredOut = Boolean(previous?.selectedId && !selectedId);
     if (previous === null) {
       if (regionIds.length > 0) controller.current?.focus(regionIds);
@@ -49,7 +69,7 @@ export function WholeBodyViewer({ regionIds, selectedId, selectedIds, onSelect, 
       controller.current?.focus(regionIds);
     }
     previousView.current = { regionKey, selectedId };
-  }, [ready, regionIds, selectedId, selectedIds, bones, muscles, dim, isolated]);
+  }, [ready, regionIds, selectedId, selectedIds, bones, muscles, presentation]);
   return <div className="whole-body-viewer">
     <div className="whole-body-canvas" inert={!entered} aria-hidden={!entered} ref={host}/>
     {!entered && <AtlasLoading failed={error || Boolean(progress?.failed)} loaded={progress?.loaded} total={progress?.total} onRetry={() => error ? setRevision(r => r + 1) : controller.current?.retry()}/> }
@@ -58,11 +78,15 @@ export function WholeBodyViewer({ regionIds, selectedId, selectedIds, onSelect, 
       <button onClick={() => controller.current?.focus(regionIds)}>화면 맞춤</button>
       <button aria-pressed={bones} onClick={() => setBones(!bones)}>뼈</button>
       <button aria-pressed={muscles} onClick={() => setMuscles(!muscles)}>근육</button>
-      {selectedId && <button aria-pressed={dim} onClick={() => setDim(!dim)}>선택 강조</button>}
-      {selectedId && <details data-isolated={isolated}><summary aria-label={isolated ? '보기 옵션 · 선택만 표시 중' : '보기 옵션'}>보기 옵션{isolated && ' · 단독'}</summary>
+      {selectedId && <button aria-pressed={presentation.dim} onClick={() => updatePresentation({ ...presentation, dim: !presentation.dim })}>선택 강조</button>}
+      {selectedId && <details data-isolated={presentation.isolated}><summary aria-label={presentation.isolated ? '보기 옵션 · 선택만 표시 중' : '보기 옵션'}>보기 옵션{presentation.isolated && ' · 단독'}</summary>
         {selectedId && <div className="selection-view-options">
-          <button disabled={!progress?.selectedAvailable && !isolated} aria-pressed={isolated} onClick={() => setIsolated(!isolated)}>선택만 보기</button>
+          <button disabled={!progress?.selectedAvailable && !presentation.isolated} aria-pressed={presentation.isolated} onClick={() => updatePresentation({ ...presentation, isolated: !presentation.isolated })}>선택만 보기</button>
           <button disabled={!progress?.selectedAvailable} onClick={() => controller.current?.focusSelection()}>선택 부위 맞춤</button>
+          <button disabled={!progress?.selectedAvailable} aria-pressed={presentation.selected === 'translucent'} onClick={() => updatePresentation({ ...presentation, selected: presentation.selected === 'translucent' ? 'normal' : 'translucent' })}>선택 반투명</button>
+          <button disabled={!progress?.selectedAvailable} aria-pressed={presentation.selected === 'hidden'} onClick={() => updatePresentation({ ...presentation, selected: presentation.selected === 'hidden' ? 'normal' : 'hidden' })}>선택 숨기기</button>
+          <button disabled={!canUndoPresentation} onClick={undoPresentation}>되돌리기</button>
+          <button disabled={presentation.dim && !presentation.isolated && presentation.selected === 'normal'} onClick={() => updatePresentation({ dim: true, isolated: false, selected: 'normal' })}>보기 복원</button>
         </div>}</details>}
     </div>
     <div className="body-status" inert={!entered} aria-hidden={!entered} role="status" aria-live="polite">

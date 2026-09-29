@@ -171,6 +171,11 @@ export class AnatomySceneController {
         material.color.set(isSelected ? '#398b80' : a.layer === 'bone' ? '#e7dec7' : '#b87969');
         material.emissive.set(a.nodeId === this.hoverId && !isSelected ? '#68897e' : '#000000');
         material.emissiveIntensity = 0.22;
+        const translucentSelection = isSelected && this.view.selectedPresentation === 'translucent';
+        if (material.transparent !== translucentSelection || material.depthWrite === translucentSelection) material.needsUpdate = true;
+        material.transparent = translucentSelection;
+        material.opacity = translucentSelection ? 0.28 : 1;
+        material.depthWrite = !translucentSelection;
         // Opaque context avoids transparency sorting artifacts and excessive mobile overdraw.
         if (this.view.selectedId && this.view.dim && !isSelected) material.color.lerp(new THREE.Color('#e5e5dd'), 0.38);
       });

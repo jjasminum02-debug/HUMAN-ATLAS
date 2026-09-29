@@ -313,13 +313,37 @@
       "title": "전신 근육·뼈 통합·지역/좌우·선택·핵심 관찰",
       "owner": "Luna Max",
       "phase": "G1",
-      "executionStatus": "planned_not_started",
-      "acceptance": "pending",
+      "executionStatus": "in_progress",
+      "acceptance": "partial",
       "spec": "work/tasks/T100.md",
       "scope": "T98 전체 target와 T99 실제 전체dataset 산출물을 사용한다. 25 설계5절에 따라 하나의 scene에 전신bones/muscles를 넣고12부위/복수region/좌우/세 이름/검색/typed card를 전체coverage matrix로 연결한다. T105–121의 exact 대상/보류/지역자료를 내부workUnits로 흡수하고 historical source나 ID를 삭제하지 않는다. 얼굴표정근/광배근/양측상완/견갑골/요추·엉치뼈/손발·골반바닥을 빠뜨리지 않는다. source-only 관찰과 canonical 학습 선택은 별도이며 이름만으로binding을 만들지 않는다. 기존controller를 재사용해 주변흐림·선택반투명·숨김·격리·맞춤·undo/복원 핵심을 함께 구현한다. held/layer-off를 복원으로 노출하지 않는다. 전체overview에서 시작하고 camera연속성/미니멀UI를 지킨다. 표정근motion은disabled, 새애니메이션·신경3D·검증전엑셀본문은 넣지 않는다. 내부최대10개 의미검증 단위/같은T100 재개이며 첫부위를 전신완료로 부르지 않는다. 실제12부위·선택·성능evidence가필수다.",
       "progress": {
-        "nextUnit": null,
-        "completedUnits": []
+        "nextUnit": "resolve-z-anatomy-source-to-canonical-concept-and-12-region-crosswalk",
+        "completedUnits": [
+          "audit-frozen-inputs-and-actual-compiled-chunks",
+          "build-12-region-542-target-563-membership-coverage-matrix",
+          "implement-selected-translucent-hide-undo-restore-on-existing-controller",
+          "browser-check-current-12-region-routes-and-observation-controls"
+        ],
+        "pendingUnits": [
+          "exact-source-to-canonical-identity",
+          "12-region-source-membership",
+          "verified-three-name-cards-and-typed-selection",
+          "per-object-display-and-review-gates",
+          "ZA-learner-scene-integration-and-full-matrix",
+          "T100-integrated-runtime-performance"
+        ],
+        "evidence": [
+          "work/evidence/T100/start-baseline.json",
+          "work/evidence/T100/region-coverage-matrix.json",
+          "work/evidence/T100/coverage-validation.json",
+          "work/evidence/T100/browser-cycles.json",
+          "work/evidence/T100/verification-results.json",
+          "work/evidence/T100/progress.json",
+          "work/evidence/T100/execution-record-delta.json",
+          "work/evidence/T100/preservation-after.json"
+        ],
+        "result": "partial_no_exact_source_to_target_identity_crosswalk"
       },
       "report": "work/reports/T100.md"
     },

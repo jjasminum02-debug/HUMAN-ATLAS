@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "task": "T100",
+  "observedAtLocal": "2026-09-29",
+  "browser": "Codex In-app Browser",
+  "url": "http://127.0.0.1:5192/",
+  "viewportScreenshot": {
+    "captured": true,
+    "width": 823,
+    "height": 759,
+    "storedInRepository": false,
+    "note": "Screenshot was visually reviewed in the CUA result; the selected-tab API did not provide a durable local screenshot path."
+  },
+  "appBoundary": {
+    "learnerRuntimeManifestRequestInSource": "/__atlas/body/manifest.json",
+    "activeBodyPackage": "existing BP3D compatibility scene",
+    "zaC7010aLoadedInLearnerScene": false,
+    "sameCanvasIdBeforeAndAfterSelection": "anatomy-e905f669-594f-42b0-ae39-c230e7d33735",
+    "note": "This browser run verifies the existing learner scene and controls; it does not claim T99 Z-Anatomy dataset integration."
+  },
+  "existingRegionNavigation": [
+    {"labelKo":"머리","regionId":"head","selected":true,"route":"/?region=head"},
+    {"labelKo":"목","regionId":"neck","selected":true,"route":"/?region=neck"},
+    {"labelKo":"등","regionId":"back","selected":true,"route":"/?region=back"},
+    {"labelKo":"어깨·어깨뼈","regionId":"shoulder-scapular","selected":true,"route":"/?region=shoulder-scapular"},
+    {"labelKo":"가슴우리","regionId":"thorax","selected":true,"route":"/?region=thorax"},
+    {"labelKo":"배·허리","regionId":"abdomen-lumbar","selected":true,"route":"/?region=abdomen-lumbar"},
+    {"labelKo":"골반·샅","regionId":"pelvis-perineum","selected":true,"route":"/?region=pelvis-perineum"},
+    {"labelKo":"볼기·깊은엉덩이","regionId":"gluteal-hip","selected":true,"route":"/?region=gluteal-hip"},
+    {"labelKo":"넙다리","regionId":"thigh","selected":true,"route":"/?region=thigh"},
+    {"labelKo":"종아리","regionId":"leg","selected":true,"route":"/?region=leg"},
+    {"labelKo":"발","regionId":"foot","selected":true,"route":"/?region=foot"},
+    {"labelKo":"팔·손","regionId":"upper-limb","selected":true,"route":"/?region=upper-limb"}
+  ],
+  "selection": {
+    "search": "비복근",
+    "resultCount": 3,
+    "selectedExistingConceptId": "HA-M-000001",
+    "side": "right",
+    "route": "/?region=leg&kind=muscle&id=HA-M-000001&side=right",
+    "threeExistingNameRowsVisible": true,
+    "movementCtaDisabled": true,
+    "canvasCount": 1
+  },
+  "presentationInteractions": [
+    {"action":"선택 숨기기","observed":"selected mesh disappeared; selection card/route stayed; selection-dependent controls became disabled; status said the selected model is not in the current view"},
+    {"action":"되돌리기","observed":"normal selected mesh returned; disabled state cleared"},
+    {"action":"선택 반투명","observed":"checked in accessibility tree and translucent selected calf surface visible in screenshot"},
+    {"action":"선택만 보기","observed":"checked; summary announced isolated view"},
+    {"action":"근육 layer off then 보기 복원","observed":"restore reset presentation overrides only; muscle layer stayed off, selected availability stayed false and selection controls stayed disabled"}
+  ],
+  "consoleInspection": {
+    "captured": false,
+    "reason": "The bound CUA tab interface exposed accessibility and screenshot observations but no browser console log method.",
+    "noConsoleErrorsClaimed": true
+  },
+  "limits": [
+    "All 12 existing product region routes were visited; their geometry is the existing BP3D scene, not the T99 Z-Anatomy package.",
+    "The 12-region Z-Anatomy source membership and canonical target selections remain unverified and are zero in region-coverage-matrix.json.",
+    "No T100 cold/warm draw, device FPS, mobile GPU, or full-scene performance measurement was made."
+  ]
+}
