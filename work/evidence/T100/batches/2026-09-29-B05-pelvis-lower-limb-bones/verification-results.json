@@ -1,0 +1,74 @@
+{
+  "status": "pass_with_console_capture_unavailable",
+  "batchId": "T100-B05-pelvis-lower-limb-bones",
+  "runtime": {
+    "node": "v24.19.0",
+    "sourceArchiveDownloaded": false,
+    "newGeometryCreated": false
+  },
+  "checks": [
+    {
+      "name": "bounded-overlay-builder",
+      "command": "python3 work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/apply_t100_b05.py",
+      "status": "pass",
+      "summary": "10 frozen targets; 58 class-member relations; 40 unique existing source objects; overlay SHA256 7105d6163c48f81194f450e511a659dc336d22a58464f5888c8ae091a95a68ab"
+    },
+    {
+      "name": "strict-batch-validator",
+      "command": "python3 work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/validate_t100_b05.py",
+      "status": "pass",
+      "evidence": "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/validation.json"
+    },
+    {
+      "name": "whole-body-regression-and-compiled-source-integrity",
+      "command": "pnpm --dir atlas-web run test:whole-body",
+      "status": "pass",
+      "passed": 37,
+      "failed": 0,
+      "compiledChunksVerified": 46
+    },
+    {
+      "name": "typecheck",
+      "command": "pnpm --dir atlas-web run typecheck",
+      "status": "pass"
+    },
+    {
+      "name": "production-build-and-content-schema-checks",
+      "command": "pnpm --dir atlas-web run build",
+      "status": "pass",
+      "warning": "Vite reports the existing App JavaScript bundle is 961.31 kB after minification; build completes successfully."
+    },
+    {
+      "name": "live-browser-search-and-overview",
+      "status": "pass_with_console_capture_unavailable",
+      "evidence": "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/browser-validation.json"
+    },
+    {
+      "name": "execution-projection-sync",
+      "command": "python3 work/tools/sync_execution.py && python3 work/tools/sync_execution.py --check",
+      "status": "pass",
+      "summary": "python3 work/tools/sync_execution.py and --check passed with no generated-view drift; the latest execution authority retains nextUnit=build-common-data-pipeline-and-compact-runtime-projection. No next unit or B06 started."
+    },
+    {
+      "name": "preservation-and-diff-whitespace",
+      "command": "python3 work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/validate_t100_b05.py; git diff --check",
+      "status": "pass",
+      "evidence": "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/preservation-after.json"
+    },
+    {
+      "name": "concurrent-head-preservation",
+      "status": "pass",
+      "evidence": "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/preservation-after.json",
+      "summary": "Preserved concurrent HEAD f668469e58be454edea53f6d50732c6b11ad8a7a and its T100 bulk-plan ordering; reapplied only the bounded B05 T100 progress delta and retained all 75 baseline user WIP entries."
+    }
+  ],
+  "failureHistory": [
+    "An initial B05 builder attempt found the frozen task target field is named targetId; the builder was corrected to read that field.",
+    "A subsequent builder attempt revealed metatarsal rows can already be learner-bound to separate exact targets; the overlay now preserves those pre-existing bindings while adding only the new class-member evidence relation.",
+    "An initial test assertion treated any pre-existing metatarsal learner alias as newly introduced B05 terminology; the regression now distinguishes the two existing HA-bound rows from target-only internal terminology. Final test suite passes."
+  ],
+  "outOfScope": [
+    "No T100-B06 or later batch started.",
+    "No learner alias, label, canonical binding, geometry, license state, or human review state changed."
+  ]
+}

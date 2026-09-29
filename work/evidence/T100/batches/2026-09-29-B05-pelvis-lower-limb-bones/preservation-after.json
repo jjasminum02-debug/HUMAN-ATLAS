@@ -1,0 +1,93 @@
+{
+  "status": "pass_with_concurrent_head_advance",
+  "batchId": "T100-B05-pelvis-lower-limb-bones",
+  "startingHead": "8dae38d3dc31323bcd7312c0a1eb02d7a638a4fa",
+  "rootHeadUnchangedBeforeCommit": false,
+  "baselineUserWipEntries": 75,
+  "baselineUserWipEntriesMissing": [],
+  "frozenInputs": {
+    "atlas-data/catalog/target-scope-t96.json": {
+      "expectedSha256": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
+      "actualSha256": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
+      "unchanged": true
+    },
+    "work/evidence/T100/resolution-2026-09-29/remaining-targets.json": {
+      "expectedSha256": "25032af6febda92f06060425c9cd19a4efc035f04be50a49bda522e72e3496ba",
+      "actualSha256": "25032af6febda92f06060425c9cd19a4efc035f04be50a49bda522e72e3496ba",
+      "unchanged": true
+    },
+    "work/evidence/T98/astra-resolution-2026-09-29/source-catalog.json": {
+      "expectedSha256": "f2f1e98d22fe585b7943ddc0d7963af61cf18cced08b76be6984328a59e12ab7",
+      "actualSha256": "f2f1e98d22fe585b7943ddc0d7963af61cf18cced08b76be6984328a59e12ab7",
+      "unchanged": true
+    },
+    "work/evidence/T100/resolution-2026-09-29/source-metadata.json": {
+      "expectedSha256": "4e1d7a2f4913c846755484634b34e9a6fa5820c491bdab1a8223add541b1df3f",
+      "actualSha256": "4e1d7a2f4913c846755484634b34e9a6fa5820c491bdab1a8223add541b1df3f",
+      "unchanged": true
+    },
+    "atlas-data/source-cache/datasets/za/compiled/manifest.json": {
+      "expectedSha256": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42",
+      "actualSha256": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42",
+      "unchanged": true
+    },
+    "atlas-data/overlays/za-local-integration.json": {
+      "expectedSha256": "2bf7e497ba924fe477fc3cb29c44d8684e8998f8d1b6d750269b2e9318c072a1",
+      "actualSha256": "7105d6163c48f81194f450e511a659dc336d22a58464f5888c8ae091a95a68ab",
+      "unchanged": false
+    },
+    "work/evidence/T100/batches/2026-09-29-B04-hand-pelvis/validation.json": {
+      "expectedSha256": "315a1af13423af960784ae9970942aae9399c4944e1992862c07b55f371472d0",
+      "actualSha256": "315a1af13423af960784ae9970942aae9399c4944e1992862c07b55f371472d0",
+      "unchanged": true
+    }
+  },
+  "nonOverlayFrozenInputsUnchanged": true,
+  "overlayDelta": {
+    "expectedB04BaselineSha256": "2bf7e497ba924fe477fc3cb29c44d8684e8998f8d1b6d750269b2e9318c072a1",
+    "actualB05Sha256": "7105d6163c48f81194f450e511a659dc336d22a58464f5888c8ae091a95a68ab",
+    "matchesBoundedB05Output": true
+  },
+  "openSimModels": {
+    "head": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "expectedHead": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "clean": true,
+    "status": []
+  },
+  "sourceArchiveDownloaded": false,
+  "compiledSourceRows": 960,
+  "targetScope": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12
+  },
+  "protectedExistingObjectFields": "strict validator passed: existing HA IDs, display names, aliases, review/rights, visibility and geometry rows are unchanged; only B05 targetIds/targetRelationEvidence changed on the 40 exact member rows",
+  "historicalRemainderSourceUntouched": true,
+  "learnerAliasesChanged": false,
+  "canonicalBindingsCreated": 0,
+  "newGeometryCreated": false,
+  "humanReview": "not_performed",
+  "publicRedistribution": "held",
+  "rootHeadAfterConcurrentCommit": "f668469e58be454edea53f6d50732c6b11ad8a7a",
+  "concurrentCommit": {
+    "head": "f668469e58be454edea53f6d50732c6b11ad8a7a",
+    "subject": "docs(T100): replace fixed batches with bulk processing and exception review",
+    "committedAtLocal": "2026-09-29T19:12:43+09:00",
+    "changedPaths": [
+      "AGENTS.md",
+      "design/2026-09-25-muscle-atlas/23-PROMPTS-AFTER-T95.md",
+      "design/2026-09-25-muscle-atlas/25-WHOLE-BODY-BASE-RESET.md",
+      "design/2026-09-25-muscle-atlas/26-T100-BULK-DELIVERY-PLAN.md",
+      "work/EXECUTION.json",
+      "work/NEXT.md",
+      "work/evidence/T100/efficiency-plan-2026-09-29/README.md",
+      "work/evidence/T100/efficiency-plan-2026-09-29/baseline.json",
+      "work/evidence/T100/efficiency-plan-2026-09-29/validation.json",
+      "work/tasks/T100.md",
+      "work/tools/sync_execution.py"
+    ],
+    "batchOverlayOrB05EvidenceChangedByCommit": false
+  },
+  "headAdvanceAssessment": "Concurrent documentation/execution-plan commit is preserved. Frozen source inputs are unchanged except the bounded B05 overlay; all 75 pre-existing WIP entries remain. Root HEAD equality with the B05 start hash therefore fails as a chronology check, not as a preservation failure.",
+  "taskStatus": "B05 batch validation passed; T100 remains in_progress/partial; current nextUnit is build-common-data-pipeline-and-compact-runtime-projection; no next unit started."
+}

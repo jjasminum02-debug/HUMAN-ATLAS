@@ -1,0 +1,41 @@
+{
+  "status": "pass_with_console_capture_unavailable",
+  "batchId": "T100-B05-pelvis-lower-limb-bones",
+  "browser": "Codex In-app Browser",
+  "url": "http://127.0.0.1:5173/",
+  "pageTitle": "Human Atlas · 근육 학습",
+  "viewportScreenshot": {
+    "width": 1280,
+    "height": 720,
+    "overviewSceneVisible": true,
+    "visibleRegionCount": 12,
+    "existingLearnerItemCount": 355
+  },
+  "searchChecks": {
+    "internalTargetIds": {
+      "queries": ["TA2:1317", "TA2:1339", "TA2:1346", "TA2:1389", "TA2:1493", "TA2:1494", "TA2:1496", "TA2:1505", "TA2:1510", "TA2:1511"],
+      "resultCounts": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    "newInternalKoreanNameTerms": {
+      "queries": ["엉덩뼈", "궁둥뼈", "두덩뼈", "발세모뼈", "장골", "좌골", "치골", "삼각골"],
+      "resultCounts": [0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    "preExistingMetatarsalLearnerTerms": {
+      "queries": ["발허리뼈", "중족골"],
+      "resultCounts": [2, 2],
+      "resultNames": ["First metatarsal bone.l", "Fifth metatarsal bone.l"],
+      "existingHaConceptIds": ["HA-S-METATARSAL-1", "HA-S-METATARSAL-5"],
+      "disposition": "These two learner rows and names predate B05; the target evidence ledger did not add their learner aliases or binding."
+    }
+  },
+  "afterSearch": {
+    "queryCleared": true,
+    "overviewRestored": true,
+    "singleSceneStillPresent": true
+  },
+  "console": {
+    "status": "not_captured",
+    "reason": "The active browser control exposed accessibility and screenshot observations but no console-log reader. No console-clean claim is made."
+  },
+  "scopeLimit": "Browser search/display regression only; no geometry, learner binding, approval, or whole-body completion is implied."
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "batchId": "T100-B05-pelvis-lower-limb-bones",
+  "executionAuthority": "work/EXECUTION.json",
+  "beforeExecutionSha256": "12f88a277d18814cd58beb16482c3ca9aa1b06b4bb888d2e8ed1c4c834abbed2",
+  "afterExecutionSha256": "e11ac0225db306b465e9654495edd12029afa9f2a2b3e89640ac90249da1ca8c",
+  "changedExecutionRecord": "tasks.T100.progress only",
+  "preservedExecutionFields": [
+    "top-level revision/order/phases",
+    "all other task records",
+    "T100 executionStatus=in_progress",
+    "T100 acceptance=partial"
+  ],
+  "nextUnitBefore": "build-common-data-pipeline-and-compact-runtime-projection",
+  "nextUnitAfter": "build-common-data-pipeline-and-compact-runtime-projection",
+  "appendedCompletedUnits": [
+    "T100-B05: classify ten frozen pelvis/knee/foot bone targets and record field-level source-layered terminology evidence",
+    "T100-B05: add only 58 exact class-member relations across 40 existing source objects; retain five no-direct-surface targets and partial knee sesamoid group",
+    "T100-B05: verify internal TA2/name evidence is not newly exposed in learner search while preserving pre-existing first/fifth metatarsal learner rows",
+    "T100-B05: run strict provenance, exact-member, laterality, search, fixed-denominator, rights/review, and source-preservation checks",
+    "T100-B05: pass whole-body regression 37/37, typecheck, production build, compiled dataset hash checks, and actual browser overview/search validation"
+  ],
+  "batchResult": "B05 classified ten frozen targets; added 58 exact class-member relations across 40 existing source objects. Five targets retain no direct surface and knee sesamoids remain partial. Historical remainder is 142; T100 stays in_progress/partial. Current execution authority retains nextUnit=build-common-data-pipeline-and-compact-runtime-projection; no following unit was started.",
+  "historicalRemainderAtB05Start": 152,
+  "historicalRemainderAfterB05Disposition": 142,
+  "denominators": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12
+  },
+  "nextTaskStarted": false,
+  "batchStartingHead": "8dae38d3dc31323bcd7312c0a1eb02d7a638a4fa",
+  "concurrentHeadAdvance": {
+    "head": "f668469e58be454edea53f6d50732c6b11ad8a7a",
+    "subject": "docs(T100): replace fixed batches with bulk processing and exception review",
+    "committedAtLocal": "2026-09-29T19:12:43+09:00",
+    "handling": "Preserved current HEAD scope/order; reapplied only the B05 T100 progress delta."
+  }
+}

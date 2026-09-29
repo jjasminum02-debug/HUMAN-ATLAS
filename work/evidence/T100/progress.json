@@ -26,13 +26,19 @@
     "T100-B04: classify ten frozen hand/pelvis targets and record field-level Korean terminology provenance",
     "T100-B04: link 101 exact class-member relations to 37 existing hand-bone source objects; exclude one left fifth distal data-name conflict",
     "T100-B04: retain four bony-pelvis collection observations as candidates only and exclude foot sesamoid surfaces from hand target",
-    "T100-B04: verify target-only terminology non-leakage in live learner browser and preserve fixed whole-body gates"
+    "T100-B04: verify target-only terminology non-leakage in live learner browser and preserve fixed whole-body gates",
+    "T100-B05: classify ten frozen pelvis/knee/foot bone targets and record field-level source-layered terminology evidence",
+    "T100-B05: add only 58 exact class-member relations across 40 existing source objects; retain five no-direct-surface targets and partial knee sesamoid group",
+    "T100-B05: verify internal TA2/name evidence is not newly exposed in learner search while preserving pre-existing first/fifth metatarsal learner rows",
+    "T100-B05: run strict provenance, exact-member, laterality, search, fixed-denominator, rights/review, and source-preservation checks",
+    "T100-B05: pass whole-body regression 37/37, typecheck, production build, compiled dataset hash checks, and actual browser overview/search validation"
   ],
-  "nextUnit": "resolve-remaining-target-part-synonym-coverage-and-korean-name-gaps",
+  "nextUnit": "build-common-data-pipeline-and-compact-runtime-projection",
   "pendingUnits": [
-    "classify and evidence the remaining 152 entries from the frozen 182-target remainder after B01/B02/B03/B04 dispositions; retain all unresolved source-surface gaps explicitly",
-    "extend field-provenanced Korean names for further eligible structures only in bounded batches",
-    "complete integrated 12-region target/side/selection and whole-body runtime validation without claiming G1 complete"
+    "A: common data-driven builder/validator and compact runtime projection with policy/semantic equivalence; plan only, not implemented",
+    "B: bulk verified Korean naming and repeated-structure relations across remaining targets and all unnamed visible structures",
+    "C: resolve actual geometry/identity/terminology exceptions without repeating unchanged searches or fabricating completion",
+    "D: final full coverage, selection, runtime budget and responsive validation; preserve all mandatory gates"
   ],
   "gate": {
     "frozenTargets": 542,
@@ -45,7 +51,7 @@
     "existingHaBoundSurfaceRows": 130,
     "surfaceRowsWithThreeNamesBeforeB01": 123,
     "surfaceRowsWithThreeNamesAfterB01": 137,
-    "unresolvedTargets": 152,
+    "unresolvedTargets": 142,
     "publicRedistribution": "held",
     "humanReview": "not_performed",
     "sourceOnlyForB01Rows": true,
@@ -96,7 +102,29 @@
     "B04WrongRegionSesamoidMeshesExcluded": 2,
     "B04RightsAndReviewPromotions": 0,
     "B04CanonicalHaLearnerBindingsCreated": 0,
-    "B04NewGeometryCreated": 0
+    "B04NewGeometryCreated": 0,
+    "historicalRemainderAtB05Start": 152,
+    "historicalRemainderAfterB05Disposition": 142,
+    "B05TargetsClassified": 10,
+    "B05TargetsWithDirectSourceRelations": 5,
+    "B05ExactClassMemberRelations": 58,
+    "B05UniqueSourceObjects": 40,
+    "B05TargetsWithoutDirectSourceRelation": [
+      "TA2:1317",
+      "TA2:1339",
+      "TA2:1346",
+      "TA2:1493",
+      "TA2:1494"
+    ],
+    "B05PartialTargets": [
+      "TA2:1389"
+    ],
+    "B05CanonicalHaLearnerBindingsCreated": 0,
+    "B05LearnerSearchAliasesAdded": 0,
+    "B05NewGeometryCreated": 0,
+    "B05RightsAndReviewPromotions": 0,
+    "B05SourceOnlyTerminologyEvidence": true,
+    "sourceObjects": 960
   },
   "nextId": "T100",
   "nextOwner": "Luna Max",
@@ -140,7 +168,20 @@
     "work/evidence/T100/batches/2026-09-29-B04-hand-pelvis/verification-results.json",
     "work/evidence/T100/batches/2026-09-29-B04-hand-pelvis/preservation-after.json",
     "work/evidence/T100/batches/2026-09-29-B04-hand-pelvis/execution-record-delta.json",
-    "work/reports/T100.md"
+    "work/reports/T100.md",
+    "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/start-baseline.json",
+    "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/batch-scope.json",
+    "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/source-query-observations.json",
+    "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/apply_t100_b05.py",
+    "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/validate_t100_b05.py",
+    "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/term-and-correspondence-ledger.json",
+    "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/structure-correspondence.json",
+    "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/validation.json",
+    "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/browser-validation.json",
+    "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/verification-results.json",
+    "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/preservation-after.json",
+    "work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/execution-record-delta.json",
+    "work/tasks/T100-B05.md"
   ],
-  "result": "B04 classified ten frozen targets with 101 exact hand-bone class-member relations across 37 unique source objects; one data-name conflict excluded; three targets retain no exact direct relation; T100 remains partial with 152 historical remainder entries"
+  "result": "B05 classified ten frozen targets; added 58 exact class-member relations across 40 existing source objects. Five targets retain no direct surface and knee sesamoids remain partial. Historical remainder is 142; T100 stays in_progress/partial. The current execution authority retains nextUnit=build-common-data-pipeline-and-compact-runtime-projection; no following unit was started."
 }

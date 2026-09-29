@@ -27,6 +27,16 @@ const handPelvisBatch = JSON.parse(readFileSync(new URL('../../../../work/eviden
     crosswalkRelations: Array<{ targetId: string; sourceKey: string; sourceObjectName: string; sourceDataName: string; sourceSide: string | null; sourceParent: string; sourceCollections: string[]; relationKind: string; memberCode: string; sourceSegmentCode: string | null }>;
     memberCountsByTarget: Record<string, number>;
 };
+const pelvisLowerLimbBatch = JSON.parse(readFileSync(new URL('../../../../work/evidence/T100/batches/2026-09-29-B05-pelvis-lower-limb-bones/term-and-correspondence-ledger.json', import.meta.url), 'utf8')) as {
+    scope: { targetCount: number; requestedTargetIds: string[]; taskTargetDenominator: number; taskRegionMembershipDenominator: number; regions: number };
+    sourceEvidence: Array<{ id: string; accessMethod: string; openedOriginalSourcePage?: boolean }>;
+    targets: Array<{ targetId: string; names: { koModern: string | null; koTraditional: string | null; en: string }; fieldEvidence: Record<string, { status: string }>; existingSurface: { status: string };
+        learnerBindingCreated: boolean; canonicalHaConceptId: string | null; sourceOnly: boolean; humanReview: string; publicRedistribution: string; newGeometryCreated: boolean }>;
+    crosswalkRelations: Array<{ targetId: string; sourceKey: string; sourceObjectName: string; sourceDataName: string | null; sourceSide: string | null; sourceParent: string; sourceCollections: string[]; relationKind: string; memberCode: string; sourceSegmentCode: string | null }>;
+    memberCountsByTarget: Record<string, number>;
+    uniqueSourceObjects: number;
+    rightsAndReview: { sourceOnly: boolean; publicRedistribution: string; humanReview: string };
+};
 const datasetInstances = new Map(compiled.instances.map(instance => [instance.sourceKey, instance]));
 const fixture = {
     revision: raw.datasetRevision,
@@ -349,6 +359,100 @@ test('T100 B04 rejects the fifth distal data-name conflict and wrong side/member
     const proximal = wrongLevel.objects.find(row => row.sourceName === 'Proximal phalanx of second finger of hand.l')!;
     proximal.targetRelationEvidence!.find(relation => relation.targetId === 'TA2:1277')!.memberCode = 'distal:second:left';
     assert.throws(() => validateIntegration(wrongLevel, fixture));
+});
+test('T100 B05 records ten pelvis/knee/foot targets and exact existing class members without search leakage', () => {
+    const batchIds = new Set(pelvisLowerLimbBatch.scope.requestedTargetIds);
+    const terms = (raw.targetTerminologyEvidence ?? []).filter(term => batchIds.has(term.targetId));
+    const relations = raw.objects.flatMap(row => (row.targetRelationEvidence ?? [])
+        .filter(relation => batchIds.has(relation.targetId)).map(relation => ({ row, relation })));
+    assert.equal(pelvisLowerLimbBatch.scope.targetCount, 10);
+    assert.equal(terms.length, 10);
+    assert.equal(pelvisLowerLimbBatch.crosswalkRelations.length, 58);
+    assert.equal(relations.length, 58);
+    assert.equal(pelvisLowerLimbBatch.uniqueSourceObjects, 40);
+    assert.equal(new Set(relations.map(x => x.relation.sourceKey)).size, 40);
+    assert.deepEqual(pelvisLowerLimbBatch.memberCountsByTarget, {
+        'TA2:1317': 0, 'TA2:1339': 0, 'TA2:1346': 0, 'TA2:1389': 2, 'TA2:1493': 0,
+        'TA2:1494': 0, 'TA2:1496': 10, 'TA2:1505': 28, 'TA2:1510': 10, 'TA2:1511': 8,
+    });
+    assert.equal(pelvisLowerLimbBatch.scope.taskTargetDenominator, 542);
+    assert.equal(pelvisLowerLimbBatch.scope.taskRegionMembershipDenominator, 563);
+    assert.equal(pelvisLowerLimbBatch.scope.regions, 12);
+    assert.equal(pelvisLowerLimbBatch.rightsAndReview.sourceOnly, true);
+    assert.equal(pelvisLowerLimbBatch.rightsAndReview.publicRedistribution, 'held');
+    assert.equal(pelvisLowerLimbBatch.rightsAndReview.humanReview, 'not_performed');
+    assert(pelvisLowerLimbBatch.sourceEvidence.some(source => source.accessMethod === 'opened_pdf' && source.openedOriginalSourcePage));
+    for (const { row, relation } of relations) {
+        assert.equal(relation.sourceKey, row.sourceKey);
+        assert.equal(relation.sourceObjectName, row.sourceName);
+        assert.equal(relation.sourceSide, row.side);
+        assert.equal(relation.relationKind, 'class_member');
+        assert.equal(relation.directObjectNameMatch, false);
+        assert.equal(relation.ancestorNameAloneUsed, false);
+        assert.equal(relation.upstreamFjOrTa2IdClaim, false);
+        assert.equal(relation.canonicalHaBindingCreated, false);
+        assert.equal(row.humanReview, 'not_performed');
+        assert.equal(row.publicRedistribution, 'held');
+        assert(relation.memberCode);
+    }
+    const byId = new Map(terms.map(term => [term.targetId, term]));
+    assert.equal(byId.get('TA2:1317')?.names.koModern, '엉덩뼈');
+    assert.equal(byId.get('TA2:1317')?.names.koTraditional, '장골');
+    assert.equal(byId.get('TA2:1339')?.names.koModern, '궁둥뼈');
+    assert.equal(byId.get('TA2:1339')?.names.koTraditional, '좌골');
+    assert.equal(byId.get('TA2:1346')?.names.koModern, '두덩뼈');
+    assert.equal(byId.get('TA2:1346')?.names.koTraditional, '치골');
+    assert.equal(byId.get('TA2:1494')?.names.koModern, '발세모뼈');
+    assert.equal(byId.get('TA2:1494')?.names.koTraditional, '삼각골');
+    assert.equal(byId.get('TA2:1496')?.names.koModern, '발허리뼈');
+    assert.equal(byId.get('TA2:1496')?.names.koTraditional, '중족골');
+    for (const targetId of ['TA2:1389', 'TA2:1493', 'TA2:1505', 'TA2:1510', 'TA2:1511']) {
+        assert.equal(byId.get(targetId)?.names.koModern, null);
+        assert.equal(byId.get(targetId)?.names.koTraditional, null);
+    }
+    assert.equal(byId.get('TA2:1389')?.existingSurface.status, 'partial_patella_members_only_fabella_and_cyamella_surface_missing');
+    assert.equal(byId.get('TA2:1493')?.existingSurface.status, 'no_exact_accessory_tarsal_surface_in_frozen_source');
+    assert.equal(byId.get('TA2:1505')?.existingSurface.status, '28_exactly_named_source_class_members');
+    assert(terms.every(term => term.learnerBindingCreated === false && term.canonicalHaConceptId === null
+        && term.sourceOnly && term.humanReview === 'not_performed' && term.publicRedistribution === 'held'
+        && term.newGeometryCreated === false));
+    const leftToe = relations.find(x => x.relation.sourceObjectName === 'Proximal phalanx of first finger of foot.l')!;
+    assert.equal(leftToe.relation.sourceSide, 'left');
+    assert(leftToe.relation.sourceCollections.includes('Right foot'));
+    assert(leftToe.relation.sourceCollections.includes('Left lower limb'));
+    for (const term of terms) {
+        assert.equal(searchStructures(raw.objects, term.targetId, []).length, 0,
+            `internal B05 target id leaked into learner search: ${term.targetId}`);
+    }
+    const existingMetatarsalSearch = searchStructures(raw.objects, '발허리뼈', []);
+    assert.deepEqual(existingMetatarsalSearch.map(row => row.sourceName).sort(), ['Fifth metatarsal bone.l', 'First metatarsal bone.l']);
+    assert(existingMetatarsalSearch.every(row => ['HA-S-METATARSAL-1', 'HA-S-METATARSAL-5'].includes(row.haConceptId ?? '')),
+        'B05 term ledger must not be the source of pre-existing metatarsal learner labels');
+});
+test('T100 B05 rejects wrong laterality, foot part, member key, and parent', () => {
+    const wrongSide = structuredClone(raw);
+    const metatarsal = wrongSide.objects.find(row => row.sourceName === 'First metatarsal bone.l')!;
+    metatarsal.targetRelationEvidence!.find(relation => relation.targetId === 'TA2:1496')!.sourceSide = 'right';
+    assert.throws(() => validateIntegration(wrongSide, fixture));
+
+    const wrongMember = structuredClone(raw);
+    const toe = wrongMember.objects.find(row => row.sourceName === 'Middle phalanx of second finger of foot.l')!;
+    toe.targetRelationEvidence!.find(relation => relation.targetId === 'TA2:1511')!.memberCode = 'middle:first:left';
+    assert.throws(() => validateIntegration(wrongMember, fixture));
+
+    const wrongLevel = structuredClone(raw);
+    const proximal = wrongLevel.objects.find(row => row.sourceName === 'Proximal phalanx of first finger of foot.l')!;
+    proximal.targetRelationEvidence!.find(relation => relation.targetId === 'TA2:1510')!.sourceObjectName = 'Middle phalanx of first finger of foot.l';
+    assert.throws(() => validateIntegration(wrongLevel, fixture));
+
+    const wrongParent = structuredClone(raw);
+    const patella = wrongParent.objects.find(row => row.sourceName === 'Patella.l')!;
+    patella.targetRelationEvidence!.find(relation => relation.targetId === 'TA2:1389')!.sourceParent = 'Patella.g';
+    assert.throws(() => validateIntegration(wrongParent, fixture));
+
+    const fakeAccess = structuredClone(raw);
+    (fakeAccess.evidenceSources!.find(source => source.id === 'koa-t100-b05-accessory-tarsal-paper-opened') as unknown as { accessMethod: string }).accessMethod = 'opened_blender';
+    assert.throws(() => validateIntegration(fakeAccess, fixture));
 });
 test('both scapulae belong to arm context and sacrum to lumbar context', () => {
     const scap = raw.objects.filter(r => r.names.en === 'Scapula');

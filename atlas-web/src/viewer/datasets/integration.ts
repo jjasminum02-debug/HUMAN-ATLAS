@@ -96,10 +96,11 @@ export interface IntegrationEvidenceSource {
     exactEdition: string | null;
     editionExposure: string;
     accessDate: string;
-    accessMethod: 'opened_html' | 'search_index_excerpt' | 'local_frozen_metadata';
+    accessMethod: 'opened_html' | 'opened_pdf' | 'search_index_excerpt' | 'local_frozen_metadata';
     locator: string;
     retrievalLayer?: string;
     openedOriginalDictionaryRecord?: boolean;
+    openedOriginalSourcePage?: boolean;
 }
 export interface TargetTerminologyEvidence {
     targetId: string;
@@ -173,7 +174,7 @@ export function validateIntegration(value: unknown, dataset: Dataset): Integrati
     for (const source of i.evidenceSources ?? []) {
         if (!source.id || evidenceSources.has(source.id) || !/^https?:\/\//.test(source.url)
             || !/^\d{4}-\d{2}-\d{2}$/.test(source.accessDate) || !source.locator.trim()
-            || !['opened_html', 'search_index_excerpt', 'local_frozen_metadata'].includes(source.accessMethod))
+            || !['opened_html', 'opened_pdf', 'search_index_excerpt', 'local_frozen_metadata'].includes(source.accessMethod))
             throw Error('integration evidence source');
         evidenceSources.set(source.id, source);
     }
@@ -263,6 +264,7 @@ export function validateIntegration(value: unknown, dataset: Dataset): Integrati
             const baseName = row.sourceName.replace(/\.[lr]$/i, '').trim().toLocaleLowerCase();
             const allowedClassTargetKind = relation.relationKind === 'class_member'
                 && ((relation.targetId === 'TA2:1249' && relation.targetSemanticKind === 'bone_group')
+                    || (relation.targetId === 'TA2:1389' && relation.targetSemanticKind === 'bone_group')
                     || (['TA2:1264', 'TA2:1271'].includes(relation.targetId) && relation.targetSemanticKind === 'bone_series'));
             if (relation.sourceKey !== row.sourceKey || relation.sourceObjectName !== row.sourceName
                 || !row.targetIds.includes(relation.targetId)
@@ -352,7 +354,38 @@ export function validateIntegration(value: unknown, dataset: Dataset): Integrati
                         && relation.sourceCollections.includes('Right hand')
                         && !(relation.sourceObjectName === 'Distal phalanx of fifth finger of hand.l'
                             && relation.sourceDataName === 'Distal phalanx of fifth finger of hand.r');
-                    if (!cervical && !thoracic && !lumbar && !ordinaryRib && !carpal && !metacarpal && !phalanx)
+                    const footMetatarsalMatch = relation.sourceObjectName.match(/^(First|Second|Third|Fourth|Fifth) metatarsal bone\.([lr])$/);
+                    const footMetatarsalSide = footMetatarsalMatch?.[2] === 'l' ? 'left' : footMetatarsalMatch?.[2] === 'r' ? 'right' : null;
+                    const footMetatarsalCollection = footMetatarsalSide === 'left' ? 'Left lower limb' : 'Right lower limb';
+                    const footMetatarsal = relation.targetId === 'TA2:1496' && relation.targetSemanticKind === 'bone'
+                        && !!footMetatarsalMatch && relation.sourceSegmentCode === null
+                        && relation.memberCode === 'metatarsal:' + footMetatarsalMatch[1].toLocaleLowerCase() + ':' + footMetatarsalSide
+                        && relation.sourceParent === 'Metatarsal bones.g'
+                        && relation.sourceSide === footMetatarsalSide
+                        && relation.sourceCollections.includes(footMetatarsalCollection);
+                    const footPhalanxMatch = relation.sourceObjectName.match(/^(Proximal|Middle|Distal) phalanx of (first|second|third|fourth|fifth) finger of foot\.([lr])$/);
+                    const footPhalanxSide = footPhalanxMatch?.[3] === 'l' ? 'left' : footPhalanxMatch?.[3] === 'r' ? 'right' : null;
+                    const footPhalanxCollection = footPhalanxSide === 'left' ? 'Left lower limb' : 'Right lower limb';
+                    const footPhalanxTarget = relation.targetId === 'TA2:1505' || relation.targetId === 'TA2:1510' || relation.targetId === 'TA2:1511';
+                    const footPhalanxLevel = relation.targetId === 'TA2:1510' ? 'Proximal'
+                        : relation.targetId === 'TA2:1511' ? 'Middle' : null;
+                    const footPhalanx = footPhalanxTarget && relation.targetSemanticKind === 'bone'
+                        && !!footPhalanxMatch && (!footPhalanxLevel || footPhalanxMatch[1] === footPhalanxLevel)
+                        && relation.memberCode === footPhalanxMatch[1].toLocaleLowerCase() + ':' + footPhalanxMatch[2] + ':' + footPhalanxSide
+                        && relation.sourceParent === 'Phalanges of foot.g'
+                        && relation.sourceSide === footPhalanxSide
+                        && relation.sourceCollections.includes(footPhalanxCollection);
+                    const patellaMatch = relation.sourceObjectName.match(/^Patella\.([lr])$/);
+                    const patellaSide = patellaMatch?.[1] === 'l' ? 'left' : patellaMatch?.[1] === 'r' ? 'right' : null;
+                    const patellaCollection = patellaSide === 'left' ? 'Left lower limb' : 'Right lower limb';
+                    const kneeSesamoid = relation.targetId === 'TA2:1389' && relation.targetSemanticKind === 'bone_group'
+                        && !!patellaMatch && relation.sourceSegmentCode === null
+                        && relation.memberCode === 'sesamoid:patella:' + patellaSide
+                        && relation.sourceParent === 'Bones of free part of lower limb.g'
+                        && relation.sourceSide === patellaSide
+                        && relation.sourceCollections.includes(patellaCollection);
+                    if (!cervical && !thoracic && !lumbar && !ordinaryRib && !carpal && !metacarpal && !phalanx
+                        && !footMetatarsal && !footPhalanx && !kneeSesamoid)
                         throw Error('target relation class member mismatch: ' + relation.targetId + ' / ' + relation.sourceObjectName);
                 } else {
                     throw Error('target relation unsupported non-name match');
