@@ -554,8 +554,541 @@ def build_outputs() -> tuple[dict, dict, dict, dict, dict]:
     return overlay,query_evidence,term_ledger,repetitions,{"termsAdded":term_evidence_additions,"newlyNamed":newly_named,"fieldExceptions":field_exceptions}
 
 
+def apply_remaining_target_batch(overlay: dict, query_evidence: dict, term_ledger: dict,
+                                 repetitions: dict, detail: dict) -> tuple[dict, dict, dict, dict, dict]:
+    """Apply the frozen 172-target B query batch without inferring member names."""
+    batch_path=HERE/"remaining-target-kmle-observations.json"
+    frozen_path=HERE/"remaining-target-query-candidates-frozen.json"
+    batch=json.loads(batch_path.read_text())
+    frozen=json.loads(frozen_path.read_text())
+    need(sha(frozen_path.read_bytes())=="532d38c79c467c359c310fb1e8d0bfdca92daf1ae7a45ec0513f8db7f5e89e24","frozen B query candidates changed")
+    need(batch["candidateCount"]==172 and len(frozen["candidates"])==172,"frozen bulk-query candidate count drift")
+    need(batch["candidateTermDisposition"]["exactRows"]==36 and batch["candidateTermDisposition"]["exactMisses"]==136,"opened KMLE query result tally changed")
+    need(sha((json.dumps(overlay,ensure_ascii=False,indent=2)+"\n").encode())=="61df957f5fa39ba0db6e06347201113ffaa7c89104554c9189588110235cfede","B01-B05/A/B checkpoint overlay differs before round-2 application")
+
+    scope=read(SCOPE_REL)
+    catalog_raw=read(CATALOG_REL)
+    catalog={x["sourceKey"]:x for x in catalog_raw["objects"]}
+    source_hash=catalog_raw["sourceHash"]
+    source_revision=catalog_raw["sourceRevision"]
+    tmap={x["id"]:x for x in scope["targets"]}
+    object_map={x["sourceKey"]:x for x in overlay["objects"]}
+    compiled={x["sourceKey"]:x for x in read(COMPILED_REL).get("instances",[])}
+    known_sources={x["id"] for x in overlay.get("evidenceSources",[])}
+    known_terms={x["targetId"]:i for i,x in enumerate(overlay.get("targetTerminologyEvidence",[]))}
+    sources=[]
+    all_observations=batch["queryResults"]+batch["scopeSynonymQueries"]
+    for obs in all_observations:
+        need(obs["id"] not in known_sources,f"round-2 KMLE source ID collision: {obs['id']}")
+        known_sources.add(obs["id"])
+        sources.append({
+            "id":obs["id"],"url":obs["url"],"sourceLabel":obs["sourceLabel"],
+            "exactEdition":None,"editionExposure":obs["editionExposure"],
+            "accessDate":obs["accessDate"],"accessMethod":"opened_html",
+            "locator":obs["locator"],"retrievalLayer":obs["retrievalLayer"],
+            "openedOriginalDictionaryRecord":False,"openedOriginalSourcePage":False,
+        })
+    overlay["evidenceSources"].extend(sources)
+
+    def direct_surfaces(target_id: str) -> list[dict]:
+        target=next((x for x in frozen["candidates"] if x["targetId"]==target_id),None)
+        need(target is not None,f"candidate target not found: {target_id}")
+        rows=[object_map[k] for k in target["eligibleSourceKeys"]]
+        need(all(o.get("localDisplayEligible") and o.get("targetId")==target_id for o in rows),f"candidate surface/primary target drift: {target_id}")
+        return rows
+
+    def full_target_surfaces(target_id: str) -> list[dict]:
+        return [o for o in overlay["objects"] if o.get("localDisplayEligible") and o.get("targetId")==target_id]
+
+    def normalized_source_name(value: str) -> str:
+        value=re.sub(r"\.[lr]$","",value,flags=re.I).strip()
+        value=re.sub(r"\s+muscle$","",value,flags=re.I)
+        return re.sub(r"\s+"," ",value.strip()).casefold()
+
+    observation_by_target={x["targetId"]:x for x in batch["queryResults"]}
+    alternate_by_target={x["targetId"]:x for x in batch["scopeSynonymQueries"]}
+    target_rows_added=[]
+    target_rows_updated=[]
+    structures=[]
+    new_surface_names=[]
+    conflicts=[]
+    for candidate in frozen["candidates"]:
+        tid=candidate["targetId"]
+        target=tmap[tid]
+        obs=observation_by_target[tid]
+        surfaces=direct_surfaces(tid)
+        if tid in known_terms:
+            # Existing T100 B evidence remains the prior row. A validated scope synonym can
+            # strengthen only the two earlier exact-name misses identified below.
+            if tid not in {"TA2:1179","TA2:1504"}:
+                structures.append({"targetId":tid,"english":candidate["english"],"sourceQueryId":obs["id"],"status":"supplemental_query_record_only","existingTermEvidence":True,"surfaceRows":len(surfaces)})
+                continue
+            alternate=alternate_by_target[tid]
+            members=[o for o in overlay["objects"] if o.get("localDisplayEligible") and tid in o.get("targetIds",[])]
+            expected=60 if tid=="TA2:1179" else 28
+            need(len(members)==expected,f"existing exact group members drift for {tid}")
+            prior=overlay["targetTerminologyEvidence"][known_terms[tid]]
+            record=create_term_evidence(target,alternate,members,"exact",catalog,source_revision,source_hash)
+            record["targetTermSourceIds"]=list(dict.fromkeys([*prior.get("targetTermSourceIds",[]),obs["id"],alternate["id"]]))
+            record["classification"]={
+                "meaningType":target["semanticKind"],
+                "groupPartVariant":("KAA exact dictionary headword `Bones of free upper limb` is semantically scoped to the frozen `bones of free part of upper limb` group; no child bone is renamed." if tid=="TA2:1179" else "KAA row `Phalanges [Toes]` was displayed in the opened similar-result section and semantically matches the frozen foot-phalanx group; accepted only for the group label, never copied to individual phalanges."),
+                "laterality":"Existing T96 membership and per-object side are unchanged; no geometry mirror or new learner binding.",
+            }
+            record["existingSurface"]={
+                "status":"exact_group_term_only_no_child_surface_rename",
+                "exactSourceObjects":[member_record(o,catalog,source_revision,source_hash) for o in members],
+                "exactMemberCrosswalkAdded":False,
+                "note":"The verified term is attached to this existing group target. Individual source-member display names and canonical bindings are unchanged.",
+            }
+            record["targetTermSourceIds"]=list(dict.fromkeys(record["targetTermSourceIds"]))
+            overlay["targetTerminologyEvidence"][known_terms[tid]]=record
+            target_rows_updated.append({"targetId":tid,"oldDirectQueryId":obs["id"],"appliedTermSourceId":alternate["id"],"resultLayer":alternate["resultLayer"],"koModern":alternate["observedFields"]["koModern"],"koTraditional":alternate["observedFields"]["koTraditional"],"members":expected,"status":"group_term_updated_no_member_renames"})
+            structures.append({"targetId":tid,"english":candidate["english"],"headword":alternate["observedFields"]["englishHeadword"],"sourceQueryId":alternate["id"],"directTargetQueryId":obs["id"],"surfaceApplication":"group_term_only_no_individual_rename","memberCount":expected})
+            continue
+
+        all_members=full_target_surfaces(tid)
+        if not all_members:
+            all_members=surfaces
+        field_status="exact" if obs["resultStatus"]=="exact_named_dictionary_row" else "missing"
+        if obs.get("fieldConflict")=="koTraditional":
+            field_status="modern_only"
+            conflicts.append({"targetId":tid,"field":"koTraditional","observedButNotApplied":obs.get("observedLegacyConflict"),"status":"conflicted_not_applied","reason":"The opened legacy label conflicts with the exact third-metacarpal target."})
+        record=create_term_evidence(target,obs,all_members,field_status,catalog,source_revision,source_hash)
+        exact_surface_match=bool(obs["observedFields"].get("koModern")) and all(normalized_source_name(o["sourceName"])==normalized_source_name(candidate["english"]) for o in surfaces)
+        target_is_group=target["semanticKind"] in {"bone_group","bone_series","muscle_group","repeated_muscle_family","muscle_complex"}
+        can_name=exact_surface_match and (not target_is_group or all(normalized_source_name(o["sourceName"])==normalized_source_name(candidate["english"]) for o in surfaces))
+        if record["existingSurface"]["exactSourceObjects"] and not exact_surface_match:
+            record["existingSurface"]={
+                "status":"target_term_evidence_only_component_or_member_surfaces_not_renamed",
+                "exactSourceObjects":record["existingSurface"]["exactSourceObjects"],
+                "exactMemberCrosswalkAdded":False,
+                "note":"The KAA term names the frozen target concept, but the observed existing surface labels represent distinct components or members; no parent label was copied onto them.",
+            }
+        if obs.get("fieldConflict"):
+            record["unappliedTermCandidates"].append({"value":obs.get("observedLegacyConflict"),"sourceId":obs["id"],"locator":obs["locator"],"status":"conflicted_not_applied","reason":"The KAA legacy string conflicts with the exact third-metacarpal target."})
+        if tid=="TA2:2284" and field_status=="exact":
+            need(target["semanticKind"]=="muscle_group" and len(surfaces)==2 and all(normalized_source_name(o["sourceName"])=="rotatores" for o in surfaces),"rotatores group-root surfaces changed")
+            can_name=True
+        if field_status in {"exact","modern_only"} and can_name:
+            modern=obs["observedFields"]["koModern"]
+            traditional=obs["observedFields"].get("koTraditional") if field_status=="exact" else None
+            for obj in surfaces:
+                need(obj.get("names",{}).get("koModern") is None,"new exact name would overwrite an existing modern field")
+                need(obj.get("names",{}).get("koTraditional") is None or (traditional and obj["names"].get("koTraditional")==traditional),"new exact name would overwrite an existing legacy field")
+                need(obj.get("sourceOnly") is True and obj.get("haConceptId") is None and obj.get("humanReview")=="not_performed" and obj.get("publicRedistribution")=="held","source or review policy changed")
+                need(obj.get("localDisplayEligible") is True and obj.get("defaultVisible") is True,"local display eligibility changed")
+                obj["names"]["koModern"]=modern
+                obj["label"]=modern
+                if traditional is not None:
+                    obj["names"]["koTraditional"]=traditional
+                obj["nameSourceIds"]=list(dict.fromkeys([*obj.get("nameSourceIds",[]),obs["id"]]))
+                ev=obj.get("nameEvidence") or {}
+                need(not ev.get("koModern"),"existing modern field provenance would be overwritten")
+                ev["koModern"]={"value":modern,"sourceIds":[obs["id"]],"locator":obs["locator"]}
+                if traditional is not None:
+                    ev["koTraditional"]={"value":traditional,"sourceIds":[obs["id"]],"locator":obs["locator"]}
+                ev["en"]={"value":obj["names"].get("en"),"sourceIds":[FIPAT_ID],"locator":f"Pinned T96 source English term for {tid}: {target['term']['english']}"}
+                obj["nameEvidence"]=ev
+                cat=catalog[obj["sourceKey"]]
+                new_surface_names.append({"targetId":tid,"sourceKey":obj["sourceKey"],"sourceName":obj["sourceName"],"side":obj.get("side"),"regionIds":obj.get("regionIds",[]),"koModern":modern,"koTraditional":traditional,"english":obj["names"].get("en"),"evaluatedGeometrySha256":cat["evaluatedGeometrySha256"],"compiledInstancePresent":obj["sourceKey"] in compiled,"sourceQueryId":obs["id"]})
+            record["existingSurface"]["status"]="exact_target_source_name_rows_present" if len(surfaces)>0 else record["existingSurface"]["status"]
+            record["existingSurface"]["note"]="Only existing source labels that exactly match the frozen target concept were renamed; side, identity, geometry, visibility, source-only policy, and canonical bindings are unchanged."
+        record["queryResultContext"]={"directQueryId":obs["id"],"resultLayer":obs["resultLayer"],"resultStatus":obs["resultStatus"],"exactEdition":None}
+        overlay["targetTerminologyEvidence"].append(record)
+        known_terms[tid]=len(overlay["targetTerminologyEvidence"])-1
+        target_rows_added.append(record)
+        structures.append({"targetId":tid,"english":candidate["english"],"semanticKind":target["semanticKind"],"queryId":obs["id"],"resultStatus":obs["resultStatus"],"headword":obs["observedFields"].get("englishHeadword"),"koModern":obs["observedFields"].get("koModern"),"koTraditional":obs["observedFields"].get("koTraditional"),"sourceObjects":[member_record(o,catalog,source_revision,source_hash) for o in all_members],"candidateSurfaceRows":len(surfaces),"surfaceApplication":"exact_source_name_target_rows_only" if can_name else "term_evidence_only_no_member_rename","canonicalBindingCreated":False})
+
+    # The generic foot-sesamoid term is documented but deliberately not attached
+    # to this foot-specific target because the opened KAA headword is broader.
+    unpromoted=alternate_by_target["TA2:1514"]
+    structures.append({"targetId":"TA2:1514","english":tmap["TA2:1514"]["term"]["english"],"queryId":unpromoted["id"],"koModernCandidate":unpromoted["observedFields"]["koModern"],"status":"broader_scope_candidate_not_applied","reason":"The opened exact KAA headword says only `Sesamoid bones`, not foot; no foot-specific modifier was invented."})
+
+    overlay["revision"]="T100-source-taxonomy-local-display-v2-B-bulk-verified-names-2026-09-29-round2"
+    query_evidence["remainingTargetBatch"]={"path":"remaining-target-kmle-observations.json","candidateCount":172,"scopeSynonymQueryCount":3,"candidateSetSha256":sha(frozen_path.read_bytes()),"exactEnglishRows":36,"directExactMisses":136,"sourceEvidenceIds":[x["id"] for x in all_observations],"sourceLayers":"Opened aggregate KMLE HTML; KAA heading/count/rows read; search index discovery only; original dictionary records not opened; exact edition not exposed; human review not performed."}
+    term_ledger["remainingTargetBatch"]={"candidateCount":172,"exactEnglishRows":36,"directExactMisses":136,"additionalScopeSynonymQueries":3,"newTargetTermEvidenceRows":len(target_rows_added),"updatedPriorGroupTermRows":target_rows_updated,"newlyNamedSurfaceRows":len(new_surface_names),"fieldConflicts":conflicts,"unappliedBroaderTermCandidates":[{"targetId":"TA2:1514","sourceId":unpromoted["id"],"koModern":unpromoted["observedFields"]["koModern"],"disposition":"candidate_not_applied_broader_scope"}],"surfaceApplicationRule":"A target term is copied to existing surface labels only when sourceName exactly equals the frozen target English concept after removing only a terminal side suffix and optional `muscle`; group/series/complex terms never rename distinct member structures."}
+    repetitions["remainingTargetQueryCorrespondence"]={"candidateCount":172,"exactEnglishRows":36,"directMisses":136,"newTermRows":len(target_rows_added),"updatedGroupTerms":[x["targetId"] for x in target_rows_updated],"namedSurfaceRows":new_surface_names,"termRows":structures,"newRelationsCreated":0,"canonicalBindingsCreated":0,"geometryChanged":False}
+    detail["termsAdded"].extend(target_rows_added)
+    detail["newlyNamed"].extend(new_surface_names)
+    detail["fieldExceptions"].extend(conflicts)
+    return overlay,query_evidence,term_ledger,repetitions,detail
+
+
+def apply_source_surface_name_queries(overlay: dict, query_evidence: dict, term_ledger: dict,
+                                      repetitions: dict, detail: dict):
+    """Apply only the exact KAA rows found for frozen, previously unnamed surfaces."""
+    freeze_path = HERE / "source-surface-name-query-freeze.json"
+    observation_path = HERE / "source-surface-name-observations.json"
+    freeze = read(freeze_path.relative_to(ROOT).as_posix())
+    observations = read(observation_path.relative_to(ROOT).as_posix())
+    need(sha(freeze_path.read_bytes()) == "5d31d39de3f8387a421144508f27cf6c61e08871ed73c5c7d62e498eeeb54599",
+         "frozen source-surface query inventory changed")
+    need(sha(observation_path.read_bytes()) == "fd3ad7fc04ec37d6bdd4cb78dcbcc0fad9b7ca5f7fbf34f3011a3384de07c527",
+         "opened source-surface observation ledger changed")
+    need(freeze["overlayBeforeApplicationSha256"] == sha((json.dumps(overlay, ensure_ascii=False, indent=2) + "\n").encode()),
+         "source-surface name application baseline overlay changed")
+    query_rows = observations["observations"]
+    frozen_names = {x["query"]: x for x in freeze["sourceNames"]}
+    need(len(frozen_names) == len(query_rows) == observations["queryCount"] == 120,
+         "source-surface exact query count drift")
+    need(observations["exactRows"] == 3 and observations["exactMisses"] == 117,
+         "opened exact KAA result tally drift")
+    need(set(frozen_names) == {x["query"] for x in query_rows}, "query rows differ from the frozen source-name inventory")
+
+    catalog = {x["sourceKey"]: x for x in read(CATALOG_REL)["objects"]}
+    compiled = {x["sourceKey"]: x for x in read(COMPILED_REL)["instances"]}
+    objects = {x["sourceKey"]: x for x in overlay["objects"]}
+    evidence_ids = {x["id"] for x in overlay.get("evidenceSources", [])}
+    hits = {x["query"]: x for x in query_rows if x["resultCount"] == 1}
+    need(set(hits) == {"Body of sternum", "Manubrium of sternum", "Xiphoid process"},
+         "unexpected source-surface exact KAA rows")
+    newly_named = []
+    source_additions = []
+    source_records = []
+    for query in query_rows:
+        frozen = frozen_names[query["query"]]
+        need(query["url"] == KMLE_BASE + quote_plus(query["query"]), f"direct exact query URL drift: {query['query']}")
+        need(query["accessDate"] == ACCESS_DATE and query["accessMethod"] == "opened_html",
+             f"source-surface query access provenance drift: {query['query']}")
+        need(query["exactEdition"] is None and query["openedOriginalDictionaryRecord"] is False
+             and query["openedOriginalSourcePage"] is False and query["searchIndexUsedForDisplay"] is False,
+             f"aggregate page overstated as original KAA record: {query['query']}")
+        need(query["resultCount"] in (0, 1), f"unexpected exact-result count for {query['query']}")
+        need((query["resultCount"] == 1) == (query["resultStatus"] == "exact_KAA_dictionary_section_row"),
+             f"exact query status/count mismatch: {query['query']}")
+        need(query["sourceKeys"] == [x["sourceKey"] for x in frozen["sourceObjects"]],
+             f"source-key query crosswalk changed: {query['query']}")
+        if query["resultCount"] == 0:
+            need(query["exactRows"] == [], f"missed query has an accepted row: {query['query']}")
+            continue
+        need(len(query["exactRows"]) == 1, f"exact source term row count drift: {query['query']}")
+        row = query["exactRows"][0]
+        need(row["headword"] == query["query"] and row.get("koModern") and row.get("koTraditional"),
+             f"source-surface exact headword/field missing: {query['query']}")
+        need(row.get("hanjaRemoved") is False and not re.search(r"[\u3400-\u9fff\uf900-\ufaff]", row["koModern"] + row["koTraditional"]),
+             f"Hanja glyph captured in source-surface name evidence: {query['query']}")
+        source_id = "kmle-t100-surface-" + re.sub(r"[^a-z0-9]+", "-", query["query"].casefold()).strip("-") + "-opened"
+        need(source_id not in evidence_ids, f"duplicate evidence source id: {source_id}")
+        evidence_ids.add(source_id)
+        locator = ("Opened KMLE aggregate HTML, 대한해부학회 의학용어 사전 맞춤 검색 exact-result section; "
+                   f"exact query `{query['query']}`; exact row `{row['headword']} → {row['koModern']}`; "
+                   f"[옛 용어] `{row['koTraditional']}`. The underlying KAA dictionary edition/revision is not exposed "
+                   "and the individual dictionary record was not opened.")
+        source_additions.append({
+            "id": source_id, "url": query["url"], "sourceLabel": "KMLE aggregate HTML; 대한해부학회 의학용어 사전 section",
+            "exactEdition": None, "editionExposure": query["editionExposure"], "accessDate": query["accessDate"],
+            "accessMethod": query["accessMethod"], "locator": locator,
+            "retrievalLayer": "Opened aggregate HTML; exact KAA section row read. Search index is discovery only; original dictionary record not opened.",
+            "openedOriginalDictionaryRecord": False, "openedOriginalSourcePage": False,
+        })
+        for frozen_surface in frozen["sourceObjects"]:
+            key = frozen_surface["sourceKey"]
+            obj = objects.get(key)
+            need(obj is not None and key in catalog and key in compiled, f"frozen surface source/compiled member missing: {key}")
+            need(obj.get("sourceName") == query["query"] and obj.get("targetId") == frozen_surface["targetId"],
+                 f"exact source-name/target tuple drift: {key}")
+            need(obj.get("names", {}).get("koModern") is None and obj.get("names", {}).get("koTraditional") is None,
+                 f"exact surface name would overwrite an existing field: {key}")
+            need(obj.get("localDisplayEligible") is True and obj.get("defaultVisible") is True,
+                 f"source surface no longer eligible for local name display: {key}")
+            need(obj.get("sourceOnly") is True and obj.get("haConceptId") is None
+                 and obj.get("humanReview") == "not_performed" and obj.get("publicRedistribution") == "held",
+                 f"source/review/rights policy changed: {key}")
+            need(obj.get("side") == frozen_surface["side"] and obj.get("regionIds") == frozen_surface["regionIds"],
+                 f"side/region changed for source surface: {key}")
+            obj["names"]["koModern"] = row["koModern"]
+            obj["names"]["koTraditional"] = row["koTraditional"]
+            obj["label"] = row["koModern"]
+            obj["nameSourceIds"] = list(dict.fromkeys([*obj.get("nameSourceIds", []), source_id]))
+            name_evidence = obj.get("nameEvidence") or {}
+            need(not name_evidence.get("koModern") and not name_evidence.get("koTraditional"),
+                 f"existing field evidence would be overwritten: {key}")
+            name_evidence["koModern"] = {"value": row["koModern"], "sourceIds": [source_id], "locator": locator}
+            name_evidence["koTraditional"] = {"value": row["koTraditional"], "sourceIds": [source_id], "locator": locator}
+            obj["nameEvidence"] = name_evidence
+            newly_named.append({
+                "targetId": obj["targetId"], "sourceKey": key, "sourceName": obj["sourceName"],
+                "side": obj.get("side"), "regionIds": obj.get("regionIds", []),
+                "koModern": row["koModern"], "koTraditional": row["koTraditional"],
+                "english": obj["names"].get("en"), "evaluatedGeometrySha256": catalog[key]["evaluatedGeometrySha256"],
+                "compiledInstancePresent": True, "sourceQueryId": source_id,
+                "nameDerivation": "exact source-name KAA headword row; no parent/group/side/geometry inference",
+            })
+            source_records.append({
+                "query": query["query"], "targetId": obj["targetId"], "sourceKey": key,
+                "sourceName": obj["sourceName"], "side": obj.get("side"),
+                "koModern": row["koModern"], "koTraditional": row["koTraditional"],
+                "sourceId": source_id, "evaluatedGeometrySha256": catalog[key]["evaluatedGeometrySha256"],
+            })
+    overlay["evidenceSources"].extend(source_additions)
+    overlay["revision"] = "T100-source-taxonomy-local-display-v2-B-bulk-verified-names-2026-09-29-round4-surface-terms"
+    query_evidence["sourceSurfaceNameBatch"] = {
+        "freezePath": freeze_path.relative_to(ROOT).as_posix(), "freezeSha256": sha(freeze_path.read_bytes()),
+        "observationsPath": observation_path.relative_to(ROOT).as_posix(),
+        "observationsSha256": sha(observation_path.read_bytes()), "queryCount": 120,
+        "exactRows": 3, "exactMisses": 117, "surfaceRowsNamed": len(newly_named),
+        "sourceLayers": observations["sourceLayerPolicy"],
+    }
+    term_ledger["sourceSurfaceNameBatch"] = {
+        "frozenSourceNameConcepts": 120, "exactKaaRows": 3, "exactKaaMisses": 117,
+        "namedSurfaceRows": newly_named, "missedSourceNameQueries": [x for x in query_rows if x["resultCount"] == 0],
+        "applicationRule": "Only an exact sourceName/headword match with an opened KAA exact-section row may fill existing surface Korean name fields. No canonical target term, relation, geometry, or side rule is inferred.",
+    }
+    repetitions["sourceSurfaceNameQueries"] = {
+        "conceptQueries": 120, "exactKaaRows": 3, "exactKaaMisses": 117,
+        "namedRows": source_records, "newRelationsCreated": 0, "canonicalBindingsCreated": 0, "geometryChanged": False,
+    }
+    detail["newlyNamed"].extend(newly_named)
+    eligible = [x for x in overlay["objects"] if x.get("localDisplayEligible")]
+    named = [x for x in eligible if (x.get("names") or {}).get("koModern")]
+    term_ledger["application"]["exactSourceSurfaceRowsNamed"] = len(detail["newlyNamed"])
+    term_ledger["resultCounts"].update({
+        "sourceObjects": len(overlay["objects"]), "locallyDisplayEligibleRows": len(eligible),
+        "eligibleRowsWithKoModernAfter": len(named), "eligibleRowsStillWithoutKoModernAfter": len(eligible) - len(named),
+        "targetTerminologyEvidenceRowsAfter": len(overlay.get("targetTerminologyEvidence", [])),
+        "newNamedSurfaceRows": len(detail["newlyNamed"]),
+    })
+    term_ledger["unresolved"]["unnamedVisibleSurfaceRows"] = len(eligible) - len(named)
+    term_ledger["unresolved"]["sourceSurfaceExactKaaMisses"] = 117
+    return overlay, query_evidence, term_ledger, repetitions, detail
+
+
+def apply_multidictionary_surface_names(overlay: dict, query_evidence: dict, term_ledger: dict,
+                                        repetitions: dict, detail: dict):
+    """Apply exact field observations to exact existing bilateral target rows only."""
+    observation_path = HERE / "source-surface-multidictionary-observations.json"
+    packet = read(observation_path.relative_to(ROOT).as_posix())
+    need(packet["taskId"] == "T100" and packet["sourcePageObservationDateLocal"] == "2026-09-30",
+         "multidictionary source observation packet scope/date drift")
+    need(packet["scopeDenominator"] == {
+        "eligibleSurfaceRowsAtQueryFreeze": 234, "distinctBaseSourceLabels": 117,
+        "targets": 542, "memberships": 563, "regions": 12,
+    }, "multidictionary query denominator drift")
+    source_observations = packet["exactSourceNameObservations"]
+    target_observations = packet["exactTargetSynonymObservations"]
+    need(len(source_observations) == 117 and len(target_observations) == 5,
+         "multidictionary query sweep size drift")
+    need(sum(x["resultStatus"] == "exact_headword_rows_present" for x in source_observations) == 6
+         and sum(x["resultStatus"] == "no_exact_same_headword_row_in_opened_exact_sections" for x in source_observations) == 111,
+         "multidictionary exact query result tally drift")
+    need(sum(bool(x.get("exactRows")) for x in target_observations) == 4
+         and sum(x.get("disposition") == "not_applied_nonexact_scope_candidate" for x in target_observations) == 1,
+         "target Latin cross-check result tally drift")
+    pages = packet["evidencePages"]
+    applications = packet["acceptedFieldApplications"]
+    need(len(pages) == 11 and len(applications) == 7,
+         "multidictionary evidence-page/application count drift")
+    packet_sha = sha(observation_path.read_bytes())
+    scope = read(SCOPE_REL)
+    catalog_raw = read(CATALOG_REL)
+    catalog = {x["sourceKey"]: x for x in catalog_raw["objects"]}
+    compiled = {x["sourceKey"]: x for x in read(COMPILED_REL)["instances"]}
+    targets = {x["id"]: x for x in scope["targets"]}
+    objects = {x["sourceKey"]: x for x in overlay["objects"]}
+    term_rows = {x["targetId"]: x for x in overlay["targetTerminologyEvidence"]}
+    source_ids = {x["id"] for x in overlay.get("evidenceSources", [])}
+
+    def normalize(value: str) -> str:
+        return re.sub(r"\s+", " ", value.strip()).casefold()
+
+    def source_base(value: str) -> str:
+        return re.sub(r"\.[lr]$", "", value.strip(), flags=re.I)
+
+    observation_by_id = {}
+    for row in source_observations + target_observations:
+        sid = row.get("evidenceSourceId")
+        if sid:
+            need(sid not in observation_by_id, f"duplicate multidictionary evidence observation id: {sid}")
+            observation_by_id[sid] = row
+    page_by_id = {x["id"]: x for x in pages}
+    need(len(page_by_id) == 11, "duplicate multidictionary evidence page ID")
+    for page in pages:
+        need(page["id"] not in source_ids, f"multidictionary evidence ID collision: {page['id']}")
+        need(page["url"].startswith("https://m.kmle.co.kr/search.php?Search="), "unexpected multidictionary evidence URL")
+        need(page.get("accessDate") == packet["sourcePageObservationDateLocal"]
+             and page.get("accessMethod") == "opened_html" and page.get("exactEdition") is None,
+             f"multidictionary page edition/access overclaim: {page['id']}")
+        need(page.get("openedOriginalDictionaryRecord") is False and page.get("openedOriginalSourcePage") is False,
+             f"aggregate page misrepresented as original: {page['id']}")
+        source_ids.add(page["id"])
+        source_observation = observation_by_id.get(page["id"])
+        need(source_observation is not None, f"evidence page lacks exact query observation: {page['id']}")
+        locator_rows = source_observation.get("exactRows", [])
+        locator = f"Opened KMLE aggregate HTML query `{page['query']}`; "
+        if locator_rows:
+            locator += "; ".join(
+                f"{r.get('section')} row `{r.get('headword')}` → {' / '.join(r.get('observedKoreanCandidates', []))}"
+                for r in locator_rows
+            )
+        else:
+            locator += "the inspected exact-match sections contained no exact row; no similar/index result was used."
+        page["locator"] = locator + " Exact edition/revision is not exposed; original dictionary records were not opened."
+        page["retrievalLayer"] = "Opened KMLE aggregate HTML query page; visible named-section rows/absence recorded; search index was discovery-only; underlying dictionary records were not opened."
+        overlay["evidenceSources"].append({
+            "id": page["id"], "url": page["url"], "sourceLabel": page["sourceLabel"],
+            "exactEdition": None, "editionExposure": page["editionExposure"],
+            "accessDate": page["accessDate"], "accessMethod": page["accessMethod"],
+            "locator": page["locator"], "retrievalLayer": page["retrievalLayer"],
+            "openedOriginalDictionaryRecord": False, "openedOriginalSourcePage": False,
+        })
+
+    expected_targets = {"TA2:2357", "TA2:2147", "TA2:2363", "TA2:2052", "TA2:2532", "TA2:2056", "TA2:1255"}
+    need({x["targetId"] for x in applications} == expected_targets, "accepted target application set drift")
+    applied_rows = []
+    applied_targets = []
+    for application in applications:
+        tid = application["targetId"]
+        target = targets.get(tid)
+        evidence = term_rows.get(tid)
+        need(target is not None and evidence is not None, f"exact target terminology row missing: {tid}")
+        need(normalize(target["term"]["english"]) == normalize(application["targetEnglish"]),
+             f"frozen T96 English target mismatch: {tid}")
+        need(target["semanticKind"] in {"named_muscle", "repeated_muscle_family", "bone"},
+             f"unexpected target semantic kind: {tid}")
+        need(evidence.get("names", {}).get("koModern") is None and evidence.get("names", {}).get("koTraditional") is None,
+             f"target name application would overwrite a prior value: {tid}")
+        surfaces = [x for x in overlay["objects"] if x.get("localDisplayEligible") and x.get("targetId") == tid]
+        need(len(surfaces) == 2 and {x.get("side") for x in surfaces} == {"left", "right"},
+             f"bilateral target surface set changed: {tid}")
+        need(all(normalize(source_base(x["sourceName"])) == normalize(application["sourceSurfaceName"]) for x in surfaces),
+             f"source label is not an exact concept match: {tid}")
+        need(all(x.get("defaultVisible") is True and x.get("sourceOnly") is True and x.get("haConceptId") is None
+                 and x.get("humanReview") == "not_performed" and x.get("publicRedistribution") == "held"
+                 for x in surfaces), f"name application would change a local/policy state: {tid}")
+        surface_query = next((x for x in source_observations if x["query"] == application["sourceSurfaceName"]), None)
+        need(surface_query is not None,
+             f"source-label query/crosswalk is missing: {tid}")
+        packet_source_keys = {x["sourceKey"] for x in surface_query.get("sourceObjects", [])}
+        need(packet_source_keys == {x["sourceKey"] for x in surfaces}, f"source-query bilateral members differ: {tid}")
+        field_ids = []
+        for field_name, field in application["fields"].items():
+            need(field_name in {"koModern", "koTraditional"}, f"unexpected Korean field: {field_name}")
+            value = field["value"]
+            sid = field["sourceId"]
+            need(sid in page_by_id and sid in observation_by_id, f"field has no opened-page evidence: {tid} {field_name}")
+            source_observation = observation_by_id[sid]
+            need(source_observation.get("query") == field["query"], f"field query/source ID crosswalk mismatch: {tid} {field_name}")
+            exact = [r for r in source_observation.get("exactRows", [])
+                     if r.get("section") == field["section"] and normalize(r.get("headword", "")) == normalize(field["headword"])
+                     and value in r.get("observedKoreanCandidates", [])]
+            need(exact, f"field value lacks its exact section/headword locator: {tid} {field_name}")
+            need(page_by_id[sid].get("url") == source_observation["url"], f"source URL/page crosswalk mismatch: {sid}")
+            target_field = evidence["fieldEvidence"][field_name]
+            need(target_field.get("value") is None and target_field.get("status") == "missing",
+                 f"existing target field is not an unresolved gap: {tid} {field_name}")
+            locator = (f"Opened KMLE aggregate HTML; exact section `{field['section']}`; exact headword `"
+                       f"{field['headword']}`; observed Korean candidate `{value}`. The underlying dictionary record and exact publication revision were not exposed.")
+            target_field.update({"value": value, "sourceIds": list(dict.fromkeys([*target_field.get("sourceIds", []), sid])),
+                                 "locator": locator, "status": "evidence_backed", "missingReason": None})
+            evidence["names"][field_name] = value
+            field_ids.append(sid)
+        evidence["targetTermSourceIds"] = list(dict.fromkeys([*evidence.get("targetTermSourceIds", []), *field_ids]))
+        evidence["classification"]["groupPartVariant"] = (
+            "Exact T96 target and existing bilateral source-label rows; opened KMLE exact named-section evidence supports only the listed Korean fields. No additional group/member relation was inferred."
+        )
+        evidence["existingSurface"]["status"] = "exact_target_source_name_rows_present"
+        evidence["existingSurface"]["note"] = (
+            "The exact target has two existing side-labelled source surfaces. Only field values with direct opened-page section/headword evidence were applied; identity, side, relation, and geometry are unchanged."
+        )
+        for candidate in packet.get("unappliedExactCandidates", []):
+            if candidate.get("targetId") != tid:
+                continue
+            evidence.setdefault("unappliedTermCandidates", []).append({
+                "value": candidate["value"], "sourceId": candidate["sourceId"],
+                "locator": page_by_id[candidate["sourceId"]]["locator"],
+                "status": candidate["status"], "reason": candidate["reason"],
+            })
+        for obj in surfaces:
+            for field_name, field in application["fields"].items():
+                current = obj["names"].get(field_name)
+                need(current is None, f"surface Korean field would be overwritten: {obj['sourceKey']} {field_name}")
+                obj["names"][field_name] = field["value"]
+            support_ids = list(dict.fromkeys(field["sourceId"] for field in application["fields"].values()))
+            obj["nameSourceIds"] = list(dict.fromkeys([*obj.get("nameSourceIds", []), *support_ids]))
+            name_evidence = obj.get("nameEvidence") or {}
+            for field_name, field in application["fields"].items():
+                page = page_by_id[field["sourceId"]]
+                locator = (f"Opened KMLE aggregate HTML; exact section `{field['section']}`; exact headword `"
+                           f"{field['headword']}`; observed Korean candidate `{field['value']}`. Exact edition/revision is not exposed; original dictionary record was not opened.")
+                need(not name_evidence.get(field_name), f"surface field evidence would be overwritten: {obj['sourceKey']} {field_name}")
+                name_evidence[field_name] = {"value": field["value"], "sourceIds": [field["sourceId"]], "locator": locator}
+            if not name_evidence.get("en"):
+                name_evidence["en"] = {"value": obj["names"].get("en"), "sourceIds": [FIPAT_ID],
+                                        "locator": f"Pinned T96 exact English target term for {tid}: {target['term']['english']}"}
+            obj["nameEvidence"] = name_evidence
+            obj["label"] = obj["names"].get("koModern") or obj["names"].get("koTraditional") or obj["names"].get("en")
+            cat = catalog[obj["sourceKey"]]
+            need(obj["sourceKey"] in compiled and cat.get("evaluatedGeometrySha256"),
+                 f"surface lacks its existing compiled/evaluated source record: {obj['sourceKey']}")
+            applied_rows.append({
+                "targetId": tid, "sourceKey": obj["sourceKey"], "sourceName": obj["sourceName"], "side": obj["side"],
+                "regionIds": obj["regionIds"], "koModern": obj["names"].get("koModern"),
+                "koTraditional": obj["names"].get("koTraditional"), "english": obj["names"].get("en"),
+                "sourceIds": support_ids, "evaluatedGeometrySha256": cat["evaluatedGeometrySha256"],
+                "compiledInstancePresent": True, "nameDerivation": "exact existing T96 target + exact bilateral source label + field-specific opened section/headword row",
+            })
+        applied_targets.append({"targetId": tid, "targetEnglish": application["targetEnglish"], "surfaceRows": len(surfaces),
+                                "sideSet": ["left", "right"], "fieldApplications": application["fields"],
+                                "sourceKeys": sorted(x["sourceKey"] for x in surfaces), "status": "exact_fields_applied_existing_rows_only"})
+
+    overlay["revision"] = "T100-source-taxonomy-local-display-v2-B-bulk-verified-names-2026-09-30-round5-multidictionary"
+    query_evidence["multidictionarySourceSurfaceBatch"] = {
+        "path": observation_path.relative_to(ROOT).as_posix(), "sha256": packet_sha,
+        "sourceNameQueries": 117, "eligibleSourceSurfaceRows": 234,
+        "exactRows": 6, "exactMisses": 111, "targetLatinCrossChecks": 5,
+        "targetLatinExactRows": 4, "targetLatinSimilarOnlyNotApplied": 1,
+        "fieldApplications": 7, "surfaceRowsWithKoreanFieldUpdates": len(applied_rows),
+        "surfaceRowsWithModernKoreanUpdates": sum(bool(x["koModern"]) for x in applied_rows),
+        "surfaceRowsWithLegacyOnlyUpdates": sum(bool(x["koTraditional"]) and not x["koModern"] for x in applied_rows),
+        "sourceLayers": packet["sourceLayerPolicy"],
+    }
+    term_ledger.setdefault("application", {})["multidictionarySurfaceApplications"] = {
+        "targetConcepts": len(applied_targets), "surfaceRowsWithKoreanFieldUpdates": len(applied_rows),
+        "surfaceRowsWithModernKoreanUpdates": sum(bool(x["koModern"]) for x in applied_rows),
+        "surfaceRowsWithLegacyOnlyUpdates": sum(bool(x["koTraditional"]) and not x["koModern"] for x in applied_rows),
+        "canonicalBindingsAdded": 0, "newGeometry": False,
+    }
+    term_ledger["multidictionarySourceSurfaceQueries"] = {
+        "packetSha256": packet_sha, "sourceNameQueryCount": len(source_observations),
+        "queryRowsWithExactHeadword": 6, "queryRowsWithoutExactHeadword": 111,
+        "exactTargetLatinCrossChecks": len(target_observations), "targetLatinExactRows": 4,
+        "similarOnlyNotApplied": 1, "fieldApplications": applied_targets,
+        "unappliedExactCandidates": packet.get("unappliedExactCandidates", []),
+        "newlyNamedSurfaceRows": applied_rows,
+        "negativeScope": "Exact query misses are limited to the opened KMLE named sections and do not establish absence from other sources or editions.",
+    }
+    repetitions["multidictionarySourceSurfaceQueries"] = {
+        "sourceNameConceptQueries": len(source_observations), "exactHeadwordQueries": 6,
+        "exactMisses": 111, "targetLatinCrossChecks": len(target_observations),
+        "targetLatinExactRows": 4, "similarOnlyNotApplied": 1,
+        "appliedConcepts": applied_targets, "namedSourceRows": applied_rows,
+        "newRelationsCreated": 0, "canonicalBindingsCreated": 0, "geometryChanged": False,
+    }
+    detail["newlyNamed"].extend(applied_rows)
+    detail["multidictionarySurfaceApplications"] = applied_targets
+    eligible = [x for x in overlay["objects"] if x.get("localDisplayEligible")]
+    modern_named = [x for x in eligible if (x.get("names") or {}).get("koModern")]
+    legacy_named = [x for x in eligible if (x.get("names") or {}).get("koTraditional") and not (x.get("names") or {}).get("koModern")]
+    term_ledger["resultCounts"].update({
+        "eligibleRowsWithKoModernAfter": len(modern_named),
+        "eligibleRowsStillWithoutKoModernAfter": len(eligible) - len(modern_named),
+        "eligibleRowsWithLegacyOnlyName": len(legacy_named),
+        "targetTerminologyEvidenceRowsAfter": len(overlay.get("targetTerminologyEvidence", [])),
+        "newNamedSurfaceRows": len(detail["newlyNamed"]),
+    })
+    term_ledger["unresolved"]["unnamedVisibleSurfaceRows"] = len(eligible) - len(modern_named)
+    term_ledger["unresolved"]["multidictionaryExactSourceNameMisses"] = 111
+    return overlay, query_evidence, term_ledger, repetitions, detail
+
+
 def main() -> None:
+    from apply_suffix_m_queries import apply_suffix_m_query_batch
     overlay, query_evidence, ledger, repetition, detail = build_outputs()
+    overlay, query_evidence, ledger, repetition, detail = apply_remaining_target_batch(overlay,query_evidence,ledger,repetition,detail)
+    overlay, query_evidence, ledger, repetition, detail = apply_suffix_m_query_batch(overlay,query_evidence,ledger,repetition,detail)
+    overlay, query_evidence, ledger, repetition, detail = apply_source_surface_name_queries(overlay,query_evidence,ledger,repetition,detail)
+    overlay, query_evidence, ledger, repetition, detail = apply_multidictionary_surface_names(overlay,query_evidence,ledger,repetition,detail)
     outputs={
         HERE/"source-query-observations.json":query_evidence,
         HERE/"term-and-repetition-ledger.json":ledger,
@@ -573,7 +1106,7 @@ def main() -> None:
         need(overlay_path.read_text()==rendered_overlay,"current overlay differs from deterministic continuation output")
     else:
         overlay_path.write_text(rendered_overlay)
-    print(json.dumps({"status":"pass" if "--check" in sys.argv else "written","revision":overlay["revision"],"sourceObjects":len(overlay["objects"]),"namedSurfaceRows":len(detail["newlyNamed"]),"targetEvidenceRowsAdded":len(detail["termsAdded"]),"directTerms":34,"repeatedGroupExactTerms":7,"unresolvedQueries":8,"parentOnlyTerm":1},ensure_ascii=False,indent=2))
+    print(json.dumps({"status":"pass" if "--check" in sys.argv else "written","revision":overlay["revision"],"sourceObjects":len(overlay["objects"]),"namedSurfaceRows":len(detail["newlyNamed"]),"multidictionarySurfaceApplications":len(detail.get("multidictionarySurfaceApplications",[])),"targetEvidenceRowsAdded":len(detail["termsAdded"]),"round2ExactRows":36,"round2DirectMisses":136,"suffixExactRows":54,"suffixDirectMisses":33,"sourceEvidenceCount":len(overlay["evidenceSources"]),"termEvidenceCount":len(overlay["targetTerminologyEvidence"]),"wholeBodyComplete":False},ensure_ascii=False,indent=2))
 
 
 if __name__ == "__main__":

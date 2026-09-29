@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "checkedAtLocal": "2026-09-29",
+  "executionStatus": "in_progress",
+  "acceptance": "partial",
+  "nextUnit": "bulk-verified-korean-naming-and-repeated-structures",
+  "workUnits": [
+    "B bulk naming/repeated structures",
+    "C exceptions and actual missing",
+    "D integrated validation"
+  ],
+  "currentB": {
+    "eligibleSurfaces": 672,
+    "modernKoreanNames": 438,
+    "withoutModernKorean": 234,
+    "newExactSourceSurfaceRowsThisContinuation": 3,
+    "queries": 120,
+    "exactKaaRows": 3,
+    "directMisses": 117
+  },
+  "currentC": {
+    "targetTermRowsWithModernEvidence": 156,
+    "unresolvedTargetTermGaps": 79,
+    "directTargetQueryMisses": 136,
+    "suffixDirectQueryMisses": 33,
+    "sourceSurfaceExactMisses": 117,
+    "fieldConflicts": 2,
+    "homonyms": 4,
+    "parentPartBoundaries": 1,
+    "substringAmbiguities": 1,
+    "allExceptionLedgersRemainOpen": true
+  },
+  "currentD": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12,
+    "targetsWithSourceSurfaceCandidate": 379,
+    "targetsWithoutSourceSurfaceCandidate": 163,
+    "candidateRelationsProveCanonicalIdentity": false,
+    "wholeBodyVisualAndPerformancePass": false,
+    "browserNewNameSpotCheck": "390x844 Body of sternum selected; 3 names visible in same scene"
+  },
+  "holds": {
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "canonicalBindingsAdded": 0,
+    "newGeometry": false,
+    "wholeBodyComplete": false
+  },
+  "notStarted": [
+    "T80",
+    "T58",
+    "push",
+    "deployment"
+  ]
+}

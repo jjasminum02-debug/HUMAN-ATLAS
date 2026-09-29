@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "workUnit": "B full frozen-label pass plus C/D current delta",
+  "checkedAtLocal": "2026-09-30",
+  "baselineHead": "18b52ab2308887427afe511a97c463014d47182c",
+  "commands": [
+    {
+      "command": "python3 work/evidence/T100/bulk-continuation-2026-09-29/build_t100_bulk_continuation.py --check",
+      "status": "pass",
+      "summary": "960 source objects; 292 cumulative named rows; 213 target term evidence rows; 329 source evidence rows; wholeBodyComplete=false"
+    },
+    {
+      "command": "python3 work/evidence/T100/bulk-continuation-2026-09-29/validate_t100_bulk_continuation.py",
+      "status": "pass_partial",
+      "summary": "446/672 eligible rows have modern Korean; 226 do not; fixed denominators, field provenance, no geometry/binding/policy promotion"
+    },
+    {
+      "command": "python3 work/evidence/T100/bulk-continuation-2026-09-29/build_t100_target_coverage.py",
+      "status": "pass_partial",
+      "summary": "542 target rows, 563 region memberships, 12 regions; candidates distinguished from verified identity"
+    },
+    {
+      "command": "python3 -m py_compile [three T100 bulk scripts]",
+      "status": "pass",
+      "note": "Used a task-scoped PYTHONPYCACHEPREFIX because the default cache location was not writable."
+    },
+    {
+      "command": "pnpm run test:whole-body",
+      "status": "pass",
+      "tests": 42,
+      "compiledChunkHashesChecked": 46
+    },
+    {
+      "command": "pnpm run test:search",
+      "status": "pass",
+      "tests": 44
+    },
+    {
+      "command": "pnpm run test:delivery",
+      "status": "pass",
+      "tests": 3
+    },
+    {
+      "command": "pnpm run typecheck",
+      "status": "pass"
+    },
+    {
+      "command": "pnpm run build",
+      "status": "pass",
+      "appBundleBytes": 953570,
+      "warning": "Existing App JS chunk >500 kB advisory; build succeeds."
+    }
+  ],
+  "counts": {
+    "fixedTargets": 542,
+    "fixedMemberships": 563,
+    "fixedRegions": 12,
+    "sourceObjects": 960,
+    "locallyDisplayEligible": 672,
+    "eligibleWithModernKorean": 446,
+    "eligibleWithoutModernKorean": 226,
+    "legacyOnlySurfaceRows": 20,
+    "newSurfaceNameRowsCumulative": 292,
+    "currentSupplementalTargetTermModernEvidence": 160,
+    "currentTermGapRows": 75,
+    "sourceNameExactMissesPriorKAA": 117,
+    "sourceNameExactMissesMultiDictionary": 111,
+    "targetExactQueryMisses": 136,
+    "suffixExactQueryMisses": 33,
+    "targetsWithSourceCandidates": 379,
+    "targetsWithoutSourceCandidates": 163,
+    "heldAccessories": 288
+  },
+  "holds": {
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "canonicalBindingsAdded": 0,
+    "newGeometry": false,
+    "wholeBodyComplete": false
+  },
+  "result": "pass_partial; task-level coverage gates are not satisfied.",
+  "scopeLimitations": {
+    "AProjectionMetrics": "Not rerun per user scope; prior compact response/parse measurements remain historical and do not assert current payload size after B naming additions."
+  }
+}

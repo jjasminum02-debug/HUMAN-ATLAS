@@ -1,16 +1,19 @@
 {
   "schemaVersion": 1,
   "taskId": "T100",
-  "workUnit": "B/C preservation and provenance validation",
+  "workUnit": "B/C/D continuation validation",
   "status": "pass_partial",
-  "checkedAtLocal": "2026-09-29",
+  "checkedAtLocal": "2026-09-30",
   "baselineHead": "c757c2d9e870c8c403025868024872c1710d56a2",
   "checks": {
     "sourceObjectInventory960AndT96Denominators542_563_12": true,
-    "only102ExistingSurfaceNameFieldsChanged": true,
-    "allOtherObjectFieldsAnd893OtherRowsPreserved": true,
+    "onlyEvidenceBackedExistingSurfaceNameFieldsChanged": true,
+    "allOtherObjectFieldsAnd668OtherRowsPreserved": true,
     "prior42Terminology57SourcesAndHistoricalRelationsPreserved": true,
-    "exactly50TermRowsAnd51QuerySourcesAdded": true,
+    "213CumulativeSupplementalTargetTermRowsAnd329UniqueCurrentContinuationSourcesAdded": true,
+    "120ExactSourceSurfaceNamesQueriedWith3KAAExactRowsAnd117Misses": true,
+    "87SuffixAbbreviationQueriesRecordedWith54ExactRowsAnd33Misses": true,
+    "relatedTermCrosswalkSeparatedFromDirectExactQueryAndNonKAAResultHeld": true,
     "sevenExactRepeatedGroupTermsAndThreeExplicitNoExactGroupTermsRecorded": true,
     "35OrdinalMemberNamesComposedFromExactKaaRangeAndFrozenMembership": true,
     "noCanonicalBindingsGeometryOrPolicyPromotion": true,
@@ -18,18 +21,28 @@
     "noHanjaCollected": true,
     "eligibleNamingCoverageReconciled": true,
     "exceptionAndBacklogLedgersGenerated": true,
-    "liveSearchAmbiguityRecordedWithoutChangingVerifiedNames": true
+    "unresolvedSuffixMissesSeparatedFromDirectAndSimilarCrosswalkEvidence": true,
+    "liveSearchAmbiguityRecordedWithoutChangingVerifiedNames": true,
+    "117MultiDictionarySurfaceLabelsSweptWith6ExactRowsAnd111ExactMisses": true,
+    "sevenExactFieldApplicationsOnFourteenExistingBilateralRows": true,
+    "fieldEvidenceURLsLocatorsAndExactSectionRowsValidated": true,
+    "legacyOnlyFieldsAndThreeTrueModernGapsRetained": true,
+    "separateIndexOpenedHTMLOriginalRecordAndHumanReviewStatesRetained": true
   },
   "counts": {
     "sourceObjects": 960,
     "eligible": 672,
-    "named": 262,
-    "unnamed": 410,
-    "newSurfaceNames": 102,
-    "newTerminologyRows": 50,
-    "newEvidenceSources": 51,
-    "backlogGroups": 410,
-    "gapRows": 8
+    "namedModern": 446,
+    "unnamedModern": 226,
+    "legacyOnlySurfaceRows": 20,
+    "newLegacyOnlySurfaceRows": 6,
+    "newSurfaceNameFieldRows": 292,
+    "newTerminologyRows": 213,
+    "newEvidenceSources": 329,
+    "backlogGroups": 226,
+    "gapRowsInSupplementalBatch": 75,
+    "priorDirectSourceSurfaceNameExactMisses": 117,
+    "multiDictionarySourceSurfaceNameExactMisses": 111
   },
   "holds": {
     "wholeBodyCompletion": false,
@@ -40,8 +53,8 @@
     "geometryChanged": false
   },
   "remainingWork": [
-    "Continue B evidence-backed naming/repeated-structure processing for 410 eligible unnamed surfaces and additional unnamed exact source groups; this verified continuation is not an exhaustive B pass.",
-    "Resolve eight exact-query term gaps, one legacy-field conflict, four existing homonym cases, and the live 허리뼈 substring ambiguity only with exact source-backed resolution.",
-    "D whole-body visual/selection/performance coverage remains partial; this browser run covers 12 region transitions, 3 viewports, one new-name selection, controls, and search exception behavior."
+    "Continue B evidence-backed naming for 226 eligible surfaces still missing a modern Korean field; 6 surfaces have a historical name only. The 117-label query sweep is an observation set, not the whole-body denominator.",
+    "Keep 111 exact named-section source-label misses, three unapplied exact alternatives, one nonexact hand-scope Latin candidate, existing field conflicts/homonyms/parent-part boundary and substring ambiguity open until stronger evidence supports resolution.",
+    "D whole-body exact visual/selection/performance coverage remains partial; named target/source identity, active-scene FPS/GPU/memory budgets and full device coverage are incomplete."
   ]
 }

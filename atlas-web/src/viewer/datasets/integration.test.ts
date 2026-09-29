@@ -418,8 +418,15 @@ test('T100 B04 records hand-bone members without leaking internal target termino
         && term.newGeometryCreated === false), true);
     for (const term of terms) {
         for (const query of [term.names.koModern, term.names.koTraditional].filter(Boolean) as string[]) {
-            assert(!searchStructures(raw.objects, query, []).some(row => row.targetIds.some(id => batchIds.has(id))),
-                `internal B04 terminology leaked into learner search: ${term.targetId}:${query}`);
+            const matches = searchStructures(raw.objects, query, []);
+            for (const row of matches.filter(candidate => candidate.targetIds.some(id => batchIds.has(id)))) {
+                // A source surface may independently carry a directly evidenced Korean name.
+                // Its exact English locator is distinct from projecting the internal target term.
+                assert.equal(row.nameEvidence?.koModern?.value, row.names.koModern,
+                    `B04 terminology was projected without surface-level name evidence: ${term.targetId}:${query}`);
+                assert(row.names.en && row.nameEvidence?.koModern?.locator.includes(row.names.en),
+                    `B04 query matched a surface without its own exact English locator: ${term.targetId}:${query}:${row.sourceName}`);
+            }
         }
     }
 });

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "workUnit": "B/C/D current verification",
+  "checkedAtLocal": "2026-09-29",
+  "baselineHead": "18b52ab2308887427afe511a97c463014d47182c",
+  "commands": [
+    {
+      "command": "python3 work/evidence/T100/bulk-continuation-2026-09-29/build_t100_bulk_continuation.py --check",
+      "status": "pass",
+      "summary": "round4-surface-terms; 960 source objects; 278 cumulative name rows; 213 cumulative target term rows; 375 evidence sources; wholeBodyComplete=false"
+    },
+    {
+      "command": "python3 work/evidence/T100/bulk-continuation-2026-09-29/validate_t100_bulk_continuation.py",
+      "status": "pass_partial",
+      "summary": "438/672 eligible surfaces named; 234 unnamed; 120 exact source-surface queries, 3 exact rows applied, 117 misses; policy/geometry/ID/denominator gates preserved"
+    },
+    {
+      "command": "python3 work/evidence/T100/bulk-continuation-2026-09-29/build_t100_target_coverage.py",
+      "status": "pass_partial",
+      "summary": "542 unique target rows; 563 membership rows; 12 regions; 379 targets have candidate surface, 163 have none; candidate relations are not verified canonical identity"
+    },
+    {
+      "command": "pnpm test:whole-body",
+      "status": "pass",
+      "tests": 42,
+      "compiledChunkHashesChecked": 46,
+      "note": "One regression test initially conflated exact surface-level name evidence with target-term projection; assertion was narrowed to require the matching surface’s own Korean evidence and exact English locator, then all 42 tests passed."
+    },
+    {
+      "command": "pnpm test:search",
+      "status": "pass",
+      "tests": 44
+    },
+    {
+      "command": "pnpm test:delivery",
+      "status": "pass",
+      "tests": 3
+    },
+    {
+      "command": "pnpm typecheck",
+      "status": "pass"
+    },
+    {
+      "command": "pnpm build",
+      "status": "pass",
+      "appBundleBytes": 953570,
+      "warning": "Existing App JS chunk exceeds 500 kB advisory; build succeeds."
+    }
+  ],
+  "coverage": {
+    "targets": 542,
+    "regionMemberships": 563,
+    "regions": 12,
+    "sourceObjects": 960
+  },
+  "currentCoverageCounts": {
+    "eligibleSurfaceRows": 672,
+    "eligibleRowsWithModernKorean": 438,
+    "eligibleRowsWithoutModernKorean": 234,
+    "uniqueExistingHaBoundSurfaceRows": 130,
+    "targetsWithAnySourceSurfaceCandidate": 379,
+    "targetsWithoutAnySourceSurfaceCandidate": 163,
+    "targetTermRowsWithModernEvidence": 156,
+    "sourceObjectsHeldOutsideLocalDisplay": 288,
+    "heldObjectsDisposition": "All 288 are source kind accessory, have no T96 targetId/targetIds, remain defaultHidden/inspection-ineligible/source-only/rights-held under the inherited accessory-or-original-hidden-or-exception hold. They are excluded from the 542 muscle/bone target denominator and were not promoted."
+  },
+  "cLedgerCounts": {
+    "termGaps": 79,
+    "directTargetQueryMisses": 136,
+    "suffixVariantDirectQueryMisses": 33,
+    "directSourceSurfaceNameMisses": 117,
+    "fieldConflicts": 2,
+    "searchHomonyms": 4,
+    "parentPartBoundaries": 1,
+    "searchAmbiguities": 1
+  },
+  "holds": {
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "canonicalBindingsAdded": 0,
+    "geometryChanged": false,
+    "wholeBodyComplete": false
+  },
+  "status": "T100 remains in_progress/partial; full 542-target visual identity/selection coverage and active-scene performance gates are open.",
+  "overlayDeltaFromResumeHead": {
+    "resumeHead": "18b52ab2308887427afe511a97c463014d47182c",
+    "objectsBefore": 960,
+    "objectsAfter": 960,
+    "objectKeysetPreserved": true,
+    "modifiedObjectRows": 176,
+    "allowedObjectFields": [
+      "label",
+      "nameEvidence",
+      "nameSourceIds",
+      "names"
+    ],
+    "targetTerminologyRows": {
+      "added": 163,
+      "removed": 0,
+      "modified": 2
+    },
+    "evidenceSources": {
+      "before": 108,
+      "after": 375,
+      "added": 267,
+      "priorPrefixPreserved": true
+    },
+    "geometryIdentitySideRegionRightsReviewAndBindingFieldsChanged": false,
+    "checkedBy": "JSON field-by-field comparison against HEAD; bulk validator additionally checks frozen-input and field-provenance invariants."
+  }
+}

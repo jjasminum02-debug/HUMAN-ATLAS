@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "workUnit": "B source-backed multidictionary field application",
+  "checkedAtLocal": "2026-09-30",
+  "input": "work/evidence/T100/bulk-continuation-2026-09-29/source-surface-multidictionary-observations.json",
+  "inputSha256": "89be0eee9a72277c7c64f320c06e4f667f08278902784cf0e6da38fab0f2081f",
+  "queries": {
+    "sourceEnglishLabels": 117,
+    "bilateralEligibleRowsRepresented": 234,
+    "exactOpenedNamedSectionHits": 6,
+    "exactMisses": 111,
+    "frozenTargetLatinCrossChecks": 5,
+    "targetLatinCrossCheckQueriesWithExactRows": 4,
+    "exactTargetRowsObserved": 5
+  },
+  "applications": [
+    {
+      "targetId": "TA2:2357",
+      "english": "rectus abdominis muscle",
+      "modern": "배곧은근",
+      "traditional": "복직근",
+      "sourceSurfaceRows": 2,
+      "exactSourceObjects": true,
+      "learnerBindingCreated": false,
+      "newGeometryCreated": false
+    },
+    {
+      "targetId": "TA2:2147",
+      "english": "platysma",
+      "modern": "넓은목근",
+      "traditional": "활경근",
+      "sourceSurfaceRows": 2,
+      "exactSourceObjects": true,
+      "learnerBindingCreated": false,
+      "newGeometryCreated": false
+    },
+    {
+      "targetId": "TA2:2363",
+      "english": "pyramidalis muscle",
+      "modern": "배세모근",
+      "traditional": "추체근",
+      "sourceSurfaceRows": 2,
+      "exactSourceObjects": true,
+      "learnerBindingCreated": false,
+      "newGeometryCreated": false
+    },
+    {
+      "targetId": "TA2:2052",
+      "english": "levator palpebrae superioris",
+      "modern": "눈꺼풀올림근",
+      "traditional": "상안검거근",
+      "sourceSurfaceRows": 2,
+      "exactSourceObjects": true,
+      "learnerBindingCreated": false,
+      "newGeometryCreated": false
+    },
+    {
+      "targetId": "TA2:2532",
+      "english": "lumbrical muscles of hand",
+      "modern": null,
+      "traditional": "손의 충양근",
+      "sourceSurfaceRows": 2,
+      "exactSourceObjects": true,
+      "learnerBindingCreated": false,
+      "newGeometryCreated": false
+    },
+    {
+      "targetId": "TA2:2056",
+      "english": "frontalis muscle",
+      "modern": null,
+      "traditional": "전두근",
+      "sourceSurfaceRows": 2,
+      "exactSourceObjects": true,
+      "learnerBindingCreated": false,
+      "newGeometryCreated": false
+    },
+    {
+      "targetId": "TA2:1255",
+      "english": "trapezium bone",
+      "modern": null,
+      "traditional": "대능형골",
+      "sourceSurfaceRows": 2,
+      "exactSourceObjects": true,
+      "learnerBindingCreated": false,
+      "newGeometryCreated": false
+    }
+  ],
+  "notApplied": {
+    "exactAlternatives": 3,
+    "nonexactHandScopeCandidate": 1,
+    "reason": "Alternative or scope differs from exact frozen target and is retained as an exception only."
+  },
+  "sourceLayerSeparation": {
+    "searchIndex": "not used for display names",
+    "openedHtml": "the visible exact or similar result sections on the KMLE aggregate HTML query pages were inspected",
+    "originalDictionaryRecords": "not opened",
+    "edition": "exact edition/revision unavailable unless old KMA section label is shown",
+    "humanReview": "not performed",
+    "hanja": "no Hanzi glyphs captured or stored"
+  },
+  "status": "applied only the listed exact supported name fields; no Hanja glyph, person review, learner binding, or geometry."
+}
