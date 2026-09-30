@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "t100-source-completion-verification-v1",
+  "taskId": "T100",
+  "recordedAt": "2026-10-01 Asia/Seoul",
+  "baselineHead": "3352e4c3416ffd6df527227cd17faad763d4c36d",
+  "commands": [
+    {
+      "command": "python3 atlas-data/tools/build_t100_source_supplement.py --check",
+      "result": "passed",
+      "detail": "T100 cached source supplement is current"
+    },
+    {
+      "command": "pnpm --dir atlas-web run test:whole-body",
+      "result": "passed",
+      "passed": 54,
+      "failed": 0,
+      "detail": "compiled dataset contracts/dependency hashes verified across 46 chunks"
+    },
+    {
+      "command": "pnpm --dir atlas-web run test:delivery",
+      "result": "passed",
+      "passed": 3,
+      "failed": 0,
+      "detail": "single-scene source composition, compact runtime allowlist, stale/path/chunk safeguards"
+    },
+    {
+      "command": "pnpm --dir atlas-web run typecheck",
+      "result": "passed"
+    },
+    {
+      "command": "pnpm --dir atlas-web run build",
+      "result": "passed",
+      "detail": "11 meshes/712192 bytes and 9 meshes/205392 bytes decoder checks passed; production build completed"
+    },
+    {
+      "command": "python3 work/tools/inspect_t100_progress.py",
+      "result": "passed",
+      "detail": "409/542 target paths, 427/563 membership paths, 672/672 base display surface name sets, 73 direct citation gaps; denominators unchanged"
+    }
+  ],
+  "buildWarning": "Vite reports App JS 955.03 kB minified > 500 kB advisory; build passes. This is recorded, not promoted to a new completion blocker.",
+  "pluginRouteResponseHashes": [
+    {
+      "url": "/__atlas/integration.json",
+      "method": "same Vite plugin middleware exercised by delivery harness, not a browser-network body read",
+      "status": 200,
+      "bytes": 887553,
+      "sha256": "1c08536e178af8cdd3426494cd975baaa40e4230d781ed30ec528c24e7895aa4",
+      "schema": "whole-body-local-runtime-v3",
+      "objects": 973,
+      "ZA": 960,
+      "BP3D": 13,
+      "scope": {
+        "targets": 542,
+        "memberships": 563,
+        "regions": 12
+      }
+    },
+    {
+      "url": "/__atlas/datasets/human-atlas-local/manifest.json",
+      "method": "same Vite plugin middleware exercised by delivery harness, not a browser-network body read",
+      "status": 200,
+      "bytes": 1789386,
+      "sha256": "bdcb2ed90046551317b2d215aa0c0b32460c391d8513b3df4d54472274111355",
+      "instances": 973,
+      "ZA": 960,
+      "BP3D": 13
+    }
+  ],
+  "actualBrowser": "13/13 source-key routes selected one BP3D source object within a single canvas; visible source matched selection, loaded with zero pending/failures, card names/region and explicit side matched. 12/13 objects have all 3 names; the 2 salpingopharyngeus sides share a null traditional Korean field. Thirteen selected surfaces were visually seen; no screenshot files persisted and no whole-group extent claim was made.",
+  "browserResponseHash": "not captured; the browser evaluation scope did not expose fetch/performance, endpoint navigation was blocked, and local urllib access was denied. The plugin middleware response body hash above is available and is not represented as a browser network hash.",
+  "limitations": [
+    "No PNG/JPEG files were persisted. CUA screenshot byte hashes are recorded in browser-qa.json; screenshots were returned to the tool and visually inspected only.",
+    "No target/group/global extent acceptance.",
+    "No target-term citation gap closed.",
+    "No active-scene FPS/GPU/total process memory remeasurement; not repeated solely for this cached-source addition.",
+    "No source download, no source-cache geometry rewrite, no new canonical binding, no rights/review promotion."
+  ],
+  "status": "T100 remains in_progress / partial at the same nextUnit.",
+  "executionProjectionSync": {
+    "commands": [
+      {
+        "command": "python3 work/tools/sync_execution.py",
+        "result": "passed",
+        "updatedViews": 0
+      },
+      {
+        "command": "python3 work/tools/sync_execution.py --check",
+        "result": "passed",
+        "detail": "Execution projections match; no writes."
+      }
+    ],
+    "status": "generated work/STATUS.md and work/NEXT.md views were already synchronized; existing shared WIP was not rewritten"
+  }
+}

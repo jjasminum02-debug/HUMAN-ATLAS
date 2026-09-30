@@ -32,7 +32,7 @@ export default function App() {
     useEffect(() => {
         const abort = new AbortController();
         const timer = setTimeout(() => { abort.abort(); setError(true); }, 20000);
-        void Promise.all(['/__atlas/datasets/za-c7010a9/manifest.json', '/__atlas/integration.json'].map(async (url) => { const response = await fetch(url, { signal: abort.signal }); if (!response.ok)
+        void Promise.all(['/__atlas/datasets/human-atlas-local/manifest.json', '/__atlas/integration.json'].map(async (url) => { const response = await fetch(url, { signal: abort.signal }); if (!response.ok)
             throw Error('자료 연결 실패'); return response.json(); }))
             .then(([raw, overlay]) => { if (abort.signal.aborted)
             return; const dataset = validateDataset(raw); const integration = validateRuntimeIntegration(overlay, dataset); setData({ dataset, integration }); setRoute(readDatasetRoute(location.search, integration.objects, regionIds)); })
@@ -96,7 +96,7 @@ export default function App() {
     <button className="region-all-toggle" aria-pressed={!route.regions.length} onClick={() => { setQuery(''); navigate({ regions: [], selected: route.selected }, true); }}>전신</button>
     <nav className="region-grid" aria-label="12개 해부학 부위">{navigation.categories.map(c => <button key={c.id} aria-pressed={route.regions.includes(c.id)} className={route.regions.includes(c.id) ? 'is-current' : ''} onClick={() => toggleRegion(c.id)}>{c.labelKo}</button>)}</nav>
     <div className="region-list-heading"><span className="eyebrow">{query.trim() ? 'SEARCH RESULTS' : 'STRUCTURES'}</span><h2>{query.trim() ? '검색 결과' : title}</h2><p className="result-count" role="status">{rows.length}개 이름 · 좌우 모형 함께 보기</p></div>
-    <nav className="study-list region-structure-list" aria-label="구조 목록">{rows.map(r => <button key={r.sourceKey} className={selected?.names.en === r.names.en ? 'selected' : ''} aria-pressed={selected?.names.en === r.names.en} onClick={() => select(r.sourceKey)}><span>{r.label}</span>{r.label !== r.names.en && <small>{r.names.en}</small>}{r.searchApproximate && <em>비슷한 이름</em>}</button>)}{!rows.length && <p className="quiet-note">등록된 이름을 찾지 못했습니다. 다른 이름으로 검색해 보세요.</p>}</nav>
+    <nav className="study-list region-structure-list" aria-label="구조 목록">{rows.map(r => { const sameSearchConcept = selected && (selected.searchGroupKey ?? selected.sourceKey) === (r.searchGroupKey ?? r.sourceKey); return <button key={r.sourceKey} className={sameSearchConcept ? 'selected' : ''} aria-pressed={Boolean(sameSearchConcept)} onClick={() => select(r.sourceKey)}><span>{r.label}</span>{r.label !== r.names.en && <small>{r.names.en}</small>}{r.searchApproximate && <em>비슷한 이름</em>}</button>; })}{!rows.length && <p className="quiet-note">등록된 이름을 찾지 못했습니다. 다른 이름으로 검색해 보세요.</p>}</nav>
    </aside>
    <section id="atlas-stage" tabIndex={-1} className="study-stage" aria-label={`${title} 학습 장면`}><div className="stage-caption" aria-hidden={!entered}><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{title}</h2><p>회전하고 확대하며 구조를 살펴보세요.</p></div>
     <WholeBodyViewer homeRevision={homeRevision} datasetSource={data} onEntered={setEntered} regionIds={route.regions} selectedId={route.selected} selectedIds={route.selected ? [route.selected] : []} whole={!route.regions.length} onWholeChange={() => navigate({ regions: [], selected: route.selected })} onSelect={select}/>

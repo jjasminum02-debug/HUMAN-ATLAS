@@ -219,7 +219,7 @@ export interface RuntimeStructureRecord {
 }
 export interface RuntimeIntegration {
     schemaVersion: 1;
-    projectionSchema: 'za-local-runtime-v2';
+    projectionSchema: 'whole-body-local-runtime-v3';
     revision: string;
     datasetRevision: string;
     sourceOverlaySha256: string;
@@ -728,7 +728,7 @@ export function validateIntegration(value: unknown, dataset: Dataset, frozenTarg
         throw Error('incomplete trapezius surface-assignment correction pair');
     return i;
 }
-const RUNTIME_SCHEMA = 'za-local-runtime-v2' as const;
+const RUNTIME_SCHEMA = 'whole-body-local-runtime-v3' as const;
 const FROZEN_T100_SCOPE = { targets: 542, memberships: 563, regions: 12 } as const;
 const projectionKeys = ['schemaVersion', 'projectionSchema', 'revision', 'datasetRevision', 'sourceOverlaySha256', 'rightsEvidenceSha256', 'scope', 'policy', 'objects'];
 const runtimeRowKeys = ['sourceKey', 'searchGroupKey', 'kind', 'regionIds', 'side', 'label', 'names', 'aliases', 'haConceptId', 'learnerConceptKeys', 'localDisplayEligible', 'inspectionEligible', 'defaultVisible', 'sourceOnly', 'humanReview', 'publicRedistribution', 'sourceHiddenStatePreserved', 'localUseRights', 'displayDecisionBasis', 'hardHoldReasons', 'bounds', 'relatedMuscles'];
@@ -842,7 +842,7 @@ export function validateRuntimeIntegration(value: unknown, dataset: Dataset): Ru
             || !Array.isArray(row.hardHoldReasons) || row.hardHoldReasons.some(reason => typeof reason !== 'string')
             || !Array.isArray(row.bounds) || row.bounds.length !== 2 || row.bounds.some(bound => !Array.isArray(bound) || bound.length !== 3 || bound.some(value => !Number.isFinite(value))))
             throw Error('runtime row policy/geometry');
-        if (row.localDisplayEligible !== runtimeCanDisplayLocally(row, i.policy) || row.defaultVisible !== row.localDisplayEligible
+        if (row.localDisplayEligible !== runtimeCanDisplayLocally(row, i.policy) || row.defaultVisible && !row.localDisplayEligible
             || row.inspectionEligible && !row.localDisplayEligible)
             throw Error('runtime local display decision mismatch');
         if (!Array.isArray(row.relatedMuscles))

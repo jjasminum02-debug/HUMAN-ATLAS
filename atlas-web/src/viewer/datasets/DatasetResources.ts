@@ -36,20 +36,23 @@ export class DatasetResources {
     const doc=JSON.parse(new TextDecoder().decode(new Uint8Array(bytes,20,size)));
     if(doc.images?.length||doc.animations?.length||doc.skins?.length||doc.buffers?.some((b:{uri?:string})=>b.uri))throw Error('unexpected external/animated resource');
     const gltf=await new GLTFLoader().parseAsync(bytes,'');const meshes=new Map<string,THREE.BufferGeometry>();
-    const materials=new Set<THREE.Material>();const buffers=new Set<ArrayBufferLike>();
+    const materials=new Set<THREE.Material>();const buffers=new Set<ArrayBufferLike>();const unrequested:THREE.BufferGeometry[]=[];
     try {
       gltf.scene.traverse(o=>{if(o instanceof THREE.Mesh){
-        const key=o.userData.resourceKey as string;
-        if(!chunk.resources.includes(key)||meshes.has(key)||!o.geometry.index)throw Error('resource identity/index');
+        const key=o.userData.resourceKey??o.userData.stableMeshAssetId??o.name;
+        if(typeof key!=='string'||!o.geometry.index)throw Error('resource identity/index');
+        if(!chunk.resources.includes(key)){unrequested.push(o.geometry);for(const m of Array.isArray(o.material)?o.material:[o.material])materials.add(m);return;}
+        if(meshes.has(key))throw Error('duplicate requested resource');
         meshes.set(key,o.geometry);
         for(const a of Object.values(o.geometry.attributes) as THREE.BufferAttribute[])buffers.add(a.array.buffer);
         buffers.add(o.geometry.index.array.buffer);
         for(const m of Array.isArray(o.material)?o.material:[o.material])materials.add(m);
       }});
       if(meshes.size!==chunk.resources.length)throw Error('missing resource');
+      const retained=new Set(meshes.values());for(const geometry of new Set(unrequested))if(!retained.has(geometry))geometry.dispose();
       const size=[...buffers].reduce((n,b)=>n+b.byteLength,0);
-      // GLTFLoader may share the entire BIN buffer; measure real retained arrays, not estimates.
-      return {meshes,bytes:size};
+      // Cache cost includes the fetched GLB, while render cost still uses retained geometry views.
+      return {meshes,bytes:Math.max(size,chunk.bytes)};
     }catch(e){gltf.scene.traverse(o=>{if(o instanceof THREE.Mesh)o.geometry.dispose();});throw e;}
     finally {for(const m of materials)m.dispose();}
   }

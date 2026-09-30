@@ -1,0 +1,2496 @@
+{
+  "schemaVersion": 1,
+  "id": "T100-cached-source-supplement-2026-10-01-v1",
+  "namespace": "bp3d-r4",
+  "revision": "bp3d-r4-t100-cached-candidates-v1",
+  "composition": "append validated local source objects into the existing ZA scene and renderer",
+  "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+  "sourceRelease": "BodyParts3D Release 4.0",
+  "sourceLicense": "CC BY-SA 2.1 Japan",
+  "attribution": "BodyParts3D, (c) The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan",
+  "sourceFrame": "BodyParts3D Release 4.0 native static reference",
+  "sourceUnit": "mm, evidenced per exact OBJ Bounds(mm) header",
+  "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+  "projectUnit": "m",
+  "geometrySpace": "registered_world",
+  "registration": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or source-label change",
+  "pose": "bodyparts3d-r4-static-reference",
+  "nodeTransform": "identity; registered project coordinates baked into T77 evaluated geometry",
+  "rightsDecision": {
+    "evidencePath": "atlas-data/manifests/bodyparts3d-r4-t77/display-policy.json",
+    "evidenceSha256": "eeea154883f4887c4d4c8bd75ddca98ab0767db3bb486bc4e511f03d363fb19d",
+    "decisionId": "T77-local-display-v1",
+    "decisionRevision": "T77-local-display-v1",
+    "localDisplay": "per-item allowed only for the thirteen listed objects",
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "sourceOnly": true
+  },
+  "inputSha256": {
+    "work/evidence/T100/closure-audit-2026-09-30/action-queue.json": "b0d88bd438e84586ce01f3d4ca36586cd48706a721a892edb48cf982cc51240d",
+    "atlas-data/catalog/target-scope-t96.json": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
+    "work/evidence/T78/source-elements.json": "4be2aa589705081d28e2c2ce31389f9ec7a2b025def41dfbeb6c02f96e268789",
+    "work/evidence/T77/current-inventory.json": "2e703352f40e410cc941ee393463218360f37ce95140212dad6fa1d387096768",
+    "atlas-data/manifests/bodyparts3d-r4-t77/display-policy.json": "eeea154883f4887c4d4c8bd75ddca98ab0767db3bb486bc4e511f03d363fb19d",
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/manifest.json": "67a2f79b9248d18a754a6567e1b0bb4b1fce698ad0e3100a172b428ee58341f8",
+    "atlas-data/source-cache/datasets/bp3d/registry.json": "d83b9a0502af42e1742aa46fb22112e46927003c193dad5f42058fe7541df6a3",
+    "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_element_parts.txt": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea",
+    "work/evidence/T50/scene-contract.md": "2697496d18bd1fc58adca557d95364092f7c7189bff4218277882142c8b26fa4",
+    "work/evidence/T69/diagnostic.json": "39f8086df7042349633e3c19e7e60e81669ca49be63b0d4e3be88d15cfd93cca"
+  },
+  "targetScopeSha256": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
+  "sourceElementCatalogSha256": "4be2aa589705081d28e2c2ce31389f9ec7a2b025def41dfbeb6c02f96e268789",
+  "sourceMeshMetadataPath": "work/evidence/T77/current-inventory.json",
+  "sourceMeshMetadataSha256": "2e703352f40e410cc941ee393463218360f37ce95140212dad6fa1d387096768",
+  "sourceGroupMembership": {
+    "FMA16580": {
+      "path": "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_element_parts.txt",
+      "sha256": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea",
+      "memberElementFileIds": [
+        "FJ3152",
+        "FJ3288",
+        "FJ3393"
+      ],
+      "targetId": "TA2:1282",
+      "extentStatus": "source-declared-three-member-set; not global anatomy completeness"
+    }
+  },
+  "localEvidence": {
+    "sourceIndexOrExcerptOnly": true,
+    "nameFields": {
+      "FJ3152": {
+        "koModern": {
+          "value": "볼기뼈",
+          "url": "https://m.kmle.co.kr/search.php?Search=hip+bone",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "KMLE search-index result, standard anatomical terminology entry for the individual source member; edition not exposed",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "관골",
+          "url": "https://m.kmle.co.kr/search.php?Search=hip+bone",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "KMLE search-index result, standard anatomical terminology entry for the individual source member; edition not exposed",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Hip bone",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:1282; T78 source element FJ3152 / FMA16586"
+        }
+      },
+      "FJ3288": {
+        "koModern": {
+          "value": "볼기뼈",
+          "url": "https://m.kmle.co.kr/search.php?Search=hip+bone",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "KMLE search-index result, standard anatomical terminology entry for the individual source member; edition not exposed",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "관골",
+          "url": "https://m.kmle.co.kr/search.php?Search=hip+bone",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "KMLE search-index result, standard anatomical terminology entry for the individual source member; edition not exposed",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Hip bone",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:1282; T78 source element FJ3288 / FMA16587"
+        }
+      },
+      "FJ3393": {
+        "koModern": {
+          "value": "엉치뼈",
+          "url": "https://m.kmle.co.kr/search.php?Search=sacrum",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "KMLE search-index result, standard anatomical terminology entry for the individual source member; edition not exposed",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "천골",
+          "url": "https://m.kmle.co.kr/search.php?Search=sacrum",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "KMLE search-index result, standard anatomical terminology entry for the individual source member; edition not exposed",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Sacrum",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:1282; T78 source element FJ3393 / FMA16202"
+        }
+      },
+      "FJ2741": {
+        "koModern": {
+          "value": "입천장올림근",
+          "url": "https://m.kmle.co.kr/search.php?Search=levator+veli+palatini+muscle",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 맞춤 결과, Levator veli palatini m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "구개범거근",
+          "url": "https://m.kmle.co.kr/search.php?Search=levator+veli+palatini+muscle",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 맞춤 결과, Levator veli palatini m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Levator veli palatini muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2128; T78 source element FJ2741 / FMA46729"
+        }
+      },
+      "FJ2753": {
+        "koModern": {
+          "value": "입천장올림근",
+          "url": "https://m.kmle.co.kr/search.php?Search=levator+veli+palatini+muscle",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 맞춤 결과, Levator veli palatini m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "구개범거근",
+          "url": "https://m.kmle.co.kr/search.php?Search=levator+veli+palatini+muscle",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 맞춤 결과, Levator veli palatini m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Levator veli palatini muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2128; T78 source element FJ2753 / FMA46728"
+        }
+      },
+      "FJ2748": {
+        "koModern": {
+          "value": "입천장긴장근",
+          "url": "https://m.kmle.co.kr/search.php?Search=tensor",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 맞춤 결과, Tensor veli palatini m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "구개범장근",
+          "url": "https://m.kmle.co.kr/search.php?Search=tensor",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 맞춤 결과, Tensor veli palatini m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Tensor veli palatini muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2129; T78 source element FJ2748 / FMA46732"
+        }
+      },
+      "FJ2760": {
+        "koModern": {
+          "value": "입천장긴장근",
+          "url": "https://m.kmle.co.kr/search.php?Search=tensor",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 맞춤 결과, Tensor veli palatini m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "구개범장근",
+          "url": "https://m.kmle.co.kr/search.php?Search=tensor",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 맞춤 결과, Tensor veli palatini m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Tensor veli palatini muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2129; T78 source element FJ2760 / FMA46731"
+        }
+      },
+      "FJ2745": {
+        "koModern": {
+          "value": "귀관인두근",
+          "url": "https://m.kmle.co.kr/search.php?Search=salpingo",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한의협 의학용어 사전 맞춤 결과, salpingopharyngeus muscle; two Korean forms listed without an explicit older-term field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": null,
+          "url": "https://m.kmle.co.kr/search.php?Search=salpingo",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": null,
+          "openedOriginalDictionaryRecord": false,
+          "missingReason": "검색 결과에 현대명과 대체형은 있으나 이 필드의 옛 용어 판정이 명시되지 않음"
+        },
+        "en": {
+          "value": "Salpingopharyngeus muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2191; T78 source element FJ2745 / FMA46670"
+        }
+      },
+      "FJ2757": {
+        "koModern": {
+          "value": "귀관인두근",
+          "url": "https://m.kmle.co.kr/search.php?Search=salpingo",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한의협 의학용어 사전 맞춤 결과, salpingopharyngeus muscle; two Korean forms listed without an explicit older-term field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": null,
+          "url": "https://m.kmle.co.kr/search.php?Search=salpingo",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": null,
+          "openedOriginalDictionaryRecord": false,
+          "missingReason": "검색 결과에 현대명과 대체형은 있으나 이 필드의 옛 용어 판정이 명시되지 않음"
+        },
+        "en": {
+          "value": "Salpingopharyngeus muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2191; T78 source element FJ2757 / FMA46669"
+        }
+      },
+      "FJ2788": {
+        "koModern": {
+          "value": "성대근",
+          "url": "https://m.kmle.co.kr/search.php?Search=musculus+vocalis",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, KMLE medical terminology exact query, musculus vocalis entry; 성대근",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "성대근",
+          "url": "https://m.kmle.co.kr/search.php?Search=musculus+vocalis",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, KMLE medical terminology exact query, musculus vocalis entry; 성대근",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Vocalis muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2202; T78 source element FJ2788 / FMA46593"
+        }
+      },
+      "FJ2806": {
+        "koModern": {
+          "value": "성대근",
+          "url": "https://m.kmle.co.kr/search.php?Search=musculus+vocalis",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, KMLE medical terminology exact query, musculus vocalis entry; 성대근",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "성대근",
+          "url": "https://m.kmle.co.kr/search.php?Search=musculus+vocalis",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, KMLE medical terminology exact query, musculus vocalis entry; 성대근",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Vocalis muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2202; T78 source element FJ2806 / FMA46592"
+        }
+      },
+      "FJ1538": {
+        "koModern": {
+          "value": "머리반가시근",
+          "url": "https://m.kmle.co.kr/search.php?Search=semis",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 matched entry, Semispinalis capitis m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "두반극근",
+          "url": "https://m.kmle.co.kr/search.php?Search=semis",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 matched entry, Semispinalis capitis m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Semispinalis capitis muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2283; T78 source element FJ1538 / FMA22876"
+        }
+      },
+      "FJ1538M": {
+        "koModern": {
+          "value": "머리반가시근",
+          "url": "https://m.kmle.co.kr/search.php?Search=semis",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 matched entry, Semispinalis capitis m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "두반극근",
+          "url": "https://m.kmle.co.kr/search.php?Search=semis",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 matched entry, Semispinalis capitis m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Semispinalis capitis muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2283; T78 source element FJ1538M / FMA22877"
+        }
+      }
+    },
+    "sourceIdentityAndFrame": "T78 source-elements + T77 compiled GLB manifest/geometry extras + T50 scene contract + T69 frame registration evidence",
+    "noNewDownload": true,
+    "originalSourceBytesMutated": false
+  },
+  "targets": {
+    "TA2:1282": {
+      "targetId": "TA2:1282",
+      "english": "bony pelvis",
+      "latin": "pelvis ossea",
+      "semanticKind": "bone_group",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "targetKoreanGroupName": null,
+      "sourceObjectCount": 3,
+      "relationKind": "source_declared_group_member",
+      "fullAnatomicalExtentClaim": false,
+      "canonicalHaBindingCreated": false
+    },
+    "TA2:2128": {
+      "targetId": "TA2:2128",
+      "english": "levator veli palatini",
+      "latin": "levator veli palatini",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "targetKoreanGroupName": "입천장올림근",
+      "sourceObjectCount": 2,
+      "relationKind": "exact_target_with_explicit_side_child",
+      "fullAnatomicalExtentClaim": false,
+      "canonicalHaBindingCreated": false
+    },
+    "TA2:2129": {
+      "targetId": "TA2:2129",
+      "english": "tensor veli palatini",
+      "latin": "tensor veli palatini",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "targetKoreanGroupName": "입천장긴장근",
+      "sourceObjectCount": 2,
+      "relationKind": "exact_target_with_explicit_side_child",
+      "fullAnatomicalExtentClaim": false,
+      "canonicalHaBindingCreated": false
+    },
+    "TA2:2191": {
+      "targetId": "TA2:2191",
+      "english": "salpingopharyngeus muscle",
+      "latin": "musculus salpingopharyngeus",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "targetKoreanGroupName": "귀관인두근",
+      "sourceObjectCount": 2,
+      "relationKind": "exact_target_with_explicit_side_child",
+      "fullAnatomicalExtentClaim": false,
+      "canonicalHaBindingCreated": false
+    },
+    "TA2:2202": {
+      "targetId": "TA2:2202",
+      "english": "vocalis muscle",
+      "latin": "musculus vocalis",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "targetKoreanGroupName": "성대근",
+      "sourceObjectCount": 2,
+      "relationKind": "exact_target_with_explicit_side_child",
+      "fullAnatomicalExtentClaim": false,
+      "canonicalHaBindingCreated": false
+    },
+    "TA2:2283": {
+      "targetId": "TA2:2283",
+      "english": "semispinalis capitis muscle",
+      "latin": "musculus semispinalis capitis",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "back",
+      "regionIds": [
+        "back"
+      ],
+      "targetKoreanGroupName": "머리반가시근",
+      "sourceObjectCount": 2,
+      "relationKind": "exact_target_with_explicit_side_child",
+      "fullAnatomicalExtentClaim": false,
+      "canonicalHaBindingCreated": false
+    }
+  },
+  "chunks": [
+    {
+      "id": "06-gluteal-hip-bone-0",
+      "sourceNamespace": "bp3d-r4",
+      "url": "/__atlas/body/06-gluteal-hip-bone-0.glb",
+      "sha256": "a38810d8b018177a6e99e37d65957c7bce5a2f5a95105ed7bc37034e50ad6d21",
+      "bytes": 105976,
+      "geometryBytes": 89172,
+      "resources": [
+        "HA-MESH-BP3D4-FJ3152",
+        "HA-MESH-BP3D4-FJ3288"
+      ],
+      "level": "overview",
+      "selectionScoped": true
+    },
+    {
+      "id": "15-pelvis-perineum-bone-1",
+      "sourceNamespace": "bp3d-r4",
+      "url": "/__atlas/body/15-pelvis-perineum-bone-1.glb",
+      "sha256": "0fa92ba735b8a17bffda7aac43a4409d5a8d7b981941da36ceaff1fc79b5e986",
+      "bytes": 199948,
+      "geometryBytes": 186564,
+      "resources": [
+        "HA-MESH-BP3D4-FJ3393"
+      ],
+      "level": "overview",
+      "selectionScoped": true
+    },
+    {
+      "id": "10-head-muscle-0",
+      "sourceNamespace": "bp3d-r4",
+      "url": "/__atlas/body/10-head-muscle-0.glb",
+      "sha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16",
+      "bytes": 2385972,
+      "geometryBytes": 1001676,
+      "resources": [
+        "HA-MESH-BP3D4-FJ2741",
+        "HA-MESH-BP3D4-FJ2753",
+        "HA-MESH-BP3D4-FJ2748",
+        "HA-MESH-BP3D4-FJ2760"
+      ],
+      "level": "overview",
+      "selectionScoped": true
+    },
+    {
+      "id": "14-neck-muscle-0",
+      "sourceNamespace": "bp3d-r4",
+      "url": "/__atlas/body/14-neck-muscle-0.glb",
+      "sha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6",
+      "bytes": 7341968,
+      "geometryBytes": 388440,
+      "resources": [
+        "HA-MESH-BP3D4-FJ2745",
+        "HA-MESH-BP3D4-FJ2757",
+        "HA-MESH-BP3D4-FJ2788",
+        "HA-MESH-BP3D4-FJ2806"
+      ],
+      "level": "overview",
+      "selectionScoped": true
+    },
+    {
+      "id": "02-back-muscle-0",
+      "sourceNamespace": "bp3d-r4",
+      "url": "/__atlas/body/02-back-muscle-0.glb",
+      "sha256": "cd4b4a211649281d628a040ad9dc1d9f598fa552e37e8cd4bf83abfa46a93acd",
+      "bytes": 7575744,
+      "geometryBytes": 154512,
+      "resources": [
+        "HA-MESH-BP3D4-FJ1538",
+        "HA-MESH-BP3D4-FJ1538M"
+      ],
+      "level": "overview",
+      "selectionScoped": true
+    }
+  ],
+  "objects": [
+    {
+      "sourceKey": "BP3D4-FJ3152",
+      "sourceName": "Right hip bone",
+      "resource": "HA-MESH-BP3D4-FJ3152",
+      "chunkId": "06-gluteal-hip-bone-0",
+      "kind": "skeletal_surface",
+      "side": "right",
+      "searchGroupKey": "bp3d-concept-hip_bone_right",
+      "label": "볼기뼈 · 오른쪽",
+      "names": {
+        "koModern": "볼기뼈",
+        "koTraditional": "관골",
+        "en": "Hip bone"
+      },
+      "aliases": [
+        "bony pelvis",
+        "pelvis ossea"
+      ],
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "sourceRegionIds": [
+        "gluteal-hip"
+      ],
+      "bounds": [
+        [
+          -0.14487199485301971,
+          0.7521529793739319,
+          0.0011187799973413348
+        ],
+        [
+          -0.002790299942716956,
+          0.9578689932823181,
+          0.13901899755001068
+        ]
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "geometrySpace": "registered_world",
+      "sourceNamespace": "bp3d-r4",
+      "lods": {
+        "overview": {
+          "resource": "HA-MESH-BP3D4-FJ3152",
+          "chunk": "06-gluteal-hip-bone-0",
+          "triangles": 2374,
+          "vertices": 1282,
+          "geometryBytes": 45012
+        },
+        "detail": {
+          "resource": "HA-MESH-BP3D4-FJ3152",
+          "chunk": "06-gluteal-hip-bone-0",
+          "triangles": 2374,
+          "vertices": 1282,
+          "geometryBytes": 45012
+        }
+      },
+      "sourceIdentity": {
+        "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+        "sourceRelease": "BodyParts3D Release 4.0",
+        "sourceElementFileId": "FJ3152",
+        "sourceFmaId": "FMA16586",
+        "targetFmaId": "FMA16580",
+        "sourceSha256": "99de26e5435a8397b6f39b44ada75319d5e8fa1433e1ea38fdd8de9e079ed9a9",
+        "priorCompiledGeometrySha256": "3b03257af26e337e99798d1871b8e946a08b98bc3287cb3ac1075373579630bd",
+        "compiledChunkSha256": "a38810d8b018177a6e99e37d65957c7bce5a2f5a95105ed7bc37034e50ad6d21",
+        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
+        "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or source-label change",
+        "pose": "bodyparts3d-r4-static-reference",
+        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "triangleCount": 2374,
+        "vertexCount": 1282,
+        "compiledMeshAccessorSha256": "d1892fd872af038c21bdbbbc2d3d34e6f80bcdbde5c631b8d18e87ad1d2cc3b9",
+        "sourceLaterality": "right"
+      },
+      "rights": {
+        "sourceLicense": "CC BY-SA 2.1 Japan",
+        "localDisplay": "allowed_per_T77_item_decision",
+        "localDecisionId": "T77-local-display-v1",
+        "publicRedistribution": "held",
+        "canonicalHaBinding": null,
+        "sourceOnly": true,
+        "humanReview": "not_performed",
+        "retainedNonBlockingReasons": []
+      },
+      "nameEvidence": {
+        "koModern": {
+          "value": "볼기뼈",
+          "url": "https://m.kmle.co.kr/search.php?Search=hip+bone",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "KMLE search-index result, standard anatomical terminology entry for the individual source member; edition not exposed",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "관골",
+          "url": "https://m.kmle.co.kr/search.php?Search=hip+bone",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "KMLE search-index result, standard anatomical terminology entry for the individual source member; edition not exposed",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Hip bone",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:1282; T78 source element FJ3152 / FMA16586"
+        }
+      },
+      "targetAssociation": {
+        "targetId": "TA2:1282",
+        "targetFmaGroup": "FMA16580",
+        "targetEnglish": "bony pelvis",
+        "targetLatin": "pelvis ossea",
+        "relationKind": "source_declared_group_member",
+        "sourceMemberFma": "FMA16586",
+        "proof": "exact FMA16580 PART-OF row names the candidate FJ member",
+        "completeness": "three source-declared members in this exact cached FMA group; not a whole-anatomy completeness claim",
+        "canonicalHaBindingCreated": false,
+        "exactPartOfTableSha256": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea",
+        "sourceGroupMemberSet": [
+          "FJ3152",
+          "FJ3288",
+          "FJ3393"
+        ]
+      }
+    },
+    {
+      "sourceKey": "BP3D4-FJ3288",
+      "sourceName": "Left hip bone",
+      "resource": "HA-MESH-BP3D4-FJ3288",
+      "chunkId": "06-gluteal-hip-bone-0",
+      "kind": "skeletal_surface",
+      "side": "left",
+      "searchGroupKey": "bp3d-concept-hip_bone_left",
+      "label": "볼기뼈 · 왼쪽",
+      "names": {
+        "koModern": "볼기뼈",
+        "koTraditional": "관골",
+        "en": "Hip bone"
+      },
+      "aliases": [
+        "bony pelvis",
+        "pelvis ossea"
+      ],
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "sourceRegionIds": [
+        "gluteal-hip"
+      ],
+      "bounds": [
+        [
+          0.0027503101155161858,
+          0.7519509792327881,
+          0.0013149400474503636
+        ],
+        [
+          0.14475399255752563,
+          0.9580900073051453,
+          0.1390949934720993
+        ]
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "geometrySpace": "registered_world",
+      "sourceNamespace": "bp3d-r4",
+      "lods": {
+        "overview": {
+          "resource": "HA-MESH-BP3D4-FJ3288",
+          "chunk": "06-gluteal-hip-bone-0",
+          "triangles": 2332,
+          "vertices": 1257,
+          "geometryBytes": 44160
+        },
+        "detail": {
+          "resource": "HA-MESH-BP3D4-FJ3288",
+          "chunk": "06-gluteal-hip-bone-0",
+          "triangles": 2332,
+          "vertices": 1257,
+          "geometryBytes": 44160
+        }
+      },
+      "sourceIdentity": {
+        "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+        "sourceRelease": "BodyParts3D Release 4.0",
+        "sourceElementFileId": "FJ3288",
+        "sourceFmaId": "FMA16587",
+        "targetFmaId": "FMA16580",
+        "sourceSha256": "bfc8b489fee0945cd1d387cf64bd3691af8e033fa72f9fccae45cfd55ac88694",
+        "priorCompiledGeometrySha256": "da2866c3b55ba68793cb6344cdb534419fd2d9519d93d5dfcc5f33736cf63dbf",
+        "compiledChunkSha256": "a38810d8b018177a6e99e37d65957c7bce5a2f5a95105ed7bc37034e50ad6d21",
+        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
+        "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or source-label change",
+        "pose": "bodyparts3d-r4-static-reference",
+        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "triangleCount": 2332,
+        "vertexCount": 1257,
+        "compiledMeshAccessorSha256": "449fbda33b5899c378e02ca2e590adbb156ede918a12a81365fcabba0dc0e792",
+        "sourceLaterality": "left"
+      },
+      "rights": {
+        "sourceLicense": "CC BY-SA 2.1 Japan",
+        "localDisplay": "allowed_per_T77_item_decision",
+        "localDecisionId": "T77-local-display-v1",
+        "publicRedistribution": "held",
+        "canonicalHaBinding": null,
+        "sourceOnly": true,
+        "humanReview": "not_performed",
+        "retainedNonBlockingReasons": []
+      },
+      "nameEvidence": {
+        "koModern": {
+          "value": "볼기뼈",
+          "url": "https://m.kmle.co.kr/search.php?Search=hip+bone",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "KMLE search-index result, standard anatomical terminology entry for the individual source member; edition not exposed",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "관골",
+          "url": "https://m.kmle.co.kr/search.php?Search=hip+bone",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "KMLE search-index result, standard anatomical terminology entry for the individual source member; edition not exposed",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Hip bone",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:1282; T78 source element FJ3288 / FMA16587"
+        }
+      },
+      "targetAssociation": {
+        "targetId": "TA2:1282",
+        "targetFmaGroup": "FMA16580",
+        "targetEnglish": "bony pelvis",
+        "targetLatin": "pelvis ossea",
+        "relationKind": "source_declared_group_member",
+        "sourceMemberFma": "FMA16587",
+        "proof": "exact FMA16580 PART-OF row names the candidate FJ member",
+        "completeness": "three source-declared members in this exact cached FMA group; not a whole-anatomy completeness claim",
+        "canonicalHaBindingCreated": false,
+        "exactPartOfTableSha256": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea",
+        "sourceGroupMemberSet": [
+          "FJ3152",
+          "FJ3288",
+          "FJ3393"
+        ]
+      }
+    },
+    {
+      "sourceKey": "BP3D4-FJ3393",
+      "sourceName": "Sacrum",
+      "resource": "HA-MESH-BP3D4-FJ3393",
+      "chunkId": "15-pelvis-perineum-bone-1",
+      "kind": "skeletal_surface",
+      "side": null,
+      "searchGroupKey": "bp3d-concept-sacrum_midline",
+      "label": "엉치뼈",
+      "names": {
+        "koModern": "엉치뼈",
+        "koTraditional": "천골",
+        "en": "Sacrum"
+      },
+      "aliases": [
+        "bony pelvis",
+        "pelvis ossea"
+      ],
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "sourceRegionIds": [
+        "pelvis-perineum"
+      ],
+      "bounds": [
+        [
+          -0.059591200202703476,
+          0.7828369736671448,
+          -0.00725375022739172
+        ],
+        [
+          0.05820289999246597,
+          0.9272000193595886,
+          0.08139640092849731
+        ]
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "geometrySpace": "registered_world",
+      "sourceNamespace": "bp3d-r4",
+      "lods": {
+        "overview": {
+          "resource": "HA-MESH-BP3D4-FJ3393",
+          "chunk": "15-pelvis-perineum-bone-1",
+          "triangles": 9922,
+          "vertices": 5293,
+          "geometryBytes": 186564
+        },
+        "detail": {
+          "resource": "HA-MESH-BP3D4-FJ3393",
+          "chunk": "15-pelvis-perineum-bone-1",
+          "triangles": 9922,
+          "vertices": 5293,
+          "geometryBytes": 186564
+        }
+      },
+      "sourceIdentity": {
+        "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+        "sourceRelease": "BodyParts3D Release 4.0",
+        "sourceElementFileId": "FJ3393",
+        "sourceFmaId": "FMA16202",
+        "targetFmaId": "FMA16580",
+        "sourceSha256": "cd04cc9f78d758ba34e92896914f647d22d257b9e7e51b97764670f694033489",
+        "priorCompiledGeometrySha256": "8f855b2b93d189fe5c266dadac69860296fd6d6a4d5e42f55d58f978719b630c",
+        "compiledChunkSha256": "0fa92ba735b8a17bffda7aac43a4409d5a8d7b981941da36ceaff1fc79b5e986",
+        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
+        "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+        "pose": "bodyparts3d-r4-static-reference",
+        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "triangleCount": 9922,
+        "vertexCount": 5293,
+        "compiledMeshAccessorSha256": "71a36a663318ad16eeb60897e087735d12e8db28fca5fc38f3aa2d14b48286fc",
+        "sourceLaterality": "not_lateralized_by_exact_source_name"
+      },
+      "rights": {
+        "sourceLicense": "CC BY-SA 2.1 Japan",
+        "localDisplay": "allowed_per_T77_item_decision",
+        "localDecisionId": "T77-local-display-v1",
+        "publicRedistribution": "held",
+        "canonicalHaBinding": null,
+        "sourceOnly": true,
+        "humanReview": "not_performed",
+        "retainedNonBlockingReasons": [
+          "not_canonical_learner_binding",
+          "human_anatomy_review_not_performed",
+          "public_redistribution_held"
+        ]
+      },
+      "nameEvidence": {
+        "koModern": {
+          "value": "엉치뼈",
+          "url": "https://m.kmle.co.kr/search.php?Search=sacrum",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "KMLE search-index result, standard anatomical terminology entry for the individual source member; edition not exposed",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "천골",
+          "url": "https://m.kmle.co.kr/search.php?Search=sacrum",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "KMLE search-index result, standard anatomical terminology entry for the individual source member; edition not exposed",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Sacrum",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:1282; T78 source element FJ3393 / FMA16202"
+        }
+      },
+      "targetAssociation": {
+        "targetId": "TA2:1282",
+        "targetFmaGroup": "FMA16580",
+        "targetEnglish": "bony pelvis",
+        "targetLatin": "pelvis ossea",
+        "relationKind": "source_declared_group_member",
+        "sourceMemberFma": "FMA16202",
+        "proof": "exact FMA16580 PART-OF row names the candidate FJ member",
+        "completeness": "three source-declared members in this exact cached FMA group; not a whole-anatomy completeness claim",
+        "canonicalHaBindingCreated": false,
+        "exactPartOfTableSha256": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea",
+        "sourceGroupMemberSet": [
+          "FJ3152",
+          "FJ3288",
+          "FJ3393"
+        ]
+      }
+    },
+    {
+      "sourceKey": "BP3D4-FJ2741",
+      "sourceName": "Left levator veli palatini",
+      "resource": "HA-MESH-BP3D4-FJ2741",
+      "chunkId": "10-head-muscle-0",
+      "kind": "muscle_surface_or_part",
+      "side": "left",
+      "searchGroupKey": "bp3d-concept-levator_veli_palatini",
+      "label": "입천장올림근",
+      "names": {
+        "koModern": "입천장올림근",
+        "koTraditional": "구개범거근",
+        "en": "Levator veli palatini muscle"
+      },
+      "aliases": [
+        "levator veli palatini",
+        "levator veli palatini muscle",
+        "musculus levator veli palatini"
+      ],
+      "regionIds": [
+        "head"
+      ],
+      "sourceRegionIds": [
+        "head"
+      ],
+      "bounds": [
+        [
+          0.001386099960654974,
+          1.4636800289154053,
+          0.08818049728870392
+        ],
+        [
+          0.031355299055576324,
+          1.4969799518585205,
+          0.11010599881410599
+        ]
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "geometrySpace": "registered_world",
+      "sourceNamespace": "bp3d-r4",
+      "lods": {
+        "overview": {
+          "resource": "HA-MESH-BP3D4-FJ2741",
+          "chunk": "10-head-muscle-0",
+          "triangles": 12318,
+          "vertices": 6821,
+          "geometryBytes": 237612
+        },
+        "detail": {
+          "resource": "HA-MESH-BP3D4-FJ2741",
+          "chunk": "10-head-muscle-0",
+          "triangles": 12318,
+          "vertices": 6821,
+          "geometryBytes": 237612
+        }
+      },
+      "sourceIdentity": {
+        "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+        "sourceRelease": "BodyParts3D Release 4.0",
+        "sourceElementFileId": "FJ2741",
+        "sourceFmaId": "FMA46729",
+        "targetFmaId": "FMA46727",
+        "sourceSha256": "a7d1e90a0757aa53530521cd25ee855da0cc1e774dbe2c6bcaf372ab9e654259",
+        "priorCompiledGeometrySha256": null,
+        "compiledChunkSha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16",
+        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
+        "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring",
+        "pose": "bodyparts3d-r4-static-reference",
+        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "triangleCount": 12318,
+        "vertexCount": 6821,
+        "compiledMeshAccessorSha256": "6fbf280dc7bc78fad6a54663c6666e6e9f90e82248973958e9352d2ca6db7382",
+        "sourceLaterality": "left"
+      },
+      "rights": {
+        "sourceLicense": "CC BY-SA 2.1 Japan",
+        "localDisplay": "allowed_per_T77_item_decision",
+        "localDecisionId": "T77-local-display-v1",
+        "publicRedistribution": "held",
+        "canonicalHaBinding": null,
+        "sourceOnly": true,
+        "humanReview": "not_performed",
+        "retainedNonBlockingReasons": []
+      },
+      "nameEvidence": {
+        "koModern": {
+          "value": "입천장올림근",
+          "url": "https://m.kmle.co.kr/search.php?Search=levator+veli+palatini+muscle",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 맞춤 결과, Levator veli palatini m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "구개범거근",
+          "url": "https://m.kmle.co.kr/search.php?Search=levator+veli+palatini+muscle",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 맞춤 결과, Levator veli palatini m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Levator veli palatini muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2128; T78 source element FJ2741 / FMA46729"
+        }
+      },
+      "targetAssociation": {
+        "targetId": "TA2:2128",
+        "targetFma": "FMA46727",
+        "targetEnglish": "levator veli palatini",
+        "targetLatin": "levator veli palatini",
+        "relationKind": "exact_target_with_explicit_side_child",
+        "sourceMemberFma": "FMA46729",
+        "proof": "exact T96 target English/Latin equals the frozen FMA parent concept; FMA child and source name state the explicit side",
+        "canonicalHaBindingCreated": false
+      }
+    },
+    {
+      "sourceKey": "BP3D4-FJ2753",
+      "sourceName": "Right levator veli palatini",
+      "resource": "HA-MESH-BP3D4-FJ2753",
+      "chunkId": "10-head-muscle-0",
+      "kind": "muscle_surface_or_part",
+      "side": "right",
+      "searchGroupKey": "bp3d-concept-levator_veli_palatini",
+      "label": "입천장올림근",
+      "names": {
+        "koModern": "입천장올림근",
+        "koTraditional": "구개범거근",
+        "en": "Levator veli palatini muscle"
+      },
+      "aliases": [
+        "levator veli palatini",
+        "levator veli palatini muscle",
+        "musculus levator veli palatini"
+      ],
+      "regionIds": [
+        "head"
+      ],
+      "sourceRegionIds": [
+        "head"
+      ],
+      "bounds": [
+        [
+          -0.032665301114320755,
+          1.4636900424957275,
+          0.08817970007658005
+        ],
+        [
+          -0.0025623301044106483,
+          1.4969899654388428,
+          0.11010000109672546
+        ]
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "geometrySpace": "registered_world",
+      "sourceNamespace": "bp3d-r4",
+      "lods": {
+        "overview": {
+          "resource": "HA-MESH-BP3D4-FJ2753",
+          "chunk": "10-head-muscle-0",
+          "triangles": 12312,
+          "vertices": 6835,
+          "geometryBytes": 237912
+        },
+        "detail": {
+          "resource": "HA-MESH-BP3D4-FJ2753",
+          "chunk": "10-head-muscle-0",
+          "triangles": 12312,
+          "vertices": 6835,
+          "geometryBytes": 237912
+        }
+      },
+      "sourceIdentity": {
+        "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+        "sourceRelease": "BodyParts3D Release 4.0",
+        "sourceElementFileId": "FJ2753",
+        "sourceFmaId": "FMA46728",
+        "targetFmaId": "FMA46727",
+        "sourceSha256": "84b856010832db82451e940a172f175d3a753c08e7284663bd40de6ef427fbcc",
+        "priorCompiledGeometrySha256": null,
+        "compiledChunkSha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16",
+        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
+        "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring",
+        "pose": "bodyparts3d-r4-static-reference",
+        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "triangleCount": 12312,
+        "vertexCount": 6835,
+        "compiledMeshAccessorSha256": "748e2639da53531c742fc77898775c794c8ab6f7e9fb49f5b19cf46d73f2034f",
+        "sourceLaterality": "right"
+      },
+      "rights": {
+        "sourceLicense": "CC BY-SA 2.1 Japan",
+        "localDisplay": "allowed_per_T77_item_decision",
+        "localDecisionId": "T77-local-display-v1",
+        "publicRedistribution": "held",
+        "canonicalHaBinding": null,
+        "sourceOnly": true,
+        "humanReview": "not_performed",
+        "retainedNonBlockingReasons": []
+      },
+      "nameEvidence": {
+        "koModern": {
+          "value": "입천장올림근",
+          "url": "https://m.kmle.co.kr/search.php?Search=levator+veli+palatini+muscle",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 맞춤 결과, Levator veli palatini m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "구개범거근",
+          "url": "https://m.kmle.co.kr/search.php?Search=levator+veli+palatini+muscle",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 맞춤 결과, Levator veli palatini m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Levator veli palatini muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2128; T78 source element FJ2753 / FMA46728"
+        }
+      },
+      "targetAssociation": {
+        "targetId": "TA2:2128",
+        "targetFma": "FMA46727",
+        "targetEnglish": "levator veli palatini",
+        "targetLatin": "levator veli palatini",
+        "relationKind": "exact_target_with_explicit_side_child",
+        "sourceMemberFma": "FMA46728",
+        "proof": "exact T96 target English/Latin equals the frozen FMA parent concept; FMA child and source name state the explicit side",
+        "canonicalHaBindingCreated": false
+      }
+    },
+    {
+      "sourceKey": "BP3D4-FJ2748",
+      "sourceName": "Left tensor veli palatini",
+      "resource": "HA-MESH-BP3D4-FJ2748",
+      "chunkId": "10-head-muscle-0",
+      "kind": "muscle_surface_or_part",
+      "side": "left",
+      "searchGroupKey": "bp3d-concept-tensor_veli_palatini",
+      "label": "입천장긴장근",
+      "names": {
+        "koModern": "입천장긴장근",
+        "koTraditional": "구개범장근",
+        "en": "Tensor veli palatini muscle"
+      },
+      "aliases": [
+        "musculus tensor veli palatini",
+        "tensor veli palatini",
+        "tensor veli palatini muscle"
+      ],
+      "regionIds": [
+        "head"
+      ],
+      "sourceRegionIds": [
+        "head"
+      ],
+      "bounds": [
+        [
+          0.0007606970029883087,
+          1.4609999656677246,
+          0.10010000318288803
+        ],
+        [
+          0.016656899824738503,
+          1.5033400058746338,
+          0.12049199640750885
+        ]
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "geometrySpace": "registered_world",
+      "sourceNamespace": "bp3d-r4",
+      "lods": {
+        "overview": {
+          "resource": "HA-MESH-BP3D4-FJ2748",
+          "chunk": "10-head-muscle-0",
+          "triangles": 13872,
+          "vertices": 7523,
+          "geometryBytes": 263784
+        },
+        "detail": {
+          "resource": "HA-MESH-BP3D4-FJ2748",
+          "chunk": "10-head-muscle-0",
+          "triangles": 13872,
+          "vertices": 7523,
+          "geometryBytes": 263784
+        }
+      },
+      "sourceIdentity": {
+        "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+        "sourceRelease": "BodyParts3D Release 4.0",
+        "sourceElementFileId": "FJ2748",
+        "sourceFmaId": "FMA46732",
+        "targetFmaId": "FMA46730",
+        "sourceSha256": "d6bca501cda0201b5221acbee58f2a58eff4784886825f72a0c40b1e1f7cbf97",
+        "priorCompiledGeometrySha256": null,
+        "compiledChunkSha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16",
+        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
+        "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring",
+        "pose": "bodyparts3d-r4-static-reference",
+        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "triangleCount": 13872,
+        "vertexCount": 7523,
+        "compiledMeshAccessorSha256": "79939052b3dbadae221cfa6ae8ac85af375a4cf6bc0f90022b9c9da6dc420a69",
+        "sourceLaterality": "left"
+      },
+      "rights": {
+        "sourceLicense": "CC BY-SA 2.1 Japan",
+        "localDisplay": "allowed_per_T77_item_decision",
+        "localDecisionId": "T77-local-display-v1",
+        "publicRedistribution": "held",
+        "canonicalHaBinding": null,
+        "sourceOnly": true,
+        "humanReview": "not_performed",
+        "retainedNonBlockingReasons": []
+      },
+      "nameEvidence": {
+        "koModern": {
+          "value": "입천장긴장근",
+          "url": "https://m.kmle.co.kr/search.php?Search=tensor",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 맞춤 결과, Tensor veli palatini m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "구개범장근",
+          "url": "https://m.kmle.co.kr/search.php?Search=tensor",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 맞춤 결과, Tensor veli palatini m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Tensor veli palatini muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2129; T78 source element FJ2748 / FMA46732"
+        }
+      },
+      "targetAssociation": {
+        "targetId": "TA2:2129",
+        "targetFma": "FMA46730",
+        "targetEnglish": "tensor veli palatini",
+        "targetLatin": "tensor veli palatini",
+        "relationKind": "exact_target_with_explicit_side_child",
+        "sourceMemberFma": "FMA46732",
+        "proof": "exact T96 target English/Latin equals the frozen FMA parent concept; FMA child and source name state the explicit side",
+        "canonicalHaBindingCreated": false
+      }
+    },
+    {
+      "sourceKey": "BP3D4-FJ2760",
+      "sourceName": "Right tensor veli palatini",
+      "resource": "HA-MESH-BP3D4-FJ2760",
+      "chunkId": "10-head-muscle-0",
+      "kind": "muscle_surface_or_part",
+      "side": "right",
+      "searchGroupKey": "bp3d-concept-tensor_veli_palatini",
+      "label": "입천장긴장근",
+      "names": {
+        "koModern": "입천장긴장근",
+        "koTraditional": "구개범장근",
+        "en": "Tensor veli palatini muscle"
+      },
+      "aliases": [
+        "musculus tensor veli palatini",
+        "tensor veli palatini",
+        "tensor veli palatini muscle"
+      ],
+      "regionIds": [
+        "head"
+      ],
+      "sourceRegionIds": [
+        "head"
+      ],
+      "bounds": [
+        [
+          -0.017973799258470535,
+          1.4609899520874023,
+          0.10010000318288803
+        ],
+        [
+          -0.0020690499804913998,
+          1.503350019454956,
+          0.12049499899148941
+        ]
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "geometrySpace": "registered_world",
+      "sourceNamespace": "bp3d-r4",
+      "lods": {
+        "overview": {
+          "resource": "HA-MESH-BP3D4-FJ2760",
+          "chunk": "10-head-muscle-0",
+          "triangles": 13872,
+          "vertices": 7464,
+          "geometryBytes": 262368
+        },
+        "detail": {
+          "resource": "HA-MESH-BP3D4-FJ2760",
+          "chunk": "10-head-muscle-0",
+          "triangles": 13872,
+          "vertices": 7464,
+          "geometryBytes": 262368
+        }
+      },
+      "sourceIdentity": {
+        "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+        "sourceRelease": "BodyParts3D Release 4.0",
+        "sourceElementFileId": "FJ2760",
+        "sourceFmaId": "FMA46731",
+        "targetFmaId": "FMA46730",
+        "sourceSha256": "ceddb3e852a795354bf31e6151dd9d2feaacb9f4612e3f0376d980dc063fc33a",
+        "priorCompiledGeometrySha256": null,
+        "compiledChunkSha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16",
+        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
+        "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring",
+        "pose": "bodyparts3d-r4-static-reference",
+        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "triangleCount": 13872,
+        "vertexCount": 7464,
+        "compiledMeshAccessorSha256": "59b86c7950be421c7068a14dd55edf5162074dc798b1f429824c34117f16d8f2",
+        "sourceLaterality": "right"
+      },
+      "rights": {
+        "sourceLicense": "CC BY-SA 2.1 Japan",
+        "localDisplay": "allowed_per_T77_item_decision",
+        "localDecisionId": "T77-local-display-v1",
+        "publicRedistribution": "held",
+        "canonicalHaBinding": null,
+        "sourceOnly": true,
+        "humanReview": "not_performed",
+        "retainedNonBlockingReasons": []
+      },
+      "nameEvidence": {
+        "koModern": {
+          "value": "입천장긴장근",
+          "url": "https://m.kmle.co.kr/search.php?Search=tensor",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 맞춤 결과, Tensor veli palatini m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "구개범장근",
+          "url": "https://m.kmle.co.kr/search.php?Search=tensor",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 맞춤 결과, Tensor veli palatini m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Tensor veli palatini muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2129; T78 source element FJ2760 / FMA46731"
+        }
+      },
+      "targetAssociation": {
+        "targetId": "TA2:2129",
+        "targetFma": "FMA46730",
+        "targetEnglish": "tensor veli palatini",
+        "targetLatin": "tensor veli palatini",
+        "relationKind": "exact_target_with_explicit_side_child",
+        "sourceMemberFma": "FMA46731",
+        "proof": "exact T96 target English/Latin equals the frozen FMA parent concept; FMA child and source name state the explicit side",
+        "canonicalHaBindingCreated": false
+      }
+    },
+    {
+      "sourceKey": "BP3D4-FJ2745",
+      "sourceName": "Left salpingopharyngeus",
+      "resource": "HA-MESH-BP3D4-FJ2745",
+      "chunkId": "14-neck-muscle-0",
+      "kind": "muscle_surface_or_part",
+      "side": "left",
+      "searchGroupKey": "bp3d-concept-salpingopharyngeus",
+      "label": "귀관인두근",
+      "names": {
+        "koModern": "귀관인두근",
+        "koTraditional": null,
+        "en": "Salpingopharyngeus muscle"
+      },
+      "aliases": [
+        "musculus salpingopharyngeus",
+        "salpingopharyngeus muscle",
+        "이관인두근"
+      ],
+      "regionIds": [
+        "neck"
+      ],
+      "sourceRegionIds": [
+        "neck"
+      ],
+      "bounds": [
+        [
+          0.007165980059653521,
+          1.4576300382614136,
+          0.08652819693088531
+        ],
+        [
+          0.02098429948091507,
+          1.4987900257110596,
+          0.10631699860095978
+        ]
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "geometrySpace": "registered_world",
+      "sourceNamespace": "bp3d-r4",
+      "lods": {
+        "overview": {
+          "resource": "HA-MESH-BP3D4-FJ2745",
+          "chunk": "14-neck-muscle-0",
+          "triangles": 9152,
+          "vertices": 4846,
+          "geometryBytes": 171216
+        },
+        "detail": {
+          "resource": "HA-MESH-BP3D4-FJ2745",
+          "chunk": "14-neck-muscle-0",
+          "triangles": 9152,
+          "vertices": 4846,
+          "geometryBytes": 171216
+        }
+      },
+      "sourceIdentity": {
+        "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+        "sourceRelease": "BodyParts3D Release 4.0",
+        "sourceElementFileId": "FJ2745",
+        "sourceFmaId": "FMA46670",
+        "targetFmaId": "FMA46665",
+        "sourceSha256": "81c70a6f8ab2de5d20a715cdf5339d756ca7171c473adc645231929b2732bf31",
+        "priorCompiledGeometrySha256": null,
+        "compiledChunkSha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6",
+        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
+        "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring",
+        "pose": "bodyparts3d-r4-static-reference",
+        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "triangleCount": 9152,
+        "vertexCount": 4846,
+        "compiledMeshAccessorSha256": "c01bd6e6e1f346353ce63fe3b5592c0f1c399c0ec4454083e5f31fc53d9445fb",
+        "sourceLaterality": "left"
+      },
+      "rights": {
+        "sourceLicense": "CC BY-SA 2.1 Japan",
+        "localDisplay": "allowed_per_T77_item_decision",
+        "localDecisionId": "T77-local-display-v1",
+        "publicRedistribution": "held",
+        "canonicalHaBinding": null,
+        "sourceOnly": true,
+        "humanReview": "not_performed",
+        "retainedNonBlockingReasons": []
+      },
+      "nameEvidence": {
+        "koModern": {
+          "value": "귀관인두근",
+          "url": "https://m.kmle.co.kr/search.php?Search=salpingo",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한의협 의학용어 사전 맞춤 결과, salpingopharyngeus muscle; two Korean forms listed without an explicit older-term field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": null,
+          "url": "https://m.kmle.co.kr/search.php?Search=salpingo",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": null,
+          "openedOriginalDictionaryRecord": false,
+          "missingReason": "검색 결과에 현대명과 대체형은 있으나 이 필드의 옛 용어 판정이 명시되지 않음"
+        },
+        "en": {
+          "value": "Salpingopharyngeus muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2191; T78 source element FJ2745 / FMA46670"
+        }
+      },
+      "targetAssociation": {
+        "targetId": "TA2:2191",
+        "targetFma": "FMA46665",
+        "targetEnglish": "salpingopharyngeus muscle",
+        "targetLatin": "musculus salpingopharyngeus",
+        "relationKind": "exact_target_with_explicit_side_child",
+        "sourceMemberFma": "FMA46670",
+        "proof": "exact T96 target English/Latin equals the frozen FMA parent concept; FMA child and source name state the explicit side",
+        "canonicalHaBindingCreated": false
+      }
+    },
+    {
+      "sourceKey": "BP3D4-FJ2757",
+      "sourceName": "Right salpingopharyngeus",
+      "resource": "HA-MESH-BP3D4-FJ2757",
+      "chunkId": "14-neck-muscle-0",
+      "kind": "muscle_surface_or_part",
+      "side": "right",
+      "searchGroupKey": "bp3d-concept-salpingopharyngeus",
+      "label": "귀관인두근",
+      "names": {
+        "koModern": "귀관인두근",
+        "koTraditional": null,
+        "en": "Salpingopharyngeus muscle"
+      },
+      "aliases": [
+        "musculus salpingopharyngeus",
+        "salpingopharyngeus muscle",
+        "이관인두근"
+      ],
+      "regionIds": [
+        "neck"
+      ],
+      "sourceRegionIds": [
+        "neck"
+      ],
+      "bounds": [
+        [
+          -0.02228749915957451,
+          1.4576300382614136,
+          0.08652810007333755
+        ],
+        [
+          -0.008479000069200993,
+          1.4987900257110596,
+          0.1063069999217987
+        ]
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "geometrySpace": "registered_world",
+      "sourceNamespace": "bp3d-r4",
+      "lods": {
+        "overview": {
+          "resource": "HA-MESH-BP3D4-FJ2757",
+          "chunk": "14-neck-muscle-0",
+          "triangles": 9152,
+          "vertices": 4853,
+          "geometryBytes": 171384
+        },
+        "detail": {
+          "resource": "HA-MESH-BP3D4-FJ2757",
+          "chunk": "14-neck-muscle-0",
+          "triangles": 9152,
+          "vertices": 4853,
+          "geometryBytes": 171384
+        }
+      },
+      "sourceIdentity": {
+        "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+        "sourceRelease": "BodyParts3D Release 4.0",
+        "sourceElementFileId": "FJ2757",
+        "sourceFmaId": "FMA46669",
+        "targetFmaId": "FMA46665",
+        "sourceSha256": "b10e40d550d6208c907df65d844403071233d8088a109b2be5f925cd5d9e6c36",
+        "priorCompiledGeometrySha256": null,
+        "compiledChunkSha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6",
+        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
+        "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring",
+        "pose": "bodyparts3d-r4-static-reference",
+        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "triangleCount": 9152,
+        "vertexCount": 4853,
+        "compiledMeshAccessorSha256": "45ab7301bda01904ddc3bb90c027cba2f644a9b74a80406ed551fc917f78a441",
+        "sourceLaterality": "right"
+      },
+      "rights": {
+        "sourceLicense": "CC BY-SA 2.1 Japan",
+        "localDisplay": "allowed_per_T77_item_decision",
+        "localDecisionId": "T77-local-display-v1",
+        "publicRedistribution": "held",
+        "canonicalHaBinding": null,
+        "sourceOnly": true,
+        "humanReview": "not_performed",
+        "retainedNonBlockingReasons": []
+      },
+      "nameEvidence": {
+        "koModern": {
+          "value": "귀관인두근",
+          "url": "https://m.kmle.co.kr/search.php?Search=salpingo",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한의협 의학용어 사전 맞춤 결과, salpingopharyngeus muscle; two Korean forms listed without an explicit older-term field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": null,
+          "url": "https://m.kmle.co.kr/search.php?Search=salpingo",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": null,
+          "openedOriginalDictionaryRecord": false,
+          "missingReason": "검색 결과에 현대명과 대체형은 있으나 이 필드의 옛 용어 판정이 명시되지 않음"
+        },
+        "en": {
+          "value": "Salpingopharyngeus muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2191; T78 source element FJ2757 / FMA46669"
+        }
+      },
+      "targetAssociation": {
+        "targetId": "TA2:2191",
+        "targetFma": "FMA46665",
+        "targetEnglish": "salpingopharyngeus muscle",
+        "targetLatin": "musculus salpingopharyngeus",
+        "relationKind": "exact_target_with_explicit_side_child",
+        "sourceMemberFma": "FMA46669",
+        "proof": "exact T96 target English/Latin equals the frozen FMA parent concept; FMA child and source name state the explicit side",
+        "canonicalHaBindingCreated": false
+      }
+    },
+    {
+      "sourceKey": "BP3D4-FJ2788",
+      "sourceName": "Left vocalis",
+      "resource": "HA-MESH-BP3D4-FJ2788",
+      "chunkId": "14-neck-muscle-0",
+      "kind": "muscle_surface_or_part",
+      "side": "left",
+      "searchGroupKey": "bp3d-concept-vocalis",
+      "label": "성대근",
+      "names": {
+        "koModern": "성대근",
+        "koTraditional": "성대근",
+        "en": "Vocalis muscle"
+      },
+      "aliases": [
+        "musculus vocalis",
+        "vocalis",
+        "vocalis muscle"
+      ],
+      "regionIds": [
+        "neck"
+      ],
+      "sourceRegionIds": [
+        "neck"
+      ],
+      "bounds": [
+        [
+          0.0011831000447273254,
+          1.4036999940872192,
+          0.10088299959897995
+        ],
+        [
+          0.002770490013062954,
+          1.4051300287246704,
+          0.11497899889945984
+        ]
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "geometrySpace": "registered_world",
+      "sourceNamespace": "bp3d-r4",
+      "lods": {
+        "overview": {
+          "resource": "HA-MESH-BP3D4-FJ2788",
+          "chunk": "14-neck-muscle-0",
+          "triangles": 1152,
+          "vertices": 679,
+          "geometryBytes": 23208
+        },
+        "detail": {
+          "resource": "HA-MESH-BP3D4-FJ2788",
+          "chunk": "14-neck-muscle-0",
+          "triangles": 1152,
+          "vertices": 679,
+          "geometryBytes": 23208
+        }
+      },
+      "sourceIdentity": {
+        "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+        "sourceRelease": "BodyParts3D Release 4.0",
+        "sourceElementFileId": "FJ2788",
+        "sourceFmaId": "FMA46593",
+        "targetFmaId": "FMA46591",
+        "sourceSha256": "dd26f669e127e5c5fae7ff796da0f516887f8c3834bbde1f2881d3a222cc2375",
+        "priorCompiledGeometrySha256": null,
+        "compiledChunkSha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6",
+        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
+        "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring",
+        "pose": "bodyparts3d-r4-static-reference",
+        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "triangleCount": 1152,
+        "vertexCount": 679,
+        "compiledMeshAccessorSha256": "47093dc0f1da01c43b4cb4833440b3af7371404b1839bf52b7c6cac58bb6f539",
+        "sourceLaterality": "left"
+      },
+      "rights": {
+        "sourceLicense": "CC BY-SA 2.1 Japan",
+        "localDisplay": "allowed_per_T77_item_decision",
+        "localDecisionId": "T77-local-display-v1",
+        "publicRedistribution": "held",
+        "canonicalHaBinding": null,
+        "sourceOnly": true,
+        "humanReview": "not_performed",
+        "retainedNonBlockingReasons": []
+      },
+      "nameEvidence": {
+        "koModern": {
+          "value": "성대근",
+          "url": "https://m.kmle.co.kr/search.php?Search=musculus+vocalis",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, KMLE medical terminology exact query, musculus vocalis entry; 성대근",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "성대근",
+          "url": "https://m.kmle.co.kr/search.php?Search=musculus+vocalis",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, KMLE medical terminology exact query, musculus vocalis entry; 성대근",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Vocalis muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2202; T78 source element FJ2788 / FMA46593"
+        }
+      },
+      "targetAssociation": {
+        "targetId": "TA2:2202",
+        "targetFma": "FMA46591",
+        "targetEnglish": "vocalis muscle",
+        "targetLatin": "musculus vocalis",
+        "relationKind": "exact_target_with_explicit_side_child",
+        "sourceMemberFma": "FMA46593",
+        "proof": "exact T96 target English/Latin equals the frozen FMA parent concept; FMA child and source name state the explicit side",
+        "canonicalHaBindingCreated": false
+      }
+    },
+    {
+      "sourceKey": "BP3D4-FJ2806",
+      "sourceName": "Right vocalis",
+      "resource": "HA-MESH-BP3D4-FJ2806",
+      "chunkId": "14-neck-muscle-0",
+      "kind": "muscle_surface_or_part",
+      "side": "right",
+      "searchGroupKey": "bp3d-concept-vocalis",
+      "label": "성대근",
+      "names": {
+        "koModern": "성대근",
+        "koTraditional": "성대근",
+        "en": "Vocalis muscle"
+      },
+      "aliases": [
+        "musculus vocalis",
+        "vocalis",
+        "vocalis muscle"
+      ],
+      "regionIds": [
+        "neck"
+      ],
+      "sourceRegionIds": [
+        "neck"
+      ],
+      "bounds": [
+        [
+          -0.004087029956281185,
+          1.403689980506897,
+          0.10087999701499939
+        ],
+        [
+          -0.0024958299472928047,
+          1.4051300287246704,
+          0.11497099697589874
+        ]
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "geometrySpace": "registered_world",
+      "sourceNamespace": "bp3d-r4",
+      "lods": {
+        "overview": {
+          "resource": "HA-MESH-BP3D4-FJ2806",
+          "chunk": "14-neck-muscle-0",
+          "triangles": 1148,
+          "vertices": 656,
+          "geometryBytes": 22632
+        },
+        "detail": {
+          "resource": "HA-MESH-BP3D4-FJ2806",
+          "chunk": "14-neck-muscle-0",
+          "triangles": 1148,
+          "vertices": 656,
+          "geometryBytes": 22632
+        }
+      },
+      "sourceIdentity": {
+        "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+        "sourceRelease": "BodyParts3D Release 4.0",
+        "sourceElementFileId": "FJ2806",
+        "sourceFmaId": "FMA46592",
+        "targetFmaId": "FMA46591",
+        "sourceSha256": "f4b83790f1c6364785f6ec6a8428443e7f20cfe48ed9a14234bb8aff1d80f2a9",
+        "priorCompiledGeometrySha256": null,
+        "compiledChunkSha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6",
+        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
+        "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring",
+        "pose": "bodyparts3d-r4-static-reference",
+        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "triangleCount": 1148,
+        "vertexCount": 656,
+        "compiledMeshAccessorSha256": "cf789ff6e1c9ba23a2071a42a1878d3ba931a7280406b6e8b2faf072fcd477a5",
+        "sourceLaterality": "right"
+      },
+      "rights": {
+        "sourceLicense": "CC BY-SA 2.1 Japan",
+        "localDisplay": "allowed_per_T77_item_decision",
+        "localDecisionId": "T77-local-display-v1",
+        "publicRedistribution": "held",
+        "canonicalHaBinding": null,
+        "sourceOnly": true,
+        "humanReview": "not_performed",
+        "retainedNonBlockingReasons": []
+      },
+      "nameEvidence": {
+        "koModern": {
+          "value": "성대근",
+          "url": "https://m.kmle.co.kr/search.php?Search=musculus+vocalis",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, KMLE medical terminology exact query, musculus vocalis entry; 성대근",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "성대근",
+          "url": "https://m.kmle.co.kr/search.php?Search=musculus+vocalis",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, KMLE medical terminology exact query, musculus vocalis entry; 성대근",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Vocalis muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2202; T78 source element FJ2806 / FMA46592"
+        }
+      },
+      "targetAssociation": {
+        "targetId": "TA2:2202",
+        "targetFma": "FMA46591",
+        "targetEnglish": "vocalis muscle",
+        "targetLatin": "musculus vocalis",
+        "relationKind": "exact_target_with_explicit_side_child",
+        "sourceMemberFma": "FMA46592",
+        "proof": "exact T96 target English/Latin equals the frozen FMA parent concept; FMA child and source name state the explicit side",
+        "canonicalHaBindingCreated": false
+      }
+    },
+    {
+      "sourceKey": "BP3D4-FJ1538",
+      "sourceName": "Right semispinalis capitis",
+      "resource": "HA-MESH-BP3D4-FJ1538",
+      "chunkId": "02-back-muscle-0",
+      "kind": "muscle_surface_or_part",
+      "side": "right",
+      "searchGroupKey": "bp3d-concept-semispinalis_capitis",
+      "label": "머리반가시근",
+      "names": {
+        "koModern": "머리반가시근",
+        "koTraditional": "두반극근",
+        "en": "Semispinalis capitis muscle"
+      },
+      "aliases": [
+        "musculus semispinalis capitis",
+        "semispinalis capitis",
+        "semispinalis capitis muscle"
+      ],
+      "regionIds": [
+        "back"
+      ],
+      "sourceRegionIds": [
+        "back"
+      ],
+      "bounds": [
+        [
+          -0.04350470006465912,
+          1.3752199411392212,
+          0.014606799930334091
+        ],
+        [
+          -0.003342190058901906,
+          1.494670033454895,
+          0.06877309828996658
+        ]
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "geometrySpace": "registered_world",
+      "sourceNamespace": "bp3d-r4",
+      "lods": {
+        "overview": {
+          "resource": "HA-MESH-BP3D4-FJ1538",
+          "chunk": "02-back-muscle-0",
+          "triangles": 1912,
+          "vertices": 2744,
+          "geometryBytes": 77328
+        },
+        "detail": {
+          "resource": "HA-MESH-BP3D4-FJ1538",
+          "chunk": "02-back-muscle-0",
+          "triangles": 1912,
+          "vertices": 2744,
+          "geometryBytes": 77328
+        }
+      },
+      "sourceIdentity": {
+        "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+        "sourceRelease": "BodyParts3D Release 4.0",
+        "sourceElementFileId": "FJ1538",
+        "sourceFmaId": "FMA22876",
+        "targetFmaId": "FMA22830",
+        "sourceSha256": "189e16f70c49bc3465f5216fcb0e0b0ffb114458fde427eaf5406ddd1a1bd315",
+        "priorCompiledGeometrySha256": "b24dccb2dbc48218b32ed3838275ac41e58fdd40d58d21902176906cff1167c2",
+        "compiledChunkSha256": "cd4b4a211649281d628a040ad9dc1d9f598fa552e37e8cd4bf83abfa46a93acd",
+        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
+        "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or source-label change",
+        "pose": "bodyparts3d-r4-static-reference",
+        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "triangleCount": 1912,
+        "vertexCount": 2744,
+        "compiledMeshAccessorSha256": "0fac91551143082f1df575a9e8fd354e4632023fce11209ca448ed9ebbb8ed01",
+        "sourceLaterality": "right"
+      },
+      "rights": {
+        "sourceLicense": "CC BY-SA 2.1 Japan",
+        "localDisplay": "allowed_per_T77_item_decision",
+        "localDecisionId": "T77-local-display-v1",
+        "publicRedistribution": "held",
+        "canonicalHaBinding": null,
+        "sourceOnly": true,
+        "humanReview": "not_performed",
+        "retainedNonBlockingReasons": []
+      },
+      "nameEvidence": {
+        "koModern": {
+          "value": "머리반가시근",
+          "url": "https://m.kmle.co.kr/search.php?Search=semis",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 matched entry, Semispinalis capitis m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "두반극근",
+          "url": "https://m.kmle.co.kr/search.php?Search=semis",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 matched entry, Semispinalis capitis m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Semispinalis capitis muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2283; T78 source element FJ1538 / FMA22876"
+        }
+      },
+      "targetAssociation": {
+        "targetId": "TA2:2283",
+        "targetFma": "FMA22830",
+        "targetEnglish": "semispinalis capitis muscle",
+        "targetLatin": "musculus semispinalis capitis",
+        "relationKind": "exact_target_with_explicit_side_child",
+        "sourceMemberFma": "FMA22876",
+        "proof": "exact T96 target English/Latin equals the frozen FMA parent concept; FMA child and source name state the explicit side",
+        "canonicalHaBindingCreated": false
+      }
+    },
+    {
+      "sourceKey": "BP3D4-FJ1538M",
+      "sourceName": "Left semispinalis capitis",
+      "resource": "HA-MESH-BP3D4-FJ1538M",
+      "chunkId": "02-back-muscle-0",
+      "kind": "muscle_surface_or_part",
+      "side": "left",
+      "searchGroupKey": "bp3d-concept-semispinalis_capitis",
+      "label": "머리반가시근",
+      "names": {
+        "koModern": "머리반가시근",
+        "koTraditional": "두반극근",
+        "en": "Semispinalis capitis muscle"
+      },
+      "aliases": [
+        "musculus semispinalis capitis",
+        "semispinalis capitis",
+        "semispinalis capitis muscle"
+      ],
+      "regionIds": [
+        "back"
+      ],
+      "sourceRegionIds": [
+        "back"
+      ],
+      "bounds": [
+        [
+          0.003342190058901906,
+          1.3752199411392212,
+          0.014606799930334091
+        ],
+        [
+          0.04350470006465912,
+          1.494670033454895,
+          0.06877309828996658
+        ]
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "geometrySpace": "registered_world",
+      "sourceNamespace": "bp3d-r4",
+      "lods": {
+        "overview": {
+          "resource": "HA-MESH-BP3D4-FJ1538M",
+          "chunk": "02-back-muscle-0",
+          "triangles": 1912,
+          "vertices": 2738,
+          "geometryBytes": 77184
+        },
+        "detail": {
+          "resource": "HA-MESH-BP3D4-FJ1538M",
+          "chunk": "02-back-muscle-0",
+          "triangles": 1912,
+          "vertices": 2738,
+          "geometryBytes": 77184
+        }
+      },
+      "sourceIdentity": {
+        "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+        "sourceRelease": "BodyParts3D Release 4.0",
+        "sourceElementFileId": "FJ1538M",
+        "sourceFmaId": "FMA22877",
+        "targetFmaId": "FMA22830",
+        "sourceSha256": "8f587a9a50e0ca6555ffb086e60445a499904ce55a5664340cce8ed12d86bb77",
+        "priorCompiledGeometrySha256": "62de0ab1ec7cbee4df0b1091180fa0c154e9fd3aa2b7cf365cf6bf2179ad7496",
+        "compiledChunkSha256": "cd4b4a211649281d628a040ad9dc1d9f598fa552e37e8cd4bf83abfa46a93acd",
+        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
+        "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or source-label change",
+        "pose": "bodyparts3d-r4-static-reference",
+        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "triangleCount": 1912,
+        "vertexCount": 2738,
+        "compiledMeshAccessorSha256": "db8ba11341c45ba02e03dd96939623cca0aa82d1f159ffa4d6257ac842986471",
+        "sourceLaterality": "left"
+      },
+      "rights": {
+        "sourceLicense": "CC BY-SA 2.1 Japan",
+        "localDisplay": "allowed_per_T77_item_decision",
+        "localDecisionId": "T77-local-display-v1",
+        "publicRedistribution": "held",
+        "canonicalHaBinding": null,
+        "sourceOnly": true,
+        "humanReview": "not_performed",
+        "retainedNonBlockingReasons": []
+      },
+      "nameEvidence": {
+        "koModern": {
+          "value": "머리반가시근",
+          "url": "https://m.kmle.co.kr/search.php?Search=semis",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 matched entry, Semispinalis capitis m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "koTraditional": {
+          "value": "두반극근",
+          "url": "https://m.kmle.co.kr/search.php?Search=semis",
+          "exactEdition": null,
+          "editionExposure": "not_exposed",
+          "accessDate": "2026-10-01",
+          "accessMethod": "search_index_excerpt",
+          "locator": "Search result, 대한해부학회 의학용어 사전 matched entry, Semispinalis capitis m.; modern term and [옛 용어] field",
+          "openedOriginalDictionaryRecord": false
+        },
+        "en": {
+          "value": "Semispinalis capitis muscle",
+          "source": "BodyParts3D T77 exact source concept + T96 target record",
+          "accessMethod": "local_frozen_metadata",
+          "locator": "T96 TA2:2283; T78 source element FJ1538M / FMA22877"
+        }
+      },
+      "targetAssociation": {
+        "targetId": "TA2:2283",
+        "targetFma": "FMA22830",
+        "targetEnglish": "semispinalis capitis muscle",
+        "targetLatin": "musculus semispinalis capitis",
+        "relationKind": "exact_target_with_explicit_side_child",
+        "sourceMemberFma": "FMA22877",
+        "proof": "exact T96 target English/Latin equals the frozen FMA parent concept; FMA child and source name state the explicit side",
+        "canonicalHaBindingCreated": false
+      }
+    }
+  ],
+  "summary": {
+    "assignedTargets": [
+      "TA2:1282",
+      "TA2:2128",
+      "TA2:2129",
+      "TA2:2191",
+      "TA2:2202",
+      "TA2:2283"
+    ],
+    "targetCount": 6,
+    "uniqueObjects": 13,
+    "uniqueChunkCount": 5,
+    "uniqueRegions": [
+      "back",
+      "head",
+      "neck",
+      "pelvis-perineum"
+    ],
+    "newCanonicalHaBindings": 0,
+    "humanReview": "not_performed",
+    "publicRedistribution": "held",
+    "targetTermEvidenceGapCountChanged": 0,
+    "newSourceGeometry": 0,
+    "sourceGeometryNewlyAvailableToMainLearnerScene": 13
+  }
+}

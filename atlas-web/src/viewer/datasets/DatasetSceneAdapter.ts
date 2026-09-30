@@ -38,7 +38,7 @@ export class DatasetSceneAdapter {
     setView(view: BodyView) {
         this.view = view;
         const regions = view.regionIds ?? (view.region ? [view.region] : []);
-        const keys = [...this.records.values()].filter(r => r.localDisplayEligible && (!regions.length || r.regionIds.some(x => regions.includes(x))) &&
+        const keys = [...this.records.values()].filter(r => r.localDisplayEligible && (r.defaultVisible || r.sourceKey === view.selectedId) && (!regions.length || r.regionIds.some(x => regions.includes(x))) &&
             (r.kind === 'bone' ? view.bones : r.kind === 'muscle' && view.muscles) && (!view.isolate || !view.selectedId || r.sourceKey === view.selectedId)).map(r => r.sourceKey);
         this.resources.demand(keys, view.selectedId ? [view.selectedId] : []);
         this.apply();

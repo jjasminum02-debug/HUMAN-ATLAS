@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "t100-source-candidate-resolution-v1",
+  "taskId": "T100",
+  "nextUnit": "resolve-target-representation-and-final-scene-qa",
+  "baselineHead": "3352e4c3416ffd6df527227cd17faad763d4c36d",
+  "createdAt": "2026-10-01 Asia/Seoul",
+  "inputHashes": {
+    "actionQueue": "b0d88bd438e84586ce01f3d4ca36586cd48706a721a892edb48cf982cc51240d",
+    "targetScopeT96": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
+    "t77SourceElements": "4be2aa589705081d28e2c2ce31389f9ec7a2b025def41dfbeb6c02f96e268789",
+    "t77CurrentInventory": "2e703352f40e410cc941ee393463218360f37ce95140212dad6fa1d387096768",
+    "t77DisplayPolicy": "eeea154883f4887c4d4c8bd75ddca98ab0767db3bb486bc4e511f03d363fb19d",
+    "t77CompiledManifest": "67a2f79b9248d18a754a6567e1b0bb4b1fce698ad0e3100a172b428ee58341f8",
+    "t50SceneContract": "2697496d18bd1fc58adca557d95364092f7c7189bff4218277882142c8b26fa4",
+    "t69FrameEvidence": "39f8086df7042349633e3c19e7e60e81669ca49be63b0d4e3be88d15cfd93cca",
+    "supplementManifest": "fb882248673639213da4105b60aa9e1935783cdc30a094cee09bac5ae6d10683",
+    "baseOverlay": "0a85010365e2da21e8665dbaabb57574b572d0b048282d36cc4476ad103b6979"
+  },
+  "sourceSupplement": {
+    "id": "T100-cached-source-supplement-2026-10-01-v1",
+    "namespace": "bp3d-r4",
+    "revision": "bp3d-r4-t100-cached-candidates-v1",
+    "source": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
+    "sourceRelease": "BodyParts3D Release 4.0",
+    "objects": 13,
+    "uniqueChunks": 5,
+    "newGeometryFiles": 0,
+    "existingBaseObjects": 960,
+    "composedObjects": 973,
+    "singleSceneAndRenderer": true,
+    "frameConversion": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or source-label change",
+    "sourcePose": "bodyparts3d-r4-static-reference",
+    "canonicalHaBindingsCreated": 0,
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed"
+  },
+  "targets": [
+    {
+      "targetId": "TA2:1282",
+      "status": "source-only local display integrated; no canonical HA binding; target/group completeness not inferred",
+      "objects": [
+        "BP3D4-FJ3152",
+        "BP3D4-FJ3288",
+        "BP3D4-FJ3393"
+      ],
+      "sourceTargetAssociation": {
+        "targetId": "TA2:1282",
+        "targetFmaGroup": "FMA16580",
+        "targetEnglish": "bony pelvis",
+        "targetLatin": "pelvis ossea",
+        "relationKind": "source_declared_group_member",
+        "sourceMemberFma": "FMA16586",
+        "proof": "exact FMA16580 PART-OF row names the candidate FJ member",
+        "completeness": "three source-declared members in this exact cached FMA group; not a whole-anatomy completeness claim",
+        "canonicalHaBindingCreated": false,
+        "exactPartOfTableSha256": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea",
+        "sourceGroupMemberSet": [
+          "FJ3152",
+          "FJ3288",
+          "FJ3393"
+        ]
+      },
+      "openIssue": "source declares only the listed 3-member bony-pelvis set; no global extent claim"
+    },
+    {
+      "targetId": "TA2:2128",
+      "status": "source-only local display integrated; no canonical HA binding; target/group completeness not inferred",
+      "objects": [
+        "BP3D4-FJ2741",
+        "BP3D4-FJ2753"
+      ],
+      "sourceTargetAssociation": {
+        "targetId": "TA2:2128",
+        "targetFma": "FMA46727",
+        "targetEnglish": "levator veli palatini",
+        "targetLatin": "levator veli palatini",
+        "relationKind": "exact_target_with_explicit_side_child",
+        "sourceMemberFma": "FMA46729",
+        "proof": "exact T96 target English/Latin equals the frozen FMA parent concept; FMA child and source name state the explicit side",
+        "canonicalHaBindingCreated": false
+      },
+      "openIssue": "whole anatomical/variant extent and human review not established"
+    },
+    {
+      "targetId": "TA2:2129",
+      "status": "source-only local display integrated; no canonical HA binding; target/group completeness not inferred",
+      "objects": [
+        "BP3D4-FJ2748",
+        "BP3D4-FJ2760"
+      ],
+      "sourceTargetAssociation": {
+        "targetId": "TA2:2129",
+        "targetFma": "FMA46730",
+        "targetEnglish": "tensor veli palatini",
+        "targetLatin": "tensor veli palatini",
+        "relationKind": "exact_target_with_explicit_side_child",
+        "sourceMemberFma": "FMA46732",
+        "proof": "exact T96 target English/Latin equals the frozen FMA parent concept; FMA child and source name state the explicit side",
+        "canonicalHaBindingCreated": false
+      },
+      "openIssue": "whole anatomical/variant extent and human review not established"
+    },
+    {
+      "targetId": "TA2:2191",
+      "status": "source-only local display integrated; no canonical HA binding; target/group completeness not inferred",
+      "objects": [
+        "BP3D4-FJ2745",
+        "BP3D4-FJ2757"
+      ],
+      "sourceTargetAssociation": {
+        "targetId": "TA2:2191",
+        "targetFma": "FMA46665",
+        "targetEnglish": "salpingopharyngeus muscle",
+        "targetLatin": "musculus salpingopharyngeus",
+        "relationKind": "exact_target_with_explicit_side_child",
+        "sourceMemberFma": "FMA46670",
+        "proof": "exact T96 target English/Latin equals the frozen FMA parent concept; FMA child and source name state the explicit side",
+        "canonicalHaBindingCreated": false
+      },
+      "openIssue": "traditional Korean name is null; not inferred"
+    },
+    {
+      "targetId": "TA2:2202",
+      "status": "source-only local display integrated; no canonical HA binding; target/group completeness not inferred",
+      "objects": [
+        "BP3D4-FJ2788",
+        "BP3D4-FJ2806"
+      ],
+      "sourceTargetAssociation": {
+        "targetId": "TA2:2202",
+        "targetFma": "FMA46591",
+        "targetEnglish": "vocalis muscle",
+        "targetLatin": "musculus vocalis",
+        "relationKind": "exact_target_with_explicit_side_child",
+        "sourceMemberFma": "FMA46593",
+        "proof": "exact T96 target English/Latin equals the frozen FMA parent concept; FMA child and source name state the explicit side",
+        "canonicalHaBindingCreated": false
+      },
+      "openIssue": "whole anatomical/variant extent and human review not established"
+    },
+    {
+      "targetId": "TA2:2283",
+      "status": "source-only local display integrated; no canonical HA binding; target/group completeness not inferred",
+      "objects": [
+        "BP3D4-FJ1538",
+        "BP3D4-FJ1538M"
+      ],
+      "sourceTargetAssociation": {
+        "targetId": "TA2:2283",
+        "targetFma": "FMA22830",
+        "targetEnglish": "semispinalis capitis muscle",
+        "targetLatin": "musculus semispinalis capitis",
+        "relationKind": "exact_target_with_explicit_side_child",
+        "sourceMemberFma": "FMA22876",
+        "proof": "exact T96 target English/Latin equals the frozen FMA parent concept; FMA child and source name state the explicit side",
+        "canonicalHaBindingCreated": false
+      },
+      "openIssue": "whole anatomical/variant extent and human review not established"
+    }
+  ],
+  "fixedQueue": {
+    "rows": 133,
+    "cachedCandidateRowsAdjudicated": 6,
+    "cachedCandidateTargets": [
+      "TA2:1282",
+      "TA2:2128",
+      "TA2:2129",
+      "TA2:2191",
+      "TA2:2202",
+      "TA2:2283"
+    ],
+    "otherRowsRemaining": 127,
+    "remainingByNextAction": {
+      "acquire_or_establish_exact_source_correspondence": 43,
+      "seek_variant_specific_source_evidence": 21,
+      "establish_group_membership_and_extent": 20,
+      "inspect_source_part_segmentation_or_acquire_exact_part": 31,
+      "establish_explicit_side_or_acquire_side_specific_surface": 12
+    },
+    "queueSnapshotModified": false
+  },
+  "routeCounts": {
+    "baselineTargetPaths": 409,
+    "targetsDenominator": 542,
+    "baselineMembershipPaths": 427,
+    "membershipDenominator": 563,
+    "regions": 12,
+    "countsChanged": false,
+    "reason": "source-only supplement is not a canonical target/member route overlay"
+  },
+  "preserved": {
+    "existingCanonicalHaBindings": 130,
+    "historicalClassifications": {
+      "total": 163,
+      "subcounts": [
+        6,
+        20,
+        135,
+        2
+      ]
+    },
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "opensimModelsModified": false,
+    "sourceCacheOriginalChunksModified": false
+  }
+}
