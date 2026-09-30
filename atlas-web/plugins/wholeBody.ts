@@ -17,7 +17,7 @@ export function wholeBodyPlugin(root: string): Plugin {
     name: 'local-compiled-datasets',
     configureServer(server) {
       // A new immutable snapshot or changed frozen dependency must be revalidated, never mixed.
-      server.watcher.add([`${cache}/datasets`, `${root}atlas-data/manifests`, `${root}atlas-data/catalog/target-scope-t96.json`, `${cache}/bodyparts3d-r4/converted`]);
+      server.watcher.add([`${cache}/datasets`, `${root}atlas-data/manifests`, `${root}atlas-data/catalog/target-scope-t96.json`, `${root}work/evidence/T78/reference/ta2-scope.json`, `${cache}/bodyparts3d-r4/converted`]);
       const invalidate = (path: string) => { if(path.includes('atlas-data/')) { snapshots.clear(); runtimeProjections.clear(); } };
       server.watcher.on('change', invalidate).on('unlink', invalidate).on('add', invalidate);
       server.httpServer?.once('close', () => {
@@ -55,8 +55,12 @@ export function wholeBodyPlugin(root: string): Plugin {
             const targetScopeBytes=await readFile(resolve(root,'atlas-data/catalog/target-scope-t96.json'));
             const targetScope=JSON.parse(targetScopeBytes.toString());
             const targetScopeSha256=sha(targetScopeBytes);
+            const supportContextBytes=await readFile(resolve(root,'work/evidence/T78/reference/ta2-scope.json'));
+            const supportContextSha256=sha(supportContextBytes);
+            if(supportContextSha256!==targetScope.source.snapshotSha256)throw Error('changed frozen support context');
             const frozenTargetLexicon={
               sha256:targetScopeSha256,
+              supportContext:{sha256:supportContextSha256,terms:JSON.parse(supportContextBytes.toString())},
               targets:targetScope.targets.map((target:{id:string;term:{english:string;latin:string;sourceSynonyms:Record<string,string[]>};semanticKind:string;regionIds:string[];sourceAncestryIds?:number[];sourceCardinality?:{explicitSourceSide?:string|null}})=>({
                 id:target.id,term:target.term,semanticKind:target.semanticKind,regionIds:target.regionIds,
                 sourceAncestryIds:target.sourceAncestryIds,
@@ -70,7 +74,7 @@ export function wholeBodyPlugin(root: string): Plugin {
             const compiled=await snapshot('za-c7010a9');
             const dataset=validateDataset(compiled.manifest);
             if(dataset.revision!==overlay.datasetRevision)throw Error('stale integration');
-            const cacheKey=sha(Buffer.from([overlaySha256,dataset.revision,rightsEvidenceSha256,targetScopeSha256].join('\n')));
+            const cacheKey=sha(Buffer.from([overlaySha256,dataset.revision,rightsEvidenceSha256,targetScopeSha256,supportContextSha256].join('\n')));
             let cached=runtimeProjections.get('za-c7010a9');
             if(!cached||cached.key!==cacheKey) {
               const projection=buildRuntimeIntegration(overlay,dataset,overlaySha256,rightsEvidenceSha256,frozenTargetLexicon);

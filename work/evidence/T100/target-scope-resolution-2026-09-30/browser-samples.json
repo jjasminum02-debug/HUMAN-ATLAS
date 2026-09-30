@@ -1,0 +1,120 @@
+{
+  "taskId": "T100",
+  "browser": "Codex in-app browser",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "samples": [
+    {
+      "sourceKey": "ZA-c7010a9-ba233b3437c11ebd1878bb33",
+      "sourceName": "Vertebra C3",
+      "route": "/?source=ZA-c7010a9-ba233b3437c11ebd1878bb33",
+      "result": "localized_surface_visible_after_fit_and_isolation; contextual_fit_partly_occluded",
+      "screenshotStored": false,
+      "sampleId": "local-01",
+      "exhaustiveTargetPass": false,
+      "exhaustiveMembershipPass": false
+    },
+    {
+      "targetId": "TA2:1038",
+      "regionId": "neck",
+      "conceptKey": "LC-bd2ee31874cbbd802dc0",
+      "route": "http://127.0.0.1:5173/?regions=neck&concept=LC-bd2ee31874cbbd802dc0",
+      "result": "route_card_and_localized_surface_pass; ring opening visible after fit/isolate/keyboard rotation",
+      "screenshotStored": false,
+      "sampleId": "local-02",
+      "exhaustiveTargetPass": false,
+      "exhaustiveMembershipPass": false
+    },
+    {
+      "targetId": "TA2:1050",
+      "regionId": "neck",
+      "conceptKey": "LC-0d7a7cc508c02b6551b9",
+      "route": "http://127.0.0.1:5173/?regions=neck&concept=LC-0d7a7cc508c02b6551b9",
+      "result": "route_card_and_localized_surface_pass; dens visible after fit/isolate",
+      "screenshotStored": false,
+      "sampleId": "local-03",
+      "exhaustiveTargetPass": false,
+      "exhaustiveMembershipPass": false
+    },
+    {
+      "targetId": "TA2:1113",
+      "regionId": "thorax",
+      "side": "left",
+      "conceptKey": "LC-80e09694a169dc79b45d",
+      "route": "http://127.0.0.1:5173/?regions=thorax&concept=LC-80e09694a169dc79b45d&side=left",
+      "result": "route_card_and_localized_surface_pass; eighth rib only, not entire false-rib series",
+      "screenshotStored": false,
+      "sampleId": "local-04",
+      "exhaustiveTargetPass": false,
+      "exhaustiveMembershipPass": false
+    },
+    {
+      "targetId": "TA2:1253",
+      "regionId": "upper-limb",
+      "side": "left",
+      "conceptKey": "LC-66a63c91e53d07e33659",
+      "route": "http://127.0.0.1:5173/?regions=upper-limb&concept=LC-66a63c91e53d07e33659&side=left",
+      "result": "route_card_and_localized_surface_pass; isolated left triquetrum visible",
+      "screenshotStored": false,
+      "sampleId": "local-05",
+      "exhaustiveTargetPass": false,
+      "exhaustiveMembershipPass": false
+    },
+    {
+      "targetId": "TA2:2248",
+      "regionId": "neck",
+      "side": "left",
+      "conceptKey": "LC-a9b77402a38c52b13366",
+      "route": "http://127.0.0.1:5173/?regions=neck&concept=LC-a9b77402a38c52b13366&side=left",
+      "result": "route_card_and_localized_surface_pass; inferior oblique head member only; contextual view partly occluded, isolation clear",
+      "screenshotStored": false,
+      "sampleId": "local-06",
+      "exhaustiveTargetPass": false,
+      "exhaustiveMembershipPass": false,
+      "frozenMembershipRegionMatch": false,
+      "scopeNote": "Suboccipital target has a back membership; neck source sample is not a back-membership visual pass"
+    },
+    {
+      "targetId": "TA2:2657",
+      "regionId": "leg",
+      "side": "left",
+      "conceptKey": "LC-d6db531466f41a4e75c4",
+      "route": "http://127.0.0.1:5173/?regions=leg&concept=LC-d6db531466f41a4e75c4&side=left",
+      "result": "route_card_and_localized_surface_pass; gastrocnemius lateral head member only",
+      "screenshotStored": false,
+      "sampleId": "local-07",
+      "exhaustiveTargetPass": false,
+      "exhaustiveMembershipPass": false
+    },
+    {
+      "targetId": "TA2:2673",
+      "regionId": "foot",
+      "side": "left",
+      "conceptKey": "LC-f27c4355d5b23bb26804",
+      "route": "http://127.0.0.1:5173/?regions=foot&concept=LC-f27c4355d5b23bb26804&side=left",
+      "result": "route_card_and_localized_surface_pass; flexor hallucis brevis lateral head only",
+      "screenshotStored": false,
+      "sampleId": "local-08",
+      "exhaustiveTargetPass": false,
+      "exhaustiveMembershipPass": false
+    },
+    {
+      "targetId": "TA2:1129",
+      "regionId": "thorax",
+      "conceptKey": "LC-5f30ca101ffa3af7be4a",
+      "route": "http://127.0.0.1:5173/?regions=thorax&concept=LC-5f30ca101ffa3af7be4a",
+      "result": "route_card_and_localized_surface_pass; sternum manubrium member only, not composite sternum extent",
+      "screenshotStored": true,
+      "sampleId": "local-09",
+      "exhaustiveTargetPass": false,
+      "exhaustiveMembershipPass": false,
+      "screenshotPath": "sternum-manubrium-local-qa.jpg"
+    }
+  ],
+  "fullVisualSweep": false,
+  "consoleLogs": [],
+  "consoleScope": "Empty captured warning/error lists on sternum tab and prior reused target tab after foot sample; C3 console not queried; no whole-sweep console claim",
+  "screenshotPath": "sternum-manubrium-local-qa.jpg"
+}

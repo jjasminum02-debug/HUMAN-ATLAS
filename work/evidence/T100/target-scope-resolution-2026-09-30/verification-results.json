@@ -1,0 +1,75 @@
+{
+  "taskId": "T100",
+  "acceptance": "partial",
+  "checks": [
+    {
+      "command": "pnpm run test:whole-body",
+      "exitCode": 0,
+      "passed": 49,
+      "failed": 0,
+      "compiledChunks": 46,
+      "log": "test-whole-body.log"
+    },
+    {
+      "command": "pnpm run test:delivery",
+      "exitCode": 0,
+      "passed": 3,
+      "failed": 0,
+      "log": "test-delivery.log"
+    },
+    {
+      "command": "pnpm run typecheck",
+      "exitCode": 0,
+      "log": "typecheck.log"
+    },
+    {
+      "command": "pnpm run build",
+      "exitCode": 0,
+      "log": "build.log",
+      "existingAppJsChunkKb": 954.06,
+      "existing500KbAdvisory": true
+    },
+    {
+      "command": "python3 atlas-data/tools/resolve_target_representations.py --check",
+      "exitCode": 0,
+      "reproducible": true,
+      "log": "reproducibility.log"
+    },
+    {
+      "name": "localized-browser-visual-samples",
+      "count": 9,
+      "fullSweep": false,
+      "evidence": "browser-samples.json"
+    },
+    {
+      "name": "previous-exact-term-12-route-performance-search-evidence",
+      "status": "reused; not rerun",
+      "paths": [
+        "work/evidence/T100/target-representation-2026-09-30/verification-results.json",
+        "work/evidence/T100/target-representation-continuation-2026-09-30/verification-results.json"
+      ]
+    },
+    {
+      "command": "python3 work/tools/sync_execution.py --check",
+      "exitCode": 0,
+      "derivedViewsRewritten": 0
+    },
+    {
+      "command": "git diff --check -- task-owned paths",
+      "exitCode": 0
+    },
+    {
+      "name": "python-builder-ast",
+      "status": "passed"
+    }
+  ],
+  "remaining": {
+    "targets": 135,
+    "membershipsWithoutExactRoute": 139,
+    "officialTermEvidenceGaps": 75,
+    "full542563VisualSweep": false,
+    "partGroupTotalExtent": "not_asserted"
+  },
+  "humanReview": "not_performed",
+  "publicRedistribution": "held"
+}

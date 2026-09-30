@@ -11,7 +11,9 @@ const targetScopeBytes = readFileSync(new URL('../../../../atlas-data/catalog/ta
 const targetScope = JSON.parse(targetScopeBytes.toString('utf8')) as {
     targets: Array<{ id: string; term: { english: string; latin: string; sourceSynonyms: Record<string, string[]> }; semanticKind: string; regionIds: string[] }>;
 };
+const supportContextBytes = readFileSync(new URL('../../../../work/evidence/T78/reference/ta2-scope.json', import.meta.url));
 const frozenTargetLexicon: FrozenTargetLexicon = {
+    supportContext: { sha256: createHash('sha256').update(supportContextBytes).digest('hex'), terms: JSON.parse(supportContextBytes.toString()) },
     sha256: createHash('sha256').update(targetScopeBytes).digest('hex'),
     targets: targetScope.targets,
 };
@@ -74,6 +76,7 @@ const fixture = {
     revision: raw.datasetRevision,
     instances: raw.objects.map(row => ({
         sourceKey: row.sourceKey,
+        sourceName: row.sourceName,
         kind: datasetInstances.get(row.sourceKey)?.kind,
         lods: { detail: { resource: datasetInstances.get(row.sourceKey)?.lods.detail.resource } },
     })),
@@ -831,7 +834,7 @@ test('T100 target membership continuation adds only evidenced member routes and 
     }
     const taxonomyLinks = raw.objects.flatMap(row => (row.learnerConceptLinks ?? [])
         .filter(link => link.relationKind === 'verified_taxonomy_member').map(link => ({ row, link })));
-    assert.equal(taxonomyLinks.length, plan.taxonomyMemberLinks.length);
+    assert(taxonomyLinks.length >= plan.taxonomyMemberLinks.length, 'historical taxonomy links must be preserved');
     const frozenById = new Map(frozenTargetLexicon.targets.map(target => [target.id, target]));
     for (const entry of plan.taxonomyMemberLinks) {
         const row = raw.objects.find(candidate => candidate.sourceKey === entry.sourceKey)!;
@@ -929,4 +932,40 @@ test('contextual names cover visible surfaces without exposing judgment records 
     const invalid = structuredClone(raw);
     invalid.evidenceSources!.find(source => source.id === 't100-explicit-source-part-composition')!.url = 'local:../../private.json';
     assert.throws(() => validateIntegration(invalid, fixture));
+});
+
+test('pending source crosswalks and child routes require bounded proofs and preserve historical links', () => {
+    const delta = JSON.parse(readFileSync(new URL('../../../../work/evidence/T100/target-scope-resolution-2026-09-30/link-delta.json', import.meta.url), 'utf8')) as {
+        entries: Array<{ sourceKey: string; side: string | null; targetId: string; link: NonNullable<Integration['objects'][number]['learnerConceptLinks']>[number] }>;
+    };
+    const regions = [...new Set(raw.objects.flatMap(row => row.regionIds))];
+    for (const entry of delta.entries) {
+        const row = raw.objects.find(row => row.sourceKey === entry.sourceKey)!;
+        assert(row.learnerConceptLinks?.some(link => JSON.stringify(link) === JSON.stringify(entry.link)));
+        const query = new URLSearchParams({ concept: entry.link.conceptKey! });
+        if (entry.side) query.set('side', entry.side);
+        assert.equal(readDatasetRoute('?' + query, runtime.objects, regions).selected, entry.sourceKey);
+    }
+    for (const rule of ['qualified_synonym', 'corrected_surface', 'direct_term_with_class_context', 'series_member', 'context_part_member']) {
+        const rejected = structuredClone(raw);
+        const entry = delta.entries.find(entry => entry.link.matchRule.endsWith(': ' + rule))!;
+        assert(entry, rule);
+        const row = rejected.objects.find(row => row.sourceKey === entry.sourceKey)!;
+        const link = row.learnerConceptLinks!.find(link => link.conceptKey === entry.link.conceptKey)!;
+        link.targetIds = [rule === 'series_member' ? 'TA2:1115' : 'TA2:819'];
+        assert.throws(() => validateIntegration(rejected, fixture), /source-crosswalk proof mismatch/);
+    }
+    const staleContext = structuredClone(frozenTargetLexicon);
+    staleContext.supportContext!.sha256 = '0'.repeat(64);
+    assert.throws(() => validateIntegrationWithCatalog(raw, fixture, staleContext), /support context provenance/);
+    const wrongName = structuredClone(raw);
+    const source = wrongName.objects.find(row => row.learnerConceptLinks?.some(link => link.relationKind === 'verified_source_crosswalk'))!;
+    source.sourceName += ' altered';
+    assert.throws(() => validateIntegration(wrongName, fixture), /integration identity\/policy/);
+    const outsideRange = structuredClone(raw);
+    const rib = outsideRange.objects.find(row => row.learnerConceptLinks?.some(link =>
+        link.relationKind === 'verified_source_crosswalk' && link.targetIds.includes('TA2:1114')))!;
+    const ribLink = rib.learnerConceptLinks!.find(link => link.relationKind === 'verified_source_crosswalk' && link.targetIds.includes('TA2:1114'))!;
+    ribLink.memberCode = 'rib:8';
+    assert.throws(() => validateIntegration(outsideRange, fixture), /source-crosswalk proof mismatch/);
 });

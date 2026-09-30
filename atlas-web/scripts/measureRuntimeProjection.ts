@@ -14,7 +14,8 @@ const semanticBaseline = JSON.parse(await readFile(resolve(root, 'work/evidence/
     preservedUnnamedSurfaceState: Array<{ sourceKey: string }>;
 };
 const targetScopeSha256 = createHash('sha256').update(targetScopeBytes).digest('hex');
-const frozenTargetLexicon = { sha256: targetScopeSha256, targets: targetScope.targets };
+const supportContextBytes = await readFile(resolve(root, 'work/evidence/T78/reference/ta2-scope.json'));
+const frozenTargetLexicon = { sha256: targetScopeSha256, targets: targetScope.targets, supportContext: { sha256: createHash('sha256').update(supportContextBytes).digest('hex'), terms: JSON.parse(supportContextBytes.toString()) } };
 const overlayText = overlayBytes.toString('utf8');
 const overlay = JSON.parse(overlayText);
 const dataset = validateDataset(JSON.parse(await readFile(resolve(root, 'atlas-data/source-cache/datasets/za/compiled/manifest.json'), 'utf8')));
