@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "capturedAtLocal": "2026-09-30",
+  "measurementContext": {
+    "selectedSourceKey": "ZA-c7010a9-f04b81d9566c227fb9805995",
+    "canvasCssPixels": [
+      1280,
+      460
+    ],
+    "canvasBackingPixels": [
+      2240,
+      805
+    ],
+    "devicePixelRatio": 1.75,
+    "oneCanvas": true,
+    "visibleAndLoadedSourceMeshes": 672,
+    "pending": 0,
+    "failed": 0,
+    "resourceQueueBytes": 16848420
+  },
+  "sharedRendererTelemetry": {
+    "cumulativeRenderCalls": 297,
+    "triangles": 293351,
+    "uniqueGeometries": 399,
+    "visibleMeshes": 672,
+    "materials": 3,
+    "geometryBuffersBytes": 7014222,
+    "geometryBuffersMiB": 6.689,
+    "renderCpuSampleCount": 9,
+    "renderCpuMsP50": 0.8,
+    "renderCpuMsP95": 8.7,
+    "rafIntervalSampleCount": 240,
+    "rafIntervalMsP50": 16.7,
+    "rafIntervalMsP95": 17.4
+  },
+  "interpretationAndLimits": [
+    "The animation-frame callback interval is not rendered FPS: the controller renders on demand, so this run did not measure sustained FPS under a camera-motion workload.",
+    "GPU VRAM and GPU time were unavailable through the browser evaluation surface; no WebGL timer query or GPU memory claim is made.",
+    "geometryBuffersBytes is retained typed-array CPU geometry storage, not total JavaScript heap, browser process memory, or GPU VRAM.",
+    "resourceQueueBytes is the dataset adapter's loaded resource byte total, not resident GPU memory.",
+    "The legacy controller selection telemetry is empty in dataset mode; dataset selection was verified separately through data-dataset and the visible selected card. Shared-scene renderer telemetry above still reads the active renderer."
+  ],
+  "acceptance": "partial; actual whole-body motion FPS and GPU/total-memory budgets remain unmeasured."
+}

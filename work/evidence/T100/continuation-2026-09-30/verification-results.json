@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "capturedAtLocal": "2026-09-30",
+  "overall": "pass_partial",
+  "commands": [
+    {
+      "command": "python3 work/evidence/T100/continuation-2026-09-30/record_t100_continuation.py",
+      "result": "pass_partial",
+      "details": "12 structural/provenance/preservation/browser/performance evidence checks pass; T100 acceptance remains partial"
+    },
+    {
+      "command": "python3 -m py_compile work/evidence/T100/continuation-2026-09-30/record_t100_continuation.py",
+      "result": "passed with PYTHONPYCACHEPREFIX=/private/tmp/human-atlas-t100-pycache"
+    },
+    {
+      "command": "pnpm run test:whole-body",
+      "result": "passed",
+      "tests": "45/45",
+      "compiledChunks": "46 verified"
+    },
+    {
+      "command": "pnpm run test:search",
+      "result": "passed",
+      "tests": "44/44"
+    },
+    {
+      "command": "pnpm run test:delivery",
+      "result": "passed",
+      "tests": "3/3"
+    },
+    {
+      "command": "pnpm run typecheck",
+      "result": "passed"
+    },
+    {
+      "command": "pnpm run build",
+      "result": "passed",
+      "warning": "Existing App bundle 954.06 kB exceeds the 500 kB advisory threshold"
+    },
+    {
+      "command": "python3 work/tools/sync_execution.py --check",
+      "result": "passed",
+      "details": "Generated current execution projections match work/EXECUTION.json; no files written"
+    }
+  ],
+  "browserEvidence": "browser-selection-validation.json; six bilateral target route/card/side/focus samples, one shared canvas each, pending/failure 0, console logs empty; not whole-body selection acceptance",
+  "performanceEvidence": "active-scene-performance.json; on-demand CPU render metrics and CPU memory proxies recorded; rendered FPS under motion, GPU time/VRAM and total memory remain unavailable",
+  "unresolvedAcceptance": "159 eligible surface Korean modern names, 75 target term gaps, target-specific geometry extent for candidate-free/grouped targets, full 542 target/563 membership visual selection, active motion FPS/GPU/total memory",
+  "doesNotPromote": "No anatomy review, canonical binding, rights, or source identity was promoted; no new names, geometry, or app code were created."
+}
