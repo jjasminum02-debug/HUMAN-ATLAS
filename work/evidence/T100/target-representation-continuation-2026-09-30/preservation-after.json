@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "t100-preservation-after-v1",
+  "taskId": "T100",
+  "capturedAtLocal": "2026-09-30",
+  "startHead": "844f21614856401d0181f64c85968c11557cf39e",
+  "baselinePreexistingStatusEntryCount": 76,
+  "baselinePathsMissingAfter": [],
+  "allBaselinePathsStillExist": true,
+  "protectedSourceHashMatches": {
+    "atlas-data/catalog/target-scope-t96.json": true,
+    "work/evidence/T98/astra-resolution-2026-09-29/source-catalog.json": true,
+    "atlas-data/source-cache/datasets/za/compiled/manifest.json": true,
+    "work/evidence/T100/target-representation-2026-09-30/target-representation-matrix.json": true,
+    "work/evidence/T100/target-representation-2026-09-30/link-delta.json": true
+  },
+  "allProtectedSourceHashesUnchanged": true,
+  "taskOwnedExpectedChanges": {
+    "overlaySha256Before": "3cb4a000a93cac2e73a2a76817448a17e84345ddc45df9b410bd2df8d7f62551",
+    "overlaySha256After": "8b3f488c76811e5388b2f2a74524d879b131bde532467b1ff0ae59fb951e4044",
+    "reportAndExecutionUpdated": true,
+    "adapterAndTestUpdated": true,
+    "pluginLexiconUpdated": true
+  },
+  "overlayCounts": {
+    "rows": 960,
+    "localDisplayEligible": 672,
+    "sourceOnlyTrue": 830,
+    "existingHaBound": 130,
+    "humanReviewNotPerformed": 960,
+    "publicRedistribution": "held",
+    "localUseRights": "supported_local_prototype"
+  },
+  "openSimModelsGitStatus": "",
+  "openSimModelsDiffAgainstHeadExitCode": 0,
+  "historical163EvidenceSha256": "016e48da971ca657584fcebabf8972e9dae987b51785fd9b6db1aa16995e13a0",
+  "writeSet": [
+    "atlas-data/overlays/za-local-integration.json",
+    "atlas-web/plugins/wholeBody.ts",
+    "atlas-web/src/viewer/datasets/integration.ts",
+    "atlas-web/src/viewer/datasets/integration.test.ts",
+    "work/reports/T100.md",
+    "work/EXECUTION.json",
+    "work/evidence/T100/target-representation-continuation-2026-09-30/"
+  ],
+  "protectedFromWrites": [
+    "OpenSim_Models",
+    "atlas-data/source-cache original bytes",
+    "atlas-data/catalog/target-scope-t96.json",
+    "T96 source scope",
+    "T98/T99 frozen source inventory",
+    "T13 spatial drafts",
+    "historical candidate-free 163 evidence"
+  ],
+  "note": "Pre-existing WIP paths captured at task start still exist. Protected source/scope hashes are unchanged. Original source objects, evaluated meshes, canonical IDs, and rights/review states are preserved; only T100 overlay relation rows and task-owned code/report/evidence/execution are updated."
+}

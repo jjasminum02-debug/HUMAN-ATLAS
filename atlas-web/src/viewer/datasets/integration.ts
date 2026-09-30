@@ -51,7 +51,7 @@ export interface StructureRecord {
     /** Opaque learner/source concept links. They do not create a canonical HA binding. */
     learnerConceptLinks?: {
         conceptKey: string | null;
-        relationKind: 'verified_class_member' | 'normalized_exact_target_term' | 'paired_source_concept' | 'side_or_source_identity_conflict';
+        relationKind: 'verified_class_member' | 'verified_taxonomy_member' | 'normalized_exact_target_term' | 'paired_source_concept' | 'side_or_source_identity_conflict';
         targetIds: string[];
         memberCode: string | null;
         targetTermMatches: { targetId: string; matchedValues: string[] }[];
@@ -157,6 +157,8 @@ export interface FrozenTargetLexicon {
         term: { english: string; latin: string; sourceSynonyms: Record<string, string[]> };
         semanticKind: string;
         regionIds: string[];
+        sourceAncestryIds?: number[];
+        sourceCardinality?: { explicitSourceSide?: string | null };
     }[];
 }
 export interface Integration {
@@ -358,7 +360,7 @@ export function validateIntegration(value: unknown, dataset: Dataset, frozenTarg
         for (const link of row.learnerConceptLinks ?? []) {
             exactKeys(link, ['conceptKey', 'relationKind', 'targetIds', 'memberCode', 'targetTermMatches', 'matchRule', 'evidenceIds', 'identityStatus', 'humanReview'], 'learner concept link fields');
             if (link.conceptKey !== null && !/^LC-[a-f0-9]{20}$/.test(link.conceptKey)
-                || !['verified_class_member', 'normalized_exact_target_term', 'paired_source_concept', 'side_or_source_identity_conflict'].includes(link.relationKind)
+                || !['verified_class_member', 'verified_taxonomy_member', 'normalized_exact_target_term', 'paired_source_concept', 'side_or_source_identity_conflict'].includes(link.relationKind)
                 || !Array.isArray(link.targetIds) || link.targetIds.some(id => !/^TA2:\d+$/.test(id))
                 || new Set(link.targetIds).size !== link.targetIds.length
                 || !Array.isArray(link.targetTermMatches) || !Array.isArray(link.evidenceIds)
@@ -390,23 +392,70 @@ export function validateIntegration(value: unknown, dataset: Dataset, frozenTarg
                 if (!target.semanticKind.includes(row.kind) || !target.regionIds.some(region => row.regionIds.includes(region)))
                     throw Error('learner exact-term kind/region mismatch');
             } else if (link.relationKind === 'verified_class_member') {
-                if (!link.conceptKey || !link.targetIds.length || link.targetIds.some(id => !frozenTargets.has(id)) || !link.memberCode
-                    || link.targetTermMatches.length || !['left', 'right'].includes(row.side ?? ''))
-                    throw Error('learner class-member link shape');
-                if (!link.matchRule.startsWith('exact frozen T96 class_member'))
-                    throw Error('learner class-member rule provenance');
-                const sideCode = link.memberCode + ':' + row.side;
                 const rows = row.targetRelationEvidence ?? [];
                 const matching = rows.filter(relation => link.targetIds.includes(relation.targetId)
                     && relation.relationKind === 'class_member'
-                    && (relation.memberCode === sideCode || relation.memberCode === link.memberCode && relation.sourceSide === row.side));
-                if (!matching.length || link.evidenceIds.some(id => !matching.some(relation => relation.matchEvidenceSourceIds?.includes(id))))
+                    && (relation.memberCode === link.memberCode + ':' + row.side
+                        || relation.memberCode === link.memberCode && relation.sourceSide === row.side));
+                const segmentCode = link.memberCode?.match(/^(?:segment|lumbar):([CTL]\d+)$/)?.[1] ?? null;
+                const exactUnsidedSegment = row.side === null && !!segmentCode
+                    && rows.some(relation => link.targetIds.includes(relation.targetId)
+                        && relation.relationKind === 'class_member' && relation.sourceSide === null
+                        && relation.sourceSegmentCode === segmentCode
+                        && /^Vertebra (?:C[3-7]|T(?:[1-9]|1[0-2])|L[1-5])$/.test(relation.sourceObjectName)
+                        && relation.sourceObjectName === `Vertebra ${segmentCode}`);
+                if (!link.conceptKey || !link.targetIds.length || link.targetIds.some(id => !frozenTargets.has(id)) || !link.memberCode
+                    || link.targetTermMatches.length || (!['left', 'right'].includes(row.side ?? '') && !exactUnsidedSegment))
+                    throw Error('learner class-member link shape');
+                if (!link.matchRule.startsWith('exact frozen T96 class_member'))
+                    throw Error('learner class-member rule provenance');
+                const evidenced = matching.length > 0 && link.evidenceIds.every(id => matching.some(relation => relation.matchEvidenceSourceIds?.includes(id)));
+                const segmentEvidence = exactUnsidedSegment && link.targetIds.every(targetId => rows.some(relation =>
+                    relation.targetId === targetId && relation.relationKind === 'class_member'
+                    && relation.sourceSegmentCode === segmentCode && relation.matchEvidenceSourceIds?.some(id => link.evidenceIds.includes(id))));
+                if ((!evidenced && !segmentEvidence) || link.evidenceIds.some(id => !rows.some(relation =>
+                    link.targetIds.includes(relation.targetId) && relation.relationKind === 'class_member'
+                    && relation.matchEvidenceSourceIds?.includes(id))))
                     throw Error('learner class-member proof mismatch');
                 if (link.targetIds.some(id => {
                     const target = frozenTargets.get(id)!;
                     return !target.semanticKind.includes(row.kind) || !target.regionIds.some(region => row.regionIds.includes(region));
                 }))
                     throw Error('learner class-member kind/region mismatch');
+            } else if (link.relationKind === 'verified_taxonomy_member') {
+                const parentId = link.targetIds[0];
+                const childId = link.memberCode;
+                const parent = frozenTargets.get(parentId);
+                const child = childId ? frozenTargets.get(childId) : undefined;
+                const childNumber = childId?.match(/^TA2:(\d+)$/)?.[1];
+                const parentNumber = parentId?.match(/^TA2:(\d+)$/)?.[1];
+                const ancestryHasParent = !!child?.sourceAncestryIds?.includes(Number(parentNumber));
+                const exactChildProof = row.learnerConceptLinks?.some(proof => proof !== link
+                    && proof.relationKind === 'normalized_exact_target_term'
+                    && proof.identityStatus === 'evidence_backed' && proof.targetIds.length === 1
+                    && proof.targetIds[0] === childId && proof.evidenceIds.includes('fipat-ta2-t96-full-target-catalog')
+                    && proof.evidenceIds.includes('za-t99-frozen-source-objects'));
+                const classChildProof = row.learnerConceptLinks?.some(proof => proof !== link
+                    && proof.relationKind === 'verified_class_member'
+                    && proof.identityStatus === 'evidence_backed' && proof.targetIds.includes(childId!)
+                    && (row.targetRelationEvidence ?? []).some(relation => relation.targetId === childId
+                        && relation.relationKind === 'class_member'
+                        && relation.matchEvidenceSourceIds?.some(id => proof.evidenceIds.includes(id))));
+                if (!link.conceptKey || link.targetIds.length !== 1 || !parent || !child || parentId === childId
+                    || !childNumber || !parentNumber || !ancestryHasParent || !link.memberCode
+                    || link.targetTermMatches.length || link.identityStatus !== 'evidence_backed'
+                    || !link.evidenceIds.includes('fipat-ta2-t96-full-target-catalog')
+                    || !link.evidenceIds.includes('za-t99-frozen-source-objects')
+                    || !link.matchRule.startsWith('exact frozen T96 sourceAncestryIds')
+                    || (!exactChildProof && !classChildProof))
+                    throw Error('learner taxonomy-member link proof mismatch');
+                if (!parent.semanticKind.includes(row.kind) || !parent.regionIds.some(region => row.regionIds.includes(region)))
+                    throw Error('learner taxonomy-member kind/region mismatch');
+                const explicitParentSide = parent.sourceCardinality?.explicitSourceSide;
+                const explicitChildSide = child.sourceCardinality?.explicitSourceSide;
+                if (explicitParentSide && row.side !== explicitParentSide
+                    || explicitChildSide && row.side !== explicitChildSide)
+                    throw Error('learner taxonomy-member source side mismatch');
             } else if (link.relationKind === 'paired_source_concept') {
                 const sideSuffix = row.sourceName.match(/\.([lr])$/i)?.[1]?.toLocaleLowerCase();
                 if (!link.conceptKey || link.targetIds.length || link.memberCode !== null || link.targetTermMatches.length

@@ -26,6 +26,16 @@ const directTargetLinkDelta = JSON.parse(readFileSync(new URL('../../../../work/
     change: { addedRows: number; uniqueTargetIds: number; sourceKindCounts: Record<string, number>; sourceOnlyCounts: Record<string, number>; sideCounts: Record<string, number> };
     entries: Array<{ sourceKey: string; sourceName: string; targetId: string; kind: string; side: string | null; regionIds: string[]; conceptKey: string; evaluatedGeometrySha256: string; link: NonNullable<Integration['objects'][number]['learnerConceptLinks']>[number] }>;
 };
+const targetMembershipContinuation = JSON.parse(readFileSync(new URL('../../../../work/evidence/T100/target-representation-continuation-2026-09-30/target-membership-plan-and-qa.json', import.meta.url), 'utf8')) as {
+    addedClassMemberLinks: Array<{ sourceKey: string; targetIds: string[]; memberCode: string; link: NonNullable<Integration['objects'][number]['learnerConceptLinks']>[number] }>;
+    taxonomyMemberLinks: Array<{ sourceKey: string; targetId: string; childTargetId: string; link: NonNullable<Integration['objects'][number]['learnerConceptLinks']>[number] }>;
+    targetRegionMembershipSelection: Array<{ targetId: string; regionId: string; status: string; selectionRoutes: Array<{ sourceKey: string; side: string | null; relationKind: string; conceptKey: string; routeResolvesToExactSourceAndRegion: boolean }> }>;
+    routeFailureCount: number;
+    termGapCount: number;
+    unresolvedTargetDisposition: Record<string, { status: string }>;
+    denominators: { scopeTargets: number; scopeMemberships: number; regions: number; sourceObjects: number; localDisplayEligible: number; existingHaBindings: number; historicalCandidateFree163: number };
+    rightsAndIdentityInvariants: { newCanonicalHaBindings: number; humanReview: string; publicRedistribution: string; sourceOnly: boolean; newGeometry: number; TA2DenominatorChanged: boolean };
+};
 const compiled = JSON.parse(readFileSync(new URL('../../../../atlas-data/source-cache/datasets/za/compiled/manifest.json', import.meta.url), 'utf8')) as {
     revision: string;
     instances: Array<{ sourceKey: string; kind: string; lods: { detail: { resource: string } } }>;
@@ -660,15 +670,15 @@ test('T100 semantic continuation groups the 226 unnamed surfaces without side du
     // Preserve the original 226-row semantic continuation as its own regression cohort.
     const linked = raw.objects.filter(row => preservedUnnamedBySource.has(row.sourceKey));
     assert.equal(linked.length, 226);
-    assert.equal(raw.objects.filter(row => row.learnerConceptLinks?.length).length, 618);
+    assert(raw.objects.filter(row => row.learnerConceptLinks?.length).length >= 618);
     const groups = new Map<string, typeof linked>();
     for (const row of linked) {
         const label = row.sourceName.replace(/\.[lr]$/i, '');
         const group = groups.get(label) ?? [];
         group.push(row);
         groups.set(label, group);
-        assert.equal(row.learnerConceptLinks!.length, 1);
-        const link = row.learnerConceptLinks![0];
+        const link = row.learnerConceptLinks!.find(candidate => candidate.relationKind !== 'verified_taxonomy_member')!;
+        assert(link);
         assert.equal(link.humanReview, 'not_performed');
         if (link.relationKind === 'paired_source_concept')
             assert(link.evidenceIds.includes('za-t99-frozen-source-objects'));
@@ -742,9 +752,9 @@ test('T100 exact direct target links add typed source selection without changing
         assert.equal(row.haConceptId ?? null, preexistingHaBySource.get(row.sourceKey) ?? null, `canonical binding changed for ${row.sourceName}`);
     for (const entry of entries) {
         const row = raw.objects.find(candidate => candidate.sourceKey === entry.sourceKey)!;
-        const link = row.learnerConceptLinks?.[0];
+        const link = row.learnerConceptLinks?.find(candidate => candidate.relationKind === 'normalized_exact_target_term' && candidate.targetIds.includes(entry.targetId));
         assert(link, entry.sourceKey);
-        assert.equal(row.learnerConceptLinks!.length, 1);
+        assert.equal(row.learnerConceptLinks!.filter(candidate => candidate.relationKind === 'normalized_exact_target_term' && candidate.targetIds.includes(entry.targetId)).length, 1);
         assert.equal(row.sourceName, entry.sourceName);
         assert.equal(row.targetId, entry.targetId);
         assert(row.targetIds.includes(entry.targetId));
@@ -784,6 +794,102 @@ test('T100 exact direct target links add typed source selection without changing
     const midline = unsided[0][0];
     assert.equal(readDatasetRoute(`?concept=${midline.conceptKey}`, raw.objects, regions).selected, midline.sourceKey);
 });
+test('T100 target membership continuation adds only evidenced member routes and keeps the frozen denominator partial', () => {
+    const plan = targetMembershipContinuation;
+    assert.equal(plan.addedClassMemberLinks.length, 72);
+    assert.equal(plan.taxonomyMemberLinks.length, 1076);
+    assert.deepEqual(plan.denominators, {
+        scopeTargets: 542, scopeMemberships: 563, regions: 12, sourceObjects: 960,
+        localDisplayEligible: 672, existingHaBindings: 130, sourceOnly: 830,
+        publicRedistributionHeld: 960, humanReviewNotPerformed: 960, historicalCandidateFree163: 163,
+    });
+    assert.equal(plan.termGapCount, 75);
+    assert.deepEqual(plan.rightsAndIdentityInvariants, {
+        newCanonicalHaBindings: 0, humanReview: 'not_performed', publicRedistribution: 'held',
+        sourceOnlyRowsPreserved: true, newGeometry: 0, TA2DenominatorChanged: false,
+    });
+    assert.equal(raw.scope.targets, 542);
+    assert.equal(raw.scope.memberships, 563);
+    assert.equal(raw.scope.regions, 12);
+    assert.equal(raw.objects.length, 960);
+    assert.equal(raw.objects.filter(row => row.localDisplayEligible).length, 672);
+    assert.equal(raw.objects.filter(row => row.haConceptId).length, 130);
+    assert.equal(raw.objects.filter(row => row.sourceOnly).length, 830);
+    assert(raw.objects.every(row => row.publicRedistribution === 'held' && row.humanReview === 'not_performed'));
+    assert(raw.objects.every(row => row.sourceOnly === !Boolean(row.haConceptId)), 'per-object source-only/canonical state changed');
+    for (const row of raw.objects)
+        assert.equal(row.haConceptId ?? null, preexistingHaBySource.get(row.sourceKey) ?? null,
+            `canonical HA identity changed for ${row.sourceKey}`);
+
+    for (const entry of plan.addedClassMemberLinks) {
+        const row = raw.objects.find(candidate => candidate.sourceKey === entry.sourceKey)!;
+        assert(row, entry.sourceKey);
+        assert(row.learnerConceptLinks?.some(link => link.relationKind === 'verified_class_member'
+            && link.memberCode === entry.memberCode && link.targetIds.join('|') === entry.targetIds.join('|')
+            && link.conceptKey === entry.link.conceptKey && link.evidenceIds.join('|') === entry.link.evidenceIds.join('|')),
+        `class-member relation missing for ${entry.sourceKey}`);
+    }
+    const taxonomyLinks = raw.objects.flatMap(row => (row.learnerConceptLinks ?? [])
+        .filter(link => link.relationKind === 'verified_taxonomy_member').map(link => ({ row, link })));
+    assert.equal(taxonomyLinks.length, plan.taxonomyMemberLinks.length);
+    const frozenById = new Map(frozenTargetLexicon.targets.map(target => [target.id, target]));
+    for (const entry of plan.taxonomyMemberLinks) {
+        const row = raw.objects.find(candidate => candidate.sourceKey === entry.sourceKey)!;
+        assert(row, entry.sourceKey);
+        const link = row.learnerConceptLinks?.find(candidate => candidate.relationKind === 'verified_taxonomy_member'
+            && candidate.targetIds.length === 1 && candidate.targetIds[0] === entry.targetId
+            && candidate.memberCode === entry.childTargetId);
+        assert(link, `${entry.sourceKey} -> ${entry.targetId} member ${entry.childTargetId}`);
+        assert(frozenById.get(entry.childTargetId)?.sourceAncestryIds?.includes(Number(entry.targetId.slice('TA2:'.length))),
+            `frozen T96 ancestry does not prove ${entry.targetId} -> ${entry.childTargetId}`);
+        assert.equal(link.humanReview, 'not_performed');
+        assert.equal(link.identityStatus, 'evidence_backed');
+        assert(!link.conceptKey?.startsWith('HA-'));
+    }
+
+    const memberships = plan.targetRegionMembershipSelection;
+    assert.equal(memberships.length, 563);
+    assert.equal(memberships.filter(item => item.status === 'selectable_member_surfaces_verified').length, 393);
+    assert.equal(memberships.filter(item => item.status === 'no_exact_selectable_member_surface').length, 170);
+    assert.equal(plan.routeFailureCount, 0);
+    const regions = [...new Set(raw.objects.flatMap(row => row.regionIds))];
+    let checkedRoutes = 0;
+    for (const membership of memberships) {
+        if (membership.status === 'no_exact_selectable_member_surface') {
+            assert.equal(membership.selectionRoutes.length, 0);
+            continue;
+        }
+        assert(membership.selectionRoutes.length > 0, `${membership.targetId}/${membership.regionId}`);
+        for (const route of membership.selectionRoutes) {
+            assert.equal(route.routeResolvesToExactSourceAndRegion, true);
+            const query = new URLSearchParams({ concept: route.conceptKey, region: membership.regionId });
+            if (route.side)
+                query.set('side', route.side);
+            const search = '?' + query.toString();
+            assert.equal(readDatasetRoute(search, raw.objects, regions).selected, route.sourceKey,
+                `developer route mismatch for ${membership.targetId}/${membership.regionId}/${route.sourceKey}`);
+            assert.equal(readDatasetRoute(search, runtime.objects, regions).selected, route.sourceKey,
+                `learner projection route mismatch for ${membership.targetId}/${membership.regionId}/${route.sourceKey}`);
+            checkedRoutes++;
+        }
+    }
+    assert.equal(checkedRoutes, memberships.reduce((sum, item) => sum + item.selectionRoutes.length, 0));
+
+    const rejected = structuredClone(raw);
+    const rejectedRow = rejected.objects.find(row => row.learnerConceptLinks?.some(link => link.relationKind === 'verified_taxonomy_member'))!;
+    const rejectedLink = rejectedRow.learnerConceptLinks!.find(link => link.relationKind === 'verified_taxonomy_member')!;
+    rejectedLink.memberCode = 'TA2:999999';
+    assert.throws(() => validateIntegration(rejected, fixture), /taxonomy-member link proof mismatch/);
+
+    const leftTaxonomyRow = raw.objects.find(row => row.side === 'left'
+        && row.learnerConceptLinks?.some(link => link.relationKind === 'verified_taxonomy_member'
+            && link.memberCode === 'TA2:2672'))!;
+    const wrongChildSideLexicon = structuredClone(frozenTargetLexicon);
+    const child = wrongChildSideLexicon.targets.find(target => target.id === 'TA2:2672')!;
+    child.sourceCardinality = { explicitSourceSide: 'right' };
+    assert.equal(leftTaxonomyRow.side, 'left');
+    assert.throws(() => validateIntegrationWithCatalog(raw, fixture, wrongChildSideLexicon), /taxonomy-member source side mismatch/);
+});
 test('opaque learner concept links resolve a selected side and fail closed when a bilateral side is omitted', () => {
     const pair = raw.objects.find(row => row.learnerConceptLinks?.some(link => link.conceptKey && link.relationKind === 'verified_class_member'))!;
     const key = pair.learnerConceptLinks!.find(link => link.conceptKey)!.conceptKey!;
@@ -798,7 +904,7 @@ test('opaque learner concept links resolve a selected side and fail closed when 
     assert.equal(readDatasetRoute('?concept=LC-00000000000000000000&side=left', raw.objects, regionIds).selected, null);
 
     const runtimePair = runtime.objects.find(row => row.sourceKey === left.sourceKey)!;
-    assert.deepEqual(runtimePair.learnerConceptKeys, [key]);
+    assert(runtimePair.learnerConceptKeys.includes(key));
     assert.equal(JSON.stringify(runtimePair).includes('TA2:'), false);
     assert.equal(JSON.stringify(runtimePair).includes('targetRelationEvidence'), false);
     assert.equal(readDatasetRoute(`?concept=${key}&side=left`, runtime.objects, regionIds).selected, left.sourceKey);

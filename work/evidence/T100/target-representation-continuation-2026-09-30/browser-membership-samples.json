@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "t100-browser-membership-samples-v1",
+  "taskId": "T100",
+  "capturedAtLocal": "2026-09-30",
+  "browser": "Codex in-app browser; local Vite learner app",
+  "viewportCssPx": {
+    "width": 1280,
+    "height": 720
+  },
+  "consoleLog": "not_observable_through_available_browser_surface; no zero-error claim",
+  "checks": [
+    {
+      "targetId": "TA2:503",
+      "targetLabel": "bones of cranium",
+      "memberTargetId": "TA2:552",
+      "memberSourceName": "Occipital bone",
+      "conceptKey": "LC-28daf70a393924229558",
+      "route": "/?regions=head&concept=LC-28daf70a393924229558",
+      "observed": "Member card remained the occipital bone. After rotating the shared scene to a posterior-lateral view, the highlighted patch was on the posterior cranium. One member visual spot-check only; not complete cranial-group extent."
+    },
+    {
+      "targetId": "TA2:2040",
+      "targetLabel": "muscles of head",
+      "memberTargetId": "TA2:2073",
+      "memberSourceName": "Orbicularis oris muscle",
+      "conceptKey": "LC-69dcf2aee352282c5909",
+      "routes": [
+        "/?regions=head&concept=LC-69dcf2aee352282c5909&side=left",
+        "/?regions=head&concept=LC-69dcf2aee352282c5909&side=right"
+      ],
+      "observed": "Left/right URL and card side matched; names were 입둘레근 / 구윤근 / Orbicularis oris muscle. Left route visually highlighted the mouth ring. Bilateral member spot-check only; not full group geometry or human review."
+    },
+    {
+      "targetId": "TA2:1031",
+      "targetLabel": "cervical vertebrae",
+      "memberTargetId": "TA2:1032",
+      "memberSourceName": "Vertebra C3",
+      "sourceKey": "ZA-c7010a9-ba233b3437c11ebd1878bb33",
+      "side": null,
+      "route": "/?source=ZA-c7010a9-ba233b3437c11ebd1878bb33",
+      "observed": "Actual local browser: after loading settled, URL and selected list item/card identified Vertebra C3 / 셋째 목뼈, and exactly one canvas was present. The screenshot remained at whole-body scale; the selected C3 surface was not visually distinguishable enough to count as a localized highlight pass.",
+      "visualResult": "card_and_route_match; local_surface_highlight_unconfirmed_at_overview_scale",
+      "screenshotInspected": true,
+      "screenshotStored": false
+    }
+  ],
+  "fullBrowserSweep": "incomplete; three membership samples inspected across prior/current continuation, not a 542-target/563-membership visual sweep",
+  "capturePersistence": "Visual output was inspected in the browser tool; screenshot bytes were not saved in the repository.",
+  "limitation": "Automated integration tests verify typed member routes. These two visual samples do not prove visual correctness for every target."
+}

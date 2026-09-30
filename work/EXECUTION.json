@@ -387,13 +387,20 @@
           "T100 2026-09-30: generate full 542-target/563-membership/12-region representation disposition and keep candidate classes separate from exact target identity",
           "T100 D 2026-09-30: exercise all 12 region routes on the shared scene and selected-card responsive/keyboard samples at 1440/1024/390; verify trapezius upper/lower source selection without claiming human approval",
           "T100 D 2026-09-30: measure updated runtime projection payload/index and available overview scene CPU/geometry budgets; GPU/VRAM and total process memory remain unavailable",
-          "T100 D 2026-09-30: pass whole-body 47/47, search 44/44, delivery 3/3, typecheck, production build, strict link/provenance validation, and expanded preservation comparison"
+          "T100 D 2026-09-30: pass whole-body 47/47, search 44/44, delivery 3/3, typecheck, production build, strict link/provenance validation, and expanded preservation comparison",
+          "T100 continuation 2026-09-30: resolve 85 of the initial 251 target representation candidates using exact frozen class-member or taxonomy ancestry relations with identity/side/hash validation",
+          "T100 continuation 2026-09-30: add 72 source class-member and 1,076 frozen taxonomy member routes without new geometry or canonical binding",
+          "T100 continuation 2026-09-30: classify the remaining 166 target rows by kind, owner, region, prior candidate class and unresolved exact member route; infer no side or geometry",
+          "T100 continuation 2026-09-30: validate all 563 memberships with 393 exact selectable routes, 170 missing exact routes and zero failed routes",
+          "T100 continuation 2026-09-30: inspect two actual browser member selection samples and audit the existing 75 terminology/evidence gaps without repeating no-result queries",
+          "T100 continuation 2026-09-30: cross-check all 75 target term gaps against their 150 current targetId source rows; keep 73 exact-label displays separate from two group member-only rows and leave dictionary fields unpromoted",
+          "T100 continuation 2026-09-30: compare overlay to task-start HEAD and verify 1,148 links were added without removing any existing link or changing non-link object fields"
         ],
         "pendingUnits": [
-          "C: 251 targets still lack an exact typed target/source representation: 18 direct candidates, 76 declared-crosswalk candidates, 93 ancestry-only candidates, and 64 without a current pinned surface crosswalk. Resolve exact identity/member scope and distinguish part/group representations from genuinely unavailable geometry.",
-          "C: 75 target terminology/evidence gaps and remaining side/identity/part exceptions remain open; composed names on existing source surfaces do not complete target terminology or canonical bindings.",
-          "D: exhaustive exact selection and visual QA for all 542 targets and 563 memberships remains incomplete. All 12 region routes and selected samples were checked but do not prove per-target coverage.",
-          "D: GPU time/VRAM and total browser/process memory were unavailable through the runtime surface; retain as unmeasured diagnostics and do not invent values or promote them to a new hard gate."
+          "C: 166 targets still lack an exact typed target/source representation: 7 direct candidates, 7 declared-crosswalk candidates, 88 ancestry-only candidates, and 64 without a current pinned surface crosswalk. Resolve exact identity and part/group/side scope from permitted evidence; keep unsupported cases unresolved.",
+          "C: 75 target terminology/evidence gaps remain (75 modern Korean, 72 traditional Korean, 75 Hanja fields missing in the stored ledger). Do not repeat the same exact no-result queries; obtain opened, edition-located records or keep fields missing.",
+          "D: 170 of 563 memberships have no exact selectable member-surface route. The 393 validated routes and two browser spot-checks do not constitute exhaustive 542-target/563-membership visual QA.",
+          "Prior GPU/VRAM and total process-memory values were unavailable; this continuation did not repeat performance measurements. Existing CPU/runtime evidence remains historical and must not be represented as measurements of the current overlay revision."
         ],
         "evidence": [
           "work/evidence/T100/start-baseline.json",
@@ -537,9 +544,19 @@
           "work/evidence/T100/continuation-2026-09-30/execution-record-delta.json",
           "work/evidence/T100/completion-2026-09-30/naming-validation.json",
           "work/evidence/T100/completion-2026-09-30/browser-validation.json",
-          "work/evidence/T100/completion-2026-09-30/verification.json"
+          "work/evidence/T100/completion-2026-09-30/verification.json",
+          "work/evidence/T100/target-representation-continuation-2026-09-30/start-baseline.json",
+          "work/evidence/T100/target-representation-continuation-2026-09-30/target-membership-plan-and-qa.json",
+          "work/evidence/T100/target-representation-continuation-2026-09-30/target-representation-continuation.json",
+          "work/evidence/T100/target-representation-continuation-2026-09-30/term-gap-continuation-audit.json",
+          "work/evidence/T100/target-representation-continuation-2026-09-30/browser-membership-samples.json",
+          "work/evidence/T100/target-representation-continuation-2026-09-30/verification-results.json",
+          "work/evidence/T100/target-representation-continuation-2026-09-30/preservation-after.json",
+          "work/evidence/T100/target-representation-continuation-2026-09-30/progress.json",
+          "work/evidence/T100/target-representation-continuation-2026-09-30/execution-record-delta.json",
+          "work/evidence/T100/target-representation-continuation-2026-09-30/overlay-delta-validation.json"
         ],
-        "result": "Contextual naming implemented under explicit user instruction. 672/672 display-eligible surfaces now have all three names; 267 source rows updated only in name/label evidence fields. Actual browser search/card verified. T100 overall remains partial because full target representation and final scene QA are not complete, not because an exact dictionary phrase or human approval is missing.",
+        "result": "Contextual naming implemented under explicit user instruction. 672/672 display-eligible surfaces now have all three names; 267 source rows updated only in name/label evidence fields. Actual browser search/card verified. T100 overall remains partial because full target representation and final scene QA are not complete, not because an exact dictionary phrase or human approval is missing. Latest target-representation continuation: 85 of 251 previous candidates gained exact member routes (11 direct, 69 crosswalk, 5 ancestry); 166 remain unresolved. 393/563 membership routes are exact-selectable, 170 lack an exact route, and route failures=0. T100 remains partial at the same nextUnit. Existing display evidence for the 75 target-term gaps was cross-checked: 150 exact targetId source rows carry Korean display names; 73 target labels match exactly, while two group targets expose member names only. The target term ledger remains open. Latest validation also rejects an explicit child-side mismatch in a taxonomy membership; a live C3 browser sample matched route/card with a localized highlight limitation. T100 remains partial at the same nextUnit.",
         "runtimeProjection": {
           "schema": "za-local-runtime-v2",
           "sourceOverlaySha256": "80cf8797c2b7844a9f7efa25a4f8425d9d7dc572e4220cd9de016d9499378b77",
@@ -593,12 +610,13 @@
           "exhaustiveTargetMemberVisualSelection": false,
           "typedExactRepresentationCounts": {
             "exactTermLinkedTargets": 280,
-            "verifiedSourceClassMemberTargets": 11
+            "verifiedSourceClassMemberTargets": 17,
+            "verifiedT96AncestorMemberTargets": 79
           },
           "unresolvedDispositionCounts": {
-            "directCandidate": 18,
-            "declaredCrosswalkCandidate": 76,
-            "ancestryOnlyCandidate": 93,
+            "directCandidate": 7,
+            "declaredCrosswalkCandidate": 7,
+            "ancestryOnlyCandidate": 88,
             "noPinnedCrosswalkObserved": 64
           },
           "newCanonicalHaBindings": 0,
@@ -607,10 +625,54 @@
           "sourceOnly": true,
           "publicRedistribution": "held",
           "humanReview": "not_performed",
-          "activeSceneGpuVram": "unavailable",
-          "activeSceneTotalMemory": "unavailable",
-          "acceptanceScope": "T100 remains partial until target representation and exhaustive target/member selection QA are resolved",
-          "evidence": "work/evidence/T100/target-representation-2026-09-30/verification-results.json"
+          "activeSceneGpuVram": "not_remeasured_unavailable",
+          "activeSceneTotalMemory": "not_remeasured_unavailable",
+          "acceptanceScope": "T100 partial: 166 target identities/scope, 170 membership exact routes, 75 terminology evidence gaps, and exhaustive visual QA remain unresolved. Do not advance task.",
+          "evidence": "work/evidence/T100/target-representation-continuation-2026-09-30/verification-results.json",
+          "initialRepresentationCandidates": {
+            "direct": 18,
+            "declaredCrosswalk": 76,
+            "ancestryOnly": 93,
+            "noPinnedCrosswalkObserved": 64
+          },
+          "resolvedThisContinuation": {
+            "direct": 11,
+            "declaredCrosswalk": 69,
+            "ancestryOnly": 5,
+            "total": 85
+          },
+          "selectableMembershipRoutes": 393,
+          "membershipRowsWithoutExactRoute": 170,
+          "membershipRouteFailures": 0,
+          "targetTerminologyEvidenceGaps": 75,
+          "historical163": {
+            "preserved": true,
+            "confirmedSourceWideGeometryAbsence": 0
+          },
+          "sourceOnlyRowCount": 830,
+          "humanReviewNotPerformedRows": 960,
+          "currentOverlaySha256": "8b3f488c76811e5388b2f2a74524d879b131bde532467b1ff0ae59fb951e4044",
+          "termGapSurfaceDisplayAudit": {
+            "targetGapCount": 75,
+            "existingTargetIdSourceRows": 150,
+            "existingModernSurfaceDisplayTargets": 75,
+            "existingTraditionalSurfaceDisplayTargets": 75,
+            "normalizedExactEnglishLabelTargets": 73,
+            "groupMemberOnlyTargets": [
+              "TA2:2477",
+              "TA2:503"
+            ],
+            "directTargetTermLedgerGapStillOpen": 75,
+            "humanReview": "not_performed"
+          },
+          "overlayDeltaValidated": {
+            "addedLearnerConceptLinks": 1148,
+            "removedPreexistingLinks": 0,
+            "nonLinkObjectFieldsChanged": 0,
+            "newGeometry": 0,
+            "newCanonicalHaBindings": 0
+          },
+          "taxonomyChildExplicitSideMismatchRejected": true
         },
         "resumeHistory": [
           {
@@ -619,6 +681,22 @@
             "unit": "resolve-target-representation-and-final-scene-qa",
             "result": "392 exact normalized target-term relations across 203 targets added; all 12 routes and selected responsive/browser samples verified; target representation and exhaustive visual-selection remain partial.",
             "evidence": "work/evidence/T100/target-representation-2026-09-30/progress.json",
+            "nextUnit": "resolve-target-representation-and-final-scene-qa",
+            "nextId": "T100"
+          },
+          {
+            "date": "2026-09-30",
+            "unit": "resolve-target-representation-and-final-scene-qa",
+            "result": "Added 72 exact class-member and 1,076 frozen taxonomy-member relations; 85 initial candidate targets now have typed routes. 166 target rows and 170 memberships remain without an exact route; 75 terminology/evidence gaps remain. Two browser member samples passed. T100 stays partial.",
+            "evidence": "work/evidence/T100/target-representation-continuation-2026-09-30/progress.json",
+            "nextUnit": "resolve-target-representation-and-final-scene-qa",
+            "nextId": "T100"
+          },
+          {
+            "date": "2026-09-30",
+            "unit": "resolve-target-representation-and-final-scene-qa",
+            "result": "Added fail-closed explicit child-side validation for taxonomy-member links and a negative wrong-side fixture; inspected one live C3 member route/card/canvas sample, while localized highlight and full 542/563 visual QA remain incomplete. T100 remains partial.",
+            "evidence": "work/evidence/T100/target-representation-continuation-2026-09-30/verification-results.json",
             "nextUnit": "resolve-target-representation-and-final-scene-qa",
             "nextId": "T100"
           }

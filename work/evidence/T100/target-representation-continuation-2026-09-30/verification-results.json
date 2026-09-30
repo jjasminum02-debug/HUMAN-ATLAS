@@ -1,0 +1,144 @@
+{
+  "schemaVersion": "t100-continuation-verification-v1",
+  "taskId": "T100",
+  "capturedAtLocal": "2026-09-30",
+  "nextUnit": "resolve-target-representation-and-final-scene-qa",
+  "checks": [
+    {
+      "name": "12-region-route-checks-and-performance",
+      "status": "not_repeated",
+      "reason": "Already recorded in prior T100 evidence; user asked not to repeat them"
+    },
+    {
+      "name": "browser-member-spot-checks",
+      "evidence": "browser-membership-samples.json",
+      "status": "passed_for_two_samples",
+      "fullSweep": false
+    },
+    {
+      "name": "delivery-regression",
+      "command": "pnpm run test:delivery",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0
+    },
+    {
+      "name": "execution-projection-sync",
+      "commands": [
+        "python3 work/tools/sync_execution.py",
+        "python3 work/tools/sync_execution.py --check"
+      ],
+      "status": "passed; no derived view needed changes"
+    },
+    {
+      "name": "git-diff-check",
+      "command": "git diff --check -- task-owned paths",
+      "status": "passed"
+    },
+    {
+      "name": "gpu-vram-total-process-memory",
+      "status": "not_measured_again",
+      "reason": "Not exposed by prior browser instrumentation; no values inferred"
+    },
+    {
+      "name": "membership-builder-check",
+      "command": "python3 work/evidence/T100/target-representation-continuation-2026-09-30/build_target_memberships.py --check",
+      "status": "passed",
+      "resolvedTargets": {
+        "direct": 11,
+        "declaredCrosswalk": 69,
+        "ancestry": 5
+      },
+      "remainingTargets": {
+        "direct": 7,
+        "declaredCrosswalk": 7,
+        "ancestry": 88,
+        "noCurrentPinnedCrosswalkObserved": 64
+      },
+      "memberships": {
+        "exactRoute": 393,
+        "noExactRoute": 170,
+        "routeFailures": 0
+      },
+      "termGaps": 75,
+      "overlaySha256": "8b3f488c76811e5388b2f2a74524d879b131bde532467b1ff0ae59fb951e4044"
+    },
+    {
+      "name": "overlay-link-only-delta",
+      "evidence": "overlay-delta-validation.json",
+      "status": "passed",
+      "addedRelations": 1148,
+      "removedPreexistingRelations": 0,
+      "nonLinkObjectFieldsChanged": 0
+    },
+    {
+      "name": "production-build",
+      "command": "pnpm run build",
+      "status": "passed",
+      "existingChunkAdvisory": "App JavaScript chunk 954.06 kB exceeds the 500 kB advisory threshold"
+    },
+    {
+      "name": "search-regression",
+      "command": "pnpm run test:search",
+      "status": "passed",
+      "passed": 44,
+      "failed": 0
+    },
+    {
+      "name": "typecheck",
+      "command": "pnpm run typecheck",
+      "status": "passed"
+    },
+    {
+      "name": "whole-body-regression",
+      "command": "pnpm run test:whole-body",
+      "status": "passed",
+      "passed": 48,
+      "failed": 0,
+      "compiledChunks": 46
+    },
+    {
+      "name": "taxonomy-child-explicit-side-guard",
+      "status": "passed",
+      "command": "pnpm run test:whole-body",
+      "detail": "Existing 1,076 production taxonomy links contain no child-explicit-side constraint. A negative fixture assigning TA2:2672 explicitSourceSide=right against a left source row was rejected by the validator."
+    },
+    {
+      "name": "actual-browser-cervical-member-sample",
+      "status": "passed_with_visual_limit",
+      "evidence": "browser-membership-samples.json",
+      "detail": "Selected card and source route matched Vertebra C3 / 셋째 목뼈; one canvas loaded. Overview screenshot did not make localized C3 highlight confidently distinguishable."
+    },
+    {
+      "name": "typecheck-rerun-after-side-guard",
+      "status": "passed",
+      "command": "pnpm run typecheck"
+    },
+    {
+      "name": "production-build-rerun-after-side-guard",
+      "status": "passed_with_existing_advisory",
+      "command": "pnpm run build",
+      "advisory": "App JavaScript chunk 954.06 kB exceeds 500 kB advisory threshold."
+    },
+    {
+      "name": "12-region-routes-and-performance",
+      "status": "not_repeated",
+      "reason": "Completed earlier and user explicitly asked not to repeat them."
+    },
+    {
+      "name": "search-and-delivery-regressions",
+      "status": "not_repeated",
+      "reason": "Not affected by the child-side validator change; prior results remain recorded."
+    }
+  ],
+  "aggregate": "All checks run in this continuation passed. T100 remains in_progress/partial: 166 target scopes, 170 exact member routes, 75 target terminology/evidence gaps, and exhaustive target/member visual QA remain unresolved.",
+  "toolchainResolution": {
+    "initialLoginShellNode": false,
+    "rerunNodeExecutable": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "rerunStatus": "all listed pnpm checks passed using bundled runtime"
+  },
+  "notes": [
+    "pnpm checks first lacked node on the login-shell PATH; they were rerun with the Codex bundled Node executable and passed.",
+    "No previous 12-region route sweep or performance measurements were repeated."
+  ]
+}
