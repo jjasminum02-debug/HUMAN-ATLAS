@@ -222,8 +222,8 @@ test('T100 ordinal-composed modern-only names accept field-scoped evidence witho
     const modernOnly = structuredClone(raw);
     const rib = modernOnly.objects.find(row => row.sourceName === 'Eighth rib.l')!;
     assert.equal(rib.names.koModern, '여덟째갈비뼈');
-    assert.equal(rib.names.koTraditional, null);
-    assert.deepEqual(Object.keys(rib.nameEvidence ?? {}), ['koModern']);
+    assert.equal(rib.names.koTraditional, '제8늑골');
+    assert.equal(rib.nameEvidence?.koTraditional?.value, rib.names.koTraditional);
     assert.doesNotThrow(() => validateIntegration(modernOnly, fixture));
 
     const mismatched = structuredClone(modernOnly);
@@ -319,7 +319,7 @@ test('T100 B03 adds only ten terminology dispositions and 45 exact lumbar, ordin
         if (/^(Vertebra L[1-5]|(?:First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|Eleventh|Twelfth) rib\.[lr])$/i.test(row.sourceName)) {
             assert(row.nameEvidence?.koModern, `later T100 ordinal naming evidence missing: ${row.sourceName}`);
             assert.equal(row.nameEvidence!.koModern!.value, row.names.koModern);
-            assert.equal(row.names.koTraditional, null);
+            assert(row.names.koTraditional === null || row.nameEvidence?.koTraditional?.value === row.names.koTraditional);
         }
     }
     for (const target of terms) {
@@ -353,7 +353,7 @@ test('T100 B03 adds only ten terminology dispositions and 45 exact lumbar, ordin
         for (const query of [target.names.koModern, target.names.koTraditional].filter(Boolean) as string[]) {
             const matches = searchStructures(raw.objects, query, []);
             const targetMemberMatches = matches.filter(row => row.targetIds.includes(target.targetId));
-            if ((target.targetId === 'TA2:1068' || target.targetId === 'TA2:1118') && query === target.names.koModern) {
+            if ((target.targetId === 'TA2:1068' || target.targetId === 'TA2:1118') && (query === target.names.koModern || targetMemberMatches.length > 0)) {
                 assert(targetMemberMatches.length > 0,
                     'later T100 exact ordinal member names should search through the existing B03 class-member surfaces');
                 assert(targetMemberMatches.every(row => row.nameEvidence?.koModern?.value === row.names.koModern
@@ -597,7 +597,7 @@ test('T100 B bulk exact group terms and ordinal compositions preserve semantic s
     const ordinalRows = raw.objects.filter(row => row.nameEvidence?.koModern?.sourceIds.some(id => ordinalIds.includes(id)));
     assert.equal(ordinalRows.length, 35);
     assert(ordinalRows.every(row => row.names.koModern === row.nameEvidence?.koModern?.value
-        && row.names.koTraditional === null && row.haConceptId === null
+        && (row.names.koTraditional === null || row.nameEvidence?.koTraditional?.value === row.names.koTraditional) && row.haConceptId === null
         && row.sourceOnly && row.humanReview === 'not_performed' && row.publicRedistribution === 'held'));
     const laryngealMembers = raw.objects.filter(row => row.targetIds.includes('TA2:2192'));
     assert.equal(laryngealMembers.length, 15);
@@ -673,9 +673,11 @@ test('T100 semantic continuation groups the 226 unnamed surfaces without side du
         for (const key of ['sourceOnly', 'publicRedistribution', 'humanReview', 'mappingStatus', 'regionIds', 'side',
             'aliases', 'localDisplayEligible', 'inspectionEligible', 'defaultVisible'])
             assert.deepEqual((row as unknown as Record<string, unknown>)[key], baseline[key], `${key} changed for ${row.sourceName}`);
-        assert.deepEqual({ koTraditional: row.names.koTraditional, en: row.names.en },
-            { koTraditional: (baseline.names as any).koTraditional, en: (baseline.names as any).en },
-            `non-modern names changed for ${row.sourceName}`);
+        assert.equal(row.names.en, (baseline.names as any).en);
+        if (row.names.koTraditional !== (baseline.names as any).koTraditional) {
+            assert.equal(row.nameEvidence?.koTraditional?.value, row.names.koTraditional);
+            assert(row.nameEvidence?.koTraditional?.sourceIds.includes('t100-explicit-source-part-composition'));
+        }
         assert(!/\p{Script=Han}/u.test(row.names.koModern ?? ''));
     }
     assert.equal(groups.size, 113);
@@ -694,7 +696,8 @@ test('T100 semantic continuation groups the 226 unnamed surfaces without side du
     assert.equal(kinds.get('side_or_source_identity_conflict'), 1);
 
     const handConflict = raw.objects.find(row => row.sourceName === 'Distal phalanx of fifth finger of hand.l')!;
-    assert.equal(handConflict.names.koModern, null);
+    assert.equal(handConflict.names.koModern, '다섯째손가락 끝마디뼈');
+    assert(handConflict.nameEvidence?.koModern?.sourceIds.includes('t100-explicit-source-part-composition'));
     assert.equal(handConflict.learnerConceptLinks![0].conceptKey, null);
     assert.equal(handConflict.learnerConceptLinks![0].identityStatus, 'held');
     const iliocostalis = groups.get('Iliocostalis colli muscle')!;
@@ -744,5 +747,16 @@ test('composed Korean phalanx and named carpal terms search to one source concep
     }
     const conflictResult = searchStructures(runtime.objects, '다섯째손가락 끝마디뼈', []);
     assert.equal(conflictResult.length, 1);
-    assert.equal(conflictResult[0].side, 'right');
+    assert.equal(conflictResult[0].names.koModern, '다섯째손가락 끝마디뼈');
+    assert.deepEqual(runtime.objects.find(row => row.sourceKey === 'ZA-c7010a9-0e655a17b4dd00a4d206bb71')!.learnerConceptKeys, []);
+});
+
+test('contextual names cover visible surfaces without exposing judgment records or promoting holds', () => {
+    const visible = runtime.objects.filter(row => row.localDisplayEligible);
+    assert(visible.every(row => Object.values(row.names).every(value => typeof value === 'string' && value.trim())));
+    assert(visible.every(row => !/[\p{Script=Han}]/u.test(row.names.koModern! + row.names.koTraditional!)));
+    assert(!JSON.stringify(runtime).includes('AI contextual'));
+    const invalid = structuredClone(raw);
+    invalid.evidenceSources!.find(source => source.id === 't100-explicit-source-part-composition')!.url = 'local:../../private.json';
+    assert.throws(() => validateIntegration(invalid, fixture));
 });

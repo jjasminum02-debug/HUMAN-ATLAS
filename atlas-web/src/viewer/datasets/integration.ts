@@ -263,7 +263,7 @@ export function validateIntegration(value: unknown, dataset: Dataset, frozenTarg
     const instances = new Map(dataset.instances.map(x => [x.sourceKey, x]));
     const evidenceSources = new Map<string, IntegrationEvidenceSource>();
     for (const source of i.evidenceSources ?? []) {
-        if (!source.id || evidenceSources.has(source.id) || !/^https?:\/\//.test(source.url)
+        if (!source.id || evidenceSources.has(source.id) || !(/^https?:\/\//.test(source.url) || source.accessMethod === 'local_frozen_metadata' && /^local:atlas-data\/terminology\/rules\/[a-z0-9-]+\.json$/.test(source.url))
             || !/^\d{4}-\d{2}-\d{2}$/.test(source.accessDate) || !source.locator.trim()
             || !['opened_html', 'opened_pdf', 'search_index_excerpt', 'local_frozen_metadata'].includes(source.accessMethod))
             throw Error('integration evidence source');
