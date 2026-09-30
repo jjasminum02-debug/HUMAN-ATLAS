@@ -12194,7 +12194,8 @@
       "targetIds": [
         "TA2:1504",
         "TA2:1446",
-        "TA2:1505"
+        "TA2:1505",
+        "TA2:1512"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -12267,6 +12268,49 @@
             "za-t99-t100-b05-frozen-source-objects",
             "fipat-ta2-t100-b05-frozen-target-terms"
           ]
+        },
+        {
+          "targetId": "TA2:1512",
+          "targetEnglish": "distal phalanx of foot",
+          "targetLatin": "phalanx distalis pedis",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "foot",
+          "targetRegionIds": [
+            "foot"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-3ef3969d3040f9434dca1ab6",
+          "sourceObjectName": "Distal phalanx of fifth finger of foot.l",
+          "sourceDataName": "Distal phalanx of fifth finger of foot",
+          "sourceParent": "Phalanges of foot.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Appendicular skeleton",
+            "Bones of free lower limb",
+            "Bones of lower limb",
+            "Bonus collection",
+            "Left lower limb",
+            "Right foot"
+          ],
+          "sourceSide": "left",
+          "evaluatedGeometrySha256": "42f2fefa48501c3598e3c9486f43bbf87a85faad613ca069d376c084f4974f90",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact frozen TA2:1512 distal-foot target plus source object name `Distal phalanx of {ordinal} finger of foot.{l|r}`, parent `Phalanges of foot.g`, and source-declared side. This adds a distal member relation while retaining the distinct existing generic TA2:1505 link; target extent remains unclaimed.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": null,
+          "memberCode": "distal:fifth:left",
+          "matchEvidenceSourceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
+          ]
         }
       ],
       "learnerConceptLinks": [
@@ -12321,6 +12365,23 @@
           ],
           "identityStatus": "evidence_backed",
           "humanReview": "not_performed"
+        },
+        {
+          "conceptKey": "LC-f11ff198a400fd05afdc",
+          "relationKind": "verified_class_member",
+          "targetIds": [
+            "TA2:1512"
+          ],
+          "memberCode": "distal:fifth",
+          "targetTermMatches": [],
+          "matchRule": "exact frozen T96 class_member memberCode + observed source side + row evidence",
+          "evidenceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
+          ],
+          "identityStatus": "evidence_backed",
+          "humanReview": "not_performed"
         }
       ],
       "nameEvidence": {
@@ -12366,7 +12427,8 @@
       "targetIds": [
         "TA2:1504",
         "TA2:1446",
-        "TA2:1505"
+        "TA2:1505",
+        "TA2:1512"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -12439,6 +12501,49 @@
             "za-t99-t100-b05-frozen-source-objects",
             "fipat-ta2-t100-b05-frozen-target-terms"
           ]
+        },
+        {
+          "targetId": "TA2:1512",
+          "targetEnglish": "distal phalanx of foot",
+          "targetLatin": "phalanx distalis pedis",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "foot",
+          "targetRegionIds": [
+            "foot"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-7fdc346491c401fafbbde592",
+          "sourceObjectName": "Distal phalanx of fifth finger of foot.r",
+          "sourceDataName": "Distal phalanx of fifth finger of foot",
+          "sourceParent": "Phalanges of foot.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Appendicular skeleton",
+            "Bones of free lower limb",
+            "Bones of lower limb",
+            "Bonus collection",
+            "Right foot",
+            "Right lower limb"
+          ],
+          "sourceSide": "right",
+          "evaluatedGeometrySha256": "42f2fefa48501c3598e3c9486f43bbf87a85faad613ca069d376c084f4974f90",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact frozen TA2:1512 distal-foot target plus source object name `Distal phalanx of {ordinal} finger of foot.{l|r}`, parent `Phalanges of foot.g`, and source-declared side. This adds a distal member relation while retaining the distinct existing generic TA2:1505 link; target extent remains unclaimed.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": null,
+          "memberCode": "distal:fifth:right",
+          "matchEvidenceSourceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
+          ]
         }
       ],
       "learnerConceptLinks": [
@@ -12490,6 +12595,23 @@
             "fipat-ta2-t96-full-target-catalog",
             "za-t99-frozen-source-objects",
             "za-t99-t100-b05-frozen-source-objects"
+          ],
+          "identityStatus": "evidence_backed",
+          "humanReview": "not_performed"
+        },
+        {
+          "conceptKey": "LC-f11ff198a400fd05afdc",
+          "relationKind": "verified_class_member",
+          "targetIds": [
+            "TA2:1512"
+          ],
+          "memberCode": "distal:fifth",
+          "targetTermMatches": [],
+          "matchRule": "exact frozen T96 class_member memberCode + observed source side + row evidence",
+          "evidenceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
           ],
           "identityStatus": "evidence_backed",
           "humanReview": "not_performed"
@@ -12947,7 +13069,8 @@
       "targetIds": [
         "TA2:1504",
         "TA2:1446",
-        "TA2:1505"
+        "TA2:1505",
+        "TA2:1512"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -13020,6 +13143,49 @@
             "za-t99-t100-b05-frozen-source-objects",
             "fipat-ta2-t100-b05-frozen-target-terms"
           ]
+        },
+        {
+          "targetId": "TA2:1512",
+          "targetEnglish": "distal phalanx of foot",
+          "targetLatin": "phalanx distalis pedis",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "foot",
+          "targetRegionIds": [
+            "foot"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-20ca0726a44ab036405dd976",
+          "sourceObjectName": "Distal phalanx of first finger of foot.l",
+          "sourceDataName": "Distal phalanx of first finger of foot",
+          "sourceParent": "Phalanges of foot.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Appendicular skeleton",
+            "Bones of free lower limb",
+            "Bones of lower limb",
+            "Bonus collection",
+            "Left lower limb",
+            "Right foot"
+          ],
+          "sourceSide": "left",
+          "evaluatedGeometrySha256": "95f2dd8cea7c02d20cb03bcaa5870a9a7a611ca9722b6cbb581c3863574e26cb",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact frozen TA2:1512 distal-foot target plus source object name `Distal phalanx of {ordinal} finger of foot.{l|r}`, parent `Phalanges of foot.g`, and source-declared side. This adds a distal member relation while retaining the distinct existing generic TA2:1505 link; target extent remains unclaimed.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": null,
+          "memberCode": "distal:first:left",
+          "matchEvidenceSourceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
+          ]
         }
       ],
       "learnerConceptLinks": [
@@ -13074,6 +13240,23 @@
           ],
           "identityStatus": "evidence_backed",
           "humanReview": "not_performed"
+        },
+        {
+          "conceptKey": "LC-8a17730d8ed0783d9758",
+          "relationKind": "verified_class_member",
+          "targetIds": [
+            "TA2:1512"
+          ],
+          "memberCode": "distal:first",
+          "targetTermMatches": [],
+          "matchRule": "exact frozen T96 class_member memberCode + observed source side + row evidence",
+          "evidenceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
+          ],
+          "identityStatus": "evidence_backed",
+          "humanReview": "not_performed"
         }
       ],
       "nameEvidence": {
@@ -13119,7 +13302,8 @@
       "targetIds": [
         "TA2:1504",
         "TA2:1446",
-        "TA2:1505"
+        "TA2:1505",
+        "TA2:1512"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -13192,6 +13376,49 @@
             "za-t99-t100-b05-frozen-source-objects",
             "fipat-ta2-t100-b05-frozen-target-terms"
           ]
+        },
+        {
+          "targetId": "TA2:1512",
+          "targetEnglish": "distal phalanx of foot",
+          "targetLatin": "phalanx distalis pedis",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "foot",
+          "targetRegionIds": [
+            "foot"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-21ebc5730330e4150d9a21c3",
+          "sourceObjectName": "Distal phalanx of first finger of foot.r",
+          "sourceDataName": "Distal phalanx of first finger of foot",
+          "sourceParent": "Phalanges of foot.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Appendicular skeleton",
+            "Bones of free lower limb",
+            "Bones of lower limb",
+            "Bonus collection",
+            "Right foot",
+            "Right lower limb"
+          ],
+          "sourceSide": "right",
+          "evaluatedGeometrySha256": "95f2dd8cea7c02d20cb03bcaa5870a9a7a611ca9722b6cbb581c3863574e26cb",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact frozen TA2:1512 distal-foot target plus source object name `Distal phalanx of {ordinal} finger of foot.{l|r}`, parent `Phalanges of foot.g`, and source-declared side. This adds a distal member relation while retaining the distinct existing generic TA2:1505 link; target extent remains unclaimed.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": null,
+          "memberCode": "distal:first:right",
+          "matchEvidenceSourceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
+          ]
         }
       ],
       "learnerConceptLinks": [
@@ -13243,6 +13470,23 @@
             "fipat-ta2-t96-full-target-catalog",
             "za-t99-frozen-source-objects",
             "za-t99-t100-b05-frozen-source-objects"
+          ],
+          "identityStatus": "evidence_backed",
+          "humanReview": "not_performed"
+        },
+        {
+          "conceptKey": "LC-8a17730d8ed0783d9758",
+          "relationKind": "verified_class_member",
+          "targetIds": [
+            "TA2:1512"
+          ],
+          "memberCode": "distal:first",
+          "targetTermMatches": [],
+          "matchRule": "exact frozen T96 class_member memberCode + observed source side + row evidence",
+          "evidenceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
           ],
           "identityStatus": "evidence_backed",
           "humanReview": "not_performed"
@@ -13941,7 +14185,8 @@
       "targetIds": [
         "TA2:1504",
         "TA2:1446",
-        "TA2:1505"
+        "TA2:1505",
+        "TA2:1512"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -14014,6 +14259,49 @@
             "za-t99-t100-b05-frozen-source-objects",
             "fipat-ta2-t100-b05-frozen-target-terms"
           ]
+        },
+        {
+          "targetId": "TA2:1512",
+          "targetEnglish": "distal phalanx of foot",
+          "targetLatin": "phalanx distalis pedis",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "foot",
+          "targetRegionIds": [
+            "foot"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-485332cf50a4c56009d6deab",
+          "sourceObjectName": "Distal phalanx of fourth finger of foot.l",
+          "sourceDataName": "Distal phalanx of fourth finger of foot",
+          "sourceParent": "Phalanges of foot.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Appendicular skeleton",
+            "Bones of free lower limb",
+            "Bones of lower limb",
+            "Bonus collection",
+            "Left lower limb",
+            "Right foot"
+          ],
+          "sourceSide": "left",
+          "evaluatedGeometrySha256": "10db7d1b1d8330745b607a158a09229429971a5ba9e8037c23cb43f311ad8973",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact frozen TA2:1512 distal-foot target plus source object name `Distal phalanx of {ordinal} finger of foot.{l|r}`, parent `Phalanges of foot.g`, and source-declared side. This adds a distal member relation while retaining the distinct existing generic TA2:1505 link; target extent remains unclaimed.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": null,
+          "memberCode": "distal:fourth:left",
+          "matchEvidenceSourceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
+          ]
         }
       ],
       "learnerConceptLinks": [
@@ -14068,6 +14356,23 @@
           ],
           "identityStatus": "evidence_backed",
           "humanReview": "not_performed"
+        },
+        {
+          "conceptKey": "LC-aa9e38e7c5d64d758049",
+          "relationKind": "verified_class_member",
+          "targetIds": [
+            "TA2:1512"
+          ],
+          "memberCode": "distal:fourth",
+          "targetTermMatches": [],
+          "matchRule": "exact frozen T96 class_member memberCode + observed source side + row evidence",
+          "evidenceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
+          ],
+          "identityStatus": "evidence_backed",
+          "humanReview": "not_performed"
         }
       ],
       "nameEvidence": {
@@ -14113,7 +14418,8 @@
       "targetIds": [
         "TA2:1504",
         "TA2:1446",
-        "TA2:1505"
+        "TA2:1505",
+        "TA2:1512"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -14186,6 +14492,49 @@
             "za-t99-t100-b05-frozen-source-objects",
             "fipat-ta2-t100-b05-frozen-target-terms"
           ]
+        },
+        {
+          "targetId": "TA2:1512",
+          "targetEnglish": "distal phalanx of foot",
+          "targetLatin": "phalanx distalis pedis",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "foot",
+          "targetRegionIds": [
+            "foot"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-403941ce03486160854a2e7e",
+          "sourceObjectName": "Distal phalanx of fourth finger of foot.r",
+          "sourceDataName": "Distal phalanx of fourth finger of foot",
+          "sourceParent": "Phalanges of foot.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Appendicular skeleton",
+            "Bones of free lower limb",
+            "Bones of lower limb",
+            "Bonus collection",
+            "Right foot",
+            "Right lower limb"
+          ],
+          "sourceSide": "right",
+          "evaluatedGeometrySha256": "10db7d1b1d8330745b607a158a09229429971a5ba9e8037c23cb43f311ad8973",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact frozen TA2:1512 distal-foot target plus source object name `Distal phalanx of {ordinal} finger of foot.{l|r}`, parent `Phalanges of foot.g`, and source-declared side. This adds a distal member relation while retaining the distinct existing generic TA2:1505 link; target extent remains unclaimed.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": null,
+          "memberCode": "distal:fourth:right",
+          "matchEvidenceSourceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
+          ]
         }
       ],
       "learnerConceptLinks": [
@@ -14237,6 +14586,23 @@
             "fipat-ta2-t96-full-target-catalog",
             "za-t99-frozen-source-objects",
             "za-t99-t100-b05-frozen-source-objects"
+          ],
+          "identityStatus": "evidence_backed",
+          "humanReview": "not_performed"
+        },
+        {
+          "conceptKey": "LC-aa9e38e7c5d64d758049",
+          "relationKind": "verified_class_member",
+          "targetIds": [
+            "TA2:1512"
+          ],
+          "memberCode": "distal:fourth",
+          "targetTermMatches": [],
+          "matchRule": "exact frozen T96 class_member memberCode + observed source side + row evidence",
+          "evidenceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
           ],
           "identityStatus": "evidence_backed",
           "humanReview": "not_performed"
@@ -14935,7 +15301,8 @@
       "targetIds": [
         "TA2:1504",
         "TA2:1446",
-        "TA2:1505"
+        "TA2:1505",
+        "TA2:1512"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -15008,6 +15375,49 @@
             "za-t99-t100-b05-frozen-source-objects",
             "fipat-ta2-t100-b05-frozen-target-terms"
           ]
+        },
+        {
+          "targetId": "TA2:1512",
+          "targetEnglish": "distal phalanx of foot",
+          "targetLatin": "phalanx distalis pedis",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "foot",
+          "targetRegionIds": [
+            "foot"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-84f1edbaa160c729a1e1f4b2",
+          "sourceObjectName": "Distal phalanx of second finger of foot.l",
+          "sourceDataName": "Distal phalanx of second finger of foot",
+          "sourceParent": "Phalanges of foot.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Appendicular skeleton",
+            "Bones of free lower limb",
+            "Bones of lower limb",
+            "Bonus collection",
+            "Left lower limb",
+            "Right foot"
+          ],
+          "sourceSide": "left",
+          "evaluatedGeometrySha256": "68717389fded4e54a31189a4756fc09cb0b7148905f15ce5b5911b716f99426f",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact frozen TA2:1512 distal-foot target plus source object name `Distal phalanx of {ordinal} finger of foot.{l|r}`, parent `Phalanges of foot.g`, and source-declared side. This adds a distal member relation while retaining the distinct existing generic TA2:1505 link; target extent remains unclaimed.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": null,
+          "memberCode": "distal:second:left",
+          "matchEvidenceSourceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
+          ]
         }
       ],
       "learnerConceptLinks": [
@@ -15062,6 +15472,23 @@
           ],
           "identityStatus": "evidence_backed",
           "humanReview": "not_performed"
+        },
+        {
+          "conceptKey": "LC-882ebc28d2a26e44c896",
+          "relationKind": "verified_class_member",
+          "targetIds": [
+            "TA2:1512"
+          ],
+          "memberCode": "distal:second",
+          "targetTermMatches": [],
+          "matchRule": "exact frozen T96 class_member memberCode + observed source side + row evidence",
+          "evidenceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
+          ],
+          "identityStatus": "evidence_backed",
+          "humanReview": "not_performed"
         }
       ],
       "nameEvidence": {
@@ -15107,7 +15534,8 @@
       "targetIds": [
         "TA2:1504",
         "TA2:1446",
-        "TA2:1505"
+        "TA2:1505",
+        "TA2:1512"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -15180,6 +15608,49 @@
             "za-t99-t100-b05-frozen-source-objects",
             "fipat-ta2-t100-b05-frozen-target-terms"
           ]
+        },
+        {
+          "targetId": "TA2:1512",
+          "targetEnglish": "distal phalanx of foot",
+          "targetLatin": "phalanx distalis pedis",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "foot",
+          "targetRegionIds": [
+            "foot"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-c956642614a1502da28310f7",
+          "sourceObjectName": "Distal phalanx of second finger of foot.r",
+          "sourceDataName": "Distal phalanx of second finger of foot",
+          "sourceParent": "Phalanges of foot.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Appendicular skeleton",
+            "Bones of free lower limb",
+            "Bones of lower limb",
+            "Bonus collection",
+            "Right foot",
+            "Right lower limb"
+          ],
+          "sourceSide": "right",
+          "evaluatedGeometrySha256": "68717389fded4e54a31189a4756fc09cb0b7148905f15ce5b5911b716f99426f",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact frozen TA2:1512 distal-foot target plus source object name `Distal phalanx of {ordinal} finger of foot.{l|r}`, parent `Phalanges of foot.g`, and source-declared side. This adds a distal member relation while retaining the distinct existing generic TA2:1505 link; target extent remains unclaimed.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": null,
+          "memberCode": "distal:second:right",
+          "matchEvidenceSourceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
+          ]
         }
       ],
       "learnerConceptLinks": [
@@ -15231,6 +15702,23 @@
             "fipat-ta2-t96-full-target-catalog",
             "za-t99-frozen-source-objects",
             "za-t99-t100-b05-frozen-source-objects"
+          ],
+          "identityStatus": "evidence_backed",
+          "humanReview": "not_performed"
+        },
+        {
+          "conceptKey": "LC-882ebc28d2a26e44c896",
+          "relationKind": "verified_class_member",
+          "targetIds": [
+            "TA2:1512"
+          ],
+          "memberCode": "distal:second",
+          "targetTermMatches": [],
+          "matchRule": "exact frozen T96 class_member memberCode + observed source side + row evidence",
+          "evidenceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
           ],
           "identityStatus": "evidence_backed",
           "humanReview": "not_performed"
@@ -15929,7 +16417,8 @@
       "targetIds": [
         "TA2:1504",
         "TA2:1446",
-        "TA2:1505"
+        "TA2:1505",
+        "TA2:1512"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -16002,6 +16491,49 @@
             "za-t99-t100-b05-frozen-source-objects",
             "fipat-ta2-t100-b05-frozen-target-terms"
           ]
+        },
+        {
+          "targetId": "TA2:1512",
+          "targetEnglish": "distal phalanx of foot",
+          "targetLatin": "phalanx distalis pedis",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "foot",
+          "targetRegionIds": [
+            "foot"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-89b42c08f1be78e7706de602",
+          "sourceObjectName": "Distal phalanx of third finger of foot.l",
+          "sourceDataName": "Distal phalanx of third finger of foot",
+          "sourceParent": "Phalanges of foot.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Appendicular skeleton",
+            "Bones of free lower limb",
+            "Bones of lower limb",
+            "Bonus collection",
+            "Left lower limb",
+            "Right foot"
+          ],
+          "sourceSide": "left",
+          "evaluatedGeometrySha256": "8236ec61735e7f87a51073c0c26ccc3cb74b596d2568aed880b8524b980ff5fa",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact frozen TA2:1512 distal-foot target plus source object name `Distal phalanx of {ordinal} finger of foot.{l|r}`, parent `Phalanges of foot.g`, and source-declared side. This adds a distal member relation while retaining the distinct existing generic TA2:1505 link; target extent remains unclaimed.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": null,
+          "memberCode": "distal:third:left",
+          "matchEvidenceSourceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
+          ]
         }
       ],
       "learnerConceptLinks": [
@@ -16056,6 +16588,23 @@
           ],
           "identityStatus": "evidence_backed",
           "humanReview": "not_performed"
+        },
+        {
+          "conceptKey": "LC-6f58acc2f6873d71c667",
+          "relationKind": "verified_class_member",
+          "targetIds": [
+            "TA2:1512"
+          ],
+          "memberCode": "distal:third",
+          "targetTermMatches": [],
+          "matchRule": "exact frozen T96 class_member memberCode + observed source side + row evidence",
+          "evidenceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
+          ],
+          "identityStatus": "evidence_backed",
+          "humanReview": "not_performed"
         }
       ],
       "nameEvidence": {
@@ -16101,7 +16650,8 @@
       "targetIds": [
         "TA2:1504",
         "TA2:1446",
-        "TA2:1505"
+        "TA2:1505",
+        "TA2:1512"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -16174,6 +16724,49 @@
             "za-t99-t100-b05-frozen-source-objects",
             "fipat-ta2-t100-b05-frozen-target-terms"
           ]
+        },
+        {
+          "targetId": "TA2:1512",
+          "targetEnglish": "distal phalanx of foot",
+          "targetLatin": "phalanx distalis pedis",
+          "targetSemanticKind": "bone",
+          "targetPrimaryOwner": "foot",
+          "targetRegionIds": [
+            "foot"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-fd30572856dff59afa6b19a0",
+          "sourceObjectName": "Distal phalanx of third finger of foot.r",
+          "sourceDataName": "Distal phalanx of third finger of foot",
+          "sourceParent": "Phalanges of foot.g",
+          "sourceCollections": [
+            "1: Skeletal system",
+            "Appendicular skeleton",
+            "Bones of free lower limb",
+            "Bones of lower limb",
+            "Bonus collection",
+            "Right foot",
+            "Right lower limb"
+          ],
+          "sourceSide": "right",
+          "evaluatedGeometrySha256": "8236ec61735e7f87a51073c0c26ccc3cb74b596d2568aed880b8524b980ff5fa",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact frozen TA2:1512 distal-foot target plus source object name `Distal phalanx of {ordinal} finger of foot.{l|r}`, parent `Phalanges of foot.g`, and source-declared side. This adds a distal member relation while retaining the distinct existing generic TA2:1505 link; target extent remains unclaimed.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "class_member",
+          "matchedTargetSynonym": null,
+          "sourceSegmentCode": null,
+          "memberCode": "distal:third:right",
+          "matchEvidenceSourceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
+          ]
         }
       ],
       "learnerConceptLinks": [
@@ -16225,6 +16818,23 @@
             "fipat-ta2-t96-full-target-catalog",
             "za-t99-frozen-source-objects",
             "za-t99-t100-b05-frozen-source-objects"
+          ],
+          "identityStatus": "evidence_backed",
+          "humanReview": "not_performed"
+        },
+        {
+          "conceptKey": "LC-6f58acc2f6873d71c667",
+          "relationKind": "verified_class_member",
+          "targetIds": [
+            "TA2:1512"
+          ],
+          "memberCode": "distal:third",
+          "targetTermMatches": [],
+          "matchRule": "exact frozen T96 class_member memberCode + observed source side + row evidence",
+          "evidenceIds": [
+            "fipat-ta2-t100-b05-frozen-target-terms",
+            "za-t99-t100-b05-frozen-source-objects",
+            "fipat-ta2-t96-full-target-catalog"
           ],
           "identityStatus": "evidence_backed",
           "humanReview": "not_performed"
@@ -65575,7 +66185,8 @@
       "targetId": "TA2:2192",
       "targetIds": [
         "TA2:2192",
-        "TA2:2146"
+        "TA2:2146",
+        "TA2:2196"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -65619,6 +66230,23 @@
           ],
           "identityStatus": "source_label_pair_only",
           "humanReview": "not_performed"
+        },
+        {
+          "conceptKey": "LC-e7ca671b6cdf87cdc2e2",
+          "relationKind": "verified_source_crosswalk",
+          "targetIds": [
+            "TA2:2196"
+          ],
+          "memberCode": null,
+          "targetTermMatches": [],
+          "matchRule": "exact frozen target representation: qualified_synonym",
+          "evidenceIds": [
+            "fipat-ta2-t96-full-target-catalog",
+            "fipat-ta2-t78-frozen-full-context",
+            "za-t99-frozen-source-objects"
+          ],
+          "identityStatus": "evidence_backed",
+          "humanReview": "not_performed"
         }
       ],
       "nameEvidence": {
@@ -65636,7 +66264,51 @@
           ],
           "locator": "AI contextual anatomical rendering under user 2026-09-30 instruction; not a verbatim dictionary claim. Source concept: Posterior crico-arytenoid muscle; retained explicit body-region/part scope. Decision in composed-parts.json semanticNames; uncertainty in identity/side remains independent."
         }
-      }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:2196",
+          "targetEnglish": "posterior cricoarytentoid muscle",
+          "targetLatin": "musculus cricoarytenoideus posterior",
+          "targetSemanticKind": "named_muscle",
+          "targetPrimaryOwner": "neck",
+          "targetRegionIds": [
+            "neck"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-31c308f704eaed2344683f62",
+          "sourceObjectName": "Posterior crico-arytenoid muscle.l",
+          "sourceDataName": "Posterior crico-arytenoid muscle",
+          "sourceParent": "Laryngeal muscles.g",
+          "sourceCollections": [
+            "4: Muscular system",
+            "Laryngeal muscles",
+            "Muscles",
+            "Muscles of neck",
+            "Neck",
+            "Trunk"
+          ],
+          "sourceSide": "left",
+          "evaluatedGeometrySha256": "8805d9b4d826a3a7af29b2d72ea086b50c1c4ac36b7b9d4098e9bc0c270dbc36",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact source object label matches the frozen TA2 2.07 en_GB synonym `posterior crico-arytenoid muscle`; exact parent `Laryngeal muscles.g` and Laryngeal muscles/Neck collections disambiguate it from other laryngeal surfaces. Source `.l/.r` label and frozen source side agree. The T96 English field contains a recorded spelling variant; no fuzzy match, side inference, extent assertion, or HA binding is made.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "qualified_target_synonym",
+          "matchedTargetSynonym": "posterior crico-arytenoid muscle",
+          "sourceSegmentCode": null,
+          "memberCode": null,
+          "matchEvidenceSourceIds": [
+            "fipat-ta2-t96-full-target-catalog",
+            "fipat-ta2-t78-frozen-full-context",
+            "za-t99-frozen-source-objects"
+          ]
+        }
+      ]
     },
     {
       "sourceKey": "ZA-c7010a9-669167331cb6d48152f00205",
@@ -65660,7 +66332,8 @@
       "targetId": "TA2:2192",
       "targetIds": [
         "TA2:2192",
-        "TA2:2146"
+        "TA2:2146",
+        "TA2:2196"
       ],
       "mappingStatus": "source_taxonomy_correspondence",
       "localDisplayEligible": true,
@@ -65704,6 +66377,23 @@
           ],
           "identityStatus": "source_label_pair_only",
           "humanReview": "not_performed"
+        },
+        {
+          "conceptKey": "LC-e7ca671b6cdf87cdc2e2",
+          "relationKind": "verified_source_crosswalk",
+          "targetIds": [
+            "TA2:2196"
+          ],
+          "memberCode": null,
+          "targetTermMatches": [],
+          "matchRule": "exact frozen target representation: qualified_synonym",
+          "evidenceIds": [
+            "fipat-ta2-t96-full-target-catalog",
+            "fipat-ta2-t78-frozen-full-context",
+            "za-t99-frozen-source-objects"
+          ],
+          "identityStatus": "evidence_backed",
+          "humanReview": "not_performed"
         }
       ],
       "nameEvidence": {
@@ -65721,7 +66411,51 @@
           ],
           "locator": "AI contextual anatomical rendering under user 2026-09-30 instruction; not a verbatim dictionary claim. Source concept: Posterior crico-arytenoid muscle; retained explicit body-region/part scope. Decision in composed-parts.json semanticNames; uncertainty in identity/side remains independent."
         }
-      }
+      },
+      "targetRelationEvidence": [
+        {
+          "targetId": "TA2:2196",
+          "targetEnglish": "posterior cricoarytentoid muscle",
+          "targetLatin": "musculus cricoarytenoideus posterior",
+          "targetSemanticKind": "named_muscle",
+          "targetPrimaryOwner": "neck",
+          "targetRegionIds": [
+            "neck"
+          ],
+          "targetLaterality": "not_specified_by_source",
+          "sourceKey": "ZA-c7010a9-669167331cb6d48152f00205",
+          "sourceObjectName": "Posterior crico-arytenoid muscle.r",
+          "sourceDataName": "Posterior crico-arytenoid muscle",
+          "sourceParent": "Laryngeal muscles.g",
+          "sourceCollections": [
+            "4: Muscular system",
+            "Laryngeal muscles",
+            "Muscles",
+            "Muscles of neck",
+            "Neck",
+            "Trunk"
+          ],
+          "sourceSide": "right",
+          "evaluatedGeometrySha256": "8805d9b4d826a3a7af29b2d72ea086b50c1c4ac36b7b9d4098e9bc0c270dbc36",
+          "sourceHash": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "sourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+          "matchBasis": "Exact source object label matches the frozen TA2 2.07 en_GB synonym `posterior crico-arytenoid muscle`; exact parent `Laryngeal muscles.g` and Laryngeal muscles/Neck collections disambiguate it from other laryngeal surfaces. Source `.l/.r` label and frozen source side agree. The T96 English field contains a recorded spelling variant; no fuzzy match, side inference, extent assertion, or HA binding is made.",
+          "directObjectNameMatch": false,
+          "ancestorNameAloneUsed": false,
+          "upstreamFjOrTa2IdClaim": false,
+          "canonicalHaBindingCreated": false,
+          "humanReview": "not_performed",
+          "relationKind": "qualified_target_synonym",
+          "matchedTargetSynonym": "posterior crico-arytenoid muscle",
+          "sourceSegmentCode": null,
+          "memberCode": null,
+          "matchEvidenceSourceIds": [
+            "fipat-ta2-t96-full-target-catalog",
+            "fipat-ta2-t78-frozen-full-context",
+            "za-t99-frozen-source-objects"
+          ]
+        }
+      ]
     },
     {
       "sourceKey": "ZA-c7010a9-a7e23d57e73d0b4a1331ac41",
@@ -114842,6 +115576,45 @@
       "accessDate": "2026-09-30",
       "accessMethod": "local_frozen_metadata",
       "locator": "learning-names.json parent entry IDs and explicit sourceTerm rules; Korean directional/part wording is descriptive translation. Source part identity is required by existing exact learner links."
+    },
+    {
+      "id": "nikl-trapezium-565982",
+      "url": "https://kli.korean.go.kr/term/trgtWord/indexTrgtWord.do?trgtWordNo=565982",
+      "sourceLabel": "국립국어원: 온용어 record 큰마름뼈",
+      "exactEdition": null,
+      "editionExposure": "The opened 온용어 record identifies collection `21세기 세종 계획 전문 용어`, period 1998–2008, and record 565982; this is not asserted as current KAA adoption.",
+      "accessDate": "2026-09-30",
+      "accessMethod": "opened_html",
+      "locator": "record 565982; heading 큰마름뼈; English translation trapezium bone",
+      "retrievalLayer": "opened_official_record",
+      "openedOriginalDictionaryRecord": false,
+      "openedOriginalSourcePage": true
+    },
+    {
+      "id": "kses-terms-p60",
+      "url": "https://www.kses.or.kr/terms/index.php?keyword=&lang=8&mode=&page=60",
+      "sourceLabel": "Korean Shoulder and Elbow Society: 대한견·주관절의학회 용어검색 page 60",
+      "exactEdition": null,
+      "editionExposure": "The opened table exposes columns 대한의학 용어집 4판, 정형외과 용어집 2판, and 견관절 주관절학; publication years are not exposed.",
+      "accessDate": "2026-09-30",
+      "accessMethod": "opened_html",
+      "locator": "page 60 row `flexor carpi radialis`; recommended term/대한의학 용어집 4판 = 노쪽손목굽힘근; 정형외과 용어집 2판 and 견관절 주관절학 = 요 수근 굴근",
+      "retrievalLayer": "opened_official_table",
+      "openedOriginalDictionaryRecord": false,
+      "openedOriginalSourcePage": true
+    },
+    {
+      "id": "fipat-ta2-t78-frozen-full-context",
+      "url": "https://ta2viewer.openanatomy.org/",
+      "sourceLabel": "FIPAT TA2 2.07 full hierarchy context frozen in T78",
+      "exactEdition": "Terminologia Anatomica 2nd edition, vocabulary 2.07",
+      "editionExposure": "Frozen local full-context file with exact upstream fields; this decision uses TA2 2196 term.en_GB only.",
+      "accessDate": "2026-09-30",
+      "accessMethod": "local_frozen_metadata",
+      "locator": "work/evidence/T78/reference/ta2-scope.json#/id/2196/term/en_GB; `posterior crico-arytenoid muscle`",
+      "retrievalLayer": "frozen_local_full_hierarchy_context",
+      "openedOriginalDictionaryRecord": false,
+      "openedOriginalSourcePage": false
     }
   ],
   "targetTerminologyEvidence": [
@@ -137776,7 +138549,8 @@
       "targetId": "TA2:2481",
       "targetTermSourceIds": [
         "fipat-ta2-t96-frozen-target-terms",
-        "kmle-t100-bulk-flexor-carpi-radialis-opened"
+        "kmle-t100-bulk-flexor-carpi-radialis-opened",
+        "kses-terms-p60"
       ],
       "english": "flexor carpi radialis",
       "latin": "flexor radialis carpi",
@@ -137819,24 +138593,28 @@
         "laterality": "Source object side remains independent; no geometry mirror or new learner binding."
       },
       "names": {
-        "koModern": null,
-        "koTraditional": null,
+        "koModern": "노쪽손목굽힘근",
+        "koTraditional": "요 수근 굴근",
         "en": "flexor carpi radialis"
       },
       "fieldEvidence": {
         "koModern": {
-          "value": null,
-          "sourceIds": [],
-          "locator": null,
-          "status": "missing",
-          "missingReason": "Exact-name Korean terminology row was not directly confirmed; no similar/fuzzy substitute was applied."
+          "value": "노쪽손목굽힘근",
+          "sourceIds": [
+            "kses-terms-p60"
+          ],
+          "locator": "Opened KSES page 60, exact `flexor carpi radialis` row, 대한의학 용어집 4판 column.",
+          "status": "evidence_backed",
+          "missingReason": null
         },
         "koTraditional": {
-          "value": null,
-          "sourceIds": [],
-          "locator": null,
-          "status": "missing",
-          "missingReason": "Exact-name Korean terminology row was not directly confirmed; no similar/fuzzy substitute was applied."
+          "value": "요 수근 굴근",
+          "sourceIds": [
+            "kses-terms-p60"
+          ],
+          "locator": "Opened KSES page 60, exact `flexor carpi radialis` row, 정형외과 용어집 2판 and 견관절 주관절학 columns.",
+          "status": "evidence_backed",
+          "missingReason": null
         },
         "en": {
           "value": "flexor carpi radialis",
@@ -151793,7 +152571,8 @@
       "targetTermSourceIds": [
         "fipat-ta2-t96-frozen-target-terms",
         "kmle-t100-round2-ta2-1255-opened",
-        "kmle-t100-multidict-trapezium-bone-opened"
+        "kmle-t100-multidict-trapezium-bone-opened",
+        "nikl-trapezium-565982"
       ],
       "english": "trapezium bone",
       "latin": "os trapezium",
@@ -151834,17 +152613,19 @@
         "laterality": "Source object side remains independent; no geometry mirror or new learner binding."
       },
       "names": {
-        "koModern": null,
+        "koModern": "큰마름뼈",
         "koTraditional": "대능형골",
         "en": "trapezium bone"
       },
       "fieldEvidence": {
         "koModern": {
-          "value": null,
-          "sourceIds": [],
-          "locator": null,
-          "status": "missing",
-          "missingReason": "Exact-name Korean terminology row was not directly confirmed; no similar/fuzzy substitute was applied."
+          "value": "큰마름뼈",
+          "sourceIds": [
+            "nikl-trapezium-565982"
+          ],
+          "locator": "Opened NIKL record 565982: heading 큰마름뼈 and English translation trapezium bone; collection period 1998–2008 exposed.",
+          "status": "evidence_backed",
+          "missingReason": null
         },
         "koTraditional": {
           "value": "대능형골",

@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "runId": "T100-parallel-resolution-2026-09-30-r1",
+  "sharedDatasetValidator": "passed",
+  "sharedIntegrationValidator": "passed",
+  "runtimeProjectionValidator": "passed by buildRuntimeIntegration",
+  "overlaySha256": "4a11f7235a1956a31958a5dc647dac243e44e2c52f79afb33e7102f70329da71",
+  "runtimeInputHashes": {
+    "runtimeBuilderCodeSha256": "843a63d08558c75c1f3cccb0d6478e54ca57e4fe01cab2692cf5b831dc0ce4be",
+    "datasetSchemaCodeSha256": "f8911ed1ca79b1222bad4e8b9e24488a74b9071e299918481239cbd30fb42989",
+    "localViteIntegrationPluginCodeSha256": "7200389bcf25a292df86a990f238c3c71aa581f1124ffc34ce2eed31e9d2ebdc"
+  },
+  "runtimeSha256": "ce5dfa8d63798e2bfa5d8710a2f6ffb5d9fb048327e7b002d69cdb8e151b13db",
+  "runtimeBytes": 889304,
+  "targetRoutes": {
+    "withPaths": 408,
+    "withoutPaths": 134
+  },
+  "membershipRoutes": {
+    "withPaths": 426,
+    "withoutPaths": 137
+  },
+  "T100_status": "in_progress",
+  "T100_acceptance": "partial",
+  "nextUnit": "resolve-target-representation-and-final-scene-qa",
+  "visualQA": "pending; no exhaustive browser selection claim",
+  "buildAndTestEvidence": [
+    {
+      "command": "pnpm run test:whole-body",
+      "result": "passed",
+      "tests": 51,
+      "failures": 0,
+      "compiledChunks": 46
+    },
+    {
+      "command": "pnpm run test:delivery",
+      "result": "passed",
+      "tests": 3,
+      "failures": 0
+    },
+    {
+      "command": "pnpm run typecheck",
+      "result": "passed"
+    },
+    {
+      "command": "pnpm run build",
+      "result": "passed",
+      "warning": "existing production chunk-size warning (>500 kB)"
+    }
+  ],
+  "pinnedRelevantInputHashes": {
+    "parallelRunManifestSha256": "14b84bc0359ced6559eee88953ba066bbc8c086d1b24ede793bb7a0dcebc382c",
+    "frozenInputsFromManifest": {
+      "atlas-data/catalog/target-scope-t96.json": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
+      "atlas-data/overlays/za-local-integration.json": "e9277ca6f7b2081ce3cf78b3a9ac02bc265207782e0294e82d84847fa0bd2ab4",
+      "work/evidence/T98/astra-resolution-2026-09-29/source-catalog.json": "f2f1e98d22fe585b7943ddc0d7963af61cf18cced08b76be6984328a59e12ab7",
+      "atlas-data/source-cache/datasets/za/compiled/manifest.json": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42",
+      "work/evidence/T78/reference/ta2-scope.json": "f789725cf0206d6096abfffbc2657e309bd62bab0f89451f413468d8738da983",
+      "work/evidence/T100/target-scope-resolution-2026-09-30/representation-scope-audit.json": "1a708ab61f08626fae324596d5817f812400124cd6cc7e12d57ec9a5a7fb25f3",
+      "work/evidence/T100/target-scope-resolution-2026-09-30/selection-visual-qa-ledger.json": "7b92432c457eeae5b273a29f588a32aadc5f9cf76009b9701ee7578e6d049215",
+      "work/evidence/T100/target-scope-resolution-2026-09-30/target-term-display-proposals.json": "8260901678a2edd655da2aa33f3b29062588892cf2c3027441b01f64930e7c68",
+      "work/evidence/T100/target-scope-resolution-2026-09-30/link-delta.json": "8312545dbe6ba0845bda4f836f3eef41c4d88c311b8d620f395e5262b81c4c31",
+      "work/evidence/T100/target-scope-resolution-2026-09-30/browser-samples.json": "9c52ec428a20347e3a6581c2f58f895415b643558f648863853a76ce0d42f5c1",
+      "work/evidence/T100/target-scope-resolution-2026-09-30/progress.json": "5b181e5a971a6b8200c2ac1af5d4d75fb38cd9bd2c6e3d8d3371e605f5410de2",
+      "work/evidence/T100/target-scope-resolution-2026-09-30/NEXT-T100.md": "aedc1edc9a89f821245721b2b5d26844ad7a125f6cd69eb7c8741ff5691f838f",
+      "work/evidence/T100/target-representation-continuation-2026-09-30/target-representation-continuation.json": "4fb127fac97d129cd3b2c3fc7e8cf4e989856b4f71a6740f560515878093e0a8",
+      "work/evidence/T100/target-representation-2026-09-30/target-representation-matrix.json": "f9c401ee0de46c8c451f9c597cae97a2681526e5dad2bf9d7763b5665ad75b2c",
+      "atlas-data/tools/resolve_target_representations.py": "eba5eff5ff96958c58c5b86664417c871462b04ef4ca65717120c32e4d591e8a",
+      "atlas-web/src/viewer/datasets/integration.ts": "b460dae865007bae31b445d3a49fda1916ca50dbdb1ff7412edc476b7ede2d99",
+      "AGENTS.md": "6521028855ab2092b55b811a8c4421dd7446b134b1b2b72ae6e0d206d8d4126d",
+      "work/EXECUTION.json": "43b89253759c2046d7d6b51532b6b7f61bda9aa1afc4c0c5a9529396de052bf1",
+      "work/NEXT.md": "45269fc49ffb86299ca4b01f6232dc8c98acdfca4780af5cc22b57e23ac023e0",
+      "work/tasks/T100.md": "efd1ef93560f09eace392ade41a42fff03d379217e08625e12a03a8851dc5470",
+      "work/reports/T100.md": "ae9516ac67fd0565bd365a12b7c2d4dffa117a58f4aa9c41959fe844f8d61750",
+      "design/2026-09-25-muscle-atlas/25-WHOLE-BODY-BASE-RESET.md": "1980b2ff4276b6e8c58e543f90838af05a379247abf4c3f6f3e5348307959019",
+      "design/2026-09-25-muscle-atlas/26-T100-BULK-DELIVERY-PLAN.md": "5f4e4a35ef601a2fdef972b2c6d8b163c1e841fd95df1f27f211f440a2b8f312"
+    },
+    "finalT96ScopeSha256": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
+    "frozenT78ContextSha256": "f789725cf0206d6096abfffbc2657e309bd62bab0f89451f413468d8738da983",
+    "compiledDatasetManifestSha256": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42",
+    "runtimeBuilderCodeSha256": "843a63d08558c75c1f3cccb0d6478e54ca57e4fe01cab2692cf5b831dc0ce4be",
+    "datasetSchemaCodeSha256": "f8911ed1ca79b1222bad4e8b9e24488a74b9071e299918481239cbd30fb42989",
+    "localViteIntegrationPluginCodeSha256": "7200389bcf25a292df86a990f238c3c71aa581f1124ffc34ce2eed31e9d2ebdc",
+    "rightsEvidenceSha256": "0575d024474dbcadb1fdd2090064fb3e53e208bb716b3981d9a48f6095fda58c"
+  },
+  "executionProjectionChecks": {
+    "sync": "passed; 0 generated view changes",
+    "check": "passed; projections match"
+  },
+  "taskState": {
+    "executionStatus": "in_progress",
+    "acceptance": "partial",
+    "nextUnit": "resolve-target-representation-and-final-scene-qa"
+  }
+}

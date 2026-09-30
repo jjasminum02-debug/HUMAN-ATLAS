@@ -61,8 +61,8 @@ export function wholeBodyPlugin(root: string): Plugin {
             const frozenTargetLexicon={
               sha256:targetScopeSha256,
               supportContext:{sha256:supportContextSha256,terms:JSON.parse(supportContextBytes.toString())},
-              targets:targetScope.targets.map((target:{id:string;term:{english:string;latin:string;sourceSynonyms:Record<string,string[]>};semanticKind:string;regionIds:string[];sourceAncestryIds?:number[];sourceCardinality?:{explicitSourceSide?:string|null}})=>({
-                id:target.id,term:target.term,semanticKind:target.semanticKind,regionIds:target.regionIds,
+              targets:targetScope.targets.map((target:{id:string;term:{english:string;latin:string;sourceSynonyms:Record<string,string[]>};semanticKind:string;primaryOwner:string;regionIds:string[];sourceAncestryIds?:number[];sourceCardinality?:{explicitSourceSide?:string|null}})=>({
+                id:target.id,term:target.term,semanticKind:target.semanticKind,primaryOwner:target.primaryOwner,regionIds:target.regionIds,
                 sourceAncestryIds:target.sourceAncestryIds,
                 sourceCardinality:target.sourceCardinality ? {explicitSourceSide:target.sourceCardinality.explicitSourceSide ?? null} : undefined,
               })),

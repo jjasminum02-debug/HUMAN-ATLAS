@@ -9,7 +9,7 @@ const overlayBytes = readFileSync(new URL('../../../../atlas-data/overlays/za-lo
 const raw = JSON.parse(overlayBytes.toString('utf8')) as Integration;
 const targetScopeBytes = readFileSync(new URL('../../../../atlas-data/catalog/target-scope-t96.json', import.meta.url));
 const targetScope = JSON.parse(targetScopeBytes.toString('utf8')) as {
-    targets: Array<{ id: string; term: { english: string; latin: string; sourceSynonyms: Record<string, string[]> }; semanticKind: string; regionIds: string[] }>;
+    targets: Array<{ id: string; term: { english: string; latin: string; sourceSynonyms: Record<string, string[]> }; semanticKind: string; primaryOwner: string; regionIds: string[] }>;
 };
 const supportContextBytes = readFileSync(new URL('../../../../work/evidence/T78/reference/ta2-scope.json', import.meta.url));
 const frozenTargetLexicon: FrozenTargetLexicon = {
@@ -647,6 +647,102 @@ test('T100 B05 rejects wrong laterality, foot part, member key, and parent', () 
     const fakeAccess = structuredClone(raw);
     (fakeAccess.evidenceSources!.find(source => source.id === 'koa-t100-b05-accessory-tarsal-paper-opened') as unknown as { accessMethod: string }).accessMethod = 'opened_blender';
     assert.throws(() => validateIntegration(fakeAccess, fixture));
+});
+
+test('T100 parallel integration accepts only exact distal-foot members and posterior crico-arytenoid synonym evidence', () => {
+    const distalRows = raw.objects.filter(row => row.targetRelationEvidence?.some(relation => relation.targetId === 'TA2:1512'));
+    assert.equal(distalRows.length, 10);
+    assert.equal(new Set(distalRows.map(row => row.sourceName.replace(/\.[lr]$/i, ''))).size, 5);
+    assert.equal(distalRows.filter(row => row.side === 'left').length, 5);
+    assert.equal(distalRows.filter(row => row.side === 'right').length, 5);
+    for (const row of distalRows) {
+        const name = row.sourceName;
+        const match = name.match(/^Distal phalanx of (first|second|third|fourth|fifth) finger of foot\.([lr])$/);
+        assert(match, name);
+        const member = `distal:${match[1]}`;
+        const side = match[2] === 'l' ? 'left' : 'right';
+        const targetLink = row.learnerConceptLinks?.find(link => link.relationKind === 'verified_class_member'
+            && link.targetIds.length === 1 && link.targetIds[0] === 'TA2:1512');
+        assert(targetLink, name);
+        assert.equal(targetLink.memberCode, member);
+        assert.equal(targetLink.conceptKey, row.learnerConceptLinks?.find(link => link.relationKind === 'verified_class_member'
+            && link.targetIds.length === 1 && link.targetIds[0] === 'TA2:1505')?.conceptKey,
+        'the distinct generic TA2:1505 member proof is preserved');
+        assert.equal(row.learnerConceptLinks?.filter(link => link.relationKind === 'verified_class_member'
+            && link.targetIds.includes('TA2:1505')).length, 1);
+        const relation = row.targetRelationEvidence!.find(item => item.targetId === 'TA2:1512')!;
+        assert.equal(relation.memberCode, `${member}:${side}`);
+        assert.equal(relation.sourceSide, side);
+        assert.equal(relation.sourceParent, 'Phalanges of foot.g');
+        assert(relation.sourceCollections.includes(side === 'left' ? 'Left lower limb' : 'Right lower limb'));
+        assert.equal(relation.directObjectNameMatch, false);
+        assert.equal(relation.ancestorNameAloneUsed, false);
+        assert.equal(relation.upstreamFjOrTa2IdClaim, false);
+    }
+
+    const posteriorRows = raw.objects.filter(row => row.learnerConceptLinks?.some(link => link.relationKind === 'verified_source_crosswalk'
+        && link.targetIds.includes('TA2:2196')));
+    assert.equal(posteriorRows.length, 2);
+    assert.deepEqual(posteriorRows.map(row => row.sourceName).sort(), [
+        'Posterior crico-arytenoid muscle.l', 'Posterior crico-arytenoid muscle.r',
+    ]);
+    assert.deepEqual(posteriorRows.map(row => row.side).sort(), ['left', 'right']);
+    for (const row of posteriorRows) {
+        const relation = row.targetRelationEvidence!.find(item => item.targetId === 'TA2:2196')!;
+        assert.equal(relation.matchedTargetSynonym, 'posterior crico-arytenoid muscle');
+        assert.equal(relation.sourceParent, 'Laryngeal muscles.g');
+        assert(['Laryngeal muscles', 'Muscles of neck', 'Neck'].every(name => relation.sourceCollections.includes(name)));
+        assert(relation.matchEvidenceSourceIds!.includes('fipat-ta2-t78-frozen-full-context'));
+        assert.equal(relation.directObjectNameMatch, false);
+        assert.equal(relation.humanReview, 'not_performed');
+        assert.equal(row.haConceptId, null);
+        assert.equal(row.publicRedistribution, 'held');
+    }
+    const iliocostalis = raw.objects.filter(row => row.targetIds.includes('TA2:2261'));
+    assert.equal(iliocostalis.length, 2);
+    assert(iliocostalis.every(row => row.learnerConceptLinks?.some(link => link.conceptKey === null
+        && link.identityStatus === 'side_conflicted' && link.relationKind === 'normalized_exact_target_term')));
+    assert(iliocostalis.every(row => !row.learnerConceptLinks?.some(link => link.identityStatus === 'evidence_backed'
+        && link.targetIds.includes('TA2:2261'))));
+
+    const terms = new Map(raw.targetTerminologyEvidence!.map(term => [term.targetId, term]));
+    assert.equal(terms.get('TA2:1255')!.names.koModern, '큰마름뼈');
+    assert.equal(terms.get('TA2:1255')!.fieldEvidence.koModern.status, 'evidence_backed');
+    assert.equal(terms.get('TA2:1255')!.fieldEvidence.koModern.sourceIds[0], 'nikl-trapezium-565982');
+    assert.equal(terms.get('TA2:2481')!.names.koModern, '노쪽손목굽힘근');
+    assert.equal(terms.get('TA2:2481')!.names.koTraditional, '요 수근 굴근');
+    assert.equal(terms.get('TA2:2481')!.fieldEvidence.koModern.sourceIds[0], 'kses-terms-p60');
+    assert.equal(terms.get('TA2:2481')!.fieldEvidence.koTraditional.sourceIds[0], 'kses-terms-p60');
+    for (const targetId of ['TA2:2056', 'TA2:2532']) {
+        assert.equal(terms.get(targetId)!.fieldEvidence.koModern.status, 'missing');
+        assert.equal(terms.get(targetId)!.fieldEvidence.koTraditional.status, 'evidence_backed');
+    }
+    assert.equal(terms.get('TA2:1253')!.fieldEvidence.koModern.status, 'missing');
+    assert.equal(terms.get('TA2:1253')!.fieldEvidence.koTraditional.status, 'missing');
+    assert.equal(raw.scope.targets, 542);
+    assert.equal(raw.scope.memberships, 563);
+    assert.equal(raw.scope.regions, 12);
+    assert.equal(raw.objects.filter(row => row.haConceptId).length, 130);
+    assert.equal(raw.objects.filter(row => row.sourceOnly).length, 830);
+    assert(raw.objects.every(row => row.publicRedistribution === 'held' && row.humanReview === 'not_performed'));
+});
+
+test('T100 parallel integration rejects wrong foot level and non-exact laryngeal synonym or context', () => {
+    const wrongFootMember = structuredClone(raw);
+    const distal = wrongFootMember.objects.find(row => row.targetRelationEvidence?.some(relation => relation.targetId === 'TA2:1512'))!;
+    distal.targetRelationEvidence!.find(relation => relation.targetId === 'TA2:1512')!.memberCode = 'middle:first:left';
+    assert.throws(() => validateIntegration(wrongFootMember, fixture));
+
+    for (const mutate of [
+        (relation: NonNullable<Integration['objects'][number]['targetRelationEvidence']>[number]) => { relation.matchedTargetSynonym = 'lateral crico-arytenoid muscle'; },
+        (relation: NonNullable<Integration['objects'][number]['targetRelationEvidence']>[number]) => { relation.sourceParent = 'Intrinsic muscles of larynx.g'; },
+        (relation: NonNullable<Integration['objects'][number]['targetRelationEvidence']>[number]) => { relation.sourceSide = 'right'; },
+    ]) {
+        const invalid = structuredClone(raw);
+        const row = invalid.objects.find(candidate => candidate.sourceName === 'Posterior crico-arytenoid muscle.l')!;
+        mutate(row.targetRelationEvidence!.find(relation => relation.targetId === 'TA2:2196')!);
+        assert.throws(() => validateIntegration(invalid, fixture));
+    }
 });
 test('both scapulae belong to arm context and sacrum to lumbar context', () => {
     const scap = raw.objects.filter(r => r.names.en === 'Scapula');

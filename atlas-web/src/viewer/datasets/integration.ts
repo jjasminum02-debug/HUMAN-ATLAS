@@ -152,11 +152,20 @@ export interface TargetTerminologyEvidence {
 /** Frozen T96 lexical authority supplied to the local validator, never emitted to learner runtime. */
 export interface FrozenTargetLexicon {
     sha256: string;
-    supportContext?: { sha256: string; terms: { id: number; parent: number | null; term: { en: string; la: string }; synonyms?: Record<string, string[]> }[] };
+    supportContext?: {
+        sha256: string;
+        terms: {
+            id: number;
+            parent: number | null;
+            term: { en?: string; en_US?: string; en_GB?: string; la: string };
+            synonyms?: Record<string, string[]>;
+        }[];
+    };
     targets: {
         id: string;
         term: { english: string; latin: string; sourceSynonyms: Record<string, string[]> };
         semanticKind: string;
+        primaryOwner: string;
         regionIds: string[];
         sourceAncestryIds?: number[];
         sourceCardinality?: { explicitSourceSide?: string | null };
@@ -249,10 +258,24 @@ export function validateIntegration(value: unknown, dataset: Dataset, frozenTarg
         || context.terms.length !== 2422 || new Set(context.terms.map(term => term.id)).size !== 2422))
         throw Error('frozen support context provenance');
     const contextTerms = new Map(context?.terms.map(term => [term.id, term]) ?? []);
+    const hasExactPosteriorCricoarytenoidContext = (relation: NonNullable<StructureRecord['targetRelationEvidence']>[number], sourceName: string, side: string | null) => {
+        const contextTarget = contextTerms.get(2196);
+        const exactEnglish = contextTarget?.term.en_GB;
+        const suffixSide = sourceName.match(/\.([lr])$/i)?.[1]?.toLocaleLowerCase();
+        return relation.targetId === 'TA2:2196' && exactEnglish === 'posterior crico-arytenoid muscle'
+            && relation.matchedTargetSynonym === exactEnglish
+            && normalizeConceptTerm(sourceName.replace(/\.[lr]$/i, '')) === normalizeConceptTerm(exactEnglish)
+            && (suffixSide === 'l' ? 'left' : suffixSide === 'r' ? 'right' : null) === side
+            && (side === 'left' || side === 'right')
+            && relation.sourceObjectName === sourceName && relation.sourceSide === side
+            && relation.sourceParent === 'Laryngeal muscles.g'
+            && ['Laryngeal muscles', 'Muscles of neck', 'Neck'].every(name => relation.sourceCollections.includes(name))
+            && relation.matchEvidenceSourceIds?.includes('fipat-ta2-t78-frozen-full-context') === true;
+    };
     const frozenTargets = new Map(frozenTargetLexicon.targets.map(target => [target.id, target]));
     if (frozenTargets.size !== frozenTargetLexicon.targets.length
         || [...frozenTargets.values()].some(target => !/^TA2:\d+$/.test(target.id) || !target.term?.english
-            || typeof target.term.latin !== 'string' || !target.semanticKind || !Array.isArray(target.regionIds)))
+            || typeof target.term.latin !== 'string' || !target.semanticKind || !target.primaryOwner || !Array.isArray(target.regionIds)))
         throw Error('frozen target lexicon shape');
     // Build the frozen vocabulary index once per validation run; never rescan 542 targets for each surface.
     const exactLexiconIndex = new Map<string, Map<string, Set<string>>>();
@@ -433,7 +456,8 @@ export function validateIntegration(value: unknown, dataset: Dataset, frozenTarg
                 const target = frozenTargets.get(link.targetIds[0]);
                 const qualified = (row.targetRelationEvidence ?? []).some(relation =>
                     relation.targetId === target?.id && relation.relationKind === 'qualified_target_synonym'
-                    && Object.values(target.term.sourceSynonyms).flat().includes(relation.matchedTargetSynonym ?? '')
+                    && (Object.values(target.term.sourceSynonyms).flat().includes(relation.matchedTargetSynonym ?? '')
+                        || hasExactPosteriorCricoarytenoidContext(relation, row.sourceName, row.side))
                     && relation.sourceObjectName === row.sourceName && relation.sourceSide === row.side
                     && relation.matchEvidenceSourceIds?.every(id => link.evidenceIds.includes(id)));
                 const corrected = !!row.surfaceAssignmentCorrection && row.targetId === target?.id
@@ -463,6 +487,7 @@ export function validateIntegration(value: unknown, dataset: Dataset, frozenTarg
                     && !row.surfaceAssignmentCorrection && row.targetIds.includes(target.id)
                     && contextAncestry.has(Number(target.id.slice(4)))
                     && [contextChild.term.en, contextChild.term.la, ...Object.values(contextChild.synonyms ?? {}).flat()]
+                        .filter((value): value is string => typeof value === 'string')
                         .some(value => normalizeConceptTerm(value) === normalizeConceptTerm(row.sourceName.replace(/\.[lr]$/i, '')));
                 const ruleProof = link.matchRule === 'exact frozen target representation: qualified_synonym' && qualified
                     || link.matchRule === 'exact frozen target representation: corrected_surface' && corrected
@@ -527,13 +552,18 @@ export function validateIntegration(value: unknown, dataset: Dataset, frozenTarg
         }
         for (const relation of row.targetRelationEvidence ?? []) {
             const baseName = row.sourceName.replace(/\.[lr]$/i, '').trim().toLocaleLowerCase();
+            const frozenRelationTarget = frozenTargets.get(relation.targetId);
+            const exactFrozenSemanticKind = !!frozenRelationTarget
+                && relation.targetSemanticKind === frozenRelationTarget.semanticKind
+                && frozenRelationTarget.semanticKind.includes(row.kind);
             const allowedClassTargetKind = relation.relationKind === 'class_member'
                 && ((relation.targetId === 'TA2:1249' && relation.targetSemanticKind === 'bone_group')
                     || (relation.targetId === 'TA2:1389' && relation.targetSemanticKind === 'bone_group')
                     || (['TA2:1264', 'TA2:1271'].includes(relation.targetId) && relation.targetSemanticKind === 'bone_series'));
             if (relation.sourceKey !== row.sourceKey || relation.sourceObjectName !== row.sourceName
                 || !row.targetIds.includes(relation.targetId)
-                || relation.targetSemanticKind !== 'bone' && relation.targetSemanticKind !== 'muscle' && !allowedClassTargetKind
+                || relation.targetSemanticKind !== 'bone' && relation.targetSemanticKind !== 'muscle'
+                    && !allowedClassTargetKind && !exactFrozenSemanticKind
                 || relation.ancestorNameAloneUsed || relation.upstreamFjOrTa2IdClaim
                 || relation.canonicalHaBindingCreated || relation.humanReview !== 'not_performed'
                 || !/^[a-f0-9]{64}$/.test(relation.evaluatedGeometrySha256)
@@ -545,12 +575,26 @@ export function validateIntegration(value: unknown, dataset: Dataset, frozenTarg
                     throw Error('target relation exact name mismatch');
             } else {
                 const term = targetTerms.get(relation.targetId);
-                if (!term || !relation.matchEvidenceSourceIds?.length || (!relation.sourceSegmentCode && !relation.memberCode))
+                const exactT78PosteriorContext = relation.relationKind === 'qualified_target_synonym'
+                    && hasExactPosteriorCricoarytenoidContext(relation, row.sourceName, row.side);
+                const frozenClassTarget = frozenTargets.get(relation.targetId);
+                const exactFrozenClassContext = relation.relationKind === 'class_member' && !!frozenClassTarget
+                    && relation.targetEnglish === frozenClassTarget.term.english
+                    && relation.targetLatin === frozenClassTarget.term.latin
+                    && relation.targetSemanticKind === frozenClassTarget.semanticKind
+                    && relation.targetPrimaryOwner === frozenClassTarget.primaryOwner
+                    && relation.targetRegionIds.length === frozenClassTarget.regionIds.length
+                    && relation.targetRegionIds.every((region, index) => region === frozenClassTarget.regionIds[index])
+                    && relation.matchEvidenceSourceIds?.includes('fipat-ta2-t96-full-target-catalog') === true;
+                if ((!term && !exactT78PosteriorContext && !exactFrozenClassContext) || !relation.matchEvidenceSourceIds?.length
+                    || (relation.relationKind !== 'qualified_target_synonym' && !relation.sourceSegmentCode && !relation.memberCode))
                     throw Error('target relation missing target/member evidence');
                 if (relation.relationKind === 'qualified_target_synonym') {
                     const exact = (relation.targetId === 'TA2:1038' && relation.sourceObjectName === 'Atlas (C1)' && relation.matchedTargetSynonym === 'vertebra C1' && relation.sourceSegmentCode === 'C1')
                         || (relation.targetId === 'TA2:1050' && relation.sourceObjectName === 'Axis (C2)' && relation.matchedTargetSynonym === 'vertebra C2' && relation.sourceSegmentCode === 'C2');
-                    if (!exact || !relation.sourceCollections.some(x => /cervical vertebrae/i.test(x)) || relation.sourceParent !== 'Cervical vertebrae.g')
+                    const exactPosteriorCricoarytenoid = hasExactPosteriorCricoarytenoidContext(relation, row.sourceName, row.side);
+                    if ((!exact && !exactPosteriorCricoarytenoid)
+                        || (exact && (!relation.sourceCollections.some(x => /cervical vertebrae/i.test(x)) || relation.sourceParent !== 'Cervical vertebrae.g')))
                         throw Error('target relation qualified synonym mismatch');
                 } else if (relation.relationKind === 'class_member') {
                     const cervical = relation.targetId === 'TA2:1032' && /^Vertebra C[3-7]$/.test(relation.sourceObjectName)
@@ -631,9 +675,11 @@ export function validateIntegration(value: unknown, dataset: Dataset, frozenTarg
                     const footPhalanxMatch = relation.sourceObjectName.match(/^(Proximal|Middle|Distal) phalanx of (first|second|third|fourth|fifth) finger of foot\.([lr])$/);
                     const footPhalanxSide = footPhalanxMatch?.[3] === 'l' ? 'left' : footPhalanxMatch?.[3] === 'r' ? 'right' : null;
                     const footPhalanxCollection = footPhalanxSide === 'left' ? 'Left lower limb' : 'Right lower limb';
-                    const footPhalanxTarget = relation.targetId === 'TA2:1505' || relation.targetId === 'TA2:1510' || relation.targetId === 'TA2:1511';
+                    const footPhalanxTarget = relation.targetId === 'TA2:1505' || relation.targetId === 'TA2:1510'
+                        || relation.targetId === 'TA2:1511' || relation.targetId === 'TA2:1512';
                     const footPhalanxLevel = relation.targetId === 'TA2:1510' ? 'Proximal'
-                        : relation.targetId === 'TA2:1511' ? 'Middle' : null;
+                        : relation.targetId === 'TA2:1511' ? 'Middle'
+                            : relation.targetId === 'TA2:1512' ? 'Distal' : null;
                     const footPhalanx = footPhalanxTarget && relation.targetSemanticKind === 'bone'
                         && !!footPhalanxMatch && (!footPhalanxLevel || footPhalanxMatch[1] === footPhalanxLevel)
                         && relation.memberCode === footPhalanxMatch[1].toLocaleLowerCase() + ':' + footPhalanxMatch[2] + ':' + footPhalanxSide

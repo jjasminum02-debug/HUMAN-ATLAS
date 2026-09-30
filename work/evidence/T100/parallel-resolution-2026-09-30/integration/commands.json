@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "runId": "T100-parallel-resolution-2026-09-30-r1",
+  "verifiedAtLocal": "2026-09-30",
+  "commands": [
+    {
+      "command": "python3 work/tools/sync_execution.py",
+      "result": "passed",
+      "output": "Updated 0 execution views; generated projections already matched updated EXECUTION record."
+    },
+    {
+      "command": "python3 work/tools/sync_execution.py --check",
+      "result": "passed",
+      "output": "Execution projections match; no writes."
+    },
+    {
+      "command": "pnpm run test:whole-body",
+      "result": "passed",
+      "tests": 51,
+      "failures": 0,
+      "compiledChunks": 46
+    },
+    {
+      "command": "pnpm run test:delivery",
+      "result": "passed",
+      "tests": 3,
+      "failures": 0
+    },
+    {
+      "command": "pnpm run typecheck",
+      "result": "passed"
+    },
+    {
+      "command": "pnpm run build",
+      "result": "passed",
+      "warning": "Existing App JS chunk-size warning: 954.06 kB minified (>500 kB)."
+    }
+  ],
+  "taskState": {
+    "executionStatus": "in_progress",
+    "acceptance": "partial",
+    "nextUnit": "resolve-target-representation-and-final-scene-qa"
+  },
+  "browserVisualQA": "pending; no exhaustive visual pass claimed",
+  "performance": "not remeasured for the final overlay revision"
+}
