@@ -1,0 +1,79 @@
+{
+  "mode": "validated_plan_only_not_applied",
+  "inputOverlaySha256": "4a11f7235a1956a31958a5dc647dac243e44e2c52f79afb33e7102f70329da71",
+  "additions": [
+    {
+      "targetId": "TA2:2261",
+      "sourceKey": "ZA-c7010a9-31e68de95beec69e94a14dc7",
+      "sourceName": "Iliocostalis colli muscle.r",
+      "declaredSide": "right",
+      "link": {
+        "conceptKey": "LC-7717108271527158e01a",
+        "relationKind": "normalized_exact_target_term",
+        "targetIds": [
+          "TA2:2261"
+        ],
+        "memberCode": null,
+        "targetTermMatches": [
+          {
+            "targetId": "TA2:2261",
+            "matchedValues": [
+              "iliocostalis colli muscle"
+            ]
+          }
+        ],
+        "matchRule": "terminal-side-suffix removed; Unicode NFKC/casefold/alphanumeric-fold punctuation_fold_exact equality only; independent explicit source object side; paired unsided source remains unresolved",
+        "evidenceIds": [
+          "fipat-ta2-t96-frozen-target-terms",
+          "kmle-t100-round2-ta2-2261-opened",
+          "kmle-t100-suffixm-ta2-2261-opened",
+          "fipat-ta2-t96-full-target-catalog",
+          "za-t99-frozen-source-objects"
+        ],
+        "identityStatus": "evidence_backed",
+        "humanReview": "not_performed"
+      },
+      "proof": {
+        "sourceCatalogObjectName": "Iliocostalis colli muscle.r",
+        "sourceLabelSide": "right",
+        "compiledObjectName": "Iliocostalis colli muscle.r",
+        "compiledSourceLabelSide": "right",
+        "dataName": "Iliocostalis colli muscle",
+        "dataNameHasOpposingExplicitSide": false,
+        "sourceLocator": {
+          "archivePath": "Z-Anatomy/Startup.blend",
+          "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+          "objectDataBlockPointer": "0x18b63f66b08",
+          "objectIdName": "Iliocostalis colli muscle.r",
+          "serializedFileBlockOffset": 45375900
+        },
+        "evaluatedGeometrySha256": "87627d46b5c1973ee6bca8ebdd37c287d439d32509543bc78544da5f2a40541a",
+        "parent": "Iliocostalis muscles.g",
+        "collections": [
+          "4: Muscular system",
+          "Back",
+          "Erector spinae",
+          "Muscles",
+          "Neck",
+          "Trunk"
+        ]
+      },
+      "fullBilateralExtent": false,
+      "unsidedMateResolved": false,
+      "originalConflictLinkPreserved": true,
+      "validatedRouteQuery": "regions=back&concept=LC-7717108271527158e01a&side=right"
+    }
+  ],
+  "addedRelationCount": 1,
+  "existingLinksPreserved": 1895,
+  "sourceObjects": 960,
+  "existingHaBindings": 130,
+  "newGeometry": 0,
+  "changedNonLinkObjectFields": 0,
+  "humanReview": "not_performed",
+  "publicRedistribution": "held",
+  "commonValidatorPassed": true,
+  "commonRouterPassed": true,
+  "claimBoundary": "A declared right/left source is independent bounded evidence. The unsided mate remains conflicted and full extent/visual acceptance is not asserted.",
+  "applicationBoundary": "Do not apply while the current QA uses the frozen 4a11 overlay. Preserve that evidence, then apply through the single common writer and inspect the added route."
+}

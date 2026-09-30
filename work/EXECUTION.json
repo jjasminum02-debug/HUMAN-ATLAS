@@ -398,10 +398,9 @@
           "T100 parallel A/B/C integration: adjudicate exact member/name evidence, apply only bounded supported relations/fields, and preserve held conflicts."
         ],
         "pendingUnits": [
-          "A/B: the 135-target continuation subset has 2 accepted bounded relations and 133 unresolved scopes (69 ancestry-only, 64 with no pinned crosswalk); TA2:2261 is a separate side-conflicted target outside that assignment. Whole-scope route inventory has 134 target IDs with no path. Do not infer complete groups, sides, geometry absence, or human approval.",
-          "C: 73 of 75 assigned targets still have at least one Korean terminology/evidence gap (73 modern, 71 traditional); Hanja was not collected. AI-only proposals and the TA2:1253 conflict remain unpromoted.",
-          "D: 426/563 memberships have exact selectable routes and 137 do not; 408/542 target IDs have at least one path and 134 do not. Route presence is not localized visual QA; exhaustive 542-target/563-membership selection and region/side/part visual checks remain pending.",
-          "Prior GPU/VRAM and total process-memory values remain unavailable; active-scene performance was not remeasured for this overlay revision."
+          "Resolve the 133 targets/136 memberships with no selectable path using action-queue.json: new source/correspondence evidence, exact part segmentation, variant evidence, group extent or explicit side. Do not repeat exhausted fixed-label scans or infer geometry absence. Six already-cached cross-dataset candidate targets require identity and frame/registration verification before integration.",
+          "Complete anatomical target/part/group/side and whole-extent adjudication separately from successful available-path raster checks. TA2:2261 unsided mate/bilateral extent remain pending; preserve both historical side_conflicted/null links. Old C3 overview never counts as localized visual acceptance.",
+          "Continue the 73 direct Korean terminology citation gaps and held terminology conflicts in the internal evidence ledger; all 672 eligible surface display names are already complete. Do not treat direct dictionary quotation or humanReview not_performed as an automatic learner-name blocker."
         ],
         "evidence": [
           "work/evidence/T100/start-baseline.json",
@@ -572,9 +571,14 @@
           "work/evidence/T100/parallel-resolution-2026-09-30/integration/browser-validation.json",
           "work/evidence/T100/parallel-resolution-2026-09-30/integration/apply_supported_integration.py",
           "work/evidence/T100/parallel-resolution-2026-09-30/integration/build_qa_baseline.mjs",
-          "work/evidence/T100/parallel-resolution-2026-09-30/integration/commands.json"
+          "work/evidence/T100/parallel-resolution-2026-09-30/integration/commands.json",
+          "work/evidence/T100/closure-audit-2026-09-30/REPORT.md",
+          "work/evidence/T100/closure-audit-2026-09-30/qa-baseline.json",
+          "work/evidence/T100/closure-audit-2026-09-30/action-queue.json",
+          "work/evidence/T100/closure-audit-2026-09-30/selection-render-ledger.json",
+          "work/evidence/T100/closure-audit-2026-09-30/declared-side-application.json"
         ],
-        "result": "Contextual naming implemented under explicit user instruction. 672/672 display-eligible surfaces now have all three names; 267 source rows updated only in name/label evidence fields. Actual browser search/card verified. T100 overall remains partial because full target representation and final scene QA are not complete, not because an exact dictionary phrase or human approval is missing. Latest target-representation continuation: 85 of 251 previous candidates gained exact member routes (11 direct, 69 crosswalk, 5 ancestry); 166 remain unresolved. 393/563 membership routes are exact-selectable, 170 lack an exact route, and route failures=0. T100 remains partial at the same nextUnit. Existing display evidence for the 75 target-term gaps was cross-checked: 150 exact targetId source rows carry Korean display names; 73 target labels match exactly, while two group targets expose member names only. The target term ledger remains open. Latest validation also rejects an explicit child-side mismatch in a taxonomy membership; a live C3 browser sample matched route/card with a localized highlight limitation. T100 remains partial at the same nextUnit. Latest scope resolution added 117 typed links across 31 of 166 pending targets (7 direct, 7 crosswalk, 17 ancestry); 135 remain (71 ancestry, 64 no pinned crosswalk). 424/563 memberships have exact routes, 139 do not. Nine localized browser samples were inspected, including a newly isolated C3 surface; exhaustive visual QA and 75 official target term evidence gaps remain open.\n\n2026-09-30 parallel A/B/C adjudication: accepted only ten bounded TA2:1512 distal member routes, two exact T78-en_GB/side/context TA2:2196 routes, and three directly evidenced Korean terminology fields across TA2:1255/2481. TA2:2261 and AI-only/conflicted terminology remain held. Final current routes are 408/542 target IDs and 426/563 memberships; the previous 407 current-target field was incorrect. The 135-target assigned remainder now has 133 unresolved; TA2:2261 remains a separate conflict. C retains 73 target rows with Korean evidence gaps. Browser visual selection and active-scene remeasurement remain pending; T100 is still partial at the same nextUnit.",
+        "result": "Current T100: 409/542 targets and 427/563 memberships have at least one bounded selectable path; 133 targets and 136 memberships have no path. 672/672 eligible surfaces already have three display names. All 2,027 current route aliases have actual browser selection/card/raster evidence through 696 physical region/source captures with verified runtime-response hashes and saved PNGs. This completes available-path rendering checks only; full target/part/group/side extent acceptance remains pending. One independently declared right TA2:2261 route was added while both original side-conflicted null links and the unsided mate were preserved. Direct Korean citation gaps remain 73 and are independent of learner naming. Unavailable GPU/VRAM/total-memory values are evidence limits; no repeat measurement is required solely by a 25-byte relation-only runtime delta. T100 remains partial at the same nextUnit because representation/extent gaps remain.",
         "runtimeProjection": {
           "schema": "za-local-runtime-v2",
           "sourceOverlaySha256": "80cf8797c2b7844a9f7efa25a4f8425d9d7dc572e4220cd9de016d9499378b77",
@@ -614,6 +618,15 @@
             "relativeSpeedup": 1802.38,
             "exactResultsMatch": true,
             "method": "same 113 labels and 542 target terms; one normalized exact index reused vs scanning all target terms for each label; no fuzzy matching"
+          },
+          "historicalMeasurementEvidence": "Prior payload/parse/builder/gzip/search and scene figures retain their original input snapshots; this object is historical measurement evidence, not the current response byte count.",
+          "currentResponse": {
+            "sourceOverlaySha256": "0a85010365e2da21e8665dbaabb57574b572d0b048282d36cc4476ad103b6979",
+            "sha256": "3161eb67872003a5870e8e1df4735b86f8b494b6d9dd1848da9f4244a1bb3c0e",
+            "bytes": 889329,
+            "browserResponseHashVerified": true,
+            "baseline": "work/evidence/T100/closure-audit-2026-09-30/qa-baseline.json",
+            "benchmarkRepeated": false
           }
         },
         "nextId": "T100",
@@ -645,8 +658,8 @@
           "humanReview": "not_performed",
           "activeSceneGpuVram": "not_remeasured_unavailable",
           "activeSceneTotalMemory": "not_remeasured_unavailable",
-          "acceptanceScope": "T100 partial: the 135-target A/B continuation subset has 133 unresolved targets (69 ancestry-only, 64 without pinned crosswalk), with TA2:2261 as a separate held conflict. Current whole-scope routes are 408/542 target IDs and 426/563 memberships; 134 targets and 137 memberships have no exact selectable path. C retains 73 Korean term-evidence gap rows. Exhaustive localized 542/563 visual QA, part/group extent and selection verification remain pending.",
-          "evidence": "work/evidence/T100/target-scope-resolution-2026-09-30/verification-results.json",
+          "acceptanceScope": "T100 partial: 133 targets/136 memberships without paths; anatomical target/group/part/side extent remains pending. All current available paths have bounded browser render evidence. 73 direct citations remain separate from complete 672-surface display naming. TA2:2261 independent right route exists; unknown mate and bilateral extent remain pending.",
+          "evidence": "work/evidence/T100/closure-audit-2026-09-30/selection-render-ledger.json",
           "initialRepresentationCandidates": {
             "direct": 18,
             "declaredCrosswalk": 76,
@@ -659,8 +672,8 @@
             "ancestryOnly": 5,
             "total": 85
           },
-          "selectableMembershipRoutes": 426,
-          "membershipRowsWithoutExactRoute": 137,
+          "selectableMembershipRoutes": 427,
+          "membershipRowsWithoutExactRoute": 136,
           "membershipRouteFailures": 0,
           "targetTerminologyEvidenceGaps": 73,
           "historical163": {
@@ -669,7 +682,7 @@
           },
           "sourceOnlyRowCount": 830,
           "humanReviewNotPerformedRows": 960,
-          "currentOverlaySha256": "4a11f7235a1956a31958a5dc647dac243e44e2c52f79afb33e7102f70329da71",
+          "currentOverlaySha256": "0a85010365e2da21e8665dbaabb57574b572d0b048282d36cc4476ad103b6979",
           "termGapSurfaceDisplayAudit": {
             "targetGapCount": 75,
             "existingTargetIdSourceRows": 150,
@@ -707,15 +720,15 @@
             "localizedVisualSamples": 9,
             "fullTargetExtentNotAsserted": true
           },
-          "currentTargetsWithSomeTypedMemberRoute": 408,
+          "currentTargetsWithSomeTypedMemberRoute": 409,
           "historicalTypedRepresentationCountsEvidence": "work/evidence/T100/target-representation-continuation-2026-09-30/target-membership-plan-and-qa.json; previous type counts retained as history",
-          "currentTargetsWithoutSelectableRoute": 134,
+          "currentTargetsWithoutSelectableRoute": 133,
           "currentRouteTargetCountsByRelationKind": {
-            "normalized_exact_target_term": 279,
+            "normalized_exact_target_term": 280,
             "verified_class_member": 18,
             "verified_taxonomy_member": 102,
             "verified_source_crosswalk": 10,
-            "distinctTargetUnion": 408,
+            "distinctTargetUnion": 409,
             "categoriesOverlap": true
           },
           "parallelAdjudication": {
@@ -733,8 +746,17 @@
             "newCanonicalHaBindings": 0,
             "humanReview": "not_performed",
             "rights": "public redistribution held",
-            "evidence": "work/evidence/T100/parallel-resolution-2026-09-30/integration/REPORT.md"
-          }
+            "evidence": "work/evidence/T100/parallel-resolution-2026-09-30/integration/REPORT.md",
+            "historicalSnapshotMeaning": "Original A/B/C adjudication preserved; subsequent bounded right-side TA2:2261 addition is in closureAudit."
+          },
+          "currentQaBaseline": "work/evidence/T100/closure-audit-2026-09-30/qa-baseline.json",
+          "availablePathRenderingComplete": true,
+          "availablePathRouteAliasesChecked": 2027,
+          "actualRegionSourceRasterCaptures": 696,
+          "fullTargetExtentPassesClaimed": 0,
+          "learnerDisplayNameGapFields": 0,
+          "directCitationGapIsNotLearnerNameGap": true,
+          "unavailableGpuVramTotalMemoryAreLimitationsNotAutomaticBlockers": true
         },
         "resumeHistory": [
           {
@@ -767,6 +789,14 @@
             "unit": "resolve-target-representation-and-final-scene-qa",
             "result": "31 pending targets gained bounded member routes; 135 target scopes/139 routes/75 term evidence gaps and exhaustive visual QA remain open. C3 localized surface now sampled without counting prior overview screenshot.",
             "evidence": "work/evidence/T100/target-scope-resolution-2026-09-30/progress.json",
+            "nextUnit": "resolve-target-representation-and-final-scene-qa",
+            "nextId": "T100"
+          },
+          {
+            "date": "2026-09-30",
+            "unit": "resolve-target-representation-and-final-scene-qa",
+            "result": "Replaced sample-only QA with 2,027 alias selections/696 bounded raster cases and preserved PNGs; added one independently declared right route without inferring mate. Current 409/542 targets, 427/563 memberships; representation/extent gaps remain partial.",
+            "evidence": "work/evidence/T100/closure-audit-2026-09-30/REPORT.md",
             "nextUnit": "resolve-target-representation-and-final-scene-qa",
             "nextId": "T100"
           }
@@ -840,7 +870,92 @@
             "datasetSchemaCodeSha256": "f8911ed1ca79b1222bad4e8b9e24488a74b9071e299918481239cbd30fb42989",
             "localViteIntegrationPluginCodeSha256": "7200389bcf25a292df86a990f238c3c71aa581f1124ffc34ce2eed31e9d2ebdc",
             "rightsEvidenceSha256": "0575d024474dbcadb1fdd2090064fb3e53e208bb716b3981d9a48f6095fda58c"
-          }
+          },
+          "historicalSnapshotMeaning": "Integration result as of 81db8d7; current route/QA status is closureAudit/currentQaBaseline. Original decisions and 408/426 counts are preserved as history."
+        },
+        "closureAudit": {
+          "report": "work/evidence/T100/closure-audit-2026-09-30/REPORT.md",
+          "currentQaBaseline": "work/evidence/T100/closure-audit-2026-09-30/qa-baseline.json",
+          "currentActionQueue": "work/evidence/T100/closure-audit-2026-09-30/action-queue.json",
+          "selectionRenderLedger": "work/evidence/T100/closure-audit-2026-09-30/selection-render-ledger.json",
+          "currentRouteCounts": {
+            "targetIdsWithPaths": 409,
+            "targetIdsWithoutPaths": 133,
+            "membershipsWithPaths": 427,
+            "membershipsWithoutPaths": 136
+          },
+          "availablePathRendering": {
+            "taskId": "T100",
+            "executionStatus": "in_progress",
+            "acceptance": "partial",
+            "nextUnit": "resolve-target-representation-and-final-scene-qa",
+            "generatedAt": "2026-09-30T14:43:32.065Z",
+            "denominators": {
+              "targets": 542,
+              "memberships": 563,
+              "regions": 12
+            },
+            "targetIdsWithPaths": 409,
+            "membershipsWithPaths": 427,
+            "membershipsWithoutPaths": 136,
+            "currentAliasesChecked": 2027,
+            "actualPhysicalCaptures": 696,
+            "carriedForwardUnchangedCases": 695,
+            "newlyCapturedCases": 1,
+            "routeFailures": 0,
+            "missingOrChangedScreenshots": 0,
+            "runtimeErrorsObserved": 0,
+            "browserRuntimeResponseHashVerified": true,
+            "availablePathCaptureComplete": true,
+            "full542Target563MembershipVisualAcceptance": false,
+            "fullTargetExtentPassesClaimed": 0,
+            "previousOverlayRef": "81db8d74fc8e8bd834735728d8ba78b0b8179633",
+            "previousOverlaySha256": "4a11f7235a1956a31958a5dc647dac243e44e2c52f79afb33e7102f70329da71",
+            "currentOverlaySha256": "0a85010365e2da21e8665dbaabb57574b572d0b048282d36cc4476ad103b6979",
+            "rendererUiFilesComparedToIntegrationCommit": 57,
+            "reuseProof": "Same compiled geometry/resources, rights, source-specific runtime projections and renderer/UI code; every current alias resolves in the common router. Original images and revision hashes remain unchanged.",
+            "performance": "No benchmark repeated. Geometry, renderer, buffer budgets and physical scene unchanged; runtime JSON increased by 25 bytes. GPU/VRAM/total-process memory remain unmeasured limitations, not newly invented acceptance gates.",
+            "evidence": [
+              {
+                "path": "work/evidence/T100/closure-audit-2026-09-30/browser-raster/raster-ledger.json",
+                "sha256": "f3ef22ab9a1b799932565aaa24a2604c0a29958a966a6dabb4d485e5145aef07",
+                "overlaySha256": "4a11f7235a1956a31958a5dc647dac243e44e2c52f79afb33e7102f70329da71",
+                "browserRuntime": {
+                  "sha256": "ce5dfa8d63798e2bfa5d8710a2f6ffb5d9fb048327e7b002d69cdb8e151b13db",
+                  "bytes": 889304,
+                  "verified": true,
+                  "endpoint": "/__atlas/integration.json",
+                  "checkedAt": "2026-09-30T14:24:02.580Z"
+                },
+                "caseCount": 695
+              },
+              {
+                "path": "work/evidence/T100/closure-audit-2026-09-30/browser-declared-right/raster-ledger.json",
+                "sha256": "5edbf901652bc54c9421d8dffb4f3f27fb949bc46547ebd43b6dd5fc2d933883",
+                "overlaySha256": "0a85010365e2da21e8665dbaabb57574b572d0b048282d36cc4476ad103b6979",
+                "browserRuntime": {
+                  "sha256": "3161eb67872003a5870e8e1df4735b86f8b494b6d9dd1848da9f4244a1bb3c0e",
+                  "bytes": 889329,
+                  "verified": true,
+                  "endpoint": "/__atlas/integration.json",
+                  "checkedAt": "2026-09-30T14:32:39.159Z"
+                },
+                "caseCount": 1
+              }
+            ],
+            "humanReview": "not_performed",
+            "publicRedistribution": "held"
+          },
+          "directKoreanCitationGapRows": 73,
+          "displayNameGapFields": 0,
+          "cachedUnroutedOtherDatasetCandidateTargets": 6,
+          "declaredRightRelationApplied": "work/evidence/T100/closure-audit-2026-09-30/declared-side-application.json",
+          "TA2_2261FullBilateralExtent": "pending; unsided mate not inferred",
+          "dataContractTests": {
+            "passed": 37,
+            "failed": 0
+          },
+          "performanceRemeasured": false
         }
       },
       "report": "work/reports/T100.md"

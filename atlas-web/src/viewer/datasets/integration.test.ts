@@ -649,7 +649,7 @@ test('T100 B05 rejects wrong laterality, foot part, member key, and parent', () 
     assert.throws(() => validateIntegration(fakeAccess, fixture));
 });
 
-test('T100 parallel integration accepts only exact distal-foot members and posterior crico-arytenoid synonym evidence', () => {
+test('T100 bounded source relations preserve unknown sides independently of a declared-side route', () => {
     const distalRows = raw.objects.filter(row => row.targetRelationEvidence?.some(relation => relation.targetId === 'TA2:1512'));
     assert.equal(distalRows.length, 10);
     assert.equal(new Set(distalRows.map(row => row.sourceName.replace(/\.[lr]$/i, ''))).size, 5);
@@ -702,8 +702,17 @@ test('T100 parallel integration accepts only exact distal-foot members and poste
     assert.equal(iliocostalis.length, 2);
     assert(iliocostalis.every(row => row.learnerConceptLinks?.some(link => link.conceptKey === null
         && link.identityStatus === 'side_conflicted' && link.relationKind === 'normalized_exact_target_term')));
-    assert(iliocostalis.every(row => !row.learnerConceptLinks?.some(link => link.identityStatus === 'evidence_backed'
-        && link.targetIds.includes('TA2:2261'))));
+    const unsided = iliocostalis.find(row => row.side === null)!;
+    const declaredRight = iliocostalis.find(row => row.sourceName === 'Iliocostalis colli muscle.r')!;
+    assert.equal(declaredRight.side, 'right');
+    assert(!unsided.learnerConceptLinks?.some(link => link.identityStatus === 'evidence_backed'
+        && link.targetIds.includes('TA2:2261')), 'an unsided mate is never inferred to be left');
+    const independent = declaredRight.learnerConceptLinks?.filter(link => link.identityStatus === 'evidence_backed'
+        && link.targetIds.includes('TA2:2261')) ?? [];
+    assert.equal(independent.length, 1);
+    assert(independent[0].matchRule.includes('independent explicit source object side'));
+    assert.equal(readDatasetRoute(`?regions=back&concept=${independent[0].conceptKey}&side=right`, runtime.objects, ['back']).selected, declaredRight.sourceKey);
+    assert.equal(readDatasetRoute(`?regions=back&concept=${independent[0].conceptKey}&side=left`, runtime.objects, ['back']).selected, null);
 
     const terms = new Map(raw.targetTerminologyEvidence!.map(term => [term.targetId, term]));
     assert.equal(terms.get('TA2:1255')!.names.koModern, '큰마름뼈');

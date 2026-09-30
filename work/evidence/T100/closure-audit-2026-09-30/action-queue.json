@@ -1,0 +1,2715 @@
+{
+  "summary": {
+    "taskId": "T100",
+    "nextUnit": "resolve-target-representation-and-final-scene-qa",
+    "acceptance": "partial",
+    "denominators": {
+      "targets": 542,
+      "memberships": 563,
+      "regions": 12
+    },
+    "overlaySha256": "0a85010365e2da21e8665dbaabb57574b572d0b048282d36cc4476ad103b6979",
+    "qaBaselineSha256": "dfa8e1e63d12d6e5e090697291da021205c3504a26e917e057582af1773c379f",
+    "targetsWithPaths": 409,
+    "targetsWithoutPaths": 133,
+    "membershipsWithPaths": 427,
+    "membershipsWithoutPaths": 136,
+    "eligibleSurfacesWithThreeNames": 672,
+    "eligibleSurfaces": 672,
+    "directKoreanCitationGapRows": 73,
+    "citationGapIsNotTheSameAsMissingLearnerName": true,
+    "otherDatasetCandidateTargets": 6,
+    "cachedOtherDatasetCandidateTargets": 6,
+    "unroutedKinds": {
+      "bone": 11,
+      "bone_series": 1,
+      "bone_group": 8,
+      "muscle_part": 43,
+      "named_muscle": 54,
+      "muscle_group": 5,
+      "repeated_muscle_family": 11
+    },
+    "actionCounts": {
+      "acquire_or_establish_exact_source_correspondence": 43,
+      "seek_variant_specific_source_evidence": 21,
+      "establish_group_membership_and_extent": 20,
+      "review_cached_cross_dataset_correspondence_and_frame": 6,
+      "inspect_source_part_segmentation_or_acquire_exact_part": 31,
+      "establish_explicit_side_or_acquire_side_specific_surface": 12
+    },
+    "inconstantUnroutedTargets": 21,
+    "routePathOccurrences": 2027,
+    "distinctPhysicalVisualCases": 696,
+    "visualAcceptance": "pending; no passes inferred from this inventory",
+    "fullTargetExtent": "not established by member routes",
+    "heldSourceIdentityExceptionRows": 2,
+    "performance": "No repeated measurement requested by this audit; retain recorded input-bound evidence and separate unmeasured GPU/VRAM limits.",
+    "inputHashes": {
+      "atlas-data/overlays/za-local-integration.json": "0a85010365e2da21e8665dbaabb57574b572d0b048282d36cc4476ad103b6979",
+      "work/evidence/T100/closure-audit-2026-09-30/qa-baseline.json": "dfa8e1e63d12d6e5e090697291da021205c3504a26e917e057582af1773c379f",
+      "atlas-data/manifests/bodyparts3d-r4-source-manifest-t51.json": "fd804d31dfcfa121b69458affbd3cfb126dd97fafdfebf21cd00458a86176aea",
+      "atlas-data/source-cache/datasets/bp3d/registry.json": "d83b9a0502af42e1742aa46fb22112e46927003c193dad5f42058fe7541df6a3"
+    }
+  },
+  "targets": [
+    {
+      "targetId": "TA2:1065",
+      "english": "lower thoracic vertebra",
+      "semanticKind": "bone",
+      "primaryOwner": "back",
+      "regionIds": [
+        "back"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:1115",
+      "english": "supernumerary ribs",
+      "semanticKind": "bone_series",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "thorax"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:1116",
+      "english": "cervical rib",
+      "semanticKind": "bone",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "neck",
+        "thorax"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:1117",
+      "english": "lumbar rib",
+      "semanticKind": "bone",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "back",
+        "thorax"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:1137",
+      "english": "accessory bones of thorax",
+      "semanticKind": "bone_group",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "thorax"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:1138",
+      "english": "suprasternal bones",
+      "semanticKind": "bone_group",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "thorax"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:1262",
+      "english": "accessory carpal bones",
+      "semanticKind": "bone_group",
+      "primaryOwner": "upper-limb",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:1263",
+      "english": "os centrale",
+      "semanticKind": "bone",
+      "primaryOwner": "upper-limb",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:1281",
+      "english": "sesamoid bones of hand",
+      "semanticKind": "bone_group",
+      "primaryOwner": "upper-limb",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:1282",
+      "english": "bony pelvis",
+      "semanticKind": "bone_group",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "review_cached_cross_dataset_correspondence_and_frame",
+      "otherDatasetCandidates": [
+        {
+          "sourceFmaConceptId": "FMA16580",
+          "sourceName": "bony pelvis",
+          "elementFileIds": [
+            "FJ3152",
+            "FJ3288",
+            "FJ3393"
+          ],
+          "cachedAssets": [
+            {
+              "elementFileId": "FJ3152",
+              "nodeId": "HA-MESH-BP3D4-FJ3152",
+              "side": "right",
+              "regions": [
+                "gluteal-hip"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "06-gluteal-hip-bone-0",
+              "chunkSha256": "a38810d8b018177a6e99e37d65957c7bce5a2f5a95105ed7bc37034e50ad6d21",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/06-gluteal-hip-bone-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "99de26e5435a8397b6f39b44ada75319d5e8fa1433e1ea38fdd8de9e079ed9a9"
+            },
+            {
+              "elementFileId": "FJ3288",
+              "nodeId": "HA-MESH-BP3D4-FJ3288",
+              "side": "left",
+              "regions": [
+                "gluteal-hip"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "06-gluteal-hip-bone-0",
+              "chunkSha256": "a38810d8b018177a6e99e37d65957c7bce5a2f5a95105ed7bc37034e50ad6d21",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/06-gluteal-hip-bone-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "bfc8b489fee0945cd1d387cf64bd3691af8e033fa72f9fccae45cfd55ac88694"
+            },
+            {
+              "elementFileId": "FJ3393",
+              "nodeId": "HA-MESH-BP3D4-FJ3393",
+              "side": null,
+              "regions": [
+                "pelvis-perineum"
+              ],
+              "holdReasons": [
+                "not_canonical_learner_binding",
+                "human_anatomy_review_not_performed",
+                "public_redistribution_held"
+              ],
+              "localDisplayState": "allowed",
+              "chunkId": "15-pelvis-perineum-bone-1",
+              "chunkSha256": "0fa92ba735b8a17bffda7aac43a4409d5a8d7b981941da36ceaff1fc79b5e986",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/15-pelvis-perineum-bone-1.glb",
+              "chunkExists": true,
+              "sourceSha256": "cd04cc9f78d758ba34e92896914f647d22d257b9e7e51b97764670f694033489"
+            }
+          ]
+        }
+      ],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:1317",
+      "english": "ilium",
+      "semanticKind": "bone",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:1339",
+      "english": "ischium",
+      "semanticKind": "bone",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:1346",
+      "english": "pubis",
+      "semanticKind": "bone",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:1493",
+      "english": "accessory tarsal bones",
+      "semanticKind": "bone_group",
+      "primaryOwner": "foot",
+      "regionIds": [
+        "foot"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:1494",
+      "english": "os trigonum",
+      "semanticKind": "bone",
+      "primaryOwner": "foot",
+      "regionIds": [
+        "foot"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2063",
+      "english": "transverse part of nasalis muscle",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2064",
+      "english": "alar part of nasalis muscle",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2068",
+      "english": "ciliary bundle of orbicularis oculi",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2069",
+      "english": "deep palpebral part of orbicularis oculi muscle",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2072",
+      "english": "depressor supercilii",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2074",
+      "english": "marginal part of orbicularis oris muscle",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2075",
+      "english": "labial part of orbicularis oris muscle",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2077",
+      "english": "transversus menti muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2088",
+      "english": "extrinsic auricular muscles",
+      "semanticKind": "muscle_group",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2089",
+      "english": "auricularis anterior muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2090",
+      "english": "auricularis superior muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2091",
+      "english": "auricularis posterior muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2092",
+      "english": "intrinsic auricular muscles",
+      "semanticKind": "muscle_group",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2093",
+      "english": "helicis major muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2094",
+      "english": "helicis minor muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2095",
+      "english": "tragicus muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2096",
+      "english": "muscle of terminal notch",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2097",
+      "english": "pyramidal muscle of auricle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2098",
+      "english": "antitragicus muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2099",
+      "english": "transverse muscle of auricle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2100",
+      "english": "oblique muscle of auricle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2101",
+      "english": "muscles of auditory ossicles",
+      "semanticKind": "muscle_group",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2102",
+      "english": "tensor tympani",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2103",
+      "english": "stapedius muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2112",
+      "english": "pterygoideus proprius muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2114",
+      "english": "deep head of medial pterygoid muscle",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2115",
+      "english": "superficial head of medial pterygoid muscle",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2119",
+      "english": "chondroglossus muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2120",
+      "english": "ceratoglossus muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2121",
+      "english": "styloglossus muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2122",
+      "english": "superior longitudinal lingual muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2123",
+      "english": "inferior longitudinal lingual muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2124",
+      "english": "transversus linguae muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2125",
+      "english": "verticalis linguae muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2128",
+      "english": "levator veli palatini",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "review_cached_cross_dataset_correspondence_and_frame",
+      "otherDatasetCandidates": [
+        {
+          "sourceFmaConceptId": "FMA46727",
+          "sourceName": "levator veli palatini",
+          "elementFileIds": [
+            "FJ2741",
+            "FJ2753"
+          ],
+          "cachedAssets": [
+            {
+              "elementFileId": "FJ2741",
+              "nodeId": "HA-MESH-BP3D4-FJ2741",
+              "side": "left",
+              "regions": [
+                "head"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "10-head-muscle-0",
+              "chunkSha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/10-head-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "a7d1e90a0757aa53530521cd25ee855da0cc1e774dbe2c6bcaf372ab9e654259"
+            },
+            {
+              "elementFileId": "FJ2753",
+              "nodeId": "HA-MESH-BP3D4-FJ2753",
+              "side": "right",
+              "regions": [
+                "head"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "10-head-muscle-0",
+              "chunkSha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/10-head-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "84b856010832db82451e940a172f175d3a753c08e7284663bd40de6ef427fbcc"
+            }
+          ]
+        },
+        {
+          "sourceFmaConceptId": "FMA46728",
+          "sourceName": "right levator veli palatini",
+          "elementFileIds": [
+            "FJ2753"
+          ],
+          "cachedAssets": [
+            {
+              "elementFileId": "FJ2753",
+              "nodeId": "HA-MESH-BP3D4-FJ2753",
+              "side": "right",
+              "regions": [
+                "head"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "10-head-muscle-0",
+              "chunkSha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/10-head-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "84b856010832db82451e940a172f175d3a753c08e7284663bd40de6ef427fbcc"
+            }
+          ]
+        },
+        {
+          "sourceFmaConceptId": "FMA46729",
+          "sourceName": "left levator veli palatini",
+          "elementFileIds": [
+            "FJ2741"
+          ],
+          "cachedAssets": [
+            {
+              "elementFileId": "FJ2741",
+              "nodeId": "HA-MESH-BP3D4-FJ2741",
+              "side": "left",
+              "regions": [
+                "head"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "10-head-muscle-0",
+              "chunkSha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/10-head-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "a7d1e90a0757aa53530521cd25ee855da0cc1e774dbe2c6bcaf372ab9e654259"
+            }
+          ]
+        }
+      ],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2129",
+      "english": "tensor veli palatini",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "review_cached_cross_dataset_correspondence_and_frame",
+      "otherDatasetCandidates": [
+        {
+          "sourceFmaConceptId": "FMA46730",
+          "sourceName": "tensor veli palatini",
+          "elementFileIds": [
+            "FJ2748",
+            "FJ2760"
+          ],
+          "cachedAssets": [
+            {
+              "elementFileId": "FJ2748",
+              "nodeId": "HA-MESH-BP3D4-FJ2748",
+              "side": "left",
+              "regions": [
+                "head"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "10-head-muscle-0",
+              "chunkSha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/10-head-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "d6bca501cda0201b5221acbee58f2a58eff4784886825f72a0c40b1e1f7cbf97"
+            },
+            {
+              "elementFileId": "FJ2760",
+              "nodeId": "HA-MESH-BP3D4-FJ2760",
+              "side": "right",
+              "regions": [
+                "head"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "10-head-muscle-0",
+              "chunkSha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/10-head-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "ceddb3e852a795354bf31e6151dd9d2feaacb9f4612e3f0376d980dc063fc33a"
+            }
+          ]
+        },
+        {
+          "sourceFmaConceptId": "FMA46731",
+          "sourceName": "right tensor veli palatini",
+          "elementFileIds": [
+            "FJ2760"
+          ],
+          "cachedAssets": [
+            {
+              "elementFileId": "FJ2760",
+              "nodeId": "HA-MESH-BP3D4-FJ2760",
+              "side": "right",
+              "regions": [
+                "head"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "10-head-muscle-0",
+              "chunkSha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/10-head-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "ceddb3e852a795354bf31e6151dd9d2feaacb9f4612e3f0376d980dc063fc33a"
+            }
+          ]
+        },
+        {
+          "sourceFmaConceptId": "FMA46732",
+          "sourceName": "left tensor veli palatini",
+          "elementFileIds": [
+            "FJ2748"
+          ],
+          "cachedAssets": [
+            {
+              "elementFileId": "FJ2748",
+              "nodeId": "HA-MESH-BP3D4-FJ2748",
+              "side": "left",
+              "regions": [
+                "head"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "10-head-muscle-0",
+              "chunkSha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/10-head-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "d6bca501cda0201b5221acbee58f2a58eff4784886825f72a0c40b1e1f7cbf97"
+            }
+          ]
+        }
+      ],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2130",
+      "english": "musculus uvulae",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2131",
+      "english": "palatoglossus muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2133",
+      "english": "anterior fascicle of palatopharyngeus muscle",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2134",
+      "english": "posterior fascicle of palatopharyngeus muscle",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2155",
+      "english": "scalenus minimus muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2157",
+      "english": "sternal head of sternocleidomastoid muscle",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2158",
+      "english": "clavicular head of sternocleidomastoid muscle",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2170",
+      "english": "superior belly of omohyoid muscle",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2172",
+      "english": "inferior belly of omohyoid muscle",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2175",
+      "english": "levator glandulae thyroideae",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2180",
+      "english": "pterygopharyngeal part of superior pharyngeal constrictor",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2181",
+      "english": "buccopharyngeal part of superior pharyngeal constrictor",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2182",
+      "english": "mylopharyngeal part of superior pharyngeal constrictor",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2183",
+      "english": "glossopharyngeal part of superior pharyngeal constrictor",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2185",
+      "english": "chondropharyngeal part of middle pharyngeal constrictor",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2186",
+      "english": "ceratopharyngeal part of middle pharyngeal constrictor",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2188",
+      "english": "thyropharyngeal part of inferior pharyngeal constrictor",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2189",
+      "english": "cricopharyngeal part of inferior pharyngeal constrictor",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2191",
+      "english": "salpingopharyngeus muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "review_cached_cross_dataset_correspondence_and_frame",
+      "otherDatasetCandidates": [
+        {
+          "sourceFmaConceptId": "FMA46665",
+          "sourceName": "salpingopharyngeus",
+          "elementFileIds": [
+            "FJ2745",
+            "FJ2757"
+          ],
+          "cachedAssets": [
+            {
+              "elementFileId": "FJ2745",
+              "nodeId": "HA-MESH-BP3D4-FJ2745",
+              "side": "left",
+              "regions": [
+                "neck"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "14-neck-muscle-0",
+              "chunkSha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/14-neck-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "81c70a6f8ab2de5d20a715cdf5339d756ca7171c473adc645231929b2732bf31"
+            },
+            {
+              "elementFileId": "FJ2757",
+              "nodeId": "HA-MESH-BP3D4-FJ2757",
+              "side": "right",
+              "regions": [
+                "neck"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "14-neck-muscle-0",
+              "chunkSha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/14-neck-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "b10e40d550d6208c907df65d844403071233d8088a109b2be5f925cd5d9e6c36"
+            }
+          ]
+        },
+        {
+          "sourceFmaConceptId": "FMA46669",
+          "sourceName": "right salpingopharyngeus",
+          "elementFileIds": [
+            "FJ2757"
+          ],
+          "cachedAssets": [
+            {
+              "elementFileId": "FJ2757",
+              "nodeId": "HA-MESH-BP3D4-FJ2757",
+              "side": "right",
+              "regions": [
+                "neck"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "14-neck-muscle-0",
+              "chunkSha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/14-neck-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "b10e40d550d6208c907df65d844403071233d8088a109b2be5f925cd5d9e6c36"
+            }
+          ]
+        },
+        {
+          "sourceFmaConceptId": "FMA46670",
+          "sourceName": "left salpingopharyngeus",
+          "elementFileIds": [
+            "FJ2745"
+          ],
+          "cachedAssets": [
+            {
+              "elementFileId": "FJ2745",
+              "nodeId": "HA-MESH-BP3D4-FJ2745",
+              "side": "left",
+              "regions": [
+                "neck"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "14-neck-muscle-0",
+              "chunkSha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/14-neck-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "81c70a6f8ab2de5d20a715cdf5339d756ca7171c473adc645231929b2732bf31"
+            }
+          ]
+        }
+      ],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2197",
+      "english": "ceratocricoid muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2202",
+      "english": "vocalis muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "neck",
+      "regionIds": [
+        "neck"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "review_cached_cross_dataset_correspondence_and_frame",
+      "otherDatasetCandidates": [
+        {
+          "sourceFmaConceptId": "FMA46591",
+          "sourceName": "vocalis",
+          "elementFileIds": [
+            "FJ2788",
+            "FJ2806"
+          ],
+          "cachedAssets": [
+            {
+              "elementFileId": "FJ2788",
+              "nodeId": "HA-MESH-BP3D4-FJ2788",
+              "side": "left",
+              "regions": [
+                "neck"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "14-neck-muscle-0",
+              "chunkSha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/14-neck-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "dd26f669e127e5c5fae7ff796da0f516887f8c3834bbde1f2881d3a222cc2375"
+            },
+            {
+              "elementFileId": "FJ2806",
+              "nodeId": "HA-MESH-BP3D4-FJ2806",
+              "side": "right",
+              "regions": [
+                "neck"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "14-neck-muscle-0",
+              "chunkSha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/14-neck-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "f4b83790f1c6364785f6ec6a8428443e7f20cfe48ed9a14234bb8aff1d80f2a9"
+            }
+          ]
+        },
+        {
+          "sourceFmaConceptId": "FMA46592",
+          "sourceName": "right vocalis",
+          "elementFileIds": [
+            "FJ2806"
+          ],
+          "cachedAssets": [
+            {
+              "elementFileId": "FJ2806",
+              "nodeId": "HA-MESH-BP3D4-FJ2806",
+              "side": "right",
+              "regions": [
+                "neck"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "14-neck-muscle-0",
+              "chunkSha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/14-neck-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "f4b83790f1c6364785f6ec6a8428443e7f20cfe48ed9a14234bb8aff1d80f2a9"
+            }
+          ]
+        },
+        {
+          "sourceFmaConceptId": "FMA46593",
+          "sourceName": "left vocalis",
+          "elementFileIds": [
+            "FJ2788"
+          ],
+          "cachedAssets": [
+            {
+              "elementFileId": "FJ2788",
+              "nodeId": "HA-MESH-BP3D4-FJ2788",
+              "side": "left",
+              "regions": [
+                "neck"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "14-neck-muscle-0",
+              "chunkSha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/14-neck-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "dd26f669e127e5c5fae7ff796da0f516887f8c3834bbde1f2881d3a222cc2375"
+            }
+          ]
+        }
+      ],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2230",
+      "english": "transversus nuchae muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "back",
+      "regionIds": [
+        "neck",
+        "back"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2237",
+      "english": "anterior intertransversarii colli muscles",
+      "semanticKind": "repeated_muscle_family",
+      "primaryOwner": "back",
+      "regionIds": [
+        "back"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2238",
+      "english": "lateral posterior intertransversarii colli muscles",
+      "semanticKind": "repeated_muscle_family",
+      "primaryOwner": "back",
+      "regionIds": [
+        "back"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2264",
+      "english": "lumbar part of longissimus thoracis muscle",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "back",
+      "regionIds": [
+        "back"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2283",
+      "english": "semispinalis capitis muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "back",
+      "regionIds": [
+        "back"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "review_cached_cross_dataset_correspondence_and_frame",
+      "otherDatasetCandidates": [
+        {
+          "sourceFmaConceptId": "FMA22830",
+          "sourceName": "semispinalis capitis",
+          "elementFileIds": [
+            "FJ1538",
+            "FJ1538M"
+          ],
+          "cachedAssets": [
+            {
+              "elementFileId": "FJ1538",
+              "nodeId": "HA-MESH-BP3D4-FJ1538",
+              "side": "right",
+              "regions": [
+                "back"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "02-back-muscle-0",
+              "chunkSha256": "cd4b4a211649281d628a040ad9dc1d9f598fa552e37e8cd4bf83abfa46a93acd",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/02-back-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "189e16f70c49bc3465f5216fcb0e0b0ffb114458fde427eaf5406ddd1a1bd315"
+            },
+            {
+              "elementFileId": "FJ1538M",
+              "nodeId": "HA-MESH-BP3D4-FJ1538M",
+              "side": "left",
+              "regions": [
+                "back"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "02-back-muscle-0",
+              "chunkSha256": "cd4b4a211649281d628a040ad9dc1d9f598fa552e37e8cd4bf83abfa46a93acd",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/02-back-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "8f587a9a50e0ca6555ffb086e60445a499904ce55a5664340cce8ed12d86bb77"
+            }
+          ]
+        },
+        {
+          "sourceFmaConceptId": "FMA22876",
+          "sourceName": "right semispinalis capitis",
+          "elementFileIds": [
+            "FJ1538"
+          ],
+          "cachedAssets": [
+            {
+              "elementFileId": "FJ1538",
+              "nodeId": "HA-MESH-BP3D4-FJ1538",
+              "side": "right",
+              "regions": [
+                "back"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "02-back-muscle-0",
+              "chunkSha256": "cd4b4a211649281d628a040ad9dc1d9f598fa552e37e8cd4bf83abfa46a93acd",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/02-back-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "189e16f70c49bc3465f5216fcb0e0b0ffb114458fde427eaf5406ddd1a1bd315"
+            }
+          ]
+        },
+        {
+          "sourceFmaConceptId": "FMA22877",
+          "sourceName": "left semispinalis capitis",
+          "elementFileIds": [
+            "FJ1538M"
+          ],
+          "cachedAssets": [
+            {
+              "elementFileId": "FJ1538M",
+              "nodeId": "HA-MESH-BP3D4-FJ1538M",
+              "side": "left",
+              "regions": [
+                "back"
+              ],
+              "holdReasons": [],
+              "localDisplayState": "allowed",
+              "chunkId": "02-back-muscle-0",
+              "chunkSha256": "cd4b4a211649281d628a040ad9dc1d9f598fa552e37e8cd4bf83abfa46a93acd",
+              "chunkPath": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/02-back-muscle-0.glb",
+              "chunkExists": true,
+              "sourceSha256": "8f587a9a50e0ca6555ffb086e60445a499904ce55a5664340cce8ed12d86bb77"
+            }
+          ]
+        }
+      ],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2285",
+      "english": "rotatores lumborum",
+      "semanticKind": "repeated_muscle_family",
+      "primaryOwner": "back",
+      "regionIds": [
+        "back"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2286",
+      "english": "rotatores thoracis",
+      "semanticKind": "repeated_muscle_family",
+      "primaryOwner": "back",
+      "regionIds": [
+        "back"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2287",
+      "english": "long rotatores",
+      "semanticKind": "repeated_muscle_family",
+      "primaryOwner": "back",
+      "regionIds": [
+        "back"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2288",
+      "english": "short rotatores",
+      "semanticKind": "repeated_muscle_family",
+      "primaryOwner": "back",
+      "regionIds": [
+        "back"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2289",
+      "english": "rotatores colli",
+      "semanticKind": "repeated_muscle_family",
+      "primaryOwner": "back",
+      "regionIds": [
+        "back"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2294",
+      "english": "intertransversarii muscles",
+      "semanticKind": "muscle_group",
+      "primaryOwner": "back",
+      "regionIds": [
+        "back"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2295",
+      "english": "medial intertransversarii lumborum muscles",
+      "semanticKind": "repeated_muscle_family",
+      "primaryOwner": "back",
+      "regionIds": [
+        "back"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2296",
+      "english": "intertransversarii thoracis muscles",
+      "semanticKind": "repeated_muscle_family",
+      "primaryOwner": "back",
+      "regionIds": [
+        "back"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2297",
+      "english": "medial posterior intertransversarii colli muscles",
+      "semanticKind": "repeated_muscle_family",
+      "primaryOwner": "back",
+      "regionIds": [
+        "back"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2300",
+      "english": "sternalis muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "thorax"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2314",
+      "english": "subcostal muscles",
+      "semanticKind": "repeated_muscle_family",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "thorax"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2328",
+      "english": "right hemidiaphragm",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "thorax"
+      ],
+      "inconstant": false,
+      "reasonCategory": "declared_target_side_not_separated_from_parent_surface",
+      "nextAction": "establish_explicit_side_or_acquire_side_specific_surface",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2329",
+      "english": "left hemidiaphragm",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "thorax"
+      ],
+      "inconstant": false,
+      "reasonCategory": "declared_target_side_not_separated_from_parent_surface",
+      "nextAction": "establish_explicit_side_or_acquire_side_specific_surface",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2330",
+      "english": "muscle of right hemidiaphragm",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "thorax"
+      ],
+      "inconstant": false,
+      "reasonCategory": "declared_target_side_not_separated_from_parent_surface",
+      "nextAction": "establish_explicit_side_or_acquire_side_specific_surface",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2331",
+      "english": "right lumbar part of diaphragm",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "thorax"
+      ],
+      "inconstant": false,
+      "reasonCategory": "declared_target_side_not_separated_from_parent_surface",
+      "nextAction": "establish_explicit_side_or_acquire_side_specific_surface",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2332",
+      "english": "right crus of diaphragm",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "thorax"
+      ],
+      "inconstant": false,
+      "reasonCategory": "declared_target_side_not_separated_from_parent_surface",
+      "nextAction": "establish_explicit_side_or_acquire_side_specific_surface",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2336",
+      "english": "right costal part of diaphragm",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "thorax"
+      ],
+      "inconstant": false,
+      "reasonCategory": "declared_target_side_not_separated_from_parent_surface",
+      "nextAction": "establish_explicit_side_or_acquire_side_specific_surface",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2337",
+      "english": "right sternal part of diaphragm",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "thorax"
+      ],
+      "inconstant": false,
+      "reasonCategory": "declared_target_side_not_separated_from_parent_surface",
+      "nextAction": "establish_explicit_side_or_acquire_side_specific_surface",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2345",
+      "english": "muscle of left hemidiaphragm",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "thorax"
+      ],
+      "inconstant": false,
+      "reasonCategory": "declared_target_side_not_separated_from_parent_surface",
+      "nextAction": "establish_explicit_side_or_acquire_side_specific_surface",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2346",
+      "english": "left lumbar part of diaphragm",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "thorax"
+      ],
+      "inconstant": false,
+      "reasonCategory": "declared_target_side_not_separated_from_parent_surface",
+      "nextAction": "establish_explicit_side_or_acquire_side_specific_surface",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2347",
+      "english": "left crus of diaphragm",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "thorax"
+      ],
+      "inconstant": false,
+      "reasonCategory": "declared_target_side_not_separated_from_parent_surface",
+      "nextAction": "establish_explicit_side_or_acquire_side_specific_surface",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2351",
+      "english": "left costal part of diaphragm",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "thorax"
+      ],
+      "inconstant": false,
+      "reasonCategory": "declared_target_side_not_separated_from_parent_surface",
+      "nextAction": "establish_explicit_side_or_acquire_side_specific_surface",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2352",
+      "english": "left sternal part of diaphragm",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "thorax",
+      "regionIds": [
+        "thorax"
+      ],
+      "inconstant": false,
+      "reasonCategory": "declared_target_side_not_separated_from_parent_surface",
+      "nextAction": "establish_explicit_side_or_acquire_side_specific_surface",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2374",
+      "english": "cremaster",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "abdomen-lumbar",
+      "regionIds": [
+        "abdomen-lumbar"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2407",
+      "english": "puboperinealis muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2408",
+      "english": "puboprostaticus muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2409",
+      "english": "pubovaginalis muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2414",
+      "english": "muscles of urogenital triangle",
+      "semanticKind": "muscle_group",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2416",
+      "english": "superficial transverse perineal muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2417",
+      "english": "ischiocavernosus muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2418",
+      "english": "bulbospongiosus muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2420",
+      "english": "deep transverse perineal muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2421",
+      "english": "male external urethral sphincter",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2422",
+      "english": "female external urethral sphincter",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2423",
+      "english": "compressor urethrae",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2424",
+      "english": "sphincter urethrovaginalis",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2427",
+      "english": "subcutaneous part of external anal sphincter",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2428",
+      "english": "superficial part of external anal sphincter",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2429",
+      "english": "deep part of external anal sphincter",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "pelvis-perineum",
+      "regionIds": [
+        "pelvis-perineum"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2475",
+      "english": "articularis cubiti muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "upper-limb",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2513",
+      "english": "humeral head of supinator",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "upper-limb",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2514",
+      "english": "ulnar head of supinator",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "upper-limb",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2520",
+      "english": "palmaris brevis muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "upper-limb",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2535",
+      "english": "pollical palmar interosseus muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "upper-limb",
+      "regionIds": [
+        "upper-limb"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2596",
+      "english": "psoas minor",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "gluteal-hip",
+      "regionIds": [
+        "gluteal-hip"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2615",
+      "english": "straight head of rectus femoris",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "thigh",
+      "regionIds": [
+        "thigh"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2616",
+      "english": "reflected head of rectus femoris",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "thigh",
+      "regionIds": [
+        "thigh"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2617",
+      "english": "third head of rectus femoris",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "thigh",
+      "regionIds": [
+        "thigh"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2625",
+      "english": "articularis genus muscle",
+      "semanticKind": "named_muscle",
+      "primaryOwner": "thigh",
+      "regionIds": [
+        "thigh"
+      ],
+      "inconstant": false,
+      "reasonCategory": "exact_target_identity_or_segment_not_established",
+      "nextAction": "acquire_or_establish_exact_source_correspondence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2633",
+      "english": "ischiocondylar part of adductor magnus",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "thigh",
+      "regionIds": [
+        "thigh"
+      ],
+      "inconstant": false,
+      "reasonCategory": "parent_or_whole_surface_not_an_exact_target_part",
+      "nextAction": "inspect_source_part_segmentation_or_acquire_exact_part",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:2680",
+      "english": "abductor of fifth metatarsal",
+      "semanticKind": "muscle_part",
+      "primaryOwner": "foot",
+      "regionIds": [
+        "foot"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:356",
+      "english": "facial bones",
+      "semanticKind": "bone_group",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:819",
+      "english": "os japonicum",
+      "semanticKind": "bone",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:830",
+      "english": "accessory bones of cranium",
+      "semanticKind": "bone_group",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": false,
+      "reasonCategory": "group_or_repeated_family_extent_not_established",
+      "nextAction": "establish_group_membership_and_extent",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:831",
+      "english": "sutural bone",
+      "semanticKind": "bone",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    },
+    {
+      "targetId": "TA2:832",
+      "english": "interparietal bone",
+      "semanticKind": "bone",
+      "primaryOwner": "head",
+      "regionIds": [
+        "head"
+      ],
+      "inconstant": true,
+      "reasonCategory": "variant_specific_source_member_not_established",
+      "nextAction": "seek_variant_specific_source_evidence",
+      "otherDatasetCandidates": [],
+      "candidateOnly": true,
+      "geometryAbsenceClaim": false,
+      "retryFrozenNameScanWithoutNewEvidence": false
+    }
+  ],
+  "heldSourceIdentityExceptions": [
+    {
+      "sourceKey": "ZA-c7010a9-f1c445f6efa7d889f9c6ffaa",
+      "sourceName": "Iliocostalis colli muscle",
+      "declaredSide": null,
+      "targetIds": [
+        "TA2:2261"
+      ],
+      "originalConflictStillUnresolved": true,
+      "inferMissingSide": false
+    },
+    {
+      "sourceKey": "ZA-c7010a9-31e68de95beec69e94a14dc7",
+      "sourceName": "Iliocostalis colli muscle.r",
+      "declaredSide": "right",
+      "targetIds": [
+        "TA2:2261"
+      ],
+      "originalConflictStillUnresolved": true,
+      "inferMissingSide": false
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "summary": {
+    "overlaySha256": "0a85010365e2da21e8665dbaabb57574b572d0b048282d36cc4476ad103b6979",
+    "qaBaselineSha256": "dfa8e1e63d12d6e5e090697291da021205c3504a26e917e057582af1773c379f",
+    "qaBaselinePath": "work/evidence/T100/closure-audit-2026-09-30/qa-baseline.json",
+    "browserRuntime": {
+      "sha256": "3161eb67872003a5870e8e1df4735b86f8b494b6d9dd1848da9f4244a1bb3c0e",
+      "bytes": 889329,
+      "verified": true,
+      "endpoint": "/__atlas/integration.json",
+      "checkedAt": "2026-09-30T14:32:39.159Z"
+    },
+    "plannedPhysicalCases": 1,
+    "completedCases": 1,
+    "renderObserved": 1,
+    "failedOrUnverified": 0,
+    "routeFailures": [],
+    "consoleErrors": [],
+    "fullTargetExtentPass": false,
+    "humanReview": "not_performed",
+    "claimBoundary": "Route/card/source and isolated raster evidence only. Raster presence is not anatomical correspondence, side geometry, full target extent or exhaustive visual acceptance."
+  },
+  "rows": [
+    {
+      "caseKey": "back|ZA-c7010a9-31e68de95beec69e94a14dc7",
+      "sourceKey": "ZA-c7010a9-31e68de95beec69e94a14dc7",
+      "regionId": "back",
+      "side": "right",
+      "sourceName": "Iliocostalis colli muscle.r",
+      "references": [
+        {
+          "targetId": "TA2:2261",
+          "regionId": "back",
+          "conceptKey": "LC-7717108271527158e01a",
+          "query": "regions=back&concept=LC-7717108271527158e01a&side=right"
+        }
+      ],
+      "overlaySha256": "0a85010365e2da21e8665dbaabb57574b572d0b048282d36cc4476ad103b6979",
+      "checkedAt": "2026-09-30T14:32:41.185Z",
+      "cardMatch": true,
+      "routeAliasesChecked": 1,
+      "localizedRasterObserved": true,
+      "anatomicalVisualQA": "pending",
+      "targetExtent": "not_asserted",
+      "sideClaim": "source label only; anatomical side review separate",
+      "sceneState": {
+        "root": "4fec4981-f920-45f1-a1bf-18885dbdc417",
+        "dataset": "za-c7010a9",
+        "visible": [
+          "ZA-c7010a9-31e68de95beec69e94a14dc7"
+        ],
+        "selected": "ZA-c7010a9-31e68de95beec69e94a14dc7",
+        "bytes": 16761132,
+        "pending": 0,
+        "failed": [],
+        "camera": [
+          -2.8033131371785203e-15,
+          1.2025173184876232,
+          1.4949720779089657
+        ],
+        "calls": 98,
+        "triangles": 75802
+      },
+      "selectedColorPixelCount": 14026,
+      "uiPixelMaskApplied": true,
+      "pixelMasks": [
+        {
+          "x": 0,
+          "y": -195,
+          "width": 1440,
+          "height": 100
+        },
+        {
+          "x": 24,
+          "y": -81,
+          "width": 240,
+          "height": 860
+        },
+        {
+          "x": 300,
+          "y": -81,
+          "width": 165.046875,
+          "height": 80.140625
+        },
+        {
+          "x": 1026,
+          "y": -81,
+          "width": 390,
+          "height": 405
+        },
+        {
+          "x": 1197,
+          "y": 10,
+          "width": 208,
+          "height": 301
+        },
+        {
+          "x": 576.40625,
+          "y": 748,
+          "width": 287.171875,
+          "height": 43
+        },
+        {
+          "x": 1106,
+          "y": 10,
+          "width": 310,
+          "height": 636.375
+        }
+      ],
+      "screenshotLocator": "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T100/closure-audit-2026-09-30/browser-declared-right/screenshots/b69157a07f4b2b17437e.png",
+      "screenshotSha256": "706b453e423f65b9b9c075c795dddd3c8b3ba584ac0f56e025376c7b76a47e0e",
+      "status": "render_observed",
+      "hiddenControlPixelCount": 0,
+      "hiddenControlPassed": true
+    }
+  ]
+}

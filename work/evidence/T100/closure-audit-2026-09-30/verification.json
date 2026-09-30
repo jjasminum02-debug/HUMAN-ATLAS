@@ -1,0 +1,45 @@
+{
+  "taskId": "T100",
+  "executionStatus": "in_progress",
+  "acceptance": "partial",
+  "nextUnit": "resolve-target-representation-and-final-scene-qa",
+  "currentOverlaySha256": "0a85010365e2da21e8665dbaabb57574b572d0b048282d36cc4476ad103b6979",
+  "runtimeResponseSha256": "3161eb67872003a5870e8e1df4735b86f8b494b6d9dd1848da9f4244a1bb3c0e",
+  "checks": {
+    "datasetContractTests": {
+      "passed": 37,
+      "failed": 0,
+      "output": "dataset-contract-tests.txt"
+    },
+    "commonDatasetIntegrationValidator": "passed via snapshotTargetSelection and consolidateTargetSelection",
+    "currentRouteAliasesChecked": 2027,
+    "actualPhysicalRasterCases": 696,
+    "screenshotsHashChecked": 696,
+    "negativeRasterControls": 2,
+    "runtimeResponseHashesVerified": 2,
+    "renderFailures": 0,
+    "pageErrorsObserved": 0,
+    "rendererUiFilesUnchanged": 57,
+    "pythonAst": "passed",
+    "executionProjectionCheck": "passed",
+    "gitDiffCheck": "passed"
+  },
+  "reusedWithoutRerun": [
+    "prior whole-body 51/51 and delivery 3/3",
+    "prior typecheck/build",
+    "completed exact-term links",
+    "12-region route regression",
+    "performance measurements with original input boundaries"
+  ],
+  "notClaimed": [
+    "full anatomical target/group/part/side extent acceptance",
+    "human review",
+    "new geometry",
+    "canonical HA bindings",
+    "public redistribution"
+  ],
+  "initialTestFailureAndResolution": "Historical assertion that both TA2:2261 sources have no route failed after the deliberate bounded right-only change. Updated it to require right selection, reject left selection and preserve unsided/null conflict records; final dataset contracts pass 37/37.",
+  "sourceFilesAndOtherWipChanged": false,
+  "newCanonicalHaBindings": 0,
+  "newGeometry": 0
+}
