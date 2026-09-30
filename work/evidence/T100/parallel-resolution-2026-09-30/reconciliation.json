@@ -1,0 +1,119 @@
+{
+  "runId": "T100-parallel-resolution-2026-09-30-r1",
+  "derivation": "Read actual QA rows; keep historical continuation subset and whole-scope route counts separate.",
+  "previousPromptClaim": {
+    "targetsWithRoutes": 407,
+    "wholeScopeUnroutedTargetsImplied": 135
+  },
+  "observed": {
+    "targetsWithRoutes": 406,
+    "targetsWithoutRoutes": 136,
+    "historical166RemainingSubset": 135,
+    "membershipsWithRoutes": 424,
+    "membershipsWithoutRoutes": 139
+  },
+  "setDifference": [
+    {
+      "targetId": "TA2:2261",
+      "english": "iliocostalis colli muscle",
+      "primaryOwner": "back",
+      "assignedTo": "integration",
+      "status": "unresolved_side_conflict_no_selectable_concept",
+      "historicalDisposition": "exact_target_term_source_surface_linked",
+      "inOriginal166ContinuationQueue": false,
+      "inRemaining135Queue": false,
+      "inWholeScopeUnrouted136": true,
+      "sourceObjects": [
+        {
+          "sourceKey": "ZA-c7010a9-f1c445f6efa7d889f9c6ffaa",
+          "sourceName": "Iliocostalis colli muscle",
+          "side": null,
+          "learnerConceptLinks": [
+            {
+              "conceptKey": null,
+              "relationKind": "normalized_exact_target_term",
+              "targetIds": [
+                "TA2:2261"
+              ],
+              "memberCode": null,
+              "targetTermMatches": [
+                {
+                  "targetId": "TA2:2261",
+                  "matchedValues": [
+                    "iliocostalis colli muscle"
+                  ]
+                }
+              ],
+              "matchRule": "terminal-side-suffix removed; Unicode NFKC/casefold/alphanumeric-fold punctuation_fold_exact equality only",
+              "evidenceIds": [
+                "fipat-ta2-t96-frozen-target-terms",
+                "kmle-t100-round2-ta2-2261-opened",
+                "kmle-t100-suffixm-ta2-2261-opened",
+                "fipat-ta2-t96-full-target-catalog",
+                "za-t99-frozen-source-objects"
+              ],
+              "identityStatus": "side_conflicted",
+              "humanReview": "not_performed"
+            }
+          ]
+        },
+        {
+          "sourceKey": "ZA-c7010a9-31e68de95beec69e94a14dc7",
+          "sourceName": "Iliocostalis colli muscle.r",
+          "side": "right",
+          "learnerConceptLinks": [
+            {
+              "conceptKey": null,
+              "relationKind": "normalized_exact_target_term",
+              "targetIds": [
+                "TA2:2261"
+              ],
+              "memberCode": null,
+              "targetTermMatches": [
+                {
+                  "targetId": "TA2:2261",
+                  "matchedValues": [
+                    "iliocostalis colli muscle"
+                  ]
+                }
+              ],
+              "matchRule": "terminal-side-suffix removed; Unicode NFKC/casefold/alphanumeric-fold punctuation_fold_exact equality only",
+              "evidenceIds": [
+                "fipat-ta2-t96-frozen-target-terms",
+                "kmle-t100-round2-ta2-2261-opened",
+                "kmle-t100-suffixm-ta2-2261-opened",
+                "fipat-ta2-t96-full-target-catalog",
+                "za-t99-frozen-source-objects"
+              ],
+              "identityStatus": "side_conflicted",
+              "humanReview": "not_performed"
+            }
+          ]
+        }
+      ],
+      "qaTarget": {
+        "targetId": "TA2:2261",
+        "english": "iliocostalis colli muscle",
+        "semanticKind": "named_muscle",
+        "regionIds": [
+          "back"
+        ],
+        "routes": [],
+        "coverageCompleteness": "not_asserted; partial members remain distinct from full extent",
+        "actualVisualQA": "pending"
+      },
+      "qaMemberships": [
+        {
+          "targetId": "TA2:2261",
+          "regionId": "back",
+          "routes": [],
+          "status": "no_exact_member_route",
+          "visualStatus": "pending"
+        }
+      ],
+      "reason": "Historical continuation queue excludes this exact-term-linked candidate; current QA accepts only evidence_backed links with a non-null conceptKey. Its links remain side_conflicted and conceptKey null. No new binding or side inference performed."
+    }
+  ],
+  "productionOrHistoricalEvidenceChanged": false,
+  "geometryAbsenceClaim": false
+}
