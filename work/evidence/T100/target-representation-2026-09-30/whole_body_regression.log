@@ -1,0 +1,57 @@
+✔ 960 preserved instances, separate kinds, no rights/binding promotions (2.840709ms)
+✔ reject changed unit, duplicate instance, missing LOD, hold promotion and oversized chunk (42.711167ms)
+✔ all-detail demand retains every surface and stays within triangles and bytes (1.496583ms)
+✔ LRU evicts oldest unwanted only; twenty cycles stay bounded and release once (124.953458ms)
+✔ late cancelled decode is released; re-demand can subsequently load same key (19.56ms)
+✔ oversized load fails once without retry loop, disposal cancels pending (6.534208ms)
+✔ whole-source overlay retains records and independent release/review status (6.937208ms)
+✔ common projection preserves learner/search/selection fields and strips the developer evidence ledger (21.289875ms)
+✔ common search and stable routes match the full validated ledger across names, sides and all regions (72.042833ms)
+✔ runtime projection fails closed on stale inputs, policy drift, forbidden fields and incomplete identity (24.592417ms)
+✔ historical non-approval, public hold and human review do not block evidenced local rendering (0.088584ms)
+✔ revision, duplicate/missing keys, local decision mismatch and invented binding fail closed (58.462625ms)
+✔ all three names search a source pair and regional filters use union (5.265458ms)
+✔ T100 B01 maps ten exact skull targets to fourteen existing source surfaces with field provenance (27.685083ms)
+✔ T100 B01 evidence refs and direct crosswalk proof fail closed when altered (22.640167ms)
+✔ T100 ordinal-composed modern-only names accept field-scoped evidence without inventing legacy or Latin fields (30.5725ms)
+✔ T100 B02 classifies ten exact vertebral/variant targets and links only nineteen verified source members (2.677333ms)
+✔ T100 B02 rejects unsupported segment/member relations and target-name evidence without provenance (28.004667ms)
+✔ T100 B03 adds only ten terminology dispositions and 45 exact lumbar, ordinary-rib and carpal class members (5.589625ms)
+✔ T100 B03 rejects wrong sides, parents, member keys, unsupported variants and missing field provenance (72.93025ms)
+✔ T100 B04 records hand-bone members without leaking internal target terminology to learner search (2.373791ms)
+✔ T100 B04 rejects the fifth distal data-name conflict and wrong side/member evidence (66.092042ms)
+✔ T100 B05 records ten pelvis/knee/foot targets and exact existing class members without search leakage (5.15675ms)
+✔ T100 B bulk exact group terms and ordinal compositions preserve semantic scope and field-level holds (2.799458ms)
+✔ T100 B05 rejects wrong laterality, foot part, member key, and parent (67.25275ms)
+✔ both scapulae belong to arm context and sacrum to lumbar context (0.173042ms)
+✔ accessories remain retained without masquerading as muscle/bone (0.183625ms)
+✔ stable source route roundtrips, old bound HA route resolves side, invalid/filtered keys stay unselected (0.2305ms)
+✔ T100 semantic continuation groups the 226 unnamed surfaces without side duplicates and keeps unresolved identities held (1.207833ms)
+✔ T100 exact direct target links add typed source selection without changing canonical bindings or release holds (2.66575ms)
+✔ opaque learner concept links resolve a selected side and fail closed when a bilateral side is omitted (0.376458ms)
+✔ composed Korean phalanx and named carpal terms search to one source concept (1.652833ms)
+✔ contextual names cover visible surfaces without exposing judgment records or promoting holds (12.496125ms)
+✔ T95 product context adds left scapula membership without editing source or duplicating nodes (0.838375ms)
+✔ T95 context overlay rejects source identity, laterality, region, policy, and duplicate drift (0.257125ms)
+✔ source-only context never becomes selectable (0.633584ms)
+✔ supplements require explicit opt-in, stay unbound (0.061333ms)
+✔ held identity cannot be revealed through layer/opt-in (0.042125ms)
+✔ region/layer demand excludes unrelated geometry (0.126375ms)
+✔ T95 overlapping region union keeps one asset visible and empty filters mean whole body (0.078375ms)
+✔ reject conflicting duplicate IDs and source-only binding promotion (0.30175ms)
+✔ late parse after cancellation is disposed; same-id new demand can recover (4.117041ms)
+✔ failure retains successful resources; explicit retry only failed asset (1.86125ms)
+✔ dispose releases completed and late resources exactly once (1.638375ms)
+✔ isolation never promotes source-only or held nodes and respects layer switches (0.169667ms)
+✔ selected transparency preserves eligibility and selection; hide only hides the selected eligible asset (0.054792ms)
+✔ v2 local display is independent from learner binding, rights and review holds (0.139375ms)
+ℹ tests 47
+ℹ suites 0
+ℹ pass 47
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 699.17925
+Current compiled dataset contracts/dependencies/content hashes verified: 46 chunks. Historical plan/document freezes are tested separately.
+$ node --experimental-strip-types --test src/viewer/wholeBody/wholeBody.test.ts src/viewer/wholeBody/productContext.test.ts src/viewer/datasets/*.test.ts && node --experimental-strip-types scripts/verifyCompiledDatasets.ts

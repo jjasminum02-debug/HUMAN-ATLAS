@@ -1,0 +1,253 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "workUnit": "resolve-target-representation-and-final-scene-qa",
+  "capturedAtLocal": "2026-09-30",
+  "browser": "Codex in-app browser · local Vite app at http://127.0.0.1:5173/",
+  "inputHashes": {
+    "overlaySha256": "3cb4a000a93cac2e73a2a76817448a17e84345ddc45df9b410bd2df8d7f62551",
+    "targetScopeSha256": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
+    "compiledManifestSha256": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915c35d4b6111f1b7f42"
+  },
+  "viewport": {
+    "regionSwitchRun": [
+      1440,
+      900
+    ],
+    "cardResponsiveRuns": [
+      [
+        1024,
+        768
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "browserTabRestoredToDefaultViewport": true
+  },
+  "regionalSwitches": {
+    "regionsChecked": 12,
+    "sameRendererRoot": "7a9579c2-2e14-45e7-8ae5-17e7bd467337",
+    "oneCanvasPerView": true,
+    "allRouteHeadingAndPressedButtonMatched": true,
+    "allPendingAndFailedCountsZero": true,
+    "allHadPositiveVisibleMeshAndTriangleCounts": true,
+    "horizontalOverflow": false,
+    "nameCountsAreFilteredSearchRowsNotTA2TargetDenominators": true,
+    "samples": [
+      {
+        "labelKo": "머리",
+        "regionId": "head",
+        "names": 54,
+        "visibleMeshes": 101,
+        "triangles": 62395
+      },
+      {
+        "labelKo": "목",
+        "regionId": "neck",
+        "names": 55,
+        "visibleMeshes": 101,
+        "triangles": 50334
+      },
+      {
+        "labelKo": "등",
+        "regionId": "back",
+        "names": 62,
+        "visibleMeshes": 98,
+        "triangles": 74120
+      },
+      {
+        "labelKo": "어깨·어깨뼈",
+        "regionId": "shoulder-scapular",
+        "names": 13,
+        "visibleMeshes": 25,
+        "triangles": 28366
+      },
+      {
+        "labelKo": "가슴우리",
+        "regionId": "thorax",
+        "names": 40,
+        "visibleMeshes": 64,
+        "triangles": 106800
+      },
+      {
+        "labelKo": "배·허리",
+        "regionId": "abdomen-lumbar",
+        "names": 14,
+        "visibleMeshes": 21,
+        "triangles": 51337
+      },
+      {
+        "labelKo": "골반·샅",
+        "regionId": "pelvis-perineum",
+        "names": 9,
+        "visibleMeshes": 16,
+        "triangles": 11703
+      },
+      {
+        "labelKo": "볼기·깊은엉덩이",
+        "regionId": "gluteal-hip",
+        "names": 12,
+        "visibleMeshes": 24,
+        "triangles": 15720
+      },
+      {
+        "labelKo": "넙다리",
+        "regionId": "thigh",
+        "names": 18,
+        "visibleMeshes": 36,
+        "triangles": 30772
+      },
+      {
+        "labelKo": "종아리",
+        "regionId": "leg",
+        "names": 16,
+        "visibleMeshes": 32,
+        "triangles": 23390
+      },
+      {
+        "labelKo": "발",
+        "regionId": "foot",
+        "names": 42,
+        "visibleMeshes": 84,
+        "triangles": 25420
+      },
+      {
+        "labelKo": "팔·손",
+        "regionId": "upper-limb",
+        "names": 83,
+        "visibleMeshes": 166,
+        "triangles": 78508
+      }
+    ],
+    "visualReviewCoverage": "All twelve region buttons were exercised in the live browser with region-specific list, route, renderer root, mesh and triangle state. Direct screenshot visual inspection was performed for back/trapezius and head; a visual review of all 542 targets/563 memberships is still incomplete."
+  },
+  "selectedCardChecks": [
+    {
+      "concept": "협근",
+      "query": "볼근",
+      "region": "head",
+      "sourceKey": "ZA-c7010a9-04b9aa236b4d795160c54db8",
+      "side": "left",
+      "url": "/?regions=head&source=ZA-c7010a9-04b9aa236b4d795160c54db8",
+      "cardNames": [
+        "볼근",
+        "협근",
+        "Bucinator"
+      ],
+      "cardSide": "왼쪽",
+      "selectedKeyMatchesRouteAndCard": true,
+      "selectedSourcePresentInRendererVisibleSet": true
+    },
+    {
+      "concept": "협근",
+      "region": "head",
+      "sourceKey": "ZA-c7010a9-acd8cac3c62b4ce86edb51be",
+      "side": "right",
+      "url": "/?regions=head&source=ZA-c7010a9-acd8cac3c62b4ce86edb51be",
+      "cardNames": [
+        "볼근",
+        "협근",
+        "Bucinator"
+      ],
+      "cardSide": "오른쪽",
+      "selectedKeyMatchesRouteAndCard": true,
+      "selectedSourcePresentInRendererVisibleSet": true
+    },
+    {
+      "concept": "승모근 상부",
+      "query": "등세모근 위부분",
+      "region": "back",
+      "sourceKey": "ZA-c7010a9-e07069f3efea3d66c4e25ac2",
+      "side": "left",
+      "displayedNames": [
+        "등세모근 위부분",
+        "승모근 상부",
+        "Descending part of trapezius muscle"
+      ],
+      "sourceNameConflict": "raw source object says Ascending part; local display label/term correction maps this source surface to superior; correction evidence retains source conflict",
+      "geometryBoundsYMetres": [
+        1.4154925046074687,
+        1.5747380518717493
+      ],
+      "selectedSourcePresentInRendererVisibleSet": true,
+      "tealSelectionVisibleInActualScreenshot": true,
+      "sameRendererRoot": "7a9579c2-2e14-45e7-8ae5-17e7bd467337"
+    },
+    {
+      "concept": "승모근 하부",
+      "query": "등세모근 아래부분",
+      "region": "back",
+      "sourceKey": "ZA-c7010a9-949cdee8e7b16d22f295af1e",
+      "side": "left",
+      "displayedNames": [
+        "등세모근 아래부분",
+        "승모근 하부",
+        "Ascending part of trapezius muscle"
+      ],
+      "sourceNameConflict": "raw source object says Descending part; local display label/term correction maps this source surface to inferior; correction evidence retains source conflict",
+      "geometryBoundsYMetres": [
+        1.1200791815298081,
+        1.4143072562864352
+      ],
+      "selectedSourcePresentInRendererVisibleSet": true,
+      "tealSelectionVisibleInActualScreenshot": true,
+      "sameRendererRoot": "7a9579c2-2e14-45e7-8ae5-17e7bd467337"
+    }
+  ],
+  "trapeziusVisualComparison": {
+    "screenshotsInspectedAt1440x900": true,
+    "upperPatchObserved": "Cranial neck-to-shoulder area is selected in teal.",
+    "lowerPatchObserved": "A smaller teal patch is visible laterally near the scapular region; the screenshot cannot confirm its full caudal extent.",
+    "boundsOrdering": "upper lower-bound Y exceeds lower upper-bound Y by about 0.001185 m; ordering supports the corrected cranial/caudal assignment.",
+    "geometryChanged": false,
+    "sourceConflictAndHumanReview": "Raw source labels remain crossed relative to the geometry-based display correction; humanReview remains not_performed. This visual spot check is not a human anatomical sign-off.",
+    "visualLimit": "The mesh conflict is not closed by this spot check; exact geometry-to-part correspondence remains human-review pending."
+  },
+  "keyboard": {
+    "arrowLeftChangesCamera": true,
+    "homeReturnsToOverviewRouteAndFullScene": true,
+    "homeResetsAzimuth": false,
+    "interpretation": "Home restores full-body framing while retaining the current azimuth; presentation reset/selection behavior was outside this keyboard check."
+  },
+  "overviewPerformanceDuringFourCameraDragGestures": {
+    "viewport": [
+      1440,
+      900
+    ],
+    "canvasCount": 1,
+    "visibleSourceObjects": 672,
+    "visibleMeshes": 672,
+    "triangles": 486184,
+    "drawCalls": 672,
+    "typedGeometryBufferBytes": 6825150,
+    "resourceQueueBytes": 24961500,
+    "renderSamples": 240,
+    "renderCpuP50Ms": 1.6,
+    "renderCpuP95Ms": 2.5,
+    "animationFrameCallbackSamples": 240,
+    "callbackIntervalP50Ms": 16.7,
+    "callbackIntervalP95Ms": 17.5,
+    "pending": 0,
+    "failed": 0,
+    "gpuTimeOrVram": "unavailable",
+    "browserProcessOrTotalMemory": "unavailable via browser evaluation",
+    "limitations": "RAF callback interval is reported separately and is not presented as rendered FPS. Browser profile is a desktop in-app browser; 390px viewport is not a physical phone."
+  },
+  "policyChecks": {
+    "learnerVisibleTextHasNoDeveloperIdsOrJson": true,
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "existingCanonicalHaBindings": 130,
+    "newCanonicalHaBindings": 0,
+    "newGeometry": 0,
+    "targetDenominator": 542,
+    "membershipDenominator": 563,
+    "regionDenominator": 12,
+    "nonleakageMethod": "Actual visible body text checked for TA2 IDs, HA IDs, ZA source keys, sourceKey, learnerConceptLinks, JSON, or serialized payload patterns; none were found."
+  },
+  "consoleErrorsAndWarnings": 0,
+  "screenshotEvidence": "Two CUA screenshot observations (upper and lower trapezius selection) and one 390px head/card view were visually inspected during this run; screenshot bytes are not persisted as project files by the browser surface."
+}

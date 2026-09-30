@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "workUnit": "resolve-target-representation-and-final-scene-qa",
+  "updatedAtLocal": "2026-09-30T13:41:15+09:00",
+  "state": "partial",
+  "nextUnit": "resolve-target-representation-and-final-scene-qa",
+  "completedThisRun": [
+    "add 392 provenance-backed normalized-exact target term relations across 203 frozen target IDs without creating geometry or canonical HA bindings",
+    "reconcile every frozen target into exact-term-linked, verified-class-member, direct-candidate, declared-crosswalk, ancestry-only, or no-pinned-crosswalk dispositions while preserving 542/563/12",
+    "verify all 12 region routes in the same live scene and responsive selected-card samples at 1440, 1024, and 390 CSS-pixel widths; record trapezius upper/lower assignment sample and keyboard behavior",
+    "measure updated runtime projection and overview scene budgets with available renderer/CPU proxies; state GPU/VRAM and total process memory as unavailable",
+    "pass whole-body, search, delivery, typecheck, production build, exact-link validation, and preservation checks"
+  ],
+  "denominators": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12,
+    "changed": false
+  },
+  "newRelations": {
+    "rows": 392,
+    "uniqueTargets": 203,
+    "leftRightPairs": 189,
+    "unsided": 14,
+    "muscleSurfaces": 304,
+    "boneSurfaces": 88,
+    "alreadyHaBound": 112,
+    "sourceOnly": 280,
+    "newCanonicalHaBindings": 0,
+    "newGeometry": 0
+  },
+  "targetDispositions": {
+    "exactTermLinked": 280,
+    "verifiedSourceClassMembersLinked": 11,
+    "directCandidateWithoutTypedLink": 18,
+    "declaredCrosswalkCandidateWithoutTypedLink": 76,
+    "ancestryCandidateOnly": 93,
+    "noCurrentPinnedSurfaceCrosswalkObserved": 64
+  },
+  "historical163Preserved": {
+    "exactLabelObservations": 6,
+    "descendantSurfaces": 20,
+    "ancestorOrGroupSurfaces": 135,
+    "frozenPackageHierarchyNonObservations": 2,
+    "provenSourceWideGeometryAbsence": 0,
+    "targetSpecificStatus": "unresolved"
+  },
+  "runtimeProjection": {
+    "rows": 960,
+    "localDisplayEligible": 672,
+    "existingHaBindings": 130,
+    "sourceOnlyRows": 830,
+    "projectionBytes": 856375,
+    "compactLedgerBytes": 4539757,
+    "reductionPercent": 81.14,
+    "projectionParseMedianMs": 1.088,
+    "builderAndValidationMedianMs": 7.035,
+    "repeatedSearchFullScanMedianMs": 200.143,
+    "exactIndexMedianMs": 0.119,
+    "sameResults": true
+  },
+  "sceneQa": {
+    "regionRoutes": 12,
+    "selectedCardChecks": 4,
+    "viewports": [
+      1440,
+      1024,
+      390
+    ],
+    "visibleObjects": 672,
+    "triangles": 486184,
+    "rendererCalls": 672,
+    "typedGeometryBytes": 6825150,
+    "resourceQueueBytes": 24961500,
+    "renderCpuP95Ms": 2.5,
+    "rafIntervalP95Ms": 17.5,
+    "gpuVram": "unavailable",
+    "totalBrowserProcessMemory": "unavailable",
+    "consoleErrorsAndWarnings": 0
+  },
+  "holds": {
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "existingCanonicalHaBindings": 130,
+    "newCanonicalHaBindings": 0,
+    "newGeometry": 0
+  },
+  "pendingUnits": [
+    "C: 251 targets still lack an exact typed target/source representation: 18 direct candidates, 76 declared-crosswalk candidates, 93 ancestry-only candidates, and 64 without a current pinned surface crosswalk; resolve identity/member scope and distinguish group/part representation from genuinely unavailable geometry.",
+    "C: 75 target terminology/evidence gaps and any remaining side/identity/part exceptions remain unresolved; do not equate composed source surface names with complete target terminology or bindings.",
+    "D: complete exact target/member selection and visual QA over all 542 targets and 563 memberships. The 12 route switches and selected samples are not exhaustive coverage.",
+    "D: GPU time/VRAM and total browser/process memory were not observable; retain these as unmeasured diagnostics and do not invent measurements or a new hard gate."
+  ],
+  "evidence": [
+    "work/evidence/T100/target-representation-2026-09-30/link-delta.json",
+    "work/evidence/T100/target-representation-2026-09-30/target-representation-matrix.json",
+    "work/evidence/T100/target-representation-2026-09-30/validation.json",
+    "work/evidence/T100/target-representation-2026-09-30/browser-validation.json",
+    "work/evidence/T100/target-representation-2026-09-30/runtime-projection-measurement.json",
+    "work/evidence/T100/target-representation-2026-09-30/verification-results.json",
+    "work/evidence/T100/target-representation-2026-09-30/preservation-after.json"
+  ]
+}

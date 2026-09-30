@@ -22,6 +22,10 @@ const semanticBaseline = JSON.parse(readFileSync(new URL('../../../../work/evide
 };
 const preexistingHaBySource = new Map(semanticBaseline.preexistingHaConceptBindings.map(binding => [binding.sourceKey, binding.haConceptId]));
 const preservedUnnamedBySource = new Map(semanticBaseline.preservedUnnamedSurfaceState.map(row => [row.sourceKey, row]));
+const directTargetLinkDelta = JSON.parse(readFileSync(new URL('../../../../work/evidence/T100/target-representation-2026-09-30/link-delta.json', import.meta.url), 'utf8')) as {
+    change: { addedRows: number; uniqueTargetIds: number; sourceKindCounts: Record<string, number>; sourceOnlyCounts: Record<string, number>; sideCounts: Record<string, number> };
+    entries: Array<{ sourceKey: string; sourceName: string; targetId: string; kind: string; side: string | null; regionIds: string[]; conceptKey: string; evaluatedGeometrySha256: string; link: NonNullable<Integration['objects'][number]['learnerConceptLinks']>[number] }>;
+};
 const compiled = JSON.parse(readFileSync(new URL('../../../../atlas-data/source-cache/datasets/za/compiled/manifest.json', import.meta.url), 'utf8')) as {
     revision: string;
     instances: Array<{ sourceKey: string; kind: string; lods: { detail: { resource: string } } }>;
@@ -653,8 +657,10 @@ test('stable source route roundtrips, old bound HA route resolves side, invalid/
 });
 
 test('T100 semantic continuation groups the 226 unnamed surfaces without side duplicates and keeps unresolved identities held', () => {
-    const linked = raw.objects.filter(row => row.learnerConceptLinks?.length);
+    // Preserve the original 226-row semantic continuation as its own regression cohort.
+    const linked = raw.objects.filter(row => preservedUnnamedBySource.has(row.sourceKey));
     assert.equal(linked.length, 226);
+    assert.equal(raw.objects.filter(row => row.learnerConceptLinks?.length).length, 618);
     const groups = new Map<string, typeof linked>();
     for (const row of linked) {
         const label = row.sourceName.replace(/\.[lr]$/i, '');
@@ -719,6 +725,64 @@ test('T100 semantic continuation groups the 226 unnamed surfaces without side du
     assert.equal(raw.scope.targets, 542);
     assert.equal(raw.scope.memberships, 563);
     assert.equal(raw.scope.regions, 12);
+});
+test('T100 exact direct target links add typed source selection without changing canonical bindings or release holds', () => {
+    const entries = directTargetLinkDelta.entries;
+    assert.equal(directTargetLinkDelta.change.addedRows, 392);
+    assert.equal(directTargetLinkDelta.change.uniqueTargetIds, 203);
+    assert.equal(entries.length, 392);
+    assert.equal(new Set(entries.map(entry => entry.sourceKey)).size, 392);
+    assert.equal(new Set(entries.map(entry => entry.targetId)).size, 203);
+    assert.deepEqual(directTargetLinkDelta.change.sourceKindCounts, { bone: 88, muscle: 304 });
+    assert.deepEqual(directTargetLinkDelta.change.sourceOnlyCounts, { existing_HA_bound: 112, source_only: 280 });
+    assert.deepEqual(directTargetLinkDelta.change.sideCounts, { left: 189, right: 189, unsided: 14 });
+    assert.equal(raw.objects.filter(row => row.learnerConceptLinks?.some(link => link.relationKind === 'normalized_exact_target_term')).length, 546);
+    assert.equal(raw.objects.filter(row => row.haConceptId).length, 130);
+    for (const row of raw.objects)
+        assert.equal(row.haConceptId ?? null, preexistingHaBySource.get(row.sourceKey) ?? null, `canonical binding changed for ${row.sourceName}`);
+    for (const entry of entries) {
+        const row = raw.objects.find(candidate => candidate.sourceKey === entry.sourceKey)!;
+        const link = row.learnerConceptLinks?.[0];
+        assert(link, entry.sourceKey);
+        assert.equal(row.learnerConceptLinks!.length, 1);
+        assert.equal(row.sourceName, entry.sourceName);
+        assert.equal(row.targetId, entry.targetId);
+        assert(row.targetIds.includes(entry.targetId));
+        assert.equal(row.kind, entry.kind);
+        assert.equal(row.side, entry.side);
+        assert.deepEqual(row.regionIds, entry.regionIds);
+        assert.equal(row.localDisplayEligible, true);
+        assert.equal(row.publicRedistribution, 'held');
+        assert.equal(row.humanReview, 'not_performed');
+        assert.equal(link.relationKind, 'normalized_exact_target_term');
+        assert.equal(link.identityStatus, 'evidence_backed');
+        assert.equal(link.humanReview, 'not_performed');
+        assert.deepEqual(link.targetIds, [entry.targetId]);
+        assert.deepEqual(link.evidenceIds, ['fipat-ta2-t96-full-target-catalog', 'za-t99-frozen-source-objects']);
+        assert.equal(link.conceptKey, entry.conceptKey);
+        assert.match(entry.evaluatedGeometrySha256, /^[a-f0-9]{64}$/);
+        assert(!entry.conceptKey.startsWith('HA-'));
+    }
+    const groups = new Map<string, typeof entries>();
+    for (const entry of entries) {
+        const group = groups.get(entry.conceptKey) ?? [];
+        group.push(entry);
+        groups.set(entry.conceptKey, group);
+    }
+    assert.equal(groups.size, 203);
+    const bilateral = [...groups.values()].filter(group => group.length === 2 && new Set(group.map(entry => entry.side)).size === 2
+        && group.some(entry => entry.side === 'left') && group.some(entry => entry.side === 'right'));
+    const unsided = [...groups.values()].filter(group => group.length === 1 && group[0].side === null);
+    assert.equal(bilateral.length, 189);
+    assert.equal(unsided.length, 14);
+    const pair = bilateral[0];
+    const left = pair.find(entry => entry.side === 'left')!;
+    const right = pair.find(entry => entry.side === 'right')!;
+    const regions = [...new Set(raw.objects.flatMap(row => row.regionIds))];
+    assert.equal(readDatasetRoute(`?concept=${left.conceptKey}&side=left`, raw.objects, regions).selected, left.sourceKey);
+    assert.equal(readDatasetRoute(`?concept=${right.conceptKey}&side=right`, raw.objects, regions).selected, right.sourceKey);
+    const midline = unsided[0][0];
+    assert.equal(readDatasetRoute(`?concept=${midline.conceptKey}`, raw.objects, regions).selected, midline.sourceKey);
 });
 test('opaque learner concept links resolve a selected side and fail closed when a bilateral side is omitted', () => {
     const pair = raw.objects.find(row => row.learnerConceptLinks?.some(link => link.conceptKey && link.relationKind === 'verified_class_member'))!;
