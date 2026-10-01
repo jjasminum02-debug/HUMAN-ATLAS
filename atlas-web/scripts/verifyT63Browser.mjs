@@ -1,0 +1,64 @@
+import {createRequire} from 'node:module';
+import {mkdir,writeFile,readFile} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import {createHash} from 'node:crypto';
+const require=createRequire('/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/t63.cjs');
+const {chromium}=require('playwright');
+const out=resolve('../work/evidence/T63/browser');await mkdir(out,{recursive:true});
+const browser=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
+const checks=[],captures=[],errors=[];let page;
+const check=(name,pass,detail)=>{checks.push({name,pass,detail});if(!pass)throw Error(name+': '+JSON.stringify(detail));};
+const wait=async()=>{await page.waitForFunction(()=>{const c=document.querySelector('.whole-body-canvas canvas');if(!c?.dataset.dataset)return false;const s=JSON.parse(c.dataset.dataset);return s.pending===0&&!document.querySelector('.whole-body-canvas').inert;},null,{timeout:30000});await page.waitForTimeout(450);};
+const state=()=>page.locator('.whole-body-canvas canvas').evaluate(c=>JSON.parse(c.dataset.dataset));
+const shot=async(name)=>{const b=await page.screenshot({path:resolve(out,name+'.png')});captures.push({path:'work/evidence/T63/browser/'+name+'.png',sha256:createHash('sha256').update(b).digest('hex')});};
+try{
+ page=await browser.newPage({viewport:{width:1440,height:1000}});page.on('pageerror',e=>errors.push(String(e)));page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
+ await page.goto('http://127.0.0.1:5183/?regions=leg',{waitUntil:'domcontentloaded'});await wait();
+ const data=await page.evaluate(async()=>({runtime:await(await fetch('/__atlas/integration.json')).json(),dataset:await(await fetch('/__atlas/datasets/human-atlas-local/manifest.json')).json()}));
+ const nerves=data.runtime.objects.filter(r=>r.kind==='nerve');check('six verified source nerves',nerves.length===6,nerves.map(n=>n.sourceKey));
+ await writeFile(resolve(out,'runtime.json'),JSON.stringify(data.runtime));await writeFile(resolve(out,'dataset.json'),JSON.stringify(data.dataset));
+ const first=await state();check('default nerves off',nerves.every(n=>!first.visible.includes(n.sourceKey)),first);
+ await page.getByRole('button',{name:'신경',exact:true}).click();await wait();
+ const nerveState=await state();check('six visible under existing scene',nerves.every(n=>nerveState.visible.includes(n.sourceKey)),nerveState);
+ await page.getByRole('button',{name:'근육',exact:true}).click();await wait();await shot('1440-leg-bones-nerves');
+ await page.getByRole('searchbox',{name:'구조 검색'}).fill('Common fibular nerve');await page.locator('.region-structure-list button').filter({hasText:'Common fibular nerve'}).first().click();await wait();
+ await page.getByRole('button',{name:'선택 맞춤',exact:true}).click();await page.waitForTimeout(500);await shot('1440-common-selected');
+ await page.locator('.nerve-card button').filter({hasText:'Deep fibular nerve'}).click();await wait();await page.getByRole('button',{name:'선택 맞춤',exact:true}).click();await page.waitForTimeout(500);await shot('1440-deep-bone-context');
+ await page.getByRole('button',{name:'근육',exact:true}).click();await wait();await shot('1440-deep-motor-context');
+ const motor=await state();const selected=nerves.find(n=>n.sourceKey===motor.selected);check('same-side motor highlight',motor.highlighted.length===1&&motor.highlighted[0]===selected.nerve.muscleKeys[0],motor.highlighted);
+ await page.locator('.part-pills button').filter({hasText:'오른쪽'}).click();await wait();const right=await state();check('right card and motor target',data.runtime.objects.find(n=>n.sourceKey===right.selected).side==='right'&&right.highlighted[0]!==motor.highlighted[0],right);await shot('1440-deep-right');
+ check('single scene root after selections',right.root===first.root&&await page.locator('.whole-body-canvas canvas').count()===1,right.root);
+ await page.getByRole('button',{name:'선택 숨기기',exact:true}).click();await wait();const hidden=await state();check('hidden nerve removed and highlight cleared',!hidden.visible.includes(hidden.selected)&&hidden.highlighted.length===0,hidden);
+ await page.locator('.part-pills button').filter({hasText:'왼쪽'}).click();await wait();check('switching side preserves hidden right',!(await state()).visible.includes(right.selected),await state());
+ await page.getByRole('button',{name:'신경',exact:true}).click();await wait();const off=await state();check('layer-off clears geometry and highlights',nerves.every(n=>!off.visible.includes(n.sourceKey))&&off.highlighted.length===0,off);
+ await page.getByRole('button',{name:'보기 복원',exact:true}).click();await wait();check('restore obeys nerve layer off',(await state()).nerveLayer===false&&!(await state()).highlighted.length,await state());
+ await page.goBack();await wait();check('history typed card',await page.locator('.nerve-card').count()===1,await page.locator('.names-card').allTextContents());
+ await page.goForward();await wait();
+ await page.getByRole('button',{name:'신경',exact:true}).click();await wait();
+ await page.getByRole('button',{name:'근육',exact:true}).click();await wait();
+ await page.getByRole('searchbox',{name:'구조 검색'}).fill('Superficial fibular nerve');await page.locator('.region-structure-list button').filter({hasText:'Superficial fibular nerve'}).first().click();await wait();await page.getByRole('button',{name:'선택 맞춤',exact:true}).click();await page.waitForTimeout(500);await shot('1440-superficial-bone-context');
+ check('no invented superficial motor targets',(await state()).highlighted.length===0,await state());
+ for(const width of [1024,390]){
+  await page.setViewportSize({width,height:width===390?844:900});await page.waitForTimeout(500);await shot(width+'-nerve-card');
+  const layout=await page.evaluate(()=>{const rect=s=>{const r=document.querySelector(s).getBoundingClientRect();return{x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width,height:r.height}};return{viewport:innerWidth,document:document.documentElement.scrollWidth,canvas:rect('.whole-body-canvas'),tools:rect('.body-tools'),card:rect('.study-details')}});
+  const overlap=(a,b)=>Math.min(a.right,b.right)-Math.max(a.x,b.x)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.y,b.y)>1;
+  check(width+' responsive containment',layout.document<=width&&layout.canvas.height>=170&&!overlap(layout.canvas,layout.tools)&&!overlap(layout.canvas,layout.card),layout);
+ }
+ const cancelPage=await browser.newPage({viewport:{width:1440,height:1000}});
+ cancelPage.on('pageerror',e=>errors.push(String(e)));
+ const chunk=data.dataset.chunks.find(c=>c.resources.every(key=>key.startsWith('ZA-NERVE-')));
+ let requests=0;
+ await cancelPage.route('**'+chunk.url,async route=>{requests++;if(requests===1)await new Promise(r=>setTimeout(r,900));try{await route.continue();}catch{} });
+ await cancelPage.goto('http://127.0.0.1:5183/?regions=leg');
+ const oldPage=page;page=cancelPage;await wait();
+ await page.getByRole('button',{name:'신경',exact:true}).click();
+ await page.waitForFunction(()=>JSON.parse(document.querySelector('canvas').dataset.dataset).pending>0);
+ await page.getByRole('button',{name:'신경',exact:true}).click();await wait();await page.waitForTimeout(1100);
+ const cancelled=await state();check('pending nerve load cancelled without late attachment',cancelled.cancellations>=1&&cancelled.failed.length===0&&nerves.every(n=>!cancelled.visible.includes(n.sourceKey)),cancelled);
+ await page.getByRole('button',{name:'신경',exact:true}).click();await wait();const cached=await state();const beforeRequests=requests;
+ await page.getByRole('button',{name:'신경',exact:true}).click();await page.getByRole('button',{name:'신경',exact:true}).click();await wait();
+ check('shared cache reused within unchanged 96 MiB budget',requests===beforeRequests&&(await state()).bytes<=96*1024*1024&&cached.root===(await state()).root,{requests,cached,final:await state()});
+ await page.close();page=oldPage;
+ check('no console errors',errors.length===0,errors);
+}catch(e){errors.push(String(e));if(page)await shot('failure');throw e;}
+finally{await writeFile(resolve(out,'checks.json'),JSON.stringify({checks,captures,errors,limitations:['Desktop Chrome viewport at 390px is not mobile hardware validation.','Static source snapshot only; no individual variation or dynamic pose validation.']},null,2)+'\n');await browser.close();}

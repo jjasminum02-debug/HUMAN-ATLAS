@@ -1,3 +1,5 @@
+import { loadNerveAssets } from './nerveAssets.ts';
+import { composeNerveScene } from '../src/viewer/datasets/nerveScene.ts';
 import { readFile, realpath } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { createHash } from 'node:crypto';
@@ -9,7 +11,7 @@ import { validateDataset, type Dataset } from '../src/viewer/datasets/schema.ts'
 
 type FileEntry = { id: string; path: string; sha256: string; bytes: number };
 type Snapshot = { manifest: any; dependencies: {path: string; sha256: string}[]; files: FileEntry[] };
-type ProjectionAssets = { dataset: Dataset; datasetBody: Buffer; runtimeBody: Buffer; key: string };
+type ProjectionAssets = { dataset: Dataset; datasetBody: Buffer; runtimeBody: Buffer; key: string; nerveFiles: FileEntry[] };
 const sha = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 const T100_INPUTS = [
   'work/evidence/T100/closure-audit-2026-09-30/action-queue.json',
@@ -35,7 +37,7 @@ export function wholeBodyPlugin(root: string): Plugin {
     configureServer(server) {
       // Frozen dependencies invalidate both namespaces and their single-scene composition.
       server.watcher.add([
-        `${cache}/datasets`, `${root}atlas-data/manifests`, `${root}atlas-data/catalog/target-scope-t96.json`,
+        `${cache}/datasets`, `${root}atlas-data/overlays/nerve-support-t63.json`, `${root}atlas-data/assets/derived-glb/za-nerve-t63`, `${root}work/evidence/T63/local-use-rights.json`, `${root}work/evidence/T63/evaluated-surfaces.json`, `${root}atlas-data/manifests`, `${root}atlas-data/catalog/target-scope-t96.json`,
         `${root}work/evidence/T78/reference/ta2-scope.json`, `${root}work/evidence/T78/source-elements.json`,
         `${root}work/evidence/T50/scene-contract.md`, `${root}work/evidence/T69/diagnostic.json`,
         `${root}work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json`,
@@ -177,7 +179,11 @@ export function wholeBodyPlugin(root: string): Plugin {
           const composedOverlaySha=sha(Buffer.from([overlaySha256,supplementSha256].join('\n')));
           const composedRightsSha=sha(Buffer.from([rightsEvidenceSha256,supplementRightsSha256].join('\n')));
           const projection=composeSupplementRuntime(baseProjection,dataset,supplement,targetRoutesBySource(relationEvidence),composedOverlaySha,composedRightsSha);
-          return {dataset,datasetBody:Buffer.from(JSON.stringify(dataset)),runtimeBody:Buffer.from(JSON.stringify(projection)),key:sha(Buffer.from([overlaySha256,supplementSha256,rightsEvidenceSha256,supplementRightsSha256,targetScopeSha256,supportContextSha256].join('\n')))};
+          const nerve = await loadNerveAssets(root);
+          const combined = composeNerveScene(dataset, projection, nerve.manifest, nerve.registry, nerve.dataset, nerve.rights,
+            sha(Buffer.from([composedOverlaySha, nerve.sha256].join('\n'))), sha(Buffer.from([composedRightsSha, nerve.rightsSha256].join('\n'))));
+          return { dataset: combined.dataset, datasetBody: Buffer.from(JSON.stringify(combined.dataset)),
+            runtimeBody: Buffer.from(JSON.stringify(combined.integration)), key: nerve.sha256, nerveFiles: nerve.files };
         })();
         composed=pending; pending.catch(()=>{if(composed===pending)composed=undefined;}); return pending;
       }
@@ -200,7 +206,8 @@ export function wholeBodyPlugin(root: string): Plugin {
         try {
           const data=await snapshot(namespace);
           if(file==='manifest.json'){res.setHeader('Content-Type','application/json');res.end(JSON.stringify(data.manifest));return;}
-          const entry=data.files.find(candidate=>`${candidate.id}.glb`===file);if(!entry){res.statusCode=404;res.end();return;}
+          const nerveFiles = namespace === 'za-c7010a9' ? (await compose()).nerveFiles : [];
+          const entry=[...data.files, ...nerveFiles].find(candidate=>`${candidate.id}.glb`===file);if(!entry){res.statusCode=404;res.end();return;}
           const bytes=await readFile(entry.path);if(bytes.length!==entry.bytes||sha(bytes)!==entry.sha256)throw Error('chunk integrity');
           if(req.destroyed)return;
           // URLs may survive recompilation: revalidate the actual verified content, never cache blindly.

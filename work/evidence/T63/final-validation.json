@@ -1,0 +1,97 @@
+{
+  "taskId": "T63",
+  "contractRevision": "app-completion-2026-10-01",
+  "acceptanceScope": "six same-source static fibular nerve surfaces, typed routes/cards/branch navigation and two side-matched tibialis-anterior motor relations in one existing learner scene; no universal extent or dynamic pose",
+  "productReadiness": "local_app_ready",
+  "contentCompleteness": "partial",
+  "knownContentGaps": "work/evidence/T63/content-gaps.json",
+  "unresolvedProductBlockers": [],
+  "automated": {
+    "relatedContractPolicySceneAndDeliveryTests": {
+      "passed": 86,
+      "failed": 0,
+      "command": "node --experimental-strip-types --test src/viewer/wholeBody/wholeBody.test.ts src/viewer/wholeBody/productContext.test.ts src/viewer/datasets/*.test.ts src/domain/nerveContract.test.ts scripts/delivery.test.ts"
+    },
+    "finalGeometryPresentationDeliveryRecheck": {
+      "passed": 7,
+      "failed": 0,
+      "evidence": "work/evidence/T63/final-checks.json"
+    },
+    "allSixGeometryAndRouteContracts": "passed; original asset/chunk hashes, finite positions/unit normals, native world bake, reflected winding, indexed topology, sides, symmetric pair centroids and unchanged packed accessors",
+    "typecheck": "passed",
+    "productionBuild": "passed",
+    "chunkSizeNotice": "existing nonblocking JavaScript chunk >500 kB; budget was not raised"
+  },
+  "actualBrowser": {
+    "checksPassed": 33,
+    "checksFailed": 0,
+    "consoleErrors": 0,
+    "viewports": [
+      1440,
+      1024,
+      390
+    ],
+    "singleSceneRendererCamera": true,
+    "actualRegionsExercised": 12,
+    "actualSurfaceClick": true,
+    "keyboardSelectionCamera": true,
+    "delayedRequestCancellationAndCacheReuse": true,
+    "captureCount": 10,
+    "evidence": [
+      "work/evidence/T63/browser/checks.json",
+      "work/evidence/T63/interaction/checks.json",
+      "work/evidence/T63/visual-review.json"
+    ]
+  },
+  "resourceImpact": {
+    "additionalChunkBytes": 348184,
+    "additionalSourceTriangles": 19008,
+    "additionalDeclaredGeometryBytes": 343872,
+    "existingCacheBudgetBytes": 100663296,
+    "budgetChanged": false,
+    "overviewTriangles": 738380,
+    "overviewBytes": 9399848
+  },
+  "inputAndPreservation": {
+    "baseline": "work/evidence/T63/baseline.json",
+    "runtimeIntegrity": "work/evidence/T63/runtime-integrity.json",
+    "sourceChecks": "Original blend hash remains pinned 9f08a17e…; T62 evidence/registry preserved; all 960 ZA base rows compared; original source assets, OpenSim_Models and T13 not written. Existing WIP not staged.",
+    "fullTargetDenominators": [
+      542,
+      563,
+      12
+    ],
+    "existingHaBindings": 130,
+    "historical163": [
+      6,
+      20,
+      135,
+      2
+    ],
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed"
+  },
+  "limitations": [
+    "Static source frame 0 only; unsupported motion pose hides nerves and motor highlights. No dynamic anatomical pose claim.",
+    "Local source geometry and technical placement observation are not human anatomical review or a universal full-course pass.",
+    "Remaining nerve candidates and incomplete Korean terminology remain unsupported/null.",
+    "GPU time, VRAM and total process memory not observed; current geometry cache cost is not those measurements.",
+    "390px desktop browser is not mobile hardware validation."
+  ],
+  "evidenceSha256": {
+    "work/evidence/T63/product-scope.json": "ae1c90ed2af299d7268af4daafeb4cbbe0ca527f25754a902541b1fda7490417",
+    "work/evidence/T63/runtime-integrity.json": "267bc579d05ce9622a4a633bf84905040098991df4cf7ceb571e1b3f62e4409b",
+    "work/evidence/T63/evaluated-surfaces.json": "9868b332c9d0790f6a7af7c7ea76fba39416ffb378bd1ddf9ba7de1415cef69a",
+    "work/evidence/T63/browser/checks.json": "4367bb4e1ea7aa463d3da7dadd1795e3ef65ad2efd8295184091420798cc7228",
+    "work/evidence/T63/interaction/checks.json": "fa8e9b8307b11219c66126f54c1e3ed80bc735a8a8a294e7652321bd8bf31d83",
+    "work/evidence/T63/visual-review.json": "c903ffb1afb11ed02e9f2a4b4be41dac8d47cea8d5af3f8336e028e2a7003698",
+    "work/evidence/T63/content-gaps.json": "93611fce88e3415f093975996858d61bc27720d028dc0acd81977fab658e6b3b",
+    "work/evidence/T63/final-checks.json": "4debde9cd4c42cdf1eaaacaefaae0a057231646a9718da63d323a553b7fd0619"
+  },
+  "executionSynchronization": {
+    "sync_execution.py": "passed; 3 execution views updated",
+    "sync_execution.py --check": "passed; no writes",
+    "git diff --check": "passed"
+  }
+}

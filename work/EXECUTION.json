@@ -2397,17 +2397,98 @@
       "title": "같은 장면의 신경 주행·지배근 선택",
       "owner": "Sol High",
       "phase": "G3",
-      "executionStatus": "planned_not_started",
-      "acceptance": "pending",
+      "executionStatus": "completed",
+      "acceptance": "passed",
       "spec": "work/tasks/T63-APP-COMPLETION.md",
       "scope": "검증된 T62 신경을 기존 scene/renderer/camera에서 표시하고 typed 선택/카드/근거 있는 지배근 강조/복원을 연결한다. T89의 같은 방식 확장은 데이터 기반 내부 unit으로 흡수한다. 신경 주행·좌표·pose가 확인된 실제 surface/curve만 사용하고 미확보 신경은 미지원으로 유지한다. source 후보나 이름을 실제 주행으로 조작하지 않는다.",
       "progress": {
         "nextUnit": null,
-        "completedUnits": []
+        "completedUnits": [
+          "verify-runtime-signature-and-original-source-hashes-with-scripts-disabled",
+          "evaluate-and-compile-six-original-native-curve-surfaces",
+          "compose-one-existing-dataset-loader-cache-scene-and-pose-gates",
+          "connect-typed-nerve-selection-cards-same-side-branches-and-verified-motor-highlights",
+          "validate-all-contracts-12-region-actual-ui-and-responsive-visuals",
+          "record-scoped-product-acceptance-and-separate-content-gaps"
+        ],
+        "pendingUnits": [],
+        "productAcceptance": {
+          "contractRevision": "app-completion-2026-10-01",
+          "acceptanceScope": "six same-source static fibular nerve surfaces, typed routes/cards/branch navigation and two side-matched tibialis-anterior motor relations in one existing learner scene; no universal extent or dynamic pose",
+          "productReadiness": "local_app_ready",
+          "contentCompleteness": "partial",
+          "knownContentGaps": {
+            "contractRevision": "app-completion-2026-10-01",
+            "acceptanceScope": "six same-source static fibular nerve surfaces, typed routes/cards/branch navigation and two side-matched tibialis-anterior motor relations in one existing learner scene; no universal extent or dynamic pose",
+            "productReadiness": "local_app_ready",
+            "contentCompleteness": "partial",
+            "unresolvedProductBlockers": [],
+            "denominators": {
+              "targets": 542,
+              "memberships": 563,
+              "regions": 12,
+              "existingCanonicalHaBindings": 130,
+              "historical163": {
+                "total": 163,
+                "classes": [
+                  6,
+                  20,
+                  135,
+                  2
+                ]
+              }
+            },
+            "existingContent": {
+              "targetsWithoutLearnerRoute": 133,
+              "membershipsWithoutLearnerRoute": 136,
+              "directKoreanTermEvidenceRows": 73,
+              "spatiallyUnacceptedBP3DInspectionObjects": 13,
+              "source": "work/product-scope.json (G1/T58 snapshot retained)"
+            },
+            "nerveContent": {
+              "T61CandidateRows": 1291,
+              "candidateRowsAreNotNerveConceptDenominator": true,
+              "verifiedStaticSourceSurfaces": 6,
+              "classes": [
+                "Common fibular nerve",
+                "Deep fibular nerve",
+                "Superficial fibular nerve"
+              ],
+              "sides": [
+                "left",
+                "right"
+              ],
+              "registeredBranchRelations": 6,
+              "learnerVisibleBranchRelations": 4,
+              "registeredMotorRelations": 2,
+              "staticSourceSnapshotPoses": 1,
+              "dynamicPoses": 0,
+              "unsupportedContextAncestors": 2,
+              "KoreanDirectTermEvidence": 0,
+              "fullNerveConceptDenominator": "not_established",
+              "remaining": "Other nerve acquisition/identity/geometry/course, exact Korean terms, further evidenced motor/sensory/proprioceptive relations, variants and dynamic pose bindings remain unsupported. None inferred from names or geometric proximity."
+            },
+            "rightsAndReview": {
+              "sourceOnly": true,
+              "publicRedistribution": "held",
+              "humanReview": "not_performed"
+            }
+          },
+          "unresolvedProductBlockers": [],
+          "evidence": [
+            "work/reports/T63.md",
+            "work/evidence/T63/final-validation.json",
+            "work/evidence/T63/product-scope.json",
+            "work/evidence/T63/visual-review.json",
+            "atlas-data/overlays/nerve-support-t63.json",
+            "atlas-data/manifests/nerve-scene-t63.json"
+          ]
+        },
+        "result": "Six native static fibular nerve surfaces integrated in the existing single learner scene; four supported child-branch links and two exact-side tibialis-anterior motor links. All automated and real UI checks passed; other nerves, Korean terms, universal extent and motion pose remain content gaps."
       },
       "report": "work/reports/T63.md",
       "promptFile": "work/prompts/app-completion-2026-10-01/10-T63.txt",
-      "acceptanceScope": "declared_verified_feature_scope; exhaustive_content_coverage_reported_separately",
+      "acceptanceScope": "six same-source static fibular nerve surfaces, typed routes/cards/branch navigation and two side-matched tibialis-anterior motor relations in one existing learner scene; no universal extent or dynamic pose",
       "contractRevision": "app-completion-2026-10-01",
       "acceptanceContract": {
         "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
@@ -2420,7 +2501,67 @@
       },
       "absorbedWorkIds": [
         "T89"
-      ]
+      ],
+      "productReadiness": "local_app_ready",
+      "contentCompleteness": "partial",
+      "knownContentGaps": {
+        "contractRevision": "app-completion-2026-10-01",
+        "acceptanceScope": "six same-source static fibular nerve surfaces, typed routes/cards/branch navigation and two side-matched tibialis-anterior motor relations in one existing learner scene; no universal extent or dynamic pose",
+        "productReadiness": "local_app_ready",
+        "contentCompleteness": "partial",
+        "unresolvedProductBlockers": [],
+        "denominators": {
+          "targets": 542,
+          "memberships": 563,
+          "regions": 12,
+          "existingCanonicalHaBindings": 130,
+          "historical163": {
+            "total": 163,
+            "classes": [
+              6,
+              20,
+              135,
+              2
+            ]
+          }
+        },
+        "existingContent": {
+          "targetsWithoutLearnerRoute": 133,
+          "membershipsWithoutLearnerRoute": 136,
+          "directKoreanTermEvidenceRows": 73,
+          "spatiallyUnacceptedBP3DInspectionObjects": 13,
+          "source": "work/product-scope.json (G1/T58 snapshot retained)"
+        },
+        "nerveContent": {
+          "T61CandidateRows": 1291,
+          "candidateRowsAreNotNerveConceptDenominator": true,
+          "verifiedStaticSourceSurfaces": 6,
+          "classes": [
+            "Common fibular nerve",
+            "Deep fibular nerve",
+            "Superficial fibular nerve"
+          ],
+          "sides": [
+            "left",
+            "right"
+          ],
+          "registeredBranchRelations": 6,
+          "learnerVisibleBranchRelations": 4,
+          "registeredMotorRelations": 2,
+          "staticSourceSnapshotPoses": 1,
+          "dynamicPoses": 0,
+          "unsupportedContextAncestors": 2,
+          "KoreanDirectTermEvidence": 0,
+          "fullNerveConceptDenominator": "not_established",
+          "remaining": "Other nerve acquisition/identity/geometry/course, exact Korean terms, further evidenced motor/sensory/proprioceptive relations, variants and dynamic pose bindings remain unsupported. None inferred from names or geometric proximity."
+        },
+        "rightsAndReview": {
+          "sourceOnly": true,
+          "publicRedistribution": "held",
+          "humanReview": "not_performed"
+        }
+      },
+      "unresolvedProductBlockers": []
     },
     "T90": {
       "title": "신경 그래픽·선택 품질 완성",
@@ -3385,7 +3526,7 @@
   "productReadiness": {
     "state": "local_app_ready",
     "contractRevision": "app-completion-2026-10-01",
-    "next": "T62_pending",
+    "next": "T90_pending",
     "localAppAcceptance": "passed_current_supported_local_learning_scope",
     "contentCompleteness": "partial",
     "denominators": {
@@ -3409,7 +3550,8 @@
       "T82",
       "T83",
       "T84",
-      "T61"
+      "T61",
+      "T63"
     ],
     "evidence": [
       "work/reports/T100.md",
@@ -3425,7 +3567,9 @@
       "work/reports/T84.md",
       "work/evidence/T84/verification.json",
       "work/reports/T61.md",
-      "work/evidence/T61/final-validation.json"
+      "work/evidence/T61/final-validation.json",
+      "work/reports/T63.md",
+      "work/evidence/T63/final-validation.json"
     ]
   }
 }

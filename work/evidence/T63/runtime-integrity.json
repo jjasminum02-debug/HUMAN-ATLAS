@@ -1,0 +1,23 @@
+{
+  "codesign": {
+    "command": [
+      "codesign",
+      "--verify",
+      "--deep",
+      "--strict",
+      "--verbose=2",
+      "/Volumes/Blender/Blender.app"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": "/Volumes/Blender/Blender.app: valid on disk\n/Volumes/Blender/Blender.app: satisfies its Designated Requirement\n",
+    "execution": "outside restricted sandbox; read only"
+  },
+  "files": {
+    "/Volumes/Blender/Blender.app/Contents/MacOS/Blender": "23171ca8704539b44c94cb370894cb3b38908530c012267bed079326d7be95b0",
+    "/private/tmp/t97-blender-3.5.0-arm64.dmg": "5941f450f90b8db6a1bde459db4d9248fc67f022c7cb5f662c9e0818a3725457",
+    "atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Startup.blend": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd"
+  },
+  "previousObservation": "T62 sandbox signature error preserved as history, superseded by successful same-binary read-only verification; not original corruption.",
+  "extraction": "factory-startup, disable-autoexec, load_ui=False/use_scripts=False, original frame 0; no source save"
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "name": "scoped runtime and preserved base snapshot",
+    "command": [
+      "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--experimental-strip-types",
+      "scripts/snapshotT63Scope.ts"
+    ],
+    "exitCode": 0,
+    "output": "{\"runtime\":{\"sha256\":\"0ba59cca1f7cac296842c1c30ae129d9a2d14daf0435862b633b09dc36f67c9f\",\"records\":979,\"learnerEligible\":678,\"inspectionEligible\":13,\"existingCanonicalHaBindings\":130},\"nerveSupport\":{\"instances\":6,\"searchGroups\":3,\"staticPoseIds\":[\"za-c7010a9-9f08a17ea011-frame0-static\"],\"supportedContextRegions\":[\"leg\"],\"visibleBranchEdges\":4,\"motorEdges\":2,\"newHaBindings\":0},\"dataset\":{\"sha256\":\"8ecaf7983ded55709e88ca95b21c59f631ad821b9b2ffaa41787f6467a02ef8a\",\"instances\":979,\"uniqueResources\":1233,\"totalBytes\":78010396,\"overviewBytes\":9399848,\"overviewTriangles\":738380,\"overviewGeometryBytes\":10755138}}\n"
+  },
+  {
+    "name": "final nerve geometry/presentation/delivery",
+    "command": [
+      "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--experimental-strip-types",
+      "--test",
+      "src/viewer/datasets/nerveScene.test.ts",
+      "scripts/delivery.test.ts"
+    ],
+    "exitCode": 0,
+    "output": "\u2714 offline BP3D snapshot exactly matches original runtime composition (65.135834ms)\n\u2714 local integration route serves the validated compact allowlist, never the developer ledger (366.31025ms)\n\u2714 delivery rejects path traversal, stale dependency, and changed derived chunk bytes (367.822584ms)\n\u2714 verified GLB uses conditional private cache and changed bytes still fail closed (387.166625ms)\n\u2714 all six original Curve surfaces: pinned files, topology, finite positions/normals, index bounds and pair symmetry (268.963792ms)\n\u2714 geometry promotion rejects missing frame proof, wrong pose and fabricated side (250.773625ms)\n\u2714 shared presentation gates layers/pose/region/hidden before motor highlights, preserves existing source routes (275.49975ms)\n\u2139 tests 7\n\u2139 suites 0\n\u2139 pass 7\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 1342.549667\n"
+  },
+  {
+    "name": "typecheck",
+    "command": [
+      "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "node_modules/typescript/bin/tsc",
+      "-b"
+    ],
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "name": "production build",
+    "command": [
+      "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "node_modules/vite/bin/vite.js",
+      "build"
+    ],
+    "exitCode": 0,
+    "output": "vite v8.3.1 building client environment for production...\ntransforming...\n\u2713 46 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.58 kB \u2502 gzip:   0.37 kB\ndist/assets/index-UUYMvEqZ.css    0.74 kB \u2502 gzip:   0.44 kB\ndist/assets/App-CeiRXfGi.css     37.42 kB \u2502 gzip:   7.97 kB\ndist/assets/index-BuweGPXq.js   222.37 kB \u2502 gzip:  69.95 kB\ndist/assets/App-Bj3nTjZz.js     734.29 kB \u2502 gzip: 182.70 kB\n\n\u2713 built in 114ms\n[plugin builtin:vite-reporter] \n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n"
+  }
+]

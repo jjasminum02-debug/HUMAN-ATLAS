@@ -1,0 +1,56 @@
+{
+  "taskId": "T63",
+  "contractRevision": "app-completion-2026-10-01",
+  "acceptanceScope": "six same-source static fibular nerve surfaces, typed routes/cards/branch navigation and two side-matched tibialis-anterior motor relations in one existing learner scene; no universal extent or dynamic pose",
+  "productReadiness": "local_app_ready",
+  "contentCompleteness": "partial",
+  "unresolvedProductBlockers": [],
+  "runtime": {
+    "sha256": "0ba59cca1f7cac296842c1c30ae129d9a2d14daf0435862b633b09dc36f67c9f",
+    "records": 979,
+    "learnerEligible": 678,
+    "inspectionEligible": 13,
+    "existingCanonicalHaBindings": 130
+  },
+  "dataset": {
+    "sha256": "8ecaf7983ded55709e88ca95b21c59f631ad821b9b2ffaa41787f6467a02ef8a",
+    "instances": 979,
+    "uniqueResources": 1233,
+    "totalBytes": 78010396,
+    "overviewBytes": 9399848,
+    "overviewTriangles": 738380,
+    "overviewGeometryBytes": 10755138
+  },
+  "denominators": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12
+  },
+  "nerveSupport": {
+    "instances": 6,
+    "searchGroups": 3,
+    "staticPoseIds": [
+      "za-c7010a9-9f08a17ea011-frame0-static"
+    ],
+    "supportedContextRegions": [
+      "leg"
+    ],
+    "visibleBranchEdges": 4,
+    "motorEdges": 2,
+    "newHaBindings": 0
+  },
+  "basePreservation": {
+    "zaRecordsCompared": 960,
+    "namesSidesRegionsBoundsEligibilityAndHaUnchanged": true,
+    "allSixNerveRoutesValidated": true
+  },
+  "impactAnalysis": {
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "regionMeaning": "display_context_only; source surfaces not clipped to region",
+    "existingG1Scope": "Frozen T58 target/member coverage preserved; G3 nerve support is a separate extension, not added to the 542/563 denominator.",
+    "geometrySpace": "Domain source_world: original object transform baked into native ZA coordinates. Existing technical dataset source_local denotes the source namespace coordinate frame, with only the ZA-to-atlas axis matrix on the instance. No inter-model alignment or double transform.",
+    "visualReuse": "Existing bone/muscle geometry, names, side, target routes and shader colors preserved; T58 region captures reused after exact input comparison. T63 exercises 12 actual regional UI transitions and new nerve cases. T63 viewer option layout and typed nerve rendering have fresh 1440/1024/390 evidence."
+  }
+}

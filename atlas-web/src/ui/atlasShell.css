@@ -132,3 +132,6 @@
   .atlas-shell:has(.study-details:not([open])) .body-tools { bottom: 88px; }
   .atlas-shell:has(.study-details:not([open])) .body-status { bottom: 65px; }
 }
+
+/* The five anatomy/view controls share one row; nerve selection reuses the emphasis slot. */
+.atlas-shell .view-options-row { grid-template-columns: repeat(5,minmax(0,1fr)); }

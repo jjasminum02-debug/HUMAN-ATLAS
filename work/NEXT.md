@@ -2,12 +2,12 @@
 
 자동 생성. 편집 원본은 [EXECUTION.json](EXECUTION.json). 역사 handoff/자료 개수로 다음 작업을 결정하지 않는다.
 
-- 확인된 최근 진행: T62 / accepted
-- 다음 ID: **T63**
+- 확인된 최근 진행: T63 / accepted
+- 다음 ID: **T90**
 - 현재 지원 앱 완성: T100 통합 마무리 → T80 사용 감사/보완 → T58 UI·성능 최적화. 전체 콘텐츠 확보는 별도 상태로 유지한다.
 
 ```text
-HUMAN ATLAS에서 T63만 수행해라. 담당 Sol High.
+HUMAN ATLAS에서 T90만 수행해라. 담당 Astra · 현재 대화 직접 구현.
 
 AGENTS.md, work/EXECUTION.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/product-acceptance.json,
 해당 task의 현재 spec/promptFile, 실제 선행 report/evidence를 읽어라.
@@ -26,9 +26,9 @@ python3 work/tools/sync_execution.py 및 --check를 수행하고 소유 변경�
 다음 task 자동 실행, 새 번호/스레드 발급, 자동 위임, push/배포, 임상 진단·치료·자침 기능은 금지한다.
 
 이번 실행:
-이번 범위: 검증된 T62 신경을 기존 scene/renderer/camera에서 표시하고 typed 선택/카드/근거 있는 지배근 강조/복원을 연결한다. T89의 같은 방식 확장은 데이터 기반 내부 unit으로 흡수한다. 신경 주행·좌표·pose가 확인된 실제 surface/curve만 사용하고 미확보 신경은 미지원으로 유지한다. source 후보나 이름을 실제 주행으로 조작하지 않는다.
+이번 범위: T63의 실제 지원 신경 주행과 기존 근육·뼈 맥락에서 대비/깊이/선택/지배근 강조/카드/복원 품질을 다듬는다. 대표 지역과 390/1024/1440 흐름을 실제 검증한다. 전체 신경 미확보는 별도 상태이며 지원 경로의 잘못된 pose/좌우/위치는 해결한다. 담당 Astra 현재 대화 직접 구현을 유지한다.
 
-하나의 신경 3D 경로로 검증된 자료 전체를 처리하고 선택/branch/side/region/card 및 지배근 강조/복원을 연결한다. loader 취소·cache·layer-off·pose 지원을 기존 controller와 통합한다. 지원되지 않은 운동 pose에서 정적 신경을 잘못 고정하지 않는다. 데이터 계약 전수 검사와 지역/주행 유형·변경 사례의 실제 UI를 확인한다. T89를 따로 실행하지 않는다.
+현재 UI와 실제 신경 geometry를 보고 색/깊이/관찰/선택 대비를 조정한다. 기존 scene/camera를 유지하고 기본 상태·신경 layer 전환·선택·복원을 검증한다. source pose 제한을 정확히 처리한다. 지원 집합의 계약과 대표/변경 화면 및 관련 성능을 확인하고 그래픽 scoped acceptance를 남긴다. 다른 task/agent로 자동 위임하지 않는다.
 
-종료 후 다음 ID는 T90다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
+종료 후 다음 ID는 T65다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
 ```

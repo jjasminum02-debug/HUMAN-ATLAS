@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { demandedStructureKeys, innervationHighlightKeys } from './presentation.ts';
 import { AnatomySceneController, type BodyProgress } from '../wholeBody/AnatomySceneController.ts';
 import type { BodyManifest, BodyView } from '../wholeBody/contract.ts';
 import { DatasetResources } from './DatasetResources.ts';
@@ -38,26 +39,24 @@ export class DatasetSceneAdapter {
     }
     setView(view: BodyView) {
         this.view = view;
-        const regions = view.regionIds ?? (view.region ? [view.region] : []);
-        const hidden = new Set(view.hiddenSourceKeys);
-        const keys = [...this.records.values()].filter(r => !hidden.has(r.sourceKey) && r.localDisplayEligible && (r.defaultVisible || r.sourceKey === view.selectedId) && (!regions.length || r.regionIds.some(x => regions.includes(x))) &&
-            (r.kind === 'bone' ? view.bones : r.kind === 'muscle' && view.muscles) && (!view.isolate || !view.selectedId || r.sourceKey === view.selectedId)).map(r => r.sourceKey);
+        const keys = demandedStructureKeys([...this.records.values()], view);
         this.resources.demand(keys, view.selectedId && keys.includes(view.selectedId) ? [view.selectedId] : []);
         this.apply();
     }
     private apply() {
         if (this.dead)
             return;
+        const highlights = new Set(innervationHighlightKeys([...this.records.values()], this.view, new Set(demandedStructureKeys([...this.records.values()], this.view))));
         const selectionAlternativeKeys = new Set(this.records.get(this.view.selectedId ?? '')?.selectionSuppressSourceKeys ?? []);
         for (const [key, node] of this.resources.nodes) {
             const row = this.records.get(key)!;
             const selected = key === this.view.selectedId;
             node.visible = !this.view.hiddenSourceKeys?.includes(key) && !selectionAlternativeKeys.has(key) && !(selected && this.view.selectedPresentation === 'hidden');
-            const mode = this.view.translucentSourceKeys?.includes(key) || selected && this.view.selectedPresentation === 'translucent' ? 'translucent' : selected ? 'selected' : this.view.selectedId && this.view.dim ? 'dim' : 'normal';
+            const mode = this.view.translucentSourceKeys?.includes(key) || selected && this.view.selectedPresentation === 'translucent' ? 'translucent' : selected ? 'selected' : highlights.has(key) ? 'innervated' : this.view.selectedId && this.view.dim ? 'dim' : 'normal';
             const materialKey = row.kind + ':' + mode;
             let material = this.materials.get(materialKey);
             if (!material) {
-                const color = new THREE.Color(mode === 'selected' ? '#398b80' : row.kind === 'bone' ? '#e7dec7' : '#b87969');
+                const color = new THREE.Color(mode === 'selected' ? '#18776d' : mode === 'innervated' ? '#338fc1' : row.kind === 'nerve' ? '#d89712' : row.kind === 'bone' ? '#e7dec7' : '#b87969');
                 if (mode === 'dim')
                     color.lerp(new THREE.Color('#e5e5dd'), .55);
                 material = new THREE.MeshStandardMaterial({ color, roughness: .76, transparent: mode === 'translucent', opacity: mode === 'translucent' ? .3 : 1, depthWrite: mode !== 'translucent' });
@@ -72,7 +71,7 @@ export class DatasetSceneAdapter {
             contextLost: this.contextLost, selectedAvailable: !this.view.selectedId || this.resources.nodes.has(this.view.selectedId), calls: this.resources.nodes.size,
             triangles: this.scene.renderer.info.render.triangles, geometries: this.scene.renderer.info.memory.geometries });
         this.scene.renderer.domElement.dataset.dataset = JSON.stringify({ root: this.scene.root.uuid, dataset: this.resources.dataset.namespace,
-            visible: [...this.resources.nodes].filter(([, n]) => n.visible).map(([key]) => key), selected: this.view.selectedId, bytes: q.bytes, cacheEntries: q.loaded.size, evictions: q.evictions, cancellations: q.cancellations, lateReleases: q.lateReleases, wantedChunks: [...q.wanted], pending: q.pending.size, failed: [...q.failed],
+            highlighted: [...highlights], nerveLayer: Boolean(this.view.nerves), poseId: this.view.poseId, visible: [...this.resources.nodes].filter(([, n]) => n.visible).map(([key]) => key), selected: this.view.selectedId, bytes: q.bytes, cacheEntries: q.loaded.size, evictions: q.evictions, cancellations: q.cancellations, lateReleases: q.lateReleases, wantedChunks: [...q.wanted], pending: q.pending.size, failed: [...q.failed],
             camera: this.scene.camera.position.toArray(), calls: this.scene.renderer.info.render.calls, triangles: this.scene.renderer.info.render.triangles });
     }
     private fit(rows: RuntimeStructureRecord[]) {
