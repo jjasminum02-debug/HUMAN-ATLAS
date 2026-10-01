@@ -1,0 +1,73 @@
+{
+  "taskId": "T58",
+  "checks": [
+    {
+      "name": "whole-body",
+      "command": "node --experimental-strip-types --test src/viewer/wholeBody/wholeBody.test.ts src/viewer/wholeBody/productContext.test.ts src/viewer/datasets/*.test.ts && node --experimental-strip-types scripts/verifyCompiledDatasets.ts",
+      "exitCode": 0,
+      "seconds": 1.313,
+      "log": "work/evidence/T58/app-finish-2026-10-01/whole-body.log",
+      "tests": [
+        "ℹ tests 60",
+        "ℹ pass 60",
+        "ℹ fail 0"
+      ]
+    },
+    {
+      "name": "search",
+      "command": "node --experimental-strip-types --test src/domain/search.test.ts src/data/boneNames.test.ts",
+      "exitCode": 0,
+      "seconds": 0.166,
+      "log": "work/evidence/T58/app-finish-2026-10-01/search.log",
+      "tests": [
+        "ℹ tests 44",
+        "ℹ pass 44",
+        "ℹ fail 0"
+      ]
+    },
+    {
+      "name": "delivery",
+      "command": "node --experimental-strip-types --test scripts/delivery.test.ts",
+      "exitCode": 0,
+      "seconds": 0.42,
+      "log": "work/evidence/T58/app-finish-2026-10-01/delivery.log",
+      "tests": [
+        "ℹ tests 4",
+        "ℹ pass 4",
+        "ℹ fail 0"
+      ]
+    },
+    {
+      "name": "typecheck",
+      "command": "tsc -b --pretty false",
+      "exitCode": 0,
+      "seconds": 1.486,
+      "log": "work/evidence/T58/app-finish-2026-10-01/typecheck.log",
+      "tests": []
+    },
+    {
+      "name": "production-build",
+      "command": "python3 scripts/validate-learning-content.py && python3 ../atlas-data/schemas/validate_ai_evidence.py --check && python3 ../atlas-data/schemas/validate_bone_name_overlay.py --check && python3 ../atlas-data/schemas/validate_motion_learning.py --check && python3 ../atlas-data/schemas/validate_motion_asset_sources.py && node scripts/check-scene-decoders.mjs && tsc -b && vite build",
+      "exitCode": 0,
+      "seconds": 1.972,
+      "log": "work/evidence/T58/app-finish-2026-10-01/production-build.log",
+      "tests": []
+    },
+    {
+      "name": "current-product-contract",
+      "command": "node --experimental-strip-types scripts/buildProductScope.ts --check",
+      "exitCode": 0,
+      "seconds": 0.444,
+      "log": "work/evidence/T58/app-finish-2026-10-01/current-product-contract.log",
+      "tests": []
+    },
+    {
+      "name": "display-rules",
+      "command": "python3 ../atlas-data/tools/apply_t58_display_names.py --check",
+      "exitCode": 0,
+      "seconds": 0.201,
+      "log": "work/evidence/T58/app-finish-2026-10-01/display-rules.log",
+      "tests": []
+    }
+  ]
+}

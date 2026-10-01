@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T58",
+  "learningNamesSha256": "6f78fbce22d999aff95ba10fb835f137ba1dfdb2a9c790bb90fef18e580b776e",
+  "source": {
+    "id": "t58-contextual-muscle-display",
+    "url": "local:atlas-data/terminology/rules/t58-contextual-muscle-display.json",
+    "sourceLabel": "Project display composition from existing parent names, explicit source parts and user requested labels",
+    "exactEdition": null,
+    "editionExposure": "Project composed display wording; not a verbatim dictionary or human review claim",
+    "accessDate": "2026-10-01",
+    "accessMethod": "local_frozen_metadata",
+    "locator": "Existing learning-names parent entries + exact source English part/context + user T58 deltoid and biceps naming instruction; identity/side/extent unchanged."
+  },
+  "rules": [
+    {
+      "sourceTerm": "Clavicular part of deltoid muscle",
+      "parentEntryId": "HA-M-000030",
+      "koModern": "어깨세모근 빗장부분",
+      "koTraditional": "전면삼각근",
+      "aliases": [
+        "삼각근 쇄골부",
+        "삼각근 빗장부분",
+        "앞삼각근"
+      ],
+      "basis": "exact explicit source part + existing named parent"
+    },
+    {
+      "sourceTerm": "Acromial part of deltoid muscle",
+      "parentEntryId": "HA-M-000030",
+      "koModern": "어깨세모근 봉우리부분",
+      "koTraditional": "측면삼각근",
+      "aliases": [
+        "삼각근 견봉부",
+        "삼각근 봉우리부분",
+        "가쪽삼각근"
+      ],
+      "basis": "exact explicit source part + existing named parent"
+    },
+    {
+      "sourceTerm": "Scapular spinal part of deltoid muscle",
+      "parentEntryId": "HA-M-000030",
+      "koModern": "어깨세모근 어깨뼈가시부분",
+      "koTraditional": "후면삼각근",
+      "aliases": [
+        "삼각근 견갑극부",
+        "삼각근 어깨뼈가시부분",
+        "뒤삼각근"
+      ],
+      "basis": "exact explicit source part + existing named parent"
+    },
+    {
+      "sourceTerm": "Long head of biceps brachii",
+      "parentEntryId": "HA-M-000035",
+      "koModern": "위팔두갈래근 긴갈래",
+      "koTraditional": "상완이두근 장두",
+      "aliases": [
+        "위팔두갈래근 장두"
+      ],
+      "basis": "exact explicit source part + existing named parent"
+    },
+    {
+      "sourceTerm": "Short head of biceps brachii",
+      "parentEntryId": "HA-M-000035",
+      "koModern": "위팔두갈래근 짧은갈래",
+      "koTraditional": "상완이두근 단두",
+      "aliases": [
+        "위팔두갈래근 단두"
+      ],
+      "basis": "exact explicit source part + existing named parent"
+    },
+    {
+      "sourceTerm": "Long head of triceps brachii",
+      "parentEntryId": "HA-M-000038",
+      "koModern": "위팔세갈래근 긴갈래",
+      "koTraditional": "상완삼두근 장두",
+      "aliases": [
+        "위팔세갈래근 장두"
+      ],
+      "basis": "exact explicit source part + existing named parent"
+    },
+    {
+      "sourceTerm": "Lateral head of triceps brachii",
+      "parentEntryId": "HA-M-000038",
+      "koModern": "위팔세갈래근 가쪽갈래",
+      "koTraditional": "상완삼두근 외측두",
+      "aliases": [
+        "위팔세갈래근 외측두"
+      ],
+      "basis": "exact explicit source part + existing named parent"
+    },
+    {
+      "sourceTerm": "Medial head of triceps brachii",
+      "parentEntryId": "HA-M-000038",
+      "koModern": "위팔세갈래근 안쪽갈래",
+      "koTraditional": "상완삼두근 내측두",
+      "aliases": [
+        "위팔세갈래근 내측두"
+      ],
+      "basis": "exact explicit source part + existing named parent"
+    },
+    {
+      "sourceTerm": "Abductor hallucis",
+      "parentEntryId": null,
+      "koModern": "발 · 엄지벌림근",
+      "koTraditional": "발 · 무지외전근",
+      "aliases": [
+        "엄지발가락벌림근"
+      ],
+      "basis": "explicit hallucis foot context; contextual prefix disambiguates pollicis"
+    },
+    {
+      "sourceTerm": "Extensor hallucis brevis",
+      "parentEntryId": null,
+      "koModern": "발 · 짧은엄지폄근",
+      "koTraditional": "발 · 단무지신근",
+      "aliases": [
+        "짧은엄지발가락폄근"
+      ],
+      "basis": "explicit hallucis foot context; contextual prefix disambiguates pollicis"
+    },
+    {
+      "sourceTerm": "Extensor hallucis longus",
+      "parentEntryId": null,
+      "koModern": "발 · 긴엄지폄근",
+      "koTraditional": "발 · 발 장무지신근",
+      "aliases": [
+        "긴엄지발가락폄근"
+      ],
+      "basis": "explicit hallucis foot context; contextual prefix disambiguates pollicis"
+    },
+    {
+      "sourceTerm": "Flexor hallucis longus",
+      "parentEntryId": null,
+      "koModern": "발 · 긴엄지굽힘근",
+      "koTraditional": "발 · 장무지굴근",
+      "aliases": [
+        "긴엄지발가락굽힘근"
+      ],
+      "basis": "explicit hallucis foot context; contextual prefix disambiguates pollicis"
+    },
+    {
+      "sourceTerm": "Lateral head of flexor hallucis brevis",
+      "parentEntryId": null,
+      "koModern": "발 · 짧은엄지굽힘근 · 가쪽갈래",
+      "koTraditional": "발 · 단무지굴근 · 가쪽갈래",
+      "aliases": [
+        "짧은엄지발가락굽힘근 · 가쪽갈래"
+      ],
+      "basis": "explicit hallucis foot context; contextual prefix disambiguates pollicis"
+    },
+    {
+      "sourceTerm": "Medial head of flexor hallucis brevis",
+      "parentEntryId": null,
+      "koModern": "발 · 짧은엄지굽힘근 · 안쪽갈래",
+      "koTraditional": "발 · 단무지굴근 · 안쪽갈래",
+      "aliases": [
+        "짧은엄지발가락굽힘근 · 안쪽갈래"
+      ],
+      "basis": "explicit hallucis foot context; contextual prefix disambiguates pollicis"
+    },
+    {
+      "sourceTerm": "Oblique head of adductor hallucis",
+      "parentEntryId": null,
+      "koModern": "발 · 엄지모음근 · 빗갈래",
+      "koTraditional": "발 · 무지내전근 · 빗갈래",
+      "aliases": [
+        "엄지발가락모음근 · 빗갈래"
+      ],
+      "basis": "explicit hallucis foot context; contextual prefix disambiguates pollicis"
+    },
+    {
+      "sourceTerm": "Transverse head of adductor hallucis",
+      "parentEntryId": null,
+      "koModern": "발 · 엄지모음근 · 가로갈래",
+      "koTraditional": "발 · 무지내전근 · 가로갈래",
+      "aliases": [
+        "엄지발가락모음근 · 가로갈래"
+      ],
+      "basis": "explicit hallucis foot context; contextual prefix disambiguates pollicis"
+    }
+  ]
+}

@@ -7,6 +7,8 @@ import { buildRuntimeIntegration, validateRuntimeIntegration, validateIntegratio
 import type { Dataset } from './schema.ts';
 const overlayBytes = readFileSync(new URL('../../../../atlas-data/overlays/za-local-integration.json', import.meta.url));
 const raw = JSON.parse(overlayBytes.toString('utf8')) as Integration;
+const t58DisplayRules = JSON.parse(readFileSync(new URL('../../../../atlas-data/terminology/rules/t58-contextual-muscle-display.json', import.meta.url), 'utf8')) as {rules:Array<{sourceTerm:string;koModern:string;koTraditional:string;aliases:string[]}>};
+const t58DisplayTerms = new Set(t58DisplayRules.rules.map(rule => rule.sourceTerm));
 const targetScopeBytes = readFileSync(new URL('../../../../atlas-data/catalog/target-scope-t96.json', import.meta.url));
 const targetScope = JSON.parse(targetScopeBytes.toString('utf8')) as {
     targets: Array<{ id: string; term: { english: string; latin: string; sourceSynonyms: Record<string, string[]> }; semanticKind: string; primaryOwner: string; regionIds: string[] }>;
@@ -795,12 +797,19 @@ test('T100 semantic continuation groups the 226 unnamed surfaces without side du
         assert(!link.conceptKey || !/^HA-/.test(link.conceptKey));
         const baseline = preservedUnnamedBySource.get(row.sourceKey)!;
         for (const key of ['sourceOnly', 'publicRedistribution', 'humanReview', 'mappingStatus', 'regionIds', 'side',
-            'aliases', 'localDisplayEligible', 'inspectionEligible', 'defaultVisible'])
+            'localDisplayEligible', 'inspectionEligible', 'defaultVisible'])
             assert.deepEqual((row as unknown as Record<string, unknown>)[key], baseline[key], `${key} changed for ${row.sourceName}`);
+        if (t58DisplayTerms.has(row.names.en)) {
+            for (const alias of baseline.aliases as string[]) assert(row.aliases.includes(alias));
+            const rule=t58DisplayRules.rules.find(rule => rule.sourceTerm===row.names.en)!;
+            assert.equal(row.names.koModern,rule.koModern);assert.equal(row.names.koTraditional,rule.koTraditional);
+            assert(rule.aliases.every(alias=>row.aliases.includes(alias)));
+            assert(row.nameEvidence?.koTraditional?.sourceIds.includes('t58-contextual-muscle-display'));
+        } else assert.deepEqual(row.aliases, baseline.aliases);
         assert.equal(row.names.en, (baseline.names as any).en);
         if (row.names.koTraditional !== (baseline.names as any).koTraditional) {
             assert.equal(row.nameEvidence?.koTraditional?.value, row.names.koTraditional);
-            assert(row.nameEvidence?.koTraditional?.sourceIds.includes('t100-explicit-source-part-composition'));
+            assert(row.nameEvidence?.koTraditional?.sourceIds.includes(t58DisplayTerms.has(row.names.en) ? 't58-contextual-muscle-display' : 't100-explicit-source-part-composition'));
         }
         assert(!/\p{Script=Han}/u.test(row.names.koModern ?? ''));
     }
@@ -1073,4 +1082,15 @@ test('pending source crosswalks and child routes require bounded proofs and pres
     const ribLink = rib.learnerConceptLinks!.find(link => link.relationKind === 'verified_source_crosswalk' && link.targetIds.includes('TA2:1114'))!;
     ribLink.memberCode = 'rib:8';
     assert.throws(() => validateIntegration(outsideRange, fixture), /source-crosswalk proof mismatch/);
+});
+
+test('complete parent prefix finds both biceps heads and anatomical deltoid aliases retain their distinct parts',()=>{
+ const biceps=searchStructures(raw.objects,'위팔두갈래',[]);
+ assert.equal(biceps.length,2);assert.deepEqual(new Set(biceps.map(r=>r.label)),new Set(['상완이두근 장두','상완이두근 단두']));
+ assert(biceps.every(r=>r.names.koModern?.startsWith('위팔두갈래근 ')));
+ const deltoids=searchStructures(raw.objects,'어깨세모근',[]);
+ assert.deepEqual(new Set(deltoids.map(r=>r.label)),new Set(['전면삼각근','측면삼각근','후면삼각근']));
+ assert.equal(searchStructures(raw.objects,'삼각근 견봉부',[])[0]?.label,'측면삼각근');
+ const foot=searchStructures(raw.objects,'엄지발가락굽힘근',[]);
+ assert(foot.length>=3);assert(foot.every(r=>r.names.en.toLowerCase().includes('hallucis')&&r.names.koModern?.startsWith('발 · ')));
 });

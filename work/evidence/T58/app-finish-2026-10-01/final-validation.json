@@ -1,0 +1,354 @@
+{
+  "taskId": "T58",
+  "owner": "SOL 6.1",
+  "predecessorHead": "9e2238d8b24a0ef052b7091a91643dc77fa36b45",
+  "contractRevision": "app-completion-2026-10-01",
+  "acceptanceScope": "current_supported_local_product; not all_target_content_or_public_release",
+  "productReadiness": "local_app_ready",
+  "contentCompleteness": "partial",
+  "knownContentGaps": {
+    "denominators": {
+      "targets": 542,
+      "memberships": 563,
+      "regions": 12
+    },
+    "existingCanonicalHaBindings": 130,
+    "historical163": {
+      "total": 163,
+      "classes": {
+        "exactSourceLabel": 6,
+        "descendantSurface": 20,
+        "ancestorOrGroupSurface": 135,
+        "frozenPackageNoExactAncestorOrDescendant": 2
+      }
+    },
+    "learnerCoverage": {
+      "targetsWithRoute": 409,
+      "targetsWithoutRoute": 133,
+      "membershipsWithRoute": 427,
+      "membershipsWithoutRoute": 136
+    },
+    "inspectionOnlyBp3d": {
+      "objects": 13,
+      "distinctTargetIds": 6,
+      "targetRegionMembershipPairs": 6,
+      "spatiallyAcceptedObjects": 0,
+      "learnerVisibleByDefault": 0
+    },
+    "directKoreanTermEvidenceRows": 73,
+    "fullTargetExtentPasses": 0,
+    "unresolvedFinePartVariantGroupAndSideEvidence": true,
+    "crossDatasetRegionalRegistration": "BP3D supplement remains inspection-only; no global transform established",
+    "rightsAndReview": {
+      "sourceOnly": "preserved per item",
+      "publicRedistribution": "held",
+      "humanReview": "not_performed"
+    }
+  },
+  "unresolvedProductBlockers": [],
+  "evidence": [
+    "work/reports/T58.md",
+    "work/product-scope.json",
+    "work/evidence/T58/app-finish-2026-10-01/final-validation.json",
+    "work/evidence/T58/app-finish-2026-10-01/automated-contract.json",
+    "work/evidence/T58/app-finish-2026-10-01/name-audit.json",
+    "work/evidence/T58/app-finish-2026-10-01/final-browser-validation.json",
+    "work/evidence/T58/app-finish-2026-10-01/framing-final/framing-validation.json",
+    "work/evidence/T58/app-finish-2026-10-01/history-final.json",
+    "work/evidence/T58/app-finish-2026-10-01/context-final/context-validation.json",
+    "work/evidence/T58/app-finish-2026-10-01/before/profile.json",
+    "work/evidence/T58/app-finish-2026-10-01/after/profile.json",
+    "work/evidence/T58/app-finish-2026-10-01/verification.json"
+  ],
+  "automatedTests": {
+    "wholeBody": {
+      "passed": 60,
+      "total": 60
+    },
+    "search": {
+      "passed": 44,
+      "total": 44
+    },
+    "delivery": {
+      "passed": 4,
+      "total": 4
+    },
+    "typecheck": "passed",
+    "build": "passed",
+    "contract": "passed"
+  },
+  "browser": {
+    "coreChecks": 112,
+    "finalNeckFramingCases": 3,
+    "finalHistoryRestorationCases": 3,
+    "finalBoneContextAndPosteriorCases": 4,
+    "captures": [
+      {
+        "path": "browser/1440-whole.png",
+        "sha256": "3c399a27962c8eff8fa6097edc35a05839e15b55b64fb283b098ab8c679168ad"
+      },
+      {
+        "path": "browser/region-head.png",
+        "sha256": "a15fd1f6532dcdfa85d0836e23e24972b9753251a62aef663e1b0cf42de7f6c7"
+      },
+      {
+        "path": "browser/region-neck.png",
+        "sha256": "7ecd4bef6b604176a05a8b135d817c459f2a50ceb0984f65109b2c57a9d2f46b"
+      },
+      {
+        "path": "browser/region-back.png",
+        "sha256": "ec3b398117451bdfe13ee3942365871b37e424d8f2daf99b6c9b02ecdb9e17f8"
+      },
+      {
+        "path": "browser/region-shoulder-scapular.png",
+        "sha256": "19147cf698782ff922e6274f3478ec2c2887b10e98fb55dd608837005d1ad3cd"
+      },
+      {
+        "path": "browser/region-thorax.png",
+        "sha256": "d851a6b68203245378883a0949ab050c23fe04d9a9281e0b6be9c0e8037a7154"
+      },
+      {
+        "path": "browser/region-abdomen-lumbar.png",
+        "sha256": "885740ab1f625dad0b3b72a291a2ec2657805c3ec37c99331751bf93ba83a951"
+      },
+      {
+        "path": "browser/region-pelvis-perineum.png",
+        "sha256": "62281986ebcfbd0827124864d7b37ef4537bd839abebb5d1c7f6f55cc17cb892"
+      },
+      {
+        "path": "browser/region-gluteal-hip.png",
+        "sha256": "acb255b984ab86818508831cf655ca679e0e168a792fb261ab890322847c02f9"
+      },
+      {
+        "path": "browser/region-thigh.png",
+        "sha256": "7e21603ae0b526b4357add6cfdf5f02f9eecd67a828b957250f06e9348b3e2ec"
+      },
+      {
+        "path": "browser/region-leg.png",
+        "sha256": "799c5a10949ac5c4b778e41099cb8ebef50d365943f3ff651eb1715c1b3b4c8a"
+      },
+      {
+        "path": "browser/region-foot.png",
+        "sha256": "94d40617a089f4b25da5cd58e024a025d41ee1fabee48bd90c59ad57603f6284"
+      },
+      {
+        "path": "browser/region-upper-limb.png",
+        "sha256": "b567162d52586c6537f915a3a53ed8de2ac612f950719769d3da23bae5591e7b"
+      },
+      {
+        "path": "browser/1440-head.png",
+        "sha256": "a15fd1f6532dcdfa85d0836e23e24972b9753251a62aef663e1b0cf42de7f6c7"
+      },
+      {
+        "path": "browser/1440-back.png",
+        "sha256": "ec3b398117451bdfe13ee3942365871b37e424d8f2daf99b6c9b02ecdb9e17f8"
+      },
+      {
+        "path": "browser/1440-thigh.png",
+        "sha256": "7e21603ae0b526b4357add6cfdf5f02f9eecd67a828b957250f06e9348b3e2ec"
+      },
+      {
+        "path": "browser/1440-foot.png",
+        "sha256": "94d40617a089f4b25da5cd58e024a025d41ee1fabee48bd90c59ad57603f6284"
+      },
+      {
+        "path": "browser/1440-C3-local-highlight.png",
+        "sha256": "2148ae717aebd8924629522a6af2893a165098c7b85d1adf9e07e5248d73a2c6"
+      },
+      {
+        "path": "browser/1440-hand.png",
+        "sha256": "c94f7313a74c9d7c03c60bbc9ebce3fd5378a133ddbf1f56f4294ae3a3cfea07"
+      },
+      {
+        "path": "browser/1440-biceps-long.png",
+        "sha256": "4c33fdf5b1dc6e4a30591168a19d549b97ceae3c947340e37bafa375423954dc"
+      },
+      {
+        "path": "browser/1440-deep-after-hide.png",
+        "sha256": "cd41a5e43e6a6869fff6aa91a184f7203417e0f03fc149963c3f423f70676c84"
+      },
+      {
+        "path": "browser/1440-deltoid.png",
+        "sha256": "4f219659526e0c10dde21bbb9e087d7ee6613327912edf1be194108493d010d4"
+      },
+      {
+        "path": "browser/1024-whole.png",
+        "sha256": "0a71d6ce22a25177733a8639c6559d2174355a220fb8a968013c90207aa6b828"
+      },
+      {
+        "path": "browser/1024-head.png",
+        "sha256": "c9a0c1751a4a5204b8779fadb8ef80c738ab18ce497c64cbaa0c9cf2161809dc"
+      },
+      {
+        "path": "browser/1024-back.png",
+        "sha256": "860e373033a2ef490014c1fc1135e5d9e90a09c626d9d38da96f6c11321b9f3d"
+      },
+      {
+        "path": "browser/1024-thigh.png",
+        "sha256": "912257b6b6cfa7d60562ab70a79aaa3bc9dcae9b9b9840dfdea895907e71eb7e"
+      },
+      {
+        "path": "browser/1024-foot.png",
+        "sha256": "e0751a4a4e72e148c446c207c6ef936da110272f22a0de87600ee29fa226a946"
+      },
+      {
+        "path": "browser/1024-C3-local-highlight.png",
+        "sha256": "91d043752f6a9470381526a81f726bfd6fa6551daae241f759921c7446822e64"
+      },
+      {
+        "path": "browser/1024-hand.png",
+        "sha256": "51ebdbe8a2df40a4fcc7f344f5dfaf26bfa0ef105cb26e29b2a6e3ce3c862fde"
+      },
+      {
+        "path": "browser/1024-biceps-long.png",
+        "sha256": "784e9b9bb4d4f8656c312fa3553d23b96c5e9ec7025d4415cc0e582b0cc59ae3"
+      },
+      {
+        "path": "browser/1024-deep-after-hide.png",
+        "sha256": "295985834616e9166768be73ddd90aa660e5f7cee9d39d77503ab9d5577bbc97"
+      },
+      {
+        "path": "browser/1024-deltoid.png",
+        "sha256": "24fd3070971d8dc277a12e983fcb0904fee4ec2f3d376a46028db986dded9c72"
+      },
+      {
+        "path": "browser/390-whole.png",
+        "sha256": "4f6468a8fd0dac0ee6cccae44df8daf04e16866a2a36dbcac301541942eba7fa"
+      },
+      {
+        "path": "browser/390-head.png",
+        "sha256": "e83c18064e3137e238fc0dd9afaa21e722cf5108d8c1c842aed34c201787cf14"
+      },
+      {
+        "path": "browser/390-back.png",
+        "sha256": "1509a285fac5bca949ee220b66281f4a527252470ac6544a50b56e1a9378970f"
+      },
+      {
+        "path": "browser/390-thigh.png",
+        "sha256": "cd3a3d3fb09a3471e14b0502773abe24fc284d34bff4e75389f4c608b6614708"
+      },
+      {
+        "path": "browser/390-foot.png",
+        "sha256": "ec7c0d3e6bfba2d0cfec91762521e25b4006480d2c79c7dc82375c9edfe4e831"
+      },
+      {
+        "path": "browser/390-C3-local-highlight.png",
+        "sha256": "bb748d2dbf3dbf249a87c51f361ce3dae10c62f30a080fd49b5819505ad12f3a"
+      },
+      {
+        "path": "browser/390-hand.png",
+        "sha256": "1afe45626d84b8c73ce118715e1c082131786e54fbbc3f8b59e22d1683625082"
+      },
+      {
+        "path": "browser/390-biceps-long.png",
+        "sha256": "283bcf03fa99e88ef6963368eda7f7a00ce66f3c81126d6ec0adad638b445159"
+      },
+      {
+        "path": "browser/390-deep-after-hide.png",
+        "sha256": "3e92031525615c19c1e9a37ba6c62365c32dc231ef3e78112334c4a4a4ab90ff"
+      },
+      {
+        "path": "browser/390-deltoid.png",
+        "sha256": "eed8540b86fdaf65ff944d85d3f9522aa2669f120d0b7b405c179098169ae004"
+      },
+      {
+        "path": "framing-final/1440-neck.png",
+        "sha256": "ced5f44848ab512dea4efdd1415a43cdd1345e7b7724af66a4ee7dfb9b38a7ab"
+      },
+      {
+        "path": "framing-final/1024-neck.png",
+        "sha256": "9b8b0e1b693d357183bccd18ad16268b75fce4990933001cc2d887dd02e498f6"
+      },
+      {
+        "path": "framing-final/390-neck.png",
+        "sha256": "3dd3c8c0a2a6a3d715314a353ad5a5ffe93e405f069cff75d8cd2e2178b527af"
+      },
+      {
+        "path": "context-final/neck-bones.png",
+        "sha256": "bb6e04fb9bad3a3b9a604d1b0e39974db07ec6e4ed652e08735de08371b46fbe"
+      },
+      {
+        "path": "context-final/thorax-bones.png",
+        "sha256": "bfffc9f34c92ea439e5c8637e326266e3953a84ef900692e7268bb057f2319f9"
+      },
+      {
+        "path": "context-final/abdomen-lumbar-bones.png",
+        "sha256": "c69a19a1b252bb5e64689fdc630d9d1e74849027d0353aa6533c1217dc29f8ac"
+      },
+      {
+        "path": "context-final/back-posterior.png",
+        "sha256": "256f6994fbc27fc3c1e2124e34758df8d5f311b8d6ab1b2814c52da9c82f89e8"
+      }
+    ],
+    "consoleErrors": 0,
+    "realMobileDeviceTested": false,
+    "fullTargetExtentAccepted": 0
+  },
+  "performance": {
+    "before": {
+      "coldTransferBytes": 25188570,
+      "warmTransferBytes": 11784019,
+      "assetReadyMsEstimate": {
+        "cold": 581,
+        "warm": 488
+      },
+      "startupTimingNote": "before readyMs included fixed 700ms settle; estimates subtract that delay",
+      "renderCpuP95Ms": 3.1000001430511475,
+      "frameIntervalP95Ms": 16.799999999999955
+    },
+    "after": {
+      "coldTransferBytes": 24553137,
+      "warmTransferBytes": 2738227,
+      "assetReadyMs": {
+        "cold": 547,
+        "warm": 504
+      },
+      "renderCpuP95Ms": 3.8999998569488525,
+      "frameIntervalP95Ms": 16.799999999999955,
+      "activeTriangles": 486184,
+      "activeDraws": 672,
+      "cpuGeometryBuffersBytes": 6825150,
+      "after20RegionChanges": {
+        "bytes": 9051664,
+        "cacheEntries": 3,
+        "evictions": 0,
+        "cancellations": 0,
+        "lateReleases": 0,
+        "pending": 0,
+        "failed": []
+      }
+    },
+    "budgetChanged": false,
+    "geometryChanged": false,
+    "gpu": {
+      "vendor": "Google Inc. (Apple)",
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M5, Unspecified Version)"
+    },
+    "limits": [
+      "desktop Chrome on Apple M5; Vite local app, not packaged/mobile hardware",
+      "CPU render timing is not GPU duration; frame interval is measured separately",
+      "GPU/VRAM/total-process memory unavailable",
+      "one before and one current comparison; no claim of statistically significant CPU speedup"
+    ]
+  },
+  "codeHashes": {
+    "atlas-data/overlays/za-local-integration.json": "4a5028dd7c1bca3b142d7899cc99a425ad88d5837ca598d2d5f4ad612994be5c",
+    "atlas-data/terminology/rules/t58-contextual-muscle-display.json": "9379a0a032eee9d29f6922fe7543809bd6f588b0eacd272ce3035e2421a168ae",
+    "atlas-data/tools/apply_t58_display_names.py": "658e98a1a34b63f05e19e53527bdb9138d04f23b95a2ef3119592429d7f76ec1",
+    "atlas-web/plugins/wholeBody.ts": "1c4a0fa0faa6983486b8530b180cd217b982fb8f67e3434602262c23f7cd7dd2",
+    "atlas-web/scripts/buildProductScope.ts": "4942eac93eb278352f09c0586e2ba7c59d7624b763e5d807a9605cb7393061ed",
+    "atlas-web/scripts/delivery.test.ts": "d255653b1db9d6c729d1868928af397ee9bf670a00f6600a6921abab864c98e0",
+    "atlas-web/src/domain/displayNames.ts": "1bba530926dc0ef273b8b1ff40636ccbe1b8bf603b9c5d7502704fa1a452df60",
+    "atlas-web/src/ui/App.tsx": "3c3da6bf9a0daf0b659e183a5e9e4941eed7a2c65d6b8566959a8407e2fe6933",
+    "atlas-web/src/ui/atlasShell.css": "51cd3f0e605515010cc484eb12a04f418895f7c069aac71dcf55b924fc236f83",
+    "atlas-web/src/viewer/datasets/DatasetSceneAdapter.ts": "32f2f87fd84270d3366014fd8cc2dd48232df41fcadc9dc3b9108c5505c8d8c5",
+    "atlas-web/src/viewer/datasets/framing.test.ts": "664fb5810be8746473384a4b27fcf1329db91b231b9147d8b18d00f4cd0cc9fa",
+    "atlas-web/src/viewer/datasets/framing.ts": "91ffc65711a2149ea3ca7b9be1f5de73fc99d604ef470166ea5b78f7dc8e4c66",
+    "atlas-web/src/viewer/datasets/integration.test.ts": "528bcbd08fc621970455b3f489dca20b69be9c2fbf675895739f7d08af8642e0",
+    "atlas-web/src/viewer/wholeBody/AnatomySceneController.ts": "1bf3042ad6ac2317421a4a24d6493c8d6174492a3e94b9f0811dd6ad318e8dfc",
+    "atlas-web/src/viewer/wholeBody/WholeBodyViewer.tsx": "cc7bfe3b331f2aae147ccd704e55987a2dc52b382257774b1655537212d3e17b",
+    "atlas-web/src/viewer/wholeBody/contract.ts": "bfab5bf858c6874c613727a022db4ca0339060c5c20a2fa586a625b95f9b9b66",
+    "atlas-web/src/viewer/wholeBody/resources.ts": "5ba663d3c4a5f6b920f2d1511fb50c939ff4b59b1d6baf457036b2a18ea85da0",
+    "atlas-web/src/viewer/wholeBody/wholeBody.test.ts": "202a72c9014069998b4435f69fe9fa104d972f19c594c2aa5130b8dc771226e5"
+  }
+}

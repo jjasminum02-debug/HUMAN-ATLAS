@@ -14,10 +14,11 @@ export interface BodyAsset {
 }
 export interface BodyChunk { id: string; url: string; sha256: string; bytes: number; assets: BodyAsset[] }
 export interface BodyManifest { version: number; revision?: string; localOnly: boolean; publicRedistribution: string; frame: string; unit: string; lodLevels: number; chunks: BodyChunk[] }
-export interface BodyView { region: string | null; regionIds?: string[]; bones: boolean; muscles: boolean; supplements: boolean; selectedId: string | null; selectedIds?: string[]; dim: boolean; isolate?: boolean; selectedPresentation?: 'normal' | 'translucent' | 'hidden' }
+export interface BodyView { region: string | null; regionIds?: string[]; bones: boolean; muscles: boolean; supplements: boolean; selectedId: string | null; selectedIds?: string[]; dim: boolean; isolate?: boolean; selectedPresentation?: 'normal' | 'translucent' | 'hidden'; hiddenSourceKeys?: string[]; translucentSourceKeys?: string[] }
 export function visible(a: BodyAsset, view: BodyView): boolean {
   const regionIds = view.regionIds ?? (view.region ? [view.region] : []);
   return (a.localDisplay ? a.localDisplay.state === 'allowed' && a.defaultVisible : (a.defaultVisible || (a.supplement && view.supplements && a.pickState === 'source_only_unbound')))
+    && !view.hiddenSourceKeys?.some(key => key === a.id || key === a.nodeId || a.stableIds.includes(key))
     && !(view.selectedPresentation === 'hidden' && selected(a, view))
     && (!view.isolate || !view.selectedId || selected(a, view))
     && (a.layer === 'bone' ? view.bones : view.muscles)

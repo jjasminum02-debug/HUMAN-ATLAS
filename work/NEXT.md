@@ -2,12 +2,12 @@
 
 자동 생성. 편집 원본은 [EXECUTION.json](EXECUTION.json). 역사 handoff/자료 개수로 다음 작업을 결정하지 않는다.
 
-- 확인된 최근 진행: T80 / accepted
-- 다음 ID: **T58**
+- 확인된 최근 진행: T58 / accepted
+- 다음 ID: **T81**
 - 현재 지원 앱 완성: T100 통합 마무리 → T80 사용 감사/보완 → T58 UI·성능 최적화. 전체 콘텐츠 확보는 별도 상태로 유지한다.
 
 ```text
-HUMAN ATLAS에서 T58만 수행해라. 담당 Astra · 현재 대화 직접 구현.
+HUMAN ATLAS에서 T81만 수행해라. 담당 Luna Max.
 
 AGENTS.md, work/EXECUTION.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/product-acceptance.json,
 해당 task의 현재 spec/promptFile, 실제 선행 report/evidence를 읽어라.
@@ -26,12 +26,11 @@ python3 work/tools/sync_execution.py 및 --check를 수행하고 소유 변경�
 다음 task 자동 실행, 새 번호/스레드 발급, 자동 위임, push/배포, 임상 진단·치료·자침 기능은 금지한다.
 
 이번 실행:
-1. T100/T80 새 계약의 passed, 실제 product-scope.json, T80 결함·개선 원장과 최신 UI를 확인한다. 오래된 전체 콘텐츠 gate나 역사 T57→T59 순서를 재실행하지 않는다. 담당 Astra, 현재 대화 직접 구현이며 자동 위임하지 않는다.
-2. 현재 UI를 먼저 보고 화면의 큰 문제부터 수정한다. 단일 viewport/scene/camera, 밝은 배경, 뼈·근육 식별, 선택 대비, 카메라 프레이밍, 패널 가림, 깊은 구조 접근, 복원 예측 가능성에 집중한다. 제거한 로딩 로고/인체 그림/슬로건을 복구하지 않는다. 학생 화면에 source/task/evidence 메타데이터를 넣지 않는다.
-3. 변경 전 한 번의 실제 프로파일을 잡는다. cold와 warm bytes/loading, render 호출 비용과 frame interval을 구분하고 active triangles/draws/CPU geometry, 20회 지역 전환 후 cache/취소/late-response 상태를 확인한다. GPU/VRAM/total-process 메모리 관측 불가는 한계로 기록한다.
-4. 확인된 병목부터 lazy loading·경량 projection·캐시/LRU·중복 render·불필요한 state churn·패널 layout·LOD를 공통 경로에서 최적화한다. 실제 필요 없이 기술을 갈아엎거나 별도 viewer를 만들지 않는다. 구조 삭제/잘못된 좌우/무조건 품질 저하로 빠르게 만들지 않는다. 예산 변경은 근거와 품질 영향으로 명시하고 몰래 상향하지 않는다.
-5. 1440/1024/390 실제 브라우저에서 전신·머리·손·하지/등 대표 시점, 검색·양측 선택·카드·키보드·뒤/앞·숨김/복원을 검증한다. 검은 프레임·로딩 실패·카메라 reset·overlap·console error와 성능 회귀를 수정한다. desktop 390px를 모바일 실기기 검증으로 부르지 않는다.
-6. 최종 관련 회귀/typecheck/build와 영향받는 실제 흐름을 한 번 검증하고 변경 전후 수치·PNG·한계를 남긴다. 제품 차단 결함 없이 지원 앱이 안정적으로 사용 가능하면 T58 completed/passed 및 local_app_ready를 기록한다. 전체 해부학 완료나 공개 배포 승인을 뜻하지 않는다. 다음 T81은 자동 실행하지 않는다.
+1. T58 local_app_ready와 product-scope.json에서 현재 지원 근육 전체를 가져온다. 합격용 작은 표본만 고르지 않는다. 전체 target와 workbook 257행은 disposition을 유지한다.
+2. 기존 verified claim/사전/워크북 mapping을 재사용하고 private 원문은 ignore 경로에 보존한다. 원문·정규화 후보·검증 claim을 분리한다. 필요한 기시/정지 내용은 공식/학술 원문을 확인하여 조사하고 카드에는 간결하게 쓴다.
+3. 운동신경과 감각/고유수용성 정보를 혼동하지 않는다. 모호한 가지/신경근은 검증된 상위명 또는 미기재를 사용한다. 손/발 동명·whole/part·좌우 조건을 구분한다. 기본 텍스트에 사람이 모두 승인해야 하는 조건은 없다.
+4. 현재 지원 근육의 구조 카드 기본 내용을 우선 완성한다. 추가 source가 필요한 세부 claim은 정확한 gap·사용자 영향을 기록하고 독립 작업을 계속한다. 앱에 확인되지 않은 placeholder/기시정지 좌표/새 nerve3D를 넣지 않는다. H열은 후보만 보존한다.
+5. 현재 카드의 표시·검색·구조 탭과 provenance/private bundle 제외를 검증한다. 제품 계약을 충족하면 scoped passed로 종료하고 미확보 콘텐츠는 별도 남긴다. 기존 지식의 실질적인 부재로 주요 구조 학습이 불가능하면 해당 제품 문제를 해결한다. 다음 T82는 자동 실행하지 않는다.
 
-종료 후 다음 ID는 T81다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
+종료 후 다음 ID는 T82다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
 ```

@@ -3,7 +3,7 @@ export interface ResourceBudget<T> { maxBytes: number; measure: (item: T) => num
 export class ResourceQueue<T> {
   loaded = new Map<string,T>(); failed = new Set<string>();
   pending = new Map<string,AbortController>(); wanted = new Set<string>(); pinned = new Set<string>();
-  disposed=false; bytes=0; evictions=0;
+  disposed=false; bytes=0; evictions=0; cancellations=0; lateReleases=0;
   private sizes=new Map<string,number>();
   readonly load: (id:string,signal:AbortSignal)=>Promise<T>;
   readonly release:(item:T)=>void; readonly changed:()=>void; readonly limit:number;
@@ -16,7 +16,7 @@ export class ResourceQueue<T> {
     if(this.disposed) return;
     this.pinned=new Set(pins);this.wanted=new Set([...ids,...pins]);
     for(const id of this.wanted) {const item=this.loaded.get(id);if(item!==undefined) {this.loaded.delete(id);this.loaded.set(id,item);}}
-    for(const [id,c] of this.pending) if(!this.wanted.has(id)) c.abort();
+    for(const [id,c] of this.pending) if(!this.wanted.has(id) && !c.signal.aborted) {this.cancellations++;c.abort();}
     this.pump();
   }
   retry() {this.failed.clear();this.pump();}
@@ -40,7 +40,7 @@ export class ResourceQueue<T> {
       let loading:Promise<T>;
       try {loading=this.load(id,c.signal);}catch(error){loading=Promise.reject(error);}
       void loading.then(item=> {
-        if(this.disposed||c.signal.aborted||!this.wanted.has(id)) this.release(item);
+        if(this.disposed||c.signal.aborted||!this.wanted.has(id)) {this.lateReleases++;this.release(item);}
         else if(!this.admit(id,item)) {this.release(item);this.failed.add(id);}
       }).catch(()=> {if(!c.signal.aborted&&!this.disposed) this.failed.add(id);})
         .finally(()=> {if(this.pending.get(id)===c)this.pending.delete(id);if(!this.disposed){this.changed();this.pump();}});

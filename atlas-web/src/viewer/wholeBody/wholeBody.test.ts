@@ -72,3 +72,16 @@ test('v2 local display is independent from learner binding, rights and review ho
  const hidden={...a,defaultVisible:false,localDisplay:{...a.localDisplay!,afterDefaultVisible:false,state:'held' as const}};
  assert(!visible(hidden,{...view,supplements:true}));
 });
+
+test('persistent source hiding survives a different selection and reset cannot bypass policy', () => {
+ const outer={...asset,id:'outer',nodeId:'outer-node',pickState:'existing_binding_unreviewed',stableIds:['outer-concept']};
+ const inner={...asset,id:'inner',nodeId:'inner-node',pickState:'existing_binding_unreviewed',stableIds:['inner-concept']};
+ const hidden={...view,selectedId:'inner-concept',hiddenSourceKeys:['outer']};
+ assert(!visible(outer,hidden));assert(visible(inner,hidden));
+ assert(!visible(outer,{...hidden,selectedId:null}));
+ assert(visible(outer,{...hidden,hiddenSourceKeys:[]}));
+ assert(!visible(inner,{...hidden,muscles:false}));
+ assert(!visible({...inner,defaultVisible:false,pickState:'held'}, {...hidden,hiddenSourceKeys:[],isolate:true}));
+ const sourceOnly={...asset,id:'source-only',pickState:'source_only_unbound',stableIds:[]};
+ assert(!visible(sourceOnly,{...view,hiddenSourceKeys:['source-only']}));
+});

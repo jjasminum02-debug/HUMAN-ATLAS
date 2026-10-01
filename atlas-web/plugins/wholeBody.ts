@@ -202,7 +202,12 @@ export function wholeBodyPlugin(root: string): Plugin {
           if(file==='manifest.json'){res.setHeader('Content-Type','application/json');res.end(JSON.stringify(data.manifest));return;}
           const entry=data.files.find(candidate=>`${candidate.id}.glb`===file);if(!entry){res.statusCode=404;res.end();return;}
           const bytes=await readFile(entry.path);if(bytes.length!==entry.bytes||sha(bytes)!==entry.sha256)throw Error('chunk integrity');
-          if(req.destroyed)return;res.setHeader('Content-Type','model/gltf-binary');res.end(bytes);
+          if(req.destroyed)return;
+          // URLs may survive recompilation: revalidate the actual verified content, never cache blindly.
+          const etag=`"${entry.sha256}"`;
+          res.setHeader('Cache-Control','private, no-cache');res.setHeader('ETag',etag);
+          if(req.headers?.['if-none-match']===etag){res.statusCode=304;res.end();return;}
+          res.setHeader('Content-Type','model/gltf-binary');res.setHeader('Content-Length',String(bytes.length));res.end(bytes);
         }catch{res.statusCode=503;res.end('Local compiled anatomy assets unavailable; prepare and validate the dataset.');}
       });
     },

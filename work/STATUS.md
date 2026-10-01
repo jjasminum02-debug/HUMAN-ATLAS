@@ -3,10 +3,10 @@
 
 - SOURCE_OF_TRUTH: work/EXECUTION.json
 - PLAN_REVISION: app-completion-2026-10-01
-- CURRENT_TASK: T100
-- LAST_OBSERVED_TASK: T99 / accepted
+- CURRENT_TASK: none recorded as running
+- LAST_OBSERVED_TASK: T58 / accepted
 - LEGACY_T104_OBSERVATION_AT_RESET: 감사 도중 T104 report/browser/performance evidence와 로컬커밋67d8b79가 확인됨. exact10 source 표면 기술 통합 passed_with_gaps, 전신/새학습binding 완료 아님. 과거 T105 handoff 대신 현재 전신베이스 queue T98 적용.
-- NEXT_TASK: T100 / Luna Max
+- NEXT_TASK: T81 / Luna Max
 - NEXT_PROMPT: work/NEXT.md
 - CURRENT_GOAL: 현재 지원 앱 통합 → 사용 감사/보완 → UI·실측 성능 완성. 전체 콘텐츠 completeness는 별도 보고. 이후 설명→신경→모션.
 - HISTORY: 아래 기존 보고/상태와 work/evidence/*의 nextTask는 당시 snapshot이며 실행 지시가 아니다.

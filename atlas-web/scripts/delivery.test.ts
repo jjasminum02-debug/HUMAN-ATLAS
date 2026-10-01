@@ -13,10 +13,10 @@ function harness(plugin:any){
  const watcher={add:()=>{},on:(name:string,f:Function)=>{listeners.set(name,[...(listeners.get(name)??[]),f]);return watcher;},off:()=>{}};
  plugin.configureServer({watcher,middlewares:{use:(...args:any[])=>{handler=args.at(-1);}},httpServer:{once:()=>{}}});
  return {invalidate:()=>{for(const f of listeners.get('change')??[])f(root+'atlas-data/source-cache/datasets/index.json');},
- call:(url:string)=>new Promise<{status:number,body:string,headers:Record<string,string>}>((resolve,reject)=>{
+ call:(url:string,requestHeaders:Record<string,string>={})=>new Promise<{status:number,body:string,headers:Record<string,string>}>((resolve,reject)=>{
   const headers:Record<string,string>={};
   const res={statusCode:200,setHeader:(name:string,value:string)=>{headers[name.toLowerCase()]=value;},end:(bytes:any)=>resolve({status:res.statusCode,body:bytes?.toString()??'',headers})};
-  Promise.resolve(handler({url,destroyed:false},res,()=>resolve({status:404,body:''}))).catch(reject);
+  Promise.resolve(handler({url,headers:requestHeaders,destroyed:false},res,()=>resolve({status:404,body:''}))).catch(reject);
  })};
 }
 test('offline BP3D snapshot exactly matches original runtime composition',async()=>{
@@ -95,4 +95,17 @@ test('delivery rejects path traversal, stale dependency, and changed derived chu
  try{await writeFile(chunk.path,Buffer.concat([bytes,Buffer.from([0])]));assert.equal((await h.call(`/__atlas/datasets/za-c7010a9/${chunk.id}.glb`)).status,503);}
  finally{await writeFile(chunk.path,bytes);h.invalidate();}
  assert.equal((await h.call('/__atlas/datasets/za-c7010a9/manifest.json')).status,200);
+});
+
+test('verified GLB uses conditional private cache and changed bytes still fail closed',async()=>{
+ const h=harness(wholeBodyPlugin(root));
+ const registry=JSON.parse((await readFile(root+'atlas-data/source-cache/datasets/za/registry.json')).toString());
+ const entry=registry.files[0],url=`/__atlas/datasets/za-c7010a9/${entry.id}.glb`;
+ const first=await h.call(url);assert.equal(first.status,200);assert.equal(first.headers.etag,`"${entry.sha256}"`);
+ assert.equal(first.headers['cache-control'],'private, no-cache');
+ const warm=await h.call(url,{'if-none-match':first.headers.etag});assert.equal(warm.status,304);assert.equal(warm.body,'');
+ const stale=await h.call(url,{'if-none-match':'"stale"'});assert.equal(stale.status,200);
+ const original=await readFile(entry.path);
+ try{await writeFile(entry.path,Buffer.concat([original,Buffer.from([0])]));assert.equal((await h.call(url,{'if-none-match':first.headers.etag})).status,503);}
+ finally{await writeFile(entry.path,original);h.invalidate();}
 });

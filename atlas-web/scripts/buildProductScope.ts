@@ -7,6 +7,11 @@ import { validateDataset } from '../src/viewer/datasets/schema.ts';
 import { validateRuntimeIntegration, readDatasetRoute, searchStructures, type RuntimeIntegration } from '../src/viewer/datasets/integration.ts';
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+const taskArg = process.argv.indexOf('--task');
+const previousScope = JSON.parse(await readFile(resolve(projectRoot, 'work/product-scope.json'), 'utf8').catch(() => '{}'));
+const contractTask = taskArg >= 0 ? process.argv[taskArg + 1] : previousScope.pipeline?.contractTask ?? 'T100';
+if (!/^T(?:100|58)$/.test(contractTask)) throw Error('unsupported product contract evidence task');
+const contractEvidence = contractTask === 'T58' ? 'work/evidence/T58/app-finish-2026-10-01/automated-contract.json' : 'work/evidence/T100/app-completion-2026-10-01/automated-contract.json';
 const sha = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
 const read = async (path: string) => readFile(resolve(projectRoot, path));
 const json = async (path: string) => JSON.parse((await read(path)).toString());
@@ -263,7 +268,7 @@ sourceHashes['/__atlas/datasets/human-atlas-local/manifest.json'] = sha(datasetR
 sourceHashes['/__atlas/integration.json'] = sha(runtimeResponse.body);
 const scopeDocument = {
   schemaVersion: 'human-atlas-product-scope-v1', contractRevision: 'app-completion-2026-10-01',
-  pipeline: { builder: 'atlas-web/scripts/buildProductScope.ts', runtimeSource: '/__atlas/integration.json', runtimeProjectionSchema: runtime.projectionSchema },
+  pipeline: { contractTask, contractEvidence, builder: 'atlas-web/scripts/buildProductScope.ts', runtimeSource: '/__atlas/integration.json', runtimeProjectionSchema: runtime.projectionSchema },
   sourceHashes,
   denominators: { targets: scope.targets.length, memberships: allMemberships.size, regions: scope.regions.length, existingCanonicalHaBindings: existingHaBindingRows,
     uniqueCanonicalHaConceptIds: uniqueHaConceptIds,
@@ -330,9 +335,9 @@ if (process.argv.includes('--check')) {
   console.log(JSON.stringify({ status: 'written', output: 'work/product-scope.json', ...conciseSummary, routeFailures: routeFailures.length }));
 }
 
-const evidencePath = resolve(projectRoot, 'work/evidence/T100/app-completion-2026-10-01/automated-contract.json');
+const evidencePath = resolve(projectRoot, contractEvidence);
 const evidence = {
-  schemaVersion: 't100-app-completion-contract-v1', taskId: 'T100', contractRevision: 'app-completion-2026-10-01',
+  schemaVersion: 'app-completion-contract-v1', taskId: contractTask, contractRevision: 'app-completion-2026-10-01',
   productScopeSha256: sha(output),
   runtimeSha256: sha(runtimeResponse.body), runtimeBytes: runtimeResponse.body.byteLength,
   datasetSha256: sha(datasetResponse.body), datasetBytes: datasetResponse.body.byteLength,

@@ -6,7 +6,7 @@
 .atlas-shell .brand small { font-size: 11px; margin-top: 7px; }
 .atlas-shell .global-search { width: 310px; height: 48px; border-radius: 16px; box-shadow: none; }
 .atlas-shell .global-search input { min-width: 0; font-size: 13px; }
-.atlas-shell .app-info-trigger { font-size: 11px; min-height: 44px; }
+.atlas-shell .app-info-trigger { font-size: 10px; min-height: 30px; padding: 5px 8px; border-radius: 8px; }
 .atlas-shell .study-layout { display: block; position: relative; flex: 1; min-height: 0; padding: 0; }
 .atlas-shell .study-stage { position: absolute; inset: 0; height: auto; min-height: 0; border: 0; border-radius: 0; overflow: hidden; }
 .atlas-shell .study-stage > .stage-caption { left: 300px; top: 14px; right: auto; width: auto; max-width: none; padding: 0; }
@@ -48,17 +48,17 @@
   .atlas-shell .mobile-region-picker, .atlas-shell .explore-trigger, .atlas-shell .explore-close { display: none; }
 .atlas-shell .whole-body-viewer { height: 100%; min-height: 0; border-radius: 0; }
 .atlas-shell .whole-body-canvas { inset: 95px 0 65px; }
-.atlas-shell .body-tools { top: 14px; left: auto; right: 24px; gap: 6px; z-index: 2; max-width: 390px; justify-content: flex-end; }
-.atlas-shell .body-tools button, .atlas-shell .body-tools summary { min-height: 42px; padding: 10px 14px; border-radius: 12px; font-size: 12px; border-color: #e0e6df; }
+/* Always exposed below the model. Cards and exploration get their own canvas space. */
+.atlas-shell .body-tools { top: auto; bottom: 60px; left: 288px; right: 24px; max-width: none; display: grid; gap: 6px; padding: 10px 12px; background: #fffffff0; border: 1px solid #dfe6e0; border-radius: 14px; z-index: 2; }
+.atlas-shell .body-tools button { min-height: 34px; padding: 6px 8px; border-radius: 8px; font-size: 11px; border-color: #e0e6df; white-space: nowrap; }
+.atlas-shell .body-tools button:disabled { opacity: .45; cursor: default; }
 .atlas-shell .body-tools button[aria-pressed=true] { background: #47796b; color: white; }
-.atlas-shell .body-tools details { position: relative; }
-/* One anchored popover: options must not overlap each other or the detail card. */
-.atlas-shell .body-tools details[open] { background: white; border: 1px solid #e0e6df; border-radius: 14px; padding: 0 10px 12px; width: 245px; box-shadow: 0 12px 30px #35493f15; }
-.atlas-shell .body-tools details[open] summary { border: 0; }
-.atlas-shell .body-tools details[open] label { padding: 12px 0; font-size: 12px; }
-.atlas-shell .body-tools details[open] p { font-size: 11px; line-height: 1.7; }
-.atlas-shell .selection-view-options { display: grid; gap: 6px; border-bottom: 1px solid #edf0ed; padding: 6px 0 12px; }
-.atlas-shell .body-tools:has(details[open]) { z-index: 5; }
+.atlas-shell .view-options-label { font-size: 10px; color: #73877e; }
+.atlas-shell .view-options-row, .atlas-shell .selection-view-options { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 5px; padding: 0; border: 0; }
+.atlas-shell .hidden-count { align-self: center; text-align: center; font-size: 10px; color: #73877e; }
+.atlas-shell .whole-body-canvas { inset: 92px 24px 216px 280px; }
+.atlas-shell:has(.study-details) .whole-body-canvas, .atlas-shell:has(.study-details) .body-tools { right: 358px; }
+.atlas-shell .anatomical-part-subtitle { margin: -8px 0 16px; font-size: 11px; color: #829088; }
 .atlas-shell .body-status { bottom: 14px; padding: 6px 12px; border-radius: 10px; background: transparent; max-width: 420px; font-size: 11px; }
 .atlas-shell .body-status small { font-size: 10px; }
 @media(max-width:1100px) and (min-width:761px) {
@@ -66,8 +66,10 @@
   .atlas-shell .study-stage > .stage-caption { left: 250px; }
   .atlas-shell .study-details { right: 18px; width: 275px; }
   .atlas-shell .study-detail-content { padding: 20px; }
-  .atlas-shell .body-tools { max-width: 295px; }
-  .atlas-shell .body-tools button, .atlas-shell .body-tools summary { padding: 10px; }
+  .atlas-shell .body-tools { left: 238px; }
+  .atlas-shell .whole-body-canvas { left: 235px; }
+  .atlas-shell:has(.study-details) .whole-body-canvas, .atlas-shell:has(.study-details) .body-tools { right: 311px; }
+
   .atlas-shell .body-status { max-width: 310px; }
 }
 @media(max-width:760px) {
@@ -91,10 +93,10 @@
   .atlas-shell .study-stage > .stage-caption { top: 10px; left: 20px; right: auto; }
   .atlas-shell .stage-caption h2 { font-size: 21px; }
   .atlas-shell .stage-caption p, .atlas-shell .stage-caption .eyebrow { display: none; }
-  .atlas-shell .body-tools { top: 52px; left: 18px; right: 18px; max-width: none; justify-content: flex-start; gap: 5px; }
-  .atlas-shell .body-tools button, .atlas-shell .body-tools summary { min-height: 38px; padding: 8px 10px; font-size: 11px; }
-  .atlas-shell .whole-body-canvas { inset: 100px 0 90px; }
-  .atlas-shell .body-status { bottom: 40px; width: calc(100% - 30px); max-width: none; font-size: 10px; }
+  .atlas-shell .body-tools, .atlas-shell:has(.study-details) .body-tools { top: auto; bottom: 44px; left: 12px; right: 12px; gap: 5px; padding: 8px; }
+  .atlas-shell .body-tools button { min-height: 32px; padding: 5px 3px; font-size: 10px; }
+  .atlas-shell .whole-body-canvas, .atlas-shell:has(.study-details) .whole-body-canvas { inset: 48px 0 207px; }
+  .atlas-shell .body-status { bottom: 8px; width: calc(100% - 30px); max-width: none; font-size: 10px; }
   .atlas-shell .body-status small { display: none; }
   .atlas-shell .study-details { top: auto; right: 12px; left: 12px; bottom: 10px; width: auto; max-height: 48%; border-radius: 20px; }
   .atlas-shell .study-details > .mobile-detail-summary { display: block; min-height: 48px; padding: 15px 20px; font-size: 13px; color: #42675b; cursor: pointer; }
@@ -116,15 +118,17 @@
 .atlas-shell .whole-body-canvas canvas { cursor: grab; }
 .atlas-shell .whole-body-canvas canvas:active { cursor: grabbing; }
 @media(max-width:760px) {
-  .atlas-shell .study-details[open] { max-height: 42%; }
+  .atlas-shell .study-details[open] { max-height: 32%; }
   .atlas-shell .study-detail-content > .bone-related-muscle { float: right; font-size: 11px; }
   .atlas-shell .study-detail-content > h2 { font-size: 22px; margin: 4px 0 12px; }
   .atlas-shell .movement-cta-block { margin: 14px 0; }
 }
 
-.atlas-shell .body-tools details[data-isolated=true] > summary { background: #e5efeb; border-color: #669588; }
 @media(max-width:760px) {
-  /* Give the open card its own space without remounting or refitting the camera. */
-  .atlas-shell:has(.study-details[open]) .whole-body-canvas { bottom: calc(42% + 20px); }
-  .atlas-shell:has(.study-details[open]) .body-status { bottom: calc(42% + 13px); padding: 0; }
+  .atlas-shell:has(.study-details[open]) .whole-body-canvas { bottom: calc(32% + 220px); }
+  .atlas-shell:has(.study-details[open]) .body-tools { bottom: calc(32% + 54px); }
+  .atlas-shell:has(.study-details[open]) .body-status { bottom: calc(32% + 16px); padding: 0; }
+  .atlas-shell:has(.study-details:not([open])) .whole-body-canvas { bottom: 250px; }
+  .atlas-shell:has(.study-details:not([open])) .body-tools { bottom: 88px; }
+  .atlas-shell:has(.study-details:not([open])) .body-status { bottom: 65px; }
 }
