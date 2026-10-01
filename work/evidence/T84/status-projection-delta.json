@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "t84-execution-projection-delta-v1",
+  "taskId": "T84",
+  "generatedBy": "python3 work/tools/sync_execution.py",
+  "check": "python3 work/tools/sync_execution.py --check passed",
+  "baselineHead": "1261c3f2ec256f15c51ebb3876de13f8d3faf2f9",
+  "projectionFiles": [
+    {
+      "path": "work/NEXT.md",
+      "atTaskStart": "clean in git status",
+      "afterSync": "updated to show T84 accepted and T61 next",
+      "sha256AfterSync": "040765d6e25a4f353c17fed0ef2f39f2ccafda5a77588fea1ec11bebc3a32207",
+      "commitDisposition": "include; generated T84-owned delta only"
+    },
+    {
+      "path": "work/STATUS.md",
+      "atTaskStart": "preexisting user-modified",
+      "afterSync": "execution projection refreshed",
+      "commitDisposition": "exclude; preserve mixed preexisting working-tree changes"
+    },
+    {
+      "path": "work/task-registry-r15.json",
+      "atTaskStart": "preexisting untracked user file",
+      "afterSync": "execution projection refreshed",
+      "commitDisposition": "exclude; preserve existing user file"
+    }
+  ],
+  "executionSource": "work/EXECUTION.json T84 record and productReadiness handoff",
+  "nextId": "T61",
+  "nextOwner": "Sol High",
+  "nextPromptPath": "work/prompts/app-completion-2026-10-01/08-T61.txt"
+}

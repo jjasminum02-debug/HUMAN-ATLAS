@@ -1,0 +1,274 @@
+{
+  "schemaVersion": "t84-verification-v1",
+  "taskId": "T84",
+  "asOfLocal": "2026-10-01 Asia/Seoul",
+  "status": "passed_scoped",
+  "baseline": {
+    "startHead": "1261c3f2ec256f15c51ebb3876de13f8d3faf2f9",
+    "branch": "main",
+    "preexistingDirtySetAtStart": {
+      "trackedChangedCount": 24,
+      "untrackedPathCount": 307,
+      "sortedPathListSha256": "d639dd90703e2e661f9a4ca3f9daf5ce193036e460e8a44cba081c447370d970",
+      "protectedExamples": [
+        "AGENTS.md",
+        "design/2026-09-25-muscle-atlas/00-START-HERE.md",
+        "design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+        "work/STATUS.md",
+        "work/task-registry-r13.json",
+        "work/tasks/T24.md through T40.md",
+        "work/evidence/2026-09-26-* snapshots and prior evidence"
+      ]
+    },
+    "currentOtherDirtyPathCount": 333,
+    "note": "Existing unrelated WIP is preserved and excluded from this task commit."
+  },
+  "acceptance": {
+    "contractRevision": "app-completion-2026-10-01",
+    "acceptanceScope": "current_supported_local_product; not all_target_content_or_public_release",
+    "productReadiness": "local_app_ready",
+    "contentCompleteness": "partial",
+    "unresolvedProductBlockers": []
+  },
+  "inputIntegrity": {
+    "t83InputFiles": {
+      "work/evidence/T81/supported-muscle-content-coverage.json": {
+        "expectedSha256": "e23e4c59df1ba11bbd1a1ba911b013164e2bd0fab023610428ebfdebcee05bdb",
+        "actualSha256": "e23e4c59df1ba11bbd1a1ba911b013164e2bd0fab023610428ebfdebcee05bdb",
+        "match": true
+      },
+      "atlas-data/terminology/learner-structure-source-content.json": {
+        "expectedSha256": "eddeb46173de13977769250fb4ad40f83a870e5d2d3cd9c5e07c5377fa1269f8",
+        "actualSha256": "eddeb46173de13977769250fb4ad40f83a870e5d2d3cd9c5e07c5377fa1269f8",
+        "match": true
+      },
+      "atlas-data/motion/motion-learning.json": {
+        "expectedSha256": "d7d1705c38b44c9d5f3510d6016187bd71a40dd4f71b5224f40c3ca29725c57a",
+        "actualSha256": "d7d1705c38b44c9d5f3510d6016187bd71a40dd4f71b5224f40c3ca29725c57a",
+        "match": true
+      },
+      "atlas-data/terminology/ai-evidence-overlay.json": {
+        "expectedSha256": "0a46e544f595179f8bfdaf307ea718d0a804f4d42dc9c3d8221ced554757f20f",
+        "actualSha256": "0a46e544f595179f8bfdaf307ea718d0a804f4d42dc9c3d8221ced554757f20f",
+        "match": true
+      },
+      "atlas-data/terminology/learner-card-runtime.json": {
+        "expectedSha256": "1849c451551c933f58e17ab1fdcfc1def6c8a7510f9763d8c50142d1588f1f64",
+        "actualSha256": "1849c451551c933f58e17ab1fdcfc1def6c8a7510f9763d8c50142d1588f1f64",
+        "match": true
+      },
+      "work/product-scope.json": {
+        "expectedSha256": "892df96b376d9ee9172cb6636ee77b857068bef57feb3b5cdd78c7b0912a7599",
+        "actualSha256": "892df96b376d9ee9172cb6636ee77b857068bef57feb3b5cdd78c7b0912a7599",
+        "match": true
+      },
+      "work/evidence/T21/source-manifest.json": {
+        "expectedSha256": "38fd66d15b7d283fb7f1477e997a1b98b66b2153759333e69627a1a66b33de63",
+        "actualSha256": "38fd66d15b7d283fb7f1477e997a1b98b66b2153759333e69627a1a66b33de63",
+        "match": true
+      },
+      "work/evidence/T21/overlay-link-audit.json": {
+        "expectedSha256": "44aeeaabbfe30bff9d40083aad5b7a789742c5786748a1f026be2e0c6a33f5fe",
+        "actualSha256": "44aeeaabbfe30bff9d40083aad5b7a789742c5786748a1f026be2e0c6a33f5fe",
+        "match": true
+      },
+      "work/evidence/T83/function-card-coverage.json": {
+        "expectedSha256": "59b6b0f83c9bbd0d7f8b4a174473615eaf2c95237d1450ba21edd1a5d7d089d9",
+        "actualSha256": "59b6b0f83c9bbd0d7f8b4a174473615eaf2c95237d1450ba21edd1a5d7d089d9",
+        "match": true
+      },
+      "work/evidence/T83/verification.json": {
+        "expectedSha256": "72fb8e32f7808dcf5b613ed7f431f59fc8f89dedb66aecad0b8b6e9b6298fa87",
+        "actualSha256": "72fb8e32f7808dcf5b613ed7f431f59fc8f89dedb66aecad0b8b6e9b6298fa87",
+        "match": true
+      },
+      "work/evidence/T83/browser-observations.json": {
+        "expectedSha256": "1ec249e263f3cd2d6447cf193acdf560cbeb6c904deb8662ef1fd49c5325a1b8",
+        "actualSha256": "1ec249e263f3cd2d6447cf193acdf560cbeb6c904deb8662ef1fd49c5325a1b8",
+        "match": true
+      },
+      "work/reports/T21.md": {
+        "expectedSha256": "489b56e35f6c04562404532a1138cb1be9a5ba25a61a274c13f42ffa4ca1553e",
+        "actualSha256": "489b56e35f6c04562404532a1138cb1be9a5ba25a61a274c13f42ffa4ca1553e",
+        "match": true
+      },
+      "work/reports/T24.md": {
+        "expectedSha256": "7e24b7d988e99e2ee81e6d87708538d50f7837dbd1b42c0ab355a402ad2b9616",
+        "actualSha256": "7e24b7d988e99e2ee81e6d87708538d50f7837dbd1b42c0ab355a402ad2b9616",
+        "match": true
+      },
+      "work/reports/T83.md": {
+        "expectedSha256": "07a233b870cb044d5b719d3a29d61543eef172bfd937abc53e434c9e1f4dc600",
+        "actualSha256": "07a233b870cb044d5b719d3a29d61543eef172bfd937abc53e434c9e1f4dc600",
+        "match": true
+      }
+    },
+    "t83CodeFiles": {
+      "atlas-web/src/domain/learnerActionText.ts": {
+        "expectedSha256": "24543005795571cf904ed76855a0eb3b39ebf3b42d13b07dc51e6594cc684df7",
+        "actualSha256": "24543005795571cf904ed76855a0eb3b39ebf3b42d13b07dc51e6594cc684df7",
+        "match": true
+      },
+      "atlas-web/src/domain/motionLearning.ts": {
+        "expectedSha256": "e9b93f7b01466f4a7e78d76c4374a93e74afaa5c3be925b75021111cbe20642d",
+        "actualSha256": "e9b93f7b01466f4a7e78d76c4374a93e74afaa5c3be925b75021111cbe20642d",
+        "match": true
+      },
+      "atlas-web/src/data/learning.ts": {
+        "expectedSha256": "15c699e7252ba1e3f4e046152805784f48c759d4b8a138bf6c458f4c0b9825b1",
+        "actualSha256": "15c699e7252ba1e3f4e046152805784f48c759d4b8a138bf6c458f4c0b9825b1",
+        "match": true
+      },
+      "atlas-web/src/ui/App.tsx": {
+        "expectedSha256": "0ad91644e168e19bb69f2d00f40c6c9f3d205b3cdde1081de7d3ed0f63cfb6f1",
+        "actualSha256": "0ad91644e168e19bb69f2d00f40c6c9f3d205b3cdde1081de7d3ed0f63cfb6f1",
+        "match": true
+      },
+      "atlas-web/scripts/buildLearnerCardRuntime.mjs": {
+        "expectedSha256": "96a08ff7bcb2f8e2c51e256e081283eb14c71ac68cba06867bbf1bbf90d81e9a",
+        "actualSha256": "96a08ff7bcb2f8e2c51e256e081283eb14c71ac68cba06867bbf1bbf90d81e9a",
+        "match": true
+      },
+      "work/tools/validate_t83_function_content.py": {
+        "expectedSha256": "4ddec531383dd024830c10e734e868b9e66da9c174ae47025f07b3ae7bda316f",
+        "actualSha256": "4ddec531383dd024830c10e734e868b9e66da9c174ae47025f07b3ae7bda316f",
+        "match": true
+      },
+      "work/tools/normalize_t83_private_action_cells.py": {
+        "expectedSha256": "64a9ef1b6135a68622f11ab96468beda2a4514189c3cb1e50f966c86d09b3442",
+        "actualSha256": "64a9ef1b6135a68622f11ab96468beda2a4514189c3cb1e50f966c86d09b3442",
+        "match": true
+      }
+    },
+    "allFixedInputsMatch": true,
+    "allReferencedCodeMatches": true
+  },
+  "coverageAndMeaning": {
+    "denominators": {
+      "targets": 542,
+      "memberships": 563,
+      "regions": 12,
+      "existingCanonicalHaBindings": 130,
+      "historical163": {
+        "total": 163,
+        "categories": {
+          "6": 6,
+          "20": 20,
+          "135": 135,
+          "2": 2
+        }
+      }
+    },
+    "supportedMuscleConcepts": 232,
+    "supportedMuscleSurfaces": 462,
+    "learnerActionRows": 7,
+    "crossCheckedT21Claims": 6,
+    "exactVerifiedText": {
+      "concepts": 5,
+      "surfaces": 10
+    },
+    "withoutExactVerifiedActionTextConcepts": 227,
+    "gastrocnemiusWholeClaimInheritedToHeads": false,
+    "rightOnlyTibialisTextOnLeft": false,
+    "rightOnlyCandidatePlayable": false,
+    "playableMotionClips": 0,
+    "handFootAbductorDigitiMinimiIdentityCollapsed": false,
+    "unsupportedFaceJointRotationOrAnimationClaimed": false,
+    "manualTestPosturePresentedAsFixedAnatomy": false,
+    "learnerRuntimeHanjaGlyphCountByFile": {
+      "atlas-data/terminology/learner-card-runtime.json": 0,
+      "atlas-data/motion/motion-learning.json": 0,
+      "atlas-data/terminology/learner-structure-source-content.json": 0,
+      "atlas-data/terminology/ai-evidence-overlay.json": 0,
+      "work/product-scope.json": 0,
+      "work/evidence/T81/supported-muscle-content-coverage.json": 0
+    },
+    "learnerRuntimeHanjaGlyphCountTotal": 0,
+    "newClaims": 0,
+    "newCanonicalBindings": 0
+  },
+  "liveBrowser": {
+    "evidence": "work/evidence/T84/browser-observations.json",
+    "cases": [
+      "right/left tibialis anterior",
+      "hand abductor digiti minimi",
+      "foot abductor digiti minimi",
+      "orbicularis oris"
+    ],
+    "screenshotsVisuallyInspectedButNotPersisted": true,
+    "directConsoleCapture": "unavailable via current CUA observation; T83 empty console evidence reused only because code/data hashes match"
+  },
+  "commands": [
+    {
+      "command": "python3 work/tools/validate_t83_function_content.py --check",
+      "result": "passed; 5 exact-text concepts/10 surfaces; 227 concepts have no exact verified action text; 0 playable clips; no new claims/bindings"
+    },
+    {
+      "command": "node --experimental-strip-types --test src/domain/motionLearning.test.ts src/domain/legacyJointActionAdapter.test.ts",
+      "result": "passed; 7 tests"
+    },
+    {
+      "command": "node --experimental-strip-types --test src/domain/motionPlayer.test.ts src/viewer/animationPlayback.test.ts src/data/learning.test.ts",
+      "result": "passed; 25 tests"
+    },
+    {
+      "command": "python3 ../atlas-data/schemas/validate_motion_learning.py --fixtures",
+      "result": "passed; 16/16 fixtures"
+    },
+    {
+      "command": "node --experimental-strip-types scripts/buildLearnerCardRuntime.mjs --check",
+      "result": "passed; 8 concept rows, 14 source rows, 7 action rows"
+    },
+    {
+      "command": "node scripts/auditLearnerCardDistribution.mjs --check",
+      "result": "passed; 5 generated files scanned, no provenance leaks"
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc -b --pretty false",
+      "result": "passed"
+    },
+    {
+      "command": "node node_modules/vite/bin/vite.js build",
+      "result": "passed; Vite noted existing App bundle chunk >500 kB"
+    },
+    {
+      "command": "runtime Hanja scan U+3400–U+9FFF across 6 fixed learner/evidence projections",
+      "result": "passed; 0 glyphs"
+    },
+    {
+      "command": "python3 work/tools/sync_execution.py",
+      "result": "passed; regenerated execution projections from work/EXECUTION.json"
+    },
+    {
+      "command": "python3 work/tools/sync_execution.py --check",
+      "result": "passed; projections match without writes"
+    }
+  ],
+  "preservation": {
+    "sourceOnly": true,
+    "humanReview": "not_performed",
+    "publicRedistribution": "held",
+    "OpenSim_Models": "unchanged; git status reports no changed paths under directory",
+    "originalSourceClaimsAndHashes": "unchanged",
+    "T13Drafts": "preserved",
+    "userWip": "not staged or altered"
+  },
+  "knownContentGaps": [
+    "227 of 232 supported muscle concepts have no exact verified action text.",
+    "The generic gastrocnemius whole-structure claim has no exact whole-surface mapping and is not inherited by the two explicit head surfaces.",
+    "The right ankle dorsiflexion option remains a text-only candidate; there are 0 playable clips.",
+    "257 private workbook rows remain candidate dispositions; no workbook action claim was adopted.",
+    "542/563/12 denominators and historical unresolved 163 (6/20/135/2) remain; this is not exhaustive content or human-review acceptance.",
+    "Public redistribution remains held and human anatomy review has not been performed."
+  ],
+  "unresolvedProductBlockers": [],
+  "evidenceFiles": [
+    "work/reports/T84.md",
+    "work/evidence/T84/baseline.json",
+    "work/evidence/T84/meaning-scope-audit.json",
+    "work/evidence/T84/browser-observations.json",
+    "work/evidence/T84/verification.json",
+    "work/evidence/T84/status-projection-delta.json",
+    "work/evidence/T84/summary.md"
+  ]
+}

@@ -2,12 +2,12 @@
 
 자동 생성. 편집 원본은 [EXECUTION.json](EXECUTION.json). 역사 handoff/자료 개수로 다음 작업을 결정하지 않는다.
 
-- 확인된 최근 진행: T83 / accepted
-- 다음 ID: **T84**
+- 확인된 최근 진행: T84 / accepted
+- 다음 ID: **T61**
 - 현재 지원 앱 완성: T100 통합 마무리 → T80 사용 감사/보완 → T58 UI·성능 최적화. 전체 콘텐츠 확보는 별도 상태로 유지한다.
 
 ```text
-HUMAN ATLAS에서 T84만 수행해라. 담당 Luna Max.
+HUMAN ATLAS에서 T61만 수행해라. 담당 Sol High.
 
 AGENTS.md, work/EXECUTION.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/product-acceptance.json,
 해당 task의 현재 spec/promptFile, 실제 선행 report/evidence를 읽어라.
@@ -26,7 +26,9 @@ python3 work/tools/sync_execution.py 및 --check를 수행하고 소유 변경�
 다음 task 자동 실행, 새 번호/스레드 발급, 자동 위임, push/배포, 임상 진단·치료·자침 기능은 금지한다.
 
 이번 실행:
-T83의 현재 지원 카드/claim 전체를 자동 대조하고 작용/갈래/고정 조건의 의미 충돌과 대표 실제 UI를 감사한다. 한자 제거만으로 의미가 검증됐다고 하지 않는다. 구조 설명과 기능의 모순, 손발 동명, 표정근의 unsupported animation 표시를 확인하고 오류를 수정한다. 검증되지 않은 clip·형상·기능을 만들어 통과하지 않는다. 데이터·카드 흐름·runtime 한자0건을 확인하고 제품 계약이 충족되면 completed/passed로 종료한다. 콘텐츠 completeness와 gap을 별도 보고하고 다음 ID는 EXECUTION의 T61이며 자동 실행하지 않는다.
+이번 범위: T58의 지원 앱과 T84 설명 기능 뒤에 신경 source inventory와 실제 지원 집합을 정리하고 source namespace/frame/pose/curve 또는 mesh/branch/검증된 지배 관계/typed card/layer 계약을 구현한다. T86의 범위 대조를 같은 task에 흡수한다. 전체 원장과 미확보는 유지하지만 전 신경의 source 확보를 계약 완료 조건으로 두지 않는다. 감각영역·피부분절·경락을 혼합하지 않고 source 이름만으로 지배 관계를 만들지 않는다.
 
-종료 후 다음 ID는 T61다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
+현재 확보 자료와 주요 사용 흐름으로 지원/미지원 신경 집합을 정하고 정확한 identity/좌표/pose/지배 관계 계약을 구현한다. 조사 원장은 전수 참조하고 필수 참조의 실제 자료/hash를 검증한다. T86을 별도로 시작하지 않는다. 계약 fixtures와 기존 앱 policy/selection 회귀를 검사하며 새 신경3D를 완성했다고 쓰지 않는다.
+
+종료 후 다음 ID는 T62다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
 ```

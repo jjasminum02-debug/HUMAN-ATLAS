@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "t84-browser-observations-v1",
+  "observedAtLocal": "2026-10-01 Asia/Seoul",
+  "browser": "Codex In-app Browser / actual local app",
+  "baseUrl": "http://127.0.0.1:5173/",
+  "appTitle": "Human Atlas · 근육 학습",
+  "codeAndRuntimeUnchangedFromT83": true,
+  "inputs": {
+    "work/evidence/T81/supported-muscle-content-coverage.json": "e23e4c59df1ba11bbd1a1ba911b013164e2bd0fab023610428ebfdebcee05bdb",
+    "atlas-data/terminology/learner-structure-source-content.json": "eddeb46173de13977769250fb4ad40f83a870e5d2d3cd9c5e07c5377fa1269f8",
+    "atlas-data/motion/motion-learning.json": "d7d1705c38b44c9d5f3510d6016187bd71a40dd4f71b5224f40c3ca29725c57a",
+    "atlas-data/terminology/ai-evidence-overlay.json": "0a46e544f595179f8bfdaf307ea718d0a804f4d42dc9c3d8221ced554757f20f",
+    "atlas-data/terminology/learner-card-runtime.json": "1849c451551c933f58e17ab1fdcfc1def6c8a7510f9763d8c50142d1588f1f64",
+    "work/product-scope.json": "892df96b376d9ee9172cb6636ee77b857068bef57feb3b5cdd78c7b0912a7599",
+    "work/evidence/T21/source-manifest.json": "38fd66d15b7d283fb7f1477e997a1b98b66b2153759333e69627a1a66b33de63",
+    "work/evidence/T21/overlay-link-audit.json": "44aeeaabbfe30bff9d40083aad5b7a789742c5786748a1f026be2e0c6a33f5fe",
+    "work/evidence/T83/function-card-coverage.json": "59b6b0f83c9bbd0d7f8b4a174473615eaf2c95237d1450ba21edd1a5d7d089d9",
+    "work/evidence/T83/verification.json": "72fb8e32f7808dcf5b613ed7f431f59fc8f89dedb66aecad0b8b6e9b6298fa87",
+    "work/evidence/T83/browser-observations.json": "1ec249e263f3cd2d6447cf193acdf560cbeb6c904deb8662ef1fd49c5325a1b8",
+    "work/reports/T21.md": "489b56e35f6c04562404532a1138cb1be9a5ba25a61a274c13f42ffa4ca1553e",
+    "work/reports/T24.md": "7e24b7d988e99e2ee81e6d87708538d50f7837dbd1b42c0ab355a402ad2b9616",
+    "work/reports/T83.md": "07a233b870cb044d5b719d3a29d61543eef172bfd937abc53e434c9e1f4dc600"
+  },
+  "cases": [
+    {
+      "sample": "앞정강근 left selection",
+      "sourceKey": "ZA-c7010a9-74ced50ada635db761f807e4",
+      "selectedSide": "left",
+      "names": [
+        "앞정강근",
+        "전경골근",
+        "Tibialis anterior muscle"
+      ],
+      "visibleActions": [
+        "발목 등쪽굽힘과 발 안쪽번짐"
+      ],
+      "rightOnlyOptionVisible": false,
+      "movementDemoEnabled": false,
+      "method": "T84 live browser; earlier in this same run; screen visually inspected"
+    },
+    {
+      "sample": "앞정강근 right selection",
+      "sourceKey": "ZA-c7010a9-54ae5266082b61f48ed8e83e",
+      "selectedSide": "right",
+      "visibleActions": [
+        "발목 등쪽굽힘과 발 안쪽번짐",
+        "오른쪽 발목 등쪽굽힘"
+      ],
+      "rightOnlyExplanation": "앞정강근은 오른쪽 발목을 등쪽으로 굽히는 데 관여합니다. 한 근육이 움직임 전체를 단독으로 만든다는 뜻은 아닙니다.",
+      "movementDemoEnabled": false,
+      "method": "T84 live browser; prior observation and exact hashes reused"
+    },
+    {
+      "sample": "손 소지외전근",
+      "sourceKey": "ZA-c7010a9-d3839cec2e0626a3881b2d21",
+      "selectedName": "손 소지외전근",
+      "modernName": "손 새끼벌림근",
+      "englishName": "Abductor digiti minimi of hand",
+      "selectedSide": "left",
+      "functionPanel": "현재 확인 가능한 기능 설명이 없습니다.",
+      "movementDemoEnabled": false,
+      "movementDemoNotice": "이 구조의 움직임 시범은 아직 제공되지 않습니다.",
+      "method": "T84 live browser selection + Function tab + AX state and screenshot visually inspected"
+    },
+    {
+      "sample": "발 소지외전근",
+      "sourceKey": "ZA-c7010a9-14008ccad78ce56854ac4662",
+      "selectedName": "발 소지외전근",
+      "modernName": "발 새끼벌림근",
+      "englishName": "Abductor digiti minimi of foot",
+      "selectedSide": "left",
+      "functionPanel": "현재 확인 가능한 기능 설명이 없습니다.",
+      "movementDemoEnabled": false,
+      "method": "T84 live browser selection + Function tab + AX state"
+    },
+    {
+      "sample": "입둘레근 / 표정근 representative",
+      "sourceKey": "ZA-c7010a9-080c1f6fcfde42b0e6e25411",
+      "selectedName": "입둘레근",
+      "threeNameCard": [
+        "입둘레근",
+        "구윤근",
+        "Orbicularis oris muscle"
+      ],
+      "functionPanel": "현재 확인 가능한 기능 설명이 없습니다.",
+      "movementDemoEnabled": false,
+      "movementDemoNotice": "이 구조의 움직임 시범은 아직 제공되지 않습니다.",
+      "method": "T84 live browser; screenshot visually inspected"
+    },
+    {
+      "sample": "눈꺼풀올림근 / 이설근 / 바깥항문조임근 and two gastrocnemius heads",
+      "reusedObservation": "work/evidence/T83/browser-observations.json",
+      "reason": "all T83 code and data hashes match the current checkout; those cases remain no-action and no-clip; gastrocnemius heads do not inherit whole claim"
+    }
+  ],
+  "sharedChecks": {
+    "selectionAndCardMatch": true,
+    "handFootHomonymsSeparateBySourceIdentity": true,
+    "leftRightFilteringObserved": true,
+    "unsupportedFunctionText": "현재 확인 가능한 기능 설명이 없습니다.",
+    "unsupportedMotionState": "disabled CTA + explicit notice",
+    "runtimeHanjaGlyphCount": 0,
+    "taskIdsOrEvidenceCodesInLearnerCards": false
+  },
+  "console": {
+    "T84DirectConsoleCapture": "not available through this CUA observation",
+    "reusedT83ConsoleWarnings": [],
+    "reusedT83ConsoleErrors": [],
+    "reuseBasis": "T83 code hashes (7 files) and all six relevant data input hashes exactly match current"
+  },
+  "screenshots": {
+    "visuallyInspectedInBrowserToolOutput": true,
+    "persistedPngFiles": false,
+    "note": "No local PNG was saved; screenshot image was inspected in the actual browser tool output."
+  },
+  "limitations": [
+    "Browser samples validate current card/action/clip messaging, not full body geometry or completeness.",
+    "No human anatomy review or public redistribution permission is asserted."
+  ]
+}

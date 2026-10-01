@@ -1856,13 +1856,80 @@
       "title": "지원 기능 설명·학습 흐름 감사",
       "owner": "Luna Max",
       "phase": "G2",
-      "executionStatus": "planned_not_started",
-      "acceptance": "pending",
+      "executionStatus": "completed",
+      "acceptance": "passed",
       "spec": "work/tasks/T84-APP-COMPLETION.md",
       "scope": "T83의 현재 지원 기능 카드 전체를 구조/갈래/고정 조건과 대조하여 오류를 수정한다. 한글 의미와 runtime 한자0건, 텍스트 지원과 clip 미지원의 구분, 표정근 설명을 감사한다. 전체 변이/미지원 target의 자료 확보를 일괄 gate로 만들지 않는다. 검증한 기능만 제품 채택하고 콘텐츠 completeness는 별도로 유지한 뒤 기존 G3 신경 순서로 인계한다.",
       "progress": {
         "nextUnit": null,
-        "completedUnits": []
+        "completedUnits": [
+          "verify-current-T83-input-and-code-hashes-before-reusing-prior-browser-evidence",
+          "audit-all-232-supported-muscle-concepts-462-surfaces-and-seven-action-rows-for-scope-meaning-side-and-clip-state",
+          "confirm-gastrocnemius-whole-claim-noninheritance-right-only-tibialis-filtering-and-hand-foot-homonym-separation",
+          "verify-runtime-hanja-zero-unsupported-face-function-availability-and-motion-CTA-fail-closed",
+          "run-focused-action-motion-schema-distribution-typecheck-build-and-live-browser-verification",
+          "record-scoped-product-acceptance-with-partial-content-completeness-and-G3-handoff"
+        ],
+        "pendingUnits": [],
+        "productAcceptance": {
+          "contractRevision": "app-completion-2026-10-01",
+          "acceptanceScope": "current_supported_local_product; not all_target_content_or_public_release",
+          "productReadiness": "local_app_ready",
+          "contentCompleteness": "partial",
+          "knownContentGaps": {
+            "denominators": {
+              "targets": 542,
+              "memberships": 563,
+              "regions": 12,
+              "existingCanonicalHaBindings": 130,
+              "historical163": {
+                "total": 163,
+                "categories": {
+                  "6": 6,
+                  "20": 20,
+                  "135": 135,
+                  "2": 2
+                }
+              }
+            },
+            "supportedMuscleFunction": {
+              "sourceConcepts": 232,
+              "sourceSurfaces": 462,
+              "conceptsWithExactVerifiedText": 5,
+              "surfacesWithExactVerifiedText": 10,
+              "conceptsWithoutExactVerifiedText": 227,
+              "existingT21Claims": 6,
+              "wholeGastrocnemiusClaimWithoutExactHeadScope": [
+                "HA-M-000001"
+              ]
+            },
+            "motion": {
+              "playableClips": 0,
+              "rightTibialisCandidate": "text_only; filtered to right selection; not playable",
+              "unsupportedFaceEyeTongueSphincterClaims": "unavailable; no inferred joint rotation or animation"
+            },
+            "workbookCandidates": {
+              "rows": 257,
+              "learnerClaimsAdopted": 0,
+              "directCitationGap": "retained separately"
+            },
+            "rightsAndReview": {
+              "sourceOnly": "preserved per item",
+              "publicRedistribution": "held",
+              "humanReview": "not_performed"
+            }
+          },
+          "unresolvedProductBlockers": [],
+          "evidence": [
+            "work/reports/T84.md",
+            "work/evidence/T84/meaning-scope-audit.json",
+            "work/evidence/T84/browser-observations.json",
+            "work/evidence/T84/verification.json",
+            "work/evidence/T84/summary.md",
+            "work/evidence/T84/status-projection-delta.json"
+          ]
+        },
+        "result": "Current supported function-card scope passed. No misleading function, side, branch, hand-foot identity, or unsupported clip behavior was found; no data/code correction was required. Content completeness remains partial."
       },
       "report": "work/reports/T84.md",
       "acceptanceScope": "current_supported_local_product; not all_target_content_or_public_release",
@@ -1876,7 +1943,64 @@
         ],
         "contentGapPolicy": "retain_all_denominators_and_unresolved_evidence; only_real_product_blockers_prevent_scoped_acceptance"
       },
-      "promptFile": "work/prompts/app-completion-2026-10-01/07-T84.txt"
+      "promptFile": "work/prompts/app-completion-2026-10-01/07-T84.txt",
+      "productReadiness": "local_app_ready",
+      "contentCompleteness": "partial",
+      "knownContentGaps": {
+        "denominators": {
+          "targets": 542,
+          "memberships": 563,
+          "regions": 12,
+          "existingCanonicalHaBindings": 130,
+          "historical163": {
+            "total": 163,
+            "categories": {
+              "6": 6,
+              "20": 20,
+              "135": 135,
+              "2": 2
+            }
+          }
+        },
+        "supportedMuscleFunction": {
+          "sourceConcepts": 232,
+          "sourceSurfaces": 462,
+          "conceptsWithExactVerifiedText": 5,
+          "surfacesWithExactVerifiedText": 10,
+          "conceptsWithoutExactVerifiedText": 227,
+          "existingT21Claims": 6,
+          "wholeGastrocnemiusClaimWithoutExactHeadScope": [
+            "HA-M-000001"
+          ]
+        },
+        "motion": {
+          "playableClips": 0,
+          "rightTibialisCandidate": "text_only; filtered to right selection; not playable",
+          "unsupportedFaceEyeTongueSphincterClaims": "unavailable; no inferred joint rotation or animation"
+        },
+        "workbookCandidates": {
+          "rows": 257,
+          "learnerClaimsAdopted": 0,
+          "directCitationGap": "retained separately"
+        },
+        "rightsAndReview": {
+          "sourceOnly": "preserved per item",
+          "publicRedistribution": "held",
+          "humanReview": "not_performed"
+        }
+      },
+      "unresolvedProductBlockers": [],
+      "evidence": [
+        "work/reports/T84.md",
+        "work/evidence/T84/meaning-scope-audit.json",
+        "work/evidence/T84/browser-observations.json",
+        "work/evidence/T84/verification.json",
+        "work/evidence/T84/summary.md",
+        "work/evidence/T84/status-projection-delta.json"
+      ],
+      "nextId": "T61",
+      "nextOwner": "Sol High",
+      "nextPromptPath": "work/prompts/app-completion-2026-10-01/08-T61.txt"
     },
     "T61": {
       "title": "신경 지원 범위·자료 inventory·공통 계약",
@@ -2929,7 +3053,7 @@
   "productReadiness": {
     "state": "local_app_ready",
     "contractRevision": "app-completion-2026-10-01",
-    "next": "T83_pending",
+    "next": "T61_pending",
     "localAppAcceptance": "passed_current_supported_local_learning_scope",
     "contentCompleteness": "partial",
     "denominators": {
@@ -2950,7 +3074,9 @@
       "T80",
       "T58",
       "T81",
-      "T82"
+      "T82",
+      "T83",
+      "T84"
     ],
     "evidence": [
       "work/reports/T100.md",
@@ -2960,7 +3086,11 @@
       "work/reports/T81.md",
       "work/reports/T82.md",
       "work/evidence/T82/verification.json",
-      "work/evidence/T82/bundle-audit.json"
+      "work/evidence/T82/bundle-audit.json",
+      "work/reports/T83.md",
+      "work/evidence/T83/verification.json",
+      "work/reports/T84.md",
+      "work/evidence/T84/verification.json"
     ]
   }
 }
