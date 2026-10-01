@@ -3,6 +3,7 @@ import { displayTerms, termText, type PilotCatalog } from "./catalog";
 import { learnerNameProjection, learnerSearchEntry, learnerVisibleTerms, mergeLearningConcepts, searchEntries, type SearchEntry } from "../domain/search";
 import type { LearnerFieldProjection } from "../domain/aiEvidence";
 import { learnerStructureUnavailability } from "../domain/learnerStructureSourceContent";
+import { learnerActionAppliesToSide } from "../domain/learnerActionText";
 
 type LearnerCardRuntime = {
   schemaVersion: "learner-card-runtime-v1";
@@ -11,7 +12,7 @@ type LearnerCardRuntime = {
     byConcept: Record<string, Partial<Record<"origin" | "insertion", string>>>;
     bySource: Record<string, Partial<Record<"origin" | "insertion", string>>>;
   };
-  actions: Array<{ conceptId: string; key: string; label: string; explanation: string; candidateSide: string | null }>;
+  actions: Array<{ conceptId: string; key: string; label: string; explanation: string; sideApplicability: "left" | "right" | null }>;
 };
 
 const cardRuntime = learnerCardRuntime as LearnerCardRuntime;
@@ -43,12 +44,13 @@ export function findMuscles(catalog: PilotCatalog, query: string) {
 }
 
 /** Learner-only action text is preprojected; source/evidence references stay out of this bundle. */
-export function motionActionOptionsForLearner(conceptId: string) {
-  return cardRuntime.actions.filter((row) => row.conceptId === conceptId).map((row) => ({
+export function motionActionOptionsForLearner(conceptId: string, selectedSide?: string | null) {
+  return cardRuntime.actions.filter((row) => row.conceptId === conceptId
+    && learnerActionAppliesToSide(row.sideApplicability, selectedSide)).map((row) => ({
     id: row.key,
     label: row.label,
     text: { label: row.label, explanation: row.explanation },
-    candidateSide: row.candidateSide,
+    sideApplicability: row.sideApplicability,
   }));
 }
 

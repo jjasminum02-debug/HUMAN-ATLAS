@@ -1753,13 +1753,90 @@
       "title": "지원 근육 한글 기능 설명 연결",
       "owner": "Luna Max",
       "phase": "G2",
-      "executionStatus": "planned_not_started",
-      "acceptance": "pending",
+      "executionStatus": "completed",
+      "acceptance": "passed",
       "spec": "work/tasks/T83-APP-COMPLETION.md",
       "scope": "현재 지원 근육 전체에 검증된 한글 기능 설명을 연결한다. 기존 workbook staging/claim을 재사용하고 한자 정규화뿐 아니라 작용/움직이는 구조/고정 조건/갈래 의미를 대조한다. 표정근은 텍스트를 제공하고 애니메이션 미지원은 유지한다. 확인되지 않은 세부 작용은 unsupported로 분리하되 미지원 clip 때문에 텍스트를 막지 않는다. 전체 변이/모든 clip 연구는 이번 기능 종료 조건이 아니다.",
       "progress": {
         "nextUnit": null,
-        "completedUnits": []
+        "completedUnits": [
+          "audit-all-232-supported-muscle-concepts-and-462-surfaces-with-adopted-or-unavailable-action-disposition",
+          "normalize-53-Hanja-action-cells-as-private-Hangul-candidates-without-promoting-unverified-workbook-claims",
+          "preserve-542-target-563-membership-12-region-130-HA-and-historical-163-denominators",
+          "project-action-side-applicability-independently-from-playable-clip-readiness",
+          "verify-right-only-tibialis-action-filtering-and-face-eye-tongue-sphincter-unavailability-in-live-browser",
+          "run-focused-regressions-learning-content-provenance-motion-runtime-typecheck-build-and-bundle-audit"
+        ],
+        "pendingUnits": [],
+        "productAcceptance": {
+          "contractRevision": "app-completion-2026-10-01",
+          "acceptanceScope": "current_supported_local_product; not all_target_content_or_public_release",
+          "productReadiness": "local_app_ready",
+          "contentCompleteness": "partial",
+          "knownContentGaps": {
+            "denominators": {
+              "targets": 542,
+              "memberships": 563,
+              "regions": 12,
+              "existingCanonicalHaBindings": 130,
+              "historical163": {
+                "total": 163,
+                "categories": {
+                  "6": 6,
+                  "20": 20,
+                  "135": 135,
+                  "2": 2
+                }
+              }
+            },
+            "supportedMuscleFunction": {
+              "sourceConcepts": 232,
+              "sourceSurfaces": 462,
+              "conceptsWithExactVerifiedText": 5,
+              "surfacesWithExactVerifiedText": 10,
+              "conceptsWithoutExactVerifiedText": 227,
+              "existingT21Claims": 6,
+              "T21ClaimWithoutExactCurrentSurfaceScope": [
+                "HA-M-000001"
+              ]
+            },
+            "workbookCandidates": {
+              "rows": 257,
+              "HanjaActionCellsNormalizedPrivately": 53,
+              "exactSupportedConceptCandidatesUnverified": 10,
+              "candidateRowsOutsideExactSupportedSet": 43,
+              "learnerClaimsAdopted": 0
+            },
+            "motion": {
+              "playableClips": 0,
+              "T24RightAnkleTextCandidate": "text_only_not_playable"
+            },
+            "rightsAndReview": {
+              "sourceOnly": "preserved per item",
+              "publicRedistribution": "held",
+              "humanReview": "not_performed"
+            }
+          },
+          "unresolvedProductBlockers": [],
+          "evidence": [
+            "work/reports/T83.md",
+            "work/evidence/T83/verification.json",
+            "work/evidence/T83/browser-observations.json",
+            "work/evidence/T83/function-card-coverage.json",
+            "work/evidence/T83/workbook-action-normalization-audit.json",
+            "work/evidence/T83/status-projection-delta.json"
+          ]
+        },
+        "nextId": "T84",
+        "nextOwner": "Luna Max",
+        "nextPromptPath": "work/prompts/app-completion-2026-10-01/07-T84.txt",
+        "evidence": [
+          "work/reports/T83.md",
+          "work/evidence/T83/verification.json",
+          "work/evidence/T83/browser-observations.json",
+          "work/evidence/T83/status-projection-delta.json"
+        ],
+        "result": "Current supported local function-card contract passes. Function evidence remains partial; unverified workbook candidates, the unmapped gastrocnemius whole claim, absent clips, human review, and public redistribution remain explicit gaps."
       },
       "report": "work/reports/T83.md",
       "acceptanceScope": "current_supported_local_product; not all_target_content_or_public_release",

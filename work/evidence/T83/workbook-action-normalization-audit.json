@@ -1,0 +1,906 @@
+{
+  "schemaVersion": "t83-workbook-action-normalization-audit-v1",
+  "input": {
+    "privateWorkbookSha256": "8e10e00e76f5da8e6d1be6a0f9dcab6039d9a3f81d8a3808c0fe28545802ab3c",
+    "t81RowDispositionPath": "work/evidence/T81/workbook-row-dispositions.json",
+    "t81RowDispositionSha256": "a71f61064cd2ef7f0b8f5d6cc68510023f01d3612a024eb620797634eaac3540",
+    "rawWorkbookTrackedOrCopied": false
+  },
+  "counts": {
+    "workbookRows": 257,
+    "actionCellsWithHanja": 53,
+    "normalizedToHangul": 53,
+    "exactSupportedConceptCandidatesStillUnverified": 10,
+    "candidateRowsOutsideExactSupportedSet": 43,
+    "learnerClaimsAdopted": 0,
+    "candidateCellsAddedToLearnerRuntime": 0
+  },
+  "termReplacements": [
+    {
+      "sourceHanja": "擧上",
+      "koreanGloss": "들어올림",
+      "occurrences": 10
+    },
+    {
+      "sourceHanja": "後引",
+      "koreanGloss": "뒤로 당김",
+      "occurrences": 3
+    },
+    {
+      "sourceHanja": "前引",
+      "koreanGloss": "앞으로 당김",
+      "occurrences": 4
+    },
+    {
+      "sourceHanja": "閉鎖",
+      "koreanGloss": "닫힘",
+      "occurrences": 2
+    },
+    {
+      "sourceHanja": "下降",
+      "koreanGloss": "내림",
+      "occurrences": 11
+    },
+    {
+      "sourceHanja": "狹窄",
+      "koreanGloss": "좁아짐",
+      "occurrences": 1
+    },
+    {
+      "sourceHanja": "擴張",
+      "koreanGloss": "넓어짐",
+      "occurrences": 1
+    },
+    {
+      "sourceHanja": "壓迫",
+      "koreanGloss": "눌림",
+      "occurrences": 1
+    },
+    {
+      "sourceHanja": "外轉",
+      "koreanGloss": "바깥쪽 움직임",
+      "occurrences": 1
+    },
+    {
+      "sourceHanja": "內轉",
+      "koreanGloss": "안쪽 움직임",
+      "occurrences": 1
+    },
+    {
+      "sourceHanja": "上轉",
+      "koreanGloss": "위쪽 움직임",
+      "occurrences": 1
+    },
+    {
+      "sourceHanja": "內回旋",
+      "koreanGloss": "안쪽 회선",
+      "occurrences": 2
+    },
+    {
+      "sourceHanja": "下轉",
+      "koreanGloss": "아래쪽 움직임",
+      "occurrences": 1
+    },
+    {
+      "sourceHanja": "外回旋",
+      "koreanGloss": "바깥쪽 회선",
+      "occurrences": 2
+    },
+    {
+      "sourceHanja": "後退",
+      "koreanGloss": "뒤로 물러남",
+      "occurrences": 1
+    },
+    {
+      "sourceHanja": "回內",
+      "koreanGloss": "회내",
+      "occurrences": 2
+    },
+    {
+      "sourceHanja": "回外",
+      "koreanGloss": "회외",
+      "occurrences": 1
+    },
+    {
+      "sourceHanja": "對立",
+      "koreanGloss": "맞섬",
+      "occurrences": 2
+    },
+    {
+      "sourceHanja": "背屈",
+      "koreanGloss": "등쪽굽힘",
+      "occurrences": 1
+    },
+    {
+      "sourceHanja": "內翻",
+      "koreanGloss": "안쪽번짐",
+      "occurrences": 1
+    },
+    {
+      "sourceHanja": "外翻",
+      "koreanGloss": "가쪽번짐",
+      "occurrences": 1
+    },
+    {
+      "sourceHanja": "跖屈",
+      "koreanGloss": "발바닥굽힘",
+      "occurrences": 6
+    }
+  ],
+  "policy": {
+    "meaningAndPunctuationOutsideHanjaParentheticalsPreserved": true,
+    "candidateTranslationsRemainPrivate": true,
+    "noDirectRowSourceCitation": true,
+    "noIndependentAnatomyVerification": true,
+    "noLearnerClaimAdoption": true,
+    "faceEyeTongueSphincterActionsMappedToJointRotation": false
+  },
+  "rows": [
+    {
+      "sheet": "근육표",
+      "row": 6,
+      "sourceRowSha256": "7c589791b74845bbd1aa7764f423bfc2ddbdf35b98c7d04458f1933800996249",
+      "originalCellSha256": "71fb5cfba24ac888991645faa3be63f521bc52a3aed34d61668c082a428fdffa",
+      "normalizedCellSha256": "a1e2decf62edd0b745b29627958c64a617bd097ed5cb32284a17a417d0da7797",
+      "normalizationTerms": [
+        "擧上"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 7,
+      "sourceRowSha256": "c63a7da1fe11c7f9554ef34147dce880875738d62e03cda6807e91140606c617",
+      "originalCellSha256": "ac819e63a190e6259460700a83ca01b03356d69a229f6e6dc69d90ecb55ec742",
+      "normalizedCellSha256": "197e8a9a81d7b160a2e788baeba18229769d3d28127775a3c881ae3429353f49",
+      "normalizationTerms": [
+        "後引"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 9,
+      "sourceRowSha256": "5d666b22827f59f36475751064859b180fc165ac1a47a85b82bfe25619034180",
+      "originalCellSha256": "2e4ae9ade2909df47270fcd52b66bb767a2be0fbfb50ab0cef80a10c2e7d632e",
+      "normalizedCellSha256": "908f6b7e4ed049be4d146b620ac3dea4043a849ac17cbd71ad39b1f4a4e0970c",
+      "normalizationTerms": [
+        "前引"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 10,
+      "sourceRowSha256": "4605ca8b10836b7616fb1c8655b8fb324f8c832023132aee9cc179002a3f3359",
+      "originalCellSha256": "95f9e17bafb1648d72398cb9098fbf319fef5550edc92c6f26b0649594bd10b9",
+      "normalizedCellSha256": "2da90e1093038c02cbf261617032c2d41634deadaf4d7d6c9d870a2ce2c06c9a",
+      "normalizationTerms": [
+        "擧上"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 11,
+      "sourceRowSha256": "9787318342c7a3108e1703bca608adafc8bf6dcb1980b22fb54cf1bda528a3dc",
+      "originalCellSha256": "7c914b764ec6417de33d6d86a15285f8eefb7aebb35b30711dab7f3798d2799d",
+      "normalizedCellSha256": "c07ebc82bceb7564db483925394215802954980fd360378bc895280602a4db7e",
+      "normalizationTerms": [
+        "後引"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 12,
+      "sourceRowSha256": "652edda019807a2c6a6a92da5973dd262c9a543bda65f9d2ad5e6d710c8b3da0",
+      "originalCellSha256": "a8e76684566dcaa6fde45d5cdc8fde642382cf39f1eefcccdbbc65643c7ec352",
+      "normalizedCellSha256": "89fe2957a294c8686cccf0cb9d7f9ac9cf3aaa4fd8b87b302f7a0f38c06bfe4d",
+      "normalizationTerms": [
+        "閉鎖"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 13,
+      "sourceRowSha256": "6d85e97b1b29b2ed5177655539b47a57606752b641693e1d15e2a252b082bc4e",
+      "originalCellSha256": "b9c1859a696c343aaf166828f1b6bfde64f77f55819446245dbab08006632790",
+      "normalizedCellSha256": "9cd2e5981cabf28ed127c546787a2d2aeeebcc8c19ff07f221daf6e895a3899b",
+      "normalizationTerms": [
+        "下降"
+      ],
+      "candidateSupportedConceptKeys": [
+        "Corrugator supercilii|head"
+      ],
+      "sourceDisposition": "exact_english_and_region_candidate_only_unverified",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 14,
+      "sourceRowSha256": "b95c677c9084ef7f5109aedbe96933a7e352a6ac57d749c55f99b5f27a0a876b",
+      "originalCellSha256": "1195d2a06706eca8c108799c7e6d1a1fa0a17184c39d365e4ae7d790c1b916ed",
+      "normalizedCellSha256": "60ed7755d9648de915cb763dce6ae838849e97d89da5a2f0bff976ef97036205",
+      "normalizationTerms": [
+        "下降"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 15,
+      "sourceRowSha256": "28d03e9c8502edee4be86af53d935fc9799d186111471fb176b7e127e43f141c",
+      "originalCellSha256": "d4e7c62c8ed70a45a349dfdb2aa249e5b648b51d215e3c35187e1f3908897b52",
+      "normalizedCellSha256": "8283e5649b9bad5e8cd8b1e892b6424f161842632c930043f75edf102600a901",
+      "normalizationTerms": [
+        "擧上"
+      ],
+      "candidateSupportedConceptKeys": [
+        "Levator palpebrae superioris|head"
+      ],
+      "sourceDisposition": "exact_english_and_region_candidate_only_unverified",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 16,
+      "sourceRowSha256": "ceff4fe5defe4bcf5f12f6c80fdffe36f027c687941483fef9206fed2fcb9513",
+      "originalCellSha256": "db813d1c380b041e650d907fc944c6a84e5b3683e24a562a3d2b2fd2c761ed0c",
+      "normalizedCellSha256": "40ae6651e327db0fb875d4f9240eb7046b98f00854dbbdf2da201285e7923abd",
+      "normalizationTerms": [
+        "狹窄"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 17,
+      "sourceRowSha256": "ee9a27914f3102cfe2cf7975fb5ec64c476c2282db6dc151bfb368433f40f234",
+      "originalCellSha256": "a16a67c9c459eab36d10fb5d069ea9812a20779740ba85287df391243daa8bce",
+      "normalizedCellSha256": "c0d3a9235b38d16abee595ebdb2ffefba963e4f87e84a15f53bbec47a44cccf9",
+      "normalizationTerms": [
+        "擴張"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 18,
+      "sourceRowSha256": "649a5bc5e9b32ec1d844c5157caeb46b1a6e798eddefeb41763a8ccad3c3ee80",
+      "originalCellSha256": "1c9a4cb360cb32bc55c1477fb056e7ee026ea24a993ab5edecf43b48ca4e357e",
+      "normalizedCellSha256": "41648ed31a2d434fc7e4baf9ab0777601cd85ea9f432eb67ba4251d292cdb32d",
+      "normalizationTerms": [
+        "下降"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 19,
+      "sourceRowSha256": "e06027e02920d60f48f2ebbf38191c6acedf11d1472f70f005be24999b5ece20",
+      "originalCellSha256": "90c8c4ae09351bb708fc3c14a5a440354d9dea237325b536e9903818b83316b8",
+      "normalizedCellSha256": "c80a1b5897faae1037abdeecf42034f0a9d58b09031c6fcf552ceacf700ab6d0",
+      "normalizationTerms": [
+        "下降"
+      ],
+      "candidateSupportedConceptKeys": [
+        "Depressor septi nasi|head"
+      ],
+      "sourceDisposition": "exact_english_and_region_candidate_only_unverified",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 20,
+      "sourceRowSha256": "3accf2ea07746451d5dc748a18562bf0814ab0d9419dd2e75af961a280197bbb",
+      "originalCellSha256": "707dd68537c34edf16a39fdbc251230e1331b201eb79939643200d663390b9d0",
+      "normalizedCellSha256": "f5b8b7bfdd24422d3f1b2c0456df2d4730de31a8832d2bb9791c788e6c6c3970",
+      "normalizationTerms": [
+        "擧上"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 21,
+      "sourceRowSha256": "9f8cecef69312477ba8cb623b8d7503854a7921d37eeca4acea03e9b739a6eaa",
+      "originalCellSha256": "93a44efbf09fa4c1064a8a4cfea342bb9923d8e2e465719be38c2e9e7abc6c35",
+      "normalizedCellSha256": "47dc93cda4772b114d80932fd0adc49f767832d528693a9a693ea0506da7b441",
+      "normalizationTerms": [
+        "閉鎖"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 22,
+      "sourceRowSha256": "6598a0b5b62a68ea22e60e825cab39ffd542df5b0f424dbcda1cd6f65960c13a",
+      "originalCellSha256": "72b4ef3b2f57aba7b752a46975fc0b7dc0d753cecfecbf7f291fbf072b800440",
+      "normalizedCellSha256": "138f22a399fdc7ad45b7d829b0fde639b23efdd89d3e746e6b31ba16f357c739",
+      "normalizationTerms": [
+        "壓迫"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 24,
+      "sourceRowSha256": "b7079e9fec936238fd664dbf19aa2c0053a25ae69c7f2069d8dab8a659cec700",
+      "originalCellSha256": "14587451f99151bdf1b6c566571bbef3e56a252186ec8141443ed4426c6847d1",
+      "normalizedCellSha256": "c050f9ee77e2269f733dd075b718866df0a4d8efeca403f79c38fe9864493181",
+      "normalizationTerms": [
+        "擧上"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 25,
+      "sourceRowSha256": "6ef0e09bbbc469d4013a4002c12e23154317f06700c653ac25a3d79919a66d25",
+      "originalCellSha256": "14587451f99151bdf1b6c566571bbef3e56a252186ec8141443ed4426c6847d1",
+      "normalizedCellSha256": "c050f9ee77e2269f733dd075b718866df0a4d8efeca403f79c38fe9864493181",
+      "normalizationTerms": [
+        "擧上"
+      ],
+      "candidateSupportedConceptKeys": [
+        "Levator labii superioris|head"
+      ],
+      "sourceDisposition": "exact_english_and_region_candidate_only_unverified",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 26,
+      "sourceRowSha256": "b637ab6cbbe8059520c2423c98be503b07d6a305769f19c6f5aae7845b85f3fc",
+      "originalCellSha256": "d07026ce70db8a794658466dddbfaab3eec3cb5a6b08a46ddc2f923acebedada",
+      "normalizedCellSha256": "7c3f141e7ebaec3529483b4c80e6a6f4ae629603bbda6fcddb6fd8d9f3451ba4",
+      "normalizationTerms": [
+        "擧上"
+      ],
+      "candidateSupportedConceptKeys": [
+        "Levator anguli oris|head"
+      ],
+      "sourceDisposition": "exact_english_and_region_candidate_only_unverified",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 28,
+      "sourceRowSha256": "863dea5979da68fb480492c7a1a2c945d03090b6a1bb5ee21610cd30eca341b5",
+      "originalCellSha256": "acfdf4a72ac6774efbd65fb379ceae4369334b24cb0b6fdcd22909d2b9ed3c13",
+      "normalizedCellSha256": "6f5e09b16110c691f68f3c4b794a7215402b5c9fd4f4294313270b3854eda0bf",
+      "normalizationTerms": [
+        "下降"
+      ],
+      "candidateSupportedConceptKeys": [
+        "Depressor anguli oris|head"
+      ],
+      "sourceDisposition": "exact_english_and_region_candidate_only_unverified",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 31,
+      "sourceRowSha256": "17d1ccc5fff0255ad6267194431d5901a6cf52c3e760d0be422271d8ccec1488",
+      "originalCellSha256": "8ae11190a11b6e0c92082a41158671fcf5b070776add582bd6712f375ae7d9f3",
+      "normalizedCellSha256": "82a83f57065c2fd7677fbeb6157f57dd734234acbfc0bb162f8165edc86e6175",
+      "normalizationTerms": [
+        "前引"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 33,
+      "sourceRowSha256": "2dc985615025eaf921ffa7591d7a6cd961114003ef7e8dc05b038f5fbac63b6f",
+      "originalCellSha256": "987d299ab29c644f4ce0d17630c9a158f10eae9c5674037f9a95ddb51e003f34",
+      "normalizedCellSha256": "93a0b15042a4a591dff487cc90c2a7360e99c671aa829350b026ed5b93aec7e7",
+      "normalizationTerms": [
+        "外轉"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 34,
+      "sourceRowSha256": "d0de79074a29b4989f23129d10fce3b8e6b3a5bb6c0e2480ded38a1140b01b37",
+      "originalCellSha256": "821f7a3f7254e85e4a2bcd8a50bf5c8830d8a24e9d611a7ca5f0e72847be19fe",
+      "normalizedCellSha256": "786d1a9ceff6c900490e8087df005e3c60e1a918f4dd214305be387bb94fd4b7",
+      "normalizationTerms": [
+        "內轉"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 35,
+      "sourceRowSha256": "db77cc63bc7e599068803f51509456c9986f60211258217c55d804744a02dd83",
+      "originalCellSha256": "cf2f785ec4ebed54914d4ef12c6635f363487a2ac86eb4a76349272ef60691db",
+      "normalizedCellSha256": "8e75c04cec5ea64f659a9fd41e2515c5d8f7d3759a628f1124c1c309dc405e5f",
+      "normalizationTerms": [
+        "上轉",
+        "內回旋"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 36,
+      "sourceRowSha256": "dfd87dd73b2dc90e5bbd29733a7bee37dd795cd9dbc1a04a3d214eaecc2c2d84",
+      "originalCellSha256": "030f3b640dc46c2a13cc352761c3857973c1c90e4dde60b3c994c0bd7d3c380c",
+      "normalizedCellSha256": "e5f4085f9469fc18d6239088e29b0880c9b30188d26ef611f424a6d627642b9e",
+      "normalizationTerms": [
+        "下轉",
+        "外回旋"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 37,
+      "sourceRowSha256": "6a3dba6795c79dac8b2bd5f1be988a9ae844b108b5655977e2ec2b99f1e2b9de",
+      "originalCellSha256": "aff89975a96cc668645d84988c3c9f3ef415ff034d2ec8c12050c316d9030b70",
+      "normalizedCellSha256": "d38ceef752e88a681575e0cfcfdc0078767e17b73c271bb82d26cb74c312ad55",
+      "normalizationTerms": [
+        "內回旋"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 38,
+      "sourceRowSha256": "453b905a8c805c71de26ba7c017ca577b09dea574c075759bab1d32c757de209",
+      "originalCellSha256": "98bc8738288d0499b829e5856c2ca780a39c990f21fea13f85ef853ba2325eb7",
+      "normalizedCellSha256": "32cd71512b40704c0e37aaf72cb1b18241d101f5265f7f98d763b721744097ee",
+      "normalizationTerms": [
+        "外回旋"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 39,
+      "sourceRowSha256": "184949a985e479459e54cbc4e5a4283d98787793c7e97d81c38d9c0eea632e84",
+      "originalCellSha256": "fc97097c37a371479da59ed0571054a2eecafe5faa074bf66f91127ff3c669e4",
+      "normalizedCellSha256": "d66805b5e308ca5fa3cd2e90e50c573ce9530203c312e00f6f21e26d5e14875f",
+      "normalizationTerms": [
+        "擧上"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 40,
+      "sourceRowSha256": "de8311fa160b152f3905db99e5b4778d9001ebe3e5f71ab0bf661643fbb04b17",
+      "originalCellSha256": "b50ff0b8ff4471c7c107c93a3559fd29ce9f07d36a7cbabed90f4ad31d7bed74",
+      "normalizedCellSha256": "7af932cd007797e50f86a813f46b59a857c57fcb2cf31040e90dd9eadb15672a",
+      "normalizationTerms": [
+        "後退"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 50,
+      "sourceRowSha256": "9da10b432dc88f98f5b3ac6ba24e637c252b95fec4c26002b2f5a09d75bf585e",
+      "originalCellSha256": "2ef9b132fae5dc7311f4a804edf5768a9d383603ad9d9777a58c84e18dec003f",
+      "normalizedCellSha256": "5b575dde836238ae1cbbf2c9349295466f9993514cc230c59e05d1d5b4f3e4e9",
+      "normalizationTerms": [
+        "下降"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 100,
+      "sourceRowSha256": "654f9e32b231bd5cd9642d829364aaf27bbafb2ded837c463f159696dd7dc89f",
+      "originalCellSha256": "c3d8e4f60b36b688ebc638b06e00cce77728382c735602b5cd4fd90ac1239662",
+      "normalizedCellSha256": "e4d74387f752bc78b8536f851e17bd2a70874bdeef1456f0c9a2605ec2ab8732",
+      "normalizationTerms": [
+        "擧上"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 101,
+      "sourceRowSha256": "985948a3ebfa106ab1305d4d96b4df2fe76511f3ecc462e7594b5fb4a9ce5e39",
+      "originalCellSha256": "0d7b128c4eba56c57d041fbad773e81409a90831fe9ffe53b7b98c67f2265524",
+      "normalizedCellSha256": "cf09fc6c75749090072ee2de42481e04515bf4d9db780d6ce08c0db0078049d0",
+      "normalizationTerms": [
+        "下降"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 102,
+      "sourceRowSha256": "821cf9d15c42e0649e6ca24cf0a8d01082fda8ee5153194422f13f2c2eba327f",
+      "originalCellSha256": "91f085a8c98105e5724fe615edfce65a37c7086e82e30bd98c4034f3a452146d",
+      "normalizedCellSha256": "6b129e1913fe938b8a38fa53e22a5d371bfe0cfa8c14684d576bbaf567c4c66a",
+      "normalizationTerms": [
+        "下降"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 103,
+      "sourceRowSha256": "83a997aa8a88fb54ebd3b7df888a35bb0f07576e98da3f86951f1ce4f80e25b8",
+      "originalCellSha256": "91f085a8c98105e5724fe615edfce65a37c7086e82e30bd98c4034f3a452146d",
+      "normalizedCellSha256": "6b129e1913fe938b8a38fa53e22a5d371bfe0cfa8c14684d576bbaf567c4c66a",
+      "normalizationTerms": [
+        "下降"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 104,
+      "sourceRowSha256": "26dc0e5c3d68d7b8235eb21868b1d526c8bafd834d59b5ebfe0b804a22824a2c",
+      "originalCellSha256": "d4d74dfd01211cc1e024523c9066a1fcaec081d0b15cd34edc77103f3f380cca",
+      "normalizedCellSha256": "c1cb60201dc50798b174966ba6b892e7b58ba94e65693586cf7b62132b226b71",
+      "normalizationTerms": [
+        "下降"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 109,
+      "sourceRowSha256": "552ebb4ac638fbf70af04ced26b00aa3e8fa93343276d41fb5eb501615d786c5",
+      "originalCellSha256": "54b20b7357e1eb66dd37fa8e204b0ddca1a18846835022fb7c8a3d1d5dde2ae5",
+      "normalizedCellSha256": "af147457b8c9b5d3b52fedf2d626cf6607bb31502be742735f68056987d5d5fe",
+      "normalizationTerms": [
+        "下降"
+      ],
+      "candidateSupportedConceptKeys": [
+        "Diaphragm|thorax"
+      ],
+      "sourceDisposition": "exact_english_and_region_candidate_only_unverified",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 115,
+      "sourceRowSha256": "c6adc4378d236cd70be8d867a6ce5e7d065da341cc64be0c288fbd805a187a4d",
+      "originalCellSha256": "78207f0e5985c1e2295af3242bdb4900452696eb8c89159b456912212f0c62e3",
+      "normalizedCellSha256": "44b432ca9c9074231e02c3019d982a1e62754dc2fab79c86ad901856c75e820d",
+      "normalizationTerms": [
+        "擧上"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 120,
+      "sourceRowSha256": "13b925bfcb1f411cdd526b41681a2d484e4c726d5101f57d1bba945444d54def",
+      "originalCellSha256": "dfe0e1f965b3b9f4be90ca0a669bdffa0abe41137b47d380c6ea9633543d0ebc",
+      "normalizedCellSha256": "55c5e08427ebfca9fbcd2b82b431aeaa75418fa955d3cb27a820fcd285d33d58",
+      "normalizationTerms": [
+        "前引"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 133,
+      "sourceRowSha256": "59016900249f9652b88e7d61f00c5548cde34e22da807506a16543abe7e3c600",
+      "originalCellSha256": "61281d6669334816458ff804ac6f5cdf54a160cc81bcbe31ae16e5b8e0582157",
+      "normalizedCellSha256": "c2d628f57196f1bf140024f8ba8a65e4aed819dceaf49249bdcb366cb6cdf022",
+      "normalizationTerms": [
+        "後引"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 138,
+      "sourceRowSha256": "a4ebbdae981834e913f72c5eded6caac213f9009e8b3c35bd42b68153d433081",
+      "originalCellSha256": "2f2c104c3e54b08b00d5bb55f00b96bcf1b8f90ad4330d48594cd89f69e42f0f",
+      "normalizedCellSha256": "8d055c2579fa7a1097a10b5eeac067291c6903c9a3b96dd25cb7574fba88178a",
+      "normalizationTerms": [
+        "前引"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 160,
+      "sourceRowSha256": "f91557ef4059902be97af3efae0f4d56ba669f122eb87cd2c1ca074f0333d591",
+      "originalCellSha256": "951738e98717f25d3419d3dab6f8a43b96c432b32da0b6b66d3c134ef2d0168a",
+      "normalizedCellSha256": "a40c4db2fcdad45f0b5fb812a804a6116ee4dee47871682e0409b09fa68fb0e7",
+      "normalizationTerms": [
+        "回內"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 168,
+      "sourceRowSha256": "50731d16463b40a46efd8ff983c0fa6dda00a4ac7a392f8e24d9d5e13ab14490",
+      "originalCellSha256": "b4e2dd4b0695cc5082b3ede5a0b93f45c61b26c623f2d2b5833be48d48993440",
+      "normalizedCellSha256": "3169cdbf6227a9f1881559a49bb50657082470d23d65efd9c8df14a08a07db78",
+      "normalizationTerms": [
+        "回內"
+      ],
+      "candidateSupportedConceptKeys": [
+        "Pronator quadratus|upper-limb"
+      ],
+      "sourceDisposition": "exact_english_and_region_candidate_only_unverified",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 175,
+      "sourceRowSha256": "70199fd9579055c5c8d373cd00912208688b99d691d54cd9b0b01194b85d4f7d",
+      "originalCellSha256": "f626d5ca2f943ce525fc44159d80e8c14a8468a3b5a8f3d14c8da0b4e99fbd3e",
+      "normalizedCellSha256": "1126b11e1034fd2aa0ecc5a2822b86a9100544d9d7cb2e82ef24a3ed1791c79e",
+      "normalizationTerms": [
+        "回外"
+      ],
+      "candidateSupportedConceptKeys": [
+        "Supinator|upper-limb"
+      ],
+      "sourceDisposition": "exact_english_and_region_candidate_only_unverified",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 183,
+      "sourceRowSha256": "39427d2832b49dd55b746960741ca5bdbf2dfb7650d7d62c162d6cd60eeb9f97",
+      "originalCellSha256": "4c2109422cc250e0c529db343bea683fc4bf794d868c6dea5730c5bbf4a5de33",
+      "normalizedCellSha256": "4d4d8ab2bb09969970883cf53a51f4e9e87ebdd3d2cf34426ac35ea0eaa8f257",
+      "normalizationTerms": [
+        "對立"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 188,
+      "sourceRowSha256": "14c5475ff32aa5aa0bff3e31dcf8c2ea3f057123fbb8ee46f33132addc3a0ff6",
+      "originalCellSha256": "8081c2ba9d8ad860a2063fb99efee32db5c60b43b7d19b88d5b11d709c555ae8",
+      "normalizedCellSha256": "47efdd44295301cbc0ea4a0627d6203a5fa0d56c2dbd81c11ab1c3a6ab5f166a",
+      "normalizationTerms": [
+        "對立"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 229,
+      "sourceRowSha256": "149e719ae38063f686c88dd3d8a20d15b580c2f1217103e8d303accfa7e2b8b1",
+      "originalCellSha256": "723a00ad9d550699e3e34f9d7b8b4ba71caf269ff0fa71b781dcb0fa9b26153e",
+      "normalizedCellSha256": "6ebe7343dc24a2e0b88e758d8bfecbb660010ff12011ff57da4d91711d8879b9",
+      "normalizationTerms": [
+        "背屈",
+        "內翻"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 230,
+      "sourceRowSha256": "f805884e5701871a048516a96dbce6434171b9ed3be674b40430ccd036962fdf",
+      "originalCellSha256": "ff04a787cbf8b8bd9ae9f44f3e7226b122542c043f749bfd601a42e51bcc2266",
+      "normalizedCellSha256": "7cd973ff4d6de335f538208cb989b9a0844b52d9a0b7733425c182e1d6fc59f1",
+      "normalizationTerms": [
+        "外翻"
+      ],
+      "candidateSupportedConceptKeys": [
+        "Extensor digitorum longus|leg"
+      ],
+      "sourceDisposition": "exact_english_and_region_candidate_only_unverified",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 233,
+      "sourceRowSha256": "e585aeb04f269a98f747e8c9422b3173dd9a16ae5d94c8c8e6f6c0ed38feb875",
+      "originalCellSha256": "5e294c762017f422bf21c022fbfaf29b2f257bdedf10e7d6257a1e00aa6e863e",
+      "normalizedCellSha256": "0e94ce1e24fccaf4d2ecabf73bf1e7232309de3d1fae7bd35517a6f198fc0f6f",
+      "normalizationTerms": [
+        "跖屈"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 234,
+      "sourceRowSha256": "64aa2bcfb651cc3636f308715b35294c343ced3a03929deb4c4bad8ea98a3661",
+      "originalCellSha256": "1e0dd736af65b63265620def299bc433c86bf107f08e00914e4b3da4fcd2fbb3",
+      "normalizedCellSha256": "9ad65b0a00505110ce748877d9f8d5fdb59e15293264fae76e75222df4d3e9ba",
+      "normalizationTerms": [
+        "跖屈"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 235,
+      "sourceRowSha256": "f74eecc27010ebed98e54d8f0f192fc5cd409d1573128062674191be8c263eb2",
+      "originalCellSha256": "bc3749f2d6a00ffb0561e75151d0792f82b9d3a3b5f7bdd512ea221ec740a064",
+      "normalizedCellSha256": "8106afa4261b9c3e44e12d39f3afe9ae9214466c31ff3690f46907d6e58f8d55",
+      "normalizationTerms": [
+        "跖屈"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 236,
+      "sourceRowSha256": "4f8d48a8fa4b7d099394f8a0a26899fb44808a7dd98ad3333d4590c00fa35c5e",
+      "originalCellSha256": "bc3749f2d6a00ffb0561e75151d0792f82b9d3a3b5f7bdd512ea221ec740a064",
+      "normalizedCellSha256": "8106afa4261b9c3e44e12d39f3afe9ae9214466c31ff3690f46907d6e58f8d55",
+      "normalizationTerms": [
+        "跖屈"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 237,
+      "sourceRowSha256": "2695fe2fb596fa347858bd207ed170d9673974cf6594a1b6e99ebcd75b262bcc",
+      "originalCellSha256": "e8711e85d98072cb497e97430a8b02ec277534e8b596774b51a261f05e771052",
+      "normalizedCellSha256": "f97df1d102edd655c1bac35c44ed16da5959b6062b2149193725b8e1ff8baf01",
+      "normalizationTerms": [
+        "跖屈"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    },
+    {
+      "sheet": "근육표",
+      "row": 238,
+      "sourceRowSha256": "475ec8b1375619aab957cc512819393253b6e2955fbf8d756a08803037ec5a5d",
+      "originalCellSha256": "977d6a9c50b5d52ca17d3de5e27882db9effaf5cce84a3f54b8436368fca8adb",
+      "normalizedCellSha256": "6f1d95bc2e6d00223fcbe1d55158c9eb2545494b45d9099467d80a642e93c53a",
+      "normalizationTerms": [
+        "跖屈"
+      ],
+      "candidateSupportedConceptKeys": [],
+      "sourceDisposition": "no_exact_match_in_current_supported_muscles",
+      "learnerClaimEligible": false,
+      "claimAdoption": "not_adopted_no_row_level_source_citation"
+    }
+  ],
+  "privateDerivativePath": "private-sources/t83/action-normalization-candidates.json"
+}

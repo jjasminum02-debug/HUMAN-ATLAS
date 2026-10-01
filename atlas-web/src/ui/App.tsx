@@ -4,6 +4,7 @@ import { validateDataset, type Dataset } from '../viewer/datasets/schema';
 import { validateRuntimeIntegration, searchStructures, readDatasetRoute, datasetRouteQuery, type RuntimeIntegration, type DatasetRoute, type RuntimeStructureRecord } from '../viewer/datasets/integration';
 import { structureTextForLearner, structureTextForSource, structureUnavailabilityForLearner, motionActionOptionsForLearner } from '../data/learning';
 import navigation from '../../../atlas-data/navigation/atlas-navigation.json';
+import { learnerFunctionUnavailableText } from '../domain/learnerActionText';
 import { AtlasLoading } from './AtlasLoading';
 import { anatomicalPartSubtitle } from '../domain/displayNames';
 import './styles.css';
@@ -52,7 +53,7 @@ export default function App() {
         return; const pop = () => { setRoute(resolveRoute(location.search, data.integration.objects)); setQuery(history.state?.atlasSearchQuery ?? ''); setDetailsOpen(true); }; window.addEventListener('popstate', pop); return () => window.removeEventListener('popstate', pop); }, [data]);
     const rows = useMemo(() => data ? searchStructures(data.integration.objects, query, route.regions, route.audience ?? 'learner') : [], [data, query, route.regions, route.audience]);
     const selected = data?.integration.objects.find(r => r.sourceKey === route.selected);
-    const actions = useMemo(() => selected?.haConceptId ? motionActionOptionsForLearner(selected.haConceptId).filter(a => !a.candidateSide || !selected.side || a.candidateSide === selected.side) : [], [selected?.haConceptId, selected?.side]);
+    const actions = useMemo(() => selected?.haConceptId ? motionActionOptionsForLearner(selected.haConceptId, selected.side) : [], [selected?.haConceptId, selected?.side]);
     const action = actions.find(a => a.id === actionId) ?? actions[0];
     const title = route.regions.length ? navigation.categories.filter(c => route.regions.includes(c.id)).map(c => c.labelKo).join(' · ') : '전신 살펴보기';
     function navigate(next: DatasetRoute, keepExplore = false, searchQuery = query) {
@@ -124,7 +125,7 @@ export default function App() {
     <button className="bone-related-muscle" onClick={() => navigate({ ...route, selected: null })}>선택 해제</button><h2>{selected.label}</h2>{anatomicalPartSubtitle(selected.names.en) && <p className="anatomical-part-subtitle">{anatomicalPartSubtitle(selected.names.en)}</p>}<NameRows row={selected}/>
     <div className="names-card"><div><span>{selected.kind === 'bone' ? '뼈' : '근육'}</span><strong>{selected.side === 'left' ? '왼쪽' : selected.side === 'right' ? '오른쪽' : '좌우 구분 없음'}</strong></div></div>
     <div className="part-pills" aria-label="좌우 모형">{data.integration.objects.filter(r => r.routeAudience === (route.audience ?? 'learner') && r.localDisplayEligible && r.inspectionEligible && r.names.en === selected.names.en && r.side).map(r => <button key={r.sourceKey} aria-pressed={r.sourceKey === selected.sourceKey} onClick={() => select(r.sourceKey)}>{r.side === 'left' ? '왼쪽' : '오른쪽'}</button>)}</div>
-    {selected.kind === 'muscle' ? <><div className="movement-cta-block"><button className="movement-cta" disabled aria-describedby="movement-unavailable-note">움직임으로 이해하기</button><p id="movement-unavailable-note" className="quiet-note">움직임 시범 자료는 준비 중입니다.</p></div>
+    {selected.kind === 'muscle' ? <><div className="movement-cta-block"><button className="movement-cta" disabled aria-describedby="movement-unavailable-note">움직임으로 이해하기</button><p id="movement-unavailable-note" className="quiet-note">이 구조의 움직임 시범은 아직 제공되지 않습니다.</p></div>
     <div className="study-tabs" role="tablist" aria-label="학습 내용">{(['구조', '기능'] as const).map(t => <button key={t} role="tab" id={`tab-${t}`} aria-controls="study-tab-panel" aria-selected={tab === t} tabIndex={tab === t ? 0 : -1} onClick={() => setTab(t)} onKeyDown={e => { if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) {
                 e.preventDefault();
                 const next = e.key === 'Home' ? '구조' : e.key === 'End' ? '기능' : tab === '구조' ? '기능' : '구조';
@@ -147,7 +148,7 @@ export default function App() {
         <h3>감각·고유감각</h3>
         <p>{structureUnavailabilityForLearner('sensoryProprioception')}</p>
       </section>
-    </> : action ? <div className="muscle-action-learning"><h3>이 근육이 하는 일</h3><p>{action.text.label}</p><p>{action.text.explanation}</p><fieldset className="learner-action-picker"><legend>작용 선택</legend>{actions.map(a => <button key={a.id} aria-pressed={action.id === a.id} onClick={() => setActionId(a.id)}>{a.label}</button>)}</fieldset></div> : <p className="quiet-note">작용 정보를 준비하고 있습니다.</p>}</section>
+    </> : action ? <div className="muscle-action-learning"><h3>이 근육이 하는 일</h3><p>{action.text.label}</p><p>{action.text.explanation}</p><fieldset className="learner-action-picker"><legend>작용 선택</legend>{actions.map(a => <button key={a.id} aria-pressed={action.id === a.id} onClick={() => setActionId(a.id)}>{a.label}</button>)}</fieldset></div> : <p className="quiet-note">{learnerFunctionUnavailableText()}</p>}</section>
     </> : <section className="attachment-section"><h3>관련 근육</h3>{selected.relatedMuscles?.length ? <ul>{selected.relatedMuscles.map(r => <li key={r.sourceKey}><button className="bone-related-muscle" onClick={() => select(r.sourceKey)}>{r.label}</button><span>{r.roles.map(role => role === 'origin' ? '기시' : role === 'insertion' ? '정지' : '부착').join(' · ')}</span></li>)}</ul> : <p className="quiet-note">주요 표지와 관련 근육 설명을 준비하고 있습니다.</p>}</section>}
    </div></details>}
   </div>

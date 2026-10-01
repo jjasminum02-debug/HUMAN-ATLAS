@@ -42,9 +42,13 @@ test("supported structure cards preserve exact claim text, conflict copy, and fi
 test("action tab receives only learner strings and retains the current no-clip state", () => {
   const rows = runtime.actions.filter((row: { conceptId: string }) => row.conceptId === "HA-M-000003");
   assert.equal(rows.length, 2);
-  assert.ok(rows.every((row: { candidateSide: string | null }) => row.candidateSide === null));
+  assert.equal(rows[0].sideApplicability, null);
+  assert.equal(rows[1].sideApplicability, "right");
   for (const row of rows) {
-    assert.deepEqual(Object.keys(row).sort(), ["candidateSide", "conceptId", "explanation", "key", "label"]);
+    assert.deepEqual(Object.keys(row).sort(), ["conceptId", "explanation", "key", "label", "sideApplicability"]);
     assert.doesNotMatch(JSON.stringify(row), /https?:\/\/|evidence|claim|source|T21-|T18-/i);
+    assert.doesNotMatch(`${row.label} ${row.explanation}`, /\p{Script=Han}/u);
   }
+  assert.match(rows[1].explanation, /오른쪽 발목/);
+  assert.doesNotMatch(rows[1].explanation, /이 시범은/);
 });

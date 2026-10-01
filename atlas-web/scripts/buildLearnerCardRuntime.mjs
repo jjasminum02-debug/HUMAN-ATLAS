@@ -70,7 +70,9 @@ for (const conceptId of actionConceptIds) {
       key: `option-${String(optionIndex++).padStart(3, "0")}`,
       label: option.text.label,
       explanation: learnerActionExplanation(option.text.explanation),
-      candidateSide: option.candidate?.definition.side ?? null,
+      sideApplicability: option.sideApplicability === "left" || option.sideApplicability === "right"
+        ? option.sideApplicability
+        : null,
     });
   }
 }
@@ -131,8 +133,12 @@ function assertSafeProjection(value) {
     if (!/^ZA-[a-z0-9]+-[a-f0-9]{24}$/.test(key) || Object.keys(row).some((field) => !["origin", "insertion"].includes(field))) throw new Error(`Invalid source projection ${key}`);
   }
   for (const row of value.actions) {
-    if (Object.keys(row).sort().join(",") !== "candidateSide,conceptId,explanation,key,label") throw new Error(`Unexpected action projection fields at ${row.key}`);
+    if (Object.keys(row).sort().join(",") !== "conceptId,explanation,key,label,sideApplicability") throw new Error(`Unexpected action projection fields at ${row.key}`);
     if (!/^HA-[A-Z]-\d{6}$/.test(row.conceptId) || !/^option-\d{3}$/.test(row.key)) throw new Error(`Invalid learner action key at ${row.key}`);
+    if (row.sideApplicability !== null && row.sideApplicability !== "left" && row.sideApplicability !== "right") throw new Error(`Invalid action side applicability at ${row.key}`);
+    for (const text of [row.label, row.explanation]) {
+      if (typeof text !== "string" || hasHanScript(text)) throw new Error(`Learner action text must be Hangul/Latin only at ${row.key}`);
+    }
   }
 }
 

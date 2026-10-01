@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "t83-verification-v1",
+  "baselineHead": "49f6174c521264c646169b8d44e4c66b12708b7f",
+  "asOf": "2026-10-01",
+  "status": "passed",
+  "acceptanceScope": "current_supported_local_product; not all target content or public release",
+  "coverage": {
+    "supportedConceptsWithExactVerifiedText": 5,
+    "supportedSurfacesWithExactVerifiedText": 10,
+    "supportedConceptsWithoutExactVerifiedText": 227,
+    "existingCrossCheckedT21Claims": 6,
+    "T21ClaimsNotMappedToExactCurrentSurfaceScope": [
+      "HA-M-000001"
+    ],
+    "gastrocnemiusHeadWholeClaimInheritance": "not_applied_to_two_explicit_part_subjects",
+    "rightOnlyTextCandidates": 1,
+    "playableClips": 0,
+    "learnerActionTextHanjaCount": 0,
+    "newClaims": 0,
+    "newCanonicalBindings": 0,
+    "humanReview": "not_performed",
+    "publicRedistribution": "held",
+    "sourceOnly": true
+  },
+  "denominators": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12,
+    "existingCanonicalHaBindings": 130,
+    "historical163": {
+      "total": 163,
+      "categories": {
+        "6": 6,
+        "20": 20,
+        "135": 135,
+        "2": 2
+      }
+    },
+    "supportedMuscleConcepts": 232,
+    "supportedMuscleSurfaces": 462
+  },
+  "workbookNormalization": {
+    "workbookRows": 257,
+    "actionCellsWithHanja": 53,
+    "normalizedToHangul": 53,
+    "exactSupportedConceptCandidatesStillUnverified": 10,
+    "candidateRowsOutsideExactSupportedSet": 43,
+    "learnerClaimsAdopted": 0,
+    "candidateCellsAddedToLearnerRuntime": 0
+  },
+  "privacyAndReview": {
+    "privateWorkbookRawBytesTrackedOrCopied": false,
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "newClaims": 0,
+    "newCanonicalBindings": 0,
+    "newPlayableClips": 0
+  },
+  "commands": [
+    {
+      "command": "node --experimental-strip-types --test src/data/learning.test.ts src/data/learnerCardRuntime.test.ts src/domain/motionLearning.test.ts src/domain/aiEvidence.test.ts",
+      "result": "passed; 25 tests, 0 failures"
+    },
+    {
+      "command": "node --experimental-strip-types scripts/buildLearnerCardRuntime.mjs --check",
+      "result": "passed; 8 names rows, 14 source rows, 7 action rows"
+    },
+    {
+      "command": "python3 scripts/validate-learning-content.py",
+      "result": "passed"
+    },
+    {
+      "command": "python3 ../atlas-data/schemas/validate_ai_evidence.py --check",
+      "result": "passed"
+    },
+    {
+      "command": "python3 ../atlas-data/schemas/validate_bone_name_overlay.py --check",
+      "result": "passed"
+    },
+    {
+      "command": "python3 ../atlas-data/schemas/validate_motion_learning.py --check",
+      "result": "passed"
+    },
+    {
+      "command": "python3 ../atlas-data/schemas/validate_motion_asset_sources.py",
+      "result": "passed; source bytes unchanged"
+    },
+    {
+      "command": "python3 ../work/tools/validate_t83_function_content.py --check",
+      "result": "passed"
+    },
+    {
+      "command": "node scripts/check-scene-decoders.mjs",
+      "result": "passed; 11 meshes/712192 bytes and 9 meshes/205392 bytes"
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc -b --pretty false",
+      "result": "passed"
+    },
+    {
+      "command": "node node_modules/vite/bin/vite.js build",
+      "result": "passed; Vite reported the existing >500 kB chunk advisory"
+    },
+    {
+      "command": "node scripts/auditLearnerCardDistribution.mjs --check",
+      "result": "passed; current distribution had no provenance leaks"
+    }
+  ],
+  "browserEvidence": "work/evidence/T83/browser-observations.json",
+  "limitations": [
+    "Only evidence-backed action text is shown; 227 supported concepts remain without exact verified action text.",
+    "The local app has zero playable motion clips; the right ankle candidate remains text-only.",
+    "Private workbook translations are candidate staging only, not learner claims.",
+    "No human review or public redistribution permission is asserted."
+  ],
+  "codeSha256": {
+    "atlas-web/src/domain/learnerActionText.ts": "24543005795571cf904ed76855a0eb3b39ebf3b42d13b07dc51e6594cc684df7",
+    "atlas-web/src/domain/motionLearning.ts": "e9b93f7b01466f4a7e78d76c4374a93e74afaa5c3be925b75021111cbe20642d",
+    "atlas-web/src/data/learning.ts": "15c699e7252ba1e3f4e046152805784f48c759d4b8a138bf6c458f4c0b9825b1",
+    "atlas-web/src/ui/App.tsx": "0ad91644e168e19bb69f2d00f40c6c9f3d205b3cdde1081de7d3ed0f63cfb6f1",
+    "atlas-web/scripts/buildLearnerCardRuntime.mjs": "96a08ff7bcb2f8e2c51e256e081283eb14c71ac68cba06867bbf1bbf90d81e9a",
+    "work/tools/validate_t83_function_content.py": "4ddec531383dd024830c10e734e868b9e66da9c174ae47025f07b3ae7bda316f",
+    "work/tools/normalize_t83_private_action_cells.py": "64a9ef1b6135a68622f11ab96468beda2a4514189c3cb1e50f966c86d09b3442"
+  },
+  "sideApplicabilityRegression": {
+    "rightOnlyActionOnRight": true,
+    "rightOnlyActionOnLeft": false,
+    "rightOnlyActionOnUnknownSide": false,
+    "bilateralActionOnUnknownSide": true,
+    "note": "Unknown side does not inherit a unilateral text option."
+  },
+  "distribution": {
+    "audit": "passed",
+    "provenanceLeaks": 0,
+    "learnerRuntimeRows": {
+      "nameRows": 81,
+      "structureRows": 8,
+      "sourceStructureRows": 14,
+      "actionRows": 7
+    },
+    "viteAdvisory": "one minified app chunk exceeds 500 kB; production build succeeded"
+  },
+  "browserCasesVerified": [
+    "right-only tibialis action filtered by selected side",
+    "face/eye/tongue/sphincter function stays unavailable and motion CTA stays disabled",
+    "bilateral gastrocnemius heads do not inherit the generic whole-muscle action"
+  ]
+}

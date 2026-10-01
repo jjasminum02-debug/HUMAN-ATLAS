@@ -229,6 +229,8 @@ export interface LearnerMotionActionOption {
   label: string;
   text: LearnerActionText;
   subjectIds: string[];
+  /** Text applicability follows the authored action scope, independently of clip readiness. */
+  sideApplicability: Laterality;
   candidate: { definition: MotionDefinition; asset: MotionAsset } | null;
 }
 
@@ -254,6 +256,7 @@ export function projectLearnerMotionActionOptions(
       label: text.label,
       text,
       subjectIds: [...action.subjectIds],
+      sideApplicability: action.sideApplicability,
       candidate: compatible.length === 1 ? compatible[0] : null,
     }];
   });

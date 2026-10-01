@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "t83-execution-projection-delta-v1",
+  "executionSource": "work/EXECUTION.json",
+  "executionSha256": "d12453e6626b564d931d92f7ded77cb2611f9f3e0e3c3f4c51608fd961ed893e",
+  "task": "T83",
+  "taskState": {
+    "contractRevision": "app-completion-2026-10-01",
+    "acceptanceScope": "current_supported_local_product; not all_target_content_or_public_release",
+    "productReadiness": "local_app_ready",
+    "contentCompleteness": "partial",
+    "knownContentGaps": {
+      "denominators": {
+        "targets": 542,
+        "memberships": 563,
+        "regions": 12,
+        "existingCanonicalHaBindings": 130,
+        "historical163": {
+          "total": 163,
+          "categories": {
+            "6": 6,
+            "20": 20,
+            "135": 135,
+            "2": 2
+          }
+        }
+      },
+      "supportedMuscleFunction": {
+        "sourceConcepts": 232,
+        "sourceSurfaces": 462,
+        "conceptsWithExactVerifiedText": 5,
+        "surfacesWithExactVerifiedText": 10,
+        "conceptsWithoutExactVerifiedText": 227,
+        "existingT21Claims": 6,
+        "T21ClaimWithoutExactCurrentSurfaceScope": [
+          "HA-M-000001"
+        ]
+      },
+      "workbookCandidates": {
+        "rows": 257,
+        "HanjaActionCellsNormalizedPrivately": 53,
+        "exactSupportedConceptCandidatesUnverified": 10,
+        "candidateRowsOutsideExactSupportedSet": 43,
+        "learnerClaimsAdopted": 0
+      },
+      "motion": {
+        "playableClips": 0,
+        "T24RightAnkleTextCandidate": "text_only_not_playable"
+      },
+      "rightsAndReview": {
+        "sourceOnly": "preserved per item",
+        "publicRedistribution": "held",
+        "humanReview": "not_performed"
+      }
+    },
+    "unresolvedProductBlockers": [],
+    "evidence": [
+      "work/reports/T83.md",
+      "work/evidence/T83/verification.json",
+      "work/evidence/T83/browser-observations.json",
+      "work/evidence/T83/function-card-coverage.json",
+      "work/evidence/T83/workbook-action-normalization-audit.json",
+      "work/evidence/T83/status-projection-delta.json"
+    ]
+  },
+  "generatedNext": {
+    "path": "work/NEXT.md",
+    "nextId": "T84",
+    "owner": "Luna Max",
+    "promptFile": "work/prompts/app-completion-2026-10-01/07-T84.txt"
+  },
+  "statusProjection": {
+    "path": "work/STATUS.md",
+    "generatedBlock": "<!-- BEGIN GENERATED EXECUTION -->\n# 현재 실행 — 단일 기준\n\n- SOURCE_OF_TRUTH: work/EXECUTION.json\n- PLAN_REVISION: app-completion-2026-10-01\n- CURRENT_TASK: none recorded as running\n- LAST_OBSERVED_TASK: T83 / accepted\n- LEGACY_T104_OBSERVATION_AT_RESET: 감사 도중 T104 report/browser/performance evidence와 로컬커밋67d8b79가 확인됨. exact10 source 표면 기술 통합 passed_with_gaps, 전신/새학습binding 완료 아님. 과거 T105 handoff 대신 현재 전신베이스 queue T98 적용.\n- NEXT_TASK: T84 / Luna Max\n- NEXT_PROMPT: work/NEXT.md\n- CURRENT_GOAL: 현재 지원 앱 통합 → 사용 감사/보완 → UI·실측 성능 완성. 전체 콘텐츠 completeness는 별도 보고. 이후 설명→신경→모션.\n- HISTORY: 아래 기존 보고/상태와 work/evidence/*의 nextTask는 당시 snapshot이며 실행 지시가 아니다.\n<!-- END GENERATED EXECUTION -->",
+    "pathWasDirtyBeforeT83": true,
+    "commitPolicy": "excluded because the tracked file already contained unrelated user WIP; generated block is synchronized in the working tree"
+  },
+  "r15RegistryProjection": {
+    "path": "work/task-registry-r15.json",
+    "nextTask": "T84",
+    "taskState": {
+      "executionStatus": "completed",
+      "acceptance": "passed"
+    },
+    "pathWasUntrackedBeforeT83": true,
+    "commitPolicy": "excluded because the pre-existing untracked registry is a shared generated file; full file was not added"
+  },
+  "syncChecks": [
+    "python3 work/tools/sync_execution.py",
+    "python3 work/tools/sync_execution.py --check"
+  ],
+  "secondTaskStarted": false
+}

@@ -6,6 +6,7 @@ import { projectLearnerActionCard, projectLearnerMotionActionOptions, type Motio
 import { learnerStructureText } from "../domain/learnerStructureText.ts";
 import { learnerStructureSourceText, learnerStructureUnavailability } from "../domain/learnerStructureSourceContent.ts";
 import { learnerActionExplanation } from "../domain/learnerActionText.ts";
+import { learnerActionAppliesToSide, learnerFunctionUnavailableText } from "../domain/learnerActionText.ts";
 import type { LegacyLearningSummary } from "../domain/legacyEvidenceAdapter.ts";
 const evidenceFields = JSON.parse(readFileSync(new URL("../../../atlas-data/terminology/ai-evidence-overlay.json", import.meta.url), "utf8")).items as AiEvidenceField[];
 const structureSummaries = JSON.parse(readFileSync(new URL("../../../atlas-data/terminology/learning-structure-summaries.json", import.meta.url), "utf8")) as LegacyLearningSummary[];
@@ -13,6 +14,7 @@ const sourceStructureContentRows = JSON.parse(readFileSync(new URL("../../../atl
 
 const bundle = JSON.parse(readFileSync(new URL("../../../atlas-data/motion/motion-learning.json", import.meta.url), "utf8")) as MotionLearningBundle;
 const fields = JSON.parse(readFileSync(new URL("../../../atlas-data/terminology/ai-evidence-overlay.json", import.meta.url), "utf8")) as { items: AiEvidenceField[] };
+const learnerRuntime = JSON.parse(readFileSync(new URL("../../../atlas-data/terminology/learner-card-runtime.json", import.meta.url), "utf8"));
 const pilotCalfIds = [
   "HA-M-000001", "HA-M-000002", "HA-M-000003", "HA-M-000004", "HA-M-000005", "HA-M-000006",
 ];
@@ -57,12 +59,40 @@ test("learner motion options retain six authored rows and keep the T24 candidate
   assert.deepEqual(projectLearnerMotionActionOptions("HA-M-NOT-ASSIGNED", bundle, fields.items), []);
 });
 
+test("the T24 text candidate keeps its right-side scope while its clip remains unavailable", () => {
+  const tibialisActions = projectLearnerMotionActionOptions("HA-M-000003", bundle, fields.items);
+  const rightCandidate = tibialisActions.find((option) => option.sideApplicability === "right");
+  assert.ok(rightCandidate);
+  assert.equal(rightCandidate.candidate, null);
+  assert.equal(learnerActionAppliesToSide(rightCandidate.sideApplicability, "left"), false);
+  assert.equal(learnerActionAppliesToSide(rightCandidate.sideApplicability, "right"), true);
+  assert.equal(learnerActionAppliesToSide(rightCandidate.sideApplicability, null), false, "unilateral text needs a matching selected side");
+  assert.equal(learnerActionAppliesToSide(rightCandidate.sideApplicability, undefined), false, "unilateral text stays hidden when side is unknown");
+  assert.equal(learnerActionAppliesToSide(null, "left"), true, "bilateral action text remains available on both sides");
+  assert.equal(learnerActionAppliesToSide(null, null), true, "bilateral action text remains available when side is unspecified");
+  const projected = learnerRuntime.actions.filter((option: { conceptId: string }) => option.conceptId === "HA-M-000003");
+  const forLeft = projected.filter((option: { sideApplicability: string | null }) => learnerActionAppliesToSide(option.sideApplicability, "left"));
+  const forRight = projected.filter((option: { sideApplicability: string | null }) => learnerActionAppliesToSide(option.sideApplicability, "right"));
+  assert.deepEqual(forLeft.map((option: { label: string }) => option.label), ["발목 등쪽굽힘과 발 안쪽번짐"]);
+  assert.deepEqual(forRight.map((option: { label: string }) => option.label), ["발목 등쪽굽힘과 발 안쪽번짐", "오른쪽 발목 등쪽굽힘"]);
+  assert.deepEqual(projectLearnerMotionActionOptions("HA-P-000001", bundle, fields.items), [], "a whole-muscle action must not be inherited by the lateral head");
+  assert.deepEqual(projectLearnerMotionActionOptions("HA-P-000002", bundle, fields.items), [], "a whole-muscle action must not be inherited by the medial head");
+});
+
+test("unsupported function content has a clear learner message and stays separate from clip state", () => {
+  assert.equal(learnerFunctionUnavailableText(), "현재 확인 가능한 기능 설명이 없습니다.");
+  assert.equal(bundle.motionAssets.every((asset) => asset.technicalStatus !== "binding_verified"), true);
+});
+
 test("learner action copy omits source-scope disclosure while preserving underlying source claim", () => {
   const action = bundle.muscleActions.find((row) => row.subjectIds.includes("HA-M-000003"));
   assert.ok(action);
   assert.match(action.explanation, /출처에 한정되며/);
   assert.equal(learnerActionExplanation(action.explanation), "해당 근육은 발목 등쪽굽힘과 발 안쪽번짐에 관여합니다. 이 근육 하나가 움직임 전체를 단독으로 만든다는 뜻은 아닙니다.");
   assert.doesNotMatch(learnerActionExplanation(action.explanation), /출처|https?:\/\/|\[\d+\]|\b(?:19|20)\d{2}\b|현대 연구|사람 검토|AI 대조/);
+  const rightCandidate = bundle.muscleActions.find((row) => row.id.startsWith("T24-"));
+  assert.ok(rightCandidate);
+  assert.doesNotMatch(learnerActionExplanation(rightCandidate.explanation), /시범|재생/);
 });
 
 test("origin and insertion learner text hides source disclosures while retaining the original evidence projection", () => {

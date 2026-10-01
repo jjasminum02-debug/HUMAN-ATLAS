@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "t83-browser-observations-v1",
+  "observedAtLocal": "2026-10-01 Asia/Seoul",
+  "browser": "Codex In-app Browser",
+  "url": "http://127.0.0.1:5173/",
+  "title": "Human Atlas · 근육 학습",
+  "cases": [
+    {
+      "sample": "앞정강근 right-only action text",
+      "rightSelectionUrl": "http://127.0.0.1:5173/?source=ZA-c7010a9-54ae5266082b61f48ed8e83e",
+      "selectedName": "앞정강근 / 전경골근 / Tibialis anterior muscle",
+      "selectedSide": "right",
+      "functionHeading": "오른쪽 발목 등쪽굽힘",
+      "explanation": "앞정강근은 오른쪽 발목을 등쪽으로 굽히는 데 관여합니다. 한 근육이 움직임 전체를 단독으로 만든다는 뜻은 아닙니다.",
+      "visibleActions": [
+        "발목 등쪽굽힘과 발 안쪽번짐",
+        "오른쪽 발목 등쪽굽힘"
+      ],
+      "movementDemoEnabled": false,
+      "result": "right-specific text is visible on right selection while the demo remains unavailable"
+    },
+    {
+      "sample": "앞정강근 left-only action filtering",
+      "leftSelectionUrl": "http://127.0.0.1:5173/?source=ZA-c7010a9-74ced50ada635db761f807e4",
+      "selectedName": "앞정강근 / 전경골근 / Tibialis anterior muscle",
+      "selectedSide": "left",
+      "functionHeading": "발목 등쪽굽힘과 발 안쪽번짐",
+      "explanation": "해당 근육은 발목 등쪽굽힘과 발 안쪽번짐에 관여합니다. 이 근육 하나가 움직임 전체를 단독으로 만든다는 뜻은 아닙니다.",
+      "visibleActions": [
+        "발목 등쪽굽힘과 발 안쪽번짐"
+      ],
+      "rightSpecificOptionVisible": false,
+      "movementDemoEnabled": false,
+      "result": "right-only text is absent on left selection; bilateral text remains available"
+    },
+    {
+      "sample": "입둘레근",
+      "selectedName": "입둘레근",
+      "functionPanel": "현재 확인 가능한 기능 설명이 없습니다.",
+      "actionPickerVisible": false,
+      "movementDemoEnabled": false,
+      "result": "no joint-rotation text or unsupported claim displayed"
+    },
+    {
+      "sample": "눈꺼풀올림근",
+      "selectedName": "눈꺼풀올림근",
+      "functionPanel": "현재 확인 가능한 기능 설명이 없습니다.",
+      "actionPickerVisible": false,
+      "movementDemoEnabled": false,
+      "result": "no joint-rotation text or unsupported claim displayed"
+    },
+    {
+      "sample": "이설근",
+      "selectedName": "이설근",
+      "functionPanel": "현재 확인 가능한 기능 설명이 없습니다.",
+      "actionPickerVisible": false,
+      "movementDemoEnabled": false,
+      "result": "no joint-rotation text or unsupported claim displayed"
+    },
+    {
+      "sample": "바깥항문조임근",
+      "selectedName": "바깥항문조임근",
+      "functionPanel": "현재 확인 가능한 기능 설명이 없습니다.",
+      "actionPickerVisible": false,
+      "movementDemoEnabled": false,
+      "result": "no joint-rotation text or unsupported claim displayed"
+    },
+    {
+      "sample": "비복근 · 외측두 whole-action non-inheritance",
+      "selectedName": "비복근 · 외측두",
+      "selectedUrl": "http://127.0.0.1:5173/?source=ZA-c7010a9-09c6b1c0b14247d7765a362b",
+      "functionPanel": "현재 확인 가능한 기능 설명이 없습니다.",
+      "actionPickerVisible": false,
+      "movementDemoEnabled": false,
+      "result": "the generic whole-gastrocnemius action is not inherited by this explicitly separate head"
+    },
+    {
+      "sample": "비복근 · 내측두 whole-action non-inheritance",
+      "selectedName": "비복근 · 내측두",
+      "selectedUrl": "http://127.0.0.1:5173/?source=ZA-c7010a9-cccd38ff033ad2834f12217a",
+      "functionPanel": "현재 확인 가능한 기능 설명이 없습니다.",
+      "actionPickerVisible": false,
+      "movementDemoEnabled": false,
+      "result": "the generic whole-gastrocnemius action is not inherited by this explicitly separate head"
+    }
+  ],
+  "sharedChecks": {
+    "threeNameCardVisible": true,
+    "movementButtonPosition": "below the selected name/laterality card and above the Structure/Function tabs",
+    "disabledDemoNote": "이 구조의 움직임 시범은 아직 제공되지 않습니다.",
+    "learnerPageExposesTaskIdsOrEvidenceCodes": false,
+    "consoleWarnings": [],
+    "consoleErrors": [],
+    "screenshot": "captured and visually inspected via the browser tool output; no local PNG was persisted in this run",
+    "gastrocnemiusWholeClaimNotInheritedToHeads": true
+  }
+}
