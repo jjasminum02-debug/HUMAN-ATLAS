@@ -1236,13 +1236,86 @@
       "title": "앱 사용 흐름·주요 구조 감사와 결함 보완",
       "owner": "Luna Max",
       "phase": "G1",
-      "executionStatus": "planned_not_started",
-      "acceptance": "pending",
+      "executionStatus": "completed",
+      "acceptance": "passed",
       "spec": "work/tasks/T80-APP-COMPLETION.md",
       "scope": "T100의 실제 product-scope와 기존 전수 원장/시각 evidence를 재사용하여 지원 앱을 감사하고 고친다. 전신→12부위→검색→양측 선택→카드→심부 관찰→숨김/복원과 주요 뼈 맥락이 실제로 사용 가능한지 확인한다. 모든 542/563 disposition은 유지하되 모든 세부 target의 새 geometry/PNG/직접 인용을 요구하지 않는다. 알려진 콘텐츠 backlog만으로 T100을 다시 partial로 돌리지 않는다. 지원하는 구조의 잘못된 대응·좌우·누락 노출·주요 학습 흐름 공백은 이 task에서 수정한다. UI polish/정밀 성능은 T58로 인계한다.",
       "progress": {
         "nextUnit": null,
-        "completedUnits": []
+        "completedUnits": [
+          "verify-current-T100-product-scope-and-full-542-563-12-disposition-contract",
+          "exercise-whole-body-and-all-12-region-search-selection-return-flows-in-live-browser",
+          "verify-supported-bilateral-name-card-local-highlight-and-context-controls",
+          "audit-representative-face-back-shoulder-limb-spine-sacrum-and-pelvis-contexts",
+          "preserve-source-only-rights-human-review-and-content-gap-boundaries",
+          "reuse-impact-matched-T100-regression-typecheck-and-build-evidence",
+          "record-T58-ui-and-runtime-polish-handoff"
+        ],
+        "pendingUnits": [],
+        "productAcceptance": {
+          "contractRevision": "app-completion-2026-10-01",
+          "acceptanceScope": "current_supported_local_product; not all_target_content_or_public_release",
+          "productReadiness": "ready_for_current_supported_local_learning_scope",
+          "contentCompleteness": "partial",
+          "knownContentGaps": {
+            "denominators": {
+              "targets": 542,
+              "memberships": 563,
+              "regions": 12
+            },
+            "existingCanonicalHaBindings": 130,
+            "historical163": {
+              "total": 163,
+              "classes": {
+                "exactSourceLabel": 6,
+                "descendantSurface": 20,
+                "ancestorOrGroupSurface": 135,
+                "frozenPackageNoExactAncestorOrDescendant": 2
+              }
+            },
+            "learnerCoverage": {
+              "targetsWithRoute": 409,
+              "targetsWithoutRoute": 133,
+              "membershipsWithRoute": 427,
+              "membershipsWithoutRoute": 136
+            },
+            "inspectionOnlyBp3d": {
+              "objects": 13,
+              "distinctTargetIds": 6,
+              "targetRegionMembershipPairs": 6,
+              "spatiallyAcceptedObjects": 0,
+              "learnerVisibleByDefault": 0
+            },
+            "directKoreanTermEvidenceRows": 73,
+            "fullTargetExtentPasses": 0,
+            "unresolvedFinePartVariantGroupAndSideEvidence": true,
+            "crossDatasetRegionalRegistration": "BP3D supplement remains inspection-only; no global transform established",
+            "rightsAndReview": {
+              "sourceOnly": "preserved per item",
+              "publicRedistribution": "held",
+              "humanReview": "not_performed"
+            }
+          },
+          "unresolvedProductBlockers": [],
+          "evidence": [
+            "work/reports/T80.md",
+            "work/evidence/T80/app-flow-2026-10-01/baseline.json",
+            "work/evidence/T80/app-flow-2026-10-01/browser-observations.json",
+            "work/evidence/T80/app-flow-2026-10-01/verification.json",
+            "work/product-scope.json",
+            "work/evidence/T100/app-completion-2026-10-01/automated-contract.json",
+            "work/evidence/T100/app-completion-2026-10-01/browser-qa.json",
+            "work/evidence/T100/app-completion-2026-10-01/verification.json"
+          ]
+        },
+        "nextId": "T58",
+        "nextOwner": "Luna Max",
+        "nextPromptPath": "work/prompts/app-completion-2026-10-01/03-T58.txt",
+        "evidence": [
+          "work/reports/T80.md",
+          "work/evidence/T80/app-flow-2026-10-01/verification.json"
+        ],
+        "result": "Current supported local app flows pass; known anatomical content, spatial registration, human review and redistribution gaps remain explicitly partial."
       },
       "report": "work/reports/T80.md",
       "acceptanceScope": "current_supported_local_product; not all_target_content_or_public_release",
@@ -1257,7 +1330,10 @@
         ],
         "contentGapPolicy": "retain_all_denominators_and_unresolved_evidence; only_real_product_blockers_prevent_scoped_acceptance"
       },
-      "promptFile": "work/prompts/app-completion-2026-10-01/02-T80.txt"
+      "promptFile": "work/prompts/app-completion-2026-10-01/02-T80.txt",
+      "nextId": "T58",
+      "nextOwner": "Luna Max",
+      "nextPromptPath": "work/prompts/app-completion-2026-10-01/03-T58.txt"
     },
     "T58": {
       "title": "앱 화면·관찰 UX·실측 성능 완성",

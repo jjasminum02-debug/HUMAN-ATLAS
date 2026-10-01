@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "t80-live-browser-observations-v1",
+  "taskId": "T80",
+  "observedAt": "2026-10-01",
+  "browser": {
+    "application": "Human Atlas · 근육 학습",
+    "origin": "http://127.0.0.1:5173/",
+    "surface": "Codex in-app browser; live screenshot observations returned by CUA",
+    "screenshotFilesPersisted": false,
+    "screenshotNote": "Screenshots were visually inspected in the browser tool output; no local PNG/JPEG path was available, so no saved raster is claimed."
+  },
+  "wholeBodyAndRegions": {
+    "initialWholeBodyObserved": true,
+    "regionSwitchesAllSucceeded": true,
+    "wholeBodyRestored": true,
+    "regionSearchCounts": {
+      "head": 54,
+      "neck": 55,
+      "back": 62,
+      "shoulder-scapular": 13,
+      "thorax": 40,
+      "abdomen-lumbar": 14,
+      "pelvis-perineum": 9,
+      "gluteal-hip": 12,
+      "thigh": 18,
+      "leg": 16,
+      "foot": 42,
+      "upper-limb": 83
+    },
+    "liveAction": "Each region was switched sequentially; the selected region heading/list updated; toggling 전신 restored the 355 search groups and whole-body scene."
+  },
+  "representativeFlows": [
+    {
+      "case": "tibialis-anterior bilateral search and selection",
+      "query": "앞정강근",
+      "cardNames": {
+        "koModern": "앞정강근",
+        "koTraditional": "전경골근",
+        "en": "Tibialis anterior muscle"
+      },
+      "resultCount": 1,
+      "sideSwitch": "left-to-right",
+      "visual": "Selected lower-leg surface followed the side control; fit/isolate/transparency/hide/undo/restore returned surrounding structures and the active highlight.",
+      "verdict": "pass",
+      "basis": "Live browser observation in this T80 execution before context compaction; same running app and source revision."
+    },
+    {
+      "case": "face deep masseter",
+      "query": "심부 교근",
+      "cardNames": {
+        "koModern": "깨물근 · 깊은부분",
+        "koTraditional": "심부 교근",
+        "en": "Deep part of masseter"
+      },
+      "visual": "Face entry selected; focused and isolated view showed the separate deep-masseter surface; no full-extent claim.",
+      "verdict": "pass"
+    },
+    {
+      "case": "latissimus dorsi source observation",
+      "query": "광배근",
+      "cardNames": {
+        "koModern": "넓은등근",
+        "koTraditional": "광배근",
+        "en": "Latissimus dorsi muscle"
+      },
+      "sideSwitch": "right-to-left",
+      "visual": "Fitted posterior view showed a broad back surface and moved the highlight between sides; label, card side and source URL changed together.",
+      "scopeLimit": "This is an existing local source observation. It does not resolve T100 target extent, add a new canonical binding, or imply human review or public rights.",
+      "verdict": "pass for available local route only"
+    },
+    {
+      "case": "deltoid scapular-spinal part",
+      "query": "삼각근",
+      "searchResults": [
+        "삼각근 · 견봉부",
+        "삼각근 · 어깨뼈가시부분",
+        "입꼬리내림근"
+      ],
+      "selected": "Scapular spinal part of deltoid muscle",
+      "sideSwitch": "left-to-right",
+      "visual": "Posterior shoulder highlight moved with side selection; title, modern name, Hangul Sino-Korean name and English part label matched.",
+      "ambiguity": "The separate depressor-anguli-oris legacy alias is a distinct result, not bound to the deltoid geometry.",
+      "verdict": "pass; search wording polish may be considered in T58"
+    },
+    {
+      "case": "trapezius upper/lower visual-order conflict",
+      "upper": {
+        "sourcePart": "Descending part of trapezius muscle",
+        "card": "승모근 상부 / 등세모근 위부분",
+        "observedRegion": "upper posterior neck/base-of-skull region"
+      },
+      "lower": {
+        "sourcePart": "Ascending part of trapezius muscle",
+        "card": "승모근 하부 / 등세모근 아래부분",
+        "observedRegion": "lower thoracic-to-scapular posterior region"
+      },
+      "visual": "Upper and lower graphics appeared in their correspondingly named superior/inferior regions; not reversed in this live view.",
+      "scopeLimit": "This checks label-to-visible-region order only. It does not certify full trapezius extent.",
+      "verdict": "pass for current presentation; extent remains unaccepted"
+    },
+    {
+      "case": "sacrum and pelvis",
+      "sacrum": {
+        "query": "천골",
+        "cardNames": {
+          "koModern": "엉치뼈",
+          "koTraditional": "천골",
+          "en": "Sacrum"
+        },
+        "side": "좌우 구분 없음",
+        "visual": "Selection fit isolated the midline sacrum at the pelvis with surrounding pelvic context."
+      },
+      "hipBone": {
+        "query": "볼기뼈",
+        "cardNames": {
+          "koModern": "볼기뼈",
+          "koTraditional": "관골",
+          "en": "Hip bone"
+        },
+        "sideSwitch": "left-to-right",
+        "visual": "The fitted selection moved between the left and right hip-bone surfaces."
+      },
+      "contentLimit": "Landmark/related-muscle prose remains an honest preparation placeholder where no accepted text is available.",
+      "verdict": "pass for name/side/selection context"
+    },
+    {
+      "case": "lumbar vertebra",
+      "query": "제5요추",
+      "cardNames": {
+        "koModern": "다섯째허리뼈",
+        "koTraditional": "제5요추",
+        "en": "Vertebra L5"
+      },
+      "side": "좌우 구분 없음",
+      "visual": "Isolate showed one vertebral surface; whole-view reset restored surrounding anatomy.",
+      "history": "Browser Back changed URL and card to the prior metatarsal route; Forward restored URL/card/selected L5 row.",
+      "polish": "The free-text search filter remains the current L5 query after Back even when a different prior source is selected. Route/card themselves matched; the filtered row can therefore be unchecked. Non-blocking discoverability item for T58.",
+      "verdict": "pass for route/card history; filter persistence noted"
+    },
+    {
+      "case": "fifth metacarpal and metatarsal disambiguation",
+      "hand": {
+        "query": "Fifth metacarpal bone",
+        "cardNames": {
+          "koModern": "다섯째 손허리뼈",
+          "koTraditional": "제5중수골",
+          "en": "Fifth metacarpal bone"
+        },
+        "sideSwitch": "left-to-right"
+      },
+      "foot": {
+        "query": "Fifth metatarsal bone",
+        "cardNames": {
+          "koModern": "다섯째발허리뼈",
+          "koTraditional": "중족골",
+          "en": "Fifth metatarsal bone"
+        },
+        "alternateSearch": "다섯째발허리뼈",
+        "sideSwitch": "left-to-right"
+      },
+      "visual": "Each selection focused the corresponding hand/foot bone; isolate and view restore preserved selection and surrounding context.",
+      "ambiguity": "The English metatarsal query returned a separate fifth-metacarpal result marked 비슷한 이름. Korean modern foot name also returned the intended metatarsal row.",
+      "verdict": "pass for available routes; lexical distinction is visible"
+    },
+    {
+      "case": "upper arm long head of biceps",
+      "query": "상완이두근장두",
+      "cardNames": {
+        "koModern": "긴갈래",
+        "koTraditional": "상완이두근장두",
+        "en": "Long head of biceps brachii"
+      },
+      "sideSwitch": "left-to-right",
+      "visual": "Anterior upper-arm highlight moved to the opposite arm with the side control; card and source route followed.",
+      "scopeLimit": "Long-head part selection does not establish the whole biceps extent.",
+      "verdict": "pass for source part and bilateral route"
+    }
+  ],
+  "supportedScopeLimits": [
+    "Selection/render samples do not upgrade partial source members to whole-group extent.",
+    "Browser inspection-only BP3D supplement was not made learner-visible by this task.",
+    "Human anatomy review remains not_performed and public redistribution remains held."
+  ]
+}

@@ -2,12 +2,12 @@
 
 자동 생성. 편집 원본은 [EXECUTION.json](EXECUTION.json). 역사 handoff/자료 개수로 다음 작업을 결정하지 않는다.
 
-- 확인된 최근 진행: T100 / accepted
-- 다음 ID: **T80**
+- 확인된 최근 진행: T80 / accepted
+- 다음 ID: **T58**
 - 현재 지원 앱 완성: T100 통합 마무리 → T80 사용 감사/보완 → T58 UI·성능 최적화. 전체 콘텐츠 확보는 별도 상태로 유지한다.
 
 ```text
-HUMAN ATLAS에서 T80만 수행해라. 담당 Luna Max.
+HUMAN ATLAS에서 T58만 수행해라. 담당 Astra · 현재 대화 직접 구현.
 
 AGENTS.md, work/EXECUTION.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/product-acceptance.json,
 해당 task의 현재 spec/promptFile, 실제 선행 report/evidence를 읽어라.
@@ -26,12 +26,12 @@ python3 work/tools/sync_execution.py 및 --check를 수행하고 소유 변경�
 다음 task 자동 실행, 새 번호/스레드 발급, 자동 위임, push/배포, 임상 진단·치료·자침 기능은 금지한다.
 
 이번 실행:
-1. T100이 새 계약으로 passed이고 product-scope.json과 실제 evidence가 있는지 확인한다. 과거 partial 보고서가 존재한다는 이유만으로 중단하지 않는다. 현재 지원 범위와 콘텐츠 completeness를 구분한다.
-2. 전체 542 target/563 membership은 기존 disposition과 실제 runtime을 자동 대조한다. 이미 기록한 127개에 새 후보가 없으면 같은 catalog 검색을 반복하지 않는다. 경로/표현 범위/일반 learner 노출이 정확한지 검사한다.
-3. 실제 브라우저에서 전신과 12부위, 합집합/전체 복귀, 이름 검색, 양측 전환, typed card, 국소 강조·주변 흐림, 깊은 구조의 격리/맞춤, 숨김/undo/복원, 뒤/앞 탐색을 연속 사용자 흐름으로 검사한다. 얼굴/광배근/양측 어깨·상완/손발/척추·엉치/골반 맥락은 기존 실제 지원 데이터로 확인한다. 표본마다 새 원장을 만들지 않는다.
-4. 클릭되지 않는 유효한 표면, wrong side/card, parent를 exact part로 오인시키는 표시, 지역 맥락 손실, 격리 자료 재노출 등 실제 결함을 수정한다. 주요 부위 자체가 비어 있거나 핵심 조작을 할 수 없다면 제품 차단으로 처리한다. 어려운 결함을 콘텐츠 backlog로 바꿔 통과하지 않는다.
-5. 선택 가능한 member가 있는 그룹은 그 제공 범위만 검증한다. 변이/미세 분절/미확보 구조는 정직하게 미지원으로 유지한다. 모든 542개의 full extent pass를 새로 만들 필요는 없다. 기존 side conflict는 근거 없이 해소하지 않는다.
-6. 변경에 맞는 관련 회귀·타입·빌드 및 대표/변경 browser 사례를 확인한다. 제품 차단 결함이 없으면 T80 completed/passed, contentCompleteness=partial 허용으로 종료한다. UI polish·프로파일 결과·대표 캡처를 T58에 넘기고 자동 실행하지 않는다.
+1. T100/T80 새 계약의 passed, 실제 product-scope.json, T80 결함·개선 원장과 최신 UI를 확인한다. 오래된 전체 콘텐츠 gate나 역사 T57→T59 순서를 재실행하지 않는다. 담당 Astra, 현재 대화 직접 구현이며 자동 위임하지 않는다.
+2. 현재 UI를 먼저 보고 화면의 큰 문제부터 수정한다. 단일 viewport/scene/camera, 밝은 배경, 뼈·근육 식별, 선택 대비, 카메라 프레이밍, 패널 가림, 깊은 구조 접근, 복원 예측 가능성에 집중한다. 제거한 로딩 로고/인체 그림/슬로건을 복구하지 않는다. 학생 화면에 source/task/evidence 메타데이터를 넣지 않는다.
+3. 변경 전 한 번의 실제 프로파일을 잡는다. cold와 warm bytes/loading, render 호출 비용과 frame interval을 구분하고 active triangles/draws/CPU geometry, 20회 지역 전환 후 cache/취소/late-response 상태를 확인한다. GPU/VRAM/total-process 메모리 관측 불가는 한계로 기록한다.
+4. 확인된 병목부터 lazy loading·경량 projection·캐시/LRU·중복 render·불필요한 state churn·패널 layout·LOD를 공통 경로에서 최적화한다. 실제 필요 없이 기술을 갈아엎거나 별도 viewer를 만들지 않는다. 구조 삭제/잘못된 좌우/무조건 품질 저하로 빠르게 만들지 않는다. 예산 변경은 근거와 품질 영향으로 명시하고 몰래 상향하지 않는다.
+5. 1440/1024/390 실제 브라우저에서 전신·머리·손·하지/등 대표 시점, 검색·양측 선택·카드·키보드·뒤/앞·숨김/복원을 검증한다. 검은 프레임·로딩 실패·카메라 reset·overlap·console error와 성능 회귀를 수정한다. desktop 390px를 모바일 실기기 검증으로 부르지 않는다.
+6. 최종 관련 회귀/typecheck/build와 영향받는 실제 흐름을 한 번 검증하고 변경 전후 수치·PNG·한계를 남긴다. 제품 차단 결함 없이 지원 앱이 안정적으로 사용 가능하면 T58 completed/passed 및 local_app_ready를 기록한다. 전체 해부학 완료나 공개 배포 승인을 뜻하지 않는다. 다음 T81은 자동 실행하지 않는다.
 
-종료 후 다음 ID는 T58다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
+종료 후 다음 ID는 T81다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
 ```

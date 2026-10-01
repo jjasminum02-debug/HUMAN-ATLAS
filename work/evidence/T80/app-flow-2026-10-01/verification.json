@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "t80-verification-v1",
+  "taskId": "T80",
+  "checkedAt": "2026-10-01",
+  "baselineHead": "0943a62ecc903209041a996ac7eb7e8165edbaa8",
+  "result": "passed_for_current_supported_local_learning_scope",
+  "productScope": {
+    "status": "passed",
+    "command": "node --experimental-strip-types scripts/buildProductScope.ts --check",
+    "workingDirectory": "atlas-web",
+    "source": "work/product-scope.json",
+    "counts": {
+      "runtimeRecords": 960,
+      "selectableNamedSourceStructures": 672,
+      "searchGroups": 355,
+      "targets": 542,
+      "memberships": 563,
+      "regions": 12,
+      "targetsWithLearnerRoute": 409,
+      "targetsWithoutLearnerRoute": 133,
+      "membershipsWithLearnerRoute": 427,
+      "membershipsWithoutLearnerRoute": 136,
+      "inspectionOnlyBp3dObjects": 13,
+      "inspectionOnlyBp3dLearnerVisibleByDefault": 0,
+      "inspectionOnlyBp3dLearnerRouteFailures": 0
+    },
+    "notes": [
+      "Counts were read from the checked generated product scope, not hard-coded as expected values.",
+      "The 13 BP3D inspection observations are excluded from learner routes, default visibility, and learner coverage."
+    ]
+  },
+  "liveBrowser": {
+    "status": "passed_for_representative_supported_flows",
+    "origin": "http://127.0.0.1:5173/",
+    "surface": "Codex in-app browser using CUA live interactions",
+    "evidence": "work/evidence/T80/app-flow-2026-10-01/browser-observations.json",
+    "checks": [
+      "whole-body initial context and return",
+      "all 12 region switches and union search restoration",
+      "name search, typed three-name cards and source selection",
+      "bilateral side switches for supported paired structures",
+      "localized highlight, fit/isolate, transparency, hide, undo and restore in representative flows",
+      "face deep masseter, latissimus dorsi, deltoid part, trapezius superior/inferior display, sacrum, hip bone, vertebra L5, fifth metacarpal/metatarsal, and biceps long-head part",
+      "browser Back/Forward restored route, selected source and matching card"
+    ],
+    "limits": [
+      "CUA returned live visual screenshots for inspection, but this interface provided no local raster-save path; no persisted T80 screenshot is claimed.",
+      "A separate browser-console log view was unavailable in this CUA session. T100 console evidence was not treated as a new T80 console scan."
+    ]
+  },
+  "regressionsReused": {
+    "reason": "No application/runtime/source code changed in T80; current source hashes match the T80 baseline.",
+    "sourceHashFile": "work/evidence/T80/app-flow-2026-10-01/baseline.json",
+    "T100WholeBody": "56/56 passed; 46 compiled chunks verified",
+    "T100Delivery": "3/3 passed",
+    "T100Typecheck": "passed",
+    "T100ProductionBuild": "passed; existing non-failing App bundle size advisory retained",
+    "evidence": [
+      "work/evidence/T100/app-completion-2026-10-01/verification.json",
+      "work/evidence/T100/app-completion-2026-10-01/automated-contract.json",
+      "work/reports/T100.md"
+    ]
+  },
+  "preservation": {
+    "denominators": {
+      "targets": 542,
+      "memberships": 563,
+      "regions": 12
+    },
+    "existingCanonicalHaBindings": 130,
+    "historical163": {
+      "total": 163,
+      "classes": {
+        "exactSourceLabel": 6,
+        "descendantSurface": 20,
+        "ancestorOrGroupSurface": 135,
+        "frozenPackageNoExactAncestorOrDescendant": 2
+      }
+    },
+    "humanReview": "not_performed",
+    "publicRedistribution": "held",
+    "sourceOnly": "preserved per item",
+    "OpenSim_Models": "clean and unchanged",
+    "T13Drafts": "clean and unchanged",
+    "applicationCodeChanged": false,
+    "protectedSourceAndScopeHashesUnchanged": true
+  },
+  "knownContentGaps": {
+    "directKoreanTermEvidenceRows": 73,
+    "fullTargetExtentPasses": 0,
+    "targetsWithoutLearnerRoute": 133,
+    "membershipsWithoutLearnerRoute": 136,
+    "inspectionOnlyBp3dObjects": 13,
+    "spatiallyAcceptedBp3dObjects": 0,
+    "regionalCrossDatasetRegistration": "held/unresolved",
+    "humanReview": "not_performed",
+    "publicRedistribution": "held"
+  },
+  "nonBlockingFollowupsForT58": [
+    "On browser Back/Forward, route and card restore correctly but the prior free-text filter remains; selected row can be outside the visible filtered list.",
+    "Improve search discoverability for alternate ordinal metatarsal wording and distinguish the legacy triangularis alias from deltoid results without conflating identities.",
+    "Add persisted responsive/interaction captures and a direct browser-console collection path; current CUA screenshots were visually inspected but not saved as T80 files.",
+    "Perform measured layout/runtime performance work under T58 scope."
+  ],
+  "unresolvedProductBlockers": []
+}
