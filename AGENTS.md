@@ -45,3 +45,13 @@
 - Follow design/2026-09-25-muscle-atlas/26-T100-BULK-DELIVERY-PLAN.md for current T100 execution and subsequent data-processing cadence. It supersedes mandatory ten-item stopping/repeated full-suite rules, not evidence or completion requirements.
 - Batch is an internal recovery/review unit. Use one data-driven pipeline, bulk verified regular cases, and bounded review of real exceptions. Preserve historical scripts but do not add a runtime/test branch per batch.
 - Separate compact learner runtime data from full development evidence; retain policy enforcement, source hashes, originals, user WIP and actual unresolved gaps. This amendment is planning, not implementation acceptance.
+
+
+## 2026-10-01 사용자 승인 — 앱 완성과 콘텐츠 확장 분리
+
+현재 완료 기준은 `design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md`와 `work/product-acceptance.json`이다. 사용자가 합리적인 기준 개정·권고 구조·순서·각 프롬프트 구현을 승인했다.
+현재 실행은 EXECUTION의 spec/acceptanceContract/promptFile을 따른다. 충돌하는 과거 전체542 형상/직접 인용/전수 extent가 모두 끝나야 앱 task를 닫는 규칙은 대체한다.
+T100 통합 마무리 → T80 주요 사용자 흐름 감사/보완 → T58 UI·실측 성능 완성이다. 이후 설명·신경·움직임 순서는 EXECUTION을 따른다.
+task scoped acceptance와 전체 contentCompleteness를 분리한다. 전체542/563/12 원장·기존HA130·역사163·source-only·public held·humanReview를 보존하며 근거 없는 anatomy/geometry를 만들지 않는다.
+미정합 표면/잘못된 side/name/scope와 실제 사용자 흐름 결함은 해결/격리한다. 이미 확인한 콘텐츠 backlog만으로 과거 제품 pass를 취소하거나 고정 catalog를 재검색하지 않는다.
+현재 product-scope는 T100에서 실제 runtime으로 생성한다. 계획 수정만으로 T100/T80/T58을 pass하지 않는다. 요청당 한 task, 자동 다음 실행/위임/push/배포 금지는 유지한다.

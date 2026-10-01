@@ -1,3 +1,5 @@
+> **2026-10-01 사용자 승인 개정:** [27-APP-COMPLETION-AND-CONTENT-ROADMAP.md](27-APP-COMPLETION-AND-CONTENT-ROADMAP.md)이 앱 완료·콘텐츠 확장 분리와 task 인계 기준의 현재 원본이다. 아래 전체-content 0-gap 규칙은 충돌 시 역사다. 보존/근거/공통 처리 원칙은 유지한다. 계획 개정은 구현 합격이 아니다.
+
 # 전신 베이스 우선 재설계와 단일 실행 기준
 
 2026-09-28 · Astra · 사용자 요청에 따른 설계 정정. 이 문서는 전신 모델 구현 완료가 아니다.

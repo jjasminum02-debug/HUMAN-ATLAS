@@ -1,10 +1,24 @@
+<!-- BEGIN GENERATED EXECUTION -->
+# 현재 실행 — 단일 기준
+
+- SOURCE_OF_TRUTH: work/EXECUTION.json
+- PLAN_REVISION: app-completion-2026-10-01
+- CURRENT_TASK: T100
+- LAST_OBSERVED_TASK: T99 / accepted
+- LEGACY_T104_OBSERVATION_AT_RESET: 감사 도중 T104 report/browser/performance evidence와 로컬커밋67d8b79가 확인됨. exact10 source 표면 기술 통합 passed_with_gaps, 전신/새학습binding 완료 아님. 과거 T105 handoff 대신 현재 전신베이스 queue T98 적용.
+- NEXT_TASK: T100 / Luna Max
+- NEXT_PROMPT: work/NEXT.md
+- CURRENT_GOAL: 현재 지원 앱 통합 → 사용 감사/보완 → UI·실측 성능 완성. 전체 콘텐츠 completeness는 별도 보고. 이후 설명→신경→모션.
+- HISTORY: 아래 기존 보고/상태와 work/evidence/*의 nextTask는 당시 snapshot이며 실행 지시가 아니다.
+<!-- END GENERATED EXECUTION -->
+
 # 진행 상태 — HUMAN ATLAS
 
 - LAST_UPDATED: 2026-09-27
-- PLAN_REVISION: R14-2026-09-27 — 구조·기능 우선; 실행 순서는 work/task-registry-r14.json
-- CURRENT_TASK: T24 — blocked; T44 기반 오른쪽 발목 clip·설명용 경로의 기술 후보는 생성·검증했으나 사용자 요구인 원래 앞정강근 그래픽의 CTA 기반 연속 수축 시범은 미달. 초기 별도 모형 메인 전환은 되돌림.
-- NEXT_TASK: T24 해결 작업 / Sol High. R14 후속 T25 / Luna Max는 T24 실제 합격 전 실행 금지.
-- LAST_REPORT: work/reports/T24.md
+- HISTORICAL_PLAN_REVISION: R14-2026-09-27 — 구조·기능 우선; 실행 순서는 work/task-registry-r14.json
+- HISTORICAL_CURRENT_TASK: T24 — blocked; T44 기반 오른쪽 발목 clip·설명용 경로의 기술 후보는 생성·검증했으나 사용자 요구인 원래 앞정강근 그래픽의 CTA 기반 연속 수축 시범은 미달. 초기 별도 모형 메인 전환은 되돌림.
+- HISTORICAL_NEXT_TASK: T24 해결 작업 / Sol High. R14 후속 T25 / Luna Max는 T24 실제 합격 전 실행 금지.
+- HISTORICAL_LAST_REPORT: work/reports/T24.md
 - CATALOG: partial85 (individual48/group16/part21); 전신 분모 미동결
 - LEARNING_OVERLAY: entries81; current canonical overlap 79/85, six group IDs lack overlay entries, two lookup-only IDs are extra; T11 B01-B09 field work covered the current partial catalog with gaps; humanReviewed=false. T42 bone-name overlay adds names/search for the 9 currently selectable bones; actual Hanja not collected; humanAnatomyReview=not_reviewed.
 - AI_EVIDENCE_OVERLAY: T16 schema/types/validator/learner adapter + T18 origin/insertion rows 16 + T21 action/context rows 35; 14 legacy rows remain test-only preview; canonical human review unchanged; T21 claims remain source-derived and geometry absent

@@ -1,0 +1,217 @@
+{
+  "schemaVersion": "local-product-acceptance-v1",
+  "revision": "app-completion-2026-10-01",
+  "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+  "authorization": "2026-10-01 user requested reasonable criteria and authorized recommended replan",
+  "planningOnly": true,
+  "implementationAcceptanceInferred": false,
+  "taskAcceptanceIndependentOfContentCompleteness": true,
+  "productScopeFile": "work/product-scope.json",
+  "productScopeFileStatus": "not_generated_by_this_plan; T100 actual runtime required",
+  "contentBacklog": "work/content-backlog.json",
+  "denominators": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12
+  },
+  "releaseMeaning": "supported_local_learning_app; not exhaustive anatomy completion or public redistribution",
+  "productBlockingDefects": [
+    "runtime_load_or_render_failure",
+    "wrong_supported_structure_name_side_scope_or_placement",
+    "broken_core_12_region_search_selection_card_or_observation_flow",
+    "core_context_unusable",
+    "hold_layer_off_or_quarantine_bypass",
+    "measured_disruptive_performance_or_layout_regression"
+  ],
+  "nonGlobalBlockers": [
+    "unsupported_detailed_targets_and_memberships",
+    "direct_citation_gaps_with_valid_composed_names",
+    "unacquired_variants_and_fine_parts",
+    "all_target_full_extent_pass_count",
+    "humanReview_not_performed",
+    "publicRedistribution_held",
+    "unobservable_GPU_VRAM_total_process_memory"
+  ],
+  "tasks": {
+    "T100": {
+      "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "required": [
+        "현재 실제 runtime에서 지원 범위와 정확한 표현 수준을 생성하고 542/563 전체 disposition을 기존 원장과 연결한다.",
+        "지원 경로의 카드/side/region/name/정책 자동 계약 검사와 기본 전신·12부위·선택 controller의 실제 동작을 확인한다.",
+        "미정합 BP3D의 잘못된 일반 학습 노출을 격리하고 held/user-layer-off 복원 우회를 막는다.",
+        "발견된 통합 차단 결함을 수정하고 콘텐츠 completeness와 제품 acceptance를 별도 기록한다."
+      ],
+      "contentGapPolicy": "retain_all_denominators_and_unresolved_evidence; only_real_product_blockers_prevent_scoped_acceptance"
+    },
+    "T80": {
+      "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "required": [
+        "12부위와 주요 전신 맥락에서 검색·선택·카드·관찰의 실제 사용 흐름을 확인한다.",
+        "지원 표면의 잘못된 명칭/side/범위 및 주요 흐름을 막는 누락·복원·정책 결함을 수정한다.",
+        "전체 542/563 disposition 및 기존 gap 원장을 보존하고 제품 결함과 콘텐츠 확장 항목을 구분한다.",
+        "재현 가능한 제품 차단 결함이 남지 않고 T58용 실제 UI/성능 개선 목록을 전달한다."
+      ],
+      "contentGapPolicy": "retain_all_denominators_and_unresolved_evidence; only_real_product_blockers_prevent_scoped_acceptance"
+    },
+    "T58": {
+      "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "required": [
+        "1440/1024/390 폭에서 주요 조작/카드/화면이 가려지지 않고 scene/camera 연속성을 유지한다.",
+        "cold/warm, 실제 renderer/frame 및 반복 지역 전환 cache를 측정하고 확인된 큰 성능 문제를 수정한다.",
+        "대표 전신/지역/선택 장면의 실제 캡처와 변경 전후 성능·오류 상태를 남긴다.",
+        "현재 지원 범위의 local_app_ready를 실제 검증으로 판정하고 전체 콘텐츠/모바일 실기기/공개 권리 한계를 분리한다."
+      ],
+      "contentGapPolicy": "retain_all_denominators_and_unresolved_evidence; only_real_product_blockers_prevent_scoped_acceptance"
+    },
+    "T81": {
+      "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "required": [
+        "현재 지원 근육 전체를 대상으로 카드 콘텐츠/근거/채택 또는 미지원 상태를 연결한다.",
+        "257행과 기존 전체 target 처리 상태 및 private 자료 분리를 보존한다.",
+        "잘못된 기시정지/손발 동명/갈래/신경 구분을 노출하지 않고 주요 카드의 구조 학습 흐름을 검증한다."
+      ],
+      "contentGapPolicy": "retain_all_denominators_and_unresolved_evidence; only_real_product_blockers_prevent_scoped_acceptance"
+    },
+    "T82": {
+      "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "required": [
+        "현재 지원 카드 전체의 데이터 계약과 주요 구조 설명 흐름을 감사한다.",
+        "확인된 기시정지/갈래/손발/신경 구분 오류와 private 원문 노출을 수정한다.",
+        "범위가 명시된 구조 설명 기능 acceptance와 콘텐츠 completeness를 별도 보고한다."
+      ],
+      "contentGapPolicy": "retain_all_denominators_and_unresolved_evidence; only_real_product_blockers_prevent_scoped_acceptance"
+    },
+    "T83": {
+      "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "required": [
+        "현재 지원 근육 전체의 기능 claim과 카드 채택/미지원 상태를 연결한다.",
+        "runtime 기능 텍스트의 한자 0건 및 의미/방향/조건/갈래 보존을 검증한다.",
+        "구조·기능·clip 지원을 구분하고 실제 기능 카드 흐름을 확인한다."
+      ],
+      "contentGapPolicy": "retain_all_denominators_and_unresolved_evidence; only_real_product_blockers_prevent_scoped_acceptance"
+    },
+    "T84": {
+      "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "required": [
+        "현재 지원 기능 설명 전체의 데이터 계약과 의미/구조 일관성을 감사한다.",
+        "실제 카드/clip 상태의 misleading UI와 기능 텍스트 오류를 수정한다.",
+        "설명 기능의 scoped acceptance와 남은 콘텐츠 및 G3 인계를 구분한다."
+      ],
+      "contentGapPolicy": "retain_all_denominators_and_unresolved_evidence; only_real_product_blockers_prevent_scoped_acceptance"
+    },
+    "T61": {
+      "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "required": [
+        "이번에 실제 지원하는 자료/기능의 정확한 범위와 전체 원장을 함께 보존한다.",
+        "명시한 자료·구현·학습 흐름을 실제 검증하고 지원된 기능의 잘못된 anatomy/pose/선택/재생 오류를 해결한다.",
+        "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다."
+      ],
+      "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research"
+    },
+    "T62": {
+      "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "required": [
+        "이번에 실제 지원하는 자료/기능의 정확한 범위와 전체 원장을 함께 보존한다.",
+        "명시한 자료·구현·학습 흐름을 실제 검증하고 지원된 기능의 잘못된 anatomy/pose/선택/재생 오류를 해결한다.",
+        "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다."
+      ],
+      "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research"
+    },
+    "T63": {
+      "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "required": [
+        "이번에 실제 지원하는 자료/기능의 정확한 범위와 전체 원장을 함께 보존한다.",
+        "명시한 자료·구현·학습 흐름을 실제 검증하고 지원된 기능의 잘못된 anatomy/pose/선택/재생 오류를 해결한다.",
+        "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다."
+      ],
+      "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research"
+    },
+    "T90": {
+      "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "required": [
+        "이번에 실제 지원하는 자료/기능의 정확한 범위와 전체 원장을 함께 보존한다.",
+        "명시한 자료·구현·학습 흐름을 실제 검증하고 지원된 기능의 잘못된 anatomy/pose/선택/재생 오류를 해결한다.",
+        "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다."
+      ],
+      "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research"
+    },
+    "T65": {
+      "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "required": [
+        "이번에 실제 지원하는 자료/기능의 정확한 범위와 전체 원장을 함께 보존한다.",
+        "명시한 자료·구현·학습 흐름을 실제 검증하고 지원된 기능의 잘못된 anatomy/pose/선택/재생 오류를 해결한다.",
+        "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다."
+      ],
+      "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research"
+    },
+    "T35": {
+      "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "required": [
+        "이번에 실제 지원하는 자료/기능의 정확한 범위와 전체 원장을 함께 보존한다.",
+        "명시한 자료·구현·학습 흐름을 실제 검증하고 지원된 기능의 잘못된 anatomy/pose/선택/재생 오류를 해결한다.",
+        "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다."
+      ],
+      "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research"
+    },
+    "T59": {
+      "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "required": [
+        "이번에 실제 지원하는 자료/기능의 정확한 범위와 전체 원장을 함께 보존한다.",
+        "명시한 자료·구현·학습 흐름을 실제 검증하고 지원된 기능의 잘못된 anatomy/pose/선택/재생 오류를 해결한다.",
+        "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다."
+      ],
+      "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research"
+    },
+    "T25": {
+      "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "required": [
+        "이번에 실제 지원하는 자료/기능의 정확한 범위와 전체 원장을 함께 보존한다.",
+        "명시한 자료·구현·학습 흐름을 실제 검증하고 지원된 기능의 잘못된 anatomy/pose/선택/재생 오류를 해결한다.",
+        "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다."
+      ],
+      "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research"
+    },
+    "T66": {
+      "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "required": [
+        "이번에 실제 지원하는 자료/기능의 정확한 범위와 전체 원장을 함께 보존한다.",
+        "명시한 자료·구현·학습 흐름을 실제 검증하고 지원된 기능의 잘못된 anatomy/pose/선택/재생 오류를 해결한다.",
+        "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다."
+      ],
+      "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research"
+    },
+    "T85": {
+      "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "required": [
+        "이번에 실제 지원하는 자료/기능의 정확한 범위와 전체 원장을 함께 보존한다.",
+        "명시한 자료·구현·학습 흐름을 실제 검증하고 지원된 기능의 잘못된 anatomy/pose/선택/재생 오류를 해결한다.",
+        "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다."
+      ],
+      "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research"
+    },
+    "T40": {
+      "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "required": [
+        "이번에 실제 지원하는 자료/기능의 정확한 범위와 전체 원장을 함께 보존한다.",
+        "명시한 자료·구현·학습 흐름을 실제 검증하고 지원된 기능의 잘못된 anatomy/pose/선택/재생 오류를 해결한다.",
+        "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다."
+      ],
+      "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research"
+    }
+  },
+  "futureFeatureContract": "EXECUTION task.acceptanceContract and current promptFile; declared feature scope and exhaustive content independent",
+  "completionRecord": {
+    "path": "progress.productAcceptance",
+    "requiredFields": [
+      "contractRevision",
+      "acceptanceScope",
+      "productReadiness",
+      "contentCompleteness",
+      "knownContentGaps",
+      "unresolvedProductBlockers",
+      "evidence"
+    ],
+    "evidenceFormat": "nonempty list of actual workspace file paths",
+    "unresolvedProductBlockersForPass": []
+  }
+}

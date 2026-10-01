@@ -1,3 +1,5 @@
+> **2026-10-01 사용자 승인 개정:** [27-APP-COMPLETION-AND-CONTENT-ROADMAP.md](27-APP-COMPLETION-AND-CONTENT-ROADMAP.md)이 앱 완료·콘텐츠 확장 분리와 task 인계 기준의 현재 원본이다. 아래 전체-content 0-gap 규칙은 충돌 시 역사다. 보존/근거/공통 처리 원칙은 유지한다. 계획 개정은 구현 합격이 아니다.
+
 # T100 이후 효율적 구현 계획
 
 2026-09-29 · 사용자 요청에 따른 Astra 계획 수정. **계획이며 구현 완료 기록이 아니다.**

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "app-replan-verification-v2",
+  "date": "2026-10-01",
+  "planningOnly": true,
+  "remainingProductTasks": 18,
+  "absorbedRedundantTaskUnits": 14,
+  "retainedActiveRelativeOrderVerified": true,
+  "allPreviousExecutionAndAcceptanceStatesPreservedInActiveOrAbsorbedRecords": true,
+  "historicalAbsorbedRetiredEvidenceQueuesUnchanged": true,
+  "T100PreviousGateAndFinalizationPreserved": true,
+  "existingSevenTaskSpecsUnchanged": [
+    "work/tasks/T100.md",
+    "work/tasks/T80.md",
+    "work/tasks/T58.md",
+    "work/tasks/T81.md",
+    "work/tasks/T82.md",
+    "work/tasks/T83.md",
+    "work/tasks/T84.md"
+  ],
+  "AGENTSExistingWipPrefixPreserved": true,
+  "STATUSHistoricalWipBodyPreserved": true,
+  "registryHistoricalStatesPreservedExceptExplicitAbsorption": true,
+  "promptFilesAndNextIdsVerified": 18,
+  "currentSpecFilesVerified": 18,
+  "backlogSourceSha256Verified": "dc814c806949761b33664c0223a2db70972f9d72546d59acebb99ca2ac8a3890",
+  "countsAndProtectedStatesPreserved": true,
+  "syncProjectionsMatch": true,
+  "completionGuardChecks": [
+    {
+      "case": "reject missing scoped verdict",
+      "passed": true
+    },
+    {
+      "case": "allow scoped pass independently of content partial",
+      "passed": true
+    },
+    {
+      "case": "reject nonexistent evidence",
+      "passed": true
+    },
+    {
+      "case": "reject actual product blocker",
+      "passed": true
+    },
+    {
+      "case": "reject pending unit",
+      "passed": true
+    }
+  ],
+  "applicationCodeOrGeometryChanged": false,
+  "browserBuildTestsRepeated": false,
+  "productScopeCreatedFromGuesses": false,
+  "tasksStarted": []
+}

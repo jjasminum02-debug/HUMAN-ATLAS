@@ -30,17 +30,36 @@ def load_and_validate():
             raise ValueError(f"Missing spec for {tid}")
         if task["acceptance"] == "passed" and not (ROOT / task["report"]).is_file():
             raise ValueError(f"Passed task needs an actual report: {tid}")
+        if task.get("promptFile"):
+            source = (ROOT / task["promptFile"]).resolve()
+            if not source.is_relative_to(ROOT) or not source.is_file():
+                raise ValueError(f"Missing or out-of-workspace prompt: {tid}")
+        if task.get("acceptanceContract") and task["acceptance"] == "passed":
+            progress = task.get("progress", {})
+            if progress.get("nextUnit") is not None:
+                raise ValueError(f"Passed product task has a pending nextUnit: {tid}")
+            verdict = progress.get("productAcceptance", {})
+            evidence = verdict.get("evidence", [])
+            if (verdict.get("contractRevision") != task.get("contractRevision")
+                    or verdict.get("unresolvedProductBlockers") != []
+                    or not isinstance(evidence, list) or not evidence
+                    or any(not isinstance(path, str)
+                           or not (ROOT / path).resolve().is_relative_to(ROOT)
+                           or not (ROOT / path).is_file() for path in evidence)):
+                raise ValueError(f"Passed product task needs a scoped verdict and actual evidence: {tid}")
     return data, raw
 
 
 def prompt(data, tid):
     task = data["tasks"][tid]
+    if task.get("promptFile"):
+        return (ROOT / task["promptFile"]).read_text().rstrip() + "\n"
     index = data["activeOrder"].index(tid)
     next_id = data["activeOrder"][index + 1] if index + 1 < len(data["activeOrder"]) else "없음"
     return (
         f"HUMAN ATLAS에서 {tid}만 수행해라. 담당 {task['owner']}.\n"
         "AGENTS.md, work/EXECUTION.json, work/NEXT.md, 최신 STATUS의 generated execution 블록,\n"
-        "design/2026-09-25-muscle-atlas/25-WHOLE-BODY-BASE-RESET.md와 해당 task 명세, 실제 선행 report/evidence/manifest를 읽어라.\n"
+        f"{data['design']}와 해당 task 명세, 실제 선행 report/evidence/manifest를 읽어라.\n"
         "26-T100-BULK-DELIVERY-PLAN.md의 공통 처리·예외 검토·앱 데이터 분리·변경별 검증 원칙을 적용한다. 고정 10개 처리 후 의무 종료하지 않는다. 역사 evidence는 보존한다.\n"
         "EXECUTION이 현재 범위/순서의 유일한 원본이다. 역사 queue의 nextTask를 실행하지 마라. 24의 엑셀 검증·한글 기능·짧은 신경·표정근 motion 제외는 유지한다.\n"
         f"이번 범위: {task['scope']}\n"
@@ -65,7 +84,7 @@ def render(data):
         "자동 생성. 편집 원본은 [EXECUTION.json](EXECUTION.json). 역사 handoff/자료 개수로 다음 작업을 결정하지 않는다.\n\n"
         f"- 확인된 최근 진행: {latest}\n"
         f"- 다음 ID: **{next_id or '없음'}**\n"
-        "- 먼저 전신 구조 G1을 완성한다. 새 task 번호 없이 T98→T99→T100→T80→T58.\n\n"
+        "- 현재 지원 앱 완성: T100 통합 마무리 → T80 사용 감사/보완 → T58 UI·성능 최적화. 전체 콘텐츠 확보는 별도 상태로 유지한다.\n\n"
     )
     if next_id:
         next_text += "```text\n" + prompt(data, next_id) + "```\n"
@@ -73,7 +92,7 @@ def render(data):
         "# 현행 실행 순서와 프롬프트\n\n"
         "자동 생성 · 원본: `work/EXECUTION.json` · `python3 work/tools/sync_execution.py --check`로 일치 검증.\n\n"
         "이 파일의 과거 T95/T102 시점 안내는 Git 이력으로 보존된다. 현재 next는 [work/NEXT.md](../../work/NEXT.md)에서 확인한다. 완료한 과거 작업은 반복하지 않는다.\n\n"
-        "25-WHOLE-BODY-BASE-RESET.md가 변경한 범위가 우선한다. 기존 T105–109/T110–121/T166의 필요한 내용은 새 범위의 T98/T99/T100/T80/T58로 흡수됐으며 별도 실행하지 않는다. T122–165도 미실행 폐기 상태다.\n\n"
+        f"현재 기준은 `{data['design']}`와 task별 acceptanceContract/promptFile이다. task 합격과 전체 contentCompleteness를 분리한다. 기존 T105–109/T110–121/T166은 흡수된 역사이며 별도 실행하지 않는다. T122–165도 미실행 폐기 상태다.\n\n"
     )
     for phase in data["phases"]:
         book += f"## {phase['id']} — {phase['goal']}\n\n| ID | 담당 | 결과 |\n|---|---|---|\n"
@@ -105,7 +124,7 @@ def render(data):
         f"- LEGACY_T104_OBSERVATION_AT_RESET: {observation['note']}\n"
         f"- NEXT_TASK: {next_id or '없음'} / {data['tasks'][next_id]['owner'] if next_id else 'none'}\n"
         "- NEXT_PROMPT: work/NEXT.md\n"
-        "- CURRENT_GOAL: G1 전신 뼈·근육의 실제 표시/세 이름/선택/관찰 합격. 이후 설명→신경→모션.\n"
+        "- CURRENT_GOAL: 현재 지원 앱 통합 → 사용 감사/보완 → UI·실측 성능 완성. 전체 콘텐츠 completeness는 별도 보고. 이후 설명→신경→모션.\n"
         "- HISTORY: 아래 기존 보고/상태와 work/evidence/*의 nextTask는 당시 snapshot이며 실행 지시가 아니다.\n"
         f"{END}\n\n"
     )
@@ -124,7 +143,7 @@ def render(data):
         row.update({"title": task["title"], "model": task["owner"], "scopeOverride": task["scope"],
                     "executionAmendment": data["revision"], "amendmentDesign": data["design"],
                     "defaultNext": order[index+1] if index+1 < len(order) else None,
-                    "prerequisite": "EXECUTION phase/order and actual predecessor acceptance; 25 design supersedes historical ordering",
+                    "prerequisite": "EXECUTION phase/order and actual scoped predecessor acceptance; current design supersedes historical all-content gates",
                     "prerequisiteIds": [order[index-1]] if index else ["T97", "T96"], "mode": "active"})
         if "resumePrerequisiteIds" in row:
             row["resumePrerequisiteIds"] = row["prerequisiteIds"]
@@ -136,6 +155,8 @@ def render(data):
         reg["taskStatuses"][tid] = "absorbed_not_executed"
     reg["productGates"]["nerveStart"] = "G1/T58 + T84 accepted; no full-muscle-animation prerequisite; EXECUTION G3"
     reg["productGates"]["motionStart"] = "G1/G2/G3 accepted; EXECUTION G4; facial-expression exact deferral retained"
+    reg["productGates"]["localAppReady"] = "T100 supported integration + T80 learner audit + T58 UI/performance; contentCompleteness independent"
+    reg["productGates"]["wholeContentCoverage"] = "reported independently against 542/563/12; not a global app-development prerequisite"
     reg["wholeBodyBaseAmendment"] = {"design": data["design"], "executionAuthority": "work/EXECUTION.json", "newTaskIds": []}
     return {
         ROOT / "work/NEXT.md": next_text,

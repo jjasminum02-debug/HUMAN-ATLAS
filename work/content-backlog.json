@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "content-backlog-index-v1",
+  "contractRevision": "app-completion-2026-10-01",
+  "status": "partial_content_not_global_app_blocker",
+  "scope": "all_542_targets_563_memberships_12_regions_preserved",
+  "sourceLedger": "work/evidence/T100/source-completion-2026-10-01/integration/final-blocker-list.json",
+  "sourceLedgerSha256": "dc814c806949761b33664c0223a2db70972f9d72546d59acebb99ca2ac8a3890",
+  "snapshotDate": "2026-10-01",
+  "coverageAtPlan": {
+    "canonicalOverlayTargetsWithPaths": 409,
+    "canonicalOverlayMembershipsWithPaths": 427,
+    "mixedRuntimeTargetsWithRoutes": 415,
+    "mixedRuntimeMembershipsWithRoutes": 433,
+    "mixedRuntimeTargetsWithoutRoutes": 127,
+    "mixedRuntimeMembershipsWithoutRoutes": 130,
+    "fullTargetExtentPasses": 0
+  },
+  "queues": [
+    {
+      "kind": "exact_correspondence",
+      "observedCount": 43,
+      "sourceField": "unresolvedTargetBlockers",
+      "action": "acquire_or_establish_exact_source_correspondence"
+    },
+    {
+      "kind": "variant",
+      "observedCount": 21,
+      "sourceField": "unresolvedTargetBlockers",
+      "action": "seek_variant_specific_source_evidence"
+    },
+    {
+      "kind": "group_extent",
+      "observedCount": 20,
+      "sourceField": "unresolvedTargetBlockers",
+      "action": "establish_group_membership_and_extent"
+    },
+    {
+      "kind": "part_segmentation",
+      "observedCount": 31,
+      "sourceField": "unresolvedTargetBlockers",
+      "action": "inspect_source_part_segmentation_or_acquire_exact_part"
+    },
+    {
+      "kind": "explicit_side",
+      "observedCount": 12,
+      "sourceField": "unresolvedTargetBlockers",
+      "action": "establish_explicit_side_or_acquire_side_specific_surface"
+    },
+    {
+      "kind": "direct_terminology_evidence",
+      "observedCount": 73,
+      "sourceField": "targetTermEvidenceGapRows"
+    },
+    {
+      "kind": "cross_source_registration",
+      "observedObjects": 13,
+      "sourceField": "spatialRegistration"
+    }
+  ],
+  "retryTriggers": [
+    "new_specific_source_or_crosswalk_or_segmentation_evidence",
+    "user_requests_specific_structure",
+    "T80_demonstrates_core_learner_journey_gap"
+  ],
+  "noRepeatedFrozenCatalogSearchWithoutNewLead": true,
+  "individualEvidenceAndNextActions": "reuse sourceLedger entries; do not duplicate anatomy ledger",
+  "denominators": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12
+  },
+  "preserved": {
+    "targetCount": 542,
+    "membershipCount": 563,
+    "regionCount": 12,
+    "existingCanonicalHaBindings": 130,
+    "historical163": [
+      6,
+      20,
+      135,
+      2
+    ],
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "OpenSimModelsModified": false,
+    "T13DraftsModified": false
+  }
+}
