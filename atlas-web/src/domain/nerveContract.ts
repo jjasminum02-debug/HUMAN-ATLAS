@@ -46,6 +46,9 @@ export interface NerveRegistry {
   evidence: NerveEvidence[]; relations: NerveRelation[];
   targets: { id: string; kind: 'muscle' | 'muscle_part' | 'cutaneous_area' | 'root_area' | 'traditional_area';
     side: NerveSide; evidenceIds: string[] }[];
+  /** Region context is separate from the nerve's full course/extent. */
+  regionalBindings?: { instanceId: string; regionIds: string[]; evidenceIds: string[];
+    extentMeaning: 'display_context_only' }[];
 }
 const hash = (s: string) => /^[a-f0-9]{64}$/.test(s);
 const localPath = (s: string) => /^(atlas-data|work)\//.test(s) && !s.split('/').includes('..');
@@ -78,6 +81,22 @@ export function validateNerveRegistry(value: unknown, options: { allowFixtures?:
   });
   for (const t of r.targets) check(t.id && ['muscle', 'muscle_part', 'cutaneous_area', 'root_area', 'traditional_area'].includes(t.kind)
     && sides.includes(t.side) && refs(t.evidenceIds) && ['identity', 'side', 'scope'].every(p => has(t.evidenceIds, t.id, p)), 'target identity/scope');
+  const regionalBindings = r.regionalBindings ?? [];
+  check(Array.isArray(regionalBindings), 'regional bindings');
+  const regionalKeys = new Set<string>();
+  for (const binding of regionalBindings) {
+    const instance = nodes.get(binding.instanceId);
+    check(instance && binding.extentMeaning === 'display_context_only'
+      && Array.isArray(binding.regionIds) && binding.regionIds.length > 0
+      && binding.regionIds.every(id => regions.includes(id) && instance.regionIds.includes(id))
+      && refs(binding.evidenceIds) && has(binding.evidenceIds, binding.instanceId, 'scope'),
+    'regional context evidence/extent');
+    for (const regionId of binding.regionIds) {
+      const key = `${binding.instanceId}:${regionId}`;
+      check(!regionalKeys.has(key), 'duplicate regional binding');
+      regionalKeys.add(key);
+    }
+  }
   for (const n of r.instances) {
     check(n.id?.startsWith(`${n.sourceNamespace}:`) && n.sourceNamespace && n.sourceObjectId && sides.includes(n.side)
       && ['trunk', 'branch', 'root', 'plexus', 'ganglion', 'neural_context', 'unresolved'].includes(n.scope)

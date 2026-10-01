@@ -61,6 +61,19 @@ test('text-only identity card is distinct from 3D picking or course support', ()
   const r = fixture(); const n = r.instances[0]; n.geometry = null; n.localSelection = 'text_only';
   validateNerveRegistry(r); assert.equal(nerveCard(r, n)!.courseAvailable, false); assert.equal(nerveVisible(n, view), false);
 });
+test('regional context is explicitly not full course extent and requires same-instance scope evidence', () => {
+  const r = fixture();
+  r.regionalBindings = [{ instanceId: r.instances[0].id, regionIds: ['leg'], evidenceIds: ['fixture:scope'], extentMeaning: 'display_context_only' }];
+  validateNerveRegistry(r);
+  r.regionalBindings[0].extentMeaning = 'course_extent' as 'display_context_only';
+  assert.throws(() => validateNerveRegistry(r), /regional context/);
+  r.regionalBindings[0].extentMeaning = 'display_context_only';
+  r.regionalBindings[0].evidenceIds = ['fixture:frame'];
+  assert.throws(() => validateNerveRegistry(r), /regional context/);
+  r.regionalBindings[0].evidenceIds = ['fixture:scope'];
+  r.regionalBindings[0].regionIds = ['head'];
+  assert.throws(() => validateNerveRegistry(r), /regional context/);
+});
 test('identity, side and exact scope need subject-specific evidence, not names or parent evidence', () => {
   for (const change of [(r: NerveRegistry) => { r.instances[0].evidenceIds = []; },
     (r: NerveRegistry) => { r.evidence[0].subjectId = 'parent'; },

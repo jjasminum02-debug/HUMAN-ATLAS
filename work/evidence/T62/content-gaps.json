@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "t62-nerve-content-gaps-v1",
+  "taskId": "T62",
+  "contentCompleteness": "partial",
+  "candidateLedger": "atlas-data/manifests/nerve-support-t61.json",
+  "candidateRowsAreNotConceptDenominator": true,
+  "prioritizedSet": {
+    "sourceObjects": 6,
+    "textIdentityRegistered": 6,
+    "sourceGeometryEvaluated": 0,
+    "geometryAccepted": 0,
+    "branchRelationsRegistered": 6,
+    "motorRelationsRegistered": 2
+  },
+  "unresolved": [
+    {
+      "scope": "six prioritized common/deep/superficial fibular nerve source curves",
+      "missing": ["evaluated geometry hash", "nerve-specific source pose", "target frame registration", "anatomical course and branch-point placement QA"],
+      "reason": "T98 raw inventory establishes serialized Curve objects only; current Blender 3.5.0 code-signature verification is invalid and no approved evaluated export exists.",
+      "nextEvidence": "verified official runtime provenance and evaluated export with per-object hash/topology, nerve-specific pose/frame and surrounding-anatomy placement review"
+    },
+    {
+      "scope": "registered nerve labels",
+      "missing": ["supported Korean modern term", "supported Korean historical term"],
+      "reason": "The three opened papers establish relations and variability, not a Korean term authority; exact source-backed Korean names were not established.",
+      "nextEvidence": "official Korean anatomical terminology source with edition and exact term locator"
+    },
+    {
+      "scope": "nerve learner feature",
+      "missing": ["learner route and card UI", "browser-visible nerve selection", "3D picking and highlighting"],
+      "reason": "T62 registered a text-only internal contract/overlay. No learner UI integration or nerve geometry was implemented.",
+      "nextEvidence": "separately scoped product implementation using the validated registry and text-only fail-closed state"
+    },
+    {
+      "scope": "whole nerve content",
+      "missing": ["finite nerve concept denominator", "complete trunk/branch/root/plexus inventory", "variant-specific branches and territories"],
+      "reason": "T61's 1,291 candidate rows are observations, not a nerve concept denominator; a supported candidate set does not establish exhaustive nerve coverage.",
+      "nextEvidence": "source-bounded nerve concept/membership denominator with explicit inclusion and exclusion rules"
+    },
+    {
+      "scope": "release and review policy",
+      "missing": ["public redistribution decision", "human anatomical review"],
+      "reason": "Rights and review remain independent from local source/claim checks.",
+      "nextEvidence": "item-level rights review and human anatomy review"
+    }
+  ],
+  "preserved": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12,
+    "existingCanonicalHaBindings": 130,
+    "historical163": {"total": 163, "classes": [6, 20, 135, 2]},
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed"
+  }
+}

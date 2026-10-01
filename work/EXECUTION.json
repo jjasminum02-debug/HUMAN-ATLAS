@@ -2267,17 +2267,77 @@
       "title": "신경 자료 검증·공통 등록",
       "owner": "Luna Max",
       "phase": "G3",
-      "executionStatus": "planned_not_started",
-      "acceptance": "pending",
+      "executionStatus": "completed",
+      "acceptance": "passed",
       "spec": "work/tasks/T62-APP-COMPLETION.md",
       "scope": "T61의 실제 지원 신경을 우선순위에 따라 조사·검증·등록한다. T87의 확장 조사와 T88의 등록은 같은 task의 공통 pipeline으로 흡수한다. trunk/branch/지역/좌우/pose/지배 관계와 source 근거를 구분한다. 이미 확보한 자료부터 완성하며 새 source가 필요한 신경은 명시한 확장 backlog로 남긴다. 모든 신경 연구가 끝날 때까지 첫 검증 자료를 제품에서 사용할 수 없게 만드는 조건은 폐기한다.",
       "progress": {
         "nextUnit": null,
-        "completedUnits": []
+        "completedUnits": [
+          "verify-T61-priority-object-identity-side-scope-and-source-parent-pointers",
+          "open-and-compare-three-academic-originals-for-fibular-branch-topology-and-deep-fibular-to-tibialis-anterior-relation",
+          "register-six-text-only-fibular-nerve-instances-two-context-ancestors-six-branch-edges-and-two-existing-TA-relations",
+          "keep-region-as-display-context-and-preserve-geometry-pose-frame-placement-rights-and-human-review-holds",
+          "validate-source-locators-hashes-endpoints-sides-existing-HA-mapping-contract-tests-typecheck-and-production-build"
+        ],
+        "pendingUnits": [],
+        "result": "Scoped T62 nerve source registry passed: six priority fibular nerve objects are text-only with six source-and-literature-cross-checked branch relations and two side-matched deep-fibular-to-existing-tibialis-anterior relations. No geometry, UI, canonical IDs, public rights, or human review were promoted; overall nerve/content completeness remains partial.",
+        "productAcceptance": {
+          "contractRevision": "app-completion-2026-10-01",
+          "acceptanceScope": "T61 priority fibular-nerve local text identity/branch and side-matched existing tibialis-anterior relation registry; excludes nerve geometry, course extent, learner UI, complete nerve inventory and public release",
+          "productReadiness": "local_app_ready",
+          "contentCompleteness": "partial",
+          "knownContentGaps": {
+            "denominators": {
+              "targets": 542,
+              "memberships": 563,
+              "regions": 12,
+              "existingCanonicalHaBindings": 130,
+              "historical163": {
+                "total": 163,
+                "classes": [
+                  6,
+                  20,
+                  135,
+                  2
+                ]
+              }
+            },
+            "nerveRegistry": {
+              "T61CandidateRows": 1291,
+              "candidateRowsAreNotNerveConceptDenominator": true,
+              "prioritySourceObjects": 6,
+              "textIdentityRegistered": 6,
+              "contextAncestors": 2,
+              "branchRelations": 6,
+              "motorRelations": 2,
+              "geometryAccepted": 0,
+              "nerveSpecificPoseOrPlacementAccepted": 0,
+              "learnerUiIntegrated": false,
+              "KoreanTermEvidence": 0,
+              "fullNerveConceptDenominator": "not_established"
+            },
+            "rightsAndReview": {
+              "sourceOnly": "true per item",
+              "publicRedistribution": "held",
+              "humanReview": "not_performed"
+            },
+            "evidenceFile": "work/evidence/T62/content-gaps.json"
+          },
+          "unresolvedProductBlockers": [],
+          "evidence": [
+            "work/reports/T62.md",
+            "work/evidence/T62/verification.json",
+            "work/evidence/T62/geometry-review.json",
+            "work/evidence/T62/source-references.json",
+            "work/evidence/T62/content-gaps.json",
+            "atlas-data/overlays/nerve-support-t62.json"
+          ]
+        }
       },
       "report": "work/reports/T62.md",
       "promptFile": "work/prompts/app-completion-2026-10-01/09-T62.txt",
-      "acceptanceScope": "declared_verified_feature_scope; exhaustive_content_coverage_reported_separately",
+      "acceptanceScope": "T61 priority fibular-nerve local text identity/branch and side-matched existing tibialis-anterior relation registry; excludes nerve geometry, course extent, learner UI, complete nerve inventory and public release",
       "contractRevision": "app-completion-2026-10-01",
       "acceptanceContract": {
         "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
@@ -2291,7 +2351,47 @@
       "absorbedWorkIds": [
         "T87",
         "T88"
-      ]
+      ],
+      "productReadiness": "local_app_ready",
+      "contentCompleteness": "partial",
+      "knownContentGaps": {
+        "denominators": {
+          "targets": 542,
+          "memberships": 563,
+          "regions": 12,
+          "existingCanonicalHaBindings": 130,
+          "historical163": {
+            "total": 163,
+            "classes": [
+              6,
+              20,
+              135,
+              2
+            ]
+          }
+        },
+        "nerveRegistry": {
+          "T61CandidateRows": 1291,
+          "candidateRowsAreNotNerveConceptDenominator": true,
+          "prioritySourceObjects": 6,
+          "textIdentityRegistered": 6,
+          "contextAncestors": 2,
+          "branchRelations": 6,
+          "motorRelations": 2,
+          "geometryAccepted": 0,
+          "nerveSpecificPoseOrPlacementAccepted": 0,
+          "learnerUiIntegrated": false,
+          "KoreanTermEvidence": 0,
+          "fullNerveConceptDenominator": "not_established"
+        },
+        "rightsAndReview": {
+          "sourceOnly": "true per item",
+          "publicRedistribution": "held",
+          "humanReview": "not_performed"
+        },
+        "evidenceFile": "work/evidence/T62/content-gaps.json"
+      },
+      "unresolvedProductBlockers": []
     },
     "T63": {
       "title": "같은 장면의 신경 주행·지배근 선택",

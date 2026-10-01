@@ -1,0 +1,1001 @@
+{
+  "schemaVersion": "t62-nerve-geometry-review-v1",
+  "taskId": "T62",
+  "sourceOnly": true,
+  "references": {
+    "rawInventory": {
+      "path": "work/evidence/T98/blender-raw-object-inventory.json",
+      "sha256": "f2e87b76af094d899a5e7591920143589f8c13747edd25d01bc490c1142be038"
+    },
+    "frameContract": {
+      "path": "work/evidence/T98/astra-resolution-2026-09-29/frame-contract.json",
+      "sha256": "bd2029cbbcfe3a63ad693fac41b3a5e7492822030d822074ba2d5c751e89542d"
+    },
+    "runtimeCheck": {
+      "path": "work/evidence/T62/runtime-check.json",
+      "sha256": "ba6dea17fa162b48cd3c73b537b1773dd48fd6eba8549ed4dfabfe0f77511884"
+    },
+    "T61Handoff": {
+      "path": "work/evidence/T61/T62-handoff.json",
+      "sha256": "e858f2fe6ea7d75444f9a7a7286880cfb34303fc80c2b6cf94b7dc4c81d94a99"
+    }
+  },
+  "runtimeDecision": {
+    "version": "3.5.0",
+    "executableSha256": "23171ca8704539b44c94cb370894cb3b38908530c012267bed079326d7be95b0",
+    "codesignStatus": "invalid",
+    "historicalAttestation": {
+      "path": "work/evidence/T98/astra-resolution-2026-09-29/runtime-integrity.json",
+      "sha256": "d961b243053c22306fb6760ca127ace3e5998f9beb7416e9b28c45613948989b",
+      "recordedDmgSha256": "5941f450f90b8db6a1bde459db4d9248fc67f022c7cb5f662c9e0818a3725457",
+      "recordedBinarySha256": "23171ca8704539b44c94cb370894cb3b38908530c012267bed079326d7be95b0",
+      "recordedCodeSignature": "valid on disk / satisfies designated requirement"
+    },
+    "sourceArchiveExecuted": false,
+    "blendLoaded": false,
+    "evaluatedExporterRun": false
+  },
+  "frameAndPoseDecision": {
+    "observedSceneFrameId": "ZA-c7010a9-native-XYZ-frame0-m",
+    "sourceUnit": "m",
+    "sourceAxes": {
+      "positiveX": "subject_left",
+      "positiveY": "posterior",
+      "positiveZ": "superior"
+    },
+    "useForNerveSideCrosscheckOnly": true,
+    "registeredNerveSourceFrameId": null,
+    "registeredTargetFrameId": null,
+    "sourcePoseId": null,
+    "whyNotAccepted": "Scene-level frame evidence is not nerve-specific evaluated-geometry, pose, or placement proof."
+  },
+  "counts": {
+    "rawNerveObjectObservations": 8,
+    "rawCurveObjects": 8,
+    "evaluatedGeometryAccepted": 0,
+    "registeredPlacement": 0,
+    "validatedPose": 0
+  },
+  "objects": [
+    {
+      "sourceObjectId": "0x18b6246f208",
+      "sourceObjectName": "Common fibular nerve.l",
+      "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+      "dataKind": "Curve",
+      "dataBlockPointer": "0x18b64c92e88",
+      "dataBlockName": "Common fibular nerve",
+      "sideFromExactSourceLabel": "left",
+      "explicitRegionCollection": "Left lower limb",
+      "sideCoordinateCrosscheck": {
+        "frameContractId": "ZA-c7010a9-native-XYZ-frame0-m",
+        "positiveX": "subject_left",
+        "rawObjectTranslationX": 0.0962260439991951,
+        "expectedSubjectSide": "subject_left",
+        "signConsistent": true,
+        "meaning": "serialized object-transform consistency only; not evaluated curve side or placement approval"
+      },
+      "sourceParent": {
+        "pointer": "0x18b635b2408",
+        "name": "Sciatic nerve.l"
+      },
+      "collectionPaths": [
+        [
+          "Scene Collection",
+          "7: Nervous system & Sense organs"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Nerves"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus",
+          "Sacral plexus",
+          "Sciatic nerve"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus",
+          "Sacral plexus",
+          "Sciatic nerve",
+          "Common fibular nerve"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Regions of human body",
+          "Main divisions",
+          "Left lower limb"
+        ]
+      ],
+      "rawObjectMatrix": [
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.9999998807907104,
+        3.258413130424742e-07,
+        0.0,
+        0.0,
+        -3.258413130424742e-07,
+        0.9999998807907104,
+        0.0,
+        0.0962260439991951,
+        0.05195898935198784,
+        0.4664000868797302,
+        1.0000001192092896
+      ],
+      "rawLinearDeterminant": -0.9999997615815412,
+      "modifiers": {
+        "count": 0,
+        "nodes": [],
+        "unresolvedPointer": null
+      },
+      "constraints": {
+        "count": 0,
+        "nodes": [],
+        "unresolvedPointer": null
+      },
+      "animationDataPointer": null,
+      "collectionInstancePointer": null,
+      "sourceUnitContext": "m from source-scene setting; curve-point evaluation was not performed",
+      "sourcePoseId": null,
+      "registeredTargetFrameId": null,
+      "evaluatedGeometryHash": null,
+      "topologyHash": null,
+      "geometryStatus": "not_evaluated_or_accepted",
+      "placementStatus": "not_registered",
+      "reason": "No approved evaluated-curve export, nerve-specific pose binding, or target-frame placement proof."
+    },
+    {
+      "sourceObjectId": "0x18b6246eb08",
+      "sourceObjectName": "Common fibular nerve.r",
+      "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+      "dataKind": "Curve",
+      "dataBlockPointer": "0x18b64c92e88",
+      "dataBlockName": "Common fibular nerve",
+      "sideFromExactSourceLabel": "right",
+      "explicitRegionCollection": "Right lower limb",
+      "sideCoordinateCrosscheck": {
+        "frameContractId": "ZA-c7010a9-native-XYZ-frame0-m",
+        "positiveX": "subject_left",
+        "rawObjectTranslationX": -0.09622605890035629,
+        "expectedSubjectSide": "subject_right",
+        "signConsistent": true,
+        "meaning": "serialized object-transform consistency only; not evaluated curve side or placement approval"
+      },
+      "sourceParent": {
+        "pointer": "0x18b635b1d08",
+        "name": "Sciatic nerve.r"
+      },
+      "collectionPaths": [
+        [
+          "Scene Collection",
+          "7: Nervous system & Sense organs"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Nerves"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus",
+          "Sacral plexus",
+          "Sciatic nerve"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus",
+          "Sacral plexus",
+          "Sciatic nerve",
+          "Common fibular nerve"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Regions of human body",
+          "Main divisions",
+          "Right lower limb"
+        ]
+      ],
+      "rawObjectMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.9999998807907104,
+        -8.470329472543003e-22,
+        0.0,
+        0.0,
+        1.4210853868169056e-14,
+        0.9999998807907104,
+        0.0,
+        -0.09622605890035629,
+        0.051958922296762466,
+        0.4664000868797302,
+        1.0000001192092896
+      ],
+      "rawLinearDeterminant": 0.9999997615814351,
+      "modifiers": {
+        "count": 0,
+        "nodes": [],
+        "unresolvedPointer": null
+      },
+      "constraints": {
+        "count": 0,
+        "nodes": [],
+        "unresolvedPointer": null
+      },
+      "animationDataPointer": null,
+      "collectionInstancePointer": null,
+      "sourceUnitContext": "m from source-scene setting; curve-point evaluation was not performed",
+      "sourcePoseId": null,
+      "registeredTargetFrameId": null,
+      "evaluatedGeometryHash": null,
+      "topologyHash": null,
+      "geometryStatus": "not_evaluated_or_accepted",
+      "placementStatus": "not_registered",
+      "reason": "No approved evaluated-curve export, nerve-specific pose binding, or target-frame placement proof."
+    },
+    {
+      "sourceObjectId": "0x18b6239a408",
+      "sourceObjectName": "Deep fibular nerve.l",
+      "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+      "dataKind": "Curve",
+      "dataBlockPointer": "0x18b64c2f608",
+      "dataBlockName": "Deep fibular nerve",
+      "sideFromExactSourceLabel": "left",
+      "explicitRegionCollection": "Left lower limb",
+      "sideCoordinateCrosscheck": {
+        "frameContractId": "ZA-c7010a9-native-XYZ-frame0-m",
+        "positiveX": "subject_left",
+        "rawObjectTranslationX": 0.09251279383897781,
+        "expectedSubjectSide": "subject_left",
+        "signConsistent": true,
+        "meaning": "serialized object-transform consistency only; not evaluated curve side or placement approval"
+      },
+      "sourceParent": {
+        "pointer": "0x18b6246f208",
+        "name": "Common fibular nerve.l"
+      },
+      "collectionPaths": [
+        [
+          "Scene Collection",
+          "7: Nervous system & Sense organs"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Nerves"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus",
+          "Sacral plexus",
+          "Sciatic nerve"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus",
+          "Sacral plexus",
+          "Sciatic nerve",
+          "Common fibular nerve",
+          "Deep fibular nerve"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Regions of human body",
+          "Main divisions",
+          "Left lower limb"
+        ]
+      ],
+      "rawObjectMatrix": [
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.9999998807907104,
+        3.258413130424742e-07,
+        0.0,
+        0.0,
+        -3.258413130424742e-07,
+        0.9999998807907104,
+        0.0,
+        0.09251279383897781,
+        0.014359554275870323,
+        0.193593367934227,
+        1.0000001192092896
+      ],
+      "rawLinearDeterminant": -0.9999997615815412,
+      "modifiers": {
+        "count": 0,
+        "nodes": [],
+        "unresolvedPointer": null
+      },
+      "constraints": {
+        "count": 0,
+        "nodes": [],
+        "unresolvedPointer": null
+      },
+      "animationDataPointer": null,
+      "collectionInstancePointer": null,
+      "sourceUnitContext": "m from source-scene setting; curve-point evaluation was not performed",
+      "sourcePoseId": null,
+      "registeredTargetFrameId": null,
+      "evaluatedGeometryHash": null,
+      "topologyHash": null,
+      "geometryStatus": "not_evaluated_or_accepted",
+      "placementStatus": "not_registered",
+      "reason": "No approved evaluated-curve export, nerve-specific pose binding, or target-frame placement proof."
+    },
+    {
+      "sourceObjectId": "0x18b62399d08",
+      "sourceObjectName": "Deep fibular nerve.r",
+      "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+      "dataKind": "Curve",
+      "dataBlockPointer": "0x18b64c2f608",
+      "dataBlockName": "Deep fibular nerve",
+      "sideFromExactSourceLabel": "right",
+      "explicitRegionCollection": "Right lower limb",
+      "sideCoordinateCrosscheck": {
+        "frameContractId": "ZA-c7010a9-native-XYZ-frame0-m",
+        "positiveX": "subject_left",
+        "rawObjectTranslationX": -0.09251280874013901,
+        "expectedSubjectSide": "subject_right",
+        "signConsistent": true,
+        "meaning": "serialized object-transform consistency only; not evaluated curve side or placement approval"
+      },
+      "sourceParent": {
+        "pointer": "0x18b6246eb08",
+        "name": "Common fibular nerve.r"
+      },
+      "collectionPaths": [
+        [
+          "Scene Collection",
+          "7: Nervous system & Sense organs"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Nerves"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus",
+          "Sacral plexus",
+          "Sciatic nerve"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus",
+          "Sacral plexus",
+          "Sciatic nerve",
+          "Common fibular nerve",
+          "Deep fibular nerve"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Regions of human body",
+          "Main divisions",
+          "Right lower limb"
+        ]
+      ],
+      "rawObjectMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.9999998807907104,
+        8.470327453059086e-22,
+        0.0,
+        0.0,
+        1.4210853868169056e-14,
+        0.9999998807907104,
+        0.0,
+        -0.09251280874013901,
+        0.014359397813677788,
+        0.19359338283538818,
+        1.0000001192092896
+      ],
+      "rawLinearDeterminant": 0.9999997615814351,
+      "modifiers": {
+        "count": 0,
+        "nodes": [],
+        "unresolvedPointer": null
+      },
+      "constraints": {
+        "count": 0,
+        "nodes": [],
+        "unresolvedPointer": null
+      },
+      "animationDataPointer": null,
+      "collectionInstancePointer": null,
+      "sourceUnitContext": "m from source-scene setting; curve-point evaluation was not performed",
+      "sourcePoseId": null,
+      "registeredTargetFrameId": null,
+      "evaluatedGeometryHash": null,
+      "topologyHash": null,
+      "geometryStatus": "not_evaluated_or_accepted",
+      "placementStatus": "not_registered",
+      "reason": "No approved evaluated-curve export, nerve-specific pose binding, or target-frame placement proof."
+    },
+    {
+      "sourceObjectId": "0x18b641ef908",
+      "sourceObjectName": "Superficial fibular nerve.l",
+      "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+      "dataKind": "Curve",
+      "dataBlockPointer": "0x18b6469ae88",
+      "dataBlockName": "Superficial fibular nerve",
+      "sideFromExactSourceLabel": "left",
+      "explicitRegionCollection": "Left lower limb",
+      "sideCoordinateCrosscheck": {
+        "frameContractId": "ZA-c7010a9-native-XYZ-frame0-m",
+        "positiveX": "subject_left",
+        "rawObjectTranslationX": 0.1121642217040062,
+        "expectedSubjectSide": "subject_left",
+        "signConsistent": true,
+        "meaning": "serialized object-transform consistency only; not evaluated curve side or placement approval"
+      },
+      "sourceParent": {
+        "pointer": "0x18b6246f208",
+        "name": "Common fibular nerve.l"
+      },
+      "collectionPaths": [
+        [
+          "Scene Collection",
+          "7: Nervous system & Sense organs"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Nerves"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus",
+          "Sacral plexus",
+          "Sciatic nerve"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus",
+          "Sacral plexus",
+          "Sciatic nerve",
+          "Common fibular nerve",
+          "Superficial fibular nerve"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Regions of human body",
+          "Main divisions",
+          "Left lower limb"
+        ]
+      ],
+      "rawObjectMatrix": [
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.9999998807907104,
+        3.258413130424742e-07,
+        0.0,
+        0.0,
+        -3.258413130424742e-07,
+        0.9999998807907104,
+        0.0,
+        0.1121642217040062,
+        0.040996845811605453,
+        0.24894613027572632,
+        1.0000001192092896
+      ],
+      "rawLinearDeterminant": -0.9999997615815412,
+      "modifiers": {
+        "count": 0,
+        "nodes": [],
+        "unresolvedPointer": null
+      },
+      "constraints": {
+        "count": 0,
+        "nodes": [],
+        "unresolvedPointer": null
+      },
+      "animationDataPointer": null,
+      "collectionInstancePointer": null,
+      "sourceUnitContext": "m from source-scene setting; curve-point evaluation was not performed",
+      "sourcePoseId": null,
+      "registeredTargetFrameId": null,
+      "evaluatedGeometryHash": null,
+      "topologyHash": null,
+      "geometryStatus": "not_evaluated_or_accepted",
+      "placementStatus": "not_registered",
+      "reason": "No approved evaluated-curve export, nerve-specific pose binding, or target-frame placement proof."
+    },
+    {
+      "sourceObjectId": "0x18b641ef208",
+      "sourceObjectName": "Superficial fibular nerve.r",
+      "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+      "dataKind": "Curve",
+      "dataBlockPointer": "0x18b6469ae88",
+      "dataBlockName": "Superficial fibular nerve",
+      "sideFromExactSourceLabel": "right",
+      "explicitRegionCollection": "Right lower limb",
+      "sideCoordinateCrosscheck": {
+        "frameContractId": "ZA-c7010a9-native-XYZ-frame0-m",
+        "positiveX": "subject_left",
+        "rawObjectTranslationX": -0.11216423660516739,
+        "expectedSubjectSide": "subject_right",
+        "signConsistent": true,
+        "meaning": "serialized object-transform consistency only; not evaluated curve side or placement approval"
+      },
+      "sourceParent": {
+        "pointer": "0x18b6246eb08",
+        "name": "Common fibular nerve.r"
+      },
+      "collectionPaths": [
+        [
+          "Scene Collection",
+          "7: Nervous system & Sense organs"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Nerves"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus",
+          "Sacral plexus",
+          "Sciatic nerve"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus",
+          "Sacral plexus",
+          "Sciatic nerve",
+          "Common fibular nerve",
+          "Superficial fibular nerve"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Regions of human body",
+          "Main divisions",
+          "Right lower limb"
+        ]
+      ],
+      "rawObjectMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.9999998807907104,
+        8.470327453059086e-22,
+        0.0,
+        0.0,
+        1.4210853868169056e-14,
+        0.9999998807907104,
+        0.0,
+        -0.11216423660516739,
+        0.04099670797586441,
+        0.24894613027572632,
+        1.0000001192092896
+      ],
+      "rawLinearDeterminant": 0.9999997615814351,
+      "modifiers": {
+        "count": 0,
+        "nodes": [],
+        "unresolvedPointer": null
+      },
+      "constraints": {
+        "count": 0,
+        "nodes": [],
+        "unresolvedPointer": null
+      },
+      "animationDataPointer": null,
+      "collectionInstancePointer": null,
+      "sourceUnitContext": "m from source-scene setting; curve-point evaluation was not performed",
+      "sourcePoseId": null,
+      "registeredTargetFrameId": null,
+      "evaluatedGeometryHash": null,
+      "topologyHash": null,
+      "geometryStatus": "not_evaluated_or_accepted",
+      "placementStatus": "not_registered",
+      "reason": "No approved evaluated-curve export, nerve-specific pose binding, or target-frame placement proof."
+    },
+    {
+      "sourceObjectId": "0x18b635b2408",
+      "sourceObjectName": "Sciatic nerve.l",
+      "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+      "dataKind": "Curve",
+      "dataBlockPointer": "0x18b64711a88",
+      "dataBlockName": "Sciatic nerve",
+      "sideFromExactSourceLabel": "left",
+      "explicitRegionCollection": "Left lower limb",
+      "sideCoordinateCrosscheck": {
+        "frameContractId": "ZA-c7010a9-native-XYZ-frame0-m",
+        "positiveX": "subject_left",
+        "rawObjectTranslationX": 0.05495322123169899,
+        "expectedSubjectSide": "subject_left",
+        "signConsistent": true,
+        "meaning": "serialized object-transform consistency only; not evaluated curve side or placement approval"
+      },
+      "sourceParent": {
+        "pointer": "0x18b633a2408",
+        "name": "Sacral plexus.g"
+      },
+      "collectionPaths": [
+        [
+          "Scene Collection",
+          "7: Nervous system & Sense organs"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Nerves"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus",
+          "Sacral plexus",
+          "Sciatic nerve"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Regions of human body",
+          "Main divisions",
+          "Left lower limb"
+        ]
+      ],
+      "rawObjectMatrix": [
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.9999997615814209,
+        3.258412846207648e-07,
+        0.0,
+        0.0,
+        -3.258412846207648e-07,
+        0.9999997615814209,
+        0.0,
+        0.05495322123169899,
+        0.045973069965839386,
+        0.6734158992767334,
+        1.0
+      ],
+      "rawLinearDeterminant": -0.9999995231630048,
+      "modifiers": {
+        "count": 0,
+        "nodes": [],
+        "unresolvedPointer": null
+      },
+      "constraints": {
+        "count": 0,
+        "nodes": [],
+        "unresolvedPointer": null
+      },
+      "animationDataPointer": null,
+      "collectionInstancePointer": null,
+      "sourceUnitContext": "m from source-scene setting; curve-point evaluation was not performed",
+      "sourcePoseId": null,
+      "registeredTargetFrameId": null,
+      "evaluatedGeometryHash": null,
+      "topologyHash": null,
+      "geometryStatus": "not_evaluated_or_accepted",
+      "placementStatus": "not_registered",
+      "reason": "No approved evaluated-curve export, nerve-specific pose binding, or target-frame placement proof."
+    },
+    {
+      "sourceObjectId": "0x18b635b1d08",
+      "sourceObjectName": "Sciatic nerve.r",
+      "sourceFileSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+      "dataKind": "Curve",
+      "dataBlockPointer": "0x18b64711a88",
+      "dataBlockName": "Sciatic nerve",
+      "sideFromExactSourceLabel": "right",
+      "explicitRegionCollection": "Right lower limb",
+      "sideCoordinateCrosscheck": {
+        "frameContractId": "ZA-c7010a9-native-XYZ-frame0-m",
+        "positiveX": "subject_left",
+        "rawObjectTranslationX": -0.05495322123169899,
+        "expectedSubjectSide": "subject_right",
+        "signConsistent": true,
+        "meaning": "serialized object-transform consistency only; not evaluated curve side or placement approval"
+      },
+      "sourceParent": {
+        "pointer": "0x18b633a2408",
+        "name": "Sacral plexus.g"
+      },
+      "collectionPaths": [
+        [
+          "Scene Collection",
+          "7: Nervous system & Sense organs"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Nerves"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Nervous system",
+          "Peripheral nervous system",
+          "Spinal nerves",
+          "Lumbosacral plexus",
+          "Sacral plexus",
+          "Sciatic nerve"
+        ],
+        [
+          "Scene Collection",
+          "Bonus collection",
+          "Regions of human body",
+          "Main divisions",
+          "Right lower limb"
+        ]
+      ],
+      "rawObjectMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.9999997615814209,
+        -1.4210852174103162e-14,
+        0.0,
+        0.0,
+        1.4210852174103162e-14,
+        0.9999997615814209,
+        0.0,
+        -0.05495322123169899,
+        0.045973069965839386,
+        0.6734158992767334,
+        1.0
+      ],
+      "rawLinearDeterminant": 0.9999995231628986,
+      "modifiers": {
+        "count": 0,
+        "nodes": [],
+        "unresolvedPointer": null
+      },
+      "constraints": {
+        "count": 0,
+        "nodes": [],
+        "unresolvedPointer": null
+      },
+      "animationDataPointer": null,
+      "collectionInstancePointer": null,
+      "sourceUnitContext": "m from source-scene setting; curve-point evaluation was not performed",
+      "sourcePoseId": null,
+      "registeredTargetFrameId": null,
+      "evaluatedGeometryHash": null,
+      "topologyHash": null,
+      "geometryStatus": "not_evaluated_or_accepted",
+      "placementStatus": "not_registered",
+      "reason": "No approved evaluated-curve export, nerve-specific pose binding, or target-frame placement proof."
+    }
+  ],
+  "sideMatchedExistingTAMuscleTargets": {
+    "left": {
+      "sourceKey": "ZA-c7010a9-74ced50ada635db761f807e4",
+      "sourceName": "Tibialis anterior muscle.l",
+      "overlayIndex": 868,
+      "targetId": "TA2:2644",
+      "existingHaConceptId": "HA-M-000003",
+      "side": "left",
+      "regionIds": [
+        "leg"
+      ]
+    },
+    "right": {
+      "sourceKey": "ZA-c7010a9-54ae5266082b61f48ed8e83e",
+      "sourceName": "Tibialis anterior muscle.r",
+      "overlayIndex": 869,
+      "targetId": "TA2:2644",
+      "existingHaConceptId": "HA-M-000003",
+      "side": "right",
+      "regionIds": [
+        "leg"
+      ]
+    }
+  },
+  "limitations": [
+    "Raw Object matrices are serialized source metadata, not evaluated nerve curves.",
+    "Source nerve objects are not rendered, picked, or accepted as 3D paths.",
+    "No branch point or course coordinate is derived from bounds or object origin.",
+    "No geometry is modified, mirrored, split, or exported."
+  ]
+}

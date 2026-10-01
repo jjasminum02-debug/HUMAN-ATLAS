@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "t62-runtime-check-v1",
+  "checkedAt": "2026-10-01",
+  "path": "/Volumes/Blender/Blender.app/Contents/MacOS/Blender",
+  "readOnlyChecks": [
+    "Blender --version",
+    "shasum -a 256 executable",
+    "codesign --verify --deep --strict --verbose=2 app bundle"
+  ],
+  "observedVersion": "3.5.0",
+  "executableSha256": "23171ca8704539b44c94cb370894cb3b38908530c012267bed079326d7be95b0",
+  "codesignVerification": {
+    "status": "invalid",
+    "exitCode": 1,
+    "message": "invalid signature (code or signature have been modified), arm64"
+  },
+  "historicalAttestation": {
+    "path": "work/evidence/T98/astra-resolution-2026-09-29/runtime-integrity.json",
+    "sha256": "d961b243053c22306fb6760ca127ace3e5998f9beb7416e9b28c45613948989b",
+    "recordedDmgSha256": "5941f450f90b8db6a1bde459db4d9248fc67f022c7cb5f662c9e0818a3725457",
+    "recordedBinarySha256": "23171ca8704539b44c94cb370894cb3b38908530c012267bed079326d7be95b0",
+    "recordedCodeSignature": "valid on disk / satisfies designated requirement"
+  },
+  "conclusion": "Binary bytes match the historical T98 record but current code-signature verification fails; provenance/integrity chain is unresolved for executing the .blend.",
+  "sourceArchiveExecuted": false,
+  "blendLoaded": false,
+  "evaluatedExporterRun": false,
+  "startupBlendModified": false,
+  "relatedInputHashes": {
+    "rawObjectInventory": "f2e87b76af094d899a5e7591920143589f8c13747edd25d01bc490c1142be038",
+    "frameContract": "bd2029cbbcfe3a63ad693fac41b3a5e7492822030d822074ba2d5c751e89542d"
+  }
+}

@@ -2,12 +2,12 @@
 
 자동 생성. 편집 원본은 [EXECUTION.json](EXECUTION.json). 역사 handoff/자료 개수로 다음 작업을 결정하지 않는다.
 
-- 확인된 최근 진행: T61 / accepted
-- 다음 ID: **T62**
+- 확인된 최근 진행: T62 / accepted
+- 다음 ID: **T63**
 - 현재 지원 앱 완성: T100 통합 마무리 → T80 사용 감사/보완 → T58 UI·성능 최적화. 전체 콘텐츠 확보는 별도 상태로 유지한다.
 
 ```text
-HUMAN ATLAS에서 T62만 수행해라. 담당 Luna Max.
+HUMAN ATLAS에서 T63만 수행해라. 담당 Sol High.
 
 AGENTS.md, work/EXECUTION.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/product-acceptance.json,
 해당 task의 현재 spec/promptFile, 실제 선행 report/evidence를 읽어라.
@@ -26,9 +26,9 @@ python3 work/tools/sync_execution.py 및 --check를 수행하고 소유 변경�
 다음 task 자동 실행, 새 번호/스레드 발급, 자동 위임, push/배포, 임상 진단·치료·자침 기능은 금지한다.
 
 이번 실행:
-이번 범위: T61의 실제 지원 신경을 우선순위에 따라 조사·검증·등록한다. T87의 확장 조사와 T88의 등록은 같은 task의 공통 pipeline으로 흡수한다. trunk/branch/지역/좌우/pose/지배 관계와 source 근거를 구분한다. 이미 확보한 자료부터 완성하며 새 source가 필요한 신경은 명시한 확장 backlog로 남긴다. 모든 신경 연구가 끝날 때까지 첫 검증 자료를 제품에서 사용할 수 없게 만드는 조건은 폐기한다.
+이번 범위: 검증된 T62 신경을 기존 scene/renderer/camera에서 표시하고 typed 선택/카드/근거 있는 지배근 강조/복원을 연결한다. T89의 같은 방식 확장은 데이터 기반 내부 unit으로 흡수한다. 신경 주행·좌표·pose가 확인된 실제 surface/curve만 사용하고 미확보 신경은 미지원으로 유지한다. source 후보나 이름을 실제 주행으로 조작하지 않는다.
 
-T61의 지원 후보와 실제 source를 검증하고 같은 schema/registry로 bulk 등록한다. 공식/학술 원문에서 필요한 관계를 확인하고 원문·AI 해석·채택·사람검토를 분리한다. source geometry/좌표/branch와 지배 관계를 각각 검증한다. 실제 통합 가능 자료와 미확보를 보고하며 한 파일럿 또는 자료 수만으로 전 신경 완료라고 하지 않는다. T87/T88 별도 실행·반복 전수 builder를 만들지 않는다.
+하나의 신경 3D 경로로 검증된 자료 전체를 처리하고 선택/branch/side/region/card 및 지배근 강조/복원을 연결한다. loader 취소·cache·layer-off·pose 지원을 기존 controller와 통합한다. 지원되지 않은 운동 pose에서 정적 신경을 잘못 고정하지 않는다. 데이터 계약 전수 검사와 지역/주행 유형·변경 사례의 실제 UI를 확인한다. T89를 따로 실행하지 않는다.
 
-종료 후 다음 ID는 T63다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
+종료 후 다음 ID는 T90다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
 ```

@@ -1,0 +1,293 @@
+{
+  "schemaVersion": "t62-verification-v1",
+  "taskId": "T62",
+  "checkedAt": "2026-10-01",
+  "status": "passed_scoped",
+  "baseline": {
+    "head": "f030ab2400400a89196717f5ecdded215318a903",
+    "branch": "main",
+    "preexistingTrackedDirtyFileCount": 24,
+    "unchangedAfterWork": 23,
+    "generatedProjectionOnlyChange": [
+      "work/STATUS.md"
+    ],
+    "unchangedBeforeExecutionViewSync": "24/24"
+  },
+  "inputs": {
+    "T61PriorityHandoff": {
+      "path": "work/evidence/T61/T62-handoff.json",
+      "sha256": "e858f2fe6ea7d75444f9a7a7286880cfb34303fc80c2b6cf94b7dc4c81d94a99"
+    },
+    "T61CandidateInventory": {
+      "path": "atlas-data/manifests/nerve-support-t61.json",
+      "sha256": "a6a9838f885439f34686a04dadcb4f1acd7d6469c3625ed894e676bd3c3afa2c"
+    },
+    "RawZAObjectInventory": {
+      "path": "work/evidence/T98/blender-raw-object-inventory.json",
+      "sha256": "f2e87b76af094d899a5e7591920143589f8c13747edd25d01bc490c1142be038"
+    },
+    "ZASceneFrameContract": {
+      "path": "work/evidence/T98/astra-resolution-2026-09-29/frame-contract.json",
+      "sha256": "bd2029cbbcfe3a63ad693fac41b3a5e7492822030d822074ba2d5c751e89542d"
+    },
+    "CurrentRuntimeCheck": {
+      "path": "work/evidence/T62/runtime-check.json",
+      "sha256": "ba6dea17fa162b48cd3c73b537b1773dd48fd6eba8549ed4dfabfe0f77511884"
+    },
+    "OpenedSourceClaims": {
+      "path": "work/evidence/T62/source-references.json",
+      "sha256": "0c243a29a293b7617a71073cd4e381a219b1e34e9936b335d738a5f054124c01"
+    },
+    "ExistingZAIntegration": {
+      "path": "atlas-data/overlays/za-local-integration.json",
+      "sha256": "4a5028dd7c1bca3b142d7899cc99a425ad88d5837ca598d2d5f4ad612994be5c"
+    },
+    "CompiledZAInstances": {
+      "path": "atlas-data/source-cache/datasets/za/compiled/manifest.json",
+      "sha256": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42"
+    },
+    "ExistingProductScope": {
+      "path": "work/product-scope.json",
+      "sha256": "892df96b376d9ee9172cb6636ee77b857068bef57feb3b5cdd78c7b0912a7599"
+    },
+    "T96TargetDenominator": {
+      "path": "atlas-data/catalog/target-scope-t96.json",
+      "sha256": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24"
+    },
+    "T98HistoricalRuntimeAttestation": {
+      "path": "work/evidence/T98/astra-resolution-2026-09-29/runtime-integrity.json",
+      "sha256": "d961b243053c22306fb6760ca127ace3e5998f9beb7416e9b28c45613948989b"
+    }
+  },
+  "outputs": {
+    "atlas-data/overlays/nerve-support-t62.json": "f9110513f362a6b8cc3b364663cfa3433fa4fdada11e831e0a8cf8fc7c7e03ae",
+    "work/evidence/T62/geometry-review.json": "a94b8ae0b8c84b70ee48e4e2c93a1f61ce2331607d260b019bb74de6aabbb42a",
+    "work/evidence/T62/source-references.json": "0c243a29a293b7617a71073cd4e381a219b1e34e9936b335d738a5f054124c01",
+    "work/evidence/T62/runtime-check.json": "ba6dea17fa162b48cd3c73b537b1773dd48fd6eba8549ed4dfabfe0f77511884",
+    "work/evidence/T62/content-gaps.json": "6e3e99e10eafaf258505570053297badaf0141ced5ea2d6bdb94d2026a5bbd72",
+    "work/tools/build_t62_nerve_registry.py": "2ee0eb064da96370ffbeb2af585719523e4599a63963baa5ffd738f112a842a8",
+    "atlas-web/src/domain/nerveContract.ts": "54990bfc6132c2a3717d8203477889b8de14667a29ecca5b0dea10deead2e3d2",
+    "atlas-web/src/domain/nerveContract.test.ts": "a6c5b20dc973c193e3687b588df8d63e439a975a249931a5c2b1ccf59ad5aaf8",
+    "atlas-web/scripts/validateT62NerveRegistration.ts": "fc3f68f1c877f302740faac1848d6e0c61c809c545a0a864f10ea5a96104eb0b",
+    "work/reports/T62.md": "e818c3295759518cd680c579acffc50f480e663e03ca1af132b291f0b82c7625",
+    "work/EXECUTION.json": "c45c4fb4bb2d76f9f8512b964f759ee0dd2bfba4e995dd383f7d852293b3e2d1",
+    "work/NEXT.md": "8cc8ccbc5837f820205ed896e9fcbb22242d9c077f75656eca5c198bc855498c",
+    "work/STATUS.md": "e3f5ef7c208fc28fa751d5ba4efbffb15ea9f4458bc70404d4c4d83c16ed53cb"
+  },
+  "registrationCounts": {
+    "registryInstances": 8,
+    "priorityTextOnlyNerves": 6,
+    "unsupportedContextAncestors": 2,
+    "regionalBindingsDisplayContextOnly": 6,
+    "verifiedBranchRelations": 6,
+    "verifiedSideMatchedMotorRelations": 2,
+    "existingTibialisAnteriorTargets": 2,
+    "acceptedNerveGeometry": 0,
+    "acceptedNervePoseOrPlacement": 0,
+    "newCanonicalHaIds": 0
+  },
+  "preservedDenominators": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12,
+    "existingCanonicalHaBindings": 130,
+    "historical163": {
+      "total": 163,
+      "classes": [
+        6,
+        20,
+        135,
+        2
+      ]
+    }
+  },
+  "policy": {
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "learnerUiIntegrated": false,
+    "openSimModelsChanged": false
+  },
+  "checks": {
+    "registrationBuild": "passed; python3 work/tools/build_t62_nerve_registry.py --write and --check",
+    "sourceRegistryValidator": "passed; node --experimental-strip-types atlas-web/scripts/validateT62NerveRegistration.ts; exact sources, hashes, locators, parent pointers, sides, region context, and existing TA endpoints checked",
+    "nerveContractTests": "passed; 19/19 tests",
+    "typecheck": "passed; tsc -b --pretty false with bundled Node 24.19.0",
+    "productionBuild": "passed; Vite 8.3.1, 45 modules",
+    "buildAdvisory": "App JS chunk 731.49 kB uncompressed; non-failing advisory; no T62 runtime UI import",
+    "browserVerification": "not run; learner UI/renderer were not changed or integrated",
+    "blenderOrBlendExecution": "not run; invalid current code signature retained as a geometry/export hold",
+    "executionProjectionSync": "passed; python3 work/tools/sync_execution.py --check; no drift",
+    "learnerRuntimeImportAudit": "passed; no runtime source import of nerveContract or T62 nerve registry was found; no learner UI integration is claimed"
+  },
+  "preexistingTrackedFileChecks": [
+    {
+      "path": "AGENTS.md",
+      "baselineSha256": "f4801313b11bdec858f7e0b04d80e429559efd4a4ef631ecf8384ced182b9eb7",
+      "currentSha256": "f4801313b11bdec858f7e0b04d80e429559efd4a4ef631ecf8384ced182b9eb7",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/00-START-HERE.md",
+      "baselineSha256": "a0cfa926cb776bf32b0d007489c81e0980fbd68def5b71a31492c3db738bd9a3",
+      "currentSha256": "a0cfa926cb776bf32b0d007489c81e0980fbd68def5b71a31492c3db738bd9a3",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md",
+      "baselineSha256": "8d7f510f7b2fd697f35997ea9754fd4a8eec5339797319cf5d81b9e74678eb24",
+      "currentSha256": "8d7f510f7b2fd697f35997ea9754fd4a8eec5339797319cf5d81b9e74678eb24",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/07-AI-EVIDENCE-AND-MOTION-DESIGN.md",
+      "baselineSha256": "2760275e0a45c78768615ba6c6aa8348eb92848543df1c6e3f69cc598ad86185",
+      "currentSha256": "2760275e0a45c78768615ba6c6aa8348eb92848543df1c6e3f69cc598ad86185",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/08-SERIAL-ROADMAP-AND-GIT.md",
+      "baselineSha256": "97ef138107428bbed4e96f3969e32c3587ed643a552a1a78f67748275c5575fc",
+      "currentSha256": "97ef138107428bbed4e96f3969e32c3587ed643a552a1a78f67748275c5575fc",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "work/STATUS.md",
+      "baselineSha256": "ea63f08f04a55ccec247404a68e9a629fcb19b37181c850697c1eefd46090075",
+      "currentSha256": "e3f5ef7c208fc28fa751d5ba4efbffb15ea9f4458bc70404d4c4d83c16ed53cb",
+      "unchanged": false,
+      "expectedGeneratedProjectionChange": true
+    },
+    {
+      "path": "work/task-registry-r13.json",
+      "baselineSha256": "80ba59e7a9d7323a4fc115da37c4fe1ebdc4ca6e4206a9a6f07fb42ed5833258",
+      "currentSha256": "80ba59e7a9d7323a4fc115da37c4fe1ebdc4ca6e4206a9a6f07fb42ed5833258",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "work/tasks/T24.md",
+      "baselineSha256": "1c5ba88feb180ba78cf04c2d146257b10369e691354adbea87886fbfe920f7a6",
+      "currentSha256": "1c5ba88feb180ba78cf04c2d146257b10369e691354adbea87886fbfe920f7a6",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "work/tasks/T25.md",
+      "baselineSha256": "6372b3e5813d380505d83b553b166ffab0f5b4e99a1cf3e8772fccfde854a18a",
+      "currentSha256": "6372b3e5813d380505d83b553b166ffab0f5b4e99a1cf3e8772fccfde854a18a",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "work/tasks/T26.md",
+      "baselineSha256": "3e77c66831f3790d000af28605ff85901de1b805c2d1b203647c2bf8b564ba8a",
+      "currentSha256": "3e77c66831f3790d000af28605ff85901de1b805c2d1b203647c2bf8b564ba8a",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "work/tasks/T27.md",
+      "baselineSha256": "cfb9e72e86a8dcaf13fbcf0523ad38c1d599aff4da507b5e7ed0ff9c977a3937",
+      "currentSha256": "cfb9e72e86a8dcaf13fbcf0523ad38c1d599aff4da507b5e7ed0ff9c977a3937",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "work/tasks/T28.md",
+      "baselineSha256": "0e27ca173aded1624aa799639f7db6b86e04a8ac344a5825ee8ef98db826f021",
+      "currentSha256": "0e27ca173aded1624aa799639f7db6b86e04a8ac344a5825ee8ef98db826f021",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "work/tasks/T29.md",
+      "baselineSha256": "b84fc06db2196bbc17ee6312dfc54ab7af1dd0aa8ae3a268f9e33f10ecec8b63",
+      "currentSha256": "b84fc06db2196bbc17ee6312dfc54ab7af1dd0aa8ae3a268f9e33f10ecec8b63",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "work/tasks/T30.md",
+      "baselineSha256": "6fc18624d4438813d928174bad58de59f463c2c064837dbbc5af32f3ed8a6b66",
+      "currentSha256": "6fc18624d4438813d928174bad58de59f463c2c064837dbbc5af32f3ed8a6b66",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "work/tasks/T31.md",
+      "baselineSha256": "5561e085133e04074251e23fa4d0973fc69e1fcd9fbbf783242c78eb06b47b4c",
+      "currentSha256": "5561e085133e04074251e23fa4d0973fc69e1fcd9fbbf783242c78eb06b47b4c",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "work/tasks/T32.md",
+      "baselineSha256": "2d73b738568855e08bd89fd467a84736052bc9cf0303022e34ebe661e62076cf",
+      "currentSha256": "2d73b738568855e08bd89fd467a84736052bc9cf0303022e34ebe661e62076cf",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "work/tasks/T33.md",
+      "baselineSha256": "78c208e9744218d8ee48ee88e137bcc1afbdc67f43041a25259674f47290ac35",
+      "currentSha256": "78c208e9744218d8ee48ee88e137bcc1afbdc67f43041a25259674f47290ac35",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "work/tasks/T34.md",
+      "baselineSha256": "2a149e9b10ca16a1f53016d2a8f870ce9887cfdb8edbdda8339867769e830c46",
+      "currentSha256": "2a149e9b10ca16a1f53016d2a8f870ce9887cfdb8edbdda8339867769e830c46",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "work/tasks/T35.md",
+      "baselineSha256": "bdcc4be3d7f2604db4d407b04657f26d571864e0bee213017590d9c3ba794194",
+      "currentSha256": "bdcc4be3d7f2604db4d407b04657f26d571864e0bee213017590d9c3ba794194",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "work/tasks/T36.md",
+      "baselineSha256": "c24ec711a974c39feccdf4c8383a09e40e52109cc6b3a5efc3285ee0650cd337",
+      "currentSha256": "c24ec711a974c39feccdf4c8383a09e40e52109cc6b3a5efc3285ee0650cd337",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "work/tasks/T37.md",
+      "baselineSha256": "ae622a4a4d62a53b4f27ca8e38fdea149ebc676e4ec04292e71ce0a322c78b8f",
+      "currentSha256": "ae622a4a4d62a53b4f27ca8e38fdea149ebc676e4ec04292e71ce0a322c78b8f",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "work/tasks/T38.md",
+      "baselineSha256": "e709736a79806e309c1abebcb8813f3be7bb4fddf119b9ac713fb54d111a7979",
+      "currentSha256": "e709736a79806e309c1abebcb8813f3be7bb4fddf119b9ac713fb54d111a7979",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "work/tasks/T39.md",
+      "baselineSha256": "89ffe23d3fd9c17484d5e41ee0f8eaacb5c05f3b45b75e417b0e98125a241ec1",
+      "currentSha256": "89ffe23d3fd9c17484d5e41ee0f8eaacb5c05f3b45b75e417b0e98125a241ec1",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    },
+    {
+      "path": "work/tasks/T40.md",
+      "baselineSha256": "0907ace1bff3d30ab8be144744ab21fb325ddf97b2a18a95a100c977c988ad07",
+      "currentSha256": "0907ace1bff3d30ab8be144744ab21fb325ddf97b2a18a95a100c977c988ad07",
+      "unchanged": true,
+      "expectedGeneratedProjectionChange": false
+    }
+  ]
+}

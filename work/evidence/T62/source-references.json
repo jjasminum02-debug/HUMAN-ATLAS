@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "t62-opened-anatomy-reference-review-v1",
+  "taskId": "T62",
+  "accessedOn": "2026-10-01",
+  "evidencePolicy": {
+    "searchIndex": "Used only to discover candidate articles. Search result text is not accepted as claim evidence.",
+    "openedOriginal": "Each claim below was checked against the opened PMC full-text HTML at the listed section/line locators.",
+    "interpretation": "Paraphrased anatomical claims remain separate from source wording; no human review or source-asset approval is inferred."
+  },
+  "sources": [
+    {
+      "id": "kim-ryou-2019-common-fibular-course",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6960080/",
+      "title": "Branching Patterns and Anatomical Course of the Common Fibular Nerve",
+      "publication": "Annals of Rehabilitation Medicine. 2019;43(6):700-706. Published 2019-12-31.",
+      "doi": "10.5535/arm.2019.43.6.700",
+      "pmc": "PMC6960080",
+      "version": "PMC full-text HTML of the published article; publisher-file comparison not performed.",
+      "accessMethod": "Opened full-text HTML directly; source text reviewed in Introduction, Materials and Methods, and Results.",
+      "discoveryRole": "Search index was not used as evidence.",
+      "licenseObserved": "Creative Commons Attribution-NonCommercial 4.0 International stated on article page.",
+      "originalTextOpened": true,
+      "claims": [
+        {
+          "id": "common-fibular-course-and-branches",
+          "claim": "The article describes the common fibular nerve as a sciatic division that courses by the biceps femoris tendon around the fibular head, and later separates into deep and superficial fibular nerves.",
+          "locator": "Introduction, PMC HTML lines 121-123. This paragraph is literature synthesis; exact left/right source-object parent links were separately checked in the pinned source inventory.",
+          "use": "Branch hierarchy cross-check only; no individual branch point, course coordinates, or universal geometry."
+        },
+        {
+          "id": "fibular-head-course-variation",
+          "claim": "The cadaveric series reports both a cross-over and a posterior course at the fibular head, so a single source curve cannot be treated as a universal course.",
+          "locator": "Abstract lines 107-116; Materials and Methods lines 135-149; Results lines 154-170.",
+          "use": "Supports retaining nerve geometry as unresolved until object-specific evaluated course and variation policy are validated."
+        }
+      ]
+    },
+    {
+      "id": "shekhawat-2025-fibular-branches",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12519015/",
+      "title": "Anatomical study of fascial and aponeurotic bands in the anterolateral leg",
+      "publication": "Anatomy & Cell Biology. 2025;58(3):373-378. Published 2025-07-03; issue date 2025-09-30.",
+      "doi": "10.5115/acb.24.273",
+      "pmc": "PMC12519015",
+      "version": "PMC full-text HTML of the published article; publisher-file comparison not performed.",
+      "accessMethod": "Search result used only for discovery; opened full-text HTML and checked Anatomy, Methods, Results, and Discussion.",
+      "discoveryRole": "Search snippet not used to accept any claim.",
+      "licenseObserved": "Creative Commons Attribution-NonCommercial 4.0 International stated on article page.",
+      "originalTextOpened": true,
+      "claims": [
+        {
+          "id": "sciatic-common-and-terminal-branch-hierarchy",
+          "claim": "The article describes the common fibular nerve as the lateral sciatic division, then the deep and superficial fibular nerves as its terminal branches.",
+          "locator": "Anatomy, PMC HTML lines 193-197; Discussion line 299.",
+          "use": "General branch topology cross-checked against exact source parent-object pointers; not a source-side or geometry claim."
+        },
+        {
+          "id": "bilateral-cadaver-sampling-and-branching-variation",
+          "claim": "The authors dissected 52 lower-limb sides, including 27 right and 25 left, and observed multiple deep fibular branching patterns and recurrent articular branches to tibialis anterior in a subset.",
+          "locator": "Materials and Methods lines 207-229; Results lines 272-278; side summary lines 294-302.",
+          "use": "Supports bilateral relation scope and warns that a static un-evaluated curve cannot establish variant branch geometry or exclusive muscle supply."
+        }
+      ]
+    },
+    {
+      "id": "congio-2026-deep-fibular-ta-innervation",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13403479/",
+      "title": "Anatomical study of the innervation of the tibialis anterior muscle and its relationship with myofascial trigger points",
+      "publication": "Acta Cirurgica Brasileira. 2026;41:e414326. Published 2026-07-24.",
+      "doi": "10.1590/acb414326",
+      "pmc": "PMC13403479",
+      "version": "PMC full-text HTML of the published article; publisher-file comparison not performed.",
+      "accessMethod": "Opened full-text HTML directly; checked Abstract, Anatomical technique, Results, and figure captions.",
+      "discoveryRole": "No search snippet used as evidence.",
+      "licenseObserved": "Creative Commons Attribution 4.0 International stated on article page.",
+      "originalTextOpened": true,
+      "claims": [
+        {
+          "id": "deep-fibular-to-tibialis-anterior",
+          "claim": "The authors dissected 20 tibialis anterior muscles from 12 cadavers, followed deep fibular nerve branches to the muscle, and exposed/mapped their entry points; both right- and left-side measurements are reported.",
+          "locator": "Abstract/method summary, PMC HTML lines 127-138; Anatomical technique lines 165-173; side comparisons lines 267-280.",
+          "use": "Supports presence of a deep-fibular-to-tibialis-anterior motor-entry relation on matched sides. It does not establish exclusive supply, the complete course, or a model-specific coordinate/entry point."
+        }
+      ]
+    }
+  ],
+  "adoptedParaphrases": [
+    {
+      "claimId": "common-fibular-course-and-branches",
+      "status": "adopted_for_text_only_branch_topology"
+    },
+    {
+      "claimId": "sciatic-common-and-terminal-branch-hierarchy",
+      "status": "adopted_for_text_only_branch_topology"
+    },
+    {
+      "claimId": "deep-fibular-to-tibialis-anterior",
+      "status": "adopted_for_side_matched_innervation_relation_only"
+    }
+  ],
+  "notAdopted": [
+    "No source curve coordinates, evaluated topology, pose binding, target-frame registration, or object-specific anatomical course was accepted.",
+    "No exact Korean nerve display term was established in this task; Korean name fields remain null.",
+    "No human review, public redistribution right, diagnosis, treatment, or needling claim was created."
+  ]
+}
