@@ -1,5 +1,6 @@
 import summaries from "../../../atlas-data/terminology/learning-structure-summaries.json";
 import aiEvidenceOverlay from "../../../atlas-data/terminology/ai-evidence-overlay.json";
+import sourceStructureContent from "../../../atlas-data/terminology/learner-structure-source-content.json";
 import motionLearningBundle from "../../../atlas-data/motion/motion-learning.json";
 import names from '../../../atlas-data/terminology/learning-names.json';
 import { displayTerms, termText, type PilotCatalog } from './catalog';
@@ -8,6 +9,7 @@ import { projectAiEvidenceField, type AiEvidenceField, type LearnerFieldProjecti
 import { projectLegacySummary, type LegacyLearningSummary } from '../domain/legacyEvidenceAdapter';
 import { projectLearnerActionCard, projectLearnerMotionActionOptions, type MotionLearningBundle } from '../domain/motionLearning';
 import { learnerStructureText } from '../domain/learnerStructureText';
+import { learnerStructureSourceText, learnerStructureUnavailability, type SourceStructureContentRecord } from '../domain/learnerStructureSourceContent';
 import { learnerActionExplanation } from '../domain/learnerActionText';
 const rawNameSources = names.sources as Record<string, { title: string; url: string | null; locator: string }>;
 export const nameSources = Object.fromEntries(Object.entries(rawNameSources).map(([id, source]) => [id, {
@@ -44,6 +46,8 @@ export function findMuscles(catalog: PilotCatalog, query: string) {
 const aiFieldItems = (aiEvidenceOverlay as { items: AiEvidenceField[] }).items;
 const legacySummaryRows = summaries as LegacyLearningSummary[];
 const motionBundle = motionLearningBundle as MotionLearningBundle;
+const sourceStructureContentRows = (sourceStructureContent as { records: SourceStructureContentRecord[] }).records;
+const sourceStructureContentByKey = new Map(sourceStructureContentRows.flatMap(row => row.sourceKeys.map(sourceKey => [sourceKey, row] as const)));
 
 /** Project a source-bound muscle action without exposing evidence, task, or authoring identifiers. */
 export function actionCardForLearner(conceptId: string) {
@@ -75,6 +79,17 @@ export function structureTextForLearner(conceptId: string, field: string): strin
   const aiField = aiFieldItems.find((row) => row.subjectId === conceptId && row.field === field);
   const legacy = legacySummaryRows.find((row) => row.conceptId === conceptId && row.role === field);
   return learnerStructureText(aiField, legacy);
+}
+
+/** Project existing claims only through the exact source-scoped pointers frozen by T81. */
+export function structureTextForSource(sourceKey: string, field: "origin" | "insertion"): string | null {
+  const record = sourceStructureContentByKey.get(sourceKey);
+  return learnerStructureSourceText(record, field, structureTextForLearner);
+}
+
+/** Short learner-safe explanation for fields without a validated display sentence. */
+export function structureUnavailabilityForLearner(field: "origin" | "insertion" | "motorNerve" | "sensoryProprioception") {
+  return learnerStructureUnavailability(field);
 }
 
 export function structureSummary(conceptId: string, role: string) {

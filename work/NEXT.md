@@ -2,12 +2,12 @@
 
 자동 생성. 편집 원본은 [EXECUTION.json](EXECUTION.json). 역사 handoff/자료 개수로 다음 작업을 결정하지 않는다.
 
-- 확인된 최근 진행: T58 / accepted
-- 다음 ID: **T81**
+- 확인된 최근 진행: T81 / accepted
+- 다음 ID: **T82**
 - 현재 지원 앱 완성: T100 통합 마무리 → T80 사용 감사/보완 → T58 UI·성능 최적화. 전체 콘텐츠 확보는 별도 상태로 유지한다.
 
 ```text
-HUMAN ATLAS에서 T81만 수행해라. 담당 Luna Max.
+HUMAN ATLAS에서 T82만 수행해라. 담당 Luna Max.
 
 AGENTS.md, work/EXECUTION.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/product-acceptance.json,
 해당 task의 현재 spec/promptFile, 실제 선행 report/evidence를 읽어라.
@@ -26,11 +26,7 @@ python3 work/tools/sync_execution.py 및 --check를 수행하고 소유 변경�
 다음 task 자동 실행, 새 번호/스레드 발급, 자동 위임, push/배포, 임상 진단·치료·자침 기능은 금지한다.
 
 이번 실행:
-1. T58 local_app_ready와 product-scope.json에서 현재 지원 근육 전체를 가져온다. 합격용 작은 표본만 고르지 않는다. 전체 target와 workbook 257행은 disposition을 유지한다.
-2. 기존 verified claim/사전/워크북 mapping을 재사용하고 private 원문은 ignore 경로에 보존한다. 원문·정규화 후보·검증 claim을 분리한다. 필요한 기시/정지 내용은 공식/학술 원문을 확인하여 조사하고 카드에는 간결하게 쓴다.
-3. 운동신경과 감각/고유수용성 정보를 혼동하지 않는다. 모호한 가지/신경근은 검증된 상위명 또는 미기재를 사용한다. 손/발 동명·whole/part·좌우 조건을 구분한다. 기본 텍스트에 사람이 모두 승인해야 하는 조건은 없다.
-4. 현재 지원 근육의 구조 카드 기본 내용을 우선 완성한다. 추가 source가 필요한 세부 claim은 정확한 gap·사용자 영향을 기록하고 독립 작업을 계속한다. 앱에 확인되지 않은 placeholder/기시정지 좌표/새 nerve3D를 넣지 않는다. H열은 후보만 보존한다.
-5. 현재 카드의 표시·검색·구조 탭과 provenance/private bundle 제외를 검증한다. 제품 계약을 충족하면 scoped passed로 종료하고 미확보 콘텐츠는 별도 남긴다. 기존 지식의 실질적인 부재로 주요 구조 학습이 불가능하면 해당 제품 문제를 해결한다. 다음 T82는 자동 실행하지 않는다.
+T81 실제 지원 근육/claim 원장을 자동 전수 감사하고 기존 근거를 재사용해 주요 카드와 충돌 사례를 실제 UI에서 확인한다. 잘못된 기시정지/갈래/손발 동명/운동·감각 구분은 수정한다. 확인되지 않은 세부 신경은 상위명/미기재 상태를 유지한다. private 원문과 출처 개발 원장이 학생 카드/bundle에 유출되지 않는지 검사한다. 전체 257행 처리 상태와 unsupported 콘텐츠를 보존한다. 주요 구조 학습을 막는 제품 결함이 없고 계약을 충족하면 completed/passed로 종료하며 전체 해부 연구 합격으로 쓰지 않는다. 다음 T83은 실행하지 않는다.
 
-종료 후 다음 ID는 T82다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
+종료 후 다음 ID는 T83다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
 ```

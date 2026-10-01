@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "t81-status-delta-v1",
+  "baselineHead": "cd33325945ea5604dfdb503f5346b5f2d55c9876",
+  "sourceOfTruth": "work/EXECUTION.json#tasks.T81",
+  "executionRecord": {
+    "executionStatus": "completed",
+    "acceptance": "passed",
+    "nextUnit": null,
+    "nextId": "T82",
+    "nextPromptPath": "work/prompts/app-completion-2026-10-01/05-T82.txt"
+  },
+  "generatedViews": {
+    "work/NEXT.md": {
+      "baselineStatus": "clean",
+      "currentProjection": "T81 accepted; next T82"
+    },
+    "work/STATUS.md": {
+      "baselineStatus": "modified before T81; contained unrelated historical/user work",
+      "currentProjection": "generated block now records T81 accepted and next T82",
+      "commitPolicy": "do not stage the mixed file wholesale"
+    },
+    "work/task-registry-r15.json": {
+      "baselineStatus": "untracked before T81",
+      "currentProjection": "synced from EXECUTION.json",
+      "commitPolicy": "left unstaged to preserve the pre-existing registry work"
+    },
+    "design/2026-09-25-muscle-atlas/23-PROMPTS-AFTER-T95.md": {
+      "baselineStatus": "untracked before T81",
+      "currentProjection": "execution prompt projection",
+      "commitPolicy": "left unstaged because the file was pre-existing untracked work"
+    }
+  },
+  "verification": "python3 work/tools/sync_execution.py --check passed",
+  "preservation": {
+    "OpenSim_Models": "git status unchanged",
+    "atlas-data/spatial-drafts": "git status unchanged",
+    "rawWorkbook": "private ignored input preserved"
+  }
+}

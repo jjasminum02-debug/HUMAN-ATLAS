@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "t81-browser-observations-v1",
+  "testedAt": "2026-10-01",
+  "environment": {
+    "browser": "Codex In-app Browser",
+    "urlOrigin": "http://127.0.0.1:5173/",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "screenshots": {
+      "visuallyInspectedInline": true,
+      "persistedFiles": []
+    }
+  },
+  "cases": [
+    {
+      "targetId": "TA2:2644",
+      "sourceKeys": [
+        "ZA-c7010a9-54ae5266082b61f48ed8e83e"
+      ],
+      "query": "앞정강근",
+      "selectedSide": "right",
+      "route": "http://127.0.0.1:5173/?source=ZA-c7010a9-54ae5266082b61f48ed8e83e",
+      "names": {
+        "modernKorean": "앞정강근",
+        "sinoKoreanHangul": "전경골근",
+        "english": "Tibialis anterior muscle"
+      },
+      "origin": "앞정강근은 정강뼈 가쪽관절융기·몸쪽 정강뼈와 뼈사이막에서 시작합니다.",
+      "insertion": "앞정강근은 안쪽쐐기뼈와 첫째 중족골 바닥에 정지합니다.",
+      "localizedHighlight": "right lower-leg surface visibly highlighted in screenshot",
+      "nerveFields": {
+        "motor": "확인된 운동신경 설명이 없습니다.",
+        "sensoryProprioception": "별도로 확인된 감각·고유감각 설명이 없습니다."
+      },
+      "cardRouteMatch": true,
+      "scope": "exact whole-muscle target; no parent/part inheritance"
+    },
+    {
+      "targetId": "TA2:2652",
+      "sourceKeys": [
+        "ZA-c7010a9-4f96bdd8fb89eeb10b302e4a"
+      ],
+      "query": "긴종아리근",
+      "selectedSide": "left",
+      "route": "http://127.0.0.1:5173/?source=ZA-c7010a9-4f96bdd8fb89eeb10b302e4a",
+      "names": {
+        "modernKorean": "긴종아리근",
+        "sinoKoreanHangul": "장비골근",
+        "english": "Fibularis longus muscle"
+      },
+      "origin": "설명 정리 중",
+      "insertion": "긴종아리근은 첫째 중족골 바닥과 안쪽쐐기뼈에 정지합니다.",
+      "localizedHighlight": "not individually assessed",
+      "cardRouteMatch": true,
+      "scope": "existing origin conflict remains short and unresolved"
+    },
+    {
+      "targetId": "TA2:2658",
+      "sourceKeys": [
+        "ZA-c7010a9-09c6b1c0b14247d7765a362b"
+      ],
+      "query": "Lateral head of gastrocnemius",
+      "selectedSide": "left",
+      "route": "http://127.0.0.1:5173/?source=ZA-c7010a9-09c6b1c0b14247d7765a362b",
+      "names": {
+        "modernKorean": "장딴지근 · 가쪽갈래",
+        "sinoKoreanHangul": "비복근 · 외측두",
+        "english": "Lateral head of gastrocnemius"
+      },
+      "origin": "비복근 외측두는 대퇴골 외측관절융기에서 시작합니다.",
+      "insertion": "자료에는 비복근의 공통 정지가 종골로 기록되어 있고, 외측두만의 별도 원위 부착면은 나뉘어 제시되지 않습니다.",
+      "localizedHighlight": "not individually assessed",
+      "cardRouteMatch": true,
+      "scope": "explicit lateral-head surface; no whole-gastrocnemius target mapping"
+    },
+    {
+      "targetId": null,
+      "sourceKeys": [
+        "ZA-c7010a9-d3839cec2e0626a3881b2d21"
+      ],
+      "query": "Abductor digiti minimi of hand",
+      "selectedSide": "left",
+      "route": "http://127.0.0.1:5173/?source=ZA-c7010a9-d3839cec2e0626a3881b2d21",
+      "names": {
+        "modernKorean": "손 새끼벌림근",
+        "sinoKoreanHangul": "손 소지외전근",
+        "english": "Abductor digiti minimi of hand"
+      },
+      "origin": "확인된 기시 설명이 없습니다.",
+      "insertion": "확인된 정지 설명이 없습니다.",
+      "cardRouteMatch": true,
+      "homonymCheck": "separate from foot structure"
+    },
+    {
+      "targetId": null,
+      "sourceKeys": [
+        "ZA-c7010a9-14008ccad78ce56854ac4662"
+      ],
+      "query": "Abductor digiti minimi of foot",
+      "selectedSide": "left",
+      "route": "http://127.0.0.1:5173/?source=ZA-c7010a9-14008ccad78ce56854ac4662",
+      "names": {
+        "modernKorean": "발 새끼벌림근",
+        "sinoKoreanHangul": "발 소지외전근",
+        "english": "Abductor digiti minimi of foot"
+      },
+      "origin": "확인된 기시 설명이 없습니다.",
+      "insertion": "확인된 정지 설명이 없습니다.",
+      "cardRouteMatch": true,
+      "homonymCheck": "separate from hand structure"
+    }
+  ],
+  "learnerNonDisclosure": {
+    "internalIdsOrTaskNumbersVisible": false,
+    "sourceLinksOrReviewLabelsVisible": false,
+    "privateWorkbookTextVisible": false,
+    "checkMethod": "visible accessibility tree and screenshots of learner card"
+  },
+  "notes": [
+    "Only the tibialis anterior screenshot was used to confirm visible localized highlight; other listed samples confirm route/card text, not full surface extent.",
+    "The screenshots were visually checked inline in the browser tool session but were not persisted as files."
+  ]
+}

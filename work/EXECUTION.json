@@ -1478,13 +1478,95 @@
       "title": "지원 근육 기시·정지·짧은 신경 정보 연결",
       "owner": "Luna Max",
       "phase": "G2",
-      "executionStatus": "planned_not_started",
-      "acceptance": "pending",
+      "executionStatus": "completed",
+      "acceptance": "passed",
       "spec": "work/tasks/T81-APP-COMPLETION.md",
       "scope": "T58의 실제 지원 근육 집합과 기존 근거를 사용해 기시/정지 및 짧은 운동·감각 신경 정보를 카드에 연결한다. 사용자 workbook은 원본/셀 provenance와 private staging으로 한 번 import하고 전체 257행의 처리 상태를 보존한다. 현재 지원 근육의 기본 학습 내용을 우선 완성하고 workbook 밖 대상도 포함한다. 미검증 세부 claim은 미기재/미지원으로 분리하며 whole542의 모든 부착 좌표·변이·신경 가지 연구는 종료 선행 조건이 아니다. 기능 H열 최종 채택은 T83에 남긴다.",
       "progress": {
         "nextUnit": null,
-        "completedUnits": []
+        "completedUnits": [
+          "audit-current-T58-supported-muscle-set-and-private-workbook-hash",
+          "process-all-257-workbook-rows-as-candidate-only-with-row-dispositions",
+          "connect-existing-T18-origin-insertion-claims-to-14-exact-bilateral-source-surfaces",
+          "render-per-field-unavailable-copy-and-distinguish-motor-from-sensory-proprioception",
+          "verify-gastrocnemius-head-boundary-conflict-state-and-hand-foot-homonyms",
+          "run-coverage-provenance-tests-typecheck-build-and-local-browser",
+          "exclude-private-workbook-from-bundle-and-preserve-source-only-rights-human-review"
+        ],
+        "pendingUnits": [],
+        "productAcceptance": {
+          "contractRevision": "app-completion-2026-10-01",
+          "acceptanceScope": "current_supported_local_product; not all_target_content_or_public_release",
+          "productReadiness": "local_app_ready",
+          "contentCompleteness": "partial",
+          "knownContentGaps": {
+            "denominators": {
+              "targets": 542,
+              "memberships": 563,
+              "regions": 12,
+              "existingCanonicalHaBindings": 130,
+              "historical163": {
+                "total": 163,
+                "categories": {
+                  "6": 6,
+                  "20": 20,
+                  "135": 135,
+                  "2": 2
+                }
+              }
+            },
+            "existingLearnerRoutes": {
+              "targetsWithRoute": 409,
+              "targetsWithoutRoute": 133,
+              "membershipsWithRoute": 427,
+              "membershipsWithoutRoute": 136
+            },
+            "supportedMuscleScope": {
+              "sourceSurfaces": 462,
+              "sourceConcepts": 232
+            },
+            "verifiedStructureClaims": {
+              "targets": 7,
+              "bilateralSurfacePointers": 14,
+              "originClaimAvailable": 6,
+              "originConflicted": 1,
+              "insertionClaimAvailable": 7,
+              "motorNerveClaimAvailable": 0,
+              "sensoryProprioceptionClaimAvailable": 0
+            },
+            "unverifiedStructureFields": {
+              "conceptsWithoutOriginClaim": 225,
+              "conceptsWithOriginConflict": 1,
+              "conceptsWithoutInsertionClaim": 225,
+              "conceptsWithoutMotorNerve": 232,
+              "conceptsWithoutSensoryProprioception": 232
+            },
+            "workbookRows": {
+              "total": 257,
+              "candidateOnlyExactEnglishAndRegion": 40,
+              "englishMatchRegionConflict": 1,
+              "noExactSupportedMuscleMatch": 216,
+              "rowLevelSourceReferences": 0,
+              "actionColumnImported": false
+            },
+            "rightsAndReview": {
+              "sourceOnly": "preserved per item",
+              "publicRedistribution": "held",
+              "humanReview": "not_performed"
+            }
+          },
+          "unresolvedProductBlockers": [],
+          "evidence": [
+            "work/reports/T81.md",
+            "work/evidence/T81/verification.json",
+            "work/evidence/T81/browser-observations.json",
+            "work/evidence/T81/supported-muscle-content-coverage.json",
+            "work/evidence/T81/workbook-row-dispositions.json",
+            "atlas-data/terminology/learner-structure-source-content.json",
+            "work/evidence/T81/status-delta.json"
+          ]
+        },
+        "result": "Current supported structure cards pass the scoped learner contract. Anatomy content remains partial; unverified fields stay explicitly unavailable."
       },
       "report": "work/reports/T81.md",
       "acceptanceScope": "current_supported_local_product; not all_target_content_or_public_release",
@@ -1498,7 +1580,69 @@
         ],
         "contentGapPolicy": "retain_all_denominators_and_unresolved_evidence; only_real_product_blockers_prevent_scoped_acceptance"
       },
-      "promptFile": "work/prompts/app-completion-2026-10-01/04-T81.txt"
+      "promptFile": "work/prompts/app-completion-2026-10-01/04-T81.txt",
+      "productReadiness": "local_app_ready",
+      "contentCompleteness": "partial",
+      "knownContentGaps": {
+        "denominators": {
+          "targets": 542,
+          "memberships": 563,
+          "regions": 12,
+          "existingCanonicalHaBindings": 130,
+          "historical163": {
+            "total": 163,
+            "categories": {
+              "6": 6,
+              "20": 20,
+              "135": 135,
+              "2": 2
+            }
+          }
+        },
+        "existingLearnerRoutes": {
+          "targetsWithRoute": 409,
+          "targetsWithoutRoute": 133,
+          "membershipsWithRoute": 427,
+          "membershipsWithoutRoute": 136
+        },
+        "supportedMuscleScope": {
+          "sourceSurfaces": 462,
+          "sourceConcepts": 232
+        },
+        "verifiedStructureClaims": {
+          "targets": 7,
+          "bilateralSurfacePointers": 14,
+          "originClaimAvailable": 6,
+          "originConflicted": 1,
+          "insertionClaimAvailable": 7,
+          "motorNerveClaimAvailable": 0,
+          "sensoryProprioceptionClaimAvailable": 0
+        },
+        "unverifiedStructureFields": {
+          "conceptsWithoutOriginClaim": 225,
+          "conceptsWithOriginConflict": 1,
+          "conceptsWithoutInsertionClaim": 225,
+          "conceptsWithoutMotorNerve": 232,
+          "conceptsWithoutSensoryProprioception": 232
+        },
+        "workbookRows": {
+          "total": 257,
+          "candidateOnlyExactEnglishAndRegion": 40,
+          "englishMatchRegionConflict": 1,
+          "noExactSupportedMuscleMatch": 216,
+          "rowLevelSourceReferences": 0,
+          "actionColumnImported": false
+        },
+        "rightsAndReview": {
+          "sourceOnly": "preserved per item",
+          "publicRedistribution": "held",
+          "humanReview": "not_performed"
+        }
+      },
+      "unresolvedProductBlockers": [],
+      "nextId": "T82",
+      "nextOwner": "Luna Max",
+      "nextPromptPath": "work/prompts/app-completion-2026-10-01/05-T82.txt"
     },
     "T82": {
       "title": "지원 구조 설명·카드 감사와 보완",

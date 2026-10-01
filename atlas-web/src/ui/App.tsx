@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { WholeBodyViewer } from '../viewer/wholeBody/WholeBodyViewer';
 import { validateDataset, type Dataset } from '../viewer/datasets/schema';
 import { validateRuntimeIntegration, searchStructures, readDatasetRoute, datasetRouteQuery, type RuntimeIntegration, type DatasetRoute, type RuntimeStructureRecord } from '../viewer/datasets/integration';
-import { structureTextForLearner, motionActionOptionsForLearner } from '../data/learning';
+import { structureTextForLearner, structureTextForSource, structureUnavailabilityForLearner, motionActionOptionsForLearner } from '../data/learning';
 import navigation from '../../../atlas-data/navigation/atlas-navigation.json';
 import { AtlasLoading } from './AtlasLoading';
 import { anatomicalPartSubtitle } from '../domain/displayNames';
@@ -131,7 +131,23 @@ export default function App() {
                 setTab(next);
                 document.getElementById(`tab-${next}`)?.focus();
             } }}>{t}</button>)}</div>
-    <section id="study-tab-panel" role="tabpanel" aria-labelledby={`tab-${tab}`}>{tab === '구조' ? (['origin', 'insertion'] as const).map(role => <section className="attachment-section attachment-summary-block" key={role}><h3><i className={role}/>{role === 'origin' ? '기시' : '정지'}<span>{role === 'origin' ? 'ORIGIN' : 'INSERTION'}</span></h3><p>{selected.haConceptId && structureTextForLearner(selected.haConceptId, role) || '설명 자료는 준비하고 있습니다.'}</p></section>) : action ? <div className="muscle-action-learning"><h3>이 근육이 하는 일</h3><p>{action.text.label}</p><p>{action.text.explanation}</p><fieldset className="learner-action-picker"><legend>작용 선택</legend>{actions.map(a => <button key={a.id} aria-pressed={action.id === a.id} onClick={() => setActionId(a.id)}>{a.label}</button>)}</fieldset></div> : <p className="quiet-note">작용 정보를 준비하고 있습니다.</p>}</section>
+    <section id="study-tab-panel" role="tabpanel" aria-labelledby={`tab-${tab}`}>{tab === '구조' ? <>
+      {(['origin', 'insertion'] as const).map(role => {
+        const text = (selected.haConceptId && structureTextForLearner(selected.haConceptId, role)) || structureTextForSource(selected.sourceKey, role);
+        return <section className="attachment-section attachment-summary-block" key={role}>
+          <h3><i className={role}/>{role === 'origin' ? '기시' : '정지'}<span>{role === 'origin' ? 'ORIGIN' : 'INSERTION'}</span></h3>
+          <p>{text || structureUnavailabilityForLearner(role)}</p>
+        </section>;
+      })}
+      <section className="attachment-section attachment-summary-block">
+        <h3>운동신경</h3>
+        <p>{structureUnavailabilityForLearner('motorNerve')}</p>
+      </section>
+      <section className="attachment-section attachment-summary-block">
+        <h3>감각·고유감각</h3>
+        <p>{structureUnavailabilityForLearner('sensoryProprioception')}</p>
+      </section>
+    </> : action ? <div className="muscle-action-learning"><h3>이 근육이 하는 일</h3><p>{action.text.label}</p><p>{action.text.explanation}</p><fieldset className="learner-action-picker"><legend>작용 선택</legend>{actions.map(a => <button key={a.id} aria-pressed={action.id === a.id} onClick={() => setActionId(a.id)}>{a.label}</button>)}</fieldset></div> : <p className="quiet-note">작용 정보를 준비하고 있습니다.</p>}</section>
     </> : <section className="attachment-section"><h3>관련 근육</h3>{selected.relatedMuscles?.length ? <ul>{selected.relatedMuscles.map(r => <li key={r.sourceKey}><button className="bone-related-muscle" onClick={() => select(r.sourceKey)}>{r.label}</button><span>{r.roles.map(role => role === 'origin' ? '기시' : role === 'insertion' ? '정지' : '부착').join(' · ')}</span></li>)}</ul> : <p className="quiet-note">주요 표지와 관련 근육 설명을 준비하고 있습니다.</p>}</section>}
    </div></details>}
   </div>

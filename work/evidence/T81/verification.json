@@ -1,0 +1,152 @@
+{
+  "schemaVersion": "t81-verification-v1",
+  "asOf": "2026-10-01",
+  "commands": [
+    {
+      "name": "t81_content_validator",
+      "command": "python3 work/tools/validate_t81_content.py",
+      "exitCode": 0,
+      "durationSeconds": 1.48,
+      "stdoutTail": "{\n  \"status\": \"passed\",\n  \"denominators\": {\n    \"targets\": 542,\n    \"memberships\": 563,\n    \"regions\": 12,\n    \"existingCanonicalHaBindings\": 130,\n    \"historical163\": [\n      2,\n      6,\n      20,\n      135\n    ]\n  },\n  \"supportedMuscleSurfaces\": 462,\n  \"uniqueSupportedMuscleSourceConcepts\": 232,\n  \"workbookRowsProcessed\": 257,\n  \"workbookDispositionCounts\": {\n    \"english_match_region_scope_conflict\": 1,\n    \"exact_english_and_region_candidate_only_unverified\": 40,\n    \"no_exact_match_in_current_supported_muscles\": 216\n  },\n  \"existingClaimProjectionSurfaces\": 14,\n  \"existingClaimProjectionTargets\": [\n    \"TA2:2644\",\n    \"TA2:2652\",\n    \"TA2:2653\",\n    \"TA2:2658\",\n    \"TA2:2659\",\n    \"TA2:2660\",\n    \"TA2:2666\"\n  ],\n  \"rawWorkbookPrivateAndIgnored\": true,\n  \"canonicalBindingsOrClaimsCreated\": 0,\n  \"humanReview\": \"not_performed\",\n  \"publicRedistribution\": \"held\"\n}",
+      "stderrTail": ""
+    },
+    {
+      "name": "learning_and_evidence_tests",
+      "command": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --experimental-strip-types --test src/data/learning.test.ts src/domain/aiEvidence.test.ts src/domain/legacyEvidenceAdapter.test.ts",
+      "exitCode": 0,
+      "durationSeconds": 3.3,
+      "stdoutTail": "✔ the six pilot calf action cards have field-linked citations and no authoring status (9.229958ms)\n✔ unassigned concepts do not receive inferred action cards (0.1875ms)\n✔ learner motion options retain six authored rows and keep the T24 candidate unplayable (7.382417ms)\n✔ learner action copy omits source-scope disclosure while preserving underlying source claim (0.377ms)\n✔ origin and insertion learner text hides source disclosures while retaining the original evidence projection (2.744083ms)\n✔ conflicted attachment claims project only the short learner notice (0.576875ms)\n✔ legacy structure summaries remain visible without adding evidence disclosures (0.516542ms)\n✔ T81 projects existing attachment evidence only to exact source surfaces and keeps conflicts short (28.25925ms)\n✔ T81 covers every supported source muscle while keeping workbook and nerve fields non-claim data separate (35.350167ms)\n✔ cross-check display allows a basic quiz without implying human approval (1.83225ms)\n✔ single-source display carries a caveat and is not quiz eligible (0.146375ms)\n✔ conflicted fields render alternatives without a single answer (3.162584ms)\n✔ unavailable and unresearched fields have distinct learner messages (0.31825ms)\n✔ geometry and motion values do not alter evidence projection (6.07925ms)\n✔ legacy summary fallback preserves exact learner text without changing its approval or source contract (49.707ms)\n✔ empty legacy summaries remain unavailable (2.363333ms)\nℹ tests 16\nℹ suites 0\nℹ pass 16\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1651.258375",
+      "stderrTail": ""
+    },
+    {
+      "name": "learning_validator",
+      "command": "python3 scripts/validate-learning-content.py",
+      "exitCode": 0,
+      "durationSeconds": 0.46,
+      "stdoutTail": "{\"pass\": true, \"nameEntries\": 81, \"summaries\": 14, \"scope\": \"references and stale hashes, not anatomy approval\"}",
+      "stderrTail": ""
+    },
+    {
+      "name": "ai_evidence_schema",
+      "command": "python3 ../atlas-data/schemas/validate_ai_evidence.py --check",
+      "exitCode": 0,
+      "durationSeconds": 0.34,
+      "stdoutTail": "{\n  \"task\": \"T16\",\n  \"mode\": \"check\",\n  \"pass\": true,\n  \"legacyRowsCheckedInTestOnlyMigrationPreview\": 14,\n  \"productionFieldItems\": 51,\n  \"migrationPreviewIssues\": [],\n  \"issues\": []\n}",
+      "stderrTail": ""
+    },
+    {
+      "name": "bone_names_schema",
+      "command": "python3 ../atlas-data/schemas/validate_bone_name_overlay.py --check",
+      "exitCode": 0,
+      "durationSeconds": 0.05,
+      "stdoutTail": "{\n  \"status\": \"passed\",\n  \"entryCount\": 9,\n  \"selectableBoneCount\": 9,\n  \"sourceCount\": 9,\n  \"humanAnatomyReview\": \"not_reviewed\",\n  \"actualHanjaCollected\": false\n}",
+      "stderrTail": ""
+    },
+    {
+      "name": "motion_learning_schema",
+      "command": "python3 ../atlas-data/schemas/validate_motion_learning.py --check",
+      "exitCode": 0,
+      "durationSeconds": 0.07,
+      "stdoutTail": "{\n  \"production\": {\n    \"valid\": true,\n    \"actionCount\": 7,\n    \"definitionCount\": 1,\n    \"assetCount\": 1,\n    \"issues\": []\n  }\n}",
+      "stderrTail": ""
+    },
+    {
+      "name": "motion_asset_sources",
+      "command": "python3 ../atlas-data/schemas/validate_motion_asset_sources.py",
+      "exitCode": 0,
+      "durationSeconds": 0.04,
+      "stdoutTail": "PASS: 2 source candidates verified; production motion assets=1; source bytes unchanged",
+      "stderrTail": ""
+    },
+    {
+      "name": "scene_decoder_parity",
+      "command": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/check-scene-decoders.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.38,
+      "stdoutTail": "Scene decoder QA passed: 11 meshes/712192 bytes, 9 meshes/205392 bytes",
+      "stderrTail": ""
+    },
+    {
+      "name": "typecheck",
+      "command": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node node_modules/typescript/bin/tsc -b --pretty false",
+      "exitCode": 0,
+      "durationSeconds": 3.69,
+      "stdoutTail": "",
+      "stderrTail": ""
+    },
+    {
+      "name": "production_build",
+      "command": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node node_modules/vite/bin/vite.js build",
+      "exitCode": 0,
+      "durationSeconds": 2.63,
+      "stdoutTail": "vite v8.3.1 building client environment for production...\ntransforming...\n✓ 53 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                     0.58 kB │ gzip:   0.37 kB\ndist/assets/index-UUYMvEqZ.css      0.74 kB │ gzip:   0.44 kB\ndist/assets/App-BHhbobJb.css       37.34 kB │ gzip:   7.96 kB\ndist/assets/index-BSn-jwGh.js     222.37 kB │ gzip:  69.95 kB\ndist/assets/App-X3cv7bvC.js     1,091.48 kB │ gzip: 228.40 kB\n\n✓ built in 2.24s",
+      "stderrTail": "[plugin builtin:vite-reporter] \n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit."
+    },
+    {
+      "name": "private_bundle_exclusion",
+      "exitCode": 0,
+      "distFiles": 5,
+      "distBytes": 1352532,
+      "needlesPresent": {
+        "muscle-attachment-notes.xlsx": false,
+        "candidate-extract.json": false,
+        "originCandidate": false,
+        "motorNerveCandidate": false,
+        "눈썹 거상(擧上), 이마 피부 주름 형성": false
+      },
+      "privateWorkbookIgnored": true
+    }
+  ],
+  "allPassed": true,
+  "trackedArtifactSha256": {
+    "atlas-data/terminology/learner-structure-source-content.json": "eddeb46173de13977769250fb4ad40f83a870e5d2d3cd9c5e07c5377fa1269f8",
+    "atlas-web/src/domain/learnerStructureSourceContent.ts": "4afd2ea7004ad4d2ae11d2796052375a05f8d733dc6e3e34a43f67b9abcf872a",
+    "atlas-web/src/data/learning.ts": "84b9d2eec1e28b5ddb6e5d26eb71be3601f58b86d475c0d3f02d77e58494115d",
+    "atlas-web/src/ui/App.tsx": "fa8c7e0f99a1d3d33c4bfe236170a2f27ec5994e11ed44869360ad8dff476856",
+    "atlas-web/src/data/learning.test.ts": "0c0294c79ecdcccfe2e6e74f9a8382703a6fd535de3d6c078450a3d519d9662a",
+    "work/tools/build_t81_content_coverage.py": "9df1cfce5629f5210bd6823bd4560a90f7a8e5ff2c19687cee5ec2cc3455e65f",
+    "work/tools/validate_t81_content.py": "780aeca607de55ca35d37aacf6d57a9ff4fea07e5e772bcbaa66d00a6922a1c9",
+    "work/evidence/T81/baseline.json": "ff3633d85c0316006f17d60fb4629d202a241ccca88a6ee0fbe3978ac2de238a",
+    "work/evidence/T81/supported-muscle-content-coverage.json": "e23e4c59df1ba11bbd1a1ba911b013164e2bd0fab023610428ebfdebcee05bdb",
+    "work/evidence/T81/workbook-row-dispositions.json": "a71f61064cd2ef7f0b8f5d6cc68510023f01d3612a024eb620797634eaac3540",
+    "work/evidence/T81/browser-observations.json": "ab09a10153345145e1952acd26572f595998fca3530f806fd79199a990cfb0e2"
+  },
+  "protectedGitStatus": {
+    "OpenSim_Models": "",
+    "atlas-data/spatial-drafts": ""
+  },
+  "notes": [
+    "Existing source and claim evidence were reused; no anatomy claim, canonical binding, geometry, review approval, or public redistribution permission was created.",
+    "Browser inspection is recorded separately in browser-observations.json."
+  ],
+  "browserObservationValidation": {
+    "status": "passed",
+    "caseCount": 5,
+    "sourceKeyDataNameAndSideMatchesRoute": true,
+    "learnerNonDisclosureConfirmed": true,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "visuallyInspectedScreenshotFiles": []
+  },
+  "finalRecordHashes": {
+    "work/reports/T81.md": "55c46fb57ecc3c22854588fe8d49a4582fb3ea63a83c6dbebd4836f35cb88b22",
+    "work/evidence/T81/status-delta.json": "4413d261cfe409d7f6d22da05306b82153ce55a224dee8d888ea1a4bf21af1f1",
+    "work/EXECUTION.json": "a4678020e5b25aeed5a96989a081df2abfba363314b5a81878690766c6492467",
+    "work/evidence/T81/browser-observations.json": "ab09a10153345145e1952acd26572f595998fca3530f806fd79199a990cfb0e2"
+  },
+  "executionRecordValidation": {
+    "executionStatus": "completed",
+    "acceptance": "passed",
+    "nextUnit": null,
+    "contractRevision": "app-completion-2026-10-01",
+    "productReadiness": "local_app_ready",
+    "contentCompleteness": "partial",
+    "unresolvedProductBlockers": [],
+    "nextId": "T82",
+    "nextPromptPath": "work/prompts/app-completion-2026-10-01/05-T82.txt"
+  },
+  "executionProjectionCheck": {
+    "exitCode": 0,
+    "stdout": "Execution projections match; no writes."
+  }
+}
