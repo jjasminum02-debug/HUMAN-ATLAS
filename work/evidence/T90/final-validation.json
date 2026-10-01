@@ -1,0 +1,127 @@
+{
+  "contractRevision": "app-completion-2026-10-01",
+  "acceptanceScope": "six verified static fibular nerve surfaces in the existing single scene: depth/contrast/native selection, two exact-side motor highlights, card/history/restore; exclusive 12-region core skeleton with explicit principal-attachment bone context; source-scoped principal attachment summaries for 15 additional muscles (30 surfaces); tiny lower-left attribution",
+  "productReadiness": "local_app_ready",
+  "contentCompleteness": "partial",
+  "knownContentGaps": {
+    "muscleAttachments": {
+      "ledger": "work/evidence/T90/muscle-attachment-coverage.json",
+      "supportedSourceConcepts": 232,
+      "supportedSurfaces": 462,
+      "withDescriptionOrConflictNoticeConcepts": 22,
+      "withDescriptionOrConflictNoticeSurfaces": 44,
+      "missingSourceConcepts": 210,
+      "missingSourceSurfaces": 418,
+      "originConflicts": 1,
+      "summaryExtent": "principal attachments, not exhaustive variants",
+      "nextTask": "T65"
+    },
+    "existingContent": {
+      "targetsWithoutLearnerRoute": 133,
+      "membershipsWithoutLearnerRoute": 136,
+      "directKoreanTermEvidenceRows": 73,
+      "spatiallyUnacceptedBP3DInspectionObjects": 13
+    },
+    "nerveContent": {
+      "T61CandidateRows": 1291,
+      "candidateRowsAreNotNerveConceptDenominator": true,
+      "verifiedStaticSourceSurfaces": 6,
+      "classes": [
+        "Common fibular nerve",
+        "Deep fibular nerve",
+        "Superficial fibular nerve"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "registeredBranchRelations": 6,
+      "learnerVisibleBranchRelations": 4,
+      "registeredMotorRelations": 2,
+      "staticSourceSnapshotPoses": 1,
+      "dynamicPoses": 0,
+      "unsupportedContextAncestors": 2,
+      "KoreanDirectTermEvidence": 0,
+      "fullNerveConceptDenominator": "not_established",
+      "remaining": "Other nerve acquisition/identity/geometry/course, exact Korean terms, further evidenced motor/sensory/proprioceptive relations, variants and dynamic pose bindings remain unsupported. None inferred from names or geometric proximity."
+    },
+    "source": "work/evidence/T63/product-scope.json and work/product-scope.json retained",
+    "fullNerveContent": "Other nerves and dynamic poses remain unsupported; candidate rows are not a nerve concept denominator",
+    "rightsAndReview": {
+      "sourceOnly": true,
+      "humanReview": "not_performed",
+      "publicRedistribution": "held"
+    }
+  },
+  "unresolvedProductBlockers": [],
+  "evidence": [
+    "work/reports/T90.md",
+    "work/evidence/T90/final-validation.json",
+    "work/evidence/T90/product-scope.json",
+    "work/evidence/T90/browser/checks.json",
+    "work/evidence/T90/browser/responsive-fit.json",
+    "work/evidence/T90/muscle-attachment-coverage.json",
+    "work/evidence/T90/performance.json"
+  ],
+  "status": "passed",
+  "automated": {
+    "baseContractTests": {
+      "passed": 103,
+      "failed": 0,
+      "note": "Executed earlier this T90 run; reused after impact analysis: picking/responsive details do not alter native source/identity/pose/cache contracts"
+    },
+    "finalAffectedContractTests": {
+      "passed": 7,
+      "failed": 0,
+      "files": [
+        "sourceAttachments.test.ts",
+        "regionalContext.test.ts",
+        "surfacePicking.test.ts"
+      ],
+      "note": "Six repeat affected tests plus new native one-pixel picker test"
+    },
+    "typecheck": "passed via final production build",
+    "productionBuild": "passed",
+    "currentFunctionCoverage": "passed live contract validation; current T90 snapshot retained and historical T83 preserved",
+    "newSourceHtmlHashChecks": 9,
+    "distributionDevelopmentMarkerLeaks": 0
+  },
+  "actualBrowser": {
+    "baseCases": 73,
+    "responsiveAndFreshProfileCases": 10,
+    "consoleErrors": 0,
+    "regions": 12,
+    "viewportWidths": [
+      390,
+      1024,
+      1440
+    ],
+    "changedSourceMuscleCardPairs": 30,
+    "matchedFinalPngHashes": 30,
+    "physicalMobileDevice": false
+  },
+  "resolvedDefects": [
+    "ordinary region navigation retained previous back region",
+    "full-spine Rotatores shown by default in neck",
+    "no source-scoped origin/insertion summaries for 15 major regional muscles",
+    "attachment context bones absent and context selection discarded region/history",
+    "native thin nerve pointer ray selected faded muscle behind it",
+    "mobile collapsed details became inaccessible on desktop resize",
+    "restore omitted nerve observation and motor highlight settings",
+    "Home key framed whole body while region-filtered",
+    "historical function audit invalidated by unrelated attachment card hash"
+  ],
+  "evidenceReuse": {
+    "T63": "Same nerve scene manifest/support overlay/evaluated native geometry; full native contract tests pass; no source asset mutation",
+    "T81": "Entire 232/462 inventory and seven legacy attachment concepts retained; conflict not resolved by new data",
+    "T83": "Function records unchanged; scoped current card hash validation stored under T90 rather than rewriting history"
+  },
+  "limitations": [
+    "principal attachments are authored Korean factual summaries with opened HTML/hash/locators, not exhaustive anatomy or direct dictionary entries",
+    "Static source pose only; all six unsupported-pose gates checked automatically",
+    "Human anatomy review not performed; public redistribution rights held",
+    "GPU/VRAM/total-process memory unobserved; cold performance has small descriptive samples"
+  ],
+  "syncExecution": "passed; sync and --check",
+  "preservation": "passed; work/evidence/T90/preservation.json"
+}

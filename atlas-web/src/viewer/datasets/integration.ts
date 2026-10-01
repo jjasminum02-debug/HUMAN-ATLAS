@@ -1,5 +1,6 @@
 import { searchEntries } from '../../domain/search.ts';
 import type { Dataset } from './schema.ts';
+import { inRegionalRoute, inRegionalScene, regionalAttachmentBoneKeys } from './regionalContext.ts';
 export interface StructureRecord {
     sourceKey: string;
     sourceName: string;
@@ -890,12 +891,13 @@ export function validateRuntimeIntegration(value: unknown, dataset: Dataset): Ru
     return i;
 }
 type RouteAudience = 'learner' | 'inspection';
-type SearchableStructure = Pick<StructureRecord, 'sourceKey' | 'label' | 'names' | 'aliases' | 'localDisplayEligible' | 'regionIds' | 'haConceptId' | 'side'> & { sourceName?: string; searchGroupKey?: string; searchApproximate?: boolean; routeAudience?: RouteAudience; inspectionEligible?: boolean; learnerConceptKeys?: string[]; learnerConceptLinks?: StructureRecord['learnerConceptLinks']; targetRoutes?: { key: string; regionId: string }[] };
+type SearchableStructure = Pick<StructureRecord, 'sourceKey' | 'label' | 'names' | 'aliases' | 'localDisplayEligible' | 'regionIds' | 'haConceptId' | 'side'> & { kind?: RuntimeStructureRecord['kind']; defaultVisible?: boolean; sourceName?: string; searchGroupKey?: string; searchApproximate?: boolean; routeAudience?: RouteAudience; inspectionEligible?: boolean; learnerConceptKeys?: string[]; learnerConceptLinks?: StructureRecord['learnerConceptLinks']; targetRoutes?: { key: string; regionId: string }[] };
 function routeAllowed(row: SearchableStructure, audience: RouteAudience) {
     return row.localDisplayEligible && row.inspectionEligible !== false && (row.routeAudience ?? 'learner') === audience;
 }
 export function searchStructures<T extends SearchableStructure>(rows: T[], query: string, regions: string[], audience: RouteAudience = 'learner') {
-    const candidates = rows.filter(r => routeAllowed(r, audience) && (query.trim() || !regions.length || r.regionIds.some(x => regions.includes(x))));
+    const context = regionalAttachmentBoneKeys(rows, regions);
+    const candidates = rows.filter(r => routeAllowed(r, audience) && (query.trim() || inRegionalScene(r, regions, null) || r.kind === 'bone' && context.has(r.sourceKey)));
     const unique = new Map<string, T>();
     for (const r of candidates) {
         const key = r.searchGroupKey ?? r.sourceName?.replace(/\.[lr]$/, '') ?? r.sourceKey;
@@ -942,7 +944,7 @@ export function readDatasetRoute(search: string, rows: SearchableStructure[], re
                 row = matches[0];
         }
     }
-    const result: DatasetRoute = { regions: [...new Set(regions)], selected: row && (!regions.length || row.regionIds.some(r => regions.includes(r))) ? row.sourceKey : null,
+    const result: DatasetRoute = { regions: [...new Set(regions)], selected: row && inRegionalRoute(row, rows, regions) ? row.sourceKey : null,
         ...(audience === 'inspection' ? { audience: 'inspection' as const } : {}) };
     if (targetPathKey && result.selected) result.targetPathKey = targetPathKey;
     return result;

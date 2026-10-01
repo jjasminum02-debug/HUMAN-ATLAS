@@ -451,6 +451,15 @@ python3 work/tools/sync_execution.py 및 --check를 수행하고 소유 변경�
 
 기존 verified 신경 claim을 재사용하고 필요한 교육용 기능 변화/포착 설명만 공식/학술 원문으로 대조한다. 위치·관련 구조·가능한 기능 변화를 설명하되 자동 진단·시술 추천으로 전환하지 않는다. 접힌 정보 UI와 신경 선택→주행→지배근→설명→복원을 검증하고 실제 혼동/오류를 수정한다. T64/T91 별도 실행을 하지 않는다. unsupported 텍스트/geometry는 정직하게 분리한다.
 
+
+## T90에서 추가된 근육 기시·정지 후속 범위
+
+T90 report와 work/evidence/T90/muscle-attachment-coverage.json, muscle-attachment-content-t90.json, learner-attachment-context.json을 먼저 읽는다. 현재 232개 지원 source 근육 중 22개(44 표면)에 설명 또는 충돌 안내가 있고, 210개(418 표면)의 기시·정지 설명과 긴종아리근 origin 충돌 1개가 남는다. T90의 새 15개 근육 설명·기시정지 뼈 문맥과 12부위 선택/숨김/복원은 유지한다.
+
+신경 설명과 함께 주요 사용 흐름의 근육 기시·정지를 실제 카드에 더 채운다. 어깨·위팔의 자주 선택하는 근육/분절, 등 근육을 우선하고 기존 source별 projection을 확장한다. 신뢰할 수 있는 새 공식/학술 원문이 있는 묶음부터 직접 읽고 field locator/hash·정확한 source/side/part를 대조한다. 전체 근육 설명을 분절에 무조건 상속하지 않는다. 기존 고정 후보/용어 검색은 새 단서 없으면 반복하지 않는다. 나머지 210개의 0-gap 확보는 이 task의 일괄 완료 조건이 아니다.
+
+새 설명의 명시한 부착 뼈만 같은 쪽 existing whole-bone context로 연결하고 부착점·좌표를 만들지 않는다. source-only·humanReview=not_performed·권리 held와 기존 HA130을 유지한다. 추가한 설명의 정확성·카드 접근·뼈 이동·지역 유지·숨김·복원을 실제 검사하고 미확보/충돌을 전수 원장으로 정리한다. 새 geometry나 임상 기능은 만들지 않는다. 이 추가 범위는 T65 한 task에 포함하며 다른 task 번호를 발급하지 않는다.
+
 종료 후 다음 ID는 T35다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
 ```
 

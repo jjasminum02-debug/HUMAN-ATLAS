@@ -29,7 +29,12 @@ def fail(message: str) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
+    parser.add_argument("--validate-only", action="store_true", help="Validate current live function contracts without rewriting or requiring a historical coverage snapshot")
+    parser.add_argument("--output", help="Current dependency audit; preserve the historical T83 artifact when another feature changes the runtime projection")
     args = parser.parse_args()
+    output = (ROOT / args.output).resolve() if args.output else OUT
+    if not output.is_relative_to(ROOT / 'work/evidence'):
+        fail('current audit output must remain under work/evidence')
 
     coverage_path = "work/evidence/T81/supported-muscle-content-coverage.json"
     source_path = "atlas-data/terminology/learner-structure-source-content.json"
@@ -224,14 +229,18 @@ def main() -> None:
         "records": records,
     }
     encoded = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
-    if args.check:
-        current = OUT.read_text(encoding="utf-8") if OUT.exists() else None
+    if args.validate_only:
+        if args.check or args.output:
+            fail("--validate-only cannot be combined with snapshot --check/--output")
+        print(json.dumps({"status": "passed", "mode": "live_contract_validation", **result["summary"]}, ensure_ascii=False))
+    elif args.check:
+        current = output.read_text(encoding="utf-8") if output.exists() else None
         if current != encoded:
             fail("coverage evidence is stale; rebuild without changing the frozen inputs")
         print(json.dumps({"status": "passed", **result["summary"]}, ensure_ascii=False))
     else:
-        OUT.parent.mkdir(parents=True, exist_ok=True)
-        OUT.write_text(encoded, encoding="utf-8")
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(encoded, encoding="utf-8")
         print(json.dumps({"status": "built", **result["summary"], "records": len(records)}, ensure_ascii=False))
 
 

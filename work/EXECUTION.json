@@ -2567,17 +2567,92 @@
       "title": "신경 그래픽·선택 품질 완성",
       "owner": "Astra · 현재 대화 직접 구현",
       "phase": "G3",
-      "executionStatus": "planned_not_started",
-      "acceptance": "pending",
+      "executionStatus": "completed",
+      "acceptance": "passed",
       "spec": "work/tasks/T90-APP-COMPLETION.md",
-      "scope": "T63의 실제 지원 신경 주행과 기존 근육·뼈 맥락에서 대비/깊이/선택/지배근 강조/카드/복원 품질을 다듬는다. 대표 지역과 390/1024/1440 흐름을 실제 검증한다. 전체 신경 미확보는 별도 상태이며 지원 경로의 잘못된 pose/좌우/위치는 해결한다. 담당 Astra 현재 대화 직접 구현을 유지한다.",
+      "scope": "T63의 실제 지원 신경 주행과 기존 근육·뼈 맥락에서 대비/깊이/선택/지배근 강조/카드/복원 품질을 다듬는다. 대표 지역과 390/1024/1440 흐름을 실제 검증한다. 전체 신경 미확보는 별도 상태이며 지원 경로의 잘못된 pose/좌우/위치는 해결한다. 담당 Astra 현재 대화 직접 구현을 유지한다. 사용자 추가: 작은 좌하단 앱 정보, 단일 지역 뼈/근육 및 근거 있는 주요 부착 뼈 문맥, 15개 근육의 source별 기시·정지 요약; 미확보 설명은 T65 후속 범위에 편입한다.",
       "progress": {
         "nextUnit": null,
-        "completedUnits": []
+        "completedUnits": [
+          "verify-predecessor-contract-and-current-native-scene",
+          "polish-native-nerve-observation-selection-depth-and-restoration",
+          "fix-exclusive-region-core-skeleton-and-principal-attachment-context",
+          "add-15-exact-source-muscle-principal-attachment-summaries",
+          "verify-12-regions-30-muscle-sides-and-responsive-native-selection",
+          "record-graphics-scoped-acceptance-content-gaps-and-T65-handoff"
+        ],
+        "pendingUnits": [],
+        "productAcceptance": {
+          "contractRevision": "app-completion-2026-10-01",
+          "acceptanceScope": "six verified static fibular nerve surfaces in the existing single scene: depth/contrast/native selection, two exact-side motor highlights, card/history/restore; exclusive 12-region core skeleton with explicit principal-attachment bone context; source-scoped principal attachment summaries for 15 additional muscles (30 surfaces); tiny lower-left attribution",
+          "productReadiness": "local_app_ready",
+          "contentCompleteness": "partial",
+          "knownContentGaps": {
+            "muscleAttachments": {
+              "ledger": "work/evidence/T90/muscle-attachment-coverage.json",
+              "supportedSourceConcepts": 232,
+              "supportedSurfaces": 462,
+              "withDescriptionOrConflictNoticeConcepts": 22,
+              "withDescriptionOrConflictNoticeSurfaces": 44,
+              "missingSourceConcepts": 210,
+              "missingSourceSurfaces": 418,
+              "originConflicts": 1,
+              "summaryExtent": "principal attachments, not exhaustive variants",
+              "nextTask": "T65"
+            },
+            "existingContent": {
+              "targetsWithoutLearnerRoute": 133,
+              "membershipsWithoutLearnerRoute": 136,
+              "directKoreanTermEvidenceRows": 73,
+              "spatiallyUnacceptedBP3DInspectionObjects": 13
+            },
+            "nerveContent": {
+              "T61CandidateRows": 1291,
+              "candidateRowsAreNotNerveConceptDenominator": true,
+              "verifiedStaticSourceSurfaces": 6,
+              "classes": [
+                "Common fibular nerve",
+                "Deep fibular nerve",
+                "Superficial fibular nerve"
+              ],
+              "sides": [
+                "left",
+                "right"
+              ],
+              "registeredBranchRelations": 6,
+              "learnerVisibleBranchRelations": 4,
+              "registeredMotorRelations": 2,
+              "staticSourceSnapshotPoses": 1,
+              "dynamicPoses": 0,
+              "unsupportedContextAncestors": 2,
+              "KoreanDirectTermEvidence": 0,
+              "fullNerveConceptDenominator": "not_established",
+              "remaining": "Other nerve acquisition/identity/geometry/course, exact Korean terms, further evidenced motor/sensory/proprioceptive relations, variants and dynamic pose bindings remain unsupported. None inferred from names or geometric proximity."
+            },
+            "source": "work/evidence/T63/product-scope.json and work/product-scope.json retained",
+            "fullNerveContent": "Other nerves and dynamic poses remain unsupported; candidate rows are not a nerve concept denominator",
+            "rightsAndReview": {
+              "sourceOnly": true,
+              "humanReview": "not_performed",
+              "publicRedistribution": "held"
+            }
+          },
+          "unresolvedProductBlockers": [],
+          "evidence": [
+            "work/reports/T90.md",
+            "work/evidence/T90/final-validation.json",
+            "work/evidence/T90/product-scope.json",
+            "work/evidence/T90/browser/checks.json",
+            "work/evidence/T90/browser/responsive-fit.json",
+            "work/evidence/T90/muscle-attachment-coverage.json",
+            "work/evidence/T90/performance.json"
+          ]
+        },
+        "result": "Current supported single-scene graphic, region/card/restore flows passed; source geometry/HA bindings unchanged. Content partial; T65 handoff only."
       },
       "report": "work/reports/T90.md",
       "promptFile": "work/prompts/app-completion-2026-10-01/11-T90.txt",
-      "acceptanceScope": "declared_verified_feature_scope; exhaustive_content_coverage_reported_separately",
+      "acceptanceScope": "six verified static fibular nerve surfaces in the existing single scene: depth/contrast/native selection, two exact-side motor highlights, card/history/restore; exclusive 12-region core skeleton with explicit principal-attachment bone context; source-scoped principal attachment summaries for 15 additional muscles (30 surfaces); tiny lower-left attribution",
       "contractRevision": "app-completion-2026-10-01",
       "acceptanceContract": {
         "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
@@ -2588,7 +2663,60 @@
         ],
         "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research"
       },
-      "absorbedWorkIds": []
+      "absorbedWorkIds": [],
+      "productReadiness": "local_app_ready",
+      "contentCompleteness": "partial",
+      "knownContentGaps": {
+        "muscleAttachments": {
+          "ledger": "work/evidence/T90/muscle-attachment-coverage.json",
+          "supportedSourceConcepts": 232,
+          "supportedSurfaces": 462,
+          "withDescriptionOrConflictNoticeConcepts": 22,
+          "withDescriptionOrConflictNoticeSurfaces": 44,
+          "missingSourceConcepts": 210,
+          "missingSourceSurfaces": 418,
+          "originConflicts": 1,
+          "summaryExtent": "principal attachments, not exhaustive variants",
+          "nextTask": "T65"
+        },
+        "existingContent": {
+          "targetsWithoutLearnerRoute": 133,
+          "membershipsWithoutLearnerRoute": 136,
+          "directKoreanTermEvidenceRows": 73,
+          "spatiallyUnacceptedBP3DInspectionObjects": 13
+        },
+        "nerveContent": {
+          "T61CandidateRows": 1291,
+          "candidateRowsAreNotNerveConceptDenominator": true,
+          "verifiedStaticSourceSurfaces": 6,
+          "classes": [
+            "Common fibular nerve",
+            "Deep fibular nerve",
+            "Superficial fibular nerve"
+          ],
+          "sides": [
+            "left",
+            "right"
+          ],
+          "registeredBranchRelations": 6,
+          "learnerVisibleBranchRelations": 4,
+          "registeredMotorRelations": 2,
+          "staticSourceSnapshotPoses": 1,
+          "dynamicPoses": 0,
+          "unsupportedContextAncestors": 2,
+          "KoreanDirectTermEvidence": 0,
+          "fullNerveConceptDenominator": "not_established",
+          "remaining": "Other nerve acquisition/identity/geometry/course, exact Korean terms, further evidenced motor/sensory/proprioceptive relations, variants and dynamic pose bindings remain unsupported. None inferred from names or geometric proximity."
+        },
+        "source": "work/evidence/T63/product-scope.json and work/product-scope.json retained",
+        "fullNerveContent": "Other nerves and dynamic poses remain unsupported; candidate rows are not a nerve concept denominator",
+        "rightsAndReview": {
+          "sourceOnly": true,
+          "humanReview": "not_performed",
+          "publicRedistribution": "held"
+        }
+      },
+      "unresolvedProductBlockers": []
     },
     "T65": {
       "title": "신경 기능 변화 설명·사용 흐름 완성",
@@ -2597,10 +2725,15 @@
       "executionStatus": "planned_not_started",
       "acceptance": "pending",
       "spec": "work/tasks/T65-APP-COMPLETION.md",
-      "scope": "T64/T91의 접힌 설명과 확장 자료를 같은 task에 흡수하여 현재 지원 신경의 주행·지배근·교육용 기능 변화/포착 맥락을 검증된 설명으로 연결한다. 구조·설명·3D 지원 범위는 분리한다. 임상 진단·치료·자침 위치/깊이 추천은 만들지 않는다. 현재 신경 학습 흐름을 완성하고 모든 신경/모든 운동의 자료 확보를 일괄 선행 조건으로 두지 않는다.",
+      "scope": "T64/T91의 접힌 설명과 확장 자료를 같은 task에 흡수하여 현재 지원 신경의 주행·지배근·교육용 기능 변화/포착 맥락을 검증된 설명으로 연결한다. 구조·설명·3D 지원 범위는 분리한다. 임상 진단·치료·자침 위치/깊이 추천은 만들지 않는다. 현재 신경 학습 흐름을 완성하고 모든 신경/모든 운동의 자료 확보를 일괄 선행 조건으로 두지 않는다. T90의 기시·정지 후속 범위도 흡수한다: 210개 미확보 source 근육/418 표면과 origin 충돌 1개를 전수 원장으로 보존하고, 주요 어깨·위팔·등 흐름에 근거가 확인된 source/side/part별 설명과 기존 부착 뼈 문맥을 확장한다. 전체 설명 0-gap은 완료 조건이 아니다.",
       "progress": {
         "nextUnit": null,
-        "completedUnits": []
+        "completedUnits": [],
+        "incomingHandoff": {
+          "from": "T90",
+          "evidence": "work/evidence/T90/muscle-attachment-coverage.json",
+          "workStarted": false
+        }
       },
       "report": "work/reports/T65.md",
       "promptFile": "work/prompts/app-completion-2026-10-01/12-T65.txt",

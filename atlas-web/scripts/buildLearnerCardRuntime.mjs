@@ -5,10 +5,13 @@ import { learnerStructureText } from "../src/domain/learnerStructureText.ts";
 import { projectLearnerMotionActionOptions } from "../src/domain/motionLearning.ts";
 import { learnerActionExplanation } from "../src/domain/learnerActionText.ts";
 import { hasHanScript } from "../src/domain/search.ts";
+import { projectSourceAttachments } from "../src/domain/sourceAttachments.ts";
+import { createHash } from "node:crypto";
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const root = resolve(scriptDir, "../..");
 const outputPath = resolve(root, "atlas-data/terminology/learner-card-runtime.json");
+const contextOutputPath = resolve(root, "atlas-data/terminology/learner-attachment-context.json");
 const checkOnly = process.argv.includes("--check");
 
 async function load(relativePath) {
@@ -57,6 +60,15 @@ for (const row of sourceContent.records) {
   }
   if (!Object.keys(fields).length) continue;
   for (const sourceKey of row.sourceKeys) bySource[sourceKey] = fields;
+}
+
+const attachments = await load("atlas-data/terminology/muscle-attachment-content-t90.json");
+const integrationBytes = await readFile(resolve(root, "atlas-data/overlays/za-local-integration.json"));
+if (createHash('sha256').update(integrationBytes).digest('hex') !== attachments.sourceOverlaySha256) throw Error('Attachment identity input changed; review before rebuilding');
+const attachmentProjection = projectSourceAttachments(attachments, JSON.parse(integrationBytes).objects);
+for (const [sourceKey, fields] of Object.entries(attachmentProjection.text)) {
+  if (bySource[sourceKey]) throw Error('New attachment text must not override an existing field or conflict');
+  bySource[sourceKey] = fields;
 }
 
 const actionConceptIds = [...new Set(motionBundle.muscleActions.flatMap((row) => row.subjectIds))].sort();
@@ -144,9 +156,11 @@ function assertSafeProjection(value) {
 
 assertSafeProjection(projected);
 const bytes = `${JSON.stringify(projected, null, 2)}\n`;
+const contextBytes = `${JSON.stringify(attachmentProjection.contexts, null, 2)}\n`;
 if (checkOnly) {
   const existing = await readFile(outputPath, "utf8").catch(() => null);
-  if (existing !== bytes) {
+  const existingContexts = await readFile(contextOutputPath, "utf8").catch(() => null);
+  if (existing !== bytes || existingContexts !== contextBytes) {
     console.error("Learner card runtime is stale; regenerate with node --experimental-strip-types scripts/buildLearnerCardRuntime.mjs");
     process.exitCode = 1;
   } else {
@@ -154,5 +168,6 @@ if (checkOnly) {
   }
 } else {
   await writeFile(outputPath, bytes);
+  await writeFile(contextOutputPath, contextBytes);
   console.log(JSON.stringify({ status: "built", conceptRows: Object.keys(byConcept).length, sourceRows: Object.keys(bySource).length, actionRows: actions.length }));
 }

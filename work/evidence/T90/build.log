@@ -1,0 +1,49 @@
+{"status":"passed","conceptRows":8,"sourceRows":44,"actionRows":7}
+{"pass": true, "nameEntries": 81, "summaries": 14, "scope": "references and stale hashes, not anatomy approval"}
+{
+  "task": "T16",
+  "mode": "check",
+  "pass": true,
+  "legacyRowsCheckedInTestOnlyMigrationPreview": 14,
+  "productionFieldItems": 51,
+  "migrationPreviewIssues": [],
+  "issues": []
+}
+{
+  "status": "passed",
+  "entryCount": 9,
+  "selectableBoneCount": 9,
+  "sourceCount": 9,
+  "humanAnatomyReview": "not_reviewed",
+  "actualHanjaCollected": false
+}
+{
+  "production": {
+    "valid": true,
+    "actionCount": 7,
+    "definitionCount": 1,
+    "assetCount": 1,
+    "issues": []
+  }
+}
+PASS: 2 source candidates verified; production motion assets=1; source bytes unchanged
+{"status": "passed", "mode": "live_contract_validation", "supportedConceptsWithExactVerifiedText": 5, "supportedSurfacesWithExactVerifiedText": 10, "supportedConceptsWithoutExactVerifiedText": 227, "existingCrossCheckedT21Claims": 6, "T21ClaimsNotMappedToExactCurrentSurfaceScope": ["HA-M-000001"], "gastrocnemiusHeadWholeClaimInheritance": "not_applied_to_two_explicit_part_subjects", "rightOnlyTextCandidates": 1, "playableClips": 0, "learnerActionTextHanjaCount": 0, "newClaims": 0, "newCanonicalBindings": 0, "humanReview": "not_performed", "publicRedistribution": "held", "sourceOnly": true}
+Scene decoder QA passed: 11 meshes/712192 bytes, 9 meshes/205392 bytes
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 49 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.58 kB │ gzip:   0.37 kB
+dist/assets/index-UUYMvEqZ.css    0.74 kB │ gzip:   0.44 kB
+dist/assets/App-EXFiVjVe.css     38.41 kB │ gzip:   8.15 kB
+dist/assets/index-CCpUwCik.js   222.37 kB │ gzip:  69.95 kB
+dist/assets/App-BwFCQYur.js     753.13 kB │ gzip: 187.54 kB
+
+✓ built in 117ms
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+{"schemaVersion":"t82-learner-distribution-audit-v1","status":"passed","scope":"compiled learner distribution; development evidence remains in source files and is not copied to learner JS/HTML/CSS/JSON","checkedAt":"2026-10-01T12:34:59.830Z","inputs":{"learnerRuntimeSha256":"599b6ccfe9a459c3e412c7c29aff3d7cf3ded990b0231bd2a57364f209d6664d","aiEvidenceOverlaySha256":"0a46e544f595179f8bfdaf307ea718d0a804f4d42dc9c3d8221ced554757f20f","t81WorkbookDispositionSha256":"a71f61064cd2ef7f0b8f5d6cc68510023f01d3612a024eb620797634eaac3540","t81PrivateWorkbookRows":257,"t81PrivateWorkbookHashReference":"8e10e00e76f5da8e6d1be6a0f9dcab6039d9a3f81d8a3808c0fe28545802ab3c"},"priorBundle":{"path":"atlas-web/dist/assets/App-X3cv7bvC.js","bytes":1091485,"hits":["cross_checked","evidenceHash","accessedOn","fieldEvidenceId","T18-FIELD-","T18-STATPEARLS","StatPearls","Hands-on Anatomy"],"sha256":"5bb64f9df1005baa44c29566949c961fdd6c6166917a8ea7e73a105b871c9d2d"},"learnerRuntimeRows":{"names":81,"conceptStructureRows":8,"sourceStructureRows":44,"actions":7},"distribution":{"scannedFiles":5,"bundles":[{"path":"atlas-web/dist/assets/App-BwFCQYur.js","bytes":753131,"sha256":"3da82f904d86d54c529c5c2855d5c129eca512a521ab4dab96b0ffa3fcd4deca"},{"path":"atlas-web/dist/assets/index-CCpUwCik.js","bytes":222370,"sha256":"ec91a838d3dae50cb8a20f969651c5cbf2c6155217ed61d975c8e94c50e66d94"}]},"provenanceMarkersChecked":274,"leaks":[],"limitations":["The private workbook bytes were not reopened or copied; only the existing T81 disposition/hash record was checked.","This validates absence of development provenance markers from compiled learner assets, not public redistribution permission or human review."]}
