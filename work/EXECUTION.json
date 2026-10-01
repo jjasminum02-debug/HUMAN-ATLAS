@@ -2760,7 +2760,12 @@
               "existingCanonicalHaBindings": 130,
               "historical163": {
                 "total": 163,
-                "categories": [6, 20, 135, 2]
+                "categories": [
+                  6,
+                  20,
+                  135,
+                  2
+                ]
               }
             },
             "muscleAttachments": {
@@ -2822,13 +2827,13 @@
       ]
     },
     "T35": {
-      "title": "같은 모형 움직임 지원 범위·제작 계획",
+      "title": "전체 근육 움직임 범위·공통 제작 계약",
       "owner": "Sol High",
       "phase": "G4",
       "executionStatus": "planned_not_started",
       "acceptance": "pending",
       "spec": "work/tasks/T35-APP-COMPLETION.md",
-      "scope": "현재 실제 전신 base와 구조/설명/신경 지원 범위를 확인하여 첫 앞정강근 시범과 재사용 가능한 다음 움직임 family를 계획한다. 실제 source/frame/pose/부착/rig 가능성과 OpenSim 보조 source 대응을 검증한다. 현재 제작 가능한 범위를 명시하고 나머지는 움직임 backlog로 보존한다. exact 표정근 clip 사용자 제외는 유지하며 전 근육 clip 확보를 첫 움직임 제공의 선행 조건으로 두지 않는다. 계획 task이며 clip 구현은 T59/T66에서 한다.",
+      "scope": "전체 근육 관련 429 target/447 membership과 현재 232 source 개념/462 표면을 빠짐없이 움직임 제작 대상으로 계획한다. 별도 초기 근육 목록을 두지 않는다. 실제 source/side/part/frame/rest pose/부착·작용/rig 가능성을 전수 disposition으로 연결한다. 관절·다관절·넓은 부착·반복/분절·비관절 연조직 family를 공통 같은-scene 계약으로 정리한다. 과거 표정근 제외는 최신 전 근육 지시로 대체하되 자료 없는 형상을 만들지 않는다. 계획 task이며 새 clip 제작은 T59/T66에서 한다.",
       "progress": {
         "nextUnit": null,
         "completedUnits": []
@@ -2842,20 +2847,26 @@
         "required": [
           "이번에 실제 지원하는 자료/기능의 정확한 범위와 전체 원장을 함께 보존한다.",
           "명시한 자료·구현·학습 흐름을 실제 검증하고 지원된 기능의 잘못된 anatomy/pose/선택/재생 오류를 해결한다.",
-          "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다."
+          "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다.",
+          "429 target/232 source 전수 제작·미확보 원장과 source/side/part/pose의 실제 가능성 근거를 작성한다.",
+          "공통 제작 계약과 준비된 전수 parallel research 배정을 검증하고 계획 acceptance를 clip 구현과 분리한다."
         ],
-        "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research"
+        "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research",
+        "motionAmendment": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md"
       },
-      "absorbedWorkIds": []
+      "absorbedWorkIds": [],
+      "motionPlanningReference": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md",
+      "scopeGoal": "all_declared_muscles_without_initial_shortlist",
+      "planningAmendment": "user-all-muscles-2026-10-02"
     },
     "T59": {
-      "title": "앞정강근 실제 변형·공통 재생 연결",
+      "title": "전체 근육용 공통 변형·제작·재생 경로",
       "owner": "Sol High",
       "phase": "G4",
       "executionStatus": "planned_not_started",
       "acceptance": "pending",
       "spec": "work/tasks/T59-APP-COMPLETION.md",
-      "scope": "T35의 현재 base에 실제 앞정강근 변형과 발 움직임을 제작하고 같은 viewport의 공통 재생기로 연결한다. T60의 player/CTA 통합을 같은 task에 흡수한다. source/frame/rest pose/endpoint 근거, 실제 skinning 또는 morph 변형, 주변 구조의 수동 대응/관통을 검증한다. scale-only/뼈나 선 길이만/별도 모형 전환은 제품 수축 시범으로 세지 않는다.",
+      "scope": "T35의 전체 근육 계약에 따라 같은 전신 scene에서 원본 source 표면의 derived 변형/관절 움직임을 제작하고 공통 player/CTA/취소/복원을 구현한다. 근육별 runtime 코드나 별도 viewer를 만들지 않는다. T60를 흡수한다. 실제 검증 표본은 공통 경로 검증 수단이며 전체 429 target/232 source 제작 범위를 축소하지 않는다. T66용 전수 authoring manifest와 hash/validator를 실제 남긴다.",
       "progress": {
         "nextUnit": null,
         "completedUnits": []
@@ -2869,22 +2880,28 @@
         "required": [
           "이번에 실제 지원하는 자료/기능의 정확한 범위와 전체 원장을 함께 보존한다.",
           "명시한 자료·구현·학습 흐름을 실제 검증하고 지원된 기능의 잘못된 anatomy/pose/선택/재생 오류를 해결한다.",
-          "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다."
+          "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다.",
+          "같은 scene의 실제 source 표면 변형·공통 player/복원과 전체 확장 가능한 exporter/adapter를 실제 검증한다.",
+          "T66 authoring-run-manifest와 실제 validator를 생성해 전수 source/target 작업과 입력 hash/owner/dependency를 고정한다."
         ],
-        "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research"
+        "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research",
+        "motionAmendment": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md"
       },
       "absorbedWorkIds": [
         "T60"
-      ]
+      ],
+      "motionPlanningReference": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md",
+      "scopeGoal": "all_declared_muscles_without_initial_shortlist",
+      "planningAmendment": "user-all-muscles-2026-10-02"
     },
     "T25": {
-      "title": "첫 같은 모형 움직임 학습 흐름 완성",
+      "title": "전체 근육 공통 움직임 학습 흐름",
       "owner": "Luna Max",
       "phase": "G4",
       "executionStatus": "planned_not_started",
       "acceptance": "pending",
       "spec": "work/tasks/T25-APP-COMPLETION.md",
-      "scope": "T59의 실제 같은 모형 clip·player를 구조/기능 카드와 연결하여 전신 탐색→앞정강근→기시정지/기능→움직임으로 이해하기→실제 표면 변형과 발 움직임→복원을 검증하고 오류를 수정한다. 역사 T24 별도 모형/뼈 경로 후보는 그대로 역사로 보존한다. 신경은 이미 선행 지원 기능이며 전 근육 motion 뒤에 다시 시작하는 옛 순서는 폐기한다.",
+      "scope": "T59 공통 변형/player를 source별 구조/기능 카드와 연결하고 전체 원장의 motion 가용성을 정확히 표시한다. 현재 실제 자산의 탐색→선택→작용→재생→pause/scrub/처음 자세→복원을 검증한다. 자료/clip 미확보와 실제 지원을 분리한다. 한 파일럿의 성공을 전체 범위 완료로 세지 않는다.",
       "progress": {
         "nextUnit": null,
         "completedUnits": []
@@ -2900,18 +2917,22 @@
           "명시한 자료·구현·학습 흐름을 실제 검증하고 지원된 기능의 잘못된 anatomy/pose/선택/재생 오류를 해결한다.",
           "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다."
         ],
-        "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research"
+        "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research",
+        "motionAmendment": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md"
       },
-      "absorbedWorkIds": []
+      "absorbedWorkIds": [],
+      "motionPlanningReference": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md",
+      "scopeGoal": "all_declared_muscles_without_initial_shortlist",
+      "planningAmendment": "user-all-muscles-2026-10-02"
     },
     "T66": {
-      "title": "움직임 family 재사용 확장·학습 연결",
+      "title": "전체 근육 변형 자산 제작·통합",
       "owner": "Luna Max",
       "phase": "G4",
       "executionStatus": "planned_not_started",
       "acceptance": "pending",
       "spec": "work/tasks/T66-APP-COMPLETION.md",
-      "scope": "T27/T28/T45/T46/T29/T31의 소흉근·견갑대 준비/시범/설명/감사를 이 task의 내부 unit으로 흡수한다. T35가 실제 지원 가능으로 정한 family를 공통 rig/player/설명 계약으로 확장한다. 현재 base에서 실제 해부학적 이동과 표면 변형이 성립하는 사례만 지원한다. 사용자 제외 표정근 clip은 만들지 않는다. 전 근육 animation 수집을 무제한 종료 조건으로 두지 않고 지원 집합과 나머지 backlog를 명시한다.",
+      "scope": "T35/T59 전체 근육 원장과 공통 rig/player/설명 계약으로 429 target/232 source 개념 전체를 처리한다. T27/T28/T45/T46/T29/T31 내부 작업을 흡수한다. 별도 초기 확장 근육 목록을 두지 않으며 제작 가능으로 확정한 모든 source/family 패키지를 구현·검증·등록한다. 미확보/충돌도 전수 원장과 구체적 다음 작업으로 남긴다. 같은 task 내 병렬 candidate 제작과 단일 writer 통합을 사용한다.",
       "progress": {
         "nextUnit": null,
         "completedUnits": []
@@ -2925,9 +2946,12 @@
         "required": [
           "이번에 실제 지원하는 자료/기능의 정확한 범위와 전체 원장을 함께 보존한다.",
           "명시한 자료·구현·학습 흐름을 실제 검증하고 지원된 기능의 잘못된 anatomy/pose/선택/재생 오류를 해결한다.",
-          "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다."
+          "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다.",
+          "전수 원장에서 현재 제작 가능으로 확정한 모든 패키지를 실제 구현·검증·통합하며 소수 예시에서 종료하지 않는다.",
+          "전체 muscle/side/action 목표 구현과 task responsibility acceptance를 별도 집계하고 미확보/미구현 행을 삭제하지 않는다."
         ],
-        "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research"
+        "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research",
+        "motionAmendment": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md"
       },
       "absorbedWorkIds": [
         "T27",
@@ -2936,16 +2960,19 @@
         "T46",
         "T29",
         "T31"
-      ]
+      ],
+      "motionPlanningReference": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md",
+      "scopeGoal": "all_declared_muscles_without_initial_shortlist",
+      "planningAmendment": "user-all-muscles-2026-10-02"
     },
     "T85": {
-      "title": "지원 움직임·통합 앱 품질 완성",
+      "title": "전체 지원 움직임·통합 앱 품질 감사",
       "owner": "Astra · 현재 대화 직접 구현",
       "phase": "G4",
       "executionStatus": "planned_not_started",
       "acceptance": "pending",
       "spec": "work/tasks/T85-APP-COMPLETION.md",
-      "scope": "T47의 구조/기능/motion 감사를 흡수하여 현재 실제 지원 clip의 같은 surface/scene 변형과 사용자 흐름을 검증하고 화면 품질을 다듬는다. 표정근 exact clip 제외, 나머지 미지원 움직임, 실제 지원 clip을 구분한다. camera/layer/선택/설명·신경 pose의 동기를 확인한다. 전 근육 clip 확보와 지원 앱 품질 합격은 분리한다. 담당 Astra 현재 대화 직접 구현을 유지한다.",
+      "scope": "T47 감사를 흡수해 전체 motion 원장에서 실제 지원하는 모든 clip/side/part/action 계약을 자동 검사하고 같은 source surface/scene 변형·신경 pose·카메라/선택/설명/복원/성능을 다듬는다. 미제작 전체 대상과 실제 지원을 분리하며 소수 예시 성공을 전체 근육 완성으로 표시하지 않는다. 담당 Astra 현재 대화 직접 구현을 유지한다.",
       "progress": {
         "nextUnit": null,
         "completedUnits": []
@@ -2959,22 +2986,27 @@
         "required": [
           "이번에 실제 지원하는 자료/기능의 정확한 범위와 전체 원장을 함께 보존한다.",
           "명시한 자료·구현·학습 흐름을 실제 검증하고 지원된 기능의 잘못된 anatomy/pose/선택/재생 오류를 해결한다.",
-          "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다."
+          "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다.",
+          "전체 실제 지원 clip/side/action 계약과 대표/변경 UI·성능을 검사하고 전체 근육 지원 과장을 수정한다."
         ],
-        "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research"
+        "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research",
+        "motionAmendment": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md"
       },
       "absorbedWorkIds": [
         "T47"
-      ]
+      ],
+      "motionPlanningReference": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md",
+      "scopeGoal": "all_declared_muscles_without_initial_shortlist",
+      "planningAmendment": "user-all-muscles-2026-10-02"
     },
     "T40": {
-      "title": "실행 가능한 로컬 앱 전달",
+      "title": "실행 가능한 로컬 앱과 전체 움직임 범위 전달",
       "owner": "Luna Max",
       "phase": "G5",
       "executionStatus": "planned_not_started",
       "acceptance": "pending",
       "spec": "work/tasks/T40-APP-COMPLETION.md",
-      "scope": "현재 지원 구조·설명·신경·움직임의 실제 scoped acceptance를 사용하여 로컬 실행/설치/asset 확보/검증/복구 안내와 전달 가능한 실행 경로를 완성한다. dev-server 전용 middleware가 필요한 기능을 dist 단독 실행으로 오인하지 않도록 실제 실행 방식을 검증한다. 권리 held/private 자료/비공개 원문을 배포 허가로 바꾸지 않는다. 평가/퀴즈와 미확보 콘텐츠의 추가 연구는 이번 전달의 선행 조건이 아니다.",
+      "scope": "현재 지원 구조·설명·신경·움직임의 실제 scoped acceptance를 사용해 로컬 실행/설치/asset 확보/검증/복구 경로를 완성한다. 전체 근육 motion 목표의 전수 구현·미확보/미구현 원장을 함께 전달하며 sample 기능을 전체 완성으로 오인하지 않는다. dev middleware/asset 확보와 dist 단독 실행을 실제 구분한다. held/private/humanReview 상태를 보존한다.",
       "progress": {
         "nextUnit": null,
         "completedUnits": []
@@ -2990,9 +3022,13 @@
           "명시한 자료·구현·학습 흐름을 실제 검증하고 지원된 기능의 잘못된 anatomy/pose/선택/재생 오류를 해결한다.",
           "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다."
         ],
-        "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research"
+        "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research",
+        "motionAmendment": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md"
       },
-      "absorbedWorkIds": []
+      "absorbedWorkIds": [],
+      "motionPlanningReference": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md",
+      "scopeGoal": "all_declared_muscles_without_initial_shortlist",
+      "planningAmendment": "user-all-muscles-2026-10-02"
     }
   },
   "absorbedTasks": {
@@ -3772,5 +3808,22 @@
       "work/reports/T63.md",
       "work/evidence/T63/final-validation.json"
     ]
+  },
+  "motionExpansionPlan": {
+    "revision": "all-muscles-motion-2026-10-02",
+    "design": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md",
+    "authorization": "user explicitly requires all muscles without an initial expansion shortlist",
+    "planningOnly": true,
+    "goal": "all_declared_muscles",
+    "wholeMuscleMotionGoal": "not_started",
+    "targetRecords": 429,
+    "muscleMemberships": 447,
+    "supportedSourceConcepts": 232,
+    "supportedSourceInstances": 462,
+    "researchManifest": "work/evidence/motion-all-muscles-plan-2026-10-02/run-manifest.json",
+    "runtimeImplementedByThisAmendment": false,
+    "manualParallelPromptsDirectory": "work/prompts/motion-all-muscles-2026-10-02",
+    "nextExecutionStill": "T35",
+    "previousFaceClipExclusionSupersededForFutureMotion": true
   }
 }

@@ -1,0 +1,12 @@
+HUMAN ATLAS의 전체 근육 움직임 준비에서 조사 A만 수행해라. 이는 T35의 자료 준비 worker이며 새 task ID가 아니다.
+design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md, AGENTS.md, 실제 T65 report와 work/evidence/motion-all-muscles-plan-2026-10-02/run-manifest.json를 읽어라.
+최신 사용자 목표는 초기 확장 목록 없이 전체 근육이다. 사용자 예시/쉬운 항목/표본만 처리하고 범위를 끝내지 마라. 과거 표정근 제외는 이 미래 움직임 계획에 적용하지 않는다.
+
+1. python3 work/tools/validate_motion_parallel_plan.py를 실행하고 manifest의 runId/inputHashes/snapshots와 assignments.A를 확인한다. 이 manifest는 실제 준비돼 있다. 해시가 다르면 차이만 기록하고 임의 배정/새 baseline을 만들지 않는다.
+2. 최종 assignedTargetIds 144개, assignedSourceConceptKeys 66개와 assignedSourceKeys 131개 전부를 조사 원장에 포함한다. 지역 배정은 단일 작성자 소유 기준일 뿐 원래 다지역 membership을 바꾸지 않는다. 다른 배정은 읽기 참조만 허용한다.
+3. 기존 T81/T90/T65 기시·정지/기능·source/side/part 근거를 재사용한다. 직접 근거가 부족하거나 기존 geometry/rig/pose가 필요한 필드에 대해 공식/학술 원문 또는 실제 source를 확인하고 field locator·확인 방법·정확한 대응을 기록한다. 전체 group/whole muscle 설명을 member/part로 복사하지 않는다. 출처 파일 byte hash와 검토 노트 hash를 구분한다. 직접 읽지 않은 검색 결과는 candidate다.
+4. 각 source/target에 정확한 identity/scope/좌우, 움직임 작용·조건, 움직이는 뼈/고정 구조/주변 수동 맥락, 관절·다관절·넓은 부착·반복·비관절 변형 유형, 현재 geometry/rig·부착 근거, 부족한 입력과 다음 행동을 정리한다. OpenSim path와 실제 muscle surface를 구분한다. source 이름으로 관절/pivot/부착 좌표나 신경 지배를 만들지 않는다.
+5. 모형이 없거나 변형을 아직 제작할 수 없는 행도 삭제하지 않고 구체적인 근거와 미확보 작업을 남긴다. 전체 세계의 anatomy 부재라고 단정하지 않는다. 새 실제 source가 있으면 후보로 기록하되 common runtime/HA binding/rights/humanReview를 승격하지 않는다. 이 worker는 geometry·clip·rig·공통 코드 제작이 아니다.
+6. 출력은 work/evidence/motion-all-muscles-plan-2026-10-02/research-a/ 안으로 제한한다. start.json에 runId/assignment/inputHashes/배정 IDs를 기록하고, proposals.json header에 runId, assignment='A', inputHashes, assignedTargetIds, assignedSourceConceptKeys, productionAcceptance=false를 그대로 넣는다. targetRows 전수(각 row targetId), sourceRows 전수(각 row sourceConceptKey와 양측 sourceKeys), field별 evidence/feasibility/nextAction을 기록한다. 진행중 checkpoint/progress.json 및 summary.md도 같은 폴더에 둔다. 이미 있는 다른 worker 출력은 건드리지 않는다.
+7. 자기 전수 결과의 누락/중복·field hash·변경 source를 확인한다. whole app suite/전체 12지역 PNG를 반복하지 않는다. EXECUTION·STATUS·product acceptance·공통 schema/loader/runtime·다른 worker 폴더를 수정/커밋하지 않는다. 공통 작성/최종 커밋은 통합자가 맡는다.
+원본/OpenSim_Models/T13/WIP, HA130, 역사163, 542/563/12, source-only·held·not_performed를 보존한다. 자동 위임/다른 task/thread/push/배포/임상 기능 금지. 배정 전수를 처리한 조사 결과와 실제 미확보를 보고하고 멈춰라. 조사 완료를 motion 구현 합격으로 쓰지 마라.

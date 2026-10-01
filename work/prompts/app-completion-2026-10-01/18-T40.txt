@@ -1,7 +1,8 @@
 HUMAN ATLAS에서 T40만 수행해라. 담당 Luna Max.
 
 AGENTS.md, work/EXECUTION.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/product-acceptance.json,
-해당 task의 현재 spec/promptFile, 실제 선행 report/evidence를 읽어라.
+해당 task의 현재 spec/promptFile, 실제 선행 report/evidence 및 design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md를 읽어라.
+2026-10-02 최신 사용자 지시: 초기 확장 근육 목록 없이 전체 근육을 대상으로 한다. 28 설계가 미래 motion의 소수 파일럿/소흉근 중심 범위와 과거 표정근 제외 문구보다 우선한다. 27의 제품 acceptance/content completeness 분리는 유지한다.
 목표는 현재 지원 범위에서 정확하고 안정적으로 사용할 수 있는 앱이다. task acceptance와 전체 콘텐츠 completeness를 분리한다.
 27 설계/현재 acceptanceContract가 과거 전체 콘텐츠 0-gap·full extent 전수 PNG·10개마다 종료 문구보다 우선한다.
 542 target/563 membership/12부위, 기존 HA 130, 역사163(6/20/135/2), 원본/OpenSim_Models/T13/기존 WIP를 보존한다.
@@ -17,8 +18,11 @@ python3 work/tools/sync_execution.py 및 --check를 수행하고 소유 변경�
 다음 task 자동 실행, 새 번호/스레드 발급, 자동 위임, push/배포, 임상 진단·치료·자침 기능은 금지한다.
 
 이번 실행:
-이번 범위: 현재 지원 구조·설명·신경·움직임의 실제 scoped acceptance를 사용하여 로컬 실행/설치/asset 확보/검증/복구 안내와 전달 가능한 실행 경로를 완성한다. dev-server 전용 middleware가 필요한 기능을 dist 단독 실행으로 오인하지 않도록 실제 실행 방식을 검증한다. 권리 held/private 자료/비공개 원문을 배포 허가로 바꾸지 않는다. 평가/퀴즈와 미확보 콘텐츠의 추가 연구는 이번 전달의 선행 조건이 아니다.
+이번 범위: 현재 지원 구조·설명·신경·움직임의 실제 scoped acceptance를 사용해 로컬 실행/설치/asset 확보/검증/복구 경로를 완성한다. 전체 근육 motion 목표의 전수 구현·미확보/미구현 원장을 함께 전달하며 sample 기능을 전체 완성으로 오인하지 않는다. dev middleware/asset 확보와 dist 단독 실행을 실제 구분한다. held/private/humanReview 상태를 보존한다.
 
-실제 새 checkout 또는 독립 실행 조건에서 의존성과 asset locator/해시/서버 실행/복구 절차를 확인한다. source 원본을 무단 bundle하거나 private 원문을 넣지 않는다. 현재 앱의 지원 범위·알려진 한계·필수 실행 서버·라이선스 정보를 정확하게 전달한다. 검증된 콘텐츠와 지원 앱 task 완료를 전체 해부학/모든 신경/모든 clip 완성으로 쓰지 않는다. 로컬 전달만 수행하고 push/배포를 하지 않는다.
+1. T85 실제 report/evidence와 모든 지원 asset의 실행 입력을 읽고 재현 가능한 로컬 앱 실행·asset 확보·검증/복구 절차를 완성한다. dev middleware가 필요한 상태를 dist만 실행하면 되는 것으로 전달하지 않는다.
+2. 실제 구조/설명/신경/움직임의 지원 경로와 전체 target/source/side/action 원장을 대조한다. 429 muscle target/232 source 전수 목표에 남은 작업을 삭제하거나 첫 표본 성공으로 전체 지원이라고 광고하지 않는다.
+3. 기존 제품 acceptance를 이유 없이 반복하지 않고 전달 실행 방식의 실제 차단 결함을 해결한다. private 원문/원본/OpenSim_Models·T13/WIP·held권리·humanReview를 보존하며 push/배포하지 않는다.
+4. 해당 로컬 전달 책임을 끝내면 정확한 readiness/contentCompleteness/wholeMuscleMotionGoal와 근거를 남기고 멈춘다. 새 task/전체 완료 추정/임상 기능은 만들지 않는다.
 
-종료 후 다음 ID는 없음다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
+종료 후 자동 실행할 task는 없다. 실제 전달 상태를 보고하고 멈춰라.

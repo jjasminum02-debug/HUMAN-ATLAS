@@ -1,0 +1,28 @@
+{
+  "asOf": "2026-10-02",
+  "head": "f60d89acaa72451466d147827b0ea6f22bfbaff3",
+  "nextTask": "T35",
+  "T65": "completed/passed",
+  "motionCta": "currently disabled in App.tsx",
+  "mainDatasetLoader": "DatasetResources.load rejects animation/skins; its resource extraction keeps static geometry only",
+  "existingAnimationCode": [
+    "atlas-web/src/viewer/animationSceneAdapter.ts",
+    "atlas-web/src/viewer/animationPlayback.ts",
+    "atlas-web/src/domain/motionPlayer.ts"
+  ],
+  "reuseBoundary": "asset parse/player clock/policy can be reused; live dataset rig/skinned/morph graph cannot pass through static loader without an explicit motion adapter",
+  "existingT24": "one historical bone-motion/illustrative-path candidate; blocked for original-muscle deformation, not learner-supported contraction",
+  "supportedSameModelMuscleMotionCount": 0,
+  "attachmentDescriptionConceptsOrConflict": 31,
+  "attachmentDescriptionMissingConcepts": 201,
+  "remainingOriginConflict": 1,
+  "source": [
+    "work/reports/T24.md",
+    "work/reports/T65.md",
+    "work/evidence/T65/final-validation.json",
+    "atlas-web/src/ui/App.tsx",
+    "atlas-web/src/viewer/datasets/DatasetResources.ts"
+  ],
+  "planningOnly": true,
+  "noRuntimeChange": true
+}

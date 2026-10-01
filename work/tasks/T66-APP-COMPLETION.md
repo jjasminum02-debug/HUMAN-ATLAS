@@ -1,19 +1,22 @@
-# T66 — 움직임 family 재사용 확장·학습 연결
+# T66 — 전체 근육 변형 자산 제작·통합
 
-2026-10-01 · 현재 계획 · 담당 Luna Max.
-현재 기준은 27-APP-COMPLETION-AND-CONTENT-ROADMAP.md와 EXECUTION의 acceptanceContract/promptFile이다.
-이전 명세 `work/tasks/T66.md`와 흡수 task의 자료/보고는 역사로 보존한다. 계획 수정은 실행·합격이 아니다.
+2026-10-02 · 전수 motion 계획 개정 · 담당 Luna Max.
+27 앱 완료 계약과 [28 전체 근육 움직임 계획](../../design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md) 및 EXECUTION의 현재 promptFile이 기준이다. 과거 파일/보고는 보존한다. 계획 수정은 실행·합격이 아니다.
 
 ## 범위
 
-T27/T28/T45/T46/T29/T31의 소흉근·견갑대 준비/시범/설명/감사를 이 task의 내부 unit으로 흡수한다. T35가 실제 지원 가능으로 정한 family를 공통 rig/player/설명 계약으로 확장한다. 현재 base에서 실제 해부학적 이동과 표면 변형이 성립하는 사례만 지원한다. 사용자 제외 표정근 clip은 만들지 않는다. 전 근육 animation 수집을 무제한 종료 조건으로 두지 않고 지원 집합과 나머지 backlog를 명시한다.
+T35/T59 전체 근육 원장과 공통 rig/player/설명 계약으로 429 target/232 source 개념 전체를 처리한다. T27/T28/T45/T46/T29/T31 내부 작업을 흡수한다. 별도 초기 확장 근육 목록을 두지 않으며 제작 가능으로 확정한 모든 source/family 패키지를 구현·검증·등록한다. 미확보/충돌도 전수 원장과 구체적 다음 작업으로 남긴다. 같은 task 내 병렬 candidate 제작과 단일 writer 통합을 사용한다.
 
 ## 수행
 
-T59 공통 rig/player와 T25 학습 흐름을 재사용하여 T35의 후속 family를 제작한다. 소흉근·견갑대의 실제 source/부착/pose/움직이는 뼈·수동 변형 근거를 검증한다. 검증된 clip과 같은 scene의 설명/카드/재생을 함께 연결한다. 모든 이동을 단순 scale로 표현하지 않는다. 실제 family별 의미 검토와 전환/복원/관통/소스 보존 검사를 한다. 흡수된 작은 task를 별도로 실행하거나 batch 전용 runtime 분기를 만들지 않는다. 새 근거 없이는 지원 clip 수를 채우기 위한 모션을 만들지 않는다.
+1. T35/T59/T25의 실제 산출물, work/evidence/T59/authoring-run-manifest.json과 validator를 읽고 frozen 계약·전수 배정·출력 ownership/hash를 검사한다. manifest 없이 과거 임의 배정/근육 shortlist를 추정하지 않는다. 소흉근/견갑대만 처리하는 과거 범위를 반복하지 않는다.
+2. 전체 429 target/447 membership과 232 source/462 표면의 action/side/part/geometry/rig/clip 상태를 유지한다. 전체를 작업 큐로 처리하며 batch는 내부 복구 단위다. 몇 개 예시나 10개 후 의무 종료로 범위를 줄이지 않는다. group/repeated family가 일부 member로 완료되지 않도록 정확한 지원 범위를 계산한다.
+3. 사람이 자산 A/B/C 프롬프트를 실행했으면 owned candidate package와 생성/검증 근거를 통합한다. 자동 agent/thread는 만들지 않는다. worker 미실행이면 같은 공통 exporter로 직접 처리한다. 공통 rig/axis/frame/key를 worker가 제각각 재정의하지 않게 한다.
+4. 가능한 입력은 실제 derived skin/morph/corrective 자산으로 만들고 정확한 현재 source/side/pose에 결속한다. shared 관절 동작을 재사용하되 해당 muscle의 부착·분절·수동 주변 변형·관통/중간 pose를 검증한다. 원본 변형/가짜 geometry·선/scale-only/별도 모델 뷰로 완료를 만들지 않는다.
+5. 부족한 실제 입력은 새 단서에 따라 조사/보완하고 source 없는 항목은 null·구체적 확보 작업을 유지한다. 제작 가능으로 확정한 패키지가 미구현이면 실제 미완 unit으로 남기고 같은 task에서 계속 해결한다. 전수 row 작성만으로 clip 구현을 합격 처리하지 않는다.
+6. 전수 자동 source/side/rest/weights/topology/track/pose/cleanup/정책 검사와 유형·변경/충돌 실제 화면을 검사한다. whole suite/12지역 PNG는 각 worker가 반복하지 않고 통합 writer가 영향 분석 후 한 번 검사한다. 지원된 실제 자산의 bugs를 해결하고 범위를 정직하게 보고한다.
+7. 모든 현재 제작 가능 패키지의 구현/통합 책임을 마쳤을 때 해당 task acceptance를 기록한다. 전체 움직임 목표는 각 target/side/action의 실제 구현에서 별도로 계산하며 remaining이 있으면 wholeMuscleMotionGoal=partial이다. 몇 개 근육 성공으로 전체 구현 완료라고 쓰거나 나머지 근육을 삭제하지 않는다. 다음은 T85다.
 
 ## 합격과 보존
 
-실제 지정된 기능/자료/계획의 근거·검증과 해당 계약을 충족하면 scoped passed로 종료한다. 지원한다고 표시한 자료·기능의 오류는 해결하며 전체 콘텐츠 completeness는 독립이다. 본문에 남은 과거 전수 0-gap/10개 종료/후속 순서 문구는 현재 계약과 충돌하면 적용하지 않는다.
-
-report/evidence, progress.productAcceptance와 EXECUTION의 해당 record를 갱신하고 sync_execution.py 및 --check를 수행한다. 기존 원본/OpenSim_Models/T13/사용자 WIP/HA130/역사163/source-only/rights/humanReview를 보존한다. 소유 변경만 로컬 커밋하며 다른 task/자동 위임/push/배포/임상 기능은 실행하지 않는다.
+542/563/12, 근육 관련429 target/447 membership, 현재232 source 개념/462 표면과 원장 전체를 보존한다. 기존 HA130·역사163(6/20/135/2), source-only·권리 held·humanReview=not_performed·원본/OpenSim_Models/T13/WIP를 유지한다. 자동 위임·새 task/thread·push/배포·임상 기능은 금지한다. 전체 움직임 완료와 해당 task의 실제 책임 완료를 구분하며 일부 clip 성공으로 전체를 완료 처리하지 않는다. report/evidence/EXECUTION의 현재 acceptance 필드를 실제 검증으로 기록하고 sync/check 및 소유 로컬 커밋 후 멈춘다.

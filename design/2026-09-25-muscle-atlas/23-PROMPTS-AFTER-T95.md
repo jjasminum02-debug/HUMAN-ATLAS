@@ -39,17 +39,17 @@
 
 | ID | 담당 | 결과 |
 |---|---|---|
-| [T35](#t35) | Sol High | 같은 모형 움직임 지원 범위·제작 계획 |
-| [T59](#t59) | Sol High | 앞정강근 실제 변형·공통 재생 연결 |
-| [T25](#t25) | Luna Max | 첫 같은 모형 움직임 학습 흐름 완성 |
-| [T66](#t66) | Luna Max | 움직임 family 재사용 확장·학습 연결 |
-| [T85](#t85) | Astra · 현재 대화 직접 구현 | 지원 움직임·통합 앱 품질 완성 |
+| [T35](#t35) | Sol High | 전체 근육 움직임 범위·공통 제작 계약 |
+| [T59](#t59) | Sol High | 전체 근육용 공통 변형·제작·재생 경로 |
+| [T25](#t25) | Luna Max | 전체 근육 공통 움직임 학습 흐름 |
+| [T66](#t66) | Luna Max | 전체 근육 변형 자산 제작·통합 |
+| [T85](#t85) | Astra · 현재 대화 직접 구현 | 전체 지원 움직임·통합 앱 품질 감사 |
 
 ## G5 — 최종 로컬 전달
 
 | ID | 담당 | 결과 |
 |---|---|---|
-| [T40](#t40) | Luna Max | 실행 가능한 로컬 앱 전달 |
+| [T40](#t40) | Luna Max | 실행 가능한 로컬 앱과 전체 움직임 범위 전달 |
 
 ## 붙여 넣기 — 한 번에 한 ID
 
@@ -464,13 +464,14 @@ T90 report와 work/evidence/T90/muscle-attachment-coverage.json, muscle-attachme
 ```
 
 <a id="t35"></a>
-### T35 — 같은 모형 움직임 지원 범위·제작 계획
+### T35 — 전체 근육 움직임 범위·공통 제작 계약
 
 ```text
 HUMAN ATLAS에서 T35만 수행해라. 담당 Sol High.
 
 AGENTS.md, work/EXECUTION.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/product-acceptance.json,
-해당 task의 현재 spec/promptFile, 실제 선행 report/evidence를 읽어라.
+해당 task의 현재 spec/promptFile, 실제 선행 report/evidence 및 design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md를 읽어라.
+2026-10-02 최신 사용자 지시: 초기 확장 근육 목록 없이 전체 근육을 대상으로 한다. 28 설계가 미래 motion의 소수 파일럿/소흉근 중심 범위와 과거 표정근 제외 문구보다 우선한다. 27의 제품 acceptance/content completeness 분리는 유지한다.
 목표는 현재 지원 범위에서 정확하고 안정적으로 사용할 수 있는 앱이다. task acceptance와 전체 콘텐츠 completeness를 분리한다.
 27 설계/현재 acceptanceContract가 과거 전체 콘텐츠 0-gap·full extent 전수 PNG·10개마다 종료 문구보다 우선한다.
 542 target/563 membership/12부위, 기존 HA 130, 역사163(6/20/135/2), 원본/OpenSim_Models/T13/기존 WIP를 보존한다.
@@ -486,21 +487,28 @@ python3 work/tools/sync_execution.py 및 --check를 수행하고 소유 변경�
 다음 task 자동 실행, 새 번호/스레드 발급, 자동 위임, push/배포, 임상 진단·치료·자침 기능은 금지한다.
 
 이번 실행:
-이번 범위: 현재 실제 전신 base와 구조/설명/신경 지원 범위를 확인하여 첫 앞정강근 시범과 재사용 가능한 다음 움직임 family를 계획한다. 실제 source/frame/pose/부착/rig 가능성과 OpenSim 보조 source 대응을 검증한다. 현재 제작 가능한 범위를 명시하고 나머지는 움직임 backlog로 보존한다. exact 표정근 clip 사용자 제외는 유지하며 전 근육 clip 확보를 첫 움직임 제공의 선행 조건으로 두지 않는다. 계획 task이며 clip 구현은 T59/T66에서 한다.
+이번 범위: 전체 근육 관련 429 target/447 membership과 현재 232 source 개념/462 표면을 빠짐없이 움직임 제작 대상으로 계획한다. 별도 초기 근육 목록을 두지 않는다. 실제 source/side/part/frame/rest pose/부착·작용/rig 가능성을 전수 disposition으로 연결한다. 관절·다관절·넓은 부착·반복/분절·비관절 연조직 family를 공통 같은-scene 계약으로 정리한다. 과거 표정근 제외는 최신 전 근육 지시로 대체하되 자료 없는 형상을 만들지 않는다. 계획 task이며 새 clip 제작은 T59/T66에서 한다.
 
-기존 실제 source와 target/rig 상태를 읽고 제작 입력·좌표·부착 근거·family 재사용/예외·품질 판단을 정한다. 임의로 지원 가능을 선언하지 않는다. 앞정강근 pilot과 후속 소흉근/견갑대 사례의 실제 가능성과 필요 작업을 확인한다. 검증 가능한 계획 산출물로 종료하며 새 clip/원본 geometry 변형을 하지 않는다.
+1. 실제 T65 passed/report/evidence, 현재 App/정적 dataset loader/animation adapter/공통 controller를 읽어 현재 실제 motion 지원 0과 역사 T24 기술 candidate를 구분한다. 과거 blocked T24를 재실행하지 않는다.
+2. 준비된 run-manifest 및 snapshots를 읽고 python3 work/tools/validate_motion_parallel_plan.py로 해시·429/232/462 전수 배정·중복 0을 검증한다. 입력이 같으면 배정을 다시 만들지 않는다. A/B/C는 사람이 별도 프롬프트로 실행할 수 있는 같은 T35 자료 준비 작업이다. 자동 위임/새 thread를 만들지 않는다.
+3. 전체 target/source/part/group/side/action/pose의 움직임 원장을 만든다. 기시·정지31개 설명/201개 gap을 재사용하고 원문 locator와 source geometry/rig 입력의 부족을 구체적으로 연결한다. 전체 원장에서 임의로 쉬운 근육만 제외/선정하거나 몇 개 예시를 목표로 고정하지 않는다. 그룹/반복 family의 일부 구현을 전체로 세지 않는다.
+4. 원문·좌표·pose·부착 근거와 source-derived authoring 선택을 구분한다. OpenSim은 해당 frame/관절/path를 검증할 수 있을 때 보조로 쓰며 전 근육 solver 설치를 일괄 선행 조건으로 만들지 않는다. 기존 source-only와 null canonical binding을 지원 제작의 일괄 차단으로 쓰지 않는다.
+5. work/evidence/T35/motion-contract.json에 native source identity/hash/rest pose, sourceKey 기반 결속, derived skin/morph/corrective 변형, 움직이는 뼈·고정 구조·주변 수동 변형·관통 위험, 부분/좌우/동작 조건과 비관절 변형 유형의 계약을 정한다. 수치·pivot·정합을 근거 없이 채우지 않는다. 부족한 입력은 정확한 재개 조건으로 둔다. pipeline 표본은 전체 원장에서 검증 가능성에 따라 정하며 초기 확장 리스트가 아니다.
+6. A/B/C 결과가 실제 있으면 --results 검사로 검증한 전수 결과만 통합한다. worker 실행은 선택 사항이며 없으면 같은 manifest 전수 규칙으로 현재 입력/제작 가능성 계획을 직접 처리한다. 아직 조사중인 필드는 unknown·필요 입력으로 남기고 없는 근거를 만들지 않는다. 전체 원장의 현재 상태/필요 작업과 검증된 공통 제작 계약을 완성하면 계획 task를 종료할 수 있으며, 모든 근육의 원문/clip 확보를 T59 시작의 일괄 조건으로 만들지 않는다. 실제 계획/공통 계약 자체가 미완이면 그 unit만 같은 T35에서 해결한다. 공통 작성자는 이 담당자 하나다.
+7. T59가 공통 제작/player를 만들고 authoring-run-manifest를 실제 생성한 후 전체 자산을 병렬 제작하는 순서를 구체화한다. T35 합격은 전수 제작 계획/계약 완료이지 새 motion 구현 합격이 아니다. 전체 근육 목표를 소수의 clip 지원으로 축소하지 않는다.
 
-종료 후 다음 ID는 T59다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
+종료 후 다음 ID는 T59다. 현재 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
 ```
 
 <a id="t59"></a>
-### T59 — 앞정강근 실제 변형·공통 재생 연결
+### T59 — 전체 근육용 공통 변형·제작·재생 경로
 
 ```text
 HUMAN ATLAS에서 T59만 수행해라. 담당 Sol High.
 
 AGENTS.md, work/EXECUTION.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/product-acceptance.json,
-해당 task의 현재 spec/promptFile, 실제 선행 report/evidence를 읽어라.
+해당 task의 현재 spec/promptFile, 실제 선행 report/evidence 및 design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md를 읽어라.
+2026-10-02 최신 사용자 지시: 초기 확장 근육 목록 없이 전체 근육을 대상으로 한다. 28 설계가 미래 motion의 소수 파일럿/소흉근 중심 범위와 과거 표정근 제외 문구보다 우선한다. 27의 제품 acceptance/content completeness 분리는 유지한다.
 목표는 현재 지원 범위에서 정확하고 안정적으로 사용할 수 있는 앱이다. task acceptance와 전체 콘텐츠 completeness를 분리한다.
 27 설계/현재 acceptanceContract가 과거 전체 콘텐츠 0-gap·full extent 전수 PNG·10개마다 종료 문구보다 우선한다.
 542 target/563 membership/12부위, 기존 HA 130, 역사163(6/20/135/2), 원본/OpenSim_Models/T13/기존 WIP를 보존한다.
@@ -516,21 +524,28 @@ python3 work/tools/sync_execution.py 및 --check를 수행하고 소유 변경�
 다음 task 자동 실행, 새 번호/스레드 발급, 자동 위임, push/배포, 임상 진단·치료·자침 기능은 금지한다.
 
 이번 실행:
-이번 범위: T35의 현재 base에 실제 앞정강근 변형과 발 움직임을 제작하고 같은 viewport의 공통 재생기로 연결한다. T60의 player/CTA 통합을 같은 task에 흡수한다. source/frame/rest pose/endpoint 근거, 실제 skinning 또는 morph 변형, 주변 구조의 수동 대응/관통을 검증한다. scale-only/뼈나 선 길이만/별도 모형 전환은 제품 수축 시범으로 세지 않는다.
+이번 범위: T35의 전체 근육 계약에 따라 같은 전신 scene에서 원본 source 표면의 derived 변형/관절 움직임을 제작하고 공통 player/CTA/취소/복원을 구현한다. 근육별 runtime 코드나 별도 viewer를 만들지 않는다. T60를 흡수한다. 실제 검증 표본은 공통 경로 검증 수단이며 전체 429 target/232 source 제작 범위를 축소하지 않는다. T66용 전수 authoring manifest와 hash/validator를 실제 남긴다.
 
-현재 product-scope의 실제 근육/뼈와 T35 제작 입력을 사용하여 derived rig/clip을 별도 소유 경로에 만든다. 원본을 수정하지 않는다. 실제 표면 변형과 관절 움직임, 주변 맥락을 같은 scene에 결속한다. CTA의 명시 재생/pause/속도/진행/처음 자세, reduced-motion, 전환·실패·unmount 정리를 공통 player로 구현한다. 데이터/pose/주변 관통과 실제 전신 탐색→선택→재생→복원을 확인한다. T60 별도 실행을 하지 않는다.
+1. T35 실제 report/전수 원장/motion-contract, 준비된 research manifest와 실제 A/B/C 근거를 읽는다. 전체 근육 목표와 현재 실제 제작 가능한 입력을 구분한다. 원본/OpenSim_Models을 수정하지 않는다.
+2. 기존 static loader가 animation graph를 거부하고 geometry만 캐시하는 지점을 실제로 해결한다. 전체 glTF skeleton/skin/morph/clip graph를 유지하는 공통 motion adapter를 기존 scene 아래에 결속하고 sourceKey/frame/rest-pose/hash를 검증한다. AnimationSceneAdapter/player 정책과 controller.addUpdate를 재사용해 한 renderer/camera/frame clock을 유지한다.
+3. reproducible exporter/derivation 경로와 source별 weights/morph/corrective 입력·관절/pose/family 패키지 계약을 구현한다. source geometry 공유 cache는 불변이며 instance별 deformation state를 분리한다. 관절 동작 재사용과 source별 부착/변형을 분리해 전체에 같은 scale 효과를 복사하지 않는다.
+4. 전체 원장에서 선택한 실제 계약 검증 사례로 rest/중간/끝 pose·표면 변형·동반 뼈/수동 주변 근육·관통·좌우/part·원본 복귀를 확인한다. 희소/부채꼴/다관절/비관절 유형은 계약이 실제 지원하는 것과 미지원인 것을 명시한다. 이 표본 선택으로 제품 scope를 제한하지 않는다.
+5. 명시 CTA 재생/pause/scrub/속도/reduced-motion, 선택/부위 변경·취소/late response/실패/unmount/context loss, user hidden/layer/selection/camera 복원을 구현한다. 움직이는 pose에서 정적 신경을 잘못 고정하지 않는다. 필요한 family만 lazy load하고 motion buffers/skin/morph를 cache 예산에 포함한다.
+6. T66의 전체 source/target 제작을 위해 work/evidence/T59/authoring-run-manifest.json과 실제 manifest validator를 생성한다. 실제 계약·exporter·입력 hash, 모든 패키지의 owner/assigned IDs/dependency/출력 경로·미확보 작업을 기록한다. common rig/관절/sourceKey 정의는 단일 writer가 고정하고 A/B/C는 candidate package만 쓰게 한다. 이 파일과 전수 배정/입력 검사가 없으면 T59 인계를 완료로 쓰지 않는다.
+7. 관련 자동 회귀·type/build·실제 현재 앱 재생→복원을 한 번 검증하고 측정/한계를 남긴다. 공통 경로 pass를 전체 근육 제작 완료로 쓰지 않는다. 다음은 T25, 전체 자산 제작/등록은 T66이다.
 
-종료 후 다음 ID는 T25다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
+종료 후 다음 ID는 T25다. 현재 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
 ```
 
 <a id="t25"></a>
-### T25 — 첫 같은 모형 움직임 학습 흐름 완성
+### T25 — 전체 근육 공통 움직임 학습 흐름
 
 ```text
 HUMAN ATLAS에서 T25만 수행해라. 담당 Luna Max.
 
 AGENTS.md, work/EXECUTION.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/product-acceptance.json,
-해당 task의 현재 spec/promptFile, 실제 선행 report/evidence를 읽어라.
+해당 task의 현재 spec/promptFile, 실제 선행 report/evidence 및 design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md를 읽어라.
+2026-10-02 최신 사용자 지시: 초기 확장 근육 목록 없이 전체 근육을 대상으로 한다. 28 설계가 미래 motion의 소수 파일럿/소흉근 중심 범위와 과거 표정근 제외 문구보다 우선한다. 27의 제품 acceptance/content completeness 분리는 유지한다.
 목표는 현재 지원 범위에서 정확하고 안정적으로 사용할 수 있는 앱이다. task acceptance와 전체 콘텐츠 completeness를 분리한다.
 27 설계/현재 acceptanceContract가 과거 전체 콘텐츠 0-gap·full extent 전수 PNG·10개마다 종료 문구보다 우선한다.
 542 target/563 membership/12부위, 기존 HA 130, 역사163(6/20/135/2), 원본/OpenSim_Models/T13/기존 WIP를 보존한다.
@@ -546,21 +561,26 @@ python3 work/tools/sync_execution.py 및 --check를 수행하고 소유 변경�
 다음 task 자동 실행, 새 번호/스레드 발급, 자동 위임, push/배포, 임상 진단·치료·자침 기능은 금지한다.
 
 이번 실행:
-이번 범위: T59의 실제 같은 모형 clip·player를 구조/기능 카드와 연결하여 전신 탐색→앞정강근→기시정지/기능→움직임으로 이해하기→실제 표면 변형과 발 움직임→복원을 검증하고 오류를 수정한다. 역사 T24 별도 모형/뼈 경로 후보는 그대로 역사로 보존한다. 신경은 이미 선행 지원 기능이며 전 근육 motion 뒤에 다시 시작하는 옛 순서는 폐기한다.
+이번 범위: T59 공통 변형/player를 source별 구조/기능 카드와 연결하고 전체 원장의 motion 가용성을 정확히 표시한다. 현재 실제 자산의 탐색→선택→작용→재생→pause/scrub/처음 자세→복원을 검증한다. 자료/clip 미확보와 실제 지원을 분리한다. 한 파일럿의 성공을 전체 범위 완료로 세지 않는다.
 
-T59 실제 rig/clip/player와 현재 카드/설명을 연결하고 실제 browser에서 재생/중지/속도/처음 자세/부위 변경/선택 변경/실패 복구를 확인한다. camera reset과 pose reset을 구분하고 자동 재생을 하지 않는다. 눈에 보이는 실제 같은 근육 변형과 작용 설명의 동기를 검증한다. clip 부족을 다른 모델·scale-only로 대체하지 않는다. 한 시범 완료와 전체 motion completeness는 별도로 보고한다.
+1. T35/T59 실제 계약·자산·report/evidence 및 전수 motion 원장을 읽고 source/side/part/action 지원과 learner CTA의 상태를 데이터로 연결한다. HA ID가 없는 검증된 source muscle도 공통 sourceKey 경로를 사용하며 canonical binding을 만들지 않는다.
+2. 같은 동작 family에서 선택 근육과 정확한 source 표면/설명이 바뀌는 흐름을 만들고, 작용 조건/여러 작용을 일반화하지 않는다. 내부 source/task/evidence 메타데이터를 학생 UI에 넣지 않는다.
+3. 같은 scene의 근육 선택→기시/정지·작용→명시 CTA→몸 움직임과 실제 표면 변형→재생/정지/scrub/속도→rest 복원, 검색·양측·카드·키보드·뒤/앞·숨김을 확인한다. 지원되지 않은 신경 pose는 정확히 가리고 복원은 user layer 상태를 따른다.
+4. 390/1024/1440 실제 UI와 관련 공통 계약을 검사하고 발견된 문제를 고친다. T66 자산 workers가 frozen contract 아래 candidate 폴더에서 작업할 수 있게 UI 입력 계약을 유지한다. common code는 이 writer만 변경한다.
+5. 전체 target/source 원장과 잔여 제작 작업을 유지하고 실제 현재 공통 UI responsibility acceptance를 보고한다. 전체 근육 움직임 구현 완료를 선언하지 않는다. 다음 T66을 자동 실행하지 않는다.
 
-종료 후 다음 ID는 T66다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
+종료 후 다음 ID는 T66다. 현재 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
 ```
 
 <a id="t66"></a>
-### T66 — 움직임 family 재사용 확장·학습 연결
+### T66 — 전체 근육 변형 자산 제작·통합
 
 ```text
 HUMAN ATLAS에서 T66만 수행해라. 담당 Luna Max.
 
 AGENTS.md, work/EXECUTION.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/product-acceptance.json,
-해당 task의 현재 spec/promptFile, 실제 선행 report/evidence를 읽어라.
+해당 task의 현재 spec/promptFile, 실제 선행 report/evidence 및 design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md를 읽어라.
+2026-10-02 최신 사용자 지시: 초기 확장 근육 목록 없이 전체 근육을 대상으로 한다. 28 설계가 미래 motion의 소수 파일럿/소흉근 중심 범위와 과거 표정근 제외 문구보다 우선한다. 27의 제품 acceptance/content completeness 분리는 유지한다.
 목표는 현재 지원 범위에서 정확하고 안정적으로 사용할 수 있는 앱이다. task acceptance와 전체 콘텐츠 completeness를 분리한다.
 27 설계/현재 acceptanceContract가 과거 전체 콘텐츠 0-gap·full extent 전수 PNG·10개마다 종료 문구보다 우선한다.
 542 target/563 membership/12부위, 기존 HA 130, 역사163(6/20/135/2), 원본/OpenSim_Models/T13/기존 WIP를 보존한다.
@@ -576,21 +596,28 @@ python3 work/tools/sync_execution.py 및 --check를 수행하고 소유 변경�
 다음 task 자동 실행, 새 번호/스레드 발급, 자동 위임, push/배포, 임상 진단·치료·자침 기능은 금지한다.
 
 이번 실행:
-이번 범위: T27/T28/T45/T46/T29/T31의 소흉근·견갑대 준비/시범/설명/감사를 이 task의 내부 unit으로 흡수한다. T35가 실제 지원 가능으로 정한 family를 공통 rig/player/설명 계약으로 확장한다. 현재 base에서 실제 해부학적 이동과 표면 변형이 성립하는 사례만 지원한다. 사용자 제외 표정근 clip은 만들지 않는다. 전 근육 animation 수집을 무제한 종료 조건으로 두지 않고 지원 집합과 나머지 backlog를 명시한다.
+이번 범위: T35/T59 전체 근육 원장과 공통 rig/player/설명 계약으로 429 target/232 source 개념 전체를 처리한다. T27/T28/T45/T46/T29/T31 내부 작업을 흡수한다. 별도 초기 확장 근육 목록을 두지 않으며 제작 가능으로 확정한 모든 source/family 패키지를 구현·검증·등록한다. 미확보/충돌도 전수 원장과 구체적 다음 작업으로 남긴다. 같은 task 내 병렬 candidate 제작과 단일 writer 통합을 사용한다.
 
-T59 공통 rig/player와 T25 학습 흐름을 재사용하여 T35의 후속 family를 제작한다. 소흉근·견갑대의 실제 source/부착/pose/움직이는 뼈·수동 변형 근거를 검증한다. 검증된 clip과 같은 scene의 설명/카드/재생을 함께 연결한다. 모든 이동을 단순 scale로 표현하지 않는다. 실제 family별 의미 검토와 전환/복원/관통/소스 보존 검사를 한다. 흡수된 작은 task를 별도로 실행하거나 batch 전용 runtime 분기를 만들지 않는다. 새 근거 없이는 지원 clip 수를 채우기 위한 모션을 만들지 않는다.
+1. T35/T59/T25의 실제 산출물, work/evidence/T59/authoring-run-manifest.json과 validator를 읽고 frozen 계약·전수 배정·출력 ownership/hash를 검사한다. manifest 없이 과거 임의 배정/근육 shortlist를 추정하지 않는다. 소흉근/견갑대만 처리하는 과거 범위를 반복하지 않는다.
+2. 전체 429 target/447 membership과 232 source/462 표면의 action/side/part/geometry/rig/clip 상태를 유지한다. 전체를 작업 큐로 처리하며 batch는 내부 복구 단위다. 몇 개 예시나 10개 후 의무 종료로 범위를 줄이지 않는다. group/repeated family가 일부 member로 완료되지 않도록 정확한 지원 범위를 계산한다.
+3. 사람이 자산 A/B/C 프롬프트를 실행했으면 owned candidate package와 생성/검증 근거를 통합한다. 자동 agent/thread는 만들지 않는다. worker 미실행이면 같은 공통 exporter로 직접 처리한다. 공통 rig/axis/frame/key를 worker가 제각각 재정의하지 않게 한다.
+4. 가능한 입력은 실제 derived skin/morph/corrective 자산으로 만들고 정확한 현재 source/side/pose에 결속한다. shared 관절 동작을 재사용하되 해당 muscle의 부착·분절·수동 주변 변형·관통/중간 pose를 검증한다. 원본 변형/가짜 geometry·선/scale-only/별도 모델 뷰로 완료를 만들지 않는다.
+5. 부족한 실제 입력은 새 단서에 따라 조사/보완하고 source 없는 항목은 null·구체적 확보 작업을 유지한다. 제작 가능으로 확정한 패키지가 미구현이면 실제 미완 unit으로 남기고 같은 task에서 계속 해결한다. 전수 row 작성만으로 clip 구현을 합격 처리하지 않는다.
+6. 전수 자동 source/side/rest/weights/topology/track/pose/cleanup/정책 검사와 유형·변경/충돌 실제 화면을 검사한다. whole suite/12지역 PNG는 각 worker가 반복하지 않고 통합 writer가 영향 분석 후 한 번 검사한다. 지원된 실제 자산의 bugs를 해결하고 범위를 정직하게 보고한다.
+7. 모든 현재 제작 가능 패키지의 구현/통합 책임을 마쳤을 때 해당 task acceptance를 기록한다. 전체 움직임 목표는 각 target/side/action의 실제 구현에서 별도로 계산하며 remaining이 있으면 wholeMuscleMotionGoal=partial이다. 몇 개 근육 성공으로 전체 구현 완료라고 쓰거나 나머지 근육을 삭제하지 않는다. 다음은 T85다.
 
-종료 후 다음 ID는 T85다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
+종료 후 다음 ID는 T85다. 현재 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
 ```
 
 <a id="t85"></a>
-### T85 — 지원 움직임·통합 앱 품질 완성
+### T85 — 전체 지원 움직임·통합 앱 품질 감사
 
 ```text
 HUMAN ATLAS에서 T85만 수행해라. 담당 Astra · 현재 대화 직접 구현.
 
 AGENTS.md, work/EXECUTION.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/product-acceptance.json,
-해당 task의 현재 spec/promptFile, 실제 선행 report/evidence를 읽어라.
+해당 task의 현재 spec/promptFile, 실제 선행 report/evidence 및 design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md를 읽어라.
+2026-10-02 최신 사용자 지시: 초기 확장 근육 목록 없이 전체 근육을 대상으로 한다. 28 설계가 미래 motion의 소수 파일럿/소흉근 중심 범위와 과거 표정근 제외 문구보다 우선한다. 27의 제품 acceptance/content completeness 분리는 유지한다.
 목표는 현재 지원 범위에서 정확하고 안정적으로 사용할 수 있는 앱이다. task acceptance와 전체 콘텐츠 completeness를 분리한다.
 27 설계/현재 acceptanceContract가 과거 전체 콘텐츠 0-gap·full extent 전수 PNG·10개마다 종료 문구보다 우선한다.
 542 target/563 membership/12부위, 기존 HA 130, 역사163(6/20/135/2), 원본/OpenSim_Models/T13/기존 WIP를 보존한다.
@@ -606,21 +633,26 @@ python3 work/tools/sync_execution.py 및 --check를 수행하고 소유 변경�
 다음 task 자동 실행, 새 번호/스레드 발급, 자동 위임, push/배포, 임상 진단·치료·자침 기능은 금지한다.
 
 이번 실행:
-이번 범위: T47의 구조/기능/motion 감사를 흡수하여 현재 실제 지원 clip의 같은 surface/scene 변형과 사용자 흐름을 검증하고 화면 품질을 다듬는다. 표정근 exact clip 제외, 나머지 미지원 움직임, 실제 지원 clip을 구분한다. camera/layer/선택/설명·신경 pose의 동기를 확인한다. 전 근육 clip 확보와 지원 앱 품질 합격은 분리한다. 담당 Astra 현재 대화 직접 구현을 유지한다.
+이번 범위: T47 감사를 흡수해 전체 motion 원장에서 실제 지원하는 모든 clip/side/part/action 계약을 자동 검사하고 같은 source surface/scene 변형·신경 pose·카메라/선택/설명/복원/성능을 다듬는다. 미제작 전체 대상과 실제 지원을 분리하며 소수 예시 성공을 전체 근육 완성으로 표시하지 않는다. 담당 Astra 현재 대화 직접 구현을 유지한다.
 
-지원 clip 전체의 데이터/pose/player 계약과 family별 대표·변경 실제 화면을 감사한다. 움직임 없이 텍스트나 별도 viewer만 보이는 사례를 지원으로 세지 않는다. 실제 주변 관통·camera reset·layer 손실·잘못 고정된 정적 신경·설명 불일치·재생/복원 오류를 수정한다. 현재 앱의 구조/설명/신경/움직임 지원 범위와 콘텐츠 gap을 종합하여 scoped product acceptance를 판정한다. T47 별도 실행 또는 전 근육 제작 재개를 하지 않는다.
+1. T66의 전수 처리 결과와 지원 clip 목록을 실제 assets/runtime으로 대조한다. target429/source232를 보존하고 예시 clip/registry entry/부분 group을 전체 muscle support로 잘못 세는 오류를 수정한다.
+2. 실제 같은 source graph/frame/rest pose, deformation/bones/passive context·중간 pose/관통·part·side·layer-off/held·취소/전환/복원·신경 pose를 전수 자동 계약 검사한다. 필요한 변경 사례의 실제 시각 검증에 집중하고 동일 입력 근거를 재사용한다.
+3. 390/1024/1440에서 여러 deformation 유형과 전체 12지역 탐색→근육→작용→재생→설명→복원을 실제 검증한다. 전신 renderer/camera를 유지하고 선택 대비/깊이/가림/카메라 reset·검은 frame/console errors를 고친다.
+4. cold/warm bytes/loading, render CPU/frame interval, active triangles/draws/geometry+animation bytes, 반복 clip/region 전환 후 cache/cancel/late response를 확인한다. 관측 불가 GPU/VRAM은 한계로 남기고 실제 budget을 몰래 상향하지 않는다.
+5. 현재 지원 기능의 제품 blocker를 해결한다. 전체 근육 움직임 목표의 진짜 구현율·남은 anatomy/source/rig/clip 작업과 local_app_ready를 별도 기록한다. 전체가 실제 구현되지 않았다면 wholeMuscleMotionGoal=complete로 쓰지 않는다. 다음 T40은 실행하지 않는다.
 
-종료 후 다음 ID는 T40다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
+종료 후 다음 ID는 T40다. 현재 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
 ```
 
 <a id="t40"></a>
-### T40 — 실행 가능한 로컬 앱 전달
+### T40 — 실행 가능한 로컬 앱과 전체 움직임 범위 전달
 
 ```text
 HUMAN ATLAS에서 T40만 수행해라. 담당 Luna Max.
 
 AGENTS.md, work/EXECUTION.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/product-acceptance.json,
-해당 task의 현재 spec/promptFile, 실제 선행 report/evidence를 읽어라.
+해당 task의 현재 spec/promptFile, 실제 선행 report/evidence 및 design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md를 읽어라.
+2026-10-02 최신 사용자 지시: 초기 확장 근육 목록 없이 전체 근육을 대상으로 한다. 28 설계가 미래 motion의 소수 파일럿/소흉근 중심 범위와 과거 표정근 제외 문구보다 우선한다. 27의 제품 acceptance/content completeness 분리는 유지한다.
 목표는 현재 지원 범위에서 정확하고 안정적으로 사용할 수 있는 앱이다. task acceptance와 전체 콘텐츠 completeness를 분리한다.
 27 설계/현재 acceptanceContract가 과거 전체 콘텐츠 0-gap·full extent 전수 PNG·10개마다 종료 문구보다 우선한다.
 542 target/563 membership/12부위, 기존 HA 130, 역사163(6/20/135/2), 원본/OpenSim_Models/T13/기존 WIP를 보존한다.
@@ -636,9 +668,12 @@ python3 work/tools/sync_execution.py 및 --check를 수행하고 소유 변경�
 다음 task 자동 실행, 새 번호/스레드 발급, 자동 위임, push/배포, 임상 진단·치료·자침 기능은 금지한다.
 
 이번 실행:
-이번 범위: 현재 지원 구조·설명·신경·움직임의 실제 scoped acceptance를 사용하여 로컬 실행/설치/asset 확보/검증/복구 안내와 전달 가능한 실행 경로를 완성한다. dev-server 전용 middleware가 필요한 기능을 dist 단독 실행으로 오인하지 않도록 실제 실행 방식을 검증한다. 권리 held/private 자료/비공개 원문을 배포 허가로 바꾸지 않는다. 평가/퀴즈와 미확보 콘텐츠의 추가 연구는 이번 전달의 선행 조건이 아니다.
+이번 범위: 현재 지원 구조·설명·신경·움직임의 실제 scoped acceptance를 사용해 로컬 실행/설치/asset 확보/검증/복구 경로를 완성한다. 전체 근육 motion 목표의 전수 구현·미확보/미구현 원장을 함께 전달하며 sample 기능을 전체 완성으로 오인하지 않는다. dev middleware/asset 확보와 dist 단독 실행을 실제 구분한다. held/private/humanReview 상태를 보존한다.
 
-실제 새 checkout 또는 독립 실행 조건에서 의존성과 asset locator/해시/서버 실행/복구 절차를 확인한다. source 원본을 무단 bundle하거나 private 원문을 넣지 않는다. 현재 앱의 지원 범위·알려진 한계·필수 실행 서버·라이선스 정보를 정확하게 전달한다. 검증된 콘텐츠와 지원 앱 task 완료를 전체 해부학/모든 신경/모든 clip 완성으로 쓰지 않는다. 로컬 전달만 수행하고 push/배포를 하지 않는다.
+1. T85 실제 report/evidence와 모든 지원 asset의 실행 입력을 읽고 재현 가능한 로컬 앱 실행·asset 확보·검증/복구 절차를 완성한다. dev middleware가 필요한 상태를 dist만 실행하면 되는 것으로 전달하지 않는다.
+2. 실제 구조/설명/신경/움직임의 지원 경로와 전체 target/source/side/action 원장을 대조한다. 429 muscle target/232 source 전수 목표에 남은 작업을 삭제하거나 첫 표본 성공으로 전체 지원이라고 광고하지 않는다.
+3. 기존 제품 acceptance를 이유 없이 반복하지 않고 전달 실행 방식의 실제 차단 결함을 해결한다. private 원문/원본/OpenSim_Models·T13/WIP·held권리·humanReview를 보존하며 push/배포하지 않는다.
+4. 해당 로컬 전달 책임을 끝내면 정확한 readiness/contentCompleteness/wholeMuscleMotionGoal와 근거를 남기고 멈춘다. 새 task/전체 완료 추정/임상 기능은 만들지 않는다.
 
-종료 후 다음 ID는 없음다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
+종료 후 자동 실행할 task는 없다. 실제 전달 상태를 보고하고 멈춰라.
 ```
