@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "t100-final-validation-v2",
+  "taskId": "T100",
+  "baselineHead": "3a04aa4049f1d0948c760eb1962fcf9cc215953b",
+  "currentHeadAtRecord": "3a04aa4049f1d0948c760eb1962fcf9cc215953b",
+  "status": "in_progress",
+  "acceptance": "partial",
+  "nextUnit": "resolve-target-representation-and-final-scene-qa",
+  "denominators": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12
+  },
+  "coverage": {
+    "canonicalOverlayTargetsWithPaths": 409,
+    "canonicalOverlayMembershipsWithPaths": 427,
+    "mixedRuntimeTargetsWithRoutes": 415,
+    "mixedRuntimeMembershipsWithRoutes": 433,
+    "targetsWithoutMixedRuntimeRoute": 127,
+    "membershipsWithoutMixedRuntimeRoute": 130,
+    "mixedRuntimeRouteAliasExecutions": 2040,
+    "routeFailures": 0,
+    "fullTargetExtentPasses": 0,
+    "supplementTargetMembershipPairsWithRoutes": 6,
+    "supplementSourceObjectRoutes": 13
+  },
+  "supplement": {
+    "sourceObjects": 13,
+    "targetAssociations": 6,
+    "sourceOnly": true,
+    "newCanonicalHaBindings": 0,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "spatiallyAcceptedObjects": 0,
+    "pelvisSurfaceCandidateObjectsWithoutNamedLandmarkReview": 3,
+    "crossRegionPlacementUnresolvedObjects": 10
+  },
+  "browser": {
+    "currentRuntimeSha256": "b5c6a321e402c7792970b6a383ffb9a532fb33e4ab486f1211ad38fba2766201",
+    "currentRuntimeBytes": 906076,
+    "currentSupplementSourceCaptures": 13,
+    "supplementRouteFailures": 0,
+    "supplementConsoleErrors": 0,
+    "responsiveViewports": 3,
+    "responsiveCardMatches": 3,
+    "responsiveConsoleErrors": 0,
+    "noHorizontalOverflow": true,
+    "keyboardSearchHistory": {
+      "keyboard": true,
+      "search": true,
+      "history": true
+    },
+    "claimBoundary": "Selection/card/raster only; no full target, group, side, or attachment extent acceptance."
+  },
+  "resourceBudgetEvidence": "work/evidence/T100/source-completion-2026-10-01/integration/resource-budget-v8.json",
+  "tests": {
+    "test:datasets": "42/42 passed",
+    "test:delivery": "3/3 passed",
+    "test:whole-body": "56/56 passed; 46 chunks verified",
+    "test:search": "44/44 passed",
+    "typecheck": "passed",
+    "build": "passed; 956.38 kB App chunk advisory"
+  },
+  "dataChecks": {
+    "supplementBuilderCheck": "passed",
+    "regionalRegistrationDiagnosticCheck": "passed",
+    "currentProgressInspector": "passed; current counts calculated from mixed runtime",
+    "mixedRuntimeRouteMetrics": "passed; 2,027 base route executions, 6 unique supplement targetId+regionId pairs, 13 unique target/source routes; combined 415/433",
+    "currentProgressInspectorOutputSha256": "3699e7a0eaa1dbb61f57c3c57d4b91f5f8ac6e0708e8208ca9136d79d89b3d17",
+    "currentVisualWorklistSha256": "1060a29beec5adc46e7533c9d1d071238f07ea6ffdc8d4d1e2f1a2abd5618020",
+    "currentSelectedAndContextPngIntegrity": {
+      "status": "passed",
+      "verifiedPngCount": 26,
+      "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v8/png-integrity-validation.json",
+      "evidenceSha256": "9a33cc680196af6bb6a040b8e54951a8ccd85e15176d669c9c2b8d5f0a202a5d"
+    },
+    "responsiveScreenshotPngIntegrity": {
+      "status": "passed",
+      "verifiedPngCount": 3,
+      "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v11/png-integrity-validation.json",
+      "evidenceSha256": "166b4de3c9d5b529682a392f300af91cc9309c436d522fe78c2b5b4611eb2470"
+    }
+  },
+  "preservation": {
+    "OpenSimModels": "no dirty paths; source cache/ZA compiled manifest/T13 evidence unchanged in Git status",
+    "existingWorktreeChanges": "preserved; no reset/clean/checkout"
+  },
+  "inputSha256": {
+    "supplementManifest": "9751c3882cde0c23108cc8840cc047a710dc24900cdb8894f84c450319aae00a",
+    "runtimeValidation": "feecbbafc64a7ceddccf78aeadfd07aad3791d67965fb6026542bc9b816687c6",
+    "supplementBrowserLedger": "44e2964bffe783f6bcd32348eddd11c4fc25727abf074d839a1890b2f25fb295",
+    "responsiveBrowserSmoke": "bba23a882e10b51c795bf81751cf8936f3717bd04802362afa43c3bba65dbfc5",
+    "targetScope": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
+    "zaOverlay": "0a85010365e2da21e8665dbaabb57574b572d0b048282d36cc4476ad103b6979",
+    "zaCompiledManifest": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42",
+    "supplementRelationLedger": "65abc05c2d402ba5faff4f105b405477a74f215b9eaf2d3b1896b601ab9db0ee",
+    "currentProgress": "3699e7a0eaa1dbb61f57c3c57d4b91f5f8ac6e0708e8208ca9136d79d89b3d17",
+    "currentVisualWorklist": "1060a29beec5adc46e7533c9d1d071238f07ea6ffdc8d4d1e2f1a2abd5618020",
+    "remainingActionQueue": "99c3b7df3210f717d56aabb423e0feab681a25423cd47cda4c86cf8f3745e8a2",
+    "currentBrowserPngIntegrity": "9a33cc680196af6bb6a040b8e54951a8ccd85e15176d669c9c2b8d5f0a202a5d",
+    "responsivePngIntegrity": "166b4de3c9d5b529682a392f300af91cc9309c436d522fe78c2b5b4611eb2470"
+  },
+  "remainingMandatoryGates": {
+    "targetRepresentationBlockers": 127,
+    "membershipRouteGaps": 130,
+    "terminologyEvidenceRows": 73,
+    "allTargetGroupExtent": "not_established",
+    "singleSourceToSourceTransform": "not_established",
+    "T100Complete": false
+  },
+  "routeMetricCorrection": {
+    "supersedes": "final-validation-v8.json and runtime-v8/mixed-runtime-route-validation.json for naming the supplement membership delta",
+    "reason": "runtime-v8 used the 13 unique target/source object selections under a field named membershipsWithRoutes. Distinct targetId+regionId membership pairs are 6; source object routes are 13. Combined coverage was already 415/433 and is unchanged.",
+    "supplementMembershipPairsWithRoutes": 6,
+    "supplementSourceObjectRoutes": 13,
+    "runtimeValidationPath": "work/evidence/T100/source-completion-2026-10-01/integration/runtime-v9/mixed-runtime-route-validation.json",
+    "runtimeValidationSha256": "feecbbafc64a7ceddccf78aeadfd07aad3791d67965fb6026542bc9b816687c6",
+    "relationLedgerSha256": "65abc05c2d402ba5faff4f105b405477a74f215b9eaf2d3b1896b601ab9db0ee"
+  }
+}

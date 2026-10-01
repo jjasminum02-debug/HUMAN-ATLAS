@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import type { Plugin } from 'vite';
 import { buildRuntimeIntegration } from '../src/viewer/datasets/integration.ts';
 import { composeSupplementDataset, composeSupplementRuntime, type SourceSupplement } from '../src/viewer/datasets/sourceSupplement.ts';
+import { resolveSupplementTargetRelations, targetRoutesBySource } from '../src/viewer/datasets/supplementRelations.ts';
 import { validateDataset, type Dataset } from '../src/viewer/datasets/schema.ts';
 
 type FileEntry = { id: string; path: string; sha256: string; bytes: number };
@@ -21,8 +22,9 @@ const T100_INPUTS = [
   'atlas-data/source-cache/bodyparts3d-r4/metadata/partof_element_parts.txt',
   'work/evidence/T50/scene-contract.md',
   'work/evidence/T69/diagnostic.json',
+  'work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json',
+  'work/evidence/T100/source-completion-2026-10-01/integration/registration-regional-comparison.json',
 ];
-const ASSIGNED_TARGETS = ['TA2:1282','TA2:2128','TA2:2129','TA2:2191','TA2:2202','TA2:2283'];
 /** Generic local delivery only. The merged view remains one dataset, renderer, and scene root. */
 export function wholeBodyPlugin(root: string): Plugin {
   const cache = resolve(root, 'atlas-data/source-cache');
@@ -36,6 +38,8 @@ export function wholeBodyPlugin(root: string): Plugin {
         `${cache}/datasets`, `${root}atlas-data/manifests`, `${root}atlas-data/catalog/target-scope-t96.json`,
         `${root}work/evidence/T78/reference/ta2-scope.json`, `${root}work/evidence/T78/source-elements.json`,
         `${root}work/evidence/T50/scene-contract.md`, `${root}work/evidence/T69/diagnostic.json`,
+        `${root}work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json`,
+        `${root}work/evidence/T100/source-completion-2026-10-01/integration/registration-regional-comparison.json`,
         `${cache}/bodyparts3d-r4/converted`,
       ]);
       const invalidate = (path: string) => { if(path.includes('atlas-data/') || path.includes('work/evidence/')) { snapshots.clear(); composed=undefined; } };
@@ -91,9 +95,11 @@ export function wholeBodyPlugin(root: string): Plugin {
           if(supplementRightsSha256!==supplement.rightsDecision.evidenceSha256||rightsPolicy.revision!==supplement.rightsDecision.decisionRevision
             ||supplement.rightsDecision.publicRedistribution!=='held'||supplement.rightsDecision.humanReview!=='not_performed'||supplement.rightsDecision.sourceOnly!==true)
             throw Error('supplement rights provenance');
-          if(supplement.summary.targetCount!==6||supplement.summary.uniqueObjects!==13||supplement.summary.newCanonicalHaBindings!==0
-            ||[...new Set(supplement.objects.map(object=>object.targetAssociation.targetId))].sort().join('\n')!==[...ASSIGNED_TARGETS].sort().join('\n'))
-            throw Error('supplement assigned target scope');
+          const associatedTargets=new Set(supplement.objects.map(object=>object.targetAssociation.targetId));
+          if(supplement.summary.targetCount!==associatedTargets.size||supplement.summary.uniqueObjects!==supplement.objects.length
+            ||supplement.summary.newCanonicalHaBindings!==0||!associatedTargets.size
+            ||[...associatedTargets].some(id=>!targetScope.targets.some((target:any)=>target.id===id)))
+            throw Error('supplement data-driven target/object scope');
 
           const [baseSnapshot,bpSnapshot]=await Promise.all([snapshot('za-c7010a9'),snapshot('bp3d-r4')]);
           const baseDataset=validateDataset(baseSnapshot.manifest);
@@ -153,9 +159,24 @@ export function wholeBodyPlugin(root: string): Plugin {
           };
           const baseProjection=buildRuntimeIntegration(overlay,baseDataset,overlaySha256,rightsEvidenceSha256,frozenTargetLexicon);
           const dataset=composeSupplementDataset(baseDataset,supplement);
+          const partofPath='atlas-data/source-cache/bodyparts3d-r4/metadata/partof_element_parts.txt';
+          const partofBytes=await readFile(resolve(root,partofPath));
+          const groupRows=new Map<string,string[]>();
+          for(const line of partofBytes.toString().split(/\r?\n/).filter(Boolean)) {
+            const [groupId,,fj]=line.split('\t'); if(!groupId||!fj)continue;
+            const rows=groupRows.get(groupId)??[];rows.push(fj);groupRows.set(groupId,rows);
+          }
+          const relationEvidence=resolveSupplementTargetRelations(supplement,{
+            targets:targetScope.targets,sourceElements:sourceCatalog,evidenceHashes:{...supplement.inputSha256,
+              [rightsPath]:supplementRightsSha256,[partofPath]:sha(partofBytes)},
+          });
+          for(const [groupId,group] of Object.entries(supplement.sourceGroupMembership??{})) {
+            if(groupRows.get(groupId)?.sort().join('\n')!==[...group.memberElementFileIds].sort().join('\n'))
+              throw Error(`supplement group relation changed against exact PART-OF table: ${groupId}`);
+          }
           const composedOverlaySha=sha(Buffer.from([overlaySha256,supplementSha256].join('\n')));
           const composedRightsSha=sha(Buffer.from([rightsEvidenceSha256,supplementRightsSha256].join('\n')));
-          const projection=composeSupplementRuntime(baseProjection,dataset,supplement,composedOverlaySha,composedRightsSha);
+          const projection=composeSupplementRuntime(baseProjection,dataset,supplement,targetRoutesBySource(relationEvidence),composedOverlaySha,composedRightsSha);
           return {dataset,datasetBody:Buffer.from(JSON.stringify(dataset)),runtimeBody:Buffer.from(JSON.stringify(projection)),key:sha(Buffer.from([overlaySha256,supplementSha256,rightsEvidenceSha256,supplementRightsSha256,targetScopeSha256,supportContextSha256].join('\n')))};
         })();
         composed=pending; pending.catch(()=>{if(composed===pending)composed=undefined;}); return pending;

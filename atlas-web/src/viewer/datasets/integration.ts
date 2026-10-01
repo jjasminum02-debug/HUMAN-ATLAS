@@ -204,6 +204,10 @@ export interface RuntimeStructureRecord {
     haConceptId: string | null;
     /** Opaque, side-deduplicated concept handles only; no TA2 IDs or evidence. */
     learnerConceptKeys: string[];
+    /** Opaque, evidence-validated target/member route handles; raw TA2 IDs stay internal. */
+    targetRoutes: { key: string; regionId: string }[];
+    /** Exact alternate source nodes hidden only while this source observation is selected. */
+    selectionSuppressSourceKeys?: string[];
     localDisplayEligible: boolean;
     inspectionEligible: boolean;
     defaultVisible: boolean;
@@ -219,7 +223,7 @@ export interface RuntimeStructureRecord {
 }
 export interface RuntimeIntegration {
     schemaVersion: 1;
-    projectionSchema: 'whole-body-local-runtime-v3';
+    projectionSchema: 'whole-body-local-runtime-v4';
     revision: string;
     datasetRevision: string;
     sourceOverlaySha256: string;
@@ -728,10 +732,10 @@ export function validateIntegration(value: unknown, dataset: Dataset, frozenTarg
         throw Error('incomplete trapezius surface-assignment correction pair');
     return i;
 }
-const RUNTIME_SCHEMA = 'whole-body-local-runtime-v3' as const;
+const RUNTIME_SCHEMA = 'whole-body-local-runtime-v4' as const;
 const FROZEN_T100_SCOPE = { targets: 542, memberships: 563, regions: 12 } as const;
 const projectionKeys = ['schemaVersion', 'projectionSchema', 'revision', 'datasetRevision', 'sourceOverlaySha256', 'rightsEvidenceSha256', 'scope', 'policy', 'objects'];
-const runtimeRowKeys = ['sourceKey', 'searchGroupKey', 'kind', 'regionIds', 'side', 'label', 'names', 'aliases', 'haConceptId', 'learnerConceptKeys', 'localDisplayEligible', 'inspectionEligible', 'defaultVisible', 'sourceOnly', 'humanReview', 'publicRedistribution', 'sourceHiddenStatePreserved', 'localUseRights', 'displayDecisionBasis', 'hardHoldReasons', 'bounds', 'relatedMuscles'];
+const runtimeRowKeys = ['sourceKey', 'searchGroupKey', 'kind', 'regionIds', 'side', 'label', 'names', 'aliases', 'haConceptId', 'learnerConceptKeys', 'targetRoutes', 'selectionSuppressSourceKeys', 'localDisplayEligible', 'inspectionEligible', 'defaultVisible', 'sourceOnly', 'humanReview', 'publicRedistribution', 'sourceHiddenStatePreserved', 'localUseRights', 'displayDecisionBasis', 'hardHoldReasons', 'bounds', 'relatedMuscles'];
 const runtimePolicyKeys = ['localOnly', 'publicRedistribution', 'humanReview', 'localUseRights', 'rightsDecisionId'];
 function exactKeys(value: unknown, expected: string[], message: string): asserts value is Record<string, unknown> {
     if (!value || typeof value !== 'object' || Array.isArray(value)
@@ -780,6 +784,7 @@ export function buildRuntimeIntegration(value: unknown, dataset: Dataset, source
             aliases: [...row.aliases],
             haConceptId: row.haConceptId,
             learnerConceptKeys: [...new Set((row.learnerConceptLinks ?? []).flatMap(link => link.conceptKey ? [link.conceptKey] : []))].sort(),
+            targetRoutes: [],
             localDisplayEligible: row.localDisplayEligible,
             inspectionEligible: row.inspectionEligible,
             defaultVisible: row.defaultVisible,
@@ -817,7 +822,9 @@ export function validateRuntimeIntegration(value: unknown, dataset: Dataset): Ru
     const seen = new Set<string>();
     const regions = new Set<string>();
     for (const row of i.objects) {
-        exactKeys(row, runtimeRowKeys, 'runtime row shape');
+        const expectedRowKeys = row.selectionSuppressSourceKeys === undefined
+            ? runtimeRowKeys.filter(key => key !== 'selectionSuppressSourceKeys') : runtimeRowKeys;
+        exactKeys(row, expectedRowKeys, 'runtime row shape');
         const instance = instances.get(row.sourceKey);
         const geometryKind = instance ? runtimeKindForDataset(instance.kind) : null;
         if (!row.sourceKey || !instance || seen.has(row.sourceKey) || !geometryKind || (row.kind !== 'accessory' && geometryKind !== row.kind)
@@ -826,11 +833,22 @@ export function validateRuntimeIntegration(value: unknown, dataset: Dataset): Ru
             || !Array.isArray(row.aliases) || row.aliases.some(alias => typeof alias !== 'string')
             || !Array.isArray(row.learnerConceptKeys) || row.learnerConceptKeys.some(key => typeof key !== 'string' || !/^LC-[a-f0-9]{20}$/.test(key))
             || new Set(row.learnerConceptKeys).size !== row.learnerConceptKeys.length
+            || !Array.isArray(row.targetRoutes) || row.targetRoutes.some(route => !route || typeof route.key !== 'string' || !/^TR-[a-f0-9]{24}$/.test(route.key)
+                || typeof route.regionId !== 'string' || !row.regionIds.includes(route.regionId))
+            || new Set(row.targetRoutes.map(route => route.key)).size !== row.targetRoutes.length
+            || row.selectionSuppressSourceKeys !== undefined && (!Array.isArray(row.selectionSuppressSourceKeys)
+                || row.selectionSuppressSourceKeys.some(key => typeof key !== 'string' || !key || key === row.sourceKey || !instances.has(key))
+                || new Set(row.selectionSuppressSourceKeys).size !== row.selectionSuppressSourceKeys.length)
             || row.side !== null && typeof row.side !== 'string'
             || row.haConceptId !== null && (typeof row.haConceptId !== 'string' || !/^HA-[A-Z]-[A-Z0-9-]+$/.test(row.haConceptId)))
             throw Error('runtime row identity: ' + JSON.stringify({ sourceKey: row.sourceKey, geometryKind, kind: row.kind,
                 searchGroupKey: row.searchGroupKey, regionIds: row.regionIds, side: row.side, haConceptId: row.haConceptId }));
         row.regionIds.forEach(region => regions.add(region));
+        for (const alternateKey of row.selectionSuppressSourceKeys ?? []) {
+            const alternate = i.objects.find(candidate => candidate.sourceKey === alternateKey);
+            if (!alternate || alternate.kind !== row.kind || !alternate.regionIds.some(region => row.regionIds.includes(region)))
+                throw Error('selection display alternative reference mismatch');
+        }
         exactKeys(row.names, ['koTraditional', 'koModern', 'en'], 'runtime names shape');
         if (typeof row.names.en !== 'string' || ['koTraditional', 'koModern'].some(key => row.names[key as 'koTraditional' | 'koModern'] !== null && typeof row.names[key as 'koTraditional' | 'koModern'] !== 'string'))
             throw Error('runtime names');
@@ -858,7 +876,7 @@ export function validateRuntimeIntegration(value: unknown, dataset: Dataset): Ru
         throw Error('runtime missing source record or region');
     return i;
 }
-type SearchableStructure = Pick<StructureRecord, 'sourceKey' | 'label' | 'names' | 'aliases' | 'localDisplayEligible' | 'regionIds' | 'haConceptId' | 'side'> & { sourceName?: string; searchGroupKey?: string; searchApproximate?: boolean; learnerConceptKeys?: string[]; learnerConceptLinks?: StructureRecord['learnerConceptLinks'] };
+type SearchableStructure = Pick<StructureRecord, 'sourceKey' | 'label' | 'names' | 'aliases' | 'localDisplayEligible' | 'regionIds' | 'haConceptId' | 'side'> & { sourceName?: string; searchGroupKey?: string; searchApproximate?: boolean; learnerConceptKeys?: string[]; learnerConceptLinks?: StructureRecord['learnerConceptLinks']; targetRoutes?: { key: string; regionId: string }[] };
 export function searchStructures<T extends SearchableStructure>(rows: T[], query: string, regions: string[]) {
     const candidates = rows.filter(r => r.localDisplayEligible && (query.trim() || !regions.length || r.regionIds.some(x => regions.includes(x))));
     const unique = new Map<string, T>();
@@ -875,14 +893,27 @@ export function searchStructures<T extends SearchableStructure>(rows: T[], query
 export interface DatasetRoute {
     regions: string[];
     selected: string | null;
+    targetPathKey?: string;
 }
 export function readDatasetRoute(search: string, rows: SearchableStructure[], regionIds: string[]): DatasetRoute {
     const p = new URLSearchParams(search);
-    const regions = (p.get('regions') ?? p.get('region') ?? '').split(',').filter(id => regionIds.includes(id));
+    let regions = (p.get('regions') ?? p.get('region') ?? '').split(',').filter(id => regionIds.includes(id));
     const id = p.get('source') ?? p.get('id');
     const side = p.get('side');
     let row = id ? rows.find(r => r.localDisplayEligible && (r.sourceKey === id || r.haConceptId === id) && (!side || r.side === side)) : undefined;
-    if (!id) {
+    const targetPathKey = p.get('targetPathKey');
+    if (targetPathKey) {
+        const matches = rows.filter(candidate => candidate.localDisplayEligible
+            && candidate.targetRoutes?.some(route => route.key === targetPathKey)
+            && (!id || candidate.sourceKey === id)
+            && (!side || candidate.side === side));
+        row = matches.length === 1 ? matches[0] : undefined;
+        if (row) {
+            const routeRegion = row.targetRoutes!.find(route => route.key === targetPathKey)!.regionId;
+            if (regions.length && !regions.includes(routeRegion)) row = undefined;
+            else regions = [routeRegion];
+        }
+    } else if (!id) {
         const concept = p.get('concept');
         if (concept && /^LC-[a-f0-9]{20}$/.test(concept)) {
             const matches = rows.filter(r => r.localDisplayEligible
@@ -892,8 +923,11 @@ export function readDatasetRoute(search: string, rows: SearchableStructure[], re
                 row = matches[0];
         }
     }
-    return { regions: [...new Set(regions)], selected: row && (!regions.length || row.regionIds.some(r => regions.includes(r))) ? row.sourceKey : null };
+    const result: DatasetRoute = { regions: [...new Set(regions)], selected: row && (!regions.length || row.regionIds.some(r => regions.includes(r))) ? row.sourceKey : null };
+    if (targetPathKey && result.selected) result.targetPathKey = targetPathKey;
+    return result;
 }
 export function datasetRouteQuery(route: DatasetRoute) { const p = new URLSearchParams(); if (route.regions.length)
     p.set('regions', route.regions.join(',')); if (route.selected)
-    p.set('source', route.selected); return p.toString(); }
+    p.set('source', route.selected); if (route.targetPathKey)
+    p.set('targetPathKey', route.targetPathKey); return p.toString(); }

@@ -1,0 +1,577 @@
+{
+  "schemaVersion": "t100-mixed-runtime-route-validation-v1",
+  "taskId": "T100",
+  "nextUnit": "resolve-target-representation-and-final-scene-qa",
+  "baselineHead": "3a04aa4049f1d0948c760eb1962fcf9cc215953b",
+  "generatedAt": "2026-10-01T01:25:18.122Z",
+  "runtimeEndpoint": {
+    "path": "/__atlas/integration.json",
+    "status": 200,
+    "sha256": "b5c6a321e402c7792970b6a383ffb9a532fb33e4ab486f1211ad38fba2766201",
+    "bytes": 906076
+  },
+  "denominators": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12
+  },
+  "baseRevisionCoverage": {
+    "targetsWithRoutedMemberships": 409,
+    "membershipRowsWithRoutes": 427,
+    "routeOccurrencesValidated": 2027,
+    "distinctCapturedReferences": 2027
+  },
+  "supplementDelta": {
+    "targetsWithRoutes": 6,
+    "membershipsWithRoutes": 13,
+    "sourceObjectRoutes": 13
+  },
+  "combinedCoverage": {
+    "targetsWithRoutedMemberships": 415,
+    "membershipRowsWithRoutes": 433,
+    "targetsWithoutAnyRoutedMembership": 127,
+    "membershipsWithoutAnyRoute": 130
+  },
+  "routeFailures": [],
+  "missingMemberships": [
+    {
+      "targetId": "TA2:356",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:819",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:830",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:831",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:832",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:1065",
+      "regionId": "back"
+    },
+    {
+      "targetId": "TA2:1115",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:1116",
+      "regionId": "neck"
+    },
+    {
+      "targetId": "TA2:1116",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:1117",
+      "regionId": "back"
+    },
+    {
+      "targetId": "TA2:1117",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:1137",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:1138",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:1262",
+      "regionId": "upper-limb"
+    },
+    {
+      "targetId": "TA2:1263",
+      "regionId": "upper-limb"
+    },
+    {
+      "targetId": "TA2:1281",
+      "regionId": "upper-limb"
+    },
+    {
+      "targetId": "TA2:1317",
+      "regionId": "pelvis-perineum"
+    },
+    {
+      "targetId": "TA2:1339",
+      "regionId": "pelvis-perineum"
+    },
+    {
+      "targetId": "TA2:1346",
+      "regionId": "pelvis-perineum"
+    },
+    {
+      "targetId": "TA2:1493",
+      "regionId": "foot"
+    },
+    {
+      "targetId": "TA2:1494",
+      "regionId": "foot"
+    },
+    {
+      "targetId": "TA2:2063",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2064",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2068",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2069",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2072",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2074",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2075",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2077",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2088",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2089",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2090",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2091",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2092",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2093",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2094",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2095",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2096",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2097",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2098",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2099",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2100",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2101",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2102",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2103",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2112",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2114",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2115",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2119",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2120",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2121",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2122",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2123",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2124",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2125",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2130",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2131",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2133",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2134",
+      "regionId": "head"
+    },
+    {
+      "targetId": "TA2:2155",
+      "regionId": "neck"
+    },
+    {
+      "targetId": "TA2:2157",
+      "regionId": "neck"
+    },
+    {
+      "targetId": "TA2:2158",
+      "regionId": "neck"
+    },
+    {
+      "targetId": "TA2:2170",
+      "regionId": "neck"
+    },
+    {
+      "targetId": "TA2:2172",
+      "regionId": "neck"
+    },
+    {
+      "targetId": "TA2:2175",
+      "regionId": "neck"
+    },
+    {
+      "targetId": "TA2:2180",
+      "regionId": "neck"
+    },
+    {
+      "targetId": "TA2:2181",
+      "regionId": "neck"
+    },
+    {
+      "targetId": "TA2:2182",
+      "regionId": "neck"
+    },
+    {
+      "targetId": "TA2:2183",
+      "regionId": "neck"
+    },
+    {
+      "targetId": "TA2:2185",
+      "regionId": "neck"
+    },
+    {
+      "targetId": "TA2:2186",
+      "regionId": "neck"
+    },
+    {
+      "targetId": "TA2:2188",
+      "regionId": "neck"
+    },
+    {
+      "targetId": "TA2:2189",
+      "regionId": "neck"
+    },
+    {
+      "targetId": "TA2:2197",
+      "regionId": "neck"
+    },
+    {
+      "targetId": "TA2:2230",
+      "regionId": "neck"
+    },
+    {
+      "targetId": "TA2:2230",
+      "regionId": "back"
+    },
+    {
+      "targetId": "TA2:2237",
+      "regionId": "back"
+    },
+    {
+      "targetId": "TA2:2238",
+      "regionId": "back"
+    },
+    {
+      "targetId": "TA2:2264",
+      "regionId": "back"
+    },
+    {
+      "targetId": "TA2:2285",
+      "regionId": "back"
+    },
+    {
+      "targetId": "TA2:2286",
+      "regionId": "back"
+    },
+    {
+      "targetId": "TA2:2287",
+      "regionId": "back"
+    },
+    {
+      "targetId": "TA2:2288",
+      "regionId": "back"
+    },
+    {
+      "targetId": "TA2:2289",
+      "regionId": "back"
+    },
+    {
+      "targetId": "TA2:2294",
+      "regionId": "back"
+    },
+    {
+      "targetId": "TA2:2295",
+      "regionId": "back"
+    },
+    {
+      "targetId": "TA2:2296",
+      "regionId": "back"
+    },
+    {
+      "targetId": "TA2:2297",
+      "regionId": "back"
+    },
+    {
+      "targetId": "TA2:2300",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:2314",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:2328",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:2329",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:2330",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:2331",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:2332",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:2336",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:2337",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:2345",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:2346",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:2347",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:2351",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:2352",
+      "regionId": "thorax"
+    },
+    {
+      "targetId": "TA2:2374",
+      "regionId": "abdomen-lumbar"
+    },
+    {
+      "targetId": "TA2:2407",
+      "regionId": "pelvis-perineum"
+    },
+    {
+      "targetId": "TA2:2408",
+      "regionId": "pelvis-perineum"
+    },
+    {
+      "targetId": "TA2:2409",
+      "regionId": "pelvis-perineum"
+    },
+    {
+      "targetId": "TA2:2414",
+      "regionId": "pelvis-perineum"
+    },
+    {
+      "targetId": "TA2:2416",
+      "regionId": "pelvis-perineum"
+    },
+    {
+      "targetId": "TA2:2417",
+      "regionId": "pelvis-perineum"
+    },
+    {
+      "targetId": "TA2:2418",
+      "regionId": "pelvis-perineum"
+    },
+    {
+      "targetId": "TA2:2420",
+      "regionId": "pelvis-perineum"
+    },
+    {
+      "targetId": "TA2:2421",
+      "regionId": "pelvis-perineum"
+    },
+    {
+      "targetId": "TA2:2422",
+      "regionId": "pelvis-perineum"
+    },
+    {
+      "targetId": "TA2:2423",
+      "regionId": "pelvis-perineum"
+    },
+    {
+      "targetId": "TA2:2424",
+      "regionId": "pelvis-perineum"
+    },
+    {
+      "targetId": "TA2:2427",
+      "regionId": "pelvis-perineum"
+    },
+    {
+      "targetId": "TA2:2428",
+      "regionId": "pelvis-perineum"
+    },
+    {
+      "targetId": "TA2:2429",
+      "regionId": "pelvis-perineum"
+    },
+    {
+      "targetId": "TA2:2475",
+      "regionId": "upper-limb"
+    },
+    {
+      "targetId": "TA2:2513",
+      "regionId": "upper-limb"
+    },
+    {
+      "targetId": "TA2:2514",
+      "regionId": "upper-limb"
+    },
+    {
+      "targetId": "TA2:2520",
+      "regionId": "upper-limb"
+    },
+    {
+      "targetId": "TA2:2535",
+      "regionId": "upper-limb"
+    },
+    {
+      "targetId": "TA2:2596",
+      "regionId": "gluteal-hip"
+    },
+    {
+      "targetId": "TA2:2615",
+      "regionId": "thigh"
+    },
+    {
+      "targetId": "TA2:2616",
+      "regionId": "thigh"
+    },
+    {
+      "targetId": "TA2:2617",
+      "regionId": "thigh"
+    },
+    {
+      "targetId": "TA2:2625",
+      "regionId": "thigh"
+    },
+    {
+      "targetId": "TA2:2633",
+      "regionId": "thigh"
+    },
+    {
+      "targetId": "TA2:2680",
+      "regionId": "foot"
+    }
+  ],
+  "fullExtentAcceptance": false,
+  "anatomicalHumanReview": "not_performed",
+  "rights": {
+    "sourceOnly": true,
+    "publicRedistribution": "held"
+  },
+  "provenance": {
+    "overlaySha256": "0a85010365e2da21e8665dbaabb57574b572d0b048282d36cc4476ad103b6979",
+    "supplementManifestSha256": "9751c3882cde0c23108cc8840cc047a710dc24900cdb8894f84c450319aae00a",
+    "targetScopeSha256": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
+    "sourceElementsSha256": "4be2aa589705081d28e2c2ce31389f9ec7a2b025def41dfbeb6c02f96e268789",
+    "partOfSha256": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea",
+    "historicalRasterLedgerHashes": {
+      "work/evidence/T100/closure-audit-2026-09-30/browser-raster/raster-ledger.json": "f3ef22ab9a1b799932565aaa24a2604c0a29958a966a6dabb4d485e5145aef07",
+      "work/evidence/T100/closure-audit-2026-09-30/browser-declared-right/raster-ledger.json": "5edbf901652bc54c9421d8dffb4f3f27fb949bc46547ebd43b6dd5fc2d933883"
+    },
+    "historicalMembershipLedgerSha256": "5feb1f3b6adc9d322675ebef567f8e4df385d769d6da03c8e10cee75e4945e5d"
+  },
+  "claimBoundary": "Base route aliases are re-executed through the current v4 mixed-runtime router. The 13 supplement member routes are new opaque targetPathKey selections. Neither establishes full target/group extent, anatomical approval, or visual acceptance."
+}

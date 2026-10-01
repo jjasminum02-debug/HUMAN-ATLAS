@@ -19,11 +19,17 @@ export interface SupplementObject {
     bounds: [[number, number, number], [number, number, number]];
     matrix: number[];
     geometrySpace: 'registered_world';
+    spatialPlacementStatus: 'pelvis_surface_candidate_without_named_landmark_review' | 'cross_region_placement_unresolved';
     sourceNamespace: 'bp3d-r4';
     lods: Record<'overview' | 'detail', {
         resource: string; chunk: string; triangles: number; vertices: number; geometryBytes: number;
     }>;
     sourceIdentity: { sourceElementFileId: string; sourceFmaId: string; sourceSha256: string; compiledChunkSha256: string; [key: string]: unknown };
+    selectionDisplayAlternative?: {
+        mode: 'suppress_exact_counterpart_while_selected'; sourceKeys: string[]; basis: string;
+        evidencePath: string; evidenceSha256: string; sourcePair: { bp3dElementFileId: string; zaSourceKey: string; zaSourceName: string };
+        surfaceDiagnostic: Record<string, unknown>; doesNotAssert: string[];
+    };
     rights: { localDisplay: string; publicRedistribution: string; sourceOnly: boolean; humanReview: string; localDecisionId: string };
     targetAssociation: { targetId: string; [key: string]: unknown };
 }
@@ -42,8 +48,10 @@ export interface SourceSupplement {
     sourceGroupMembership?: Record<string, { targetId: string; memberElementFileIds: string[]; extentStatus: string }>;
     chunks: (Chunk & { sourceNamespace: 'bp3d-r4'; selectionScoped: true })[];
     objects: SupplementObject[];
-    summary: { targetCount: number; uniqueObjects: number; newCanonicalHaBindings: number; humanReview: string; publicRedistribution: string };
+    summary: { targetCount: number; uniqueObjects: number; spatiallyAcceptedObjects: number; pelvisSurfaceCandidateObjectsWithoutNamedLandmarkReview: number; crossRegionPlacementUnresolvedObjects: number; newCanonicalHaBindings: number; humanReview: string; publicRedistribution: string };
 }
+
+export interface SupplementRuntimeRoute { key: string; regionId: string }
 
 /** Compose a validated source namespace into the existing one-renderer dataset. */
 export function composeSupplementDataset(baseValue: Dataset, supplement: SourceSupplement): Dataset {
@@ -51,6 +59,7 @@ export function composeSupplementDataset(baseValue: Dataset, supplement: SourceS
     if (supplement.schemaVersion !== 1 || supplement.namespace !== 'bp3d-r4' || supplement.projectUnit !== 'm'
         || supplement.projectFrame!==PROJECT_FRAME||supplement.geometrySpace !== 'registered_world' || supplement.rightsDecision.publicRedistribution !== 'held'
         || supplement.rightsDecision.humanReview !== 'not_performed' || supplement.rightsDecision.sourceOnly !== true
+        || supplement.summary.spatiallyAcceptedObjects !== 0
         || supplement.summary.newCanonicalHaBindings !== 0 || supplement.summary.humanReview !== 'not_performed'
         || supplement.summary.publicRedistribution !== 'held' || supplement.objects.length !== supplement.summary.uniqueObjects)
         throw Error('source supplement policy');
@@ -62,6 +71,7 @@ export function composeSupplementDataset(baseValue: Dataset, supplement: SourceS
         const chunk=chunkById.get(object.chunkId);
         if(sourceKeys.has(object.sourceKey)||!/^BP3D4-FJ\d+M?$/.test(object.sourceKey)||object.sourceNamespace!=='bp3d-r4'
             ||object.geometrySpace!=='registered_world'||!chunk?.resources.includes(object.resource)
+            ||!['pelvis_surface_candidate_without_named_landmark_review','cross_region_placement_unresolved'].includes(object.spatialPlacementStatus)
             ||object.side!==null&&object.side!=='left'&&object.side!=='right'
             ||!/^FJ\d+M?$/.test(object.sourceIdentity.sourceElementFileId)||!/^FMA\d+$/.test(object.sourceIdentity.sourceFmaId)
             ||object.sourceIdentity.compiledChunkSha256!==chunk.sha256||object.sourceIdentity.projectFrame!==PROJECT_FRAME
@@ -72,6 +82,17 @@ export function composeSupplementDataset(baseValue: Dataset, supplement: SourceS
             ||object.targetAssociation.canonicalHaBindingCreated!==false)
             throw Error('source supplement object identity/frame/policy');
         sourceKeys.add(object.sourceKey);
+        if (object.selectionDisplayAlternative) {
+            const alternative = object.selectionDisplayAlternative;
+            if (alternative.mode !== 'suppress_exact_counterpart_while_selected' || !alternative.basis
+                || !/^[a-f0-9]{64}$/.test(alternative.evidenceSha256)
+                || supplement.inputSha256[alternative.evidencePath] !== alternative.evidenceSha256
+                || alternative.sourcePair.bp3dElementFileId !== object.sourceIdentity.sourceElementFileId
+                || alternative.sourcePair.zaSourceKey !== alternative.sourceKeys[0]
+                || !alternative.sourceKeys.length || new Set(alternative.sourceKeys).size !== alternative.sourceKeys.length
+                || alternative.doesNotAssert.length === 0)
+                throw Error('source supplement selection alternative provenance');
+        }
     }
 
     const chunks: Chunk[] = [
@@ -136,17 +157,29 @@ export function composeSupplementRuntime(
     baseValue: RuntimeIntegration,
     dataset: Dataset,
     supplement: SourceSupplement,
+    targetRoutesBySource: Map<string, SupplementRuntimeRoute[]>,
     sourceOverlaySha256: string,
     rightsEvidenceSha256: string,
 ): RuntimeIntegration {
     const base = baseValue;
+    const baseBySource = new Map(base.objects.map(row => [row.sourceKey, row]));
     const objects: RuntimeStructureRecord[] = [
-        ...base.objects.map(row => ({ ...row, displayDecisionBasis: COMPOSITE_LOCAL_DECISION })),
+        ...base.objects.map(row => ({ ...row, targetRoutes: [], displayDecisionBasis: COMPOSITE_LOCAL_DECISION })),
         ...supplement.objects.map(object => {
             if (object.rights.localDisplay !== 'allowed_per_T77_item_decision' || object.rights.publicRedistribution !== 'held'
                 || object.rights.sourceOnly !== true || object.rights.humanReview !== 'not_performed'
                 || object.rights.localDecisionId !== supplement.rightsDecision.decisionId)
                 throw Error('source supplement per-object rights/review hold');
+            const targetRoutes = targetRoutesBySource.get(object.sourceKey);
+            if (!targetRoutes?.length) throw Error(`source supplement has no validated target/member route: ${object.sourceKey}`);
+            const alternative = object.selectionDisplayAlternative;
+            const selectionSuppressSourceKeys = alternative?.sourceKeys ?? [];
+            for (const key of selectionSuppressSourceKeys) {
+                const row = baseBySource.get(key);
+                if (!row || row.kind !== (object.kind === 'skeletal_surface' ? 'bone' : object.kind === 'muscle_surface_or_part' ? 'muscle' : 'accessory')
+                    || row.side !== object.side || !object.regionIds.some(region => row.regionIds.includes(region)))
+                    throw Error(`source supplement selection alternative is not an exact compatible base node: ${object.sourceKey}`);
+            }
             return {
                 sourceKey: object.sourceKey,
                 searchGroupKey: object.searchGroupKey,
@@ -158,6 +191,8 @@ export function composeSupplementRuntime(
                 aliases: [...object.aliases],
                 haConceptId: null,
                 learnerConceptKeys: [],
+                targetRoutes: targetRoutes.map(route => ({ ...route })),
+                ...(selectionSuppressSourceKeys.length ? { selectionSuppressSourceKeys: [...selectionSuppressSourceKeys] } : {}),
                 localDisplayEligible: true,
                 inspectionEligible: true,
                 defaultVisible: false,
@@ -175,7 +210,7 @@ export function composeSupplementRuntime(
     ];
     const projection: RuntimeIntegration = {
         ...base,
-        projectionSchema: 'whole-body-local-runtime-v3',
+        projectionSchema: 'whole-body-local-runtime-v4',
         revision: `${base.revision}+${supplement.revision}`,
         datasetRevision: dataset.revision,
         sourceOverlaySha256,

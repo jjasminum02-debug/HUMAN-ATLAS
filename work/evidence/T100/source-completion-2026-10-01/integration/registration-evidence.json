@@ -1,0 +1,259 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T100",
+  "status": "rigid_translation_geometric_registration_candidate",
+  "sourcePair": {
+    "bp3d": "BodyParts3D Release 4.0/T77 evaluated static reference",
+    "za": "7a337bd05380da5790cb64d4d62247590e29c1b73e2989daeb419c8173d0e982",
+    "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+    "units": "m after source-specific frame conversion"
+  },
+  "method": {
+    "anchors": "exact right hip bone, left hip bone, and sacrum evaluated meshes; source names/FJ identity and source-labeled side checked",
+    "fit": "componentwise median of per-object evaluated-vertex arithmetic-mean differences; translation only because both source-axis bases are already established in the project frame",
+    "translationBp3dToZaM": [
+      0.0002500127333797636,
+      0.05492022138419583,
+      -0.08492280419081753
+    ],
+    "sourceAabbsUsedForFit": false,
+    "heldOutCheck": "each anchor translation compared to robust median; each anchor surface compared with all other-source vertices using deterministic at-most-256 strided query vertices in both directions",
+    "limits": [
+      "mesh sampling and anatomical model differences remain",
+      "no human anatomy approval",
+      "global transform is only established by the pelvis anchor set; non-pelvic candidates require local surrounding-structure visual QA",
+      "nearest-vertex distances are not exact point-to-triangle distances",
+      "T69 supplied source-axis validation only; it did not provide this inter-model translation"
+    ]
+  },
+  "anchors": [
+    {
+      "sourceElementFileId": "FJ3152",
+      "sourceName": "FJ3152",
+      "sourceSha256": "99de26e5435a8397b6f39b44ada75319d5e8fa1433e1ea38fdd8de9e079ed9a9",
+      "compiledChunkId": "06-gluteal-hip-bone-0",
+      "compiledChunkSha256": "a38810d8b018177a6e99e37d65957c7bce5a2f5a95105ed7bc37034e50ad6d21",
+      "bp3dVertexCount": 1282,
+      "zaSourceKey": "ZA-c7010a9-74a765dc396d690d1642153e",
+      "zaSourceName": "Hip bone.r",
+      "zaEvaluatedGeometrySha256": "dbd1b9bebca230ac73bdd9494471d8e62a5491d7134b4ca8f67c397957fed76f",
+      "zaResource": "649f3fb3c2ba49a9bf2a51bf59fec2e70c53e0abce3ec1a9b7af4016618b419a",
+      "zaResourceSha256": "649f3fb3c2ba49a9bf2a51bf59fec2e70c53e0abce3ec1a9b7af4016618b419a",
+      "zaVertexCount": 1894,
+      "sourceLabelSide": "right",
+      "bp3dVertexMeanM": [
+        -0.06894807702430936,
+        0.8421654551058961,
+        0.07276655193961294
+      ],
+      "zaVertexMeanM": [
+        -0.06626490631594137,
+        0.897085676490092,
+        -0.012156252251204596
+      ],
+      "centroidDerivedBp3dToZaTranslationM": [
+        0.002683170708367988,
+        0.05492022138419583,
+        -0.08492280419081753
+      ],
+      "preRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          214,
+          237
+        ],
+        "directedNearestVertexMedianM": [
+          0.060690654259643075,
+          0.049510379223483454
+        ],
+        "directedNearestVertexP95M": [
+          0.09237676532993477,
+          0.09273592196245597
+        ],
+        "symmetricNearestVertexMedianM": 0.055732801043088004,
+        "symmetricNearestVertexP95M": 0.09270795765678166,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      },
+      "translationResidualFromRobustMedianM": [
+        0.0024331579749882243,
+        0.0,
+        0.0
+      ],
+      "translationResidualNormM": 0.0024331579749882243,
+      "postRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          214,
+          237
+        ],
+        "directedNearestVertexMedianM": [
+          0.00445796015293597,
+          0.005134979659944132
+        ],
+        "directedNearestVertexP95M": [
+          0.008481686885814601,
+          0.008964731673320302
+        ],
+        "symmetricNearestVertexMedianM": 0.004810548258599687,
+        "symmetricNearestVertexP95M": 0.00880334665895163,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      }
+    },
+    {
+      "sourceElementFileId": "FJ3288",
+      "sourceName": "FJ3288",
+      "sourceSha256": "bfc8b489fee0945cd1d387cf64bd3691af8e033fa72f9fccae45cfd55ac88694",
+      "compiledChunkId": "06-gluteal-hip-bone-0",
+      "compiledChunkSha256": "a38810d8b018177a6e99e37d65957c7bce5a2f5a95105ed7bc37034e50ad6d21",
+      "bp3dVertexCount": 1257,
+      "zaSourceKey": "ZA-c7010a9-ecb65ff4cc3da710e5a2d157",
+      "zaSourceName": "Hip bone.l",
+      "zaEvaluatedGeometrySha256": "dbd1b9bebca230ac73bdd9494471d8e62a5491d7134b4ca8f67c397957fed76f",
+      "zaResource": "6baacaab7d05e148c55b9c3a247e9c87437d83445978a7eacf04d90a9ea060e9",
+      "zaResourceSha256": "6baacaab7d05e148c55b9c3a247e9c87437d83445978a7eacf04d90a9ea060e9",
+      "zaVertexCount": 1894,
+      "sourceLabelSide": "left",
+      "bp3dVertexMeanM": [
+        0.06865856388188134,
+        0.8441305878433616,
+        0.07185061234884874
+      ],
+      "zaVertexMeanM": [
+        0.06626490631594137,
+        0.897085676490092,
+        -0.012156252251204596
+      ],
+      "centroidDerivedBp3dToZaTranslationM": [
+        -0.002393657565939969,
+        0.052955088646730375,
+        -0.08400686460005333
+      ],
+      "preRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          252,
+          237
+        ],
+        "directedNearestVertexMedianM": [
+          0.05947538694092043,
+          0.04970720987019395
+        ],
+        "directedNearestVertexP95M": [
+          0.09331756890684723,
+          0.09281509020682385
+        ],
+        "symmetricNearestVertexMedianM": 0.054995467444721176,
+        "symmetricNearestVertexP95M": 0.09305398914242272,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      },
+      "translationResidualFromRobustMedianM": [
+        -0.0026436702993197325,
+        -0.001965132737465458,
+        0.000915939590764206
+      ],
+      "translationResidualNormM": 0.0034190180843764297,
+      "postRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          252,
+          237
+        ],
+        "directedNearestVertexMedianM": [
+          0.004618254708521155,
+          0.005067623054637419
+        ],
+        "directedNearestVertexP95M": [
+          0.008198797167130427,
+          0.009254312841149815
+        ],
+        "symmetricNearestVertexMedianM": 0.0047590629784401576,
+        "symmetricNearestVertexP95M": 0.008882896588288228,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      }
+    },
+    {
+      "sourceElementFileId": "FJ3393",
+      "sourceName": "FJ3393",
+      "sourceSha256": "cd04cc9f78d758ba34e92896914f647d22d257b9e7e51b97764670f694033489",
+      "compiledChunkId": "15-pelvis-perineum-bone-1",
+      "compiledChunkSha256": "0fa92ba735b8a17bffda7aac43a4409d5a8d7b981941da36ceaff1fc79b5e986",
+      "bp3dVertexCount": 5293,
+      "zaSourceKey": "ZA-c7010a9-95b8d859c84ae9e56cacdafc",
+      "zaSourceName": "Sacrum",
+      "zaEvaluatedGeometrySha256": "50fa8931a53276c5b317c92799716c4f89139484fafa3d5cb93ac689500734ad",
+      "zaResource": "1fa280a6bab9381858fe6773fbcfd5662fafa271dec8f27c5eb752a9d48676f7",
+      "zaResourceSha256": "1fa280a6bab9381858fe6773fbcfd5662fafa271dec8f27c5eb752a9d48676f7",
+      "zaVertexCount": 5811,
+      "sourceLabelSide": null,
+      "bp3dVertexMeanM": [
+        -0.0002891046916607935,
+        0.8703316725676483,
+        0.02915450764992754
+      ],
+      "zaVertexMeanM": [
+        -3.909195828102991e-05,
+        0.9270174217054108,
+        -0.05909410312310943
+      ],
+      "centroidDerivedBp3dToZaTranslationM": [
+        0.0002500127333797636,
+        0.056685749137762476,
+        -0.08824861077303697
+      ],
+      "preRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          253,
+          253
+        ],
+        "directedNearestVertexMedianM": [
+          0.0773848492092121,
+          0.08459235960844819
+        ],
+        "directedNearestVertexP95M": [
+          0.11621405628370401,
+          0.09700504602135296
+        ],
+        "symmetricNearestVertexMedianM": 0.08210278681912614,
+        "symmetricNearestVertexP95M": 0.1006258397230181,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      },
+      "translationResidualFromRobustMedianM": [
+        0.0,
+        0.0017655277535666425,
+        -0.00332580658221944
+      ],
+      "translationResidualNormM": 0.0037653788217054903,
+      "postRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          253,
+          253
+        ],
+        "directedNearestVertexMedianM": [
+          0.002638034419337251,
+          0.002698493310456373
+        ],
+        "directedNearestVertexP95M": [
+          0.021403318721540474,
+          0.005905289584434512
+        ],
+        "symmetricNearestVertexMedianM": 0.0026693894707976703,
+        "symmetricNearestVertexP95M": 0.008127025685745111,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      }
+    }
+  ],
+  "inputSha256": {
+    "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/06-gluteal-hip-bone-0.glb": "a38810d8b018177a6e99e37d65957c7bce5a2f5a95105ed7bc37034e50ad6d21",
+    "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/15-pelvis-perineum-bone-1.glb": "0fa92ba735b8a17bffda7aac43a4409d5a8d7b981941da36ceaff1fc79b5e986",
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/manifest.json": "67a2f79b9248d18a754a6567e1b0bb4b1fce698ad0e3100a172b428ee58341f8",
+    "atlas-data/source-cache/datasets/bp3d/registry.json": "d83b9a0502af42e1742aa46fb22112e46927003c193dad5f42058fe7541df6a3",
+    "atlas-data/source-cache/datasets/za/compiled/manifest.json": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42",
+    "atlas-data/source-cache/datasets/za/resources/1fa280a6bab9381858fe6773fbcfd5662fafa271dec8f27c5eb752a9d48676f7.glb": "1fa280a6bab9381858fe6773fbcfd5662fafa271dec8f27c5eb752a9d48676f7",
+    "atlas-data/source-cache/datasets/za/resources/649f3fb3c2ba49a9bf2a51bf59fec2e70c53e0abce3ec1a9b7af4016618b419a.glb": "649f3fb3c2ba49a9bf2a51bf59fec2e70c53e0abce3ec1a9b7af4016618b419a",
+    "atlas-data/source-cache/datasets/za/resources/6baacaab7d05e148c55b9c3a247e9c87437d83445978a7eacf04d90a9ea060e9.glb": "6baacaab7d05e148c55b9c3a247e9c87437d83445978a7eacf04d90a9ea060e9",
+    "work/evidence/T50/scene-contract.md": "2697496d18bd1fc58adca557d95364092f7c7189bff4218277882142c8b26fa4",
+    "work/evidence/T69/diagnostic.json": "39f8086df7042349633e3c19e7e60e81669ca49be63b0d4e3be88d15cfd93cca"
+  },
+  "preservation": {
+    "sourceGlbBytesModified": false,
+    "sourceObjBytesModified": false,
+    "zaCompiledManifestModified": false,
+    "historicalT69DiagnosticModified": false
+  }
+}

@@ -16,6 +16,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "atlas-data/manifests/bodyparts3d-r4-t100-source-supplement.json"
+REGISTRATION_PATH = "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json"
+REGIONAL_REGISTRATION_PATH = "work/evidence/T100/source-completion-2026-10-01/integration/registration-regional-comparison.json"
 SOURCE = "atlas-data/source-cache/bodyparts3d-r4"
 FRAME = "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR"
 TRANSFORM = "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or source-label change"
@@ -27,7 +29,6 @@ T77_INVENTORY_PATH = "work/evidence/T77/current-inventory.json"
 T96_PATH = "atlas-data/catalog/target-scope-t96.json"
 QUEUE_PATH = "work/evidence/T100/closure-audit-2026-09-30/action-queue.json"
 
-IDENTITY = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
 
 # T96 exact target identity, source FMA concept ancestry, and display-name fields.
 # This is intentionally small: the six cached candidates in the current queue.
@@ -95,6 +96,15 @@ MEMBERS = [
     ("TA2:2283", "FJ1538", "FMA22876", "right", "semispinalis_capitis", "Semispinalis capitis muscle", "머리반가시근", "두반극근", "muscle_surface_or_part", ["back"]),
     ("TA2:2283", "FJ1538M", "FMA22877", "left", "semispinalis_capitis", "Semispinalis capitis muscle", "머리반가시근", "두반극근", "muscle_surface_or_part", ["back"]),
 ]
+
+# Exact, source-labeled counterparts used only to avoid displaying the same
+# pelvis bone twice when the BP3D source observation is selected. This does
+# not delete or replace either source record or create a canonical binding.
+DISPLAY_ALTERNATIVES = {
+    "FJ3152": "ZA-c7010a9-74a765dc396d690d1642153e",
+    "FJ3288": "ZA-c7010a9-ecb65ff4cc3da710e5a2d157",
+    "FJ3393": "ZA-c7010a9-95b8d859c84ae9e56cacdafc",
+}
 
 def read(path: str):
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
@@ -208,6 +218,24 @@ def build() -> dict:
 
     registry = read("atlas-data/source-cache/datasets/bp3d/registry.json")
     cached_files = {entry["id"]: entry for entry in registry["files"]}
+    registration = read(REGISTRATION_PATH)
+    regional_registration = read(REGIONAL_REGISTRATION_PATH)
+    if registration.get("status") != "rigid_translation_geometric_registration_candidate":
+        raise ValueError("T100 BP3D-to-ZA registration evidence is not the expected validated result")
+    if regional_registration.get("status") != "single-global-transform-not-established":
+        raise ValueError("cross-region registration diagnostic is missing or unexpectedly promoted")
+    registration_hash = sha(ROOT / REGISTRATION_PATH)
+    regional_registration_hash = sha(ROOT / REGIONAL_REGISTRATION_PATH)
+    if regional_registration.get("inputSha256", {}).get(REGISTRATION_PATH) != registration_hash:
+        raise ValueError("cross-region diagnostic is stale against the local-pelvis registration")
+    for path, expected in registration.get("inputSha256", {}).items():
+        if sha(ROOT / path) != expected:
+            raise ValueError(f"stale inter-model registration input: {path}")
+    translation = registration["method"]["translationBp3dToZaM"]
+    if len(translation) != 3 or not all(isinstance(v, (int, float)) for v in translation):
+        raise ValueError("invalid registration translation")
+    registered_matrix = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, *translation, 1]
+    registration_anchors = {row["sourceElementFileId"]: row for row in registration.get("anchors", [])}
     out_chunks: dict[str, dict] = {}
     out_objects = []
     name_sources: dict[str, dict] = {}
@@ -324,8 +352,10 @@ def build() -> dict:
             "label": f"{ko_modern} · {'왼쪽' if side == 'left' else '오른쪽'}" if tid == "TA2:1282" and side else ko_modern,
             "names": {"koModern": ko_modern, "koTraditional": ko_traditional, "en": english_display},
             "aliases": sorted(set([target["english"], target["latin"], *synonyms])),
-            "regionIds": target["regionIds"], "sourceRegionIds": asset["regions"], "bounds": asset["bounds"],
-            "matrix": IDENTITY, "geometrySpace": "registered_world", "sourceNamespace": "bp3d-r4",
+            "regionIds": target["regionIds"], "sourceRegionIds": asset["regions"],
+            "bounds": [[asset["bounds"][i][j] + translation[j] for j in range(3)] for i in range(2)],
+            "matrix": registered_matrix, "geometrySpace": "registered_world", "sourceNamespace": "bp3d-r4",
+            "spatialPlacementStatus": "pelvis_surface_candidate_without_named_landmark_review" if fj in {"FJ3152", "FJ3288", "FJ3393"} else "cross_region_placement_unresolved",
             "lods": {
                 "overview": {"resource": resource_key, "chunk": chunk["id"], "triangles": triangles, "vertices": vertices, "geometryBytes": geometry_bytes},
                 "detail": {"resource": resource_key, "chunk": chunk["id"], "triangles": triangles, "vertices": vertices, "geometryBytes": geometry_bytes},
@@ -334,10 +364,18 @@ def build() -> dict:
                 "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0", "sourceRelease": "BodyParts3D Release 4.0",
                 "sourceElementFileId": fj, "sourceFmaId": member_fma, "targetFmaId": target["sourceFma"],
                 "sourceSha256": inventory_row["sourceSha256"], "priorCompiledGeometrySha256": frozen_geometry_sha,
-                "compiledChunkSha256": chunk["sha256"], "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+                "compiledChunkSha256": chunk["sha256"], "sourceFrame": "BodyParts3D R4 native static reference; T77 axis-converted into project frame, then T100 pelvis-derived translation used as a scene comparison candidate; cross-region offset remains unresolved",
                 "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
-                "projectFrame": FRAME, "conversion": source_transform,
-                "pose": "bodyparts3d-r4-static-reference", "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+                "projectFrame": FRAME,
+                "conversion": source_transform + "; then apply T100 pelvis-derived instance translation in metres for local comparison; no scale, rotation, mirror, or geometry mutation",
+                "pose": "bodyparts3d-r4-static-reference",
+                "nodeTransform": "per-instance pelvis-derived translation used as a comparison candidate; cross-region registration not established; source GLB bytes remain unchanged",
+                "registration": {"id": "T100-BP3D4-to-ZA-pelvis-surface-translation-v1",
+                    "evidencePath": REGISTRATION_PATH, "evidenceSha256": registration_hash,
+                    "translationMetres": translation, "validationStatus": registration["status"],
+                    "regionalDiagnosticPath": REGIONAL_REGISTRATION_PATH,
+                    "regionalDiagnosticSha256": regional_registration_hash,
+                    "spatialPlacementStatus": "pelvis_surface_correspondence_candidate_only; no_named_landmark_or_human_approval" if fj in {"FJ3152", "FJ3288", "FJ3393"} else "cross_region_placement_unresolved"},
                 "triangleCount": triangles, "vertexCount": vertices,
                 "compiledMeshAccessorSha256": geometry_sha256,
                 "sourceLaterality": side if side else "not_lateralized_by_exact_source_name",
@@ -351,6 +389,20 @@ def build() -> dict:
             "nameEvidence": name_provenance,
             "targetAssociation": source_relation(tid, member_fma, target),
         }
+        if fj in DISPLAY_ALTERNATIVES:
+            anchor = registration_anchors.get(fj)
+            if not anchor or anchor.get("zaSourceKey") != DISPLAY_ALTERNATIVES[fj]:
+                raise ValueError(f"pelvis display alternative lacks exact registration pair: {fj}")
+            obj["selectionDisplayAlternative"] = {
+                "mode": "suppress_exact_counterpart_while_selected",
+                "sourceKeys": [DISPLAY_ALTERNATIVES[fj]],
+                "basis": "exact BP3D source member name/FMA identity plus the paired evaluated surface registration record; both source geometries remain in their original datasets",
+                "evidencePath": REGISTRATION_PATH,
+                "evidenceSha256": registration_hash,
+                "sourcePair": {"bp3dElementFileId": fj, "zaSourceKey": anchor["zaSourceKey"], "zaSourceName": anchor["zaSourceName"]},
+                "surfaceDiagnostic": anchor["postRegistrationSurface"],
+                "doesNotAssert": ["anatomical approval", "full target extent", "canonical identity beyond the exact source pair"],
+            }
         # Keep the hip member crosswalk explicit and don't imply a target-level Korean group name.
         if tid == "TA2:1282":
             obj["targetAssociation"]["exactPartOfTableSha256"] = partof_sha
@@ -363,7 +415,8 @@ def build() -> dict:
         QUEUE_PATH, T96_PATH, T78_SOURCE_PATH, T77_INVENTORY_PATH, POLICY_PATH,
         T77_MANIFEST_PATH, "atlas-data/source-cache/datasets/bp3d/registry.json",
         "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_element_parts.txt",
-        "work/evidence/T50/scene-contract.md", "work/evidence/T69/diagnostic.json",
+        "work/evidence/T50/scene-contract.md", "work/evidence/T69/diagnostic.json", REGISTRATION_PATH,
+        REGIONAL_REGISTRATION_PATH,
     ]
     target_rows = {tid: {
         "targetId": tid, "english": spec["english"], "latin": spec["latin"], "semanticKind": spec["kind"],
@@ -378,8 +431,8 @@ def build() -> dict:
         "schemaVersion": 1,
         "id": "T100-cached-source-supplement-2026-10-01-v1",
         "namespace": "bp3d-r4",
-        "revision": "bp3d-r4-t100-cached-candidates-v1",
-        "composition": "append validated local source objects into the existing ZA scene and renderer",
+        "revision": "bp3d-r4-t100-cached-candidates-spatial-status-v4",
+        "composition": "append source-only objects to the existing ZA scene; exact pelvic pairs have a local geometric registration candidate; a single cross-region transform is not established",
         "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
         "sourceRelease": "BodyParts3D Release 4.0",
         "sourceLicense": "CC BY-SA 2.1 Japan",
@@ -389,9 +442,23 @@ def build() -> dict:
         "projectFrame": FRAME,
         "projectUnit": "m",
         "geometrySpace": "registered_world",
-        "registration": TRANSFORM,
+        "registration": {
+            "sourceAxisConversion": TRANSFORM,
+            "evidencePath": REGISTRATION_PATH,
+            "evidenceSha256": registration_hash,
+            "regionalDiagnosticPath": REGIONAL_REGISTRATION_PATH,
+            "regionalDiagnosticSha256": regional_registration_hash,
+            "regionalDiagnosticStatus": regional_registration["status"],
+            "singleGlobalTransformAccepted": False,
+            "method": registration["method"]["fit"],
+            "translationBp3dToZaMetres": translation,
+            "appliedAsPerInstanceMatrix": registered_matrix,
+            "sourceGeometryMutated": False,
+            "humanReview": "not_performed",
+            "anatomicalRegistrationAcceptance": "geometric_local_validation_only; not human anatomy approval",
+        },
         "pose": "bodyparts3d-r4-static-reference",
-        "nodeTransform": "identity; registered project coordinates baked into T77 evaluated geometry",
+        "nodeTransform": "T77 axis conversion is baked in the source GLBs; pelvis-derived translation is a provisional per-instance comparison matrix; cross-region placement remains unresolved; source GLB bytes are preserved",
         "rightsDecision": {
             "evidencePath": POLICY_PATH,
             "evidenceSha256": sha(ROOT / POLICY_PATH),
@@ -411,7 +478,7 @@ def build() -> dict:
         "localEvidence": {
             "sourceIndexOrExcerptOnly": True,
             "nameFields": name_sources,
-            "sourceIdentityAndFrame": "T78 source-elements + T77 compiled GLB manifest/geometry extras + T50 scene contract + T69 frame registration evidence",
+            "sourceIdentityAndFrame": "T78 source-elements + T77 compiled GLB manifest/geometry extras + T50 scene contract + T69 source-axis evidence + T100 evaluated-pelvis inter-model registration",
             "noNewDownload": True,
             "originalSourceBytesMutated": False,
         },
@@ -419,7 +486,10 @@ def build() -> dict:
         "chunks": list(out_chunks.values()),
         "objects": out_objects,
         "summary": {
-            "assignedTargets": sorted(wanted), "targetCount": 6, "uniqueObjects": len(out_objects),
+            "assignedTargets": sorted(wanted), "targetCount": len(target_rows), "uniqueObjects": len(out_objects),
+            "spatiallyAcceptedObjects": 0,
+            "pelvisSurfaceCandidateObjectsWithoutNamedLandmarkReview": 3,
+            "crossRegionPlacementUnresolvedObjects": 10,
             "uniqueChunkCount": len(out_chunks), "uniqueRegions": sorted({region for o in out_objects for region in o["regionIds"]}),
             "newCanonicalHaBindings": 0, "humanReview": "not_performed", "publicRedistribution": "held",
             "targetTermEvidenceGapCountChanged": 0, "newSourceGeometry": 0,

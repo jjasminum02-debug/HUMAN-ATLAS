@@ -46,10 +46,11 @@ export class DatasetSceneAdapter {
     private apply() {
         if (this.dead)
             return;
+        const selectionAlternativeKeys = new Set(this.records.get(this.view.selectedId ?? '')?.selectionSuppressSourceKeys ?? []);
         for (const [key, node] of this.resources.nodes) {
             const row = this.records.get(key)!;
             const selected = key === this.view.selectedId;
-            node.visible = !(selected && this.view.selectedPresentation === 'hidden');
+            node.visible = !selectionAlternativeKeys.has(key) && !(selected && this.view.selectedPresentation === 'hidden');
             const mode = selected ? (this.view.selectedPresentation === 'translucent' ? 'translucent' : 'selected') : this.view.selectedId && this.view.dim ? 'dim' : 'normal';
             const materialKey = row.kind + ':' + mode;
             let material = this.materials.get(materialKey);

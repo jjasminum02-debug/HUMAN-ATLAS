@@ -20,52 +20,88 @@ const { chromium } = require('playwright');
 const sharp = require('sharp');
 const json = async path => JSON.parse(await readFile(resolve(root, path), 'utf8'));
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
-const baselinePath = arg('--baseline', 'work/evidence/T100/parallel-resolution-2026-09-30/integration/qa-baseline.json');
-const baselineBytes = await readFile(resolve(root, baselinePath));
-const baseline = JSON.parse(baselineBytes);
-const overlayBytes = await readFile(resolve(root, baseline.overlay.path));
-if (hash(overlayBytes) !== baseline.overlay.sha256) throw Error('Overlay changed; do not mix QA revisions.');
-const overlay = JSON.parse(overlayBytes);
-const scopeBytes = await readFile(resolve(root, 'atlas-data/catalog/target-scope-t96.json'));
-const scope = JSON.parse(scopeBytes);
-const contextBytes = await readFile(resolve(root, 'work/evidence/T78/reference/ta2-scope.json'));
-const dataset = validateDataset(await json('atlas-data/source-cache/datasets/za/compiled/manifest.json'));
-const runtime = buildRuntimeIntegration(overlay, dataset, hash(overlayBytes),
-    hash(await readFile(resolve(root, overlay.policy.rightsEvidence))),
-    { sha256: hash(scopeBytes), supportContext: { sha256: hash(contextBytes), terms: JSON.parse(contextBytes) }, targets: scope.targets });
+const mixedMode = args.includes('--current-mixed');
+let baseline = null, baselineBytes = null, runtime = null, mixedRelationLedger = null, mixedSupplement = null;
+let baselinePath = null, routeValidation = null;
+let runIdentity;
+const scope = await json('atlas-data/catalog/target-scope-t96.json');
 const regionIds = scope.regions.map(r => r.regionId);
 const targetFilter = new Set((arg('--targets', '')).split(',').filter(Boolean));
 const cases = new Map(), routeFailures = [];
-for (const row of baseline.routeCoverage.memberships) for (const path of row.paths) {
-    if (targetFilter.size && !targetFilter.has(row.targetId)) continue;
-    const params = new URLSearchParams({ regions: row.regionId, concept: path.conceptKey });
-    if (path.side) params.set('side', path.side);
-    const query = params.toString();
-    const actual = readDatasetRoute('?' + query, runtime.objects, regionIds);
-    const ref = { targetId: row.targetId, regionId: row.regionId, conceptKey: path.conceptKey, query };
-    if (actual.selected !== path.sourceKey || !actual.regions.includes(row.regionId)) {
-        routeFailures.push({ ...ref, expectedSourceKey: path.sourceKey, actual });
-        continue;
+if (mixedMode) {
+    const routePath = arg('--route-validation', 'work/evidence/T100/source-completion-2026-10-01/integration/mixed-runtime-route-validation.json');
+    const relationPath = arg('--relations', 'work/evidence/T100/source-completion-2026-10-01/integration/supplement-target-relation-ledger.json');
+    const supplementPath = arg('--supplement', 'atlas-data/manifests/bodyparts3d-r4-t100-source-supplement.json');
+    routeValidation = await json(routePath);
+    mixedRelationLedger = await json(relationPath);
+    mixedSupplement = await json(supplementPath);
+    if (routeValidation.runtimeEndpoint?.path !== '/__atlas/integration.json'
+        || !/^[a-f0-9]{64}$/.test(routeValidation.runtimeEndpoint?.sha256)
+        || mixedRelationLedger.provenance?.supplementManifestSha256 !== hash(await readFile(resolve(root, supplementPath))))
+        throw Error('Current mixed runtime evidence is stale or mismatched.');
+    const sourceObjects = new Map(mixedSupplement.objects.map(object => [object.sourceKey, object]));
+    for (const relation of mixedRelationLedger.relations) {
+        if (targetFilter.size && !targetFilter.has(relation.targetId)) continue;
+        const object = sourceObjects.get(relation.sourceKey);
+        if (!object) throw Error(`supplement relation has no source object: ${relation.sourceKey}`);
+        const params = new URLSearchParams({ regions: relation.regionId, targetPathKey: relation.targetRouteKey });
+        const query = params.toString();
+        const key = relation.regionId + '|' + relation.sourceKey;
+        const ref = { targetId: relation.targetId, regionId: relation.regionId, targetPathKey: relation.targetRouteKey, query };
+        if (!cases.has(key)) cases.set(key, { caseKey: key, sourceKey: relation.sourceKey, regionId: relation.regionId,
+            side: relation.side, sourceName: object.sourceName, targetIds: [], references: [], names: object.names });
+        const item = cases.get(key);
+        if (!item.targetIds.includes(relation.targetId)) item.targetIds.push(relation.targetId);
+        item.references.push(ref);
     }
-    const key = row.regionId + '|' + path.sourceKey;
-    if (!cases.has(key)) cases.set(key, { caseKey: key, sourceKey: path.sourceKey,
-        regionId: row.regionId, side: path.side, sourceName: path.sourceName, references: [] });
-    cases.get(key).references.push(ref);
+    runIdentity = { overlaySha256: routeValidation.provenance.overlaySha256,
+        qaBaselineSha256: hash(JSON.stringify({ relationPath, supplementPath, runtimeSha256: routeValidation.runtimeEndpoint.sha256 })),
+        qaBaselinePath: routePath, runtime: routeValidation.runtimeEndpoint };
+} else {
+    baselinePath = arg('--baseline', 'work/evidence/T100/parallel-resolution-2026-09-30/integration/qa-baseline.json');
+    baselineBytes = await readFile(resolve(root, baselinePath));
+    baseline = JSON.parse(baselineBytes);
+    const overlayBytes = await readFile(resolve(root, baseline.overlay.path));
+    if (hash(overlayBytes) !== baseline.overlay.sha256) throw Error('Overlay changed; do not mix QA revisions.');
+    const overlay = JSON.parse(overlayBytes);
+    const scopeBytes = await readFile(resolve(root, 'atlas-data/catalog/target-scope-t96.json'));
+    const contextBytes = await readFile(resolve(root, 'work/evidence/T78/reference/ta2-scope.json'));
+    const dataset = validateDataset(await json('atlas-data/source-cache/datasets/za/compiled/manifest.json'));
+    runtime = buildRuntimeIntegration(overlay, dataset, hash(overlayBytes),
+        hash(await readFile(resolve(root, overlay.policy.rightsEvidence))),
+        { sha256: hash(scopeBytes), supportContext: { sha256: hash(contextBytes), terms: JSON.parse(contextBytes) }, targets: scope.targets });
+    runIdentity = { overlaySha256: baseline.overlay.sha256, qaBaselineSha256: hash(baselineBytes), qaBaselinePath: baselinePath, runtime: baseline.runtime };
+    for (const row of baseline.routeCoverage.memberships) for (const path of row.paths) {
+        if (targetFilter.size && !targetFilter.has(row.targetId)) continue;
+        const params = new URLSearchParams({ regions: row.regionId, concept: path.conceptKey });
+        if (path.side) params.set('side', path.side);
+        const query = params.toString();
+        const actual = readDatasetRoute('?' + query, runtime.objects, regionIds);
+        const ref = { targetId: row.targetId, regionId: row.regionId, conceptKey: path.conceptKey, query };
+        if (actual.selected !== path.sourceKey || !actual.regions.includes(row.regionId)) {
+            routeFailures.push({ ...ref, expectedSourceKey: path.sourceKey, actual });
+            continue;
+        }
+        const key = row.regionId + '|' + path.sourceKey;
+        if (!cases.has(key)) cases.set(key, { caseKey: key, sourceKey: path.sourceKey,
+            regionId: row.regionId, side: path.side, sourceName: path.sourceName, references: [] });
+        cases.get(key).references.push(ref);
+    }
 }
 const out = resolve(root, arg('--out', 'work/evidence/T100/closure-audit-2026-09-30/browser-raster'));
 await mkdir(resolve(out, 'screenshots'), { recursive: true });
 let rows = [], messages = [], browserRuntime = null;
 try {
     const previous = await json(resolve(out, 'raster-ledger.json'));
-    if (previous.summary.overlaySha256 !== baseline.overlay.sha256
-        || previous.summary.qaBaselineSha256 !== hash(baselineBytes)) throw Error('Existing captures use a different baseline; preserve them and choose a new output directory.');
+    if (previous.summary.overlaySha256 !== runIdentity.overlaySha256
+        || previous.summary.qaBaselineSha256 !== runIdentity.qaBaselineSha256) throw Error('Existing captures use a different input identity; preserve them and choose a new output directory.');
     rows = previous.rows;
     messages = previous.summary.consoleErrors ?? [];
     browserRuntime = previous.summary.browserRuntime ?? null;
 } catch (error) { if (error.code !== 'ENOENT') throw error; }
 const completedKeys = new Set(rows.map(r => r.caseKey));
-const summary = () => ({ overlaySha256: baseline.overlay.sha256, qaBaselineSha256: hash(baselineBytes),
-    qaBaselinePath: baselinePath, browserRuntime,
+const summary = () => ({ overlaySha256: runIdentity.overlaySha256, qaBaselineSha256: runIdentity.qaBaselineSha256,
+    qaBaselinePath: runIdentity.qaBaselinePath, browserRuntime,
     plannedPhysicalCases: cases.size, completedCases: rows.length,
     renderObserved: rows.filter(r => r.status === 'render_observed').length,
     failedOrUnverified: rows.filter(r => r.status !== 'render_observed').length,
@@ -102,14 +138,16 @@ try {
     await page.goto(arg('--base-url', 'http://127.0.0.1:5173/'), { waitUntil: 'domcontentloaded', timeout: 30000 });
     const delivered = await page.evaluate(async () => {
         const bytes = await (await fetch('/__atlas/integration.json')).arrayBuffer();
-        return { sha256: [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(v => v.toString(16).padStart(2, '0')).join(''), bytes: bytes.byteLength };
+        return { sha256: [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(v => v.toString(16).padStart(2, '0')).join(''), bytes: bytes.byteLength,
+            integration: JSON.parse(new TextDecoder().decode(bytes)) };
     });
-    if (delivered.sha256 !== baseline.runtime.sha256 || delivered.bytes !== baseline.runtime.bytes) throw Error('Browser response differs from immutable QA baseline.');
-    browserRuntime = { ...delivered, verified: true, endpoint: baseline.runtime.route, checkedAt: new Date().toISOString() };
+    if (delivered.sha256 !== runIdentity.runtime.sha256 || delivered.bytes !== runIdentity.runtime.bytes) throw Error('Browser response differs from the current mixed-runtime snapshot.');
+    runtime = delivered.integration;
+    browserRuntime = { sha256: delivered.sha256, bytes: delivered.bytes, verified: true, endpoint: runIdentity.runtime.path ?? runIdentity.runtime.route, checkedAt: new Date().toISOString() };
     await page.locator('.whole-body-canvas canvas').waitFor({ timeout: 30000 });
     for (const item of [...cases.values()].slice(0, Number(arg('--limit', cases.size)))) {
         if (completedKeys.has(item.caseKey)) continue;
-        const row = { ...item, overlaySha256: baseline.overlay.sha256, checkedAt: new Date().toISOString(),
+        const row = { ...item, overlaySha256: runIdentity.overlaySha256, checkedAt: new Date().toISOString(),
             cardMatch: false, routeAliasesChecked: 0, localizedRasterObserved: false, anatomicalVisualQA: 'pending',
             targetExtent: 'not_asserted', sideClaim: 'source label only; anatomical side review separate' };
         try {
@@ -125,9 +163,24 @@ try {
             }
             const expected = runtime.objects.find(r => r.sourceKey === item.sourceKey);
             const card = await page.locator('#study-details').innerText();
-            row.cardMatch = [expected.names.en, expected.names.koModern, expected.names.koTraditional].every(v => v && card.includes(v));
+            const expectedNames = item.names ?? expected.names;
+            const availableNames = [expectedNames.en, expectedNames.koModern, expectedNames.koTraditional].filter(v => v);
+            row.nameFieldsPresent = availableNames.length;
+            row.nameFieldsMatched = availableNames.every(v => card.includes(v));
+            row.missingNameFields = ['en', 'koModern', 'koTraditional'].filter(k => !expectedNames[k]);
+            row.missingNamePlaceholderVisible = row.missingNameFields.length === 0 || card.includes('이름 정리 중');
+            row.cardMatch = row.nameFieldsMatched && row.missingNamePlaceholderVisible;
+            row.sideCardMatch = card.includes(item.side === 'right' ? '오른쪽' : item.side === 'left' ? '왼쪽' : '좌우 구분 없음');
+            const regionHeading = await page.locator('.stage-caption h2').innerText().catch(() => '');
+            row.regionHeading = regionHeading;
+            row.regionContextMatch = Boolean(regionHeading.trim());
             const details = page.locator('.body-tools details');
             await details.evaluate(el => { el.open = true; });
+            await page.getByRole('button', { name: '선택 부위 맞춤', exact: true }).click();
+            await page.evaluate(() => new Promise(done => requestAnimationFrame(() => requestAnimationFrame(done))));
+            const contextPng = await page.locator('.whole-body-canvas canvas').screenshot({ path: resolve(out, 'screenshots/' + hash(Buffer.from(item.caseKey)).slice(0, 20) + '-context.png') });
+            row.contextScreenshotLocator = resolve(out, 'screenshots/' + hash(Buffer.from(item.caseKey)).slice(0, 20) + '-context.png');
+            row.contextScreenshotSha256 = hash(contextPng);
             const isolate = page.getByRole('button', { name: '선택만 보기', exact: true });
             if (await isolate.getAttribute('aria-pressed') !== 'true') await isolate.click();
             await page.getByRole('button', { name: '선택 부위 맞춤', exact: true }).click();
@@ -143,7 +196,7 @@ try {
             row.localizedRasterObserved = row.selectedColorPixelCount > 20;
             row.screenshotLocator = resolve(out, screenshot);
             row.screenshotSha256 = hash(png);
-            row.status = row.cardMatch && row.localizedRasterObserved ? 'render_observed' : 'needs_visual_investigation';
+            row.status = row.cardMatch && row.sideCardMatch && row.regionContextMatch && row.localizedRasterObserved ? 'render_observed' : 'needs_visual_investigation';
             if (!rows.length) {
                 const hide = page.getByRole('button', { name: '선택 숨기기', exact: true });
                 await hide.click();

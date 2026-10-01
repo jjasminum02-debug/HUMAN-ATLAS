@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "id": "T100-cached-source-supplement-2026-10-01-v1",
   "namespace": "bp3d-r4",
-  "revision": "bp3d-r4-t100-cached-candidates-v1",
-  "composition": "append validated local source objects into the existing ZA scene and renderer",
+  "revision": "bp3d-r4-t100-cached-candidates-spatial-status-v4",
+  "composition": "append source-only objects to the existing ZA scene; exact pelvic pairs have a local geometric registration candidate; a single cross-region transform is not established",
   "sourceId": "BODYPARTS3D_LSDB_ARCHIVE_RELEASE_4_0",
   "sourceRelease": "BodyParts3D Release 4.0",
   "sourceLicense": "CC BY-SA 2.1 Japan",
@@ -13,9 +13,44 @@
   "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
   "projectUnit": "m",
   "geometrySpace": "registered_world",
-  "registration": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or source-label change",
+  "registration": {
+    "sourceAxisConversion": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or source-label change",
+    "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json",
+    "evidenceSha256": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+    "regionalDiagnosticPath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-regional-comparison.json",
+    "regionalDiagnosticSha256": "abbab0dbe352c1a10408116647e91e3d1d9ae048e3c1f7163cf24a583b2b64c2",
+    "regionalDiagnosticStatus": "single-global-transform-not-established",
+    "singleGlobalTransformAccepted": false,
+    "method": "componentwise median of per-object evaluated-vertex arithmetic-mean differences; translation only because both source-axis bases are already established in the project frame",
+    "translationBp3dToZaMetres": [
+      0.0002500127333797636,
+      0.05492022138419583,
+      -0.08492280419081753
+    ],
+    "appliedAsPerInstanceMatrix": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0.0002500127333797636,
+      0.05492022138419583,
+      -0.08492280419081753,
+      1
+    ],
+    "sourceGeometryMutated": false,
+    "humanReview": "not_performed",
+    "anatomicalRegistrationAcceptance": "geometric_local_validation_only; not human anatomy approval"
+  },
   "pose": "bodyparts3d-r4-static-reference",
-  "nodeTransform": "identity; registered project coordinates baked into T77 evaluated geometry",
+  "nodeTransform": "T77 axis conversion is baked in the source GLBs; pelvis-derived translation is a provisional per-instance comparison matrix; cross-region placement remains unresolved; source GLB bytes are preserved",
   "rightsDecision": {
     "evidencePath": "atlas-data/manifests/bodyparts3d-r4-t77/display-policy.json",
     "evidenceSha256": "eeea154883f4887c4d4c8bd75ddca98ab0767db3bb486bc4e511f03d363fb19d",
@@ -36,7 +71,9 @@
     "atlas-data/source-cache/datasets/bp3d/registry.json": "d83b9a0502af42e1742aa46fb22112e46927003c193dad5f42058fe7541df6a3",
     "atlas-data/source-cache/bodyparts3d-r4/metadata/partof_element_parts.txt": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea",
     "work/evidence/T50/scene-contract.md": "2697496d18bd1fc58adca557d95364092f7c7189bff4218277882142c8b26fa4",
-    "work/evidence/T69/diagnostic.json": "39f8086df7042349633e3c19e7e60e81669ca49be63b0d4e3be88d15cfd93cca"
+    "work/evidence/T69/diagnostic.json": "39f8086df7042349633e3c19e7e60e81669ca49be63b0d4e3be88d15cfd93cca",
+    "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+    "work/evidence/T100/source-completion-2026-10-01/integration/registration-regional-comparison.json": "abbab0dbe352c1a10408116647e91e3d1d9ae048e3c1f7163cf24a583b2b64c2"
   },
   "targetScopeSha256": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
   "sourceElementCatalogSha256": "4be2aa589705081d28e2c2ce31389f9ec7a2b025def41dfbeb6c02f96e268789",
@@ -425,7 +462,7 @@
         }
       }
     },
-    "sourceIdentityAndFrame": "T78 source-elements + T77 compiled GLB manifest/geometry extras + T50 scene contract + T69 frame registration evidence",
+    "sourceIdentityAndFrame": "T78 source-elements + T77 compiled GLB manifest/geometry extras + T50 scene contract + T69 source-axis evidence + T100 evaluated-pelvis inter-model registration",
     "noNewDownload": true,
     "originalSourceBytesMutated": false
   },
@@ -623,14 +660,14 @@
       ],
       "bounds": [
         [
-          -0.14487199485301971,
-          0.7521529793739319,
-          0.0011187799973413348
+          -0.14462198211963995,
+          0.8070732007581277,
+          -0.0838040241934762
         ],
         [
-          -0.002790299942716956,
-          0.9578689932823181,
-          0.13901899755001068
+          -0.0025402872093371926,
+          1.012789214666514,
+          0.05409619335919315
         ]
       ],
       "matrix": [
@@ -646,13 +683,14 @@
         0,
         1,
         0,
-        0,
-        0,
-        0,
+        0.0002500127333797636,
+        0.05492022138419583,
+        -0.08492280419081753,
         1
       ],
       "geometrySpace": "registered_world",
       "sourceNamespace": "bp3d-r4",
+      "spatialPlacementStatus": "pelvis_surface_candidate_without_named_landmark_review",
       "lods": {
         "overview": {
           "resource": "HA-MESH-BP3D4-FJ3152",
@@ -678,12 +716,26 @@
         "sourceSha256": "99de26e5435a8397b6f39b44ada75319d5e8fa1433e1ea38fdd8de9e079ed9a9",
         "priorCompiledGeometrySha256": "3b03257af26e337e99798d1871b8e946a08b98bc3287cb3ac1075373579630bd",
         "compiledChunkSha256": "a38810d8b018177a6e99e37d65957c7bce5a2f5a95105ed7bc37034e50ad6d21",
-        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceFrame": "BodyParts3D R4 native static reference; T77 axis-converted into project frame, then T100 pelvis-derived translation used as a scene comparison candidate; cross-region offset remains unresolved",
         "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
         "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
-        "conversion": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or source-label change",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or source-label change; then apply T100 pelvis-derived instance translation in metres for local comparison; no scale, rotation, mirror, or geometry mutation",
         "pose": "bodyparts3d-r4-static-reference",
-        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "nodeTransform": "per-instance pelvis-derived translation used as a comparison candidate; cross-region registration not established; source GLB bytes remain unchanged",
+        "registration": {
+          "id": "T100-BP3D4-to-ZA-pelvis-surface-translation-v1",
+          "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json",
+          "evidenceSha256": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+          "translationMetres": [
+            0.0002500127333797636,
+            0.05492022138419583,
+            -0.08492280419081753
+          ],
+          "validationStatus": "rigid_translation_geometric_registration_candidate",
+          "regionalDiagnosticPath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-regional-comparison.json",
+          "regionalDiagnosticSha256": "abbab0dbe352c1a10408116647e91e3d1d9ae048e3c1f7163cf24a583b2b64c2",
+          "spatialPlacementStatus": "pelvis_surface_correspondence_candidate_only; no_named_landmark_or_human_approval"
+        },
         "triangleCount": 2374,
         "vertexCount": 1282,
         "compiledMeshAccessorSha256": "d1892fd872af038c21bdbbbc2d3d34e6f80bcdbde5c631b8d18e87ad1d2cc3b9",
@@ -743,6 +795,42 @@
           "FJ3288",
           "FJ3393"
         ]
+      },
+      "selectionDisplayAlternative": {
+        "mode": "suppress_exact_counterpart_while_selected",
+        "sourceKeys": [
+          "ZA-c7010a9-74a765dc396d690d1642153e"
+        ],
+        "basis": "exact BP3D source member name/FMA identity plus the paired evaluated surface registration record; both source geometries remain in their original datasets",
+        "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json",
+        "evidenceSha256": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+        "sourcePair": {
+          "bp3dElementFileId": "FJ3152",
+          "zaSourceKey": "ZA-c7010a9-74a765dc396d690d1642153e",
+          "zaSourceName": "Hip bone.r"
+        },
+        "surfaceDiagnostic": {
+          "queryVerticesEachDirection": [
+            214,
+            237
+          ],
+          "directedNearestVertexMedianM": [
+            0.00445796015293597,
+            0.005134979659944132
+          ],
+          "directedNearestVertexP95M": [
+            0.008481686885814601,
+            0.008964731673320302
+          ],
+          "symmetricNearestVertexMedianM": 0.004810548258599687,
+          "symmetricNearestVertexP95M": 0.00880334665895163,
+          "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+        },
+        "doesNotAssert": [
+          "anatomical approval",
+          "full target extent",
+          "canonical identity beyond the exact source pair"
+        ]
       }
     },
     {
@@ -771,14 +859,14 @@
       ],
       "bounds": [
         [
-          0.0027503101155161858,
-          0.7519509792327881,
-          0.0013149400474503636
+          0.0030003228488959493,
+          0.8068712006169839,
+          -0.08360786414336717
         ],
         [
-          0.14475399255752563,
-          0.9580900073051453,
-          0.1390949934720993
+          0.1450040052909054,
+          1.0130102286893412,
+          0.05417218928128177
         ]
       ],
       "matrix": [
@@ -794,13 +882,14 @@
         0,
         1,
         0,
-        0,
-        0,
-        0,
+        0.0002500127333797636,
+        0.05492022138419583,
+        -0.08492280419081753,
         1
       ],
       "geometrySpace": "registered_world",
       "sourceNamespace": "bp3d-r4",
+      "spatialPlacementStatus": "pelvis_surface_candidate_without_named_landmark_review",
       "lods": {
         "overview": {
           "resource": "HA-MESH-BP3D4-FJ3288",
@@ -826,12 +915,26 @@
         "sourceSha256": "bfc8b489fee0945cd1d387cf64bd3691af8e033fa72f9fccae45cfd55ac88694",
         "priorCompiledGeometrySha256": "da2866c3b55ba68793cb6344cdb534419fd2d9519d93d5dfcc5f33736cf63dbf",
         "compiledChunkSha256": "a38810d8b018177a6e99e37d65957c7bce5a2f5a95105ed7bc37034e50ad6d21",
-        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceFrame": "BodyParts3D R4 native static reference; T77 axis-converted into project frame, then T100 pelvis-derived translation used as a scene comparison candidate; cross-region offset remains unresolved",
         "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
         "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
-        "conversion": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or source-label change",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or source-label change; then apply T100 pelvis-derived instance translation in metres for local comparison; no scale, rotation, mirror, or geometry mutation",
         "pose": "bodyparts3d-r4-static-reference",
-        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "nodeTransform": "per-instance pelvis-derived translation used as a comparison candidate; cross-region registration not established; source GLB bytes remain unchanged",
+        "registration": {
+          "id": "T100-BP3D4-to-ZA-pelvis-surface-translation-v1",
+          "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json",
+          "evidenceSha256": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+          "translationMetres": [
+            0.0002500127333797636,
+            0.05492022138419583,
+            -0.08492280419081753
+          ],
+          "validationStatus": "rigid_translation_geometric_registration_candidate",
+          "regionalDiagnosticPath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-regional-comparison.json",
+          "regionalDiagnosticSha256": "abbab0dbe352c1a10408116647e91e3d1d9ae048e3c1f7163cf24a583b2b64c2",
+          "spatialPlacementStatus": "pelvis_surface_correspondence_candidate_only; no_named_landmark_or_human_approval"
+        },
         "triangleCount": 2332,
         "vertexCount": 1257,
         "compiledMeshAccessorSha256": "449fbda33b5899c378e02ca2e590adbb156ede918a12a81365fcabba0dc0e792",
@@ -891,6 +994,42 @@
           "FJ3288",
           "FJ3393"
         ]
+      },
+      "selectionDisplayAlternative": {
+        "mode": "suppress_exact_counterpart_while_selected",
+        "sourceKeys": [
+          "ZA-c7010a9-ecb65ff4cc3da710e5a2d157"
+        ],
+        "basis": "exact BP3D source member name/FMA identity plus the paired evaluated surface registration record; both source geometries remain in their original datasets",
+        "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json",
+        "evidenceSha256": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+        "sourcePair": {
+          "bp3dElementFileId": "FJ3288",
+          "zaSourceKey": "ZA-c7010a9-ecb65ff4cc3da710e5a2d157",
+          "zaSourceName": "Hip bone.l"
+        },
+        "surfaceDiagnostic": {
+          "queryVerticesEachDirection": [
+            252,
+            237
+          ],
+          "directedNearestVertexMedianM": [
+            0.004618254708521155,
+            0.005067623054637419
+          ],
+          "directedNearestVertexP95M": [
+            0.008198797167130427,
+            0.009254312841149815
+          ],
+          "symmetricNearestVertexMedianM": 0.0047590629784401576,
+          "symmetricNearestVertexP95M": 0.008882896588288228,
+          "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+        },
+        "doesNotAssert": [
+          "anatomical approval",
+          "full target extent",
+          "canonical identity beyond the exact source pair"
+        ]
       }
     },
     {
@@ -919,14 +1058,14 @@
       ],
       "bounds": [
         [
-          -0.059591200202703476,
-          0.7828369736671448,
-          -0.00725375022739172
+          -0.059341187469323715,
+          0.8377571950513406,
+          -0.09217655441820925
         ],
         [
-          0.05820289999246597,
-          0.9272000193595886,
-          0.08139640092849731
+          0.05845291272584573,
+          0.9821202407437845,
+          -0.0035264032623202185
         ]
       ],
       "matrix": [
@@ -942,13 +1081,14 @@
         0,
         1,
         0,
-        0,
-        0,
-        0,
+        0.0002500127333797636,
+        0.05492022138419583,
+        -0.08492280419081753,
         1
       ],
       "geometrySpace": "registered_world",
       "sourceNamespace": "bp3d-r4",
+      "spatialPlacementStatus": "pelvis_surface_candidate_without_named_landmark_review",
       "lods": {
         "overview": {
           "resource": "HA-MESH-BP3D4-FJ3393",
@@ -974,12 +1114,26 @@
         "sourceSha256": "cd04cc9f78d758ba34e92896914f647d22d257b9e7e51b97764670f694033489",
         "priorCompiledGeometrySha256": "8f855b2b93d189fe5c266dadac69860296fd6d6a4d5e42f55d58f978719b630c",
         "compiledChunkSha256": "0fa92ba735b8a17bffda7aac43a4409d5a8d7b981941da36ceaff1fc79b5e986",
-        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceFrame": "BodyParts3D R4 native static reference; T77 axis-converted into project frame, then T100 pelvis-derived translation used as a scene comparison candidate; cross-region offset remains unresolved",
         "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
         "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
-        "conversion": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or recenter; then apply T100 pelvis-derived instance translation in metres for local comparison; no scale, rotation, mirror, or geometry mutation",
         "pose": "bodyparts3d-r4-static-reference",
-        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "nodeTransform": "per-instance pelvis-derived translation used as a comparison candidate; cross-region registration not established; source GLB bytes remain unchanged",
+        "registration": {
+          "id": "T100-BP3D4-to-ZA-pelvis-surface-translation-v1",
+          "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json",
+          "evidenceSha256": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+          "translationMetres": [
+            0.0002500127333797636,
+            0.05492022138419583,
+            -0.08492280419081753
+          ],
+          "validationStatus": "rigid_translation_geometric_registration_candidate",
+          "regionalDiagnosticPath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-regional-comparison.json",
+          "regionalDiagnosticSha256": "abbab0dbe352c1a10408116647e91e3d1d9ae048e3c1f7163cf24a583b2b64c2",
+          "spatialPlacementStatus": "pelvis_surface_correspondence_candidate_only; no_named_landmark_or_human_approval"
+        },
         "triangleCount": 9922,
         "vertexCount": 5293,
         "compiledMeshAccessorSha256": "71a36a663318ad16eeb60897e087735d12e8db28fca5fc38f3aa2d14b48286fc",
@@ -1043,6 +1197,42 @@
           "FJ3288",
           "FJ3393"
         ]
+      },
+      "selectionDisplayAlternative": {
+        "mode": "suppress_exact_counterpart_while_selected",
+        "sourceKeys": [
+          "ZA-c7010a9-95b8d859c84ae9e56cacdafc"
+        ],
+        "basis": "exact BP3D source member name/FMA identity plus the paired evaluated surface registration record; both source geometries remain in their original datasets",
+        "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json",
+        "evidenceSha256": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+        "sourcePair": {
+          "bp3dElementFileId": "FJ3393",
+          "zaSourceKey": "ZA-c7010a9-95b8d859c84ae9e56cacdafc",
+          "zaSourceName": "Sacrum"
+        },
+        "surfaceDiagnostic": {
+          "queryVerticesEachDirection": [
+            253,
+            253
+          ],
+          "directedNearestVertexMedianM": [
+            0.002638034419337251,
+            0.002698493310456373
+          ],
+          "directedNearestVertexP95M": [
+            0.021403318721540474,
+            0.005905289584434512
+          ],
+          "symmetricNearestVertexMedianM": 0.0026693894707976703,
+          "symmetricNearestVertexP95M": 0.008127025685745111,
+          "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+        },
+        "doesNotAssert": [
+          "anatomical approval",
+          "full target extent",
+          "canonical identity beyond the exact source pair"
+        ]
       }
     },
     {
@@ -1072,14 +1262,14 @@
       ],
       "bounds": [
         [
-          0.001386099960654974,
-          1.4636800289154053,
-          0.08818049728870392
+          0.0016361126940347376,
+          1.5186002502996012,
+          0.0032576930978863855
         ],
         [
-          0.031355299055576324,
-          1.4969799518585205,
-          0.11010599881410599
+          0.031605311788956085,
+          1.5519001732427165,
+          0.025183194623288455
         ]
       ],
       "matrix": [
@@ -1095,13 +1285,14 @@
         0,
         1,
         0,
-        0,
-        0,
-        0,
+        0.0002500127333797636,
+        0.05492022138419583,
+        -0.08492280419081753,
         1
       ],
       "geometrySpace": "registered_world",
       "sourceNamespace": "bp3d-r4",
+      "spatialPlacementStatus": "cross_region_placement_unresolved",
       "lods": {
         "overview": {
           "resource": "HA-MESH-BP3D4-FJ2741",
@@ -1127,12 +1318,26 @@
         "sourceSha256": "a7d1e90a0757aa53530521cd25ee855da0cc1e774dbe2c6bcaf372ab9e654259",
         "priorCompiledGeometrySha256": null,
         "compiledChunkSha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16",
-        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceFrame": "BodyParts3D R4 native static reference; T77 axis-converted into project frame, then T100 pelvis-derived translation used as a scene comparison candidate; cross-region offset remains unresolved",
         "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
         "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
-        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring; then apply T100 pelvis-derived instance translation in metres for local comparison; no scale, rotation, mirror, or geometry mutation",
         "pose": "bodyparts3d-r4-static-reference",
-        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "nodeTransform": "per-instance pelvis-derived translation used as a comparison candidate; cross-region registration not established; source GLB bytes remain unchanged",
+        "registration": {
+          "id": "T100-BP3D4-to-ZA-pelvis-surface-translation-v1",
+          "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json",
+          "evidenceSha256": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+          "translationMetres": [
+            0.0002500127333797636,
+            0.05492022138419583,
+            -0.08492280419081753
+          ],
+          "validationStatus": "rigid_translation_geometric_registration_candidate",
+          "regionalDiagnosticPath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-regional-comparison.json",
+          "regionalDiagnosticSha256": "abbab0dbe352c1a10408116647e91e3d1d9ae048e3c1f7163cf24a583b2b64c2",
+          "spatialPlacementStatus": "cross_region_placement_unresolved"
+        },
         "triangleCount": 12318,
         "vertexCount": 6821,
         "compiledMeshAccessorSha256": "6fbf280dc7bc78fad6a54663c6666e6e9f90e82248973958e9352d2ca6db7382",
@@ -1214,14 +1419,14 @@
       ],
       "bounds": [
         [
-          -0.032665301114320755,
-          1.4636900424957275,
-          0.08817970007658005
+          -0.032415288380940994,
+          1.5186102638799235,
+          0.0032568958857625147
         ],
         [
-          -0.0025623301044106483,
-          1.4969899654388428,
-          0.11010000109672546
+          -0.0023123173710308848,
+          1.5519101868230387,
+          0.02517719690590793
         ]
       ],
       "matrix": [
@@ -1237,13 +1442,14 @@
         0,
         1,
         0,
-        0,
-        0,
-        0,
+        0.0002500127333797636,
+        0.05492022138419583,
+        -0.08492280419081753,
         1
       ],
       "geometrySpace": "registered_world",
       "sourceNamespace": "bp3d-r4",
+      "spatialPlacementStatus": "cross_region_placement_unresolved",
       "lods": {
         "overview": {
           "resource": "HA-MESH-BP3D4-FJ2753",
@@ -1269,12 +1475,26 @@
         "sourceSha256": "84b856010832db82451e940a172f175d3a753c08e7284663bd40de6ef427fbcc",
         "priorCompiledGeometrySha256": null,
         "compiledChunkSha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16",
-        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceFrame": "BodyParts3D R4 native static reference; T77 axis-converted into project frame, then T100 pelvis-derived translation used as a scene comparison candidate; cross-region offset remains unresolved",
         "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
         "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
-        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring; then apply T100 pelvis-derived instance translation in metres for local comparison; no scale, rotation, mirror, or geometry mutation",
         "pose": "bodyparts3d-r4-static-reference",
-        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "nodeTransform": "per-instance pelvis-derived translation used as a comparison candidate; cross-region registration not established; source GLB bytes remain unchanged",
+        "registration": {
+          "id": "T100-BP3D4-to-ZA-pelvis-surface-translation-v1",
+          "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json",
+          "evidenceSha256": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+          "translationMetres": [
+            0.0002500127333797636,
+            0.05492022138419583,
+            -0.08492280419081753
+          ],
+          "validationStatus": "rigid_translation_geometric_registration_candidate",
+          "regionalDiagnosticPath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-regional-comparison.json",
+          "regionalDiagnosticSha256": "abbab0dbe352c1a10408116647e91e3d1d9ae048e3c1f7163cf24a583b2b64c2",
+          "spatialPlacementStatus": "cross_region_placement_unresolved"
+        },
         "triangleCount": 12312,
         "vertexCount": 6835,
         "compiledMeshAccessorSha256": "748e2639da53531c742fc77898775c794c8ab6f7e9fb49f5b19cf46d73f2034f",
@@ -1356,14 +1576,14 @@
       ],
       "bounds": [
         [
-          0.0007606970029883087,
-          1.4609999656677246,
-          0.10010000318288803
+          0.0010107097363680722,
+          1.5159201870519206,
+          0.015177198992070498
         ],
         [
-          0.016656899824738503,
-          1.5033400058746338,
-          0.12049199640750885
+          0.016906912558118267,
+          1.5582602272588297,
+          0.03556919221669132
         ]
       ],
       "matrix": [
@@ -1379,13 +1599,14 @@
         0,
         1,
         0,
-        0,
-        0,
-        0,
+        0.0002500127333797636,
+        0.05492022138419583,
+        -0.08492280419081753,
         1
       ],
       "geometrySpace": "registered_world",
       "sourceNamespace": "bp3d-r4",
+      "spatialPlacementStatus": "cross_region_placement_unresolved",
       "lods": {
         "overview": {
           "resource": "HA-MESH-BP3D4-FJ2748",
@@ -1411,12 +1632,26 @@
         "sourceSha256": "d6bca501cda0201b5221acbee58f2a58eff4784886825f72a0c40b1e1f7cbf97",
         "priorCompiledGeometrySha256": null,
         "compiledChunkSha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16",
-        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceFrame": "BodyParts3D R4 native static reference; T77 axis-converted into project frame, then T100 pelvis-derived translation used as a scene comparison candidate; cross-region offset remains unresolved",
         "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
         "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
-        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring; then apply T100 pelvis-derived instance translation in metres for local comparison; no scale, rotation, mirror, or geometry mutation",
         "pose": "bodyparts3d-r4-static-reference",
-        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "nodeTransform": "per-instance pelvis-derived translation used as a comparison candidate; cross-region registration not established; source GLB bytes remain unchanged",
+        "registration": {
+          "id": "T100-BP3D4-to-ZA-pelvis-surface-translation-v1",
+          "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json",
+          "evidenceSha256": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+          "translationMetres": [
+            0.0002500127333797636,
+            0.05492022138419583,
+            -0.08492280419081753
+          ],
+          "validationStatus": "rigid_translation_geometric_registration_candidate",
+          "regionalDiagnosticPath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-regional-comparison.json",
+          "regionalDiagnosticSha256": "abbab0dbe352c1a10408116647e91e3d1d9ae048e3c1f7163cf24a583b2b64c2",
+          "spatialPlacementStatus": "cross_region_placement_unresolved"
+        },
         "triangleCount": 13872,
         "vertexCount": 7523,
         "compiledMeshAccessorSha256": "79939052b3dbadae221cfa6ae8ac85af375a4cf6bc0f90022b9c9da6dc420a69",
@@ -1498,14 +1733,14 @@
       ],
       "bounds": [
         [
-          -0.017973799258470535,
-          1.4609899520874023,
-          0.10010000318288803
+          -0.01772378652509077,
+          1.5159101734715983,
+          0.015177198992070498
         ],
         [
-          -0.0020690499804913998,
-          1.503350019454956,
-          0.12049499899148941
+          -0.0018190372471116362,
+          1.558270240839152,
+          0.03557219480067188
         ]
       ],
       "matrix": [
@@ -1521,13 +1756,14 @@
         0,
         1,
         0,
-        0,
-        0,
-        0,
+        0.0002500127333797636,
+        0.05492022138419583,
+        -0.08492280419081753,
         1
       ],
       "geometrySpace": "registered_world",
       "sourceNamespace": "bp3d-r4",
+      "spatialPlacementStatus": "cross_region_placement_unresolved",
       "lods": {
         "overview": {
           "resource": "HA-MESH-BP3D4-FJ2760",
@@ -1553,12 +1789,26 @@
         "sourceSha256": "ceddb3e852a795354bf31e6151dd9d2feaacb9f4612e3f0376d980dc063fc33a",
         "priorCompiledGeometrySha256": null,
         "compiledChunkSha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16",
-        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceFrame": "BodyParts3D R4 native static reference; T77 axis-converted into project frame, then T100 pelvis-derived translation used as a scene comparison candidate; cross-region offset remains unresolved",
         "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
         "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
-        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring; then apply T100 pelvis-derived instance translation in metres for local comparison; no scale, rotation, mirror, or geometry mutation",
         "pose": "bodyparts3d-r4-static-reference",
-        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "nodeTransform": "per-instance pelvis-derived translation used as a comparison candidate; cross-region registration not established; source GLB bytes remain unchanged",
+        "registration": {
+          "id": "T100-BP3D4-to-ZA-pelvis-surface-translation-v1",
+          "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json",
+          "evidenceSha256": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+          "translationMetres": [
+            0.0002500127333797636,
+            0.05492022138419583,
+            -0.08492280419081753
+          ],
+          "validationStatus": "rigid_translation_geometric_registration_candidate",
+          "regionalDiagnosticPath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-regional-comparison.json",
+          "regionalDiagnosticSha256": "abbab0dbe352c1a10408116647e91e3d1d9ae048e3c1f7163cf24a583b2b64c2",
+          "spatialPlacementStatus": "cross_region_placement_unresolved"
+        },
         "triangleCount": 13872,
         "vertexCount": 7464,
         "compiledMeshAccessorSha256": "59b86c7950be421c7068a14dd55edf5162074dc798b1f429824c34117f16d8f2",
@@ -1640,14 +1890,14 @@
       ],
       "bounds": [
         [
-          0.007165980059653521,
-          1.4576300382614136,
-          0.08652819693088531
+          0.007415992793033285,
+          1.5125502596456095,
+          0.001605392740067782
         ],
         [
-          0.02098429948091507,
-          1.4987900257110596,
-          0.10631699860095978
+          0.021234312214294834,
+          1.5537102470952555,
+          0.021394194410142245
         ]
       ],
       "matrix": [
@@ -1663,13 +1913,14 @@
         0,
         1,
         0,
-        0,
-        0,
-        0,
+        0.0002500127333797636,
+        0.05492022138419583,
+        -0.08492280419081753,
         1
       ],
       "geometrySpace": "registered_world",
       "sourceNamespace": "bp3d-r4",
+      "spatialPlacementStatus": "cross_region_placement_unresolved",
       "lods": {
         "overview": {
           "resource": "HA-MESH-BP3D4-FJ2745",
@@ -1695,12 +1946,26 @@
         "sourceSha256": "81c70a6f8ab2de5d20a715cdf5339d756ca7171c473adc645231929b2732bf31",
         "priorCompiledGeometrySha256": null,
         "compiledChunkSha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6",
-        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceFrame": "BodyParts3D R4 native static reference; T77 axis-converted into project frame, then T100 pelvis-derived translation used as a scene comparison candidate; cross-region offset remains unresolved",
         "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
         "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
-        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring; then apply T100 pelvis-derived instance translation in metres for local comparison; no scale, rotation, mirror, or geometry mutation",
         "pose": "bodyparts3d-r4-static-reference",
-        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "nodeTransform": "per-instance pelvis-derived translation used as a comparison candidate; cross-region registration not established; source GLB bytes remain unchanged",
+        "registration": {
+          "id": "T100-BP3D4-to-ZA-pelvis-surface-translation-v1",
+          "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json",
+          "evidenceSha256": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+          "translationMetres": [
+            0.0002500127333797636,
+            0.05492022138419583,
+            -0.08492280419081753
+          ],
+          "validationStatus": "rigid_translation_geometric_registration_candidate",
+          "regionalDiagnosticPath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-regional-comparison.json",
+          "regionalDiagnosticSha256": "abbab0dbe352c1a10408116647e91e3d1d9ae048e3c1f7163cf24a583b2b64c2",
+          "spatialPlacementStatus": "cross_region_placement_unresolved"
+        },
         "triangleCount": 9152,
         "vertexCount": 4846,
         "compiledMeshAccessorSha256": "c01bd6e6e1f346353ce63fe3b5592c0f1c399c0ec4454083e5f31fc53d9445fb",
@@ -1783,14 +2048,14 @@
       ],
       "bounds": [
         [
-          -0.02228749915957451,
-          1.4576300382614136,
-          0.08652810007333755
+          -0.022037486426194745,
+          1.5125502596456095,
+          0.001605295882520022
         ],
         [
-          -0.008479000069200993,
-          1.4987900257110596,
-          0.1063069999217987
+          -0.008228987335821229,
+          1.5537102470952555,
+          0.021384195730981173
         ]
       ],
       "matrix": [
@@ -1806,13 +2071,14 @@
         0,
         1,
         0,
-        0,
-        0,
-        0,
+        0.0002500127333797636,
+        0.05492022138419583,
+        -0.08492280419081753,
         1
       ],
       "geometrySpace": "registered_world",
       "sourceNamespace": "bp3d-r4",
+      "spatialPlacementStatus": "cross_region_placement_unresolved",
       "lods": {
         "overview": {
           "resource": "HA-MESH-BP3D4-FJ2757",
@@ -1838,12 +2104,26 @@
         "sourceSha256": "b10e40d550d6208c907df65d844403071233d8088a109b2be5f925cd5d9e6c36",
         "priorCompiledGeometrySha256": null,
         "compiledChunkSha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6",
-        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceFrame": "BodyParts3D R4 native static reference; T77 axis-converted into project frame, then T100 pelvis-derived translation used as a scene comparison candidate; cross-region offset remains unresolved",
         "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
         "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
-        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring; then apply T100 pelvis-derived instance translation in metres for local comparison; no scale, rotation, mirror, or geometry mutation",
         "pose": "bodyparts3d-r4-static-reference",
-        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "nodeTransform": "per-instance pelvis-derived translation used as a comparison candidate; cross-region registration not established; source GLB bytes remain unchanged",
+        "registration": {
+          "id": "T100-BP3D4-to-ZA-pelvis-surface-translation-v1",
+          "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json",
+          "evidenceSha256": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+          "translationMetres": [
+            0.0002500127333797636,
+            0.05492022138419583,
+            -0.08492280419081753
+          ],
+          "validationStatus": "rigid_translation_geometric_registration_candidate",
+          "regionalDiagnosticPath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-regional-comparison.json",
+          "regionalDiagnosticSha256": "abbab0dbe352c1a10408116647e91e3d1d9ae048e3c1f7163cf24a583b2b64c2",
+          "spatialPlacementStatus": "cross_region_placement_unresolved"
+        },
         "triangleCount": 9152,
         "vertexCount": 4853,
         "compiledMeshAccessorSha256": "45ab7301bda01904ddc3bb90c027cba2f644a9b74a80406ed551fc917f78a441",
@@ -1926,14 +2206,14 @@
       ],
       "bounds": [
         [
-          0.0011831000447273254,
-          1.4036999940872192,
-          0.10088299959897995
+          0.001433112778107089,
+          1.4586202154714152,
+          0.015960195408162417
         ],
         [
-          0.002770490013062954,
-          1.4051300287246704,
-          0.11497899889945984
+          0.0030205027464427175,
+          1.4600502501088664,
+          0.030056194708642306
         ]
       ],
       "matrix": [
@@ -1949,13 +2229,14 @@
         0,
         1,
         0,
-        0,
-        0,
-        0,
+        0.0002500127333797636,
+        0.05492022138419583,
+        -0.08492280419081753,
         1
       ],
       "geometrySpace": "registered_world",
       "sourceNamespace": "bp3d-r4",
+      "spatialPlacementStatus": "cross_region_placement_unresolved",
       "lods": {
         "overview": {
           "resource": "HA-MESH-BP3D4-FJ2788",
@@ -1981,12 +2262,26 @@
         "sourceSha256": "dd26f669e127e5c5fae7ff796da0f516887f8c3834bbde1f2881d3a222cc2375",
         "priorCompiledGeometrySha256": null,
         "compiledChunkSha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6",
-        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceFrame": "BodyParts3D R4 native static reference; T77 axis-converted into project frame, then T100 pelvis-derived translation used as a scene comparison candidate; cross-region offset remains unresolved",
         "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
         "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
-        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring; then apply T100 pelvis-derived instance translation in metres for local comparison; no scale, rotation, mirror, or geometry mutation",
         "pose": "bodyparts3d-r4-static-reference",
-        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "nodeTransform": "per-instance pelvis-derived translation used as a comparison candidate; cross-region registration not established; source GLB bytes remain unchanged",
+        "registration": {
+          "id": "T100-BP3D4-to-ZA-pelvis-surface-translation-v1",
+          "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json",
+          "evidenceSha256": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+          "translationMetres": [
+            0.0002500127333797636,
+            0.05492022138419583,
+            -0.08492280419081753
+          ],
+          "validationStatus": "rigid_translation_geometric_registration_candidate",
+          "regionalDiagnosticPath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-regional-comparison.json",
+          "regionalDiagnosticSha256": "abbab0dbe352c1a10408116647e91e3d1d9ae048e3c1f7163cf24a583b2b64c2",
+          "spatialPlacementStatus": "cross_region_placement_unresolved"
+        },
         "triangleCount": 1152,
         "vertexCount": 679,
         "compiledMeshAccessorSha256": "47093dc0f1da01c43b4cb4833440b3af7371404b1839bf52b7c6cac58bb6f539",
@@ -2068,14 +2363,14 @@
       ],
       "bounds": [
         [
-          -0.004087029956281185,
-          1.403689980506897,
-          0.10087999701499939
+          -0.0038370172229014216,
+          1.458610201891093,
+          0.015957192824181857
         ],
         [
-          -0.0024958299472928047,
-          1.4051300287246704,
-          0.11497099697589874
+          -0.002245817213913041,
+          1.4600502501088664,
+          0.03004819278508121
         ]
       ],
       "matrix": [
@@ -2091,13 +2386,14 @@
         0,
         1,
         0,
-        0,
-        0,
-        0,
+        0.0002500127333797636,
+        0.05492022138419583,
+        -0.08492280419081753,
         1
       ],
       "geometrySpace": "registered_world",
       "sourceNamespace": "bp3d-r4",
+      "spatialPlacementStatus": "cross_region_placement_unresolved",
       "lods": {
         "overview": {
           "resource": "HA-MESH-BP3D4-FJ2806",
@@ -2123,12 +2419,26 @@
         "sourceSha256": "f4b83790f1c6364785f6ec6a8428443e7f20cfe48ed9a14234bb8aff1d80f2a9",
         "priorCompiledGeometrySha256": null,
         "compiledChunkSha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6",
-        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceFrame": "BodyParts3D R4 native static reference; T77 axis-converted into project frame, then T100 pelvis-derived translation used as a scene comparison candidate; cross-region offset remains unresolved",
         "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
         "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
-        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; no reflection or mirroring; then apply T100 pelvis-derived instance translation in metres for local comparison; no scale, rotation, mirror, or geometry mutation",
         "pose": "bodyparts3d-r4-static-reference",
-        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "nodeTransform": "per-instance pelvis-derived translation used as a comparison candidate; cross-region registration not established; source GLB bytes remain unchanged",
+        "registration": {
+          "id": "T100-BP3D4-to-ZA-pelvis-surface-translation-v1",
+          "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json",
+          "evidenceSha256": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+          "translationMetres": [
+            0.0002500127333797636,
+            0.05492022138419583,
+            -0.08492280419081753
+          ],
+          "validationStatus": "rigid_translation_geometric_registration_candidate",
+          "regionalDiagnosticPath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-regional-comparison.json",
+          "regionalDiagnosticSha256": "abbab0dbe352c1a10408116647e91e3d1d9ae048e3c1f7163cf24a583b2b64c2",
+          "spatialPlacementStatus": "cross_region_placement_unresolved"
+        },
         "triangleCount": 1148,
         "vertexCount": 656,
         "compiledMeshAccessorSha256": "cf789ff6e1c9ba23a2071a42a1878d3ba931a7280406b6e8b2faf072fcd477a5",
@@ -2210,14 +2520,14 @@
       ],
       "bounds": [
         [
-          -0.04350470006465912,
-          1.3752199411392212,
-          0.014606799930334091
+          -0.04325468733127936,
+          1.4301401625234171,
+          -0.07031600426048344
         ],
         [
-          -0.003342190058901906,
-          1.494670033454895,
-          0.06877309828996658
+          -0.0030921773255221424,
+          1.549590254839091,
+          -0.01614970590085095
         ]
       ],
       "matrix": [
@@ -2233,13 +2543,14 @@
         0,
         1,
         0,
-        0,
-        0,
-        0,
+        0.0002500127333797636,
+        0.05492022138419583,
+        -0.08492280419081753,
         1
       ],
       "geometrySpace": "registered_world",
       "sourceNamespace": "bp3d-r4",
+      "spatialPlacementStatus": "cross_region_placement_unresolved",
       "lods": {
         "overview": {
           "resource": "HA-MESH-BP3D4-FJ1538",
@@ -2265,12 +2576,26 @@
         "sourceSha256": "189e16f70c49bc3465f5216fcb0e0b0ffb114458fde427eaf5406ddd1a1bd315",
         "priorCompiledGeometrySha256": "b24dccb2dbc48218b32ed3838275ac41e58fdd40d58d21902176906cff1167c2",
         "compiledChunkSha256": "cd4b4a211649281d628a040ad9dc1d9f598fa552e37e8cd4bf83abfa46a93acd",
-        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceFrame": "BodyParts3D R4 native static reference; T77 axis-converted into project frame, then T100 pelvis-derived translation used as a scene comparison candidate; cross-region offset remains unresolved",
         "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
         "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
-        "conversion": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or source-label change",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or source-label change; then apply T100 pelvis-derived instance translation in metres for local comparison; no scale, rotation, mirror, or geometry mutation",
         "pose": "bodyparts3d-r4-static-reference",
-        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "nodeTransform": "per-instance pelvis-derived translation used as a comparison candidate; cross-region registration not established; source GLB bytes remain unchanged",
+        "registration": {
+          "id": "T100-BP3D4-to-ZA-pelvis-surface-translation-v1",
+          "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json",
+          "evidenceSha256": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+          "translationMetres": [
+            0.0002500127333797636,
+            0.05492022138419583,
+            -0.08492280419081753
+          ],
+          "validationStatus": "rigid_translation_geometric_registration_candidate",
+          "regionalDiagnosticPath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-regional-comparison.json",
+          "regionalDiagnosticSha256": "abbab0dbe352c1a10408116647e91e3d1d9ae048e3c1f7163cf24a583b2b64c2",
+          "spatialPlacementStatus": "cross_region_placement_unresolved"
+        },
         "triangleCount": 1912,
         "vertexCount": 2744,
         "compiledMeshAccessorSha256": "0fac91551143082f1df575a9e8fd354e4632023fce11209ca448ed9ebbb8ed01",
@@ -2352,14 +2677,14 @@
       ],
       "bounds": [
         [
-          0.003342190058901906,
-          1.3752199411392212,
-          0.014606799930334091
+          0.0035922027922816696,
+          1.4301401625234171,
+          -0.07031600426048344
         ],
         [
-          0.04350470006465912,
-          1.494670033454895,
-          0.06877309828996658
+          0.04375471279803888,
+          1.549590254839091,
+          -0.01614970590085095
         ]
       ],
       "matrix": [
@@ -2375,13 +2700,14 @@
         0,
         1,
         0,
-        0,
-        0,
-        0,
+        0.0002500127333797636,
+        0.05492022138419583,
+        -0.08492280419081753,
         1
       ],
       "geometrySpace": "registered_world",
       "sourceNamespace": "bp3d-r4",
+      "spatialPlacementStatus": "cross_region_placement_unresolved",
       "lods": {
         "overview": {
           "resource": "HA-MESH-BP3D4-FJ1538M",
@@ -2407,12 +2733,26 @@
         "sourceSha256": "8f587a9a50e0ca6555ffb086e60445a499904ce55a5664340cce8ed12d86bb77",
         "priorCompiledGeometrySha256": "62de0ab1ec7cbee4df0b1091180fa0c154e9fd3aa2b7cf365cf6bf2179ad7496",
         "compiledChunkSha256": "cd4b4a211649281d628a040ad9dc1d9f598fa552e37e8cd4bf83abfa46a93acd",
-        "sourceFrame": "BodyParts3D R4 static reference; registered by T77/T50/T69 pipeline",
+        "sourceFrame": "BodyParts3D R4 native static reference; T77 axis-converted into project frame, then T100 pelvis-derived translation used as a scene comparison candidate; cross-region offset remains unresolved",
         "sourceUnit": "mm (exact OBJ Bounds(mm) header; T77 transformed output is metres)",
         "projectFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
-        "conversion": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or source-label change",
+        "conversion": "[x,y,z]mm -> [x,z,-y]m; preserve x sign; no mirror or source-label change; then apply T100 pelvis-derived instance translation in metres for local comparison; no scale, rotation, mirror, or geometry mutation",
         "pose": "bodyparts3d-r4-static-reference",
-        "nodeTransform": "identity; project coordinates baked into evaluated geometry",
+        "nodeTransform": "per-instance pelvis-derived translation used as a comparison candidate; cross-region registration not established; source GLB bytes remain unchanged",
+        "registration": {
+          "id": "T100-BP3D4-to-ZA-pelvis-surface-translation-v1",
+          "evidencePath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json",
+          "evidenceSha256": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+          "translationMetres": [
+            0.0002500127333797636,
+            0.05492022138419583,
+            -0.08492280419081753
+          ],
+          "validationStatus": "rigid_translation_geometric_registration_candidate",
+          "regionalDiagnosticPath": "work/evidence/T100/source-completion-2026-10-01/integration/registration-regional-comparison.json",
+          "regionalDiagnosticSha256": "abbab0dbe352c1a10408116647e91e3d1d9ae048e3c1f7163cf24a583b2b64c2",
+          "spatialPlacementStatus": "cross_region_placement_unresolved"
+        },
         "triangleCount": 1912,
         "vertexCount": 2738,
         "compiledMeshAccessorSha256": "db8ba11341c45ba02e03dd96939623cca0aa82d1f159ffa4d6257ac842986471",
@@ -2479,6 +2819,9 @@
     ],
     "targetCount": 6,
     "uniqueObjects": 13,
+    "spatiallyAcceptedObjects": 0,
+    "pelvisSurfaceCandidateObjectsWithoutNamedLandmarkReview": 3,
+    "crossRegionPlacementUnresolvedObjects": 10,
     "uniqueChunkCount": 5,
     "uniqueRegions": [
       "back",

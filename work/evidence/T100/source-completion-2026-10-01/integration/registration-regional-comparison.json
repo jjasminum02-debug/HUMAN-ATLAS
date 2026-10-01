@@ -1,0 +1,1126 @@
+{
+  "schemaVersion": "t100-multiregion-registration-diagnostic-v1",
+  "taskId": "T100",
+  "status": "single-global-transform-not-established",
+  "method": "Use exact source IDs and source-named ZA counterparts already present in T71/T72/T77. For each evaluated GLB, compare arithmetic vertex centroids and deterministic bidirectional sampled nearest-vertex distances. Report pelvis/lumbar/thorax/head robust translations and the all-region robust translation; do not infer anatomy approval from these diagnostics.",
+  "allRegionTranslationBp3dToZaMetres": [
+    -0.0008150337472650282,
+    0.05230046730846627,
+    -0.10143923834668679
+  ],
+  "regionalFits": {
+    "head": {
+      "translationBp3dToZaMetres": [
+        -0.0001720547509689261,
+        0.06482441366806935,
+        -0.07754033449741564
+      ],
+      "anchors": [
+        {
+          "sourceElementFileId": "FJ3200",
+          "zaSourceKey": "ZA-c7010a9-78bbaa2bb395956fc914364b",
+          "zaSourceName": "Frontal bone",
+          "bp3dSourceSha256": "48583dbbeab8ae243aa4c266b44ca5b26b9c4e1e79976819cfdf5dcb59ec5772",
+          "zaEvaluatedGeometrySha256": "1d8c95515aabd9d303bc4b5e6d7deef64f761d7c69c15bfd8519e7c5395a2cf2",
+          "centroidDerivedTranslationMetres": [
+            -0.0001720547509689261,
+            0.0694983216994749,
+            -0.08698345554240597
+          ],
+          "residualFromRegionalMedianMetres": [
+            0.0,
+            0.004673908031405549,
+            -0.00944312104499033
+          ],
+          "residualNormMetres": 0.01053650565208298,
+          "preRegistrationSurface": {
+            "queryVerticesEachDirection": [
+              250,
+              244
+            ],
+            "directedNearestVertexMedianM": [
+              0.08131180951099036,
+              0.06627812716727054
+            ],
+            "directedNearestVertexP95M": [
+              0.10904154263431876,
+              0.1103389716006796
+            ],
+            "symmetricNearestVertexMedianM": 0.0734252865363244,
+            "symmetricNearestVertexP95M": 0.10956807242383199,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          },
+          "regionalFitSurface": {
+            "queryVerticesEachDirection": [
+              250,
+              244
+            ],
+            "directedNearestVertexMedianM": [
+              0.0052268156681882245,
+              0.007342416283640945
+            ],
+            "directedNearestVertexP95M": [
+              0.011374637385228255,
+              0.012290059423740972
+            ],
+            "symmetricNearestVertexMedianM": 0.005629394918127589,
+            "symmetricNearestVertexP95M": 0.012220074884845018,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          }
+        },
+        {
+          "sourceElementFileId": "FJ3289",
+          "zaSourceKey": "ZA-c7010a9-179fa204ccffef5f88aa335f",
+          "zaSourceName": "Mandible",
+          "bp3dSourceSha256": "c38102c34660e2b767a7b95a341380bf4a52c754c6235fcd322be5c7b8cb1745",
+          "zaEvaluatedGeometrySha256": "e5e39703885dc3423fc3c76ef40bfcd870e7ea10d2299dc0dec261c288c03fa9",
+          "centroidDerivedTranslationMetres": [
+            0.0007379371844378709,
+            0.05689419590646705,
+            -0.07730804825749629
+          ],
+          "residualFromRegionalMedianMetres": [
+            0.000909991935406797,
+            -0.007930217761602298,
+            0.0002322862399193465
+          ],
+          "residualNormMetres": 0.007985636854139676,
+          "preRegistrationSurface": {
+            "queryVerticesEachDirection": [
+              238,
+              254
+            ],
+            "directedNearestVertexMedianM": [
+              0.07079665498974788,
+              0.04023114725772181
+            ],
+            "directedNearestVertexP95M": [
+              0.10940201051835399,
+              0.07776633370363227
+            ],
+            "symmetricNearestVertexMedianM": 0.05317223573781166,
+            "symmetricNearestVertexP95M": 0.10785445775134639,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          },
+          "regionalFitSurface": {
+            "queryVerticesEachDirection": [
+              238,
+              254
+            ],
+            "directedNearestVertexMedianM": [
+              0.006301553743710265,
+              0.003607258576890021
+            ],
+            "directedNearestVertexP95M": [
+              0.014300736606039553,
+              0.010692066149154043
+            ],
+            "symmetricNearestVertexMedianM": 0.004762046964491751,
+            "symmetricNearestVertexP95M": 0.013481361038879775,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          }
+        },
+        {
+          "sourceElementFileId": "FJ3309",
+          "zaSourceKey": "ZA-c7010a9-06ebb84f8a0406bd37b531c1",
+          "zaSourceName": "Occipital bone",
+          "bp3dSourceSha256": "c0262a08591e48504c8a53302525377e0c4ad1c165456475f3bb80aab6202d44",
+          "zaEvaluatedGeometrySha256": "dad5d46158e6230dfa31cb8491de777b822697558b073b1208ac81aa16b54bc7",
+          "centroidDerivedTranslationMetres": [
+            -0.00036505449397981676,
+            0.06482441366806935,
+            -0.07754033449741564
+          ],
+          "residualFromRegionalMedianMetres": [
+            -0.00019299974301089065,
+            0.0,
+            0.0
+          ],
+          "residualNormMetres": 0.00019299974301089065,
+          "preRegistrationSurface": {
+            "queryVerticesEachDirection": [
+              250,
+              251
+            ],
+            "directedNearestVertexMedianM": [
+              0.04745154978471362,
+              0.05736026104989312
+            ],
+            "directedNearestVertexP95M": [
+              0.10699627305793588,
+              0.10682846204601315
+            ],
+            "symmetricNearestVertexMedianM": 0.051388264607828096,
+            "symmetricNearestVertexP95M": 0.10693742953857581,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          },
+          "regionalFitSurface": {
+            "queryVerticesEachDirection": [
+              250,
+              251
+            ],
+            "directedNearestVertexMedianM": [
+              0.004476072162333242,
+              0.0041623551613441685
+            ],
+            "directedNearestVertexP95M": [
+              0.011351098247421988,
+              0.009765350039464885
+            ],
+            "symmetricNearestVertexMedianM": 0.004415287125493421,
+            "symmetricNearestVertexP95M": 0.01030309752633831,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          }
+        }
+      ]
+    },
+    "lumbar": {
+      "translationBp3dToZaMetres": [
+        0.0009171293254106097,
+        0.05230046730846627,
+        -0.09902355419235194
+      ],
+      "anchors": [
+        {
+          "sourceElementFileId": "FJ3157",
+          "zaSourceKey": "ZA-c7010a9-484ccd540149a7cdad5c74a8",
+          "zaSourceName": "Vertebra L1",
+          "bp3dSourceSha256": "67940f16382935851ebeb7a86c926dbf922070f390c438fdbbb56f7b7fb76057",
+          "zaEvaluatedGeometrySha256": "4381f7312adf4285002467b2fc7aeb1e2aba45d5bd7fba1993e7ecde88a3825e",
+          "centroidDerivedTranslationMetres": [
+            0.0009171293254106097,
+            0.059798535487086246,
+            -0.09956187026144682
+          ],
+          "residualFromRegionalMedianMetres": [
+            0.0,
+            0.0074980681786199765,
+            -0.0005383160690948796
+          ],
+          "residualNormMetres": 0.007517367265305006,
+          "preRegistrationSurface": {
+            "queryVerticesEachDirection": [
+              241,
+              226
+            ],
+            "directedNearestVertexMedianM": [
+              0.08188874446491734,
+              0.09810446243470347
+            ],
+            "directedNearestVertexP95M": [
+              0.10065772345143946,
+              0.11522112337290613
+            ],
+            "symmetricNearestVertexMedianM": 0.0900179176391841,
+            "symmetricNearestVertexP95M": 0.11394056969918737,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          },
+          "regionalFitSurface": {
+            "queryVerticesEachDirection": [
+              241,
+              226
+            ],
+            "directedNearestVertexMedianM": [
+              0.0034887353990763603,
+              0.004044333238949633
+            ],
+            "directedNearestVertexP95M": [
+              0.007904465127098451,
+              0.008682391737646195
+            ],
+            "symmetricNearestVertexMedianM": 0.003812724465554961,
+            "symmetricNearestVertexP95M": 0.008368574365592329,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          }
+        },
+        {
+          "sourceElementFileId": "FJ3159",
+          "zaSourceKey": "ZA-c7010a9-0bc91f56657c8ad942f9f283",
+          "zaSourceName": "Vertebra L2",
+          "bp3dSourceSha256": "5e6301d2020ba73167e71c274848ddcbec0f7936d9f26a78f2de8ffa82f095c7",
+          "zaEvaluatedGeometrySha256": "880d0e6529332d4368964942f4a19a7ecb41b319b536a5f4736bb9b5246361e3",
+          "centroidDerivedTranslationMetres": [
+            0.001535690035337074,
+            0.056901479628562734,
+            -0.09902355419235194
+          ],
+          "residualFromRegionalMedianMetres": [
+            0.0006185607099264642,
+            0.004601012320096465,
+            0.0
+          ],
+          "residualNormMetres": 0.004642405811811822,
+          "preRegistrationSurface": {
+            "queryVerticesEachDirection": [
+              235,
+              224
+            ],
+            "directedNearestVertexMedianM": [
+              0.07170869564671999,
+              0.09562919658077665
+            ],
+            "directedNearestVertexP95M": [
+              0.09773124936720835,
+              0.11019697556845798
+            ],
+            "symmetricNearestVertexMedianM": 0.08428833080397369,
+            "symmetricNearestVertexP95M": 0.109311063015173,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          },
+          "regionalFitSurface": {
+            "queryVerticesEachDirection": [
+              235,
+              224
+            ],
+            "directedNearestVertexMedianM": [
+              0.0034240007785443145,
+              0.002960244481302268
+            ],
+            "directedNearestVertexP95M": [
+              0.006653066156359111,
+              0.007193147140314852
+            ],
+            "symmetricNearestVertexMedianM": 0.0033112652027145043,
+            "symmetricNearestVertexP95M": 0.006895281697794776,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          }
+        },
+        {
+          "sourceElementFileId": "FJ3162",
+          "zaSourceKey": "ZA-c7010a9-4ce8a03807489dbb188edadb",
+          "zaSourceName": "Vertebra L3",
+          "bp3dSourceSha256": "aa58bbebf75e858d5258926b3f85ef6bc27f765464e87bfc828baf24156bf155",
+          "zaEvaluatedGeometrySha256": "2631d64f03229b9b96b1602411fb98dcb07d21d43a4d1d5f03ed458c8bec9157",
+          "centroidDerivedTranslationMetres": [
+            0.001304456975251404,
+            0.054529662938482826,
+            -0.09740815986553827
+          ],
+          "residualFromRegionalMedianMetres": [
+            0.00038732764984079427,
+            0.002229195630016556,
+            0.0016153943268136656
+          ],
+          "residualNormMetres": 0.0027800781816916375,
+          "preRegistrationSurface": {
+            "queryVerticesEachDirection": [
+              232,
+              226
+            ],
+            "directedNearestVertexMedianM": [
+              0.06615345205379045,
+              0.0903643545869155
+            ],
+            "directedNearestVertexP95M": [
+              0.09793915593387972,
+              0.10762567930711041
+            ],
+            "symmetricNearestVertexMedianM": 0.07559860713005656,
+            "symmetricNearestVertexP95M": 0.10545837167178931,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          },
+          "regionalFitSurface": {
+            "queryVerticesEachDirection": [
+              232,
+              226
+            ],
+            "directedNearestVertexMedianM": [
+              0.0026068628645848748,
+              0.0027242608270509074
+            ],
+            "directedNearestVertexP95M": [
+              0.005895891793021345,
+              0.006110028078463545
+            ],
+            "symmetricNearestVertexMedianM": 0.002659619783436702,
+            "symmetricNearestVertexP95M": 0.006023280593682658,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          }
+        },
+        {
+          "sourceElementFileId": "FJ3165",
+          "zaSourceKey": "ZA-c7010a9-aae2ed33f4a0bf4f1ad5387a",
+          "zaSourceName": "Vertebra L4",
+          "bp3dSourceSha256": "2b02ea3874d39295b15a7de2a2b2dd1367cf5a00a5ba5f87519f2a7064b2286f",
+          "zaEvaluatedGeometrySha256": "5d374f1baa93254e847ed77470333c23f8e70e3a0456f0c57d5566a63fa96ddc",
+          "centroidDerivedTranslationMetres": [
+            -0.00017958336444942225,
+            0.05134233826421608,
+            -0.09237948016787424
+          ],
+          "residualFromRegionalMedianMetres": [
+            -0.001096712689860032,
+            -0.0009581290442501889,
+            0.0066440740244776975
+          ],
+          "residualNormMetres": 0.00680180194009463,
+          "preRegistrationSurface": {
+            "queryVerticesEachDirection": [
+              246,
+              238
+            ],
+            "directedNearestVertexMedianM": [
+              0.061620787418360135,
+              0.08413835119927196
+            ],
+            "directedNearestVertexP95M": [
+              0.0955767304800563,
+              0.10069865397442448
+            ],
+            "symmetricNearestVertexMedianM": 0.06990426612932073,
+            "symmetricNearestVertexP95M": 0.0997858034907346,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          },
+          "regionalFitSurface": {
+            "queryVerticesEachDirection": [
+              246,
+              238
+            ],
+            "directedNearestVertexMedianM": [
+              0.0034098934572630545,
+              0.0032155632787364604
+            ],
+            "directedNearestVertexP95M": [
+              0.008132720216755075,
+              0.007934324753013894
+            ],
+            "symmetricNearestVertexMedianM": 0.0033086785257671596,
+            "symmetricNearestVertexP95M": 0.008076162846525105,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          }
+        },
+        {
+          "sourceElementFileId": "FJ3168",
+          "zaSourceKey": "ZA-c7010a9-0532a0f965344c7db7218160",
+          "zaSourceName": "Vertebra L5",
+          "bp3dSourceSha256": "0b8d0317800abd7c7cb66473cfa23bcecf2b2a8060a4434f32eb9f6ea93c1cc4",
+          "zaEvaluatedGeometrySha256": "7648aaadf13bed1c296783c4fa86acb827b33b50b1d41fe8d2e72e7f259fcb3d",
+          "centroidDerivedTranslationMetres": [
+            0.0014147082175291407,
+            0.05230046730846627,
+            -0.08671760792946806
+          ],
+          "residualFromRegionalMedianMetres": [
+            0.000497578892118531,
+            0.0,
+            0.01230594626288388
+          ],
+          "residualNormMetres": 0.012316001712360535,
+          "preRegistrationSurface": {
+            "queryVerticesEachDirection": [
+              235,
+              252
+            ],
+            "directedNearestVertexMedianM": [
+              0.057119396577911936,
+              0.08168041478021407
+            ],
+            "directedNearestVertexP95M": [
+              0.09491631309929223,
+              0.09623634058657604
+            ],
+            "symmetricNearestVertexMedianM": 0.07036987826075738,
+            "symmetricNearestVertexP95M": 0.09593252474002267,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          },
+          "regionalFitSurface": {
+            "queryVerticesEachDirection": [
+              235,
+              252
+            ],
+            "directedNearestVertexMedianM": [
+              0.006097794356037956,
+              0.004530202129391827
+            ],
+            "directedNearestVertexP95M": [
+              0.009352853584218673,
+              0.010566117843539124
+            ],
+            "symmetricNearestVertexMedianM": 0.00532517165711176,
+            "symmetricNearestVertexP95M": 0.01006923525688816,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          }
+        }
+      ]
+    },
+    "pelvis": {
+      "translationBp3dToZaMetres": [
+        0.0002500127333797636,
+        0.05492022138419583,
+        -0.08492280419081753
+      ],
+      "anchors": [
+        {
+          "sourceElementFileId": "FJ3152",
+          "zaSourceKey": "ZA-c7010a9-74a765dc396d690d1642153e",
+          "zaSourceName": "Hip bone.r",
+          "bp3dSourceSha256": "99de26e5435a8397b6f39b44ada75319d5e8fa1433e1ea38fdd8de9e079ed9a9",
+          "zaEvaluatedGeometrySha256": "dbd1b9bebca230ac73bdd9494471d8e62a5491d7134b4ca8f67c397957fed76f",
+          "centroidDerivedTranslationMetres": [
+            0.002683170708367988,
+            0.05492022138419583,
+            -0.08492280419081753
+          ],
+          "residualFromRegionalMedianMetres": [
+            0.0024331579749882243,
+            0.0,
+            0.0
+          ],
+          "residualNormMetres": 0.0024331579749882243,
+          "preRegistrationSurface": {
+            "queryVerticesEachDirection": [
+              214,
+              237
+            ],
+            "directedNearestVertexMedianM": [
+              0.060690654259643075,
+              0.049510379223483454
+            ],
+            "directedNearestVertexP95M": [
+              0.09237676532993477,
+              0.09273592196245597
+            ],
+            "symmetricNearestVertexMedianM": 0.055732801043088004,
+            "symmetricNearestVertexP95M": 0.09270795765678166,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          },
+          "regionalFitSurface": {
+            "queryVerticesEachDirection": [
+              214,
+              237
+            ],
+            "directedNearestVertexMedianM": [
+              0.00445796015293597,
+              0.005134979659944132
+            ],
+            "directedNearestVertexP95M": [
+              0.008481686885814601,
+              0.008964731673320302
+            ],
+            "symmetricNearestVertexMedianM": 0.004810548258599687,
+            "symmetricNearestVertexP95M": 0.00880334665895163,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          }
+        },
+        {
+          "sourceElementFileId": "FJ3288",
+          "zaSourceKey": "ZA-c7010a9-ecb65ff4cc3da710e5a2d157",
+          "zaSourceName": "Hip bone.l",
+          "bp3dSourceSha256": "bfc8b489fee0945cd1d387cf64bd3691af8e033fa72f9fccae45cfd55ac88694",
+          "zaEvaluatedGeometrySha256": "dbd1b9bebca230ac73bdd9494471d8e62a5491d7134b4ca8f67c397957fed76f",
+          "centroidDerivedTranslationMetres": [
+            -0.002393657565939969,
+            0.052955088646730375,
+            -0.08400686460005333
+          ],
+          "residualFromRegionalMedianMetres": [
+            -0.0026436702993197325,
+            -0.001965132737465458,
+            0.000915939590764206
+          ],
+          "residualNormMetres": 0.0034190180843764297,
+          "preRegistrationSurface": {
+            "queryVerticesEachDirection": [
+              252,
+              237
+            ],
+            "directedNearestVertexMedianM": [
+              0.05947538694092043,
+              0.04970720987019395
+            ],
+            "directedNearestVertexP95M": [
+              0.09331756890684723,
+              0.09281509020682385
+            ],
+            "symmetricNearestVertexMedianM": 0.054995467444721176,
+            "symmetricNearestVertexP95M": 0.09305398914242272,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          },
+          "regionalFitSurface": {
+            "queryVerticesEachDirection": [
+              252,
+              237
+            ],
+            "directedNearestVertexMedianM": [
+              0.004618254708521155,
+              0.005067623054637419
+            ],
+            "directedNearestVertexP95M": [
+              0.008198797167130427,
+              0.009254312841149815
+            ],
+            "symmetricNearestVertexMedianM": 0.0047590629784401576,
+            "symmetricNearestVertexP95M": 0.008882896588288228,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          }
+        },
+        {
+          "sourceElementFileId": "FJ3393",
+          "zaSourceKey": "ZA-c7010a9-95b8d859c84ae9e56cacdafc",
+          "zaSourceName": "Sacrum",
+          "bp3dSourceSha256": "cd04cc9f78d758ba34e92896914f647d22d257b9e7e51b97764670f694033489",
+          "zaEvaluatedGeometrySha256": "50fa8931a53276c5b317c92799716c4f89139484fafa3d5cb93ac689500734ad",
+          "centroidDerivedTranslationMetres": [
+            0.0002500127333797636,
+            0.056685749137762476,
+            -0.08824861077303697
+          ],
+          "residualFromRegionalMedianMetres": [
+            0.0,
+            0.0017655277535666425,
+            -0.00332580658221944
+          ],
+          "residualNormMetres": 0.0037653788217054903,
+          "preRegistrationSurface": {
+            "queryVerticesEachDirection": [
+              253,
+              253
+            ],
+            "directedNearestVertexMedianM": [
+              0.0773848492092121,
+              0.08459235960844819
+            ],
+            "directedNearestVertexP95M": [
+              0.11621405628370401,
+              0.09700504602135296
+            ],
+            "symmetricNearestVertexMedianM": 0.08210278681912614,
+            "symmetricNearestVertexP95M": 0.1006258397230181,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          },
+          "regionalFitSurface": {
+            "queryVerticesEachDirection": [
+              253,
+              253
+            ],
+            "directedNearestVertexMedianM": [
+              0.002638034419337251,
+              0.002698493310456373
+            ],
+            "directedNearestVertexP95M": [
+              0.021403318721540474,
+              0.005905289584434512
+            ],
+            "symmetricNearestVertexMedianM": 0.0026693894707976703,
+            "symmetricNearestVertexP95M": 0.008127025685745111,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          }
+        }
+      ]
+    },
+    "thorax": {
+      "translationBp3dToZaMetres": [
+        -0.00013497025548944862,
+        0.07219059492950408,
+        -0.10143923834668679
+      ],
+      "anchors": [
+        {
+          "sourceElementFileId": "FJ3153",
+          "zaSourceKey": "ZA-c7010a9-492b8564566beb4155afe719",
+          "zaSourceName": "Xiphoid process",
+          "bp3dSourceSha256": "371573a43e28506d674bf4999ee4c50c0497014aa8d69865f450a078d493a495",
+          "zaEvaluatedGeometrySha256": "c7d07b5ad555404dab4e03c370aa267bbdb42fa768ad091ce876b09f3ba6102b",
+          "centroidDerivedTranslationMetres": [
+            -2.398254852652293e-05,
+            0.05761333921678391,
+            -0.10280356460950073
+          ],
+          "residualFromRegionalMedianMetres": [
+            0.0001109877069629257,
+            -0.014577255712720172,
+            -0.0013643262628139363
+          ],
+          "residualNormMetres": 0.014641382739909971,
+          "preRegistrationSurface": {
+            "queryVerticesEachDirection": [
+              248,
+              230
+            ],
+            "directedNearestVertexMedianM": [
+              0.11331026631633359,
+              0.1070970388221516
+            ],
+            "directedNearestVertexP95M": [
+              0.11730671797701345,
+              0.11818957165487065
+            ],
+            "symmetricNearestVertexMedianM": 0.11032981434801514,
+            "symmetricNearestVertexP95M": 0.1177941369371111,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          },
+          "regionalFitSurface": {
+            "queryVerticesEachDirection": [
+              248,
+              230
+            ],
+            "directedNearestVertexMedianM": [
+              0.011215043664579767,
+              0.005337323028630117
+            ],
+            "directedNearestVertexP95M": [
+              0.013264628859264143,
+              0.014551153506171937
+            ],
+            "symmetricNearestVertexMedianM": 0.0062410088034093045,
+            "symmetricNearestVertexP95M": 0.01346343689782831,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          }
+        },
+        {
+          "sourceElementFileId": "FJ3178",
+          "zaSourceKey": "ZA-c7010a9-a7c8e4f4119fede30c949007",
+          "zaSourceName": "Body of sternum",
+          "bp3dSourceSha256": "ec90f03f2ce1edebc8793a9e9973229b198d6367eb5eab1dff6e238110e94d9d",
+          "zaEvaluatedGeometrySha256": "2393bd349a143bd5b5f181f93f5596cd372e57339e72da7fa4e04e592aa12466",
+          "centroidDerivedTranslationMetres": [
+            -0.0008150337472650282,
+            0.07219059492950408,
+            -0.10143923834668679
+          ],
+          "residualFromRegionalMedianMetres": [
+            -0.0006800634917755796,
+            0.0,
+            0.0
+          ],
+          "residualNormMetres": 0.0006800634917755796,
+          "preRegistrationSurface": {
+            "queryVerticesEachDirection": [
+              247,
+              249
+            ],
+            "directedNearestVertexMedianM": [
+              0.09053640293556997,
+              0.07585258368967603
+            ],
+            "directedNearestVertexP95M": [
+              0.11298014700393418,
+              0.1132397612480964
+            ],
+            "symmetricNearestVertexMedianM": 0.08162845925976928,
+            "symmetricNearestVertexP95M": 0.11310729685545165,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          },
+          "regionalFitSurface": {
+            "queryVerticesEachDirection": [
+              247,
+              249
+            ],
+            "directedNearestVertexMedianM": [
+              0.002217914578970924,
+              0.0026950108647191694
+            ],
+            "directedNearestVertexP95M": [
+              0.00693733982604015,
+              0.011602203964535759
+            ],
+            "symmetricNearestVertexMedianM": 0.0024495703878755965,
+            "symmetricNearestVertexP95M": 0.009940771213511302,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          }
+        },
+        {
+          "sourceElementFileId": "FJ3290",
+          "zaSourceKey": "ZA-c7010a9-52e3a5b946ff5a2410b74a61",
+          "zaSourceName": "Manubrium of sternum",
+          "bp3dSourceSha256": "e94f731d044131260947146ab79fa7c4712865e1aac36a1410003358b96e0692",
+          "zaEvaluatedGeometrySha256": "580796ec6d461bd818e57a77d902370a822a26d5e6c45da7b0d029b6560a0f43",
+          "centroidDerivedTranslationMetres": [
+            -0.00013497025548944862,
+            0.07841828213942148,
+            -0.0992419835924293
+          ],
+          "residualFromRegionalMedianMetres": [
+            0.0,
+            0.0062276872099173985,
+            0.0021972547542574855
+          ],
+          "residualNormMetres": 0.006603939463659239,
+          "preRegistrationSurface": {
+            "queryVerticesEachDirection": [
+              241,
+              223
+            ],
+            "directedNearestVertexMedianM": [
+              0.08785133373830974,
+              0.10451136917929357
+            ],
+            "directedNearestVertexP95M": [
+              0.1158720627949192,
+              0.1238231495022144
+            ],
+            "symmetricNearestVertexMedianM": 0.09991509422751348,
+            "symmetricNearestVertexP95M": 0.12168802972237393,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          },
+          "regionalFitSurface": {
+            "queryVerticesEachDirection": [
+              241,
+              223
+            ],
+            "directedNearestVertexMedianM": [
+              0.002820680626903797,
+              0.004840113210421751
+            ],
+            "directedNearestVertexP95M": [
+              0.007261703107905122,
+              0.007854028146120967
+            ],
+            "symmetricNearestVertexMedianM": 0.0034093105664943155,
+            "symmetricNearestVertexP95M": 0.007664975023224307,
+            "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+          }
+        }
+      ]
+    }
+  },
+  "allRegionResiduals": [
+    {
+      "sourceElementFileId": "FJ3152",
+      "zaSourceKey": "ZA-c7010a9-74a765dc396d690d1642153e",
+      "translationResidualNormMetres": 0.017084880539701676,
+      "postRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          214,
+          237
+        ],
+        "directedNearestVertexMedianM": [
+          0.008744660890475892,
+          0.00889931613978893
+        ],
+        "directedNearestVertexP95M": [
+          0.016430148603193584,
+          0.018093693067346674
+        ],
+        "symmetricNearestVertexMedianM": 0.0088152430509595,
+        "symmetricNearestVertexP95M": 0.01725371791534096,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      }
+    },
+    {
+      "sourceElementFileId": "FJ3288",
+      "zaSourceKey": "ZA-c7010a9-ecb65ff4cc3da710e5a2d157",
+      "translationResidualNormMetres": 0.01751594235831216,
+      "postRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          252,
+          237
+        ],
+        "directedNearestVertexMedianM": [
+          0.008575385040103526,
+          0.00875388667337296
+        ],
+        "directedNearestVertexP95M": [
+          0.016226866908320238,
+          0.0174929980272764
+        ],
+        "symmetricNearestVertexMedianM": 0.008692645311430424,
+        "symmetricNearestVertexP95M": 0.01652774954315514,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      }
+    },
+    {
+      "sourceElementFileId": "FJ3393",
+      "zaSourceKey": "ZA-c7010a9-95b8d859c84ae9e56cacdafc",
+      "translationResidualNormMetres": 0.013941222203057387,
+      "postRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          253,
+          253
+        ],
+        "directedNearestVertexMedianM": [
+          0.006987849699628993,
+          0.006025774594549517
+        ],
+        "directedNearestVertexP95M": [
+          0.02412812201579536,
+          0.013805233563365112
+        ],
+        "symmetricNearestVertexMedianM": 0.006414106574503371,
+        "symmetricNearestVertexP95M": 0.016176450463905766,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      }
+    },
+    {
+      "sourceElementFileId": "FJ3157",
+      "zaSourceKey": "ZA-c7010a9-484ccd540149a7cdad5c74a8",
+      "translationResidualNormMetres": 0.007921232621824219,
+      "postRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          241,
+          226
+        ],
+        "directedNearestVertexMedianM": [
+          0.004062553631536474,
+          0.004121253309805113
+        ],
+        "directedNearestVertexP95M": [
+          0.008295742505106183,
+          0.008866137015297936
+        ],
+        "symmetricNearestVertexMedianM": 0.004084858157087592,
+        "symmetricNearestVertexP95M": 0.008570408796991103,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      }
+    },
+    {
+      "sourceElementFileId": "FJ3159",
+      "zaSourceKey": "ZA-c7010a9-0bc91f56657c8ad942f9f283",
+      "translationResidualNormMetres": 0.005703573143677135,
+      "postRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          235,
+          224
+        ],
+        "directedNearestVertexMedianM": [
+          0.0036542566324389947,
+          0.003539965896743492
+        ],
+        "directedNearestVertexP95M": [
+          0.006992018666698398,
+          0.0077303012631504825
+        ],
+        "symmetricNearestVertexMedianM": 0.003565109411555926,
+        "symmetricNearestVertexP95M": 0.007453791183148625,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      }
+    },
+    {
+      "sourceElementFileId": "FJ3162",
+      "zaSourceKey": "ZA-c7010a9-4ce8a03807489dbb188edadb",
+      "translationResidualNormMetres": 0.005070616116498741,
+      "postRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          232,
+          226
+        ],
+        "directedNearestVertexMedianM": [
+          0.003501982053144501,
+          0.003447488067579694
+        ],
+        "directedNearestVertexP95M": [
+          0.007164559447192775,
+          0.008034265578776288
+        ],
+        "symmetricNearestVertexMedianM": 0.003477006941948844,
+        "symmetricNearestVertexP95M": 0.007429459991139084,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      }
+    },
+    {
+      "sourceElementFileId": "FJ3165",
+      "zaSourceKey": "ZA-c7010a9-aae2ed33f4a0bf4f1ad5387a",
+      "translationResidualNormMetres": 0.009132416258198986,
+      "postRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          246,
+          238
+        ],
+        "directedNearestVertexMedianM": [
+          0.004616679552679257,
+          0.004090367714117419
+        ],
+        "directedNearestVertexP95M": [
+          0.009764838277286199,
+          0.009449058754132364
+        ],
+        "symmetricNearestVertexMedianM": 0.004360327770393022,
+        "symmetricNearestVertexP95M": 0.009545622684826298,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      }
+    },
+    {
+      "sourceElementFileId": "FJ3168",
+      "zaSourceKey": "ZA-c7010a9-0532a0f965344c7db7218160",
+      "translationResidualNormMetres": 0.014889531603470403,
+      "postRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          235,
+          252
+        ],
+        "directedNearestVertexMedianM": [
+          0.0070876878046870085,
+          0.004987234218212911
+        ],
+        "directedNearestVertexP95M": [
+          0.011512096374675596,
+          0.011999172986559335
+        ],
+        "symmetricNearestVertexMedianM": 0.006088644640823102,
+        "symmetricNearestVertexP95M": 0.011719531609179832,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      }
+    },
+    {
+      "sourceElementFileId": "FJ3153",
+      "zaSourceKey": "ZA-c7010a9-492b8564566beb4155afe719",
+      "translationResidualNormMetres": 0.005541999284068899,
+      "postRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          248,
+          230
+        ],
+        "directedNearestVertexMedianM": [
+          0.002249468785249364,
+          0.004254940391679916
+        ],
+        "directedNearestVertexP95M": [
+          0.004884584390630957,
+          0.0070401809240116745
+        ],
+        "symmetricNearestVertexMedianM": 0.0026771808145917945,
+        "symmetricNearestVertexP95M": 0.006879964035523784,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      }
+    },
+    {
+      "sourceElementFileId": "FJ3178",
+      "zaSourceKey": "ZA-c7010a9-a7c8e4f4119fede30c949007",
+      "translationResidualNormMetres": 0.019890127621037812,
+      "postRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          247,
+          249
+        ],
+        "directedNearestVertexMedianM": [
+          0.0027517461964463924,
+          0.004758971295055913
+        ],
+        "directedNearestVertexP95M": [
+          0.007899629334485403,
+          0.01394176458794698
+        ],
+        "symmetricNearestVertexMedianM": 0.0035564931558944163,
+        "symmetricNearestVertexP95M": 0.011882979553118768,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      }
+    },
+    {
+      "sourceElementFileId": "FJ3290",
+      "zaSourceKey": "ZA-c7010a9-52e3a5b946ff5a2410b74a61",
+      "translationResidualNormMetres": 0.026218899030127432,
+      "postRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          241,
+          223
+        ],
+        "directedNearestVertexMedianM": [
+          0.013969434695462897,
+          0.014727558643043294
+        ],
+        "directedNearestVertexP95M": [
+          0.020557630553579342,
+          0.024959535355430617
+        ],
+        "symmetricNearestVertexMedianM": 0.014359761687733594,
+        "symmetricNearestVertexP95M": 0.024025689075162886,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      }
+    },
+    {
+      "sourceElementFileId": "FJ3200",
+      "zaSourceKey": "ZA-c7010a9-78bbaa2bb395956fc914364b",
+      "translationResidualNormMetres": 0.022475526114610837,
+      "postRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          250,
+          244
+        ],
+        "directedNearestVertexMedianM": [
+          0.016248805985345373,
+          0.007036117953102898
+        ],
+        "directedNearestVertexP95M": [
+          0.021740532235876533,
+          0.01864986627582096
+        ],
+        "symmetricNearestVertexMedianM": 0.013722990324997391,
+        "symmetricNearestVertexP95M": 0.021191838678373175,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      }
+    },
+    {
+      "sourceElementFileId": "FJ3289",
+      "zaSourceKey": "ZA-c7010a9-179fa204ccffef5f88aa335f",
+      "translationResidualNormMetres": 0.02461358154083737,
+      "postRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          238,
+          254
+        ],
+        "directedNearestVertexMedianM": [
+          0.00830429287440125,
+          0.010995677093316902
+        ],
+        "directedNearestVertexP95M": [
+          0.024337207186685632,
+          0.023201616560714948
+        ],
+        "symmetricNearestVertexMedianM": 0.009941644665161219,
+        "symmetricNearestVertexP95M": 0.02385208456353133,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      }
+    },
+    {
+      "sourceElementFileId": "FJ3309",
+      "zaSourceKey": "ZA-c7010a9-06ebb84f8a0406bd37b531c1",
+      "translationResidualNormMetres": 0.026985353785772565,
+      "postRegistrationSurface": {
+        "queryVerticesEachDirection": [
+          250,
+          251
+        ],
+        "directedNearestVertexMedianM": [
+          0.015115023860572202,
+          0.019493440620686954
+        ],
+        "directedNearestVertexP95M": [
+          0.022727059479517614,
+          0.024157386600427877
+        ],
+        "symmetricNearestVertexMedianM": 0.01650602075534171,
+        "symmetricNearestVertexP95M": 0.023975930186866445,
+        "interpretation": "vertex-to-vertex diagnostic; not exact point-to-triangle distance or human anatomy approval"
+      }
+    }
+  ],
+  "interpretation": {
+    "aabbUsed": false,
+    "singleTransformAccepted": false,
+    "regionalTranslationsAreApplied": false,
+    "existingPelvisTransformStatus": "pelvis-local geometric candidate only; not independently established for all 13 supplement objects",
+    "anatomicalHumanReview": "not_performed",
+    "rights": "unchanged; local item decisions only, public redistribution held",
+    "sourceBytesModified": false,
+    "reason": "Matched exact bone pairs yield materially different regional centroid-derived translations and all-region residuals. A one-transform fit is not accepted solely from shared axes, labels, or visual plausibility. New muscle surfaces remain source observations until cross-region placement is supported."
+  },
+  "inputSha256": {
+    "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/01-back-bone-1.glb": "c5caefb8da090f755bdc64fa8a126f08a2370b111028e2b47015718863a7675a",
+    "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/06-gluteal-hip-bone-0.glb": "a38810d8b018177a6e99e37d65957c7bce5a2f5a95105ed7bc37034e50ad6d21",
+    "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/09-head-bone-1.glb": "92238ba9e71b4a5e6dedf6dc3b78c541d8f28af2969fbb9cd4447031dc737fd2",
+    "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/15-pelvis-perineum-bone-1.glb": "0fa92ba735b8a17bffda7aac43a4409d5a8d7b981941da36ceaff1fc79b5e986",
+    "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/bodyparts3d-r4/converted/t77/25-thorax-bone-1.glb": "b17e017900ae01dced43ab0679c892bf1a46485f5e6863354df8adf635902ae3",
+    "atlas-data/source-cache/bodyparts3d-r4/converted/t77/manifest.json": "67a2f79b9248d18a754a6567e1b0bb4b1fce698ad0e3100a172b428ee58341f8",
+    "atlas-data/source-cache/datasets/bp3d/registry.json": "d83b9a0502af42e1742aa46fb22112e46927003c193dad5f42058fe7541df6a3",
+    "atlas-data/source-cache/datasets/za/compiled/manifest.json": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42",
+    "atlas-data/source-cache/datasets/za/resources/1fa280a6bab9381858fe6773fbcfd5662fafa271dec8f27c5eb752a9d48676f7.glb": "1fa280a6bab9381858fe6773fbcfd5662fafa271dec8f27c5eb752a9d48676f7",
+    "atlas-data/source-cache/datasets/za/resources/25718a5fdce98a3c8aba6afa9c075e06eaa9c47d73b475ca0aae9d8d956da5be.glb": "25718a5fdce98a3c8aba6afa9c075e06eaa9c47d73b475ca0aae9d8d956da5be",
+    "atlas-data/source-cache/datasets/za/resources/36f12be64f470f555eae0faea8b5b76dc543ad5f81d6dfcb991cddc2257d68f2.glb": "36f12be64f470f555eae0faea8b5b76dc543ad5f81d6dfcb991cddc2257d68f2",
+    "atlas-data/source-cache/datasets/za/resources/6142ed1512adf745dc1eb86ef60849428bd93917e7feb4bb68e276303ea9c6a2.glb": "6142ed1512adf745dc1eb86ef60849428bd93917e7feb4bb68e276303ea9c6a2",
+    "atlas-data/source-cache/datasets/za/resources/649f3fb3c2ba49a9bf2a51bf59fec2e70c53e0abce3ec1a9b7af4016618b419a.glb": "649f3fb3c2ba49a9bf2a51bf59fec2e70c53e0abce3ec1a9b7af4016618b419a",
+    "atlas-data/source-cache/datasets/za/resources/6baacaab7d05e148c55b9c3a247e9c87437d83445978a7eacf04d90a9ea060e9.glb": "6baacaab7d05e148c55b9c3a247e9c87437d83445978a7eacf04d90a9ea060e9",
+    "atlas-data/source-cache/datasets/za/resources/84134f4062575d8a8e00f1dc27388aaabec40f5979ec8962c816fb050d2d40bc.glb": "84134f4062575d8a8e00f1dc27388aaabec40f5979ec8962c816fb050d2d40bc",
+    "atlas-data/source-cache/datasets/za/resources/929fc5f8007661ca652772a67596786f74c7de317b65abd0b9b26a13877b5218.glb": "929fc5f8007661ca652772a67596786f74c7de317b65abd0b9b26a13877b5218",
+    "atlas-data/source-cache/datasets/za/resources/98818c436b3d63039f88201119018c7c11c857ae8244b1af43fb20d2f66f0bfa.glb": "98818c436b3d63039f88201119018c7c11c857ae8244b1af43fb20d2f66f0bfa",
+    "atlas-data/source-cache/datasets/za/resources/af90a7d9bd1cf6629cb35fc81d626f218ea9d418739e4469c063bd79690c551d.glb": "af90a7d9bd1cf6629cb35fc81d626f218ea9d418739e4469c063bd79690c551d",
+    "atlas-data/source-cache/datasets/za/resources/c56ad3a8d680bd0541594a773918dc76184a95978b25cecd0bfb55d51bf144b8.glb": "c56ad3a8d680bd0541594a773918dc76184a95978b25cecd0bfb55d51bf144b8",
+    "atlas-data/source-cache/datasets/za/resources/dc374c89db784a53d15691d9f0959772f760e8236cb9c15c3013f8ac10737f1c.glb": "dc374c89db784a53d15691d9f0959772f760e8236cb9c15c3013f8ac10737f1c",
+    "atlas-data/source-cache/datasets/za/resources/ec41967935ab55c3f3479a2ee20d6f47098ff1f5383215f64f31fa3c251dd71d.glb": "ec41967935ab55c3f3479a2ee20d6f47098ff1f5383215f64f31fa3c251dd71d",
+    "atlas-data/source-cache/datasets/za/resources/f30e7dde9af1332e42998dd0cb680aca9091358ba2cae87223b3e23a7cd08b7b.glb": "f30e7dde9af1332e42998dd0cb680aca9091358ba2cae87223b3e23a7cd08b7b",
+    "work/evidence/T100/source-completion-2026-10-01/integration/registration-evidence.json": "babed8f5feeb0e4989b214f03d892b57272047a79beb456bee59cfdb069b597c",
+    "work/evidence/T50/scene-contract.md": "2697496d18bd1fc58adca557d95364092f7c7189bff4218277882142c8b26fa4",
+    "work/evidence/T69/diagnostic.json": "39f8086df7042349633e3c19e7e60e81669ca49be63b0d4e3be88d15cfd93cca",
+    "work/evidence/T71/frozen-source-set.json": "6a6ca966a3315895f75309ac83b9fb32709eeafcabdfd270ebcb6f401f3a94a3",
+    "work/evidence/T72/frozen-source-set.json": "0ca12d3b8fbcef08e96d93eee374c1b25c9ea2a40ac953c35c7cb687d6e9924f"
+  }
+}

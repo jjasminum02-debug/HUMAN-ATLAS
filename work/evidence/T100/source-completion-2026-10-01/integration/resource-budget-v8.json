@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "t100-mixed-source-resource-budget-v2",
+  "taskId": "T100",
+  "recordedAt": "2026-10-01",
+  "currentRuntime": {
+    "path": "/__atlas/integration.json",
+    "sha256": "b5c6a321e402c7792970b6a383ffb9a532fb33e4ab486f1211ad38fba2766201",
+    "bytes": 906076,
+    "objects": 973,
+    "chunks": 15,
+    "baseZaObjects": 960,
+    "supplementObjects": 13
+  },
+  "geometryAndCache": {
+    "supplementObjects": 13,
+    "supplementDetailTriangles": 91430,
+    "supplementGeometryBytes": 1820364,
+    "baseZaFullChunkBytes": 60052604,
+    "supplementUniqueChunkBytes": 17609608,
+    "combinedAllChunksBytes": 77662212,
+    "supplementDefaultVisible": false
+  },
+  "supplementChunks": [
+    {
+      "chunkId": "02-back-muscle-0",
+      "sha256": "cd4b4a211649281d628a040ad9dc1d9f598fa552e37e8cd4bf83abfa46a93acd",
+      "bytes": 7575744,
+      "exists": true,
+      "objectsInSupplement": 2
+    },
+    {
+      "chunkId": "06-gluteal-hip-bone-0",
+      "sha256": "a38810d8b018177a6e99e37d65957c7bce5a2f5a95105ed7bc37034e50ad6d21",
+      "bytes": 105976,
+      "exists": true,
+      "objectsInSupplement": 2
+    },
+    {
+      "chunkId": "10-head-muscle-0",
+      "sha256": "0ff516a1d3ea9cbaedc6522876daef8d70bba79e105b80532e7f0e4b78cc6a16",
+      "bytes": 2385972,
+      "exists": true,
+      "objectsInSupplement": 4
+    },
+    {
+      "chunkId": "14-neck-muscle-0",
+      "sha256": "97e26eae356bd3204bf12307d87a4d8db8d54a2f07dfa5e9de9c96ae474ed1e6",
+      "bytes": 7341968,
+      "exists": true,
+      "objectsInSupplement": 4
+    },
+    {
+      "chunkId": "15-pelvis-perineum-bone-1",
+      "sha256": "0fa92ba735b8a17bffda7aac43a4409d5a8d7b981941da36ceaff1fc79b5e986",
+      "bytes": 199948,
+      "exists": true,
+      "objectsInSupplement": 1
+    }
+  ],
+  "unchangedBaseAssetManifest": {
+    "path": "atlas-data/source-cache/datasets/za/compiled/manifest.json",
+    "sha256": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42"
+  },
+  "currentSupplementManifest": {
+    "path": "atlas-data/manifests/bodyparts3d-r4-t100-source-supplement.json",
+    "sha256": "9751c3882cde0c23108cc8840cc047a710dc24900cdb8894f84c450319aae00a",
+    "bytes": 117014
+  },
+  "deliveryObservations": {
+    "actualRuntimeEndpointResponseVerifiedInBrowser": true,
+    "runtimeBytes": 906076,
+    "sourceChunkBytesAreLocalCacheManifestSizesNotNetworkTransferredBytes": true,
+    "assetChunkBytesByBrowserRequest": null,
+    "gpuVramFpsTotalProcessMemory": "not_measured_not_an_automatic_gate"
+  },
+  "claimBoundary": "The byte/triangle figures are cached/compiled asset and loader-accounting observations; they do not establish GPU residency, application process memory, or anatomical acceptance.",
+  "provenance": {
+    "runtimeValidation": {
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/runtime-v8/mixed-runtime-route-validation.json",
+      "sha256": "d6123dffbd59b4203b01920dd19086a6b5389d28b145665f9277ea04ee6d4830"
+    },
+    "currentBrowserRasterLedger": {
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v8/raster-ledger.json",
+      "sha256": "44e2964bffe783f6bcd32348eddd11c4fc25727abf074d839a1890b2f25fb295"
+    },
+    "responsiveBrowserSmoke": {
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v11/responsive-browser-smoke.json",
+      "sha256": "bba23a882e10b51c795bf81751cf8936f3717bd04802362afa43c3bba65dbfc5"
+    }
+  }
+}
