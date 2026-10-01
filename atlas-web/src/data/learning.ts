@@ -1,93 +1,73 @@
-import summaries from "../../../atlas-data/terminology/learning-structure-summaries.json";
-import aiEvidenceOverlay from "../../../atlas-data/terminology/ai-evidence-overlay.json";
-import sourceStructureContent from "../../../atlas-data/terminology/learner-structure-source-content.json";
-import motionLearningBundle from "../../../atlas-data/motion/motion-learning.json";
-import names from '../../../atlas-data/terminology/learning-names.json';
-import { displayTerms, termText, type PilotCatalog } from './catalog';
-import { learnerNameProjection, learnerSearchEntry, learnerVisibleTerms, mergeLearningConcepts, searchEntries, withoutHanScript, type SearchEntry } from '../domain/search';
-import { projectAiEvidenceField, type AiEvidenceField, type LearnerFieldProjection } from '../domain/aiEvidence';
-import { projectLegacySummary, type LegacyLearningSummary } from '../domain/legacyEvidenceAdapter';
-import { projectLearnerActionCard, projectLearnerMotionActionOptions, type MotionLearningBundle } from '../domain/motionLearning';
-import { learnerStructureText } from '../domain/learnerStructureText';
-import { learnerStructureSourceText, learnerStructureUnavailability, type SourceStructureContentRecord } from '../domain/learnerStructureSourceContent';
-import { learnerActionExplanation } from '../domain/learnerActionText';
-const rawNameSources = names.sources as Record<string, { title: string; url: string | null; locator: string }>;
-export const nameSources = Object.fromEntries(Object.entries(rawNameSources).map(([id, source]) => [id, {
-  ...source, title: withoutHanScript(source.title), locator: withoutHanScript(source.locator),
-}])) as Record<string, { title: string; url: string | null; locator: string }>;
-export const vocabulary = names.entries;
+import learnerCardRuntime from "../../../atlas-data/terminology/learner-card-runtime.json";
+import { displayTerms, termText, type PilotCatalog } from "./catalog";
+import { learnerNameProjection, learnerSearchEntry, learnerVisibleTerms, mergeLearningConcepts, searchEntries, type SearchEntry } from "../domain/search";
+import type { LearnerFieldProjection } from "../domain/aiEvidence";
+import { learnerStructureUnavailability } from "../domain/learnerStructureSourceContent";
+
+type LearnerCardRuntime = {
+  schemaVersion: "learner-card-runtime-v1";
+  names: Array<{ id: string; label: string; korean: string; english: string; aliases: string[]; parentId: string | null; entityType: string; lookupOnly: boolean }>;
+  structure: {
+    byConcept: Record<string, Partial<Record<"origin" | "insertion", string>>>;
+    bySource: Record<string, Partial<Record<"origin" | "insertion", string>>>;
+  };
+  actions: Array<{ conceptId: string; key: string; label: string; explanation: string; candidateSide: string | null }>;
+};
+
+const cardRuntime = learnerCardRuntime as LearnerCardRuntime;
+export const vocabulary = cardRuntime.names;
 
 export function nameFor(catalog: PilotCatalog, id: string) {
-  const entry = vocabulary.find(row => row.id === id);
+  const entry = vocabulary.find((row) => row.id === id);
   const terms = learnerVisibleTerms(displayTerms(catalog, id));
-  const projected = learnerNameProjection(id, entry ?? {}, {
-    korean: terms.find(term => term.language === 'ko')?.text,
-    english: termText(catalog, id, 'en'),
-    latin: termText(catalog, id, 'la'),
+  return learnerNameProjection(id, entry ?? {}, {
+    korean: terms.find((term) => term.language === "ko")?.text,
+    english: termText(catalog, id, "en"),
+    latin: termText(catalog, id, "la"),
   });
-  return {
-    ...projected, sources: entry?.sourceIds ?? [],
-  };
 }
+
 export function learningConcepts(catalog: PilotCatalog) {
   return mergeLearningConcepts(catalog.concepts, vocabulary);
 }
+
 export function findMuscles(catalog: PilotCatalog, query: string) {
-  const entries: SearchEntry[] = learningConcepts(catalog).map(concept => {
-    const n = nameFor(catalog, concept.id);
-    const custom = vocabulary.find(row => row.id === concept.id);
+  const entries: SearchEntry[] = learningConcepts(catalog).map((concept) => {
+    const names = nameFor(catalog, concept.id);
+    const custom = vocabulary.find((row) => row.id === concept.id);
     const terms = learnerVisibleTerms(displayTerms(catalog, concept.id));
-    return learnerSearchEntry(concept.id, n.label, [n.koTraditional, n.koModern, n.en, ...custom?.aliases ?? [],
-      ...terms.flatMap(t => typeof t.text === 'string' ? [t.text] : [])]);
+    return learnerSearchEntry(concept.id, names.label, [names.koTraditional, names.koModern, names.en, ...custom?.aliases ?? [],
+      ...terms.flatMap((term) => typeof term.text === "string" ? [term.text] : [])]);
   });
   return searchEntries(entries, query);
 }
 
-const aiFieldItems = (aiEvidenceOverlay as { items: AiEvidenceField[] }).items;
-const legacySummaryRows = summaries as LegacyLearningSummary[];
-const motionBundle = motionLearningBundle as MotionLearningBundle;
-const sourceStructureContentRows = (sourceStructureContent as { records: SourceStructureContentRecord[] }).records;
-const sourceStructureContentByKey = new Map(sourceStructureContentRows.flatMap(row => row.sourceKeys.map(sourceKey => [sourceKey, row] as const)));
-
-/** Project a source-bound muscle action without exposing evidence, task, or authoring identifiers. */
-export function actionCardForLearner(conceptId: string) {
-  const action = motionBundle.muscleActions.find((row) => row.subjectIds.includes(conceptId));
-  const card = projectLearnerActionCard(action, aiFieldItems);
-  return card ? { ...card, explanation: learnerActionExplanation(card.explanation) } : null;
-}
-
-/** Return only authored action rows and their exactly compatible, technically bound clip, if any. */
+/** Learner-only action text is preprojected; source/evidence references stay out of this bundle. */
 export function motionActionOptionsForLearner(conceptId: string) {
-  return projectLearnerMotionActionOptions(conceptId, motionBundle, aiFieldItems).map((option) => ({
-    ...option,
-    text: { ...option.text, explanation: learnerActionExplanation(option.text.explanation) },
+  return cardRuntime.actions.filter((row) => row.conceptId === conceptId).map((row) => ({
+    id: row.key,
+    label: row.label,
+    text: { label: row.label, explanation: row.explanation },
+    candidateSide: row.candidateSide,
   }));
 }
 
-/** Prefer the current field overlay; keep an exact-text legacy fallback for older fields.
- * The returned projection intentionally omits internal evidence/review/geometry/motion codes.
- */
+/** Learner-safe field projection; provenance and review detail stay in development evidence. */
 export function structureFieldForLearner(conceptId: string, field: string): LearnerFieldProjection | null {
-  const aiField = aiFieldItems.find((row) => row.subjectId === conceptId && row.field === field);
-  if (aiField) return projectAiEvidenceField(aiField);
-  const legacy = legacySummaryRows.find((row) => row.conceptId === conceptId && row.role === field);
-  return projectLegacySummary(legacy);
+  if (field !== "origin" && field !== "insertion") return null;
+  const text = cardRuntime.structure.byConcept[conceptId]?.[field];
+  return text ? { text, note: null, alternatives: [], sources: [], quizEligible: false } : null;
 }
 
-/** Plain learner sentence only. Source, alternative, and review details stay internal. */
 export function structureTextForLearner(conceptId: string, field: string): string | null {
-  const aiField = aiFieldItems.find((row) => row.subjectId === conceptId && row.field === field);
-  const legacy = legacySummaryRows.find((row) => row.conceptId === conceptId && row.role === field);
-  return learnerStructureText(aiField, legacy);
+  return structureFieldForLearner(conceptId, field)?.text ?? null;
 }
 
-/** Project existing claims only through the exact source-scoped pointers frozen by T81. */
+/** Resolve only the source-scoped learner text frozen from T81 pointers. */
 export function structureTextForSource(sourceKey: string, field: "origin" | "insertion"): string | null {
-  const record = sourceStructureContentByKey.get(sourceKey);
-  return learnerStructureSourceText(record, field, structureTextForLearner);
+  return cardRuntime.structure.bySource[sourceKey]?.[field] ?? null;
 }
 
-/** Short learner-safe explanation for fields without a validated display sentence. */
 export function structureUnavailabilityForLearner(field: "origin" | "insertion" | "motorNerve" | "sensoryProprioception") {
   return learnerStructureUnavailability(field);
 }

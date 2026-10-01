@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "t82-verification-v1",
+  "taskId": "T82",
+  "checkedOn": "2026-10-01",
+  "baselineHead": "177f8cc48bdf4f612ff334ee17a73feaa2abddb9",
+  "result": "passed_scoped_acceptance",
+  "automated": [
+    {
+      "command": "python3 work/tools/validate_t81_content.py",
+      "status": "passed",
+      "evidence": "work/evidence/T82/card-contract-audit.json"
+    },
+    {
+      "command": "node --experimental-strip-types --test src/data/learnerCardRuntime.test.ts src/data/learning.test.ts",
+      "status": "passed",
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "command": "node --experimental-strip-types --test src/domain/aiEvidence.test.ts src/domain/legacyEvidenceAdapter.test.ts src/domain/t18Evidence.integration.test.ts",
+      "status": "passed",
+      "passed": 9,
+      "failed": 0
+    },
+    {
+      "command": "node --experimental-strip-types --test src/domain/motionLearning.test.ts src/domain/legacyJointActionAdapter.test.ts src/viewer/motionPlayer.test.ts src/viewer/animationPlayback.test.ts src/data/learning.test.ts",
+      "status": "passed",
+      "passed": 21,
+      "failed": 0
+    },
+    {
+      "command": "python3 scripts/validate-learning-content.py",
+      "status": "passed",
+      "result": "81 name entries; 14 summaries; reference/hash checks only"
+    },
+    {
+      "command": "python3 atlas-data/schemas/validate_ai_evidence.py --check",
+      "status": "passed"
+    },
+    {
+      "command": "python3 atlas-data/schemas/validate_bone_name_overlay.py --check",
+      "status": "passed",
+      "result": "9 entries; 9 selectable bones; no actual Hanja collected"
+    },
+    {
+      "command": "python3 atlas-data/schemas/validate_motion_learning.py --check",
+      "status": "passed",
+      "result": "7 actions; 1 definition; 1 asset; no issues"
+    },
+    {
+      "command": "python3 atlas-data/schemas/validate_motion_asset_sources.py",
+      "status": "passed",
+      "result": "2 source candidates; 1 production motion asset; source bytes unchanged"
+    },
+    {
+      "command": "node scripts/check-scene-decoders.mjs",
+      "status": "passed",
+      "result": "11 meshes / 712192 bytes and 9 meshes / 205392 bytes"
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc -b --pretty false",
+      "status": "passed"
+    },
+    {
+      "command": "vite build",
+      "status": "passed_with_nonblocking_chunk_warning",
+      "result": "App JS 731451 bytes (gzip 182.01 KB); index JS 222370 bytes"
+    },
+    {
+      "command": "node scripts/auditLearnerCardDistribution.mjs",
+      "status": "passed",
+      "evidence": "work/evidence/T82/bundle-audit.json",
+      "result": "5 built files scanned; 274 provenance markers checked; 0 leaks"
+    },
+    {
+      "command": "node scripts/buildLearnerCardRuntime.mjs --check",
+      "status": "passed",
+      "result": "8 concept structure rows; 14 source rows; 7 action rows"
+    }
+  ],
+  "liveBrowser": {
+    "status": "passed_representative_card_flows",
+    "evidence": "work/evidence/T82/browser-observations.json",
+    "cases": [
+      "trapezius-upper",
+      "trapezius-lower",
+      "gastrocnemius-lateral-head",
+      "fibularis-longus-conflict",
+      "abductor-digiti-minimi-foot",
+      "abductor-digiti-minimi-hand"
+    ],
+    "console": "not_captured; no clean-console assertion",
+    "fullExtentAndHumanReview": "not_claimed"
+  },
+  "preservation": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12,
+    "canonicalHaBindings": 130,
+    "historical163Categories": [6, 20, 135, 2],
+    "privateWorkbookRows": 257,
+    "privateWorkbookContentInspected": false,
+    "privateWorkbookHashPreserved": true,
+    "newClaimsOrBindings": 0,
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed"
+  },
+  "knownNonBlockingLimitation": "Production build retains an existing App JavaScript chunk above Vite's 500 KB warning threshold. No disruptive runtime regression was observed in the audited flows; GPU/VRAM and full process memory were not measured."
+}

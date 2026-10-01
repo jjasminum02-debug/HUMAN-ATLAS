@@ -52,7 +52,7 @@ export default function App() {
         return; const pop = () => { setRoute(resolveRoute(location.search, data.integration.objects)); setQuery(history.state?.atlasSearchQuery ?? ''); setDetailsOpen(true); }; window.addEventListener('popstate', pop); return () => window.removeEventListener('popstate', pop); }, [data]);
     const rows = useMemo(() => data ? searchStructures(data.integration.objects, query, route.regions, route.audience ?? 'learner') : [], [data, query, route.regions, route.audience]);
     const selected = data?.integration.objects.find(r => r.sourceKey === route.selected);
-    const actions = useMemo(() => selected?.haConceptId ? motionActionOptionsForLearner(selected.haConceptId).filter(a => !a.candidate || !selected.side || a.candidate.definition.side === selected.side) : [], [selected?.haConceptId, selected?.side]);
+    const actions = useMemo(() => selected?.haConceptId ? motionActionOptionsForLearner(selected.haConceptId).filter(a => !a.candidateSide || !selected.side || a.candidateSide === selected.side) : [], [selected?.haConceptId, selected?.side]);
     const action = actions.find(a => a.id === actionId) ?? actions[0];
     const title = route.regions.length ? navigation.categories.filter(c => route.regions.includes(c.id)).map(c => c.labelKo).join(' · ') : '전신 살펴보기';
     function navigate(next: DatasetRoute, keepExplore = false, searchQuery = query) {

@@ -1648,13 +1648,92 @@
       "title": "지원 구조 설명·카드 감사와 보완",
       "owner": "Luna Max",
       "phase": "G2",
-      "executionStatus": "planned_not_started",
-      "acceptance": "pending",
+      "executionStatus": "completed",
+      "acceptance": "passed",
       "spec": "work/tasks/T82-APP-COMPLETION.md",
       "scope": "T81이 연결한 현재 지원 근육 전체의 기시정지/카드/명칭/갈래와 운동·감각 신경 구분을 감사하고 실질적인 오류를 보완한다. 257행과 전체 target disposition을 확인하되 미검증 세부 연구를 완료로 만들지 않는다. 주요 구조 학습 흐름과 private 원문 비노출을 검증한다. 기존 콘텐츠 backlog나 모든 신경 세부 가지의 미확정만으로 앱 기능 합격을 취소하지 않는다.",
       "progress": {
         "nextUnit": null,
-        "completedUnits": []
+        "completedUnits": [
+          "audit-all-232-supported-muscle-concepts-and-462-surfaces",
+          "preserve-542-target-563-membership-12-region-130-ha-and-historical-163-denominators",
+          "verify-all-257-workbook-row-dispositions-and-private-hash-preservation",
+          "generate-minimal-learner-card-runtime-and-adapt-existing-card-consumers",
+          "verify-trapezius-head-scope-hand-foot-homonyms-and-separate-motor-sensory-fields",
+          "remove-development-provenance-from-learner-distribution-and-add-build-audit",
+          "run-focused-tests-schema-validators-typecheck-production-build-and-live-browser-cases",
+          "record-scoped-product-acceptance-with-partial-content-completeness"
+        ],
+        "pendingUnits": [],
+        "nextId": "T83",
+        "nextOwner": "Luna Max",
+        "nextPromptPath": "work/prompts/app-completion-2026-10-01/06-T83.txt",
+        "productAcceptance": {
+          "contractRevision": "app-completion-2026-10-01",
+          "acceptanceScope": "current_supported_local_product; not all_target_content_or_public_release",
+          "productReadiness": "local_app_ready",
+          "contentCompleteness": "partial",
+          "knownContentGaps": {
+            "denominators": {
+              "targets": 542,
+              "memberships": 563,
+              "regions": 12,
+              "existingCanonicalHaBindings": 130,
+              "historical163": {
+                "total": 163,
+                "categories": {
+                  "6": 6,
+                  "20": 20,
+                  "135": 135,
+                  "2": 2
+                }
+              }
+            },
+            "supportedMuscleScope": {
+              "surfaces": 462,
+              "sourceConcepts": 232
+            },
+            "verifiedStructureClaims": {
+              "targets": 7,
+              "bilateralSurfacePointers": 14,
+              "originAvailable": 6,
+              "originConflicted": 1,
+              "insertionAvailable": 7,
+              "motorNerveAvailable": 0,
+              "sensoryProprioceptionAvailable": 0
+            },
+            "unverifiedStructureFields": {
+              "conceptsWithoutOriginClaim": 225,
+              "conceptsWithOriginConflict": 1,
+              "conceptsWithoutInsertionClaim": 225,
+              "conceptsWithoutMotorNerve": 232,
+              "conceptsWithoutSensoryProprioception": 232
+            },
+            "workbookRows": {
+              "total": 257,
+              "exactEnglishAndRegionCandidateOnlyUnverified": 40,
+              "englishMatchRegionScopeConflict": 1,
+              "noExactCurrentSupportedMuscleMatch": 216,
+              "rowLevelSourceReferences": 0,
+              "actionColumnImported": false
+            },
+            "rightsAndReview": {
+              "sourceOnly": "preserved per item",
+              "publicRedistribution": "held",
+              "humanReview": "not_performed"
+            }
+          },
+          "unresolvedProductBlockers": [],
+          "evidence": [
+            "work/reports/T82.md",
+            "work/evidence/T82/card-contract-audit.json",
+            "work/evidence/T82/browser-observations.json",
+            "work/evidence/T82/bundle-audit.json",
+            "work/evidence/T82/verification.json",
+            "work/evidence/T82/status-delta.json"
+          ]
+        },
+        "result": "Current supported local structure-card flow and provenance boundary pass; content completeness remains partial."
       },
       "report": "work/reports/T82.md",
       "acceptanceScope": "current_supported_local_product; not all_target_content_or_public_release",
@@ -2773,7 +2852,7 @@
   "productReadiness": {
     "state": "local_app_ready",
     "contractRevision": "app-completion-2026-10-01",
-    "next": "T81_not_started",
+    "next": "T83_pending",
     "localAppAcceptance": "passed_current_supported_local_learning_scope",
     "contentCompleteness": "partial",
     "denominators": {
@@ -2792,13 +2871,19 @@
     "acceptedBy": [
       "T100",
       "T80",
-      "T58"
+      "T58",
+      "T81",
+      "T82"
     ],
     "evidence": [
       "work/reports/T100.md",
       "work/reports/T80.md",
       "work/reports/T58.md",
-      "work/evidence/T58/app-finish-2026-10-01/final-validation.json"
+      "work/evidence/T58/app-finish-2026-10-01/final-validation.json",
+      "work/reports/T81.md",
+      "work/reports/T82.md",
+      "work/evidence/T82/verification.json",
+      "work/evidence/T82/bundle-audit.json"
     ]
   }
 }

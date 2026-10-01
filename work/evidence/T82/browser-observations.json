@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "t82-browser-observations-v1",
+  "checkedAt": "2026-10-01",
+  "environment": {
+    "browser": "Codex In-app Browser",
+    "origin": "http://127.0.0.1:5173/",
+    "method": "live local browser accessibility snapshots and visual screenshots",
+    "screenshotFilesSaved": false,
+    "console": "not_captured_by_available_CUA_tab_api"
+  },
+  "sharedChecks": {
+    "regionControls": 12,
+    "structureEntriesVisible": 355,
+    "currentBrowserCardInternalProvenanceMarkers": [],
+    "nameRows": ["우리말명", "한자어명 (한글 표기)", "영어명"],
+    "rightsAndReview": {
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed"
+    },
+    "scopeLimit": "Observed card and view behavior is a representative UI check, not full anatomical extent or human review."
+  },
+  "cases": [
+    {
+      "caseId": "trapezius-upper",
+      "sourceKey": "ZA-c7010a9-e07069f3efea3d66c4e25ac2",
+      "url": "http://127.0.0.1:5173/?source=ZA-c7010a9-e07069f3efea3d66c4e25ac2",
+      "cardMatch": true,
+      "side": "left",
+      "names": {
+        "nativeKorean": "등세모근 위부분",
+        "sinoKorean": "승모근 상부",
+        "english": "Descending part of trapezius muscle"
+      },
+      "observedExtent": "After selected-only view and fit, a narrow posterior neck-to-shoulder surface was visible. This is a visual sample, not a full extent claim.",
+      "screenshot": "visually inspected inline; not saved as a file",
+      "decision": "pass_for_card_name_side_and_sampled_localization"
+    },
+    {
+      "caseId": "trapezius-lower",
+      "sourceKey": "ZA-c7010a9-949cdee8e7b16d22f295af1e",
+      "url": "http://127.0.0.1:5173/?source=ZA-c7010a9-949cdee8e7b16d22f295af1e",
+      "cardMatch": true,
+      "side": "left",
+      "names": {
+        "nativeKorean": "등세모근 아래부분",
+        "sinoKorean": "승모근 하부",
+        "english": "Ascending part of trapezius muscle"
+      },
+      "observedExtent": "The anterior overview occluded the selected surface. In selected-only view, followed by fit, a triangular teal surface over the mid-to-lower posterior trunk was visible. This is a sampled view, not a full extent claim.",
+      "screenshot": "visually inspected inline; not saved as a file",
+      "decision": "pass_for_card_name_side_and_sampled_localization"
+    },
+    {
+      "caseId": "gastrocnemius-lateral-head",
+      "sourceKey": "ZA-c7010a9-09c6b1c0b14247d7765a362b",
+      "url": "http://127.0.0.1:5173/?source=ZA-c7010a9-09c6b1c0b14247d7765a362b",
+      "cardMatch": true,
+      "side": "left",
+      "names": {
+        "nativeKorean": "장딴지근 · 가쪽갈래",
+        "sinoKorean": "비복근 · 외측두",
+        "english": "Lateral head of gastrocnemius"
+      },
+      "origin": "비복근 외측두는 대퇴골 외측관절융기에서 시작합니다.",
+      "insertion": "자료에는 비복근의 공통 정지가 종골로 기록되어 있고, 외측두만의 별도 원위 부착면은 나뉘어 제시되지 않습니다.",
+      "motorNerve": "확인된 운동신경 설명이 없습니다.",
+      "sensoryProprioception": "별도로 확인된 감각·고유감각 설명이 없습니다.",
+      "observedExtent": "Card scope distinguishes the lateral head origin from the shared whole-muscle insertion; no head-only insertion surface was asserted.",
+      "screenshot": "visually inspected inline; not saved as a file",
+      "decision": "pass_for_claim_scope_and_separate_nerve_fields"
+    },
+    {
+      "caseId": "fibularis-longus-conflict",
+      "sourceKey": "ZA-c7010a9-4f96bdd8fb89eeb10b302e4a",
+      "url": "http://127.0.0.1:5173/?source=ZA-c7010a9-4f96bdd8fb89eeb10b302e4a",
+      "cardMatch": true,
+      "side": "left",
+      "names": {
+        "nativeKorean": "긴종아리근",
+        "sinoKorean": "장비골근",
+        "english": "Fibularis longus muscle"
+      },
+      "origin": "설명 정리 중",
+      "insertion": "긴종아리근은 첫째 중족골 바닥과 안쪽쐐기뼈에 정지합니다.",
+      "motorNerve": "확인된 운동신경 설명이 없습니다.",
+      "sensoryProprioception": "별도로 확인된 감각·고유감각 설명이 없습니다.",
+      "observedExtent": "Conflicted origin remains unresolved in the card; no candidate was promoted.",
+      "screenshot": "visually inspected inline; not saved as a file",
+      "decision": "pass_for_conflict_preservation_and_field_separation"
+    },
+    {
+      "caseId": "abductor-digiti-minimi-foot",
+      "sourceKey": "ZA-c7010a9-14008ccad78ce56854ac4662",
+      "url": "http://127.0.0.1:5173/?source=ZA-c7010a9-14008ccad78ce56854ac4662",
+      "cardMatch": true,
+      "side": "left",
+      "names": {
+        "nativeKorean": "발 새끼벌림근",
+        "sinoKorean": "발 소지외전근",
+        "english": "Abductor digiti minimi of foot"
+      },
+      "origin": "확인된 기시 설명이 없습니다.",
+      "insertion": "확인된 정지 설명이 없습니다.",
+      "motorNerve": "확인된 운동신경 설명이 없습니다.",
+      "sensoryProprioception": "별도로 확인된 감각·고유감각 설명이 없습니다.",
+      "observedExtent": "Foot-specific card identity and names are distinct from the hand homonym.",
+      "screenshot": "visually inspected inline; not saved as a file",
+      "decision": "pass_for_hand_foot_disambiguation"
+    },
+    {
+      "caseId": "abductor-digiti-minimi-hand",
+      "sourceKey": "ZA-c7010a9-d3839cec2e0626a3881b2d21",
+      "url": "http://127.0.0.1:5173/?source=ZA-c7010a9-d3839cec2e0626a3881b2d21",
+      "cardMatch": true,
+      "side": "left",
+      "names": {
+        "nativeKorean": "손 새끼벌림근",
+        "sinoKorean": "손 소지외전근",
+        "english": "Abductor digiti minimi of hand"
+      },
+      "origin": "확인된 기시 설명이 없습니다.",
+      "insertion": "확인된 정지 설명이 없습니다.",
+      "motorNerve": "확인된 운동신경 설명이 없습니다.",
+      "sensoryProprioception": "별도로 확인된 감각·고유감각 설명이 없습니다.",
+      "observedExtent": "Hand-specific card identity and names are distinct from the foot homonym.",
+      "screenshot": "accessibility snapshot confirmed the card; visual image was inspected inline in the same browser session",
+      "decision": "pass_for_hand_foot_disambiguation"
+    }
+  ],
+  "limitations": [
+    "CUA exposed accessibility snapshots and inline screenshots but not a screenshot file writer; screenshots were not saved to the repository.",
+    "Browser console logs were not exposed by the selected CUA tab API and are not claimed as clean.",
+    "Representative view checks do not establish full muscle geometry extent or anatomy approval."
+  ]
+}

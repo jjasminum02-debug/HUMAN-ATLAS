@@ -2,12 +2,12 @@
 
 자동 생성. 편집 원본은 [EXECUTION.json](EXECUTION.json). 역사 handoff/자료 개수로 다음 작업을 결정하지 않는다.
 
-- 확인된 최근 진행: T81 / accepted
-- 다음 ID: **T82**
+- 확인된 최근 진행: T82 / accepted
+- 다음 ID: **T83**
 - 현재 지원 앱 완성: T100 통합 마무리 → T80 사용 감사/보완 → T58 UI·성능 최적화. 전체 콘텐츠 확보는 별도 상태로 유지한다.
 
 ```text
-HUMAN ATLAS에서 T82만 수행해라. 담당 Luna Max.
+HUMAN ATLAS에서 T83만 수행해라. 담당 Luna Max.
 
 AGENTS.md, work/EXECUTION.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/product-acceptance.json,
 해당 task의 현재 spec/promptFile, 실제 선행 report/evidence를 읽어라.
@@ -26,7 +26,7 @@ python3 work/tools/sync_execution.py 및 --check를 수행하고 소유 변경�
 다음 task 자동 실행, 새 번호/스레드 발급, 자동 위임, push/배포, 임상 진단·치료·자침 기능은 금지한다.
 
 이번 실행:
-T81 실제 지원 근육/claim 원장을 자동 전수 감사하고 기존 근거를 재사용해 주요 카드와 충돌 사례를 실제 UI에서 확인한다. 잘못된 기시정지/갈래/손발 동명/운동·감각 구분은 수정한다. 확인되지 않은 세부 신경은 상위명/미기재 상태를 유지한다. private 원문과 출처 개발 원장이 학생 카드/bundle에 유출되지 않는지 검사한다. 전체 257행 처리 상태와 unsupported 콘텐츠를 보존한다. 주요 구조 학습을 막는 제품 결함이 없고 계약을 충족하면 completed/passed로 종료하며 전체 해부 연구 합격으로 쓰지 않는다. 다음 T83은 실행하지 않는다.
+T81/T82의 staging·근육 mapping·verified claim을 재사용한다. 현재 지원 근육 전체를 처리하고 각 작용의 움직이는 구조·고정 조건·방향·갈래 차이를 근거로 검증한다. 한자 포함 action cell은 의미/괄호/조건을 보존하며 한글화한다. 손발 동명·얼굴/눈/혀/괄약근 기능을 관절 회전으로 억지 변환하지 않는다. 학생 설명은 간결하게 쓰고 출처·원문·AI 해석·채택은 내부에서 구분한다. 움직임으로 이해하기 버튼 위치와 실제 clip 지원 상태를 분리한다. 표정근 clip/가짜 수축/별도 scene는 만들지 않는다. 현재 기능 카드 전체의 계약과 대표·충돌 UI를 검증하고 scoped passed로 종료한다. 추가 source가 필요한 claim은 별도 콘텐츠 gap으로 남긴다. 다음 T84는 실행하지 않는다.
 
-종료 후 다음 ID는 T83다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
+종료 후 다음 ID는 T84다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
 ```
