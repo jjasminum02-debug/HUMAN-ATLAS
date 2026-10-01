@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "t35-worker-result-observation-v1",
+  "manifestPath": "work/evidence/motion-all-muscles-plan-2026-10-02/run-manifest-r2.json",
+  "manifestRunId": "all-muscle-motion-research-2026-10-02-f60d89acaa72-r2",
+  "assignments": {
+    "A": {
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-a/proposals.json",
+      "status": "absent",
+      "stableRead": false,
+      "eligibleForFullValidator": false,
+      "integrated": false,
+      "reason": "no proposal file present for this assignment"
+    },
+    "B": {
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-b/proposals.json",
+      "status": "stale_or_unvalidated_not_integrated",
+      "stableRead": true,
+      "sha256": "c5bc6cea121eba83fbbba381286ec395cda3be404efa5c42d7d038027f1a2303",
+      "bytes": 4997100,
+      "recordedRunId": "all-muscle-motion-research-2026-10-02-f60d89acaa72",
+      "expectedRunId": "all-muscle-motion-research-2026-10-02-f60d89acaa72-r2",
+      "assignment": "B",
+      "recordedStatus": "complete_research_ledger_stale_input_hash_mismatch",
+      "stale": true,
+      "changedInputPaths": [
+        "atlas-data/terminology/learner-card-runtime.json",
+        "atlas-data/terminology/muscle-attachment-content-2026-10-02.json",
+        "work/evidence/T98/astra-resolution-2026-09-29/base-selection.json",
+        "work/evidence/T98/astra-resolution-2026-09-29/frame-contract.json",
+        "work/evidence/T98/astra-resolution-2026-09-29/rights-scope.json",
+        "work/evidence/T98/astra-resolution-2026-09-29/source-catalog.json",
+        "work/evidence/T98/astra-resolution-2026-09-29/validation.json",
+        "work/evidence/muscle-attachment-review-2026-10-02/coverage.json"
+      ],
+      "targetRowCount": 139,
+      "sourceConceptRowCount": 76,
+      "assignedTargetIdsMatch": true,
+      "assignedSourceConceptKeysMatch": true,
+      "eligibleForFullValidator": false,
+      "integrated": false,
+      "reason": "worker outputs are optional; only a complete current-manifest result set that passes --results may be integrated"
+    },
+    "C": {
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-c/proposals.json",
+      "status": "absent",
+      "stableRead": false,
+      "eligibleForFullValidator": false,
+      "integrated": false,
+      "reason": "no proposal file present for this assignment"
+    }
+  },
+  "integratedAssignments": [],
+  "allAssignmentsReadyForValidator": false,
+  "noUnvalidatedOutputIntegrated": true
+}

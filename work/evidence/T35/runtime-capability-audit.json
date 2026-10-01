@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "t35-runtime-capability-audit-v1",
+  "asOfHead": "0d554e3e1bef766ff4ecde8131f097e079207849",
+  "T65": {
+    "status": "completed/passed",
+    "report": "work/reports/T65.md",
+    "reuse": "attachment summaries, learner projection and static app acceptance only"
+  },
+  "learnerMotion": {
+    "sameModelMuscleMotionCount": 0,
+    "ctaCode": "disabled with unavailable note; no new activation in T35",
+    "staticDatasetLoader": "rejects glTF animations and skins and retains static BufferGeometry; morph/live deformation graph preservation is not established in the learner loader",
+    "animationAdapter": "standalone hash/frame checked animation-capable GLB parser; no sourceKey-bound live muscle surface integration in current learner path",
+    "playbackController": "single scheduler/player logic can be reused for clock, pause, reset and disposal after the same-scene resource adapter exists"
+  },
+  "T24": {
+    "status": "blocked historical candidate",
+    "representation": "bone_motion_with_illustrative_path",
+    "notSupportedReason": "not an original source-linked muscle surface contraction; was rejected by actual report and is not retried in T35",
+    "report": "work/reports/T24.md"
+  },
+  "codeEvidence": {
+    "atlas-web/src/ui/App.tsx": {
+      "sha256": "e30173006518257ae886176bcc163e9bb26269b5280289dce4198eb6c8d3bee6"
+    },
+    "atlas-web/src/viewer/datasets/DatasetResources.ts": {
+      "sha256": "5cdff7b6ed9d541c02eb0561e372bd95b63dda5c8205943dde9d2242f6d1efae"
+    },
+    "atlas-web/src/viewer/animationSceneAdapter.ts": {
+      "sha256": "657aa1dc64fbef2fd71826d32a3d6010f2fbafaa5114c1cbf4181b1eb0b58789"
+    },
+    "atlas-web/src/viewer/animationPlayback.ts": {
+      "sha256": "763a337b9aae9e9c142c01ca93f1c783a425494890a7fd80fe481c7e7c9e6d41"
+    },
+    "atlas-web/src/domain/motionPlayer.ts": {
+      "sha256": "72f3066635c0fcf6df0fdf24020b5db252a0ba522ef7c0883fd138ce194dd45b"
+    }
+  },
+  "motionCatalogCounts": {
+    "textActionRows": 7,
+    "motionDefinitionRows": 1,
+    "motionAssetRows": 1,
+    "technicalCandidateRows": 1,
+    "supportedMuscleSurfaceDeformationRows": 0
+  },
+  "sourceAndRights": {
+    "sourceOnly": "existing per-instance values preserved",
+    "humanReview": "not_performed",
+    "publicRedistribution": "held",
+    "T98BaseSelection": "source engineering feasibility and input freeze; NOT complete anatomy, learner binding, rig, public rights, or production release approval",
+    "exceptionGroups": [
+      "Brainder/White matter",
+      "Dundee cranial nerves/foramina CC-BY-4.0",
+      "Dundee inner ear CC-BY-NC-SA-4.0",
+      "Kidney CC-BY-NC-4.0"
+    ]
+  },
+  "browserNotRunReason": "T35 is a planning/contract task and changes no UI or runtime; the learner motion CTA remains disabled. Existing T65 and T24 browser evidence is reused only for those prior scopes, not as motion support proof.",
+  "missingLearnerAttachmentProjectionSourceKeys": [
+    "ZA-c7010a9-f1c445f6efa7d889f9c6ffaa"
+  ],
+  "learnerAttachmentProjectionGapIsNotAnOriginInsertionClaimGap": true
+}

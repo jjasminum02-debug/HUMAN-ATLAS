@@ -1,0 +1,338 @@
+{
+  "schemaVersion": "t35-verification-v1",
+  "task": "T35",
+  "baselineHead": "0d554e3e1bef766ff4ecde8131f097e079207849",
+  "manifestValidation": {
+    "status": "passed",
+    "command": "python3 work/tools/validate_motion_parallel_plan.py --manifest work/evidence/motion-all-muscles-plan-2026-10-02/run-manifest-r2.json",
+    "runId": "all-muscle-motion-research-2026-10-02-f60d89acaa72-r2"
+  },
+  "manifestReconciliation": {
+    "schemaVersion": "t35-manifest-reconciliation-v1",
+    "baselineHead": "0d554e3e1bef766ff4ecde8131f097e079207849",
+    "originalRunId": "all-muscle-motion-research-2026-10-02-f60d89acaa72",
+    "revisedRunId": "all-muscle-motion-research-2026-10-02-f60d89acaa72-r2",
+    "originalSourceHead": "f60d89acaa72451466d147827b0ea6f22bfbaff3",
+    "manifestSourceHeadUnchanged": true,
+    "originalInputHashCount": 11,
+    "revisedInputHashCount": 18,
+    "changedOrAddedInputHashes": [
+      {
+        "path": "atlas-data/terminology/learner-card-runtime.json",
+        "originalSha256": "6470716cf4e4921fc8405916cff591607856897e8e3349d54dd4baa42d0c65a6",
+        "revisedSha256": "bca2ab324f77059303c0f7391886f0b11e54f5c469f447bcf9bd2ec09cbb9f5d",
+        "changeKind": "hash_changed"
+      },
+      {
+        "path": "atlas-data/terminology/muscle-attachment-content-2026-10-02.json",
+        "originalSha256": null,
+        "revisedSha256": "84a31d8bd9fb2eb61de5fceb8e380938b934180598ae9a93944edabe90c1f9d8",
+        "changeKind": "added_to_revised_manifest"
+      },
+      {
+        "path": "work/evidence/T98/astra-resolution-2026-09-29/base-selection.json",
+        "originalSha256": null,
+        "revisedSha256": "44914ac18eca5bd6a74f6ae749a33b0555422c9bf1275c2cf4227144543af830",
+        "changeKind": "added_to_revised_manifest"
+      },
+      {
+        "path": "work/evidence/T98/astra-resolution-2026-09-29/frame-contract.json",
+        "originalSha256": null,
+        "revisedSha256": "bd2029cbbcfe3a63ad693fac41b3a5e7492822030d822074ba2d5c751e89542d",
+        "changeKind": "added_to_revised_manifest"
+      },
+      {
+        "path": "work/evidence/T98/astra-resolution-2026-09-29/rights-scope.json",
+        "originalSha256": null,
+        "revisedSha256": "ee6c6617b97faca4f4ba8d45717cbc141ca7c65fec11b42694c9c92c57fa40d2",
+        "changeKind": "added_to_revised_manifest"
+      },
+      {
+        "path": "work/evidence/T98/astra-resolution-2026-09-29/source-catalog.json",
+        "originalSha256": null,
+        "revisedSha256": "f2f1e98d22fe585b7943ddc0d7963af61cf18cced08b76be6984328a59e12ab7",
+        "changeKind": "added_to_revised_manifest"
+      },
+      {
+        "path": "work/evidence/T98/astra-resolution-2026-09-29/validation.json",
+        "originalSha256": null,
+        "revisedSha256": "1d9fe4e04627321ae44f579705ac63a837ec653e33a26d6962adfc59f1732aeb",
+        "changeKind": "added_to_revised_manifest"
+      },
+      {
+        "path": "work/evidence/muscle-attachment-review-2026-10-02/coverage.json",
+        "originalSha256": null,
+        "revisedSha256": "4edea7fc105f2b560bff9a1e0f9f923994bbd5460fe309c9495bf41449595e69",
+        "changeKind": "added_to_revised_manifest"
+      }
+    ],
+    "snapshotHashesUnchanged": true,
+    "assignmentChecks": {
+      "A": {
+        "sameAssignedListsAndOutputPath": true,
+        "counts": {
+          "targets": 144,
+          "sourceConcepts": 66,
+          "sourceInstances": 131
+        },
+        "orderedAssignmentDigestSha256": "b0564f896333dbae42bddb3e65d987343c37d1548d8fe7ac57643b61d170d1da"
+      },
+      "B": {
+        "sameAssignedListsAndOutputPath": true,
+        "counts": {
+          "targets": 139,
+          "sourceConcepts": 76,
+          "sourceInstances": 151
+        },
+        "orderedAssignmentDigestSha256": "768496bcef27836dada71acb1045408490e27ff8507c18c15d34322a4a1e5066"
+      },
+      "C": {
+        "sameAssignedListsAndOutputPath": true,
+        "counts": {
+          "targets": 146,
+          "sourceConcepts": 90,
+          "sourceInstances": 180
+        },
+        "orderedAssignmentDigestSha256": "cd36261f28df5474cb994cd59e8f7286afa4b3386eccb2bf5cdd49bcc0fa35bd"
+      }
+    },
+    "allAssignmentsUnchanged": true,
+    "revisionReason": "the original frozen inputs predate current T98 feasibility/frame/rights evidence and the 2026-10-02 attachment review/runtime projection; r2 preserves the original 429/447/232/462 assignment and the same snapshots while pinning the current evidence hashes",
+    "originalManifestModified": false
+  },
+  "ledgerChecks": {
+    "wholeBodyDenominatorsRemain54256312": true,
+    "all429MuscleTargetsEqualT96MuscleSelection": true,
+    "all429MuscleTargetsExactlyOnce": true,
+    "all447TargetRegionMembershipsExactlyOnce": true,
+    "all232SourceConceptsExactlyOnce": true,
+    "all462SourceInstancesExactlyOnce": true,
+    "allSourceGeometryHashesPresent": true,
+    "allSourceKeysResolveToPinnedCatalogAndCompiledManifest": true,
+    "allSourceCatalogAndCompiledHashValuesRecorded": true,
+    "noNewCanonicalBindingGeometryOrClip": true,
+    "allRowsPreserveSourceOnlyRightsAndReview": true,
+    "allTargetIdentityClaimsRemainUnverified": true,
+    "allGroupPartAndRepeatedExtentIsIndependent": true,
+    "workerResultsOptionalAndNotInvented": true,
+    "originalAssignmentAndSnapshotFreezePreserved": true,
+    "T98LocalSelectionNotPromotedToReleaseOrBinding": true
+  },
+  "counts": {
+    "targetKinds": {
+      "muscle_group": 58,
+      "named_muscle": 245,
+      "muscle_complex": 6,
+      "muscle_part": 94,
+      "repeated_muscle_family": 26
+    },
+    "targetSourceCandidateStatuses": {
+      "lexical_group_or_other_representation_needs_reconciliation": 59,
+      "no_ZA_lexical_candidate": 97,
+      "lexical_candidate_with_evaluated_geometry": 273
+    },
+    "targetsWithLexicalCandidateKeys": 273,
+    "targetsWithIdentityVerified": 0,
+    "targetsWithLearnerBinding": 0,
+    "sourceSides": {
+      "right": 230,
+      "left": 229,
+      "None": 3
+    },
+    "sourceGeometryHashesPresent": 462,
+    "sourceGeometryHashMissingKeys": [],
+    "sourceCatalogVsCompiledHashValuesEqual": 462,
+    "sourceCatalogVsCompiledHashValuesDiffer": 0,
+    "sourceCatalogVsCompiledHashEquivalenceStatus": "not_reconciled; same sourceKey and hash field label do not establish equal hashing recipes or revisions",
+    "sideVsSourceLabelDisposition": {
+      "agree": 462
+    },
+    "sourceObjectsWithKnownUpstreamFjId": 0,
+    "sourceObjectsWithUnresolvedUpstreamAncestry": 462,
+    "sourceAttachmentLatestBundle": {
+      "records": 201,
+      "singleSourceSummary": 200,
+      "conflictedSummary": 1,
+      "sourceKeyCoverage": 399,
+      "baselineMissingRowsMatchedByExactSourceKeys": 201
+    },
+    "attachmentConceptDisposition": {
+      "latest_review_record": 201,
+      "historical_description_or_conflict": 31
+    },
+    "learnerAttachmentProjection": {
+      "sourceKeysWithAnyProjection": 461,
+      "sourceKeysWithOriginText": 461,
+      "sourceKeysWithInsertionText": 461,
+      "missingRuntimeSourceKeys": [
+        "ZA-c7010a9-f1c445f6efa7d889f9c6ffaa"
+      ],
+      "incompleteRuntimeSourceKeys": [],
+      "projectionDoesNotProveFullExtentOrMotion": true
+    },
+    "textActionEvidence": {
+      "actionRows": 7,
+      "distinctHaSubjects": 6,
+      "sourceInstancesLinkedByExistingHaId": 112,
+      "sourceInstancesWithTextActionCandidate": 10,
+      "learnerMotionAcceptance": false
+    },
+    "manifestAssignments": {
+      "A": {
+        "targets": 144,
+        "sourceConcepts": 66,
+        "sourceInstances": 131
+      },
+      "B": {
+        "targets": 139,
+        "sourceConcepts": 76,
+        "sourceInstances": 151
+      },
+      "C": {
+        "targets": 146,
+        "sourceConcepts": 90,
+        "sourceInstances": 180
+      }
+    },
+    "workerResultAudit": {
+      "schemaVersion": "t35-worker-result-observation-v1",
+      "manifestPath": "work/evidence/motion-all-muscles-plan-2026-10-02/run-manifest-r2.json",
+      "manifestRunId": "all-muscle-motion-research-2026-10-02-f60d89acaa72-r2",
+      "assignments": {
+        "A": {
+          "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-a/proposals.json",
+          "status": "absent",
+          "stableRead": false,
+          "eligibleForFullValidator": false,
+          "integrated": false,
+          "reason": "no proposal file present for this assignment"
+        },
+        "B": {
+          "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-b/proposals.json",
+          "status": "stale_or_unvalidated_not_integrated",
+          "stableRead": true,
+          "sha256": "c5bc6cea121eba83fbbba381286ec395cda3be404efa5c42d7d038027f1a2303",
+          "bytes": 4997100,
+          "recordedRunId": "all-muscle-motion-research-2026-10-02-f60d89acaa72",
+          "expectedRunId": "all-muscle-motion-research-2026-10-02-f60d89acaa72-r2",
+          "assignment": "B",
+          "recordedStatus": "complete_research_ledger_stale_input_hash_mismatch",
+          "stale": true,
+          "changedInputPaths": [
+            "atlas-data/terminology/learner-card-runtime.json",
+            "atlas-data/terminology/muscle-attachment-content-2026-10-02.json",
+            "work/evidence/T98/astra-resolution-2026-09-29/base-selection.json",
+            "work/evidence/T98/astra-resolution-2026-09-29/frame-contract.json",
+            "work/evidence/T98/astra-resolution-2026-09-29/rights-scope.json",
+            "work/evidence/T98/astra-resolution-2026-09-29/source-catalog.json",
+            "work/evidence/T98/astra-resolution-2026-09-29/validation.json",
+            "work/evidence/muscle-attachment-review-2026-10-02/coverage.json"
+          ],
+          "targetRowCount": 139,
+          "sourceConceptRowCount": 76,
+          "assignedTargetIdsMatch": true,
+          "assignedSourceConceptKeysMatch": true,
+          "eligibleForFullValidator": false,
+          "integrated": false,
+          "reason": "worker outputs are optional; only a complete current-manifest result set that passes --results may be integrated"
+        },
+        "C": {
+          "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-c/proposals.json",
+          "status": "absent",
+          "stableRead": false,
+          "eligibleForFullValidator": false,
+          "integrated": false,
+          "reason": "no proposal file present for this assignment"
+        }
+      },
+      "integratedAssignments": [],
+      "allAssignmentsReadyForValidator": false,
+      "noUnvalidatedOutputIntegrated": true
+    },
+    "motionAssets": {
+      "catalogEntries": 1,
+      "supportedSourceBoundMuscleSurfaceDeformation": 0,
+      "T24CandidateAssetIsNotCounted": true
+    },
+    "preservedStates": {
+      "sourceOnlyPerExistingRecord": {
+        "True": 350,
+        "False": 112
+      },
+      "humanReview": "not_performed",
+      "publicRedistribution": "held",
+      "canonicalHaBindings": 130,
+      "newCanonicalBindings": 0,
+      "newGeometryOrClips": 0,
+      "historical163": [
+        6,
+        20,
+        135,
+        2
+      ]
+    }
+  },
+  "workerResultAudit": {
+    "schemaVersion": "t35-worker-result-observation-v1",
+    "manifestPath": "work/evidence/motion-all-muscles-plan-2026-10-02/run-manifest-r2.json",
+    "manifestRunId": "all-muscle-motion-research-2026-10-02-f60d89acaa72-r2",
+    "assignments": {
+      "A": {
+        "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-a/proposals.json",
+        "status": "absent",
+        "stableRead": false,
+        "eligibleForFullValidator": false,
+        "integrated": false,
+        "reason": "no proposal file present for this assignment"
+      },
+      "B": {
+        "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-b/proposals.json",
+        "status": "stale_or_unvalidated_not_integrated",
+        "stableRead": true,
+        "sha256": "c5bc6cea121eba83fbbba381286ec395cda3be404efa5c42d7d038027f1a2303",
+        "bytes": 4997100,
+        "recordedRunId": "all-muscle-motion-research-2026-10-02-f60d89acaa72",
+        "expectedRunId": "all-muscle-motion-research-2026-10-02-f60d89acaa72-r2",
+        "assignment": "B",
+        "recordedStatus": "complete_research_ledger_stale_input_hash_mismatch",
+        "stale": true,
+        "changedInputPaths": [
+          "atlas-data/terminology/learner-card-runtime.json",
+          "atlas-data/terminology/muscle-attachment-content-2026-10-02.json",
+          "work/evidence/T98/astra-resolution-2026-09-29/base-selection.json",
+          "work/evidence/T98/astra-resolution-2026-09-29/frame-contract.json",
+          "work/evidence/T98/astra-resolution-2026-09-29/rights-scope.json",
+          "work/evidence/T98/astra-resolution-2026-09-29/source-catalog.json",
+          "work/evidence/T98/astra-resolution-2026-09-29/validation.json",
+          "work/evidence/muscle-attachment-review-2026-10-02/coverage.json"
+        ],
+        "targetRowCount": 139,
+        "sourceConceptRowCount": 76,
+        "assignedTargetIdsMatch": true,
+        "assignedSourceConceptKeysMatch": true,
+        "eligibleForFullValidator": false,
+        "integrated": false,
+        "reason": "worker outputs are optional; only a complete current-manifest result set that passes --results may be integrated"
+      },
+      "C": {
+        "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-c/proposals.json",
+        "status": "absent",
+        "stableRead": false,
+        "eligibleForFullValidator": false,
+        "integrated": false,
+        "reason": "no proposal file present for this assignment"
+      }
+    },
+    "integratedAssignments": [],
+    "allAssignmentsReadyForValidator": false,
+    "noUnvalidatedOutputIntegrated": true
+  },
+  "workerResultsFullValidatorAttempt": {
+    "command": "python3 work/tools/validate_motion_parallel_plan.py --manifest work/evidence/motion-all-muscles-plan-2026-10-02/run-manifest-r2.json --results",
+    "exitCode": 1,
+    "status": "incomplete_result_set_not_integrated",
+    "firstFailure": "A proposal file is absent; C is also absent, and B is tied to the stale r1 runId/input hashes.",
+    "interpretation": "Worker execution is optional for T35 planning acceptance; the r2 ready-manifest validator and direct exhaustive ledger builder passed. No worker rows were imported."
+  },
+  "limitation": "These checks validate plan coverage and provenance joins, not anatomical truth, motion readiness, full extent, human approval or actual muscle animation."
+}

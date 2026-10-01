@@ -2830,13 +2830,112 @@
       "title": "전체 근육 움직임 범위·공통 제작 계약",
       "owner": "Sol High",
       "phase": "G4",
-      "executionStatus": "planned_not_started",
-      "acceptance": "pending",
+      "executionStatus": "completed",
+      "acceptance": "passed",
       "spec": "work/tasks/T35-APP-COMPLETION.md",
       "scope": "전체 근육 관련 429 target/447 membership과 현재 232 source 개념/462 표면을 빠짐없이 움직임 제작 대상으로 계획한다. 별도 초기 근육 목록을 두지 않는다. 실제 source/side/part/frame/rest pose/부착·작용/rig 가능성을 전수 disposition으로 연결한다. 관절·다관절·넓은 부착·반복/분절·비관절 연조직 family를 공통 같은-scene 계약으로 정리한다. 과거 표정근 제외는 최신 전 근육 지시로 대체하되 자료 없는 형상을 만들지 않는다. 계획 task이며 새 clip 제작은 T59/T66에서 한다.",
       "progress": {
         "nextUnit": null,
-        "completedUnits": []
+        "completedUnits": [
+          "capture-start-HEAD-dirty-path-hashes-and-OpenSim-read-only-baseline",
+          "validate-current-r2-manifest-input-hashes-and-exact-A-B-C-429-447-232-462-partition",
+          "build-exhaustive-target-membership-source-concept-and-source-instance-motion-readiness-ledger",
+          "record-attachment-action-frame-side-pose-rig-rights-and-extent-dispositions-without-promotion",
+          "define-sourceKey-bound-same-scene-deformation-playback-restoration-and-visual-QA-contract",
+          "audit-T65-T24-and-current-static-motion-runtime-boundary",
+          "record-worker-result-staleness-and-do-not-integrate-unvalidated-output",
+          "run-ledger-manifest-and-execution-projection-validation"
+        ],
+        "pendingUnits": [],
+        "nextId": "T59",
+        "nextOwner": "Sol High",
+        "nextPromptPath": "work/prompts/app-completion-2026-10-01/14-T59.txt",
+        "productAcceptance": {
+          "contractRevision": "app-completion-2026-10-01",
+          "acceptanceScope": "T35 exhaustive all-muscle motion readiness plan and same-scene authoring contract; excludes motion runtime, clips, anatomy approval and public release",
+          "productReadiness": "current_local_static_learning_scope_ready; muscle_motion_not_implemented_and_CTA_remains_disabled",
+          "contentCompleteness": "partial",
+          "knownContentGaps": {
+            "denominators": {
+              "allTargets": 542,
+              "allMemberships": 563,
+              "regions": 12,
+              "muscleTargets": 429,
+              "muscleMemberships": 447,
+              "sourceConcepts": 232,
+              "sourceInstances": 462,
+              "existingCanonicalHaBindings": 130,
+              "historical163": [
+                6,
+                20,
+                135,
+                2
+              ]
+            },
+            "motionReadiness": {
+              "sameModelMuscleSurfaceMotion": 0,
+              "playableMuscleClips": 0,
+              "targetIdentityVerified": 0,
+              "targetLexicalCandidateWithGeometry": 273,
+              "targetGroupOrOtherRepresentationNeedsReconciliation": 59,
+              "targetWithoutZaLexicalCandidate": 97,
+              "sourceObjectsWithKnownUpstreamFjId": 0,
+              "sourceObjectsWithUnresolvedUpstreamAncestry": 462,
+              "sourceProvidedRestPoseIds": 0,
+              "verifiedRigBindings": 0,
+              "sourceSides": {
+                "right": 230,
+                "left": 229,
+                "unspecified": 3
+              }
+            },
+            "attachments": {
+              "newReviewRecords": 201,
+              "singleSourceSummaries": 200,
+              "conflictedSummaries": 1,
+              "historicalDescriptionsOrConflicts": 31,
+              "runtimeProjectionSourceKeys": 461,
+              "runtimeProjectionMissingSourceKeys": [
+                "ZA-c7010a9-f1c445f6efa7d889f9c6ffaa"
+              ]
+            },
+            "textActions": {
+              "actionRows": 7,
+              "distinctHaSubjects": 6,
+              "sourceInstancesLinkedByExistingHaId": 112,
+              "sourceInstancesWithActionTextCandidate": 10,
+              "playableMotionEvidence": 0
+            },
+            "workerResearch": {
+              "A": "proposal absent",
+              "B": "stale r1 runId/input hashes; preserved and not integrated",
+              "C": "proposal absent"
+            },
+            "frameAndRights": {
+              "zaSourceFrame": "ZA-c7010a9-native-XYZ-frame0-m",
+              "registeredToT50Bp3d": false,
+              "sourceProvidedRestPose": "unknown",
+              "rigBindPose": "unknown",
+              "sourceOnlyValuesPreserved": {
+                "true": 350,
+                "false": 112
+              },
+              "humanReview": "not_performed",
+              "publicRedistribution": "held"
+            }
+          },
+          "unresolvedProductBlockers": [],
+          "evidence": [
+            "work/reports/T35.md",
+            "work/evidence/T35/verification.json",
+            "work/evidence/T35/motion-contract.json",
+            "work/evidence/T35/motion-readiness-ledger.json",
+            "work/evidence/T35/runtime-capability-audit.json",
+            "work/evidence/T35/manifest-reconciliation.json",
+            "work/evidence/T35/worker-result-observation.json",
+            "work/evidence/T35/progress.json"
+          ]
+        }
       },
       "report": "work/reports/T35.md",
       "promptFile": "work/prompts/app-completion-2026-10-01/13-T35.txt",
