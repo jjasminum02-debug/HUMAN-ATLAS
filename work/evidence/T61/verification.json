@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "t61-verification-v1",
+  "status": "passed",
+  "predecessorHead": "37ecc1776ba20980edfc0709f9d2836f3c505748",
+  "T84ThreadState": "completed/idle before final freeze",
+  "checks": [
+    {
+      "name": "nerve_policy_selection_fixtures",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--experimental-strip-types",
+        "--test",
+        "src/domain/nerveContract.test.ts",
+        "src/viewer/datasets/integration.test.ts",
+        "src/viewer/datasets/sourceSupplement.test.ts",
+        "src/viewer/wholeBody/wholeBody.test.ts"
+      ],
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "seconds": 1.203,
+      "log": "work/evidence/T61/nerve_policy_selection_fixtures.log",
+      "stdoutTail": "e, identity, rights, bindings, and transfer budget (16.511958ms)\n✔ composite manifest rejects a bad mixed-coordinate declaration and duplicate source keys (26.095583ms)\n✔ supplement relations create opaque target/member routes from exact frozen evidence without HA bindings (8.195208ms)\n✔ registered same-bone display alternatives suppress only their ZA counterpart on selected source routes (56.870917ms)\n✔ source-only context never becomes selectable (0.410833ms)\n✔ supplements require explicit opt-in, stay unbound (0.051542ms)\n✔ held identity cannot be revealed through layer/opt-in (0.041583ms)\n✔ region/layer demand excludes unrelated geometry (0.040208ms)\n✔ T95 overlapping region union keeps one asset visible and empty filters mean whole body (0.060416ms)\n✔ reject conflicting duplicate IDs and source-only binding promotion (0.239792ms)\n✔ late parse after cancellation is disposed; same-id new demand can recover (4.401208ms)\n✔ failure retains successful resources; explicit retry only failed asset (2.52425ms)\n✔ dispose releases completed and late resources exactly once (1.191ms)\n✔ isolation never promotes source-only or held nodes and respects layer switches (0.141708ms)\n✔ selected transparency preserves eligibility and selection; hide only hides the selected eligible asset (0.057417ms)\n✔ v2 local display is independent from learner binding, rights and review holds (0.13925ms)\n✔ persistent source hiding survives a different selection and reset cannot bypass policy (0.658625ms)\nℹ tests 66\nℹ suites 0\nℹ pass 66\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1174.486708\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "learner_runtime_check",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--experimental-strip-types",
+        "scripts/buildLearnerCardRuntime.mjs",
+        "--check"
+      ],
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "seconds": 0.048,
+      "log": "work/evidence/T61/learner_runtime_check.log",
+      "stdoutTail": "{\"status\":\"passed\",\"conceptRows\":8,\"sourceRows\":14,\"actionRows\":7}\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/typescript/bin/tsc",
+        "-b",
+        "--pretty",
+        "false"
+      ],
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "seconds": 1.492,
+      "log": "work/evidence/T61/typecheck.log",
+      "stdoutTail": "",
+      "stderrTail": ""
+    },
+    {
+      "name": "production_build",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "seconds": 0.248,
+      "log": "work/evidence/T61/production_build.log",
+      "stdoutTail": "vite v8.3.1 building client environment for production...\ntransforming...\n✓ 45 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.58 kB │ gzip:   0.37 kB\ndist/assets/index-UUYMvEqZ.css    0.74 kB │ gzip:   0.44 kB\ndist/assets/App-BHhbobJb.css     37.34 kB │ gzip:   7.96 kB\ndist/assets/index-BA3WcX97.js   222.37 kB │ gzip:  69.95 kB\ndist/assets/App-BhWxpm9v.js     731.49 kB │ gzip: 182.04 kB\n\n✓ built in 116ms\n",
+      "stderrTail": "[plugin builtin:vite-reporter] \n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n"
+    },
+    {
+      "name": "learner_distribution",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "scripts/auditLearnerCardDistribution.mjs",
+        "--check"
+      ],
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "seconds": 0.053,
+      "log": "work/evidence/T61/learner_distribution.log",
+      "stdoutTail": "r distribution; development evidence remains in source files and is not copied to learner JS/HTML/CSS/JSON\",\"checkedAt\":\"2026-10-01T09:29:29.404Z\",\"inputs\":{\"learnerRuntimeSha256\":\"1849c451551c933f58e17ab1fdcfc1def6c8a7510f9763d8c50142d1588f1f64\",\"aiEvidenceOverlaySha256\":\"0a46e544f595179f8bfdaf307ea718d0a804f4d42dc9c3d8221ced554757f20f\",\"t81WorkbookDispositionSha256\":\"a71f61064cd2ef7f0b8f5d6cc68510023f01d3612a024eb620797634eaac3540\",\"t81PrivateWorkbookRows\":257,\"t81PrivateWorkbookHashReference\":\"8e10e00e76f5da8e6d1be6a0f9dcab6039d9a3f81d8a3808c0fe28545802ab3c\"},\"priorBundle\":{\"path\":\"atlas-web/dist/assets/App-X3cv7bvC.js\",\"bytes\":1091485,\"hits\":[\"cross_checked\",\"evidenceHash\",\"accessedOn\",\"fieldEvidenceId\",\"T18-FIELD-\",\"T18-STATPEARLS\",\"StatPearls\",\"Hands-on Anatomy\"],\"sha256\":\"5bb64f9df1005baa44c29566949c961fdd6c6166917a8ea7e73a105b871c9d2d\"},\"learnerRuntimeRows\":{\"names\":81,\"conceptStructureRows\":8,\"sourceStructureRows\":14,\"actions\":7},\"distribution\":{\"scannedFiles\":5,\"bundles\":[{\"path\":\"atlas-web/dist/assets/App-BhWxpm9v.js\",\"bytes\":731496,\"sha256\":\"ece7dd7801c798c46e1376679ff37241cfe861a1c0f7b69eaacc609af9b5fa26\"},{\"path\":\"atlas-web/dist/assets/index-BA3WcX97.js\",\"bytes\":222370,\"sha256\":\"e37b1f88a60312a8d483d0b2279c0a0402cb1faf0f61e31ce56a4d0b24792f0b\"}]},\"provenanceMarkersChecked\":274,\"leaks\":[],\"limitations\":[\"The private workbook bytes were not reopened or copied; only the existing T81 disposition/hash record was checked.\",\"This validates absence of development provenance markers from compiled learner assets, not public redistribution permission or human review.\"]}\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "final_nerve_fixtures",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--experimental-strip-types",
+        "--test",
+        "src/domain/nerveContract.test.ts"
+      ],
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "seconds": 0.085,
+      "log": "work/evidence/T61/final_nerve_fixtures.log",
+      "stdoutTail": "✔ verified fixture uses typed picking/card and explicit many-muscle relations without granting rights (1.141625ms)\n✔ production validation rejects synthetic software evidence (0.177042ms)\n✔ off/hidden/wrong region/frame/pose cannot be bypassed by a selected or restored route (0.644917ms)\n✔ raw metadata candidate can be retained but creates no card, geometry or inferred innervation (0.106625ms)\n✔ text-only identity card is distinct from 3D picking or course support (0.083416ms)\n✔ identity, side and exact scope need subject-specific evidence, not names or parent evidence (0.177709ms)\n✔ wrong units, mirror, invalid hashes, missing geometry and stale pose evidence reject registration (0.21725ms)\n✔ matching axis conventions do not establish inter-person registration (0.076959ms)\n✔ source millimeters must be converted exactly once; curve and mesh share this contract (0.142541ms)\n✔ source names, collections and candidate claims do not establish motor links (0.145709ms)\n✔ multiple verified targets retained; wrong side and whole-part substitutions need different evidence (0.152ms)\n✔ innervation cannot highlight an unregistered or differently scoped target (0.069958ms)\n✔ pose incompatibility requests explicit rest restoration without mutating user layer state (0.03875ms)\n✔ relationship highlighting respects both nerve and existing muscle layer/hold/hidden policy (0.206375ms)\n✔ cutaneous territory, dermatome, proprioception and traditional areas cannot occupy a motor slot (0.168417ms)\n✔ source hierarchy branch claims require exact endpoints/side; cycles and missing nodes rejected (0.214792ms)\n✔ independent policy flags cannot be promoted by valid local geometry (0.098041ms)\nℹ tests 17\nℹ suites 0\nℹ pass 17\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 55.271333\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "final_typecheck",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/typescript/bin/tsc",
+        "-b",
+        "--pretty",
+        "false"
+      ],
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "seconds": 1.525,
+      "log": "work/evidence/T61/final_typecheck.log",
+      "stdoutTail": "",
+      "stderrTail": ""
+    },
+    {
+      "name": "inventory_replay_final",
+      "command": [
+        "python3",
+        "work/tools/build_t61_nerve_inventory.py",
+        "--check"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "seconds": 0.3,
+      "log": "work/evidence/T61/inventory_replay_final.log",
+      "stdoutTail": "{\"status\": \"passed\", \"counts\": {\"sourceCandidateRows\": 1291, \"byNamespace\": {\"za-c7010a9\": 1134, \"bp3d-r4\": 157}, \"supportedNerve3D\": 0, \"supportedNerveCards\": 0, \"verifiedBranchRelations\": 0, \"verifiedMotorRelations\": 0, \"supportedMuscleMotorText\": 0, \"muscleFieldDispositionRows\": 232}}\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "actual_sources_final",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--experimental-strip-types",
+        "atlas-web/scripts/validateNerveInventory.ts"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "seconds": 0.25,
+      "log": "work/evidence/T61/actual_sources_final.log",
+      "stdoutTail": "{\n  \"status\": \"passed\",\n  \"validatedInputs\": 26,\n  \"fullLedgerReferences\": 3,\n  \"counts\": {\n    \"sourceCandidateRows\": 1291,\n    \"byNamespace\": {\n      \"za-c7010a9\": 1134,\n      \"bp3d-r4\": 157\n    },\n    \"supportedNerve3D\": 0,\n    \"supportedNerveCards\": 0,\n    \"verifiedBranchRelations\": 0,\n    \"verifiedMotorRelations\": 0,\n    \"supportedMuscleMotorText\": 0,\n    \"muscleFieldDispositionRows\": 232\n  },\n  \"fixtureEvidenceIsProductionEvidence\": false,\n  \"newNerve3D\": false,\n  \"contentCompleteness\": \"partial\"\n}\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "frame_bound_nerve_fixtures",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--experimental-strip-types",
+        "--test",
+        "src/domain/nerveContract.test.ts"
+      ],
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "seconds": 0.082,
+      "log": "work/evidence/T61/frame_bound_nerve_fixtures.log",
+      "stdoutTail": "uction validation rejects synthetic software evidence (0.163666ms)\n✔ off/hidden/wrong region/frame/pose cannot be bypassed by a selected or restored route (0.558459ms)\n✔ raw metadata candidate can be retained but creates no card, geometry or inferred innervation (0.0895ms)\n✔ text-only identity card is distinct from 3D picking or course support (0.073875ms)\n✔ identity, side and exact scope need subject-specific evidence, not names or parent evidence (0.173417ms)\n✔ wrong units, mirror, invalid hashes, missing geometry and stale pose evidence reject registration (0.221ms)\n✔ matching axis conventions do not establish inter-person registration (0.066958ms)\n✔ source millimeters must be converted exactly once; curve and mesh share this contract (0.140042ms)\n✔ frame proof is invalidated by changed transforms/frame/topology; baked source-world data cannot be transformed twice (0.18175ms)\n✔ source names, collections and candidate claims do not establish motor links (0.104708ms)\n✔ multiple verified targets retained; wrong side and whole-part substitutions need different evidence (0.12625ms)\n✔ innervation cannot highlight an unregistered or differently scoped target (0.226125ms)\n✔ pose incompatibility requests explicit rest restoration without mutating user layer state (0.034041ms)\n✔ relationship highlighting respects both nerve and existing muscle layer/hold/hidden policy (0.074958ms)\n✔ cutaneous territory, dermatome, proprioception and traditional areas cannot occupy a motor slot (0.16375ms)\n✔ source hierarchy branch claims require exact endpoints/side; cycles and missing nodes rejected (0.218875ms)\n✔ independent policy flags cannot be promoted by valid local geometry (0.110875ms)\nℹ tests 18\nℹ suites 0\nℹ pass 18\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 55.200083\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "frame_bound_typecheck",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/typescript/bin/tsc",
+        "-b",
+        "--pretty",
+        "false"
+      ],
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "seconds": 1.525,
+      "log": "work/evidence/T61/frame_bound_typecheck.log",
+      "stdoutTail": "",
+      "stderrTail": ""
+    },
+    {
+      "name": "frame_bound_actual_inventory",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--experimental-strip-types",
+        "atlas-web/scripts/validateNerveInventory.ts"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "seconds": 0.29,
+      "log": "work/evidence/T61/frame_bound_actual_inventory.log",
+      "stdoutTail": "{\n  \"status\": \"passed\",\n  \"validatedInputs\": 26,\n  \"fullLedgerReferences\": 3,\n  \"counts\": {\n    \"sourceCandidateRows\": 1291,\n    \"byNamespace\": {\n      \"za-c7010a9\": 1134,\n      \"bp3d-r4\": 157\n    },\n    \"supportedNerve3D\": 0,\n    \"supportedNerveCards\": 0,\n    \"verifiedBranchRelations\": 0,\n    \"verifiedMotorRelations\": 0,\n    \"supportedMuscleMotorText\": 0,\n    \"muscleFieldDispositionRows\": 232\n  },\n  \"fixtureEvidenceIsProductionEvidence\": false,\n  \"newNerve3D\": false,\n  \"contentCompleteness\": \"partial\"\n}\n",
+      "stderrTail": ""
+    }
+  ],
+  "hashes": {
+    "atlas-web/src/domain/nerveContract.ts": "7ed0134dda28c5374e662d7c9bdac47fa595b40930de23cbe0dd77be06818e3b",
+    "atlas-web/src/domain/nerveContract.test.ts": "a287762c1de168348c50dd6b87ef77377b823243c0c5244e95f7d487348fc6b6",
+    "atlas-web/scripts/validateNerveInventory.ts": "d788202e3cd2ce4e864310af3354a3e416234c60eed54fe54065b6073ed2731d",
+    "work/tools/build_t61_nerve_inventory.py": "7cfea444304d8391f548666db4eac274bcc3b7c20223a05d86f541c089c8c681",
+    "atlas-data/manifests/nerve-support-t61.json": "a6a9838f885439f34686a04dadcb4f1acd7d6469c3625ed894e676bd3c3afa2c"
+  },
+  "staleAttempt": {
+    "log": "work/evidence/T61/inventory_replay.log",
+    "cause": "T84 report/evidence still finalizing; no anatomy/UI data drift",
+    "resolved": "waited for T84 thread completion and commit, regenerated candidate inventory and replay passed"
+  },
+  "tests": {
+    "finalNerveContract": 18,
+    "existingPolicySelection": 50,
+    "uniqueTotal": 68
+  },
+  "limits": [
+    "fixtures are synthetic software evidence, not anatomical approval",
+    "production nerve registry remains empty; no new nerve3D or browser nerve acceptance",
+    "JS chunk size advisory remains nonblocking"
+  ],
+  "targetedFollowup": "Final review bound frame evidence to exact transforms/topology and separated local/world coordinates; 18 fixtures/typecheck/actual inventory passed. No learner import or bundle change."
+}

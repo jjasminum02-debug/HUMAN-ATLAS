@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "t61-code-verification-v1",
+  "checks": [
+    {
+      "name": "nerve_policy_selection_fixtures",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--experimental-strip-types",
+        "--test",
+        "src/domain/nerveContract.test.ts",
+        "src/viewer/datasets/integration.test.ts",
+        "src/viewer/datasets/sourceSupplement.test.ts",
+        "src/viewer/wholeBody/wholeBody.test.ts"
+      ],
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "seconds": 1.203,
+      "log": "work/evidence/T61/nerve_policy_selection_fixtures.log",
+      "stdoutTail": "e, identity, rights, bindings, and transfer budget (16.511958ms)\n✔ composite manifest rejects a bad mixed-coordinate declaration and duplicate source keys (26.095583ms)\n✔ supplement relations create opaque target/member routes from exact frozen evidence without HA bindings (8.195208ms)\n✔ registered same-bone display alternatives suppress only their ZA counterpart on selected source routes (56.870917ms)\n✔ source-only context never becomes selectable (0.410833ms)\n✔ supplements require explicit opt-in, stay unbound (0.051542ms)\n✔ held identity cannot be revealed through layer/opt-in (0.041583ms)\n✔ region/layer demand excludes unrelated geometry (0.040208ms)\n✔ T95 overlapping region union keeps one asset visible and empty filters mean whole body (0.060416ms)\n✔ reject conflicting duplicate IDs and source-only binding promotion (0.239792ms)\n✔ late parse after cancellation is disposed; same-id new demand can recover (4.401208ms)\n✔ failure retains successful resources; explicit retry only failed asset (2.52425ms)\n✔ dispose releases completed and late resources exactly once (1.191ms)\n✔ isolation never promotes source-only or held nodes and respects layer switches (0.141708ms)\n✔ selected transparency preserves eligibility and selection; hide only hides the selected eligible asset (0.057417ms)\n✔ v2 local display is independent from learner binding, rights and review holds (0.13925ms)\n✔ persistent source hiding survives a different selection and reset cannot bypass policy (0.658625ms)\nℹ tests 66\nℹ suites 0\nℹ pass 66\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1174.486708\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "learner_runtime_check",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--experimental-strip-types",
+        "scripts/buildLearnerCardRuntime.mjs",
+        "--check"
+      ],
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "seconds": 0.048,
+      "log": "work/evidence/T61/learner_runtime_check.log",
+      "stdoutTail": "{\"status\":\"passed\",\"conceptRows\":8,\"sourceRows\":14,\"actionRows\":7}\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/typescript/bin/tsc",
+        "-b",
+        "--pretty",
+        "false"
+      ],
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "seconds": 1.492,
+      "log": "work/evidence/T61/typecheck.log",
+      "stdoutTail": "",
+      "stderrTail": ""
+    },
+    {
+      "name": "production_build",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "seconds": 0.248,
+      "log": "work/evidence/T61/production_build.log",
+      "stdoutTail": "vite v8.3.1 building client environment for production...\ntransforming...\n✓ 45 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.58 kB │ gzip:   0.37 kB\ndist/assets/index-UUYMvEqZ.css    0.74 kB │ gzip:   0.44 kB\ndist/assets/App-BHhbobJb.css     37.34 kB │ gzip:   7.96 kB\ndist/assets/index-BA3WcX97.js   222.37 kB │ gzip:  69.95 kB\ndist/assets/App-BhWxpm9v.js     731.49 kB │ gzip: 182.04 kB\n\n✓ built in 116ms\n",
+      "stderrTail": "[plugin builtin:vite-reporter] \n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n"
+    },
+    {
+      "name": "learner_distribution",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "scripts/auditLearnerCardDistribution.mjs",
+        "--check"
+      ],
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "seconds": 0.053,
+      "log": "work/evidence/T61/learner_distribution.log",
+      "stdoutTail": "r distribution; development evidence remains in source files and is not copied to learner JS/HTML/CSS/JSON\",\"checkedAt\":\"2026-10-01T09:29:29.404Z\",\"inputs\":{\"learnerRuntimeSha256\":\"1849c451551c933f58e17ab1fdcfc1def6c8a7510f9763d8c50142d1588f1f64\",\"aiEvidenceOverlaySha256\":\"0a46e544f595179f8bfdaf307ea718d0a804f4d42dc9c3d8221ced554757f20f\",\"t81WorkbookDispositionSha256\":\"a71f61064cd2ef7f0b8f5d6cc68510023f01d3612a024eb620797634eaac3540\",\"t81PrivateWorkbookRows\":257,\"t81PrivateWorkbookHashReference\":\"8e10e00e76f5da8e6d1be6a0f9dcab6039d9a3f81d8a3808c0fe28545802ab3c\"},\"priorBundle\":{\"path\":\"atlas-web/dist/assets/App-X3cv7bvC.js\",\"bytes\":1091485,\"hits\":[\"cross_checked\",\"evidenceHash\",\"accessedOn\",\"fieldEvidenceId\",\"T18-FIELD-\",\"T18-STATPEARLS\",\"StatPearls\",\"Hands-on Anatomy\"],\"sha256\":\"5bb64f9df1005baa44c29566949c961fdd6c6166917a8ea7e73a105b871c9d2d\"},\"learnerRuntimeRows\":{\"names\":81,\"conceptStructureRows\":8,\"sourceStructureRows\":14,\"actions\":7},\"distribution\":{\"scannedFiles\":5,\"bundles\":[{\"path\":\"atlas-web/dist/assets/App-BhWxpm9v.js\",\"bytes\":731496,\"sha256\":\"ece7dd7801c798c46e1376679ff37241cfe861a1c0f7b69eaacc609af9b5fa26\"},{\"path\":\"atlas-web/dist/assets/index-BA3WcX97.js\",\"bytes\":222370,\"sha256\":\"e37b1f88a60312a8d483d0b2279c0a0402cb1faf0f61e31ce56a4d0b24792f0b\"}]},\"provenanceMarkersChecked\":274,\"leaks\":[],\"limitations\":[\"The private workbook bytes were not reopened or copied; only the existing T81 disposition/hash record was checked.\",\"This validates absence of development provenance markers from compiled learner assets, not public redistribution permission or human review.\"]}\n",
+      "stderrTail": ""
+    }
+  ],
+  "status": "passed"
+}
