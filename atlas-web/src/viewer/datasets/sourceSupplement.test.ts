@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { composeSupplementDataset, composeSupplementRuntime } from './sourceSupplement.ts';
 import { resolveSupplementTargetRelations, targetRoutesBySource } from './supplementRelations.ts';
-import { buildRuntimeIntegration, datasetRouteQuery, readDatasetRoute } from './integration.ts';
+import { buildRuntimeIntegration, datasetRouteQuery, readDatasetRoute, searchStructures } from './integration.ts';
 import { DATASET_BUDGET, planLods, validateDataset, type Dataset } from './schema.ts';
 import type { SourceSupplement } from './sourceSupplement.ts';
 
@@ -70,12 +70,12 @@ test('supplement relations create opaque target/member routes from exact frozen 
  assert.equal(relations.filter(row=>row.scope==='bounded_source_group_member').length,supplement.sourceGroupMembership!.FMA16580.memberElementFileIds.length);
  const targetRoutes=targetRoutesBySource(relations);
  const rows=supplement.objects.map(object=>({sourceKey:object.sourceKey,label:object.label,
-  names:object.names,aliases:object.aliases,localDisplayEligible:true,regionIds:object.regionIds,
+  routeAudience:'inspection' as const,names:object.names,aliases:object.aliases,localDisplayEligible:true,regionIds:object.regionIds,
   haConceptId:null,side:object.side,targetRoutes:targetRoutes.get(object.sourceKey)!}));
  for(const relation of relations) {
-  const route=readDatasetRoute(`?targetPathKey=${relation.targetRouteKey}`,rows,scope.regions.map((r:any)=>r.regionId));
+  const route=readDatasetRoute(`?targetPathKey=${relation.targetRouteKey}`,rows,scope.regions.map((r:any)=>r.regionId),'inspection');
   assert.equal(route.selected,relation.sourceKey);assert.equal(route.targetPathKey,relation.targetRouteKey);
-  assert.deepEqual(readDatasetRoute('?'+datasetRouteQuery(route),rows,scope.regions.map((r:any)=>r.regionId)),route);
+  assert.deepEqual(readDatasetRoute('?'+datasetRouteQuery(route),rows,scope.regions.map((r:any)=>r.regionId),'inspection'),route);
   assert.equal(JSON.stringify(route).includes(relation.targetId),false);
  }
  const bad=structuredClone(supplement);bad.objects.find((row:any)=>row.sourceIdentity.sourceElementFileId==='FJ2741')!.side='right';
@@ -98,6 +98,18 @@ test('registered same-bone display alternatives suppress only their ZA counterpa
   {sha256:hash(scopeBytes),supportContext:{sha256:hash(supportBytes),terms:supportContext},targets:scope.targets});
  const runtime=composeSupplementRuntime(baseRuntime,dataset,supplement,targetRoutesBySource(relationEvidence),'d'.repeat(64),'e'.repeat(64));
  assert.equal(runtime.objects.some(row=>'spatialPlacementStatus' in row),false);
+ assert.equal(runtime.objects.filter(row=>row.routeAudience==='inspection').length,13);
+ assert.equal(runtime.objects.filter(row=>row.routeAudience==='learner').length,960);
+ assert.equal(searchStructures(runtime.objects,'levator veli palatini',[]).some(row=>row.sourceKey.startsWith('BP3D4-')),false);
+ assert.equal(searchStructures(runtime.objects,'levator veli palatini',[],'inspection').some(row=>row.sourceKey==='BP3D4-FJ2741'),true);
+ for(const row of runtime.objects.filter(row=>row.routeAudience==='inspection')) {
+  assert.equal(readDatasetRoute(`?source=${encodeURIComponent(row.sourceKey)}`,runtime.objects,['head','neck','back','thorax','abdomen-lumbar','pelvis-perineum','gluteal-hip','upper-limb','forearm-hand','thigh','leg','foot']).selected,null);
+  for(const path of row.targetRoutes) {
+   assert.equal(readDatasetRoute(`?regions=${path.regionId}&targetPathKey=${path.key}`,runtime.objects,['head','neck','back','thorax','abdomen-lumbar','pelvis-perineum','gluteal-hip','upper-limb','forearm-hand','thigh','leg','foot']).selected,null);
+   const inspected=readDatasetRoute(`?regions=${path.regionId}&targetPathKey=${path.key}`,runtime.objects,['head','neck','back','thorax','abdomen-lumbar','pelvis-perineum','gluteal-hip','upper-limb','forearm-hand','thigh','leg','foot'],'inspection');
+   assert.equal(inspected.selected,row.sourceKey);assert.equal(inspected.audience,'inspection');
+  }
+ }
  const expected=new Map([
   ['BP3D4-FJ3152','ZA-c7010a9-74a765dc396d690d1642153e'],
   ['BP3D4-FJ3288','ZA-c7010a9-ecb65ff4cc3da710e5a2d157'],

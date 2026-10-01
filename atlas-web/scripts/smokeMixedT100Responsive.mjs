@@ -12,8 +12,8 @@ const require=createRequire(resolve(arg('--packages'),'t100-responsive-smoke.cjs
 const {chromium}=require('playwright');
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const root=resolve(fileURLToPath(new URL('../..',import.meta.url)));
-const routePath=arg('--route-validation','work/evidence/T100/source-completion-2026-10-01/integration/runtime-v6/mixed-runtime-route-validation.json');
-const relationPath=arg('--relations','work/evidence/T100/source-completion-2026-10-01/integration/runtime-v6/supplement-target-relation-ledger.json');
+const routePath=arg('--route-validation','work/evidence/T100/source-completion-2026-10-01/integration/runtime-v9/mixed-runtime-route-validation.json');
+const relationPath=arg('--relations','work/evidence/T100/source-completion-2026-10-01/integration/runtime-v9/supplement-target-relation-ledger.json');
 const relations=JSON.parse(await readFile(resolve(root,relationPath),'utf8')).relations;
 const routes=JSON.parse(await readFile(resolve(root,routePath),'utf8'));
 const supplement=JSON.parse(await readFile(resolve(root,'atlas-data/manifests/bodyparts3d-r4-t100-source-supplement.json'),'utf8'));
@@ -22,7 +22,7 @@ const sourceByKey=new Map(supplement.objects.map(row=>[row.sourceKey,row]));
 const queryFor=sourceKey=>{
  const relation=relations.find(row=>row.sourceKey===sourceKey);
  if(!relation)throw Error(`missing exact current target route for ${sourceKey}`);
- return `/?regions=${encodeURIComponent(relation.regionId)}&targetPathKey=${encodeURIComponent(relation.targetRouteKey)}`;
+ return `/?view=source-observation&regions=${encodeURIComponent(relation.regionId)}&targetPathKey=${encodeURIComponent(relation.targetRouteKey)}`;
 };
 const widths=[{width:1440,height:1000},{width:1024,height:900},{width:390,height:844}];
 const out=resolve(root,arg('--out','work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v6'));

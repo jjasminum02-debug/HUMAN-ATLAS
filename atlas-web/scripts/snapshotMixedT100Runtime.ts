@@ -119,7 +119,7 @@ for (const relation of relationEvidence) {
         supplementRelationFailures.push({ targetId: relation.targetId, regionId: relation.regionId, reason: 'not-in-frozen-scope' });
         continue;
     }
-    const route = readDatasetRoute(`?regions=${encodeURIComponent(relation.regionId)}&targetPathKey=${encodeURIComponent(relation.targetRouteKey)}`, runtime.objects, regionIds);
+    const route = readDatasetRoute(`?regions=${encodeURIComponent(relation.regionId)}&targetPathKey=${encodeURIComponent(relation.targetRouteKey)}`, runtime.objects, regionIds, 'inspection');
     if (route.selected !== relation.sourceKey || route.targetPathKey !== relation.targetRouteKey || route.regions.join(',') !== relation.regionId) {
         supplementRelationFailures.push({ ...relation, reason: 'mixed-runtime-supplement-route-mismatch', selected: route.selected, regions: route.regions });
         continue;
@@ -134,7 +134,7 @@ if (routeFailures.length || supplementRelationFailures.length) throw Error(`mixe
 const missingMemberships = [...targetMemberships.values()].filter(({ targetId, regionId }) => !routedMemberships.has(`${targetId}|${regionId}`));
 const routeBodySha256 = sha(endpoint.body);
 const routeSummary = {
-    schemaVersion: 't100-mixed-runtime-route-validation-v1',
+    schemaVersion: 't100-mixed-runtime-route-validation-v2',
     taskId: 'T100',
     nextUnit: 'resolve-target-representation-and-final-scene-qa',
     baselineHead: '3a04aa4049f1d0948c760eb1962fcf9cc215953b',
@@ -159,7 +159,7 @@ const routeSummary = {
         partOfSha256: sha(partofBytes), historicalRasterLedgerHashes: sourceLedgerHashes,
         historicalMembershipLedgerSha256: sha(await read('work/evidence/T100/closure-audit-2026-09-30/selection-render-ledger.json')),
     },
-    claimBoundary: 'Base route aliases are re-executed through the current v4 mixed-runtime router. The 13 supplement member routes are new opaque targetPathKey selections. Neither establishes full target/group extent, anatomical approval, or visual acceptance.',
+    claimBoundary: 'Base route aliases are re-executed through the current v5 mixed-runtime router in the learner audience. The 13 supplement member routes are developer-only source-observation selections. Neither establishes full target/group extent, anatomical approval, or visual acceptance.',
 };
 const targetRelationLedger = {
     schemaVersion: 't100-supplement-target-relation-ledger-v1', taskId: 'T100', generatedAt: new Date().toISOString(),

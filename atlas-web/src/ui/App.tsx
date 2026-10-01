@@ -8,6 +8,12 @@ import { AtlasLoading } from './AtlasLoading';
 import './styles.css';
 import './atlasShell.css';
 const regionIds = navigation.categories.map(c => c.id);
+function routeAudienceFor(search: string): 'learner' | 'inspection' {
+    return import.meta.env.DEV && new URLSearchParams(search).get('view') === 'source-observation' ? 'inspection' : 'learner';
+}
+function resolveRoute(search: string, rows: RuntimeStructureRecord[]): DatasetRoute {
+    return readDatasetRoute(search, rows, regionIds, routeAudienceFor(search));
+}
 function NameRows({ row }: {
     row: RuntimeStructureRecord;
 }) {
@@ -35,24 +41,25 @@ export default function App() {
         void Promise.all(['/__atlas/datasets/human-atlas-local/manifest.json', '/__atlas/integration.json'].map(async (url) => { const response = await fetch(url, { signal: abort.signal }); if (!response.ok)
             throw Error('자료 연결 실패'); return response.json(); }))
             .then(([raw, overlay]) => { if (abort.signal.aborted)
-            return; const dataset = validateDataset(raw); const integration = validateRuntimeIntegration(overlay, dataset); setData({ dataset, integration }); setRoute(readDatasetRoute(location.search, integration.objects, regionIds)); })
+            return; const dataset = validateDataset(raw); const integration = validateRuntimeIntegration(overlay, dataset); setData({ dataset, integration }); setRoute(resolveRoute(location.search, integration.objects)); })
             .catch(() => { if (!abort.signal.aborted)
             setError(true); }).finally(() => clearTimeout(timer));
         return () => { clearTimeout(timer); abort.abort(); };
     }, []);
     useEffect(() => { if (!data)
-        return; const pop = () => { setRoute(readDatasetRoute(location.search, data.integration.objects, regionIds)); setDetailsOpen(true); }; window.addEventListener('popstate', pop); return () => window.removeEventListener('popstate', pop); }, [data]);
-    const rows = useMemo(() => data ? searchStructures(data.integration.objects, query, route.regions) : [], [data, query, route.regions]);
+        return; const pop = () => { setRoute(resolveRoute(location.search, data.integration.objects)); setDetailsOpen(true); }; window.addEventListener('popstate', pop); return () => window.removeEventListener('popstate', pop); }, [data]);
+    const rows = useMemo(() => data ? searchStructures(data.integration.objects, query, route.regions, route.audience ?? 'learner') : [], [data, query, route.regions, route.audience]);
     const selected = data?.integration.objects.find(r => r.sourceKey === route.selected);
     const actions = useMemo(() => selected?.haConceptId ? motionActionOptionsForLearner(selected.haConceptId).filter(a => !a.candidate || !selected.side || a.candidate.definition.side === selected.side) : [], [selected?.haConceptId, selected?.side]);
     const action = actions.find(a => a.id === actionId) ?? actions[0];
     const title = route.regions.length ? navigation.categories.filter(c => route.regions.includes(c.id)).map(c => c.labelKo).join(' · ') : '전신 살펴보기';
     function navigate(next: DatasetRoute, keepExplore = false) {
-        const query = datasetRouteQuery(next);
+        const nextRoute = route.audience === 'inspection' ? { ...next, audience: 'inspection' as const } : next;
+        const query = datasetRouteQuery(nextRoute);
         const url = location.pathname + (query ? '?' + query : '');
         if (url !== location.pathname + location.search)
             history.pushState(null, '', url);
-        setRoute(next);
+        setRoute(nextRoute);
         setDetailsOpen(true);
         setTab('구조');
         setActionId(null);
@@ -65,7 +72,8 @@ export default function App() {
         navigate({ regions, selected: selected && (!regions.length || selected.regionIds.some(r => regions.includes(r))) ? selected.sourceKey : null }, true);
     }
     function select(id: string) {
-        const row = data?.integration.objects.find(r => r.sourceKey === id && r.inspectionEligible && r.localDisplayEligible);
+        const row = data?.integration.objects.find(r => r.sourceKey === id && r.inspectionEligible && r.localDisplayEligible
+            && r.routeAudience === (route.audience ?? 'learner'));
         if (!row)
             return;
         // Search can reach outside a regional filter; whole-body selection never narrows the user's scene.
@@ -104,7 +112,7 @@ export default function App() {
    {selected && <details inert={!entered} className="study-details" id="study-details" open={detailsOpen} onToggle={e => setDetailsOpen(e.currentTarget.open)}><summary className="mobile-detail-summary">{selected.label}</summary><div className="study-detail-content">
     <button className="bone-related-muscle" onClick={() => navigate({ ...route, selected: null })}>선택 해제</button><h2>{selected.label}</h2><NameRows row={selected}/>
     <div className="names-card"><div><span>{selected.kind === 'bone' ? '뼈' : '근육'}</span><strong>{selected.side === 'left' ? '왼쪽' : selected.side === 'right' ? '오른쪽' : '좌우 구분 없음'}</strong></div></div>
-    <div className="part-pills" aria-label="좌우 모형">{data.integration.objects.filter(r => r.localDisplayEligible && r.names.en === selected.names.en && r.side).map(r => <button key={r.sourceKey} aria-pressed={r.sourceKey === selected.sourceKey} onClick={() => select(r.sourceKey)}>{r.side === 'left' ? '왼쪽' : '오른쪽'}</button>)}</div>
+    <div className="part-pills" aria-label="좌우 모형">{data.integration.objects.filter(r => r.routeAudience === (route.audience ?? 'learner') && r.localDisplayEligible && r.inspectionEligible && r.names.en === selected.names.en && r.side).map(r => <button key={r.sourceKey} aria-pressed={r.sourceKey === selected.sourceKey} onClick={() => select(r.sourceKey)}>{r.side === 'left' ? '왼쪽' : '오른쪽'}</button>)}</div>
     {selected.kind === 'muscle' ? <><div className="movement-cta-block"><button className="movement-cta" disabled aria-describedby="movement-unavailable-note">움직임으로 이해하기</button><p id="movement-unavailable-note" className="quiet-note">움직임 시범 자료는 준비 중입니다.</p></div>
     <div className="study-tabs" role="tablist" aria-label="학습 내용">{(['구조', '기능'] as const).map(t => <button key={t} role="tab" id={`tab-${t}`} aria-controls="study-tab-panel" aria-selected={tab === t} tabIndex={tab === t ? 0 : -1} onClick={() => setTab(t)} onKeyDown={e => { if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) {
                 e.preventDefault();

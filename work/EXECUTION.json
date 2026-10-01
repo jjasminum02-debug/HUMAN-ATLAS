@@ -285,12 +285,12 @@
       "title": "현재 지원 범위 앱 통합 마무리",
       "owner": "Luna Max",
       "phase": "G1",
-      "executionStatus": "in_progress",
-      "acceptance": "partial",
+      "executionStatus": "completed",
+      "acceptance": "passed",
       "spec": "work/tasks/T100-APP-COMPLETION.md",
       "scope": "현재 단일 scene의 ZA 기반 전신 앱 통합을 마무리한다. 현재 runtime에서 product-scope.json을 생성하여 지원 구조/실제 표현 범위/학습 경로/개발 관찰을 구분한다. BP3D 미정합 13개는 일반 학습 노출에서 격리하고 source-only 근거를 보존한다. 지원 구조의 검색·세 이름 카드·좌우·12부위·선택·핵심 관찰 controller와 정책을 검증한다. 127개 세부 target 확보·73개 직접 인용·전체 extent pass는 콘텐츠 backlog이며 이 task의 일괄 종료 조건이 아니다. 실제 지원한다고 표시한 구조의 오류는 고친다. 최종 UI polish와 정밀 성능 최적화는 T58 책임이다.",
       "progress": {
-        "nextUnit": "finalize-supported-app-integration",
+        "nextUnit": null,
         "completedUnits": [
           "audit-frozen-inputs-and-actual-compiled-chunks",
           "build-12-region-542-target-563-membership-coverage-matrix",
@@ -377,14 +377,10 @@
           "T100 2026-10-01 final integration: compare three pelvis surface candidates and retain all 13 supplement objects as spatially unaccepted; regional placement for ten head/neck/back objects remains unresolved",
           "T100 2026-10-01 final integration: capture all 13 supplement selections in current browser runtime and run responsive/keyboard/search/history smoke at 1440/1024/390 without treating raster as target extent acceptance",
           "T100 2026-10-01 final integration: pass current dataset/delivery/whole-body/search tests, typecheck, build, supplement and regional diagnostic checks; keep 127 target, 130 membership, 73 term-evidence and all-target extent gates partial",
-          "T100 2026-10-01 final integration: correct route evidence to count six unique target-region membership pairs separately from thirteen source-object selection routes; combined coverage remains 415/433"
+          "T100 2026-10-01 final integration: correct route evidence to count six unique target-region membership pairs separately from thirteen source-object selection routes; combined coverage remains 415/433",
+          "T100 app-completion contract: generated current product scope, quarantined spatially unaccepted BP3D from learner routes, verified all twelve regions and passed actual supported-scope browser/controller checks"
         ],
-        "pendingUnits": [
-          "현재 실제 runtime에서 지원 범위와 정확한 표현 수준을 생성하고 542/563 전체 disposition을 기존 원장과 연결한다.",
-          "지원 경로의 카드/side/region/name/정책 자동 계약 검사와 기본 전신·12부위·선택 controller의 실제 동작을 확인한다.",
-          "미정합 BP3D의 잘못된 일반 학습 노출을 격리하고 held/user-layer-off 복원 우회를 막는다.",
-          "발견된 통합 차단 결함을 수정하고 콘텐츠 completeness와 제품 acceptance를 별도 기록한다."
-        ],
+        "pendingUnits": [],
         "evidence": [
           "work/evidence/T100/start-baseline.json",
           "work/evidence/T100/region-coverage-matrix.json",
@@ -581,9 +577,13 @@
           "work/evidence/T100/source-completion-2026-10-01/integration/current-visual-worklist.json",
           "work/evidence/T100/source-completion-2026-10-01/integration/remaining-action-queue.json",
           "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v8/png-integrity-validation.json",
-          "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v11/png-integrity-validation.json"
+          "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v11/png-integrity-validation.json",
+          "work/product-scope.json",
+          "work/evidence/T100/app-completion-2026-10-01/automated-contract.json",
+          "work/evidence/T100/app-completion-2026-10-01/browser-qa.json",
+          "work/evidence/T100/app-completion-2026-10-01/verification.json"
         ],
-        "result": "기준·순서·프롬프트 개정만 적용했다. T100 remains in_progress/partial pending actual supported-app finalization. Historical route coverage 415/542 and 433/563, unsupported 127/130, citation gaps 73 and spatially unaccepted BP3D 13 remain unchanged; no implementation or acceptance is inferred.",
+        "result": "Current supported local learner scope passed under app-completion-2026-10-01. Content completeness remains partial and is recorded separately; no T80/T58 work was started.",
         "runtimeProjection": {
           "schema": "whole-body-local-runtime-v3",
           "sourceOverlaySha256": "ff57e0e98c635c65708c5322d82b35cf7f6c1fc6ada2ba95ae95db7f15a9b2af",
@@ -668,22 +668,22 @@
             "humanReview": "not_performed"
           }
         },
-        "nextId": "T100",
+        "nextId": "T80",
         "nextOwner": "Luna Max",
-        "nextPromptPath": "work/prompts/app-completion-2026-10-01/01-T100.txt",
+        "nextPromptPath": "work/prompts/app-completion-2026-10-01/02-T80.txt",
         "gate": {
           "contractRevision": "app-completion-2026-10-01",
           "acceptanceScope": "current_supported_local_product; not all_target_content_or_public_release",
-          "productReadiness": "not_yet_validated_against_revised_contract",
+          "productReadiness": "ready_for_current_supported_local_learning_scope",
           "contentCompleteness": "partial",
           "denominators": {
             "targets": 542,
             "memberships": 563,
             "regions": 12
           },
-          "historicalGateRef": "progress.scopeAmendmentHistory[-1].previousGate",
-          "currentEvidenceRef": "work/evidence/T100/source-completion-2026-10-01/integration/final-blocker-list.json",
-          "productScopeFile": "work/product-scope.json; to be generated by T100"
+          "productScopeFile": "work/product-scope.json",
+          "automatedContractEvidence": "work/evidence/T100/app-completion-2026-10-01/automated-contract.json",
+          "unresolvedProductBlockers": []
         },
         "resumeHistory": [
           {
@@ -1160,7 +1160,62 @@
             "reason": "User authorized product completion separate from exhaustive content acquisition"
           }
         ],
-        "finalizationRole": "historical pre-amendment validation; preserved, not revised product acceptance"
+        "finalizationRole": "historical pre-amendment validation; preserved, not revised product acceptance",
+        "productAcceptance": {
+          "contractRevision": "app-completion-2026-10-01",
+          "acceptanceScope": "current_supported_local_product; not all_target_content_or_public_release",
+          "productReadiness": "ready_for_current_supported_local_learning_scope",
+          "contentCompleteness": "partial",
+          "knownContentGaps": {
+            "denominators": {
+              "targets": 542,
+              "memberships": 563,
+              "regions": 12
+            },
+            "learnerCoverage": {
+              "targetsWithRoute": 409,
+              "targetsWithoutRoute": 133,
+              "membershipsWithRoute": 427,
+              "membershipsWithoutRoute": 136
+            },
+            "inspectionOnlyBp3d": {
+              "objects": 13,
+              "distinctTargetIds": 6,
+              "targetRegionMembershipPairs": 6,
+              "spatiallyAcceptedObjects": 0
+            },
+            "directKoreanTermEvidenceRows": 73,
+            "fullTargetExtentPasses": 0,
+            "unresolvedFinePartVariantGroupAndSideEvidence": true,
+            "unresolvedCrossDatasetRegionalRegistration": "BP3D supplement remains observation-only; no global transform established",
+            "historical163": {
+              "total": 163,
+              "classes": {
+                "exactSourceLabel": 6,
+                "descendantSurface": 20,
+                "ancestorOrGroupSurface": 135,
+                "frozenPackageNoExactAncestorOrDescendant": 2
+              }
+            },
+            "performanceAndUiFollowup": [
+              "T80 learner-flow audit not started",
+              "T58 measured UI/performance optimization not started"
+            ],
+            "rightsAndReview": {
+              "publicRedistribution": "held",
+              "humanReview": "not_performed",
+              "sourceOnly": "retained per object"
+            }
+          },
+          "unresolvedProductBlockers": [],
+          "evidence": [
+            "work/product-scope.json",
+            "work/evidence/T100/app-completion-2026-10-01/automated-contract.json",
+            "work/evidence/T100/app-completion-2026-10-01/browser-qa.json",
+            "work/evidence/T100/app-completion-2026-10-01/verification.json",
+            "work/reports/T100.md"
+          ]
+        }
       },
       "report": "work/reports/T100.md",
       "acceptanceScope": "current_supported_local_product; not all_target_content_or_public_release",

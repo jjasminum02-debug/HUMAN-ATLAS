@@ -1,0 +1,193 @@
+{
+  "schemaVersion": "t100-app-completion-browser-qa-v1",
+  "taskId": "T100",
+  "contractRevision": "app-completion-2026-10-01",
+  "observedAt": "2026-10-01",
+  "browser": "Codex In-app Browser (Chrome)",
+  "origin": "http://127.0.0.1:5173/",
+  "actualBrowserVerified": true,
+  "currentScreenshotObservedViewportPx": [
+    825,
+    809
+  ],
+  "currentVisibleRegion": "upper-limb",
+  "learnerRegions": [
+    {
+      "regionId": "head",
+      "label": "머리",
+      "visibleNameCount": 54,
+      "regionControlSelected": true,
+      "existingStagePresent": true
+    },
+    {
+      "regionId": "neck",
+      "label": "목",
+      "visibleNameCount": 55,
+      "regionControlSelected": true,
+      "existingStagePresent": true
+    },
+    {
+      "regionId": "back",
+      "label": "등",
+      "visibleNameCount": 62,
+      "regionControlSelected": true,
+      "existingStagePresent": true
+    },
+    {
+      "regionId": "shoulder-scapular",
+      "label": "어깨·어깨뼈",
+      "visibleNameCount": 13,
+      "regionControlSelected": true,
+      "existingStagePresent": true
+    },
+    {
+      "regionId": "thorax",
+      "label": "가슴우리",
+      "visibleNameCount": 40,
+      "regionControlSelected": true,
+      "existingStagePresent": true
+    },
+    {
+      "regionId": "abdomen-lumbar",
+      "label": "배·허리",
+      "visibleNameCount": 14,
+      "regionControlSelected": true,
+      "existingStagePresent": true
+    },
+    {
+      "regionId": "pelvis-perineum",
+      "label": "골반·샅",
+      "visibleNameCount": 9,
+      "regionControlSelected": true,
+      "existingStagePresent": true
+    },
+    {
+      "regionId": "gluteal-hip",
+      "label": "볼기·깊은엉덩이",
+      "visibleNameCount": 12,
+      "regionControlSelected": true,
+      "existingStagePresent": true
+    },
+    {
+      "regionId": "thigh",
+      "label": "넙다리",
+      "visibleNameCount": 18,
+      "regionControlSelected": true,
+      "existingStagePresent": true
+    },
+    {
+      "regionId": "leg",
+      "label": "종아리",
+      "visibleNameCount": 16,
+      "regionControlSelected": true,
+      "existingStagePresent": true
+    },
+    {
+      "regionId": "foot",
+      "label": "발",
+      "visibleNameCount": 42,
+      "regionControlSelected": true,
+      "existingStagePresent": true
+    },
+    {
+      "regionId": "upper-limb",
+      "label": "팔·손",
+      "visibleNameCount": 83,
+      "regionControlSelected": true,
+      "existingStagePresent": true
+    }
+  ],
+  "supportedMuscleSelection": {
+    "concept": "tibialis-anterior",
+    "learnerNames": {
+      "modernKorean": "앞정강근",
+      "sinoKoreanHangul": "전경골근",
+      "english": "Tibialis anterior muscle"
+    },
+    "leftSelectionCardAndRouteMatch": true,
+    "rightSelectionCardAndRouteMatch": true,
+    "localizedHighlightVisuallyInspected": true,
+    "sameSceneAndCanvas": true
+  },
+  "viewerControls": {
+    "selectionOnlyIsolation": true,
+    "restoreView": true,
+    "hideSelected": true,
+    "undoHide": true,
+    "selectedTransparency": true,
+    "fitSelectedRegionInContext": true,
+    "controlsRemainConsistentWithSelection": true
+  },
+  "history": {
+    "leftRightBackForwardRestoresMatchingCardAndRoute": true,
+    "blockedLearnerRouteBackForwardDoesNotSelectQuarantinedSource": true,
+    "explicitDevInspectionRouteIsRequiredToSelectInspectionSource": true
+  },
+  "quarantineCase": {
+    "sourceKey": "BP3D4-FJ2741",
+    "searchTerm": "입천장올림근",
+    "normalLearnerSearchResultCount": 0,
+    "directLearnerSourceRouteSelected": false,
+    "directLearnerTargetPathSelected": false,
+    "explicitDevInspectionRouteSelected": true,
+    "inspectionNamesAndSourceSideMatch": true,
+    "sameSceneNoSeparateViewer": true,
+    "defaultVisibleInspectionObjects": 0
+  },
+  "scopeAndVisualLimits": {
+    "actualSelectionAndHighlightIsNotFullTargetExtentAcceptance": true,
+    "supplementObjectsWithSpatialAcceptance": 0,
+    "allTargetExtentPasses": 0,
+    "screenshotVisuallyInspected": true,
+    "persistedScreenshotPaths": [],
+    "screenshotPersistenceNote": "CUA returned an in-tool screenshot for visual inspection; this run did not expose a local screenshot file path.",
+    "browserConsoleLogsIndependentlyRead": false,
+    "consoleStatus": "Not claimed; current CUA tab interface exposed page state and screenshot but not console logs."
+  },
+  "regionCountSource": "Counts were read after selecting each region button in the actual browser and match the generated learner product scope.",
+  "sourceEvidence": [
+    "work/evidence/T100/app-completion-2026-10-01/automated-contract.json",
+    "work/evidence/T100/source-completion-2026-10-01/integration/final-validation-v9.json",
+    "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v11/responsive-browser-smoke.json"
+  ],
+  "trapeziusDisplayConflictCheck": {
+    "actualBrowserSearch": "승모근",
+    "uiRows": [
+      {
+        "display": "승모근 상부",
+        "english": "Descending part of trapezius muscle",
+        "sourceKey": "ZA-c7010a9-e07069f3efea3d66c4e25ac2",
+        "sourceName": "Ascending part of trapezius muscle.l",
+        "correctedDisplayPart": "superior",
+        "worldYBoundsMetres": [
+          1.4154925046074687,
+          1.5747380518717493
+        ],
+        "evaluatedGeometrySha256": "576353abfdb0fd286ce49a9ca454da5ff5f4d6d1ef03a33955ebcc901593846b",
+        "isolatedFitVisuallyInspected": true
+      },
+      {
+        "display": "승모근 하부",
+        "english": "Ascending part of trapezius muscle",
+        "sourceKey": "ZA-c7010a9-949cdee8e7b16d22f295af1e",
+        "sourceName": "Descending part of trapezius muscle.l",
+        "correctedDisplayPart": "inferior",
+        "worldYBoundsMetres": [
+          1.1200791815298081,
+          1.4143072562864352
+        ],
+        "evaluatedGeometrySha256": "bba204c6fac7acb06200db7ad8eef4e88ec8694c32c0ab60b2147bbbeed3df43",
+        "isolatedFitVisuallyInspected": true
+      }
+    ],
+    "observation": "Source object English labels conflict with physical geometry. Existing T100 correction assigns the higher cervical/shoulder surface to displayed superior and the lower thoracic surface to displayed inferior; live UI names and isolated fitted selections were visually compared. No source label, geometry, canonical binding, or human-review state was changed in this task.",
+    "humanReview": "not_performed",
+    "persistedScreenshots": false
+  },
+  "finalState": {
+    "route": "http://127.0.0.1:5173/",
+    "selectionCleared": true,
+    "allRegionsUnselected": true,
+    "fullBodyFitAppliedAndVisuallyConfirmed": true
+  }
+}

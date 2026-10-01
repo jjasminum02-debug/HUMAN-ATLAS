@@ -164,7 +164,7 @@ export function composeSupplementRuntime(
     const base = baseValue;
     const baseBySource = new Map(base.objects.map(row => [row.sourceKey, row]));
     const objects: RuntimeStructureRecord[] = [
-        ...base.objects.map(row => ({ ...row, targetRoutes: [], displayDecisionBasis: COMPOSITE_LOCAL_DECISION })),
+        ...base.objects.map(row => ({ ...row, routeAudience: 'learner' as const, targetRoutes: [], displayDecisionBasis: COMPOSITE_LOCAL_DECISION })),
         ...supplement.objects.map(object => {
             if (object.rights.localDisplay !== 'allowed_per_T77_item_decision' || object.rights.publicRedistribution !== 'held'
                 || object.rights.sourceOnly !== true || object.rights.humanReview !== 'not_performed'
@@ -182,6 +182,7 @@ export function composeSupplementRuntime(
             }
             return {
                 sourceKey: object.sourceKey,
+                routeAudience: 'inspection',
                 searchGroupKey: object.searchGroupKey,
                 kind: object.kind === 'skeletal_surface' ? 'bone' : object.kind === 'muscle_surface_or_part' ? 'muscle' : 'accessory',
                 regionIds: [...object.regionIds],
@@ -210,7 +211,7 @@ export function composeSupplementRuntime(
     ];
     const projection: RuntimeIntegration = {
         ...base,
-        projectionSchema: 'whole-body-local-runtime-v4',
+        projectionSchema: 'whole-body-local-runtime-v5',
         revision: `${base.revision}+${supplement.revision}`,
         datasetRevision: dataset.revision,
         sourceOverlaySha256,

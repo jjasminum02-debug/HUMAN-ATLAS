@@ -194,6 +194,8 @@ export interface Integration {
 /** Learner/runtime rows intentionally exclude developer evidence, target IDs, locators and local paths. */
 export interface RuntimeStructureRecord {
     sourceKey: string;
+    /** Separates learner-ready routes from local-only source inspection routes. */
+    routeAudience: 'learner' | 'inspection';
     searchGroupKey: string;
     kind: 'bone' | 'muscle' | 'accessory';
     regionIds: string[];
@@ -223,7 +225,7 @@ export interface RuntimeStructureRecord {
 }
 export interface RuntimeIntegration {
     schemaVersion: 1;
-    projectionSchema: 'whole-body-local-runtime-v4';
+    projectionSchema: 'whole-body-local-runtime-v5';
     revision: string;
     datasetRevision: string;
     sourceOverlaySha256: string;
@@ -732,10 +734,10 @@ export function validateIntegration(value: unknown, dataset: Dataset, frozenTarg
         throw Error('incomplete trapezius surface-assignment correction pair');
     return i;
 }
-const RUNTIME_SCHEMA = 'whole-body-local-runtime-v4' as const;
+const RUNTIME_SCHEMA = 'whole-body-local-runtime-v5' as const;
 const FROZEN_T100_SCOPE = { targets: 542, memberships: 563, regions: 12 } as const;
 const projectionKeys = ['schemaVersion', 'projectionSchema', 'revision', 'datasetRevision', 'sourceOverlaySha256', 'rightsEvidenceSha256', 'scope', 'policy', 'objects'];
-const runtimeRowKeys = ['sourceKey', 'searchGroupKey', 'kind', 'regionIds', 'side', 'label', 'names', 'aliases', 'haConceptId', 'learnerConceptKeys', 'targetRoutes', 'selectionSuppressSourceKeys', 'localDisplayEligible', 'inspectionEligible', 'defaultVisible', 'sourceOnly', 'humanReview', 'publicRedistribution', 'sourceHiddenStatePreserved', 'localUseRights', 'displayDecisionBasis', 'hardHoldReasons', 'bounds', 'relatedMuscles'];
+const runtimeRowKeys = ['sourceKey', 'routeAudience', 'searchGroupKey', 'kind', 'regionIds', 'side', 'label', 'names', 'aliases', 'haConceptId', 'learnerConceptKeys', 'targetRoutes', 'selectionSuppressSourceKeys', 'localDisplayEligible', 'inspectionEligible', 'defaultVisible', 'sourceOnly', 'humanReview', 'publicRedistribution', 'sourceHiddenStatePreserved', 'localUseRights', 'displayDecisionBasis', 'hardHoldReasons', 'bounds', 'relatedMuscles'];
 const runtimePolicyKeys = ['localOnly', 'publicRedistribution', 'humanReview', 'localUseRights', 'rightsDecisionId'];
 function exactKeys(value: unknown, expected: string[], message: string): asserts value is Record<string, unknown> {
     if (!value || typeof value !== 'object' || Array.isArray(value)
@@ -775,6 +777,7 @@ export function buildRuntimeIntegration(value: unknown, dataset: Dataset, source
         },
         objects: full.objects.map(row => ({
             sourceKey: row.sourceKey,
+            routeAudience: 'learner',
             searchGroupKey: row.sourceName.replace(/\.[lr]$/, ''),
             kind: row.kind,
             regionIds: [...row.regionIds],
@@ -828,6 +831,7 @@ export function validateRuntimeIntegration(value: unknown, dataset: Dataset): Ru
         const instance = instances.get(row.sourceKey);
         const geometryKind = instance ? runtimeKindForDataset(instance.kind) : null;
         if (!row.sourceKey || !instance || seen.has(row.sourceKey) || !geometryKind || (row.kind !== 'accessory' && geometryKind !== row.kind)
+            || row.routeAudience !== (instance.sourceNamespace === 'bp3d-r4' ? 'inspection' : 'learner')
             || !['bone', 'muscle', 'accessory'].includes(row.kind) || !row.searchGroupKey || !row.label
             || !Array.isArray(row.regionIds) || row.regionIds.some(id => typeof id !== 'string' || !id)
             || !Array.isArray(row.aliases) || row.aliases.some(alias => typeof alias !== 'string')
@@ -876,9 +880,13 @@ export function validateRuntimeIntegration(value: unknown, dataset: Dataset): Ru
         throw Error('runtime missing source record or region');
     return i;
 }
-type SearchableStructure = Pick<StructureRecord, 'sourceKey' | 'label' | 'names' | 'aliases' | 'localDisplayEligible' | 'regionIds' | 'haConceptId' | 'side'> & { sourceName?: string; searchGroupKey?: string; searchApproximate?: boolean; learnerConceptKeys?: string[]; learnerConceptLinks?: StructureRecord['learnerConceptLinks']; targetRoutes?: { key: string; regionId: string }[] };
-export function searchStructures<T extends SearchableStructure>(rows: T[], query: string, regions: string[]) {
-    const candidates = rows.filter(r => r.localDisplayEligible && (query.trim() || !regions.length || r.regionIds.some(x => regions.includes(x))));
+type RouteAudience = 'learner' | 'inspection';
+type SearchableStructure = Pick<StructureRecord, 'sourceKey' | 'label' | 'names' | 'aliases' | 'localDisplayEligible' | 'regionIds' | 'haConceptId' | 'side'> & { sourceName?: string; searchGroupKey?: string; searchApproximate?: boolean; routeAudience?: RouteAudience; inspectionEligible?: boolean; learnerConceptKeys?: string[]; learnerConceptLinks?: StructureRecord['learnerConceptLinks']; targetRoutes?: { key: string; regionId: string }[] };
+function routeAllowed(row: SearchableStructure, audience: RouteAudience) {
+    return row.localDisplayEligible && row.inspectionEligible !== false && (row.routeAudience ?? 'learner') === audience;
+}
+export function searchStructures<T extends SearchableStructure>(rows: T[], query: string, regions: string[], audience: RouteAudience = 'learner') {
+    const candidates = rows.filter(r => routeAllowed(r, audience) && (query.trim() || !regions.length || r.regionIds.some(x => regions.includes(x))));
     const unique = new Map<string, T>();
     for (const r of candidates) {
         const key = r.searchGroupKey ?? r.sourceName?.replace(/\.[lr]$/, '') ?? r.sourceKey;
@@ -894,16 +902,18 @@ export interface DatasetRoute {
     regions: string[];
     selected: string | null;
     targetPathKey?: string;
+    /** Present only for the dev-only observation route; never used for ordinary learner navigation. */
+    audience?: 'inspection';
 }
-export function readDatasetRoute(search: string, rows: SearchableStructure[], regionIds: string[]): DatasetRoute {
+export function readDatasetRoute(search: string, rows: SearchableStructure[], regionIds: string[], audience: RouteAudience = 'learner'): DatasetRoute {
     const p = new URLSearchParams(search);
     let regions = (p.get('regions') ?? p.get('region') ?? '').split(',').filter(id => regionIds.includes(id));
     const id = p.get('source') ?? p.get('id');
     const side = p.get('side');
-    let row = id ? rows.find(r => r.localDisplayEligible && (r.sourceKey === id || r.haConceptId === id) && (!side || r.side === side)) : undefined;
+    let row = id ? rows.find(r => routeAllowed(r, audience) && (r.sourceKey === id || r.haConceptId === id) && (!side || r.side === side)) : undefined;
     const targetPathKey = p.get('targetPathKey');
     if (targetPathKey) {
-        const matches = rows.filter(candidate => candidate.localDisplayEligible
+        const matches = rows.filter(candidate => routeAllowed(candidate, audience)
             && candidate.targetRoutes?.some(route => route.key === targetPathKey)
             && (!id || candidate.sourceKey === id)
             && (!side || candidate.side === side));
@@ -916,18 +926,19 @@ export function readDatasetRoute(search: string, rows: SearchableStructure[], re
     } else if (!id) {
         const concept = p.get('concept');
         if (concept && /^LC-[a-f0-9]{20}$/.test(concept)) {
-            const matches = rows.filter(r => r.localDisplayEligible
+            const matches = rows.filter(r => routeAllowed(r, audience)
                 && (r.learnerConceptKeys?.includes(concept) || r.learnerConceptLinks?.some(link => link.conceptKey === concept))
                 && (!side || r.side === side));
             if (matches.length === 1)
                 row = matches[0];
         }
     }
-    const result: DatasetRoute = { regions: [...new Set(regions)], selected: row && (!regions.length || row.regionIds.some(r => regions.includes(r))) ? row.sourceKey : null };
+    const result: DatasetRoute = { regions: [...new Set(regions)], selected: row && (!regions.length || row.regionIds.some(r => regions.includes(r))) ? row.sourceKey : null,
+        ...(audience === 'inspection' ? { audience: 'inspection' as const } : {}) };
     if (targetPathKey && result.selected) result.targetPathKey = targetPathKey;
     return result;
 }
-export function datasetRouteQuery(route: DatasetRoute) { const p = new URLSearchParams(); if (route.regions.length)
+export function datasetRouteQuery(route: DatasetRoute) { const p = new URLSearchParams(); if (route.audience === 'inspection') p.set('view', 'source-observation'); if (route.regions.length)
     p.set('regions', route.regions.join(',')); if (route.selected)
     p.set('source', route.selected); if (route.targetPathKey)
     p.set('targetPathKey', route.targetPathKey); return p.toString(); }

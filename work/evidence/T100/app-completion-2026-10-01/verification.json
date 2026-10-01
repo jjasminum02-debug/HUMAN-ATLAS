@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "t100-app-completion-verification-v1",
+  "taskId": "T100",
+  "contractRevision": "app-completion-2026-10-01",
+  "recordedAt": "2026-10-01",
+  "baselineHeadAtTaskStart": "4111ba6ea6de31f0b6c365454ac8613824a066dc",
+  "priorUserReferencedCommit": "3a04aa4049f1d0948c760eb1962fcf9cc215953b",
+  "baselineNote": "Actual HEAD was verified from git and was newer than the commit cited in the prompt; no reset or checkout change was performed.",
+  "productScope": {
+    "path": "work/product-scope.json",
+    "sha256": "4cd3568b05db9c23e36d5120cb770424e3271d055b4f769f632f0378f0a1d737",
+    "deterministicBuilder": "atlas-web/scripts/buildProductScope.ts",
+    "builderCommand": "node --experimental-strip-types scripts/buildProductScope.ts --check",
+    "builderCheck": "passed",
+    "contractEvidence": "work/evidence/T100/app-completion-2026-10-01/automated-contract.json",
+    "learner": {
+      "targetRoutes": "409/542",
+      "membershipRoutes": "427/563",
+      "missingTargets": 133,
+      "missingMemberships": 136,
+      "selectableNamedSourceStructures": 672,
+      "directSelectionRoutesExecuted": 672,
+      "membershipRouteReferencesReexecuted": 2027,
+      "routeFailures": 0,
+      "searchEntries": 355
+    },
+    "inspection": {
+      "objects": 13,
+      "directSourceRoutesExecuted": 13,
+      "sourceObjectRoutes": 13,
+      "distinctTargetIds": 6,
+      "targetRegionMembershipPairs": 6,
+      "defaultVisibleObjects": 0,
+      "learnerSearchLeaks": 0,
+      "directLearnerSelectionLeaks": 0,
+      "directLearnerTargetRouteLeaks": 0
+    }
+  },
+  "denominatorsAndPreservation": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12,
+    "existingHaBindings": 130,
+    "uniqueExistingHaConceptIds": 65,
+    "historical163": {
+      "total": 163,
+      "classes": {
+        "exactSourceLabel": 6,
+        "descendantSurface": 20,
+        "ancestorOrGroupSurface": 135,
+        "frozenPackageNoExactAncestorOrDescendant": 2
+      },
+      "unchanged": true
+    },
+    "sourceOnly": "preserved independently per object; no canonical binding or rights/review promotion",
+    "humanReview": "not_performed",
+    "publicRedistribution": "held",
+    "fullTargetExtentAccepted": 0,
+    "sourceSupplementSpatialAcceptance": 0,
+    "OpenSim_Models": "not modified",
+    "T13Drafts": "not modified"
+  },
+  "tests": {
+    "command": "node --experimental-strip-types --test src/viewer/datasets/*.test.ts src/viewer/wholeBody/wholeBody.test.ts src/viewer/wholeBody/productContext.test.ts src/domain/search.test.ts src/data/boneNames.test.ts scripts/delivery.test.ts",
+    "status": "passed",
+    "passed": 103,
+    "failed": 0
+  },
+  "build": {
+    "command": "node --run build (atlas-web/package.json)",
+    "status": "passed",
+    "steps": [
+      "learning content validation",
+      "AI evidence schema check",
+      "bone-name overlay check",
+      "motion learning schema check",
+      "motion asset source validation",
+      "scene decoder QA",
+      "TypeScript project build/typecheck",
+      "Vite production build"
+    ],
+    "sceneDecoderQa": "passed; 11 meshes/712192 bytes and 9 meshes/205392 bytes",
+    "viteAppChunk": "956.91 kB minified; non-failing advisory above 500 kB; detailed optimization belongs to T58"
+  },
+  "syncExecution": {
+    "command": "python3 work/tools/sync_execution.py; python3 work/tools/sync_execution.py --check",
+    "status": "passed",
+    "checkOutput": "Execution projections match; no writes."
+  },
+  "browserEvidence": "work/evidence/T100/app-completion-2026-10-01/browser-qa.json",
+  "inputFiles": {
+    "runtime": "work/evidence/T100/app-completion-2026-10-01/automated-contract.json",
+    "scope": "work/product-scope.json",
+    "targetScope": "atlas-data/catalog/target-scope-t96.json",
+    "baseOverlay": "atlas-data/overlays/za-local-integration.json",
+    "supplementManifest": "atlas-data/manifests/bodyparts3d-r4-t100-source-supplement.json"
+  },
+  "trapeziusConflictCheck": {
+    "status": "visually_rechecked_and_matches_corrected_geometry_assignment",
+    "evidencePath": "work/evidence/T100/app-completion-2026-10-01/browser-qa.json",
+    "priorCorrectionEvidence": "work/evidence/T100/geometry-corrections/2026-09-29-trapezius-assignment/surface-assignment.json",
+    "humanReview": "not_performed"
+  },
+  "browserQaSha256": "b443bb9c2b9ed4d6c2d31e5751ecc833dc051ced1fc42a00a30d71635d3a3544",
+  "productScopeSha256": "4cd3568b05db9c23e36d5120cb770424e3271d055b4f769f632f0378f0a1d737"
+}

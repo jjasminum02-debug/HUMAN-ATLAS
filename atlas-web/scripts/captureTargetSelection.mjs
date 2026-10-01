@@ -44,7 +44,7 @@ if (mixedMode) {
         if (targetFilter.size && !targetFilter.has(relation.targetId)) continue;
         const object = sourceObjects.get(relation.sourceKey);
         if (!object) throw Error(`supplement relation has no source object: ${relation.sourceKey}`);
-        const params = new URLSearchParams({ regions: relation.regionId, targetPathKey: relation.targetRouteKey });
+        const params = new URLSearchParams({ view: 'source-observation', regions: relation.regionId, targetPathKey: relation.targetRouteKey });
         const query = params.toString();
         const key = relation.regionId + '|' + relation.sourceKey;
         const ref = { targetId: relation.targetId, regionId: relation.regionId, targetPathKey: relation.targetRouteKey, query };

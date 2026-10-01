@@ -38,7 +38,7 @@ test('local integration route serves the validated compact allowlist, never the 
  const value=JSON.parse(response.body);
  const rawBytes=await readFile(root+'atlas-data/overlays/za-local-integration.json');
  const raw=JSON.parse(rawBytes.toString());
- assert.equal(value.projectionSchema,'whole-body-local-runtime-v4');
+ assert.equal(value.projectionSchema,'whole-body-local-runtime-v5');
  const supplementBytes=await readFile(root+'atlas-data/manifests/bodyparts3d-r4-t100-source-supplement.json');
  const supplement=JSON.parse(supplementBytes.toString());
  const supplementHash=createHash('sha256').update(supplementBytes).digest('hex');
@@ -74,7 +74,7 @@ test('local integration route serves the validated compact allowlist, never the 
  assert.equal(routeKeys.every((key:string)=>/^TR-[a-f0-9]{24}$/.test(key)),true);
  const regions=scoped.regions.map((region:any)=>region.regionId);
  for(const row of paths) for(const route of row.targetRoutes) {
-  const result=readDatasetRoute(`?targetPathKey=${route.key}`,value.objects,regions);
+  const result=readDatasetRoute(`?targetPathKey=${route.key}`,value.objects,regions,'inspection');
   assert.equal(result.selected,row.sourceKey);
   assert.equal(result.targetPathKey,route.key);
   assert.deepEqual(result.regions,[route.regionId]);
