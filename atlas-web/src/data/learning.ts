@@ -12,6 +12,7 @@ type LearnerCardRuntime = {
     byConcept: Record<string, Partial<Record<"origin" | "insertion", string>>>;
     bySource: Record<string, Partial<Record<"origin" | "insertion", string>>>;
   };
+  nerveLearning: Record<string, { courseContext: string; compressionContext: string; functionContext: string }>;
   actions: Array<{ conceptId: string; key: string; label: string; explanation: string; sideApplicability: "left" | "right" | null }>;
 };
 
@@ -76,4 +77,9 @@ export function structureUnavailabilityForLearner(field: "origin" | "insertion" 
 
 export function structureSummary(conceptId: string, role: string) {
   return structureFieldForLearner(conceptId, role)?.text ?? undefined;
+}
+
+/** Learner-safe text for the supported fibular nerve concepts; source evidence stays internal. */
+export function nerveLearningForLearner(englishName: string) {
+  return cardRuntime.nerveLearning[englishName] ?? null;
 }

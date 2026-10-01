@@ -2,12 +2,12 @@
 
 자동 생성. 편집 원본은 [EXECUTION.json](EXECUTION.json). 역사 handoff/자료 개수로 다음 작업을 결정하지 않는다.
 
-- 확인된 최근 진행: T90 / accepted
-- 다음 ID: **T65**
+- 확인된 최근 진행: T65 / accepted
+- 다음 ID: **T35**
 - 현재 지원 앱 완성: T100 통합 마무리 → T80 사용 감사/보완 → T58 UI·성능 최적화. 전체 콘텐츠 확보는 별도 상태로 유지한다.
 
 ```text
-HUMAN ATLAS에서 T65만 수행해라. 담당 Luna Max.
+HUMAN ATLAS에서 T35만 수행해라. 담당 Sol High.
 
 AGENTS.md, work/EXECUTION.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/product-acceptance.json,
 해당 task의 현재 spec/promptFile, 실제 선행 report/evidence를 읽어라.
@@ -26,18 +26,9 @@ python3 work/tools/sync_execution.py 및 --check를 수행하고 소유 변경�
 다음 task 자동 실행, 새 번호/스레드 발급, 자동 위임, push/배포, 임상 진단·치료·자침 기능은 금지한다.
 
 이번 실행:
-이번 범위: T64/T91의 접힌 설명과 확장 자료를 같은 task에 흡수하여 현재 지원 신경의 주행·지배근·교육용 기능 변화/포착 맥락을 검증된 설명으로 연결한다. 구조·설명·3D 지원 범위는 분리한다. 임상 진단·치료·자침 위치/깊이 추천은 만들지 않는다. 현재 신경 학습 흐름을 완성하고 모든 신경/모든 운동의 자료 확보를 일괄 선행 조건으로 두지 않는다.
+이번 범위: 현재 실제 전신 base와 구조/설명/신경 지원 범위를 확인하여 첫 앞정강근 시범과 재사용 가능한 다음 움직임 family를 계획한다. 실제 source/frame/pose/부착/rig 가능성과 OpenSim 보조 source 대응을 검증한다. 현재 제작 가능한 범위를 명시하고 나머지는 움직임 backlog로 보존한다. exact 표정근 clip 사용자 제외는 유지하며 전 근육 clip 확보를 첫 움직임 제공의 선행 조건으로 두지 않는다. 계획 task이며 clip 구현은 T59/T66에서 한다.
 
-기존 verified 신경 claim을 재사용하고 필요한 교육용 기능 변화/포착 설명만 공식/학술 원문으로 대조한다. 위치·관련 구조·가능한 기능 변화를 설명하되 자동 진단·시술 추천으로 전환하지 않는다. 접힌 정보 UI와 신경 선택→주행→지배근→설명→복원을 검증하고 실제 혼동/오류를 수정한다. T64/T91 별도 실행을 하지 않는다. unsupported 텍스트/geometry는 정직하게 분리한다.
+기존 실제 source와 target/rig 상태를 읽고 제작 입력·좌표·부착 근거·family 재사용/예외·품질 판단을 정한다. 임의로 지원 가능을 선언하지 않는다. 앞정강근 pilot과 후속 소흉근/견갑대 사례의 실제 가능성과 필요 작업을 확인한다. 검증 가능한 계획 산출물로 종료하며 새 clip/원본 geometry 변형을 하지 않는다.
 
-
-## T90에서 추가된 근육 기시·정지 후속 범위
-
-T90 report와 work/evidence/T90/muscle-attachment-coverage.json, muscle-attachment-content-t90.json, learner-attachment-context.json을 먼저 읽는다. 현재 232개 지원 source 근육 중 22개(44 표면)에 설명 또는 충돌 안내가 있고, 210개(418 표면)의 기시·정지 설명과 긴종아리근 origin 충돌 1개가 남는다. T90의 새 15개 근육 설명·기시정지 뼈 문맥과 12부위 선택/숨김/복원은 유지한다.
-
-신경 설명과 함께 주요 사용 흐름의 근육 기시·정지를 실제 카드에 더 채운다. 어깨·위팔의 자주 선택하는 근육/분절, 등 근육을 우선하고 기존 source별 projection을 확장한다. 신뢰할 수 있는 새 공식/학술 원문이 있는 묶음부터 직접 읽고 field locator/hash·정확한 source/side/part를 대조한다. 전체 근육 설명을 분절에 무조건 상속하지 않는다. 기존 고정 후보/용어 검색은 새 단서 없으면 반복하지 않는다. 나머지 210개의 0-gap 확보는 이 task의 일괄 완료 조건이 아니다.
-
-새 설명의 명시한 부착 뼈만 같은 쪽 existing whole-bone context로 연결하고 부착점·좌표를 만들지 않는다. source-only·humanReview=not_performed·권리 held와 기존 HA130을 유지한다. 추가한 설명의 정확성·카드 접근·뼈 이동·지역 유지·숨김·복원을 실제 검사하고 미확보/충돌을 전수 원장으로 정리한다. 새 geometry나 임상 기능은 만들지 않는다. 이 추가 범위는 T65 한 task에 포함하며 다른 task 번호를 발급하지 않는다.
-
-종료 후 다음 ID는 T35다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
+종료 후 다음 ID는 T59다. 다음 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
 ```

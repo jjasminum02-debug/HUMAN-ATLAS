@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "t65-live-browser-checks-v1",
+  "checkedAt": "2026-10-02T00:56:03+09:00",
+  "application": "http://127.0.0.1:5173/",
+  "method": "Codex in-app browser live interaction and screenshot inspection",
+  "screenshots": {
+    "capturedAndVisuallyInspected": [1440, 1024, 390],
+    "persistedScreenshotFiles": [],
+    "note": "The live captures were inspected in the browser tool; the tool did not provide a local screenshot-file export API."
+  },
+  "responsive": [
+    {
+      "viewport": [1440, 960],
+      "documentWidth": 1440,
+      "bodyWidth": 1440,
+      "cardTitle": "승모근 하부",
+      "stageTitle": "등",
+      "regionRoute": "back",
+      "cardBox": [1106, 205, 310, 730],
+      "originPresent": true,
+      "insertionPresent": true,
+      "horizontalOverflow": false
+    },
+    {
+      "viewport": [1024, 900],
+      "documentWidth": 1024,
+      "bodyWidth": 1024,
+      "cardTitle": "승모근 하부",
+      "stageTitle": "등",
+      "regionRoute": "back",
+      "cardBox": [731, 205, 275, 670],
+      "originPresent": true,
+      "insertionPresent": true,
+      "horizontalOverflow": false
+    },
+    {
+      "viewport": [390, 844],
+      "documentWidth": 390,
+      "bodyWidth": 390,
+      "cardTitle": "승모근 하부",
+      "stageTitle": "등",
+      "regionRoute": "back",
+      "cardBox": [12, 606.16, 366, 227.84],
+      "originPresent": true,
+      "insertionPresent": true,
+      "horizontalOverflow": false
+    }
+  ],
+  "nerveFlow": [
+    {
+      "selected": "Common fibular nerve",
+      "side": "left",
+      "sourceKey": "ZA-NERVE-18b6246f208",
+      "route": "http://127.0.0.1:5173/?source=ZA-NERVE-18b6246f208",
+      "disclosureInitiallyCollapsed": true,
+      "disclosureOpenedByPointer": true,
+      "branches": ["Deep fibular nerve", "Superficial fibular nerve"]
+    },
+    {
+      "selected": "Deep fibular nerve",
+      "side": "left",
+      "sourceKey": "ZA-NERVE-18b6239a408",
+      "route": "http://127.0.0.1:5173/?source=ZA-NERVE-18b6239a408",
+      "disclosureCollapsedAfterBranchChange": true,
+      "verifiedMuscleLinks": ["전경골근"],
+      "disclosureKeyboardEnterOpenedAndClosed": true
+    },
+    {
+      "selected": "Superficial fibular nerve",
+      "side": "left",
+      "sourceKey": "ZA-NERVE-18b641ef908",
+      "route": "http://127.0.0.1:5173/?source=ZA-NERVE-18b641ef908",
+      "verifiedMuscleLinks": [],
+      "note": "No muscle motor relation was invented. Function/sensory context remains distinct."
+    },
+    {
+      "flow": "deep fibular nerve -> tibialis anterior -> browser back",
+      "result": "The tibialis anterior card/route matched, and Back returned to the deep fibular nerve with its explanation collapsed."
+    }
+  ],
+  "attachmentFlow": [
+    {
+      "concept": "Descending part of trapezius muscle",
+      "learnerName": "승모근 상부",
+      "sourceKeys": [
+        "ZA-c7010a9-e07069f3efea3d66c4e25ac2",
+        "ZA-c7010a9-951e9d95076ad0635ead80e3"
+      ],
+      "observedSideSwitch": "left to right",
+      "leftUrl": "http://127.0.0.1:5173/?source=ZA-c7010a9-e07069f3efea3d66c4e25ac2",
+      "rightUrl": "http://127.0.0.1:5173/?source=ZA-c7010a9-951e9d95076ad0635ead80e3",
+      "origin": "upper medial superior nuchal line/external occipital protuberance/nuchal ligament/C7 spinous process",
+      "insertion": "posterior surface of lateral third of clavicle",
+      "linkedWholeBones": ["뒤통수뼈", "일곱째 목뼈", "빗장뼈"]
+    },
+    {
+      "concept": "Ascending part of trapezius muscle",
+      "learnerName": "승모근 하부",
+      "sourceKeys": [
+        "ZA-c7010a9-949cdee8e7b16d22f295af1e",
+        "ZA-c7010a9-935a4aed2c3c6c262ba36166"
+      ],
+      "observedSideSwitch": "left to right",
+      "leftUrl": "http://127.0.0.1:5173/?source=ZA-c7010a9-949cdee8e7b16d22f295af1e",
+      "rightUrl": "http://127.0.0.1:5173/?source=ZA-c7010a9-935a4aed2c3c6c262ba36166",
+      "origin": "T4-T12 spinous processes",
+      "insertion": "aponeurotic attachment near the scapula; no scapula bone binding asserted",
+      "linkedWholeBones": ["T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12"]
+    },
+    {
+      "flow": "lower trapezius -> linked T4 whole-bone context -> browser back",
+      "result": "T4 card route opened; browser Back returned to the same lower trapezius source card and attachment summary."
+    }
+  ],
+  "visibilityControls": {
+    "baseline": {"selectedOnly": false, "selectedHidden": false},
+    "hideSelected": {"pressed": true, "hiddenCountVisible": true, "cardRetained": true},
+    "showAgain": {"pressed": false, "hiddenCountCleared": true, "cardRetained": true},
+    "selectedOnly": {"onObserved": true, "offRestored": true},
+    "finalView": {"selectedOnly": false, "selectedHidden": false}
+  },
+  "console": {
+    "errors": [],
+    "warnings": [],
+    "observedOtherLevels": ["debug", "info"]
+  },
+  "finalVisibleBrowserState": {
+    "route": "http://127.0.0.1:5173/?source=ZA-NERVE-18b6246f208",
+    "selected": "Common fibular nerve",
+    "disclosureCollapsed": true,
+    "viewportOverrideReset": true
+  }
+}

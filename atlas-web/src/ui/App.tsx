@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { WholeBodyViewer } from '../viewer/wholeBody/WholeBodyViewer';
 import { validateDataset, type Dataset } from '../viewer/datasets/schema';
 import { validateRuntimeIntegration, searchStructures, readDatasetRoute, datasetRouteQuery, type RuntimeIntegration, type DatasetRoute, type RuntimeStructureRecord } from '../viewer/datasets/integration';
-import { structureTextForLearner, structureTextForSource, structureUnavailabilityForLearner, motionActionOptionsForLearner } from '../data/learning';
+import { structureTextForLearner, structureTextForSource, structureUnavailabilityForLearner, motionActionOptionsForLearner, nerveLearningForLearner } from '../data/learning';
 import navigation from '../../../atlas-data/navigation/atlas-navigation.json';
 import { learnerFunctionUnavailableText } from '../domain/learnerActionText';
 import { AtlasLoading } from './AtlasLoading';
@@ -74,6 +74,7 @@ export default function App() {
     }, [selected, data]);
     const actions = useMemo(() => selected?.haConceptId ? motionActionOptionsForLearner(selected.haConceptId, selected.side) : [], [selected?.haConceptId, selected?.side]);
     const action = actions.find(a => a.id === actionId) ?? actions[0];
+    const nerveLearning = selected?.kind === 'nerve' ? nerveLearningForLearner(selected.names.en) : null;
     const title = route.regions.length ? navigation.categories.filter(c => route.regions.includes(c.id)).map(c => c.labelKo).join(' · ') : '전신 살펴보기';
     function navigate(next: DatasetRoute, keepExplore = false, searchQuery = query) {
         const nextRoute = route.audience === 'inspection' ? { ...next, audience: 'inspection' as const } : next;
@@ -149,7 +150,9 @@ export default function App() {
     <div className="part-pills" aria-label="좌우 모형">{data.integration.objects.filter(r => r.routeAudience === (route.audience ?? 'learner') && r.localDisplayEligible && r.inspectionEligible && r.names.en === selected.names.en && r.side).map(r => <button key={r.sourceKey} aria-pressed={r.sourceKey === selected.sourceKey} onClick={() => select(r.sourceKey)}>{r.side === 'left' ? '왼쪽' : '오른쪽'}</button>)}</div>
     {selected.kind === 'nerve' ? <section className="attachment-section nerve-card" aria-label="신경 설명"><h3>신경 주행</h3><p>정적 자세에서 확인한 주행을 표시합니다. 움직이는 자세에는 적용하지 않습니다. 개인별 분지와 경로에는 차이가 있습니다.</p><p className="nerve-legend"><span><i className="nerve-swatch"/>선택 신경</span><span><i className="motor-swatch"/>확인된 지배근</span></p>
       <h3>분지</h3>{selected.nerve!.branchKeys.length ? selected.nerve!.branchKeys.map(key => <button className="bone-related-muscle" key={key} onClick={() => select(key)}>{data.integration.objects.find(r => r.sourceKey === key)!.label}</button>) : <p className="quiet-note">표시할 하위 분지가 준비되지 않았습니다.</p>}
-      <h3>운동 지배근</h3>{selected.nerve!.muscleKeys.length ? selected.nerve!.muscleKeys.map(key => <button className="bone-related-muscle" key={key} onClick={() => select(key)}>{data.integration.objects.find(r => r.sourceKey === key)!.label}</button>) : <p className="quiet-note">확인된 지배근 설명을 준비하고 있습니다.</p>}<p className="quiet-note">표시 목록은 전체 지배 범위를 뜻하지 않습니다.</p></section> : selected.kind === 'muscle' ? <><div className="movement-cta-block"><button className="movement-cta" disabled aria-describedby="movement-unavailable-note">움직임으로 이해하기</button><p id="movement-unavailable-note" className="quiet-note">이 구조의 움직임 시범은 아직 제공되지 않습니다.</p></div>
+      <h3>운동 지배근</h3>{selected.nerve!.muscleKeys.length ? selected.nerve!.muscleKeys.map(key => <button className="bone-related-muscle" key={key} onClick={() => select(key)}>{data.integration.objects.find(r => r.sourceKey === key)!.label}</button>) : <p className="quiet-note">확인된 지배근 설명을 준비하고 있습니다.</p>}<p className="quiet-note">표시 목록은 전체 지배 범위를 뜻하지 않습니다.</p>
+      {nerveLearning && <details key={selected.sourceKey} className="nerve-learning-context"><summary>기능 변화와 포착 맥락</summary><section><h4>기능 변화</h4><p>{nerveLearning.functionContext}</p></section><section><h4>해부학적 주행과 변이</h4><p>{nerveLearning.courseContext}</p></section><section><h4>주변 조직 맥락</h4><p>{nerveLearning.compressionContext}</p></section></details>}
+    </section> : selected.kind === 'muscle' ? <><div className="movement-cta-block"><button className="movement-cta" disabled aria-describedby="movement-unavailable-note">움직임으로 이해하기</button><p id="movement-unavailable-note" className="quiet-note">이 구조의 움직임 시범은 아직 제공되지 않습니다.</p></div>
     <div className="study-tabs" role="tablist" aria-label="학습 내용">{(['구조', '기능'] as const).map(t => <button key={t} role="tab" id={`tab-${t}`} aria-controls="study-tab-panel" aria-selected={tab === t} tabIndex={tab === t ? 0 : -1} onClick={() => setTab(t)} onKeyDown={e => { if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) {
                 e.preventDefault();
                 const next = e.key === 'Home' ? '구조' : e.key === 'End' ? '기능' : tab === '구조' ? '기능' : '구조';

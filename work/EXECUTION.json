@@ -2722,17 +2722,85 @@
       "title": "신경 기능 변화 설명·사용 흐름 완성",
       "owner": "Luna Max",
       "phase": "G3",
-      "executionStatus": "planned_not_started",
-      "acceptance": "pending",
+      "executionStatus": "completed",
+      "acceptance": "passed",
       "spec": "work/tasks/T65-APP-COMPLETION.md",
       "scope": "T64/T91의 접힌 설명과 확장 자료를 같은 task에 흡수하여 현재 지원 신경의 주행·지배근·교육용 기능 변화/포착 맥락을 검증된 설명으로 연결한다. 구조·설명·3D 지원 범위는 분리한다. 임상 진단·치료·자침 위치/깊이 추천은 만들지 않는다. 현재 신경 학습 흐름을 완성하고 모든 신경/모든 운동의 자료 확보를 일괄 선행 조건으로 두지 않는다. T90의 기시·정지 후속 범위도 흡수한다: 210개 미확보 source 근육/418 표면과 origin 충돌 1개를 전수 원장으로 보존하고, 주요 어깨·위팔·등 흐름에 근거가 확인된 source/side/part별 설명과 기존 부착 뼈 문맥을 확장한다. 전체 설명 0-gap은 완료 조건이 아니다.",
       "progress": {
         "nextUnit": null,
-        "completedUnits": [],
+        "completedUnits": [
+          "read-and-hash-baseline-and-T90-T63-inputs",
+          "verify-three-supported-bilateral-fibular-nerve-learning-summaries",
+          "add-nine-source-specific-bilateral-muscle-attachment-summaries",
+          "connect-only-named-same-side-whole-bone-contexts",
+          "integrate-collapsed-nerve-learning-disclosure-and-keyboard-flow",
+          "validate-complete-supported-muscle-attachment-disposition-ledger",
+          "run-related-tests-typecheck-build-and-learner-distribution-audit",
+          "verify-live-browser-flows-at-1440-1024-390-and-console",
+          "record-scoped-product-acceptance-and-content-gaps"
+        ],
         "incomingHandoff": {
           "from": "T90",
           "evidence": "work/evidence/T90/muscle-attachment-coverage.json",
-          "workStarted": false
+          "workStarted": true
+        },
+        "nextId": "T35",
+        "nextOwner": "Sol High",
+        "nextPromptPath": "work/prompts/app-completion-2026-10-01/13-T35.txt",
+        "productAcceptance": {
+          "contractRevision": "app-completion-2026-10-01",
+          "acceptanceScope": "Current supported bilateral fibular nerve learning disclosures and verified branch-to-muscle card flow, plus nine exact source-specific bilateral muscle attachment summaries with same-side existing whole-bone context; excludes exhaustive nerve/muscle research, complete attachment extents, new geometry, human review, public release and clinical functions.",
+          "productReadiness": "local_app_ready",
+          "contentCompleteness": "partial",
+          "knownContentGaps": {
+            "denominators": {
+              "targets": 542,
+              "memberships": 563,
+              "regions": 12,
+              "existingCanonicalHaBindings": 130,
+              "historical163": {
+                "total": 163,
+                "categories": [6, 20, 135, 2]
+              }
+            },
+            "muscleAttachments": {
+              "supportedSourceConcepts": 232,
+              "supportedSurfaces": 462,
+              "withDescriptionOrConflictNoticeConcepts": 31,
+              "withDescriptionOrConflictNoticeSurfaces": 62,
+              "withoutVerifiedDescriptionConcepts": 201,
+              "withoutVerifiedDescriptionSurfaces": 400,
+              "unresolvedOriginConflicts": 1,
+              "ledger": "work/evidence/T65/muscle-attachment-dispositions.json"
+            },
+            "nerveLearning": {
+              "supportedConceptsDescribed": 3,
+              "existingStaticSurfaces": 6,
+              "fullNerveDenominator": "not_established",
+              "otherNervesAndRelations": "remain_unreviewed_or_unsupported"
+            },
+            "sourceEvidence": {
+              "originalPageBytesRetrieved": false,
+              "originalPageSha256": null,
+              "upperArmBicepsPartLocator": "not_verified; not added"
+            },
+            "authority": {
+              "sourceOnly": true,
+              "humanReview": "not_performed",
+              "publicRedistribution": "held",
+              "newCanonicalBindings": 0,
+              "newGeometry": 0
+            }
+          },
+          "unresolvedProductBlockers": [],
+          "evidence": [
+            "work/reports/T65.md",
+            "work/evidence/T65/final-validation.json",
+            "work/evidence/T65/browser/checks.json",
+            "work/evidence/T65/muscle-attachment-dispositions.json",
+            "work/evidence/T65/source-review.json",
+            "work/evidence/T65/source-review-notes.md"
+          ]
         }
       },
       "report": "work/reports/T65.md",

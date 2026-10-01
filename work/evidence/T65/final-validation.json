@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "t65-final-validation-v1",
+  "checkedAt": "2026-10-02T01:04:12+09:00",
+  "baseline": {
+    "head": "d02f1a48673660ec4ff68f2ad56cef2a846324e5",
+    "preexistingDirtyPathCount": 100,
+    "preservationVerified": true
+  },
+  "implemented": {
+    "nerveConcepts": 3,
+    "existingNerveSurfaceInstances": 6,
+    "newAttachmentConcepts": 9,
+    "newAttachmentSurfaces": 18,
+    "sourceOnly": true,
+    "newCanonicalBindings": 0,
+    "newGeometry": 0,
+    "humanReview": "not_performed",
+    "publicRedistribution": "held"
+  },
+  "contentCoverage": {
+    "supportedSourceConcepts": 232,
+    "supportedSurfaces": 462,
+    "priorT90WithDescriptionOrConflictNoticeConcepts": 22,
+    "T65AddedConcepts": 9,
+    "withDescriptionOrConflictNoticeConcepts": 31,
+    "withDescriptionOrConflictNoticeSurfaces": 62,
+    "missingDescriptionConcepts": 201,
+    "missingDescriptionSurfaces": 400,
+    "unresolvedOriginConflicts": 1,
+    "fullyDispositionedSupportedConcepts": 232
+  },
+  "preservedDenominators": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12,
+    "existingCanonicalHaBindings": 130,
+    "historical163": {
+      "total": 163,
+      "categories": {
+        "6": 6,
+        "20": 20,
+        "135": 135,
+        "2": 2
+      }
+    },
+    "supportedMuscleSurfaces": 462,
+    "uniqueSupportedMuscleSourceConcepts": 232,
+    "workbookRows": 257
+  },
+  "protectedInputSha256Unchanged": {
+    "atlas-data/terminology/muscle-attachment-content-t90.json": true,
+    "work/evidence/T90/muscle-attachment-coverage.json": true,
+    "atlas-data/overlays/nerve-support-t63.json": true,
+    "atlas-data/overlays/za-local-integration.json": true
+  },
+  "artifactSha256": {
+    "atlas-data/terminology/muscle-attachment-content-t65.json": "1fb766c99405ae7227ab3ab06b3fb14b6197f4b62562cd1238b646bfb01bebbf",
+    "atlas-data/terminology/nerve-learning-content-t65.json": "a4e30b0e136fb4c0c05245564931d09d6670a61d86cc6c6e10a03e7585b1aa15",
+    "atlas-data/terminology/learner-card-runtime.json": "6470716cf4e4921fc8405916cff591607856897e8e3349d54dd4baa42d0c65a6",
+    "atlas-data/terminology/learner-attachment-context.json": "f8edb5d852f6320cff0317b24d9eb91798a54162a9ed6c16b3bf0322fbdc4861",
+    "work/evidence/T65/source-review.json": "f793168d654febb3d30ed67bec56489b3935e9b3c8d904555078584ecdb537ec",
+    "work/evidence/T65/source-review-notes.md": "e5c952ce76e3435b53ac4dcbd4e8907b999807a8d34f08fce8d7c98a4d8648d3",
+    "work/evidence/T65/browser/checks.json": "ff0a5167e8aaa85255e4d1f640966e84a16297c9a1ac1b9743b912327767428a",
+    "work/evidence/T65/muscle-attachment-dispositions.json": "a521c1f2774276fdc1d8700b99e8e32d79dd997b18efba57f9aecffe210dbc3a"
+  },
+  "automatedValidation": {
+    "t65ContentValidator": "passed",
+    "learningContentValidator": "passed",
+    "relatedNodeTests": {
+      "passed": 36,
+      "failed": 0
+    },
+    "runtimeFreshness": "passed",
+    "aiEvidence": "passed",
+    "boneNameOverlay": "passed",
+    "motionLearning": "passed",
+    "motionSources": "passed",
+    "t83FunctionContract": "passed",
+    "sceneDecoders": "passed",
+    "typescript": "passed",
+    "viteProductionBuild": "passed",
+    "learnerDistributionAudit": "passed",
+    "compiledDistributionLeaks": 0,
+    "viteChunkSizeNotice": "763.43 kB App chunk exceeded 500 kB advisory threshold; build passed"
+  },
+  "liveBrowserEvidence": "work/evidence/T65/browser/checks.json",
+  "productAcceptance": {
+    "acceptanceScope": "current supported bilateral fibular-nerve learner explanations and branch/muscle navigation plus nine exact source-specific attachment summaries and same-side whole-bone contexts; excludes exhaustive anatomy coverage, human approval and public release",
+    "productReadiness": "local_app_ready",
+    "contentCompleteness": "partial",
+    "unresolvedProductBlockers": []
+  },
+  "limitations": [
+    "Original page bytes were not downloaded; page-byte SHA256 remains null and local review-note hashes are not source-file hashes.",
+    "Live screenshots were inspected at 1440/1024/390 but not saved as files because the CUA session exposes no local screenshot-export API.",
+    "No human anatomical review was performed."
+  ]
+}
