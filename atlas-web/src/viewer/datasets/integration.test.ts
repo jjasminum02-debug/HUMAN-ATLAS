@@ -41,6 +41,7 @@ const targetMembershipContinuation = JSON.parse(readFileSync(new URL('../../../.
     rightsAndIdentityInvariants: { newCanonicalHaBindings: number; humanReview: string; publicRedistribution: string; sourceOnly: boolean; newGeometry: number; TA2DenominatorChanged: boolean };
 };
 const compiled = JSON.parse(readFileSync(new URL('../../../../atlas-data/source-cache/datasets/za/compiled/manifest.json', import.meta.url), 'utf8')) as {
+    namespace: string;
     revision: string;
     instances: Array<{ sourceKey: string; kind: string; lods: { detail: { resource: string } } }>;
 };
@@ -75,6 +76,7 @@ const pelvisLowerLimbBatch = JSON.parse(readFileSync(new URL('../../../../work/e
 };
 const datasetInstances = new Map(compiled.instances.map(instance => [instance.sourceKey, instance]));
 const fixture = {
+    namespace: compiled.namespace,
     revision: raw.datasetRevision,
     instances: raw.objects.map(row => ({
         sourceKey: row.sourceKey,

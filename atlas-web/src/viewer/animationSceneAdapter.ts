@@ -98,7 +98,7 @@ function assertAssetContract(asset: MotionAsset): void {
     const nodeIds = binding.members.map((row) => row.nodeId);
     if (new Set(sourceKeys).size !== sourceKeys.length || new Set(nodeIds).size !== nodeIds.length
       || binding.members.some((row) => !row.sourceKey || !row.nodeId || !row.sourceNamespace || !row.resourceKey
-        || !["deforming_muscle_surface", "moving_structure", "fixed_structure", "passive_context"].includes(row.role)
+        || !["deforming_muscle_surface", "deforming_passive_surface", "moving_structure", "co_moving_context", "fixed_structure", "passive_context"].includes(row.role)
         || !/^[a-f0-9]{64}$/.test(row.sourceChunkSha256) || !/^[a-f0-9]{64}$/.test(row.geometrySha256)
         || row.instanceMatrix.length !== 16 || !row.instanceMatrix.every(Number.isFinite))) {
       throw new Error("source_bound_surface의 source instance binding이 유효하지 않습니다.");
@@ -348,14 +348,14 @@ export async function loadAnimationScene(
         const member = sourceIdsByNode.get(nodeName);
         if (!member) throw new Error(`source motion track가 고정된 source node를 벗어납니다: ${track.name}`);
         if (member.role === "fixed_structure" || member.role === "passive_context") throw new Error(`fixed/passive source node를 움직이는 track은 허용되지 않습니다: ${track.name}`);
-        if (member.role === "deforming_muscle_surface" && propertyName !== "morphTargetInfluences") {
+        if (["deforming_muscle_surface", "deforming_passive_surface"].includes(member.role) && propertyName !== "morphTargetInfluences") {
           throw new Error(`근육 전체 transform track은 허용되지 않습니다: ${track.name}`);
         }
-        if (member.role === "deforming_muscle_surface" && !(meshTargetsByNode.get(member.nodeId) ?? 0)) {
+        if (["deforming_muscle_surface", "deforming_passive_surface"].includes(member.role) && !(meshTargetsByNode.get(member.nodeId) ?? 0)) {
           throw new Error(`변형 근육 표면에 morph target이 없습니다: ${member.nodeId}`);
         }
-        if (member.role === "moving_structure" && propertyName === "scale") throw new Error(`moving structure scale track은 허용되지 않습니다: ${track.name}`);
-        if (member.role === "moving_structure" && !["position", "quaternion", "rotation"].includes(propertyName)) {
+        if (["moving_structure", "co_moving_context"].includes(member.role) && propertyName === "scale") throw new Error(`moving structure scale track은 허용되지 않습니다: ${track.name}`);
+        if (["moving_structure", "co_moving_context"].includes(member.role) && !["position", "quaternion", "rotation"].includes(propertyName)) {
           throw new Error(`moving structure에는 위치/회전 track만 허용됩니다: ${track.name}`);
         }
       }

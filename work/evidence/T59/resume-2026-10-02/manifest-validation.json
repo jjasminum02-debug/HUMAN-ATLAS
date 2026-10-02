@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "manifest": "work/evidence/T59/authoring-run-manifest-r2.json",
+  "sha256": "c8f1a5f8b05951a7ac00aaa6169f9dbaadabbd3d88d3c634cba250215f6e5269",
+  "readiness": {
+    "sourceSurfaceUnits": {
+      "ready": 1,
+      "needs_authoring": 458,
+      "unavailable": 3
+    },
+    "aggregatePackages": {
+      "ready": 0,
+      "needs_authoring": 519,
+      "unavailable": 142
+    },
+    "actualAuthoredSourceAssets": 1,
+    "actualBrowserVerifiedSourceAssets": 1
+  },
+  "negativeFixtures": [
+    {
+      "case": "assignment",
+      "passed": true
+    },
+    {
+      "case": "readiness",
+      "passed": true
+    },
+    {
+      "case": "source_matrix",
+      "passed": true
+    },
+    {
+      "case": "approval",
+      "passed": true
+    }
+  ]
+}

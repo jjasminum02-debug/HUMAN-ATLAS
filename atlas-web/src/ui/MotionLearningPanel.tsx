@@ -7,7 +7,6 @@ import {
   playMotion,
   resetMotionPose,
   seekMotionProgress,
-  setMotionSpeed,
   setMotionTime,
   setReducedMotionPreference,
   suspendMotionForHiddenPage,
@@ -77,6 +76,7 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
     prefersReducedMotion: prefersReducedMotion(),
     boundStructureIds: [],
   }));
+  const [returning, setReturning] = useState(false);
   const stateRef = useRef(state);
   const abortRef = useRef<AbortController | null>(null);
   const playbackRef = useRef<AnimationPlaybackController | null>(null);
@@ -126,6 +126,7 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
   useEffect(() => {
     abortRef.current?.abort();
     abortRef.current = null;
+    setReturning(false);
     host?.restoreSourceMotion("selection-or-action-changed");
     playbackRef.current = null;
     const current = stateRef.current;
@@ -165,11 +166,14 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
 
       const controller = await host.attachSourceMotion(playable.asset, resource, (time, completed) => {
           const latest = stateRef.current;
-          publish(setMotionTime(latest, completed ? playable.asset.clip.durationSeconds : time));
+          const next = setMotionTime(latest, time);
+          publish(latest.session.status === "playing" && !completed
+            ? { ...next, session: { ...next.session, status: "playing", selectedStructureIds: [...latest.boundStructureIds] } } : next);
         }, (reason) => {
           abortRef.current?.abort();
           abortRef.current = null;
           playbackRef.current = null;
+          setReturning(false);
           const latest = stateRef.current;
           publish({ ...latest, session: { status: "idle", definitionId: null, assetId: null, currentTimeSeconds: 0,
             playbackSpeed: 1, selectedStructureIds: [], errorMessage: null }, durationSeconds: null,
@@ -198,7 +202,8 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
           publish(playing);
         }
       }
-    } catch {
+    } catch (error) {
+      if (import.meta.env.DEV) console.debug("Motion package unavailable", error);
       if (abort.signal.aborted) return;
       host.restoreSourceMotion("source-motion-load-failed");
       playbackRef.current?.dispose();
@@ -231,27 +236,25 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
     void loadCandidate(false);
   }
 
-  function pause() {
-    playbackRef.current?.pause();
+  function toggleMotion() {
+    if (stateRef.current.session.status !== "playing") { play(); return; }
+    const player = playbackRef.current;
+    if (!player) return;
+    setReturning(true);
     publish(pauseMotion(stateRef.current));
-  }
-
-  function resetPose() {
-    playbackRef.current?.resetPose();
-    publish(resetMotionPose(stateRef.current));
+    player.returnToRest(0.7, () => {
+      setReturning(false);
+      host?.restoreSourceMotion("smooth-return-completed");
+    });
   }
 
   function seek(fraction: number) {
-    const next = seekMotionProgress(stateRef.current, fraction);
+    const current = stateRef.current;
+    const sought = seekMotionProgress(current, fraction);
+    const next = current.session.status === "playing" ? { ...sought, session: { ...sought.session, status: "playing" as const } } : sought;
     if (next === stateRef.current) return;
+    playbackRef.current?.pause();
     playbackRef.current?.seek(next.session.currentTimeSeconds);
-    publish(next);
-  }
-
-  function toggleSlow() {
-    const speed = stateRef.current.session.playbackSpeed === 1 ? 0.5 : 1;
-    const next = setMotionSpeed(stateRef.current, speed);
-    playbackRef.current?.setSpeed(speed);
     publish(next);
   }
 
@@ -271,8 +274,8 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
           : state.prefersReducedMotion
             ? "움직임 줄이기 설정이 적용되어 정지 자세로 확인합니다. 재생은 자동으로 시작되지 않습니다."
             : loaded
-              ? state.session.status === "playing" ? "교육용 시범을 재생 중입니다." : "재생 버튼을 눌러 교육용 시범을 볼 수 있습니다."
-              : "재생을 누르면 연결된 시범 자료를 불러옵니다. 자동 재생은 하지 않습니다.";
+              ? returning ? "처음 자세로 서서히 돌아갑니다." : state.session.status === "playing" ? "움직임을 반복해서 보여 줍니다. 버튼을 다시 누르면 처음 자세로 돌아갑니다." : "움직임으로 이해하기를 눌러 시범을 볼 수 있습니다."
+              : "움직임으로 이해하기를 누르면 시범을 반복해서 보여 줍니다.";
 
   return <section className="motion-player" aria-label="움직임으로 이해하기" data-testid="motion-player">
     <h4>움직임으로 이해하기</h4>
@@ -290,11 +293,9 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
       정지 자세 보기
     </button>}
     <div className="motion-player-controls" aria-label="시범 재생 조작">
-      <button type="button" onClick={play} disabled={!available || state.prefersReducedMotion || state.session.status === "loading" || state.session.status === "playing"}>재생</button>
-      <button type="button" onClick={pause} disabled={state.session.status !== "playing"}>멈춤</button>
-      <button type="button" onClick={resetPose} disabled={!loaded}>처음 자세</button>
-      <button type="button" onClick={toggleSlow} aria-pressed={state.session.playbackSpeed < 1} disabled={!available}>
-        느리게 보기{state.session.playbackSpeed < 1 ? " 켬" : " 끔"}
+      <button type="button" onClick={toggleMotion} aria-pressed={state.session.status === "playing" || returning}
+        disabled={!available || state.prefersReducedMotion || state.session.status === "loading" || returning}>
+        움직임으로 이해하기
       </button>
     </div>
     <label className="motion-progress-label" htmlFor="motion-progress">시범 진행</label>
@@ -307,11 +308,11 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
         max={100}
         step={1}
         value={progress}
-        disabled={!loaded}
+        disabled={!loaded || returning}
         onChange={(event) => seek(Number(event.currentTarget.value) / 100)}
       />
       <output htmlFor="motion-progress">{progress}%</output>
     </div>
-    <p className="motion-player-note">진행 막대는 시범의 재생 위치를 나타냅니다. 힘이나 근력의 비율이 아닙니다. 처음 자세는 움직임만 되돌리며, 카메라는 별도 보기 조작으로 초기화합니다.</p>
+    <p className="motion-player-note">교육용 표면 변형은 개인의 실제 수축량이나 운동 범위를 재현하지 않습니다. 진행 막대는 시범의 재생 위치를 나타냅니다. 힘이나 근력의 비율이 아닙니다. 버튼을 다시 누르면 처음 자세로 서서히 돌아갑니다. 카메라와 보기 설정은 유지됩니다.</p>
   </section>;
 }

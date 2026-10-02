@@ -179,3 +179,39 @@ test("missing clip fails closed and releases the imported scene", () => {
   assert.throws(() => new AnimationPlaybackController(resource, "not-present"), /시범 clip/);
   assert.equal(disposed.count, 1);
 });
+
+test("one-toggle gesture reverses at its endpoint and eases to exact rest on the same clock", () => {
+  const frames = new FakeFrames();
+  const resource = syntheticResource({ count: 0 });
+  const camera = resource.camera.position.toArray();
+  let restored = 0;
+  const player = new AnimationPlaybackController(resource, "SyntheticMotion", { scheduler: frames, repeat: true, pingPong: true });
+  player.play(); frames.frame(0); frames.frame(900);
+  assert.ok(Math.abs(resource.bone.position.y - .9) < 1e-6);
+  frames.frame(1100);
+  assert.ok(Math.abs(resource.bone.position.y - .9) < 1e-6);
+  assert.equal(player.isPlaying, true);
+  player.returnToRest(.7, () => { restored++; });
+  assert.equal(frames.pending.size, 1);
+  frames.frame(1200); frames.frame(1550);
+  assert.ok(Math.abs(resource.bone.position.y - .45) < 1e-6);
+  frames.frame(1900);
+  assert.equal(player.currentTime, 0);
+  assert.equal(player.isPlaying, false);
+  assert.equal(frames.pending.size, 0);
+  assert.equal(restored, 1);
+  assert.deepEqual(resource.camera.position.toArray(), camera);
+  player.dispose();
+});
+
+test("return cancellation and disposal cannot invoke a stale rest callback", () => {
+  const frames = new FakeFrames();
+  const resource = syntheticResource({ count: 0 });
+  const player = new AnimationPlaybackController(resource, "SyntheticMotion", { scheduler: frames, repeat: true, pingPong: true });
+  player.seek(.8);
+  let restored = 0;
+  player.returnToRest(.7, () => { restored++; });
+  player.dispose(); frames.fireCancelled(1000);
+  assert.equal(restored, 0);
+  assert.equal(frames.pending.size, 0);
+});

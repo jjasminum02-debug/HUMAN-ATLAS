@@ -226,6 +226,7 @@ export interface RuntimeStructureRecord {
     nerve?: { poseId: string; branchKeys: string[]; muscleKeys: string[] };
 }
 export interface RuntimeIntegration {
+    sourceComponents?: Record<string, { datasetRevision: string; integrationRevision: string; overlaySha256: string }>;
     schemaVersion: 1;
     projectionSchema: 'whole-body-local-runtime-v5';
     revision: string;
@@ -738,7 +739,7 @@ export function validateIntegration(value: unknown, dataset: Dataset, frozenTarg
 }
 const RUNTIME_SCHEMA = 'whole-body-local-runtime-v5' as const;
 const FROZEN_T100_SCOPE = { targets: 542, memberships: 563, regions: 12 } as const;
-const projectionKeys = ['schemaVersion', 'projectionSchema', 'revision', 'datasetRevision', 'sourceOverlaySha256', 'rightsEvidenceSha256', 'scope', 'policy', 'objects'];
+const projectionKeys = ['schemaVersion', 'projectionSchema', 'revision', 'datasetRevision', 'sourceOverlaySha256', 'rightsEvidenceSha256', 'scope', 'policy', 'objects', 'sourceComponents'];
 const runtimeRowKeys = ['sourceKey', 'routeAudience', 'searchGroupKey', 'kind', 'regionIds', 'side', 'label', 'names', 'aliases', 'haConceptId', 'learnerConceptKeys', 'targetRoutes', 'selectionSuppressSourceKeys', 'localDisplayEligible', 'inspectionEligible', 'defaultVisible', 'sourceOnly', 'humanReview', 'publicRedistribution', 'sourceHiddenStatePreserved', 'localUseRights', 'displayDecisionBasis', 'hardHoldReasons', 'bounds', 'relatedMuscles'];
 const runtimePolicyKeys = ['localOnly', 'publicRedistribution', 'humanReview', 'localUseRights', 'rightsDecisionId'];
 function exactKeys(value: unknown, expected: string[], message: string): asserts value is Record<string, unknown> {
@@ -766,6 +767,7 @@ export function buildRuntimeIntegration(value: unknown, dataset: Dataset, source
         schemaVersion: 1,
         projectionSchema: RUNTIME_SCHEMA,
         revision: full.revision,
+        sourceComponents: { [dataset.namespace]: { datasetRevision: dataset.revision, integrationRevision: full.revision, overlaySha256: sourceOverlaySha256 } },
         datasetRevision: full.datasetRevision,
         sourceOverlaySha256,
         rightsEvidenceSha256,
@@ -808,12 +810,21 @@ export function buildRuntimeIntegration(value: unknown, dataset: Dataset, source
 }
 /** Client-side defense for the compact endpoint: exact field allowlist, fixed denominator and display policy. */
 export function validateRuntimeIntegration(value: unknown, dataset: Dataset): RuntimeIntegration {
-    exactKeys(value, projectionKeys, 'runtime projection shape');
+    exactKeys(value, (value as RuntimeIntegration)?.sourceComponents === undefined ? projectionKeys.filter(key => key !== 'sourceComponents') : projectionKeys, 'runtime projection shape');
     const i = value as unknown as RuntimeIntegration;
     if (i.schemaVersion !== 1 || i.projectionSchema !== RUNTIME_SCHEMA || !i.revision
         || i.datasetRevision !== dataset.revision || !/^[a-f0-9]{64}$/.test(i.sourceOverlaySha256)
         || !/^[a-f0-9]{64}$/.test(i.rightsEvidenceSha256))
         throw Error('runtime projection provenance');
+    if (i.sourceComponents !== undefined) {
+        if (!i.sourceComponents || typeof i.sourceComponents !== 'object' || Array.isArray(i.sourceComponents)) throw Error('runtime source components');
+        for (const [namespace, component] of Object.entries(i.sourceComponents)) {
+            exactKeys(component, ['datasetRevision', 'integrationRevision', 'overlaySha256'], 'runtime source component shape');
+            if (!namespace || !component.datasetRevision || !component.integrationRevision || !/^[a-f0-9]{64}$/.test(component.overlaySha256)
+                || (dataset.sourceRevisions?.[namespace] ?? (dataset.namespace === namespace ? dataset.revision : null)) !== component.datasetRevision)
+                throw Error('runtime source component provenance');
+        }
+    }
     exactKeys(i.scope, ['targets', 'memberships', 'regions'], 'runtime scope shape');
     if (i.scope.targets !== FROZEN_T100_SCOPE.targets || i.scope.memberships !== FROZEN_T100_SCOPE.memberships || i.scope.regions !== FROZEN_T100_SCOPE.regions)
         throw Error('runtime frozen scope');

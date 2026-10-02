@@ -61,7 +61,8 @@ export function findMuscles(catalog: PilotCatalog, query: string) {
 /** Learner-only action text is preprojected; source/evidence references stay out of this bundle. */
 export function motionActionOptionsForLearner(conceptId: string | null, selectedSide?: string | null, sourceKey?: string | null) {
   const selector = conceptId ?? sourceKey;
-  const projected = selector ? motionRuntime.actions[selector] ?? [] : [];
+  const projected = (selector ? motionRuntime.actions[selector] ?? [] : []).filter(row =>
+    !row.candidate || !sourceKey || row.candidate.asset.sourceBinding?.subjectSourceKey === sourceKey);
   const displayRows = cardRuntime.actions.filter((row) => row.conceptId === conceptId
     && learnerActionAppliesToSide(row.sideApplicability, selectedSide)).map((row) => {
     return {

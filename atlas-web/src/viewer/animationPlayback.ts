@@ -77,6 +77,8 @@ export interface AnimationPlaybackOptions {
   onTimeChange?: (timeSeconds: number, completed: boolean) => void;
   scheduler?: AnimationFrameScheduler;
   repeat?: boolean;
+  /** Repeated educational gestures return smoothly instead of jumping at the clip boundary. */
+  pingPong?: boolean;
   /** Use the existing anatomy renderer's frame clock instead of creating another RAF chain. */
   registerUpdate?: (update: (deltaSeconds: number) => void) => () => void;
   /** Same-scene hosts own the imported GLTF resource and restore their nodes before disposal. */
@@ -96,6 +98,8 @@ export class AnimationPlaybackController {
   private disposed = false;
   private sharedPlaying = false;
   private speed = 1;
+  private direction = 1;
+  private returning: { start: number; elapsed: number; duration: number; onRest?: () => void } | null = null;
   private readonly unregisterUpdate: (() => void) | null;
 
   constructor(
@@ -124,7 +128,7 @@ export class AnimationPlaybackController {
       this.loop = null;
       this.unregisterUpdate = options.registerUpdate((delta) => {
         if (!this.sharedPlaying || this.disposed) return;
-        if (!this.step(delta * this.speed)) this.sharedPlaying = false;
+        if (!this.step(delta * (this.returning ? 1 : this.speed))) this.sharedPlaying = false;
       });
     } else {
       this.loop = new SingleAnimationFrameLoop((delta) => this.step(delta), options.scheduler);
@@ -137,6 +141,7 @@ export class AnimationPlaybackController {
 
   play(speed = 1): void {
     if (this.disposed) return;
+    this.returning = null;
     if (this.currentTimeSeconds >= this.durationSeconds) this.seek(0);
     this.action.paused = false;
     this.speed = Number.isFinite(speed) && speed > 0 ? speed : 1;
@@ -149,6 +154,19 @@ export class AnimationPlaybackController {
     this.loop?.stop();
     this.sharedPlaying = false;
     this.action.paused = true;
+    this.returning = null;
+  }
+
+  /** Uses the same renderer clock, reverses only the pose, and never changes the camera. */
+  returnToRest(durationSeconds = 0.7, onRest?: () => void): void {
+    if (this.disposed) return;
+    this.pause();
+    if (this.currentTimeSeconds <= 0 || !Number.isFinite(durationSeconds) || durationSeconds <= 0) {
+      this.resetPose(); onRest?.(); return;
+    }
+    this.returning = { start: this.currentTimeSeconds, elapsed: 0, duration: durationSeconds, onRest };
+    if (this.loop) this.loop.start(1);
+    else this.sharedPlaying = true;
   }
 
   setSpeed(speed: number): void {
@@ -166,7 +184,7 @@ export class AnimationPlaybackController {
     this.action.time = this.currentTimeSeconds;
     this.mixer.update(0);
     this.action.paused = wasPaused;
-    this.options.onTimeChange?.(this.currentTimeSeconds, this.currentTimeSeconds >= this.durationSeconds);
+    this.options.onTimeChange?.(this.currentTimeSeconds, !this.options.repeat && this.currentTimeSeconds >= this.durationSeconds);
   }
 
   /** Resets the clip pose only. Camera framing remains untouched. */
@@ -174,6 +192,7 @@ export class AnimationPlaybackController {
     if (this.disposed) return;
     this.pause();
     this.seek(0);
+    this.direction = 1;
   }
 
   dispose(): void {
@@ -190,6 +209,25 @@ export class AnimationPlaybackController {
 
   private step(deltaSeconds: number): boolean {
     if (this.disposed) return false;
+    if (this.returning) {
+      const returning = this.returning;
+      returning.elapsed += Math.max(0, deltaSeconds);
+      const t = Math.min(1, returning.elapsed / returning.duration);
+      this.seek(returning.start * (1 - t * t * (3 - 2 * t)));
+      if (t < 1) return true;
+      this.returning = null;
+      this.direction = 1;
+      returning.onRest?.();
+      return false;
+    }
+    if (this.options.repeat && this.options.pingPong) {
+      const period = 2 * this.durationSeconds;
+      const phase = (this.direction > 0 ? this.currentTimeSeconds : period - this.currentTimeSeconds) + Math.max(0, deltaSeconds);
+      const wrapped = phase % period;
+      this.direction = wrapped < this.durationSeconds ? 1 : -1;
+      this.seek(wrapped <= this.durationSeconds ? wrapped : period - wrapped);
+      return true;
+    }
     if (deltaSeconds > 0) this.mixer.update(deltaSeconds);
     this.currentTimeSeconds = this.options.repeat
       ? (this.currentTimeSeconds + deltaSeconds) % this.durationSeconds

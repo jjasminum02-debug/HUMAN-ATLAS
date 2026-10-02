@@ -88,7 +88,7 @@ export default function App() {
         ? motionActionOptionsForLearner(selected.haConceptId, selected.side, selected.sourceKey) : [],
         [selected?.kind, selected?.haConceptId, selected?.side, selected?.sourceKey]);
     const motionActions = useMemo(() => selected?.kind === 'muscle' ? motionPanelOptions(actions, selected.sourceKey) : [], [actions, selected?.kind, selected?.sourceKey]);
-    const action = actions.find(a => a.id === actionId) ?? actions[0];
+    const action = actions.find(a => a.id === actionId) ?? actions.find(a => a.candidate) ?? actions[0];
     const nerveLearning = selected?.kind === 'nerve' ? nerveLearningForLearner(selected.names.en) : null;
     const title = route.regions.length ? navigation.categories.filter(c => route.regions.includes(c.id)).map(c => c.labelKo).join(' · ') : '전신 살펴보기';
     function navigate(next: DatasetRoute, keepExplore = false, searchQuery = query) {
@@ -167,7 +167,7 @@ export default function App() {
       <h3>분지</h3>{selected.nerve!.branchKeys.length ? selected.nerve!.branchKeys.map(key => <button className="bone-related-muscle" key={key} onClick={() => select(key)}>{data.integration.objects.find(r => r.sourceKey === key)!.label}</button>) : <p className="quiet-note">표시할 하위 분지가 준비되지 않았습니다.</p>}
       <h3>운동 지배근</h3>{selected.nerve!.muscleKeys.length ? selected.nerve!.muscleKeys.map(key => <button className="bone-related-muscle" key={key} onClick={() => select(key)}>{data.integration.objects.find(r => r.sourceKey === key)!.label}</button>) : <p className="quiet-note">확인된 지배근 설명을 준비하고 있습니다.</p>}<p className="quiet-note">표시 목록은 전체 지배 범위를 뜻하지 않습니다.</p>
       {nerveLearning && <details key={selected.sourceKey} className="nerve-learning-context"><summary>기능 변화와 포착 맥락</summary><section><h4>기능 변화</h4><p>{nerveLearning.functionContext}</p></section><section><h4>해부학적 주행과 변이</h4><p>{nerveLearning.courseContext}</p></section><section><h4>주변 조직 맥락</h4><p>{nerveLearning.compressionContext}</p></section></details>}
-    </section> : selected.kind === 'muscle' ? <><MotionLearningPanel actions={motionActions} selectedActionId={actionId ?? motionActions[0]?.id ?? null} onSelectAction={setActionId} host={motionHost} sourceContextKey={selected.sourceKey} showActionPicker={false}/>
+    </section> : selected.kind === 'muscle' ? <><MotionLearningPanel actions={motionActions} selectedActionId={actionId ?? motionActions.find(a => a.candidate)?.id ?? motionActions[0]?.id ?? null} onSelectAction={setActionId} host={motionHost} sourceContextKey={selected.sourceKey} showActionPicker={false}/>
     <div className="study-tabs" role="tablist" aria-label="학습 내용">{(['구조', '기능'] as const).map(t => <button key={t} role="tab" id={`tab-${t}`} aria-controls="study-tab-panel" aria-selected={tab === t} tabIndex={tab === t ? 0 : -1} onClick={() => setTab(t)} onKeyDown={e => { if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) {
                 e.preventDefault();
                 const next = e.key === 'Home' ? '구조' : e.key === 'End' ? '기능' : tab === '구조' ? '기능' : '구조';

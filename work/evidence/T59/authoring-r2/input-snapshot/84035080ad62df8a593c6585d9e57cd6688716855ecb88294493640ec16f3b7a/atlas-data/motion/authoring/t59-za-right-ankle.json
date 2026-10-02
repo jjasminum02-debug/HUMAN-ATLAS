@@ -1,0 +1,4447 @@
+{
+  "schemaVersion": "t59-authoring-record-v1",
+  "id": "T59-ZA-R-ANKLE-AUTHORING-01",
+  "inputSha256": "8a83937aeb99d082f9231694bd759ecb7a8edcddd2e1548ec7c09b8599738cc9",
+  "sourceClaimVsAuthoring": {
+    "sourceMeasured": [
+      "immutable source POSITION/NORMAL/index, instance matrices, explicit labels, units/frame/static snapshot"
+    ],
+    "authored": [
+      "inspected vertex masks, conservative hinge approximation, clip timing and smooth deformation field"
+    ],
+    "notClaimed": [
+      "source-provided neutral/bind pose",
+      "physiological strain or calibrated contraction",
+      "human approval",
+      "clinical motion range"
+    ]
+  },
+  "rights": {
+    "sourceOnly": true,
+    "localUseRights": "inherits_pinned_source_decision",
+    "publicRedistribution": "held",
+    "humanReview": "not_performed"
+  },
+  "poseRange": {
+    "referencePoseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+    "endPoseId": "ZA-T59-AUTHORED-R-ANKLE-DF6P5",
+    "coupledClearanceMetres": [
+      0.0,
+      -0.0,
+      -0.0
+    ],
+    "clearanceMethod": "minimum 25 micrometre sampled translation along fixed tibia geometry principal axis; authored contact correction, not physiological joint translation",
+    "angleRadians": 0.11344640137963143,
+    "axis": [
+      -1,
+      0,
+      0
+    ],
+    "pivotMetres": [
+      -0.07160056026460314,
+      0.07503668362963675,
+      -0.03727961895408123
+    ],
+    "domeArcFitRadiusMetres": 0.010415671256517484,
+    "domeArcFitRmsMetres": 0.0020572996396283727
+  },
+  "anatomicalEvidence": [
+    {
+      "field": "tibialis_anterior_action",
+      "existingClaimId": "T21-C-HA-M-000003-action",
+      "existingFieldId": "T21-FIELD-HA-M-000003-action",
+      "scope": "dorsiflexion qualitative only; original posture is not this static ZA snapshot"
+    },
+    {
+      "field": "ankle_articulation_and_hinge",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK545158/",
+      "locator": "Structure and Function; talar trochlear upper cylindrical surface, tibia/fibula mortise; independent paraphrase only",
+      "scope": "qualitative anatomical constraint; no axis coordinates or exact neutral pose"
+    },
+    {
+      "field": "tibialis_anterior_insertion",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29308658/",
+      "locator": "2018 cadaveric study abstract Background",
+      "scope": "medial/plantar medial cuneiform and first metatarsal base; no source mesh vertex label proven"
+    },
+    {
+      "field": "limits_of_morphology_axis",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9381502/",
+      "locator": "Discussion",
+      "scope": "morphology does not uniquely determine in-vivo gait kinematics; fit is an authored educational approximation"
+    }
+  ],
+  "geometryInspection": {
+    "paths": [
+      "work/evidence/T59/resume-2026-10-02/source-leg.png",
+      "work/evidence/T59/resume-2026-10-02/source-foot.png"
+    ],
+    "views": [
+      "source vertex wireframe anterior",
+      "sagittal",
+      "axial"
+    ],
+    "selectedRegions": "Trochlear upper band visually inspected on actual talar triangles; source muscle distal tip at medial cuneiform/first metatarsal area. Masks are authored source-vertex constraints, not verified microscopic attachment footprints.",
+    "maskConstruction": "Source-local positions transformed by exact instance matrix. Authored lower/upper blending planes 0.045/0.160m in atlas Y, fixed >=0.160m, co-moving <=0.045m; proximal and distal vertex lists explicitly retained. Not inferred anatomical origin/insertions.",
+    "contactConstraint": "Triangle winding contact constraints preserve original overlap/contact; corrective pins are engineering constraints, not anatomical origin/insertion labels. Four sampled morph states track rigid bone arcs."
+  },
+  "unresolved": [
+    "Exact anatomical instantaneous ankle axis and subtalar coupling are unmeasured; this is a 5 degree educational sagittal approximation.",
+    "Microscopic OI footprints, retinacular sliding, independent toe-joint degrees of freedom and physiological contraction/bulging are not modeled.",
+    "Passive surfaces use source-vertex boundary constraints; individual activation/co-contraction is not claimed. Source-provided neutral/bind pose remains unavailable."
+  ],
+  "members": [
+    {
+      "sourceKey": "ZA-c7010a9-f1b8f017f065ca519bd77a72",
+      "nodeId": "surface_0",
+      "sourceNamespace": "za-c7010a9",
+      "role": "co_moving_context",
+      "side": "right",
+      "resourceKey": "9cb81699ade28ff2f4b6366a0f41db1905925c24c65789a14ac4ee0d0cc52762",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "ba271d4336928a2a98152f7726ce88169a54c8a24e1413539559eb271a397d5a",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.105427357601002e-14,
+        -0.999999463558197,
+        0.0,
+        0.0,
+        0.999999463558197,
+        7.105427357601002e-14,
+        0.0,
+        -0.11741777509450912,
+        0.021952733397483826,
+        0.014009459875524044,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a10f307fc95f872b62897168",
+      "nodeId": "surface_1",
+      "sourceNamespace": "za-c7010a9",
+      "role": "co_moving_context",
+      "side": "right",
+      "resourceKey": "a312237812dc7f4e6bc6878bbb7fec868ad7bf8f1c8a881ceac7de0680cfc656",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "d6f6d431aa5ecc75f268c0bfe530b031acc17e78dcfb7d42c2052cf255e0bd2a",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.105427357601002e-14,
+        -0.999999463558197,
+        0.0,
+        0.0,
+        0.999999463558197,
+        7.105427357601002e-14,
+        0.0,
+        -0.1049676239490509,
+        0.019060509279370308,
+        -0.015506023541092873,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-bb1f688e53b7983527bbc4c0",
+      "nodeId": "surface_2",
+      "sourceNamespace": "za-c7010a9",
+      "role": "co_moving_context",
+      "side": "right",
+      "resourceKey": "7755a009de864465b9e82b618e9b5eea2629ea920728c356b24b0e475642d1f7",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "10796365b2528c9cee1e1e9e4de6ec553eee3f83e7a49d7b939a036c747a7069",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.105427357601002e-14,
+        -0.999999463558197,
+        0.0,
+        0.0,
+        0.999999463558197,
+        7.105427357601002e-14,
+        0.0,
+        -0.06248171627521515,
+        0.02796991355717182,
+        0.01009596697986126,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-26d57a52182af4b4475cef42",
+      "nodeId": "surface_3",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "2ff6c85d7bceb6ccf70409c35dee07a55b35de1dc8a9443e42964bfd0c3f9d7b",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "9245c8995c1d54b1bdba9ebca2f51dbc276372154e66e00fb1cfad1d364e409e",
+      "instanceMatrix": [
+        0.9999885559082031,
+        0.004776683636009693,
+        2.036423376898988e-16,
+        0.0,
+        0.0,
+        2.8421692489745062e-14,
+        -0.9999990463256836,
+        0.0,
+        -0.004776685032993555,
+        0.9999882578849792,
+        4.263207625462839e-14,
+        0.0,
+        -0.08008165657520294,
+        0.0408017635345459,
+        -0.04860048368573189,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ab881618a17c726a5d4072c2",
+      "nodeId": "surface_4",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "bb40dff6e5d0787ee602c03a510a4e8477e60242af79cd97f3d705bf130c8476",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "aaea8d6d4d34e5e56033bcf83cc22524069b5d2ff8c61f10ad3a408db5dee464",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.8421692489745062e-14,
+        -0.9999990463256836,
+        0.0,
+        0.0,
+        0.9999997019767761,
+        4.263256414560601e-14,
+        0.0,
+        -0.09583570808172226,
+        0.04272758215665817,
+        -0.006868795026093721,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-7fdc346491c401fafbbde592",
+      "nodeId": "surface_5",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "e02d4cf8e888531f6257c5b8ddd548f7510810d5f5c0b74f21f5e659ff494216",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "c6c1e53648d5634235dfa25abb10812e8342c19e3f3af90d465769c3e3f22895",
+      "instanceMatrix": [
+        0.9999997615814209,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.8421697571942746e-14,
+        -0.9999992251396179,
+        0.0,
+        0.0,
+        0.999999463558197,
+        4.2632553981210644e-14,
+        0.0,
+        -0.14270414412021637,
+        0.011891755275428295,
+        0.09051455557346344,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-21ebc5730330e4150d9a21c3",
+      "nodeId": "surface_6",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "8cf1ce8e53408725d309087bf28e04a2607a256fd079da7605f509e450e700af",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "bae4dd149024d8ff6132b4fc61df9eb90f62c33aae5f57c4557ee50aa554b07e",
+      "instanceMatrix": [
+        0.9999998807907104,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.8421707736338113e-14,
+        -0.9999995827674866,
+        0.0,
+        0.0,
+        0.9999996423721313,
+        4.263256075747422e-14,
+        0.0,
+        -0.08134625107049942,
+        0.01403401792049408,
+        0.12093670666217804,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-403941ce03486160854a2e7e",
+      "nodeId": "surface_7",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "497bcdd7ac623e111f120a5d9c05097a5e67705e4955476627be57abc30cef15",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "eba47fc8026c17e928a3bd0379c3b9eaa2742bf88c555e295316fcd665503632",
+      "instanceMatrix": [
+        0.9999997019767761,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.8421694183810957e-14,
+        -0.9999991059303284,
+        0.0,
+        0.0,
+        0.9999996423721313,
+        4.263256075747422e-14,
+        0.0,
+        -0.13242068886756897,
+        0.012222472578287125,
+        0.10858065634965897,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-c956642614a1502da28310f7",
+      "nodeId": "surface_8",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "cbfc5f2e3b644c78f6f80c42b70d5fd172d9ea4abd8a731321e41655700d53a3",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "c287eba1b71c0a6d30993ce0387695bc43d9a13a40c0b66c36a5188a46044954",
+      "instanceMatrix": [
+        1.0000003576278687,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.842169926600864e-14,
+        -0.9999992847442627,
+        0.0,
+        0.0,
+        0.9999998211860657,
+        4.263257092186959e-14,
+        0.0,
+        -0.10423606634140015,
+        0.01287590991705656,
+        0.12940993905067444,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-fd30572856dff59afa6b19a0",
+      "nodeId": "surface_9",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "b6ce878a027e1448c26b35a1878013e1c9f673e31519d580f5c9901367ddc99b",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "db775ca0daf33b4177e2cb34a1af31f3b0c1554e9d4dd4997d2afcdbf6eff27c",
+      "instanceMatrix": [
+        0.9999999403953552,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.842170265414043e-14,
+        -0.9999994039535522,
+        0.0,
+        0.0,
+        0.9999992251396179,
+        4.263254381681528e-14,
+        0.0,
+        -0.11923844367265701,
+        0.012435142882168293,
+        0.1232488751411438,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-43fa07db75bcfd51cdd6bdac",
+      "nodeId": "surface_10",
+      "sourceNamespace": "za-c7010a9",
+      "role": "co_moving_context",
+      "side": "right",
+      "resourceKey": "de5a6b93049e57d06ae875ebef5e913d6169815a283fa46da4a22dcb6e8245d4",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "2900fea97baf2caf77cea408f03ef683886a89c652f82c0681ec0f2587497012",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.105427357601002e-14,
+        -0.999999463558197,
+        0.0,
+        0.0,
+        0.999999463558197,
+        7.105427357601002e-14,
+        0.0,
+        -0.10270426422357559,
+        0.036998432129621506,
+        0.04935682564973831,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-daaa7d3a2aceb5b6050f7827",
+      "nodeId": "surface_11",
+      "sourceNamespace": "za-c7010a9",
+      "role": "co_moving_context",
+      "side": "right",
+      "resourceKey": "6e4196541f47cd699b44d3f7a5f6720e821550028df597aef978f6ef9f8a1c98",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "5de8cb1167a582b28e1c0048b3e10a8e0046ef9f70c3fd2eee3814782637a554",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.105427357601002e-14,
+        -0.999999463558197,
+        0.0,
+        0.0,
+        0.999999463558197,
+        7.105427357601002e-14,
+        0.0,
+        -0.10483565926551819,
+        0.0482032410800457,
+        0.02677154913544655,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-dfe5c957deefdff49d3e00d8",
+      "nodeId": "surface_12",
+      "sourceNamespace": "za-c7010a9",
+      "role": "deforming_passive_surface",
+      "side": "right",
+      "resourceKey": "eb76f3b84e907687209ba9f3d06e74be9a41d3fd5a60070128352dcdc0a374a0",
+      "lod": "overview",
+      "sourceChunkSha256": "a3e9f203fbca24358d5fb16cd8d6c62087045cc7254a80241602f498d696ab72",
+      "geometrySha256": "05bad8ed3c2d900eadb383d05f8bf29df3809a50cfd8050e89e6b2191e3eaef2",
+      "instanceMatrix": [
+        0.9999999403953552,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.105427357601002e-14,
+        -0.999999463558197,
+        0.0,
+        0.0,
+        0.999999463558197,
+        7.105427357601002e-14,
+        0.0,
+        -0.1073376014828682,
+        0.26906752586364746,
+        -0.02888244390487671,
+        0.9999999403953552
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-9f78cdb1fcbd9ca0c24066d5",
+      "nodeId": "surface_13",
+      "sourceNamespace": "za-c7010a9",
+      "role": "co_moving_context",
+      "side": "right",
+      "resourceKey": "4514064899b58d970a916693b19208140b987b985e7ff40bff4e46e530d1ea77",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "0df38923cc58844d868f9dec16d2f0382d0841dc8a099f731c5d6c7dcb1ba987",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.105427357601002e-14,
+        -0.999999463558197,
+        0.0,
+        0.0,
+        0.999999463558197,
+        7.105427357601002e-14,
+        0.0,
+        -0.08486966043710709,
+        0.05288272351026535,
+        0.027397889643907547,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-58b8d48b1e45988619a108bd",
+      "nodeId": "surface_14",
+      "sourceNamespace": "za-c7010a9",
+      "role": "deforming_passive_surface",
+      "side": "right",
+      "resourceKey": "b6b38fa71c158c61c66b11d12a470032b60c1eb375a836cfaebe8e2f9362e0dc",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "a7ebc9ce66c162f6660e831a2d69a9e9a7888f843e2ef4b39d777e9875cd3c89",
+      "instanceMatrix": [
+        0.9999999403953552,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.105427357601002e-14,
+        -0.999999463558197,
+        0.0,
+        0.0,
+        0.999999463558197,
+        7.105427357601002e-14,
+        0.0,
+        -0.09296765923500061,
+        0.1638287901878357,
+        -0.015126597136259079,
+        0.9999999403953552
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-cffb7aa7dcf415f6e999dea3",
+      "nodeId": "surface_15",
+      "sourceNamespace": "za-c7010a9",
+      "role": "fixed_structure",
+      "side": "right",
+      "resourceKey": "cc5261dd3ed910bfff08cd5599b0c4e5d8a7312bd171eb2fa466670f5253f5e6",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "8caba38fb9dff980be73f0cf61f9707f199f3a36e84ce0a9f8a09f21442a832f",
+      "instanceMatrix": [
+        0.9999999403953552,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.4210854715202004e-14,
+        -0.9999998807907104,
+        0.0,
+        0.0,
+        0.9999998807907104,
+        -1.4210854715202004e-14,
+        0.0,
+        -0.10612326115369797,
+        0.25558212399482727,
+        -0.046540167182683945,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-660f1d894dac4eaaac8cda4c",
+      "nodeId": "surface_16",
+      "sourceNamespace": "za-c7010a9",
+      "role": "deforming_passive_surface",
+      "side": "right",
+      "resourceKey": "88336bdde4cb822897816b9d0abe373e30cc752ee8fbc5cc077650a35dea2e58",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "863843c8b725b0f9fd2168aebf1efc5960337a5a2deb47d95e5bcaea13be39e4",
+      "instanceMatrix": [
+        0.9999999403953552,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.105427357601002e-14,
+        -0.999999463558197,
+        0.0,
+        0.0,
+        0.999999463558197,
+        7.105427357601002e-14,
+        0.0,
+        -0.10473847389221191,
+        0.1309114545583725,
+        -0.04822048544883728,
+        0.9999999403953552
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-8a4afe3bad15949b534d7395",
+      "nodeId": "surface_17",
+      "sourceNamespace": "za-c7010a9",
+      "role": "deforming_passive_surface",
+      "side": "right",
+      "resourceKey": "a6b84d7b806b50e57ae6d830d58fc743ae6b5a981c3218352872ef504aaf26a1",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "28b5713b13ea16783877f70c2a5994cd8cd21a6e4da07404c1f2c900fb1cf89c",
+      "instanceMatrix": [
+        0.9999999403953552,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.105427357601002e-14,
+        -0.999999463558197,
+        0.0,
+        0.0,
+        0.999999463558197,
+        7.105427357601002e-14,
+        0.0,
+        -0.11157863587141037,
+        0.2103981077671051,
+        -0.03851679340004921,
+        0.9999999403953552
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-6cc7e43e8a15f379ceaa7794",
+      "nodeId": "surface_18",
+      "sourceNamespace": "za-c7010a9",
+      "role": "deforming_passive_surface",
+      "side": "right",
+      "resourceKey": "80971f2b9c61eec6ced3467360ca748b4fa316f2f8ea099d59e1088dce76e9d5",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "833b81259be0d431682102f6b560ffb22d63a1d6c9703d498e29889013560227",
+      "instanceMatrix": [
+        0.9999999403953552,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.105427357601002e-14,
+        -0.999999463558197,
+        0.0,
+        0.0,
+        0.999999463558197,
+        7.105427357601002e-14,
+        0.0,
+        -0.10497167706489563,
+        0.08643221110105515,
+        -0.015920724719762802,
+        0.9999999403953552
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-440e8f3a5e420fb40740e2fa",
+      "nodeId": "surface_19",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "4e8160a7c1b372b10be6ea45cf1d402e38c1dad1f7cd73e9707b028a2981d615",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "1d26d93011e38a334084710581762d07c6238693e482683d640434829ead5c47",
+      "instanceMatrix": [
+        0.9999998211860657,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.8421694183810957e-14,
+        -0.9999991059303284,
+        0.0,
+        0.0,
+        0.9999995231628418,
+        4.263255736934243e-14,
+        0.0,
+        -0.11902481317520142,
+        0.02453026920557022,
+        0.023149363696575165,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-48acd9f4e0949932aafb2354",
+      "nodeId": "surface_20",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "5e2d315a3c07da63dadf2e277a4ae693d24a1c9e9f4860854839aa710a471fb7",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "82c5045964bcde062e0e3d7ede5e59753c141b6986fed4b542e114ec082bdc86",
+      "instanceMatrix": [
+        0.9999999403953552,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.8421700960074535e-14,
+        -0.9999993443489075,
+        0.0,
+        0.0,
+        0.9999994039535522,
+        4.2632550593078855e-14,
+        0.0,
+        -0.07197360694408417,
+        0.03473325073719025,
+        0.05069882050156593,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-833efde9c3258375fcebb1df",
+      "nodeId": "surface_21",
+      "sourceNamespace": "za-c7010a9",
+      "role": "co_moving_context",
+      "side": "right",
+      "resourceKey": "928e354a3c5a924c5fc8f2afa4c6a82d82531fc7db37713ce5f2e506535b9d92",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "f95be496f56b965b4dfb666d08777ba3d6d7379892e78ccdb3d74d6f5b83b37b",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.105427357601002e-14,
+        -0.999999463558197,
+        0.0,
+        0.0,
+        0.999999463558197,
+        7.105427357601002e-14,
+        0.0,
+        -0.12163343280553818,
+        0.017001476138830185,
+        0.028317231684923172,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d52d66255e8edcf7ed5d6e98",
+      "nodeId": "surface_22",
+      "sourceNamespace": "za-c7010a9",
+      "role": "co_moving_context",
+      "side": "right",
+      "resourceKey": "16d40d90658143e16ce1ae42895fb72c5df4fc0359945abe62a57294e7d7c9e3",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "8815980745e2b6f76d370bc79ad92053297e0290c86bcc42df6faf9076cbcb8d",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.105427357601002e-14,
+        -0.999999463558197,
+        0.0,
+        0.0,
+        0.999999463558197,
+        7.105427357601002e-14,
+        0.0,
+        -0.09932585805654526,
+        0.013800334185361862,
+        0.03849408030509949,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d2d2bb7705b6e4218e0fbd6c",
+      "nodeId": "surface_23",
+      "sourceNamespace": "za-c7010a9",
+      "role": "deforming_passive_surface",
+      "side": "right",
+      "resourceKey": "da0d8403bf8a2e16c5b2377052483fe79a223f72904958e685d25639eba39cd6",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "c4c68f403bc42ff978691a01db88d54de91a2178df4c3c3ac59377310f0b34d3",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.526512829121202e-14,
+        -0.9999993443489075,
+        0.0,
+        0.0,
+        0.9999993443489075,
+        8.526512829121202e-14,
+        0.0,
+        -0.082645945250988,
+        0.10405942052602768,
+        -0.0033983420580625534,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-84a26a68018e4752231454ac",
+      "nodeId": "surface_24",
+      "sourceNamespace": "za-c7010a9",
+      "role": "deforming_passive_surface",
+      "side": "right",
+      "resourceKey": "e2c47d39eebd3e80574304a573d8b06f2013ca9b182e4de511b95a9a9e4e6591",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "2757c523fc58d007ad53508e0fc68356a158e2be0d2523c18d9562f01ef102ee",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.526512829121202e-14,
+        -0.9999993443489075,
+        0.0,
+        0.0,
+        0.9999993443489075,
+        8.526512829121202e-14,
+        0.0,
+        -0.08513906598091125,
+        0.137800931930542,
+        -0.027076976373791695,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-db3c281e1a7f7318cae95b1b",
+      "nodeId": "surface_25",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "ab2bdcb4dad195bd6d0b73a60a6b7f0bf59a82036c17c018bc87d05948e292f5",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "c928a1b738b46ea371262c1e0f59a69f6364a67ee0480e62db81cda721910cf2",
+      "instanceMatrix": [
+        1.0000001192092896,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.8421694183810957e-14,
+        -0.9999991059303284,
+        0.0,
+        0.0,
+        0.999999463558197,
+        4.2632553981210644e-14,
+        0.0,
+        -0.1074683666229248,
+        0.031344614923000336,
+        0.03187720105051994,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-3259c0cf77de294da9cb7d04",
+      "nodeId": "surface_26",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "cf21775e47b31b663e0601b3c446b162764622413f78c7a7a5cfc94bba6b8cab",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "62f77d293fda3adef0403c163dc4322673d50841f0f721f77e3d91ebc8ac7d99",
+      "instanceMatrix": [
+        0.9999995827674866,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.8421700960074535e-14,
+        -0.9999993443489075,
+        0.0,
+        0.0,
+        0.9999993443489075,
+        4.2632550593078855e-14,
+        0.0,
+        -0.08294042944908142,
+        0.05848214030265808,
+        0.0111231729388237,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-00f32a23d4766caa4cc6928e",
+      "nodeId": "surface_27",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "77628450c5de88186b7e5ff3a3837cda0cb6b5ca2b79301fe4eda1947a825081",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "61cb5a9ec11d827a21c8310d6679d9e573ec93b1d55969fe746cf60554261ade",
+      "instanceMatrix": [
+        0.9999995827674866,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.8421700960074535e-14,
+        -0.9999993443489075,
+        0.0,
+        0.0,
+        0.9999993443489075,
+        4.2632550593078855e-14,
+        0.0,
+        -0.09143959730863571,
+        0.0516832061111927,
+        0.006218981929123402,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-778db9df1432e547dd5858a1",
+      "nodeId": "surface_28",
+      "sourceNamespace": "za-c7010a9",
+      "role": "co_moving_context",
+      "side": "right",
+      "resourceKey": "d2acc9bb8d1a54a4eb848929a8d4200605d983294d8fc92a2f48bc8276ec1d9a",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "677553213c55501db04b1683a4ebbae1a84a09ab935a71d803271ac01e4c6d99",
+      "instanceMatrix": [
+        0.9999999403953552,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.1368683772161603e-13,
+        -0.9999992251396179,
+        0.0,
+        0.0,
+        0.9999992251396179,
+        1.1368683772161603e-13,
+        0.0,
+        -0.07205717265605927,
+        0.0290052630007267,
+        0.036895014345645905,
+        0.9999999403953552
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-3b0f2c0e246db270d7983fc6",
+      "nodeId": "surface_29",
+      "sourceNamespace": "za-c7010a9",
+      "role": "passive_context",
+      "side": "right",
+      "resourceKey": "9a7ccb0d10a79edf61392ed08016e2fecc9e2f1fa87c850d20d72b5bde849644",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "1457c810403c370fb91d591c607dc8c2675ea011dbed6d80dc6dd13dee03b521",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.526512829121202e-14,
+        -0.9999993443489075,
+        0.0,
+        0.0,
+        0.9999993443489075,
+        8.526512829121202e-14,
+        0.0,
+        -0.10594228655099869,
+        0.3656615912914276,
+        -0.07409781217575073,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-1ca813fe3948ac17ce76a4d1",
+      "nodeId": "surface_30",
+      "sourceNamespace": "za-c7010a9",
+      "role": "co_moving_context",
+      "side": "right",
+      "resourceKey": "fc5b8ba81e9f67c55a17a4929e14547d96bd2cd852f986d33346e2e1b1ea711e",
+      "lod": "overview",
+      "sourceChunkSha256": "a3e9f203fbca24358d5fb16cd8d6c62087045cc7254a80241602f498d696ab72",
+      "geometrySha256": "13b1f305517099cff8f78f3b0cbf8539b38991b8eb7c978e9c7b4cb9facea246",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.105427357601002e-14,
+        -0.999999463558197,
+        0.0,
+        0.0,
+        0.999999463558197,
+        7.105427357601002e-14,
+        0.0,
+        -0.07969949394464493,
+        0.02340586856007576,
+        0.03559936583042145,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a994664b35bbf32521094e7f",
+      "nodeId": "surface_31",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "76792b3536912501eb5c668906162a0db3e1372ed0ae777f31eb75dbda4e22de",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "baa21bb6893e9040b6e25ccd182eba8854d7f3c45e48026cfc657f35800e0f8b",
+      "instanceMatrix": [
+        0.9999995827674866,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.8421700960074535e-14,
+        -0.9999993443489075,
+        0.0,
+        0.0,
+        0.9999993443489075,
+        4.2632550593078855e-14,
+        0.0,
+        -0.0705353170633316,
+        0.051217351108789444,
+        0.01686369627714157,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a7333213cf75ff3e8cb3b376",
+      "nodeId": "surface_32",
+      "sourceNamespace": "za-c7010a9",
+      "role": "co_moving_context",
+      "side": "right",
+      "resourceKey": "608cf46dba6d8924ec5fa0060e7cc840d57c77682534fd05025577efff5ba1a5",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "183417416413f71d1715d2fdce53c6f84d4fa7802d096233b233b28fbba8606a",
+      "instanceMatrix": [
+        0.9999999403953552,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.1368683772161603e-13,
+        -0.9999992251396179,
+        0.0,
+        0.0,
+        0.9999992251396179,
+        1.1368683772161603e-13,
+        0.0,
+        -0.06478726863861084,
+        0.027996769174933434,
+        0.04872153699398041,
+        0.9999999403953552
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-eafc9174265a4bbc41581e2a",
+      "nodeId": "surface_33",
+      "sourceNamespace": "za-c7010a9",
+      "role": "passive_context",
+      "side": "right",
+      "resourceKey": "80b56a0f954d948294235a9b75709fdeeb56f0cdedf42591e74e61a389070653",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "5fdb78e40188a6d37b993be6963c76f0a25292353fd61d0c2df3bf8222adf587",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.526512829121202e-14,
+        -0.9999993443489075,
+        0.0,
+        0.0,
+        0.9999993443489075,
+        8.526512829121202e-14,
+        0.0,
+        -0.06025487184524536,
+        0.37500596046447754,
+        -0.06305218487977982,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-e825e809355cd4bd211e3d17",
+      "nodeId": "surface_34",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "ff4661c7656fa76df0725c706d54375caacbace564edc5ab9a076a6ae560f506",
+      "lod": "overview",
+      "sourceChunkSha256": "a3e9f203fbca24358d5fb16cd8d6c62087045cc7254a80241602f498d696ab72",
+      "geometrySha256": "fa8d92a4c64ea2e722911fb090f6f6b8dc6fbb75a2a943ef15b9a675b8a8f6f5",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.842170265414043e-14,
+        -0.9999994039535522,
+        0.0,
+        0.0,
+        0.9999998211860657,
+        4.263257092186959e-14,
+        0.0,
+        -0.14056292176246643,
+        0.012270467355847359,
+        0.08297192305326462,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4f7f7141218bf7dde81de1df",
+      "nodeId": "surface_35",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "62e3f932ec81101cf0e1d766017c4ebfcdddf12972a4106fdc6d332469e6511a",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "71bec4f18f13fe2c4ab2e4b1ec09805220e2221eb8329c416f3cae5f642a9d4b",
+      "instanceMatrix": [
+        0.9999999403953552,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.842169926600864e-14,
+        -0.9999992847442627,
+        0.0,
+        0.0,
+        0.9999998211860657,
+        4.263257092186959e-14,
+        0.0,
+        -0.12967444956302643,
+        0.01346635166555643,
+        0.09890463948249817,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-8b97ca16ecd81d34c3ed3f5e",
+      "nodeId": "surface_36",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "06297fb08c4ce49674138e4f84022df48d21c481ac24eab6059da059000f7a27",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "59e55572bf86b538c3f838289755ca81d4cfabadc9c149c41202da06370a7ecd",
+      "instanceMatrix": [
+        0.9999999403953552,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.8421692489745062e-14,
+        -0.9999990463256836,
+        0.0,
+        0.0,
+        0.9999997019767761,
+        4.263256414560601e-14,
+        0.0,
+        -0.10164934396743774,
+        0.015295806340873241,
+        0.1179833635687828,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ea763997ca960e971a10328a",
+      "nodeId": "surface_37",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "5e5ad0140af9bc5efbab76a4c0b4ff87ebc2142be6eb64775fd387b4cb9ed0e8",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "60cb504ef461a0da2c147c22a6c32ea3d1dab33743b603683a82bba3ee7383b6",
+      "instanceMatrix": [
+        1.000000238418579,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.8421716206667585e-14,
+        -0.9999998807907104,
+        0.0,
+        0.0,
+        0.9999998211860657,
+        4.263257092186959e-14,
+        0.0,
+        -0.11618366837501526,
+        0.014351220801472664,
+        0.11136918514966965,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b0783f8644612ab1d31b51ae",
+      "nodeId": "surface_38",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "4a160917ebb3cb6073216d8ece5e476006e04af2ff196e8a6820bed74f7e5cd1",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "4c1124f564b7de7e58e230ebcd833d4b21e3de52768e7823257cc65cc07888e1",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.842170943040401e-14,
+        -0.9999996423721313,
+        0.0,
+        0.0,
+        0.9999997019767761,
+        4.263256414560601e-14,
+        0.0,
+        -0.07503192126750946,
+        0.06414856016635895,
+        -0.0033239147160202265,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-1297af1a4a6874ec11e6e9e0",
+      "nodeId": "surface_39",
+      "sourceNamespace": "za-c7010a9",
+      "role": "co_moving_context",
+      "side": "right",
+      "resourceKey": "730d6cf8450712b1fb76798f0a6ecfce7ef9014526959b8afae7ec9a84427ff1",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "afa554b495830f0e4af22a0e08ea78d467f17ff23f28e5602a2366e15cacda6c",
+      "instanceMatrix": [
+        0.9999999403953552,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.1368683772161603e-13,
+        -0.9999992251396179,
+        0.0,
+        0.0,
+        0.9999992251396179,
+        1.1368683772161603e-13,
+        0.0,
+        -0.0911918580532074,
+        0.03231152519583702,
+        0.02864065207540989,
+        0.9999999403953552
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-665732009b163a77ce0486a2",
+      "nodeId": "surface_40",
+      "sourceNamespace": "za-c7010a9",
+      "role": "co_moving_context",
+      "side": "right",
+      "resourceKey": "0b40fcba3e563c74df5611940b9fb9fa374918be9b80e8877d612b93a7d7cd44",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "231d3aa4a84702a11a91a7e2507b87485de2c795b499dd6c1daa1ccc46d01d68",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.105427357601002e-14,
+        -0.999999463558197,
+        0.0,
+        0.0,
+        0.999999463558197,
+        7.105427357601002e-14,
+        0.0,
+        -0.10832963138818741,
+        0.028064996004104614,
+        0.04812674969434738,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-edb60adde86cd72492dedb1b",
+      "nodeId": "surface_41",
+      "sourceNamespace": "za-c7010a9",
+      "role": "deforming_passive_surface",
+      "side": "right",
+      "resourceKey": "60e94e43f925a3f8ea08eafe4db11746e450d77d4117b0e1ec6531034506af76",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "66125a5ecd60343adb7dd569b89da14307b27c8ed749120d1d352497367ce1d4",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.526512829121202e-14,
+        -0.9999993443489075,
+        0.0,
+        0.0,
+        0.9999993443489075,
+        8.526512829121202e-14,
+        0.0,
+        -0.07601528614759445,
+        0.3032023310661316,
+        -0.0626501590013504,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-6bbbbd531b69f3585ceeafc8",
+      "nodeId": "surface_42",
+      "sourceNamespace": "za-c7010a9",
+      "role": "passive_context",
+      "side": "right",
+      "resourceKey": "59af300a3987ee3f9e36734184cb49f5a3164d52fb26966eff0f2c91e7692355",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "688302ff3bfe700221b43fd2a1b28d09341595157221ef2998cebbe5ab913f9a",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.526512829121202e-14,
+        -0.9999993443489075,
+        0.0,
+        0.0,
+        0.9999993443489075,
+        8.526512829121202e-14,
+        0.0,
+        -0.08625417947769165,
+        0.4016335904598236,
+        -0.04903348535299301,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-da68304526f8c9bbc61306da",
+      "nodeId": "surface_43",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "3fb65f8a6b663caed94ff9de6b6f6e2b1afd3aa46bd9aa1145c5ae3b085c6789",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "eedeb9bb675af58639fadb31c4e5b1907cd82150e8ae2bd21e3b01eb8c70ed8a",
+      "instanceMatrix": [
+        0.9999998211860657,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.842169926600864e-14,
+        -0.9999992847442627,
+        0.0,
+        0.0,
+        0.9999995231628418,
+        4.263255736934243e-14,
+        0.0,
+        -0.13567203283309937,
+        0.013348150998353958,
+        0.06735506653785706,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-811c52b6b45c12323e057e8b",
+      "nodeId": "surface_44",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "125a2cc92fdc00bf116731f1dd0904b5b3622a3bd93ba2ace8dd8fb1588aa356",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "6254b9fc74dc90f0d1c7d6bd8ff397f1d6539fc3341e072d347ddfb1272f05cb",
+      "instanceMatrix": [
+        1.000000238418579,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.8421716206667585e-14,
+        -0.9999998807907104,
+        0.0,
+        0.0,
+        0.9999999403953552,
+        4.263257431000138e-14,
+        0.0,
+        -0.07464782148599625,
+        0.01798761822283268,
+        0.09664790332317352,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-1e2eb56fc4a54025f43abbfa",
+      "nodeId": "surface_45",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "50ba498d81ae95af74bfc166579e8fae639b0b688938c50ada9d20bb1f099fdf",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "c8586e76afb6735c1f31c370e76683accd14fb785cb2a847aacea53bcd7c8b5e",
+      "instanceMatrix": [
+        0.9999998807907104,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.842168740754738e-14,
+        -0.9999988675117493,
+        0.0,
+        0.0,
+        0.9999997019767761,
+        4.263256414560601e-14,
+        0.0,
+        -0.12324198335409164,
+        0.016453374177217484,
+        0.0799800232052803,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-28354d907ed0c43cd1f22ae9",
+      "nodeId": "surface_46",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "9ef3eb65f8ab0d2c89cad17feaa4fc510b8e1ea3c4f591ac6b00eed0579d8968",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "5459237dc118f3ae5b38067c5ad5674dbf81fd0904f41d5f70f166818215ead8",
+      "instanceMatrix": [
+        0.9999998211860657,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.8421689101613273e-14,
+        -0.999998927116394,
+        0.0,
+        0.0,
+        0.9999995827674866,
+        4.263255736934243e-14,
+        0.0,
+        -0.09566137194633484,
+        0.01855841651558876,
+        0.0981375202536583,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-00354e48f55a2b440735eece",
+      "nodeId": "surface_47",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "e7962f1b167e69ecb07a4ca29d7b0042eadb09b67c7405176f9bdfd8ae263639",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "34d57bc35013cf5bdfdd0eca0647d28c5206231b0c026ec2df4e852035ef5133",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.8421697571942746e-14,
+        -0.9999992251396179,
+        0.0,
+        0.0,
+        0.9999992251396179,
+        4.263254381681528e-14,
+        0.0,
+        -0.11096876114606857,
+        0.017005031928420067,
+        0.0892457440495491,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-0b52eaa17e772e36c284d22a",
+      "nodeId": "surface_48",
+      "sourceNamespace": "za-c7010a9",
+      "role": "co_moving_context",
+      "side": "right",
+      "resourceKey": "5cc27ffc856f60db51bcfeaef66ebe10fbef0370b15ba1f4d75643c1d36a23a5",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "937cb41c03f7cf5aa2934590b80c184e31b3aa3c49aa2631fb1b84338ec345fe",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.105427357601002e-14,
+        -0.999999463558197,
+        0.0,
+        0.0,
+        0.999999463558197,
+        7.105427357601002e-14,
+        0.0,
+        -0.08551808446645737,
+        0.025028100237250328,
+        -0.02263673022389412,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b1b47432a6dcaa8fd126497a",
+      "nodeId": "surface_49",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "2960dce51a40654c1dc91bf1b1539a972d703f5b854b23354e853f91bf1a2e01",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "da41f7e08e7e1de4210f0fba50b10bb500b16c43d0f085dd1296bf9862dc50ff",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.842169926600864e-14,
+        -0.9999992847442627,
+        0.0,
+        0.0,
+        0.9999995827674866,
+        4.263255736934243e-14,
+        0.0,
+        -0.08982803672552109,
+        0.0429828017950058,
+        0.03963343799114227,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-fc07a02a3e10ba2f2748c60d",
+      "nodeId": "surface_50",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "5f4300648e017722d2cd1a2d6017b51e9e367cb501528748d0674c82167dd43f",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "7e4131897b70f7f0131e82c381e837a86bbc4a5b8804c11ed31170d28bf5704f",
+      "instanceMatrix": [
+        0.9999999403953552,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.4210850480037267e-14,
+        -0.9999995231628418,
+        0.0,
+        0.0,
+        0.9999995231628418,
+        1.4210850480037267e-14,
+        0.0,
+        -0.07420171797275543,
+        0.015307500958442688,
+        0.06992559134960175,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ca930d96bd1ebb900eec15b1",
+      "nodeId": "surface_51",
+      "sourceNamespace": "za-c7010a9",
+      "role": "passive_context",
+      "side": "right",
+      "resourceKey": "1895b03f5b077c2f32f8a0c1e133fdea5d89f84e4d42788f8114891fca776477",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "0d12c1033097433716a2bec4643b280ea2bda150ba9ae1fc87ea50a84848127d",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.526512829121202e-14,
+        -0.9999993443489075,
+        0.0,
+        0.0,
+        0.9999993443489075,
+        8.526512829121202e-14,
+        0.0,
+        -0.08593872934579849,
+        0.28455448150634766,
+        -0.058188553899526596,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-f59e38e9fc116b299b0d58f0",
+      "nodeId": "surface_52",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "81b484b6c32d3494eddcc05b90a85146e0cea16f877a925b049d8fb1b65a99f6",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "97adfcd35ad0df943b73dfec95af7dda5b06e77469034c0ee28ca92ffffc508c",
+      "instanceMatrix": [
+        1.0000001192092896,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.8421700960074535e-14,
+        -0.9999993443489075,
+        0.0,
+        0.0,
+        0.9999997019767761,
+        4.263256414560601e-14,
+        0.0,
+        -0.07301297783851624,
+        0.06533300876617432,
+        -0.03519171103835106,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d97e4f8f243af60ebfe3b198",
+      "nodeId": "surface_53",
+      "sourceNamespace": "za-c7010a9",
+      "role": "moving_structure",
+      "side": "right",
+      "resourceKey": "88ed15e730c67aaaefa0d5f36da211fad3454348d58c854104761862e6dc5c9d",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "718c3286f41d8c790a5536c16ec69fb83db8d196978f7501461b64ac6238e29c",
+      "instanceMatrix": [
+        1.000000238418579,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.842170943040401e-14,
+        -0.9999996423721313,
+        0.0,
+        0.0,
+        0.9999998211860657,
+        4.263257092186959e-14,
+        0.0,
+        -0.10175421833992004,
+        0.033158302307128906,
+        0.04699832201004028,
+        1.0000001192092896
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4e2855b7618ac050900a1b0c",
+      "nodeId": "surface_54",
+      "sourceNamespace": "za-c7010a9",
+      "role": "fixed_structure",
+      "side": "right",
+      "resourceKey": "b75248181c76b27bafdd621971e0c0caf55ba3a85457f175d82ba03eff997891",
+      "lod": "overview",
+      "sourceChunkSha256": "46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e",
+      "geometrySha256": "f0808fcbac815580bd6a37948fb34220e67ce218df9d8531fdd4bcfb41b99148",
+      "instanceMatrix": [
+        0.9999999403953552,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.4210854715202004e-14,
+        -0.9999998807907104,
+        0.0,
+        0.0,
+        0.9999998807907104,
+        -1.4210854715202004e-14,
+        0.0,
+        -0.07511287182569504,
+        0.30274513363838196,
+        -0.034159112721681595,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-54ae5266082b61f48ed8e83e",
+      "nodeId": "surface_55",
+      "sourceNamespace": "za-c7010a9",
+      "role": "deforming_muscle_surface",
+      "side": "right",
+      "resourceKey": "b1911c5b31332a4d523cf132d042cf93279177cfdee6d43a733d1f8707d50601",
+      "lod": "detail",
+      "sourceChunkSha256": "ecaefb3496aca83362536c412b6ffdd61f0214eecbe4232b0ee88f56836d5e69",
+      "geometrySha256": "8a8de5e082141dfbb840a135785f540d6e2a3241c4aa1d0b7c1566c28b5b975b",
+      "instanceMatrix": [
+        0.9999999403953552,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.105427357601002e-14,
+        -0.999999463558197,
+        0.0,
+        0.0,
+        0.999999463558197,
+        7.105427357601002e-14,
+        0.0,
+        -0.09068579971790314,
+        0.2279169112443924,
+        -0.008054859936237335,
+        0.9999999403953552
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4aedd051afdad37d616d1994",
+      "nodeId": "surface_56",
+      "sourceNamespace": "za-c7010a9",
+      "role": "deforming_passive_surface",
+      "side": "right",
+      "resourceKey": "386cba46bd523c596350383c7d766bb86b2df1b920a2326a16567d7c53062275",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "70fcfbad3e319cb158369447aef57be756427b600a0b86ddc78dda094c5ae1d4",
+      "instanceMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.526512829121202e-14,
+        -0.9999993443489075,
+        0.0,
+        0.0,
+        0.9999993443489075,
+        8.526512829121202e-14,
+        0.0,
+        -0.07657227665185928,
+        0.15185828506946564,
+        -0.023469017818570137,
+        1.0
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-56453688481eb47b17c98b50",
+      "nodeId": "surface_57",
+      "sourceNamespace": "za-c7010a9",
+      "role": "co_moving_context",
+      "side": "right",
+      "resourceKey": "06cba14c756a1e37da1ba79cd151859569bd47244278129da0abd6af4da4d743",
+      "lod": "overview",
+      "sourceChunkSha256": "a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff",
+      "geometrySha256": "b11ac43a15bf90f9e1b5a9cf0c0c70c335e7cd4fd1c5dfb807c0cf51c5c16bc1",
+      "instanceMatrix": [
+        0.9999999403953552,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.1368683772161603e-13,
+        -0.9999992251396179,
+        0.0,
+        0.0,
+        0.9999992251396179,
+        1.1368683772161603e-13,
+        0.0,
+        -0.10272681713104248,
+        0.017841115593910217,
+        0.06379134953022003,
+        0.9999999403953552
+      ]
+    }
+  ],
+  "surfaceMetrics": [
+    {
+      "sourceKey": "ZA-c7010a9-f1b8f017f065ca519bd77a72",
+      "sourceName": "(Opponens digiti minimi muscle of foot).r",
+      "role": "co_moving_context",
+      "vertices": 120,
+      "triangles": 236,
+      "maximumDisplacementMetres": 0.010904790646466076,
+      "maxRelativeEdgeLengthChange": 3.2965198079730024e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a10f307fc95f872b62897168",
+      "sourceName": "Abductor digiti minimi of foot.r",
+      "role": "co_moving_context",
+      "vertices": 128,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.013032128855383013,
+      "maxRelativeEdgeLengthChange": 1.2119001666631224e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-bb1f688e53b7983527bbc4c0",
+      "sourceName": "Abductor hallucis.r",
+      "role": "co_moving_context",
+      "vertices": 151,
+      "triangles": 302,
+      "maximumDisplacementMetres": 0.015377613308421014,
+      "maxRelativeEdgeLengthChange": 4.4022858085933605e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-26d57a52182af4b4475cef42",
+      "sourceName": "Calcaneus.r",
+      "role": "moving_structure",
+      "vertices": 132,
+      "triangles": 260,
+      "maximumDisplacementMetres": 0.008424205712817516,
+      "maxRelativeEdgeLengthChange": 3.4541633634370874e-15,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ab881618a17c726a5d4072c2",
+      "sourceName": "Cuboid bone.r",
+      "role": "moving_structure",
+      "vertices": 161,
+      "triangles": 318,
+      "maximumDisplacementMetres": 0.007033659120514227,
+      "maxRelativeEdgeLengthChange": 6.777561559666611e-15,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-7fdc346491c401fafbbde592",
+      "sourceName": "Distal phalanx of fifth finger of foot.r",
+      "role": "moving_structure",
+      "vertices": 120,
+      "triangles": 236,
+      "maximumDisplacementMetres": 0.016795755388397966,
+      "maxRelativeEdgeLengthChange": 1.0047981048086437e-13,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 1,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-21ebc5730330e4150d9a21c3",
+      "sourceName": "Distal phalanx of first finger of foot.r",
+      "role": "moving_structure",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.020693636732456194,
+      "maxRelativeEdgeLengthChange": 4.2054621273919456e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-403941ce03486160854a2e7e",
+      "sourceName": "Distal phalanx of fourth finger of foot.r",
+      "role": "moving_structure",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.018773068447103688,
+      "maxRelativeEdgeLengthChange": 5.986975482895794e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-c956642614a1502da28310f7",
+      "sourceName": "Distal phalanx of second finger of foot.r",
+      "role": "moving_structure",
+      "vertices": 120,
+      "triangles": 236,
+      "maximumDisplacementMetres": 0.021060732227136655,
+      "maxRelativeEdgeLengthChange": 4.919729694049719e-13,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-fd30572856dff59afa6b19a0",
+      "sourceName": "Distal phalanx of third finger of foot.r",
+      "role": "moving_structure",
+      "vertices": 129,
+      "triangles": 254,
+      "maximumDisplacementMetres": 0.020300256575848497,
+      "maxRelativeEdgeLengthChange": 1.4505069704866438e-13,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-43fa07db75bcfd51cdd6bdac",
+      "sourceName": "Dorsal interossei muscles of foot.r",
+      "role": "co_moving_context",
+      "vertices": 488,
+      "triangles": 972,
+      "maximumDisplacementMetres": 0.015402068807160055,
+      "maxRelativeEdgeLengthChange": 3.47584782131782e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-daaa7d3a2aceb5b6050f7827",
+      "sourceName": "Extensor digitorum brevis.r",
+      "role": "co_moving_context",
+      "vertices": 290,
+      "triangles": 572,
+      "maximumDisplacementMetres": 0.01866363523620566,
+      "maxRelativeEdgeLengthChange": 1.37482043403357e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-dfe5c957deefdff49d3e00d8",
+      "sourceName": "Extensor digitorum longus.r",
+      "role": "deforming_passive_surface",
+      "vertices": 287,
+      "triangles": 571,
+      "maximumDisplacementMetres": 0.00317210543828151,
+      "maxRelativeEdgeLengthChange": 0.2644289186196798,
+      "contactPins": [
+        {
+          "boneSourceKey": "ZA-c7010a9-26d57a52182af4b4475cef42",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ab881618a17c726a5d4072c2",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-7fdc346491c401fafbbde592",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-21ebc5730330e4150d9a21c3",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-403941ce03486160854a2e7e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-c956642614a1502da28310f7",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fd30572856dff59afa6b19a0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-440e8f3a5e420fb40740e2fa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-48acd9f4e0949932aafb2354",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-db3c281e1a7f7318cae95b1b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-3259c0cf77de294da9cb7d04",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00f32a23d4766caa4cc6928e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-a994664b35bbf32521094e7f",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-e825e809355cd4bd211e3d17",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4f7f7141218bf7dde81de1df",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-8b97ca16ecd81d34c3ed3f5e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ea763997ca960e971a10328a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b0783f8644612ab1d31b51ae",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-da68304526f8c9bbc61306da",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-811c52b6b45c12323e057e8b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-1e2eb56fc4a54025f43abbfa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-28354d907ed0c43cd1f22ae9",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00354e48f55a2b440735eece",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b1b47432a6dcaa8fd126497a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fc07a02a3e10ba2f2748c60d",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-f59e38e9fc116b299b0d58f0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-d97e4f8f243af60ebfe3b198",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4e2855b7618ac050900a1b0c",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            278
+          ]
+        }
+      ],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 236,
+      "movingRegionCount": 4,
+      "fixedRegionErrorMetres": 0.0,
+      "movingRegionErrorMetres": 0.0
+    },
+    {
+      "sourceKey": "ZA-c7010a9-9f78cdb1fcbd9ca0c24066d5",
+      "sourceName": "Extensor hallucis brevis.r",
+      "role": "co_moving_context",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.015612352748447668,
+      "maxRelativeEdgeLengthChange": 1.3876146509527193e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-58b8d48b1e45988619a108bd",
+      "sourceName": "Extensor hallucis longus.r",
+      "role": "deforming_passive_surface",
+      "vertices": 214,
+      "triangles": 424,
+      "maximumDisplacementMetres": 0.016633155178075742,
+      "maxRelativeEdgeLengthChange": 0.08823469504852476,
+      "contactPins": [
+        {
+          "boneSourceKey": "ZA-c7010a9-26d57a52182af4b4475cef42",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ab881618a17c726a5d4072c2",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-7fdc346491c401fafbbde592",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-21ebc5730330e4150d9a21c3",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-403941ce03486160854a2e7e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-c956642614a1502da28310f7",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fd30572856dff59afa6b19a0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-440e8f3a5e420fb40740e2fa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-48acd9f4e0949932aafb2354",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            187
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-db3c281e1a7f7318cae95b1b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-3259c0cf77de294da9cb7d04",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00f32a23d4766caa4cc6928e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-a994664b35bbf32521094e7f",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-a994664b35bbf32521094e7f",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            191
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-e825e809355cd4bd211e3d17",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4f7f7141218bf7dde81de1df",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-8b97ca16ecd81d34c3ed3f5e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ea763997ca960e971a10328a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b0783f8644612ab1d31b51ae",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-da68304526f8c9bbc61306da",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-811c52b6b45c12323e057e8b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            171,
+            180
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-1e2eb56fc4a54025f43abbfa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-28354d907ed0c43cd1f22ae9",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00354e48f55a2b440735eece",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b1b47432a6dcaa8fd126497a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fc07a02a3e10ba2f2748c60d",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-f59e38e9fc116b299b0d58f0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-d97e4f8f243af60ebfe3b198",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4e2855b7618ac050900a1b0c",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            156
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4e2855b7618ac050900a1b0c",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            142,
+            153
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-48acd9f4e0949932aafb2354",
+          "kind": "post_relax_avoid_new_containment",
+          "vertexIndices": [
+            199
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-a994664b35bbf32521094e7f",
+          "kind": "post_relax_avoid_new_containment",
+          "vertexIndices": [
+            185
+          ]
+        }
+      ],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 115,
+      "movingRegionCount": 20,
+      "fixedRegionErrorMetres": 0.0,
+      "movingRegionErrorMetres": 0.0
+    },
+    {
+      "sourceKey": "ZA-c7010a9-cffb7aa7dcf415f6e999dea3",
+      "sourceName": "Fibula.r",
+      "role": "fixed_structure",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.0,
+      "maxRelativeEdgeLengthChange": 0.0,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-660f1d894dac4eaaac8cda4c",
+      "sourceName": "Fibularis brevis muscle.r",
+      "role": "deforming_passive_surface",
+      "vertices": 310,
+      "triangles": 620,
+      "maximumDisplacementMetres": 0.006187034886494925,
+      "maxRelativeEdgeLengthChange": 0.07178706597449572,
+      "contactPins": [
+        {
+          "boneSourceKey": "ZA-c7010a9-26d57a52182af4b4475cef42",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ab881618a17c726a5d4072c2",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-7fdc346491c401fafbbde592",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-21ebc5730330e4150d9a21c3",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-403941ce03486160854a2e7e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-c956642614a1502da28310f7",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fd30572856dff59afa6b19a0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-440e8f3a5e420fb40740e2fa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-48acd9f4e0949932aafb2354",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-db3c281e1a7f7318cae95b1b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-3259c0cf77de294da9cb7d04",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00f32a23d4766caa4cc6928e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-a994664b35bbf32521094e7f",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-e825e809355cd4bd211e3d17",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4f7f7141218bf7dde81de1df",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-8b97ca16ecd81d34c3ed3f5e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ea763997ca960e971a10328a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b0783f8644612ab1d31b51ae",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-da68304526f8c9bbc61306da",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-811c52b6b45c12323e057e8b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-1e2eb56fc4a54025f43abbfa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-28354d907ed0c43cd1f22ae9",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00354e48f55a2b440735eece",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b1b47432a6dcaa8fd126497a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fc07a02a3e10ba2f2748c60d",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-f59e38e9fc116b299b0d58f0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-d97e4f8f243af60ebfe3b198",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        }
+      ],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 126,
+      "movingRegionCount": 43,
+      "fixedRegionErrorMetres": 0.0,
+      "movingRegionErrorMetres": 0.0
+    },
+    {
+      "sourceKey": "ZA-c7010a9-8a4afe3bad15949b534d7395",
+      "sourceName": "Fibularis longus muscle.r",
+      "role": "deforming_passive_surface",
+      "vertices": 474,
+      "triangles": 992,
+      "maximumDisplacementMetres": 0.008198503417376445,
+      "maxRelativeEdgeLengthChange": 0.06553657077829736,
+      "contactPins": [
+        {
+          "boneSourceKey": "ZA-c7010a9-26d57a52182af4b4475cef42",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            393
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ab881618a17c726a5d4072c2",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            363,
+            370,
+            380,
+            409
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-7fdc346491c401fafbbde592",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-21ebc5730330e4150d9a21c3",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-403941ce03486160854a2e7e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-c956642614a1502da28310f7",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fd30572856dff59afa6b19a0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-440e8f3a5e420fb40740e2fa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-48acd9f4e0949932aafb2354",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            449
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-db3c281e1a7f7318cae95b1b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-3259c0cf77de294da9cb7d04",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00f32a23d4766caa4cc6928e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-a994664b35bbf32521094e7f",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            472
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-e825e809355cd4bd211e3d17",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4f7f7141218bf7dde81de1df",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-8b97ca16ecd81d34c3ed3f5e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ea763997ca960e971a10328a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b0783f8644612ab1d31b51ae",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-da68304526f8c9bbc61306da",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-811c52b6b45c12323e057e8b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-1e2eb56fc4a54025f43abbfa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-28354d907ed0c43cd1f22ae9",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00354e48f55a2b440735eece",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b1b47432a6dcaa8fd126497a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fc07a02a3e10ba2f2748c60d",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-f59e38e9fc116b299b0d58f0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-d97e4f8f243af60ebfe3b198",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        }
+      ],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 325,
+      "movingRegionCount": 96,
+      "fixedRegionErrorMetres": 0.0,
+      "movingRegionErrorMetres": 4.336808689942018e-19
+    },
+    {
+      "sourceKey": "ZA-c7010a9-6cc7e43e8a15f379ceaa7794",
+      "sourceName": "Fibularis tertius muscle.r",
+      "role": "deforming_passive_surface",
+      "vertices": 128,
+      "triangles": 254,
+      "maximumDisplacementMetres": 0.00726517972011339,
+      "maxRelativeEdgeLengthChange": 0.07693613924358862,
+      "contactPins": [
+        {
+          "boneSourceKey": "ZA-c7010a9-26d57a52182af4b4475cef42",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ab881618a17c726a5d4072c2",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-7fdc346491c401fafbbde592",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-21ebc5730330e4150d9a21c3",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-403941ce03486160854a2e7e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-c956642614a1502da28310f7",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fd30572856dff59afa6b19a0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-cffb7aa7dcf415f6e999dea3",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            82
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-440e8f3a5e420fb40740e2fa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            2
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-48acd9f4e0949932aafb2354",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-db3c281e1a7f7318cae95b1b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-3259c0cf77de294da9cb7d04",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00f32a23d4766caa4cc6928e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-a994664b35bbf32521094e7f",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-e825e809355cd4bd211e3d17",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4f7f7141218bf7dde81de1df",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-8b97ca16ecd81d34c3ed3f5e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ea763997ca960e971a10328a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b0783f8644612ab1d31b51ae",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-da68304526f8c9bbc61306da",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-811c52b6b45c12323e057e8b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-1e2eb56fc4a54025f43abbfa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-28354d907ed0c43cd1f22ae9",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00354e48f55a2b440735eece",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b1b47432a6dcaa8fd126497a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fc07a02a3e10ba2f2748c60d",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-f59e38e9fc116b299b0d58f0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-d97e4f8f243af60ebfe3b198",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4e2855b7618ac050900a1b0c",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            124,
+            126
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4e2855b7618ac050900a1b0c",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            119,
+            125
+          ]
+        }
+      ],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 2,
+      "movingRegionCount": 34,
+      "fixedRegionErrorMetres": 0.0,
+      "movingRegionErrorMetres": 0.0
+    },
+    {
+      "sourceKey": "ZA-c7010a9-440e8f3a5e420fb40740e2fa",
+      "sourceName": "Fifth metatarsal bone.r",
+      "role": "moving_structure",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.012878393001727143,
+      "maxRelativeEdgeLengthChange": 5.257193318486779e-15,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-48acd9f4e0949932aafb2354",
+      "sourceName": "First metatarsal bone.r",
+      "role": "moving_structure",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.015003110908445843,
+      "maxRelativeEdgeLengthChange": 6.4318256668748055e-15,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-833efde9c3258375fcebb1df",
+      "sourceName": "Flexor digiti minimi of foot.r",
+      "role": "co_moving_context",
+      "vertices": 126,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.01368828488861027,
+      "maxRelativeEdgeLengthChange": 1.2445832328151148e-13,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d52d66255e8edcf7ed5d6e98",
+      "sourceName": "Flexor digitorum brevis.r",
+      "role": "co_moving_context",
+      "vertices": 288,
+      "triangles": 580,
+      "maximumDisplacementMetres": 0.019066575854978406,
+      "maxRelativeEdgeLengthChange": 9.780986084966593e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d2d2bb7705b6e4218e0fbd6c",
+      "sourceName": "Flexor digitorum longus.r",
+      "role": "deforming_passive_surface",
+      "vertices": 617,
+      "triangles": 1230,
+      "maximumDisplacementMetres": 0.02008807149974268,
+      "maxRelativeEdgeLengthChange": 0.06923706008386915,
+      "contactPins": [
+        {
+          "boneSourceKey": "ZA-c7010a9-26d57a52182af4b4475cef42",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ab881618a17c726a5d4072c2",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-7fdc346491c401fafbbde592",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            0,
+            3,
+            5
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-21ebc5730330e4150d9a21c3",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-403941ce03486160854a2e7e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            15,
+            19,
+            20
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-c956642614a1502da28310f7",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            111,
+            114,
+            116,
+            122
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fd30572856dff59afa6b19a0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            52,
+            53,
+            57,
+            59,
+            61
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-440e8f3a5e420fb40740e2fa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-48acd9f4e0949932aafb2354",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-db3c281e1a7f7318cae95b1b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-3259c0cf77de294da9cb7d04",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00f32a23d4766caa4cc6928e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-a994664b35bbf32521094e7f",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-e825e809355cd4bd211e3d17",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            2
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4f7f7141218bf7dde81de1df",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-8b97ca16ecd81d34c3ed3f5e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ea763997ca960e971a10328a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            76
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b0783f8644612ab1d31b51ae",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-da68304526f8c9bbc61306da",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            6,
+            11,
+            13,
+            14,
+            17
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-811c52b6b45c12323e057e8b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-1e2eb56fc4a54025f43abbfa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            49,
+            54
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-28354d907ed0c43cd1f22ae9",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            147
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00354e48f55a2b440735eece",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            83,
+            90,
+            104
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b1b47432a6dcaa8fd126497a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fc07a02a3e10ba2f2748c60d",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-f59e38e9fc116b299b0d58f0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-d97e4f8f243af60ebfe3b198",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            100,
+            112,
+            115
+          ]
+        }
+      ],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 206,
+      "movingRegionCount": 285,
+      "fixedRegionErrorMetres": 0.0,
+      "movingRegionErrorMetres": 4.336808689942018e-19
+    },
+    {
+      "sourceKey": "ZA-c7010a9-84a26a68018e4752231454ac",
+      "sourceName": "Flexor hallucis longus.r",
+      "role": "deforming_passive_surface",
+      "vertices": 531,
+      "triangles": 1058,
+      "maximumDisplacementMetres": 0.019043165630921188,
+      "maxRelativeEdgeLengthChange": 0.08830665181447075,
+      "contactPins": [
+        {
+          "boneSourceKey": "ZA-c7010a9-26d57a52182af4b4475cef42",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            483
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ab881618a17c726a5d4072c2",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-7fdc346491c401fafbbde592",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-21ebc5730330e4150d9a21c3",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            284,
+            297,
+            313,
+            326,
+            340,
+            341,
+            345,
+            347,
+            357,
+            362,
+            369,
+            373,
+            377
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-403941ce03486160854a2e7e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-c956642614a1502da28310f7",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fd30572856dff59afa6b19a0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-cffb7aa7dcf415f6e999dea3",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            153
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-440e8f3a5e420fb40740e2fa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-48acd9f4e0949932aafb2354",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-db3c281e1a7f7318cae95b1b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-3259c0cf77de294da9cb7d04",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00f32a23d4766caa4cc6928e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-a994664b35bbf32521094e7f",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-e825e809355cd4bd211e3d17",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4f7f7141218bf7dde81de1df",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-8b97ca16ecd81d34c3ed3f5e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ea763997ca960e971a10328a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b0783f8644612ab1d31b51ae",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-da68304526f8c9bbc61306da",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-811c52b6b45c12323e057e8b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            374
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-1e2eb56fc4a54025f43abbfa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-28354d907ed0c43cd1f22ae9",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00354e48f55a2b440735eece",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b1b47432a6dcaa8fd126497a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fc07a02a3e10ba2f2748c60d",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-f59e38e9fc116b299b0d58f0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-d97e4f8f243af60ebfe3b198",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-cffb7aa7dcf415f6e999dea3",
+          "kind": "post_relax_avoid_new_containment",
+          "vertexIndices": [
+            155
+          ]
+        }
+      ],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 244,
+      "movingRegionCount": 113,
+      "fixedRegionErrorMetres": 0.0,
+      "movingRegionErrorMetres": 0.0
+    },
+    {
+      "sourceKey": "ZA-c7010a9-db3c281e1a7f7318cae95b1b",
+      "sourceName": "Fourth metatarsal bone.r",
+      "role": "moving_structure",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.013982607568111741,
+      "maxRelativeEdgeLengthChange": 8.936593041688466e-15,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-3259c0cf77de294da9cb7d04",
+      "sourceName": "Intermediate cuneiform bone.r",
+      "role": "moving_structure",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.006933545862724559,
+      "maxRelativeEdgeLengthChange": 1.306605297600438e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-00f32a23d4766caa4cc6928e",
+      "sourceName": "Lateral cuneiform bone.r",
+      "role": "moving_structure",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.006998949749573153,
+      "maxRelativeEdgeLengthChange": 8.765552667175748e-15,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-778db9df1432e547dd5858a1",
+      "sourceName": "Lateral head of flexor hallucis brevis.r",
+      "role": "co_moving_context",
+      "vertices": 239,
+      "triangles": 482,
+      "maximumDisplacementMetres": 0.015820328208776605,
+      "maxRelativeEdgeLengthChange": 5.884404648125787e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-3b0f2c0e246db270d7983fc6",
+      "sourceName": "Lateral head of gastrocnemius.r",
+      "role": "passive_context",
+      "vertices": 441,
+      "triangles": 882,
+      "maximumDisplacementMetres": 0.0,
+      "maxRelativeEdgeLengthChange": 0.0,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-1ca813fe3948ac17ce76a4d1",
+      "sourceName": "Lumbrical muscles of foot.r",
+      "role": "co_moving_context",
+      "vertices": 125,
+      "triangles": 254,
+      "maximumDisplacementMetres": 0.015589319070132807,
+      "maxRelativeEdgeLengthChange": 2.2676085529551094e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a994664b35bbf32521094e7f",
+      "sourceName": "Medial cuneiform bone.r",
+      "role": "moving_structure",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.00809959452524587,
+      "maxRelativeEdgeLengthChange": 9.909386603666984e-15,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a7333213cf75ff3e8cb3b376",
+      "sourceName": "Medial head of flexor hallucis brevis.r",
+      "role": "co_moving_context",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.01576779707600206,
+      "maxRelativeEdgeLengthChange": 8.49242480645584e-15,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-eafc9174265a4bbc41581e2a",
+      "sourceName": "Medial head of gastrocnemius.r",
+      "role": "passive_context",
+      "vertices": 583,
+      "triangles": 1162,
+      "maximumDisplacementMetres": 0.0,
+      "maxRelativeEdgeLengthChange": 0.0,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-e825e809355cd4bd211e3d17",
+      "sourceName": "Middle phalanx of fifth finger of foot.r",
+      "role": "moving_structure",
+      "vertices": 110,
+      "triangles": 216,
+      "maximumDisplacementMetres": 0.015915829325697396,
+      "maxRelativeEdgeLengthChange": 8.136665152552306e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4f7f7141218bf7dde81de1df",
+      "sourceName": "Middle phalanx of fourth finger of foot.r",
+      "role": "moving_structure",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.017667463651787372,
+      "maxRelativeEdgeLengthChange": 4.8624601138158105e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-8b97ca16ecd81d34c3ed3f5e",
+      "sourceName": "Middle phalanx of second finger of foot.r",
+      "role": "moving_structure",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.019778033013697092,
+      "maxRelativeEdgeLengthChange": 1.141201782668638e-13,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ea763997ca960e971a10328a",
+      "sourceName": "Middle phalanx of third finger of foot.r",
+      "role": "moving_structure",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.019248397935519305,
+      "maxRelativeEdgeLengthChange": 5.739375442373385e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b0783f8644612ab1d31b51ae",
+      "sourceName": "Navicular bone.r",
+      "role": "moving_structure",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.005310475820843076,
+      "maxRelativeEdgeLengthChange": 8.786774601868338e-15,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-1297af1a4a6874ec11e6e9e0",
+      "sourceName": "Oblique head of adductor hallucis.r",
+      "role": "co_moving_context",
+      "vertices": 228,
+      "triangles": 452,
+      "maximumDisplacementMetres": 0.013649429165469039,
+      "maxRelativeEdgeLengthChange": 1.3284294676024712e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-665732009b163a77ce0486a2",
+      "sourceName": "Plantar interossei muscles.r",
+      "role": "co_moving_context",
+      "vertices": 134,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.01519591515016488,
+      "maxRelativeEdgeLengthChange": 1.2466743798838117e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-edb60adde86cd72492dedb1b",
+      "sourceName": "Plantaris muscle.r",
+      "role": "deforming_passive_surface",
+      "vertices": 424,
+      "triangles": 844,
+      "maximumDisplacementMetres": 0.007242346771129912,
+      "maxRelativeEdgeLengthChange": 0.15466814071809298,
+      "contactPins": [
+        {
+          "boneSourceKey": "ZA-c7010a9-26d57a52182af4b4475cef42",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            292,
+            328,
+            337,
+            354,
+            364,
+            375,
+            385
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ab881618a17c726a5d4072c2",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-7fdc346491c401fafbbde592",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-21ebc5730330e4150d9a21c3",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-403941ce03486160854a2e7e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-c956642614a1502da28310f7",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fd30572856dff59afa6b19a0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-440e8f3a5e420fb40740e2fa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-48acd9f4e0949932aafb2354",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-db3c281e1a7f7318cae95b1b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-3259c0cf77de294da9cb7d04",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00f32a23d4766caa4cc6928e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-a994664b35bbf32521094e7f",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-e825e809355cd4bd211e3d17",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4f7f7141218bf7dde81de1df",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-8b97ca16ecd81d34c3ed3f5e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ea763997ca960e971a10328a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b0783f8644612ab1d31b51ae",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-da68304526f8c9bbc61306da",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-811c52b6b45c12323e057e8b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-1e2eb56fc4a54025f43abbfa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-28354d907ed0c43cd1f22ae9",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00354e48f55a2b440735eece",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b1b47432a6dcaa8fd126497a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fc07a02a3e10ba2f2748c60d",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-f59e38e9fc116b299b0d58f0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-d97e4f8f243af60ebfe3b198",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        }
+      ],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 343,
+      "movingRegionCount": 14,
+      "fixedRegionErrorMetres": 0.0,
+      "movingRegionErrorMetres": 0.0
+    },
+    {
+      "sourceKey": "ZA-c7010a9-6bbbbd531b69f3585ceeafc8",
+      "sourceName": "Popliteus muscle.r",
+      "role": "passive_context",
+      "vertices": 128,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.0,
+      "maxRelativeEdgeLengthChange": 0.0,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-da68304526f8c9bbc61306da",
+      "sourceName": "Proximal phalanx of fifth finger of foot.r",
+      "role": "moving_structure",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.015282367507195662,
+      "maxRelativeEdgeLengthChange": 4.023423570705135e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-811c52b6b45c12323e057e8b",
+      "sourceName": "Proximal phalanx of first finger of foot.r",
+      "role": "moving_structure",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.01842607254436143,
+      "maxRelativeEdgeLengthChange": 4.5744355438048107e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-1e2eb56fc4a54025f43abbfa",
+      "sourceName": "Proximal phalanx of fourth finger of foot.r",
+      "role": "moving_structure",
+      "vertices": 129,
+      "triangles": 254,
+      "maximumDisplacementMetres": 0.016389298847031827,
+      "maxRelativeEdgeLengthChange": 2.5712701894980514e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-28354d907ed0c43cd1f22ae9",
+      "sourceName": "Proximal phalanx of second finger of foot.r",
+      "role": "moving_structure",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.01811939825579458,
+      "maxRelativeEdgeLengthChange": 5.793335409672503e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-00354e48f55a2b440735eece",
+      "sourceName": "Proximal phalanx of third finger of foot.r",
+      "role": "moving_structure",
+      "vertices": 129,
+      "triangles": 254,
+      "maximumDisplacementMetres": 0.017672702868254408,
+      "maxRelativeEdgeLengthChange": 3.7282841995264594e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-0b52eaa17e772e36c284d22a",
+      "sourceName": "Quadratus plantae muscle.r",
+      "role": "co_moving_context",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.008534381571575602,
+      "maxRelativeEdgeLengthChange": 6.866957824372016e-15,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b1b47432a6dcaa8fd126497a",
+      "sourceName": "Second metatarsal bone.r",
+      "role": "moving_structure",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.015280683368055065,
+      "maxRelativeEdgeLengthChange": 1.0367574882238996e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-fc07a02a3e10ba2f2748c60d",
+      "sourceName": "Sesamoid bones of foot.r",
+      "role": "moving_structure",
+      "vertices": 132,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.014706305821819466,
+      "maxRelativeEdgeLengthChange": 2.8329785893471275e-14,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-ca930d96bd1ebb900eec15b1",
+      "sourceName": "Soleus muscle.r",
+      "role": "passive_context",
+      "vertices": 601,
+      "triangles": 1218,
+      "maximumDisplacementMetres": 0.0,
+      "maxRelativeEdgeLengthChange": 0.0,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-f59e38e9fc116b299b0d58f0",
+      "sourceName": "Talus.r",
+      "role": "moving_structure",
+      "vertices": 218,
+      "triangles": 432,
+      "maximumDisplacementMetres": 0.0036490425231198854,
+      "maxRelativeEdgeLengthChange": 4.634178279915059e-15,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-d97e4f8f243af60ebfe3b198",
+      "sourceName": "Third metatarsal bone.r",
+      "role": "moving_structure",
+      "vertices": 130,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.014813941676201476,
+      "maxRelativeEdgeLengthChange": 6.1079864649002524e-15,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4e2855b7618ac050900a1b0c",
+      "sourceName": "Tibia.r",
+      "role": "fixed_structure",
+      "vertices": 152,
+      "triangles": 300,
+      "maximumDisplacementMetres": 0.0,
+      "maxRelativeEdgeLengthChange": 0.0,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    },
+    {
+      "sourceKey": "ZA-c7010a9-54ae5266082b61f48ed8e83e",
+      "sourceName": "Tibialis anterior muscle.r",
+      "role": "deforming_muscle_surface",
+      "vertices": 1761,
+      "triangles": 3526,
+      "maximumDisplacementMetres": 0.009104502536158932,
+      "maxRelativeEdgeLengthChange": 0.1552832667687268,
+      "contactPins": [
+        {
+          "boneSourceKey": "ZA-c7010a9-26d57a52182af4b4475cef42",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ab881618a17c726a5d4072c2",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-7fdc346491c401fafbbde592",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-21ebc5730330e4150d9a21c3",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-403941ce03486160854a2e7e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-c956642614a1502da28310f7",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fd30572856dff59afa6b19a0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-440e8f3a5e420fb40740e2fa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-48acd9f4e0949932aafb2354",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            1442,
+            1445,
+            1451,
+            1461,
+            1511,
+            1512,
+            1533,
+            1535
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-48acd9f4e0949932aafb2354",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            1453
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-48acd9f4e0949932aafb2354",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            1473
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-48acd9f4e0949932aafb2354",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            1513,
+            1543
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-db3c281e1a7f7318cae95b1b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-3259c0cf77de294da9cb7d04",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00f32a23d4766caa4cc6928e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-a994664b35bbf32521094e7f",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            1430,
+            1436,
+            1441,
+            1452,
+            1475,
+            1479,
+            1481,
+            1482,
+            1490,
+            1527,
+            1552,
+            1553,
+            1566,
+            1582,
+            1689
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-a994664b35bbf32521094e7f",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            1433,
+            1459
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-a994664b35bbf32521094e7f",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            1454,
+            1456
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-a994664b35bbf32521094e7f",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            1576
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-e825e809355cd4bd211e3d17",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4f7f7141218bf7dde81de1df",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-8b97ca16ecd81d34c3ed3f5e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ea763997ca960e971a10328a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b0783f8644612ab1d31b51ae",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            1422,
+            1438,
+            1524
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b0783f8644612ab1d31b51ae",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            1562
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-da68304526f8c9bbc61306da",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-811c52b6b45c12323e057e8b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-1e2eb56fc4a54025f43abbfa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-28354d907ed0c43cd1f22ae9",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00354e48f55a2b440735eece",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b1b47432a6dcaa8fd126497a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fc07a02a3e10ba2f2748c60d",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-f59e38e9fc116b299b0d58f0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-d97e4f8f243af60ebfe3b198",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4e2855b7618ac050900a1b0c",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            1314,
+            1342
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4e2855b7618ac050900a1b0c",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            1303,
+            1323,
+            1327,
+            1328,
+            1332,
+            1334,
+            1341,
+            1357,
+            1364,
+            1365
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4e2855b7618ac050900a1b0c",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            1306,
+            1350,
+            1359
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4e2855b7618ac050900a1b0c",
+          "kind": "avoid_new_containment",
+          "vertexIndices": [
+            1287,
+            1319
+          ]
+        }
+      ],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 1253,
+      "movingRegionCount": 40,
+      "fixedRegionErrorMetres": 0.0,
+      "movingRegionErrorMetres": 0.0
+    },
+    {
+      "sourceKey": "ZA-c7010a9-4aedd051afdad37d616d1994",
+      "sourceName": "Tibialis posterior muscle.r",
+      "role": "deforming_passive_surface",
+      "vertices": 475,
+      "triangles": 994,
+      "maximumDisplacementMetres": 0.007659354864503242,
+      "maxRelativeEdgeLengthChange": 0.06564483953312472,
+      "contactPins": [
+        {
+          "boneSourceKey": "ZA-c7010a9-26d57a52182af4b4475cef42",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ab881618a17c726a5d4072c2",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-7fdc346491c401fafbbde592",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-21ebc5730330e4150d9a21c3",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-403941ce03486160854a2e7e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-c956642614a1502da28310f7",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fd30572856dff59afa6b19a0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-440e8f3a5e420fb40740e2fa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-48acd9f4e0949932aafb2354",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-db3c281e1a7f7318cae95b1b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-3259c0cf77de294da9cb7d04",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00f32a23d4766caa4cc6928e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            113,
+            141
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-a994664b35bbf32521094e7f",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            296,
+            352,
+            370
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-e825e809355cd4bd211e3d17",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-4f7f7141218bf7dde81de1df",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-8b97ca16ecd81d34c3ed3f5e",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-ea763997ca960e971a10328a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b0783f8644612ab1d31b51ae",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            349,
+            357,
+            359,
+            380,
+            394,
+            396,
+            404,
+            405,
+            406,
+            411,
+            420,
+            421,
+            424,
+            430,
+            436
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-da68304526f8c9bbc61306da",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-811c52b6b45c12323e057e8b",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-1e2eb56fc4a54025f43abbfa",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-28354d907ed0c43cd1f22ae9",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-00354e48f55a2b440735eece",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-b1b47432a6dcaa8fd126497a",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            158
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-fc07a02a3e10ba2f2748c60d",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": []
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-f59e38e9fc116b299b0d58f0",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            372
+          ]
+        },
+        {
+          "boneSourceKey": "ZA-c7010a9-d97e4f8f243af60ebfe3b198",
+          "kind": "retain_original_co_moving_contact",
+          "vertexIndices": [
+            83,
+            114
+          ]
+        }
+      ],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 195,
+      "movingRegionCount": 95,
+      "fixedRegionErrorMetres": 0.0,
+      "movingRegionErrorMetres": 9.813077866773595e-18
+    },
+    {
+      "sourceKey": "ZA-c7010a9-56453688481eb47b17c98b50",
+      "sourceName": "Transverse head of adductor hallucis.r",
+      "role": "co_moving_context",
+      "vertices": 126,
+      "triangles": 256,
+      "maximumDisplacementMetres": 0.014210785683730486,
+      "maxRelativeEdgeLengthChange": 1.200595589330083e-13,
+      "contactPins": [],
+      "orientationWeightCorrections": [],
+      "sourceDegenerateTriangles": 0,
+      "flippedTriangles": 0,
+      "fixedRegionCount": 0,
+      "movingRegionCount": 0,
+      "fixedRegionErrorMetres": null,
+      "movingRegionErrorMetres": null
+    }
+  ],
+  "restSha256": "af7cdd79142f17016bafa744b219fd6587571b9a628899826885562195c57243",
+  "motionSha256": "671289393379dd31e5514c2ff39b6f1b163e057b76b63236a5b0f88f70a392c0",
+  "motionBytes": 1092164,
+  "sourceGeometryModified": false
+}

@@ -24,6 +24,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
     private down = { x: 0, y: 0 };
     private dead = false;
     private contextLost = false;
+    private motionPoseActive = false;
     private notify: (p: BodyProgress) => void;
     private select: (id: string, side: string | null) => void;
     private motion: { asset: MotionAsset; resource: AnimationSceneResource; player: AnimationPlaybackController; originals: Map<string, { node: THREE.Mesh; visible: boolean }>; packageMaterials: Map<string, THREE.Material | THREE.Material[]>; contextKey: string; onInvalidated?: (reason: string) => void } | null = null;
@@ -72,17 +73,37 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 throw new Error('현재 장면에는 exact source-bound surface motion만 연결할 수 있습니다.');
             const dataset = this.resources.dataset;
             const frameContract = dataset.frameContract;
-            if (binding.datasetNamespace !== dataset.namespace || binding.datasetRevision !== dataset.revision
-                || binding.integrationRevision !== this.integration.revision
-                || binding.sourceOverlaySha256 !== this.integration.sourceOverlaySha256
+            const component = this.integration.sourceComponents?.[binding.datasetNamespace];
+            const componentMatches = component
+                ? component.datasetRevision === binding.datasetRevision
+                    && component.integrationRevision === binding.integrationRevision && component.overlaySha256 === binding.sourceOverlaySha256
+                    && (dataset.sourceRevisions?.[binding.datasetNamespace] ?? (dataset.namespace === binding.datasetNamespace ? dataset.revision : null)) === binding.datasetRevision
+                : binding.datasetNamespace === dataset.namespace && binding.datasetRevision === dataset.revision
+                    && binding.integrationRevision === this.integration.revision && binding.sourceOverlaySha256 === this.integration.sourceOverlaySha256;
+            if (!componentMatches
                 || binding.frameId !== frameContract?.targetFrameId || binding.frameId !== asset.staticBinding.frameId
                 || binding.units !== dataset.unit || binding.referencePoseId !== frameContract?.staticReferencePose?.id
-                || asset.staticBinding.modelId !== dataset.namespace || asset.staticBinding.sceneRevision !== dataset.revision
+                || asset.staticBinding.modelId !== binding.datasetNamespace || asset.staticBinding.sceneRevision !== binding.datasetRevision
                 || this.view.selectedId !== binding.subjectSourceKey || asset.staticBinding.side === 'bilateral'
                 || asset.staticBinding.side === 'midline' || asset.staticBinding.side === 'not_applicable') {
                 throw new Error('motion의 dataset/revision/overlay/frame/unit/reference-pose가 현재 학습 장면과 다릅니다.');
             }
             const currentContextKey = this.motionContextKey(this.view);
+            const baseKeys = demandedStructureKeys([...this.records.values()], this.view);
+            const requiredKeys = [...new Set([...baseKeys, ...binding.members.map(member => member.sourceKey)])];
+            const detailKeys = binding.members.filter(member => member.lod === 'detail').map(member => member.sourceKey);
+            if (this.view.selectedId && !detailKeys.includes(this.view.selectedId)) detailKeys.push(this.view.selectedId);
+            this.resources.demand(requiredKeys, detailKeys);
+            const deadline = performance.now() + 15000;
+            while (!binding.members.every(member => {
+                const node = this.resources.nodes.get(member.sourceKey);
+                return node?.userData.resourceKey === member.resourceKey;
+            })) {
+                if (this.dead || this.motionContextKey(this.view) !== currentContextKey) throw new Error('motion context loading cancelled');
+                if (performance.now() > deadline || this.resources.queue.failed.size) throw new Error('motion context resources unavailable');
+                await new Promise(resolve => setTimeout(resolve, 40));
+            }
+            if (this.dead || this.motionContextKey(this.view) !== currentContextKey) throw new Error('motion context loading cancelled');
             if (this.resources.queue.bytes + resource.memoryEstimateBytes > DATASET_BUDGET.geometryBytes)
                 throw new Error('현재 정적 자원과 motion 원본·형상·clip 버퍼가 함께 활성 장면 예산을 초과합니다.');
             const instances = new Map(dataset.instances.map(instance => [instance.sourceKey, instance]));
@@ -104,13 +125,12 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 if (namespace !== member.sourceNamespace || chunk.sha256 !== member.sourceChunkSha256
                     || lod.resource !== member.resourceKey || JSON.stringify(instance.matrix) !== JSON.stringify(member.instanceMatrix)
                     || row.side !== member.side || activeNode.userData.resourceKey !== member.resourceKey
-                    || activeNode.userData.lod !== member.lod || !row.localDisplayEligible || row.hardHoldReasons.length
+                    || instance.lods[activeNode.userData.lod as 'overview' | 'detail']?.resource !== member.resourceKey || !row.localDisplayEligible || row.hardHoldReasons.length
                     || row.sourceHiddenStatePreserved.hideViewport || (member.role === 'deforming_muscle_surface' && row.kind !== 'muscle')) {
                     throw new Error(`sourceKey, side, resource/LOD, transform 또는 로컬 표시 근거가 현재 장면과 다릅니다: ${member.sourceKey}`);
                 }
-                if (!this.view.muscles && row.kind === 'muscle' || !this.view.bones && row.kind === 'bone'
-                    || this.view.hiddenSourceKeys?.includes(member.sourceKey)
-                    || !demandedStructureKeys([...this.records.values()], this.view).includes(member.sourceKey)) {
+                if (member.sourceKey === binding.subjectSourceKey && (!this.view.muscles
+                    || this.view.hiddenSourceKeys?.includes(member.sourceKey) || this.view.selectedPresentation === 'hidden')) {
                     throw new Error(`motion source가 현재 선택/레이어/부위 보기에서 활성 상태가 아닙니다: ${member.sourceKey}`);
                 }
                 const [activeGeometryHash, motionGeometryHash] = await Promise.all([
@@ -126,7 +146,14 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 }
                 const motionMesh = motionNode as THREE.Mesh;
                 const activeMatrix = new THREE.Matrix4().fromArray(member.instanceMatrix);
-                motionMesh.matrix.copy(activeMatrix); motionMesh.matrixAutoUpdate = false; motionMesh.matrixWorldNeedsUpdate = true;
+                if (member.role === 'moving_structure' || member.role === 'co_moving_context') {
+                    activeMatrix.decompose(motionMesh.position, motionMesh.quaternion, motionMesh.scale);
+                    motionMesh.matrixAutoUpdate = true;
+                    motionMesh.updateMatrix();
+                } else {
+                    motionMesh.matrix.copy(activeMatrix); motionMesh.matrixAutoUpdate = false;
+                }
+                motionMesh.matrixWorldNeedsUpdate = true;
                 motionMesh.userData.sourceKey = member.sourceKey;
                 motionMesh.userData.sourceName = instance.sourceName;
                 originalNodes.set(member.sourceKey, { node: activeNode, visible: activeNode.visible });
@@ -144,7 +171,11 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 this.resources.motionOverrides.add(sourceKey);
             }
             const player = new AnimationPlaybackController(resource, asset.clip.id, {
-                repeat: true, onTimeChange, disposeResource: false,
+                repeat: true, pingPong: true, onTimeChange: (time, completed) => {
+                    const activePose = time > 1e-6;
+                    if (this.motionPoseActive !== activePose) { this.motionPoseActive = activePose; this.apply(); }
+                    onTimeChange?.(time, completed);
+                }, disposeResource: false,
                 registerUpdate: update => this.scene.addUpdate(update),
             });
             this.motion = { asset, resource, player, originals: originalNodes, packageMaterials, contextKey: currentContextKey, onInvalidated };
@@ -161,7 +192,11 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 if (!original.node.parent) this.scene.root.add(original.node);
             }
             resource.dispose();
-            if (!this.dead) this.apply();
+            if (!this.dead) {
+                const keys = demandedStructureKeys([...this.records.values()], this.view);
+                this.resources.demand(keys, this.view.selectedId ? [this.view.selectedId] : []);
+                this.apply();
+            }
             throw error;
         }
     }
@@ -169,6 +204,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         const active = this.motion;
         if (!active) return;
         this.motion = null;
+        this.motionPoseActive = false;
         active.player.resetPose();
         active.player.dispose();
         for (const [sourceKey, original] of active.originals) {
@@ -182,6 +218,8 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         }
         active.resource.dispose();
         active.onInvalidated?.(reason);
+        const keys = demandedStructureKeys([...this.records.values()], this.view);
+        this.resources.demand(keys, this.view.selectedId ? [this.view.selectedId] : []);
         this.apply();
     }
     private apply() {
@@ -189,13 +227,18 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             return;
         const rows = [...this.records.values()];
         const visibleKeys = new Set(demandedStructureKeys(rows, this.view));
+        // Motion context may cross region boundaries, but never overrides user layer/hidden choices.
+        if (this.motion && !this.view.isolate) for (const member of this.motion.asset.sourceBinding?.members ?? []) {
+            const row = this.records.get(member.sourceKey);
+            if (row && (row.kind === 'bone' ? this.view.bones : this.view.muscles)) visibleKeys.add(member.sourceKey);
+        }
         const highlights = new Set(innervationHighlightKeys(rows, this.view, visibleKeys));
         const observe = observingNerves(rows, this.view, visibleKeys);
         const selectionAlternativeKeys = new Set(this.records.get(this.view.selectedId ?? '')?.selectionSuppressSourceKeys ?? []);
         for (const [key, node] of this.resources.nodes) {
             const row = this.records.get(key)!;
             const selected = key === this.view.selectedId;
-            node.visible = !this.view.hiddenSourceKeys?.includes(key) && !selectionAlternativeKeys.has(key) && !(selected && this.view.selectedPresentation === 'hidden');
+            node.visible = visibleKeys.has(key) && !(this.motionPoseActive && row.kind === 'nerve') && !this.view.hiddenSourceKeys?.includes(key) && !selectionAlternativeKeys.has(key) && !(selected && this.view.selectedPresentation === 'hidden');
             const mode = this.view.translucentSourceKeys?.includes(key) || selected && this.view.selectedPresentation === 'translucent' ? 'translucent'
                 : selected ? 'selected' : observe && row.kind !== 'nerve' ? highlights.has(key) ? 'motorContext' : 'nerveContext'
                 : highlights.has(key) ? 'innervated' : this.view.selectedId && this.view.dim ? 'dim' : 'normal';
@@ -224,6 +267,8 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         this.scene.renderer.domElement.dataset.dataset = JSON.stringify({ root: this.scene.root.uuid, dataset: this.resources.dataset.namespace,
             highlighted: [...highlights], observingNerves: observe, nerveLayer: Boolean(this.view.nerves), poseId: this.view.poseId, visible: [...this.resources.nodes].filter(([, n]) => n.visible).map(([key]) => key), selected: this.view.selectedId, bytes: q.bytes, cacheEntries: q.loaded.size, evictions: q.evictions, cancellations: q.cancellations, lateReleases: q.lateReleases, wantedChunks: [...q.wanted], pending: q.pending.size, failed: [...q.failed],
             camera: this.scene.camera.position.toArray(), calls: this.scene.renderer.info.render.calls, triangles: this.scene.renderer.info.render.triangles,
+            motion: this.motion ? { assetId: this.motion.asset.id, contextKey: this.motion.contextKey,
+                surfaceCount: this.motion.originals.size, fixedCount: this.motion.asset.sourceBinding?.members.filter(m => m.role === 'fixed_structure').length } : null,
             motionBytes: this.motion?.resource.memoryEstimateBytes ?? 0, estimatedActiveBytes: q.bytes + (this.motion?.resource.memoryEstimateBytes ?? 0) });
     }
     private fit(rows: RuntimeStructureRecord[]) {

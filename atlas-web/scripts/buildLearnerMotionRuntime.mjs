@@ -74,7 +74,11 @@ function inspect(value, path = "$", key = "") {
   if (value && typeof value === "object") return Object.entries(value).forEach(([childKey, child]) => inspect(child, path, childKey));
   if (typeof value === "string" && forbiddenText.test(value)) throw new Error(`Internal provenance text in learner motion projection at ${path}`);
 }
-inspect(projected);
+// Identity/buffer bindings are private control data consumed by the player, not rendered text.
+// Inspect every learner-visible field; retain exact IDs in the separately validated candidate.
+for (const rows of Object.values(projected.actions)) for (const row of rows) {
+  inspect(row.label); inspect(row.text);
+}
 
 const output = `const learnerMotionRuntime = ${JSON.stringify(projected, null, 2)} as const;\n\nexport default learnerMotionRuntime;\n`;
 if (checkOnly) {

@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "human-atlas-motion-contract-v1",
+  "task": "T35",
+  "revision": "all-muscle-motion-2026-10-02",
+  "planningOnly": true,
+  "productionMotionImplemented": false,
+  "scope": {
+    "allMuscleTargets": 429,
+    "allMuscleMemberships": 447,
+    "allSupportedSourceConcepts": 232,
+    "allSupportedSourceInstances": 462,
+    "initialShortlist": null,
+    "faceOcularTongueNeckTrunkHandFootPelvisPerineumIncluded": true,
+    "denominatorMeaning": "records and memberships; not count of distinct individual muscles"
+  },
+  "runtimeBoundary": {
+    "currentSameModelMuscleMotionCount": 0,
+    "currentLearnerMotionCTA": "disabled; unavailable note remains",
+    "T24": "historical technical candidate only: bone motion with illustrative path; blocked for original muscle-surface contraction",
+    "sameScene": "reuse existing learner AnatomySceneRoot, renderer, camera and controller; never switch to a second viewport/model",
+    "oneRendererAndClock": "one active WebGL renderer and one animation frame clock per learner scene"
+  },
+  "sourceIdentity": {
+    "bindingKey": "dataset namespace + stable sourceKey + immutable source/revision and geometry hash",
+    "doNotUseAsBinding": [
+      "TA2 target ID alone",
+      "name similarity",
+      "parent name",
+      "array index",
+      "unverified mirror"
+    ],
+    "rawAssetImmutable": true,
+    "derivedAssetMustRecord": [
+      "sourceKey",
+      "source file hash",
+      "evaluated geometry hash",
+      "derivation version",
+      "derived output hash",
+      "source rights state",
+      "target/part/side scope"
+    ],
+    "sourceKeyCaveat": "the current ZA sourceKey is a derived object key, not an upstream canonical ID"
+  },
+  "coordinateAndPose": {
+    "currentCompiledSourceFrame": {
+      "sourceFrameId": "ZA-c7010a9-native-XYZ-frame0-m",
+      "unit": "m",
+      "axes": {
+        "positiveX": "subject_left",
+        "positiveY": "posterior",
+        "positiveZ": "superior"
+      },
+      "projectConvention": [
+        [
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "transformScope": "axis convention only; no inter-model registration, translation, fit, or mm-to-m scaling",
+      "registeredToBP3DGeometry": false,
+      "staticReferencePose": {
+        "id": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+        "sourceFrame": 0,
+        "kind": "hash-bound evaluated static snapshot; not a rig bind pose",
+        "sourceProvidedRestPoseId": null,
+        "rigBindingVerified": false,
+        "geometryAffectingObjectDriversInCandidateSet": 0,
+        "knownGlobalDependencyWarning": "Oesophagus/profile cycle outside selected bone/muscle source systems; whole source depsgraph not certified"
+      },
+      "physicalCalibration": false
+    },
+    "T50Meaning": "BodyParts3D Release 4 remains a separate provisional static reference and was not geometrically registered to ZA",
+    "T98Decision": {
+      "decision": "select_Z_Anatomy_as_primary_local_offline_compilation_base",
+      "selectionScope": "source engineering feasibility and input freeze; NOT complete anatomy, learner binding, rig, public rights, or production release approval",
+      "selectedSourceRevision": "c7010a903b75a2fd24a13b1c2c4c3546a9223780",
+      "productionReleaseApproved": false,
+      "learnerBindingsAdded": 0
+    },
+    "rule": "the selected ZA revision may use its frozen compiled scene frame as the local reference; any external/different-revision motion asset must verify exact source frame, unit, side, reference pose and registration to the active learner scene; equal axis/unit labels are insufficient",
+    "unknowns": [
+      "source-declared physical unit/calibrated subject measurement",
+      "source-provided neutral/anatomical rest pose",
+      "per-object rig bind pose",
+      "hashing contract equivalence between source-catalog and compiled-manifest geometry hashes",
+      "external-source registration residual/acceptance threshold"
+    ]
+  },
+  "deformation": {
+    "allowedRepresentations": [
+      "source-derived skinning weights",
+      "morph targets",
+      "corrective shape bases",
+      "other reproducible source-derived surface deformation with validation"
+    ],
+    "mustPreserve": [
+      "source topology or documented topology revision",
+      "instance isolation",
+      "left/right identity",
+      "part/member scope",
+      "rest-pose equivalence and restoration"
+    ],
+    "prohibitedAsMuscleContraction": [
+      "whole-muscle scale-only",
+      "rigidly rotating the entire muscle",
+      "line-of-action only",
+      "color/highlight-only",
+      "fabricated or reflected geometry"
+    ],
+    "geometryMutation": "never deform shared/raw source geometry in place; bind a derived per-sourceKey resource"
+  },
+  "anatomicalMotionContract": {
+    "requiredPerAction": [
+      "exact muscle/part/member and side",
+      "source-backed action and posture conditions",
+      "moving joints/bones",
+      "fixed structures",
+      "co-moving/passively deforming context",
+      "non-joint tissue deformation type where applicable",
+      "start/reference/end pose identity"
+    ],
+    "motionFamiliesToDisposition": [
+      "single-joint",
+      "multi-joint",
+      "broad or multi-head attachment",
+      "repeated/segmental family",
+      "facial/ocular/tongue soft tissue",
+      "pelvic/perineal or sphincter soft tissue",
+      "other explicitly sourced non-joint motion"
+    ],
+    "scopeRule": "a part/head/member motion never satisfies its parent whole-muscle/group/repeated-family extent",
+    "sourceClaimVsAuthoring": "source claim, AI normalization, human review, artist/engine authoring choice, and runtime validation are separate records",
+    "nonClinical": "no force, activation, patient-normality, diagnosis, treatment, exercise prescription or needling inference"
+  },
+  "sameScenePlayback": {
+    "lifecycle": [
+      "verify bytes/hash and frame contract",
+      "load isolated derived motion resources into the existing scene root",
+      "bind by sourceKey",
+      "run one scheduler and update the shared scene",
+      "on stop/failure/context switch/unmount restore exact rest pose and prior selection/camera/layers/hidden state"
+    ],
+    "context": "moving bones and affected neighboring visible structures must move or have an explicitly validated passive deformation; hide-only substitution is not acceptance",
+    "failurePolicy": "fail closed to static structure explanation; stale requests cannot start or retain emphasis",
+    "resourcePolicy": "lazy-load only selected action/context; count actual fetched animation/deformation bytes and retained geometry against the existing cache budget"
+  },
+  "validation": {
+    "automaticWholeLedger": [
+      "all denominators and ID uniqueness",
+      "sourceKey and source/hash references",
+      "side/part/group extent flags",
+      "frame/unit/rest-pose completeness",
+      "rig/deformation record presence",
+      "independent review/rights states",
+      "no unsupported production state"
+    ],
+    "visualByActualMotionWhenAvailable": [
+      "rest, intermediate and supported end poses",
+      "left/right and part extent",
+      "moving/fixed/passive context",
+      "surface topology and attachment continuity",
+      "penetration/intersection risks",
+      "same-scene selection/card/emphasis",
+      "cancel/reset/route/layer restore",
+      "390/1024/1440 responsive and keyboard/console"
+    ],
+    "numericThresholds": "not set by T35; must be backed by source/engineering QA before evaluation"
+  },
+  "authorityState": {
+    "sourceOnlyPerExistingRecordPreserved": true,
+    "humanReview": "not_performed",
+    "publicRedistribution": "held",
+    "existingCanonicalHaBindings": 130,
+    "newCanonicalBindings": 0,
+    "newGeometryOrClips": 0
+  },
+  "nextImplementation": "T59 must implement and validate the common same-scene sourceKey adapter/player and create work/evidence/T59/authoring-run-manifest.json from this frozen contract; it must not claim all-muscle support from a sample."
+}

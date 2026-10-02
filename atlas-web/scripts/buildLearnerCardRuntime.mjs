@@ -132,6 +132,9 @@ let optionIndex = 0;
 for (const conceptId of actionConceptIds) {
   const options = projectLearnerMotionActionOptions(conceptId, motionBundle, aiOverlay.items);
   for (const option of options) {
+    // Explicit motion bindings reuse an existing authored card; adding an asset must
+    // not duplicate learner actions or shift the existing action keys.
+    if (motionBundle.muscleActions.some(row => row.learnerActionKey === option.id && row.subjectIds.includes(conceptId))) continue;
     actions.push({
       conceptId,
       key: `option-${String(optionIndex++).padStart(3, "0")}`,

@@ -4,7 +4,7 @@ export type ContractionRole = "concentric" | "eccentric" | "isometric" | "stabil
 export type ActionRole = "agonist" | "antagonist" | "synergist" | "fixator" | "stabilizer" | "unspecified";
 
 export interface EvidenceRef {
-  layer: "canonical_claim" | "ai_field";
+  layer: "canonical_claim" | "ai_field" | "authoring_record";
   field: string;
   appliesTo: "action_explanation" | "posture_condition" | "stabilization_condition" | "context_role" | "motion_pose_range";
   contextId: string | null;
@@ -103,7 +103,7 @@ export interface SourceMotionBindingMember {
   sourceKey: string;
   nodeId: string;
   sourceNamespace: string;
-  role: "deforming_muscle_surface" | "moving_structure" | "fixed_structure" | "passive_context";
+  role: "deforming_muscle_surface" | "deforming_passive_surface" | "moving_structure" | "co_moving_context" | "fixed_structure" | "passive_context";
   side: Laterality;
   resourceKey: string;
   lod: "overview" | "detail";

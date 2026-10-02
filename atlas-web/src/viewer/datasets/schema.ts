@@ -7,6 +7,7 @@ export interface Instance {sourceKey:string;sourceName:string;kind:string;matrix
   publicRedistribution:string;humanReview:string;sourceHiddenStatePreserved:{hideRender:boolean;hideViewport:boolean};}
 export interface Chunk {id:string;url:string;sha256:string;bytes:number;geometryBytes:number;resources:string[];level:Level;sourceNamespace?:string;selectionScoped?:boolean}
 export interface Dataset {schemaVersion:1;namespace:string;revision:string;unit:'m';geometrySpace:'source_local'|'registered_world'|'mixed';localOnly:true;publicRedistribution:'held';
+  sourceRevisions?:Record<string,string>;
   frameContract?:{targetFrameId?:string;staticReferencePose?:{id?:string;kind?:string;sourceProvidedRestPoseId?:string|null;rigBindingVerified?:boolean};[key:string]:unknown};
   instances:Instance[];chunks:Chunk[];resources:Record<string,{triangles:number;vertices:number;geometryBytes:number}>;budgetPass:boolean}
 export function validateDataset(value:unknown):Dataset {

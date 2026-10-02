@@ -142,6 +142,7 @@ export function composeSupplementDataset(baseValue: Dataset, supplement: SourceS
     const dataset: Dataset = {
         ...base,
         namespace: 'human-atlas-local',
+        sourceRevisions: { ...(base.sourceRevisions ?? { [base.namespace]: base.revision }), 'bp3d-r4': supplement.revision },
         revision: `${base.revision}+${supplement.revision}`,
         geometrySpace: 'mixed',
         instances,

@@ -62,6 +62,28 @@ def load_production_context() -> dict[str, Any]:
         source["id"]: ([source.get("license", {}).get("id")] if source.get("license", {}).get("id") else [])
         for source in entities.get("sources", [])
     }
+    authoring_records = {}
+    registry_path = ROOT / "atlas-data/motion/authoring/registry.json"
+    if registry_path.is_file():
+        registry = json.loads(registry_path.read_text())
+        for entry in registry.get("records", []):
+            record_path = (ROOT / entry["path"]).resolve()
+            if not record_path.is_relative_to(ROOT / "atlas-data/motion/authoring") or sha256_bytes(record_path.read_bytes()) != entry["sha256"]:
+                raise ValueError("Motion authoring record path/hash mismatch")
+            record = json.loads(record_path.read_text())
+            if record["id"] != entry["id"] or record.get("schemaVersion") != "t59-authoring-record-v1" or record.get("rights") != {
+                    "sourceOnly": True, "localUseRights": "inherits_pinned_source_decision", "publicRedistribution": "held", "humanReview": "not_performed"}:
+                raise ValueError("Authoring identity/source-only/rights contract differs")
+            authoring_records[entry["id"]] = record
+        for entry in registry.get("sources", []):
+            for prefix in ("dataset", "rightsEvidence"):
+                dep = (ROOT / entry[prefix + "Path"]).resolve()
+                if not dep.is_relative_to(ROOT) or sha256_bytes(dep.read_bytes()) != entry[prefix + "Sha256"]:
+                    raise ValueError("Motion local source rights/dataset dependency drift")
+            if entry["publicRedistribution"] != "held" or entry["humanReview"] != "not_performed" or entry["localUse"] != "inherits_pinned_source_decision":
+                raise ValueError("Motion authoring source cannot promote rights/review")
+            source_licenses[entry["id"]] = [entry["licenseId"]]
+            licenses.add(entry["licenseId"])
     scene_contexts: dict[str, dict[str, Any]] = {}
     for scene in navigation.get("sceneManifests", []):
         refs = scene.get("assetRefs", [])
@@ -107,7 +129,8 @@ def load_production_context() -> dict[str, Any]:
         "sourceLicenses": source_licenses,
         "scenes": scene_contexts,
         "legacyJointActions": {row["id"]: row for row in entities.get("jointActions", [])},
-        "sourceIds": {row["id"] for row in entities.get("sources", [])},
+        "sourceIds": set(source_licenses),
+        "authoringRecords": authoring_records,
         "fixtureAssets": {},
         "fixtureMode": False,
     }
@@ -118,6 +141,13 @@ def issue(code: str, path: str, message: str) -> dict[str, str]:
 
 
 def validate_evidence_ref(ref: dict[str, Any], path: str, context: dict[str, Any], issues: list[dict[str, str]]) -> None:
+    if ref["layer"] == "authoring_record":
+        record = context.get("authoringRecords", {}).get(ref["evidenceId"])
+        if (ref["appliesTo"] != "motion_pose_range" or ref["field"] != "motion_pose_range"
+                or ref["contextId"] is not None or ref["fieldEvidenceId"] is not None or not record
+                or record.get("id") != ref["claimId"] or value_hash(record.get("poseRange")) != ref["valueHash"]):
+            issues.append(issue("invalid_authoring_pose_reference", path, "Authored pose must resolve to its exact hashed authoring record; cannot stand in for anatomical action/attachment evidence."))
+        return
     if ref["layer"] == "canonical_claim":
         if ref["fieldEvidenceId"] is not None:
             issues.append(issue("canonical_ref_has_ai_field", f"{path}.fieldEvidenceId", "Canonical claim references do not carry an AI field ID."))
@@ -286,10 +316,11 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
             issues.append(issue("moving_fixed_structure_overlap", path, "A structure cannot be both moving and fixed in one motion definition."))
         for structure_id in definition["movingStructureIds"]:
             structure = context["structures"].get(structure_id)
-            if structure is None or structure.get("kind") != "bone":
+            source_structure = context.get("sourceInstances", {}).get(structure_id)
+            if (structure is None or structure.get("kind") != "bone") and not (source_structure and source_structure.get("kind") == "skeletal_surface" and source_structure.get("sourceLabelSide") == definition["side"]):
                 issues.append(issue("invalid_moving_structure", f"{path}.movingStructureIds", f"Moving structure {structure_id!r} must resolve to a canonical bone."))
         for structure_id in definition["fixedStructureIds"]:
-            if structure_id not in context["structures"]:
+            if structure_id not in context["structures"] and not (context.get("sourceInstances", {}).get(structure_id, {}).get("kind") == "skeletal_surface" and context["sourceInstances"][structure_id].get("sourceLabelSide") == definition["side"]):
                 issues.append(issue("orphan_fixed_structure", f"{path}.fixedStructureIds", f"Unknown canonical fixed structure {structure_id!r}."))
         for joint_id in definition["targetJointIds"]:
             structure = context["structures"].get(joint_id)
@@ -372,6 +403,13 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
             for member_index, member in enumerate(source_members):
                 if not isinstance(member, dict):
                     continue
+                source_instance = context.get("sourceInstances", {}).get(member.get("sourceKey"))
+                if source_instance:
+                    source_lod = source_instance.get("lods", {}).get(member.get("lod"), {})
+                    if member.get("resourceKey") != source_lod.get("resource") or member.get("sourceChunkSha256") != source_lod.get("chunk") or member.get("instanceMatrix") != source_instance.get("matrix") or member.get("side") != source_instance.get("sourceLabelSide"):
+                        issues.append(issue("source_motion_member_drift", f"{path}.sourceBinding.members[{member_index}]", "Source member resource/LOD/chunk/side/matrix differs from immutable source."))
+                else:
+                    issues.append(issue("unknown_source_motion_member", f"{path}.sourceBinding.members[{member_index}]", "Source member must resolve in the actual dataset."))
                 for field in ("sourceChunkSha256", "geometrySha256"):
                     value = member.get(field)
                     if not isinstance(value, str) or len(value) != 64:
@@ -482,6 +520,10 @@ def run_fixtures(schema: dict[str, Any]) -> dict[str, Any]:
                      "side": "right", "resourceKey": "fixture-resource", "lod": "overview", "sourceChunkSha256": "b" * 64,
                      "geometrySha256": "c" * 64, "instanceMatrix": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]}],
     }
+    source_context['sourceInstances'][source_key].update({
+        'lods': {'overview': {'resource': 'fixture-resource', 'chunk': 'b' * 64}},
+        'matrix': [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+    })
     source_issues = validate_bundle(source_bundle, schema, source_context, allow_fixture=True)
     results.append({"id": "source-only-action-by-exact-sourceKey", "expectPass": True, "passed": not source_issues,
                     "issueCodes": sorted({row["code"] for row in source_issues}), "issues": source_issues})

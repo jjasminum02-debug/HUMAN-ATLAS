@@ -40,9 +40,9 @@ const asset: MotionAsset = {
 };
 
 test("production bundle retains six original texts and adds one right ankle source-bound clip", () => {
-  assert.equal(production.muscleActions.length, 7);
-  assert.equal(production.motionDefinitions.length, 1);
-  assert.equal(production.motionAssets.length, 1);
+  assert.equal(production.muscleActions.length, 8);
+  assert.equal(production.motionDefinitions.length, 2);
+  assert.equal(production.motionAssets.length, 2);
   const actions = production.muscleActions as MuscleAction[];
   assert.deepEqual(actions.slice(0, 6).map((row) => row.subjectIds[0]), [
     "HA-M-000001", "HA-M-000002", "HA-M-000003", "HA-M-000004", "HA-M-000005", "HA-M-000006",
@@ -51,6 +51,11 @@ test("production bundle retains six original texts and adds one right ankle sour
   assert.equal(actions[6].sideApplicability, "right");
   assert.deepEqual(actions[6].targetJointIds, ["HA-S-JOINT-R-ANKLE-TALOCRURAL"]);
   assert.equal((production.motionAssets[0] as MotionAsset).representationType, "bone_motion_with_illustrative_path");
+  const authored = production.motionAssets[1] as MotionAsset;
+  assert.equal(authored.representationType, "source_bound_surface");
+  assert.equal(authored.sourceBinding?.subjectSourceKey, "ZA-c7010a9-54ae5266082b61f48ed8e83e");
+  assert.equal(authored.staticBinding.side, "right");
+  assert.equal(authored.technicalStatus, "binding_verified");
 });
 
 test("text can be present while there is no compatible motion clip", () => {
