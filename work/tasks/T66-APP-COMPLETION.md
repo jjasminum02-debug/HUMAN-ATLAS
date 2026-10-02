@@ -20,3 +20,9 @@ T35/T59 전체 근육 원장과 공통 rig/player/설명 계약으로 429 target
 ## 합격과 보존
 
 542/563/12, 근육 관련429 target/447 membership, 현재232 source 개념/462 표면과 원장 전체를 보존한다. 기존 HA130·역사163(6/20/135/2), source-only·권리 held·humanReview=not_performed·원본/OpenSim_Models/T13/WIP를 유지한다. 자동 위임·새 task/thread·push/배포·임상 기능은 금지한다. 전체 움직임 완료와 해당 task의 실제 책임 완료를 구분하며 일부 clip 성공으로 전체를 완료 처리하지 않는다. report/evidence/EXECUTION의 현재 acceptance 필드를 실제 검증으로 기록하고 sync/check 및 소유 로컬 커밋 후 멈춘다.
+
+## 최신 사용자 정상 모형 개정과 현재 검증 결과
+
+현재 promptFile인 `06-T66-after-results-full.txt`가 과거 근육만의 범위보다 우선한다. 모든 뼈 typed 선택/공동 이동/실제 DOF, 관절 조절, native 신경 정적 주행 및 문헌 포착 맥락을 같은 scene에 연결한다. 병리 editor는 제외한다. 공통 writer가 family/weights/trajectory/corrective를 직접 작성하며 native rig 부재를 engineering 전체의 차단으로 쓰지 않는다. 자동 위임·새 thread는 금지한다.
+
+현재 실제 검증된 subset은 원본 오른쪽 앞정강근1 clip, 공유 clip을 선택하는 오른쪽 발 뼈27개, native static nerve195 표면이다. 최신 T66 결과와 blocker는 `work/reports/T66.md` 및 `work/evidence/T66/implementation-2026-10-02/final-blockers.json`이 기준이다. 새로운14 후보는 source contact12 실패/손목2 context 미완으로 미등록이다. 전체 큐의 추가 작성·통합 책임이 남으므로 계획/표 작성/기존 subset 합격만으로 T66을 passed 처리하지 않는다. 전체 0-gap이나 전수 PNG gate를 복구하는 것도 아니다.

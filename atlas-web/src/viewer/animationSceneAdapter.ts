@@ -84,7 +84,7 @@ function assertAssetContract(asset: MotionAsset): void {
     }
   } else if (asset.representationType === "source_bound_surface") {
     const binding = asset.sourceBinding;
-    if (!binding || binding.contractVersion !== "t59-source-motion-binding-v1" || binding.members.length === 0
+    if (!binding || !["t59-source-motion-binding-v1", "t66-typed-source-motion-v2"].includes(binding.contractVersion) || binding.members.length === 0
       || !binding.datasetNamespace || !binding.datasetRevision || !binding.integrationRevision
       || !/^[a-f0-9]{64}$/.test(binding.sourceOverlaySha256)
       || !binding.subjectSourceKey
@@ -103,7 +103,7 @@ function assertAssetContract(asset: MotionAsset): void {
         || row.instanceMatrix.length !== 16 || !row.instanceMatrix.every(Number.isFinite))) {
       throw new Error("source_bound_surface의 source instance binding이 유효하지 않습니다.");
     }
-    if (!binding.members.some((row) => row.role === "deforming_muscle_surface" && row.sourceKey === binding.subjectSourceKey
+    if (!binding.members.some((row) => row.role === (binding.subjectKind === "bone" ? "moving_structure" : "deforming_muscle_surface") && row.sourceKey === binding.subjectSourceKey
       && row.side === asset.staticBinding.side)) {
       throw new Error("source_bound_surface에 같은 쪽 변형 근육 표면이 없습니다.");
     }

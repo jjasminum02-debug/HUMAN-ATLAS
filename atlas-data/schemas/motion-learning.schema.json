@@ -273,7 +273,7 @@
         },
         "postureConditions": {
           "type": "array",
-          "minItems": 1,
+          "minItems": 0,
           "items": {
             "$ref": "#/$defs/NonEmptyString"
           }
@@ -292,7 +292,7 @@
         },
         "contextRoles": {
           "type": "array",
-          "minItems": 1,
+          "minItems": 0,
           "items": {
             "$ref": "#/$defs/ContextRole"
           },
@@ -310,6 +310,12 @@
           "type": [
             "string",
             "null"
+          ]
+        },
+        "subjectKind": {
+          "enum": [
+            "muscle",
+            "bone"
           ]
         }
       }
@@ -541,7 +547,10 @@
       "additionalProperties": false,
       "properties": {
         "contractVersion": {
-          "const": "t59-source-motion-binding-v1"
+          "enum": [
+            "t59-source-motion-binding-v1",
+            "t66-typed-source-motion-v2"
+          ]
         },
         "datasetNamespace": {
           "$ref": "#/$defs/Id"
@@ -582,6 +591,12 @@
             "$ref": "#/$defs/SourceMotionMember"
           },
           "uniqueItems": true
+        },
+        "subjectKind": {
+          "enum": [
+            "muscle",
+            "bone"
+          ]
         }
       }
     },
@@ -768,6 +783,31 @@
               "type": "null"
             }
           ]
+        },
+        "poseControl": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "startDegrees",
+            "endDegrees",
+            "combination"
+          ],
+          "properties": {
+            "label": {
+              "type": "string",
+              "minLength": 1
+            },
+            "startDegrees": {
+              "type": "number"
+            },
+            "endDegrees": {
+              "type": "number"
+            },
+            "combination": {
+              "const": "single_dof_only"
+            }
+          }
         }
       },
       "allOf": [

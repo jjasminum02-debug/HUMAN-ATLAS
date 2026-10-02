@@ -6,8 +6,11 @@ import { validateDataset } from '../src/viewer/datasets/schema.ts';
 import type { NerveLocalRights, NerveSceneManifest } from '../src/viewer/datasets/nerveScene.ts';
 const sha = (b: Buffer) => createHash('sha256').update(b).digest('hex');
 /** No ambient filesystem access from asset URLs: delivery uses this fixed, hash-checked manifest. */
-export async function loadNerveAssets(root: string) {
-  const bytes = await readFile(resolve(root, 'atlas-data/manifests/nerve-scene-t63.json'));
+export async function loadNerveAssets(root: string, revision: "current" | "T63" = "current") {
+  const bytes = await readFile(resolve(root, revision === 'T63' ? 'atlas-data/manifests/nerve-scene-t63.json' : 'atlas-data/manifests/nerve-scene-t66.json')).catch(error => {
+    if (error.code !== 'ENOENT') throw error;
+    return readFile(resolve(root, 'atlas-data/manifests/nerve-scene-t63.json'));
+  });
   const manifest = JSON.parse(bytes.toString()) as NerveSceneManifest;
   const inputs = new Map<string, Buffer>();
   for (const [relative, hash] of Object.entries(manifest.inputSha256)) {
@@ -36,7 +39,7 @@ export async function loadNerveAssets(root: string) {
     if (!inputs.has(e.sourcePath) || sha(inputs.get(e.sourcePath)!) !== e.sourceSha256) throw Error('nerve evidence hash: ' + e.id);
   }
   const files = dataset.chunks.map(c => {
-    const path = 'atlas-data/assets/derived-glb/za-nerve-t63/chunks/' + c.id + '.glb';
+    const path = manifest.datasetPath.slice(0, manifest.datasetPath.lastIndexOf('/') + 1) + c.id + '.glb';
     const b = inputs.get(path);
     if (!b || sha(b) !== c.sha256 || b.length !== c.bytes) throw Error('nerve chunk hash/bytes');
     return { id: c.id, path: resolve(root, path), sha256: c.sha256, bytes: c.bytes };

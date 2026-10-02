@@ -3158,17 +3158,85 @@
       "title": "전체 근육 변형 자산 제작·통합",
       "owner": "Luna Max",
       "phase": "G4",
-      "executionStatus": "planned_not_started",
-      "acceptance": "pending",
+      "executionStatus": "in_progress",
+      "acceptance": "partial",
       "spec": "work/tasks/T66-APP-COMPLETION.md",
-      "scope": "T35/T59 전체 근육 원장과 공통 rig/player/설명 계약으로 429 target/232 source 개념 전체를 처리한다. T27/T28/T45/T46/T29/T31 내부 작업을 흡수한다. 별도 초기 확장 근육 목록을 두지 않으며 제작 가능으로 확정한 모든 source/family 패키지를 구현·검증·등록한다. 미확보/충돌도 전수 원장과 구체적 다음 작업으로 남긴다. 같은 task 내 병렬 candidate 제작과 단일 writer 통합을 사용한다.",
+      "scope": "2026-10-02 최신 사용자 범위: 단일 버튼 회귀 수정, 전체 근육/뼈 전수 큐의 family별 실제 작성·자산 제작·같은 scene 통합, typed bone 직접 선택·관절 각도, 전수 신경 주행·포착 텍스트/실제 geometry 지원과 검증. T66 단일 작성자. 병리 editor 제외.",
       "progress": {
-        "nextUnit": null,
-        "completedUnits": []
+        "nextUnit": "author-and-integrate-normal-motion-bone-and-nerve",
+        "completedUnits": [
+          "single-button-motion-regression-and-hidden-layer-guards",
+          "typed-shared-ankle-bone-selection-and-angle-control",
+          "native-nerve-static-surface-and-scoped-course-card-integration",
+          "all14-real-family-candidates-and-source-contact-rejection-evidence",
+          "current-supported-subset-browser-and-contract-validation"
+        ],
+        "productAcceptance": {
+          "contractRevision": "app-completion-2026-10-01",
+          "acceptanceScope": "T66 latest whole-muscle / whole-bone normal-motion authoring and native nerve-course integration; currently verified subset reported separately",
+          "productReadiness": "partial_expansion_not_ready",
+          "contentCompleteness": "partial",
+          "knownContentGaps": {
+            "muscleTargetCount": 429,
+            "muscleMembershipCount": 447,
+            "sourceConceptCount": 232,
+            "sourceSurfaceCount": 462,
+            "primaryPlayableMuscleSourceSurfaces": 1,
+            "registeredBoneSourceInstances": 27,
+            "eligibleBoneSourceInstances": 210,
+            "registeredNativeNerveStaticSurfaces": 195,
+            "nativeNerveLabelGroups": 98,
+            "independentNerveConceptCount": null,
+            "confirmedEntrapmentTextGroups": 5,
+            "abstractIndexEntrapmentGroups": 2,
+            "surroundingAnatomyOnlyGroups": 1,
+            "observedModelOnlyCourseGroups": 90,
+            "dynamicNervePoses": 0,
+            "entrapmentCoordinateBindings": 0
+          },
+          "unresolvedProductBlockers": [
+            "T66-B1",
+            "T66-B2",
+            "T66-B3"
+          ],
+          "evidence": [
+            "work/reports/T66.md",
+            "work/evidence/T66/implementation-2026-10-02/final-validation.json",
+            "work/evidence/T66/implementation-2026-10-02/final-blockers.json",
+            "work/evidence/T66/implementation-2026-10-02/preservation.json"
+          ]
+        },
+        "wholeMuscleMotionGoal": {
+          "status": "partial",
+          "targets": 429,
+          "memberships": 447,
+          "sourceConcepts": 232,
+          "sourceSurfaces": 462,
+          "primaryPlayableSourceSurfaces": 1,
+          "newFullTargetExtentApprovals": 0
+        },
+        "wholeBoneMotionGoal": {
+          "status": "partial",
+          "eligibleSourceInstances": 210,
+          "typedPlayableSourceInstances": 27,
+          "independentAnatomicalBoneCount": null,
+          "independentDOFsAdded": 0
+        },
+        "nerveCourseCoverage": {
+          "status": "partial",
+          "staticSourceSurfaces": 195,
+          "nativeLabelGroups": 98,
+          "confirmedEntrapmentTextGroups": 5,
+          "abstractIndexEntrapmentGroups": 2,
+          "surroundingAnatomyOnlyGroups": 1,
+          "observedModelOnlyCourseGroups": 90,
+          "dynamicGeometry": 0,
+          "entrapmentCoordinates": 0
+        }
       },
       "report": "work/reports/T66.md",
-      "promptFile": "work/prompts/app-completion-2026-10-01/16-T66.txt",
-      "acceptanceScope": "declared_verified_feature_scope; exhaustive_content_coverage_reported_separately",
+      "promptFile": "work/plans/normal-motion-and-nerve-2026-10-02/06-T66-after-results-full.txt",
+      "acceptanceScope": "T66 latest whole-muscle / whole-bone normal-motion authoring and native nerve-course integration; currently verified subset reported separately",
       "contractRevision": "app-completion-2026-10-01",
       "acceptanceContract": {
         "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
@@ -3192,7 +3260,33 @@
       ],
       "motionPlanningReference": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md",
       "scopeGoal": "all_declared_muscles_without_initial_shortlist",
-      "planningAmendment": "user-all-muscles-2026-10-02"
+      "planningAmendment": "user-normal-motion-all-muscles-bones-nerve-2026-10-02",
+      "scopeRevision": "t66-normal-motion-bone-nerve-2026-10-02",
+      "productReadiness": "partial_expansion_not_ready",
+      "contentCompleteness": "partial",
+      "knownContentGaps": {
+        "muscleTargetCount": 429,
+        "muscleMembershipCount": 447,
+        "sourceConceptCount": 232,
+        "sourceSurfaceCount": 462,
+        "primaryPlayableMuscleSourceSurfaces": 1,
+        "registeredBoneSourceInstances": 27,
+        "eligibleBoneSourceInstances": 210,
+        "registeredNativeNerveStaticSurfaces": 195,
+        "nativeNerveLabelGroups": 98,
+        "independentNerveConceptCount": null,
+        "confirmedEntrapmentTextGroups": 5,
+        "abstractIndexEntrapmentGroups": 2,
+        "surroundingAnatomyOnlyGroups": 1,
+        "observedModelOnlyCourseGroups": 90,
+        "dynamicNervePoses": 0,
+        "entrapmentCoordinateBindings": 0
+      },
+      "unresolvedProductBlockers": [
+        "T66-B1",
+        "T66-B2",
+        "T66-B3"
+      ]
     },
     "T85": {
       "title": "전체 지원 움직임·통합 앱 품질 감사",

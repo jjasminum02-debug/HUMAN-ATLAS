@@ -7,7 +7,6 @@ import {
   playMotion,
   resetMotionPose,
   seekMotionProgress,
-  setMotionSpeed,
   setMotionTime,
   setReducedMotionPreference,
   suspendMotionForHiddenPage,
@@ -27,6 +26,8 @@ interface Props {
   sourceContextKey: string | null;
   showActionPicker?: boolean;
   muscleLayerEnabled?: boolean;
+  subjectKind?: "muscle" | "bone";
+  subjectHidden?: boolean;
 }
 
 function prefersReducedMotion(): boolean {
@@ -67,7 +68,7 @@ async function readMotionPackage(response: Response, signal: AbortSignal): Promi
   return output.buffer;
 }
 
-export function MotionLearningPanel({ actions, selectedActionId, onSelectAction, host, sourceContextKey, showActionPicker = true, muscleLayerEnabled = true }: Props) {
+export function MotionLearningPanel({ actions, selectedActionId, onSelectAction, host, sourceContextKey, showActionPicker = true, muscleLayerEnabled = true, subjectKind = "muscle", subjectHidden = false }: Props) {
   const selectedAction = actions.find((action) => action.id === selectedActionId) ?? null;
   const candidate = selectedAction?.candidate ?? null;
   const [state, setState] = useState<MotionPlayerState>(() => ({
@@ -138,10 +139,10 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
   }, [host, sourceContextKey, selectedActionId]);
 
   useEffect(() => {
-    if (muscleLayerEnabled) return;
+    if (muscleLayerEnabled && !subjectHidden) return;
     abortRef.current?.abort();
     abortRef.current = null;
-    host?.restoreSourceMotion("muscle-layer-hidden");
+    host?.restoreSourceMotion(subjectHidden ? "selected-source-hidden" : "subject-layer-hidden");
     playbackRef.current?.dispose();
     playbackRef.current = null;
     setReturning(false);
@@ -149,12 +150,12 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
     publish({ ...current, session: { status: "idle", definitionId: null, assetId: null, currentTimeSeconds: 0,
       playbackSpeed: 1, selectedStructureIds: [], errorMessage: null }, durationSeconds: null,
       generation: current.generation + 1, boundStructureIds: [] });
-  }, [muscleLayerEnabled, host]);
+  }, [muscleLayerEnabled, subjectHidden, host]);
 
   async function loadCandidate(startAfterLoad: boolean) {
     const option = actions.find((action) => action.id === stateRef.current.selectedActionId);
     const playable = option?.candidate ?? null;
-    if (!option || !playable || !host || !muscleLayerEnabled) return;
+    if (!option || !playable || !host || !muscleLayerEnabled || subjectHidden) return;
     const begun = beginMotionAssetLoad(stateRef.current);
     if (begun.requestToken === null) return;
     abortRef.current?.abort();
@@ -256,8 +257,7 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
     if (stateRef.current.session.status !== "playing") { play(); return; }
     const player = playbackRef.current;
     if (!player) return;
-    player.pause();
-    publish(pauseMotion(stateRef.current));
+    returnToRest();
   }
 
   function returnToRest() {
@@ -269,13 +269,6 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
       setReturning(false);
       host?.restoreSourceMotion("smooth-return-completed");
     });
-  }
-
-  function changePlaybackSpeed(speed: 0.5 | 1) {
-    const next = setMotionSpeed(stateRef.current, speed);
-    if (next === stateRef.current) return;
-    playbackRef.current?.setSpeed(speed);
-    publish(next);
   }
 
   function seek(fraction: number) {
@@ -295,11 +288,12 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
     publish(next);
   }
 
-  const available = Boolean(candidate) && muscleLayerEnabled;
+  const available = Boolean(candidate) && muscleLayerEnabled && !subjectHidden;
   const loaded = Boolean(state.session.assetId && state.durationSeconds);
   const progress = loaded && state.durationSeconds
     ? Math.round((state.session.currentTimeSeconds / state.durationSeconds) * 100)
     : 0;
+  const poseFraction = loaded && state.durationSeconds ? state.session.currentTimeSeconds / state.durationSeconds : 0;
   const statusText = state.session.status === "error"
     ? state.session.errorMessage
     : state.session.status === "loading"
@@ -307,11 +301,11 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
     : !selectedAction
         ? actions.length ? "먼저 작용을 선택해 주세요." : "현재 연결된 작용 설명이 없으며 재생 자료도 제공되지 않습니다."
         : !available
-          ? !muscleLayerEnabled ? "근육 보기가 꺼져 있어 시범을 표시할 수 없습니다. 모형 보기에서 근육을 켜 주세요." : "이 작용에 연결된 3D 시범 자료가 아직 없습니다. 글 설명으로 작용을 확인할 수 있습니다."
+          ? !muscleLayerEnabled ? `${subjectKind === "bone" ? "뼈" : "근육"} 보기가 꺼져 있어 시범을 표시할 수 없습니다. 모형 보기에서 켜 주세요.` : subjectHidden ? "선택한 모형을 숨겨 시범을 표시할 수 없습니다. 선택 다시 표시를 누르면 재생할 수 있습니다." : "이 작용에 연결된 3D 시범 자료가 아직 없습니다. 글 설명으로 작용을 확인할 수 있습니다."
           : state.prefersReducedMotion
             ? "움직임 줄이기 설정이 적용되어 정지 자세로 확인합니다. 재생은 자동으로 시작되지 않습니다."
         : loaded
-              ? returning ? "처음 자세로 서서히 돌아갑니다." : state.session.status === "playing" ? "움직임을 반복해서 보여 줍니다. 일시정지를 누르면 현재 자세에서 멈춥니다." : state.session.currentTimeSeconds > 0 ? "시범이 멈춰 있습니다. 재생을 이어가거나 처음 자세로 돌아갈 수 있습니다." : "움직임으로 이해하기를 눌러 시범을 볼 수 있습니다."
+              ? returning ? "처음 자세로 서서히 돌아갑니다." : state.session.status === "playing" ? "움직임을 반복해서 보여 줍니다. 버튼을 다시 누르면 처음 자세로 서서히 돌아갑니다." : state.session.currentTimeSeconds > 0 ? "진행 막대로 고른 자세를 유지합니다. 버튼을 누르면 반복 시범을 시작합니다." : "움직임으로 이해하기를 눌러 시범을 볼 수 있습니다."
               : "움직임으로 이해하기를 누르면 시범을 반복해서 보여 줍니다.";
 
   return <section className="motion-player" aria-label="움직임으로 이해하기" data-testid="motion-player">
@@ -332,17 +326,20 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
     <div className="motion-player-controls" aria-label="시범 재생 조작">
       <button type="button" onClick={toggleMotion} aria-pressed={state.session.status === "playing" || returning}
         disabled={!available || state.prefersReducedMotion || state.session.status === "loading" || returning}>
-        {state.session.status === "playing" ? "일시정지" : loaded && state.session.currentTimeSeconds > 0 ? "계속 재생" : "움직임으로 이해하기"}
+        움직임으로 이해하기
       </button>
-      {loaded && state.session.currentTimeSeconds > 0 && <button type="button" onClick={returnToRest} disabled={returning || state.session.status === "loading"}>
-        처음 자세로 돌아가기
-      </button>}
     </div>
-    {loaded && <div className="motion-playback-speed" role="group" aria-label="시범 재생 속도">
-      <span>재생 속도</span>
-      <button type="button" aria-pressed={state.session.playbackSpeed === 1} onClick={() => changePlaybackSpeed(1)} disabled={returning}>보통</button>
-      <button type="button" aria-pressed={state.session.playbackSpeed === 0.5} onClick={() => changePlaybackSpeed(0.5)} disabled={returning}>느리게</button>
-    </div>}
+    {candidate?.asset.poseControl && <details className="joint-angle-control"><summary>관절 조절</summary>
+      <label htmlFor="joint-angle">{candidate.asset.poseControl.label}</label>
+      <input id="joint-angle" aria-label="교육용 관절 각도" type="range"
+        min={Math.min(candidate.asset.poseControl.startDegrees, candidate.asset.poseControl.endDegrees)}
+        max={Math.max(candidate.asset.poseControl.startDegrees, candidate.asset.poseControl.endDegrees)} step={0.1}
+        value={candidate.asset.poseControl.startDegrees + (candidate.asset.poseControl.endDegrees - candidate.asset.poseControl.startDegrees) * poseFraction}
+        disabled={!loaded || returning} onChange={event => seek((Number(event.currentTarget.value) - candidate.asset.poseControl!.startDegrees) /
+          (candidate.asset.poseControl!.endDegrees - candidate.asset.poseControl!.startDegrees))}/>
+      <output htmlFor="joint-angle">{(candidate.asset.poseControl.startDegrees + (candidate.asset.poseControl.endDegrees - candidate.asset.poseControl.startDegrees) * poseFraction).toFixed(1)}°</output>
+      <p className="quiet-note">교육용 자세 조절입니다. 개인의 정상 운동범위가 아닙니다. 지금 선택한 한 방향만 조절하며 다른 방향과의 조합은 제공하지 않습니다.</p>
+    </details>}
     <label className="motion-progress-label" htmlFor="motion-progress">시범 진행</label>
     <div className="motion-progress-row">
       <input
@@ -358,6 +355,6 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
       />
       <output htmlFor="motion-progress">{progress}%</output>
     </div>
-    <p className="motion-player-note">교육용 표면 변형은 개인의 실제 수축량이나 운동 범위를 재현하지 않습니다. 진행 막대는 시범의 재생 위치를 나타냅니다. 힘이나 근력의 비율이 아닙니다. 재생 중 일시정지하면 현재 자세를 유지하며, 처음 자세로 돌아가기를 누르면 부드럽게 복원됩니다. 카메라와 보기 설정은 유지됩니다.</p>
+    <p className="motion-player-note">{subjectKind === 'bone' ? '뼈가 관절 동작에 따라 함께 이동하는 교육용 시범입니다. 선택한 뼈에 독립적인 관절이 있다는 뜻은 아닙니다.' : '교육용 표면 변형은 개인의 실제 수축량이나 운동 범위를 재현하지 않습니다.'} 진행 막대는 시범의 재생 위치를 나타냅니다. 힘이나 근력의 비율이 아닙니다. 버튼을 다시 누르면 반복 시범을 멈추고 처음 자세로 부드럽게 복원됩니다. 진행 막대를 조절하면 해당 자세를 유지합니다. 카메라와 보기 설정은 유지됩니다.</p>
   </section>;
 }

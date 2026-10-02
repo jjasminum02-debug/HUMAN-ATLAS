@@ -27,6 +27,7 @@ export interface ActionContextRole {
 }
 
 export interface MuscleAction {
+  subjectKind?: "muscle" | "bone";
   id: string;
   subjectIds: string[];
   /** Exact source instance subjects are allowed when no canonical HA concept exists. */
@@ -97,6 +98,7 @@ export interface MotionAsset {
   sourceBinding?: SourceMotionBinding | null;
   /** Technical validation only. It is not human review or educational release. */
   technicalStatus: "candidate" | "binding_verified";
+  poseControl?: { label: string; startDegrees: number; endDegrees: number; combination: "single_dof_only" };
 }
 
 export interface SourceMotionBindingMember {
@@ -113,7 +115,8 @@ export interface SourceMotionBindingMember {
 }
 
 export interface SourceMotionBinding {
-  contractVersion: "t59-source-motion-binding-v1";
+  contractVersion: "t59-source-motion-binding-v1" | "t66-typed-source-motion-v2";
+  subjectKind?: "muscle" | "bone";
   datasetNamespace: string;
   datasetRevision: string;
   integrationRevision: string;
@@ -239,13 +242,14 @@ export function assessMotionCapability(
   const expectedPathSubjects = [...action.subjectIds].sort();
   const sourceBinding = asset.sourceBinding;
   const sourceBindingCompatible = asset.representationType !== "source_bound_surface" || Boolean(sourceBinding
-    && sourceBinding.contractVersion === "t59-source-motion-binding-v1"
+    && ["t59-source-motion-binding-v1", "t66-typed-source-motion-v2"].includes(sourceBinding.contractVersion)
     && sourceBinding.frameId === binding.frameId && sourceBinding.units === binding.units
     && sourceBinding.referencePoseId === binding.referencePoseId
     && sourceBinding.subjectSourceKey === definition.instanceId
     && action.sourceSubjectKeys?.includes(definition.instanceId)
+    && (sourceBinding.subjectKind ?? "muscle") === (action.subjectKind ?? "muscle")
     && sourceBinding.members.some((member) => member.sourceKey === definition.instanceId
-      && member.role === "deforming_muscle_surface" && member.side === definition.side)
+      && member.role === (sourceBinding.subjectKind === "bone" ? "moving_structure" : "deforming_muscle_surface") && member.side === definition.side)
     && new Set(sourceBinding.members.map((member) => member.sourceKey)).size === sourceBinding.members.length
     && new Set(sourceBinding.members.map((member) => member.nodeId)).size === sourceBinding.members.length);
   const compatible = definition.actionId === action.id

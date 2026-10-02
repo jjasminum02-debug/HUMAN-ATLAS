@@ -80,7 +80,17 @@ for (const rows of Object.values(projected.actions)) for (const row of rows) {
   inspect(row.label); inspect(row.text);
 }
 
-const output = `const learnerMotionRuntime = ${JSON.stringify(projected, null, 2)} as const;\n\nexport default learnerMotionRuntime;\n`;
+// Bone and muscle selections share the same family buffers. Intern the exact
+// member contracts instead of shipping a copy of every member for every subject.
+const memberContracts = [];
+const memberIndex = new Map();
+const serialized = JSON.stringify(projected, (key, value) => {
+  if (key !== "members" || !Array.isArray(value)) return value;
+  const signature = JSON.stringify(value);
+  if (!memberIndex.has(signature)) { memberIndex.set(signature, memberContracts.length); memberContracts.push(value); }
+  return `__sharedMotionMembers${memberIndex.get(signature)}__`;
+}, 2).replace(/"__sharedMotionMembers(\d+)__"/g, (_, index) => `sourceMotionMembers[${index}]`);
+const output = `const sourceMotionMembers = ${JSON.stringify(memberContracts)} as const;\n\nconst learnerMotionRuntime = ${serialized} as const;\n\nexport default learnerMotionRuntime;\n`;
 if (checkOnly) {
   const existing = await readFile(outputPath, "utf8").catch(() => "");
   if (existing !== output) throw new Error("Learner motion runtime is stale; rebuild from validated motion content");

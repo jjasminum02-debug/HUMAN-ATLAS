@@ -58,6 +58,8 @@ export default function App() {
     const [actionId, setActionId] = useState<string | null>(null);
     const [motionHost, setMotionHost] = useState<SourceMotionHost | null>(null);
     const [muscleLayerEnabled, setMuscleLayerEnabled] = useState(true);
+    const [boneLayerEnabled, setBoneLayerEnabled] = useState(true);
+    const [selectedSourceHidden, setSelectedSourceHidden] = useState(false);
     const info = useRef<HTMLDialogElement>(null);
     useEffect(() => {
         // Desktop has no collapse control; restore its card when leaving the
@@ -81,7 +83,7 @@ export default function App() {
     useEffect(() => { if (!data)
         return; const pop = () => { setRoute(resolveRoute(location.search, data.integration.objects)); setTextNerveKey(nerveConceptForLearner(new URLSearchParams(location.search).get('nerveConcept') ?? '')?.key ?? null); setQuery(history.state?.atlasSearchQuery ?? ''); setDetailsOpen(true); }; window.addEventListener('popstate', pop); return () => window.removeEventListener('popstate', pop); }, [data]);
     const rows = useMemo(() => data ? searchStructures(data.integration.objects, query, route.regions, route.audience ?? 'learner')
-        .filter(row => !query.trim() || row.kind !== 'nerve') : [], [data, query, route.regions, route.audience]);
+        .filter(row => !query.trim() || row.kind !== 'nerve' || !nerveConceptForSourceName(row.names.en)) : [], [data, query, route.regions, route.audience]);
     const nerveSearchResults = useMemo(() => query.trim() && route.audience !== 'inspection'
         ? nerveConceptsForLearner(query).map(match => ({ ...match, nativeRows: match.concept.sourceNativeEnglishName
             ? (data?.integration.objects ?? []).filter(row => row.kind === 'nerve' && row.names.en === match.concept.sourceNativeEnglishName
@@ -100,10 +102,10 @@ export default function App() {
         }
         return [...result.values()];
     }, [selected, data]);
-    const actions = useMemo(() => selected?.kind === 'muscle'
+    const actions = useMemo(() => (selected?.kind === 'muscle' || selected?.kind === 'bone')
         ? motionActionOptionsForLearner(selected.haConceptId, selected.side, selected.sourceKey) : [],
         [selected?.kind, selected?.haConceptId, selected?.side, selected?.sourceKey]);
-    const motionActions = useMemo(() => selected?.kind === 'muscle' ? motionPanelOptions(actions, selected.sourceKey) : [], [actions, selected?.kind, selected?.sourceKey]);
+    const motionActions = useMemo(() => (selected?.kind === 'muscle' || selected?.kind === 'bone') ? motionPanelOptions(actions, selected.sourceKey) : [], [actions, selected?.kind, selected?.sourceKey]);
     const action = actions.find(a => a.id === actionId) ?? actions.find(a => a.candidate) ?? actions[0];
     const nerveLearning = selected?.kind === 'nerve' ? nerveLearningForLearner(selected.names.en) : null;
     const selectedNerveRelations = selectedNerveConcept ? motorRelationsForNerve(selectedNerveConcept.key, selected?.side) : [];
@@ -212,7 +214,7 @@ export default function App() {
     </section>}
    </aside>
    <section id="atlas-stage" tabIndex={-1} className="study-stage" aria-label={`${title} 학습 장면`}><div className="stage-caption" aria-hidden={!entered}><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{title}</h2><p>회전하고 확대하며 구조를 살펴보세요.</p></div>
-    <WholeBodyViewer homeRevision={homeRevision} viewResetRevision={viewResetRevision} datasetSource={data} onEntered={setEntered} onMotionHostChange={setMotionHost} onMuscleLayerChange={setMuscleLayerEnabled} regionIds={route.regions} selectedId={route.selected} selectedIds={route.selected ? [route.selected] : []} whole={!route.regions.length} onWholeChange={() => { resetPresentation(); navigate({ regions: [], selected: route.selected }); }} onSelect={select}/>
+    <WholeBodyViewer homeRevision={homeRevision} viewResetRevision={viewResetRevision} datasetSource={data} onEntered={setEntered} onMotionHostChange={setMotionHost} onMuscleLayerChange={setMuscleLayerEnabled} onBoneLayerChange={setBoneLayerEnabled} onSelectionHiddenChange={setSelectedSourceHidden} regionIds={route.regions} selectedId={route.selected} selectedIds={route.selected ? [route.selected] : []} whole={!route.regions.length} onWholeChange={() => { resetPresentation(); navigate({ regions: [], selected: route.selected }); }} onSelect={select}/>
    </section>
    {(selected || selectedTextNerve) && <details inert={!entered} className="study-details" id="study-details" open={detailsOpen} onToggle={e => setDetailsOpen(e.currentTarget.open)}><summary className="mobile-detail-summary">{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</summary><div className="study-detail-content">
     <button className="bone-related-muscle" onClick={() => navigate({ regions: [], selected: null })}>선택 해제</button><h2>{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</h2>{selected && anatomicalPartSubtitle(selected.names.en) && <p className="anatomical-part-subtitle">{anatomicalPartSubtitle(selected.names.en)}</p>}{selected ? <NameRows row={selected}/> : <div className="names-card" aria-label="이름"><div><span>우리말명</span><strong>{selectedTextNerve!.names.koModern}</strong></div><div><span>한자어명 (한글 표기)</span><strong>{selectedTextNerve!.names.koTraditional}</strong></div><div><span>영어명</span><strong>{selectedTextNerve!.names.en}</strong></div></div>}
@@ -242,8 +244,8 @@ export default function App() {
         <p>{relation.displayNote}</p>
         {relation.targetSourceKeys.map(key => { const row = data.integration.objects.find(r => r.sourceKey === key); return row ? <button className="bone-related-muscle" key={key} onClick={() => select(key)}>{learnerRowTitle(row)} · {row.side === 'left' ? '왼쪽' : row.side === 'right' ? '오른쪽' : '좌우 구분 없음'}</button> : null; })}
       </li>)}</ul> : <p className="quiet-note">현재 연결된 운동근 자료가 없습니다.</p>}<p className="quiet-note">표시 목록은 전체 지배 범위를 뜻하지 않습니다.</p>
-      {nerveLearning && <details key={selected.sourceKey} className="nerve-learning-context"><summary>기능 변화와 포착 맥락</summary><section><h4>기능 변화</h4><p>{nerveLearning.functionContext}</p></section><section><h4>해부학적 주행과 변이</h4><p>{nerveLearning.courseContext}</p></section><section><h4>주변 조직 맥락</h4><p>{nerveLearning.compressionContext}</p></section></details>}
-    </section> : selected?.kind === 'muscle' ? <><MotionLearningPanel actions={motionActions} selectedActionId={actionId ?? motionActions.find(a => a.candidate)?.id ?? motionActions[0]?.id ?? null} onSelectAction={setActionId} host={motionHost} sourceContextKey={selected.sourceKey} showActionPicker={false} muscleLayerEnabled={muscleLayerEnabled}/>
+      {nerveLearning && <details key={selected.sourceKey} className="nerve-learning-context"><summary>주행·포착 맥락</summary><section><h4>기능 연결</h4><p>{nerveLearning.functionContext}</p></section><section><h4>해부학적 주행과 변이</h4><p>{nerveLearning.courseContext}</p></section><section><h4>포착 가능 구간과 주변 조직</h4><p>{nerveLearning.compressionContext}</p></section>{"variationContext" in nerveLearning && <section><h4>변이와 자세 범위</h4><p>{String(nerveLearning.variationContext)}</p></section>}</details>}
+    </section> : selected?.kind === 'muscle' ? <><MotionLearningPanel subjectHidden={selectedSourceHidden} actions={motionActions} selectedActionId={actionId ?? motionActions.find(a => a.candidate)?.id ?? motionActions[0]?.id ?? null} onSelectAction={setActionId} host={motionHost} sourceContextKey={selected.sourceKey} showActionPicker={false} muscleLayerEnabled={muscleLayerEnabled}/>
     <div className="study-tabs" role="tablist" aria-label="학습 내용">{(['구조', '기능'] as const).map(t => <button key={t} role="tab" id={`tab-${t}`} aria-controls="study-tab-panel" aria-selected={tab === t} tabIndex={tab === t ? 0 : -1} onClick={() => setTab(t)} onKeyDown={e => { if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) {
                 e.preventDefault();
                 const next = e.key === 'Home' ? '구조' : e.key === 'End' ? '기능' : tab === '구조' ? '기능' : '구조';
@@ -276,7 +278,7 @@ export default function App() {
         <p>{structureUnavailabilityForLearner('sensoryProprioception')}</p>
       </section>
     </> : action ? <div className="muscle-action-learning"><h3>이 근육이 하는 일</h3><p>{action.text.label}</p><p>{action.text.explanation}</p><fieldset className="learner-action-picker"><legend>작용 선택</legend>{actions.map(a => <button key={a.id} aria-pressed={action.id === a.id} onClick={() => setActionId(a.id)}>{a.label}</button>)}</fieldset></div> : <p className="quiet-note">{learnerFunctionUnavailableText()}</p>}</section>
-    </> : selected?.kind === 'bone' ? <section className="attachment-section"><h3>관련 근육</h3>{relatedMuscles.length ? <ul>{relatedMuscles.map(r => <li key={r.sourceKey}><button className="bone-related-muscle" onClick={() => select(r.sourceKey)}>{r.label}</button><span>{r.roles.map(role => role === 'origin' ? '기시' : role === 'insertion' ? '정지' : '부착').join(' · ')}</span></li>)}</ul> : <p className="quiet-note">주요 표지와 관련 근육 설명을 준비하고 있습니다.</p>}</section> : null}
+    </> : selected?.kind === 'bone' ? <><MotionLearningPanel subjectHidden={selectedSourceHidden} actions={motionActions} selectedActionId={actionId ?? motionActions.find(a => a.candidate)?.id ?? motionActions[0]?.id ?? null} onSelectAction={setActionId} host={motionHost} sourceContextKey={selected.sourceKey} showActionPicker={true} muscleLayerEnabled={boneLayerEnabled} subjectKind="bone"/><section className="attachment-section"><h3>관련 근육</h3>{relatedMuscles.length ? <ul>{relatedMuscles.map(r => <li key={r.sourceKey}><button className="bone-related-muscle" onClick={() => select(r.sourceKey)}>{r.label}</button><span>{r.roles.map(role => role === 'origin' ? '기시' : role === 'insertion' ? '정지' : '부착').join(' · ')}</span></li>)}</ul> : <p className="quiet-note">주요 표지와 관련 근육 설명을 준비하고 있습니다.</p>}</section></> : null}
    </div></details>}
   </div>
  </div>;

@@ -8,7 +8,7 @@ import type { RuntimeIntegration } from '../datasets/integration';
 import { AtlasLoading } from '../../ui/AtlasLoading';
 import type { SourceMotionHost } from '../datasets/sourceMotionHost';
 
-export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, whole, onWholeChange, onEntered, onMotionHostChange, onMuscleLayerChange }: { homeRevision?: number; viewResetRevision?: number; datasetSource?: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; onMotionHostChange?: (host: SourceMotionHost | null) => void; onMuscleLayerChange?: (enabled: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
+export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, whole, onWholeChange, onEntered, onMotionHostChange, onMuscleLayerChange, onBoneLayerChange, onSelectionHiddenChange }: { homeRevision?: number; viewResetRevision?: number; datasetSource?: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; onMotionHostChange?: (host: SourceMotionHost | null) => void; onMuscleLayerChange?: (enabled: boolean) => void; onBoneLayerChange?: (enabled: boolean) => void; onSelectionHiddenChange?: (hidden: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
   const host = useRef<HTMLDivElement>(null);
   const controller = useRef<AnatomySceneController | DatasetSceneAdapter | null>(null);
   const previousView = useRef<{ regionKey: string; selectedId: string | null; resetRevision: number } | null>(null);
@@ -20,6 +20,7 @@ export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datas
   const [muscles, setMuscles] = useState(true);
   type Presentation = { observeNerves: boolean; highlightInnervation: boolean; dim: boolean; isolated: boolean; hidden: string[]; translucent: string[] };
   const [presentation, setPresentation] = useState<Presentation>({ observeNerves: true, highlightInnervation: true, dim: true, isolated: false, hidden: [], translucent: [] });
+  useEffect(() => { onSelectionHiddenChange?.(Boolean(selectedId && presentation.hidden.includes(selectedId))); }, [selectedId, presentation.hidden, onSelectionHiddenChange]);
   const presentationRef = useRef(presentation);
   const presentationHistory = useRef<Presentation[]>([]);
   const [canUndoPresentation, setCanUndoPresentation] = useState(false);
@@ -91,7 +92,7 @@ export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datas
       <div className="view-options-row">
         <button aria-pressed={whole} onClick={() => { onWholeChange(true); controller.current?.focus([]); }}>전체 보기</button>
         <button onClick={() => controller.current?.focus(regionIds)}>화면 맞춤</button>
-        <button aria-pressed={bones} onClick={() => setBones(!bones)}>뼈</button>
+        <button aria-pressed={bones} onClick={() => { const enabled = !bones; setBones(enabled); onBoneLayerChange?.(enabled); }}>뼈</button>
         <button aria-pressed={muscles} onClick={() => { const enabled = !muscles; setMuscles(enabled); onMuscleLayerChange?.(enabled); }}>근육</button>
         {staticPose && <button aria-pressed={nerves} onClick={() => setNerves(!nerves)}>신경</button>}
       </div>

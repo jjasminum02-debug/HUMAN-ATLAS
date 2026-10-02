@@ -15,7 +15,7 @@ function glb(b:Buffer){
  return {doc,accessor:(id:number)=>{const a=doc.accessors[id],v=doc.bufferViews[a.bufferView];const bytes=a.componentType===5126||a.componentType===5125?4:2;return binary.subarray((v.byteOffset??0)+(a.byteOffset??0),(v.byteOffset??0)+(a.byteOffset??0)+a.count*(a.type==='VEC3'?3:1)*bytes);}};
 }
 test('all six original Curve surfaces: pinned files, topology, finite positions/normals, index bounds and pair symmetry',async()=>{
- const x=await loadNerveAssets(root);assert.equal(x.manifest.objects.length,6);assert.equal(x.registry.instances.filter(n=>n.localSelection==='unsupported').length,2);
+ const x=await loadNerveAssets(root, "T63");assert.equal(x.manifest.objects.length,6);assert.equal(x.registry.instances.filter(n=>n.localSelection==='unsupported').length,2);
  const evaluated=JSON.parse(await readFile(root+'work/evidence/T63/evaluated-surfaces.json','utf8'));
  assert.equal(evaluated.scriptsAutoExecute,false);assert.equal(evaluated.sourceModified,false);assert.equal(evaluated.sourceFrame,0);
  const world=new Map<string,number[]>();
@@ -39,13 +39,13 @@ test('all six original Curve surfaces: pinned files, topology, finite positions/
  for(const node of chunk.doc.nodes){const original=glb(await readFile(root+x.manifest.objects.find(o=>o.sourceKey===node.name)!.path));const a=chunk.doc.meshes[node.mesh].primitives[0],b=original.doc.meshes[0].primitives[0];assert.deepEqual(chunk.accessor(a.attributes.POSITION),original.accessor(b.attributes.POSITION));assert.deepEqual(chunk.accessor(a.attributes.NORMAL),original.accessor(b.attributes.NORMAL));assert.deepEqual(chunk.accessor(a.indices),original.accessor(b.indices));}
 });
 test('geometry promotion rejects missing frame proof, wrong pose and fabricated side',async()=>{
- const x=await loadNerveAssets(root);
+ const x=await loadNerveAssets(root, "T63");
  for(const mutate of [(r:any)=>r.instances[0].geometry.evidenceIds=[],(r:any)=>r.instances[0].geometry.validatedPoseIds=['walking'],(r:any)=>r.instances[0].side='right']){
   const r=structuredClone(x.registry);mutate(r);assert.throws(()=>validateNerveRegistry(r));
  }
 });
 test('shared presentation gates layers/pose/region/hidden before motor highlights, preserves existing source routes',async()=>{
- const x=await loadNerveAssets(root);
+ const x=await loadNerveAssets(root, "T63");
  const runtime=JSON.parse(await readFile(root+'work/evidence/T63/browser/runtime.json','utf8'));
  const dataset=JSON.parse(await readFile(root+'work/evidence/T63/browser/dataset.json','utf8'));
  const nerveKeys=new Set(x.manifest.objects.map(o=>o.sourceKey));

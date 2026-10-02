@@ -1,0 +1,126 @@
+{
+  "task": "T66",
+  "nextUnit": "author-and-integrate-normal-motion-bone-and-nerve",
+  "status": "partial",
+  "unresolvedProductBlockers": [
+    {
+      "id": "T66-B1",
+      "kind": "actual_authored_geometry_defect",
+      "summary": "12 authored family candidates have new source-bone containment. The geometry exporter rejects folded corrective trials. These candidates are unregistered.",
+      "familyResults": [
+        {
+          "familyId": "shoulder-flexion-left",
+          "newContainmentMaximum": 73,
+          "conflictingPairs": 5
+        },
+        {
+          "familyId": "shoulder-external-rotation-left",
+          "newContainmentMaximum": 24,
+          "conflictingPairs": 3
+        },
+        {
+          "familyId": "elbow-flexion-left",
+          "newContainmentMaximum": 51,
+          "conflictingPairs": 2
+        },
+        {
+          "familyId": "hip-flexion-left",
+          "newContainmentMaximum": 65,
+          "conflictingPairs": 3
+        },
+        {
+          "familyId": "hip-abduction-left",
+          "newContainmentMaximum": 6,
+          "conflictingPairs": 1
+        },
+        {
+          "familyId": "knee-flexion-left",
+          "newContainmentMaximum": 45,
+          "conflictingPairs": 3
+        },
+        {
+          "familyId": "shoulder-flexion-right",
+          "newContainmentMaximum": 73,
+          "conflictingPairs": 5
+        },
+        {
+          "familyId": "shoulder-external-rotation-right",
+          "newContainmentMaximum": 24,
+          "conflictingPairs": 3
+        },
+        {
+          "familyId": "elbow-flexion-right",
+          "newContainmentMaximum": 51,
+          "conflictingPairs": 2
+        },
+        {
+          "familyId": "hip-flexion-right",
+          "newContainmentMaximum": 65,
+          "conflictingPairs": 3
+        },
+        {
+          "familyId": "hip-abduction-right",
+          "newContainmentMaximum": 6,
+          "conflictingPairs": 1
+        },
+        {
+          "familyId": "knee-flexion-right",
+          "newContainmentMaximum": 45,
+          "conflictingPairs": 3
+        }
+      ],
+      "evidence": [
+        "work/evidence/T66/implementation-2026-10-02/family-contact-summary.json",
+        "work/evidence/T66/implementation-2026-10-02/contact-corrective-trial.json",
+        "work/evidence/T66/implementation-2026-10-02/arap-corrective-trial.json"
+      ],
+      "requiredFix": "Source-specific attachment masks / articular trajectory and contact-preserving deformation; retain source geometry and area/orientation contract."
+    },
+    {
+      "id": "T66-B2",
+      "kind": "engineering_implementation_remaining",
+      "summary": "Both wrist candidates have no extrinsic muscle deformation context. Zero sampled vertex containment does not make the normal joint context complete.",
+      "familyResults": [
+        {
+          "familyId": "wrist-flexion-left",
+          "newContainmentMaximum": 0,
+          "conflictingPairs": 0
+        },
+        {
+          "familyId": "wrist-flexion-right",
+          "newContainmentMaximum": 0,
+          "conflictingPairs": 0
+        }
+      ],
+      "requiredFix": "Use existing reviewed hand attachment context to author actual cross-joint muscle/tendon weights and validate intermediate geometry; do not register bones-only as completed normal motion."
+    },
+    {
+      "id": "T66-B3",
+      "kind": "whole_scope_engineering_remaining",
+      "summary": "The full queue is retained, but family-specific coupled shoulder-girdle, forearm, digit, spine and non-joint authoring/integration remains. Missing engineering is not classified as missing source anatomy.",
+      "remainingTypes": [
+        "shoulder-girdle",
+        "forearm",
+        "hand-digit",
+        "ankle",
+        "foot-digit",
+        "cervical",
+        "thoracolumbar",
+        "rib-respiration",
+        "jaw",
+        "hyoid-larynx",
+        "eye",
+        "facial",
+        "tongue",
+        "pharynx",
+        "pelvic-floor"
+      ],
+      "fullSourceQueuePath": "work/evidence/T66/implementation-2026-10-02/family-queue.json",
+      "requiredFix": "Implement source-specific family trajectories and deformable source packages across the retained queue, then integrate only passing packages."
+    }
+  ],
+  "dataGapsSeparate": {
+    "nerveText": "90 of 98 native groups have observed static-model regional course context only; 93 have no confirmed direct entrapment support. Two abstract-index contexts and one surrounding-anatomy context remain explicitly separate.",
+    "nativeRigOrMeasuredAxisMissing": "Does not prohibit authored engineering; does prohibit calling authored pivots measured physiological axes."
+  }
+}

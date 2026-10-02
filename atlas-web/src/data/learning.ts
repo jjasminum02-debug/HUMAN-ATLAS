@@ -2,7 +2,8 @@ import learnerCardRuntime from "../../../atlas-data/terminology/learner-card-run
 import learnerMotionRuntime from "./learnerMotionRuntime.generated.ts";
 import { displayTerms, termText, type PilotCatalog } from "./catalog";
 import { learnerNameProjection, learnerSearchEntry, learnerVisibleTerms, mergeLearningConcepts, searchEntries, type SearchEntry } from "../domain/search";
-import learnerNerveGraph from "../../../atlas-data/terminology/learner-nerve-graph-t25.json";
+import learnerNerveGraph from "../../../atlas-data/terminology/learner-nerve-graph-t66.json";
+import learnerNerveCourse from "../../../atlas-data/terminology/nerve-learning-t66.json";
 import type { LearnerFieldProjection } from "../domain/aiEvidence";
 import { learnerStructureUnavailability } from "../domain/learnerStructureSourceContent";
 import { learnerActionAppliesToSide } from "../domain/learnerActionText";
@@ -82,7 +83,7 @@ export function findMuscles(catalog: PilotCatalog, query: string) {
 
 /** Learner-only action text is preprojected; source/evidence references stay out of this bundle. */
 export function motionActionOptionsForLearner(conceptId: string | null, selectedSide?: string | null, sourceKey?: string | null) {
-  const selector = conceptId ?? sourceKey;
+  const selector = sourceKey && motionRuntime.actions[sourceKey]?.length ? sourceKey : conceptId ?? sourceKey;
   const projected = (selector ? motionRuntime.actions[selector] ?? [] : []).filter(row =>
     !row.candidate || !sourceKey || row.candidate.asset.sourceBinding?.subjectSourceKey === sourceKey);
   const displayRows = cardRuntime.actions.filter((row) => row.conceptId === conceptId
@@ -95,7 +96,7 @@ export function motionActionOptionsForLearner(conceptId: string | null, selected
       candidate: resolveLearnerMotionCandidate(row.key, selectedSide, projected),
     };
   });
-  if (conceptId || !sourceKey) return displayRows;
+  if ((conceptId && selector === conceptId) || !sourceKey) return displayRows;
   // A source-only action is reachable by exact sourceKey; no canonical ID or alias is invented.
   return projected.filter((row) => learnerActionAppliesToSide(row.sideApplicability, selectedSide)).map((row) => ({
     id: row.actionKey,
@@ -132,7 +133,8 @@ export function structureSummary(conceptId: string, role: string) {
 
 /** Learner-safe text for the supported fibular nerve concepts; source evidence stays internal. */
 export function nerveLearningForLearner(englishName: string) {
-  return cardRuntime.nerveLearning[englishName] ?? null;
+  return (learnerNerveCourse as Record<string, { courseContext: string; compressionContext: string; variationContext: string; functionContext: string }>)[englishName]
+    ?? cardRuntime.nerveLearning[englishName] ?? null;
 }
 
 /** Nerve terms are searchable aliases; evidence and review metadata stay in work/evidence. */

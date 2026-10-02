@@ -37,6 +37,7 @@ export function wholeBodyPlugin(root: string): Plugin {
     configureServer(server) {
       // Frozen dependencies invalidate both namespaces and their single-scene composition.
       server.watcher.add([
+        resolve(root, 'atlas-data/overlays/nerve-support-t66.json'), resolve(root, 'atlas-data/assets/derived-glb/za-nerve-t66'), ...['nerve-evaluated-surfaces.json','nerve-export-input.json','nerve-local-use-rights.json'].map(p => resolve(root, 'work/evidence/T66/implementation-2026-10-02', p)),
         `${cache}/datasets`, `${root}atlas-data/overlays/nerve-support-t63.json`, `${root}atlas-data/assets/derived-glb/za-nerve-t63`, `${root}work/evidence/T63/local-use-rights.json`, `${root}work/evidence/T63/evaluated-surfaces.json`, `${root}atlas-data/manifests`, `${root}atlas-data/catalog/target-scope-t96.json`,
         `${root}work/evidence/T78/reference/ta2-scope.json`, `${root}work/evidence/T78/source-elements.json`,
         `${root}work/evidence/T50/scene-contract.md`, `${root}work/evidence/T69/diagnostic.json`,

@@ -92,7 +92,10 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             const baseKeys = demandedStructureKeys([...this.records.values()], this.view);
             const requiredKeys = [...new Set([...baseKeys, ...binding.members.map(member => member.sourceKey)])];
             const detailKeys = binding.members.filter(member => member.lod === 'detail').map(member => member.sourceKey);
-            if (this.view.selectedId && !detailKeys.includes(this.view.selectedId)) detailKeys.push(this.view.selectedId);
+            // An exact motion buffer may bind overview even for the selected bone.
+            // Upgrading it to detail would make the required source hash unreachable.
+            if (this.view.selectedId && !binding.members.some(m => m.sourceKey === this.view.selectedId)
+                && !detailKeys.includes(this.view.selectedId)) detailKeys.push(this.view.selectedId);
             this.resources.demand(requiredKeys, detailKeys);
             const deadline = performance.now() + 15000;
             while (!binding.members.every(member => {
@@ -129,7 +132,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                     || row.sourceHiddenStatePreserved.hideViewport || (member.role === 'deforming_muscle_surface' && row.kind !== 'muscle')) {
                     throw new Error(`sourceKey, side, resource/LOD, transform 또는 로컬 표시 근거가 현재 장면과 다릅니다: ${member.sourceKey}`);
                 }
-                if (member.sourceKey === binding.subjectSourceKey && (!this.view.muscles
+                if (member.sourceKey === binding.subjectSourceKey && (!(binding.subjectKind === 'bone' ? this.view.bones : this.view.muscles)
                     || this.view.hiddenSourceKeys?.includes(member.sourceKey) || this.view.selectedPresentation === 'hidden')) {
                     throw new Error(`motion source가 현재 선택/레이어/부위 보기에서 활성 상태가 아닙니다: ${member.sourceKey}`);
                 }
@@ -139,6 +142,11 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 if (activeGeometryHash !== member.geometrySha256 || motionGeometryHash !== member.geometrySha256)
                     throw new Error(`기본 geometry hash가 현재 장면과 derived motion 사이에 일치하지 않습니다: ${member.sourceKey}`);
                 if (motionNode.parent !== resource.scene) throw new Error(`motion surface는 고정된 scene root의 직접 child여야 합니다: ${member.nodeId}`);
+                if (binding.subjectKind === 'bone' && member.sourceKey === binding.subjectSourceKey) {
+                    if (row.kind !== 'bone' || member.role !== 'moving_structure' || member.side !== asset.staticBinding.side)
+                        throw new Error('뼈 subject는 실제 같은 쪽 moving bone이어야 합니다.');
+                    hasSubject = true;
+                }
                 if (member.role === 'deforming_muscle_surface') {
                     if (row.kind !== 'muscle' || member.sourceKey !== binding.subjectSourceKey || member.side !== asset.staticBinding.side)
                         throw new Error('변형 표면은 정확히 선택된 근육 sourceKey와 같은 쪽이어야 합니다.');
@@ -265,7 +273,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             contextLost: this.contextLost, selectedAvailable: !this.view.selectedId || this.resources.nodes.has(this.view.selectedId), calls: this.resources.nodes.size,
             triangles: this.scene.renderer.info.render.triangles, geometries: this.scene.renderer.info.memory.geometries });
         this.scene.renderer.domElement.dataset.dataset = JSON.stringify({ root: this.scene.root.uuid, dataset: this.resources.dataset.namespace,
-            highlighted: [...highlights], observingNerves: observe, nerveLayer: Boolean(this.view.nerves), poseId: this.view.poseId, visible: [...this.resources.nodes].filter(([, n]) => n.visible).map(([key]) => key), selected: this.view.selectedId, bytes: q.bytes, cacheEntries: q.loaded.size, evictions: q.evictions, cancellations: q.cancellations, lateReleases: q.lateReleases, wantedChunks: [...q.wanted], pending: q.pending.size, failed: [...q.failed],
+            regionIds: this.view.regionIds ?? (this.view.region ? [this.view.region] : []), highlighted: [...highlights], observingNerves: observe, nerveLayer: Boolean(this.view.nerves), poseId: this.view.poseId, visible: [...this.resources.nodes].filter(([, n]) => n.visible).map(([key]) => key), selected: this.view.selectedId, bytes: q.bytes, cacheEntries: q.loaded.size, evictions: q.evictions, cancellations: q.cancellations, lateReleases: q.lateReleases, wantedChunks: [...q.wanted], pending: q.pending.size, failed: [...q.failed],
             camera: this.scene.camera.position.toArray(), calls: this.scene.renderer.info.render.calls, triangles: this.scene.renderer.info.render.triangles,
             motion: this.motion ? { assetId: this.motion.asset.id, contextKey: this.motion.contextKey,
                 surfaceCount: this.motion.originals.size, fixedCount: this.motion.asset.sourceBinding?.members.filter(m => m.role === 'fixed_structure').length } : null,

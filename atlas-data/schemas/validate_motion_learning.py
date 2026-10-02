@@ -238,7 +238,7 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
                 issues.append(issue("orphan_action_subject", f"{path}.subjectIds", f"Unknown muscle/part ID {subject_id!r}."))
         for source_key in source_subjects:
             source_instance = context.get("sourceInstances", {}).get(source_key)
-            if source_instance is None or source_instance.get("kind") not in {"muscle_surface_or_part", "muscle"}:
+            if source_instance is None or source_instance.get("kind") not in ({"skeletal_surface"} if action.get("subjectKind") == "bone" else {"muscle_surface_or_part", "muscle"}):
                 issues.append(issue("orphan_source_action_subject", f"{path}.sourceSubjectKeys", f"Unknown exact muscle sourceKey {source_key!r}."))
         joint_state = action["jointBindingState"]
         joint_note = action["jointBindingNote"]
@@ -268,7 +268,11 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
             if ref["appliesTo"] != "context_role" and ref["contextId"] is not None:
                 issues.append(issue("unexpected_source_context", f"{path}.sourceRefs[{ref_index}].contextId", "Only a context-role source link may carry a context ID."))
             validate_evidence_ref(ref, f"{path}.sourceRefs[{ref_index}]", context, issues)
+        if action.get("subjectKind", "muscle") == "muscle" and (not action["postureConditions"] or not action["contextRoles"]):
+            issues.append(issue("muscle_context_required", path, "Muscle actions retain the posture and contraction/context contract; bone co-movement cannot weaken it."))
         required_scopes = {"action_explanation", "context_role"}
+        if action.get("subjectKind") == "bone" and not context_ids:
+            required_scopes.remove("context_role")
         if action["postureConditions"]:
             required_scopes.add("posture_condition")
         if action["stabilizationConditions"]:
@@ -382,7 +386,7 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
             if not isinstance(source_binding, dict):
                 issues.append(issue("missing_source_motion_binding", f"{path}.sourceBinding", "A source-bound surface clip needs an exact runtime scene/source binding."))
                 source_binding = {}
-            if source_binding.get("contractVersion") != "t59-source-motion-binding-v1":
+            if source_binding.get("contractVersion") not in ["t59-source-motion-binding-v1", "t66-typed-source-motion-v2"]:
                 issues.append(issue("invalid_source_motion_contract", f"{path}.sourceBinding.contractVersion", "Source motion binding must use the T59 contract."))
             source_members = source_binding.get("members", [])
             source_keys = [row.get("sourceKey") for row in source_members if isinstance(row, dict)]
@@ -397,7 +401,12 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
                 issues.append(issue("source_motion_frame_mismatch", f"{path}.sourceBinding", "Source motion and static binding frame/unit must match exactly."))
             if source_binding.get("referencePoseId") != binding.get("referencePoseId"):
                 issues.append(issue("source_motion_pose_mismatch", f"{path}.sourceBinding.referencePoseId", "Source motion must bind the exact static reference pose."))
-            deforming = [row for row in source_members if isinstance(row, dict) and row.get("role") == "deforming_muscle_surface"]
+            subject_kind = source_binding.get("subjectKind", "muscle")
+            subject_role = "moving_structure" if subject_kind == "bone" else "deforming_muscle_surface"
+            deforming = [row for row in source_members if isinstance(row, dict) and row.get("role") == subject_role]
+            source_subject = context.get("sourceInstances", {}).get(definition["instanceId"], {})
+            if subject_kind == "bone" and (source_binding.get("contractVersion") != "t66-typed-source-motion-v2" or source_subject.get("kind") != "skeletal_surface"):
+                issues.append(issue("source_motion_subject_kind", path, "Bone motion requires a typed actual skeletal instance."))
             if source_binding.get("subjectSourceKey") != definition["instanceId"] or not any(row.get("sourceKey") == definition["instanceId"] and row.get("side") == definition["side"] for row in deforming):
                 issues.append(issue("source_motion_subject_side_mismatch", f"{path}.sourceBinding.members", "The exact motion instance and side must be a declared deforming muscle surface."))
             for member_index, member in enumerate(source_members):

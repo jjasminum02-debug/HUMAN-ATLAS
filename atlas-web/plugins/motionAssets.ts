@@ -34,7 +34,13 @@ export function motionAssetsPlugin(root: string): Plugin {
       });
     },
     async generateBundle() {
-      for (const entry of await entries()) this.emitFile({ type: 'asset', fileName: entry.uri, source: await verified(entry) });
+      const unique = new Map<string, { uri: string; sha256: string }>();
+      for (const entry of await entries()) {
+        const previous = unique.get(entry.uri);
+        if (previous && previous.sha256 !== entry.sha256) throw Error('Conflicting motion asset hashes');
+        unique.set(entry.uri, entry);
+      }
+      for (const entry of unique.values()) this.emitFile({ type: 'asset', fileName: entry.uri, source: await verified(entry) });
     },
   };
 }

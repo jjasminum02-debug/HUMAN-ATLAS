@@ -1,0 +1,94 @@
+[
+  {
+    "command": [
+      "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--experimental-strip-types",
+      "scripts/buildLearnerCardRuntime.mjs",
+      "--check"
+    ],
+    "exitCode": 0,
+    "log": "work/evidence/T66/implementation-2026-10-02/validation/build-00.log"
+  },
+  {
+    "command": [
+      "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--experimental-strip-types",
+      "scripts/buildLearnerMotionRuntime.mjs",
+      "--check"
+    ],
+    "exitCode": 0,
+    "log": "work/evidence/T66/implementation-2026-10-02/validation/build-01.log"
+  },
+  {
+    "command": [
+      "python3",
+      "scripts/validate-learning-content.py"
+    ],
+    "exitCode": 0,
+    "log": "work/evidence/T66/implementation-2026-10-02/validation/build-02.log"
+  },
+  {
+    "command": [
+      "python3",
+      "../atlas-data/schemas/validate_ai_evidence.py",
+      "--check"
+    ],
+    "exitCode": 0,
+    "log": "work/evidence/T66/implementation-2026-10-02/validation/build-03.log"
+  },
+  {
+    "command": [
+      "python3",
+      "../atlas-data/schemas/validate_bone_name_overlay.py",
+      "--check"
+    ],
+    "exitCode": 0,
+    "log": "work/evidence/T66/implementation-2026-10-02/validation/build-04.log"
+  },
+  {
+    "command": [
+      "python3",
+      "../work/tools/validate_t83_function_content.py",
+      "--validate-only"
+    ],
+    "exitCode": 0,
+    "log": "work/evidence/T66/implementation-2026-10-02/validation/build-05.log"
+  },
+  {
+    "command": [
+      "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "scripts/check-scene-decoders.mjs"
+    ],
+    "exitCode": 0,
+    "log": "work/evidence/T66/implementation-2026-10-02/validation/build-06.log"
+  },
+  {
+    "command": [
+      "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "node_modules/typescript/bin/tsc",
+      "-b",
+      "--pretty",
+      "false"
+    ],
+    "exitCode": 0,
+    "log": "work/evidence/T66/implementation-2026-10-02/validation/build-07.log"
+  },
+  {
+    "command": [
+      "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "node_modules/vite/bin/vite.js",
+      "build"
+    ],
+    "exitCode": 0,
+    "log": "work/evidence/T66/implementation-2026-10-02/validation/build-08.log"
+  },
+  {
+    "command": [
+      "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "scripts/auditLearnerCardDistribution.mjs",
+      "--check"
+    ],
+    "exitCode": 0,
+    "log": "work/evidence/T66/implementation-2026-10-02/validation/build-09.log"
+  }
+]
