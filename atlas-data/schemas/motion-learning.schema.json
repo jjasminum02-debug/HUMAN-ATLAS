@@ -84,7 +84,8 @@
           "enum": [
             "canonical_claim",
             "ai_field",
-            "authoring_record"
+            "authoring_record",
+            "source_family_record"
           ]
         },
         "field": {
@@ -249,7 +250,8 @@
           "type": "string",
           "enum": [
             "canonical_bound",
-            "unmapped"
+            "unmapped",
+            "source_family_bound"
           ]
         },
         "jointBindingNote": {
@@ -317,6 +319,9 @@
             "muscle",
             "bone"
           ]
+        },
+        "sourceFamilyId": {
+          "$ref": "#/$defs/Id"
         }
       }
     },
@@ -391,7 +396,7 @@
         },
         "targetJointIds": {
           "type": "array",
-          "minItems": 1,
+          "minItems": 0,
           "items": {
             "$ref": "#/$defs/Id"
           },
@@ -429,6 +434,9 @@
             "$ref": "#/$defs/EvidenceRef"
           },
           "uniqueItems": true
+        },
+        "sourceFamilyId": {
+          "$ref": "#/$defs/Id"
         }
       }
     },
@@ -501,7 +509,14 @@
           ]
         },
         "side": {
-          "$ref": "#/$defs/Side"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Side"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "resourceKey": {
           "$ref": "#/$defs/Id"
@@ -597,6 +612,9 @@
             "muscle",
             "bone"
           ]
+        },
+        "sourceFamilyId": {
+          "$ref": "#/$defs/Id"
         }
       }
     },

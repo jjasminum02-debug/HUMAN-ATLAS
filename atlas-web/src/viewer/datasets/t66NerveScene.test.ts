@@ -32,13 +32,13 @@ test('T66 all native nerve resources retain finite unit-normal topology, source 
 });
 test('T66 typed bones share the validated clip and cannot accept a muscle, wrong side or nonmoving primary binding',async()=>{
  const b=JSON.parse(await readFile(root+'atlas-data/motion/motion-learning.json','utf8')) as MotionLearningBundle;
- const actions=b.muscleActions.filter(a=>a.subjectKind==='bone');assert.equal(actions.length,27);
+ const actions=b.muscleActions.filter(a=>a.subjectKind==='bone');assert.equal(actions.length,199);
  for(const a of actions){
   const d=b.motionDefinitions.find(d=>d.actionId===a.id)!,asset=b.motionAssets.find(s=>s.motionDefinitionId===d.id)!;
   assert.equal(assessMotionCapability(a,d,asset).hasTechnicallyCompatibleClip,true);
   const primary=asset.sourceBinding!.members.find(m=>m.sourceKey===asset.sourceBinding!.subjectSourceKey)!;assert.equal(primary.role,'moving_structure');
   assert.equal(assessMotionCapability({...a,subjectKind:'muscle'},d,asset).hasTechnicallyCompatibleClip,false);
-  assert.equal(assessMotionCapability(a,d,{...asset,staticBinding:{...asset.staticBinding,side:'left'}}).hasTechnicallyCompatibleClip,false);
+  assert.equal(assessMotionCapability(a,d,{...asset,staticBinding:{...asset.staticBinding,side:d.side==='left'?'right':'left'}}).hasTechnicallyCompatibleClip,false);
   const bad=structuredClone(asset);bad.sourceBinding!.members.find(m=>m.sourceKey===bad.sourceBinding!.subjectSourceKey)!.role='deforming_muscle_surface';assert.equal(assessMotionCapability(a,d,bad).hasTechnicallyCompatibleClip,false);
  }
 });

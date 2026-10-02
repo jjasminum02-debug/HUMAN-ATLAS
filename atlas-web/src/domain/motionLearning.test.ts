@@ -40,10 +40,10 @@ const asset: MotionAsset = {
 };
 
 test("production bundle retains six original texts and adds one right ankle source-bound clip", () => {
-  assert.equal((production.muscleActions as MuscleAction[]).filter(a => a.subjectKind !== "bone").length, 8);
-  assert.equal((production.muscleActions as MuscleAction[]).filter(a => a.subjectKind === "bone").length, 27);
-  assert.equal(production.motionDefinitions.length, 29);
-  assert.equal(production.motionAssets.length, 29);
+  assert.equal((production.muscleActions as MuscleAction[]).filter(a => a.subjectKind !== "bone" && !a.sourceFamilyId).length, 8);
+  assert.equal((production.muscleActions as MuscleAction[]).filter(a => a.subjectKind === "bone" && !a.sourceFamilyId).length, 27);
+  assert.equal(production.motionDefinitions.length, 275);
+  assert.equal(production.motionAssets.length, 275);
   const actions = production.muscleActions as MuscleAction[];
   assert.deepEqual(actions.slice(0, 6).map((row) => row.subjectIds[0]), [
     "HA-M-000001", "HA-M-000002", "HA-M-000003", "HA-M-000004", "HA-M-000005", "HA-M-000006",

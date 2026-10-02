@@ -27,13 +27,13 @@ def verify(payload,frames):
             if key==bk or (role=='moving_structure' and members[bk]['role']=='moving_structure'):continue
             if any(rest.max(0)[i]<bp[0].min(0)[i]-.025 or rest.min(0)[i]>bp[0].max(0)[i]+.025 for i in range(3)):continue
             baseline=bounded_inside(rest,bp[0],bt);maximum=0;badIds=set()
-            for step in [2,4,6,8]:
+            for step in range(1, len(poses)):
                 fresh=bounded_inside(poses[step],bp[step],bt)&~baseline
                 maximum=max(maximum,int(fresh.sum()));badIds.update(np.flatnonzero(fresh).tolist())
             row={'sourceKey':key,'boneSourceKey':bk,'role':role,'baselineContainedVertices':int(baseline.sum()),'newContainedMaximum':maximum,'newVertexIds':sorted(badIds)}
             rows.append(row)
             if maximum: failures.append(row)
-    return {'familyId':payload['family']['id'],'testedPhases':[.25,.5,.75,1],
+    return {'familyId':payload['family']['id'],'testedPhases':[i/payload['family']['samples'] for i in range(1,payload['family']['samples']+1)],
         'method':'All original overview vertices; bounding rejection then exact triangle solid-angle winding >0.75. Retain original overlap separately. Does not prove continuous collision freedom or footprint accuracy.',
         'rows':rows,'failures':failures,'newContainmentMaximum':max([r['newContainedMaximum'] for r in rows],default=0)}
 

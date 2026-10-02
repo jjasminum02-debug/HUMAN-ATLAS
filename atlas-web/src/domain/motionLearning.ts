@@ -4,7 +4,7 @@ export type ContractionRole = "concentric" | "eccentric" | "isometric" | "stabil
 export type ActionRole = "agonist" | "antagonist" | "synergist" | "fixator" | "stabilizer" | "unspecified";
 
 export interface EvidenceRef {
-  layer: "canonical_claim" | "ai_field" | "authoring_record";
+  layer: "canonical_claim" | "ai_field" | "authoring_record" | "source_family_record";
   field: string;
   appliesTo: "action_explanation" | "posture_condition" | "stabilization_condition" | "context_role" | "motion_pose_range";
   contextId: string | null;
@@ -35,7 +35,9 @@ export interface MuscleAction {
   /** Explicit bridge to a learner-card action. Never inferred from a label. */
   learnerActionKey?: string;
   sideApplicability: Laterality;
-  jointBindingState: "canonical_bound" | "unmapped";
+  jointBindingState: "canonical_bound" | "source_family_bound" | "unmapped";
+  /** Authored source family, never a canonical anatomical joint identity. */
+  sourceFamilyId?: string;
   jointBindingNote: string | null;
   targetJointIds: string[];
   actionLabel: string;
@@ -59,6 +61,7 @@ export interface StaticReference {
 }
 
 export interface MotionDefinition {
+  sourceFamilyId?: string;
   id: string;
   actionId: string;
   instanceId: string;
@@ -106,7 +109,8 @@ export interface SourceMotionBindingMember {
   nodeId: string;
   sourceNamespace: string;
   role: "deforming_muscle_surface" | "deforming_passive_surface" | "moving_structure" | "co_moving_context" | "fixed_structure" | "passive_context";
-  side: Laterality;
+  /** Retain null for unlabelled axial context; never assign the subject's side. */
+  side: Laterality | null;
   resourceKey: string;
   lod: "overview" | "detail";
   sourceChunkSha256: string;
@@ -115,6 +119,7 @@ export interface SourceMotionBindingMember {
 }
 
 export interface SourceMotionBinding {
+  sourceFamilyId?: string;
   contractVersion: "t59-source-motion-binding-v1" | "t66-typed-source-motion-v2";
   subjectKind?: "muscle" | "bone";
   datasetNamespace: string;
@@ -246,6 +251,8 @@ export function assessMotionCapability(
     && sourceBinding.frameId === binding.frameId && sourceBinding.units === binding.units
     && sourceBinding.referencePoseId === binding.referencePoseId
     && sourceBinding.subjectSourceKey === definition.instanceId
+    && (sourceBinding.sourceFamilyId ?? null) === (definition.sourceFamilyId ?? null)
+    && (action.sourceFamilyId ?? null) === (definition.sourceFamilyId ?? null)
     && action.sourceSubjectKeys?.includes(definition.instanceId)
     && (sourceBinding.subjectKind ?? "muscle") === (action.subjectKind ?? "muscle")
     && sourceBinding.members.some((member) => member.sourceKey === definition.instanceId
@@ -253,6 +260,10 @@ export function assessMotionCapability(
     && new Set(sourceBinding.members.map((member) => member.sourceKey)).size === sourceBinding.members.length
     && new Set(sourceBinding.members.map((member) => member.nodeId)).size === sourceBinding.members.length);
   const compatible = definition.actionId === action.id
+    && (definition.sourceFamilyId
+      ? action.jointBindingState === "source_family_bound" && action.sourceFamilyId === definition.sourceFamilyId
+        && action.targetJointIds.length === 0 && definition.targetJointIds.length === 0
+      : action.jointBindingState === "canonical_bound" && !action.sourceFamilyId)
     && asset.motionDefinitionId === definition.id
     && definition.side === asset.staticBinding.side
     && binding.sceneId === ref.sceneId

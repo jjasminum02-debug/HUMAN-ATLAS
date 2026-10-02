@@ -71,9 +71,34 @@ def load_production_context() -> dict[str, Any]:
             if not record_path.is_relative_to(ROOT / "atlas-data/motion/authoring") or sha256_bytes(record_path.read_bytes()) != entry["sha256"]:
                 raise ValueError("Motion authoring record path/hash mismatch")
             record = json.loads(record_path.read_text())
-            if record["id"] != entry["id"] or record.get("schemaVersion") != "t59-authoring-record-v1" or record.get("rights") != {
+            if record["id"] != entry["id"] or record.get("schemaVersion") not in {"t59-authoring-record-v1", "t66-authoring-family-record-v1"} or record.get("rights") != {
                     "sourceOnly": True, "localUseRights": "inherits_pinned_source_decision", "publicRedistribution": "held", "humanReview": "not_performed"}:
                 raise ValueError("Authoring identity/source-only/rights contract differs")
+            if record.get("schemaVersion") == "t66-authoring-family-record-v1":
+                dependencies = record.get("verificationDependencies", [])
+                if not dependencies or record.get("measuredAnatomicalAxis") is not False:
+                    raise ValueError("Source family needs explicit hashed verification and authored-axis distinction")
+                for dependency in dependencies:
+                    dep = (ROOT / dependency["path"]).resolve()
+                    if not dep.is_relative_to(ROOT) or sha256_bytes(dep.read_bytes()) != dependency["sha256"]:
+                        raise ValueError("Source family verification dependency drift")
+                qc = json.loads((ROOT / record["contactQcPath"]).read_text())
+                geometry = json.loads((ROOT / record["geometryRecordPath"]).read_text())
+                glb_qc = json.loads((ROOT / record["glbPoseQcPath"]).read_text())
+                if (glb_qc.get("passed") is not True or glb_qc.get("motionSha256") != record["motionSha256"]
+                        or glb_qc.get("testedKeys") != geometry["family"]["samples"] + 1
+                        or glb_qc.get("familyId") != record["sourceFamilyId"]
+                        or {r["sourceKey"] for r in glb_qc["rows"]} != {r["sourceKey"] for r in geometry["members"]}
+                        or any(r.get("passed") is not True or r["maximumWorldErrorMetres"] > 1e-6 for r in glb_qc["rows"])):
+                    raise ValueError("Emitted GLB must preserve actual source-frame poses/reflections")
+                if qc["failures"] or qc["newContainmentMaximum"] or any(m["flips"] or m["minimumAreaRatio"] < .1 for m in geometry["surfaceMetrics"]):
+                    raise ValueError("Source family cannot register failed geometry/contact")
+                if record.get("sourceFamilyId") != geometry["family"]["id"] or record["side"] not in {"left", "right"}:
+                    raise ValueError("Source family identity/side differs")
+                if (record["motionSha256"] != geometry["motionSha256"] or record["restSha256"] != geometry["restSha256"]
+                        or any(record["poseRange"][k] != geometry["family"][k] for k in ["axis", "pivotMetres", "endDegrees", "referencePoseId"])
+                        or not {record["contactQcPath"], record["geometryRecordPath"], record["glbPoseQcPath"]}.issubset({d["path"] for d in dependencies})):
+                    raise ValueError("Source family pose/geometry/verification differs")
             authoring_records[entry["id"]] = record
         for entry in registry.get("sources", []):
             for prefix in ("dataset", "rightsEvidence"):
@@ -141,6 +166,15 @@ def issue(code: str, path: str, message: str) -> dict[str, str]:
 
 
 def validate_evidence_ref(ref: dict[str, Any], path: str, context: dict[str, Any], issues: list[dict[str, str]]) -> None:
+    if ref["layer"] == "source_family_record":
+        record = context.get("authoringRecords", {}).get(ref["evidenceId"])
+        claim = next((c for c in record.get("claims", []) if c["id"] == ref["claimId"]), None) if record else None
+        if (not record or record.get("schemaVersion") != "t66-authoring-family-record-v1" or not claim
+                or ref["fieldEvidenceId"] is not None or claim["field"] != ref["field"]
+                or claim["appliesTo"] != ref["appliesTo"] or claim["contextId"] != ref["contextId"]
+                or value_hash(claim["value"]) != ref["valueHash"]):
+            issues.append(issue("invalid_source_family_reference", path, "Exact adopted source-family field/context/hash required; no canonical claim approval inferred."))
+        return
     if ref["layer"] == "authoring_record":
         record = context.get("authoringRecords", {}).get(ref["evidenceId"])
         if (ref["appliesTo"] != "motion_pose_range" or ref["field"] != "motion_pose_range"
@@ -246,6 +280,18 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
             issues.append(issue("bound_joint_ids_missing", f"{path}.targetJointIds", "Canonical-bound actions need joint IDs and no unmapped note."))
         if joint_state == "unmapped" and (action["targetJointIds"] or not isinstance(joint_note, str) or not joint_note.strip()):
             issues.append(issue("unmapped_joint_binding_incomplete", f"{path}.jointBindingNote", "Unmapped actions need an explicit reason and must not invent joint IDs."))
+        source_family = action.get("sourceFamilyId")
+        family_record = next((r for r in context.get("authoringRecords", {}).values() if r.get("sourceFamilyId") == source_family), None) if source_family else None
+        if joint_state == "source_family_bound":
+            if (not family_record or action["targetJointIds"] or not source_subjects or action["subjectIds"]
+                    or not isinstance(joint_note, str) or not joint_note.strip()
+                    or action["sideApplicability"] != family_record["side"]
+                    or not set(source_subjects).issubset(set(family_record["supportedSubjectKeys"]))):
+                issues.append(issue("source_family_action_binding_invalid", path, "Verified exact source family/subjects/side required, with no canonical joint/concept promotion."))
+            if family_record and any(ref["evidenceId"] != family_record["id"] or ref["layer"] != "source_family_record" for ref in action["sourceRefs"]):
+                issues.append(issue("source_family_action_evidence_mismatch", path, "Source action fields must bind the adopted family record."))
+        elif source_family:
+            issues.append(issue("unexpected_source_family_binding", path, "Source family IDs require the explicit source_family_bound state."))
         for joint_id in action["targetJointIds"]:
             structure = context["structures"].get(joint_id)
             if structure is None or structure.get("kind") != "joint":
@@ -292,10 +338,21 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
         action = actions.get(definition["actionId"])
         if action is None:
             issues.append(issue("orphan_motion_action", f"{path}.actionId", f"Unknown MuscleAction {definition['actionId']!r}."))
+        elif action["jointBindingState"] == "source_family_bound":
+            family = next((r for r in context.get("authoringRecords", {}).values() if r.get("sourceFamilyId") == definition.get("sourceFamilyId")), None)
+            if (not family or definition.get("sourceFamilyId") != action.get("sourceFamilyId")
+                    or definition["targetJointIds"] or definition["side"] != family["side"]
+                    or definition["endPoseId"] != family["poseRange"]["endPoseId"]
+                    or definition["staticReference"]["poseId"] != family["poseRange"]["referencePoseId"]
+                    or set(definition["movingStructureIds"]) != set(family["movingBoneKeys"])
+                    or set(definition["fixedStructureIds"]) != set(family["fixedBoneKeys"])):
+                issues.append(issue("motion_source_family_mismatch", path, "Definition must match adopted family side/pose/moving/fixed source structures."))
         elif action["jointBindingState"] != "canonical_bound":
             issues.append(issue("motion_action_joint_unmapped", f"{path}.actionId", "A motion definition requires canonical joint bindings; text-only unmapped actions cannot define a clip."))
         elif not set(definition["targetJointIds"]).issubset(set(action["targetJointIds"])):
             issues.append(issue("motion_action_joint_mismatch", f"{path}.targetJointIds", "Motion definition joints must be declared by its MuscleAction."))
+        if action and action["jointBindingState"] == "canonical_bound" and (not definition["targetJointIds"] or definition.get("sourceFamilyId")):
+            issues.append(issue("motion_canonical_joint_required", path, "Canonical motions retain nonempty canonical joint bindings and cannot use authored family IDs."))
         if action and action["sideApplicability"] in {"right", "left"} and definition["side"] != action["sideApplicability"]:
             issues.append(issue("motion_action_side_mismatch", f"{path}.side", "Motion laterality conflicts with the MuscleAction side applicability."))
         instance = context["instances"].get(definition["instanceId"])
@@ -324,7 +381,10 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
             if (structure is None or structure.get("kind") != "bone") and not (source_structure and source_structure.get("kind") == "skeletal_surface" and source_structure.get("sourceLabelSide") == definition["side"]):
                 issues.append(issue("invalid_moving_structure", f"{path}.movingStructureIds", f"Moving structure {structure_id!r} must resolve to a canonical bone."))
         for structure_id in definition["fixedStructureIds"]:
-            if structure_id not in context["structures"] and not (context.get("sourceInstances", {}).get(structure_id, {}).get("kind") == "skeletal_surface" and context["sourceInstances"][structure_id].get("sourceLabelSide") == definition["side"]):
+            source_fixed = context.get("sourceInstances", {}).get(structure_id, {})
+            adopted = next((r for r in context.get("authoringRecords", {}).values() if r.get("sourceFamilyId") == definition.get("sourceFamilyId") and r.get("sourceFamilyId")), None)
+            nullable_axial_context = bool(adopted and structure_id in adopted["fixedBoneKeys"] and source_fixed.get("sourceLabelSide") is None)
+            if structure_id not in context["structures"] and not (source_fixed.get("kind") == "skeletal_surface" and (source_fixed.get("sourceLabelSide") == definition["side"] or nullable_axial_context)):
                 issues.append(issue("orphan_fixed_structure", f"{path}.fixedStructureIds", f"Unknown canonical fixed structure {structure_id!r}."))
         for joint_id in definition["targetJointIds"]:
             structure = context["structures"].get(joint_id)
@@ -389,6 +449,16 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
             if source_binding.get("contractVersion") not in ["t59-source-motion-binding-v1", "t66-typed-source-motion-v2"]:
                 issues.append(issue("invalid_source_motion_contract", f"{path}.sourceBinding.contractVersion", "Source motion binding must use the T59 contract."))
             source_members = source_binding.get("members", [])
+            family_id = definition.get("sourceFamilyId")
+            if family_id:
+                family = next((r for r in context.get("authoringRecords", {}).values() if r.get("sourceFamilyId") == family_id), None)
+                if (not family or source_binding.get("sourceFamilyId") != family_id
+                        or asset["sha256"] != family["motionSha256"]
+                        or asset["staticBinding"]["sourceAssetSha256"] != family["restSha256"]
+                        or asset.get("poseControl", {}).get("endDegrees") != family["poseRange"]["endDegrees"]):
+                    issues.append(issue("source_family_asset_mismatch", path, "Exact adopted family/motion/rest bytes and authored angle required."))
+            elif source_binding.get("sourceFamilyId"):
+                issues.append(issue("unexpected_asset_source_family", path, "An asset cannot add a family missing from its definition."))
             source_keys = [row.get("sourceKey") for row in source_members if isinstance(row, dict)]
             node_ids = [row.get("nodeId") for row in source_members if isinstance(row, dict)]
             if not source_members or len(source_keys) != len(source_members) or len(set(source_keys)) != len(source_keys) or len(set(node_ids)) != len(node_ids):

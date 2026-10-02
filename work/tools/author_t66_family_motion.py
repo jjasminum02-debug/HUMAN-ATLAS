@@ -12,6 +12,20 @@ from derive_source_surface_motion import accessor_bytes, geometry_hash, append_b
 from source_surface_constraints import inside
 from t66_contact_correctives import wrap, arap_wrap
 
+def signed_quat(matrix):
+    """Preserve actual reflected source frames when glTF uses animated TRS.
+
+    A reflection cannot be represented by a quaternion. Keep its determinant
+    sign on X scale, matching Three.js Matrix4.decompose, then rotate the proper
+    orthonormal matrix. This changes derived T66 assets only.
+    """
+    proper=matrix.copy()
+    reflected=np.linalg.det(proper[:3,:3])<0
+    if reflected:proper[:3,0]*=-1
+    q,scale=quat(proper)
+    if reflected:scale[0]*=-1
+    return q,scale
+
 def bounded_inside(points,vertices,triangles):
     result=np.zeros(len(points),dtype=bool)
     ids=np.flatnonzero(((points>=vertices.min(0)-1e-8)&(points<=vertices.max(0)+1e-8)).all(1))
@@ -130,6 +144,9 @@ def author(payload):
             for step in range(1,samples+1):
                 R=rotation(axis,math.radians(degrees)*step/samples)
                 frame=deform(world,pivot,axis,degrees,step/samples,weights,payload.get('deformationMethod','linear_blend'))
+                if payload.get('arapShapeCorrectives',False):
+                    frame,corrective=arap_wrap(frame,world,idx,[],locked,force_shape=True)
+                    vectorCorrectives.append(corrective)
                 if payload.get('surfaceWrapCorrectives',False) or payload.get('arapContactCorrectives',False):
                     phaseContacts=[(ck,(cg[-1]-pivot)@R.T+pivot if ce['role']=='moving_structure' else cg[-1],cg[4],baseline)
                         for ck,(ce,cg,baseline) in relevant.items()]
@@ -143,11 +160,11 @@ def author(payload):
             for step in range(1,samples+1):values[step*samples+step-1]=1
             tracks.append((ni,'weights',values,'SCALAR'))
         elif role in ['moving_structure','co_moving_context']:
-            node.pop('matrix');q,sc=quat(M);node.update(translation=M[:3,3].tolist(),rotation=q,scale=sc)
+            node.pop('matrix');q,sc=signed_quat(M);node.update(translation=M[:3,3].tolist(),rotation=q,scale=sc)
             ts=[];qs=[]
             for step in range(samples+1):
                 R=rotation(axis,math.radians(degrees)*step/samples);MM=M.copy();MM[:3,:3]=R@M[:3,:3];MM[:3,3]=(M[:3,3]-pivot)@R.T+pivot
-                ts.extend(MM[:3,3].tolist());qs.extend(quat(MM)[0])
+                ts.extend(MM[:3,3].tolist());qs.extend(signed_quat(MM)[0])
                 if step:phaseFrames.append((world-pivot)@R.T+pivot)
             tracks.extend([(ni,'translation',ts,'VEC3'),(ni,'rotation',qs,'VEC4')])
         elif role not in ['fixed_structure','passive_context']:raise ValueError('unknown role')

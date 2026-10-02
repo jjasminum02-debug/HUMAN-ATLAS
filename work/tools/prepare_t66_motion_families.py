@@ -64,7 +64,7 @@ def prepare():
         # Family-specific educational ranges, not normative ROM. Direction is explicit in atlas frame.
         specs=[
           ('shoulder-flexion','어깨 앞쪽 굽힘','shoulder','Humerus',True,[-1,0,0],12,upper,['Scapula','Clavicle']),
-          ('shoulder-external-rotation','어깨 가쪽돌림','shoulder','Humerus',True,[0,1,0],8 if side=='right' else -8,upper,['Scapula','Clavicle']),
+          ('shoulder-external-rotation','어깨 가쪽돌림','shoulder','Humerus',True,[0,1,0],-8 if side=='right' else 8,upper,['Scapula','Clavicle']),
           ('elbow-flexion','팔꿈치 굽힘','elbow','Humerus',False,[-1,0,0],15,[bone('Radius',side),bone('Ulna',side)]+hand,['Humerus']),
           ('wrist-flexion','손목 굽힘','wrist','Radius',False,[-1,0,0],12,hand,['Radius','Ulna']),
           ('hip-flexion','엉덩관절 굽힘','hip','Femur',True,[-1,0,0],12,lower,['Hip bone']),

@@ -25,4 +25,8 @@ T35/T59 전체 근육 원장과 공통 rig/player/설명 계약으로 429 target
 
 현재 promptFile인 `06-T66-after-results-full.txt`가 과거 근육만의 범위보다 우선한다. 모든 뼈 typed 선택/공동 이동/실제 DOF, 관절 조절, native 신경 정적 주행 및 문헌 포착 맥락을 같은 scene에 연결한다. 병리 editor는 제외한다. 공통 writer가 family/weights/trajectory/corrective를 직접 작성하며 native rig 부재를 engineering 전체의 차단으로 쓰지 않는다. 자동 위임·새 thread는 금지한다.
 
-현재 실제 검증된 subset은 원본 오른쪽 앞정강근1 clip, 공유 clip을 선택하는 오른쪽 발 뼈27개, native static nerve195 표면이다. 최신 T66 결과와 blocker는 `work/reports/T66.md` 및 `work/evidence/T66/implementation-2026-10-02/final-blockers.json`이 기준이다. 새로운14 후보는 source contact12 실패/손목2 context 미완으로 미등록이다. 전체 큐의 추가 작성·통합 책임이 남으므로 계획/표 작성/기존 subset 합격만으로 T66을 passed 처리하지 않는다. 전체 0-gap이나 전수 PNG gate를 복구하는 것도 아니다.
+현재 검증된 subset은 기존 오른쪽 앞정강근 clip과 새 source-family GLB 6개다. 손목 굽힘·어깨 가쪽돌림·엉덩관절 벌림을 좌우에 등록했다. 선택 가능한 source 근육 표면 관찰75개와 고유 source 뼈120개/뼈-family 연결199개는 각각 실제 표면의 관찰과 공동 이동 수다. 근육 주작용 clip은 기존1개이며, 모든 근육 작용/활성도/target extent나 독립 DOF 완료로 승격하지 않는다. native static nerve195 표면은 보존한다.
+
+source-only family는 명시적인 `source_family_bound` 계약으로 정확한 sourceKey/측/frame/pose/생성 GLB/기하·접촉 근거를 결속한다. 기존 canonical joint 계약은 유지하며 HA ID가 없다는 이유로 검증된 source-local 관찰 전체를 금지하지 않는다. 실제 GLB의 signed scale/quaternion/translation/morph를 모든 authored key에서 재생해 원본 frame 좌표와 대조해야 한다. 왼쪽 반사 변환 결함을 발견해 r13에서 고쳤고, 이상적 Python trajectory만으로 export placement를 합격 처리하지 않는다. 교육용 작성값은 출처 실측 정상축/부착 footprint/정상 ROM이 아니다.
+
+최신 T66 결과와 blocker는 `work/reports/T66.md`, `work/evidence/T66/implementation-2026-10-02/final-blockers.json`이 기준이다. 손목 context 차단은 해결했다. 어깨 굽힘·팔꿈치 굽힘·엉덩관절 굽힘의6 후보는 기하/접촉 실패이며 무릎2 후보는 fractional geometry/contact가 통과해도 슬개골·넙다리네갈래근 협응 작성이 남았다. 척추·전완·손발가락·비관절 가족과 full232 source 큐 책임도 남았다. 현재 `partial`을 유지한다. 전체 0-gap·전수 PNG·사람 승인 gate를 복구하지 않는다.

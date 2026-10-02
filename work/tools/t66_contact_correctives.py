@@ -51,7 +51,7 @@ def wrap(frame,rest,idx,contacts,locked):
         frame=original+correction
     return frame,{'contactPushes':records,'maximumCorrectiveMetres':float(np.linalg.norm(correction,axis=1).max()),'correctiveVectors':correction.tolist()}
 
-def arap_wrap(frame,rest,idx,contacts,locked):
+def arap_wrap(frame,rest,idx,contacts,locked,force_shape=False):
     """Local rest-edge-preserving corrective with exact authored endpoint constraints.
 
     Contact targets derive only from actual source triangles. The independent
@@ -70,8 +70,8 @@ def arap_wrap(frame,rest,idx,contacts,locked):
             q+=direction/np.maximum(length,1e-15)[:,None]*.00015
             for v,target in zip(free,q):pins[int(v)]=target
             records.append({'sourceKey':key,'pass':contactPass,'vertexIndices':free.tolist(),'maximumPushMetres':float(length.max())})
-        if not records:break
-        for iteration in range(100):
+        if not records and not force_shape:break
+        for iteration in range(300 if force_shape else 100):
             current=x[i]-x[j];cov=np.zeros((len(x),3,3));outer=w[:,None,None]*current[:,:,None]*d[:,None,:]
             np.add.at(cov,i,outer);np.add.at(cov,j,outer)
             u,_,vt=np.linalg.svd(cov);rot=u@vt;bad=np.linalg.det(rot)<0;u[bad,:,-1]*=-1;rot=u@vt
@@ -80,4 +80,5 @@ def arap_wrap(frame,rest,idx,contacts,locked):
             target=sums/np.maximum(degree,1)[:,None]
             x=.5*x+.5*(.98*target+.02*original)
             for v,value in pins.items():x[v]=value
+        if force_shape and not contacts:break
     return x,{'contactPushes':records,'correctiveVectors':(x-original).tolist(),'maximumCorrectiveMetres':float(np.linalg.norm(x-original,axis=1).max()),'method':'authored_rest_edge_arap_not_measured_physiology'}

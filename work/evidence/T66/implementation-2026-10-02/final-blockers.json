@@ -6,93 +6,58 @@
     {
       "id": "T66-B1",
       "kind": "actual_authored_geometry_defect",
-      "summary": "12 authored family candidates have new source-bone containment. The geometry exporter rejects folded corrective trials. These candidates are unregistered.",
+      "summary": "Six shoulder-flexion/elbow-flexion/hip-flexion candidates remain rejected: folded/collapsed surface or new bone-to-bone containment. Supported six families were corrected and adopted separately.",
       "familyResults": [
         {
-          "familyId": "shoulder-flexion-left",
-          "newContainmentMaximum": 73,
-          "conflictingPairs": 5
+          "id": "shoulder-flexion-left",
+          "status": "geometry_rejected",
+          "error": "folded/collapsed authored geometry ZA-c7010a9-b20b574e456449c5d571c7a1: 1/0.19247824563347124",
+          "newContainmentMaximum": null,
+          "inputPath": "work/evidence/T66/implementation-2026-10-02/contact-production-r6/shoulder-flexion-left/input.json"
         },
         {
-          "familyId": "shoulder-external-rotation-left",
-          "newContainmentMaximum": 24,
-          "conflictingPairs": 3
+          "id": "elbow-flexion-left",
+          "status": "geometry_rejected",
+          "error": "folded/collapsed authored geometry ZA-c7010a9-b20b574e456449c5d571c7a1: 153/0.0343845758876434",
+          "newContainmentMaximum": null,
+          "inputPath": "work/evidence/T66/implementation-2026-10-02/contact-production-r6/elbow-flexion-left/input.json"
         },
         {
-          "familyId": "elbow-flexion-left",
-          "newContainmentMaximum": 51,
-          "conflictingPairs": 2
+          "id": "hip-flexion-left",
+          "status": "source_contact_rejected",
+          "error": null,
+          "newContainmentMaximum": 3,
+          "inputPath": "work/evidence/T66/implementation-2026-10-02/contact-production-r6/hip-flexion-left/input.json"
         },
         {
-          "familyId": "hip-flexion-left",
-          "newContainmentMaximum": 65,
-          "conflictingPairs": 3
+          "id": "shoulder-flexion-right",
+          "status": "geometry_rejected",
+          "error": "folded/collapsed authored geometry ZA-c7010a9-a0c2ea00609e874a7faa926d: 1/0.19247897066923117",
+          "newContainmentMaximum": null,
+          "inputPath": "work/evidence/T66/implementation-2026-10-02/contact-production-r6/shoulder-flexion-right/input.json"
         },
         {
-          "familyId": "hip-abduction-left",
-          "newContainmentMaximum": 6,
-          "conflictingPairs": 1
+          "id": "elbow-flexion-right",
+          "status": "geometry_rejected",
+          "error": "folded/collapsed authored geometry ZA-c7010a9-a0c2ea00609e874a7faa926d: 153/0.034380081750379966",
+          "newContainmentMaximum": null,
+          "inputPath": "work/evidence/T66/implementation-2026-10-02/contact-production-r6/elbow-flexion-right/input.json"
         },
         {
-          "familyId": "knee-flexion-left",
-          "newContainmentMaximum": 45,
-          "conflictingPairs": 3
-        },
-        {
-          "familyId": "shoulder-flexion-right",
-          "newContainmentMaximum": 73,
-          "conflictingPairs": 5
-        },
-        {
-          "familyId": "shoulder-external-rotation-right",
-          "newContainmentMaximum": 24,
-          "conflictingPairs": 3
-        },
-        {
-          "familyId": "elbow-flexion-right",
-          "newContainmentMaximum": 51,
-          "conflictingPairs": 2
-        },
-        {
-          "familyId": "hip-flexion-right",
-          "newContainmentMaximum": 65,
-          "conflictingPairs": 3
-        },
-        {
-          "familyId": "hip-abduction-right",
-          "newContainmentMaximum": 6,
-          "conflictingPairs": 1
-        },
-        {
-          "familyId": "knee-flexion-right",
-          "newContainmentMaximum": 45,
-          "conflictingPairs": 3
+          "id": "hip-flexion-right",
+          "status": "source_contact_rejected",
+          "error": null,
+          "newContainmentMaximum": 3,
+          "inputPath": "work/evidence/T66/implementation-2026-10-02/contact-production-r6/hip-flexion-right/input.json"
         }
       ],
       "evidence": [
-        "work/evidence/T66/implementation-2026-10-02/family-contact-summary.json",
-        "work/evidence/T66/implementation-2026-10-02/contact-corrective-trial.json",
-        "work/evidence/T66/implementation-2026-10-02/arap-corrective-trial.json"
+        "work/evidence/T66/implementation-2026-10-02/contact-production-r6/production.json",
+        "work/evidence/T66/implementation-2026-10-02/head-pivot-r10/summary.json",
+        "work/evidence/T66/implementation-2026-10-02/shape-correctives-r11/summary.json",
+        "work/evidence/T66/implementation-2026-10-02/contact-wrap-r12/summary.json"
       ],
-      "requiredFix": "Source-specific attachment masks / articular trajectory and contact-preserving deformation; retain source geometry and area/orientation contract."
-    },
-    {
-      "id": "T66-B2",
-      "kind": "engineering_implementation_remaining",
-      "summary": "Both wrist candidates have no extrinsic muscle deformation context. Zero sampled vertex containment does not make the normal joint context complete.",
-      "familyResults": [
-        {
-          "familyId": "wrist-flexion-left",
-          "newContainmentMaximum": 0,
-          "conflictingPairs": 0
-        },
-        {
-          "familyId": "wrist-flexion-right",
-          "newContainmentMaximum": 0,
-          "conflictingPairs": 0
-        }
-      ],
-      "requiredFix": "Use existing reviewed hand attachment context to author actual cross-joint muscle/tendon weights and validate intermediate geometry; do not register bones-only as completed normal motion."
+      "requiredFix": "Source-specific biceps/passive-context deformation and articular trajectory; preserve endpoint masks, range and geometry acceptance. No missing-source classification."
     },
     {
       "id": "T66-B3",
@@ -117,10 +82,40 @@
       ],
       "fullSourceQueuePath": "work/evidence/T66/implementation-2026-10-02/family-queue.json",
       "requiredFix": "Implement source-specific family trajectories and deformable source packages across the retained queue, then integrate only passing packages."
+    },
+    {
+      "id": "T66-B4",
+      "kind": "normal_joint_context_engineering_remaining",
+      "summary": "Knee fractional rotation candidates pass sampled orientation/area/contact, but the current moving/fixed contract lacks the actual patella/quadriceps mechanism. Candidates remain unregistered; geometry pass alone is not normal joint context approval.",
+      "familyIds": [
+        "knee-flexion-left",
+        "knee-flexion-right"
+      ],
+      "evidence": [
+        "work/evidence/T66/implementation-2026-10-02/corrective-trials-r9/summary.json"
+      ],
+      "requiredFix": "Use actual Patella source and reviewed quadriceps attachment context for an authored cooperative trajectory, retain source-side reflection in emitted GLB, and verify all intermediate poses and surrounding context before registration."
     }
   ],
   "dataGapsSeparate": {
     "nerveText": "90 of 98 native groups have observed static-model regional course context only; 93 have no confirmed direct entrapment support. Two abstract-index contexts and one surrounding-anatomy context remain explicitly separate.",
     "nativeRigOrMeasuredAxisMissing": "Does not prohibit authored engineering; does prohibit calling authored pivots measured physiological axes."
-  }
+  },
+  "resolvedProductBlockers": [
+    {
+      "id": "T66-B2",
+      "summary": "Wrist context repaired from exact numbered metacarpal/carpal words and explicit source evidence. Seven actual extrinsic deforming surfaces per side; proximal-only ulnar FCU retained as passive context. Both emitted GLB source frames/contact/representative UI passed.",
+      "evidence": [
+        "work/evidence/T66/implementation-2026-10-02/wrist-context-r4/",
+        "work/evidence/T66/implementation-2026-10-02/signed-trs-r13/production.json",
+        "work/evidence/T66/implementation-2026-10-02/browser-source-families-r13/ui-proof.json"
+      ]
+    }
+  ],
+  "continuationFixedDefects": [
+    "external-rotation-side-direction",
+    "negative-determinant-left-bone-GLB-placement",
+    "wrist-cross-joint-muscle-context",
+    "obsolete-canonical-joint-ID-prerequisite-for-source-only-pose-observation"
+  ]
 }

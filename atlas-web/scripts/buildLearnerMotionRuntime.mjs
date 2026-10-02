@@ -84,13 +84,34 @@ for (const rows of Object.values(projected.actions)) for (const row of rows) {
 // member contracts instead of shipping a copy of every member for every subject.
 const memberContracts = [];
 const memberIndex = new Map();
+const memberRows = [];
+const memberRowIndex = new Map();
+const sharedKeys = ["movingStructureIds", "fixedStructureIds", "rig", "staticReference", "staticBinding", "poseControl"];
+const shared = Object.fromEntries(sharedKeys.map(key => [key, []]));
+const sharedIndices = Object.fromEntries(sharedKeys.map(key => [key, new Map()]));
 const serialized = JSON.stringify(projected, (key, value) => {
+  if (sharedKeys.includes(key) && value != null) {
+    const signature = JSON.stringify(value);
+    if (!sharedIndices[key].has(signature)) {
+      sharedIndices[key].set(signature, shared[key].length); shared[key].push(value);
+    }
+    return `__sharedSourceMotion:${key}:${sharedIndices[key].get(signature)}__`;
+  }
   if (key !== "members" || !Array.isArray(value)) return value;
   const signature = JSON.stringify(value);
-  if (!memberIndex.has(signature)) { memberIndex.set(signature, memberContracts.length); memberContracts.push(value); }
+  if (!memberIndex.has(signature)) {
+    memberIndex.set(signature, memberContracts.length);
+    memberContracts.push(value.map(row => {
+      const signature = JSON.stringify(row);
+      if (!memberRowIndex.has(signature)) { memberRowIndex.set(signature, memberRows.length); memberRows.push(row); }
+      return memberRowIndex.get(signature);
+    }));
+  }
   return `__sharedMotionMembers${memberIndex.get(signature)}__`;
-}, 2).replace(/"__sharedMotionMembers(\d+)__"/g, (_, index) => `sourceMotionMembers[${index}]`);
-const output = `const sourceMotionMembers = ${JSON.stringify(memberContracts)} as const;\n\nconst learnerMotionRuntime = ${serialized} as const;\n\nexport default learnerMotionRuntime;\n`;
+}, 2).replace(/"__sharedMotionMembers(\d+)__"/g, (_, index) => `sourceMotionMembers[${index}]`)
+  .replace(/"__sharedSourceMotion:([A-Za-z]+):(\d+)__"/g, (_, key, index) => `sharedSourceMotion.${key}[${index}]`);
+const groups = `[${memberContracts.map(group => `[${group.map(index => `sourceMotionMemberRows[${index}]`).join(",")}]`).join(",")} ]`;
+const output = `const sourceMotionMemberRows = ${JSON.stringify(memberRows)} as const;\nconst sourceMotionMembers = ${groups} as const;\nconst sharedSourceMotion = ${JSON.stringify(shared)} as const;\n\nconst learnerMotionRuntime = ${serialized} as const;\n\nexport default learnerMotionRuntime;\n`;
 if (checkOnly) {
   const existing = await readFile(outputPath, "utf8").catch(() => "");
   if (existing !== output) throw new Error("Learner motion runtime is stale; rebuild from validated motion content");
