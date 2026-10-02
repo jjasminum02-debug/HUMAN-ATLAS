@@ -103,9 +103,12 @@ function assertAssetContract(asset: MotionAsset): void {
         || row.instanceMatrix.length !== 16 || !row.instanceMatrix.every(Number.isFinite))) {
       throw new Error("source_bound_surface의 source instance binding이 유효하지 않습니다.");
     }
-    if (!binding.members.some((row) => row.role === (binding.subjectKind === "bone" ? "moving_structure" : "deforming_muscle_surface") && row.sourceKey === binding.subjectSourceKey
+    const subjectRoles = binding.subjectKind === "bone"
+      ? new Set(["moving_structure", "fixed_structure"])
+      : new Set(["deforming_muscle_surface", "deforming_passive_surface"]);
+    if (!binding.members.some((row) => subjectRoles.has(row.role) && row.sourceKey === binding.subjectSourceKey
       && row.side === asset.staticBinding.side)) {
-      throw new Error("source_bound_surface에 같은 쪽 변형 근육 표면이 없습니다.");
+      throw new Error("source_bound_surface에 선택된 source instance와 일치하는 같은 쪽 변형 표면 또는 관절 구조가 없습니다.");
     }
     if (asset.illustration) throw new Error("source_bound_surface는 별도 경로 illustration을 허용하지 않습니다.");
   } else if (!asset.rig || !asset.illustration || asset.rig.nodeBindings.length === 0 || asset.illustration.trajectoryBindings.length === 0) {

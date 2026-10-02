@@ -472,13 +472,30 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
             if source_binding.get("referencePoseId") != binding.get("referencePoseId"):
                 issues.append(issue("source_motion_pose_mismatch", f"{path}.sourceBinding.referencePoseId", "Source motion must bind the exact static reference pose."))
             subject_kind = source_binding.get("subjectKind", "muscle")
-            subject_role = "moving_structure" if subject_kind == "bone" else "deforming_muscle_surface"
-            deforming = [row for row in source_members if isinstance(row, dict) and row.get("role") == subject_role]
+            subject_roles = {"moving_structure", "fixed_structure"} if subject_kind == "bone" else {"deforming_muscle_surface", "deforming_passive_surface"}
+            subject_members = [row for row in source_members if isinstance(row, dict)
+                and row.get("role") in subject_roles]
             source_subject = context.get("sourceInstances", {}).get(definition["instanceId"], {})
             if subject_kind == "bone" and (source_binding.get("contractVersion") != "t66-typed-source-motion-v2" or source_subject.get("kind") != "skeletal_surface"):
                 issues.append(issue("source_motion_subject_kind", path, "Bone motion requires a typed actual skeletal instance."))
-            if source_binding.get("subjectSourceKey") != definition["instanceId"] or not any(row.get("sourceKey") == definition["instanceId"] and row.get("side") == definition["side"] for row in deforming):
-                issues.append(issue("source_motion_subject_side_mismatch", f"{path}.sourceBinding.members", "The exact motion instance and side must be a declared deforming muscle surface."))
+            subject_role_in_pose = None
+            if subject_kind == "bone":
+                if definition["instanceId"] in definition.get("movingStructureIds", []):
+                    subject_role_in_pose = "moving_structure"
+                elif definition["instanceId"] in definition.get("fixedStructureIds", []):
+                    subject_role_in_pose = "fixed_structure"
+            else:
+                exact_subject_roles = [row.get("role") for row in source_members if isinstance(row, dict)
+                    and row.get("sourceKey") == definition["instanceId"]
+                    and row.get("side") == definition["side"]
+                    and row.get("role") in subject_roles]
+                subject_role_in_pose = exact_subject_roles[0] if len(exact_subject_roles) == 1 else None
+            if (source_binding.get("subjectSourceKey") != definition["instanceId"] or not any(
+                    row.get("sourceKey") == definition["instanceId"]
+                    and row.get("side") == definition["side"]
+                    and row.get("role") == subject_role_in_pose for row in subject_members)):
+                issues.append(issue("source_motion_subject_side_mismatch", f"{path}.sourceBinding.members",
+                    "The exact source instance, side, and moving/fixed/deforming role must match the authored pose."))
             for member_index, member in enumerate(source_members):
                 if not isinstance(member, dict):
                     continue

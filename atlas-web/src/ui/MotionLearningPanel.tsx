@@ -13,6 +13,7 @@ import {
   type MotionPlayerState,
 } from "../domain/motionPlayer";
 import type { LearnerMotionActionOption } from "../domain/motionLearning";
+import { motionSubjectExplanation, selectedMotionSubjectRole } from "../domain/motionSubjectPresentation.ts";
 import { loadAnimationScene } from "../viewer/animationSceneAdapter";
 import { AnimationPlaybackController } from "../viewer/animationPlayback";
 import type { SourceMotionHost } from "../viewer/datasets/sourceMotionHost.ts";
@@ -71,6 +72,7 @@ async function readMotionPackage(response: Response, signal: AbortSignal): Promi
 export function MotionLearningPanel({ actions, selectedActionId, onSelectAction, host, sourceContextKey, showActionPicker = true, muscleLayerEnabled = true, subjectKind = "muscle", subjectHidden = false }: Props) {
   const selectedAction = actions.find((action) => action.id === selectedActionId) ?? null;
   const candidate = selectedAction?.candidate ?? null;
+  const selectedSubjectRole = selectedMotionSubjectRole(candidate?.asset ?? null, sourceContextKey);
   const [state, setState] = useState<MotionPlayerState>(() => ({
     session: { status: "idle", definitionId: null, assetId: null, currentTimeSeconds: 0, playbackSpeed: 1, selectedStructureIds: [], errorMessage: null },
     selectedActionId,
@@ -358,6 +360,6 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
       />
       <output htmlFor="motion-progress">{progress}%</output>
     </div>
-    <p className="motion-player-note">{subjectKind === 'bone' ? '뼈가 관절 동작에 따라 함께 이동하는 교육용 시범입니다. 선택한 뼈에 독립적인 관절이 있다는 뜻은 아닙니다.' : '교육용 표면 변형은 개인의 실제 수축량이나 운동 범위를 재현하지 않습니다.'} 진행 막대는 시범의 재생 위치를 나타냅니다. 힘이나 근력의 비율이 아닙니다. 버튼을 다시 누르면 반복 시범을 멈추고 처음 자세로 부드럽게 복원됩니다. 진행 막대를 조절하면 해당 자세를 유지합니다. 카메라와 보기 설정은 유지됩니다.</p>
+    <p className="motion-player-note">{motionSubjectExplanation(subjectKind, selectedSubjectRole)} 진행 막대는 시범의 재생 위치를 나타냅니다. 힘이나 근력의 비율이 아닙니다. 버튼을 다시 누르면 반복 시범을 멈추고 처음 자세로 부드럽게 복원됩니다. 진행 막대를 조절하면 해당 자세를 유지합니다. 카메라와 보기 설정은 유지됩니다.</p>
   </section>;
 }

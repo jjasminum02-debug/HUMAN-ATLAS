@@ -256,7 +256,11 @@ export function assessMotionCapability(
     && action.sourceSubjectKeys?.includes(definition.instanceId)
     && (sourceBinding.subjectKind ?? "muscle") === (action.subjectKind ?? "muscle")
     && sourceBinding.members.some((member) => member.sourceKey === definition.instanceId
-      && member.role === (sourceBinding.subjectKind === "bone" ? "moving_structure" : "deforming_muscle_surface") && member.side === definition.side)
+      && (sourceBinding.subjectKind === "bone"
+        ? (member.role === "moving_structure" && definition.movingStructureIds.includes(definition.instanceId))
+          || (member.role === "fixed_structure" && definition.fixedStructureIds.includes(definition.instanceId))
+        : member.role === "deforming_muscle_surface" || member.role === "deforming_passive_surface")
+      && member.side === definition.side)
     && new Set(sourceBinding.members.map((member) => member.sourceKey)).size === sourceBinding.members.length
     && new Set(sourceBinding.members.map((member) => member.nodeId)).size === sourceBinding.members.length);
   const compatible = definition.actionId === action.id

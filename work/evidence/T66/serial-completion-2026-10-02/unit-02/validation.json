@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "t66-unit02-validation-v1",
+  "status": "implemented_verified",
+  "taskStatus": "in_progress_partial",
+  "families": [
+    "hip-flexion-left",
+    "hip-flexion-right",
+    "knee-flexion-left",
+    "knee-flexion-right"
+  ],
+  "counts": {
+    "registeredSelectorRows": 178,
+    "muscleSelectorRows": 50,
+    "boneSelectorRows": 128,
+    "uniqueAddedMuscleSourceKeys": 38,
+    "uniqueAddedBoneSourceKeys": 64,
+    "interpolationSurfaceRowsPassed": 50,
+    "browserScenariosPassed": 9,
+    "protectedPreexistingFilesHashChecked": 124
+  },
+  "geometry": {
+    "sampledTriangleFlips": 0,
+    "sampledNewContainment": 0,
+    "minimumSampledAreaRatio": 0.12312869700095488,
+    "interpolationSubdivisionsPerAuthoredSegment": 8,
+    "continuousCollisionFreedomClaimed": false,
+    "authoredTrajectoryIsMeasuredNormalAxis": false
+  },
+  "packages": {
+    "hip-flexion-left": {
+      "motionUri": "atlas-data/assets/motion/t66-unit02-hip-flexion-left/motion.glb",
+      "motionBytes": 2193060,
+      "motionSha256": "fa9ca35cae7f4e54eeeae201abc288ada4490ee955b4aeee1d2e95fb23a0260e",
+      "derivedUri": "atlas-data/assets/derived-glb/t66-unit02-hip-flexion-left/reference.glb",
+      "derivedBytes": 2149796,
+      "derivedSha256": "dbb58169b6a75fd77930765aca6ea0c0c0a57ba387e999aca0f83ea4219219a2",
+      "selectorRows": 48
+    },
+    "hip-flexion-right": {
+      "motionUri": "atlas-data/assets/motion/t66-unit02-hip-flexion-right/motion.glb",
+      "motionBytes": 2193888,
+      "motionSha256": "cb1667188606bb202ac0a765417a20627ae245cec35ccc54e70bc2c10eeda206",
+      "derivedUri": "atlas-data/assets/derived-glb/t66-unit02-hip-flexion-right/reference.glb",
+      "derivedBytes": 2150628,
+      "derivedSha256": "96df9c804d8a9d667670fa133fd376452be8f74cbfb23facddb28c79ad230322",
+      "selectorRows": 48
+    },
+    "knee-flexion-left": {
+      "motionUri": "atlas-data/assets/motion/t66-unit02-knee-flexion-left/motion.glb",
+      "motionBytes": 1364324,
+      "motionSha256": "a2319ee674b3df0054610ab4400c464de4a98566d88ad0f3b2a9f164222f9810",
+      "derivedUri": "atlas-data/assets/derived-glb/t66-unit02-knee-flexion-left/reference.glb",
+      "derivedBytes": 1330228,
+      "derivedSha256": "d5f52be46ff367cf97922b3b09aa1754d6c6050007a1a1065b75ed78f70a0481",
+      "selectorRows": 41
+    },
+    "knee-flexion-right": {
+      "motionUri": "atlas-data/assets/motion/t66-unit02-knee-flexion-right/motion.glb",
+      "motionBytes": 1364896,
+      "motionSha256": "725ee6c9e4ded012f29d6118482ddb11d6a1d89996549b83f66b46793c72650b",
+      "derivedUri": "atlas-data/assets/derived-glb/t66-unit02-knee-flexion-right/reference.glb",
+      "derivedBytes": 1330804,
+      "derivedSha256": "c43889d7e33597f5ecf3f8bf248aa5fcb488e434495647d079bfcd995b597539",
+      "selectorRows": 41
+    }
+  },
+  "browserEvidence": {
+    "path": "work/evidence/T66/serial-completion-2026-10-02/unit-02/browser/browser-checks.json",
+    "browser": "Google Chrome 154 headless via Playwright 1.62.1",
+    "viewports": [
+      {
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "width": 390,
+        "height": 844
+      }
+    ],
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "motionResponses": 9,
+    "failedMotionGlbResponses": 0,
+    "initialBootstrapRequestCancellations": 4,
+    "mobileOverflow": {
+      "scrollWidth": 390,
+      "viewport": 390
+    }
+  },
+  "preservation": {
+    "baselineHead": "5d4255ccac2790ef65beeef5b56e4821a43a4f2a",
+    "dirtyEntriesAtStart": 230,
+    "hashedRegularFilesAtStart": 131,
+    "nonOwnedBaselineFilesRecheckedUnchanged": 124,
+    "OpenSimStatusAtStart": [],
+    "sourceManifestSha256": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42",
+    "sourceOverlaySha256": "4a5028dd7c1bca3b142d7899cc99a425ad88d5837ca598d2d5f4ad612994be5c",
+    "haCanonicalBindingAdded": false,
+    "sourceOnly": true,
+    "humanReview": "not_performed",
+    "publicRedistribution": "held"
+  },
+  "limitations": [
+    "Authored poses are educational source observations, not measured normal joint axes, attachment coordinates, force/activation, or normal range of motion.",
+    "Quadriceps attachment evidence is qualitative and does not establish a measured footprint or independent patellar glide.",
+    "Geometry/contact checks sample authored keys and eight subdivisions; continuous collision freedom is not claimed.",
+    "Browser checks cover bilateral representative muscle and bone selections, not every selector row or whole-target extent.",
+    "Unit 01 learner-browser evidence remains blocked_by_environment and was not relabeled as a pass by this unit."
+  ],
+  "passed": true
+}

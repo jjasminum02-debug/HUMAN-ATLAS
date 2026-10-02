@@ -142,15 +142,16 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 if (activeGeometryHash !== member.geometrySha256 || motionGeometryHash !== member.geometrySha256)
                     throw new Error(`기본 geometry hash가 현재 장면과 derived motion 사이에 일치하지 않습니다: ${member.sourceKey}`);
                 if (motionNode.parent !== resource.scene) throw new Error(`motion surface는 고정된 scene root의 직접 child여야 합니다: ${member.nodeId}`);
-                if (binding.subjectKind === 'bone' && member.sourceKey === binding.subjectSourceKey) {
-                    if (row.kind !== 'bone' || member.role !== 'moving_structure' || member.side !== asset.staticBinding.side)
-                        throw new Error('뼈 subject는 실제 같은 쪽 moving bone이어야 합니다.');
-                    hasSubject = true;
-                }
-                if (member.role === 'deforming_muscle_surface') {
-                    if (row.kind !== 'muscle' || member.sourceKey !== binding.subjectSourceKey || member.side !== asset.staticBinding.side)
-                        throw new Error('변형 표면은 정확히 선택된 근육 sourceKey와 같은 쪽이어야 합니다.');
-                    hasSubject = true;
+                if (member.sourceKey === binding.subjectSourceKey) {
+                    if (binding.subjectKind === 'bone') {
+                        if (row.kind !== 'bone' || !['moving_structure', 'fixed_structure'].includes(member.role) || member.side !== asset.staticBinding.side)
+                            throw new Error('뼈 subject는 실제 같은 쪽 이동·고정 관절 구조여야 합니다.');
+                        hasSubject = true;
+                    } else {
+                        if (row.kind !== 'muscle' || !['deforming_muscle_surface', 'deforming_passive_surface'].includes(member.role) || member.side !== asset.staticBinding.side)
+                            throw new Error('근육 subject는 정확히 선택된 같은 쪽 변형 표면이어야 합니다.');
+                        hasSubject = true;
+                    }
                 }
                 const motionMesh = motionNode as THREE.Mesh;
                 const activeMatrix = new THREE.Matrix4().fromArray(member.instanceMatrix);

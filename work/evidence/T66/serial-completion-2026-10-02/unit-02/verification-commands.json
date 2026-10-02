@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "t66-unit02-check-run-v1",
+  "recordedAtLocal": "2026-10-03T07:46:03+09:00",
+  "checks": [
+    {
+      "name": "unit02-data-contract",
+      "command": "python3 work/evidence/T66/serial-completion-2026-10-02/unit-02/validate_unit02.py",
+      "cwd": ".",
+      "exitCode": 0,
+      "durationSeconds": 0.201,
+      "logPath": "work/evidence/T66/serial-completion-2026-10-02/unit-02/verification/unit02-data-contract.log",
+      "outputTail": "ft/reference.glb\",\n      \"derivedBytes\": 1330228,\n      \"derivedSha256\": \"d5f52be46ff367cf97922b3b09aa1754d6c6050007a1a1065b75ed78f70a0481\",\n      \"selectorRows\": 41\n    },\n    \"knee-flexion-right\": {\n      \"motionUri\": \"atlas-data/assets/motion/t66-unit02-knee-flexion-right/motion.glb\",\n      \"motionBytes\": 1364896,\n      \"motionSha256\": \"725ee6c9e4ded012f29d6118482ddb11d6a1d89996549b83f66b46793c72650b\",\n      \"derivedUri\": \"atlas-data/assets/derived-glb/t66-unit02-knee-flexion-right/reference.glb\",\n      \"derivedBytes\": 1330804,\n      \"derivedSha256\": \"c43889d7e33597f5ecf3f8bf248aa5fcb488e434495647d079bfcd995b597539\",\n      \"selectorRows\": 41\n    }\n  },\n  \"browserEvidence\": {\n    \"path\": \"work/evidence/T66/serial-completion-2026-10-02/unit-02/browser/browser-checks.json\",\n    \"browser\": \"Google Chrome 154 headless via Playwright 1.62.1\",\n    \"viewports\": [\n      {\n        \"width\": 1440,\n        \"height\": 1000\n      },\n      {\n        \"width\": 390,\n        \"height\": 844\n      }\n    ],\n    \"consoleErrors\": 0,\n    \"pageErrors\": 0,\n    \"motionResponses\": 9,\n    \"failedMotionGlbResponses\": 0,\n    \"initialBootstrapRequestCancellations\": 4,\n    \"mobileOverflow\": {\n      \"scrollWidth\": 390,\n      \"viewport\": 390\n    }\n  },\n  \"preservation\": {\n    \"baselineHead\": \"5d4255ccac2790ef65beeef5b56e4821a43a4f2a\",\n    \"dirtyEntriesAtStart\": 230,\n    \"hashedRegularFilesAtStart\": 131,\n    \"nonOwnedBaselineFilesRecheckedUnchanged\": 124,\n    \"OpenSimStatusAtStart\": [],\n    \"sourceManifestSha256\": \"56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42\",\n    \"sourceOverlaySha256\": \"4a5028dd7c1bca3b142d7899cc99a425ad88d5837ca598d2d5f4ad612994be5c\",\n    \"haCanonicalBindingAdded\": false,\n    \"sourceOnly\": true,\n    \"humanReview\": \"not_performed\",\n    \"publicRedistribution\": \"held\"\n  },\n  \"limitations\": [\n    \"Authored poses are educational source observations, not measured normal joint axes, attachment coordinates, force/activation, or normal range of motion.\",\n    \"Quadriceps attachment evidence is qualitative and does not establish a measured footprint or independent patellar glide.\",\n    \"Geometry/contact checks sample authored keys and eight subdivisions; continuous collision freedom is not claimed.\",\n    \"Browser checks cover bilateral representative muscle and bone selections, not every selector row or whole-target extent.\",\n    \"Unit 01 learner-browser evidence remains blocked_by_environment and was not relabeled as a pass by this unit.\"\n  ],\n  \"passed\": true\n}\n"
+    },
+    {
+      "name": "motion-learning-schema",
+      "command": "python3 atlas-data/schemas/validate_motion_learning.py --check",
+      "cwd": ".",
+      "exitCode": 0,
+      "durationSeconds": 2.943,
+      "logPath": "work/evidence/T66/serial-completion-2026-10-02/unit-02/verification/motion-learning-schema.log",
+      "outputTail": "{\n  \"production\": {\n    \"valid\": true,\n    \"actionCount\": 463,\n    \"definitionCount\": 457,\n    \"assetCount\": 457,\n    \"issues\": []\n  }\n}\n"
+    },
+    {
+      "name": "motion-asset-source-policy",
+      "command": "python3 atlas-data/schemas/validate_motion_asset_sources.py",
+      "cwd": ".",
+      "exitCode": 0,
+      "durationSeconds": 0.146,
+      "logPath": "work/evidence/T66/serial-completion-2026-10-02/unit-02/verification/motion-asset-source-policy.log",
+      "outputTail": "PASS: 2 source candidates verified; production motion assets=457; source bytes unchanged\n"
+    },
+    {
+      "name": "focused-regressions",
+      "command": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --experimental-strip-types --test src/viewer/unit02HipKneeMotion.test.ts src/viewer/animationSceneAdapter.test.ts src/domain/motionSubjectPresentation.test.ts",
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "durationSeconds": 0.208,
+      "logPath": "work/evidence/T66/serial-completion-2026-10-02/unit-02/verification/focused-regressions.log",
+      "outputTail": "✔ selected source role requires exact key and side (0.289208ms)\n✔ learner explanations distinguish fixed bone, moving bone, and passive muscle (0.124583ms)\n✔ GLTFLoader import keeps hierarchy, skin attributes, named node bindings and original clip tracks (6.790625ms)\n✔ illustrative path remains a distinct unskinned representation (0.770166ms)\n✔ bone motion plus illustrative path uses separate node and path bindings (1.675542ms)\nTHREE.GLTFLoader: Missing min/max properties for accessor POSITION.\nTHREE.GLTFLoader: Missing min/max properties for accessor POSITION.\n✔ T59 source-bound morph keeps the exact source node in the full scene and rejects whole-muscle transform tracks (1.616833ms)\n✔ frame, unit and source hash mismatch fail closed without rescaling (0.249542ms)\n✔ missing node binding and clip mismatch are rejected (0.82725ms)\n✔ import bundle disposes shared geometry, material and texture once and is idempotent (0.502083ms)\n✔ disposal helper deduplicates resources shared across independent roots (0.094208ms)\n✔ off-scene rig and path bindings are rejected while the active single scene still loads (0.967458ms)\n✔ off-scene skin joints and clip targets cannot accompany the returned active scene (0.9365ms)\n✔ external buffer and image URI are rejected before GLTFLoader can resolve them (0.424375ms)\n✔ unit-02 actual GLBs preserve exact bilateral hip/knee source frame, passive muscle deformation, patella motion and fixed structures (68.669ms)\nℹ tests 14\nℹ suites 0\nℹ pass 14\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 179.667208\n"
+    },
+    {
+      "name": "typecheck",
+      "command": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node node_modules/typescript/bin/tsc -b --pretty false",
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "durationSeconds": 4.035,
+      "logPath": "work/evidence/T66/serial-completion-2026-10-02/unit-02/verification/typecheck.log",
+      "outputTail": ""
+    },
+    {
+      "name": "learner-runtime-projection",
+      "command": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/buildLearnerMotionRuntime.mjs --check",
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "durationSeconds": 0.187,
+      "logPath": "work/evidence/T66/serial-completion-2026-10-02/unit-02/verification/learner-runtime-projection.log",
+      "outputTail": "{\"status\":\"passed\",\"selectors\":208,\"actions\":463,\"playableSourceBoundCandidates\":456}\n"
+    },
+    {
+      "name": "production-build",
+      "command": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node node_modules/vite/bin/vite.js build",
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "durationSeconds": 0.348,
+      "logPath": "work/evidence/T66/serial-completion-2026-10-02/unit-02/verification/production-build.log",
+      "outputTail": "t24-right-tibialis-anterior/ankle-dorsiflexion.glb               88.16 kB\ndist/atlas-data/assets/motion/t66-wrist-flexion-right/motion.glb                              591.62 kB\ndist/atlas-data/assets/motion/t66-wrist-flexion-left/motion.glb                               594.26 kB\ndist/atlas-data/assets/motion/t59-za-right-ankle/motion.glb                                 1,092.16 kB\ndist/atlas-data/assets/motion/t66-unit02-knee-flexion-left/motion.glb                       1,364.32 kB\ndist/atlas-data/assets/motion/t66-unit02-knee-flexion-right/motion.glb                      1,364.89 kB\ndist/atlas-data/assets/motion/t66-unit01-shoulder-flexion-right-source-frame-r4/motion.glb  1,518.56 kB\ndist/atlas-data/assets/motion/t66-unit01-shoulder-flexion-left-source-frame-r4/motion.glb   1,519.78 kB\ndist/atlas-data/assets/motion/t66-shoulder-external-rotation-right/motion.glb               2,027.30 kB\ndist/atlas-data/assets/motion/t66-shoulder-external-rotation-left/motion.glb                2,028.63 kB\ndist/atlas-data/assets/motion/t66-unit01-elbow-flexion-right-source-frame-r4/motion.glb     2,100.25 kB\ndist/atlas-data/assets/motion/t66-unit01-elbow-flexion-left-source-frame-r4/motion.glb      2,100.76 kB\ndist/atlas-data/assets/motion/t66-hip-abduction-left/motion.glb                             2,192.05 kB\ndist/atlas-data/assets/motion/t66-hip-abduction-right/motion.glb                            2,192.98 kB\ndist/atlas-data/assets/motion/t66-unit02-hip-flexion-left/motion.glb                        2,193.06 kB\ndist/atlas-data/assets/motion/t66-unit02-hip-flexion-right/motion.glb                       2,193.88 kB\ndist/assets/index-UUYMvEqZ.css                                                                  0.74 kB │ gzip:   0.44 kB\ndist/assets/App-C8Mkk1HF.css                                                                   40.27 kB │ gzip:   8.45 kB\ndist/assets/index-Cx04z6Rk.js                                                                 222.37 kB │ gzip:  69.95 kB\ndist/assets/App-jE8ts7WK.js                                                                 2,787.38 kB │ gzip: 387.53 kB\n\n✓ built in 241ms\n[plugin builtin:vite-reporter] \n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n"
+    },
+    {
+      "name": "execution-projection-sync",
+      "command": "python3 work/tools/sync_execution.py",
+      "cwd": ".",
+      "exitCode": 0,
+      "durationSeconds": 0.039,
+      "logPath": "work/evidence/T66/serial-completion-2026-10-02/unit-02/verification/execution-projection-sync.log",
+      "outputTail": "Updated 0 execution views from 1f2ffa760fc7\n"
+    },
+    {
+      "name": "execution-projection-check",
+      "command": "python3 work/tools/sync_execution.py --check",
+      "cwd": ".",
+      "exitCode": 0,
+      "durationSeconds": 0.03,
+      "logPath": "work/evidence/T66/serial-completion-2026-10-02/unit-02/verification/execution-projection-check.log",
+      "outputTail": "Execution projections match; no writes.\n"
+    }
+  ],
+  "allPassed": true,
+  "browserEvidencePath": "work/evidence/T66/serial-completion-2026-10-02/unit-02/browser/browser-checks.json"
+}

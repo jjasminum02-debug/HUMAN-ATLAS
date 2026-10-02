@@ -39,3 +39,12 @@ source-only family는 명시적인 `source_family_bound` 계약으로 정확한 
 - 구현 상태: GLB/loader/mixer/자동 계약 검증 완료. 실제 learner-browser 시각 확인은 Mac 잠금 오류로 미실행이며 pass로 세지 않는다.
 - T66은 계속 `in_progress / partial`; 부모 `nextUnit=author-and-integrate-normal-motion-bone-and-nerve` 유지.
 - 다음 수동 unit: `work/plans/t66-serial-completion-2026-10-02/02-T66-hip-knee.txt`. unit02 전에 unit01의 실제 learner-browser 확인이 필요하면 잠금 해제 후 그 확인만 재개한다.
+
+## 2026-10-03 직렬 내부 unit 02 실행 기록
+
+- 이번 책임: 좌우 고관절 굽힘 2개·무릎 굽힘 2개 candidate를 실제 변형/협응/같은 scene 선택으로 작성·등록.
+- 상태: implemented_verified; 4개 GLB package, 178 source selector relations(50 muscle/128 bone)을 공통 source-family/runtime 계약으로 검증했다. 근육 relation은 passive surface context, 뼈 role은 source별 moving/fixed로 유지한다.
+- 검증: 샘플링 geometry/contact, 실제 Chrome 9개 표본, 회귀 14/14, schema/source policy/runtime projection, typecheck, production build. 사람 검토·정상 관절축·정상 ROM·연속 충돌 자유·공개 재배포 권리는 승인되지 않았다.
+- evidence: work/evidence/T66/serial-completion-2026-10-02/unit-02/.
+- T66은 in_progress / partial이며 부모 nextUnit은 변경하지 않는다. 이번 실행 promptFile은 work/plans/t66-serial-completion-2026-10-02/02-T66-hip-knee.txt이다. unit 01의 실제 UI 환경 차단은 별도 미검증으로 유지한다.
+- 다음 수동 내부 unit 입력: work/plans/t66-serial-completion-2026-10-02/03-T66-shoulder-forearm-wrist.txt; 자동 실행 금지.
