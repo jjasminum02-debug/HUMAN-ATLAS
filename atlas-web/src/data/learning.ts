@@ -2,6 +2,7 @@ import learnerCardRuntime from "../../../atlas-data/terminology/learner-card-run
 import learnerMotionRuntime from "./learnerMotionRuntime.generated.ts";
 import { displayTerms, termText, type PilotCatalog } from "./catalog";
 import { learnerNameProjection, learnerSearchEntry, learnerVisibleTerms, mergeLearningConcepts, searchEntries, type SearchEntry } from "../domain/search";
+import learnerNerveGraph from "../../../atlas-data/terminology/learner-nerve-graph-t25.json";
 import type { LearnerFieldProjection } from "../domain/aiEvidence";
 import { learnerStructureUnavailability } from "../domain/learnerStructureSourceContent";
 import { learnerActionAppliesToSide } from "../domain/learnerActionText";
@@ -19,6 +20,27 @@ type LearnerCardRuntime = {
 };
 
 const cardRuntime = learnerCardRuntime as LearnerCardRuntime;
+type LearnerNerveConcept = {
+  key: string;
+  names: { koModern: string; koTraditional: string; en: string; latin: string };
+  searchTerms: string[];
+  sourceNativeEnglishName: string | null;
+  summary?: { course: string; motorRelation: string; variation: string };
+};
+export type LearnerMotorRelation = {
+  nerveKey: string;
+  targetEnglishConcept?: string;
+  targetSourceKeys: string[];
+  targetSide: "left" | "right" | null;
+  scope: "exact_side_matched_source_instance" | "unsided_named_whole_muscle_concept";
+  displayNote: string;
+};
+type LearnerNerveGraph = {
+  schemaVersion: "learner-nerve-graph-v1";
+  concepts: LearnerNerveConcept[];
+  motorRelations: LearnerMotorRelation[];
+};
+const nerveGraph = learnerNerveGraph as LearnerNerveGraph;
 type LearnerMotionRuntime = {
   schemaVersion: "learner-motion-runtime-v1";
   actions: Record<string, Array<{
@@ -111,4 +133,43 @@ export function structureSummary(conceptId: string, role: string) {
 /** Learner-safe text for the supported fibular nerve concepts; source evidence stays internal. */
 export function nerveLearningForLearner(englishName: string) {
   return cardRuntime.nerveLearning[englishName] ?? null;
+}
+
+/** Nerve terms are searchable aliases; evidence and review metadata stay in work/evidence. */
+export function nerveConceptsForLearner(query = "") {
+  const entries: SearchEntry[] = nerveGraph.concepts.map(concept => learnerSearchEntry(
+    concept.key,
+    concept.names.koModern,
+    [concept.names.koTraditional, concept.names.en, concept.names.latin, ...concept.searchTerms],
+  ));
+  return searchEntries(entries, query).flatMap(match => {
+    const concept = nerveGraph.concepts.find(row => row.key === match.entry.id);
+    return concept ? [{ concept, approximate: match.approximate }] : [];
+  });
+}
+
+export function nerveConceptForLearner(key: string) {
+  return nerveGraph.concepts.find(row => row.key === key) ?? null;
+}
+
+export function nerveConceptForSourceName(englishName: string) {
+  return nerveGraph.concepts.find(row => row.sourceNativeEnglishName === englishName) ?? null;
+}
+
+export function nerveNamesForSource(englishName: string) {
+  return nerveConceptForSourceName(englishName)?.names ?? null;
+}
+
+/** Both card directions read the same exact relation rows and preserve side/scope. */
+export function motorRelationsForSource(sourceKey: string): LearnerMotorRelation[] {
+  return nerveGraph.motorRelations.filter(row => row.targetSourceKeys.includes(sourceKey));
+}
+
+export function motorRelationsForNerve(nerveKey: string, selectedSide?: string | null): LearnerMotorRelation[] {
+  return nerveGraph.motorRelations.filter(row => row.nerveKey === nerveKey
+    && (row.scope !== "exact_side_matched_source_instance" || !selectedSide || row.targetSide === selectedSide));
+}
+
+export function nerveGraphForLearner() {
+  return nerveGraph;
 }

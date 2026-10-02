@@ -1,0 +1,253 @@
+{
+  "schemaVersion": "t25-browser-qa-v1",
+  "task": "T25",
+  "observedOn": "2026-10-02",
+  "browser": "Codex In-app Browser",
+  "baseUrl": "http://127.0.0.1:5173/",
+  "finalRoute": "/?source=ZA-c7010a9-54ae5266082b61f48ed8e83e",
+  "sourceCodeRevision": "post-T25 changes; local dev server, no deployment",
+  "visualSamples": [
+    {
+      "label": "390px mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentWidth": 390,
+      "bodyWidth": 390,
+      "horizontalOverflow": false,
+      "canvasCount": 1,
+      "stage": {
+        "left": 0,
+        "right": 390,
+        "width": 390
+      },
+      "card": {
+        "left": 12,
+        "right": 378,
+        "width": 366,
+        "height": 228,
+        "clientHeight": 226,
+        "scrollHeight": 1007,
+        "overflowY": "auto"
+      },
+      "motionPanel": {
+        "left": 33,
+        "right": 357,
+        "width": 324
+      },
+      "screenshot": {
+        "captured": true,
+        "savedPath": null,
+        "bytes": 8004,
+        "sha256": "b660883bb1191f4828734c08dbc71e548c6801dfbdfb79a4121ab38beda60ccd",
+        "capture": "browser tool output"
+      }
+    },
+    {
+      "label": "1024px tablet",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "documentWidth": 1024,
+      "bodyWidth": 1024,
+      "horizontalOverflow": false,
+      "canvasCount": 1,
+      "stage": {
+        "left": 0,
+        "right": 1024,
+        "width": 1024
+      },
+      "card": {
+        "left": 731,
+        "right": 1006,
+        "width": 275,
+        "height": 538,
+        "clientHeight": 536,
+        "scrollHeight": 1185,
+        "overflowY": "auto"
+      },
+      "motionPanel": {
+        "left": 752,
+        "right": 985,
+        "width": 233
+      },
+      "screenshot": {
+        "captured": true,
+        "savedPath": null,
+        "bytes": 15228,
+        "sha256": "3efcedd99078bebc6c56d49cd5560842194bde2b3c87f6524275069bc65d399d",
+        "capture": "browser tool output"
+      }
+    },
+    {
+      "label": "1440px desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "documentWidth": 1440,
+      "bodyWidth": 1440,
+      "horizontalOverflow": false,
+      "canvasCount": 1,
+      "stage": {
+        "left": 0,
+        "right": 1440,
+        "width": 1440
+      },
+      "card": {
+        "left": 1106,
+        "right": 1416,
+        "width": 310,
+        "height": 670,
+        "clientHeight": 668,
+        "scrollHeight": 1127,
+        "overflowY": "auto"
+      },
+      "motionPanel": {
+        "left": 1131,
+        "right": 1391,
+        "width": 260
+      },
+      "screenshot": {
+        "captured": true,
+        "savedPath": null,
+        "bytes": 38552,
+        "sha256": "49d172108397b7ea6ffe7f90333eabd280ad4e4562854f4fd71804ee028a2d3c",
+        "capture": "browser tool output"
+      }
+    },
+    {
+      "label": "final default browser state",
+      "viewport": {
+        "width": 825,
+        "height": 807
+      },
+      "selected": "right tibialis anterior source surface",
+      "restProgressPercent": 0,
+      "muscleLayerEnabled": true,
+      "threeNameCardVisible": true,
+      "localizedHighlightVisible": true,
+      "singleSceneCanvasCount": 1,
+      "screenshot": {
+        "captured": true,
+        "savedPath": null,
+        "bytes": 54907,
+        "sha256": "6a2c284b3a3687c1c4e09fe4c5a5a59c8f9483b2873b6beca4616e610fe3a420",
+        "capture": "browser tool output"
+      }
+    }
+  ],
+  "userFlows": [
+    {
+      "name": "keyboard nerve discovery",
+      "actions": [
+        "search 등쪽어깨신경",
+        "Enter",
+        "Enter on explanation result"
+      ],
+      "result": "dorsal scapular text card opened at ?nerveConcept=dorsal-scapular; name, literature-supported course/variation and unsided rhomboid concepts shown"
+    },
+    {
+      "name": "text-only sciatic and history",
+      "actions": [
+        "search 좌골신경",
+        "open text result",
+        "Back",
+        "Forward"
+      ],
+      "result": "search-only sciatic card states no verified learner course or 3D mesh; back/forward restored prior deep-fibular card and sciatic card"
+    },
+    {
+      "name": "side-specific deep-fibular to muscle",
+      "routes": [
+        "?source=ZA-NERVE-18b6239a408",
+        "?source=ZA-c7010a9-74ced50ada635db761f807e4",
+        "?source=ZA-NERVE-18b62399d08",
+        "?source=ZA-c7010a9-54ae5266082b61f48ed8e83e"
+      ],
+      "result": "left and right nerve-to-tibialis links remain exact-side; each matching three-name card and localized surface selection/highlight observed; reverse link returns to the nerve card"
+    },
+    {
+      "name": "same-scene clip playback",
+      "actions": [
+        "right tibialis anterior selected",
+        "play",
+        "pause",
+        "resume",
+        "choose 0.5x speed",
+        "scrub while paused",
+        "return to rest"
+      ],
+      "result": "existing T59 source-bound clip loaded in same canvas; pause held pose, speed altered the shared playback clock, scrub paused, return restored 0% rest while retaining selected card/camera"
+    },
+    {
+      "name": "muscle visibility guard",
+      "actions": [
+        "play clip",
+        "turn muscle layer off",
+        "attempted replay while hidden before code fix produced an unhelpful load error; fix added visibility contract",
+        "reloaded current code",
+        "turn muscle layer off",
+        "turn muscle layer on"
+      ],
+      "result": "while playing, disabling muscle layer cancels clip and resets to 0%; while hidden current build disables the motion CTA and explains how to enable muscle layer; re-enabling restores the selected card and playable CTA"
+    },
+    {
+      "name": "keyboard card navigation",
+      "actions": [
+        "search field entered by keyboard",
+        "Enter to show results",
+        "Enter to open text result",
+        "Back",
+        "Forward"
+      ],
+      "result": "URL and card state matched visible selected concept"
+    },
+    {
+      "name": "function text independent of clip support",
+      "actions": [
+        "open function tab",
+        "select 발목 등쪽굽힘과 발 안쪽번짐",
+        "select 오른쪽 발목 등쪽굽힘"
+      ],
+      "result": "text and selected action updated; the first action had no clip so its motion CTA was disabled with text-only guidance; switching to the clip-backed action re-enabled playback, without autoplay"
+    },
+    {
+      "name": "keyboard tab navigation",
+      "actions": [
+        "focus selected function tab",
+        "Home"
+      ],
+      "result": "keyboard moved focus and selection to the structure tab"
+    }
+  ],
+  "learnerTextAudit": {
+    "nameRows": [
+      "앞정강근",
+      "전경골근",
+      "Tibialis anterior muscle"
+    ],
+    "internalMarkerRegexMatches": [],
+    "checkedPatterns": [
+      "task IDs",
+      "ZA-/HA- internal identifiers",
+      "sourceKey/evidenceHash",
+      "humanReview/not_performed",
+      "rights",
+      "FIPAT/TAH"
+    ],
+    "nerveCourseDistinguishesStatic3DFromTextOnly": true
+  },
+  "console": {
+    "errors": 0,
+    "warnings": 0,
+    "observedAfterFinalLayerGuardAndResponsivePass": true
+  },
+  "limitations": [
+    "CUA screenshot pixels were rendered and hashed in browser tool output; no local PNG export was exposed by the browser bridge, so savedPath is null.",
+    "Rendered local selection/highlight confirms the existing surface path only; it does not approve full muscle extent, attachment footprint, anatomy, human review or public redistribution.",
+    "The one playable clip is the existing right tibialis anterior source-bound T59 asset; all other muscle surfaces remain unimplemented/held/unavailable per manifest."
+  ]
+}

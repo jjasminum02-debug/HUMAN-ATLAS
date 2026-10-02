@@ -1,0 +1,156 @@
+{
+  "schemaVersion": "t25-final-validation-v1",
+  "task": "T25",
+  "asOf": "2026-10-02",
+  "baselineHead": "d702460be4e799a609861ecf852ad61cd8e31a47",
+  "acceptance": {
+    "status": "passed",
+    "scope": "T25 common same-scene source motion player connection, typed learner muscle/nerve information, current all-muscle availability ledger and validated current user flows; not exhaustive content or all-muscle motion completion",
+    "productReadiness": "local_app_ready",
+    "contentCompleteness": "partial",
+    "unresolvedProductBlockers": []
+  },
+  "preservedDenominators": {
+    "productTargets": 542,
+    "productMemberships": 563,
+    "regions": 12,
+    "muscleTargets": 429,
+    "muscleMemberships": 447,
+    "sourceConcepts": 232,
+    "sourceSurfaces": 462,
+    "existingCanonicalHaBindings": 130,
+    "historical163": {
+      "total": 163,
+      "categories": {
+        "6": 6,
+        "20": 20,
+        "135": 135,
+        "2": 2
+      }
+    },
+    "workbookRows": 257
+  },
+  "coverageEvidence": {
+    "path": "work/evidence/T25/all-muscle-content-and-motion-coverage.json",
+    "sha256": "710c4e218d56bf29220ba4465275b5ffb12f4f8ba4e912a87efff6be32300642",
+    "counts": {
+      "exactTargetScopeOriginInsertionRows": 7,
+      "projectedOriginSurfaces": 459,
+      "originPlaceholderSurfaces": 2,
+      "missingOriginSurfaces": 1,
+      "projectedInsertionSurfaces": 461,
+      "originInsertionConflictAttachmentRecords": 1,
+      "latestAttachmentEvidenceRecords": 201,
+      "actionVerifiedConcepts": 5,
+      "actionVerifiedSurfaces": 10,
+      "motorRelationEdges": 4,
+      "motorRelationSurfaces": 6,
+      "motionReadySurfaces": 1,
+      "conceptsWithAnyMotionReadySurface": 1
+    }
+  },
+  "learnerNerveGraph": {
+    "path": "atlas-data/terminology/learner-nerve-graph-t25.json",
+    "concepts": 5,
+    "motorRelationEdges": 4,
+    "motorRelationSurfaces": 6,
+    "sourceNativeGeometryOnly": true,
+    "textOnlyConcepts": [
+      "sciatic",
+      "dorsal-scapular"
+    ],
+    "humanReview": "not_performed",
+    "publicRedistribution": "held",
+    "canonicalBindingsCreated": 0,
+    "newGeometryCreated": 0,
+    "sourceReviewPath": "work/evidence/T25/nerve-source-review.json"
+  },
+  "motion": {
+    "sourceSurfaceDenominator": 462,
+    "currentPlayableSourceSurfaces": 1,
+    "T59Readiness": {
+      "ready": 1,
+      "needsAuthoring": 458,
+      "unavailable": 3,
+      "manifest": "work/evidence/T59/authoring-run-manifest-r2.json"
+    },
+    "actualPlayableClip": "existing T59 right tibialis anterior; one source surface only, not target/group completeness"
+  },
+  "tests": {
+    "targetedNodeTests": {
+      "command": "node --experimental-strip-types --test src/domain/motionPlayer.test.ts src/viewer/animationPlayback.test.ts src/data/learnerNerveGraph.test.ts",
+      "passed": 23,
+      "failed": 0
+    },
+    "typecheck": "passed as part of pnpm run build"
+  },
+  "build": {
+    "command": "pnpm run build",
+    "status": "passed",
+    "checks": [
+      "learner card runtime --check",
+      "learner motion runtime --check",
+      "learning content validator",
+      "AI evidence validator",
+      "bone name validator",
+      "motion learning schema and fixtures",
+      "motion asset sources and source-byte preservation",
+      "T83 current-scope content audit",
+      "scene decoder QA",
+      "TypeScript build",
+      "Vite production build",
+      "learner distribution audit"
+    ],
+    "distributionLeakCount": 0,
+    "sourceAssetBytesChanged": false,
+    "knownWarning": "Vite App JavaScript chunk is 985.75 kB (minified), above 500 kB advisory threshold; build succeeds and no runtime regression was observed."
+  },
+  "browserEvidence": {
+    "path": "work/evidence/T25/browser-qa.json",
+    "sha256": "f837e95d469cd99903973a4c10f16d5da6d356d8387a7bb12071817ea80cf828",
+    "dimensions": [
+      390,
+      1024,
+      1440
+    ],
+    "singleCanvas": true,
+    "keyboardSearchBackForward": true,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "muscleLayerOffPlayerDisabled": true
+  },
+  "preservation": {
+    "path": "work/evidence/T25/preservation-check.json",
+    "baselineProtectedInputsChecked": 23,
+    "mismatches": 0,
+    "OpenSimHeadAndStatusUnchanged": true,
+    "sourceBytesUnchanged": true,
+    "userAttachmentWipUnchanged": true,
+    "T13DraftsUnchanged": true
+  },
+  "policy": {
+    "sourceOnly": "preserved per item",
+    "humanReview": "not_performed",
+    "publicRedistribution": "held",
+    "existingCanonicalHaBindings": 130,
+    "newCanonicalBindings": 0,
+    "geometryCreated": 0,
+    "sideInferred": false,
+    "T13DraftsPreserved": true,
+    "OpenSimModelsReadOnly": true
+  },
+  "buildCompatibilityChange": "work/tools/validate_t83_function_content.py now checks T83-owned clips rather than rejecting an unrelated existing T59 clip; historical T83 reports/evidence remain unchanged.",
+  "limitations": [
+    "The 429 target/447 membership and 232 concept/462 surface ledger is exhaustive as a disposition ledger, not exhaustive anatomical acceptance.",
+    "Only 7 origin/insertion rows are exact target-scoped; 459 surfaces have a learner origin summary (2 placeholders, 1 missing) and 461 have a learner insertion summary; display does not prove full extent/footprint.",
+    "Exact verified action text exists for 5 concepts/10 surfaces; 227 concepts lack an exact verified action row.",
+    "Four motor relations cover 6 surfaces only; absence from graph is not proof of absent innervation.",
+    "Only one source-bound motion clip is playable; remaining authoring and unavailable statuses remain in T59 manifest.",
+    "No independent human anatomical review or public redistribution permission was created.",
+    "Browser screenshots are hashed but retained in the CUA output rather than saved as PNG files."
+  ],
+  "report": {
+    "path": "work/reports/T25.md",
+    "sha256": "54b6ece31c278ee0be20c0b10ce14230a264821f3675e0d301320b8663d792f5"
+  }
+}

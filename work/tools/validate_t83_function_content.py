@@ -111,8 +111,14 @@ def main() -> None:
     playable = [asset for asset in motion["motionAssets"] if asset["technicalStatus"] == "binding_verified"]
     if t24_assets and any(asset["technicalStatus"] == "binding_verified" for asset in t24_assets):
         fail("T24 candidate was promoted to a playable clip")
-    if playable:
-        fail("T83 must not add or promote a playable clip")
+    t83_playable = []
+    for asset in playable:
+        definition = next((row for row in motion["motionDefinitions"] if row["id"] == asset["motionDefinitionId"]), None)
+        action = next((row for row in actions if definition and row["id"] == definition["actionId"]), None)
+        if asset["id"].startswith("T83-") or (definition and definition["id"].startswith("T83-")) or (action and action["id"].startswith("T83-")):
+            t83_playable.append(asset["id"])
+    if t83_playable:
+        fail(f"T83 must not add or promote its own playable clip: {t83_playable}")
 
     if len(runtime["actions"]) != 7:
         fail("expected only the six existing T21 action rows and one T24 text candidate")

@@ -6,6 +6,7 @@ import {
   changeMotionContext,
   createMotionPlayerState,
   failMotionAssetLoad,
+  pauseMotion,
   playMotion,
   resetMotionPose,
   seekMotionProgress,
@@ -95,6 +96,18 @@ test("progress seeks are clamped and pose reset is independent from speed and ca
   assert.equal(reset.session.currentTimeSeconds, 0);
   assert.equal(reset.session.playbackSpeed, 0.5);
   assert.deepEqual(reset.session.selectedStructureIds, []);
+});
+
+test("pause keeps the sampled pose and can resume without returning to rest", () => {
+  const { ready } = readyState();
+  const playing = playMotion(setMotionTime(playMotion(ready), 0.7));
+  const paused = pauseMotion(playing);
+  assert.equal(paused.session.status, "paused");
+  assert.equal(paused.session.currentTimeSeconds, playing.session.currentTimeSeconds);
+  assert.deepEqual(paused.session.selectedStructureIds, playing.session.selectedStructureIds);
+  const resumed = playMotion(paused);
+  assert.equal(resumed.session.status, "playing");
+  assert.equal(resumed.session.currentTimeSeconds, paused.session.currentTimeSeconds);
 });
 
 test("stale errors and malformed duration cannot replace a newer session", () => {
