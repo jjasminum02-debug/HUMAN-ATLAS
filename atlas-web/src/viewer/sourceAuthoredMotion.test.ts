@@ -76,14 +76,22 @@ test('dorsiflexion raises the actual anterior foot in the head-positive source f
   } finally { resource.dispose(); }
 });
 
-test('all emitted source-family clips preserve reflected frames and real rigid trajectories at every key', async () => {
+test('unit-01 bilateral flexion observations preserve signed source frames at keys and between keys in the real loader/mixer', async () => {
   const bundle = JSON.parse(await readFile(new URL('atlas-data/motion/motion-learning.json', root), 'utf8'));
+  const authoringRegistry = JSON.parse(await readFile(new URL('atlas-data/motion/authoring/registry.json', root), 'utf8'));
   const assets = bundle.motionAssets.filter((a: MotionAsset) => a.sourceBinding?.sourceFamilyId) as MotionAsset[];
-  const unique = [...new Map(assets.map(a => [a.uri, a])).values()];
-  assert.equal(unique.length, 6);
+  const allUnique = [...new Map(assets.map(a => [a.uri, a])).values()];
+  const unitFamilies = ['shoulder-flexion-left','shoulder-flexion-right','elbow-flexion-left','elbow-flexion-right'];
+  const families = new Set(allUnique.map((asset) => asset.sourceBinding!.sourceFamilyId!));
+  for (const family of unitFamilies) assert.ok(families.has(family), `missing source-family clip ${family}`);
+  const unique = allUnique.filter((asset) => unitFamilies.includes(asset.sourceBinding!.sourceFamilyId!));
+  assert.equal(unique.length, unitFamilies.length);
   for (const asset of unique) {
     const family = asset.sourceBinding!.sourceFamilyId!;
-    const record = JSON.parse(await readFile(new URL(`atlas-data/motion/authoring/t66-${family}.json`, root), 'utf8'));
+    const authoringEntry = authoringRegistry.records.find((row: { id: string }) => row.id === `T66-FAMILY-${family}-AUTHORING`);
+    assert.ok(authoringEntry, `missing registered authoring evidence for ${family}`);
+    const record = JSON.parse(await readFile(new URL(authoringEntry.path, root), 'utf8'));
+    const geometryRecord = JSON.parse(await readFile(new URL(record.geometryRecordPath, root), 'utf8'));
     const bytes = await readFile(new URL(asset.uri, root));
     const resource = await loadAnimationScene(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) as ArrayBuffer, asset);
     const mixer = new AnimationMixer(resource.scene);
@@ -92,8 +100,9 @@ test('all emitted source-family clips preserve reflected frames and real rigid t
       action.setLoop(LoopOnce, 0); action.clampWhenFinished = true; action.play();
       const axis = new Vector3(...record.poseRange.axis as [number, number, number]);
       const pivot = new Vector3(...record.poseRange.pivotMetres as [number, number, number]);
-      for (let key = 0; key <= 8; key++) {
-        const phase = key / 8;
+      const phaseSteps = geometryRecord.family.samples * 8;
+      for (let key = 0; key <= phaseSteps; key++) {
+        const phase = key / phaseSteps;
         mixer.setTime(asset.clip.durationSeconds * phase); resource.scene.updateMatrixWorld(true);
         const rotation = new Matrix4().makeRotationAxis(axis, record.poseRange.endDegrees * Math.PI / 180 * phase);
         for (const member of asset.sourceBinding!.members.filter(m => ['moving_structure', 'co_moving_context'].includes(m.role))) {
@@ -104,7 +113,8 @@ test('all emitted source-family clips preserve reflected frames and real rigid t
             const local = new Vector3().fromBufferAttribute(positions, vertex);
             const expected = local.clone().applyMatrix4(original).sub(pivot).applyMatrix4(rotation).add(pivot);
             const actual = local.applyMatrix4(mesh.matrixWorld);
-            assert.ok(actual.distanceTo(expected) <= 1e-6, `${family}/${member.sourceKey}/key${key}/vertex${vertex} source frame drift`);
+            const error = actual.distanceTo(expected);
+            assert.ok(error <= 1e-6, `${family}/${member.sourceKey}/sample${key}/${phase}/vertex${vertex} source frame drift (${error} m)`);
           }
         }
       }

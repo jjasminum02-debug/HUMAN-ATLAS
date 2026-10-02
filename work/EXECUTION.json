@@ -3198,13 +3198,13 @@
             "observedModelOnlyCourseGroups": 90,
             "dynamicNervePoses": 0,
             "entrapmentCoordinateBindings": 0,
-            "sourcePoseObservationSurfaces": 75,
+            "sourcePoseObservationSurfaces": 79,
             "mainFunctionSourceClipSurfaces": 1,
             "registeredBoneFamilyBindings": 199,
-            "uniquePlayableGLBPackages": 7,
-            "newRegisteredFamilyPackages": 6,
-            "remainingFamilyCandidates": 8,
-            "geometryOrContactRejectedCandidates": 6,
+            "uniquePlayableGLBPackages": 11,
+            "newRegisteredFamilyPackages": 10,
+            "remainingFamilyCandidates": 4,
+            "geometryOrContactRejectedCandidates": 2,
             "kneeNormalContextPendingCandidates": 2
           },
           "unresolvedProductBlockers": [
@@ -3219,7 +3219,13 @@
             "work/evidence/T66/implementation-2026-10-02/preservation.json",
             "work/evidence/T66/implementation-2026-10-02/signed-trs-r13/production.json",
             "work/evidence/T66/implementation-2026-10-02/validation-r13/results.json",
-            "work/evidence/T66/implementation-2026-10-02/browser-source-families-r13/ui-proof.json"
+            "work/evidence/T66/implementation-2026-10-02/browser-source-families-r13/ui-proof.json",
+            "work/evidence/T66/serial-completion-2026-10-02/unit-01/REPORT.md",
+            "work/evidence/T66/serial-completion-2026-10-02/unit-01/validation-2026-10-03.json",
+            "work/evidence/T66/serial-completion-2026-10-02/unit-01/browser-verification.json",
+            "work/evidence/T66/serial-completion-2026-10-02/unit-01/preservation.json",
+            "work/evidence/T66/serial-completion-2026-10-02/unit-01/final-glb-source-frame-validation-r4.json",
+            "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-family-registration-r4.json"
           ]
         },
         "wholeMuscleMotionGoal": {
@@ -3230,9 +3236,9 @@
           "sourceSurfaces": 462,
           "primaryPlayableSourceSurfaces": 1,
           "newFullTargetExtentApprovals": 0,
-          "sourcePoseObservationSurfaces": 75,
+          "sourcePoseObservationSurfaces": 79,
           "mainFunctionSourceClipSurfaces": 1,
-          "registeredNewFamilyPackages": 6
+          "registeredNewFamilyPackages": 10
         },
         "wholeBoneMotionGoal": {
           "status": "partial",
@@ -3252,10 +3258,40 @@
           "observedModelOnlyCourseGroups": 90,
           "dynamicGeometry": 0,
           "entrapmentCoordinates": 0
-        }
+        },
+        "serialUnitProgress": [
+          {
+            "unit": "01",
+            "promptFile": "work/plans/t66-serial-completion-2026-10-02/01-T66-deformation-repair.txt",
+            "engineeringStatus": "implemented_verified",
+            "actualLearnerUiStatus": "blocked_by_environment",
+            "implementedRejectedCandidates": 4,
+            "registeredFamilyPackagesBefore": 6,
+            "registeredFamilyPackagesAfter": 10,
+            "sourcePoseObservationSurfacesBefore": 75,
+            "sourcePoseObservationSurfacesAfter": 79,
+            "uniquePlayableGLBPackagesBefore": 7,
+            "uniquePlayableGLBPackagesAfter": 11,
+            "remainingFamilyCandidatesBefore": 8,
+            "remainingFamilyCandidatesAfter": 4,
+            "geometryOrContactRejectedCandidatesBefore": 6,
+            "geometryOrContactRejectedCandidatesAfter": 2,
+            "sourceOnly": true,
+            "publicRedistribution": "held",
+            "humanReview": "not_performed",
+            "evidence": [
+              "work/evidence/T66/serial-completion-2026-10-02/unit-01/REPORT.md",
+              "work/evidence/T66/serial-completion-2026-10-02/unit-01/validation-2026-10-03.json",
+              "work/evidence/T66/serial-completion-2026-10-02/unit-01/browser-verification.json",
+              "work/evidence/T66/serial-completion-2026-10-02/unit-01/preservation.json",
+              "work/evidence/T66/serial-completion-2026-10-02/unit-01/final-glb-source-frame-validation-r4.json",
+              "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-family-registration-r4.json"
+            ]
+          }
+        ]
       },
       "report": "work/reports/T66.md",
-      "promptFile": "work/plans/normal-motion-and-nerve-2026-10-02/06-T66-after-results-full.txt",
+      "promptFile": "work/plans/t66-serial-completion-2026-10-02/01-T66-deformation-repair.txt",
       "acceptanceScope": "T66 latest whole-muscle / whole-bone normal-motion authoring and native nerve-course integration; currently verified subset reported separately",
       "contractRevision": "app-completion-2026-10-01",
       "acceptanceContract": {
@@ -3301,20 +3337,22 @@
         "observedModelOnlyCourseGroups": 90,
         "dynamicNervePoses": 0,
         "entrapmentCoordinateBindings": 0,
-        "sourcePoseObservationSurfaces": 75,
+        "sourcePoseObservationSurfaces": 79,
         "mainFunctionSourceClipSurfaces": 1,
         "registeredBoneFamilyBindings": 199,
-        "uniquePlayableGLBPackages": 7,
-        "newRegisteredFamilyPackages": 6,
-        "remainingFamilyCandidates": 8,
-        "geometryOrContactRejectedCandidates": 6,
+        "uniquePlayableGLBPackages": 11,
+        "newRegisteredFamilyPackages": 10,
+        "remainingFamilyCandidates": 4,
+        "geometryOrContactRejectedCandidates": 2,
         "kneeNormalContextPendingCandidates": 2
       },
       "unresolvedProductBlockers": [
         "T66-B1",
         "T66-B3",
         "T66-B4"
-      ]
+      ],
+      "currentInternalUnit": "01",
+      "currentInternalUnitStatus": "engineering_verified_actual_learner_ui_blocked_by_environment"
     },
     "T85": {
       "title": "전체 지원 움직임·통합 앱 품질 감사",

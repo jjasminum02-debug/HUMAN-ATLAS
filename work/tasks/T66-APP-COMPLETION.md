@@ -30,3 +30,12 @@ T35/T59 전체 근육 원장과 공통 rig/player/설명 계약으로 429 target
 source-only family는 명시적인 `source_family_bound` 계약으로 정확한 sourceKey/측/frame/pose/생성 GLB/기하·접촉 근거를 결속한다. 기존 canonical joint 계약은 유지하며 HA ID가 없다는 이유로 검증된 source-local 관찰 전체를 금지하지 않는다. 실제 GLB의 signed scale/quaternion/translation/morph를 모든 authored key에서 재생해 원본 frame 좌표와 대조해야 한다. 왼쪽 반사 변환 결함을 발견해 r13에서 고쳤고, 이상적 Python trajectory만으로 export placement를 합격 처리하지 않는다. 교육용 작성값은 출처 실측 정상축/부착 footprint/정상 ROM이 아니다.
 
 최신 T66 결과와 blocker는 `work/reports/T66.md`, `work/evidence/T66/implementation-2026-10-02/final-blockers.json`이 기준이다. 손목 context 차단은 해결했다. 어깨 굽힘·팔꿈치 굽힘·엉덩관절 굽힘의6 후보는 기하/접촉 실패이며 무릎2 후보는 fractional geometry/contact가 통과해도 슬개골·넙다리네갈래근 협응 작성이 남았다. 척추·전완·손발가락·비관절 가족과 full232 source 큐 책임도 남았다. 현재 `partial`을 유지한다. 전체 0-gap·전수 PNG·사람 승인 gate를 복구하지 않는다.
+
+
+## 직렬 실행 기록 — 내부 unit 01
+
+- 실행 promptFile: `work/plans/t66-serial-completion-2026-10-02/01-T66-deformation-repair.txt`
+- 책임: 양측 어깨 굽힘·팔꿈치 굽힘 short-head rejected surface candidate 4개의 deformation repair 및 기존 단일 scene 등록.
+- 구현 상태: GLB/loader/mixer/자동 계약 검증 완료. 실제 learner-browser 시각 확인은 Mac 잠금 오류로 미실행이며 pass로 세지 않는다.
+- T66은 계속 `in_progress / partial`; 부모 `nextUnit=author-and-integrate-normal-motion-bone-and-nerve` 유지.
+- 다음 수동 unit: `work/plans/t66-serial-completion-2026-10-02/02-T66-hip-knee.txt`. unit02 전에 unit01의 실제 learner-browser 확인이 필요하면 잠금 해제 후 그 확인만 재개한다.

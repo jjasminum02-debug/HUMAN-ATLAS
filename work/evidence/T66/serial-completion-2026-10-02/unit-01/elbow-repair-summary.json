@@ -1,0 +1,348 @@
+{
+  "schemaVersion": "t66-unit01-elbow-repair-summary-v1",
+  "familyCount": 2,
+  "passedCount": 2,
+  "sourceTopologyModified": false,
+  "collapseLocalization": {
+    "failedRevision": "t66-unit01-short-head-triangle-seed-corrective-r31",
+    "failedGlbPath": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-short-head-triangle-seed-corrective-r31/elbow-flexion-left/refined-motion.glb",
+    "failedGlbSha256": "ead965b0dc17f5d58591f55808372f2485e0e3cdce0a7b31fcdc319ef7385ffa",
+    "sampledActualEmittedGlb": true,
+    "sampleCount": 4097,
+    "minimumAreaRatio": 0.026953601599979612,
+    "seconds": 1.5498046875,
+    "phase": 0.77490234375,
+    "triangleIndex": 118,
+    "sourceVertexIndices": [
+      41,
+      49,
+      40
+    ],
+    "vertexWeightsFromAuthoredSourceField": {
+      "41": 0.7962117265761688,
+      "49": 0.7786709446531228,
+      "40": 0.8792221371002962
+    },
+    "fixedEndpointMaskOverlap": false,
+    "movingEndpointMaskOverlap": false,
+    "olderTwoTriangleDetail": [
+      {
+        "triangleIndex": 118,
+        "sourceVertexIndices": [
+          41,
+          49,
+          40
+        ],
+        "badSamples": [
+          {
+            "seconds": 1.552734375,
+            "phase": 0.7763671875,
+            "areaRatio": 0.08445760083224171,
+            "flipped": false
+          }
+        ],
+        "minimumAreaRatio": 0.08445760083224171,
+        "flippedSampleCount": 0
+      },
+      {
+        "triangleIndex": 191,
+        "sourceVertexIndices": [
+          52,
+          53,
+          72
+        ],
+        "badSamples": [
+          {
+            "seconds": 1.30078125,
+            "phase": 0.650390625,
+            "areaRatio": 0.09125048908324598,
+            "flipped": false
+          }
+        ],
+        "minimumAreaRatio": 0.09125048908324598,
+        "flippedSampleCount": 0
+      }
+    ],
+    "sourceGeometrySha256": "ffe0e775daa48c8ecb3141aa67dd0cb169f248a4f880385d1dde6ca83cee2d41",
+    "attachmentBoundaryInterpretation": "The exact face is inside the authored deformation-weight transition region and outside both locked endpoint vertex masks. This identifies an engineering transition-zone collapse only; it does not locate or measure a biological attachment footprint.",
+    "repairRevision": "t66-unit01-short-head-triangle-seed-corrective-r32",
+    "repairedSameTriangleAreaRatiosAtSameTime": [
+      {
+        "triangleIndex": 119,
+        "sourceVertexIndices": [
+          36,
+          50,
+          26
+        ],
+        "areaRatio": 0.11796273500954947
+      },
+      {
+        "triangleIndex": 49,
+        "sourceVertexIndices": [
+          29,
+          31,
+          18
+        ],
+        "areaRatio": 0.13962938315291973
+      },
+      {
+        "triangleIndex": 74,
+        "sourceVertexIndices": [
+          62,
+          45,
+          40
+        ],
+        "areaRatio": 0.25747139663411467
+      },
+      {
+        "triangleIndex": 367,
+        "sourceVertexIndices": [
+          155,
+          141,
+          137
+        ],
+        "areaRatio": 0.3007105909110967
+      },
+      {
+        "triangleIndex": 64,
+        "sourceVertexIndices": [
+          26,
+          22,
+          36
+        ],
+        "areaRatio": 0.3261791218467146
+      }
+    ],
+    "finalRightTriangleAtSameTime": [
+      {
+        "triangleIndex": 119,
+        "sourceVertexIndices": [
+          36,
+          50,
+          26
+        ],
+        "areaRatio": 0.11796514829789014
+      },
+      {
+        "triangleIndex": 49,
+        "sourceVertexIndices": [
+          29,
+          31,
+          18
+        ],
+        "areaRatio": 0.13963224292249007
+      },
+      {
+        "triangleIndex": 74,
+        "sourceVertexIndices": [
+          62,
+          45,
+          40
+        ],
+        "areaRatio": 0.2574719771026815
+      },
+      {
+        "triangleIndex": 367,
+        "sourceVertexIndices": [
+          155,
+          141,
+          137
+        ],
+        "areaRatio": 0.30063529649719817
+      },
+      {
+        "triangleIndex": 64,
+        "sourceVertexIndices": [
+          26,
+          22,
+          36
+        ],
+        "areaRatio": 0.326181582768677
+      }
+    ],
+    "rightPriorEmittedFailedReplayAvailable": false,
+    "rightPriorSourceCandidateStatus": "geometry_rejected with 153/0.034380081750379966 in T66 blocker; no earlier right-side emitted interpolation GLB was present in the inspected evidence."
+  },
+  "results": [
+    {
+      "familyId": "elbow-flexion-left",
+      "side": "left",
+      "priorBlockerStatus": "geometry_rejected",
+      "priorBlockerError": "folded/collapsed authored geometry ZA-c7010a9-b20b574e456449c5d571c7a1: 153/0.0343845758876434",
+      "priorInputPath": "work/evidence/T66/implementation-2026-10-02/contact-production-r6/elbow-flexion-left/input.json",
+      "sourceKey": "ZA-c7010a9-b20b574e456449c5d571c7a1",
+      "sourceName": "Short head of biceps brachii.l",
+      "sourceGeometrySha256": "ffe0e775daa48c8ecb3141aa67dd0cb169f248a4f880385d1dde6ca83cee2d41",
+      "sourceGeometryHashRecomputedFromPinnedOverview": "ffe0e775daa48c8ecb3141aa67dd0cb169f248a4f880385d1dde6ca83cee2d41",
+      "sourceGeometryMatchesPinned": true,
+      "sourceManifestSha256": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42",
+      "sourceTriangleCount": 484,
+      "sourceVertexCount": 238,
+      "priorAuthoredCorrection": {
+        "sourceTopologyShapeRepairTriangleIds": [
+          95,
+          110,
+          118,
+          126,
+          191,
+          294,
+          483
+        ],
+        "sourceTopologyDisplacementGroups": [
+          [
+            26,
+            30,
+            38,
+            50
+          ],
+          [
+            31,
+            36,
+            37
+          ],
+          [
+            40,
+            41,
+            49
+          ],
+          [
+            52,
+            53,
+            72
+          ],
+          [
+            63,
+            65,
+            66,
+            67,
+            68,
+            70,
+            71
+          ],
+          [
+            73,
+            74,
+            75,
+            76,
+            78,
+            80,
+            81,
+            82,
+            85
+          ]
+        ],
+        "groupEvidence": "source triangle-vertex neighborhood from emitted GLB defect detail; authored geometry repair only; not an attachment footprint"
+      },
+      "finalMotionPath": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-short-head-triangle-seed-corrective-r32/elbow-flexion-left/refined-motion.glb",
+      "finalMotionSha256": "0d46a99dacbe901a62e523fb8ac3d4caab8c30d029b63ac621c9eca806ca100f",
+      "finalInterpolationQcPath": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-short-head-triangle-seed-corrective-r32/elbow-flexion-left/glb-interpolation-qc.json",
+      "sampleCount": 2049,
+      "minimumAreaRatio": 0.10005150897544418,
+      "flippedFaceSamples": 0,
+      "newContainmentMaximum": 0,
+      "maximumAbsoluteEdgeRatioDelta": 2.9521788782533847,
+      "measuredAnatomicalAxis": false,
+      "measuredAttachmentFootprints": false,
+      "sourceTopologyModified": false,
+      "rights": {
+        "sourceOnly": true,
+        "localUseRights": "inherits_pinned_source_decision",
+        "publicRedistribution": "held",
+        "humanReview": "not_performed"
+      },
+      "fixedEndpointVertexCount": 17,
+      "movingEndpointVertexCount": 17,
+      "collapseNotClaimedForRightWithoutFailedRightReplay": true
+    },
+    {
+      "familyId": "elbow-flexion-right",
+      "side": "right",
+      "priorBlockerStatus": "geometry_rejected",
+      "priorBlockerError": "folded/collapsed authored geometry ZA-c7010a9-a0c2ea00609e874a7faa926d: 153/0.034380081750379966",
+      "priorInputPath": "work/evidence/T66/implementation-2026-10-02/contact-production-r6/elbow-flexion-right/input.json",
+      "sourceKey": "ZA-c7010a9-a0c2ea00609e874a7faa926d",
+      "sourceName": "Short head of biceps brachii.r",
+      "sourceGeometrySha256": "ffe0e775daa48c8ecb3141aa67dd0cb169f248a4f880385d1dde6ca83cee2d41",
+      "sourceGeometryHashRecomputedFromPinnedOverview": "ffe0e775daa48c8ecb3141aa67dd0cb169f248a4f880385d1dde6ca83cee2d41",
+      "sourceGeometryMatchesPinned": true,
+      "sourceManifestSha256": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42",
+      "sourceTriangleCount": 484,
+      "sourceVertexCount": 238,
+      "priorAuthoredCorrection": {
+        "sourceTopologyShapeRepairTriangleIds": [
+          95,
+          110,
+          118,
+          126,
+          191,
+          294,
+          483
+        ],
+        "sourceTopologyDisplacementGroups": [
+          [
+            26,
+            30,
+            38,
+            50
+          ],
+          [
+            31,
+            36,
+            37
+          ],
+          [
+            40,
+            41,
+            49
+          ],
+          [
+            52,
+            53,
+            72
+          ],
+          [
+            63,
+            65,
+            66,
+            67,
+            68,
+            70,
+            71
+          ],
+          [
+            73,
+            74,
+            75,
+            76,
+            78,
+            80,
+            81,
+            82,
+            85
+          ]
+        ],
+        "groupEvidence": "source triangle-vertex neighborhood from emitted GLB defect detail; authored geometry repair only; not an attachment footprint"
+      },
+      "finalMotionPath": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-short-head-triangle-seed-corrective-r33/elbow-flexion-right/refined-motion.glb",
+      "finalMotionSha256": "fc3b97050b188a99fff6602bfca06c89729ba9e4f6bba123f2ac101807cf781d",
+      "finalInterpolationQcPath": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-short-head-triangle-seed-corrective-r33/elbow-flexion-right/glb-interpolation-qc.json",
+      "sampleCount": 2049,
+      "minimumAreaRatio": 0.10005156165027015,
+      "flippedFaceSamples": 0,
+      "newContainmentMaximum": 0,
+      "maximumAbsoluteEdgeRatioDelta": 2.952185620815321,
+      "measuredAnatomicalAxis": false,
+      "measuredAttachmentFootprints": false,
+      "sourceTopologyModified": false,
+      "rights": {
+        "sourceOnly": true,
+        "localUseRights": "inherits_pinned_source_decision",
+        "publicRedistribution": "held",
+        "humanReview": "not_performed"
+      },
+      "fixedEndpointVertexCount": 17,
+      "movingEndpointVertexCount": 17,
+      "collapseNotClaimedForRightWithoutFailedRightReplay": false
+    }
+  ]
+}

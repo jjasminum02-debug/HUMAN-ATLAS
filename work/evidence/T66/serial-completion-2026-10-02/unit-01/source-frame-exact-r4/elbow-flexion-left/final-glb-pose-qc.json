@@ -1,0 +1,54 @@
+{
+  "familyId": "elbow-flexion-left",
+  "method": "Actual emitted GLB quaternion/translation/signed scale and morph buffers replay at authored keys; rigid structures compare to immutable source-frame trajectories while authored deforming surfaces require linked interpolation geometry/contact QC",
+  "motionSha256": "a263144376925c2ece792c965347f26911e6c6b9de4cc29dfc398983e8e3844d",
+  "testedKeys": 17,
+  "rows": [
+    {
+      "sourceKey": "ZA-c7010a9-b16edda753e6a1cc9cd9d4ed",
+      "maximumWorldErrorMetres": 1.202527129608097e-07,
+      "sourceFrameComparison": "exact_rigid_source_frame",
+      "passed": true,
+      "requiresGeometryQc": false,
+      "reflectionPreserved": true
+    },
+    {
+      "sourceKey": "ZA-c7010a9-68847f9641b9adb6808dc865",
+      "maximumWorldErrorMetres": 8.43587706305991e-08,
+      "sourceFrameComparison": "exact_rigid_source_frame",
+      "passed": true,
+      "requiresGeometryQc": false,
+      "reflectionPreserved": false
+    },
+    {
+      "sourceKey": "ZA-c7010a9-25e67d646be42500458282ca",
+      "maximumWorldErrorMetres": 8.507084891509525e-08,
+      "sourceFrameComparison": "exact_rigid_source_frame",
+      "passed": true,
+      "requiresGeometryQc": false,
+      "reflectionPreserved": false
+    },
+    {
+      "sourceKey": "ZA-c7010a9-b20b574e456449c5d571c7a1",
+      "sourceFrameComparison": "authored_surface_deformation",
+      "rigidCounterfactualDifferenceMetres": null,
+      "passed": true,
+      "requiresGeometryQc": true,
+      "reflectionPreserved": false,
+      "geometryQcPath": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r4/elbow-flexion-left/glb-interpolation-qc.json",
+      "geometryQcSha256": "94a7241f6819ab6fdf52bca847a142ca251b619a777317d4cffada1f427a3250"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-28cd9da98154c1615092d958",
+      "maximumWorldErrorMetres": 1.0108383221440915e-07,
+      "sourceFrameComparison": "exact_rigid_source_frame",
+      "passed": true,
+      "requiresGeometryQc": false,
+      "reflectionPreserved": true
+    }
+  ],
+  "maximumWorldErrorMetres": 1.202527129608097e-07,
+  "passed": true,
+  "anatomicalApproval": false,
+  "sourceFrameScope": "all rigid bones and co-moving source context compared to authored source-frame trajectories; exact short-head target surface is intentionally deforming and validated by the linked emitted-GLB interpolation geometry/contact QC"
+}

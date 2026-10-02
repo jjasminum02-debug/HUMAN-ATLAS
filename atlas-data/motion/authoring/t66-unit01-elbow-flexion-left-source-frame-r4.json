@@ -1,0 +1,163 @@
+{
+  "schemaVersion": "t66-authoring-family-record-v1",
+  "id": "T66-FAMILY-elbow-flexion-left-AUTHORING",
+  "sourceFamilyId": "elbow-flexion-left",
+  "side": "left",
+  "rights": {
+    "sourceOnly": true,
+    "localUseRights": "inherits_pinned_source_decision",
+    "publicRedistribution": "held",
+    "humanReview": "not_performed"
+  },
+  "claims": [
+    {
+      "id": "T66-FAMILY-elbow-flexion-left-ACTION-FIELD",
+      "field": "action",
+      "appliesTo": "action_explanation",
+      "contextId": null,
+      "value": "팔꿈치 굽힘 자세에서 이 표면과 주변 구조의 변화를 관찰합니다."
+    },
+    {
+      "id": "T66-FAMILY-elbow-flexion-left-POSTURE-FIELD",
+      "field": "model_posture",
+      "appliesTo": "posture_condition",
+      "contextId": null,
+      "value": "고정된 시작 자세에서 같은 장면의 관절 자세를 따라 표면 변화를 보는 교육용 관찰입니다."
+    },
+    {
+      "id": "T66-FAMILY-elbow-flexion-left-CONTEXT-FIELD",
+      "field": "model_context",
+      "appliesTo": "context_role",
+      "contextId": "T66-FAMILY-elbow-flexion-left-POSE-CONTEXT",
+      "value": "이 시범은 근육 활성도·수축량·개인의 정상 운동 범위를 계산하지 않습니다."
+    }
+  ],
+  "supportedSubjectKeys": [
+    "ZA-c7010a9-b20b574e456449c5d571c7a1"
+  ],
+  "movingBoneKeys": [
+    "ZA-c7010a9-b16edda753e6a1cc9cd9d4ed"
+  ],
+  "fixedBoneKeys": [
+    "ZA-c7010a9-68847f9641b9adb6808dc865",
+    "ZA-c7010a9-25e67d646be42500458282ca"
+  ],
+  "poseRange": {
+    "referencePoseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+    "endPoseId": "T66-FAMILY-elbow-flexion-left-END",
+    "axis": [
+      -1,
+      0,
+      0
+    ],
+    "pivotMetres": [
+      0.21511647239759732,
+      1.0938570666249166,
+      -0.03433301774810724
+    ],
+    "endDegrees": 15,
+    "meaning": "source-frame-derived educational pose observation; not a measured anatomical axis or physiological ROM"
+  },
+  "motionSha256": "a263144376925c2ece792c965347f26911e6c6b9de4cc29dfc398983e8e3844d",
+  "restSha256": "a0fc258b922104e9e5eba38fd70cbbc9bad45d2c82bad4d0e1fc37c3ae7cd75c",
+  "measuredAnatomicalAxis": false,
+  "measuredAttachmentFootprints": false,
+  "anatomicalMotorRoleClaimed": false,
+  "scope": "exact_short_head_source_surface_pose_observation",
+  "geometryRecordPath": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-short-head-triangle-seed-corrective-r32/elbow-flexion-left/authoring-record.json",
+  "contactQcPath": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-short-head-triangle-seed-corrective-r32/elbow-flexion-left/contact-qc.json",
+  "glbPoseQcPath": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r4/elbow-flexion-left/final-glb-pose-qc.json",
+  "glbInterpolationQcPath": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r4/elbow-flexion-left/glb-interpolation-qc.json",
+  "interpolationRefinement": {
+    "revision": "source-local-contact-patch-r1",
+    "baseCandidateMotionSha256": "092fb1c089d9c171b3d976238996e19c29ea270a2167206e98378ca81246e9e4",
+    "finalMotionSha256": "0d46a99dacbe901a62e523fb8ac3d4caab8c30d029b63ac621c9eca806ca100f",
+    "sourceGeometrySha256": "ffe0e775daa48c8ecb3141aa67dd0cb169f248a4f880385d1dde6ca83cee2d41",
+    "sourceTriangleCount": 484,
+    "correctionMethod": "source-local minimum-displacement corrective constrained by emitted source-bone surface and source triangle orientation/area; exact source topology retained",
+    "measuredAnatomicalAxis": false,
+    "measuredAttachmentFootprints": false
+  },
+  "verificationDependencies": [
+    {
+      "path": "work/evidence/T66/implementation-2026-10-02/contact-production-r6/elbow-flexion-left/input.json",
+      "sha256": "3a2dcdee0d69ae06aa177a26e5b5eba4e2dd792b276078bec3ba448d1b6c5173"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-short-head-triangle-seed-corrective-r32/elbow-flexion-left/input.json",
+      "sha256": "2db170637f54fb6eed1045ffa3578d1e98e5964158fb9ec92167c067b8bbd1dc"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-short-head-triangle-seed-corrective-r32/elbow-flexion-left/authoring-record.json",
+      "sha256": "a85ad78f96330dc640c09e7c78c5b29c49a102d8030e5d864d095bf1f15e1279"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-short-head-triangle-seed-corrective-r32/elbow-flexion-left/contact-qc.json",
+      "sha256": "e05b566c210f3c2a90569d46cb26496ded5eb22da987fd6dd03640fcbb92b92b"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-short-head-triangle-seed-corrective-r32/elbow-flexion-left/glb-pose-qc.json",
+      "sha256": "d4d1ebcfe418084805af2c608deb740796fe6902124c5d1f3a87be218246bb5d"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-short-head-triangle-seed-corrective-r32/elbow-flexion-left/glb-interpolation-qc.json",
+      "sha256": "be6b2dbc705cce169a72bf7143670afad20fafb07f88753569acfbef68da6f5a"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-short-head-triangle-seed-corrective-r32/elbow-flexion-left/motion.glb",
+      "sha256": "092fb1c089d9c171b3d976238996e19c29ea270a2167206e98378ca81246e9e4"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-short-head-triangle-seed-corrective-r32/elbow-flexion-left/refined-motion.glb",
+      "sha256": "0d46a99dacbe901a62e523fb8ac3d4caab8c30d029b63ac621c9eca806ca100f"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-short-head-triangle-seed-corrective-r32/elbow-flexion-left/reference.glb",
+      "sha256": "a0fc258b922104e9e5eba38fd70cbbc9bad45d2c82bad4d0e1fc37c3ae7cd75c"
+    },
+    {
+      "path": "atlas-data/source-cache/datasets/za/compiled/manifest.json",
+      "sha256": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-short-head-triangle-seed-corrective-r32/elbow-flexion-left/final-glb-pose-qc.json",
+      "sha256": "ba74c459a8800a408fdbcb5573a429b7f198fe851bddf9dd218d1356232b4819"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r3/elbow-flexion-left/rigid-trajectory-qc.json",
+      "sha256": "543a01fa2f62a03a2643f668fd5e1b7c8da387285baf9fc192084546eb0483bd"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r3/elbow-flexion-left/glb-interpolation-qc.json",
+      "sha256": "42c97e677121ca1e9840a477b6ead2a7ab93c6a2ba86ad26615c5f2249efbebf"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r3/elbow-flexion-left/motion.glb",
+      "sha256": "2a25c8c583f0a373607c644e545311551c402d3055fc4602296a6a7f6002ad5f"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r3/elbow-flexion-left/final-glb-pose-qc.json",
+      "sha256": "8da687a9badf81a60e27c646b7cb9681f9265f509aef0d644ea97a1ca798f7f3"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r4/elbow-flexion-left/rigid-trajectory-qc.json",
+      "sha256": "0ef11009fd77ec9077f080cb85eda16bc15617acdec1c746c2049e5248a926c9"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r4/elbow-flexion-left/glb-interpolation-qc.json",
+      "sha256": "94a7241f6819ab6fdf52bca847a142ca251b619a777317d4cffada1f427a3250"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r4/elbow-flexion-left/motion.glb",
+      "sha256": "a263144376925c2ece792c965347f26911e6c6b9de4cc29dfc398983e8e3844d"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r4/elbow-flexion-left/final-glb-pose-qc.json",
+      "sha256": "7727119b705e387184d5f05a8a865adb746871252d9dc59d99cc6f7dc989ee3d"
+    }
+  ],
+  "candidateGlbPoseQcPath": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r3/elbow-flexion-left/final-glb-pose-qc.json",
+  "rigidTrajectoryQcPath": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r4/elbow-flexion-left/rigid-trajectory-qc.json",
+  "rigidTrajectoryQcSha256": "0ef11009fd77ec9077f080cb85eda16bc15617acdec1c746c2049e5248a926c9",
+  "motionAssetRevision": "t66-unit01-source-frame-exact-r4"
+}

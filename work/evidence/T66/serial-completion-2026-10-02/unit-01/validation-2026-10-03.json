@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "t66-unit01-validation-v1",
+  "recordedAtLocal": "2026-10-03T04:24:56+0900",
+  "checks": [
+    {
+      "name": "motion-learning-schema",
+      "command": "python3 atlas-data/schemas/validate_motion_learning.py --check",
+      "cwd": ".",
+      "exitCode": 0,
+      "durationSeconds": 1.876,
+      "outputTail": "{\n  \"production\": {\n    \"valid\": true,\n    \"actionCount\": 285,\n    \"definitionCount\": 279,\n    \"assetCount\": 279,\n    \"issues\": []\n  }\n}\n"
+    },
+    {
+      "name": "motion-asset-source-policy",
+      "command": "python3 atlas-data/schemas/validate_motion_asset_sources.py",
+      "cwd": ".",
+      "exitCode": 0,
+      "durationSeconds": 0.1,
+      "outputTail": "PASS: 2 source candidates verified; production motion assets=279; source bytes unchanged\n"
+    },
+    {
+      "name": "focused-runtime-mixer-tests",
+      "command": "node --experimental-strip-types --test src/viewer/sourceAuthoredMotion.test.ts src/domain/motionLearning.test.ts",
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "durationSeconds": 0.499,
+      "outputTail": "✔ production bundle retains original motions and registers unit-01 bilateral flexion observations (1.172666ms)\n✔ text can be present while there is no compatible motion clip (0.187125ms)\n✔ learner card motion linking requires an explicit action key and compatible side (0.077583ms)\n✔ clip capability requires exact static scene, side, frame, reference pose, and rig-node binding (0.132458ms)\n✔ runtime session is resettable state and exposes no persisted content/review fields (0.069125ms)\n✔ learner text projection omits authoring IDs, JSON, task codes, and review states (0.110167ms)\n✔ learner action projection translates roles and unspecified contraction into plain Korean (0.085ms)\n✔ source-only action and clip resolve by exact sourceKey without creating a canonical subject (0.190916ms)\n✔ real source clip preserves base buffers, fixed bones and exact reset (65.133542ms)\n✔ real clip rejects an animated member falsely declared fixed (44.317959ms)\n✔ dorsiflexion raises the actual anterior foot in the head-positive source frame (51.6655ms)\n✔ unit-01 bilateral flexion observations preserve signed source frames at keys and between keys in the real loader/mixer (224.993084ms)\nℹ tests 12\nℹ suites 0\nℹ pass 12\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 470.979584\n"
+    },
+    {
+      "name": "typecheck",
+      "command": "node_modules/.bin/tsc -b --pretty false",
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "durationSeconds": 3.458,
+      "outputTail": ""
+    },
+    {
+      "name": "production-build",
+      "command": "node_modules/.bin/vite build",
+      "cwd": "atlas-web",
+      "exitCode": 0,
+      "durationSeconds": 0.342,
+      "outputTail": "vite v8.3.1 building client environment for production...\ntransforming...\n✓ 58 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                                                                                 0.58 kB │ gzip:   0.37 kB\ndist/atlas-data/assets/motion/t24-right-tibialis-anterior/ankle-dorsiflexion.glb               88.16 kB\ndist/atlas-data/assets/motion/t66-wrist-flexion-right/motion.glb                              591.62 kB\ndist/atlas-data/assets/motion/t66-wrist-flexion-left/motion.glb                               594.26 kB\ndist/atlas-data/assets/motion/t59-za-right-ankle/motion.glb                                 1,092.16 kB\ndist/atlas-data/assets/motion/t66-unit01-shoulder-flexion-right-source-frame-r4/motion.glb  1,518.56 kB\ndist/atlas-data/assets/motion/t66-unit01-shoulder-flexion-left-source-frame-r4/motion.glb   1,519.78 kB\ndist/atlas-data/assets/motion/t66-shoulder-external-rotation-right/motion.glb               2,027.30 kB\ndist/atlas-data/assets/motion/t66-shoulder-external-rotation-left/motion.glb                2,028.63 kB\ndist/atlas-data/assets/motion/t66-unit01-elbow-flexion-right-source-frame-r4/motion.glb     2,100.25 kB\ndist/atlas-data/assets/motion/t66-unit01-elbow-flexion-left-source-frame-r4/motion.glb      2,100.76 kB\ndist/atlas-data/assets/motion/t66-hip-abduction-left/motion.glb                             2,192.05 kB\ndist/atlas-data/assets/motion/t66-hip-abduction-right/motion.glb                            2,192.98 kB\ndist/assets/index-UUYMvEqZ.css                                                                  0.74 kB │ gzip:   0.44 kB\ndist/assets/App-C8Mkk1HF.css                                                                   40.27 kB │ gzip:   8.45 kB\ndist/assets/index-B67oW9uz.js                                                                 222.37 kB │ gzip:  69.95 kB\ndist/assets/App-CMWbsSSM.js                                                                 2,231.22 kB │ gzip: 346.33 kB\n\n✓ built in 214ms\n[plugin builtin:vite-reporter] \n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n"
+    }
+  ],
+  "allPassed": true,
+  "artifacts": {
+    "sourceManifestSha256": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42",
+    "sourceGeometrySha256": "ffe0e775daa48c8ecb3141aa67dd0cb169f248a4f880385d1dde6ca83cee2d41",
+    "finalSourceFrameValidationSha256": "7533d6409d901f0ecc9a253269bb085b5265dfac6998872d299412dce791e1ee",
+    "registrationReceiptSha256": "ee2a69489a1622ae63d02fbdde98167c3a1e129341353c1dc9857064aa3aa874",
+    "registeredGlbs": [
+      {
+        "familyId": "shoulder-flexion-left",
+        "path": "atlas-data/assets/motion/t66-unit01-shoulder-flexion-left-source-frame-r4/motion.glb",
+        "sha256": "13cb37b2d1bf048626cb79d46ed28a3c2f6453f1d19444c106e46b6ec2403e86"
+      },
+      {
+        "familyId": "shoulder-flexion-right",
+        "path": "atlas-data/assets/motion/t66-unit01-shoulder-flexion-right-source-frame-r4/motion.glb",
+        "sha256": "8f7e3a5ea0a27a4b2a6254ce65c6b8ed01c99dab67f2e2e0266a7fed12225b96"
+      },
+      {
+        "familyId": "elbow-flexion-left",
+        "path": "atlas-data/assets/motion/t66-unit01-elbow-flexion-left-source-frame-r4/motion.glb",
+        "sha256": "a263144376925c2ece792c965347f26911e6c6b9de4cc29dfc398983e8e3844d"
+      },
+      {
+        "familyId": "elbow-flexion-right",
+        "path": "atlas-data/assets/motion/t66-unit01-elbow-flexion-right-source-frame-r4/motion.glb",
+        "sha256": "eeb3924478234b86cfc47c3505ab74e89eaf27c81cba5e12998bee6e1bab5852"
+      }
+    ]
+  },
+  "actualBrowserUi": {
+    "status": "blocked_by_environment",
+    "notCountedAsPass": true,
+    "evidence": "work/evidence/T66/serial-completion-2026-10-02/unit-01/browser-verification.json"
+  }
+}

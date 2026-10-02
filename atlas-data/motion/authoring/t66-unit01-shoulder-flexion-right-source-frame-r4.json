@@ -1,0 +1,164 @@
+{
+  "schemaVersion": "t66-authoring-family-record-v1",
+  "id": "T66-FAMILY-shoulder-flexion-right-AUTHORING",
+  "sourceFamilyId": "shoulder-flexion-right",
+  "side": "right",
+  "rights": {
+    "sourceOnly": true,
+    "localUseRights": "inherits_pinned_source_decision",
+    "publicRedistribution": "held",
+    "humanReview": "not_performed"
+  },
+  "claims": [
+    {
+      "id": "T66-FAMILY-shoulder-flexion-right-ACTION-FIELD",
+      "field": "action",
+      "appliesTo": "action_explanation",
+      "contextId": null,
+      "value": "어깨 앞쪽 굽힘 자세에서 이 표면과 주변 구조의 변화를 관찰합니다."
+    },
+    {
+      "id": "T66-FAMILY-shoulder-flexion-right-POSTURE-FIELD",
+      "field": "model_posture",
+      "appliesTo": "posture_condition",
+      "contextId": null,
+      "value": "고정된 시작 자세에서 같은 장면의 관절 자세를 따라 표면 변화를 보는 교육용 관찰입니다."
+    },
+    {
+      "id": "T66-FAMILY-shoulder-flexion-right-CONTEXT-FIELD",
+      "field": "model_context",
+      "appliesTo": "context_role",
+      "contextId": "T66-FAMILY-shoulder-flexion-right-POSE-CONTEXT",
+      "value": "이 시범은 근육 활성도·수축량·개인의 정상 운동 범위를 계산하지 않습니다."
+    }
+  ],
+  "supportedSubjectKeys": [
+    "ZA-c7010a9-a0c2ea00609e874a7faa926d"
+  ],
+  "movingBoneKeys": [
+    "ZA-c7010a9-34b418ba01ebccb353db5982",
+    "ZA-c7010a9-288b2f7df8d9a68245276571"
+  ],
+  "fixedBoneKeys": [
+    "ZA-c7010a9-60fdfbce8b40f76046cc1110",
+    "ZA-c7010a9-be2ab281ed58d1030a35fdaf"
+  ],
+  "poseRange": {
+    "referencePoseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+    "endPoseId": "T66-FAMILY-shoulder-flexion-right-END",
+    "axis": [
+      -1,
+      0,
+      0
+    ],
+    "pivotMetres": [
+      -0.1725494413545396,
+      1.3989935204921033,
+      -0.02589613531127906
+    ],
+    "endDegrees": 12,
+    "meaning": "source-frame-derived educational pose observation; not a measured anatomical axis or physiological ROM"
+  },
+  "motionSha256": "8f7e3a5ea0a27a4b2a6254ce65c6b8ed01c99dab67f2e2e0266a7fed12225b96",
+  "restSha256": "e83e4acb6a4a5e5aae1afb9109a636fdbcea50dc3fa25db26cea3082ac160fec",
+  "measuredAnatomicalAxis": false,
+  "measuredAttachmentFootprints": false,
+  "anatomicalMotorRoleClaimed": false,
+  "scope": "exact_short_head_source_surface_pose_observation",
+  "geometryRecordPath": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-source-frame-feasible-short-head-r8/shoulder-flexion-right/authoring-record.json",
+  "contactQcPath": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-source-frame-feasible-short-head-r8/shoulder-flexion-right/contact-qc.json",
+  "glbPoseQcPath": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r4/shoulder-flexion-right/final-glb-pose-qc.json",
+  "glbInterpolationQcPath": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r4/shoulder-flexion-right/glb-interpolation-qc.json",
+  "interpolationRefinement": {
+    "revision": "t66-unit01-shoulder-flexion-contact-r3",
+    "baseCandidateMotionSha256": "418e2eb3db98e3df792cb3f7047d76073bc19c2289ee4a4f23f299b75233df26",
+    "finalMotionSha256": "52e8f16ea2dc1b0b22fa68d9386f4028548d4821077e49f5fe1acca19913da00",
+    "sourceGeometrySha256": "ffe0e775daa48c8ecb3141aa67dd0cb169f248a4f880385d1dde6ca83cee2d41",
+    "sourceTriangleCount": 484,
+    "correctionMethod": "source-local minimum-displacement corrective constrained by emitted source-bone surface and source triangle orientation/area; exact source topology retained",
+    "measuredAnatomicalAxis": false,
+    "measuredAttachmentFootprints": false
+  },
+  "verificationDependencies": [
+    {
+      "path": "work/evidence/T66/implementation-2026-10-02/contact-production-r6/shoulder-flexion-right/input.json",
+      "sha256": "ff2f6eca29e3dd24b72456d72d2f0f1717090dd0b45c2b2a9efaf42a19c2f6a6"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-source-frame-feasible-short-head-r8/shoulder-flexion-right/input.json",
+      "sha256": "70f3becefd86709d60cd007418528af03a45506e7c65cffa1c9528d4724a81ee"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-source-frame-feasible-short-head-r8/shoulder-flexion-right/authoring-record.json",
+      "sha256": "23d8836c842fdd1a693ad76c4832c4af1c09f552fb21b074d4ef0e047590e2e6"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-source-frame-feasible-short-head-r8/shoulder-flexion-right/contact-qc.json",
+      "sha256": "634ca9985a3e6e23777c298dc72031783f1427cbd235c166311aeef8ca91a6dd"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-source-frame-feasible-short-head-r8/shoulder-flexion-right/glb-pose-qc.json",
+      "sha256": "898a86f5058d185d4230779eac752c2a9dfb6ab29c2b5e445b9441e5a6f2ec2d"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-shoulder-flexion-contact-r3/shoulder-flexion-right/glb-interpolation-qc.json",
+      "sha256": "a0816fa2b608e067bbd29c77e12fb35e3e0b5404058a926bc63d03744b3d289d"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-source-frame-feasible-short-head-r8/shoulder-flexion-right/motion.glb",
+      "sha256": "418e2eb3db98e3df792cb3f7047d76073bc19c2289ee4a4f23f299b75233df26"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-shoulder-flexion-contact-r3/shoulder-flexion-right/refined-motion.glb",
+      "sha256": "52e8f16ea2dc1b0b22fa68d9386f4028548d4821077e49f5fe1acca19913da00"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-source-frame-feasible-short-head-r8/shoulder-flexion-right/reference.glb",
+      "sha256": "e83e4acb6a4a5e5aae1afb9109a636fdbcea50dc3fa25db26cea3082ac160fec"
+    },
+    {
+      "path": "atlas-data/source-cache/datasets/za/compiled/manifest.json",
+      "sha256": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/t66-unit01-shoulder-flexion-contact-r3/shoulder-flexion-right/final-glb-pose-qc.json",
+      "sha256": "624acd091c8773eb7e267e73393a42e27bad10fdb150c1f6f5af24408ad6f2ca"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r3/shoulder-flexion-right/rigid-trajectory-qc.json",
+      "sha256": "e99a9e7cb4b6e304c6894c19931c46cb83d910d505781779d685ba1149a39db2"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r3/shoulder-flexion-right/glb-interpolation-qc.json",
+      "sha256": "5144b0398a25f373e8cde28d43d252b16156170a8d391b198add87f18fbb6cc8"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r3/shoulder-flexion-right/motion.glb",
+      "sha256": "4a1f48b109aad1ce2d2da020966e9eda8766146333e02a1c287dfbcca58ca0e0"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r3/shoulder-flexion-right/final-glb-pose-qc.json",
+      "sha256": "801d549f476eb3f77a274a2d3d0cc0f12312efa26f4525e22ea97f62fa827e21"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r4/shoulder-flexion-right/rigid-trajectory-qc.json",
+      "sha256": "599ede49e82e5069dc1edb17b0b30d1387dc88db65ccb3cd85f810978d7ae4c4"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r4/shoulder-flexion-right/glb-interpolation-qc.json",
+      "sha256": "4834f65d6d06216bb4a45ee85fb2d999e74a2110b140b0d052477a62f8c543c9"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r4/shoulder-flexion-right/motion.glb",
+      "sha256": "8f7e3a5ea0a27a4b2a6254ce65c6b8ed01c99dab67f2e2e0266a7fed12225b96"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r4/shoulder-flexion-right/final-glb-pose-qc.json",
+      "sha256": "f12b39469cbb8ebc711f9066aff65c0ec1585c47f95303efd7d508e73496187a"
+    }
+  ],
+  "candidateGlbPoseQcPath": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r3/shoulder-flexion-right/final-glb-pose-qc.json",
+  "rigidTrajectoryQcPath": "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-frame-exact-r4/shoulder-flexion-right/rigid-trajectory-qc.json",
+  "rigidTrajectoryQcSha256": "599ede49e82e5069dc1edb17b0b30d1387dc88db65ccb3cd85f810978d7ae4c4",
+  "motionAssetRevision": "t66-unit01-source-frame-exact-r4"
+}
