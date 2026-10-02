@@ -17,6 +17,7 @@ CATALOG_PATH = ROOT / "atlas-data/catalog/canonical-catalog.json"
 AI_OVERLAY_PATH = ROOT / "atlas-data/terminology/ai-evidence-overlay.json"
 NAVIGATION_PATH = ROOT / "atlas-data/navigation/atlas-navigation.json"
 MOTION_SCENES_PATH = ROOT / "atlas-data/motion/motion-scenes.json"
+SOURCE_DATASET_PATH = ROOT / "atlas-data/source-cache/datasets/za/compiled/manifest.json"
 FIXTURE_INDEX_PATH = ROOT / "work/evidence/T20/fixtures/index.json"
 
 _T03_SPEC = importlib.util.spec_from_file_location("human_atlas_t03_validator", Path(__file__).with_name("validate.py"))
@@ -47,6 +48,8 @@ def load_production_context() -> dict[str, Any]:
     subjects = {row["id"] for group in ("muscleConcepts", "muscleParts") for row in entities.get(group, [])}
     structures = {row["id"]: row for row in entities.get("structures", [])}
     instances = {row["id"]: row for row in entities.get("instances", [])}
+    source_manifest = json.loads(SOURCE_DATASET_PATH.read_text(encoding="utf-8"))
+    source_instances = {row["sourceKey"]: row for row in source_manifest.get("instances", [])}
     claims = {row["id"]: row for row in entities.get("claims", [])}
     evidence = {row["id"]: row for row in entities.get("evidence", [])}
     ai_fields = {row["id"]: row for row in overlay.get("items", [])}
@@ -96,6 +99,7 @@ def load_production_context() -> dict[str, Any]:
         "subjects": subjects,
         "structures": structures,
         "instances": instances,
+        "sourceInstances": source_instances,
         "claims": claims,
         "evidence": evidence,
         "aiFields": ai_fields,
@@ -196,9 +200,16 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
 
     for index, action in enumerate(payload["muscleActions"]):
         path = f"$.muscleActions[{index}]"
+        source_subjects = action.get("sourceSubjectKeys", [])
+        if not action["subjectIds"] and not source_subjects:
+            issues.append(issue("action_subject_missing", path, "An action must bind at least one canonical concept or exact source instance."))
         for subject_id in action["subjectIds"]:
             if subject_id not in context["subjects"]:
                 issues.append(issue("orphan_action_subject", f"{path}.subjectIds", f"Unknown muscle/part ID {subject_id!r}."))
+        for source_key in source_subjects:
+            source_instance = context.get("sourceInstances", {}).get(source_key)
+            if source_instance is None or source_instance.get("kind") not in {"muscle_surface_or_part", "muscle"}:
+                issues.append(issue("orphan_source_action_subject", f"{path}.sourceSubjectKeys", f"Unknown exact muscle sourceKey {source_key!r}."))
         joint_state = action["jointBindingState"]
         joint_note = action["jointBindingNote"]
         if joint_state == "canonical_bound" and (not action["targetJointIds"] or joint_note is not None):
@@ -254,13 +265,19 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
         if action and action["sideApplicability"] in {"right", "left"} and definition["side"] != action["sideApplicability"]:
             issues.append(issue("motion_action_side_mismatch", f"{path}.side", "Motion laterality conflicts with the MuscleAction side applicability."))
         instance = context["instances"].get(definition["instanceId"])
-        if instance is None:
+        source_instance = context.get("sourceInstances", {}).get(definition["instanceId"])
+        if instance is None and source_instance is None:
             issues.append(issue("orphan_motion_instance", f"{path}.instanceId", f"Unknown anatomical instance {definition['instanceId']!r}."))
-        else:
+        elif instance is not None:
             if action and instance.get("conceptId") not in action["subjectIds"]:
                 issues.append(issue("motion_instance_subject_mismatch", f"{path}.instanceId", "Instance concept is not a subject of the bound MuscleAction."))
             if definition["side"] != instance.get("side"):
                 issues.append(issue("motion_instance_side_mismatch", f"{path}.side", "Motion side must match the canonical instance laterality."))
+        else:
+            if not action or definition["instanceId"] not in action.get("sourceSubjectKeys", []):
+                issues.append(issue("motion_source_subject_mismatch", f"{path}.instanceId", "Exact source instance is not a sourceSubjectKey of the bound action."))
+            if definition["side"] != source_instance.get("sourceLabelSide"):
+                issues.append(issue("motion_source_side_mismatch", f"{path}.side", "Motion side must match the source's explicit side label."))
         if definition["startPoseId"] != definition["staticReference"]["poseId"]:
             issues.append(issue("motion_start_pose_mismatch", f"{path}.startPoseId", "Motion must start from the exact static reference pose."))
         if definition["endPoseId"] == definition["startPoseId"]:
@@ -329,7 +346,48 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
         elif sha256_bytes(resolved.read_bytes()) != asset["sha256"]:
             issues.append(issue("motion_asset_hash_mismatch", f"{path}.sha256", "Motion asset file content does not match its recorded SHA-256."))
 
-        if asset["representationType"] == "rigged_mesh":
+        if asset["representationType"] == "source_bound_surface":
+            source_binding = asset.get("sourceBinding")
+            if not isinstance(source_binding, dict):
+                issues.append(issue("missing_source_motion_binding", f"{path}.sourceBinding", "A source-bound surface clip needs an exact runtime scene/source binding."))
+                source_binding = {}
+            if source_binding.get("contractVersion") != "t59-source-motion-binding-v1":
+                issues.append(issue("invalid_source_motion_contract", f"{path}.sourceBinding.contractVersion", "Source motion binding must use the T59 contract."))
+            source_members = source_binding.get("members", [])
+            source_keys = [row.get("sourceKey") for row in source_members if isinstance(row, dict)]
+            node_ids = [row.get("nodeId") for row in source_members if isinstance(row, dict)]
+            if not source_members or len(source_keys) != len(source_members) or len(set(source_keys)) != len(source_keys) or len(set(node_ids)) != len(node_ids):
+                issues.append(issue("invalid_source_motion_members", f"{path}.sourceBinding.members", "Source instance and GLB node bindings must be present and unique."))
+            required_hashes = ("sourceOverlaySha256",)
+            for field in required_hashes:
+                if not isinstance(source_binding.get(field), str) or len(source_binding[field]) != 64:
+                    issues.append(issue("invalid_source_motion_hash", f"{path}.sourceBinding.{field}", "Source runtime binding hashes must be SHA-256."))
+            if source_binding.get("frameId") != binding.get("frameId") or source_binding.get("units") != binding.get("units"):
+                issues.append(issue("source_motion_frame_mismatch", f"{path}.sourceBinding", "Source motion and static binding frame/unit must match exactly."))
+            if source_binding.get("referencePoseId") != binding.get("referencePoseId"):
+                issues.append(issue("source_motion_pose_mismatch", f"{path}.sourceBinding.referencePoseId", "Source motion must bind the exact static reference pose."))
+            deforming = [row for row in source_members if isinstance(row, dict) and row.get("role") == "deforming_muscle_surface"]
+            if source_binding.get("subjectSourceKey") != definition["instanceId"] or not any(row.get("sourceKey") == definition["instanceId"] and row.get("side") == definition["side"] for row in deforming):
+                issues.append(issue("source_motion_subject_side_mismatch", f"{path}.sourceBinding.members", "The exact motion instance and side must be a declared deforming muscle surface."))
+            for member_index, member in enumerate(source_members):
+                if not isinstance(member, dict):
+                    continue
+                for field in ("sourceChunkSha256", "geometrySha256"):
+                    value = member.get(field)
+                    if not isinstance(value, str) or len(value) != 64:
+                        issues.append(issue("invalid_source_motion_member_hash", f"{path}.sourceBinding.members[{member_index}].{field}", "Each source instance needs an exact chunk and base-geometry SHA-256."))
+                if not isinstance(member.get("instanceMatrix"), list) or len(member["instanceMatrix"]) != 16 or not all(isinstance(value, (int, float)) for value in member["instanceMatrix"]):
+                    issues.append(issue("invalid_source_motion_instance_matrix", f"{path}.sourceBinding.members[{member_index}].instanceMatrix", "The source instance transform must be copied exactly from the frozen dataset manifest."))
+            rig_bindings = asset["rig"]["nodeBindings"] if asset["rig"] is not None else []
+            rig_structure_ids = [row["structureId"] for row in rig_bindings]
+            rig_node_ids = [row["nodeId"] for row in rig_bindings]
+            if asset["rig"] is not None and (len(set(rig_structure_ids)) != len(rig_structure_ids) or len(set(rig_node_ids)) != len(rig_node_ids)):
+                issues.append(issue("duplicate_source_motion_rig_binding", f"{path}.rig.nodeBindings", "Source motion rig bindings must be unique."))
+            if source_binding.get("deformation") in ("skinning", "morph_and_skinning") and not rig_bindings:
+                issues.append(issue("missing_source_motion_rig", f"{path}.rig", "Skinned source motion requires a rig binding."))
+            if asset["illustration"] is not None:
+                issues.append(issue("source_motion_illustration_not_allowed", f"{path}.illustration", "Source-bound surface motion cannot use an illustrative path as a deformation substitute."))
+        elif asset["representationType"] == "rigged_mesh":
             if asset["rig"] is None:
                 issues.append(issue("missing_rig_binding", f"{path}.rig", "A rigged mesh requires a rig/node binding."))
             if asset["illustration"] is not None:
@@ -403,6 +461,47 @@ def run_fixtures(schema: dict[str, Any]) -> dict[str, Any]:
         expected = sorted(case.get("expectedIssueCodes", []))
         passed = (not issues) if case["expectPass"] else all(code in codes for code in expected)
         results.append({"id": case["id"], "expectPass": case["expectPass"], "passed": passed, "issueCodes": codes, "issues": issues})
+    source_key = "ZA-T59-FIXTURE-SOURCE-R"
+    source_context = json.loads((ROOT / index["context"]).read_text(encoding="utf-8"))
+    source_context["fixtureMode"] = True
+    source_context.setdefault("fixtureAssets", {})
+    source_context["sourceInstances"] = {source_key: {"sourceKey": source_key, "kind": "muscle_surface_or_part", "sourceLabelSide": "right"}}
+    source_bundle = json.loads((ROOT / "work/evidence/T20/fixtures/positive-valid-motion.json").read_text(encoding="utf-8"))
+    source_bundle["muscleActions"][0]["subjectIds"] = []
+    source_bundle["muscleActions"][0]["sourceSubjectKeys"] = [source_key]
+    source_bundle["muscleActions"][0]["learnerActionKey"] = "fixture-source-action"
+    source_bundle["motionDefinitions"][0]["instanceId"] = source_key
+    source_bundle["motionAssets"][0]["representationType"] = "source_bound_surface"
+    source_bundle["motionAssets"][0]["illustration"] = None
+    source_bundle["motionAssets"][0]["sourceBinding"] = {
+        "contractVersion": "t59-source-motion-binding-v1", "datasetNamespace": "fixture-dataset", "datasetRevision": "fixture-r1",
+        "integrationRevision": "fixture-integration-r1", "sourceOverlaySha256": "a" * 64, "subjectSourceKey": source_key,
+        "frameId": source_bundle["motionDefinitions"][0]["staticReference"]["frameId"], "units": "m",
+        "referencePoseId": source_bundle["motionDefinitions"][0]["startPoseId"], "deformation": "morph_targets",
+        "members": [{"sourceKey": source_key, "nodeId": "FixtureMuscleSurface", "sourceNamespace": "za-fixture", "role": "deforming_muscle_surface",
+                     "side": "right", "resourceKey": "fixture-resource", "lod": "overview", "sourceChunkSha256": "b" * 64,
+                     "geometrySha256": "c" * 64, "instanceMatrix": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]}],
+    }
+    source_issues = validate_bundle(source_bundle, schema, source_context, allow_fixture=True)
+    results.append({"id": "source-only-action-by-exact-sourceKey", "expectPass": True, "passed": not source_issues,
+                    "issueCodes": sorted({row["code"] for row in source_issues}), "issues": source_issues})
+    wrong_side_bundle = json.loads(json.dumps(source_bundle))
+    wrong_side_bundle["motionDefinitions"][0]["side"] = "left"
+    wrong_side_bundle["motionAssets"][0]["staticBinding"]["side"] = "left"
+    wrong_side_bundle["motionAssets"][0]["sourceBinding"]["members"][0]["side"] = "left"
+    wrong_side_issues = validate_bundle(wrong_side_bundle, schema, source_context, allow_fixture=True)
+    wrong_side_codes = sorted({row["code"] for row in wrong_side_issues})
+    results.append({"id": "source-only-action-rejects-declared-side-mismatch", "expectPass": False,
+                    "passed": "motion_action_side_mismatch" in wrong_side_codes, "issueCodes": wrong_side_codes, "issues": wrong_side_issues})
+    unknown_source_bundle = json.loads(json.dumps(source_bundle))
+    unknown_source_bundle["muscleActions"][0]["sourceSubjectKeys"] = ["ZA-T59-UNKNOWN"]
+    unknown_source_bundle["motionDefinitions"][0]["instanceId"] = "ZA-T59-UNKNOWN"
+    unknown_source_bundle["motionAssets"][0]["sourceBinding"]["subjectSourceKey"] = "ZA-T59-UNKNOWN"
+    unknown_source_bundle["motionAssets"][0]["sourceBinding"]["members"][0]["sourceKey"] = "ZA-T59-UNKNOWN"
+    unknown_issues = validate_bundle(unknown_source_bundle, schema, source_context, allow_fixture=True)
+    unknown_codes = sorted({row["code"] for row in unknown_issues})
+    results.append({"id": "source-only-action-rejects-unregistered-sourceKey", "expectPass": False,
+                    "passed": "orphan_source_action_subject" in unknown_codes, "issueCodes": unknown_codes, "issues": unknown_issues})
     return {"fixtureCount": len(results), "passed": sum(row["passed"] for row in results), "failed": sum(not row["passed"] for row in results), "cases": results}
 
 

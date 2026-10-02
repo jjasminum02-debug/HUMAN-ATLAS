@@ -1,9 +1,11 @@
 import learnerCardRuntime from "../../../atlas-data/terminology/learner-card-runtime.json";
+import learnerMotionRuntime from "./learnerMotionRuntime.generated.ts";
 import { displayTerms, termText, type PilotCatalog } from "./catalog";
 import { learnerNameProjection, learnerSearchEntry, learnerVisibleTerms, mergeLearningConcepts, searchEntries, type SearchEntry } from "../domain/search";
 import type { LearnerFieldProjection } from "../domain/aiEvidence";
 import { learnerStructureUnavailability } from "../domain/learnerStructureSourceContent";
 import { learnerActionAppliesToSide } from "../domain/learnerActionText";
+import { resolveLearnerMotionCandidate, type LearnerMotionActionOption, type LearnerActionText } from "../domain/motionLearning.ts";
 
 type LearnerCardRuntime = {
   schemaVersion: "learner-card-runtime-v1";
@@ -17,6 +19,18 @@ type LearnerCardRuntime = {
 };
 
 const cardRuntime = learnerCardRuntime as LearnerCardRuntime;
+type LearnerMotionRuntime = {
+  schemaVersion: "learner-motion-runtime-v1";
+  actions: Record<string, Array<{
+    actionKey: string;
+    learnerActionKey: string | null;
+    label: string;
+    text: LearnerActionText;
+    sideApplicability: "left" | "right" | "bilateral" | "midline" | "not_applicable";
+    candidate: LearnerMotionActionOption["candidate"];
+  }>>;
+};
+const motionRuntime = learnerMotionRuntime as unknown as LearnerMotionRuntime;
 export const vocabulary = cardRuntime.names;
 
 export function nameFor(catalog: PilotCatalog, id: string) {
@@ -45,13 +59,27 @@ export function findMuscles(catalog: PilotCatalog, query: string) {
 }
 
 /** Learner-only action text is preprojected; source/evidence references stay out of this bundle. */
-export function motionActionOptionsForLearner(conceptId: string, selectedSide?: string | null) {
-  return cardRuntime.actions.filter((row) => row.conceptId === conceptId
-    && learnerActionAppliesToSide(row.sideApplicability, selectedSide)).map((row) => ({
-    id: row.key,
+export function motionActionOptionsForLearner(conceptId: string | null, selectedSide?: string | null, sourceKey?: string | null) {
+  const selector = conceptId ?? sourceKey;
+  const projected = selector ? motionRuntime.actions[selector] ?? [] : [];
+  const displayRows = cardRuntime.actions.filter((row) => row.conceptId === conceptId
+    && learnerActionAppliesToSide(row.sideApplicability, selectedSide)).map((row) => {
+    return {
+      id: row.key,
+      label: row.label,
+      text: { label: row.label, explanation: row.explanation },
+      sideApplicability: row.sideApplicability,
+      candidate: resolveLearnerMotionCandidate(row.key, selectedSide, projected),
+    };
+  });
+  if (conceptId || !sourceKey) return displayRows;
+  // A source-only action is reachable by exact sourceKey; no canonical ID or alias is invented.
+  return projected.filter((row) => learnerActionAppliesToSide(row.sideApplicability, selectedSide)).map((row) => ({
+    id: row.actionKey,
     label: row.label,
-    text: { label: row.label, explanation: row.explanation },
-    sideApplicability: row.sideApplicability,
+    text: { label: row.text.label, explanation: row.text.explanation },
+    sideApplicability: row.sideApplicability === "left" || row.sideApplicability === "right" ? row.sideApplicability : null,
+    candidate: row.candidate,
   }));
 }
 

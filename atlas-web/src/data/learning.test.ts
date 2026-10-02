@@ -8,6 +8,7 @@ import { learnerStructureSourceText, learnerStructureUnavailability } from "../d
 import { learnerActionExplanation } from "../domain/learnerActionText.ts";
 import { learnerActionAppliesToSide, learnerFunctionUnavailableText } from "../domain/learnerActionText.ts";
 import type { LegacyLearningSummary } from "../domain/legacyEvidenceAdapter.ts";
+import safeMotionRuntime from "./learnerMotionRuntime.generated.ts";
 const evidenceFields = JSON.parse(readFileSync(new URL("../../../atlas-data/terminology/ai-evidence-overlay.json", import.meta.url), "utf8")).items as AiEvidenceField[];
 const structureSummaries = JSON.parse(readFileSync(new URL("../../../atlas-data/terminology/learning-structure-summaries.json", import.meta.url), "utf8")) as LegacyLearningSummary[];
 const sourceStructureContentRows = JSON.parse(readFileSync(new URL("../../../atlas-data/terminology/learner-structure-source-content.json", import.meta.url), "utf8")).records;
@@ -57,6 +58,14 @@ test("learner motion options retain six authored rows and keep the T24 candidate
     assert.ok(options.every((option) => JSON.stringify(option.subjectIds) === JSON.stringify([id])));
   }
   assert.deepEqual(projectLearnerMotionActionOptions("HA-M-NOT-ASSIGNED", bundle, fields.items), []);
+});
+
+test("learner motion runtime excludes raw evidence and exposes no unavailable production clip", () => {
+  const serialized = JSON.stringify(safeMotionRuntime);
+  assert.equal(safeMotionRuntime.schemaVersion, "learner-motion-runtime-v1");
+  assert.equal(Object.values(safeMotionRuntime.actions).reduce((count, rows) => count + rows.length, 0), 7);
+  assert.ok(Object.values(safeMotionRuntime.actions).flat().every((row) => row.candidate === null));
+  assert.doesNotMatch(serialized, /T21-|T24-|evidenceHash|fieldEvidenceId|sourceRefs|poseSourceRefs|https?:\/\//);
 });
 
 test("the T24 text candidate keeps its right-side scope while its clip remains unavailable", () => {

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "t59-resource-budget-v1",
+  "limits": {
+    "overviewBytes": 20971520,
+    "geometryBytes": 100663296,
+    "triangles": 1000000,
+    "chunkBytes": 8388608,
+    "motionPackageBytesMax": 100663296
+  },
+  "runtimePolicy": "Motion package is lazy-loaded only after explicit play/pose request; streamed bytes and decoded motion estimate must fit the same existing active-scene geometry budget; shared static source cache is not mutated and per-instance deformation state is owned by the motion package.",
+  "observedProductionMotionBytes": 0,
+  "observedProductionMotionCandidates": 0,
+  "productionPackageMemoryMeasurement": "not_available_no_package",
+  "warning": "No actual motion package exists, so code budgets and synthetic loader tests are not a measurement of production memory or performance."
+}

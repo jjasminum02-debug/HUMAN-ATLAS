@@ -7,6 +7,8 @@ type Resource = {meshes:Map<string,THREE.BufferGeometry>;bytes:number};
 export class DatasetResources {
   readonly dataset:Dataset;readonly root:THREE.Group;readonly queue:ResourceQueue<Resource>;
   readonly nodes=new Map<string,THREE.Mesh>(); readonly materials=new Map<string,THREE.MeshStandardMaterial>();
+  /** Source keys temporarily backed by an exact source-bound motion GLB node. */
+  readonly motionOverrides=new Set<string>();
   readonly inspection:boolean;readonly invalidate:()=>void;private visible=new Set<string>();private detail=new Set<string>();
   private disposed=false;readonly localDisplayKeys:ReadonlySet<string>;
   constructor(dataset:Dataset,root:THREE.Group,inspection=false,invalidate:()=>void=()=>{},localDisplayKeys:ReadonlySet<string>=new Set()) {
@@ -59,7 +61,7 @@ export class DatasetResources {
   private sync() {
     if(this.disposed)return;
     const plan=planLods(this.dataset,this.visible,this.detail);
-    for(const [key,node] of this.nodes)if(!this.visible.has(key)){node.removeFromParent();this.nodes.delete(key);}
+    for(const [key,node] of this.nodes)if(!this.visible.has(key)&&!this.motionOverrides.has(key)){node.removeFromParent();this.nodes.delete(key);}
     for(const instance of this.dataset.instances) {
       if(!this.visible.has(instance.sourceKey))continue;
       const choice=plan.choices.get(instance.sourceKey)!;
@@ -73,10 +75,14 @@ export class DatasetResources {
         node=new THREE.Mesh(geometry,material);node.name=instance.sourceKey;node.matrixAutoUpdate=false;node.matrix.fromArray(instance.matrix);
         node.userData={sourceKey:instance.sourceKey,sourceName:instance.sourceName,learnerBinding:instance.learnerBinding,engineeringInspection:this.inspection};
         this.nodes.set(instance.sourceKey,node);this.root.add(node);
-      }else node.geometry=geometry;
+      }else if(!this.motionOverrides.has(instance.sourceKey))node.geometry=geometry;
+      node.userData.resourceKey=wanted?choice.resource:instance.lods.overview.resource;
+      node.userData.lod=wanted&&choice.chunk===instance.lods.detail.chunk&&choice.resource===instance.lods.detail.resource?'detail':'overview';
+      node.userData.sourceNamespace=instance.sourceNamespace??this.dataset.namespace;
+      node.userData.instanceMatrix=[...instance.matrix];
       node.userData.level=wanted?'requested':'overview-fallback';
     }
     this.invalidate();
   }
-  dispose(){if(this.disposed)return;this.disposed=true;for(const n of this.nodes.values())n.removeFromParent();this.nodes.clear();this.queue.dispose();for(const m of this.materials.values())m.dispose();this.materials.clear();}
+  dispose(){if(this.disposed)return;this.disposed=true;for(const n of this.nodes.values())n.removeFromParent();this.nodes.clear();this.motionOverrides.clear();this.queue.dispose();for(const m of this.materials.values())m.dispose();this.materials.clear();}
 }

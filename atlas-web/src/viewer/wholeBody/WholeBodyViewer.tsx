@@ -6,8 +6,9 @@ import { DatasetSceneAdapter } from '../datasets/DatasetSceneAdapter';
 import type { Dataset } from '../datasets/schema';
 import type { RuntimeIntegration } from '../datasets/integration';
 import { AtlasLoading } from '../../ui/AtlasLoading';
+import type { SourceMotionHost } from '../datasets/sourceMotionHost';
 
-export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, whole, onWholeChange, onEntered }: { homeRevision?: number; viewResetRevision?: number; datasetSource?: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
+export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, whole, onWholeChange, onEntered, onMotionHostChange }: { homeRevision?: number; viewResetRevision?: number; datasetSource?: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; onMotionHostChange?: (host: SourceMotionHost | null) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
   const host = useRef<HTMLDivElement>(null);
   const controller = useRef<AnatomySceneController | DatasetSceneAdapter | null>(null);
   const previousView = useRef<{ regionKey: string; selectedId: string | null; resetRevision: number } | null>(null);
@@ -56,8 +57,8 @@ export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datas
     if (datasetSource && host.current) {
       window.clearTimeout(timeout);
       current = new DatasetSceneAdapter(host.current, datasetSource.dataset, datasetSource.integration, setProgress, (id, side) => select.current(id, side));
-      controller.current = current; setReady(true);
-      return () => { abort.abort(); current?.dispose(); controller.current = null; };
+      controller.current = current; onMotionHostChange?.(current); setReady(true);
+      return () => { abort.abort(); onMotionHostChange?.(null); current?.dispose(); controller.current = null; };
     }
     void fetch('/__atlas/body/manifest.json', { signal: abort.signal }).then(async response => {
       if (!response.ok) throw new Error('Unavailable');
@@ -65,10 +66,10 @@ export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datas
       if (abort.signal.aborted || !host.current) return;
       window.clearTimeout(timeout);
       current = new AnatomySceneController(host.current, manifest, setProgress, (id, side) => select.current(id, side));
-      controller.current = current; setReady(true);
+      controller.current = current; onMotionHostChange?.(null); setReady(true);
     }).catch(() => { window.clearTimeout(timeout); if (!abort.signal.aborted) setError(true); });
     return () => { window.clearTimeout(timeout); abort.abort(); current?.dispose(); controller.current = null; };
-  }, [revision, datasetSource]);
+  }, [revision, datasetSource, onMotionHostChange]);
   useEffect(() => {
     if (!ready) return;
     const regionKey = JSON.stringify(regionIds);

@@ -16,18 +16,57 @@ import {
 import type { LearnerMotionActionOption } from "../domain/motionLearning";
 import { loadAnimationScene } from "../viewer/animationSceneAdapter";
 import { AnimationPlaybackController } from "../viewer/animationPlayback";
+import type { SourceMotionHost } from "../viewer/datasets/sourceMotionHost.ts";
+import { DATASET_BUDGET } from "../viewer/datasets/schema.ts";
 
 interface Props {
   actions: readonly LearnerMotionActionOption[];
   selectedActionId: string | null;
   onSelectAction(actionId: string): void;
+  host: SourceMotionHost | null;
+  sourceContextKey: string | null;
+  showActionPicker?: boolean;
 }
 
 function prefersReducedMotion(): boolean {
   return typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-export function MotionLearningPanel({ actions, selectedActionId, onSelectAction }: Props) {
+async function readMotionPackage(response: Response, signal: AbortSignal): Promise<ArrayBuffer> {
+  const declaredLength = Number(response.headers.get("content-length"));
+  if (Number.isFinite(declaredLength) && declaredLength > DATASET_BUDGET.geometryBytes) {
+    throw new Error("시범 자료가 현재 형상·움직임 예산을 초과합니다.");
+  }
+  if (!response.body) {
+    const bytes = await response.arrayBuffer();
+    if (bytes.byteLength > DATASET_BUDGET.geometryBytes) throw new Error("시범 자료가 현재 형상·움직임 예산을 초과합니다.");
+    return bytes;
+  }
+  const reader = response.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let totalBytes = 0;
+  try {
+    while (true) {
+      if (signal.aborted) throw new DOMException("Motion load cancelled", "AbortError");
+      const { done, value } = await reader.read();
+      if (done) break;
+      totalBytes += value.byteLength;
+      if (totalBytes > DATASET_BUDGET.geometryBytes) {
+        await reader.cancel();
+        throw new Error("시범 자료가 현재 형상·움직임 예산을 초과합니다.");
+      }
+      chunks.push(value);
+    }
+  } finally {
+    reader.releaseLock();
+  }
+  const output = new Uint8Array(totalBytes);
+  let offset = 0;
+  for (const chunk of chunks) { output.set(chunk, offset); offset += chunk.byteLength; }
+  return output.buffer;
+}
+
+export function MotionLearningPanel({ actions, selectedActionId, onSelectAction, host, sourceContextKey, showActionPicker = true }: Props) {
   const selectedAction = actions.find((action) => action.id === selectedActionId) ?? null;
   const candidate = selectedAction?.candidate ?? null;
   const [state, setState] = useState<MotionPlayerState>(() => ({
@@ -79,17 +118,30 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction 
   useEffect(() => () => {
     abortRef.current?.abort();
     abortRef.current = null;
+    host?.restoreSourceMotion("player-unmounted");
     playbackRef.current?.dispose();
     playbackRef.current = null;
-  }, []);
+  }, [host]);
+
+  useEffect(() => {
+    abortRef.current?.abort();
+    abortRef.current = null;
+    host?.restoreSourceMotion("selection-or-action-changed");
+    playbackRef.current = null;
+    const current = stateRef.current;
+    publish({ ...current, session: { status: "idle", definitionId: null, assetId: null, currentTimeSeconds: 0,
+      playbackSpeed: 1, selectedStructureIds: [], errorMessage: null }, durationSeconds: null,
+      generation: current.generation + 1, selectedActionId, boundStructureIds: [] });
+  }, [host, sourceContextKey, selectedActionId]);
 
   async function loadCandidate(startAfterLoad: boolean) {
     const option = actions.find((action) => action.id === stateRef.current.selectedActionId);
     const playable = option?.candidate ?? null;
-    if (!option || !playable) return;
+    if (!option || !playable || !host) return;
     const begun = beginMotionAssetLoad(stateRef.current);
     if (begun.requestToken === null) return;
     abortRef.current?.abort();
+    host.restoreSourceMotion("new-source-motion-request");
     playbackRef.current?.dispose();
     playbackRef.current = null;
     publish(begun.state);
@@ -100,7 +152,7 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction 
       const uri = new URL(playable.asset.uri, window.location.href);
       const response = await fetch(uri, { signal: abort.signal });
       if (!response.ok) throw new Error("asset request failed");
-      const bytes = await response.arrayBuffer();
+      const bytes = await readMotionPackage(response, abort.signal);
       const resource = await loadAnimationScene(bytes, playable.asset, {
         basePath: new URL(".", uri).href,
         signal: abort.signal,
@@ -111,12 +163,25 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction 
         return;
       }
 
-      const controller = new AnimationPlaybackController(resource, playable.asset.clip.id, {
-        onTimeChange: (time, completed) => {
+      const controller = await host.attachSourceMotion(playable.asset, resource, (time, completed) => {
           const latest = stateRef.current;
           publish(setMotionTime(latest, completed ? playable.asset.clip.durationSeconds : time));
-        },
-      });
+        }, (reason) => {
+          abortRef.current?.abort();
+          abortRef.current = null;
+          playbackRef.current = null;
+          const latest = stateRef.current;
+          publish({ ...latest, session: { status: "idle", definitionId: null, assetId: null, currentTimeSeconds: 0,
+            playbackSpeed: 1, selectedStructureIds: [], errorMessage: null }, durationSeconds: null,
+            generation: latest.generation + 1, boundStructureIds: [] });
+          void reason;
+        });
+      const afterAttach = stateRef.current;
+      if (abort.signal.aborted || afterAttach.generation !== begun.requestToken || afterAttach.session.status !== "loading") {
+        host.restoreSourceMotion("late-motion-response");
+        controller.dispose();
+        return;
+      }
       playbackRef.current = controller;
       const ready = acceptMotionAssetLoad(current, begun.requestToken, {
         actionId: option.id,
@@ -135,6 +200,7 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction 
       }
     } catch {
       if (abort.signal.aborted) return;
+      host.restoreSourceMotion("source-motion-load-failed");
       playbackRef.current?.dispose();
       playbackRef.current = null;
       publish(failMotionAssetLoad(stateRef.current, begun.requestToken));
@@ -210,7 +276,7 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction 
 
   return <section className="motion-player" aria-label="움직임으로 이해하기" data-testid="motion-player">
     <h4>움직임으로 이해하기</h4>
-    <fieldset className="motion-action-picker" aria-label="작용 선택">
+    {showActionPicker && <fieldset className="motion-action-picker" aria-label="작용 선택">
       <legend>작용 선택</legend>
       {actions.length ? actions.map((action) => <button
         type="button"
@@ -218,7 +284,7 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction 
         aria-pressed={action.id === selectedActionId}
         onClick={() => onSelectAction(action.id)}
       >{action.label}</button>) : <p className="quiet-note">연결된 작용 자료가 없습니다.</p>}
-    </fieldset>
+    </fieldset>}
     <p className="motion-player-status" role="status" aria-live="polite">{statusText}</p>
     {state.prefersReducedMotion && available && <button type="button" onClick={loadStaticPose} disabled={!candidate || state.session.status === "loading"}>
       정지 자세 보기

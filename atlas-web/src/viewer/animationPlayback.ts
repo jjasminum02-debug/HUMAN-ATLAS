@@ -77,6 +77,10 @@ export interface AnimationPlaybackOptions {
   onTimeChange?: (timeSeconds: number, completed: boolean) => void;
   scheduler?: AnimationFrameScheduler;
   repeat?: boolean;
+  /** Use the existing anatomy renderer's frame clock instead of creating another RAF chain. */
+  registerUpdate?: (update: (deltaSeconds: number) => void) => () => void;
+  /** Same-scene hosts own the imported GLTF resource and restore their nodes before disposal. */
+  disposeResource?: boolean;
 }
 
 /** Playback owns only animation pose/time. It has no camera or view-reset dependency. */
@@ -85,11 +89,14 @@ export class AnimationPlaybackController {
   private readonly mixer: AnimationMixer;
   private readonly action: AnimationAction;
   private readonly root: Object3D;
-  private readonly loop: SingleAnimationFrameLoop;
+  private readonly loop: SingleAnimationFrameLoop | null;
   private readonly resource: Pick<AnimationSceneResource, "scene" | "animations" | "dispose">;
   private readonly options: AnimationPlaybackOptions;
   private currentTimeSeconds = 0;
   private disposed = false;
+  private sharedPlaying = false;
+  private speed = 1;
+  private readonly unregisterUpdate: (() => void) | null;
 
   constructor(
     resource: Pick<AnimationSceneResource, "scene" | "animations" | "dispose">,
@@ -101,7 +108,7 @@ export class AnimationPlaybackController {
     this.root = resource.scene;
     const clip: AnimationClip | undefined = resource.animations.find((candidate) => candidate.name === clipId);
     if (!clip || !Number.isFinite(clip.duration) || clip.duration <= 0) {
-      resource.dispose();
+      if (options.disposeResource !== false) resource.dispose();
       throw new Error("재생할 시범 clip을 찾을 수 없습니다.");
     }
     this.durationSeconds = clip.duration;
@@ -113,27 +120,42 @@ export class AnimationPlaybackController {
     this.action.paused = true;
     this.action.time = 0;
     this.mixer.update(0);
-    this.loop = new SingleAnimationFrameLoop((delta) => this.step(delta), options.scheduler);
+    if (options.registerUpdate) {
+      this.loop = null;
+      this.unregisterUpdate = options.registerUpdate((delta) => {
+        if (!this.sharedPlaying || this.disposed) return;
+        if (!this.step(delta * this.speed)) this.sharedPlaying = false;
+      });
+    } else {
+      this.loop = new SingleAnimationFrameLoop((delta) => this.step(delta), options.scheduler);
+      this.unregisterUpdate = null;
+    }
   }
 
   get currentTime(): number { return this.currentTimeSeconds; }
-  get isPlaying(): boolean { return this.loop.isRunning; }
+  get isPlaying(): boolean { return this.loop?.isRunning ?? this.sharedPlaying; }
 
   play(speed = 1): void {
     if (this.disposed) return;
     if (this.currentTimeSeconds >= this.durationSeconds) this.seek(0);
     this.action.paused = false;
-    this.loop.start(speed);
+    this.speed = Number.isFinite(speed) && speed > 0 ? speed : 1;
+    if (this.loop) this.loop.start(this.speed);
+    else this.sharedPlaying = true;
   }
 
   pause(): void {
     if (this.disposed) return;
-    this.loop.stop();
+    this.loop?.stop();
+    this.sharedPlaying = false;
     this.action.paused = true;
   }
 
   setSpeed(speed: number): void {
-    if (!this.disposed) this.loop.setSpeed(speed);
+    if (!this.disposed && Number.isFinite(speed) && speed > 0) {
+      this.speed = speed;
+      this.loop?.setSpeed(speed);
+    }
   }
 
   seek(timeSeconds: number): void {
@@ -157,11 +179,13 @@ export class AnimationPlaybackController {
   dispose(): void {
     if (this.disposed) return;
     this.disposed = true;
-    this.loop.stop();
+    this.loop?.stop();
+    this.sharedPlaying = false;
+    this.unregisterUpdate?.();
     this.mixer.stopAllAction();
     this.mixer.uncacheAction(this.action.getClip(), this.root);
     this.mixer.uncacheRoot(this.root);
-    this.resource.dispose();
+    if (this.options.disposeResource !== false) this.resource.dispose();
   }
 
   private step(deltaSeconds: number): boolean {

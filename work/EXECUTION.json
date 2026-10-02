@@ -2962,13 +2962,45 @@
       "title": "전체 근육용 공통 변형·제작·재생 경로",
       "owner": "Sol High",
       "phase": "G4",
-      "executionStatus": "planned_not_started",
-      "acceptance": "pending",
+      "executionStatus": "in_progress",
+      "acceptance": "partial",
       "spec": "work/tasks/T59-APP-COMPLETION.md",
       "scope": "T35의 전체 근육 계약에 따라 같은 전신 scene에서 원본 source 표면의 derived 변형/관절 움직임을 제작하고 공통 player/CTA/취소/복원을 구현한다. 근육별 runtime 코드나 별도 viewer를 만들지 않는다. T60를 흡수한다. 실제 검증 표본은 공통 경로 검증 수단이며 전체 429 target/232 source 제작 범위를 축소하지 않는다. T66용 전수 authoring manifest와 hash/validator를 실제 남긴다.",
       "progress": {
-        "nextUnit": null,
-        "completedUnits": []
+        "nextUnit": "produce-and-verify-one-real-source-derived-same-scene-motion-package-and-playback-restore",
+        "completedUnits": [
+          "implement-sourceKey-frame-unit-pose-side-hash-binding-and-moving-fixed-passive-contract",
+          "retain-full-gltf-hierarchy-skin-morph-clips-and-use-existing-scene-controller-clock",
+          "add-source-local-reproducible-morph-exporter-and-fail-closed-input-validation",
+          "connect-lazy-same-scene-player-lifecycle-and-explicit-action-key-learner-link",
+          "generate-and-validate-full-429-target-447-membership-232-concept-462-surface-authoring-manifest",
+          "reconcile-stale-r1-worker-proposals-against-r2-without-editing-historical-inputs",
+          "run-motion-tests-schema-fixtures-typecheck-build-and-current-browser-disabled-cta-check"
+        ],
+        "productAcceptance": {
+          "contractRevision": "app-completion-2026-10-01",
+          "acceptanceScope": "T59 common same-scene source-bound motion runtime/export contract and full T66 authoring handoff; does not claim a production muscle clip or completed whole-muscle motion content",
+          "productReadiness": "partial",
+          "contentCompleteness": "partial",
+          "knownContentGaps": [
+            "429 whole-muscle targets, 447 memberships, 232 source concepts, and 462 surfaces remain in the complete authoring denominator; no production package is currently authorable from the frozen static inventory.",
+            "No source-native muscle bind/rest pose or verified per-source action-conditioned deformation input is present.",
+            "Real same-scene muscle surface start/mid/end, bone/attachment/passive-context continuity, penetration and player restore have not been verified."
+          ],
+          "unresolvedProductBlockers": [
+            "A source-derived motion package with exact source identity, laterality, frame, rest pose, geometry hash and non-scale deformation input is unavailable.",
+            "Real-asset browser play/pause/seek/reset/restore cannot be exercised until that package is available."
+          ],
+          "evidence": [
+            "work/reports/T59.md",
+            "work/evidence/T59/verification.json",
+            "work/evidence/T59/browser-qa.json",
+            "work/evidence/T59/resource-budget.json",
+            "work/evidence/T59/progress.json",
+            "work/evidence/T59/authoring-run-manifest.json",
+            "work/evidence/T59/worker-reconciliation.json"
+          ]
+        }
       },
       "report": "work/reports/T59.md",
       "promptFile": "work/prompts/app-completion-2026-10-01/14-T59.txt",

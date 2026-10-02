@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "t59-verification-v1",
+  "task": "T59",
+  "recordedOn": "2026-10-02",
+  "status": "partial",
+  "baseline": {
+    "head": "be9cb4575ef3a5927a2a01ed4bf444765a352c4f",
+    "dirtyPathCount": 374,
+    "evidence": "work/evidence/T59/start-baseline.json"
+  },
+  "sourcePreservation": {
+    "openSimHeadAtStart": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "openSimStatusAtStart": [],
+    "openSimUnchangedDuringTask": true,
+    "originalSourceBytesModified": false,
+    "T13DraftsModified": false,
+    "historySnapshotsModified": false
+  },
+  "researchReconciliation": {
+    "r2RunId": "all-muscle-motion-research-2026-10-02-f60d89acaa72-r2",
+    "assignmentsUnchanged": true,
+    "snapshotsUnchanged": true,
+    "proposalFilesUnmodified": true,
+    "workers": {
+      "A": {
+        "recordedRunId": "all-muscle-motion-research-2026-10-02-f60d89acaa72",
+        "recordedStatus": "stale_one_fixed_input_do_not_rebaseline",
+        "stale": true,
+        "staleInputPaths": [
+          "atlas-data/terminology/learner-card-runtime.json"
+        ],
+        "targetRows": 144,
+        "sourceConceptRows": 66,
+        "sourceKeys": 131,
+        "proposalSha256": "893c63a0cf57840561436bcd7dfd3eb2a26a83541465e49cbae9afc945e0bf9f"
+      },
+      "B": {
+        "recordedRunId": "all-muscle-motion-research-2026-10-02-f60d89acaa72",
+        "recordedStatus": "complete_research_ledger_stale_input_hash_mismatch",
+        "stale": true,
+        "staleInputPaths": [
+          "atlas-data/terminology/learner-card-runtime.json"
+        ],
+        "targetRows": 139,
+        "sourceConceptRows": 76,
+        "sourceKeys": 151,
+        "proposalSha256": "c5bc6cea121eba83fbbba381286ec395cda3be404efa5c42d7d038027f1a2303"
+      },
+      "C": {
+        "recordedRunId": "all-muscle-motion-research-2026-10-02-f60d89acaa72",
+        "recordedStatus": "completed_with_stale_input",
+        "stale": true,
+        "staleInputPaths": [
+          "atlas-data/terminology/learner-card-runtime.json"
+        ],
+        "targetRows": 146,
+        "sourceConceptRows": 90,
+        "sourceKeys": 180,
+        "proposalSha256": "d0ea7a6ba664d9692d55a49a9ccf42f69539f78c90c322651423766994246758"
+      }
+    },
+    "policy": "Reuse frozen identities, assignment sets, immutable source locators and unaffected fields; refresh only learner-projection-dependent action/attachment/pose judgements; preserve original stale headers and raw proposals; no proposal claim is promoted.",
+    "learnerCardRuntimeProjectionChanged": true
+  },
+  "currentRuntime": {
+    "wholeBodyRootAndRendererReused": true,
+    "productionSourceBoundMuscleMotionCandidates": 0,
+    "learnerSafeActionSelectors": 6,
+    "learnerSafeActionRows": 7,
+    "selectedSourceObservationCount": 1,
+    "realSelectedSourceMotionPackageLoaded": false,
+    "currentMotionAssetRecords": 1,
+    "compatiblePlayableCandidates": "0 by source-bound candidate projection"
+  },
+  "authoringHandoff": {
+    "path": "work/evidence/T59/authoring-run-manifest.json",
+    "sha256": "0c48f84ab386d2296755b0e535370ed72df284cf40d7a796ad86cea3b17959f3",
+    "runId": "T59-authoring-handoff-2026-10-02-r1",
+    "nextUnit": "await-source-derived-candidate-packages",
+    "contractInputs": 15,
+    "targets": 429,
+    "memberships": 447,
+    "sourceConcepts": 232,
+    "sourceSurfaces": 462,
+    "productionAuthorablePackages": 0,
+    "workers": {
+      "A": {
+        "targets": 144,
+        "memberships": 144,
+        "sourceConcepts": 66,
+        "sourceSurfaces": 131,
+        "outputDirectory": "work/evidence/T66/authoring-candidates/A"
+      },
+      "B": {
+        "targets": 139,
+        "memberships": 150,
+        "sourceConcepts": 76,
+        "sourceSurfaces": 151,
+        "outputDirectory": "work/evidence/T66/authoring-candidates/B"
+      },
+      "C": {
+        "targets": 146,
+        "memberships": 153,
+        "sourceConcepts": 90,
+        "sourceSurfaces": 180,
+        "outputDirectory": "work/evidence/T66/authoring-candidates/C"
+      }
+    },
+    "validator": "python3 work/tools/validate_t59_authoring_manifest.py --check --fixtures"
+  },
+  "checks": [
+    {
+      "name": "motion domain and JSON runtime contract",
+      "command": "node --experimental-strip-types --test src/domain/motionLearning.test.ts src/domain/legacyJointActionAdapter.test.ts",
+      "result": "passed",
+      "passed": 9,
+      "failed": 0
+    },
+    {
+      "name": "player lifecycle and learner motion projection",
+      "command": "node --experimental-strip-types --test src/domain/motionPlayer.test.ts src/viewer/animationPlayback.test.ts src/data/learning.test.ts",
+      "result": "passed",
+      "passed": 27,
+      "failed": 0
+    },
+    {
+      "name": "GLTF hierarchy/skin/morph/source binding loader",
+      "command": "node --experimental-strip-types --test src/viewer/animationSceneAdapter.test.ts",
+      "result": "passed",
+      "passed": 11,
+      "failed": 0,
+      "warnings": [
+        "Synthetic GLTF fixtures emit missing accessor min/max diagnostics; fixtures still pass."
+      ]
+    },
+    {
+      "name": "existing dataset lifecycle and scene regressions",
+      "command": "node --experimental-strip-types --test src/viewer/datasets/*.test.ts",
+      "result": "passed",
+      "passed": 53,
+      "failed": 0
+    },
+    {
+      "name": "TypeScript project check",
+      "command": "node node_modules/typescript/bin/tsc -b --pretty false",
+      "result": "passed"
+    },
+    {
+      "name": "motion learning schema/provenance fixtures",
+      "command": "python3 atlas-data/schemas/validate_motion_learning.py --check --fixtures",
+      "result": "passed",
+      "fixtures": 19,
+      "productionActions": 7,
+      "productionDefinitions": 1,
+      "productionAssetRecords": 1,
+      "sourceBoundPlayableCandidates": 0
+    },
+    {
+      "name": "deterministic derived surface exporter",
+      "command": "python3 work/tools/test_t59_source_motion_exporter.py",
+      "result": "passed",
+      "scope": "synthetic-only fixtures; no production asset written"
+    },
+    {
+      "name": "full authoring manifest and negative fixtures",
+      "command": "python3 work/tools/validate_t59_authoring_manifest.py --check --fixtures",
+      "result": "passed",
+      "targets": 429,
+      "memberships": 447,
+      "sourceConcepts": 232,
+      "sourceSurfaces": 462,
+      "productionAuthorable": 0,
+      "negativeFixtures": 3
+    },
+    {
+      "name": "full learner build chain",
+      "command": "learner card/motion projection checks; learning, AI evidence, bone names, motion schema/source, T83 content, scene decoders, TypeScript, Vite build and distribution audit",
+      "result": "passed",
+      "viteAppChunkBytes": 929078,
+      "viteAppChunkGzipBytes": 227180,
+      "warning": "Vite App chunk exceeds 500kB; this is a known warning, not a failed build."
+    }
+  ],
+  "nonPassReasons": [
+    "No real source-derived muscle motion package with verified source-native rest/bind pose and action-conditioned deformation is present.",
+    "No real three-pose same-scene surface/bone/attachment/passive-context/penetration and player play/pause/scrub/restore browser proof can be performed without such a package."
+  ],
+  "preservation": {
+    "productDenominators": {
+      "targets": 542,
+      "memberships": 563,
+      "regions": 12,
+      "muscleTargets": 429,
+      "muscleMemberships": 447,
+      "sourceConcepts": 232,
+      "surfaceInstances": 462
+    },
+    "existingCanonicalHaBindings": 130,
+    "historical163": [
+      6,
+      20,
+      135,
+      2
+    ],
+    "localRights": "held_per_source",
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "newCanonicalBindings": 0,
+    "sourceFilesChanged": false,
+    "OpenSim_ModelsChanged": false,
+    "sourceOnlyStatus": "preserved_per_original_record",
+    "originalAnatomySourceAssetsModified": false
+  }
+}

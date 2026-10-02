@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "t59-browser-qa-v1",
+  "task": "T59",
+  "date": "2026-10-02",
+  "browser": "Codex In-app Browser / actual localhost app",
+  "url": "http://127.0.0.1:5173/?source=ZA-c7010a9-74ced50ada635db761f807e4",
+  "result": "partial_runtime_integration_verified; no production playback asset exists",
+  "observed": {
+    "oneExistingAnatomyScene": true,
+    "oneSceneImageCanvas": true,
+    "selectedStructure": "앞정강근",
+    "names": {
+      "우리말명": "앞정강근",
+      "한자어명_한글표기": "전경골근",
+      "영어명": "Tibialis anterior muscle"
+    },
+    "side": "left",
+    "sourceObservationDisplayedInCurrentScene": true,
+    "motionPanel": "움직임으로 이해하기",
+    "noDemoNoticeVisible": true,
+    "playPauseResetSlowSeekControls": "all disabled",
+    "progressPercent": 0,
+    "autoplayObserved": false,
+    "playClicked": false,
+    "reason": "The current learner-safe runtime exposes zero source-bound playable candidates; controls are disabled."
+  },
+  "notVerified": [
+    "Real source-derived start/intermediate/end deformation because no eligible motion package exists.",
+    "Real bone movement, attachment/tendon continuity, neighboring passive deformation, penetration/warping and restoration from an actual source package.",
+    "Browser developer-console logs were not exposed by the current CUA observation interface; no clean-console claim is made."
+  ],
+  "screenshotEvidence": "An actual CUA screenshot was inspected in the task transcript; this CUA surface returned it inline and did not expose a file-write API, so no screenshot file path is claimed."
+}

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
-import { assessMotionCapability, createIdleMotionSession, projectLearnerActionText, type MotionAsset, type MotionDefinition, type MuscleAction } from "./motionLearning.ts";
+import { assessMotionCapability, createIdleMotionSession, projectLearnerActionText, projectLearnerMotionActionOptions, resolveLearnerMotionCandidate, type MotionAsset, type MotionDefinition, type MuscleAction, type MotionLearningBundle } from "./motionLearning.ts";
 
 const production = JSON.parse(readFileSync(new URL("../../../atlas-data/motion/motion-learning.json", import.meta.url), "utf8")) as {
   muscleActions: unknown[]; motionDefinitions: unknown[]; motionAssets: unknown[];
@@ -60,6 +60,19 @@ test("text can be present while there is no compatible motion clip", () => {
   assert.deepEqual(assessMotionCapability(textOnlyUnmapped, undefined, undefined), { hasActionText: true, hasTechnicallyCompatibleClip: false });
 });
 
+test("learner card motion linking requires an explicit action key and compatible side", () => {
+  const candidate = { definition, asset };
+  const projected = [
+    { learnerActionKey: "option-3", sideApplicability: "right" as const, candidate },
+    { learnerActionKey: null, sideApplicability: "right" as const, candidate },
+    { learnerActionKey: "option-4", sideApplicability: "right" as const, candidate },
+  ];
+  assert.deepEqual(resolveLearnerMotionCandidate("option-3", "right", projected), candidate);
+  assert.equal(resolveLearnerMotionCandidate("option-3", "left", projected), null);
+  assert.equal(resolveLearnerMotionCandidate("option-unknown", "right", projected), null, "label similarity is not an association");
+  assert.equal(resolveLearnerMotionCandidate("option-3", "right", [projected[0], projected[0]]), null, "duplicate action links fail closed");
+});
+
 test("clip capability requires exact static scene, side, frame, reference pose, and rig-node binding", () => {
   assert.deepEqual(assessMotionCapability(action, definition, asset), { hasActionText: true, hasTechnicallyCompatibleClip: true });
   const pathAsset: MotionAsset = { ...asset, representationType: "illustrative_path", rig: null, illustration: { id: "FX-ILLUSTRATION-1", trajectoryBindings: [{ structureId: "FX-BONE-MOVING", trajectoryId: "trajectory-1" }] } };
@@ -109,4 +122,34 @@ test("learner action projection translates roles and unspecified contraction int
   assert.equal(output?.citations[0]?.locator, "Action column");
   const serialized = JSON.stringify(output);
   assert.doesNotMatch(serialized, /stabilizer|unspecified|FX-|reviewed|needs_review/);
+});
+
+test("source-only action and clip resolve by exact sourceKey without creating a canonical subject", () => {
+  const sourceKey = "ZA-fixture-muscle-right";
+  const sourceAction: MuscleAction = {
+    ...action, id: "T59-FIXTURE-SOURCE-ACTION", subjectIds: [], sourceSubjectKeys: [sourceKey],
+    learnerActionKey: "option-source-flexion", sideApplicability: "right",
+  };
+  const sourceDefinition: MotionDefinition = {
+    ...definition, id: "T59-FIXTURE-SOURCE-DEFINITION", actionId: sourceAction.id, instanceId: sourceKey,
+  };
+  const sourceAsset: MotionAsset = {
+    ...asset, id: "T59-FIXTURE-SOURCE-ASSET", motionDefinitionId: sourceDefinition.id, representationType: "source_bound_surface",
+    sourceBinding: {
+      contractVersion: "t59-source-motion-binding-v1", datasetNamespace: "fixture-dataset", datasetRevision: "fixture-revision",
+      integrationRevision: "fixture-integration", sourceOverlaySha256: "e".repeat(64), subjectSourceKey: sourceKey,
+      frameId: sourceDefinition.staticReference.frameId, units: "m", referencePoseId: sourceDefinition.startPoseId, deformation: "morph_targets",
+      members: [{ sourceKey, nodeId: "fixture-surface", sourceNamespace: "za-fixture", role: "deforming_muscle_surface", side: "right",
+        resourceKey: "fixture-resource", lod: "detail", sourceChunkSha256: "f".repeat(64), geometrySha256: "1".repeat(64),
+        instanceMatrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] }],
+    },
+  };
+  const bundle: MotionLearningBundle = { schemaVersion: "1.0.0", revision: "fixture", muscleActions: [sourceAction],
+    motionDefinitions: [sourceDefinition], motionAssets: [sourceAsset] };
+  const [option] = projectLearnerMotionActionOptions(sourceKey, bundle, [], "right");
+  assert.equal(option?.id, "option-source-flexion");
+  assert.deepEqual(option?.subjectIds, [sourceKey]);
+  assert.equal(option?.candidate?.asset.id, sourceAsset.id);
+  assert.equal(projectLearnerMotionActionOptions(sourceKey, bundle, [], "left").length, 0);
+  assert.equal(projectLearnerMotionActionOptions("ZA-other-source", bundle, [], "right").length, 0);
 });

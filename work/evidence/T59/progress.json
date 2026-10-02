@@ -1,0 +1,20 @@
+{
+  "task": "T59",
+  "executionStatus": "in_progress",
+  "acceptance": "partial",
+  "nextUnit": "produce-and-verify-one-real-source-derived-same-scene-motion-package-and-playback-restore",
+  "completedUnits": [
+    "Define sourceKey/frame/unit/reference-pose/hash/side/namespace/revision binding and moving/fixed/passive roles.",
+    "Retain full glTF node/skin/morph/clip graph in a shared single-scene adapter and use the AnatomySceneController frame clock.",
+    "Add deterministic source-local per-vertex morph exporter with exact hashes and fail-closed side/zero-deformation checks; tests only use synthetic fixtures.",
+    "Wire source-keyed lazy player/CTA lifecycle and restoration into the existing viewer; no real candidate is advertised.",
+    "Generate and validate the full T66 authoring handoff with original A/B/C stale run provenance."
+  ],
+  "unresolvedProductBlockers": [
+    "No exact source package currently supplies a verified source-native rest/bind pose and source-derived action deformation.",
+    "End-to-end real source surface playback and restoration has not been browser-verified."
+  ],
+  "contentCompleteness": "partial",
+  "nextTaskAfterT59Gate": "T25 (specified downstream ID; not started)",
+  "T66": "handoff manifest only; no candidate packages or authoring work started"
+}

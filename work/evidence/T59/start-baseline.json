@@ -1,0 +1,1540 @@
+{
+  "schemaVersion": "t59-start-baseline-v1",
+  "task": "T59",
+  "capturedAt": "2026-10-02",
+  "baselineHead": "be9cb4575ef3a5927a2a01ed4bf444765a352c4f",
+  "branch": "main",
+  "dirtyPathCount": 374,
+  "dirtyPaths": [
+    {
+      "status": " M",
+      "path": "AGENTS.md"
+    },
+    {
+      "status": " M",
+      "path": "atlas-data/terminology/learner-attachment-context.json"
+    },
+    {
+      "status": " M",
+      "path": "atlas-data/terminology/learner-card-runtime.json"
+    },
+    {
+      "status": " M",
+      "path": "atlas-web/scripts/buildLearnerCardRuntime.mjs"
+    },
+    {
+      "status": " M",
+      "path": "atlas-web/src/domain/sourceAttachments.ts"
+    },
+    {
+      "status": " M",
+      "path": "design/2026-09-25-muscle-atlas/00-START-HERE.md"
+    },
+    {
+      "status": " M",
+      "path": "design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md"
+    },
+    {
+      "status": " M",
+      "path": "design/2026-09-25-muscle-atlas/07-AI-EVIDENCE-AND-MOTION-DESIGN.md"
+    },
+    {
+      "status": " M",
+      "path": "design/2026-09-25-muscle-atlas/08-SERIAL-ROADMAP-AND-GIT.md"
+    },
+    {
+      "status": " M",
+      "path": "work/STATUS.md"
+    },
+    {
+      "status": " M",
+      "path": "work/task-registry-r13.json"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T24.md"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T25.md"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T26.md"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T27.md"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T28.md"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T29.md"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T30.md"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T31.md"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T32.md"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T33.md"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T34.md"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T35.md"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T36.md"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T37.md"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T38.md"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T39.md"
+    },
+    {
+      "status": " M",
+      "path": "work/tasks/T40.md"
+    },
+    {
+      "status": "??",
+      "path": "atlas-data/terminology/muscle-attachment-content-2026-10-02.json"
+    },
+    {
+      "status": "??",
+      "path": "design/2026-09-25-muscle-atlas/10-STRUCTURE-FUNCTION-DELIVERY-PLAN.md"
+    },
+    {
+      "status": "??",
+      "path": "design/2026-09-25-muscle-atlas/11-TASK-PROMPTS-R14.md"
+    },
+    {
+      "status": "??",
+      "path": "design/2026-09-25-muscle-atlas/12-ASSESSMENT-ANIMATION-FUTURE.md"
+    },
+    {
+      "status": "??",
+      "path": "design/2026-09-25-muscle-atlas/13-CONTINUOUS-WHOLE-BODY-EXPERIENCE-R15.md"
+    },
+    {
+      "status": "??",
+      "path": "design/2026-09-25-muscle-atlas/14-TASK-PROMPTS-R15.md"
+    },
+    {
+      "status": "??",
+      "path": "design/2026-09-25-muscle-atlas/15-NERVE-AND-ASSESSMENT-SCOPE-R15.md"
+    },
+    {
+      "status": "??",
+      "path": "design/2026-09-25-muscle-atlas/16-ASTRA-UI-HANDOFF.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/AGENTS.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/00-START-HERE.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/01-PRODUCT-AND-ARCHITECTURE.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/02-DATA-CONTRACT.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/04-SOURCES-AND-DECISIONS.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/design/2026-09-25-muscle-atlas/06-REGION12-MUSCLE-BONE-REVISION.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/DECISIONS.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/STATUS.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14a.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T14b.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15a.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15b.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15c.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15d.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15e.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15f.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T15g.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T16.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T17.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T18.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T19.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T20.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T21.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T22.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T23.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-motion-roadmap/before/work/tasks/T24.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/AGENTS.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/00-START-HERE.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/01-PRODUCT-AND-ARCHITECTURE.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/02-DATA-CONTRACT.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/design/2026-09-25-muscle-atlas/04-SOURCES-AND-DECISIONS.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/DECISIONS.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/STATUS.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T15.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T16.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T17.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T18.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T19.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T20.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T21.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T22.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T23.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-26-region12-design/before/work/tasks/T24.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/AGENTS.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/design/2026-09-25-muscle-atlas/00-START-HERE.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/design/2026-09-25-muscle-atlas/13-CONTINUOUS-WHOLE-BODY-EXPERIENCE-R15.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/design/2026-09-25-muscle-atlas/14-TASK-PROMPTS-R15.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/work/task-registry-r15.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T51.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T52.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T53.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T54.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T55.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T56.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T57.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/before/work/tasks/T58.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/changed-paths.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-astra-ui-handoff/validation.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/before-plan-docs/AGENTS.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/00-START-HERE.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/07-AI-EVIDENCE-AND-MOTION-DESIGN.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/before-plan-docs/design/2026-09-25-muscle-atlas/08-SERIAL-ROADMAP-AND-GIT.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/git-status-before.txt"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/head.txt"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/owned-files.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/protected-before.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r14-plan/validation.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/AGENTS.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/00-START-HERE.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/03-LUNA-SERIAL-RUNBOOK.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/10-STRUCTURE-FUNCTION-DELIVERY-PLAN.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/11-TASK-PROMPTS-R14.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/design/2026-09-25-muscle-atlas/12-ASSESSMENT-ANIMATION-FUTURE.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/STATUS.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T25.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T26.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T27.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T28.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T29.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T30.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T31.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T32.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T33.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T34.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T35.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T36.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T37.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T38.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T39.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T40.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T45.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T46.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T47.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T48.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/before/work/tasks/T49.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/head.txt"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/owned-paths.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/protected-before.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/status-before.txt"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/2026-09-27-r15-plan/validation.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/closure-audit-2026-09-30/browser-new-relations/raster-ledger.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/closure-audit-2026-09-30/browser-new-relations/screenshots/ed53082e23ca72a6010e.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/closure-audit-2026-09-30/browser-new-relations/screenshots/fae046274520382d40a6.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/closure-audit-2026-09-30/browser-raster-mask-validation/raster-ledger.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/closure-audit-2026-09-30/browser-raster-mask-validation/screenshots/ed53082e23ca72a6010e.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/closure-audit-2026-09-30/browser-raster-mask-validation/screenshots/fae046274520382d40a6.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/closure-audit-2026-09-30/browser-raster-mask-validation/screenshots/hidden-control.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/closure-audit-2026-09-30/commit-receipt.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/completion-2026-09-30/commit-receipt.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/parallel-resolution-2026-09-30/representation-a/proposals.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/parallel-resolution-2026-09-30/representation-a/source-candidate-evidence.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/parallel-resolution-2026-09-30/representation-a/start.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/parallel-resolution-2026-09-30/representation-a/summary.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/parallel-resolution-2026-09-30/representation-b/proposals.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/parallel-resolution-2026-09-30/representation-b/source-object-audit.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/parallel-resolution-2026-09-30/representation-b/start.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/parallel-resolution-2026-09-30/representation-b/summary.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/parallel-resolution-2026-09-30/terminology-c/start.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/parallel-resolution-2026-09-30/terminology-c/summary.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/parallel-resolution-2026-09-30/terminology-c/term-evidence.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/parallel-resolution-2026-09-30/terminology-c/term-source-register.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/parallel-resolution-2026-09-30/visual-qa/qa-ledger.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/parallel-resolution-2026-09-30/visual-qa/samples.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/parallel-resolution-2026-09-30/visual-qa/screenshots/README.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/parallel-resolution-2026-09-30/visual-qa/summary.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/resolution-2026-09-29/commit-receipt.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/raster-ledger.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/180602067dce2564c972-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/180602067dce2564c972.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/23e76ce2858c27df86b3-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/23e76ce2858c27df86b3.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/313de5ffedf24f9293e8-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/313de5ffedf24f9293e8.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/41e2af695b6cd9490f98-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/41e2af695b6cd9490f98.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/43f016d7a0f7c5ccd7f2-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/43f016d7a0f7c5ccd7f2.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/4513a33d60d1a69500bd-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/4513a33d60d1a69500bd.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/70ff4a23e4eba1b7839b-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/70ff4a23e4eba1b7839b.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/81988d121775c5c0a779-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/81988d121775c5c0a779.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/b9c8e26af003d7be7049-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/b9c8e26af003d7be7049.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/c2dbe5b82ff496a7b734-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/c2dbe5b82ff496a7b734.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/df45d1a7da306f7e13a9-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/df45d1a7da306f7e13a9.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/e4ce917c0ee401d40447-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/e4ce917c0ee401d40447.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/ffd14c6c479b10862f16-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/ffd14c6c479b10862f16.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v4/screenshots/hidden-control.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/raster-ledger.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/180602067dce2564c972-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/180602067dce2564c972.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/23e76ce2858c27df86b3-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/23e76ce2858c27df86b3.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/313de5ffedf24f9293e8-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/313de5ffedf24f9293e8.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/41e2af695b6cd9490f98-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/41e2af695b6cd9490f98.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/43f016d7a0f7c5ccd7f2-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/43f016d7a0f7c5ccd7f2.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/4513a33d60d1a69500bd-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/4513a33d60d1a69500bd.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/70ff4a23e4eba1b7839b-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/70ff4a23e4eba1b7839b.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/81988d121775c5c0a779-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/81988d121775c5c0a779.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/b9c8e26af003d7be7049-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/b9c8e26af003d7be7049.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/c2dbe5b82ff496a7b734-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/c2dbe5b82ff496a7b734.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/df45d1a7da306f7e13a9-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/df45d1a7da306f7e13a9.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/e4ce917c0ee401d40447-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/e4ce917c0ee401d40447.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/ffd14c6c479b10862f16-context.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/ffd14c6c479b10862f16.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-current-v6/screenshots/hidden-control.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v10/responsive-browser-smoke.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v10/screenshots/viewport-1024.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v10/screenshots/viewport-1440.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v10/screenshots/viewport-390.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v6/responsive-browser-smoke.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v6/screenshots/viewport-1024.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v6/screenshots/viewport-1440.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v6/screenshots/viewport-390.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v7/responsive-browser-smoke.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v7/screenshots/viewport-1024.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v7/screenshots/viewport-1440.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v7/screenshots/viewport-390.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v8/responsive-browser-smoke.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v8/screenshots/viewport-1024.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v8/screenshots/viewport-1440.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/browser-responsive-v8/screenshots/viewport-390.png"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/mixed-runtime-route-validation.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/resource-budget.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/resume-baseline.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/runtime-v5/mixed-runtime-route-validation.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/runtime-v5/supplement-target-relation-ledger.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/runtime-v6/mixed-runtime-route-validation.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/runtime-v6/supplement-target-relation-ledger.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/runtime-v7/mixed-runtime-route-validation.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/runtime-v7/supplement-target-relation-ledger.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/supplement-target-relation-ledger.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/source-completion-2026-10-01/integration/unresolved-source-triage.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/target-scope-resolution-2026-09-30/commit-receipt.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T100/target-scope-resolution-2026-09-30/server.log"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T99/commit-receipt.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/T99/server.log"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-a/progress.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-a/proposals.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-a/source-evidence-catalog.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-a/source-review-notes.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-a/start.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-a/summary.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-b/external-claims.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-b/external-sources.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-b/final-validation.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-b/input-hash-audit.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-b/openstax-source-review-notes.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-b/progress.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-b/proposals.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-b/start.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-b/summary.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-c/external-sources.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-c/progress.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-c/proposals.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-c/self-audit.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-c/start.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-all-muscles-plan-2026-10-02/research-c/summary.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-content-audit-2026-10-02/REPORT.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/motion-content-audit-2026-10-02/audit.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/muscle-attachment-review-2026-10-02/build-review-pack.py"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/muscle-attachment-review-2026-10-02/claims.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/muscle-attachment-review-2026-10-02/coverage.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/muscle-attachment-review-2026-10-02/final-validation.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/muscle-attachment-review-2026-10-02/selection-decisions.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/muscle-attachment-review-2026-10-02/source-catalog.json"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/muscle-attachment-review-2026-10-02/source-review-notes.md"
+    },
+    {
+      "status": "??",
+      "path": "work/evidence/muscle-attachment-review-2026-10-02/supplemental-claims.json"
+    },
+    {
+      "status": "??",
+      "path": "work/prompts/T100-parallel-2026-09-30/00-integrator.md"
+    },
+    {
+      "status": "??",
+      "path": "work/prompts/T100-parallel-2026-09-30/01-representation-a.md"
+    },
+    {
+      "status": "??",
+      "path": "work/prompts/T100-parallel-2026-09-30/02-representation-b.md"
+    },
+    {
+      "status": "??",
+      "path": "work/prompts/T100-parallel-2026-09-30/03-terminology-c.md"
+    },
+    {
+      "status": "??",
+      "path": "work/prompts/T100-parallel-2026-09-30/04-visual-qa.md"
+    },
+    {
+      "status": "??",
+      "path": "work/prompts/T100-parallel-2026-09-30/README.md"
+    },
+    {
+      "status": "??",
+      "path": "work/prompts/motion-content-handoff-2026-10-02/01-T59.txt"
+    },
+    {
+      "status": "??",
+      "path": "work/prompts/motion-content-handoff-2026-10-02/02-T25.txt"
+    },
+    {
+      "status": "??",
+      "path": "work/prompts/motion-content-handoff-2026-10-02/03-authoring-A.txt"
+    },
+    {
+      "status": "??",
+      "path": "work/prompts/motion-content-handoff-2026-10-02/03-authoring-B.txt"
+    },
+    {
+      "status": "??",
+      "path": "work/prompts/motion-content-handoff-2026-10-02/03-authoring-C.txt"
+    },
+    {
+      "status": "??",
+      "path": "work/prompts/motion-content-handoff-2026-10-02/04-T66.txt"
+    },
+    {
+      "status": "??",
+      "path": "work/prompts/motion-content-handoff-2026-10-02/05-T85.txt"
+    },
+    {
+      "status": "??",
+      "path": "work/prompts/motion-content-handoff-2026-10-02/06-T40.txt"
+    },
+    {
+      "status": "??",
+      "path": "work/prompts/motion-content-handoff-2026-10-02/README.md"
+    },
+    {
+      "status": "??",
+      "path": "work/reports/R14-2026-09-27-PLAN.md"
+    },
+    {
+      "status": "??",
+      "path": "work/reports/R15-2026-09-27-PLAN.md"
+    },
+    {
+      "status": "??",
+      "path": "work/reports/muscle-attachment-review-2026-10-02.md"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T22-2026-09-27/REVIEW.md"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T22-2026-09-27/edge-repro.patch"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T22-2026-09-27/node-tests.log"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T22-2026-09-27/validation.log"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T22-2026-09-27/verification.json"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T50-T55-T69-2026-09-27/REVIEW.md"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T50-T55-T69-2026-09-27/audit_sources.py"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T50-T55-T69-2026-09-27/baseline.json"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T50-T55-T69-2026-09-27/build.log"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T50-T55-T69-2026-09-27/historical-t52-validator.json"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T50-T55-T69-2026-09-27/preservation.json"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T50-T55-T69-2026-09-27/source-audit.json"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T50-T55-T69-2026-09-27/t52-integrity.json"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T50-T55-T69-2026-09-27/test_bodyparts3d_r4_ingest.py.log"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T50-T55-T69-2026-09-27/test_bodyparts3d_r4_t53.py.log"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T50-T55-T69-2026-09-27/test_bodyparts3d_r4_t54.py.log"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T50-T55-T69-2026-09-27/test_bodyparts3d_r4_t55.py.log"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T50-T55-T69-2026-09-27/test_diagnose_bodyparts3d_r4_t52_laterality.py.log"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T50-T55-T69-2026-09-27/test_extract_bodyparts3d_r4_selected_zip_members.py.log"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T50-T55-T69-2026-09-27/typecheck.log"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T50-T55-T69-2026-09-27/web-checks.json"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T52-2026-09-27/REVIEW-AND-NEXT.md"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T52-2026-09-27/baseline.json"
+    },
+    {
+      "status": "??",
+      "path": "work/reviews/T52-2026-09-27/verification.json"
+    },
+    {
+      "status": "??",
+      "path": "work/task-registry-r14.json"
+    },
+    {
+      "status": "??",
+      "path": "work/task-registry-r15.json"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T23-R14-RESUME.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T41.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T43.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T44.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T45.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T46.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T47.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T48.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T49.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T50.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T51.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T52.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T53.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T54.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T56.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T57.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T58.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T59.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T60.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T61.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T62.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T63.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T64.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T65.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T66.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T67.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T68.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/T69.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T24.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T25.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T26.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T27.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T28.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T29.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T30.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T31.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T32.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T33.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T34.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T35.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T36.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T37.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T38.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T39.md"
+    },
+    {
+      "status": "??",
+      "path": "work/tasks/archive/R13-before-R14/T40.md"
+    }
+  ],
+  "watchedInputSha256": {
+    "work/EXECUTION.json": "3536978154f3d6bea245051ee33afd949389e57bad4d8ad17241cd8d793d540b",
+    "work/product-acceptance.json": "d2003d6b101c3f0a6dd5bc91f7c0ae709baa9688673e99537935e0be82d26ce3",
+    "work/tasks/T59-APP-COMPLETION.md": "4506143f21667a9dc0eceaf1cb4655537f77b83af2ed3c6491d256c89a5bc7e4",
+    "work/prompts/app-completion-2026-10-01/14-T59.txt": "dd2f681dcfb0cabde1a71f591e9251e563828c5d60b0f3e50e1178aa30ef4fd1",
+    "work/reports/T35.md": "b6af623f16cc4ba4fa53b489aa6654bf4c34f40b87265e01919c0315fa262f2c",
+    "work/evidence/T35/motion-contract.json": "6847301f1189ced52a10e844310bcb7539a8fe30b036528fb122616202685eed",
+    "work/evidence/T35/motion-readiness-ledger.json": "22d137757138d7ca78907d4536f2aef3258f68d6dda1f4add152e4bfa1f54f80",
+    "work/evidence/T35/manifest-reconciliation.json": "b234699f96180a8525913a8492f9508362333312bcc9aeb014ea2c0d8aaa3f7b",
+    "work/evidence/T35/runtime-capability-audit.json": "72c8ca7ffacbf63a68bec7a84357702fe1d897f7ce62d7f91e2c7ba005cd9c81",
+    "work/evidence/motion-content-audit-2026-10-02/audit.json": "9dc433b3e0a45f4f8f42eb548e48aadacf6fcb8e53125d846592f1201fa92b03",
+    "work/evidence/motion-all-muscles-plan-2026-10-02/run-manifest.json": "3a10b1b137566d3527c0850cf31f2bb6a487c131ffa80cd8ac1a4f4f0d3d2d21",
+    "work/evidence/motion-all-muscles-plan-2026-10-02/run-manifest-r2.json": "d6723f25d50049a682cb6641584c65aaf05385deb987af0da9e42563d638db2c",
+    "atlas-web/src/viewer/wholeBody/AnatomySceneController.ts": "1bf3042ad6ac2317421a4a24d6493c8d6174492a3e94b9f0811dd6ad318e8dfc",
+    "atlas-web/src/viewer/datasets/DatasetResources.ts": "5cdff7b6ed9d541c02eb0561e372bd95b63dda5c8205943dde9d2242f6d1efae",
+    "atlas-web/src/viewer/datasets/DatasetSceneAdapter.ts": "58f9d138f2c2c515a349ff55779fe86fae1050c57ed7cb5533d9b9e50c2d8575",
+    "atlas-web/src/ui/MotionLearningPanel.tsx": "136cf4654e63172a737a70557b1b0af050634eb8c9e676efbdee139fdf2f1310",
+    "atlas-web/src/ui/App.tsx": "e30173006518257ae886176bcc163e9bb26269b5280289dce4198eb6c8d3bee6",
+    "atlas-web/src/viewer/animationSceneAdapter.ts": "657aa1dc64fbef2fd71826d32a3d6010f2fbafaa5114c1cbf4181b1eb0b58789",
+    "atlas-web/src/viewer/animationPlayback.ts": "763a337b9aae9e9c142c01ca93f1c783a425494890a7fd80fe481c7e7c9e6d41",
+    "atlas-web/src/domain/motionPlayer.ts": "72f3066635c0fcf6df0fdf24020b5db252a0ba522ef7c0883fd138ce194dd45b",
+    "atlas-web/src/domain/motionLearning.ts": "e9b93f7b01466f4a7e78d76c4374a93e74afaa5c3be925b75021111cbe20642d"
+  },
+  "openSim": {
+    "head": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "status": [],
+    "unchangedDuringT59": true
+  },
+  "protection": [
+    "Existing dirty files listed above are pre-existing WIP; do not reset or stage wholesale.",
+    "OpenSim_Models is immutable read-only source.",
+    "T35 history, source bytes, T13 drafts, user changes and motion research worker source outputs are preserved."
+  ],
+  "priorT59EvidenceExisted": false
+}

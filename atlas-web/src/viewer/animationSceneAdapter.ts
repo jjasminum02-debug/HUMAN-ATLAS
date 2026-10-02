@@ -10,6 +10,7 @@ import {
 } from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import type { MotionAsset } from "../domain/motionLearning.ts";
+import { DATASET_BUDGET } from "./datasets/schema.ts";
 
 /** Explicitly retained, source-specific motion frames. No cross-frame alignment is implied. */
 export const SUPPORTED_MOTION_FRAME = "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR";
@@ -39,7 +40,15 @@ export interface AnimationSceneResource {
   readonly animations: readonly AnimationClip[];
   readonly rigNodes: ReadonlyMap<string, Object3D>;
   readonly pathNodes: ReadonlyMap<string, Object3D>;
+  /** SourceKey-to-node map for the current-scene surface binding contract. */
+  readonly sourceNodes: ReadonlyMap<string, Object3D>;
   readonly skinnedMeshCount: number;
+  readonly morphMeshCount: number;
+  /** Conservative active-memory estimate: fetched GLB plus geometry and animation buffers. */
+  readonly memoryEstimateBytes: number;
+  readonly geometryBytes: number;
+  readonly animationBytes: number;
+  readonly sourceBytes: number;
   dispose(): void;
 }
 
@@ -73,6 +82,32 @@ function assertAssetContract(asset: MotionAsset): void {
     if (!asset.illustration || asset.rig || asset.illustration.trajectoryBindings.length === 0) {
       throw new Error("illustrative_path는 illustration trajectory binding만 가져야 합니다.");
     }
+  } else if (asset.representationType === "source_bound_surface") {
+    const binding = asset.sourceBinding;
+    if (!binding || binding.contractVersion !== "t59-source-motion-binding-v1" || binding.members.length === 0
+      || !binding.datasetNamespace || !binding.datasetRevision || !binding.integrationRevision
+      || !/^[a-f0-9]{64}$/.test(binding.sourceOverlaySha256)
+      || !binding.subjectSourceKey
+      || binding.frameId !== SUPPORTED_MOTION_FRAME || binding.frameId !== asset.staticBinding.frameId
+      || binding.units !== "m" || binding.units !== asset.staticBinding.units
+      || binding.referencePoseId !== asset.staticBinding.referencePoseId
+      || !["morph_targets", "skinning", "morph_and_skinning"].includes(binding.deformation)) {
+      throw new Error("source_bound_surface는 정확한 현재 scene/source/pose 결속이 필요합니다.");
+    }
+    const sourceKeys = binding.members.map((row) => row.sourceKey);
+    const nodeIds = binding.members.map((row) => row.nodeId);
+    if (new Set(sourceKeys).size !== sourceKeys.length || new Set(nodeIds).size !== nodeIds.length
+      || binding.members.some((row) => !row.sourceKey || !row.nodeId || !row.sourceNamespace || !row.resourceKey
+        || !["deforming_muscle_surface", "moving_structure", "fixed_structure", "passive_context"].includes(row.role)
+        || !/^[a-f0-9]{64}$/.test(row.sourceChunkSha256) || !/^[a-f0-9]{64}$/.test(row.geometrySha256)
+        || row.instanceMatrix.length !== 16 || !row.instanceMatrix.every(Number.isFinite))) {
+      throw new Error("source_bound_surface의 source instance binding이 유효하지 않습니다.");
+    }
+    if (!binding.members.some((row) => row.role === "deforming_muscle_surface" && row.sourceKey === binding.subjectSourceKey
+      && row.side === asset.staticBinding.side)) {
+      throw new Error("source_bound_surface에 같은 쪽 변형 근육 표면이 없습니다.");
+    }
+    if (asset.illustration) throw new Error("source_bound_surface는 별도 경로 illustration을 허용하지 않습니다.");
   } else if (!asset.rig || !asset.illustration || asset.rig.nodeBindings.length === 0 || asset.illustration.trajectoryBindings.length === 0) {
     throw new Error("bone_motion_with_illustrative_path는 뼈 node와 단순 경로 binding을 각각 가져야 합니다.");
   }
@@ -108,6 +143,29 @@ function validateSkinnedMeshes(scene: Object3D): SkinnedMesh[] {
     skinned.push(mesh);
   });
   return skinned;
+}
+
+function estimateAnimationBytes(scene: Object3D, clips: readonly AnimationClip[], sourceBytes: number) {
+  const geometryBuffers = new Set<ArrayBufferLike>();
+  const geometryViews = new Set<BufferGeometry>();
+  let skeletonBytes = 0;
+  scene.traverse((object) => {
+    const mesh = object as Object3D & { geometry?: BufferGeometry; skeleton?: Skeleton };
+    if (!mesh.geometry?.isBufferGeometry || geometryViews.has(mesh.geometry)) return;
+    geometryViews.add(mesh.geometry);
+    for (const attribute of Object.values(mesh.geometry.attributes)) geometryBuffers.add(attribute.array.buffer);
+    for (const attributes of Object.values(mesh.geometry.morphAttributes)) for (const attribute of attributes) geometryBuffers.add(attribute.array.buffer);
+    if (mesh.geometry.index) geometryBuffers.add(mesh.geometry.index.array.buffer);
+    skeletonBytes += (mesh.skeleton?.boneInverses ?? []).reduce((sum, inverse) => sum + inverse.elements.length * 4, 0);
+  });
+  const geometryBytes = [...geometryBuffers].reduce((sum, buffer) => sum + buffer.byteLength, 0) + skeletonBytes;
+  const trackBuffers = new Set<ArrayBufferLike>();
+  for (const clip of clips) for (const track of clip.tracks) {
+    trackBuffers.add(track.times.buffer);
+    trackBuffers.add(track.values.buffer);
+  }
+  const animationBytes = [...trackBuffers].reduce((sum, buffer) => sum + buffer.byteLength, 0);
+  return { sourceBytes, geometryBytes, animationBytes, memoryEstimateBytes: sourceBytes + geometryBytes + animationBytes };
 }
 
 /** Inspect the GLB container before GLTFLoader can resolve a URI or issue a request. */
@@ -200,6 +258,7 @@ export async function loadAnimationScene(
 ): Promise<AnimationSceneResource> {
   assertAssetContract(asset);
   if (options.signal?.aborted) throw abortError();
+  if (bytes.byteLength > DATASET_BUDGET.geometryBytes) throw new Error("motion GLB가 활성 장면 형상 예산을 초과합니다.");
   if (await sha256(bytes) !== asset.sha256) throw new Error(`motion GLB SHA-256이 manifest와 다릅니다: ${asset.id}`);
   if (options.signal?.aborted) throw abortError();
   assertSelfContainedGlb(bytes);
@@ -229,6 +288,7 @@ export async function loadAnimationScene(
     if (new Set(allNodeIds).size !== allNodeIds.length) throw new Error("rig와 path node binding이 겹칩니다.");
     const rigNodes = new Map<string, Object3D>();
     const pathNodes = new Map<string, Object3D>();
+    const sourceNodes = new Map<string, Object3D>();
     for (const binding of rigBindings) {
       if (duplicates.has(binding.nodeId)) throw new Error(`glTF node 이름이 중복되어 binding이 모호합니다: ${binding.nodeId}`);
       const node = names.get(binding.nodeId);
@@ -251,11 +311,57 @@ export async function loadAnimationScene(
     }
 
     const skinnedMeshes = validateSkinnedMeshes(gltf.scene);
+    const memory = estimateAnimationBytes(gltf.scene, gltf.animations, bytes.byteLength);
+    if (memory.memoryEstimateBytes > DATASET_BUDGET.geometryBytes) throw new Error("motion GLB·변형 형상·clip 버퍼의 합이 motion 메모리 예산을 초과합니다.");
+    const morphMeshes: Object3D[] = [];
+    gltf.scene.traverse((object) => {
+      const mesh = object as Object3D & { morphTargetInfluences?: number[]; geometry?: BufferGeometry };
+      if (mesh.morphTargetInfluences?.length || Object.values(mesh.geometry?.morphAttributes ?? {}).some((rows) => rows.length > 0)) morphMeshes.push(object);
+    });
     if (asset.representationType === "rigged_mesh" && skinnedMeshes.length === 0) {
       throw new Error("rigged_mesh manifest인데 GLB에 유효한 SkinnedMesh가 없습니다.");
     }
+    if (asset.representationType === "source_bound_surface") {
+      const deformation = asset.sourceBinding!.deformation;
+      if ((deformation === "morph_targets" || deformation === "morph_and_skinning") && morphMeshes.length === 0) {
+        throw new Error("source_bound_surface manifest인데 GLB에 morph target mesh가 없습니다.");
+      }
+      if ((deformation === "skinning" || deformation === "morph_and_skinning") && skinnedMeshes.length === 0) {
+        throw new Error("source_bound_surface manifest인데 GLB에 유효한 skinned mesh가 없습니다.");
+      }
+      const sourceBinding = asset.sourceBinding!;
+      const sourceIdsByNode = new Map(sourceBinding.members.map((row) => [row.nodeId, row]));
+      const meshTargetsByNode = new Map<string, number>();
+      for (const member of sourceBinding.members) {
+        if (duplicates.has(member.nodeId)) throw new Error(`source GLB node 이름이 중복되어 결속이 모호합니다: ${member.nodeId}`);
+        const node = names.get(member.nodeId);
+        if (!node || !(node as Object3D & { isMesh?: boolean }).isMesh) throw new Error(`source GLB mesh binding을 찾을 수 없습니다: ${member.nodeId}`);
+        sourceNodes.set(member.sourceKey, node);
+        const mesh = node as Object3D & { morphTargetInfluences?: number[] };
+        meshTargetsByNode.set(member.nodeId, mesh.morphTargetInfluences?.length ?? 0);
+      }
+      const visibleMeshNames: string[] = [];
+      gltf.scene.traverse((object) => { if ((object as Object3D & { isMesh?: boolean }).isMesh) visibleMeshNames.push(object.name); });
+      if (visibleMeshNames.some((name) => !sourceIdsByNode.has(name))) throw new Error("source motion GLB에 manifest에 없는 surface mesh가 포함되어 있습니다.");
+      for (const animation of gltf.animations) for (const track of animation.tracks) {
+        const { nodeName, propertyName } = PropertyBinding.parseTrackName(track.name);
+        const member = sourceIdsByNode.get(nodeName);
+        if (!member) throw new Error(`source motion track가 고정된 source node를 벗어납니다: ${track.name}`);
+        if (member.role === "fixed_structure" || member.role === "passive_context") throw new Error(`fixed/passive source node를 움직이는 track은 허용되지 않습니다: ${track.name}`);
+        if (member.role === "deforming_muscle_surface" && propertyName !== "morphTargetInfluences") {
+          throw new Error(`근육 전체 transform track은 허용되지 않습니다: ${track.name}`);
+        }
+        if (member.role === "deforming_muscle_surface" && !(meshTargetsByNode.get(member.nodeId) ?? 0)) {
+          throw new Error(`변형 근육 표면에 morph target이 없습니다: ${member.nodeId}`);
+        }
+        if (member.role === "moving_structure" && propertyName === "scale") throw new Error(`moving structure scale track은 허용되지 않습니다: ${track.name}`);
+        if (member.role === "moving_structure" && !["position", "quaternion", "rotation"].includes(propertyName)) {
+          throw new Error(`moving structure에는 위치/회전 track만 허용됩니다: ${track.name}`);
+        }
+      }
+    }
     if (asset.representationType !== "rigged_mesh" && skinnedMeshes.length > 0) {
-      throw new Error("bone/path 표현은 수축 조직 SkinnedMesh를 포함하지 않아야 합니다.");
+      if (asset.representationType !== "source_bound_surface") throw new Error("bone/path 표현은 수축 조직 SkinnedMesh를 포함하지 않아야 합니다.");
     }
 
     let disposed = false;
@@ -272,7 +378,10 @@ export async function loadAnimationScene(
       animations: gltf.animations,
       rigNodes,
       pathNodes,
+      sourceNodes,
       skinnedMeshCount: skinnedMeshes.length,
+      morphMeshCount: morphMeshes.length,
+      ...memory,
       dispose: () => {
         if (disposed) return;
         disposed = true;

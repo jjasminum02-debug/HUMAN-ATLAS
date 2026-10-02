@@ -127,6 +127,32 @@ test("T22 adapter scene is driven by one mixer clock; pose reset does not reset 
   assert.equal(disposed.count, 1);
 });
 
+test("same-scene playback uses the host clock, creates no RAF chain, and leaves resource disposal to the host", () => {
+  const disposed = { count: 0 };
+  const resource = syntheticResource(disposed);
+  let update: ((deltaSeconds: number) => void) | null = null;
+  let unregistered = 0;
+  const player = new AnimationPlaybackController(resource, "SyntheticMotion", {
+    registerUpdate: (callback) => { update = callback; return () => { unregistered++; update = null; }; },
+    disposeResource: false,
+    repeat: true,
+  });
+  player.play(0.5);
+  assert.equal(player.isPlaying, true);
+  assert.equal(update !== null, true);
+  update!(0.5);
+  assert.equal(player.currentTime, 0.25);
+  assert.ok(Math.abs(resource.bone.position.y - 0.25) < 1e-6);
+  player.resetPose();
+  assert.equal(player.isPlaying, false);
+  assert.equal(player.currentTime, 0);
+  player.dispose();
+  assert.equal(unregistered, 1);
+  assert.equal(disposed.count, 0);
+  resource.dispose();
+  assert.equal(disposed.count, 1);
+});
+
 test("clip end clamps at the final pose and cancels its RAF chain", () => {
   const frames = new FakeFrames();
   const disposed = { count: 0 };

@@ -8,6 +8,9 @@ import { learnerFunctionUnavailableText } from '../domain/learnerActionText';
 import { AtlasLoading } from './AtlasLoading';
 import { anatomicalPartSubtitle } from '../domain/displayNames';
 import { attachmentBoneKeys, inRegionalRoute } from '../viewer/datasets/regionalContext';
+import { MotionLearningPanel } from './MotionLearningPanel';
+import type { LearnerMotionActionOption } from '../domain/motionLearning';
+import type { SourceMotionHost } from '../viewer/datasets/sourceMotionHost';
 import './styles.css';
 import './atlasShell.css';
 const regionIds = navigation.categories.map(c => c.id);
@@ -21,6 +24,14 @@ function NameRows({ row }: {
     row: RuntimeStructureRecord;
 }) {
     return <div className="names-card" aria-label="이름">{[['우리말명', row.names.koModern], ['한자어명 (한글 표기)', row.names.koTraditional], ['영어명', row.names.en]].map(([label, value]) => <div key={label}><span>{label}</span><strong>{value || '이름 정리 중'}</strong></div>)}</div>;
+}
+function motionPanelOptions(actions: ReturnType<typeof motionActionOptionsForLearner>, sourceKey: string): LearnerMotionActionOption[] {
+    return actions.map(action => ({
+        id: action.id, label: action.label, subjectIds: [sourceKey], sideApplicability: action.sideApplicability,
+        text: { label: action.text.label, explanation: action.text.explanation, postureConditions: [],
+            stabilizationConditions: [], stabilizationNote: null, contextNotes: [], contractionNote: '', citations: [] },
+        candidate: action.candidate ?? null,
+    }));
 }
 /** One data-driven atlas: source observation remains usable independently of optional content bindings. */
 export default function App() {
@@ -38,6 +49,7 @@ export default function App() {
     const [detailsOpen, setDetailsOpen] = useState(true);
     const [tab, setTab] = useState<'구조' | '기능'>('구조');
     const [actionId, setActionId] = useState<string | null>(null);
+    const [motionHost, setMotionHost] = useState<SourceMotionHost | null>(null);
     const info = useRef<HTMLDialogElement>(null);
     useEffect(() => {
         // Desktop has no collapse control; restore its card when leaving the
@@ -72,7 +84,10 @@ export default function App() {
         }
         return [...result.values()];
     }, [selected, data]);
-    const actions = useMemo(() => selected?.haConceptId ? motionActionOptionsForLearner(selected.haConceptId, selected.side) : [], [selected?.haConceptId, selected?.side]);
+    const actions = useMemo(() => selected?.kind === 'muscle'
+        ? motionActionOptionsForLearner(selected.haConceptId, selected.side, selected.sourceKey) : [],
+        [selected?.kind, selected?.haConceptId, selected?.side, selected?.sourceKey]);
+    const motionActions = useMemo(() => selected?.kind === 'muscle' ? motionPanelOptions(actions, selected.sourceKey) : [], [actions, selected?.kind, selected?.sourceKey]);
     const action = actions.find(a => a.id === actionId) ?? actions[0];
     const nerveLearning = selected?.kind === 'nerve' ? nerveLearningForLearner(selected.names.en) : null;
     const title = route.regions.length ? navigation.categories.filter(c => route.regions.includes(c.id)).map(c => c.labelKo).join(' · ') : '전신 살펴보기';
@@ -141,7 +156,7 @@ export default function App() {
     <nav className="study-list region-structure-list" aria-label="구조 목록">{rows.map(r => { const sameSearchConcept = selected && (selected.searchGroupKey ?? selected.sourceKey) === (r.searchGroupKey ?? r.sourceKey); return <button key={r.sourceKey} className={sameSearchConcept ? 'selected' : ''} aria-pressed={Boolean(sameSearchConcept)} onClick={() => select(r.sourceKey)}><span>{r.label}</span>{r.label !== r.names.en && <small>{r.names.en}</small>}{r.searchApproximate && <em>비슷한 이름</em>}</button>; })}{!rows.length && <p className="quiet-note">등록된 이름을 찾지 못했습니다. 다른 이름으로 검색해 보세요.</p>}</nav>
    </aside>
    <section id="atlas-stage" tabIndex={-1} className="study-stage" aria-label={`${title} 학습 장면`}><div className="stage-caption" aria-hidden={!entered}><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{title}</h2><p>회전하고 확대하며 구조를 살펴보세요.</p></div>
-    <WholeBodyViewer homeRevision={homeRevision} viewResetRevision={viewResetRevision} datasetSource={data} onEntered={setEntered} regionIds={route.regions} selectedId={route.selected} selectedIds={route.selected ? [route.selected] : []} whole={!route.regions.length} onWholeChange={() => { resetPresentation(); navigate({ regions: [], selected: route.selected }); }} onSelect={select}/>
+    <WholeBodyViewer homeRevision={homeRevision} viewResetRevision={viewResetRevision} datasetSource={data} onEntered={setEntered} onMotionHostChange={setMotionHost} regionIds={route.regions} selectedId={route.selected} selectedIds={route.selected ? [route.selected] : []} whole={!route.regions.length} onWholeChange={() => { resetPresentation(); navigate({ regions: [], selected: route.selected }); }} onSelect={select}/>
    </section>
    {selected && <details inert={!entered} className="study-details" id="study-details" open={detailsOpen} onToggle={e => setDetailsOpen(e.currentTarget.open)}><summary className="mobile-detail-summary">{selected.label}</summary><div className="study-detail-content">
     <button className="bone-related-muscle" onClick={() => navigate({ ...route, selected: null })}>선택 해제</button><h2>{selected.label}</h2>{anatomicalPartSubtitle(selected.names.en) && <p className="anatomical-part-subtitle">{anatomicalPartSubtitle(selected.names.en)}</p>}<NameRows row={selected}/>
@@ -152,7 +167,7 @@ export default function App() {
       <h3>분지</h3>{selected.nerve!.branchKeys.length ? selected.nerve!.branchKeys.map(key => <button className="bone-related-muscle" key={key} onClick={() => select(key)}>{data.integration.objects.find(r => r.sourceKey === key)!.label}</button>) : <p className="quiet-note">표시할 하위 분지가 준비되지 않았습니다.</p>}
       <h3>운동 지배근</h3>{selected.nerve!.muscleKeys.length ? selected.nerve!.muscleKeys.map(key => <button className="bone-related-muscle" key={key} onClick={() => select(key)}>{data.integration.objects.find(r => r.sourceKey === key)!.label}</button>) : <p className="quiet-note">확인된 지배근 설명을 준비하고 있습니다.</p>}<p className="quiet-note">표시 목록은 전체 지배 범위를 뜻하지 않습니다.</p>
       {nerveLearning && <details key={selected.sourceKey} className="nerve-learning-context"><summary>기능 변화와 포착 맥락</summary><section><h4>기능 변화</h4><p>{nerveLearning.functionContext}</p></section><section><h4>해부학적 주행과 변이</h4><p>{nerveLearning.courseContext}</p></section><section><h4>주변 조직 맥락</h4><p>{nerveLearning.compressionContext}</p></section></details>}
-    </section> : selected.kind === 'muscle' ? <><div className="movement-cta-block"><button className="movement-cta" disabled aria-describedby="movement-unavailable-note">움직임으로 이해하기</button><p id="movement-unavailable-note" className="quiet-note">이 구조의 움직임 시범은 아직 제공되지 않습니다.</p></div>
+    </section> : selected.kind === 'muscle' ? <><MotionLearningPanel actions={motionActions} selectedActionId={actionId ?? motionActions[0]?.id ?? null} onSelectAction={setActionId} host={motionHost} sourceContextKey={selected.sourceKey} showActionPicker={false}/>
     <div className="study-tabs" role="tablist" aria-label="학습 내용">{(['구조', '기능'] as const).map(t => <button key={t} role="tab" id={`tab-${t}`} aria-controls="study-tab-panel" aria-selected={tab === t} tabIndex={tab === t ? 0 : -1} onClick={() => setTab(t)} onKeyDown={e => { if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) {
                 e.preventDefault();
                 const next = e.key === 'Home' ? '구조' : e.key === 'End' ? '기능' : tab === '구조' ? '기능' : '구조';

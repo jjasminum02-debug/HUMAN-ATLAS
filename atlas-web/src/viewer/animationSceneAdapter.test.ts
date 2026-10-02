@@ -3,6 +3,7 @@ import test from "node:test";
 import { AnimationMixer, Mesh, MeshBasicMaterial, Texture } from "three";
 import type { MotionAsset } from "../domain/motionLearning.ts";
 import { disposeAnimationScenes, loadAnimationScene, SUPPORTED_MOTION_FRAME } from "./animationSceneAdapter.ts";
+import { sourceGeometrySha256 } from "./datasets/sourceMotionGeometry.ts";
 
 const encoder = new TextEncoder();
 
@@ -122,6 +123,44 @@ function syntheticGlb(representation: FixtureRepresentation = "rigged_mesh"): Ar
   return glb.buffer;
 }
 
+function syntheticSourceMorphGlb(): ArrayBuffer {
+  const chunks: Uint8Array[] = [];
+  let byteLength = 0;
+  const bufferViews: Array<Record<string, number>> = [];
+  const accessors: Array<Record<string, unknown>> = [];
+  const add = (bytes: Uint8Array, target?: number): number => {
+    while (byteLength % 4) { chunks.push(new Uint8Array([0])); byteLength += 1; }
+    const offset = byteLength; chunks.push(bytes); byteLength += bytes.byteLength;
+    bufferViews.push({ buffer: 0, byteOffset: offset, byteLength: bytes.byteLength, ...(target ? { target } : {}) });
+    return bufferViews.length - 1;
+  };
+  const accessor = (view: number, componentType: number, count: number, type: string, extra: Record<string, unknown> = {}) => {
+    accessors.push({ bufferView: view, componentType, count, type, ...extra }); return accessors.length - 1;
+  };
+  const position = accessor(add(floats([0, 0, 0, 0.1, 0, 0, 0, 0.1, 0]), 34962), 5126, 3, "VEC3", { min: [0, 0, 0], max: [0.1, 0.1, 0] });
+  const delta = accessor(add(floats([0, 0, 0, 0, 0.03, 0, 0, 0, 0]), 34962), 5126, 3, "VEC3");
+  const indices = accessor(add(uints([0, 1, 2], 2), 34963), 5123, 3, "SCALAR");
+  const input = accessor(add(floats([0, 1])), 5126, 2, "SCALAR", { min: [0], max: [1] });
+  const output = accessor(add(floats([0, 1])), 5126, 2, "SCALAR");
+  const json = {
+    asset: { version: "2.0", generator: "HUMAN ATLAS T59 synthetic test-only source morph" }, scene: 0,
+    scenes: [{ nodes: [0] }], nodes: [{ name: "SyntheticRoot", children: [1] }, { name: "SyntheticSurface", mesh: 0, weights: [0] }],
+    meshes: [{ name: "SyntheticResource", weights: [0], primitives: [{ attributes: { POSITION: position }, indices, targets: [{ POSITION: delta }] }] }],
+    animations: [{ name: "SyntheticSourceClip", samplers: [{ input, output, interpolation: "LINEAR" }], channels: [{ sampler: 0, target: { node: 1, path: "weights" } }] }],
+    buffers: [{ byteLength }], bufferViews, accessors,
+  };
+  const jsonBytes = encoder.encode(JSON.stringify(json)); const paddedJsonLength = Math.ceil(jsonBytes.length / 4) * 4;
+  const jsonChunk = new Uint8Array(paddedJsonLength).fill(0x20); jsonChunk.set(jsonBytes);
+  const binary = new Uint8Array(byteLength); let cursor = 0;
+  for (const chunk of chunks) { binary.set(chunk, cursor); cursor += chunk.byteLength; }
+  const paddedBinaryLength = Math.ceil(binary.length / 4) * 4; const binaryChunk = new Uint8Array(paddedBinaryLength); binaryChunk.set(binary);
+  const totalLength = 12 + 8 + jsonChunk.byteLength + 8 + binaryChunk.byteLength; const glb = new Uint8Array(totalLength); const view = new DataView(glb.buffer);
+  view.setUint32(0, 0x46546c67, true); view.setUint32(4, 2, true); view.setUint32(8, totalLength, true);
+  view.setUint32(12, jsonChunk.byteLength, true); view.setUint32(16, 0x4e4f534a, true); glb.set(jsonChunk, 20);
+  const binaryHeader = 20 + jsonChunk.byteLength; view.setUint32(binaryHeader, binaryChunk.byteLength, true); view.setUint32(binaryHeader + 4, 0x004e4942, true); glb.set(binaryChunk, binaryHeader + 8);
+  return glb.buffer;
+}
+
 async function hash(buffer: ArrayBuffer): Promise<string> {
   const digest = await globalThis.crypto.subtle.digest("SHA-256", buffer);
   return [...new Uint8Array(digest)].map((value) => value.toString(16).padStart(2, "0")).join("");
@@ -148,6 +187,26 @@ async function assetFor(bytes: ArrayBuffer, representation: FixtureRepresentatio
     illustration: hasPath ? { id: "SyntheticPath", trajectoryBindings: [{ structureId: combined ? "SYNTHETIC-MUSCLE-PATH" : "SYNTHETIC-PATH", trajectoryId: "SyntheticPathNode" }] } : null,
     clip: { id: "SyntheticClip", durationSeconds: 1, startPoseId: "TEST-REST-POSE", endPoseId: "TEST-END-POSE" },
     technicalStatus: "candidate",
+  };
+}
+
+async function sourceBoundMorphAssetFor(bytes: ArrayBuffer): Promise<MotionAsset> {
+  const sha256 = await hash(bytes);
+  return {
+    id: "T59-FIXTURE-SOURCE-MORPH", motionDefinitionId: "T59-FIXTURE-DEFINITION", uri: "test-only://source-morph.glb",
+    revision: "fixture-revision", sha256, sourceId: "TEST-ONLY-SOURCE", licenseId: "TEST-ONLY-LICENSE",
+    representationType: "source_bound_surface",
+    staticBinding: { sceneId: "fixture-scene", sceneRevision: "fixture-dataset-revision", modelId: "fixture-dataset",
+      sourceAssetSha256: "a".repeat(64), frameId: SUPPORTED_MOTION_FRAME, units: "m", side: "right", referencePoseId: "fixture-static-frame0" },
+    rig: null, illustration: null,
+    clip: { id: "SyntheticSourceClip", durationSeconds: 1, startPoseId: "fixture-static-frame0", endPoseId: "fixture-motion-end" },
+    sourceBinding: { contractVersion: "t59-source-motion-binding-v1", datasetNamespace: "fixture-dataset", datasetRevision: "fixture-dataset-revision",
+      integrationRevision: "fixture-runtime", sourceOverlaySha256: "b".repeat(64), subjectSourceKey: "ZA-fixture-muscle-r",
+      frameId: SUPPORTED_MOTION_FRAME, units: "m", referencePoseId: "fixture-static-frame0", deformation: "morph_targets",
+      members: [{ sourceKey: "ZA-fixture-muscle-r", nodeId: "SyntheticSurface", sourceNamespace: "za-c7010a9", role: "deforming_muscle_surface",
+        side: "right", resourceKey: "ZA-fixture-resource", lod: "overview", sourceChunkSha256: "c".repeat(64), geometrySha256: "d".repeat(64),
+        instanceMatrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] }] },
+    technicalStatus: "binding_verified",
   };
 }
 
@@ -233,6 +292,32 @@ test("bone motion plus illustrative path uses separate node and path bindings", 
   } finally {
     loaded.dispose();
   }
+});
+
+test("T59 source-bound morph keeps the exact source node in the full scene and rejects whole-muscle transform tracks", async () => {
+  const bytes = syntheticSourceMorphGlb();
+  const asset = await sourceBoundMorphAssetFor(bytes);
+  const loaded = await loadAnimationScene(bytes, asset);
+  try {
+    assert.equal(loaded.representationType, "source_bound_surface");
+    assert.equal(loaded.morphMeshCount, 1);
+    assert.equal(loaded.skinnedMeshCount, 0);
+    assert.equal(loaded.sourceBytes, bytes.byteLength);
+    assert.ok(loaded.geometryBytes > 0);
+    assert.ok(loaded.animationBytes > 0);
+    assert.equal(loaded.memoryEstimateBytes, loaded.sourceBytes + loaded.geometryBytes + loaded.animationBytes);
+    const sourceNode = loaded.sourceNodes.get("ZA-fixture-muscle-r") as Mesh;
+    assert.ok(sourceNode?.isMesh);
+    assert.equal(await sourceGeometrySha256(sourceNode.geometry), "9890fb4ba2a9710a456d2dd314e996ef70a02995c067fd4f0da9c7f8f900cfcf");
+    assert.deepEqual(sourceNode.matrix.elements, asset.sourceBinding!.members[0]!.instanceMatrix);
+    const mixer = new AnimationMixer(loaded.scene);
+    mixer.clipAction(loaded.animations[0]!).play();
+    mixer.setTime(0.5);
+    assert.ok(Math.abs(sourceNode.morphTargetInfluences?.[0]! - 0.5) < 1e-6);
+    mixer.stopAllAction(); mixer.uncacheRoot(loaded.scene);
+  } finally { loaded.dispose(); }
+  const badTransform = editGlb(bytes, document => { document.animations[0].channels[0].target.path = "translation"; });
+  await assert.rejects(loadAnimationScene(badTransform, { ...asset, sha256: await hash(badTransform) }), /근육 전체 transform/);
 });
 
 test("frame, unit and source hash mismatch fail closed without rescaling", async () => {

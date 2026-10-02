@@ -29,6 +29,10 @@ export interface ActionContextRole {
 export interface MuscleAction {
   id: string;
   subjectIds: string[];
+  /** Exact source instance subjects are allowed when no canonical HA concept exists. */
+  sourceSubjectKeys?: string[];
+  /** Explicit bridge to a learner-card action. Never inferred from a label. */
+  learnerActionKey?: string;
   sideApplicability: Laterality;
   jointBindingState: "canonical_bound" | "unmapped";
   jointBindingNote: string | null;
@@ -75,7 +79,7 @@ export interface MotionAsset {
   sha256: string;
   sourceId: string;
   licenseId: string;
-  representationType: "rigged_mesh" | "illustrative_path" | "bone_motion_with_illustrative_path";
+  representationType: "rigged_mesh" | "illustrative_path" | "bone_motion_with_illustrative_path" | "source_bound_surface";
   staticBinding: {
     sceneId: string;
     sceneRevision: string;
@@ -89,8 +93,37 @@ export interface MotionAsset {
   rig: { id: string; nodeBindings: Array<{ structureId: string; nodeId: string }> } | null;
   illustration: { id: string; trajectoryBindings: Array<{ structureId: string; trajectoryId: string }> } | null;
   clip: { id: string; durationSeconds: number; startPoseId: string; endPoseId: string };
+  /** Exact current-scene source instance bindings for derived surface motion. */
+  sourceBinding?: SourceMotionBinding | null;
   /** Technical validation only. It is not human review or educational release. */
   technicalStatus: "candidate" | "binding_verified";
+}
+
+export interface SourceMotionBindingMember {
+  sourceKey: string;
+  nodeId: string;
+  sourceNamespace: string;
+  role: "deforming_muscle_surface" | "moving_structure" | "fixed_structure" | "passive_context";
+  side: Laterality;
+  resourceKey: string;
+  lod: "overview" | "detail";
+  sourceChunkSha256: string;
+  geometrySha256: string;
+  instanceMatrix: number[];
+}
+
+export interface SourceMotionBinding {
+  contractVersion: "t59-source-motion-binding-v1";
+  datasetNamespace: string;
+  datasetRevision: string;
+  integrationRevision: string;
+  sourceOverlaySha256: string;
+  subjectSourceKey: string;
+  frameId: string;
+  units: "m";
+  referencePoseId: string;
+  deformation: "morph_targets" | "skinning" | "morph_and_skinning";
+  members: SourceMotionBindingMember[];
 }
 
 export interface MotionLearningBundle {
@@ -199,11 +232,22 @@ export function assessMotionCapability(
   const expectedMoving = [...definition.movingStructureIds].sort();
   const actualMoving = asset.representationType === "rigged_mesh"
     ? asset.rig?.nodeBindings.map((row) => row.structureId).sort() ?? []
-    : asset.representationType === "bone_motion_with_illustrative_path"
+    : asset.representationType === "bone_motion_with_illustrative_path" || asset.representationType === "source_bound_surface"
       ? asset.rig?.nodeBindings.map((row) => row.structureId).sort() ?? []
       : asset.illustration?.trajectoryBindings.map((row) => row.structureId).sort() ?? [];
   const pathSubjects = asset.illustration?.trajectoryBindings.map((row) => row.structureId).sort() ?? [];
   const expectedPathSubjects = [...action.subjectIds].sort();
+  const sourceBinding = asset.sourceBinding;
+  const sourceBindingCompatible = asset.representationType !== "source_bound_surface" || Boolean(sourceBinding
+    && sourceBinding.contractVersion === "t59-source-motion-binding-v1"
+    && sourceBinding.frameId === binding.frameId && sourceBinding.units === binding.units
+    && sourceBinding.referencePoseId === binding.referencePoseId
+    && sourceBinding.subjectSourceKey === definition.instanceId
+    && action.sourceSubjectKeys?.includes(definition.instanceId)
+    && sourceBinding.members.some((member) => member.sourceKey === definition.instanceId
+      && member.role === "deforming_muscle_surface" && member.side === definition.side)
+    && new Set(sourceBinding.members.map((member) => member.sourceKey)).size === sourceBinding.members.length
+    && new Set(sourceBinding.members.map((member) => member.nodeId)).size === sourceBinding.members.length);
   const compatible = definition.actionId === action.id
     && asset.motionDefinitionId === definition.id
     && definition.side === asset.staticBinding.side
@@ -216,6 +260,7 @@ export function assessMotionCapability(
     && binding.referencePoseId === ref.poseId
     && (asset.representationType !== "bone_motion_with_illustrative_path"
       || JSON.stringify(pathSubjects) === JSON.stringify(expectedPathSubjects))
+    && sourceBindingCompatible
     && definition.startPoseId === ref.poseId
     && asset.clip.startPoseId === definition.startPoseId
     && asset.clip.endPoseId === definition.endPoseId
@@ -230,8 +275,26 @@ export interface LearnerMotionActionOption {
   text: LearnerActionText;
   subjectIds: string[];
   /** Text applicability follows the authored action scope, independently of clip readiness. */
-  sideApplicability: Laterality;
+  sideApplicability: Laterality | null;
   candidate: { definition: MotionDefinition; asset: MotionAsset } | null;
+}
+
+export interface LearnerMotionCandidateRelation {
+  learnerActionKey: string | null;
+  sideApplicability: Laterality;
+  candidate: LearnerMotionActionOption["candidate"];
+}
+
+/** A card receives a motion candidate only through an explicit action key, never label similarity. */
+export function resolveLearnerMotionCandidate(
+  learnerActionKey: string,
+  selectedSide: string | null | undefined,
+  projected: readonly LearnerMotionCandidateRelation[],
+): LearnerMotionActionOption["candidate"] {
+  const matches = projected.filter((row) => row.learnerActionKey === learnerActionKey
+    && (row.sideApplicability === "bilateral" || row.sideApplicability === "midline"
+      || row.sideApplicability === "not_applicable" || row.sideApplicability === selectedSide));
+  return matches.length === 1 ? matches[0].candidate : null;
 }
 
 /** Project only authored actions and exactly compatible, technically bound clips. */
@@ -239,23 +302,28 @@ export function projectLearnerMotionActionOptions(
   conceptId: string,
   bundle: MotionLearningBundle,
   fields: readonly ActionCitationEvidenceField[],
+  selectedSide?: Laterality | null,
 ): LearnerMotionActionOption[] {
   return bundle.muscleActions.flatMap((action) => {
-    if (!action.subjectIds.includes(conceptId)) return [];
+    if (!action.subjectIds.includes(conceptId) && !action.sourceSubjectKeys?.includes(conceptId)) return [];
+    if ((selectedSide === "left" || selectedSide === "right")
+      && (action.sideApplicability === "left" || action.sideApplicability === "right")
+      && action.sideApplicability !== selectedSide) return [];
     const text = projectLearnerActionCard(action, fields);
     if (!text) return [];
     const compatible = bundle.motionDefinitions.flatMap((definition) => {
       if (definition.actionId !== action.id) return [];
       return bundle.motionAssets.flatMap((asset) => asset.motionDefinitionId === definition.id &&
+        asset.representationType === "source_bound_surface" && asset.sourceBinding != null &&
         assessMotionCapability(action, definition, asset).hasTechnicallyCompatibleClip
         ? [{ definition, asset }]
         : []);
     });
     return [{
-      id: action.id,
+      id: action.learnerActionKey ?? action.id,
       label: text.label,
       text,
-      subjectIds: [...action.subjectIds],
+      subjectIds: action.subjectIds.length ? [...action.subjectIds] : [...(action.sourceSubjectKeys ?? [])],
       sideApplicability: action.sideApplicability,
       candidate: compatible.length === 1 ? compatible[0] : null,
     }];
