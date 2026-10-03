@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "t66-u03-continuation-validation-v1",
+  "task": "T66",
+  "unit": "03",
+  "capturedAt": "2026-10-03",
+  "baselineHead": "2aa20fc03757f4a890dbe8220eb316aa282863bc",
+  "checks": [
+    {
+      "id": "current-runtime-count-reconciliation",
+      "command": "python3 work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/reconcile_u03_continuation.py",
+      "status": "passed",
+      "evidence": "runtime-count-reconciliation.json",
+      "assertions": {
+        "zaIdentityUnionMatchesCurrent": true,
+        "u03MuscleAndBoneRowsSumToReceipt": true,
+        "runtimeSourceDerivedUriSetMatchesCalculatedCount": true,
+        "allTypedU03KeysAreZaIds": true,
+        "uniqueSourceDerivedGlbHashMatchesUriCount": true,
+        "uniqueRuntimeGlbHashMatchesUriCount": true,
+        "eachRuntimeUriHasExactlyOneHash": true
+      }
+    },
+    {
+      "id": "latest-candidate-to-r4-registration",
+      "status": "passed",
+      "evidence": "candidate-registration-reconciliation.json",
+      "latestCandidateCounts": {
+        "candidate_pass": 18
+      },
+      "registeredFamilySides": 18,
+      "familyHashMismatches": 0,
+      "r2ArtifactExists": false
+    },
+    {
+      "id": "u01-supplemental-actual-browser",
+      "status": "passed",
+      "evidence": "u01-browser-supplement-validation.json",
+      "candidateChecks": 4,
+      "allChecksPassed": true,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "viewport": "1440x960"
+    },
+    {
+      "id": "existing-u03-focused-regression-and-build",
+      "status": "reused_same_runtime_input",
+      "sourceEvidence": "../final-validation.json",
+      "details": "U03 production/schema/runtime/38 focused regressions/typecheck/build already passed; this continuation changed no runtime, scene, source, or GLB files."
+    },
+    {
+      "id": "execution-projections",
+      "status": "passed",
+      "command": "python3 work/tools/sync_execution.py && python3 work/tools/sync_execution.py --check",
+      "evidence": "sync-results.json",
+      "result": "updated execution projections and then verified --check",
+      "commands": [
+        {
+          "argv": [
+            "python3",
+            "work/tools/sync_execution.py"
+          ],
+          "returncode": 0,
+          "stdout": "Updated 0 execution views from 37a5b98319a8",
+          "stderr": "",
+          "status": "passed"
+        },
+        {
+          "argv": [
+            "python3",
+            "work/tools/sync_execution.py",
+            "--check"
+          ],
+          "returncode": 0,
+          "stdout": "Execution projections match; no writes.",
+          "stderr": "",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "id": "common-writer-checkpoint-paths",
+      "status": "passed",
+      "evidence": "common-writer-checkpoint.json",
+      "appEntrypoints": [
+        "atlas-web/src/main.tsx",
+        "atlas-web/src/ui/App.tsx"
+      ],
+      "missingPaths": []
+    },
+    {
+      "id": "source-derived-glb-uri-hash-counts",
+      "status": "passed",
+      "evidence": "runtime-count-reconciliation.json",
+      "assertions": {
+        "sourceDerivedUris": 33,
+        "sourceDerivedUniqueHashes": 33,
+        "allRuntimeUris": 34,
+        "allRuntimeUniqueHashes": 34,
+        "uriToHashOneToOne": true
+      }
+    },
+    {
+      "id": "unit03-current-source-frame-browser-regression-reuse",
+      "status": "reused_same_runtime_input",
+      "evidence": "../final-validation.json",
+      "reason": "This continuation did not modify runtime, scene, source, exporter, or GLB inputs; prior focused 38 regressions/typecheck/build remain tied to the same runtime snapshot."
+    },
+    {
+      "id": "continuation-start-baseline-hash-coverage",
+      "status": "limitation_recorded",
+      "evidence": "baseline.json",
+      "dirtyPathCount": 2389,
+      "perPathSha256CapturedAtStart": false,
+      "commonRuntimeFilesModifiedByContinuation": false,
+      "effect": "Do not claim byte-level preservation for pre-existing dirty files; scope of this continuation did not edit common runtime/exporter/source/GLB files."
+    },
+    {
+      "id": "bounded-motion-scope-interpretation",
+      "status": "passed",
+      "evidence": "scope-interpretation.json",
+      "assertions": {
+        "scapularR2ExcludesHumerusAndDistalArm": true,
+        "wristRadialDeviationCurrentR3AuthoredRangeIsSevenDegrees": true,
+        "primeMoverOrActivationClipAddedByU03": 0,
+        "sourceSideAndMemberScopeKeptDistinct": true
+      }
+    }
+  ],
+  "notClaimed": [
+    "all 18 registered family-side packages visually inspected",
+    "whole family/group extent approved",
+    "human anatomy review performed",
+    "public redistribution rights granted",
+    "T66 overall passed"
+  ],
+  "parentStatus": "in_progress / partial",
+  "parentNextUnit": "author-and-integrate-normal-motion-bone-and-nerve"
+}

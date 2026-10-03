@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "t66-u03-continuation-blockers-v1",
+  "task": "T66",
+  "unit": "03 continuation",
+  "status": "unit_implemented_verified_with_content_gaps",
+  "parentStatus": "in_progress / partial",
+  "parentNextUnit": "author-and-integrate-normal-motion-bone-and-nerve",
+  "productDefectBlockers": [],
+  "contentGaps": [
+    {
+      "key": "flexor-carpi-ulnaris-ulnar-head-direction-left",
+      "status": "unresolved_content_gap",
+      "reason": "opened source wording is not safely normalized to radial/ulnar direction"
+    },
+    {
+      "key": "flexor-carpi-ulnaris-ulnar-head-direction-right",
+      "status": "unresolved_content_gap",
+      "reason": "opened source wording is not safely normalized to radial/ulnar direction"
+    },
+    {
+      "key": "supinator-direction",
+      "status": "unresolved_content_gap",
+      "reason": "direction conflict within one opened source; no directional action bound"
+    },
+    {
+      "key": "trapezius-part-actions",
+      "status": "unresolved_content_gap",
+      "reason": "whole-group action is not inherited to upper/middle/lower portions"
+    }
+  ],
+  "historicalCandidateFailures": {
+    "preservedByRevision": {
+      "candidate-production.json": {
+        "candidate_pass": 8,
+        "geometry_rejected": 10
+      },
+      "revision-r2/candidate-production.json": {
+        "candidate_pass": 4,
+        "geometry_rejected": 6
+      },
+      "revision-r3/candidate-production.json": {
+        "candidate_pass": 2,
+        "geometry_rejected": 4
+      },
+      "revision-r4-authoring/candidate-production.json": {
+        "authoring_or_validation_error": 2,
+        "candidate_pass": 2
+      },
+      "revision-r5-accepted-02/candidate-production.json": {
+        "geometry_rejected": 6
+      },
+      "revision-r5-accepted-04/candidate-production.json": {
+        "candidate_pass": 6
+      }
+    },
+    "meaning": "superseded trial records remain preserved and are not active latest-candidate failures"
+  },
+  "currentU03CandidateRegistration": {
+    "latestCandidateCounts": {
+      "candidate_pass": 18
+    },
+    "registeredFamilySides": 18,
+    "unregisteredLatestPass": [],
+    "registrationHashMismatches": [],
+    "uiAcceptanceMeaning": "registration and candidate QC are not individual browser visual passes"
+  },
+  "otherT66Blocker": "T66-B3 remains unresolved; no parent task pass.",
+  "processEvidenceLimitations": [
+    {
+      "key": "dirty-start-hashes-not-captured",
+      "status": "limitation_recorded",
+      "impact": "Per-file starting hashes for already-dirty paths cannot be proven from the captured manifest. No common runtime/exporter/source/GLB files were written in this continuation; current hashes are recorded in common-writer-checkpoint.json."
+    }
+  ]
+}

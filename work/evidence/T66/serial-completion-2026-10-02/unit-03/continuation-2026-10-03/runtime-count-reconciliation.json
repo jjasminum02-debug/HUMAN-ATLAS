@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "t66-motion-count-reconciliation-v1",
+  "task": "T66",
+  "unit": "03-continuation-2026-10-03",
+  "baselineHead": "2aa20fc03757f4a890dbe8220eb316aa282863bc",
+  "currentHead": "2aa20fc03757f4a890dbe8220eb316aa282863bc",
+  "baseline": {
+    "motionLearningSha256": "0cdd988fb70f82c3b747648f8ae2785dda3d287cf0e1f5fcc5fcf7fb1e58fa33",
+    "motionActionCount": 463,
+    "motionDefinitionCount": 457,
+    "motionAssetCount": 457,
+    "uniqueZaInstanceIds": 203,
+    "uniqueAllRuntimeUris": 16,
+    "uniqueSourceDerivedUrisExcludingT24": 15,
+    "preU03MetricsAsSpecified": {
+      "uniqueMuscleSourceSurfaces": 81,
+      "muscleActionRows": 129,
+      "uniqueBoneSourceInstances": 122,
+      "boneFamilyRows": 327,
+      "uniqueSourceDerivedMotionUris": 15
+    },
+    "sourceOfTypedBaselineCounts": "continuation instruction and pre-U03 T66 execution/report evidence; total distinct ZA instance identities independently reconcile to 203"
+  },
+  "unit03Registration": {
+    "registrationFile": "work/evidence/T66/serial-completion-2026-10-02/unit-03/registration.json",
+    "schemaVersion": "t66-u03-registration-r4",
+    "sha256": "72a7569d2effc1851608315b67595ca48226fea61091f7b55c07b08ddbb2af1e",
+    "registeredFamilySidePackages": 18,
+    "registeredSelectorRows": 682,
+    "rowsBySubjectKind": {
+      "bone": 538,
+      "muscle": 144
+    },
+    "uniqueKeysBySubjectKind": {
+      "muscle": 68,
+      "bone": 86
+    },
+    "newKeysAgainstPinnedPreU03ZaIdentitySet": {
+      "muscle": 26,
+      "bone": 28
+    },
+    "distinctMotionUris": 18,
+    "publicRights": [
+      "held"
+    ],
+    "humanReview": [
+      "not_performed"
+    ],
+    "localTechnicalOnlyValues": [
+      true
+    ],
+    "canonicalHaBindingsAdded": 0
+  },
+  "currentRuntime": {
+    "motionLearningSha256": "39843e60f22bfa0e8380362f90c3415d2d992399f4b1640ef852e73e6256ca25",
+    "motionActionCount": 1145,
+    "motionDefinitionCount": 1139,
+    "motionAssetCount": 1139,
+    "uniqueZaInstanceIds": 257,
+    "uniqueRuntimeUrisIncludingNonZaT24": 34,
+    "uniqueSourceDerivedUrisExcludingNonZaT24": 33,
+    "uniqueRuntimeGlbSha256IncludingNonZaT24": 34,
+    "uniqueSourceDerivedGlbSha256ExcludingNonZaT24": 33,
+    "runtimeUriToHashRelationIsOneToOne": true,
+    "uniqueT66FamilySideKeys": 32,
+    "derivedFromBaselinePlusU03": {
+      "uniqueMuscleSourceSurfaces": 107,
+      "muscleActionRows": 273,
+      "uniqueBoneSourceInstances": 150,
+      "boneFamilyRows": 865,
+      "uniqueSourceDerivedMotionUris": 33
+    },
+    "calculationChecks": {
+      "zaIdentityUnionMatchesCurrent": true,
+      "u03MuscleAndBoneRowsSumToReceipt": true,
+      "runtimeSourceDerivedUriSetMatchesCalculatedCount": true,
+      "sourceDerivedHashCountMatchesUniqueUris": true,
+      "runtimeHashCountMatchesUniqueUris": true,
+      "eachRuntimeUriHasOneHash": true,
+      "allTypedU03KeysAreZaIds": true
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "t66-u03-motion-scope-interpretation-v1",
+  "task": "T66",
+  "unit": "03 continuation",
+  "candidateRegistrationEvidence": "candidate-registration-reconciliation.json",
+  "currentLatestCandidatesAllPass": true,
+  "latestCandidatesRegistered": true,
+  "registeredPackagesAreNotIndividualUiAcceptance": true,
+  "primeMoverOrMuscleActivationClipAddedByU03": 0,
+  "scopeInterpretation": {
+    "registeredU03Families": "The registered family/action names identify bounded source-pose observations. Passive surface deformation accompanying a pose is not a prime-mover claim, muscle activation, or a physiological contraction clip.",
+    "scapularSuperiorRotation": "R2 is explicitly scapula/clavicle-only; humerus and distal-arm movement are excluded/fixed. It is not full scapulohumeral rhythm or complete shoulder-girdle coupling.",
+    "wristRadialDeviation": "Current registered candidate uses revision R3 at signed +/-7 degrees across sides. R2 +/-4 degrees was an intermediate range after the wider R1 trial had new containment; R3 restores the original authored observation range using a different source-derived pivot. Neither range is physiological ROM.",
+    "qualitativeActionEvidence": "Action labels/qualitative direction evidence remain distinct from muscle prime-mover status; the only existing main-function clip remains the separately recorded T59 right tibialis anterior clip.",
+    "sideAndPart": "Exact source side and member selectors remain package-level scope. Candidate registration does not approve all parts, a full group extent, or a broader target."
+  },
+  "referencedInputs": {
+    "scapularSuperiorRotationLeft": {
+      "input": "work/evidence/T66/serial-completion-2026-10-02/unit-03/revision-r2/candidate-inputs/scapular-superior-rotation-left/input.json",
+      "inputSha256": "b45799702ca643a7fab3be8c6eb87d03e96179ca55e08221d12f14da212908c0",
+      "side": "left",
+      "familyId": "scapular-superior-rotation-left",
+      "label": "어깨뼈 위쪽돌림 자세 관찰",
+      "authoredEndDegrees": 6,
+      "validatedAuthoringLimitDegrees": 6,
+      "poseMeaning": "pinned source frame0 static reference, not measured neutral",
+      "rotationOrder": "scapula/clavicle-only authored pose; humerus remains fixed; not scapulohumeral rhythm",
+      "memberRowCount": 91,
+      "scopeAndLimits": [
+        "R2 intentionally excludes humerus and distal-arm movement because the R1 shared clavicle pivot created widespread new muscle/bone containment. This is not a claim of complete physiological shoulder-girdle coupling."
+      ]
+    },
+    "scapularSuperiorRotationRight": {
+      "input": "work/evidence/T66/serial-completion-2026-10-02/unit-03/revision-r2/candidate-inputs/scapular-superior-rotation-right/input.json",
+      "inputSha256": "75cf74eed3be0f000dad04bb06f4222a2785b12c1e742535cf9839eb26cd3f9c",
+      "side": "right",
+      "familyId": "scapular-superior-rotation-right",
+      "label": "어깨뼈 위쪽돌림 자세 관찰",
+      "authoredEndDegrees": -6,
+      "validatedAuthoringLimitDegrees": 6,
+      "poseMeaning": "pinned source frame0 static reference, not measured neutral",
+      "rotationOrder": "scapula/clavicle-only authored pose; humerus remains fixed; not scapulohumeral rhythm",
+      "memberRowCount": 91,
+      "scopeAndLimits": [
+        "R2 intentionally excludes humerus and distal-arm movement because the R1 shared clavicle pivot created widespread new muscle/bone containment. This is not a claim of complete physiological shoulder-girdle coupling."
+      ]
+    },
+    "wristRadialDeviationLeft": {
+      "input": "work/evidence/T66/serial-completion-2026-10-02/unit-03/revision-r3/candidate-inputs/wrist-radial-deviation-left/input.json",
+      "inputSha256": "d27ee1e46042f60c8846c1e5ce62124e287e837571c2d92e2722e3039dc44310",
+      "side": "left",
+      "familyId": "wrist-radial-deviation-left",
+      "label": "손목 노쪽 편위 자세 관찰",
+      "authoredEndDegrees": 7,
+      "validatedAuthoringLimitDegrees": 7,
+      "poseMeaning": "pinned source frame0 static reference, not measured neutral",
+      "rotationOrder": "entire exact source carpal/hand chain deviates around source-derived radius-scaphoid contact reference; authored 7 degree observation only, not normal ROM",
+      "memberRowCount": 37,
+      "scopeAndLimits": [
+        "R3 restores the original 7 degree candidate and changes only the authored pivot derivation to the actual registered radius/scaphoid source surface interface; the earlier 4 degree range is not carried forward.",
+        "Pivot is reproducibly derived from the midpoint of the closest actual source vertices and is not claimed as a measured physiological axis or center.",
+        "Whole target/group extent and continuous collision freedom are not approved."
+      ]
+    },
+    "wristRadialDeviationRight": {
+      "input": "work/evidence/T66/serial-completion-2026-10-02/unit-03/revision-r3/candidate-inputs/wrist-radial-deviation-right/input.json",
+      "inputSha256": "076a3c7ca67667d98742dbcce75e24cce158da2e85a65c49bf98e748743607e7",
+      "side": "right",
+      "familyId": "wrist-radial-deviation-right",
+      "label": "손목 노쪽 편위 자세 관찰",
+      "authoredEndDegrees": -7,
+      "validatedAuthoringLimitDegrees": 7,
+      "poseMeaning": "pinned source frame0 static reference, not measured neutral",
+      "rotationOrder": "entire exact source carpal/hand chain deviates around source-derived radius-scaphoid contact reference; authored 7 degree observation only, not normal ROM",
+      "memberRowCount": 37,
+      "scopeAndLimits": [
+        "R3 restores the original 7 degree candidate and changes only the authored pivot derivation to the actual registered radius/scaphoid source surface interface; the earlier 4 degree range is not carried forward.",
+        "Pivot is reproducibly derived from the midpoint of the closest actual source vertices and is not claimed as a measured physiological axis or center.",
+        "Whole target/group extent and continuous collision freedom are not approved."
+      ]
+    }
+  },
+  "sourceOnly": true,
+  "publicRedistribution": "held",
+  "humanReview": "not_performed",
+  "newCanonicalHaBindings": 0
+}

@@ -1,0 +1,275 @@
+{
+  "schemaVersion": "t66-common-writer-checkpoint-v1",
+  "task": "T66",
+  "unit": "03 continuation",
+  "capturedAt": "2026-10-03",
+  "baselineHead": "2aa20fc03757f4a890dbe8220eb316aa282863bc",
+  "baselineStatusPathCount": 2389,
+  "baselineManifest": "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/baseline.json",
+  "baselineManifestSha256": "018d19e558f4cabb42ffda5ff5f31a52550232346bc73a160ef832c29f599249",
+  "existingWipRule": "No reset/cleanup. The dirty-path baseline predates this continuation. Dirty-at-start paths have no captured starting SHA256, so byte equality is not claimed; exact current SHA256 is recorded for the next writer. This continuation made no writes to common runtime/exporter files.",
+  "preservation": {
+    "OpenSim_ModelsStatusAtCapture": "",
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "canonicalHaBindingsAdded": 0,
+    "denominators": {
+      "targets": 542,
+      "memberships": 563,
+      "regions": 12,
+      "muscleTargets": 429,
+      "muscleMemberships": 447,
+      "sourceMuscleConcepts": 232,
+      "sourceMuscleSurfaces": 462,
+      "existingHaConnections": 130,
+      "historical163": [
+        6,
+        20,
+        135,
+        2
+      ]
+    }
+  },
+  "commonInterfaceVersions": {
+    "motionLearningRevision": "t66-unit03-source-pose-r4",
+    "motionSceneSchemaVersion": "1.0.0",
+    "motionSceneRevision": "t66-unit02-hip-knee-r1",
+    "motionAssetSourcesSchemaVersion": "1.0.0",
+    "motionAssetSourcesRevision": "T24-2026-09-27-motion-assets-v1",
+    "authoringRegistrySchemaVersion": "t59-motion-authoring-registry-v1",
+    "registrationSchemaVersion": "t66-u03-registration-r4"
+  },
+  "sharedFiles": [
+    {
+      "path": "atlas-data/motion/authoring/registry.json",
+      "exists": true,
+      "bytes": 8693,
+      "currentSha256": "79e7c9e9acd6ef614d93556d65dd611717c7c2c845c7a4ecd9deeb46b0a42309",
+      "baselineStatus": " M",
+      "baselineWorkingTreeSha256": null,
+      "baselineByteEquality": "unverifiable; dirty-path snapshot did not record SHA256",
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "atlas-data/motion/motion-asset-sources.json",
+      "exists": true,
+      "bytes": 99570,
+      "currentSha256": "6db109c9971c9ac1ef8c385812ab6b7d086aea247f3cdf0b9343d146edc4e8fc",
+      "baselineStatus": " M",
+      "baselineWorkingTreeSha256": null,
+      "baselineByteEquality": "unverifiable; dirty-path snapshot did not record SHA256",
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "atlas-data/motion/motion-learning.json",
+      "exists": true,
+      "bytes": 99511907,
+      "currentSha256": "39843e60f22bfa0e8380362f90c3415d2d992399f4b1640ef852e73e6256ca25",
+      "baselineStatus": " M",
+      "baselineWorkingTreeSha256": null,
+      "baselineByteEquality": "unverifiable; dirty-path snapshot did not record SHA256",
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "atlas-data/motion/motion-scenes.json",
+      "exists": true,
+      "bytes": 26762,
+      "currentSha256": "0a14beca1069638517a80cf69641bfa96a57f23a5f620d4ba739c39506e7b0e6",
+      "baselineStatus": " M",
+      "baselineWorkingTreeSha256": null,
+      "baselineByteEquality": "unverifiable; dirty-path snapshot did not record SHA256",
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "atlas-data/schemas/validate_motion_learning.py",
+      "exists": true,
+      "bytes": 55564,
+      "currentSha256": "2d59e95eae2ef23bd3c51ccd0f615bfec6d2c2f1074ce1737a1347c950cbe5b4",
+      "baselineStatus": " M",
+      "baselineWorkingTreeSha256": null,
+      "baselineByteEquality": "unverifiable; dirty-path snapshot did not record SHA256",
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "atlas-web/src/domain/motionLearning.ts",
+      "exists": true,
+      "bytes": 15772,
+      "currentSha256": "e83ee8cd9fc092b968763dd97d935c849dfb8ee962307e78c75a2f07fe15f318",
+      "baselineStatus": "clean",
+      "baselineHeadSha256": "e83ee8cd9fc092b968763dd97d935c849dfb8ee962307e78c75a2f07fe15f318",
+      "currentMatchesCleanBaseline": true,
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "atlas-web/src/viewer/animationSceneAdapter.ts",
+      "exists": true,
+      "bytes": 22329,
+      "currentSha256": "35ea76fe7737bf689b5afd392557f7c5fd1a0e7d31a56f4b0a73c3e141008303",
+      "baselineStatus": "clean",
+      "baselineHeadSha256": "35ea76fe7737bf689b5afd392557f7c5fd1a0e7d31a56f4b0a73c3e141008303",
+      "currentMatchesCleanBaseline": true,
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "atlas-web/src/viewer/animationPlayback.ts",
+      "exists": true,
+      "bytes": 9340,
+      "currentSha256": "f1ba14a38606e42e0a8105220ad1c911035b85aef2c074343a963f705466b89c",
+      "baselineStatus": "clean",
+      "baselineHeadSha256": "f1ba14a38606e42e0a8105220ad1c911035b85aef2c074343a963f705466b89c",
+      "currentMatchesCleanBaseline": true,
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "atlas-web/src/viewer/wholeBody/AnatomySceneController.ts",
+      "exists": true,
+      "bytes": 18427,
+      "currentSha256": "1bf3042ad6ac2317421a4a24d6493c8d6174492a3e94b9f0811dd6ad318e8dfc",
+      "baselineStatus": "clean",
+      "baselineHeadSha256": "1bf3042ad6ac2317421a4a24d6493c8d6174492a3e94b9f0811dd6ad318e8dfc",
+      "currentMatchesCleanBaseline": true,
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "atlas-web/src/viewer/datasets/DatasetSceneAdapter.ts",
+      "exists": true,
+      "bytes": 25178,
+      "currentSha256": "5e2fc279bf07a4955676cbfdd5db1673a9bd5ac5aaf38cab3c53b30175c4c778",
+      "baselineStatus": "clean",
+      "baselineHeadSha256": "5e2fc279bf07a4955676cbfdd5db1673a9bd5ac5aaf38cab3c53b30175c4c778",
+      "currentMatchesCleanBaseline": true,
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "atlas-web/src/main.tsx",
+      "exists": true,
+      "bytes": 465,
+      "currentSha256": "8552cc3850c6656639191060d3fa622598efd6fe92197af21a78dfd090af256b",
+      "baselineStatus": "clean",
+      "baselineHeadSha256": "8552cc3850c6656639191060d3fa622598efd6fe92197af21a78dfd090af256b",
+      "currentMatchesCleanBaseline": true,
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "atlas-web/src/ui/App.tsx",
+      "exists": true,
+      "bytes": 30151,
+      "currentSha256": "bc11dd72ae93e12712712c0b67026882bcc966239e3c10f736158fe2cc799ca1",
+      "baselineStatus": "clean",
+      "baselineHeadSha256": "bc11dd72ae93e12712712c0b67026882bcc966239e3c10f736158fe2cc799ca1",
+      "currentMatchesCleanBaseline": true,
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "atlas-web/src/data/learnerMotionRuntime.generated.ts",
+      "exists": true,
+      "bytes": 5485360,
+      "currentSha256": "98b8bec2e61012d267ee0a40a97f25a9c162a3e314ac09b4f4c625d6c8169bed",
+      "baselineStatus": " M",
+      "baselineWorkingTreeSha256": null,
+      "baselineByteEquality": "unverifiable; dirty-path snapshot did not record SHA256",
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "work/tools/author_t66_family_motion.py",
+      "exists": true,
+      "bytes": 24634,
+      "currentSha256": "538ee11b06a269c87fbf4d84c991d9acfd2d8c6480b39076428f906e1c6816d4",
+      "baselineStatus": " M",
+      "baselineWorkingTreeSha256": null,
+      "baselineByteEquality": "unverifiable; dirty-path snapshot did not record SHA256",
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "work/tools/t66_contact_correctives.py",
+      "exists": true,
+      "bytes": 30412,
+      "currentSha256": "c4c56983ded5494c94e368fbe4a2bcf5f6b4e8652a1fb29a355a5893124d95b3",
+      "baselineStatus": " M",
+      "baselineWorkingTreeSha256": null,
+      "baselineByteEquality": "unverifiable; dirty-path snapshot did not record SHA256",
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "work/tools/verify_t66_glb_pose.py",
+      "exists": true,
+      "bytes": 3959,
+      "currentSha256": "285ae88abad4fc8373453232a682bdccef4cc9887c0a746d208072d6fc6a4086",
+      "baselineStatus": " M",
+      "baselineWorkingTreeSha256": null,
+      "baselineByteEquality": "unverifiable; dirty-path snapshot did not record SHA256",
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "work/tools/rewrite_t66_glb_rigid_tracks.py",
+      "exists": true,
+      "bytes": 12080,
+      "currentSha256": "f2037836e4808009631a506dfc30767ba8eeefd3f150a498970adffcd461738d",
+      "baselineStatus": "clean",
+      "baselineHeadSha256": "f2037836e4808009631a506dfc30767ba8eeefd3f150a498970adffcd461738d",
+      "currentMatchesCleanBaseline": true,
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-03/register_unit03_r4.py",
+      "exists": true,
+      "bytes": 25595,
+      "currentSha256": "595a33bf7761b602ff1b7f84f76a0676856eb669d2da7fc11773a6281e4725ca",
+      "baselineStatus": "??",
+      "baselineWorkingTreeSha256": null,
+      "baselineByteEquality": "unverifiable; dirty-path snapshot did not record SHA256",
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-03/validate_unit03_coverage.py",
+      "exists": true,
+      "bytes": 8323,
+      "currentSha256": "fc2f244b6c6c0fa0e815422e1109f72f60170a50f905f1cf5897d0abdce32b82",
+      "baselineStatus": "clean",
+      "baselineHeadSha256": "fc2f244b6c6c0fa0e815422e1109f72f60170a50f905f1cf5897d0abdce32b82",
+      "currentMatchesCleanBaseline": true,
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-03/registration.json",
+      "exists": true,
+      "bytes": 587224,
+      "currentSha256": "72a7569d2effc1851608315b67595ca48226fea61091f7b55c07b08ddbb2af1e",
+      "baselineStatus": "clean",
+      "baselineHeadSha256": "72a7569d2effc1851608315b67595ca48226fea61091f7b55c07b08ddbb2af1e",
+      "currentMatchesCleanBaseline": true,
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-03/action-scope-ledger.json",
+      "exists": true,
+      "bytes": 315481,
+      "currentSha256": "70fc14774a651ae0aa3614dc8222f046da3e3b390f004813c4e5841f16e662ac",
+      "baselineStatus": "clean",
+      "baselineHeadSha256": "70fc14774a651ae0aa3614dc8222f046da3e3b390f004813c4e5841f16e662ac",
+      "currentMatchesCleanBaseline": true,
+      "continuationWritePerformed": false
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-03/serial-queue.json",
+      "exists": true,
+      "bytes": 1040338,
+      "currentSha256": "e2f80b989c16fe1e0bc2d8e4b5bb9b7d83b757dc8fbe7cbde729126a6431ee48",
+      "baselineStatus": "clean",
+      "baselineHeadSha256": "e2f80b989c16fe1e0bc2d8e4b5bb9b7d83b757dc8fbe7cbde729126a6431ee48",
+      "currentMatchesCleanBaseline": true,
+      "continuationWritePerformed": false
+    }
+  ],
+  "ownership": {
+    "currentWriter": "Luna Max / T66 unit03 continuation",
+    "thisContinuationCommonRuntimeFilesModified": false,
+    "nextWriter": "Single shared writer: use currentSha256 as the new input snapshot; re-hash before editing. Dirty-at-start files lack a start hash, so do not infer prior-byte equality.",
+    "noNewFamilyExpansionAdded": true,
+    "nextManualInput": "work/plans/t66-parallel-completion-2026-10-03/01-writer-freeze-and-optimize.txt",
+    "nextManualInputStarted": false
+  },
+  "scopeLimit": "Current hashes and interfaces are a checkpoint, not permission or a frozen authoring assignment. Candidate registration does not mean per-package learner UI acceptance.",
+  "commonFilesCheckpointPath": "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/common-writer-checkpoint.json"
+}

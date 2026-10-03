@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "t66-execution-sync-evidence-v1",
+  "capturedAt": "2026-10-03",
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "work/tools/sync_execution.py"
+      ],
+      "returncode": 0,
+      "stdout": "Updated 0 execution views from 37a5b98319a8",
+      "stderr": "",
+      "status": "passed"
+    },
+    {
+      "argv": [
+        "python3",
+        "work/tools/sync_execution.py",
+        "--check"
+      ],
+      "returncode": 0,
+      "stdout": "Execution projections match; no writes.",
+      "stderr": "",
+      "status": "passed"
+    }
+  ],
+  "postSyncSha256": {
+    "work/EXECUTION.json": "37a5b98319a8843c8875d0d61bd05ef0eddf558fc156d0114ceafc9e6404c76b",
+    "work/NEXT.md": "b0099674e0e6a50834ef7baaebecfa6017fec918b306d771e4f69ca6ae2a135d",
+    "work/STATUS.md": "36fd2ea78f4fec1d2eab5c31011a3811843f00f7a9fb17d98ea91b82b334217a",
+    "design/2026-09-25-muscle-atlas/23-PROMPTS-AFTER-T95.md": "d23fbfffe65a1fa491ecd6080d5bd1c1f46ede773083e5e3f8095f5c1d133e2a",
+    "work/task-registry-r15.json": "58b018f61e8b60e457cea17b6acc9f9fa27626ddb0ed173dc0d9c86c6ab9c9f2"
+  },
+  "note": "Execution projections regenerated from work/EXECUTION.json; --check passed. Preexisting dirty/untracked outputs remain mixed and are not automatically task-owned for commit."
+}

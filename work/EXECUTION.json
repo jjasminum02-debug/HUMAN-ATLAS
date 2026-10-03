@@ -3187,7 +3187,7 @@
             "sourceConceptCount": 232,
             "sourceSurfaceCount": 462,
             "primaryPlayableMuscleSourceSurfaces": 1,
-            "registeredBoneSourceInstances": 122,
+            "registeredBoneSourceInstances": 150,
             "eligibleBoneSourceInstances": 210,
             "registeredNativeNerveStaticSurfaces": 195,
             "nativeNerveLabelGroups": 98,
@@ -3198,14 +3198,22 @@
             "observedModelOnlyCourseGroups": 90,
             "dynamicNervePoses": 0,
             "entrapmentCoordinateBindings": 0,
-            "sourcePoseObservationSurfaces": 129,
+            "sourcePoseObservationSurfaces": 107,
             "mainFunctionSourceClipSurfaces": 1,
-            "registeredBoneFamilyBindings": 327,
-            "uniquePlayableGLBPackages": 15,
-            "newRegisteredFamilyPackages": 14,
+            "registeredBoneFamilyBindings": 865,
+            "uniquePlayableGLBPackages": 33,
+            "newRegisteredFamilyPackages": 32,
             "remainingFamilyCandidates": 0,
             "geometryOrContactRejectedCandidates": 0,
-            "kneeNormalContextPendingCandidates": 0
+            "kneeNormalContextPendingCandidates": 0,
+            "muscleActionSourceRows": 273,
+            "boneFamilyBindingRows": 865,
+            "uniqueSourceDerivedMotionUris": 33,
+            "uniqueRuntimeMotionUris": 34,
+            "uniqueSourceDerivedMotionGlbUris": 33,
+            "uniqueSourceDerivedMotionGlbSha256": 33,
+            "uniqueRuntimeMotionGlbUris": 34,
+            "uniqueRuntimeMotionGlbSha256": 34
           },
           "unresolvedProductBlockers": [
             "T66-B3"
@@ -3230,7 +3238,14 @@
             "work/evidence/T66/serial-completion-2026-10-02/unit-02/trials-r1/summary.json",
             "work/evidence/T66/serial-completion-2026-10-02/unit-02/browser/browser-checks.json",
             "work/evidence/T66/serial-completion-2026-10-02/unit-02/fit-sample.json",
-            "work/evidence/T66/serial-completion-2026-10-02/unit-02/verification-commands.json"
+            "work/evidence/T66/serial-completion-2026-10-02/unit-02/verification-commands.json",
+            "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/REPORT.md",
+            "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/validation.json",
+            "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/runtime-count-reconciliation.json",
+            "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/candidate-registration-reconciliation.json",
+            "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/common-writer-checkpoint.json",
+            "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/u01-browser-supplement-validation.json",
+            "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/scope-interpretation.json"
           ]
         },
         "wholeMuscleMotionGoal": {
@@ -3241,17 +3256,29 @@
           "sourceSurfaces": 462,
           "primaryPlayableSourceSurfaces": 1,
           "newFullTargetExtentApprovals": 0,
-          "sourcePoseObservationSurfaces": 129,
+          "sourcePoseObservationSurfaces": 107,
           "mainFunctionSourceClipSurfaces": 1,
-          "registeredNewFamilyPackages": 14
+          "registeredNewFamilyPackages": 32,
+          "muscleActionSourceRows": 273,
+          "uniqueMuscleSourceSurfaces": 107,
+          "uniqueSourceDerivedMotionUris": 33,
+          "uniqueRuntimeMotionUris": 34,
+          "uniqueSourceDerivedMotionGlbUris": 33,
+          "uniqueSourceDerivedMotionGlbSha256": 33,
+          "uniqueRuntimeMotionGlbUris": 34,
+          "uniqueRuntimeMotionGlbSha256": 34
         },
         "wholeBoneMotionGoal": {
           "status": "partial",
           "eligibleSourceInstances": 210,
-          "typedPlayableSourceInstances": 122,
+          "typedPlayableSourceInstances": 150,
           "independentAnatomicalBoneCount": null,
           "independentDOFsAdded": 0,
-          "registeredFamilyBindings": 327
+          "registeredFamilyBindings": 865,
+          "uniqueBoneSourceInstances": 150,
+          "boneFamilyBindingRows": 865,
+          "uniqueSourceDerivedMotionUris": 33,
+          "uniqueRuntimeMotionUris": 34
         },
         "nerveCourseCoverage": {
           "status": "partial",
@@ -3269,7 +3296,7 @@
             "unit": "01",
             "promptFile": "work/plans/t66-serial-completion-2026-10-02/01-T66-deformation-repair.txt",
             "engineeringStatus": "implemented_verified",
-            "actualLearnerUiStatus": "blocked_by_environment",
+            "actualLearnerUiStatus": "passed",
             "implementedRejectedCandidates": 4,
             "registeredFamilyPackagesBefore": 6,
             "registeredFamilyPackagesAfter": 10,
@@ -3290,8 +3317,19 @@
               "work/evidence/T66/serial-completion-2026-10-02/unit-01/browser-verification.json",
               "work/evidence/T66/serial-completion-2026-10-02/unit-01/preservation.json",
               "work/evidence/T66/serial-completion-2026-10-02/unit-01/final-glb-source-frame-validation-r4.json",
-              "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-family-registration-r4.json"
-            ]
+              "work/evidence/T66/serial-completion-2026-10-02/unit-01/source-family-registration-r4.json",
+              "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/u01-browser-supplement-validation.json",
+              "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/browser-u01/browser-validation.json"
+            ],
+            "previousActualLearnerUiStatus": "blocked_by_environment",
+            "actualLearnerUiSupplement": {
+              "status": "passed_supplemental_actual_browser",
+              "candidateChecksPassed": 4,
+              "sourceActionScope": "bilateral short head of biceps brachii; shoulder flexion and elbow flexion",
+              "evidence": "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/u01-browser-supplement-validation.json",
+              "screenshots": "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/browser-u01/screenshots/",
+              "limitations": "Four exact source/action combinations; not whole-family extent or human anatomy approval."
+            }
           },
           {
             "unit": "02",
@@ -3392,15 +3430,73 @@
               "work/evidence/T66/serial-completion-2026-10-02/unit-03/registration.json",
               "work/evidence/T66/serial-completion-2026-10-02/unit-03/action-scope-ledger.json",
               "work/evidence/T66/serial-completion-2026-10-02/unit-03/browser/final-browser-validation.stdout.json",
-              "work/evidence/T66/serial-completion-2026-10-02/unit-03/browser/pronation-angle-drag-verified.json"
+              "work/evidence/T66/serial-completion-2026-10-02/unit-03/browser/pronation-angle-drag-verified.json",
+              "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/REPORT.md",
+              "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/validation.json",
+              "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/runtime-count-reconciliation.json",
+              "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/candidate-registration-reconciliation.json",
+              "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/common-writer-checkpoint.json"
             ],
             "parentStatus": "in_progress / partial",
-            "parentNextUnit": "author-and-integrate-normal-motion-bone-and-nerve"
+            "parentNextUnit": "author-and-integrate-normal-motion-bone-and-nerve",
+            "runtimeCountReconciliation": {
+              "uniqueMuscleSourceSurfaces": 107,
+              "muscleActionSourceRows": 273,
+              "uniqueBoneSourceInstances": 150,
+              "boneFamilyBindingRows": 865,
+              "uniqueSourceDerivedMotionUris": 33,
+              "uniqueRuntimeMotionUris": 34,
+              "currentLatestCandidateStatusCounts": {
+                "candidate_pass": 18
+              },
+              "registeredFamilySides": 18,
+              "candidateHashRegistrationMismatches": 0,
+              "registrationReceiptIsNotUiAcceptance": true,
+              "uniqueSourceDerivedMotionGlbUris": 33,
+              "uniqueSourceDerivedMotionGlbSha256": 33,
+              "uniqueRuntimeMotionGlbUris": 34,
+              "uniqueRuntimeMotionGlbSha256": 34
+            },
+            "continuationEvidence": "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/",
+            "nextManualInput": "work/plans/t66-parallel-completion-2026-10-03/01-writer-freeze-and-optimize.txt",
+            "nextManualInputStarted": false,
+            "scopeInterpretationEvidence": "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/scope-interpretation.json",
+            "primeMoverOrActivationClipAdded": 0
           }
-        ]
+        ],
+        "continuation2026-10-03": {
+          "unit": "03",
+          "unitStatus": "implemented_verified_with_content_gaps",
+          "u01ActualBrowserSupplement": "passed",
+          "u01BrowserCandidateChecksPassed": 4,
+          "latestU03CandidateStatuses": {
+            "candidate_pass": 18
+          },
+          "registeredU03FamilySides": 18,
+          "registrationR2ArtifactPresent": false,
+          "currentCounts": {
+            "sourcePoseObservationSurfaces": 107,
+            "registeredBoneSourceInstances": 150,
+            "registeredBoneFamilyBindings": 865,
+            "uniquePlayableGLBPackages": 33,
+            "newRegisteredFamilyPackages": 32,
+            "muscleActionSourceRows": 273,
+            "boneFamilyBindingRows": 865,
+            "uniqueSourceDerivedMotionUris": 33,
+            "uniqueRuntimeMotionUris": 34,
+            "uniqueSourceDerivedMotionGlbUris": 33,
+            "uniqueSourceDerivedMotionGlbSha256": 33,
+            "uniqueRuntimeMotionGlbUris": 34,
+            "uniqueRuntimeMotionGlbSha256": 34
+          },
+          "parentStatus": "in_progress / partial",
+          "parentNextUnit": "author-and-integrate-normal-motion-bone-and-nerve",
+          "nextManualInput": "work/plans/t66-parallel-completion-2026-10-03/01-writer-freeze-and-optimize.txt",
+          "nextManualInputStarted": false
+        }
       },
       "report": "work/reports/T66.md",
-      "promptFile": "work/plans/t66-serial-completion-2026-10-02/02-T66-hip-knee.txt",
+      "promptFile": "work/plans/t66-serial-completion-2026-10-02/03-T66-shoulder-forearm-wrist.txt",
       "acceptanceScope": "T66 latest whole-muscle / whole-bone normal-motion authoring and native nerve-course integration; currently verified subset reported separately",
       "contractRevision": "app-completion-2026-10-01",
       "acceptanceContract": {
@@ -3435,7 +3531,7 @@
         "sourceConceptCount": 232,
         "sourceSurfaceCount": 462,
         "primaryPlayableMuscleSourceSurfaces": 1,
-        "registeredBoneSourceInstances": 122,
+        "registeredBoneSourceInstances": 150,
         "eligibleBoneSourceInstances": 210,
         "registeredNativeNerveStaticSurfaces": 195,
         "nativeNerveLabelGroups": 98,
@@ -3446,20 +3542,24 @@
         "observedModelOnlyCourseGroups": 90,
         "dynamicNervePoses": 0,
         "entrapmentCoordinateBindings": 0,
-        "sourcePoseObservationSurfaces": 129,
+        "sourcePoseObservationSurfaces": 107,
         "mainFunctionSourceClipSurfaces": 1,
-        "registeredBoneFamilyBindings": 327,
-        "uniquePlayableGLBPackages": 15,
-        "newRegisteredFamilyPackages": 14,
+        "registeredBoneFamilyBindings": 865,
+        "uniquePlayableGLBPackages": 33,
+        "newRegisteredFamilyPackages": 32,
         "remainingFamilyCandidates": 0,
         "geometryOrContactRejectedCandidates": 0,
-        "kneeNormalContextPendingCandidates": 0
+        "kneeNormalContextPendingCandidates": 0,
+        "muscleActionSourceRows": 273,
+        "boneFamilyBindingRows": 865,
+        "uniqueSourceDerivedMotionUris": 33,
+        "uniqueRuntimeMotionUris": 34
       },
       "unresolvedProductBlockers": [
         "T66-B3"
       ],
-      "currentInternalUnit": "02",
-      "currentInternalUnitStatus": "implemented_verified; next manual unit not started"
+      "currentInternalUnit": "03",
+      "currentInternalUnitStatus": "implemented_verified; U01 actual browser supplement completed; next manual parallel writer input not started"
     },
     "T85": {
       "title": "전체 지원 움직임·통합 앱 품질 감사",
