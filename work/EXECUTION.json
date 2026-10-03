@@ -3343,6 +3343,59 @@
             "verificationGapInherited": [
               "unit 01 actual learner UI remains blocked_by_environment; unit 02 result does not reclassify it"
             ]
+          },
+          {
+            "unit": "03",
+            "promptFile": "work/plans/t66-serial-completion-2026-10-02/03-T66-shoulder-forearm-wrist.txt",
+            "engineeringStatus": "implemented_verified",
+            "contentStatus": "processed_with_content_gaps",
+            "anatomicalFamilyCategories": [
+              "shoulder-girdle",
+              "shoulder",
+              "elbow",
+              "forearm",
+              "wrist"
+            ],
+            "responsibilityCount": 66,
+            "implementedVerified": 64,
+            "processedWithContentGaps": 2,
+            "blockedByProductDefect": 0,
+            "outOfActionScopeRowsPreserved": 674,
+            "registeredFamilySidePackages": 18,
+            "registeredSelectorRelations": 682,
+            "newR5Packages": 6,
+            "r5SampledDeformingSurfaceCount": 46,
+            "r5MinimumSampledAreaRatio": 0.1988717674083129,
+            "r5SampledFaceFlips": 0,
+            "r5NewContainmentMaximum": 0,
+            "browserStatus": "passed_representative_actual_browser",
+            "browserViewports": [
+              "390x900",
+              "1024x900",
+              "1440x900"
+            ],
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "sourceOnly": true,
+            "publicRedistribution": "held",
+            "humanReview": "not_performed",
+            "canonicalBindingAdded": 0,
+            "contentGaps": [
+              "bilateral ulnar-head flexor carpi ulnaris sideward direction is not normalized to radial/ulnar",
+              "Supinator direction conflicts within one opened source; no directional action registered",
+              "Trapezius action remains whole-group only and is not inherited by upper/middle/lower parts"
+            ],
+            "evidence": [
+              "work/evidence/T66/serial-completion-2026-10-02/unit-03/REPORT.md",
+              "work/evidence/T66/serial-completion-2026-10-02/unit-03/final-validation.json",
+              "work/evidence/T66/serial-completion-2026-10-02/unit-03/preservation-final.json",
+              "work/evidence/T66/serial-completion-2026-10-02/unit-03/registration.json",
+              "work/evidence/T66/serial-completion-2026-10-02/unit-03/action-scope-ledger.json",
+              "work/evidence/T66/serial-completion-2026-10-02/unit-03/browser/final-browser-validation.stdout.json",
+              "work/evidence/T66/serial-completion-2026-10-02/unit-03/browser/pronation-angle-drag-verified.json"
+            ],
+            "parentStatus": "in_progress / partial",
+            "parentNextUnit": "author-and-integrate-normal-motion-bone-and-nerve"
           }
         ]
       },

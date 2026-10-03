@@ -48,3 +48,14 @@ source-only family는 명시적인 `source_family_bound` 계약으로 정확한 
 - evidence: work/evidence/T66/serial-completion-2026-10-02/unit-02/.
 - T66은 in_progress / partial이며 부모 nextUnit은 변경하지 않는다. 이번 실행 promptFile은 work/plans/t66-serial-completion-2026-10-02/02-T66-hip-knee.txt이다. unit 01의 실제 UI 환경 차단은 별도 미검증으로 유지한다.
 - 다음 수동 내부 unit 입력: work/plans/t66-serial-completion-2026-10-02/03-T66-shoulder-forearm-wrist.txt; 자동 실행 금지.
+
+
+## 직렬 내부 unit 03 — 어깨띠·어깨·팔꿈치·전완·손목
+
+- promptFile: `work/plans/t66-serial-completion-2026-10-02/03-T66-shoulder-forearm-wrist.txt`
+- 수행 범위: 이 다섯 해부학 가족에서 현재 source/action 책임을 같은 scene에 구현한다. intrinsic 손가락은 unit 04 소유다.
+- 판정: 66개 action responsibility 중 64개 `implemented_verified`, 좌우 척측수근굴근 자갈래 2개는 방향 근거가 불충분해 `processed_with_content_gaps`; 674개 비작용 문맥 행은 보존했다.
+- 양측 견갑대 올림·앞쪽 이동과 전완 엎침을 포함해 U03의 18 family-side package/682 selector relation을 등록했다. 여섯 R5 package의 GLB key pose, 보간 geometry/contact 검사는 통과했다.
+- 작용 카드와 자세 관찰을 구분한다. Supinator의 원문 방향 충돌은 미해결, 승모근 작용은 전체군 범위로 유지하며 세부 머리에 상속하지 않는다.
+- source-only, 공개 재배포 held, humanReview `not_performed`, 새 HA canonical binding 0을 유지한다. 전체 T66은 계속 `in_progress / partial`, 부모 `nextUnit=author-and-integrate-normal-motion-bone-and-nerve`다.
+- 실제 browser, regression, schema, runtime projection, typecheck, build 및 입력/원본 보존 결과: `work/evidence/T66/serial-completion-2026-10-02/unit-03/`.
