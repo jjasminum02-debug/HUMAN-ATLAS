@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "t66-cache-equivalence-v1",
+  "status": "passed",
+  "runId": "T66-W1-20261003-5dadff8d782b",
+  "manifestFileSha256": "7d12000c2a049d1c2bf09f8349159609a6dd7b5f93f1d0710742ede84aacad95",
+  "sample": "existing U02 hip-flexion-left input; bounded candidate dry-run, not learner registration",
+  "inputSha256": "90c7fd7d54859241ddd0d11acb13564e96aba41dedbbb4dca5b9337ef1748024",
+  "cacheMetrics": {
+    "no-cache": {
+      "enabled": false,
+      "hits": 0,
+      "misses": 110,
+      "requests": 110,
+      "missParseSeconds": 0.057160378666594625,
+      "hitLookupSeconds": 0.0
+    },
+    "cache": {
+      "enabled": true,
+      "hits": 38,
+      "misses": 72,
+      "requests": 110,
+      "missParseSeconds": 0.024674245389178395,
+      "hitLookupSeconds": 1.2580770999193192e-05
+    }
+  },
+  "stageTimingsSeconds": {
+    "no-cache": {
+      "inputReadSeconds": 2.3707980290055275e-05,
+      "inputSha256Seconds": 6.291596218943596e-05,
+      "inputJsonParseSeconds": 0.0008939998224377632,
+      "frozenModuleLoadSeconds": 0.053994332905858755,
+      "authorGeometrySolverAndGlbAssemblySeconds": 1.5306993329431862,
+      "sourceGeometryReadHashDecodeTransformSeconds": 0.057160378666594625,
+      "contactWeightSolveSeconds": 0.0,
+      "contactCorrectiveSeconds": 0.0,
+      "glbContainerAssemblySeconds": 0.005276750074699521,
+      "authoringRemainderSeconds": 1.468262204201892,
+      "glbFileWriteSeconds": 0.0005887078586965799,
+      "authoringRecordJsonWriteSeconds": 0.0033257498871535063,
+      "emittedGlbPoseReplaySeconds": 0.009297207929193974,
+      "poseQcJsonWriteSeconds": 0.0002587498165667057,
+      "historicalQcLookupSeconds": 0.018001000164076686,
+      "learnerUiPreparationSeconds": null
+    },
+    "cache": {
+      "inputReadSeconds": 2.3916829377412796e-05,
+      "inputSha256Seconds": 6.616697646677494e-05,
+      "inputJsonParseSeconds": 0.0010159998200833797,
+      "frozenModuleLoadSeconds": 0.0362052081618458,
+      "authorGeometrySolverAndGlbAssemblySeconds": 1.5076779590453953,
+      "sourceGeometryReadHashDecodeTransformSeconds": 0.024674245389178395,
+      "contactWeightSolveSeconds": 0.0,
+      "contactCorrectiveSeconds": 0.0,
+      "glbContainerAssemblySeconds": 0.005649873986840248,
+      "authoringRemainderSeconds": 1.4773538396693766,
+      "glbFileWriteSeconds": 0.0005581660661846399,
+      "authoringRecordJsonWriteSeconds": 0.0033175419084727764,
+      "emittedGlbPoseReplaySeconds": 0.009223500033840537,
+      "poseQcJsonWriteSeconds": 0.00026908284053206444,
+      "historicalQcLookupSeconds": 0.01773870806209743,
+      "learnerUiPreparationSeconds": null
+    }
+  },
+  "geometryOutputFiles": [
+    {
+      "file": "authoring-record.json",
+      "noCacheSha256": "f5eeab3df23ba91ee57fd77990e92b54d41f7338b98bb291cf3218b0b99cae9a",
+      "cacheSha256": "f5eeab3df23ba91ee57fd77990e92b54d41f7338b98bb291cf3218b0b99cae9a",
+      "byteIdentical": true,
+      "bytes": 303038
+    },
+    {
+      "file": "motion.glb",
+      "noCacheSha256": "fa9ca35cae7f4e54eeeae201abc288ada4490ee955b4aeee1d2e95fb23a0260e",
+      "cacheSha256": "fa9ca35cae7f4e54eeeae201abc288ada4490ee955b4aeee1d2e95fb23a0260e",
+      "byteIdentical": true,
+      "bytes": 2193060
+    },
+    {
+      "file": "pose-qc.json",
+      "noCacheSha256": "ded9666b27412edd6763dc2b1cebf7247c71780c75c613a78e01cf1af8fc9620",
+      "cacheSha256": "ded9666b27412edd6763dc2b1cebf7247c71780c75c613a78e01cf1af8fc9620",
+      "byteIdentical": true,
+      "bytes": 20377
+    },
+    {
+      "file": "reference.glb",
+      "noCacheSha256": "dbb58169b6a75fd77930765aca6ea0c0c0a57ba387e999aca0f83ea4219219a2",
+      "cacheSha256": "dbb58169b6a75fd77930765aca6ea0c0c0a57ba387e999aca0f83ea4219219a2",
+      "byteIdentical": true,
+      "bytes": 2149796
+    }
+  ],
+  "semanticFieldsEqual": true,
+  "expectedDifferences": [
+    "output paths",
+    "cache telemetry",
+    "stage timings"
+  ],
+  "metadataNote": "All emitted GLB, authoring-record, pose-QC bytes and semantic handoff fields match. A single paired run establishes equivalence only, not speedup."
+}

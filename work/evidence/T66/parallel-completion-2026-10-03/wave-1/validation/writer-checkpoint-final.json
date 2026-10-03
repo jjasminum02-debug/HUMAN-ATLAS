@@ -1,0 +1,371 @@
+{
+  "schemaVersion": "t66-parallel-writer-checkpoint-v1",
+  "baselineHead": "ae993a8a455632d738b2141f50ad09789bf5ee7c",
+  "runId": "T66-W1-20261003-5dadff8d782b",
+  "files": [
+    {
+      "path": "work/tools/t66_parallel_protocol.py",
+      "sha256": "d266d7d109f0c25d737032d028791fec90c6ccee88521d88a0ec895d1ef4fc7b",
+      "bytes": 23355
+    },
+    {
+      "path": "work/tools/build_t66_parallel_wave1_manifest.py",
+      "sha256": "657da1bcb4906a517a8152677a49cf5212f7e225d7e141466f177fbc8b9a2347",
+      "bytes": 45529
+    },
+    {
+      "path": "work/tools/run_t66_parallel_candidate.py",
+      "sha256": "9a2489e16bfe584b32849ee26bdc3eaee27cb05c42fca0dc3b6fd1258444cf91",
+      "bytes": 25680
+    },
+    {
+      "path": "work/tools/validate_t66_parallel_wave1.py",
+      "sha256": "18999e802927d72e34cef79f2eea608af8e19255616959b107e8d0d1fc1f6671",
+      "bytes": 7031
+    },
+    {
+      "path": "work/tools/test_t66_parallel_protocol.py",
+      "sha256": "28bc45d7a703113279f023c6d6fd7af360c29a181c1ff5c23420e15ddb267ae4",
+      "bytes": 5149
+    },
+    {
+      "path": "work/schemas/t66-parallel-candidate-package.schema.json",
+      "sha256": "a39074983ff301658c76a6a9a5d56a1a0c988417967719a72201745c0502be7e",
+      "bytes": 4609
+    }
+  ],
+  "manifestCanonicalSha256": "a495d9421e38aadf4990dcfa5758661ab4a852d8690b483c328b34bccce2b511",
+  "snapshotInputCount": 47,
+  "snapshotInputs": [
+    {
+      "path": "AGENTS.md",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/AGENTS.md",
+      "sha256": "f4801313b11bdec858f7e0b04d80e429559efd4a4ef631ecf8384ced182b9eb7",
+      "bytes": 12819,
+      "role": "repository instructions"
+    },
+    {
+      "path": "atlas-data/catalog/target-scope-t96.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/atlas-data/catalog/target-scope-t96.json",
+      "sha256": "dba3f2a2dee6c732515e71082d62506b88375b0f88af392c950356703013ac24",
+      "bytes": 1771036,
+      "role": "frozen product target scope"
+    },
+    {
+      "path": "atlas-data/motion/authoring/registry.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/atlas-data/motion/authoring/registry.json",
+      "sha256": "79e7c9e9acd6ef614d93556d65dd611717c7c2c845c7a4ecd9deeb46b0a42309",
+      "bytes": 8693,
+      "role": "current authoring registry"
+    },
+    {
+      "path": "atlas-data/motion/motion-learning.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/atlas-data/motion/motion-learning.json",
+      "sha256": "39843e60f22bfa0e8380362f90c3415d2d992399f4b1640ef852e73e6256ca25",
+      "bytes": 99511907,
+      "role": "current actual learner motion registry"
+    },
+    {
+      "path": "atlas-data/overlays/za-local-integration.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/atlas-data/overlays/za-local-integration.json",
+      "sha256": "4a5028dd7c1bca3b142d7899cc99a425ad88d5837ca598d2d5f4ad612994be5c",
+      "bytes": 7239558,
+      "role": "current source/target candidate overlay"
+    },
+    {
+      "path": "atlas-data/source-cache/datasets/za/compiled/manifest.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/atlas-data/source-cache/datasets/za/compiled/manifest.json",
+      "sha256": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42",
+      "bytes": 3511141,
+      "role": "source instances and immutable resource references"
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+      "sha256": "04a7343582654f3eac501185e7985296fd8c67814bbd4383308086c4b83a49b6",
+      "bytes": 14742,
+      "role": "product acceptance design"
+    },
+    {
+      "path": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md",
+      "sha256": "3c5ca745fc1e75db0862f022db6effb55009d01c0e05f7af5719f71ef16c242e",
+      "bytes": 16556,
+      "role": "all-muscle motion design"
+    },
+    {
+      "path": "work/evidence/T35/motion-contract.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T35/motion-contract.json",
+      "sha256": "6847301f1189ced52a10e844310bcb7539a8fe30b036528fb122616202685eed",
+      "bytes": 8244,
+      "role": "all-muscle motion contract"
+    },
+    {
+      "path": "work/evidence/T59/authoring-run-manifest-r2.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T59/authoring-run-manifest-r2.json",
+      "sha256": "c8f1a5f8b05951a7ac00aaa6169f9dbaadabbd3d88d3c634cba250215f6e5269",
+      "bytes": 1885725,
+      "role": "whole-muscle authoring denominator and source mapping"
+    },
+    {
+      "path": "work/evidence/T66/implementation-2026-10-02/contact-production-r6/hip-flexion-left/input.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T66/implementation-2026-10-02/contact-production-r6/hip-flexion-left/input.json",
+      "sha256": "ed0bbd121d126dda6c57cc45d727528c76a9550970179ef10a12f88d80e0f9e9",
+      "bytes": 213371,
+      "role": "historical rejected candidate input; inspection only, not rerun without new hypothesis"
+    },
+    {
+      "path": "work/evidence/T66/implementation-2026-10-02/family-queue.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T66/implementation-2026-10-02/family-queue.json",
+      "sha256": "01aa9f70732053f26d3bc2ca297e0ad52864111770452d9ebbabc39893c547bb",
+      "bytes": 148836,
+      "role": "current family/source work queue"
+    },
+    {
+      "path": "work/evidence/T66/implementation-2026-10-02/final-blockers.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T66/implementation-2026-10-02/final-blockers.json",
+      "sha256": "1c8c78df3a814f3a06e5c02974bc7501348984942ede45fc72f4ec6891813a98",
+      "bytes": 6202,
+      "role": "latest unresolved engineering/content gaps"
+    },
+    {
+      "path": "work/evidence/T66/implementation-2026-10-02/final-validation.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T66/implementation-2026-10-02/final-validation.json",
+      "sha256": "12c87fb2bd63d9c8374d95684d41db6ba4ae8baba5ca157d721b9185c4accdab",
+      "bytes": 23417,
+      "role": "latest runtime validation"
+    },
+    {
+      "path": "work/evidence/T66/implementation-2026-10-02/nerve-course-and-entrapment-ledger.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T66/implementation-2026-10-02/nerve-course-and-entrapment-ledger.json",
+      "sha256": "9d8a7e2a68c3d7cc76610ee7088ef0f77b2e36ebee9c0dd203776a886473c810",
+      "bytes": 116471,
+      "role": "nerve text/geometry state"
+    },
+    {
+      "path": "work/evidence/T66/implementation-2026-10-02/whole-bone-motion-ledger.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T66/implementation-2026-10-02/whole-bone-motion-ledger.json",
+      "sha256": "042b6e69de8d36b47ab5808144933f31277994956238b7aad30d6de3e77d966d",
+      "bytes": 125355,
+      "role": "whole-bone motion contexts"
+    },
+    {
+      "path": "work/evidence/T66/implementation-2026-10-02/whole-target-motion-ledger.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T66/implementation-2026-10-02/whole-target-motion-ledger.json",
+      "sha256": "c54fcff5199ee52881b653c9a139b002ae379acabddf5496837ed6a380d68922",
+      "bytes": 237027,
+      "role": "429-target motion disposition"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/serial-queue.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T66/serial-completion-2026-10-02/unit-01/serial-queue.json",
+      "sha256": "dc9816b705537d8a330669c30fa56471c28ea50ed99c88f8ceb6853cb1f07828",
+      "bytes": 432055,
+      "role": "unit-01 actual work/result queue"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-02/candidate-interpolation-r1.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T66/serial-completion-2026-10-02/unit-02/candidate-interpolation-r1.json",
+      "sha256": "2491e765a6fdddb58f2a14de49ff37ab9d3ca13115a48e51168aa684b89906bc",
+      "bytes": 830945,
+      "role": "prior successful package interpolation QC"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-02/serial-queue.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T66/serial-completion-2026-10-02/unit-02/serial-queue.json",
+      "sha256": "0a8835a182cb1f9d404265465d74a6748e757a5b293811b92d53afc4735a96d8",
+      "bytes": 201275,
+      "role": "unit-02 actual work/result queue"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-02/trials-r1/hip-flexion-left/contact-qc.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T66/serial-completion-2026-10-02/unit-02/trials-r1/hip-flexion-left/contact-qc.json",
+      "sha256": "3d9d82913d2988781b7d4ab4be595fe4aa5dfd7248f1a95ceb9c308beb964dc6",
+      "bytes": 16690,
+      "role": "prior successful package contact QC"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-02/trials-r1/hip-flexion-left/glb-pose-qc.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T66/serial-completion-2026-10-02/unit-02/trials-r1/hip-flexion-left/glb-pose-qc.json",
+      "sha256": "0e810a332eaad4bf75e43f8a3500445f48b385272aa4df1d7ffb8e83ab9b43a7",
+      "bytes": 20389,
+      "role": "prior successful emitted GLB pose QC"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-02/trials-r1/hip-flexion-left/input.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T66/serial-completion-2026-10-02/unit-02/trials-r1/hip-flexion-left/input.json",
+      "sha256": "90c7fd7d54859241ddd0d11acb13564e96aba41dedbbb4dca5b9337ef1748024",
+      "bytes": 213446,
+      "role": "prior exact successful candidate input for harness smoke only"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-02/validate_unit02.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T66/serial-completion-2026-10-02/unit-02/validate_unit02.py",
+      "sha256": "00d2b62d9e33e05b08bf509089a5c6aac87a9011b83e9cdb05e5f6c749f0dc78",
+      "bytes": 12533,
+      "role": "frozen executable/reference code"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-02/validation.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T66/serial-completion-2026-10-02/unit-02/validation.json",
+      "sha256": "ab1d2538f1dd559be82a9ee4b939503b213f4f7ac7b4ede6fee50ca20483042a",
+      "bytes": 4638,
+      "role": "unit-02 actual validation"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-03/action-scope-ledger.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T66/serial-completion-2026-10-02/unit-03/action-scope-ledger.json",
+      "sha256": "70fc14774a651ae0aa3614dc8222f046da3e3b390f004813c4e5841f16e662ac",
+      "bytes": 315481,
+      "role": "unit-03 action/claim scope"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/common-writer-checkpoint.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/common-writer-checkpoint.json",
+      "sha256": "1ca9a3e3d695309a75131e02a73578e5f799ed23c819516527de39f3d1ff3c09",
+      "bytes": 11895,
+      "role": "unit-03 writer checkpoint"
+    },
+    {
+      "path": "work/evidence/T66/serial-completion-2026-10-02/unit-03/serial-queue.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/evidence/T66/serial-completion-2026-10-02/unit-03/serial-queue.json",
+      "sha256": "e2f80b989c16fe1e0bc2d8e4b5bb9b7d83b757dc8fbe7cbde729126a6431ee48",
+      "bytes": 1040338,
+      "role": "unit-03 actual work/result queue"
+    },
+    {
+      "path": "work/plans/t66-parallel-completion-2026-10-03/README.md",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/plans/t66-parallel-completion-2026-10-03/README.md",
+      "sha256": "6a3fbecf070f878ddee96b23fdc6321ed9d9996f12f8db662874252acb6b4a99",
+      "bytes": 8361,
+      "role": "parallel handoff plan"
+    },
+    {
+      "path": "work/product-acceptance.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/product-acceptance.json",
+      "sha256": "d2003d6b101c3f0a6dd5bc91f7c0ae709baa9688673e99537935e0be82d26ce3",
+      "bytes": 16166,
+      "role": "app acceptance contract"
+    },
+    {
+      "path": "work/schemas/t66-parallel-candidate-package.schema.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/schemas/t66-parallel-candidate-package.schema.json",
+      "sha256": "a39074983ff301658c76a6a9a5d56a1a0c988417967719a72201745c0502be7e",
+      "bytes": 4609,
+      "role": "frozen executable/reference code"
+    },
+    {
+      "path": "work/tasks/T66-APP-COMPLETION.md",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tasks/T66-APP-COMPLETION.md",
+      "sha256": "7ff54a24daff6cd6d7d46c10a31383d7de677f4ff66acab6d8e042eee239a434",
+      "bytes": 9664,
+      "role": "T66 task specification"
+    },
+    {
+      "path": "work/tools/author_source_surface_motion.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/author_source_surface_motion.py",
+      "sha256": "3aafd71e348b261ea346e5fc644f16fd6c70a2f336e616c12742408189342467",
+      "bytes": 22344,
+      "role": "frozen executable/reference code"
+    },
+    {
+      "path": "work/tools/author_t66_family_motion.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/author_t66_family_motion.py",
+      "sha256": "538ee11b06a269c87fbf4d84c991d9acfd2d8c6480b39076428f906e1c6816d4",
+      "bytes": 24634,
+      "role": "frozen executable/reference code"
+    },
+    {
+      "path": "work/tools/build_t66_parallel_wave1_manifest.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/build_t66_parallel_wave1_manifest.py",
+      "sha256": "657da1bcb4906a517a8152677a49cf5212f7e225d7e141466f177fbc8b9a2347",
+      "bytes": 45529,
+      "role": "frozen executable/reference code"
+    },
+    {
+      "path": "work/tools/derive_source_surface_motion.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/derive_source_surface_motion.py",
+      "sha256": "15bd05c185a3408071affdb32836c5d82467a3b7fc1b58f0f184710097660999",
+      "bytes": 15816,
+      "role": "frozen executable/reference code"
+    },
+    {
+      "path": "work/tools/refine_t66_glb_interpolation.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/refine_t66_glb_interpolation.py",
+      "sha256": "8e9796ee28e441d25d9e0ffd1b076db12676e3aa714fe53cc49392a03b68e5b8",
+      "bytes": 20200,
+      "role": "frozen executable/reference code"
+    },
+    {
+      "path": "work/tools/rewrite_t66_glb_rigid_tracks.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/rewrite_t66_glb_rigid_tracks.py",
+      "sha256": "f2037836e4808009631a506dfc30767ba8eeefd3f150a498970adffcd461738d",
+      "bytes": 12080,
+      "role": "frozen executable/reference code"
+    },
+    {
+      "path": "work/tools/run_t66_parallel_candidate.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/run_t66_parallel_candidate.py",
+      "sha256": "9a2489e16bfe584b32849ee26bdc3eaee27cb05c42fca0dc3b6fd1258444cf91",
+      "bytes": 25680,
+      "role": "frozen executable/reference code"
+    },
+    {
+      "path": "work/tools/source_surface_constraints.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/source_surface_constraints.py",
+      "sha256": "d3380ece675161fa3e153339e42d3f403c77f51c504031c29ddb3fa3f297dfff",
+      "bytes": 834,
+      "role": "frozen executable/reference code"
+    },
+    {
+      "path": "work/tools/t66_contact_correctives.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/t66_contact_correctives.py",
+      "sha256": "c4c56983ded5494c94e368fbe4a2bcf5f6b4e8652a1fb29a355a5893124d95b3",
+      "bytes": 30412,
+      "role": "frozen executable/reference code"
+    },
+    {
+      "path": "work/tools/t66_contact_weights.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/t66_contact_weights.py",
+      "sha256": "bb628b99eeb467f98ae2328d56bfe4492bb6cc89b94c2542dbe283d0aa38d7f4",
+      "bytes": 37480,
+      "role": "frozen executable/reference code"
+    },
+    {
+      "path": "work/tools/t66_parallel_protocol.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/t66_parallel_protocol.py",
+      "sha256": "d266d7d109f0c25d737032d028791fec90c6ccee88521d88a0ec895d1ef4fc7b",
+      "bytes": 23355,
+      "role": "frozen executable/reference code"
+    },
+    {
+      "path": "work/tools/validate_authored_surface_geometry.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/validate_authored_surface_geometry.py",
+      "sha256": "cbd8e5fac4a0020566c1865890a2fe004b0f28abcadcf407e2c8d88a75ffb534",
+      "bytes": 5772,
+      "role": "frozen executable/reference code"
+    },
+    {
+      "path": "work/tools/validate_t66_parallel_wave1.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/validate_t66_parallel_wave1.py",
+      "sha256": "18999e802927d72e34cef79f2eea608af8e19255616959b107e8d0d1fc1f6671",
+      "bytes": 7031,
+      "role": "frozen executable/reference code"
+    },
+    {
+      "path": "work/tools/verify_t66_family_contacts.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/verify_t66_family_contacts.py",
+      "sha256": "83a619236190778bdb5f29dde7c9bac2ab9f3a00bb93b28453674d8ebcdcffc4",
+      "bytes": 3135,
+      "role": "frozen executable/reference code"
+    },
+    {
+      "path": "work/tools/verify_t66_glb_pose.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/verify_t66_glb_pose.py",
+      "sha256": "285ae88abad4fc8373453232a682bdccef4cc9887c0a746d208072d6fc6a4086",
+      "bytes": 3959,
+      "role": "frozen executable/reference code"
+    }
+  ],
+  "note": "Worker-facing source/authoring code hashes are pinned by the manifest. This checkpoint records added protocol/tool/schema/test outputs."
+}

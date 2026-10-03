@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "t66-parallel-protocol-contract-tests-v1",
+  "status": "passed",
+  "runId": "T66-W1-20261003-5dadff8d782b",
+  "manifestSha256": "7d12000c2a049d1c2bf09f8349159609a6dd7b5f93f1d0710742ede84aacad95",
+  "schemaSha256": "a39074983ff301658c76a6a9a5d56a1a0c988417967719a72201745c0502be7e",
+  "count": 8,
+  "tests": [
+    {
+      "name": "valid-minimal-package",
+      "result": "accepted",
+      "expected": "accepted",
+      "validator": "schema",
+      "reason": null
+    },
+    {
+      "name": "reject-additional-property",
+      "result": "rejected",
+      "expected": "rejected",
+      "validator": "schema",
+      "reason": "$: unexpected properties ['extraPrivateField']"
+    },
+    {
+      "name": "reject-missing-required",
+      "result": "rejected",
+      "expected": "rejected",
+      "validator": "schema",
+      "reason": "$: missing required properties ['sourceOnly']"
+    },
+    {
+      "name": "reject-duplicate-source-list",
+      "result": "rejected",
+      "expected": "rejected",
+      "validator": "schema",
+      "reason": "$.sourceKeys: array items are not unique"
+    },
+    {
+      "name": "reject-invalid-date-time",
+      "result": "rejected",
+      "expected": "rejected",
+      "validator": "schema",
+      "reason": "$.createdAt: invalid date-time"
+    },
+    {
+      "name": "reject-date-time-without-zone",
+      "result": "rejected",
+      "expected": "rejected",
+      "validator": "schema",
+      "reason": "$.createdAt: date-time must include a timezone"
+    },
+    {
+      "name": "reject-repeated-exact-action-work-key",
+      "result": "rejected",
+      "expected": "rejected",
+      "validator": "candidate",
+      "reason": "candidate repeats exact action work key: T66-WK-b637f9468a3e7fc811460251"
+    },
+    {
+      "name": "allow-same-source-distinct-families",
+      "result": "accepted",
+      "expected": "accepted",
+      "validator": "candidate",
+      "reason": null
+    }
+  ],
+  "scope": "candidate package schema and exact six-field work-key identity; no anatomy, learner registration, rights or human review approval"
+}

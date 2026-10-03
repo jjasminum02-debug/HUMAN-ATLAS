@@ -1,0 +1,547 @@
+{
+  "task": "T66",
+  "acceptance": "partial",
+  "contract": {
+    "contractRevision": "app-completion-2026-10-01",
+    "acceptanceScope": "T66 latest whole-muscle / whole-bone normal-motion authoring and native nerve-course integration; currently verified subset reported separately",
+    "productReadiness": "partial_expansion_not_ready",
+    "contentCompleteness": "partial",
+    "knownContentGaps": {
+      "muscleTargetCount": 429,
+      "muscleMembershipCount": 447,
+      "sourceConceptCount": 232,
+      "sourceSurfaceCount": 462,
+      "primaryPlayableMuscleSourceSurfaces": 1,
+      "registeredBoneSourceInstances": 120,
+      "eligibleBoneSourceInstances": 210,
+      "registeredNativeNerveStaticSurfaces": 195,
+      "nativeNerveLabelGroups": 98,
+      "independentNerveConceptCount": null,
+      "confirmedEntrapmentTextGroups": 5,
+      "abstractIndexEntrapmentGroups": 2,
+      "surroundingAnatomyOnlyGroups": 1,
+      "observedModelOnlyCourseGroups": 90,
+      "dynamicNervePoses": 0,
+      "entrapmentCoordinateBindings": 0,
+      "sourcePoseObservationSurfaces": 75,
+      "mainFunctionSourceClipSurfaces": 1,
+      "registeredBoneFamilyBindings": 199,
+      "uniquePlayableGLBPackages": 7,
+      "newRegisteredFamilyPackages": 6,
+      "remainingFamilyCandidates": 8,
+      "geometryOrContactRejectedCandidates": 6,
+      "kneeNormalContextPendingCandidates": 2
+    },
+    "unresolvedProductBlockers": [
+      "T66-B1",
+      "T66-B3",
+      "T66-B4"
+    ],
+    "evidence": [
+      "work/reports/T66.md",
+      "work/evidence/T66/implementation-2026-10-02/final-validation.json",
+      "work/evidence/T66/implementation-2026-10-02/final-blockers.json",
+      "work/evidence/T66/implementation-2026-10-02/preservation.json",
+      "work/evidence/T66/implementation-2026-10-02/signed-trs-r13/production.json",
+      "work/evidence/T66/implementation-2026-10-02/validation-r13/results.json",
+      "work/evidence/T66/implementation-2026-10-02/browser-source-families-r13/ui-proof.json"
+    ]
+  },
+  "automatic": {
+    "currentRelatedRegressionTests": {
+      "passed": 26,
+      "failed": 0,
+      "path": "work/evidence/T66/implementation-2026-10-02/validation-r13/source-family-regression.log"
+    },
+    "sourceFamilyNegativeContracts": {
+      "passed": 7,
+      "failed": 0,
+      "path": "work/evidence/T66/implementation-2026-10-02/validation-r13/source-family-negative-contracts.log"
+    },
+    "motionSchemaFixtures": {
+      "passed": 19,
+      "failed": 0,
+      "path": "work/evidence/T66/implementation-2026-10-02/validation-r13/motion-fixtures.log"
+    },
+    "productionMotion": "281 actions / 275 definitions / 275 assets; 274 technically playable source subject bindings, seven unique GLB packages",
+    "currentChecks": [
+      {
+        "check": "card-projection",
+        "exitCode": 0,
+        "seconds": 0.181,
+        "command": [
+          "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+          "--experimental-strip-types",
+          "scripts/buildLearnerCardRuntime.mjs",
+          "--check"
+        ],
+        "log": "work/evidence/T66/implementation-2026-10-02/validation-r13/card-projection.log"
+      },
+      {
+        "check": "motion-projection",
+        "exitCode": 0,
+        "seconds": 0.141,
+        "command": [
+          "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+          "--experimental-strip-types",
+          "scripts/buildLearnerMotionRuntime.mjs",
+          "--check"
+        ],
+        "log": "work/evidence/T66/implementation-2026-10-02/validation-r13/motion-projection.log"
+      },
+      {
+        "check": "learning-content",
+        "exitCode": 0,
+        "seconds": 0.024,
+        "command": [
+          "python3",
+          "scripts/validate-learning-content.py"
+        ],
+        "log": "work/evidence/T66/implementation-2026-10-02/validation-r13/learning-content.log"
+      },
+      {
+        "check": "ai-evidence",
+        "exitCode": 0,
+        "seconds": 0.052,
+        "command": [
+          "python3",
+          "../atlas-data/schemas/validate_ai_evidence.py",
+          "--check"
+        ],
+        "log": "work/evidence/T66/implementation-2026-10-02/validation-r13/ai-evidence.log"
+      },
+      {
+        "check": "bone-names",
+        "exitCode": 0,
+        "seconds": 0.026,
+        "command": [
+          "python3",
+          "../atlas-data/schemas/validate_bone_name_overlay.py",
+          "--check"
+        ],
+        "log": "work/evidence/T66/implementation-2026-10-02/validation-r13/bone-names.log"
+      },
+      {
+        "check": "motion-schema",
+        "exitCode": 0,
+        "seconds": 1.869,
+        "command": [
+          "python3",
+          "../atlas-data/schemas/validate_motion_learning.py",
+          "--check"
+        ],
+        "log": "work/evidence/T66/implementation-2026-10-02/validation-r13/motion-schema.log"
+      },
+      {
+        "check": "motion-assets",
+        "exitCode": 0,
+        "seconds": 0.104,
+        "command": [
+          "python3",
+          "../atlas-data/schemas/validate_motion_asset_sources.py"
+        ],
+        "log": "work/evidence/T66/implementation-2026-10-02/validation-r13/motion-assets.log"
+      },
+      {
+        "check": "function-content",
+        "exitCode": 0,
+        "seconds": 0.128,
+        "command": [
+          "python3",
+          "../work/tools/validate_t83_function_content.py",
+          "--validate-only"
+        ],
+        "log": "work/evidence/T66/implementation-2026-10-02/validation-r13/function-content.log"
+      },
+      {
+        "check": "scene-decoders",
+        "exitCode": 0,
+        "seconds": 0.209,
+        "command": [
+          "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+          "scripts/check-scene-decoders.mjs"
+        ],
+        "log": "work/evidence/T66/implementation-2026-10-02/validation-r13/scene-decoders.log"
+      },
+      {
+        "check": "source-family-negative-contracts",
+        "exitCode": 0,
+        "seconds": 1.771,
+        "command": [
+          "python3",
+          "../work/tools/test_t66_source_families.py"
+        ],
+        "log": "work/evidence/T66/implementation-2026-10-02/validation-r13/source-family-negative-contracts.log"
+      },
+      {
+        "check": "motion-fixtures",
+        "exitCode": 0,
+        "seconds": 0.047,
+        "command": [
+          "python3",
+          "../atlas-data/schemas/validate_motion_learning.py",
+          "--fixtures"
+        ],
+        "log": "work/evidence/T66/implementation-2026-10-02/validation-r13/motion-fixtures.log"
+      },
+      {
+        "check": "source-family-regression",
+        "exitCode": 0,
+        "seconds": 3.457,
+        "command": [
+          "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+          "--experimental-strip-types",
+          "--test",
+          "src/domain/motionLearning.test.ts",
+          "src/data/learning.test.ts",
+          "src/viewer/sourceAuthoredMotion.test.ts",
+          "src/viewer/datasets/t66NerveScene.test.ts"
+        ],
+        "log": "work/evidence/T66/implementation-2026-10-02/validation-r13/source-family-regression.log"
+      },
+      {
+        "check": "typecheck",
+        "exitCode": 0,
+        "seconds": 3.338,
+        "command": [
+          "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+          "node_modules/typescript/bin/tsc",
+          "-b",
+          "--pretty",
+          "false"
+        ],
+        "log": "work/evidence/T66/implementation-2026-10-02/validation-r13/typecheck.log"
+      },
+      {
+        "check": "production-build",
+        "exitCode": 0,
+        "seconds": 0.375,
+        "command": [
+          "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+          "node_modules/vite/bin/vite.js",
+          "build"
+        ],
+        "log": "work/evidence/T66/implementation-2026-10-02/validation-r13/production-build.log",
+        "logTrailingWhitespaceNormalized": true
+      },
+      {
+        "check": "learner-distribution",
+        "exitCode": 0,
+        "seconds": 0.098,
+        "command": [
+          "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+          "scripts/auditLearnerCardDistribution.mjs",
+          "--check"
+        ],
+        "log": "work/evidence/T66/implementation-2026-10-02/validation-r13/learner-distribution.log"
+      }
+    ],
+    "all195NerveSourceGeometry": "rechecked in current regression; native static geometry/side/frame/rights finite/source topology passed",
+    "all246NewSourceFamilyBindings": "source-only identity/family/side/pose/field/asset contracts verified",
+    "sixActualEmittedGLBPackages": "all nine keys / actual quaternion/translation/signed scale/morph vs authored source frame; every member <=1e-6m world error; Three.js actual rigid-member replay passed",
+    "typecheck": "passed",
+    "build": "passed",
+    "learnerDistribution": "passed",
+    "reuseImpact": "Unchanged original T59 clip, native nerve geometry/card data, 12-region routes, cleanup/reduced-motion/history guards retain prior evidence. New r13 clips rechecked; pre-fix r7 left TRS screenshots do not count as passed."
+  },
+  "actualBrowser": {
+    "representativeNewFamilies": [
+      "hip-abduction-left",
+      "hip-abduction-right",
+      "shoulder-external-rotation-left",
+      "shoulder-external-rotation-right",
+      "wrist-flexion-left",
+      "wrist-flexion-right"
+    ],
+    "proofPath": "work/evidence/T66/implementation-2026-10-02/browser-source-families-r13/ui-proof.json",
+    "viewportWidths": [
+      1440,
+      1024,
+      390
+    ],
+    "desktop390IsMobileDevice": false,
+    "sameSceneRootAcrossR13Cases": true,
+    "singleButtonLoopAndSmoothRest": true,
+    "angleSeekStopsAutoplayAndHoldsPose": true,
+    "selectedHideCancelsAndBlocks": true,
+    "sameCameraWithinRestReturn": true,
+    "browserConsoleErrors": 0,
+    "images": [
+      {
+        "path": "work/evidence/T66/implementation-2026-10-02/browser-source-families-r13/wrist-right-end.png",
+        "sha256": "3901d8c5c998016849e211fbe3055c8adf7aed104b3ddb4635858ce40daa06b4",
+        "bytes": 86961
+      },
+      {
+        "path": "work/evidence/T66/implementation-2026-10-02/browser-source-families-r13/shoulder-right-front-end.png",
+        "sha256": "5ef1285efc434465ae46cab462c6e9ccaf80025d17a8a5714acb75a0634da8e0",
+        "bytes": 90862
+      },
+      {
+        "path": "work/evidence/T66/implementation-2026-10-02/browser-source-families-r13/wrist-1024-settled.png",
+        "sha256": "a840ecf212869743ec3951a25247e7b22b922cce1f8f29ee8234766824c6ea73",
+        "bytes": 67351
+      },
+      {
+        "path": "work/evidence/T66/implementation-2026-10-02/browser-source-families-r13/shoulder-left-posterior-end.png",
+        "sha256": "61615e180b2a25740d4b2b02013e38ba52dcbe97ab327275f57c4a6d2af2fb21",
+        "bytes": 99492
+      },
+      {
+        "path": "work/evidence/T66/implementation-2026-10-02/browser-source-families-r13/wrist-390.png",
+        "sha256": "f5af0f16c1b3a14513048707dde888587845367fd91042d622c6ad82c3b68f83",
+        "bytes": 28133
+      },
+      {
+        "path": "work/evidence/T66/implementation-2026-10-02/browser-source-families-r13/hip-left-end.png",
+        "sha256": "0cfbabf5e36cba2e8d30333158dfe4bf63396ed254bc74a98232812f377c162a",
+        "bytes": 90500
+      },
+      {
+        "path": "work/evidence/T66/implementation-2026-10-02/browser-source-families-r13/wrist-left-end.png",
+        "sha256": "cf76de41bfd28e94cc1e92d7339ab5643f44ffb0df617976effd8ca3f4dfa628",
+        "bytes": 86078
+      },
+      {
+        "path": "work/evidence/T66/implementation-2026-10-02/browser-source-families-r13/bone-left-femur-corrected-end.png",
+        "sha256": "bebe097740ef505fa74db1df449dc56a37ec2c1383fc567518efc305bd7ba95f",
+        "bytes": 77857
+      },
+      {
+        "path": "work/evidence/T66/implementation-2026-10-02/browser-source-families-r13/shoulder-right-posterior-final.png",
+        "sha256": "0dd899ef93c138c6b84d0fb8fd3bff9f56f84e732c289b0d8f4573c4aeff07b8",
+        "bytes": 76522
+      }
+    ],
+    "fullExtentQAClaimed": false,
+    "priorR7Disposition": "Diagnostic pre-fix left reflected TRS views are rejected; r13 replaces acceptance. Resize screenshot wrist-1024.png was captured before canvas redraw; settled view is wrist-1024-settled.png."
+  },
+  "assetAuthoring": {
+    "realFamilyCandidatesProduced": 14,
+    "newFamilyAssetsRegistered": 0,
+    "newSourceContactRejected": 12,
+    "wristContextIncomplete": 2,
+    "maskOccurrences": 158,
+    "independentPrimaryMuscleClipsAdded": 0,
+    "failedCorrectiveTrials": [
+      "fractional rotation: no flips but 52 new contained biceps vertices",
+      "reversed axis diagnostic: different bone/triceps containment, no anatomical acceptance",
+      "rest-edge ARAP: 35 triangle flips and minimum area ratio0.039; rejected"
+    ],
+    "unresolvedEngineeringIsNotMissingAnatomy": true
+  },
+  "hashes": {
+    "atlas-web/src/ui/App.tsx": "9556604aecc8bc34c3d62902c4d0871473c955d9f07cb226463a02470428d6f7",
+    "atlas-web/src/ui/MotionLearningPanel.tsx": "2e3c24bdbf987b23971ffedafaa32f065fa23d6f5831f9f6315986e160e23f0d",
+    "atlas-web/src/viewer/wholeBody/WholeBodyViewer.tsx": "53a7d50eb3b4aae2d603fd82a094f7a1f7ba931e47a824835ae9b9492aad9c58",
+    "atlas-web/src/viewer/datasets/DatasetSceneAdapter.ts": "bd3444840db12bdf597d4d6f7334e4ad7bab4511938b380348011640f1e0e39d",
+    "atlas-data/motion/motion-learning.json": "f687e97c9d028750e3070d653a8fc5360c81d9ed75e02ad4e67463cd56b921b4",
+    "atlas-data/manifests/nerve-scene-t66.json": "417de05faee526e6bbaa91b71a6fd543024537512107c68b578f644db9ed4c53",
+    "atlas-data/terminology/nerve-learning-t66.json": "4e73c933542c17a4b2278b93c39630fed61b5006b9d75672ee14537f14fcfe3e"
+  },
+  "limitations": [
+    "Authoring approximations are not measured physiological axes, attachment footprints or normal ROM.",
+    "Area/orientation includes keys and middle interpolation; containment samples all eight nonrest keys, not continuous collision detection.",
+    "Current UI evidence is representative family/source selection; not per-target/group full-extent certification.",
+    "GPU/VRAM/total-process memory and complete cold/warm network timings not observed.",
+    "Build warning >500kB chunk remains nonblocking; no budget increased.",
+    "Validation used preserved current WIP, not a clean checkout containing only owned commits."
+  ],
+  "validationWorkspace": "existing WIP preserved; clean checkout reproducibility not separately tested",
+  "priorCheckpoint": {
+    "head": "4d91370927b7e7fdda77c127e0f53da70c512c68",
+    "automatic": {
+      "relatedRegressionTests": {
+        "passed": 138,
+        "failed": 0,
+        "path": "work/evidence/T66/implementation-2026-10-02/validation/tests-138.log"
+      },
+      "motionSchemaFixtures": {
+        "passed": 19,
+        "failed": 0,
+        "path": "work/evidence/T66/implementation-2026-10-02/validation/motion-fixtures.json"
+      },
+      "all195NerveSourceGeometry": "finite position/unit normals/index bounds/topology hash/side/static pose/native overview passed",
+      "typedBoneBindings": "27 exact source/side/primary moving-track subjects; wrong kind/side/primary mutation rejected",
+      "productionMotion": "35 actions / 29 definitions / 29 assets; 1 muscle + 27 bone playable selectors",
+      "typecheck": "passed",
+      "build": "passed",
+      "learnerDistribution": "passed; no provenance marker leak",
+      "lateUiChange": "Hidden-selection guard: actual browser verification plus typecheck/build/distribution rerun; unrelated data contracts and 138 results reused after impact review"
+    },
+    "actualBrowser": {
+      "regions": 12,
+      "viewportWidths": [
+        1440,
+        1024,
+        390
+      ],
+      "desktop390IsMobileDevice": false,
+      "singleButtonLoopAndSmoothRest": true,
+      "sameSceneAndCameraPreserved": true,
+      "angleSeekStopsAutoplayAndHoldsPose": true,
+      "muscleLayerOffCancelsAndBlocks": true,
+      "selectedHideCancelsAndBlocks": true,
+      "hiddenPersistsAcrossSideSelectionAndHistory": true,
+      "staticNervesHiddenDuringMotion": true,
+      "browserConsoleErrors": 0,
+      "representativeNerves": [
+        "Dorsal scapular nerve right",
+        "Median nerve right"
+      ],
+      "twentyRegionSwitches": "9,051,664 cache bytes / 3 cached chunks / pending0 / failed[] across20 transitions",
+      "images": [
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/bone-motion.jpg",
+          "sha256": "0ebeb7518f23d3758b23430ae0fd07203b737b2dbc9506e2f9428b6493db75d4",
+          "bytes": 62719
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/dorsal-scapular-nerve.jpg",
+          "sha256": "2220f8a6a934cefd25aafb436e8e1a935364bd33f08e54da62fcf37c6fc3c641",
+          "bytes": 77361
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/hidden-motion-fixed.jpg",
+          "sha256": "10218e3c938cec9c8a4fc55281b88bd1ddce55df635a7100ae1eb3e491d50dd1",
+          "bytes": 25972
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/keyboard-camera.jpg",
+          "sha256": "d36119a33faf708f12597ff8c2eeaa666e3ab6bf6960d1d00a9e3520ae75f51d",
+          "bytes": 28478
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/muscle-motion-390.jpg",
+          "sha256": "f64d7a8dba95291ad852338d662a484cf6c54f4d17ccd015d32b7c444627f315",
+          "bytes": 27009
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/nerve-1024.jpg",
+          "sha256": "9778eab8b636049ed070fc4f7db109cabd67b3e04b3d3e151f2a674f6073e3da",
+          "bytes": 57633
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/nerve-1440.jpg",
+          "sha256": "c5652bbe34ad588c48963e7ac4259617a758945630686fe509a2a297825de7d8",
+          "bytes": 77177
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/nerve-390.jpg",
+          "sha256": "e5085da0aae9b0b4dc1c831c449b872fea7b180651b0de8e5b5d95f95c89aeeb",
+          "bytes": 27210
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/region-abdomen-lumbar.jpg",
+          "sha256": "7d99ad8c637bd850a1a96e22c1edeac9fb977b4cf8517d870986021446f87818",
+          "bytes": 55726
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/region-back.jpg",
+          "sha256": "03c8b87643d2ef020f02726e7c96b31cb6b73915c9a3a3320f6be2273a22e601",
+          "bytes": 54209
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/region-contact-sheet.jpg",
+          "sha256": "626e258eb663e6f666e87f314982ce693339982e8b2d459108687e4b7a63912f",
+          "bytes": 118621
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/region-foot.jpg",
+          "sha256": "37ce67ea2fb963beea9518d22d8ab55758d44c2afb0b329d918c139b8153ba1f",
+          "bytes": 56500
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/region-gluteal-hip.jpg",
+          "sha256": "9d04fe2b35955f2012c3745ec3faa12a23c66814b1976a682b7ddc5f883fad1d",
+          "bytes": 54383
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/region-head.jpg",
+          "sha256": "9e0319899ee34a0445b9bf438b59fc0c8b87eb16eba55a583166dad75e2f7c86",
+          "bytes": 51149
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/region-leg.jpg",
+          "sha256": "9436ff425488eecf245339de02ae76de47a3c2b5d9af18e6caf28a41f03a798c",
+          "bytes": 53560
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/region-neck.jpg",
+          "sha256": "39de7080d99e9072dd381a68deb98aa1cd807b5c4cf4414f3196e4d490a8605f",
+          "bytes": 54164
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/region-pelvis-perineum.jpg",
+          "sha256": "f35e92b56553415f21e818dafa5dc5935137a06e273e8679b5311d960d0cbd18",
+          "bytes": 53011
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/region-shoulder-scapular.jpg",
+          "sha256": "f230727e2e25820272c0a5591b28475c1b8c6cc010430f7a4675e947e01d10f8",
+          "bytes": 54048
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/region-thigh.jpg",
+          "sha256": "7a7cd98ac899a49a3386bab9ae43cbd5e56630abc6321571c65a00a7d53bb07f",
+          "bytes": 51817
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/region-thorax.jpg",
+          "sha256": "2cf7dd4c0288dd906c289093537cccfe4527ceb74abbcf416f7a4fad6d1281df",
+          "bytes": 53829
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/region-upper-limb.jpg",
+          "sha256": "e7564133ea6ff070c9c55d58184bc1c1b866ccefd4156bfd714e553fa929d501",
+          "bytes": 56014
+        },
+        {
+          "path": "work/evidence/T66/implementation-2026-10-02/browser-final/final-supported-motion.jpg",
+          "sha256": "bc202ae7b6b4642890070ed659691cb9475fbf5746eb75e7ede7a480d1ff0357",
+          "bytes": 57920
+        }
+      ]
+    },
+    "contract": {
+      "contractRevision": "app-completion-2026-10-01",
+      "acceptanceScope": "T66 latest whole-muscle / whole-bone normal-motion authoring and native nerve-course integration; currently verified subset reported separately",
+      "productReadiness": "partial_expansion_not_ready",
+      "contentCompleteness": "partial",
+      "knownContentGaps": {
+        "muscleTargetCount": 429,
+        "muscleMembershipCount": 447,
+        "sourceConceptCount": 232,
+        "sourceSurfaceCount": 462,
+        "primaryPlayableMuscleSourceSurfaces": 1,
+        "registeredBoneSourceInstances": 27,
+        "eligibleBoneSourceInstances": 210,
+        "registeredNativeNerveStaticSurfaces": 195,
+        "nativeNerveLabelGroups": 98,
+        "independentNerveConceptCount": null,
+        "confirmedEntrapmentTextGroups": 5,
+        "abstractIndexEntrapmentGroups": 2,
+        "surroundingAnatomyOnlyGroups": 1,
+        "observedModelOnlyCourseGroups": 90,
+        "dynamicNervePoses": 0,
+        "entrapmentCoordinateBindings": 0
+      },
+      "unresolvedProductBlockers": [
+        "T66-B1",
+        "T66-B2",
+        "T66-B3"
+      ],
+      "evidence": [
+        "work/reports/T66.md",
+        "work/evidence/T66/implementation-2026-10-02/final-validation.json",
+        "work/evidence/T66/implementation-2026-10-02/final-blockers.json",
+        "work/evidence/T66/implementation-2026-10-02/preservation.json"
+      ]
+    }
+  },
+  "projectionOptimization": {
+    "beforeDeduplicationObservedBytes": 6513174,
+    "currentGeneratedBytes": 1591310,
+    "method": "Intern exact member rows, arrays, rigid bindings and pose contracts; preserve every selector/family/source hash. No geometry, angle, LOD or budget change."
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "t66-wave-assignment-summary-v2",
+  "runId": "T66-W1-20261003-5dadff8d782b",
+  "baselineHead": "ae993a8a455632d738b2141f50ad09789bf5ee7c",
+  "manifestFileSha256": "7d12000c2a049d1c2bf09f8349159609a6dd7b5f93f1d0710742ede84aacad95",
+  "manifestCanonicalSha256": "a495d9421e38aadf4990dcfa5758661ab4a852d8690b483c328b34bccce2b511",
+  "denominators": {
+    "productTargets": 542,
+    "productMemberships": 563,
+    "regions": 12,
+    "muscleTargets": 429,
+    "muscleMemberships": 447,
+    "sourceConcepts": 232,
+    "sourceSurfaceInstances": 462,
+    "compiledAdditionalMuscleLikeInstancesNotInT59SurfaceDenominator": 47,
+    "wholeBoneSourceRows": 210,
+    "independentAnatomicalBoneCount": null,
+    "nerveLabelRows": 98,
+    "independentNerveConceptCount": null,
+    "haCanonicalBindings": 130,
+    "historical163": {
+      "6": 6,
+      "20": 20,
+      "135": 135,
+      "2": 2
+    }
+  },
+  "assignments": {
+    "A": {
+      "assignedTargetIds": 26,
+      "assignedMembershipKeys": 26,
+      "assignedSourceKeys": 42,
+      "assignedBoneSourceKeys": 54,
+      "assignedNerveRowIds": 0,
+      "assignedWorkKeys": 42
+    },
+    "B": {
+      "assignedTargetIds": 82,
+      "assignedMembershipKeys": 85,
+      "assignedSourceKeys": 112,
+      "assignedBoneSourceKeys": 64,
+      "assignedNerveRowIds": 0,
+      "assignedWorkKeys": 112
+    },
+    "C": {
+      "assignedTargetIds": 158,
+      "assignedMembershipKeys": 162,
+      "assignedSourceKeys": 166,
+      "assignedBoneSourceKeys": 54,
+      "assignedNerveRowIds": 0,
+      "assignedWorkKeys": 166
+    },
+    "F": {
+      "assignedTargetIds": 0,
+      "assignedMembershipKeys": 0,
+      "assignedSourceKeys": 0,
+      "assignedBoneSourceKeys": 0,
+      "assignedNerveRowIds": 98,
+      "assignedWorkKeys": 98
+    }
+  },
+  "assignedWorkKeyCount": 418,
+  "duplicateAssignedWorkKeyCount": 0,
+  "sourceResourceRefs": 924,
+  "uniqueSourceResourceSha256": 627,
+  "routingLedgers": [
+    {
+      "ledger": "targetDisposition",
+      "rows": 542,
+      "routingCounts": {
+        "deferred": 276,
+        "C": 158,
+        "A": 26,
+        "B": 82
+      }
+    },
+    {
+      "ledger": "membershipDisposition",
+      "rows": 563,
+      "routingCounts": {
+        "deferred": 290,
+        "C": 162,
+        "A": 26,
+        "B": 85
+      }
+    },
+    {
+      "ledger": "sourceDisposition",
+      "rows": 462,
+      "routingCounts": {
+        "C": 166,
+        "B": 112,
+        "A": 42,
+        "deferred": 142
+      }
+    },
+    {
+      "ledger": "boneContextDisposition",
+      "rows": 210,
+      "routingCounts": {
+        "C": 54,
+        "B": 64,
+        "A": 54,
+        "deferred": 38
+      }
+    },
+    {
+      "ledger": "nerveTextDisposition",
+      "rows": 98,
+      "routingCounts": {
+        "F": 98
+      }
+    }
+  ],
+  "workerLaunches": {
+    "A": false,
+    "B": false,
+    "C": false,
+    "F": false
+  },
+  "deferredWave1Workers": [
+    "D",
+    "E"
+  ],
+  "authority": {
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "canonicalBindingAdded": false
+  },
+  "promptFiles": {
+    "A": "work/plans/t66-parallel-completion-2026-10-03/02-worker-A-hand.txt",
+    "B": "work/plans/t66-parallel-completion-2026-10-03/03-worker-B-leg-foot.txt",
+    "C": "work/plans/t66-parallel-completion-2026-10-03/04-worker-C-spine-ribs.txt",
+    "F": "work/plans/t66-parallel-completion-2026-10-03/05-worker-F-nerve-text.txt"
+  }
+}

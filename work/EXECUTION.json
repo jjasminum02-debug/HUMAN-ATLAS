@@ -3493,10 +3493,107 @@
           "parentNextUnit": "author-and-integrate-normal-motion-bone-and-nerve",
           "nextManualInput": "work/plans/t66-parallel-completion-2026-10-03/01-writer-freeze-and-optimize.txt",
           "nextManualInputStarted": false
+        },
+        "parallelPreparation2026-10-03": {
+          "status": "worker_ready_for_manual_wave1",
+          "runId": "T66-W1-20261003-5dadff8d782b",
+          "baselineHead": "ae993a8a455632d738b2141f50ad09789bf5ee7c",
+          "manifestPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/run-manifest.json",
+          "manifestCanonicalSha256": "a495d9421e38aadf4990dcfa5758661ab4a852d8690b483c328b34bccce2b511",
+          "assignmentCounts": {
+            "A": {
+              "assignedTargetIds": 26,
+              "assignedMembershipKeys": 26,
+              "assignedSourceKeys": 42,
+              "assignedBoneSourceKeys": 54,
+              "assignedNerveRowIds": 0,
+              "assignedWorkKeys": 42
+            },
+            "B": {
+              "assignedTargetIds": 82,
+              "assignedMembershipKeys": 85,
+              "assignedSourceKeys": 112,
+              "assignedBoneSourceKeys": 64,
+              "assignedNerveRowIds": 0,
+              "assignedWorkKeys": 112
+            },
+            "C": {
+              "assignedTargetIds": 158,
+              "assignedMembershipKeys": 162,
+              "assignedSourceKeys": 166,
+              "assignedBoneSourceKeys": 54,
+              "assignedNerveRowIds": 0,
+              "assignedWorkKeys": 166
+            },
+            "F": {
+              "assignedTargetIds": 0,
+              "assignedMembershipKeys": 0,
+              "assignedSourceKeys": 0,
+              "assignedBoneSourceKeys": 0,
+              "assignedNerveRowIds": 98,
+              "assignedWorkKeys": 98
+            }
+          },
+          "workKeys": {
+            "total": 560,
+            "assigned": 418,
+            "deferred": 142,
+            "duplicateAssigned": 0
+          },
+          "sourceResourceRefs": 924,
+          "uniqueSourceResourceHashes": 627,
+          "candidateDryRun": {
+            "input": "existing U02 hip-flexion-left",
+            "status": "passed_candidate_only",
+            "cacheOffMisses": 110,
+            "cacheOnMisses": 72,
+            "cacheOnHits": 38,
+            "emittedGeometryAndQcByteIdentical": true,
+            "learnerRegistration": "not_performed"
+          },
+          "historicalR6ContactFailure": {
+            "rerun": false,
+            "newlyContainedVertices": [
+              248,
+              257,
+              262
+            ],
+            "sourceKey": "ZA-c7010a9-fd0168c8488ff1aa5ec47694",
+            "reason": "No new engineering hypothesis; preserved saved QC."
+          },
+          "workersLaunched": false,
+          "workerReady": true,
+          "authority": {
+            "sourceOnly": true,
+            "publicRedistribution": "held",
+            "humanReview": "not_performed",
+            "canonicalBindingAdded": false
+          },
+          "nextManualInputs": [
+            "work/plans/t66-parallel-completion-2026-10-03/02-worker-A-hand.txt",
+            "work/plans/t66-parallel-completion-2026-10-03/03-worker-B-leg-foot.txt",
+            "work/plans/t66-parallel-completion-2026-10-03/04-worker-C-spine-ribs.txt",
+            "work/plans/t66-parallel-completion-2026-10-03/05-worker-F-nerve-text.txt"
+          ],
+          "evidence": [
+            "work/evidence/T66/parallel-completion-2026-10-03/REPORT.md",
+            "work/evidence/T66/parallel-completion-2026-10-03/wave-1/validation/manifest-validation-final.json",
+            "work/evidence/T66/parallel-completion-2026-10-03/wave-1/validation/assignment-summary-final.json",
+            "work/evidence/T66/parallel-completion-2026-10-03/wave-1/validation/writer-checkpoint-final.json",
+            "work/evidence/T66/parallel-completion-2026-10-03/wave-1/validation/protocol-contract-tests-final.json",
+            "work/evidence/T66/parallel-completion-2026-10-03/wave-1/validation/cache-equivalence-final-v2.json",
+            "work/evidence/T66/parallel-completion-2026-10-03/wave-1/validation/historical-r6-failure-profile.json",
+            "work/evidence/T66/parallel-completion-2026-10-03/preservation-final.json"
+          ],
+          "parentStatus": "in_progress / partial",
+          "parentNextUnit": "author-and-integrate-normal-motion-bone-and-nerve",
+          "unresolvedProductBlockers": [
+            "T66-B3"
+          ]
         }
       },
       "report": "work/reports/T66.md",
-      "promptFile": "work/plans/t66-serial-completion-2026-10-02/03-T66-shoulder-forearm-wrist.txt",
+      "promptFile": "work/evidence/T66/parallel-completion-2026-10-03/request-prompt.txt",
       "acceptanceScope": "T66 latest whole-muscle / whole-bone normal-motion authoring and native nerve-course integration; currently verified subset reported separately",
       "contractRevision": "app-completion-2026-10-01",
       "acceptanceContract": {
@@ -3559,7 +3656,7 @@
         "T66-B3"
       ],
       "currentInternalUnit": "03",
-      "currentInternalUnitStatus": "implemented_verified; U01 actual browser supplement completed; next manual parallel writer input not started"
+      "currentInternalUnitStatus": "unit 03 result preserved; wave-1 parallel preparation worker-ready; manual A/B/C/F candidates not launched"
     },
     "T85": {
       "title": "전체 지원 움직임·통합 앱 품질 감사",

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://human-atlas.local/schemas/t66-parallel-candidate-package.schema.json",
+  "title": "T66 parallel candidate package",
+  "description": "Unreviewed worker handoff for a frozen T66 run. A package is not a production registration, human review, or rights approval.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "runId", "assignment", "candidateNamespace", "candidateKind",
+    "sourceOnly", "publicRedistribution", "humanReview", "canonicalBindingAdded",
+    "completedWorkKeyIds", "sourceKeys", "artifacts", "disposition"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "t66-parallel-candidate-package-v1" },
+    "runId": { "type": "string", "minLength": 1 },
+    "assignment": { "enum": ["A", "B", "C", "F"] },
+    "candidateNamespace": { "type": "string", "pattern": "^worker-(A|B|C|F):[a-z0-9][a-z0-9._-]*$" },
+    "candidateKind": { "enum": ["geometry_candidate", "text_evidence_candidate", "unsupported_evidence", "deferred_with_reason"] },
+    "sourceOnly": { "const": true },
+    "publicRedistribution": { "const": "held" },
+    "humanReview": { "const": "not_performed" },
+    "canonicalBindingAdded": { "const": false },
+    "completedWorkKeyIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^T66-WK-[a-f0-9-]+$" } },
+    "sourceKeys": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "nerveRowIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^T66-NR-[a-f0-9]{24}$" } },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256", "bytes", "role"],
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "bytes": { "type": "integer", "minimum": 0 },
+          "role": { "enum": ["candidate_input", "derived_glb", "authoring_record", "geometry_qc", "pose_qc", "evidence_delta", "unsupported_reason", "worker_local_code"] }
+        }
+      }
+    },
+    "actionWorkKeys": {
+      "type": "array",
+      "description": "Exact source-bound six-field work keys discovered by the worker. action can be null only for a review/disposition task and cannot imply a supported motion.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["family", "side", "action", "sourceKey", "part", "poseContractRevision", "workKeyId", "evidenceRefs", "implementationState"],
+        "properties": {
+          "family": { "type": "string", "minLength": 1 },
+          "side": { "enum": ["left", "right", "midline", "unspecified", null] },
+          "action": { "type": ["string", "null"] },
+          "sourceKey": { "type": "string", "minLength": 1 },
+          "part": { "type": ["string", "null"] },
+          "poseContractRevision": { "type": "string", "minLength": 1 },
+          "workKeyId": { "type": "string", "pattern": "^T66-WK-[a-f0-9]{24}$" },
+          "evidenceRefs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "implementationState": { "enum": ["qualitative_action_demonstration", "passive_pose_observation", "unsupported_evidence", "deferred_with_reason"] }
+        }
+      }
+    },
+    "familyContract": {
+      "type": ["object", "null"],
+      "description": "Namespaced worker-local family data; must not mutate or supersede the frozen shared frame/pose contract. Any shared-code change is a patch proposal for the common writer.",
+      "properties": {
+        "namespace": { "type": "string", "minLength": 1 },
+        "revision": { "type": "string", "minLength": 1 },
+        "sharedContractRevision": { "type": "string", "minLength": 1 },
+        "evidenceRefs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "authoredPoseMeaning": { "enum": ["qualitative_action_education", "passive_pose_observation", "not_implemented"] },
+        "changesCommonCode": { "const": false }
+      },
+      "required": ["namespace", "revision", "sharedContractRevision", "evidenceRefs", "authoredPoseMeaning", "changesCommonCode"],
+      "additionalProperties": false
+    },
+    "disposition": { "enum": ["candidate_validated", "processed_with_content_gaps", "unsupported_evidence", "deferred_with_reason"] },
+    "unresolved": { "type": "array", "items": { "type": "string" } },
+    "createdAt": { "type": "string", "format": "date-time" }
+  }
+}

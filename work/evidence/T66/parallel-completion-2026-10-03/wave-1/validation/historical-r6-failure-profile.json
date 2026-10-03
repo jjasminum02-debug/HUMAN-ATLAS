@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "t66-historical-failure-artifact-profile-v1",
+  "caseId": "hip-flexion-left",
+  "historicalDisposition": "source_contact_rejected",
+  "inputPath": "work/evidence/T66/implementation-2026-10-02/contact-production-r6/hip-flexion-left/input.json",
+  "inputSha256": "ed0bbd121d126dda6c57cc45d727528c76a9550970179ef10a12f88d80e0f9e9",
+  "manifestRecordedInputSha256": "ed0bbd121d126dda6c57cc45d727528c76a9550970179ef10a12f88d80e0f9e9",
+  "savedContactQc": {
+    "newContainmentMaximum": 3,
+    "failureCount": 1,
+    "failingSourceKey": "ZA-c7010a9-fd0168c8488ff1aa5ec47694",
+    "boneSourceKey": "ZA-c7010a9-ecb65ff4cc3da710e5a2d157",
+    "newVertexIds": [
+      248,
+      257,
+      262
+    ],
+    "baselineContainedVertices": 1
+  },
+  "savedAuthoringRecord": {
+    "motionSha256": "728d122eacf890f0c1e4385d2218b94a6c057a4f64f59abc42ef0a11473719da",
+    "recordedMotionBytes": 2187072,
+    "measuredAnatomicalAxis": false,
+    "measuredAttachmentFootprints": false,
+    "physiologicalROM": false,
+    "memberCount": 72
+  },
+  "existingArtifacts": {
+    "reference.glb": {
+      "bytes": 2143812,
+      "jsonBytes": 114588,
+      "nodes": 72,
+      "meshes": 72,
+      "animationCount": 0,
+      "sha256": "2b2c6539535c795f0ced5b8a15f7df065c5825572e22e644e947ec5dca9b25a6"
+    },
+    "motion.glb": {
+      "bytes": 2187072,
+      "jsonBytes": 140604,
+      "nodes": 72,
+      "meshes": 72,
+      "animationCount": 1,
+      "sha256": "728d122eacf890f0c1e4385d2218b94a6c057a4f64f59abc42ef0a11473719da"
+    }
+  },
+  "artifactInspectionTimingsSeconds": {
+    "inputReadSeconds": 0.00020033400505781174,
+    "inputJsonParseSeconds": 0.000957458047196269,
+    "authoringRecordReadSeconds": 0.00029666698537766933,
+    "authoringRecordJsonParseSeconds": 0.0012009579222649336,
+    "savedContactQcReadSeconds": 0.00018820795230567455,
+    "savedContactQcJsonParseSeconds": 0.00030341604724526405,
+    "reference_glbReadSeconds": 0.000574708916246891,
+    "reference_glbExistingGlbJsonChunkDecodeSeconds": 0.0014104580041021109,
+    "motion_glbReadSeconds": 0.0006399168632924557,
+    "motion_glbExistingGlbJsonChunkDecodeSeconds": 0.0013715832028537989
+  },
+  "historicalGenerationStageTimingsAvailable": false,
+  "generationStageTimings": [
+    "source geometry parse",
+    "contact solver/containment",
+    "phase solver",
+    "GLB export",
+    "QC rerun"
+  ],
+  "rerunPerformed": false,
+  "reason": "same contact-production-r6 source-contact failure had no new engineering hypothesis; retained the recorded failure and profiled only existing artifact read/JSON/GLB-container inspection",
+  "authority": {
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "canonicalBindingAdded": false
+  }
+}
