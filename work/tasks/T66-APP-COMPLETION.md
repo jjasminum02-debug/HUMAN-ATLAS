@@ -66,3 +66,15 @@ source-only family는 명시적인 `source_family_bound` 계약으로 정확한 
 Visible Body 공식 muscle-action 흐름을 참고하여 현재 근육 작용 목록/단일 scene 재생을 수정했다. 전 근육 원장과 authoring 책임을 유지하며 동작·joint family를 관련 근육/측/part에 연결하는 구조로 확장한다. 주변 관절 자세 관찰을 선택 근육의 작용으로 표시하지 않는다. 원문 좌우/기하·동작 결과를 확인하지 않은 generic morph와 source 후보를 실제 작용으로 승격하지 않는다. 현재 목록13 라벨/35 연결/19 표면은 전신 작용 완료가 아니다.
 
 단일 CTA, 실제 clock 기준 toggle, 동작 강조·복귀 fade/1.7배 reset, scrub 유지와 숨김/layer/카메라 복원을 보존한다. 전체0-gap/전수PNG/생리 실측·사람 승인 gate는 도입하지 않는다. D manifest 소유 충돌 및 E runner의 실제 preflight 모순은 anatomy 부족과 별도로 writer가 해결해야 한다. 새 UI의390/1024/1440은 요청값이 아닌 실제 DOM 크기로 검증한다. 이번 전체 판정partial 및 기존 nextUnit을 유지한다. 근거와 다음 수동 재개는 work/evidence/T66/atlas-action-experience-2026-10-04/REPORT.md 및 NEXT-T66-ATLAS-ACTIONS.txt다.
+
+## 2026-10-05 — wave-2 writer 계약 정정 및 후보 대조
+
+- 실행 산출물: `work/evidence/T66/final-writer-2026-10-05/`.
+- wave-2 원 manifest의 D 16행/E 66행은 exact six-field work key와 ID/hash는 frozen `sourceActionScopeQueue`와 일치했지만, 복제된 `disposition/assignedTo/deferredTo`만 `deferred/null/E`였다. writer correction r1은 원 manifest SHA 및 각 scope/source/assignment row hash에 묶인 정정 receipt다. frozen queue와 `sourceDisposition`에서 실제 D/E 배정을 확인해 이 세 필드만 effective in-memory copy에서 교정한다. 원 manifest, assignment snapshot, worker handoff는 수정하지 않았다.
+- D/E 실제 runner preflight는 각각 16/66 work key로 통과했다. bone 자료는 muscle source 목록과 분리한 read-only context(D 1, E 16)이며 muscle member나 독립 DOF로 처리되지 않는다. non-empty output root는 소유 기록·symlink·경계·다른 소유자 검사 후 허용하고 신규 출력 경로 충돌은 거부한다.
+- 후보 형태가 서로 다르다. D는 여러 family payload와 candidate inventory를 handoff에 포함하지만 별도 aggregate `candidate-package.json`이 없다. E는 56개 후보 GLB와 입력/QC를 가리키는 aggregate index를 제공한다. E용 aggregate validator를 분리했고 여러 candidate input을 단일 payload runner에 넘기지 않았다.
+- D의 worker handoff에는 아직 교정 전 manifest-conflict 표시가 남아 있어 이를 덮지 않았다. D 22개 후보 GLB의 action 책임 중 jaw 10개는 실제 edge/area 변형 결함, 2개는 source/relation gap, 2개는 적용 불가다. 2개 `candidate_validated` 행은 family/action이 없는 scope disposition으로 실제 작용·앱 연결 승인을 뜻하지 않는다.
+- E 집계 index는 206 artifact 중 205개의 hash/크기가 일치한다. `proposals.json`의 index hash/크기가 현재 worker 파일과 다르다(기대 `d9ccc51c…af52eb`, 949336 bytes; 실제 `92115698…cf09`, 980461 bytes). worker 파일/원장을 수정하거나 현재 bytes로 재기준화하지 않았다. E 56개 GLB 중 local geometry QC는 38 pass/18 fail, action-outcome QC 0 pass, candidate-validated work key 0이다. D/E 앱 등록은 0이다.
+- action 학습 지표는 13 label / 35 exact source-action links / 19 source surfaces다. 311 source-action rows는 원장 행 수이지 서로 다른 작용 311개가 아니다. 주변 자세를 선택 근육의 작용으로 승격하지 않았다.
+- runner/payload 계약 positive/negative fixture 14건과 기존 protocol regression 8건 통과, D/E 실제 preflight 통과, E aggregate index preflight는 위 hash 불일치로 예상된 실패다. 이 변경은 writer 도구/evidence만 건드렸으므로 학습 runtime/브라우저를 다시 실행하지 않았다. 기존 action UI 증거의 실측 viewport는 825×807이고, 390/1024/1440은 이 실행에서 통과로 주장하지 않는다.
+- T66은 `in_progress / partial`, 부모 `nextUnit=author-and-integrate-normal-motion-bone-and-nerve` 유지다. W1-A/B/C, unit03 및 D/E 실제 제작/연결 차단이 남으므로 T85 인계를 하지 않는다. source-only, local selection, public rights `held`, humanReview `not_performed`, HA130, 542/563/12, 역사 163 분류 및 기존 source/WIP를 유지한다.

@@ -1,0 +1,164 @@
+{
+  "schemaVersion": "t66-final-writer-validation-v1",
+  "status": "partial",
+  "taskStatus": "in_progress",
+  "taskAcceptance": "partial",
+  "nextUnit": "author-and-integrate-normal-motion-bone-and-nerve",
+  "baselineHead": "67840b1e51ad8956ac8a52f3214feb9288d25c21",
+  "baselineDirtyEntries": 5464,
+  "writerCorrection": {
+    "revision": "T66-W2-20261005-owner-normalization-r1",
+    "rawManifestSha256": "d6ad4413da2beb44508715f1e48b8389c29071d2cad28fb28c2254a3f0c1a600",
+    "correctedRows": 82,
+    "byAssignment": {
+      "D": 16,
+      "E": 66
+    },
+    "exactWorkKeyIdsChanged": 0,
+    "frozenManifestChanged": false,
+    "assignmentSnapshotsChanged": false,
+    "workerHandoffChanged": false,
+    "effectiveManifestCounts": {
+      "targets": 542,
+      "memberships": 563,
+      "sourceSurfaces": 462,
+      "boneSources": 210,
+      "nerveRows": 98,
+      "workKeys": 560,
+      "assignedWorkKeys": 500,
+      "sourceResourceRefs": 924
+    },
+    "effectiveManifestCanonicalSha256": "f085d40dfd25cffa1fedf4c7a9fa024dfe371e5512ed8838344d6fe6b2daa631"
+  },
+  "runnerPreflight": {
+    "D": {
+      "status": "wave2_worker_preflight_passed_without_authoring",
+      "workKeys": 16,
+      "boneContextReadOnlyKeys": 1,
+      "geometryAuthored": false,
+      "nonemptyOutputRoot": true,
+      "symlinks": 0,
+      "otherOwnerFiles": 0
+    },
+    "E": {
+      "status": "wave2_worker_preflight_passed_without_authoring",
+      "workKeys": 66,
+      "boneContextReadOnlyKeys": 16,
+      "geometryAuthored": false,
+      "nonemptyOutputRoot": true,
+      "symlinks": 0,
+      "otherOwnerFiles": 0
+    }
+  },
+  "candidateIntegration": {
+    "D": {
+      "aggregateIndexPresent": false,
+      "layout": "family packages embedded in handoff",
+      "candidateGlbs": 22,
+      "candidateRowsByStatus": {
+        "candidate_validated": 2,
+        "blocked_engineering": 10,
+        "missing_source_or_relation": 2,
+        "not_applicable_with_evidence": 2
+      },
+      "registered": 0
+    },
+    "E": {
+      "status": "aggregate_index_preflight_failed",
+      "artifactCount": 206,
+      "artifactMatches": 205,
+      "mismatches": [
+        {
+          "path": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/workers/E/proposals.json",
+          "role": "authoring_record",
+          "expectedSha256": "d9ccc51c8e263b936d7d7b97043b3b2a5c598c9c195a0251ed562a0689af52eb",
+          "observedSha256": "921156988bb276547c4284626798c6fb05af6fbaa0675edee57bbf564fa9cf09",
+          "expectedBytes": 949336,
+          "observedBytes": 980461
+        }
+      ],
+      "candidateGlbs": 56,
+      "geometryQcPassed": 38,
+      "geometryQcFailed": 18,
+      "actionOutcomeQcPassed": 0,
+      "candidateValidatedWorkKeys": 0,
+      "registered": 0
+    }
+  },
+  "tests": {
+    "writerContract": {
+      "status": "passed",
+      "count": 14
+    },
+    "existingProtocol": {
+      "status": "passed",
+      "count": 8
+    }
+  },
+  "learnerActionInventory": {
+    "labels": 13,
+    "exactSourceActionLinks": 35,
+    "sourceSurfaces": 19,
+    "sourceActionLedgerRows": 311,
+    "rowsAreNotDistinctActions": true
+  },
+  "authorityAndDenominators": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12,
+    "muscleTargets": 429,
+    "muscleMemberships": 447,
+    "sourceConcepts": 232,
+    "sourceSurfaces": 462,
+    "canonicalHaBindings": 130,
+    "historical163": {
+      "6": 6,
+      "20": 20,
+      "135": 135,
+      "2": 2
+    },
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "newFullTargetExtentApprovals": 0
+  },
+  "browserImpact": "No learner runtime or geometry changed. Existing browser evidence was reused; its actual DOM was 825x807. No 390/1024/1440 pass is asserted for this writer-only change.",
+  "unresolvedBlockers": [
+    "W1-A: 92 source-action rows remain blocked by concrete authoring/geometry engineering failures; 54 further rows are source/relation gaps.",
+    "W1-B: 29 generated candidates fail geometry, source identity, or target/action relation checks and remain unregistered.",
+    "W1-C: 2 respiratory candidates remain blocked by topology/contact QC.",
+    "W2-D: writer correction R1 resolves 16 copied owner-metadata conflicts only in an effective validator copy; the frozen D handoff remains pre-correction and unregistered. Ten jaw action rows have actual edge/area deformation defects, two rows have source/relation gaps, two are not applicable, and two null-action scope rows are not muscle-action acceptance. D has no aggregate candidate-package index.",
+    "W2-E: D/E runner preflight succeeds with an owned nonempty E output root and typed read-only bone context. E aggregate index preflight is blocked by proposals.json hash/size drift (expected d9ccc51c…af52eb/949336 bytes; observed 92115698…cf09/980461 bytes). Of 56 candidate GLBs, 38 have local geometry QC pass and 18 fail; action-outcome QC passed 0 and candidate-validated work keys are 0. No E candidate is registered."
+  ],
+  "fileSha256": {
+    "work/tools/run_t66_parallel_candidate.py": "f8f808f550fc5cbbed77922828f1872914e40468f44da0a53bc0166cc14f6a09",
+    "work/tools/t66_parallel_protocol.py": "9b4a8fc843e30799d6d05bb4faba5d78e634c1409feb076b31e7a02dc9536622",
+    "work/tools/validate_t66_aggregate_candidate.py": "b76dc7bec6f12b465ec2b81c994b6d5598bf16366c98f44b678a28343492b8c9",
+    "work/tools/test_t66_writer_contract.py": "d11e96b55233fa63834db77160f5826a6cebbf3cb28be838e601df8ee5482930",
+    "work/evidence/T66/parallel-completion-2026-10-03/wave-2/run-manifest.json": "d6ad4413da2beb44508715f1e48b8389c29071d2cad28fb28c2254a3f0c1a600",
+    "work/evidence/T66/final-writer-2026-10-05/writer-correction-revision-r1.json": "18cd25c7a9f29700fca1bde28d5e44015639c7c13e296ab0c10bd231140d8a00",
+    "work/evidence/T66/final-writer-2026-10-05/writer-contract-tests.json": "1233afecc22703c09013d7cde307dad5895c8932bcdc068849af0a021420832e",
+    "work/evidence/T66/final-writer-2026-10-05/base-protocol-tests.json": "3aa40d86ae5f7f0c34354368fda61fd26e59106dfacb8b95107eef9e93bb5de8",
+    "work/evidence/T66/final-writer-2026-10-05/d-preflight.stdout.json": "36a7aff455b458ab436f4ae900562d17ccebebf04c5479f8c63b92affe3c9f3e",
+    "work/evidence/T66/final-writer-2026-10-05/e-preflight.stdout.json": "c3acee06a87e12cb008877ade8d5447a5861eb6b666df9add78575cbe562f6b9",
+    "work/evidence/T66/final-writer-2026-10-05/e-aggregate-preflight.json": "e7b90cf841d83eda3c410ab1f7ae4fef6854be2a8a18ccfa3a41a4589c328591",
+    "work/evidence/T66/final-writer-2026-10-05/candidate-layout-audit.json": "cef8b8b217c44d9fda5e8d3de76907afe0fbe763163ff530a6a715d6d1648d7d",
+    "work/evidence/T66/atlas-action-experience-2026-10-04/browser-validation.json": "20a3495ea129ce33261936d7c55cbd34699bb6ec30e5db24c33dd80d0abec5cb",
+    "work/evidence/T66/final-writer-2026-10-05/REPORT.md": "1ba6735a2469ea29e5c06c4b9557ac3ac5f1027af7a447f74c91b0d67819aecb",
+    "work/evidence/T66/final-writer-2026-10-05/wave2-unresolved-workkeys.json": "1a92d937dca2a3e4a4678a1673506a335b8df4785e63034ef002d5438a8a8caf",
+    "work/evidence/T66/final-writer-2026-10-05/preservation-check.json": "20b8ec09fb9d481aeae11b33f75ef7c10dc1cc3e4c80f3716f0289f86e350f45"
+  },
+  "acceptance": "T66 remains in_progress/partial. Writer contract bugs are repaired, but D/E and W1/unit03 authoring, evidence, and integration blockers remain. No T85 handoff.",
+  "wave2UnresolvedWorkKeys": {
+    "path": "work/evidence/T66/final-writer-2026-10-05/wave2-unresolved-workkeys.json",
+    "D": 12,
+    "E": 66
+  },
+  "preservationCheck": {
+    "path": "work/evidence/T66/final-writer-2026-10-05/preservation-check.json",
+    "allProtectedHashesUnchanged": true,
+    "preflightProbeFilesRemaining": 0,
+    "OpenSimModelsGitChanges": 0,
+    "T13EvidenceGitChanges": 0
+  }
+}

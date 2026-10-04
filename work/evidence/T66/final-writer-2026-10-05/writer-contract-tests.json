@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "t66-writer-contract-tests-v1",
+  "status": "passed",
+  "wave2ManifestSha256": "d6ad4413da2beb44508715f1e48b8389c29071d2cad28fb28c2254a3f0c1a600",
+  "writerCorrectionSha256": "18cd25c7a9f29700fca1bde28d5e44015639c7c13e296ab0c10bd231140d8a00",
+  "testCount": 14,
+  "tests": [
+    {
+      "name": "frozen-manifest-mismatch-reproduced",
+      "result": "expected_rejection",
+      "reason": "D embedded owner metadata differs from source-action queue for T66-WK-8d3aa1e0b5da97a00426cfb5: disposition"
+    },
+    {
+      "name": "hash-pinned-writer-correction-and-immutable-snapshots",
+      "result": "accepted",
+      "correctedRows": 82,
+      "counts": {
+        "targets": 542,
+        "memberships": 563,
+        "sourceSurfaces": 462,
+        "boneSources": 210,
+        "nerveRows": 98,
+        "workKeys": 560,
+        "assignedWorkKeys": 500,
+        "sourceResourceRefs": 924
+      }
+    },
+    {
+      "name": "reject-wrong-base-manifest-hash",
+      "result": "rejected",
+      "reason": "writer correction base manifest file hash mismatch"
+    },
+    {
+      "name": "reject-changed-owner-source-row",
+      "result": "rejected",
+      "reason": "frozen source-action queue does not establish D ownership: T66-WK-8d3aa1e0b5da97a00426cfb5"
+    },
+    {
+      "name": "typed-read-only-bone-context",
+      "result": "accepted",
+      "boneSourceKeys": 16,
+      "muscleSourceOverlap": 0
+    },
+    {
+      "name": "reject-bone-context-as-muscle-member",
+      "result": "rejected",
+      "reason": "typed bone context is not a read-only subset of assignedBoneSourceKeys"
+    },
+    {
+      "name": "reject-unassigned-bone-source",
+      "result": "rejected",
+      "reason": "read-only bone context contains duplicate or unassigned source keys"
+    },
+    {
+      "name": "allow-prepopulated-owned-output-root",
+      "result": "accepted",
+      "ownership": {
+        "status": "owned_root_validated",
+        "nonempty": true,
+        "inspectedJsonFiles": 1,
+        "ownershipMarkers": [
+          "handoff.json"
+        ],
+        "symlinkCount": 0,
+        "otherOwnerFiles": 0
+      }
+    },
+    {
+      "name": "reject-other-assignment-output-file",
+      "result": "rejected",
+      "reason": "worker output contains another assignment's file: /Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T66/final-writer-2026-10-05/.t66-writer-contract-rduoo0gr/other-owner/handoff.json (D)"
+    },
+    {
+      "name": "reject-symlink-in-owned-output-root",
+      "result": "rejected",
+      "reason": "symlink in worker path is forbidden: /Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T66/final-writer-2026-10-05/.t66-writer-contract-rduoo0gr/symlink-root/escape.json"
+    },
+    {
+      "name": "reject-output-overwrite-collision",
+      "result": "rejected",
+      "reason": "refusing to overwrite existing worker output paths: ['package.json']"
+    },
+    {
+      "name": "aggregate-index-keeps-two-payloads-distinct",
+      "result": "accepted",
+      "candidateInputArtifacts": 2
+    },
+    {
+      "name": "reject-aggregate-artifact-hash-mismatch",
+      "result": "rejected",
+      "reason": "aggregate candidate artifact missing or symlinked: input-0.json"
+    },
+    {
+      "name": "preserve-actual-E-index-drift-as-failure",
+      "result": "rejected_as_unverified_candidate",
+      "mismatch": {
+        "path": "proposals.json",
+        "expectedSha256": "d9ccc51c8e263b936d7d7b97043b3b2a5c598c9c195a0251ed562a0689af52eb",
+        "observedSha256": "921156988bb276547c4284626798c6fb05af6fbaa0675edee57bbf564fa9cf09",
+        "expectedBytes": 949336,
+        "observedBytes": 980461
+      }
+    }
+  ],
+  "scope": "writer ownership correction, immutable snapshots, typed read-only bone context, output-root/path safety, and aggregate index artifact integrity; no geometry or learner acceptance"
+}

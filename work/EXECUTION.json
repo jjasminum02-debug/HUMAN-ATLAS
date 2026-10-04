@@ -3178,7 +3178,7 @@
         ],
         "productAcceptance": {
           "contractRevision": "app-completion-2026-10-01",
-          "acceptanceScope": "T66 final integration of the current supported normal-motion subset, source-bound bone roles, nerve-course text, and one shared-scene learner flow; whole anatomy/motion coverage is reported separately.",
+          "acceptanceScope": "T66 current supported normal-motion UI plus writer-integrated source-bound motion candidates; unregistered wave-2 candidates and whole-muscle/bone/nerve coverage remain separate gaps.",
           "productReadiness": "partial_with_unresolved_motion_engineering",
           "contentCompleteness": "partial",
           "knownContentGaps": {
@@ -3242,14 +3242,26 @@
             "atlasActionLibraryLabelEntries": 13,
             "atlasPlayableSourceActionBindings": 35,
             "atlasQualitativeOrHistoricalActionSourceSurfaces": 19,
-            "newMotionAssetsThisCorrection": 0
+            "newMotionAssetsThisCorrection": 0,
+            "atlasExactSourceActionLinks": 35,
+            "atlasActionSourceSurfaces": 19,
+            "sourceActionRowCount": 311,
+            "sourceActionRowInterpretation": "source-action ledger rows; not 311 distinct anatomical actions",
+            "wave2DWorkKeyOwnerMetadataCorrectedInWriterCopy": 16,
+            "wave2DAggregateCandidateIndexPresent": false,
+            "wave2DGeneratedCandidateGlbsNotRegistered": 22,
+            "wave2EAggregateArtifactCount": 206,
+            "wave2EAggregateArtifactsMatchingIndex": 205,
+            "wave2EAggregateIndexMismatches": 1,
+            "wave2EGeneratedCandidateGlbsNotRegistered": 56,
+            "wave2ENewRegistrationsThisWriter": 0
           },
           "unresolvedProductBlockers": [
             "W1-A: 92 source-action rows remain blocked by concrete authoring/geometry engineering failures; 54 further rows are source/relation gaps.",
             "W1-B: 29 generated candidates fail geometry, source identity, or target/action relation checks and remain unregistered.",
             "W1-C: 2 respiratory candidates remain blocked by topology/contact QC.",
-            "W2-D: all 16 work keys conflict with the frozen manifest owner; 10 jaw rows have actual Bucinator edge/area deformation defects, with additional functional-context/action rows unresolved.",
-            "W2-E: 18 source-local candidate deformations introduce new bone containment; all 56 candidates have action-outcome QC incomplete (0 passed), so none are registrable."
+            "W2-D: writer correction R1 resolves 16 copied owner-metadata conflicts only in an effective validator copy; the frozen D handoff remains pre-correction and unregistered. Ten jaw action rows have actual edge/area deformation defects, two rows have source/relation gaps, two are not applicable, and two null-action scope rows are not muscle-action acceptance. D has no aggregate candidate-package index.",
+            "W2-E: D/E runner preflight succeeds with an owned nonempty E output root and typed read-only bone context. E aggregate index preflight is blocked by proposals.json hash/size drift (expected d9ccc51c…af52eb/949336 bytes; observed 92115698…cf09/980461 bytes). Of 56 candidate GLBs, 38 have local geometry QC pass and 18 fail; action-outcome QC passed 0 and candidate-validated work keys are 0. No E candidate is registered."
           ],
           "evidence": [
             "work/reports/T66.md",
@@ -3265,7 +3277,18 @@
             "work/evidence/T66/atlas-action-experience-2026-10-04/REPORT.md",
             "work/evidence/T66/atlas-action-experience-2026-10-04/browser-validation.json",
             "work/evidence/T66/atlas-action-experience-2026-10-04/checks.json",
-            "work/evidence/T66/atlas-action-experience-2026-10-04/intent-review.json"
+            "work/evidence/T66/atlas-action-experience-2026-10-04/intent-review.json",
+            "work/evidence/T66/final-writer-2026-10-05/REPORT.md",
+            "work/evidence/T66/final-writer-2026-10-05/candidate-layout-audit.json",
+            "work/evidence/T66/final-writer-2026-10-05/writer-correction-revision-r1.json",
+            "work/evidence/T66/final-writer-2026-10-05/writer-contract-tests.json",
+            "work/evidence/T66/final-writer-2026-10-05/base-protocol-tests.json",
+            "work/evidence/T66/final-writer-2026-10-05/d-preflight.stdout.json",
+            "work/evidence/T66/final-writer-2026-10-05/e-preflight.stdout.json",
+            "work/evidence/T66/final-writer-2026-10-05/e-aggregate-preflight.json",
+            "work/evidence/T66/final-writer-2026-10-05/final-validation.json",
+            "work/evidence/T66/final-writer-2026-10-05/wave2-unresolved-workkeys.json",
+            "work/evidence/T66/final-writer-2026-10-05/preservation-check.json"
           ]
         },
         "wholeMuscleMotionGoal": {
@@ -3833,6 +3856,118 @@
           "sourceOnly": true,
           "publicRedistribution": "held",
           "humanReview": "not_performed"
+        },
+        "finalWriter2026-10-05": {
+          "status": "partial_with_writer_contract_repairs_and_unresolved_candidate_gates",
+          "baselineHead": "67840b1e51ad8956ac8a52f3214feb9288d25c21",
+          "baselineStatusEntries": 5464,
+          "baselineStatusSha256": "9a4da85caeca9db6d2cca120cbab24627e92de5cc7dee5abe43a74a325d1fdfb",
+          "wave2ManifestSha256": "d6ad4413da2beb44508715f1e48b8389c29071d2cad28fb28c2254a3f0c1a600",
+          "writerCorrectionRevision": "T66-W2-20261005-owner-normalization-r1",
+          "effectiveManifestCanonicalSha256": "f085d40dfd25cffa1fedf4c7a9fa024dfe371e5512ed8838344d6fe6b2daa631",
+          "ownerMetadataRowsCorrectedInEffectiveCopy": 82,
+          "correctedByAssignment": {
+            "D": 16,
+            "E": 66
+          },
+          "frozenManifestMutated": false,
+          "workerAssignmentSnapshotsMutated": false,
+          "runnerPreflight": {
+            "D": "passed_without_authoring",
+            "DWorkKeys": 16,
+            "DBoneContextKeysReadOnly": 1,
+            "E": "passed_without_authoring",
+            "EWorkKeys": 66,
+            "EBoneContextKeysReadOnly": 16,
+            "nonemptyEOwnedOutputRootAccepted": true,
+            "outputCollisionGuardTested": true,
+            "symlinkAndOtherOwnerNegativeFixturesPassed": true
+          },
+          "candidatePackageLayouts": {
+            "D": "family batches embedded in handoff; no aggregate candidate-package index; not sent through single-payload runner",
+            "E": "aggregate candidate-package index with multiple candidate_input artifacts; validated by separate aggregate validator"
+          },
+          "D": {
+            "candidateGlbs": 22,
+            "statusCounts": {
+              "candidate_validated_null_action_scope_rows": 2,
+              "blocked_engineering_jaw_action_rows": 10,
+              "missing_source_or_relation": 2,
+              "not_applicable_with_evidence": 2
+            },
+            "registered": 0,
+            "handoffPredatesWriterCorrection": true
+          },
+          "E": {
+            "aggregateArtifacts": 206,
+            "aggregateArtifactHashAndSizeMatches": 205,
+            "aggregateMismatches": 1,
+            "mismatchPath": "proposals.json",
+            "candidateGlbs": 56,
+            "localGeometryQcPassed": 38,
+            "localGeometryQcFailed": 18,
+            "actionOutcomeQcPassed": 0,
+            "candidateValidatedWorkKeys": 0,
+            "registered": 0
+          },
+          "registeredWave2CandidateGlbs": 0,
+          "contractTests": {
+            "status": "passed",
+            "count": 14
+          },
+          "existingProtocolTests": {
+            "status": "passed",
+            "count": 8
+          },
+          "actionInventory": {
+            "labels": 13,
+            "exactSourceActionLinks": 35,
+            "sourceSurfaces": 19,
+            "sourceActionRows": 311,
+            "sourceActionRowsAreNotDistinctActions": true
+          },
+          "learnerRuntimeChanged": false,
+          "browserEvidenceReused": "work/evidence/T66/atlas-action-experience-2026-10-04/browser-validation.json; measured 825x807, not 390/1024/1440",
+          "sourceOnly": true,
+          "localSelection": "technical_only",
+          "publicRedistribution": "held",
+          "humanReview": "not_performed",
+          "canonicalHaBindings": 130,
+          "denominators": {
+            "targets": 542,
+            "memberships": 563,
+            "regions": 12,
+            "muscleTargets": 429,
+            "muscleMemberships": 447,
+            "sourceConcepts": 232,
+            "sourceSurfaces": 462,
+            "history163": {
+              "6": 6,
+              "20": 20,
+              "135": 135,
+              "2": 2
+            }
+          },
+          "unresolvedProductBlockers": [
+            "W1-A: 92 source-action rows remain blocked by concrete authoring/geometry engineering failures; 54 further rows are source/relation gaps.",
+            "W1-B: 29 generated candidates fail geometry, source identity, or target/action relation checks and remain unregistered.",
+            "W1-C: 2 respiratory candidates remain blocked by topology/contact QC.",
+            "W2-D: writer correction R1 resolves 16 copied owner-metadata conflicts only in an effective validator copy; the frozen D handoff remains pre-correction and unregistered. Ten jaw action rows have actual edge/area deformation defects, two rows have source/relation gaps, two are not applicable, and two null-action scope rows are not muscle-action acceptance. D has no aggregate candidate-package index.",
+            "W2-E: D/E runner preflight succeeds with an owned nonempty E output root and typed read-only bone context. E aggregate index preflight is blocked by proposals.json hash/size drift (expected d9ccc51c…af52eb/949336 bytes; observed 92115698…cf09/980461 bytes). Of 56 candidate GLBs, 38 have local geometry QC pass and 18 fail; action-outcome QC passed 0 and candidate-validated work keys are 0. No E candidate is registered."
+          ],
+          "evidence": [
+            "work/evidence/T66/final-writer-2026-10-05/REPORT.md",
+            "work/evidence/T66/final-writer-2026-10-05/candidate-layout-audit.json",
+            "work/evidence/T66/final-writer-2026-10-05/writer-correction-revision-r1.json",
+            "work/evidence/T66/final-writer-2026-10-05/writer-contract-tests.json",
+            "work/evidence/T66/final-writer-2026-10-05/base-protocol-tests.json",
+            "work/evidence/T66/final-writer-2026-10-05/d-preflight.stdout.json",
+            "work/evidence/T66/final-writer-2026-10-05/e-preflight.stdout.json",
+            "work/evidence/T66/final-writer-2026-10-05/e-aggregate-preflight.json",
+            "work/evidence/T66/final-writer-2026-10-05/final-validation.json",
+            "work/evidence/T66/final-writer-2026-10-05/wave2-unresolved-workkeys.json",
+            "work/evidence/T66/final-writer-2026-10-05/preservation-check.json"
+          ]
         }
       },
       "report": "work/reports/T66.md",
@@ -3926,17 +4061,29 @@
         "atlasActionLibraryLabelEntries": 13,
         "atlasPlayableSourceActionBindings": 35,
         "atlasQualitativeOrHistoricalActionSourceSurfaces": 19,
-        "newMotionAssetsThisCorrection": 0
+        "newMotionAssetsThisCorrection": 0,
+        "atlasExactSourceActionLinks": 35,
+        "atlasActionSourceSurfaces": 19,
+        "sourceActionRowCount": 311,
+        "sourceActionRowInterpretation": "source-action ledger rows; not 311 distinct anatomical actions",
+        "wave2DWorkKeyOwnerMetadataCorrectedInWriterCopy": 16,
+        "wave2DAggregateCandidateIndexPresent": false,
+        "wave2DGeneratedCandidateGlbsNotRegistered": 22,
+        "wave2EAggregateArtifactCount": 206,
+        "wave2EAggregateArtifactsMatchingIndex": 205,
+        "wave2EAggregateIndexMismatches": 1,
+        "wave2EGeneratedCandidateGlbsNotRegistered": 56,
+        "wave2ENewRegistrationsThisWriter": 0
       },
       "unresolvedProductBlockers": [
         "W1-A: 92 source-action rows remain blocked by concrete authoring/geometry engineering failures; 54 further rows are source/relation gaps.",
         "W1-B: 29 generated candidates fail geometry, source identity, or target/action relation checks and remain unregistered.",
         "W1-C: 2 respiratory candidates remain blocked by topology/contact QC.",
-        "W2-D: all 16 work keys conflict with the frozen manifest owner; 10 jaw rows have actual Bucinator edge/area deformation defects, with additional functional-context/action rows unresolved.",
-        "W2-E: 18 source-local candidate deformations introduce new bone containment; all 56 candidates have action-outcome QC incomplete (0 passed), so none are registrable."
+        "W2-D: writer correction R1 resolves 16 copied owner-metadata conflicts only in an effective validator copy; the frozen D handoff remains pre-correction and unregistered. Ten jaw action rows have actual edge/area deformation defects, two rows have source/relation gaps, two are not applicable, and two null-action scope rows are not muscle-action acceptance. D has no aggregate candidate-package index.",
+        "W2-E: D/E runner preflight succeeds with an owned nonempty E output root and typed read-only bone context. E aggregate index preflight is blocked by proposals.json hash/size drift (expected d9ccc51c…af52eb/949336 bytes; observed 92115698…cf09/980461 bytes). Of 56 candidate GLBs, 38 have local geometry QC pass and 18 fail; action-outcome QC passed 0 and candidate-validated work keys are 0. No E candidate is registered."
       ],
-      "currentInternalUnit": "atlas-action-experience",
-      "currentInternalUnitStatus": "action library and playback correction implemented; whole-motion engineering responsibilities remain partial"
+      "currentInternalUnit": "wave2-final-writer-integration-2026-10-05",
+      "currentInternalUnitStatus": "writer contract defects corrected and preflight tests passed; worker candidate registration blocked by D engineering/action scope and E artifact drift/action-QC failures"
     },
     "T85": {
       "title": "전체 지원 움직임·통합 앱 품질 감사",

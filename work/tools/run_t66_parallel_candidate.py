@@ -11,8 +11,10 @@ import hashlib
 import importlib
 import json
 import os
+import stat
 import sys
 import time
+import uuid
 from pathlib import Path
 from typing import Any
 
@@ -25,18 +27,96 @@ from t66_parallel_protocol import (
     sha_file,
     validate_candidate_schema,
     validate_manifest,
+    validate_schema_instance,
     work_key_id,
+    apply_writer_correction,
+    assigned_bone_context,
+    validate_assigned_bone_context,
 )
 
 
 def ensure_no_symlink_path(path: Path, boundary: Path) -> None:
-    current = path
-    while current != boundary and current != current.parent:
-        if current.exists() and current.is_symlink():
-            raise ValueError(f"symlink in worker path is forbidden: {current}")
-        current = current.parent
-    if not inside(path, boundary):
+    if ".." in path.parts or ".." in boundary.parts:
+        raise ValueError("parent traversal is forbidden in worker paths")
+    absolute_path = Path(os.path.abspath(str(path)))
+    absolute_boundary = Path(os.path.abspath(str(boundary)))
+    for candidate in (absolute_boundary, absolute_path):
+        current = Path(candidate.anchor)
+        for part in candidate.parts[1:]:
+            current = current / part
+            try:
+                mode = current.lstat().st_mode
+            except FileNotFoundError:
+                continue
+            if stat.S_ISLNK(mode):
+                raise ValueError(f"symlink in worker path is forbidden: {current}")
+    if not inside(absolute_path, absolute_boundary):
         raise ValueError(f"path escapes owned boundary: {path}")
+
+
+def resolve_repo_argument(repo_root: Path, raw: Path) -> Path:
+    if ".." in raw.parts:
+        raise ValueError(f"parent traversal is forbidden in worker path: {raw}")
+    return raw.expanduser() if raw.expanduser().is_absolute() else repo_root / raw.expanduser()
+
+
+def validate_existing_output_root(output_root: Path, boundary: Path, worker: str, run_id: str, manifest_output_root: str) -> dict[str, Any]:
+    ensure_no_symlink_path(output_root, boundary)
+    if output_root.exists() and not output_root.is_dir():
+        raise NotADirectoryError(f"worker output root is not a directory: {output_root}")
+    owned_markers: list[str] = []
+    inspected_json = 0
+    if output_root.exists():
+        for item in output_root.rglob("*"):
+            ensure_no_symlink_path(item, output_root)
+            if not item.is_file() or item.suffix.lower() != ".json":
+                continue
+            inspected_json += 1
+            try:
+                value = read_json(item)
+            except (OSError, ValueError, json.JSONDecodeError):
+                continue
+            if not isinstance(value, dict):
+                continue
+            file_run_id = value.get("runId")
+            if file_run_id is not None and file_run_id != run_id:
+                raise ValueError(f"worker output contains a file from another run: {item}")
+            owner = value.get("assignment")
+            if isinstance(owner, str):
+                if owner != worker:
+                    raise ValueError(f"worker output contains another assignment's file: {item} ({owner})")
+                if file_run_id == run_id:
+                    owned_markers.append(str(item.relative_to(output_root)))
+            elif isinstance(owner, dict):
+                stated_root = owner.get("outputRoot")
+                if stated_root is not None and Path(stated_root) != Path(manifest_output_root):
+                    raise ValueError(f"worker start record points to another output root: {item}")
+                if item.name == "start.json" and file_run_id == run_id and stated_root == manifest_output_root:
+                    owned_markers.append(str(item.relative_to(output_root)))
+            stated_worker = value.get("worker")
+            if stated_worker is not None and stated_worker != worker:
+                raise ValueError(f"worker output contains another worker's file: {item} ({stated_worker})")
+    nonempty = output_root.exists() and any(output_root.iterdir())
+    if nonempty and not owned_markers:
+        raise ValueError("non-empty worker output root has no matching run/assignment ownership record")
+    return {"status": "owned_root_validated", "nonempty": nonempty, "inspectedJsonFiles": inspected_json,
+            "ownershipMarkers": owned_markers, "symlinkCount": 0, "otherOwnerFiles": 0}
+
+
+def ensure_output_paths_unused(output_root: Path, names: list[str]) -> None:
+    collisions = [name for name in names if (output_root / name).exists() or (output_root / name).is_symlink()]
+    if collisions:
+        raise FileExistsError(f"refusing to overwrite existing worker output paths: {collisions}")
+
+
+def write_new_bytes(path: Path, data: bytes) -> None:
+    with path.open("xb") as handle:
+        handle.write(data)
+
+
+def write_new_text(path: Path, data: str) -> None:
+    with path.open("x", encoding="utf-8") as handle:
+        handle.write(data)
 
 
 def validate_package(package: dict[str, Any], manifest: dict[str, Any], worker: str, repo_root: Path, output_root: Path) -> tuple[dict[str, Any] | None, Path | None]:
@@ -78,8 +158,8 @@ def validate_package(package: dict[str, Any], manifest: dict[str, Any], worker: 
     for artifact in package.get("artifacts", []):
         raw = artifact.get("path", "")
         p = Path(raw)
-        path = (repo_root / p).resolve() if not p.is_absolute() else p.resolve()
-        ensure_no_symlink_path(path, output_root.resolve())
+        path = resolve_repo_argument(repo_root, p)
+        ensure_no_symlink_path(path, output_root)
         if not path.is_file() or path.is_symlink():
             raise FileNotFoundError(f"candidate artifact missing or symlinked: {raw}")
         if path.stat().st_size != artifact.get("bytes") or sha_file(path) != artifact.get("sha256"):
@@ -91,7 +171,7 @@ def validate_package(package: dict[str, Any], manifest: dict[str, Any], worker: 
             raise ValueError("geometry package must contain exactly one candidate_input artifact")
         item = payload_artifacts[0]
         p = Path(item["path"])
-        payload_path = (repo_root / p).resolve() if not p.is_absolute() else p.resolve()
+        payload_path = resolve_repo_argument(repo_root, p)
     return package, payload_path
 
 
@@ -139,32 +219,63 @@ def main() -> None:
     parser.add_argument("--manifest", required=True, type=Path)
     parser.add_argument("--input-root", required=True, type=Path)
     parser.add_argument("--output-root", required=True, type=Path)
-    parser.add_argument("--assignment", choices=["A", "B", "C", "F", "writer-dry-run"], required=True)
+    parser.add_argument("--assignment", choices=["A", "B", "C", "D", "E", "F", "writer-dry-run"], required=True)
     parser.add_argument("--candidate-package", type=Path)
     parser.add_argument("--writer-sample-success", action="store_true")
     parser.add_argument("--disable-source-cache", action="store_true")
+    parser.add_argument("--preflight-only", action="store_true", help="validate a worker assignment and execution boundaries without authoring geometry")
+    parser.add_argument("--writer-correction", type=Path, help="hash-pinned writer-only ownership metadata correction; frozen manifest remains unchanged")
     args = parser.parse_args()
 
     # Keep geometry work predictable: one process, one numerical library thread.
     for key in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "VECLIB_MAXIMUM_THREADS", "NUMEXPR_NUM_THREADS"):
         os.environ[key] = "1"
     repo_root = args.repo_root.expanduser().resolve()
-    manifest_path = args.manifest.expanduser().resolve()
+    manifest_path = resolve_repo_argument(repo_root, args.manifest)
+    ensure_no_symlink_path(manifest_path, repo_root)
     manifest_rel = manifest_path.relative_to(repo_root)
-    manifest = read_json(manifest_path)
-    manifest_check = validate_manifest(manifest, repo_root=repo_root, verify_snapshot=True, verify_source_bytes=False)
-    snapshot_root = (repo_root / manifest["snapshotRoot"]).resolve()
-    input_root = args.input_root.expanduser().resolve()
-    if input_root != (snapshot_root / "files").resolve():
-        raise ValueError("input-root must be the frozen snapshot files root for this run")
-    output_root = args.output_root.expanduser().resolve()
-    if args.assignment == "writer-dry-run":
-        boundary = (repo_root / manifest["writerDryRun"]["outputRoot"]).resolve().parent
+    original_manifest = read_json(manifest_path)
+    manifest_file_sha256 = sha_file(manifest_path)
+    correction_summary = None
+    if args.writer_correction:
+        correction_path = resolve_repo_argument(repo_root, args.writer_correction)
+        ensure_no_symlink_path(correction_path, repo_root)
+        receipt = read_json(correction_path)
+        manifest, correction_summary = apply_writer_correction(
+            original_manifest, receipt, manifest_file_sha256=manifest_file_sha256,
+        )
     else:
-        boundary = (repo_root / manifest["assignments"][args.assignment]["outputRoot"]).resolve()
-    ensure_no_symlink_path(output_root, boundary)
-    if output_root.exists() and any(output_root.iterdir()):
-        raise FileExistsError(f"output root is non-empty; refusing to overwrite: {output_root}")
+        manifest = original_manifest
+    if manifest.get("waveNumber") == 2 and args.assignment in {"D", "E"} and correction_summary is None:
+        raise ValueError("wave-2 D/E execution requires the exact writer correction receipt")
+    manifest_check = validate_manifest(
+        manifest, repo_root=repo_root, verify_snapshot=True, verify_source_bytes=False,
+        verify_original_inputs=manifest.get("waveNumber", 1) == 1,
+        assignment_snapshot_source=original_manifest,
+    )
+    manifest_check["manifestFileSha256"] = manifest_file_sha256
+    manifest_check["writerCorrection"] = correction_summary
+    if manifest.get("waveNumber", 1) == 2 and args.assignment in {"A", "B", "C", "F"}:
+        raise PermissionError("wave-2 A/B/C/F records are read-only carry-forward; only D/E may write new candidates")
+    snapshot_root = (repo_root / manifest["snapshotRoot"]).resolve()
+    input_root = resolve_repo_argument(repo_root, args.input_root)
+    ensure_no_symlink_path(input_root, repo_root)
+    allowed_input_roots = [(snapshot_root / "files").resolve()]
+    supplemental = manifest.get("supplementalSnapshotRoot")
+    if supplemental:
+        allowed_input_roots.append((repo_root / supplemental / "files").resolve())
+    if input_root.resolve() not in allowed_input_roots:
+        raise ValueError("input-root must be one of the frozen snapshot files roots for this run")
+    output_root = resolve_repo_argument(repo_root, args.output_root)
+    if args.assignment == "writer-dry-run":
+        boundary = (repo_root / manifest["writerDryRun"]["outputRoot"]).parent
+        manifest_output_root = manifest["writerDryRun"]["outputRoot"]
+    else:
+        manifest_output_root = manifest["assignments"][args.assignment]["outputRoot"]
+        boundary = repo_root / manifest_output_root
+    output_root_ownership = validate_existing_output_root(
+        output_root, boundary, args.assignment, manifest["runId"], manifest_output_root,
+    )
     output_root.mkdir(parents=True, exist_ok=True)
 
     if args.assignment == "writer-dry-run":
@@ -179,9 +290,79 @@ def main() -> None:
         package = None
     else:
         worker = args.assignment
+        if args.preflight_only:
+            if args.candidate_package or worker not in {"D", "E"}:
+                raise ValueError("preflight-only is reserved for frozen wave-2 D/E assignments without a candidate package")
+            assignment = manifest["assignments"][worker]
+            if not assignment.get("assignedWorkKeys") or not assignment.get("assignedSourceKeys"):
+                raise ValueError(f"{worker} assignment has no exact source work")
+            bone_context = assigned_bone_context(assignment)
+            validate_assigned_bone_context(bone_context, assignment)
+            at66, asfm, verify = load_authoring_modules(snapshot_root / "files", repo_root, input_root)
+            required_functions = [
+                (at66, "author"), (asfm, "source_geometry"), (verify, "verify_glb"),
+            ]
+            missing = [name for module, name in required_functions if not callable(getattr(module, name, None))]
+            if missing:
+                raise ValueError(f"frozen authoring/QC functions unavailable: {missing}")
+            schema_path = repo_root / manifest["workerOutputSchema"]
+            schema = read_json(schema_path)
+            first_key = assignment["assignedWorkKeys"][0]["workKeyId"]
+            sample_source = assignment["assignedSourceKeys"][0]
+            canary = {
+                "schemaVersion": "t66-parallel-candidate-package-v1",
+                "runId": manifest["runId"], "assignment": worker,
+                "candidateNamespace": f"worker-{worker}:preflight",
+                "candidateKind": "deferred_with_reason", "sourceOnly": True,
+                "publicRedistribution": "held", "humanReview": "not_performed",
+                "canonicalBindingAdded": False, "completedWorkKeyIds": [],
+                "sourceKeys": [sample_source], "artifacts": [],
+                "disposition": "deferred_with_reason", "unresolved": ["preflight-only; no candidate authored"],
+            }
+            validate_schema_instance(canary, schema)
+            if canary["assignment"] != worker or first_key not in {row["workKeyId"] for row in assignment["assignedWorkKeys"]}:
+                raise ValueError("worker package schema/assignment canary did not bind to its frozen owner")
+            try:
+                ensure_no_symlink_path(repo_root / "work/evidence/T66/parallel-completion-2026-10-03/wave-1", output_root)
+            except ValueError:
+                pass
+            else:
+                raise ValueError("output-root guard accepted a path outside this worker boundary")
+            probe = output_root / f".preflight-write-probe-{uuid.uuid4().hex}"
+            descriptor = os.open(probe, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+            try:
+                with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
+                    handle.write("scoped output permission check\n")
+                if probe.read_text(encoding="utf-8") != "scoped output permission check\n":
+                    raise OSError("worker output-root write/read probe failed")
+            finally:
+                probe.unlink(missing_ok=True)
+            print(json.dumps({
+                "status": "wave2_worker_preflight_passed_without_authoring",
+                "assignment": worker, "runId": manifest["runId"],
+                "assignedWorkKeys": len(assignment["assignedWorkKeys"]),
+                "assignedSourceKeys": len(assignment["assignedSourceKeys"]),
+                "assignedBoneSourceKeys": len(bone_context["sourceKeys"]),
+                "boneContext": bone_context,
+                "schemaPath": str(schema_path.relative_to(repo_root)),
+                "authoringModuleRoot": str((snapshot_root / "files/work/tools").relative_to(repo_root)),
+                "outputRoot": str(output_root.relative_to(repo_root)),
+                "outputRootOwnership": output_root_ownership,
+                "inputRoot": str(input_root.relative_to(repo_root)),
+                "inputRootKind": "supplemental" if supplemental and input_root.resolve() == (repo_root / supplemental / "files").resolve() else "base",
+                "manifestFileSha256": manifest_file_sha256,
+                "writerCorrection": correction_summary,
+                "outputProbeRemoved": True, "geometryAuthored": False,
+                "sourceOnly": True, "publicRedistribution": "held", "humanReview": "not_performed",
+            }, ensure_ascii=False, indent=2))
+            return
+        if worker == "F":
+            ensure_output_paths_unused(output_root, ["candidate-handoff.json"])
+        else:
+            ensure_output_paths_unused(output_root, ["reference.glb", "motion.glb", "authoring-record.json", "pose-qc.json", "candidate-result.json", "candidate-handoff.json"])
         if not args.candidate_package:
             raise ValueError("worker execution needs --candidate-package from its owned output root")
-        package_path = args.candidate_package.expanduser().resolve()
+        package_path = resolve_repo_argument(repo_root, args.candidate_package)
         ensure_no_symlink_path(package_path, output_root)
         package = read_json(package_path)
         package, payload_path = validate_package(package, manifest, worker, repo_root, output_root)
@@ -194,7 +375,7 @@ def main() -> None:
                 "artifacts": package.get("artifacts", []), "authority": dict(RIGHTS_STATE),
                 "registeredToLearner": False, "humanReview": "not_performed", "publicRedistribution": "held",
             }
-            (output_root / "candidate-handoff.json").write_text(json.dumps(handoff, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            write_new_text(output_root / "candidate-handoff.json", json.dumps(handoff, ensure_ascii=False, indent=2) + "\n")
             print(json.dumps({"status": "text_candidate_handoff_validated", "handoffPath": str(output_root / 'candidate-handoff.json'), "nerveRows": len(handoff["nerveRowIds"])}, ensure_ascii=False, indent=2))
             return
 
@@ -306,12 +487,12 @@ def main() -> None:
     write_started = time.perf_counter()
     reference_path = output_root / "reference.glb"
     motion_path = output_root / "motion.glb"
-    reference_path.write_bytes(rest_bytes)
-    motion_path.write_bytes(motion_bytes)
+    write_new_bytes(reference_path, rest_bytes)
+    write_new_bytes(motion_path, motion_bytes)
     timings["glbFileWriteSeconds"] = time.perf_counter() - write_started
     record_path = output_root / "authoring-record.json"
     write_started = time.perf_counter()
-    record_path.write_text(json.dumps(record, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    write_new_text(record_path, json.dumps(record, ensure_ascii=False, indent=2, allow_nan=False) + "\n")
     timings["authoringRecordJsonWriteSeconds"] = time.perf_counter() - write_started
 
     pose_started = time.perf_counter()
@@ -321,7 +502,7 @@ def main() -> None:
     timings["emittedGlbPoseReplaySeconds"] = time.perf_counter() - pose_started
     pose_path = output_root / "pose-qc.json"
     write_started = time.perf_counter()
-    pose_path.write_text(json.dumps(pose_result, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    write_new_text(pose_path, json.dumps(pose_result, ensure_ascii=False, indent=2, allow_nan=False) + "\n")
     timings["poseQcJsonWriteSeconds"] = time.perf_counter() - write_started
 
     prior_qc = {}
@@ -390,8 +571,8 @@ def main() -> None:
         ],
         "authority": dict(RIGHTS_STATE), "registeredToLearner": False,
     }
-    (output_root / "candidate-result.json").write_text(json.dumps(final, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
-    (output_root / "candidate-handoff.json").write_text(json.dumps(handoff, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    write_new_text(output_root / "candidate-result.json", json.dumps(final, ensure_ascii=False, indent=2, allow_nan=False) + "\n")
+    write_new_text(output_root / "candidate-handoff.json", json.dumps(handoff, ensure_ascii=False, indent=2, allow_nan=False) + "\n")
     print(json.dumps({"status": final["status"], "outputRoot": str(output_root), "motionSha256": final["motionGlb"]["sha256"],
                       "cache": cache_stats, "stageTimingsSeconds": timings, "manifest": manifest_check}, ensure_ascii=False, indent=2))
 

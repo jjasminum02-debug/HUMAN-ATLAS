@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "t66-parallel-protocol-contract-tests-v1",
+  "status": "passed",
+  "runId": "T66-W2-20261004-r2-5735b81b7626",
+  "manifestSha256": "d6ad4413da2beb44508715f1e48b8389c29071d2cad28fb28c2254a3f0c1a600",
+  "schemaSha256": "0dadf736d354555f581498bc36895cd977f7d00231c447aaa2d7277e91aec648",
+  "count": 8,
+  "tests": [
+    {
+      "name": "valid-minimal-package",
+      "result": "accepted",
+      "expected": "accepted",
+      "validator": "schema",
+      "reason": null
+    },
+    {
+      "name": "reject-additional-property",
+      "result": "rejected",
+      "expected": "rejected",
+      "validator": "schema",
+      "reason": "$: unexpected properties ['extraPrivateField']"
+    },
+    {
+      "name": "reject-missing-required",
+      "result": "rejected",
+      "expected": "rejected",
+      "validator": "schema",
+      "reason": "$: missing required properties ['sourceOnly']"
+    },
+    {
+      "name": "reject-duplicate-source-list",
+      "result": "rejected",
+      "expected": "rejected",
+      "validator": "schema",
+      "reason": "$.sourceKeys: array items are not unique"
+    },
+    {
+      "name": "reject-invalid-date-time",
+      "result": "rejected",
+      "expected": "rejected",
+      "validator": "schema",
+      "reason": "$.createdAt: invalid date-time"
+    },
+    {
+      "name": "reject-date-time-without-zone",
+      "result": "rejected",
+      "expected": "rejected",
+      "validator": "schema",
+      "reason": "$.createdAt: date-time must include a timezone"
+    },
+    {
+      "name": "reject-repeated-exact-action-work-key",
+      "result": "rejected",
+      "expected": "rejected",
+      "validator": "candidate",
+      "reason": "candidate repeats exact action work key: T66-WK-b637f9468a3e7fc811460251"
+    },
+    {
+      "name": "allow-same-source-distinct-families",
+      "result": "accepted",
+      "expected": "accepted",
+      "validator": "candidate",
+      "reason": null
+    }
+  ],
+  "scope": "candidate package schema and exact six-field work-key identity; no anatomy, learner registration, rights or human review approval"
+}

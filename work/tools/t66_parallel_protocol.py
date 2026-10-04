@@ -9,6 +9,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import copy
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -64,6 +65,127 @@ def work_key_id(key: dict[str, Any]) -> str:
         if key[field] is not None and (not isinstance(key[field], str) or not key[field].strip()):
             raise ValueError(f"work key {field} must be null or a nonempty string")
     return "T66-WK-" + sha_bytes(canonical_json({field: key[field] for field in required}))[:24]
+
+
+def apply_writer_correction(manifest: dict[str, Any], receipt: dict[str, Any], *, manifest_file_sha256: str) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Apply a narrow, hash-pinned ownership-metadata correction to a copy.
+
+    The frozen wave-2 manifest and worker assignment snapshots remain untouched.
+    Only stale ownership fields duplicated inside D/E assignedWorkKeys rows are
+    normalized to the already-frozen sourceActionScopeQueue and sourceDisposition.
+    """
+    if receipt.get("schemaVersion") != "t66-wave2-writer-correction-v1":
+        raise ValueError("unsupported writer correction receipt")
+    if manifest.get("waveNumber") != 2 or manifest.get("runId") != receipt.get("runId"):
+        raise ValueError("writer correction is for another T66 wave/run")
+    if manifest.get("manifestRevision") != receipt.get("manifestRevision"):
+        raise ValueError("writer correction manifest revision mismatch")
+    if manifest_file_sha256 != receipt.get("baseManifestFileSha256"):
+        raise ValueError("writer correction base manifest file hash mismatch")
+
+    original = copy.deepcopy(manifest)
+    effective = copy.deepcopy(manifest)
+    queue = {row["workKeyId"]: row for row in manifest.get("sourceActionScopeQueue", [])}
+    source_rows = {row["sourceKey"]: row for row in manifest.get("sourceDisposition", [])}
+    entry_by_id: dict[str, dict[str, Any]] = {}
+    for entry in receipt.get("corrections", []):
+        work_id = entry.get("workKeyId")
+        if not isinstance(work_id, str) or work_id in entry_by_id:
+            raise ValueError("writer correction contains missing/duplicate work key IDs")
+        entry_by_id[work_id] = entry
+    if receipt.get("correctionCount") != len(entry_by_id):
+        raise ValueError("writer correction count does not match its entry list")
+
+    expected_mismatches: dict[str, tuple[str, dict[str, Any], dict[str, Any], dict[str, Any]]] = {}
+    for worker in ("D", "E"):
+        record = manifest.get("assignments", {}).get(worker)
+        if record is None:
+            raise ValueError(f"writer correction run has no {worker} assignment")
+        assigned_sources = set(record.get("assignedSourceKeys", []))
+        for row in record.get("assignedWorkKeys", []):
+            work_id = row.get("workKeyId")
+            scope_row = queue.get(work_id)
+            if scope_row is None:
+                raise ValueError(f"assigned work key is absent from frozen source-action queue: {work_id}")
+            if row.get("key") != scope_row.get("key") or work_key_id(row["key"]) != work_id:
+                raise ValueError(f"writer correction found a changed exact work key: {work_id}")
+            source_key = row["key"].get("sourceKey")
+            source_row = source_rows.get(source_key)
+            if source_row is None or source_key not in assigned_sources:
+                raise ValueError(f"writer correction source is not in the assigned source inventory: {work_id}")
+            if (scope_row.get("disposition"), scope_row.get("assignedTo"), scope_row.get("deferredTo")) != ("assigned", worker, None):
+                raise ValueError(f"frozen source-action queue does not establish {worker} ownership: {work_id}")
+            if (source_row.get("disposition"), source_row.get("assignedTo"), source_row.get("deferredTo")) != ("assigned", worker, None):
+                raise ValueError(f"frozen source disposition does not establish {worker} ownership: {work_id}")
+            before = {field: row.get(field) for field in ("disposition", "assignedTo", "deferredTo")}
+            after = {field: scope_row.get(field) for field in ("disposition", "assignedTo", "deferredTo")}
+            if before != after:
+                expected_mismatches[work_id] = (worker, row, scope_row, source_row)
+
+    if set(entry_by_id) != set(expected_mismatches):
+        missing = sorted(set(expected_mismatches) - set(entry_by_id))
+        extra = sorted(set(entry_by_id) - set(expected_mismatches))
+        raise ValueError(f"writer correction mismatch universe changed; missing={missing[:3]} extra={extra[:3]}")
+
+    patched = 0
+    for work_id, (worker, before_row, scope_row, source_row) in expected_mismatches.items():
+        entry = entry_by_id[work_id]
+        if entry.get("assignment") != worker or entry.get("sourceKey") != before_row["key"]["sourceKey"]:
+            raise ValueError(f"writer correction entry owner/source mismatch: {work_id}")
+        if entry.get("assignmentRowSha256Before") != sha_bytes(canonical_json(before_row)):
+            raise ValueError(f"writer correction assigned-row hash mismatch: {work_id}")
+        if entry.get("exactKeySha256") != sha_bytes(canonical_json(before_row["key"])):
+            raise ValueError(f"writer correction exact-key hash mismatch: {work_id}")
+        if entry.get("scopeQueueRowSha256") != sha_bytes(canonical_json(scope_row)):
+            raise ValueError(f"writer correction scope-row hash mismatch: {work_id}")
+        if entry.get("sourceDispositionRowSha256") != sha_bytes(canonical_json(source_row)):
+            raise ValueError(f"writer correction source-disposition hash mismatch: {work_id}")
+        before = {field: before_row.get(field) for field in ("disposition", "assignedTo", "deferredTo")}
+        after = {field: scope_row.get(field) for field in ("disposition", "assignedTo", "deferredTo")}
+        if entry.get("before") != before or entry.get("after") != after:
+            raise ValueError(f"writer correction owner transition mismatch: {work_id}")
+        corrected_row = next(row for row in effective["assignments"][worker]["assignedWorkKeys"] if row["workKeyId"] == work_id)
+        for field in ("disposition", "assignedTo", "deferredTo"):
+            corrected_row[field] = after[field]
+        if entry.get("assignmentRowSha256After") != sha_bytes(canonical_json(corrected_row)):
+            raise ValueError(f"writer correction after-row hash mismatch: {work_id}")
+        patched += 1
+
+    return effective, {
+        "applied": True,
+        "revisionId": receipt.get("revisionId"),
+        "baseManifestFileSha256": manifest_file_sha256,
+        "originalManifestCanonicalSha256": sha_bytes(canonical_json(original)),
+        "effectiveManifestCanonicalSha256": sha_bytes(canonical_json(effective)),
+        "correctedAssignmentRows": patched,
+        "byAssignment": {worker: sum(1 for entry in receipt["corrections"] if entry["assignment"] == worker) for worker in ("D", "E")},
+        "frozenManifestMutated": False,
+        "workerSnapshotsMutated": False,
+    }
+
+
+def assigned_bone_context(record: dict[str, Any], source_keys: list[str] | None = None) -> dict[str, Any]:
+    """Return a typed, read-only bone context distinct from muscle members."""
+    allowed = set(record.get("assignedBoneSourceKeys", []))
+    selected = list(record.get("assignedBoneSourceKeys", [])) if source_keys is None else list(source_keys)
+    if len(selected) != len(set(selected)) or not set(selected) <= allowed:
+        raise ValueError("read-only bone context contains duplicate or unassigned source keys")
+    return {
+        "contextType": "t66_assigned_bone_source_context",
+        "sourceKeys": selected,
+        "accessMode": "read_only_context",
+        "candidateMuscleMember": False,
+        "independentDofGranted": False,
+    }
+
+
+def validate_assigned_bone_context(context: dict[str, Any], record: dict[str, Any]) -> None:
+    expected = assigned_bone_context(record, context.get("sourceKeys", []))
+    if context != expected:
+        raise ValueError("typed bone context is not a read-only subset of assignedBoneSourceKeys")
+    if set(context.get("sourceKeys", [])) & set(record.get("assignedSourceKeys", [])):
+        # The same provider key must never silently change semantic roles in a package.
+        raise ValueError("bone context source keys overlap assigned muscle source keys")
 
 
 def validate_schema_instance(value: Any, schema: dict[str, Any], location: str = "$" ) -> None:
@@ -162,7 +284,7 @@ def validate_work_key_rows(rows: list[dict[str, Any]]) -> None:
         ids.add(expected)
 
 
-def validate_manifest(manifest: dict[str, Any], *, repo_root: Path | None = None, verify_snapshot: bool = True, verify_source_bytes: bool = False, verify_original_inputs: bool = True) -> dict[str, Any]:
+def validate_manifest(manifest: dict[str, Any], *, repo_root: Path | None = None, verify_snapshot: bool = True, verify_source_bytes: bool = False, verify_original_inputs: bool = True, assignment_snapshot_source: dict[str, Any] | None = None) -> dict[str, Any]:
     if manifest.get("schemaVersion") != SCHEMA_VERSION:
         raise ValueError("unsupported T66 parallel manifest schema")
     if manifest.get("task") != "T66" or manifest.get("nextUnit") != "author-and-integrate-normal-motion-bone-and-nerve":
@@ -217,9 +339,15 @@ def validate_manifest(manifest: dict[str, Any], *, repo_root: Path | None = None
         raise ValueError("nerve row IDs are missing or duplicated")
 
     workers = manifest.get("assignments", {})
-    expected_workers = {"A", "B", "C", "F"}
+    wave_number = manifest.get("waveNumber", 1)
+    if wave_number == 1:
+        expected_workers = {"A", "B", "C", "F"}
+    elif wave_number == 2:
+        expected_workers = {"A", "B", "C", "D", "E", "F"}
+    else:
+        raise ValueError(f"unsupported T66 wave number: {wave_number}")
     if set(workers) != expected_workers:
-        raise ValueError("wave-1 must contain exactly A/B/C/F")
+        raise ValueError(f"wave-{wave_number} must contain exactly {sorted(expected_workers)}")
     all_work_ids: set[str] = set()
     all_assigned_sources: dict[str, str] = {}
     all_targets: dict[str, str] = {}
@@ -250,13 +378,20 @@ def validate_manifest(manifest: dict[str, Any], *, repo_root: Path | None = None
         assigned_work_set.update(row["workKeyId"] for row in record.get("assignedWorkKeys", []))
     planned_work = manifest.get("sourceActionScopeQueue", [])
     validate_work_key_rows(planned_work)
+    planned_by_id = {row["workKeyId"]: row for row in planned_work}
     planned_assigned = {r["workKeyId"] for r in planned_work if r.get("disposition") == "assigned"}
     if planned_assigned != assigned_work_set:
         raise ValueError("worker assignedWorkKeys do not equal the explicitly assigned source-action scope queue")
     assignment_owner = {r["workKeyId"]: r.get("assignedTo") for r in planned_work if r.get("disposition") == "assigned"}
     for worker, record in workers.items():
-        if any(assignment_owner.get(row["workKeyId"]) != worker for row in record.get("assignedWorkKeys", [])):
-            raise ValueError(f"{worker} contains a work key owned by another assignment")
+        for row in record.get("assignedWorkKeys", []):
+            work_id = row["workKeyId"]
+            if assignment_owner.get(work_id) != worker:
+                raise ValueError(f"{worker} contains a work key owned by another assignment")
+            planned = planned_by_id[work_id]
+            for field in ("disposition", "assignedTo", "deferredTo"):
+                if field in row and row.get(field) != planned.get(field):
+                    raise ValueError(f"{worker} embedded owner metadata differs from source-action queue for {work_id}: {field}")
 
     def verify_disposition(items: list[dict[str, Any]], key: str, allowed: set[str], expected: set[str], name: str, assigned_field: str | None = None) -> None:
         owned: dict[str, str] = {}
@@ -372,6 +507,8 @@ def validate_manifest(manifest: dict[str, Any], *, repo_root: Path | None = None
             output = root / record["outputRoot"]
             if not inside(output, wave_root / "workers" / worker):
                 raise ValueError(f"{worker} output root escapes its owned directory")
+        snapshot_manifest = assignment_snapshot_source or manifest
+        snapshot_workers = snapshot_manifest.get("assignments", {})
         for item in manifest.get("assignmentSnapshots", []):
             path = root / item["path"]
             if not path.is_file() or path.is_symlink():
@@ -380,7 +517,7 @@ def validate_manifest(manifest: dict[str, Any], *, repo_root: Path | None = None
                 raise ValueError(f"assignment snapshot changed: {item['path']}")
             snapshot = read_json(path)
             worker = item.get("assignment")
-            record = workers.get(worker)
+            record = snapshot_workers.get(worker)
             if record is None or snapshot.get("runId") != manifest.get("runId") or snapshot.get("assignment") != worker:
                 raise ValueError(f"assignment snapshot run/owner mismatch: {item['path']}")
             for field in ("assignedWorkKeys", "assignedSourceKeys", "assignedTargetIds", "assignedMembershipKeys", "assignedBoneSourceKeys", "assignedNerveRowIds"):
