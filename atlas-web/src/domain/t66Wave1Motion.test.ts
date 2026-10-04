@@ -130,3 +130,18 @@ test("T66 wave-1 sampled GLBs replay exact muscle morph and midline bone motion,
     action.stop();
   }
 });
+
+test("wave-1 action intent needs exact writer review; cited local spine morphs stay observation", async () => {
+  const registration = await readJson<T66Wave1Registration>("atlas-data/motion/t66-wave1-registration.json");
+  const review = await readJson<{ byActionId: Record<string, "muscle_action" | "posture_observation"> }>("atlas-data/motion/t66-motion-learning-intents.json");
+  const counts = { muscle_action: 0, posture_observation: 0 };
+  for (const selector of registration.selectors.filter(row => row.subjectKind === "muscle")) {
+    const option = projectT66Wave1MotionOptions(registration, selector.sourceSubjectKey, selector.side, review.byActionId).find(row => row.id === selector.learnerActionKey)!;
+    assert.ok(option.candidate);
+    assert.equal(option.learningIntent, review.byActionId[selector.actionId]);
+    counts[option.learningIntent as keyof typeof counts]++;
+    const unreviewed = projectT66Wave1MotionOptions(registration, selector.sourceSubjectKey, selector.side).find(row => row.id === selector.learnerActionKey)!;
+    assert.equal(unreviewed.learningIntent, "posture_observation");
+  }
+  assert.deepEqual(counts, { muscle_action: 34, posture_observation: 4 });
+});

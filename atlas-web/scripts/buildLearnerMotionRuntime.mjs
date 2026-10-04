@@ -50,6 +50,7 @@ for (const action of bundle.muscleActions ?? []) {
         label: text.label,
         text,
         sideApplicability: action.sideApplicability,
+        learningIntent: option.learningIntent,
         candidate: safeCandidate(option.candidate),
       };
       const rows = actionsBySelector.get(selector) ?? [];

@@ -7,12 +7,13 @@ import {
   playMotion,
   resetMotionPose,
   seekMotionProgress,
-  setMotionTime,
+  syncMotionPlaybackTime,
   setReducedMotionPreference,
   suspendMotionForHiddenPage,
   type MotionPlayerState,
 } from "../domain/motionPlayer";
 import type { LearnerMotionActionOption } from "../domain/motionLearning";
+import { motionActionLabel, motionLearningIntent, motionLearningTitle, motionPhaseLabel } from "../domain/atlasMotionExperience.ts";
 import { motionSubjectExplanation, selectedMotionSubjectRole } from "../domain/motionSubjectPresentation.ts";
 import { loadAnimationScene } from "../viewer/animationSceneAdapter";
 import { AnimationPlaybackController } from "../viewer/animationPlayback";
@@ -72,6 +73,8 @@ async function readMotionPackage(response: Response, signal: AbortSignal): Promi
 export function MotionLearningPanel({ actions, selectedActionId, onSelectAction, host, sourceContextKey, showActionPicker = true, muscleLayerEnabled = true, subjectKind = "muscle", subjectHidden = false }: Props) {
   const selectedAction = actions.find((action) => action.id === selectedActionId) ?? null;
   const candidate = selectedAction?.candidate ?? null;
+  const intent = motionLearningIntent(selectedAction);
+  const actionLabel = motionActionLabel(selectedAction?.label ?? "");
   const selectedSubjectRole = selectedMotionSubjectRole(candidate?.asset ?? null, sourceContextKey);
   const [state, setState] = useState<MotionPlayerState>(() => ({
     session: { status: "idle", definitionId: null, assetId: null, currentTimeSeconds: 0, playbackSpeed: 1, selectedStructureIds: [], errorMessage: null },
@@ -82,6 +85,9 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
     boundStructureIds: [],
   }));
   const [returning, setReturning] = useState(false);
+  const returningRef = useRef(false);
+  const [phase, setPhase] = useState<AnimationPlaybackController["phase"]>("rest");
+  const timePublication = useRef({ at: 0, phase: "rest" });
   const stateRef = useRef(state);
   const abortRef = useRef<AbortController | null>(null);
   const playbackRef = useRef<AnimationPlaybackController | null>(null);
@@ -131,7 +137,9 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
   useEffect(() => {
     abortRef.current?.abort();
     abortRef.current = null;
+    returningRef.current = false;
     setReturning(false);
+    setPhase("rest");
     host?.restoreSourceMotion("selection-or-action-changed");
     playbackRef.current = null;
     const current = stateRef.current;
@@ -147,6 +155,7 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
     host?.restoreSourceMotion(subjectHidden ? "selected-source-hidden" : "subject-layer-hidden");
     playbackRef.current?.dispose();
     playbackRef.current = null;
+    returningRef.current = false;
     setReturning(false);
     const current = stateRef.current;
     publish({ ...current, session: { status: "idle", definitionId: null, assetId: null, currentTimeSeconds: 0,
@@ -185,20 +194,27 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
 
       const controller = await host.attachSourceMotion(playable.asset, resource, (time, completed) => {
           const latest = stateRef.current;
-          const next = setMotionTime(latest, time);
-          publish(latest.session.status === "playing" && !completed
-            ? { ...next, session: { ...next.session, status: "playing", selectedStructureIds: [...latest.boundStructureIds] } } : next);
+          const nextPhase = playbackRef.current?.phase ?? "rest";
+          const now = performance.now();
+          const phaseChanged = nextPhase !== timePublication.current.phase;
+          // Geometry keeps its frame clock; the card needs only ten updates per second.
+          if (!completed && !phaseChanged && now - timePublication.current.at < 100) return;
+          timePublication.current = { at: now, phase: nextPhase };
+          setPhase(nextPhase);
+          publish(syncMotionPlaybackTime(latest, time, Boolean(playbackRef.current?.isPlaying) && !returningRef.current));
         }, (reason) => {
           abortRef.current?.abort();
           abortRef.current = null;
           playbackRef.current = null;
-          setReturning(false);
+          returningRef.current = false;
+    setReturning(false);
           const latest = stateRef.current;
           publish({ ...latest, session: { status: "idle", definitionId: null, assetId: null, currentTimeSeconds: 0,
             playbackSpeed: 1, selectedStructureIds: [], errorMessage: null }, durationSeconds: null,
             generation: latest.generation + 1, boundStructureIds: [] });
+          setPhase("rest");
           void reason;
-        });
+        }, { intent: motionLearningIntent(option) });
       const afterAttach = stateRef.current;
       if (abort.signal.aborted || afterAttach.generation !== begun.requestToken || afterAttach.session.status !== "loading") {
         host.restoreSourceMotion("late-motion-response");
@@ -256,19 +272,21 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
   }
 
   function toggleMotion() {
-    if (stateRef.current.session.status !== "playing") { play(); return; }
-    const player = playbackRef.current;
-    if (!player) return;
-    returnToRest();
+    // The actual clock wins over an asynchronously published card snapshot.
+    if (playbackRef.current?.isPlaying) returnToRest();
+    else play();
   }
 
   function returnToRest() {
     const player = playbackRef.current;
     if (!player) return;
+    returningRef.current = true;
     setReturning(true);
+    setPhase("return");
     publish(pauseMotion(stateRef.current));
     player.returnToRest(0.7, () => {
-      setReturning(false);
+      returningRef.current = false;
+    setReturning(false);
       host?.restoreSourceMotion("smooth-return-completed");
     });
   }
@@ -287,6 +305,7 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
     if (next === stateRef.current) return;
     playbackRef.current?.pause();
     playbackRef.current?.seek(next.session.currentTimeSeconds);
+    setPhase(playbackRef.current?.phase ?? "rest");
     publish(next);
   }
 
@@ -311,20 +330,24 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
               : "움직임으로 이해하기를 누르면 시범을 반복해서 보여 줍니다.";
 
   return <section className="motion-player" aria-label="움직임으로 이해하기" data-testid="motion-player">
-    <h4>움직임으로 이해하기</h4>
-    {!showActionPicker && selectedAction && candidate && <p className="motion-action-summary">{selectedAction.label}</p>}
-    {candidate?.definition.sourceFamilyId && <p className="quiet-note">
-      {candidate.asset.poseControl?.label} 자세에서 표면 변화를 관찰합니다. 주변 근육의 수동 변화도 포함하며 개별 근육의 활성도를 나타내지 않습니다.
-    </p>}
-    {showActionPicker && <fieldset className="motion-action-picker" aria-label="작용 선택">
-      <legend>작용 선택</legend>
+    <div className="motion-heading"><h4>{motionLearningTitle(intent)}</h4>
+      {selectedAction && <span className="motion-kind">{intent === "muscle_action" ? "작용 시범" : intent === "bone_motion" ? "관절 시범" : intent === "posture_observation" ? "주변 구조 관찰" : "글 설명"}</span>}
+    </div>
+    {selectedAction && <p className="motion-action-summary">{actionLabel}</p>}
+    {intent === "posture_observation" && <p className="quiet-note">주변 관절이 움직일 때의 모습을 보여 줍니다. 선택한 근육의 작용 시범은 아닙니다.</p>}
+    {showActionPicker && <fieldset className="motion-action-picker" aria-label="움직임 선택">
+      <legend>움직임 선택</legend>
       {actions.length ? actions.map((action) => <button
         type="button"
         key={action.id}
         aria-pressed={action.id === selectedActionId}
         onClick={() => onSelectAction(action.id)}
-      >{action.label}</button>) : <p className="quiet-note">연결된 작용 자료가 없습니다.</p>}
+      >{motionActionLabel(action.label)}{motionLearningIntent(action) === "posture_observation" && <small>주변 구조</small>}</button>) : <p className="quiet-note">연결된 작용 자료가 없습니다.</p>}
     </fieldset>}
+    {loaded && <div className="motion-phase" data-phase={phase} aria-label="현재 동작 구간">
+      <span className="motion-phase-dot"/><strong>{motionPhaseLabel(phase, actionLabel)}</strong>
+      <span>{returning ? "복원 중" : state.session.status === "playing" ? "반복 재생" : "정지"}</span>
+    </div>}
     <p className="motion-player-status" role="status" aria-live="polite">{statusText}</p>
     {state.prefersReducedMotion && available && <button type="button" onClick={loadStaticPose} disabled={!candidate || state.session.status === "loading"}>
       정지 자세 보기
@@ -361,6 +384,7 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
       />
       <output htmlFor="motion-progress">{progress}%</output>
     </div>
-    <p className="motion-player-note">{motionSubjectExplanation(subjectKind, selectedSubjectRole)} 진행 막대는 시범의 재생 위치를 나타냅니다. 힘이나 근력의 비율이 아닙니다. 버튼을 다시 누르면 반복 시범을 멈추고 처음 자세로 부드럽게 복원됩니다. 진행 막대를 조절하면 해당 자세를 유지합니다. 카메라와 보기 설정은 유지됩니다.</p>
+    <p className="motion-player-note">다시 누르면 처음 자세로 부드럽게 돌아갑니다. 진행 막대를 조절하면 고른 자세를 유지합니다.</p>
+    <details className="motion-explanation"><summary>시범 안내</summary><p>{motionSubjectExplanation(subjectKind, selectedSubjectRole)} 교육용 동작이며, 힘·활성도·개인의 정상 운동범위를 나타내지 않습니다. 카메라와 보기 설정은 유지됩니다.</p></details>
   </section>;
 }

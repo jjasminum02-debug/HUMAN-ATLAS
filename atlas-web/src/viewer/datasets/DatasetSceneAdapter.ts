@@ -13,6 +13,8 @@ import type { AnimationSceneResource } from '../animationSceneAdapter.ts';
 import type { MotionAsset } from '../../domain/motionLearning.ts';
 import { sourceGeometrySha256 } from './sourceMotionGeometry.ts';
 import type { SourceMotionHost } from './sourceMotionHost.ts';
+import { muscleActionEmphasis } from "../../domain/atlasMotionExperience.ts";
+import type { MotionLearningIntent } from '../../domain/atlasMotionExperience.ts';
 /** Dataset selection/presentation adapter; renderer, camera and lifecycle remain owned by the existing controller. */
 export class DatasetSceneAdapter implements SourceMotionHost {
     readonly scene: AnatomySceneController;
@@ -25,6 +27,9 @@ export class DatasetSceneAdapter implements SourceMotionHost {
     private dead = false;
     private contextLost = false;
     private motionPoseActive = false;
+    private readonly actionTone = new THREE.Color('#bd5047');
+    private motionPhase: AnimationPlaybackController['phase'] = 'rest';
+    private motionIntent: MotionLearningIntent = 'posture_observation';
     private notify: (p: BodyProgress) => void;
     private select: (id: string, side: string | null) => void;
     private motion: { asset: MotionAsset; resource: AnimationSceneResource; player: AnimationPlaybackController; originals: Map<string, { node: THREE.Mesh; visible: boolean }>; packageMaterials: Map<string, THREE.Material | THREE.Material[]>; contextKey: string; onInvalidated?: (reason: string) => void } | null = null;
@@ -63,8 +68,10 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             [...(view.translucentSourceKeys ?? [])].sort(), view.dim, view.observeNerves, view.highlightInnervation]);
     }
     async attachSourceMotion(asset: MotionAsset, resource: AnimationSceneResource,
-        onTimeChange?: AnimationPlaybackOptions['onTimeChange'], onInvalidated?: (reason: string) => void): Promise<AnimationPlaybackController> {
+        onTimeChange?: AnimationPlaybackOptions['onTimeChange'], onInvalidated?: (reason: string) => void,
+        presentation?: { intent: MotionLearningIntent }): Promise<AnimationPlaybackController> {
         this.restoreSourceMotion('replaced');
+        this.motionIntent = presentation?.intent ?? 'posture_observation';
         const originalNodes = new Map<string, { node: THREE.Mesh; visible: boolean }>();
         const packageMaterials = new Map<string, THREE.Material | THREE.Material[]>();
         try {
@@ -180,9 +187,20 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 this.resources.motionOverrides.add(sourceKey);
             }
             const player = new AnimationPlaybackController(resource, asset.clip.id, {
-                repeat: true, pingPong: true, onTimeChange: (time, completed) => {
+                repeat: true, pingPong: true, returnSpeed: this.motionIntent === 'muscle_action' ? 1.7 : 1,
+                onTimeChange: (time, completed) => {
                     const activePose = time > 1e-6;
-                    if (this.motionPoseActive !== activePose) { this.motionPoseActive = activePose; this.apply(); }
+                    const phase = player.phase;
+                    if (this.motionPoseActive !== activePose || this.motionPhase !== phase) {
+                        this.motionPoseActive = activePose; this.motionPhase = phase; this.apply();
+                    }
+                    if (this.motionIntent === 'muscle_action' && asset.sourceBinding?.subjectSourceKey === this.view.selectedId) {
+                        const node = this.resources.nodes.get(asset.sourceBinding.subjectSourceKey);
+                        const emphasis = muscleActionEmphasis(phase, time / player.durationSeconds);
+                        if (emphasis !== null && node?.material instanceof THREE.MeshStandardMaterial) {
+                            node.material.color.set('#a4aaa8').lerp(this.actionTone, emphasis);
+                        }
+                    }
                     onTimeChange?.(time, completed);
                 }, disposeResource: false,
                 registerUpdate: update => this.scene.addUpdate(update),
@@ -214,6 +232,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         if (!active) return;
         this.motion = null;
         this.motionPoseActive = false;
+        this.motionPhase = 'rest';
         active.player.resetPose();
         active.player.dispose();
         for (const [sourceKey, original] of active.originals) {
@@ -251,10 +270,15 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             const mode = this.view.translucentSourceKeys?.includes(key) || selected && this.view.selectedPresentation === 'translucent' ? 'translucent'
                 : selected ? 'selected' : observe && row.kind !== 'nerve' ? highlights.has(key) ? 'motorContext' : 'nerveContext'
                 : highlights.has(key) ? 'innervated' : this.view.selectedId && this.view.dim ? 'dim' : 'normal';
-            const materialKey = row.kind + ':' + mode;
+            const actionPhase = selected && row.kind === 'muscle' && this.motion && this.motionIntent === 'muscle_action'
+                && this.motion.asset.sourceBinding?.subjectSourceKey === key ? this.motionPhase : null;
+            const phaseTone = actionPhase === 'action' ? 'action' : actionPhase === 'return' ? 'return' : null;
+            const materialKey = row.kind + ':' + mode + (phaseTone ? ':' + phaseTone : '');
             let material = this.materials.get(materialKey);
             if (!material) {
                 const color = new THREE.Color(mode === 'selected' ? row.kind === 'nerve' ? '#a02c74' : '#18776d' : mode === 'innervated' || mode === 'motorContext' ? '#338fc1' : row.kind === 'nerve' ? '#b77810' : row.kind === 'bone' ? '#e7dec7' : '#b87969');
+                if (phaseTone === 'action') color.set('#bd5047');
+                else if (phaseTone === 'return') color.set('#a4aaa8');
                 if (mode === 'dim')
                     color.lerp(new THREE.Color('#e5e5dd'), .55);
                 const transparent = ['translucent', 'nerveContext', 'motorContext'].includes(mode);
@@ -277,6 +301,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             regionIds: this.view.regionIds ?? (this.view.region ? [this.view.region] : []), highlighted: [...highlights], observingNerves: observe, nerveLayer: Boolean(this.view.nerves), poseId: this.view.poseId, visible: [...this.resources.nodes].filter(([, n]) => n.visible).map(([key]) => key), selected: this.view.selectedId, bytes: q.bytes, cacheEntries: q.loaded.size, evictions: q.evictions, cancellations: q.cancellations, lateReleases: q.lateReleases, wantedChunks: [...q.wanted], pending: q.pending.size, failed: [...q.failed],
             camera: this.scene.camera.position.toArray(), calls: this.scene.renderer.info.render.calls, triangles: this.scene.renderer.info.render.triangles,
             motion: this.motion ? { assetId: this.motion.asset.id, contextKey: this.motion.contextKey,
+                learningIntent: this.motionIntent, phase: this.motionPhase,
                 surfaceCount: this.motion.originals.size, fixedCount: this.motion.asset.sourceBinding?.members.filter(m => m.role === 'fixed_structure').length } : null,
             motionBytes: this.motion?.resource.memoryEstimateBytes ?? 0, estimatedActiveBytes: q.bytes + (this.motion?.resource.memoryEstimateBytes ?? 0) });
     }

@@ -198,3 +198,10 @@ export function setReducedMotionPreference(state: MotionPlayerState, prefersRedu
   }
   return next;
 }
+
+/** The renderer clock owns repeating playback; a sampled endpoint is not a stop. */
+export function syncMotionPlaybackTime(state: MotionPlayerState, seconds: number, loopPlaying: boolean): MotionPlayerState {
+  if (!state.session.assetId || !state.durationSeconds || !Number.isFinite(seconds)) return state;
+  const next = setMotionTime(loopPlaying ? state : pauseMotion(state), seconds);
+  return loopPlaying ? { ...next, session: { ...next.session, status: "playing", selectedStructureIds: [...state.boundStructureIds] } } : next;
+}

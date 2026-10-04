@@ -295,6 +295,8 @@ export interface LearnerMotionActionOption {
   subjectIds: string[];
   /** Text applicability follows the authored action scope, independently of clip readiness. */
   sideApplicability: Laterality | null;
+  /** Educational meaning is independent of whether the selected surface has morph tracks. */
+  learningIntent?: "muscle_action" | "bone_motion" | "posture_observation" | "text_only";
   candidate: { definition: MotionDefinition; asset: MotionAsset } | null;
 }
 
@@ -344,6 +346,8 @@ export function projectLearnerMotionActionOptions(
       text,
       subjectIds: action.subjectIds.length ? [...action.subjectIds] : [...(action.sourceSubjectKeys ?? [])],
       sideApplicability: action.sideApplicability,
+      learningIntent: compatible.length !== 1 ? "text_only" : action.subjectKind === "bone" ? "bone_motion"
+        : action.sourceFamilyId ? "posture_observation" : "muscle_action",
       candidate: compatible.length === 1 ? compatible[0] : null,
     }];
   });

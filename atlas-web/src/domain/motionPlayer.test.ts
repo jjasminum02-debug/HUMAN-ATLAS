@@ -13,6 +13,7 @@ import {
   selectMotionAction,
   setMotionSpeed,
   setMotionTime,
+  syncMotionPlaybackTime,
   setReducedMotionPreference,
   suspendMotionForHiddenPage,
 } from "./motionPlayer.ts";
@@ -146,4 +147,17 @@ test("hiding the page cancels a pending load and clears active playback emphasis
   assert.equal(hiddenPlaying.session.status, "paused");
   assert.deepEqual(hiddenPlaying.session.selectedStructureIds, []);
   assert.equal(hiddenPlaying.session.assetId, "asset-1");
+});
+
+test("the renderer loop stays playing at exact endpoints and return/scrub cannot restart it", () => {
+  const playing = playMotion(readyState().ready);
+  const sampledEnd = syncMotionPlaybackTime(playing, 2, true);
+  assert.equal(sampledEnd.session.status, "playing");
+  assert.equal(syncMotionPlaybackTime(sampledEnd, 1, true).session.status, "playing");
+  const stalePausedUi = pauseMotion(sampledEnd);
+  assert.equal(syncMotionPlaybackTime(stalePausedUi, 1, true).session.status, "playing");
+  const returning = syncMotionPlaybackTime(sampledEnd, 1, false);
+  assert.equal(returning.session.status, "paused");
+  assert.deepEqual(returning.session.selectedStructureIds, []);
+  assert.equal(syncMotionPlaybackTime(returning, 0, false).session.status, "ready");
 });

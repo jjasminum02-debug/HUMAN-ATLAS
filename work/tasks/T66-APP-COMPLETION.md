@@ -59,3 +59,10 @@ source-only family는 명시적인 `source_family_bound` 계약으로 정확한 
 - 작용 카드와 자세 관찰을 구분한다. Supinator의 원문 방향 충돌은 미해결, 승모근 작용은 전체군 범위로 유지하며 세부 머리에 상속하지 않는다.
 - source-only, 공개 재배포 held, humanReview `not_performed`, 새 HA canonical binding 0을 유지한다. 전체 T66은 계속 `in_progress / partial`, 부모 `nextUnit=author-and-integrate-normal-motion-bone-and-nerve`다.
 - 실제 browser, regression, schema, runtime projection, typecheck, build 및 입력/원본 보존 결과: `work/evidence/T66/serial-completion-2026-10-02/unit-03/`.
+
+
+## 2026-10-05 — 사용자 목표: 한국어 Atlas식 정상 작용 학습
+
+Visible Body 공식 muscle-action 흐름을 참고하여 현재 근육 작용 목록/단일 scene 재생을 수정했다. 전 근육 원장과 authoring 책임을 유지하며 동작·joint family를 관련 근육/측/part에 연결하는 구조로 확장한다. 주변 관절 자세 관찰을 선택 근육의 작용으로 표시하지 않는다. 원문 좌우/기하·동작 결과를 확인하지 않은 generic morph와 source 후보를 실제 작용으로 승격하지 않는다. 현재 목록13 라벨/35 연결/19 표면은 전신 작용 완료가 아니다.
+
+단일 CTA, 실제 clock 기준 toggle, 동작 강조·복귀 fade/1.7배 reset, scrub 유지와 숨김/layer/카메라 복원을 보존한다. 전체0-gap/전수PNG/생리 실측·사람 승인 gate는 도입하지 않는다. D manifest 소유 충돌 및 E runner의 실제 preflight 모순은 anatomy 부족과 별도로 writer가 해결해야 한다. 새 UI의390/1024/1440은 요청값이 아닌 실제 DOM 크기로 검증한다. 이번 전체 판정partial 및 기존 nextUnit을 유지한다. 근거와 다음 수동 재개는 work/evidence/T66/atlas-action-experience-2026-10-04/REPORT.md 및 NEXT-T66-ATLAS-ACTIONS.txt다.

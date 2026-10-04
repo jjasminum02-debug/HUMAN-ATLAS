@@ -15,6 +15,7 @@ export interface T66Wave1Selector {
   learnerActionKey: string;
   label: string;
   explanation: string;
+  evidenceRefs?: string[];
 }
 
 export interface T66Wave1Package {
@@ -54,6 +55,7 @@ export function projectT66Wave1MotionOptions(
   registration: T66Wave1Registration,
   sourceKey: string,
   selectedSide?: string | null,
+  intentByAction: Readonly<Record<string, LearnerMotionActionOption["learningIntent"]>> = {},
 ): LearnerMotionActionOption[] {
   if (registration.schemaVersion !== "t66-wave1-source-motion-registration-v2"
     || registration.authority.sourceOnly !== true
@@ -123,5 +125,13 @@ export function projectT66Wave1MotionOptions(
     motionAssets.push(asset);
   }
   const bundle: MotionLearningBundle = { schemaVersion: "1.0.0", revision: registration.revision, muscleActions, motionDefinitions, motionAssets };
-  return projectLearnerMotionActionOptions(sourceKey, bundle, [], (selectedSide as Laterality | null | undefined) ?? null);
+  return projectLearnerMotionActionOptions(sourceKey, bundle, [], (selectedSide as Laterality | null | undefined) ?? null).map<LearnerMotionActionOption>(option => {
+    const selector = selectors.find(row => row.learnerActionKey === option.id);
+    const member = option.candidate?.asset.sourceBinding?.members.find(row => row.sourceKey === sourceKey);
+    // Geometry and citation presence alone never establish action intent.
+    // Only the writer-reviewed exact selector can teach a muscle action.
+    return { ...option, learningIntent: selector?.subjectKind === "bone" ? "bone_motion"
+      : member?.role === "deforming_muscle_surface" && selector && intentByAction[selector.actionId] === "muscle_action"
+        ? "muscle_action" : "posture_observation" };
+  });
 }

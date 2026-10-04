@@ -1,5 +1,6 @@
 import learnerCardRuntime from "../../../atlas-data/terminology/learner-card-runtime.json";
 import learnerMotionRuntime from "./learnerMotionRuntime.generated.ts";
+import t66MotionIntents from "../../../atlas-data/motion/t66-motion-learning-intents.json";
 import t66Wave1Registration from "../../../atlas-data/motion/t66-wave1-registration.json";
 import { displayTerms, termText, type PilotCatalog } from "./catalog";
 import { learnerNameProjection, learnerSearchEntry, learnerVisibleTerms, mergeLearningConcepts, searchEntries, type SearchEntry } from "../domain/search";
@@ -52,6 +53,7 @@ type LearnerMotionRuntime = {
     label: string;
     text: LearnerActionText;
     sideApplicability: "left" | "right" | "bilateral" | "midline" | "not_applicable";
+    learningIntent?: LearnerMotionActionOption["learningIntent"];
     candidate: LearnerMotionActionOption["candidate"];
   }>>;
 };
@@ -90,7 +92,7 @@ export function motionActionOptionsForLearner(conceptId: string | null, selected
   const projected = (selector ? motionRuntime.actions[selector] ?? [] : []).filter(row =>
     !row.candidate || !sourceKey || row.candidate.asset.sourceBinding?.subjectSourceKey === sourceKey);
   const wave1Options = sourceKey
-    ? projectT66Wave1MotionOptions(t66Wave1Motion, sourceKey, selectedSide as Laterality | null | undefined)
+    ? projectT66Wave1MotionOptions(t66Wave1Motion, sourceKey, selectedSide as Laterality | null | undefined, t66MotionIntents.byActionId as Record<string, LearnerMotionActionOption["learningIntent"]>)
     : [];
   const displayRows = cardRuntime.actions.filter((row) => row.conceptId === conceptId
     && learnerActionAppliesToSide(row.sideApplicability, selectedSide)).map((row) => {
@@ -99,6 +101,7 @@ export function motionActionOptionsForLearner(conceptId: string | null, selected
       label: row.label,
       text: { label: row.label, explanation: row.explanation },
       sideApplicability: row.sideApplicability,
+      learningIntent: "muscle_action" as const,
       candidate: resolveLearnerMotionCandidate(row.key, selectedSide, projected),
     };
   });
@@ -110,6 +113,7 @@ export function motionActionOptionsForLearner(conceptId: string | null, selected
     label: row.label,
     text: { label: row.text.label, explanation: row.text.explanation },
     sideApplicability: row.sideApplicability === "left" || row.sideApplicability === "right" ? row.sideApplicability : null,
+    learningIntent: row.learningIntent ?? "posture_observation" as const,
     candidate: row.candidate,
   }));
   const byId = new Map([...sourceRows, ...wave1Options].map(row => [row.id, row]));

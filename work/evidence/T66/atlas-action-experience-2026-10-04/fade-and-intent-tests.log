@@ -1,0 +1,24 @@
+✔ a selected muscle's verified action wins over an earlier playable surrounding pose (0.307708ms)
+✔ observation wording is cleaned without expanding a partial or initial movement range (0.140625ms)
+✔ the action library excludes contextual poses and unavailable actions and retains exact sides (0.303292ms)
+✔ action emphasis fades smoothly during reset without treating a held pose as activation (0.054333ms)
+✔ T66 wave-1 normalized selectors project through the shared source-motion contract (15.8995ms)
+✔ T66 wave-1 sampled GLBs replay exact muscle morph and midline bone motion, then return to rest (13.069ms)
+✔ wave-1 action intent needs exact writer review; cited local spine morphs stay observation (6.46775ms)
+✔ single RAF loop updates speed without making a second chain and ignores late callbacks (0.606292ms)
+✔ repeating playback wraps continuously and reset restores the rest pose (1.011167ms)
+✔ T22 adapter scene is driven by one mixer clock; pose reset does not reset camera (0.217ms)
+✔ same-scene playback uses the host clock, creates no RAF chain, and leaves resource disposal to the host (0.122083ms)
+✔ clip end clamps at the final pose and cancels its RAF chain (0.133ms)
+✔ missing clip fails closed and releases the imported scene (0.16025ms)
+✔ one-toggle gesture reverses at its endpoint and eases to exact rest on the same clock (0.144416ms)
+✔ return cancellation and disposal cannot invoke a stale rest callback (0.088875ms)
+✔ an action cycle has a faster neutral return, preserves poses and uses one clock (0.12425ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 110.827709

@@ -215,3 +215,27 @@ test("return cancellation and disposal cannot invoke a stale rest callback", () 
   assert.equal(restored, 0);
   assert.equal(frames.pending.size, 0);
 });
+
+test("an action cycle has a faster neutral return, preserves poses and uses one clock", () => {
+  const frames = new FakeFrames();
+  const resource = syntheticResource({ count: 0 });
+  const player = new AnimationPlaybackController(resource, "SyntheticMotion", { scheduler: frames, repeat: true, pingPong: true, returnSpeed: 2 });
+  assert.equal(player.phase, "rest");
+  player.play(); frames.frame(0); frames.frame(1000);
+  assert.equal(player.phase, "return");
+  assert.equal(player.currentTime, 1);
+  frames.frame(1250);
+  assert.ok(Math.abs(player.currentTime - .5) < 1e-6);
+  frames.frame(1500);
+  assert.equal(player.phase, "action");
+  assert.equal(player.currentTime, 0);
+  assert.equal(frames.pending.size, 1);
+  player.pause(); player.seek(.6);
+  assert.equal(player.phase, "held");
+  player.returnToRest(.7); assert.equal(player.phase, "return");
+  frames.frame(2000); frames.frame(2700);
+  assert.equal(player.phase, "rest");
+  assert.equal(player.currentTime, 0);
+  assert.equal(frames.pending.size, 0);
+  player.dispose();
+});

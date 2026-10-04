@@ -3238,7 +3238,11 @@
             "sourceOnly": true,
             "localSelection": "technical_only",
             "publicRedistribution": "held",
-            "humanReview": "not_performed"
+            "humanReview": "not_performed",
+            "atlasActionLibraryLabelEntries": 13,
+            "atlasPlayableSourceActionBindings": 35,
+            "atlasQualitativeOrHistoricalActionSourceSurfaces": 19,
+            "newMotionAssetsThisCorrection": 0
           },
           "unresolvedProductBlockers": [
             "W1-A: 92 source-action rows remain blocked by concrete authoring/geometry engineering failures; 54 further rows are source/relation gaps.",
@@ -3257,7 +3261,11 @@
             "work/evidence/T66/parallel-completion-2026-10-03/integration-final/candidate-asset-hash-audit.json",
             "work/evidence/T66/parallel-completion-2026-10-03/integration-final/final-validation.json",
             "work/evidence/T66/parallel-completion-2026-10-03/integration-final/final-browser-validation.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-final/region-navigation-validation.json"
+            "work/evidence/T66/parallel-completion-2026-10-03/integration-final/region-navigation-validation.json",
+            "work/evidence/T66/atlas-action-experience-2026-10-04/REPORT.md",
+            "work/evidence/T66/atlas-action-experience-2026-10-04/browser-validation.json",
+            "work/evidence/T66/atlas-action-experience-2026-10-04/checks.json",
+            "work/evidence/T66/atlas-action-experience-2026-10-04/intent-review.json"
           ]
         },
         "wholeMuscleMotionGoal": {
@@ -3792,6 +3800,39 @@
           "canonicalBindingAdded": 0,
           "fullTargetExtentApprovalAdded": 0,
           "evidence": "work/evidence/T66/parallel-completion-2026-10-03/integration-final/REPORT.md"
+        },
+        "atlasActionExperience2026-10-05": {
+          "status": "implemented_verified_at_observed_825px",
+          "contractRevision": "app-completion-2026-10-01",
+          "acceptanceScope": "registered source-scoped muscle-action library and shared-clock presentation; surrounding posture observations remain distinct",
+          "productReadiness": "partial_with_unresolved_motion_engineering",
+          "contentCompleteness": "partial",
+          "knownContentGaps": {
+            "actionLabelEntries": 13,
+            "sourceActionBindings": 35,
+            "sourceMuscleSurfaces": 19,
+            "newMotionAssets": 0
+          },
+          "remainingVerification": [
+            "new library/panel at actual 390/1024/1440; requested viewport overrides did not apply"
+          ],
+          "unresolvedProductBlockers": [
+            "W1-A: 92 source-action rows remain blocked by concrete authoring/geometry engineering failures; 54 further rows are source/relation gaps.",
+            "W1-B: 29 generated candidates fail geometry, source identity, or target/action relation checks and remain unregistered.",
+            "W1-C: 2 respiratory candidates remain blocked by topology/contact QC.",
+            "W2-D: all 16 work keys conflict with the frozen manifest owner; 10 jaw rows have actual Bucinator edge/area deformation defects, with additional functional-context/action rows unresolved.",
+            "W2-E: 18 source-local candidate deformations introduce new bone containment; all 56 candidates have action-outcome QC incomplete (0 passed), so none are registrable."
+          ],
+          "evidence": [
+            "work/evidence/T66/atlas-action-experience-2026-10-04/REPORT.md",
+            "work/evidence/T66/atlas-action-experience-2026-10-04/browser-validation.json",
+            "work/evidence/T66/atlas-action-experience-2026-10-04/checks.json",
+            "work/evidence/T66/atlas-action-experience-2026-10-04/intent-review.json"
+          ],
+          "nextManualPrompt": "work/evidence/T66/atlas-action-experience-2026-10-04/NEXT-T66-ATLAS-ACTIONS.txt",
+          "sourceOnly": true,
+          "publicRedistribution": "held",
+          "humanReview": "not_performed"
         }
       },
       "report": "work/reports/T66.md",
@@ -3822,7 +3863,7 @@
       "scopeGoal": "all_declared_muscles_without_initial_shortlist",
       "planningAmendment": "user-normal-motion-all-muscles-bones-nerve-2026-10-02",
       "scopeRevision": "t66-source-family-normal-motion-r13",
-      "productReadiness": "partial_expansion_not_ready",
+      "productReadiness": "partial_with_unresolved_motion_engineering",
       "contentCompleteness": "partial",
       "knownContentGaps": {
         "muscleTargetCount": 429,
@@ -3830,35 +3871,72 @@
         "sourceConceptCount": 232,
         "sourceSurfaceCount": 462,
         "primaryPlayableMuscleSourceSurfaces": 1,
-        "registeredBoneSourceInstances": 150,
+        "sourcePoseObservationSurfaces": 129,
+        "historicalMainFunctionSourceClipSurfaces": 1,
+        "qualitativeActionDemonstrationSelectorRows": 34,
+        "qualitativeActionDemonstrationGlbAssets": 26,
+        "passivePostureObservationSelectorRows": 4,
+        "passivePostureObservationGlbAssets": 2,
+        "muscleSourceActionRows": 311,
+        "uniqueMuscleSourceSurfacesWithMotionOrObservation": 129,
+        "uniqueSourceDerivedMotionGlbUris": 61,
+        "uniqueSourceDerivedMotionGlbSha256": 61,
+        "uniqueRuntimeMotionGlbUrisIncludingHistoricalT24Candidate": 62,
+        "uniqueRuntimeMotionGlbSha256IncludingHistoricalT24Candidate": 62,
+        "registeredBoneSourceInstancesWithFamilyRoles": 166,
         "eligibleBoneSourceInstances": 210,
-        "registeredNativeNerveStaticSurfaces": 195,
-        "nativeNerveLabelGroups": 98,
+        "independentAnatomicalBoneCount": null,
+        "registeredBoneFamilyBindingRows": 1581,
+        "independentBoneDofsAdded": 0,
+        "nativeNerveStaticSurfaces": 195,
+        "nativeNerveLabelGroupsNotConcepts": 98,
         "independentNerveConceptCount": null,
         "confirmedEntrapmentTextGroups": 5,
         "abstractIndexEntrapmentGroups": 2,
         "surroundingAnatomyOnlyGroups": 1,
         "observedModelOnlyCourseGroups": 90,
+        "wave1FValidatedNerveTextWorkKeys": 30,
+        "wave1FMissingNerveTextWorkKeys": 68,
         "dynamicNervePoses": 0,
         "entrapmentCoordinateBindings": 0,
-        "sourcePoseObservationSurfaces": 107,
-        "mainFunctionSourceClipSurfaces": 1,
-        "registeredBoneFamilyBindings": 865,
-        "uniquePlayableGLBPackages": 33,
-        "newRegisteredFamilyPackages": 32,
-        "remainingFamilyCandidates": 0,
-        "geometryOrContactRejectedCandidates": 0,
-        "kneeNormalContextPendingCandidates": 0,
-        "muscleActionSourceRows": 273,
-        "boneFamilyBindingRows": 865,
-        "uniqueSourceDerivedMotionUris": 33,
-        "uniqueRuntimeMotionUris": 34
+        "newFullTargetExtentApprovals": 0,
+        "wave1PackageTemplatesNotAssets": 32,
+        "wave1UniqueActualGlbAssets": 28,
+        "wave1SelectorRelationsNotConcepts": 754,
+        "wave2DCandidateGlbsNotRegistered": 22,
+        "wave2ECandidateGlbsNotRegistered": 56,
+        "wave2EGeometryQcPassed": 38,
+        "wave2EGeometryQcFailed": 18,
+        "wave2EActionOutcomeQcPassed": 0,
+        "deferredWave2TargetRows": 276,
+        "deferredWave2MembershipRows": 290,
+        "deferredWave2SourceRows": 60,
+        "deferredWave2BoneContextRows": 21,
+        "canonicalHaBindings": 130,
+        "historical163Classification": {
+          "6": 6,
+          "20": 20,
+          "135": 135,
+          "2": 2
+        },
+        "sourceOnly": true,
+        "localSelection": "technical_only",
+        "publicRedistribution": "held",
+        "humanReview": "not_performed",
+        "atlasActionLibraryLabelEntries": 13,
+        "atlasPlayableSourceActionBindings": 35,
+        "atlasQualitativeOrHistoricalActionSourceSurfaces": 19,
+        "newMotionAssetsThisCorrection": 0
       },
       "unresolvedProductBlockers": [
-        "T66-B3"
+        "W1-A: 92 source-action rows remain blocked by concrete authoring/geometry engineering failures; 54 further rows are source/relation gaps.",
+        "W1-B: 29 generated candidates fail geometry, source identity, or target/action relation checks and remain unregistered.",
+        "W1-C: 2 respiratory candidates remain blocked by topology/contact QC.",
+        "W2-D: all 16 work keys conflict with the frozen manifest owner; 10 jaw rows have actual Bucinator edge/area deformation defects, with additional functional-context/action rows unresolved.",
+        "W2-E: 18 source-local candidate deformations introduce new bone containment; all 56 candidates have action-outcome QC incomplete (0 passed), so none are registrable."
       ],
-      "currentInternalUnit": "03",
-      "currentInternalUnitStatus": "unit 03 result preserved; wave-1 parallel preparation worker-ready; manual A/B/C/F candidates not launched"
+      "currentInternalUnit": "atlas-action-experience",
+      "currentInternalUnitStatus": "action library and playback correction implemented; whole-motion engineering responsibilities remain partial"
     },
     "T85": {
       "title": "전체 지원 움직임·통합 앱 품질 감사",

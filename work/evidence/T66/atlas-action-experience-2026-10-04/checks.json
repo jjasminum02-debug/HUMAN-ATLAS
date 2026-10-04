@@ -1,0 +1,194 @@
+{
+  "runnerLimitation": "npm/tsc/vite bare commands absent on host PATH; installed local entrypoints used. Passed earlier checks were retained, not rerun.",
+  "checks": [
+    {
+      "command": "node --experimental-strip-types scripts/buildLearnerMotionRuntime.mjs",
+      "exitCode": 0,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/check-00.log"
+    },
+    {
+      "command": "node --experimental-strip-types --test src/domain/atlasMotionExperience.test.ts src/domain/motionLearning.test.ts src/domain/motionPlayer.test.ts src/domain/t66Wave1Motion.test.ts src/data/learning.test.ts src/viewer/animationPlayback.test.ts src/viewer/datasets/regionalContext.test.ts",
+      "exitCode": 0,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/check-01.log"
+    },
+    {
+      "command": "node --experimental-strip-types scripts/buildLearnerCardRuntime.mjs --check",
+      "exitCode": 0,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/check-02.log"
+    },
+    {
+      "command": "node --experimental-strip-types scripts/buildLearnerMotionRuntime.mjs --check",
+      "exitCode": 0,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/check-03.log"
+    },
+    {
+      "command": "python3 scripts/validate-learning-content.py",
+      "exitCode": 0,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/check-04.log"
+    },
+    {
+      "command": "python3 ../atlas-data/schemas/validate_ai_evidence.py --check",
+      "exitCode": 0,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/check-05.log"
+    },
+    {
+      "command": "python3 ../atlas-data/schemas/validate_bone_name_overlay.py --check",
+      "exitCode": 0,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/check-06.log"
+    },
+    {
+      "command": "python3 ../atlas-data/schemas/validate_motion_learning.py --check",
+      "exitCode": 0,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/check-07.log"
+    },
+    {
+      "command": "python3 ../atlas-data/schemas/validate_motion_asset_sources.py",
+      "exitCode": 0,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/check-08.log"
+    },
+    {
+      "command": "python3 ../work/tools/validate_t83_function_content.py --validate-only",
+      "exitCode": 0,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/check-09.log"
+    },
+    {
+      "command": "node scripts/check-scene-decoders.mjs",
+      "exitCode": 0,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/check-10.log"
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc -b",
+      "exitCode": 0,
+      "seconds": 9.443,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/check-11.log"
+    },
+    {
+      "command": "node node_modules/vite/bin/vite.js build",
+      "exitCode": 0,
+      "seconds": 0.738,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/check-12.log"
+    },
+    {
+      "command": "node scripts/auditLearnerCardDistribution.mjs --check",
+      "exitCode": 0,
+      "seconds": 0.199,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/check-13.log"
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "--test",
+        "src/domain/atlasMotionExperience.test.ts",
+        "src/domain/t66Wave1Motion.test.ts",
+        "src/viewer/animationPlayback.test.ts"
+      ],
+      "exitCode": 0,
+      "seconds": 0.138,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/fade-and-intent-tests.log"
+    },
+    {
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "-b",
+        "--pretty",
+        "false"
+      ],
+      "exitCode": 0,
+      "seconds": 9.207,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/final-typecheck.log"
+    },
+    {
+      "command": [
+        "node",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.696,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/final-build.log"
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "--test",
+        "src/domain/atlasMotionExperience.test.ts",
+        "src/domain/motionLearning.test.ts",
+        "src/domain/motionPlayer.test.ts",
+        "src/domain/t66Wave1Motion.test.ts",
+        "src/data/learning.test.ts",
+        "src/viewer/animationPlayback.test.ts",
+        "src/viewer/datasets/regionalContext.test.ts"
+      ],
+      "exitCode": 0,
+      "seconds": 0.591,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/final-related-regression.log"
+    },
+    {
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "-b",
+        "--pretty",
+        "false"
+      ],
+      "exitCode": 0,
+      "seconds": 8.963,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/final-typecheck-r2.log"
+    },
+    {
+      "command": [
+        "node",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.716,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/final-build-r2.log"
+    },
+    {
+      "command": [
+        "node",
+        "scripts/auditLearnerCardDistribution.mjs",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 0.198,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/final-distribution-r2.log"
+    },
+    {
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "-b",
+        "--pretty",
+        "false"
+      ],
+      "exitCode": 0,
+      "seconds": 9.183,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/library-layout-typecheck.log"
+    },
+    {
+      "command": [
+        "node",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.706,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/library-layout-build.log"
+    },
+    {
+      "command": [
+        "node",
+        "scripts/auditLearnerCardDistribution.mjs",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 0.199,
+      "log": "work/evidence/T66/atlas-action-experience-2026-10-04/library-layout-distribution.log"
+    }
+  ]
+}

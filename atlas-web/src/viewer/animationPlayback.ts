@@ -79,6 +79,8 @@ export interface AnimationPlaybackOptions {
   repeat?: boolean;
   /** Repeated educational gestures return smoothly instead of jumping at the clip boundary. */
   pingPong?: boolean;
+  /** Return is a visual reset, not the opposing muscle action. */
+  returnSpeed?: number;
   /** Use the existing anatomy renderer's frame clock instead of creating another RAF chain. */
   registerUpdate?: (update: (deltaSeconds: number) => void) => () => void;
   /** Same-scene hosts own the imported GLTF resource and restore their nodes before disposal. */
@@ -138,6 +140,11 @@ export class AnimationPlaybackController {
 
   get currentTime(): number { return this.currentTimeSeconds; }
   get isPlaying(): boolean { return this.loop?.isRunning ?? this.sharedPlaying; }
+  get phase(): "action" | "return" | "rest" | "held" {
+    if (this.returning) return "return";
+    if (!this.isPlaying) return this.currentTimeSeconds <= 1e-6 ? "rest" : "held";
+    return this.direction > 0 ? "action" : "return";
+  }
 
   play(speed = 1): void {
     if (this.disposed) return;
@@ -221,11 +228,13 @@ export class AnimationPlaybackController {
       return false;
     }
     if (this.options.repeat && this.options.pingPong) {
-      const period = 2 * this.durationSeconds;
-      const phase = (this.direction > 0 ? this.currentTimeSeconds : period - this.currentTimeSeconds) + Math.max(0, deltaSeconds);
+      const returnSpeed = Number.isFinite(this.options.returnSpeed) && this.options.returnSpeed! > 0 ? this.options.returnSpeed! : 1;
+      const period = this.durationSeconds + this.durationSeconds / returnSpeed;
+      const phase = (this.direction > 0 ? this.currentTimeSeconds
+        : this.durationSeconds + (this.durationSeconds - this.currentTimeSeconds) / returnSpeed) + Math.max(0, deltaSeconds);
       const wrapped = phase % period;
       this.direction = wrapped < this.durationSeconds ? 1 : -1;
-      this.seek(wrapped <= this.durationSeconds ? wrapped : period - wrapped);
+      this.seek(wrapped <= this.durationSeconds ? wrapped : this.durationSeconds - (wrapped - this.durationSeconds) * returnSpeed);
       return true;
     }
     if (deltaSeconds > 0) this.mixer.update(deltaSeconds);
