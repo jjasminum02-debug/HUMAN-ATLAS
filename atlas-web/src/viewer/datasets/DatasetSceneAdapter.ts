@@ -65,7 +65,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
     private motionContextKey(view: BodyView): string {
         return JSON.stringify([view.regionIds ?? (view.region ? [view.region] : []), view.selectedId, view.bones, view.muscles,
             view.nerves, view.poseId, view.isolate, view.selectedPresentation, [...(view.hiddenSourceKeys ?? [])].sort(),
-            [...(view.translucentSourceKeys ?? [])].sort(), view.dim, view.observeNerves, view.highlightInnervation]);
+            [...(view.translucentSourceKeys ?? [])].sort(), view.dim, view.observeNerves, view.highlightInnervation, view.nerveConceptMuscleKeys]);
     }
     async attachSourceMotion(asset: MotionAsset, resource: AnimationSceneResource,
         onTimeChange?: AnimationPlaybackOptions['onTimeChange'], onInvalidated?: (reason: string) => void,
@@ -276,14 +276,14 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             const materialKey = row.kind + ':' + mode + (phaseTone ? ':' + phaseTone : '');
             let material = this.materials.get(materialKey);
             if (!material) {
-                const color = new THREE.Color(mode === 'selected' ? row.kind === 'nerve' ? '#a02c74' : '#18776d' : mode === 'innervated' || mode === 'motorContext' ? '#338fc1' : row.kind === 'nerve' ? '#b77810' : row.kind === 'bone' ? '#e7dec7' : '#b87969');
+                const color = new THREE.Color(mode === 'selected' ? row.kind === 'nerve' ? '#208b3a' : '#18776d' : mode === 'innervated' || mode === 'motorContext' ? '#338fc1' : row.kind === 'nerve' ? '#d7ac20' : row.kind === 'bone' ? '#e7dec7' : '#b87969');
                 if (phaseTone === 'action') color.set('#bd5047');
                 else if (phaseTone === 'return') color.set('#a4aaa8');
-                if (mode === 'dim')
+                if (mode === 'dim' && row.kind !== 'nerve')
                     color.lerp(new THREE.Color('#e5e5dd'), .55);
                 const transparent = ['translucent', 'nerveContext', 'motorContext'].includes(mode);
                 material = new THREE.MeshStandardMaterial({ color, roughness: .76, transparent,
-                    opacity: mode === 'nerveContext' ? .12 : mode === 'motorContext' ? .28 : mode === 'translucent' ? .3 : 1,
+                    opacity: mode === 'nerveContext' ? .12 : mode === 'motorContext' ? .82 : mode === 'translucent' ? .3 : 1,
                     depthWrite: !transparent, depthTest: true,
                     emissive: row.kind === 'nerve' ? color : '#000000', emissiveIntensity: row.kind === 'nerve' ? .22 : 0 });
                 this.materials.set(materialKey, material);

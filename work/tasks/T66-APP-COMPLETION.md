@@ -78,3 +78,10 @@ Visible Body 공식 muscle-action 흐름을 참고하여 현재 근육 작용 �
 - action 학습 지표는 13 label / 35 exact source-action links / 19 source surfaces다. 311 source-action rows는 원장 행 수이지 서로 다른 작용 311개가 아니다. 주변 자세를 선택 근육의 작용으로 승격하지 않았다.
 - runner/payload 계약 positive/negative fixture 14건과 기존 protocol regression 8건 통과, D/E 실제 preflight 통과, E aggregate index preflight는 위 hash 불일치로 예상된 실패다. 이 변경은 writer 도구/evidence만 건드렸으므로 학습 runtime/브라우저를 다시 실행하지 않았다. 기존 action UI 증거의 실측 viewport는 825×807이고, 390/1024/1440은 이 실행에서 통과로 주장하지 않는다.
 - T66은 `in_progress / partial`, 부모 `nextUnit=author-and-integrate-normal-motion-bone-and-nerve` 유지다. W1-A/B/C, unit03 및 D/E 실제 제작/연결 차단이 남으므로 T85 인계를 하지 않는다. source-only, local selection, public rights `held`, humanReview `not_performed`, HA130, 542/563/12, 역사 163 분류 및 기존 source/WIP를 유지한다.
+
+
+## 2026-10-05 최신 사용자 개정 — 우선7근육 완성 후 점진 확장
+
+2026-10-05 사용자 개정: 우선7근육군(앞정강근·대흉근·견갑거근·대퇴직근·복직근·외복사근·능형근)의 대표 작용을 양측 available source/part에서 실제 제작·등록·검증하고 현재 지원 신경 주행/지배·관련근육 학습 흐름을 보완한다. 전체 원장·기존 지원 기능과 확장 backlog는 보존한다.
+
+현재 T66 record의 priority-muscle-atlas-2026-10-05 acceptanceContract가 과거 전수 제작 가능 package 일괄완료 gate보다 우선한다. 범위 밖 failed engineering은 별도 deferred backlog로 원래 실패 상태를 보존한다. 실제 지원된 기존 기능의 회귀와 우선 근육의 engineering 미완은 해결해야 한다. 신규 pass는 마지막 통합 실제 검증 후만 기록한다. 현재 partial/같은nextUnit을 유지한다. 이번 신경 표시 수정과 실측 검증은 work/evidence/T66/nerve-and-priority-review-2026-10-05/REPORT.md를 참조한다. 새 수동 프롬프트 순서는 work/plans/t66-priority-atlas-2026-10-05/README.md다.

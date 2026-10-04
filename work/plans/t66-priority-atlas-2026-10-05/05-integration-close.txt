@@ -1,0 +1,18 @@
+HUMAN ATLAS에서 T66의 아래 내부 단계만 수행해라. 담당 Luna Max · 현재 대화 직접 구현.
+
+AGENTS.md, work/EXECUTION.json, work/product-acceptance.json, T66 현재 spec, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/plans/t66-priority-atlas-2026-10-05/README.md, work/evidence/T66/nerve-and-priority-review-2026-10-05/REPORT.md와 이번 책임의 실제 선행 증거를 읽어라.
+최신 사용자 개정: 전신 애니메이션 일괄 완성 대신 앞정강근·대흉근·견갑거근·대퇴직근·복직근·외복사근·능형근을 우선 완성하고 하나씩 확장한다. 전체 원장은 보존하되, 범위 밖 턱/얼굴/호흡 등 후보 수리와 E proposals hash 복구를 이 우선 범위의 gate로 만들지 않는다. 이들은 자료 부족이 아니라 별도 deferred engineering backlog로 유지한다. 기존 등록된 기능의 실제 회귀는 해결한다.
+542/563/12, 근육429/447/232 source concepts/462 surfaces, HA130·역사163(6/20/135/2), 원본/source-cache/OpenSim_Models/T13/WIP를 보존한다. source-only, 로컬 선택, humanReview=not_performed, public rights held를 별개로 유지한다. 새 task/thread/agent/자동 병렬/다음 단계 자동 실행/push/배포/병리 editor/진단·치료·자침은 금지한다.
+단일 scene/renderer/camera/controller/frame clock 및 기존 공유 player를 사용한다. CTA는 움직임으로 이해하기 하나: 클릭 반복 왕복, 재클릭 smooth rest. scrub·reduced-motion·숨김·layer-off·좌우·뒤앞·취소·복원을 유지한다. 기본 slow/pause/reset을 복구하지 않는다. 이미 +30%인 T59 clip을 다시 확대하지 않는다.
+실제 원본 표면과 정성적 작용·부착 근거로 authored masks/weights/pivot/trajectory/correctives를 작성하는 것은 구현 책임이다. 이를 source 실측 좌표/정상 ROM/활성도·힘으로 포장하지 않는다. 단순 scale/색/선 변화로 근육 표면 변형을 대체하지 않는다. native rig 부재를 작업 미수행 사유로 끝내지 않는다. 실제 자료/관계 부족은 범위별 근거로 남긴다. 작용과 수동 자세를 분리하며 단순 라벨/learningIntent 변경만으로 승격하지 않는다.
+이미 통과한 동일 입력 QC/근거는 의존성 영향 분석 후 재사용한다. 변경된 geometry는 emitted GLB의 실제 key/중간 보간·frame/side/관통/접촉/부착 문맥/동작 결과를 검증한다. 관련 회귀와 실제 UI를 수행하고 학생 화면에 task/source/evidence/내부 ID를 넣지 않는다. 실측 viewport 크기를 기록하고 요청 크기나 CSS390을 실기기로 부르지 않는다.
+이번 단계의 report/evidence를 실제 결과로 남기고 T66 소유 progress만 갱신한다. 부모 T66 completed/passed는 마지막 통합 단계에서 필수 범위가 실제 통과했을 때만 판정한다. python3 work/tools/sync_execution.py 및 --check, 소유 변경만 선별 로컬 커밋 후 멈춘다. 다음 파일을 안내하되 자동 실행하지 않는다.
+
+이번 책임: 앞선 네 단계 결과를 통합하고 사용자 지정 우선 범위로 T66 종료를 판정한다.
+1. 계획/spec의 pass나 worker count를 인용하지 말고 현재 runtime을 읽는다. 앞정강근·대흉근·견갑거근·대퇴직근·복직근·외복사근·능형근의 available source/side/part를 전수대조한다. 각 근육군에서 적합한 대표 muscle_action clip과 작용 설명이 실제 연결되어야 한다. 대흉근 세부part와 대/소능형근을 구분하며 exact binding/shared family/고유GLB 수를 분리한다.
+2. 기존 posture를 작용으로 가장한 행, 방향/side/placement/부착 오류, 숨김/layer 우회, 재클릭rest/스크럽/카메라 오류를 수정한다. 지원된 기존 손 작용과 다른 기능에 회귀가 없는지 영향 범위를 검사한다. 미지원 미래 작용·턱/얼굴/호흡 자산 제작은 backlog로 보존하며 현재7근육군의 제품gate로 되돌리지 않는다. engineering 실패는 여전히 engineering 상태다.
+3. 현재 신경 정적지원/텍스트/지배 개념 관계/geometry-bound 관계/움직임pose support를 분리하고 신경선택→주행→관련근육→작용→rest 복원 흐름을 실제 검증한다. 생리적 활성도나 힘을 측정하는 기능으로 설명하지 않는다.
+4. 현재 지원 데이터 계약 전수 검사, 실제7근육군 대표/각변경측/분절·중간자세/신경 흐름을 확인한다. 실측390/1024/1440 가능한 도구로 viewport 치수와 PNG를 함께 기록한다. 도구가 요청폭을 적용하지 못하면 기존3width 근거의 영향 분석을 하고 미검증 변경을 통과라고 꾸미지 않는다. 관련typecheck/build/회귀를 최종 한 번 수행한다.
+5. 우선 범위가 실제 통과하고 current supported app의 blocker가0이면 T66 completed/passed,nextUnit=null로 종료한다. contractRevision=app-completion-2026-10-01, scopeAmendment=priority-muscle-atlas-2026-10-05, acceptanceScope, productReadiness,contentCompleteness=partial,knownContentGaps,unresolvedProductBlockers=[],실제evidence를 top-level과 progress.productAcceptance에 일치시킨다. 전신 정상모형/모든근육 완성으로 쓰지 않는다. 지정근육이 미구현 또는 실제결함이면 partial을 유지하고 실패 근육/측/작용만 명시해 재개한다.
+6. T85는 현재 지원 우선 범위의 UI/성능 품질 검사로 인계한다. 턱/얼굴전체 제작을 T85에 몰래 붙이지 않는다. work/plans/t66-parallel-completion-2026-10-03/10-T85-ui-performance.txt의 충돌하는 전체0-gap gate가 있으면 이번 승인된 범위개정을 보충 인계에 명시하되 T85 상태/실행은 변경하지 않는다.
+종료 후 T85 promptFile과 실제 결과를 안내하고 멈춰라. T85를 자동 실행하지 않는다.

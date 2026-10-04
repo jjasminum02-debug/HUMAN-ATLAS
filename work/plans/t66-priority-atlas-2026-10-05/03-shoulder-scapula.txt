@@ -1,0 +1,17 @@
+HUMAN ATLAS에서 T66의 아래 내부 단계만 수행해라. 담당 Luna Max · 현재 대화 직접 구현.
+
+AGENTS.md, work/EXECUTION.json, work/product-acceptance.json, T66 현재 spec, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/plans/t66-priority-atlas-2026-10-05/README.md, work/evidence/T66/nerve-and-priority-review-2026-10-05/REPORT.md와 이번 책임의 실제 선행 증거를 읽어라.
+최신 사용자 개정: 전신 애니메이션 일괄 완성 대신 앞정강근·대흉근·견갑거근·대퇴직근·복직근·외복사근·능형근을 우선 완성하고 하나씩 확장한다. 전체 원장은 보존하되, 범위 밖 턱/얼굴/호흡 등 후보 수리와 E proposals hash 복구를 이 우선 범위의 gate로 만들지 않는다. 이들은 자료 부족이 아니라 별도 deferred engineering backlog로 유지한다. 기존 등록된 기능의 실제 회귀는 해결한다.
+542/563/12, 근육429/447/232 source concepts/462 surfaces, HA130·역사163(6/20/135/2), 원본/source-cache/OpenSim_Models/T13/WIP를 보존한다. source-only, 로컬 선택, humanReview=not_performed, public rights held를 별개로 유지한다. 새 task/thread/agent/자동 병렬/다음 단계 자동 실행/push/배포/병리 editor/진단·치료·자침은 금지한다.
+단일 scene/renderer/camera/controller/frame clock 및 기존 공유 player를 사용한다. CTA는 움직임으로 이해하기 하나: 클릭 반복 왕복, 재클릭 smooth rest. scrub·reduced-motion·숨김·layer-off·좌우·뒤앞·취소·복원을 유지한다. 기본 slow/pause/reset을 복구하지 않는다. 이미 +30%인 T59 clip을 다시 확대하지 않는다.
+실제 원본 표면과 정성적 작용·부착 근거로 authored masks/weights/pivot/trajectory/correctives를 작성하는 것은 구현 책임이다. 이를 source 실측 좌표/정상 ROM/활성도·힘으로 포장하지 않는다. 단순 scale/색/선 변화로 근육 표면 변형을 대체하지 않는다. native rig 부재를 작업 미수행 사유로 끝내지 않는다. 실제 자료/관계 부족은 범위별 근거로 남긴다. 작용과 수동 자세를 분리하며 단순 라벨/learningIntent 변경만으로 승격하지 않는다.
+이미 통과한 동일 입력 QC/근거는 의존성 영향 분석 후 재사용한다. 변경된 geometry는 emitted GLB의 실제 key/중간 보간·frame/side/관통/접촉/부착 문맥/동작 결과를 검증한다. 관련 회귀와 실제 UI를 수행하고 학생 화면에 task/source/evidence/내부 ID를 넣지 않는다. 실측 viewport 크기를 기록하고 요청 크기나 CSS390을 실기기로 부르지 않는다.
+이번 단계의 report/evidence를 실제 결과로 남기고 T66 소유 progress만 갱신한다. 부모 T66 completed/passed는 마지막 통합 단계에서 필수 범위가 실제 통과했을 때만 판정한다. python3 work/tools/sync_execution.py 및 --check, 소유 변경만 선별 로컬 커밋 후 멈춘다. 다음 파일을 안내하되 자동 실행하지 않는다.
+
+이번 책임: 대흉근·견갑거근·능형근의 실제 작용 애니메이션을 완성한다.
+현재 이 세 근육군은 posture 관찰뿐이다. 기존 U03 어깨띠 올림/앞쪽이동/어깨가쪽돌림 등을 자동으로 선택 근육의 작용으로 승격하지 않는다. 대흉근은 실제 원본 쇄골/흉늑/배부분, 능형근은 대/소를 구분하며 일괄 whole-group 승인을 만들지 않는다.
+1. 기존 어깨·견갑대 family/GLB/QC와 정확한 action/attachment 근거를 먼저 재사용한다. 대흉근의 근거 있는 대표 작용, 견갑거근의 대표 견갑대 작용, 대/소능형근의 대표 작용을 source part/side별로 작성한다. 상완골·견갑골·빗장뼈/흉곽·경추 중 실제 필요한 moving/fixed/passive 문맥과 source별 변형을 정한다.
+2. 기존 움직임이 해당 action 방향/조건/해당 표면 변형에 실제 적합하면 scope 검토 receipt와 existing QC를 재사용해 정확한 selector를 추가할 수 있다. 실제 반대작용/수동 신장/단순관찰은 새 authored trajectory/weights/corrective로 수리한다. generic passive를 label만 바꿔 pass하지 않는다.
+3. 근육군별 대표 작용을 양측 실제 표면·기시정지 문맥·rest/mid/end geometry/contact/좌우·part로 검증하고 실제 scene에 등록한다. 넓은 부착을 한 점에 붙이거나 일부 head clip을 전체 대흉근 완료로 세지 않는다. 실제 미확보 세부 작용은 별도 backlog이며 각 available 주요 part의 대표 동작은 이번 범위다.
+4. 신경 단계의 확인된 관련 근육 links와 작용 연결을 동일 선택 경로로 재사용한다. 각 근육군에서 실제 loop/rest와 동작 의미가 눈에 보이는 PNG를 남긴다. 견갑대가 움직이지 않는 단순 팔 관찰을 견갑거근/능형근 시범으로 대신하지 않는다.
+종료 후 04-trunk.txt를 안내하고 멈춰라.

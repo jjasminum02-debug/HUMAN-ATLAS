@@ -1,0 +1,24 @@
+{
+  "scope": "2026-10-02 최신 사용자 범위: 단일 버튼 회귀 수정, 전체 근육/뼈 전수 큐의 family별 실제 작성·자산 제작·같은 scene 통합, typed bone 직접 선택·관절 각도, 전수 신경 주행·포착 텍스트/실제 geometry 지원과 검증. T66 단일 작성자. 병리 editor 제외.",
+  "scopeRevision": "t66-source-family-normal-motion-r13",
+  "acceptanceContract": {
+    "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
+    "required": [
+      "이번에 실제 지원하는 자료/기능의 정확한 범위와 전체 원장을 함께 보존한다.",
+      "명시한 자료·구현·학습 흐름을 실제 검증하고 지원된 기능의 잘못된 anatomy/pose/선택/재생 오류를 해결한다.",
+      "제품 지원 범위의 scoped acceptance와 미확보 콘텐츠 completeness를 별도 기록한다.",
+      "전수 원장에서 현재 제작 가능으로 확정한 모든 패키지를 실제 구현·검증·통합하며 소수 예시에서 종료하지 않는다.",
+      "전체 muscle/side/action 목표 구현과 task responsibility acceptance를 별도 집계하고 미확보/미구현 행을 삭제하지 않는다."
+    ],
+    "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research",
+    "motionAmendment": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md"
+  },
+  "acceptanceScope": "T66 latest whole-muscle / whole-bone normal-motion authoring and native nerve-course integration; currently verified subset reported separately",
+  "unresolvedProductBlockers": [
+    "W1-A: 92 source-action rows remain blocked by concrete authoring/geometry engineering failures; 54 further rows are source/relation gaps.",
+    "W1-B: 29 generated candidates fail geometry, source identity, or target/action relation checks and remain unregistered.",
+    "W1-C: 2 respiratory candidates remain blocked by topology/contact QC.",
+    "W2-D: writer correction R1 resolves 16 copied owner-metadata conflicts only in an effective validator copy; the frozen D handoff remains pre-correction and unregistered. Ten jaw action rows have actual edge/area deformation defects, two rows have source/relation gaps, two are not applicable, and two null-action scope rows are not muscle-action acceptance. D has no aggregate candidate-package index.",
+    "W2-E: D/E runner preflight succeeds with an owned nonempty E output root and typed read-only bone context. E aggregate index preflight is blocked by proposals.json hash/size drift (expected d9ccc51c…af52eb/949336 bytes; observed 92115698…cf09/980461 bytes). Of 56 candidate GLBs, 38 have local geometry QC pass and 18 fail; action-outcome QC passed 0 and candidate-validated work keys are 0. No E candidate is registered."
+  ]
+}

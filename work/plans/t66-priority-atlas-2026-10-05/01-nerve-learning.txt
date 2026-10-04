@@ -1,0 +1,18 @@
+HUMAN ATLAS에서 T66의 아래 내부 단계만 수행해라. 담당 Luna Max · 현재 대화 직접 구현.
+
+AGENTS.md, work/EXECUTION.json, work/product-acceptance.json, T66 현재 spec, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/plans/t66-priority-atlas-2026-10-05/README.md, work/evidence/T66/nerve-and-priority-review-2026-10-05/REPORT.md와 이번 책임의 실제 선행 증거를 읽어라.
+최신 사용자 개정: 전신 애니메이션 일괄 완성 대신 앞정강근·대흉근·견갑거근·대퇴직근·복직근·외복사근·능형근을 우선 완성하고 하나씩 확장한다. 전체 원장은 보존하되, 범위 밖 턱/얼굴/호흡 등 후보 수리와 E proposals hash 복구를 이 우선 범위의 gate로 만들지 않는다. 이들은 자료 부족이 아니라 별도 deferred engineering backlog로 유지한다. 기존 등록된 기능의 실제 회귀는 해결한다.
+542/563/12, 근육429/447/232 source concepts/462 surfaces, HA130·역사163(6/20/135/2), 원본/source-cache/OpenSim_Models/T13/WIP를 보존한다. source-only, 로컬 선택, humanReview=not_performed, public rights held를 별개로 유지한다. 새 task/thread/agent/자동 병렬/다음 단계 자동 실행/push/배포/병리 editor/진단·치료·자침은 금지한다.
+단일 scene/renderer/camera/controller/frame clock 및 기존 공유 player를 사용한다. CTA는 움직임으로 이해하기 하나: 클릭 반복 왕복, 재클릭 smooth rest. scrub·reduced-motion·숨김·layer-off·좌우·뒤앞·취소·복원을 유지한다. 기본 slow/pause/reset을 복구하지 않는다. 이미 +30%인 T59 clip을 다시 확대하지 않는다.
+실제 원본 표면과 정성적 작용·부착 근거로 authored masks/weights/pivot/trajectory/correctives를 작성하는 것은 구현 책임이다. 이를 source 실측 좌표/정상 ROM/활성도·힘으로 포장하지 않는다. 단순 scale/색/선 변화로 근육 표면 변형을 대체하지 않는다. native rig 부재를 작업 미수행 사유로 끝내지 않는다. 실제 자료/관계 부족은 범위별 근거로 남긴다. 작용과 수동 자세를 분리하며 단순 라벨/learningIntent 변경만으로 승격하지 않는다.
+이미 통과한 동일 입력 QC/근거는 의존성 영향 분석 후 재사용한다. 변경된 geometry는 emitted GLB의 실제 key/중간 보간·frame/side/관통/접촉/부착 문맥/동작 결과를 검증한다. 관련 회귀와 실제 UI를 수행하고 학생 화면에 task/source/evidence/내부 ID를 넣지 않는다. 실측 viewport 크기를 기록하고 요청 크기나 CSS390을 실기기로 부르지 않는다.
+이번 단계의 report/evidence를 실제 결과로 남기고 T66 소유 progress만 갱신한다. 부모 T66 completed/passed는 마지막 통합 단계에서 필수 범위가 실제 통과했을 때만 판정한다. python3 work/tools/sync_execution.py 및 --check, 소유 변경만 선별 로컬 커밋 후 멈춘다. 다음 파일을 안내하되 자동 실행하지 않는다.
+
+이번 책임: 신경을 선택하면 주행과 지배/관련 근육을 이해할 수 있는 현재 지원 학습 흐름을 완성한다.
+이번 리뷰에서 normal nerve gold / selected green, 처음 선택 시 layer-on(사용자 명시 off 존중), 같은쪽 기존 문헌상 능형근 context 강조를 구현했다. 이를 되돌리거나 재조사하지 말고 현재 UI부터 확인한다. nerve-support-t66의195 정적 표면과98 이름그룹을 고유 신경 개념 수로 오인하지 않는다. 기존 exact geometry motor2건(깊은종아리신경→좌우 앞정강근)과 concept motor2건(견갑배신경→큰/작은능형근)을 구분한다.
+1. 기존 T25/T65/T66 및 worker F의 검증된 근거를 재사용한다. 현재 source별 기시정지/운동신경 자료와 신경 graph를 대조해 이미 확인된 관계의 UI 미연결부터 고친다. 모든 등록 신경에는 motor/sensory/mixed/관계 미연결 상태가 실제 근거와 일치하게 있어야 하며, 감각신경에 운동근을 붙이지 않는다. 관계 근거가 없다고 해당 신경 3D 주행까지 막지 않는다.
+2. 우선 일곱 근육군의 운동신경 관계 및 사용자가 반복 예시한 견갑배·액와·요골·정중·대퇴피신경 흐름에서 실제 근거가 확인되는 링크를 연결한다. 새 anatomy 주장은 실제 원문/field locator/범위를 검증한다. 이름/주변 가까움만으로 motor relation이나 신경 branch 좌표를 만들지 않는다. 대퇴피신경의 외측/후방과 대퇴신경을 합치지 않는다. 전98개 신경 원문 0-gap을 종료 gate로 두지 않는다.
+3. 공통 카드에는 짧은 주행 요약, 확인된 지배 근육 목록/동일 side 선택·강조, 관련 작용 텍스트를 제공한다. 문헌 개념 관계의 표시와 실제 branch→mesh binding을 구분한다. 미측정 힘을 '힘이 들어간다'는 수치/활성도 애니메이션으로 만들지 않는다. 검증된 clip이 있으면 관련 근육을 선택한 뒤 재생으로 연결하며, 정적 신경은 unsupported motion에서 숨기고 rest/user-layer 상태로 복원한다.
+4. 신경 기본 노랑·선택 초록·지배/관련 근육 별도 강조, 주변 반투명, 선택 맞춤/카드 목록/숨김/복원을 실제 브라우저에서 확인한다. static source geometry를 굵게 만드는 재작성이나 깊이 무시로 몸 밖 주행을 조작하지 않는다. 문헌 포착 맥락은 설명이며 질환/압박 좌표 재현이 아니다.
+5.195 등록 표면/98 label group의 정책 및 현재 motor 역관계를 전수 자동 검사하고 실제 대표 신경 선택과 미연결/감각 사례를 검증한다. 새 관계수·개념 링크수·exact side geometry binding 수·텍스트/정적3D/동적pose 수를 별도로 보고한다.
+종료 후 02-ankle-knee.txt를 안내하고 멈춰라.
