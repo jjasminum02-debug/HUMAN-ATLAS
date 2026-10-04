@@ -6,9 +6,39 @@ import type { Plugin } from 'vite';
 /** Deliver registered, hashed local motion packages lazily; unknown paths never fall through as HTML. */
 export function motionAssetsPlugin(root: string): Plugin {
   const prefix = '/atlas-data/assets/motion/';
+  const learnerRegistryPath = resolve(root, 'atlas-data/motion/motion-learning.json');
+  const wave1RegistryPath = resolve(root, 'atlas-data/motion/t66-wave1-registration.json');
+  let entriesPromise: Promise<Array<{ uri: string; sha256: string }>> | null = null;
   async function entries() {
-    const bundle = JSON.parse(await readFile(resolve(root, 'atlas-data/motion/motion-learning.json'), 'utf8'));
-    return bundle.motionAssets as Array<{ uri: string; sha256: string }>;
+    if (entriesPromise) return entriesPromise;
+    entriesPromise = (async () => {
+      const [bundleBytes, wave1Bytes] = await Promise.all([
+        readFile(learnerRegistryPath, 'utf8'), readFile(wave1RegistryPath, 'utf8'),
+      ]);
+      const bundle = JSON.parse(bundleBytes);
+      const wave1 = JSON.parse(wave1Bytes);
+      if (wave1.schemaVersion !== 't66-wave1-source-motion-registration-v2'
+        || wave1.authority?.sourceOnly !== true
+        || wave1.authority?.publicRedistribution !== 'held'
+        || wave1.authority?.humanReview !== 'not_performed'
+        || wave1.authority?.canonicalTargetMembershipApproved !== false
+        || !Array.isArray(wave1.packages)) throw Error('wave-1 motion registration contract');
+      const rows = [
+        ...(bundle.motionAssets as Array<{ uri: string; sha256: string }>),
+        ...wave1.packages.map((row: { uri: string; sha256: string }) => ({ uri: row.uri, sha256: row.sha256 })),
+      ];
+      const unique = new Map<string, { uri: string; sha256: string }>();
+      for (const row of rows) {
+        const existing = unique.get(row.uri);
+        if (existing && existing.sha256 !== row.sha256) throw Error(`conflicting motion hashes for ${row.uri}`);
+        unique.set(row.uri, row);
+      }
+      return [...unique.values()];
+    })().catch((error) => {
+      entriesPromise = null;
+      throw error;
+    });
+    return entriesPromise;
   }
   async function verified(entry: { uri: string; sha256: string }) {
     if (!entry.uri.startsWith(prefix.slice(1)) || entry.uri.includes('..') || !/^[a-f0-9]{64}$/.test(entry.sha256)) throw Error('motion asset path/hash');
@@ -21,6 +51,10 @@ export function motionAssetsPlugin(root: string): Plugin {
   return {
     name: 'registered-local-motion-assets',
     configureServer(server) {
+      server.watcher.add([learnerRegistryPath, wave1RegistryPath]);
+      server.watcher.on('change', (file) => {
+        if (resolve(file) === learnerRegistryPath || resolve(file) === wave1RegistryPath) entriesPromise = null;
+      });
       server.middlewares.use(async (req, res, next) => {
         const path = req.url?.split('?')[0];
         if (!path?.startsWith(prefix)) return next();

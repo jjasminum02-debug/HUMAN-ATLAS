@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "t66-wave1-writer-final-validation-v1",
+  "recordedAtLocal": "2026-10-04T16:48:06+09:00",
+  "scope": "T66 wave1 integration writer only; no worker/D/E launch, no push/deployment",
+  "baseline": {
+    "integrationStartHead": "754afdc8e89803977c8131d05dd4544aec61e964",
+    "wave1ManifestDeclaredBaselineHead": "ae993a8a455632d738b2141f50ad09789bf5ee7c",
+    "wave1ManifestSha256": "7d12000c2a049d1c2bf09f8349159609a6dd7b5f93f1d0710742ede84aacad95",
+    "startBaselineSha256": "d83e819af9ee488d9921618f319cfd1ea630fbfc309378c1a052ed827b64481b"
+  },
+  "workerAssignments": {
+    "A": {
+      "assignmentAndSourceKeyExact": true,
+      "runId": "T66-W1-20261003-5dadff8d782b",
+      "outputRoot": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/workers/A"
+    },
+    "B": {
+      "assignmentAndSourceKeyExact": true,
+      "runId": "T66-W1-20261003-5dadff8d782b",
+      "outputRoot": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/workers/B"
+    },
+    "C": {
+      "assignmentAndSourceKeyExact": true,
+      "runId": "T66-W1-20261003-5dadff8d782b",
+      "outputRoot": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/workers/C"
+    },
+    "F": {
+      "assignmentAndSourceKeyExact": true,
+      "runId": "T66-W1-20261003-5dadff8d782b",
+      "outputRoot": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/workers/F"
+    }
+  },
+  "registration": {
+    "path": "atlas-data/motion/t66-wave1-registration.json",
+    "sha256": "454b6cb914386ba5c3f1652161aab81d942f77bb267b43d418498c6475c5c2f0",
+    "counts": {
+      "packageTemplates": 32,
+      "selectorRows": 754,
+      "muscleActionRelationRows": 38,
+      "uniqueMuscleSourceKeys": 22,
+      "uniqueMuscleSourceSideActionKeys": 38,
+      "boneRoleRelationRows": 716,
+      "uniqueBoneSourceInstances": 68,
+      "uniqueBoneSourceFamilySideKeys": 716,
+      "uniqueGlbUris": 28,
+      "uniqueGlbSha256": 28,
+      "uniqueGlbBytes": 35892956,
+      "targetSideActionExtentsApproved": null
+    },
+    "authority": {
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "canonicalTargetMembershipApproved": false
+    },
+    "storedAssetRowsMatchSummary": {
+      "passed": true,
+      "uniqueRowsChecked": 28,
+      "summaryPath": "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/integration-summary.json"
+    },
+    "allRegisteredPackageFileHashesMatch": true,
+    "uniqueUriAndByteRowsMatchIntegrationSummary": true,
+    "byteRowEvidencePath": "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/integration-summary.json"
+  },
+  "denominatorsPreserved": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12,
+    "muscleTargets": 429,
+    "muscleMemberships": 447,
+    "sourceConcepts": 232,
+    "sourceSurfaces": 462,
+    "existingHACanonicalLinks": 130,
+    "historicalClassification": [
+      6,
+      20,
+      135,
+      2
+    ]
+  },
+  "authorityPreserved": {
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "newCanonicalIds": 0,
+    "targetExtentPromotion": false
+  },
+  "automatedChecks": [
+    {
+      "name": "T66 wave1 motion projection and asset integrity tests",
+      "command": "node --experimental-strip-types --test src/domain/t66Wave1Motion.test.ts plugins/motionAssets.test.ts",
+      "result": "passed",
+      "pass": 4,
+      "fail": 0,
+      "note": "Includes the preserved generic corruption/unknown-path test plus wave-1 lazy integrity route and source-motion replay checks."
+    },
+    {
+      "name": "learner wave1 filtered regression",
+      "command": "node --experimental-strip-types --test --test-name-pattern=wave-1 src/data/learning.test.ts",
+      "result": "passed",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "name": "TypeScript project build",
+      "command": "node node_modules/typescript/bin/tsc -b --pretty false",
+      "result": "passed"
+    },
+    {
+      "name": "Vite production build",
+      "command": "node node_modules/vite/bin/vite.js build",
+      "result": "passed",
+      "warning": "App chunk 6201.86 kB, gzip 644.18 kB; above 500 kB hint"
+    },
+    {
+      "name": "EXECUTION projection sync",
+      "command": "python3 work/tools/sync_execution.py; python3 work/tools/sync_execution.py --check",
+      "result": "passed",
+      "syncUpdatedViews": 0,
+      "check": "Execution projections match; no writes."
+    }
+  ],
+  "knownTestLimitation": {
+    "suite": "full src/data/learning.test.ts was previously run in this task context",
+    "result": "two stale exact-count assertions fail against the unchanged generated learner runtime",
+    "actualCounts": [
+      1145,
+      1138
+    ],
+    "expectedCounts": [
+      281,
+      274
+    ],
+    "baselineGeneratedFileSha256": "98b8bec2e61012d267ee0a40a97f25a9c162a3e314ac09b4f4c625d6c8169bed",
+    "changedInThisIntegration": false
+  },
+  "actualBrowserEvidence": {
+    "path": "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/browser-verification.json",
+    "scenarios": [
+      "right abductor pollicis brevis action",
+      "left longus colli limited observation",
+      "atlas/C1 fixed bone role",
+      "left dorsal scapular nerve static route and expanded text"
+    ],
+    "all754SelectorsVisuallyCertified": false,
+    "screenshotsPersisted": false
+  },
+  "wave2Freeze": {
+    "path": "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/wave2-freeze-validation.json",
+    "status": "passed_preflight_only",
+    "D": 16,
+    "E": 66,
+    "deferred": 60,
+    "authoringStarted": false
+  },
+  "preservation": {
+    "unchangedBaselineRelevantFiles": [
+      "atlas-data/motion/authoring/registry.json",
+      "atlas-data/motion/motion-asset-sources.json",
+      "atlas-data/motion/motion-learning.json",
+      "atlas-data/motion/motion-scenes.json",
+      "atlas-data/schemas/validate_motion_learning.py",
+      "atlas-data/terminology/learner-card-runtime.json",
+      "atlas-web/scripts/buildLearnerCardRuntime.mjs",
+      "atlas-web/src/data/learnerMotionRuntime.generated.ts",
+      "atlas-web/src/domain/nerveContract.ts",
+      "atlas-web/src/viewer/datasets/nerveScene.ts",
+      "work/tasks/T66-APP-COMPLETION.md"
+    ],
+    "expectedChangedBaselineFiles": [
+      {
+        "path": "atlas-data/terminology/nerve-learning-t66.json",
+        "startSha256": "4e73c933542c17a4b2278b93c39630fed61b5006b9d75672ee14537f14fcfe3e",
+        "currentSha256": "eddc46b7f12a64cc0b50f13941c1f619c1107438e712c8d7b70c55a834d9ea9b"
+      },
+      {
+        "path": "atlas-web/src/data/learning.ts",
+        "startSha256": "6b4a6aab30a4973ad02365ad37c98a5b1e368085303bb8a30996c7d14ac2a9d3",
+        "currentSha256": "76efa9f7395395795c8dcdce6f386171504f844775d21ebc857ad62594f4ea7a"
+      },
+      {
+        "path": "work/EXECUTION.json",
+        "startSha256": "9f21940d1d574a04680f60af08d3b82d04ef4433eb43726424559c595261a555",
+        "currentSha256": "5084b70cf50bda4e55937d9f0700612110bde5f734cbbf2ddafe4515492cc58c"
+      },
+      {
+        "path": "work/reports/T66.md",
+        "startSha256": "1597f7020ad7a334ca84375e33b895c37cc7d991e4fdf79d0796f6959f6524c6",
+        "currentSha256": "4d542561a2fe529dfb37143110b099dc6f5b47fb39be091039df8a89c7c1a105"
+      }
+    ],
+    "openSimGitStatus": "",
+    "t13WorkingTreeStatus": ""
+  },
+  "parentTaskState": {
+    "executionStatus": "in_progress",
+    "acceptance": "partial",
+    "nextUnit": "author-and-integrate-normal-motion-bone-and-nerve",
+    "unresolvedProductBlockers": [
+      "T66-B3",
+      "T66-W1-A",
+      "T66-W1-B",
+      "T66-W1-C-RESPIRATORY"
+    ]
+  }
+}

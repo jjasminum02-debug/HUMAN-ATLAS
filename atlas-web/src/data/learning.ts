@@ -1,5 +1,6 @@
 import learnerCardRuntime from "../../../atlas-data/terminology/learner-card-runtime.json";
 import learnerMotionRuntime from "./learnerMotionRuntime.generated.ts";
+import t66Wave1Registration from "../../../atlas-data/motion/t66-wave1-registration.json";
 import { displayTerms, termText, type PilotCatalog } from "./catalog";
 import { learnerNameProjection, learnerSearchEntry, learnerVisibleTerms, mergeLearningConcepts, searchEntries, type SearchEntry } from "../domain/search";
 import learnerNerveGraph from "../../../atlas-data/terminology/learner-nerve-graph-t66.json";
@@ -7,7 +8,8 @@ import learnerNerveCourse from "../../../atlas-data/terminology/nerve-learning-t
 import type { LearnerFieldProjection } from "../domain/aiEvidence";
 import { learnerStructureUnavailability } from "../domain/learnerStructureSourceContent";
 import { learnerActionAppliesToSide } from "../domain/learnerActionText";
-import { resolveLearnerMotionCandidate, type LearnerMotionActionOption, type LearnerActionText } from "../domain/motionLearning.ts";
+import { resolveLearnerMotionCandidate, type LearnerMotionActionOption, type LearnerActionText, type Laterality } from "../domain/motionLearning.ts";
+import { projectT66Wave1MotionOptions, type T66Wave1Registration } from "../domain/t66Wave1Motion.ts";
 
 type LearnerCardRuntime = {
   schemaVersion: "learner-card-runtime-v1";
@@ -54,6 +56,7 @@ type LearnerMotionRuntime = {
   }>>;
 };
 const motionRuntime = learnerMotionRuntime as unknown as LearnerMotionRuntime;
+const t66Wave1Motion = t66Wave1Registration as T66Wave1Registration;
 export const vocabulary = cardRuntime.names;
 
 export function nameFor(catalog: PilotCatalog, id: string) {
@@ -86,6 +89,9 @@ export function motionActionOptionsForLearner(conceptId: string | null, selected
   const selector = sourceKey && motionRuntime.actions[sourceKey]?.length ? sourceKey : conceptId ?? sourceKey;
   const projected = (selector ? motionRuntime.actions[selector] ?? [] : []).filter(row =>
     !row.candidate || !sourceKey || row.candidate.asset.sourceBinding?.subjectSourceKey === sourceKey);
+  const wave1Options = sourceKey
+    ? projectT66Wave1MotionOptions(t66Wave1Motion, sourceKey, selectedSide as Laterality | null | undefined)
+    : [];
   const displayRows = cardRuntime.actions.filter((row) => row.conceptId === conceptId
     && learnerActionAppliesToSide(row.sideApplicability, selectedSide)).map((row) => {
     return {
@@ -96,15 +102,18 @@ export function motionActionOptionsForLearner(conceptId: string | null, selected
       candidate: resolveLearnerMotionCandidate(row.key, selectedSide, projected),
     };
   });
-  if ((conceptId && selector === conceptId) || !sourceKey) return displayRows;
+  if (conceptId && selector === conceptId) return [...displayRows, ...wave1Options];
+  if (!sourceKey) return displayRows;
   // A source-only action is reachable by exact sourceKey; no canonical ID or alias is invented.
-  return projected.filter((row) => learnerActionAppliesToSide(row.sideApplicability, selectedSide)).map((row) => ({
+  const sourceRows = projected.filter((row) => learnerActionAppliesToSide(row.sideApplicability, selectedSide)).map((row) => ({
     id: row.actionKey,
     label: row.label,
     text: { label: row.text.label, explanation: row.text.explanation },
     sideApplicability: row.sideApplicability === "left" || row.sideApplicability === "right" ? row.sideApplicability : null,
     candidate: row.candidate,
   }));
+  const byId = new Map([...sourceRows, ...wave1Options].map(row => [row.id, row]));
+  return [...byId.values()];
 }
 
 /** Learner-safe field projection; provenance and review detail stay in development evidence. */

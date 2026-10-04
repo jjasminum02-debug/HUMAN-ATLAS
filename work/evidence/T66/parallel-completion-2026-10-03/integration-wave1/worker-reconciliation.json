@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "t66-wave1-worker-reconciliation-v1",
+  "runId": "T66-W1-20261003-5dadff8d782b",
+  "manifestSha256": "7d12000c2a049d1c2bf09f8349159609a6dd7b5f93f1d0710742ede84aacad95",
+  "assignments": {
+    "A": {
+      "workKeyCount": 42,
+      "sourceKeyCount": 42,
+      "outputRoot": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/workers/A",
+      "handoffSha256": "420ff6c748a6fe9c52d794594e03a067c7356216744fa63ebd65933bb84b522d"
+    },
+    "B": {
+      "workKeyCount": 112,
+      "sourceKeyCount": 112,
+      "outputRoot": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/workers/B",
+      "handoffSha256": "2394387d77fb484e458156db1e4b39b106c23fac970682e2537378771f78c3e1"
+    },
+    "C": {
+      "workKeyCount": 166,
+      "sourceKeyCount": 166,
+      "outputRoot": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/workers/C",
+      "handoffSha256": "4a6b872ed3a587899ba3c9f3d58d25874da5d55c7d2b4ea36413f6f6d1c4ead3"
+    },
+    "F": {
+      "workKeyCount": 98,
+      "sourceKeyCount": 0,
+      "outputRoot": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/workers/F",
+      "handoffSha256": "21dcb5476d952740fdf6899b21f91bd3cabc94b7f754f906c97f28f4f80cc1ad"
+    }
+  },
+  "workerResults": {
+    "A": {
+      "candidateValidatedActionRows": 34,
+      "uniqueAcceptedMotionGlbs": 26,
+      "uniqueAcceptedGlbBytes": 34923888,
+      "muscleSelectorRows": 34,
+      "boneRoleSelectorRows": 702,
+      "blockedEngineeringSourceActionRows": 92,
+      "missingSourceOrRelationRows": 54,
+      "blockedFamilyRows": 56
+    },
+    "B": {
+      "freshCandidateGlbs": 29,
+      "registered": 0,
+      "blockedEngineering": 29,
+      "sourceActionRows": 152,
+      "targetSideActionExtentRows": 222,
+      "unresolvedActionClaimRows": 7
+    },
+    "C": {
+      "candidateActionWorkKeys": 9,
+      "candidateAssets": 4,
+      "validatedCandidateAssets": 2,
+      "blockedRespiratoryCandidateAssets": 2,
+      "validatedUniqueGlbs": 2,
+      "validatedGlbBytes": 969068,
+      "validatedMuscleSelectorRows": 4,
+      "boneRoleSelectorRows": 14,
+      "missingSourceOrRelationWorkKeys": 157
+    },
+    "F": {
+      "assignedNerveRows": 98,
+      "candidateValidatedTextWorkKeys": 30,
+      "missingSourceOrRelationWorkKeys": 68,
+      "learnerFieldsReviewed": 7,
+      "learnerFieldHashesChanged": 1,
+      "newGlbs": 0,
+      "independentAnatomicalConceptCount": null
+    }
+  },
+  "commonWriterPathsWereNotWorkerOutputs": true,
+  "candidateSelectorRowsAreNotUniqueConceptOrAssetCounts": true,
+  "sourceOnly": true,
+  "publicRedistribution": "held",
+  "humanReview": "not_performed",
+  "integrationStartHead": "754afdc8e89803977c8131d05dd4544aec61e964",
+  "wave1ManifestDeclaredBaselineHead": "ae993a8a455632d738b2141f50ad09789bf5ee7c",
+  "manifestRawSha256Verified": "7d12000c2a049d1c2bf09f8349159609a6dd7b5f93f1d0710742ede84aacad95",
+  "assignmentChecks": {
+    "A": true,
+    "B": true,
+    "C": true,
+    "F": true
+  },
+  "assignmentCheckBasis": {
+    "A": "assignedWorkKeyCoverage.allMatch and sourceActionCoverage.allMatch; action rows are child keys, not the 42 scope keys",
+    "B": "assignedWorkKeysMatch",
+    "C": "assignedWorkKeysMatch and assignedSourceKeysMatch",
+    "F": "assignmentExactMatch and nerveRowExactMatch"
+  }
+}

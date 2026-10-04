@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "t66-wave1-integration-browser-check-v1",
+  "date": "2026-10-04",
+  "browser": "Chrome via CUA in-app browser",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "devServer": "http://127.0.0.1:5175/",
+  "screenshotFilesPersisted": false,
+  "screenshotsNote": "Actual CUA screenshots were inspected inline; image files were not persisted. This is not visual certification of all 754 selectors.",
+  "samples": [
+    {
+      "sample": "A right thumb MCP abduction source surface",
+      "route": "/?source=ZA-c7010a9-0f56fb6c5633c34da16a6eda",
+      "selectedSide": "right",
+      "cardName": "짧은엄지벌림근 / Abductor pollicis brevis",
+      "action": "엄지손가락 손허리손가락관절 벌림",
+      "observations": [
+        "Card side and URL selection agreed.",
+        "Three-name card and action option were visible.",
+        "Selection fit showed the local hand; the selected thumb muscle surface was visibly teal.",
+        "CTA playback advanced slider from 0% to 89% (screen capture sampled near 74%); re-click returned progress to 0%."
+      ],
+      "scope": "One exact source/action sample; not complete thumb or hand extent certification."
+    },
+    {
+      "sample": "C left longus colli partial posture observation",
+      "route": "/?source=ZA-c7010a9-634eba3397c00766765d1c25",
+      "selectedSide": "left",
+      "cardName": "긴목근 / Longus colli muscle",
+      "action": "목 굽힘 자세 관찰",
+      "observations": [
+        "Card displayed O/I summary while the motion card explicitly limited lower-cervical surface extent and excluded upper-cervical motion and complete neck flexion.",
+        "CTA playback advanced the slider (0% to 16%); re-click returned progress to 0%.",
+        "Selection-only rendered a localized teal longus colli surface in the same scene."
+      ],
+      "scope": "Limited source surface observation only; not whole Longus colli/neck extent or a full flexion claim."
+    },
+    {
+      "sample": "C midline bone role direct route",
+      "route": "/?source=ZA-c7010a9-d6c3cdfe939e4d46b75ce9b6",
+      "selectedSide": "midline",
+      "cardName": "고리뼈 / Atlas (C1)",
+      "action": "척추 자세에서 역할 관찰",
+      "observations": [
+        "Direct bone URL selected typed C1 card and showed it as a fixed reference structure in the posture.",
+        "Fixed context role only; no independent measured ROM/axis or moving bone claim."
+      ],
+      "scope": "One fixed role selector sample."
+    },
+    {
+      "sample": "F left dorsal scapular nerve card",
+      "route": "/?source=ZA-NERVE-18b632a7908",
+      "selectedSide": "left",
+      "cardName": "등쪽어깨신경 / Dorsal scapular nerve",
+      "observations": [
+        "Nerve layer and static course view were enabled; the native scene showed the selected course color and the learner card showed the static-model warning.",
+        "Expanded course/compression/variation card displayed scalene route variation and surrounding compression context, and stated literature routes are not model coordinates.",
+        "Motor relation card warned that both-side rhomboid surfaces do not establish side-specific branches. No new nerve geometry or side claim was made."
+      ],
+      "scope": "One native static source path/card sample; dynamic nerve poses and entrapment coordinates remain zero."
+    }
+  ],
+  "console": "Browser console API was not available in CUA; Vite server log showed only the expected registration JSON reload. No browser-console-clean claim is made.",
+  "restoration": "Restored original user tab URL /?source=ZA-c7010a9-2d15cee81610b0809f565954 and verified left acromial deltoid card remained selected."
+}

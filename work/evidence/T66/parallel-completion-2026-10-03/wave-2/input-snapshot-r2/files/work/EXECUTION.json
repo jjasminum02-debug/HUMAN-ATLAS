@@ -3216,10 +3216,7 @@
             "uniqueRuntimeMotionGlbSha256": 34
           },
           "unresolvedProductBlockers": [
-            "T66-B3",
-            "T66-W1-A",
-            "T66-W1-B",
-            "T66-W1-C-RESPIRATORY"
+            "T66-B3"
           ],
           "evidence": [
             "work/reports/T66.md",
@@ -3248,14 +3245,7 @@
             "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/candidate-registration-reconciliation.json",
             "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/common-writer-checkpoint.json",
             "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/u01-browser-supplement-validation.json",
-            "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/scope-interpretation.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/REPORT.md",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/integration-summary.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/worker-reconciliation.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/exceptions-remaining.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/browser-verification.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/wave2-freeze-validation.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/final-validation.json"
+            "work/evidence/T66/serial-completion-2026-10-02/unit-03/continuation-2026-10-03/scope-interpretation.json"
           ]
         },
         "wholeMuscleMotionGoal": {
@@ -3599,141 +3589,6 @@
           "parentNextUnit": "author-and-integrate-normal-motion-bone-and-nerve",
           "unresolvedProductBlockers": [
             "T66-B3"
-          ]
-        },
-        "parallelWave1Integration": {
-          "status": "integrated_partial",
-          "runId": "T66-W1-20261003-5dadff8d782b",
-          "integrationStartHead": "754afdc8e89803977c8131d05dd4544aec61e964",
-          "manifestDeclaredBaselineHead": "ae993a8a455632d738b2141f50ad09789bf5ee7c",
-          "manifestRawSha256": "7d12000c2a049d1c2bf09f8349159609a6dd7b5f93f1d0710742ede84aacad95",
-          "manifestCanonicalSha256": "a495d9421e38aadf4990dcfa5758661ab4a852d8690b483c328b34bccce2b511",
-          "assignmentChecks": {
-            "A": true,
-            "B": true,
-            "C": true,
-            "F": true
-          },
-          "counts": {
-            "packageTemplates": 32,
-            "selectorRows": 754,
-            "muscleSourceActionRows": 38,
-            "uniqueMuscleSourceKeys": 22,
-            "uniqueMuscleSourceSideActionRows": 38,
-            "boneRoleSelectorRows": 716,
-            "uniqueBoneSourceInstances": 68,
-            "uniqueBoneSourceFamilySideRows": 716,
-            "uniqueGlbUris": 28,
-            "uniqueGlbSha256": 28,
-            "uniqueGlbBytes": 35892956
-          },
-          "denominatorsPreserved": {
-            "targets": 542,
-            "memberships": 563,
-            "regions": 12,
-            "muscleTargets": 429,
-            "muscleMemberships": 447,
-            "sourceMuscleConcepts": 232,
-            "sourceMuscleSurfaces": 462,
-            "existingHACanonicalLinks": 130,
-            "historicalClassification": [
-              6,
-              20,
-              135,
-              2
-            ]
-          },
-          "authority": {
-            "sourceOnly": true,
-            "publicRedistribution": "held",
-            "humanReview": "not_performed",
-            "newHACanonicalIds": 0,
-            "canonicalTargetMembershipApproved": false
-          },
-          "workerDisposition": {
-            "A": {
-              "validatedMuscleActionRows": 34,
-              "uniqueAcceptedGlbs": 26,
-              "boneRoleRelations": 702,
-              "blockedEngineeringRows": 92,
-              "blockedFamilies": 56,
-              "missingSourceOrRelationRows": 54
-            },
-            "B": {
-              "candidateGlbs": 29,
-              "registeredGlbs": 0,
-              "blockedEngineeringGlbs": 29,
-              "sourceActionRows": 152,
-              "targetSideActionExtentRows": 222,
-              "unresolvedActionClaimRows": 7
-            },
-            "C": {
-              "candidateGlbs": 4,
-              "validatedGlbs": 2,
-              "registeredBlockedGlbs": 0,
-              "validatedMuscleActionRows": 4,
-              "boneRoleRelations": 14,
-              "missingSourceOrRelationWorkKeys": 157,
-              "respiratoryBlockedGlbs": 2
-            },
-            "F": {
-              "nativeRowsReviewed": 98,
-              "validatedTextWorkKeys": 30,
-              "missingSourceOrRelationWorkKeys": 68,
-              "learnerFieldsReviewed": 7,
-              "learnerTextFieldsChanged": 1,
-              "nerveGlbs": 0,
-              "independentNerveConceptCount": null
-            }
-          },
-          "unresolvedEngineering": [
-            {
-              "id": "T66-W1-A",
-              "scope": "92 source/action rows across 56 families remain engineering-blocked; 54 other rows lack source/relation evidence."
-            },
-            {
-              "id": "T66-W1-B",
-              "scope": "29 candidate GLBs fail geometry/contact QC; none registered."
-            },
-            {
-              "id": "T66-W1-C-RESPIRATORY",
-              "scope": "Two respiratory candidate GLBs fail topology/contact QC; none registered."
-            }
-          ],
-          "contentGaps": [
-            {
-              "id": "T66-W1-C",
-              "scope": "157 assigned work keys lack source/relation support."
-            },
-            {
-              "id": "T66-W1-F",
-              "scope": "68 nerve text work keys lack source/relation evidence; no independent nerve concept count established."
-            },
-            {
-              "id": "T66-W1-A-SOURCE-GAP",
-              "scope": "54 assigned rows lack source/relation evidence; distinct from 92 engineering-blocked rows."
-            }
-          ],
-          "wave2Freeze": {
-            "runId": "T66-W2-20261004-r2-5735b81b7626",
-            "manifestPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/run-manifest.json",
-            "validationPath": "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/wave2-freeze-validation.json",
-            "DWorkKeys": 16,
-            "DBoneContextSources": 1,
-            "EWorkKeys": 66,
-            "EBoneContextSources": 16,
-            "deferredWorkKeys": 60,
-            "preflightOnlyPassed": true,
-            "authoringStarted": false
-          },
-          "evidence": [
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/REPORT.md",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/integration-summary.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/worker-reconciliation.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/exceptions-remaining.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/browser-verification.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/wave2-freeze-validation.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-wave1/final-validation.json"
           ]
         }
       },

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "t66-wave1-unresolved-candidate-exceptions-v1",
+  "runId": "T66-W1-20261003-5dadff8d782b",
+  "registrationPolicy": "Only passing candidate GLBs are registered. Engineering failures remain in worker-owned evidence; do not relabel them as content gaps.",
+  "workers": {
+    "A": {
+      "blockedEngineeringSourceActionRows": 92,
+      "blockedFamilyRows": 56,
+      "missingSourceOrRelationRows": 54,
+      "details": "34 action rows on 26 unique GLBs passed and were registered. Other family QC records remain in the frozen A handoff and exceptions."
+    },
+    "B": {
+      "blockedFreshCandidateGlbs": 29,
+      "registeredFreshCandidateGlbs": 0,
+      "sourceActionRows": 152,
+      "targetSideActionExtentRows": 222,
+      "unresolvedActionClaimRows": 7,
+      "detailsPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/workers/B/exceptions.json",
+      "detailsSha256": "0b8ec86c8b10ff15e23c4f088e8c73d4ed54d347fc9ecc0901c542b333d7ce0d"
+    },
+    "C": {
+      "blockedCandidates": [
+        "respiratory-inspiration-local",
+        "forced-expiration-local"
+      ],
+      "blockedWorkKeys": 5,
+      "registeredBlockedGlbs": 0,
+      "validatedCandidates": [
+        "lumbar-multifidus-extension-local",
+        "cervical-longus-colli-flexion-local"
+      ],
+      "detailsPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/workers/C/exceptions.json",
+      "detailsSha256": "35ebf06f9f7e6fbb618860f03a1116ea29edc6221cf51e8c351e54d258263830"
+    },
+    "F": {
+      "missingSourceOrRelationTextWorkKeys": 68,
+      "candidateValidatedTextWorkKeys": 30,
+      "dynamicNerveGeometry": 0,
+      "detailsPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/workers/F/field-evidence-sources.json",
+      "detailsSha256": "4fee591eee1017dafabec04d1574e40fd7c9f52ede58532ff18f97226fc5618e"
+    }
+  },
+  "noFailedCandidateRegistered": true,
+  "noCanonicalBindingOrTargetExtentPromotion": true
+}

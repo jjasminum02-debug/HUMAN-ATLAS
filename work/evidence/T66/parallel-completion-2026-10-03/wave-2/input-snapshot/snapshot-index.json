@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "t66-wave2-supplemental-snapshot-index-v1",
+  "runId": "T66-W2-20261004-9f5926a80312",
+  "wave1Base": {
+    "runId": "T66-W1-20261003-5dadff8d782b",
+    "manifestPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/run-manifest.json",
+    "rawSha256": "7d12000c2a049d1c2bf09f8349159609a6dd7b5f93f1d0710742ede84aacad95",
+    "inputSnapshotRoot": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot",
+    "reusedInputCount": 47,
+    "sourceResourceRefs": 924,
+    "uniqueSourceResourceHashes": 627
+  },
+  "wave2SnapshotRoot": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/input-snapshot",
+  "workerOutputSchema": {
+    "path": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/input-snapshot/files/work/schemas/t66-parallel-candidate-package.schema.json",
+    "sha256": "0dadf736d354555f581498bc36895cd977f7d00231c447aaa2d7277e91aec648",
+    "bytes": 6335
+  },
+  "workerToolSnapshots": [
+    {
+      "modulePath": "work/tools/run_t66_parallel_candidate.py",
+      "sourcePath": "work/tools/run_t66_parallel_candidate.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/input-snapshot/tools/run_t66_parallel_candidate.py",
+      "bytes": 29835,
+      "sha256": "59e7cefbe11cbc372f49f9a64013fa7443ec6eb3f8a659afc7e1e7cb12137d96",
+      "provenance": "writer-owned runner frozen for wave-2"
+    },
+    {
+      "modulePath": "work/tools/t66_parallel_protocol.py",
+      "sourcePath": "work/tools/t66_parallel_protocol.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/input-snapshot/tools/t66_parallel_protocol.py",
+      "bytes": 23631,
+      "sha256": "1b2a3c0116acfcc43add7362e18252c0b0d217b1a5e0b782b7659e4c4f4d2798",
+      "provenance": "writer-owned protocol frozen for wave-2"
+    },
+    {
+      "modulePath": "work/tools/author_t66_family_motion.py",
+      "sourcePath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/author_t66_family_motion.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/input-snapshot/tools/author_t66_family_motion.py",
+      "bytes": 24634,
+      "sha256": "538ee11b06a269c87fbf4d84c991d9acfd2d8c6480b39076428f906e1c6816d4",
+      "provenance": "inherited immutable wave-1 authoring module"
+    },
+    {
+      "modulePath": "work/tools/author_source_surface_motion.py",
+      "sourcePath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/author_source_surface_motion.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/input-snapshot/tools/author_source_surface_motion.py",
+      "bytes": 22344,
+      "sha256": "3aafd71e348b261ea346e5fc644f16fd6c70a2f336e616c12742408189342467",
+      "provenance": "inherited immutable wave-1 source geometry module"
+    },
+    {
+      "modulePath": "work/tools/verify_t66_glb_pose.py",
+      "sourcePath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/verify_t66_glb_pose.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/input-snapshot/tools/verify_t66_glb_pose.py",
+      "bytes": 3959,
+      "sha256": "285ae88abad4fc8373453232a682bdccef4cc9887c0a746d208072d6fc6a4086",
+      "provenance": "inherited immutable wave-1 emitted-GLB pose verifier"
+    },
+    {
+      "modulePath": "work/tools/validate_authored_surface_geometry.py",
+      "sourcePath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/validate_authored_surface_geometry.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/input-snapshot/tools/validate_authored_surface_geometry.py",
+      "bytes": 5772,
+      "sha256": "cbd8e5fac4a0020566c1865890a2fe004b0f28abcadcf407e2c8d88a75ffb534",
+      "provenance": "inherited immutable wave-1 geometry QC"
+    },
+    {
+      "modulePath": "work/tools/verify_t66_family_contacts.py",
+      "sourcePath": "work/evidence/T66/parallel-completion-2026-10-03/wave-1/input-snapshot/files/work/tools/verify_t66_family_contacts.py",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/input-snapshot/tools/verify_t66_family_contacts.py",
+      "bytes": 3135,
+      "sha256": "83a619236190778bdb5f29dde7c9bac2ab9f3a00bb93b28453674d8ebcdcffc4",
+      "provenance": "inherited immutable wave-1 contact QC"
+    }
+  ],
+  "controlSnapshots": [
+    {
+      "path": "work/EXECUTION.json",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/input-snapshot/files/work/EXECUTION.json",
+      "sha256": "9f21940d1d574a04680f60af08d3b82d04ef4433eb43726424559c595261a555",
+      "bytes": 260132,
+      "role": "wave-2 writer-start routing context; administrative only"
+    },
+    {
+      "path": "work/NEXT.md",
+      "snapshotPath": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/input-snapshot/files/work/NEXT.md",
+      "sha256": "736c79cffe313ca160720acd4d44bb41817b776015b0c2e953d1f2bce2cd6f2c",
+      "bytes": 9621,
+      "role": "wave-2 writer-start routing context; administrative only"
+    }
+  ],
+  "assignmentSnapshots": [
+    {
+      "assignment": "A",
+      "path": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/input-snapshot/assignments/A.json",
+      "sha256": "d8e57632389b2430baf9627781651c71d499e2884bd096284d09e5946b37a6d6",
+      "bytes": 34250
+    },
+    {
+      "assignment": "B",
+      "path": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/input-snapshot/assignments/B.json",
+      "sha256": "1a226605fb40587f8cf529348404cd7d4e47c8859f334a07b813fe015cf6f885",
+      "bytes": 87053
+    },
+    {
+      "assignment": "C",
+      "path": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/input-snapshot/assignments/C.json",
+      "sha256": "e50a1a34b2f98b0a0c0d11d15ef01da86fded3cf66e7a0b1b6712bd974fccd22",
+      "bytes": 129405
+    },
+    {
+      "assignment": "F",
+      "path": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/input-snapshot/assignments/F.json",
+      "sha256": "6b1ff59fec85d478e3dd0a6144b59409881669bfa415ccf1b3ddfde304d57be6",
+      "bytes": 54527
+    },
+    {
+      "assignment": "D",
+      "path": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/input-snapshot/assignments/D.json",
+      "sha256": "c9a3c923b2d2164e1afb2701f83f2801180853b8d44a8280a33a0915a0c7f2a7",
+      "bytes": 10498
+    },
+    {
+      "assignment": "E",
+      "path": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/input-snapshot/assignments/E.json",
+      "sha256": "5a9ea3e32b4149d51a74daadcfc0f323e3ae1803aa1ff729404e292313493b32",
+      "bytes": 42518
+    }
+  ],
+  "snapshotPolicy": "wave-2 stores only supplemental control/assignment/schema/runner inputs; immutable source/data bytes and 47 pinned input snapshots are reused from wave-1 without rewriting them"
+}
