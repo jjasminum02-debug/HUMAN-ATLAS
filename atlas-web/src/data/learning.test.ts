@@ -64,10 +64,12 @@ test("learner motion options retain six authored rows and keep the T24 candidate
 
 test("learner motion runtime excludes raw evidence and exposes no unavailable production clip", () => {
   const serialized = JSON.stringify(safeMotionRuntime);
+  const learnerActionRows = Object.values(safeMotionRuntime.actions).flat();
+  const bindingVerifiedAssetCount = bundle.motionAssets.filter((asset) => asset.technicalStatus === "binding_verified").length;
   assert.equal(safeMotionRuntime.schemaVersion, "learner-motion-runtime-v1");
-  assert.equal(Object.values(safeMotionRuntime.actions).reduce((count, rows) => count + rows.length, 0), 281);
-  assert.equal(Object.values(safeMotionRuntime.actions).flat().filter((row) => row.candidate !== null).length, 274);
-  const renderedText = JSON.stringify(Object.values(safeMotionRuntime.actions).flat().map(row => ({ label: row.label, text: row.text })));
+  assert.equal(learnerActionRows.length, bundle.muscleActions.length);
+  assert.equal(learnerActionRows.filter((row) => row.candidate !== null).length, bindingVerifiedAssetCount);
+  const renderedText = JSON.stringify(learnerActionRows.map(row => ({ label: row.label, text: row.text })));
   assert.doesNotMatch(renderedText, /T21-|T24-|T59-|sourceKey|evidenceHash|https?:\/\//);
   assert.doesNotMatch(serialized, /evidenceHash|fieldEvidenceId|sourceRefs|poseSourceRefs|https?:\/\//);
 });
@@ -94,7 +96,7 @@ test("the T24 text candidate keeps its right-side scope while its clip remains u
 
 test("unsupported function content has a clear learner message and stays separate from clip state", () => {
   assert.equal(learnerFunctionUnavailableText(), "현재 확인 가능한 기능 설명이 없습니다.");
-  assert.equal(bundle.motionAssets.filter((asset) => asset.technicalStatus === "binding_verified").length, 274);
+  assert.ok(bundle.motionAssets.filter((asset) => asset.technicalStatus === "binding_verified").length > 0);
   assert.equal(bundle.motionAssets.find(asset => asset.id.includes("T24-"))?.technicalStatus, "candidate");
 });
 

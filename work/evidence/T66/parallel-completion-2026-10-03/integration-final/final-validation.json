@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "t66-final-validation-v1",
+  "recordedAtUtc": "2026-10-04T13:24:25.830278+00:00",
+  "checks": [
+    {
+      "name": "motion-and-wave1-regression",
+      "cwd": "atlas-web",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--experimental-strip-types",
+        "--test",
+        "src/domain/motionLearning.test.ts",
+        "src/domain/legacyJointActionAdapter.test.ts",
+        "src/domain/t66Wave1Motion.test.ts",
+        "src/viewer/animationSceneAdapter.test.ts",
+        "src/data/learning.test.ts",
+        "src/viewer/animationPlayback.test.ts"
+      ],
+      "exitCode": 0,
+      "passed": true,
+      "stdoutTail": "✔ the six pilot calf action cards have field-linked citations and no authoring status (0.824459ms)\n✔ unassigned concepts do not receive inferred action cards (0.041833ms)\n✔ learner motion options retain six authored rows and keep the T24 candidate unplayable (1.182667ms)\n✔ learner motion runtime excludes raw evidence and exposes no unavailable production clip (93.045875ms)\n✔ the T24 text candidate keeps its right-side scope while its clip remains unavailable (0.44275ms)\n✔ unsupported function content has a clear learner message and stays separate from clip state (0.095375ms)\n✔ learner action copy omits source-scope disclosure while preserving underlying source claim (0.12ms)\n✔ origin and insertion learner text hides source disclosures while retaining the original evidence projection (0.151791ms)\n✔ conflicted attachment claims project only the short learner notice (0.052875ms)\n✔ legacy structure summaries remain visible without adding evidence disclosures (0.079625ms)\n✔ T81 projects existing attachment evidence only to exact source surfaces and keeps conflicts short (0.6105ms)\n✔ T81 covers every supported source muscle while keeping workbook and nerve fields non-claim data separate (0.715833ms)\n✔ legacy JointAction migration is a non-persistable preview and preserves source review/hash/evidence (1.419458ms)\n✔ production bundle retains original motions and registers unit-01 bilateral flexion observations (0.939417ms)\n✔ text can be present while there is no compatible motion clip (0.160542ms)\n✔ learner card motion linking requires an explicit action key and compatible side (0.071625ms)\n✔ clip capability requires exact static scene, side, frame, reference pose, and rig-node binding (0.122334ms)\n✔ runtime session is resettable state and exposes no persisted content/review fields (0.062125ms)\n✔ learner text projection omits authoring IDs, JSON, task codes, and review states (0.099042ms)\n✔ learner action projection translates roles and unspecified contraction into plain Korean (0.080458ms)\n✔ source-only action and clip resolve by exact sourceKey without creating a canonical subject (0.174792ms)\n✔ T66 wave-1 normalized selectors project through the shared source-motion contract (24.958292ms)\n✔ T66 wave-1 sampled GLBs replay exact muscle morph and midline bone motion, then return to rest (15.846208ms)\n✔ single RAF loop updates speed without making a second chain and ignores late callbacks (0.631667ms)\n✔ repeating playback wraps continuously and reset restores the rest pose (1.080042ms)\n✔ T22 adapter scene is driven by one mixer clock; pose reset does not reset camera (5.123958ms)\n✔ same-scene playback uses the host clock, creates no RAF chain, and leaves resource disposal to the host (0.477041ms)\n✔ clip end clamps at the final pose and cancels its RAF chain (0.349917ms)\n✔ missing clip fails closed and releases the imported scene (0.602292ms)\n✔ one-toggle gesture reverses at its endpoint and eases to exact rest on the same clock (0.724834ms)\n✔ return cancellation and disposal cannot invoke a stale rest callback (0.408708ms)\n✔ GLTFLoader import keeps hierarchy, skin attributes, named node bindings and original clip tracks (9.195583ms)\n✔ illustrative path remains a distinct unskinned representation (1.320125ms)\n✔ bone motion plus illustrative path uses separate node and path bindings (2.08175ms)\nTHREE.GLTFLoader: Missing min/max properties for accessor POSITION.\nTHREE.GLTFLoader: Missing min/max properties for accessor POSITION.\n✔ T59 source-bound morph keeps the exact source node in the full scene and rejects whole-muscle transform tracks (1.803042ms)\n✔ frame, unit and source hash mismatch fail closed without rescaling (0.301875ms)\n✔ missing node binding and clip mismatch are rejected (1.349541ms)\n✔ import bundle disposes shared geometry, material and texture once and is idempotent (0.81375ms)\n✔ disposal helper deduplicates resources shared across independent roots (0.109375ms)\n✔ off-scene rig and path bindings are rejected while the active single scene still loads (1.112708ms)\n✔ off-scene skin joints and clip targets cannot accompany the returned active scene (1.427542ms)\n✔ external buffer and image URI are rejected before GLTFLoader can resolve them (0.906875ms)\nℹ tests 42\nℹ suites 0\nℹ pass 42\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 550.974916\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "learner-card-runtime-check",
+      "cwd": "atlas-web",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "scripts/buildLearnerCardRuntime.mjs",
+        "--check"
+      ],
+      "exitCode": 0,
+      "passed": true,
+      "stdoutTail": "{\"status\":\"passed\",\"conceptRows\":8,\"sourceRows\":461,\"actionRows\":7}\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "learner-motion-runtime-check",
+      "cwd": "atlas-web",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "scripts/buildLearnerMotionRuntime.mjs",
+        "--check"
+      ],
+      "exitCode": 0,
+      "passed": true,
+      "stdoutTail": "{\"status\":\"passed\",\"selectors\":262,\"actions\":1145,\"playableSourceBoundCandidates\":1138}\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "learner-content-validation",
+      "cwd": "atlas-web",
+      "command": [
+        "python3",
+        "scripts/validate-learning-content.py"
+      ],
+      "exitCode": 0,
+      "passed": true,
+      "stdoutTail": "{\"pass\": true, \"nameEntries\": 81, \"summaries\": 14, \"scope\": \"references and stale hashes, not anatomy approval\"}\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "ai-evidence-contract",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "atlas-data/schemas/validate_ai_evidence.py",
+        "--check"
+      ],
+      "exitCode": 0,
+      "passed": true,
+      "stdoutTail": "{\n  \"task\": \"T16\",\n  \"mode\": \"check\",\n  \"pass\": true,\n  \"legacyRowsCheckedInTestOnlyMigrationPreview\": 14,\n  \"productionFieldItems\": 51,\n  \"migrationPreviewIssues\": [],\n  \"issues\": []\n}\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "bone-name-overlay-contract",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "atlas-data/schemas/validate_bone_name_overlay.py",
+        "--check"
+      ],
+      "exitCode": 0,
+      "passed": true,
+      "stdoutTail": "{\n  \"status\": \"passed\",\n  \"entryCount\": 9,\n  \"selectableBoneCount\": 9,\n  \"sourceCount\": 9,\n  \"humanAnatomyReview\": \"not_reviewed\",\n  \"actualHanjaCollected\": false\n}\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "motion-learning-contract",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "atlas-data/schemas/validate_motion_learning.py",
+        "--check"
+      ],
+      "exitCode": 0,
+      "passed": true,
+      "stdoutTail": "{\n  \"production\": {\n    \"valid\": true,\n    \"actionCount\": 1145,\n    \"definitionCount\": 1139,\n    \"assetCount\": 1139,\n    \"issues\": []\n  }\n}\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "motion-asset-source-contract",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "atlas-data/schemas/validate_motion_asset_sources.py"
+      ],
+      "exitCode": 0,
+      "passed": true,
+      "stdoutTail": "PASS: 2 source candidates verified; production motion assets=1139; source bytes unchanged\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "function-content-contract",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "work/tools/validate_t83_function_content.py",
+        "--validate-only"
+      ],
+      "exitCode": 0,
+      "passed": true,
+      "stdoutTail": "{\"status\": \"passed\", \"mode\": \"live_contract_validation\", \"supportedConceptsWithExactVerifiedText\": 5, \"supportedSurfacesWithExactVerifiedText\": 10, \"supportedConceptsWithoutExactVerifiedText\": 227, \"existingCrossCheckedT21Claims\": 6, \"T21ClaimsNotMappedToExactCurrentSurfaceScope\": [\"HA-M-000001\"], \"gastrocnemiusHeadWholeClaimInheritance\": \"not_applied_to_two_explicit_part_subjects\", \"rightOnlyTextCandidates\": 1, \"playableClips\": 0, \"learnerActionTextHanjaCount\": 0, \"newClaims\": 0, \"newCanonicalBindings\": 0, \"humanReview\": \"not_performed\", \"publicRedistribution\": \"held\", \"sourceOnly\": true}\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "scene-decoder-contract",
+      "cwd": "atlas-web",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "scripts/check-scene-decoders.mjs"
+      ],
+      "exitCode": 0,
+      "passed": true,
+      "stdoutTail": "Scene decoder QA passed: 11 meshes/712192 bytes, 9 meshes/205392 bytes\n",
+      "stderrTail": ""
+    },
+    {
+      "name": "typescript-project-check",
+      "cwd": "atlas-web",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/typescript/bin/tsc",
+        "-b",
+        "--pretty",
+        "false"
+      ],
+      "exitCode": 0,
+      "passed": true,
+      "stdoutTail": "",
+      "stderrTail": ""
+    },
+    {
+      "name": "production-vite-build",
+      "cwd": "atlas-web",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "exitCode": 0,
+      "passed": true,
+      "stdoutTail": "ata/assets/motion/t66-wave1/A-left-little-mcp-abduction-digit-5-7119c1c0185f.glb   1,051.24 kB\ndist/atlas-data/assets/motion/t66-wave1/A-right-thumb-mcp-abduction-digit-1-03a4ba7b2a05.glb   1,052.30 kB\ndist/atlas-data/assets/motion/t66-wave1/A-left-thumb-mcp-abduction-digit-1-d0de141ac8f9.glb    1,052.71 kB\ndist/atlas-data/assets/motion/t66-wave1/A-right-finger-mcp-abduction-digit-2-b9602051e9b5.glb  1,068.88 kB\ndist/atlas-data/assets/motion/t66-wave1/A-left-finger-mcp-abduction-digit-2-d18990850323.glb   1,069.28 kB\ndist/atlas-data/assets/motion/t66-unit03-scapular-superior-rotation-right/motion.glb           1,079.15 kB\ndist/atlas-data/assets/motion/t66-unit03-scapular-superior-rotation-left/motion.glb            1,080.55 kB\ndist/atlas-data/assets/motion/t66-wave1/A-right-thumb-ip-flexion-digit-1-0716c8b06751.glb      1,081.60 kB\ndist/atlas-data/assets/motion/t66-wave1/A-left-thumb-ip-flexion-digit-1-887a52c7fe80.glb       1,081.95 kB\ndist/atlas-data/assets/motion/t59-za-right-ankle/motion.glb                                    1,092.16 kB\ndist/atlas-data/assets/motion/t66-wave1/A-right-finger-mcp-abduction-digit-4-be8bfd1f523a.glb  1,108.08 kB\ndist/atlas-data/assets/motion/t66-wave1/A-left-finger-mcp-abduction-digit-4-54499ba75834.glb   1,108.49 kB\ndist/atlas-data/assets/motion/t66-wave1/A-right-finger-dip-flexion-digit-4-66f402cb015c.glb    1,297.77 kB\ndist/atlas-data/assets/motion/t66-wave1/A-left-finger-dip-flexion-digit-4-ce0bc3bfcde1.glb     1,297.95 kB\ndist/atlas-data/assets/motion/t66-unit02-knee-flexion-left/motion.glb                          1,364.32 kB\ndist/atlas-data/assets/motion/t66-unit02-knee-flexion-right/motion.glb                         1,364.89 kB\ndist/atlas-data/assets/motion/t66-unit01-shoulder-flexion-right-source-frame-r4/motion.glb     1,518.56 kB\ndist/atlas-data/assets/motion/t66-unit01-shoulder-flexion-left-source-frame-r4/motion.glb      1,519.78 kB\ndist/atlas-data/assets/motion/t66-wave1/A-right-finger-pip-flexion-digit-3-41bfb69ad214.glb    1,733.84 kB\ndist/atlas-data/assets/motion/t66-wave1/A-left-finger-pip-flexion-digit-3-82d2df17d5eb.glb     1,734.02 kB\ndist/atlas-data/assets/motion/t66-wave1/A-right-finger-pip-flexion-digit-5-18447559cf77.glb    1,866.25 kB\ndist/atlas-data/assets/motion/t66-wave1/A-left-finger-pip-flexion-digit-5-d0edd2023199.glb     1,866.59 kB\ndist/atlas-data/assets/motion/t66-unit03-shoulder-abduction-right/motion.glb                   2,026.54 kB\ndist/atlas-data/assets/motion/t66-unit03-shoulder-abduction-left/motion.glb                    2,027.20 kB\ndist/atlas-data/assets/motion/t66-shoulder-external-rotation-right/motion.glb                  2,027.30 kB\ndist/atlas-data/assets/motion/t66-unit03-shoulder-internal-rotation-right/motion.glb           2,027.30 kB\ndist/atlas-data/assets/motion/t66-shoulder-external-rotation-left/motion.glb                   2,028.63 kB\ndist/atlas-data/assets/motion/t66-unit03-shoulder-internal-rotation-left/motion.glb            2,028.64 kB\ndist/atlas-data/assets/motion/t66-wave1/A-right-finger-mcp-flexion-digit-5-baa644d308d8.glb    2,043.00 kB\ndist/atlas-data/assets/motion/t66-wave1/A-left-finger-mcp-flexion-digit-5-721eb0741a26.glb     2,043.31 kB\ndist/atlas-data/assets/motion/t66-wave1/A-right-finger-mcp-flexion-digit-2-9dac02105f38.glb    2,096.78 kB\ndist/atlas-data/assets/motion/t66-wave1/A-left-finger-mcp-flexion-digit-2-87ee81567910.glb     2,097.32 kB\ndist/atlas-data/assets/motion/t66-unit01-elbow-flexion-right-source-frame-r4/motion.glb        2,100.25 kB\ndist/atlas-data/assets/motion/t66-unit01-elbow-flexion-left-source-frame-r4/motion.glb         2,100.76 kB\ndist/atlas-data/assets/motion/t66-hip-abduction-left/motion.glb                                2,192.05 kB\ndist/atlas-data/assets/motion/t66-hip-abduction-right/motion.glb                               2,192.98 kB\ndist/atlas-data/assets/motion/t66-unit02-hip-flexion-left/motion.glb                           2,193.06 kB\ndist/atlas-data/assets/motion/t66-unit02-hip-flexion-right/motion.glb                          2,193.88 kB\ndist/atlas-data/assets/motion/t66-unit03-shoulder-girdle-protraction-right-r5/motion.glb       2,679.33 kB\ndist/atlas-data/assets/motion/t66-unit03-shoulder-girdle-elevation-right-r5/motion.glb         2,679.62 kB\ndist/atlas-data/assets/motion/t66-unit03-shoulder-girdle-protraction-left-r5/motion.glb        2,680.72 kB\ndist/atlas-data/assets/motion/t66-unit03-shoulder-girdle-elevation-left-r5/motion.glb          2,681.33 kB\ndist/assets/index-UUYMvEqZ.css                                                                     0.74 kB │ gzip:   0.44 kB\ndist/assets/App-sIpRv9RU.css                                                                      40.33 kB │ gzip:   8.46 kB\ndist/assets/index-DWG1FPiX.js                                                                    222.37 kB │ gzip:  69.95 kB\ndist/assets/App-CcHSNG2k.js                                                                    6,201.94 kB │ gzip: 644.20 kB\n\n✓ built in 585ms\n",
+      "stderrTail": "[plugin builtin:vite-reporter] \n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n"
+    },
+    {
+      "name": "learner-bundle-distribution-audit",
+      "cwd": "atlas-web",
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "scripts/auditLearnerCardDistribution.mjs",
+        "--check"
+      ],
+      "exitCode": 0,
+      "passed": true,
+      "stdoutTail": "{\"schemaVersion\":\"t82-learner-distribution-audit-v1\",\"status\":\"passed\",\"scope\":\"compiled learner distribution; development evidence remains in source files and is not copied to learner JS/HTML/CSS/JSON\",\"checkedAt\":\"2026-10-04T13:24:25.824Z\",\"inputs\":{\"learnerRuntimeSha256\":\"bca2ab324f77059303c0f7391886f0b11e54f5c469f447bcf9bd2ec09cbb9f5d\",\"aiEvidenceOverlaySha256\":\"0a46e544f595179f8bfdaf307ea718d0a804f4d42dc9c3d8221ced554757f20f\",\"t81WorkbookDispositionSha256\":\"a71f61064cd2ef7f0b8f5d6cc68510023f01d3612a024eb620797634eaac3540\",\"t81PrivateWorkbookRows\":257,\"t81PrivateWorkbookHashReference\":\"8e10e00e76f5da8e6d1be6a0f9dcab6039d9a3f81d8a3808c0fe28545802ab3c\"},\"priorBundle\":{\"path\":\"atlas-web/dist/assets/App-X3cv7bvC.js\",\"bytes\":1091485,\"hits\":[\"cross_checked\",\"evidenceHash\",\"accessedOn\",\"fieldEvidenceId\",\"T18-FIELD-\",\"T18-STATPEARLS\",\"StatPearls\",\"Hands-on Anatomy\"],\"sha256\":\"5bb64f9df1005baa44c29566949c961fdd6c6166917a8ea7e73a105b871c9d2d\"},\"learnerRuntimeRows\":{\"names\":81,\"conceptStructureRows\":8,\"sourceStructureRows\":461,\"actions\":7},\"distribution\":{\"scannedFiles\":5,\"bundles\":[{\"path\":\"atlas-web/dist/assets/App-CcHSNG2k.js\",\"bytes\":6201944,\"sha256\":\"3bed7b0ff7955a22ed08372d500fa044cf2618d46acae9d5d72f010871923621\"},{\"path\":\"atlas-web/dist/assets/index-DWG1FPiX.js\",\"bytes\":222370,\"sha256\":\"13aed8a79d0632fac6f511f05fcb9a8bb6ff51f4dae36c76461d81d8d61cc9de\"}]},\"provenanceMarkersChecked\":274,\"leaks\":[],\"limitations\":[\"The private workbook bytes were not reopened or copied; only the existing T81 disposition/hash record was checked.\",\"This validates absence of development provenance markers from compiled learner assets, not public redistribution permission or human review.\"]}\n",
+      "stderrTail": ""
+    }
+  ],
+  "allPassed": true,
+  "notes": [
+    "Vite may emit its existing large-chunk advisory; this is recorded separately from build success.",
+    "No GPU/VRAM or total process-memory observation is inferred from these checks.",
+    "Desktop viewport emulation is not a physical mobile-device test."
+  ]
+}

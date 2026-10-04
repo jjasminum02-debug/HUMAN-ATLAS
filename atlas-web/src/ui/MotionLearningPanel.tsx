@@ -312,6 +312,7 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
 
   return <section className="motion-player" aria-label="움직임으로 이해하기" data-testid="motion-player">
     <h4>움직임으로 이해하기</h4>
+    {!showActionPicker && selectedAction && candidate && <p className="motion-action-summary">{selectedAction.label}</p>}
     {candidate?.definition.sourceFamilyId && <p className="quiet-note">
       {candidate.asset.poseControl?.label} 자세에서 표면 변화를 관찰합니다. 주변 근육의 수동 변화도 포함하며 개별 근육의 활성도를 나타내지 않습니다.
     </p>}

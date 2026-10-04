@@ -1,0 +1,86 @@
+{
+  "runId": "T66-W2-20261004-r2-5735b81b7626",
+  "manifestSha256": "d6ad4413da2beb44508715f1e48b8389c29071d2cad28fb28c2254a3f0c1a600",
+  "D": {
+    "assignedWorkKeys": 16,
+    "assignmentOwnerMatchesD": false,
+    "manifestOwnershipConflictCount": 16,
+    "productionCandidateGlbs": 22,
+    "candidateGlbsHashedAndChecked": 22,
+    "candidateValidatedRowsNotRegistered": 2,
+    "jawEngineeringBlockRows": 10,
+    "missingFunctionalContextRows": 2,
+    "unresolvedPterygoidActionRows": 2,
+    "registered": false,
+    "blockerIds": [
+      "T66-WK-8d3aa1e0b5da97a00426cfb5",
+      "T66-WK-8a4aa81491435ea4b7363b0c",
+      "T66-WK-c63a79243517e9fcb8cf3f8b",
+      "T66-WK-771a69a58ae4658d1e2a7b25",
+      "T66-WK-ac6a41110884e6f0483e0c18",
+      "T66-WK-a6ba9e9c14562ee6ec49c51b",
+      "T66-WK-3b315b39c68622971dff6829",
+      "T66-WK-b49f71f556187ebdd0f707f2",
+      "T66-WK-c84ef9445cc16420079de7c6",
+      "T66-WK-7581316eb81067b892be3e9c",
+      "T66-WK-1a131f4321d78103dec832f6",
+      "T66-WK-1a03b8e442a0f42fad367944",
+      "T66-WK-0f0321f9abc45ddfa6f8d31f",
+      "T66-WK-e3f678261b7cdeb678a7d79e",
+      "T66-WK-a9900774da8b22aa37e2215e",
+      "T66-WK-fd6a91b0f907ab86485c66e0"
+    ],
+    "auditBlockers": [
+      "16 fixed work-key ownership conflicts",
+      "10 jaw action source rows blocked by actual Bucinator edge/area deformation",
+      "2 Palatopharyngeus source-action rows lack assigned functional context",
+      "2 superior lateral pterygoid active actions remain unresolved",
+      "hyoid/larynx sources are not in assignment D"
+    ],
+    "exceptions": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/workers/D/exceptions.json"
+  },
+  "E": {
+    "assignedWorkKeys": 66,
+    "actionEvidenceRows": 82,
+    "candidateGlbs": 56,
+    "uniqueGlbHashes": 56,
+    "localGeometryQc": {
+      "passed": 38,
+      "failed": 18
+    },
+    "actualAuditMatches": {
+      "pass": 38,
+      "fail": 18
+    },
+    "actionOutcomeQcPassed": 0,
+    "candidateValidatedWorkKeys": 0,
+    "blockedEngineeringWorkKeys": 18,
+    "missingSourceOrRelationWorkKeys": 48,
+    "registered": false,
+    "engineeringExceptionSourceKeys": [
+      "ZA-c7010a9-452803023ef7e6415eec7e29",
+      "ZA-c7010a9-87401ac0e10b65dbca11538f",
+      "ZA-c7010a9-4217ef5d74b72fb97abf9a68",
+      "ZA-c7010a9-a74965560e389cd8fe0eef14",
+      "ZA-c7010a9-8e286cbe757346bef41a126e",
+      "ZA-c7010a9-3c88ebd2523e56a252daaa02",
+      "ZA-c7010a9-e59c2fa20022909910b16d8a",
+      "ZA-c7010a9-53ab97075daa0d4bfedfc418",
+      "ZA-c7010a9-080c1f6fcfde42b0e6e25411",
+      "ZA-c7010a9-f3300fbc4a7230973e1035e5",
+      "ZA-c7010a9-8134654f9814f6d7b7938faa",
+      "ZA-c7010a9-a7787c4405179bf9f20c40c1",
+      "ZA-c7010a9-3080206139cedc3d2d43cd9b",
+      "ZA-c7010a9-9e38cc82c15401a2d95fbdcd",
+      "ZA-c7010a9-65a3cb9fc4c8d0e919163307",
+      "ZA-c7010a9-77f406d04d8606615ddfd68e",
+      "ZA-c7010a9-22f1fc696e0dff69f702a1d1",
+      "ZA-c7010a9-045436bbb9a3e19439b1f993"
+    ],
+    "details": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/workers/E/exceptions.json",
+    "runnerContractPatchProposal": {
+      "path": "work/evidence/T66/parallel-completion-2026-10-03/wave-2/workers/E/patch-proposals/runner-contract.md",
+      "reason": "The wave-2 runner forbids any nonempty outputRoot then requires candidate artifacts and package under that same root. It also only permits package.sourceKeys from assignedSourceKeys and offers no typed field for explicitly read-only assignedBoneSourceKeys as context. A writer-owned fix should validate an already-populated owned root safely and validate assigned muscle keys separately from explicit assigned bone-context dependencies; worker E did not alter common code."
+    }
+  }
+}
