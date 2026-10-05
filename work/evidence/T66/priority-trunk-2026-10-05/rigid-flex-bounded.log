@@ -1,0 +1,8 @@
+flex Diaphragm Vertebra L2 12
+flex Diaphragm Vertebra L3 13
+flex rigid contact pairs 3010 passed False
+Traceback (most recent call last):
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T66/priority-trunk-2026-10-05/verify_context.py", line 34, in <module>
+    (O/'context-contact-summary.json').write_text(json.dumps([{'kind':r['kind'],'pairs':len(r['rows']),'newContainmentMaximum':r['newContainmentMaximum'],'passed':r['passed']} for r in results],indent=2)+'\n');assert all(r['passed'] for r in results)
+                                                                                                                                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

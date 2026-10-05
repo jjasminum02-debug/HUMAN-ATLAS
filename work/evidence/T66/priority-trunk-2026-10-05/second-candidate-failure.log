@@ -1,0 +1,113 @@
+author flex native surfaces 365
+surface flex 0 Multifidus lumborum muscle.r
+surface flex 1 Brachialis muscle.l
+surface flex 2 Proximal phalanx of second finger of hand.l
+surface flex 3 Twelfth rib.r
+surface flex 4 Fifth metacarpal bone.l
+surface flex 5 Vertebra T11
+surface flex 6 Third metacarpal bone.r
+surface flex 7 First rib.r
+surface flex 8 Vertebra L5
+surface flex 9 Long head of triceps brachii.l
+surface flex 10 Occipital bone
+surface flex 11 Levatores breves costarum.l
+surface flex 12 (Abdominal part of pectoralis major muscle).l
+surface flex 13 Proximal phalanx of third finger of hand.l
+surface flex 14 Triquetrum bone.l
+surface flex 15 Sternocleidomastoid muscle.l
+surface flex 16 Hamate bone.l
+surface flex 17 Interspinales colli muscles.l
+surface flex 18 Serratus anterior muscle.l
+surface flex 19 Vertebra L2
+surface flex 20 Anconeus muscle.l
+surface flex 21 Capitate bone.r
+surface flex 22 Inferior pharyngeal constrictor.l
+surface flex 23 Extensor pollicis longus.r
+surface flex 24 Extensor digiti minimi.r
+surface flex 25 Latissimus dorsi muscle.r
+surface flex 26 Distal phalanx of fifth finger of hand.l
+surface flex 27 Rhomboid minor muscle.r
+surface flex 28 Semispinalis thoracis muscle.l
+surface flex 29 Proximal phalanx of third finger of hand.r
+surface flex 30 Vertebra C5
+surface flex 31 Sternocleidomastoid muscle.r
+surface flex 32 Dorsal parts of lateral intertransversarii lumborum muscles.l
+surface flex 33 Splenius capitis muscle.r
+surface flex 34 Ninth rib.r
+surface flex 35 Geniohyoid muscle.r
+surface flex 36 Sixth rib.r
+surface flex 37 Pectoralis minor muscle.l
+surface flex 38 External intercostal muscles.l
+surface flex 39 Thyrohyoid muscle.r
+surface flex 40 Radius.l
+surface flex 41 Psoas major.l
+surface flex 42 Extensor digiti minimi.l
+surface flex 43 Subscapularis muscle.l
+surface flex 44 Third rib.l
+surface flex 45 Extensor indicis.r
+surface flex 46 Serratus posterior inferior muscle.l
+surface flex 47 Lunate bone.l
+surface flex 48 Pisiform bone.l
+surface flex 49 Scapula.l
+surface flex 50 Pyramidalis muscle.r
+surface flex 51 Clavicular part of deltoid muscle.l
+surface flex 52 Ulna.r
+surface flex 53 Ulnar head of flexor carpi ulnaris.l
+surface flex 54 Brachioradialis muscle.r
+surface flex 55 Serratus posterior superior muscle.l
+surface flex 56 Tenth rib.l
+surface flex 57 Acromial part of deltoid muscle.l
+surface flex 58 Rectus anterior capitis muscle.r
+surface flex 59 Scapular spinal part of deltoid muscle.r
+surface flex 60 Sternocostal head of pectoralis major muscle.r
+surface flex 61 Vertebra T5
+surface flex 62 Middle phalanx of third finger of hand.r
+surface flex 63 Coracobrachialis muscle.r
+surface flex 64 Long head of biceps brachii.l
+surface flex 65 Posterior crico-arytenoid muscle.l
+surface flex 66 Iliocostalis colli muscle.r
+surface flex 67 Rectus abdominis muscle.l
+surface flex 68 Third metacarpal bone.l
+surface flex 69 Humerus.r
+surface flex 70 Iliocostalis lumborum muscle.l
+surface flex 71 Dorsal parts of lateral intertransversarii lumborum muscles.r
+surface flex 72 Extensor indicis.l
+surface flex 73 Ninth rib.l
+surface flex 74 Posterior belly of digastric muscle.r
+surface flex 75 Semispinalis colli muscle.r
+surface flex 76 Sternothyroid muscle.r
+surface flex 77 Pronator quadratus.r
+surface flex 78 (Abdominal part of pectoralis major muscle).r
+surface flex 79 Spinalis capitis muscle.r
+surface flex 80 Middle phalanx of fourth finger of hand.r
+surface flex 81 Humeral head of flexor carpi ulnaris.r
+surface flex 82 Distal phalanx of second finger of hand.r
+surface flex 83 Palmaris longus muscle.r
+surface flex 84 Flexor pollicis longus.l
+surface flex 85 Rotatores.r
+surface flex 86 Subclavius muscle.r
+surface flex 87 Pronator quadratus.l
+surface flex 88 Internal intercostal muscles.l
+surface flex 89 Proximal phalanx of second finger of hand.r
+surface flex 90 Spinalis colli muscle.l
+surface flex 91 Extensor carpi radialis longus.l
+surface flex 92 Medial head of triceps brachii.l
+surface flex 93 Longissimus colli muscle.r
+surface flex 94 Superior pharyngeal constrictor.l
+surface flex 95 Quadratus lumborum muscle.r
+Traceback (most recent call last):
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T66/priority-trunk-2026-10-05/author_trunk.py", line 101, in <module>
+    try:poses[step],c=source_bone_projection_corrective(poses[step],w,tri,contacts,set(fixed),margin_metres=.00001)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/t66_contact_correctives.py", line 177, in source_bone_projection_corrective
+    if flips or minimum<.1:raise ValueError(f'source-bone projection geometry rejected: flips={flips}, minimumAreaRatio={minimum}')
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: source-bone projection geometry rejected: flips=1, minimumAreaRatio=0.37747810303436946
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T66/priority-trunk-2026-10-05/author_trunk.py", line 102, in <module>
+    except ValueError as e:raise RuntimeError(src[k]['name']+' '+kind+' key '+str(step)+': '+str(e))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Quadratus lumborum muscle.r flex key 10: source-bone projection geometry rejected: flips=1, minimumAreaRatio=0.37747810303436946

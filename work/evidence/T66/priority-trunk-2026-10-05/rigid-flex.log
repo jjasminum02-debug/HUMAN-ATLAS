@@ -1,0 +1,45 @@
+flex Proximal phalanx of second finger of hand.l Middle phalanx of second finger of hand.l 1
+flex Serratus anterior muscle.l Scapula.l 1
+flex Splenius capitis muscle.r Vertebra C7 1
+flex Pectoralis minor muscle.l Third rib.l 1
+flex External intercostal muscles.l Fourth rib.l 2
+flex Subscapularis muscle.l Scapula.l 1
+flex Internal intercostal muscles.l Second rib.l 1
+flex Internal intercostal muscles.l Fourth rib.l 1
+flex Internal intercostal muscles.l Eleventh rib.l 1
+flex Proximal phalanx of second finger of hand.r Middle phalanx of second finger of hand.r 1
+flex First metacarpal bone.r Proximal phalanx of first finger of hand.r 1
+flex Serratus anterior muscle.r Scapula.r 1
+flex Innermost intercostal muscles.l Ninth rib.l 1
+flex Innermost intercostal muscles.l Fourth rib.l 1
+flex Innermost intercostal muscles.l Fifth rib.l 1
+flex Innermost intercostal muscles.l Sixth rib.l 1
+flex Pectoralis minor muscle.r Third rib.r 1
+flex External intercostal muscles.r Fourth rib.r 2
+flex Ascending part of trapezius muscle.r Clavicle.r 1
+flex Internal intercostal muscles.r Fourth rib.r 1
+flex Internal intercostal muscles.r Second rib.r 1
+flex Internal intercostal muscles.r Eleventh rib.r 1
+flex Longus capitis muscle.r Occipital bone 1
+flex Subscapularis muscle.r Scapula.r 1
+flex Flexor digitorum profundus.l Distal phalanx of third finger of hand.l 1
+flex Innermost intercostal muscles.r Ninth rib.r 1
+flex Innermost intercostal muscles.r Sixth rib.r 1
+flex Innermost intercostal muscles.r Fifth rib.r 1
+flex First metacarpal bone.l Proximal phalanx of first finger of hand.l 1
+flex Flexor digitorum profundus.r Distal phalanx of third finger of hand.r 1
+flex Diaphragm Vertebra L2 12
+Traceback (most recent call last):
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T66/priority-trunk-2026-10-05/verify_context.py", line 15, in <module>
+    return actual@np.linalg.inv(np.array(src[k]['matrix']).reshape(4,4).T)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T66/serial-completion-2026-10-02/unit-01/verify_glb_interpolation.py", line 103, in bounded_inside
+    if len(ids): result[ids] = inside(points[ids], vertices, triangles)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/source_surface_constraints.py", line 10, in inside
+    la=np.linalg.norm(a,axis=2);lb=np.linalg.norm(b,axis=2);lc=np.linalg.norm(c,axis=2)
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/linalg/_linalg.py", line 2619, in _norm_dispatcher
+    def _norm_dispatcher(x, ord=None, axis=None, keepdims=None):
+
+KeyboardInterrupt

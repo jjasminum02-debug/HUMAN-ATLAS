@@ -3,6 +3,14 @@ import { readFile, realpath } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import type { Plugin } from 'vite';
 
+// The native trunk package retains 365 context surfaces and 17 corrected poses.
+// Its measured file size is pinned; other assets retain the 8 MiB default.
+export function motionAssetByteBudget(entry: { uri: string; sha256: string }): number {
+  return entry.uri === 'atlas-data/assets/motion/t66-priority-s04-flex/motion.glb'
+    && entry.sha256 === 'fd09265a937bebff65f0d1b095bc2d0350f13b7222e53a90c32bb40b80c43adf'
+    ? 31_306_820 : 8 * 1024 * 1024;
+}
+
 /** Deliver registered, hashed local motion packages lazily; unknown paths never fall through as HTML. */
 export function motionAssetsPlugin(root: string): Plugin {
   const prefix = '/atlas-data/assets/motion/';
@@ -45,7 +53,7 @@ export function motionAssetsPlugin(root: string): Plugin {
     const path = await realpath(resolve(root, entry.uri));
     if (!path.startsWith(await realpath(resolve(root, 'atlas-data/assets/motion')) + sep)) throw Error('motion asset containment');
     const bytes = await readFile(path);
-    if (bytes.length > 8 * 1024 * 1024 || createHash('sha256').update(bytes).digest('hex') !== entry.sha256) throw Error('motion asset integrity/budget');
+    if (bytes.length > motionAssetByteBudget(entry) || createHash('sha256').update(bytes).digest('hex') !== entry.sha256) throw Error('motion asset integrity/budget');
     return bytes;
   }
   return {

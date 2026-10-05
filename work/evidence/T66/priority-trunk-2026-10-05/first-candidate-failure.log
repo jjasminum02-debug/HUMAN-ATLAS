@@ -1,0 +1,16 @@
+author flex native surfaces 365
+Traceback (most recent call last):
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T66/priority-trunk-2026-10-05/author_trunk.py", line 101, in <module>
+    try:poses[step],c=source_bone_projection_corrective(poses[step],w,tri,contacts,set(fixed),margin_metres=.00001)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/t66_contact_correctives.py", line 163, in source_bone_projection_corrective
+    raise ValueError('source-bone projection corrective cannot clear contact while retaining source triangle orientation/10% area')
+ValueError: source-bone projection corrective cannot clear contact while retaining source triangle orientation/10% area
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T66/priority-trunk-2026-10-05/author_trunk.py", line 102, in <module>
+    except ValueError as e:raise RuntimeError(src[k]['name']+' '+kind+' key '+str(step)+': '+str(e))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: External intercostal muscles.l flex key 2: source-bone projection corrective cannot clear contact while retaining source triangle orientation/10% area

@@ -76,7 +76,7 @@ test('rectus knee extension is reverse from preparation and retains complete nat
 
 test('priority action contexts contain every supported native leg and foot muscle on the subject side', () => {
   const overlay = read('atlas-data/overlays/za-local-integration.json');
-  for (const row of acceptance.rows.filter((r: { assetId: string }) => !r.assetId.startsWith('T66-PRIORITY-S03-'))) {
+  for (const row of acceptance.rows.filter((r: { assetId: string }) => !/^T66-PRIORITY-S0[34]-/.test(r.assetId))) {
     const asset = bundle.motionAssets.find(asset => asset.id === row.assetId)!;
     const keys = new Set(asset.sourceBinding!.members.map(m => m.sourceKey));
     for (const source of overlay.objects) {
@@ -96,7 +96,7 @@ test('priority action contexts contain every supported native leg and foot muscl
 
 test('actual hip context loads bounded passive morphs and rejects unverified or excessive corrections', async () => {
   const { loadAnimationScene } = await import('../viewer/animationSceneAdapter.ts');
-  for (const row of acceptance.rows.filter((r: { assetId: string }) => /RECTUS-ASSET$/.test(r.assetId))) {
+  for (const row of acceptance.rows.filter((r: { assetId: string }) => /RECTUS-ASSET$/.test(r.assetId) && !r.assetId.startsWith('T66-PRIORITY-S04-'))) {
     const asset = bundle.motionAssets.find(asset => asset.id === row.assetId)!;
     const bytes = readFileSync(new URL('../../../' + asset.uri, import.meta.url));
     const buffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) as ArrayBuffer;

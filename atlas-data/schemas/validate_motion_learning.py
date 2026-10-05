@@ -135,6 +135,14 @@ def load_production_context() -> dict[str, Any]:
                         or any(record["poseRange"][k] != geometry["family"][k] for k in ["axis", "pivotMetres", "endDegrees", "referencePoseId"])
                         or not {record["contactQcPath"], record["geometryRecordPath"], record["glbPoseQcPath"], *interpolation_paths.values()}.issubset({d["path"] for d in dependencies})):
                     raise ValueError("Source family pose/geometry/verification differs")
+                # Only the hash/QC-validated family may supply bilateral or
+                # axial bone context for an exact unilateral source subject.
+                # Subject laterality remains checked independently below.
+                record["_verifiedFamilyBoneContext"] = {
+                    member["sourceKey"]: {"role": member["role"], "side": member["side"]}
+                    for member in geometry["members"]
+                    if member["role"] in {"moving_structure", "fixed_structure"}
+                }
             authoring_records[entry["id"]] = record
         for entry in registry.get("sources", []):
             for prefix in ("dataset", "rightsEvidence"):
@@ -277,6 +285,18 @@ def asset_path(uri: str, context: dict[str, Any]) -> Path | None:
     return path
 
 
+def verified_family_bone_context(structure_id: str, role: str, definition: dict[str, Any], context: dict[str, Any]) -> bool:
+    """A source subject's side does not restrict its verified surrounding bones."""
+    family = next((r for r in context.get("authoringRecords", {}).values()
+        if r.get("sourceFamilyId") and r["sourceFamilyId"] == definition.get("sourceFamilyId")), None)
+    source = context.get("sourceInstances", {}).get(structure_id, {})
+    member = (family or {}).get("_verifiedFamilyBoneContext", {}).get(structure_id, {})
+    field = "movingBoneKeys" if role == "moving_structure" else "fixedBoneKeys"
+    return bool(family and structure_id in family.get(field, [])
+        and source.get("kind") == "skeletal_surface" and member.get("role") == role
+        and "side" in member and member["side"] == source.get("sourceLabelSide"))
+
+
 def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any], *, allow_fixture: bool = False) -> list[dict[str, str]]:
     issues = [issue(row["code"], row["path"], row["message"]) for row in _T03.schema_issues(schema, payload)]
     if issues:
@@ -414,13 +434,17 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
         for structure_id in definition["movingStructureIds"]:
             structure = context["structures"].get(structure_id)
             source_structure = context.get("sourceInstances", {}).get(structure_id)
-            if (structure is None or structure.get("kind") != "bone") and not (source_structure and source_structure.get("kind") == "skeletal_surface" and source_structure.get("sourceLabelSide") == definition["side"]):
+            if ((structure is None or structure.get("kind") != "bone")
+                    and not (source_structure and source_structure.get("kind") == "skeletal_surface" and source_structure.get("sourceLabelSide") == definition["side"])
+                    and not verified_family_bone_context(structure_id, "moving_structure", definition, context)):
                 issues.append(issue("invalid_moving_structure", f"{path}.movingStructureIds", f"Moving structure {structure_id!r} must resolve to a canonical bone."))
         for structure_id in definition["fixedStructureIds"]:
             source_fixed = context.get("sourceInstances", {}).get(structure_id, {})
             adopted = next((r for r in context.get("authoringRecords", {}).values() if r.get("sourceFamilyId") == definition.get("sourceFamilyId") and r.get("sourceFamilyId")), None)
             nullable_axial_context = bool(adopted and structure_id in adopted["fixedBoneKeys"] and source_fixed.get("sourceLabelSide") is None)
-            if structure_id not in context["structures"] and not (source_fixed.get("kind") == "skeletal_surface" and (source_fixed.get("sourceLabelSide") == definition["side"] or nullable_axial_context)):
+            if (structure_id not in context["structures"]
+                    and not (source_fixed.get("kind") == "skeletal_surface" and (source_fixed.get("sourceLabelSide") == definition["side"] or nullable_axial_context))
+                    and not verified_family_bone_context(structure_id, "fixed_structure", definition, context)):
                 issues.append(issue("orphan_fixed_structure", f"{path}.fixedStructureIds", f"Unknown canonical fixed structure {structure_id!r}."))
         for joint_id in definition["targetJointIds"]:
             structure = context["structures"].get(joint_id)

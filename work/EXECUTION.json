@@ -3186,7 +3186,7 @@
             "muscleMembershipCount": 447,
             "sourceConceptCount": 232,
             "sourceSurfaceCount": 462,
-            "primaryPlayableMuscleSourceSurfaces": 16,
+            "primaryPlayableMuscleSourceSurfaces": 20,
             "sourcePoseObservationSurfaces": 129,
             "historicalMainFunctionSourceClipSurfaces": 1,
             "qualitativeActionDemonstrationSelectorRows": 34,
@@ -3280,7 +3280,11 @@
               "ZA-c7010a9-2ea5931bed7570848730b3f4": 1,
               "ZA-c7010a9-93bf352448accd9e7356fc10": 1,
               "ZA-c7010a9-96cb4db8fde040d91dd1119e": 1,
-              "ZA-c7010a9-0f9baaa60e90f20ca5ccb7e8": 1
+              "ZA-c7010a9-0f9baaa60e90f20ca5ccb7e8": 1,
+              "ZA-c7010a9-33941d62db2cd36b20fe5945": 1,
+              "ZA-c7010a9-d75abb958e1463ceecb5430b": 1,
+              "ZA-c7010a9-9184adfd521c527f3b352e71": 1,
+              "ZA-c7010a9-eb0bd1853a90acada85e9177": 1
             },
             "priorityMotionCompleteness": "partial",
             "nativeStaticNerveSurfaceCount": 195,
@@ -3296,14 +3300,14 @@
             "newNerveBranchCoordinates": 0,
             "newCanonicalBindings": 0,
             "nerveTextCoverageStatus": "partial; not a gate for the currently supported nerve-learning flow",
-            "priorityVerifiedSourceActionBindings": 18,
-            "priorityVerifiedGlbAssets": 12,
-            "priorityNewDerivedAssetsThisUnit": 2,
-            "priorityGroupsWithRepresentativeActions": 5,
-            "priorityGroupsRemaining": 2
+            "priorityVerifiedSourceActionBindings": 22,
+            "priorityVerifiedGlbAssets": 13,
+            "priorityNewDerivedAssetsThisUnit": 1,
+            "priorityGroupsWithRepresentativeActions": 7,
+            "priorityGroupsRemaining": 0
           },
           "unresolvedProductBlockers": [
-            "우선7근육군 중 앞정강근·대퇴직근·대흉근(3부위)·견갑거근·대/소능형근의 양측 대표 작용을 실제 검증했다. 복직근·외복사근과 최종 통합은 다음 승인된 내부 단계에서 수행한다.",
+            "우선 7근육군의 양측 대표 작용을 각 내부 단계에서 검증했다. 부모 T66의 최종 통합·지원 앱 회귀 및 신경 흐름 판정은 05 통합 단계에서 수행한다.",
             "이번 신경 카드의 대표 실제 UI는 검증했다. 우선 애니메이션과 이번 신경 관계를 함께 확인하는 T66 최종 통합 회귀/판정은 아직 남아 있다."
           ],
           "evidence": [
@@ -3352,7 +3356,13 @@
             "work/evidence/T66/priority-shoulder-scapula-2026-10-05/action-outcome.json",
             "work/evidence/T66/priority-shoulder-scapula-2026-10-05/registration.json",
             "work/evidence/T66/priority-shoulder-scapula-2026-10-05/dependency-audit.json",
-            "work/evidence/T66/priority-shoulder-scapula-2026-10-05/browser/observations.json"
+            "work/evidence/T66/priority-shoulder-scapula-2026-10-05/browser/observations.json",
+            "work/evidence/T66/priority-trunk-2026-10-05/REPORT.md",
+            "work/evidence/T66/priority-trunk-2026-10-05/final-validation.json",
+            "work/evidence/T66/priority-trunk-2026-10-05/action-outcome.json",
+            "work/evidence/T66/priority-trunk-2026-10-05/registration.json",
+            "work/evidence/T66/priority-trunk-2026-10-05/dependency-audit.json",
+            "work/evidence/T66/priority-trunk-2026-10-05/browser/observations.json"
           ],
           "scopeAmendment": "priority-muscle-atlas-2026-10-05"
         },
@@ -4065,7 +4075,7 @@
             "same_side_existing_literature_rhomboid_context_highlight",
             "user_layer_off_hidden_pose_guards"
           ],
-          "nextManualPrompt": "work/plans/t66-priority-atlas-2026-10-05/04-trunk.txt"
+          "nextManualPrompt": "work/plans/t66-priority-atlas-2026-10-05/05-integration-close.txt"
         },
         "nerveLearningUnit": {
           "status": "implemented_verified_with_content_gaps",
@@ -4187,6 +4197,46 @@
             "work/evidence/T66/priority-shoulder-scapula-2026-10-05/browser/observations.json"
           ],
           "nextManualFile": "work/plans/t66-priority-atlas-2026-10-05/04-trunk.txt"
+        },
+        "priorityTrunkUnit": {
+          "executionStatus": "completed",
+          "acceptance": "passed",
+          "contractRevision": "app-completion-2026-10-01",
+          "acceptanceScope": "T66 step04: exact bilateral native rectus abdominis trunk flexion and external abdominal oblique bilateral cooperative trunk flexion with intact native trunk and upper-body context",
+          "productReadiness": "local_supported_priority_trunk_actions_ready",
+          "contentCompleteness": "partial",
+          "knownContentGaps": [
+            "Only representative bilateral trunk flexion is supported; unilateral external oblique rotation remains blocked_engineering and unregistered; other trunk actions, whole-muscle physiological behavior and full ROM remain outside this unit.",
+            "Exact TA2 whole-group/part extent, human review and public redistribution approval remain separate, unapproved states.",
+            "Final T66 integration and current supported-app cross-viewport/nerve flow acceptance are the next authorized internal step.",
+            "Out-of-priority jaw/face/breathing/E-index engineering remains deferred, not a source gap or a gate for this step."
+          ],
+          "unresolvedProductBlockers": [],
+          "actualMuscleSourceSurfaces": 4,
+          "completedPriorityGroupsThisUnit": 2,
+          "cumulativePriorityGroupsWithRepresentativeActions": 7,
+          "priorityGroupDenominator": 7,
+          "exactSourceActionBindings": 4,
+          "distinctBodyActions": 1,
+          "sharedFamilyAcrossMuscles": true,
+          "deferredEngineering": [
+            "external oblique unilateral rotation candidates: contact/topology repair not yet passed; not a missing-source claim"
+          ],
+          "uniqueGlbAssets": 1,
+          "newDerivedGlbAssets": 1,
+          "contextSurfacesPerPackage": 365,
+          "sourceOnly": true,
+          "publicRedistribution": "held",
+          "humanReview": "not_performed",
+          "evidence": [
+            "work/evidence/T66/priority-trunk-2026-10-05/REPORT.md",
+            "work/evidence/T66/priority-trunk-2026-10-05/final-validation.json",
+            "work/evidence/T66/priority-trunk-2026-10-05/action-outcome.json",
+            "work/evidence/T66/priority-trunk-2026-10-05/registration.json",
+            "work/evidence/T66/priority-trunk-2026-10-05/dependency-audit.json",
+            "work/evidence/T66/priority-trunk-2026-10-05/browser/observations.json"
+          ],
+          "nextManualFile": "work/plans/t66-priority-atlas-2026-10-05/05-integration-close.txt"
         }
       },
       "report": "work/reports/T66.md",

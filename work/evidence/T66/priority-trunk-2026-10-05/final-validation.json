@@ -1,0 +1,83 @@
+{
+  "status": "passed",
+  "acceptanceScope": "T66 step04: exact bilateral native rectus abdominis trunk flexion and external abdominal oblique bilateral cooperative trunk flexion with intact native trunk and upper-body context",
+  "contractRevision": "app-completion-2026-10-01",
+  "deliveryBudgetRegression": {
+    "passed": 1,
+    "failed": 0,
+    "log": "work/evidence/T66/priority-trunk-2026-10-05/verification/delivery-budget-tests.log"
+  },
+  "sourceContextRegression": {
+    "passed": 4,
+    "failed": 0,
+    "log": "work/evidence/T66/priority-trunk-2026-10-05/verification/source-context-tests.log"
+  },
+  "schemaFixtures": {
+    "passed": 19,
+    "failed": 0
+  },
+  "relatedRegression": {
+    "passed": 35,
+    "failed": 0,
+    "log": "work/evidence/T66/priority-trunk-2026-10-05/verification/related-tests.log",
+    "contactProjectionRegression": {
+      "passed": 2,
+      "failed": 0,
+      "log": "work/evidence/T66/priority-trunk-2026-10-05/verification/contact-projection-tests.log"
+    }
+  },
+  "productionBuild": {
+    "passed": true,
+    "typecheckAndFullMotionSchemaPolicy": true,
+    "learnerDistributionAudit": true,
+    "log": "work/evidence/T66/priority-trunk-2026-10-05/verification/build.log"
+  },
+  "emittedGeometry": {
+    "exactSourceActions": 4,
+    "distinctTargetSourceSurfaces": 4,
+    "uniqueMotionGlbs": 1,
+    "sourceContextSurfacesPerPackage": 365,
+    "actionOutcomeSamplesPerAction": 65,
+    "flippedFaceSamples": 0,
+    "newDeformerBoneContainment": 0,
+    "baselineOverlapPreserved": true,
+    "continuousCollisionFreedomClaimed": false,
+    "wholeTargetExtentApprovalsAdded": 0,
+    "humanReview": "not_performed",
+    "rigidContextPrecision": "Native key replay retains 1 micrometre. Common rigid pairs are explicitly compared at 65 interpolated poses with a 10 micrometre bound for independent glTF TRS interpolation; this is not strict ray-count-zero or a tolerance change in the deforming-muscle verifier."
+  },
+  "browser": {
+    "cases": [
+      "rectus-left",
+      "rectus-right",
+      "oblique-left",
+      "oblique-right"
+    ],
+    "cssViewport": [
+      1280,
+      720
+    ],
+    "singleCanvas": true,
+    "loopAndReclickSmoothRest": true,
+    "scrubRestMidEnd": true,
+    "selectionAndLayerOffGuards": true,
+    "keyboardCameraAndHistory": true,
+    "staticNerveNonRestSuppressionAndRestoration": true,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "pngCount": 26,
+    "observationsPath": "work/evidence/T66/priority-trunk-2026-10-05/browser/observations.json",
+    "consolePath": "work/evidence/T66/priority-trunk-2026-10-05/browser/console-log.json",
+    "physicalDeviceValidation": false,
+    "39010241440Claimed": false
+  },
+  "unresolvedProductBlockers": [],
+  "knownVerificationLimitations": [
+    "Only bounded authored teaching trajectories are supported: 14 degree trunk flexion. They are not full physiological ROM, force/activation, measured anatomical axes, exact source attachment footprints, or all abdominal actions.",
+    "Actual emitted keys/interpolation are sampled; source-baseline overlap is retained and continuous collision freedom is not established.",
+    "No same-input old QC/catalog/whole-family investigations were repeated; unchanged used accessor bytes and source transforms are explicitly reused.",
+    "One desktop browser viewport was exercised here. Cross-viewport integration belongs to the next separately authorized internal step.",
+    "Selective commit is an owned checkpoint on the current workspace, which retains required predecessor authoring/runtime WIP. A standalone clean-HEAD app completion is not claimed.",
+    "Reduced-motion and shared clock policy are covered by unchanged-player regressions; no physical device or OS accessibility preference was exercised."
+  ]
+}
