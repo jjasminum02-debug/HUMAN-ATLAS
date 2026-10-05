@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "t66-nerve-learning-verification-summary-v1",
+  "recordedAt": "2026-10-05",
+  "checks": [
+    {
+      "command": "python3 work/tools/build_t66_nerve_learning.py --check",
+      "status": "passed",
+      "result": {
+        "exactGeometryMotorRows": 2,
+        "literatureConceptRows": 16,
+        "totalRows": 18,
+        "uniqueNerveKeysInRelations": 9,
+        "uniqueTargetSourceKeys": 44,
+        "sourceSurfaces": 195,
+        "sourceLabelGroups": 98
+      }
+    },
+    {
+      "command": "python3 work/tools/validate_t66_nerve_learning.py",
+      "status": "passed",
+      "findings": []
+    },
+    {
+      "command": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --experimental-strip-types --test src/data/t66NerveLearning.test.ts",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0
+    },
+    {
+      "command": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node node_modules/typescript/bin/tsc -b --pretty false",
+      "status": "passed"
+    },
+    {
+      "command": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node node_modules/vite/bin/vite.js build",
+      "status": "passed_with_existing_chunk_warning",
+      "warning": "App JS chunk is above 500 kB after minification."
+    },
+    {
+      "command": "python3 work/tools/sync_execution.py",
+      "status": "passed",
+      "executionViewsUpdated": 0
+    },
+    {
+      "command": "python3 work/tools/sync_execution.py --check",
+      "status": "passed",
+      "result": "Execution projections match; no writes."
+    }
+  ],
+  "parentTask": {
+    "id": "T66",
+    "executionStatus": "in_progress",
+    "acceptance": "partial",
+    "nextUnit": "author-and-integrate-normal-motion-bone-and-nerve"
+  }
+}

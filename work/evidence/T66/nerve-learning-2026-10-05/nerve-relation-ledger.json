@@ -1,0 +1,2408 @@
+{
+  "schemaVersion": "t66-nerve-learning-evidence-v1",
+  "recordedAt": "2026-10-05",
+  "sourceSnapshot": {
+    "nerveSupportSha256": "7bad30e35976431bbda3d05e88b80648c6777d13472aa1ec75eb466122c9416a",
+    "zaIntegrationSha256": "4a5028dd7c1bca3b142d7899cc99a425ad88d5837ca598d2d5f4ad612994be5c",
+    "learnerGraphSeedSha256": "2c639c836cd84224704f04d5713ce25f08dd286dc18db86d1a6567a794214c75",
+    "nerveCourseSeedSha256": "eddc46b7f12a64cc0b50f13941c1f619c1107438e712c8d7b70c55a834d9ea9b"
+  },
+  "denominators": {
+    "staticSourceSurfaces": 195,
+    "uniqueSourceLabelGroups": 98,
+    "independentAnatomyConceptCount": "not inferred from label groups"
+  },
+  "preservedPolicy": {
+    "sourceOnly": true,
+    "localSelection": "verified_geometry_only",
+    "humanReview": "not_performed",
+    "publicRedistribution": "held",
+    "newCanonicalBindings": 0,
+    "newNerveGeometry": 0,
+    "newBranchCoordinates": 0
+  },
+  "sourceRecords": {
+    "T61_EXISTING_EXACT_GEOMETRY": {
+      "url": "internal:work/evidence/T61/verification.json;work/evidence/T61/learner_runtime_check.log",
+      "edition": "Existing T61 verified runtime relation; frozen source instance and side",
+      "access": "Prior exact runtime and source-geometry verification reused",
+      "locator": "Exact deep fibular nerve to left/right tibialis anterior source instance relation only; not a complete nerve supply claim",
+      "supports": [
+        {
+          "conceptKey": "deep-fibular",
+          "relationIds": [
+            "nerve-motor-deep-fibular-left",
+            "nerve-motor-deep-fibular-right"
+          ],
+          "fields": []
+        }
+      ]
+    },
+    "T66_AXILLARY_2018": {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30428810/",
+      "edition": "2018 Dec;23(4):533-538; PMID 30428810; DOI 10.1142/S2424835518500546",
+      "access": "PubMed record and abstract opened",
+      "locator": "Abstract, Methods/Results/Conclusions; 23 dissections; deltoid regional distribution and teres minor branch",
+      "supports": [
+        {
+          "conceptKey": "nerve-source-axillary-nerve",
+          "relationIds": [
+            "nerve-motor-axillary-nerve-deltoid-muscle",
+            "nerve-motor-axillary-nerve-teres-minor-muscle"
+          ],
+          "fields": []
+        }
+      ]
+    },
+    "T66_DSN_2018": {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30461656/",
+      "edition": "2018 Nov;97(47):e13349; PMID 30461656; PMCID PMC6392864; DOI 10.1097/MD.0000000000013349",
+      "access": "PubMed record and abstract opened",
+      "locator": "Abstract; 70 Japanese cadavers / 140 sides; rhomboid major, rhomboid minor, levator scapulae; middle-scalene path variants",
+      "supports": [
+        {
+          "conceptKey": "dorsal-scapular",
+          "relationIds": [
+            "nerve-motor-dorsal-scapular-levator-scapulae",
+            "nerve-motor-dorsal-scapular-rhomboid-major",
+            "nerve-motor-dorsal-scapular-rhomboid-minor"
+          ],
+          "fields": []
+        }
+      ]
+    },
+    "T66_PECTORAL_2011": {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21587039/",
+      "edition": "2012 Feb;68(2):209-214; PMID 21587039; DOI 10.1097/SAP.0b013e318212f3d9",
+      "access": "PubMed record and abstract opened",
+      "locator": "Abstract; 30 pectoral specimens from 15 cadavers; lateral and medial pectoral innervation and variable fourth-intercostal contribution",
+      "supports": [
+        {
+          "conceptKey": "nerve-source-lateral-pectoral-nerve",
+          "relationIds": [
+            "nerve-motor-lateral-pectoral-nerve-pectoralis-major-muscle"
+          ],
+          "fields": [
+            "functionContext"
+          ]
+        },
+        {
+          "conceptKey": "nerve-source-medial-pectoral-nerve",
+          "relationIds": [
+            "nerve-motor-medial-pectoral-nerve-pectoralis-major-muscle"
+          ],
+          "fields": [
+            "functionContext"
+          ]
+        }
+      ]
+    },
+    "T66_RF_2019": {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6662958/",
+      "edition": "2019; PMID 31660203; PMCID PMC6662958",
+      "access": "PMC primary article abstract and methods/results opened from indexed full-text page; PubMed direct page unavailable",
+      "locator": "Abstract and Methods/Results; seven cadaveric specimens; femoral motor branches entering rectus femoris; branch-count variation",
+      "supports": [
+        {
+          "conceptKey": "nerve-source-femoral-nerve",
+          "relationIds": [
+            "nerve-motor-femoral-nerve-rectus-femoris-muscle"
+          ],
+          "fields": [
+            "functionContext"
+          ]
+        }
+      ]
+    },
+    "T66_INTERCOSTAL_ABDOMINAL_1992": {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/1600882/",
+      "edition": "1992 Apr-May;32(4-5):171-185; PMID 1600882",
+      "access": "PubMed indexed abstract; direct page returned a verification challenge",
+      "locator": "Abstract; lower intercostal mixed branches include external-oblique muscle branch and deep branch to rectus abdominis / other muscles",
+      "supports": [
+        {
+          "conceptKey": "nerve-source-intercostal-nerves",
+          "relationIds": [
+            "nerve-motor-intercostal-nerves-external-abdominal-oblique-muscle",
+            "nerve-motor-intercostal-nerves-rectus-abdominis-muscle"
+          ],
+          "fields": [
+            "functionContext"
+          ]
+        }
+      ]
+    },
+    "T66_EAO_1985": {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/3160258/",
+      "edition": "1985;158(3):285-292; PMID 3160258",
+      "access": "PubMed indexed abstract",
+      "locator": "Abstract; one-cadaver report of upper external-oblique slips with fifth/sixth intercostal motor branches; narrow variant evidence only",
+      "supports": [
+        {
+          "conceptKey": "nerve-source-intercostal-nerves",
+          "relationIds": [
+            "nerve-motor-intercostal-nerves-external-abdominal-oblique-muscle"
+          ],
+          "fields": [
+            "functionContext"
+          ]
+        }
+      ]
+    },
+    "T66_RA_2008": {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18428988/",
+      "edition": "2008; PMID 18428988",
+      "access": "PubMed indexed abstract; direct page unavailable in this session",
+      "locator": "Abstract; 20 human cadaveric hemi-abdominal walls; rectus abdominis T6-L1 segmental innervation and widespread communications",
+      "supports": [
+        {
+          "conceptKey": "nerve-source-intercostal-nerves",
+          "relationIds": [
+            "nerve-motor-intercostal-nerves-rectus-abdominis-muscle"
+          ],
+          "fields": [
+            "courseContext",
+            "functionContext"
+          ]
+        }
+      ]
+    },
+    "T66_MEDIAN_2020": {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7580294/",
+      "edition": "2020; PMID 33144842; PMCID PMC7580294",
+      "access": "PMC primary article text opened via indexed full-text page",
+      "locator": "Methods/Results; 20 upper limbs from 10 cadavers; branches to pronator teres, FCR, palmaris longus, FDS; variable branch patterns",
+      "supports": [
+        {
+          "conceptKey": "nerve-source-median-nerve",
+          "relationIds": [
+            "nerve-motor-median-nerve-flexor-carpi-radialis",
+            "nerve-motor-median-nerve-flexor-digitorum-superficialis",
+            "nerve-motor-median-nerve-palmaris-longus-muscle",
+            "nerve-motor-median-nerve-pronator-teres"
+          ],
+          "fields": [
+            "functionContext"
+          ]
+        }
+      ]
+    },
+    "T66_RADIAL_2020": {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32498404/",
+      "edition": "2020 Jun 2;10(6):366; PMID 32498404; PMCID PMC7345276; DOI 10.3390/diagnostics10060366",
+      "access": "PubMed record and abstract opened",
+      "locator": "Abstract; 35 cadavers; typical motor branch order includes brachioradialis and extensor carpi radialis longus; variations noted",
+      "supports": [
+        {
+          "conceptKey": "nerve-source-radial-nerve",
+          "relationIds": [
+            "nerve-motor-radial-nerve-brachioradialis-muscle",
+            "nerve-motor-radial-nerve-extensor-carpi-radialis-longus"
+          ],
+          "fields": [
+            "functionContext"
+          ]
+        }
+      ]
+    },
+    "T66_PFCN_2020": {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31973825/",
+      "edition": "2020 Mar;124(3):308-313; PMID 31973825; DOI 10.1016/j.bja.2019.10.026",
+      "access": "PubMed record and abstract opened",
+      "locator": "Abstract; 83 human lower extremities; subgluteal fold to distal terminus; sensory lower-leg contribution and course variation",
+      "supports": [
+        {
+          "conceptKey": "nerve-source-posterior-femoral-cutaneous-nerve",
+          "relationIds": [],
+          "fields": [
+            "courseContext",
+            "functionContext",
+            "variationContext"
+          ]
+        }
+      ]
+    },
+    "T66_LFCN_2025": {
+      "url": "internal:work/evidence/T66/parallel-completion-2026-10-03/wave-1/workers/F/field-evidence-sources.json",
+      "edition": "2025 Mar 28;40(1):12-17; PMID 40152087; PMCID PMC11974468",
+      "access": "Existing worker F field claim/provenance and value hash reused",
+      "locator": "Measurement details; Results; Discussion; LFCN around inguinal ligament/ASIS with variable branching; distinct from PFCN",
+      "supports": []
+    },
+    "T66_MEDIAN_COURSE_2014": {
+      "url": "internal:work/evidence/T66/parallel-completion-2026-10-03/wave-1/workers/F/field-evidence-sources.json",
+      "edition": "2014 May 15;9(4):466-470; PMID 25414606; PMCID PMC4235925",
+      "access": "Existing worker F course field claim/provenance and value hash reused",
+      "locator": "Abstract; Anatomy; Discussion; proximal forearm FDS arch / median nerve / AIN takeoff; 38 cadavers",
+      "supports": []
+    }
+  },
+  "relationSummary": {
+    "exactGeometryMotorRows": 2,
+    "literatureConceptRows": 16,
+    "totalRows": 18,
+    "uniqueNerveConceptKeys": 9,
+    "uniqueTargetSourceKeys": 44
+  },
+  "relations": [
+    {
+      "relationId": "nerve-motor-deep-fibular-left",
+      "nerveKey": "deep-fibular",
+      "targetEnglishConcept": null,
+      "targetSourceKeys": [
+        "ZA-c7010a9-74ced50ada635db761f807e4"
+      ],
+      "targetSides": [
+        "left"
+      ],
+      "basis": "exact_geometry_motor_relation",
+      "scope": "exact_side_matched_source_instance",
+      "displayLimit": "현재 확인한 모형 연결은 왼쪽 깊은종아리신경 표면과 같은 쪽 앞정강근 표면에 한정됩니다. 전체 지배 범위를 뜻하지 않습니다.",
+      "sourceIds": [
+        "T61_EXISTING_EXACT_GEOMETRY"
+      ],
+      "identityLimit": "existing exact same-side geometry relation; limited to this source instance",
+      "displayNoteSha256": "e69252671f9167b582dad65d6bd51863c6b5c02d52649e3cab10d50b6561a822"
+    },
+    {
+      "relationId": "nerve-motor-deep-fibular-right",
+      "nerveKey": "deep-fibular",
+      "targetEnglishConcept": null,
+      "targetSourceKeys": [
+        "ZA-c7010a9-54ae5266082b61f48ed8e83e"
+      ],
+      "targetSides": [
+        "right"
+      ],
+      "basis": "exact_geometry_motor_relation",
+      "scope": "exact_side_matched_source_instance",
+      "displayLimit": "현재 확인한 모형 연결은 오른쪽 깊은종아리신경 표면과 같은 쪽 앞정강근 표면에 한정됩니다. 전체 지배 범위를 뜻하지 않습니다.",
+      "sourceIds": [
+        "T61_EXISTING_EXACT_GEOMETRY"
+      ],
+      "identityLimit": "existing exact same-side geometry relation; limited to this source instance",
+      "displayNoteSha256": "19b398eea36bf126cfe9d244e170505c81e37873807b61a10716a8aea7596dcd"
+    },
+    {
+      "relationId": "nerve-motor-dorsal-scapular-rhomboid-major",
+      "nerveKey": "dorsal-scapular",
+      "targetEnglishConcept": "Rhomboid major muscle",
+      "targetSourceKeys": [
+        "ZA-c7010a9-96cb4db8fde040d91dd1119e",
+        "ZA-c7010a9-bc1b5e5fc64c6cbbbab9c03e"
+      ],
+      "targetSides": [
+        "left",
+        "right"
+      ],
+      "basis": "literature_concept_motor_relation",
+      "scope": "unsided_named_whole_muscle_concept",
+      "displayLimit": "문헌은 큰마름근 개념과의 관계를 서술합니다. 아래 좌·우 항목은 현재 선택 가능한 표면이며 좌우별 신경 가지를 별도로 확인한 것은 아닙니다.",
+      "sourceIds": [
+        "T66_DSN_2018"
+      ],
+      "identityLimit": "literature relation does not establish a source nerve-branch-to-muscle-mesh coordinate binding",
+      "displayNoteSha256": "d27df43bd13e3b97ba7ff94d8520065dd7ce80e788b5f8d9dc589d8812d0c03c"
+    },
+    {
+      "relationId": "nerve-motor-dorsal-scapular-rhomboid-minor",
+      "nerveKey": "dorsal-scapular",
+      "targetEnglishConcept": "Rhomboid minor muscle",
+      "targetSourceKeys": [
+        "ZA-c7010a9-0f9baaa60e90f20ca5ccb7e8",
+        "ZA-c7010a9-fc7b5ebec6fab48ae5ae8ebf"
+      ],
+      "targetSides": [
+        "left",
+        "right"
+      ],
+      "basis": "literature_concept_motor_relation",
+      "scope": "unsided_named_whole_muscle_concept",
+      "displayLimit": "문헌은 작은마름근 개념과의 관계를 서술합니다. 아래 좌·우 항목은 현재 선택 가능한 표면이며 좌우별 신경 가지를 별도로 확인한 것은 아닙니다.",
+      "sourceIds": [
+        "T66_DSN_2018"
+      ],
+      "identityLimit": "literature relation does not establish a source nerve-branch-to-muscle-mesh coordinate binding",
+      "displayNoteSha256": "f54ab1efc5c23cb1a85e9e67138122ec953f76aac6acd04cc541edd521bd11a4"
+    },
+    {
+      "relationId": "nerve-motor-dorsal-scapular-levator-scapulae",
+      "nerveKey": "dorsal-scapular",
+      "targetEnglishConcept": "Levator scapulae",
+      "targetSourceKeys": [
+        "ZA-c7010a9-efabaac8183789cad65a55e6",
+        "ZA-c7010a9-93bf352448accd9e7356fc10"
+      ],
+      "targetSides": [
+        "left",
+        "right"
+      ],
+      "basis": "literature_concept_motor_relation",
+      "scope": "unsided_named_whole_muscle_concept",
+      "displayLimit": "해부 연구에서 어깨올림근과의 운동 관계가 보고되었습니다. 아래는 같은 쪽에 선택 가능한 근육 표면이며, 모형의 신경 가지에 직접 연결된 좌표는 아닙니다.",
+      "sourceIds": [
+        "T66_DSN_2018"
+      ],
+      "identityLimit": "literature relation does not establish a source nerve-branch-to-muscle-mesh coordinate binding",
+      "displayNoteSha256": "1693234a0cdb1c138761e668ec8715f129f87d3c4751ffde42a9a265a7f8d06c"
+    },
+    {
+      "relationId": "nerve-motor-axillary-nerve-deltoid-muscle",
+      "nerveKey": "nerve-source-axillary-nerve",
+      "targetEnglishConcept": "Deltoid muscle",
+      "targetSourceKeys": [
+        "ZA-c7010a9-2d15cee81610b0809f565954",
+        "ZA-c7010a9-587d9e8125e466b1fbb94246",
+        "ZA-c7010a9-2825ee09cf08074eadd0331a",
+        "ZA-c7010a9-81df363f916894757ff12e15",
+        "ZA-c7010a9-d5dc0a457c96c60ef5dfbe1e",
+        "ZA-c7010a9-2e5cd9571677b6718aa51e97"
+      ],
+      "targetSides": [
+        "left",
+        "right"
+      ],
+      "basis": "literature_concept_motor_relation",
+      "scope": "unsided_named_muscle_part_set",
+      "displayLimit": "해부 연구는 겨드랑신경과 삼각근 여러 구역의 관계를 보고합니다. 아래 세분 표면은 모형의 표시 단위이며 각 신경 가지와 일대일로 대응하지 않습니다.",
+      "sourceIds": [
+        "T66_AXILLARY_2018"
+      ],
+      "identityLimit": "literature relation does not establish a source nerve-branch-to-muscle-mesh coordinate binding",
+      "displayNoteSha256": "cbc90979a953b45f62cad817090e3a827be41909e6d1e6ef8084da619441fd82"
+    },
+    {
+      "relationId": "nerve-motor-axillary-nerve-teres-minor-muscle",
+      "nerveKey": "nerve-source-axillary-nerve",
+      "targetEnglishConcept": "Teres minor muscle",
+      "targetSourceKeys": [
+        "ZA-c7010a9-6a3b39de37d72ca69105debf",
+        "ZA-c7010a9-6fac2e434e98bf12637d777b"
+      ],
+      "targetSides": [
+        "left",
+        "right"
+      ],
+      "basis": "literature_concept_motor_relation",
+      "scope": "unsided_named_whole_muscle_concept",
+      "displayLimit": "해부 연구에서 소원근으로 향하는 겨드랑신경 가지가 확인되었습니다. 아래는 같은 쪽 선택 표면이며, 개별 가지를 잇는 모형 좌표는 아닙니다.",
+      "sourceIds": [
+        "T66_AXILLARY_2018"
+      ],
+      "identityLimit": "literature relation does not establish a source nerve-branch-to-muscle-mesh coordinate binding",
+      "displayNoteSha256": "14844a8cf0e03eb44600893df245be609acb596e451ed972bc8e453aa02a4ff4"
+    },
+    {
+      "relationId": "nerve-motor-lateral-pectoral-nerve-pectoralis-major-muscle",
+      "nerveKey": "nerve-source-lateral-pectoral-nerve",
+      "targetEnglishConcept": "Pectoralis major muscle",
+      "targetSourceKeys": [
+        "ZA-c7010a9-07d4e851bc713a1c5bb0b8f9",
+        "ZA-c7010a9-3a414d5573f8ef7250596305",
+        "ZA-c7010a9-9648fd79baf7b216be0e8c91",
+        "ZA-c7010a9-72ab84e76cdf041dd9425609",
+        "ZA-c7010a9-e4a7d3329f606e0541166646",
+        "ZA-c7010a9-2ea5931bed7570848730b3f4"
+      ],
+      "targetSides": [
+        "left",
+        "right"
+      ],
+      "basis": "literature_concept_motor_relation",
+      "scope": "unsided_named_muscle_part_set",
+      "displayLimit": "문헌은 가쪽가슴근신경이 대흉근의 주요 운동 공급에 참여한다고 보고합니다. 아래 모형의 세 부분은 선택 가능한 표시 단위이며 문헌의 가지별 구획과 일대일로 대응하지 않습니다.",
+      "sourceIds": [
+        "T66_PECTORAL_2011"
+      ],
+      "identityLimit": "literature relation does not establish a source nerve-branch-to-muscle-mesh coordinate binding",
+      "displayNoteSha256": "9b9bfc01bcce4b6a4e97b9245463fb37adbb15832939db940f3a0a866393dc0b"
+    },
+    {
+      "relationId": "nerve-motor-medial-pectoral-nerve-pectoralis-major-muscle",
+      "nerveKey": "nerve-source-medial-pectoral-nerve",
+      "targetEnglishConcept": "Pectoralis major muscle",
+      "targetSourceKeys": [
+        "ZA-c7010a9-07d4e851bc713a1c5bb0b8f9",
+        "ZA-c7010a9-3a414d5573f8ef7250596305",
+        "ZA-c7010a9-9648fd79baf7b216be0e8c91",
+        "ZA-c7010a9-72ab84e76cdf041dd9425609",
+        "ZA-c7010a9-e4a7d3329f606e0541166646",
+        "ZA-c7010a9-2ea5931bed7570848730b3f4"
+      ],
+      "targetSides": [
+        "left",
+        "right"
+      ],
+      "basis": "literature_concept_motor_relation",
+      "scope": "unsided_named_muscle_part_set",
+      "displayLimit": "문헌은 안쪽가슴근신경이 대흉근 일부 구간에 기여한다고 보고합니다. 아래 모형의 세 부분은 선택 가능한 표시 단위이며 정확한 신경가지 분포 경계가 아닙니다.",
+      "sourceIds": [
+        "T66_PECTORAL_2011"
+      ],
+      "identityLimit": "literature relation does not establish a source nerve-branch-to-muscle-mesh coordinate binding",
+      "displayNoteSha256": "ca1a4cd227dde0b3d8559a172a0320fa3785a319c401bc06cea18d2b65882055"
+    },
+    {
+      "relationId": "nerve-motor-femoral-nerve-rectus-femoris-muscle",
+      "nerveKey": "nerve-source-femoral-nerve",
+      "targetEnglishConcept": "Rectus femoris muscle",
+      "targetSourceKeys": [
+        "ZA-c7010a9-afb0624c66f652ea012c7534",
+        "ZA-c7010a9-eb0a993e09d73159468116ce"
+      ],
+      "targetSides": [
+        "left",
+        "right"
+      ],
+      "basis": "literature_concept_motor_relation",
+      "scope": "unsided_named_whole_muscle_concept",
+      "displayLimit": "해부 연구에서 넙다리신경 운동가지가 넙다리곧은근에 들어가는 관계를 확인했습니다. 가지 수와 진입 양상에 변이가 있으며, 모형 신경 가지의 좌표 연결은 아닙니다.",
+      "sourceIds": [
+        "T66_RF_2019"
+      ],
+      "identityLimit": "literature relation does not establish a source nerve-branch-to-muscle-mesh coordinate binding",
+      "displayNoteSha256": "f76dfddfe7fe3d17deb51fffcb749fefb3d683aa2fd5c5525ea77a7fafe32fcf"
+    },
+    {
+      "relationId": "nerve-motor-intercostal-nerves-rectus-abdominis-muscle",
+      "nerveKey": "nerve-source-intercostal-nerves",
+      "targetEnglishConcept": "Rectus abdominis muscle",
+      "targetSourceKeys": [
+        "ZA-c7010a9-33941d62db2cd36b20fe5945",
+        "ZA-c7010a9-9184adfd521c527f3b352e71"
+      ],
+      "targetSides": [
+        "left",
+        "right"
+      ],
+      "basis": "literature_concept_motor_relation",
+      "scope": "unsided_partial_muscle_concept",
+      "displayLimit": "문헌은 여러 분절의 가슴배신경이 복직근에 기여한다고 보고합니다. 현재 신경 묶음·근육 표면에서 특정 분절이나 전체 범위를 일대일로 지정하지 않습니다.",
+      "sourceIds": [
+        "T66_INTERCOSTAL_ABDOMINAL_1992",
+        "T66_RA_2008"
+      ],
+      "identityLimit": "literature relation does not establish a source nerve-branch-to-muscle-mesh coordinate binding",
+      "displayNoteSha256": "5a3c58283114dd28947d418de4246753993330513ba09143a89230e1a35d688a"
+    },
+    {
+      "relationId": "nerve-motor-intercostal-nerves-external-abdominal-oblique-muscle",
+      "nerveKey": "nerve-source-intercostal-nerves",
+      "targetEnglishConcept": "External abdominal oblique muscle",
+      "targetSourceKeys": [
+        "ZA-c7010a9-d75abb958e1463ceecb5430b",
+        "ZA-c7010a9-eb0bd1853a90acada85e9177"
+      ],
+      "targetSides": [
+        "left",
+        "right"
+      ],
+      "basis": "literature_concept_motor_relation",
+      "scope": "unsided_partial_muscle_concept",
+      "displayLimit": "해부 문헌은 가슴사이신경의 근육가지를 바깥배빗근 일부에 기술합니다. 아래는 한 선택 가능 표면이며, 모든 섬유·분절의 완전한 범위나 좌표 연결을 뜻하지 않습니다.",
+      "sourceIds": [
+        "T66_INTERCOSTAL_ABDOMINAL_1992",
+        "T66_EAO_1985"
+      ],
+      "identityLimit": "literature relation does not establish a source nerve-branch-to-muscle-mesh coordinate binding",
+      "displayNoteSha256": "ade2efa7ebac3cf2d51b8a939f114d8048a91bc38b07f80252c5849856d3c74c"
+    },
+    {
+      "relationId": "nerve-motor-median-nerve-pronator-teres",
+      "nerveKey": "nerve-source-median-nerve",
+      "targetEnglishConcept": "Pronator teres",
+      "targetSourceKeys": [
+        "ZA-c7010a9-a43ee8628da555b5ec9a56d1",
+        "ZA-c7010a9-b61125f680db2d3b4ad80fdd",
+        "ZA-c7010a9-633c52da4b8baf98dcf7c630",
+        "ZA-c7010a9-56d2a832b94cd47795d2382f"
+      ],
+      "targetSides": [
+        "left",
+        "right"
+      ],
+      "basis": "literature_concept_motor_relation",
+      "scope": "unsided_named_muscle_part_set",
+      "displayLimit": "해부 연구에서 정중신경의 원엎침근 운동가지가 보고되었습니다. 아래 두 모형 부분은 분할 표면이며, 각 부분별 신경 가지의 정확한 경계를 뜻하지 않습니다.",
+      "sourceIds": [
+        "T66_MEDIAN_2020"
+      ],
+      "identityLimit": "literature relation does not establish a source nerve-branch-to-muscle-mesh coordinate binding",
+      "displayNoteSha256": "8edb99bb846a15b9977dbac4139fa7457334fdd718f17608ad263e527e027126"
+    },
+    {
+      "relationId": "nerve-motor-median-nerve-flexor-carpi-radialis",
+      "nerveKey": "nerve-source-median-nerve",
+      "targetEnglishConcept": "Flexor carpi radialis",
+      "targetSourceKeys": [
+        "ZA-c7010a9-482b430cd15a8a85ca48faed",
+        "ZA-c7010a9-e65b8c86027df88000cfa861"
+      ],
+      "targetSides": [
+        "left",
+        "right"
+      ],
+      "basis": "literature_concept_motor_relation",
+      "scope": "unsided_named_whole_muscle_concept",
+      "displayLimit": "해부 연구에서 정중신경과 노쪽손목굽힘근의 운동 관계가 보고되었습니다. 아래는 같은 쪽 선택 표면이며 개별 가지 좌표는 연결하지 않았습니다.",
+      "sourceIds": [
+        "T66_MEDIAN_2020"
+      ],
+      "identityLimit": "literature relation does not establish a source nerve-branch-to-muscle-mesh coordinate binding",
+      "displayNoteSha256": "aa90706ff24380bd282df1216afbaf7cd2ea8fe5992c77fc6eb9c3904e019089"
+    },
+    {
+      "relationId": "nerve-motor-median-nerve-palmaris-longus-muscle",
+      "nerveKey": "nerve-source-median-nerve",
+      "targetEnglishConcept": "Palmaris longus muscle",
+      "targetSourceKeys": [
+        "ZA-c7010a9-cad47c186968439e81f29795",
+        "ZA-c7010a9-3e18a4ad2ccc53bbe4d75528"
+      ],
+      "targetSides": [
+        "left",
+        "right"
+      ],
+      "basis": "literature_concept_motor_relation",
+      "scope": "unsided_named_whole_muscle_concept",
+      "displayLimit": "해부 연구에서 정중신경과 긴손바닥근의 운동 관계가 보고되었습니다. 아래는 같은 쪽 선택 표면이며 개인별 존재·분지 변이를 모두 나타내지 않습니다.",
+      "sourceIds": [
+        "T66_MEDIAN_2020"
+      ],
+      "identityLimit": "literature relation does not establish a source nerve-branch-to-muscle-mesh coordinate binding",
+      "displayNoteSha256": "a206db56da5b9be2397b56c7de65f9a04d526f12189673a4b50ef0e15cfc6c39"
+    },
+    {
+      "relationId": "nerve-motor-median-nerve-flexor-digitorum-superficialis",
+      "nerveKey": "nerve-source-median-nerve",
+      "targetEnglishConcept": "Flexor digitorum superficialis",
+      "targetSourceKeys": [
+        "ZA-c7010a9-9e5c3efa530741ae8f0595ec",
+        "ZA-c7010a9-f04b81d9566c227fb9805995",
+        "ZA-c7010a9-d291b577fd8cafb2ad7fca70",
+        "ZA-c7010a9-ebd7f99e4124271e3ec2de0f"
+      ],
+      "targetSides": [
+        "left",
+        "right"
+      ],
+      "basis": "literature_concept_motor_relation",
+      "scope": "unsided_named_muscle_part_set",
+      "displayLimit": "해부 연구에서 정중신경과 얕은손가락굽힘근의 운동 관계가 보고되었습니다. 두 모형 부분은 표시 단위이며 문헌의 가지와 부위가 일대일 대응하지 않습니다.",
+      "sourceIds": [
+        "T66_MEDIAN_2020"
+      ],
+      "identityLimit": "literature relation does not establish a source nerve-branch-to-muscle-mesh coordinate binding",
+      "displayNoteSha256": "ba1843edae9aa8f05ceac3a7471b79410224ae19b7e27668c088dd5e61c2e178"
+    },
+    {
+      "relationId": "nerve-motor-radial-nerve-brachioradialis-muscle",
+      "nerveKey": "nerve-source-radial-nerve",
+      "targetEnglishConcept": "Brachioradialis muscle",
+      "targetSourceKeys": [
+        "ZA-c7010a9-87b1b65de2b790206c478a96",
+        "ZA-c7010a9-2a02586fddeb2e8d493ae238"
+      ],
+      "targetSides": [
+        "left",
+        "right"
+      ],
+      "basis": "literature_concept_motor_relation",
+      "scope": "unsided_named_whole_muscle_concept",
+      "displayLimit": "아래팔 해부 연구에서 위팔노근으로 향하는 노신경 가지가 전형적 분지 순서에 포함되며 변이도 보고되었습니다. 개별 가지의 모형 좌표 연결은 아닙니다.",
+      "sourceIds": [
+        "T66_RADIAL_2020"
+      ],
+      "identityLimit": "literature relation does not establish a source nerve-branch-to-muscle-mesh coordinate binding",
+      "displayNoteSha256": "99d882b3d599657aa7ef46108256d995a45a01f39683686d6426e4e666c30da2"
+    },
+    {
+      "relationId": "nerve-motor-radial-nerve-extensor-carpi-radialis-longus",
+      "nerveKey": "nerve-source-radial-nerve",
+      "targetEnglishConcept": "Extensor carpi radialis longus",
+      "targetSourceKeys": [
+        "ZA-c7010a9-40e1a2b6c115f6a412e2beee",
+        "ZA-c7010a9-7a38c3af3417773bf9fff9b0"
+      ],
+      "targetSides": [
+        "left",
+        "right"
+      ],
+      "basis": "literature_concept_motor_relation",
+      "scope": "unsided_named_whole_muscle_concept",
+      "displayLimit": "아래팔 해부 연구에서 긴노쪽손목폄근으로 향하는 노신경 가지가 전형적 분지 순서에 포함됩니다. 분지 순서에는 변이가 있으며, 모형 가지의 직접 좌표 연결은 아닙니다.",
+      "sourceIds": [
+        "T66_RADIAL_2020"
+      ],
+      "identityLimit": "literature relation does not establish a source nerve-branch-to-muscle-mesh coordinate binding",
+      "displayNoteSha256": "ec0dadc2112933add46c13c98a40d7e16d45ea6fd433eadee350be180726dec4"
+    }
+  ],
+  "labelGroupDisposition": [
+    {
+      "labelGroupEnglishName": "(Communicating branch of median nerve with ulnar nerve)",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b628f4f08",
+        "za-c7010a9:raw:0x18b628f4808"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-communicating-branch-of-median-nerve-with-ulnar-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Anterior branch of medial antebrachial cutaneous nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b627f8f08",
+        "za-c7010a9:raw:0x18b627f8808"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-anterior-branch-of-medial-antebrachial-cutaneous-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Anterior branch of obturator nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b627f8108",
+        "za-c7010a9:raw:0x18b627e7908"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-anterior-branch-of-obturator-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Anterior cutaneous branches of femoral nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b627cd608",
+        "za-c7010a9:raw:0x18b627ccf08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-anterior-cutaneous-branches-of-femoral-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Anterior division of inferior trunk of brachial plexus",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b627c7908",
+        "za-c7010a9:raw:0x18b627c7208"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-anterior-division-of-inferior-trunk-of-brachial-plexus",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Anterior division of middle trunk of brachial plexus",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b627c4f08",
+        "za-c7010a9:raw:0x18b627c4808"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-anterior-division-of-middle-trunk-of-brachial-plexus",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Anterior division of superior trunk of brachial plexus",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b627cb208",
+        "za-c7010a9:raw:0x18b627cab08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-anterior-division-of-superior-trunk-of-brachial-plexus",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Anterior interosseous nerve of forearm",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b627b0f08",
+        "za-c7010a9:raw:0x18b627b0808"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-anterior-interosseous-nerve-of-forearm",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Anterior root of posterior femoral cutaneous nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6275c108",
+        "za-c7010a9:raw:0x18b6275b908"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-anterior-root-of-posterior-femoral-cutaneous-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Anterior root of spinal nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6275b208",
+        "za-c7010a9:raw:0x18b6275ab08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-anterior-root-of-spinal-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Axillary nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b62623908",
+        "za-c7010a9:raw:0x18b62623208"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-axillary-nerve",
+      "motorRelationStatus": "documented",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "mixed_motor_sensory_evidence_and_motor_relation",
+      "relationIds": [
+        "nerve-motor-axillary-nerve-deltoid-muscle",
+        "nerve-motor-axillary-nerve-teres-minor-muscle"
+      ]
+    },
+    {
+      "labelGroupEnglishName": "Common fibular nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6246f208",
+        "za-c7010a9:raw:0x18b6246eb08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "common-fibular",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Common palmar digital branches of median nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6245f908",
+        "za-c7010a9:raw:0x18b6245f208"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-common-palmar-digital-branches-of-median-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Common palmar digital branches of ulnar nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6245eb08",
+        "za-c7010a9:raw:0x18b6245e408"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-common-palmar-digital-branches-of-ulnar-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Common plantar digital branches of lateral plantar nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6245cf08",
+        "za-c7010a9:raw:0x18b6245c808"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-common-plantar-digital-branches-of-lateral-plantar-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Common plantar digital branches of medial plantar nerve",
+      "sourceSurfaceCount": 1,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6245c108"
+      ],
+      "sides": [
+        "left"
+      ],
+      "graphConceptKey": "nerve-source-common-plantar-digital-branches-of-medial-plantar-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Deep branch of radial nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b623a8108",
+        "za-c7010a9:raw:0x18b623a3908"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-deep-branch-of-radial-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Deep branch of ulnar nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b623a3208",
+        "za-c7010a9:raw:0x18b623a2b08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-deep-branch-of-ulnar-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Deep fibular nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6239a408",
+        "za-c7010a9:raw:0x18b62399d08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "deep-fibular",
+      "motorRelationStatus": "documented",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "motor_relation_documented_sensory_class_not_assessed",
+      "relationIds": [
+        "nerve-motor-deep-fibular-left",
+        "nerve-motor-deep-fibular-right"
+      ]
+    },
+    {
+      "labelGroupEnglishName": "Dorsal branch of ulnar nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b632f6408",
+        "za-c7010a9:raw:0x18b632f5d08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-dorsal-branch-of-ulnar-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Dorsal digital branches of deep fibular nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b632e4808",
+        "za-c7010a9:raw:0x18b632e4108"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-dorsal-digital-branches-of-deep-fibular-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Dorsal digital branches of radial nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b632df908",
+        "za-c7010a9:raw:0x18b632df208"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-dorsal-digital-branches-of-radial-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Dorsal digital branches of superficial fibular nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b632deb08",
+        "za-c7010a9:raw:0x18b632de408"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-dorsal-digital-branches-of-superficial-fibular-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Dorsal digital branches of ulnar nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b632ddd08",
+        "za-c7010a9:raw:0x18b632dd608"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-dorsal-digital-branches-of-ulnar-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Dorsal scapular nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b632a7908",
+        "za-c7010a9:raw:0x18b632a7208"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "dorsal-scapular",
+      "motorRelationStatus": "documented",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "motor_relation_documented_sensory_class_not_assessed",
+      "relationIds": [
+        "nerve-motor-dorsal-scapular-rhomboid-major",
+        "nerve-motor-dorsal-scapular-rhomboid-minor",
+        "nerve-motor-dorsal-scapular-levator-scapulae"
+      ]
+    },
+    {
+      "labelGroupEnglishName": "Femoral branch of genitofemoral nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6319f908",
+        "za-c7010a9:raw:0x18b6319f208"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-femoral-branch-of-genitofemoral-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Femoral nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6319eb08",
+        "za-c7010a9:raw:0x18b6319e408"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-femoral-nerve",
+      "motorRelationStatus": "documented",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "motor_relation_documented_sensory_class_not_assessed",
+      "relationIds": [
+        "nerve-motor-femoral-nerve-rectus-femoris-muscle"
+      ]
+    },
+    {
+      "labelGroupEnglishName": "Genital branch of genitofemoral nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6309c808",
+        "za-c7010a9:raw:0x18b6309c108"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-genital-branch-of-genitofemoral-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Genitofemoral nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63096b08",
+        "za-c7010a9:raw:0x18b63096408"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-genitofemoral-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Ilio-inguinal nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b62f75d08",
+        "za-c7010a9:raw:0x18b62f75608"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-ilio-inguinal-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Iliohypogastric nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63f5f908",
+        "za-c7010a9:raw:0x18b63f5f208"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-iliohypogastric-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Inferior lateral brachial cutaneous nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63eff208",
+        "za-c7010a9:raw:0x18b63efeb08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-inferior-lateral-brachial-cutaneous-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Inferior subscapular nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63ecc808",
+        "za-c7010a9:raw:0x18b63ecc108"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-inferior-subscapular-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Inferior trunk of brachial plexus",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63eb8808",
+        "za-c7010a9:raw:0x18b63eb8108"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-inferior-trunk-of-brachial-plexus",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Infrapatellar branch of saphenous nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63e8e408",
+        "za-c7010a9:raw:0x18b63e8dd08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-infrapatellar-branch-of-saphenous-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Intercostal nerves",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63e4c108",
+        "za-c7010a9:raw:0x18b63e53908"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-intercostal-nerves",
+      "motorRelationStatus": "documented",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "mixed_motor_sensory_evidence_and_motor_relation",
+      "relationIds": [
+        "nerve-motor-intercostal-nerves-rectus-abdominis-muscle",
+        "nerve-motor-intercostal-nerves-external-abdominal-oblique-muscle"
+      ]
+    },
+    {
+      "labelGroupEnglishName": "Intermediate dorsal cutaneous nerve of foot",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63e49608",
+        "za-c7010a9:raw:0x18b63e48f08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-intermediate-dorsal-cutaneous-nerve-of-foot",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Lateral antebrachial cutaneous nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63d3eb08",
+        "za-c7010a9:raw:0x18b63d3e408"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-lateral-antebrachial-cutaneous-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Lateral femoral cutaneous nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63d08f08",
+        "za-c7010a9:raw:0x18b63d08808"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-lateral-femoral-cutaneous-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "documented",
+      "functionEvidenceClass": "sensory_course_documented_no_motor_relation",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Lateral pectoral nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63cc5d08",
+        "za-c7010a9:raw:0x18b63cc5608"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-lateral-pectoral-nerve",
+      "motorRelationStatus": "documented",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "motor_relation_documented_sensory_class_not_assessed",
+      "relationIds": [
+        "nerve-motor-lateral-pectoral-nerve-pectoralis-major-muscle"
+      ]
+    },
+    {
+      "labelGroupEnglishName": "Lateral plantar nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63cc3908",
+        "za-c7010a9:raw:0x18b63cc3208"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-lateral-plantar-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Long thoracic nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63b8c808",
+        "za-c7010a9:raw:0x18b63b8c108"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-long-thoracic-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Medial antebrachial cutaneous nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63ab3208",
+        "za-c7010a9:raw:0x18b63ab2b08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-medial-antebrachial-cutaneous-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Medial brachial cutaneous nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63a96b08",
+        "za-c7010a9:raw:0x18b63a96408"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-medial-brachial-cutaneous-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Medial crural cutaneous branches of saphenous nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63a86408",
+        "za-c7010a9:raw:0x18b63a85d08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-medial-crural-cutaneous-branches-of-saphenous-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Medial dorsal cutaneous nerve of foot",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63a84808",
+        "za-c7010a9:raw:0x18b63a84108"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-medial-dorsal-cutaneous-nerve-of-foot",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Medial pectoral nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63a52b08",
+        "za-c7010a9:raw:0x18b63a52408"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-medial-pectoral-nerve",
+      "motorRelationStatus": "documented",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "motor_relation_documented_sensory_class_not_assessed",
+      "relationIds": [
+        "nerve-motor-medial-pectoral-nerve-pectoralis-major-muscle"
+      ]
+    },
+    {
+      "labelGroupEnglishName": "Medial plantar nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63a50f08",
+        "za-c7010a9:raw:0x18b63a50808"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-medial-plantar-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Medial sural cutaneous nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63a24108",
+        "za-c7010a9:raw:0x18b63a1f908"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-medial-sural-cutaneous-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Median nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b639ff908",
+        "za-c7010a9:raw:0x18b639ff208"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-median-nerve",
+      "motorRelationStatus": "documented",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "motor_relation_documented_sensory_class_not_assessed",
+      "relationIds": [
+        "nerve-motor-median-nerve-pronator-teres",
+        "nerve-motor-median-nerve-flexor-carpi-radialis",
+        "nerve-motor-median-nerve-palmaris-longus-muscle",
+        "nerve-motor-median-nerve-flexor-digitorum-superficialis"
+      ]
+    },
+    {
+      "labelGroupEnglishName": "Middle trunk of brachial plexus",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6399e408",
+        "za-c7010a9:raw:0x18b6399dd08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-middle-trunk-of-brachial-plexus",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Muscular branches of axillary nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6397ab08",
+        "za-c7010a9:raw:0x18b6397a408"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-muscular-branches-of-axillary-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Muscular branches of deep fibular nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63979d08",
+        "za-c7010a9:raw:0x18b63979608"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-muscular-branches-of-deep-fibular-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Muscular branches of median nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63978f08",
+        "za-c7010a9:raw:0x18b63978808"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-muscular-branches-of-median-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Muscular branches of radial nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63978108",
+        "za-c7010a9:raw:0x18b63973908"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-muscular-branches-of-radial-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Muscular branches of ulnar nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63973208",
+        "za-c7010a9:raw:0x18b63972b08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-muscular-branches-of-ulnar-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Musculocutaneous nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63969608",
+        "za-c7010a9:raw:0x18b63968f08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-musculocutaneous-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Nerve to piriformis muscle",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6390e408",
+        "za-c7010a9:raw:0x18b6390dd08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-nerve-to-piriformis-muscle",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Nerve to quadratus femoris muscle",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6390d608",
+        "za-c7010a9:raw:0x18b6390cf08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-nerve-to-quadratus-femoris-muscle",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Obturator nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b638b2408",
+        "za-c7010a9:raw:0x18b638b1d08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-obturator-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Palmar branch of median nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6382e408",
+        "za-c7010a9:raw:0x18b6382dd08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-palmar-branch-of-median-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Palmar branch of ulnar nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6382d608",
+        "za-c7010a9:raw:0x18b6382cf08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-palmar-branch-of-ulnar-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Posterior antebrachial cutaneous nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6372c108",
+        "za-c7010a9:raw:0x18b6372b908"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-posterior-antebrachial-cutaneous-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Posterior branch of medial antebrachial cutaneous nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6371ab08",
+        "za-c7010a9:raw:0x18b6371a408"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-posterior-branch-of-medial-antebrachial-cutaneous-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Posterior branch of obturator nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63719d08",
+        "za-c7010a9:raw:0x18b63719608"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-posterior-branch-of-obturator-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Posterior cord of brachial plexus",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b636feb08",
+        "za-c7010a9:raw:0x18b636fe408"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-posterior-cord-of-brachial-plexus",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Posterior division of inferior trunk of brachial plexus",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b636f7208",
+        "za-c7010a9:raw:0x18b636f6b08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-posterior-division-of-inferior-trunk-of-brachial-plexus",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Posterior division of middle trunk of brachial plexus",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b636f4808",
+        "za-c7010a9:raw:0x18b636f4108"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-posterior-division-of-middle-trunk-of-brachial-plexus",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Posterior division of superior trunk of brachial plexus",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b636eeb08",
+        "za-c7010a9:raw:0x18b636ee408"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-posterior-division-of-superior-trunk-of-brachial-plexus",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Posterior femoral cutaneous nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6360d608",
+        "za-c7010a9:raw:0x18b636ec108"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-posterior-femoral-cutaneous-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "documented",
+      "functionEvidenceClass": "sensory_course_documented_no_motor_relation",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Posterior interosseous nerve of forearm",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b636da408",
+        "za-c7010a9:raw:0x18b636d9d08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-posterior-interosseous-nerve-of-forearm",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Posterior root of posterior femoral cutaneous nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b636a7208",
+        "za-c7010a9:raw:0x18b636a6b08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-posterior-root-of-posterior-femoral-cutaneous-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Posterior root of spinal nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b636a6408",
+        "za-c7010a9:raw:0x18b636a5d08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-posterior-root-of-spinal-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Proper palmar digital branches of median nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63657208",
+        "za-c7010a9:raw:0x18b63656b08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-proper-palmar-digital-branches-of-median-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Proper palmar digital branches of ulnar nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63656408",
+        "za-c7010a9:raw:0x18b63655d08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-proper-palmar-digital-branches-of-ulnar-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Proper plantar digital branches of lateral plantar nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63655608",
+        "za-c7010a9:raw:0x18b63654f08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-proper-plantar-digital-branches-of-lateral-plantar-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Proper plantar digital branches of medial plantar nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63654808",
+        "za-c7010a9:raw:0x18b63654108"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-proper-plantar-digital-branches-of-medial-plantar-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Pudendal nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63456408",
+        "za-c7010a9:raw:0x18b63455d08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-pudendal-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Radial nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6361e408",
+        "za-c7010a9:raw:0x18b6361dd08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-radial-nerve",
+      "motorRelationStatus": "documented",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "motor_relation_documented_sensory_class_not_assessed",
+      "relationIds": [
+        "nerve-motor-radial-nerve-brachioradialis-muscle",
+        "nerve-motor-radial-nerve-extensor-carpi-radialis-longus"
+      ]
+    },
+    {
+      "labelGroupEnglishName": "Roots of brachial plexus",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b633a9608",
+        "za-c7010a9:raw:0x18b633a8f08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-roots-of-brachial-plexus",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Saphenous nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b635c4108",
+        "za-c7010a9:raw:0x18b635c3908"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-saphenous-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Sciatic nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b635b2408",
+        "za-c7010a9:raw:0x18b635b1d08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "sciatic",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Subclavian nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b64261d08",
+        "za-c7010a9:raw:0x18b64261608"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-subclavian-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Superficial branch of radial nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b64208808",
+        "za-c7010a9:raw:0x18b64208108"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-superficial-branch-of-radial-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Superficial branch of ulnar nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b641f7908",
+        "za-c7010a9:raw:0x18b641f7208"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-superficial-branch-of-ulnar-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Superficial fibular nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b641ef908",
+        "za-c7010a9:raw:0x18b641ef208"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "superficial-fibular",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Superior gluteal nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b64190108",
+        "za-c7010a9:raw:0x18b6418b908"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-superior-gluteal-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Superior lateral brachial cutaneous nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b64181d08",
+        "za-c7010a9:raw:0x18b64181608"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-superior-lateral-brachial-cutaneous-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Superior subscapular nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b6413c108",
+        "za-c7010a9:raw:0x18b64137908"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-superior-subscapular-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Superior trunk of brachial plexus",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b64124f08",
+        "za-c7010a9:raw:0x18b64124808"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-superior-trunk-of-brachial-plexus",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Suprascapular nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b640f9608",
+        "za-c7010a9:raw:0x18b640f8f08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-suprascapular-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Sural communicating branch of common fibular nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b640dd608",
+        "za-c7010a9:raw:0x18b640dcf08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-sural-communicating-branch-of-common-fibular-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Sural nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b640dc808",
+        "za-c7010a9:raw:0x18b640dc108"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-sural-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Sympathetic nerves",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b640ce408",
+        "za-c7010a9:raw:0x18b640cdd08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-sympathetic-nerves",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Sympathetic trunk",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b640cd608",
+        "za-c7010a9:raw:0x18b640ccf08"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-sympathetic-trunk",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Thoracodorsal nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b64017208",
+        "za-c7010a9:raw:0x18b64017908"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-thoracodorsal-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Tibial nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b63ffc808",
+        "za-c7010a9:raw:0x18b63ffc108"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-tibial-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    },
+    {
+      "labelGroupEnglishName": "Ulnar nerve",
+      "sourceSurfaceCount": 2,
+      "sourceInstanceIds": [
+        "za-c7010a9:raw:0x18b64f01d08",
+        "za-c7010a9:raw:0x18b64f01608"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "graphConceptKey": "nerve-source-ulnar-nerve",
+      "motorRelationStatus": "not_linked",
+      "sensoryCourseStatus": "not_assessed",
+      "functionEvidenceClass": "relationship_not_linked",
+      "relationIds": []
+    }
+  ],
+  "learnerFieldEvidence": {
+    "Posterior femoral cutaneous nerve:courseContext": {
+      "valueSha256": "ad4e58be9e222c9234b4ddc33bee1bd642ed1b8fc35b7db1a946c1b3e0fd2bfa",
+      "sourceIds": [
+        "T66_PFCN_2020"
+      ],
+      "scope": "paraphrased field summary; not a source quotation"
+    },
+    "Posterior femoral cutaneous nerve:functionContext": {
+      "valueSha256": "29357cc0e818490913f83d98f4dae3555d1fdf7e311845a7aeaa3cce39526669",
+      "sourceIds": [
+        "T66_PFCN_2020"
+      ],
+      "scope": "paraphrased field summary; not a source quotation"
+    },
+    "Posterior femoral cutaneous nerve:variationContext": {
+      "valueSha256": "22f3ecd7dd7375f8828a809422e8dec62ca75c553c6a12341abc13b850948ac9",
+      "sourceIds": [
+        "T66_PFCN_2020"
+      ],
+      "scope": "paraphrased field summary; not a source quotation"
+    },
+    "Femoral nerve:functionContext": {
+      "valueSha256": "ed2781e6dee5aa6367aa07422d999d95577048211c813fbd646118fd9ab89645",
+      "sourceIds": [
+        "T66_RF_2019"
+      ],
+      "scope": "paraphrased field summary; not a source quotation"
+    },
+    "Lateral pectoral nerve:functionContext": {
+      "valueSha256": "5ea0c76a75e898faebef34bcd2120a956c12c6a5855bd6f764115c82b868d86a",
+      "sourceIds": [
+        "T66_PECTORAL_2011"
+      ],
+      "scope": "paraphrased field summary; not a source quotation"
+    },
+    "Medial pectoral nerve:functionContext": {
+      "valueSha256": "ebd2b7f5f9cb5d696e0771536ece429c99d8afee4fe2f6dcd2be9d72ae5a4de7",
+      "sourceIds": [
+        "T66_PECTORAL_2011"
+      ],
+      "scope": "paraphrased field summary; not a source quotation"
+    },
+    "Intercostal nerves:courseContext": {
+      "valueSha256": "1bd01556fb24cc39c121f31a2df2bb39e1f987bbce833588fd8320e3a165009b",
+      "sourceIds": [
+        "T66_RA_2008"
+      ],
+      "scope": "paraphrased field summary; not a source quotation"
+    },
+    "Intercostal nerves:functionContext": {
+      "valueSha256": "70ff51a5792540aea386b60b623ff4a130b1ca568a86fc53e96c20cb3e2b87c7",
+      "sourceIds": [
+        "T66_INTERCOSTAL_ABDOMINAL_1992",
+        "T66_RA_2008",
+        "T66_EAO_1985"
+      ],
+      "scope": "paraphrased field summary; not a source quotation"
+    },
+    "Radial nerve:functionContext": {
+      "valueSha256": "08120f2331488c223ba9bb087e2a964d81682deb437f4f12e7816754856442c5",
+      "sourceIds": [
+        "T66_RADIAL_2020"
+      ],
+      "scope": "paraphrased field summary; not a source quotation"
+    },
+    "Median nerve:functionContext": {
+      "valueSha256": "111fee4d33ea13f29b5c090b7ed3e97d72f4a514e3f3556f3d9bfa09896cf02f",
+      "sourceIds": [
+        "T66_MEDIAN_2020"
+      ],
+      "scope": "paraphrased field summary; not a source quotation"
+    }
+  }
+}

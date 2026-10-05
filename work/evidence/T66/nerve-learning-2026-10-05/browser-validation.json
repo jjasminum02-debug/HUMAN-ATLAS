@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "t66-nerve-learning-browser-validation-v1",
+  "recordedAt": "2026-10-05",
+  "application": "http://127.0.0.1:5176/?source=ZA-NERVE-18b62399d08",
+  "browserSurface": "Codex in-app browser, tab 3; actual local Atlas runtime",
+  "actualViewport": {
+    "cssWidth": 825,
+    "cssHeight": 807,
+    "devicePixelRatio": 2,
+    "documentScrollWidth": 825,
+    "canvasCount": 1,
+    "capturePixelSize": [825, 807]
+  },
+  "consoleErrors": 0,
+  "screenshots": [
+    {
+      "capture": "current deep-fibular-right card, emitted inline from CUA screenshot",
+      "sha256": "bb3610db06fe810a4c12aa2f297b84c6f0504b24bce218513b0facb0329830f9",
+      "bytes": 61740,
+      "persistedToRepository": false,
+      "note": "Screenshot bytes were inspected inline; no repository screenshot path is claimed."
+    }
+  ],
+  "checks": [
+    {
+      "case": "deep fibular nerve, right",
+      "result": "passed",
+      "observed": "Static gold nerve; exact right tibialis anterior surface relation; card exposes verified action text and right ankle dorsiflexion motion link; selecting the link opens the exact right muscle card; playback changes the muscle surface; the static nerve surface is hidden during unsupported moving nerve pose; re-click restores slider to 0/rest."
+    },
+    {
+      "case": "dorsal scapular nerve, left",
+      "result": "passed",
+      "observed": "Course card lists same-side rhomboid major/minor and levator scapulae context; selecting left levator scapulae updates card/selection; posture-only observations are not rendered as muscle action."
+    },
+    {
+      "case": "axillary nerve, left",
+      "result": "passed",
+      "observed": "Same-side deltoid displayed part-set and teres minor are selectable; unavailable action text is stated explicitly."
+    },
+    {
+      "case": "radial nerve, left",
+      "result": "passed",
+      "observed": "Same-side brachioradialis and extensor carpi radialis longus are selectable; no unverified action text is invented."
+    },
+    {
+      "case": "median nerve, left",
+      "result": "passed",
+      "observed": "Same-side pronator teres part-set, flexor carpi radialis, palmaris longus and flexor digitorum superficialis part-set appear; only eligible verified action-text intents are shown."
+    },
+    {
+      "case": "femoral nerve, left",
+      "result": "passed",
+      "observed": "Femoral nerve card links to same-side rectus femoris; it remains distinct from lateral/posterior femoral cutaneous nerve concepts."
+    },
+    {
+      "case": "LFCN and PFCN sensory cases",
+      "result": "passed",
+      "observed": "Separate concepts/cards; no motor rows; learner text says no currently linked motor relation does not mean anatomical absence."
+    },
+    {
+      "case": "user nerve-layer preference",
+      "result": "passed",
+      "observed": "Explicit layer-off remained off when changing side; user could manually turn the layer back on; selected nerve and related-muscle highlight cleanup/restoration verified."
+    },
+    {
+      "case": "learner metadata leakage",
+      "result": "passed",
+      "observed": "No task IDs, internal source IDs, PMIDs/PMCID, evidence paths or review-state codes displayed."
+    }
+  ],
+  "scopeLimits": [
+    "Only actual viewport 825x807 CSS px was measured for this run; this is not 390px mobile hardware QA or 1024/1440 viewport evidence.",
+    "The screenshot is an inline CUA capture, not a persisted evidence file.",
+    "Same-side selection of concept-level literature relations does not create a side-specific nerve branch-to-mesh binding.",
+    "This is representative learner-flow validation, not exhaustive nerve concept or individual branch validation."
+  ]
+}

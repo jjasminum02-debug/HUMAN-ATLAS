@@ -11,6 +11,7 @@ import { learnerStructureUnavailability } from "../domain/learnerStructureSource
 import { learnerActionAppliesToSide } from "../domain/learnerActionText";
 import { resolveLearnerMotionCandidate, type LearnerMotionActionOption, type LearnerActionText, type Laterality } from "../domain/motionLearning.ts";
 import { projectT66Wave1MotionOptions, type T66Wave1Registration } from "../domain/t66Wave1Motion.ts";
+import { conceptForExactNerveName, relationsForNerve } from "../domain/nerveRelations.ts";
 
 type LearnerCardRuntime = {
   schemaVersion: "learner-card-runtime-v1";
@@ -30,13 +31,16 @@ type LearnerNerveConcept = {
   searchTerms: string[];
   sourceNativeEnglishName: string | null;
   summary?: { course: string; motorRelation: string; variation: string };
+  functionEvidenceClass?: "mixed_motor_sensory_evidence_and_motor_relation" | "sensory_course_documented_no_motor_relation" | "motor_relation_documented_sensory_class_not_assessed" | "relationship_not_linked";
 };
 export type LearnerMotorRelation = {
+  relationId: string;
   nerveKey: string;
+  basis: "exact_geometry_motor_relation" | "literature_concept_motor_relation";
   targetEnglishConcept?: string;
   targetSourceKeys: string[];
   targetSide: "left" | "right" | null;
-  scope: "exact_side_matched_source_instance" | "unsided_named_whole_muscle_concept";
+  scope: "exact_side_matched_source_instance" | "unsided_named_whole_muscle_concept" | "unsided_named_muscle_part_set" | "unsided_partial_muscle_concept";
   displayNote: string;
 };
 type LearnerNerveGraph = {
@@ -168,7 +172,7 @@ export function nerveConceptForLearner(key: string) {
 }
 
 export function nerveConceptForSourceName(englishName: string) {
-  return nerveGraph.concepts.find(row => row.sourceNativeEnglishName === englishName) ?? null;
+  return conceptForExactNerveName(nerveGraph.concepts, englishName);
 }
 
 export function nerveNamesForSource(englishName: string) {
@@ -181,8 +185,7 @@ export function motorRelationsForSource(sourceKey: string): LearnerMotorRelation
 }
 
 export function motorRelationsForNerve(nerveKey: string, selectedSide?: string | null): LearnerMotorRelation[] {
-  return nerveGraph.motorRelations.filter(row => row.nerveKey === nerveKey
-    && (row.scope !== "exact_side_matched_source_instance" || !selectedSide || row.targetSide === selectedSide));
+  return relationsForNerve(nerveGraph.motorRelations, nerveKey, selectedSide);
 }
 
 export function nerveGraphForLearner() {

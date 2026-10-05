@@ -1,97 +1,336 @@
-"""Exact native-source cards, separately scoped literature and observed model course."""
-import hashlib,json,re
+#!/usr/bin/env python3
+"""Rebuild the bounded T66 learner nerve relation projection and its private evidence ledger."""
+from __future__ import annotations
+
+import hashlib
+import json
+import sys
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[2]
-OUT='work/evidence/T66/implementation-2026-10-02'
-def read(p):return json.loads((ROOT/p).read_text())
-def save(p,v):
-    f=ROOT/p;f.parent.mkdir(parents=True,exist_ok=True);f.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
-def sha(p):return hashlib.sha256((ROOT/p).read_bytes()).hexdigest()
-regions={'head':'머리','neck':'목','back':'등','shoulder-scapular':'어깨·어깨뼈','thorax':'가슴우리','abdomen-lumbar':'배·허리','pelvis-perineum':'골반·샅','gluteal-hip':'볼기·엉덩이','thigh':'넙다리','leg':'종아리','foot':'발','upper-limb':'팔·손'}
-names={
- 'Dorsal scapular nerve':('등쪽어깨신경','견갑배신경'),'Median nerve':('정중신경','정중신경'),
- 'Axillary nerve':('겨드랑신경','액와신경'),'Radial nerve':('노신경','요골신경'),
- 'Deep branch of radial nerve':('노신경 깊은가지','요골신경 심지'),'Superficial branch of radial nerve':('노신경 얕은가지','요골신경 천지'),
- 'Lateral femoral cutaneous nerve':('가쪽넙다리피부신경','외측대퇴피신경'),
- 'Posterior femoral cutaneous nerve':('뒤넙다리피부신경','후대퇴피신경'),'Femoral nerve':('넙다리신경','대퇴신경'),
- 'Ulnar nerve':('자신경','척골신경'),'Musculocutaneous nerve':('근육피부신경','근피신경'),
- 'Tibial nerve':('정강신경','경골신경'),'Saphenous nerve':('두렁신경','복재신경'),
- 'Sural nerve':('장딴지신경','비복신경'),'Obturator nerve':('폐쇄신경','폐쇄신경'),
- 'Suprascapular nerve':('어깨위신경','견갑상신경'),'Long thoracic nerve':('긴가슴신경','장흉신경'),
- 'Medial plantar nerve':('안쪽발바닥신경','내측족저신경'),'Lateral plantar nerve':('가쪽발바닥신경','외측족저신경'),
-}
-# Concise educational paraphrases of actually opened primary papers/abstracts.
-# No numerical location from a cadaver series is bound to this model's coordinates.
-literature={
- 'Dorsal scapular nerve':{
-  'courseContext':'목의 상완신경얼기에서 시작해 중간목갈비근 주변을 지나 마름근·어깨올림근 쪽으로 내려갑니다. 중간목갈비근을 뚫거나 앞쪽을 지나는 경로가 해부 연구에서 보고되었습니다.',
-  'compressionContext':'중간목갈비근 주변은 문헌에서 포착 맥락으로 다룹니다. 근육을 관통하는 경로와 앞쪽으로 지나는 변이가 있으므로 한 모형의 경로를 모든 사람에게 적용하지 않습니다.',
-  'variationContext':'좌우가 서로 다른 경로를 보인 표본도 보고되었습니다. 문헌의 경로 변이는 이 정적 모형의 좌표로 확정하지 않습니다.',
-  'source':'https://pmc.ncbi.nlm.nih.gov/articles/PMC6392864/','locator':'Abstract; Introduction; Results, middle-scalene piercing/anterior variants, 70 cadavers / 140 sides','access':'opened_primary_fulltext'},
- 'Median nerve':{
-  'courseContext':'아래팔의 몸쪽 구간에서 정중신경은 얕은손가락굽힘근의 섬유성 아치 아래로 지납니다. 앞뼈사이신경이 갈라지는 위치도 이 아치와의 관계에서 변이를 보입니다. 이 설명은 아래팔 몸쪽 구간에 한정합니다.',
-  'compressionContext':'얕은손가락굽힘근의 아치는 정중신경의 포착 가능 구간으로 기술됩니다. 뚜렷한 가로 섬유띠와 주변 근막에 섞이는 형태가 구분되며 모형에서 압박이 발생했다고 판정하지 않습니다.',
-  'variationContext':'아치 모양·덮는 근육·앞뼈사이신경 분지 위치에 변이가 보고되었습니다. 손목터널이나 모든 정중신경 구간의 확보를 뜻하지 않습니다.',
-  'source':'https://pmc.ncbi.nlm.nih.gov/articles/PMC4235925/','locator':'Abstract; Anatomy; Discussion, FDS arch / median nerve / AIN takeoff, 38 cadavers','access':'opened_primary_fulltext'},
- 'Lateral femoral cutaneous nerve':{
-  'courseContext':'외측대퇴피신경은 골반에서 샅고랑인대·위앞엉덩뼈가시 주변을 지나 넙다리로 이어집니다. 인대 아래의 분지는 넙다리빗근과 넙다리근막긴장근 주변에서 여러 형태를 보입니다.',
-  'compressionContext':'이 문헌은 샅고랑인대 주변의 주행·분지와 수술 중 손상 위험을 다룹니다. 만성 포착을 직접 확인한 근거는 아직 연결하지 않았습니다. 문헌의 위치를 모형 위의 포착점으로 표시하지 않으며, 가까이 보이는 것만으로 압박을 판정하지 않습니다.',
-  'variationContext':'부채꼴·넙다리빗근을 따르는 형태·뒤쪽으로 가는 분지 형태가 보고되었습니다. 외측대퇴피신경의 뒤쪽 분지와 후대퇴피신경은 다른 개념입니다.',
-  'source':'https://pmc.ncbi.nlm.nih.gov/articles/PMC11974468/','locator':'Measurement details; Results; Discussion, LFCN / inguinal ligament / ASIS / sartorius and TFL, 30 specimens','access':'opened_primary_fulltext'},
- 'Axillary nerve':{
-  'courseContext':'상완신경얼기 뒤다발에서 이어져 사각공간을 지나는 경로가 해부 연구에서 추적되었습니다. 이 구간에서 삼각근으로 가는 운동 섬유와 소원근·어깨 피부로 이어지는 섬유가 구별됩니다.',
-  'compressionContext':'사각공간은 액와신경의 잠재적 포착 구간으로 해부 연구에서 다뤄집니다. 정적 모형의 신경과 주변 구조를 관찰하는 설명이며 실제 포착이나 질환을 재현하지 않습니다.',
-  'variationContext':'문헌의 섬유다발 위치·거리와 현재 모형의 좌표는 별도입니다. 이를 개인의 안전 범위나 압박 좌표로 바꾸지 않습니다.',
-  'source':'https://pubmed.ncbi.nlm.nih.gov/8866374/','locator':'Abstract, posterior cord to quadrangular space, 40 brachial plexuses; potential entrapment context: PMID15926719 abstract index','access':'opened_primary_abstract','additionalSource':'https://pubmed.ncbi.nlm.nih.gov/15926719/'},
- 'Deep branch of radial nerve':{
-  'courseContext':'요골신경의 깊은가지는 팔꿈치 주변에서 회외근의 몸쪽 아치 아래를 통과합니다. 이 설명은 깊은가지에 한정하며 피부 감각을 담당하는 얕은가지 전체와 합치지 않습니다.',
-  'compressionContext':'회외근의 몸쪽 입구인 Frohse 아치와 짧은노쪽손목폄근 주변의 힘줄성 구조가 깊은가지 포착과 관련된 해부 맥락으로 연구되었습니다.',
-  'variationContext':'아치가 섬유성인지, 주행을 가로지르는 조직과의 관계가 어떤지에 변이가 보고되었습니다. 문헌의 수치를 모형의 포착 좌표로 결속하지 않습니다.',
-  'source':'https://pubmed.ncbi.nlm.nih.gov/2606390/','locator':'Indexed primary abstract; 120 cadaver elbow regions; ECRB initial deep surface and superior supinator hiatus; source fulltext unavailable','access':'primary_abstract_index_only'},
+
+ROOT = Path(__file__).resolve().parents[2]
+GRAPH_PATH = ROOT / "atlas-data/terminology/learner-nerve-graph-t66.json"
+COURSE_PATH = ROOT / "atlas-data/terminology/nerve-learning-t66.json"
+INTEGRATION_PATH = ROOT / "atlas-data/overlays/za-local-integration.json"
+SUPPORT_PATH = ROOT / "atlas-data/overlays/nerve-support-t66.json"
+EVIDENCE_DIR = ROOT / "work/evidence/T66/nerve-learning-2026-10-05"
+INPUT_DIR = EVIDENCE_DIR / "input"
+GRAPH_SEED_PATH = INPUT_DIR / "learner-nerve-graph-t66.json"
+COURSE_SEED_PATH = INPUT_DIR / "nerve-learning-t66.json"
+
+SOURCES = {
+    "T61_EXISTING_EXACT_GEOMETRY": {
+        "url": "internal:work/evidence/T61/verification.json;work/evidence/T61/learner_runtime_check.log",
+        "edition": "Existing T61 verified runtime relation; frozen source instance and side",
+        "access": "Prior exact runtime and source-geometry verification reused",
+        "locator": "Exact deep fibular nerve to left/right tibialis anterior source instance relation only; not a complete nerve supply claim",
+    },
+    "T66_AXILLARY_2018": {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/30428810/",
+        "edition": "2018 Dec;23(4):533-538; PMID 30428810; DOI 10.1142/S2424835518500546",
+        "access": "PubMed record and abstract opened",
+        "locator": "Abstract, Methods/Results/Conclusions; 23 dissections; deltoid regional distribution and teres minor branch",
+    },
+    "T66_DSN_2018": {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/30461656/",
+        "edition": "2018 Nov;97(47):e13349; PMID 30461656; PMCID PMC6392864; DOI 10.1097/MD.0000000000013349",
+        "access": "PubMed record and abstract opened",
+        "locator": "Abstract; 70 Japanese cadavers / 140 sides; rhomboid major, rhomboid minor, levator scapulae; middle-scalene path variants",
+    },
+    "T66_PECTORAL_2011": {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21587039/",
+        "edition": "2012 Feb;68(2):209-214; PMID 21587039; DOI 10.1097/SAP.0b013e318212f3d9",
+        "access": "PubMed record and abstract opened",
+        "locator": "Abstract; 30 pectoral specimens from 15 cadavers; lateral and medial pectoral innervation and variable fourth-intercostal contribution",
+    },
+    "T66_RF_2019": {
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6662958/",
+        "edition": "2019; PMID 31660203; PMCID PMC6662958",
+        "access": "PMC primary article abstract and methods/results opened from indexed full-text page; PubMed direct page unavailable",
+        "locator": "Abstract and Methods/Results; seven cadaveric specimens; femoral motor branches entering rectus femoris; branch-count variation",
+    },
+    "T66_INTERCOSTAL_ABDOMINAL_1992": {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/1600882/",
+        "edition": "1992 Apr-May;32(4-5):171-185; PMID 1600882",
+        "access": "PubMed indexed abstract; direct page returned a verification challenge",
+        "locator": "Abstract; lower intercostal mixed branches include external-oblique muscle branch and deep branch to rectus abdominis / other muscles",
+    },
+    "T66_EAO_1985": {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3160258/",
+        "edition": "1985;158(3):285-292; PMID 3160258",
+        "access": "PubMed indexed abstract",
+        "locator": "Abstract; one-cadaver report of upper external-oblique slips with fifth/sixth intercostal motor branches; narrow variant evidence only",
+    },
+    "T66_RA_2008": {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/18428988/",
+        "edition": "2008; PMID 18428988",
+        "access": "PubMed indexed abstract; direct page unavailable in this session",
+        "locator": "Abstract; 20 human cadaveric hemi-abdominal walls; rectus abdominis T6-L1 segmental innervation and widespread communications",
+    },
+    "T66_MEDIAN_2020": {
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7580294/",
+        "edition": "2020; PMID 33144842; PMCID PMC7580294",
+        "access": "PMC primary article text opened via indexed full-text page",
+        "locator": "Methods/Results; 20 upper limbs from 10 cadavers; branches to pronator teres, FCR, palmaris longus, FDS; variable branch patterns",
+    },
+    "T66_RADIAL_2020": {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32498404/",
+        "edition": "2020 Jun 2;10(6):366; PMID 32498404; PMCID PMC7345276; DOI 10.3390/diagnostics10060366",
+        "access": "PubMed record and abstract opened",
+        "locator": "Abstract; 35 cadavers; typical motor branch order includes brachioradialis and extensor carpi radialis longus; variations noted",
+    },
+    "T66_PFCN_2020": {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/31973825/",
+        "edition": "2020 Mar;124(3):308-313; PMID 31973825; DOI 10.1016/j.bja.2019.10.026",
+        "access": "PubMed record and abstract opened",
+        "locator": "Abstract; 83 human lower extremities; subgluteal fold to distal terminus; sensory lower-leg contribution and course variation",
+    },
+    "T66_LFCN_2025": {
+        "url": "internal:work/evidence/T66/parallel-completion-2026-10-03/wave-1/workers/F/field-evidence-sources.json",
+        "edition": "2025 Mar 28;40(1):12-17; PMID 40152087; PMCID PMC11974468",
+        "access": "Existing worker F field claim/provenance and value hash reused",
+        "locator": "Measurement details; Results; Discussion; LFCN around inguinal ligament/ASIS with variable branching; distinct from PFCN",
+    },
+    "T66_MEDIAN_COURSE_2014": {
+        "url": "internal:work/evidence/T66/parallel-completion-2026-10-03/wave-1/workers/F/field-evidence-sources.json",
+        "edition": "2014 May 15;9(4):466-470; PMID 25414606; PMCID PMC4235925",
+        "access": "Existing worker F course field claim/provenance and value hash reused",
+        "locator": "Abstract; Anatomy; Discussion; proximal forearm FDS arch / median nerve / AIN takeoff; 38 cadavers",
+    },
 }
 
-def build():
-    graph=read('atlas-data/terminology/learner-nerve-graph-t25.json');old={c['names']['en']:c for c in graph['concepts']}
-    registry=read('atlas-data/overlays/nerve-support-t66.json');groups={}
-    for n in registry['instances']:
-        if n['localSelection']=='verified_geometry':groups.setdefault(n['names']['en'],[]).append(n)
-    oldTexts={r['nerveName']:r for r in read('atlas-data/terminology/nerve-learning-content-t65.json')['records']}
-    learner={};ledger=[]
-    for en,rows in sorted(groups.items()):
-        c=old.get(en)
-        if c is None:
-            ko=names.get(en,(en,en));key='nerve-source-'+re.sub('[^a-z0-9]+','-',en.lower()).strip('-')
-            c={'key':key,'names':{'koModern':ko[0],'koTraditional':ko[1],'en':en,'latin':None},'searchTerms':[ko[0],ko[1],en],
-                'sourceNativeEnglishName':en,'summary':None}
-            graph['concepts'].append(c)
+# Nerve source label, target display concept, exact existing muscle names, scope, learner-safe limit, source rows.
+CONCEPT_LINKS = [
+    ("dorsal-scapular", "Levator scapulae", ["Levator scapulae"], "unsided_named_whole_muscle_concept", "해부 연구에서 어깨올림근과의 운동 관계가 보고되었습니다. 아래는 같은 쪽에 선택 가능한 근육 표면이며, 모형의 신경 가지에 직접 연결된 좌표는 아닙니다.", ["T66_DSN_2018"]),
+    ("nerve-source-axillary-nerve", "Deltoid muscle", ["Acromial part of deltoid muscle", "Clavicular part of deltoid muscle", "Scapular spinal part of deltoid muscle"], "unsided_named_muscle_part_set", "해부 연구는 겨드랑신경과 삼각근 여러 구역의 관계를 보고합니다. 아래 세분 표면은 모형의 표시 단위이며 각 신경 가지와 일대일로 대응하지 않습니다.", ["T66_AXILLARY_2018"]),
+    ("nerve-source-axillary-nerve", "Teres minor muscle", ["Teres minor muscle"], "unsided_named_whole_muscle_concept", "해부 연구에서 소원근으로 향하는 겨드랑신경 가지가 확인되었습니다. 아래는 같은 쪽 선택 표면이며, 개별 가지를 잇는 모형 좌표는 아닙니다.", ["T66_AXILLARY_2018"]),
+    ("nerve-source-lateral-pectoral-nerve", "Pectoralis major muscle", ["(Abdominal part of pectoralis major muscle)", "Clavicular head of pectoralis major muscle", "Sternocostal head of pectoralis major muscle"], "unsided_named_muscle_part_set", "문헌은 가쪽가슴근신경이 대흉근의 주요 운동 공급에 참여한다고 보고합니다. 아래 모형의 세 부분은 선택 가능한 표시 단위이며 문헌의 가지별 구획과 일대일로 대응하지 않습니다.", ["T66_PECTORAL_2011"]),
+    ("nerve-source-medial-pectoral-nerve", "Pectoralis major muscle", ["(Abdominal part of pectoralis major muscle)", "Clavicular head of pectoralis major muscle", "Sternocostal head of pectoralis major muscle"], "unsided_named_muscle_part_set", "문헌은 안쪽가슴근신경이 대흉근 일부 구간에 기여한다고 보고합니다. 아래 모형의 세 부분은 선택 가능한 표시 단위이며 정확한 신경가지 분포 경계가 아닙니다.", ["T66_PECTORAL_2011"]),
+    ("nerve-source-femoral-nerve", "Rectus femoris muscle", ["Rectus femoris muscle"], "unsided_named_whole_muscle_concept", "해부 연구에서 넙다리신경 운동가지가 넙다리곧은근에 들어가는 관계를 확인했습니다. 가지 수와 진입 양상에 변이가 있으며, 모형 신경 가지의 좌표 연결은 아닙니다.", ["T66_RF_2019"]),
+    ("nerve-source-intercostal-nerves", "Rectus abdominis muscle", ["Rectus abdominis muscle"], "unsided_partial_muscle_concept", "문헌은 여러 분절의 가슴배신경이 복직근에 기여한다고 보고합니다. 현재 신경 묶음·근육 표면에서 특정 분절이나 전체 범위를 일대일로 지정하지 않습니다.", ["T66_INTERCOSTAL_ABDOMINAL_1992", "T66_RA_2008"]),
+    ("nerve-source-intercostal-nerves", "External abdominal oblique muscle", ["External abdominal oblique muscle"], "unsided_partial_muscle_concept", "해부 문헌은 가슴사이신경의 근육가지를 바깥배빗근 일부에 기술합니다. 아래는 한 선택 가능 표면이며, 모든 섬유·분절의 완전한 범위나 좌표 연결을 뜻하지 않습니다.", ["T66_INTERCOSTAL_ABDOMINAL_1992", "T66_EAO_1985"]),
+    ("nerve-source-median-nerve", "Pronator teres", ["Superficial head of pronator teres", "Deep head of pronator teres"], "unsided_named_muscle_part_set", "해부 연구에서 정중신경의 원엎침근 운동가지가 보고되었습니다. 아래 두 모형 부분은 분할 표면이며, 각 부분별 신경 가지의 정확한 경계를 뜻하지 않습니다.", ["T66_MEDIAN_2020"]),
+    ("nerve-source-median-nerve", "Flexor carpi radialis", ["Flexor carpi radialis"], "unsided_named_whole_muscle_concept", "해부 연구에서 정중신경과 노쪽손목굽힘근의 운동 관계가 보고되었습니다. 아래는 같은 쪽 선택 표면이며 개별 가지 좌표는 연결하지 않았습니다.", ["T66_MEDIAN_2020"]),
+    ("nerve-source-median-nerve", "Palmaris longus muscle", ["Palmaris longus muscle"], "unsided_named_whole_muscle_concept", "해부 연구에서 정중신경과 긴손바닥근의 운동 관계가 보고되었습니다. 아래는 같은 쪽 선택 표면이며 개인별 존재·분지 변이를 모두 나타내지 않습니다.", ["T66_MEDIAN_2020"]),
+    ("nerve-source-median-nerve", "Flexor digitorum superficialis", ["Humero-ulnar head of flexor digitorum superficialis", "Radial head of flexor digitorum superficialis"], "unsided_named_muscle_part_set", "해부 연구에서 정중신경과 얕은손가락굽힘근의 운동 관계가 보고되었습니다. 두 모형 부분은 표시 단위이며 문헌의 가지와 부위가 일대일 대응하지 않습니다.", ["T66_MEDIAN_2020"]),
+    ("nerve-source-radial-nerve", "Brachioradialis muscle", ["Brachioradialis muscle"], "unsided_named_whole_muscle_concept", "아래팔 해부 연구에서 위팔노근으로 향하는 노신경 가지가 전형적 분지 순서에 포함되며 변이도 보고되었습니다. 개별 가지의 모형 좌표 연결은 아닙니다.", ["T66_RADIAL_2020"]),
+    ("nerve-source-radial-nerve", "Extensor carpi radialis longus", ["Extensor carpi radialis longus"], "unsided_named_whole_muscle_concept", "아래팔 해부 연구에서 긴노쪽손목폄근으로 향하는 노신경 가지가 전형적 분지 순서에 포함됩니다. 분지 순서에는 변이가 있으며, 모형 가지의 직접 좌표 연결은 아닙니다.", ["T66_RADIAL_2020"]),
+]
+
+def load(path: Path):
+    return json.loads(path.read_text())
+
+def dump(path: Path, value):
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
+
+def sha(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+def main() -> None:
+    check = "--check" in sys.argv[1:]
+    graph = load(GRAPH_SEED_PATH)
+    course = load(COURSE_SEED_PATH)
+    integration = load(INTEGRATION_PATH)
+    support = load(SUPPORT_PATH)
+    muscles = [r for r in integration["objects"] if r.get("kind") == "muscle" and r.get("localDisplayEligible")]
+    muscles_by_name: dict[str, list[dict]] = {}
+    for row in muscles:
+        muscles_by_name.setdefault(row["names"]["en"], []).append(row)
+    concepts = {c["key"]: c for c in graph["concepts"]}
+    ids = set()
+    for row in graph["motorRelations"]:
+        nerve = concepts[row["nerveKey"]]
+        if row["nerveKey"] == "deep-fibular":
+            side = row.get("targetSide")
+            row["relationId"] = f"nerve-motor-deep-fibular-{side}"
+            row["basis"] = "exact_geometry_motor_relation"
+            row["displayNote"] = f"현재 확인한 모형 연결은 {'왼쪽' if side == 'left' else '오른쪽'} 깊은종아리신경 표면과 같은 쪽 앞정강근 표면에 한정됩니다. 전체 지배 범위를 뜻하지 않습니다."
+        elif nerve["key"] == "dorsal-scapular":
+            label = "rhomboid-major" if row.get("targetEnglishConcept") == "Rhomboid major muscle" else "rhomboid-minor"
+            row["relationId"] = f"nerve-motor-dorsal-scapular-{label}"
+            row["basis"] = "literature_concept_motor_relation"
+        if row["relationId"] in ids:
+            raise ValueError(f"duplicate relation id: {row['relationId']}")
+        ids.add(row["relationId"])
+    for nerve_key, target, names, scope, note, source_ids in CONCEPT_LINKS:
+        target_rows = []
+        for name in names:
+            matched = muscles_by_name.get(name, [])
+            if not matched:
+                raise ValueError(f"no existing eligible target surface: {name}")
+            sides = {row.get("side") for row in matched}
+            if sides != {"left", "right"}:
+                raise ValueError(f"expected existing left/right target surfaces for {name}, got {sides}")
+            target_rows.extend(sorted(matched, key=lambda row: (row["side"], row["sourceKey"])))
+        relation_id = "nerve-motor-" + nerve_key.removeprefix("nerve-source-") + "-" + target.lower().replace(" ", "-")
+        if relation_id in ids:
+            raise ValueError(f"duplicate relation id: {relation_id}")
+        ids.add(relation_id)
+        graph["motorRelations"].append({
+            "relationId": relation_id,
+            "nerveKey": nerve_key,
+            "basis": "literature_concept_motor_relation",
+            "targetEnglishConcept": target,
+            "targetSourceKeys": [row["sourceKey"] for row in target_rows],
+            "targetSide": None,
+            "scope": scope,
+            "displayNote": note,
+        })
+    relation_nerve_keys = {row["nerveKey"] for row in graph["motorRelations"]}
+    for concept in graph["concepts"]:
+        if concept["key"] in {"nerve-source-lateral-femoral-cutaneous-nerve", "nerve-source-posterior-femoral-cutaneous-nerve"}:
+            concept["functionEvidenceClass"] = "sensory_course_documented_no_motor_relation"
+        elif concept["key"] in {"nerve-source-axillary-nerve", "nerve-source-intercostal-nerves"}:
+            concept["functionEvidenceClass"] = "mixed_motor_sensory_evidence_and_motor_relation"
+        elif concept["key"] in relation_nerve_keys:
+            concept["functionEvidenceClass"] = "motor_relation_documented_sensory_class_not_assessed"
         else:
-            c['sourceNativeEnglishName']=en
-            if en=='Dorsal scapular nerve' and c['summary']:
-                c['summary']['course']=c['summary']['course'].replace('이 앱에는 이 신경의 3D 주행 모형이 없습니다.','한 정적 모형의 주행을 관찰할 수 있으며 개인별 경로에는 차이가 있습니다.')
-        rids=sorted({r for n in rows for r in n['regionIds']})
-        observed='정적 모형에서 '+', '.join(regions[r] for r in rids)+'의 주변 구조와 주행을 살펴볼 수 있습니다. 한 주행 표본이며 정상 경로의 모든 변이를 보여 주지는 않습니다.'
-        text={'courseContext':observed,'compressionContext':'이 신경의 포착 가능 구간을 설명할 문헌 근거가 아직 연결되지 않았습니다. 모형의 가까움·교차만으로 포착을 판정하지 않습니다.',
-            'variationContext':'현재는 정적 자세의 주행을 관찰합니다. 움직이는 자세에서의 신경 변형·미끄러짐은 제공하지 않습니다.',
-            'functionContext':'확인된 신경 지배 관계가 있는 경우 아래 운동 연결에서 살펴볼 수 있습니다.'}
-        evidence=[];support='observed_static_model_context'
-        if en in oldTexts:
-            text.update({k:oldTexts[en][k] for k in ['courseContext','compressionContext','functionContext']});evidence.append({'path':'atlas-data/terminology/nerve-learning-content-t65.json','sha256':sha('atlas-data/terminology/nerve-learning-content-t65.json'),'locator':'records[nerveName='+en+'].fieldEvidence'});support='reused_field_evidence'
-        if en in literature:
-            claim=literature[en];text.update({k:claim[k] for k in ['courseContext','compressionContext','variationContext']});evidence.append({k:claim[k] for k in ['source','locator','access']});
-            if claim.get('additionalSource'):evidence.append({'source':claim['additionalSource'],'locator':'primary abstract index only; entrapment context','access':'primary_abstract_index_only'})
-            support=claim['access']
-        learner[en]=text
-        ledger.append({'sourceNativeName':en,'sourceInstanceIds':[n['id'] for n in rows],'sourceKeys':[n['geometry']['assetPath'].split('/')[-1].replace('.glb','') for n in rows],
-            'anatomicalConceptId':None,'displayNameMeaning':'context-composed learner names, not a quoted dictionary headword or canonical binding',
-            'courseTextSupport':support,'entrapmentTextSupported':en in oldTexts or en in ['Dorsal scapular nerve','Median nerve'],
-            'entrapmentEvidenceStatus':('reused_field_evidence' if en in oldTexts else 'opened_primary_fulltext' if en in ['Dorsal scapular nerve','Median nerve'] else 'primary_abstract_index_only' if en in ['Axillary nerve','Deep branch of radial nerve'] else 'surrounding_anatomy_only' if en=='Lateral femoral cutaneous nerve' else 'unavailable'),
-            'observedModelCourse':observed,'regionIds':rids,'fieldEvidence':evidence,'staticGeometry':len(rows),'dynamicGeometry':0,'entrapmentCoordinates':0,
-            'humanReview':'not_performed','publicRedistribution':'held'})
-    save('atlas-data/terminology/learner-nerve-graph-t66.json',graph)
-    save('atlas-data/terminology/nerve-learning-t66.json',learner)
-    save(OUT+'/nerve-course-and-entrapment-ledger.json',{'schemaVersion':'t66-source-course-text-v1','originalT25Preserved':True,
-        'rows':ledger,'literatureClaims':literature,'independentAnatomicalConceptCount':None,'nativeLabelGroups':len(groups),
-        'scope':'Full currently evaluated native source set; roots/plexus/trunks/branches retained, not independent anatomy counts. Text/geometry/dynamic-pose/entrapment-coordinate support separate.'})
-    print(json.dumps({'nativeSourceGroups':len(groups),'staticSurfaces':sum(len(r) for r in groups.values()),'literatureEntrapmentLabels':sum(x['entrapmentTextSupported'] for x in ledger)}))
+            concept["functionEvidenceClass"] = "relationship_not_linked"
+    dorsal = concepts["dorsal-scapular"]["summary"]
+    dorsal["motorRelation"] = "문헌은 등쪽어깨신경과 큰·작은마름근 및 어깨올림근의 운동 관계를 보고합니다. 아래 근육 표면은 같은 쪽 선택을 돕는 개념 연결이며, 좌우별 신경 가지나 부착 좌표를 뜻하지 않습니다."
+    dorsal["variation"] = "등쪽어깨신경은 중간목갈비근을 뚫거나 앞쪽을 지나는 경로 변이가 보고되었습니다. 어깨올림근 관계는 문헌 수준에서 연결했으며, 정적 모형의 좌표나 모든 개인의 분지 범위를 확정하지 않습니다."
 
-if __name__=='__main__':build()
+    course["Posterior femoral cutaneous nerve"]["courseContext"] = "해부 연구는 엉덩이 아래주름에서 시작한 후대퇴피신경을 오금 아래까지 추적했습니다. 83개 표본에서 종말점이 오금에 머물거나 종아리 근위·원위부까지 이어지는 차이가 관찰되었습니다."
+    course["Posterior femoral cutaneous nerve"]["functionContext"] = "후대퇴피신경은 피부 감각 경로입니다. 인용한 해부 연구에서는 종아리까지 이어지는 변이가 관찰되었으며, 이를 특정 모형의 좌표나 운동근 연결로 해석하지 않습니다."
+    course["Posterior femoral cutaneous nerve"]["variationContext"] = "표본의 원위 종말점은 오금·종아리 근위부·종아리 원위부로 달랐습니다. 외측대퇴피신경이나 넙다리신경과 같은 구조로 합치지 않으며, 실제 압박 지점을 지정하지 않습니다."
+    course["Femoral nerve"]["functionContext"] = "해부 연구에서 넙다리신경의 운동가지가 넙다리곧은근에 들어가는 것을 확인했고, 가지 수와 진입 양상에는 변이가 있었습니다. 문헌 관계는 개념 수준이며 정적 모형의 가지 좌표를 뜻하지 않습니다."
+    course["Lateral pectoral nerve"]["functionContext"] = "해부 연구는 가쪽가슴근신경을 대흉근의 주요 운동 공급으로, 안쪽가슴근신경 가지를 보충 경로로 보고했습니다. 선택 가능한 대흉근 부분 표면은 표시 단위이며 개별 신경 가지의 경계와 일치한다고 확정하지 않습니다."
+    course["Medial pectoral nerve"]["functionContext"] = "해부 연구는 안쪽가슴근신경이 작은가슴근을 지나 대흉근 일부 구간에도 가지를 보내는 양상을 보고했습니다. 문헌의 구획과 현재 모형의 세 부분 표면을 일대일로 대응하지 않습니다."
+    course["Intercostal nerves"]["courseContext"] = "앞배벽의 분절 신경은 여러 가지와 연결을 이루며 근육 가지와 피부 가지를 냅니다. 현재 표시는 정적 묶음 표본으로, 개별 분절의 좌우·주행을 완전히 구분한 모형은 아닙니다."
+    course["Intercostal nerves"]["functionContext"] = "문헌은 여러 가슴배 분절의 운동 가지가 복직근에, 가슴사이신경의 일부 가지가 바깥배빗근에 기여한다고 보고합니다. 현재 연결은 부분 개념 수준이며 특정 분절이나 전체 근육을 대표하지 않습니다."
+    course["Radial nerve"]["functionContext"] = "해부 연구에서 위팔노근과 긴노쪽손목폄근으로 향하는 가지가 전형적 아래팔 분지 순서에 포함되지만, 가지 순서와 일부 근육의 신경 기원에는 변이가 보고됩니다. 현재 관계는 근육 개념 수준입니다."
+    course["Median nerve"]["functionContext"] = "해부 연구의 20개 팔 표본에서 원엎침근·노쪽손목굽힘근·긴손바닥근·얕은손가락굽힘근의 정중신경 운동 관계가 보고되었고 가지 배열은 변이가 컸습니다. 현재 모형의 머리·부분을 특정 가지와 일대일로 연결하지 않습니다."
+
+    instances = support["instances"]
+    label_groups: dict[str, list[dict]] = {}
+    for row in instances:
+        label_groups.setdefault(row["names"]["en"], []).append(row)
+    if len(instances) != 195 or len(label_groups) != 98:
+        raise ValueError(f"nerve support input drift: {len(instances)} surfaces / {len(label_groups)} label groups")
+    concepts_by_source = {c.get("sourceNativeEnglishName"): c for c in graph["concepts"] if c.get("sourceNativeEnglishName")}
+    concepts_by_name = {c["names"]["en"]: c for c in graph["concepts"]}
+    relations_by_nerve: dict[str, list[dict]] = {}
+    for row in graph["motorRelations"]:
+        relations_by_nerve.setdefault(row["nerveKey"], []).append(row)
+    groups = []
+    for english_name, group in sorted(label_groups.items()):
+        concept = concepts_by_source.get(english_name) or concepts_by_name.get(english_name)
+        related = relations_by_nerve.get(concept["key"], []) if concept else []
+        groups.append({
+            "labelGroupEnglishName": english_name,
+            "sourceSurfaceCount": len(group),
+            "sourceInstanceIds": [row["id"] for row in group],
+            "sides": sorted({row.get("side") for row in group if row.get("side")}),
+            "graphConceptKey": concept["key"] if concept else None,
+            "motorRelationStatus": "documented" if related else "not_linked",
+            "sensoryCourseStatus": "documented" if concept and concept.get("functionEvidenceClass") == "sensory_course_documented_no_motor_relation" else "not_assessed",
+            "functionEvidenceClass": concept.get("functionEvidenceClass", "unmapped_source_label") if concept else "unmapped_source_label",
+            "relationIds": [row["relationId"] for row in related],
+        })
+
+    relation_sources = {
+        "nerve-motor-deep-fibular-left": ["T61_EXISTING_EXACT_GEOMETRY"],
+        "nerve-motor-deep-fibular-right": ["T61_EXISTING_EXACT_GEOMETRY"],
+        "nerve-motor-dorsal-scapular-rhomboid-major": ["T66_DSN_2018"],
+        "nerve-motor-dorsal-scapular-rhomboid-minor": ["T66_DSN_2018"],
+        "nerve-motor-dorsal-scapular-levator-scapulae": ["T66_DSN_2018"],
+    }
+    for nerve_key, target, _, _, _, source_ids in CONCEPT_LINKS:
+        safe_nerve = nerve_key.removeprefix("nerve-source-")
+        target_slug = target.lower().replace(" ", "-")
+        relation_sources[f"nerve-motor-{safe_nerve}-{target_slug}"] = source_ids
+    relation_rows = []
+    muscle_by_key = {row["sourceKey"]: row for row in muscles}
+    for row in graph["motorRelations"]:
+        is_exact = row["basis"] == "exact_geometry_motor_relation"
+        source_ids = relation_sources.get(row["relationId"], [])
+        relation_rows.append({
+            "relationId": row["relationId"],
+            "nerveKey": row["nerveKey"],
+            "targetEnglishConcept": row.get("targetEnglishConcept"),
+            "targetSourceKeys": row["targetSourceKeys"],
+            "targetSides": sorted({muscle_by_key[key].get("side") for key in row["targetSourceKeys"]}),
+            "basis": row["basis"],
+            "scope": row["scope"],
+            "displayLimit": row["displayNote"],
+            "sourceIds": source_ids,
+            "identityLimit": "existing exact same-side geometry relation; limited to this source instance" if is_exact else "literature relation does not establish a source nerve-branch-to-muscle-mesh coordinate binding",
+            "displayNoteSha256": hashlib.sha256(row["displayNote"].encode()).hexdigest(),
+        })
+    learner_fields = {}
+    field_sources = {
+        ("Posterior femoral cutaneous nerve", "courseContext"): ["T66_PFCN_2020"],
+        ("Posterior femoral cutaneous nerve", "functionContext"): ["T66_PFCN_2020"],
+        ("Posterior femoral cutaneous nerve", "variationContext"): ["T66_PFCN_2020"],
+        ("Femoral nerve", "functionContext"): ["T66_RF_2019"],
+        ("Lateral pectoral nerve", "functionContext"): ["T66_PECTORAL_2011"],
+        ("Medial pectoral nerve", "functionContext"): ["T66_PECTORAL_2011"],
+        ("Intercostal nerves", "courseContext"): ["T66_RA_2008"],
+        ("Intercostal nerves", "functionContext"): ["T66_INTERCOSTAL_ABDOMINAL_1992", "T66_RA_2008", "T66_EAO_1985"],
+        ("Radial nerve", "functionContext"): ["T66_RADIAL_2020"],
+        ("Median nerve", "functionContext"): ["T66_MEDIAN_2020"],
+    }
+    for (name, field), source_ids in field_sources.items():
+        learner_fields[f"{name}:{field}"] = {
+            "valueSha256": hashlib.sha256(course[name][field].encode()).hexdigest(),
+            "sourceIds": source_ids,
+            "scope": "paraphrased field summary; not a source quotation",
+        }
+    supported_by_source: dict[str, dict[str, dict[str, set[str]]]] = {}
+    for relation in relation_rows:
+        for source_id in relation["sourceIds"]:
+            entry = supported_by_source.setdefault(source_id, {}).setdefault(relation["nerveKey"], {"relationIds": set(), "fields": set()})
+            entry["relationIds"].add(relation["relationId"])
+    for (name, field), source_ids in field_sources.items():
+        concept = concepts_by_name.get(name)
+        if not concept:
+            continue
+        for source_id in source_ids:
+            supported_by_source.setdefault(source_id, {}).setdefault(concept["key"], {"relationIds": set(), "fields": set()})["fields"].add(field)
+    for source_id, record in SOURCES.items():
+        record["supports"] = [
+            {"conceptKey": concept_key, "relationIds": sorted(values["relationIds"]), "fields": sorted(values["fields"])}
+            for concept_key, values in sorted(supported_by_source.get(source_id, {}).items())
+        ]
+    ledger = {
+        "schemaVersion": "t66-nerve-learning-evidence-v1",
+        "recordedAt": "2026-10-05",
+        "sourceSnapshot": {
+            "nerveSupportSha256": sha(SUPPORT_PATH),
+            "zaIntegrationSha256": sha(INTEGRATION_PATH),
+            "learnerGraphSeedSha256": sha(GRAPH_SEED_PATH),
+            "nerveCourseSeedSha256": sha(COURSE_SEED_PATH),
+        },
+        "denominators": {"staticSourceSurfaces": len(instances), "uniqueSourceLabelGroups": len(label_groups), "independentAnatomyConceptCount": "not inferred from label groups"},
+        "preservedPolicy": {"sourceOnly": True, "localSelection": "verified_geometry_only", "humanReview": "not_performed", "publicRedistribution": "held", "newCanonicalBindings": 0, "newNerveGeometry": 0, "newBranchCoordinates": 0},
+        "sourceRecords": SOURCES,
+        "relationSummary": {
+            "exactGeometryMotorRows": sum(row["basis"] == "exact_geometry_motor_relation" for row in graph["motorRelations"]),
+            "literatureConceptRows": sum(row["basis"] == "literature_concept_motor_relation" for row in graph["motorRelations"]),
+            "totalRows": len(graph["motorRelations"]),
+            "uniqueNerveConceptKeys": len({row["nerveKey"] for row in graph["motorRelations"]}),
+            "uniqueTargetSourceKeys": len({key for row in graph["motorRelations"] for key in row["targetSourceKeys"]}),
+        },
+        "relations": relation_rows,
+        "labelGroupDisposition": groups,
+        "learnerFieldEvidence": learner_fields,
+    }
+    generated = {
+        GRAPH_PATH: json.dumps(graph, ensure_ascii=False, indent=2) + "\n",
+        COURSE_PATH: json.dumps(course, ensure_ascii=False, indent=2) + "\n",
+        EVIDENCE_DIR / "nerve-relation-ledger.json": json.dumps(ledger, ensure_ascii=False, indent=2) + "\n",
+    }
+    if check:
+        mismatches = [str(path.relative_to(ROOT)) for path, content in generated.items()
+                      if not path.exists() or path.read_text() != content]
+        if mismatches:
+            raise SystemExit("generated T66 nerve outputs differ: " + ", ".join(mismatches))
+        print("T66 nerve projection check passed")
+    else:
+        for path, content in generated.items():
+            path.write_text(content)
+    print(json.dumps(ledger["relationSummary"], ensure_ascii=False))
+    print(f"surface groups: {len(instances)} / {len(label_groups)}; mapped groups: {sum(row['graphConceptKey'] is not None for row in groups)}")
+
+
+if __name__ == "__main__":
+    main()
