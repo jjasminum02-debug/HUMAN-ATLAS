@@ -1,0 +1,74 @@
+{
+  "status": "passed",
+  "acceptanceScope": "T66 step03 twelve exact native source parts/sides: pectoralis major clavicular/sternocostal/abdominal adduction, levator scapulae elevation, rhomboid major/minor retraction",
+  "contractRevision": "app-completion-2026-10-01",
+  "relatedRegression": {
+    "passed": 33,
+    "failed": 0,
+    "log": "work/evidence/T66/priority-shoulder-scapula-2026-10-05/verification/related-tests.log"
+  },
+  "productionBuild": {
+    "passed": true,
+    "typecheckAndFullMotionSchemaPolicy": true,
+    "learnerDistributionAudit": true,
+    "log": "work/evidence/T66/priority-shoulder-scapula-2026-10-05/verification/build.log",
+    "chunkWarning": "App JS 6430954 bytes, gzip 682.96 KB exceeds existing 500 KB advisory; unchanged budget; no new performance benchmark or GPU/VRAM claim"
+  },
+  "emittedGeometry": {
+    "sourceActions": 12,
+    "poseSamplesPerAction": 65,
+    "changedBroadPectoralSurfaces": 4,
+    "flippedFaceSamples": 0,
+    "newBoneContainment": 0,
+    "minimumChangedSurfaceAreaRatio": 0.2650327010669121,
+    "originalPectoralReplaySamples": 65,
+    "oldUnchangedVerticesMaximumErrorMetres": 0,
+    "newNativeContextSurfacesPerSide": 34,
+    "correctedStationaryNeckSurfacesPerSide": 2,
+    "originalFamilyDependenciesVerified": 126,
+    "unchangedGirdleGlbsReused": 4,
+    "wholeTargetExtentApprovalsAdded": 0,
+    "humanReview": "not_performed"
+  },
+  "browser": {
+    "cases": [
+      "levator-left",
+      "levator-right",
+      "rhomboid-major-left",
+      "rhomboid-major-right",
+      "rhomboid-minor-left",
+      "rhomboid-minor-right",
+      "pectoral-clavicular-left",
+      "pectoral-clavicular-right",
+      "pectoral-sternocostal-left",
+      "pectoral-sternocostal-right",
+      "pectoral-abdominal-left",
+      "pectoral-abdominal-right"
+    ],
+    "cssViewport": [
+      1280,
+      720
+    ],
+    "singleCanvas": true,
+    "loopAndReclickSmoothRest": true,
+    "scrubRestMidEnd": true,
+    "selectionAndLayerOffGuards": true,
+    "dorsalScapularNerveToRhomboidAction": true,
+    "keyboardCameraAndHistory": true,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "pngCount": 87,
+    "observationsPath": "work/evidence/T66/priority-shoulder-scapula-2026-10-05/browser/observations.json",
+    "consolePath": "work/evidence/T66/priority-shoulder-scapula-2026-10-05/browser/console-log.json",
+    "physicalDeviceValidation": false,
+    "39010241440Claimed": false
+  },
+  "unresolvedProductBlockers": [],
+  "knownVerificationLimitations": [
+    "Bounded authored educational ranges: pectoral preparation 8 degrees and girdle preparation/elevation 5 degrees, with closer teaching framing. They are not full action/ROM, physiological force/activation, measured axes or exact source attachment footprints.",
+    "Contact verification samples actual emitted keys and intermediate geometry, retains source-baseline overlaps and does not claim continuous collision freedom.",
+    "Original generic posture records/assets and other worker WIP are preserved; this step adopts corrected priority source-action paths, not an all-family anatomy/engineering approval.",
+    "Selective commit is an owned checkpoint on the current workspace. Preexisting U03-r5 authoring/assets/validator WIP remains required; a clean HEAD-only checkout is not claimed to include all those predecessor artifacts.",
+    "Reduced-motion policy/one-clock behavior reuses unchanged player checks; no OS accessibility setting or physical mobile device was exercised."
+  ]
+}

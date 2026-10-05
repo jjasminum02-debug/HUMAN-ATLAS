@@ -30,6 +30,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
     private readonly actionTone = new THREE.Color('#bd5047');
     private motionPhase: AnimationPlaybackController['phase'] = 'rest';
     private motionIntent: MotionLearningIntent = 'posture_observation';
+    private guidedMotionDirection: THREE.Vector3 | null = null;
     private notify: (p: BodyProgress) => void;
     private select: (id: string, side: string | null) => void;
     private motion: { asset: MotionAsset; resource: AnimationSceneResource; player: AnimationPlaybackController; originals: Map<string, { node: THREE.Mesh; visible: boolean }>; packageMaterials: Map<string, THREE.Material | THREE.Material[]>; contextKey: string; onInvalidated?: (reason: string) => void } | null = null;
@@ -216,11 +217,20 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             const defaultFront = this.scene.camera.position.clone().sub(this.scene.controls.target).normalize();
             // A straight frontal default hides sagittal motion in depth. Establish an
             // oblique teaching view once; retain any already chosen non-default view.
-            if (asset.poseControl?.actionDirection === 'reverse' && defaultFront.z > .999
+            const untouchedFront = defaultFront.z > .999 && Math.abs(defaultFront.x) < .01 && Math.abs(defaultFront.y) < .01;
+            const previousGuideRetained = this.guidedMotionDirection !== null && defaultFront.dot(this.guidedMotionDirection) > .9999;
+            if (asset.poseControl?.observationDirection && (untouchedFront || previousGuideRetained)) {
+                const observation = new THREE.Vector3(...asset.poseControl.observationDirection);
+                if (Number.isFinite(observation.lengthSq()) && observation.lengthSq() > .01) {
+                    this.scene.camera.position.copy(this.scene.controls.target).add(observation.normalize());
+                    this.guidedMotionDirection = observation.clone();
+                }
+            } else if (asset.poseControl?.actionDirection === 'reverse' && defaultFront.z > .999
                 && Math.abs(defaultFront.x) < .01 && Math.abs(defaultFront.y) < .01) {
                 this.scene.camera.position.copy(this.scene.controls.target).add(new THREE.Vector3(.866, 0, .5));
             }
-            this.fit(binding.members.map(m => this.records.get(m.sourceKey)!).filter(row => row
+            const framingKeys = asset.poseControl?.framingSourceKeys?.filter(key => binding.members.some(member => member.sourceKey === key));
+            this.fit(binding.members.filter(m => !framingKeys?.length || framingKeys.includes(m.sourceKey)).map(m => this.records.get(m.sourceKey)!).filter(row => row
                 && (row.kind === 'bone' ? this.view.bones : this.view.muscles)
                 && !this.view.hiddenSourceKeys?.includes(row.sourceKey)), 1.05);
             return player;
@@ -284,14 +294,15 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         for (const [key, node] of this.resources.nodes) {
             const row = this.records.get(key)!;
             const selected = key === this.view.selectedId;
+            const motionContextOpacity = this.motion?.asset.poseControl?.contextOpacity;
             node.visible = visibleKeys.has(key) && !(this.motionPoseActive && row.kind === 'nerve') && !this.view.hiddenSourceKeys?.includes(key) && !selectionAlternativeKeys.has(key) && !(selected && this.view.selectedPresentation === 'hidden');
             const mode = this.view.translucentSourceKeys?.includes(key) || selected && this.view.selectedPresentation === 'translucent' ? 'translucent'
                 : selected ? 'selected' : observe && row.kind !== 'nerve' ? highlights.has(key) ? 'motorContext' : 'nerveContext'
-                : highlights.has(key) ? 'innervated' : this.motion?.originals.has(key) ? 'normal' : this.view.selectedId && this.view.dim ? 'dim' : 'normal';
+                : highlights.has(key) ? 'innervated' : this.motion?.originals.has(key) ? row.kind === 'muscle' && motionContextOpacity != null ? 'motionContext' : 'normal' : this.view.selectedId && this.view.dim ? 'dim' : 'normal';
             const actionPhase = selected && row.kind === 'muscle' && this.motion && this.motionIntent === 'muscle_action'
                 && this.motion.asset.sourceBinding?.subjectSourceKey === key ? this.motionPhase : null;
             const phaseTone = actionPhase === 'action' ? 'action' : actionPhase === 'return' ? 'return' : null;
-            const materialKey = row.kind + ':' + mode + (phaseTone ? ':' + phaseTone : '');
+            const materialKey = row.kind + ':' + mode + (mode === 'motionContext' ? ':' + motionContextOpacity : '') + (phaseTone ? ':' + phaseTone : '');
             let material = this.materials.get(materialKey);
             if (!material) {
                 const color = new THREE.Color(mode === 'selected' ? row.kind === 'nerve' ? '#208b3a' : '#18776d' : mode === 'innervated' || mode === 'motorContext' ? '#338fc1' : row.kind === 'nerve' ? '#d7ac20' : row.kind === 'bone' ? '#e7dec7' : '#b87969');
@@ -299,9 +310,9 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 else if (phaseTone === 'return') color.set('#a4aaa8');
                 if (mode === 'dim' && row.kind !== 'nerve')
                     color.lerp(new THREE.Color('#e5e5dd'), .55);
-                const transparent = ['translucent', 'nerveContext', 'motorContext'].includes(mode);
+                const transparent = ['translucent', 'nerveContext', 'motorContext', 'motionContext'].includes(mode);
                 material = new THREE.MeshStandardMaterial({ color, roughness: .76, transparent,
-                    opacity: mode === 'nerveContext' ? .12 : mode === 'motorContext' ? .82 : mode === 'translucent' ? .3 : 1,
+                    opacity: mode === 'motionContext' ? Math.max(.1, Math.min(.6, motionContextOpacity!)) : mode === 'nerveContext' ? .12 : mode === 'motorContext' ? .82 : mode === 'translucent' ? .3 : 1,
                     depthWrite: !transparent, depthTest: true,
                     emissive: row.kind === 'nerve' ? color : '#000000', emissiveIntensity: row.kind === 'nerve' ? .22 : 0 });
                 this.materials.set(materialKey, material);

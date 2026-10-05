@@ -101,7 +101,7 @@ export interface MotionAsset {
   sourceBinding?: SourceMotionBinding | null;
   /** Technical validation only. It is not human review or educational release. */
   technicalStatus: "candidate" | "binding_verified";
-  poseControl?: { label: string; startDegrees: number; endDegrees: number; combination: "single_dof_only"; actionDirection?: "forward" | "reverse" };
+  poseControl?: { label: string; startDegrees: number; endDegrees: number; combination: "single_dof_only"; actionDirection?: "forward" | "reverse"; observationDirection?: [number, number, number]; framingSourceKeys?: string[]; contextOpacity?: number };
 }
 
 export interface SourceMotionBindingMember {
