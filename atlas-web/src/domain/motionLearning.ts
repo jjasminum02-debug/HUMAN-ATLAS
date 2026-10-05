@@ -101,7 +101,7 @@ export interface MotionAsset {
   sourceBinding?: SourceMotionBinding | null;
   /** Technical validation only. It is not human review or educational release. */
   technicalStatus: "candidate" | "binding_verified";
-  poseControl?: { label: string; startDegrees: number; endDegrees: number; combination: "single_dof_only" };
+  poseControl?: { label: string; startDegrees: number; endDegrees: number; combination: "single_dof_only"; actionDirection?: "forward" | "reverse" };
 }
 
 export interface SourceMotionBindingMember {
@@ -116,6 +116,8 @@ export interface SourceMotionBindingMember {
   sourceChunkSha256: string;
   geometrySha256: string;
   instanceMatrix: number[];
+  /** Bounded passive contact repair; never an active muscle-action claim. */
+  passiveCorrectiveMaxMetres?: number;
 }
 
 export interface SourceMotionBinding {
@@ -324,6 +326,7 @@ export function projectLearnerMotionActionOptions(
   bundle: MotionLearningBundle,
   fields: readonly ActionCitationEvidenceField[],
   selectedSide?: Laterality | null,
+  acceptedSourceActions: Readonly<Record<string, { assetId: string; sourceKey: string; motionSha256: string }>> = {},
 ): LearnerMotionActionOption[] {
   return bundle.muscleActions.flatMap((action) => {
     if (!action.subjectIds.includes(conceptId) && !action.sourceSubjectKeys?.includes(conceptId)) return [];
@@ -340,6 +343,13 @@ export function projectLearnerMotionActionOptions(
         ? [{ definition, asset }]
         : []);
     });
+    const acceptance = acceptedSourceActions[action.id];
+    const acceptedAction = compatible.length === 1 && acceptance
+      && acceptance.assetId === compatible[0].asset.id
+      && acceptance.sourceKey === compatible[0].asset.sourceBinding?.subjectSourceKey
+      && acceptance.motionSha256 === compatible[0].asset.sha256
+      && compatible[0].asset.sourceBinding?.members.some(member =>
+        member.sourceKey === acceptance.sourceKey && member.role === "deforming_muscle_surface");
     return [{
       id: action.learnerActionKey ?? action.id,
       label: text.label,
@@ -347,7 +357,7 @@ export function projectLearnerMotionActionOptions(
       subjectIds: action.subjectIds.length ? [...action.subjectIds] : [...(action.sourceSubjectKeys ?? [])],
       sideApplicability: action.sideApplicability,
       learningIntent: compatible.length !== 1 ? "text_only" : action.subjectKind === "bone" ? "bone_motion"
-        : action.sourceFamilyId ? "posture_observation" : "muscle_action",
+        : action.sourceFamilyId && !acceptedAction ? "posture_observation" : "muscle_action",
       candidate: compatible.length === 1 ? compatible[0] : null,
     }];
   });

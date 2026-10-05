@@ -187,7 +187,9 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 this.resources.motionOverrides.add(sourceKey);
             }
             const player = new AnimationPlaybackController(resource, asset.clip.id, {
-                repeat: true, pingPong: true, returnSpeed: this.motionIntent === 'muscle_action' ? 1.7 : 1,
+                repeat: true, pingPong: true,
+                actionDirection: asset.poseControl?.actionDirection,
+                returnSpeed: this.motionIntent === 'muscle_action' && asset.poseControl?.actionDirection !== 'reverse' ? 1.7 : 1,
                 onTimeChange: (time, completed) => {
                     const activePose = time > 1e-6;
                     const phase = player.phase;
@@ -196,7 +198,8 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                     }
                     if (this.motionIntent === 'muscle_action' && asset.sourceBinding?.subjectSourceKey === this.view.selectedId) {
                         const node = this.resources.nodes.get(asset.sourceBinding.subjectSourceKey);
-                        const emphasis = muscleActionEmphasis(phase, time / player.durationSeconds);
+                        const fraction = time / player.durationSeconds;
+                        const emphasis = muscleActionEmphasis(phase, asset.poseControl?.actionDirection === 'reverse' ? 1 - fraction : fraction);
                         if (emphasis !== null && node?.material instanceof THREE.MeshStandardMaterial) {
                             node.material.color.set('#a4aaa8').lerp(this.actionTone, emphasis);
                         }
@@ -206,7 +209,20 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 registerUpdate: update => this.scene.addUpdate(update),
             });
             this.motion = { asset, resource, player, originals: originalNodes, packageMaterials, contextKey: currentContextKey, onInvalidated };
+            this.scene.renderer.domElement.parentElement?.setAttribute('data-motion-context', 'active');
             this.apply();
+            // Frame the complete moving chain once, retaining the user's viewing direction.
+            // Playback, scrubbing and restoration never continually refit or reset the camera.
+            const defaultFront = this.scene.camera.position.clone().sub(this.scene.controls.target).normalize();
+            // A straight frontal default hides sagittal motion in depth. Establish an
+            // oblique teaching view once; retain any already chosen non-default view.
+            if (asset.poseControl?.actionDirection === 'reverse' && defaultFront.z > .999
+                && Math.abs(defaultFront.x) < .01 && Math.abs(defaultFront.y) < .01) {
+                this.scene.camera.position.copy(this.scene.controls.target).add(new THREE.Vector3(.866, 0, .5));
+            }
+            this.fit(binding.members.map(m => this.records.get(m.sourceKey)!).filter(row => row
+                && (row.kind === 'bone' ? this.view.bones : this.view.muscles)
+                && !this.view.hiddenSourceKeys?.includes(row.sourceKey)), 1.05);
             return player;
         } catch (error) {
             for (const [sourceKey, original] of originalNodes) {
@@ -231,6 +247,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         const active = this.motion;
         if (!active) return;
         this.motion = null;
+        this.scene.renderer.domElement.parentElement?.removeAttribute('data-motion-context');
         this.motionPoseActive = false;
         this.motionPhase = 'rest';
         active.player.resetPose();
@@ -256,6 +273,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         const rows = [...this.records.values()];
         const visibleKeys = new Set(demandedStructureKeys(rows, this.view));
         // Motion context may cross region boundaries, but never overrides user layer/hidden choices.
+        if (this.motion && !this.view.isolate) visibleKeys.clear();
         if (this.motion && !this.view.isolate) for (const member of this.motion.asset.sourceBinding?.members ?? []) {
             const row = this.records.get(member.sourceKey);
             if (row && (row.kind === 'bone' ? this.view.bones : this.view.muscles)) visibleKeys.add(member.sourceKey);
@@ -269,7 +287,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             node.visible = visibleKeys.has(key) && !(this.motionPoseActive && row.kind === 'nerve') && !this.view.hiddenSourceKeys?.includes(key) && !selectionAlternativeKeys.has(key) && !(selected && this.view.selectedPresentation === 'hidden');
             const mode = this.view.translucentSourceKeys?.includes(key) || selected && this.view.selectedPresentation === 'translucent' ? 'translucent'
                 : selected ? 'selected' : observe && row.kind !== 'nerve' ? highlights.has(key) ? 'motorContext' : 'nerveContext'
-                : highlights.has(key) ? 'innervated' : this.view.selectedId && this.view.dim ? 'dim' : 'normal';
+                : highlights.has(key) ? 'innervated' : this.motion?.originals.has(key) ? 'normal' : this.view.selectedId && this.view.dim ? 'dim' : 'normal';
             const actionPhase = selected && row.kind === 'muscle' && this.motion && this.motionIntent === 'muscle_action'
                 && this.motion.asset.sourceBinding?.subjectSourceKey === key ? this.motionPhase : null;
             const phaseTone = actionPhase === 'action' ? 'action' : actionPhase === 'return' ? 'return' : null;
@@ -305,7 +323,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 surfaceCount: this.motion.originals.size, fixedCount: this.motion.asset.sourceBinding?.members.filter(m => m.role === 'fixed_structure').length } : null,
             motionBytes: this.motion?.resource.memoryEstimateBytes ?? 0, estimatedActiveBytes: q.bytes + (this.motion?.resource.memoryEstimateBytes ?? 0) });
     }
-    private fit(rows: RuntimeStructureRecord[]) {
+    private fit(rows: RuntimeStructureRecord[], padding = 1.25) {
         const box = new THREE.Box3();
         for (const r of rows) {
             box.expandByPoint(new THREE.Vector3().fromArray(r.bounds[0]));
@@ -314,7 +332,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         if (box.isEmpty())
             return;
         const center = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());
-        const distance = Math.max(size.y, size.x / this.scene.camera.aspect) / (2 * Math.tan(THREE.MathUtils.degToRad(17.5))) * 1.25 + size.z / 2;
+        const distance = Math.max(size.y, size.x / this.scene.camera.aspect) / (2 * Math.tan(THREE.MathUtils.degToRad(17.5))) * padding + size.z / 2;
         const direction = this.scene.camera.position.clone().sub(this.scene.controls.target);
         if (direction.length() < .01)
             direction.set(0, 0, 1);

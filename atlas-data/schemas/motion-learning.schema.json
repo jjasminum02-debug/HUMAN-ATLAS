@@ -541,6 +541,11 @@
           "items": {
             "type": "number"
           }
+        },
+        "passiveCorrectiveMaxMetres": {
+          "type": "number",
+          "minimum": 1e-12,
+          "maximum": 0.001
         }
       }
     },
@@ -824,6 +829,12 @@
             },
             "combination": {
               "const": "single_dof_only"
+            },
+            "actionDirection": {
+              "enum": [
+                "forward",
+                "reverse"
+              ]
             }
           }
         }

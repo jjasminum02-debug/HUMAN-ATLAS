@@ -1,0 +1,68 @@
+{
+  "status": "passed",
+  "acceptanceScope": "T66 step02 bilateral tibialis anterior dorsiflexion and bilateral rectus femoris knee extension/hip flexion, native surrounding context and same-scene controls",
+  "contractRevision": "app-completion-2026-10-01",
+  "relatedTests": {
+    "passed": 50,
+    "failed": 0,
+    "log": "work/evidence/T66/priority-ankle-knee-2026-10-05/verification/final-related-tests.log"
+  },
+  "typecheck": "passed",
+  "productionSchema": {
+    "production": {
+      "valid": true,
+      "actionCount": 1150,
+      "definitionCount": 1144,
+      "assetCount": 1144,
+      "issues": []
+    }
+  },
+  "productionViteBuild": "passed_with_existing_chunk_size_warning",
+  "buildLog": "work/evidence/T66/priority-ankle-knee-2026-10-05/verification/final-build.log",
+  "browser": {
+    "observations": 77,
+    "viewportCssPx": [
+      1280,
+      720
+    ],
+    "singleCanvas": true,
+    "finalConsoleErrors": 0,
+    "finalConsoleWarnings": 0,
+    "consoleCutoffUtc": "2026-10-05T06:47:34.756Z",
+    "initialCaughtHipLoadFailureRepaired": true,
+    "observationsPath": "work/evidence/T66/priority-ankle-knee-2026-10-05/browser/observations.json",
+    "consolePath": "work/evidence/T66/priority-ankle-knee-2026-10-05/browser/console-log.json",
+    "pngCount": 25,
+    "mobileDeviceValidationClaimed": false,
+    "otherRequestedViewportValidationClaimed": false
+  },
+  "geometry": {
+    "leftTADeformers": 10,
+    "TAInterpolationSamples": 33,
+    "kneeDeformersPerSide": 14,
+    "kneeInterpolationSamples": 49,
+    "hipAddedNativeCoMovingSurfacesPerSide": 16,
+    "hipContactPairsPerSide": 241,
+    "hipContactSamples": 65,
+    "hipCorrectiveSurfacesPerSide": 5,
+    "hipCorrectiveInterpolationSamples": 129,
+    "hipMaximumLocalPassiveCorrectionMetres": 3.95e-05,
+    "newContainment": 0,
+    "strictShapeQcPassed": true,
+    "metadataOnlyChangeReceipt": "work/evidence/T66/priority-ankle-knee-2026-10-05/hip-metadata-reuse-receipt.json"
+  },
+  "unresolvedProductBlockers": [],
+  "knownVerificationLimitations": [
+    "Historical t66NerveScene test expects 199 bone bindings while the pre-unit baseline and current workspace have 865. The widened suite failed that one preexisting fixture; it is not counted as passed. Relevant 50-test suite passes.",
+    "Preexisting worker/runtime/validator/tool WIP is preserved. Selective local commit is a checkpoint of this unit on the existing workspace, not a claim that a clean HEAD checkout includes every preexisting dependency.",
+    "No GPU/memory/performance profile repeated; no continuous collision freedom or physiological ROM/activation/force claim."
+  ],
+  "syncExecution": "passed; updated 0 projections; --check no writes",
+  "selectiveValidatorAdoptionReceipt": "work/evidence/T66/priority-ankle-knee-2026-10-05/adopted-validator-dependency.json",
+  "stagedPriorityTests": {
+    "passed": 5,
+    "failed": 0,
+    "scope": "HEAD plus owned typed domain/loader/bundle, immutable native source manifests and owned artifacts; unrelated common runtime WIP excluded",
+    "log": "work/evidence/T66/priority-ankle-knee-2026-10-05/verification/staged-priority-tests.log"
+  }
+}

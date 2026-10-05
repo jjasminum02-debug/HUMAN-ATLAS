@@ -1,0 +1,79 @@
+✔ a selected muscle's verified action wins over an earlier playable surrounding pose (1.052125ms)
+✔ observation wording is cleaned without expanding a partial or initial movement range (0.366458ms)
+✔ the action library excludes contextual poses and unavailable actions and retains exact sides (0.781333ms)
+✔ action emphasis fades smoothly during reset without treating a held pose as activation (0.127542ms)
+✔ production bundle retains original motions and registers unit-01 bilateral flexion observations (0.941625ms)
+✔ text can be present while there is no compatible motion clip (0.162583ms)
+✔ learner card motion linking requires an explicit action key and compatible side (0.064291ms)
+✔ clip capability requires exact static scene, side, frame, reference pose, and rig-node binding (0.112334ms)
+✔ runtime session is resettable state and exposes no persisted content/review fields (0.06125ms)
+✔ learner text projection omits authoring IDs, JSON, task codes, and review states (0.101875ms)
+✔ learner action projection translates roles and unspecified contraction into plain Korean (0.083084ms)
+✔ source-only action and clip resolve by exact sourceKey without creating a canonical subject (0.198708ms)
+✔ a muscle action can be selected without loading or autoplaying a clip (0.660459ms)
+✔ a fake clock advances clip time at selected playback speed and clamps at the end (0.306917ms)
+✔ action and region changes invalidate late loads and clear emphasis (0.086125ms)
+✔ load errors stop playback and clear selected structure emphasis (1.735333ms)
+✔ reduced motion prevents play and keeps a loaded clip at its initial pose (0.238ms)
+✔ progress seeks are clamped and pose reset is independent from speed and camera state (0.119042ms)
+✔ pause keeps the sampled pose and can resume without returning to rest (0.113958ms)
+✔ stale errors and malformed duration cannot replace a newer session (0.09225ms)
+✔ reset while loading invalidates the pending response (0.111ms)
+✔ hiding the page cancels a pending load and clears active playback emphasis (0.202375ms)
+✔ the renderer loop stays playing at exact endpoints and return/scrub cannot restart it (0.158375ms)
+✔ acceptance is exact source/asset/hash and never promotes passive selectors (4.504833ms)
+✔ four native source-action outcomes retain actual buffers and separate anatomy states (5.655333ms)
+✔ rectus knee extension is reverse from preparation and retains complete native context (7.135375ms)
+✔ extension distinguishes preparation from reverse action and smooth reset (3.714458ms)
+✔ extension starts from a scrubbed bent endpoint without jumping to rest (0.434417ms)
+✔ single RAF loop updates speed without making a second chain and ignores late callbacks (0.133125ms)
+✔ repeating playback wraps continuously and reset restores the rest pose (0.180125ms)
+✔ T22 adapter scene is driven by one mixer clock; pose reset does not reset camera (0.340959ms)
+✔ same-scene playback uses the host clock, creates no RAF chain, and leaves resource disposal to the host (0.296042ms)
+✔ clip end clamps at the final pose and cancels its RAF chain (0.122041ms)
+✔ missing clip fails closed and releases the imported scene (0.270458ms)
+✔ one-toggle gesture reverses at its endpoint and eases to exact rest on the same clock (0.319791ms)
+✔ return cancellation and disposal cannot invoke a stale rest callback (0.246833ms)
+✔ an action cycle has a faster neutral return, preserves poses and uses one clock (0.198833ms)
+✔ GLTFLoader import keeps hierarchy, skin attributes, named node bindings and original clip tracks (10.331292ms)
+✔ illustrative path remains a distinct unskinned representation (1.066459ms)
+✔ bone motion plus illustrative path uses separate node and path bindings (1.948416ms)
+THREE.GLTFLoader: Missing min/max properties for accessor POSITION.
+THREE.GLTFLoader: Missing min/max properties for accessor POSITION.
+✔ T59 source-bound morph keeps the exact source node in the full scene and rejects whole-muscle transform tracks (1.793375ms)
+✔ frame, unit and source hash mismatch fail closed without rescaling (0.273041ms)
+✔ missing node binding and clip mismatch are rejected (2.640041ms)
+✔ import bundle disposes shared geometry, material and texture once and is idempotent (1.375459ms)
+✔ disposal helper deduplicates resources shared across independent roots (0.144708ms)
+✔ off-scene rig and path bindings are rejected while the active single scene still loads (1.940083ms)
+✔ off-scene skin joints and clip targets cannot accompany the returned active scene (1.068666ms)
+✔ external buffer and image URI are rejected before GLTFLoader can resolve them (0.791542ms)
+✔ T66 all native nerve resources retain finite unit-normal topology, source side, frame, rights and bounded native overview (3328.008041ms)
+✖ T66 typed bones share the validated clip and cannot accept a muscle, wrong side or nonmoving primary binding (173.512875ms)
+ℹ tests 50
+ℹ suites 0
+ℹ pass 49
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3616.556709
+
+✖ failing tests:
+
+test at src/viewer/datasets/t66NerveScene.test.ts:33:1
+✖ T66 typed bones share the validated clip and cannot accept a muscle, wrong side or nonmoving primary binding (173.512875ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  865 !== 199
+
+      at TestContext.<anonymous> (file:///Users/daniel/Downloads/SIM%20/HUMAN%20ATLAS/atlas-web/src/viewer/datasets/t66NerveScene.test.ts:35:73)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 865,
+    expected: 199,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

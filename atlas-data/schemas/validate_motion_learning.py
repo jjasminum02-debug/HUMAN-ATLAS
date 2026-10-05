@@ -85,19 +85,55 @@ def load_production_context() -> dict[str, Any]:
                 qc = json.loads((ROOT / record["contactQcPath"]).read_text())
                 geometry = json.loads((ROOT / record["geometryRecordPath"]).read_text())
                 glb_qc = json.loads((ROOT / record["glbPoseQcPath"]).read_text())
+                frame_rows = {r["sourceKey"]: r for r in glb_qc.get("rows", [])}
+                deformation_rows = [r for r in frame_rows.values() if r.get("sourceFrameComparison") == "authored_surface_deformation"]
+                interpolation_qcs = {}
+                interpolation_paths = record.get("glbInterpolationQcPaths", {})
+                if interpolation_paths:
+                    if not isinstance(interpolation_paths, dict):
+                        raise ValueError("Per-surface interpolation QC paths must be a sourceKey map")
+                    interpolation_qcs = {source_key: json.loads((ROOT / path).read_text())
+                        for source_key, path in interpolation_paths.items()}
+                elif deformation_rows and record.get("glbInterpolationQcPath"):
+                    # Backward-compatible one-target package used by earlier T66 units.
+                    legacy_qc = json.loads((ROOT / record["glbInterpolationQcPath"]).read_text())
+                    interpolation_qcs = {legacy_qc.get("targetSourceKey"): legacy_qc}
+                exact_frame_rows_pass = all(
+                    r.get("sourceFrameComparison", "exact_rigid_source_frame") == "exact_rigid_source_frame"
+                    and r.get("passed") is True and r.get("maximumWorldErrorMetres", float("inf")) <= 1e-6
+                    for r in frame_rows.values() if r.get("sourceFrameComparison", "exact_rigid_source_frame") == "exact_rigid_source_frame"
+                )
+                deformation_rows_pass = bool(deformation_rows) and all(
+                    (interpolation_qc := interpolation_qcs.get(r.get("sourceKey"))) is not None
+                    and r.get("requiresGeometryQc") is True
+                    and r.get("passed") is True
+                    and r.get("geometryQcPath") in {record.get("glbInterpolationQcPath"), interpolation_paths.get(r.get("sourceKey"))}
+                    and r.get("geometryQcSha256") == sha256_bytes((ROOT / r["geometryQcPath"]).read_bytes())
+                    and r.get("sourceKey") == interpolation_qc.get("targetSourceKey")
+                    and interpolation_qc.get("motionGlbSha256") == record["motionSha256"]
+                    and interpolation_qc.get("passed") is True
+                    and interpolation_qc.get("geometry", {}).get("passed") is True
+                    and interpolation_qc.get("contact", {}).get("passed") is True
+                    for r in deformation_rows
+                )
                 if (glb_qc.get("passed") is not True or glb_qc.get("motionSha256") != record["motionSha256"]
                         or glb_qc.get("testedKeys") != geometry["family"]["samples"] + 1
                         or glb_qc.get("familyId") != record["sourceFamilyId"]
-                        or {r["sourceKey"] for r in glb_qc["rows"]} != {r["sourceKey"] for r in geometry["members"]}
-                        or any(r.get("passed") is not True or r["maximumWorldErrorMetres"] > 1e-6 for r in glb_qc["rows"])):
+                        or set(frame_rows) != {r["sourceKey"] for r in geometry["members"]}
+                        or not exact_frame_rows_pass
+                        or any(r.get("sourceFrameComparison") == "authored_surface_deformation" for r in frame_rows.values()) and not deformation_rows_pass):
                     raise ValueError("Emitted GLB must preserve actual source-frame poses/reflections")
                 if qc["failures"] or qc["newContainmentMaximum"] or any(m["flips"] or m["minimumAreaRatio"] < .1 for m in geometry["surfaceMetrics"]):
                     raise ValueError("Source family cannot register failed geometry/contact")
                 if record.get("sourceFamilyId") != geometry["family"]["id"] or record["side"] not in {"left", "right"}:
                     raise ValueError("Source family identity/side differs")
-                if (record["motionSha256"] != geometry["motionSha256"] or record["restSha256"] != geometry["restSha256"]
+                motion_hash_matches = record["motionSha256"] == geometry["motionSha256"] or any(
+                    qc.get("motionGlbSha256") == record["motionSha256"] and qc.get("targetSourceKey") in frame_rows
+                    for qc in interpolation_qcs.values()
+                )
+                if (not motion_hash_matches or record["restSha256"] != geometry["restSha256"]
                         or any(record["poseRange"][k] != geometry["family"][k] for k in ["axis", "pivotMetres", "endDegrees", "referencePoseId"])
-                        or not {record["contactQcPath"], record["geometryRecordPath"], record["glbPoseQcPath"]}.issubset({d["path"] for d in dependencies})):
+                        or not {record["contactQcPath"], record["geometryRecordPath"], record["glbPoseQcPath"], *interpolation_paths.values()}.issubset({d["path"] for d in dependencies})):
                     raise ValueError("Source family pose/geometry/verification differs")
             authoring_records[entry["id"]] = record
         for entry in registry.get("sources", []):
@@ -455,7 +491,8 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
                 if (not family or source_binding.get("sourceFamilyId") != family_id
                         or asset["sha256"] != family["motionSha256"]
                         or asset["staticBinding"]["sourceAssetSha256"] != family["restSha256"]
-                        or asset.get("poseControl", {}).get("endDegrees") != family["poseRange"]["endDegrees"]):
+                        or asset.get("poseControl", {}).get("endDegrees") != family["poseRange"]["endDegrees"]
+                        or asset.get("poseControl", {}).get("actionDirection", "forward") != family["poseRange"].get("actionDirection", "forward")):
                     issues.append(issue("source_family_asset_mismatch", path, "Exact adopted family/motion/rest bytes and authored angle required."))
             elif source_binding.get("sourceFamilyId"):
                 issues.append(issue("unexpected_asset_source_family", path, "An asset cannot add a family missing from its definition."))
@@ -499,6 +536,10 @@ def validate_bundle(payload: Any, schema: dict[str, Any], context: dict[str, Any
             for member_index, member in enumerate(source_members):
                 if not isinstance(member, dict):
                     continue
+                corrective_bound = member.get("passiveCorrectiveMaxMetres")
+                if corrective_bound is not None and (member.get("role") != "co_moving_context"
+                        or not isinstance(corrective_bound, (int, float)) or not 0 < corrective_bound <= .001):
+                    issues.append(issue("invalid_passive_contact_corrective", f"{path}.sourceBinding.members[{member_index}]", "Only bounded passive co-moving surface correctives are allowed."))
                 source_instance = context.get("sourceInstances", {}).get(member.get("sourceKey"))
                 if source_instance:
                     source_lod = source_instance.get("lods", {}).get(member.get("lod"), {})

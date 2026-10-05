@@ -1,6 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
+import { createHash } from "node:crypto";
 import { projectLearnerActionText, projectLearnerMotionActionOptions } from "../src/domain/motionLearning.ts";
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
@@ -12,6 +13,42 @@ const checkOnly = process.argv.includes("--check");
 
 const bundle = JSON.parse(await readFile(inputPath, "utf8"));
 const cardRuntime = JSON.parse(await readFile(cardRuntimePath, "utf8"));
+const acceptedSourceActions = {};
+const acceptance = JSON.parse(await readFile(resolve(root, "atlas-data/motion/t66-priority-action-acceptance.json"), "utf8"));
+if (acceptance.publicRedistribution !== "held" || acceptance.humanReview !== "not_performed") {
+  throw new Error("Local source action acceptance cannot promote rights or human review");
+}
+for (const row of acceptance.rows) {
+  const outcomeBytes = await readFile(resolve(root, row.outcomePath));
+  const authoringBytes = await readFile(resolve(root, row.authoringPath));
+  const digest = bytes => createHash("sha256").update(bytes).digest("hex");
+  const outcome = JSON.parse(outcomeBytes).find(item => item.sourceKey === row.sourceKey && item.assetId === row.assetId);
+  const authoring = JSON.parse(authoringBytes);
+  const action = bundle.muscleActions.find(item => item.id === row.actionId);
+  const asset = bundle.motionAssets.find(item => item.id === row.assetId);
+  if (digest(outcomeBytes) !== row.outcomeSha256 || digest(authoringBytes) !== row.authoringSha256
+      || !outcome?.passed || outcome.motionSha256 !== row.motionSha256 || outcome.side !== row.side
+      || authoring.motionSha256 !== row.motionSha256 || !authoring.motorRoleSourceKeys?.includes(row.sourceKey)
+      || action?.sourceSubjectKeys?.length !== 1 || action.sourceSubjectKeys[0] !== row.sourceKey
+      || action.sideApplicability !== row.side
+      || asset?.poseControl?.actionDirection !== authoring.poseRange?.actionDirection
+      || (asset?.poseControl?.actionDirection === "reverse" && outcome.actionDirection !== "reverse")) {
+    throw new Error(`Source action acceptance has drifted: ${row.actionId}`);
+  }
+  for (const member of asset.sourceBinding?.members ?? []) if (member.passiveCorrectiveMaxMetres != null) {
+    const qcPath = authoring.glbInterpolationQcPaths?.[member.sourceKey];
+    const dependency = authoring.verificationDependencies?.find(item => item.path === qcPath);
+    if (!qcPath || !dependency) throw new Error("Passive contact corrective lacks emitted geometry verification");
+    const qcBytes = await readFile(resolve(root, qcPath));
+    const qc = JSON.parse(qcBytes);
+    if (digest(qcBytes) !== dependency.sha256 || qc.motionGlbSha256 !== asset.sha256
+        || qc.targetSourceKey !== member.sourceKey || !qc.passed || !qc.geometry?.passed || !qc.contact?.passed
+        || member.role !== "co_moving_context" || !(member.passiveCorrectiveMaxMetres > 0 && member.passiveCorrectiveMaxMetres <= .001)) {
+      throw new Error("Passive contact corrective verification has drifted");
+    }
+  }
+  acceptedSourceActions[row.actionId] = row;
+}
 
 function safeCandidate(candidate) {
   if (!candidate) return null;
@@ -39,7 +76,7 @@ for (const action of bundle.muscleActions ?? []) {
   const selectors = [...new Set([...(action.subjectIds ?? []), ...(action.sourceSubjectKeys ?? [])])];
   for (const selector of selectors) {
     const actionKey = action.learnerActionKey ?? action.id;
-    const options = projectLearnerMotionActionOptions(selector, bundle, [], null)
+    const options = projectLearnerMotionActionOptions(selector, bundle, [], null, acceptedSourceActions)
       .filter((option) => option.id === actionKey && option.subjectIds.includes(selector));
     for (const option of options) {
       const text = projectLearnerActionText(action, []);

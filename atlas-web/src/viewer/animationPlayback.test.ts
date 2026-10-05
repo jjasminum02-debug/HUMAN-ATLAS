@@ -37,6 +37,43 @@ class FakeFrames implements AnimationFrameScheduler {
   }
 }
 
+test('extension distinguishes preparation from reverse action and smooth reset', () => {
+  const frames = new FakeFrames();
+  const resource = syntheticResource({ count: 0 });
+  const player = new AnimationPlaybackController(resource, 'SyntheticMotion', {
+    scheduler: frames, repeat: true, pingPong: true, actionDirection: 'reverse',
+  });
+  player.play(); frames.frame(0); frames.frame(500);
+  assert.equal(player.phase, 'preparation');
+  frames.frame(1100);
+  assert.equal(player.phase, 'action');
+  assert.ok(player.currentTime < 1);
+  const previous = player.currentTime;
+  frames.frame(1300);
+  assert.ok(player.currentTime < previous);
+  player.returnToRest(.5);
+  assert.equal(player.phase, 'return');
+  frames.frame(1500); frames.frame(2100);
+  assert.equal(player.currentTime, 0);
+  assert.equal(player.phase, 'rest');
+  assert.deepEqual(resource.camera.position.toArray(), [5, 2, 8]);
+  player.dispose();
+});
+
+test('extension starts from a scrubbed bent endpoint without jumping to rest', () => {
+  const frames = new FakeFrames();
+  const resource = syntheticResource({ count: 0 });
+  const player = new AnimationPlaybackController(resource, 'SyntheticMotion', {
+    scheduler: frames, repeat: true, pingPong: true, actionDirection: 'reverse',
+  });
+  player.seek(1); player.play();
+  assert.equal(player.currentTime, 1);
+  assert.equal(player.phase, 'action');
+  frames.frame(0); frames.frame(200);
+  assert.ok(player.currentTime < 1 && player.currentTime > 0);
+  player.dispose();
+});
+
 test("single RAF loop updates speed without making a second chain and ignores late callbacks", () => {
   const frames = new FakeFrames();
   const deltas: number[] = [];

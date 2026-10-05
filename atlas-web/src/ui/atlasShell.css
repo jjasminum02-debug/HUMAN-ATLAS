@@ -59,6 +59,12 @@
 .atlas-shell .whole-body-canvas { inset: 92px 24px 216px 280px; }
 .atlas-shell:has(.study-details) .whole-body-canvas, .atlas-shell:has(.study-details) .body-tools { right: 358px; }
 .atlas-shell .anatomical-part-subtitle { margin: -8px 0 16px; font-size: 11px; color: #829088; }
+/* Give a complete animated limb more vertical space, retaining one canvas and exposed controls. */
+@media(min-width:761px) {
+  .atlas-shell .whole-body-canvas[data-motion-context=active] { top: 52px; }
+  .atlas-shell .study-stage:has([data-motion-context=active]) .stage-caption p,
+  .atlas-shell .study-stage:has([data-motion-context=active]) .stage-caption .eyebrow { display: none; }
+}
 .atlas-shell .body-status { bottom: 14px; padding: 6px 12px; border-radius: 10px; background: transparent; max-width: 420px; font-size: 11px; }
 .atlas-shell .body-status small { font-size: 10px; }
 @media(max-width:1100px) and (min-width:761px) {

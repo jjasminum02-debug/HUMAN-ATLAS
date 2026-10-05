@@ -3186,7 +3186,7 @@
             "muscleMembershipCount": 447,
             "sourceConceptCount": 232,
             "sourceSurfaceCount": 462,
-            "primaryPlayableMuscleSourceSurfaces": 1,
+            "primaryPlayableMuscleSourceSurfaces": 4,
             "sourcePoseObservationSurfaces": 129,
             "historicalMainFunctionSourceClipSurfaces": 1,
             "qualitativeActionDemonstrationSelectorRows": 34,
@@ -3265,7 +3265,10 @@
               "능형근"
             ],
             "priorityActualPlayableSources": {
-              "Tibialis anterior muscle:right": 1
+              "Tibialis anterior muscle:right": 1,
+              "Tibialis anterior muscle:left": 1,
+              "Rectus femoris muscle:right": 1,
+              "Rectus femoris muscle:left": 1
             },
             "priorityMotionCompleteness": "partial",
             "nativeStaticNerveSurfaceCount": 195,
@@ -3280,10 +3283,15 @@
             "newNerveGeometry": 0,
             "newNerveBranchCoordinates": 0,
             "newCanonicalBindings": 0,
-            "nerveTextCoverageStatus": "partial; not a gate for the currently supported nerve-learning flow"
+            "nerveTextCoverageStatus": "partial; not a gate for the currently supported nerve-learning flow",
+            "priorityVerifiedSourceActionBindings": 6,
+            "priorityVerifiedGlbAssets": 6,
+            "priorityNewDerivedAssetsThisUnit": 5,
+            "priorityGroupsWithRepresentativeActions": 2,
+            "priorityGroupsRemaining": 5
           },
           "unresolvedProductBlockers": [
-            "우선7근육군 중 현재 오른쪽 앞정강근만 대표 작용 재생이 확인된다. 다른 available source/측/part의 실제 작용 제작·연결·검증이 필요하다.",
+            "우선7근육군 중 앞정강근·대퇴직근 양측 대표 작용은 완료했다. 대흉근·견갑거근·복직근·외복사근·능형근의 source/측/part별 작용 제작·연결·검증은 다음 내부 단계다.",
             "이번 신경 카드의 대표 실제 UI는 검증했다. 우선 애니메이션과 이번 신경 관계를 함께 확인하는 T66 최종 통합 회귀/판정은 아직 남아 있다."
           ],
           "evidence": [
@@ -3319,7 +3327,14 @@
             "work/evidence/T66/nerve-learning-2026-10-05/input-manifest.json",
             "work/evidence/T66/nerve-learning-2026-10-05/browser-validation.json",
             "work/evidence/T66/nerve-learning-2026-10-05/validation.json",
-            "work/evidence/T66/nerve-learning-2026-10-05/verification-summary.json"
+            "work/evidence/T66/nerve-learning-2026-10-05/verification-summary.json",
+            "work/evidence/T66/priority-ankle-knee-2026-10-05/REPORT.md",
+            "work/evidence/T66/priority-ankle-knee-2026-10-05/final-validation.json",
+            "work/evidence/T66/priority-ankle-knee-2026-10-05/supported-actions.json",
+            "work/evidence/T66/priority-ankle-knee-2026-10-05/action-outcome.json",
+            "work/evidence/T66/priority-ankle-knee-2026-10-05/knee-action-outcome.json",
+            "work/evidence/T66/priority-ankle-knee-2026-10-05/hip-context-outcome.json",
+            "work/evidence/T66/priority-ankle-knee-2026-10-05/browser/observations.json"
           ],
           "scopeAmendment": "priority-muscle-atlas-2026-10-05"
         },
@@ -4032,7 +4047,7 @@
             "same_side_existing_literature_rhomboid_context_highlight",
             "user_layer_off_hidden_pose_guards"
           ],
-          "nextManualPrompt": "work/plans/t66-priority-atlas-2026-10-05/02-ankle-knee.txt"
+          "nextManualPrompt": "work/plans/t66-priority-atlas-2026-10-05/03-shoulder-scapula.txt"
         },
         "nerveLearningUnit": {
           "status": "implemented_verified_with_content_gaps",
@@ -4071,6 +4086,53 @@
           ],
           "nextManualFile": "work/plans/t66-priority-atlas-2026-10-05/02-ankle-knee.txt",
           "sourceLabelGroupsReviewed": 98
+        },
+        "priorityAnkleKneeUnit": {
+          "executionStatus": "completed",
+          "acceptance": "passed",
+          "contractRevision": "app-completion-2026-10-01",
+          "acceptanceScope": "T66 step02 bilateral tibialis anterior dorsiflexion and bilateral rectus femoris knee extension/hip flexion, native surrounding context and same-scene controls",
+          "productReadiness": "local_supported_ankle_knee_actions_ready",
+          "contentCompleteness": "partial",
+          "knownContentGaps": [
+            "TA inversion is not animated; full normal ROM and physiological muscle force/activation are not supported.",
+            "RF clips use bounded authored educational ranges; exact measured footprints and physiological patellar tracking are not claimed.",
+            "Five other priority groups and final T66 integration remain for subsequent authorized internal steps.",
+            "Whole-body target/part extent and deferred engineering backlog are unchanged."
+          ],
+          "unresolvedProductBlockers": [],
+          "actualMuscleSourceSurfaces": 4,
+          "completedPriorityGroups": 2,
+          "priorityGroupDenominator": 7,
+          "exactSourceActionBindings": 6,
+          "uniqueGlbAssets": 6,
+          "newDerivedGlbAssets": 5,
+          "reusedUnchangedT59RightAsset": true,
+          "kneeExtension": {
+            "educationalPreparationDegrees": 15,
+            "actionDirection": "reverse",
+            "maximumHeelExcursionMetres": 0.1032,
+            "membersPerSide": 71,
+            "allQuadricepsAndSupportedDistalMusclesPresent": true
+          },
+          "hipFlexion": {
+            "educationalDegrees": 12,
+            "kneeHeld": true,
+            "membersPerSide": 88
+          },
+          "sourceOnly": true,
+          "publicRedistribution": "held",
+          "humanReview": "not_performed",
+          "evidence": [
+            "work/evidence/T66/priority-ankle-knee-2026-10-05/REPORT.md",
+            "work/evidence/T66/priority-ankle-knee-2026-10-05/final-validation.json",
+            "work/evidence/T66/priority-ankle-knee-2026-10-05/supported-actions.json",
+            "work/evidence/T66/priority-ankle-knee-2026-10-05/action-outcome.json",
+            "work/evidence/T66/priority-ankle-knee-2026-10-05/knee-action-outcome.json",
+            "work/evidence/T66/priority-ankle-knee-2026-10-05/hip-context-outcome.json",
+            "work/evidence/T66/priority-ankle-knee-2026-10-05/browser/observations.json"
+          ],
+          "nextManualFile": "work/plans/t66-priority-atlas-2026-10-05/03-shoulder-scapula.txt"
         }
       },
       "report": "work/reports/T66.md",

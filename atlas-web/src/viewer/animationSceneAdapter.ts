@@ -339,6 +339,21 @@ export async function loadAnimationScene(
         if (duplicates.has(member.nodeId)) throw new Error(`source GLB node 이름이 중복되어 결속이 모호합니다: ${member.nodeId}`);
         const node = names.get(member.nodeId);
         if (!node || !(node as Object3D & { isMesh?: boolean }).isMesh) throw new Error(`source GLB mesh binding을 찾을 수 없습니다: ${member.nodeId}`);
+        if (member.passiveCorrectiveMaxMetres != null) {
+          const bound = member.passiveCorrectiveMaxMetres;
+          const corrected = node as Object3D & { geometry?: BufferGeometry };
+          const positions = corrected.geometry?.morphAttributes.position ?? [];
+          if (member.role !== "co_moving_context" || !Number.isFinite(bound) || bound <= 0 || bound > .001
+              || !corrected.geometry?.morphTargetsRelative || !positions.length) {
+            throw new Error(`수동 접촉 보정은 검증된 동반 표면의 상대 morph에만 허용됩니다: ${member.nodeId}`);
+          }
+          for (const attribute of positions) for (let i = 0; i < attribute.count; i++) {
+            const distance = Math.hypot(attribute.getX(i), attribute.getY(i), attribute.getZ(i));
+            if (!Number.isFinite(distance) || distance > bound + 1e-7) {
+              throw new Error(`수동 접촉 보정이 명시한 변위 범위를 초과합니다: ${member.nodeId}`);
+            }
+          }
+        }
         sourceNodes.set(member.sourceKey, node);
         const mesh = node as Object3D & { morphTargetInfluences?: number[] };
         meshTargetsByNode.set(member.nodeId, mesh.morphTargetInfluences?.length ?? 0);
@@ -358,7 +373,8 @@ export async function loadAnimationScene(
           throw new Error(`변형 근육 표면에 morph target이 없습니다: ${member.nodeId}`);
         }
         if (["moving_structure", "co_moving_context"].includes(member.role) && propertyName === "scale") throw new Error(`moving structure scale track은 허용되지 않습니다: ${track.name}`);
-        if (["moving_structure", "co_moving_context"].includes(member.role) && !["position", "quaternion", "rotation"].includes(propertyName)) {
+        if (["moving_structure", "co_moving_context"].includes(member.role) && !["position", "quaternion", "rotation"].includes(propertyName)
+            && !(member.role === "co_moving_context" && member.passiveCorrectiveMaxMetres != null && propertyName === "morphTargetInfluences")) {
           throw new Error(`moving structure에는 위치/회전 track만 허용됩니다: ${track.name}`);
         }
       }

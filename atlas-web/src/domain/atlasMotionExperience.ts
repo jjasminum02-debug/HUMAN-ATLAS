@@ -29,7 +29,8 @@ export function motionLearningTitle(intent: MotionLearningIntent): string {
     : intent === "posture_observation" ? "관절 움직임과 주변 구조" : "작용 설명";
 }
 
-export function motionPhaseLabel(phase: "action" | "return" | "rest" | "held", label: string): string {
+export function motionPhaseLabel(phase: "action" | "preparation" | "return" | "rest" | "held", label: string): string {
+  if (phase === "preparation") return "작용을 위한 준비 자세";
   return phase === "action" ? label : phase === "return" ? "처음 자세로 복귀"
     : phase === "held" ? "선택한 자세" : "처음 자세";
 }
@@ -57,7 +58,7 @@ export function buildMotionActionLibrary(subjects: readonly MotionLibrarySubject
 }
 
 /** Colour emphasis teaches the action/reset phases; it is not physiological activation. */
-export function muscleActionEmphasis(phase: "action" | "return" | "rest" | "held", poseFraction: number): number | null {
+export function muscleActionEmphasis(phase: "action" | "preparation" | "return" | "rest" | "held", poseFraction: number): number | null {
   if (phase !== "action" && phase !== "return") return null;
   const fraction = Math.max(0, Math.min(1, Number.isFinite(poseFraction) ? poseFraction : 0));
   const x = phase === "action" ? Math.min(1, fraction / 0.15) : fraction;

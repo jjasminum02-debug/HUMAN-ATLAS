@@ -81,6 +81,8 @@ export interface AnimationPlaybackOptions {
   pingPong?: boolean;
   /** Return is a visual reset, not the opposing muscle action. */
   returnSpeed?: number;
+  /** Some actions extend from a bent preparation pose back to the native rest. */
+  actionDirection?: "forward" | "reverse";
   /** Use the existing anatomy renderer's frame clock instead of creating another RAF chain. */
   registerUpdate?: (update: (deltaSeconds: number) => void) => () => void;
   /** Same-scene hosts own the imported GLTF resource and restore their nodes before disposal. */
@@ -140,16 +142,20 @@ export class AnimationPlaybackController {
 
   get currentTime(): number { return this.currentTimeSeconds; }
   get isPlaying(): boolean { return this.loop?.isRunning ?? this.sharedPlaying; }
-  get phase(): "action" | "return" | "rest" | "held" {
+  get phase(): "action" | "preparation" | "return" | "rest" | "held" {
     if (this.returning) return "return";
     if (!this.isPlaying) return this.currentTimeSeconds <= 1e-6 ? "rest" : "held";
+    if (this.options.actionDirection === "reverse") return this.direction < 0 ? "action" : "preparation";
     return this.direction > 0 ? "action" : "return";
   }
 
   play(speed = 1): void {
     if (this.disposed) return;
     this.returning = null;
-    if (this.currentTimeSeconds >= this.durationSeconds) this.seek(0);
+    if (this.currentTimeSeconds >= this.durationSeconds) {
+      if (this.options.repeat && this.options.pingPong && this.options.actionDirection === 'reverse') this.direction = -1;
+      else this.seek(0);
+    }
     this.action.paused = false;
     this.speed = Number.isFinite(speed) && speed > 0 ? speed : 1;
     if (this.loop) this.loop.start(this.speed);
