@@ -1,11 +1,15 @@
 # T85 — 전체 지원 움직임·통합 앱 품질 감사
 
-2026-10-02 · 전수 motion 계획 개정 · 담당 Astra · 현재 대화 직접 구현.
+2026-10-02 · 전수 motion 계획 개정 · 담당 Luna Max · 현재 대화 직접 구현.
 27 앱 완료 계약과 [28 전체 근육 움직임 계획](../../design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md) 및 EXECUTION의 현재 promptFile이 기준이다. 과거 파일/보고는 보존한다. 계획 수정은 실행·합격이 아니다.
+
+## 2026-10-06 사용자 추가 기준
+
+각 현재 등록 동작은 선택된 정확한 source/side/part의 근육 표면, 실제 package에 포함된 moving/co-moving 뼈 사슬, 근거 있는 기시·정지의 표시 적격 whole-bone 문맥을 같은 scene에서 보여야 한다. 팔/다리 package가 원본으로 제공하는 손·발까지 frame에 포함하며, 빠진 구조를 추정 생성하지 않는다. 하나의 공통 frame/context 경로와 전수 자동 계약으로 모든 현재 등록 동작에 적용한다. 미래 근육 전체에 동작 자산이 있다는 뜻은 아니다. 사용자가 뼈 layer-off, isolate, hidden을 명시하면 해당 설정이 문맥 자동 표시보다 우선한다.
 
 ## 범위
 
-T47 감사를 흡수해 전체 motion 원장에서 실제 지원하는 모든 clip/side/part/action 계약을 자동 검사하고 같은 source surface/scene 변형·신경 pose·카메라/선택/설명/복원/성능을 다듬는다. 미제작 전체 대상과 실제 지원을 분리하며 소수 예시 성공을 전체 근육 완성으로 표시하지 않는다. 담당 Astra 현재 대화 직접 구현을 유지한다.
+T47 감사를 흡수해 전체 motion 원장에서 실제 지원하는 모든 clip/side/part/action 계약을 자동 검사하고 같은 source surface/scene 변형·신경 pose·카메라/선택/설명/복원/성능을 다듬는다. 미제작 전체 대상과 실제 지원을 분리하며 소수 예시 성공을 전체 근육 완성으로 표시하지 않는다. 담당 Luna Max 현재 대화 직접 구현을 유지한다.
 
 ## 수행
 

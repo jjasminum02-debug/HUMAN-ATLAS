@@ -131,9 +131,10 @@
 }
 
 @media(max-width:760px) {
-  .atlas-shell:has(.study-details[open]) .whole-body-canvas { bottom: calc(32% + 220px); }
-  .atlas-shell:has(.study-details[open]) .body-tools { bottom: calc(32% + 54px); }
-  .atlas-shell:has(.study-details[open]) .body-status { bottom: calc(32% + 16px); padding: 0; }
+  .atlas-shell:has(.study-details[open]) .whole-body-canvas { bottom: calc(32% + 180px); }
+  .atlas-shell:has(.study-details[open]) .body-tools { bottom: calc(32% + 24px); }
+  .atlas-shell:has(.study-details[open]) .body-status { bottom: 32%; padding: 0; }
+  .atlas-shell:has(.study-details[open]) .study-details { bottom: 0; }
   .atlas-shell:has(.study-details:not([open])) .whole-body-canvas { bottom: 250px; }
   .atlas-shell:has(.study-details:not([open])) .body-tools { bottom: 88px; }
   .atlas-shell:has(.study-details:not([open])) .body-status { bottom: 65px; }

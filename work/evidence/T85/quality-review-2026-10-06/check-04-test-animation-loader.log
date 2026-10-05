@@ -1,0 +1,24 @@
+$ node --experimental-strip-types --test src/viewer/animationSceneAdapter.test.ts && python3 ../atlas-data/schemas/test_motion_asset_representation_t22.py && python3 ../atlas-data/schemas/validate_motion_asset_sources.py
+✔ GLTFLoader import keeps hierarchy, skin attributes, named node bindings and original clip tracks (6.710417ms)
+✔ illustrative path remains a distinct unskinned representation (0.791584ms)
+✔ bone motion plus illustrative path uses separate node and path bindings (1.039458ms)
+THREE.GLTFLoader: Missing min/max properties for accessor POSITION.
+THREE.GLTFLoader: Missing min/max properties for accessor POSITION.
+✔ T59 source-bound morph keeps the exact source node in the full scene and rejects whole-muscle transform tracks (1.539917ms)
+✔ frame, unit and source hash mismatch fail closed without rescaling (0.271708ms)
+✔ missing node binding and clip mismatch are rejected (0.748042ms)
+✔ import bundle disposes shared geometry, material and texture once and is idempotent (0.482542ms)
+✔ disposal helper deduplicates resources shared across independent roots (0.086625ms)
+✔ off-scene rig and path bindings are rejected while the active single scene still loads (0.981541ms)
+✔ off-scene skin joints and clip targets cannot accompany the returned active scene (0.859667ms)
+✔ external buffer and image URI are rejected before GLTFLoader can resolve them (0.436083ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 80.453416
+PASS: combined bone-node + subject-path contract positive/negative fixtures (3/3)
+PASS: 2 source candidates verified; production motion assets=1160; source bytes unchanged

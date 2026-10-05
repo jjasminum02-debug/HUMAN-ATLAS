@@ -13,6 +13,8 @@ import type { AnimationSceneResource } from '../animationSceneAdapter.ts';
 import type { MotionAsset } from '../../domain/motionLearning.ts';
 import { sourceGeometrySha256 } from './sourceMotionGeometry.ts';
 import type { SourceMotionHost } from './sourceMotionHost.ts';
+import { attachmentBoneKeys } from './regionalContext.ts';
+import { motionFrameSourceKeys } from './motionFrameContext.ts';
 import { muscleActionEmphasis } from "../../domain/atlasMotionExperience.ts";
 import type { MotionLearningIntent } from '../../domain/atlasMotionExperience.ts';
 /** Dataset selection/presentation adapter; renderer, camera and lifecycle remain owned by the existing controller. */
@@ -33,7 +35,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
     private guidedMotionDirection: THREE.Vector3 | null = null;
     private notify: (p: BodyProgress) => void;
     private select: (id: string, side: string | null) => void;
-    private motion: { asset: MotionAsset; resource: AnimationSceneResource; player: AnimationPlaybackController; originals: Map<string, { node: THREE.Mesh; visible: boolean }>; packageMaterials: Map<string, THREE.Material | THREE.Material[]>; contextKey: string; onInvalidated?: (reason: string) => void } | null = null;
+    private motion: { asset: MotionAsset; resource: AnimationSceneResource; player: AnimationPlaybackController; originals: Map<string, { node: THREE.Mesh; visible: boolean }>; packageMaterials: Map<string, THREE.Material | THREE.Material[]>; contextKey: string; frameSourceKeys: string[]; onInvalidated?: (reason: string) => void } | null = null;
     constructor(host: HTMLElement, dataset: Dataset, integration: RuntimeIntegration, notify: (p: BodyProgress) => void, select: (id: string, side: string | null) => void) {
         validateRuntimeIntegration(integration, dataset);
         this.notify = notify;
@@ -100,7 +102,20 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             }
             const currentContextKey = this.motionContextKey(this.view);
             const baseKeys = demandedStructureKeys([...this.records.values()], this.view);
-            const requiredKeys = [...new Set([...baseKeys, ...binding.members.map(member => member.sourceKey)])];
+            const subject = this.records.get(binding.subjectSourceKey);
+            const exactAttachmentKeys = !this.view.isolate && this.view.bones && subject
+                ? attachmentBoneKeys(binding.subjectSourceKey).filter(key => {
+                    const row = this.records.get(key);
+                    return row?.kind === 'bone' && row.localDisplayEligible && row.defaultVisible && !row.hardHoldReasons.length
+                        && !row.sourceHiddenStatePreserved.hideViewport && !this.view.hiddenSourceKeys?.includes(key)
+                        && (row.side === subject.side || row.side === null);
+                })
+                : [];
+            const frameSourceKeys = this.view.isolate ? [binding.subjectSourceKey] : motionFrameSourceKeys(
+                binding.members, asset.poseControl?.framingSourceKeys, binding.subjectSourceKey,
+                key => this.records.get(key)?.kind, exactAttachmentKeys,
+            );
+            const requiredKeys = [...new Set([...baseKeys, ...binding.members.map(member => member.sourceKey), ...frameSourceKeys])];
             const detailKeys = binding.members.filter(member => member.lod === 'detail').map(member => member.sourceKey);
             // An exact motion buffer may bind overview even for the selected bone.
             // Upgrading it to detail would make the required source hash unreachable.
@@ -111,7 +126,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             while (!binding.members.every(member => {
                 const node = this.resources.nodes.get(member.sourceKey);
                 return node?.userData.resourceKey === member.resourceKey;
-            })) {
+            }) || !frameSourceKeys.every(key => this.resources.nodes.has(key))) {
                 if (this.dead || this.motionContextKey(this.view) !== currentContextKey) throw new Error('motion context loading cancelled');
                 if (performance.now() > deadline || this.resources.queue.failed.size) throw new Error('motion context resources unavailable');
                 await new Promise(resolve => setTimeout(resolve, 40));
@@ -211,7 +226,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 }, disposeResource: false,
                 registerUpdate: update => this.scene.addUpdate(update),
             });
-            this.motion = { asset, resource, player, originals: originalNodes, packageMaterials, contextKey: currentContextKey, onInvalidated };
+            this.motion = { asset, resource, player, originals: originalNodes, packageMaterials, contextKey: currentContextKey, frameSourceKeys, onInvalidated };
             this.scene.renderer.domElement.parentElement?.setAttribute('data-motion-context', 'active');
             this.apply();
             // Frame the complete moving chain once, retaining the user's viewing direction.
@@ -231,10 +246,11 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 && Math.abs(defaultFront.x) < .01 && Math.abs(defaultFront.y) < .01) {
                 this.scene.camera.position.copy(this.scene.controls.target).add(new THREE.Vector3(.866, 0, .5));
             }
-            const framingKeys = asset.poseControl?.framingSourceKeys?.filter(key => binding.members.some(member => member.sourceKey === key));
-            this.fit(binding.members.filter(m => !framingKeys?.length || framingKeys.includes(m.sourceKey)).map(m => this.records.get(m.sourceKey)!).filter(row => row
+            this.fit(frameSourceKeys.map(key => this.records.get(key)!).filter(row => row && row.localDisplayEligible
+                && !row.hardHoldReasons.length && !row.sourceHiddenStatePreserved.hideViewport
                 && (row.kind === 'bone' ? this.view.bones : this.view.muscles)
-                && !this.view.hiddenSourceKeys?.includes(row.sourceKey)), 1.05);
+                && !this.view.hiddenSourceKeys?.includes(row.sourceKey)
+                && (row.defaultVisible || row.sourceKey === this.view.selectedId)), 1.05);
             this.scene.camera.zoom = zoom;
             this.scene.camera.updateProjectionMatrix();
             this.scene.requestRender();
@@ -296,6 +312,11 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         }
         const highlights = new Set(innervationHighlightKeys(rows, this.view, visibleKeys));
         const observe = observingNerves(rows, this.view, visibleKeys);
+        }
+        if (this.motion && !this.view.isolate && this.view.bones) for (const sourceKey of this.motion.frameSourceKeys) {
+            const row = this.records.get(sourceKey);
+            if (row?.kind === 'bone' && row.localDisplayEligible && row.defaultVisible && !row.hardHoldReasons.length
+                && !row.sourceHiddenStatePreserved.hideViewport && !this.view.hiddenSourceKeys?.includes(sourceKey)) visibleKeys.add(sourceKey);
         const selectionAlternativeKeys = new Set(this.records.get(this.view.selectedId ?? '')?.selectionSuppressSourceKeys ?? []);
         for (const [key, node] of this.resources.nodes) {
             const row = this.records.get(key)!;

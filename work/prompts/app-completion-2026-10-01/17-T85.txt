@@ -1,4 +1,4 @@
-HUMAN ATLAS에서 T85만 수행해라. 담당 Astra · 현재 대화 직접 구현.
+HUMAN ATLAS에서 T85만 수행해라. 담당 Luna Max · 현재 대화 직접 구현.
 
 AGENTS.md, work/EXECUTION.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/product-acceptance.json,
 해당 task의 현재 spec/promptFile, 실제 선행 report/evidence 및 design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md를 읽어라.
@@ -27,3 +27,6 @@ python3 work/tools/sync_execution.py 및 --check를 수행하고 소유 변경�
 5. 현재 지원 기능의 제품 blocker를 해결한다. 전체 근육 움직임 목표의 진짜 구현율·남은 anatomy/source/rig/clip 작업과 local_app_ready를 별도 기록한다. 전체가 실제 구현되지 않았다면 wholeMuscleMotionGoal=complete로 쓰지 않는다. 다음 T40은 실행하지 않는다.
 
 종료 후 다음 ID는 T40다. 현재 promptFile을 안내하고 멈춰라. 다른 task를 이번에 시작하지 마라.
+
+
+2026-10-06 사용자 추가 기준: 모든 현재 등록 동작의 같은 scene 프레임에 선택된 정확한 source/side/part 근육, 실제 package의 moving/co-moving 뼈 사슬, 근거 있는 기시·정지의 표시 적격 whole-bone 문맥을 포함한다. 팔/다리 package가 제공하면 손/발까지 보인다. 없는 구조를 만들지 않는다. 공통 frame/context 경로와 현재 등록 동작 전수 계약에 적용하되 미래 근육 전체에 동작 자산이 있다는 뜻은 아니다. 사용자의 explicit layer-off/isolate/hidden은 자동 문맥 표시보다 우선한다.

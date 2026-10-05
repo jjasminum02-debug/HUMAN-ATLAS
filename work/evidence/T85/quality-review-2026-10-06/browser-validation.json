@@ -1,0 +1,238 @@
+{
+  "schemaVersion": "t85-browser-validation-v1",
+  "capturedAt": "2026-10-06",
+  "route": "http://127.0.0.1:5175/?source=ZA-c7010a9-efabaac8183789cad65a55e6",
+  "selectedSource": "ZA-c7010a9-efabaac8183789cad65a55e6",
+  "selectedName": "Levator scapulae, left",
+  "selectedAction": "어깨뼈 올림",
+  "contextResult": {
+    "sameScene": true,
+    "sameSide": "left",
+    "visibleAnatomicalContext": [
+      "C1-C4 origin bones",
+      "left scapula insertion bone",
+      "scapular/shoulder context",
+      "humerus",
+      "radius",
+      "ulna",
+      "carpals",
+      "metacarpals",
+      "phalanges through fingertips"
+    ],
+    "visualFinding": "The neck-to-scapula action focus and the complete continuous left arm through the hand were visible in the same scene at 390, 1024 and 1440 CSS-pixel widths. No distal forearm or hand cutoff was seen. This is a source-frame/context observation, not a measured joint axis or full-target anatomy approval.",
+    "manualScreenshots": "Three live CUA screenshots were inspected in-session; the CUA image output is not available as a local PNG path. Persistent prior screenshots for unchanged region/nerve flows are listed under reusedEvidence."
+  },
+  "responsive": [
+    {
+      "viewportCssPx": [
+        390,
+        844
+      ],
+      "documentCssPx": [
+        390,
+        844
+      ],
+      "canvasRect": [
+        0,
+        180,
+        390,
+        256.16
+      ],
+      "toolsRect": [
+        12,
+        450.66,
+        366,
+        141.5
+      ],
+      "statusRect": [
+        15,
+        603.66,
+        360,
+        12.5
+      ],
+      "detailsRect": [
+        12,
+        616.16,
+        366,
+        227.84
+      ],
+      "visual": "motion context fits; tools/status end before details panel; panel reaches viewport bottom; no page overflow"
+    },
+    {
+      "viewportCssPx": [
+        1024,
+        900
+      ],
+      "documentCssPx": [
+        1024,
+        900
+      ],
+      "canvasRect": [
+        235,
+        152,
+        478,
+        532
+      ],
+      "detailsRect": [
+        731,
+        205,
+        275,
+        670
+      ],
+      "toolsRect": [
+        238,
+        687,
+        475,
+        154
+      ],
+      "visual": "full left arm and fingers remain in frame; detail panel and tools do not cover the selected motion"
+    },
+    {
+      "viewportCssPx": [
+        1440,
+        900
+      ],
+      "documentCssPx": [
+        1440,
+        900
+      ],
+      "canvasRect": [
+        280,
+        152,
+        802,
+        532
+      ],
+      "detailsRect": [
+        1106,
+        205,
+        310,
+        670
+      ],
+      "toolsRect": [
+        288,
+        686.5,
+        794,
+        153.5
+      ],
+      "visual": "full left arm and fingers remain in frame; details panel remains inside viewport"
+    }
+  ],
+  "interactions": [
+    {
+      "flow": "scrub then resume then return",
+      "observed": "ArrowRight changed progress 28 to 37 and player phase to held without changing the selected source. Activating the single CTA resumed the loop; activating it again cleared motion and returned progress to 0 while preserving the selected source."
+    },
+    {
+      "flow": "user bone layer off during active motion",
+      "observed": "aria-pressed changed to false; the active motion session was cancelled; the explicitly hidden bone context was not forced visible. Re-enabling bones restored the user layer state, left the motion at rest, and produced no pending or failed resources."
+    },
+    {
+      "flow": "nerve card and browser history",
+      "observed": "Search found the dorsal scapular nerve concept; left-model selection showed its static nerve card and same-scene course/context. Browser Back restored the previously selected left levator card and source route. No new branch geometry or entrapment coordinate was asserted."
+    }
+  ],
+  "runtimeProfile": {
+    "baseline": {
+      "source": "baseline.json baselineBrowserObservation and preChangeViewportObservations[0]",
+      "viewportCssPx": [
+        390,
+        844
+      ],
+      "assetId": "T66-PRIORITY-S03-L-LEV-LEV-ASSET",
+      "phaseAtCapture": "return",
+      "visibleMeshes": 117,
+      "sceneTriangles": 70234,
+      "geometryBuffersBytes": 8249106,
+      "motionBytes": 5932956,
+      "estimatedActiveBytes": 23370504,
+      "renderCpuP95Ms": 2.0,
+      "frameIntervalP95Ms": 16.8,
+      "pending": 0,
+      "cacheEvictions": 0,
+      "cancellations": 0,
+      "lateReleases": 0
+    },
+    "postChange": {
+      "viewportCssPx": [
+        390,
+        844
+      ],
+      "assetId": "T66-PRIORITY-S03-L-LEV-LEV-ASSET",
+      "phaseAtCapture": "return",
+      "visibleMeshes": 119,
+      "sceneTriangles": 80498,
+      "rendererCalls": 119,
+      "geometryCount": 515,
+      "geometryBuffersBytes": 8249106,
+      "appLoadedBytes": 17437548,
+      "motionBytes": 5932956,
+      "estimatedActiveBytes": 23370504,
+      "renderCpuP95Ms": 2.2,
+      "frameIntervalP95Ms": 18.7,
+      "pending": 0,
+      "failed": [],
+      "cacheEntries": 4,
+      "cacheEvictions": 0,
+      "cancellations": 0,
+      "lateReleases": 0
+    },
+    "coldWarmActionLoad": {
+      "coldMotionReadyMs": 413,
+      "warmMotionReadyMs": 398,
+      "coldAppLoadedBytes": 17437548,
+      "coldMotionBytes": 5932956,
+      "warmAppLoadedBytes": 17437548,
+      "warmMotionBytes": 5932956,
+      "interpretation": "Measured click-to-active session readiness and application queue byte counters in the current local browser. These are not HTTP wire-byte timing or GPU/VRAM measurements."
+    },
+    "repeatedRouteHighWater": {
+      "viewportCssPx": [
+        390,
+        844
+      ],
+      "appLoadedBytes": 28702312,
+      "estimatedActiveBytes": 34635268,
+      "motionBytes": 5932956,
+      "cacheEntries": 6,
+      "cacheEvictions": 0,
+      "pending": 0,
+      "failed": [],
+      "cancellations": 0,
+      "lateReleases": 0,
+      "interpretation": "Observed after the nerve-search/back-to-muscle route; additional cached content stayed bounded during this run."
+    },
+    "comparison": "The full moving arm context adds two visible source instances and 10264 displayed triangles to the preserved baseline frame. Shared source geometry buffers, app loaded bytes and motion payload bytes did not increase in the same 390px cold/warm motion run. Renderer CPU P95 increased by about 0.2ms in this sample; frame interval P95 increased by 1.9ms, with no observed queue, cache eviction or load failure. This is a small measured timing change, not a device-wide performance guarantee.",
+    "unmeasured": [
+      "GPU",
+      "VRAM",
+      "total process memory",
+      "physical-device mobile performance",
+      "HTTP transfer timing"
+    ]
+  },
+  "consoleErrors": [],
+  "reusedEvidence": [
+    {
+      "path": "work/evidence/T66/priority-integration-2026-10-05/browser-validation.json",
+      "reuse": "12 actual region transitions, nerve course-to-muscle/action/rest flow, hand regression, hidden/layer-off CTA guards, history and prior responsive screenshots. Navigation/region/domain inputs were unchanged by T85; current motion-context changes were separately retested in this browser."
+    }
+  ],
+  "status": "passed for current declared support; whole-body content and all-muscle motion remain partial",
+  "inputHashes": {
+    "atlas-data/motion/motion-learning.json": "b58de1150ba9a9c96c91c7ce38fb37198aa8c0c1f567fa563438cb94a0eb8f3b",
+    "atlas-data/overlays/za-local-integration.json": "4a5028dd7c1bca3b142d7899cc99a425ad88d5837ca598d2d5f4ad612994be5c",
+    "atlas-data/terminology/learner-attachment-context.json": "32426721775eed2ca53311bea2f73ecd4c51d6cd9dbba0d696a6623f53ac336c",
+    "atlas-web/src/ui/atlasShell.css": "d2ba3aa4a825bbfa8ebbbd982bb87deb841c370819f99756342dd1fa9f9d1995",
+    "atlas-web/src/viewer/datasets/DatasetSceneAdapter.ts": "be85599f25ce97b5f9b3013a0d8ec9f517d0648faefae2847a8b9dc030cc4e77",
+    "atlas-web/src/viewer/datasets/motionFrameContext.ts": "cf3f3b40eb622f5cfb6a6a541210f8d4313e28022e64c36b5412d14b097039ab",
+    "work/evidence/T66/priority-integration-2026-10-05/browser-validation.json": "4878796cac41e90cc89ff7478603225cd70b7e6d98c85db75760aa2507c94ff5",
+    "work/evidence/T66/priority-integration-2026-10-05/final-validation.json": "17f4fb140f80ff1d292e09d8b1aa2dac7dd031e36403ce11c0af37ef551360cc",
+    "work/evidence/T66/priority-integration-2026-10-05/product-scope.json": "c52fa84bf39933cbf0e3db12beec29d8d731af4885636fd8ddc62f21c0e360f5"
+  },
+  "baselineCommit": "dfb4687d8548e8ceb4b486512ba89b1fc2d326ec",
+  "preexistingWorktree": {
+    "dirtyPathCount": 590,
+    "porcelainSha256": "f31ab814e765a7d5212e38cd04e9b3caad57534453668df31bbdd33cd0706199",
+    "preserved": true
+  }
+}
