@@ -1,0 +1,12 @@
+right Gracilis muscle.r True 0.501340759813955 0
+right Long head of biceps femoris.r True 0.40263858537462593 0
+right Plantaris muscle.r True 0.2532729149895229 0
+right Popliteus muscle.r True 0.4701634603700276 0
+right Rectus femoris muscle.r True 0.1593488621368391 0
+right Sartorius muscle.r True 0.7424020122217436 0
+right Semimembranosus muscle.r False 0.7399472637517807 31
+Traceback (most recent call last):
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T66/priority-integration-2026-10-05/verify-enlarged-knee.py", line 28, in <module>
+    assert qc['passed'],(key,qc['geometry'],qc['contact']['failures'][:3])
+           ~~^^^^^^^^^^
+AssertionError: ('ZA-c7010a9-7827fbd13932ee0d8c2c5497', {'triangleCount': 1338, 'sourceDegenerateTriangleCount': 0, 'flippedFaceSamples': 0, 'minimumAreaRatio': 0.7399472637517807, 'maximumAbsoluteEdgeRatioDelta': 0.15487306053195127, 'passed': True}, [{'seconds': 0.125, 'boneSourceKey': 'ZA-c7010a9-881dc33c5537a4e0e28b151c', 'newContainedVertexCount': 1, 'sourceVertexIndices': [505]}, {'seconds': 0.1875, 'boneSourceKey': 'ZA-c7010a9-881dc33c5537a4e0e28b151c', 'newContainedVertexCount': 1, 'sourceVertexIndices': [505]}, {'seconds': 0.25, 'boneSourceKey': 'ZA-c7010a9-881dc33c5537a4e0e28b151c', 'newContainedVertexCount': 1, 'sourceVertexIndices': [505]}])

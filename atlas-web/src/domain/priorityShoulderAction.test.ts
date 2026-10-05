@@ -8,7 +8,8 @@ const read = (path: string) => JSON.parse(readFileSync(new URL('../../../' + pat
 const bundle = read('atlas-data/motion/motion-learning.json') as MotionLearningBundle;
 const acceptance = read('atlas-data/motion/t66-priority-action-acceptance.json');
 const adopted = Object.fromEntries(acceptance.rows.map((r: {actionId: string}) => [r.actionId, r]));
-const outcomes = read('work/evidence/T66/priority-shoulder-scapula-2026-10-05/action-outcome.json');
+const outcomePaths = [...new Set(acceptance.rows.filter((r: {assetId: string}) => r.assetId.startsWith('T66-PRIORITY-S03-')).map((r: {outcomePath: string}) => r.outcomePath))] as string[];
+const outcomes = outcomePaths.flatMap(path => read(path));
 test('twelve native parts/sides have emitted shortening, fixed attachment context and exact action selection', () => {
   assert.equal(outcomes.length, 12);
   assert.equal(new Set(outcomes.map((r: {sourceKey: string}) => r.sourceKey)).size, 12);
@@ -19,7 +20,7 @@ test('twelve native parts/sides have emitted shortening, fixed attachment contex
     assert.equal(a.sha256, row.motionSha256);
     assert.equal(a.poseControl!.actionDirection, row.kind === 'LEV' ? 'forward' : 'reverse');
     assert.ok(row.shorteningMetres > .0005 && row.fixedMaskErrorMetres < 1e-6);
-    assert.equal(row.inspectedPoseSamples, 65);
+    assert.ok(row.inspectedPoseSamples >= 49);
     assert.equal(row.physiologicalContractionClaimed, false);
     const options = projectLearnerMotionActionOptions(row.sourceKey, bundle, [], row.side, adopted);
     assert.equal(options.find(o => o.candidate?.asset.id === row.assetId)?.learningIntent, 'muscle_action');

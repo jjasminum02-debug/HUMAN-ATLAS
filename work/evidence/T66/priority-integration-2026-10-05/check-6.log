@@ -1,0 +1,36 @@
+✔ offline BP3D snapshot exactly matches original runtime composition (84.654667ms)
+✖ local integration route serves the validated compact allowlist, never the developer ledger (3153.428834ms)
+✔ delivery rejects path traversal, stale dependency, and changed derived chunk bytes (3144.791708ms)
+✔ verified GLB uses conditional private cache and changed bytes still fail closed (3183.936417ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9719.106041
+
+✖ failing tests:
+
+test at scripts/delivery.test.ts:31:1
+✖ local integration route serves the validated compact allowlist, never the developer ledger (3153.428834ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + '3234c9c7b4cf96fe07062e616d9c2c44161bc8fb54ef107a921c3a3d2ba08eeb'
+  - '5015b3654d141ed2bbb8ab48313eacee7eb99583dd4629ad96f2b0f731e6b9b5'
+
+      at TestContext.<anonymous> (file:///Users/daniel/Downloads/SIM%20/HUMAN%20ATLAS/atlas-web/scripts/delivery.test.ts:49:9)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '3234c9c7b4cf96fe07062e616d9c2c44161bc8fb54ef107a921c3a3d2ba08eeb',
+    expected: '5015b3654d141ed2bbb8ab48313eacee7eb99583dd4629ad96f2b0f731e6b9b5',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+[ELIFECYCLE] Command failed with exit code 1.
+
+$ node --experimental-strip-types --test scripts/delivery.test.ts

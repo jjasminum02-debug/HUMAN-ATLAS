@@ -1,0 +1,37 @@
+ZA-c7010a9-0032489e5062440b0fa49b28 True 0.8152944099659022 0
+ZA-c7010a9-136297c30c138538f1cb3586 True 0.7554172373430587 0
+ZA-c7010a9-1da479516bf0ec12416bcf15 True 0.2516686371106012 0
+ZA-c7010a9-2231c6fbcbf2e0248adb4a72 True 0.6475349115297993 0
+ZA-c7010a9-27afab07491db814dd099498 True 1.0 0
+ZA-c7010a9-33941d62db2cd36b20fe5945 True 0.21900505164836595 0
+ZA-c7010a9-363dc833b44b54fc3df645a6 True 0.7334216512242271 0
+ZA-c7010a9-36458588114c0db7bfa8a021 True 0.7554172373430552 0
+ZA-c7010a9-3e4b09bb77ba1ca0ae6c92a4 True 0.5572892556877257 0
+ZA-c7010a9-422683830aef648591844113 True 0.6225497952227572 0
+ZA-c7010a9-4813d0c7b087c9af17839e9e True 0.7334211460981944 0
+ZA-c7010a9-490e0e6cc6bdea38d63b7440 True 0.6225497952227572 0
+ZA-c7010a9-4ab9026121346c07a1a49590 True 0.829117548668381 0
+ZA-c7010a9-57685950014655eebe68c4a6 True 0.46797382767884804 0
+ZA-c7010a9-5e0f7dfea4470a1950ed42d8 True 0.497769114912866 0
+ZA-c7010a9-62a4fba42674f5d453c6e277 False 0.1779908874694294 2
+ZA-c7010a9-6d200091f5d75fd817af12ad True 0.45902533794478273 0
+ZA-c7010a9-7099bd7bc2d099935ed31603 True 0.8291169797350254 0
+ZA-c7010a9-8217100657324a6f1e04260b True 0.5572892556877233 0
+ZA-c7010a9-874a9a21ca0c01091bf356c0 True 0.6475349115295042 0
+ZA-c7010a9-895f0d6632a783d45dc4ff12 True 0.653286677419707 0
+ZA-c7010a9-9184adfd521c527f3b352e71 True 0.21899968549490284 0
+ZA-c7010a9-98148d5380ab1abd5154e41c True 0.4590328177889701 0
+ZA-c7010a9-b549788aa5c22d0370829038 True 1.0 0
+ZA-c7010a9-bef3937bee85a8c7bcc77d9c False 0.27621596223046213 1
+ZA-c7010a9-d75abb958e1463ceecb5430b True 0.32076437833419247 0
+ZA-c7010a9-e7530af132273e8c7aa1745e True 0.8470992045594775 0
+ZA-c7010a9-e88e987b81fea91de786e6fd True 0.5383640420413546 0
+ZA-c7010a9-eb0bd1853a90acada85e9177 True 0.32076405770885685 0
+ZA-c7010a9-f16b09418b31e886ea77b274 True 0.6532866774197407 0
+ZA-c7010a9-f5ec9690fcbdd3f75d655fb9 True 0.8470992045593971 0
+ZA-c7010a9-f981466588cab66b0ca123f0 True 0.8152944099663817 0
+Traceback (most recent call last):
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T66/priority-integration-2026-10-05/guard-trunk-native-exterior.py", line 46, in <module>
+    pose.update(passed=all(r['passed'] for r in pose['rows']),motionSha256=sha(motion));geo.update(motionSha256=sha(motion),motionBytes=len(motion));save(d/'glb-pose-qc.json',pose);save(d/'geometry-record.json',geo);save(d/'contact-qc.json',{'passed':not failures,'failures':failures,'newContainmentMaximum':max((r['newContainedVertexCount'] for r in failures),default=0),'baselineOverlapPreserved':True,'continuousCollisionFreedomClaimed':False});save(d/'native-exterior-guard-receipt.json',{'oldMotionSha256':sha(raw),'newMotionSha256':sha(motion),'changedSourceKeys':changed,'authoredContactGuards':records,'unchangedDeformerReplay':reuse,'sourceModified':False,'measuredSpacingClaimed':False});assert pose['passed'],'native exterior contact branch still unresolved'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ~~~~^^^^^^^^^^
+AssertionError: native exterior contact branch still unresolved

@@ -85,3 +85,12 @@ Visible Body 공식 muscle-action 흐름을 참고하여 현재 근육 작용 �
 2026-10-05 사용자 개정: 우선7근육군(앞정강근·대흉근·견갑거근·대퇴직근·복직근·외복사근·능형근)의 대표 작용을 양측 available source/part에서 실제 제작·등록·검증하고 현재 지원 신경 주행/지배·관련근육 학습 흐름을 보완한다. 전체 원장·기존 지원 기능과 확장 backlog는 보존한다.
 
 현재 T66 record의 priority-muscle-atlas-2026-10-05 acceptanceContract가 과거 전수 제작 가능 package 일괄완료 gate보다 우선한다. 범위 밖 failed engineering은 별도 deferred backlog로 원래 실패 상태를 보존한다. 실제 지원된 기존 기능의 회귀와 우선 근육의 engineering 미완은 해결해야 한다. 신규 pass는 마지막 통합 실제 검증 후만 기록한다. 현재 partial/같은nextUnit을 유지한다. 이번 신경 표시 수정과 실측 검증은 work/evidence/T66/nerve-and-priority-review-2026-10-05/REPORT.md를 참조한다. 새 수동 프롬프트 순서는 work/plans/t66-priority-atlas-2026-10-05/README.md다.
+
+
+## 2026-10-05 우선 범위 최종 통합 계약·결과
+
+우선7군의 available20 native source/side/part와22 exact muscle_action binding/13 unique GLB에 대해 현재 지원 앱의 통합 계약을 검사했다. 현재 completed/passed,nextUnit=null이며 whole-content는 partial이다. 최신 실제 근거는 work/evidence/T66/priority-integration-2026-10-05/REPORT.md 및 product-scope.json이다. 이전 full-queue engineering gate는 최신 사용자 우선 범위의 pass 조건이 아니다.
+
+동작 가시성 증대는 무릎/대흉근/견갑거근/능형근의 실제 각도×1.3, 기존+30% T59 보존, 검증된14° 몸통 morph의 projection zoom1.3으로 구현한다. 몸통18.2° 실패 후보는 등록하지 않고 blocked_engineering/deferred로 보존한다. 화면 확대를 정상 ROM 또는 실제 각도 증가로 주장하지 않는다. 원본 morph/주변 구조/정적 신경 pose 제한을 유지한다.
+
+T85는 현재 지원 우선 범위의 UI/성능 품질 검사로 수동 인계하며 턱/얼굴/호흡/E 후보 제작을 추가하지 않는다. T85 record/status는 수정하지 않았다.

@@ -45,12 +45,13 @@ test("production bundle retains six original texts and adds one right ankle sour
   assert.equal(production.motionDefinitions.length, 275);
   assert.equal(production.motionAssets.length, 275);
   const actions = production.muscleActions as MuscleAction[];
-  assert.deepEqual(actions.slice(0, 6).map((row) => row.subjectIds[0]), [
+  assert.deepEqual(actions.filter((row) => row.id.startsWith("T21-ACTION-")).map((row) => row.subjectIds[0]), [
     "HA-M-000001", "HA-M-000002", "HA-M-000003", "HA-M-000004", "HA-M-000005", "HA-M-000006",
   ]);
-  assert.ok(actions.slice(0, 6).every((row) => row.jointBindingState === "unmapped" && row.targetJointIds.length === 0 && row.sourceRefs.length > 0));
-  assert.equal(actions[6].sideApplicability, "right");
-  assert.deepEqual(actions[6].targetJointIds, ["HA-S-JOINT-R-ANKLE-TALOCRURAL"]);
+  assert.ok(actions.filter((row) => row.id.startsWith("T21-ACTION-")).every((row) => row.jointBindingState === "unmapped" && row.targetJointIds.length === 0 && row.sourceRefs.length > 0));
+  const historicalAnkle = actions.find((row) => row.id === "T24-ACTION-HA-M-000003-R-ANKLE-DF")!;
+  assert.equal(historicalAnkle.sideApplicability, "right");
+  assert.deepEqual(historicalAnkle.targetJointIds, ["HA-S-JOINT-R-ANKLE-TALOCRURAL"]);
   assert.equal((production.motionAssets[0] as MotionAsset).representationType, "bone_motion_with_illustrative_path");
   const authored = production.motionAssets[1] as MotionAsset;
   assert.equal(authored.representationType, "source_bound_surface");

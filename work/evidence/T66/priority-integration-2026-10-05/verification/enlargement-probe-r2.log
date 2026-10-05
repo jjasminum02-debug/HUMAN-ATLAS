@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T66/priority-integration-2026-10-05/probe-enlarged-knee-r2.py", line 12, in <module>
+    rest,motion,record,frames=author(p)
+                              ^^^^^^^^^
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/author_t66_family_motion.py", line 264, in author
+    if keyFlips or keyMinimumAreaRatio<.1:raise ValueError(f'folded/collapsed authored key geometry {key}: {keyFlips}/{keyMinimumAreaRatio}')
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: folded/collapsed authored key geometry ZA-c7010a9-eafc9174265a4bbc41581e2a: 3/0.006698481022708004
+{"generated": false, "accepted": false, "status": "blocked_engineering", "failureType": "ValueError", "failure": "folded/collapsed authored key geometry ZA-c7010a9-eafc9174265a4bbc41581e2a: 3/0.006698481022708004"}

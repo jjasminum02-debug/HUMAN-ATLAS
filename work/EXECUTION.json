@@ -3158,12 +3158,12 @@
       "title": "전체 근육 변형 자산 제작·통합",
       "owner": "Luna Max",
       "phase": "G4",
-      "executionStatus": "in_progress",
-      "acceptance": "partial",
+      "executionStatus": "completed",
+      "acceptance": "passed",
       "spec": "work/tasks/T66-APP-COMPLETION.md",
       "scope": "2026-10-05 사용자 개정: 우선7근육군(앞정강근·대흉근·견갑거근·대퇴직근·복직근·외복사근·능형근)의 대표 작용을 양측 available source/part에서 실제 제작·등록·검증하고 현재 지원 신경 주행/지배·관련근육 학습 흐름을 보완한다. 전체 원장·기존 지원 기능과 확장 backlog는 보존한다.",
       "progress": {
-        "nextUnit": "author-and-integrate-normal-motion-bone-and-nerve",
+        "nextUnit": null,
         "completedUnits": [
           "single-button-motion-regression-and-hidden-layer-guards",
           "typed-shared-ankle-bone-selection-and-angle-control",
@@ -3174,197 +3174,73 @@
           "all14-contact-preserving-trials-and-six-source-family-registrations",
           "external-rotation-direction-and-left-reflected-TRS-correction",
           "actual-emitted-GLB-all-key-source-frame-replay",
-          "six-family-representative-browser-and-scoped-regression"
+          "six-family-representative-browser-and-scoped-regression",
+          "priority-seven-group-native-side-part-final-integration",
+          "verified-action-enlargement-and-trunk-observation-zoom",
+          "supported-nerve-muscle-action-rest-and-12-region-responsive-final-qa"
         ],
         "productAcceptance": {
           "contractRevision": "app-completion-2026-10-01",
-          "acceptanceScope": "priority seven muscle groups with actual representative same-scene actions, and supported static nerve course/related-muscle learning; whole-body expansion remains backlog",
-          "productReadiness": "partial_priority_motion_pending",
+          "scopeAmendment": "priority-muscle-atlas-2026-10-05",
+          "acceptanceScope": "Seven priority muscle groups: all 20 available native side/parts have exact representative muscle_action bindings with intact bone/passive context, same-scene loop/rest/scrub, and supported static nerve course → related muscle → action → rest. Visible-amplitude treatment: actual +30% angles for knee/pectoral/scapular representatives, retained already-enlarged T59/native left ankle, 1.3 projection zoom for verified 14-degree trunk geometry. Whole-body and deferred larger-angle trunk engineering are outside this scoped pass.",
+          "productReadiness": "local_app_ready",
           "contentCompleteness": "partial",
           "knownContentGaps": {
-            "muscleTargetCount": 429,
-            "muscleMembershipCount": 447,
-            "sourceConceptCount": 232,
-            "sourceSurfaceCount": 462,
-            "primaryPlayableMuscleSourceSurfaces": 20,
-            "sourcePoseObservationSurfaces": 129,
-            "historicalMainFunctionSourceClipSurfaces": 1,
-            "qualitativeActionDemonstrationSelectorRows": 34,
-            "qualitativeActionDemonstrationGlbAssets": 26,
-            "passivePostureObservationSelectorRows": 4,
-            "passivePostureObservationGlbAssets": 2,
-            "muscleSourceActionRows": 311,
-            "uniqueMuscleSourceSurfacesWithMotionOrObservation": 129,
-            "uniqueSourceDerivedMotionGlbUris": 61,
-            "uniqueSourceDerivedMotionGlbSha256": 61,
-            "uniqueRuntimeMotionGlbUrisIncludingHistoricalT24Candidate": 62,
-            "uniqueRuntimeMotionGlbSha256IncludingHistoricalT24Candidate": 62,
-            "registeredBoneSourceInstancesWithFamilyRoles": 166,
-            "eligibleBoneSourceInstances": 210,
-            "independentAnatomicalBoneCount": null,
-            "registeredBoneFamilyBindingRows": 1581,
-            "independentBoneDofsAdded": 0,
-            "nativeNerveStaticSurfaces": 195,
-            "nativeNerveLabelGroupsNotConcepts": 98,
-            "independentNerveConceptCount": null,
-            "confirmedEntrapmentTextGroups": 5,
-            "abstractIndexEntrapmentGroups": 2,
-            "surroundingAnatomyOnlyGroups": 1,
-            "observedModelOnlyCourseGroups": 90,
-            "wave1FValidatedNerveTextWorkKeys": 30,
-            "wave1FMissingNerveTextWorkKeys": 68,
-            "dynamicNervePoses": 0,
-            "entrapmentCoordinateBindings": 0,
-            "newFullTargetExtentApprovals": 0,
-            "wave1PackageTemplatesNotAssets": 32,
-            "wave1UniqueActualGlbAssets": 28,
-            "wave1SelectorRelationsNotConcepts": 754,
-            "wave2DCandidateGlbsNotRegistered": 22,
-            "wave2ECandidateGlbsNotRegistered": 56,
-            "wave2EGeometryQcPassed": 38,
-            "wave2EGeometryQcFailed": 18,
-            "wave2EActionOutcomeQcPassed": 0,
-            "deferredWave2TargetRows": 276,
-            "deferredWave2MembershipRows": 290,
-            "deferredWave2SourceRows": 60,
-            "deferredWave2BoneContextRows": 21,
-            "canonicalHaBindings": 130,
-            "historical163Classification": {
-              "6": 6,
-              "20": 20,
-              "135": 135,
-              "2": 2
-            },
+            "wholeMuscleMotionGoal": "partial; seven representative groups supported, not all muscles/actions/whole-target extents",
+            "priorityAvailableSourceSurfaces": 20,
+            "priorityExactActionBindings": 22,
+            "priorityUniqueGlbUris": 13,
             "sourceOnly": true,
             "localSelection": "technical_only",
-            "publicRedistribution": "held",
             "humanReview": "not_performed",
-            "atlasActionLibraryLabelEntries": 13,
-            "atlasPlayableSourceActionBindings": 35,
-            "atlasQualitativeOrHistoricalActionSourceSurfaces": 19,
-            "newMotionAssetsThisCorrection": 0,
-            "atlasExactSourceActionLinks": 35,
-            "atlasActionSourceSurfaces": 19,
-            "sourceActionRowCount": 311,
-            "sourceActionRowInterpretation": "source-action ledger rows; not 311 distinct anatomical actions",
-            "wave2DWorkKeyOwnerMetadataCorrectedInWriterCopy": 16,
-            "wave2DAggregateCandidateIndexPresent": false,
-            "wave2DGeneratedCandidateGlbsNotRegistered": 22,
-            "wave2EAggregateArtifactCount": 206,
-            "wave2EAggregateArtifactsMatchingIndex": 205,
-            "wave2EAggregateIndexMismatches": 1,
-            "wave2EGeneratedCandidateGlbsNotRegistered": 56,
-            "wave2ENewRegistrationsThisWriter": 0,
-            "priorityMuscleGroups": [
-              "앞정강근",
-              "대흉근",
-              "견갑거근",
-              "대퇴직근",
-              "복직근",
-              "외복사근",
-              "능형근"
-            ],
-            "priorityActualPlayableSources": {
-              "Tibialis anterior muscle:right": 1,
-              "Tibialis anterior muscle:left": 1,
-              "Rectus femoris muscle:right": 1,
-              "Rectus femoris muscle:left": 1,
-              "ZA-c7010a9-07d4e851bc713a1c5bb0b8f9": 1,
-              "ZA-c7010a9-9648fd79baf7b216be0e8c91": 1,
-              "ZA-c7010a9-e4a7d3329f606e0541166646": 1,
-              "ZA-c7010a9-efabaac8183789cad65a55e6": 1,
-              "ZA-c7010a9-bc1b5e5fc64c6cbbbab9c03e": 1,
-              "ZA-c7010a9-fc7b5ebec6fab48ae5ae8ebf": 1,
-              "ZA-c7010a9-3a414d5573f8ef7250596305": 1,
-              "ZA-c7010a9-72ab84e76cdf041dd9425609": 1,
-              "ZA-c7010a9-2ea5931bed7570848730b3f4": 1,
-              "ZA-c7010a9-93bf352448accd9e7356fc10": 1,
-              "ZA-c7010a9-96cb4db8fde040d91dd1119e": 1,
-              "ZA-c7010a9-0f9baaa60e90f20ca5ccb7e8": 1,
-              "ZA-c7010a9-33941d62db2cd36b20fe5945": 1,
-              "ZA-c7010a9-d75abb958e1463ceecb5430b": 1,
-              "ZA-c7010a9-9184adfd521c527f3b352e71": 1,
-              "ZA-c7010a9-eb0bd1853a90acada85e9177": 1
+            "publicRedistribution": "held",
+            "denominators": {
+              "targets": 542,
+              "memberships": 563,
+              "regions": 12,
+              "muscleTargets": 429,
+              "muscleMemberships": 447,
+              "muscleSourceConcepts": 232,
+              "muscleSourceSurfaces": 462,
+              "canonicalHaBindings": 130,
+              "historicalClassification163": [
+                6,
+                20,
+                135,
+                2
+              ]
             },
-            "priorityMotionCompleteness": "partial",
-            "nativeStaticNerveSurfaceCount": 195,
-            "nerveLabelGroupCount": 98,
-            "exactGeometryMotorRelationRows": 2,
-            "literatureConceptMotorRelationRows": 16,
-            "physiologicalForceOrActivationSupport": false,
-            "newLiteratureConceptMotorRelationRowsThisUnit": 14,
-            "nerveMotorRelationRowsTotal": 18,
-            "uniqueNerveKeysInRelations": 9,
-            "relatedTargetSourceKeys": 44,
-            "newNerveGeometry": 0,
-            "newNerveBranchCoordinates": 0,
-            "newCanonicalBindings": 0,
-            "nerveTextCoverageStatus": "partial; not a gate for the currently supported nerve-learning flow",
-            "priorityVerifiedSourceActionBindings": 22,
-            "priorityVerifiedGlbAssets": 13,
-            "priorityNewDerivedAssetsThisUnit": 1,
-            "priorityGroupsWithRepresentativeActions": 7,
-            "priorityGroupsRemaining": 0
+            "futureActions": [
+              "other anatomical actions of the seven groups",
+              "muscles outside current priority scope",
+              "unilateral external-oblique rotation"
+            ],
+            "nerve": {
+              "staticSourceSurfaces": 195,
+              "nativeLabelsNotConcepts": 98,
+              "exactGeometryMotorRelationRows": 2,
+              "literatureConceptMotorRelationRows": 16,
+              "relationRows": 18,
+              "relatedNerveKeys": 9,
+              "relatedTargetSourceKeys": 44,
+              "dynamicPoses": 0,
+              "entrapmentCoordinateBindings": 0,
+              "textWorkKeysValidated": 30,
+              "textWorkKeysMissing": 68
+            },
+            "deferredEngineering": "work/evidence/T66/priority-integration-2026-10-05/deferred-engineering.json",
+            "approvals": "no new full extent/canonical HA/human/rights approval"
           },
-          "unresolvedProductBlockers": [
-            "우선 7근육군의 양측 대표 작용을 각 내부 단계에서 검증했다. 부모 T66의 최종 통합·지원 앱 회귀 및 신경 흐름 판정은 05 통합 단계에서 수행한다.",
-            "이번 신경 카드의 대표 실제 UI는 검증했다. 우선 애니메이션과 이번 신경 관계를 함께 확인하는 T66 최종 통합 회귀/판정은 아직 남아 있다."
-          ],
+          "unresolvedProductBlockers": [],
           "evidence": [
-            "work/reports/T66.md",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-final/REPORT.md",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-final/runtime-counts.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-final/final-blocker-list.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-final/wave2-reconciliation.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-final/unit03-reconciliation.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-final/candidate-asset-hash-audit.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-final/final-validation.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-final/final-browser-validation.json",
-            "work/evidence/T66/parallel-completion-2026-10-03/integration-final/region-navigation-validation.json",
-            "work/evidence/T66/atlas-action-experience-2026-10-04/REPORT.md",
-            "work/evidence/T66/atlas-action-experience-2026-10-04/browser-validation.json",
-            "work/evidence/T66/atlas-action-experience-2026-10-04/checks.json",
-            "work/evidence/T66/atlas-action-experience-2026-10-04/intent-review.json",
-            "work/evidence/T66/final-writer-2026-10-05/REPORT.md",
-            "work/evidence/T66/final-writer-2026-10-05/candidate-layout-audit.json",
-            "work/evidence/T66/final-writer-2026-10-05/writer-correction-revision-r1.json",
-            "work/evidence/T66/final-writer-2026-10-05/writer-contract-tests.json",
-            "work/evidence/T66/final-writer-2026-10-05/base-protocol-tests.json",
-            "work/evidence/T66/final-writer-2026-10-05/d-preflight.stdout.json",
-            "work/evidence/T66/final-writer-2026-10-05/e-preflight.stdout.json",
-            "work/evidence/T66/final-writer-2026-10-05/e-aggregate-preflight.json",
-            "work/evidence/T66/final-writer-2026-10-05/final-validation.json",
-            "work/evidence/T66/final-writer-2026-10-05/wave2-unresolved-workkeys.json",
-            "work/evidence/T66/final-writer-2026-10-05/preservation-check.json",
-            "work/evidence/T66/nerve-and-priority-review-2026-10-05/REPORT.md",
-            "work/evidence/T66/nerve-and-priority-review-2026-10-05/browser-validation.json",
-            "work/evidence/T66/nerve-and-priority-review-2026-10-05/priority-motion-audit.json",
-            "work/evidence/T66/nerve-learning-2026-10-05/REPORT.md",
-            "work/evidence/T66/nerve-learning-2026-10-05/input-manifest.json",
-            "work/evidence/T66/nerve-learning-2026-10-05/browser-validation.json",
-            "work/evidence/T66/nerve-learning-2026-10-05/validation.json",
-            "work/evidence/T66/nerve-learning-2026-10-05/verification-summary.json",
-            "work/evidence/T66/priority-ankle-knee-2026-10-05/REPORT.md",
-            "work/evidence/T66/priority-ankle-knee-2026-10-05/final-validation.json",
-            "work/evidence/T66/priority-ankle-knee-2026-10-05/supported-actions.json",
-            "work/evidence/T66/priority-ankle-knee-2026-10-05/action-outcome.json",
-            "work/evidence/T66/priority-ankle-knee-2026-10-05/knee-action-outcome.json",
-            "work/evidence/T66/priority-ankle-knee-2026-10-05/hip-context-outcome.json",
-            "work/evidence/T66/priority-ankle-knee-2026-10-05/browser/observations.json",
-            "work/evidence/T66/priority-shoulder-scapula-2026-10-05/REPORT.md",
-            "work/evidence/T66/priority-shoulder-scapula-2026-10-05/final-validation.json",
-            "work/evidence/T66/priority-shoulder-scapula-2026-10-05/action-outcome.json",
-            "work/evidence/T66/priority-shoulder-scapula-2026-10-05/registration.json",
-            "work/evidence/T66/priority-shoulder-scapula-2026-10-05/dependency-audit.json",
-            "work/evidence/T66/priority-shoulder-scapula-2026-10-05/browser/observations.json",
-            "work/evidence/T66/priority-trunk-2026-10-05/REPORT.md",
-            "work/evidence/T66/priority-trunk-2026-10-05/final-validation.json",
-            "work/evidence/T66/priority-trunk-2026-10-05/action-outcome.json",
-            "work/evidence/T66/priority-trunk-2026-10-05/registration.json",
-            "work/evidence/T66/priority-trunk-2026-10-05/dependency-audit.json",
-            "work/evidence/T66/priority-trunk-2026-10-05/browser/observations.json"
-          ],
-          "scopeAmendment": "priority-muscle-atlas-2026-10-05"
+            "work/evidence/T66/priority-integration-2026-10-05/REPORT.md",
+            "work/evidence/T66/priority-integration-2026-10-05/runtime-scope-audit.json",
+            "work/evidence/T66/priority-integration-2026-10-05/dependency-audit.json",
+            "work/evidence/T66/priority-integration-2026-10-05/final-validation.json",
+            "work/evidence/T66/priority-integration-2026-10-05/browser-validation.json",
+            "work/evidence/T66/priority-integration-2026-10-05/trunk-display-enlargement.json",
+            "work/evidence/T66/priority-integration-2026-10-05/deferred-engineering.json"
+          ]
         },
         "wholeMuscleMotionGoal": {
           "status": "partial",
@@ -3372,7 +3248,7 @@
           "memberships": 447,
           "sourceConcepts": 232,
           "sourceSurfaces": 462,
-          "primaryPlayableSourceSurfaces": 1,
+          "primaryPlayableSourceSurfaces": 20,
           "newFullTargetExtentApprovals": 0,
           "sourcePoseObservationSurfaces": 129,
           "mainFunctionSourceClipSurfaces": 1,
@@ -3390,7 +3266,10 @@
           "passivePostureObservationGlbAssets": 2,
           "muscleActionRows": 311,
           "wave1PackageTemplates": 32,
-          "wave1UniqueGlbAssets": 28
+          "wave1UniqueGlbAssets": 28,
+          "priorityExactSourceActionBindings": 22,
+          "priorityUniqueGlbAssets": 13,
+          "priorityGroupsWithRepresentativeActions": 7
         },
         "wholeBoneMotionGoal": {
           "status": "partial",
@@ -3422,7 +3301,7 @@
           "totalMotorRelationRows": 18,
           "uniqueNerveKeysInRelations": 9,
           "relatedTargetSourceKeys": 44,
-          "learnerCourseAndRelatedMuscleFlow": "implemented_and_representatively_browser_verified",
+          "learnerCourseAndRelatedMuscleFlow": "final_integrated_browser_verified",
           "humanReview": "not_performed",
           "publicRedistribution": "held"
         },
@@ -4237,11 +4116,1212 @@
             "work/evidence/T66/priority-trunk-2026-10-05/browser/observations.json"
           ],
           "nextManualFile": "work/plans/t66-priority-atlas-2026-10-05/05-integration-close.txt"
-        }
+        },
+        "priorityIntegrationUnit": {
+          "executionStatus": "completed",
+          "acceptance": "passed",
+          "contractRevision": "app-completion-2026-10-01",
+          "scopeAmendment": "priority-muscle-atlas-2026-10-05",
+          "acceptanceScope": "Seven priority muscle groups: all 20 available native side/parts have exact representative muscle_action bindings with intact bone/passive context, same-scene loop/rest/scrub, and supported static nerve course → related muscle → action → rest. Visible-amplitude treatment: actual +30% angles for knee/pectoral/scapular representatives, retained already-enlarged T59/native left ankle, 1.3 projection zoom for verified 14-degree trunk geometry. Whole-body and deferred larger-angle trunk engineering are outside this scoped pass.",
+          "productReadiness": "local_app_ready",
+          "contentCompleteness": "partial",
+          "knownContentGaps": {
+            "wholeMuscleMotionGoal": "partial; seven representative groups supported, not all muscles/actions/whole-target extents",
+            "priorityAvailableSourceSurfaces": 20,
+            "priorityExactActionBindings": 22,
+            "priorityUniqueGlbUris": 13,
+            "sourceOnly": true,
+            "localSelection": "technical_only",
+            "humanReview": "not_performed",
+            "publicRedistribution": "held",
+            "denominators": {
+              "targets": 542,
+              "memberships": 563,
+              "regions": 12,
+              "muscleTargets": 429,
+              "muscleMemberships": 447,
+              "muscleSourceConcepts": 232,
+              "muscleSourceSurfaces": 462,
+              "canonicalHaBindings": 130,
+              "historicalClassification163": [
+                6,
+                20,
+                135,
+                2
+              ]
+            },
+            "futureActions": [
+              "other anatomical actions of the seven groups",
+              "muscles outside current priority scope",
+              "unilateral external-oblique rotation"
+            ],
+            "nerve": {
+              "staticSourceSurfaces": 195,
+              "nativeLabelsNotConcepts": 98,
+              "exactGeometryMotorRelationRows": 2,
+              "literatureConceptMotorRelationRows": 16,
+              "relationRows": 18,
+              "relatedNerveKeys": 9,
+              "relatedTargetSourceKeys": 44,
+              "dynamicPoses": 0,
+              "entrapmentCoordinateBindings": 0,
+              "textWorkKeysValidated": 30,
+              "textWorkKeysMissing": 68
+            },
+            "deferredEngineering": "work/evidence/T66/priority-integration-2026-10-05/deferred-engineering.json",
+            "approvals": "no new full extent/canonical HA/human/rights approval"
+          },
+          "unresolvedProductBlockers": [],
+          "evidence": [
+            "work/evidence/T66/priority-integration-2026-10-05/REPORT.md",
+            "work/evidence/T66/priority-integration-2026-10-05/runtime-scope-audit.json",
+            "work/evidence/T66/priority-integration-2026-10-05/dependency-audit.json",
+            "work/evidence/T66/priority-integration-2026-10-05/final-validation.json",
+            "work/evidence/T66/priority-integration-2026-10-05/browser-validation.json",
+            "work/evidence/T66/priority-integration-2026-10-05/trunk-display-enlargement.json",
+            "work/evidence/T66/priority-integration-2026-10-05/deferred-engineering.json"
+          ],
+          "nativeSourceGroups": [
+            {
+              "group": "앞정강근",
+              "availableSurfaces": 2,
+              "passedSurfaces": 2
+            },
+            {
+              "group": "대퇴직근",
+              "availableSurfaces": 2,
+              "passedSurfaces": 2
+            },
+            {
+              "group": "대흉근",
+              "availableSurfaces": 6,
+              "passedSurfaces": 6
+            },
+            {
+              "group": "견갑거근",
+              "availableSurfaces": 2,
+              "passedSurfaces": 2
+            },
+            {
+              "group": "능형근",
+              "availableSurfaces": 4,
+              "passedSurfaces": 4
+            },
+            {
+              "group": "복직근",
+              "availableSurfaces": 2,
+              "passedSurfaces": 2
+            },
+            {
+              "group": "외복사근",
+              "availableSurfaces": 2,
+              "passedSurfaces": 2
+            }
+          ],
+          "sourceBindings": [
+            {
+              "group": "앞정강근",
+              "name": "Tibialis anterior muscle.l",
+              "sourceKey": "ZA-c7010a9-74ced50ada635db761f807e4",
+              "regionIds": [
+                "leg"
+              ],
+              "sourceSide": "left",
+              "options": [
+                {
+                  "label": "발목 등쪽굽힘",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-L-TIBANT-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-left-tibialis/motion.glb",
+                  "sha256": "1ad591f5cae78930a3b1f6e24f485739195061d265087867ac5d34372a6b4848",
+                  "side": "left",
+                  "actionId": "T66-PRIORITY-L-TIBANT-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "앞정강근이 발등을 정강이 쪽으로 들어 올리는 작용을 봅니다. 정강뼈·종아리뼈는 고정하고 발의 뼈와 연결된 근육 표면은 함께 움직입니다. 실제 힘이나 수축량을 계산하는 시범은 아닙니다.",
+                  "contextSurfaces": 58,
+                  "poseControl": {
+                    "label": "발목 등쪽굽힘",
+                    "startDegrees": 0,
+                    "endDegrees": 6.5,
+                    "combination": "single_dof_only"
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "앞정강근",
+              "name": "Tibialis anterior muscle.r",
+              "sourceKey": "ZA-c7010a9-54ae5266082b61f48ed8e83e",
+              "regionIds": [
+                "leg"
+              ],
+              "sourceSide": "right",
+              "options": [
+                {
+                  "label": "오른쪽 발목 등쪽굽힘",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T59-ASSET-ZA-R-TIBANT-DF",
+                  "uri": "atlas-data/assets/motion/t59-za-right-ankle/motion.glb",
+                  "sha256": "671289393379dd31e5514c2ff39b6f1b163e057b76b63236a5b0f88f70a392c0",
+                  "side": "right",
+                  "actionId": "T59-ACTION-ZA-R-TIBANT-DF",
+                  "actualFileHashMatches": true,
+                  "explanation": "앞정강근의 발목 등쪽굽힘 방향을 보여 주는 교육용 표면 변형입니다. 실제 수축량이나 개인의 운동 범위를 재현하지 않습니다.",
+                  "contextSurfaces": 58,
+                  "poseControl": {
+                    "label": "발목 등쪽굽힘",
+                    "startDegrees": 0,
+                    "endDegrees": 6.5,
+                    "combination": "single_dof_only"
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "대퇴직근",
+              "name": "Rectus femoris muscle.l",
+              "sourceKey": "ZA-c7010a9-afb0624c66f652ea012c7534",
+              "regionIds": [
+                "thigh"
+              ],
+              "sourceSide": "left",
+              "options": [
+                {
+                  "label": "무릎 폄 · 슬관절 신전",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-L-RECTUS-KNEE-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-s05-left-knee/motion.glb",
+                  "sha256": "04b6461e26b71f205277c76b269046954a50e55bc1d3d7a56f8bbe0913ac17c1",
+                  "side": "left",
+                  "actionId": "T66-PRIORITY-L-RECTUS-KNEE-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "대퇴직근이 무릎을 펴는 작용을 봅니다. 먼저 무릎을 굽혀 준비한 뒤 아래다리와 발을 펴며 처음 자세로 돌아옵니다. 대퇴사두근 4개와 무릎뼈, 아래다리·발의 뼈와 근육을 함께 표시합니다.",
+                  "contextSurfaces": 71,
+                  "poseControl": {
+                    "label": "무릎 굽힘 각도",
+                    "startDegrees": 0,
+                    "endDegrees": 19.5,
+                    "combination": "single_dof_only",
+                    "actionDirection": "reverse"
+                  }
+                },
+                {
+                  "label": "고관절 굽힘 · 무릎 유지",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-L-RECTUS-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-l-rectus-complete/motion.glb",
+                  "sha256": "7a42fc0dfc288d706ae166da83427c842474a7d44a3faf69e2a011349e32a8b5",
+                  "side": "left",
+                  "actionId": "T66-PRIORITY-L-RECTUS-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "대퇴직근이 허벅지를 앞으로 들어 올리는 고관절 굽힘 작용을 봅니다. 골반 쪽은 고정되고 무릎뼈·정강뼈가 허벅지와 함께 움직이며 무릎 각도는 유지됩니다. 대퇴직근은 무릎을 펴는 작용도 하지만, 이 시범에는 무릎 폄을 섞지 않았습니다.",
+                  "contextSurfaces": 88,
+                  "poseControl": {
+                    "label": "엉덩관절 굽힘",
+                    "startDegrees": 0,
+                    "endDegrees": 12,
+                    "combination": "single_dof_only"
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "대퇴직근",
+              "name": "Rectus femoris muscle.r",
+              "sourceKey": "ZA-c7010a9-eb0a993e09d73159468116ce",
+              "regionIds": [
+                "thigh"
+              ],
+              "sourceSide": "right",
+              "options": [
+                {
+                  "label": "무릎 폄 · 슬관절 신전",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-R-RECTUS-KNEE-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-s05-right-knee/motion.glb",
+                  "sha256": "5d8fb2a5190ad9dce5badc12622a702e6fc67e6024f0a7964100025fb9c92b98",
+                  "side": "right",
+                  "actionId": "T66-PRIORITY-R-RECTUS-KNEE-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "대퇴직근이 무릎을 펴는 작용을 봅니다. 먼저 무릎을 굽혀 준비한 뒤 아래다리와 발을 펴며 처음 자세로 돌아옵니다. 대퇴사두근 4개와 무릎뼈, 아래다리·발의 뼈와 근육을 함께 표시합니다.",
+                  "contextSurfaces": 71,
+                  "poseControl": {
+                    "label": "무릎 굽힘 각도",
+                    "startDegrees": 0,
+                    "endDegrees": 19.5,
+                    "combination": "single_dof_only",
+                    "actionDirection": "reverse"
+                  }
+                },
+                {
+                  "label": "고관절 굽힘 · 무릎 유지",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-R-RECTUS-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-r-rectus-complete/motion.glb",
+                  "sha256": "46fd1dc2031a2a095af002e9f635b5d708f8d8750c1aef6fe8ec39ddc6be0fe3",
+                  "side": "right",
+                  "actionId": "T66-PRIORITY-R-RECTUS-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "대퇴직근이 허벅지를 앞으로 들어 올리는 고관절 굽힘 작용을 봅니다. 골반 쪽은 고정되고 무릎뼈·정강뼈가 허벅지와 함께 움직이며 무릎 각도는 유지됩니다. 대퇴직근은 무릎을 펴는 작용도 하지만, 이 시범에는 무릎 폄을 섞지 않았습니다.",
+                  "contextSurfaces": 88,
+                  "poseControl": {
+                    "label": "엉덩관절 굽힘",
+                    "startDegrees": 0,
+                    "endDegrees": 12,
+                    "combination": "single_dof_only"
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "대흉근",
+              "name": "(Abdominal part of pectoralis major muscle).l",
+              "sourceKey": "ZA-c7010a9-07d4e851bc713a1c5bb0b8f9",
+              "regionIds": [
+                "thorax"
+              ],
+              "sourceSide": "left",
+              "options": [
+                {
+                  "label": "팔 모음 · 어깨 모음",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-S03-L-PECT-ABDOM-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-s05-pect-left/motion.glb",
+                  "sha256": "8e4fdf2e626caef9211947b93639877abace552bf32a7120f112f7e97fc61566",
+                  "side": "left",
+                  "actionId": "T66-PRIORITY-S03-L-PECT-ABDOM-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "팔을 살짝 벌린 준비 자세에서 몸통 쪽으로 모으는 대흉근의 대표 작용을 봅니다. 쇄골부·흉늑부·배부분의 몸통 쪽 연결은 유지되고 위팔뼈 쪽을 따라 표면이 변형됩니다. 선택한 부분과 주변 구조를 함께 표시합니다.",
+                  "contextSurfaces": 117,
+                  "poseControl": {
+                    "label": "준비 자세 각도",
+                    "startDegrees": 0,
+                    "endDegrees": 10.4,
+                    "combination": "single_dof_only",
+                    "actionDirection": "reverse",
+                    "observationDirection": [
+                      0.55,
+                      0,
+                      0.84
+                    ],
+                    "framingSourceKeys": [
+                      "ZA-c7010a9-68847f9641b9adb6808dc865",
+                      "ZA-c7010a9-25e67d646be42500458282ca",
+                      "ZA-c7010a9-edf488fe677ac2ddf714c8bd",
+                      "ZA-c7010a9-07d4e851bc713a1c5bb0b8f9",
+                      "ZA-c7010a9-9648fd79baf7b216be0e8c91",
+                      "ZA-c7010a9-e4a7d3329f606e0541166646",
+                      "ZA-c7010a9-a7c8e4f4119fede30c949007",
+                      "ZA-c7010a9-d3e80a278002c84b9d9b0524",
+                      "ZA-c7010a9-93d2f2f716604c6fdd2e2bff",
+                      "ZA-c7010a9-76051e6dd360414b32a0a2bc",
+                      "ZA-c7010a9-a3bee6d0aadd71c673127a63",
+                      "ZA-c7010a9-6ead19bf2457855eaa32bea3",
+                      "ZA-c7010a9-52e3a5b946ff5a2410b74a61",
+                      "ZA-c7010a9-36ec86bb0cb753aee7367b6e",
+                      "ZA-c7010a9-59a894b54ef84c1c8d84cafa",
+                      "ZA-c7010a9-b5f374c414d15a1cd22e00a0",
+                      "ZA-c7010a9-f446a9c4e26017bc0a31f19d",
+                      "ZA-c7010a9-2a1702311206cf52e05ada19",
+                      "ZA-c7010a9-20021c7259ac21d6e098e89e",
+                      "ZA-c7010a9-9bd06b86e29af4e0f43ae094"
+                    ]
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "대흉근",
+              "name": "(Abdominal part of pectoralis major muscle).r",
+              "sourceKey": "ZA-c7010a9-3a414d5573f8ef7250596305",
+              "regionIds": [
+                "thorax"
+              ],
+              "sourceSide": "right",
+              "options": [
+                {
+                  "label": "팔 모음 · 어깨 모음",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-S03-R-PECT-ABDOM-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-s05-pect-right/motion.glb",
+                  "sha256": "0819358fa0a5b41bbb2cd965663bafbbd4374444999dad304b02eea463583f1f",
+                  "side": "right",
+                  "actionId": "T66-PRIORITY-S03-R-PECT-ABDOM-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "팔을 살짝 벌린 준비 자세에서 몸통 쪽으로 모으는 대흉근의 대표 작용을 봅니다. 쇄골부·흉늑부·배부분의 몸통 쪽 연결은 유지되고 위팔뼈 쪽을 따라 표면이 변형됩니다. 선택한 부분과 주변 구조를 함께 표시합니다.",
+                  "contextSurfaces": 117,
+                  "poseControl": {
+                    "label": "준비 자세 각도",
+                    "startDegrees": 0,
+                    "endDegrees": -10.4,
+                    "combination": "single_dof_only",
+                    "actionDirection": "reverse",
+                    "observationDirection": [
+                      0.55,
+                      0,
+                      0.84
+                    ],
+                    "framingSourceKeys": [
+                      "ZA-c7010a9-34b418ba01ebccb353db5982",
+                      "ZA-c7010a9-60fdfbce8b40f76046cc1110",
+                      "ZA-c7010a9-be2ab281ed58d1030a35fdaf",
+                      "ZA-c7010a9-3a414d5573f8ef7250596305",
+                      "ZA-c7010a9-72ab84e76cdf041dd9425609",
+                      "ZA-c7010a9-2ea5931bed7570848730b3f4",
+                      "ZA-c7010a9-a7c8e4f4119fede30c949007",
+                      "ZA-c7010a9-b4f9757ec42328a1efde114c",
+                      "ZA-c7010a9-ffe55aa5a6ff3a8b70228377",
+                      "ZA-c7010a9-e989df3e3f16431a2b691130",
+                      "ZA-c7010a9-047342c7f1d929f381127788",
+                      "ZA-c7010a9-6cc53bec8353c2366fb105d9",
+                      "ZA-c7010a9-52e3a5b946ff5a2410b74a61",
+                      "ZA-c7010a9-14aa9a315e88405c9c6bc52f",
+                      "ZA-c7010a9-76f9ee93e618e98ca6011193",
+                      "ZA-c7010a9-85c6f971412a2c833918b5ac",
+                      "ZA-c7010a9-16eb71d8f51c751c44504d63",
+                      "ZA-c7010a9-d8afd5f96dc2401d40f9aec8",
+                      "ZA-c7010a9-b877f6a487dfee3568e4d4dc",
+                      "ZA-c7010a9-00bfd47edef004ed6a3f5b89"
+                    ]
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "대흉근",
+              "name": "Clavicular head of pectoralis major muscle.l",
+              "sourceKey": "ZA-c7010a9-9648fd79baf7b216be0e8c91",
+              "regionIds": [
+                "thorax"
+              ],
+              "sourceSide": "left",
+              "options": [
+                {
+                  "label": "팔 모음 · 어깨 모음",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-S03-L-PECT-CLAV-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-s05-pect-left/motion.glb",
+                  "sha256": "8e4fdf2e626caef9211947b93639877abace552bf32a7120f112f7e97fc61566",
+                  "side": "left",
+                  "actionId": "T66-PRIORITY-S03-L-PECT-CLAV-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "팔을 살짝 벌린 준비 자세에서 몸통 쪽으로 모으는 대흉근의 대표 작용을 봅니다. 쇄골부·흉늑부·배부분의 몸통 쪽 연결은 유지되고 위팔뼈 쪽을 따라 표면이 변형됩니다. 선택한 부분과 주변 구조를 함께 표시합니다.",
+                  "contextSurfaces": 117,
+                  "poseControl": {
+                    "label": "준비 자세 각도",
+                    "startDegrees": 0,
+                    "endDegrees": 10.4,
+                    "combination": "single_dof_only",
+                    "actionDirection": "reverse",
+                    "observationDirection": [
+                      0.55,
+                      0,
+                      0.84
+                    ],
+                    "framingSourceKeys": [
+                      "ZA-c7010a9-68847f9641b9adb6808dc865",
+                      "ZA-c7010a9-25e67d646be42500458282ca",
+                      "ZA-c7010a9-edf488fe677ac2ddf714c8bd",
+                      "ZA-c7010a9-07d4e851bc713a1c5bb0b8f9",
+                      "ZA-c7010a9-9648fd79baf7b216be0e8c91",
+                      "ZA-c7010a9-e4a7d3329f606e0541166646",
+                      "ZA-c7010a9-a7c8e4f4119fede30c949007",
+                      "ZA-c7010a9-d3e80a278002c84b9d9b0524",
+                      "ZA-c7010a9-93d2f2f716604c6fdd2e2bff",
+                      "ZA-c7010a9-76051e6dd360414b32a0a2bc",
+                      "ZA-c7010a9-a3bee6d0aadd71c673127a63",
+                      "ZA-c7010a9-6ead19bf2457855eaa32bea3",
+                      "ZA-c7010a9-52e3a5b946ff5a2410b74a61",
+                      "ZA-c7010a9-36ec86bb0cb753aee7367b6e",
+                      "ZA-c7010a9-59a894b54ef84c1c8d84cafa",
+                      "ZA-c7010a9-b5f374c414d15a1cd22e00a0",
+                      "ZA-c7010a9-f446a9c4e26017bc0a31f19d",
+                      "ZA-c7010a9-2a1702311206cf52e05ada19",
+                      "ZA-c7010a9-20021c7259ac21d6e098e89e",
+                      "ZA-c7010a9-9bd06b86e29af4e0f43ae094"
+                    ]
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "대흉근",
+              "name": "Clavicular head of pectoralis major muscle.r",
+              "sourceKey": "ZA-c7010a9-72ab84e76cdf041dd9425609",
+              "regionIds": [
+                "thorax"
+              ],
+              "sourceSide": "right",
+              "options": [
+                {
+                  "label": "팔 모음 · 어깨 모음",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-S03-R-PECT-CLAV-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-s05-pect-right/motion.glb",
+                  "sha256": "0819358fa0a5b41bbb2cd965663bafbbd4374444999dad304b02eea463583f1f",
+                  "side": "right",
+                  "actionId": "T66-PRIORITY-S03-R-PECT-CLAV-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "팔을 살짝 벌린 준비 자세에서 몸통 쪽으로 모으는 대흉근의 대표 작용을 봅니다. 쇄골부·흉늑부·배부분의 몸통 쪽 연결은 유지되고 위팔뼈 쪽을 따라 표면이 변형됩니다. 선택한 부분과 주변 구조를 함께 표시합니다.",
+                  "contextSurfaces": 117,
+                  "poseControl": {
+                    "label": "준비 자세 각도",
+                    "startDegrees": 0,
+                    "endDegrees": -10.4,
+                    "combination": "single_dof_only",
+                    "actionDirection": "reverse",
+                    "observationDirection": [
+                      0.55,
+                      0,
+                      0.84
+                    ],
+                    "framingSourceKeys": [
+                      "ZA-c7010a9-34b418ba01ebccb353db5982",
+                      "ZA-c7010a9-60fdfbce8b40f76046cc1110",
+                      "ZA-c7010a9-be2ab281ed58d1030a35fdaf",
+                      "ZA-c7010a9-3a414d5573f8ef7250596305",
+                      "ZA-c7010a9-72ab84e76cdf041dd9425609",
+                      "ZA-c7010a9-2ea5931bed7570848730b3f4",
+                      "ZA-c7010a9-a7c8e4f4119fede30c949007",
+                      "ZA-c7010a9-b4f9757ec42328a1efde114c",
+                      "ZA-c7010a9-ffe55aa5a6ff3a8b70228377",
+                      "ZA-c7010a9-e989df3e3f16431a2b691130",
+                      "ZA-c7010a9-047342c7f1d929f381127788",
+                      "ZA-c7010a9-6cc53bec8353c2366fb105d9",
+                      "ZA-c7010a9-52e3a5b946ff5a2410b74a61",
+                      "ZA-c7010a9-14aa9a315e88405c9c6bc52f",
+                      "ZA-c7010a9-76f9ee93e618e98ca6011193",
+                      "ZA-c7010a9-85c6f971412a2c833918b5ac",
+                      "ZA-c7010a9-16eb71d8f51c751c44504d63",
+                      "ZA-c7010a9-d8afd5f96dc2401d40f9aec8",
+                      "ZA-c7010a9-b877f6a487dfee3568e4d4dc",
+                      "ZA-c7010a9-00bfd47edef004ed6a3f5b89"
+                    ]
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "대흉근",
+              "name": "Sternocostal head of pectoralis major muscle.l",
+              "sourceKey": "ZA-c7010a9-e4a7d3329f606e0541166646",
+              "regionIds": [
+                "thorax"
+              ],
+              "sourceSide": "left",
+              "options": [
+                {
+                  "label": "팔 모음 · 어깨 모음",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-S03-L-PECT-STERN-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-s05-pect-left/motion.glb",
+                  "sha256": "8e4fdf2e626caef9211947b93639877abace552bf32a7120f112f7e97fc61566",
+                  "side": "left",
+                  "actionId": "T66-PRIORITY-S03-L-PECT-STERN-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "팔을 살짝 벌린 준비 자세에서 몸통 쪽으로 모으는 대흉근의 대표 작용을 봅니다. 쇄골부·흉늑부·배부분의 몸통 쪽 연결은 유지되고 위팔뼈 쪽을 따라 표면이 변형됩니다. 선택한 부분과 주변 구조를 함께 표시합니다.",
+                  "contextSurfaces": 117,
+                  "poseControl": {
+                    "label": "준비 자세 각도",
+                    "startDegrees": 0,
+                    "endDegrees": 10.4,
+                    "combination": "single_dof_only",
+                    "actionDirection": "reverse",
+                    "observationDirection": [
+                      0.55,
+                      0,
+                      0.84
+                    ],
+                    "framingSourceKeys": [
+                      "ZA-c7010a9-68847f9641b9adb6808dc865",
+                      "ZA-c7010a9-25e67d646be42500458282ca",
+                      "ZA-c7010a9-edf488fe677ac2ddf714c8bd",
+                      "ZA-c7010a9-07d4e851bc713a1c5bb0b8f9",
+                      "ZA-c7010a9-9648fd79baf7b216be0e8c91",
+                      "ZA-c7010a9-e4a7d3329f606e0541166646",
+                      "ZA-c7010a9-a7c8e4f4119fede30c949007",
+                      "ZA-c7010a9-d3e80a278002c84b9d9b0524",
+                      "ZA-c7010a9-93d2f2f716604c6fdd2e2bff",
+                      "ZA-c7010a9-76051e6dd360414b32a0a2bc",
+                      "ZA-c7010a9-a3bee6d0aadd71c673127a63",
+                      "ZA-c7010a9-6ead19bf2457855eaa32bea3",
+                      "ZA-c7010a9-52e3a5b946ff5a2410b74a61",
+                      "ZA-c7010a9-36ec86bb0cb753aee7367b6e",
+                      "ZA-c7010a9-59a894b54ef84c1c8d84cafa",
+                      "ZA-c7010a9-b5f374c414d15a1cd22e00a0",
+                      "ZA-c7010a9-f446a9c4e26017bc0a31f19d",
+                      "ZA-c7010a9-2a1702311206cf52e05ada19",
+                      "ZA-c7010a9-20021c7259ac21d6e098e89e",
+                      "ZA-c7010a9-9bd06b86e29af4e0f43ae094"
+                    ]
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "대흉근",
+              "name": "Sternocostal head of pectoralis major muscle.r",
+              "sourceKey": "ZA-c7010a9-2ea5931bed7570848730b3f4",
+              "regionIds": [
+                "thorax"
+              ],
+              "sourceSide": "right",
+              "options": [
+                {
+                  "label": "팔 모음 · 어깨 모음",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-S03-R-PECT-STERN-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-s05-pect-right/motion.glb",
+                  "sha256": "0819358fa0a5b41bbb2cd965663bafbbd4374444999dad304b02eea463583f1f",
+                  "side": "right",
+                  "actionId": "T66-PRIORITY-S03-R-PECT-STERN-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "팔을 살짝 벌린 준비 자세에서 몸통 쪽으로 모으는 대흉근의 대표 작용을 봅니다. 쇄골부·흉늑부·배부분의 몸통 쪽 연결은 유지되고 위팔뼈 쪽을 따라 표면이 변형됩니다. 선택한 부분과 주변 구조를 함께 표시합니다.",
+                  "contextSurfaces": 117,
+                  "poseControl": {
+                    "label": "준비 자세 각도",
+                    "startDegrees": 0,
+                    "endDegrees": -10.4,
+                    "combination": "single_dof_only",
+                    "actionDirection": "reverse",
+                    "observationDirection": [
+                      0.55,
+                      0,
+                      0.84
+                    ],
+                    "framingSourceKeys": [
+                      "ZA-c7010a9-34b418ba01ebccb353db5982",
+                      "ZA-c7010a9-60fdfbce8b40f76046cc1110",
+                      "ZA-c7010a9-be2ab281ed58d1030a35fdaf",
+                      "ZA-c7010a9-3a414d5573f8ef7250596305",
+                      "ZA-c7010a9-72ab84e76cdf041dd9425609",
+                      "ZA-c7010a9-2ea5931bed7570848730b3f4",
+                      "ZA-c7010a9-a7c8e4f4119fede30c949007",
+                      "ZA-c7010a9-b4f9757ec42328a1efde114c",
+                      "ZA-c7010a9-ffe55aa5a6ff3a8b70228377",
+                      "ZA-c7010a9-e989df3e3f16431a2b691130",
+                      "ZA-c7010a9-047342c7f1d929f381127788",
+                      "ZA-c7010a9-6cc53bec8353c2366fb105d9",
+                      "ZA-c7010a9-52e3a5b946ff5a2410b74a61",
+                      "ZA-c7010a9-14aa9a315e88405c9c6bc52f",
+                      "ZA-c7010a9-76f9ee93e618e98ca6011193",
+                      "ZA-c7010a9-85c6f971412a2c833918b5ac",
+                      "ZA-c7010a9-16eb71d8f51c751c44504d63",
+                      "ZA-c7010a9-d8afd5f96dc2401d40f9aec8",
+                      "ZA-c7010a9-b877f6a487dfee3568e4d4dc",
+                      "ZA-c7010a9-00bfd47edef004ed6a3f5b89"
+                    ]
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "견갑거근",
+              "name": "Levator scapulae.l",
+              "sourceKey": "ZA-c7010a9-efabaac8183789cad65a55e6",
+              "regionIds": [
+                "back",
+                "neck",
+                "shoulder-scapular"
+              ],
+              "sourceSide": "left",
+              "options": [
+                {
+                  "label": "어깨뼈 올림",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-S03-L-LEV-LEV-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-s05-lev-left/motion.glb",
+                  "sha256": "3aa234d9f7495b9c91f35ae8e704d6aaf721c8b3dbb8b744bce83ba24ca404a2",
+                  "side": "left",
+                  "actionId": "T66-PRIORITY-S03-L-LEV-LEV-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "목뼈 쪽 연결을 유지하면서 어깨뼈가 위로 올라가는 견갑거근의 대표 작용을 봅니다. 어깨뼈·빗장뼈와 연결된 팔의 문맥을 함께 관찰합니다.",
+                  "contextSurfaces": 117,
+                  "poseControl": {
+                    "label": "어깨띠 올림 각도",
+                    "startDegrees": 0,
+                    "endDegrees": 6.5,
+                    "combination": "single_dof_only",
+                    "actionDirection": "forward",
+                    "observationDirection": [
+                      0.35,
+                      0.1,
+                      -0.93
+                    ],
+                    "framingSourceKeys": [
+                      "ZA-c7010a9-25e67d646be42500458282ca",
+                      "ZA-c7010a9-edf488fe677ac2ddf714c8bd",
+                      "ZA-c7010a9-01d3b746fffced72073c9cf4",
+                      "ZA-c7010a9-9f03a59b82316afbeea1b631",
+                      "ZA-c7010a9-ec06f162cb073e506509724d",
+                      "ZA-c7010a9-efabaac8183789cad65a55e6",
+                      "ZA-c7010a9-bc1b5e5fc64c6cbbbab9c03e",
+                      "ZA-c7010a9-fc7b5ebec6fab48ae5ae8ebf",
+                      "ZA-c7010a9-ba233b3437c11ebd1878bb33",
+                      "ZA-c7010a9-79fdb2da04a91feede8dc361",
+                      "ZA-c7010a9-10fbd529e96cb0d19ef8752b",
+                      "ZA-c7010a9-d1a470dc79c9ce82d1cca60c",
+                      "ZA-c7010a9-b2ebff66eb1792f6e8e32080",
+                      "ZA-c7010a9-76e5da8886205c6c995b337d",
+                      "ZA-c7010a9-b152318736adaa2906689dd4",
+                      "ZA-c7010a9-762ce47ecb86b812a16aeaef",
+                      "ZA-c7010a9-70797c869b775802950660dd",
+                      "ZA-c7010a9-2efd0d84f3e7cb96e0dfe800"
+                    ],
+                    "contextOpacity": 0.25
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "견갑거근",
+              "name": "Levator scapulae.r",
+              "sourceKey": "ZA-c7010a9-93bf352448accd9e7356fc10",
+              "regionIds": [
+                "back",
+                "neck",
+                "shoulder-scapular"
+              ],
+              "sourceSide": "right",
+              "options": [
+                {
+                  "label": "어깨뼈 올림",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-S03-R-LEV-LEV-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-s05-lev-right/motion.glb",
+                  "sha256": "60d81dc32e02ef0de7c1e71cee96f80f8595d123ff8b76cbaf5c38f7b88e1a35",
+                  "side": "right",
+                  "actionId": "T66-PRIORITY-S03-R-LEV-LEV-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "목뼈 쪽 연결을 유지하면서 어깨뼈가 위로 올라가는 견갑거근의 대표 작용을 봅니다. 어깨뼈·빗장뼈와 연결된 팔의 문맥을 함께 관찰합니다.",
+                  "contextSurfaces": 117,
+                  "poseControl": {
+                    "label": "어깨띠 올림 각도",
+                    "startDegrees": 0,
+                    "endDegrees": -6.5,
+                    "combination": "single_dof_only",
+                    "actionDirection": "forward",
+                    "observationDirection": [
+                      0.35,
+                      0.1,
+                      -0.93
+                    ],
+                    "framingSourceKeys": [
+                      "ZA-c7010a9-60fdfbce8b40f76046cc1110",
+                      "ZA-c7010a9-be2ab281ed58d1030a35fdaf",
+                      "ZA-c7010a9-01d3b746fffced72073c9cf4",
+                      "ZA-c7010a9-9f03a59b82316afbeea1b631",
+                      "ZA-c7010a9-ec06f162cb073e506509724d",
+                      "ZA-c7010a9-93bf352448accd9e7356fc10",
+                      "ZA-c7010a9-96cb4db8fde040d91dd1119e",
+                      "ZA-c7010a9-0f9baaa60e90f20ca5ccb7e8",
+                      "ZA-c7010a9-ba233b3437c11ebd1878bb33",
+                      "ZA-c7010a9-79fdb2da04a91feede8dc361",
+                      "ZA-c7010a9-10fbd529e96cb0d19ef8752b",
+                      "ZA-c7010a9-d1a470dc79c9ce82d1cca60c",
+                      "ZA-c7010a9-b2ebff66eb1792f6e8e32080",
+                      "ZA-c7010a9-76e5da8886205c6c995b337d",
+                      "ZA-c7010a9-b152318736adaa2906689dd4",
+                      "ZA-c7010a9-762ce47ecb86b812a16aeaef",
+                      "ZA-c7010a9-70797c869b775802950660dd",
+                      "ZA-c7010a9-2efd0d84f3e7cb96e0dfe800"
+                    ],
+                    "contextOpacity": 0.25
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "능형근",
+              "name": "Rhomboid major muscle.l",
+              "sourceKey": "ZA-c7010a9-bc1b5e5fc64c6cbbbab9c03e",
+              "regionIds": [
+                "back"
+              ],
+              "sourceSide": "left",
+              "options": [
+                {
+                  "label": "어깨뼈 뒤당김",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-S03-L-RHOM-MAJOR-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-s05-rhom-left/motion.glb",
+                  "sha256": "cc86df9bc619d5282da69dd100ca163e38d606a73cb040b4b69413d4b2e8a9a6",
+                  "side": "left",
+                  "actionId": "T66-PRIORITY-S03-L-RHOM-MAJOR-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "어깨뼈가 앞쪽으로 이동한 준비 자세에서 척추 쪽으로 뒤당겨지는 능형근의 대표 작용을 봅니다. 대능형근과 소능형근은 각각의 실제 표면과 척추 쪽 연결을 유지합니다.",
+                  "contextSurfaces": 117,
+                  "poseControl": {
+                    "label": "준비 자세 각도",
+                    "startDegrees": 0,
+                    "endDegrees": -6.5,
+                    "combination": "single_dof_only",
+                    "actionDirection": "reverse",
+                    "observationDirection": [
+                      0.35,
+                      0.1,
+                      -0.93
+                    ],
+                    "framingSourceKeys": [
+                      "ZA-c7010a9-25e67d646be42500458282ca",
+                      "ZA-c7010a9-edf488fe677ac2ddf714c8bd",
+                      "ZA-c7010a9-01d3b746fffced72073c9cf4",
+                      "ZA-c7010a9-9f03a59b82316afbeea1b631",
+                      "ZA-c7010a9-ec06f162cb073e506509724d",
+                      "ZA-c7010a9-efabaac8183789cad65a55e6",
+                      "ZA-c7010a9-bc1b5e5fc64c6cbbbab9c03e",
+                      "ZA-c7010a9-fc7b5ebec6fab48ae5ae8ebf",
+                      "ZA-c7010a9-ba233b3437c11ebd1878bb33",
+                      "ZA-c7010a9-79fdb2da04a91feede8dc361",
+                      "ZA-c7010a9-10fbd529e96cb0d19ef8752b",
+                      "ZA-c7010a9-d1a470dc79c9ce82d1cca60c",
+                      "ZA-c7010a9-b2ebff66eb1792f6e8e32080",
+                      "ZA-c7010a9-76e5da8886205c6c995b337d",
+                      "ZA-c7010a9-b152318736adaa2906689dd4",
+                      "ZA-c7010a9-762ce47ecb86b812a16aeaef",
+                      "ZA-c7010a9-70797c869b775802950660dd",
+                      "ZA-c7010a9-2efd0d84f3e7cb96e0dfe800"
+                    ],
+                    "contextOpacity": 0.25
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "능형근",
+              "name": "Rhomboid major muscle.r",
+              "sourceKey": "ZA-c7010a9-96cb4db8fde040d91dd1119e",
+              "regionIds": [
+                "back"
+              ],
+              "sourceSide": "right",
+              "options": [
+                {
+                  "label": "어깨뼈 뒤당김",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-S03-R-RHOM-MAJOR-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-s05-rhom-right/motion.glb",
+                  "sha256": "5afca51945313dd4dad59522f2c53e991be849c0c4d2ab357dd63592c88255e3",
+                  "side": "right",
+                  "actionId": "T66-PRIORITY-S03-R-RHOM-MAJOR-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "어깨뼈가 앞쪽으로 이동한 준비 자세에서 척추 쪽으로 뒤당겨지는 능형근의 대표 작용을 봅니다. 대능형근과 소능형근은 각각의 실제 표면과 척추 쪽 연결을 유지합니다.",
+                  "contextSurfaces": 117,
+                  "poseControl": {
+                    "label": "준비 자세 각도",
+                    "startDegrees": 0,
+                    "endDegrees": 6.5,
+                    "combination": "single_dof_only",
+                    "actionDirection": "reverse",
+                    "observationDirection": [
+                      0.35,
+                      0.1,
+                      -0.93
+                    ],
+                    "framingSourceKeys": [
+                      "ZA-c7010a9-60fdfbce8b40f76046cc1110",
+                      "ZA-c7010a9-be2ab281ed58d1030a35fdaf",
+                      "ZA-c7010a9-01d3b746fffced72073c9cf4",
+                      "ZA-c7010a9-9f03a59b82316afbeea1b631",
+                      "ZA-c7010a9-ec06f162cb073e506509724d",
+                      "ZA-c7010a9-93bf352448accd9e7356fc10",
+                      "ZA-c7010a9-96cb4db8fde040d91dd1119e",
+                      "ZA-c7010a9-0f9baaa60e90f20ca5ccb7e8",
+                      "ZA-c7010a9-ba233b3437c11ebd1878bb33",
+                      "ZA-c7010a9-79fdb2da04a91feede8dc361",
+                      "ZA-c7010a9-10fbd529e96cb0d19ef8752b",
+                      "ZA-c7010a9-d1a470dc79c9ce82d1cca60c",
+                      "ZA-c7010a9-b2ebff66eb1792f6e8e32080",
+                      "ZA-c7010a9-76e5da8886205c6c995b337d",
+                      "ZA-c7010a9-b152318736adaa2906689dd4",
+                      "ZA-c7010a9-762ce47ecb86b812a16aeaef",
+                      "ZA-c7010a9-70797c869b775802950660dd",
+                      "ZA-c7010a9-2efd0d84f3e7cb96e0dfe800"
+                    ],
+                    "contextOpacity": 0.25
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "능형근",
+              "name": "Rhomboid minor muscle.l",
+              "sourceKey": "ZA-c7010a9-fc7b5ebec6fab48ae5ae8ebf",
+              "regionIds": [
+                "back"
+              ],
+              "sourceSide": "left",
+              "options": [
+                {
+                  "label": "어깨뼈 뒤당김",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-S03-L-RHOM-MINOR-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-s05-rhom-left/motion.glb",
+                  "sha256": "cc86df9bc619d5282da69dd100ca163e38d606a73cb040b4b69413d4b2e8a9a6",
+                  "side": "left",
+                  "actionId": "T66-PRIORITY-S03-L-RHOM-MINOR-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "어깨뼈가 앞쪽으로 이동한 준비 자세에서 척추 쪽으로 뒤당겨지는 능형근의 대표 작용을 봅니다. 대능형근과 소능형근은 각각의 실제 표면과 척추 쪽 연결을 유지합니다.",
+                  "contextSurfaces": 117,
+                  "poseControl": {
+                    "label": "준비 자세 각도",
+                    "startDegrees": 0,
+                    "endDegrees": -6.5,
+                    "combination": "single_dof_only",
+                    "actionDirection": "reverse",
+                    "observationDirection": [
+                      0.35,
+                      0.1,
+                      -0.93
+                    ],
+                    "framingSourceKeys": [
+                      "ZA-c7010a9-25e67d646be42500458282ca",
+                      "ZA-c7010a9-edf488fe677ac2ddf714c8bd",
+                      "ZA-c7010a9-01d3b746fffced72073c9cf4",
+                      "ZA-c7010a9-9f03a59b82316afbeea1b631",
+                      "ZA-c7010a9-ec06f162cb073e506509724d",
+                      "ZA-c7010a9-efabaac8183789cad65a55e6",
+                      "ZA-c7010a9-bc1b5e5fc64c6cbbbab9c03e",
+                      "ZA-c7010a9-fc7b5ebec6fab48ae5ae8ebf",
+                      "ZA-c7010a9-ba233b3437c11ebd1878bb33",
+                      "ZA-c7010a9-79fdb2da04a91feede8dc361",
+                      "ZA-c7010a9-10fbd529e96cb0d19ef8752b",
+                      "ZA-c7010a9-d1a470dc79c9ce82d1cca60c",
+                      "ZA-c7010a9-b2ebff66eb1792f6e8e32080",
+                      "ZA-c7010a9-76e5da8886205c6c995b337d",
+                      "ZA-c7010a9-b152318736adaa2906689dd4",
+                      "ZA-c7010a9-762ce47ecb86b812a16aeaef",
+                      "ZA-c7010a9-70797c869b775802950660dd",
+                      "ZA-c7010a9-2efd0d84f3e7cb96e0dfe800"
+                    ],
+                    "contextOpacity": 0.25
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "능형근",
+              "name": "Rhomboid minor muscle.r",
+              "sourceKey": "ZA-c7010a9-0f9baaa60e90f20ca5ccb7e8",
+              "regionIds": [
+                "back"
+              ],
+              "sourceSide": "right",
+              "options": [
+                {
+                  "label": "어깨뼈 뒤당김",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-S03-R-RHOM-MINOR-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-s05-rhom-right/motion.glb",
+                  "sha256": "5afca51945313dd4dad59522f2c53e991be849c0c4d2ab357dd63592c88255e3",
+                  "side": "right",
+                  "actionId": "T66-PRIORITY-S03-R-RHOM-MINOR-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "어깨뼈가 앞쪽으로 이동한 준비 자세에서 척추 쪽으로 뒤당겨지는 능형근의 대표 작용을 봅니다. 대능형근과 소능형근은 각각의 실제 표면과 척추 쪽 연결을 유지합니다.",
+                  "contextSurfaces": 117,
+                  "poseControl": {
+                    "label": "준비 자세 각도",
+                    "startDegrees": 0,
+                    "endDegrees": 6.5,
+                    "combination": "single_dof_only",
+                    "actionDirection": "reverse",
+                    "observationDirection": [
+                      0.35,
+                      0.1,
+                      -0.93
+                    ],
+                    "framingSourceKeys": [
+                      "ZA-c7010a9-60fdfbce8b40f76046cc1110",
+                      "ZA-c7010a9-be2ab281ed58d1030a35fdaf",
+                      "ZA-c7010a9-01d3b746fffced72073c9cf4",
+                      "ZA-c7010a9-9f03a59b82316afbeea1b631",
+                      "ZA-c7010a9-ec06f162cb073e506509724d",
+                      "ZA-c7010a9-93bf352448accd9e7356fc10",
+                      "ZA-c7010a9-96cb4db8fde040d91dd1119e",
+                      "ZA-c7010a9-0f9baaa60e90f20ca5ccb7e8",
+                      "ZA-c7010a9-ba233b3437c11ebd1878bb33",
+                      "ZA-c7010a9-79fdb2da04a91feede8dc361",
+                      "ZA-c7010a9-10fbd529e96cb0d19ef8752b",
+                      "ZA-c7010a9-d1a470dc79c9ce82d1cca60c",
+                      "ZA-c7010a9-b2ebff66eb1792f6e8e32080",
+                      "ZA-c7010a9-76e5da8886205c6c995b337d",
+                      "ZA-c7010a9-b152318736adaa2906689dd4",
+                      "ZA-c7010a9-762ce47ecb86b812a16aeaef",
+                      "ZA-c7010a9-70797c869b775802950660dd",
+                      "ZA-c7010a9-2efd0d84f3e7cb96e0dfe800"
+                    ],
+                    "contextOpacity": 0.25
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "복직근",
+              "name": "Rectus abdominis muscle.l",
+              "sourceKey": "ZA-c7010a9-33941d62db2cd36b20fe5945",
+              "regionIds": [
+                "abdomen-lumbar"
+              ],
+              "sourceSide": "left",
+              "options": [
+                {
+                  "label": "몸통 굽힘",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-S04-L-RECTUS-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-s04-flex/motion.glb",
+                  "sha256": "fd09265a937bebff65f0d1b095bc2d0350f13b7222e53a90c32bb40b80c43adf",
+                  "side": "left",
+                  "actionId": "T66-PRIORITY-S04-L-RECTUS-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "골반을 유지하면서 흉곽이 골반 쪽으로 가까워지는 복직근의 대표 작용을 봅니다. 양쪽 복직근과 주변 배 근육이 함께 변형되며 척추 분절과 흉곽이 따라 움직입니다.",
+                  "contextSurfaces": 365,
+                  "poseControl": {
+                    "label": "몸통 굽힘 각도",
+                    "startDegrees": 0,
+                    "endDegrees": 14,
+                    "combination": "single_dof_only",
+                    "actionDirection": "forward",
+                    "observationDirection": [
+                      0.8,
+                      0.05,
+                      0.6
+                    ],
+                    "framingSourceKeys": [
+                      "ZA-c7010a9-0532a0f965344c7db7218160",
+                      "ZA-c7010a9-0bc91f56657c8ad942f9f283",
+                      "ZA-c7010a9-33941d62db2cd36b20fe5945",
+                      "ZA-c7010a9-484ccd540149a7cdad5c74a8",
+                      "ZA-c7010a9-492b8564566beb4155afe719",
+                      "ZA-c7010a9-4ce8a03807489dbb188edadb",
+                      "ZA-c7010a9-74a765dc396d690d1642153e",
+                      "ZA-c7010a9-9184adfd521c527f3b352e71",
+                      "ZA-c7010a9-95b8d859c84ae9e56cacdafc",
+                      "ZA-c7010a9-9f03a59b82316afbeea1b631",
+                      "ZA-c7010a9-aae2ed33f4a0bf4f1ad5387a",
+                      "ZA-c7010a9-d75abb958e1463ceecb5430b",
+                      "ZA-c7010a9-eb0bd1853a90acada85e9177",
+                      "ZA-c7010a9-ecb65ff4cc3da710e5a2d157"
+                    ],
+                    "contextOpacity": 0.25,
+                    "observationZoom": 1.3
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "복직근",
+              "name": "Rectus abdominis muscle.r",
+              "sourceKey": "ZA-c7010a9-9184adfd521c527f3b352e71",
+              "regionIds": [
+                "abdomen-lumbar"
+              ],
+              "sourceSide": "right",
+              "options": [
+                {
+                  "label": "몸통 굽힘",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-S04-R-RECTUS-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-s04-flex/motion.glb",
+                  "sha256": "fd09265a937bebff65f0d1b095bc2d0350f13b7222e53a90c32bb40b80c43adf",
+                  "side": "right",
+                  "actionId": "T66-PRIORITY-S04-R-RECTUS-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "골반을 유지하면서 흉곽이 골반 쪽으로 가까워지는 복직근의 대표 작용을 봅니다. 양쪽 복직근과 주변 배 근육이 함께 변형되며 척추 분절과 흉곽이 따라 움직입니다.",
+                  "contextSurfaces": 365,
+                  "poseControl": {
+                    "label": "몸통 굽힘 각도",
+                    "startDegrees": 0,
+                    "endDegrees": 14,
+                    "combination": "single_dof_only",
+                    "actionDirection": "forward",
+                    "observationDirection": [
+                      0.8,
+                      0.05,
+                      0.6
+                    ],
+                    "framingSourceKeys": [
+                      "ZA-c7010a9-0532a0f965344c7db7218160",
+                      "ZA-c7010a9-0bc91f56657c8ad942f9f283",
+                      "ZA-c7010a9-33941d62db2cd36b20fe5945",
+                      "ZA-c7010a9-484ccd540149a7cdad5c74a8",
+                      "ZA-c7010a9-492b8564566beb4155afe719",
+                      "ZA-c7010a9-4ce8a03807489dbb188edadb",
+                      "ZA-c7010a9-74a765dc396d690d1642153e",
+                      "ZA-c7010a9-9184adfd521c527f3b352e71",
+                      "ZA-c7010a9-95b8d859c84ae9e56cacdafc",
+                      "ZA-c7010a9-9f03a59b82316afbeea1b631",
+                      "ZA-c7010a9-aae2ed33f4a0bf4f1ad5387a",
+                      "ZA-c7010a9-d75abb958e1463ceecb5430b",
+                      "ZA-c7010a9-eb0bd1853a90acada85e9177",
+                      "ZA-c7010a9-ecb65ff4cc3da710e5a2d157"
+                    ],
+                    "contextOpacity": 0.25,
+                    "observationZoom": 1.3
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "외복사근",
+              "name": "External abdominal oblique muscle.l",
+              "sourceKey": "ZA-c7010a9-d75abb958e1463ceecb5430b",
+              "regionIds": [
+                "abdomen-lumbar"
+              ],
+              "sourceSide": "left",
+              "options": [
+                {
+                  "label": "양측 협응 몸통 굽힘",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-S04-L-OBLIQUE-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-s04-flex/motion.glb",
+                  "sha256": "fd09265a937bebff65f0d1b095bc2d0350f13b7222e53a90c32bb40b80c43adf",
+                  "side": "left",
+                  "actionId": "T66-PRIORITY-S04-L-OBLIQUE-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "양쪽 외복사근이 함께 관여하는 몸통 굽힘을 보여줍니다. 넓은 배바깥빗근 표면과 주변 배 근육이 함께 변형됩니다. 한쪽 외복사근이 관여하는 반대 방향 몸통 돌림과 구분되는 시범입니다.",
+                  "contextSurfaces": 365,
+                  "poseControl": {
+                    "label": "몸통 굽힘 각도",
+                    "startDegrees": 0,
+                    "endDegrees": 14,
+                    "combination": "single_dof_only",
+                    "actionDirection": "forward",
+                    "observationDirection": [
+                      0.3,
+                      0.35,
+                      0.88
+                    ],
+                    "framingSourceKeys": [
+                      "ZA-c7010a9-0532a0f965344c7db7218160",
+                      "ZA-c7010a9-0bc91f56657c8ad942f9f283",
+                      "ZA-c7010a9-33941d62db2cd36b20fe5945",
+                      "ZA-c7010a9-484ccd540149a7cdad5c74a8",
+                      "ZA-c7010a9-492b8564566beb4155afe719",
+                      "ZA-c7010a9-4ce8a03807489dbb188edadb",
+                      "ZA-c7010a9-74a765dc396d690d1642153e",
+                      "ZA-c7010a9-9184adfd521c527f3b352e71",
+                      "ZA-c7010a9-95b8d859c84ae9e56cacdafc",
+                      "ZA-c7010a9-9f03a59b82316afbeea1b631",
+                      "ZA-c7010a9-aae2ed33f4a0bf4f1ad5387a",
+                      "ZA-c7010a9-d75abb958e1463ceecb5430b",
+                      "ZA-c7010a9-eb0bd1853a90acada85e9177",
+                      "ZA-c7010a9-ecb65ff4cc3da710e5a2d157"
+                    ],
+                    "contextOpacity": 0.25,
+                    "observationZoom": 1.3
+                  }
+                }
+              ],
+              "passed": true
+            },
+            {
+              "group": "외복사근",
+              "name": "External abdominal oblique muscle.r",
+              "sourceKey": "ZA-c7010a9-eb0bd1853a90acada85e9177",
+              "regionIds": [
+                "abdomen-lumbar"
+              ],
+              "sourceSide": "right",
+              "options": [
+                {
+                  "label": "양측 협응 몸통 굽힘",
+                  "learningIntent": "muscle_action",
+                  "assetId": "T66-PRIORITY-S04-R-OBLIQUE-ASSET",
+                  "uri": "atlas-data/assets/motion/t66-priority-s04-flex/motion.glb",
+                  "sha256": "fd09265a937bebff65f0d1b095bc2d0350f13b7222e53a90c32bb40b80c43adf",
+                  "side": "right",
+                  "actionId": "T66-PRIORITY-S04-R-OBLIQUE-ACTION",
+                  "actualFileHashMatches": true,
+                  "explanation": "양쪽 외복사근이 함께 관여하는 몸통 굽힘을 보여줍니다. 넓은 배바깥빗근 표면과 주변 배 근육이 함께 변형됩니다. 한쪽 외복사근이 관여하는 반대 방향 몸통 돌림과 구분되는 시범입니다.",
+                  "contextSurfaces": 365,
+                  "poseControl": {
+                    "label": "몸통 굽힘 각도",
+                    "startDegrees": 0,
+                    "endDegrees": 14,
+                    "combination": "single_dof_only",
+                    "actionDirection": "forward",
+                    "observationDirection": [
+                      0.3,
+                      0.35,
+                      0.88
+                    ],
+                    "framingSourceKeys": [
+                      "ZA-c7010a9-0532a0f965344c7db7218160",
+                      "ZA-c7010a9-0bc91f56657c8ad942f9f283",
+                      "ZA-c7010a9-33941d62db2cd36b20fe5945",
+                      "ZA-c7010a9-484ccd540149a7cdad5c74a8",
+                      "ZA-c7010a9-492b8564566beb4155afe719",
+                      "ZA-c7010a9-4ce8a03807489dbb188edadb",
+                      "ZA-c7010a9-74a765dc396d690d1642153e",
+                      "ZA-c7010a9-9184adfd521c527f3b352e71",
+                      "ZA-c7010a9-95b8d859c84ae9e56cacdafc",
+                      "ZA-c7010a9-9f03a59b82316afbeea1b631",
+                      "ZA-c7010a9-aae2ed33f4a0bf4f1ad5387a",
+                      "ZA-c7010a9-d75abb958e1463ceecb5430b",
+                      "ZA-c7010a9-eb0bd1853a90acada85e9177",
+                      "ZA-c7010a9-ecb65ff4cc3da710e5a2d157"
+                    ],
+                    "contextOpacity": 0.25,
+                    "observationZoom": 1.3
+                  }
+                }
+              ],
+              "passed": true
+            }
+          ],
+          "amplitude": {
+            "kneeExtensionDegrees": [
+              15,
+              19.5
+            ],
+            "pectoralAdductionMagnitudeDegrees": [
+              8,
+              10.4
+            ],
+            "levatorMagnitudeDegrees": [
+              5,
+              6.5
+            ],
+            "rhomboidRetractionMagnitudeDegrees": [
+              5,
+              6.5
+            ],
+            "ankleDegrees": 6.5,
+            "alreadyEnlargedT59Preserved": true,
+            "hipAlternateDegrees": 12,
+            "trunkDegrees": 14,
+            "trunkProjectionZoom": 1.3,
+            "trunkActual18Point2DegreeCandidateRegistered": false
+          },
+          "newDerivedGlbCount": 8,
+          "sourceOnly": true,
+          "humanReview": "not_performed",
+          "publicRedistribution": "held"
+        },
+        "nextManualPromptFile": "work/plans/t66-parallel-completion-2026-10-03/10-T85-ui-performance.txt"
       },
       "report": "work/reports/T66.md",
-      "promptFile": "work/plans/t66-priority-atlas-2026-10-05/01-nerve-learning.txt",
-      "acceptanceScope": "priority seven muscle groups with actual representative same-scene actions, and supported static nerve course/related-muscle learning; whole-body expansion remains backlog",
+      "promptFile": "work/plans/t66-priority-atlas-2026-10-05/05-integration-close.txt",
+      "acceptanceScope": "Seven priority muscle groups: all 20 available native side/parts have exact representative muscle_action bindings with intact bone/passive context, same-scene loop/rest/scrub, and supported static nerve course → related muscle → action → rest. Visible-amplitude treatment: actual +30% angles for knee/pectoral/scapular representatives, retained already-enlarged T59/native left ankle, 1.3 projection zoom for verified 14-degree trunk geometry. Whole-body and deferred larger-angle trunk engineering are outside this scoped pass.",
       "contractRevision": "app-completion-2026-10-01",
       "acceptanceContract": {
         "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
@@ -4255,7 +5335,31 @@
         ],
         "contentGapPolicy": "declared_feature_scope_pass_is_independent_of_exhaustive_content_research",
         "motionAmendment": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md",
-        "scopeAmendment": "priority-muscle-atlas-2026-10-05"
+        "scopeAmendment": "priority-muscle-atlas-2026-10-05",
+        "motionVisibilityTreatment": {
+          "kneeExtensionDegrees": [
+            15,
+            19.5
+          ],
+          "pectoralAdductionMagnitudeDegrees": [
+            8,
+            10.4
+          ],
+          "levatorMagnitudeDegrees": [
+            5,
+            6.5
+          ],
+          "rhomboidRetractionMagnitudeDegrees": [
+            5,
+            6.5
+          ],
+          "ankleDegrees": 6.5,
+          "alreadyEnlargedT59Preserved": true,
+          "hipAlternateDegrees": 12,
+          "trunkDegrees": 14,
+          "trunkProjectionZoom": 1.3,
+          "trunkActual18Point2DegreeCandidateRegistered": false
+        }
       },
       "absorbedWorkIds": [
         "T27",
@@ -4269,108 +5373,67 @@
       "scopeGoal": "all_declared_muscles_without_initial_shortlist",
       "planningAmendment": "user-normal-motion-all-muscles-bones-nerve-2026-10-02",
       "scopeRevision": "priority-muscle-atlas-2026-10-05",
-      "productReadiness": "partial_priority_motion_pending",
+      "productReadiness": "local_app_ready",
       "contentCompleteness": "partial",
       "knownContentGaps": {
-        "muscleTargetCount": 429,
-        "muscleMembershipCount": 447,
-        "sourceConceptCount": 232,
-        "sourceSurfaceCount": 462,
-        "primaryPlayableMuscleSourceSurfaces": 1,
-        "sourcePoseObservationSurfaces": 129,
-        "historicalMainFunctionSourceClipSurfaces": 1,
-        "qualitativeActionDemonstrationSelectorRows": 34,
-        "qualitativeActionDemonstrationGlbAssets": 26,
-        "passivePostureObservationSelectorRows": 4,
-        "passivePostureObservationGlbAssets": 2,
-        "muscleSourceActionRows": 311,
-        "uniqueMuscleSourceSurfacesWithMotionOrObservation": 129,
-        "uniqueSourceDerivedMotionGlbUris": 61,
-        "uniqueSourceDerivedMotionGlbSha256": 61,
-        "uniqueRuntimeMotionGlbUrisIncludingHistoricalT24Candidate": 62,
-        "uniqueRuntimeMotionGlbSha256IncludingHistoricalT24Candidate": 62,
-        "registeredBoneSourceInstancesWithFamilyRoles": 166,
-        "eligibleBoneSourceInstances": 210,
-        "independentAnatomicalBoneCount": null,
-        "registeredBoneFamilyBindingRows": 1581,
-        "independentBoneDofsAdded": 0,
-        "nativeNerveStaticSurfaces": 195,
-        "nativeNerveLabelGroupsNotConcepts": 98,
-        "independentNerveConceptCount": null,
-        "confirmedEntrapmentTextGroups": 5,
-        "abstractIndexEntrapmentGroups": 2,
-        "surroundingAnatomyOnlyGroups": 1,
-        "observedModelOnlyCourseGroups": 90,
-        "wave1FValidatedNerveTextWorkKeys": 30,
-        "wave1FMissingNerveTextWorkKeys": 68,
-        "dynamicNervePoses": 0,
-        "entrapmentCoordinateBindings": 0,
-        "newFullTargetExtentApprovals": 0,
-        "wave1PackageTemplatesNotAssets": 32,
-        "wave1UniqueActualGlbAssets": 28,
-        "wave1SelectorRelationsNotConcepts": 754,
-        "wave2DCandidateGlbsNotRegistered": 22,
-        "wave2ECandidateGlbsNotRegistered": 56,
-        "wave2EGeometryQcPassed": 38,
-        "wave2EGeometryQcFailed": 18,
-        "wave2EActionOutcomeQcPassed": 0,
-        "deferredWave2TargetRows": 276,
-        "deferredWave2MembershipRows": 290,
-        "deferredWave2SourceRows": 60,
-        "deferredWave2BoneContextRows": 21,
-        "canonicalHaBindings": 130,
-        "historical163Classification": {
-          "6": 6,
-          "20": 20,
-          "135": 135,
-          "2": 2
-        },
+        "wholeMuscleMotionGoal": "partial; seven representative groups supported, not all muscles/actions/whole-target extents",
+        "priorityAvailableSourceSurfaces": 20,
+        "priorityExactActionBindings": 22,
+        "priorityUniqueGlbUris": 13,
         "sourceOnly": true,
         "localSelection": "technical_only",
-        "publicRedistribution": "held",
         "humanReview": "not_performed",
-        "atlasActionLibraryLabelEntries": 13,
-        "atlasPlayableSourceActionBindings": 35,
-        "atlasQualitativeOrHistoricalActionSourceSurfaces": 19,
-        "newMotionAssetsThisCorrection": 0,
-        "atlasExactSourceActionLinks": 35,
-        "atlasActionSourceSurfaces": 19,
-        "sourceActionRowCount": 311,
-        "sourceActionRowInterpretation": "source-action ledger rows; not 311 distinct anatomical actions",
-        "wave2DWorkKeyOwnerMetadataCorrectedInWriterCopy": 16,
-        "wave2DAggregateCandidateIndexPresent": false,
-        "wave2DGeneratedCandidateGlbsNotRegistered": 22,
-        "wave2EAggregateArtifactCount": 206,
-        "wave2EAggregateArtifactsMatchingIndex": 205,
-        "wave2EAggregateIndexMismatches": 1,
-        "wave2EGeneratedCandidateGlbsNotRegistered": 56,
-        "wave2ENewRegistrationsThisWriter": 0,
-        "priorityMuscleGroups": [
-          "앞정강근",
-          "대흉근",
-          "견갑거근",
-          "대퇴직근",
-          "복직근",
-          "외복사근",
-          "능형근"
-        ],
-        "priorityActualPlayableSources": {
-          "Tibialis anterior muscle:right": 1
+        "publicRedistribution": "held",
+        "denominators": {
+          "targets": 542,
+          "memberships": 563,
+          "regions": 12,
+          "muscleTargets": 429,
+          "muscleMemberships": 447,
+          "muscleSourceConcepts": 232,
+          "muscleSourceSurfaces": 462,
+          "canonicalHaBindings": 130,
+          "historicalClassification163": [
+            6,
+            20,
+            135,
+            2
+          ]
         },
-        "priorityMotionCompleteness": "partial",
-        "nativeStaticNerveSurfaceCount": 195,
-        "nerveLabelGroupCount": 98,
-        "exactGeometryMotorRelationRows": 2,
-        "literatureConceptMotorRelationRows": 2,
-        "physiologicalForceOrActivationSupport": false
+        "futureActions": [
+          "other anatomical actions of the seven groups",
+          "muscles outside current priority scope",
+          "unilateral external-oblique rotation"
+        ],
+        "nerve": {
+          "staticSourceSurfaces": 195,
+          "nativeLabelsNotConcepts": 98,
+          "exactGeometryMotorRelationRows": 2,
+          "literatureConceptMotorRelationRows": 16,
+          "relationRows": 18,
+          "relatedNerveKeys": 9,
+          "relatedTargetSourceKeys": 44,
+          "dynamicPoses": 0,
+          "entrapmentCoordinateBindings": 0,
+          "textWorkKeysValidated": 30,
+          "textWorkKeysMissing": 68
+        },
+        "deferredEngineering": "work/evidence/T66/priority-integration-2026-10-05/deferred-engineering.json",
+        "approvals": "no new full extent/canonical HA/human/rights approval"
       },
-      "unresolvedProductBlockers": [
-        "우선7근육군 중 현재 오른쪽 앞정강근만 대표 작용 재생이 확인된다. 다른 available source/측/part의 실제 작용 제작·연결·검증이 필요하다.",
-        "액와/요골/정중/대퇴 등 현재 신경 카드의 운동근 미연결은 기존 근거 대조 후 지원 관계를 연결해야 한다. 전 신경 원문0-gap이나 실제 힘 측정은 요구하지 않는다.",
-        "새 우선 애니메이션과 신경 관계 변경 후 관련 실제 UI/정확한 viewport 및 최종 통합 검증이 필요하다."
-      ],
-      "currentInternalUnit": "nerve-and-priority-review",
-      "currentInternalUnitStatus": "reviewed_and_nerve_presentation_fixed_priority_motion_pending"
+      "unresolvedProductBlockers": [],
+      "currentInternalUnit": "priority-final-integration",
+      "currentInternalUnitStatus": "completed_passed",
+      "scopeAmendment": "priority-muscle-atlas-2026-10-05",
+      "evidence": [
+        "work/evidence/T66/priority-integration-2026-10-05/REPORT.md",
+        "work/evidence/T66/priority-integration-2026-10-05/runtime-scope-audit.json",
+        "work/evidence/T66/priority-integration-2026-10-05/dependency-audit.json",
+        "work/evidence/T66/priority-integration-2026-10-05/final-validation.json",
+        "work/evidence/T66/priority-integration-2026-10-05/browser-validation.json",
+        "work/evidence/T66/priority-integration-2026-10-05/trunk-display-enlargement.json",
+        "work/evidence/T66/priority-integration-2026-10-05/deferred-engineering.json"
+      ]
     },
     "T85": {
       "title": "전체 지원 움직임·통합 앱 품질 감사",

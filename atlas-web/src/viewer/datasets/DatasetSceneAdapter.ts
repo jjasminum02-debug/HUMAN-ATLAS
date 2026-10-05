@@ -71,6 +71,8 @@ export class DatasetSceneAdapter implements SourceMotionHost {
     async attachSourceMotion(asset: MotionAsset, resource: AnimationSceneResource,
         onTimeChange?: AnimationPlaybackOptions['onTimeChange'], onInvalidated?: (reason: string) => void,
         presentation?: { intent: MotionLearningIntent }): Promise<AnimationPlaybackController> {
+        const zoom = asset.poseControl?.observationZoom ?? 1;
+        if (!Number.isFinite(zoom) || zoom < 1 || zoom > 1.5) throw new Error('관찰 화면 확대 범위가 올바르지 않습니다.');
         this.restoreSourceMotion('replaced');
         this.motionIntent = presentation?.intent ?? 'posture_observation';
         const originalNodes = new Map<string, { node: THREE.Mesh; visible: boolean }>();
@@ -233,6 +235,10 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             this.fit(binding.members.filter(m => !framingKeys?.length || framingKeys.includes(m.sourceKey)).map(m => this.records.get(m.sourceKey)!).filter(row => row
                 && (row.kind === 'bone' ? this.view.bones : this.view.muscles)
                 && !this.view.hiddenSourceKeys?.includes(row.sourceKey)), 1.05);
+            this.scene.camera.zoom = zoom;
+            this.scene.camera.updateProjectionMatrix();
+            this.scene.requestRender();
+            this.apply();
             return player;
         } catch (error) {
             for (const [sourceKey, original] of originalNodes) {
@@ -328,7 +334,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             triangles: this.scene.renderer.info.render.triangles, geometries: this.scene.renderer.info.memory.geometries });
         this.scene.renderer.domElement.dataset.dataset = JSON.stringify({ root: this.scene.root.uuid, dataset: this.resources.dataset.namespace,
             regionIds: this.view.regionIds ?? (this.view.region ? [this.view.region] : []), highlighted: [...highlights], observingNerves: observe, nerveLayer: Boolean(this.view.nerves), poseId: this.view.poseId, visible: [...this.resources.nodes].filter(([, n]) => n.visible).map(([key]) => key), selected: this.view.selectedId, bytes: q.bytes, cacheEntries: q.loaded.size, evictions: q.evictions, cancellations: q.cancellations, lateReleases: q.lateReleases, wantedChunks: [...q.wanted], pending: q.pending.size, failed: [...q.failed],
-            camera: this.scene.camera.position.toArray(), calls: this.scene.renderer.info.render.calls, triangles: this.scene.renderer.info.render.triangles,
+            camera: this.scene.camera.position.toArray(), cameraTarget: this.scene.controls.target.toArray(), cameraZoom: this.scene.camera.zoom, cameraAspect: this.scene.camera.aspect, cameraFov: this.scene.camera.fov, calls: this.scene.renderer.info.render.calls, triangles: this.scene.renderer.info.render.triangles,
             motion: this.motion ? { assetId: this.motion.asset.id, contextKey: this.motion.contextKey,
                 learningIntent: this.motionIntent, phase: this.motionPhase,
                 surfaceCount: this.motion.originals.size, fixedCount: this.motion.asset.sourceBinding?.members.filter(m => m.role === 'fixed_structure').length } : null,
@@ -342,6 +348,8 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         }
         if (box.isEmpty())
             return;
+        this.scene.camera.zoom = 1;
+        this.scene.camera.updateProjectionMatrix();
         const center = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());
         const distance = Math.max(size.y, size.x / this.scene.camera.aspect) / (2 * Math.tan(THREE.MathUtils.degToRad(17.5))) * padding + size.z / 2;
         const direction = this.scene.camera.position.clone().sub(this.scene.controls.target);

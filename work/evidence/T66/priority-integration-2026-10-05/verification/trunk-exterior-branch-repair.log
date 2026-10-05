@@ -1,0 +1,8 @@
+branch-aware patch ZA-c7010a9-62a4fba42674f5d453c6e277 coincident seams 0 native face guards 6
+Traceback (most recent call last):
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T66/priority-integration-2026-10-05/repair-trunk-exterior-branch.py", line 37, in <module>
+    frame,c=source_topology_contact_patch_corrective(frame,rest,tri,active,locked|anchors,[],margin_metres=.0002,contact_guard_metres=.0007,shape_floor=.12,patch_rings=8,shape_seed_vertices=sorted(seeds),topology_groups=[g for g in groups if not set(g)&(locked|anchors)],force_contact_guard=bool(seeds));steps.append({'step':step,'directionalGuardSourceVertices':sorted(anchors),'corrective':c});local=(frame-M[:3,3])@np.linalg.inv(M[:3,:3]).T;local[list(locked)]=pos[list(locked)];delta=(local-pos).astype('<f4');pa=put(delta.tobytes(),'VEC3',len(pos));doc['accessors'][pa].update(min=delta.min(0).tolist(),max=delta.max(0).tolist());prim['targets'].append({'POSITION':pa,'NORMAL':put((normals(local,tri)-normal).astype('<f4').tobytes(),'VEC3',len(pos))})
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T66/priority-trunk-2026-10-05/trunk_contact_patch.py", line 89, in source_topology_contact_patch_corrective
+    raise ValueError(f'new bone contact intersects a fixed/moving endpoint mask: {key} {fresh.tolist()}')
+ValueError: new bone contact intersects a fixed/moving endpoint mask: ZA-c7010a9-492b8564566beb4155afe719 [2391]

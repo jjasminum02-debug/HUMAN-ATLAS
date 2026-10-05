@@ -1,0 +1,167 @@
+branch-aware patch ZA-c7010a9-62a4fba42674f5d453c6e277 coincident seams 0 native face guards 6
+carrier step 1
+carrier step 2
+carrier step 3
+carrier step 4
+carrier step 5
+carrier step 6
+carrier step 7
+carrier step 8
+carrier step 9
+carrier step 10
+carrier step 11
+carrier step 12
+carrier step 13
+carrier step 14
+carrier step 15
+carrier step 16
+carrier step 17
+carrier step 18
+carrier step 19
+carrier step 20
+carrier step 21
+carrier step 22
+carrier step 23
+carrier step 24
+carrier step 25
+carrier step 26
+carrier step 27
+carrier step 28
+carrier step 29
+carrier step 30
+carrier step 31
+carrier step 32
+carrier step 33
+carrier step 34
+carrier step 35
+carrier step 36
+carrier step 37
+carrier step 38
+carrier step 39
+carrier step 40
+carrier step 41
+carrier step 42
+carrier step 43
+carrier step 44
+carrier step 45
+carrier step 46
+carrier step 47
+carrier step 48
+carrier step 49
+carrier step 50
+carrier step 51
+carrier step 52
+carrier step 53
+carrier step 54
+carrier step 55
+carrier step 56
+carrier step 57
+carrier step 58
+carrier step 59
+carrier step 60
+carrier step 61
+carrier step 62
+carrier step 63
+carrier step 64
+branch-aware patch ZA-c7010a9-bef3937bee85a8c7bcc77d9c coincident seams 0 native face guards 6
+carrier step 1
+carrier step 2
+carrier step 3
+carrier step 4
+carrier step 5
+carrier step 6
+carrier step 7
+carrier step 8
+carrier step 9
+carrier step 10
+carrier step 11
+carrier step 12
+carrier step 13
+carrier step 14
+carrier step 15
+carrier step 16
+carrier step 17
+carrier step 18
+carrier step 19
+carrier step 20
+carrier step 21
+carrier step 22
+carrier step 23
+carrier step 24
+carrier step 25
+carrier step 26
+carrier step 27
+carrier step 28
+carrier step 29
+carrier step 30
+carrier step 31
+carrier step 32
+carrier step 33
+carrier step 34
+carrier step 35
+carrier step 36
+carrier step 37
+carrier step 38
+carrier step 39
+carrier step 40
+carrier step 41
+carrier step 42
+carrier step 43
+carrier step 44
+carrier step 45
+carrier step 46
+carrier step 47
+carrier step 48
+carrier step 49
+carrier step 50
+carrier step 51
+carrier step 52
+carrier step 53
+carrier step 54
+carrier step 55
+carrier step 56
+carrier step 57
+carrier step 58
+carrier step 59
+carrier step 60
+carrier step 61
+carrier step 62
+carrier step 63
+carrier step 64
+ZA-c7010a9-0032489e5062440b0fa49b28 True 0 0
+ZA-c7010a9-136297c30c138538f1cb3586 True 0 0
+ZA-c7010a9-1da479516bf0ec12416bcf15 True 0 0
+ZA-c7010a9-2231c6fbcbf2e0248adb4a72 True 0 0
+ZA-c7010a9-27afab07491db814dd099498 True 0 0
+ZA-c7010a9-33941d62db2cd36b20fe5945 True 0 0
+ZA-c7010a9-363dc833b44b54fc3df645a6 True 0 0
+ZA-c7010a9-36458588114c0db7bfa8a021 True 0 0
+ZA-c7010a9-3e4b09bb77ba1ca0ae6c92a4 True 0 0
+ZA-c7010a9-422683830aef648591844113 True 0 0
+ZA-c7010a9-4813d0c7b087c9af17839e9e True 0 0
+ZA-c7010a9-490e0e6cc6bdea38d63b7440 True 0 0
+ZA-c7010a9-4ab9026121346c07a1a49590 True 0 0
+ZA-c7010a9-57685950014655eebe68c4a6 True 0 0
+ZA-c7010a9-5e0f7dfea4470a1950ed42d8 True 0 0
+ZA-c7010a9-62a4fba42674f5d453c6e277 False 2 1
+ZA-c7010a9-6d200091f5d75fd817af12ad True 0 0
+ZA-c7010a9-7099bd7bc2d099935ed31603 True 0 0
+ZA-c7010a9-8217100657324a6f1e04260b True 0 0
+ZA-c7010a9-874a9a21ca0c01091bf356c0 True 0 0
+ZA-c7010a9-895f0d6632a783d45dc4ff12 True 0 0
+ZA-c7010a9-9184adfd521c527f3b352e71 True 0 0
+ZA-c7010a9-98148d5380ab1abd5154e41c True 0 0
+ZA-c7010a9-b549788aa5c22d0370829038 True 0 0
+ZA-c7010a9-bef3937bee85a8c7bcc77d9c False 2 1
+ZA-c7010a9-d75abb958e1463ceecb5430b True 0 0
+ZA-c7010a9-e7530af132273e8c7aa1745e True 0 0
+ZA-c7010a9-e88e987b81fea91de786e6fd True 0 0
+ZA-c7010a9-eb0bd1853a90acada85e9177 True 0 0
+ZA-c7010a9-f16b09418b31e886ea77b274 True 0 0
+ZA-c7010a9-f5ec9690fcbdd3f75d655fb9 True 0 0
+ZA-c7010a9-f981466588cab66b0ca123f0 True 0 0
+Traceback (most recent call last):
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T66/priority-integration-2026-10-05/repair-trunk-sternum-carrier.py", line 47, in <module>
+    pose.update(passed=all(r['passed'] for r in pose['rows']),motionSha256=sha(motion));geo.update(motionSha256=sha(motion),motionBytes=len(motion));save(d/'glb-pose-qc.json',pose);save(d/'geometry-record.json',geo);save(d/'contact-qc.json',{'passed':not failures,'failures':failures,'newContainmentMaximum':max((r['newContainedVertexCount'] for r in failures),default=0),'baselineOverlapPreserved':True});save(d/'native-sternum-carrier-receipt.json',{'oldMotionSha256':sha(raw),'newMotionSha256':sha(motion),'changedSourceKeys':changed,'authoredCorrectives':records,'unchangedDeformerReplay':reuse,'sourceModified':False,'measuredSpacingClaimed':False});assert pose['passed'],'branch-aware local source patch remains unresolved'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ~~~~^^^^^^^^^^
+AssertionError: branch-aware local source patch remains unresolved

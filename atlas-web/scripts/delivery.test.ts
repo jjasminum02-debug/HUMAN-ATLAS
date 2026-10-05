@@ -41,7 +41,7 @@ test('local integration route serves the validated compact allowlist, never the 
  assert.equal(value.projectionSchema,'whole-body-local-runtime-v5');
  const supplementBytes=await readFile(root+'atlas-data/manifests/bodyparts3d-r4-t100-source-supplement.json');
  const supplement=JSON.parse(supplementBytes.toString());
- const nerveBytes=await readFile(root+'atlas-data/manifests/nerve-scene-t63.json');const nerve=JSON.parse(nerveBytes.toString());
+ const nerveBytes=await readFile(root+'atlas-data/manifests/nerve-scene-t66.json');const nerve=JSON.parse(nerveBytes.toString());
  const nerveHash=createHash('sha256').update(nerveBytes).digest('hex');
  const nerveRightsHash=createHash('sha256').update(await readFile(root+nerve.rightsPath)).digest('hex');
  const nerveCount=nerve.objects.length;

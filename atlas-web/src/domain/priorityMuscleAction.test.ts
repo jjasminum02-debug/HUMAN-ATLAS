@@ -52,7 +52,10 @@ test('four native source-action outcomes retain actual buffers and separate anat
 });
 
 test('rectus knee extension is reverse from preparation and retains complete native context', () => {
-  const outcomes = read('work/evidence/T66/priority-ankle-knee-2026-10-05/knee-action-outcome.json');
+  const outcomePaths = [...new Set(acceptance.rows
+    .filter((row: { assetId: string }) => row.assetId.endsWith('RECTUS-KNEE-ASSET'))
+    .map((row: { outcomePath: string }) => row.outcomePath))] as string[];
+  const outcomes = outcomePaths.flatMap(path => read(path));
   const manifest = read('atlas-data/source-cache/datasets/za/compiled/manifest.json');
   const names = new Map(manifest.instances.map((r: { sourceKey: string; name: string }) => [r.sourceKey, r.name]));
   assert.equal(outcomes.length, 2);

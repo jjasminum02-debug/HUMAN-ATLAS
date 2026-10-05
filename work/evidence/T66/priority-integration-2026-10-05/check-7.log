@@ -1,0 +1,14 @@
+✔ offline BP3D snapshot exactly matches original runtime composition (73.519666ms)
+✔ local integration route serves the validated compact allowlist, never the developer ledger (3306.2555ms)
+✔ delivery rejects path traversal, stale dependency, and changed derived chunk bytes (3344.2315ms)
+✔ verified GLB uses conditional private cache and changed bytes still fail closed (3299.304542ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10186.238958
+
+$ node --experimental-strip-types --test scripts/delivery.test.ts

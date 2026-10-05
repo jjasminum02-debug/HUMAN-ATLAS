@@ -1,0 +1,15 @@
+right (Abdominal part of pectoralis major muscle).r True 0.639664899645307 0
+right Sternocostal head of pectoralis major muscle.r True 0.6358375778415952 0
+right Ascending part of trapezius muscle.r True 0.6943984094962474 0
+right Descending part of trapezius muscle.r True 0.7600280280299341 0
+right Levator scapulae.r True 0.7680376240395418 0
+right Pectoralis minor muscle.r True 0.15494308779580399 0
+right Rhomboid major muscle.r True 0.5317699264798246 0
+right Rhomboid minor muscle.r True 0.6896057224641188 0
+right Serratus anterior muscle.r True 0.19973038766401843 0
+right Transverse part of trapezius muscle.r False 0.3231948926284404 1
+Traceback (most recent call last):
+  File "/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/T66/priority-integration-2026-10-05/verify-expanded-shoulder-families.py", line 29, in <module>
+    assert qc['passed'],(key,qc['geometry'],qc['contact']['failures'][:3])
+           ~~^^^^^^^^^^
+AssertionError: ('ZA-c7010a9-b2c4a8a8818e3a136f3250f7', {'triangleCount': 538, 'sourceDegenerateTriangleCount': 0, 'flippedFaceSamples': 0, 'minimumAreaRatio': 0.3231948926284404, 'maximumAbsoluteEdgeRatioDelta': 0.1208109293993207, 'passed': True}, [{'seconds': 2.0, 'boneSourceKey': 'ZA-c7010a9-60fdfbce8b40f76046cc1110', 'newContainedVertexCount': 1, 'sourceVertexIndices': [27]}])

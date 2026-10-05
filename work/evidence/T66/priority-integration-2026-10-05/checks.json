@@ -1,0 +1,96 @@
+[
+  {
+    "command": [
+      "pnpm",
+      "run",
+      "test:motion-learning"
+    ],
+    "exitCode": 0,
+    "seconds": 0.53,
+    "log": "work/evidence/T66/priority-integration-2026-10-05/check-1.log"
+  },
+  {
+    "command": [
+      "node",
+      "--experimental-strip-types",
+      "--test",
+      "src/domain/priorityMuscleAction.test.ts",
+      "src/domain/priorityShoulderAction.test.ts",
+      "src/domain/priorityTrunkAction.test.ts",
+      "src/data/t66NerveLearning.test.ts"
+    ],
+    "exitCode": 0,
+    "seconds": 0.75,
+    "log": "work/evidence/T66/priority-integration-2026-10-05/check-2.log"
+  },
+  {
+    "command": [
+      "pnpm",
+      "run",
+      "test:whole-body"
+    ],
+    "exitCode": 1,
+    "seconds": 3.88,
+    "log": "work/evidence/T66/priority-integration-2026-10-05/check-3.log"
+  },
+  {
+    "command": [
+      "pnpm",
+      "run",
+      "test:whole-body"
+    ],
+    "exitCode": 1,
+    "seconds": 4.17,
+    "log": "work/evidence/T66/priority-integration-2026-10-05/check-4.log"
+  },
+  {
+    "command": [
+      "pnpm",
+      "run",
+      "test:whole-body"
+    ],
+    "exitCode": 0,
+    "seconds": 4.21,
+    "log": "work/evidence/T66/priority-integration-2026-10-05/check-5.log"
+  },
+  {
+    "command": [
+      "pnpm",
+      "run",
+      "test:delivery"
+    ],
+    "exitCode": 1,
+    "seconds": 9.92,
+    "log": "work/evidence/T66/priority-integration-2026-10-05/check-6.log"
+  },
+  {
+    "command": [
+      "pnpm",
+      "run",
+      "test:delivery"
+    ],
+    "exitCode": 0,
+    "seconds": 10.4,
+    "log": "work/evidence/T66/priority-integration-2026-10-05/check-7.log"
+  },
+  {
+    "command": [
+      "pnpm",
+      "run",
+      "typecheck"
+    ],
+    "exitCode": 0,
+    "seconds": 11.25,
+    "log": "work/evidence/T66/priority-integration-2026-10-05/check-8.log"
+  },
+  {
+    "command": [
+      "pnpm",
+      "run",
+      "build"
+    ],
+    "exitCode": 0,
+    "seconds": 22.33,
+    "log": "work/evidence/T66/priority-integration-2026-10-05/check-9.log"
+  }
+]

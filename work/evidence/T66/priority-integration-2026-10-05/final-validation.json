@@ -1,0 +1,95 @@
+{
+  "passed": true,
+  "latestChecks": [
+    {
+      "command": [
+        "pnpm",
+        "run",
+        "test:motion-learning"
+      ],
+      "exitCode": 0,
+      "seconds": 0.53,
+      "log": "work/evidence/T66/priority-integration-2026-10-05/check-1.log"
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "--test",
+        "src/domain/priorityMuscleAction.test.ts",
+        "src/domain/priorityShoulderAction.test.ts",
+        "src/domain/priorityTrunkAction.test.ts",
+        "src/data/t66NerveLearning.test.ts"
+      ],
+      "exitCode": 0,
+      "seconds": 0.75,
+      "log": "work/evidence/T66/priority-integration-2026-10-05/check-2.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "run",
+        "test:whole-body"
+      ],
+      "exitCode": 0,
+      "seconds": 4.21,
+      "log": "work/evidence/T66/priority-integration-2026-10-05/check-5.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "run",
+        "test:delivery"
+      ],
+      "exitCode": 0,
+      "seconds": 10.4,
+      "log": "work/evidence/T66/priority-integration-2026-10-05/check-7.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "seconds": 11.25,
+      "log": "work/evidence/T66/priority-integration-2026-10-05/check-8.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "seconds": 22.33,
+      "log": "work/evidence/T66/priority-integration-2026-10-05/check-9.log"
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "--test",
+        "motionPlayer.test.ts",
+        "animationPlayback.test.ts",
+        "learning.test.ts"
+      ],
+      "exitCode": 0,
+      "log": "work/evidence/T66/priority-integration-2026-10-05/check-10-motion-player.log"
+    }
+  ],
+  "priorFailedChecksPreserved": true,
+  "runtimeScope": "work/evidence/T66/priority-integration-2026-10-05/runtime-scope-audit.json",
+  "dependencyAudit": "work/evidence/T66/priority-integration-2026-10-05/dependency-audit.json",
+  "browser": "work/evidence/T66/priority-integration-2026-10-05/browser-validation.json",
+  "enlargedGeometryQc": "all adopted emitted keys and intermediate replay geometry/contact pass; see adopted-*/ directories",
+  "unchangedTrunkGeometryQc": "step04 full emitted GLB/interpolation proof reused; exact SHA unchanged",
+  "buildWarning": "App JS 6716411 bytes / gzip 740.45 kB exceeds 500 kB advisory; runtime projection/clip loading profiling is T85 scope, no budget raised",
+  "limitations": [
+    "No physical-mobile test",
+    "No GPU/VRAM/total-process memory measured",
+    "No physiological muscle force, full ROM or measured joint axis claim",
+    "No dynamic nerve or entrapment coordinate claim",
+    "Trunk display zoom is 30% projected visibility, not a 30% angular increase"
+  ]
+}
