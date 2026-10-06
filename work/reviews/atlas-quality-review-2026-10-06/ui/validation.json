@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "atlas-quality-review-ui-validation-v1",
+  "stage": "01-ui-card-region",
+  "date": "2026-10-06",
+  "baseline": {
+    "head": "863694fdf457871e44990bb4938c5c3225364896",
+    "preExistingDirtyPathCount": 600,
+    "preExistingMotionLearningPanelSha256": "f95bc741407ebe432abf3099be42fdfddff52d0463a87a91edc96bea69ca7b9b",
+    "fixedDeliverySnapshot": "local-20261006032053779-deedfed2",
+    "fixedDeliverySnapshotModified": false
+  },
+  "scope": {
+    "taskStateChanged": false,
+    "executionChanged": false,
+    "t40ReportOrAcceptanceChanged": false,
+    "delivery5180Changed": false,
+    "anatomyDataChanged": false,
+    "rightsOrHumanReviewChanged": false,
+    "denominatorsChanged": false,
+    "stylesCssChanged": false,
+    "productionBuildRun": false,
+    "productionBuildOwner": "04-integrate-and-deliver"
+  },
+  "files": {
+    "atlas-web/src/ui/App.tsx": {
+      "baselineSha256": "bf1586cb439ad3f6374fdb4eab8d6baf27712c92e0b166452830a5b7596dec18",
+      "currentSha256": "b2d726b268ce16d3acb35e75dd488958e0cef1075bc47c0a0dc29f9c88a88f2a",
+      "ownership": "this stage"
+    },
+    "atlas-web/src/ui/atlasShell.css": {
+      "baselineSha256": "d2ba3aa4a825bbfa8ebbbd982bb87deb841c370819f99756342dd1fa9f9d1995",
+      "currentSha256": "2c626c3f80f6e2efbe37456230235a4eb1efbf48ba3639e3ca24f5b3d896bb6c",
+      "ownership": "this stage"
+    },
+    "atlas-web/src/ui/MotionLearningPanel.tsx": {
+      "baselineSha256": "f95bc741407ebe432abf3099be42fdfddff52d0463a87a91edc96bea69ca7b9b",
+      "currentSha256": "2364bd577e0b57dc3f7c6d878c3375200bc0be25f355785cafced5f851243d93",
+      "ownership": "mixed; stage only active prop and active-to-rest effect; leave baseline profiler and asset-timing hunks unstaged"
+    },
+    "atlas-web/src/ui/styles.css": {
+      "baselineSha256": "8c23fa8d85d9d15a32d696883023aff163437caa4bfe28d01aede2dd960091a6",
+      "currentSha256": "8c23fa8d85d9d15a32d696883023aff163437caa4bfe28d01aede2dd960091a6",
+      "changed": false
+    }
+  },
+  "automatedChecks": [
+    {"command": "pnpm typecheck", "result": "passed"},
+    {"command": "pnpm test:search", "result": "passed", "passed": 44, "failed": 0},
+    {"command": "pnpm test:motion-player", "result": "passed", "passed": 39, "failed": 0, "exactSourceSideCases": 455},
+    {"command": "pnpm test:navigation", "result": "partial", "javascriptPassed": 17, "javascriptFailed": 0, "pythonPassed": 11, "pythonFailed": 1, "unrelatedFailure": "test_current_migration_overlay_passes: protected_input_changed for baseline.atlas-data/catalog/canonical-catalog.json during T15b"},
+    {"command": "git diff --check", "result": "passed"}
+  ],
+  "browser": {
+    "url": "http://127.0.0.1:5175/",
+    "consoleErrors": 0,
+    "viewportsCssPixels": [
+      {"width": 390, "height": 844, "result": "passed; mobile sidebar selector, bounded region menu, independent result scrolling"},
+      {"width": 1024, "height": 768, "result": "passed; picker/menu and model/card layout do not overlap"},
+      {"width": 1440, "height": 900, "result": "passed; picker/menu and model/card layout do not overlap"}
+    ],
+    "flows": {
+      "scrollLongListThenSwitchToNeck": "passed; 453-row structure list scrolled to its bottom before region switch",
+      "searchThenSwitchRegion": "passed; picker remained available and selection cleared prior search",
+      "keyboardEnterSpaceEscapeOutsideClickAndFocusRestore": "passed",
+      "shiftMultiRegionAndAriaPressed": "passed; selected head and neck were both aria-pressed=true after reopening menu",
+      "normalSideBackForwardDefaultsToStructure": "passed; route/card side remained aligned",
+      "singleVerticalActionListAndProseOnlyRows": "passed; duplicate motion-action picker absent",
+      "actionRowDoesNotAutoplay": "passed",
+      "explicitActionExplorerAndNerveActionRoute": "passed; exact action row selected, no autoplay",
+      "postureObservationDisclosure": "passed; separate collapsed section with explanatory text",
+      "repeatCtaReturnToRestAndSwitchToStructure": "passed; existing player/controller returned to rest",
+      "hiddenStateAndSingleScenePlayerPreserved": "passed"
+    },
+    "physicalTouchDeviceTest": false,
+    "viewportMeaning": "browser CSS viewport; not a physical-device claim",
+    "representativeCapture": {
+      "capturedAndVisuallyInspected": true,
+      "capturedViewportCssPixels": {"width": 825, "height": 807},
+      "captureClipCssPixels": {"x": 22, "y": 127, "width": 230, "height": 390},
+      "fileSaved": false,
+      "capturedFormat": "JPEG bytes from browser inspection; PNG artifact not persisted",
+      "expectedPath": "work/reviews/atlas-quality-review-2026-10-06/ui/screenshots/region-picker.png",
+      "reason": "browser security policy rejected a local data URL navigation; no further save attempt was made"
+    }
+  },
+  "preservedStates": {
+    "sourceOnly": true,
+    "publicRights": "held",
+    "humanReview": "not_performed",
+    "canonicalAndScopeCountsChanged": false,
+    "existingT40CompletedPassed": true,
+    "5180FixedSnapshotUntouched": true
+  },
+  "commit": {
+    "status": "selectively staged and reviewed; local commit follows",
+    "includedPaths": [
+      "atlas-web/src/ui/App.tsx",
+      "atlas-web/src/ui/atlasShell.css",
+      "atlas-web/src/ui/MotionLearningPanel.tsx#active-only-hunks",
+      "work/reviews/atlas-quality-review-2026-10-06/ui/baseline.json",
+      "work/reviews/atlas-quality-review-2026-10-06/ui/REPORT.md",
+      "work/reviews/atlas-quality-review-2026-10-06/ui/validation.json"
+    ],
+    "excluded": ["baseline profiler and asset-timing edits in MotionLearningPanel.tsx", "all other pre-existing WIP", "production build and delivery snapshot"]
+  }
+}

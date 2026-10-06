@@ -26,6 +26,7 @@ interface Props {
   onSelectAction(actionId: string): void;
   host: SourceMotionHost | null;
   sourceContextKey: string | null;
+  active?: boolean;
   showActionPicker?: boolean;
   muscleLayerEnabled?: boolean;
   boneLayerEnabled?: boolean;
@@ -71,7 +72,7 @@ async function readMotionPackage(response: Response, signal: AbortSignal): Promi
   return output.buffer;
 }
 
-export function MotionLearningPanel({ actions, selectedActionId, onSelectAction, host, sourceContextKey, showActionPicker = true, muscleLayerEnabled = true, boneLayerEnabled = true, subjectKind = "muscle", subjectHidden = false }: Props) {
+export function MotionLearningPanel({ actions, selectedActionId, onSelectAction, host, sourceContextKey, active = true, showActionPicker = true, muscleLayerEnabled = true, boneLayerEnabled = true, subjectKind = "muscle", subjectHidden = false }: Props) {
   const selectedAction = actions.find((action) => action.id === selectedActionId) ?? null;
   const candidate = selectedAction?.candidate ?? null;
   const intent = motionLearningIntent(selectedAction);
@@ -163,6 +164,11 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
       playbackSpeed: 1, selectedStructureIds: [], errorMessage: null }, durationSeconds: null,
       generation: current.generation + 1, boundStructureIds: [] });
   }, [muscleLayerEnabled, subjectHidden, host]);
+
+  useEffect(() => {
+    if (active || !playbackRef.current?.isPlaying) return;
+    returnToRest();
+  }, [active]);
 
   async function loadCandidate(startAfterLoad: boolean) {
     const option = actions.find((action) => action.id === stateRef.current.selectedActionId);

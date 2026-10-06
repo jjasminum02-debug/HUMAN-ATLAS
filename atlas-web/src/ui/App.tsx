@@ -11,7 +11,7 @@ import { attachmentBoneKeys, inRegionalRoute } from '../viewer/datasets/regional
 import { MotionLearningPanel } from './MotionLearningPanel';
 import type { LearnerMotionActionOption } from '../domain/motionLearning';
 import type { SourceMotionHost } from '../viewer/datasets/sourceMotionHost';
-import { motionActionLabel, motionLearningTitle, motionLearningIntent, preferredMotionAction, buildMotionActionLibrary } from '../domain/atlasMotionExperience';
+import { motionActionLabel, motionLearningIntent, preferredMotionAction, buildMotionActionLibrary } from '../domain/atlasMotionExperience';
 import { isNerveRelatedActionTextIntent } from '../domain/nerveRelations';
 import './styles.css';
 import './atlasShell.css';
@@ -55,6 +55,7 @@ export default function App() {
     const [textNerveKey, setTextNerveKey] = useState<string | null>(null);
     const [query, setQuery] = useState('');
     const [exploreOpen, setExploreOpen] = useState(false);
+    const [regionMenuOpen, setRegionMenuOpen] = useState(false);
     const [detailsOpen, setDetailsOpen] = useState(true);
     const [tab, setTab] = useState<'구조' | '기능'>('구조');
     const [explorerMode, setExplorerMode] = useState<'structures' | 'actions'>('structures');
@@ -64,6 +65,8 @@ export default function App() {
     const [boneLayerEnabled, setBoneLayerEnabled] = useState(true);
     const [selectedSourceHidden, setSelectedSourceHidden] = useState(false);
     const info = useRef<HTMLDialogElement>(null);
+    const regionPicker = useRef<HTMLDivElement>(null);
+    const regionPickerTrigger = useRef<HTMLButtonElement>(null);
     useEffect(() => {
         // Desktop has no collapse control; restore its card when leaving the
         // narrow layout after the learner has collapsed the mobile card.
@@ -84,7 +87,15 @@ export default function App() {
         return () => { clearTimeout(timer); abort.abort(); };
     }, []);
     useEffect(() => { if (!data)
-        return; const pop = () => { setRoute(resolveRoute(location.search, data.integration.objects)); setTextNerveKey(nerveConceptForLearner(new URLSearchParams(location.search).get('nerveConcept') ?? '')?.key ?? null); setQuery(history.state?.atlasSearchQuery ?? ''); setDetailsOpen(true); }; window.addEventListener('popstate', pop); return () => window.removeEventListener('popstate', pop); }, [data]);
+        return; const pop = () => { setRoute(resolveRoute(location.search, data.integration.objects)); setTextNerveKey(nerveConceptForLearner(new URLSearchParams(location.search).get('nerveConcept') ?? '')?.key ?? null); setQuery(history.state?.atlasSearchQuery ?? ''); setDetailsOpen(true); setTab('구조'); setActionId(null); setRegionMenuOpen(false); }; window.addEventListener('popstate', pop); return () => window.removeEventListener('popstate', pop); }, [data]);
+    useEffect(() => {
+        if (!regionMenuOpen) return;
+        const closeOutside = (event: PointerEvent) => {
+            if (!regionPicker.current?.contains(event.target as Node)) setRegionMenuOpen(false);
+        };
+        document.addEventListener('pointerdown', closeOutside);
+        return () => document.removeEventListener('pointerdown', closeOutside);
+    }, [regionMenuOpen]);
     const rows = useMemo(() => data ? searchStructures(data.integration.objects, query, route.regions, route.audience ?? 'learner')
         .filter(row => !query.trim() || row.kind !== 'nerve' || !nerveConceptForSourceName(row.names.en)) : [], [data, query, route.regions, route.audience]);
     const nerveSearchResults = useMemo(() => query.trim() && route.audience !== 'inspection'
@@ -119,7 +130,12 @@ export default function App() {
         subjects: entry.subjects.filter(subject => (!route.regions.length || subject.regionIds.some(id => route.regions.includes(id)))
           && (!query.trim() || `${entry.label} ${subject.name}`.includes(query.trim()))) })).filter(entry => entry.subjects.length),
         [actionLibrary, route.regions, query]);
-    const action = actions.find(a => a.id === actionId) ?? preferredMotionAction(actions);
+    const postureActions = actions.filter(a => motionLearningIntent(a) === 'posture_observation');
+    const functionActions = actions.filter(a => motionLearningIntent(a) !== 'posture_observation');
+    const action = actions.find(a => a.id === actionId) ?? preferredMotionAction(functionActions);
+    const regionLabel = route.regions.length === 0 ? '전신'
+        : route.regions.length === 1 ? navigation.categories.find(c => c.id === route.regions[0])?.labelKo ?? '선택한 부위'
+        : `${route.regions.length}개 부위`;
     const nerveLearning = selected?.kind === 'nerve' ? nerveLearningForLearner(selected.names.en) : null;
     const textNerveLearning = selectedTextNerve ? nerveLearningForLearner(selectedTextNerve.sourceNativeEnglishName ?? selectedTextNerve.names.en) : null;
     const selectedNerveRelations = selectedNerveConcept ? motorRelationsForNerve(selectedNerveConcept.key, selected?.side) : [];
@@ -135,6 +151,7 @@ export default function App() {
         else history.replaceState({ ...history.state, atlasSearchQuery: searchQuery }, '', url);
         setTextNerveKey(null);
         setRoute(nextRoute);
+        setRegionMenuOpen(false);
         setDetailsOpen(true);
         setTab('구조');
         setActionId(null);
@@ -154,6 +171,16 @@ export default function App() {
         resetPresentation();
         navigate({ regions, selected: selected && inRegionalRoute(selected, data!.integration.objects, regions) ? selected.sourceKey : null }, true, '');
     }
+    function chooseRegion(id: string | null, combine = false) {
+        if (id) toggleRegion(id, combine);
+        else {
+            setQuery('');
+            resetPresentation();
+            navigate({ regions: [], selected: route.selected }, true, '');
+        }
+        setRegionMenuOpen(false);
+        requestAnimationFrame(() => regionPickerTrigger.current?.focus());
+    }
     function select(id: string) {
         const row = data?.integration.objects.find(r => r.sourceKey === id && r.inspectionEligible && r.localDisplayEligible
             && r.routeAudience === (route.audience ?? 'learner'));
@@ -162,6 +189,18 @@ export default function App() {
         // Search can reach outside a regional filter; whole-body selection never narrows the user's scene.
         const regions = inRegionalRoute(row, data!.integration.objects, route.regions) ? route.regions : [];
         navigate({ regions, selected: id });
+    }
+    function selectMuscleAction(sourceKey: string, selectedActionId: string) {
+        const row = data?.integration.objects.find(r => r.sourceKey === sourceKey && r.kind === 'muscle'
+            && r.inspectionEligible && r.localDisplayEligible && r.routeAudience === (route.audience ?? 'learner'));
+        const exactAction = row && motionActionOptionsForLearner(row.haConceptId, row.side, row.sourceKey)
+            .some(option => option.id === selectedActionId);
+        if (!row || !exactAction) return;
+        const regions = inRegionalRoute(row, data!.integration.objects, route.regions) ? route.regions : [];
+        navigate({ regions, selected: sourceKey });
+        // This is an explicit action link; it intentionally wins over navigate's normal structure default.
+        setActionId(selectedActionId);
+        setTab('기능');
     }
     function selectTextNerve(key: string) {
         if (!nerveConceptForLearner(key)) return;
@@ -223,8 +262,7 @@ export default function App() {
                             {actionsForTarget.length > 0 ? actionsForTarget.map(option => <div key={option.id}>
                                 <p><strong>{motionActionLabel(option.label)}</strong> · {option.text.explanation}</p>
                                 <button className="bone-related-muscle" onClick={() => {
-                                    select(row.sourceKey);
-                                    setActionId(option.id);
+                                    selectMuscleAction(row.sourceKey, option.id);
                                 }}>{option.learningIntent === 'muscle_action' ? '이 근육의 움직임 보기' : '이 근육의 작용 설명 보기'}</button>
                             </div>) : <p className="quiet-note">현재 연결된 작용 설명이 없습니다.</p>}
                         </div>
@@ -242,7 +280,7 @@ export default function App() {
   <a className="skip-link" inert={!entered} href={selected || selectedTextNerve ? '#study-details' : '#atlas-stage'}>{selected || selectedTextNerve ? '선택한 구조 설명으로 이동' : '모형으로 이동'}</a>
   <header className="study-header" inert={!entered}>
    <div className="header-brand-group"><button className="brand" aria-label="Human Atlas 전신 홈" onClick={() => { setQuery(''); resetPresentation(); navigate({ regions: [], selected: null }, false, ''); setHomeRevision(v => v + 1); }}><span className="brand-dot"/> HUMAN ATLAS</button></div>
-   <button className="explore-trigger" aria-expanded={exploreOpen} aria-controls="atlas-explorer" onClick={() => setExploreOpen(!exploreOpen)}>부위 탐색</button>
+   <button className="explore-trigger" aria-expanded={exploreOpen} aria-controls="atlas-explorer" onClick={() => setExploreOpen(!exploreOpen)}>부위 탐색 · {regionLabel} ▾</button>
    <label className="global-search"><span aria-hidden="true">⌕</span><input type="search" aria-label="구조 검색" placeholder={explorerMode === "actions" ? "움직임·근육 이름 검색" : "근육·뼈·신경 이름 검색"} autoComplete="off" value={query} onChange={e => { updateQuery(e.target.value); setExploreOpen(true); }}/>{query && <button aria-label="검색 지우기" onClick={() => updateQuery('')}>×</button>}</label>
   </header>
   <button inert={!entered} className="app-info-trigger" onClick={() => info.current?.showModal()}>앱 정보</button>
@@ -253,20 +291,33 @@ export default function App() {
   </div></dialog>
   <div className="study-layout">
    <aside id="atlas-explorer" inert={!entered} data-searching={Boolean(query.trim())} className={`study-sidebar ${exploreOpen ? 'is-open' : ''}`} aria-label="부위 탐색" onKeyDown={e => { if (e.key === 'Escape') {
-        setExploreOpen(false);
-        document.querySelector<HTMLElement>('.explore-trigger')?.focus();
+        if (regionMenuOpen) { setRegionMenuOpen(false); regionPickerTrigger.current?.focus(); }
+        else { setExploreOpen(false); document.querySelector<HTMLElement>('.explore-trigger')?.focus(); }
     } }}>
-    <button className="explore-close" onClick={() => setExploreOpen(false)}>탐색 닫기</button><div className="sidebar-heading"><span className="eyebrow">EXPLORE ANATOMY</span><h1>부위 탐색</h1><p>어디부터 살펴볼까요?</p></div>
+    <button className="explore-close" onClick={() => setExploreOpen(false)}>탐색 닫기</button>
+    <div className="region-picker" ref={regionPicker}>
+      <button ref={regionPickerTrigger} type="button" className="region-picker-trigger" aria-expanded={regionMenuOpen}
+        aria-controls="atlas-region-menu" onClick={() => setRegionMenuOpen(open => !open)}>
+        부위 탐색 · {regionLabel} <span aria-hidden="true">▾</span>
+      </button>
+      {regionMenuOpen && <div id="atlas-region-menu" className="region-picker-menu" aria-label="전신 및 12개 부위">
+        <button type="button" aria-pressed={!route.regions.length} onClick={() => chooseRegion(null)}>전신</button>
+        {navigation.categories.map(c => <button type="button" key={c.id} aria-pressed={route.regions.includes(c.id)}
+          onClick={event => chooseRegion(c.id, event.shiftKey)}>{c.labelKo}</button>)}
+        <p className="region-combine-hint">한 부위씩 보기 · Shift + 부위 선택으로 함께 보기</p>
+      </div>}
+    </div>
     <div className="explorer-mode" role="group" aria-label="탐색 방법"><button aria-pressed={explorerMode === 'structures'} onClick={() => setExplorerMode('structures')}>구조 찾기</button><button aria-pressed={explorerMode === 'actions'} onClick={() => { setExplorerMode('actions'); updateQuery(''); }}>근육 작용 찾기</button></div>
-    {explorerMode === 'actions' ? <label className="motion-library-region">동작 부위<select aria-label="동작 부위" value={route.regions.length === 1 ? route.regions[0] : route.regions.length ? 'combined' : ''} onChange={event => { const id = event.currentTarget.value; if (id === 'combined') return; if (id) toggleRegion(id); else { setQuery(''); resetPresentation(); navigate({ regions: [], selected: route.selected }, true, ''); } }}><option value="">전신</option>{route.regions.length > 1 && <option value="combined">선택한 여러 부위</option>}{navigation.categories.map(c => <option key={c.id} value={c.id}>{c.labelKo}</option>)}</select></label> : <>
-    <button className="region-all-toggle" aria-pressed={!route.regions.length} onClick={() => { setQuery(''); resetPresentation(); navigate({ regions: [], selected: route.selected }, true, ''); }}>전신</button>
-    <nav className="region-grid" aria-label="12개 해부학 부위">{navigation.categories.map(c => <button key={c.id} aria-pressed={route.regions.includes(c.id)} className={route.regions.includes(c.id) ? 'is-current' : ''} onClick={e => toggleRegion(c.id, e.shiftKey)}>{c.labelKo}</button>)}</nav><p className="region-combine-hint">한 부위씩 보기 · Shift 클릭으로 함께 보기</p></>}
 
-    {explorerMode === 'actions' ? <section className="motion-library" aria-label="근육 작용 목록">
-      <div className="region-list-heading"><span className="eyebrow">MUSCLE ACTIONS</span><h2>근육 작용 찾기</h2><p className="result-count">{visibleActionLibrary.length}개 동작 · 현재 재생할 수 있는 시범</p></div>
-      {visibleActionLibrary.map(entry => <details key={entry.label}><summary>{entry.label}</summary><div>{entry.subjects.map(subject => <button key={`${subject.sourceKey}:${subject.action.id}`} onClick={() => { select(subject.sourceKey); setActionId(subject.action.id); setQuery(''); }}><span>{subject.name}</span><small>{subject.side === 'left' ? '왼쪽' : subject.side === 'right' ? '오른쪽' : ''}</small></button>)}</div></details>)}
-      {!visibleActionLibrary.length && <p className="quiet-note">이 범위의 근육 작용 애니메이션은 준비 중입니다. 구조 찾기에서 모형과 설명을 볼 수 있습니다.</p>}
-    </section> : <>    <div className="region-list-heading"><span className="eyebrow">{query.trim() ? 'SEARCH RESULTS' : 'STRUCTURES'}</span><h2>{query.trim() ? '검색 결과' : title}</h2><p className="result-count" role="status">{rows.length + nerveSearchResults.reduce((n, row) => n + Math.max(1, row.nativeRows.length), 0)}개 이름 · 좌우 모형 함께 보기</p></div>
+    {explorerMode === 'actions' ? <>
+      <div className="region-list-heading"><span className="eyebrow">MUSCLE ACTIONS</span><h2>근육 작용 찾기</h2><p className="result-count">{visibleActionLibrary.length}개 동작 범주 · 글 설명/3D 시범 상태 표시</p></div>
+      <section className="motion-library explorer-results-body" aria-label="근육 작용 목록">
+        {visibleActionLibrary.map(entry => <details key={entry.label}><summary>{entry.label}</summary><div>{entry.subjects.map(subject => <button key={`${subject.sourceKey}:${subject.action.id}`} onClick={() => { selectMuscleAction(subject.sourceKey, subject.action.id); setQuery(''); }}><span>{subject.name}</span><small>{subject.side === 'left' ? '왼쪽' : subject.side === 'right' ? '오른쪽' : ''}</small></button>)}</div></details>)}
+        {!visibleActionLibrary.length && <p className="quiet-note">이 범위의 근육 작용 시범은 준비 중입니다. 구조 찾기에서 모형과 설명을 볼 수 있습니다.</p>}
+      </section>
+    </> : <>
+    <div className="region-list-heading"><span className="eyebrow">{query.trim() ? 'SEARCH RESULTS' : 'STRUCTURES'}</span><h2>{query.trim() ? '검색 결과' : title}</h2><p className="result-count" role="status">{rows.length + nerveSearchResults.reduce((n, row) => n + Math.max(1, row.nativeRows.length), 0)}개 이름 · 좌우 모형 함께 보기</p></div>
+    <div className="explorer-results-body">
     <nav className="study-list region-structure-list" aria-label="구조 목록">{rows.map(r => { const sameSearchConcept = selected && (selected.searchGroupKey ?? selected.sourceKey) === (r.searchGroupKey ?? r.sourceKey); return <button key={r.sourceKey} className={sameSearchConcept ? 'selected' : ''} aria-pressed={Boolean(sameSearchConcept)} onClick={() => select(r.sourceKey)}><span>{learnerRowTitle(r)}</span>{learnerRowTitle(r) !== r.names.en && <small>{r.names.en}</small>}{r.searchApproximate && <em>비슷한 이름</em>}</button>; })}{!rows.length && !nerveSearchResults.length && <p className="quiet-note">등록된 이름을 찾지 못했습니다. 다른 이름으로 검색해 보세요.</p>}</nav>
     {nerveSearchResults.length > 0 && <section className="nerve-search-results" aria-label="신경 검색 결과"><h2>신경 설명</h2>
       {nerveSearchResults.map(({ concept, nativeRows, approximate }) => <div className="nerve-search-result" key={concept.key}>
@@ -275,7 +326,7 @@ export default function App() {
           : <button onClick={() => selectTextNerve(concept.key)}>설명 보기</button>}
         {approximate && <em>비슷한 이름</em>}
       </div>)}
-    </section>}</>}
+    </section>}</div></>}
 
    </aside>
    <section id="atlas-stage" tabIndex={-1} className="study-stage" aria-label={`${title} 학습 장면`}><div className="stage-caption" aria-hidden={!entered}><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{title}</h2><p>회전하고 확대하며 구조를 살펴보세요.</p></div>
@@ -309,14 +360,15 @@ export default function App() {
       <h3>운동·감각 관계 상태</h3><p>{selectedNerveConcept ? nerveFunctionStatus(selectedNerveConcept) : '이 모형 이름은 설명 개념과 아직 연결되지 않았습니다.'}</p>
       <h3>확인된 운동근 관계</h3>{renderNerveRelations(selectedNerveRelations, selected.side)}<p className="quiet-note">강조는 확인된 관계를 설명하기 위한 표시입니다. 실제 힘이나 활성도를 측정하지 않으며, 목록은 전체 지배 범위를 뜻하지 않습니다.</p>
       {nerveLearning && <details key={selected.sourceKey} className="nerve-learning-context"><summary>주행·포착 맥락</summary><section><h4>기능 연결</h4><p>{nerveLearning.functionContext}</p></section><section><h4>해부학적 주행과 변이</h4><p>{nerveLearning.courseContext}</p></section><section><h4>포착 가능 구간과 주변 조직</h4><p>{nerveLearning.compressionContext}</p></section>{"variationContext" in nerveLearning && <section><h4>변이와 자세 범위</h4><p>{String(nerveLearning.variationContext)}</p></section>}</details>}
-    </section> : selected?.kind === 'muscle' ? <><MotionLearningPanel subjectHidden={selectedSourceHidden} actions={motionActions} selectedActionId={actionId ?? preferredMotionAction(motionActions)?.id ?? null} onSelectAction={setActionId} host={motionHost} sourceContextKey={selected.sourceKey} showActionPicker={motionActions.filter(action => action.candidate).length > 1} muscleLayerEnabled={muscleLayerEnabled} boneLayerEnabled={boneLayerEnabled}/>
-    <div className="study-tabs" role="tablist" aria-label="학습 내용">{(['구조', '기능'] as const).map(t => <button key={t} role="tab" id={`tab-${t}`} aria-controls="study-tab-panel" aria-selected={tab === t} tabIndex={tab === t ? 0 : -1} onClick={() => setTab(t)} onKeyDown={e => { if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) {
+    </section> : selected?.kind === 'muscle' ? <>
+    <div className="study-tabs" role="tablist" aria-label="학습 내용">{(['구조', '기능'] as const).map(t => <button key={t} role="tab" id={`tab-${t}`} aria-controls={t === '구조' ? 'study-structure-panel' : 'study-function-panel'} aria-selected={tab === t} tabIndex={tab === t ? 0 : -1} onClick={() => setTab(t)} onKeyDown={e => { if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) {
                 e.preventDefault();
                 const next = e.key === 'Home' ? '구조' : e.key === 'End' ? '기능' : tab === '구조' ? '기능' : '구조';
                 setTab(next);
                 document.getElementById(`tab-${next}`)?.focus();
             } }}>{t}</button>)}</div>
-    <section id="study-tab-panel" role="tabpanel" aria-labelledby={`tab-${tab}`}>{tab === '구조' ? <>
+    <div className="study-tab-panels">
+    <section id="study-structure-panel" className="study-tab-panel" role="tabpanel" aria-labelledby="tab-구조" hidden={tab !== '구조'}>
       {(['origin', 'insertion'] as const).map(role => {
         const text = structureTextForSource(selected.sourceKey, role) || (selected.haConceptId && structureTextForLearner(selected.haConceptId, role));
         const bones = attachmentBoneKeys(selected.sourceKey, role).map(key => data.integration.objects.find(r => r.sourceKey === key)!).filter(Boolean);
@@ -341,7 +393,31 @@ export default function App() {
         <h3>감각·고유감각</h3>
         <p>{structureUnavailabilityForLearner('sensoryProprioception')}</p>
       </section>
-    </> : action ? <div className="muscle-action-learning"><h3>{motionLearningTitle(motionLearningIntent(action))}</h3><p>{motionActionLabel(action.text.label)}</p><p>{action.text.explanation}</p><fieldset className="learner-action-picker"><legend>{motionLearningIntent(action) === "posture_observation" ? "주변 움직임 선택" : "작용 선택"}</legend>{actions.map(a => <button key={a.id} aria-pressed={action.id === a.id} onClick={() => setActionId(a.id)}>{motionActionLabel(a.label)}</button>)}</fieldset></div> : <p className="quiet-note">{learnerFunctionUnavailableText()}</p>}</section>
+    </section>
+    <section id="study-function-panel" className="study-tab-panel function-tab-panel" role="tabpanel" aria-labelledby="tab-기능" hidden={tab !== '기능'}>
+      {functionActions.length > 0 && <fieldset className="learner-action-picker" aria-label="근육 작용 선택">
+        <legend>근육 작용</legend>
+        {functionActions.map(option => <button type="button" key={option.id} className="action-choice-row"
+          aria-pressed={action?.id === option.id} onClick={() => setActionId(option.id)}>
+          <span className="action-choice-heading"><strong>{motionActionLabel(option.label)}</strong><small>{option.candidate ? '3D 시범 연결' : '글 설명 제공'}</small></span>
+          <span className="action-choice-description">{option.text.explanation || option.text.label}</span>
+        </button>)}
+      </fieldset>}
+      {functionActions.length === 0 && <p className="quiet-note">{learnerFunctionUnavailableText()}</p>}
+      <MotionLearningPanel active={tab === '기능'} subjectHidden={selectedSourceHidden} actions={motionActions}
+        selectedActionId={action?.id ?? null} onSelectAction={setActionId} host={motionHost} sourceContextKey={selected.sourceKey}
+        showActionPicker={false} muscleLayerEnabled={muscleLayerEnabled} boneLayerEnabled={boneLayerEnabled}/>
+      {postureActions.length > 0 && <details className="posture-observation-disclosure">
+        <summary>자세에서 관찰하기</summary>
+        <p>근육 자체의 작용 시범이 아니라, 주변 구조가 움직일 때의 자세를 관찰합니다.</p>
+        <div className="posture-observation-list">{postureActions.map(option => <button type="button" key={option.id}
+          aria-pressed={action?.id === option.id} onClick={() => setActionId(option.id)}>
+          <span className="action-choice-heading"><strong>{motionActionLabel(option.label)}</strong><small>자세 관찰 자료</small></span>
+          <span className="action-choice-description">{option.text.explanation || option.text.label}</span>
+        </button>)}</div>
+      </details>}
+    </section>
+    </div>
     </> : selected?.kind === 'bone' ? <><MotionLearningPanel subjectHidden={selectedSourceHidden} actions={motionActions} selectedActionId={actionId ?? preferredMotionAction(motionActions)?.id ?? null} onSelectAction={setActionId} host={motionHost} sourceContextKey={selected.sourceKey} showActionPicker={true} muscleLayerEnabled={boneLayerEnabled} subjectKind="bone"/><section className="attachment-section"><h3>관련 근육</h3>{relatedMuscles.length ? <ul>{relatedMuscles.map(r => <li key={r.sourceKey}><button className="bone-related-muscle" onClick={() => select(r.sourceKey)}>{r.label}</button><span>{r.roles.map(role => role === 'origin' ? '기시' : role === 'insertion' ? '정지' : '부착').join(' · ')}</span></li>)}</ul> : <p className="quiet-note">주요 표지와 관련 근육 설명을 준비하고 있습니다.</p>}</section></> : null}
    </div></details>}
   </div>
