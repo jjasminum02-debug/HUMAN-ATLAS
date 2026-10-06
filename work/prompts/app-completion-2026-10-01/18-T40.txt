@@ -1,28 +1,32 @@
-HUMAN ATLAS에서 T40만 수행해라. 담당 Luna Max.
+HUMAN ATLAS에서 T40만 수행해라. 담당 Luna Max · 현재 대화 직접 구현.
 
-AGENTS.md, work/EXECUTION.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/product-acceptance.json,
-해당 task의 현재 spec/promptFile, 실제 선행 report/evidence 및 design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md를 읽어라.
-2026-10-02 최신 사용자 지시: 초기 확장 근육 목록 없이 전체 근육을 대상으로 한다. 28 설계가 미래 motion의 소수 파일럿/소흉근 중심 범위와 과거 표정근 제외 문구보다 우선한다. 27의 제품 acceptance/content completeness 분리는 유지한다.
-목표는 현재 지원 범위에서 정확하고 안정적으로 사용할 수 있는 앱이다. task acceptance와 전체 콘텐츠 completeness를 분리한다.
-27 설계/현재 acceptanceContract가 과거 전체 콘텐츠 0-gap·full extent 전수 PNG·10개마다 종료 문구보다 우선한다.
-542 target/563 membership/12부위, 기존 HA 130, 역사163(6/20/135/2), 원본/OpenSim_Models/T13/기존 WIP를 보존한다.
-source-only, 검증된 로컬 선택, humanReview=not_performed, 공개 권리 held를 독립적으로 유지한다.
-지원한다고 표시한 구조의 wrong side/name/scope/placement와 실제 사용자 흐름 결함은 해결한다. 미지원 자료로 geometry/binding/승인을 만들지 않는다.
-자동 계약 검사는 전수 수행하고 실제 시각 검증은 대표 유형·12부위·변경/충돌 사례에 집중한다. 동일 입력의 기존 근거는 영향 분석 후 재사용한다.
-새 단서 없는 고정 catalog 검색·직접 용어 인용 검색·전체 suite/보고서 반복을 하지 않는다. 의미 검토 묶음은 내부 복구 단위다.
-제품 계약을 충족하면 completed/passed, nextUnit=null로 종료하고 contentCompleteness=partial 및 남은 콘텐츠를 별도로 보고한다.
-실제 제품 차단 결함이 남으면 실패 기능만 구체적으로 기록해 같은 task에서 고친다. 계획 문서만으로 pass하지 않는다.
-해당 report/evidence와 EXECUTION record에 acceptanceScope/contractRevision/productReadiness/contentCompleteness/knownContentGaps/unresolvedProductBlockers를 기록한다.
-합격 기록은 progress.productAcceptance에 contractRevision=app-completion-2026-10-01, acceptanceScope, productReadiness, contentCompleteness, knownContentGaps, unresolvedProductBlockers=[], evidence=[실제 보고서/검증 파일 경로]를 남긴다.
-python3 work/tools/sync_execution.py 및 --check를 수행하고 소유 변경만 선별 로컬 커밋한다.
-다음 task 자동 실행, 새 번호/스레드 발급, 자동 위임, push/배포, 임상 진단·치료·자침 기능은 금지한다.
+이번 입력 파일: work/plans/t66-parallel-completion-2026-10-03/11-T40-local-delivery.txt
+먼저 실제 T85 completed/passed와 전달 대상 build/asset snapshot을 확인한다. 선행 제품 결함이 미해결이면 T85 재개 파일을 안내하고 전달 합격을 만들지 않는다. contentCompleteness=partial 자체는 로컬 전달 blocker가 아니다. 이번 T40 record/spec/promptFile만 최신 입력으로 갱신한다. 기존 WIP에만 의존하는 runtime 필드/asset이 있으면 소유자·파일·재현 dependency를 명시하고 원본/WIP 보존 안에서 실제 전달을 재현한다. 다른 사람의 변경을 임의 stage/commit하지 않는다.
 
-이번 실행:
-이번 범위: 현재 지원 구조·설명·신경·움직임의 실제 scoped acceptance를 사용해 로컬 실행/설치/asset 확보/검증/복구 경로를 완성한다. 전체 근육 motion 목표의 전수 구현·미확보/미구현 원장을 함께 전달하며 sample 기능을 전체 완성으로 오인하지 않는다. dev middleware/asset 확보와 dist 단독 실행을 실제 구분한다. held/private/humanReview 상태를 보존한다.
+AGENTS.md, work/EXECUTION.json, work/product-acceptance.json, 해당 task의 spec/promptFile, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, 28-ALL-MUSCLE-MOTION-PIPELINE.md, work/plans/t66-parallel-completion-2026-10-03/README.md, 실제 최신 T25/T59/T66/T85 report/evidence와 지원 asset/원장을 읽어라.
 
-1. T85 실제 report/evidence와 모든 지원 asset의 실행 입력을 읽고 재현 가능한 로컬 앱 실행·asset 확보·검증/복구 절차를 완성한다. dev middleware가 필요한 상태를 dist만 실행하면 되는 것으로 전달하지 않는다.
-2. 실제 구조/설명/신경/움직임의 지원 경로와 전체 target/source/side/action 원장을 대조한다. 429 muscle target/232 source 전수 목표에 남은 작업을 삭제하거나 첫 표본 성공으로 전체 지원이라고 광고하지 않는다.
-3. 기존 제품 acceptance를 이유 없이 반복하지 않고 전달 실행 방식의 실제 차단 결함을 해결한다. private 원문/원본/OpenSim_Models·T13/WIP·held권리·humanReview를 보존하며 push/배포하지 않는다.
-4. 해당 로컬 전달 책임을 끝내면 정확한 readiness/contentCompleteness/wholeMuscleMotionGoal와 근거를 남기고 멈춘다. 새 task/전체 완료 추정/임상 기능은 만들지 않는다.
+목표: 현재 지원된 정상 구조·근육/뼈 직접 움직임 학습·관절 조절·신경 주행/포착 설명을 재현 가능한 로컬 앱으로 전달한다. task acceptance와 전체 콘텐츠/정상 모형 목표 completeness를 분리한다. 병리 모형은 정상 기준선 이후 별도 단계이며 이번에 시작하지 않는다.
 
-종료 후 자동 실행할 task는 없다. 실제 전달 상태를 보고하고 멈춰라.
+542/563/12, 근육429/447·현재232/462, 뼈/신경의 실제 전수 분모, HA130·역사163(6/20/135/2), 원본/source-cache/OpenSim_Models/T13/기존 WIP를 보존한다. source-only/local selection/humanReview=not_performed/public rights held는 독립 상태다. 공개 배포 승인이나 전 해부학 완성이라고 쓰지 않는다.
+
+1. 실제 로컬 실행·필수 asset 확보·hash 확인·오류 복구·재시작 절차를 구현/문서화한다. dev middleware와 production/local serve의 차이를 검사한다. dist만으로 동작하지 않는 상태를 dist 단독 실행 가능이라고 안내하지 않는다. 임의 네트워크 공개/외부 전송/push/배포를 하지 않는다.
+2. 전달 방식으로 실행한 앱에서 홈→근육/뼈 직접 선택→작용/관절 움직임→단일 CTA 반복/재클릭 부드러운 복원→각도 조절·숨김 유지, 신경 검색→주행·포착 설명/실제 지원3D→복원을 확인한다. T85와 동일 입력 근거를 재사용하며 전달 방식 때문에 달라진 기능만 추가 검사한다. 이미 완료된 task나 전체 suite를 다시 실행하지 않는다.
+3. 지원/미지원 수치를 전체 원장과 실제 runtime으로 계산한다. 근육 text/표면 변형/side/action, 뼈 text/direct motion/관절 DOF/지지 역할, 신경 주행text/포착text/정적3D/동적pose/좌표 결속을 따로 보고한다. 후보/목록/필드 존재를 구현 수로 세지 않는다. 일부 근육/뼈/신경 성공을 전체 완료로 표현하지 않는다. 확인된 미구현과 자료 미확보를 구별하고 다음에 필요한 구체적 입력/작업을 기록한다.
+4. 정상 모형의 실제 지원 상태·source 기준 자세·교육용 작성 가정·권리/사람 검토 상태를 내부 전달 자료에 보존한다. 후속 병리 모델은 정상 geometry/frame/pose를 보존한 파생 데이터로 확장할 수 있도록 경계를 문서화한다. 파열·압박 변형/질환 editor, 환자 진단·치료·자침은 구현하지 않는다. 정상 모델이 partial이면 병리 단계로 갈 준비가 완료됐다고 추정하지 않는다.
+5. 전달 기능의 실제 blocker를 해결한다. 필수 전달 계약이 미충족이면 partial/같은 nextUnit과 구체적 결함을 남긴다. 계약 충족 시 completed/passed,nextUnit=null로 종료하며 productReadiness/contentCompleteness/wholeMuscleMotionGoal/wholeBoneMotionGoal/nerveCourseCoverage를 별도 기록한다. 계획/보고서 작성만으로 pass하지 않는다.
+
+report/evidence와 해당 EXECUTION record에 acceptanceScope/contractRevision/productReadiness/contentCompleteness/knownContentGaps/unresolvedProductBlockers를 기록한다. 합격 progress.productAcceptance는 contractRevision=app-completion-2026-10-01, 실제 scope/readiness/gaps, unresolvedProductBlockers=[], evidence=[실제 경로]를 남긴다. python3 work/tools/sync_execution.py 및 --check, 소유 변경만 선별 로컬 커밋한다. 새 task 번호·thread/자동 위임/push/배포는 금지한다.
+
+종료 후 자동 실행할 task는 없다. 실제 정상 로컬 앱의 전달 상태와 잔여 콘텐츠를 보고하고 멈춰라. 병리 모델은 별도 사용자 요청에서 순서와 범위를 정한다.
+
+T40의 기존 전체 프롬프트와 함께 아래 인계를 적용한다. T40만 실행하며 이후 작업을 자동 시작하지 않는다.
+
+먼저 work/evidence/T85/optimization-2026-10-06/REPORT.md, optimization-metrics.json, final-validation.json 및 work/plans/t85-optimization-2026-10-06/README.md를 읽어라.
+
+최신 런타임은 atlas-web/scripts/buildLearnerMotionRuntime.mjs가 정확한 동작 옵션과 Wave 옵션을 하나의 learnerMotionRuntime.generated.ts로 생성한다. 별도의 런타임 원장 파싱이나 두 번째 viewer를 복구하지 않는다. atlas-data/motion/local-motion-delivery-index.json은 같은 작성자가 원장 두 개의 해시/bytes와 등록 URI/SHA를 생성한 전달 색인이다. 빌드 --check는 두 출력의 freshness를 검사한다. 로컬 전달 서버는 원장을 스트리밍 해시로 검사하며 실제 자산을 확인한 뒤에만 ETag 캐시 응답을 한다. 이 의존성을 새 설치/재시작/복구 경로에 포함한다. source 원장이 바뀐 경우 색인을 갱신하며 검사나 held 정책을 우회하지 않는다.
+
+shared player는 정지/held 상태에서 false를 반환하고 단일 scene은 dirty 또는 실제 동작 때만 그린다. scrub은 같은 phase 안에서도 requestRender를 요청해야 한다. 카메라 조작/복원/최종 rest 프레임을 보존한다.
+
+최적화 전후 같음 검증과 자동 184건/455개 source-side 대조 및 실제 390/1024/1440 근거는 입력 영향 분석 후 재사용한다. 로컬 전달 방식 때문에 바뀐 경로만 추가 검증한다. CSS390은 실기기 검증이 아니다. 주 JS chunk 경고가 남아 있어도 경고 한 줄을 없애기 위해 예산을 올리지 않는다.
+
+중요: 이번 검증은 기존 WIP를 보존한 실제 작업 트리의 1,166 원장 옵션을 대상으로 한다. 원장 옵션/후보는 7우선 근육군 20표면/22실제 작용/13고유 GLB와 다른 수치다. 최적화 checkpoint의 생성 데이터는 HEAD 입력으로 재생성하여 다른 사람의 WIP를 커밋하지 않는다. T40은 전달 대상이 commit 기준인지 보존된 WIP 기준인지 명시하고, 실제 자산·의존성 확보를 먼저 확인한다. WIP를 임의 stage하거나 원본/OpenSim_Models/T13을 수정하지 않는다.

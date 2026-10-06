@@ -1,5 +1,13 @@
 # T40 — 실행 가능한 로컬 앱과 전체 움직임 범위 전달
 
+## 2026-10-06 현재 전달 계약
+
+이번 실행 입력은 `work/plans/t66-parallel-completion-2026-10-03/11-T40-local-delivery.txt` 및 T85 최적화 인계다. 재현 가능한 현재 T40 prompt는 EXECUTION의 `promptFile`에 보관한다. T85의 completed/passed와 최신 지원 기능 검증을 확인한 뒤 수행하며, 전체 콘텐츠 partial은 전달 기능의 실패와 분리한다.
+
+현재 보존된 작업 트리에서 만든 production bundle, 검증된 단일 dataset/integration projection, 실제 등록 모형·motion GLB와 해시 고정 원장을 하나의 로컬 패키지로 고정한다. dev middleware 없는 127.0.0.1 실행, 재시작·누락·변조·오래된 색인 및 ETag 전 바이트 검증을 실제 검사한다. 기존 dist 폴더만으로 전신·신경 모형이 실행된다고 안내하지 않는다.
+
+범위는 현재 지원된 7우선 근육군 및 등록된 관찰/뼈/신경 기능이다. 후보 원장 수, 자세 관찰, 실제 근육 작용, 정확한 지배 관계, 텍스트 근거와 동적 신경 자세를 따로 집계한다. T66 범위 밖 제작 실패는 deferred engineering backlog이며 이번 전달 gate에 추가하지 않는다. T40 소유 구현·보고·기록만 커밋하고 보존된 WIP 및 held 자산 패키지를 커밋하지 않는다. 이후 자동 실행할 task는 없다.
+
 2026-10-02 · 전수 motion 계획 개정 · 담당 Luna Max.
 27 앱 완료 계약과 [28 전체 근육 움직임 계획](../../design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md) 및 EXECUTION의 현재 promptFile이 기준이다. 과거 파일/보고는 보존한다. 계획 수정은 실행·합격이 아니다.
 

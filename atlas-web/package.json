@@ -34,7 +34,11 @@
     "measure:runtime-projection": "node --experimental-strip-types scripts/measureRuntimeProjection.ts",
     "prepare:datasets": "node --experimental-strip-types scripts/prepareDatasets.ts",
     "test:datasets": "node --experimental-strip-types --test src/viewer/datasets/*.test.ts",
-    "test:whole-body:historical": "node --experimental-strip-types --test src/viewer/wholeBody/wholeBody.test.ts src/viewer/wholeBody/productContext.test.ts src/viewer/wholeBody/taskExtension.test.ts src/viewer/wholeBody/t101SceneExtension.test.ts src/viewer/wholeBody/t102SceneExtension.test.ts src/viewer/wholeBody/t103SceneExtension.test.ts src/viewer/wholeBody/t104SceneExtension.test.ts && python3 ../atlas-data/tools/test_extract_bodyparts3d_r4_selected_zip_members.py && python3 scripts/check-whole-body-t77.py && python3 ../atlas-data/tools/build_bodyparts3d_r4_t79.py --check && python3 ../atlas-data/tools/build_bodyparts3d_r4_t101.py --check && python3 ../atlas-data/tools/build_bodyparts3d_r4_t102.py --check && python3 ../atlas-data/tools/build_bodyparts3d_r4_t103.py --check && python3 ../atlas-data/tools/build_bodyparts3d_r4_t104.py --check && python3 ../work/evidence/T95/validate-overlay.py"
+    "test:whole-body:historical": "node --experimental-strip-types --test src/viewer/wholeBody/wholeBody.test.ts src/viewer/wholeBody/productContext.test.ts src/viewer/wholeBody/taskExtension.test.ts src/viewer/wholeBody/t101SceneExtension.test.ts src/viewer/wholeBody/t102SceneExtension.test.ts src/viewer/wholeBody/t103SceneExtension.test.ts src/viewer/wholeBody/t104SceneExtension.test.ts && python3 ../atlas-data/tools/test_extract_bodyparts3d_r4_selected_zip_members.py && python3 scripts/check-whole-body-t77.py && python3 ../atlas-data/tools/build_bodyparts3d_r4_t79.py --check && python3 ../atlas-data/tools/build_bodyparts3d_r4_t101.py --check && python3 ../atlas-data/tools/build_bodyparts3d_r4_t102.py --check && python3 ../atlas-data/tools/build_bodyparts3d_r4_t103.py --check && python3 ../atlas-data/tools/build_bodyparts3d_r4_t104.py --check && python3 ../work/evidence/T95/validate-overlay.py",
+    "local:prepare": "node --experimental-strip-types scripts/prepareLocalDelivery.ts",
+    "local:start": "node scripts/runLocalDelivery.mjs",
+    "local:verify": "node scripts/runLocalDelivery.mjs --verify-only",
+    "test:local-delivery": "node --test scripts/localDelivery.test.mjs"
   },
   "dependencies": {
     "react": "19.3.0",

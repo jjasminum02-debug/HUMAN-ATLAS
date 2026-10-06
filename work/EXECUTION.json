@@ -5645,17 +5645,88 @@
       "title": "실행 가능한 로컬 앱과 전체 움직임 범위 전달",
       "owner": "Luna Max",
       "phase": "G5",
-      "executionStatus": "planned_not_started",
-      "acceptance": "pending",
+      "executionStatus": "completed",
+      "acceptance": "passed",
       "spec": "work/tasks/T40-APP-COMPLETION.md",
       "scope": "현재 지원 구조·설명·신경·움직임의 실제 scoped acceptance를 사용해 로컬 실행/설치/asset 확보/검증/복구 경로를 완성한다. 전체 근육 motion 목표의 전수 구현·미확보/미구현 원장을 함께 전달하며 sample 기능을 전체 완성으로 오인하지 않는다. dev middleware/asset 확보와 dist 단독 실행을 실제 구분한다. held/private/humanReview 상태를 보존한다.",
       "progress": {
         "nextUnit": null,
-        "completedUnits": []
+        "completedUnits": [
+          "verified-T85-acceptance-and-preserved-worktree",
+          "implemented-frozen-local-package-and-integrity-server",
+          "verified-private-index-and-all-99-public-files",
+          "actual-production-local-muscle-bone-nerve-flow-and-restart",
+          "reconciled-runtime-support-and-content-gaps",
+          "documented-local-install-recovery-and-pathology-boundary"
+        ],
+        "productAcceptance": {
+          "contractRevision": "app-completion-2026-10-01",
+          "acceptanceScope": "Hash-fixed local delivery of current supported normal anatomy, 7 priority muscle groups and existing shared-scene muscle/bone/nerve learning; actual startup/assets/integrity/restart/recovery and learner flows, independent of exhaustive content.",
+          "productReadiness": "local_app_ready",
+          "contentCompleteness": "partial",
+          "knownContentGaps": [
+            {
+              "kind": "muscle_motion",
+              "status": "partial",
+              "withoutPlayableSourceSurfaces": 338,
+              "prioritySupportedGroups": 7,
+              "prioritySupportedSurfaces": 20,
+              "note": "Future actual muscle actions and existing passive observations remain separate; no whole-target/extent completion."
+            },
+            {
+              "kind": "muscle_attachment_text",
+              "sourceSurfacesWithoutOriginOrInsertion": 11,
+              "wholeBoneMappingGapSurfaces": 61,
+              "mappingGapBindings": 141,
+              "status": "partial",
+              "note": "Field/soft-tissue/unresolved terminology and extent gaps are not absence of geometry."
+            },
+            {
+              "kind": "bone_motion",
+              "sourceSurfacesWithoutDirectPlayableBinding": 47,
+              "independentNormalDofCount": null,
+              "status": "partial",
+              "note": "Moving/fixed/shared-family roles coexist; local joint DOF and all bone text are not complete."
+            },
+            {
+              "kind": "nerve_course",
+              "nativeLabelGroupsWithModelContextOnly": 88,
+              "entrapmentTextUnsupportedGroups": 93,
+              "dynamicPoseSurfaces": 0,
+              "entrapmentCoordinateBindings": 0,
+              "independentAnatomicalConceptCount": null,
+              "status": "partial"
+            },
+            {
+              "kind": "deferred_engineering",
+              "status": "preserved_deferred",
+              "scope": "Prior jaw/face/respiratory candidates and E proposal integrity; not reclassified as source gaps and not current local delivery gate."
+            },
+            {
+              "kind": "public_distribution_and_human_review",
+              "publicRedistribution": "held",
+              "humanReview": "not_performed",
+              "sourceOnly": true
+            }
+          ],
+          "unresolvedProductBlockers": [],
+          "evidence": [
+            "work/evidence/T40/local-delivery-2026-10-06/REPORT.md",
+            "work/evidence/T40/local-delivery-2026-10-06/final-validation.json",
+            "work/evidence/T40/local-delivery-2026-10-06/snapshot-manifest.json",
+            "work/evidence/T40/local-delivery-2026-10-06/asset-provenance.json",
+            "work/evidence/T40/local-delivery-2026-10-06/feature-coverage.json",
+            "work/evidence/T40/local-delivery-2026-10-06/browser-validation.json",
+            "work/evidence/T40/local-delivery-2026-10-06/impact-analysis.json"
+          ],
+          "deliveryBasis": "preserved_working_tree_snapshot_not_commit_only",
+          "snapshotId": "local-20261006032053779-deedfed2",
+          "manifestSha256": "e51b978ec763cf8a718489424f4fb2af6d1d277bbcf3c743e6532d77763c6f1b"
+        }
       },
       "report": "work/reports/T40.md",
       "promptFile": "work/prompts/app-completion-2026-10-01/18-T40.txt",
-      "acceptanceScope": "declared_verified_feature_scope; exhaustive_content_coverage_reported_separately",
+      "acceptanceScope": "Hash-fixed local delivery of current supported normal anatomy, 7 priority muscle groups and existing shared-scene muscle/bone/nerve learning; actual startup/assets/integrity/restart/recovery and learner flows, independent of exhaustive content.",
       "contractRevision": "app-completion-2026-10-01",
       "acceptanceContract": {
         "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
@@ -5669,8 +5740,99 @@
       },
       "absorbedWorkIds": [],
       "motionPlanningReference": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md",
-      "scopeGoal": "all_declared_muscles_without_initial_shortlist",
-      "planningAmendment": "user-all-muscles-2026-10-02"
+      "scopeGoal": "deliver_current_supported_priority_scope_with_complete_content_gap_ledger",
+      "planningAmendment": "user-all-muscles-2026-10-02",
+      "scopeAmendment": "T40-local-delivery-2026-10-06",
+      "inputAddendum": "work/plans/t85-optimization-2026-10-06/T40-ADDENDUM.txt",
+      "inputFile": "work/plans/t66-parallel-completion-2026-10-03/11-T40-local-delivery.txt",
+      "productReadiness": "local_app_ready",
+      "contentCompleteness": "partial",
+      "knownContentGaps": [
+        {
+          "kind": "muscle_motion",
+          "status": "partial",
+          "withoutPlayableSourceSurfaces": 338,
+          "prioritySupportedGroups": 7,
+          "prioritySupportedSurfaces": 20,
+          "note": "Future actual muscle actions and existing passive observations remain separate; no whole-target/extent completion."
+        },
+        {
+          "kind": "muscle_attachment_text",
+          "sourceSurfacesWithoutOriginOrInsertion": 11,
+          "wholeBoneMappingGapSurfaces": 61,
+          "mappingGapBindings": 141,
+          "status": "partial",
+          "note": "Field/soft-tissue/unresolved terminology and extent gaps are not absence of geometry."
+        },
+        {
+          "kind": "bone_motion",
+          "sourceSurfacesWithoutDirectPlayableBinding": 47,
+          "independentNormalDofCount": null,
+          "status": "partial",
+          "note": "Moving/fixed/shared-family roles coexist; local joint DOF and all bone text are not complete."
+        },
+        {
+          "kind": "nerve_course",
+          "nativeLabelGroupsWithModelContextOnly": 88,
+          "entrapmentTextUnsupportedGroups": 93,
+          "dynamicPoseSurfaces": 0,
+          "entrapmentCoordinateBindings": 0,
+          "independentAnatomicalConceptCount": null,
+          "status": "partial"
+        },
+        {
+          "kind": "deferred_engineering",
+          "status": "preserved_deferred",
+          "scope": "Prior jaw/face/respiratory candidates and E proposal integrity; not reclassified as source gaps and not current local delivery gate."
+        },
+        {
+          "kind": "public_distribution_and_human_review",
+          "publicRedistribution": "held",
+          "humanReview": "not_performed",
+          "sourceOnly": true
+        }
+      ],
+      "unresolvedProductBlockers": [],
+      "wholeMuscleMotionGoal": {
+        "status": "partial",
+        "muscleTargets": 429,
+        "muscleMemberships": 447,
+        "baseSourceConcepts": 232,
+        "baseSourceSurfaces": 462,
+        "actualMuscleActionSurfaces": 38,
+        "actualMuscleActionBindings": 56,
+        "acceptedPriorityGroups": 7,
+        "acceptedPrioritySurfaces": 20,
+        "acceptedPriorityActionBindings": 22,
+        "acceptedPriorityUniqueGlbs": 13,
+        "reachablePlayablesIncludePostures": 134
+      },
+      "wholeBoneMotionGoal": {
+        "status": "partial",
+        "boneTargets": 113,
+        "localEligibleSourceSurfaces": 213,
+        "directSelectionPlayableSourceSurfaces": 166,
+        "sourceOptionRoleBindings": 1581,
+        "independentNormalDofCount": null
+      },
+      "nerveCourseCoverage": {
+        "localEligibleSourceSurfaces": 195,
+        "nativeLabelGroups": 98,
+        "independentAnatomicalConceptCount": null,
+        "observedModelContextRows": 88,
+        "documentedOrReusedCourseRows": 10,
+        "olderImplementationLedgerCourseRows": 8,
+        "currentHashVerifiedAdditionalCourseRows": 2,
+        "entrapmentTextSupportedRows": 5,
+        "entrapmentTextUnsupportedRows": 93,
+        "staticGeometrySourceSurfaces": 195,
+        "dynamicPoseSurfaces": 0,
+        "entrapmentCoordinateBindings": 0,
+        "geometryMotorRelations": 2,
+        "motorRelationRows": 18,
+        "note": "Native label groups and relationship rows are not independent nerve concepts; generic missing-evidence messages are not supported course/entrapment text.",
+        "status": "partial"
+      }
     }
   },
   "absorbedTasks": {
