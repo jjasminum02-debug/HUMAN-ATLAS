@@ -1,0 +1,14 @@
+HUMAN ATLAS에서 이름·신경·카드 개선 계획의 02 신경 검토만 수행해라. 담당 Luna Max · 현재 대화 직접 검토.
+
+AGENTS.md, work/NEXT.md, work/EXECUTION.json, 현재 product acceptance/27 설계, work/plans/atlas-quality-review-2026-10-06/README.md와 run-manifest.json을 읽어라. 고정 input-snapshot/nerve.json의 hash와 assignments.nerve를 확인하고 시작해라. manifest는 이미 준비되어 있다. 01의 UI 변경을 고정 신경 입력 전체가 stale인 이유로 삼지 않는다. 이 단계의 공통 runtime/데이터/EXECUTION 쓰기는 금지하며 work/reviews/atlas-quality-review-2026-10-06/nerve/만 쓴다. 새 task/thread/agent, 자동 다음 실행, push/배포는 금지한다.
+
+목표는 사용자가 각 신경을 선택했을 때 나오는 근육 매칭과 신경 설명의 정확성을 전수 검토하고 실제로 적용 가능한 수정안을 완성하는 것이다. 195 source 표면/98 원본 label 묶음/98 concept 행/기존 운동근 관계18행을 구별한다. 이는 독립 신경195개 또는98개의 전수 지배망 완성이라는 뜻이 아니다. 전체 배정 ID를 빠짐없이 disposition으로 남기되 같은 개념의 양측은 근거를 공유한다.
+
+1. learner-nerve-graph-t66.json, nerve-learning-t66.json, nerve-support-t66.json, src/data/learning.ts, domain/nerveRelations.ts, App.tsx의 relation 목록, viewer의 강조/restore 경로를 읽어라. 실제 source key→선택 신경 concept→relation→선택 가능한 근육 source→좌우 filter→강조→근육 역관계→작용 링크를 추적한다. 현재 표시 이름만으로 관계를 판정하지 않는다.
+2. 기존18행의 신경 identity, 부모/분지 범위, 대상 근육/part/head/side, 여러 신경의 중복 지배, 변이/조건과 근거 locator를 모두 검토한다. 같은 이름/근접 geometry/상위 신경 관계를 모든 하위 분지에 자동 상속하지 않는다. 문헌상 개념 지배와 모형 분지의 좌표 결속을 구분하고 문헌관계를 geometry-bound로 승격하지 않는다. 반대쪽 표면 연결, 피부신경에 잘못 붙은 운동근, part 집합을 whole muscle로 과장한 행, 역관계 불일치가 있는지 확인한다.
+3. 각 신경의 courseContext/functionContext/compressionContext/variationContext와 concept.summary, functionEvidenceClass, UI의 ‘분지’/‘지배근’ 표현을 함께 대조한다. 출발/분지/주행/주변 구조/운동·감각 구분/문헌상 포착 맥락의 실제 오류, 내부 상태와 모순된 문장, 반복 placeholder를 구분한다. 감각영역·피부분절을 합치지 않는다. 문헌의 일반 주행을 화면에서 측정한 경로처럼 쓰지 않는다. 관계가 미연결이라는 이유로 운동 지배가 없다고 쓰지 않는다. 문헌상 포착 가능성은 화면 좌표나 병변 판정이 아니다.
+4. 기존 sourceRecords/field locator/value hash를 우선 재사용한다. 새로 판단할 anatomy 사실이나 충돌만 실제 해부학 연구 원문·공식 자료로 확인하고 URL/판본/section 또는 table/짧은 발췌·접근 시각을 기록한다. 고정 원장 전체의 동일 검색을 반복하지 않는다. 확인 불가능한 내용은 미확정으로 남기며 텍스트가 있다는 이유로 verified 처리하지 않는다. 의심되는 잘못된 표시에는 수정 또는 격리안을 낸다. 신경 전체의 신규 geometry/동적 pose 제작은 이번 범위가 아니다.
+5. proposals.json에는 정확한 대상 파일/JSON pointer 또는 코드 위치, before 값 또는 hash, after 제안, 근거 경로/locator, side/part/relationship scope, correction/qualification/isolation 분류를 적어 단일 통합자가 바로 적용할 수 있게 한다. relation-review.json과 description-review.json에 모든 배정 source/concept/relation의 판정(확인/수정필요/근거미확보/해당없음), 신규 발견 누락 관계와 자료 gap을 기록한다. 오류와 미확보는 구별한다. 단순 count나 목록 생성만으로 정확하다고 선언하지 않는다.
+
+REPORT.md에는 확인한 실제 오류와 수정안, 검증된 관계/텍스트 수, 미확정 수, UI 관련 주의점을 짧게 남겨라. 기존 humanReview=not_performed/public rights held/source-only와 원본/WIP/분모를 보존한다. 공통 파일 stage/commit/빌드/전체 suite/전수 PNG는 하지 않는다. 출력의 hash와 소유 경로를 보고한다. 신경 목록과 근육 표시는 검토 결과일 뿐 생리적 활성도·힘 측정이 아니다.
+종료 후 03이 끝나면 04-integrate-and-deliver.txt로 두 결과를 실제 반영한다고 안내하고 멈춰라. 다른 단계를 자동 실행하지 않는다.

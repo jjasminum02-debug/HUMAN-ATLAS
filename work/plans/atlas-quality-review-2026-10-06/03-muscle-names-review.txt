@@ -1,0 +1,14 @@
+HUMAN ATLAS에서 이름·신경·카드 개선 계획의 03 전체 근육 이름 검토만 수행해라. 담당 Luna Max · 현재 대화 직접 검토.
+
+AGENTS.md, work/NEXT.md, work/EXECUTION.json, 현재 product acceptance/27 설계, work/plans/atlas-quality-review-2026-10-06/README.md와 run-manifest.json을 읽어라. 고정 input-snapshot/muscle.json의 hash와 assignments.names를 확인하고 시작해라. manifest는 이미 준비되어 있다. 01의 UI 변경을 고정 이름 입력 전체가 stale인 이유로 삼지 않는다. 이 단계의 공통 runtime/데이터/EXECUTION 쓰기는 금지하며 work/reviews/atlas-quality-review-2026-10-06/names/만 쓴다. 새 task/thread/agent, 자동 다음 실행, push/배포는 금지한다.
+
+전체 근육을 대상으로 우리말명(현대 한국어 해부학명), 한자어명(한글 표기), 영문명이 정확한지 검토해라. ‘순우리말’ 요구는 의미를 억지로 직역한 신조어를 만들라는 뜻이 아니다. actual Hanja 수집은 하지 않는다. 고정 입력472 source 행(learner462/inspection10)과 전체429 muscle target/group/part 행을 전수 disposition으로 남기며 서로 다른 분모를 합치지 않는다. target에 표면이 없으면 이름 검토와 geometry gap을 별도로 남긴다.
+
+1. 실제 runtime label/names/aliases/searchGroupKey, source identity와 target term/parent/part/side를 대조한다. za-local-integration, learner-card-runtime, learning-names, composed-parts 규칙과 이전 명명 근거/검토 원장을 읽어 현재 화면까지 오는 우선순위를 확인한다. 세 필드 존재/빈값 검사는 자동 전수 수행하되 이를 의미 정확성 합격으로 세지 않는다.
+2. 기본 근육명, 갈래/부분/분절/번호, 대·소/긴·짧은, 노·자/안·가쪽, 양측의 이름 대응과 영어 source qualifier를 대조한다. parent/member 이름을 그룹 전체 이름으로 덮지 않는다. 원본 provider 이름/ID를 바꾸지 않는다. 괄호/순서/띄어쓰기 같은 표기와 실제 identity 오류를 구분한다. 수많은 표면은 개념/part 단위로 근거를 공유하되 적용 source key는 모두 적는다.
+3. 한자어 표시명과 현대 한국어 표준명, 학습용 익숙한 별칭을 분리한다. 이전 사용자 요청의 전면/측면/후면삼각근 표시와 해부 part subtitle, 위팔두갈래근·장두/긴갈래·단두/짧은갈래 등 검색 별칭이 정확한 대상에 도달하는지 검토한다. ‘긴갈래’ 자체를 무조건 오명으로 취급하지 않고 기준 문헌과 사용자의 검색 요구를 함께 충족하는 canonical/alias안을 낸다. 영문명은 정확한 구조/part 대응을 보존하고 source 원문과 learner 정규화명을 내부에서 구분한다.
+4. 재사용 가능한 공식 용어 자료·기존 locator/근거를 먼저 사용한다. 미검토 개념과 실제 충돌은 공신력 있는 용어 자료 또는 해부학 원문을 확인한다. 직접 표제어와 근거 있는 문맥 조합명을 서로 다른 evidenceClass로 기록한다. 전체 구조의 기존 exact-term 검색을 다시 돌리거나 근거 부족을 유사 부모 이름으로 덮지 않는다. 확인할 수 없는 이름은 명시적으로 미확정이다.
+5. names-review.json에 배정 source key 전부와 target ID 전부의 필드별 판정, 동의어/part 대응, evidenceClass/locator, learner/inspection 구분을 기록한다. proposals.json에는 정확한 소유 데이터 파일/JSON pointer, before 값/hash, after 세 이름/label/alias 제안, 적용 source/target/part/side와 근거를 넣는다. 새 규칙은 불규칙 예외를 망가뜨리지 않는 공통 규칙으로 제안하되 runtime patch는 04 담당이다. 소리만 비슷한 근육끼리 검색 결과를 합치지 않는다.
+
+REPORT.md에 누락·실제 오류·허용 변형·alias 개선·미확정 수를 분리하고 대표 수정 전후를 남겨라. 화면명 filled 수를 verified 수로 쓰지 않는다. source-only/HA binding/extent/humanReview/public rights 상태를 이름 수정으로 승격하지 않는다. 원본/OpenSim_Models/T13/WIP/542·563·12/HA130/역사163을 보존한다. 공통 파일 stage/commit, build/전체 suite/전수 PNG는 하지 않는다. 출력의 hash와 소유 경로를 보고한다.
+종료 후 02가 끝나면 04-integrate-and-deliver.txt로 두 결과를 실제 반영한다고 안내하고 멈춰라. 다른 단계를 자동 실행하지 않는다.

@@ -1,0 +1,15 @@
+HUMAN ATLAS에서 이름·신경·카드 개선 계획의 01 UI 단계만 수행해라. 담당 Luna Max · 현재 대화 직접 구현.
+
+AGENTS.md, work/NEXT.md, work/EXECUTION.json, work/product-acceptance.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/plans/atlas-quality-review-2026-10-06/README.md와 run-manifest.json, 실제 T40 전달 보고서를 읽어라. 현재 T40 완료 기록을 보존한다. 새 task 번호/스레드/agent 생성, 자동 다음 실행, push/배포는 금지한다. 이번 승인된 UI 개선의 결과는 work/reviews/atlas-quality-review-2026-10-06/ui/에 기록하며 기존 task 상태/spec을 바꾸지 않는다.
+
+현재 UI를 먼저 확인하고 직접 수정한다. atlas-web/src/ui/App.tsx, MotionLearningPanel.tsx, atlasShell.css, styles.css와 관련 selector/controller를 읽어라. 5180은 고정 snapshot이므로 소스 변경 확인은 기존 개발 실행 경로에서 하고, 전달본 갱신은 04가 담당한다고 보고해라.
+
+1. 일반 근육 선택, 좌우 변경, 검색 선택, 뒤/앞 복원 때 구조 탭을 기본 선택으로 한다. 구조에는 현재 기시·정지·관련 뼈·신경 정보를 보존한다. 신경의 ‘이 근육의 작용 설명/움직임 보기’와 작용 탐색에서 직접 선택한 경우만 명시적으로 기능 탭을 열고 정확한 actionId를 전달한다. 같은 React 이벤트에서 기본 탭 초기화가 기능 이동을 덮지 않게 한다.
+2. 기능 탭에 동작을 한 줄에 하나씩 세로 나열한다. 선택 표시, 작용명, 짧은 설명/재생 가능 상태를 일관되게 구성한다. App의 learner-action-picker와 MotionLearningPanel의 motion-action-picker 중복을 제거하고 하나의 선택 상태/목록으로 합친다. 작용 설명만 있는 행도 유지한다. 행 선택만으로 자동 재생하지 않는다.
+3. 움직임 패널과 단일 CTA를 기능 화면에 일관되게 배치한다. 이전 R14의 ‘탭 위 패널’ 지시보다 이번 사용자 요청을 우선한다. posture_observation은 기본 작용 목록의 ‘주변 구조’ 배지와 뒤섞지 말고 접힌 ‘자세에서 관찰하기’로 분리하고, 근육 작용이 아님을 짧게 설명한다. 해당 기능을 삭제하거나 muscle_action으로 이름만 바꾸지 않는다. 움직임에 필요한 관절·손발·기시정지 뼈·주변 근육 및 선택 대비는 그대로 보존한다.
+4. 단일 scene/renderer/camera/controller/frame clock/player를 유지한다. CTA 클릭 반복 왕복→재클릭 smooth rest, scrub/reduced-motion/숨김/layer-off/취소/정적 신경 복원을 보존한다. UI 재배치로 player 중복 마운트/자산 재로딩을 만들지 않는다. 재생 중 구조 탭으로 이동하면 기존 controller로 반복을 중단하고 부드럽게 rest로 복원한다. 카메라와 사용자의 숨김 설정을 초기화하지 않는다. slow/pause/reset 버튼을 복구하지 않는다.
+5. 왼쪽 부위 탐색 상단에 항상 접근 가능한 ‘부위 탐색 · 현재 부위 ▾’를 두고 전신과 기존 12부위 버튼을 펼친다. 아래 긴 구조/검색/작용 목록만 독립적으로 스크롤한다. 검색 중에도 부위 선택기를 숨기지 않는다. 클릭·터치·Enter/Space로 열기, Escape/바깥 클릭으로 닫기, 선택 후 적절한 포커스 복원, 현재 선택 표시와 기존 Shift 복수부위 선택을 보존한다. hover는 fine pointer에서만 보조로 지원해도 된다. 드롭다운 자체 높이를 화면 안에 제한하고 모형/카드를 가리지 않게 한다. 측정 없이 가상 목록이나 새 상태관리 도구를 도입하지 않는다.
+6. 실제 브라우저에서 긴 전신 목록 끝까지 내린 뒤 목으로 바로 전환, 검색 중 전신/부위 전환, 키보드/터치 대응, 구조 기본값, 세로 작용 목록, 명시적 신경→작용 이동, loop/rest/숨김을 확인한다. 390/1024/1440은 실제 viewport 치수를 기록하며 CSS 폭을 실기기라고 부르지 않는다. 관련 UI 회귀만 수행하고 전체 geometry QC/새 조사/전체 suite·production build를 반복하지 않는다. 최종 build는 04에서 한다.
+
+REPORT.md, validation.json, 대표 PNG와 소유 변경 경로를 남겨라. 기존 다른 사람의 미커밋 변경이 있는 파일은 이번 delta만 구분하여 선별 로컬 커밋하고 나머지 WIP를 보존한다. 542/563/12·HA130·역사163·원본/OpenSim_Models/T13·source-only/public held/humanReview 상태를 바꾸지 않는다. 학생 화면에 task/source/evidence/내부 ID를 넣지 않는다. 이 단계는 전체 데이터 검토 합격이 아니다.
+종료 후 02-nerve-review.txt와 03-muscle-names-review.txt는 별도 출력 폴더로 병렬 검토할 수 있다고 안내하고 멈춰라. 자동 실행하지 않는다.
