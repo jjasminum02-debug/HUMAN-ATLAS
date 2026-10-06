@@ -131,6 +131,8 @@ export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datas
         : !bones && !muscles && !nerves ? '뼈·근육·신경 중 볼 구조를 켜 주세요.'
         : selectedNerve && !nerves ? '신경 보기를 켜면 선택한 주행을 볼 수 있습니다.'
         : selectedId && presentation.hidden.includes(selectedId) ? '선택한 모형을 숨겼습니다. 다른 구조를 선택해도 숨김을 유지합니다.'
+        : selectedId && presentation.isolated ? '선택만 보기에서는 주변 뼈와 근육이 숨겨집니다. 관절 움직임을 함께 보려면 선택만 보기를 해제해 주세요.'
+        : selectedId && !bones ? '뼈 보기가 꺼져 있습니다. 관절과 부착 문맥을 함께 보려면 뼈 보기를 켜 주세요.'
         : progress && !progress.selectedAvailable ? '선택한 설명에 연결된 모형이 현재 보기에 없습니다.'
         : selectedNerve && nerves && presentation.observeNerves ? '신경 주행 보기 · 주변 구조는 반투명으로 표시합니다.'
         : '드래그하여 회전 · 스크롤하여 확대'}

@@ -15,6 +15,8 @@ import { sourceGeometrySha256 } from './sourceMotionGeometry.ts';
 import type { SourceMotionHost } from './sourceMotionHost.ts';
 import { attachmentBoneKeys } from './regionalContext.ts';
 import { motionFrameSourceKeys } from './motionFrameContext.ts';
+import { motionContextVisibility } from './motionContextVisibility.ts';
+import { contextBoneFollowers, followContextBone, limbMotionContextKeys } from './motionContextBonePose.ts';
 import { muscleActionEmphasis } from "../../domain/atlasMotionExperience.ts";
 import type { MotionLearningIntent } from '../../domain/atlasMotionExperience.ts';
 /** Dataset selection/presentation adapter; renderer, camera and lifecycle remain owned by the existing controller. */
@@ -35,7 +37,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
     private guidedMotionDirection: THREE.Vector3 | null = null;
     private notify: (p: BodyProgress) => void;
     private select: (id: string, side: string | null) => void;
-    private motion: { asset: MotionAsset; resource: AnimationSceneResource; player: AnimationPlaybackController; originals: Map<string, { node: THREE.Mesh; visible: boolean }>; packageMaterials: Map<string, THREE.Material | THREE.Material[]>; contextKey: string; frameSourceKeys: string[]; onInvalidated?: (reason: string) => void } | null = null;
+    private motion: { asset: MotionAsset; resource: AnimationSceneResource; player: AnimationPlaybackController; originals: Map<string, { node: THREE.Mesh; visible: boolean }>; packageMaterials: Map<string, THREE.Material | THREE.Material[]>; contextKey: string; frameSourceKeys: string[]; extraContextKeys: string[]; boneFollowers: Array<{ node: THREE.Mesh; rest: THREE.Matrix4; anchor: THREE.Object3D; anchorRestInverse: THREE.Matrix4 }>; onInvalidated?: (reason: string) => void } | null = null;
     constructor(host: HTMLElement, dataset: Dataset, integration: RuntimeIntegration, notify: (p: BodyProgress) => void, select: (id: string, side: string | null) => void) {
         validateRuntimeIntegration(integration, dataset);
         this.notify = notify;
@@ -111,10 +113,12 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                         && (row.side === subject.side || row.side === null);
                 })
                 : [];
-            const frameSourceKeys = this.view.isolate ? [binding.subjectSourceKey] : motionFrameSourceKeys(
+            const extraContextKeys = this.view.isolate ? [] : limbMotionContextKeys(asset, [...this.records.values()], key => attachmentBoneKeys(key, 'origin').length && attachmentBoneKeys(key, 'insertion').length ? attachmentBoneKeys(key) : [])
+                .filter(key => this.records.get(key)?.kind === 'bone' ? this.view.bones : this.view.muscles);
+            const frameSourceKeys = this.view.isolate ? [binding.subjectSourceKey] : [...new Set([...motionFrameSourceKeys(
                 binding.members, asset.poseControl?.framingSourceKeys, binding.subjectSourceKey,
                 key => this.records.get(key)?.kind, exactAttachmentKeys,
-            );
+            ), ...extraContextKeys])];
             const requiredKeys = [...new Set([...baseKeys, ...binding.members.map(member => member.sourceKey), ...frameSourceKeys])];
             const detailKeys = binding.members.filter(member => member.lod === 'detail').map(member => member.sourceKey);
             // An exact motion buffer may bind overview even for the selected bone.
@@ -204,11 +208,21 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 this.resources.nodes.set(sourceKey, motionNode);
                 this.resources.motionOverrides.add(sourceKey);
             }
+            const boneFollowers = contextBoneFollowers(asset, extraContextKeys, key => this.records.get(key)).map(follower => {
+                const node = this.resources.nodes.get(follower.sourceKey)!;
+                const anchor = resource.sourceNodes.get(follower.anchorSourceKey)!;
+                return { node, rest: node.matrix.clone(), anchor, anchorRestInverse: anchor.matrix.clone().invert() };
+            });
             const player = new AnimationPlaybackController(resource, asset.clip.id, {
                 repeat: true, pingPong: true,
                 actionDirection: asset.poseControl?.actionDirection,
                 returnSpeed: this.motionIntent === 'muscle_action' && asset.poseControl?.actionDirection !== 'reverse' ? 1.7 : 1,
                 onTimeChange: (time, completed) => {
+                    for (const follower of boneFollowers) {
+                        follower.anchor.updateMatrix();
+                        followContextBone(follower.rest, follower.anchorRestInverse, follower.anchor.matrix, follower.node.matrix);
+                        follower.node.updateMatrixWorld(true);
+                    }
                     const activePose = time > 1e-6;
                     const phase = player.phase;
                     if (this.motionPoseActive !== activePose || this.motionPhase !== phase) {
@@ -229,7 +243,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 }, disposeResource: false,
                 registerUpdate: update => this.scene.addUpdate(update),
             });
-            this.motion = { asset, resource, player, originals: originalNodes, packageMaterials, contextKey: currentContextKey, frameSourceKeys, onInvalidated };
+            this.motion = { asset, resource, player, originals: originalNodes, packageMaterials, contextKey: currentContextKey, frameSourceKeys, extraContextKeys, boneFollowers, onInvalidated };
             this.scene.renderer.domElement.parentElement?.setAttribute('data-motion-context', 'active');
             this.apply();
             // Frame the complete moving chain once, retaining the user's viewing direction.
@@ -287,6 +301,10 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         this.motionPhase = 'rest';
         active.player.resetPose();
         active.player.dispose();
+        for (const follower of active.boneFollowers) {
+            follower.node.matrix.copy(follower.rest);
+            follower.node.updateMatrixWorld(true);
+        }
         for (const [sourceKey, original] of active.originals) {
             const motionNode = active.resource.sourceNodes.get(sourceKey) as THREE.Mesh | undefined;
             const originalMaterial = active.packageMaterials.get(sourceKey);
@@ -308,15 +326,11 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         const rows = [...this.records.values()];
         const visibleKeys = new Set(demandedStructureKeys(rows, this.view));
         // Motion context may cross region boundaries, but never overrides user layer/hidden choices.
-        if (this.motion && !this.view.isolate) visibleKeys.clear();
-        if (this.motion && !this.view.isolate) for (const member of this.motion.asset.sourceBinding?.members ?? []) {
-            const row = this.records.get(member.sourceKey);
-            if (row && (row.kind === 'bone' ? this.view.bones : this.view.muscles)) visibleKeys.add(member.sourceKey);
-        }
-        if (this.motion && !this.view.isolate && this.view.bones) for (const sourceKey of this.motion.frameSourceKeys) {
-            const row = this.records.get(sourceKey);
-            if (row?.kind === 'bone' && row.localDisplayEligible && row.defaultVisible && !row.hardHoldReasons.length
-                && !row.sourceHiddenStatePreserved.hideViewport && !this.view.hiddenSourceKeys?.includes(sourceKey)) visibleKeys.add(sourceKey);
+        if (this.motion) {
+            visibleKeys.clear();
+            const contextMembers = [...this.motion.asset.sourceBinding?.members ?? [], ...this.motion.extraContextKeys.map(sourceKey => ({sourceKey, role:'co_moving_context'}))];
+            for (const key of motionContextVisibility(contextMembers, this.motion.frameSourceKeys,
+                key => this.records.get(key), this.view)) visibleKeys.add(key);
         }
         const highlights = new Set(innervationHighlightKeys(rows, this.view, visibleKeys));
         const observe = observingNerves(rows, this.view, visibleKeys);
@@ -362,6 +376,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             motion: this.motion ? { assetId: this.motion.asset.id, contextKey: this.motion.contextKey,
                 learningIntent: this.motionIntent, phase: this.motionPhase,
                 surfaceCount: this.motion.originals.size, fixedCount: this.motion.asset.sourceBinding?.members.filter(m => m.role === 'fixed_structure').length } : null,
+            contextBoneFollowers: this.motion?.boneFollowers.map(follower => ({sourceKey:follower.node.userData.sourceKey, matrix:follower.node.matrix.toArray(), rest:follower.rest.toArray()})) ?? [],
             motionBytes: this.motion?.resource.memoryEstimateBytes ?? 0, estimatedActiveBytes: q.bytes + (this.motion?.resource.memoryEstimateBytes ?? 0) });
     }
     private fit(rows: RuntimeStructureRecord[], padding = 1.25) {

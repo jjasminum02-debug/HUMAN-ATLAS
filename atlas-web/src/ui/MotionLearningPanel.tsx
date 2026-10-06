@@ -28,6 +28,7 @@ interface Props {
   sourceContextKey: string | null;
   showActionPicker?: boolean;
   muscleLayerEnabled?: boolean;
+  boneLayerEnabled?: boolean;
   subjectKind?: "muscle" | "bone";
   subjectHidden?: boolean;
 }
@@ -70,7 +71,7 @@ async function readMotionPackage(response: Response, signal: AbortSignal): Promi
   return output.buffer;
 }
 
-export function MotionLearningPanel({ actions, selectedActionId, onSelectAction, host, sourceContextKey, showActionPicker = true, muscleLayerEnabled = true, subjectKind = "muscle", subjectHidden = false }: Props) {
+export function MotionLearningPanel({ actions, selectedActionId, onSelectAction, host, sourceContextKey, showActionPicker = true, muscleLayerEnabled = true, boneLayerEnabled = true, subjectKind = "muscle", subjectHidden = false }: Props) {
   const selectedAction = actions.find((action) => action.id === selectedActionId) ?? null;
   const candidate = selectedAction?.candidate ?? null;
   const intent = motionLearningIntent(selectedAction);
@@ -334,6 +335,7 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
       {selectedAction && <span className="motion-kind">{intent === "muscle_action" ? "작용 시범" : intent === "bone_motion" ? "관절 시범" : intent === "posture_observation" ? "주변 구조 관찰" : "글 설명"}</span>}
     </div>
     {selectedAction && <p className="motion-action-summary">{actionLabel}</p>}
+    {candidate && !boneLayerEnabled && <p className="quiet-note" role="status">뼈 보기가 꺼져 있습니다. 관절과 기시·정지 뼈를 함께 보려면 모형 아래의 뼈 보기를 켜 주세요.</p>}
     {intent === "posture_observation" && <p className="quiet-note">주변 관절이 움직일 때의 모습을 보여 줍니다. 선택한 근육의 작용 시범은 아닙니다.</p>}
     {showActionPicker && <fieldset className="motion-action-picker" aria-label="움직임 선택">
       <legend>움직임 선택</legend>

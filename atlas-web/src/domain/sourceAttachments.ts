@@ -1,4 +1,5 @@
 import type { RuntimeStructureRecord } from '../viewer/datasets/integration.ts';
+import { namedAttachmentBones } from './attachmentTextContext.ts';
 
 export interface SourceAttachmentContent {
   contract: { sourceOnly: boolean; humanReview: string; publicRedistribution: string; canonicalBindingsCreated: number; geometryCreated: number };
@@ -55,6 +56,7 @@ export function projectSourceAttachments(content: SourceAttachmentContent, rows:
           if (bones.length !== 1) throw Error('Attachment bone identity: ' + name);
           contexts[sourceKey][role].push(bones[0].sourceKey);
         }
+        if (!item.contextBones[role].length) contexts[sourceKey][role] = namedAttachmentBones(item[role], muscle.side, rows).keys;
       }
     }
   }
