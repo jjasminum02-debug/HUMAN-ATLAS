@@ -167,19 +167,28 @@ test("T22 adapter scene is driven by one mixer clock; pose reset does not reset 
 test("same-scene playback uses the host clock, creates no RAF chain, and leaves resource disposal to the host", () => {
   const disposed = { count: 0 };
   const resource = syntheticResource(disposed);
-  let update: ((deltaSeconds: number) => void) | null = null;
+  let update: ((deltaSeconds: number) => boolean) | null = null;
   let unregistered = 0;
   const player = new AnimationPlaybackController(resource, "SyntheticMotion", {
     registerUpdate: (callback) => { update = callback; return () => { unregistered++; update = null; }; },
     disposeResource: false,
     repeat: true,
   });
+  assert.equal(update!(0.5), false, "resting players do not request continuous drawing");
   player.play(0.5);
   assert.equal(player.isPlaying, true);
   assert.equal(update !== null, true);
-  update!(0.5);
+  assert.equal(update!(0.5), true);
   assert.equal(player.currentTime, 0.25);
   assert.ok(Math.abs(resource.bone.position.y - 0.25) < 1e-6);
+  player.pause();
+  assert.equal(update!(0.5), false);
+  player.seek(0.6);
+  assert.equal(player.currentTime, 0.6);
+  assert.equal(update!(0.5), false, "scrubbing holds the requested pose without continuous drawing");
+  player.returnToRest(.2);
+  assert.equal(update!(.3), true, "paint the final restoration frame");
+  assert.equal(update!(.3), false);
   player.resetPose();
   assert.equal(player.isPlaying, false);
   assert.equal(player.currentTime, 0);

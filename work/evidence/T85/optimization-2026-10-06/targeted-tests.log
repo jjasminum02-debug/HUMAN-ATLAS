@@ -1,0 +1,27 @@
+✔ production bundle retains original motions and registers unit-01 bilateral flexion observations (0.9625ms)
+✔ text can be present while there is no compatible motion clip (0.149209ms)
+✔ learner card motion linking requires an explicit action key and compatible side (0.061167ms)
+✔ clip capability requires exact static scene, side, frame, reference pose, and rig-node binding (0.106625ms)
+✔ runtime session is resettable state and exposes no persisted content/review fields (0.056167ms)
+✔ learner text projection omits authoring IDs, JSON, task codes, and review states (0.092375ms)
+✔ learner action projection translates roles and unspecified contraction into plain Korean (0.071416ms)
+✔ source-only action and clip resolve by exact sourceKey without creating a canonical subject (0.2035ms)
+✔ extension distinguishes preparation from reverse action and smooth reset (1.680667ms)
+✔ extension starts from a scrubbed bent endpoint without jumping to rest (0.211583ms)
+✔ single RAF loop updates speed without making a second chain and ignores late callbacks (0.081042ms)
+✔ repeating playback wraps continuously and reset restores the rest pose (0.130625ms)
+✔ T22 adapter scene is driven by one mixer clock; pose reset does not reset camera (0.126333ms)
+✔ same-scene playback uses the host clock, creates no RAF chain, and leaves resource disposal to the host (0.124459ms)
+✔ clip end clamps at the final pose and cancels its RAF chain (0.0955ms)
+✔ missing clip fails closed and releases the imported scene (0.153167ms)
+✔ one-toggle gesture reverses at its endpoint and eases to exact rest on the same clock (0.132583ms)
+✔ return cancellation and disposal cannot invoke a stale rest callback (0.124791ms)
+✔ an action cycle has a faster neutral return, preserves poses and uses one clock (0.118875ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 306.377166

@@ -22,3 +22,7 @@ T47 감사를 흡수해 전체 motion 원장에서 실제 지원하는 모든 cl
 ## 합격과 보존
 
 542/563/12, 근육 관련429 target/447 membership, 현재232 source 개념/462 표면과 원장 전체를 보존한다. 기존 HA130·역사163(6/20/135/2), source-only·권리 held·humanReview=not_performed·원본/OpenSim_Models/T13/WIP를 유지한다. 자동 위임·새 task/thread·push/배포·임상 기능은 금지한다. 전체 움직임 완료와 해당 task의 실제 책임 완료를 구분하며 일부 clip 성공으로 전체를 완료 처리하지 않는다. report/evidence/EXECUTION의 현재 acceptance 필드를 실제 검증으로 기록하고 sync/check 및 소유 로컬 커밋 후 멈춘다.
+
+## 2026-10-06 사용자 실행 최적화 후속
+
+기능을 바꾸지 않고 주요 실행 비용을 측정해 공유 생성 데이터/정지 렌더/전달 원장 경로를 최적화한다. 기존 frame clock/카메라/형상·동작 각도/hold·권리/예산을 유지하고 전후 동일성 및 실제 사용 흐름을 검증한다. 검증 뒤 개발 순서를 정리하며 T40이나 콘텐츠 제작을 자동 실행하지 않는다. 상세 판정은 work/evidence/T85/optimization-2026-10-06/REPORT.md를 따른다.

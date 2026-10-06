@@ -1,0 +1,51 @@
+{
+  "baseHead": "48e6a6e07b7b617212c09e035a0295bc232038a7",
+  "onlyOwnedChanges": true,
+  "otherTaskRecordsUnchanged": true,
+  "workingTreeContentPreserved": true,
+  "checks": [
+    {
+      "check": "generated",
+      "result": "{\"status\":\"built\",\"selectors\":223,\"actions\":484,\"playableSourceBoundCandidates\":477}"
+    },
+    {
+      "check": "generated-check",
+      "result": "{\"status\":\"passed\",\"selectors\":223,\"actions\":484,\"playableSourceBoundCandidates\":477}"
+    },
+    {
+      "check": "committed-data-wave-equivalence",
+      "result": "{\"status\":\"passed\",\"exactSourceSideCases\":455}"
+    },
+    {
+      "check": "committed-data-main-equivalence",
+      "result": "{\"passed\":true,\"selectors\":223,\"rows\":484}"
+    }
+  ],
+  "projections": [
+    {
+      "path": "atlas-web/src/data/learnerMotionRuntime.generated.ts",
+      "indexed": {
+        "bytes": 2412816,
+        "sha256": "c2176778c6b579cb8534cf30a35d22db940184239e6d4b43b5caef054e374ef5"
+      },
+      "liveWip": {
+        "bytes": 3285605,
+        "sha256": "023d23be8a894ca120b877cab7c3c4f3410ac1faf7a7e46dc53462bce5438960"
+      }
+    },
+    {
+      "path": "atlas-data/motion/local-motion-delivery-index.json",
+      "indexed": {
+        "bytes": 11208,
+        "sha256": "6c91f88a0855469321103d8b851c5666fa831a889288f43ceb2f9d99adbab7e6"
+      },
+      "liveWip": {
+        "bytes": 14600,
+        "sha256": "664c763d642d4c6797b7acaeb1a36219b76b64123a77d12f3505c1cbb752d9e7"
+      }
+    }
+  ],
+  "checkpointTypecheck": "passed",
+  "checkpointRegression": 19,
+  "preExistingHeadRepair": "Move misplaced closing brace in DatasetSceneAdapter.apply; preserve current working copy and exclude unrelated bone WIP"
+}

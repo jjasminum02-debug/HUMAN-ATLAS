@@ -222,6 +222,9 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                             node.material.color.set('#a4aaa8').lerp(this.actionTone, emphasis);
                         }
                     }
+                    // Scrubbing within the same phase must also paint the new pose.
+                    // The host skips draw calls while the shared player is held.
+                    this.scene.requestRender();
                     onTimeChange?.(time, completed);
                 }, disposeResource: false,
                 registerUpdate: update => this.scene.addUpdate(update),
@@ -310,13 +313,13 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             const row = this.records.get(member.sourceKey);
             if (row && (row.kind === 'bone' ? this.view.bones : this.view.muscles)) visibleKeys.add(member.sourceKey);
         }
-        const highlights = new Set(innervationHighlightKeys(rows, this.view, visibleKeys));
-        const observe = observingNerves(rows, this.view, visibleKeys);
-        }
         if (this.motion && !this.view.isolate && this.view.bones) for (const sourceKey of this.motion.frameSourceKeys) {
             const row = this.records.get(sourceKey);
             if (row?.kind === 'bone' && row.localDisplayEligible && row.defaultVisible && !row.hardHoldReasons.length
                 && !row.sourceHiddenStatePreserved.hideViewport && !this.view.hiddenSourceKeys?.includes(sourceKey)) visibleKeys.add(sourceKey);
+        }
+        const highlights = new Set(innervationHighlightKeys(rows, this.view, visibleKeys));
+        const observe = observingNerves(rows, this.view, visibleKeys);
         const selectionAlternativeKeys = new Set(this.records.get(this.view.selectedId ?? '')?.selectionSuppressSourceKeys ?? []);
         for (const [key, node] of this.resources.nodes) {
             const row = this.records.get(key)!;

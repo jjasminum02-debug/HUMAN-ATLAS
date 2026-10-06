@@ -5,13 +5,11 @@ function rawAttribute(attribute: BufferAttribute | InterleavedBufferAttribute): 
     const interleaved = attribute as InterleavedBufferAttribute;
     const source = interleaved.data.array as unknown as ArrayLike<number> & { constructor: { new(length: number): ArrayBufferView } };
     const Type = source.constructor;
-    const packed = new Type(attribute.count * attribute.itemSize) as unknown as { set(values: ArrayLike<number>, offset?: number): void; buffer: ArrayBufferLike; byteOffset: number; byteLength: number };
+    const packed = new Type(attribute.count * attribute.itemSize) as unknown as { set(values: ArrayLike<number>, offset?: number): void; buffer: ArrayBufferLike; byteOffset: number; byteLength: number; [index: number]: number };
     let cursor = 0;
     for (let vertex = 0; vertex < attribute.count; vertex++) {
       const start = interleaved.offset + vertex * interleaved.data.stride;
-      const values = new Array<number>(attribute.itemSize);
-      for (let component = 0; component < attribute.itemSize; component++) values[component] = Number(source[start + component]);
-      packed.set(values, cursor); cursor += attribute.itemSize;
+      for (let component = 0; component < attribute.itemSize; component++) packed[cursor++] = Number(source[start + component]);
     }
     return { type: Type.name, bytes: new Uint8Array(packed.buffer, packed.byteOffset, packed.byteLength) };
   }

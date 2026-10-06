@@ -1,0 +1,59 @@
+{
+  "sameInputs": true,
+  "bundle": {
+    "before": {
+      "bytes": 6717611,
+      "gzipBytes": 700187,
+      "sha256": "fdb226e3567559c4b66b6467bae883ee8b346a82ca0c1c1ab1aac028e8a6c046"
+    },
+    "after": {
+      "bytes": 3633188,
+      "gzipBytes": 463379,
+      "sha256": "57f7162419ab54787b067930ecc7d9784e28a3994b94a84e636c2e4da6b2f3ea"
+    }
+  },
+  "idleRendering": {
+    "before": {
+      "observedMs": 20387,
+      "renderedFrames": 1235,
+      "phase": "held"
+    },
+    "after": {
+      "observedMs": 34957,
+      "renderedFrames": 0,
+      "phase": "held"
+    }
+  },
+  "deliveryColdServerMedianMs": {
+    "before": 173.17841600000003,
+    "after": 48.148167
+  },
+  "browserFirstLoadsSingleSamples": {
+    "before": {
+      "bytes": 3059232,
+      "fetchAndReadMs": 211.40000009536743,
+      "parseAndValidationMs": 7,
+      "attachmentValidationMs": 8.5,
+      "totalMs": 226.90000009536743
+    },
+    "after": {
+      "bytes": 3059232,
+      "fetchAndReadMs": 73.09999990463257,
+      "parseAndValidationMs": 8,
+      "attachmentValidationMs": 8.700000047683716,
+      "totalMs": 89.79999995231628
+    }
+  },
+  "deliveryIndex": {
+    "bytes": 14600,
+    "gzipBytes": 4155,
+    "sha256": "664c763d642d4c6797b7acaeb1a36219b76b64123a77d12f3505c1cbb752d9e7"
+  },
+  "unchangedGeometryBudget": true,
+  "limits": [
+    "Server benchmark excludes network/browser; browser cold samples are single observations with different OS/browser cache state.",
+    "Render CPU and frame interval exclude GPU/VRAM/total process memory.",
+    "390 CSS width is desktop browser, not physical mobile.",
+    "Initial 1024/1440 viewport requests affected the comparison tab; those captures are actual390 and excluded. Final verified files record actual requested dimensions."
+  ]
+}

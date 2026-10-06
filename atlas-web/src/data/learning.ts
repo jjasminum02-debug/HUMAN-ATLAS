@@ -1,7 +1,5 @@
 import learnerCardRuntime from "../../../atlas-data/terminology/learner-card-runtime.json";
 import learnerMotionRuntime from "./learnerMotionRuntime.generated.ts";
-import t66MotionIntents from "../../../atlas-data/motion/t66-motion-learning-intents.json";
-import t66Wave1Registration from "../../../atlas-data/motion/t66-wave1-registration.json";
 import { displayTerms, termText, type PilotCatalog } from "./catalog";
 import { learnerNameProjection, learnerSearchEntry, learnerVisibleTerms, mergeLearningConcepts, searchEntries, type SearchEntry } from "../domain/search";
 import learnerNerveGraph from "../../../atlas-data/terminology/learner-nerve-graph-t66.json";
@@ -9,8 +7,7 @@ import learnerNerveCourse from "../../../atlas-data/terminology/nerve-learning-t
 import type { LearnerFieldProjection } from "../domain/aiEvidence";
 import { learnerStructureUnavailability } from "../domain/learnerStructureSourceContent";
 import { learnerActionAppliesToSide } from "../domain/learnerActionText";
-import { resolveLearnerMotionCandidate, type LearnerMotionActionOption, type LearnerActionText, type Laterality } from "../domain/motionLearning.ts";
-import { projectT66Wave1MotionOptions, type T66Wave1Registration } from "../domain/t66Wave1Motion.ts";
+import { resolveLearnerMotionCandidate, type LearnerMotionActionOption, type LearnerActionText } from "../domain/motionLearning.ts";
 import { conceptForExactNerveName, relationsForNerve } from "../domain/nerveRelations.ts";
 
 type LearnerCardRuntime = {
@@ -51,6 +48,7 @@ type LearnerNerveGraph = {
 const nerveGraph = learnerNerveGraph as LearnerNerveGraph;
 type LearnerMotionRuntime = {
   schemaVersion: "learner-motion-runtime-v1";
+  wave1Actions: Record<string, LearnerMotionActionOption[]>;
   actions: Record<string, Array<{
     actionKey: string;
     learnerActionKey: string | null;
@@ -62,7 +60,6 @@ type LearnerMotionRuntime = {
   }>>;
 };
 const motionRuntime = learnerMotionRuntime as unknown as LearnerMotionRuntime;
-const t66Wave1Motion = t66Wave1Registration as T66Wave1Registration;
 export const vocabulary = cardRuntime.names;
 
 export function nameFor(catalog: PilotCatalog, id: string) {
@@ -96,7 +93,8 @@ export function motionActionOptionsForLearner(conceptId: string | null, selected
   const projected = (selector ? motionRuntime.actions[selector] ?? [] : []).filter(row =>
     !row.candidate || !sourceKey || row.candidate.asset.sourceBinding?.subjectSourceKey === sourceKey);
   const wave1Options = sourceKey
-    ? projectT66Wave1MotionOptions(t66Wave1Motion, sourceKey, selectedSide as Laterality | null | undefined, t66MotionIntents.byActionId as Record<string, LearnerMotionActionOption["learningIntent"]>)
+    ? (motionRuntime.wave1Actions[sourceKey] ?? []).filter(row =>
+      !selectedSide || row.sideApplicability === "bilateral" || row.sideApplicability === "midline" || row.sideApplicability === selectedSide)
     : [];
   const displayRows = cardRuntime.actions.filter((row) => row.conceptId === conceptId
     && learnerActionAppliesToSide(row.sideApplicability, selectedSide)).map((row) => {

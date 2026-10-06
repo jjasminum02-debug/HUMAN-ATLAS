@@ -4,6 +4,9 @@ import { dirname, resolve } from "node:path";
 import { createHash } from "node:crypto";
 import { projectLearnerActionText, projectLearnerMotionActionOptions } from "../src/domain/motionLearning.ts";
 
+import { projectT66Wave1MotionOptions } from "../src/domain/t66Wave1Motion.ts";
+import { serializeLearnerMotionRuntime } from "./serializeLearnerMotionRuntime.mjs";
+
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const root = resolve(scriptDir, "../..");
 const inputPath = resolve(root, "atlas-data/motion/motion-learning.json");
@@ -11,7 +14,8 @@ const cardRuntimePath = resolve(root, "atlas-data/terminology/learner-card-runti
 const outputPath = resolve(scriptDir, "../src/data/learnerMotionRuntime.generated.ts");
 const checkOnly = process.argv.includes("--check");
 
-const bundle = JSON.parse(await readFile(inputPath, "utf8"));
+const bundleBytes = await readFile(inputPath);
+const bundle = JSON.parse(bundleBytes.toString("utf8"));
 const cardRuntime = JSON.parse(await readFile(cardRuntimePath, "utf8"));
 const acceptedSourceActions = {};
 const acceptance = JSON.parse(await readFile(resolve(root, "atlas-data/motion/t66-priority-action-acceptance.json"), "utf8"));
@@ -65,6 +69,7 @@ function safeCandidate(candidate) {
 
 const actionsBySelector = new Map();
 let projectedActionCount = 0;
+const optionsBySelector = new Map();
 for (const action of bundle.muscleActions ?? []) {
   if (typeof action.learnerActionKey === "string") {
     const linkedCards = (cardRuntime.actions ?? []).filter((row) => row.key === action.learnerActionKey
@@ -76,7 +81,9 @@ for (const action of bundle.muscleActions ?? []) {
   const selectors = [...new Set([...(action.subjectIds ?? []), ...(action.sourceSubjectKeys ?? [])])];
   for (const selector of selectors) {
     const actionKey = action.learnerActionKey ?? action.id;
-    const options = projectLearnerMotionActionOptions(selector, bundle, [], null, acceptedSourceActions)
+    if (!optionsBySelector.has(selector)) optionsBySelector.set(selector,
+      projectLearnerMotionActionOptions(selector, bundle, [], null, acceptedSourceActions));
+    const options = optionsBySelector.get(selector)
       .filter((option) => option.id === actionKey && option.subjectIds.includes(selector));
     for (const option of options) {
       const text = projectLearnerActionText(action, []);
@@ -99,8 +106,23 @@ for (const action of bundle.muscleActions ?? []) {
   }
 }
 
+// The wave registration is authoring input, not a second runtime projector.
+// Expand each exact source once and share its family contracts with the main rows.
+const waveBytes = await readFile(resolve(root, "atlas-data/motion/t66-wave1-registration.json"));
+const waveRegistration = JSON.parse(waveBytes.toString("utf8"));
+const intents = JSON.parse(await readFile(resolve(root, "atlas-data/motion/t66-motion-learning-intents.json"), "utf8"));
+if (waveRegistration.schemaVersion !== "t66-wave1-source-motion-registration-v2"
+  || waveRegistration.authority?.sourceOnly !== true || waveRegistration.authority?.publicRedistribution !== "held"
+  || waveRegistration.authority?.humanReview !== "not_performed" || waveRegistration.authority?.canonicalTargetMembershipApproved !== false) {
+  throw new Error("Wave motion registration cannot promote authority");
+}
+const wave1Actions = Object.fromEntries([...new Set(waveRegistration.selectors.map(row => row.sourceSubjectKey))].sort().map(sourceKey =>
+  [sourceKey, projectT66Wave1MotionOptions(waveRegistration, sourceKey, null, intents.byActionId)
+    .map(option => ({ ...option, candidate: safeCandidate(option.candidate) }))]));
+
 const projected = {
   schemaVersion: "learner-motion-runtime-v1",
+  wave1Actions,
   actions: Object.fromEntries([...actionsBySelector.entries()].sort(([a], [b]) => a.localeCompare(b))),
 };
 
@@ -114,43 +136,25 @@ function inspect(value, path = "$", key = "") {
 }
 // Identity/buffer bindings are private control data consumed by the player, not rendered text.
 // Inspect every learner-visible field; retain exact IDs in the separately validated candidate.
-for (const rows of Object.values(projected.actions)) for (const row of rows) {
+for (const rows of [...Object.values(projected.actions), ...Object.values(projected.wave1Actions)]) for (const row of rows) {
   inspect(row.label); inspect(row.text);
 }
 
-// Bone and muscle selections share the same family buffers. Intern the exact
-// member contracts instead of shipping a copy of every member for every subject.
-const memberContracts = [];
-const memberIndex = new Map();
-const memberRows = [];
-const memberRowIndex = new Map();
-const sharedKeys = ["movingStructureIds", "fixedStructureIds", "rig", "staticReference", "staticBinding", "poseControl"];
-const shared = Object.fromEntries(sharedKeys.map(key => [key, []]));
-const sharedIndices = Object.fromEntries(sharedKeys.map(key => [key, new Map()]));
-const serialized = JSON.stringify(projected, (key, value) => {
-  if (sharedKeys.includes(key) && value != null) {
-    const signature = JSON.stringify(value);
-    if (!sharedIndices[key].has(signature)) {
-      sharedIndices[key].set(signature, shared[key].length); shared[key].push(value);
-    }
-    return `__sharedSourceMotion:${key}:${sharedIndices[key].get(signature)}__`;
-  }
-  if (key !== "members" || !Array.isArray(value)) return value;
-  const signature = JSON.stringify(value);
-  if (!memberIndex.has(signature)) {
-    memberIndex.set(signature, memberContracts.length);
-    memberContracts.push(value.map(row => {
-      const signature = JSON.stringify(row);
-      if (!memberRowIndex.has(signature)) { memberRowIndex.set(signature, memberRows.length); memberRows.push(row); }
-      return memberRowIndex.get(signature);
-    }));
-  }
-  return `__sharedMotionMembers${memberIndex.get(signature)}__`;
-}, 2).replace(/"__sharedMotionMembers(\d+)__"/g, (_, index) => `sourceMotionMembers[${index}]`)
-  .replace(/"__sharedSourceMotion:([A-Za-z]+):(\d+)__"/g, (_, key, index) => `sharedSourceMotion.${key}[${index}]`);
-const groups = `[${memberContracts.map(group => `[${group.map(index => `sourceMotionMemberRows[${index}]`).join(",")}]`).join(",")} ]`;
-const output = `const sourceMotionMemberRows = ${JSON.stringify(memberRows)} as const;\nconst sourceMotionMembers = ${groups} as const;\nconst sharedSourceMotion = ${JSON.stringify(shared)} as const;\n\nconst learnerMotionRuntime = ${serialized} as const;\n\nexport default learnerMotionRuntime;\n`;
+const output = serializeLearnerMotionRuntime(projected);
+const deliveryPath = resolve(root, "atlas-data/motion/local-motion-delivery-index.json");
+const delivered = new Map();
+for (const row of [...bundle.motionAssets, ...waveRegistration.packages]) {
+  if (delivered.has(row.uri) && delivered.get(row.uri).sha256 !== row.sha256) throw new Error("Conflicting motion delivery hashes");
+  delivered.set(row.uri, { uri: row.uri, sha256: row.sha256 });
+}
+const deliveryOutput = JSON.stringify({ schemaVersion: "local-motion-delivery-index-v1", authority: waveRegistration.authority,
+  dependencies: [
+    { path: "atlas-data/motion/motion-learning.json", bytes: bundleBytes.length, sha256: createHash("sha256").update(bundleBytes).digest("hex") },
+    { path: "atlas-data/motion/t66-wave1-registration.json", bytes: waveBytes.length, sha256: createHash("sha256").update(waveBytes).digest("hex") },
+  ], entries: [...delivered.values()].sort((a, b) => a.uri.localeCompare(b.uri)) }, null, 2) + "\n";
 if (checkOnly) {
+  const existingDelivery = await readFile(deliveryPath, "utf8").catch(() => "");
+  if (existingDelivery !== deliveryOutput) throw new Error("Local motion delivery index is stale; rebuild from validated motion content");
   const existing = await readFile(outputPath, "utf8").catch(() => "");
   if (existing !== output) throw new Error("Learner motion runtime is stale; rebuild from validated motion content");
   console.log(JSON.stringify({ status: "passed", selectors: Object.keys(projected.actions).length,
@@ -158,6 +162,7 @@ if (checkOnly) {
     playableSourceBoundCandidates: Object.values(projected.actions).flat().filter((row) => row.candidate).length }));
 } else {
   await writeFile(outputPath, output);
+  await writeFile(deliveryPath, deliveryOutput);
   console.log(JSON.stringify({ status: "built", selectors: Object.keys(projected.actions).length,
     actions: Object.values(projected.actions).reduce((count, rows) => count + rows.length, 0),
     playableSourceBoundCandidates: Object.values(projected.actions).flat().filter((row) => row.candidate).length }));

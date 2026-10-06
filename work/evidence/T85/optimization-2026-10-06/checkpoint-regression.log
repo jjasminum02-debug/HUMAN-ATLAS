@@ -1,0 +1,27 @@
+✔ compact delivery verifies dependencies, cached bytes and invalidation without weakening containment (10.7365ms)
+✔ larger native trunk delivery is restricted to its exact URI and verified hash (0.135584ms)
+✔ sharing preserves exact source, side, direction, identities and private bindings (3.227875ms)
+✔ a later family can reuse earlier pools without declaration-order errors (0.571291ms)
+✔ reserved strings fail instead of being interpreted as control references (0.172875ms)
+✔ indexed projection preserves ambiguity instead of picking the first matching asset (77.540792ms)
+✔ a later input edit or wrong side cannot reuse a stale compatible candidate (75.622916ms)
+✔ extension distinguishes preparation from reverse action and smooth reset (1.610333ms)
+✔ extension starts from a scrubbed bent endpoint without jumping to rest (0.20525ms)
+✔ single RAF loop updates speed without making a second chain and ignores late callbacks (0.076917ms)
+✔ repeating playback wraps continuously and reset restores the rest pose (0.127083ms)
+✔ T22 adapter scene is driven by one mixer clock; pose reset does not reset camera (0.126125ms)
+✔ same-scene playback uses the host clock, creates no RAF chain, and leaves resource disposal to the host (0.126167ms)
+✔ clip end clamps at the final pose and cancels its RAF chain (0.095583ms)
+✔ missing clip fails closed and releases the imported scene (0.149416ms)
+✔ one-toggle gesture reverses at its endpoint and eases to exact rest on the same clock (0.135833ms)
+✔ return cancellation and disposal cannot invoke a stale rest callback (0.125459ms)
+✔ an action cycle has a faster neutral return, preserves poses and uses one clock (0.122334ms)
+✔ packed interleaved geometry keeps the original digest and detects live edits (2.91975ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 216.34525

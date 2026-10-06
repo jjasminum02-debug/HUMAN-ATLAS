@@ -1,0 +1,196 @@
+{
+  "taskId": "T85",
+  "status": "passed",
+  "contractRevision": "app-completion-2026-10-01",
+  "acceptanceScope": "Behavior-preserving shared-scene motion runtime, rendering, geometry validation and local asset delivery optimization",
+  "productReadiness": "local_app_ready",
+  "contentCompleteness": "partial",
+  "unresolvedProductBlockers": [],
+  "tests": {
+    "uniquePassed": 184,
+    "finalRegression": 180,
+    "additionalProjection": 2,
+    "additionalDelivery": 2,
+    "deliveryRecheck": 7,
+    "deliveryRecheckOverlapsExisting": 4
+  },
+  "runtimeEquivalence": {
+    "mainRows": 1166,
+    "exactSourceSideCases": 455,
+    "operativeContractsUnchanged": true
+  },
+  "build": "passed",
+  "typecheck": "passed",
+  "visualQA": {
+    "actualDesktopCssViewports": [
+      [
+        390,
+        844
+      ],
+      [
+        1024,
+        900
+      ],
+      [
+        1440,
+        900
+      ]
+    ],
+    "physicalMobileTested": false,
+    "regionTransitions": 20,
+    "regions": 12,
+    "heldRenderingAfter": 0,
+    "geometryAnglesAndBudgetChanged": false
+  },
+  "browserConsole": {
+    "finalFreshSessionObservedErrors": 0,
+    "observation": "Verified during final first levator scapulae playback; subsequent user use of the same tab was not interrupted. No further warm-sample claim."
+  },
+  "preservation": {
+    "denominators": [
+      542,
+      563,
+      12
+    ],
+    "haLinks": 130,
+    "historicalClassification": [
+      6,
+      20,
+      135,
+      2
+    ],
+    "sourceOnly": true,
+    "humanReview": "not_performed",
+    "publicRedistribution": "held",
+    "otherTasksChanged": false
+  },
+  "inputDependencies": [
+    {
+      "path": "atlas-data/motion/motion-learning.json",
+      "bytes": 103283078,
+      "sha256": "b58de1150ba9a9c96c91c7ce38fb37198aa8c0c1f567fa563438cb94a0eb8f3b"
+    },
+    {
+      "path": "atlas-data/motion/t66-wave1-registration.json",
+      "bytes": 1787960,
+      "sha256": "454b6cb914386ba5c3f1652161aab81d942f77bb267b43d418498c6475c5c2f0"
+    }
+  ],
+  "limitations": [
+    "Primary JavaScript chunk still exceeds 500KB recommendation",
+    "GPU/VRAM/total-process memory unobserved",
+    "Browser cold loading numbers are single samples, not a controlled multi-run benchmark",
+    "Working-tree evidence includes preserved pre-existing content; indexed projections will be regenerated from committed inputs"
+  ],
+  "evidence": [
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/REPORT.md",
+      "sha256": "763dcb45a3d84b3910702d90bc7927aef04a9991f581d3628f999b0754d5def6",
+      "bytes": 7441
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/optimization-metrics.json",
+      "sha256": "ccfba646108950c00191a8cb072bb5b0c9dd3ec99a5a7196efcc8dae1dff0c4b",
+      "bytes": 1771
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/runtime-equivalence.json",
+      "sha256": "27c9bc2f54e6cf7ff72e7f0b8a016502298ee657ad11d4937f1e5047e0f5165c",
+      "bytes": 595
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/final-regression.log",
+      "sha256": "8f5b4dc75fe20a13525dc2b50b88a7399cb3cfc094a057b302b77875abb77ec5",
+      "bytes": 18183
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/projection-regression.log",
+      "sha256": "54e753df08500ec3840009dd1cf18d8bbb9b977ac6cead24507e6cda569be0fc",
+      "bytes": 311
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/motion-delivery-tests.log",
+      "sha256": "8d26e51932a6e07d2cd1038b1dbeeb68460948f590671bb1ad1f0b6a9bc6d482",
+      "bytes": 326
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/delivery-final-regression.log",
+      "sha256": "5bc07f531bd8572e2993766accda3e60316c732de0ab0f209e4f909ad43ffd8f",
+      "bytes": 830
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/final-build.log",
+      "sha256": "c5d4331844bfddae998460b4e7eff710335535e48f6cc47b9b065b902fefd6d6",
+      "bytes": 13045
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/typecheck.log",
+      "sha256": "5cfb036289d819b2a87e947d65f4532031dd37753f3cf2def0f77d398eea1737",
+      "bytes": 24
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/verified-1024.json",
+      "sha256": "951c22d8781acb97e9786ebbb41877cd017763b3bf07884c09c7ffd379af9a60",
+      "bytes": 8665
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/verified-1440.json",
+      "sha256": "6e95864ed1940359734ac947c939b2e0ef7e6e4d0e725d8ad3b18798e4a59445",
+      "bytes": 8666
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/verified-knee-390.json",
+      "sha256": "7ad8acd5c7c3f5ffca9df87444086f94b6349d643e0afba8a083e9acaf3d9b23",
+      "bytes": 6243
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/verified-trunk-390.json",
+      "sha256": "4868f3954888cb3f095544a3d2f0fdbb519a996a5dbb6ae60187830f0c477d6b",
+      "bytes": 22636
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/region-transitions.json",
+      "sha256": "3eb499a550788eaaae3aa8474eec224b7716cea613df56ab1c1d82adf77ea06a",
+      "bytes": 8030
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/final-load-first.json",
+      "sha256": "41118c49b5252e7ade1f39cfbecadb015babc6db27114b47816145946e70d7c3",
+      "bytes": 148
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/development-errors-resolved.json",
+      "sha256": "e567de11dea9eb2f0be897889085463c92d63cd261034bdf2c283f4c61e9ba1a",
+      "bytes": 686
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/execution-sync.log",
+      "sha256": "ee9105b86d12674b6b4254d58ec3b086e84e030cdabe266ef75409924ee32860",
+      "bytes": 84
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/checkpoint-scope.json",
+      "sha256": "dfa281e6fda8d5cbc94878bab151dc7c5ffae337cc2124316edd907327fc5f30",
+      "bytes": 1714
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/checkpoint-regression.log",
+      "sha256": "ffbcf509bc29b576d15a8b74321728926fa7ec2fd8b1f7ad8a277f5a9ee3cb0b",
+      "bytes": 1917
+    },
+    {
+      "path": "work/evidence/T85/optimization-2026-10-06/checkpoint-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "checkpoint": {
+    "typecheck": "passed",
+    "relatedRegression": 19,
+    "mainRows": 484,
+    "selectors": 223,
+    "waveSourceSideCases": 455,
+    "evidence": "work/evidence/T85/optimization-2026-10-06/checkpoint-scope.json"
+  },
+  "executionSynchronization": "passed"
+}

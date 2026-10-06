@@ -1,0 +1,16 @@
+{
+  "resolved": [
+    {
+      "failure": "Initial regression detected empty poseSourceRefs in preprojected Wave data",
+      "repair": "Apply the established safeCandidate learner sanitizer; final regression passes without relaxing the learner metadata test."
+    },
+    {
+      "failure": "Transient HMR read of learning.ts before new generated wave1Actions was written",
+      "repair": "Complete deterministic generation and verify a fresh final session; no final console errors."
+    },
+    {
+      "failure": "Viewport override initially targeted the second comparison tab",
+      "repair": "Close comparison tab, recapture and record actual 390/1024/1440 dimensions."
+    }
+  ]
+}

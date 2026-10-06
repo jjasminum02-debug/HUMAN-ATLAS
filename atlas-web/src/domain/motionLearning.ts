@@ -328,6 +328,18 @@ export function projectLearnerMotionActionOptions(
   selectedSide?: Laterality | null,
   acceptedSourceActions: Readonly<Record<string, { assetId: string; sourceKey: string; motionSha256: string }>> = {},
 ): LearnerMotionActionOption[] {
+  // Build lookup tables once per projection. Inputs may change between calls, so
+  // this does not retain a cache that could hide a changed binding or hash.
+  const definitionsByAction = new Map<string, MotionLearningBundle["motionDefinitions"]>();
+  const assetsByDefinition = new Map<string, MotionLearningBundle["motionAssets"]>();
+  for (const definition of bundle.motionDefinitions) {
+    const rows = definitionsByAction.get(definition.actionId) ?? [];
+    rows.push(definition); definitionsByAction.set(definition.actionId, rows);
+  }
+  for (const asset of bundle.motionAssets) {
+    const rows = assetsByDefinition.get(asset.motionDefinitionId) ?? [];
+    rows.push(asset); assetsByDefinition.set(asset.motionDefinitionId, rows);
+  }
   return bundle.muscleActions.flatMap((action) => {
     if (!action.subjectIds.includes(conceptId) && !action.sourceSubjectKeys?.includes(conceptId)) return [];
     if ((selectedSide === "left" || selectedSide === "right")
@@ -335,9 +347,9 @@ export function projectLearnerMotionActionOptions(
       && action.sideApplicability !== selectedSide) return [];
     const text = projectLearnerActionCard(action, fields);
     if (!text) return [];
-    const compatible = bundle.motionDefinitions.flatMap((definition) => {
+    const compatible = (definitionsByAction.get(action.id) ?? []).flatMap((definition) => {
       if (definition.actionId !== action.id) return [];
-      return bundle.motionAssets.flatMap((asset) => asset.motionDefinitionId === definition.id &&
+      return (assetsByDefinition.get(definition.id) ?? []).flatMap((asset) => asset.motionDefinitionId === definition.id &&
         asset.representationType === "source_bound_surface" && asset.sourceBinding != null &&
         assessMotionCapability(action, definition, asset).hasTechnicallyCompatibleClip
         ? [{ definition, asset }]

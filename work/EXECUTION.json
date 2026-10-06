@@ -5449,7 +5449,8 @@
           "audit-all-22-motion-bindings-and-exact-attachment-context",
           "frame-complete-left-shoulder-to-hand-and-mobile-panel-repair",
           "scrub-loop-rest-layer-off-nerve-history-browser-qa",
-          "responsive-cache-and-cold-warm-action-profile"
+          "responsive-cache-and-cold-warm-action-profile",
+          "optimize-shared-motion-projection-idle-rendering-and-local-delivery"
         ],
         "productAcceptance": {
           "contractRevision": "app-completion-2026-10-01",
@@ -5504,13 +5505,27 @@
             "work/reports/T85.md",
             "work/evidence/T85/quality-review-2026-10-06/browser-validation.json",
             "work/evidence/T85/quality-review-2026-10-06/motion-context-coverage.json",
-            "work/evidence/T85/quality-review-2026-10-06/validation-summary.json"
+            "work/evidence/T85/quality-review-2026-10-06/validation-summary.json",
+            "work/evidence/T85/optimization-2026-10-06/REPORT.md",
+            "work/evidence/T85/optimization-2026-10-06/optimization-metrics.json",
+            "work/evidence/T85/optimization-2026-10-06/final-validation.json"
           ]
+        },
+        "optimizationFollowup": {
+          "status": "passed",
+          "evidenceRoot": "work/evidence/T85/optimization-2026-10-06/",
+          "generatedRowsNotAcceptedActions": 1166,
+          "sourceSideEquivalenceCases": 455,
+          "automaticRegressionUniqueTests": 184,
+          "runtimeInputBoundary": "preserved working tree; checkpoint generated artifacts rebased on HEAD inputs",
+          "geometryOrAngleChanged": false,
+          "nextImplementation": "T40 manual only",
+          "tests": 184
         }
       },
       "report": "work/reports/T85.md",
       "promptFile": "work/prompts/app-completion-2026-10-01/17-T85.txt",
-      "acceptanceScope": "현재 T66 우선지원 범위의 실제 등록 22개 action binding/20 source subject/13 GLB와 기존 지원 신경·뼈 학습 흐름의 source/frame/side/주변 구조/복원/UI 계약 및 성능",
+      "acceptanceScope": "현재 선언된 지원 범위: T66 우선 7근육군의 사용 가능한 양측/부분 source 20개, 22개의 exact muscle-action 연결, 13개 고유 GLB; 각 움직임은 실제 package의 moving/co-moving 뼈 사슬과 정확하고 표시 적격인 기시/정지 뼈 문맥을 같은 scene framing에 포함한다. 기존 정적 신경 주행→관련 근육→작용/복원 흐름을 재사용한다.",
       "contractRevision": "app-completion-2026-10-01",
       "acceptanceContract": {
         "design": "design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md",
@@ -5528,7 +5543,52 @@
       ],
       "motionPlanningReference": "design/2026-09-25-muscle-atlas/28-ALL-MUSCLE-MOTION-PIPELINE.md",
       "scopeGoal": "all_declared_muscles_without_initial_shortlist",
-      "planningAmendment": "user-all-muscles-2026-10-02"
+      "planningAmendment": "user-all-muscles-2026-10-02",
+      "productReadiness": "local_app_ready",
+      "contentCompleteness": "partial",
+      "knownContentGaps": {
+        "wholeMuscleMotionGoal": "partial; 429 muscle targets/447 memberships/232 source concepts/462 surfaces 중 우선 그룹 일부만 지원",
+        "priorityGroups": 7,
+        "priorityAvailableSourceSurfaces": 20,
+        "priorityExactActionBindings": 22,
+        "priorityUniqueMotionGlbUris": 13,
+        "bones": {
+          "eligibleSourceInstances": 210,
+          "independentAnatomicalBoneCount": null,
+          "newIndependentDofs": 0
+        },
+        "nerve": {
+          "staticSourceSurfaces": 195,
+          "nativeLabelGroupsNotConceptCount": 98,
+          "relationRows": 18,
+          "exactGeometryMotorRows": 2,
+          "literatureConceptRows": 16,
+          "dynamicPoses": 0,
+          "entrapmentCoordinates": 0
+        },
+        "denominators": {
+          "targets": 542,
+          "memberships": 563,
+          "regions": 12,
+          "muscleTargets": 429,
+          "muscleMemberships": 447,
+          "muscleSourceConcepts": 232,
+          "muscleSourceSurfaces": 462,
+          "canonicalHaBindings": 130,
+          "historicalClassification163": [
+            6,
+            20,
+            135,
+            2
+          ]
+        },
+        "sourceOnly": true,
+        "localSelection": "technical_only",
+        "humanReview": "not_performed",
+        "publicRedistribution": "held",
+        "deferredEngineering": "work/evidence/T66/priority-integration-2026-10-05/deferred-engineering.json"
+      },
+      "unresolvedProductBlockers": []
     },
     "T40": {
       "title": "실행 가능한 로컬 앱과 전체 움직임 범위 전달",

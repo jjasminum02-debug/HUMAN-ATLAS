@@ -14,13 +14,14 @@ export class AnatomySceneController {
   readonly controls: OrbitControls;
   readonly queue: ResourceQueue<THREE.Group>;
   readonly assets: Map<string, BodyAsset>;
-  readonly updates = new Set<(seconds: number) => void>();
+  readonly updates = new Set<(seconds: number) => boolean | void>();
   private observer: ResizeObserver;
   private view: BodyView = { region: null, bones: true, muscles: true, supplements: false, selectedId: null, dim: true };
   private lost = false;
   private dead = false;
   private dirty = true;
   private previous = 0;
+  private renderedFrames = 0;
   private readonly frameIntervalsMs: number[] = [];
   private readonly renderDurationsMs: number[] = [];
   private pointer = { x: 0, y: 0 };
@@ -86,7 +87,7 @@ export class AnatomySceneController {
   requestRender() { this.dirty = true; }
   private invalidate = () => { this.dirty = true; };
   /** Future pose controllers register updates here, never create a second RAF/renderer. */
-  addUpdate(update: (seconds: number) => void) { this.updates.add(update); return () => { this.updates.delete(update); this.dirty = true; }; }
+  addUpdate(update: (seconds: number) => boolean | void) { this.updates.add(update); return () => { this.updates.delete(update); this.dirty = true; }; }
   private frame = (time: number) => {
     if (this.dead || this.lost) return;
     const intervalMs = this.previous ? time - this.previous : 0;
@@ -95,12 +96,14 @@ export class AnatomySceneController {
       if (this.frameIntervalsMs.length > 240) this.frameIntervalsMs.shift();
     }
     const dt = Math.min(intervalMs / 1000, 0.05); this.previous = time;
-    for (const update of this.updates) update(dt);
+    let poseChanged = false;
+    // false means an idle player; legacy callbacks without a return still render.
+    for (const update of this.updates) if (update(dt) !== false) poseChanged = true;
     this.controls.update();
     if (this.hoverPoint) { const p = this.hoverPoint; this.hoverPoint = null; this.setHover(this.pick(p.x, p.y)?.nodeId ?? null); }
-    if (this.dirty || this.updates.size) {
+    if (this.dirty || poseChanged) {
       const started = import.meta.env.DEV ? performance.now() : 0;
-      this.renderer.render(this.scene, this.camera); this.dirty = false;
+      this.renderer.render(this.scene, this.camera); this.dirty = false; this.renderedFrames += 1;
       if (import.meta.env.DEV) {
         this.renderDurationsMs.push(performance.now() - started);
         if (this.renderDurationsMs.length > 240) this.renderDurationsMs.shift();
@@ -224,6 +227,7 @@ export class AnatomySceneController {
         visible: [...this.root.children].flatMap(g => g.children.filter(o => o.visible).map(o => o.name)),
         calls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles,
         geometries: this.renderer.info.memory.geometries, visibleMeshes, materials: materials.size, geometryBuffersBytes,
+        renderedFrames: this.renderedFrames, registeredUpdates: this.updates.size,
         renderSampleCount: renderTimes.length, renderCpuP50Ms: renderPercentile(0.5), renderCpuP95Ms: renderPercentile(0.95),
         frameSampleCount: intervals.length, frameIntervalP50Ms: percentile(0.5), frameIntervalP95Ms: percentile(0.95),
         canvasWidth: this.size.width, canvasHeight: this.size.height, pixelRatio: this.renderer.getPixelRatio(),

@@ -84,7 +84,7 @@ export interface AnimationPlaybackOptions {
   /** Some actions extend from a bent preparation pose back to the native rest. */
   actionDirection?: "forward" | "reverse";
   /** Use the existing anatomy renderer's frame clock instead of creating another RAF chain. */
-  registerUpdate?: (update: (deltaSeconds: number) => void) => () => void;
+  registerUpdate?: (update: (deltaSeconds: number) => boolean) => () => void;
   /** Same-scene hosts own the imported GLTF resource and restore their nodes before disposal. */
   disposeResource?: boolean;
 }
@@ -131,8 +131,9 @@ export class AnimationPlaybackController {
     if (options.registerUpdate) {
       this.loop = null;
       this.unregisterUpdate = options.registerUpdate((delta) => {
-        if (!this.sharedPlaying || this.disposed) return;
+        if (!this.sharedPlaying || this.disposed) return false;
         if (!this.step(delta * (this.returning ? 1 : this.speed))) this.sharedPlaying = false;
+        return true;
       });
     } else {
       this.loop = new SingleAnimationFrameLoop((delta) => this.step(delta), options.scheduler);
