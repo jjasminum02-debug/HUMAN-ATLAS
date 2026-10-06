@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "atlas-quality-review-integration-final-validation-v1",
+  "runId": "atlas-quality-review-2026-10-06-r1",
+  "integrationStatus": "passed_for_review_scope_with_content_gaps",
+  "baseline": {
+    "head": "f3b2113dd8abb3422d6d7b54e251988e72bfe2d1",
+    "dirtyPathCountAtStart": 609,
+    "preExistingWipPreserved": true,
+    "T40T66T85TaskStateOrExecutionOrderChanged": false,
+    "T40ReportOrAcceptanceChanged": false
+  },
+  "frozenReviewInputs": {
+    "runManifest": {
+      "path": "work/plans/atlas-quality-review-2026-10-06/run-manifest.json",
+      "sha256": "6aa39a2f884c9abccce8a853d349b2897715e08a04dfe12edee522dde879816e"
+    },
+    "nerve": {
+      "path": "work/plans/atlas-quality-review-2026-10-06/input-snapshot/nerve.json",
+      "sha256": "da878d82a8f990f5066c482b40a5dd8a304bf38753fb49427c0536bbfebd90c3",
+      "expected": "195 source rows, 98 label groups, 98 concepts, 18 relation rows"
+    },
+    "names": {
+      "path": "work/plans/atlas-quality-review-2026-10-06/input-snapshot/muscle.json",
+      "sha256": "637e4d079f90e68743f656c07d08244a98521b42baab49b4de1f5ae8975c0996",
+      "expected": "472 source rows (462 learner, 10 inspection) and 429 muscle targets"
+    }
+  },
+  "currentScopePreserved": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12,
+    "existingCanonicalHaBindings": 130,
+    "historical163": {
+      "exact_source_label_observation_identity_crosswalk_needed": 6,
+      "descendant_surface_representation_present_target_specific_surface_unresolved": 20,
+      "ancestor_surface_representation_present_target_specific_surface_unresolved": 135,
+      "no_exact_descendant_or_ancestor_surface_evidence_in_frozen_package": 2
+    },
+    "runtimeSourceObjects": 960,
+    "nativeNerveSurfaceRows": 195,
+    "nerveLabelGroups": 98,
+    "nerveConceptRows": 98,
+    "motorRelationRowsBeforeAndAfter": 18,
+    "sourceOnly": true,
+    "localDisplayPolicy": "supported_local_prototype",
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "newCanonicalBindings": 0,
+    "newNerveGeometryOrBranchBinding": 0
+  },
+  "checks": {
+    "learnerCardRuntimeFreshness": {"status":"passed","conceptRows":8,"sourceRows":461,"actionRows":7},
+    "learnerMotionRuntimeFreshness": {"status":"passed","selectors":267,"actions":1166,"playableSourceBoundCandidates":1159},
+    "typecheck": {"status":"passed","command":"node node_modules/typescript/bin/tsc -b --pretty false"},
+    "integrationTests": {"status":"passed","passed":36,"failed":0,"command":"node --experimental-strip-types --test src/viewer/datasets/integration.test.ts"},
+    "wholeBodyAndDatasetTests": {"status":"passed","passed":83,"failed":0,"compiledDatasetChunksVerified":46},
+    "localDeliveryBuild": {"status":"passed","localOnly":true,"publicFiles":99,"publicBytes":253776659,"privateBytes":105085638,"workingTreeDependencies":23,"warning":"App chunk remains about 3.65 MB minified; observed build warning only, no failed build or browser error."},
+    "localDeliveryVerify": {"status":"passed","snapshotId":"local-20261006101936364-bf4218bb","files":99},
+    "ownedPathDiffCheck": {"status":"passed","command":"git diff --check on owned source/data paths"},
+    "repositoryWideDiffCheck": {"status":"not_used_due_to_preexisting_work/NEXT.md_blank_line_at_eof","path":"work/NEXT.md"}
+  },
+  "newLocalSnapshot": {
+    "snapshotId": "local-20261006101936364-bf4218bb",
+    "directory": "atlas-web/dist-local/local-20261006101936364-bf4218bb",
+    "snapshotManifestSha256": "86caa000ea5cf977c8f58140b946ab5e35f5928ead2dd03b23f35d7a2ac879bf",
+    "snapshotSha256FileSha256": "513b29a1070c33418f7a9f8c1d7f783d3fc8c9047a98bd175fd734c3a05fa578",
+    "serveUrl": "http://127.0.0.1:5183/",
+    "deliveryBasis": "preserved working-tree snapshot",
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "older5180SnapshotModified": false
+  },
+  "browser": {
+    "status": "passed",
+    "browser": "installed Google Chrome, headless, against local 5183 snapshot",
+    "httpStatus": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "viewportCssPixels": [
+      {"width":390,"height":844,"physicalDevice":false},
+      {"width":1024,"height":768,"physicalDevice":false},
+      {"width":1440,"height":900,"physicalDevice":false}
+    ],
+    "cases": {
+      "hoverWithoutClickOpens13OptionPickerAndDownwardAnimation": true,
+      "pointerLeaveClosesAndSpaceEscapeRestoresFocus": true,
+      "regionPickerRemainsAvailableDuringSearchAt390AndFitsViewport": true,
+      "handQualifiedPollicisAliasReturnsOneExactGroupAndSideSwitches": true,
+      "buccinatorMuscleAliasReturnsOneGroupAndCardKeepsPreferredName": true,
+      "deepFibularNerveCourseBranchScopeAndSameSideTASelection": true,
+      "textOnlyAndPlayableNerveActionLinksHaveDistinctLabels": true,
+      "explicitNerveActionLinkOpensFunctionAndExactCandidateWithoutAutoplay": true,
+      "singleCtaPlaysAndReclickReturnsToRest": true,
+      "453RowListScrollsToEndThenSwitchesDirectlyToNeck": true
+    },
+    "screenshots": [
+      {"path":"work/reviews/atlas-quality-review-2026-10-06/integration/screenshots/region-picker-hover-1440.png","sha256":"48bb0774b5f08b73da5a0bdb706d1bddbf485dd702298730279031d6c956acd6"},
+      {"path":"work/reviews/atlas-quality-review-2026-10-06/integration/screenshots/region-picker-390-search.png","sha256":"fe20e8eb05d4d2d5b79858d291bd68c14bfdf0b4f075a39e90a68febd2e2920e"},
+      {"path":"work/reviews/atlas-quality-review-2026-10-06/integration/screenshots/name-alias-card-390.png","sha256":"c85d7db1c4140bd5cdeb5b8cc413968bddd7891c6bfe19829b3fe82ce0f4a0b9"},
+      {"path":"work/reviews/atlas-quality-review-2026-10-06/integration/screenshots/buccinator-alias-card-390.png","sha256":"7e632f4b2b298a8cbbcc500111de4d1e465d5d29b53e8fd17f9aa13f9ebe26b8"},
+      {"path":"work/reviews/atlas-quality-review-2026-10-06/integration/screenshots/deep-fibular-nerve-card-1024.png","sha256":"ac34dfc069f8f743a882809bea6e547efd0c72d2fa996d3cf22eaa51ec4e54f3"},
+      {"path":"work/reviews/atlas-quality-review-2026-10-06/integration/screenshots/tibialis-action-rest-1024.png","sha256":"1b510e81b3ee873a9560b76326dac06545b333c3f1a188aba89b3dce053552ac"},
+      {"path":"work/reviews/atlas-quality-review-2026-10-06/integration/screenshots/tibialis-action-playing-1024.png","sha256":"35a17878abcda5e78969ffe6b8c5ecfb882cadd78cab762e3c4a54611ac16c72"},
+      {"path":"work/reviews/atlas-quality-review-2026-10-06/integration/screenshots/tibialis-action-restored-1024.png","sha256":"1fbb8d500d1aa7a6671da02efc114939e84c058a861cc645847ad16e099cec58"},
+      {"path":"work/reviews/atlas-quality-review-2026-10-06/integration/screenshots/head-neck-after-long-list-1440.png","sha256":"5380670b19849ac7a2da1066c1b34c77f4a01eac0f0900aadf92f23282547fab"}
+    ]
+  },
+  "taskStateWrites": {
+    "execution": false,
+    "productAcceptance": false,
+    "next": false,
+    "spec": false,
+    "historicalT40Report": false,
+    "otherTaskState": false
+  }
+}

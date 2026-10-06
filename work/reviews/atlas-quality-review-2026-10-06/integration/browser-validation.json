@@ -1,0 +1,221 @@
+{
+  "schemaVersion": "atlas-quality-review-integration-browser-validation-v1",
+  "date": "2026-10-06",
+  "url": "http://127.0.0.1:5183/",
+  "browser": {
+    "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "headless": true
+  },
+  "cases": {
+    "regionPickerHoverSlideAndKeyboard": {
+      "status": "passed",
+      "hoverOpenedWithoutClick": true,
+      "menuRegionButtons": 13,
+      "animation": "region-picker-reveal",
+      "pointerLeaveClosed": true,
+      "keyboardSpaceEscapeFocusRestore": true,
+      "screenshot": "screenshots/region-picker-hover-1440.png"
+    },
+    "nameAliasSearchCardAndBilateralSelection": {
+      "status": "passed",
+      "search": "손 · 단무지신근",
+      "resultCount": 1,
+      "cardText": "우리말명\n짧은엄지폄근\n한자어명 (한글 표기)\n단무지신근\n영어명\nExtensor pollicis brevis",
+      "ordinarySearchDefaultsToStructureTab": true,
+      "rightSideSelected": true,
+      "secondSearch": "Buccinator muscle",
+      "secondResultCount": 1,
+      "secondCardText": "우리말명\n볼근\n한자어명 (한글 표기)\n협근\n영어명\nBucinator",
+      "menuAvailableDuringSearch": true,
+      "mobileMenuBounds": {
+        "x": 25,
+        "y": 217,
+        "width": 340,
+        "height": 252.20001220703125,
+        "top": 217,
+        "right": 365,
+        "bottom": 469.20001220703125,
+        "left": 25
+      },
+      "actualViewport": {
+        "innerWidth": 390,
+        "innerHeight": 844,
+        "clientWidth": 390,
+        "clientHeight": 844,
+        "dpr": 1,
+        "sidebar": {
+          "x": 12,
+          "y": 132,
+          "width": 366,
+          "height": 462.796875
+        },
+        "stage": {
+          "x": 0,
+          "y": 132,
+          "width": 390,
+          "height": 712
+        }
+      },
+      "screenshots": [
+        "screenshots/name-alias-card-390.png",
+        "screenshots/buccinator-alias-card-390.png",
+        "screenshots/region-picker-390-search.png"
+      ]
+    },
+    "nerveCourseAndExactMotorRelationToFunction": {
+      "status": "passed",
+      "selectedNerve": "깊은종아리신경",
+      "branchHeading": [
+        "신경 주행",
+        "모형에서 연결된 분지",
+        "운동·감각 관계 상태",
+        "확인된 운동근 관계"
+      ],
+      "actionRouteLabels": [
+        "이 근육의 작용 설명 보기",
+        "이 근육의 움직임 보기"
+      ],
+      "exactLinkedMuscleSelected": "우리말명\n앞정강근\n한자어명 (한글 표기)\n전경골근\n영어명\nTibialis anterior muscle",
+      "explicitNerveToActionRouteOpensFunctionTab": true,
+      "actionPlayerBeforeCta": "근육의 작용\n작용 시범\n\n오른쪽 발목 등쪽굽힘\n\n움직임으로 이해하기를 누르면 시범을 반복해서 보여 줍니다.\n\n움직임으로 이해하기\n관절 조절\n시범 진행\n0%\n\n다시 누르면 처음 자세로 부드럽게 돌아갑니다. 진행 막대를 조절하면 고른 자세를 유지합니다.\n\n시범 안내",
+      "playingObserved": true,
+      "reclickRestObserved": true,
+      "actualViewport": {
+        "innerWidth": 1024,
+        "innerHeight": 768,
+        "clientWidth": 1024,
+        "clientHeight": 768,
+        "dpr": 1,
+        "sidebar": {
+          "x": 18,
+          "y": 114,
+          "width": 205,
+          "height": 628
+        },
+        "stage": {
+          "x": 0,
+          "y": 100,
+          "width": 1024,
+          "height": 668
+        }
+      },
+      "screenshots": [
+        "screenshots/deep-fibular-nerve-card-1024.png",
+        "screenshots/tibialis-action-rest-1024.png",
+        "screenshots/tibialis-action-playing-1024.png",
+        "screenshots/tibialis-action-restored-1024.png"
+      ]
+    },
+    "longListRegionSwitchAndResponsiveLayout": {
+      "status": "passed",
+      "longList": {
+        "scrollHeight": 28772,
+        "clientHeight": 542,
+        "count": 453
+      },
+      "scrolledTo": 28230,
+      "switchedRegion": "목",
+      "currentPickerLabel": "부위 탐색 · 목\n▾",
+      "actualViewport": {
+        "innerWidth": 1440,
+        "innerHeight": 900,
+        "clientWidth": 1440,
+        "clientHeight": 900,
+        "dpr": 1,
+        "sidebar": {
+          "x": 24,
+          "y": 114,
+          "width": 240,
+          "height": 760
+        },
+        "stage": {
+          "x": 0,
+          "y": 100,
+          "width": 1440,
+          "height": 800
+        }
+      },
+      "screenshot": "screenshots/head-neck-after-long-list-1440.png"
+    }
+  },
+  "viewports": [
+    {
+      "expectedWidth": 390,
+      "expectedHeight": 844,
+      "actual": {
+        "innerWidth": 390,
+        "innerHeight": 844,
+        "clientWidth": 390,
+        "clientHeight": 844,
+        "dpr": 1,
+        "sidebar": {
+          "x": 12,
+          "y": 132,
+          "width": 366,
+          "height": 462.796875
+        },
+        "stage": {
+          "x": 0,
+          "y": 132,
+          "width": 390,
+          "height": 712
+        }
+      },
+      "physicalDevice": false
+    },
+    {
+      "expectedWidth": 1024,
+      "expectedHeight": 768,
+      "actual": {
+        "innerWidth": 1024,
+        "innerHeight": 768,
+        "clientWidth": 1024,
+        "clientHeight": 768,
+        "dpr": 1,
+        "sidebar": {
+          "x": 18,
+          "y": 114,
+          "width": 205,
+          "height": 628
+        },
+        "stage": {
+          "x": 0,
+          "y": 100,
+          "width": 1024,
+          "height": 668
+        }
+      },
+      "physicalDevice": false
+    },
+    {
+      "expectedWidth": 1440,
+      "expectedHeight": 900,
+      "actual": {
+        "innerWidth": 1440,
+        "innerHeight": 900,
+        "clientWidth": 1440,
+        "clientHeight": 900,
+        "dpr": 1,
+        "sidebar": {
+          "x": 24,
+          "y": 114,
+          "width": 240,
+          "height": 760
+        },
+        "stage": {
+          "x": 0,
+          "y": 100,
+          "width": 1440,
+          "height": 800
+        }
+      },
+      "physicalDevice": false
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "httpStatus": 200,
+  "snapshotId": "local-20261006101936364-bf4218bb",
+  "completedAt": "2026-10-06T10:28:38.094Z"
+}

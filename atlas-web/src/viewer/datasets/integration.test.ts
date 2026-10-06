@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { gzipSync } from 'node:zlib';
 import { readFileSync } from 'node:fs';
-import { buildRuntimeIntegration, validateRuntimeIntegration, validateIntegration as validateIntegrationWithCatalog, searchStructures, canDisplayLocally, readDatasetRoute, datasetRouteQuery, type Integration, type FrozenTargetLexicon } from './integration.ts';
+import { applyLearnerNameAliasDelta, buildRuntimeIntegration, validateRuntimeIntegration, validateIntegration as validateIntegrationWithCatalog, searchStructures, canDisplayLocally, readDatasetRoute, datasetRouteQuery, type Integration, type FrozenTargetLexicon } from './integration.ts';
+import { GENERIC_UNLINKED_NERVE_FUNCTION_CONTEXT, nerveActionRouteLabel, shouldDisplayNerveFunctionContext } from '../../domain/nerveRelations.ts';
 import type { Dataset } from './schema.ts';
 const overlayBytes = readFileSync(new URL('../../../../atlas-data/overlays/za-local-integration.json', import.meta.url));
 const raw = JSON.parse(overlayBytes.toString('utf8')) as Integration;
@@ -87,6 +88,8 @@ const fixture = {
 } as Dataset;
 const runtimeOverlaySha256 = createHash('sha256').update(overlayBytes).digest('hex');
 const runtime = buildRuntimeIntegration(raw, fixture, runtimeOverlaySha256, raw.policy.rightsEvidenceSha256, frozenTargetLexicon);
+const nameAliasBytes = readFileSync(new URL('../../../../atlas-data/terminology/learner-name-aliases-2026-10-06.json', import.meta.url));
+const nameAliasDelta = JSON.parse(nameAliasBytes.toString('utf8'));
 test('whole-source overlay retains records and independent release/review status', () => {
     const overlay = validateIntegration(raw, fixture);
     assert.equal(overlay.objects.length, 960);
@@ -141,6 +144,62 @@ test('common search and stable routes match the full validated ledger across nam
     }
     assert.equal(searchStructures(runtime.objects, '승모근 상부', []).map(row => row.names.en).filter(name => /Descending/.test(name)).length, 1);
     assert.equal(searchStructures(runtime.objects, '승모근 하부', []).map(row => row.names.en).filter(name => /Ascending/.test(name)).length, 1);
+});
+test('learner name aliases are exact-source, add-only, searchable and do not change anatomy identity', () => {
+    const aliasSha = createHash('sha256').update(nameAliasBytes).digest('hex');
+    const composedSha = createHash('sha256').update([runtime.sourceOverlaySha256, aliasSha].join('\n')).digest('hex');
+    const projected = applyLearnerNameAliasDelta(runtime, fixture, nameAliasDelta,
+        value => createHash('sha256').update(value).digest('hex'), composedSha);
+    assert.equal(projected.objects.length, runtime.objects.length);
+    assert.deepEqual(projected.scope, runtime.scope);
+    assert.equal(projected.policy.publicRedistribution, 'held');
+    assert.equal(projected.policy.humanReview, 'not_performed');
+    for (const change of nameAliasDelta.records) {
+        const before = runtime.objects.find(row => row.sourceKey === change.sourceKey)!;
+        const after = projected.objects.find(row => row.sourceKey === change.sourceKey)!;
+        assert.deepEqual(after.aliases, [...before.aliases, ...change.addAliases]);
+        assert.equal(after.side, before.side);
+        assert.deepEqual(after.names, before.names);
+        assert.equal(after.haConceptId, before.haConceptId);
+        assert.deepEqual(after.learnerConceptKeys, before.learnerConceptKeys);
+        assert.deepEqual(after.targetRoutes, before.targetRoutes);
+    }
+    const shortPollicis = searchStructures(projected.objects, '손 · 단무지신근', []);
+    assert.equal(shortPollicis.length, 1, 'one source concept result is retained for paired surfaces');
+    assert(['ZA-c7010a9-92af7d1cb9623a6b2e7be964', 'ZA-c7010a9-d1ce3c3878f62513212d9999'].includes(shortPollicis[0].sourceKey));
+    assert.equal(shortPollicis[0].searchGroupKey, 'Extensor pollicis brevis');
+    assert.deepEqual(projected.objects.filter(row => [
+        'ZA-c7010a9-92af7d1cb9623a6b2e7be964', 'ZA-c7010a9-d1ce3c3878f62513212d9999',
+    ].includes(row.sourceKey)).map(row => row.aliases.includes('손 · 단무지신근')), [true, true]);
+    const buccinator = searchStructures(projected.objects, 'Buccinator muscle', []);
+    assert.equal(buccinator.length, 1, 'one source concept result is retained for paired surfaces');
+    assert.equal(buccinator[0].searchGroupKey, 'Bucinator');
+    assert.deepEqual(projected.objects.filter(row => [
+        'ZA-c7010a9-04b9aa236b4d795160c54db8', 'ZA-c7010a9-acd8cac3c62b4ce86edb51be',
+    ].includes(row.sourceKey)).map(row => row.aliases.includes('Buccinator muscle')), [true, true]);
+
+    const wrongSide = structuredClone(nameAliasDelta);
+    wrongSide.records[0].side = 'right';
+    assert.throws(() => applyLearnerNameAliasDelta(runtime, fixture, wrongSide,
+        value => createHash('sha256').update(value).digest('hex'), composedSha), /before-state mismatch/);
+    const staleAliases = structuredClone(nameAliasDelta);
+    staleAliases.records[0].beforeAliasesSha256 = '0'.repeat(64);
+    assert.throws(() => applyLearnerNameAliasDelta(runtime, fixture, staleAliases,
+        value => createHash('sha256').update(value).digest('hex'), composedSha), /before-state mismatch/);
+    const repeatedSource = structuredClone(nameAliasDelta);
+    repeatedSource.records.push(structuredClone(repeatedSource.records[0]));
+    assert.throws(() => applyLearnerNameAliasDelta(runtime, fixture, repeatedSource,
+        value => createHash('sha256').update(value).digest('hex'), composedSha), /delta row/);
+});
+test('generic nerve relation placeholder is hidden only for its exact unlinked state', () => {
+  assert.equal(shouldDisplayNerveFunctionContext(GENERIC_UNLINKED_NERVE_FUNCTION_CONTEXT, 'relationship_not_linked'), false);
+  assert.equal(shouldDisplayNerveFunctionContext('이 신경은 특정 운동 관계가 확인되었습니다.', 'relationship_not_linked'), true);
+  assert.equal(shouldDisplayNerveFunctionContext(GENERIC_UNLINKED_NERVE_FUNCTION_CONTEXT, 'motor_relation_documented_sensory_class_not_assessed'), true);
+  assert.equal(shouldDisplayNerveFunctionContext('', 'relationship_not_linked'), false);
+});
+test('nerve action navigation labels playable candidates separately from text-only actions', () => {
+    assert.equal(nerveActionRouteLabel(true), '이 근육의 움직임 보기');
+    assert.equal(nerveActionRouteLabel(false), '이 근육의 작용 설명 보기');
 });
 test('runtime projection fails closed on stale inputs, policy drift, forbidden fields and incomplete identity', () => {
     assert.throws(() => buildRuntimeIntegration(raw, fixture, runtimeOverlaySha256, '0'.repeat(64), frozenTargetLexicon));

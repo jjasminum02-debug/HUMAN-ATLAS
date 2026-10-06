@@ -5,6 +5,7 @@ import { validateRuntimeIntegration, searchStructures, readDatasetRoute, dataset
 import { structureTextForLearner, structureTextForSource, structureUnavailabilityForLearner, motionActionOptionsForLearner, nerveLearningForLearner, nerveConceptsForLearner, nerveConceptForLearner, nerveConceptForSourceName, nerveNamesForSource, motorRelationsForSource, motorRelationsForNerve } from '../data/learning';
 import navigation from '../../../atlas-data/navigation/atlas-navigation.json';
 import { learnerFunctionUnavailableText } from '../domain/learnerActionText';
+import { nerveActionRouteLabel, shouldDisplayNerveFunctionContext } from '../domain/nerveRelations';
 import { AtlasLoading } from './AtlasLoading';
 import { anatomicalPartSubtitle } from '../domain/displayNames';
 import { attachmentBoneKeys, inRegionalRoute } from '../viewer/datasets/regionalContext';
@@ -263,7 +264,7 @@ export default function App() {
                                 <p><strong>{motionActionLabel(option.label)}</strong> · {option.text.explanation}</p>
                                 <button className="bone-related-muscle" onClick={() => {
                                     selectMuscleAction(row.sourceKey, option.id);
-                                }}>{option.learningIntent === 'muscle_action' ? '이 근육의 움직임 보기' : '이 근육의 작용 설명 보기'}</button>
+                                }}>{nerveActionRouteLabel(Boolean(option.candidate))}</button>
                             </div>) : <p className="quiet-note">현재 연결된 작용 설명이 없습니다.</p>}
                         </div>
                     </div>;
@@ -295,9 +296,18 @@ export default function App() {
         else { setExploreOpen(false); document.querySelector<HTMLElement>('.explore-trigger')?.focus(); }
     } }}>
     <button className="explore-close" onClick={() => setExploreOpen(false)}>탐색 닫기</button>
-    <div className="region-picker" ref={regionPicker}>
+    <div className="region-picker" ref={regionPicker}
+      onPointerEnter={event => {
+        if (event.pointerType === 'mouse' && window.matchMedia('(any-hover: hover) and (any-pointer: fine)').matches) setRegionMenuOpen(true);
+      }}
+      onPointerLeave={event => {
+        if (event.pointerType === 'mouse' && !regionPicker.current?.contains(document.activeElement)) setRegionMenuOpen(false);
+      }}>
       <button ref={regionPickerTrigger} type="button" className="region-picker-trigger" aria-expanded={regionMenuOpen}
-        aria-controls="atlas-region-menu" onClick={() => setRegionMenuOpen(open => !open)}>
+        aria-controls="atlas-region-menu" onClick={() => {
+          const hoverPointer = window.matchMedia('(any-hover: hover) and (any-pointer: fine)').matches;
+          setRegionMenuOpen(open => hoverPointer ? true : !open);
+        }}>
         부위 탐색 · {regionLabel} <span aria-hidden="true">▾</span>
       </button>
       {regionMenuOpen && <div id="atlas-region-menu" className="region-picker-menu" aria-label="전신 및 12개 부위">
@@ -356,10 +366,10 @@ export default function App() {
       {nerveLearning && <section><h4>정적 모형에서 관찰하는 주행</h4><p>{nerveLearning.courseContext}</p></section>}
       <p className="quiet-note">표시된 주행은 정적 모형 관찰입니다. 움직임에 따른 신경 변형은 제공하지 않으며, 개인별 분지와 경로에는 차이가 있습니다.</p>
       <p className="nerve-legend"><span><i className="nerve-swatch"/>선택 신경</span><span><i className="motor-swatch"/>관련 근육</span></p>
-      <h3>분지</h3>{selected.nerve!.branchKeys.length ? selected.nerve!.branchKeys.map(key => { const row = data.integration.objects.find(r => r.sourceKey === key); return row ? <button className="bone-related-muscle" key={key} onClick={() => select(key)}>{learnerRowTitle(row)}</button> : null; }) : <p className="quiet-note">표시할 하위 분지가 준비되지 않았습니다.</p>}
+      <h3>모형에서 연결된 분지</h3>{selected.nerve!.branchKeys.length ? selected.nerve!.branchKeys.map(key => { const row = data.integration.objects.find(r => r.sourceKey === key); return row ? <button className="bone-related-muscle" key={key} onClick={() => select(key)}>{learnerRowTitle(row)}</button> : null; }) : <p className="quiet-note">표시할 하위 분지가 준비되지 않았습니다.</p>}
       <h3>운동·감각 관계 상태</h3><p>{selectedNerveConcept ? nerveFunctionStatus(selectedNerveConcept) : '이 모형 이름은 설명 개념과 아직 연결되지 않았습니다.'}</p>
       <h3>확인된 운동근 관계</h3>{renderNerveRelations(selectedNerveRelations, selected.side)}<p className="quiet-note">강조는 확인된 관계를 설명하기 위한 표시입니다. 실제 힘이나 활성도를 측정하지 않으며, 목록은 전체 지배 범위를 뜻하지 않습니다.</p>
-      {nerveLearning && <details key={selected.sourceKey} className="nerve-learning-context"><summary>주행·포착 맥락</summary><section><h4>기능 연결</h4><p>{nerveLearning.functionContext}</p></section><section><h4>해부학적 주행과 변이</h4><p>{nerveLearning.courseContext}</p></section><section><h4>포착 가능 구간과 주변 조직</h4><p>{nerveLearning.compressionContext}</p></section>{"variationContext" in nerveLearning && <section><h4>변이와 자세 범위</h4><p>{String(nerveLearning.variationContext)}</p></section>}</details>}
+      {nerveLearning && <details key={selected.sourceKey} className="nerve-learning-context"><summary>주행·포착 맥락</summary>{shouldDisplayNerveFunctionContext(nerveLearning.functionContext, selectedNerveConcept?.functionEvidenceClass) && <section><h4>기능 연결</h4><p>{nerveLearning.functionContext}</p></section>}<section><h4>해부학적 주행과 변이</h4><p>{nerveLearning.courseContext}</p></section><section><h4>포착 가능 구간과 주변 조직</h4><p>{nerveLearning.compressionContext}</p></section>{"variationContext" in nerveLearning && <section><h4>변이와 자세 범위</h4><p>{String(nerveLearning.variationContext)}</p></section>}</details>}
     </section> : selected?.kind === 'muscle' ? <>
     <div className="study-tabs" role="tablist" aria-label="학습 내용">{(['구조', '기능'] as const).map(t => <button key={t} role="tab" id={`tab-${t}`} aria-controls={t === '구조' ? 'study-structure-panel' : 'study-function-panel'} aria-selected={tab === t} tabIndex={tab === t ? 0 : -1} onClick={() => setTab(t)} onKeyDown={e => { if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) {
                 e.preventDefault();

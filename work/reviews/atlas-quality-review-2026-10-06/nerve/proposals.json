@@ -1,0 +1,289 @@
+{
+  "schemaVersion": "atlas-nerve-integration-proposals-v1",
+  "runId": "atlas-quality-review-2026-10-06-r1",
+  "baselineHead": "786fe55e5f304b434705a9bf66ff7256cdb1444d",
+  "snapshotSha256": "da878d82a8f990f5066c482b40a5dd8a304bf38753fb49427c0536bbfebd90c3",
+  "outputOwner": "work/reviews/atlas-quality-review-2026-10-06/nerve",
+  "proposals": [
+    {
+      "proposalId": "N02-P01",
+      "classification": "correction",
+      "status": "ready_for_04_integration",
+      "target": {
+        "file": "atlas-data/terminology/nerve-learning-t66.json",
+        "jsonPointer": "/Common fibular nerve/courseContext"
+      },
+      "beforeValue": "무릎 뒤쪽에서 가쪽으로 향해 종아리뼈 머리 주위를 돌아 앞·뒤 가지로 이어집니다. 분지 위치와 가지가 지나가는 경로에는 해부학적 변이가 보고되어 있습니다.",
+      "beforeValueSha256": "dea15c4e4122702950cda0544f8c964acba3745f358e8e2134cc37ab65584621",
+      "afterProposal": "무릎 뒤쪽에서 가쪽으로 향해 종아리뼈 머리 주위를 도는 온종아리신경의 대표 분지에는 깊은종아리신경과 얕은종아리신경이 있습니다. 현재 모형은 이 두 분지 표면의 연결을 보여 줍니다. 분지 위치와 주행에는 해부학적 변이가 보고되어 있습니다.",
+      "evidenceRefs": [
+        {
+          "path": "atlas-data/overlays/nerve-support-t66.json",
+          "locator": "instances[].branchKeys; exact displayed deep/superficial fibular source rows",
+          "sha256": "7bad30e35976431bbda3d05e88b80648c6777d13472aa1ec75eb466122c9416a"
+        },
+        {
+          "sourceId": "TAH_U6731",
+          "locator": "Partonomy lines 24-56; page marked work in progress",
+          "url": "https://ifaa.unifr.ch/Public/TNAEntryPage/auto/unit/LAEN/TAH6731%20Unit%20EN.htm"
+        }
+      ],
+      "scope": {
+        "concept": "common fibular",
+        "side": "paired; no side-specific claim",
+        "part": "named branches only",
+        "relationship": "not exhaustive"
+      },
+      "rationale": "Current “앞·뒤 가지” wording does not match the exact displayed model branch names."
+    },
+    {
+      "proposalId": "N02-P02",
+      "classification": "qualification",
+      "status": "ready_for_04_integration",
+      "target": {
+        "file": "atlas-web/src/ui/App.tsx",
+        "codeLocation": "App.tsx:359, nerve-card branch heading"
+      },
+      "beforeValue": "<h3>분지</h3>",
+      "beforeValueSha256": "203f8763c2c3c085e17bb3e4bf6d9fad3bcb35e291d234b2b8ae11c3be78e808",
+      "afterProposal": "<h3>모형에서 연결된 분지</h3>",
+      "evidenceRefs": [
+        {
+          "path": "atlas-data/overlays/nerve-support-t66.json",
+          "locator": "relations[] kind=branch_of: 6 registered edges; selected.nerve.branchKeys is displayed",
+          "sha256": "7bad30e35976431bbda3d05e88b80648c6777d13472aa1ec75eb466122c9416a"
+        },
+        {
+          "path": "atlas-web/src/ui/App.tsx",
+          "locator": "current App.tsx:359",
+          "sha256": "b2d726b268ce16d3acb35e75dd488958e0cef1075bc47c0a0dc29f9c88a88f2a"
+        }
+      ],
+      "scope": {
+        "all nerve cards": true,
+        "claim": "only registered model branch subset"
+      },
+      "rationale": "Avoid an impression that the current partial source registry is an exhaustive branch list."
+    },
+    {
+      "proposalId": "N02-P03",
+      "classification": "qualification",
+      "status": "ready_for_04_integration",
+      "target": {
+        "file": "atlas-web/src/ui/App.tsx",
+        "codeLocation": "App.tsx:362, functionContext section"
+      },
+      "beforeValue": "Always render the generic functionContext if a nerveLearning row exists.",
+      "beforeValueSha256": "b2d726b268ce16d3acb35e75dd488958e0cef1075bc47c0a0dc29f9c88a88f2a",
+      "afterProposal": {
+        "rule": "Suppress only the exact generic template when functionEvidenceClass is relationship_not_linked; keep nerveFunctionStatus and relation list; show all specific source-backed text."
+      },
+      "evidenceRefs": [
+        {
+          "path": "atlas-data/terminology/nerve-learning-t66.json",
+          "locator": "88 concepts share exact generic text",
+          "sha256": "2a5760992f408fff3b8887370a55564a0108cd20ae90ba04e616a983eae200e9"
+        },
+        {
+          "path": "atlas-data/terminology/learner-nerve-graph-t66.json",
+          "locator": "concepts[].functionEvidenceClass",
+          "sha256": "eb53c14297c04846ebbd3cf4d0c9711523b075aa36663208bcd7618765988c73"
+        },
+        {
+          "path": "atlas-web/src/ui/App.tsx",
+          "locator": "App.tsx:233-243, 360-362",
+          "sha256": "b2d726b268ce16d3acb35e75dd488958e0cef1075bc47c0a0dc29f9c88a88f2a"
+        }
+      ],
+      "scope": {
+        "exactTemplateOnly": true,
+        "preserve": "status and relation list"
+      },
+      "rationale": "Text is conditional, not wrong anatomy, but duplicates a more precise status."
+    },
+    {
+      "proposalId": "N02-P04",
+      "classification": "qualification",
+      "status": "candidate_addition_no_geometry_binding",
+      "target": {
+        "file": "atlas-data/terminology/nerve-learning-t66.json",
+        "jsonPointer": "/Intercostal nerves/functionContext"
+      },
+      "beforeValue": "문헌은 여러 가슴배 분절의 운동 가지가 복직근에, 가슴사이신경의 일부 가지가 바깥배빗근에 기여한다고 보고합니다. 현재 연결은 부분 개념 수준이며 특정 분절이나 전체 근육을 대표하지 않습니다.",
+      "beforeValueSha256": "70ff51a5792540aea386b60b623ff4a130b1ca568a86fc53e96c20cb3e2b87c7",
+      "afterProposal": "문헌은 여러 가슴배 분절의 운동 가지가 복직근에, 가슴사이신경의 일부 가지가 바깥배빗근에 기여한다고 보고합니다. 현재 연결은 부분 개념 수준이며 특정 분절이나 전체 근육을 대표하지 않습니다. 별도 시체해부 연구에서는 네 번째 가슴사이신경이 대흉근 아래가쪽 구간의 신경 공급에 참여한 표본이 30개 중 4개였다고 보고했습니다. 이 결과는 해당 연구 표본의 소견이며, 현재 모형의 대흉근 부분·좌우 또는 신경 가지 좌표에 결속된 것은 아닙니다.",
+      "evidenceRefs": [
+        {
+          "sourceId": "PMID_21587039",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/21587039/",
+          "locator": "Abstract Methods/Results: 30 samples / 15 cadavers, 4/30 fourth intercostal participation in inferolateral pectoralis-major supply"
+        }
+      ],
+      "scope": {
+        "nerve": "intercostal concept; study-specific fourth intercostal",
+        "target": "pectoralis-major inferolateral contribution in 4/30 samples",
+        "side": null,
+        "part": "not mapped to the three local part surfaces",
+        "geometryBinding": false
+      },
+      "rationale": "Bounded primary-study finding; do not universalize or assign to a model surface."
+    },
+    {
+      "proposalId": "N02-P05",
+      "classification": "candidate_relation_additions",
+      "status": "not_adopted_pending_primary_anatomical_crosscheck",
+      "target": {
+        "file": "atlas-data/terminology/learner-nerve-graph-t66.json",
+        "jsonPointer": "/motorRelations"
+      },
+      "beforeValue": "No rows for the four named branch candidates.",
+      "beforeValueSha256": "98c94e756a7b74a0c84b47ee2638517371098ad0c15eb34e4a7fc8be069fdabf",
+      "afterProposal": {
+        "candidateRows": [
+          {
+            "sourceId": "TAH_U6734",
+            "unit": "TAH:U12896",
+            "nerveKey": "superficial-fibular",
+            "targetEnglishConcept": "Fibularis longus muscle",
+            "targetSourceKeys": [
+              "ZA-c7010a9-4f96bdd8fb89eeb10b302e4a",
+              "ZA-c7010a9-8a4afe3bad15949b534d7395"
+            ],
+            "targetSide": null,
+            "scope": "unsided_named_whole_muscle_concept",
+            "basisCandidate": "official_nomenclature_partonomy_candidate"
+          },
+          {
+            "sourceId": "TAH_U6734",
+            "unit": "TAH:U12897",
+            "nerveKey": "superficial-fibular",
+            "targetEnglishConcept": "Fibularis brevis muscle",
+            "targetSourceKeys": [
+              "ZA-c7010a9-bb9c30b5db19ec33b36c8405",
+              "ZA-c7010a9-660f1d894dac4eaaac8cda4c"
+            ],
+            "targetSide": null,
+            "scope": "unsided_named_whole_muscle_concept",
+            "basisCandidate": "official_nomenclature_partonomy_candidate"
+          },
+          {
+            "sourceId": "TAH_U6739",
+            "unit": "TAH:U12900",
+            "nerveKey": "deep-fibular",
+            "targetEnglishConcept": "Extensor hallucis longus",
+            "targetSourceKeys": [
+              "ZA-c7010a9-7f920d7fa1277f273c5e0155",
+              "ZA-c7010a9-58b8d48b1e45988619a108bd"
+            ],
+            "targetSide": null,
+            "scope": "unsided_named_whole_muscle_concept",
+            "basisCandidate": "official_nomenclature_partonomy_candidate"
+          },
+          {
+            "sourceId": "TAH_U6739",
+            "unit": "TAH:U12902",
+            "nerveKey": "deep-fibular",
+            "targetEnglishConcept": "Extensor hallucis brevis",
+            "targetSourceKeys": [
+              "ZA-c7010a9-d24ad155d9bbc766659188b5",
+              "ZA-c7010a9-9f78cdb1fcbd9ca0c24066d5"
+            ],
+            "targetSide": null,
+            "scope": "unsided_named_whole_muscle_concept",
+            "basisCandidate": "official_nomenclature_partonomy_candidate"
+          }
+        ],
+        "doNotUseFor": "branch geometry, per-side branch identity, complete innervation, or ambiguous extensor digitorum branches"
+      },
+      "evidenceRefs": [
+        {
+          "sourceId": "TAH_U6734",
+          "url": "https://ifaa.unifr.ch/Public/TNAEntryPage/auto/unit/EN/TAH6734%20Unit%20EN.htm",
+          "locator": "U12896/U12897 long/short fibular muscle branches; work in progress page"
+        },
+        {
+          "sourceId": "TAH_U6739",
+          "url": "https://ifaa.unifr.ch/Public/TNAEntryPage/auto/unit/LAFR/TAH6739%20Unit%20EN.htm",
+          "locator": "U12900/U12902 EHL/EHB branches; U12899/U12901 labels duplicate; work in progress page"
+        }
+      ],
+      "scope": {
+        "side": "unsided paired concept candidates; targetSourceKeys include exact existing left/right objects",
+        "status": "not registered / not human reviewed"
+      },
+      "rationale": "Official terminology candidate is not primary dissection evidence and pages are WIP; do not silently extend graph."
+    },
+    {
+      "proposalId": "N02-P06",
+      "classification": "candidate_relation_addition",
+      "status": "candidate_concept_relation_limited_variant",
+      "target": {
+        "file": "atlas-data/terminology/learner-nerve-graph-t66.json",
+        "jsonPointer": "/motorRelations"
+      },
+      "beforeValue": "No intercostal-nerves → pectoralis-major row; existing intercostal rows target rectus abdominis and external abdominal oblique.",
+      "beforeValueSha256": "98c94e756a7b74a0c84b47ee2638517371098ad0c15eb34e4a7fc8be069fdabf",
+      "afterProposal": {
+        "relationId": "nerve-motor-intercostal-pectoralis-major-inferolateral-variant",
+        "nerveKey": "nerve-source-intercostal-nerves",
+        "basis": "literature_concept_motor_relation",
+        "targetEnglishConcept": "Pectoralis major muscle",
+        "targetSourceKeys": [
+          "ZA-c7010a9-07d4e851bc713a1c5bb0b8f9",
+          "ZA-c7010a9-2ea5931bed7570848730b3f4",
+          "ZA-c7010a9-3a414d5573f8ef7250596305",
+          "ZA-c7010a9-72ab84e76cdf041dd9425609",
+          "ZA-c7010a9-9648fd79baf7b216be0e8c91",
+          "ZA-c7010a9-e4a7d3329f606e0541166646"
+        ],
+        "targetSide": null,
+        "scope": "unsided_partial_muscle_concept",
+        "displayNote": "한 해부 연구의 30개 대흉근 표본 중 4개에서 네 번째 가슴사이신경이 아래가쪽 공급에 참여했습니다. 모형 부분은 선택 가능한 문맥 표면일 뿐, 연구의 부위·좌우·가지 경계에 대응하지 않습니다."
+      },
+      "evidenceRefs": [
+        {
+          "sourceId": "PMID_21587039",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/21587039/",
+          "locator": "Abstract Results; fourth intercostal participation in inferolateral Pmaj supply in 4/30 samples"
+        },
+        {
+          "path": "work/evidence/T66/nerve-learning-2026-10-05/nerve-relation-ledger.json",
+          "locator": "existing lateral/medial pectoral targets; six model parts are not branch boundaries",
+          "sha256": "122ed50c45b73fcd2a04c7644e720880ee1e7a6fd74b33ead45f3a52eaf155ef"
+        }
+      ],
+      "scope": {
+        "sample": "30 specimens from 15 cadavers; 4/30",
+        "side": null,
+        "part": "no local part surface mapping",
+        "geometryBinding": false
+      },
+      "rationale": "One opened primary abstract supports only the limited concept-level candidate; if current schema cannot safely express limits, integrate prose only."
+    }
+  ],
+  "negativeScopeCases": [
+    {
+      "case": "TAH U12899/U12901 share “extensor digitorum pedis”",
+      "decision": "do not map to EDL/EDB"
+    },
+    {
+      "case": "Common plantar digital branches of medial plantar nerve",
+      "decision": "only left surface in frozen package; do not mirror"
+    },
+    {
+      "case": "unsided literature relations filtered to selected side",
+      "decision": "display convenience is not side-specific branch evidence"
+    },
+    {
+      "case": "nearby geometry or parent relation",
+      "decision": "not enough to infer motor innervation"
+    }
+  ],
+  "guardrails": [
+    "no shared runtime/data write in this step",
+    "source-only=true, humanReview=not_performed, public rights held",
+    "candidate relations are not geometry-bound",
+    "195/98 are not independent nerve counts",
+    "preserve all 18 existing relations and overlap semantics"
+  ]
+}

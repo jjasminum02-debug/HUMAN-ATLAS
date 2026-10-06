@@ -4,7 +4,7 @@ import { readFile, realpath } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { createHash } from 'node:crypto';
 import type { Plugin } from 'vite';
-import { buildRuntimeIntegration } from '../src/viewer/datasets/integration.ts';
+import { applyLearnerNameAliasDelta, buildRuntimeIntegration } from '../src/viewer/datasets/integration.ts';
 import { composeSupplementDataset, composeSupplementRuntime, type SourceSupplement } from '../src/viewer/datasets/sourceSupplement.ts';
 import { resolveSupplementTargetRelations, targetRoutesBySource } from '../src/viewer/datasets/supplementRelations.ts';
 import { validateDataset, type Dataset } from '../src/viewer/datasets/schema.ts';
@@ -38,6 +38,7 @@ export function wholeBodyPlugin(root: string): Plugin {
       // Frozen dependencies invalidate both namespaces and their single-scene composition.
       server.watcher.add([
         resolve(root, 'atlas-data/overlays/nerve-support-t66.json'), resolve(root, 'atlas-data/assets/derived-glb/za-nerve-t66'), ...['nerve-evaluated-surfaces.json','nerve-export-input.json','nerve-local-use-rights.json'].map(p => resolve(root, 'work/evidence/T66/implementation-2026-10-02', p)),
+        resolve(root, 'atlas-data/terminology/learner-name-aliases-2026-10-06.json'),
         `${cache}/datasets`, `${root}atlas-data/overlays/nerve-support-t63.json`, `${root}atlas-data/assets/derived-glb/za-nerve-t63`, `${root}work/evidence/T63/local-use-rights.json`, `${root}work/evidence/T63/evaluated-surfaces.json`, `${root}atlas-data/manifests`, `${root}atlas-data/catalog/target-scope-t96.json`,
         `${root}work/evidence/T78/reference/ta2-scope.json`, `${root}work/evidence/T78/source-elements.json`,
         `${root}work/evidence/T50/scene-contract.md`, `${root}work/evidence/T69/diagnostic.json`,
@@ -73,15 +74,17 @@ export function wholeBodyPlugin(root: string): Plugin {
       async function compose(): Promise<ProjectionAssets> {
         if(composed)return composed;
         const pending=(async()=>{
-          const [overlayBytes,supplementBytes,targetScopeBytes,supportContextBytes]=await Promise.all([
+          const [overlayBytes,supplementBytes,targetScopeBytes,supportContextBytes,nameAliasBytes]=await Promise.all([
             readFile(resolve(root,'atlas-data/overlays/za-local-integration.json')),
             readFile(resolve(root,'atlas-data/manifests/bodyparts3d-r4-t100-source-supplement.json')),
             readFile(resolve(root,'atlas-data/catalog/target-scope-t96.json')),
             readFile(resolve(root,'work/evidence/T78/reference/ta2-scope.json')),
+            readFile(resolve(root,'atlas-data/terminology/learner-name-aliases-2026-10-06.json')),
           ]);
-          const overlaySha256=sha(overlayBytes),supplementSha256=sha(supplementBytes);
+          const overlaySha256=sha(overlayBytes),supplementSha256=sha(supplementBytes),nameAliasSha256=sha(nameAliasBytes);
           const overlay=JSON.parse(overlayBytes.toString());
           const supplement=JSON.parse(supplementBytes.toString()) as SourceSupplement;
+          const nameAliasDelta=JSON.parse(nameAliasBytes.toString());
           const targetScope=JSON.parse(targetScopeBytes.toString());
           const targetScopeSha256=sha(targetScopeBytes),supportContextSha256=sha(supportContextBytes);
           if(supportContextSha256!==targetScope.source.snapshotSha256)throw Error('changed frozen support context');
@@ -161,6 +164,9 @@ export function wholeBodyPlugin(root: string): Plugin {
             })),
           };
           const baseProjection=buildRuntimeIntegration(overlay,baseDataset,overlaySha256,rightsEvidenceSha256,frozenTargetLexicon);
+          const composedOverlaySha=sha(Buffer.from([overlaySha256,supplementSha256,nameAliasSha256].join('\n')));
+          const namedBaseProjection=applyLearnerNameAliasDelta(baseProjection,baseDataset,nameAliasDelta,
+            value=>sha(Buffer.from(value)),composedOverlaySha);
           const dataset=composeSupplementDataset(baseDataset,supplement);
           const partofPath='atlas-data/source-cache/bodyparts3d-r4/metadata/partof_element_parts.txt';
           const partofBytes=await readFile(resolve(root,partofPath));
@@ -177,9 +183,8 @@ export function wholeBodyPlugin(root: string): Plugin {
             if(groupRows.get(groupId)?.sort().join('\n')!==[...group.memberElementFileIds].sort().join('\n'))
               throw Error(`supplement group relation changed against exact PART-OF table: ${groupId}`);
           }
-          const composedOverlaySha=sha(Buffer.from([overlaySha256,supplementSha256].join('\n')));
           const composedRightsSha=sha(Buffer.from([rightsEvidenceSha256,supplementRightsSha256].join('\n')));
-          const projection=composeSupplementRuntime(baseProjection,dataset,supplement,targetRoutesBySource(relationEvidence),composedOverlaySha,composedRightsSha);
+          const projection=composeSupplementRuntime(namedBaseProjection,dataset,supplement,targetRoutesBySource(relationEvidence),composedOverlaySha,composedRightsSha);
           const nerve = await loadNerveAssets(root);
           const combined = composeNerveScene(dataset, projection, nerve.manifest, nerve.registry, nerve.dataset, nerve.rights,
             sha(Buffer.from([composedOverlaySha, nerve.sha256].join('\n'))), sha(Buffer.from([composedRightsSha, nerve.rightsSha256].join('\n'))));

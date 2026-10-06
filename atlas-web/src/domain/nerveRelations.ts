@@ -11,6 +11,23 @@ export type MotorRelationRow = {
   scope: string;
 };
 
+export const GENERIC_UNLINKED_NERVE_FUNCTION_CONTEXT =
+  "확인된 신경 지배 관계가 있는 경우 아래 운동 연결에서 살펴볼 수 있습니다.";
+
+/** Hide only the repeated generic status sentence; keep every specific explanation visible. */
+export function shouldDisplayNerveFunctionContext(
+  context: string | null | undefined,
+  evidenceClass: string | null | undefined,
+): boolean {
+  if (!context) return false;
+  return !(evidenceClass === "relationship_not_linked"
+    && context === GENERIC_UNLINKED_NERVE_FUNCTION_CONTEXT);
+}
+
+export function nerveActionRouteLabel(hasPlayableCandidate: boolean): string {
+  return hasPlayableCandidate ? '이 근육의 움직임 보기' : '이 근육의 작용 설명 보기';
+}
+
 /** Resolve only a unique exact native label, with a unique exact display-name fallback. */
 export function conceptForExactNerveName<T extends NerveConceptNameRow>(concepts: readonly T[], englishName: string): T | null {
   const sourceMatches = concepts.filter(row => row.sourceNativeEnglishName === englishName);

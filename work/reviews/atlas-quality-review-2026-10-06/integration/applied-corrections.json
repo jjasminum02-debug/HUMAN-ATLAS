@@ -1,0 +1,135 @@
+{
+  "schemaVersion": "atlas-quality-review-integration-applied-v1",
+  "runId": "atlas-quality-review-2026-10-06-r1",
+  "baselineHead": "786fe55e5f304b434705a9bf66ff7256cdb1444d",
+  "integrationBaseHead": "f3b2113dd8abb3422d6d7b54e251988e72bfe2d1",
+  "reviewInputs": {
+    "manifest": {
+      "path": "work/plans/atlas-quality-review-2026-10-06/run-manifest.json",
+      "sha256": "6aa39a2f884c9abccce8a853d349b2897715e08a04dfe12edee522dde879816e"
+    },
+    "nerveSnapshot": {
+      "path": "work/plans/atlas-quality-review-2026-10-06/input-snapshot/nerve.json",
+      "sha256": "da878d82a8f990f5066c482b40a5dd8a304bf38753fb49427c0536bbfebd90c3",
+      "matchesAssignment": true
+    },
+    "muscleSnapshot": {
+      "path": "work/plans/atlas-quality-review-2026-10-06/input-snapshot/muscle.json",
+      "sha256": "637e4d079f90e68743f656c07d08244a98521b42baab49b4de1f5ae8975c0996",
+      "matchesAssignment": true
+    },
+    "reviewOutputs": {
+      "nerveProposalsSha256": "95b79b2db17a8514c9d41f02fc1e9c578d102fbe4ca5f72bbd20e5fc41bbaf7f",
+      "relationReviewSha256": "a6abefcab609716669321d21c066fda928c0745ef6486ca60c4fba6e7025c573",
+      "descriptionReviewSha256": "8d34d3c8c29e848874ece20277d24033210132ef2a3644dbf2aafe0d33d9184a",
+      "nameProposalsSha256": "c89898445d5e3390cd845b1608f436014fcfa142857f03f309dbe9dc124a55e7",
+      "nameReviewSha256": "d83011a8669c9182d0df7af61ba3ca4fa26e3214801eae2c77bb1b2d109cc7e4"
+    }
+  },
+  "corrections": [
+    {
+      "proposalId": "N02-P01",
+      "status": "applied",
+      "target": "atlas-data/terminology/nerve-learning-t66.json#/Common fibular nerve/courseContext",
+      "beforeValueSha256": "dea15c4e4122702950cda0544f8c964acba3745f358e8e2134cc37ab65584621",
+      "afterValue": "무릎 뒤쪽에서 가쪽으로 향해 종아리뼈 머리 주위를 도는 온종아리신경의 대표 분지에는 깊은종아리신경과 얕은종아리신경이 있습니다. 현재 모형은 이 두 분지 표면의 연결을 보여 줍니다. 분지 위치와 주행에는 해부학적 변이가 보고되어 있습니다.",
+      "scope": "names the two present model branches and explicitly limits the description to the connected subset",
+      "geometryOrRelationAdded": false
+    },
+    {
+      "proposalId": "N02-P02",
+      "status": "applied",
+      "target": "atlas-web/src/ui/App.tsx nerve-card branch heading",
+      "beforeValue": "분지",
+      "afterValue": "모형에서 연결된 분지",
+      "scope": "all native nerve cards; describes registered model branch subset",
+      "geometryOrRelationAdded": false
+    },
+    {
+      "proposalId": "N02-P03",
+      "status": "applied",
+      "target": "atlas-web/src/domain/nerveRelations.ts and atlas-web/src/ui/App.tsx",
+      "rule": "Hide only the exact repeated generic function template when functionEvidenceClass is relationship_not_linked. Keep the structured status, specific text, relation list, and all other evidence classes visible.",
+      "regressionTest": "generic nerve relation placeholder is hidden only for its exact unlinked state",
+      "geometryOrRelationAdded": false
+    },
+    {
+      "proposalId": "N02-P04",
+      "status": "applied_as_bounded_prose_only",
+      "target": "atlas-data/terminology/nerve-learning-t66.json#/Intercostal nerves/functionContext",
+      "beforeValueSha256": "70ff51a5792540aea386b60b623ff4a130b1ca568a86fc53e96c20cb3e2b87c7",
+      "source": "PMID 21587039, opened PubMed abstract; Methods/Results locator in nerve/proposals.json",
+      "claimLimit": "4/30 specimens; no side, local pectoralis part, branch coordinate, or model geometry binding",
+      "motorRelationRowsAdded": 0
+    },
+    {
+      "proposalId": "N02-P05",
+      "status": "not_adopted_pending_primary_anatomical_crosscheck",
+      "target": "atlas-data/terminology/learner-nerve-graph-t66.json#/motorRelations",
+      "reason": "The cited TAH entries are work-in-progress nomenclature/partonomy candidates and do not prove the proposed muscle-branch relations.",
+      "existingMotorRelationRowsPreserved": 18
+    },
+    {
+      "proposalId": "N02-P06",
+      "status": "not_registered_prose_only",
+      "target": "atlas-data/terminology/learner-nerve-graph-t66.json#/motorRelations",
+      "reason": "A single study supports bounded explanatory prose but not side- or part-specific model linkage.",
+      "existingMotorRelationRowsPreserved": 18
+    },
+    {
+      "proposalId": "N03-POLLICIS-HAND-QUALIFIERS",
+      "status": "applied_add_only",
+      "target": "atlas-data/terminology/learner-name-aliases-2026-10-06.json",
+      "sourceRows": 6,
+      "groups": ["Extensor pollicis brevis", "Extensor pollicis longus", "Flexor pollicis longus"],
+      "aliases": "Add 손-qualified modern/traditional search terms to exact left/right hand source rows; retain unqualified aliases and foot counterparts.",
+      "namesOrBindingsChanged": false
+    },
+    {
+      "proposalId": "N03-BUCCINATOR-SEARCH-ALIAS",
+      "status": "applied_add_only",
+      "target": "atlas-data/terminology/learner-name-aliases-2026-10-06.json",
+      "sourceRows": 2,
+      "group": "Bucinator",
+      "alias": "Buccinator muscle",
+      "namesOrBindingsChanged": false,
+      "preferredEnglishAndRawSourceNamePreserved": "Bucinator"
+    },
+    {
+      "proposalId": "NERVE-ACTION-ROUTE-COPY",
+      "status": "corrected_from-browser-finding",
+      "target": "atlas-web/src/domain/nerveRelations.ts and atlas-web/src/ui/App.tsx",
+      "beforeIssue": "Both text-only and playable source-action links were labeled 이 근육의 움직임 보기 because the label followed learningIntent alone.",
+      "afterRule": "Use the verified playable candidate presence: playable candidate → 이 근육의 움직임 보기; text-only action → 이 근육의 작용 설명 보기.",
+      "exactActionSelectionAndAutoplay": "Explicit link opens the function tab and selects its exact action; it does not start playback.",
+      "regressionTest": "nerve action navigation labels playable candidates separately from text-only actions"
+    },
+    {
+      "proposalId": "USER-REGION-PICKER-HOVER",
+      "status": "implemented-and-browser-verified",
+      "target": "atlas-web/src/ui/App.tsx and atlas-web/src/ui/atlasShell.css",
+      "behavior": "On fine mouse pointer enter, open the whole-body/12-region picker without click; reveal with 220ms downward fade/slide; close on pointer leave unless keyboard focus remains inside. Keyboard activation and touch/click fallback remain available.",
+      "reducedMotion": "Animation disabled for prefers-reduced-motion: reduce.",
+      "realBrowserEvidence": "Chrome hover opened aria-expanded=true, displayed 13 region buttons, pointer leave closed it; Escape restored trigger focus. At 390x844 CSS viewport the picker remained available during search and its menu bounds stayed inside the viewport."
+    }
+  ],
+  "preservation": {
+    "scopeDenominators": {"targets":542,"memberships":563,"regions":12},
+    "existingCanonicalHaBindings": 130,
+    "historical163CategoryCounts": {
+      "exact_source_label_observation_identity_crosswalk_needed": 6,
+      "descendant_surface_representation_present_target_specific_surface_unresolved": 20,
+      "ancestor_surface_representation_present_target_specific_surface_unresolved": 135,
+      "no_exact_descendant_or_ancestor_surface_evidence_in_frozen_package": 2
+    },
+    "nerveConceptRows": 98,
+    "nativeNerveSurfaceRows": 195,
+    "existingMotorRelations": 18,
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "actualHanjaGlyphsCollected": false,
+    "canonicalBindingsOrTargetExtentChanged": false,
+    "sourceGeometryOrRightsChanged": false
+  }
+}

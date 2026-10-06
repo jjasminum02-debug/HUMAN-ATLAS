@@ -243,6 +243,67 @@ export interface RuntimeIntegration {
     };
     objects: RuntimeStructureRecord[];
 }
+
+export interface LearnerNameAliasDelta {
+    schemaVersion: 'learner-name-alias-delta-v1';
+    revision: string;
+    sourceSnapshotSha256: string;
+    records: Array<{
+        sourceKey: string;
+        kind: 'muscle';
+        side: string | null;
+        searchGroupKey: string;
+        label: string;
+        names: RuntimeStructureRecord['names'];
+        beforeAliasesSha256: string;
+        addAliases: string[];
+    }>;
+}
+
+/** Apply an add-only, exact-source learner search overlay without changing identity or bindings. */
+export function applyLearnerNameAliasDelta(
+    value: unknown,
+    dataset: Dataset,
+    deltaValue: unknown,
+    shaText: (value: string) => string,
+    composedSourceOverlaySha256: string,
+): RuntimeIntegration {
+    const runtime = validateRuntimeIntegration(value, dataset);
+    const delta = deltaValue as LearnerNameAliasDelta;
+    if (!delta || delta.schemaVersion !== 'learner-name-alias-delta-v1' || !delta.revision
+        || !/^[a-f0-9]{64}$/.test(delta.sourceSnapshotSha256)
+        || !/^[a-f0-9]{64}$/.test(composedSourceOverlaySha256) || !Array.isArray(delta.records)
+        || !delta.records.length) throw Error('learner name alias delta header');
+
+    const recordKeys = new Set<string>();
+    const bySource = new Map(runtime.objects.map(row => [row.sourceKey, row]));
+    const patched = new Map<string, string[]>();
+    for (const record of delta.records) {
+        if (!record || !record.sourceKey || recordKeys.has(record.sourceKey) || record.kind !== 'muscle'
+            || !/^[a-f0-9]{64}$/.test(record.beforeAliasesSha256) || !Array.isArray(record.addAliases)
+            || !record.addAliases.length || record.addAliases.some(alias => typeof alias !== 'string' || !alias.trim())
+            || new Set(record.addAliases).size !== record.addAliases.length) throw Error('learner name alias delta row');
+        recordKeys.add(record.sourceKey);
+        const row = bySource.get(record.sourceKey);
+        if (!row || row.kind !== record.kind || row.routeAudience !== 'learner' || !row.localDisplayEligible
+            || row.side !== record.side || row.searchGroupKey !== record.searchGroupKey || row.label !== record.label
+            || JSON.stringify(row.names) !== JSON.stringify(record.names)
+            || shaText(JSON.stringify(row.aliases)) !== record.beforeAliasesSha256)
+            throw Error(`learner name alias before-state mismatch: ${record.sourceKey}`);
+        if (record.addAliases.some(alias => row.aliases.includes(alias)))
+            throw Error(`learner name alias is not add-only: ${record.sourceKey}`);
+        patched.set(record.sourceKey, [...row.aliases, ...record.addAliases]);
+    }
+    const projection: RuntimeIntegration = {
+        ...runtime,
+        revision: `${runtime.revision}+${delta.revision}`,
+        sourceOverlaySha256: composedSourceOverlaySha256,
+        objects: runtime.objects.map(row => patched.has(row.sourceKey)
+            ? { ...row, aliases: patched.get(row.sourceKey)! }
+            : row),
+    };
+    return validateRuntimeIntegration(projection, dataset);
+}
 /** Historical non-approval, public-release holds and optional human review are NOT local display gates. */
 export function canDisplayLocally(row: StructureRecord, policy: Integration['policy']) {
     return policy.localOnly && policy.localUseRights === 'supported_local_prototype'

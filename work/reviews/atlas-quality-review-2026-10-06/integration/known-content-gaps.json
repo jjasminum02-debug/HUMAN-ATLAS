@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "atlas-quality-review-known-content-gaps-v1",
+  "reviewScopeStatus": "passed_with_content_gaps",
+  "contentCompleteness": "partial",
+  "muscleNames": {
+    "fixedSourceRows": 472,
+    "learnerRows": 462,
+    "inspectionRows": 10,
+    "muscleTargets": 429,
+    "addedSearchAliases": 8,
+    "directTermEvidenceAndAICompositionRemainSeparate": true,
+    "fieldEvidenceLimits": {
+      "modernNameWithoutDirectTargetScopedLocator": 321,
+      "traditionalNameWithoutDirectTargetScopedLocator": 320,
+      "targetsWithoutTermDossier": 250,
+      "inspectionRowsWithNullTraditionalName": ["BP3D4-FJ2745", "BP3D4-FJ2757"]
+    },
+    "historicalAiProposals": {
+      "candidateRows": 75,
+      "overlapWithAssignedMuscleTargets": 71,
+      "displayNameCandidates": 73,
+      "meaning": "AI contextual proposals, not direct terminology citations or human review"
+    },
+    "retainedNameQuestions": [
+      "Salpingopharyngeus inspection traditional field remains null without a locator.",
+      "Bucinator remains the frozen preferred English display; Buccinator muscle is an add-only search alias.",
+      "Modern Korean contextual compositions are not presented as verbatim dictionary headwords.",
+      "Previously corrected upper/lower trapezius mapping was reused; original upstream conflict remains preserved."
+    ]
+  },
+  "nerves": {
+    "nativeSourceSurfaces": 195,
+    "nativeLabelGroups": 98,
+    "descriptionConceptRows": 98,
+    "independentNerveConceptDenominator": null,
+    "existingMotorRelationRows": 18,
+    "relationComposition": {"exactSideGeometry":2,"literatureConcept":16},
+    "descriptionFieldUncertainty": {
+      "compressionContextWithoutConnectedFieldEvidence": 98,
+      "courseDispositionUnresolved": 8,
+      "functionDispositionUnresolved": 3,
+      "variationDispositionUnresolved": 5
+    },
+    "remainingGaps": [
+      "The 18 existing relations do not establish complete innervation for all nerve concepts or muscles.",
+      "The common plantar digital branches of medial plantar nerve has only the left native surface; no right side was synthesized.",
+      "Four official branch-to-muscle candidates remain unregistered pending primary anatomical cross-check.",
+      "TAH U12899/U12901 use duplicate extensor digitorum pedis wording; no long/short extensor mapping was inferred.",
+      "Generic compression prose is not evidence for each nerve; no local compression coordinate or disease finding is displayed.",
+      "The intercostal study prose records 4/30 specimens and is not linked to a model side, pectoralis part, or branch surface."
+    ]
+  },
+  "scopePreservation": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12,
+    "existingCanonicalHaBindings": 130,
+    "historical163": {
+      "categoryCounts": {
+        "exact_source_label_observation_identity_crosswalk_needed": 6,
+        "descendant_surface_representation_present_target_specific_surface_unresolved": 20,
+        "ancestor_surface_representation_present_target_specific_surface_unresolved": 135,
+        "no_exact_descendant_or_ancestor_surface_evidence_in_frozen_package": 2
+      },
+      "convertedToGeometryAbsence": false
+    },
+    "sourceOnly": true,
+    "publicRights": "held",
+    "humanReview": "not_performed",
+    "geometryGap": "not inferred from missing target name or missing nerve prose"
+  }
+}
