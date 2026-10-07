@@ -1,0 +1,40 @@
+✔ current partial navigation contract resolves all typed references without promoting review (0.921ms)
+✔ mesh picks resolve through one typed mapping into a bone selection (0.116375ms)
+✔ sourced bone mesh selection round-trips through an explicit typed URL and stays separate from landmarks (0.241125ms)
+✔ all nine source-linked bone mappings can be typed while the four unconfirmed meshes stay unbound (0.211625ms)
+✔ unconfirmed and absent scene bindings do not retain the previous typed selection (0.397208ms)
+✔ T13 scene keeps six sourced bones selectable and three source meshes unbound (0.085584ms)
+✔ explicit empty typed selection survives URL normalization and reload (0.086333ms)
+✔ muscle, whole bone, and landmark selections reject cross-kind references (0.066625ms)
+✔ region, typed selection, and legacy muscle URL adapters preserve explicit user choice (0.11025ms)
+✔ T95 repeated region parameters normalize to a unique union and keep old single-region URLs (0.161125ms)
+✔ T95 route validation preserves a card covered by any selected region and clears an excluded card (0.108792ms)
+✔ T95 explicit whole-body card URLs keep an empty filter across reload (0.07825ms)
+✔ learner category routes expose twelve regions but only the six sourced leg memberships (0.068209ms)
+✔ home and category navigation never implicitly select a muscle (0.091709ms)
+✔ legacy pilot links canonicalize to leg, while unassigned search selections stay unassigned (0.065583ms)
+✔ search selection routes parts through their existing parent without inventing a region (0.056209ms)
+✔ synthetic obturator internus membership is multi-region only in this test fixture (0.465208ms)
+✔ neck framing retains cervical bones and neck muscles without the full cross-regional rotator group (1.909583ms)
+✔ invisible unregistered supplement cannot change default camera framing; explicit eligible inspection stays independent (0.235625ms)
+✔ motion frame keeps authored attachments and includes the complete moving arm through hand (0.696375ms)
+✔ assets without a focus list retain their whole package frame and exact attachment context (0.103666ms)
+✔ temporary focus retains eligible context and never revives explicit hidden, held or layer-off surfaces (1.426417ms)
+✔ regional skeletons: cervical, thoracic and lumbar cores plus explicit principal-attachment context, never the entire spine (113.2175ms)
+✔ context cannot override layer-off, hidden or held geometry, and does not reframe the region to a complete femur (101.882458ms)
+✔ same-side context bones retain regional card/history routes, unrelated bones cannot enter them (51.212458ms)
+✔ nerve observation respects all six static-pose, hidden, layer and muscle-selection gates (3.093417ms)
+✔ transparent observation picks native subpixel surfaces within one pixel; normal depth picking and far misses still pick context (3.779291ms)
+✔ anatomical presets preserve orbit height, radius, target and zoom in the verified frame (1.067375ms)
+✔ opposite-side transition keeps distance and never crosses the orbit target (0.380875ms)
+✔ common fit retains every corner in front and side view at narrow and wide aspects (1.500459ms)
+✔ entrance is a bounded left-facing camera orbit with a smooth exact end (1.108584ms)
+✔ entrance eases both ends instead of abruptly starting or stopping rotation (0.111084ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 383.883625

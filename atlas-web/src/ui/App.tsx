@@ -325,9 +325,10 @@ export default function App() {
    <p>근육 부착 설명은 NCBI Bookshelf의 StatPearls 해부학 자료를 대조한 한국어 요약입니다. 자세한 기시·정지 범위에는 개인차가 있습니다.</p><a href="https://www.ncbi.nlm.nih.gov/books/NBK459392/" target="_blank" rel="noreferrer">해부학 설명 참고 자료 ↗</a>
   </div></dialog>
   <div className="study-layout">
+   <button inert={!entered} className="explore-rail" aria-expanded={exploreOpen} aria-controls="atlas-explorer" onClick={() => setExploreOpen(!exploreOpen)}><span aria-hidden="true">☰</span><span>부위 탐색</span></button>
    <aside id="atlas-explorer" inert={!entered} data-searching={Boolean(query.trim())} className={`study-sidebar ${exploreOpen ? 'is-open' : ''}`} aria-label="부위 탐색" onKeyDown={e => { if (e.key === 'Escape') {
         if (regionMenuOpen) { setRegionMenuOpen(false); regionPickerTrigger.current?.focus(); }
-        else { setExploreOpen(false); document.querySelector<HTMLElement>('.explore-trigger')?.focus(); }
+        else { setExploreOpen(false); document.querySelector<HTMLElement>(window.innerWidth >= 600 ? '.explore-rail' : '.explore-trigger')?.focus(); }
     } }}>
     <button className="explore-close" onClick={() => setExploreOpen(false)}>탐색 닫기</button>
     <div className="region-picker" ref={regionPicker}

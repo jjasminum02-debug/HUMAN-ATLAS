@@ -1,0 +1,102 @@
+{
+  "stage": "02-observation",
+  "status": "passed",
+  "acceptanceScope": "Common verified-frame camera presets, contextual focus with user hidden/layer/translucency priority, predictable camera restoration and visible left exploration on tablet/laptop for currently supported sources.",
+  "productReadiness": "local_supported_observation_ready",
+  "contentCompleteness": "partial",
+  "unresolvedProductBlockers": [],
+  "baseHead": "c265fc7d95530c3c97f9f960fa167b989e41ac2a",
+  "inputs": {
+    "atlas-web/src/ui/App.tsx": "489d140cbde7e25f535959a082709c5cc5e4f663d3bda9a86171d7ffb780e7f7",
+    "atlas-web/src/ui/atlasShell.css": "782170922ef439db859ee3770ece4f89f3cea1eb86df2a6b6ad1b9531554d83f",
+    "atlas-web/src/viewer/wholeBody/WholeBodyViewer.tsx": "07b1853188bf7d3be508b362e902b6f87bfa167619d9b60e04ae355f02940341",
+    "atlas-web/src/viewer/wholeBody/AnatomySceneController.ts": "b2ef17f7c7835f91368ea9605917f2cfad09b776ce0460c83dff37828edff2e9",
+    "atlas-web/src/viewer/datasets/DatasetSceneAdapter.ts": "ca1bcfb9f3ceebca8121c76e881630dc92b80db9365539cef35f09bc5c982baf",
+    "work/EXECUTION.json": "217a8cee5253222a4d4098a8b4a6c7974ac386248a9204d3b2c459c1faf9dc39",
+    "work/product-acceptance.json": "d2003d6b101c3f0a6dd5bc91f7c0ae709baa9688673e99537935e0be82d26ce3"
+  },
+  "outputs": {
+    "atlas-web/src/ui/App.tsx": "911d3dbfd7b977fe87e8e37113be35d4d24792e227acf8266c611fc28a911063",
+    "atlas-web/src/ui/atlasShell.css": "0a1ed163e340be71b668ac053a4e021a70923357ad11c47111400713b14b452e",
+    "atlas-web/src/viewer/wholeBody/WholeBodyViewer.tsx": "4df0d2e6a209fcdaa50352ebbc0c78728f17101c8e00fe504cde44874fd9fcba",
+    "atlas-web/src/viewer/wholeBody/AnatomySceneController.ts": "51860b2fe3fe7b6b12f57d54fbe6cf5015ca39632cac3b2f5fa3845286ce23f8",
+    "atlas-web/src/viewer/wholeBody/cameraObservation.ts": "140642355f92bf25fc234d1235f388318ec03f28e4f599b22ba443ee797afcf6",
+    "atlas-web/src/viewer/wholeBody/cameraObservation.test.ts": "be027d12825bb1c85b40afb14500a41be9d76325e8ad956a0a85fd31e8a14ce7",
+    "atlas-web/src/viewer/wholeBody/contract.ts": "7eca438dcbdd88cd528fb99f14bd76655214bc642791621335f355a7df2fc70a",
+    "atlas-web/src/viewer/datasets/presentation.ts": "d138d26e363398a0438921facb90f18e599e258c3175ad938cb17c950206a21b",
+    "atlas-web/src/viewer/datasets/observation.test.ts": "acf4f02ea8fae4291d5fc019db6becd13eb4975e1dc5de79c2a85e52613a61ad",
+    "atlas-web/src/viewer/datasets/DatasetSceneAdapter.ts": "d10e8af6a9bed7c89a9b77ce48ae66a030c77da9db2bbbb2b69884481fbe1547"
+  },
+  "executionUnchanged": true,
+  "productAcceptanceUnchanged": true,
+  "checks": {
+    "relatedContracts": {
+      "pass": 32,
+      "fail": 0,
+      "evidence": "contract-tests.txt"
+    },
+    "typecheck": {
+      "pass": true,
+      "evidence": "typecheck-final.txt"
+    },
+    "buildAndFreshness": {
+      "pass": true,
+      "evidence": "build-local-final.txt",
+      "reasonForAdditionalBuilds": "Targeted fixes after actual UI uncovered interrupted fit, focus/selection reset race, nerve highlight priority and offscreen observation menu. Final bundle includes the fixes. Final history check exposed temporary focus reviving on browser back; key cleanup fixed and only that affected flow rerun."
+    },
+    "syncExecution": {
+      "pass": true,
+      "evidence": "execution-check.txt"
+    },
+    "developerUI": "browser-validation.json",
+    "frozenProductionUI": "production-browser-validation.json",
+    "screenshots": "screenshots.json",
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "canvasCount": 1,
+    "idleFramesBefore": 1461,
+    "idleFramesAfter": 1461,
+    "historyTemporaryState": "history-fix-validation.json",
+    "finalProductionHistory": "production-history-fix-validation.json",
+    "ownership": "ownership-validation.json"
+  },
+  "preservation": {
+    "snapshotId": "local-20261007143727068-bf4218bb",
+    "manifestSha256": "883c66d07ed18e11ed8c1025b76e7bf7e72db86d9dde375cc05defd0026633bd",
+    "deliveryBasis": "preserved_working_tree_snapshot_not_commit_only",
+    "publicFiles": 99,
+    "nonAppFiles": 94,
+    "nonAppFilesIdentical": true,
+    "authority": {
+      "sourceOnly": true,
+      "publicRedistribution": "held",
+      "humanReview": "not_performed",
+      "canonicalTargetMembershipApproved": false
+    },
+    "scope": {
+      "targets": 542,
+      "memberships": 563,
+      "regions": 12
+    },
+    "deployment": false
+  },
+  "knownContentGaps": [
+    "All prior anatomy/attachment/motion/nerve coverage gaps remain separate. No new geometry, clip, relationship, precise footprint or review approval."
+  ],
+  "limitations": [
+    "CSS viewport checks at 390x844, 1024x768, 1440x900; extra 768x1024 check. No physical iPhone/iPad verification.",
+    "GPU/VRAM/total-process memory not measured; browser metrics are render CPU and frame-clock intervals.",
+    "Large JavaScript chunk warning remains; no budget increased.",
+    "Existing WIP dependencies remain required for the frozen local package; commit alone is not an exhaustive asset snapshot."
+  ],
+  "reusedEvidence": {
+    "sources": [
+      "work/reviews/atlas-ui-graphics-and-hosting-2026-10-07/01-layout/validation.json",
+      "work/evidence/T85/motion-context-2026-10-06/final-validation.json"
+    ],
+    "reason": "94 non-app URI/byte/SHA tuples unchanged. Source identity/geometry/action QC reused. Layout/policy/observation/navigation and motion-context flows were tested; no repeat of frozen catalog searches or full anatomical PNG coverage.",
+    "developmentImpact": "HMR iterations have distinct root IDs, not runtime scene recreation. Preset math and non-nerve hiding evidence reused after focus-key and nerve-material-only fixes. Focus restore, drag takeover, moving context and final tablet/mobile UI were tested after relevant fixes. Frozen final bundle was separately opened and checked at all three required widths. Final snapshot history fix was rechecked in frozen production at actual 1280x720. Earlier three-width production evidence is reused because this last fix only clears temporary focus state after navigation and does not alter CSS or geometry."
+  },
+  "nextPromptFile": "work/plans/atlas-ui-graphics-and-hosting-2026-10-07/03-materials-and-lighting.txt",
+  "nextAutoRun": false
+}

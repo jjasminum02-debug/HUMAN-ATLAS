@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { demandedStructureKeys, innervationHighlightKeys, observingNerves } from './presentation.ts';
+import { demandedStructureKeys, innervationHighlightKeys, observingNerves, observationContextKeys } from './presentation.ts';
 import { AnatomySceneController, type BodyProgress } from '../wholeBody/AnatomySceneController.ts';
 import type { BodyManifest, BodyView } from '../wholeBody/contract.ts';
 import { DatasetResources } from './DatasetResources.ts';
@@ -44,7 +44,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         this.select = select;
         this.integration = integration;
         this.records = new Map(integration.objects.map(r => [r.sourceKey, r]));
-        const empty = { version: 2, localOnly: true, publicRedistribution: 'held', frame: 'HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR', unit: 'm', lodLevels: 1, chunks: [] } as BodyManifest;
+        const empty = { version: 2, localOnly: true, publicRedistribution: 'held', frame: dataset.frameContract?.targetFrameId ?? 'unverified', unit: 'm', lodLevels: 1, chunks: [] } as BodyManifest;
         this.scene = new AnatomySceneController(host, empty, p => { if (this.contextLost !== p.contextLost) {
             this.contextLost = p.contextLost;
             if (this.contextLost) this.restoreSourceMotion('webgl-context-lost');
@@ -62,8 +62,17 @@ export class DatasetSceneAdapter implements SourceMotionHost {
     setView(view: BodyView) {
         const nextContextKey = this.motionContextKey(view);
         if (this.motion && this.motion.contextKey !== nextContextKey) this.restoreSourceMotion('selection-or-view-changed');
+        const wasObserving = Boolean(this.view.focusObservation);
+        const changedSelection = this.view.selectedId !== view.selectedId;
+        if (wasObserving && (!view.focusObservation || this.view.selectedId !== view.selectedId)) this.scene.endObservation();
         this.view = view;
-        const keys = demandedStructureKeys([...this.records.values()], view);
+        if (view.focusObservation && (!wasObserving || changedSelection)) {
+            this.scene.beginObservation(); this.focusSelection(true);
+        }
+        const keys = this.motion ? motionContextVisibility(
+            [...this.motion.asset.sourceBinding?.members ?? [], ...this.motion.extraContextKeys.map(sourceKey => ({sourceKey, role:'co_moving_context'}))],
+            this.motion.frameSourceKeys, key => this.records.get(key), view)
+            : demandedStructureKeys([...this.records.values()], view);
         this.resources.demand(keys, view.selectedId && keys.includes(view.selectedId) ? [view.selectedId] : []);
         this.apply();
     }
@@ -75,6 +84,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
     async attachSourceMotion(asset: MotionAsset, resource: AnimationSceneResource,
         onTimeChange?: AnimationPlaybackOptions['onTimeChange'], onInvalidated?: (reason: string) => void,
         presentation?: { intent: MotionLearningIntent }): Promise<AnimationPlaybackController> {
+        this.scene.cancelCameraMotion();
         const zoom = asset.poseControl?.observationZoom ?? 1;
         if (!Number.isFinite(zoom) || zoom < 1 || zoom > 1.5) throw new Error('관찰 화면 확대 범위가 올바르지 않습니다.');
         this.restoreSourceMotion('replaced');
@@ -342,7 +352,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             node.visible = visibleKeys.has(key) && !(this.motionPoseActive && row.kind === 'nerve') && !this.view.hiddenSourceKeys?.includes(key) && !selectionAlternativeKeys.has(key) && !(selected && this.view.selectedPresentation === 'hidden');
             const mode = this.view.translucentSourceKeys?.includes(key) || selected && this.view.selectedPresentation === 'translucent' ? 'translucent'
                 : selected ? 'selected' : observe && row.kind !== 'nerve' ? highlights.has(key) ? 'motorContext' : 'nerveContext'
-                : highlights.has(key) ? 'innervated' : this.motion?.originals.has(key) ? row.kind === 'muscle' && motionContextOpacity != null ? 'motionContext' : 'normal' : this.view.selectedId && this.view.dim ? 'dim' : 'normal';
+                : highlights.has(key) ? 'innervated' : this.view.focusObservation && row.kind === 'muscle' ? 'observationContext' : this.motion?.originals.has(key) ? row.kind === 'muscle' && motionContextOpacity != null ? 'motionContext' : 'normal' : this.view.selectedId && this.view.dim ? 'dim' : 'normal';
             const actionPhase = selected && row.kind === 'muscle' && this.motion && this.motionIntent === 'muscle_action'
                 && this.motion.asset.sourceBinding?.subjectSourceKey === key ? this.motionPhase : null;
             const phaseTone = actionPhase === 'action' ? 'action' : actionPhase === 'return' ? 'return' : null;
@@ -354,9 +364,9 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 else if (phaseTone === 'return') color.set('#a4aaa8');
                 if (mode === 'dim' && row.kind !== 'nerve')
                     color.lerp(new THREE.Color('#e5e5dd'), .55);
-                const transparent = ['translucent', 'nerveContext', 'motorContext', 'motionContext'].includes(mode);
+                const transparent = ['translucent', 'nerveContext', 'motorContext', 'motionContext', 'observationContext'].includes(mode);
                 material = new THREE.MeshStandardMaterial({ color, roughness: .76, transparent,
-                    opacity: mode === 'motionContext' ? Math.max(.1, Math.min(.6, motionContextOpacity!)) : mode === 'nerveContext' ? .12 : mode === 'motorContext' ? .82 : mode === 'translucent' ? .3 : 1,
+                    opacity: mode === 'observationContext' ? .18 : mode === 'motionContext' ? Math.max(.1, Math.min(.6, motionContextOpacity!)) : mode === 'nerveContext' ? .12 : mode === 'motorContext' ? .82 : mode === 'translucent' ? .3 : 1,
                     depthWrite: !transparent, depthTest: true,
                     emissive: row.kind === 'nerve' ? color : '#000000', emissiveIntensity: row.kind === 'nerve' ? .22 : 0 });
                 this.materials.set(materialKey, material);
@@ -371,7 +381,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             contextLost: this.contextLost, selectedAvailable: !this.view.selectedId || this.resources.nodes.has(this.view.selectedId), calls: this.resources.nodes.size,
             triangles: this.scene.renderer.info.render.triangles, geometries: this.scene.renderer.info.memory.geometries });
         this.scene.renderer.domElement.dataset.dataset = JSON.stringify({ root: this.scene.root.uuid, dataset: this.resources.dataset.namespace,
-            regionIds: this.view.regionIds ?? (this.view.region ? [this.view.region] : []), highlighted: [...highlights], observingNerves: observe, nerveLayer: Boolean(this.view.nerves), poseId: this.view.poseId, visible: [...this.resources.nodes].filter(([, n]) => n.visible).map(([key]) => key), selected: this.view.selectedId, bytes: q.bytes, cacheEntries: q.loaded.size, evictions: q.evictions, cancellations: q.cancellations, lateReleases: q.lateReleases, wantedChunks: [...q.wanted], pending: q.pending.size, failed: [...q.failed],
+            regionIds: this.view.regionIds ?? (this.view.region ? [this.view.region] : []), highlighted: [...highlights], observingNerves: observe, focusObservation: Boolean(this.view.focusObservation), hidden: this.view.hiddenSourceKeys ?? [], translucent: this.view.translucentSourceKeys ?? [], nerveLayer: Boolean(this.view.nerves), poseId: this.view.poseId, visible: [...this.resources.nodes].filter(([, n]) => n.visible).map(([key]) => key), selected: this.view.selectedId, bytes: q.bytes, cacheEntries: q.loaded.size, evictions: q.evictions, cancellations: q.cancellations, lateReleases: q.lateReleases, wantedChunks: [...q.wanted], pending: q.pending.size, failed: [...q.failed],
             camera: this.scene.camera.position.toArray(), cameraTarget: this.scene.controls.target.toArray(), cameraZoom: this.scene.camera.zoom, cameraAspect: this.scene.camera.aspect, cameraFov: this.scene.camera.fov, calls: this.scene.renderer.info.render.calls, triangles: this.scene.renderer.info.render.triangles,
             motion: this.motion ? { assetId: this.motion.asset.id, contextKey: this.motion.contextKey,
                 learningIntent: this.motionIntent, phase: this.motionPhase,
@@ -387,22 +397,20 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         }
         if (box.isEmpty())
             return;
-        this.scene.camera.zoom = 1;
-        this.scene.camera.updateProjectionMatrix();
-        const center = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());
-        const distance = Math.max(size.y, size.x / this.scene.camera.aspect) / (2 * Math.tan(THREE.MathUtils.degToRad(17.5))) * padding + size.z / 2;
-        const direction = this.scene.camera.position.clone().sub(this.scene.controls.target);
-        if (direction.length() < .01)
-            direction.set(0, 0, 1);
-        direction.normalize();
-        this.scene.controls.target.copy(center);
-        this.scene.camera.position.copy(center).addScaledVector(direction, distance);
-        this.scene.controls.update();
-        this.scene.requestRender();
+        this.scene.fitObservationBounds(box, padding);
     }
     focus(regions: string[]) { this.fit(framingRecords([...this.records.values()], this.view, regions)); }
-    focusSelection() { const row = this.records.get(this.view.selectedId ?? ''); if (row)
-        this.fit([row]); }
+    focusSelection(smooth = false) {
+        const keys = this.motion ? this.motion.frameSourceKeys : observationContextKeys([...this.records.values()], this.view);
+        const box = new THREE.Box3();
+        for (const key of keys) {
+            const row = this.records.get(key); if (!row || this.view.hiddenSourceKeys?.includes(key)) continue;
+            box.expandByPoint(new THREE.Vector3().fromArray(row.bounds[0])); box.expandByPoint(new THREE.Vector3().fromArray(row.bounds[1]));
+        }
+        // Include the actual current moving surfaces, not only their frozen rest bounds.
+        if (this.motion) box.union(new THREE.Box3().setFromObject(this.motion.resource.scene));
+        this.scene.fitObservationBounds(box, 1.25, smooth);
+    }
     retry() { this.resources.queue.retry(); }
     private onKey = (e: KeyboardEvent) => { if (e.key === 'Home') {
         e.preventDefault();
