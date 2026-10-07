@@ -1,0 +1,40 @@
+✔ current partial navigation contract resolves all typed references without promoting review (1.045916ms)
+✔ mesh picks resolve through one typed mapping into a bone selection (0.123417ms)
+✔ sourced bone mesh selection round-trips through an explicit typed URL and stays separate from landmarks (0.260209ms)
+✔ all nine source-linked bone mappings can be typed while the four unconfirmed meshes stay unbound (0.220917ms)
+✔ unconfirmed and absent scene bindings do not retain the previous typed selection (0.053375ms)
+✔ T13 scene keeps six sourced bones selectable and three source meshes unbound (0.049125ms)
+✔ explicit empty typed selection survives URL normalization and reload (0.071042ms)
+✔ muscle, whole bone, and landmark selections reject cross-kind references (0.052792ms)
+✔ region, typed selection, and legacy muscle URL adapters preserve explicit user choice (0.101541ms)
+✔ T95 repeated region parameters normalize to a unique union and keep old single-region URLs (0.150625ms)
+✔ T95 route validation preserves a card covered by any selected region and clears an excluded card (0.09475ms)
+✔ T95 explicit whole-body card URLs keep an empty filter across reload (0.076959ms)
+✔ learner category routes expose twelve regions but only the six sourced leg memberships (0.078083ms)
+✔ home and category navigation never implicitly select a muscle (0.080083ms)
+✔ legacy pilot links canonicalize to leg, while unassigned search selections stay unassigned (0.068ms)
+✔ search selection routes parts through their existing parent without inventing a region (0.051375ms)
+✔ synthetic obturator internus membership is multi-region only in this test fixture (0.52225ms)
+✔ entrance is a bounded left-facing camera orbit with a smooth exact end (0.924416ms)
+✔ entrance eases both ends instead of abruptly starting or stopping rotation (0.059333ms)
+✔ source-only context never becomes selectable (0.396833ms)
+✔ supplements require explicit opt-in, stay unbound (0.050125ms)
+✔ held identity cannot be revealed through layer/opt-in (0.047667ms)
+✔ region/layer demand excludes unrelated geometry (0.087292ms)
+✔ T95 overlapping region union keeps one asset visible and empty filters mean whole body (0.062667ms)
+✔ reject conflicting duplicate IDs and source-only binding promotion (0.231625ms)
+✔ late parse after cancellation is disposed; same-id new demand can recover (4.172792ms)
+✔ failure retains successful resources; explicit retry only failed asset (2.655792ms)
+✔ dispose releases completed and late resources exactly once (0.225792ms)
+✔ isolation never promotes source-only or held nodes and respects layer switches (0.112542ms)
+✔ selected transparency preserves eligibility and selection; hide only hides the selected eligible asset (0.055917ms)
+✔ v2 local display is independent from learner binding, rights and review holds (0.133083ms)
+✔ persistent source hiding survives a different selection and reset cannot bypass policy (0.046791ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 81.593458

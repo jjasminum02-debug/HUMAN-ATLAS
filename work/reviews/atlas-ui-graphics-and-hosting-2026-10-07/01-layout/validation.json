@@ -1,0 +1,784 @@
+{
+  "stage": "01-layout",
+  "status": "passed",
+  "acceptanceScope": "Existing supported learner layout, cards, tools, region navigation, resize, and representative motion flow",
+  "productReadiness": "local_supported_layout_ready",
+  "contentCompleteness": "partial",
+  "unresolvedProductBlockers": [],
+  "baseHead": "c406c0f776a26b7d6426e1515c1711387ff9b3f7",
+  "inputs": {
+    "atlas-web/src/ui/App.tsx": "f3440f61db7b34b9cdc752e5e3a99483fb9804c4f0a0e0f4cc09e93d13afe283",
+    "atlas-web/src/ui/atlasShell.css": "0a7c963324f1e81714bdb74626d75a60ca8377c716f536b56440c283df05cbce",
+    "atlas-web/src/viewer/wholeBody/WholeBodyViewer.tsx": "3712800581da9b33dafad7e2570d3f3e18f4d46993d5d506d5b5fb8a6291d6f6",
+    "atlas-web/src/viewer/wholeBody/AnatomySceneController.ts": "b2ef17f7c7835f91368ea9605917f2cfad09b776ce0460c83dff37828edff2e9",
+    "atlas-web/src/viewer/wholeBody/wholeBody.css": "0e63cda1c655116daa870d343b8d3733c9624ac555d7c438bc13d979d045578c",
+    "work/EXECUTION.json": "217a8cee5253222a4d4098a8b4a6c7974ac386248a9204d3b2c459c1faf9dc39",
+    "work/product-acceptance.json": "d2003d6b101c3f0a6dd5bc91f7c0ae709baa9688673e99537935e0be82d26ce3"
+  },
+  "outputs": {
+    "atlas-web/src/ui/App.tsx": "489d140cbde7e25f535959a082709c5cc5e4f663d3bda9a86171d7ffb780e7f7",
+    "atlas-web/src/ui/atlasShell.css": "782170922ef439db859ee3770ece4f89f3cea1eb86df2a6b6ad1b9531554d83f",
+    "atlas-web/src/viewer/wholeBody/WholeBodyViewer.tsx": "3712800581da9b33dafad7e2570d3f3e18f4d46993d5d506d5b5fb8a6291d6f6",
+    "atlas-web/src/viewer/wholeBody/AnatomySceneController.ts": "b2ef17f7c7835f91368ea9605917f2cfad09b776ce0460c83dff37828edff2e9",
+    "atlas-web/src/viewer/wholeBody/wholeBody.css": "0e63cda1c655116daa870d343b8d3733c9624ac555d7c438bc13d979d045578c",
+    "work/EXECUTION.json": "217a8cee5253222a4d4098a8b4a6c7974ac386248a9204d3b2c459c1faf9dc39",
+    "work/product-acceptance.json": "d2003d6b101c3f0a6dd5bc91f7c0ae709baa9688673e99537935e0be82d26ce3"
+  },
+  "unchangedInputs": [
+    "atlas-web/src/viewer/wholeBody/WholeBodyViewer.tsx",
+    "atlas-web/src/viewer/wholeBody/AnatomySceneController.ts",
+    "atlas-web/src/viewer/wholeBody/wholeBody.css",
+    "work/EXECUTION.json",
+    "work/product-acceptance.json"
+  ],
+  "automaticChecks": {
+    "relatedContracts": {
+      "passed": 32,
+      "failed": 0,
+      "evidence": "contract-tests.txt"
+    },
+    "typecheck": {
+      "passed": true,
+      "evidence": "typecheck.txt"
+    },
+    "generatedRuntimeFreshness": true,
+    "productionAndLocalBuild": {
+      "passed": true,
+      "evidence": "build-local.txt"
+    },
+    "syncExecutionCheck": {
+      "passed": true,
+      "writes": false
+    },
+    "ownedDiffCheck": true
+  },
+  "browserChecks": {
+    "viewports": [
+      [
+        390,
+        844
+      ],
+      [
+        1024,
+        768
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1280,
+        720
+      ]
+    ],
+    "mobilePhysicalDevice": false,
+    "regions": [
+      "whole",
+      "head+neck",
+      "arm+hand",
+      "thigh+leg"
+    ],
+    "modelBoundsVisual": "Representative home/regions/rest/mid/end screenshots retain required context inside the canvas; not exhaustive geometry QA.",
+    "singleCanvas": true,
+    "resizeRootUnchanged": true,
+    "resizeCameraMaxDelta": 4.440892098500626e-16,
+    "scrubPhaseAfterResize": "50",
+    "layerOffPreserved": true,
+    "translucencyPreserved": true,
+    "tabScrollRestoration": "after/scroll-keyboard.json",
+    "flows": "after/flow-checks.json",
+    "delivery": "after/delivery-check.json",
+    "finalDeliveryConsoleErrors": 0,
+    "resolvedDevelopmentErrors": 2
+  },
+  "layoutMetrics": [
+    {
+      "case": "home-1280",
+      "viewport": [
+        1280,
+        720
+      ],
+      "beforeCanvas": [
+        976,
+        317.5
+      ],
+      "afterCanvas": [
+        994,
+        439.5
+      ],
+      "heightIncreasePercent": 38.4,
+      "beforeCanvasAreaPercent": 33.6,
+      "afterCanvasAreaPercent": 47.4,
+      "beforeCard": null,
+      "afterCard": null
+    },
+    {
+      "case": "home-1440",
+      "viewport": [
+        1440,
+        900
+      ],
+      "beforeCanvas": [
+        1136,
+        497.5
+      ],
+      "afterCanvas": [
+        1154,
+        619.5
+      ],
+      "heightIncreasePercent": 24.5,
+      "beforeCanvasAreaPercent": 43.6,
+      "afterCanvasAreaPercent": 55.2,
+      "beforeCard": null,
+      "afterCard": null
+    },
+    {
+      "case": "home-1024",
+      "viewport": [
+        1024,
+        768
+      ],
+      "beforeCanvas": [
+        1024,
+        415.5
+      ],
+      "afterCanvas": [
+        1000,
+        487.5
+      ],
+      "heightIncreasePercent": 17.3,
+      "beforeCanvasAreaPercent": 54.1,
+      "afterCanvasAreaPercent": 62.0,
+      "beforeCard": null,
+      "afterCard": null
+    },
+    {
+      "case": "home-390",
+      "viewport": [
+        390,
+        844
+      ],
+      "beforeCanvas": [
+        390,
+        491.5
+      ],
+      "afterCanvas": [
+        390,
+        554
+      ],
+      "heightIncreasePercent": 12.7,
+      "beforeCanvasAreaPercent": 58.2,
+      "afterCanvasAreaPercent": 65.6,
+      "beforeCard": null,
+      "afterCard": null
+    },
+    {
+      "case": "selected-390",
+      "viewport": [
+        390,
+        844
+      ],
+      "beforeCanvas": [
+        390,
+        277.1015625
+      ],
+      "afterCanvas": [
+        390,
+        300.8046875
+      ],
+      "heightIncreasePercent": 8.6,
+      "beforeCanvasAreaPercent": 32.8,
+      "afterCanvasAreaPercent": 35.6,
+      "beforeCard": {
+        "clientHeight": 228,
+        "height": 230.3984375,
+        "scrollHeight": 788,
+        "scrollTop": 0,
+        "width": 366,
+        "x": 12,
+        "y": 627.55224609375
+      },
+      "afterCard": {
+        "clientHeight": 251,
+        "height": 253.1953125,
+        "scrollHeight": 251,
+        "scrollTop": 0,
+        "width": 366,
+        "x": 12,
+        "y": 604.75537109375
+      }
+    },
+    {
+      "case": "selected-1024",
+      "viewport": [
+        1024,
+        768
+      ],
+      "beforeCanvas": [
+        1024,
+        225.421875
+      ],
+      "afterCanvas": [
+        684,
+        487.5
+      ],
+      "heightIncreasePercent": 116.3,
+      "beforeCanvasAreaPercent": 29.4,
+      "afterCanvasAreaPercent": 42.4,
+      "beforeCard": {
+        "clientHeight": 204,
+        "height": 206.078125,
+        "scrollHeight": 778,
+        "scrollTop": 0,
+        "width": 1000,
+        "x": 12,
+        "y": 561.921875
+      },
+      "afterCard": {
+        "clientHeight": 662,
+        "height": 664,
+        "scrollHeight": 662,
+        "scrollTop": 0,
+        "width": 300,
+        "x": 712,
+        "y": 84
+      }
+    },
+    {
+      "case": "selected-1440",
+      "viewport": [
+        1440,
+        900
+      ],
+      "beforeCanvas": [
+        802,
+        497.5
+      ],
+      "afterCanvas": [
+        834,
+        619.5
+      ],
+      "heightIncreasePercent": 24.5,
+      "beforeCanvasAreaPercent": 30.8,
+      "afterCanvasAreaPercent": 39.9,
+      "beforeCard": {
+        "clientHeight": 668,
+        "height": 670,
+        "scrollHeight": 908,
+        "scrollTop": 0,
+        "width": 310,
+        "x": 1106,
+        "y": 205
+      },
+      "afterCard": {
+        "clientHeight": 794,
+        "height": 796,
+        "scrollHeight": 794,
+        "scrollTop": 0,
+        "width": 300,
+        "x": 1120,
+        "y": 84
+      }
+    }
+  ],
+  "images": [
+    {
+      "path": "after/delivered-home-1280.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "5662c1a29fd82ac64ea947ff447dea722aed4a93e94a6e59ff8210877d293339",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/home-1024.png",
+      "width": 1024,
+      "height": 768,
+      "sha256": "5fc830fbacc2f7c381355afc090df77bca208d55728fc323d96536de099f550f",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/home-1280.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "5662c1a29fd82ac64ea947ff447dea722aed4a93e94a6e59ff8210877d293339",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/home-1440.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "ecbff7acdf6abbff1c0529314349cfdec24b2da8af609c46d6b147f3c9a8eec2",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/home-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "410ebe9c050b09158475866dd0eb321b3e8d202e7a7f1d0b391f21db6c462d15",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/motion-1024.png",
+      "width": 1024,
+      "height": 768,
+      "sha256": "668167e5562e13dd56eb72988b1352401abcd630e1292324b09b2298fa877141",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/motion-1440.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "8b06474a414a718ce94f31598631b2908253f485e21f0e31e169cfb99f8e70fa",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/motion-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "57bf6605d196879b678e52b97914016d55dec230298b83a9e009ad0135c86e91",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/motion-end-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "2cc79bac0a352051e6d4067aa324b4623a61ef6af6d21501d505bdcd21d18ae7",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/region-hand-1440.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "b98afbeeddbe41a9f73ba3772782a80288688feea1a81458523292f8f822f0eb",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/regions-hand-1024.png",
+      "width": 1024,
+      "height": 768,
+      "sha256": "08aa794f003f2bae4f15e4dbbec917a75506096d4cd706b0fd6aff4c26d5f48d",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/regions-hand-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "4748855efd1ffb6a34e3bea851dd531d4926c3cd17519c6293e855db266163b2",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/regions-head-neck-1024.png",
+      "width": 1024,
+      "height": 768,
+      "sha256": "2ce5d37ce147e4fc6380a4f8be484d1229b3b0caa6135e36c8adf605991384af",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/regions-head-neck-1440.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "55004150ceb5d22bcbd054b7b93882811f8e5647e2e5c897c583bbc47868d5ef",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/regions-head-neck-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "61e4e606fd7613df5109da195931b7d9fa833e7f4d74a0b856ef45018d00793c",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/regions-leg-1024.png",
+      "width": 1024,
+      "height": 768,
+      "sha256": "a4909b284b9cb943853789701bdef40f868405cfde9b83f5a12363f2efdf1859",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/regions-leg-1440.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "ea1397fc1a7df8c8355321dc20a2b966d17c5a406587119b30d74b19654c10b6",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/regions-leg-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "0428e1812ff25b19afef2ddf4e21721bf9ee26b166deb95b931823fd7bb51de4",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/selected-1024.png",
+      "width": 1024,
+      "height": 768,
+      "sha256": "c45e58c8f4f87d71c59d6e4d5f0a75f027e32a30976098698620d78cfbfa9c21",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/selected-1440.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "0acff72f271080f683ef1b5a8c3100b00090df2634fdf34a5024bdccacd92d25",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/selected-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "78d3b12cd49e7dd5b5f3be56104b999ea528ff4ad23454e888db6f2c0d16580a",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "before/home-1024.png",
+      "width": 1024,
+      "height": 768,
+      "sha256": "7ba90eee2efe33fa9ca50cf725c80e932bb106f554ebe4f8b57bd0701f8a91b4",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "before/home-1280.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "ff4813f92b015703c505adc9fa4b98ecde667f5322b869340579b964b3fdb4f8",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "before/home-1440.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "68937731a360d50659031fe3859787641ccd5ee9ec313d527915743d10476183",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "before/home-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "a9ad6b3b7f196ff6da7549ea50023d5538e10a00240394c96290b75890a097b1",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "before/selected-1440.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "7b9cc746a2966e55649607769a032c7de4edcda13fd04f801eae77b2142d7e3d",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "before/selected-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "417cf6588c89c2f0f31c6a74d668ffee8753344b03cdaf36334d74273cba1567",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    }
+  ],
+  "excludedImages": [
+    {
+      "path": "before/selected-1024.jpg",
+      "capturedSize": [
+        355,
+        768
+      ],
+      "expected": [
+        1024,
+        768
+      ],
+      "reason": "Screenshot taken before viewport capture surface finished resizing; excluded from visual evidence."
+    }
+  ],
+  "delivery": {
+    "url": "http://127.0.0.1:5184/",
+    "snapshot": "atlas-web/dist-local/local-20261007134505825-bf4218bb/snapshot.json",
+    "manifestSha256": "a5eb7a0fa2058cc2774b9e8ac1928813266925f677365bf76c5799812b995dac",
+    "basis": "preserved_working_tree_snapshot_not_commit_only",
+    "workingTreeDependencies": [
+      {
+        "path": "atlas-data/motion/local-motion-delivery-index.json",
+        "bytes": 14600,
+        "sha256": "664c763d642d4c6797b7acaeb1a36219b76b64123a77d12f3505c1cbb752d9e7",
+        "committedSha256": "6c91f88a0855469321103d8b851c5666fa831a889288f43ceb2f9d99adbab7e6",
+        "workingTreeOnly": true,
+        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
+      },
+      {
+        "path": "atlas-data/motion/motion-learning.json",
+        "bytes": 103283078,
+        "sha256": "b58de1150ba9a9c96c91c7ce38fb37198aa8c0c1f567fa563438cb94a0eb8f3b",
+        "committedSha256": "79b0d2c356c6a4d2b90398e17336befa3313a4eea7d8b4e1fd25bf836b4654f2",
+        "workingTreeOnly": true,
+        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
+      },
+      {
+        "path": "atlas-data/source-cache/bodyparts3d-r4/converted/t77/manifest.json",
+        "bytes": 847446,
+        "sha256": "67a2f79b9248d18a754a6567e1b0bb4b1fce698ad0e3100a172b428ee58341f8",
+        "committedSha256": null,
+        "workingTreeOnly": true,
+        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
+      },
+      {
+        "path": "atlas-data/source-cache/datasets/bp3d/registry.json",
+        "bytes": 611885,
+        "sha256": "d83b9a0502af42e1742aa46fb22112e46927003c193dad5f42058fe7541df6a3",
+        "committedSha256": null,
+        "workingTreeOnly": true,
+        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
+      },
+      {
+        "path": "atlas-data/terminology/learner-attachment-context.json",
+        "bytes": 68334,
+        "sha256": "f3009fe53e4c864f1e5156f8c0cf90178855d9ef69d388d9dc94edd5d4077e71",
+        "committedSha256": "16a12b577efd6a17bbb376166bbc818a05dec521f34f822a08e3d5380a4c1c8d",
+        "workingTreeOnly": true,
+        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
+      },
+      {
+        "path": "atlas-data/terminology/learner-card-runtime.json",
+        "bytes": 146136,
+        "sha256": "bca2ab324f77059303c0f7391886f0b11e54f5c469f447bcf9bd2ec09cbb9f5d",
+        "committedSha256": "6470716cf4e4921fc8405916cff591607856897e8e3349d54dd4baa42d0c65a6",
+        "workingTreeOnly": true,
+        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
+      },
+      {
+        "path": "atlas-data/terminology/muscle-attachment-content-2026-10-02.json",
+        "bytes": 392604,
+        "sha256": "84a31d8bd9fb2eb61de5fceb8e380938b934180598ae9a93944edabe90c1f9d8",
+        "committedSha256": null,
+        "workingTreeOnly": true,
+        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
+      },
+      {
+        "path": "atlas-web/src/data/learnerMotionRuntime.generated.ts",
+        "bytes": 2603904,
+        "sha256": "476fd0dc80479b4191c4a8c5ca0540c43531f71803b89c0a3965ef65db97dcfd",
+        "committedSha256": "9018c1bd687da96979ece6c99395865fa09007440759dd46f31d2e5814724076",
+        "workingTreeOnly": true,
+        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
+      },
+      {
+        "path": "atlas-web/src/domain/motionLearning.test.ts",
+        "bytes": 13351,
+        "sha256": "83487cacac76171d809210e4e7b3d647dbeb4b103129274af6591844feea5a8f",
+        "committedSha256": "fc559c35bd9fac76c51a69404ef442b1c915669e0963cb5d28b1d8479bcff4da",
+        "workingTreeOnly": true,
+        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
+      },
+      {
+        "path": "atlas-web/src/domain/motionLearning.ts",
+        "bytes": 17953,
+        "sha256": "6028a61d0f8656d55e2256ba56fe973d4fad756813490028f1502cee1be36d23",
+        "committedSha256": "b384dcd03757838c8bf3f0044b4fadbbf1125db8eb7857092cd9e8a236f590a9",
+        "workingTreeOnly": true,
+        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
+      },
+      {
+        "path": "atlas-web/src/domain/motionSubjectPresentation.ts",
+        "bytes": 2347,
+        "sha256": "7db011bf58636bce5ded9388d5098cca620dc699fc5b34b9692eb19b9deb5830",
+        "committedSha256": "e15e150dd81855e29a39922cf7b6f9fd1bcd11949559bf0afb2b5e3bb8996ac0",
+        "workingTreeOnly": true,
+        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
+      },
+      {
+        "path": "atlas-web/src/domain/sourceAttachments.ts",
+        "bytes": 9419,
+        "sha256": "dbb603c2c5454b9490c4c6d2e2d8e82769c1f7e7e8145cc35bfc0b5b7d6ca19d",
+        "committedSha256": "89c3f0b0e01fed76d7d096d805546b7482d61569a4bd3cbaa4457c6cee1f8ba8",
+        "workingTreeOnly": true,
+        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
+      },
+      {
+        "path": "atlas-web/src/ui/App.tsx",
+        "bytes": 44499,
+        "sha256": "489d140cbde7e25f535959a082709c5cc5e4f663d3bda9a86171d7ffb780e7f7",
+        "committedSha256": "f3440f61db7b34b9cdc752e5e3a99483fb9804c4f0a0e0f4cc09e93d13afe283",
+        "workingTreeOnly": true,
+        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
+      },
+      {
+        "path": "atlas-web/src/ui/MotionLearningPanel.tsx",
+        "bytes": 20123,
+        "sha256": "2364bd577e0b57dc3f7c6d878c3375200bc0be25f355785cafced5f851243d93",
+        "committedSha256": "86303d90a171d0b3ddd3fcfff5edfb7319649c0e2ab28508812fa6db7ef1f01c",
+        "workingTreeOnly": true,
+        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
+      },
+      {
+        "path": "atlas-web/src/ui/atlasShell.css",
+        "bytes": 25377,
+        "sha256": "782170922ef439db859ee3770ece4f89f3cea1eb86df2a6b6ad1b9531554d83f",
+        "committedSha256": "0a7c963324f1e81714bdb74626d75a60ca8377c716f536b56440c283df05cbce",
+        "workingTreeOnly": true,
+        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
+      },
+      {
+        "path": "atlas-web/src/viewer/animationSceneAdapter.ts",
+        "bytes": 23608,
+        "sha256": "982bb94c52df91b86e1cde8761983d82b19ea606a294812027b9110297dfcb65",
+        "committedSha256": "a5b793160ec031a7630ccc2c62649f2b247d207ffb0cf07d6ddf9af61055c2f3",
+        "workingTreeOnly": true,
+        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
+      },
+      {
+        "path": "atlas-web/src/viewer/datasets/DatasetSceneAdapter.ts",
+        "bytes": 34379,
+        "sha256": "ca1bcfb9f3ceebca8121c76e881630dc92b80db9365539cef35f09bc5c982baf",
+        "committedSha256": "42624baf87182f7df55cfa2f513ca5e2736bf9dccb4fe9e50bdc2a6633dcdf72",
+        "workingTreeOnly": true,
+        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
+      }
+    ],
+    "fileCount": 99,
+    "nonAppFilesIdentical": true,
+    "nonAppFileCount": 94,
+    "deployed": false
+  },
+  "scope": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12
+  },
+  "authority": {
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "canonicalTargetMembershipApproved": false
+  },
+  "knownContentGaps": [
+    "Existing content completeness remains partial; no new geometry, footprint, motion clip, anatomical relationship or review approval added."
+  ],
+  "deferredEngineering": [
+    "Stage 02 camera presets and deeper structure observation",
+    "Stage 03 materials and lighting",
+    "Stage 04 supported attachment visualization",
+    "Stage 05 nerve and motion emphasis",
+    "Stage 06 hosting package"
+  ],
+  "reusedEvidence": {
+    "reason": "94 non-app files and controller/viewer/geometry/runtime policies unchanged. Reused source/action/asset QC and prior anatomical extent evidence; reran layout-dependent UI and 32 related policy/navigation/entrance contracts only.",
+    "notClaimed": "No new full anatomy, geometry, motion support, device, GPU or public hosting acceptance."
+  },
+  "visibleModelPixelEstimates": [
+    {
+      "phase": "before",
+      "case": "home-1280",
+      "approximateVisibleModelPixelBounds": [
+        720,
+        229,
+        95,
+        249
+      ],
+      "modelEnvelopeViewportAreaPercent": 2.57,
+      "modelHeightViewportPercent": 34.58,
+      "method": "Screenshot silhouette estimate in canvas: RGB mean <220 and channel span >4. This is not projected geometry extent or exhaustive clipping validation."
+    },
+    {
+      "phase": "after",
+      "case": "home-1280",
+      "approximateVisibleModelPixelBounds": [
+        697,
+        166,
+        131,
+        346
+      ],
+      "modelEnvelopeViewportAreaPercent": 4.92,
+      "modelHeightViewportPercent": 48.06,
+      "method": "Screenshot silhouette estimate in canvas: RGB mean <220 and channel span >4. This is not projected geometry extent or exhaustive clipping validation."
+    },
+    {
+      "phase": "after",
+      "case": "home-1440",
+      "approximateVisibleModelPixelBounds": [
+        747,
+        187,
+        187,
+        486
+      ],
+      "modelEnvelopeViewportAreaPercent": 7.01,
+      "modelHeightViewportPercent": 54.0,
+      "method": "Screenshot silhouette estimate in canvas: RGB mean <220 and channel span >4. This is not projected geometry extent or exhaustive clipping validation."
+    },
+    {
+      "phase": "after",
+      "case": "home-1024",
+      "approximateVisibleModelPixelBounds": [
+        436,
+        172,
+        148,
+        383
+      ],
+      "modelEnvelopeViewportAreaPercent": 7.21,
+      "modelHeightViewportPercent": 49.87,
+      "method": "Screenshot silhouette estimate in canvas: RGB mean <220 and channel span >4. This is not projected geometry extent or exhaustive clipping validation."
+    },
+    {
+      "phase": "after",
+      "case": "home-390",
+      "approximateVisibleModelPixelBounds": [
+        111,
+        212,
+        166,
+        435
+      ],
+      "modelEnvelopeViewportAreaPercent": 21.94,
+      "modelHeightViewportPercent": 51.54,
+      "method": "Screenshot silhouette estimate in canvas: RGB mean <220 and channel span >4. This is not projected geometry extent or exhaustive clipping validation."
+    }
+  ],
+  "pixelComparisonLimitation": "Only the 1280×720 before/after captures are used for visible model pixel comparison. Other before captures were taken during a viewport transition and are archived without a model-size comparison claim. Actual DOM layout dimensions remain recorded separately."
+}
