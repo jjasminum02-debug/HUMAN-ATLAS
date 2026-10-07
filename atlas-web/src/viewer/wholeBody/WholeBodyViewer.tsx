@@ -11,6 +11,16 @@ import { motorRelationsForNerve, nerveConceptForSourceName } from '../../data/le
 
 export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, onEntered, onMotionHostChange, onMuscleLayerChange, onBoneLayerChange, onSelectionHiddenChange }: { homeRevision?: number; viewResetRevision?: number; datasetSource?: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; onMotionHostChange?: (host: SourceMotionHost | null) => void; onMuscleLayerChange?: (enabled: boolean) => void; onBoneLayerChange?: (enabled: boolean) => void; onSelectionHiddenChange?: (hidden: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
   const host = useRef<HTMLDivElement>(null);
+  const tools = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const element = tools.current;
+    if (!element) return;
+    // Account for wrapped controls without React state changes or recreating the scene.
+    const measure = () => element.parentElement?.style.setProperty('--view-tools-height', `${element.getBoundingClientRect().height}px`);
+    const observer = new ResizeObserver(measure);
+    observer.observe(element); measure();
+    return () => observer.disconnect();
+  }, []);
   const controller = useRef<AnatomySceneController | DatasetSceneAdapter | null>(null);
   const previousView = useRef<{ regionKey: string; selectedId: string | null; resetRevision: number } | null>(null);
   const select = useRef(onSelect); select.current = onSelect;
@@ -85,7 +95,7 @@ export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datas
   return <div className="whole-body-viewer">
     <div className="whole-body-canvas" inert={!entered} aria-hidden={!entered} ref={host}/>
     {!entered && <AtlasLoading failed={error || Boolean(progress?.failed)} loaded={progress?.loaded} total={progress?.total} onRetry={() => error ? setRevision(r => r + 1) : controller.current?.retry()}/> }
-    <div inert={!entered} className="body-tools" aria-label="모형 보기 설정">
+    <div inert={!entered} ref={tools} className="body-tools" aria-label="모형 보기 설정">
       <span className="view-options-label">보기 옵션</span>
       <div className="view-options-row">
         <button onClick={() => controller.current?.focus(regionIds)}>화면 맞춤</button>
