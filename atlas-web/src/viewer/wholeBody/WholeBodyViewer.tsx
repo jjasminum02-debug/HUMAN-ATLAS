@@ -55,13 +55,24 @@ export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datas
   const [error, setError] = useState(false);
   const [progress, setProgress] = useState<BodyProgress | null>(null);
   const [entered, setEntered] = useState(false);
+  const stopEntrance = () => {
+    const current = controller.current;
+    const scene = current instanceof DatasetSceneAdapter ? current.scene : current;
+    scene?.stopEntrance();
+  };
   useEffect(() => { onEntered?.(entered); }, [entered, onEntered]);
+  useEffect(() => {
+    if (!entered) return;
+    const current = controller.current;
+    const scene = current instanceof DatasetSceneAdapter ? current.scene : current;
+    scene?.startEntrance();
+  }, [entered]);
   useEffect(() => {
     if (progress && progress.calls > 0 && (progress.loaded === progress.total || progress.failed > 0)) setEntered(true);
   }, [progress]);
   useEffect(() => {
     const abort = new AbortController(); let current: AnatomySceneController | DatasetSceneAdapter | null = null;
-    setError(false); setReady(false); setProgress(null);
+    setError(false); setReady(false); setProgress(null); setEntered(false); previousView.current = null;
     const timeout = window.setTimeout(() => { abort.abort(); setError(true); }, 20000);
     if (datasetSource && host.current) {
       window.clearTimeout(timeout);
@@ -81,6 +92,7 @@ export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datas
   }, [revision, datasetSource, onMotionHostChange]);
   useEffect(() => {
     if (!ready) return;
+    stopEntrance();
     const regionKey = JSON.stringify(regionIds);
     const previous = previousView.current;
     controller.current?.setView({ region: null, regionIds, selectedId, selectedIds, bones, muscles, nerves, poseId: staticPose, nerveConceptMuscleKeys, observeNerves: presentation.observeNerves, highlightInnervation: presentation.highlightInnervation, supplements: false, dim: presentation.dim, isolate: presentation.isolated && Boolean(selectedId), hiddenSourceKeys: presentation.hidden, translucentSourceKeys: presentation.translucent });
@@ -91,8 +103,8 @@ export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datas
     }
     previousView.current = { regionKey, selectedId, resetRevision: viewResetRevision };
   }, [ready, regionIds, selectedId, selectedIds, bones, muscles, nerves, staticPose, nerveConceptMuscleKeys, presentation, viewResetRevision]);
-  useEffect(() => { if (ready && homeRevision > 0) controller.current?.focus([]); }, [ready, homeRevision]);
-  return <div className="whole-body-viewer">
+  useEffect(() => { if (ready && homeRevision > 0) { stopEntrance(); controller.current?.focus([]); } }, [ready, homeRevision]);
+  return <div className="whole-body-viewer" onPointerDownCapture={stopEntrance}>
     <div className="whole-body-canvas" inert={!entered} aria-hidden={!entered} ref={host}/>
     {!entered && <AtlasLoading failed={error || Boolean(progress?.failed)} loaded={progress?.loaded} total={progress?.total} onRetry={() => error ? setRevision(r => r + 1) : controller.current?.retry()}/> }
     <div inert={!entered} ref={tools} className="body-tools" aria-label="모형 보기 설정">

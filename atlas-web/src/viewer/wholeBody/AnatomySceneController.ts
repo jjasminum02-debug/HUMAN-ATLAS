@@ -3,6 +3,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { type BodyAsset, type BodyManifest, type BodyView, visible, pickable, selected } from './contract';
 import { ResourceQueue } from './resources';
+import { entranceFrame } from './sceneEntrance.ts';
 
 export interface BodyProgress { loaded: number; total: number; failed: number; contextLost: boolean; selectedAvailable: boolean; calls: number; triangles: number; geometries: number }
 /** Sole owner of renderer, frame loop, camera, controls and the persistent anatomy root. */
@@ -22,6 +23,8 @@ export class AnatomySceneController {
   private dirty = true;
   private previous = 0;
   private renderedFrames = 0;
+  private entrance: { elapsed: number; target: THREE.Vector3; offset: THREE.Vector3 } | null = null;
+  private readonly reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   private readonly frameIntervalsMs: number[] = [];
   private readonly renderDurationsMs: number[] = [];
   private pointer = { x: 0, y: 0 };
@@ -55,6 +58,8 @@ export class AnatomySceneController {
     this.controls.enableDamping = true; this.controls.dampingFactor = 0.12;
     this.controls.minDistance = 0.06; this.controls.maxDistance = 8;
     this.controls.addEventListener('change', this.invalidate);
+    this.controls.addEventListener('start', this.stopEntrance);
+    this.reducedMotion.addEventListener('change', this.stopEntrance);
     // Fetch cancellation must reach both the network and the late parse guard.
     this.queue = new ResourceQueue((id, signal) => this.load(id, signal), group => this.release(group), () => this.sync(), 2, {maxBytes:96*1024*1024,measure:group=>{
       const buffers=new Set<ArrayBufferLike>();
@@ -85,6 +90,33 @@ export class AnatomySceneController {
   }
 
   requestRender() { this.dirty = true; }
+  /** One opening presentation on the existing frame clock; input always takes over. */
+  startEntrance() {
+    this.stopEntrance();
+    if (this.reducedMotion.matches || this.dead || this.lost) return;
+    this.entrance = { elapsed: 0, target: this.controls.target.clone(),
+      offset: this.camera.position.clone().sub(this.controls.target) };
+    this.renderer.domElement.style.opacity = String(entranceFrame(0).opacity);
+    this.renderer.domElement.setAttribute('data-entrance', 'active');
+    this.dirty = true;
+  }
+  stopEntrance = () => {
+    this.entrance = null;
+    this.renderer.domElement.style.opacity = '1';
+    this.renderer.domElement.removeAttribute('data-entrance');
+    this.dirty = true;
+  };
+  private updateEntrance(dt: number) {
+    const entrance = this.entrance;
+    if (!entrance) return false;
+    entrance.elapsed += dt;
+    const frame = entranceFrame(entrance.elapsed);
+    const offset = entrance.offset.clone().applyAxisAngle(THREE.Object3D.DEFAULT_UP, frame.yaw);
+    this.camera.position.copy(entrance.target).add(offset);
+    this.renderer.domElement.style.opacity = String(frame.opacity);
+    if (frame.finished) this.stopEntrance();
+    return true;
+  }
   private invalidate = () => { this.dirty = true; };
   /** Future pose controllers register updates here, never create a second RAF/renderer. */
   addUpdate(update: (seconds: number) => boolean | void) { this.updates.add(update); return () => { this.updates.delete(update); this.dirty = true; }; }
@@ -99,9 +131,12 @@ export class AnatomySceneController {
     let poseChanged = false;
     // false means an idle player; legacy callbacks without a return still render.
     for (const update of this.updates) if (update(dt) !== false) poseChanged = true;
+    // A real pose update owns framing; the opening orbit must not fight playback.
+    if (poseChanged && this.entrance) this.stopEntrance();
+    const entranceChanged = this.updateEntrance(dt);
     this.controls.update();
     if (this.hoverPoint) { const p = this.hoverPoint; this.hoverPoint = null; this.setHover(this.pick(p.x, p.y)?.nodeId ?? null); }
-    if (this.dirty || poseChanged) {
+    if (this.dirty || poseChanged || entranceChanged) {
       const started = import.meta.env.DEV ? performance.now() : 0;
       this.renderer.render(this.scene, this.camera); this.dirty = false; this.renderedFrames += 1;
       if (import.meta.env.DEV) {
@@ -138,6 +173,7 @@ export class AnatomySceneController {
     this.fitBounds(box);
   }
   private fitBounds(box: THREE.Box3) {
+    this.stopEntrance();
     if (box.isEmpty()) return;
     const center = box.getCenter(new THREE.Vector3()); const extent = box.getSize(new THREE.Vector3());
     const aspect = this.size.width / this.size.height;
@@ -238,9 +274,9 @@ export class AnatomySceneController {
       selectedAvailable: !this.view.selectedId || [...this.queue.loaded.values()].some(g => g.children.some(obj => obj.visible && this.assets.get(obj.name)?.stableIds.some(id => (this.view.selectedIds ?? [this.view.selectedId]).includes(id)))),
       calls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles, geometries: this.renderer.info.memory.geometries });
   }
-  private onLost = (event: Event) => { event.preventDefault(); this.lost = true; this.demand(); this.report(); };
+  private onLost = (event: Event) => { event.preventDefault(); this.stopEntrance(); this.lost = true; this.demand(); this.report(); };
   private onRestored = () => { this.lost = false; this.dirty = true; this.demand(); this.report(); };
-  private onDown = (event: PointerEvent) => { this.pointer = { x: event.clientX, y: event.clientY }; };
+  private onDown = (event: PointerEvent) => { this.stopEntrance(); this.pointer = { x: event.clientX, y: event.clientY }; };
   private onUp = (event: PointerEvent) => {
     if (Math.hypot(event.clientX - this.pointer.x, event.clientY - this.pointer.y) > 5 || event.button !== 0) return;
     const asset = this.pick(event.clientX, event.clientY);
@@ -265,6 +301,7 @@ export class AnatomySceneController {
   };
   private onLeave = () => { this.hoverPoint = null; this.setHover(null); };
   private onKey = (event: KeyboardEvent) => {
+    this.stopEntrance();
     const offset = this.camera.position.clone().sub(this.controls.target);
     const spherical = new THREE.Spherical().setFromVector3(offset);
     switch (event.key) {
@@ -284,7 +321,10 @@ export class AnatomySceneController {
     group.removeFromParent(); group.traverse(obj => { if (obj instanceof THREE.Mesh) { obj.geometry.dispose(); (Array.isArray(obj.material) ? obj.material : [obj.material]).forEach(m => m.dispose()); } });
   }
   dispose() {
+    this.stopEntrance();
     this.dead = true; this.renderer.setAnimationLoop(null); this.queue.dispose(); this.updates.clear(); this.observer.disconnect();
+    this.controls.removeEventListener('start', this.stopEntrance);
+    this.reducedMotion.removeEventListener('change', this.stopEntrance);
     this.controls.dispose();
     const canvas = this.renderer.domElement;
     document.removeEventListener('visibilitychange', this.invalidate);
