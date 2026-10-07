@@ -1,0 +1,32 @@
+HUMAN ATLAS에서 아래 UI·그래픽 후속 단계만 직접 구현해라. 담당 Luna Max · 현재 대화 직접 구현.
+
+작업 위치: /Users/daniel/Downloads/SIM /HUMAN ATLAS
+먼저 AGENTS.md, work/NEXT.md, work/EXECUTION.json, work/product-acceptance.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/reviews/atlas-visible-body-comparison-2026-10-07/REPORT.md, work/plans/atlas-ui-graphics-and-hosting-2026-10-07/README.md와 해당 단계의 실제 선행 결과를 읽어라. 현재 코드/HEAD/기존 WIP를 먼저 확인하고 역사 수치보다 실제 입력을 따른다.
+
+이는 사용자가 승인한 후속 개선이며 새 T번호를 발급하거나 T40/T66/T85 등 완료 상태를 재작성하지 않는다. 이번 단계 결과는 work/reviews/atlas-ui-graphics-and-hosting-2026-10-07/의 자기 단계 디렉터리에 기록한다. 소유 변경만 선별 로컬 커밋한다. 기존 WIP 파일을 수정할 필요가 있으면 diff에서 자신의 변경만 분리하고 다른 사람의 변경을 포함시키지 않는다.
+
+542 targets/563 memberships/12부위, HA130, 역사163, 원본/source-cache/OpenSim_Models/T13/기존 WIP를 보존한다. source-only/local selection/public rights held/humanReview=not_performed를 별개로 유지한다. 콘텐츠 전체 확보와 현재 제품 기능 합격을 분리한다. 자료 부족으로 geometry/좌우/관계/정확 부착/승인을 생성하지 않는다. 확인된 사용자 흐름 결함은 직접 고친다.
+
+단일 viewport/scene/renderer/camera/controller/frame clock, 기존 generated learner runtime, dirty/실제 동작 때만 render하는 정책을 재사용한다. 밝은 배경, 구조 기본 탭, 수직 기능 목록, 복수 부위 선택, 사용자의 숨김/반투명/layer 상태, 뒤앞/취소/복원을 유지한다. 첫 등장 12도/1.4초 easing과 reduced-motion/input-cancel을 보존한다. 움직임으로 이해하기 단일 CTA의 반복 왕복/재클릭 smooth rest와 scrub을 유지한다. slow/pause/reset·로그인창·제거한 로딩 그림/슬로건을 복구하지 않는다. 학생 UI에 task/source/evidence/내부 ID를 노출하지 않는다.
+
+Visible Body는 공개 공식 화면을 참고하되 상용 이미지/모형/texture/코드를 복제하지 않는다. 최신 기능에 대한 새 사실이 필요할 때만 공식 자료를 확인한다. 고정 catalog/원장 전수 조사와 통과한 동일 입력 검증을 반복하지 않는다. 영향받은 자동 계약과 실제 브라우저 대표 흐름을 검사하며, CSS 폭 검증을 아이폰/아이패드 실기기 검증으로 부르지 않는다. 390/1024/1440은 실제 viewport 치수를 기록하고 PNG를 남긴다. 관련 typecheck/build를 마무리 때 한 번 실행하고 console error/사용자 흐름 회귀를 고친다. 예산을 몰래 높이거나 구조 삭제로 성능을 맞추지 않는다.
+
+단계 report에는 바뀐 동작/검증 파일/PNG/전후 수치/실제 지원 범위/남은 콘텐츠·engineering/제품 blocker를 구분한다. 입력 SHA와 검증 재사용 이유를 짧게 남긴다. 선행 단계의 지원 제품 blocker는 해당 영향 부분만 해결하며, 자료 미확보나 후속 backlog를 현재 단계 gate로 만들지 않는다. 실제 미구현을 구현 완료라고 쓰지 않는다. python3 work/tools/sync_execution.py --check로 기존 projection을 확인하고 다른 task record를 수정하지 않는다. 소유 파일만 로컬 커밋한 뒤 다음 프롬프트 파일을 안내하고 멈춰라.
+
+새 task/thread/agent/자동 위임/다음 단계 자동 실행/push/외부 배포/유료 업그레이드/병리 editor/환자 진단·치료·자침 기능은 금지한다. 이번 요청은 아래 단계의 코드·로컬 검증까지다.
+
+이번 책임: 현재 품질과 지원 범위를 보존하는 경량 전달 패키지와 Vercel Hobby 배포 준비를 구현한다. 이번 단계는 외부 업로드/배포 없이 로컬 검증까지만 한다.
+선행: 01–05 실제 결과와 이 계획의 HOSTING-ASSESSMENT.md. 오래된 수치를 고정 gate로 쓰지 않고 최종 작업 트리 snapshot을 다시 측정한다. prepareLocalDelivery/localDeliveryServer/hostedPackage/prepareHostedDelivery/previewHostedDelivery, generated runtime writer와 전달 색인, DatasetResources/AnatomySceneController/animationSceneAdapter 등 모든 실제 loader/GLB parser를 확인한다.
+
+1. Vercel 공식 현재 Hobby limits/Blob 가격을 확인하고 CLI source upload/빌드 output/deployment storage/브라우저 전송량/초기 scene 비용을 분리한다. 100MB는 공식 CLI 업로드 한도이므로 모든 경로의 저장 한도라고 잘못 일반화하지 않는다. 2026-10-07 기준 현재 99 runtime 파일은 원본253.16MB·gzip189.62MB, motion152.48MB·anatomy94.16MB이며 완전 동일 SHA 중복은0이다. JS 최적화만으로 100MB 이하를 달성할 수 있다고 쓰지 않는다.
+2. 실제 runtime dependency closure를 기준으로 private research/evidence/source-cache/OpenSim_Models/node_modules/과거 dist/미등록 후보를 upload bundle에서 제외한다. 지원 근육·뼈·신경·작용을 조용히 삭제하지 않는다. 동일 파일 중복 제외와 여러 GLB 내부의 동일 buffer/geometry 반복은 별개다. motion GLB의 base geometry/morph keys/변하지 않는 배열/중복 channel/불필요한 padding을 관찰하고 가장 큰 실제 병목부터 수리한다.
+3. 무손실 또는 정확한 decoded geometry/track 값 보존을 우선하는 압축/공유화의 작은 검증 실험을 한 번 수행하고 효과가 있으면 공통 pipeline에 적용한다. gzip/Brotli 전송량 감소, sparse morph, 내부 buffer 공유, mesh compression의 장단점을 실제 bytes/decode CPU/메모리로 구분한다. meshopt/Draco를 쓰면 현재 raw accessor parser와 GLTFLoader의 지원을 모두 구현·검증한다. decoder를 설정하지 않은 자산을 등록하지 않는다. 양자화/decimation은 기본 적용하지 않으며 필요하면 오차·실루엣·부착·관통·동작 영향과 예산을 명시한다. 원본 GLB는 보존하고 새 derived revision/hash/URI/의존성을 작성한다.
+4. 100MB CLI 경로를 사용할 경우 유지보수 여유가 있는90,000,000 bytes 이하 업로드를 목표로 한다. 이는 engineering 목표이지 해부학적 품질을 낮추는 허가가 아니다. gzip 패키지189MB에서90MB를 보장한다고 쓰지 않는다. 작은 실험이 목표 달성 가능성을 보이지 않으면 끝없이 topology를 깎지 않고 다음 전달 구조로 진행한다.
+5. Vercel Hobby frontend와 원격 static asset store를 분리하는 fallback을 실제 구성한다. 앱/compact projection 약6.52MB와 모델/동작 약246.64MB를 논리적으로 분리하되 최종 수치를 재계산한다. Vercel Blob은 당시 Hobby 저장1GB/전송10GB 포함이므로 저장 적합성과 사용량 한계를 별도로 보고한다. 동일 provider 선호와 기존 Cloudflare Pages 패키지를 비교하고 현재 앱에 가장 적은 추가 코드·의존성이 필요한 구조를 권고한다. 원격 URL은 데이터 색인/config 한 곳에서 공급하고 localhost/dev middleware를 클라우드 필수 경로로 남기지 않는다. Functions로 거대 GLB를 매번 프록시하지 않는다.
+6. 기존 _headers는 Cloudflare 전용이다. Vercel용 vercel.json 또는 실제 storage header 지원으로 Content-Type/Encoding/Cache-Control/404를 정확히 구현한다. 압축된 GLB를 .glb로 저장하고 Content-Encoding 없이 전달하는 오류를 막는다. Blob/다른 storage가 custom encoding header를 지원하는지는 실제 문서를 확인하고 필요한 경우 검증된 identity GLB 전달 또는 공통 decoder 경로를 사용한다. CORS/취소/late response/failed retry/hash integrity 및 버전별 캐시 갱신을 검사한다. URL이 hash 불변일 때만 immutable을 사용하고 고정 URI의 변경 asset은 stale하게 두지 않는다. HTML/manifest cache는 새 버전 전환을 보장한다.
+7. 모든 최종 지원 자산의 identity/source/side/part/frame/track/material과 새 압축 자산의 decoded key/중간보간/contact/outcome/rest를 자동 대조한다. 단순 file hash 변화만으로 실패라고 하지 말고 원본 reference와 실제 decoded 의미의 동등성을 검증한다. 사용자 눈에 보이는 기능과 좌우/범위를 보존한다. 390/1024/1440 실제 전달 방식에서 홈/근육·뼈·신경/loop·rest·scrub/깊은 관찰/숨김/캐시·오류 복구를 확인한다. cold/warm 전송량·초기 모델·첫 action·반복 action·decode/render·캐시·20회 지역 전환 상태를 구분한다.
+8. .vercelignore와 provider-specific config, 공개 대상 allowlist, reproducible build/prepare/check, 실제 최소 upload directory, rollback·재시작·cache 갱신 지침을 만든다. 보존 WIP 기준인지 commit 기준인지 snapshot에 명시하고 다른 사람 WIP를 임의 커밋하지 않는다. source rights held를 포괄 공개 승인으로 바꾸지 않는다. 실제 공개 가능 source/예외와 기술적 준비 상태를 독립 기록하고 필요한 선행 입력이 있으면 파일 단위로 남긴다. 앱에 사용자 로그인창을 만들지 않는다. 호스팅 소유자의 계정 인증은 사용자 로그인 UI와 별개이며 이번 로컬 준비를 막는 조건이 아니다.
+
+완료 기준: 지원 범위를 보존하는 실제 최소 패키지/설정/재현 경로와 검증·사실에 맞는 Hobby 적합성 판정이 있다. 100MB 단일 업로드 가능/불가, 분리 hosting 준비, 사용량 한계와 데이터 품질을 각각 기록한다. 배포하지 않았으면 공개 URL이나 'Vercel 실동작 합격'을 만들지 않는다. 가격/업그레이드나 계정 대기를 이유로 독립 준비 작업을 중단하지 않는다. 최종 외부 배포는 사용자가 이 구체적 패키지에 대해 후속 요청할 때 별도로 수행한다.
+결과 디렉터리: work/reviews/atlas-ui-graphics-and-hosting-2026-10-07/06-vercel-package/
+종료 후 실제 권고 전달 방법과 배포 준비 상태를 보고하고 멈춰라. 자동 실행할 다음 단계는 없다.

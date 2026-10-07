@@ -1,0 +1,30 @@
+HUMAN ATLAS에서 아래 UI·그래픽 후속 단계만 직접 구현해라. 담당 Luna Max · 현재 대화 직접 구현.
+
+작업 위치: /Users/daniel/Downloads/SIM /HUMAN ATLAS
+먼저 AGENTS.md, work/NEXT.md, work/EXECUTION.json, work/product-acceptance.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/reviews/atlas-visible-body-comparison-2026-10-07/REPORT.md, work/plans/atlas-ui-graphics-and-hosting-2026-10-07/README.md와 해당 단계의 실제 선행 결과를 읽어라. 현재 코드/HEAD/기존 WIP를 먼저 확인하고 역사 수치보다 실제 입력을 따른다.
+
+이는 사용자가 승인한 후속 개선이며 새 T번호를 발급하거나 T40/T66/T85 등 완료 상태를 재작성하지 않는다. 이번 단계 결과는 work/reviews/atlas-ui-graphics-and-hosting-2026-10-07/의 자기 단계 디렉터리에 기록한다. 소유 변경만 선별 로컬 커밋한다. 기존 WIP 파일을 수정할 필요가 있으면 diff에서 자신의 변경만 분리하고 다른 사람의 변경을 포함시키지 않는다.
+
+542 targets/563 memberships/12부위, HA130, 역사163, 원본/source-cache/OpenSim_Models/T13/기존 WIP를 보존한다. source-only/local selection/public rights held/humanReview=not_performed를 별개로 유지한다. 콘텐츠 전체 확보와 현재 제품 기능 합격을 분리한다. 자료 부족으로 geometry/좌우/관계/정확 부착/승인을 생성하지 않는다. 확인된 사용자 흐름 결함은 직접 고친다.
+
+단일 viewport/scene/renderer/camera/controller/frame clock, 기존 generated learner runtime, dirty/실제 동작 때만 render하는 정책을 재사용한다. 밝은 배경, 구조 기본 탭, 수직 기능 목록, 복수 부위 선택, 사용자의 숨김/반투명/layer 상태, 뒤앞/취소/복원을 유지한다. 첫 등장 12도/1.4초 easing과 reduced-motion/input-cancel을 보존한다. 움직임으로 이해하기 단일 CTA의 반복 왕복/재클릭 smooth rest와 scrub을 유지한다. slow/pause/reset·로그인창·제거한 로딩 그림/슬로건을 복구하지 않는다. 학생 UI에 task/source/evidence/내부 ID를 노출하지 않는다.
+
+Visible Body는 공개 공식 화면을 참고하되 상용 이미지/모형/texture/코드를 복제하지 않는다. 최신 기능에 대한 새 사실이 필요할 때만 공식 자료를 확인한다. 고정 catalog/원장 전수 조사와 통과한 동일 입력 검증을 반복하지 않는다. 영향받은 자동 계약과 실제 브라우저 대표 흐름을 검사하며, CSS 폭 검증을 아이폰/아이패드 실기기 검증으로 부르지 않는다. 390/1024/1440은 실제 viewport 치수를 기록하고 PNG를 남긴다. 관련 typecheck/build를 마무리 때 한 번 실행하고 console error/사용자 흐름 회귀를 고친다. 예산을 몰래 높이거나 구조 삭제로 성능을 맞추지 않는다.
+
+단계 report에는 바뀐 동작/검증 파일/PNG/전후 수치/실제 지원 범위/남은 콘텐츠·engineering/제품 blocker를 구분한다. 입력 SHA와 검증 재사용 이유를 짧게 남긴다. 선행 단계의 지원 제품 blocker는 해당 영향 부분만 해결하며, 자료 미확보나 후속 backlog를 현재 단계 gate로 만들지 않는다. 실제 미구현을 구현 완료라고 쓰지 않는다. python3 work/tools/sync_execution.py --check로 기존 projection을 확인하고 다른 task record를 수정하지 않는다. 소유 파일만 로컬 커밋한 뒤 다음 프롬프트 파일을 안내하고 멈춰라.
+
+새 task/thread/agent/자동 위임/다음 단계 자동 실행/push/외부 배포/유료 업그레이드/병리 editor/환자 진단·치료·자침 기능은 금지한다. 이번 요청은 아래 단계의 코드·로컬 검증까지다.
+
+이번 책임: 현재 지원 신경의 주행·지배근 관찰과 기존 실제 근육 작용의 강조를 완성한다.
+선행: 01–04 실제 결과. 04의 exact footprint 미확보는 이번 blocker가 아니다. learnerNerveGraph/t66NerveLearning, DatasetSceneAdapter/nerveContextPresentation 관련 검사, atlasMotionExperience/motionSubjectPresentation 및 실제 learner runtime을 읽는다. 실재하지 않는 파일 경로는 rg로 확인하고 현재 대응 파일을 사용한다.
+
+1. 모든 현재 지원 신경 선택과 관련 근육 관계를 identity/branch/side/part/근거별로 자동 대조한다. concept-level 관계와 exact surface 연결을 구분한다. 운동 지배·감각·통과 인접/문헌상 포착 구간을 혼합하지 않는다. 신경 이름이 같거나 가까이 지나간다는 이유로 지배근을 추가하지 않는다. 설명의 모순/이름·좌우 오류와 기존 연결 결함은 직접 수리한다. 새 의학 주장에 필요한 경우만 실제 출처를 확인한다.
+2. 신경 선택 시 현재 지원 전체 주행·분지가 잘 보이는 시점과 노란 강조, 확인된 관련 근육의 정확한 선택 연결을 구현한다. 지배근은 관계가 확인된 범위로 강조한다. 주동근 색 변화는 교육용 표시이며 실제 힘·활성도 측정으로 표현하지 않는다. 반복적인 내부 정책 경고 문장을 화면마다 붙이지 말고 필요한 차이만 짧고 명확하게 안내한다.
+3. 관련 근육에 작용 text 또는 실제 clip이 있으면 기존 정확한 source-action selector를 연결한다. 모든 항목에 '현재 연결된 설명이 없습니다'를 반복하는 빈 행을 정리하고 실제 학습 콘텐츠가 있는 항목을 우선 보여준다. 설명 없음/clip 없음/지배 관계 없음은 다른 상태이며 빈 UI를 숨기기 위해 허위 관계나 동작을 만들지 않는다. 후보/posture를 muscle_action으로 승격하지 않는다.
+4. 현재 등록된 실제 작용 전부에 대해 선택 근육·동반 근육·움직이는 뼈·기시정지 뼈·움직임을 설명하는 말단 구조가 포함되는지 자동 검사한다. 7우선 근육군은 available side/part를 전수 대조한다. 긴노쪽손목폄근에서 손목 굽힘을 관찰할 때 손목/손/부착 뼈와 주변 근육이 유지되고 해당 근육은 수동 신장인지 실제 작용인지 정확히 표현한다.
+5. preparation/action/return/held를 기존 공통 phase 경로에서 읽고 선택 근육의 강조와 주변 조직의 깊이를 조정한다. 이미 적용된 작용 크기를 일괄 +30%씩 다시 늘리지 않는다. 작은 동작 문제는 프레이밍/시점/속도·대비를 먼저 수리한다. 실제 각도나 변형을 바꾸어야 하는 사례만 지원 범위/부착·중간 pose/contact/outcome을 targeted 검증한다. 새 모든 근육 제작이나 범위 밖 턱/얼굴/호흡 수리를 이번에 시작하지 않는다.
+6. 정적 신경은 미지원 운동 pose에서 숨기고 rest에서 사용자 layer 상태대로 복원한다. 신경→관련 근육→기능→loop→재클릭 rest→신경, scrub/hidden/layer-off/뒤앞을 실제 브라우저에서 확인한다. 390/1024/1440와 대표 branch/side/깊은 경로/변경 사례를 검증한다.
+
+완료 기준: 지원 신경 관계·주행 관찰과 기존 실제 동작 문맥/강조에 제품 결함이 없고 정확한 지원 수가 기록된다. 미확보 신경 3D/동적 pose/미제작 근육 작용은 별도 backlog다. 전 신경이나 전신 동작 완성으로 쓰지 않는다.
+결과 디렉터리: work/reviews/atlas-ui-graphics-and-hosting-2026-10-07/05-nerve-motion/
+종료 후 06-vercel-hobby-package.txt를 안내하고 멈춰라.

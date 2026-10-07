@@ -1,0 +1,30 @@
+HUMAN ATLAS에서 아래 UI·그래픽 후속 단계만 직접 구현해라. 담당 Luna Max · 현재 대화 직접 구현.
+
+작업 위치: /Users/daniel/Downloads/SIM /HUMAN ATLAS
+먼저 AGENTS.md, work/NEXT.md, work/EXECUTION.json, work/product-acceptance.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/reviews/atlas-visible-body-comparison-2026-10-07/REPORT.md, work/plans/atlas-ui-graphics-and-hosting-2026-10-07/README.md와 해당 단계의 실제 선행 결과를 읽어라. 현재 코드/HEAD/기존 WIP를 먼저 확인하고 역사 수치보다 실제 입력을 따른다.
+
+이는 사용자가 승인한 후속 개선이며 새 T번호를 발급하거나 T40/T66/T85 등 완료 상태를 재작성하지 않는다. 이번 단계 결과는 work/reviews/atlas-ui-graphics-and-hosting-2026-10-07/의 자기 단계 디렉터리에 기록한다. 소유 변경만 선별 로컬 커밋한다. 기존 WIP 파일을 수정할 필요가 있으면 diff에서 자신의 변경만 분리하고 다른 사람의 변경을 포함시키지 않는다.
+
+542 targets/563 memberships/12부위, HA130, 역사163, 원본/source-cache/OpenSim_Models/T13/기존 WIP를 보존한다. source-only/local selection/public rights held/humanReview=not_performed를 별개로 유지한다. 콘텐츠 전체 확보와 현재 제품 기능 합격을 분리한다. 자료 부족으로 geometry/좌우/관계/정확 부착/승인을 생성하지 않는다. 확인된 사용자 흐름 결함은 직접 고친다.
+
+단일 viewport/scene/renderer/camera/controller/frame clock, 기존 generated learner runtime, dirty/실제 동작 때만 render하는 정책을 재사용한다. 밝은 배경, 구조 기본 탭, 수직 기능 목록, 복수 부위 선택, 사용자의 숨김/반투명/layer 상태, 뒤앞/취소/복원을 유지한다. 첫 등장 12도/1.4초 easing과 reduced-motion/input-cancel을 보존한다. 움직임으로 이해하기 단일 CTA의 반복 왕복/재클릭 smooth rest와 scrub을 유지한다. slow/pause/reset·로그인창·제거한 로딩 그림/슬로건을 복구하지 않는다. 학생 UI에 task/source/evidence/내부 ID를 노출하지 않는다.
+
+Visible Body는 공개 공식 화면을 참고하되 상용 이미지/모형/texture/코드를 복제하지 않는다. 최신 기능에 대한 새 사실이 필요할 때만 공식 자료를 확인한다. 고정 catalog/원장 전수 조사와 통과한 동일 입력 검증을 반복하지 않는다. 영향받은 자동 계약과 실제 브라우저 대표 흐름을 검사하며, CSS 폭 검증을 아이폰/아이패드 실기기 검증으로 부르지 않는다. 390/1024/1440은 실제 viewport 치수를 기록하고 PNG를 남긴다. 관련 typecheck/build를 마무리 때 한 번 실행하고 console error/사용자 흐름 회귀를 고친다. 예산을 몰래 높이거나 구조 삭제로 성능을 맞추지 않는다.
+
+단계 report에는 바뀐 동작/검증 파일/PNG/전후 수치/실제 지원 범위/남은 콘텐츠·engineering/제품 blocker를 구분한다. 입력 SHA와 검증 재사용 이유를 짧게 남긴다. 선행 단계의 지원 제품 blocker는 해당 영향 부분만 해결하며, 자료 미확보나 후속 backlog를 현재 단계 gate로 만들지 않는다. 실제 미구현을 구현 완료라고 쓰지 않는다. python3 work/tools/sync_execution.py --check로 기존 projection을 확인하고 다른 task record를 수정하지 않는다. 소유 파일만 로컬 커밋한 뒤 다음 프롬프트 파일을 안내하고 멈춰라.
+
+새 task/thread/agent/자동 위임/다음 단계 자동 실행/push/외부 배포/유료 업그레이드/병리 editor/환자 진단·치료·자침 기능은 금지한다. 이번 요청은 아래 단계의 코드·로컬 검증까지다.
+
+이번 책임: 모형을 크게 보는 화면 비율과 설명 패널을 완성한다.
+
+현재 비교 표본은 1280×720에서 canvas 976×317.5이며 전신이 작게 보였다. 먼저 실제 최신 홈/선택/기능 화면을 보고 현행 치수를 다시 측정한다. App.tsx, ui/atlasShell.css, viewer/wholeBody/wholeBody.css, WholeBodyViewer.tsx 및 AnatomySceneController.ts의 현재 레이아웃·bounds fitting 경로를 확인한다.
+
+1. 사용 가능한 화면 높이에 맞춰 모형 영역을 늘리고 왼쪽 탐색/오른쪽 설명/보기 옵션의 비율을 조정한다. CSS와 기존 공통 fitBounds를 먼저 사용한다. 확대만 강제해 머리·발·동작 끝 자세를 잘라내지 않는다. 첫 등장 회전의 앞/끝 시점에서도 전신을 유지한다.
+2. 노트북은 모형 중심의 좌우 패널, 태블릿은 접을 수 있는 설명 영역, 좁은 화면은 모형과 설명의 예측 가능한 배치를 적용한다. 패널이 갑자기 튀어나오거나 제목이 잘리지 않게 기존 transition을 다듬는다. 새 구조 선택/탭 전환에 맞는 내부 scroll 처리와 제목·좌우·탭 접근을 구현하고 같은 구조에서 읽던 위치는 불필요하게 초기화하지 않는다.
+3. 보기 옵션의 버튼이 컨테이너 밖으로 나가지 않게 grid/flex min-width/wrap을 고친다. 버튼은 필요한 것만 유지하며 키보드 초점/터치 영역/한글 줄바꿈을 확인한다. 부위 메뉴가 목록 스크롤과 무관하게 접근 가능하고 복수 선택 중 닫히지 않는 흐름을 유지한다.
+4. resize 때문에 scene을 재생성하거나 카메라를 임의로 초기화하지 않는다. resize 중 orbit/선택/동작/숨김이 유지되고, 명시적 화면 맞춤만 해당 bounds로 맞춰지는지 확인한다.
+5. 390/1024/1440 실제 브라우저에서 전신→목/머리→손→하지, 카드 열림/닫힘, 구조/기능, 대퇴직근 시범, 메뉴 복수 선택을 확인한다. canvas/패널/모형 화면 점유 비율의 전후 값을 기록한다. 1280×720 문제 표본도 재확인한다. 모바일 실기기는 사용 가능한 경우에만 별도로 검증했다고 쓴다.
+
+완료 기준: 모형이 읽기 쉬운 크기이고 전체 bounds가 잘리지 않으며 카드 제목/버튼 overflow와 resize reset이 없고 기존 흐름이 유지된다. 이번에 기시정지 footprint나 새 motion 자산을 만들지 않는다.
+결과 디렉터리: work/reviews/atlas-ui-graphics-and-hosting-2026-10-07/01-layout/
+종료 후 02-observation-and-camera.txt를 안내하고 멈춰라.

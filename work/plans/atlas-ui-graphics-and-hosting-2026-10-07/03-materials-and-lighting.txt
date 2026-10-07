@@ -1,0 +1,30 @@
+HUMAN ATLAS에서 아래 UI·그래픽 후속 단계만 직접 구현해라. 담당 Luna Max · 현재 대화 직접 구현.
+
+작업 위치: /Users/daniel/Downloads/SIM /HUMAN ATLAS
+먼저 AGENTS.md, work/NEXT.md, work/EXECUTION.json, work/product-acceptance.json, design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md, work/reviews/atlas-visible-body-comparison-2026-10-07/REPORT.md, work/plans/atlas-ui-graphics-and-hosting-2026-10-07/README.md와 해당 단계의 실제 선행 결과를 읽어라. 현재 코드/HEAD/기존 WIP를 먼저 확인하고 역사 수치보다 실제 입력을 따른다.
+
+이는 사용자가 승인한 후속 개선이며 새 T번호를 발급하거나 T40/T66/T85 등 완료 상태를 재작성하지 않는다. 이번 단계 결과는 work/reviews/atlas-ui-graphics-and-hosting-2026-10-07/의 자기 단계 디렉터리에 기록한다. 소유 변경만 선별 로컬 커밋한다. 기존 WIP 파일을 수정할 필요가 있으면 diff에서 자신의 변경만 분리하고 다른 사람의 변경을 포함시키지 않는다.
+
+542 targets/563 memberships/12부위, HA130, 역사163, 원본/source-cache/OpenSim_Models/T13/기존 WIP를 보존한다. source-only/local selection/public rights held/humanReview=not_performed를 별개로 유지한다. 콘텐츠 전체 확보와 현재 제품 기능 합격을 분리한다. 자료 부족으로 geometry/좌우/관계/정확 부착/승인을 생성하지 않는다. 확인된 사용자 흐름 결함은 직접 고친다.
+
+단일 viewport/scene/renderer/camera/controller/frame clock, 기존 generated learner runtime, dirty/실제 동작 때만 render하는 정책을 재사용한다. 밝은 배경, 구조 기본 탭, 수직 기능 목록, 복수 부위 선택, 사용자의 숨김/반투명/layer 상태, 뒤앞/취소/복원을 유지한다. 첫 등장 12도/1.4초 easing과 reduced-motion/input-cancel을 보존한다. 움직임으로 이해하기 단일 CTA의 반복 왕복/재클릭 smooth rest와 scrub을 유지한다. slow/pause/reset·로그인창·제거한 로딩 그림/슬로건을 복구하지 않는다. 학생 UI에 task/source/evidence/내부 ID를 노출하지 않는다.
+
+Visible Body는 공개 공식 화면을 참고하되 상용 이미지/모형/texture/코드를 복제하지 않는다. 최신 기능에 대한 새 사실이 필요할 때만 공식 자료를 확인한다. 고정 catalog/원장 전수 조사와 통과한 동일 입력 검증을 반복하지 않는다. 영향받은 자동 계약과 실제 브라우저 대표 흐름을 검사하며, CSS 폭 검증을 아이폰/아이패드 실기기 검증으로 부르지 않는다. 390/1024/1440은 실제 viewport 치수를 기록하고 PNG를 남긴다. 관련 typecheck/build를 마무리 때 한 번 실행하고 console error/사용자 흐름 회귀를 고친다. 예산을 몰래 높이거나 구조 삭제로 성능을 맞추지 않는다.
+
+단계 report에는 바뀐 동작/검증 파일/PNG/전후 수치/실제 지원 범위/남은 콘텐츠·engineering/제품 blocker를 구분한다. 입력 SHA와 검증 재사용 이유를 짧게 남긴다. 선행 단계의 지원 제품 blocker는 해당 영향 부분만 해결하며, 자료 미확보나 후속 backlog를 현재 단계 gate로 만들지 않는다. 실제 미구현을 구현 완료라고 쓰지 않는다. python3 work/tools/sync_execution.py --check로 기존 projection을 확인하고 다른 task record를 수정하지 않는다. 소유 파일만 로컬 커밋한 뒤 다음 프롬프트 파일을 안내하고 멈춰라.
+
+새 task/thread/agent/자동 위임/다음 단계 자동 실행/push/외부 배포/유료 업그레이드/병리 editor/환자 진단·치료·자침 기능은 금지한다. 이번 요청은 아래 단계의 코드·로컬 검증까지다.
+
+이번 책임: 근육·힘줄·뼈·신경의 재질과 깊이 표현을 개선한다.
+선행: 01-layout/02-observation의 실제 결과. AnatomySceneController, DatasetSceneAdapter 및 선택/신경/동작 phase material 경로를 읽는다. 같은 조직에 viewer별 다른 규칙을 새로 만들지 않는다.
+
+1. 변경 전 대표 장면의 실제 render CPU 호출 시간/frame interval/draws/triangles/material 수와 전송 bytes를 한 번 측정한다. GPU 시간·VRAM·실기기 성능을 볼 수 없으면 측정 불가로 기록한다. 조명 변화와 모형 데이터 변화의 비용을 분리한다.
+2. 기존 밝은 배경에서 뼈는 밝은 ivory, 근육은 입체감 있는 차분한 red 계열, 검증된 힘줄은 밝은 섬유성 조직으로 구분한다. 실제 source가 구별하지 않은 근육-힘줄 경계를 색칠하거나 가짜 섬유 방향을 만들지 않는다. 선택 강조와 함께 움직이는 구조의 대비를 유지한다.
+3. shared material/roughness/normal/공통 lighting과 tone mapping을 먼저 조정한다. 무조건 대형 texture/AO/후처리를 추가하지 않는다. 유효한 원본 normals 재사용, material instance 재사용과 layer 정책을 유지하고 수십 개 구조에 별도 shader를 생성하지 않는다. 새로운 속성을 넣으면 자산/번들/캐시 증가량을 기록한다.
+4. 신경은 노란색 또는 읽기 쉬운 yellow-green 계열로 일관되게 표시한다. 선택 상태를 색 하나만으로 전달하지 않으며 뼈 위/근육 아래/반투명 주변에서도 경로가 읽히게 한다. 깊이 검사를 꺼서 가려진 신경이 어디에나 뚫려 보이는 식의 해부학적 위치 오류를 만들지 않는다.
+5. 정적/selected/hovered/translucent/hidden, 실제 motion 준비·작용·복원·held의 모든 material state를 대조한다. 조명 보정으로 신경 강조나 주동근 phase 강조가 지워지지 않게 한다. 같은 자산/시점의 전후 PNG와 성능을 남긴다.
+6. 390/1024/1440에서 전신·어깨·손·하지·등·지원 신경과 우선 근육 시범을 확인한다. 시각 품질 또는 실제 측정에서 회귀가 있으면 효과를 수리하거나 경량 공통 경로로 줄인다. 현재 clip의 +30%를 이번 재질 단계에서 다시 확대하지 않는다.
+
+완료 기준: 조직/선택/신경 경로의 구분이 개선되고 기존 포즈와 층/복원이 안정적이며 성능 회귀가 설명·해결되어 있다. 모든 근육에 해부학적 texture가 완성됐다고 쓰지 않는다.
+결과 디렉터리: work/reviews/atlas-ui-graphics-and-hosting-2026-10-07/03-materials/
+종료 후 04-attachment-visualization.txt를 안내하고 멈춰라.
