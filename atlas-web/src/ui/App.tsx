@@ -77,7 +77,7 @@ export default function App() {
     useEffect(() => {
         // Desktop has no collapse control; restore its card when leaving the
         // narrow layout after the learner has collapsed the mobile card.
-        const desktop = window.matchMedia('(min-width: 761px)');
+        const desktop = window.matchMedia('(min-width: 1101px)');
         const reopen = () => { if (desktop.matches) setDetailsOpen(true); };
         desktop.addEventListener('change', reopen);
         return () => desktop.removeEventListener('change', reopen);
@@ -110,7 +110,9 @@ export default function App() {
             ? (data?.integration.objects ?? []).filter(row => row.kind === 'nerve' && row.names.en === match.concept.sourceNativeEnglishName
                 && row.localDisplayEligible && row.inspectionEligible && row.routeAudience === 'learner')
             : [] })) : [], [data, query, route.audience]);
-    const selected = data?.integration.objects.find(r => r.sourceKey === route.selected);
+    const runtimeByKey = useMemo(() => new Map((data?.integration.objects ?? []).map(row => [row.sourceKey, row])), [data]);
+    const selectedSourceKeys = useMemo(() => route.selected ? [route.selected] : [], [route.selected]);
+    const selected = runtimeByKey.get(route.selected ?? '');
     const selectedTextNerve = textNerveKey ? nerveConceptForLearner(textNerveKey) : null;
     const detailSubject = selected?.sourceKey ?? selectedTextNerve?.key ?? null;
     useEffect(() => {
@@ -128,7 +130,6 @@ export default function App() {
         reducedMotion.addEventListener('change', stop);
         return () => { animation.cancel(); reducedMotion.removeEventListener('change', stop); };
     }, [detailSubject]);
-    const runtimeObjects = data?.integration.objects ?? [];
     const selectedNerveConcept = selected?.kind === 'nerve' ? nerveConceptForSourceName(selected.names.en) : null;
     const relatedMuscles = useMemo(() => {
         const result = new Map((selected?.relatedMuscles ?? []).map(row => [row.sourceKey, { ...row, roles: [...row.roles] }]));
@@ -145,10 +146,10 @@ export default function App() {
         [selected?.kind, selected?.haConceptId, selected?.side, selected?.sourceKey]);
     const motionActions = useMemo(() => (selected?.kind === 'muscle' || selected?.kind === 'bone') ? motionPanelOptions(actions, selected.sourceKey) : [], [actions, selected?.kind, selected?.sourceKey]);
     // Build once from the whole supported set, rather than choosing an initial muscle shortlist.
-    const actionLibrary = useMemo(() => buildMotionActionLibrary((data?.integration.objects ?? [])
+    const actionLibrary = useMemo(() => explorerMode !== 'actions' ? [] : buildMotionActionLibrary((data?.integration.objects ?? [])
         .filter(row => row.kind === 'muscle' && row.localDisplayEligible && row.inspectionEligible && row.routeAudience === 'learner')
         .flatMap(row => motionPanelOptions(motionActionOptionsForLearner(row.haConceptId, row.side, row.sourceKey), row.sourceKey)
-            .map(action => ({ sourceKey: row.sourceKey, name: learnerRowTitle(row), side: row.side, regionIds: row.regionIds, action })))), [data]);
+            .map(action => ({ sourceKey: row.sourceKey, name: learnerRowTitle(row), side: row.side, regionIds: row.regionIds, action })))), [data, explorerMode]);
     const visibleActionLibrary = useMemo(() => actionLibrary.map(entry => ({ ...entry,
         subjects: entry.subjects.filter(subject => (!route.regions.length || subject.regionIds.some(id => route.regions.includes(id)))
           && (!query.trim() || `${entry.label} ${subject.name}`.includes(query.trim()))) })).filter(entry => entry.subjects.length),
@@ -204,17 +205,17 @@ export default function App() {
         setRegionMenuOpen(true);
     }
     function select(id: string) {
-        const row = data?.integration.objects.find(r => r.sourceKey === id && r.inspectionEligible && r.localDisplayEligible
-            && r.routeAudience === (route.audience ?? 'learner'));
-        if (!row)
+        const row = runtimeByKey.get(id);
+        if (!row || !row.inspectionEligible || !row.localDisplayEligible || row.routeAudience !== (route.audience ?? 'learner'))
             return;
         // Search can reach outside a regional filter; whole-body selection never narrows the user's scene.
         const regions = inRegionalRoute(row, data!.integration.objects, route.regions) ? route.regions : [];
         navigate({ regions, selected: id });
     }
     function selectMuscleAction(sourceKey: string, selectedActionId: string) {
-        const row = data?.integration.objects.find(r => r.sourceKey === sourceKey && r.kind === 'muscle'
-            && r.inspectionEligible && r.localDisplayEligible && r.routeAudience === (route.audience ?? 'learner'));
+        const found = runtimeByKey.get(sourceKey);
+        const row = found?.kind === 'muscle' && found.inspectionEligible && found.localDisplayEligible
+            && found.routeAudience === (route.audience ?? 'learner') ? found : undefined;
         const exactAction = row && motionActionOptionsForLearner(row.haConceptId, row.side, row.sourceKey)
             .some(option => option.id === selectedActionId);
         if (!row || !exactAction) return;
@@ -266,7 +267,7 @@ export default function App() {
     }
     function renderNerveRelations(relations: ReturnType<typeof motorRelationsForNerve>, selectedSide: string | null | undefined) {
         const relationItems = relations.map(relation => {
-            const targets = relation.targetSourceKeys.map(key => runtimeObjects.find(row => row.sourceKey === key))
+            const targets = relation.targetSourceKeys.map(key => runtimeByKey.get(key))
                 .filter((row): row is RuntimeStructureRecord => Boolean(row && row.kind === 'muscle' && row.localDisplayEligible && row.inspectionEligible
                     && row.routeAudience === (route.audience ?? 'learner') && (!selectedSide || row.side === selectedSide)));
             if (!targets.length) return null;
@@ -369,7 +370,7 @@ export default function App() {
 
    </aside>
    <section id="atlas-stage" tabIndex={-1} className="study-stage" aria-label={`${title} 학습 장면`}><div className="stage-caption" aria-hidden={!entered}><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{title}</h2><p>회전하고 확대하며 구조를 살펴보세요.</p></div>
-    <WholeBodyViewer homeRevision={homeRevision} viewResetRevision={viewResetRevision} datasetSource={data} onEntered={setEntered} onMotionHostChange={setMotionHost} onMuscleLayerChange={setMuscleLayerEnabled} onBoneLayerChange={setBoneLayerEnabled} onSelectionHiddenChange={setSelectedSourceHidden} regionIds={route.regions} selectedId={route.selected} selectedIds={route.selected ? [route.selected] : []} whole={!route.regions.length} onWholeChange={() => { resetPresentation(); navigate({ regions: [], selected: route.selected }); }} onSelect={select}/>
+    <WholeBodyViewer homeRevision={homeRevision} viewResetRevision={viewResetRevision} datasetSource={data} onEntered={setEntered} onMotionHostChange={setMotionHost} onMuscleLayerChange={setMuscleLayerEnabled} onBoneLayerChange={setBoneLayerEnabled} onSelectionHiddenChange={setSelectedSourceHidden} regionIds={route.regions} selectedId={route.selected} selectedIds={selectedSourceKeys} whole={!route.regions.length} onWholeChange={() => { resetPresentation(); navigate({ regions: [], selected: route.selected }); }} onSelect={select}/>
    </section>
    {(selected || selectedTextNerve) && <details inert={!entered} className="study-details" id="study-details" open={detailsOpen} onToggle={e => setDetailsOpen(e.currentTarget.open)}><summary className="mobile-detail-summary">{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</summary><div ref={detailContent} className="study-detail-content">
     <button className="bone-related-muscle" onClick={() => navigate({ regions: [], selected: null })}>선택 해제</button><h2>{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</h2>{selected && anatomicalPartSubtitle(selected.names.en) && <p className="anatomical-part-subtitle">{anatomicalPartSubtitle(selected.names.en)}</p>}{selected ? <NameRows row={selected}/> : <div className="names-card" aria-label="이름"><div><span>우리말명</span><strong>{selectedTextNerve!.names.koModern}</strong></div><div><span>한자어명 (한글 표기)</span><strong>{selectedTextNerve!.names.koTraditional}</strong></div><div><span>영어명</span><strong>{selectedTextNerve!.names.en}</strong></div></div>}
@@ -399,7 +400,7 @@ export default function App() {
       {nerveLearning && <section><h4>정적 모형에서 관찰하는 주행</h4><p>{nerveLearning.courseContext}</p></section>}
       <p className="quiet-note">표시된 주행은 정적 모형 관찰입니다. 움직임에 따른 신경 변형은 제공하지 않으며, 개인별 분지와 경로에는 차이가 있습니다.</p>
       <p className="nerve-legend"><span><i className="nerve-swatch"/>선택 신경</span><span><i className="motor-swatch"/>관련 근육</span></p>
-      {selected.nerve!.branchKeys.length > 0 && <><h3>연결된 분지</h3>{selected.nerve!.branchKeys.map(key => { const row = data.integration.objects.find(r => r.sourceKey === key); return row ? <button className="bone-related-muscle" key={key} onClick={() => select(key)}>{learnerRowTitle(row)}</button> : null; })}</>}
+      {selected.nerve!.branchKeys.length > 0 && <><h3>연결된 분지</h3>{selected.nerve!.branchKeys.map(key => { const row = runtimeByKey.get(key); return row ? <button className="bone-related-muscle" key={key} onClick={() => select(key)}>{learnerRowTitle(row)}</button> : null; })}</>}
       {selectedNerveConcept && selectedNerveConcept.functionEvidenceClass !== 'relationship_not_linked' && <><h3>운동·감각 관계</h3><p>{nerveFunctionStatus(selectedNerveConcept)}</p></>}
       {selectedNerveRelations.length > 0 && <><h3>지배 근육</h3>{renderNerveRelations(selectedNerveRelations, selected.side)}</>}
       {selectedNerveRelations.length > 0 && <details key={`relation-${selected.sourceKey}`} className="nerve-learning-context"><summary>관계 안내</summary>
@@ -418,7 +419,7 @@ export default function App() {
     <section id="study-structure-panel" className="study-tab-panel" role="tabpanel" aria-labelledby="tab-구조" hidden={tab !== '구조'}>
       {(['origin', 'insertion'] as const).map(role => {
         const text = structureTextForSource(selected.sourceKey, role) || (selected.haConceptId && structureTextForLearner(selected.haConceptId, role));
-        const bones = attachmentBoneKeys(selected.sourceKey, role).map(key => data.integration.objects.find(r => r.sourceKey === key)!).filter(Boolean);
+        const bones = attachmentBoneKeys(selected.sourceKey, role).map(key => runtimeByKey.get(key)!).filter(Boolean);
         return <section className="attachment-section attachment-summary-block" key={role}>
           <h3><i className={role}/>{role === 'origin' ? '기시' : '정지'}<span>{role === 'origin' ? 'ORIGIN' : 'INSERTION'}</span></h3>
           <p>{text || structureUnavailabilityForLearner(role)}</p>

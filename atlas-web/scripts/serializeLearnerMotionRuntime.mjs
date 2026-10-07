@@ -11,7 +11,7 @@ export function serializeLearnerMotionRuntime(projected) {
   const pools = new Map();
   const indices = new Map();
   const expressions = [];
-  const sharedFields = new Set(['members', 'movingStructureIds', 'fixedStructureIds', 'rig', 'staticReference', 'staticBinding', 'poseControl']);
+  const sharedFields = new Set(['members', 'movingStructureIds', 'fixedStructureIds', 'rig', 'staticReference', 'staticBinding', 'poseControl', 'text', 'nodeBindings', 'instanceMatrix']);
   function expression(code) { const token = `__atlas_motion_ref_${expressions.length}__`; expressions.push(code); return token; }
   function intern(name, value) {
     if (!pools.has(name)) { pools.set(name, []); indices.set(name, new Map()); }

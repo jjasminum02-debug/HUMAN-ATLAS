@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "atlas-optimization-hosting-review-v1",
+  "optimizationStatus": "implemented_and_verified",
+  "deploymentStatus": "ready_for_owner_login_not_deployed",
+  "snapshotId": "local-20261007103011979-bf4218bb",
+  "deliveryBasis": "preserved_working_tree_snapshot_not_commit_only",
+  "workingTreeOnlyDependencyCount": 19,
+  "automatic": {
+    "relatedRegressionTests": 77,
+    "hostingAndLocalDeliveryTests": 13,
+    "uniqueTestCount": 90,
+    "exactSourceSideCases": 455,
+    "sameInputRuntimeDeepEquality": true,
+    "typecheck": "passed",
+    "productionBuild": "passed",
+    "learnerDistributionAudit": "passed",
+    "syncExecutionCheck": "passed_no_writes"
+  },
+  "browser": {
+    "origin": "http://127.0.0.1:5184",
+    "package": "exact encoded upload directory, loopback preview",
+    "measuredViewports": [
+      {
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "width": 1024,
+        "height": 768
+      },
+      {
+        "width": 390,
+        "height": 844
+      }
+    ],
+    "checks": [
+      "compressed anatomy and animation GLB load",
+      "default structure card",
+      "vertical function list",
+      "left rectus femoris knee context and loop",
+      "reclick smooth rest reaches zero and releases motion context",
+      "scrub holds selected pose",
+      "muscle layer off blocks replay and restores zero",
+      "lazy action explorer opens 21 action categories and exact right levator selector",
+      "dorsal scapular nerve right side and related right rhomboid major/minor and levator links",
+      "tablet collapsed card reopens above desktop breakpoint",
+      "one canvas",
+      "no horizontal page overflow",
+      "390 view controls within viewport"
+    ],
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "realIosDeviceTested": false,
+    "screenshots": [
+      {
+        "path": "motion-1440.jpg",
+        "format": "JPEG",
+        "width": 1440,
+        "height": 900,
+        "sha256": "56ac403e0661cef1fb540f00ac006be102ea87f96c33fd246903de256b4590d2"
+      },
+      {
+        "path": "compact-1024.jpg",
+        "format": "JPEG",
+        "width": 1024,
+        "height": 768,
+        "sha256": "976487e3fbe5ca81e8a17be09c46237c04ae9b47c30a8b0293c97134563f1bca"
+      },
+      {
+        "path": "nerve-1440.jpg",
+        "format": "JPEG",
+        "width": 1440,
+        "height": 900,
+        "sha256": "2d77875f30c2e96b42ddb4c80ad509d34f7459a99eabb5b8030af4a25cff9b25"
+      },
+      {
+        "path": "nerve-390.jpg",
+        "format": "JPEG",
+        "width": 390,
+        "height": 844,
+        "sha256": "946ae9d6ce8608348f306ae582e8e1e5549855ca00eb6d63512ab4f369989854"
+      }
+    ]
+  },
+  "preserved": {
+    "targets": 542,
+    "memberships": 563,
+    "regions": 12,
+    "geometryMotionProjectionFilesUnchanged": 94,
+    "sourceOnly": true,
+    "publicRedistribution": "held",
+    "humanReview": "not_performed",
+    "otherTaskRecordsUnchanged": true,
+    "upstreamModelsUnchanged": true
+  },
+  "limitations": [
+    "Browser viewport testing is not physical iPhone or iPad testing.",
+    "Node microbenchmarks are not browser frame-rate or GPU measurements.",
+    "GPU/VRAM/total-process memory were not measured.",
+    "Cloudflare origin headers and permanent public URL require deployment; local preview is not production verification.",
+    "Main JS chunk warning remains; no budget increase or geometry quality reduction.",
+    "The reviewed working-tree delivery includes 19 existing WIP dependencies; this is not a clean-commit-only delivery.",
+    "All 186 code files were inventoried; behavioral review focused on runtime, renderer, selection, animation, generation and delivery paths. This does not establish exhaustive anatomy acceptance."
+  ]
+}

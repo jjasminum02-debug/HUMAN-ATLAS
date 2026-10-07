@@ -10,7 +10,8 @@ import type { LearnerFieldProjection } from "../domain/aiEvidence";
 import { learnerStructureUnavailability } from "../domain/learnerStructureSourceContent";
 import { learnerActionAppliesToSide } from "../domain/learnerActionText";
 import { resolveLearnerMotionCandidate, type LearnerMotionActionOption, type LearnerActionText } from "../domain/motionLearning.ts";
-import { conceptForExactNerveName, relationsForNerve } from "../domain/nerveRelations.ts";
+import { relationsForNerve } from "../domain/nerveRelations.ts";
+import { createLearnerLookupIndex } from "../domain/learnerLookupIndex.ts";
 
 type LearnerCardRuntime = {
   schemaVersion: "learner-card-runtime-v1";
@@ -50,6 +51,11 @@ type LearnerNerveGraph = {
 const nativeNerveGraph = learnerNerveGraph as LearnerNerveGraph;
 const nerveGraph: LearnerNerveGraph = { ...nativeNerveGraph,
   concepts: withNerveDisplayNames(nativeNerveGraph.concepts, nerveDisplayNames) };
+const lookups = createLearnerLookupIndex(cardRuntime.names, cardRuntime.actions, nerveGraph.concepts, nerveGraph.motorRelations);
+const nerveSearchEntries = nerveGraph.concepts.map(concept => learnerSearchEntry(
+  concept.key, concept.names.koModern,
+  [concept.names.koTraditional, concept.names.en, concept.names.latin, ...concept.searchTerms],
+));
 type LearnerMotionRuntime = {
   schemaVersion: "learner-motion-runtime-v1";
   wave1Actions: Record<string, LearnerMotionActionOption[]>;
@@ -67,7 +73,7 @@ const motionRuntime = learnerMotionRuntime as unknown as LearnerMotionRuntime;
 export const vocabulary = cardRuntime.names;
 
 export function nameFor(catalog: PilotCatalog, id: string) {
-  const entry = vocabulary.find((row) => row.id === id);
+  const entry = lookups.namesById.get(id);
   const terms = learnerVisibleTerms(displayTerms(catalog, id));
   return learnerNameProjection(id, entry ?? {}, {
     korean: terms.find((term) => term.language === "ko")?.text,
@@ -83,7 +89,7 @@ export function learningConcepts(catalog: PilotCatalog) {
 export function findMuscles(catalog: PilotCatalog, query: string) {
   const entries: SearchEntry[] = learningConcepts(catalog).map((concept) => {
     const names = nameFor(catalog, concept.id);
-    const custom = vocabulary.find((row) => row.id === concept.id);
+    const custom = lookups.namesById.get(concept.id);
     const terms = learnerVisibleTerms(displayTerms(catalog, concept.id));
     return learnerSearchEntry(concept.id, names.label, [names.koTraditional, names.koModern, names.en, ...custom?.aliases ?? [],
       ...terms.flatMap((term) => typeof term.text === "string" ? [term.text] : [])]);
@@ -100,8 +106,8 @@ export function motionActionOptionsForLearner(conceptId: string | null, selected
     ? (motionRuntime.wave1Actions[sourceKey] ?? []).filter(row =>
       !selectedSide || row.sideApplicability === "bilateral" || row.sideApplicability === "midline" || row.sideApplicability === selectedSide)
     : [];
-  const displayRows = cardRuntime.actions.filter((row) => row.conceptId === conceptId
-    && learnerActionAppliesToSide(row.sideApplicability, selectedSide)).map((row) => {
+  const displayRows = (lookups.actionsByConcept.get(conceptId ?? '') ?? []).filter((row) =>
+    learnerActionAppliesToSide(row.sideApplicability, selectedSide)).map((row) => {
     return {
       id: row.key,
       label: row.label,
@@ -158,23 +164,18 @@ export function nerveLearningForLearner(englishName: string) {
 
 /** Nerve terms are searchable aliases; evidence and review metadata stay in work/evidence. */
 export function nerveConceptsForLearner(query = "") {
-  const entries: SearchEntry[] = nerveGraph.concepts.map(concept => learnerSearchEntry(
-    concept.key,
-    concept.names.koModern,
-    [concept.names.koTraditional, concept.names.en, concept.names.latin, ...concept.searchTerms],
-  ));
-  return searchEntries(entries, query).flatMap(match => {
-    const concept = nerveGraph.concepts.find(row => row.key === match.entry.id);
+  return searchEntries(nerveSearchEntries, query).flatMap(match => {
+    const concept = lookups.nervesByKey.get(match.entry.id);
     return concept ? [{ concept, approximate: match.approximate }] : [];
   });
 }
 
 export function nerveConceptForLearner(key: string) {
-  return nerveGraph.concepts.find(row => row.key === key) ?? null;
+  return lookups.nervesByKey.get(key) ?? null;
 }
 
 export function nerveConceptForSourceName(englishName: string) {
-  return conceptForExactNerveName(nerveGraph.concepts, englishName);
+  return lookups.nerveForExactName(englishName);
 }
 
 export function nerveNamesForSource(englishName: string) {
@@ -183,11 +184,11 @@ export function nerveNamesForSource(englishName: string) {
 
 /** Both card directions read the same exact relation rows and preserve side/scope. */
 export function motorRelationsForSource(sourceKey: string): LearnerMotorRelation[] {
-  return nerveGraph.motorRelations.filter(row => row.targetSourceKeys.includes(sourceKey));
+  return [...lookups.relationsBySource.get(sourceKey) ?? []];
 }
 
 export function motorRelationsForNerve(nerveKey: string, selectedSide?: string | null): LearnerMotorRelation[] {
-  return relationsForNerve(nerveGraph.motorRelations, nerveKey, selectedSide);
+  return relationsForNerve(lookups.relationsByNerve.get(nerveKey) ?? [], nerveKey, selectedSide);
 }
 
 export function nerveGraphForLearner() {

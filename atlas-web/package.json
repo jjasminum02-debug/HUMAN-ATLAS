@@ -38,7 +38,10 @@
     "local:prepare": "node --experimental-strip-types scripts/prepareLocalDelivery.ts",
     "local:start": "node scripts/runLocalDelivery.mjs",
     "local:verify": "node scripts/runLocalDelivery.mjs --verify-only",
-    "test:local-delivery": "node --test scripts/localDelivery.test.mjs"
+    "test:local-delivery": "node --test scripts/localDelivery.test.mjs",
+    "hosted:prepare": "node scripts/prepareHostedDelivery.mjs",
+    "hosted:preview": "node scripts/previewHostedDelivery.mjs",
+    "test:hosted-delivery": "node --test scripts/hostedPackage.test.mjs scripts/localDelivery.test.mjs"
   },
   "dependencies": {
     "react": "19.3.0",

@@ -30,3 +30,15 @@ test('a later family can reuse earlier pools without declaration-order errors', 
 test('reserved strings fail instead of being interpreted as control references', () => {
   assert.throws(() => decoded({ text: '__atlas_motion_ref_0__' }), /Reserved/);
 });
+test('shared text, matrices and node bindings preserve every nested value across selectors', () => {
+  const text = { label: '대표 작용', explanation: '같은 근육의 실제 작용 설명', postureConditions: ['준비 자세'] };
+  const matrix = [1,0,0,0,0,1,0,0,0,0,1,0,.5,.3,0,1];
+  const bindings = [{ nodeId: 'left-mesh', role: 'muscle_surface' }];
+  const input = { actions: { left: [{ text, instanceMatrix: matrix, rig: { id: 'a', nodeBindings: bindings } }],
+    right: [{ text: structuredClone(text), instanceMatrix: [...matrix], rig: { id: 'b', nodeBindings: structuredClone(bindings) } }] } };
+  assert.deepEqual(decoded(input), input);
+  const output = serializeLearnerMotionRuntime(input);
+  assert.match(output, /const motion_text =/);
+  assert.match(output, /const motion_instanceMatrix =/);
+  assert.match(output, /const motion_nodeBindings =/);
+});
