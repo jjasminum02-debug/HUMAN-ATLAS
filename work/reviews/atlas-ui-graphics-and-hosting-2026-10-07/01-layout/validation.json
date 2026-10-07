@@ -18,14 +18,13 @@
   "outputs": {
     "atlas-web/src/ui/App.tsx": "489d140cbde7e25f535959a082709c5cc5e4f663d3bda9a86171d7ffb780e7f7",
     "atlas-web/src/ui/atlasShell.css": "782170922ef439db859ee3770ece4f89f3cea1eb86df2a6b6ad1b9531554d83f",
-    "atlas-web/src/viewer/wholeBody/WholeBodyViewer.tsx": "3712800581da9b33dafad7e2570d3f3e18f4d46993d5d506d5b5fb8a6291d6f6",
+    "atlas-web/src/viewer/wholeBody/WholeBodyViewer.tsx": "07b1853188bf7d3be508b362e902b6f87bfa167619d9b60e04ae355f02940341",
     "atlas-web/src/viewer/wholeBody/AnatomySceneController.ts": "b2ef17f7c7835f91368ea9605917f2cfad09b776ce0460c83dff37828edff2e9",
     "atlas-web/src/viewer/wholeBody/wholeBody.css": "0e63cda1c655116daa870d343b8d3733c9624ac555d7c438bc13d979d045578c",
     "work/EXECUTION.json": "217a8cee5253222a4d4098a8b4a6c7974ac386248a9204d3b2c459c1faf9dc39",
     "work/product-acceptance.json": "d2003d6b101c3f0a6dd5bc91f7c0ae709baa9688673e99537935e0be82d26ce3"
   },
   "unchangedInputs": [
-    "atlas-web/src/viewer/wholeBody/WholeBodyViewer.tsx",
     "atlas-web/src/viewer/wholeBody/AnatomySceneController.ts",
     "atlas-web/src/viewer/wholeBody/wholeBody.css",
     "work/EXECUTION.json",
@@ -39,12 +38,13 @@
     },
     "typecheck": {
       "passed": true,
-      "evidence": "typecheck.txt"
+      "evidence": "typecheck-resize-fix.txt"
     },
     "generatedRuntimeFreshness": true,
     "productionAndLocalBuild": {
       "passed": true,
-      "evidence": "build-local.txt"
+      "evidence": "build-local-resize-fix.txt",
+      "rerunReason": "New confirmed resize observer defect repaired after initial checks; no repeated broad suite."
     },
     "syncExecutionCheck": {
       "passed": true,
@@ -89,7 +89,13 @@
     "flows": "after/flow-checks.json",
     "delivery": "after/delivery-check.json",
     "finalDeliveryConsoleErrors": 0,
-    "resolvedDevelopmentErrors": 2
+    "resolvedDevelopmentErrors": 2,
+    "resizeObserverRepair": {
+      "reason": "Observed ResizeObserver undelivered-notification errors in Vite client, including before layout editing. Deferred and coalesced toolbar writes outside observer delivery and skipped unchanged values; no new RAF.",
+      "postFixViewportChanges": 6,
+      "postFixViteUnhandledErrors": 0,
+      "evidence": "after/observer-check.json"
+    }
   },
   "layoutMetrics": [
     {
@@ -524,6 +530,15 @@
       "captureFormat": "JPEG",
       "artifactFormat": "PNG",
       "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
+    },
+    {
+      "path": "after/observer-fix-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "03d83b6ba52f875782f3f5ebad47611c2b8cc093112f9168dea73448969f68ca",
+      "captureFormat": "JPEG",
+      "artifactFormat": "PNG",
+      "conversion": "Pixel-preserving JPEG decode to PNG, no visual edits."
     }
   ],
   "excludedImages": [
@@ -542,8 +557,8 @@
   ],
   "delivery": {
     "url": "http://127.0.0.1:5184/",
-    "snapshot": "atlas-web/dist-local/local-20261007134505825-bf4218bb/snapshot.json",
-    "manifestSha256": "a5eb7a0fa2058cc2774b9e8ac1928813266925f677365bf76c5799812b995dac",
+    "snapshot": "atlas-web/dist-local/local-20261007135726367-bf4218bb/snapshot.json",
+    "manifestSha256": "d5fec6d10bef77d1d3511321f409835163ab40dbc8fbc1ebd2bb4ea12f5fa1d8",
     "basis": "preserved_working_tree_snapshot_not_commit_only",
     "workingTreeDependencies": [
       {
@@ -643,26 +658,10 @@
         "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
       },
       {
-        "path": "atlas-web/src/ui/App.tsx",
-        "bytes": 44499,
-        "sha256": "489d140cbde7e25f535959a082709c5cc5e4f663d3bda9a86171d7ffb780e7f7",
-        "committedSha256": "f3440f61db7b34b9cdc752e5e3a99483fb9804c4f0a0e0f4cc09e93d13afe283",
-        "workingTreeOnly": true,
-        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
-      },
-      {
         "path": "atlas-web/src/ui/MotionLearningPanel.tsx",
         "bytes": 20123,
         "sha256": "2364bd577e0b57dc3f7c6d878c3375200bc0be25f355785cafced5f851243d93",
         "committedSha256": "86303d90a171d0b3ddd3fcfff5edfb7319649c0e2ab28508812fa6db7ef1f01c",
-        "workingTreeOnly": true,
-        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
-      },
-      {
-        "path": "atlas-web/src/ui/atlasShell.css",
-        "bytes": 25377,
-        "sha256": "782170922ef439db859ee3770ece4f89f3cea1eb86df2a6b6ad1b9531554d83f",
-        "committedSha256": "0a7c963324f1e81714bdb74626d75a60ca8377c716f536b56440c283df05cbce",
         "workingTreeOnly": true,
         "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
       },
@@ -679,6 +678,14 @@
         "bytes": 34379,
         "sha256": "ca1bcfb9f3ceebca8121c76e881630dc92b80db9365539cef35f09bc5c982baf",
         "committedSha256": "42624baf87182f7df55cfa2f513ca5e2736bf9dccb4fe9e50bdc2a6633dcdf72",
+        "workingTreeOnly": true,
+        "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
+      },
+      {
+        "path": "atlas-web/src/viewer/wholeBody/WholeBodyViewer.tsx",
+        "bytes": 12550,
+        "sha256": "07b1853188bf7d3be508b362e902b6f87bfa167619d9b60e04ae355f02940341",
+        "committedSha256": "3712800581da9b33dafad7e2570d3f3e18f4d46993d5d506d5b5fb8a6291d6f6",
         "workingTreeOnly": true,
         "ownership": "preserved_existing_WIP_owner_not_assigned_by_T40"
       }

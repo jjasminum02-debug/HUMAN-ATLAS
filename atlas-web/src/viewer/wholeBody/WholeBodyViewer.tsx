@@ -15,11 +15,21 @@ export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datas
   useEffect(() => {
     const element = tools.current;
     if (!element) return;
-    // Account for wrapped controls without React state changes or recreating the scene.
-    const measure = () => element.parentElement?.style.setProperty('--view-tools-height', `${element.getBoundingClientRect().height}px`);
-    const observer = new ResizeObserver(measure);
+    // Defer layout writes outside ResizeObserver delivery; keep the shared scene clock unchanged.
+    let pending: ReturnType<typeof setTimeout> | undefined;
+    const measure = () => {
+      pending = undefined;
+      const parent = element.parentElement;
+      const height = `${element.getBoundingClientRect().height}px`;
+      if (parent && parent.style.getPropertyValue('--view-tools-height') !== height) {
+        parent.style.setProperty('--view-tools-height', height);
+      }
+    };
+    const observer = new ResizeObserver(() => {
+      if (pending === undefined) pending = setTimeout(measure, 0);
+    });
     observer.observe(element); measure();
-    return () => observer.disconnect();
+    return () => { observer.disconnect(); clearTimeout(pending); };
   }, []);
   const controller = useRef<AnatomySceneController | DatasetSceneAdapter | null>(null);
   const previousView = useRef<{ regionKey: string; selectedId: string | null; resetRevision: number } | null>(null);
