@@ -68,6 +68,12 @@ export default function App() {
     const info = useRef<HTMLDialogElement>(null);
     const regionPicker = useRef<HTMLDivElement>(null);
     const regionPickerTrigger = useRef<HTMLButtonElement>(null);
+    const regionLeaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const detailContent = useRef<HTMLDivElement>(null);
+    const previousDetailSubject = useRef<string | null>(null);
+    useEffect(() => () => {
+        if (regionLeaveTimer.current) clearTimeout(regionLeaveTimer.current);
+    }, []);
     useEffect(() => {
         // Desktop has no collapse control; restore its card when leaving the
         // narrow layout after the learner has collapsed the mobile card.
@@ -106,6 +112,22 @@ export default function App() {
             : [] })) : [], [data, query, route.audience]);
     const selected = data?.integration.objects.find(r => r.sourceKey === route.selected);
     const selectedTextNerve = textNerveKey ? nerveConceptForLearner(textNerveKey) : null;
+    const detailSubject = selected?.sourceKey ?? selectedTextNerve?.key ?? null;
+    useEffect(() => {
+        const previous = previousDetailSubject.current;
+        previousDetailSubject.current = detailSubject;
+        // Keep the card/player mounted when switching structures. Only its presentation fades.
+        if (!previous || !detailSubject || previous === detailSubject || !detailContent.current) return;
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (reducedMotion.matches) return;
+        const animation = detailContent.current.animate(
+            [{ opacity: .25, transform: 'translateY(5px)' }, { opacity: 1, transform: 'translateY(0)' }],
+            { duration: 280, easing: 'cubic-bezier(.4,0,.2,1)' },
+        );
+        const stop = () => { if (reducedMotion.matches) animation.cancel(); };
+        reducedMotion.addEventListener('change', stop);
+        return () => { animation.cancel(); reducedMotion.removeEventListener('change', stop); };
+    }, [detailSubject]);
     const runtimeObjects = data?.integration.objects ?? [];
     const selectedNerveConcept = selected?.kind === 'nerve' ? nerveConceptForSourceName(selected.names.en) : null;
     const relatedMuscles = useMemo(() => {
@@ -298,10 +320,16 @@ export default function App() {
     <button className="explore-close" onClick={() => setExploreOpen(false)}>탐색 닫기</button>
     <div className="region-picker" ref={regionPicker}
       onPointerEnter={event => {
+        if (regionLeaveTimer.current) clearTimeout(regionLeaveTimer.current);
         if (event.pointerType === 'mouse' && window.matchMedia('(any-hover: hover) and (any-pointer: fine)').matches) setRegionMenuOpen(true);
       }}
       onPointerLeave={event => {
-        if (event.pointerType === 'mouse' && !regionPicker.current?.contains(document.activeElement)) setRegionMenuOpen(false);
+        if (event.pointerType === 'mouse' && !regionPicker.current?.contains(document.activeElement)) {
+          if (regionLeaveTimer.current) clearTimeout(regionLeaveTimer.current);
+          regionLeaveTimer.current = setTimeout(() => {
+            if (!regionPicker.current?.contains(document.activeElement)) setRegionMenuOpen(false);
+          }, 140);
+        }
       }}>
       <button ref={regionPickerTrigger} type="button" className="region-picker-trigger" aria-expanded={regionMenuOpen}
         aria-controls="atlas-region-menu" onClick={() => {
@@ -310,12 +338,15 @@ export default function App() {
         }}>
         부위 탐색 · {regionLabel} <span aria-hidden="true">▾</span>
       </button>
-      {regionMenuOpen && <div id="atlas-region-menu" className="region-picker-menu" aria-label="전신 및 12개 부위">
+      <div id="atlas-region-menu" className="region-picker-disclosure" data-open={regionMenuOpen}
+        inert={!regionMenuOpen} aria-hidden={!regionMenuOpen}>
+       <div className="region-picker-clip"><div className="region-picker-menu" aria-label="전신 및 12개 부위">
         <button type="button" aria-pressed={!route.regions.length} onClick={() => chooseRegion(null)}>전신</button>
         {navigation.categories.map(c => <button type="button" key={c.id} aria-pressed={route.regions.includes(c.id)}
           onClick={event => chooseRegion(c.id, event.shiftKey)}>{c.labelKo}</button>)}
         <p className="region-combine-hint">한 부위씩 보기 · Shift + 부위 선택으로 함께 보기</p>
-      </div>}
+       </div></div>
+      </div>
     </div>
     <div className="explorer-mode" role="group" aria-label="탐색 방법"><button aria-pressed={explorerMode === 'structures'} onClick={() => setExplorerMode('structures')}>구조 찾기</button><button aria-pressed={explorerMode === 'actions'} onClick={() => { setExplorerMode('actions'); updateQuery(''); }}>근육 작용 찾기</button></div>
 
@@ -342,7 +373,7 @@ export default function App() {
    <section id="atlas-stage" tabIndex={-1} className="study-stage" aria-label={`${title} 학습 장면`}><div className="stage-caption" aria-hidden={!entered}><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{title}</h2><p>회전하고 확대하며 구조를 살펴보세요.</p></div>
     <WholeBodyViewer homeRevision={homeRevision} viewResetRevision={viewResetRevision} datasetSource={data} onEntered={setEntered} onMotionHostChange={setMotionHost} onMuscleLayerChange={setMuscleLayerEnabled} onBoneLayerChange={setBoneLayerEnabled} onSelectionHiddenChange={setSelectedSourceHidden} regionIds={route.regions} selectedId={route.selected} selectedIds={route.selected ? [route.selected] : []} whole={!route.regions.length} onWholeChange={() => { resetPresentation(); navigate({ regions: [], selected: route.selected }); }} onSelect={select}/>
    </section>
-   {(selected || selectedTextNerve) && <details inert={!entered} className="study-details" id="study-details" open={detailsOpen} onToggle={e => setDetailsOpen(e.currentTarget.open)}><summary className="mobile-detail-summary">{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</summary><div className="study-detail-content">
+   {(selected || selectedTextNerve) && <details inert={!entered} className="study-details" id="study-details" open={detailsOpen} onToggle={e => setDetailsOpen(e.currentTarget.open)}><summary className="mobile-detail-summary">{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</summary><div ref={detailContent} className="study-detail-content">
     <button className="bone-related-muscle" onClick={() => navigate({ regions: [], selected: null })}>선택 해제</button><h2>{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</h2>{selected && anatomicalPartSubtitle(selected.names.en) && <p className="anatomical-part-subtitle">{anatomicalPartSubtitle(selected.names.en)}</p>}{selected ? <NameRows row={selected}/> : <div className="names-card" aria-label="이름"><div><span>우리말명</span><strong>{selectedTextNerve!.names.koModern}</strong></div><div><span>한자어명 (한글 표기)</span><strong>{selectedTextNerve!.names.koTraditional}</strong></div><div><span>영어명</span><strong>{selectedTextNerve!.names.en}</strong></div></div>}
     {selected?.names.en === 'Rotatores' && route.regions.length > 0 && !route.regions.includes('back') && <p className="quiet-note">선택한 돌림근 모형은 목에만 한정되지 않고 척추를 따라 이어지는 전체 묶음입니다.</p>}
     {selected && <><div className="names-card"><div><span>{selected.kind === 'bone' ? '뼈' : selected.kind === 'nerve' ? '신경' : '근육'}</span><strong>{selected.side === 'left' ? '왼쪽' : selected.side === 'right' ? '오른쪽' : '좌우 구분 없음'}</strong></div></div>

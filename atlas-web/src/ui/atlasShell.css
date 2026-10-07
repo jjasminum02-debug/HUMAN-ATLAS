@@ -30,6 +30,11 @@
 .atlas-shell .region-structure-list button small { font-size: 10px; margin-top: 4px; }
 .atlas-shell .quiet-note { font-size: 12px; line-height: 1.8; color: #8a948f; }
 .atlas-shell .study-details { position: absolute; z-index: 3; top: 105px; right: 24px; width: 310px; max-height: calc(100% - 130px); border-radius: 22px; border: 1px solid #fff; background: #fffffff5; box-shadow: 0 12px 45px #334b4010; padding: 0; overflow: auto; }
+.atlas-shell .study-details { animation: detail-panel-reveal 420ms cubic-bezier(.4,0,.2,1) both; }
+@keyframes detail-panel-reveal { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: translateX(0); } }
+@media(max-width:760px) {
+  @keyframes detail-panel-reveal { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+}
 .atlas-shell .study-detail-content { padding: 24px; }
 .atlas-shell .study-detail-content > h2 { font-size: 26px; letter-spacing: -.04em; margin: 12px 0 18px; }
 .atlas-shell .names-card { padding: 0; border: 0; background: none; gap: 10px; }
@@ -177,9 +182,10 @@
 .atlas-shell .region-picker-trigger:focus-visible,
 .atlas-shell .region-picker-menu button:focus-visible,
 .atlas-shell .action-choice-row:focus-visible { outline: 3px solid #d49a36; outline-offset: 2px; }
-.atlas-shell .region-picker-menu { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 3px; max-height: min(38dvh, 300px); overflow-y: auto; overscroll-behavior: contain; margin-top: 5px; padding: 5px; border: 1px solid #dfe8e2; border-radius: 12px; background: #fff; box-shadow: 0 8px 24px #314b4018; animation: region-picker-reveal 220ms cubic-bezier(.2,.75,.25,1) both; transform-origin: top center; }
-@keyframes region-picker-reveal { from { opacity: 0; transform: translateY(-7px) scaleY(.97); } to { opacity: 1; transform: translateY(0) scaleY(1); } }
-@media(prefers-reduced-motion: reduce) { .atlas-shell .region-picker-menu { animation: none; } }
+.atlas-shell .region-picker-disclosure { display: grid; grid-template-rows: 0fr; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: grid-template-rows 440ms cubic-bezier(.4,0,.2,1), opacity 320ms cubic-bezier(.4,0,.2,1), transform 440ms cubic-bezier(.4,0,.2,1); }
+.atlas-shell .region-picker-disclosure[data-open=true] { grid-template-rows: 1fr; opacity: 1; transform: translateY(0); pointer-events: auto; }
+.atlas-shell .region-picker-clip { min-height: 0; overflow: hidden; }
+.atlas-shell .region-picker-menu { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 3px; max-height: min(38dvh, 300px); overflow-y: auto; overscroll-behavior: contain; margin-top: 5px; padding: 5px; border: 1px solid #dfe8e2; border-radius: 12px; background: #fff; box-shadow: 0 8px 24px #314b4018; }
 .atlas-shell .region-picker-menu button { min-width: 0; min-height: 38px; padding: 7px 8px; border: 1px solid transparent; border-radius: 8px; background: #fff; color: #596d64; font: inherit; font-size: 11px; text-align: left; cursor: pointer; }
 .atlas-shell .region-picker-menu button[aria-pressed=true] { border-color: #b9d0c5; background: #e8f1ed; color: #356b5e; font-weight: 700; }
 .atlas-shell .region-picker-menu .region-combine-hint { grid-column: 1/-1; margin: 2px 4px; padding: 3px 2px; font-size: 9px; }
