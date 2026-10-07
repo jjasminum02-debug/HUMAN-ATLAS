@@ -1,0 +1,90 @@
+{
+  "stage": "03-materials",
+  "status": "passed",
+  "productReadiness": "local_supported_materials_ready",
+  "contentCompleteness": "partial",
+  "unresolvedProductBlockers": [],
+  "knownContentGaps": [
+    "No eligible separately typed tendon surface in current supported runtime; no fake muscle-tendon boundary or fibers painted",
+    "Existing incomplete motion, anatomy, nerve pose and attachment footprints remain unchanged"
+  ],
+  "sourceCounts": {
+    "muscle": 472,
+    "accessory": 288,
+    "bone": 213,
+    "nerve": 195
+  },
+  "eligibleSourceRows": {
+    "muscle": 472,
+    "bone": 213,
+    "nerve": 195
+  },
+  "addedGeometry": 0,
+  "addedMotionAssets": 0,
+  "addedBindings": 0,
+  "contracts": "31/31 plus targeted camera tests 3/3 after discovered preset/fit defect",
+  "typecheck": "passed",
+  "build": "passed; prepareLocalDelivery performs freshness checks and Vite production build",
+  "buildWarning": "JS chunk exceeds 500 kB guidance; budget unchanged",
+  "revalidationReason": "Final camera target repair required typecheck/camera tests and rebuilt frozen snapshot; material-only browser evidence reused by impact analysis",
+  "viewports": [
+    [
+      390,
+      844
+    ],
+    [
+      1024,
+      768
+    ],
+    [
+      1440,
+      900
+    ]
+  ],
+  "physicalDeviceTests": false,
+  "singleCanvas": true,
+  "overflow": false,
+  "depthTestAllSampledStates": true,
+  "materialStates": "static, selected, translucent, context, action, return, held, hidden/layer-off checked; hover parameters covered by contracts only",
+  "homeCPUComparison": "same camera, source assets, pixelRatio 1, counts and buffer bytes",
+  "geometryAndDataReuse": "94 non-app URI/bytes/SHA identical; no new texture, AO, shadow or postprocess pass",
+  "authorityHashes": {
+    "work/EXECUTION.json": {
+      "before": "217a8cee5253222a4d4098a8b4a6c7974ac386248a9204d3b2c459c1faf9dc39",
+      "after": "217a8cee5253222a4d4098a8b4a6c7974ac386248a9204d3b2c459c1faf9dc39"
+    },
+    "work/product-acceptance.json": {
+      "before": "d2003d6b101c3f0a6dd5bc91f7c0ae709baa9688673e99537935e0be82d26ce3",
+      "after": "d2003d6b101c3f0a6dd5bc91f7c0ae709baa9688673e99537935e0be82d26ce3"
+    }
+  },
+  "inputHead": "1de6d26b7110acce12e6bfb369f117c6a3f43cec",
+  "outputSourceHashes": {
+    "atlas-web/src/viewer/anatomyMaterials.ts": "f864abac858d194c54f4c6617e963cc89aaacb4bfbb58d3705ad3389c27e6c67",
+    "atlas-web/src/viewer/anatomyMaterials.test.ts": "c2883db0089777231ea0b816f981da962847f18f49bf458d7406353cb6b72bee",
+    "atlas-web/src/viewer/datasets/DatasetResources.ts": "7553ae1a1ebc5933408c03ae9dd5a07d63112128a83b024cb375c6a1970e22ec",
+    "atlas-web/src/viewer/datasets/DatasetSceneAdapter.ts": "a9a952194f450e979ac5af0ae742db5f73c5122d723a380f286b38135fdbb8ba",
+    "atlas-web/src/viewer/datasets/presentation.ts": "61b853cb2d77a488b197814c314008b2a475d85f3ef8815958b133ae769762d6",
+    "atlas-web/src/viewer/datasets/observation.test.ts": "e032f51b38b149a50b64a680fe95639198e951020917b2077e34c6cc67336b0d",
+    "atlas-web/src/viewer/wholeBody/AnatomySceneController.ts": "75ad1c2b24933165bb115d892d3d62ae15ca32338ed747646c3312430a500839",
+    "atlas-web/src/ui/atlasShell.css": "0ec98c49b3a97540d880cb79208ed2bfe42f5c5870e238fff46bafd446758044"
+  },
+  "snapshot": {
+    "snapshotDirectory": "local-20261007164328940-bf4218bb",
+    "manifestSha256": "3a7c7166484576a211a88870d6d77de85b50f83d995963433eca0a3bd8438ac9"
+  },
+  "sourceAssetsStatus": "source-only/local selection/public held/humanReview not_performed preserved",
+  "preservedDenominators": "542 targets / 563 memberships / 12 regions; HA130; history163",
+  "evidence": [
+    "browser-validation.json",
+    "matched-profile.json",
+    "performance-metrics.json",
+    "delivery-asset-comparison.json",
+    "screenshots.json",
+    "contract-tests.txt",
+    "camera-repair-tests.txt",
+    "local-build-final.txt",
+    "build-audit-final.txt",
+    "final-production-validation.json"
+  ]
+}

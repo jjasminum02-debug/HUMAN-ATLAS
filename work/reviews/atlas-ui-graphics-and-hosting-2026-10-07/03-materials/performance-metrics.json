@@ -1,0 +1,136 @@
+{
+  "measured": "DEV performance.now around renderer.render; frame intervals sampled separately; no GPU timer",
+  "matchedHome": {
+    "before": {
+      "calls": 672,
+      "triangles": 486184,
+      "materials": 2,
+      "shaderPrograms": 1,
+      "geometryBuffersBytes": 6825150,
+      "renderCpuP50Ms": 2.3999998569488525,
+      "renderCpuP95Ms": 3.299999952316284,
+      "frameIntervalP50Ms": 16.600000000002183,
+      "frameIntervalP95Ms": 18.600000000002183,
+      "renderSampleCount": 90,
+      "frameSampleCount": 240,
+      "pixelRatio": 1,
+      "camera": [
+        0.7278177102021592,
+        0.8561931072709237,
+        3.427701106316575
+      ],
+      "target": [
+        0,
+        0.8561931072709235,
+        0.0035879926878309566
+      ]
+    },
+    "after": {
+      "calls": 672,
+      "triangles": 486184,
+      "materials": 2,
+      "shaderPrograms": 1,
+      "geometryBuffersBytes": 6825150,
+      "renderCpuP50Ms": 1.4000000953674316,
+      "renderCpuP95Ms": 2.5999999046325684,
+      "frameIntervalP50Ms": 16.700000000000728,
+      "frameIntervalP95Ms": 18.700000000000728,
+      "renderSampleCount": 90,
+      "frameSampleCount": 240,
+      "pixelRatio": 1,
+      "camera": [
+        0.7278177102021592,
+        0.8561931072709237,
+        3.427701106316575
+      ],
+      "target": [
+        0,
+        0.8561931072709235,
+        0.0035879926878309566
+      ]
+    }
+  },
+  "matchedViewport": [
+    1440,
+    900
+  ],
+  "homeWarmTransfers": {
+    "before": [
+      {
+        "encodedBytes": 0,
+        "transferBytes": 0,
+        "uri": "/__atlas/datasets/za-c7010a9/a3e9f203fbca24358d5fb16cd8d6c62087045cc7254a80241602f498d696ab72.glb"
+      },
+      {
+        "encodedBytes": 0,
+        "transferBytes": 0,
+        "uri": "/__atlas/datasets/za-c7010a9/46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e.glb"
+      },
+      {
+        "encodedBytes": 654788,
+        "transferBytes": 300,
+        "uri": "/__atlas/datasets/za-c7010a9/a3e9f203fbca24358d5fb16cd8d6c62087045cc7254a80241602f498d696ab72.glb"
+      },
+      {
+        "encodedBytes": 4338208,
+        "transferBytes": 300,
+        "uri": "/__atlas/datasets/za-c7010a9/46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e.glb"
+      },
+      {
+        "encodedBytes": 4058668,
+        "transferBytes": 300,
+        "uri": "/__atlas/datasets/za-c7010a9/a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff.glb"
+      }
+    ],
+    "after": [
+      {
+        "encodedBytes": 0,
+        "transferBytes": 0,
+        "uri": "/__atlas/datasets/za-c7010a9/a3e9f203fbca24358d5fb16cd8d6c62087045cc7254a80241602f498d696ab72.glb"
+      },
+      {
+        "encodedBytes": 0,
+        "transferBytes": 0,
+        "uri": "/__atlas/datasets/za-c7010a9/46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e.glb"
+      },
+      {
+        "encodedBytes": 654788,
+        "transferBytes": 300,
+        "uri": "/__atlas/datasets/za-c7010a9/a3e9f203fbca24358d5fb16cd8d6c62087045cc7254a80241602f498d696ab72.glb"
+      },
+      {
+        "encodedBytes": 4338208,
+        "transferBytes": 300,
+        "uri": "/__atlas/datasets/za-c7010a9/46a13defebbb371253ae8ae68cc90df0b70dbda6450f07bf7633b9ceb1be194e.glb"
+      },
+      {
+        "encodedBytes": 4058668,
+        "transferBytes": 300,
+        "uri": "/__atlas/datasets/za-c7010a9/a072758bd88ee1d6e28849f64d97ac56e5a63db173cf2117ee40d6df437695ff.glb"
+      }
+    ]
+  },
+  "lights": {
+    "before": "hemisphere 1.7; key 2; rim .9; exposure 1.05",
+    "after": "hemisphere 1.15; key 2.1; rim .85; exposure 1",
+    "sameThreeLights": true,
+    "castShadow": false
+  },
+  "geometryChangeBytes": 0,
+  "addedTextureBytes": 0,
+  "addedModelBytes": 0,
+  "bundleAppJSRawDelta": 627,
+  "heldIdleFrames": [
+    125,
+    125
+  ],
+  "limitations": [
+    "One observed before/after CPU pair, not a benchmark speedup guarantee",
+    "No isolated lighting-only GPU experiment; unchanged geometry/bytes separate model cost from presentation changes",
+    "GPU time, VRAM, total-process memory and physical device performance unavailable",
+    "Warm resource transfers are cache/revalidation headers, not cold payload measurements",
+    "Recovered browser initially pixelRatio 1.75, subsequent viewport overrides pixelRatio 1; mixed captures excluded from matched pair",
+    "DEV rolling metrics after navigation can include prior frames; motion state samples are not causal per-phase timing",
+    "Legacy mesh hover has a tested palette; dataset UI has no mesh-hover handler, so no dataset hover UI pass claim"
+  ]
+}

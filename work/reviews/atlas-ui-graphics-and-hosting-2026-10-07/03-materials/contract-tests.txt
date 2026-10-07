@@ -1,0 +1,39 @@
+✔ a selected muscle's verified action wins over an earlier playable surrounding pose (0.356584ms)
+✔ observation wording is cleaned without expanding a partial or initial movement range (0.157417ms)
+✔ the action library excludes contextual poses and unavailable actions and retains exact sides (0.33925ms)
+✔ action emphasis fades smoothly during reset without treating a held pose as activation (0.058917ms)
+✔ palette sharing and disposal are owned by the cache, not source mesh eviction (0.987791ms)
+✔ all presentation and motion tones keep real depth and avoid textures or fake tendon partition (1.511333ms)
+✔ extension distinguishes preparation from reverse action and smooth reset (3.621375ms)
+✔ extension starts from a scrubbed bent endpoint without jumping to rest (0.55575ms)
+✔ single RAF loop updates speed without making a second chain and ignores late callbacks (0.201375ms)
+✔ repeating playback wraps continuously and reset restores the rest pose (0.388042ms)
+✔ T22 adapter scene is driven by one mixer clock; pose reset does not reset camera (0.285459ms)
+✔ same-scene playback uses the host clock, creates no RAF chain, and leaves resource disposal to the host (0.260583ms)
+✔ clip end clamps at the final pose and cancels its RAF chain (0.198041ms)
+✔ missing clip fails closed and releases the imported scene (0.344417ms)
+✔ one-toggle gesture reverses at its endpoint and eases to exact rest on the same clock (0.382416ms)
+✔ return cancellation and disposal cannot invoke a stale rest callback (0.340333ms)
+✔ an action cycle has a faster neutral return, preserves poses and uses one clock (0.400584ms)
+✔ passive posture and muscle action keep the same complete skeletal context across region filters (0.559708ms)
+✔ explicit isolation, hidden structures, layer-off and actual hard holds remain authoritative (0.096334ms)
+✔ motion frame keeps authored attachments and includes the complete moving arm through hand (0.610917ms)
+✔ assets without a focus list retain their whole package frame and exact attachment context (0.070875ms)
+✔ temporary focus retains eligible context and never revives explicit hidden, held or layer-off surfaces (0.648042ms)
+✔ nerve camera fits existing course and confirmed related structures while retaining broader visible context (0.125334ms)
+✔ regional skeletons: cervical, thoracic and lumbar cores plus explicit principal-attachment context, never the entire spine (114.601292ms)
+✔ context cannot override layer-off, hidden or held geometry, and does not reframe the region to a complete femur (100.330916ms)
+✔ same-side context bones retain regional card/history routes, unrelated bones cannot enter them (46.908375ms)
+✔ nerve observation respects all six static-pose, hidden, layer and muscle-selection gates (3.011458ms)
+✔ transparent observation picks native subpixel surfaces within one pixel; normal depth picking and far misses still pick context (10.788ms)
+✔ anatomical presets preserve orbit height, radius, target and zoom in the verified frame (1.233791ms)
+✔ opposite-side transition keeps distance and never crosses the orbit target (0.61325ms)
+✔ common fit retains every corner in front and side view at narrow and wide aspects (3.892042ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 385.154959

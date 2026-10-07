@@ -16,6 +16,15 @@ export function observationContextKeys(rows: RuntimeStructureRecord[], view: Bod
     && (related.has(r.sourceKey) || (r.kind === 'bone' || r.kind === 'muscle')
       && r.regionIds.some(id => selection.regionIds.includes(id)) && (!r.side || r.side === 'midline' || r.side === selection.side))).map(r => r.sourceKey);
 }
+/** Broad source region memberships need not make a selected nerve's forearm view fit the legs. */
+export function observationFrameKeys(rows: RuntimeStructureRecord[], view: BodyView) {
+  const context = observationContextKeys(rows, view);
+  const selection = rows.find(r => r.sourceKey === view.selectedId);
+  if (selection?.kind !== 'nerve') return context;
+  const related = [selection.sourceKey, ...(selection.nerve?.muscleKeys ?? []), ...(view.nerveConceptMuscleKeys ?? [])];
+  const keys = new Set([...related, ...related.flatMap(key => attachmentBoneKeys(key))]);
+  return context.filter(key => keys.has(key));
+}
 export function demandedStructureKeys(rows: RuntimeStructureRecord[], view: BodyView) {
   const regions = view.regionIds ?? (view.region ? [view.region] : []);
   const observation = new Set(view.focusObservation ? observationContextKeys(rows, view) : []);

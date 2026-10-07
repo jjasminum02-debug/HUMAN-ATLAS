@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { AnatomyMaterials } from '../anatomyMaterials.ts';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { ResourceQueue } from '../wholeBody/resources.ts';
 import { DATASET_BUDGET, planLods, type Dataset } from './schema.ts';
@@ -6,7 +7,7 @@ type Resource = {meshes:Map<string,THREE.BufferGeometry>;bytes:number};
 /** Adds resource instances to an existing scene root. Owns no renderer, camera, or learner bindings. */
 export class DatasetResources {
   readonly dataset:Dataset;readonly root:THREE.Group;readonly queue:ResourceQueue<Resource>;
-  readonly nodes=new Map<string,THREE.Mesh>(); readonly materials=new Map<string,THREE.MeshStandardMaterial>();
+  readonly nodes=new Map<string,THREE.Mesh>(); readonly materials=new AnatomyMaterials();
   /** Source keys temporarily backed by an exact source-bound motion GLB node. */
   readonly motionOverrides=new Set<string>();
   readonly inspection:boolean;readonly invalidate:()=>void;private visible=new Set<string>();private detail=new Set<string>();
@@ -70,8 +71,7 @@ export class DatasetResources {
       if(!geometry)continue;
       let node=this.nodes.get(instance.sourceKey);
       if(!node) {
-        let material=this.materials.get(instance.kind);
-        if(!material){material=new THREE.MeshStandardMaterial({color:instance.kind==='skeletal_surface'?0xd8cfae:instance.kind==='musculoskeletal_accessory'?0xc2a89b:0xa65448,roughness:.78});this.materials.set(instance.kind,material);}
+        const material=this.materials.get(instance.kind==='skeletal_surface'?'bone':instance.kind==='muscle_surface_or_part'?'muscle':instance.kind==='nerve_surface'?'nerve':'accessory');
         node=new THREE.Mesh(geometry,material);node.name=instance.sourceKey;node.matrixAutoUpdate=false;node.matrix.fromArray(instance.matrix);
         node.userData={sourceKey:instance.sourceKey,sourceName:instance.sourceName,learnerBinding:instance.learnerBinding,engineeringInspection:this.inspection};
         this.nodes.set(instance.sourceKey,node);this.root.add(node);
@@ -84,5 +84,5 @@ export class DatasetResources {
     }
     this.invalidate();
   }
-  dispose(){if(this.disposed)return;this.disposed=true;for(const n of this.nodes.values())n.removeFromParent();this.nodes.clear();this.motionOverrides.clear();this.queue.dispose();for(const m of this.materials.values())m.dispose();this.materials.clear();}
+  dispose(){if(this.disposed)return;this.disposed=true;for(const n of this.nodes.values())n.removeFromParent();this.nodes.clear();this.motionOverrides.clear();this.queue.dispose();this.materials.dispose();}
 }

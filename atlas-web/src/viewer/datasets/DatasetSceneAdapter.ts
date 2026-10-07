@@ -1,5 +1,6 @@
 import * as THREE from 'three';
-import { demandedStructureKeys, innervationHighlightKeys, observingNerves, observationContextKeys } from './presentation.ts';
+import { AnatomyMaterials, ANATOMY_PALETTE, type MaterialMode } from '../anatomyMaterials.ts';
+import { demandedStructureKeys, innervationHighlightKeys, observingNerves, observationFrameKeys } from './presentation.ts';
 import { AnatomySceneController, type BodyProgress } from '../wholeBody/AnatomySceneController.ts';
 import type { BodyManifest, BodyView } from '../wholeBody/contract.ts';
 import { DatasetResources } from './DatasetResources.ts';
@@ -26,12 +27,13 @@ export class DatasetSceneAdapter implements SourceMotionHost {
     readonly integration: RuntimeIntegration;
     readonly records: Map<string, RuntimeStructureRecord>;
     private view: BodyView = { region: null, regionIds: [], bones: true, muscles: true, supplements: false, selectedId: null, dim: true };
-    private materials = new Map<string, THREE.MeshStandardMaterial>();
+    private materials = new AnatomyMaterials();
     private down = { x: 0, y: 0 };
     private dead = false;
     private contextLost = false;
     private motionPoseActive = false;
-    private readonly actionTone = new THREE.Color('#bd5047');
+    private readonly actionTone = new THREE.Color(ANATOMY_PALETTE.action);
+    private readonly returnTone = new THREE.Color(ANATOMY_PALETTE.return);
     private motionPhase: AnimationPlaybackController['phase'] = 'rest';
     private motionIntent: MotionLearningIntent = 'posture_observation';
     private guidedMotionDirection: THREE.Vector3 | null = null;
@@ -243,7 +245,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                         const fraction = time / player.durationSeconds;
                         const emphasis = muscleActionEmphasis(phase, asset.poseControl?.actionDirection === 'reverse' ? 1 - fraction : fraction);
                         if (emphasis !== null && node?.material instanceof THREE.MeshStandardMaterial) {
-                            node.material.color.set('#a4aaa8').lerp(this.actionTone, emphasis);
+                            node.material.color.copy(this.returnTone).lerp(this.actionTone, emphasis);
                         }
                     }
                     // Scrubbing within the same phase must also paint the new pose.
@@ -350,27 +352,13 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             const selected = key === this.view.selectedId;
             const motionContextOpacity = this.motion?.asset.poseControl?.contextOpacity;
             node.visible = visibleKeys.has(key) && !(this.motionPoseActive && row.kind === 'nerve') && !this.view.hiddenSourceKeys?.includes(key) && !selectionAlternativeKeys.has(key) && !(selected && this.view.selectedPresentation === 'hidden');
-            const mode = this.view.translucentSourceKeys?.includes(key) || selected && this.view.selectedPresentation === 'translucent' ? 'translucent'
+            const mode: MaterialMode = this.view.translucentSourceKeys?.includes(key) || selected && this.view.selectedPresentation === 'translucent' ? 'translucent'
                 : selected ? 'selected' : observe && row.kind !== 'nerve' ? highlights.has(key) ? 'motorContext' : 'nerveContext'
                 : highlights.has(key) ? 'innervated' : this.view.focusObservation && row.kind === 'muscle' ? 'observationContext' : this.motion?.originals.has(key) ? row.kind === 'muscle' && motionContextOpacity != null ? 'motionContext' : 'normal' : this.view.selectedId && this.view.dim ? 'dim' : 'normal';
             const actionPhase = selected && row.kind === 'muscle' && this.motion && this.motionIntent === 'muscle_action'
                 && this.motion.asset.sourceBinding?.subjectSourceKey === key ? this.motionPhase : null;
             const phaseTone = actionPhase === 'action' ? 'action' : actionPhase === 'return' ? 'return' : null;
-            const materialKey = row.kind + ':' + mode + (mode === 'motionContext' ? ':' + motionContextOpacity : '') + (phaseTone ? ':' + phaseTone : '');
-            let material = this.materials.get(materialKey);
-            if (!material) {
-                const color = new THREE.Color(mode === 'selected' ? row.kind === 'nerve' ? '#208b3a' : '#18776d' : mode === 'innervated' || mode === 'motorContext' ? '#338fc1' : row.kind === 'nerve' ? '#d7ac20' : row.kind === 'bone' ? '#e7dec7' : '#b87969');
-                if (phaseTone === 'action') color.set('#bd5047');
-                else if (phaseTone === 'return') color.set('#a4aaa8');
-                if (mode === 'dim' && row.kind !== 'nerve')
-                    color.lerp(new THREE.Color('#e5e5dd'), .55);
-                const transparent = ['translucent', 'nerveContext', 'motorContext', 'motionContext', 'observationContext'].includes(mode);
-                material = new THREE.MeshStandardMaterial({ color, roughness: .76, transparent,
-                    opacity: mode === 'observationContext' ? .18 : mode === 'motionContext' ? Math.max(.1, Math.min(.6, motionContextOpacity!)) : mode === 'nerveContext' ? .12 : mode === 'motorContext' ? .82 : mode === 'translucent' ? .3 : 1,
-                    depthWrite: !transparent, depthTest: true,
-                    emissive: row.kind === 'nerve' ? color : '#000000', emissiveIntensity: row.kind === 'nerve' ? .22 : 0 });
-                this.materials.set(materialKey, material);
-            }
+            const material = this.materials.get(row.kind, { mode, phase: phaseTone, contextOpacity: motionContextOpacity });
             node.material = material;
             node.userData.nerveObservationContext = observe && row.kind !== 'nerve';
         }
@@ -401,7 +389,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
     }
     focus(regions: string[]) { this.fit(framingRecords([...this.records.values()], this.view, regions)); }
     focusSelection(smooth = false) {
-        const keys = this.motion ? this.motion.frameSourceKeys : observationContextKeys([...this.records.values()], this.view);
+        const keys = this.motion ? this.motion.frameSourceKeys : observationFrameKeys([...this.records.values()], this.view);
         const box = new THREE.Box3();
         for (const key of keys) {
             const row = this.records.get(key); if (!row || this.view.hiddenSourceKeys?.includes(key)) continue;
@@ -432,6 +420,5 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             this.select(row.sourceKey, row.side);
     };
     dispose() { if (this.dead)
-        return; this.restoreSourceMotion('viewer-unmounted'); this.dead = true; const canvas = this.scene.renderer.domElement; canvas.removeEventListener('keydown', this.onKey, true); canvas.removeEventListener('pointerdown', this.onDown); canvas.removeEventListener('pointerup', this.onUp); this.resources.dispose(); for (const m of this.materials.values())
-        m.dispose(); this.materials.clear(); this.scene.dispose(); }
+        return; this.restoreSourceMotion('viewer-unmounted'); this.dead = true; const canvas = this.scene.renderer.domElement; canvas.removeEventListener('keydown', this.onKey, true); canvas.removeEventListener('pointerdown', this.onDown); canvas.removeEventListener('pointerup', this.onUp); this.resources.dispose(); this.materials.dispose(); this.scene.dispose(); }
 }

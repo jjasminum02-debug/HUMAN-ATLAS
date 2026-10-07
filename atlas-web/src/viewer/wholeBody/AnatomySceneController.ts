@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { AnatomyMaterials, installAnatomyLighting } from '../anatomyMaterials.ts';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { type BodyAsset, type BodyManifest, type BodyView, visible, pickable, selected } from './contract';
@@ -21,6 +22,7 @@ export class AnatomySceneController {
   private view: BodyView = { region: null, bones: true, muscles: true, supplements: false, selectedId: null, dim: true };
   private lost = false;
   private dead = false;
+  private readonly materials = new AnatomyMaterials();
   private dirty = true;
   private previous = 0;
   private renderedFrames = 0;
@@ -44,15 +46,9 @@ export class AnatomySceneController {
     this.manifest = manifest; this.notify = notify; this.select = select; this.fetchAsset = fetchAsset;
     this.assets = new Map(manifest.chunks.flatMap(c => c.assets.map(a => [a.nodeId, a] as const)));
     this.root.name = 'AnatomySceneRoot'; this.scene.add(this.root);
-    this.scene.background = new THREE.Color('#eff1ef');
-    this.scene.add(new THREE.HemisphereLight(0xffffff, 0xa4a79e, 1.7));
-    const light = new THREE.DirectionalLight(0xffffff, 2.0); light.position.set(-2, 3, 4); this.scene.add(light);
-    const rim = new THREE.DirectionalLight(0xd3e6e5, 0.9); rim.position.set(2, 1, -3); this.scene.add(rim);
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
-    this.renderer.outputColorSpace = THREE.SRGBColorSpace;
-    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.05;
+    installAnatomyLighting(this.scene, this.renderer);
     const canvas = this.renderer.domElement;
     canvas.id = `anatomy-${this.root.uuid}`;
     canvas.tabIndex = 0; canvas.setAttribute('aria-label', '해부학 모형. 방향키로 회전, 더하기와 빼기로 확대, Home으로 전체 보기');
@@ -129,7 +125,7 @@ export class AnatomySceneController {
     if (previous) this.moveCamera(previous);
   }
   fitObservationBounds(box: THREE.Box3, padding = 1.25, smooth = false) {
-    if (!box.isEmpty()) this.moveCamera(boundsCamera(box, this.cameraState(), this.camera.aspect, this.camera.fov, padding), smooth);
+    if (!box.isEmpty()) this.moveCamera(boundsCamera(box, this.cameraTransition?.to ?? this.cameraState(), this.camera.aspect, this.camera.fov, padding), smooth);
   }
   private updateCamera(dt: number) {
     const transition = this.cameraTransition; if (!transition) return false;
@@ -224,7 +220,7 @@ export class AnatomySceneController {
         if (!a || found.has(obj.name) || obj.userData.sourceSha256 !== a.sourceSha256) throw new Error('Node identity mismatch');
         found.add(obj.name);
         const old = Array.isArray(obj.material) ? obj.material : [obj.material]; old.forEach(m => m.dispose());
-        obj.material = new THREE.MeshStandardMaterial({ color: a.layer === 'bone' ? '#e7dec7' : '#b87969', roughness: 0.76, metalness: 0 });
+        obj.material = this.materials.get(a.layer);
       });
       if (found.size !== chunk.assets.length) throw new Error('Missing scene nodes');
     } catch (error) { this.release(group); throw error; }
@@ -239,17 +235,10 @@ export class AnatomySceneController {
         const a = this.assets.get(obj.name)!;
         obj.visible = visible(a, this.view);
         const isSelected = selected(a, this.view);
-        const material = obj.material as THREE.MeshStandardMaterial;
-        material.color.set(isSelected ? '#398b80' : a.layer === 'bone' ? '#e7dec7' : '#b87969');
-        material.emissive.set(a.nodeId === this.hoverId && !isSelected ? '#68897e' : '#000000');
-        material.emissiveIntensity = 0.22;
-        const translucentSelection = Boolean(this.view.focusObservation && !isSelected && a.layer === 'muscle') || isSelected && this.view.selectedPresentation === 'translucent' || Boolean(this.view.translucentSourceKeys?.some(key => key === a.id || key === a.nodeId || a.stableIds.includes(key)));
-        if (material.transparent !== translucentSelection || material.depthWrite === translucentSelection) material.needsUpdate = true;
-        material.transparent = translucentSelection;
-        material.opacity = translucentSelection ? 0.28 : 1;
-        material.depthWrite = !translucentSelection;
-        // Opaque context avoids transparency sorting artifacts and excessive mobile overdraw.
-        if (this.view.selectedId && this.view.dim && !isSelected) material.color.lerp(new THREE.Color('#e5e5dd'), 0.38);
+        const translucent = isSelected && this.view.selectedPresentation === 'translucent' || Boolean(this.view.translucentSourceKeys?.some(key => key === a.id || key === a.nodeId || a.stableIds.includes(key)));
+        obj.material = this.materials.get(a.layer, { mode: translucent ? 'translucent' : isSelected ? 'selected'
+          : this.view.focusObservation && a.layer === 'muscle' ? 'observationContext' : this.view.selectedId && this.view.dim ? 'dim' : 'normal',
+          hovered: a.nodeId === this.hoverId && !isSelected });
       });
     }
     this.dirty = true; this.report();
@@ -292,6 +281,20 @@ export class AnatomySceneController {
         renderSampleCount: renderTimes.length, renderCpuP50Ms: renderPercentile(0.5), renderCpuP95Ms: renderPercentile(0.95),
         frameSampleCount: intervals.length, frameIntervalP50Ms: percentile(0.5), frameIntervalP95Ms: percentile(0.95),
         canvasWidth: this.size.width, canvasHeight: this.size.height, pixelRatio: this.renderer.getPixelRatio(),
+        shaderPrograms: this.renderer.info.programs?.length ?? 0,
+        materialStates: [...materials].map(material => {
+          const m = material as THREE.MeshStandardMaterial;
+          return { state: m.name, color: m.color?.getHexString(), opacity: m.opacity, roughness: m.roughness,
+            emissive: m.emissive?.getHexString(), emissiveIntensity: m.emissiveIntensity, depthTest: m.depthTest, depthWrite: m.depthWrite };
+        }),
+        lights: this.scene.children.filter(object => object instanceof THREE.Light).map(object => {
+          const light = object as THREE.Light;
+          return { type: light.type, intensity: light.intensity, castShadow: light.castShadow };
+        }),
+        glbTransfers: performance.getEntriesByType('resource').filter(entry => /\.glb(?:\?|$)/.test(entry.name)).map(entry => {
+          const resource = entry as PerformanceResourceTiming;
+          return { uri: new URL(resource.name).pathname, transferBytes: resource.transferSize, encodedBytes: resource.encodedBodySize };
+        }),
       });
     }
     this.notify({ loaded: wanted.filter(id => this.queue.loaded.has(id)).length, total: wanted.length,
@@ -343,14 +346,18 @@ export class AnatomySceneController {
     this.camera.position.copy(this.controls.target).add(new THREE.Vector3().setFromSpherical(spherical)); this.controls.update(); this.dirty = true;
   };
   private release(group: THREE.Group) {
-    group.removeFromParent(); group.traverse(obj => { if (obj instanceof THREE.Mesh) { obj.geometry.dispose(); (Array.isArray(obj.material) ? obj.material : [obj.material]).forEach(m => m.dispose()); } });
+    group.removeFromParent();
+    const materials = new Set<THREE.Material>();
+    group.traverse(obj => { if (obj instanceof THREE.Mesh) { obj.geometry.dispose(); (Array.isArray(obj.material) ? obj.material : [obj.material]).forEach(m => materials.add(m)); } });
+    // Evict geometry without invalidating palette instances shared by other loaded chunks.
+    for (const material of materials) if (!this.materials.owns(material)) material.dispose();
   }
   dispose() {
     this.stopEntrance();
     this.dead = true; this.renderer.setAnimationLoop(null); this.queue.dispose(); this.updates.clear(); this.observer.disconnect();
     this.controls.removeEventListener('start', this.cancelCameraMotion);
     this.reducedMotion.removeEventListener('change', this.cancelCameraMotion);
-    this.controls.dispose();
+    this.controls.dispose(); this.materials.dispose();
     const canvas = this.renderer.domElement;
     document.removeEventListener('visibilitychange', this.invalidate);
     window.removeEventListener('pageshow', this.invalidate);
