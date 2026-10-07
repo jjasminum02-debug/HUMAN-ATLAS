@@ -3,6 +3,8 @@ import learnerMotionRuntime from "./learnerMotionRuntime.generated.ts";
 import { displayTerms, termText, type PilotCatalog } from "./catalog";
 import { learnerNameProjection, learnerSearchEntry, learnerVisibleTerms, mergeLearningConcepts, searchEntries, type SearchEntry } from "../domain/search";
 import learnerNerveGraph from "../../../atlas-data/terminology/learner-nerve-graph-t66.json";
+import nerveDisplayNames from "../../../atlas-data/terminology/learner-nerve-display-names.json";
+import { withNerveDisplayNames } from "../domain/nerveDisplayNames.ts";
 import learnerNerveCourse from "../../../atlas-data/terminology/nerve-learning-t66.json";
 import type { LearnerFieldProjection } from "../domain/aiEvidence";
 import { learnerStructureUnavailability } from "../domain/learnerStructureSourceContent";
@@ -45,7 +47,9 @@ type LearnerNerveGraph = {
   concepts: LearnerNerveConcept[];
   motorRelations: LearnerMotorRelation[];
 };
-const nerveGraph = learnerNerveGraph as LearnerNerveGraph;
+const nativeNerveGraph = learnerNerveGraph as LearnerNerveGraph;
+const nerveGraph: LearnerNerveGraph = { ...nativeNerveGraph,
+  concepts: withNerveDisplayNames(nativeNerveGraph.concepts, nerveDisplayNames) };
 type LearnerMotionRuntime = {
   schemaVersion: "learner-motion-runtime-v1";
   wave1Actions: Record<string, LearnerMotionActionOption[]>;

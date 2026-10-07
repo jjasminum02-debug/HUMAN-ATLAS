@@ -9,7 +9,7 @@ import { AtlasLoading } from '../../ui/AtlasLoading';
 import type { SourceMotionHost } from '../datasets/sourceMotionHost';
 import { motorRelationsForNerve, nerveConceptForSourceName } from '../../data/learning';
 
-export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, whole, onWholeChange, onEntered, onMotionHostChange, onMuscleLayerChange, onBoneLayerChange, onSelectionHiddenChange }: { homeRevision?: number; viewResetRevision?: number; datasetSource?: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; onMotionHostChange?: (host: SourceMotionHost | null) => void; onMuscleLayerChange?: (enabled: boolean) => void; onBoneLayerChange?: (enabled: boolean) => void; onSelectionHiddenChange?: (hidden: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
+export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, onEntered, onMotionHostChange, onMuscleLayerChange, onBoneLayerChange, onSelectionHiddenChange }: { homeRevision?: number; viewResetRevision?: number; datasetSource?: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; onMotionHostChange?: (host: SourceMotionHost | null) => void; onMuscleLayerChange?: (enabled: boolean) => void; onBoneLayerChange?: (enabled: boolean) => void; onSelectionHiddenChange?: (hidden: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
   const host = useRef<HTMLDivElement>(null);
   const controller = useRef<AnatomySceneController | DatasetSceneAdapter | null>(null);
   const previousView = useRef<{ regionKey: string; selectedId: string | null; resetRevision: number } | null>(null);
@@ -36,26 +36,9 @@ export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datas
   type Presentation = { observeNerves: boolean; highlightInnervation: boolean; dim: boolean; isolated: boolean; hidden: string[]; translucent: string[] };
   const [presentation, setPresentation] = useState<Presentation>({ observeNerves: true, highlightInnervation: true, dim: true, isolated: false, hidden: [], translucent: [] });
   useEffect(() => { onSelectionHiddenChange?.(Boolean(selectedId && presentation.hidden.includes(selectedId))); }, [selectedId, presentation.hidden, onSelectionHiddenChange]);
-  const presentationRef = useRef(presentation);
-  const presentationHistory = useRef<Presentation[]>([]);
-  const [canUndoPresentation, setCanUndoPresentation] = useState(false);
-  const updatePresentation = (next: Presentation, remember = true) => {
-    if (remember) {
-      presentationHistory.current = [...presentationHistory.current, presentationRef.current].slice(-12);
-      setCanUndoPresentation(presentationHistory.current.length > 0);
-    }
-    presentationRef.current = next;
-    setPresentation(next);
-  };
-  const undoPresentation = () => {
-    const previous = presentationHistory.current.pop();
-    if (previous) updatePresentation(previous, false);
-    setCanUndoPresentation(presentationHistory.current.length > 0);
-  };
+  const updatePresentation = (next: Presentation) => setPresentation(next);
   useEffect(() => {
-    presentationHistory.current = [];
-    setCanUndoPresentation(false);
-    updatePresentation({ observeNerves: true, highlightInnervation: true, dim: true, isolated: false, hidden: [], translucent: [] }, false);
+    updatePresentation({ observeNerves: true, highlightInnervation: true, dim: true, isolated: false, hidden: [], translucent: [] });
   }, [viewResetRevision]);
   const [revision, setRevision] = useState(0);
   const [ready, setReady] = useState(false);
@@ -105,21 +88,15 @@ export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datas
     <div inert={!entered} className="body-tools" aria-label="모형 보기 설정">
       <span className="view-options-label">보기 옵션</span>
       <div className="view-options-row">
-        <button aria-pressed={whole} onClick={() => { onWholeChange(true); controller.current?.focus([]); }}>전체 보기</button>
         <button onClick={() => controller.current?.focus(regionIds)}>화면 맞춤</button>
         <button aria-pressed={bones} onClick={() => { const enabled = !bones; setBones(enabled); onBoneLayerChange?.(enabled); }}>뼈</button>
         <button aria-pressed={muscles} onClick={() => { const enabled = !muscles; setMuscles(enabled); onMuscleLayerChange?.(enabled); }}>근육</button>
         {staticPose && <button aria-pressed={nerves} onClick={() => { nerveLayerExplicitlyOff.current = nerves; setNerves(!nerves); }}>신경</button>}
       </div>
       <div className="selection-view-options">
-        {selectedNerve ? <button disabled={!nerves} aria-pressed={presentation.observeNerves} onClick={() => updatePresentation({ ...presentation, observeNerves: !presentation.observeNerves })}>주행 보기</button> : <button disabled={!selectedId} aria-pressed={presentation.dim} onClick={() => updatePresentation({ ...presentation, dim: !presentation.dim })}>선택 강조</button>}
-        <button disabled={!selectedId || (!progress?.selectedAvailable && !presentation.isolated)} aria-pressed={presentation.isolated} onClick={() => updatePresentation({ ...presentation, isolated: !presentation.isolated })}>선택만 보기</button>
+        {!selectedNerve && <button disabled={!selectedId} aria-pressed={presentation.dim} onClick={() => updatePresentation({ ...presentation, dim: !presentation.dim })}>선택 강조</button>}
         <button disabled={!selectedId || !progress?.selectedAvailable} onClick={() => controller.current?.focusSelection()}>선택 맞춤</button>
-        {selectedNerve ? <button disabled={!nerves || !(selectedNerve.muscleKeys.length || nerveConceptMuscleKeys.length)} aria-pressed={presentation.highlightInnervation} onClick={() => updatePresentation({ ...presentation, highlightInnervation: !presentation.highlightInnervation })}>관련 근육 강조</button> : <button disabled={!selectedId || (!progress?.selectedAvailable && !presentation.translucent.includes(selectedId))} aria-pressed={Boolean(selectedId && presentation.translucent.includes(selectedId))} onClick={() => selectedId && updatePresentation({ ...presentation, translucent: presentation.translucent.includes(selectedId) ? presentation.translucent.filter(id => id !== selectedId) : [...presentation.translucent, selectedId] })}>선택 반투명</button>}
-        <button disabled={!selectedId || (!progress?.selectedAvailable && !presentation.hidden.includes(selectedId))} aria-pressed={Boolean(selectedId && presentation.hidden.includes(selectedId))} onClick={() => selectedId && updatePresentation({ ...presentation, hidden: presentation.hidden.includes(selectedId) ? presentation.hidden.filter(id => id !== selectedId) : [...presentation.hidden, selectedId] })}>{selectedId && presentation.hidden.includes(selectedId) ? '선택 다시 표시' : '선택 숨기기'}</button>
-        <button disabled={!canUndoPresentation} onClick={undoPresentation}>되돌리기</button>
-        <button disabled={presentation.observeNerves && presentation.highlightInnervation && presentation.dim && !presentation.isolated && !presentation.hidden.length && !presentation.translucent.length} onClick={() => updatePresentation({ observeNerves: true, highlightInnervation: true, dim: true, isolated: false, hidden: [], translucent: [] })}>보기 복원</button>
-        <span className="hidden-count" role="status">{presentation.hidden.length ? `${presentation.hidden.length}개 숨김` : '구조를 선택하여 조절'}</span>
+        {selectedNerve ? (selectedNerve.muscleKeys.length > 0 || nerveConceptMuscleKeys.length > 0) && <button disabled={!nerves} aria-pressed={presentation.highlightInnervation} onClick={() => updatePresentation({ ...presentation, highlightInnervation: !presentation.highlightInnervation })}>관련 근육 강조</button> : <button disabled={!selectedId || (!progress?.selectedAvailable && !presentation.translucent.includes(selectedId))} aria-pressed={Boolean(selectedId && presentation.translucent.includes(selectedId))} onClick={() => selectedId && updatePresentation({ ...presentation, translucent: presentation.translucent.includes(selectedId) ? presentation.translucent.filter(id => id !== selectedId) : [...presentation.translucent, selectedId] })}>선택 반투명</button>}
       </div>
     </div>
     <div className="body-status" inert={!entered} aria-hidden={!entered} role="status" aria-live="polite">

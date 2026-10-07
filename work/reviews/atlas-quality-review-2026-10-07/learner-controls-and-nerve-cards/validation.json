@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "scope": "User-requested learner controls, nerve naming format and relationship-card presentation; not a new anatomy-content acceptance.",
+  "automaticTests": {
+    "uniquePassed": 28,
+    "files": [
+      "src/domain/nerveDisplayNames.test.ts",
+      "src/domain/nerveRelatedActions.test.ts",
+      "src/domain/nerveContract.test.ts",
+      "src/viewer/datasets/nerveContextPresentation.test.ts",
+      "src/viewer/datasets/nerveScene.test.ts"
+    ]
+  },
+  "typecheck": "passed",
+  "build": "passed",
+  "buildWarning": "existing large JavaScript chunk advisory; no budget change",
+  "localSnapshotVerification": {
+    "status": "verified",
+    "pointer": {
+      "snapshotDirectory": "local-20261007063406868-bf4218bb",
+      "manifestSha256": "04d247052c49f2e1c7b7109568b5ca98992a5c3a6d5f3034a04c4ffc515e9911"
+    },
+    "publicFiles": 99,
+    "deliveryBasis": "preserved_working_tree_snapshot_not_commit_only"
+  },
+  "preservation": {
+    "anatomyMotionProjectionUnchanged": 94,
+    "privateInputsUnchanged": 3,
+    "nativeNerveGraphUnchanged": true,
+    "motorRelationsUnchanged": 18,
+    "newGeometry": 0,
+    "newMotorRelations": 0,
+    "sourceOnly": true,
+    "humanReview": "not_performed",
+    "publicRights": "held"
+  },
+  "browser": "browser-validation.json",
+  "artifacts": {
+    "desktop-nerve-names.png": "70287dadb5b88a53349db505231d43ba454678282dfa1e115dba89fe5f985d5e",
+    "tablet-nerve-names.png": "a78a59591a15f6ce3036804f7c7848ef5ce82a9df96ffd7200ec901b2ad756ba",
+    "mobile-multiple-regions.png": "c4da1fab7574a73c2d849bcb1ccdbac49894c2eade6564cc80f12ce3bbf40829"
+  },
+  "url": "http://127.0.0.1:5184/",
+  "oldTaskRecordsModified": false,
+  "limits": [
+    "75 additions are composed learner labels, not claimed as 75 exact dictionary headwords.",
+    "All-name format/identity tested; not a full anatomy correctness or innervation audit.",
+    "390px is a desktop viewport, not a mobile device.",
+    "Existing motion/assets and source WIP preserved; snapshot is not commit-only delivery."
+  ]
+}
