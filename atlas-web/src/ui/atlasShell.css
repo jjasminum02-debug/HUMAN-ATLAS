@@ -304,3 +304,12 @@
   .atlas-shell .study-layout:has(.study-sidebar.is-open) { --scene-left: 72px; }
   .atlas-shell .study-sidebar { width: min(250px,calc(100% - 92px)); }
 }
+
+/* Whole-bone attachment context shares the source-scoped scene; labels accompany color. */
+.atlas-shell .attachment-origin { --attachment-tone: #476eb4; }
+.atlas-shell .attachment-insertion { --attachment-tone: #bc7135; }
+.atlas-shell .attachment-summary-block h3 i { background: var(--attachment-tone); }
+.atlas-shell .attachment-observe { width: 100%; min-width: 0; min-height: 42px; display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; padding: 8px 10px; margin: 8px 0; border: 1px solid var(--attachment-tone); border-radius: 8px; background: #fff; color: var(--attachment-tone); font: inherit; font-size: 13px; cursor: pointer; text-align: left; }
+.atlas-shell .attachment-observe span { font-size: 11px; color: #626c68; }
+.atlas-shell .attachment-observe[aria-pressed="true"] { background: color-mix(in srgb, var(--attachment-tone) 12%, white); box-shadow: inset 3px 0 var(--attachment-tone); }
+.atlas-shell .attachment-observe:focus-visible { outline: 2px solid var(--attachment-tone); outline-offset: 2px; }

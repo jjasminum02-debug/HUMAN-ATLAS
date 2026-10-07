@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { AnatomyMaterials, ANATOMY_PALETTE, type MaterialMode } from '../anatomyMaterials.ts';
-import { demandedStructureKeys, innervationHighlightKeys, observingNerves, observationFrameKeys } from './presentation.ts';
+import { demandedStructureKeys, innervationHighlightKeys, observingNerves, observationFrameKeys, attachmentObservationKeys } from './presentation.ts';
 import { AnatomySceneController, type BodyProgress } from '../wholeBody/AnatomySceneController.ts';
 import type { BodyManifest, BodyView } from '../wholeBody/contract.ts';
 import { DatasetResources } from './DatasetResources.ts';
@@ -64,24 +64,26 @@ export class DatasetSceneAdapter implements SourceMotionHost {
     setView(view: BodyView) {
         const nextContextKey = this.motionContextKey(view);
         if (this.motion && this.motion.contextKey !== nextContextKey) this.restoreSourceMotion('selection-or-view-changed');
-        const wasObserving = Boolean(this.view.focusObservation);
+        const wasObserving = Boolean(this.view.focusObservation || this.view.attachmentObservation);
+        const observing = Boolean(view.focusObservation || view.attachmentObservation);
+        const changedAttachment = this.view.attachmentObservation?.role !== view.attachmentObservation?.role;
         const changedSelection = this.view.selectedId !== view.selectedId;
-        if (wasObserving && (!view.focusObservation || this.view.selectedId !== view.selectedId)) this.scene.endObservation();
+        if (wasObserving && (!observing || changedSelection)) this.scene.endObservation();
         this.view = view;
-        if (view.focusObservation && (!wasObserving || changedSelection)) {
+        if (observing && (!wasObserving || changedSelection || changedAttachment)) {
             this.scene.beginObservation(); this.focusSelection(true);
         }
         const keys = this.motion ? motionContextVisibility(
             [...this.motion.asset.sourceBinding?.members ?? [], ...this.motion.extraContextKeys.map(sourceKey => ({sourceKey, role:'co_moving_context'}))],
             this.motion.frameSourceKeys, key => this.records.get(key), view)
-            : demandedStructureKeys([...this.records.values()], view);
+            : demandedStructureKeys(this.integration.objects, view);
         this.resources.demand(keys, view.selectedId && keys.includes(view.selectedId) ? [view.selectedId] : []);
         this.apply();
     }
     private motionContextKey(view: BodyView): string {
         return JSON.stringify([view.regionIds ?? (view.region ? [view.region] : []), view.selectedId, view.bones, view.muscles,
             view.nerves, view.poseId, view.isolate, view.selectedPresentation, [...(view.hiddenSourceKeys ?? [])].sort(),
-            [...(view.translucentSourceKeys ?? [])].sort(), view.dim, view.observeNerves, view.highlightInnervation, view.nerveConceptMuscleKeys]);
+            [...(view.translucentSourceKeys ?? [])].sort(), view.dim, view.observeNerves, view.highlightInnervation, view.nerveConceptMuscleKeys, view.attachmentObservation]);
     }
     async attachSourceMotion(asset: MotionAsset, resource: AnimationSceneResource,
         onTimeChange?: AnimationPlaybackOptions['onTimeChange'], onInvalidated?: (reason: string) => void,
@@ -115,7 +117,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 throw new Error('motion의 dataset/revision/overlay/frame/unit/reference-pose가 현재 학습 장면과 다릅니다.');
             }
             const currentContextKey = this.motionContextKey(this.view);
-            const baseKeys = demandedStructureKeys([...this.records.values()], this.view);
+            const baseKeys = demandedStructureKeys(this.integration.objects, this.view);
             const subject = this.records.get(binding.subjectSourceKey);
             const exactAttachmentKeys = !this.view.isolate && this.view.bones && subject
                 ? attachmentBoneKeys(binding.subjectSourceKey).filter(key => {
@@ -125,7 +127,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                         && (row.side === subject.side || row.side === null);
                 })
                 : [];
-            const extraContextKeys = this.view.isolate ? [] : limbMotionContextKeys(asset, [...this.records.values()], key => attachmentBoneKeys(key, 'origin').length && attachmentBoneKeys(key, 'insertion').length ? attachmentBoneKeys(key) : [])
+            const extraContextKeys = this.view.isolate ? [] : limbMotionContextKeys(asset, this.integration.objects, key => attachmentBoneKeys(key, 'origin').length && attachmentBoneKeys(key, 'insertion').length ? attachmentBoneKeys(key) : [])
                 .filter(key => this.records.get(key)?.kind === 'bone' ? this.view.bones : this.view.muscles);
             const frameSourceKeys = this.view.isolate ? [binding.subjectSourceKey] : [...new Set([...motionFrameSourceKeys(
                 binding.members, asset.poseControl?.framingSourceKeys, binding.subjectSourceKey,
@@ -297,7 +299,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             }
             resource.dispose();
             if (!this.dead) {
-                const keys = demandedStructureKeys([...this.records.values()], this.view);
+                const keys = demandedStructureKeys(this.integration.objects, this.view);
                 this.resources.demand(keys, this.view.selectedId ? [this.view.selectedId] : []);
                 this.apply();
             }
@@ -328,14 +330,14 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         }
         active.resource.dispose();
         active.onInvalidated?.(reason);
-        const keys = demandedStructureKeys([...this.records.values()], this.view);
+        const keys = demandedStructureKeys(this.integration.objects, this.view);
         this.resources.demand(keys, this.view.selectedId ? [this.view.selectedId] : []);
         this.apply();
     }
     private apply() {
         if (this.dead)
             return;
-        const rows = [...this.records.values()];
+        const rows = this.integration.objects;
         const visibleKeys = new Set(demandedStructureKeys(rows, this.view));
         // Motion context may cross region boundaries, but never overrides user layer/hidden choices.
         if (this.motion) {
@@ -344,6 +346,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             for (const key of motionContextVisibility(contextMembers, this.motion.frameSourceKeys,
                 key => this.records.get(key), this.view)) visibleKeys.add(key);
         }
+        const attachmentBones = new Set(attachmentObservationKeys(rows, this.view));
         const highlights = new Set(innervationHighlightKeys(rows, this.view, visibleKeys));
         const observe = observingNerves(rows, this.view, visibleKeys);
         const selectionAlternativeKeys = new Set(this.records.get(this.view.selectedId ?? '')?.selectionSuppressSourceKeys ?? []);
@@ -352,13 +355,14 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             const selected = key === this.view.selectedId;
             const motionContextOpacity = this.motion?.asset.poseControl?.contextOpacity;
             node.visible = visibleKeys.has(key) && !(this.motionPoseActive && row.kind === 'nerve') && !this.view.hiddenSourceKeys?.includes(key) && !selectionAlternativeKeys.has(key) && !(selected && this.view.selectedPresentation === 'hidden');
-            const mode: MaterialMode = this.view.translucentSourceKeys?.includes(key) || selected && this.view.selectedPresentation === 'translucent' ? 'translucent'
+            const attachmentMode = attachmentBones.has(key) ? this.view.attachmentObservation!.role === 'origin' ? 'originContext' : 'insertionContext' : null;
+            const mode: MaterialMode = attachmentMode ?? (this.view.translucentSourceKeys?.includes(key) || selected && this.view.selectedPresentation === 'translucent' ? 'translucent'
                 : selected ? 'selected' : observe && row.kind !== 'nerve' ? highlights.has(key) ? 'motorContext' : 'nerveContext'
-                : highlights.has(key) ? 'innervated' : this.view.focusObservation && row.kind === 'muscle' ? 'observationContext' : this.motion?.originals.has(key) ? row.kind === 'muscle' && motionContextOpacity != null ? 'motionContext' : 'normal' : this.view.selectedId && this.view.dim ? 'dim' : 'normal';
+                : highlights.has(key) ? 'innervated' : this.view.focusObservation && row.kind === 'muscle' ? 'observationContext' : this.motion?.originals.has(key) ? row.kind === 'muscle' && motionContextOpacity != null ? 'motionContext' : 'normal' : this.view.selectedId && this.view.dim ? 'dim' : 'normal');
             const actionPhase = selected && row.kind === 'muscle' && this.motion && this.motionIntent === 'muscle_action'
                 && this.motion.asset.sourceBinding?.subjectSourceKey === key ? this.motionPhase : null;
             const phaseTone = actionPhase === 'action' ? 'action' : actionPhase === 'return' ? 'return' : null;
-            const material = this.materials.get(row.kind, { mode, phase: phaseTone, contextOpacity: motionContextOpacity });
+            const material = this.materials.get(row.kind, { mode, phase: phaseTone, contextOpacity: motionContextOpacity, userTranslucent: Boolean(attachmentMode && this.view.translucentSourceKeys?.includes(key)) });
             node.material = material;
             node.userData.nerveObservationContext = observe && row.kind !== 'nerve';
         }
@@ -369,7 +373,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             contextLost: this.contextLost, selectedAvailable: !this.view.selectedId || this.resources.nodes.has(this.view.selectedId), calls: this.resources.nodes.size,
             triangles: this.scene.renderer.info.render.triangles, geometries: this.scene.renderer.info.memory.geometries });
         this.scene.renderer.domElement.dataset.dataset = JSON.stringify({ root: this.scene.root.uuid, dataset: this.resources.dataset.namespace,
-            regionIds: this.view.regionIds ?? (this.view.region ? [this.view.region] : []), highlighted: [...highlights], observingNerves: observe, focusObservation: Boolean(this.view.focusObservation), hidden: this.view.hiddenSourceKeys ?? [], translucent: this.view.translucentSourceKeys ?? [], nerveLayer: Boolean(this.view.nerves), poseId: this.view.poseId, visible: [...this.resources.nodes].filter(([, n]) => n.visible).map(([key]) => key), selected: this.view.selectedId, bytes: q.bytes, cacheEntries: q.loaded.size, evictions: q.evictions, cancellations: q.cancellations, lateReleases: q.lateReleases, wantedChunks: [...q.wanted], pending: q.pending.size, failed: [...q.failed],
+            regionIds: this.view.regionIds ?? (this.view.region ? [this.view.region] : []), highlighted: [...highlights], observingNerves: observe, focusObservation: Boolean(this.view.focusObservation), attachmentObservation: this.view.attachmentObservation ?? null, attachmentBones: [...attachmentBones], hidden: this.view.hiddenSourceKeys ?? [], translucent: this.view.translucentSourceKeys ?? [], nerveLayer: Boolean(this.view.nerves), poseId: this.view.poseId, visible: [...this.resources.nodes].filter(([, n]) => n.visible).map(([key]) => key), selected: this.view.selectedId, bytes: q.bytes, cacheEntries: q.loaded.size, evictions: q.evictions, cancellations: q.cancellations, lateReleases: q.lateReleases, wantedChunks: [...q.wanted], pending: q.pending.size, failed: [...q.failed],
             camera: this.scene.camera.position.toArray(), cameraTarget: this.scene.controls.target.toArray(), cameraZoom: this.scene.camera.zoom, cameraAspect: this.scene.camera.aspect, cameraFov: this.scene.camera.fov, calls: this.scene.renderer.info.render.calls, triangles: this.scene.renderer.info.render.triangles,
             motion: this.motion ? { assetId: this.motion.asset.id, contextKey: this.motion.contextKey,
                 learningIntent: this.motionIntent, phase: this.motionPhase,
@@ -387,9 +391,9 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             return;
         this.scene.fitObservationBounds(box, padding);
     }
-    focus(regions: string[]) { this.fit(framingRecords([...this.records.values()], this.view, regions)); }
+    focus(regions: string[]) { this.fit(framingRecords(this.integration.objects, this.view, regions)); }
     focusSelection(smooth = false) {
-        const keys = this.motion ? this.motion.frameSourceKeys : observationFrameKeys([...this.records.values()], this.view);
+        const keys = this.motion ? this.motion.frameSourceKeys : observationFrameKeys(this.integration.objects, this.view);
         const box = new THREE.Box3();
         for (const key of keys) {
             const row = this.records.get(key); if (!row || this.view.hiddenSourceKeys?.includes(key)) continue;

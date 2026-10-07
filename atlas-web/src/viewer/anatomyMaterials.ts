@@ -2,20 +2,21 @@ import * as THREE from 'three';
 
 // Tissue identity must come from the source contract. A muscle's pale ends are not tendon labels.
 export type Tissue = 'bone' | 'muscle' | 'nerve' | 'accessory' | 'tendon';
-export type MaterialMode = 'normal' | 'selected' | 'dim' | 'translucent' | 'nerveContext' | 'motorContext' | 'innervated' | 'observationContext' | 'motionContext';
-export type MaterialState = { mode?: MaterialMode; phase?: 'action' | 'return' | null; contextOpacity?: number; hovered?: boolean };
+export type MaterialMode = 'normal' | 'selected' | 'dim' | 'translucent' | 'nerveContext' | 'motorContext' | 'innervated' | 'observationContext' | 'motionContext' | 'originContext' | 'insertionContext';
+export type MaterialState = { mode?: MaterialMode; phase?: 'action' | 'return' | null; contextOpacity?: number; userTranslucent?: boolean; hovered?: boolean };
 export const ANATOMY_PALETTE = {
   bone: '#e9dfc8', muscle: '#a34b4e', nerve: '#dbbb32', accessory: '#c5bdb1', tendon: '#ece6d8',
-  selected: '#237f79', selectedNerve: '#d0c42f', related: '#338fc1', action: '#bd5047', return: '#a4aaa8',
+  origin: '#476eb4', insertion: '#bc7135', selected: '#237f79', selectedNerve: '#d0c42f', related: '#338fc1', action: '#bd5047', return: '#a4aaa8',
 };
 
 export function anatomyMaterialParameters(tissue: Tissue, state: MaterialState = {}): THREE.MeshStandardMaterialParameters {
   const mode = state.mode ?? 'normal';
-  const color = new THREE.Color(mode === 'selected' ? tissue === 'nerve' ? ANATOMY_PALETTE.selectedNerve : ANATOMY_PALETTE.selected
+  const color = new THREE.Color(tissue === 'bone' && mode === 'originContext' ? ANATOMY_PALETTE.origin
+    : tissue === 'bone' && mode === 'insertionContext' ? ANATOMY_PALETTE.insertion : mode === 'selected' ? tissue === 'nerve' ? ANATOMY_PALETTE.selectedNerve : ANATOMY_PALETTE.selected
     : mode === 'innervated' || mode === 'motorContext' ? ANATOMY_PALETTE.related : ANATOMY_PALETTE[tissue]);
   if (tissue === 'muscle' && state.phase) color.set(ANATOMY_PALETTE[state.phase]);
   if (mode === 'dim' && tissue !== 'nerve') color.lerp(new THREE.Color('#e5e5dd'), .48);
-  const opacity = mode === 'translucent' ? .3 : mode === 'nerveContext' ? .12 : mode === 'motorContext' ? .5
+  const opacity = mode === 'translucent' || state.userTranslucent ? .3 : mode === 'nerveContext' ? .12 : mode === 'motorContext' ? .5
     : mode === 'observationContext' ? .18 : mode === 'motionContext' ? Math.max(.1, Math.min(.6, state.contextOpacity ?? .3)) : 1;
   const nerve = tissue === 'nerve', selected = mode === 'selected';
   return { color, metalness: 0, roughness: nerve ? selected ? .42 : .55 : tissue === 'bone' ? .62 : tissue === 'muscle' ? .68 : .8,
@@ -31,7 +32,7 @@ export class AnatomyMaterials {
   private readonly owned = new Set<THREE.Material>();
   get(tissue: Tissue, state: MaterialState = {}) {
     const opacity = state.mode === 'motionContext' ? Math.max(.1, Math.min(.6, state.contextOpacity ?? .3)) : '';
-    const key = `${tissue}:${state.mode ?? 'normal'}:${state.phase ?? ''}:${Boolean(state.hovered)}:${opacity}`;
+    const key = `${tissue}:${state.mode ?? 'normal'}:${state.phase ?? ''}:${Boolean(state.hovered)}:${opacity}${state.userTranslucent ? ':user-translucent' : ''}`;
     let material = this.instances.get(key);
     if (!material) { material = new THREE.MeshStandardMaterial(anatomyMaterialParameters(tissue, state)); material.name = key; this.instances.set(key, material); this.owned.add(material); }
     return material;

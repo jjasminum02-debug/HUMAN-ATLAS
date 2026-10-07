@@ -58,6 +58,7 @@ export default function App() {
     const [exploreOpen, setExploreOpen] = useState(false);
     const [regionMenuOpen, setRegionMenuOpen] = useState(false);
     const [detailsOpen, setDetailsOpen] = useState(true);
+    const [attachmentFocus, setAttachmentFocus] = useState<{ key: string; role: 'origin' | 'insertion' } | null>(null);
     const [tab, setTab] = useState<'구조' | '기능'>('구조');
     const [explorerMode, setExplorerMode] = useState<'structures' | 'actions'>('structures');
     const [actionId, setActionId] = useState<string | null>(null);
@@ -114,6 +115,9 @@ export default function App() {
     const runtimeByKey = useMemo(() => new Map((data?.integration.objects ?? []).map(row => [row.sourceKey, row])), [data]);
     const selectedSourceKeys = useMemo(() => route.selected ? [route.selected] : [], [route.selected]);
     const selected = runtimeByKey.get(route.selected ?? '');
+    const attachmentKey = JSON.stringify([route.selected, route.regions, homeRevision, viewResetRevision]);
+    const attachmentRole = tab === '구조' && attachmentFocus?.key === attachmentKey ? attachmentFocus.role : null;
+    useEffect(() => { setAttachmentFocus(previous => previous?.key === attachmentKey && tab === '구조' ? previous : null); }, [attachmentKey, tab]);
     const selectedTextNerve = textNerveKey ? nerveConceptForLearner(textNerveKey) : null;
     const detailSubject = selected?.sourceKey ?? selectedTextNerve?.key ?? null;
     useEffect(() => {
@@ -147,7 +151,7 @@ export default function App() {
     const relatedMuscles = useMemo(() => {
         const result = new Map((selected?.relatedMuscles ?? []).map(row => [row.sourceKey, { ...row, roles: [...row.roles] }]));
         if (selected?.kind === 'bone') for (const muscle of data?.integration.objects ?? []) {
-            const roles = (['origin', 'insertion'] as const).filter(role => attachmentBoneKeys(muscle.sourceKey, role).includes(selected.sourceKey));
+            const roles = (['origin', 'insertion'] as const).filter(role => attachmentBoneKeys(muscle.sourceKey, role, data?.integration.objects).includes(selected.sourceKey));
             if (!roles.length) continue;
             const previous = result.get(muscle.sourceKey);
             result.set(muscle.sourceKey, { sourceKey: muscle.sourceKey, label: muscle.label, roles: [...new Set([...previous?.roles ?? [], ...roles])] });
@@ -384,7 +388,7 @@ export default function App() {
 
    </aside>
    <section id="atlas-stage" tabIndex={-1} className="study-stage" aria-label={`${title} 학습 장면`}><div className="stage-caption" aria-hidden={!entered}><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{title}</h2><p>회전하고 확대하며 구조를 살펴보세요.</p></div>
-    <WholeBodyViewer homeRevision={homeRevision} viewResetRevision={viewResetRevision} datasetSource={data} onEntered={setEntered} onMotionHostChange={setMotionHost} onMuscleLayerChange={setMuscleLayerEnabled} onBoneLayerChange={setBoneLayerEnabled} onSelectionHiddenChange={setSelectedSourceHidden} regionIds={route.regions} selectedId={route.selected} selectedIds={selectedSourceKeys} whole={!route.regions.length} onWholeChange={() => { resetPresentation(); navigate({ regions: [], selected: route.selected }); }} onSelect={select}/>
+    <WholeBodyViewer attachmentRole={attachmentRole} homeRevision={homeRevision} viewResetRevision={viewResetRevision} datasetSource={data} onEntered={setEntered} onMotionHostChange={setMotionHost} onMuscleLayerChange={setMuscleLayerEnabled} onBoneLayerChange={setBoneLayerEnabled} onSelectionHiddenChange={setSelectedSourceHidden} regionIds={route.regions} selectedId={route.selected} selectedIds={selectedSourceKeys} whole={!route.regions.length} onWholeChange={() => { resetPresentation(); navigate({ regions: [], selected: route.selected }); }} onSelect={select}/>
    </section>
    {(selected || selectedTextNerve) && <details inert={!entered} className="study-details" id="study-details" open={detailsOpen} onToggle={e => setDetailsOpen(e.currentTarget.open)}><summary className="mobile-detail-summary">{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</summary><div className="study-detail-body"><div className="study-detail-header">
     <button className="bone-related-muscle" onClick={() => navigate({ regions: [], selected: null })}>선택 해제</button><h2>{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</h2>{selected && anatomicalPartSubtitle(selected.names.en) && <p className="anatomical-part-subtitle">{anatomicalPartSubtitle(selected.names.en)}</p>}
@@ -438,14 +442,15 @@ export default function App() {
     <section id="study-structure-panel" className="study-tab-panel" role="tabpanel" aria-labelledby="tab-구조" hidden={tab !== '구조'}>
       {(['origin', 'insertion'] as const).map(role => {
         const text = structureTextForSource(selected.sourceKey, role) || (selected.haConceptId && structureTextForLearner(selected.haConceptId, role));
-        const bones = attachmentBoneKeys(selected.sourceKey, role).map(key => runtimeByKey.get(key)!).filter(Boolean);
-        return <section className="attachment-section attachment-summary-block" key={role}>
+        const bones = attachmentBoneKeys(selected.sourceKey, role, data.integration.objects).map(key => runtimeByKey.get(key)!).filter(Boolean);
+        return <section className={`attachment-section attachment-summary-block attachment-${role}`} key={role}>
           <h3><i className={role}/>{role === 'origin' ? '기시' : '정지'}<span>{role === 'origin' ? 'ORIGIN' : 'INSERTION'}</span></h3>
           <p>{text || structureUnavailabilityForLearner(role)}</p>
+          {bones.length > 0 && <button className="attachment-observe" aria-pressed={attachmentRole === role} onClick={() => setAttachmentFocus(attachmentRole === role ? null : {key: attachmentKey, role})}>{attachmentRole === role ? `${role === 'origin' ? '기시' : '정지'} 관찰 끝내기` : `${role === 'origin' ? '기시' : '정지'} 뼈 관찰`}<span>뼈 전체 · 부착 문맥</span></button>}
           {bones.length > 0 && <div className="attachment-bone-links" aria-label={`${role === 'origin' ? '기시' : '정지'} 관련 뼈`}>{bones.map(bone => <button key={bone.sourceKey} onClick={() => select(bone.sourceKey)}>{bone.label}</button>)}</div>}
         </section>;
       })}
-      {attachmentBoneKeys(selected.sourceKey).length > 0 && <p className="quiet-note">주요 부착 부위를 요약했습니다. 관련 뼈는 전체 모형으로 함께 표시하며, 정확한 부착점 표시는 제공하지 않습니다.</p>}
+      {attachmentBoneKeys(selected.sourceKey, undefined, data.integration.objects).length > 0 && <p className="quiet-note">주요 부착 부위를 요약했습니다. 관련 뼈는 전체 모형으로 함께 표시하며, 정확한 부착점 표시는 제공하지 않습니다.</p>}
       <section className="attachment-section attachment-summary-block">
         <h3>운동신경</h3>
         {selectedMuscleNerveRelations.length ? <ul>{selectedMuscleNerveRelations.map(relation => {

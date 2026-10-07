@@ -9,7 +9,7 @@ import { AtlasLoading } from '../../ui/AtlasLoading';
 import type { SourceMotionHost } from '../datasets/sourceMotionHost';
 import { motorRelationsForNerve, nerveConceptForSourceName } from '../../data/learning';
 
-export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, onEntered, onMotionHostChange, onMuscleLayerChange, onBoneLayerChange, onSelectionHiddenChange }: { homeRevision?: number; viewResetRevision?: number; datasetSource?: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; onMotionHostChange?: (host: SourceMotionHost | null) => void; onMuscleLayerChange?: (enabled: boolean) => void; onBoneLayerChange?: (enabled: boolean) => void; onSelectionHiddenChange?: (hidden: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
+export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewResetRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, onEntered, onMotionHostChange, onMuscleLayerChange, onBoneLayerChange, onSelectionHiddenChange }: { attachmentRole?: 'origin' | 'insertion' | null; homeRevision?: number; viewResetRevision?: number; datasetSource?: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; onMotionHostChange?: (host: SourceMotionHost | null) => void; onMuscleLayerChange?: (enabled: boolean) => void; onBoneLayerChange?: (enabled: boolean) => void; onSelectionHiddenChange?: (hidden: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
   const host = useRef<HTMLDivElement>(null);
   const tools = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -55,7 +55,8 @@ export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datas
   const [muscles, setMuscles] = useState(true);
   const observationKey = JSON.stringify([selectedId, regionIds, homeRevision, viewResetRevision]);
   const [focusObservationKey, setFocusObservationKey] = useState<string | null>(null);
-  const focusObservation = focusObservationKey === observationKey;
+  const focusObservation = !attachmentRole && focusObservationKey === observationKey;
+  useEffect(() => { if (attachmentRole) setFocusObservationKey(null); }, [attachmentRole]);
   // Selection/region/history changes end temporary observation; returning later must not revive it.
   useEffect(() => { setFocusObservationKey(previous => previous === observationKey ? previous : null); }, [observationKey]);
   type Presentation = { observeNerves: boolean; highlightInnervation: boolean; dim: boolean; isolated: boolean; hidden: string[]; translucent: string[] };
@@ -114,14 +115,14 @@ export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datas
       if (focusObservation) { if (controller.current.beginObservation()) controller.current.focusSelection(); }
       else controller.current.endObservation();
     }
-    controller.current?.setView({ region: null, regionIds, selectedId, selectedIds, bones, muscles, nerves, focusObservation, poseId: staticPose, nerveConceptMuscleKeys, observeNerves: presentation.observeNerves, highlightInnervation: presentation.highlightInnervation, supplements: false, dim: presentation.dim, isolate: presentation.isolated && Boolean(selectedId), hiddenSourceKeys: presentation.hidden, translucentSourceKeys: presentation.translucent });
+    controller.current?.setView({ region: null, regionIds, selectedId, selectedIds, bones, muscles, nerves, focusObservation, attachmentObservation: attachmentRole && selectedId ? {sourceKey: selectedId, role: attachmentRole} : null, poseId: staticPose, nerveConceptMuscleKeys, observeNerves: presentation.observeNerves, highlightInnervation: presentation.highlightInnervation, supplements: false, dim: presentation.dim, isolate: presentation.isolated && Boolean(selectedId), hiddenSourceKeys: presentation.hidden, translucentSourceKeys: presentation.translucent });
     if (previous === null) {
       if (regionIds.length > 0) controller.current?.focus(regionIds);
     } else if (previous.regionKey !== regionKey || previous.resetRevision !== viewResetRevision) {
       controller.current?.focus(regionIds);
     }
     previousView.current = { regionKey, selectedId, resetRevision: viewResetRevision };
-  }, [ready, regionIds, selectedId, selectedIds, bones, muscles, nerves, staticPose, nerveConceptMuscleKeys, presentation, focusObservation, viewResetRevision]);
+  }, [ready, regionIds, selectedId, selectedIds, bones, muscles, nerves, staticPose, nerveConceptMuscleKeys, presentation, focusObservation, attachmentRole, viewResetRevision]);
   useEffect(() => { if (ready && homeRevision > 0) { stopEntrance(); controller.current?.focus([]); } }, [ready, homeRevision]);
   const observationScene = controller.current instanceof DatasetSceneAdapter ? controller.current.scene : controller.current;
   return <div className="whole-body-viewer" onPointerDownCapture={stopEntrance}>
@@ -143,7 +144,7 @@ export function WholeBodyViewer({ homeRevision = 0, viewResetRevision = 0, datas
             <div role="group" aria-label="해부학적 관찰 방향">{([['front', '앞'], ['back', '뒤'], ['left', '왼쪽'], ['right', '오른쪽']] as const).map(([direction, label]) => <button key={direction} disabled={!observationScene?.canObserveDirections} onClick={() => {
               const current = controller.current; (current instanceof DatasetSceneAdapter ? current.scene : current)?.observeDirection(direction);
             }}>{label}에서 보기</button>)}</div>
-            <button disabled={!focusObservation && (!selectedId || !progress?.selectedAvailable)} aria-pressed={focusObservation} onClick={() => setFocusObservationKey(focusObservation ? null : observationKey)}>{focusObservation ? '집중 관찰 끝내기' : '집중 관찰'}</button>
+            <button disabled={Boolean(attachmentRole) || !focusObservation && (!selectedId || !progress?.selectedAvailable)} aria-pressed={focusObservation} onClick={() => setFocusObservationKey(focusObservation ? null : observationKey)}>{focusObservation ? '집중 관찰 끝내기' : '집중 관찰'}</button>
             <button disabled={!selectedId} aria-pressed={Boolean(selectedId && presentation.hidden.includes(selectedId))} onClick={() => selectedId && updatePresentation({ ...presentation, hidden: presentation.hidden.includes(selectedId) ? presentation.hidden.filter(id => id !== selectedId) : [...presentation.hidden, selectedId] })}>{selectedId && presentation.hidden.includes(selectedId) ? '선택 다시 표시' : '선택 구조 숨기기'}</button>
           </div>
         </details>

@@ -1,0 +1,117 @@
+{
+  "stage": "04-attachments",
+  "status": "passed",
+  "acceptanceScope": "Supported exact source/side/part attachment prose to whole-bone observation and restoration; precise region overlays only when available",
+  "productReadiness": "local_attachment_observation_ready",
+  "contentCompleteness": "partial",
+  "knownContentGaps": {
+    "attachmentTextRolesUnavailable": 4,
+    "textWithoutUnambiguousWholeBoneContext": 397,
+    "nonBonyPriorityOrigins": 2,
+    "preciseAttachmentRegionSupport": 0,
+    "note": "Text-only rows include non-bony attachments and unavailable or ambiguous bone context; they are not evidence of missing anatomy."
+  },
+  "unresolvedProductBlockers": [],
+  "contractTests": {
+    "passed": 21,
+    "failed": 0,
+    "evidence": "contract-tests.txt"
+  },
+  "typecheck": {
+    "exitCode": 0,
+    "evidence": "typecheck.txt"
+  },
+  "build": {
+    "exitCode": 0,
+    "evidence": "build-validation-final.txt",
+    "snapshot": {
+      "snapshotDirectory": "local-20261007233141900-bf4218bb",
+      "manifestSha256": "b78080da3ad8b5cb7903c6ad780f324405c8b6456866c371fe6fa6f1facaba24"
+    },
+    "warning": "Existing JS chunk size recommendation remains; budget unchanged"
+  },
+  "automaticAudit": {
+    "counts": {
+      "supportedMuscleSurfaces": 462,
+      "roles": 924,
+      "textRoles": 920,
+      "textSurfaces": 461,
+      "wholeBoneContextRoles": 523,
+      "wholeBoneContextSurfaces": 335,
+      "previousWholeBoneContextRoles": 441,
+      "boneRoleLinks": 731,
+      "previousBoneRoleLinks": 625,
+      "preciseRegionRoles": 0,
+      "preciseRegionSurfaces": 0,
+      "prioritySurfaces": 20,
+      "priorityRoles": 40,
+      "priorityBoneContextRoles": 38
+    },
+    "errors": [],
+    "evidence": "attachment-audit.json"
+  },
+  "browser": {
+    "productionStates": 14,
+    "developmentStates": 30,
+    "actualViewportSizes": [
+      [
+        390,
+        844
+      ],
+      [
+        1024,
+        768
+      ],
+      [
+        1440,
+        900
+      ]
+    ],
+    "physicalDeviceVerified": false,
+    "consoleErrors": 0,
+    "singleProductionSceneRoots": [
+      "13cf9a7f-4e4a-4b27-8e77-285132c3f064"
+    ],
+    "evidence": "browser-validation.json",
+    "screenshots": "screenshots.json",
+    "limits": "Rapid transition captures are intermediate; settled screenshots and final-state observations are separate. Development HMR scene recreation is not counted as user-flow continuity."
+  },
+  "preservation": {
+    "work/EXECUTION.json": true,
+    "work/product-acceptance.json": true,
+    "atlas-data/terminology/learner-attachment-context.json": true,
+    "atlas-data/terminology/learner-card-runtime.json": true
+  },
+  "assetImpact": {
+    "beforeSnapshot": "local-20261007164328940-bf4218bb",
+    "afterSnapshot": "local-20261007233141900-bf4218bb",
+    "nonAppFiles": 94,
+    "nonAppAssetsUnchanged": true,
+    "geometryClipTextureChanges": 0,
+    "beforeAppBytes": 3312251,
+    "afterAppBytes": 3317155,
+    "newShaderTextureCount": 0,
+    "rendererPolicy": "existing single scene and dirty/moving frame clock; stable row array plus per-role WeakMap cache",
+    "GPUTimeVRAM": "not measured",
+    "runtimePerformanceClaim": "No new render performance benchmark; stage03 unchanged geometry profile reused by dependency impact. Bytes comparison is the same working-tree input snapshot."
+  },
+  "executionProjection": {
+    "exitCode": 0,
+    "evidence": "execution-check.txt"
+  },
+  "distributionMetadata": {
+    "exitCode": 0,
+    "evidence": "distribution-check.txt"
+  },
+  "reusedEvidence": [
+    {
+      "path": "work/reviews/atlas-ui-graphics-and-hosting-2026-10-07/03-materials/",
+      "reason": "same non-app geometry/clip/texture SHA; stage04 adds attachment presentation only; palettes retain previous modes"
+    },
+    {
+      "path": "work/evidence/T66/",
+      "reason": "No motion asset/frame/deformation changes; existing emitted-GLB QC retained. Actual loop/scrub/rest transitions rechecked here."
+    }
+  ],
+  "nextPromptFile": "work/plans/atlas-ui-graphics-and-hosting-2026-10-07/05-nerve-and-motion-emphasis.txt"
+}

@@ -1,11 +1,34 @@
 import contexts from '../../../../atlas-data/terminology/learner-attachment-context.json' with { type: 'json' };
 import type { AttachmentContexts } from '../../domain/sourceAttachments.ts';
+import cards from '../../../../atlas-data/terminology/learner-card-runtime.json' with { type: 'json' };
+import { namedAttachmentBones } from '../../domain/attachmentTextContext.ts';
 import type { RuntimeStructureRecord } from './integration.ts';
 type RegionalRow = Pick<RuntimeStructureRecord, 'sourceKey' | 'names' | 'regionIds' | 'localDisplayEligible'> & Partial<Pick<RuntimeStructureRecord, 'kind' | 'defaultVisible'>>;
 
-export function attachmentBoneKeys(sourceKey: string, role?: 'origin' | 'insertion'): string[] {
+const resolved = new WeakMap<RuntimeStructureRecord[], Map<string, string[]>>();
+export function attachmentBoneKeys(sourceKey: string, role?: 'origin' | 'insertion', rows?: RuntimeStructureRecord[]): string[] {
+  const cacheKey = `${sourceKey}:${role ?? 'both'}`;
+  const cached = rows && resolved.get(rows)?.get(cacheKey);
+  if (cached) return [...cached];
   const entry = (contexts as AttachmentContexts)[sourceKey];
-  return entry ? [...new Set(role ? entry[role] : [...entry.origin, ...entry.insertion])] : [];
+  const source = rows?.find(r => r.sourceKey === sourceKey && r.kind === 'muscle' && r.localDisplayEligible);
+  const keys = new Set<string>();
+  for (const field of role ? [role] : ['origin', 'insertion'] as const) {
+    for (const key of entry?.[field] ?? []) keys.add(key);
+    // Reuse exact source text (or its existing canonical card), without inheriting another part's prose.
+    const text = source ? attachmentText(source, field) : null;
+    if (text && source && rows) for (const key of namedAttachmentBones(text, source.side,
+      rows.filter(r => r.sourceKey.split('-')[1] === source.sourceKey.split('-')[1]), { wholeBoneContext: true }).keys) keys.add(key);
+  }
+  const result = [...keys];
+  if (rows) { let cache = resolved.get(rows); if (!cache) { cache = new Map(); resolved.set(rows, cache); } cache.set(cacheKey, result); }
+  return result;
+}
+export function attachmentText(source: RuntimeStructureRecord, role: 'origin' | 'insertion'): string | null {
+  const structure = cards.structure as { bySource: Record<string, Partial<Record<'origin' | 'insertion', string>>>;
+    byConcept: Record<string, Partial<Record<'origin' | 'insertion', string>>> };
+  const text = structure.bySource[source.sourceKey]?.[role] ?? structure.byConcept[source.haConceptId ?? '']?.[role];
+  return text && !/^(?:설명 정리 중|자료 없음)$/.test(text) ? text : null;
 }
 
 /** Regional default scenes do not present the frozen full-spine Rotatores group as a neck-only surface. */

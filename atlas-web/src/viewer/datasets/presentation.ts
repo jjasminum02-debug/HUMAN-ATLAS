@@ -1,6 +1,19 @@
 import type { BodyView } from '../wholeBody/contract.ts';
 import type { RuntimeStructureRecord } from './integration.ts';
 import { attachmentBoneKeys, inRegionalScene, regionalAttachmentBoneKeys } from './regionalContext.ts';
+/** Exact selected muscle/side and existing same-source bones only; no footprint or new binding. */
+export function attachmentObservationKeys(rows: RuntimeStructureRecord[], view: BodyView) {
+  const focus = view.attachmentObservation;
+  const muscle = rows.find(r => r.sourceKey === focus?.sourceKey && r.sourceKey === view.selectedId
+    && r.kind === 'muscle' && r.localDisplayEligible && r.defaultVisible && !r.hardHoldReasons.length);
+  if (!muscle || !focus) return [];
+  const keys = new Set(attachmentBoneKeys(muscle.sourceKey, focus.role, rows));
+  return rows.filter(r => keys.has(r.sourceKey) && r.kind === 'bone' && r.localDisplayEligible && r.defaultVisible
+    && !r.hardHoldReasons.length && !r.sourceHiddenStatePreserved.hideViewport
+    && (r.side === muscle.side || r.side === null || r.side === 'midline')
+    && r.sourceKey.split('-')[1] === muscle.sourceKey.split('-')[1]
+    && layerAvailable(r, view) && !view.hiddenSourceKeys?.includes(r.sourceKey)).map(r => r.sourceKey);
+}
 export function layerAvailable(row: RuntimeStructureRecord, view: BodyView) {
   return row.kind === 'bone' ? view.bones : row.kind === 'muscle' ? view.muscles
     : row.kind === 'nerve' && Boolean(view.nerves) && row.nerve?.poseId === view.poseId;
@@ -9,6 +22,11 @@ export function layerAvailable(row: RuntimeStructureRecord, view: BodyView) {
 export function observationContextKeys(rows: RuntimeStructureRecord[], view: BodyView) {
   const selection = rows.find(r => r.sourceKey === view.selectedId);
   if (!selection) return [];
+  if (view.attachmentObservation) {
+    const bones = new Set(attachmentObservationKeys(rows, view));
+    return rows.filter(r => (r.sourceKey === selection.sourceKey || bones.has(r.sourceKey))
+      && layerAvailable(r, view) && !view.hiddenSourceKeys?.includes(r.sourceKey)).map(r => r.sourceKey);
+  }
   const related = new Set([selection.sourceKey, ...attachmentBoneKeys(selection.sourceKey),
     ...(selection.nerve?.muscleKeys ?? []), ...(view.nerveConceptMuscleKeys ?? [])]);
   return rows.filter(r => r.localDisplayEligible && (r.defaultVisible || r.sourceKey === selection.sourceKey)
@@ -27,7 +45,7 @@ export function observationFrameKeys(rows: RuntimeStructureRecord[], view: BodyV
 }
 export function demandedStructureKeys(rows: RuntimeStructureRecord[], view: BodyView) {
   const regions = view.regionIds ?? (view.region ? [view.region] : []);
-  const observation = new Set(view.focusObservation ? observationContextKeys(rows, view) : []);
+  const observation = new Set(view.focusObservation || view.attachmentObservation ? observationContextKeys(rows, view) : []);
   const contextBones = regionalAttachmentBoneKeys(rows, regions);
   const selectedNerve = rows.find(r => r.sourceKey === view.selectedId && r.kind === 'nerve');
   const nerveVisible = selectedNerve && layerAvailable(selectedNerve, view) && selectedNerve.localDisplayEligible
@@ -36,7 +54,7 @@ export function demandedStructureKeys(rows: RuntimeStructureRecord[], view: Body
   const context = new Set(nerveVisible && view.highlightInnervation ? view.nerveConceptMuscleKeys ?? [] : []);
   return rows.filter(r => !view.hiddenSourceKeys?.includes(r.sourceKey) && r.localDisplayEligible
     && (r.defaultVisible || r.sourceKey === view.selectedId) && layerAvailable(r, view)
-    && (view.focusObservation ? observation.has(r.sourceKey) : (inRegionalScene(r, regions, view.selectedId) || r.kind === 'bone' && contextBones.has(r.sourceKey)
+    && (view.focusObservation || view.attachmentObservation ? observation.has(r.sourceKey) : (inRegionalScene(r, regions, view.selectedId) || r.kind === 'bone' && contextBones.has(r.sourceKey)
       || r.kind === 'muscle' && context.has(r.sourceKey) && r.side === selectedNerve?.side))
     && (!view.isolate || !view.selectedId || r.sourceKey === view.selectedId)).map(r => r.sourceKey);
 }
