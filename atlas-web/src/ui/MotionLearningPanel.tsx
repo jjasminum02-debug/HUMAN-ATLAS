@@ -330,7 +330,7 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
     : !selectedAction
         ? actions.length ? "먼저 작용을 선택해 주세요." : "현재 연결된 작용 설명이 없으며 재생 자료도 제공되지 않습니다."
         : !available
-          ? !muscleLayerEnabled ? `${subjectKind === "bone" ? "뼈" : "근육"} 보기가 꺼져 있어 시범을 표시할 수 없습니다. 모형 보기에서 켜 주세요.` : subjectHidden ? "선택한 모형을 숨겨 시범을 표시할 수 없습니다. 선택 다시 표시를 누르면 재생할 수 있습니다." : "이 작용에 연결된 3D 시범 자료가 아직 없습니다. 글 설명으로 작용을 확인할 수 있습니다."
+          ? !muscleLayerEnabled ? `${subjectKind === "bone" ? "뼈" : "근육"} 보기가 꺼져 있어 시범을 표시할 수 없습니다. 모형 보기에서 켜 주세요.` : subjectHidden ? "선택한 모형이 숨겨져 있어 시범을 표시할 수 없습니다. 다른 근육을 선택해 살펴보세요." : "이 작용에 연결된 3D 시범 자료가 아직 없습니다. 글 설명으로 작용을 확인할 수 있습니다."
           : state.prefersReducedMotion
             ? "움직임 줄이기 설정이 적용되어 정지 자세로 확인합니다. 재생은 자동으로 시작되지 않습니다."
         : loaded

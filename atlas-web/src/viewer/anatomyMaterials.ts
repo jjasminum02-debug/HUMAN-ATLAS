@@ -5,8 +5,8 @@ export type Tissue = 'bone' | 'muscle' | 'nerve' | 'accessory' | 'tendon';
 export type MaterialMode = 'normal' | 'selected' | 'dim' | 'translucent' | 'nerveContext' | 'motorContext' | 'innervated' | 'observationContext' | 'motionContext' | 'originContext' | 'insertionContext';
 export type MaterialState = { mode?: MaterialMode; phase?: 'action' | 'return' | null; contextOpacity?: number; userTranslucent?: boolean; hovered?: boolean };
 export const ANATOMY_PALETTE = {
-  bone: '#e9dfc8', muscle: '#a34b4e', nerve: '#dbbb32', accessory: '#c5bdb1', tendon: '#ece6d8',
-  origin: '#476eb4', insertion: '#bc7135', selected: '#237f79', selectedNerve: '#d0c42f', related: '#338fc1', action: '#bd5047', return: '#a4aaa8',
+  bone: '#e9dfc8', muscle: '#aa5659', nerve: '#dbbb32', accessory: '#c5bdb1', tendon: '#ece6d8',
+  origin: '#476eb4', insertion: '#bc7135', selected: '#237f79', selectedNerve: '#d0c42f', related: '#338fc1', action: '#c15b53', return: '#a4aaa8',
 };
 
 export function anatomyMaterialParameters(tissue: Tissue, state: MaterialState = {}): THREE.MeshStandardMaterialParameters {
