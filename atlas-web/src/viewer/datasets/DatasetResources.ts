@@ -1,3 +1,4 @@
+import { fetchAtlasAsset } from '../../transport/assetTransport.ts';
 import * as THREE from 'three';
 import { AnatomyMaterials } from '../anatomyMaterials.ts';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -30,7 +31,7 @@ export class DatasetResources {
   }
   private async load(id:string,signal:AbortSignal):Promise<Resource> {
     const chunk=this.dataset.chunks.find(c=>c.id===id);if(!chunk)throw Error('unknown chunk');
-    const response=await fetch(chunk.url,{signal});if(!response.ok)throw Error('chunk unavailable');
+    const response=await fetchAtlasAsset(chunk.url,{signal});if(!response.ok)throw Error('chunk unavailable');
     const bytes=await response.arrayBuffer();
     const hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(x=>x.toString(16).padStart(2,'0')).join('');
     if(hash!==chunk.sha256||bytes.byteLength!==chunk.bytes)throw Error('chunk hash');

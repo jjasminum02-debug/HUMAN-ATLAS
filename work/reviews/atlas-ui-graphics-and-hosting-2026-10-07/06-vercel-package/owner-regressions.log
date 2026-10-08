@@ -1,0 +1,43 @@
+✔ a muscle action can be selected without loading or autoplaying a clip (0.715041ms)
+✔ a fake clock advances clip time at selected playback speed and clamps at the end (0.86125ms)
+✔ action and region changes invalidate late loads and clear emphasis (0.08275ms)
+✔ load errors stop playback and clear selected structure emphasis (0.055209ms)
+✔ reduced motion prevents play and keeps a loaded clip at its initial pose (0.071583ms)
+✔ progress seeks are clamped and pose reset is independent from speed and camera state (0.044208ms)
+✔ pause keeps the sampled pose and can resume without returning to rest (0.051042ms)
+✔ stale errors and malformed duration cannot replace a newer session (0.042583ms)
+✔ reset while loading invalidates the pending response (0.057542ms)
+✔ hiding the page cancels a pending load and clears active playback emphasis (0.652541ms)
+✔ the renderer loop stays playing at exact endpoints and return/scrub cannot restart it (0.115084ms)
+✔ extension distinguishes preparation from reverse action and smooth reset (1.567708ms)
+✔ extension starts from a scrubbed bent endpoint without jumping to rest (0.21725ms)
+✔ single RAF loop updates speed without making a second chain and ignores late callbacks (0.08325ms)
+✔ repeating playback wraps continuously and reset restores the rest pose (0.1305ms)
+✔ T22 adapter scene is driven by one mixer clock; pose reset does not reset camera (0.118917ms)
+✔ same-scene playback uses the host clock, creates no RAF chain, and leaves resource disposal to the host (0.12225ms)
+✔ clip end clamps at the final pose and cancels its RAF chain (0.098667ms)
+✔ missing clip fails closed and releases the imported scene (0.145542ms)
+✔ one-toggle gesture reverses at its endpoint and eases to exact rest on the same clock (0.131917ms)
+✔ return cancellation and disposal cannot invoke a stale rest callback (0.121084ms)
+✔ an action cycle has a faster neutral return, preserves poses and uses one clock (0.128ms)
+✔ source-only context never becomes selectable (0.377041ms)
+✔ supplements require explicit opt-in, stay unbound (0.051209ms)
+✔ held identity cannot be revealed through layer/opt-in (0.039292ms)
+✔ region/layer demand excludes unrelated geometry (0.039583ms)
+✔ T95 overlapping region union keeps one asset visible and empty filters mean whole body (0.062792ms)
+✔ reject conflicting duplicate IDs and source-only binding promotion (0.226292ms)
+✔ late parse after cancellation is disposed; same-id new demand can recover (4.989875ms)
+✔ failure retains successful resources; explicit retry only failed asset (2.701791ms)
+✔ dispose releases completed and late resources exactly once (1.414417ms)
+✔ isolation never promotes source-only or held nodes and respects layer switches (0.127ms)
+✔ selected transparency preserves eligibility and selection; hide only hides the selected eligible asset (0.055208ms)
+✔ v2 local display is independent from learner binding, rights and review holds (0.138708ms)
+✔ persistent source hiding survives a different selection and reset cannot bypass policy (0.049167ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 85.945833

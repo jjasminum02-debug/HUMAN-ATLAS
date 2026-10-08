@@ -41,7 +41,10 @@
     "test:local-delivery": "node --test scripts/localDelivery.test.mjs",
     "hosted:prepare": "node scripts/prepareHostedDelivery.mjs",
     "hosted:preview": "node scripts/previewHostedDelivery.mjs",
-    "test:hosted-delivery": "node --test scripts/hostedPackage.test.mjs scripts/localDelivery.test.mjs"
+    "test:hosted-delivery": "node --test scripts/hostedPackage.test.mjs scripts/localDelivery.test.mjs",
+    "vercel:prepare": "node scripts/prepareVercelDelivery.mjs",
+    "vercel:preview": "node scripts/previewVercelDelivery.mjs",
+    "test:vercel-delivery": "node --experimental-strip-types --test scripts/vercelPackage.test.mjs src/transport/assetTransport.test.ts"
   },
   "dependencies": {
     "react": "19.3.0",

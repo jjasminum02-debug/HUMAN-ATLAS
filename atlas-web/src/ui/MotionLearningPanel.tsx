@@ -1,3 +1,4 @@
+import { fetchAtlasAsset } from '../transport/assetTransport.ts';
 import { useEffect, useRef, useState } from "react";
 import {
   acceptMotionAssetLoad,
@@ -186,7 +187,7 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
     abortRef.current = abort;
     try {
       const uri = new URL(playable.asset.uri, window.location.href);
-      const response = await fetch(uri, { signal: abort.signal });
+      const response = await fetchAtlasAsset(uri, { signal: abort.signal });
       if (!response.ok) throw new Error("asset request failed");
       const bytes = await readMotionPackage(response, abort.signal);
       const resource = await loadAnimationScene(bytes, playable.asset, {

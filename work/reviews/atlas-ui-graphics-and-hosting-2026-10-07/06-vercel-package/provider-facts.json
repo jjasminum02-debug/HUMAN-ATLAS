@@ -1,0 +1,40 @@
+{
+  "checkedOn": "2026-10-08",
+  "sources": [
+    {
+      "url": "https://vercel.com/docs/limits",
+      "fact": "Hobby CLI source upload 100 MB; Pro 1 GB. This is not a universal model/deployment storage limit."
+    },
+    {
+      "url": "https://vercel.com/changelog/hobby-projects-now-retain-fewer-deployments-to-free-up-storage",
+      "publishedOn": "2026-09-16",
+      "fact": "Hobby deployment storage 10 GB, distinct from CLI source upload and Blob storage."
+    },
+    {
+      "url": "https://vercel.com/docs/vercel-blob/usage-and-pricing",
+      "fact": "Hobby Blob: 1 GB-month average storage, 10 GB data transfer, 10000 simple operations, 2000 advanced operations included; regional prices differ; no paid upgrade performed."
+    },
+    {
+      "url": "https://vercel.com/docs/vercel-blob/using-blob-sdk",
+      "fact": "put documents contentType/cacheControlMaxAge/access/addRandomSuffix/allowOverwrite. No documented Content-Encoding option relied on. Deliver exact identity GLB; no large-asset Function proxy."
+    },
+    {
+      "url": "https://vercel.com/docs/vercel-blob/public-storage",
+      "fact": "Public Blob has a store-origin URL. Actual provider response CORS/headers and 3D browser integration must be checked after a separate deployment request."
+    },
+    {
+      "url": "https://vercel.com/docs/plans/hobby",
+      "fact": "Hobby is personal non-commercial; frontend transfer allowance and Blob transfer are separate resources."
+    },
+    {
+      "url": "https://vercel.com/docs/project-configuration/vercel-json",
+      "fact": "Static Other frontend uses public output and provider-specific headers, without Cloudflare _headers."
+    },
+    {
+      "url": "https://developers.cloudflare.com/pages/platform/limits",
+      "fact": "Pages asset maximum 25 MiB; Free has 20000 files. This prepared package has 101 files, largest encoded file 17220355 bytes."
+    }
+  ],
+  "recommendation": "Cloudflare Pages static same-origin gzip package uses the least extra code and one provider. Vercel Hobby + public Blob exact GLBs is the prepared fallback; neither has been deployed.",
+  "blobPriceNote": "Use the selected store region in the linked current pricing table; default-region unit prices are not asserted as global rates."
+}

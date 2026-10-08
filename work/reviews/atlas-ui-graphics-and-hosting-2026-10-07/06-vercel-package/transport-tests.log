@@ -1,0 +1,28 @@
+✔ public gzip transport preserves decoded bytes, URLs and held authority without copying private inputs (8.354167ms)
+✔ changed source bytes, escaped paths and promoted authority fail instead of producing a ready deployment (5.220666ms)
+✔ a symlink cannot import an external file into the public package (3.02475ms)
+✔ HTTP browsers recover original bytes and unknown/private paths remain 404, including after cache tampering (28.417875ms)
+✔ frozen package serves verified bytes, HEAD, ETag and restarts independently (26.589208ms)
+✔ private ledgers, developer paths and unknown assets never fall back to app HTML (7.986167ms)
+✔ changed public bytes fail before a cached response (11.255583ms)
+✔ private dependency changes invalidate otherwise valid cached assets (9.436667ms)
+✔ missing registered asset prevents startup, never produces partial-ready delivery (4.704292ms)
+✔ manifest tampering and public-rights promotion are rejected (4.886125ms)
+✔ stale small index cannot be repaired by rehashing only snapshot metadata (5.290667ms)
+✔ file replacement by an external symlink is rejected (3.444417ms)
+✔ packaged launcher integrity is checked on restart (6.760542ms)
+✔ split closure preserves GLB bytes and authority, one config before app, no private upload (15.268084ms)
+✔ invalid origin, changed sources, symlinks and promoted authority reject (10.594625ms)
+✔ cross-origin identity HTTP, 404 isolation, abort/retry and verify before ETag (28.41025ms)
+✔ new revision invalidates only the frontend config while exact SHA assets stay immutable (21.384667ms)
+✔ exact logical URL only; no metadata rewrite, query loss or foreign origin hijack (0.369166ms)
+✔ immutable map rejects credentials, mutable paths and external insecure origins (0.176417ms)
+✔ fetch forwards abort signal; failed retry and late response handling stay with original owner (11.522875ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 129.801792

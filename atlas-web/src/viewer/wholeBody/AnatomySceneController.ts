@@ -1,3 +1,4 @@
+import { fetchAtlasAsset, ASSET_INSPECTION_ENABLED } from '../../transport/assetTransport.ts';
 import * as THREE from 'three';
 import { AnatomyMaterials, installAnatomyLighting } from '../anatomyMaterials.ts';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -42,7 +43,7 @@ export class AnatomySceneController {
   private select: (id: string, side: string | null) => void;
   private fetchAsset: typeof fetch;
 
-  constructor(host: HTMLElement, manifest: BodyManifest, notify: (progress: BodyProgress) => void, select: (id: string, side: string | null) => void, fetchAsset: typeof fetch = (...args) => fetch(...args)) {
+  constructor(host: HTMLElement, manifest: BodyManifest, notify: (progress: BodyProgress) => void, select: (id: string, side: string | null) => void, fetchAsset: typeof fetch = fetchAtlasAsset) {
     this.manifest = manifest; this.notify = notify; this.select = select; this.fetchAsset = fetchAsset;
     this.assets = new Map(manifest.chunks.flatMap(c => c.assets.map(a => [a.nodeId, a] as const)));
     this.root.name = 'AnatomySceneRoot'; this.scene.add(this.root);
@@ -151,7 +152,7 @@ export class AnatomySceneController {
   private frame = (time: number) => {
     if (this.dead || this.lost) return;
     const intervalMs = this.previous ? time - this.previous : 0;
-    if (import.meta.env.DEV && intervalMs > 0) {
+    if (ASSET_INSPECTION_ENABLED && intervalMs > 0) {
       this.frameIntervalsMs.push(intervalMs);
       if (this.frameIntervalsMs.length > 240) this.frameIntervalsMs.shift();
     }
@@ -166,9 +167,9 @@ export class AnatomySceneController {
     this.controls.update();
     if (this.hoverPoint) { const p = this.hoverPoint; this.hoverPoint = null; this.setHover(this.pick(p.x, p.y)?.nodeId ?? null); }
     if (this.dirty || poseChanged || entranceChanged || cameraChanged) {
-      const started = import.meta.env.DEV ? performance.now() : 0;
+      const started = ASSET_INSPECTION_ENABLED ? performance.now() : 0;
       this.renderer.render(this.scene, this.camera); this.dirty = false; this.renderedFrames += 1;
-      if (import.meta.env.DEV) {
+      if (ASSET_INSPECTION_ENABLED) {
         this.renderDurationsMs.push(performance.now() - started);
         if (this.renderDurationsMs.length > 240) this.renderDurationsMs.shift();
       }
@@ -246,7 +247,7 @@ export class AnatomySceneController {
   private report() {
     if (this.dead) return;
     const wanted = [...this.queue.wanted];
-    if (import.meta.env.DEV) {
+    if (ASSET_INSPECTION_ENABLED) {
       const intervals = [...this.frameIntervalsMs].sort((a, b) => a - b);
       const percentile = (fraction: number) => intervals.length
         ? intervals[Math.min(intervals.length - 1, Math.ceil(fraction * (intervals.length - 1)))]

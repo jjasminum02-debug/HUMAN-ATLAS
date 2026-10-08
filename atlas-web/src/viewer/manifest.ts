@@ -1,3 +1,4 @@
+import { fetchAtlasAsset } from '../transport/assetTransport.ts';
 import rawManifest from "virtual:human-atlas-mesh-manifest";
 import glbUrl from "../../../atlas-data/assets/derived-glb/bodyparts3d-r4-right-lower-leg/right-lower-leg.glb?url";
 import boneGlbUrl from "../../../atlas-data/assets/derived-glb/bodyparts3d-r4-t13-right-bones/right-bones.glb?url";
@@ -214,7 +215,7 @@ export async function loadSceneViewerBundle(scenes: readonly SceneManifest[], si
     if (expected.length !== ref.meshAssetIds.length || !expected.every((node) => ref.meshAssetIds.includes(node.meshAssetId))) {
       throw new Error(`scene mesh 범위가 원본 manifest와 다릅니다: ${scene.id}`);
     }
-    const response = await fetch(source.url, { signal });
+    const response = await fetchAtlasAsset(source.url, { signal });
     if (!response.ok) throw new Error(`scene GLB를 불러오지 못했습니다 (HTTP ${response.status}).`);
     const buffer = await response.arrayBuffer();
     if (signal.aborted) throw new DOMException("Scene loading cancelled", "AbortError");
