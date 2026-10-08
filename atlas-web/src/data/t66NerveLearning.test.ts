@@ -117,7 +117,23 @@ test("learner-facing text carries no internal evidence IDs and preserves held re
   for (const [fieldKey, evidence] of Object.entries(ledger.learnerFieldEvidence) as Array<[string, any]>) {
     const [nerveName, field] = fieldKey.split(":");
     assert.ok(course[nerveName][field]);
-    assert.equal(createHash(course[nerveName][field]), evidence.valueSha256);
+    const actualHash = createHash(course[nerveName][field]);
+    if (actualHash !== evidence.valueSha256) {
+      // A later accepted prose-only correction has its own chain; never rewrite the frozen ledger.
+      const adopted = JSON.parse(readFileSync(new URL('../../../work/reviews/atlas-quality-review-2026-10-06/integration/applied-corrections.json', import.meta.url), 'utf8'));
+      const proposals = JSON.parse(readFileSync(new URL('../../../work/reviews/atlas-quality-review-2026-10-06/nerve/proposals.json', import.meta.url), 'utf8'));
+      const receipt = adopted.corrections.find((row: any) => row.target === `atlas-data/terminology/nerve-learning-t66.json#/${nerveName}/${field}`);
+      assert.ok(receipt, `unrecorded field change: ${fieldKey}`);
+      assert.equal(receipt.status, 'applied_as_bounded_prose_only');
+      assert.equal(receipt.beforeValueSha256, evidence.valueSha256);
+      assert.equal(receipt.motorRelationRowsAdded, 0);
+      const proposal = proposals.proposals.find((row: any) => row.proposalId === receipt.proposalId);
+      assert.equal(proposal.target.jsonPointer, `/${nerveName}/${field}`);
+      assert.equal(createHash(proposal.beforeValue), evidence.valueSha256);
+      assert.equal(course[nerveName][field], proposal.afterProposal);
+      assert.equal(proposal.scope.geometryBinding, false);
+      assert.ok(proposal.evidenceRefs.every((ref: any) => ref.sourceId && ref.url && ref.locator));
+    } else assert.equal(actualHash, evidence.valueSha256);
     assert.ok(evidence.sourceIds.length > 0);
   }
 });

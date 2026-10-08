@@ -47,3 +47,21 @@ export function relationsForNerve<T extends MotorRelationRow>(relations: readonl
 export function isNerveRelatedActionTextIntent(intent: string | undefined): boolean {
   return intent === "muscle_action" || intent === "text_only";
 }
+
+export type NerveTargetAction = { id: string; learningIntent?: string; candidate?: unknown; text: { explanation: string } };
+/** Preserve verified relations, deduplicate surfaces, put usable learning content first. */
+export function nerveLearningTargets<R extends {sourceKey:string;kind:string;side:string|null;localDisplayEligible:boolean;inspectionEligible:boolean}, A extends NerveTargetAction>(
+  relations: readonly MotorRelationRow[], rowFor: (key:string)=>R|undefined,
+  actionsFor: (row:R)=>readonly A[], side?:string|null,
+): Array<{row:R;actions:A[]}> {
+  const targets=new Map<string,{row:R;actions:A[]}>();
+  for(const relation of relations) for(const key of relation.targetSourceKeys){
+    const row=rowFor(key);
+    if(!row||row.kind!=='muscle'||!row.localDisplayEligible||!row.inspectionEligible||(side&&row.side!==side)||targets.has(key))continue;
+    const actions=[...new Map(actionsFor(row).filter(action=>isNerveRelatedActionTextIntent(action.learningIntent)
+      && action.text.explanation.trim()).map(action=>[action.id,action])).values()];
+    targets.set(key,{row,actions});
+  }
+  const rank=(item:{actions:A[]})=>item.actions.some(a=>a.candidate&&a.learningIntent==='muscle_action')?2:item.actions.length?1:0;
+  return [...targets.values()].sort((a,b)=>rank(b)-rank(a));
+}

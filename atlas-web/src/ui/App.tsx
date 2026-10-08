@@ -5,7 +5,7 @@ import { validateRuntimeIntegration, searchStructures, readDatasetRoute, dataset
 import { structureTextForLearner, structureTextForSource, structureUnavailabilityForLearner, motionActionOptionsForLearner, nerveLearningForLearner, nerveConceptsForLearner, nerveConceptForLearner, nerveConceptForSourceName, nerveNamesForSource, motorRelationsForSource, motorRelationsForNerve } from '../data/learning';
 import navigation from '../../../atlas-data/navigation/atlas-navigation.json';
 import { learnerFunctionUnavailableText } from '../domain/learnerActionText';
-import { nerveActionRouteLabel, shouldDisplayNerveFunctionContext } from '../domain/nerveRelations';
+import { nerveActionRouteLabel, shouldDisplayNerveFunctionContext, nerveLearningTargets } from '../domain/nerveRelations';
 import { AtlasLoading } from './AtlasLoading';
 import { anatomicalPartSubtitle } from '../domain/displayNames';
 import { attachmentBoneKeys, inRegionalRoute } from '../viewer/datasets/regionalContext';
@@ -13,7 +13,6 @@ import { MotionLearningPanel } from './MotionLearningPanel';
 import type { LearnerMotionActionOption } from '../domain/motionLearning';
 import type { SourceMotionHost } from '../viewer/datasets/sourceMotionHost';
 import { motionActionLabel, motionLearningIntent, preferredMotionAction, buildMotionActionLibrary } from '../domain/atlasMotionExperience';
-import { isNerveRelatedActionTextIntent } from '../domain/nerveRelations';
 import './styles.css';
 import './atlasShell.css';
 const regionIds = navigation.categories.map(c => c.id);
@@ -273,44 +272,36 @@ export default function App() {
     function nerveFunctionStatus(concept: NonNullable<typeof selectedNerveConcept>) {
         switch (concept.functionEvidenceClass) {
             case 'mixed_motor_sensory_evidence_and_motor_relation':
-                return '문헌에서 운동 가지와 감각 가지가 모두 기술됩니다. 아래는 확인된 운동근 관계입니다.';
+                return '운동·감각 가지가 있으며, 아래에서 연결된 운동근을 살펴볼 수 있습니다.';
             case 'sensory_course_documented_no_motor_relation':
-                return '확인된 자료는 피부 감각 주행을 설명합니다. 현재 연결된 운동근 관계는 없습니다.';
+                return '피부 감각 주행을 살펴볼 수 있습니다.';
             case 'motor_relation_documented_sensory_class_not_assessed':
-                return '문헌에서 아래 운동근 관계가 확인되었습니다. 이 관계만으로 신경의 감각 기능까지 분류하지 않습니다.';
+                return '아래 근육과의 운동신경 관계가 연결되어 있습니다.';
             default:
                 return '현재 학습 자료에는 연결된 운동근 관계가 없습니다. 이는 해부학적 지배가 없다는 뜻이 아닙니다.';
         }
     }
     function renderNerveRelations(relations: ReturnType<typeof motorRelationsForNerve>, selectedSide: string | null | undefined) {
-        const relationItems = relations.map(relation => {
-            const targets = relation.targetSourceKeys.map(key => runtimeByKey.get(key))
-                .filter((row): row is RuntimeStructureRecord => Boolean(row && row.kind === 'muscle' && row.localDisplayEligible && row.inspectionEligible
-                    && row.routeAudience === (route.audience ?? 'learner') && (!selectedSide || row.side === selectedSide)));
-            if (!targets.length) return null;
-            return <li key={relation.relationId}>
-                {targets.map(row => {
-                    const actionsForTarget = motionActionOptionsForLearner(row.haConceptId, row.side, row.sourceKey)
-                        .filter(option => isNerveRelatedActionTextIntent(motionLearningIntent(option)));
-                    return <div className="nerve-related-muscle" key={row.sourceKey}>
-                        <button className="bone-related-muscle" onClick={() => select(row.sourceKey)}>
-                            {learnerRowTitle(row)} · {row.side === 'left' ? '왼쪽' : row.side === 'right' ? '오른쪽' : '좌우 구분 없음'}
-                        </button>
-                        {actionsForTarget.length > 0 && <div className="nerve-related-actions" aria-label={`${learnerRowTitle(row)}의 작용 설명`}>
-                            <span>관련 작용</span>
-                            {actionsForTarget.map(option => <div key={option.id}>
-                                <p><strong>{motionActionLabel(option.label)}</strong> · {option.text.explanation}</p>
-                                <button className="bone-related-muscle" onClick={() => {
-                                    selectMuscleAction(row.sourceKey, option.id);
-                                }}>{nerveActionRouteLabel(Boolean(option.candidate))}</button>
-                            </div>)}
-                        </div>}
-                    </div>;
-                })}
-            </li>;
-        }).filter(Boolean);
-        return relationItems.length ? <ul>{relationItems}</ul> : <p className="quiet-note">현재 학습 자료에는 연결된 운동근 관계가 없습니다. 이는 해부학적 지배가 없다는 뜻이 아닙니다.</p>;
+        const targets = nerveLearningTargets(relations, key => {
+            const row = runtimeByKey.get(key);
+            return row?.routeAudience === (route.audience ?? 'learner') ? row : undefined;
+        }, row => motionActionOptionsForLearner(row.haConceptId, row.side, row.sourceKey)
+            .map(option => ({...option, learningIntent: motionLearningIntent(option)})), selectedSide);
+        return targets.length ? <ul>{targets.map(({row, actions}) => <li className="nerve-related-muscle" key={row.sourceKey}>
+            <button className="bone-related-muscle" onClick={() => select(row.sourceKey)}>
+                {learnerRowTitle(row)} · {row.side === 'left' ? '왼쪽' : row.side === 'right' ? '오른쪽' : '좌우 구분 없음'}
+            </button>
+            {actions.length > 0 && <div className="nerve-related-actions" aria-label={`${learnerRowTitle(row)}의 작용 설명`}>
+                <span>관련 작용</span>
+                {actions.map(option => <div key={option.id}>
+                    <p><strong>{motionActionLabel(option.label)}</strong> · {option.text.explanation}</p>
+                    <button className="bone-related-muscle" aria-label={`${learnerRowTitle(row)} · ${motionActionLabel(option.label)} · ${nerveActionRouteLabel(Boolean(option.candidate))}`}
+                        onClick={() => selectMuscleAction(row.sourceKey, option.id)}>{nerveActionRouteLabel(Boolean(option.candidate))}</button>
+                </div>)}
+            </div>}
+        </li>)}</ul> : <p className="quiet-note">연결된 운동근 목록은 준비 중입니다.</p>;
     }
+
     if (error)
         return <AtlasLoading failed onRetry={() => location.reload()}/>;
     if (!data)
@@ -427,16 +418,16 @@ export default function App() {
     </section>}
     {selected?.kind === 'nerve' ? <section className="attachment-section nerve-card" aria-label="신경 설명"><h3>신경 주행</h3>
       {nerveLearning && <section><h4>정적 모형에서 관찰하는 주행</h4><p>{nerveLearning.courseContext}</p></section>}
-      <p className="quiet-note">표시된 주행은 정적 모형 관찰입니다. 움직임에 따른 신경 변형은 제공하지 않으며, 개인별 분지와 경로에는 차이가 있습니다.</p>
+      <p className="quiet-note">정적 주행 · 근육 동작 중에는 신경 모형을 숨깁니다.</p>
       <p className="nerve-legend"><span><i className="nerve-swatch"/>선택 신경</span><span><i className="motor-swatch"/>관련 근육</span></p>
       {selected.nerve!.branchKeys.length > 0 && <><h3>연결된 분지</h3>{selected.nerve!.branchKeys.map(key => { const row = runtimeByKey.get(key); return row ? <button className="bone-related-muscle" key={key} onClick={() => select(key)}>{learnerRowTitle(row)}</button> : null; })}</>}
       {selectedNerveConcept && selectedNerveConcept.functionEvidenceClass !== 'relationship_not_linked' && <><h3>운동·감각 관계</h3><p>{nerveFunctionStatus(selectedNerveConcept)}</p></>}
       {selectedNerveRelations.length > 0 && <><h3>지배 근육</h3>{renderNerveRelations(selectedNerveRelations, selected.side)}</>}
       {selectedNerveRelations.length > 0 && <details key={`relation-${selected.sourceKey}`} className="nerve-learning-context"><summary>관계 안내</summary>
         {[...new Set(selectedNerveRelations.map(relation => relation.displayNote))].map(note => <p key={note}>{note}</p>)}
-        <p>목록은 현재 연결된 근육입니다. 강조 색은 신경과 근육의 관계를 보여주며 힘이나 활성도를 나타내지 않습니다.</p>
+        <p>현재 연결된 관계만 표시합니다. 강조 색은 학습용이며 힘이나 활성도를 나타내지 않습니다. 신경의 분지·주행에는 개인차가 있습니다.</p>
       </details>}
-      {nerveLearning && <details key={selected.sourceKey} className="nerve-learning-context"><summary>주행·포착 맥락</summary>{shouldDisplayNerveFunctionContext(nerveLearning.functionContext, selectedNerveConcept?.functionEvidenceClass) && <section><h4>기능 연결</h4><p>{nerveLearning.functionContext}</p></section>}<section><h4>해부학적 주행과 변이</h4><p>{nerveLearning.courseContext}</p></section><section><h4>포착 가능 구간과 주변 조직</h4><p>{nerveLearning.compressionContext}</p></section>{"variationContext" in nerveLearning && <section><h4>변이와 자세 범위</h4><p>{String(nerveLearning.variationContext)}</p></section>}</details>}
+      {nerveLearning && <details key={selected.sourceKey} className="nerve-learning-context"><summary>주행·포착 맥락</summary>{shouldDisplayNerveFunctionContext(nerveLearning.functionContext, selectedNerveConcept?.functionEvidenceClass) && <section><h4>기능 연결</h4><p>{nerveLearning.functionContext}</p></section>}<section><h4>포착 가능 구간과 주변 조직</h4><p>{nerveLearning.compressionContext}</p></section>{"variationContext" in nerveLearning && <section><h4>변이와 자세 범위</h4><p>{String(nerveLearning.variationContext)}</p></section>}</details>}
     </section> : selected?.kind === 'muscle' ? <>
     <div className="study-tab-panels">
     <section id="study-structure-panel" className="study-tab-panel" role="tabpanel" aria-labelledby="tab-구조" hidden={tab !== '구조'}>

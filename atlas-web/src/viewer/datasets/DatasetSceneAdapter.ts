@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { AnatomyMaterials, ANATOMY_PALETTE, type MaterialMode } from '../anatomyMaterials.ts';
-import { demandedStructureKeys, innervationHighlightKeys, observingNerves, observationFrameKeys, attachmentObservationKeys } from './presentation.ts';
+import { demandedStructureKeys, innervationHighlightKeys, observingNerves, observationFrameKeys, attachmentObservationKeys, shouldFocusNerveSelection, nerveCourseKeys } from './presentation.ts';
 import { AnatomySceneController, type BodyProgress } from '../wholeBody/AnatomySceneController.ts';
 import type { BodyManifest, BodyView } from '../wholeBody/contract.ts';
 import { DatasetResources } from './DatasetResources.ts';
@@ -68,6 +68,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         const observing = Boolean(view.focusObservation || view.attachmentObservation);
         const changedAttachment = this.view.attachmentObservation?.role !== view.attachmentObservation?.role;
         const changedSelection = this.view.selectedId !== view.selectedId;
+        const focusNerve = shouldFocusNerveSelection(this.integration.objects, this.view, view);
         if (wasObserving && (!observing || changedSelection)) this.scene.endObservation();
         this.view = view;
         if (observing && (!wasObserving || changedSelection || changedAttachment)) {
@@ -79,6 +80,8 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             : demandedStructureKeys(this.integration.objects, view);
         this.resources.demand(keys, view.selectedId && keys.includes(view.selectedId) ? [view.selectedId] : []);
         this.apply();
+        // Fit the initial deep link before the opening orbit captures its camera.
+        if (focusNerve && !observing && !this.motion) this.focusSelection(this.resources.nodes.size > 0 && !this.scene.renderer.domElement.dataset.entrance);
     }
     private motionContextKey(view: BodyView): string {
         return JSON.stringify([view.regionIds ?? (view.region ? [view.region] : []), view.selectedId, view.bones, view.muscles,
@@ -120,11 +123,11 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             const baseKeys = demandedStructureKeys(this.integration.objects, this.view);
             const subject = this.records.get(binding.subjectSourceKey);
             const exactAttachmentKeys = !this.view.isolate && this.view.bones && subject
-                ? attachmentBoneKeys(binding.subjectSourceKey).filter(key => {
+                ? attachmentBoneKeys(binding.subjectSourceKey, undefined, this.integration.objects).filter(key => {
                     const row = this.records.get(key);
                     return row?.kind === 'bone' && row.localDisplayEligible && row.defaultVisible && !row.hardHoldReasons.length
                         && !row.sourceHiddenStatePreserved.hideViewport && !this.view.hiddenSourceKeys?.includes(key)
-                        && (row.side === subject.side || row.side === null);
+                        && (row.side === subject.side || row.side === null || row.side === 'midline');
                 })
                 : [];
             const extraContextKeys = this.view.isolate ? [] : limbMotionContextKeys(asset, this.integration.objects, key => attachmentBoneKeys(key, 'origin').length && attachmentBoneKeys(key, 'insertion').length ? attachmentBoneKeys(key) : [])
@@ -150,6 +153,9 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 await new Promise(resolve => setTimeout(resolve, 40));
             }
             if (this.dead || this.motionContextKey(this.view) !== currentContextKey) throw new Error('motion context loading cancelled');
+            // Prior selections may retain unused detail chunks. Keep live/pinned geometry,
+            // but release that idle cache before admitting a larger existing motion package.
+            this.resources.queue.trimUnused(DATASET_BUDGET.geometryBytes - resource.memoryEstimateBytes);
             if (this.resources.queue.bytes + resource.memoryEstimateBytes > DATASET_BUDGET.geometryBytes)
                 throw new Error('현재 정적 자원과 motion 원본·형상·clip 버퍼가 함께 활성 장면 예산을 초과합니다.');
             const instances = new Map(dataset.instances.map(instance => [instance.sourceKey, instance]));
@@ -346,6 +352,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             for (const key of motionContextVisibility(contextMembers, this.motion.frameSourceKeys,
                 key => this.records.get(key), this.view)) visibleKeys.add(key);
         }
+        const course = new Set(nerveCourseKeys(rows, this.view));
         const attachmentBones = new Set(attachmentObservationKeys(rows, this.view));
         const highlights = new Set(innervationHighlightKeys(rows, this.view, visibleKeys));
         const observe = observingNerves(rows, this.view, visibleKeys);
@@ -357,7 +364,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             node.visible = visibleKeys.has(key) && !(this.motionPoseActive && row.kind === 'nerve') && !this.view.hiddenSourceKeys?.includes(key) && !selectionAlternativeKeys.has(key) && !(selected && this.view.selectedPresentation === 'hidden');
             const attachmentMode = attachmentBones.has(key) ? this.view.attachmentObservation!.role === 'origin' ? 'originContext' : 'insertionContext' : null;
             const mode: MaterialMode = attachmentMode ?? (this.view.translucentSourceKeys?.includes(key) || selected && this.view.selectedPresentation === 'translucent' ? 'translucent'
-                : selected ? 'selected' : observe && row.kind !== 'nerve' ? highlights.has(key) ? 'motorContext' : 'nerveContext'
+                : selected || course.has(key) ? 'selected' : observe && row.kind !== 'nerve' ? highlights.has(key) ? 'motorContext' : 'nerveContext'
                 : highlights.has(key) ? 'innervated' : this.view.focusObservation && row.kind === 'muscle' ? 'observationContext' : this.motion?.originals.has(key) ? row.kind === 'muscle' && motionContextOpacity != null ? 'motionContext' : 'normal' : this.view.selectedId && this.view.dim ? 'dim' : 'normal');
             const actionPhase = selected && row.kind === 'muscle' && this.motion && this.motionIntent === 'muscle_action'
                 && this.motion.asset.sourceBinding?.subjectSourceKey === key ? this.motionPhase : null;

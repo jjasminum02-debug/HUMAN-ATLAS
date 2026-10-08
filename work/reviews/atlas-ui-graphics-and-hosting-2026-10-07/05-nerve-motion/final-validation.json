@@ -1,0 +1,151 @@
+{
+  "status": "passed",
+  "acceptanceScope": "current supported nerve course/verified motor links and registered muscle-action presentation; no new anatomy or motion assets",
+  "contentCompleteness": "partial",
+  "unresolvedProductBlockers": [],
+  "snapshot": {
+    "snapshotDirectory": "local-20261008011759069-bf4218bb",
+    "manifestSha256": "2bb5d1972466b8d1438c3912eef4a4bb6492804273496e60eadab7c9985c4a14"
+  },
+  "deliveryBasis": "preserved_working_tree_snapshot_not_commit_only",
+  "counts": {
+    "nerveSurfaces": 195,
+    "nerveDisplayConcepts": 98,
+    "motorRelations": 18,
+    "exactGeometryRelations": 2,
+    "branchEdges": 6,
+    "exactSourceActionPairs": 56,
+    "actionSurfaces": 38,
+    "uniqueActionGlbs": 39,
+    "prioritySurfaces": 20,
+    "priorityActionPairs": 22
+  },
+  "automated": {
+    "scopedTests": {
+      "passed": 17,
+      "total": 17,
+      "evidence": "work/reviews/atlas-ui-graphics-and-hosting-2026-10-07/05-nerve-motion/tests.log"
+    },
+    "resourcePolicyRegression": {
+      "passed": 13,
+      "total": 13,
+      "evidence": "work/reviews/atlas-ui-graphics-and-hosting-2026-10-07/05-nerve-motion/resource-regression.log"
+    },
+    "identityRelationMotionAudit": {
+      "errors": [],
+      "evidence": "work/reviews/atlas-ui-graphics-and-hosting-2026-10-07/05-nerve-motion/nerve-motion-audit.json"
+    },
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning retained",
+    "learnerDistribution": "passed; 274 provenance markers, leaks 0",
+    "executionProjectionCheck": "passed; no writes"
+  },
+  "browser": {
+    "viewportSizes": [
+      [
+        1440,
+        900
+      ],
+      [
+        1024,
+        900
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "realDevice": false,
+    "observations": 31,
+    "consoleErrors": 0,
+    "singleCanvas": true,
+    "evidence": [
+      "work/reviews/atlas-ui-graphics-and-hosting-2026-10-07/05-nerve-motion/browser-observations.json",
+      "work/reviews/atlas-ui-graphics-and-hosting-2026-10-07/05-nerve-motion/screenshots.json",
+      "work/reviews/atlas-ui-graphics-and-hosting-2026-10-07/05-nerve-motion/console-errors.json"
+    ],
+    "failedBeforeRepair": [
+      "rectus-abdominis-action-390"
+    ],
+    "fixedAndRetested": [
+      "final-trunk-after-hand-cache-390"
+    ],
+    "reuse": "Observations 0-14 used same input geometry/material/nerve-link and initial focus fix. Final change is unused cache release; targeted hand→trunk sequence and protected live-resource regressions repeated. Earlier GLB key/mid/contact/outcome QA reused because all 92 distributed GLB hashes and 94 non-app files unchanged. Final regional-focus ordering change tested at regions=leg with real common fibular source; other controls/geometry unchanged.",
+    "regionalDeepLinkCheck": "regional-nerve-check.json; final-regional-nerve-1024.jpg"
+  },
+  "cacheRepair": {
+    "beforeUnusedStaticCacheBytes": 71317368,
+    "motionMemoryEstimateBytes": 61882524,
+    "afterStaticCacheBytes": 33709100,
+    "afterEstimatedActiveBytes": 95591624,
+    "budgetBytes": 100663296,
+    "evictedUnusedChunks": 6,
+    "wantedOrPinnedRemoved": false,
+    "budgetRaised": false
+  },
+  "preservation": {
+    "fixedInputsUnchanged": {
+      "work/EXECUTION.json": true,
+      "work/product-acceptance.json": true,
+      "atlas-data/terminology/learner-nerve-graph-t66.json": true,
+      "atlas-data/terminology/nerve-learning-t66.json": true,
+      "atlas-data/overlays/nerve-support-t66.json": true,
+      "atlas-web/src/data/learnerMotionRuntime.generated.ts": true
+    },
+    "nonAppFilesSame": true,
+    "nonAppFileCount": 94,
+    "glbCount": 92,
+    "snapshot": {
+      "snapshotDirectory": "local-20261008011759069-bf4218bb",
+      "manifestSha256": "2bb5d1972466b8d1438c3912eef4a4bb6492804273496e60eadab7c9985c4a14"
+    },
+    "publicBytesBefore": 253170065,
+    "publicBytesAfter": 253172495,
+    "uiBytesBefore": 3317155,
+    "uiBytesAfter": 3319585,
+    "deliveryBasis": "preserved_working_tree_snapshot_not_commit_only",
+    "workingTreeDependencies": [
+      "atlas-data/motion/local-motion-delivery-index.json",
+      "atlas-data/motion/motion-learning.json",
+      "atlas-data/source-cache/bodyparts3d-r4/converted/t77/manifest.json",
+      "atlas-data/source-cache/datasets/bp3d/registry.json",
+      "atlas-data/terminology/learner-attachment-context.json",
+      "atlas-data/terminology/learner-card-runtime.json",
+      "atlas-data/terminology/muscle-attachment-content-2026-10-02.json",
+      "atlas-web/src/data/learnerMotionRuntime.generated.ts",
+      "atlas-web/src/data/t66NerveLearning.test.ts",
+      "atlas-web/src/domain/motionLearning.test.ts",
+      "atlas-web/src/domain/motionLearning.ts",
+      "atlas-web/src/domain/motionSubjectPresentation.ts",
+      "atlas-web/src/domain/nerveLearningTargets.test.ts",
+      "atlas-web/src/domain/nerveRelations.ts",
+      "atlas-web/src/domain/sourceAttachments.ts",
+      "atlas-web/src/transport/assetTransport.test.ts",
+      "atlas-web/src/transport/assetTransport.ts",
+      "atlas-web/src/ui/App.tsx",
+      "atlas-web/src/ui/MotionLearningPanel.tsx",
+      "atlas-web/src/viewer/animationSceneAdapter.ts",
+      "atlas-web/src/viewer/datasets/DatasetResources.ts",
+      "atlas-web/src/viewer/datasets/DatasetSceneAdapter.ts",
+      "atlas-web/src/viewer/datasets/nerveSelectionFocus.test.ts",
+      "atlas-web/src/viewer/datasets/presentation.ts",
+      "atlas-web/src/viewer/manifest.ts",
+      "atlas-web/src/viewer/wholeBody/AnatomySceneController.ts",
+      "atlas-web/src/viewer/wholeBody/WholeBodyViewer.tsx",
+      "atlas-web/src/viewer/wholeBody/motionCacheBudget.test.ts",
+      "atlas-web/src/viewer/wholeBody/resources.ts"
+    ]
+  },
+  "limitations": [
+    "GPU duration/VRAM/total process memory not measured. Byte figures are retained CPU resource estimates, not physical GPU memory.",
+    "Viewport widths are desktop browser checks, not iPhone/iPad real-device checks.",
+    "Geometry QA reused unchanged assets; no new anatomy review or public rights approval.",
+    "Snapshot depends on preserved working tree, including paused transport work; checkpoint is not a clean-HEAD standalone package."
+  ],
+  "knownContentGaps": [
+    "Only 18 currently evidenced motor relations, 2 exact geometry relations; concept links do not prove exact nerve branch-to-surface pairing.",
+    "195 static nerve surfaces; unsupported moving-pose nerves remain hidden; no new dynamic nerve deformation.",
+    "56 exact source-action pairs on 38 surfaces in current runtime, including 22 pairs on 20 priority surfaces; 1166 options are not 1166 muscle actions.",
+    "Unproduced muscle actions, missing nerve 3D/pose and precise attachment footprints remain separate content/backlog."
+  ]
+}

@@ -14,6 +14,23 @@ export function attachmentObservationKeys(rows: RuntimeStructureRecord[], view: 
     && r.sourceKey.split('-')[1] === muscle.sourceKey.split('-')[1]
     && layerAvailable(r, view) && !view.hiddenSourceKeys?.includes(r.sourceKey)).map(r => r.sourceKey);
 }
+const nerveIndexes = new WeakMap<RuntimeStructureRecord[], Map<string, RuntimeStructureRecord>>();
+/** Follow only registered same-side static branch links; never infer branches by name/proximity. */
+export function nerveCourseKeys(rows: RuntimeStructureRecord[], view: BodyView): string[] {
+  let byKey=nerveIndexes.get(rows);
+  if(!byKey){byKey=new Map(rows.map(row=>[row.sourceKey,row]));nerveIndexes.set(rows,byKey);}
+  const selected=byKey.get(view.selectedId??'');
+  if(selected?.kind!=='nerve'||!layerAvailable(selected,view)||view.hiddenSourceKeys?.includes(selected.sourceKey)
+    || view.selectedPresentation==='hidden')return [];
+  const visited=new Set<string>(),pending=[selected.sourceKey];
+  while(pending.length){const key=pending.pop()!;if(visited.has(key))continue;const row=byKey.get(key);
+    if(!row||row.kind!=='nerve'||row.side!==selected.side||row.nerve?.poseId!==selected.nerve?.poseId
+      || !row.localDisplayEligible||row.hardHoldReasons?.length||row.sourceHiddenStatePreserved?.hideViewport
+      || !layerAvailable(row,view)||view.hiddenSourceKeys?.includes(key))continue;
+    visited.add(key);pending.push(...row.nerve?.branchKeys??[]);
+  }
+  return [...visited];
+}
 export function layerAvailable(row: RuntimeStructureRecord, view: BodyView) {
   return row.kind === 'bone' ? view.bones : row.kind === 'muscle' ? view.muscles
     : row.kind === 'nerve' && Boolean(view.nerves) && row.nerve?.poseId === view.poseId;
@@ -27,7 +44,7 @@ export function observationContextKeys(rows: RuntimeStructureRecord[], view: Bod
     return rows.filter(r => (r.sourceKey === selection.sourceKey || bones.has(r.sourceKey))
       && layerAvailable(r, view) && !view.hiddenSourceKeys?.includes(r.sourceKey)).map(r => r.sourceKey);
   }
-  const related = new Set([selection.sourceKey, ...attachmentBoneKeys(selection.sourceKey),
+  const related = new Set([...nerveCourseKeys(rows, view), selection.sourceKey, ...attachmentBoneKeys(selection.sourceKey, undefined, rows),
     ...(selection.nerve?.muscleKeys ?? []), ...(view.nerveConceptMuscleKeys ?? [])]);
   return rows.filter(r => r.localDisplayEligible && (r.defaultVisible || r.sourceKey === selection.sourceKey)
     && layerAvailable(r, view) && !view.hiddenSourceKeys?.includes(r.sourceKey)
@@ -39,8 +56,8 @@ export function observationFrameKeys(rows: RuntimeStructureRecord[], view: BodyV
   const context = observationContextKeys(rows, view);
   const selection = rows.find(r => r.sourceKey === view.selectedId);
   if (selection?.kind !== 'nerve') return context;
-  const related = [selection.sourceKey, ...(selection.nerve?.muscleKeys ?? []), ...(view.nerveConceptMuscleKeys ?? [])];
-  const keys = new Set([...related, ...related.flatMap(key => attachmentBoneKeys(key))]);
+  const related = [...nerveCourseKeys(rows, view), selection.sourceKey, ...(selection.nerve?.muscleKeys ?? []), ...(view.nerveConceptMuscleKeys ?? [])];
+  const keys = new Set([...related, ...related.flatMap(key => attachmentBoneKeys(key, undefined, rows))]);
   return context.filter(key => keys.has(key));
 }
 export function demandedStructureKeys(rows: RuntimeStructureRecord[], view: BodyView) {
@@ -51,10 +68,11 @@ export function demandedStructureKeys(rows: RuntimeStructureRecord[], view: Body
   const nerveVisible = selectedNerve && layerAvailable(selectedNerve, view) && selectedNerve.localDisplayEligible
     && !view.hiddenSourceKeys?.includes(selectedNerve.sourceKey) && inRegionalScene(selectedNerve, regions, view.selectedId);
   // A literature concept link is context only, never a new geometric nerve branch binding.
+  const course = new Set(nerveCourseKeys(rows, view));
   const context = new Set(nerveVisible && view.highlightInnervation ? view.nerveConceptMuscleKeys ?? [] : []);
   return rows.filter(r => !view.hiddenSourceKeys?.includes(r.sourceKey) && r.localDisplayEligible
     && (r.defaultVisible || r.sourceKey === view.selectedId) && layerAvailable(r, view)
-    && (view.focusObservation || view.attachmentObservation ? observation.has(r.sourceKey) : (inRegionalScene(r, regions, view.selectedId) || r.kind === 'bone' && contextBones.has(r.sourceKey)
+    && (view.focusObservation || view.attachmentObservation ? observation.has(r.sourceKey) : (course.has(r.sourceKey) || inRegionalScene(r, regions, view.selectedId) || r.kind === 'bone' && contextBones.has(r.sourceKey)
       || r.kind === 'muscle' && context.has(r.sourceKey) && r.side === selectedNerve?.side))
     && (!view.isolate || !view.selectedId || r.sourceKey === view.selectedId)).map(r => r.sourceKey);
 }
@@ -70,4 +88,13 @@ export function innervationHighlightKeys(rows: RuntimeStructureRecord[], view: B
   const candidates = new Set([...selected.nerve!.muscleKeys, ...(view.nerveConceptMuscleKeys ?? [])]);
   return rows.filter(r => candidates.has(r.sourceKey) && r.kind === 'muscle' && r.localDisplayEligible
     && r.side === selected.side && visibleKeys.has(r.sourceKey) && !view.hiddenSourceKeys?.includes(r.sourceKey)).map(r => r.sourceKey);
+}
+
+/** Focus once when a supported nerve becomes selected/visible; never on orbit or highlight updates. */
+export function shouldFocusNerveSelection(rows: RuntimeStructureRecord[], previous: BodyView, next: BodyView) {
+  const nerve=rows.find(row=>row.sourceKey===next.selectedId&&row.kind==='nerve');
+  return Boolean(nerve && nerve.localDisplayEligible && !nerve.hardHoldReasons?.length
+    && !nerve.sourceHiddenStatePreserved?.hideViewport && layerAvailable(nerve,next)
+    && !next.hiddenSourceKeys?.includes(nerve.sourceKey) && next.selectedPresentation!=='hidden'
+    && (previous.selectedId!==next.selectedId || !previous.nerves || previous.poseId!==next.poseId));
 }

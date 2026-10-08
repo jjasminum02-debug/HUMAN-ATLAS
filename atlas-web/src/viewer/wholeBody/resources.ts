@@ -19,6 +19,18 @@ export class ResourceQueue<T> {
     for(const [id,c] of this.pending) if(!this.wanted.has(id) && !c.signal.aborted) {this.cancellations++;c.abort();}
     this.pump();
   }
+  /** Release only unused cache entries to share the unchanged budget with a motion buffer. */
+  trimUnused(maxBytes:number) {
+    if(this.disposed || !Number.isFinite(maxBytes) || maxBytes<0) return false;
+    for(const [key,item] of this.loaded) {
+      if(this.bytes<=maxBytes) break;
+      if(this.wanted.has(key)||this.pinned.has(key)) continue;
+      this.loaded.delete(key);this.bytes-=this.sizes.get(key)??0;this.sizes.delete(key);
+      this.release(item);this.evictions++;
+    }
+    this.changed();
+    return this.bytes<=maxBytes;
+  }
   retry() {this.failed.clear();this.pump();}
   private admit(id:string,item:T) {
     const bytes=this.budget.measure(item);

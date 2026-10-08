@@ -116,10 +116,14 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
       else controller.current.endObservation();
     }
     controller.current?.setView({ region: null, regionIds, selectedId, selectedIds, bones, muscles, nerves, focusObservation, attachmentObservation: attachmentRole && selectedId ? {sourceKey: selectedId, role: attachmentRole} : null, poseId: staticPose, nerveConceptMuscleKeys, observeNerves: presentation.observeNerves, highlightInnervation: presentation.highlightInnervation, supplements: false, dim: presentation.dim, isolate: presentation.isolated && Boolean(selectedId), hiddenSourceKeys: presentation.hidden, translucentSourceKeys: presentation.translucent });
+    const nerveFramed = controller.current instanceof DatasetSceneAdapter && selectedNerve && nerves
+      && !presentation.hidden.includes(selectedId ?? '');
     if (previous === null) {
-      if (regionIds.length > 0) controller.current?.focus(regionIds);
+      // The adapter already fit a supported nerve deep link before its opening orbit.
+      if (regionIds.length > 0 && !nerveFramed) controller.current?.focus(regionIds);
     } else if (previous.regionKey !== regionKey || previous.resetRevision !== viewResetRevision) {
-      controller.current?.focus(regionIds);
+      if (nerveFramed) controller.current?.focusSelection(true);
+      else controller.current?.focus(regionIds);
     }
     previousView.current = { regionKey, selectedId, resetRevision: viewResetRevision };
   }, [ready, regionIds, selectedId, selectedIds, bones, muscles, nerves, staticPose, nerveConceptMuscleKeys, presentation, focusObservation, attachmentRole, viewResetRevision]);
