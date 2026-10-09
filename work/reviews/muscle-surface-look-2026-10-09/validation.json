@@ -1,0 +1,87 @@
+{
+  "status": "passed",
+  "scope": "Muscle color and illustrative surface microrelief only",
+  "tests": {
+    "materialRegression": {
+      "passed": 3,
+      "failed": 0
+    },
+    "typecheck": "passed (fixture typing corrected before final run)",
+    "productionBuild": "passed",
+    "syncExecutionCheck": "passed; no writes",
+    "ownedDiffCheck": "passed",
+    "browser": {
+      "actualViewportSizes": [
+        {
+          "canvas": [
+            940,
+            438.5
+          ],
+          "heading": "머리",
+          "viewport": [
+            1024,
+            768
+          ]
+        },
+        {
+          "canvas": [
+            390,
+            482.5
+          ],
+          "heading": "머리",
+          "viewport": [
+            390,
+            844
+          ]
+        },
+        {
+          "canvas": [
+            1154,
+            570.5
+          ],
+          "viewport": [
+            1440,
+            900
+          ]
+        }
+      ],
+      "headAndWholeBody": "visually verified",
+      "muscleSelectionAndTranslucency": "verified",
+      "leftRectusFemorisLoopAndSmoothRest": "verified in hosted preview",
+      "scrubHeldPose": "verified",
+      "hiddenMusclePreventsPlayback": "verified",
+      "consoleErrors": [],
+      "physicalMobileDevices": "not tested"
+    }
+  },
+  "preservation": {
+    "decodedGlbsUnchanged": true,
+    "glbCount": 92,
+    "protectedInputsUnchanged": {
+      "work/EXECUTION.json": true,
+      "work/NEXT.md": true
+    },
+    "noTextureFilesAdded": true,
+    "snapshot": "local-20261009141757582-bf4218bb",
+    "comparisonNote": "Previous delivery predates two unrelated UI optimization commits; app bundle changes cannot all be attributed to this material edit."
+  },
+  "limits": [
+    "Procedural microrelief is illustrative and isotropic; source fiber orientation/attachment maps are not invented.",
+    "CPU/render and frame interval measurements are post-change developer samples, not a matched performance comparison. GPU timing and VRAM unavailable.",
+    "Previous hosted baseline predates unrelated UI optimization commits.",
+    "Build chunk-size warning remains. Existing work/NEXT.md trailing blank-line diff was preserved."
+  ],
+  "imageHashes": {
+    "after-head.png": "c2f38a26f74b78811bfbe595d581db95c8f834cf517724597dd6795761e8be8c",
+    "final-head-390.png": "4188c6fb92fc4e9aed5ab40eaed8494743f374f646469f0af2b3881ff9476300",
+    "final-head-1024.png": "16888a802e41e0583307b5b713d038d1d388a52085515bb84140cdb5f98462a7",
+    "final-motion.png": "6fb486a1a45b007f697fda2bd8f491db4fed5d370944c355f9b4e650caf4f256",
+    "before-home.png": "ae0b09b049792e0c1de8d02d029fd2ec08da3fc86b82ebebc04c97821eef002f",
+    "final-translucent.png": "6749f490af794d591eedb1981e2a25636dc61e287f92f7cb7679377e65223684",
+    "final-head-1440.png": "01b63d583265ad10c646d9bb78731ec97abd71c38960022bf63b15f65e6bbd5a",
+    "final-scrub.png": "ac9fa12c00979cdbdec0def0b298032d067c5654bec3e923b5bc6adea72b582a",
+    "before-head.png": "e42409abcbeafbd6d2c5ed66c8cea65a63b39e8fbe250649b6e307350e1da875",
+    "after-motion.png": "8081c7bd6f3eb954fb58b04b98e8adc7e83f35f5ef544a5049b1c10100d0b611",
+    "after-home.png": "5e936734aa21225d3da8c39b5b2ba1b8f04cdac626b034ce4b174b7e25451f0a"
+  }
+}

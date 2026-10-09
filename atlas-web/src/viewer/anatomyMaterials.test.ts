@@ -37,3 +37,30 @@ test('all presentation and motion tones keep real depth and avoid textures or fa
   assert.equal(anatomyMaterialParameters('muscle',{mode:'motionContext',contextOpacity:2}).opacity,.6);
   cache.dispose();
 });
+
+test('muscle microrelief shares a program across states and follows rest coordinates through deformation', () => {
+  const cache = new AnatomyMaterials();
+  const modes: MaterialMode[] = ['normal', 'selected', 'translucent', 'innervated', 'motionContext'];
+  const keys = new Set<string>();
+  for (const mode of modes) for (const phase of [null, 'action', 'return'] as const) {
+    const material = cache.get('muscle', { mode, phase });
+    keys.add(material.customProgramCacheKey());
+    const shader = {
+      vertexShader: THREE.ShaderLib.standard.vertexShader,
+      fragmentShader: THREE.ShaderLib.standard.fragmentShader,
+      uniforms: {},
+    };
+    material.onBeforeCompile(shader as Parameters<typeof material.onBeforeCompile>[0], {} as THREE.WebGLRenderer);
+    assert(shader.vertexShader.indexOf('vAtlasMuscleRest = position;') < shader.vertexShader.indexOf('#include <morphtarget_vertex>'));
+    assert(shader.vertexShader.includes('#include <skinning_vertex>'));
+    assert(shader.fragmentShader.includes('float atlasDetail = 1.0 - smoothstep'));
+    assert(shader.fragmentShader.includes('dot(atlasNormal, atlasNormal) > 1e-20'));
+    assert(!shader.fragmentShader.includes('sampler2D atlas'));
+  }
+  assert.equal(keys.size, 1);
+  const boneShader = {vertexShader: THREE.ShaderLib.standard.vertexShader, fragmentShader: THREE.ShaderLib.standard.fragmentShader, uniforms: {}};
+  const bone = cache.get('bone');
+  bone.onBeforeCompile(boneShader as Parameters<typeof bone.onBeforeCompile>[0], {} as THREE.WebGLRenderer);
+  assert.equal(boneShader.fragmentShader, THREE.ShaderLib.standard.fragmentShader);
+  cache.dispose();
+});

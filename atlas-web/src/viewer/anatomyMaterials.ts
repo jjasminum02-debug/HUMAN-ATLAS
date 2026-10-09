@@ -1,12 +1,13 @@
 import * as THREE from 'three';
+import { installMuscleSurface } from './muscleSurface.ts';
 
 // Tissue identity must come from the source contract. A muscle's pale ends are not tendon labels.
 export type Tissue = 'bone' | 'muscle' | 'nerve' | 'accessory' | 'tendon';
 export type MaterialMode = 'normal' | 'selected' | 'dim' | 'translucent' | 'nerveContext' | 'motorContext' | 'innervated' | 'observationContext' | 'motionContext' | 'originContext' | 'insertionContext';
 export type MaterialState = { mode?: MaterialMode; phase?: 'action' | 'return' | null; contextOpacity?: number; userTranslucent?: boolean; hovered?: boolean };
 export const ANATOMY_PALETTE = {
-  bone: '#e9dfc8', muscle: '#aa5659', nerve: '#dbbb32', accessory: '#c5bdb1', tendon: '#ece6d8',
-  origin: '#476eb4', insertion: '#bc7135', selected: '#237f79', selectedNerve: '#d0c42f', related: '#338fc1', action: '#c15b53', return: '#a4aaa8',
+  bone: '#e9dfc8', muscle: '#d48b78', nerve: '#dbbb32', accessory: '#c5bdb1', tendon: '#ece6d8',
+  origin: '#476eb4', insertion: '#bc7135', selected: '#237f79', selectedNerve: '#d0c42f', related: '#338fc1', action: '#df8065', return: '#a4aaa8',
 };
 
 export function anatomyMaterialParameters(tissue: Tissue, state: MaterialState = {}): THREE.MeshStandardMaterialParameters {
@@ -19,7 +20,7 @@ export function anatomyMaterialParameters(tissue: Tissue, state: MaterialState =
   const opacity = mode === 'translucent' || state.userTranslucent ? .3 : mode === 'nerveContext' ? .12 : mode === 'motorContext' ? .5
     : mode === 'observationContext' ? .18 : mode === 'motionContext' ? Math.max(.1, Math.min(.6, state.contextOpacity ?? .3)) : 1;
   const nerve = tissue === 'nerve', selected = mode === 'selected';
-  return { color, metalness: 0, roughness: nerve ? selected ? .42 : .55 : tissue === 'bone' ? .62 : tissue === 'muscle' ? .68 : .8,
+  return { color, metalness: 0, roughness: nerve ? selected ? .42 : .55 : tissue === 'bone' ? .62 : tissue === 'muscle' ? .64 : .8,
     transparent: opacity < 1, opacity, depthTest: true, depthWrite: opacity === 1,
     // Selection also changes luminance/specular response; tissue identity remains yellow for nerves.
     emissive: nerve ? color : state.hovered ? '#628b83' : '#000000',
@@ -34,7 +35,11 @@ export class AnatomyMaterials {
     const opacity = state.mode === 'motionContext' ? Math.max(.1, Math.min(.6, state.contextOpacity ?? .3)) : '';
     const key = `${tissue}:${state.mode ?? 'normal'}:${state.phase ?? ''}:${Boolean(state.hovered)}:${opacity}${state.userTranslucent ? ':user-translucent' : ''}`;
     let material = this.instances.get(key);
-    if (!material) { material = new THREE.MeshStandardMaterial(anatomyMaterialParameters(tissue, state)); material.name = key; this.instances.set(key, material); this.owned.add(material); }
+    if (!material) {
+      material = new THREE.MeshStandardMaterial(anatomyMaterialParameters(tissue, state));
+      if (tissue === 'muscle') installMuscleSurface(material);
+      material.name = key; this.instances.set(key, material); this.owned.add(material);
+    }
     return material;
   }
   get size() { return this.instances.size; }
