@@ -56,6 +56,7 @@ test('nerve observation respects all six static-pose, hidden, layer and muscle-s
     const v = { ...view, regionIds: ['leg'], nerves: true, poseId: nerve.nerve!.poseId, selectedId: nerve.sourceKey, observeNerves: true };
     const observe = (next: BodyView) => observingNerves(rows, next, new Set(demandedStructureKeys(rows, next)));
     assert.equal(observe(v), true);
-    for (const next of [{ ...v, nerves: false }, { ...v, observeNerves: false }, { ...v, poseId: 'walking' }, { ...v, hiddenSourceKeys: [nerve.sourceKey] }, { ...v, regionIds: ['head'] }, { ...v, selectedId: rows.find(r => r.kind === 'muscle' && r.regionIds.includes('leg') && r.localDisplayEligible)!.sourceKey }]) assert.equal(observe(next), false);
+    assert.equal(observe({ ...v, regionIds: ['head'] }), true); // Explicit selected course crosses regional boundaries.
+    for (const next of [{ ...v, nerves: false }, { ...v, observeNerves: false }, { ...v, poseId: 'walking' }, { ...v, hiddenSourceKeys: [nerve.sourceKey] }, { ...v, regionIds: ['head'], selectedId: null }, { ...v, selectedId: rows.find(r => r.kind === 'muscle' && r.regionIds.includes('leg') && r.localDisplayEligible)!.sourceKey }]) assert.equal(observe(next), false);
   }
 });

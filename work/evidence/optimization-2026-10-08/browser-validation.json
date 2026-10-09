@@ -1,0 +1,33 @@
+{
+  "url": "http://127.0.0.1:5193/",
+  "viewports": [
+    {
+      "width": 1280,
+      "height": 720,
+      "capture": "desktop.jpg"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "capture": "mobile.jpg"
+    }
+  ],
+  "flows": {
+    "slashSearchFocus": "passed",
+    "latissimusSearchAndCard": "passed",
+    "selectionFitTransition": "transition active then settled, same canvas",
+    "structureFunctionTabs": "passed, same canvas",
+    "posteriorView": "passed",
+    "homeThenHeadRegion": "passed, head framing reached",
+    "mobileObservationControlsAndCard": "visually inspected"
+  },
+  "canvasId": "anatomy-b00ca242-c82b-4af5-9ac6-8e4a5a736672",
+  "consoleErrors": 0,
+  "consoleWarnings": 0,
+  "limitations": [
+    "Reduced-motion behavior checked in code, not browser emulation.",
+    "Manual transition cancellation was exercised but immediate diagnostic sampling lagged; not counted as a browser assertion.",
+    "Initial port 5186 served older code; final checks used the current checkout on port 5193.",
+    "No all-muscle content or animation completeness claim."
+  ]
+}

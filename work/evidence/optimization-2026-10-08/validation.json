@@ -1,0 +1,28 @@
+{
+  "search": {
+    "exit": 0,
+    "tail": " term rows from learner projection (0.058834ms)\n✔ T11-B06 opened TA2 English/Latin terms and sourced synonyms stay on their ten existing IDs (1.515ms)\n✔ T11-B06 attested Korean names/Hanja resolve to their assigned IDs; conflicting and unverified forms stay withheld (0.499125ms)\n✔ T11-B07 TA2 direct English/Latin preferred cells and synonyms resolve to their ten existing IDs (3.984042ms)\n✔ T11-B07 attested customary Korean/current Korean/source Hanja stay on the assigned ID (0.29675ms)\n✔ T11-B07 conflicting Hanja and unsupported part translations remain unlinked (0.136542ms)\n✔ T11-B08 direct TA2 English/Latin terms and recorded synonyms resolve to the ten assigned part IDs (2.207125ms)\n✔ T11-B08 source-attested Korean customary and current names remain attached to their existing part IDs (0.195791ms)\n✔ T11-B08 missing medial-pterygoid Korean/Hanja and inherited parent Hanja remain unlinked (0.156292ms)\n✔ T11-B09 direct TA2 English/Latin cells and synonyms resolve to their seven existing part IDs (1.336666ms)\n✔ T11-B09 attested Korean terms resolve to their exact existing part IDs, while the generic long-head term stays contextual (0.276167ms)\n✔ T11-B09 unsupported deltoid wording, misleading legacy lateral-head mapping, and parent Hanja stay withheld (0.131625ms)\n✔ rolling rows match full-matrix distance for all short repeated/transposed strings and anatomy terms (8.342375ms)\nℹ tests 45\nℹ suites 0\nℹ pass 45\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 115.090959\n"
+  },
+  "camera": {
+    "exit": 0,
+    "tail": "✔ anatomical presets preserve orbit height, radius, target and zoom in the verified frame (0.710041ms)\n✔ opposite-side transition keeps distance and never crosses the orbit target (0.462958ms)\n✔ common fit retains every corner in front and side view at narrow and wide aspects (1.360542ms)\n✔ entrance is a bounded left-facing camera orbit with a smooth exact end (0.583833ms)\n✔ entrance eases both ends instead of abruptly starting or stopping rotation (0.062042ms)\nℹ tests 5\nℹ suites 0\nℹ pass 5\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 71.005292\n"
+  },
+  "datasets": {
+    "exit": 1,
+    "tail": "routes (281.411ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  true !== false\n  \n      at TestContext.<anonymous> (file:///Users/daniel/Downloads/SIM%20/HUMAN%20ATLAS/atlas-web/src/viewer/datasets/nerveScene.test.ts:59:161)\n      at async Test.run (node:internal/test_runner/test:1389:7)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: true,\n    expected: false,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n\ntest at src/viewer/datasets/regionalContext.test.ts:53:1\n✖ nerve observation respects all six static-pose, hidden, layer and muscle-selection gates (1.471625ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  true !== false\n  \n      at TestContext.<anonymous> (file:///Users/daniel/Downloads/SIM%20/HUMAN%20ATLAS/atlas-web/src/viewer/datasets/regionalContext.test.ts:59:324)\n      at Test.runInAsyncScope (node:async_hooks:227:14)\n      at Test.run (node:internal/test_runner/test:1382:25)\n      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)\n      at Test.postRun (node:internal/test_runner/test:1522:19)\n      at Test.run (node:internal/test_runner/test:1447:12)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: true,\n    expected: false,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n"
+  },
+  "build": {
+    "exit": 0,
+    "tail": ":257,\"t81PrivateWorkbookHashReference\":\"8e10e00e76f5da8e6d1be6a0f9dcab6039d9a3f81d8a3808c0fe28545802ab3c\"},\"priorBundle\":{\"path\":\"atlas-web/dist/assets/App-X3cv7bvC.js\",\"bytes\":1091485,\"hits\":[\"cross_checked\",\"evidenceHash\",\"accessedOn\",\"fieldEvidenceId\",\"T18-FIELD-\",\"T18-STATPEARLS\",\"StatPearls\",\"Hands-on Anatomy\"],\"sha256\":\"5bb64f9df1005baa44c29566949c961fdd6c6166917a8ea7e73a105b871c9d2d\"},\"learnerRuntimeRows\":{\"names\":81,\"conceptStructureRows\":8,\"sourceStructureRows\":461,\"actions\":7},\"distribution\":{\"scannedFiles\":5,\"bundles\":[{\"path\":\"atlas-web/dist/assets/App-C5VD_QMS.js\",\"bytes\":3041963,\"sha256\":\"163b904c7216225a873bb0fc46987549f22f4d413598d78ac6df2f661b9a1195\"},{\"path\":\"atlas-web/dist/assets/index-BRAIecXd.js\",\"bytes\":222672,\"sha256\":\"fee0f43c043843cde394de7ed541bfe832505aef3aa4e8d0f385ebe75c8adbff\"}]},\"provenanceMarkersChecked\":274,\"leaks\":[],\"limitations\":[\"The private workbook bytes were not reopened or copied; only the existing T81 disposition/hash record was checked.\",\"This validates absence of development provenance markers from compiled learner assets, not public redistribution permission or human review.\"]}\n[plugin builtin:vite-reporter] \n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n"
+  },
+  "datasetsFinal": {
+    "exit": 0,
+    "tests": 76,
+    "passed": 76,
+    "failed": 0,
+    "initialFailures": "two historical region expectations; aligned with existing c45bff1 explicit selected nerve course behavior, while retaining layer/pose/hide gates"
+  },
+  "typecheck": {
+    "exit": 0
+  }
+}

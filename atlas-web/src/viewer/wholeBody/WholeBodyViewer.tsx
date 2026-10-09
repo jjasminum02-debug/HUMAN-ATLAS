@@ -111,7 +111,7 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
       && !presentation.hidden.includes(selectedId ?? '');
     if (previous === null) {
       // The adapter already fit a supported nerve deep link before its opening orbit.
-      if (regionIds.length > 0 && !nerveFramed) controller.current?.focus(regionIds);
+      if (regionIds.length > 0 && !nerveFramed) controller.current?.focus(regionIds, false);
     } else if (previous.regionKey !== regionKey || previous.resetRevision !== viewResetRevision) {
       if (nerveFramed) controller.current?.focusSelection(true);
       else controller.current?.focus(regionIds);

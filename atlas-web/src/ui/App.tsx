@@ -66,6 +66,19 @@ export default function App() {
     const [boneLayerEnabled, setBoneLayerEnabled] = useState(true);
     const [selectedSourceHidden, setSelectedSourceHidden] = useState(false);
     const info = useRef<HTMLDialogElement>(null);
+    const searchInput = useRef<HTMLInputElement>(null);
+    useEffect(() => {
+        const focusSearch = (event: KeyboardEvent) => {
+            const target = event.target;
+            if (event.key !== '/' || event.ctrlKey || event.metaKey || event.altKey || event.isComposing
+                || !entered || document.querySelector('dialog[open]')
+                || target instanceof HTMLElement && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))) return;
+            event.preventDefault(); searchInput.current?.focus(); searchInput.current?.select();
+            setExploreOpen(true);
+        };
+        window.addEventListener('keydown', focusSearch);
+        return () => window.removeEventListener('keydown', focusSearch);
+    }, [entered]);
     const regionPicker = useRef<HTMLDivElement>(null);
     const regionPickerTrigger = useRef<HTMLButtonElement>(null);
     const regionLeaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -311,7 +324,7 @@ export default function App() {
   <header className="study-header" inert={!entered}>
    <div className="header-brand-group"><button className="brand" aria-label="Human Atlas 전신 홈" onClick={() => { setQuery(''); resetPresentation(); navigate({ regions: [], selected: null }, false, ''); setHomeRevision(v => v + 1); }}><span className="brand-dot"/> HUMAN ATLAS</button></div>
    <button className="explore-trigger" aria-expanded={exploreOpen} aria-controls="atlas-explorer" onClick={() => setExploreOpen(!exploreOpen)}>부위 탐색 · {regionLabel} ▾</button>
-   <label className="global-search"><span aria-hidden="true">⌕</span><input type="search" aria-label="구조 검색" placeholder={explorerMode === "actions" ? "움직임·근육 이름 검색" : "근육·뼈·신경 이름 검색"} autoComplete="off" value={query} onChange={e => { updateQuery(e.target.value); setExploreOpen(true); }}/>{query && <button aria-label="검색 지우기" onClick={() => updateQuery('')}>×</button>}</label>
+   <label className="global-search"><span aria-hidden="true">⌕</span><input ref={searchInput} type="search" aria-label="구조 검색" aria-keyshortcuts="/" title="/ 키로 검색" placeholder={explorerMode === "actions" ? "움직임·근육 이름 검색" : "근육·뼈·신경 이름 검색"} autoComplete="off" value={query} onChange={e => { updateQuery(e.target.value); setExploreOpen(true); }}/>{query && <button aria-label="검색 지우기" onClick={() => updateQuery('')}>×</button>}</label>
   </header>
   <button inert={!entered} className="app-info-trigger" onClick={() => info.current?.showModal()}>앱 정보</button>
   <dialog className="app-info-dialog" ref={info} aria-labelledby="app-info-title"><div className="app-info-content"><button className="app-info-close" aria-label="앱 정보 닫기" onClick={() => info.current?.close()}>닫기</button><h2 id="app-info-title">모형·자료 정보</h2>

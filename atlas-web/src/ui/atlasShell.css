@@ -313,3 +313,13 @@
 .atlas-shell .attachment-observe span { font-size: 11px; color: #626c68; }
 .atlas-shell .attachment-observe[aria-pressed="true"] { background: color-mix(in srgb, var(--attachment-tone) 12%, white); box-shadow: inset 3px 0 var(--attachment-tone); }
 .atlas-shell .attachment-observe:focus-visible { outline: 2px solid var(--attachment-tone); outline-offset: 2px; }
+
+/* Short feedback without resizing WebGL on every animation frame. */
+.atlas-shell .study-tab-panel:not([hidden]) { animation: study-content-reveal 180ms ease-out; }
+.atlas-shell :is(.region-structure-list button,.body-tools button,.part-pills button,.study-tabs button) {
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+@keyframes study-content-reveal {
+  from { opacity: .55; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}

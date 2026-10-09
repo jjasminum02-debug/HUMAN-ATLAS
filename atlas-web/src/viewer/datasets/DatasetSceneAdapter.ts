@@ -59,7 +59,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         canvas.addEventListener('pointerdown', this.onDown);
         canvas.addEventListener('pointerup', this.onUp);
         this.setView(this.view);
-        this.focus([]);
+        this.focus([], false);
     }
     setView(view: BodyView) {
         const nextContextKey = this.motionContextKey(view);
@@ -388,7 +388,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             contextBoneFollowers: this.motion?.boneFollowers.map(follower => ({sourceKey:follower.node.userData.sourceKey, matrix:follower.node.matrix.toArray(), rest:follower.rest.toArray()})) ?? [],
             motionBytes: this.motion?.resource.memoryEstimateBytes ?? 0, estimatedActiveBytes: q.bytes + (this.motion?.resource.memoryEstimateBytes ?? 0) });
     }
-    private fit(rows: RuntimeStructureRecord[], padding = 1.25) {
+    private fit(rows: RuntimeStructureRecord[], padding = 1.25, smooth = true) {
         const box = new THREE.Box3();
         for (const r of rows) {
             box.expandByPoint(new THREE.Vector3().fromArray(r.bounds[0]));
@@ -396,10 +396,10 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         }
         if (box.isEmpty())
             return;
-        this.scene.fitObservationBounds(box, padding);
+        this.scene.fitObservationBounds(box, padding, smooth);
     }
-    focus(regions: string[]) { this.fit(framingRecords(this.integration.objects, this.view, regions)); }
-    focusSelection(smooth = false) {
+    focus(regions: string[], smooth = true) { this.fit(framingRecords(this.integration.objects, this.view, regions), 1.25, smooth); }
+    focusSelection(smooth = true) {
         const keys = this.motion ? this.motion.frameSourceKeys : observationFrameKeys(this.integration.objects, this.view);
         const box = new THREE.Box3();
         for (const key of keys) {

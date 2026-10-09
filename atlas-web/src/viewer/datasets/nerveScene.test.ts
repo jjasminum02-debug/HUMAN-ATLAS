@@ -55,8 +55,10 @@ test('shared presentation gates layers/pose/region/hidden before motor highlight
  const rows=combined.integration.objects;const deep=rows.find(r=>r.kind==='nerve'&&r.names.en==='Deep fibular nerve'&&r.side==='left')!;
  const view:BodyView={region:null,regionIds:['leg'],bones:true,muscles:true,nerves:true,poseId:deep.nerve!.poseId,selectedId:deep.sourceKey,dim:true,supplements:false,highlightInnervation:true};
  const keys=(v:BodyView)=>new Set(demandedStructureKeys(rows,v));
+ // Explicit selection follows registered nerve course across region boundaries (c45bff1).
+ assert.equal(keys({...view,regionIds:['head']}).has(deep.sourceKey),true);
  assert.equal(keys(view).has(deep.sourceKey),true);assert.deepEqual(innervationHighlightKeys(rows,view,keys(view)),deep.nerve!.muscleKeys);
- for(const v of [{...view,nerves:false},{...view,poseId:'unsupported-motion'},{...view,regionIds:['head']},{...view,hiddenSourceKeys:[deep.sourceKey]}]){assert.equal(keys(v).has(deep.sourceKey),false);assert.deepEqual(innervationHighlightKeys(rows,v,keys(v)),[]);}
+ for(const v of [{...view,nerves:false},{...view,poseId:'unsupported-motion'},{...view,regionIds:['head'],selectedId:null},{...view,hiddenSourceKeys:[deep.sourceKey]}]){assert.equal(keys(v).has(deep.sourceKey),false);assert.deepEqual(innervationHighlightKeys(rows,v,keys(v)),[]);}
  for(const v of [{...view,muscles:false},{...view,hiddenSourceKeys:deep.nerve!.muscleKeys},{...view,highlightInnervation:false},{...view,isolate:true}])assert.deepEqual(innervationHighlightKeys(rows,v,keys(v)),[]);
  assert.deepEqual(rows.filter(r=>r.kind!=='nerve').map(r=>[r.sourceKey,r.haConceptId,r.targetRoutes]),baseRuntime.objects.map((r:any)=>[r.sourceKey,r.haConceptId,r.targetRoutes]));
  const bad=structuredClone(x.manifest);bad.objects[0].bounds[0][0]=-1;assert.throws(()=>composeNerveScene(base,baseRuntime,bad,x.registry,x.dataset,x.rights,'a'.repeat(64),'b'.repeat(64)));

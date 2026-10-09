@@ -35,6 +35,7 @@ export class AnatomySceneController {
   private readonly renderDurationsMs: number[] = [];
   private pointer = { x: 0, y: 0 };
   private lastReport = 0;
+  private lastProgress: BodyProgress | null = null;
   private hoverId: string | null = null;
   private hoverPoint: { x: number; y: number } | null = null;
   private size = { width: 1, height: 1 };
@@ -85,7 +86,7 @@ export class AnatomySceneController {
     canvas.addEventListener('pointerdown', this.onDown);
     canvas.addEventListener('pointerup', this.onUp);
     canvas.addEventListener('keydown', this.onKey);
-    this.focus(null);
+    this.focus(null, false);
     this.renderer.setAnimationLoop(this.frame);
   }
 
@@ -184,14 +185,14 @@ export class AnatomySceneController {
     this.queue.demand(this.lost ? [] : this.manifest.chunks.filter(c => c.assets.some(a => visible(a, this.view))).map(c => c.id));
   }
   retry() { this.queue.retry(); this.demand(); }
-  focus(regionIds: readonly string[] | string | null = []) {
+  focus(regionIds: readonly string[] | string | null = [], smooth = true) {
     const selectedRegions = typeof regionIds === 'string' ? [regionIds] : regionIds ?? [];
     const box = new THREE.Box3();
     for (const a of this.assets.values()) if ((a.defaultVisible || (a.supplement && this.view.supplements))
       && (selectedRegions.length === 0 || selectedRegions.some((regionId) => a.regions.includes(regionId)))) {
       box.expandByPoint(new THREE.Vector3().fromArray(a.bounds[0])); box.expandByPoint(new THREE.Vector3().fromArray(a.bounds[1]));
     }
-    this.fitBounds(box);
+    this.fitBounds(box, smooth);
   }
   /** Explicit user framing command; never invoked by a pick or panel change. */
   focusSelection() {
@@ -202,7 +203,7 @@ export class AnatomySceneController {
     }
     this.fitBounds(box);
   }
-  private fitBounds(box: THREE.Box3) { this.fitObservationBounds(box, 1.18); }
+  private fitBounds(box: THREE.Box3, smooth = true) { this.fitObservationBounds(box, 1.18, smooth); }
   private async load(id: string, signal?: AbortSignal) {
     const chunk = this.manifest.chunks.find(c => c.id === id)!;
     const response = await this.fetchAsset(chunk.url, { signal }); if (!response.ok) throw new Error('Asset unavailable');
@@ -298,10 +299,13 @@ export class AnatomySceneController {
         }),
       });
     }
-    this.notify({ loaded: wanted.filter(id => this.queue.loaded.has(id)).length, total: wanted.length,
+    const progress: BodyProgress = { loaded: wanted.filter(id => this.queue.loaded.has(id)).length, total: wanted.length,
       failed: wanted.filter(id => this.queue.failed.has(id)).length, contextLost: this.lost,
       selectedAvailable: !this.view.selectedId || [...this.queue.loaded.values()].some(g => g.children.some(obj => obj.visible && this.assets.get(obj.name)?.stableIds.some(id => (this.view.selectedIds ?? [this.view.selectedId]).includes(id)))),
-      calls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles, geometries: this.renderer.info.memory.geometries });
+      calls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles, geometries: this.renderer.info.memory.geometries };
+    if (!this.lastProgress || (Object.keys(progress) as (keyof BodyProgress)[]).some(key => progress[key] !== this.lastProgress![key])) {
+      this.lastProgress = progress; this.notify(progress);
+    }
   }
   private onLost = (event: Event) => { event.preventDefault(); this.stopEntrance(); this.lost = true; this.demand(); this.report(); };
   private onRestored = () => { this.lost = false; this.dirty = true; this.demand(); this.report(); };

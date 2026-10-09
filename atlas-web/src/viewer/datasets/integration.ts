@@ -968,8 +968,10 @@ function routeAllowed(row: SearchableStructure, audience: RouteAudience) {
     return row.localDisplayEligible && row.inspectionEligible !== false && (row.routeAudience ?? 'learner') === audience;
 }
 export function searchStructures<T extends SearchableStructure>(rows: T[], query: string, regions: string[], audience: RouteAudience = 'learner') {
-    const context = regionalAttachmentBoneKeys(rows, regions);
-    const candidates = rows.filter(r => routeAllowed(r, audience) && (query.trim() || inRegionalScene(r, regions, null) || r.kind === 'bone' && context.has(r.sourceKey)));
+    // Text search spans the whole atlas; regional attachment expansion is unused here.
+    const hasQuery = Boolean(query.trim());
+    const context = hasQuery ? new Set<string>() : regionalAttachmentBoneKeys(rows, regions);
+    const candidates = rows.filter(r => routeAllowed(r, audience) && (hasQuery || inRegionalScene(r, regions, null) || r.kind === 'bone' && context.has(r.sourceKey)));
     const unique = new Map<string, T>();
     for (const r of candidates) {
         const key = r.searchGroupKey ?? r.sourceName?.replace(/\.[lr]$/, '') ?? r.sourceKey;

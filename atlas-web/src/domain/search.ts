@@ -59,14 +59,23 @@ export function normalize(value: string): string {
 }
 // Restricted Latin typo tolerance; Korean short queries never use fuzzy matching.
 export function distance(a: string, b: string): number {
-  const d = Array.from({ length: a.length + 1 }, () => Array<number>(b.length + 1).fill(0));
-  for (let i = 0; i <= a.length; i++) d[i][0] = i;
-  for (let j = 0; j <= b.length; j++) d[0][j] = j;
-  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) {
-    d[i][j] = Math.min(d[i-1][j]+1, d[i][j-1]+1, d[i-1][j-1]+(a[i-1] === b[j-1] ? 0 : 1));
-    if (i > 1 && j > 1 && a[i-1] === b[j-2] && a[i-2] === b[j-1]) d[i][j] = Math.min(d[i][j], d[i-2][j-2]+1);
+  // Optimal-string-alignment distance needs only two prior rows, including
+  // adjacent transpositions. Keep the shorter term on the allocated axis.
+  if (a.length < b.length) [a, b] = [b, a];
+  let older = new Uint32Array(b.length + 1);
+  let previous = Uint32Array.from({ length: b.length + 1 }, (_, i) => i);
+  let current = new Uint32Array(b.length + 1);
+  for (let i = 1; i <= a.length; i++) {
+    current[0] = i;
+    for (let j = 1; j <= b.length; j++) {
+      current[j] = Math.min(previous[j] + 1, current[j - 1] + 1,
+        previous[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1])
+        current[j] = Math.min(current[j], older[j - 2] + 1);
+    }
+    [older, previous, current] = [previous, current, older];
   }
-  return d[a.length][b.length];
+  return previous[b.length];
 }
 export function searchEntries(entries: SearchEntry[], query: string): SearchMatch[] {
   const q = normalize(query);
@@ -74,7 +83,10 @@ export function searchEntries(entries: SearchEntry[], query: string): SearchMatc
   return entries.flatMap(entry => {
     const terms = [entry.label, ...entry.aliases].map(normalize);
     const score = terms.some(t => t === q) ? 0 : terms.some(t => t.startsWith(q)) ? 1 : terms.some(t => t.includes(q)) ? 2 :
-      /^[a-z]{5,}$/.test(q) && terms.some(t => distance(t.replace(/muscle$/, ''), q) <= (q.length >= 9 ? 2 : 1)) ? 3 : 99;
+      /^[a-z]{5,}$/.test(q) && terms.some(t => {
+        const candidate = t.replace(/muscle$/, ''), tolerance = q.length >= 9 ? 2 : 1;
+        return Math.abs(candidate.length - q.length) <= tolerance && distance(candidate, q) <= tolerance;
+      }) ? 3 : 99;
     return score === 99 ? [] : [{ entry, approximate: score === 3, score }];
   }).sort((a,b) => a.score - b.score || a.entry.label.localeCompare(b.entry.label, 'ko'));
 }
