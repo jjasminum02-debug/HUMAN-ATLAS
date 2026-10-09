@@ -1,0 +1,53 @@
+{
+  "test-lazy-loading": {
+    "tests": 6,
+    "failures": 0
+  },
+  "test-motion-player": {
+    "tests": 40,
+    "failures": 0
+  },
+  "test-datasets": {
+    "tests": 76,
+    "failures": 0
+  },
+  "motionRuntimeSourceSideCases": 455,
+  "buildAndTypecheck": "passed",
+  "buildStaticImportAndInitialBudgetCheck": "passed",
+  "initialJS": {
+    "beforeBytes": 3264635,
+    "afterBytes": 1321415,
+    "reductionPercent": 59.52,
+    "deferredMotionBytes": 1944237,
+    "scope": "uncompressed compiled JS for home, excluding geometry/CSS/assets; not total application or FPS"
+  },
+  "preservation": {
+    "unchangedPreExistingTrackedWip": true,
+    "wholeBodyViewerRestoredExactly": true,
+    "opensimHead": "d9b05d470b1a481c222372c85b75772faf8f7792",
+    "opensimStatus": ""
+  },
+  "browser": {
+    "url": "http://127.0.0.1:5194/",
+    "environment": "production JS/CSS served by loopback QA server; /__atlas model endpoints forwarded to existing local Vite plugin",
+    "viewports": [
+      "1280x800",
+      "390x844"
+    ],
+    "homeAndMuscleStructureDoNotRequestMotionChunk": true,
+    "functionTabRequestsMotionChunk": true,
+    "intentional503FailureKeepsAnatomyVisible": true,
+    "explicitRefreshRecoversFailedModule": true,
+    "actualLeftTibialisMotionPlayback": "passed, repeated playback with progress observed",
+    "boneMotionOptions": "passed",
+    "actionLibrary": "21 categories visible",
+    "structureFunctionSwitch": "same canvas; player returns to rest on leaving function tab",
+    "reusedCanvasId": "anatomy-3a36a2e1-c539-448e-9deb-148b63725f27",
+    "viewOptions": "restored to baseline at user request",
+    "consoleLogsReportedByBrowser": [],
+    "limits": [
+      "No exhaustive replay of all motions.",
+      "Manual refresh intentionally recreates the page; ordinary feature load/tab changes keep the existing scene."
+    ]
+  }
+}

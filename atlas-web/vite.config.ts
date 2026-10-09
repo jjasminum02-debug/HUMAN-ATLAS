@@ -225,4 +225,5 @@ export default defineConfig({
   plugins: [catalogPlugin(), meshManifestPlugin(), wholeBodyPlugin(projectRoot), motionAssetsPlugin(projectRoot)],
   server: { strictPort: true, fs: { allow: [projectRoot] } },
   preview: { strictPort: true },
+  build: { manifest: true },
 });

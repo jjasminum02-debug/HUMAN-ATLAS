@@ -1,5 +1,4 @@
 import learnerCardRuntime from "../../../atlas-data/terminology/learner-card-runtime.json";
-import learnerMotionRuntime from "./learnerMotionRuntime.generated.ts";
 import { displayTerms, termText, type PilotCatalog } from "./catalog";
 import { learnerNameProjection, learnerSearchEntry, learnerVisibleTerms, mergeLearningConcepts, searchEntries, type SearchEntry } from "../domain/search";
 import learnerNerveGraph from "../../../atlas-data/terminology/learner-nerve-graph-t66.json";
@@ -8,8 +7,6 @@ import { withNerveDisplayNames } from "../domain/nerveDisplayNames.ts";
 import learnerNerveCourse from "../../../atlas-data/terminology/nerve-learning-t66.json";
 import type { LearnerFieldProjection } from "../domain/aiEvidence";
 import { learnerStructureUnavailability } from "../domain/learnerStructureSourceContent";
-import { learnerActionAppliesToSide } from "../domain/learnerActionText";
-import { resolveLearnerMotionCandidate, type LearnerMotionActionOption, type LearnerActionText } from "../domain/motionLearning.ts";
 import { relationsForNerve } from "../domain/nerveRelations.ts";
 import { createLearnerLookupIndex } from "../domain/learnerLookupIndex.ts";
 
@@ -56,20 +53,6 @@ const nerveSearchEntries = nerveGraph.concepts.map(concept => learnerSearchEntry
   concept.key, concept.names.koModern,
   [concept.names.koTraditional, concept.names.en, concept.names.latin, ...concept.searchTerms],
 ));
-type LearnerMotionRuntime = {
-  schemaVersion: "learner-motion-runtime-v1";
-  wave1Actions: Record<string, LearnerMotionActionOption[]>;
-  actions: Record<string, Array<{
-    actionKey: string;
-    learnerActionKey: string | null;
-    label: string;
-    text: LearnerActionText;
-    sideApplicability: "left" | "right" | "bilateral" | "midline" | "not_applicable";
-    learningIntent?: LearnerMotionActionOption["learningIntent"];
-    candidate: LearnerMotionActionOption["candidate"];
-  }>>;
-};
-const motionRuntime = learnerMotionRuntime as unknown as LearnerMotionRuntime;
 export const vocabulary = cardRuntime.names;
 
 export function nameFor(catalog: PilotCatalog, id: string) {
@@ -95,41 +78,6 @@ export function findMuscles(catalog: PilotCatalog, query: string) {
       ...terms.flatMap((term) => typeof term.text === "string" ? [term.text] : [])]);
   });
   return searchEntries(entries, query);
-}
-
-/** Learner-only action text is preprojected; source/evidence references stay out of this bundle. */
-export function motionActionOptionsForLearner(conceptId: string | null, selectedSide?: string | null, sourceKey?: string | null) {
-  const selector = sourceKey && motionRuntime.actions[sourceKey]?.length ? sourceKey : conceptId ?? sourceKey;
-  const projected = (selector ? motionRuntime.actions[selector] ?? [] : []).filter(row =>
-    !row.candidate || !sourceKey || row.candidate.asset.sourceBinding?.subjectSourceKey === sourceKey);
-  const wave1Options = sourceKey
-    ? (motionRuntime.wave1Actions[sourceKey] ?? []).filter(row =>
-      !selectedSide || row.sideApplicability === "bilateral" || row.sideApplicability === "midline" || row.sideApplicability === selectedSide)
-    : [];
-  const displayRows = (lookups.actionsByConcept.get(conceptId ?? '') ?? []).filter((row) =>
-    learnerActionAppliesToSide(row.sideApplicability, selectedSide)).map((row) => {
-    return {
-      id: row.key,
-      label: row.label,
-      text: { label: row.label, explanation: row.explanation },
-      sideApplicability: row.sideApplicability,
-      learningIntent: "muscle_action" as const,
-      candidate: resolveLearnerMotionCandidate(row.key, selectedSide, projected),
-    };
-  });
-  if (conceptId && selector === conceptId) return [...displayRows, ...wave1Options];
-  if (!sourceKey) return displayRows;
-  // A source-only action is reachable by exact sourceKey; no canonical ID or alias is invented.
-  const sourceRows = projected.filter((row) => learnerActionAppliesToSide(row.sideApplicability, selectedSide)).map((row) => ({
-    id: row.actionKey,
-    label: row.label,
-    text: { label: row.text.label, explanation: row.text.explanation },
-    sideApplicability: row.sideApplicability === "left" || row.sideApplicability === "right" ? row.sideApplicability : null,
-    learningIntent: row.learningIntent ?? "posture_observation" as const,
-    candidate: row.candidate,
-  }));
-  const byId = new Map([...sourceRows, ...wave1Options].map(row => [row.id, row]));
-  return [...byId.values()];
 }
 
 /** Learner-safe field projection; provenance and review detail stay in development evidence. */
