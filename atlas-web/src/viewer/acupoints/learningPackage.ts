@@ -31,7 +31,7 @@ export function validateLearningPackage(p:LearningPackage,context:AnchorContext)
 }
 export async function loadLearningPackage(side:'right'|'left',context:AnchorContext&{motionActive:boolean},signal:AbortSignal,cancelled:()=>boolean) {
   if(context.motionActive)throw Error('정지 자세에서 다시 열어 주세요.');
-  const {default:url}=await import('../../../../atlas-data/acupoints/learner/lung.json?url');
+  const {default:url}=await import('../../../../atlas-data/acupoints/learner/lung-r7.json?url');
   if(cancelled())throw new DOMException('Cancelled','AbortError');
   const response=await fetch(url,{signal});if(!response.ok)throw Error('경혈 자료를 열 수 없습니다.');
   const bytes=await response.arrayBuffer();if(cancelled())throw new DOMException('Cancelled','AbortError');

@@ -9,11 +9,15 @@ R=Path(__file__).resolve().parents[2]
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--evidence-dir',required=True,help='Workspace-relative evidence directory for this run')
 parser.add_argument('--config',help='Optional workspace-relative registered native inputs/region configuration')
+parser.add_argument('--output-dir',help='Versioned carrier directory; never overwrite a historical registration')
 args=parser.parse_args()
 E=(R/args.evidence_dir).resolve()
 assert E.is_relative_to(R/'work/evidence'),'Evidence must remain in work/evidence'
 A=R/'work/evidence/acupoint-AC1'
 OUT=R/'atlas-data/acupoints/carriers/education-r1'
+if args.output_dir:
+    OUT=(R/args.output_dir).resolve()
+    assert OUT.is_relative_to(R/'atlas-data/acupoints/carriers') and not OUT.exists(),'New carrier output must be an unused versioned directory'
 read=lambda p:json.loads(p.read_text())
 sha=lambda b:hashlib.sha256(b).hexdigest()
 dataset=read(A/'runtime-dataset.json')
@@ -116,7 +120,7 @@ if args.config:
 
 rights={'source':'Z-Anatomy CC BY-SA 4.0; BodyParts3D CC BY-SA 2.1 Japan attribution retained; exact ancestry not invented','localObservation':'supported','publicRedistribution':'held','professorReview':'not_performed'}
 entries=[];audits=[];all_hits={};seams=[];mapping={}
-previous=read(OUT/'manifest.json') if config_data else None
+previous=read(OUT/'manifest.json') if config_data and (OUT/'manifest.json').exists() else None
 # Include native anatomy at shoulder/neck/hand boundaries outside ray-source sets.
 collision_keys=[k for k,r in rows.items() if eligible(r) and r['bounds'][1][1]>-.02 and r['bounds'][0][1]<1.80]
 collision_keys=sorted(set(collision_keys)|{k for cfg in configs for k in cfg['sources']+cfg['axis']})

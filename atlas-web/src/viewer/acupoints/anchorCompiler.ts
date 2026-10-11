@@ -3,12 +3,14 @@ import { anchorBinding, localLearnerEligible, projectLearnerInstances } from './
 import { sha256 } from './placementMigration.ts';
 import type { Carrier, PlacementAssessment, PointInstance, Side, SourceRef, Vec3 } from './schema.ts';
 
-export const ANCHOR_COMPILER_VERSION='explicit-landmarks-2.0';
-type Address={triangle:number;barycentric:Vec3};
+export const ANCHOR_COMPILER_VERSION='explicit-landmarks-2.2';
+type Address={triangle:number;barycentric:Vec3;carrierId?:string};
 export interface LandmarkInput {
   id:string; anatomy:string; acquisition:'anatomical_annotation'|'bounds'|'nearest'|'mirror'|'unresolved';
   side:Side; sourceKey:string; native:TopologyAnchor; surface:Address; evidenceId:string;
   role:'anatomical_landmark'|'finger_cun_reference';
+  /** Authored model correspondence is distinct from an observed skin landmark. */
+  modelIndicator?:{kind:'educational_model_indicator';observedSkinLandmark:false;construction:string;limitations:string[]};
 }
 export interface RuleEvidence {
   id:string; purpose:'landmark_annotation'|'location_relation'|'surface_registration'|'proportion';
@@ -18,19 +20,26 @@ export interface RuleEvidence {
   /** Explicit replay tolerance for the annotated surface/native correspondence, never a nearest search. */
   maxRegistrationGapMetres?:number;
   measurement?:{kind:'B-cun'|'F-cun';value:number};
+  measurementAxis?:'anatomical_native_axis';
   rights:{localObservation:'supported'|'held';publicRedistribution:'held'|'supported'};
 }
 export type PlacementRule =
   | {kind:'landmark';landmark:string}
-  | {kind:'B-cun';from:string;to:string;value:number;totalCun:number;path:SurfaceSegment[];evidenceId:string}
-  | {kind:'F-cun';from:string;directionTo:string;value:number;calibration:{from:string;to:string;cun:number};path:SurfaceSegment[];evidenceId:string}
+  | {kind:'B-cun';from:string;to:string;value:number;totalCun:number;path:SurfaceSegment[];evidenceId:string;measurementAxis?:{from:string;to:string}}
+  | {kind:'F-cun';from:string;directionTo:string;value:number;calibration:{from:string;to:string;cun:number};path:SurfaceSegment[];evidenceId:string;
+      nativeDirections?:{origin:string;from:string;to:string}[]}
   | {kind:'bounds'|'nearest'|'unresolved'};
-export interface SurfaceSegment {triangle:number;from:Vec3;to:Vec3}
+export interface SurfaceSegment {triangle:number;from:Vec3;to:Vec3;carrierId?:string}
+export interface NativeObservation {
+  id:string; anatomy:string; acquisition:'anatomical_annotation'; side:Side; sourceKey:string; native:TopologyAnchor; evidenceId:string;
+  /** A source observation establishes context, never a surface anchor by itself. */
+  interpretation:string;
+}
 export interface PlacementUnit {
   id:string; scope:'real_input'|'technical_fixture'; code:string; side:Side; revision:string;
   context:AnchorContext; carrierId:string; originalText:string; originalSources:SourceRef[];
   author:'ai'|'human'; professorReview:PointInstance['professorReview'];
-  landmarks:LandmarkInput[]; rule:PlacementRule; relationEvidenceId:string; surfaceEvidenceId:string;
+  landmarks:LandmarkInput[]; observedReferences?:NativeObservation[]; rule:PlacementRule; relationEvidenceId:string; surfaceEvidenceId:string;
 }
 export interface CompilerInputs { domain:'real_input'|'technical_fixture';carriers:Record<string,Carrier>; native:Record<string,AnchorTopology & {rights:Carrier['rights']}>; evidence:RuleEvidence[] }
 export interface CompiledUnit {
@@ -41,8 +50,8 @@ export interface CompiledUnit {
 export interface CompilerLedger {version:2;compilerVersion:string;units:Record<string,CompiledUnit>}
 const encode=(v:unknown)=>new TextEncoder().encode(JSON.stringify(v));
 const fail=(message:string):never=>{throw Error(message);};
-const address=(c:AnchorTopology,a:Address):TopologyAnchor=>({carrierId:c.id,carrierRevision:c.revision,carrierHash:c.topologySha256,
-  side:c.side,frameId:c.frameId,unit:c.unit,poseId:c.poseId,...a});
+const address=(c:AnchorTopology,a:Address):TopologyAnchor=>({...a,carrierId:c.id,carrierRevision:c.revision,carrierHash:c.topologySha256,
+  side:c.side,frameId:c.frameId,unit:c.unit,poseId:c.poseId});
 const vector=(c:AnchorTopology,a:Address)=>resolveAnchor(c,address(c,a)).position;
 const blank=(unit:PlacementUnit,inputSha256:string):PlacementAssessment=>({schemaVersion:2,policyVersion:'landmark-evidence-v2',scope:unit.scope,inputDomain:unit.scope,
   technical:'not_checked',precision:'unresolved',basis:'legacy_unresolved',author:unit.author,inputSha256,
@@ -51,10 +60,12 @@ const blank=(unit:PlacementUnit,inputSha256:string):PlacementAssessment=>({schem
   rights:{localObservation:'held',publicRedistribution:'held',sourceIds:[]}});
 async function unitFingerprint(unit:PlacementUnit,inputs:CompilerInputs) {
   const landmarks=Array.isArray(unit.landmarks)?unit.landmarks:[];
-  const ids=[unit.relationEvidenceId,unit.surfaceEvidenceId,...landmarks.map(l=>l.evidenceId)];
+  const ids=[unit.relationEvidenceId,unit.surfaceEvidenceId,...landmarks.map(l=>l.evidenceId),...(unit.observedReferences??[]).map(l=>l.evidenceId)];
   if(unit.rule?.kind==='B-cun'||unit.rule?.kind==='F-cun')ids.push(unit.rule.evidenceId);
-  return sha256(encode({version:ANCHOR_COMPILER_VERSION,domain:inputs.domain,unit,carrier:inputs.carriers[unit.carrierId],
-    native:Object.fromEntries([...new Set(landmarks.map(l=>l.sourceKey))].sort().map(k=>[k,inputs.native[k]])),
+  const refs=[unit.carrierId,...landmarks.flatMap(l=>l.surface?.carrierId?[l.surface.carrierId]:[])];
+  if(unit.rule?.kind==='B-cun'||unit.rule?.kind==='F-cun')refs.push(...unit.rule.path.flatMap(s=>s.carrierId?[s.carrierId]:[]));
+  return sha256(encode({version:ANCHOR_COMPILER_VERSION,domain:inputs.domain,unit,carriers:Object.fromEntries([...new Set(refs)].sort().map(k=>[k,inputs.carriers[k]])),
+    native:Object.fromEntries([...new Set([...landmarks,...(unit.observedReferences??[])].map(l=>l.sourceKey))].sort().map(k=>[k,inputs.native[k]])),
     evidence:inputs.evidence.filter(e=>ids.includes(e.id)).sort((a,b)=>a.id.localeCompare(b.id))}));
 }
 
@@ -75,6 +86,18 @@ export async function compilePlacementUnit(unit:PlacementUnit,inputs:CompilerInp
     assessment.technical='passed';assessment.checks.side=true;assessment.checks.pose=true;
     assessment.checks.frame=true;assessment.checks.topology=true;
     assessment.rights={localObservation:'supported',publicRedistribution:c.rights.publicRedistribution,sourceIds:[c.rights.source]};
+    const surfaceCarriers=new Map<string,Carrier>([[c.id,c]]);
+    const referenced=(a:{carrierId?:string})=>surfaceCarriers.get(a.carrierId??c.id)??fail('unverified reference carrier');
+    const refs=[...unit.landmarks.map(l=>l.surface)];
+    if(unit.rule.kind==='B-cun'||unit.rule.kind==='F-cun')refs.push(...unit.rule.path.map(s=>({triangle:s.triangle,barycentric:s.from,carrierId:s.carrierId})));
+    for(const ref of refs)if(ref.carrierId&&!surfaceCarriers.has(ref.carrierId)){
+      const other=inputs.carriers[ref.carrierId];if(!other)fail('missing reference carrier');
+      validateCarrier(other,unit.context);await verifyCarrierHash(other);
+      if(other.side!==unit.side&&other.side!=='midline')fail('reference carrier side mismatch');
+      surfaceCarriers.set(other.id,other);assessment.rights.sourceIds.push(other.rights.source);
+      if(other.rights.publicRedistribution!=='supported')assessment.rights.publicRedistribution='held';
+    }
+    const surfaceVector=(a:Address)=>vector(referenced(a),a);
     if(['bounds','nearest','unresolved'].includes(unit.rule.kind))fail(`ineligible rule: ${unit.rule.kind}; explicit anatomical landmarks required`);
     const getEvidence=(id:string,purpose:RuleEvidence['purpose'])=>{
       const matches=inputs.evidence.filter(e=>e.id===id);
@@ -97,8 +120,10 @@ export async function compilePlacementUnit(unit:PlacementUnit,inputs:CompilerInp
     for(const l of unit.landmarks) {
       if(annotated.has(l.id))fail(`duplicate landmark: ${l.id}`);
       if(!l.id||!l.anatomy.trim()||l.acquisition!=='anatomical_annotation'||l.side!==unit.side)fail(`unresolved/bounds/nearest/mirrored landmark: ${l.id}`);
+      if(l.modelIndicator&&(l.modelIndicator.kind!=='educational_model_indicator'||l.modelIndicator.observedSkinLandmark!==false
+        ||!l.modelIndicator.construction?.trim()||!l.modelIndicator.limitations?.length||l.modelIndicator.limitations.some(x=>!x.trim())))fail(`incomplete model indicator: ${l.id}`);
       const native=inputs.native[l.sourceKey];if(!native||native.id!==l.sourceKey)fail(`missing native landmark geometry: ${l.id}`);
-      try {validateTopology(native,unit.context);await verifyCarrierHash(native);resolveAnchor(native,l.native);vector(c,l.surface);}
+      try {validateTopology(native,unit.context);await verifyCarrierHash(native);resolveAnchor(native,l.native);surfaceVector(l.surface);}
       catch(error) {
         assessment.technical='failed';assessment.checks.topology=false;
         assessment.checks.frame=native.frameId===unit.context.frameId;
@@ -109,32 +134,49 @@ export async function compilePlacementUnit(unit:PlacementUnit,inputs:CompilerInp
       assessment.rights.sourceIds.push(native.rights.source);
       if(native.side!==unit.side||l.native.side!==unit.side){assessment.technical='failed';assessment.checks.side=false;fail(`native landmark side mismatch: ${l.id}`);}
       const evidence=getEvidence(l.evidenceId,'landmark_annotation');
-      if(resolveAnchor(native,l.native).position.distanceTo(vector(c,l.surface))>gap!)fail(`surface/native annotation gap exceeds explicit tolerance: ${l.id}`);
+      if(resolveAnchor(native,l.native).position.distanceTo(surfaceVector(l.surface))>gap!)fail(`surface/native annotation gap exceeds explicit tolerance: ${l.id}`);
       annotated.set(l.id,l);
-      assessment.landmarks.push({id:l.id,anatomy:l.anatomy,sourceKey:l.sourceKey,evidenceSha256:await sha256(encode(evidence))});
+      assessment.landmarks.push({id:l.id,anatomy:l.anatomy,sourceKey:l.sourceKey,evidenceSha256:await sha256(encode(evidence)),...(l.modelIndicator?{modelIndicator:structuredClone(l.modelIndicator)}:{})});
+    }
+    for(const ref of unit.observedReferences??[]) {
+      if(!ref.id||!ref.anatomy.trim()||!ref.interpretation.trim()||ref.acquisition!=='anatomical_annotation'||ref.side!==unit.side)fail('invalid observed anatomical context');
+      const native=inputs.native[ref.sourceKey];if(!native||native.id!==ref.sourceKey)fail('missing observed context geometry');
+      validateTopology(native,unit.context);await verifyCarrierHash(native);resolveAnchor(native,ref.native);
+      if(native.side!==unit.side||ref.native.side!==unit.side)fail('observed context side mismatch');
+      if(native.rights.localObservation!=='supported')fail('observed context local rights held');
+      if(native.rights.publicRedistribution!=='supported')assessment.rights.publicRedistribution='held';
+      const e=getEvidence(ref.evidenceId,'landmark_annotation');
+      (assessment.contextReferences??=[]).push({id:ref.id,sourceKey:ref.sourceKey,anatomy:ref.anatomy,evidenceSha256:await sha256(encode(e))});
+      assessment.rights.sourceIds.push(native.rights.source);
     }
     const landmark=(id:string)=>annotated.get(id)??fail(`missing meaningful landmark: ${id}`);
     const r=unit.rule;let result:Address|null=null;
-    if(r.kind==='landmark') {result=landmark(r.landmark).surface;assessment.basis='landmark';}
+    if(r.kind==='landmark') {result=landmark(r.landmark).surface;if(referenced(result).id!==c.id)fail('target carrier mismatch');assessment.basis='landmark';}
     else if(r.kind==='B-cun'||r.kind==='F-cun') {
       const ev=getEvidence(r.evidenceId,'proportion');
       if(!Number.isFinite(r.value)||r.value<0||r.value>64)fail('invalid proportion numerator');
       const start=landmark(r.from),end=landmark(r.kind==='B-cun'?r.to:r.directionTo);
-      if(start.id===end.id||vector(c,start.surface).distanceTo(vector(c,end.surface))<1e-6)fail('degenerate proportional landmarks');
+      if(start.id===end.id||surfaceVector(start.surface).distanceTo(surfaceVector(end.surface))<1e-6)fail('degenerate proportional landmarks');
       if(!r.path.length)fail('missing explicit surface path');
-      const connected=(a:number,b:number)=>a===b||c.indices.slice(a*3,a*3+3).filter(v=>c.indices.slice(b*3,b*3+3).includes(v)).length>=2;
-      let previous=vector(c,start.surface),length=0,previousTriangle=start.surface.triangle;
+      const connected=(a:Address,b:Address)=>{
+        const ca=referenced(a),cb=referenced(b);
+        if(ca.id===cb.id)return a.triangle===b.triangle||ca.indices.slice(a.triangle*3,a.triangle*3+3).filter(v=>ca.indices.slice(b.triangle*3,b.triangle*3+3).includes(v)).length>=2;
+        const va=ca.indices.slice(a.triangle*3,a.triangle*3+3).map(i=>ca.positions.slice(i*3,i*3+3));
+        const vb=cb.indices.slice(b.triangle*3,b.triangle*3+3).map(i=>cb.positions.slice(i*3,i*3+3));
+        return va.filter(p=>vb.some(q=>Math.hypot(...p.map((x,k)=>x-q[k]))<1e-7)).length>=2;
+      };
+      let previous=surfaceVector(start.surface),length=0,previousAddress=start.surface;
       const lengths:number[]=[];
       for(const segment of r.path) {
-        if(!connected(previousTriangle,segment.triangle))fail('surface path crosses disconnected topology/components');
-        const from=vector(c,{triangle:segment.triangle,barycentric:segment.from});
-        const to=vector(c,{triangle:segment.triangle,barycentric:segment.to});
+        const a={triangle:segment.triangle,barycentric:segment.from,carrierId:segment.carrierId},b={...a,barycentric:segment.to};
+        if(!connected(previousAddress,a))fail('surface path crosses disconnected topology/components');
+        const from=surfaceVector(a),to=surfaceVector(b);
         if(from.distanceTo(previous)>1e-6)fail('disconnected surface path; no bridging or nearest projection');
         const n=from.distanceTo(to);if(n<1e-9)fail('zero-length surface segment');
-        lengths.push(n);length+=n;previous=to;previousTriangle=segment.triangle;
+        lengths.push(n);length+=n;previous=to;previousAddress=b;
       }
-      if(previous.distanceTo(vector(c,end.surface))>1e-6)fail('surface path endpoint does not match annotated landmark');
-      if(!connected(previousTriangle,end.surface.triangle))fail('surface endpoint crosses disconnected topology/components');
+      if(previous.distanceTo(surfaceVector(end.surface))>1e-6)fail('surface path endpoint does not match annotated landmark');
+      if(!connected(previousAddress,end.surface))fail('surface endpoint crosses disconnected topology/components');
       let distance:number;
       if(r.kind==='B-cun') {
         if(!Number.isFinite(r.totalCun)||r.totalCun<=0||r.totalCun>64||r.value>r.totalCun
@@ -144,20 +186,52 @@ export async function compilePlacementUnit(unit:PlacementUnit,inputs:CompilerInp
         const cal=r.calibration;
         if(landmark(cal.from).role!=='finger_cun_reference'||landmark(cal.to).role!=='finger_cun_reference')fail('F-cun calibration must use annotated finger references');
         if(!Number.isFinite(cal.cun)||cal.cun<=0||cal.cun>4||ev.measurement?.kind!=='F-cun'||ev.measurement.value!==cal.cun)fail('F-cun lacks native finger calibration evidence');
-        const width=vector(c,landmark(cal.from).surface).distanceTo(vector(c,landmark(cal.to).surface));
+        const width=surfaceVector(landmark(cal.from).surface).distanceTo(surfaceVector(landmark(cal.to).surface));
         if(width<1e-6)fail('degenerate finger calibration');
         distance=width*r.value/cal.cun;
         if(distance>length+1e-9)fail('F-cun exceeds supported surface path; no extrapolation');
         assessment.basis='F-cun';
       }
-      let remaining=distance,index=0;
-      while(index<lengths.length-1&&remaining>lengths[index]){remaining-=lengths[index];index++;}
-      const segment=r.path[index],t=Math.min(1,remaining/lengths[index]);
-      result={triangle:segment.triangle,barycentric:segment.from.map((x,k)=>x+(segment.to[k]-x)*t) as Vec3};
+      if(r.kind==='B-cun'&&r.measurementAxis) {
+        // Anatomical proportional length and surface registration length are distinct.
+        // An explicit native landmark axis defines the measurement plane; the connected
+        // surface path locates its unique supported crossing, never a body-bounds ratio.
+        if(ev.measurementAxis!=='anatomical_native_axis')fail('native measurement axis lacks matching proportion evidence');
+        const nativePosition=(id:string)=>{const l=landmark(id);return resolveAnchor(inputs.native[l.sourceKey],l.native).position;};
+        const axis=nativePosition(r.measurementAxis.to).sub(nativePosition(r.measurementAxis.from));
+        if(axis.length()<1e-6)fail('degenerate native measurement axis');axis.normalize();
+        const origin=surfaceVector(start.surface),extent=surfaceVector(end.surface).sub(origin).dot(axis);
+        if(extent<=1e-6)fail('native measurement axis opposes proportional endpoints');
+        const target=extent*r.value/r.totalCun,candidates:Address[]=[];
+        for(const s of r.path){
+          const a={triangle:s.triangle,barycentric:s.from,carrierId:s.carrierId},b={...a,barycentric:s.to};
+          const from=surfaceVector(a).sub(origin).dot(axis),to=surfaceVector(b).sub(origin).dot(axis);
+          if(Math.abs(to-from)<1e-9)continue;
+          const t=(target-from)/(to-from);if(t< -1e-8||t>1+1e-8)continue;
+          const q={...a,barycentric:s.from.map((x,k)=>x+(s.to[k]-x)*Math.max(0,Math.min(1,t))) as Vec3};
+          if(!candidates.some(p=>surfaceVector(p).distanceTo(surfaceVector(q))<1e-6))candidates.push(q);
+        }
+        if(candidates.length!==1)fail('native proportion plane has missing or ambiguous supported surface crossings');
+        result=candidates[0];
+      } else {
+        let remaining=distance,index=0;
+        while(index<lengths.length-1&&remaining>lengths[index]){remaining-=lengths[index];index++;}
+        const segment=r.path[index],t=Math.min(1,remaining/lengths[index]);
+        result={triangle:segment.triangle,barycentric:segment.from.map((x,k)=>x+(segment.to[k]-x)*t) as Vec3,carrierId:segment.carrierId};
+      }
+      if(referenced(result).id!==c.id)fail('proportional result target carrier mismatch');
+      if(r.kind==='F-cun'&&r.value>0&&surfaceVector(result).sub(surfaceVector(start.surface)).dot(surfaceVector(end.surface).sub(surfaceVector(start.surface)))<=1e-12)fail('F-cun result opposes annotated direction');
+      if(r.kind==='F-cun')for(const constraint of r.nativeDirections??[]) {
+        const nativePosition=(id:string)=>{const l=landmark(id);return resolveAnchor(inputs.native[l.sourceKey],l.native).position;};
+        const direction=nativePosition(constraint.to).sub(nativePosition(constraint.from));
+        if(direction.length()<1e-6)fail('degenerate native anatomical direction');
+        if(r.value>0&&surfaceVector(result).sub(nativePosition(constraint.origin)).dot(direction)<=1e-12)fail('F-cun result opposes native anatomical direction');
+      }
     } else fail('unresolved rule');
     if(!result)throw Error('No explicit anchor result');
+    const {carrierId:_referenceCarrier,...resolvedAddress}=result;
     instance={code:unit.code,side:unit.side,revision:unit.revision,carrierId:c.id,carrierRevision:c.revision,carrierHash:c.topologySha256,
-      frameId:c.frameId,unit:c.unit,poseId:c.poseId,...result,landmarkSourceKeys:assessment.landmarks.map(l=>l.sourceKey),
+      frameId:c.frameId,unit:c.unit,poseId:c.poseId,...resolvedAddress,landmarkSourceKeys:assessment.landmarks.map(l=>l.sourceKey),
       locationValidation:'landmarks_verified',aiProposal:unit.author==='ai',professorReview:unit.professorReview,missing:[],assessment};
     const position=resolveAnchor(c,instance).position;
     if(unit.side==='midline'&&Math.abs(position.x)>1e-5)fail('midline anchor is not on the anatomical midline');

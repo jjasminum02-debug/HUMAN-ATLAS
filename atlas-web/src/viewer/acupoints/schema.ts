@@ -36,7 +36,9 @@ export interface PlacementAssessment {
   author: 'ai' | 'human' | 'unknown'; inputSha256: string; compilerVersion: string;
   /** Exact frozen binding checked by the compiler, including the barycentric tuple. */
   checkedBinding: string | null;
-  landmarks: { id: string; anatomy: string; sourceKey: string; evidenceSha256: string }[];
+  contextReferences?: {id:string; sourceKey:string; anatomy:string; evidenceSha256:string}[];
+  landmarks: { id: string; anatomy: string; sourceKey: string; evidenceSha256: string;
+    modelIndicator?:{kind:'educational_model_indicator';observedSkinLandmark:false;construction:string;limitations:string[]}}[];
   relation: SourceRef[];
   checks: { side: boolean; pose: boolean; frame: boolean; topology: boolean; surface: boolean; anatomicalRelation: boolean };
   failures: string[];

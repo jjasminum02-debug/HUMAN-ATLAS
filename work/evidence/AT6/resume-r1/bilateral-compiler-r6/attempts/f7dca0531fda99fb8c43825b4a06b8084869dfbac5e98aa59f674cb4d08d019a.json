@@ -1,0 +1,121 @@
+{
+  "id": "LU11-left",
+  "fingerprint": "c1a1a0a29567511411714a34fb59a8dc60b55ecbf6602121961f3f156428f6a1",
+  "status": "failed",
+  "inputSha256": "1426a8576de937fc2da4140d300e25295bfc9657163be8f8cd8cbc2c5ae9ea0a",
+  "originalText": "엄지 요측 조갑각의 몸쪽·가쪽 0.1 손가락촌.",
+  "originalSources": [
+    {
+      "id": "who-location-2008-2009",
+      "title": "WHO Standard Acupuncture Point Locations in the Western Pacific Region",
+      "edition": "2008; updated and reprinted 2009",
+      "locator": "printed p. 31",
+      "url": "https://www.medbox.org/index.php/dl/627a4de115110145a1723f64"
+    }
+  ],
+  "instance": null,
+  "assessment": {
+    "schemaVersion": 2,
+    "policyVersion": "landmark-evidence-v2",
+    "scope": "real_input",
+    "inputDomain": "real_input",
+    "technical": "passed",
+    "precision": "unresolved",
+    "basis": "F-cun",
+    "author": "ai",
+    "inputSha256": "1426a8576de937fc2da4140d300e25295bfc9657163be8f8cd8cbc2c5ae9ea0a",
+    "compilerVersion": "explicit-landmarks-2.1",
+    "checkedBinding": null,
+    "landmarks": [
+      {
+        "id": "LU11-left-22",
+        "anatomy": "Native proximal radial nail-fold corner",
+        "sourceKey": "PROBE-nail-fold-left-3",
+        "evidenceSha256": "9d594c77b2eac952712a96ca1ebb01cc89bcc3e5f8b31087b109e59668f8afd5",
+        "modelIndicator": {
+          "kind": "educational_model_indicator",
+          "observedSkinLandmark": false,
+          "construction": "Actual thumb-component fold facet50 independently read from each side probe; proximal direction checked against distal phalanx base and IP articulation. Model line intersection is at radial nail-base corner, not a painted skin landmark.",
+          "limitations": [
+            "No observed nail-fold skin colour or palpable accuracy; original probe membership retained."
+          ]
+        }
+      },
+      {
+        "id": "LU11-left-23",
+        "anatomy": "Proximal direction beside radial distal phalanx",
+        "sourceKey": "ZA-c7010a9-8453962881fde35f696f083a",
+        "evidenceSha256": "6eea7313524f49d1e57db1b1f8f3674d5bd9690f4b04572b08009c2b07002e67",
+        "modelIndicator": {
+          "kind": "educational_model_indicator",
+          "observedSkinLandmark": false,
+          "construction": "Actual distal phalanx facet49 directs the path proximally from nail corner, retaining radial contour.",
+          "limitations": [
+            "Fixed frozen pose only."
+          ]
+        }
+      },
+      {
+        "id": "LU11-left-24",
+        "anatomy": "Radial IP width boundary",
+        "sourceKey": "ZA-c7010a9-7f7d4fefab6b75c36f33c257",
+        "evidenceSha256": "fa13f8aceb1add645d1bc6bf0b312cbc4375432a3a063e7b472e0835400a93ce",
+        "modelIndicator": {
+          "kind": "educational_model_indicator",
+          "observedSkinLandmark": false,
+          "construction": "Native proximal-phalangeal distal articulation facets define an authored thumb IP-level caliper. Full surface width at these addressed sides calibrates 1 F-cun; no source IP skin crease is asserted.",
+          "limitations": [
+            "Teaching joint-width correspondence; individual skin crease and clinical finger-cun accuracy not established."
+          ]
+        }
+      },
+      {
+        "id": "LU11-left-25",
+        "anatomy": "Ulnar IP width boundary",
+        "sourceKey": "ZA-c7010a9-7f7d4fefab6b75c36f33c257",
+        "evidenceSha256": "a8f7a551976ff80a38b9a92b0dc50322c4199954c7e4a0a3cca2e434ead0b9f0",
+        "modelIndicator": {
+          "kind": "educational_model_indicator",
+          "observedSkinLandmark": false,
+          "construction": "Native proximal-phalangeal distal articulation facets define an authored thumb IP-level caliper. Full surface width at these addressed sides calibrates 1 F-cun; no source IP skin crease is asserted.",
+          "limitations": [
+            "Teaching joint-width correspondence; individual skin crease and clinical finger-cun accuracy not established."
+          ]
+        }
+      }
+    ],
+    "relation": [],
+    "checks": {
+      "side": true,
+      "pose": true,
+      "frame": true,
+      "topology": true,
+      "surface": false,
+      "anatomicalRelation": false
+    },
+    "failures": [
+      "F-cun result opposes annotated direction"
+    ],
+    "rights": {
+      "localObservation": "supported",
+      "publicRedistribution": "held",
+      "sourceIds": [
+        "Z-Anatomy CC BY-SA 4.0; BodyParts3D CC BY-SA 2.1 Japan attribution retained; exact ancestry not invented",
+        "who-location-2008-2009",
+        "ZA-native-AI-annotation-r1",
+        "Z-Anatomy CC BY-SA 4.0; BodyParts3D CC BY-SA 2.1 Japan attribution retained; exact ancestry not invented",
+        "ZA-native-AI-annotation-r1",
+        "Z-Anatomy CC BY-SA 4.0; BodyParts3D CC BY-SA 2.1 Japan attribution retained; exact ancestry not invented",
+        "ZA-native-AI-annotation-r1",
+        "Z-Anatomy CC BY-SA 4.0; BodyParts3D CC BY-SA 2.1 Japan attribution retained; exact ancestry not invented",
+        "ZA-native-AI-annotation-r1",
+        "Z-Anatomy CC BY-SA 4.0; BodyParts3D CC BY-SA 2.1 Japan attribution retained; exact ancestry not invented",
+        "ZA-native-AI-annotation-r1",
+        "who-location-2008-2009"
+      ]
+    }
+  },
+  "errors": [
+    "F-cun result opposes annotated direction"
+  ]
+}

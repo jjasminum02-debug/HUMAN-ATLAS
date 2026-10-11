@@ -1,0 +1,62 @@
+[
+  {
+    "command": "node --experimental-strip-types scripts/buildLearnerCardRuntime.mjs --check",
+    "exitCode": 0,
+    "stdout": "{\"status\":\"passed\",\"conceptRows\":8,\"sourceRows\":461,\"actionRows\":7}\n",
+    "stderr": ""
+  },
+  {
+    "command": "node --experimental-strip-types scripts/buildLearnerMotionRuntime.mjs --check",
+    "exitCode": 0,
+    "stdout": "{\"status\":\"passed\",\"selectors\":267,\"actions\":1166,\"playableSourceBoundCandidates\":1159}\n",
+    "stderr": ""
+  },
+  {
+    "command": "python3 scripts/validate-learning-content.py",
+    "exitCode": 0,
+    "stdout": "{\"pass\": true, \"nameEntries\": 81, \"summaries\": 14, \"scope\": \"references and stale hashes, not anatomy approval\"}\n",
+    "stderr": ""
+  },
+  {
+    "command": "python3 ../atlas-data/schemas/validate_ai_evidence.py --check",
+    "exitCode": 0,
+    "stdout": "{\n  \"task\": \"T16\",\n  \"mode\": \"check\",\n  \"pass\": true,\n  \"legacyRowsCheckedInTestOnlyMigrationPreview\": 14,\n  \"productionFieldItems\": 51,\n  \"migrationPreviewIssues\": [],\n  \"issues\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": "python3 ../atlas-data/schemas/validate_bone_name_overlay.py --check",
+    "exitCode": 0,
+    "stdout": "{\n  \"status\": \"passed\",\n  \"entryCount\": 9,\n  \"selectableBoneCount\": 9,\n  \"sourceCount\": 9,\n  \"humanAnatomyReview\": \"not_reviewed\",\n  \"actualHanjaCollected\": false\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": "python3 ../atlas-data/schemas/validate_motion_learning.py --check",
+    "exitCode": 0,
+    "stdout": "{\n  \"production\": {\n    \"valid\": true,\n    \"actionCount\": 1166,\n    \"definitionCount\": 1160,\n    \"assetCount\": 1160,\n    \"issues\": []\n  }\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": "python3 ../atlas-data/schemas/validate_motion_asset_sources.py",
+    "exitCode": 0,
+    "stdout": "PASS: 2 source candidates verified; production motion assets=1160; source bytes unchanged\n",
+    "stderr": ""
+  },
+  {
+    "command": "python3 ../work/tools/validate_t83_function_content.py --validate-only",
+    "exitCode": 0,
+    "stdout": "{\"status\": \"passed\", \"mode\": \"live_contract_validation\", \"supportedConceptsWithExactVerifiedText\": 5, \"supportedSurfacesWithExactVerifiedText\": 10, \"supportedConceptsWithoutExactVerifiedText\": 227, \"existingCrossCheckedT21Claims\": 6, \"T21ClaimsNotMappedToExactCurrentSurfaceScope\": [\"HA-M-000001\"], \"gastrocnemiusHeadWholeClaimInheritance\": \"not_applied_to_two_explicit_part_subjects\", \"rightOnlyTextCandidates\": 1, \"playableClips\": 0, \"learnerActionTextHanjaCount\": 0, \"newClaims\": 0, \"newCanonicalBindings\": 0, \"humanReview\": \"not_performed\", \"publicRedistribution\": \"held\", \"sourceOnly\": true}\n",
+    "stderr": ""
+  },
+  {
+    "command": "node scripts/check-scene-decoders.mjs",
+    "exitCode": 0,
+    "stdout": "Scene decoder QA passed: 11 meshes/712192 bytes, 9 meshes/205392 bytes\n",
+    "stderr": ""
+  },
+  {
+    "command": "tsc -b",
+    "exitCode": 127,
+    "stdout": "",
+    "stderr": "/bin/sh: tsc: command not found\n"
+  }
+]
