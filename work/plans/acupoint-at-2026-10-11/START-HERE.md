@@ -1,14 +1,14 @@
 # AT 실행 안내 — 작업 산출물 기준 수정본
 
-2026-10-11 · AT1은 실제 catalog 범위 완료. 사용자에 따르면 AT2는 현재 진행 중이며, 이번 수정은 AT2 실행 기록을 대신 갱신하지 않는다. 정적 문구보다 최신 EXECUTION의 featureWorkUnits/featurePlans를 확인한다.
+2026-10-11 최신 검토: **AT1–5 범위 완료, AT6 partial로 재개 필요**. 이전 AT2 진행 안내는 역사 상태다. 최신 EXECUTION/실제 보고서를 기준으로 한다.
 
-**AT2를 다시 시작하거나 기존 파일을 지울 필요가 없다.** [진행 중 AT2에 보낼 보정 프롬프트](AT2-CONTINUE-CORRECTION.md)를 같은 대화에 전달하고 현재 작업을 이어간다. 종료 뒤부터 아래 수정 순서를 사용한다. 보고서 속 과거 next ID보다 최신 feature plan order가 우선이다.
+AT6의 실제 표시 위치는 0/22이며 카드 연결 성공은 위치 합격이 아니다. [AT6 재개 프롬프트](../at6-motion-camera-review-2026-10-11/AT6-RESUME.md)로 실제 지표 작성/국소 체표 보완을 이어간다. 이후 [AT7 문맥 카메라 프롬프트](../at6-motion-camera-review-2026-10-11/AT7-CAMERA.md)를 사용한다. 별도 [Luna 움직임 전수 조사](../at6-motion-camera-review-2026-10-11/MV1-LUNA-AUDIT.md) → [Sol 원인별 수정](../at6-motion-camera-review-2026-10-11/MV2-SOL-REPAIR.md)은 자동 실행하지 않는다.
 
-기존 시간 중단 규칙은 폐기했다. 산출물/합격 기준까지 진행하고 한 번에 요청한 task 하나만 실행한다. 작업 번호는 유지하며 AT20–22를 AT7 다음으로 앞당겼다. 첫 폐경 그래픽을 검증한 뒤 나머지 위치 자료를 확장한다.
+작업 종료는 산출물·합격 기준으로 판단한다. AT20–22를 AT7 뒤에 두는 조기 그래픽 검증 순서는 유지한다.
 
 ## 실행 순서
 
-AT1(완료) → AT2(진행 중) → AT3 → AT4 → AT5 → AT6 → AT7 → **AT20 → AT21 → AT22** → AT8 → AT9 → AT10 → AT11 → AT12 → AT13 → AT14 → AT15 → AT16 → AT17 → AT18 → AT19 → AT23 → AT24 → AT25 → AT26 → AT27 → AT28 → AT29.
+AT1–5(범위 완료) → AT6(재개) → AT7 → **AT20 → AT21 → AT22** → AT8 → AT9 → AT10 → AT11 → AT12 → AT13 → AT14 → AT15 → AT16 → AT17 → AT18 → AT19 → AT23 → AT24 → AT25 → AT26 → AT27 → AT28 → AT29.
 
 | Task / 전체 프롬프트 | 작업 산출물 |
 |---|---|

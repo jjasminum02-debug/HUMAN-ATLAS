@@ -3,6 +3,11 @@
 2026-10-11 작업 단위 정정. 상태는 EXECUTION의 해당 record에서 읽는다. 이 명세 자체는 구현 완료의 증거가 아니다.
 선행: AT5. 실행 순서는 번호순이 아니라 [현재 계획](../plans/acupoint-at-2026-10-11/START-HERE.md)과 EXECUTION.featurePlans.acupoint-at-361.order를 따른다.
 
+## 2026-10-11 AT1–6 검토 반영
+
+실제 모델 landmark annotation과 필요한 국소 carrier 보완을 작성해 기존 compiler에서 learner 점까지 연결한다. 자료 부재 목록만 반복하지 않는다. 교육용 모형 지표와 실제 피부/취혈 정확성을 구분하며 첫 실제 위치 연결 후 양측 22개로 확장한다.
+상세 구현·검증 기준: [32 설계](../../design/2026-09-25-muscle-atlas/32-AT6-PLACEMENT-CONTEXT-CAMERA-AND-MOTION-QA.md). 역사 완료 기록과 AT6 partial 판정을 이번 명세 수정으로 승격하지 않는다.
+
 ## 읽을 자료
 
 AGENTS.md, work/EXECUTION.json, work/NEXT.md, design/2026-09-25-muscle-atlas/30-AT-361-POINTS-AND-TERRITORIES.md, design/2026-09-25-muscle-atlas/31-AT-EXPERIENCE-AND-DELIVERY-CONTRACT.md, 선행 AT report/evidence.
@@ -41,6 +46,8 @@ LU1–11 11개 개념의 양측 선택·이름·기본 위치가 실제 모델 �
 
 ```text
 HUMAN ATLAS에서 AT6만 수행해라.
+design/2026-09-25-muscle-atlas/32-AT6-PLACEMENT-CONTEXT-CAMERA-AND-MOTION-QA.md의 해당 절을 반드시 읽어라.
+추가 필수 범위: 실제 모델 landmark annotation과 필요한 국소 carrier 보완을 작성해 기존 compiler에서 learner 점까지 연결한다. 자료 부재 목록만 반복하지 않는다. 교육용 모형 지표와 실제 피부/취혈 정확성을 구분하며 첫 실제 위치 연결 후 양측 22개로 확장한다.
 AGENTS.md, 최신 work/EXECUTION.json, work/tasks/AT6.md,
 design/2026-09-25-muscle-atlas/30-AT-361-POINTS-AND-TERRITORIES.md,
 design/2026-09-25-muscle-atlas/31-AT-EXPERIENCE-AND-DELIVERY-CONTRACT.md 및 지정 선행 실제 evidence를 읽어라.

@@ -3,6 +3,11 @@
 2026-10-11 작업 단위 정정. 상태는 EXECUTION의 해당 record에서 읽는다. 이 명세 자체는 구현 완료의 증거가 아니다.
 선행: AT6. 실행 순서는 번호순이 아니라 [현재 계획](../plans/acupoint-at-2026-10-11/START-HERE.md)과 EXECUTION.featurePlans.acupoint-at-361.order를 따른다.
 
+## 2026-10-11 AT1–6 검토 반영
+
+경혈 점만이 아니라 인근 근육·힘줄·기준 뼈/관절의 국소 범위를 함께 framing한다. 점이 화면 안에 있다는 이유만으로 전신 구도를 유지하지 않는다. 카드/검색/점 클릭 경로를 통일하고 실제 패널 가림과 문맥 크기로 거리를 계산한다. 미확정 점은 생성하지 않고 확인된 주변 구조 관찰을 별도로 제공할 수 있다.
+상세 구현·검증 기준: [32 설계](../../design/2026-09-25-muscle-atlas/32-AT6-PLACEMENT-CONTEXT-CAMERA-AND-MOTION-QA.md). 역사 완료 기록과 AT6 partial 판정을 이번 명세 수정으로 승격하지 않는다.
+
 ## 읽을 자료
 
 AGENTS.md, work/EXECUTION.json, work/NEXT.md, design/2026-09-25-muscle-atlas/30-AT-361-POINTS-AND-TERRITORIES.md, design/2026-09-25-muscle-atlas/31-AT-EXPERIENCE-AND-DELIVERY-CONTRACT.md, 선행 AT report/evidence.
@@ -41,6 +46,8 @@ AC2 Tour/CameraSessions를 데이터 기반 14경맥용으로 일반화하고 �
 
 ```text
 HUMAN ATLAS에서 AT7만 수행해라.
+design/2026-09-25-muscle-atlas/32-AT6-PLACEMENT-CONTEXT-CAMERA-AND-MOTION-QA.md의 해당 절을 반드시 읽어라.
+추가 필수 범위: 경혈 점만이 아니라 인근 근육·힘줄·기준 뼈/관절의 국소 범위를 함께 framing한다. 점이 화면 안에 있다는 이유만으로 전신 구도를 유지하지 않는다. 카드/검색/점 클릭 경로를 통일하고 실제 패널 가림과 문맥 크기로 거리를 계산한다. 미확정 점은 생성하지 않고 확인된 주변 구조 관찰을 별도로 제공할 수 있다.
 AGENTS.md, 최신 work/EXECUTION.json, work/tasks/AT7.md,
 design/2026-09-25-muscle-atlas/30-AT-361-POINTS-AND-TERRITORIES.md,
 design/2026-09-25-muscle-atlas/31-AT-EXPERIENCE-AND-DELIVERY-CONTRACT.md 및 지정 선행 실제 evidence를 읽어라.

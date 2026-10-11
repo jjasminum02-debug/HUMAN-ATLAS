@@ -1,0 +1,79 @@
+✔ frozen topology hash, subject-right and three anchors reproduce (4.861ms)
+✔ wrong frame, mm, changed pose, side and dataset revision are rejected (0.650792ms)
+✔ tampered geometry, index range, barycentric and degenerate faces fail closed (1.867041ms)
+✔ development proposals never become product placements (0.281958ms)
+✔ carrier cost consumes existing byte and triangle ceilings (0.140041ms)
+✔ landmark: explicit input replays deterministically; fixture never exports (16.092708ms)
+✔ B-cun: explicit input replays deterministically; fixture never exports (2.641125ms)
+✔ F-cun: explicit input replays deterministically; fixture never exports (1.907708ms)
+✔ midline: explicit input replays deterministically; fixture never exports (0.987917ms)
+✔ policy contract: verified AI can qualify without professor/public approval; authorship cannot be erased (1.691875ms)
+✔ wrong side/frame/pose/unit/hash and altered native bytes isolate individually (0.958667ms)
+✔ bounds, nearest, unresolved, mirrored and meaningless landmarks never approve (1.076125ms)
+✔ proportion evidence, surface/path continuity and native registration are required (1.049375ms)
+✔ F-cun rejects non-finger calibration and extrapolation (0.754083ms)
+✔ coincident disconnected surfaces cannot substitute the annotated path component (0.695667ms)
+✔ missing oral/perineal surface is not relocated; off-midline anchor fails (0.959375ms)
+✔ held local source rights block that unit; held public rights do not block local policy (1.155042ms)
+✔ failed-only resume preserves successful result and failure history; input changes invalidate checkpoint (1.427125ms)
+✔ static runtime projection rejects motion, stale topology and cancellation (0.438125ms)
+✔ actual right LU input: additive migration preserves all original fields and 11 unresolved positions (2.219625ms)
+✔ actual left LU input: additive migration preserves all original fields and 11 unresolved positions (2.076875ms)
+✔ policy rejects incomplete/forged checks and stale binding rather than trusting old flags (0.446959ms)
+✔ registered binary set reuses carrier hashes, actual bilateral topology and static frame (39.669584ms)
+✔ stale registry, duplicate ids, unsafe paths and falsified costs fail closed (0.750334ms)
+✔ truncated or tampered binary data and cancelled multi-chunk validation never allocate geometry (1.55425ms)
+✔ bounded source/carrier modes verify both hashes and preserve sample-only status (4.166625ms)
+✔ stale pose/frame/unit and corrupted source reference cannot be displayed (2.357416ms)
+✔ a renamed accepted skin fixture and an invalid visual offset are rejected (0.162ms)
+✔ late cancelled validation and active motion cannot allocate a static surface (3.016542ms)
+✔ right: native carrier binding, order, safe proposals, and names (6.574584ms)
+✔ left: native carrier binding, order, safe proposals, and names (1.879ms)
+✔ left is independently source-bound with separate source keys/hash; no runtime mirror (0.663167ms)
+✔ actual 11 concepts/22 unavailable locations are distinct; no proposal or fixture export (1.177917ms)
+✔ stale pose/dataset/frame, fake availability, wrong name and invented count fail closed (0.918417ms)
+✔ fixture cannot bypass availability/count checking (0.2995ms)
+✔ actual shared trunk carrier replays bilateral addresses without reflection and rejects swapped side (8.311166ms)
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+file:///Users/daniel/Downloads/SIM%20/HUMAN%20ATLAS/atlas-web/src/viewer/acupoints/AcupunctureOverlay.ts:39
+  }
+  private constructor(private adapter: DatasetSceneAdapter, readonly carrier: Carrier, readonly points: PointInstance[], private onSelect: (code: string) => void, private onStop: (reason: string) => void, private encodedBytes: number, private options?: { returnCamera?:CameraState;carriers?:Carrier[];side?:'right'|'left';route:number[]; names:Record<string,string>; changed:(state:PointTour['state'])=>void; cancelled:()=>boolean }) {
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    const scene = adapter.scene;
+
+SyntaxError [ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX]: TypeScript parameter property is not supported in strip-only mode
+    at parseTypeScript (node:internal/modules/typescript:68:40)
+    at processTypeScriptCode (node:internal/modules/typescript:146:42)
+    at stripTypeScriptModuleTypes (node:internal/modules/typescript:215:22)
+    at ModuleLoader.<anonymous> (node:internal/modules/esm/translators:680:29)
+    at #translate (node:internal/modules/esm/loader:434:20)
+    at afterLoad (node:internal/modules/esm/loader:502:29)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:507:12)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:560:36)
+    at afterResolve (node:internal/modules/esm/loader:607:52)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:613:12) {
+  code: 'ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX'
+}
+
+Node.js v24.19.0
+✖ src/viewer/acupoints/overlayStaticGuard.test.ts (73.877583ms)
+✔ all eleven points advance in order with four section transitions and one finish (3.819834ms)
+✔ manual interaction pauses progress and prevents automatic return (0.130875ms)
+✔ previous next and resume have bounded indices and restart the dwell time (0.114167ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 39
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 144.836458
+
+✖ failing tests:
+
+test at src/viewer/acupoints/overlayStaticGuard.test.ts:1:1
+✖ src/viewer/acupoints/overlayStaticGuard.test.ts (73.877583ms)
+  'test failed'

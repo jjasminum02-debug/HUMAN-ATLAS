@@ -1,0 +1,71 @@
+- link "선택한 구조 설명으로 이동":
+  - /url: "#study-details"
+- banner:
+  - button "Human Atlas 전신 홈": HUMAN ATLAS
+  - generic: ⌕
+  - searchbox "구조 검색"
+- button "앱 정보"
+- button "부위 탐색":
+  - generic: ☰
+  - generic: 부위 탐색
+- region "전신 살펴보기 학습 장면":
+  - heading "전신 살펴보기" [level=2]
+  - generic "해부학 모형. 방향키로 회전, 더하기와 빼기로 확대, Home으로 전체 보기" [active]
+  - complementary:
+    - button "경혈"
+  - generic "모형 보기 설정":
+    - generic: 보기 옵션
+    - button "화면 맞춤"
+    - button "뼈" [pressed]
+    - button "근육" [pressed]
+    - button "신경"
+    - button "선택 강조" [pressed]
+    - button "근육 숨기기"
+    - button "선택 맞춤"
+    - button "선택 반투명"
+  - status: 드래그하여 회전 · 스크롤하여 확대
+- generic "넙다리곧은근 접기"
+- button "선택 해제"
+- generic: 근육
+- strong: 오른쪽
+- generic "좌우 모형":
+  - button "왼쪽"
+  - button "오른쪽" [pressed]
+- tablist "학습 내용":
+  - tab "구조"
+  - tab "기능" [selected]
+- generic "이름":
+  - generic: 우리말명
+  - strong: 넙다리곧은근
+  - generic: 한자어명 (한글 표기)
+  - strong: 대퇴직근
+  - generic: 영어명
+  - strong: Rectus femoris muscle
+- tabpanel "기능":
+  - group "근육 작용 선택":
+    - generic: 근육 작용
+    - button "무릎 폄 · 슬관절 신전 3D 시범 연결 대퇴직근이 무릎을 펴는 작용을 봅니다. 먼저 무릎을 굽혀 준비한 뒤 아래다리와 발을 펴며 처음 자세로 돌아옵니다. 대퇴사두근 4개와 무릎뼈, 아래다리·발의 뼈와 근육을 함께 표시합니다." [pressed]:
+      - strong: 무릎 폄 · 슬관절 신전
+      - generic: 3D 시범 연결
+      - generic: 대퇴직근이 무릎을 펴는 작용을 봅니다. 먼저 무릎을 굽혀 준비한 뒤 아래다리와 발을 펴며 처음 자세로 돌아옵니다. 대퇴사두근 4개와 무릎뼈, 아래다리·발의 뼈와 근육을 함께 표시합니다.
+    - button "고관절 굽힘 · 무릎 유지 3D 시범 연결 대퇴직근이 허벅지를 앞으로 들어 올리는 고관절 굽힘 작용을 봅니다. 골반 쪽은 고정되고 무릎뼈·정강뼈가 허벅지와 함께 움직이며 무릎 각도는 유지됩니다. 대퇴직근은 무릎을 펴는 작용도 하지만, 이 시범에는 무릎 폄을 섞지 않았습니다.":
+      - strong: 고관절 굽힘 · 무릎 유지
+      - generic: 3D 시범 연결
+      - generic: 대퇴직근이 허벅지를 앞으로 들어 올리는 고관절 굽힘 작용을 봅니다. 골반 쪽은 고정되고 무릎뼈·정강뼈가 허벅지와 함께 움직이며 무릎 각도는 유지됩니다. 대퇴직근은 무릎을 펴는 작용도 하지만, 이 시범에는 무릎 폄을 섞지 않았습니다.
+  - region "움직임으로 이해하기":
+    - heading "근육의 작용" [level=4]
+    - generic: 작용 시범
+    - paragraph: 무릎 폄 · 슬관절 신전
+    - generic "현재 동작 구간":
+      - strong: 선택한 자세
+      - generic: 정지
+    - status: 진행 막대로 고른 자세를 유지합니다. 버튼을 누르면 반복 시범을 시작합니다.
+    - generic "시범 재생 조작":
+      - button "움직임으로 이해하기"
+    - generic "관절 조절"
+    - generic: 시범 진행
+    - slider "시범 진행 위치": "50"
+    - status: 50%
+    - paragraph: 다시 누르면 처음 자세로 부드럽게 돌아갑니다. 진행 막대를 조절하면 고른 자세를 유지합니다.
+    - generic "시범 안내"
+  - generic "자세에서 관찰하기"

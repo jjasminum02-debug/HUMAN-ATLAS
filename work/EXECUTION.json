@@ -6953,7 +6953,8 @@
       },
       "continuationUnit": "AT6",
       "nextPlannedUnit": "AT7",
-      "autoRunNext": false
+      "autoRunNext": false,
+      "reviewAmendment": "design/2026-09-25-muscle-atlas/32-AT6-PLACEMENT-CONTEXT-CAMERA-AND-MOTION-QA.md"
     },
     "AT7": {
       "status": "planned",
@@ -6964,7 +6965,8 @@
       ],
       "spec": "work/tasks/AT7.md",
       "promptFile": "work/tasks/AT7.md",
-      "targetCodes": []
+      "targetCodes": [],
+      "reviewAmendment": "design/2026-09-25-muscle-atlas/32-AT6-PLACEMENT-CONTEXT-CAMERA-AND-MOTION-QA.md"
     },
     "AT8": {
       "status": "planned",
@@ -7616,6 +7618,26 @@
       "spec": "work/tasks/AT29.md",
       "promptFile": "work/tasks/AT29.md",
       "targetCodes": []
+    },
+    "MV1": {
+      "status": "planned",
+      "feature": "motion-quality-review",
+      "owner": "Luna Max",
+      "spec": "work/tasks/MV1.md",
+      "promptFile": "work/tasks/MV1.md",
+      "dependsOn": [],
+      "autoRunNext": false
+    },
+    "MV2": {
+      "status": "planned",
+      "feature": "motion-quality-review",
+      "owner": "Sol High",
+      "spec": "work/tasks/MV2.md",
+      "promptFile": "work/tasks/MV2.md",
+      "dependsOn": [
+        "MV1"
+      ],
+      "autoRunNext": false
     }
   },
   "featurePlans": {
@@ -7672,6 +7694,17 @@
       "experienceContract": "design/2026-09-25-muscle-atlas/31-AT-EXPERIENCE-AND-DELIVERY-CONTRACT.md",
       "revision": "2026-10-11-deliverable-based",
       "executionPolicy": "Complete assigned deliverable and acceptance criteria; no elapsed-time stopping rule."
+    },
+    "motion-quality-review": {
+      "status": "planned_not_started",
+      "design": "design/2026-09-25-muscle-atlas/32-AT6-PLACEMENT-CONTEXT-CAMERA-AND-MOTION-QA.md",
+      "order": [
+        "MV1",
+        "MV2"
+      ],
+      "nextUnit": "MV1",
+      "autoRunNext": false,
+      "unitPolicy": "MV1 freezes exhaustive reachable inventory; MV2 repairs one frozen common-cause group per explicit run; completion requires remaining queue empty."
     }
   }
 }
