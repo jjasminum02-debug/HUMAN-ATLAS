@@ -1,0 +1,34 @@
+{
+  "task": "AT20",
+  "reviewer": "AI technical inspection",
+  "notProfessorReview": true,
+  "acceptedCases": "actual-screen-cases-final-r3.json",
+  "actualCases": 9,
+  "viewports": [
+    390,
+    1024,
+    1440
+  ],
+  "points": [
+    "LU6-right",
+    "LU7-right",
+    "LU8-right"
+  ],
+  "visualFindings": {
+    "singleSelectedLabel": true,
+    "pointAndLocalBonesMusclesVisible": true,
+    "panelDoesNotCoverSelectedPoint": true,
+    "mobileCardScrollPreserved": true,
+    "nativeBoundaryFigureViews": [
+      "anterior",
+      "lateral",
+      "posterior"
+    ],
+    "nativeBoundaryFigureIsLearnerRender": false
+  },
+  "noNewColourMaskRuntime": true,
+  "limitations": [
+    "No final area mask is rendered in AT20; AT21 owns alpha/depth/compositing/rotation QA.",
+    "These are educational model points and source geometry, not precise observed skin landmarks."
+  ]
+}

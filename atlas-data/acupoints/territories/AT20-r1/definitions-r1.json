@@ -1,0 +1,1389 @@
+{
+  "schemaVersion": 1,
+  "usage": "offline_authoring_only",
+  "contract": "territoryBoundary.ts",
+  "sourceRegister": "work/evidence/AT20/run-r1/source-register-r1.json",
+  "definitions": [
+    {
+      "channel": "LU",
+      "nameKo": "수태음폐경",
+      "sideRule": "independent_bilateral_annotations",
+      "revision": "AT20-r1",
+      "kind": "teaching_region",
+      "basisKind": "surface_learning_connection",
+      "status": "boundary_input_ready_partial",
+      "canonicalBoundaryClaim": false,
+      "interpretation": "ai_proposal",
+      "author": "ai",
+      "professorReview": "not_performed",
+      "publicRedistribution": "held",
+      "sourceRelations": [
+        {
+          "sourceId": "kmcric-LU6",
+          "summary": "팔꿈치–손목의 앞가쪽 연결 구간이 기본 위치 지표다.",
+          "scope": "single-point landmark indicator, no continuous boundary"
+        }
+      ],
+      "types": {
+        "surfaceLearning": {
+          "kind": "surface_learning_connection",
+          "status": "authored_draft",
+          "scope": "external supported surface only"
+        },
+        "sinew": {
+          "kind": "sinew_projection",
+          "status": "incipit_only_no_mask",
+          "sourceId": "lingshu-jingjin-incipits",
+          "indicator": "엄지·무지구·손목·팔꿈치",
+          "remaining": "full branches, joints and modern muscle correspondence not reviewed"
+        },
+        "cutaneous": {
+          "kind": "cutaneous",
+          "status": "boundary_unresolved",
+          "sourceId": "suwen-pibu",
+          "remaining": "classical skin division does not establish polygon edges; no observed skin territories"
+        },
+        "professorInterpretation": {
+          "kind": "professor_interpretation",
+          "status": "not_supplied",
+          "sourceId": null,
+          "remaining": "교수 원문·판본·지정 경계 피드백 없음"
+        }
+      },
+      "viewDrafts": {
+        "anterior": {
+          "indicators": [
+            "쇄골 아래 흉부",
+            "위팔 앞가쪽",
+            "아래팔 앞가쪽",
+            "무지구"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "posterior": {
+          "indicators": [],
+          "status": "no_area_authored",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "lateral": {
+          "indicators": [
+            "요측 아래팔",
+            "엄지"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        }
+      },
+      "branchRule": {
+        "external": "independent contour for each supported branch; overlap allowed",
+        "internal": "text-only separate relation, never projected onto outer skin",
+        "sinew": "independent source/branch relation, never inferred from point order",
+        "unresolved": "경맥의 검지 분지와 경근의 흉부·횡격막 관계는 이 아래팔 학습 면에 포함하지 않는다. 흉부/손목/엄지 다른 carrier와의 연속 경계는 별도 작성이 필요하다."
+      },
+      "boundaryRule": {
+        "width": "AI local interpretation, requires separate controls; no nearest-line buffer or canonical fixed width",
+        "seams": "split contour at missing faces/components; no spatial bridges",
+        "sides": "read each actual side; reflection is not validation",
+        "overlap": "do not assign exclusivity to another channel or dermatome"
+      },
+      "carrierPlanning": {
+        "manifest": "atlas-data/acupoints/carriers/education-r1/manifest.json",
+        "grade": "native-derived educational envelope, not skin scan",
+        "registeredControls": "lung-forearm-right-boundary-r1.json",
+        "supportedSurfaceLimits": "경맥의 검지 분지와 경근의 흉부·횡격막 관계는 이 아래팔 학습 면에 포함하지 않는다. 흉부/손목/엄지 다른 carrier와의 연속 경계는 별도 작성이 필요하다."
+      },
+      "uncertainties": [
+        "경맥의 검지 분지와 경근의 흉부·횡격막 관계는 이 아래팔 학습 면에 포함하지 않는다. 흉부/손목/엄지 다른 carrier와의 연속 경계는 별도 작성이 필요하다.",
+        "본 task의 표본 밖 native annotation·최종 face mask 미작성",
+        "교재 판본·교수 검토·공개 재배포 미확정"
+      ],
+      "finalMasks": 0
+    },
+    {
+      "channel": "LI",
+      "nameKo": "수양명대장경",
+      "sideRule": "independent_bilateral_annotations",
+      "revision": "AT20-r1",
+      "kind": "teaching_region",
+      "basisKind": "surface_learning_connection",
+      "status": "evidence_ledger_only",
+      "canonicalBoundaryClaim": false,
+      "interpretation": "ai_proposal",
+      "author": "ai",
+      "professorReview": "not_performed",
+      "publicRedistribution": "held",
+      "sourceRelations": [
+        {
+          "sourceId": "kmcric-LI15",
+          "summary": "어깨봉우리 앞끝과 위팔뼈 큰결절 사이가 위치 지표다.",
+          "scope": "single-point landmark indicator, no continuous boundary"
+        }
+      ],
+      "types": {
+        "surfaceLearning": {
+          "kind": "surface_learning_connection",
+          "status": "authored_draft",
+          "scope": "external supported surface only"
+        },
+        "sinew": {
+          "kind": "sinew_projection",
+          "status": "incipit_only_no_mask",
+          "sourceId": "lingshu-jingjin-incipits",
+          "indicator": "검지·손목·팔꿈치 바깥",
+          "remaining": "full branches, joints and modern muscle correspondence not reviewed"
+        },
+        "cutaneous": {
+          "kind": "cutaneous",
+          "status": "boundary_unresolved",
+          "sourceId": "suwen-pibu",
+          "remaining": "classical skin division does not establish polygon edges; no observed skin territories"
+        },
+        "professorInterpretation": {
+          "kind": "professor_interpretation",
+          "status": "not_supplied",
+          "sourceId": null,
+          "remaining": "교수 원문·판본·지정 경계 피드백 없음"
+        }
+      },
+      "viewDrafts": {
+        "anterior": {
+          "indicators": [
+            "검지 요측",
+            "위팔 앞가쪽",
+            "어깨 앞쪽",
+            "콧방울 옆"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "posterior": {
+          "indicators": [
+            "뒷목 교차 범위 미확인"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "lateral": {
+          "indicators": [
+            "노뼈 쪽 아래팔",
+            "어깨봉우리"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        }
+      },
+      "branchRule": {
+        "external": "independent contour for each supported branch; overlap allowed",
+        "internal": "text-only separate relation, never projected onto outer skin",
+        "sinew": "independent source/branch relation, never inferred from point order",
+        "unresolved": "검지–팔–얼굴 구간의 폭, 입 주변 좌우 교차와 어깨봉우리 앞뒤 분리 미작성. 내행을 앞몸통에 투사하지 않는다."
+      },
+      "boundaryRule": {
+        "width": "AI local interpretation, requires separate controls; no nearest-line buffer or canonical fixed width",
+        "seams": "split contour at missing faces/components; no spatial bridges",
+        "sides": "read each actual side; reflection is not validation",
+        "overlap": "do not assign exclusivity to another channel or dermatome"
+      },
+      "carrierPlanning": {
+        "manifest": "atlas-data/acupoints/carriers/education-r1/manifest.json",
+        "grade": "native-derived educational envelope, not skin scan",
+        "registeredControls": null,
+        "supportedSurfaceLimits": "검지–팔–얼굴 구간의 폭, 입 주변 좌우 교차와 어깨봉우리 앞뒤 분리 미작성. 내행을 앞몸통에 투사하지 않는다."
+      },
+      "uncertainties": [
+        "검지–팔–얼굴 구간의 폭, 입 주변 좌우 교차와 어깨봉우리 앞뒤 분리 미작성. 내행을 앞몸통에 투사하지 않는다.",
+        "본 task의 표본 밖 native annotation·최종 face mask 미작성",
+        "교재 판본·교수 검토·공개 재배포 미확정"
+      ],
+      "finalMasks": 0
+    },
+    {
+      "channel": "ST",
+      "nameKo": "족양명위경",
+      "sideRule": "independent_bilateral_annotations",
+      "revision": "AT20-r1",
+      "kind": "teaching_region",
+      "basisKind": "surface_learning_connection",
+      "status": "evidence_ledger_only",
+      "canonicalBoundaryClaim": false,
+      "interpretation": "ai_proposal",
+      "author": "ai",
+      "professorReview": "not_performed",
+      "publicRedistribution": "held",
+      "sourceRelations": [
+        {
+          "sourceId": "kmcric-ST36",
+          "summary": "정강이 앞쪽, 앞정강근과 무릎–발목 비례 구간이 지표다.",
+          "scope": "single-point landmark indicator, no continuous boundary"
+        }
+      ],
+      "types": {
+        "surfaceLearning": {
+          "kind": "surface_learning_connection",
+          "status": "authored_draft",
+          "scope": "external supported surface only"
+        },
+        "sinew": {
+          "kind": "sinew_projection",
+          "status": "incipit_only_no_mask",
+          "sourceId": "lingshu-jingjin-incipits",
+          "indicator": "발가락·발등·무릎 바깥",
+          "remaining": "full branches, joints and modern muscle correspondence not reviewed"
+        },
+        "cutaneous": {
+          "kind": "cutaneous",
+          "status": "boundary_unresolved",
+          "sourceId": "suwen-pibu",
+          "remaining": "classical skin division does not establish polygon edges; no observed skin territories"
+        },
+        "professorInterpretation": {
+          "kind": "professor_interpretation",
+          "status": "not_supplied",
+          "sourceId": null,
+          "remaining": "교수 원문·판본·지정 경계 피드백 없음"
+        }
+      },
+      "viewDrafts": {
+        "anterior": {
+          "indicators": [
+            "눈 아래",
+            "앞가슴",
+            "배 앞면",
+            "넙다리 앞면",
+            "정강이 앞면"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "posterior": {
+          "indicators": [],
+          "status": "no_area_authored",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "lateral": {
+          "indicators": [
+            "턱·목 옆",
+            "둘째발가락"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        }
+      },
+      "branchRule": {
+        "external": "independent contour for each supported branch; overlap allowed",
+        "internal": "text-only separate relation, never projected onto outer skin",
+        "sinew": "independent source/branch relation, never inferred from point order",
+        "unresolved": "흉부/배 폭과 머리·목 분지 외곽선 미확정. 무릎 아래 지표 하나로 얼굴·복부 전체 면을 확정할 수 없다."
+      },
+      "boundaryRule": {
+        "width": "AI local interpretation, requires separate controls; no nearest-line buffer or canonical fixed width",
+        "seams": "split contour at missing faces/components; no spatial bridges",
+        "sides": "read each actual side; reflection is not validation",
+        "overlap": "do not assign exclusivity to another channel or dermatome"
+      },
+      "carrierPlanning": {
+        "manifest": "atlas-data/acupoints/carriers/education-r1/manifest.json",
+        "grade": "native-derived educational envelope, not skin scan",
+        "registeredControls": null,
+        "supportedSurfaceLimits": "흉부/배 폭과 머리·목 분지 외곽선 미확정. 무릎 아래 지표 하나로 얼굴·복부 전체 면을 확정할 수 없다."
+      },
+      "uncertainties": [
+        "흉부/배 폭과 머리·목 분지 외곽선 미확정. 무릎 아래 지표 하나로 얼굴·복부 전체 면을 확정할 수 없다.",
+        "본 task의 표본 밖 native annotation·최종 face mask 미작성",
+        "교재 판본·교수 검토·공개 재배포 미확정"
+      ],
+      "finalMasks": 0
+    },
+    {
+      "channel": "SP",
+      "nameKo": "족태음비경",
+      "sideRule": "independent_bilateral_annotations",
+      "revision": "AT20-r1",
+      "kind": "teaching_region",
+      "basisKind": "surface_learning_connection",
+      "status": "evidence_ledger_only",
+      "canonicalBoundaryClaim": false,
+      "interpretation": "ai_proposal",
+      "author": "ai",
+      "professorReview": "not_performed",
+      "publicRedistribution": "held",
+      "sourceRelations": [
+        {
+          "sourceId": "kmcric-SP9",
+          "summary": "정강뼈 안쪽관절융기 아래와 안쪽모서리가 지표다.",
+          "scope": "single-point landmark indicator, no continuous boundary"
+        }
+      ],
+      "types": {
+        "surfaceLearning": {
+          "kind": "surface_learning_connection",
+          "status": "authored_draft",
+          "scope": "external supported surface only"
+        },
+        "sinew": {
+          "kind": "sinew_projection",
+          "status": "incipit_only_no_mask",
+          "sourceId": "lingshu-jingjin-incipits",
+          "indicator": "엄지발가락 안쪽·안쪽복사",
+          "remaining": "full branches, joints and modern muscle correspondence not reviewed"
+        },
+        "cutaneous": {
+          "kind": "cutaneous",
+          "status": "boundary_unresolved",
+          "sourceId": "suwen-pibu",
+          "remaining": "classical skin division does not establish polygon edges; no observed skin territories"
+        },
+        "professorInterpretation": {
+          "kind": "professor_interpretation",
+          "status": "not_supplied",
+          "sourceId": null,
+          "remaining": "교수 원문·판본·지정 경계 피드백 없음"
+        }
+      },
+      "viewDrafts": {
+        "anterior": {
+          "indicators": [
+            "안쪽 다리",
+            "배·가슴 앞면"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "posterior": {
+          "indicators": [],
+          "status": "no_area_authored",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "lateral": {
+          "indicators": [
+            "엄지발가락 안쪽",
+            "정강뼈 안쪽",
+            "옆가슴"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        }
+      },
+      "branchRule": {
+        "external": "independent contour for each supported branch; overlap allowed",
+        "internal": "text-only separate relation, never projected onto outer skin",
+        "sinew": "independent source/branch relation, never inferred from point order",
+        "unresolved": "안쪽복사/무릎의 지표와 가슴·옆가슴 연결 폭을 분리해야 한다. 간·신경과 겹침을 강제로 배타 분할하지 않는다."
+      },
+      "boundaryRule": {
+        "width": "AI local interpretation, requires separate controls; no nearest-line buffer or canonical fixed width",
+        "seams": "split contour at missing faces/components; no spatial bridges",
+        "sides": "read each actual side; reflection is not validation",
+        "overlap": "do not assign exclusivity to another channel or dermatome"
+      },
+      "carrierPlanning": {
+        "manifest": "atlas-data/acupoints/carriers/education-r1/manifest.json",
+        "grade": "native-derived educational envelope, not skin scan",
+        "registeredControls": null,
+        "supportedSurfaceLimits": "안쪽복사/무릎의 지표와 가슴·옆가슴 연결 폭을 분리해야 한다. 간·신경과 겹침을 강제로 배타 분할하지 않는다."
+      },
+      "uncertainties": [
+        "안쪽복사/무릎의 지표와 가슴·옆가슴 연결 폭을 분리해야 한다. 간·신경과 겹침을 강제로 배타 분할하지 않는다.",
+        "본 task의 표본 밖 native annotation·최종 face mask 미작성",
+        "교재 판본·교수 검토·공개 재배포 미확정"
+      ],
+      "finalMasks": 0
+    },
+    {
+      "channel": "HT",
+      "nameKo": "수소음심경",
+      "sideRule": "independent_bilateral_annotations",
+      "revision": "AT20-r1",
+      "kind": "teaching_region",
+      "basisKind": "surface_learning_connection",
+      "status": "evidence_ledger_only",
+      "canonicalBoundaryClaim": false,
+      "interpretation": "ai_proposal",
+      "author": "ai",
+      "professorReview": "not_performed",
+      "publicRedistribution": "held",
+      "sourceRelations": [
+        {
+          "sourceId": "kmcric-HT3",
+          "summary": "팔꿈치 앞안쪽과 위팔뼈 안쪽위관절융기가 지표다.",
+          "scope": "single-point landmark indicator, no continuous boundary"
+        }
+      ],
+      "types": {
+        "surfaceLearning": {
+          "kind": "surface_learning_connection",
+          "status": "authored_draft",
+          "scope": "external supported surface only"
+        },
+        "sinew": {
+          "kind": "sinew_projection",
+          "status": "incipit_only_no_mask",
+          "sourceId": "lingshu-jingjin-incipits",
+          "indicator": "새끼손가락 안쪽·손목·팔꿈치 안쪽",
+          "remaining": "full branches, joints and modern muscle correspondence not reviewed"
+        },
+        "cutaneous": {
+          "kind": "cutaneous",
+          "status": "boundary_unresolved",
+          "sourceId": "suwen-pibu",
+          "remaining": "classical skin division does not establish polygon edges; no observed skin territories"
+        },
+        "professorInterpretation": {
+          "kind": "professor_interpretation",
+          "status": "not_supplied",
+          "sourceId": null,
+          "remaining": "교수 원문·판본·지정 경계 피드백 없음"
+        }
+      },
+      "viewDrafts": {
+        "anterior": {
+          "indicators": [
+            "위팔·팔꿈치 앞안쪽",
+            "손바닥 새끼손가락 쪽"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "posterior": {
+          "indicators": [],
+          "status": "no_area_authored",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "lateral": {
+          "indicators": [
+            "겨드랑",
+            "자쪽 손목"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        }
+      },
+      "branchRule": {
+        "external": "independent contour for each supported branch; overlap allowed",
+        "internal": "text-only separate relation, never projected onto outer skin",
+        "sinew": "independent source/branch relation, never inferred from point order",
+        "unresolved": "소장/심포와의 팔 안쪽 폭 분할 미확정. 굽힌 팔오금 주름은 정지 모형의 실제 주름으로 관찰되지 않는다."
+      },
+      "boundaryRule": {
+        "width": "AI local interpretation, requires separate controls; no nearest-line buffer or canonical fixed width",
+        "seams": "split contour at missing faces/components; no spatial bridges",
+        "sides": "read each actual side; reflection is not validation",
+        "overlap": "do not assign exclusivity to another channel or dermatome"
+      },
+      "carrierPlanning": {
+        "manifest": "atlas-data/acupoints/carriers/education-r1/manifest.json",
+        "grade": "native-derived educational envelope, not skin scan",
+        "registeredControls": null,
+        "supportedSurfaceLimits": "소장/심포와의 팔 안쪽 폭 분할 미확정. 굽힌 팔오금 주름은 정지 모형의 실제 주름으로 관찰되지 않는다."
+      },
+      "uncertainties": [
+        "소장/심포와의 팔 안쪽 폭 분할 미확정. 굽힌 팔오금 주름은 정지 모형의 실제 주름으로 관찰되지 않는다.",
+        "본 task의 표본 밖 native annotation·최종 face mask 미작성",
+        "교재 판본·교수 검토·공개 재배포 미확정"
+      ],
+      "finalMasks": 0
+    },
+    {
+      "channel": "SI",
+      "nameKo": "수태양소장경",
+      "sideRule": "independent_bilateral_annotations",
+      "revision": "AT20-r1",
+      "kind": "teaching_region",
+      "basisKind": "surface_learning_connection",
+      "status": "evidence_ledger_only",
+      "canonicalBoundaryClaim": false,
+      "interpretation": "ai_proposal",
+      "author": "ai",
+      "professorReview": "not_performed",
+      "publicRedistribution": "held",
+      "sourceRelations": [
+        {
+          "sourceId": "kmcric-SI11",
+          "summary": "어깨뼈가시 중점–아래각 사이의 비례 구간이 지표다.",
+          "scope": "single-point landmark indicator, no continuous boundary"
+        }
+      ],
+      "types": {
+        "surfaceLearning": {
+          "kind": "surface_learning_connection",
+          "status": "authored_draft",
+          "scope": "external supported surface only"
+        },
+        "sinew": {
+          "kind": "sinew_projection",
+          "status": "incipit_only_no_mask",
+          "sourceId": "lingshu-jingjin-incipits",
+          "indicator": "새끼손가락·손목·팔꿈치 뒤",
+          "remaining": "full branches, joints and modern muscle correspondence not reviewed"
+        },
+        "cutaneous": {
+          "kind": "cutaneous",
+          "status": "boundary_unresolved",
+          "sourceId": "suwen-pibu",
+          "remaining": "classical skin division does not establish polygon edges; no observed skin territories"
+        },
+        "professorInterpretation": {
+          "kind": "professor_interpretation",
+          "status": "not_supplied",
+          "sourceId": null,
+          "remaining": "교수 원문·판본·지정 경계 피드백 없음"
+        }
+      },
+      "viewDrafts": {
+        "anterior": {
+          "indicators": [
+            "얼굴·귀 앞 연결 후보"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "posterior": {
+          "indicators": [
+            "어깨뼈 구간",
+            "위팔 뒤쪽"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "lateral": {
+          "indicators": [
+            "새끼손가락 자측",
+            "팔꿈치 안쪽뒤",
+            "목 옆"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        }
+      },
+      "branchRule": {
+        "external": "independent contour for each supported branch; overlap allowed",
+        "internal": "text-only separate relation, never projected onto outer skin",
+        "sinew": "independent source/branch relation, never inferred from point order",
+        "unresolved": "어깨뼈의 지표를 확인할 수 있는 규칙과 귀·얼굴 분지 폭은 별개다. 어깨 전체를 자동 채우지 않는다."
+      },
+      "boundaryRule": {
+        "width": "AI local interpretation, requires separate controls; no nearest-line buffer or canonical fixed width",
+        "seams": "split contour at missing faces/components; no spatial bridges",
+        "sides": "read each actual side; reflection is not validation",
+        "overlap": "do not assign exclusivity to another channel or dermatome"
+      },
+      "carrierPlanning": {
+        "manifest": "atlas-data/acupoints/carriers/education-r1/manifest.json",
+        "grade": "native-derived educational envelope, not skin scan",
+        "registeredControls": null,
+        "supportedSurfaceLimits": "어깨뼈의 지표를 확인할 수 있는 규칙과 귀·얼굴 분지 폭은 별개다. 어깨 전체를 자동 채우지 않는다."
+      },
+      "uncertainties": [
+        "어깨뼈의 지표를 확인할 수 있는 규칙과 귀·얼굴 분지 폭은 별개다. 어깨 전체를 자동 채우지 않는다.",
+        "본 task의 표본 밖 native annotation·최종 face mask 미작성",
+        "교재 판본·교수 검토·공개 재배포 미확정"
+      ],
+      "finalMasks": 0
+    },
+    {
+      "channel": "BL",
+      "nameKo": "족태양방광경",
+      "sideRule": "independent_bilateral_annotations",
+      "revision": "AT20-r1",
+      "kind": "teaching_region",
+      "basisKind": "surface_learning_connection",
+      "status": "evidence_ledger_only",
+      "canonicalBoundaryClaim": false,
+      "interpretation": "ai_proposal",
+      "author": "ai",
+      "professorReview": "not_performed",
+      "publicRedistribution": "held",
+      "sourceRelations": [
+        {
+          "sourceId": "kmcric-BL40",
+          "summary": "무릎 뒤 오금주름과 양쪽 힘줄 사이가 지표다.",
+          "scope": "single-point landmark indicator, no continuous boundary"
+        }
+      ],
+      "types": {
+        "surfaceLearning": {
+          "kind": "surface_learning_connection",
+          "status": "authored_draft",
+          "scope": "external supported surface only"
+        },
+        "sinew": {
+          "kind": "sinew_projection",
+          "status": "incipit_only_no_mask",
+          "sourceId": "lingshu-jingjin-incipits",
+          "indicator": "새끼발가락·복사",
+          "remaining": "full branches, joints and modern muscle correspondence not reviewed"
+        },
+        "cutaneous": {
+          "kind": "cutaneous",
+          "status": "boundary_unresolved",
+          "sourceId": "suwen-pibu",
+          "remaining": "classical skin division does not establish polygon edges; no observed skin territories"
+        },
+        "professorInterpretation": {
+          "kind": "professor_interpretation",
+          "status": "not_supplied",
+          "sourceId": null,
+          "remaining": "교수 원문·판본·지정 경계 피드백 없음"
+        }
+      },
+      "viewDrafts": {
+        "anterior": {
+          "indicators": [
+            "눈 안쪽·이마 후보"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "posterior": {
+          "indicators": [
+            "척추 양옆 두 줄",
+            "넙다리 뒤",
+            "오금",
+            "종아리 뒤"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "lateral": {
+          "indicators": [
+            "뒤가쪽 발목",
+            "새끼발가락"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        }
+      },
+      "branchRule": {
+        "external": "independent contour for each supported branch; overlap allowed",
+        "internal": "text-only separate relation, never projected onto outer skin",
+        "sinew": "independent source/branch relation, never inferred from point order",
+        "unresolved": "척추 양옆 두 줄 사이/바깥 폭 및 후두·둔부 분지의 합류 경계 미확정. 뒤쪽 전부를 방광경으로 배정하지 않는다."
+      },
+      "boundaryRule": {
+        "width": "AI local interpretation, requires separate controls; no nearest-line buffer or canonical fixed width",
+        "seams": "split contour at missing faces/components; no spatial bridges",
+        "sides": "read each actual side; reflection is not validation",
+        "overlap": "do not assign exclusivity to another channel or dermatome"
+      },
+      "carrierPlanning": {
+        "manifest": "atlas-data/acupoints/carriers/education-r1/manifest.json",
+        "grade": "native-derived educational envelope, not skin scan",
+        "registeredControls": null,
+        "supportedSurfaceLimits": "척추 양옆 두 줄 사이/바깥 폭 및 후두·둔부 분지의 합류 경계 미확정. 뒤쪽 전부를 방광경으로 배정하지 않는다."
+      },
+      "uncertainties": [
+        "척추 양옆 두 줄 사이/바깥 폭 및 후두·둔부 분지의 합류 경계 미확정. 뒤쪽 전부를 방광경으로 배정하지 않는다.",
+        "본 task의 표본 밖 native annotation·최종 face mask 미작성",
+        "교재 판본·교수 검토·공개 재배포 미확정"
+      ],
+      "finalMasks": 0
+    },
+    {
+      "channel": "KI",
+      "nameKo": "족소음신경",
+      "sideRule": "independent_bilateral_annotations",
+      "revision": "AT20-r1",
+      "kind": "teaching_region",
+      "basisKind": "surface_learning_connection",
+      "status": "evidence_ledger_only",
+      "canonicalBoundaryClaim": false,
+      "interpretation": "ai_proposal",
+      "author": "ai",
+      "professorReview": "not_performed",
+      "publicRedistribution": "held",
+      "sourceRelations": [
+        {
+          "sourceId": "kmcric-KI3",
+          "summary": "안쪽복사와 발꿈치힘줄 사이가 지표다.",
+          "scope": "single-point landmark indicator, no continuous boundary"
+        }
+      ],
+      "types": {
+        "surfaceLearning": {
+          "kind": "surface_learning_connection",
+          "status": "authored_draft",
+          "scope": "external supported surface only"
+        },
+        "sinew": {
+          "kind": "sinew_projection",
+          "status": "incipit_only_no_mask",
+          "sourceId": "lingshu-jingjin-incipits",
+          "indicator": "작은 발가락 아래",
+          "remaining": "full branches, joints and modern muscle correspondence not reviewed"
+        },
+        "cutaneous": {
+          "kind": "cutaneous",
+          "status": "boundary_unresolved",
+          "sourceId": "suwen-pibu",
+          "remaining": "classical skin division does not establish polygon edges; no observed skin territories"
+        },
+        "professorInterpretation": {
+          "kind": "professor_interpretation",
+          "status": "not_supplied",
+          "sourceId": null,
+          "remaining": "교수 원문·판본·지정 경계 피드백 없음"
+        }
+      },
+      "viewDrafts": {
+        "anterior": {
+          "indicators": [
+            "앞몸통",
+            "안쪽 넙다리 후보"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "posterior": {
+          "indicators": [
+            "안쪽 종아리 뒤 후보"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "lateral": {
+          "indicators": [
+            "안쪽복사–발꿈치힘줄",
+            "발바닥 접근"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        }
+      },
+      "branchRule": {
+        "external": "independent contour for each supported branch; overlap allowed",
+        "internal": "text-only separate relation, never projected onto outer skin",
+        "sinew": "independent source/branch relation, never inferred from point order",
+        "unresolved": "발바닥/발뒤꿈치의 지원 영역과 실제 발바닥 피부 결손을 대조해야 한다. 내부 신장·흉부 연결을 피부 띠로 만들지 않는다."
+      },
+      "boundaryRule": {
+        "width": "AI local interpretation, requires separate controls; no nearest-line buffer or canonical fixed width",
+        "seams": "split contour at missing faces/components; no spatial bridges",
+        "sides": "read each actual side; reflection is not validation",
+        "overlap": "do not assign exclusivity to another channel or dermatome"
+      },
+      "carrierPlanning": {
+        "manifest": "atlas-data/acupoints/carriers/education-r1/manifest.json",
+        "grade": "native-derived educational envelope, not skin scan",
+        "registeredControls": null,
+        "supportedSurfaceLimits": "발바닥/발뒤꿈치의 지원 영역과 실제 발바닥 피부 결손을 대조해야 한다. 내부 신장·흉부 연결을 피부 띠로 만들지 않는다."
+      },
+      "uncertainties": [
+        "발바닥/발뒤꿈치의 지원 영역과 실제 발바닥 피부 결손을 대조해야 한다. 내부 신장·흉부 연결을 피부 띠로 만들지 않는다.",
+        "본 task의 표본 밖 native annotation·최종 face mask 미작성",
+        "교재 판본·교수 검토·공개 재배포 미확정"
+      ],
+      "finalMasks": 0
+    },
+    {
+      "channel": "PC",
+      "nameKo": "수궐음심포경",
+      "sideRule": "independent_bilateral_annotations",
+      "revision": "AT20-r1",
+      "kind": "teaching_region",
+      "basisKind": "surface_learning_connection",
+      "status": "evidence_ledger_only",
+      "canonicalBoundaryClaim": false,
+      "interpretation": "ai_proposal",
+      "author": "ai",
+      "professorReview": "not_performed",
+      "publicRedistribution": "held",
+      "sourceRelations": [
+        {
+          "sourceId": "kmcric-PC7",
+          "summary": "손바닥쪽 손목의 긴손바닥근–노쪽손목굽힘근 힘줄 사이가 지표다.",
+          "scope": "single-point landmark indicator, no continuous boundary"
+        }
+      ],
+      "types": {
+        "surfaceLearning": {
+          "kind": "surface_learning_connection",
+          "status": "authored_draft",
+          "scope": "external supported surface only"
+        },
+        "sinew": {
+          "kind": "sinew_projection",
+          "status": "incipit_only_no_mask",
+          "sourceId": "lingshu-jingjin-incipits",
+          "indicator": "중지·팔꿈치 안쪽",
+          "remaining": "full branches, joints and modern muscle correspondence not reviewed"
+        },
+        "cutaneous": {
+          "kind": "cutaneous",
+          "status": "boundary_unresolved",
+          "sourceId": "suwen-pibu",
+          "remaining": "classical skin division does not establish polygon edges; no observed skin territories"
+        },
+        "professorInterpretation": {
+          "kind": "professor_interpretation",
+          "status": "not_supplied",
+          "sourceId": null,
+          "remaining": "교수 원문·판본·지정 경계 피드백 없음"
+        }
+      },
+      "viewDrafts": {
+        "anterior": {
+          "indicators": [
+            "가슴·위팔 안쪽",
+            "아래팔 앞 중앙",
+            "손바닥·중지"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "posterior": {
+          "indicators": [],
+          "status": "no_area_authored",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "lateral": {
+          "indicators": [
+            "겨드랑 아래 연결 후보"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        }
+      },
+      "branchRule": {
+        "external": "independent contour for each supported branch; overlap allowed",
+        "internal": "text-only separate relation, never projected onto outer skin",
+        "sinew": "independent source/branch relation, never inferred from point order",
+        "unresolved": "힘줄 사이 위치 지표가 손바닥/가슴 전체의 경계는 아니다. 심경/폐경과 사이의 폭과 손바닥 분지 미작성."
+      },
+      "boundaryRule": {
+        "width": "AI local interpretation, requires separate controls; no nearest-line buffer or canonical fixed width",
+        "seams": "split contour at missing faces/components; no spatial bridges",
+        "sides": "read each actual side; reflection is not validation",
+        "overlap": "do not assign exclusivity to another channel or dermatome"
+      },
+      "carrierPlanning": {
+        "manifest": "atlas-data/acupoints/carriers/education-r1/manifest.json",
+        "grade": "native-derived educational envelope, not skin scan",
+        "registeredControls": null,
+        "supportedSurfaceLimits": "힘줄 사이 위치 지표가 손바닥/가슴 전체의 경계는 아니다. 심경/폐경과 사이의 폭과 손바닥 분지 미작성."
+      },
+      "uncertainties": [
+        "힘줄 사이 위치 지표가 손바닥/가슴 전체의 경계는 아니다. 심경/폐경과 사이의 폭과 손바닥 분지 미작성.",
+        "본 task의 표본 밖 native annotation·최종 face mask 미작성",
+        "교재 판본·교수 검토·공개 재배포 미확정"
+      ],
+      "finalMasks": 0
+    },
+    {
+      "channel": "TE",
+      "nameKo": "수소양삼초경",
+      "sideRule": "independent_bilateral_annotations",
+      "revision": "AT20-r1",
+      "kind": "teaching_region",
+      "basisKind": "surface_learning_connection",
+      "status": "evidence_ledger_only",
+      "canonicalBoundaryClaim": false,
+      "interpretation": "ai_proposal",
+      "author": "ai",
+      "professorReview": "not_performed",
+      "publicRedistribution": "held",
+      "sourceRelations": [
+        {
+          "sourceId": "kmcric-TE5",
+          "summary": "아래팔 뒤쪽 노뼈–자뼈 사이와 손등쪽 손목주름이 지표다.",
+          "scope": "single-point landmark indicator, no continuous boundary"
+        }
+      ],
+      "types": {
+        "surfaceLearning": {
+          "kind": "surface_learning_connection",
+          "status": "authored_draft",
+          "scope": "external supported surface only"
+        },
+        "sinew": {
+          "kind": "sinew_projection",
+          "status": "incipit_only_no_mask",
+          "sourceId": "lingshu-jingjin-incipits",
+          "indicator": "약지·손목·팔꿈치",
+          "remaining": "full branches, joints and modern muscle correspondence not reviewed"
+        },
+        "cutaneous": {
+          "kind": "cutaneous",
+          "status": "boundary_unresolved",
+          "sourceId": "suwen-pibu",
+          "remaining": "classical skin division does not establish polygon edges; no observed skin territories"
+        },
+        "professorInterpretation": {
+          "kind": "professor_interpretation",
+          "status": "not_supplied",
+          "sourceId": null,
+          "remaining": "교수 원문·판본·지정 경계 피드백 없음"
+        }
+      },
+      "viewDrafts": {
+        "anterior": {
+          "indicators": [],
+          "status": "no_area_authored",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "posterior": {
+          "indicators": [
+            "손등·아래팔 뒤 중앙",
+            "위팔 뒤",
+            "어깨 뒤"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "lateral": {
+          "indicators": [
+            "약지",
+            "귀 뒤·관자·눈썹끝"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        }
+      },
+      "branchRule": {
+        "external": "independent contour for each supported branch; overlap allowed",
+        "internal": "text-only separate relation, never projected onto outer skin",
+        "sinew": "independent source/branch relation, never inferred from point order",
+        "unresolved": "손등–귀 주변의 분지와 얼굴 외곽선 미확정. PC6 앞뒤 관계를 두 점 사이 관통 면으로 만들지 않는다."
+      },
+      "boundaryRule": {
+        "width": "AI local interpretation, requires separate controls; no nearest-line buffer or canonical fixed width",
+        "seams": "split contour at missing faces/components; no spatial bridges",
+        "sides": "read each actual side; reflection is not validation",
+        "overlap": "do not assign exclusivity to another channel or dermatome"
+      },
+      "carrierPlanning": {
+        "manifest": "atlas-data/acupoints/carriers/education-r1/manifest.json",
+        "grade": "native-derived educational envelope, not skin scan",
+        "registeredControls": null,
+        "supportedSurfaceLimits": "손등–귀 주변의 분지와 얼굴 외곽선 미확정. PC6 앞뒤 관계를 두 점 사이 관통 면으로 만들지 않는다."
+      },
+      "uncertainties": [
+        "손등–귀 주변의 분지와 얼굴 외곽선 미확정. PC6 앞뒤 관계를 두 점 사이 관통 면으로 만들지 않는다.",
+        "본 task의 표본 밖 native annotation·최종 face mask 미작성",
+        "교재 판본·교수 검토·공개 재배포 미확정"
+      ],
+      "finalMasks": 0
+    },
+    {
+      "channel": "GB",
+      "nameKo": "족소양담경",
+      "sideRule": "independent_bilateral_annotations",
+      "revision": "AT20-r1",
+      "kind": "teaching_region",
+      "basisKind": "surface_learning_connection",
+      "status": "evidence_ledger_only",
+      "canonicalBoundaryClaim": false,
+      "interpretation": "ai_proposal",
+      "author": "ai",
+      "professorReview": "not_performed",
+      "publicRedistribution": "held",
+      "sourceRelations": [
+        {
+          "sourceId": "kmcric-GB34",
+          "summary": "종아리뼈머리의 앞·먼쪽이 지표다.",
+          "scope": "single-point landmark indicator, no continuous boundary"
+        }
+      ],
+      "types": {
+        "surfaceLearning": {
+          "kind": "surface_learning_connection",
+          "status": "authored_draft",
+          "scope": "external supported surface only"
+        },
+        "sinew": {
+          "kind": "sinew_projection",
+          "status": "incipit_only_no_mask",
+          "sourceId": "lingshu-jingjin-incipits",
+          "indicator": "넷째발가락·바깥복사",
+          "remaining": "full branches, joints and modern muscle correspondence not reviewed"
+        },
+        "cutaneous": {
+          "kind": "cutaneous",
+          "status": "boundary_unresolved",
+          "sourceId": "suwen-pibu",
+          "remaining": "classical skin division does not establish polygon edges; no observed skin territories"
+        },
+        "professorInterpretation": {
+          "kind": "professor_interpretation",
+          "status": "not_supplied",
+          "sourceId": null,
+          "remaining": "교수 원문·판본·지정 경계 피드백 없음"
+        }
+      },
+      "viewDrafts": {
+        "anterior": {
+          "indicators": [
+            "이마·골반 앞가쪽 후보"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "posterior": {
+          "indicators": [
+            "후두·어깨 뒤 후보"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "lateral": {
+          "indicators": [
+            "관자·귀 주변",
+            "옆가슴",
+            "넙다리 가쪽",
+            "종아리뼈쪽",
+            "넷째발가락"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        }
+      },
+      "branchRule": {
+        "external": "independent contour for each supported branch; overlap allowed",
+        "internal": "text-only separate relation, never projected onto outer skin",
+        "sinew": "independent source/branch relation, never inferred from point order",
+        "unresolved": "머리의 여러 교차/분지를 하나의 큰 얼굴 면으로 병합하지 않는다. 몸통 옆/둔부/다리 가쪽 폭 미확정."
+      },
+      "boundaryRule": {
+        "width": "AI local interpretation, requires separate controls; no nearest-line buffer or canonical fixed width",
+        "seams": "split contour at missing faces/components; no spatial bridges",
+        "sides": "read each actual side; reflection is not validation",
+        "overlap": "do not assign exclusivity to another channel or dermatome"
+      },
+      "carrierPlanning": {
+        "manifest": "atlas-data/acupoints/carriers/education-r1/manifest.json",
+        "grade": "native-derived educational envelope, not skin scan",
+        "registeredControls": null,
+        "supportedSurfaceLimits": "머리의 여러 교차/분지를 하나의 큰 얼굴 면으로 병합하지 않는다. 몸통 옆/둔부/다리 가쪽 폭 미확정."
+      },
+      "uncertainties": [
+        "머리의 여러 교차/분지를 하나의 큰 얼굴 면으로 병합하지 않는다. 몸통 옆/둔부/다리 가쪽 폭 미확정.",
+        "본 task의 표본 밖 native annotation·최종 face mask 미작성",
+        "교재 판본·교수 검토·공개 재배포 미확정"
+      ],
+      "finalMasks": 0
+    },
+    {
+      "channel": "LR",
+      "nameKo": "족궐음간경",
+      "sideRule": "independent_bilateral_annotations",
+      "revision": "AT20-r1",
+      "kind": "teaching_region",
+      "basisKind": "surface_learning_connection",
+      "status": "evidence_ledger_only",
+      "canonicalBoundaryClaim": false,
+      "interpretation": "ai_proposal",
+      "author": "ai",
+      "professorReview": "not_performed",
+      "publicRedistribution": "held",
+      "sourceRelations": [
+        {
+          "sourceId": "kmcric-LR3",
+          "summary": "발등 첫째–둘째 발허리뼈 바닥의 먼쪽 사이가 지표다.",
+          "scope": "single-point landmark indicator, no continuous boundary"
+        }
+      ],
+      "types": {
+        "surfaceLearning": {
+          "kind": "surface_learning_connection",
+          "status": "authored_draft",
+          "scope": "external supported surface only"
+        },
+        "sinew": {
+          "kind": "sinew_projection",
+          "status": "incipit_only_no_mask",
+          "sourceId": "lingshu-jingjin-incipits",
+          "indicator": "엄지발가락·안쪽복사 앞",
+          "remaining": "full branches, joints and modern muscle correspondence not reviewed"
+        },
+        "cutaneous": {
+          "kind": "cutaneous",
+          "status": "boundary_unresolved",
+          "sourceId": "suwen-pibu",
+          "remaining": "classical skin division does not establish polygon edges; no observed skin territories"
+        },
+        "professorInterpretation": {
+          "kind": "professor_interpretation",
+          "status": "not_supplied",
+          "sourceId": null,
+          "remaining": "교수 원문·판본·지정 경계 피드백 없음"
+        }
+      },
+      "viewDrafts": {
+        "anterior": {
+          "indicators": [
+            "안쪽 다리",
+            "서혜부·아랫배",
+            "앞가쪽 가슴"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "posterior": {
+          "indicators": [],
+          "status": "no_area_authored",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "lateral": {
+          "indicators": [
+            "첫째–둘째 발허리뼈",
+            "안쪽 무릎"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        }
+      },
+      "branchRule": {
+        "external": "independent contour for each supported branch; overlap allowed",
+        "internal": "text-only separate relation, never projected onto outer skin",
+        "sinew": "independent source/branch relation, never inferred from point order",
+        "unresolved": "서혜·외생식/내부 주행과 실제 외피 구간을 분리해야 한다. 회음 피부 결손을 허벅지로 대체하지 않는다."
+      },
+      "boundaryRule": {
+        "width": "AI local interpretation, requires separate controls; no nearest-line buffer or canonical fixed width",
+        "seams": "split contour at missing faces/components; no spatial bridges",
+        "sides": "read each actual side; reflection is not validation",
+        "overlap": "do not assign exclusivity to another channel or dermatome"
+      },
+      "carrierPlanning": {
+        "manifest": "atlas-data/acupoints/carriers/education-r1/manifest.json",
+        "grade": "native-derived educational envelope, not skin scan",
+        "registeredControls": null,
+        "supportedSurfaceLimits": "서혜·외생식/내부 주행과 실제 외피 구간을 분리해야 한다. 회음 피부 결손을 허벅지로 대체하지 않는다."
+      },
+      "uncertainties": [
+        "서혜·외생식/내부 주행과 실제 외피 구간을 분리해야 한다. 회음 피부 결손을 허벅지로 대체하지 않는다.",
+        "본 task의 표본 밖 native annotation·최종 face mask 미작성",
+        "교재 판본·교수 검토·공개 재배포 미확정"
+      ],
+      "finalMasks": 0
+    },
+    {
+      "channel": "CV",
+      "nameKo": "임맥",
+      "sideRule": "midline",
+      "revision": "AT20-r1",
+      "kind": "teaching_region",
+      "basisKind": "surface_learning_connection",
+      "status": "evidence_ledger_only",
+      "canonicalBoundaryClaim": false,
+      "interpretation": "ai_proposal",
+      "author": "ai",
+      "professorReview": "not_performed",
+      "publicRedistribution": "held",
+      "sourceRelations": [
+        {
+          "sourceId": "kmcric-CV12",
+          "summary": "배꼽과 칼몸통결합 사이, 앞정중선이 지표다.",
+          "scope": "single-point landmark indicator, no continuous boundary"
+        }
+      ],
+      "types": {
+        "surfaceLearning": {
+          "kind": "surface_learning_connection",
+          "status": "authored_draft",
+          "scope": "external supported surface only"
+        },
+        "sinew": {
+          "kind": "sinew_projection",
+          "status": "not_applicable",
+          "reason": "임독맥은 12경근 원장에 추가하지 않음"
+        },
+        "cutaneous": {
+          "kind": "cutaneous",
+          "status": "boundary_unresolved",
+          "sourceId": "suwen-pibu",
+          "remaining": "classical skin division does not establish polygon edges; no observed skin territories"
+        },
+        "professorInterpretation": {
+          "kind": "professor_interpretation",
+          "status": "not_supplied",
+          "sourceId": null,
+          "remaining": "교수 원문·판본·지정 경계 피드백 없음"
+        }
+      },
+      "viewDrafts": {
+        "anterior": {
+          "indicators": [
+            "앞정중 배·가슴·목·턱"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "posterior": {
+          "indicators": [],
+          "status": "no_area_authored",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "lateral": {
+          "indicators": [
+            "정중 폭을 확인하는 측면 점검",
+            "회음 접근"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        }
+      },
+      "branchRule": {
+        "external": "independent contour for each supported branch; overlap allowed",
+        "internal": "text-only separate relation, never projected onto outer skin",
+        "sinew": "independent source/branch relation, never inferred from point order",
+        "unresolved": "회음 피부가 없고 구강 점막 일부가 없다. 앞정중 강조 폭은 AI 디자인 값이며 13번째 경근이 아니다."
+      },
+      "boundaryRule": {
+        "width": "AI local interpretation, requires separate controls; no nearest-line buffer or canonical fixed width",
+        "seams": "split contour at missing faces/components; no spatial bridges",
+        "sides": "read each actual side; reflection is not validation",
+        "overlap": "do not assign exclusivity to another channel or dermatome"
+      },
+      "carrierPlanning": {
+        "manifest": "atlas-data/acupoints/carriers/education-r1/manifest.json",
+        "grade": "native-derived educational envelope, not skin scan",
+        "registeredControls": null,
+        "supportedSurfaceLimits": "회음 피부가 없고 구강 점막 일부가 없다. 앞정중 강조 폭은 AI 디자인 값이며 13번째 경근이 아니다."
+      },
+      "uncertainties": [
+        "회음 피부가 없고 구강 점막 일부가 없다. 앞정중 강조 폭은 AI 디자인 값이며 13번째 경근이 아니다.",
+        "본 task의 표본 밖 native annotation·최종 face mask 미작성",
+        "교재 판본·교수 검토·공개 재배포 미확정"
+      ],
+      "finalMasks": 0
+    },
+    {
+      "channel": "GV",
+      "nameKo": "독맥",
+      "sideRule": "midline",
+      "revision": "AT20-r1",
+      "kind": "teaching_region",
+      "basisKind": "surface_learning_connection",
+      "status": "evidence_ledger_only",
+      "canonicalBoundaryClaim": false,
+      "interpretation": "ai_proposal",
+      "author": "ai",
+      "professorReview": "not_performed",
+      "publicRedistribution": "held",
+      "sourceRelations": [
+        {
+          "sourceId": "kmcric-GV14",
+          "summary": "제7목뼈 가시돌기 아래, 뒤정중선이 지표다.",
+          "scope": "single-point landmark indicator, no continuous boundary"
+        }
+      ],
+      "types": {
+        "surfaceLearning": {
+          "kind": "surface_learning_connection",
+          "status": "authored_draft",
+          "scope": "external supported surface only"
+        },
+        "sinew": {
+          "kind": "sinew_projection",
+          "status": "not_applicable",
+          "reason": "임독맥은 12경근 원장에 추가하지 않음"
+        },
+        "cutaneous": {
+          "kind": "cutaneous",
+          "status": "boundary_unresolved",
+          "sourceId": "suwen-pibu",
+          "remaining": "classical skin division does not establish polygon edges; no observed skin territories"
+        },
+        "professorInterpretation": {
+          "kind": "professor_interpretation",
+          "status": "not_supplied",
+          "sourceId": null,
+          "remaining": "교수 원문·판본·지정 경계 피드백 없음"
+        }
+      },
+      "viewDrafts": {
+        "anterior": {
+          "indicators": [
+            "코·윗입술 연결 후보"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "posterior": {
+          "indicators": [
+            "뒤정중 천골·척추·목",
+            "머리 정중"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        },
+        "lateral": {
+          "indicators": [
+            "두피 경계·구강·회음 접근"
+          ],
+          "status": "ai_plan_unregistered",
+          "boundaryRule": "Annotate these local landmarks on the actual side/pose; close on one connected carrier. Empty lists mean no proposed posterior/anterior area, not proof of absence.",
+          "sourceBoundary": false
+        }
+      },
+      "branchRule": {
+        "external": "independent contour for each supported branch; overlap allowed",
+        "internal": "text-only separate relation, never projected onto outer skin",
+        "sinew": "independent source/branch relation, never inferred from point order",
+        "unresolved": "구강 잇몸·소대 표면이 없다. 뒤정중/두피 강조 폭과 전통 분지는 별도이며 14번째 경근이 아니다."
+      },
+      "boundaryRule": {
+        "width": "AI local interpretation, requires separate controls; no nearest-line buffer or canonical fixed width",
+        "seams": "split contour at missing faces/components; no spatial bridges",
+        "sides": "read each actual side; reflection is not validation",
+        "overlap": "do not assign exclusivity to another channel or dermatome"
+      },
+      "carrierPlanning": {
+        "manifest": "atlas-data/acupoints/carriers/education-r1/manifest.json",
+        "grade": "native-derived educational envelope, not skin scan",
+        "registeredControls": null,
+        "supportedSurfaceLimits": "구강 잇몸·소대 표면이 없다. 뒤정중/두피 강조 폭과 전통 분지는 별도이며 14번째 경근이 아니다."
+      },
+      "uncertainties": [
+        "구강 잇몸·소대 표면이 없다. 뒤정중/두피 강조 폭과 전통 분지는 별도이며 14번째 경근이 아니다.",
+        "본 task의 표본 밖 native annotation·최종 face mask 미작성",
+        "교재 판본·교수 검토·공개 재배포 미확정"
+      ],
+      "finalMasks": 0
+    }
+  ],
+  "canonicalBoundaryClaim": false,
+  "finalMaskCount": 0
+}

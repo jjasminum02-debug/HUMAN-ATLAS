@@ -7550,7 +7550,7 @@
       "targetCodes": []
     },
     "AT20": {
-      "status": "planned",
+      "status": "complete",
       "feature": "acupoint-at-361",
       "title": "14경맥 학습 영역의 근거·경계 규칙",
       "dependsOn": [
@@ -7559,7 +7559,52 @@
       ],
       "spec": "work/tasks/AT20.md",
       "promptFile": "work/tasks/AT20.md",
-      "targetCodes": []
+      "targetCodes": [],
+      "report": "work/reports/AT20.md",
+      "evidence": "work/evidence/AT20/run-r1/",
+      "updatedDate": "2026-10-12",
+      "completedDate": "2026-10-12",
+      "acceptance": {
+        "passed": true,
+        "acceptancePassed": true,
+        "engineeringValidationPassed": true,
+        "territoryDefinitions": 14,
+        "maskReadyPartialLUBoundaries": 1,
+        "otherEvidenceLedgers": 13,
+        "finalMasks": 0,
+        "actualBoundaryControls": 65,
+        "replayedEnclosedFaces": 351,
+        "nativeLandmarksReplayed": 4,
+        "properNativeTriangleIntersections": 0,
+        "actualContextScreens": 9,
+        "screenViewports": [
+          390,
+          1024,
+          1440
+        ],
+        "automatedTests": 20,
+        "typecheck": "passed",
+        "newPointApprovals": 0,
+        "unchangedEducationalPositions": 22,
+        "preciseLocations": 0,
+        "canonicalBoundariesConfirmed": 0,
+        "professorReviewedTerritories": 0,
+        "publicRedistributionEligibleTerritories": 0,
+        "sameSceneCameraPreserved": true,
+        "sourceAndUserWipPreserved": true,
+        "carrierBudgetsUnchanged": true,
+        "newRuntimeBytes": 0,
+        "newRuntimeGPUBufferBytes": 0,
+        "validation": "work/evidence/AT20/run-r1/validation-r1.json",
+        "missingInputLedger": "work/evidence/AT20/run-r1/remaining-units-r1.json",
+        "definitions": "atlas-data/acupoints/territories/AT20-r1/definitions-r1.json",
+        "boundaryInput": "atlas-data/acupoints/territories/AT20-r1/lung-forearm-right-boundary-r1.json",
+        "scope": "14 independent source/indicator/uncertainty ledgers and one right forearm partial LU educational control boundary. No final masks, full LU extent, left controls, canonical jingjin/cutaneous boundary, professor approval or public redistribution acceptance."
+      },
+      "continuationUnit": null,
+      "nextPlannedUnit": "AT21",
+      "nextPrompt": "work/evidence/AT20/run-r1/next-prompt-AT21.txt",
+      "autoRunNext": false
     },
     "AT21": {
       "status": "planned",
@@ -7758,7 +7803,7 @@
         "AT28",
         "AT29"
       ],
-      "nextUnit": "AT20",
+      "nextUnit": "AT21",
       "conceptCount": 361,
       "channelCount": 14,
       "extraPointsIncluded": false,
