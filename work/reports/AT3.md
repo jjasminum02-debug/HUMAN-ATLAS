@@ -84,3 +84,5 @@ AT3의 필수 생성/등록/검사 미달은 없다. 머리/목 상단/손/발/�
 ![AT3 실제 검토 화면](../evidence/AT3/delivery-screen.png)
 
 재현 명령(Python + NumPy 환경, repository root 기준): `python atlas-web/scripts/buildEducationCarriers.py --evidence-dir work/evidence/AT3`, `python atlas-web/scripts/validateEducationCarriers.py --evidence-dir work/evidence/AT3`, `python work/evidence/AT3/validate-runtime.py`. 공통 도구는 실행별 evidence 경로를 인자로 받는다.
+
+로컬 primary commit: `d5deddc3c2ea95ef464e79a9d8d8177b50590a56` (소유 85개 파일, `commit-scope.json`과 실제 목록 일치). Primary 뒤 index는 비었고 잔여 변경은 기존 baseline WIP 5,966개와 정확히 같았다. 기존 WIP hash 변화와 EXECUTION의 다른 논리 값 변화는 0개였다. 후속 receipt commit 범위는 이 report와 `commit-receipt.json` 2개뿐이며, 잔여 WIP를 포함하지 않는다.
