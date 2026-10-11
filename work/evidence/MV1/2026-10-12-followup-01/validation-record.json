@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "reviewDate": "2026-10-12",
+  "scope": "MV1 follow-up using frozen 2026-10-11-run-01 inputs; no source/runtime/GLB/authoring changes",
+  "checks": [
+    {
+      "id": "runtime-contract",
+      "command": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --experimental-strip-types atlas-web/scripts/buildLearnerMotionRuntime.mjs --check",
+      "status": "pass",
+      "result": {
+        "selectors": 267,
+        "actions": 1166,
+        "playableSourceBoundCandidates": 1159
+      }
+    },
+    {
+      "id": "motion-schema",
+      "command": "python3 atlas-data/schemas/validate_motion_learning.py --check",
+      "status": "pass",
+      "result": {
+        "actions": 1166,
+        "definitions": 1160,
+        "assets": 1160,
+        "issues": 0
+      }
+    },
+    {
+      "id": "actual-learner-loader",
+      "command": "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --experimental-strip-types work/evidence/MV1/2026-10-12-followup-01/tools/validate-loader-followup.mjs",
+      "status": "pass",
+      "result": {
+        "targetRows": 332,
+        "uniqueGlbFiles": 71,
+        "pass": 332,
+        "error": 0
+      },
+      "output": "runtime/real-loader-validation.json"
+    },
+    {
+      "id": "followup-evidence-consistency",
+      "command": "python3 work/evidence/MV1/2026-10-12-followup-01/tools/validate_followup.py",
+      "status": "pass",
+      "result": {
+        "frozenInputHashes": "17/17",
+        "learnerMappings": 332,
+        "routes": 134,
+        "denseSheets": 220,
+        "playbackGroups": 74,
+        "visualRows": 332,
+        "ambiguityGroups": 5,
+        "failures": []
+      }
+    },
+    {
+      "id": "runtime-check-shell-path-attempt",
+      "command": "node --experimental-strip-types atlas-web/scripts/buildLearnerMotionRuntime.mjs --check",
+      "status": "environmental-fallback",
+      "result": "The shell PATH lacks node (exit 127); the same check passed with the configured bundled Node runtime above."
+    },
+    {
+      "id": "execution-sync",
+      "command": "python3 work/tools/sync_execution.py",
+      "status": "pass",
+      "result": "Updated 0 execution views."
+    },
+    {
+      "id": "execution-sync-check",
+      "command": "python3 work/tools/sync_execution.py --check",
+      "status": "pass",
+      "result": "Execution projections match; no writes."
+    }
+  ],
+  "manualReview": {
+    "denseSheetsReviewed": 220,
+    "playbackGroupsReviewed": 74,
+    "learnerFlowRowsReviewed": 332,
+    "observedAmbiguousTargets": 34,
+    "uninspectedTargets": 0,
+    "naturalnessApprovedTargets": 0,
+    "confirmedDefects": 0,
+    "completion": "partial"
+  },
+  "preservation": {
+    "frozenInputHashesAtStart": 17,
+    "frozenRunEvidenceHashesAtStart": {
+      "inventory": "fdb28f1cb00a47615cf10972f310db40aed99cf7dc8de7ba1454e960ff5c58e6",
+      "targetDispositions": "7d1b79eab6bfb42659d6c77c9dbdcd5164c257134ad4e1903c59fe10e3e6249c",
+      "captureIndex": "6ce4445816203816a59ed47881d0f5947b694f5a4828c33c2756439418ff0f44"
+    },
+    "frozenLoaderValidationFile": {
+      "path": "work/evidence/MV1/2026-10-11-run-01/runtime/real-loader-validation.json",
+      "startAttempt": "A prior shared-validator invocation wrote its default output to this frozen run path. The clean-at-start snapshot was used to restore the file immediately to HEAD.",
+      "worktreeStatusAfterRestore": "clean",
+      "headBlobSha256": "81237c4ecdff179de35f1d67d97f5f405eb7d695667c71f7e6b12c38abe01726",
+      "currentFileSha256": "81237c4ecdff179de35f1d67d97f5f405eb7d695667c71f7e6b12c38abe01726",
+      "matchesHeadBlob": true
+    },
+    "at6RecordContentSha256Before": "f6892042266a8cd9368ddeea148ab1723692fa7d0b945ca0bd1ea6257fb35b98",
+    "at6RecordContentSha256After": "f6892042266a8cd9368ddeea148ab1723692fa7d0b945ca0bd1ea6257fb35b98",
+    "at6RecordUnchanged": true,
+    "initialUserWipFiles": "Not staged or modified by this follow-up. See out-of-scope-status-delta.json for AT6-related path-level status differences observed between baseline and pre-commit.",
+    "outOfScopeStatusDeltaEvidence": "out-of-scope-status-delta.json"
+  },
+  "executionScope": {
+    "updatedRecord": "featureWorkUnits.MV1",
+    "updatedPlan": "featurePlans.motion-quality-review.nextUnit and lastDisposition",
+    "at6Touched": false,
+    "nextUnit": "MV2",
+    "autoRunNext": false
+  }
+}

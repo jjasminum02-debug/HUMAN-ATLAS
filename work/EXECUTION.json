@@ -7628,26 +7628,34 @@
       "dependsOn": [],
       "autoRunNext": false,
       "report": "work/reports/MV1.md",
-      "evidence": "work/evidence/MV1/2026-10-11-run-01",
+      "evidence": "work/evidence/MV1/2026-10-12-followup-01",
       "result": {
         "learnerReachableMuscleRoleSideRows": 332,
+        "learnerSourceSideRoutes": 134,
         "uniqueMusclePlaybackMappings": 74,
         "statusCounts": {
-          "pass": 330,
-          "not_checked": 2,
+          "pass": 298,
+          "not_checked": 34,
           "fail": 0,
           "error": 0
         },
         "confirmedDefects": 0,
-        "suspectedReviewCandidates": 1,
+        "suspectedReviewCandidates": 5,
         "requiredDenseIntermediateSheets": 220,
-        "denseIntermediateSheetsManuallyReviewed": false,
+        "denseIntermediateSheetsManuallyReviewed": true,
+        "playbackGroupsReviewed": 74,
+        "frozenInputHashesMatched": 17,
+        "observedAmbiguousTargetRows": 34,
+        "uninspectedTargetRows": 0,
+        "naturalnessApprovedTargetRows": 0,
         "exhaustiveCompletionClaimed": false,
-        "learnerRuntimeActionReturnEmphasisRowsChecked": 0,
-        "learnerRuntimeActionReturnEmphasisRowsPending": 332
+        "learnerRuntimeActionReturnEmphasisRowsChecked": 332,
+        "learnerRuntimeActionReturnEmphasisRowsPending": 0,
+        "learnerIdentitySetSha256": "ac570fd46cb9267be948d9490ab6a1291c2d3a968bdd29ec6f0aed77a3e701af"
       },
-      "nextUnit": "manually-review-220-dense-interframe-sheets-resolve-two-rectus-knee-contours-and-check-332-role-side-learner-action-return-emphasis-mappings",
-      "noAutoAdvance": true
+      "nextUnit": "resolve-34-observed-ambiguous-targets-in-five-groups-through-explicit-MV2-only",
+      "noAutoAdvance": true,
+      "frozenSourceEvidence": "work/evidence/MV1/2026-10-11-run-01"
     },
     "MV2": {
       "status": "planned",
@@ -7723,10 +7731,10 @@
         "MV1",
         "MV2"
       ],
-      "nextUnit": "MV1",
+      "nextUnit": "MV2",
       "autoRunNext": false,
       "unitPolicy": "MV1 freezes exhaustive reachable inventory; MV2 repairs one frozen common-cause group per explicit run; completion requires remaining queue empty.",
-      "lastDisposition": "partial; 220 dense sheets, two not_checked knee contours, and 332 role/side learner action-return emphasis mappings remain for manual review"
+      "lastDisposition": "partial; 220/220 dense sheets, 74/74 playback groups, and 332/332 learner flows reviewed; 34 targets remain observed_ambiguous across five groups; no naturalness approval; MV2 requires an explicit user run."
     }
   }
 }

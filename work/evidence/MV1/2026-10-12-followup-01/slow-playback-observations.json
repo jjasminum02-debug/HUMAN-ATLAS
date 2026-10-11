@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "mv1-slow-playback-observations-v1",
+  "capturedAt": "2026-10-12",
+  "playbackRate": 0.25,
+  "player": "http://127.0.0.1:5184/playback-v3",
+  "recording": "../2026-10-11-run-01/visual/full-playback/muscle-playback-cycle-v3.webm",
+  "observations": [
+    {
+      "group": 9,
+      "mapping": {
+        "playbackGroup": 9,
+        "sourceKey": "ZA-c7010a9-d75abb958e1463ceecb5430b",
+        "side": "left",
+        "memberRole": "deforming_muscle_surface",
+        "assetUri": "atlas-data/assets/motion/t66-priority-s04-flex/motion.glb",
+        "assetSha256": "fd09265a937bebff65f0d1b095bc2d0350f13b7222e53a90c32bb40b80c43adf",
+        "clipId": "T66-PRIORITY-S04-FLEX",
+        "actionDirection": "forward",
+        "durationSeconds": 2.5,
+        "playbackSeconds": 3.9705882352941178,
+        "dedupeKey": "6904a7396e4a27e751e0aee3e950fe952bbac712839e93eadfa532f313cb967d",
+        "impactTargets": [
+          {
+            "targetId": "actions|ZA-c7010a9-d75abb958e1463ceecb5430b|T66-PRIORITY-S04-L-OBLIQUE-ASSET|ZA-c7010a9-d75abb958e1463ceecb5430b",
+            "label": "양측 협응 몸통 굽힘",
+            "learningIntent": "muscle_action",
+            "role": "deforming_muscle_surface"
+          }
+        ]
+      },
+      "observedPhases": [
+        "action",
+        "return"
+      ],
+      "visibleHeader": "9/74 External abdominal oblique muscle · left · T66-PRIORITY-S04-FLEX",
+      "reproduction": "Open playback-v3?rate=0.25&start≈32; use visible playback header, wait through action into return. Earlier seek at 27 s landed in group 8, so header must be checked.",
+      "observation": "Smooth action/return at the observed interval; highlighted surface remained continuous; lateral layering ambiguity persists.",
+      "screenFiles": []
+    },
+    {
+      "group": 11,
+      "mapping": {
+        "playbackGroup": 11,
+        "sourceKey": "ZA-c7010a9-afb0624c66f652ea012c7534",
+        "side": "left",
+        "memberRole": "deforming_muscle_surface",
+        "assetUri": "atlas-data/assets/motion/t66-priority-s05-left-knee/motion.glb",
+        "assetSha256": "04b6461e26b71f205277c76b269046954a50e55bc1d3d7a56f8bbe0913ac17c1",
+        "clipId": "T66-PRIORITY-L-RECTUS-KNEE-CLIP",
+        "actionDirection": "reverse",
+        "durationSeconds": 3,
+        "playbackSeconds": 6,
+        "dedupeKey": "28d0ff923180ac9508333e0f23dcf72639119f548997d53957654c59e6dc9acc",
+        "impactTargets": [
+          {
+            "targetId": "actions|ZA-c7010a9-afb0624c66f652ea012c7534|T66-PRIORITY-L-RECTUS-KNEE-ASSET|ZA-c7010a9-afb0624c66f652ea012c7534",
+            "label": "무릎 폄 · 슬관절 신전",
+            "learningIntent": "muscle_action",
+            "role": "deforming_muscle_surface"
+          }
+        ]
+      },
+      "observedPhases": [
+        "preparation",
+        "action",
+        "return"
+      ],
+      "visibleHeader": "11/74 Rectus femoris muscle · left · T66-PRIORITY-L-RECTUS-KNEE-CLIP",
+      "reproduction": "Open full-cycle player at rate=0.25 near the observed 11/74 segment; compare at least one slow action/return pass and dense group 11 sheet.",
+      "observation": "Smooth outward contour, no observed tear; protrusion remains ambiguous.",
+      "screenFiles": []
+    },
+    {
+      "group": 18,
+      "mapping": {
+        "playbackGroup": 18,
+        "sourceKey": "ZA-c7010a9-eb0a993e09d73159468116ce",
+        "side": "right",
+        "memberRole": "deforming_muscle_surface",
+        "assetUri": "atlas-data/assets/motion/t66-priority-s05-right-knee/motion.glb",
+        "assetSha256": "5d8fb2a5190ad9dce5badc12622a702e6fc67e6024f0a7964100025fb9c92b98",
+        "clipId": "T66-PRIORITY-R-RECTUS-KNEE-CLIP",
+        "actionDirection": "reverse",
+        "durationSeconds": 3,
+        "playbackSeconds": 6,
+        "dedupeKey": "b72a811d705cfb10ae5da90007807bd2c962d776a50e330255ed8c818ea113d3",
+        "impactTargets": [
+          {
+            "targetId": "actions|ZA-c7010a9-eb0a993e09d73159468116ce|T66-PRIORITY-R-RECTUS-KNEE-ASSET|ZA-c7010a9-eb0a993e09d73159468116ce",
+            "label": "무릎 폄 · 슬관절 신전",
+            "learningIntent": "muscle_action",
+            "role": "deforming_muscle_surface"
+          }
+        ]
+      },
+      "observedPhases": [
+        "preparation",
+        "action",
+        "return"
+      ],
+      "visibleHeader": "18/74 Rectus femoris muscle · right · T66-PRIORITY-R-RECTUS-KNEE-CLIP",
+      "reproduction": "Open full-cycle player at rate=0.25 near the observed 18/74 segment; compare at least one slow action/return pass and dense group 18 sheet.",
+      "observation": "Smooth outward contour, no observed tear; protrusion remains ambiguous.",
+      "screenFiles": []
+    },
+    {
+      "group": 21,
+      "mapping": {
+        "playbackGroup": 21,
+        "sourceKey": "ZA-c7010a9-b20b574e456449c5d571c7a1",
+        "side": "left",
+        "memberRole": "deforming_muscle_surface",
+        "assetUri": "atlas-data/assets/motion/t66-unit01-elbow-flexion-left-source-frame-r4/motion.glb",
+        "assetSha256": "a263144376925c2ece792c965347f26911e6c6b9de4cc29dfc398983e8e3844d",
+        "clipId": "T66-CLIP-elbow-flexion-left",
+        "actionDirection": "forward",
+        "durationSeconds": 2,
+        "playbackSeconds": 3.1764705882352944,
+        "dedupeKey": "e3c4c838061e03772996afa9e028e45c04898c30c2ed1a439ebfa4e74329b508",
+        "impactTargets": [
+          {
+            "targetId": "actions|ZA-c7010a9-b20b574e456449c5d571c7a1|T66-FAMILY-elbow-flexion-left-ZA-c7010a9-b20b574e456449c5d571c7a1-ASSET|ZA-c7010a9-b20b574e456449c5d571c7a1",
+            "label": "팔꿈치 굽힘",
+            "learningIntent": "posture_observation",
+            "role": "deforming_muscle_surface"
+          }
+        ]
+      },
+      "observedPhases": [
+        "action",
+        "return"
+      ],
+      "visibleHeader": "21/74 Short head of biceps brachii · left · T66-CLIP-elbow-flexion-left",
+      "reproduction": "Use player rate=0.25 and seek to the visible 21/74 header. At the paused control readout the video was around 1:28; compare action and return frames.",
+      "observation": "No obvious temporal tear. Lateral target/neighbor relationship remains difficult to adjudicate.",
+      "screenFiles": []
+    },
+    {
+      "group": 23,
+      "mapping": {
+        "playbackGroup": 23,
+        "sourceKey": "ZA-c7010a9-b20b574e456449c5d571c7a1",
+        "side": "left",
+        "memberRole": "deforming_muscle_surface",
+        "assetUri": "atlas-data/assets/motion/t66-unit01-shoulder-flexion-left-source-frame-r4/motion.glb",
+        "assetSha256": "13cb37b2d1bf048626cb79d46ed28a3c2f6453f1d19444c106e46b6ec2403e86",
+        "clipId": "T66-CLIP-shoulder-flexion-left",
+        "actionDirection": "forward",
+        "durationSeconds": 2,
+        "playbackSeconds": 3.1764705882352944,
+        "dedupeKey": "5929d66867efcaa462e9a3d2dde21f0fce2d6fa903e722290e176fffc20361a4",
+        "impactTargets": [
+          {
+            "targetId": "actions|ZA-c7010a9-b20b574e456449c5d571c7a1|T66-FAMILY-shoulder-flexion-left-ZA-c7010a9-b20b574e456449c5d571c7a1-ASSET|ZA-c7010a9-b20b574e456449c5d571c7a1",
+            "label": "어깨 앞쪽 굽힘",
+            "learningIntent": "posture_observation",
+            "role": "deforming_muscle_surface"
+          }
+        ]
+      },
+      "observedPhases": [
+        "action"
+      ],
+      "visibleHeader": "23/74 Short head of biceps brachii · left · T66-CLIP-shoulder-flexion-left",
+      "reproduction": "At rate=0.25, seek using the visible video progress bar until the header is 23/74; action was visible around 1:35. Continue playback about 8 s wall time; the observed next header was 24/74 at about 1:37.",
+      "observation": "No abrupt pop in the observed action frame. Lateral dark region and attachment fit remain ambiguous; the brief follow-through did not establish naturalness.",
+      "screenFiles": []
+    },
+    {
+      "group": 24,
+      "mapping": {
+        "playbackGroup": 24,
+        "sourceKey": "ZA-c7010a9-a0c2ea00609e874a7faa926d",
+        "side": "right",
+        "memberRole": "deforming_muscle_surface",
+        "assetUri": "atlas-data/assets/motion/t66-unit01-shoulder-flexion-right-source-frame-r4/motion.glb",
+        "assetSha256": "8f7e3a5ea0a27a4b2a6254ce65c6b8ed01c99dab67f2e2e0266a7fed12225b96",
+        "clipId": "T66-CLIP-shoulder-flexion-right",
+        "actionDirection": "forward",
+        "durationSeconds": 2,
+        "playbackSeconds": 3.1764705882352944,
+        "dedupeKey": "92fd0a2827e07710d120e3cf5ea1cf89b53d2f0a9848e5b6d164b4662d053e8c",
+        "impactTargets": [
+          {
+            "targetId": "actions|ZA-c7010a9-a0c2ea00609e874a7faa926d|T66-FAMILY-shoulder-flexion-right-ZA-c7010a9-a0c2ea00609e874a7faa926d-ASSET|ZA-c7010a9-a0c2ea00609e874a7faa926d",
+            "label": "어깨 앞쪽 굽힘",
+            "learningIntent": "posture_observation",
+            "role": "deforming_muscle_surface"
+          }
+        ]
+      },
+      "observedPhases": [
+        "action"
+      ],
+      "visibleHeader": "24/74 Short head of biceps brachii · right · T66-CLIP-shoulder-flexion-right",
+      "reproduction": "Continue the same 0.25x full-cycle playback after group 23 and confirm the 24/74 right-side header; compare its three-view dense sheet.",
+      "observation": "No obvious gross discontinuity in the observed action frame; lateral layering remains ambiguous.",
+      "screenFiles": []
+    }
+  ],
+  "visualCaptureNote": "The CUA live screenshot payloads were shown during this review but were not serialized into a new image file. The full frozen emitted-GLB recording and indexed dense/focused sheets remain available at the paths above; actual learner UI action/return screenshots are linked in visual-evidence-index.json."
+}

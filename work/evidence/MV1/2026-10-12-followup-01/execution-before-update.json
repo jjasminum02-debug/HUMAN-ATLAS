@@ -1,0 +1,95 @@
+{
+  "capturedAt": "2026-10-12T02:06:05.001233+09:00",
+  "executionSha256": "3da0b3c9f11cd935f4c764f15c476e296ad8b0119c3d9ebb6f2827d3183d6075",
+  "featureWorkUnits": {
+    "MV1": {
+      "status": "partial",
+      "feature": "motion-quality-review",
+      "owner": "Luna Max",
+      "spec": "work/tasks/MV1.md",
+      "promptFile": "work/tasks/MV1.md",
+      "dependsOn": [],
+      "autoRunNext": false,
+      "report": "work/reports/MV1.md",
+      "evidence": "work/evidence/MV1/2026-10-11-run-01",
+      "result": {
+        "learnerReachableMuscleRoleSideRows": 332,
+        "uniqueMusclePlaybackMappings": 74,
+        "statusCounts": {
+          "pass": 330,
+          "not_checked": 2,
+          "fail": 0,
+          "error": 0
+        },
+        "confirmedDefects": 0,
+        "suspectedReviewCandidates": 1,
+        "requiredDenseIntermediateSheets": 220,
+        "denseIntermediateSheetsManuallyReviewed": false,
+        "exhaustiveCompletionClaimed": false,
+        "learnerRuntimeActionReturnEmphasisRowsChecked": 0,
+        "learnerRuntimeActionReturnEmphasisRowsPending": 332
+      },
+      "nextUnit": "manually-review-220-dense-interframe-sheets-resolve-two-rectus-knee-contours-and-check-332-role-side-learner-action-return-emphasis-mappings",
+      "noAutoAdvance": true
+    },
+    "AT6": {
+      "status": "partial",
+      "feature": "acupoint-at-361",
+      "title": "폐경 11혈 양측 위치 보완·학습 화면 연결",
+      "dependsOn": [
+        "AT5"
+      ],
+      "spec": "work/tasks/AT6.md",
+      "promptFile": "work/tasks/AT6.md",
+      "targetCodes": [
+        "LU1",
+        "LU2",
+        "LU3",
+        "LU4",
+        "LU5",
+        "LU6",
+        "LU7",
+        "LU8",
+        "LU9",
+        "LU10",
+        "LU11"
+      ],
+      "report": "work/reports/AT6.md",
+      "evidence": "work/evidence/AT6/",
+      "updatedDate": "2026-10-11",
+      "acceptance": {
+        "passed": false,
+        "engineeringValidationPassed": true,
+        "concepts": 11,
+        "bilateralCardSelections": 22,
+        "actualTopologyProbeAddresses": 14,
+        "preciseLocations": 0,
+        "educationalApproximationLocations": 0,
+        "unresolvedLocations": 22,
+        "fixtureExports": 0,
+        "automatedTests": 47,
+        "sameLearnerScenePreserved": true,
+        "surfacePositionsCompleted": false,
+        "missingInputLedger": "work/evidence/AT6/remaining-units.json"
+      },
+      "continuationUnit": "AT6",
+      "nextPlannedUnit": "AT7",
+      "autoRunNext": false,
+      "reviewAmendment": "design/2026-09-25-muscle-atlas/32-AT6-PLACEMENT-CONTEXT-CAMERA-AND-MOTION-QA.md"
+    }
+  },
+  "featurePlans": {
+    "motion-quality-review": {
+      "status": "in_progress",
+      "design": "design/2026-09-25-muscle-atlas/32-AT6-PLACEMENT-CONTEXT-CAMERA-AND-MOTION-QA.md",
+      "order": [
+        "MV1",
+        "MV2"
+      ],
+      "nextUnit": "MV1",
+      "autoRunNext": false,
+      "unitPolicy": "MV1 freezes exhaustive reachable inventory; MV2 repairs one frozen common-cause group per explicit run; completion requires remaining queue empty.",
+      "lastDisposition": "partial; 220 dense sheets, two not_checked knee contours, and 332 role/side learner action-return emphasis mappings remain for manual review"
+    }
+  }
+}
