@@ -1,4 +1,5 @@
 /** Point text, model placement, routes and independently authored areas have separate revisions. */
+import { localLearnerEligible } from './placementPolicy.ts';
 export type Side = 'right' | 'left' | 'midline';
 export type Vec3 = [number, number, number];
 export interface SourceRef { id: string; title: string; edition: string | null; locator: string | null; url?: string }
@@ -22,6 +23,24 @@ export interface PointInstance {
   triangle: number; barycentric: Vec3; landmarkSourceKeys: string[];
   locationValidation: 'unresolved' | 'landmarks_verified'; aiProposal: boolean;
   professorReview: 'not_performed' | 'reviewed'; missing: string[];
+  /** V1 fields remain intact; this independent V2 assessment does not erase AI authorship. */
+  assessment?: PlacementAssessment;
+}
+export interface PlacementAssessment {
+  schemaVersion: 2; policyVersion: 'landmark-evidence-v2';
+  scope: 'real_input' | 'technical_fixture';
+  inputDomain:'real_input'|'technical_fixture';
+  technical: 'not_checked' | 'passed' | 'failed';
+  precision: 'unresolved' | 'educational_approximation';
+  basis: 'landmark' | 'B-cun' | 'F-cun' | 'legacy_unresolved';
+  author: 'ai' | 'human' | 'unknown'; inputSha256: string; compilerVersion: string;
+  /** Exact frozen binding checked by the compiler, including the barycentric tuple. */
+  checkedBinding: string | null;
+  landmarks: { id: string; anatomy: string; sourceKey: string; evidenceSha256: string }[];
+  relation: SourceRef[];
+  checks: { side: boolean; pose: boolean; frame: boolean; topology: boolean; surface: boolean; anatomicalRelation: boolean };
+  failures: string[];
+  rights: {localObservation:'supported'|'held';publicRedistribution:'held'|'supported';sourceIds:string[]};
 }
 export interface ChannelRoute {
   id: string; channel: string; side: Side; revision: string;
@@ -38,8 +57,7 @@ export interface Territory {
 export interface SinewPath { id: string; revision: string; sources: SourceRef[]; branches: SourcedText[]; muscles: { sourceKey: string; part: string | null; evidence: SourcedText }[] }
 export interface LearningAssociation { id: string; revision: string; from: string; to: string | null; kind: 'spatial_context' | 'lecture_association'; explanation: SourcedText | null; unresolvedOriginal: string | null }
 export type LearningSelection = { kind: 'anatomy'; sourceKey: string } | { kind: 'acupoint'; code: string; side: Side } | { kind: 'territory'; id: string };
-/** Only independently verified placements qualify; development proposals cannot be exported as learner points. */
+/** Metadata policy only. Runtime callers must also verify geometry bytes with projectLearnerInstances. */
 export function productInstances(carrier: Carrier, instances: PointInstance[]) {
-  return carrier.precision === 'landmarks_verified' && carrier.rights.localObservation === 'supported'
-    ? instances.filter(i => i.locationValidation === 'landmarks_verified' && !i.aiProposal && i.missing.length === 0) : [];
+  return instances.filter(i => localLearnerEligible(carrier, i));
 }

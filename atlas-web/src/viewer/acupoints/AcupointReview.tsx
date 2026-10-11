@@ -3,6 +3,8 @@ import type { DatasetSceneAdapter } from '../datasets/DatasetSceneAdapter.ts';
 import { AcupunctureOverlay } from './AcupunctureOverlay.ts';
 import { LUNG_ORDER, LUNG_SECTIONS, sectionFor, type PointTour } from './tour.ts';
 import type { Carrier, PointConcept, PointInstance, LearningSelection, ChannelRoute } from './schema.ts';
+import { migratePlacementDocument } from './placementMigration.ts';
+import { projectLearnerInstances } from './placementPolicy.ts';
 import './review.css';
 type LearningData={usage:string;carrier:Carrier;instances:PointInstance[];concepts:(PointConcept&{landmarkLabel:string})[];route:ChannelRoute&{positions:number[];carrierHash:string}};
 /** Review-only until exact surface placements are accepted; no fixture product projection. */
@@ -11,6 +13,8 @@ export default function AcupointReview({adapter,onClose}:{adapter:DatasetSceneAd
   const [carrierVisible,setCarrierVisible]=useState(false);
   const [reduced,setReduced]=useState(()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   const overlay=useRef<AcupunctureOverlay|null>(null),generation=useRef(0),request=useRef<AbortController|null>(null);
+  // One return value per entry, even when a side reload interrupts the previous return transition.
+  const returnCamera=useRef(adapter.scene.cameraState());
   useEffect(()=>{const media=window.matchMedia('(prefers-reduced-motion: reduce)');const change=()=>{setReduced(media.matches);overlay.current?.setReducedMotion(media.matches);};media.addEventListener('change',change);return()=>media.removeEventListener('change',change);},[]);
   const selected=selection.kind==='acupoint'?selection.code:'LU1';
   const stop=(reason='')=>{generation.current++;request.current?.abort();overlay.current?.dispose(!reason);overlay.current=null;setData(null);setLoading(false);setNotice(reason);};
@@ -26,15 +30,23 @@ export default function AcupointReview({adapter,onClose}:{adapter:DatasetSceneAd
       const {default:url}=side==='right'?await import('../../../../work/evidence/acupoint-AC2/right-learning.json?url'):await import('../../../../work/evidence/acupoint-AC2/left-learning.json?url');
       if(token!==generation.current||!alive)return;
       const response=await fetch(url,{signal:abort.signal});if(!response.ok)throw Error('경혈 자료를 열 수 없습니다.');
-      const bytes=await response.arrayBuffer(),next=JSON.parse(new TextDecoder().decode(bytes)) as LearningData;
+      const bytes=await response.arrayBuffer();
+      const migrated=await migratePlacementDocument(new Uint8Array(bytes)),next=migrated.document as unknown as LearningData;
       if(token!==generation.current||!alive)return;
       if(next.usage!=='development_review_only'||next.route.kind!=='surface_teaching'||next.route.carrierHash!==next.carrier.topologySha256||next.route.side!==side||next.instances.length!==11||next.route.teachingPointOrder.join()!==LUNG_ORDER.join())throw Error('경혈 학습 자료의 연결 기준이 다릅니다.');
-      const created=await AcupunctureOverlay.create(adapter,next.carrier,next.instances,pick,reason=>stop(reason),bytes.byteLength,{route:next.route.positions,names:Object.fromEntries(next.concepts.map(p=>[p.code,p.nameKo])),changed:state=>{if(alive)setTour(state);},cancelled:()=>token!==generation.current||!alive});
+      const d=adapter.resources.dataset;
+      const projection=await projectLearnerInstances(next.carrier,next.instances,{datasetRevision:d.revision,frameId:d.frameContract?.targetFrameId??'',unit:d.unit,
+        poseId:d.frameContract?.staticReferencePose?.id??'',motionActive:adapter.resources.motionOverrides.size>0||adapter.scene.cameraOwner==='motion'},()=>token!==generation.current||!alive);
+      if(token!==generation.current||!alive)return;
+      // Diagnostic evidence on the existing canvas; no source/review metadata added to learner cards.
+      adapter.scene.renderer.domElement.dataset.acupointProjection=JSON.stringify({schemaVersion:2,sourceSha256:migrated.sourceSha256,side,
+        proposals:next.instances.length,localLearnerEligible:projection.instances.length,fixtureExports:0,authors:[...new Set(next.instances.map(i=>i.assessment?.author))]});
+      const created=await AcupunctureOverlay.create(adapter,next.carrier,next.instances,pick,reason=>stop(reason),bytes.byteLength,{returnCamera:returnCamera.current,route:next.route.positions,names:Object.fromEntries(next.concepts.map(p=>[p.code,p.nameKo])),changed:state=>{if(alive)setTour(state);},cancelled:()=>token!==generation.current||!alive});
       if(token!==generation.current||!alive){created.dispose(false);return;}
       overlay.current=created;created.setReducedMotion(reduced);setData(next);pick('LU1');created.overview();
     }catch(error){if(token===generation.current&&alive)setNotice(error instanceof Error?error.message:'경혈 연결 실패');}
     finally{if(token===generation.current&&alive)setLoading(false);}})();
-    return()=>{alive=false;generation.current++;abort.abort();removeMotion();removeSelection();overlay.current?.dispose();overlay.current=null;};
+    return()=>{alive=false;generation.current++;abort.abort();removeMotion();removeSelection();overlay.current?.dispose();overlay.current=null;delete adapter.scene.renderer.domElement.dataset.acupointProjection;};
   },[adapter,side]);
   const concept=data?.concepts.find(p=>p.code===selected),index=LUNG_ORDER.indexOf(selected);
   if(!data&&!loading&&notice)return <aside className="acupoint-entry" aria-label="경혈 안내"><button onClick={onClose}>경혈 안내 닫기</button><p role="status">{notice}</p></aside>;

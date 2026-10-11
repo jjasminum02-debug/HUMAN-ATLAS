@@ -25,18 +25,19 @@ export class AcupunctureOverlay {
   private down = {x:0,y:0};
   private selected: string | null = null;
   private reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  static async create(adapter: DatasetSceneAdapter, carrier: Carrier, points: PointInstance[], onSelect: (code: string) => void, onStop: (reason: string) => void, encodedBytes: number, options?: { route: number[]; names: Record<string,string>; changed: (state:PointTour['state'])=>void; cancelled:()=>boolean }) {
+  static async create(adapter: DatasetSceneAdapter, carrier: Carrier, points: PointInstance[], onSelect: (code: string) => void, onStop: (reason: string) => void, encodedBytes: number, options?: { returnCamera?:CameraState;route: number[]; names: Record<string,string>; changed: (state:PointTour['state'])=>void; cancelled:()=>boolean }) {
     if(options&&(options.route.length%3||!options.route.every(Number.isFinite)))throw Error('Invalid teaching route');
     const d = adapter.resources.dataset;
     validateCarrier(carrier, { datasetRevision:d.revision, frameId:d.frameContract?.targetFrameId ?? '', unit:d.unit, poseId:d.frameContract?.staticReferencePose?.id ?? '' });
     await verifyCarrierHash(carrier); points.forEach(i => resolveAnchor(carrier,i));
     if(options?.cancelled())throw new DOMException('Cancelled','AbortError');
+    if(adapter.scene.cameraOwner==='motion'||adapter.resources.motionOverrides.size>0)throw Error('경혈 표시는 복원된 정지 자세에서만 가능합니다.');
     return new AcupunctureOverlay(adapter,carrier,points,onSelect,onStop,encodedBytes,options);
   }
-  private constructor(private adapter: DatasetSceneAdapter, readonly carrier: Carrier, readonly points: PointInstance[], private onSelect: (code: string) => void, private onStop: (reason: string) => void, private encodedBytes: number, private options?: { route:number[]; names:Record<string,string>; changed:(state:PointTour['state'])=>void; cancelled:()=>boolean }) {
+  private constructor(private adapter: DatasetSceneAdapter, readonly carrier: Carrier, readonly points: PointInstance[], private onSelect: (code: string) => void, private onStop: (reason: string) => void, private encodedBytes: number, private options?: { returnCamera?:CameraState;route:number[]; names:Record<string,string>; changed:(state:PointTour['state'])=>void; cancelled:()=>boolean }) {
     const scene = adapter.scene;
     adapter.restoreSourceMotion('acupoint-static-review');
-    scene.cancelCameraMotion(); this.savedCamera = scene.cameraState();
+    scene.cancelCameraMotion(); this.savedCamera = structuredClone(options?.returnCamera??scene.cameraState());
     scene.beginObservation('acupoint',()=>this.onStop('다른 관찰 기능으로 경혈 따라보기를 종료했습니다.'));
     this.tour=new PointTour((index,focus)=>{const code=LUNG_ORDER[index];this.onSelect(code);this.select(code);if(focus)this.focusSection(code);},()=>this.restoreCamera(true),state=>options?.changed(state));
     this.label=document.createElement('button');this.label.className='acupoint-selected-label';this.label.setAttribute('aria-label','선택 경혈');this.label.onclick=()=>{if(this.selected)this.onSelect(this.selected);};scene.renderer.domElement.parentElement?.append(this.label);
@@ -154,9 +155,9 @@ export class AcupunctureOverlay {
   }
   dispose(restore=true) {
     if(this.dead)return;this.dead=true;this.removeUpdate();this.removeMotion();this.removeCamera();
-    const scene=this.adapter.scene,canvas=scene.renderer.domElement;scene.cancelCameraMotion();
+    const scene=this.adapter.scene,canvas=scene.renderer.domElement,ownsCamera=scene.cameraOwner==='acupoint';if(ownsCamera)scene.cancelCameraMotion();
     canvas.removeEventListener('pointerdown',this.onDown,true);canvas.removeEventListener('pointerup',this.onUp,true);canvas.removeEventListener('pointermove',this.onDrag);canvas.removeEventListener('wheel',this.onManual);canvas.removeEventListener('keydown',this.onManualKey);canvas.removeEventListener('webglcontextlost',this.onLost);document.removeEventListener('visibilitychange',this.onVisibility);
     this.tour.pause();this.label.remove();this.group.removeFromParent();this.releaseGeometry();delete canvas.dataset.acupointReview;scene.endObservation('acupoint',false);
-    if(restore&&this.moved&&!this.userMoved)this.moveCamera(this.savedCamera);scene.requestRender();
+    if(restore&&ownsCamera&&this.moved&&!this.userMoved)this.moveCamera(this.savedCamera);scene.requestRender();
   }
 }

@@ -6882,7 +6882,7 @@
       "noAutoAdvance": true
     },
     "AT5": {
-      "status": "planned",
+      "status": "complete",
       "feature": "acupoint-at-361",
       "title": "일괄 anchor compiler와 학습 표시 정책",
       "dependsOn": [
@@ -6890,7 +6890,26 @@
       ],
       "spec": "work/tasks/AT5.md",
       "promptFile": "work/tasks/AT5.md",
-      "targetCodes": []
+      "targetCodes": [],
+      "report": "work/reports/AT5.md",
+      "evidence": "work/evidence/AT5/",
+      "completedDate": "2026-10-11",
+      "acceptance": {
+        "scope": "Common explicit landmark/B-cun/F-cun compiler, evidence policy, additive schema migration, frozen-pose runtime projection",
+        "passed": true,
+        "automatedTests": 40,
+        "technicalFixtures": 4,
+        "realLULegacyInputs": 22,
+        "realLULocalEligible": 0,
+        "fixtureExports": 0,
+        "realLocationAuthoringAssignedTo": "AT6",
+        "originalAIProvenancePreserved": true,
+        "failedOnlyResumeVerified": true,
+        "exactCameraReturnAfterSideSwitch": true,
+        "sourceAndUserWipPreserved": true
+      },
+      "nextUnit": "AT6",
+      "autoRunNext": false
     },
     "AT6": {
       "status": "planned",
@@ -7613,7 +7632,7 @@
         "AT28",
         "AT29"
       ],
-      "nextUnit": "AT5",
+      "nextUnit": "AT6",
       "conceptCount": 361,
       "channelCount": 14,
       "extraPointsIncluded": false,
