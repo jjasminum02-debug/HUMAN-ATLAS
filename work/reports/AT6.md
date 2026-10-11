@@ -64,3 +64,5 @@ G1/G2의 같은 모델·카드/side 기준은 확인했다. **실제 점과 카�
 EXECUTION은 AT6 record만 갱신했고 **partial이므로 nextUnit=AT6을 유지**했다. AT7이 order상 다음이며 dependsOn=AT6임을 확인했다. 계획상 프롬프트는 `next-AT7-prompt.txt`에 남겼으며 현재 미달을 건너뛰는 실행 승인이 아니다. 숫자 T/AC·다른 AT·NEXT/STATUS 상태를 덮어쓰지 않았다.
 
 소유 변경: learner compact data, 공통 adapter/compiler의 shared trunk side 보완, 기존 overlay/entry/card/loader integration, 관련 테스트, AT6 report/evidence 및 AT6 실행 기록. 제외: DatasetSceneAdapter를 포함한 기존 WIP, 원본/OpenSim_Models/T13, 역사 AC1/AC2·AT3/4/5 및 carrier binary, 다른 task와 보기옵션/홈/로딩. 정확한 파일 목록과 커밋 hash는 commit-scope/receipt에 기록한다. AT7 자동 실행·push·배포·진단·치료·침 시뮬레이션은 하지 않았다.
+
+로컬 구현 checkpoint commit: `8ac1c7b04cbcddd212d25b1a80c60f43b6133b3a` (**122개 소유 파일**). 커밋 직후 남은 status는 시작 시 기존 **5,966개 WIP와 완전히 동일**하며 index는 비었다. tracked WIP 45개와 역사/source 148개 해시를 재확인했다. 이 해시와 포함/제외 receipt 및 보고서만 별도 로컬 기록 커밋한다.
