@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "human-atlas-mv1-visual-review-v1",
+  "task": "MV1",
+  "reviewState": "partial_with_two_not_checked_targets",
+  "recording": {
+    "path": "visual/full-playback/muscle-playback-cycle-v3.webm",
+    "bytes": 10794025,
+    "sha256": "945c7f59bb9a7b80913e196eea8963a14135c0d9e60cecc76e3c168d1ded3430",
+    "durationSeconds": 242.211,
+    "frameRate": 12,
+    "groups": 74,
+    "playbackReview": "entire v3 recording presented end-to-end at 4x in browser review tab; visual sampling at group transitions, not frame-by-frame judgement"
+  },
+  "actualLearnerRuntime": {
+    "baseUrl": "http://127.0.0.1:5183",
+    "integrationSha256": "bf4218bb12b1babdcffbb34f42359aec0fc1003aa51628ff768cb652f1164662",
+    "datasetSha256": "fda7430f2b76eddd852fb9eae7fde9ad624baebdea5427a6672d87436034f17d",
+    "screenshotsIndex": "visual/live-runtime/screenshots-index.json",
+    "reproducedExamples": [
+      {
+        "name": "rectus femoris knee extension demo",
+        "screenshots": [
+          "visual/live-runtime/rectus-femoris-knee-preparation.png",
+          "visual/live-runtime/rectus-femoris-knee-intermediate.png",
+          "visual/live-runtime/rectus-femoris-knee-maximum.png",
+          "visual/live-runtime/rectus-femoris-knee-rest-return.png"
+        ],
+        "observedUi": "left side selected, knee extension demo at 67% preparation, 50% intermediate, 100% endpoint and 0% return; action label 무릎 폄 · 슬관절 신전"
+      },
+      {
+        "name": "pectoralis major action demo",
+        "screenshots": [
+          "visual/live-runtime/pect-major-rest.png",
+          "visual/live-runtime/pect-major-preparation.png",
+          "visual/live-runtime/pect-major-intermediate.png",
+          "visual/live-runtime/pect-major-maximum.png"
+        ],
+        "observedUi": "pectoral subdivision shown in actual learner route; action label 팔 모음 · 어깨 모음; preparation screenshot at 66%"
+      }
+    ]
+  },
+  "coverage": {
+    "perTargetVariantRows": 332,
+    "variantContactSheetPages": 10,
+    "variantSamples": "rest/midpoint/endpoint, three views; each row identifies sourceKey, side, role, URI, clip and hash",
+    "focusedGroupSheets": 74,
+    "focusedViewsPerGroup": 3,
+    "focusedPhasesPerGroup": 5,
+    "focusedPhaseMeaning": "rest, direction-aware preparation, intermediate, endpoint, return sample",
+    "denseKeyframeAndAdjacentMidpointSheets": 220,
+    "denseSheetFilesManuallyInspectedIndividually": false,
+    "metricSampleCount": 3682,
+    "denseRenderedSheets": "generated and file-integrity checked; not individually judged image by image",
+    "fullPlaybackGroupsRendered": 74,
+    "captureFailures": 0,
+    "variantHighlight": "review harness teal selected-subject highlight; source role and side preserved per row; not the learner UI action/return color animation",
+    "learnerActionReturnColorTransitions": "reproduced only in the two live learner demo routes (pectoralis major and left rectus femoris knee); not individually inspected for all 332 mappings"
+  },
+  "reviewJudgement": {
+    "visibleGrossTearOrSeparation": "none confirmed in inspected views",
+    "visibleFoldOrFaceFlip": "none confirmed; automatic rest-normal flip fraction 0 across all 74 groups",
+    "temporalPop": "none obvious in end-to-end 12fps full-cycle screening; subtle sub-frame/slow-motion review remains unperformed",
+    "return": "video residual 0 for all 74 groups; no visible failed return",
+    "attachment": "visible continuity screen only; numerical drift not measured because authored landmarks unavailable",
+    "penetration": "visible screen only; no collision oracle",
+    "naturalContraction": "not numerically approved; expert physiological signoff not performed; two knee demo contours remain ambiguous"
+  },
+  "manualDisposition": {
+    "focusedPhaseSheets": "all 74 opened and visually screened across frontal/lateral/oblique",
+    "variantPages": "all 10 opened and visually screened as per-target role/side samples",
+    "wholePlayback": "single v3 end-to-end recording visually screened at 4x with transition sampling",
+    "statusCounts": {
+      "pass": 330,
+      "not_checked": 2
+    },
+    "notCheckedTargets": [
+      "actions|ZA-c7010a9-afb0624c66f652ea012c7534|T66-PRIORITY-L-RECTUS-KNEE-ASSET|ZA-c7010a9-afb0624c66f652ea012c7534",
+      "actions|ZA-c7010a9-eb0a993e09d73159468116ce|T66-PRIORITY-R-RECTUS-KNEE-ASSET|ZA-c7010a9-eb0a993e09d73159468116ce"
+    ]
+  },
+  "knownCaptureAttempt": "A later Node CLI inventory refresh could not reach the loopback runtime and is preserved as runtime/inventory-refresh-attempt-2026-10-11.json. Live app manifest evidence remains the successful browser-backed runtime/live-binding-validation.json capture at 12:49:22.500Z.",
+  "limits": [
+    "The 220 dense keyframe/adjacent-midpoint contact-sheet pages were generated but not each opened separately.",
+    "Whole-cycle playback was continuous but inspected at accelerated 4x and by group-transition screenshots; it is a gross visual screen, not frame-by-frame slow-motion review.",
+    "The two rectus knee contour rows remain not_checked rather than assumed physiological or defective.",
+    "Per-target role/side highlight sheets use teal review-harness emphasis. Learner UI action/return color transitions were reproduced for the two required examples only, not exhaustively across all 332 role/side rows."
+  ]
+}

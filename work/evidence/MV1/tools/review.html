@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MV1 motion review</title>
+<style>
+html,body{margin:0;background:#10161b;color:#edf3f4;font:14px/1.45 system-ui,sans-serif}header{position:sticky;top:0;background:#10161b;border-bottom:1px solid #35434b;padding:12px 18px;z-index:2}h1{font-size:18px;margin:0 0 6px}button{margin:5px 8px 5px 0;padding:8px 12px;color:#fff;background:#176c72;border:0;border-radius:4px;cursor:pointer}button:disabled{opacity:.5}#status{white-space:pre-wrap;color:#b8d0d3}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:10px 18px}canvas{background:#080c0f;max-width:100%;border:1px solid #40525a}#live{width:960px;height:300px}#movie{position:fixed;top:-1000px;left:0}small{color:#a9b8bd}
+</style></head><body>
+<header><h1>MV1 · source-bound learner motion review</h1><div>live inventory 1913 candidates / 332 muscle-subject mappings · 74 muscle playback groups · views: +Z frontal, +X lateral, +X/+Z oblique</div>
+<button id="variants">1. 332개 대상 변형 contact sheet</button><button id="sheets">2. 74개 재생 묶음 keyframe contact sheet</button><button id="video">3. 74개 전체 ping-pong 재생 영상</button><button id="phases">4. 74개 재생군 단계별 시각 검토</button><div id="status">live runtime mapping and source GLB review harness. Technical output does not approve natural contraction.</div></header>
+<div style="margin:10px 18px"><input id="screenName" value="pect-major-preparation.png" aria-label="실제 화면 파일명"><textarea id="screenData" rows="1" style="width:70%" placeholder="실제 learner runtime PNG base64를 가져와 evidence로 저장"></textarea><button id="saveScreen">실제 화면 evidence 저장</button></div>
+<div class="grid"><canvas id="live" width="960" height="300"></canvas><canvas id="movie" width="960" height="340"></canvas></div>
+<script type="importmap">{"imports":{"three":"/vendor/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from '/vendor/three/examples/jsm/loaders/GLTFLoader.js';
+
+const $ = (id)=>document.getElementById(id); const statusEl=$('status');
+const inv=await (await fetch('/inventory.json')).json();
+const muscleGroups=inv.uniquePlaybackMappings.filter(g=>g.sourceScopes.includes('muscle'));
+const rowById=new Map(inv.candidateRows.map(r=>[r.targetId,r]));
+const glbByPair=new Map(inv.glbFiles.map(f=>[f.uri+'|'+f.expectedSha256,f]));
+const renderer=new THREE.WebGLRenderer({canvas:$('live'),antialias:true,preserveDrawingBuffer:true});
+renderer.setPixelRatio(1); renderer.setSize(960,300,false); renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.setScissorTest(true); renderer.setClearColor(0x111a20,1);
+const cameras=[new THREE.PerspectiveCamera(32,1,.001,100),new THREE.PerspectiveCamera(32,1,.001,100),new THREE.PerspectiveCamera(32,1,.001,100)];
+const cameraDefs=[{label:'정면 · +Z',dir:new THREE.Vector3(0,.03,1)},{label:'측면 · +X',dir:new THREE.Vector3(1,.03,0)},{label:'사선 · +X/+Z',dir:new THREE.Vector3(1,.18,1).normalize()}];
+const ambient=new THREE.HemisphereLight(0xdcecff,0x28302f,2.1), keyLight=new THREE.DirectionalLight(0xffffff,2.6); keyLight.position.set(1.5,2,2.4);
+const lineLight=new THREE.DirectionalLight(0x9fb8ce,1.1); lineLight.position.set(-2,.5,-1);
+const loader=new GLTFLoader(); let current=null;
+const encoder=new TextEncoder();
+async function geometryHash(g){
+ const parts=[encoder.encode('HUMAN_ATLAS_GEOMETRY_CONTENT_V1\n')];
+ const rawOf=(a)=>{if(a.isInterleavedBufferAttribute){const src=a.data.array,Type=src.constructor,packed=new Type(a.count*a.itemSize);let k=0;for(let v=0;v<a.count;v++){const start=a.offset+v*a.data.stride;for(let c=0;c<a.itemSize;c++)packed[k++]=Number(src[start+c]);}return packed;}return a.array;};
+ for(const name of Object.keys(g.attributes).sort()) {const a=g.getAttribute(name), raw=rawOf(a); parts.push(encoder.encode(`attribute:${name}|${raw.constructor.name}|${a.itemSize}|${a.normalized?1:0}|${a.count}\n`));parts.push(new Uint8Array(raw.buffer,raw.byteOffset,raw.byteLength));}
+ if(g.index){const a=g.index,raw=rawOf(a);parts.push(encoder.encode(`index:${raw.constructor.name}|${a.itemSize}|${a.normalized?1:0}|${a.count}\n`));parts.push(new Uint8Array(raw.buffer,raw.byteOffset,raw.byteLength));}else parts.push(encoder.encode('index:none\n'));
+ for(const g0 of g.groups)parts.push(encoder.encode(`group:${g0.start}|${g0.count}|${g0.materialIndex}\n`));
+ const n=parts.reduce((s,p)=>s+p.byteLength,0), buf=new Uint8Array(n);let off=0;for(const p of parts){buf.set(p,off);off+=p.byteLength;}
+ const d=await crypto.subtle.digest('SHA-256',buf);return [...new Uint8Array(d)].map(v=>v.toString(16).padStart(2,'0')).join('');
+}
+async function clearCurrent(){if(!current)return;current.mixer.stopAllAction();for(const m of current.scene.children){};renderer.renderLists.dispose();current.gltf.scene.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material)for(const m of(Array.isArray(o.material)?o.material:[o.material]))m.dispose();});current=null;}
+function chooseSample(group){const rows=group.variantIds.map(id=>rowById.get(id)).filter(Boolean);return rows.find(r=>r.inventoryScope==='in_scope_muscle')||rows[0];}
+async function loadMotion(row){
+ await clearCurrent();
+ const bytes=await (await fetch('/asset/'+encodeURIComponent(row.uri))).arrayBuffer();
+ const gltf=await loader.parseAsync(bytes,'');const assetClip=gltf.animations.find(c=>c.name===row.clipId);if(!assetClip)throw Error('clip missing: '+row.clipId);
+ const byName=new Map();const dup=new Set();gltf.scene.traverse(o=>{if(byName.has(o.name))dup.add(o.name);else byName.set(o.name,o);});
+ let geometryChecks=0,geometryFailures=[];const binding=row.sourceBinding;
+ if(!binding)throw Error('sourceBinding absent '+row.targetId);
+ for(const member of binding.members){const node=byName.get(member.nodeId);if(!node||!node.isMesh||dup.has(member.nodeId))throw Error('source node missing or ambiguous: '+member.nodeId);
+  const hash=await geometryHash(node.geometry);geometryChecks++;if(hash!==member.geometrySha256)geometryFailures.push({sourceKey:member.sourceKey,nodeId:member.nodeId,expected:member.geometrySha256,actual:hash});
+  const mat=new THREE.Matrix4().fromArray(member.instanceMatrix);
+  if(member.role==='moving_structure'||member.role==='co_moving_context'){mat.decompose(node.position,node.quaternion,node.scale);node.matrixAutoUpdate=true;node.updateMatrix();}else{node.matrix.copy(mat);node.matrixAutoUpdate=false;}
+  node.matrixWorldNeedsUpdate=true;node.userData.sourceKey=member.sourceKey;node.userData.motionRole=member.role;
+ }
+ for(const a of gltf.animations)for(const track of a.tracks){const name=THREE.PropertyBinding.parseTrackName(track.name).nodeName;const node=THREE.PropertyBinding.findNode(gltf.scene,name);if(!node)throw Error('animation target inactive: '+track.name);}
+ const subject=binding.members.find(m=>m.sourceKey===binding.subjectSourceKey);const target=byName.get(subject?.nodeId);
+ if(target?.material){target.material=Array.isArray(target.material)?target.material.map(m=>m.clone()):target.material.clone();for(const m of(Array.isArray(target.material)?target.material:[target.material])){m.color?.set('#24aeb0');m.emissive?.set('#103f42');m.emissiveIntensity=.2;}}
+ const scene=new THREE.Scene();scene.background=new THREE.Color(0x111a20);scene.add(ambient.clone(),keyLight.clone(),lineLight.clone(),gltf.scene);
+ scene.updateMatrixWorld(true);const box=new THREE.Box3().setFromObject(gltf.scene);if(box.isEmpty())throw Error('empty scene bounds');const center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3()),radius=Math.max(size.length()/2,.03);
+ const duration=assetClip.duration;for(const c of cameras){c.aspect=1;c.fov=32;c.near=Math.max(.0001,radius/1000);c.far=Math.max(10,radius*30);c.position.copy(center).addScaledVector(cameraDefs[cameras.indexOf(c)].dir,radius*3.15);c.up.set(0,1,0);c.lookAt(center);c.updateProjectionMatrix();}
+ const mixer=new THREE.AnimationMixer(gltf.scene),action=mixer.clipAction(assetClip);action.play();action.paused=true;action.time=0;mixer.update(0);
+ current={row,gltf,scene,mixer,action,clip:assetClip,duration,binding,byName,center,radius,box,geometryChecks,geometryFailures};return current;
+}
+function seek(t){current.action.paused=false;current.action.time=Math.max(0,Math.min(current.duration,t));current.mixer.update(0);current.action.paused=true;current.scene.updateMatrixWorld(true);}
+function renderViews(targetCanvas,cellW,cellH,t){seek(t);const ctx=targetCanvas.getContext('2d');for(let v=0;v<3;v++){renderer.setSize(cellW,cellH,false);renderer.setViewport(0,0,cellW,cellH);renderer.setScissor(0,0,cellW,cellH);renderer.render(current.scene,cameras[v]);ctx.drawImage(renderer.domElement,0,0,cellW,cellH,v*cellW,0,cellW,cellH);}}
+function timeline(group){const p=group.playback,ks=p.keyframeTimesSeconds||[],d=p.glbDurationSeconds||p.declaredDurationSeconds||1;const points=new Set([0,d]);for(let i=0;i<ks.length;i++){points.add(ks[i]);if(i+1<ks.length)points.add((ks[i]+ks[i+1])/2);}return [...points].sort((a,b)=>a-b).filter(t=>t>=0&&t<=d);}
+async function saveBlob(path,blob){const r=await fetch('/save?path='+encodeURIComponent(path),{method:'POST',headers:{'content-type':blob.type||'application/octet-stream'},body:blob});if(!r.ok)throw Error('save '+path+' '+r.status+' '+await r.text());return r.json();}
+function setBusy(which,busy){for(const id of ['variants','sheets','video','phases'])$(id).disabled=busy;$(which).disabled=false;}
+const captureLog={startedAt:new Date().toISOString(),runtime:{url:inv.liveRuntime.baseUrl,integrationSha256:inv.liveRuntime.integrationSha256,datasetSha256:inv.liveRuntime.datasetSha256},variantSheets:[],playbackSheets:[],videos:[],failures:[]};
+async function captureVariants(){
+ const btn=$('variants');setBusy('variants',true);const rows=inv.candidateRows.filter(r=>r.inventoryScope==='in_scope_muscle');const pageSize=36,cellW=108,cellH=76,cols=9;
+ for(let start=0;start<rows.length;start+=pageSize){const batch=rows.slice(start,start+pageSize),canvas=document.createElement('canvas');canvas.width=cols*cellW+260;canvas.height=batch.length*cellH;const ctx=canvas.getContext('2d');ctx.fillStyle='#121a20';ctx.fillRect(0,0,canvas.width,canvas.height);
+  for(let j=0;j<batch.length;j++){const row=batch[j],g=muscleGroups.find(x=>x.variantIds.includes(row.targetId));try{await loadMotion(row);const d=current.duration;const ts=[0,d*.5,d];ctx.fillStyle='#eff7f8';ctx.font='11px system-ui';ctx.fillText(`${start+j+1} ${row.selectedRowEnglishName||row.sourceKey} ${row.sourceKeySide||''} ${row.selectedMemberRole||''}`,4,j*cellH+13);ctx.fillStyle='#a7b6bc';ctx.font='10px system-ui';ctx.fillText(`${row.clipId} · ${row.sha256.slice(0,8)}`,4,j*cellH+27);
+   for(let phase=0;phase<3;phase++){const cell=document.createElement('canvas');cell.width=cellW*3;cell.height=cellH;renderViews(cell,cellW,cellH,ts[phase]);
+    for(let v=0;v<3;v++)ctx.drawImage(cell,v*cellW,0,cellW,cellH,260+(phase*3+v)*cellW,j*cellH,cellW,cellH);
+   }
+   ctx.fillStyle='#d6e2e5';ctx.font='9px system-ui';for(let col=0;col<9;col++)ctx.fillText(['rest','middle','end'][Math.floor(col/3)]+' '+cameraDefs[col%3].label,260+col*cellW+2,10);
+   if((j+1)%6===0){statusEl.textContent=`대상 변형 contact sheet ${start+j+1}/${rows.length}`;await new Promise(r=>setTimeout(r,0));}
+  }catch(e){captureLog.failures.push({type:'variant',targetId:row.targetId,error:String(e)});ctx.fillStyle='#f55';ctx.fillText('ERROR '+String(e).slice(0,35),260,j*cellH+24);}}
+  const blob=await new Promise(r=>canvas.toBlob(r,'image/jpeg',.78));const path=`visual/variant-contact-sheets/page-${String(Math.floor(start/pageSize)+1).padStart(2,'0')}.jpg`;captureLog.variantSheets.push(await saveBlob(path,blob));
+ }
+ await saveBlob('runtime/capture-index.json',new Blob([JSON.stringify(captureLog,null,2)],{type:'application/json'}));statusEl.textContent=`대상 변형 contact sheets 완료: ${captureLog.variantSheets.length} pages · failures ${captureLog.failures.length}`;setBusy('variants',false);
+}
+async function capturePlaybackSheets(){
+ const btn=$('sheets');setBusy('sheets',true);const metrics=[];
+ for(let ix=0;ix<muscleGroups.length;ix++){const group=muscleGroups[ix],row=chooseSample(group);try{await loadMotion(row);const times=timeline(group),cellW=132,cellH=96,canvas=document.createElement('canvas');canvas.width=times.length*cellW;canvas.height=cellH*3+48;const ctx=canvas.getContext('2d');ctx.fillStyle='#10161b';ctx.fillRect(0,0,canvas.width,canvas.height);
+   const extents=[];let maxMove=0,meanMoveSum=0,meanMoveN=0,flipPeak=0,degeneratePeak=0;const subject=row.sourceBinding.members.find(m=>m.sourceKey===row.sourceBinding.subjectSourceKey),mesh=current.byName.get(subject.nodeId);const posAttr=mesh.geometry.getAttribute('position'),tri=mesh.geometry.index;const rest=[];const vtmp=new THREE.Vector3();seek(0);for(let v=0;v<posAttr.count;v++){mesh.getVertexPosition(v,vtmp);rest.push(vtmp.clone());}
+   const restFace=[];const ids=tri?tri.array:Array.from({length:posAttr.count},(_,i)=>i);const a=new THREE.Vector3(),b=new THREE.Vector3(),c=new THREE.Vector3();for(let i=0;i+2<ids.length;i+=3){mesh.getVertexPosition(ids[i],a);mesh.getVertexPosition(ids[i+1],b);mesh.getVertexPosition(ids[i+2],c);restFace.push(b.clone().sub(a).cross(c.clone().sub(a)));}
+   for(let ti=0;ti<times.length;ti++){const t=times[ti];seek(t);const boxNow=new THREE.Box3().setFromObject(gltfRoot());const sizeNow=boxNow.getSize(new THREE.Vector3());extents.push({time:t,size:sizeNow.toArray()});let localMax=0,localSum=0;
+    for(let v=0;v<posAttr.count;v++){mesh.getVertexPosition(v,vtmp);const disp=vtmp.distanceTo(rest[v]);localMax=Math.max(localMax,disp);localSum+=disp;}
+    maxMove=Math.max(maxMove,localMax);meanMoveSum+=localSum/posAttr.count;meanMoveN++;
+    let flips=0,deg=0,faceCount=0;for(let f=0;f<restFace.length;f++){const k=f*3;mesh.getVertexPosition(ids[k],a);mesh.getVertexPosition(ids[k+1],b);mesh.getVertexPosition(ids[k+2],c);const now=b.clone().sub(a).cross(c.clone().sub(a)),base=restFace[f];faceCount++;if(now.lengthSq()<1e-14)deg++;if(now.dot(base)<0)flips++;}flipPeak=Math.max(flipPeak,faceCount?flips/faceCount:0);degeneratePeak=Math.max(degeneratePeak,faceCount?deg/faceCount:0);
+    const y=48+ti*cellH;for(let v=0;v<3;v++){renderer.setSize(cellW,cellH,false);renderer.setViewport(0,0,cellW,cellH);renderer.setScissor(0,0,cellW,cellH);renderer.render(current.scene,cameras[v]);ctx.drawImage(renderer.domElement,v*cellW,y,cellW,cellH);}
+    ctx.fillStyle='#d5e2e5';ctx.font='9px system-ui';ctx.fillText(`${t.toFixed(3)}s ${t===0?'rest':t===current.duration?'terminal':''}`,2,y+10);
+   }
+   ctx.fillStyle='#fff';ctx.font='12px system-ui';ctx.fillText(`${ix+1}/${muscleGroups.length} ${row.selectedRowEnglishName} · ${row.sourceKeySide||''} · ${row.clipId} · ${row.sha256.slice(0,10)} · views: ${cameraDefs.map(c=>c.label).join(' / ')}`,4,16);
+   ctx.fillStyle='#9cb0b6';ctx.font='9px system-ui';ctx.fillText('rows = actual GLB clip keyframes + between-keyframe midpoints; matrices from DatasetSceneAdapter; colors indicate selected learner muscle',4,32);
+   const blob=await new Promise(r=>canvas.toBlob(r,'image/jpeg',.76));const path=`visual/playback-contact-sheets/${String(ix+1).padStart(2,'0')}-${group.dedupeKey.slice(0,12)}.jpg`;captureLog.playbackSheets.push(await saveBlob(path,blob));
+   metrics.push({dedupeKey:group.dedupeKey,variantIds:group.variantIds,uri:row.uri,sha256:row.sha256,clipId:row.clipId,durationSeconds:current.duration,actionDirection:row.poseControl?.actionDirection||'forward',sampleTimesSeconds:times,keyframeCount:group.playback.keyframeTimesSeconds?.length||0,meshTriangleCount:tri?tri.count/3:posAttr.count/3,subjectVertexCount:posAttr.count,subjectLocalMaxDisplacementMetres:maxMove,subjectMeanPerSampleDisplacementMetres:meanMoveN?meanMoveSum/meanMoveN:0,peakRestNormalFlipFraction:flipPeak,peakDegenerateTriangleFraction:degeneratePeak,boundsAcrossSamples:extents,attachmentDrift:'not_measured_no_authored_landmarks',surfacePenetration:'not_measured_no_collision_oracle',visualContactSheet:path,wholeCycleVideo:'pending'});
+   if((ix+1)%3===0){statusEl.textContent=`playback keyframe sheets ${ix+1}/${muscleGroups.length}; current ${row.clipId}`;await new Promise(r=>setTimeout(r,0));}
+  }catch(e){captureLog.failures.push({type:'playback_sheet',dedupeKey:group.dedupeKey,error:String(e)});metrics.push({dedupeKey:group.dedupeKey,inspectionStatus:'error',error:String(e)});}}
+ await saveBlob('metrics/automatic-metrics.json',new Blob([JSON.stringify({capturedAt:new Date().toISOString(),sampling:'every unique clip keyframe and each adjacent keyframe midpoint',transform:'member.instanceMatrix applied with DatasetSceneAdapter role semantics',metrics,limitations:{attachmentDrift:'not measured: no authored insertion/origin landmark arrays in candidate contract',penetration:'not measured numerically: no mesh intersection oracle in this tool; reviewed visually in scene replay',naturalContraction:'never inferred from numeric metrics'}},null,2)],{type:'application/json'}));
+ await saveBlob('runtime/capture-index.json',new Blob([JSON.stringify(captureLog,null,2)],{type:'application/json'}));statusEl.textContent=`playback sheets complete ${captureLog.playbackSheets.length}/${muscleGroups.length} · failures ${captureLog.failures.length}`;setBusy('sheets',false);
+}
+async function capturePlaybackSheetsV3(){
+ setBusy('sheets',true);const metrics=[],files=[],failures=[];const cellW=132,cellH=96,chunkSize=18;
+ for(let ix=0;ix<muscleGroups.length;ix++){
+  const group=muscleGroups[ix],row=chooseSample(group);
+  try{
+   await loadMotion(row);const times=timeline(group);const subject=row.sourceBinding.members.find(m=>m.sourceKey===row.sourceBinding.subjectSourceKey);const mesh=current.byName.get(subject.nodeId);const pos=mesh.geometry.getAttribute('position');const tri=mesh.geometry.index;const ids=tri?tri.array:Array.from({length:pos.count},(_,i)=>i);const vv=new THREE.Vector3(),a=new THREE.Vector3(),b=new THREE.Vector3(),c=new THREE.Vector3();const rest=[];
+   seek(0);for(let i=0;i<pos.count;i++){mesh.getVertexPosition(i,vv);rest.push(vv.clone());}
+   const restFace=[];for(let i=0;i+2<ids.length;i+=3){mesh.getVertexPosition(ids[i],a);mesh.getVertexPosition(ids[i+1],b);mesh.getVertexPosition(ids[i+2],c);restFace.push(b.clone().sub(a).cross(c.clone().sub(a)));}
+   const restDegenerateCount=restFace.filter(n=>n.lengthSq()<1e-14).length;let maxMove=0,meanMove=0,flipPeak=0,degPeak=restFace.length?restDegenerateCount/restFace.length:0,addedDegPeak=0;const bounds=[],paths=[];
+   for(let start=0;start<times.length;start+=chunkSize){
+    const chunk=times.slice(start,start+chunkSize),canvas=document.createElement('canvas');canvas.width=cellW*3;canvas.height=48+chunk.length*cellH;const ctx=canvas.getContext('2d');ctx.fillStyle='#10161b';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#fff';ctx.font='12px system-ui';ctx.fillText((ix+1)+'/'+muscleGroups.length+' '+row.selectedRowEnglishName+' · '+(row.sourceKeySide||'')+' · '+row.clipId+' · '+row.sha256.slice(0,10)+' · part '+(Math.floor(start/chunkSize)+1),4,16);ctx.fillStyle='#9cb0b6';ctx.font='9px system-ui';ctx.fillText('frontal +Z / lateral +X / oblique +X +Z · keyframes and adjacent midpoints',4,32);
+    for(let local=0;local<chunk.length;local++){
+     const ti=start+local,t=times[ti];seek(t);const box=new THREE.Box3().setFromObject(current.gltf.scene),subjectBox=new THREE.Box3().setFromObject(mesh);bounds.push({time:t,sceneSize:box.getSize(new THREE.Vector3()).toArray(),subjectSize:subjectBox.getSize(new THREE.Vector3()).toArray()});let localSum=0,localMax=0;
+     for(let i=0;i<pos.count;i++){mesh.getVertexPosition(i,vv);const d=vv.distanceTo(rest[i]);localMax=Math.max(localMax,d);localSum+=d;}maxMove=Math.max(maxMove,localMax);meanMove+=localSum/pos.count;
+     let flips=0,deg=0;for(let f=0;f<restFace.length;f++){const k=f*3;mesh.getVertexPosition(ids[k],a);mesh.getVertexPosition(ids[k+1],b);mesh.getVertexPosition(ids[k+2],c);const now=b.clone().sub(a).cross(c.clone().sub(a));if(now.lengthSq()<1e-14)deg++;if(now.dot(restFace[f])<0)flips++;}if(restFace.length){flipPeak=Math.max(flipPeak,flips/restFace.length);degPeak=Math.max(degPeak,deg/restFace.length);addedDegPeak=Math.max(addedDegPeak,Math.max(0,deg-restDegenerateCount)/restFace.length);}
+     const y=48+local*cellH;for(let v=0;v<3;v++){renderer.setSize(cellW,cellH,false);renderer.setViewport(0,0,cellW,cellH);renderer.setScissor(0,0,cellW,cellH);renderer.render(current.scene,cameras[v]);ctx.drawImage(renderer.domElement,0,0,cellW,cellH,v*cellW,y,cellW,cellH);}ctx.fillStyle='#d5e2e5';ctx.font='9px system-ui';ctx.fillText(t.toFixed(3)+'s '+(ti===0?'rest':ti===times.length-1?'terminal':''),2,y+10);
+    }
+    const part=String(Math.floor(start/chunkSize)+1).padStart(2,'0');const path='visual/playback-contact-sheets-v3/'+String(ix+1).padStart(2,'0')+'-'+group.dedupeKey.slice(0,12)+'-part-'+part+'.jpg';const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',.78));if(!blob)throw Error('canvas_encoding_failed');files.push(await saveBlob(path,blob));paths.push(path);
+   }
+   metrics.push({dedupeKey:group.dedupeKey,representativeTargetId:row.targetId,sourceKey:row.sourceKey,side:row.sourceKeySide,role:row.selectedMemberRole,variantIds:group.variantIds,uri:row.uri,sha256:row.sha256,clipId:row.clipId,durationSeconds:current.duration,actionDirection:row.poseControl?.actionDirection||'forward',sampleTimesSeconds:times,keyframeCount:group.playback.keyframeTimesSeconds?.length||0,triangleCount:tri?tri.count/3:pos.count/3,subjectVertexCount:pos.count,subjectLocalMaxDisplacementMetres:maxMove,subjectMeanPerSampleDisplacementMetres:times.length?meanMove/times.length:0,peakRestNormalFlipFraction:flipPeak,restDegenerateTriangleFraction:restFace.length?restDegenerateCount/restFace.length:0,peakDegenerateTriangleFraction:degPeak,maxAdditionalDegenerateTriangleFraction:addedDegPeak,boundsAcrossSamples:bounds,attachmentDrift:'not_measured_no_authored_landmarks',surfacePenetration:'not_measured_no_collision_oracle',visualContactSheets:paths,technicalStatus:'pass'});
+  }catch(e){failures.push({type:'playback_sheet_v3',dedupeKey:group.dedupeKey,clipId:group.clipId,error:String(e)});metrics.push({dedupeKey:group.dedupeKey,inspectionStatus:'error',error:String(e)});}
+  if((ix+1)%2===0){statusEl.textContent='playback contact sheet v3 '+(ix+1)+'/'+muscleGroups.length+' · '+(files.length)+' segments · errors '+failures.length;await new Promise(resolve=>setTimeout(resolve,0));}
+ }
+ const report={capturedAt:new Date().toISOString(),sampling:'every GLB clip keyframe and every adjacent-keyframe midpoint, split across small contact sheets',transform:'each sourceBinding.instanceMatrix applied with DatasetSceneAdapter role semantics',metrics,failures,limitations:{attachmentDrift:'not measured; no authored attachment landmark arrays in candidate contract',penetration:'not measured numerically; no collision oracle. Requires visual learner-runtime inspection',naturalContraction:'not inferred from numeric metrics'}};
+ await saveBlob('metrics/automatic-metrics-v3.json',new Blob([JSON.stringify(report,null,2)],{type:'application/json'}));captureLog.playbackSheetsV3=files;captureLog.failuresV3=failures;await saveBlob('runtime/capture-index-v3.json',new Blob([JSON.stringify(captureLog,null,2)],{type:'application/json'}));statusEl.textContent='playback sheets v3 '+metrics.filter(m=>m.technicalStatus==='pass').length+'/'+muscleGroups.length+' groups · '+files.length+' segments · errors '+failures.length;setBusy('sheets',false);
+}
+async function captureFocusedPhaseSheets(){
+ const btn=$('phases');setBusy('phases',true);const files=[],failures=[],labels=['rest','preparation 25%','intermediate 50%','maximum 100%','return 50%'];
+ for(let ix=0;ix<muscleGroups.length;ix++){
+  const group=muscleGroups[ix],row=chooseSample(group);try{
+   await loadMotion(row);const d=current.duration,reverse=row.poseControl?.actionDirection==='reverse';
+   const times=reverse?[0,d*.75,d*.5,d, d*.5]:[0,d*.25,d*.5,d,d*.5];
+   const cellW=320,cellH=220,header=54,canvas=document.createElement('canvas');canvas.width=cellW*3;canvas.height=header+cellH*labels.length;const ctx=canvas.getContext('2d');ctx.fillStyle='#10161b';ctx.fillRect(0,0,canvas.width,canvas.height);
+   ctx.fillStyle='#fff';ctx.font='13px system-ui';ctx.fillText(`${ix+1}/${muscleGroups.length} ${row.selectedRowEnglishName||row.sourceKey} · ${row.sourceKey} · ${row.sourceKeySide||''} · ${row.selectedMemberRole||''}`,5,17);ctx.fillStyle='#9cb0b6';ctx.font='10px system-ui';ctx.fillText(`${row.clipId} · ${row.sha256} · ${row.uri}`,5,35);
+   for(let v=0;v<3;v++){ctx.fillStyle='#d5e2e5';ctx.font='10px system-ui';ctx.fillText(cameraDefs[v].label,cellW*v+6,50);}
+   for(let phase=0;phase<labels.length;phase++){
+    seek(times[phase]);const y=header+phase*cellH;ctx.fillStyle='#141d23';ctx.fillRect(0,y,canvas.width,cellH);ctx.fillStyle='#e9f2f4';ctx.font='11px system-ui';ctx.fillText(`${labels[phase]} · t=${times[phase].toFixed(3)}s`,5,y+13);
+    for(let v=0;v<3;v++){renderer.setSize(cellW,cellH-20,false);renderer.setViewport(0,0,cellW,cellH-20);renderer.setScissor(0,0,cellW,cellH-20);renderer.render(current.scene,cameras[v]);ctx.drawImage(renderer.domElement,0,0,cellW,cellH-20,v*cellW,y+20,cellW,cellH-20);}
+   }
+   const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',.9));const path=`visual/focused-phase-sheets/${String(ix+1).padStart(2,'0')}-${group.dedupeKey.slice(0,12)}.jpg`;files.push({targetId:row.targetId,sourceKey:row.sourceKey,side:row.sourceKeySide,role:row.selectedMemberRole,uri:row.uri,sha256:row.sha256,clipId:row.clipId,durationSeconds:d,actionDirection:reverse?'reverse':'forward',phases:labels.map((label,i)=>({label,timeSeconds:times[i]})),path:(await saveBlob(path,blob)).path});
+  }catch(e){failures.push({dedupeKey:group.dedupeKey,targetId:row.targetId,error:String(e)});}
+  if((ix+1)%2===0){statusEl.textContent=`focused-phase visual review sheets ${ix+1}/${muscleGroups.length}; errors ${failures.length}`;await new Promise(resolve=>setTimeout(resolve,0));}
+ }
+ const report={capturedAt:new Date().toISOString(),groups:files.length,failures,viewOrder:cameraDefs.map(x=>x.label),phaseSemantics:'static pose samples at documented clip times; full continuous ping-pong recorded separately',limits:'selected-subject emphasis uses the review harness teal highlight, not the learner UI action/return color animation'};
+ await saveBlob('runtime/focused-phase-index.json',new Blob([JSON.stringify({report,files},null,2)],{type:'application/json'}));statusEl.textContent=`focused-phase sheets ${files.length}/${muscleGroups.length}; errors ${failures.length}`;setBusy('phases',false);
+}
+function gltfRoot(){return current.gltf.scene;}
+async function recordFullCycle(){
+ const btn=$('video');setBusy('video',true);const out=$('movie'),ctx=out.getContext('2d'),fps=12,clipW=320,clipH=260;out.width=clipW*3;out.height=clipH+40;
+ const stream=out.captureStream(fps),mime=MediaRecorder.isTypeSupported('video/webm;codecs=vp9')?'video/webm;codecs=vp9':'video/webm';const recorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:1800000});const chunks=[];recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};const done=new Promise((resolve,reject)=>{recorder.onstop=()=>resolve(new Blob(chunks,{type:'video/webm'}));recorder.onerror=e=>reject(e.error||Error('MediaRecorder error'));});recorder.start(1000);
+ const frameMs=1000/fps;const drawFrame=(title,t,tracker)=>{seek(t);if(tracker){let maxStep=0,sum=0;const pos=tracker.mesh.geometry.getAttribute('position'),p=new THREE.Vector3();for(let i=0;i<pos.count;i++){tracker.mesh.getVertexPosition(i,p);const step=p.distanceTo(tracker.previous[i]);maxStep=Math.max(maxStep,step);sum+=step;if(t<=1e-8)tracker.returnResidual=Math.max(tracker.returnResidual,p.distanceTo(tracker.rest[i]));tracker.previous[i].copy(p);}tracker.maxVertexStep=Math.max(tracker.maxVertexStep,maxStep);tracker.meanVertexStepSum+=sum/pos.count;tracker.frameCount++;}renderer.setSize(clipW,clipH,false);ctx.fillStyle='#0d1217';ctx.fillRect(0,0,out.width,out.height);ctx.fillStyle='#f2f8f8';ctx.font='14px system-ui';ctx.fillText(title,10,18);ctx.fillStyle='#a6b7bc';ctx.font='11px system-ui';for(let v=0;v<3;v++){renderer.setViewport(0,0,clipW,clipH);renderer.setScissor(0,0,clipW,clipH);renderer.render(current.scene,cameras[v]);ctx.drawImage(renderer.domElement,0,0,clipW,clipH,v*clipW,30,clipW,clipH-30);ctx.fillStyle='#d5e2e5';ctx.fillText(cameraDefs[v].label,v*clipW+6,out.height-8);}};
+ for(let ix=0;ix<muscleGroups.length;ix++){const group=muscleGroups[ix],row=chooseSample(group);try{await loadMotion(row);const d=current.duration,reverse=row.poseControl?.actionDirection==='reverse',returnSpeed=reverse?1:1.7;const target=row.sourceBinding.members.find(m=>m.sourceKey===row.sourceBinding.subjectSourceKey),mesh=current.byName.get(target.nodeId),pattr=mesh.geometry.getAttribute('position'),v=new THREE.Vector3(),rest=[],previous=[];seek(0);for(let i=0;i<pattr.count;i++){mesh.getVertexPosition(i,v);rest.push(v.clone());previous.push(v.clone());}const tracker={mesh,rest,previous,maxVertexStep:0,meanVertexStepSum:0,frameCount:0,returnResidual:0};const total=d+d/returnSpeed,n=Math.max(2,Math.ceil(total*fps));for(let frame=0;frame<=n;frame++){const elapsed=frame/fps;const t=elapsed<=d?elapsed:Math.max(0,d-(elapsed-d)*returnSpeed);const phase=elapsed<=d?(reverse?'preparation':'action'):(reverse?'action':'return');drawFrame(`${ix+1}/${muscleGroups.length} ${row.selectedRowEnglishName} · ${row.sourceKeySide||''} · ${row.clipId} · ${phase}`,t,tracker);await new Promise(r=>setTimeout(r,frameMs));}
+ captureLog.videos.push({dedupeKey:group.dedupeKey,representativeTargetId:row.targetId,sourceKey:row.sourceKey,side:row.sourceKeySide,role:row.selectedMemberRole,uri:row.uri,sha256:row.sha256,clipId:row.clipId,durationSeconds:d,playbackSeconds:total,actionDirection:reverse?'reverse':'forward',frameCount:n+1,framesPerSecond:fps,maxSubjectVertexStepPerFrameMetres:tracker.maxVertexStep,meanSubjectVertexStepPerFrameMetres:tracker.frameCount?tracker.meanVertexStepSum/tracker.frameCount:0,returnResidualMaxMetres:tracker.returnResidual});
+ if((ix+1)%3===0){statusEl.textContent=`whole-cycle playback recording ${ix+1}/${muscleGroups.length}: ${row.clipId}`;await new Promise(r=>setTimeout(r,0));}
+ }catch(e){captureLog.failures.push({type:'video',dedupeKey:group.dedupeKey,error:String(e)});}}
+ recorder.stop();const blob=await done;const saved=await saveBlob('visual/full-playback/muscle-playback-cycle-v3.webm',blob);captureLog.videoFile=saved;captureLog.finishedAt=new Date().toISOString();await saveBlob('runtime/capture-index-v3.json',new Blob([JSON.stringify(captureLog,null,2)],{type:'application/json'}));statusEl.textContent=`full-cycle video v3 saved (${captureLog.videos.length}/${muscleGroups.length} muscle groups, ${Math.round(blob.size/1e6)} MB) · failures ${captureLog.failures.length}`;setBusy('video',false);
+}
+$('variants').addEventListener('click',()=>captureVariants().catch(e=>{statusEl.textContent='ERROR '+e;setBusy('variants',false)}));
+$('sheets').addEventListener('click',()=>capturePlaybackSheetsV3().catch(e=>{statusEl.textContent='ERROR '+e;setBusy('sheets',false)}));
+$('video').addEventListener('click',()=>recordFullCycle().catch(e=>{statusEl.textContent='ERROR '+e;setBusy('video',false)}));
+$('phases').addEventListener('click',()=>captureFocusedPhaseSheets().catch(e=>{statusEl.textContent='ERROR '+e;setBusy('phases',false)}));
+$('saveScreen').addEventListener('click',async()=>{try{const b64=$('screenData').value.trim(),name=$('screenName').value.trim();const bytes=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));const saved=await saveBlob('visual/live-runtime/'+name,new Blob([bytes],{type:'image/png'}));statusEl.textContent=`actual learner screen saved · ${saved.path} · ${saved.bytes} bytes · ${saved.sha256}`;$('screenData').value='';}catch(e){statusEl.textContent='Screenshot save error: '+e;}});
+const live=inv.liveRuntime;statusEl.textContent=`Loaded live inventory · ${muscleGroups.length} muscle playback groups · ${inv.candidateRows.filter(r=>r.inventoryScope==='in_scope_muscle').length} muscle target variants · actual app runtime ${live.baseUrl} ${live.integrationHttpStatus}/${live.datasetHttpStatus}.`;
+</script></body></html>

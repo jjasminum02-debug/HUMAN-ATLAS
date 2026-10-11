@@ -7620,13 +7620,34 @@
       "targetCodes": []
     },
     "MV1": {
-      "status": "planned",
+      "status": "partial",
       "feature": "motion-quality-review",
       "owner": "Luna Max",
       "spec": "work/tasks/MV1.md",
       "promptFile": "work/tasks/MV1.md",
       "dependsOn": [],
-      "autoRunNext": false
+      "autoRunNext": false,
+      "report": "work/reports/MV1.md",
+      "evidence": "work/evidence/MV1/2026-10-11-run-01",
+      "result": {
+        "learnerReachableMuscleRoleSideRows": 332,
+        "uniqueMusclePlaybackMappings": 74,
+        "statusCounts": {
+          "pass": 330,
+          "not_checked": 2,
+          "fail": 0,
+          "error": 0
+        },
+        "confirmedDefects": 0,
+        "suspectedReviewCandidates": 1,
+        "requiredDenseIntermediateSheets": 220,
+        "denseIntermediateSheetsManuallyReviewed": false,
+        "exhaustiveCompletionClaimed": false,
+        "learnerRuntimeActionReturnEmphasisRowsChecked": 0,
+        "learnerRuntimeActionReturnEmphasisRowsPending": 332
+      },
+      "nextUnit": "manually-review-220-dense-interframe-sheets-resolve-two-rectus-knee-contours-and-check-332-role-side-learner-action-return-emphasis-mappings",
+      "noAutoAdvance": true
     },
     "MV2": {
       "status": "planned",
@@ -7696,7 +7717,7 @@
       "executionPolicy": "Complete assigned deliverable and acceptance criteria; no elapsed-time stopping rule."
     },
     "motion-quality-review": {
-      "status": "planned_not_started",
+      "status": "in_progress",
       "design": "design/2026-09-25-muscle-atlas/32-AT6-PLACEMENT-CONTEXT-CAMERA-AND-MOTION-QA.md",
       "order": [
         "MV1",
@@ -7704,7 +7725,8 @@
       ],
       "nextUnit": "MV1",
       "autoRunNext": false,
-      "unitPolicy": "MV1 freezes exhaustive reachable inventory; MV2 repairs one frozen common-cause group per explicit run; completion requires remaining queue empty."
+      "unitPolicy": "MV1 freezes exhaustive reachable inventory; MV2 repairs one frozen common-cause group per explicit run; completion requires remaining queue empty.",
+      "lastDisposition": "partial; 220 dense sheets, two not_checked knee contours, and 332 role/side learner action-return emphasis mappings remain for manual review"
     }
   }
 }
