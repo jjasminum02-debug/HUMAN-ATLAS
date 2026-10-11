@@ -5,7 +5,7 @@ export interface SourceRef { id: string; title: string; edition: string | null; 
 export interface SourcedText { text: string; sources: SourceRef[]; interpretation: 'source_summary' | 'ai_proposal' | 'lecture' }
 export interface PointConcept {
   code: string; nameKo: string; romanization: string; aliases: string[]; channel: string; revision: string;
-  standard: SourceRef; textbook: SourceRef | null;
+  nameSources?: SourceRef[]; standard: SourceRef; textbook: SourceRef | null;
   location: SourcedText | null; posture: SourcedText | null; explanation: SourcedText | null;
   measurements: { kind: 'B-cun' | 'F-cun' | 'landmark'; value: number | null; reference: string }[];
 }

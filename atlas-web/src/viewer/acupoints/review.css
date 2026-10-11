@@ -1,7 +1,33 @@
-.acupoint-review { position:absolute; z-index:3; left:14px; bottom:98px; width:268px; padding:10px; border:1px solid #d6e2df; border-radius:12px; background:#fffffff0; color:#3e5551; font-size:12px; }
-.acupoint-review button { padding:6px 8px; margin:2px; border:1px solid #bccfca; background:white; border-radius:7px; color:inherit; font:inherit; cursor:pointer; }
-.acupoint-review button[aria-pressed=true] { background:#356b62;color:white; }
-.acupoint-review p { margin:7px 2px; line-height:1.4; }
-.acupoint-review small { display:block; line-height:1.4; }
-.acupoint-review .acupoint-limit { color:#8c572c; }
-@media(max-width:760px) { .acupoint-review { width:242px; left:10px; bottom:96px; } }
+.acupoint-entry { position:absolute;z-index:3;top:8px;right:var(--scene-right,20px); }
+.acupoint-entry button,.acupoint-review button { min-height:36px;padding:6px 9px;border:1px solid #cadbd4;background:white;border-radius:8px;color:#345e51;font:inherit;font-size:12px;cursor:pointer; }
+.acupoint-review { position:absolute;z-index:3;top:40px;right:12px;width:292px;max-height:calc(100% - 70px);padding:12px;border:1px solid #d6e2df;border-radius:16px;background:#fffffff5;color:#3e5551;font-size:12px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px; }
+.acupoint-review header {display:flex;align-items:center;justify-content:space-between;gap:4px;}
+.acupoint-review header button{font-size:11px;}
+.acupoint-review [role=group] {display:flex;gap:4px;flex-wrap:wrap;flex:none;}
+.acupoint-review .acupoint-codes {display:grid;grid-template-columns:repeat(6,minmax(0,1fr));}
+.acupoint-review button[aria-pressed=true] {background:#356b62;color:white;}
+.acupoint-review button:disabled {opacity:.4;cursor:default;}
+.acupoint-review button:focus-visible,.acupoint-entry button:focus-visible {outline:3px solid #c78a35;outline-offset:1px;}
+.acupoint-review .acupoint-card {overflow:auto;min-height:48px;overscroll-behavior:contain;scrollbar-gutter:stable;}
+.acupoint-review h3 {margin:4px 0;font-size:20px;color:#284e43;}
+.acupoint-review p {margin:6px 0;line-height:1.5;}
+.acupoint-review small {font-size:10px;line-height:1.4;flex:none;}
+.acupoint-review .acupoint-limit {color:#8c572c;}
+.acupoint-section {color:#608376;font-size:11px;}
+.acupoint-selected-label {position:absolute;z-index:2;border:1px solid #c97038;background:#fff8ee;padding:4px 7px;border-radius:7px;color:#783e22;white-space:nowrap;font-size:12px;pointer-events:none;}
+.atlas-shell .study-layout:has(.acupoint-review[data-active=true]) {--scene-right:328px;}
+.atlas-shell .study-layout:has(.acupoint-review[data-active=true]) .study-details {visibility:hidden;}
+@media(max-width:599px) {
+ .atlas-shell .study-layout:has(.acupoint-review[data-active=true]) {--scene-right:12px;--card-space:286px;}
+ .acupoint-review {top:auto;bottom:0;left:12px;right:12px;width:auto;height:286px;max-height:286px;padding:8px;gap:4px;border-radius:16px 16px 0 0;}
+ .acupoint-review header {position:absolute;top:8px;left:8px;right:8px;}
+ .acupoint-review > [aria-label="인체 좌우"] {margin-top:36px;}
+ .acupoint-review .acupoint-codes {grid-template-columns:repeat(11,minmax(0,1fr));}
+ .acupoint-review .acupoint-codes button {padding:2px;font-size:10px;min-height:32px;}
+ .acupoint-review .acupoint-tour-controls button {min-height:32px;font-size:11px;padding:4px 7px;}
+ .acupoint-review small {display:none;}
+ .acupoint-review h3 {font-size:17px;}
+}
+.acupoint-review .acupoint-codes button {white-space:nowrap;min-width:0;}
+
+.acupoint-review .acupoint-persistent-limit {display:block;color:#8c572c;}

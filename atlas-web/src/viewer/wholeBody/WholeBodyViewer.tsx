@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { AnatomySceneController, type BodyProgress } from './AnatomySceneController';
 import { type BodyManifest, validateManifest } from './contract';
 import './wholeBody.css';
+import '../acupoints/entry.css';
 import { DatasetSceneAdapter } from '../datasets/DatasetSceneAdapter';
 import type { Dataset } from '../datasets/schema';
 import type { RuntimeIntegration } from '../datasets/integration';
@@ -9,8 +10,8 @@ import { AtlasLoading } from '../../ui/AtlasLoading';
 import type { SourceMotionHost } from '../datasets/sourceMotionHost';
 import { motorRelationsForNerve, nerveConceptForSourceName } from '../../data/learning';
 
-const AcupointReview = import.meta.env.DEV && new URLSearchParams(window.location.search).get('acupointReview') === '1'
-  ? lazy(() => import('../acupoints/AcupointReview.tsx')) : null;
+const AcupointReview = import.meta.env.DEV
+  ? lazy(() => import('../acupoints/AcupointEntry.tsx')) : null;
 
 export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewResetRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, onEntered, onMotionHostChange, onMuscleLayerChange, onBoneLayerChange, onSelectionHiddenChange }: { attachmentRole?: 'origin' | 'insertion' | null; homeRevision?: number; viewResetRevision?: number; datasetSource?: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; onMotionHostChange?: (host: SourceMotionHost | null) => void; onMuscleLayerChange?: (enabled: boolean) => void; onBoneLayerChange?: (enabled: boolean) => void; onSelectionHiddenChange?: (hidden: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
   const host = useRef<HTMLDivElement>(null);

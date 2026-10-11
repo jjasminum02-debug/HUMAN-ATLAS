@@ -6,6 +6,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { type BodyAsset, type BodyManifest, type BodyView, visible, pickable, selected } from './contract';
 import { ResourceQueue } from './resources';
 import { entranceFrame } from './sceneEntrance.ts';
+import { CameraSessions } from './cameraSessions.ts';
 import { boundsCamera, interpolateCamera, observationState, OBSERVATION_FRAME, type CameraState, type ObservationDirection } from './cameraObservation.ts';
 
 export interface BodyProgress { loaded: number; total: number; failed: number; contextLost: boolean; selectedAvailable: boolean; calls: number; triangles: number; geometries: number }
@@ -29,7 +30,7 @@ export class AnatomySceneController {
   private previous = 0;
   private renderedFrames = 0;
   private cameraTransition: { from: CameraState; to: CameraState; elapsed: number } | null = null;
-  private observationCamera: CameraState | null = null;
+  private readonly cameraSessions = new CameraSessions();
   private entrance: { elapsed: number; target: THREE.Vector3; offset: THREE.Vector3 } | null = null;
   private readonly reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   private readonly frameIntervalsMs: number[] = [];
@@ -124,11 +125,12 @@ export class AnatomySceneController {
   onCameraMove(listener: () => void) { this.cameraMoveListeners.add(listener); return () => { this.cameraMoveListeners.delete(listener); }; }
   get canObserveDirections() { return this.manifest.frame === OBSERVATION_FRAME; }
   observeDirection(direction: ObservationDirection) { this.moveCamera(observationState(this.cameraTransition?.to ?? this.cameraState(), direction, this.manifest.frame)); }
-  beginObservation() { if (this.observationCamera) return false; this.observationCamera = this.cameraState(); return true; }
-  endObservation() {
-    const previous = this.observationCamera; this.observationCamera = null;
+  beginObservation(owner = 'anatomy', revoke?: () => void) { return this.cameraSessions.begin(owner, this.cameraState(), revoke); }
+  endObservation(owner = 'anatomy', restore = true) {
+    const previous = this.cameraSessions.end(owner, restore);
     if (previous) this.moveCamera(previous);
   }
+  get cameraOwner() { return this.cameraSessions.owner; }
   fitObservationBounds(box: THREE.Box3, padding = 1.25, smooth = false) {
     if (!box.isEmpty()) this.moveCamera(boundsCamera(box, this.cameraTransition?.to ?? this.cameraState(), this.camera.aspect, this.camera.fov, padding), smooth);
   }
@@ -277,7 +279,7 @@ export class AnatomySceneController {
       });
       this.renderer.domElement.dataset.scene = JSON.stringify({
         root: this.root.uuid, renderer: this.renderer.domElement.id, selectedId: this.view.selectedId,
-        camera: this.camera.position.toArray(), target: this.controls.target.toArray(), cameraTransition: Boolean(this.cameraTransition), focusObservation: Boolean(this.observationCamera),
+        camera: this.camera.position.toArray(), target: this.controls.target.toArray(), cameraTransition: Boolean(this.cameraTransition), focusObservation: Boolean(this.cameraSessions.owner), cameraOwner: this.cameraSessions.owner,
         loaded: [...this.queue.loaded.keys()], pending: [...this.queue.pending.keys()],
         visible: [...this.root.children].flatMap(g => g.children.filter(o => o.visible).map(o => o.name)),
         calls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles,
@@ -362,7 +364,7 @@ export class AnatomySceneController {
   }
   dispose() {
     this.stopEntrance();
-    this.dead = true; this.renderer.setAnimationLoop(null); this.queue.dispose(); this.updates.clear(); this.cameraMoveListeners.clear(); this.observer.disconnect();
+    this.dead = true; this.renderer.setAnimationLoop(null); this.queue.dispose(); this.updates.clear(); this.cameraMoveListeners.clear(); this.cameraSessions.clear(); this.observer.disconnect();
     this.controls.removeEventListener('start', this.cancelCameraMotion);
     this.reducedMotion.removeEventListener('change', this.cancelCameraMotion);
     this.controls.dispose(); this.materials.dispose();

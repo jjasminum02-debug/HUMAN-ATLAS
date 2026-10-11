@@ -68,6 +68,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         const observing = Boolean(view.focusObservation || view.attachmentObservation);
         const changedAttachment = this.view.attachmentObservation?.role !== view.attachmentObservation?.role;
         const changedSelection = this.view.selectedId !== view.selectedId;
+        if (changedSelection || this.view.poseId !== view.poseId) for (const listener of this.sourceSelectionListeners) listener();
         const focusNerve = shouldFocusNerveSelection(this.integration.objects, this.view, view);
         if (wasObserving && (!observing || changedSelection)) this.scene.endObservation();
         this.view = view;
@@ -87,6 +88,11 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         return JSON.stringify([view.regionIds ?? (view.region ? [view.region] : []), view.selectedId, view.bones, view.muscles,
             view.nerves, view.poseId, view.isolate, view.selectedPresentation, [...(view.hiddenSourceKeys ?? [])].sort(),
             [...(view.translucentSourceKeys ?? [])].sort(), view.dim, view.observeNerves, view.highlightInnervation, view.nerveConceptMuscleKeys, view.attachmentObservation]);
+    }
+    private readonly sourceSelectionListeners = new Set<() => void>();
+    onSourceSelectionChange(listener: () => void) {
+        this.sourceSelectionListeners.add(listener);
+        return () => { this.sourceSelectionListeners.delete(listener); };
     }
     private readonly sourceMotionStartListeners = new Set<() => void>();
     onSourceMotionStart(listener: () => void) {
@@ -275,6 +281,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             this.scene.renderer.domElement.parentElement?.setAttribute('data-motion-context', 'active');
             this.apply();
             // Frame the complete moving chain once, retaining the user's viewing direction.
+            this.scene.beginObservation('motion');
             // Playback, scrubbing and restoration never continually refit or reset the camera.
             const defaultFront = this.scene.camera.position.clone().sub(this.scene.controls.target).normalize();
             // A straight frontal default hides sagittal motion in depth. Establish an
@@ -324,6 +331,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         const active = this.motion;
         if (!active) return;
         this.motion = null;
+        this.scene.endObservation('motion', false);
         this.scene.renderer.domElement.parentElement?.removeAttribute('data-motion-context');
         this.motionPoseActive = false;
         this.motionPhase = 'rest';
