@@ -6708,7 +6708,7 @@
       "noAutoAdvance": true
     },
     "AT1": {
-      "status": "planned",
+      "status": "complete",
       "feature": "acupoint-at-361",
       "title": "기존 AC1·AC2 인수와 361혈 목록 고정",
       "estimateMinutes": [
@@ -6718,7 +6718,27 @@
       "dependsOn": [],
       "spec": "work/tasks/AT1.md",
       "promptFile": "work/tasks/AT1.md",
-      "targetCodes": []
+      "targetCodes": [],
+      "report": "work/reports/AT1.md",
+      "evidence": "work/evidence/AT1",
+      "ledger": "atlas-data/acupoints/who-361-catalog.json",
+      "validation": "work/evidence/AT1/validation.json",
+      "result": {
+        "scope": "catalog_and_laterality_only",
+        "channelCount": 14,
+        "conceptCount": 361,
+        "uniqueCodeCount": 361,
+        "missingCodeCount": 0,
+        "duplicateCodeCount": 0,
+        "bilateralConceptCount": 309,
+        "midlineConceptCount": 52,
+        "plannedInstanceCount": 670,
+        "anchorInstancesCreated": 0,
+        "ac1Ac2ProposalsPreservedUnresolved": 22,
+        "acceptedProductInstances": 0
+      },
+      "nextUnit": null,
+      "noAutoAdvance": true
     },
     "AT2": {
       "status": "planned",
@@ -7596,7 +7616,7 @@
         "AT28",
         "AT29"
       ],
-      "nextUnit": "AT1",
+      "nextUnit": "AT2",
       "conceptCount": 361,
       "channelCount": 14,
       "extraPointsIncluded": false,
