@@ -66,4 +66,4 @@ AT2의 **한 경로 결정 + 실행 가능한 실제 표면 표본** 기준을 �
 
 ![AT2 실제 개발 표본 화면](../evidence/AT2/delivery-screen.png)
 
-<!-- AT2 LOCAL RECEIPT -->
+로컬 primary commit: `4e46f089b9b52a6a2683fafe4de50ae441ffd70b` (55개 소유 파일). 후속 receipt commit에는 이 report와 `commit-receipt.json`만 포함한다. primary 후 index는 비었고 잔여 변경은 5,966개였다: 기존 WIP 5,965개와 제외한 `before-execution.json` 1개. 기존 WIP hash 변화 0개, primary 파일 목록과 소유 manifest 일치, EXECUTION의 다른 논리 값 변화 0개를 재확인했다. receipt 후도 같은 잔여 범위를 유지한다. 기록 완료 2026-10-11T08:25:48.842055+00:00, 실제 경과 34.35분; 최대 80분 checkpoint 이전에 결과를 보존했다.
