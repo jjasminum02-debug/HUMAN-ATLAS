@@ -1,11 +1,12 @@
 # AT3 — 몸통·팔·다리 체표 carrier 적용
 
-상태: planned / 구현 미착수. 실행 상태 원본은 work/EXECUTION.json의 featureWorkUnits.AT3.
-예상: **55–80분**. 선행: AT2. 기본 실행 순서: AT1→AT29.
+2026-10-11 작업 단위 정정. 상태는 EXECUTION의 해당 record에서 읽는다. 이 명세 자체는 구현 완료의 증거가 아니다.
+선행: AT2. 실행 순서는 번호순이 아니라 [현재 계획](../plans/acupoint-at-2026-10-11/START-HERE.md)과 EXECUTION.featurePlans.acupoint-at-361.order를 따른다.
 
 ## 읽을 자료
 
-AGENTS.md, work/EXECUTION.json, work/NEXT.md, design/2026-09-25-muscle-atlas/30-AT-361-POINTS-AND-TERRITORIES.md, work/reports/acupoint-AC1.md, work/reports/acupoint-AC2.md와 선행 AT report/evidence. AC 역사 자료는 최초 또는 관련 변경 때만 읽고 반복 다운로드하지 않는다.
+AGENTS.md, work/EXECUTION.json, work/NEXT.md, design/2026-09-25-muscle-atlas/30-AT-361-POINTS-AND-TERRITORIES.md, design/2026-09-25-muscle-atlas/31-AT-EXPERIENCE-AND-DELIVERY-CONTRACT.md, 선행 AT report/evidence.
+AC1·AC2 보고서와 schema/overlay/CameraSessions/tour는 최초 또는 관련 변경 때 재사용 근거를 확인한다. 같은 자료를 매번 재조사하지 않는다.
 
 ## 수행 범위
 
@@ -17,35 +18,41 @@ AT2에서 고정한 방법으로 몸통·팔·다리 patch를 일괄 생성/정�
 
 정면/뒤/양측에서 major landmark 대응, 좌우, 빈 구역, body와의 관통을 검사한다. carrier를 피부 스캔으로 오인시키지 않으며 비용이 예산 안이다.
 
-## 공통 실행 규칙
+## 작업 경계와 인수 검사
 
-- 기존 AC1·AC2 코드와 실제 evidence를 재사용한다. 교수 검토 미수행/과거 미승인만으로 독립 기술 작업을 막지 않는다. 근거 없는 좌표·권리·검토는 만들지 않는다.
-- 한 번에 이 task만 실행한다. 20–80분 규모의 계획이며 이 task의 예상 시간은 위 표기다. 60분에 진행률을 점검하고 80분에는 안전한 checkpoint를 남긴다. 시간만 채우지 말고 일찍 끝나면 종료한다. 미달을 pass로 바꾸지 않는다.
-- 처음부터 정밀 수작업을 전부 하는 추정이 아니다. 선행 공통 도구와 확인된 입력 재사용을 전제로 한다. 같은 실패가 재현되면 같은 접근을 반복하지 말고 한 가지 구체적 대안/필요 입력을 남긴다. 새 번호를 자동 발급하지 않는다.
-- 같은 AnatomySceneRoot/renderer/camera, 기존 frame/metre/static pose, 사용자 layer-off/선택을 보존한다. 관찰 시점 메뉴는 되살리지 않으며 화면 맞춤과 선택 맞춤을 사용한다.
-- 읽기 전용 원본/OpenSim_Models/T13 drafts/사용자 WIP와 역사 freeze를 보존한다. private 교재·source cache·실패 이력은 learner bundle에 넣지 않는다.
-- 관련 unit/data 검사와 변경한 실제 화면만 우선 검증한다. 모든 단계마다 전체 역사 suite를 반복하지 않는다. 코드/필수 data/작은 evidence·보고서의 소유 변경만 로컬 commit한다.
-- 상태는 EXECUTION.featureWorkUnits의 해당 AT record만 갱신한다. featurePlans의 nextUnit은 순서/선행을 확인해 갱신하고, 숫자 T queue와 역사 AC 기록은 바꾸지 않는다. sync_execution.py와 --check를 실행한다.
-- 보고서에 elapsed time, 완료/미완, 실제 표시 수/근거/검증 범위, commit hash/포함·제외·잔여 변경, 다음 ID/프롬프트를 남긴다. 다음 task 자동 실행·push·배포·진단·치료·침 시뮬레이션 금지.
+- 산출물: 공통 carrier manifest와 부위 chunk. AT2 채택 입력을 재사용하는 하나의 생성/정합 경로만 구현한다.
+- 검사: 같은 장면에서 carrier OFF/ON 비교. 원래 근육·뼈는 유지되고 부위 이음·관통·좌우를 확인한다.
+- 경계: 새 전신 수작업 조형, 경혈 좌표 작성, 별도 피부 렌더러는 하지 않는다.
 
-## 산출물
+## 실행·검증·기록
 
-이 범위의 코드/자료 + work/reports/AT3.md + work/evidence/AT3/. 계획 파일을 실제 artifact로 세지 않는다.
+- 종료는 산출물과 완료 기준으로 판단한다. 경과 시간을 이유로 중단하거나 검증을 생략하지 않는다. 정정 전 시간 checkpoint 지시는 폐기한다.
+- 범위의 완료까지 진행한다. 실제 입력 부재/재현 결함으로 진행이 불가능한 경우에만 남은 unit·시도한 해결·필요 입력을 구체적으로 남긴다. 무한 재검색이나 자동 task 증식은 하지 않는다.
+- 31 설계의 공통 구현/화면 계약 중 이 task에 해당하는 항목만 구현·검증한다. AT2에 후속 UI/전신 제작을 추가하지 않는다.
+- source/권리/교수 검토/교육용 위치 등급을 분리한다. 과거 미승인만으로 독립 작업을 막지 않으며 unresolved 위치를 자동 승인하지 않는다.
+- 단일 scene/root/renderer/camera와 사용자 layer-off/선택을 보존한다. 관찰 시점 메뉴, 로딩 로고·인체 그림·슬로건을 되살리지 않는다. 기존 보기옵션을 재배치하지 않는다.
+- 원본/OpenSim_Models/T13 drafts/사용자 WIP와 역사 evidence를 보존한다. 개발 evidence·private 교재·source cache는 learner bundle에 넣지 않는다.
+- 변경에 관련된 자동 검사와 실제 화면을 확인한다. 데이터 처리 성공과 실제 표시/시각 검증 수를 구분한다. 전체 역사 suite를 매 task 반복하지 않는다.
+- 최신 EXECUTION을 다시 읽고 이 AT record와 feature plan의 nextUnit만 갱신한다. 다음 ID는 order/선행에서 구하며 번호에 1을 더하지 않는다. 다른 실행자의 변경이나 숫자 T/AC 기록을 덮지 않는다. sync_execution.py 및 --check를 실행한다.
+- work/reports/AT3.md, work/evidence/AT3/에 실제 산출물·검증·미완·다음 ID/프롬프트를 남긴다. 소유 변경만 선별 로컬 commit하고 hash/포함·제외·잔여 변경을 보고한다. 경과 시간 보고는 완료 조건이 아니다.
+- 다음 task 자동 실행·push·배포·진단·치료·침 시뮬레이션 금지.
 
 ## 붙여 넣을 프롬프트
 
 ```text
 HUMAN ATLAS에서 AT3만 수행해라.
 AGENTS.md, 최신 work/EXECUTION.json, work/tasks/AT3.md,
-design/2026-09-25-muscle-atlas/30-AT-361-POINTS-AND-TERRITORIES.md와 지정된 선행 실제 evidence를 읽어라.
+design/2026-09-25-muscle-atlas/30-AT-361-POINTS-AND-TERRITORIES.md,
+design/2026-09-25-muscle-atlas/31-AT-EXPERIENCE-AND-DELIVERY-CONTRACT.md 및 지정 선행 실제 evidence를 읽어라.
 범위: AT2에서 고정한 방법으로 몸통·팔·다리 patch를 일괄 생성/정합하고 공통 carrier manifest에 등록한다. 전신 단일 초고해상도 mesh를 새로 만들지 않는다.
 필수 결과: 정면/뒤/양측에서 major landmark 대응, 좌우, 빈 구역, body와의 관통을 검사한다. carrier를 피부 스캔으로 오인시키지 않으며 비용이 예산 안이다.
-55–80분 규모로 수행하되 최대 80분에는 안전한 checkpoint를 남겨라.
-기존 AC1/AC2를 다시 만들지 말고 미확정 혈위를 자동 승인하지 마라.
-단일 장면, 원본/OpenSim_Models/T13/사용자 WIP를 보존해라.
-관찰 시점 메뉴를 복구하거나 보기옵션을 다시 디자인하지 마라.
-관련 검증·실제 화면·report/evidence를 남기고 EXECUTION의 이 AT 상태와 feature plan 다음 ID만 갱신해라.
-sync_execution.py 및 --check를 실행하고 소유 변경만 선별 로컬 커밋해라.
-미달이면 정확한 남은 unit을 기록하고 완료를 가장하지 마라.
-다음은 AT4이며 자동 실행하지 마라. push·배포·진단·치료·침 시뮬레이션 금지.
+명세의 작업 경계와 인수 검사를 완료해라. 경과 시간에 따른 중단 지시는 폐기됐으며 산출물과 합격 기준으로 종료해라.
+기존 AC1/AC2와 공통 compiler/overlay/CameraSessions를 재사용하고 task별 구현을 복제하지 마라.
+같은 장면·사용자 조작·원본/OpenSim_Models/T13/기존 WIP를 보존해라.
+31 설계 중 이번 범위의 자연스러운 그래픽·카메라·학습 UI 기준을 실제 화면에서 확인해라.
+관찰 시점 메뉴를 복구하거나 기존 보기옵션을 다시 디자인하지 마라.
+관련 검증·report/evidence를 남기고 최신 EXECUTION의 이 AT record와 feature plan 다음 ID만 갱신해라.
+sync_execution.py 및 --check 후 소유 변경만 로컬 커밋해라. 실제 미달은 정확히 보고해라.
+계획상 다음은 AT4. 최신 order/선행과 대조하고 자동 실행하지 마라.
+push·배포·진단·치료·침 시뮬레이션 금지.
 ```
