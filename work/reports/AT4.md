@@ -70,3 +70,5 @@ AT4의 부분 입력·공통 등록·지원/미지원·실제 접근 검사를 �
 ![머리 실제 표본 검토](../evidence/AT4/head-front-proposal.png)
 
 재현: NumPy 환경에서 `python atlas-web/scripts/buildEducationCarriers.py --evidence-dir work/evidence/AT4 --config atlas-data/acupoints/carriers/education-special-inputs.json`, `python atlas-web/scripts/validateEducationCarriers.py --evidence-dir work/evidence/AT4`, `python work/evidence/AT4/validate-special-inputs.py`, `python work/evidence/AT4/validate-runtime.py`.
+
+로컬 primary commit: `651889f5ddfbfa4ad20b83043f86b139aac51df4` (소유 244개 파일, 실제 commit 목록과 `commit-scope.json` 일치). Primary 뒤 index는 비었고 잔여 변경은 기존 WIP 5,966개와 경로/status/hash가 정확히 같았다. 원본·OpenSim_Models/T13·역사 evidence·기존 WIP는 제외했다. Receipt 후속 commit 범위는 이 report와 `commit-receipt.json` 2개뿐이다.
