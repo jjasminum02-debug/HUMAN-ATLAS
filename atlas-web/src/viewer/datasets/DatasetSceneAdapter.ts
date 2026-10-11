@@ -88,9 +88,15 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             view.nerves, view.poseId, view.isolate, view.selectedPresentation, [...(view.hiddenSourceKeys ?? [])].sort(),
             [...(view.translucentSourceKeys ?? [])].sort(), view.dim, view.observeNerves, view.highlightInnervation, view.nerveConceptMuscleKeys, view.attachmentObservation]);
     }
+    private readonly sourceMotionStartListeners = new Set<() => void>();
+    onSourceMotionStart(listener: () => void) {
+        this.sourceMotionStartListeners.add(listener);
+        return () => { this.sourceMotionStartListeners.delete(listener); };
+    }
     async attachSourceMotion(asset: MotionAsset, resource: AnimationSceneResource,
         onTimeChange?: AnimationPlaybackOptions['onTimeChange'], onInvalidated?: (reason: string) => void,
         presentation?: { intent: MotionLearningIntent }): Promise<AnimationPlaybackController> {
+        for (const listener of this.sourceMotionStartListeners) listener();
         this.scene.cancelCameraMotion();
         const zoom = asset.poseControl?.observationZoom ?? 1;
         if (!Number.isFinite(zoom) || zoom < 1 || zoom > 1.5) throw new Error('관찰 화면 확대 범위가 올바르지 않습니다.');
@@ -220,6 +226,8 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             if (!hasSubject) throw new Error('선택 근육의 exact sourceKey/side 변형 표면이 manifest에 없습니다.');
             if (!binding.members.some(member => member.sourceKey === binding.subjectSourceKey && member.side === asset.staticBinding.side))
                 throw new Error('선택 sourceKey/side가 motion package에 없습니다.');
+            // A static observation may have opened while the motion resource was loading.
+            for (const listener of this.sourceMotionStartListeners) listener();
             this.scene.root.add(resource.scene);
             for (const sourceKey of binding.members.map(row => row.sourceKey)) {
                 const original = originalNodes.get(sourceKey)!;

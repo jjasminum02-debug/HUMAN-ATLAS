@@ -19,6 +19,7 @@ export class AnatomySceneController {
   readonly queue: ResourceQueue<THREE.Group>;
   readonly assets: Map<string, BodyAsset>;
   readonly updates = new Set<(seconds: number) => boolean | void>();
+  private readonly cameraMoveListeners = new Set<() => void>();
   private observer: ResizeObserver;
   private view: BodyView = { region: null, bones: true, muscles: true, supplements: false, selectedId: null, dim: true };
   private lost = false;
@@ -114,11 +115,13 @@ export class AnatomySceneController {
     this.camera.zoom = state.zoom; this.camera.updateProjectionMatrix(); this.controls.update(); this.dirty = true;
   }
   moveCamera(state: CameraState, smooth = true) {
+    for (const listener of this.cameraMoveListeners) listener();
     this.cancelCameraMotion();
     if (!smooth || this.reducedMotion.matches) this.applyCamera(state);
     else this.cameraTransition = { from: this.cameraState(), to: state, elapsed: 0 };
     this.dirty = true;
   }
+  onCameraMove(listener: () => void) { this.cameraMoveListeners.add(listener); return () => { this.cameraMoveListeners.delete(listener); }; }
   get canObserveDirections() { return this.manifest.frame === OBSERVATION_FRAME; }
   observeDirection(direction: ObservationDirection) { this.moveCamera(observationState(this.cameraTransition?.to ?? this.cameraState(), direction, this.manifest.frame)); }
   beginObservation() { if (this.observationCamera) return false; this.observationCamera = this.cameraState(); return true; }
@@ -359,7 +362,7 @@ export class AnatomySceneController {
   }
   dispose() {
     this.stopEntrance();
-    this.dead = true; this.renderer.setAnimationLoop(null); this.queue.dispose(); this.updates.clear(); this.observer.disconnect();
+    this.dead = true; this.renderer.setAnimationLoop(null); this.queue.dispose(); this.updates.clear(); this.cameraMoveListeners.clear(); this.observer.disconnect();
     this.controls.removeEventListener('start', this.cancelCameraMotion);
     this.reducedMotion.removeEventListener('change', this.cancelCameraMotion);
     this.controls.dispose(); this.materials.dispose();

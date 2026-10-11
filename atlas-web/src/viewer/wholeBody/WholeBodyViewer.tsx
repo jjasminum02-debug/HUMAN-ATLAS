@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { AnatomySceneController, type BodyProgress } from './AnatomySceneController';
 import { type BodyManifest, validateManifest } from './contract';
 import './wholeBody.css';
@@ -8,6 +8,9 @@ import type { RuntimeIntegration } from '../datasets/integration';
 import { AtlasLoading } from '../../ui/AtlasLoading';
 import type { SourceMotionHost } from '../datasets/sourceMotionHost';
 import { motorRelationsForNerve, nerveConceptForSourceName } from '../../data/learning';
+
+const AcupointReview = import.meta.env.DEV && new URLSearchParams(window.location.search).get('acupointReview') === '1'
+  ? lazy(() => import('../acupoints/AcupointReview.tsx')) : null;
 
 export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewResetRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, onEntered, onMotionHostChange, onMuscleLayerChange, onBoneLayerChange, onSelectionHiddenChange }: { attachmentRole?: 'origin' | 'insertion' | null; homeRevision?: number; viewResetRevision?: number; datasetSource?: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; onMotionHostChange?: (host: SourceMotionHost | null) => void; onMuscleLayerChange?: (enabled: boolean) => void; onBoneLayerChange?: (enabled: boolean) => void; onSelectionHiddenChange?: (hidden: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
   const host = useRef<HTMLDivElement>(null);
@@ -122,6 +125,7 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
   const observationScene = controller.current instanceof DatasetSceneAdapter ? controller.current.scene : controller.current;
   return <div className="whole-body-viewer" onPointerDownCapture={stopEntrance}>
     <div className="whole-body-canvas" inert={!entered} aria-hidden={!entered} ref={host}/>
+    {entered && AcupointReview && controller.current instanceof DatasetSceneAdapter && <Suspense fallback={null}><AcupointReview adapter={controller.current}/></Suspense>}
     {!entered && <AtlasLoading failed={error || Boolean(progress?.failed)} loaded={progress?.loaded} total={progress?.total} onRetry={() => error ? setRevision(r => r + 1) : controller.current?.retry()}/> }
     <div inert={!entered} ref={tools} className="body-tools" aria-label="모형 보기 설정">
       <span className="view-options-label">보기 옵션</span>
