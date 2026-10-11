@@ -70,7 +70,7 @@ export async function compilePlacementUnit(unit:PlacementUnit,inputs:CompilerInp
     if(!['real_input','technical_fixture'].includes(unit.scope)||!Array.isArray(unit.landmarks)||!unit.id?.trim()||!unit.code?.trim()
       ||!['ai','human'].includes(unit.author))fail('invalid unit scope/identity/authorship/landmarks');
     validateCarrier(c,unit.context);await verifyCarrierHash(c);
-    if(unit.side!==c.side)fail('unit subject side mismatch');
+    if(unit.side!==c.side&&c.side!=='midline')fail('unit subject side mismatch');
     if(!unit.originalText.trim()||!unit.originalSources.length)fail('missing preserved location source');
     assessment.technical='passed';assessment.checks.side=true;assessment.checks.pose=true;
     assessment.checks.frame=true;assessment.checks.topology=true;

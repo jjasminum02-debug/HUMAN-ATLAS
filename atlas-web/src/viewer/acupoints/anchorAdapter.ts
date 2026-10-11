@@ -22,12 +22,13 @@ export async function verifyCarrierHash(c: Pick<Carrier,'positions'|'indices'|'t
 }
 /** Frozen world-frame topology, never a nearest-muscle search and never mirrored implicitly. */
 export function resolveAnchor(c: AnchorTopology, i: TopologyAnchor) {
-  if (i.carrierId !== c.id || i.carrierRevision !== c.revision || i.carrierHash !== c.topologySha256 || i.frameId !== c.frameId || i.unit !== c.unit || i.poseId !== c.poseId || i.side !== c.side) throw Error('stale anchor binding');
+  if (i.carrierId !== c.id || i.carrierRevision !== c.revision || i.carrierHash !== c.topologySha256 || i.frameId !== c.frameId || i.unit !== c.unit || i.poseId !== c.poseId || (i.side !== c.side && c.side !== 'midline')) throw Error('stale anchor binding');
   if (!Number.isInteger(i.triangle) || i.triangle < 0 || i.triangle >= c.indices.length / 3 || i.barycentric.length !== 3 || !i.barycentric.every(n => Number.isFinite(n) && n >= 0 && n <= 1) || Math.abs(i.barycentric.reduce((a,b) => a+b,0) - 1) > 1e-6) throw Error('anchor triangle/barycentric');
   const vertices = c.indices.slice(i.triangle * 3, i.triangle * 3 + 3).map(index => new THREE.Vector3().fromArray(c.positions, index * 3));
   const normal = vertices[1].clone().sub(vertices[0]).cross(vertices[2].clone().sub(vertices[0]));
   if (normal.lengthSq() < 1e-16) throw Error('degenerate anchor triangle');
   const position = new THREE.Vector3(); vertices.forEach((v,k) => position.addScaledVector(v,i.barycentric[k]));
+  if(i.side==='right'&&position.x>=0||i.side==='left'&&position.x<=0)throw Error('anchor subject side');
   return { position, normal: normal.normalize() };
 }
 export function withinOverlayBudget(base: { overviewBytes: number; geometryBytes: number; triangles: number }, extra: { bytes: number; triangles: number; overviewBytes?: number }) {

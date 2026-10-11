@@ -25,29 +25,32 @@ export class AcupunctureOverlay {
   private down = {x:0,y:0};
   private selected: string | null = null;
   private reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  static async create(adapter: DatasetSceneAdapter, carrier: Carrier, points: PointInstance[], onSelect: (code: string) => void, onStop: (reason: string) => void, encodedBytes: number, options?: { returnCamera?:CameraState;route: number[]; names: Record<string,string>; changed: (state:PointTour['state'])=>void; cancelled:()=>boolean }) {
+  static async create(adapter: DatasetSceneAdapter, carrier: Carrier, points: PointInstance[], onSelect: (code: string) => void, onStop: (reason: string) => void, encodedBytes: number, options?: { returnCamera?:CameraState;carriers?:Carrier[];side?:'right'|'left';route: number[]; names: Record<string,string>; changed: (state:PointTour['state'])=>void; cancelled:()=>boolean }) {
     if(options&&(options.route.length%3||!options.route.every(Number.isFinite)))throw Error('Invalid teaching route');
     const d = adapter.resources.dataset;
-    validateCarrier(carrier, { datasetRevision:d.revision, frameId:d.frameContract?.targetFrameId ?? '', unit:d.unit, poseId:d.frameContract?.staticReferencePose?.id ?? '' });
-    await verifyCarrierHash(carrier); points.forEach(i => resolveAnchor(carrier,i));
+    const all=options?.carriers??[carrier],context={datasetRevision:d.revision,frameId:d.frameContract?.targetFrameId??'',unit:d.unit,poseId:d.frameContract?.staticReferencePose?.id??''};
+    if(new Set(all.map(c=>c.id)).size!==all.length||!all.some(c=>c.id===carrier.id)||new Set(points.map(p=>p.code)).size!==points.length)throw Error('Invalid overlay carrier/point set');
+    for(const c of all){validateCarrier(c,context);await verifyCarrierHash(c);}
+    points.forEach(i=>{const c=all.find(c=>c.id===i.carrierId);if(!c)throw Error('Missing anchor carrier');resolveAnchor(c,i);});
     if(options?.cancelled())throw new DOMException('Cancelled','AbortError');
     if(adapter.scene.cameraOwner==='motion'||adapter.resources.motionOverrides.size>0)throw Error('경혈 표시는 복원된 정지 자세에서만 가능합니다.');
     return new AcupunctureOverlay(adapter,carrier,points,onSelect,onStop,encodedBytes,options);
   }
-  private constructor(private adapter: DatasetSceneAdapter, readonly carrier: Carrier, readonly points: PointInstance[], private onSelect: (code: string) => void, private onStop: (reason: string) => void, private encodedBytes: number, private options?: { returnCamera?:CameraState;route:number[]; names:Record<string,string>; changed:(state:PointTour['state'])=>void; cancelled:()=>boolean }) {
+  private constructor(private adapter: DatasetSceneAdapter, readonly carrier: Carrier, readonly points: PointInstance[], private onSelect: (code: string) => void, private onStop: (reason: string) => void, private encodedBytes: number, private options?: { returnCamera?:CameraState;carriers?:Carrier[];side?:'right'|'left';route:number[]; names:Record<string,string>; changed:(state:PointTour['state'])=>void; cancelled:()=>boolean }) {
     const scene = adapter.scene;
     adapter.restoreSourceMotion('acupoint-static-review');
     scene.cancelCameraMotion(); this.savedCamera = structuredClone(options?.returnCamera??scene.cameraState());
     scene.beginObservation('acupoint',()=>this.onStop('다른 관찰 기능으로 경혈 따라보기를 종료했습니다.'));
     this.tour=new PointTour((index,focus)=>{const code=LUNG_ORDER[index];this.onSelect(code);this.select(code);if(focus)this.focusSection(code);},()=>this.restoreCamera(true),state=>options?.changed(state));
     this.label=document.createElement('button');this.label.className='acupoint-selected-label';this.label.setAttribute('aria-label','선택 경혈');this.label.onclick=()=>{if(this.selected)this.onSelect(this.selected);};scene.renderer.domElement.parentElement?.append(this.label);
-    const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position',new THREE.Float32BufferAttribute(carrier.positions,3)); geometry.setIndex(carrier.indices); geometry.computeVertexNormals();
-    this.carrierMesh = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({color:0x2b8f99, transparent:true,opacity:.22,side:THREE.DoubleSide,depthWrite:false,forceSinglePass:true}));
-    this.carrierMesh.name = 'AcupointTeachingCarrier'; this.carrierMesh.visible = false; this.group.add(this.carrierMesh);
+    const carrierMaterial=new THREE.MeshBasicMaterial({color:0x2b8f99,transparent:true,opacity:.22,side:THREE.DoubleSide,depthWrite:false,forceSinglePass:true});
+    const meshes=(options?.carriers??[carrier]).map(c=>{const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(c.positions,3));geometry.setIndex(c.indices);geometry.computeVertexNormals();
+      const mesh=new THREE.Mesh(geometry,carrierMaterial);mesh.name='AcupointTeachingCarrier';mesh.visible=false;this.group.add(mesh);return mesh;});
+    this.carrierMesh=meshes[0];
     const markerGeometry=new THREE.SphereGeometry(.0025,12,8),normalMaterial=new THREE.MeshBasicMaterial({color:0xd36b24,depthTest:true}),selectedMaterial=new THREE.MeshBasicMaterial({color:0xed3f16,depthTest:true});
     this.group.userData.markerMaterials=[normalMaterial,selectedMaterial];
     for (const point of points) {
-      const anchor=resolveAnchor(carrier,point);
+      const anchor=resolveAnchor((options?.carriers??[carrier]).find(c=>c.id===point.carrierId)!,point);
       const marker = new THREE.Mesh(markerGeometry,normalMaterial);if(point.code==='LU11')marker.scale.setScalar(.6);
       marker.position.copy(anchor.position).addScaledVector(anchor.normal,.0008); marker.name=`AC-review-${point.code}-${carrier.side}`; marker.userData.code=point.code;
       this.markers.set(point.code,marker);this.group.add(marker);
@@ -78,10 +81,10 @@ export class AcupunctureOverlay {
     const geometries=new Set<THREE.BufferGeometry>();let triangles=0,geometryBufferBytes=0;
     this.group.traverse(o=>{if(o instanceof THREE.Mesh||o instanceof THREE.Line){geometries.add(o.geometry);if(o instanceof THREE.Mesh)triangles+=(o.geometry.index?.count??0)/3;}});
     for(const g of geometries){for(const a of Object.values(g.attributes) as THREE.BufferAttribute[])geometryBufferBytes+=a.array.byteLength;geometryBufferBytes+=g.index?.array.byteLength??0;}
-    return {encodedBytes:this.encodedBytes,geometryBufferBytes,triangles,textures:0,geometryCount:geometries.size,routeBufferBytes:this.encodedRouteBytes,drawCallsCarrierOff:this.points.length+(this.options?1:0),drawCallsCarrierOn:this.points.length+1+(this.options?1:0)};
+    return {encodedBytes:this.encodedBytes,geometryBufferBytes,triangles,textures:0,geometryCount:geometries.size,routeBufferBytes:this.encodedRouteBytes,drawCallsCarrierOff:this.points.length+(this.options?.route.length?1:0),drawCallsCarrierOn:this.points.length+(this.options?.carriers?.length??1)+(this.options?.route.length?1:0)};
   }
   select(code:string) {
-    this.selected=code;this.tour.index=LUNG_ORDER.indexOf(code);
+    this.selected=this.markers.has(code)?code:null;this.label.hidden=!this.selected;this.tour.index=LUNG_ORDER.indexOf(code);
     const [normal,selected]=this.group.userData.markerMaterials as THREE.Material[];
     for(const [key,m] of this.markers)m.material=key===code?selected:normal;
     this.label.textContent=`${this.options?.names[code]??code} · ${code}`;
@@ -105,11 +108,11 @@ export class AcupunctureOverlay {
     const scene=this.adapter.scene,safe=this.safeRect();
     const center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3()),tan=Math.tan(THREE.MathUtils.degToRad(scene.camera.fov/2));
     const distance=Math.max(.08,1.3*Math.max(size.y/tan,size.x/(tan*(safe.width/safe.height)))/2+size.z);
-    const direction=new THREE.Vector3(this.carrier.side==='right'?-.18:.18,.04,1).normalize();
+    const direction=new THREE.Vector3((this.options?.side??this.carrier.side)==='right'?-.18:.18,.04,1).normalize();
     this.moved=true;this.userMoved=false;this.moveCamera({position:center.clone().addScaledVector(direction,distance).toArray(),target:center.toArray(),zoom:1});
   }
   overview(){this.pause();this.tour.state='ready';this.options?.changed('ready');this.focusSection('LU1',true);}
-  showCarrier(enabled:boolean) {this.carrierMesh.visible=enabled;this.adapter.scene.requestRender();}
+  showCarrier(enabled:boolean) {for(const child of this.group.children)if(child.name==='AcupointTeachingCarrier')child.visible=enabled;this.adapter.scene.requestRender();}
   focus(code:string, direction:'front'|'oblique'|'side'='front') {
     const marker=this.markers.get(code);if(!marker)return;
     const target=marker.position.clone(), distance=code==='LU1'?.31:code==='LU9'?.16:.07;
@@ -145,7 +148,7 @@ export class AcupunctureOverlay {
   private inspect() {
     const scene=this.adapter.scene,r=scene.renderer.domElement.getBoundingClientRect();scene.camera.updateMatrixWorld();
     if(this.selected){const marker=this.markers.get(this.selected);if(marker){const p=marker.position.clone().project(scene.camera);this.label.hidden=this.userMoved||Math.abs(p.x)>1||Math.abs(p.y)>1||Math.abs(p.z)>1;this.label.style.left=`${(p.x+1)/2*r.width+8}px`;this.label.style.top=`${(1-p.y)/2*r.height-24}px`;}}
-    scene.renderer.domElement.dataset.acupointReview=JSON.stringify({root:scene.root.uuid,groupParent:this.group.parent?.name,carrier:this.carrier.id,carrierHash:this.carrier.topologySha256,frame:this.carrier.frameId,unit:'m',pose:this.carrier.poseId,side:this.carrier.side,selection:{kind:'acupoint',code:this.selected,side:this.carrier.side},selected:this.selected,tour:this.tour.state,tourIndex:this.tour.index,autoReturn:this.tour.autoReturn,userMoved:this.userMoved,section:this.section,safeViewport:this.safeRect(),cameraOwner:scene.cameraOwner,reducedMotion:this.reducedMotion,carrierVisible:this.carrierMesh.visible,cost:this.cost(),points:[...this.markers].map(([code,m])=>{const p=m.position.clone().project(scene.camera);return {code,world:m.position.toArray(),screen:[r.left+(p.x+1)/2*r.width,r.top+(1-p.y)/2*r.height],inFrustum:Math.abs(p.x)<=1&&Math.abs(p.y)<=1&&Math.abs(p.z)<=1,locationValidation:'unresolved'};})});
+    scene.renderer.domElement.dataset.acupointReview=JSON.stringify({root:scene.root.uuid,groupParent:this.group.parent?.name,carrier:this.carrier.id,carrierHash:this.carrier.topologySha256,frame:this.carrier.frameId,unit:'m',pose:this.carrier.poseId,side:this.options?.side??this.carrier.side,selection:{kind:'acupoint',code:this.selected,side:this.options?.side??this.carrier.side},selected:this.selected,tour:this.tour.state,tourIndex:this.tour.index,autoReturn:this.tour.autoReturn,userMoved:this.userMoved,section:this.section,safeViewport:this.safeRect(),cameraOwner:scene.cameraOwner,reducedMotion:this.reducedMotion,carrierVisible:this.carrierMesh.visible,cost:this.cost(),points:[...this.markers].map(([code,m])=>{const p=m.position.clone().project(scene.camera);return {code,world:m.position.toArray(),screen:[r.left+(p.x+1)/2*r.width,r.top+(1-p.y)/2*r.height],inFrustum:Math.abs(p.x)<=1&&Math.abs(p.y)<=1&&Math.abs(p.z)<=1,locationValidation:this.points.find(i=>i.code===code)?.locationValidation};})});
   }
   private releaseGeometry() {
     const geometries=new Set<THREE.BufferGeometry>(),materials=new Set<THREE.Material>();
