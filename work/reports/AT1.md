@@ -63,7 +63,7 @@ AC2 carrier hash는 오른쪽 `82991216229e5332bdd53c5e092341373a8b9b7ad8482ebfe
 
 시작 HEAD와 5,965개 기존 Git status 항목의 요약은 `work/evidence/AT1/preservation-before.json`에 기록했다. 이 task는 그 이전 변경을 staging하지 않는다. OpenSim_Models, source cache, T13 drafts, AC1/AC2 역사 evidence, 보기옵션 UI, 그 밖의 기존 사용자 WIP를 수정하지 않았다.
 
-- **Primary artifact/EXECUTION commit:** selective commit 후 hash를 여기에 기록한다.
+- **Primary artifact/EXECUTION commit:** `b56808c560a494fae312acee558708888c04bf65` (`AT1: add WHO 361 acupoint catalog`).
 - 포함 예정: WHO 361 source catalog, AT1 validator와 evidence, 이 보고서, `work/EXECUTION.json`의 AT1 record와 feature plan nextUnit 변경.
 - 제외: 시작 시점의 나머지 사용자 WIP, 기존 `OpenSim_Models`/source cache/T13 및 AC1·AC2 history.
 - 다음 프롬프트: `work/tasks/AT2.md` (미실행).
