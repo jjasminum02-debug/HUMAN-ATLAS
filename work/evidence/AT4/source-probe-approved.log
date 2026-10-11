@@ -1,0 +1,22 @@
+AT4_PROBE [('Nail plate (foot).l', 978, 1936), ('Nail plate (foot).r', 978, 1936), ('Perionyx (foot).l', 930, 1840), ('Perionyx (foot).r', 930, 1840), ('Tongue', 343, 682), ('Anal region.l', 26, 48), ('Anal region.r', 26, 48), ('Urogenital region.l', 646, 1284), ('Urogenital region.r', 646, 1284), ('Regions of perineum.j', 2, 0)] [{'name': 'Skin', 'exists': True, 'meshObjects': [], 'directObjects': []}, {'name': 'Dermis', 'exists': True, 'meshObjects': [], 'directObjects': []}, {'name': 'Mucosa of mouth', 'exists': True, 'meshObjects': [], 'directObjects': []}, {'name': 'Mucosa of tongue', 'exists': True, 'meshObjects': [], 'directObjects': []}, {'name': 'Inferior surface of tongue', 'exists': True, 'meshObjects': [], 'directObjects': []}, {'name': 'Perineal membrane', 'exists': True, 'meshObjects': [], 'directObjects': []}, {'name': 'Regions of perineum', 'exists': True, 'meshObjects': ['Anal region.l', 'Anal region.r', 'Regions of perineum.j', 'Urogenital region.l', 'Urogenital region.r'], 'directObjects': ['Regions of perineum.g', 'Regions of perineum.j', 'Urogenital region.l', 'Urogenital region.r']}, {'name': 'Perineal muscles', 'exists': True, 'meshObjects': [], 'directObjects': []}]
+Blender 3.5.0 (hash 1be25cfff18b built 2023-03-29 06:34:18)
+Device with name Apple M5 supports metal minimum requirements
+Read blend: /Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Startup.blend
+scripts disabled for "/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Startup.blend", skipping 'z-anatomy.py'
+Dependency cycle detected:
+  OBOesophagus-profile/TRANSFORM_INIT() depends on
+  OBOesophagus/GEOMETRY_EVAL() via 'Curve Follow Parent'
+  OBOesophagus/MODIFIER(Solidify) via 'modifier stack order'
+  OBOesophagus/GEOMETRY_EVAL_INIT() via 'Modifier'
+  CUOesophagus/GEOMETRY_EVAL_DONE() via 'Object Geometry Base Data'
+  CUOesophagus/GEOMETRY_EVAL() via 'ObData Geom Eval Done'
+  OBOesophagus-profile/TRANSFORM_FINAL() via 'Curve Bevel Transform'
+  OBOesophagus-profile/TRANSFORM_SIMULATION_INIT() via 'Simulation -> Final Transform'
+  OBOesophagus-profile/TRANSFORM_EVAL() via 'Transform Eval -> Simulation Init'
+  OBOesophagus-profile/TRANSFORM_PARENT() via 'Eval'
+  OBOesophagus-profile/TRANSFORM_LOCAL() via 'ObLocal -> ObParent'
+  OBOesophagus-profile/TRANSFORM_INIT() via 'Transform Init'
+Detected 1 dependency cycles
+
+Blender quit
+Error: Not freed memory blocks: 322, total unfreed memory 0.002457 MB

@@ -12,6 +12,8 @@ export class CarrierSampleOverlay {
   private readonly removeUpdate: () => void;
   private readonly removeMotion: () => void;
   private readonly removeSelection: () => void;
+  private readonly removeCameraMove:()=>void;
+  private fitting=false;
   private dead = false;
   private reference = false;
   private readonly adapter: DatasetSceneAdapter;
@@ -36,7 +38,7 @@ export class CarrierSampleOverlay {
 
   private constructor(adapter:DatasetSceneAdapter, data:CarrierSample[], encodedBytes:number, stop:(reason:string)=>void) {
     this.adapter=adapter;this.data=data;this.stop=stop;
-    this.material=new THREE.MeshBasicMaterial({color:0x238f9c,transparent:true,opacity:data.length===1?.38:.18,side:THREE.DoubleSide,forceSinglePass:true,depthWrite:false});
+    this.material=new THREE.MeshBasicMaterial({color:0x238f9c,transparent:true,opacity:data.length===1&&data[0].carrier.id==='za-right-middle-thigh-teaching-sample'?.38:.18,side:THREE.DoubleSide,forceSinglePass:true,depthWrite:false});
     this.group.name='CarrierSurfaceSample';
     for(const sample of data) {
       const c=sample.carrier,geometry=new THREE.BufferGeometry();
@@ -56,6 +58,8 @@ export class CarrierSampleOverlay {
     scene.renderer.domElement.dataset.carrierSampleTransfers=JSON.stringify(performance.getEntriesByType('resource').filter(e=>/CarrierSample|za-thigh-sample|education-r1/.test(e.name)).map(e=>({name:e.name,bytes:(e as PerformanceResourceTiming).encodedBodySize})));
     this.removeMotion=adapter.onSourceMotionStart(()=>stop('움직임 시작으로 정지 체표 표본을 종료했습니다.'));
     this.removeSelection=adapter.onSourceSelectionChange(()=>stop('선택 또는 자세 변경으로 표본을 종료했습니다.'));
+    this.removeCameraMove=scene.onCameraMove(()=>{if(!this.fitting)this.releaseFit();});
+    for(const event of ['pointerdown','wheel','keydown'])scene.renderer.domElement.addEventListener(event,this.releaseFit);
     this.removeUpdate=scene.addUpdate(()=>{
       if(adapter.resources.queue.bytes+this.cost.geometryBufferBytes>DATASET_BUDGET.geometryBytes || scene.renderer.info.render.triangles>DATASET_BUDGET.triangles) {
         stop('기존 장면 예산 초과로 표본을 종료했습니다.');return false;
@@ -67,6 +71,20 @@ export class CarrierSampleOverlay {
     this.inspect();
   }
 
+  /** Explicit DEV sample framing only. Existing controller supplies easing/reduced motion. */
+  fit(side:'right'|'left'|'all'='all') {
+    if(this.dead)return;
+    const scene=this.adapter.scene;
+    if(scene.cameraOwner==='motion'||scene.cameraOwner==='acupoint'||(this.adapter.resources.motionOverrides?.size??0)>0)return;
+    const selected=this.geometries.filter((_,i)=>side==='all'||this.data[i].carrier.side===side);
+    if(!selected.length)return;
+    const bounds=new THREE.Box3();
+    for(const g of selected){g.computeBoundingBox();if(g.boundingBox)bounds.union(g.boundingBox);}
+    this.fitting=true;
+    try {scene.beginObservation('carrier-review');scene.fitObservationBounds(bounds,1.7,true);}
+    finally {this.fitting=false;}
+  }
+  private releaseFit=()=>{if(this.adapter.scene.cameraOwner==='carrier-review')this.adapter.scene.endObservation('carrier-review',false);};
   showReference(enabled:boolean) {
     if(this.dead)return;
     this.reference=enabled;
@@ -115,8 +133,10 @@ export class CarrierSampleOverlay {
   }
   dispose() {
     if(this.dead)return;this.dead=true;
-    this.removeUpdate();this.removeMotion();this.removeSelection();
+    this.removeUpdate();this.removeMotion();this.removeSelection();this.removeCameraMove();
+    if(this.adapter.scene.cameraOwner==='carrier-review'){this.adapter.scene.cancelCameraMotion();this.releaseFit();}
     const canvas=this.adapter.scene.renderer.domElement;
+    for(const event of ['pointerdown','wheel','keydown'])canvas.removeEventListener(event,this.releaseFit);
     canvas.removeEventListener('webglcontextlost',this.onLost);document.removeEventListener('visibilitychange',this.onVisibility);
     this.group.removeFromParent();this.geometries.forEach(g=>g.dispose());this.material.dispose();delete canvas.dataset.carrierSample;
     this.adapter.scene.requestRender();

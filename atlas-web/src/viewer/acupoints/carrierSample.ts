@@ -6,8 +6,9 @@ export interface CarrierSample {
   referencePositions: number[]; referenceHash: string; label: string; clearanceMetres: number;
   acceptedAcupoints: 0;
 }
+export type CarrierFamily='trunk'|'arm'|'leg'|'head'|'hand'|'foot'|'nail'|'oral'|'perineum';
 export interface CarrierChunk {
-  id:string; family:'trunk'|'arm'|'leg'; label:string; side:Carrier['side']; revision:string;
+  id:string; family:CarrierFamily; label:string; side:Carrier['side']; revision:string;
   topologySha256:string; referenceHash:string; file:string; sha256:string; bytes:number;
   vertices:number; triangles:number; geometryBufferBytes:number; bounds:number[][]; clearanceMetres:number;
 }
@@ -20,7 +21,7 @@ export function validateCarrierManifest(m:CarrierManifest, context:AnchorContext
   if(m.schemaVersion!==1||m.usage!=='development_review_only'||m.acceptedAcupoints!==0||m.kind!=='authored_teaching_surface'||m.precision!=='coarse_not_skin'
     ||m.frameId!==context.frameId||m.poseId!==context.poseId||m.datasetRevision!==context.datasetRevision||m.unit!=='m'||context.unit!=='m'
     ||m.rights.localObservation!=='supported'||!m.chunks.length||new Set(m.chunks.map(c=>c.id)).size!==m.chunks.length)throw Error('Invalid carrier manifest');
-  for(const c of m.chunks)if(!/^[a-z0-9-]+\.bin$/.test(c.file)||!['right','left','midline'].includes(c.side)||!['trunk','arm','leg'].includes(c.family)
+  for(const c of m.chunks)if(!/^[a-z0-9-]+\.bin$/.test(c.file)||!['right','left','midline'].includes(c.side)||!['trunk','arm','leg','head','hand','foot','nail','oral','perineum'].includes(c.family)
     ||![c.sha256,c.topologySha256,c.referenceHash].every(h=>/^[a-f0-9]{64}$/.test(h))||!Number.isInteger(c.vertices)||c.vertices<3||c.vertices>=65536
     ||!Number.isInteger(c.triangles)||c.triangles<1||c.bytes!==c.vertices*24+c.triangles*6||c.bytes>8*1024*1024
     ||c.geometryBufferBytes!==c.bytes)throw Error('Invalid carrier chunk');

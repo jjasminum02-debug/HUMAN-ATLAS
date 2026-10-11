@@ -1,9 +1,9 @@
-import { decodeCarrierChunk, validateCarrierManifest, type CarrierManifest, type CarrierSample } from './carrierSample.ts';
+import { decodeCarrierChunk, validateCarrierManifest, type CarrierManifest, type CarrierSample, type CarrierFamily } from './carrierSample.ts';
 import type { AnchorContext } from './anchorAdapter.ts';
 
 const chunkUrls=import.meta.glob('../../../../atlas-data/acupoints/carriers/education-r1/*.bin',{query:'?url',import:'default'}) as Record<string,()=>Promise<string>>;
 /** One abortable path; browser HTTP cache supplies immutable chunks, no persistent geometry cache. */
-export async function loadCarrierSet(family:'all'|'trunk'|'arm'|'leg',context:AnchorContext,signal:AbortSignal,cancelled:()=>boolean) {
+export async function loadCarrierSet(family:'all'|CarrierFamily,context:AnchorContext,signal:AbortSignal,cancelled:()=>boolean) {
   const {default:url}=await import('../../../../atlas-data/acupoints/carriers/education-r1/manifest.json?url');
   if(cancelled())throw new DOMException('Cancelled','AbortError');
   const response=await fetch(url,{signal});if(!response.ok)throw Error('체표 목록을 읽을 수 없습니다.');

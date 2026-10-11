@@ -9,7 +9,8 @@ const manifest=JSON.parse(readFileSync(new URL('manifest.json',root),'utf8')) as
 const context={datasetRevision:manifest.datasetRevision,frameId:manifest.frameId,unit:'m',poseId:manifest.poseId};
 const bytes=(file:string)=>{const b=readFileSync(new URL(file,root));return b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength) as ArrayBuffer;};
 test('registered binary set reuses carrier hashes, actual bilateral topology and static frame',async()=>{
-  validateCarrierManifest(manifest,context);assert.equal(manifest.chunks.length,11);
+  validateCarrierManifest(manifest,context);assert.equal(manifest.chunks.filter(c=>['trunk','arm','leg'].includes(c.family)).length,11);
+  assert.deepEqual([...new Set(manifest.chunks.map(c=>c.family))].sort(),['arm','foot','hand','head','leg','nail','oral','perineum','trunk']);
   for(const chunk of manifest.chunks)await validateCarrierSample(await decodeCarrierChunk(manifest,chunk,bytes(chunk.file)),context);
   assert.deepEqual([...new Set(manifest.chunks.map(c=>c.side))].sort(),['left','midline','right']);
 });
