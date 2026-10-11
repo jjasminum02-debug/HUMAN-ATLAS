@@ -1,3 +1,5 @@
+> **2026-10-11 후속 사용자 결정:** 향후 실행은 `design/2026-09-25-muscle-atlas/30-AT-361-POINTS-AND-TERRITORIES.md`와 `work/plans/acupoint-at-2026-10-11/START-HERE.md`의 AT1–AT29를 따른다. 14경맥 361혈 전체가 범위다. 아래 AC 계획/프롬프트는 역사 자료이며 자동 재실행하지 않는다. AC1·AC2 실제 구현과 미완 상태는 보존한다.
+
 # 다음 요청용 AC3 프롬프트 — 아직 실행하지 않음
 
 ```text

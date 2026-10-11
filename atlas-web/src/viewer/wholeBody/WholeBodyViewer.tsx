@@ -123,7 +123,6 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
     previousView.current = { regionKey, selectedId, resetRevision: viewResetRevision };
   }, [ready, regionIds, selectedId, selectedIds, bones, muscles, nerves, staticPose, nerveConceptMuscleKeys, presentation, attachmentRole, viewResetRevision]);
   useEffect(() => { if (ready && homeRevision > 0) { stopEntrance(); controller.current?.focus([]); } }, [ready, homeRevision]);
-  const observationScene = controller.current instanceof DatasetSceneAdapter ? controller.current.scene : controller.current;
   return <div className="whole-body-viewer" onPointerDownCapture={stopEntrance}>
     <div className="whole-body-canvas" inert={!entered} aria-hidden={!entered} ref={host}/>
     {entered && AcupointReview && controller.current instanceof DatasetSceneAdapter && <Suspense fallback={null}><AcupointReview adapter={controller.current}/></Suspense>}
@@ -138,14 +137,6 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
       </div>
       <div className="selection-view-options">
         {!selectedNerve && <button disabled={!selectedId} aria-pressed={presentation.dim} onClick={() => updatePresentation({ ...presentation, dim: !presentation.dim })}>선택 강조</button>}
-        <details className="observation-menu" onKeyDown={event => { if (event.key === 'Escape') { event.currentTarget.open = false; event.currentTarget.querySelector('summary')?.focus(); } }}>
-          <summary>관찰 시점</summary>
-          <div className="observation-popover">
-            <div role="group" aria-label="해부학적 관찰 방향">{([['front', '앞'], ['back', '뒤'], ['left', '왼쪽'], ['right', '오른쪽']] as const).map(([direction, label]) => <button key={direction} disabled={!observationScene?.canObserveDirections} onClick={() => {
-              const current = controller.current; (current instanceof DatasetSceneAdapter ? current.scene : current)?.observeDirection(direction);
-            }}>{label}에서 보기</button>)}</div>
-          </div>
-        </details>
         <button disabled={!selectedMuscle || !selectedId || !muscles || !progress?.selectedAvailable || presentation.hidden.includes(selectedId)} title="선택한 근육을 숨겨 안쪽 구조를 봅니다." onClick={() => selectedId && setPresentation(previous => previous.hidden.includes(selectedId) ? previous : { ...previous, hidden: [...previous.hidden, selectedId] })}>근육 숨기기</button>
         <button disabled={!selectedId || !progress?.selectedAvailable} onClick={() => controller.current?.focusSelection()}>선택 맞춤</button>
         {selectedNerve ? (selectedNerve.muscleKeys.length > 0 || nerveConceptMuscleKeys.length > 0) && <button disabled={!nerves} aria-pressed={presentation.highlightInnervation} onClick={() => updatePresentation({ ...presentation, highlightInnervation: !presentation.highlightInnervation })}>관련 근육 강조</button> : <button disabled={!selectedId || (!progress?.selectedAvailable && !presentation.translucent.includes(selectedId))} aria-pressed={Boolean(selectedId && presentation.translucent.includes(selectedId))} onClick={() => selectedId && updatePresentation({ ...presentation, translucent: presentation.translucent.includes(selectedId) ? presentation.translucent.filter(id => id !== selectedId) : [...presentation.translucent, selectedId] })}>선택 반투명</button>}

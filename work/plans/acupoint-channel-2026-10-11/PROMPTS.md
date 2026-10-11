@@ -1,3 +1,5 @@
+> **2026-10-11 후속 사용자 결정:** 향후 실행은 `design/2026-09-25-muscle-atlas/30-AT-361-POINTS-AND-TERRITORIES.md`와 `work/plans/acupoint-at-2026-10-11/START-HERE.md`의 AT1–AT29를 따른다. 14경맥 361혈 전체가 범위다. 아래 AC 계획/프롬프트는 역사 자료이며 자동 재실행하지 않는다. AC1·AC2 실제 구현과 미완 상태는 보존한다.
+
 # 경혈 학습 구현 프롬프트
 
 2026-10-11. **계획이며 아직 구현을 시작하지 않았다.** AC1–AC5는 이번 기능의 로컬 작업 단위다. 역사 T번호를 재발급하거나 수십 개 task로 늘리지 않는다. 현재 `work/EXECUTION.json`/`work/NEXT.md`는 수정하지 않았다. 이 프롬프트를 사용자가 실제 실행시키면 해당 AC 단위만 진행하고, 결과는 `work/reports/acupoint-ACn.md`와 `work/evidence/acupoint-ACn/`에 기록한다. 계획만으로 현재 실행 레지스트리의 과거 task를 완료/재개 처리하지 않는다.
