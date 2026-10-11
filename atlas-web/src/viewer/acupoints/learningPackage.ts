@@ -1,6 +1,7 @@
 import type { Carrier, PointInstance } from './schema.ts';
 import type { AnchorContext } from './anchorAdapter.ts';
 import { resolveLearnerProjection, type LearnerProjection } from './placementPolicy.ts';
+import type { ObservationContext } from './observationContext.ts';
 import { LUNG_ORDER } from './tour.ts';
 export interface LearnerConcept {code:string;nameKo:string;romanization:string;channel:'LU';location:string;landmarkLabel:string;textbook:'pending'}
 export interface LearningPackage extends AnchorContext {
@@ -29,21 +30,29 @@ export function validateLearningPackage(p:LearningPackage,context:AnchorContext)
       ||a.display!==(found.has(id)?'educational_approximation':'unavailable')||(!found.has(id)&&!a.reason.trim()))throw Error('Availability does not match accepted positions');seen.add(id);}
   if(p.precisionCounts.precise!==0||p.precisionCounts.educationalApproximation!==found.size||p.precisionCounts.unresolved!==22-found.size)throw Error('Location count mismatch');
 }
-export async function loadLearningPackage(side:'right'|'left',context:AnchorContext&{motionActive:boolean},signal:AbortSignal,cancelled:()=>boolean) {
+export async function loadLearningPackage(side:'right'|'left'|'both',context:AnchorContext&{motionActive:boolean},signal:AbortSignal,cancelled:()=>boolean) {
   if(context.motionActive)throw Error('정지 자세에서 다시 열어 주세요.');
   const {default:url}=await import('../../../../atlas-data/acupoints/learner/lung-r7.json?url');
   if(cancelled())throw new DOMException('Cancelled','AbortError');
   const response=await fetch(url,{signal});if(!response.ok)throw Error('경혈 자료를 열 수 없습니다.');
   const bytes=await response.arrayBuffer();if(cancelled())throw new DOMException('Cancelled','AbortError');
   const data=JSON.parse(new TextDecoder().decode(bytes)) as LearningPackage;validateLearningPackage(data,context);
-  const projections=data.projections.filter(p=>p.instances.some(i=>i.side===side));
+  const projections=data.projections.filter(p=>p.instances.some(i=>side==='both'||i.side===side));
   const carriers:Carrier[]=[],points:PointInstance[]=[];let encodedBytes=bytes.byteLength;
   // No carrier request/allocation for unavailable points. Load exactly referenced registered chunks.
   if(projections.length){const {loadCarrierSet}=await import('./carrierLoader.ts');const set=await loadCarrierSet([...new Set(projections.map(p=>p.carrierId))],context,signal,cancelled);encodedBytes+=set.encodedBytes;
     for(const p of projections){const c=set.samples.find(s=>s.carrier.id===p.carrierId)?.carrier;if(!c)throw Error('Missing point carrier');
       await resolveLearnerProjection(c,p,context,cancelled);carriers.push(c);
-      points.push(...p.instances.filter(i=>i.side===side).map(i=>({...i,revision:'compiler-runtime',carrierId:p.carrierId,carrierRevision:p.carrierRevision,carrierHash:p.carrierHash,
+      points.push(...p.instances.filter(i=>side==='both'||i.side===side).map(i=>({...i,revision:'compiler-runtime',carrierId:p.carrierId,carrierRevision:p.carrierRevision,carrierHash:p.carrierHash,
         frameId:p.frameId,poseId:p.poseId,unit:p.unit,landmarkSourceKeys:[],locationValidation:'landmarks_verified' as const,aiProposal:i.author==='ai',missing:[]})));}
   }
-  if(cancelled())throw new DOMException('Cancelled','AbortError');return {data,carriers,points,encodedBytes};
+  const {default:contextUrl}=await import('../../../../atlas-data/acupoints/observation/lung-context-r1.json?url');
+  if(cancelled())throw new DOMException('Cancelled','AbortError');const responseContext=await fetch(contextUrl,{signal});if(!responseContext.ok)throw Error('관찰 기준 구조를 열 수 없습니다.');const contextBytes=await responseContext.arrayBuffer();encodedBytes+=contextBytes.byteLength;
+  const doc=JSON.parse(new TextDecoder().decode(contextBytes));if(doc.datasetRevision!==context.datasetRevision||doc.frameId!==context.frameId||doc.poseId!==context.poseId||doc.unit!=='m')throw Error('Observation frame/pose mismatch');
+  const contexts:ObservationContext[]=doc.contexts.filter((c:ObservationContext)=>side==='both'||c.side===side);
+  for(const c of contexts){const i=points.find(i=>i.code===c.code&&i.side===c.side);const b=c.placementBinding;
+    if(!i||!b||b.carrierId!==i.carrierId||b.carrierHash!==i.carrierHash||b.triangle!==i.triangle||b.barycentric.join()!==i.barycentric.join())throw Error('Observation placement binding mismatch');
+    if(!c.structures.length||c.structures.some(s=>s.bounds.flat().some(v=>!Number.isFinite(v))))throw Error('Missing actual local structure bounds');}
+  if(cancelled())throw new DOMException('Cancelled','AbortError');const route:number[]=doc.teachingPaths.filter((p:{side:string})=>side==='both'||p.side===side).flatMap((p:{from:number[];to:number[]})=>[...p.from,...p.to]);if(!route.every(Number.isFinite)||route.length%6)throw Error('Invalid supported teaching segments');
+  return {data,carriers,points,contexts,route,encodedBytes};
 }

@@ -10,3 +10,4 @@ test('manual interaction pauses progress and prevents automatic return',()=>{
 test('previous next and resume have bounded indices and restart the dwell time',()=>{
  const tour=new PointTour(()=>{},()=>{},()=>{});tour.step(-1);assert.equal(tour.index,0);tour.choose(9);tour.play();tour.tick(3.3);assert.equal(tour.index,10);tour.step(1);assert.equal(tour.index,10);tour.play();assert.equal(tour.index,0);
 });
+test('same tour accepts non-LU order and sections without LU fixed indices',()=>{const visited:number[]=[],changes:number[]=[];let returns=0;const tour=new PointTour((i,f)=>{visited.push(i);if(f)changes.push(i);},()=>returns++,()=>{},['ST1','ST2','ST3'],[{codes:['ST1','ST2']},{codes:['ST3']}]);tour.play();tour.tick(3.3);tour.tick(3.3);tour.tick(3.3);assert.deepEqual(visited,[0,1,2]);assert.deepEqual(changes,[0,2]);assert.equal(returns,1);tour.choose(99);assert.equal(tour.index,2);tour.step(-100);assert.equal(tour.index,0);});

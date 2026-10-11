@@ -14,3 +14,8 @@ test('repeat begin keeps independent original return values and never aliases ca
  const sessions=new CameraSessions(),initial=camera(1);sessions.begin('anatomy',initial);initial.position[0]=99;
  assert.equal(sessions.begin('anatomy',camera(5)),false);assert.deepEqual(sessions.end('anatomy'),camera(1));
 });
+test('reentry during a return uses the original snapshot and manual takeover clears it',()=>{
+ const sessions=new CameraSessions(),original=camera(1),intermediate=camera(2);sessions.begin('acupoint',original);assert.deepEqual(sessions.end('acupoint'),original);sessions.markReturn('acupoint',original);
+ assert.deepEqual(sessions.returnState('acupoint',intermediate),original);sessions.begin('acupoint',sessions.returnState('acupoint',intermediate));assert.deepEqual(sessions.end('acupoint'),original);
+ sessions.settleReturn();assert.deepEqual(sessions.returnState('acupoint',intermediate),intermediate);
+});

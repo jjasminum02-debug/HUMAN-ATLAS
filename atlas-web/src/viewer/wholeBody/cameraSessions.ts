@@ -3,6 +3,10 @@ import type { CameraState } from './cameraObservation.ts';
 export class CameraSessions {
   private sessions = new Map<string,{camera:CameraState; revoke?:()=>void}>();
   owner: string | null = null;
+  private returning: {owner:string;camera:CameraState}|null=null;
+  returnState(owner:string,current:CameraState){return structuredClone(this.sessions.get(owner)?.camera??(this.returning?.owner===owner?this.returning.camera:current));}
+  markReturn(owner:string,camera:CameraState){this.returning={owner,camera:structuredClone(camera)};}
+  settleReturn(){this.returning=null;}
   begin(owner:string,camera:CameraState,revoke?:()=>void) {
     const previous=this.owner;
     this.owner=owner;
@@ -17,5 +21,5 @@ export class CameraSessions {
     if(owns)this.owner=[...this.sessions.keys()].at(-1)??null;
     return owns&&restore&&session?structuredClone(session.camera):null;
   }
-  clear(){this.sessions.clear();this.owner=null;}
+  clear(){this.sessions.clear();this.owner=null;this.settleReturn();}
 }

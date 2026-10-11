@@ -5,13 +5,14 @@ export function sectionFor(code:string){return LUNG_SECTIONS.findIndex(s=>s.code
 export class PointTour {
   state:'ready'|'touring'|'paused'='ready'; index=0; elapsed=0; autoReturn=true;
   private select:(index:number,focus:boolean)=>void; private finish:()=>void; private changed:(state:PointTour['state'])=>void;
-  constructor(select:(index:number,focus:boolean)=>void,finish:()=>void,changed:(state:PointTour['state'])=>void){this.select=select;this.finish=finish;this.changed=changed;}
-  play(){if(this.index===10)this.index=0;this.autoReturn=true;this.elapsed=0;this.state='touring';this.select(this.index,true);this.changed(this.state);}
+  constructor(select:(index:number,focus:boolean)=>void,finish:()=>void,changed:(state:PointTour['state'])=>void,readonly order=LUNG_ORDER,readonly sections:{codes:string[]}[]=LUNG_SECTIONS){this.select=select;this.finish=finish;this.changed=changed;}
+  private section(code:string){return this.sections.findIndex(s=>s.codes.includes(code));}
+  play(){if(this.index===this.order.length-1)this.index=0;this.autoReturn=true;this.elapsed=0;this.state='touring';this.select(this.index,true);this.changed(this.state);}
   pause(manual=false){this.state='paused';this.elapsed=0;if(manual)this.autoReturn=false;this.changed(this.state);}
-  step(delta:number){this.pause();this.index=Math.max(0,Math.min(10,this.index+delta));this.select(this.index,true);}
-  choose(index:number){this.pause();this.index=index;this.select(index,true);}
+  step(delta:number){this.pause();this.index=Math.max(0,Math.min(this.order.length-1,this.index+delta));this.select(this.index,true);}
+  choose(index:number){this.pause();this.index=Math.max(0,Math.min(this.order.length-1,index));this.select(index,true);}
   tick(dt:number){if(this.state!=='touring')return false;this.elapsed+=dt;if(this.elapsed<3.2)return false;this.elapsed=0;
-    if(this.index===10){this.state='ready';this.changed(this.state);if(this.autoReturn)this.finish();return false;}
-    const previous=sectionFor(LUNG_ORDER[this.index]);this.index++;this.select(this.index,sectionFor(LUNG_ORDER[this.index])!==previous);return true;
+    if(this.index===this.order.length-1){this.state='ready';this.changed(this.state);if(this.autoReturn)this.finish();return false;}
+    const previous=this.section(this.order[this.index]);this.index++;this.select(this.index,this.section(this.order[this.index])!==previous);return true;
   }
 }

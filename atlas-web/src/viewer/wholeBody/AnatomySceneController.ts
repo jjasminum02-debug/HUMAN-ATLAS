@@ -110,7 +110,7 @@ export class AnatomySceneController {
     this.dirty = true;
   };
   cameraState(): CameraState { return { position: this.camera.position.toArray(), target: this.controls.target.toArray(), zoom: this.camera.zoom }; }
-  cancelCameraMotion = () => { this.stopEntrance(); this.cameraTransition = null; };
+  cancelCameraMotion = () => { this.stopEntrance(); this.cameraTransition = null; this.cameraSessions.settleReturn(); };
   private applyCamera(state: CameraState) {
     this.controls.target.fromArray(state.target); this.camera.position.fromArray(state.position);
     this.camera.zoom = state.zoom; this.camera.updateProjectionMatrix(); this.controls.update(); this.dirty = true;
@@ -125,10 +125,15 @@ export class AnatomySceneController {
   onCameraMove(listener: () => void) { this.cameraMoveListeners.add(listener); return () => { this.cameraMoveListeners.delete(listener); }; }
   get canObserveDirections() { return this.manifest.frame === OBSERVATION_FRAME; }
   observeDirection(direction: ObservationDirection) { this.moveCamera(observationState(this.cameraTransition?.to ?? this.cameraState(), direction, this.manifest.frame)); }
-  beginObservation(owner = 'anatomy', revoke?: () => void) { return this.cameraSessions.begin(owner, this.cameraState(), revoke); }
-  endObservation(owner = 'anatomy', restore = true) {
+  observationReturnState(owner:string){return this.cameraSessions.returnState(owner,this.cameraState());}
+  beginObservation(owner = 'anatomy', revoke?: () => void, returnCamera?:CameraState) { return this.cameraSessions.begin(owner, returnCamera??this.observationReturnState(owner), revoke); }
+  private observationFits=new Map<string,(kind:'all'|'selection')=>void>();
+  registerObservationFit(owner:string,fit:(kind:'all'|'selection')=>void){this.observationFits.set(owner,fit);return()=>{if(this.observationFits.get(owner)===fit)this.observationFits.delete(owner);};}
+  isObservationFit(owner:string,fit:(kind:'all'|'selection')=>void){return this.observationFits.get(owner)===fit;}
+  handleObservationFit(kind:'all'|'selection'){const fit=this.cameraOwner?this.observationFits.get(this.cameraOwner):undefined;if(!fit)return false;fit(kind);return true;}
+  endObservation(owner = 'anatomy', restore = true, smooth = true) {
     const previous = this.cameraSessions.end(owner, restore);
-    if (previous) this.moveCamera(previous);
+    if (previous) {this.moveCamera(previous,smooth);if(this.cameraTransition)this.cameraSessions.markReturn(owner,previous);}
   }
   get cameraOwner() { return this.cameraSessions.owner; }
   fitObservationBounds(box: THREE.Box3, padding = 1.25, smooth = false) {
@@ -138,7 +143,7 @@ export class AnatomySceneController {
     const transition = this.cameraTransition; if (!transition) return false;
     transition.elapsed += dt;
     this.applyCamera(interpolateCamera(transition.from, transition.to, transition.elapsed / .56));
-    if (transition.elapsed >= .56) this.cameraTransition = null;
+    if (transition.elapsed >= .56) {this.cameraTransition = null;this.cameraSessions.settleReturn();}
     return true;
   }
   private updateEntrance(dt: number) {

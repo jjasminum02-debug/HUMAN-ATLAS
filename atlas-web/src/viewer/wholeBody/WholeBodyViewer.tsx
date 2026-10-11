@@ -131,7 +131,7 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
     <div inert={!entered} ref={tools} className="body-tools" aria-label="모형 보기 설정">
       <span className="view-options-label">보기 옵션</span>
       <div className="view-options-row">
-        <button onClick={() => controller.current?.focus(regionIds)}>화면 맞춤</button>
+        <button onClick={() => {const c=controller.current;if(c instanceof DatasetSceneAdapter&&c.scene.handleObservationFit('all'))return;c?.focus(regionIds);}}>화면 맞춤</button>
         <button aria-pressed={bones} onClick={() => { const enabled = !bones; setBones(enabled); onBoneLayerChange?.(enabled); }}>뼈</button>
         <button aria-pressed={muscles} onClick={() => { const enabled = !muscles; setMuscles(enabled); onMuscleLayerChange?.(enabled); }}>근육</button>
         {staticPose && <button aria-pressed={nerves} onClick={() => { nerveLayerExplicitlyOff.current = nerves; setNerves(!nerves); }}>신경</button>}
@@ -139,7 +139,7 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
       <div className="selection-view-options">
         {!selectedNerve && <button disabled={!selectedId} aria-pressed={presentation.dim} onClick={() => updatePresentation({ ...presentation, dim: !presentation.dim })}>선택 강조</button>}
         <button disabled={!selectedMuscle || !selectedId || !muscles || !progress?.selectedAvailable || presentation.hidden.includes(selectedId)} title="선택한 근육을 숨겨 안쪽 구조를 봅니다." onClick={() => selectedId && setPresentation(previous => previous.hidden.includes(selectedId) ? previous : { ...previous, hidden: [...previous.hidden, selectedId] })}>근육 숨기기</button>
-        <button disabled={!selectedId || !progress?.selectedAvailable} onClick={() => controller.current?.focusSelection()}>선택 맞춤</button>
+        <button disabled={!selectedId || !progress?.selectedAvailable} onClick={() => {const c=controller.current;if(c instanceof DatasetSceneAdapter&&c.scene.handleObservationFit('selection'))return;c?.focusSelection();}}>선택 맞춤</button>
         {selectedNerve ? (selectedNerve.muscleKeys.length > 0 || nerveConceptMuscleKeys.length > 0) && <button disabled={!nerves} aria-pressed={presentation.highlightInnervation} onClick={() => updatePresentation({ ...presentation, highlightInnervation: !presentation.highlightInnervation })}>관련 근육 강조</button> : <button disabled={!selectedId || (!progress?.selectedAvailable && !presentation.translucent.includes(selectedId))} aria-pressed={Boolean(selectedId && presentation.translucent.includes(selectedId))} onClick={() => selectedId && updatePresentation({ ...presentation, translucent: presentation.translucent.includes(selectedId) ? presentation.translucent.filter(id => id !== selectedId) : [...presentation.translucent, selectedId] })}>선택 반투명</button>}
       </div>
     </div>
