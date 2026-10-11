@@ -1,0 +1,72 @@
+{
+  "pathsChanged": [
+    "featureWorkUnits.AT2",
+    "featurePlans.acupoint-at-361.nextUnit"
+  ],
+  "allOtherLogicalValuesPreserved": true,
+  "beforeSha256": "315793f51c41c0eba123c7bc78cf3a35ca916c6a5317718cf6bf8c3f314f90de",
+  "afterSha256": "06aa17375a4f69e7ef10fdb3b04c6942e47c269ba1dfb76ec1ad53e6d8417851",
+  "preUpdateHEAD": "76c6185429a440afdf139c79e7742bcab3b944f5",
+  "previousAT2": {
+    "status": "planned",
+    "feature": "acupoint-at-361",
+    "title": "전신 체표 취득·정합 경로 한 가지 결정",
+    "estimateMinutes": [
+      50,
+      80
+    ],
+    "dependsOn": [
+      "AT1"
+    ],
+    "spec": "work/tasks/AT2.md",
+    "promptFile": "work/tasks/AT2.md",
+    "targetCodes": []
+  },
+  "updatedAT2": {
+    "status": "complete",
+    "feature": "acupoint-at-361",
+    "title": "전신 체표 취득·정합 경로 한 가지 결정",
+    "estimateMinutes": [
+      50,
+      80
+    ],
+    "dependsOn": [
+      "AT1"
+    ],
+    "spec": "work/tasks/AT2.md",
+    "promptFile": "work/tasks/AT2.md",
+    "targetCodes": [],
+    "report": "work/reports/AT2.md",
+    "evidence": "work/evidence/AT2",
+    "validation": "work/evidence/AT2/validation.json",
+    "carrierSample": "atlas-data/acupoints/carriers/za-thigh-sample.json",
+    "result": {
+      "scope": "source_path_and_bounded_surface_sample_only",
+      "chosenPath": "source_bound_segmented_education_envelope",
+      "verifiedRegion": "right_middle_thigh_360_degree_strip",
+      "fullBodySkinComplete": false,
+      "mucosaComplete": false,
+      "actualDisplayedSurfaceCount": 1,
+      "actualViewCount": 3,
+      "nativeSamplesReplayed": 1024,
+      "vertices": 1024,
+      "triangles": 1920,
+      "dataBytes": 148379,
+      "geometryBufferBytes": 36096,
+      "thresholdsRaised": false,
+      "anchorInstancesCreated": 0,
+      "acceptedProductInstances": 0,
+      "ac1Ac2ProposalsPreservedUnresolved": 22,
+      "publicRedistribution": "held",
+      "professorReview": "not_performed"
+    },
+    "nextUnit": "AT3",
+    "noAutoAdvance": true
+  },
+  "nextUnit": "AT3",
+  "nextUnitExecuted": false,
+  "startedAt": "2026-10-11T07:51:28+00:00",
+  "recordedAt": "2026-10-11T08:23:09.859103+00:00",
+  "elapsedMinutes": 31.7,
+  "original80MinuteDeadlineSatisfied": true
+}

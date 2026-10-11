@@ -6741,7 +6741,7 @@
       "noAutoAdvance": true
     },
     "AT2": {
-      "status": "planned",
+      "status": "complete",
       "feature": "acupoint-at-361",
       "title": "전신 체표 취득·정합 경로 한 가지 결정",
       "estimateMinutes": [
@@ -6753,7 +6753,33 @@
       ],
       "spec": "work/tasks/AT2.md",
       "promptFile": "work/tasks/AT2.md",
-      "targetCodes": []
+      "targetCodes": [],
+      "report": "work/reports/AT2.md",
+      "evidence": "work/evidence/AT2",
+      "validation": "work/evidence/AT2/validation.json",
+      "carrierSample": "atlas-data/acupoints/carriers/za-thigh-sample.json",
+      "result": {
+        "scope": "source_path_and_bounded_surface_sample_only",
+        "chosenPath": "source_bound_segmented_education_envelope",
+        "verifiedRegion": "right_middle_thigh_360_degree_strip",
+        "fullBodySkinComplete": false,
+        "mucosaComplete": false,
+        "actualDisplayedSurfaceCount": 1,
+        "actualViewCount": 3,
+        "nativeSamplesReplayed": 1024,
+        "vertices": 1024,
+        "triangles": 1920,
+        "dataBytes": 148379,
+        "geometryBufferBytes": 36096,
+        "thresholdsRaised": false,
+        "anchorInstancesCreated": 0,
+        "acceptedProductInstances": 0,
+        "ac1Ac2ProposalsPreservedUnresolved": 22,
+        "publicRedistribution": "held",
+        "professorReview": "not_performed"
+      },
+      "nextUnit": "AT3",
+      "noAutoAdvance": true
     },
     "AT3": {
       "status": "planned",
@@ -7509,7 +7535,7 @@
         "AT28",
         "AT29"
       ],
-      "nextUnit": "AT2",
+      "nextUnit": "AT3",
       "conceptCount": 361,
       "channelCount": 14,
       "extraPointsIncluded": false,
