@@ -63,3 +63,5 @@ EXECUTION은 `/featureWorkUnits/AT5`와 feature plan의 `nextUnit=AT6`만 변경
 포함: 공통 acupoint schema/adapter/compiler/policy/migration, 기존 review/overlay의 integration·camera 보존 수정, 관련 tests/CLI/입력 안내, AT5 report/evidence 및 지정 EXECUTION 포인터. 제외: 사용자 WIP, DatasetSceneAdapter의 기존 변경, 원본/OpenSim_Models/T13, AC1/AC2·AT1–4 역사 evidence, 기존 carrier binary, 보기옵션·홈·로딩, 그 외 task.
 
 로컬 commit hash/정확한 파일 목록은 `commit-scope.json`와 후속 `commit-receipt.json`에 기록한다. push/배포는 수행하지 않는다. **다음은 AT6이며 자동 실행하지 않았다.** 붙여 넣을 프롬프트는 `work/evidence/AT5/next-AT6-prompt.txt`이다.
+
+실제 primary 로컬 commit: `8853633b19190614d1331efe89b34da37f4d5833` — 소유 172개 파일. 커밋 직후 남은 변경은 baseline WIP 5,966건과 path/status가 정확히 같고 tracked WIP 45개의 byte hash도 같다. 후속 영수증 commit은 이 report와 `commit-receipt.json` 두 파일만 포함한다.
