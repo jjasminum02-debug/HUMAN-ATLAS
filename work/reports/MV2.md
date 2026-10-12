@@ -176,3 +176,47 @@ Q02 대상은 왼쪽 `ZA-c7010a9-d75abb958e1463ceecb5430b`, `T66-PRIORITY-S04-L-
 커밋 포함은 공통 예산 모듈/검사, sourceMotionRepairs와 motionAssets 관련 검사·최소 수정, 이 report/versioned evidence 및 EXECUTION이다. GLB/repair manifest/원본/OpenSim/T13/AT21·22/기존45 WIP·기존5921미추적 파일은 제외하고 보존했다. isolated build 출력은 로컬에 보존하되 Git에서 제외한다. 로컬 commit hash·선별 포함 목록·남은status는 evidence/commit-receipt.json과 최종 답변에 남긴다.
 
 다음 수리는 **MV2 Q03 세 이두근 매핑 한 묶음**이다. [붙여 넣을 프롬프트](../evidence/MV2/2026-10-12-q02-r1/next-prompt-MV2-Q03.txt)를 남겼다. 전체 MV2 잔여는 Q03(3)/Q04(26)/Q05(2), 합31매핑이며 선택적humanReview는not_performed다. 경혈 계획의 다음은 **AT8**이다. 이번에는 Q02만 수행했고 다른 수리/AT/위임/push/배포는 실행하지 않았다.
+
+
+## 2026-10-12 Q03 — 이두근 3매핑 현행 learner 도달성·작용 판독
+
+**Q03 partial / acceptance=false.** Q01 돌출 수정, q01-learning-quality, Q02 통과는 보존했다. 이번 continuation은 Q03만 보완했다. 기존 r4 출력 GLB·authoring·registration hash가 모두 동결된 MV1 group21/23/24와 일치하므로 변형 자산은 수정하지 않았다. 실제 learner 화면에서 resting target highlight는 확인했으나 exact clip의 full action/return과 관련 복귀 흐름은 모두 완료하지 못했다. 세 mapping은 `not_checked`이며 prior MV1/Q03 observations의 `observed_ambiguous`를 그대로 분리해 둔다. 자연스러운 수축 통과가 아니다.
+
+[인수 checkpoint](../evidence/MV2/2026-10-12-q03-r2/resume-checkpoint.json), [화면 관찰 addendum](../evidence/MV2/2026-10-12-q03-r2/learner-screen-addendum.json), [결함 후보 분류](../evidence/MV2/2026-10-12-q03-r2/defects.json), [갱신된 repair queue](../evidence/MV2/2026-10-12-q03-r2/repair-queue.json), [remaining units](../evidence/MV2/2026-10-12-q03-r2/remaining-units.json), [validation](../evidence/MV2/2026-10-12-q03-r2/validation.json). 2026-10-11 MV1 contact sheets와 Q03 r1 동결 입력은 덮어쓰지 않고 참조했다.
+
+### 기준선·실제 최종 입력
+
+Q03 원 시작 HEAD `fa37d4109e33e4e31082570ac9d74e2708685e1f`, 현재 continuation HEAD도 동일하다. Q02 완료 기준 `5b51ff627ea048ee4d0c0f9e526a46268d96d094`는 시작 HEAD의 ancestor다. 시작 status는 r1 checkpoint의 628 entries / 45 tracked edits / 583 untracked이며 SHA-256 `5d808680bb46e312adee3a7324bc8e63070a59799267fa470d2afe42740f5f42`다. 이번 continuation 전 snapshot은 629 compressed entries / 45 tracked / 584 untracked, SHA-256 `39cd57d0f08e4e2a3c7df1763b00e2015847d37db23b44bd13363c9868f42411`이다. 기존 45 tracked edits, 기존 미추적 후보/r3 파일, OpenSim_Models/T13/역사 freeze/user WIP를 보존했다. EXECUTION/report는 continuation 직전 clean이었다.
+
+| MV1 group | side · sourceKey | registered learner pose observation | actual emitted GLB / SHA-256 / bytes | authoring SHA-256 |
+|---|---|---|---|---|
+| 21 elbow flexion | left · `ZA-c7010a9-b20b574e456449c5d571c7a1` | `팔꿈치 굽힘 자세에서 관찰`; source-family bound, targetJointIds empty | `t66-unit01-elbow-flexion-left-source-frame-r4/motion.glb` · `a263144376925c2ece792c965347f26911e6c6b9de4cc29dfc398983e8e3844d` · 2,100,760 B | `3eb8a4273f8a9af8603f73aed7a55f3ff853b7957f65fb4e836311ca66bccc68` |
+| 23 shoulder flexion | left · same sourceKey as group21 | `어깨 앞쪽 굽힘 자세에서 관찰`; separate clip, same sourceKey, targetJointIds empty | `t66-unit01-shoulder-flexion-left-source-frame-r4/motion.glb` · `13cb37b2d1bf048626cb79d46ed28a3c2f6453f1d19444c106e46b6ec2403e86` · 1,519,788 B | `71e5ace420cebbcd2fad2a1296a1f491a8e4d4c69f6b5805ac74624027818c65` |
+| 24 shoulder flexion | right · `ZA-c7010a9-a0c2ea00609e874a7faa926d` | `어깨 앞쪽 굽힘 자세에서 관찰`; source-family bound, targetJointIds empty | `t66-unit01-shoulder-flexion-right-source-frame-r4/motion.glb` · `8f7e3a5ea0a27a4b2a6254ce65c6b8ed01c99dab67f2e2e0266a7fed12225b96` · 1,518,568 B | `3df7de6e1c13891b574b5738179d1d949d17080cd340a7ca8802a08dcff3899d` |
+
+현재 GLB actual SHA/bytes, expected/registered SHA, Q03 start snapshot, motion-learning row 및 source-frame-r4 authoring `motionSha256`가 세 mapping 모두 일치한다. 기존 authoring은 각각 정확한 short-head source-surface pose observation이며 elbow 15°, shoulder 12°의 교육용 pose다. measured anatomical axis, attachment footprint, physiological ROM은 없다. group23은 group21과 sourceKey가 같지만 별도 clip이므로 한 재생 검사를 다른 mapping의 통과로 세지 않았다. 미등록 r3/plain WIP 후보는 그대로 보존했고 runtime 등록/최종 자산으로 채택하지 않았다.
+
+### 정적 검사 재사용 범위와 실제 learner 화면
+
+변경하지 않은 QC를 hash 기준으로 재사용했다. elbow는 513 interpolation geometry sample, 각 shoulder는 257이며 기존 기록에서 geometry/contact flags가 통과하고 flipped-face sample은 0이다. final-pose QC와 actual GLB→authoring hash 일치도 확인했다. rigid-trajectory 파일은 aggregate pass boolean 없는 transform diagnostic이며, continuous collision freedom을 주장하지 않는다. 이 수치로 수축 자연성, 완전 충돌 자유, 해부 정상성은 승인하지 않았다. 입력/코드 변경이 없어서 새 tests/typecheck/build는 실행하지 않았다.
+
+실제 native Chrome learner에서 left source route로 짧은갈래를 선택했을 때 기본 whole-body view에 선택 강조 teal이 보이고 주변 구조가 남아 있었다. 기능 탭에는 작용 미선택, disabled 재생과 disabled progress slider(0%)가 표시됐다. `근육 작용 찾기`에서 `팔꿈치 굽힘` 검색 결과는 0개였고 “이 범위의 근육 작용 시범은 준비 중입니다” 안내가 나타났다. 따라서 current-run group21 clip action/return은 수행하지 못했다. 이전 Q03 session의 group21 1x progress 22/53/62/74/48/43과 MV1 group21 0.25x action+return은 재생성하지 않고 재사용 evidence로만 남겼다.
+
+right source route는 오른쪽 side/짧은갈래 선택 및 구조 탭까지 실제로 열렸다. 기능 탭으로 가려는 클릭에서 Chrome이 사용자 제어 변경을 알렸고 이후 입력을 멈췄다. group24의 action/return을 검사했다고 주장하지 않는다. group23의 별도 어깨 clip 선택/재생도 이번 화면에서 성립시키지 못했다. 이전 MV1 slow evidence는 group23/24 action-only를 보여줄 뿐 완전 복귀 승인이 아니다. 현재 CUA 화면 이미지는 도구 결과에서 육안으로 확인했으나 이 경로에 screenshot file export가 없어 workspace screenshot으로 직렬화하지 않았다. 동결된 MV1 frame sheets를 아래 재사용한다.
+
+![Q03 group21 frozen MV1 frame sheet](../evidence/MV1/2026-10-11-run-01/visual/playback-contact-sheets-v3/21-e3c4c838061e-part-01.jpg)
+![Q03 group23 frozen MV1 frame sheet](../evidence/MV1/2026-10-11-run-01/visual/playback-contact-sheets-v3/23-5929d66867ef-part-01.jpg)
+![Q03 group24 frozen MV1 frame sheet](../evidence/MV1/2026-10-11-run-01/visual/playback-contact-sheets-v3/24-92fd0a2827e0-part-01.jpg)
+
+### 원인 후보·수정·남은 정확한 unit
+
+확정된 geometry/mechanical defect는 0건, confirmed cause 없음, repair 0건이다. 다음 판독 대상으로 source-family action reachability/clip binding, 측면 레이어 occlusion과 native surface overlap, elbow/shoulder pivot·weights·side/frame·contact, 완전 왕복과 선택/복귀를 분리해 남겼다. 이는 결함 후보이며 정적 형태 변화나 action 미재생만으로 원인을 단정하지 않았다. human review는 `not_performed`다.
+
+이번 Q03 acceptance를 막는 실제 unit은 아래뿐이다.
+
+1. group21 left elbow: 안정된 learner에서 exact clip의 기존 선택 경로를 찾고 1x/필요 시 slow 전체 cycle, 준비·중간·최대·역방향 복귀, 정면/측면/사선 attachment/neighbor, 빠른 stop/restart, muscle/side/layer 복귀, point/territory 재진입을 관찰한다.
+2. group23 left shoulder: group21과 같은 sourceKey라도 shoulder clip을 별도로 선택하고 full cycle·중간 프레임·접촉·복귀를 확인한다.
+3. group24 right shoulder: user-control이 끝난 learner에서 function/action path와 full cycle을 확인하고 좌우/주변구조/복귀·재진입을 대조한다.
+4. 실제 결함이 관찰된 경우에만 source/frame/side, pivot, weights, interpolation, contact를 분해해 공통 offline authoring/source-bound repair 여부를 결정한다.
+
+Q03 3개 mapping은 모두 승격하지 않았다. 전체 MV2는 여전히 Q03/Q04/Q05 3 groups / 31 mappings partial이며 `nextScheduledTask=AT8`, automatic execution=false다. Q04/Q05/AT8은 실행하지 않았다. 이번 변경 범위는 MV2 record/해당 lastDisposition/report/versioned Q03 evidence이며 기존 generated projection WIP 및 다른 파일은 stage하지 않는다.

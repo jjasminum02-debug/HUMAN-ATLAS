@@ -7855,42 +7855,65 @@
       "autoRunNext": false,
       "acceptancePassed": false,
       "report": "work/reports/MV2.md",
-      "evidence": "work/evidence/MV2/2026-10-12-q02-r1",
+      "evidence": "work/evidence/MV2/2026-10-12-q03-r2",
       "updatedDate": "2026-10-12",
       "lastRun": {
         "date": "2026-10-12",
-        "unit": "MV1-Q02-left-external-oblique-lateral-layering",
+        "unit": "MV1-Q03-biceps-lateral-contour-and-visibility",
         "owner": "Sol xhigh",
-        "startingHead": "2d182a6fcce068409c804f4e7391f607c14a3b20",
-        "acceptancePassed": true,
+        "startingHead": "fa37d4109e33e4e31082570ac9d74e2708685e1f",
+        "continuationHeadBeforeEvidence": "fa37d4109e33e4e31082570ac9d74e2708685e1f",
+        "acceptancePassed": false,
         "engineeringValidationPassed": true,
-        "learningExpressionAssessment": "passed_model_demo_with_native_surface_limits",
+        "learningExpressionAssessment": "not_accepted_visual_scope_incomplete",
         "geometryModified": false,
+        "assetsModified": false,
+        "authoringModified": false,
+        "runtimeModified": false,
         "finalAssets": [
-          "atlas-data/assets/motion/t66-priority-s04-flex/motion.glb"
+          "atlas-data/assets/motion/t66-unit01-elbow-flexion-left-source-frame-r4/motion.glb",
+          "atlas-data/assets/motion/t66-unit01-shoulder-flexion-left-source-frame-r4/motion.glb",
+          "atlas-data/assets/motion/t66-unit01-shoulder-flexion-right-source-frame-r4/motion.glb"
         ],
-        "actualSha256": "fd09265a937bebff65f0d1b095bc2d0350f13b7222e53a90c32bb40b80c43adf",
-        "actualBytes": 31306820,
-        "sameSceneLearnerSidesVerified": 2,
-        "denseFinalGlbTimesPerSide": 129,
-        "relatedTestsPassed": 21,
-        "packageBuildChecksPassed": 13,
-        "validation": "work/evidence/MV2/2026-10-12-q02-r1/validation-final.json",
+        "finalAssetSha256AndBytes": [
+          {
+            "uri": "atlas-data/assets/motion/t66-unit01-elbow-flexion-left-source-frame-r4/motion.glb",
+            "sha256": "a263144376925c2ece792c965347f26911e6c6b9de4cc29dfc398983e8e3844d",
+            "bytes": 2100760
+          },
+          {
+            "uri": "atlas-data/assets/motion/t66-unit01-shoulder-flexion-left-source-frame-r4/motion.glb",
+            "sha256": "13cb37b2d1bf048626cb79d46ed28a3c2f6453f1d19444c106e46b6ec2403e86",
+            "bytes": 1519788
+          },
+          {
+            "uri": "atlas-data/assets/motion/t66-unit01-shoulder-flexion-right-source-frame-r4/motion.glb",
+            "sha256": "8f7e3a5ea0a27a4b2a6254ce65c6b8ed01c99dab67f2e2e0266a7fed12225b96",
+            "bytes": 1518568
+          }
+        ],
+        "sameSceneLearnerSidesObservedAtRest": 2,
+        "completeQ03CyclesVerifiedThisRun": 0,
+        "screenStatusCounts": {
+          "pass": 0,
+          "fail": 0,
+          "not_checked": 3,
+          "error": 0
+        },
+        "observationClassCounts": {
+          "observed_ambiguous": 3
+        },
+        "newTestsRun": 0,
+        "newTypechecksRun": 0,
+        "newPackageBuildsRun": 0,
+        "validation": "work/evidence/MV2/2026-10-12-q03-r2/validation.json",
+        "screenEvidence": "work/evidence/MV2/2026-10-12-q03-r2/learner-screen-addendum.json",
         "humanReview": "not_performed",
         "publicRedistribution": "held",
         "physiologicalCertification": false,
-        "limits": {
-          "sourceEOInsideIOBaselineUniqueVerticesPerSide": 291,
-          "sampledNewEOInsideIOVerticesPerSide": 3,
-          "maximumNewSampledNearestSurfaceDepthMm": 0.8174728505162328,
-          "layerProbePosesPerSide": 5,
-          "uniqueSourceVerticesPerSide": 2665,
-          "allSurfaceIntersectionsExcluded": false,
-          "measuredAttachmentFootprints": false,
-          "physiologicalCertification": false,
-          "interpretation": "Native rough/overlapping surfaces retained. Small new sampled soft-layer overlaps are disclosed; local teaching/legibility acceptance is not anatomical normality or zero intersection approval."
-        },
-        "commitReceipt": "work/evidence/MV2/2026-10-12-q02-r1/commit-receipt.json"
+        "confirmedRepairCause": null,
+        "repairApplied": false,
+        "nextExactUnit": "Complete actual learner action selection and complete 1x/needed slow playback plus return/interruption/restore/re-entry for Q03 groups21/23/24."
       },
       "result": {
         "resolvedGroups": 2,
@@ -7899,14 +7922,24 @@
         "remainingObservedAmbiguousMappings": 31,
         "uninspectedMV1Mappings": 0,
         "wholeMV2Complete": false,
-        "learningQualityUnitsPassed": 1
+        "learningQualityUnitsPassed": 1,
+        "currentQ03MappingsNotPromoted": 3,
+        "q03ScreenStatusCounts": {
+          "pass": 0,
+          "fail": 0,
+          "not_checked": 3,
+          "error": 0
+        },
+        "q03ObservationClassCounts": {
+          "observed_ambiguous": 3
+        }
       },
-      "repairQueue": "work/evidence/MV2/2026-10-12-q02-r1/repair-queue.json",
-      "remainingUnits": "work/evidence/MV2/2026-10-12-q02-r1/remaining-units.json",
+      "repairQueue": "work/evidence/MV2/2026-10-12-q03-r2/repair-queue.json",
+      "remainingUnits": "work/evidence/MV2/2026-10-12-q03-r2/remaining-units.json",
       "nextRepairUnit": "MV1-Q03-biceps-lateral-contour-and-visibility",
       "nextScheduledTask": "AT8",
       "noAutoAdvance": true,
-      "startingHead": "6651c2049e0bb2e1e5215723e166cf6d5fc5ee51",
+      "startingHead": "fa37d4109e33e4e31082570ac9d74e2708685e1f",
       "localImplementationCommit": "3ee4587b12a7c8482d699f48fda71a0c430f0ae5",
       "priorEngineeringRun": {
         "date": "2026-10-12",
@@ -7927,7 +7960,7 @@
         "humanReview": "not_performed",
         "publicRedistribution": "held"
       },
-      "nextPrompt": "work/evidence/MV2/2026-10-12-q02-r1/next-prompt-MV2-Q03.txt",
+      "nextPrompt": "work/evidence/MV2/2026-10-12-q03-r2/next-prompt-MV2-Q03-resume.txt",
       "localImplementationCommitUnit": "prior MV1-Q01-rectus-femoris-knee-contour engineering",
       "priorLearningQualityRun": {
         "date": "2026-10-12",
@@ -7964,6 +7997,41 @@
         },
         "commitReceipt": "work/evidence/MV2/2026-10-12-q01-learning-quality-r1/commit-receipt.json",
         "localImplementationCommit": "2d182a6fcce068409c804f4e7391f607c14a3b20"
+      },
+      "priorQ02Run": {
+        "date": "2026-10-12",
+        "unit": "MV1-Q02-left-external-oblique-lateral-layering",
+        "owner": "Sol xhigh",
+        "startingHead": "2d182a6fcce068409c804f4e7391f607c14a3b20",
+        "acceptancePassed": true,
+        "engineeringValidationPassed": true,
+        "learningExpressionAssessment": "passed_model_demo_with_native_surface_limits",
+        "geometryModified": false,
+        "finalAssets": [
+          "atlas-data/assets/motion/t66-priority-s04-flex/motion.glb"
+        ],
+        "actualSha256": "fd09265a937bebff65f0d1b095bc2d0350f13b7222e53a90c32bb40b80c43adf",
+        "actualBytes": 31306820,
+        "sameSceneLearnerSidesVerified": 2,
+        "denseFinalGlbTimesPerSide": 129,
+        "relatedTestsPassed": 21,
+        "packageBuildChecksPassed": 13,
+        "validation": "work/evidence/MV2/2026-10-12-q02-r1/validation-final.json",
+        "humanReview": "not_performed",
+        "publicRedistribution": "held",
+        "physiologicalCertification": false,
+        "limits": {
+          "sourceEOInsideIOBaselineUniqueVerticesPerSide": 291,
+          "sampledNewEOInsideIOVerticesPerSide": 3,
+          "maximumNewSampledNearestSurfaceDepthMm": 0.8174728505162328,
+          "layerProbePosesPerSide": 5,
+          "uniqueSourceVerticesPerSide": 2665,
+          "allSurfaceIntersectionsExcluded": false,
+          "measuredAttachmentFootprints": false,
+          "physiologicalCertification": false,
+          "interpretation": "Native rough/overlapping surfaces retained. Small new sampled soft-layer overlaps are disclosed; local teaching/legibility acceptance is not anatomical normality or zero intersection approval."
+        },
+        "commitReceipt": "work/evidence/MV2/2026-10-12-q02-r1/commit-receipt.json"
       }
     }
   },
@@ -8032,7 +8100,7 @@
       "nextUnit": "MV2",
       "autoRunNext": false,
       "unitPolicy": "MV1 freezes exhaustive reachable inventory; MV2 repairs one frozen common-cause group per explicit run; completion requires remaining queue empty.",
-      "lastDisposition": "Q01 engineering and q01-learning-quality r9 pass preserved; Q02 local teaching inspection/budget contract pass with explicit native-surface overlap limits and unchanged GLB. MV2 partial: Q03/Q04/Q05, 3 groups/31 mappings; next explicit repair Q03; AT next AT8. No automatic execution."
+      "lastDisposition": "Q01 engineering, q01-learning-quality and Q02 pass preserved. Q03 remains partial/observed_ambiguous (3 mappings not promoted): current native learner showed a highlighted biceps rest target but elbow-flexion action search returned 0 categories, and the right shoulder function check was interrupted by user control. Exact r4 assets and authoring hashes/QCs are unchanged; no mechanical cause or repair confirmed. Q04/Q05 remain untouched; next scheduled task AT8; no automatic execution."
     }
   }
 }

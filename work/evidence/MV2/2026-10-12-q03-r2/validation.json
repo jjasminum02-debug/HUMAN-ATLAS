@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "mv2-q03-validation-v2",
+  "date": "2026-10-12",
+  "unit": "MV1-Q03-biceps-lateral-contour-and-visibility",
+  "unitStatus": "partial",
+  "acceptancePassed": false,
+  "engineeringValidationPassed": true,
+  "engineeringValidationScope": "Only unchanged input identity and previously passing r4 interpolation/contact/final-pose checks were reused; no runtime action pass is claimed.",
+  "learningExpressionAssessment": "not_accepted_visual_scope_incomplete",
+  "humanReview": "not_performed",
+  "geometryModified": false,
+  "assetsModified": false,
+  "authoringModified": false,
+  "runtimeModified": false,
+  "assetMappingsRechecked": 3,
+  "assetMappingsMatchFrozenMV1AndQ03Start": 3,
+  "reusedUnchangedChecks": [
+    "Current emitted r4 GLB bytes/SHA-256 match the frozen MV1 group21/23/24 records, motion-learning registration, authoring SHA and Q03 start snapshot.",
+    "Existing interpolation/contact QC hashes reused: elbow 513 geometry samples; each shoulder 257; recorded face-flip samples 0; geometry/contact pass flags true.",
+    "Existing final-pose QCs reused; actual current GLB SHA matches authoring motion SHA for each mapping.",
+    "Rigid trajectory files are diagnostics with no aggregate pass boolean; not treated as a natural-motion or collision pass."
+  ],
+  "newTestsRun": 0,
+  "newTypechecksRun": 0,
+  "newPackageBuildsRun": 0,
+  "reasonNoNewProductChecks": "No runtime, source, authoring or GLB input was changed; identical registered checks were reused.",
+  "screenStatusCounts": {
+    "pass": 0,
+    "fail": 0,
+    "not_checked": 3,
+    "error": 0
+  },
+  "observationClassCounts": {
+    "observed_ambiguous": 3
+  },
+  "remainingOverallMV2": {
+    "status": "partial",
+    "previouslyResolvedGroups": 2,
+    "previouslyResolvedMappings": 3,
+    "remainingObservedAmbiguousGroups": 3,
+    "remainingObservedAmbiguousMappings": 31,
+    "currentQ03MappingsNotPromoted": 3,
+    "nextScheduledTask": "AT8",
+    "automaticExecution": false
+  },
+  "repairDisposition": "No confirmed geometric/mechanical defect or repair cause. Keep all r4 GLBs and authoring unchanged. Current learner action reachability and full motion cycles remain incomplete; Q03 remains observed_ambiguous.",
+  "exactRemainingUnits": [
+    "Q03 group21: restore a stable controlled learner window; resolve the existing source-family action path without changing camera/UI policy; play the exact left elbow clip at 1x and needed slow speed through rest, preparation, intermediate, maximum, reverse action and return; inspect frontal/lateral/oblique attachment, adjacent layers, selection emphasis, fast stop/restart, muscle/side/layer restore, and point/territory re-entry.",
+    "Q03 group23: independently bind the exact left shoulder-flexion clip despite sharing sourceKey with group21; inspect 1x and needed slow full cycles and keyframes with left attachment/pivot, neighboring structures, visibility and return; repeat interruption/restart and restore/re-entry checks.",
+    "Q03 group24: reopen the exact right shoulder source route after Chrome is available; verify function/action selection and complete 1x/needed slow rest/action/midframe/return with bilateral context, right side, layers, rapid interruption, restore and point/territory re-entry.",
+    "Only if actual local observations establish a mechanical defect, separate source/frame/side, pivot, weights, interpolation and contact and apply the smallest offline source-bound repair. Otherwise retain the specific ambiguity and do not infer a natural-contraction pass."
+  ],
+  "nextAction": "Resume only Q03 after Chrome is available; complete exact clip selection, complete cycles, midframe/local view, interruption/restore and point/territory re-entry. Do not execute Q04/Q05 or AT8."
+}
