@@ -220,3 +220,24 @@ right source route는 오른쪽 side/짧은갈래 선택 및 구조 탭까지 �
 4. 실제 결함이 관찰된 경우에만 source/frame/side, pivot, weights, interpolation, contact를 분해해 공통 offline authoring/source-bound repair 여부를 결정한다.
 
 Q03 3개 mapping은 모두 승격하지 않았다. 전체 MV2는 여전히 Q03/Q04/Q05 3 groups / 31 mappings partial이며 `nextScheduledTask=AT8`, automatic execution=false다. Q04/Q05/AT8은 실행하지 않았다. 이번 변경 범위는 MV2 record/해당 lastDisposition/report/versioned Q03 evidence이며 기존 generated projection WIP 및 다른 파일은 stage하지 않는다.
+
+
+## 2026-10-12 Q03 continuation r3 — 실제 learner playback 확인
+
+**Q03 통과(등록된 posture_observation 재생 경로와 화면 판정 범위). 전체 MV2는 partial이며 acceptancePassed=false다.** Q01 engineering, q01-learning-quality, Q02 결과를 유지했다. Q03의 세 clip은 같은 source의 두 어깨 동작을 별도로 선택해 각각 확인했다. 근육 작용 검색 결과 0건을 자료 부재로 판단하지 않고, 실제 `기능 → 자세에서 관찰하기 → 정확한 동작 선택 → 움직임으로 이해하기` 경로를 사용했다.
+
+[재개 시작·소유 경계](../evidence/MV2/2026-10-12-q03-r3/start.json), [실제 learner 상태·시각 판정](../evidence/MV2/2026-10-12-q03-r3/learner-screen-addendum.json), [검증 요약](../evidence/MV2/2026-10-12-q03-r3/validation.json), [repair queue](../evidence/MV2/2026-10-12-q03-r3/repair-queue.json), [정확한 잔여 unit](../evidence/MV2/2026-10-12-q03-r3/remaining-units.json), [localhost 페이지·모듈·GLB 응답](../evidence/MV2/2026-10-12-q03-r3/server-asset-verification.log).
+
+| group / option | side · source | clip | 현행 GLB (SHA-256 · bytes) | 화면 판정 |
+|---|---|---|---|---|
+| 21 / 298 | left · `ZA-c7010a9-b20b574e456449c5d571c7a1` | elbow flexion | `a263144376925c2ece792c965347f26911e6c6b9de4cc29dfc398983e8e3844d` · 2,100,760 | pass |
+| 23 / 297 | left · same source, separately selected | shoulder flexion left | `13cb37b2d1bf048626cb79d46ed28a3c2f6453f1d19444c106e46b6ec2403e86` · 1,519,788 | pass |
+| 24 / 299 | right · `ZA-c7010a9-a0c2ea00609e874a7faa926d` | shoulder flexion right | `8f7e3a5ea0a27a4b2a6254ce65c6b8ed01c99dab67f2e2e0266a7fed12225b96` · 1,518,568 | pass |
+
+세 자산은 이전 r4 등록 hash와 일치했고 localhost 실제 GET도 전부 200 및 같은 byte/hash를 반환했다(합계 5,139,116 bytes). 현재 learner에서 left elbow, 같은 left source의 별도 shoulder clip, right shoulder clip을 정확히 열었다. 각 clip은 1배속 한 주기/역방향 또는 반복 진행/중간 자세/최대 부근/정지 후 0% 복귀를 확인했다. 화면은 대상 short head를 teal로 강조하면서 견갑·상완·팔꿈치·전완 등 주변 구조를 함께 표시했다. 샘플된 화면에서 새 부착부 이탈, 관통, 접힘/뒤집힘, 과도한 돌출, 주변 분리 또는 갑작스러운 pop은 확인되지 않았다. 동일 asset hash의 기존 interpolation/contact/final-pose 검증(팔꿈치 513, 어깨 각 257 sample; 기록된 면 뒤집힘 0)을 재사용했다. 이 정적 QC와 표본 화면은 모든 각도의 충돌 부재나 정상 생리 수축을 뜻하지 않는다.
+
+공통 흐름은 뼈 레이어 OFF→ON 복원, 재생 중지/원자세 복귀와 재시작 조작, 경혈 학습에서 왼쪽 LU7 열결 선택 후 닫아 같은 왼쪽 short-head/기능/팔꿈치 선택으로 복귀하는 것을 확인했다. 근육 레이어는 계속 ON이었다. 필요 slow-motion 관찰은 추가하지 않았다. 세 옵션 모두 UI가 **주변 구조 관찰이며 선택 근육 자체의 작용 시범이 아님**을 표시한다. 따라서 Q03 기술·학습화면 pass는 posture observation 전달만 승인하며, 이두근 수축·해부학적 부착 정확도·임상 정상 범위·사람 검토를 승인하지 않는다. `humanReview=not_performed`, `publicRedistribution=held`, physiological certification=false다.
+
+기하·authoring·등록·runtime 수리는 확인된 원인이 없어 하지 않았고 기존 GLB 원본을 보존했다. 새 제품 테스트/typecheck/build는 입력 변경이 없어 실행하지 않았다. 실제 Safari 화면은 CUA 도구 출력에서 판독했으며 도구의 screenshot API가 local file export를 제공하지 않아 새 screenshot binary 파일은 evidence 폴더에 직렬화하지 않았다. 해당 화면 접근 관찰과 frozen MV1 frame sheets의 재사용 경계는 위 JSON에 기록했다.
+
+이 Q03 unit 뒤에도 전체 MV2는 **partial**이다. Q01/Q02/Q03 세 그룹·6매핑이 resolved 범위이고, Q04 26 + Q05 2 = 28매핑이 미검사로 남는다. `nextScheduledTask=AT8`와 auto-execution=false를 유지했다. 다음 정확한 unit은 Q04/Q05의 별도 사용자 요청이며 이번에는 실행하지 않았다. AT, Q04, Q05, push 및 배포는 하지 않았다.
