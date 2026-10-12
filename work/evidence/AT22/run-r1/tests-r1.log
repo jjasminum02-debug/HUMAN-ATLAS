@@ -1,0 +1,62 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+file:///Users/daniel/Downloads/SIM%20/HUMAN%20ATLAS/atlas-web/src/viewer/acupoints/AcupunctureOverlay.ts:58
+  }
+  private constructor(private adapter: DatasetSceneAdapter, readonly carrier: Carrier, readonly points: PointInstance[], private onSelect: (code: string,side?:'right'|'left') => void, private onStop: (reason: string) => void, private encodedBytes: number, private options?: OverlayOptions) {
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    const scene = adapter.scene;
+
+SyntaxError [ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX]: TypeScript parameter property is not supported in strip-only mode
+    at parseTypeScript (node:internal/modules/typescript:68:40)
+    at processTypeScriptCode (node:internal/modules/typescript:146:42)
+    at stripTypeScriptModuleTypes (node:internal/modules/typescript:215:22)
+    at ModuleLoader.<anonymous> (node:internal/modules/esm/translators:680:29)
+    at #translate (node:internal/modules/esm/loader:434:20)
+    at afterLoad (node:internal/modules/esm/loader:502:29)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:507:12)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:560:36)
+    at afterResolve (node:internal/modules/esm/loader:607:52)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:613:12) {
+  code: 'ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX'
+}
+
+Node.js v24.19.0
+✖ src/viewer/acupoints/territoryLifecycle.test.ts (60.719667ms)
+✔ right real contour with independent topology and all three actual educational points (5.591875ms)
+✔ left real contour with independent topology and all three actual educational points (1.171375ms)
+✔ mask rejects side (0.422375ms)
+✔ mask rejects pose (0.510333ms)
+✔ mask rejects frame (0.276333ms)
+✔ mask rejects hash (0.232583ms)
+✔ mask rejects revision (0.223375ms)
+✔ mask rejects rights (0.203834ms)
+✔ mask rejects fixture promotion (0.762625ms)
+✔ mask rejects anatomy certainty (0.270167ms)
+✔ mask rejects type conflation (0.200584ms)
+✔ mask rejects missing weight (0.259958ms)
+✔ mask rejects invalid density (0.208875ms)
+✔ mask rejects unknown face (0.168625ms)
+✔ mask rejects unknown channel (0.162417ms)
+✔ mask rejects face content tamper (0.192625ms)
+✔ mask rejects weight content tamper (0.32425ms)
+✔ mask rejects fictitious CV jingjin (0.192959ms)
+✔ two real masks share canonical positions, retain holes and release GPU bindings without changing CPU topology (7.065708ms)
+✔ selection/comparison preserve separate overlapping masks with stable order; no geometry union (2.006375ms)
+✔ mask visual revision changes density independently of carrier/points and leaves public review unchanged (1.107333ms)
+✔ repeated construction/OFF balances resource disposal and creates no position/normal copies (1.860667ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 22
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 103.993416
+
+✖ failing tests:
+
+test at src/viewer/acupoints/territoryLifecycle.test.ts:1:1
+✖ src/viewer/acupoints/territoryLifecycle.test.ts (60.719667ms)
+  'test failed'

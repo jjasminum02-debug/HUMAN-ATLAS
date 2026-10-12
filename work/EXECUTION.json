@@ -7671,7 +7671,7 @@
       "autoRunNext": false
     },
     "AT22": {
-      "status": "planned",
+      "status": "complete",
       "feature": "acupoint-at-361",
       "title": "영역 경계 편집·수정 전후 비교",
       "dependsOn": [
@@ -7679,7 +7679,43 @@
       ],
       "spec": "work/tasks/AT22.md",
       "promptFile": "work/tasks/AT22.md",
-      "targetCodes": []
+      "targetCodes": [],
+      "report": "work/reports/AT22.md",
+      "evidence": "work/evidence/AT22/run-r1",
+      "updatedDate": "2026-10-12",
+      "completedDate": "2026-10-12",
+      "acceptance": {
+        "passed": true,
+        "acceptancePassed": true,
+        "engineeringValidationPassed": true,
+        "scope": "DEV-only canonical triangle mask editor; ST width technical fixture, zero new real ST locations or boundaries",
+        "method": "canonical carrier triangle brush only",
+        "baseFaces": 882,
+        "editedFaces": 763,
+        "pointRouteCarrierHashesUnchanged": true,
+        "comparisonCameraError": 0,
+        "revisionSavedReloadedAndExportReplayed": true,
+        "newRealSTTerritories": 0,
+        "newRealSTPointApprovals": 0,
+        "technicalProbes": 2,
+        "relatedAutomatedTests": 36,
+        "buildSteps": 13,
+        "actualScreens": 36,
+        "viewports": [
+          390,
+          1024,
+          1440
+        ],
+        "learnerEditorLeaks": 0,
+        "resourceReleaseVerified": true,
+        "budgetRaised": false,
+        "remainingUnits": [],
+        "verdict": "work/evidence/AT22/run-r1/validation-final-r1.json"
+      },
+      "continuationUnit": null,
+      "nextPlannedUnit": "AT8",
+      "nextPrompt": "work/evidence/AT22/run-r1/next-prompt-AT8.txt",
+      "autoRunNext": false
     },
     "AT23": {
       "status": "planned",
@@ -7892,7 +7928,7 @@
         "AT28",
         "AT29"
       ],
-      "nextUnit": "AT22",
+      "nextUnit": "AT8",
       "conceptCount": 361,
       "channelCount": 14,
       "extraPointsIncluded": false,

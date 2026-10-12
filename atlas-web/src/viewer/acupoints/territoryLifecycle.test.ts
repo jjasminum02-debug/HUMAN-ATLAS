@@ -14,6 +14,14 @@ test('OFF during module import cannot start a data request or allocate/restart c
  const on=h.o.showTerritories(true);await h.o.showTerritories(false);imported.resolve(h.module);await on;
  assert.equal(h.counts().allocated,0);assert.equal(h.counts().requests.length,0);assert.equal(h.o.territoryLayer,null);assert.equal(h.o.territoryLoading,false);
 });
+test('editor revision replacement shares the common layer and OFF invalidates its pending module',async()=>{
+ const h=harness(),imported=deferred<typeof h.module>();h.o.loadTerritoryModule=()=>imported.promise;
+ const pending=h.o.replaceTerritoryMasks([],'ST',20);await h.o.showTerritories(false);imported.resolve(h.module);await pending;
+ assert.equal(h.counts().allocated,0);assert.equal(h.o.territoryLayer,null);
+ h.o.loadTerritoryModule=async()=>h.module;await h.o.replaceTerritoryMasks([],'ST',20);await h.o.replaceTerritoryMasks([],'ST',25);
+ assert.equal(h.counts().allocated,2);assert.equal(h.counts().released,1);assert.equal(h.o.territoryEncodedBytes,25);assert.equal(h.o.group.children.length,1);
+ await h.o.showTerritories(false);assert.equal(h.counts().released,2);assert.equal(h.o.territoryEncodedBytes,0);assert.equal(h.o.group.children.length,0);
+});
 test('OFF aborts in-flight mask fetch; late parse cannot create a layer',async()=>{
  const h=harness(),on=h.o.showTerritories(true);await Promise.resolve();await Promise.resolve();assert.equal(h.counts().requests.length,1);
  await h.o.showTerritories(false);assert.equal(h.counts().requests[0].aborted,true);h.pending.resolve({masks:[],encodedBytes:10});await on;

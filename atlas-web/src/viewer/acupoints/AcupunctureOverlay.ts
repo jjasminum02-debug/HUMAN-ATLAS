@@ -119,13 +119,36 @@ export class AcupunctureOverlay {
       const loaded=await module.loadTerritoryPackage([...this.sharedCarriers.values()].map(c=>c.carrier),context,abort.signal,cancelled);if(cancelled())return;
       let masks=loaded.masks;
       if(fixture!=='none'&&import.meta.env.DEV) {const qa=await import('./territoryCompositingFixture.ts');if(cancelled())return;masks=await qa.compositingFixtures(masks,fixture);if(cancelled())return;}
-      const layer=new module.TerritoryMaskLayer(masks,this.sharedCarriers);layer.show(true,mode,channel);
-      const d=this.adapter.resources.dataset,cost=this.cost(),extra=layer.diagnostics();
-      const base={overviewBytes:d.chunks.filter(c=>c.level==='overview'&&!c.selectionScoped).reduce((n,c)=>n+c.bytes,0)+Math.max(0,...d.chunks.filter(c=>c.selectionScoped).map(c=>c.bytes)),geometryBytes:this.adapter.resources.queue.bytes,triangles:d.instances.reduce((n,i)=>n+i.lods.overview.triangles,0)};
-      if(!withinOverlayBudget(base,{bytes:cost.geometryBufferBytes+extra.additionalBufferBytes,overviewBytes:cost.encodedBytes+loaded.encodedBytes,triangles:cost.triangles+extra.triangles})){layer.dispose();throw Error('학습 영역이 기존 그래픽 예산을 초과합니다.');}
-      if(cancelled()){layer.dispose();return;}
-      this.territoryLayer=layer;this.territoryEncodedBytes=loaded.encodedBytes;this.group.add(layer.group);this.adapter.scene.requestRender();
+      this.installTerritoryLayer(module,masks,loaded.encodedBytes,mode,channel,cancelled);
     }finally {if(!cancelled()){this.territoryLoading=false;this.territoryRequest=null;this.inspect();}}
+  }
+  /** Revision replacement shares the existing layer, budget, cancellation and camera session. */
+  async replaceTerritoryMasks(masks:import('./schema.ts').TerritoryMask[],channel:string,encodedBytes=0,technicalReview=false) {
+    if(this.dead)return;
+    const token=++this.territoryGeneration;this.territoryRequest?.abort();this.territoryRequest=null;
+    const cancelled=()=>this.dead||token!==this.territoryGeneration;
+    const module=await this.loadTerritoryModule();if(cancelled())return;
+    const c=this.carrier,context={datasetRevision:c.datasetRevision,frameId:c.frameId,unit:c.unit,poseId:c.poseId};
+    const allowFixture=technicalReview&&import.meta.env.DEV;
+    for(const m of masks){const surface=this.sharedCarriers.get(m.carrierId);if(!surface)throw Error('Missing revision carrier');await module.validateTerritoryMask(m,surface.carrier,context,allowFixture);if(cancelled())return;}
+    this.territoryMode='selected';this.territoryChannel=channel;
+    this.installTerritoryLayer(module,masks,encodedBytes,'selected',channel,cancelled);
+    this.inspect();
+  }
+  private installTerritoryLayer(module:Awaited<ReturnType<typeof this.loadTerritoryModule>>,masks:import('./schema.ts').TerritoryMask[],encodedBytes:number,mode:TerritoryMode,channel:string,cancelled:()=>boolean) {
+    const layer=new module.TerritoryMaskLayer(masks,this.sharedCarriers);layer.show(true,mode,channel);
+    const d=this.adapter.resources.dataset,cost=this.cost(),extra=layer.diagnostics(),old=this.territoryLayer?.diagnostics();
+    const base={overviewBytes:d.chunks.filter(c=>c.level==='overview'&&!c.selectionScoped).reduce((n,c)=>n+c.bytes,0)+Math.max(0,...d.chunks.filter(c=>c.selectionScoped).map(c=>c.bytes)),geometryBytes:this.adapter.resources.queue.bytes,triangles:d.instances.reduce((n,i)=>n+i.lods.overview.triangles,0)};
+    if(!withinOverlayBudget(base,{bytes:cost.geometryBufferBytes-(old?.additionalBufferBytes??0)+extra.additionalBufferBytes,overviewBytes:cost.encodedBytes-this.territoryEncodedBytes+encodedBytes,triangles:cost.triangles-(old?.triangles??0)+extra.triangles})){layer.dispose();throw Error('학습 영역이 기존 그래픽 예산을 초과합니다.');}
+    if(cancelled()){layer.dispose();return;}
+    this.territoryLayer?.dispose();this.territoryLayer=layer;this.territoryEncodedBytes=encodedBytes;this.group.add(layer.group);this.adapter.scene.requestRender();
+  }
+  /** Development editing picks the already-owned hidden canonical carrier. */
+  reviewCarrierSurface(id:string) {
+    if(!import.meta.env.DEV)throw Error('Carrier editing is development-only');
+    const surface=this.sharedCarriers.get(id);if(!surface)throw Error('Missing review surface');
+    const mesh=this.group.children.find(n=>n instanceof THREE.Mesh&&n.geometry===surface.geometry) as THREE.Mesh;
+    return {...surface,mesh};
   }
   select(code:string,side:'right'|'left'=this.selectedSide) {
     this.selectedSide=side;this.selected=this.markers.has(`${code}:${side}`)?code:null;this.label.hidden=!this.selected;this.tour.index=(this.options?.order??LUNG_ORDER).indexOf(code);

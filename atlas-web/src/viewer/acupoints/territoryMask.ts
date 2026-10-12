@@ -8,10 +8,10 @@ const colours:Record<string,number>={LU:0x438b9a,LI:0x9a7354,ST:0xaa8955,SP:0x85
 const hash=async(bytes:BufferSource)=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(n=>n.toString(16).padStart(2,'0')).join('');
 export const maskContentHash=(m:Pick<TerritoryMask,'triangleIds'|'vertexWeights'>)=>hash(new TextEncoder().encode(JSON.stringify([m.triangleIds,m.vertexWeights])));
 /** Independent mask provenance never grants a point position or clinical boundary. */
-export async function validateTerritoryMask(m:TerritoryMask,c:Carrier,context:AnchorContext) {
+export async function validateTerritoryMask(m:TerritoryMask,c:Carrier,context:AnchorContext,allowTechnicalFixture=false) {
   validateCarrier(c,context);await verifyCarrierHash(c);
   if(!['LU','LI','ST','SP','HT','SI','BL','KI','PC','TE','GB','LR','CV','GV'].includes(m.channel)||(['CV','GV'].includes(m.channel)!==(m.side==='midline')))throw Error('territory channel/laterality');
-  if(m.schemaVersion!==1||m.scope!=='real_input'||m.carrierId!==c.id||m.carrierRevision!==c.revision||m.carrierHash!==c.topologySha256||m.side!==c.side
+  if(m.schemaVersion!==1||(m.scope!=='real_input'&&!(allowTechnicalFixture&&m.scope==='technical_fixture'))||m.carrierId!==c.id||m.carrierRevision!==c.revision||m.carrierHash!==c.topologySha256||m.side!==c.side
     ||m.datasetRevision!==context.datasetRevision||m.frameId!==context.frameId||m.poseId!==context.poseId||m.unit!=='m')throw Error('stale territory binding');
   const kind=m.basisKind==='cutaneous'?'cutaneous':m.basisKind==='sinew_projection'?'sinew_projection':'teaching_region';
   if(m.kind!==kind||!['ai','human'].includes(m.author)||m.canonicalBoundaryClaim!==false||m.precision!=='educational_approximation_not_skin'
