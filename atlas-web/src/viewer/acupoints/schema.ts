@@ -56,6 +56,16 @@ export interface Territory {
   triangleMask: { triangle: number; weight: number }[]; sources: SourceRef[];
   interpretation: 'source_summary' | 'ai_proposal' | 'lecture'; professorReview: 'not_performed' | 'reviewed';
 }
+/** Compact mask revision on an immutable carrier; density is a visual value only. */
+export interface TerritoryMask extends Omit<Territory,'triangleMask'> {
+  schemaVersion:1; scope:'real_input'|'technical_fixture';
+  carrierId:string; carrierRevision:string; datasetRevision:string; frameId:string; unit:'m'; poseId:string;
+  triangleIds:number[]; vertexWeights:[number,number][];
+  basisKind:'surface_learning_connection'|'cutaneous'|'sinew_projection'|'professor_interpretation';
+  author:'ai'|'human'; precision:'educational_approximation_not_skin'; canonicalBoundaryClaim:false;
+  rights:{localObservation:'supported'|'held';publicRedistribution:'held'|'supported';sourceIds:string[]};
+  boundaryInputSha256:string; faceSetSha256:string; contentSha256:string;
+}
 export interface SinewPath { id: string; revision: string; sources: SourceRef[]; branches: SourcedText[]; muscles: { sourceKey: string; part: string | null; evidence: SourcedText }[] }
 export interface LearningAssociation { id: string; revision: string; from: string; to: string | null; kind: 'spatial_context' | 'lecture_association'; explanation: SourcedText | null; unresolvedOriginal: string | null }
 export type LearningSelection = { kind: 'anatomy'; sourceKey: string } | { kind: 'acupoint'; code: string; side: Side } | { kind: 'territory'; id: string };

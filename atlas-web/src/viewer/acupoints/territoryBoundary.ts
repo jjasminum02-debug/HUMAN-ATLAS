@@ -35,7 +35,7 @@ const channels=['LU','LI','ST','SP','HT','SI','BL','KI','PC','TE','GB','LR','CV'
 /** Validate explicit loops against frozen shared topology. Face IDs are never exported here.
  * The adjacency traversal proves the boundary is executable; AT21 owns mask production.
  */
-export async function validateTerritoryBoundary(d:TerritoryBoundaryDraft,c:Carrier,context:AnchorContext) {
+export async function replayTerritoryBoundary(d:TerritoryBoundaryDraft,c:Carrier,context:AnchorContext) {
   if(d.schemaVersion!==1 || d.usage!=='offline_authoring_only' || !sides.includes(d.side) || !bases.includes(d.basisKind) || !d.components.length) throw Error('boundary input contract');
   if(!channels.includes(d.channel) || (['CV','GV'].includes(d.channel)!==(d.side==='midline'))) throw Error('boundary channel/laterality');
   const kind=d.basisKind==='cutaneous'?'cutaneous':d.basisKind==='sinew_projection'?'sinew_projection':'teaching_region';
@@ -84,7 +84,12 @@ export async function validateTerritoryBoundary(d:TerritoryBoundaryDraft,c:Carri
   }
   const bytes=new Uint32Array([...occupied].sort((a,b)=>a-b));
   const digest=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(x=>x.toString(16).padStart(2,'0')).join('');
-  return {componentCounts,controlPositions,faceSetSha256:digest,maskCreated:false as const,sourceBoundaryConfirmed:false as const};
+  return {componentCounts,controlPositions,triangleIds:Array.from(bytes),faceSetSha256:digest,maskCreated:false as const,sourceBoundaryConfirmed:false as const};
+}
+
+/** Historical AT20 audit remains non-exporting; mask compilation reuses the same traversal. */
+export async function validateTerritoryBoundary(d:TerritoryBoundaryDraft,c:Carrier,context:AnchorContext) {
+  const {triangleIds:_ids,...audit}=await replayTerritoryBoundary(d,c,context);return audit;
 }
 
 /** Converts provenance to the existing Territory vocabulary only after AT21 authors a mask. */

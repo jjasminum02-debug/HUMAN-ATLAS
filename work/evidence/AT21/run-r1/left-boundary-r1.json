@@ -1,0 +1,1586 @@
+{
+  "schemaVersion": 1,
+  "usage": "offline_authoring_only",
+  "id": "LU-forearm-left",
+  "channel": "LU",
+  "side": "left",
+  "revision": "AT21-left-r1",
+  "kind": "teaching_region",
+  "basisKind": "surface_learning_connection",
+  "boundaryRevision": "LU-forearm-left-r1",
+  "interpretation": "ai_proposal",
+  "author": "ai",
+  "professorReview": "not_performed",
+  "canonicalBoundaryClaim": false,
+  "precision": "educational_approximation_not_skin",
+  "context": {
+    "datasetRevision": "7a337bd05380da5790cb64d4d62247590e29c1b73e2989daeb419c8173d0e982+bp3d-r4-t100-cached-candidates-spatial-status-v4+nerve-scene-t66-v1",
+    "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+    "unit": "m",
+    "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off"
+  },
+  "rights": {
+    "localObservation": "supported",
+    "publicRedistribution": "held",
+    "sourceIds": [
+      "ZA-CC-BY-SA-4.0",
+      "BP3D-CC-BY-SA-2.1-JP"
+    ]
+  },
+  "carrierBinding": {
+    "manifest": "atlas-data/acupoints/carriers/education-r1/manifest.json",
+    "manifestSha256": "039bf3606e9ed2f28c1e906ab5ea9ee062d1302fc06e001b819a75ead7cc7a73",
+    "id": "arm-left-0",
+    "topologySha256": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+    "component": "arm-left",
+    "noNewGeometry": true
+  },
+  "sources": [
+    {
+      "id": "kmcric-LU6",
+      "title": "KMCRIC 표준경혈 DB — LU6",
+      "edition": "public web, checked 2026-10-12",
+      "locator": "LU6, forearm anterior-lateral relation",
+      "url": "https://www.kmcric.com/database/acupoint/LU/LU6",
+      "retrievedDate": "2026-10-12",
+      "access": "primary_page_read",
+      "claim": "팔꿈치–손목의 앞가쪽 연결 구간이 기본 위치 지표다.",
+      "claimKind": "point_landmark_relation",
+      "definesAreaBoundary": false,
+      "rights": {
+        "notice": "Copyright KMCRIC. All Rights Reserved.",
+        "localResearch": "short attributed factual paraphrase",
+        "fullTextRedistribution": "held",
+        "illustrationsRedistribution": "held"
+      },
+      "treatmentTextUsed": false
+    },
+    {
+      "id": "kmcric-LU8",
+      "title": "KMCRIC 표준경혈 DB — LU8",
+      "edition": "public web, checked 2026-10-12",
+      "locator": "부위 / Note",
+      "url": "https://www.kmcric.com/database/acupoint/LU/LU8",
+      "retrievedDate": "2026-10-12",
+      "access": "primary_page_read",
+      "claim": "경거는 아래팔 앞가쪽의 노뼈붓돌기–노동맥 사이, 태연보다 몸쪽인 관계다.",
+      "claimKind": "point_landmark_relation",
+      "definesAreaBoundary": false,
+      "rights": {
+        "localResearch": "short attributed factual paraphrase",
+        "fullTextRedistribution": "held"
+      },
+      "treatmentTextUsed": false
+    }
+  ],
+  "landmarks": [
+    {
+      "id": "LU9-left-10",
+      "anatomy": "Superficial registration of addressed radiocarpal interval",
+      "native": {
+        "carrierId": "ZA-c7010a9-3e5e8ba5b4c22f5a18105199",
+        "carrierRevision": "native-world-frozen-r1",
+        "carrierHash": "7ebb6f4aa7006e01509a665c88c1ffc27da1b006c6cea599111318619495749f",
+        "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "unit": "m",
+        "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+        "side": "left",
+        "triangle": 488,
+        "barycentric": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ]
+      },
+      "surface": {
+        "triangle": 538,
+        "barycentric": [
+          0.3812204257510965,
+          0.11104495314661487,
+          0.5077346211022886
+        ],
+        "carrierId": "wrist-link-left-0"
+      },
+      "sourceKey": "ZA-c7010a9-3e5e8ba5b4c22f5a18105199",
+      "modelIndicator": {
+        "kind": "educational_model_indicator",
+        "observedSkinLandmark": false,
+        "construction": "APB superficial facet488 supports transfer of styloid/scaphoid/APL structural relation to the current palmar envelope. APB itself is not the location definition.",
+        "limitations": [
+          "No observed skin crease, radial artery or pulsation; approximate structural model indicator."
+        ]
+      },
+      "inputFile": "work/evidence/AT6/resume-r1/bilateral-rules-r9.json",
+      "inputSha256": "4b672b8cca8aecd7962a26233c8da71052f53b46b7bad65411a81e3f279909a4",
+      "locator": "units[LU6-left].landmarks[LU9-left-10]"
+    },
+    {
+      "id": "LU5-left-12",
+      "anatomy": "Lateral cubital interval adjacent to distal biceps tendon",
+      "native": {
+        "carrierId": "ZA-c7010a9-31252d028a346dedb2eeff85",
+        "carrierRevision": "native-world-frozen-r1",
+        "carrierHash": "d03fc23405b643940e4268889c6c87eac626dd21c8a0cf400c1f199f65eaee0a",
+        "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "unit": "m",
+        "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+        "side": "left",
+        "triangle": 351,
+        "barycentric": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ]
+      },
+      "surface": {
+        "triangle": 2181,
+        "barycentric": [
+          0.08436048294610524,
+          0.7641251734498712,
+          0.15151434360402358
+        ],
+        "carrierId": "arm-left-0"
+      },
+      "sourceKey": "ZA-c7010a9-31252d028a346dedb2eeff85",
+      "modelIndicator": {
+        "kind": "educational_model_indicator",
+        "observedSkinLandmark": false,
+        "construction": "Observed distal tendon facet351 near distal humeral articulation. Authored cubital indicator at joint plane and 4mm lateral correspondence; no source skin crease or 90-degree flexion produced.",
+        "limitations": [
+          "Elbow is extended; flexible crease/depression transferred as static structural indicator only."
+        ]
+      },
+      "inputFile": "work/evidence/AT6/resume-r1/bilateral-rules-r9.json",
+      "inputSha256": "4b672b8cca8aecd7962a26233c8da71052f53b46b7bad65411a81e3f279909a4",
+      "locator": "units[LU6-left].landmarks[LU5-left-12]"
+    },
+    {
+      "id": "LU7-left-20",
+      "anatomy": "APL tendon at distal radial forearm teaching groove",
+      "native": {
+        "carrierId": "ZA-c7010a9-cde734498e2e1ebc808501a5",
+        "carrierRevision": "native-world-frozen-r1",
+        "carrierHash": "553499abe670080016f9493914e90fdb837c724cd9d78575c3b61ca56e3d4a0b",
+        "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "unit": "m",
+        "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+        "side": "left",
+        "triangle": 397,
+        "barycentric": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ]
+      },
+      "surface": {
+        "triangle": 208,
+        "barycentric": [
+          0.22417274065089238,
+          0.42537214369665116,
+          0.3504551156524565
+        ]
+      },
+      "sourceKey": "ZA-c7010a9-cde734498e2e1ebc808501a5",
+      "modelIndicator": {
+        "kind": "educational_model_indicator",
+        "observedSkinLandmark": false,
+        "construction": "Two addressed native tendons delimit the radial teaching groove; native longitudinal wrist/cubital level yields 1.5/12. The surface marker registers that groove, not a ray-inferred anatomy.",
+        "limitations": [
+          "No actual wrist crease or palpable depression; static groove is a model correspondence."
+        ]
+      },
+      "inputFile": "work/evidence/AT6/resume-r1/bilateral-rules-r9.json",
+      "inputSha256": "4b672b8cca8aecd7962a26233c8da71052f53b46b7bad65411a81e3f279909a4",
+      "locator": "units[LU7-left].landmarks[LU7-left-20]"
+    },
+    {
+      "id": "LU7-left-21",
+      "anatomy": "EPB tendon adjacent to APL groove",
+      "native": {
+        "carrierId": "ZA-c7010a9-d1ce3c3878f62513212d9999",
+        "carrierRevision": "native-world-frozen-r1",
+        "carrierHash": "06c09b53eab9bbdbfd5741b945b8f6c96c3915794829612741fe031572bbc7f9",
+        "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+        "unit": "m",
+        "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+        "side": "left",
+        "triangle": 487,
+        "barycentric": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ]
+      },
+      "surface": {
+        "triangle": 208,
+        "barycentric": [
+          0.22417274065089238,
+          0.42537214369665116,
+          0.3504551156524565
+        ]
+      },
+      "sourceKey": "ZA-c7010a9-d1ce3c3878f62513212d9999",
+      "modelIndicator": {
+        "kind": "educational_model_indicator",
+        "observedSkinLandmark": false,
+        "construction": "Two addressed native tendons delimit the radial teaching groove; native longitudinal wrist/cubital level yields 1.5/12. The surface marker registers that groove, not a ray-inferred anatomy.",
+        "limitations": [
+          "No actual wrist crease or palpable depression; static groove is a model correspondence."
+        ]
+      },
+      "inputFile": "work/evidence/AT6/resume-r1/bilateral-rules-r9.json",
+      "inputSha256": "4b672b8cca8aecd7962a26233c8da71052f53b46b7bad65411a81e3f279909a4",
+      "locator": "units[LU7-left].landmarks[LU7-left-21]"
+    }
+  ],
+  "linkedEducationalPoints": [
+    "LU6-left",
+    "LU7-left",
+    "LU8-left"
+  ],
+  "pointInputSha256": "4b672b8cca8aecd7962a26233c8da71052f53b46b7bad65411a81e3f279909a4",
+  "learnerSha256": "cac0de7048c443b36cfcfcb0c07443add241f1ab43bf5ac77badefeebd6bceee",
+  "construction": {
+    "anatomicalRelation": "Actual left source-addressed radiocarpal/cubital endpoints and APL/EPB groove, checked by AT6 independent native keys. No literal radial artery or skin crease observed.",
+    "proximalStop": "ring16, Y1.002126932m includes left LU6; matched partial forearm learning interval, not an anatomical transverse boundary. Left topology examined independently; no copied right pinch claim.",
+    "distalStop": "ring1 before wrist-link seam; includes actual left LU8.",
+    "widthRule": "AI anterior-to-left-radial learning window, actual left grid angles28..39 plus0. Visual108-degree width is not source-defined skin/jingjin boundary.",
+    "holes": "actual left rejected-face holes, independently extracted",
+    "generationReference": "work/evidence/AT3/generation.json",
+    "generationSha256": "1e3722b66c3b4f75c3489c2d7b133e83ab12874eb34d02d8ebb55994596accf4",
+    "gridSelection": {
+      "ringInclusive": [
+        1,
+        16
+      ],
+      "angleSet": [
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        0
+      ]
+    },
+    "geodesicIsAnatomicalProof": false,
+    "reflectionUsed": false
+  },
+  "components": [
+    {
+      "id": "left-forearm",
+      "carrierId": "arm-left-0",
+      "seedTriangle": 1246,
+      "loops": [
+        {
+          "role": "outer",
+          "controls": [
+            {
+              "id": "left-loop0-v40",
+              "vertex": 40,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 0,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v79",
+              "vertex": 79,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 77,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v78",
+              "vertex": 78,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 75,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v77",
+              "vertex": 77,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 73,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v76",
+              "vertex": 76,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 71,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v75",
+              "vertex": 75,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 69,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v74",
+              "vertex": 74,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 67,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v73",
+              "vertex": 73,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 65,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v72",
+              "vertex": 72,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 63,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v71",
+              "vertex": 71,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 61,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v70",
+              "vertex": 70,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 59,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v69",
+              "vertex": 69,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 57,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v68",
+              "vertex": 68,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 55,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v108",
+              "vertex": 108,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 133,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v147",
+              "vertex": 147,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 207,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v187",
+              "vertex": 187,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 284,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v227",
+              "vertex": 227,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 364,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v266",
+              "vertex": 266,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 441,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v306",
+              "vertex": 306,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 518,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v346",
+              "vertex": 346,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 596,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v386",
+              "vertex": 386,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 673,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v426",
+              "vertex": 426,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 753,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v466",
+              "vertex": 466,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 831,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v506",
+              "vertex": 506,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 907,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v546",
+              "vertex": 546,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 987,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v586",
+              "vertex": 586,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 1067,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v626",
+              "vertex": 626,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 1147,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v666",
+              "vertex": 666,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 1225,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v667",
+              "vertex": 667,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 1227,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v668",
+              "vertex": 668,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 1229,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v669",
+              "vertex": 669,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 1231,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v670",
+              "vertex": 670,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 1233,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v671",
+              "vertex": 671,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 1235,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v672",
+              "vertex": 672,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 1237,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v673",
+              "vertex": 673,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 1239,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v674",
+              "vertex": 674,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 1241,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v635",
+              "vertex": 635,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 1165,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v675",
+              "vertex": 675,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 1243,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v676",
+              "vertex": 676,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 1244,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v677",
+              "vertex": 677,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 1246,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v638",
+              "vertex": 638,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 1248,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v598",
+              "vertex": 598,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 1092,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v558",
+              "vertex": 558,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 1012,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v518",
+              "vertex": 518,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 932,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v478",
+              "vertex": 478,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 854,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v438",
+              "vertex": 438,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 777,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v398",
+              "vertex": 398,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 698,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v358",
+              "vertex": 358,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 618,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v318",
+              "vertex": 318,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 541,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v278",
+              "vertex": 278,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 466,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v239",
+              "vertex": 239,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 389,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v199",
+              "vertex": 199,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 309,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v159",
+              "vertex": 159,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 232,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v120",
+              "vertex": 120,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 158,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "id": "left-loop0-v80",
+              "vertex": 80,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 80,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "role": "hole",
+          "controls": [
+            {
+              "id": "left-loop1-v274",
+              "vertex": 274,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 457,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop1-v313",
+              "vertex": 313,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 532,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop1-v353",
+              "vertex": 353,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 610,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop1-v354",
+              "vertex": 354,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 611,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "id": "left-loop1-v315",
+              "vertex": 315,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 535,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "id": "left-loop1-v275",
+              "vertex": 275,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 459,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop1-v314",
+              "vertex": 314,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 534,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "role": "hole",
+          "controls": [
+            {
+              "id": "left-loop2-v392",
+              "vertex": 392,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 685,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop2-v431",
+              "vertex": 431,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 763,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop2-v471",
+              "vertex": 471,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 841,
+                "barycentric": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "id": "left-loop2-v472",
+              "vertex": 472,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 842,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "id": "left-loop2-v432",
+              "vertex": 432,
+              "anchor": {
+                "carrierId": "arm-left-0",
+                "carrierRevision": "education-envelope-r1",
+                "carrierHash": "33949979f3697db45b8073e2d6f03a45b5d0afa8e4513ffa81419f6e46b10d57",
+                "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+                "unit": "m",
+                "poseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+                "side": "left",
+                "triangle": 765,
+                "barycentric": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "handoff": {
+    "nextUnit": "AT21",
+    "operation": "Common barrier/seed replay on actual left topology; preserve all holes.",
+    "expectedFaceCountForReplay": 351,
+    "candidateFaceSetSha256": "b0660fd42384ce505021bbab018e76d28c0c37dd533a03833ce11bc4236de381",
+    "finalMaskCreated": false
+  },
+  "limitations": [
+    "partial left forearm only; no complete LU territory",
+    "native-derived educational envelope, not skin scan or canonical cutaneous/jingjin boundary",
+    "width and transverse stops are AI visual learning choices",
+    "LU1–5/LU9–11 outside this sample; no point coordinates changed",
+    "independent original left addresses and holes; reflection never used"
+  ]
+}
