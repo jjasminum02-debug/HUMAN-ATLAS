@@ -1,14 +1,14 @@
 # AT 실행 안내 — 작업 산출물 기준 수정본
 
-2026-10-11 최신 검토: **AT1–5 범위 완료, AT6 partial로 재개 필요**. 이전 AT2 진행 안내는 역사 상태다. 최신 EXECUTION/실제 보고서를 기준으로 한다.
+2026-10-12 갱신: **AT1–7·AT20–22 작업 범위 완료, AT 다음은 AT8**이다. AT22 완료 커밋은 `b9b041fa579ac463fd6158e8a5d37b7d71cb9853`이며 최신 EXECUTION/실제 보고서를 기준으로 한다. 이전 AT6 partial·0/22 안내는 역사 상태로, 현재 LU 교육용 표시 22점의 완료 기록을 되돌리지 않는다.
 
-AT6의 실제 표시 위치는 0/22이며 카드 연결 성공은 위치 합격이 아니다. [AT6 재개 프롬프트](../at6-motion-camera-review-2026-10-11/AT6-RESUME.md)로 실제 지표 작성/국소 체표 보완을 이어간다. 이후 [AT7 문맥 카메라 프롬프트](../at6-motion-camera-review-2026-10-11/AT7-CAMERA.md)를 사용한다. 별도 [Luna 움직임 전수 조사](../at6-motion-camera-review-2026-10-11/MV1-LUNA-AUDIT.md) → [Sol 원인별 수정](../at6-motion-camera-review-2026-10-11/MV2-SOL-REPAIR.md)은 자동 실행하지 않는다.
+이후 실행에는 [MV2·AT 통합 계획](../mv2-at-integrated-2026-10-12/START-HERE.md)과 [모델별 순서·프롬프트](../mv2-at-integrated-2026-10-12/PROMPTS-IN-ORDER.md)를 사용한다. 현재 진행 중인 MV2 q01은 중복 실행하지 않는다. 카메라·UI 개편은 사용자 후속 요청까지 보류하며 기존 기능의 연결·회귀는 진행한다. AT7/MV1 전수조사를 자동 반복하지 않는다.
 
 작업 종료는 산출물·합격 기준으로 판단한다. AT20–22를 AT7 뒤에 두는 조기 그래픽 검증 순서는 유지한다.
 
 ## 실행 순서
 
-AT1–5(범위 완료) → AT6(재개) → AT7 → **AT20 → AT21 → AT22** → AT8 → AT9 → AT10 → AT11 → AT12 → AT13 → AT14 → AT15 → AT16 → AT17 → AT18 → AT19 → AT23 → AT24 → AT25 → AT26 → AT27 → AT28 → AT29.
+AT1–7·AT20–22(각 범위 완료) → **AT8** → AT9 → AT10 → AT11 → AT12 → AT13 → AT14 → AT15 → AT16 → AT17 → AT18 → AT19 → AT23 → AT24 → AT25 → AT26 → AT27 → AT28 → AT29. MV2의 내부 순서와 병렬 자료 준비 범위는 위 통합 계획을 따른다.
 
 | Task / 전체 프롬프트 | 작업 산출물 |
 |---|---|
@@ -54,4 +54,4 @@ AT1–5(범위 완료) → AT6(재개) → AT7 → **AT20 → AT21 → AT22** �
 
 [전체 범위·영역 방식](../../../design/2026-09-25-muscle-atlas/30-AT-361-POINTS-AND-TERRITORIES.md) · [자연스러운 그래픽·UI·공통 인수 기준](../../../design/2026-09-25-muscle-atlas/31-AT-EXPERIENCE-AND-DELIVERY-CONTRACT.md)
 
-각 task 링크의 마지막 코드블록이 독립 실행용 프롬프트다. AT1은 재실행하지 않는다. 전체 묶음을 한 번에 자동 실행시키지 않는다. 기존 숫자 T queue의 NEXT=없음은 이 AT feature plan과 별개이며, AT 다음 작업은 featurePlans.acupoint-at-361에서 확인한다.
+각 task의 명세는 유지하되 후속 실행 프롬프트는 위 통합 문서의 해당 코드블록을 사용한다. 완료한 task를 재실행하거나 전체 묶음을 한 번에 자동 실행시키지 않는다. 기존 숫자 T queue의 NEXT=없음은 이 AT feature plan과 별개이며, AT 다음 작업은 featurePlans.acupoint-at-361에서 확인한다.

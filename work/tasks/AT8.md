@@ -1,5 +1,13 @@
 # AT8 — 대장경·삼초경 43혈 위치·경로 연결
 
+## 2026-10-12 구현 정정 — 공통 package 연결 먼저
+
+담당 **Sol xhigh**. [통합 계획](../plans/mv2-at-integrated-2026-10-12/START-HERE.md)과 [최신 프롬프트](../plans/mv2-at-integrated-2026-10-12/PROMPTS-IN-ORDER.md)의 AT8을 사용한다. 기존 AT 순서와 43혈 범위는 유지한다.
+
+현재 `learningPackage.ts`는 LU/11개/22 instance와 `lung-r7.json`에 고정돼 있고 `AcupointReview.tsx`도 LU만 실제 로딩한다. 이번 task에서 이를 공통 registry·채널 package·code+side·구간 경로로 일반화한 뒤 LI/TE를 연결한다. 부분 ST/BL/GB package 합성, 정중선 1 instance 및 중복/누락 검증을 공통 계약에 포함한다. 정중 기술 fixture는 실제 CV/GV 위치로 내보내지 않는다. LU의 기존 내용·22점·좌우·취소·복귀 회귀를 보존한다.
+
+완료에는 실제 LI/TE 양측 입력·표시 판정, 다경맥 전환/전체점, 필요한 carrier만 로딩·공유·해제하는 경로 검증이 필요하다. 공통화만 하고 43혈 범위를 완료 처리하지 않는다. 카메라에 전달할 기존 형식의 실제 국소 구조 context는 데이터로 추가하되 카메라 정책·패널 디자인을 바꾸지 않는다. 아래 과거 UI 문구보다 사용자 최신 UI 보류 지시가 우선한다.
+
 2026-10-11 작업 단위 정정. 상태는 EXECUTION의 해당 record에서 읽는다. 이 명세 자체는 구현 완료의 증거가 아니다.
 선행: AT5, AT6, AT7, AT22. 실행 순서는 번호순이 아니라 [현재 계획](../plans/acupoint-at-2026-10-11/START-HERE.md)과 EXECUTION.featurePlans.acupoint-at-361.order를 따른다.
 
