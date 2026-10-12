@@ -7,7 +7,10 @@ HUMAN ATLAS에서 MV2의 Q04/Q05 국소 관찰·회귀 검증 unit만 수행해�
 AGENTS.md, 최신 EXECUTION의 MV2와 report/repairQueue,
 work/plans/mv2-completion-2026-10-12/REVIEW-AND-ORDER.md,
 Sol이 남긴 검사 도구·기대 형태·입력 hash·완료 기준을 읽어라.
-AT22 및 다른 runtime 수정 작업이 종료된 기준선을 사용해라.
+work/plans/mv2-at-integrated-2026-10-12/RESUME-OWNERSHIP.md를 적용한다.
+최신 완료 기록을 확인하고 이번 검증 unit의 기존 WIP는 diff/hash를 기록해 인수한다.
+미커밋/최근 evidence/동일 HEAD/프로세스 조회 불가만으로 중단하지 마라.
+실제 동일 소유 파일의 별도 활성 writer가 확인된 경우만 충돌을 피한다. 병렬 후보 모드에서는 그 별도 소유 경계를 유지한다.
 
 대상은 최신 큐의 Q04 손 말단 26매핑과 Q05 깊은 몸통 2매핑이다.
 이미 해결된 매핑은 최신 evidence로 제외하고 전신을 다시 조사하지 마라.

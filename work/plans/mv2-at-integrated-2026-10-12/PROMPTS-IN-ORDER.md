@@ -1,8 +1,8 @@
 # MV2·AT 순서별 붙여 넣을 프롬프트
 
 2026-10-12. 아래는 실행 지시 템플릿이다. 이 문서를 생성했다고 각 작업을 실행하거나 완료한 것이 아니다.
-**한 코드블록만 복사한다.** 현재 다른 대화의 MV2 q01 작업은 종료를 기다리고 결과를 읽는다.
-현재 실행 중인 Sol High를 바꿀 필요는 없다. 이후 핵심 변경은 Sol xhigh, 반복 작업은 Luna Max로 선택한다.
+**한 코드블록만 복사한다.** 최신 기록에서 Q01 학습 표현과 Q02가 완료됐으므로 현재는 [Q03 프롬프트](NEXT-MV2-Q03.md)를 사용한다. 아래 일반 재개는 최신 미완 unit만 선택한다.
+핵심 변경은 Sol xhigh, 반복 작업은 Luna Max로 선택한다. [인수·재개 규칙](RESUME-OWNERSHIP.md)을 적용하고 과거 ‘진행 중’ 문구만으로 대기하지 않는다.
 후속 UI 개편은 하지 않는다. 검사용 수동 맞춤과 기존 기능의 연결/회귀는 유지한다.
 
 ## 1. MV2 다음 한 묶음 — Sol xhigh
@@ -16,7 +16,10 @@ AGENTS.md, 최신 EXECUTION의 MV2, work/tasks/MV2.md,
 work/plans/mv2-at-integrated-2026-10-12/START-HERE.md,
 work/plans/mv2-completion-2026-10-12/MV2-SOL-RESUME.md,
 최신 MV2 report/repairQueue/remainingUnits와 실제 최종 GLB·검증 evidence를 읽어라.
-현재 다른 실행자가 같은 MV2를 수정 중이면 중복 구현하지 마라. 종료된 기준선/실제 hash로 시작해라.
+work/plans/mv2-at-integrated-2026-10-12/RESUME-OWNERSHIP.md를 먼저 적용해라.
+최신 완료 record/evidence/커밋을 확인하고 요청 unit의 기존 미커밋 결과는 diff/hash를 기록해 인수한다.
+미커밋/최근 시간/동일 HEAD/프로세스 조회 불가만으로 중단하거나 같은 승인을 다시 요구하지 마라.
+현재 동일 소유 파일을 쓰는 별도 활성 실행이 직접 확인된 경우만 그 충돌 경로의 중복 쓰기를 보류한다.
 선택 순서는 q01-learning-quality의 남은 필수 결과 → Q02 → Q03이다.
 이들이 끝났으면 Q04/Q05 검증 결과에서 확인된 공통 원인 하나만 수행한다.
 단순 not_performed/옛 nextScheduledTask=AT22를 현재 승인 대기나 재실행 이유로 쓰지 마라.
@@ -45,7 +48,8 @@ Q02/Q03과 **병렬**로 검사하려면 이 코드블록 대신 [PARALLEL.md](P
 HUMAN ATLAS에서 MV2 Q04/Q05 검증 묶음만 수행해라. 담당 Luna Max.
 work/plans/mv2-at-integrated-2026-10-12/START-HERE.md,
 work/plans/mv2-completion-2026-10-12/MV2-LUNA-VERIFY.md와 지정 최신 입력을 읽어라.
-단독 실행이며 다른 runtime/EXECUTION writer가 없는 기준선을 사용해라.
+단독 실행이며 RESUME-OWNERSHIP.md에 따라 이번 unit의 기존 WIP를 인수한다. 미커밋/최근 시간만으로 중단하지 마라.
+실제 동일 경로의 별도 활성 writer가 확인되면 충돌을 피하고 병렬 후보 모드는 PARALLEL.md를 따른다.
 원래 Q04 26매핑/Q05 2매핑 중 최신 evidence로 완료한 항목은 제외한다.
 병렬 worker 결과가 있으면 입력 hash를 대조해 재사용하고 browser pending만 마무리해라.
 실제 앱에서 근육·관절·주변을 수동 관찰하여 준비/작용/중간/복귀를 확인해라.

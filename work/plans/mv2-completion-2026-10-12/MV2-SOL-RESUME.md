@@ -2,8 +2,10 @@
 
 AT22 검증·소유 로컬 커밋 이후 사용한다. 이후 같은 프롬프트에서 완료한 unit은 건너뛰고 다음 한 묶음만 수행한다.
 
+2026-10-12 인수 정정: [인수·재개 규칙](../mv2-at-integrated-2026-10-12/RESUME-OWNERSHIP.md)을 우선 적용한다. Q01 학습 표현과 Q02는 현재 완료 기록이 있다. 아래 기술 지침은 해당 unit을 실제 수행할 때만 적용하며, 완료한 예산 계약/기하 수정/검사를 재실행하지 않는다. 특정 Q03 실행은 [현재 프롬프트](../mv2-at-integrated-2026-10-12/NEXT-MV2-Q03.md)를 사용한다.
+
 ```text
-HUMAN ATLAS에서 MV2만 재개해라. 담당 Sol High.
+HUMAN ATLAS에서 MV2만 재개해라. 담당 Sol xhigh.
 목표는 단순 오류 제거를 넘어, 선택한 근육의 작용이 같은 해부 장면에서 이해되는 교육용 움직임이다.
 
 AGENTS.md, 최신 work/EXECUTION.json와 NEXT/STATUS, work/tasks/MV2.md,
@@ -13,7 +15,11 @@ design/2026-09-25-muscle-atlas/32-AT6-PLACEMENT-CONTEXT-CAMERA-AND-MOTION-QA.md 
 MV1 2026-10-12-followup-01 summary/원래 inventory 연결,
 AT21/AT22 최신 실제 보고서·mask/editor 계약을 읽어라.
 
-AT22 진행 중이면 공유 runtime 수정을 시작하지 말고 완료 기준선을 먼저 확인해라.
+work/plans/mv2-at-integrated-2026-10-12/RESUME-OWNERSHIP.md를 적용해라.
+AT22 완료 여부는 최신 record/최종 evidence/커밋으로 확인한다. 옛 진행 중 문구로 중단하지 마라.
+같은 unit의 미커밋 결과는 diff/hash를 기록하고 인수해 남은 수정·검증·커밋까지 이어가라.
+미커밋/최근 시간/동일 HEAD/프로세스 조회 불가만으로 동시 실행을 추정하거나 재승인을 요구하지 마라.
+현재 동일 소유 파일을 쓰는 별도 활성 실행이 직접 확인된 경우만 그 충돌 경로의 중복 쓰기를 보류한다.
 시작 HEAD/status/hash와 소유 경계를 남기고 AT22 완료 변경을 보존해라.
 MV1 미관찰은 0이다. partial/observed_ambiguous/humanReview=not_performed를 미조사나 사용자 승인 대기로 해석해 중단하지 마라.
 이를 일괄 pass로 바꾸지도 마라. 바뀐 입력만 재검증하고 MV1 전수 조사·완료한 AT task를 반복하지 마라.
