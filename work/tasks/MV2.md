@@ -1,6 +1,20 @@
 # MV2 — 공통 원인별 근육 변형 수정
 
-계획 상태이며 이번 검토에서 실행하지 않았다. 담당 Sol High.
+현재 상태는 EXECUTION의 MV2 record와 실제 보고서를 따른다. 담당 Sol High.
+
+## 2026-10-12 사용자 후속 요청 — 작용 표현의 완결성
+
+Q01 좌우 돌출 수정은 engineering acceptance를 통과했고, 전체 MV2는 Q02–Q05 4묶음·32매핑이 남아 partial이다. 역사 Q01 통과를 취소하거나 MV1 전수 조사를 반복하지 않는다.
+
+사용자는 오류 제거를 넘어 수축·작용이 이해되는 그래픽을 요청했다. 다음 명시적 실행에서는 **q01-learning-quality**로 기존 수정본의 학습 표현을 검증·필요시 보완하고, 그 뒤 최신 큐의 다음 한 묶음을 처리한다. 이것은 기존 Q01 결함 수리의 재실행이 아니라 새 표현 인수 기준이다. EXECUTION의 기존 nextRepairUnit=Q02는 보존하며, 다음 실행자가 새 unit과 실제 결과를 MV2 record에 명시한다. 계획 작성만으로 상태를 승격하지 않는다.
+
+- [현재 검토·실행 순서](../plans/mv2-completion-2026-10-12/REVIEW-AND-ORDER.md)
+- [현재 Sol 재개 프롬프트](../plans/mv2-completion-2026-10-12/MV2-SOL-RESUME.md)
+- [고정 검사 인계 후 사용할 Luna 프롬프트](../plans/mv2-completion-2026-10-12/MV2-LUNA-VERIFY.md)
+
+AT22 종료·검증·소유 커밋 이후에 수행한다. 카메라 거리·자동 이동·연출과 UI 개편은 사용자가 미룬 후속 UI 작업이다. 기존 동작은 보존하고 검사용 수동 회전/확대는 허용한다. 새 task ID를 만들지 않는다.
+
+아래 기존 프롬프트는 역사 범위 참고다. **재개에는 위 현재 Sol 프롬프트를 우선 사용한다.** 공통 보존·검증 규칙은 유지한다.
 
 설계: [32-AT6-PLACEMENT-CONTEXT-CAMERA-AND-MOTION-QA.md](../../design/2026-09-25-muscle-atlas/32-AT6-PLACEMENT-CONTEXT-CAMERA-AND-MOTION-QA.md)
 
