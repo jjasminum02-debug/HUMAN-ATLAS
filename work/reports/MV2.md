@@ -47,3 +47,5 @@ HUMAN ATLAS에서 AT22만 수행해라. 최신 AGENTS.md, EXECUTION/NEXT, work/t
 ```text
 HUMAN ATLAS에서 MV2의 MV1-Q02-left-external-oblique-lateral-layering만 재개해라. 최신 MV2 repair-queue/remaining-units와 변경된 input hash를 읽고 기존 MV1 전수 조사를 반복하지 마라. 실제 learner·원본/authoring에서 이웃 mesh, source topology, 가중치, 접촉/보간을 분리해 원인을 진단하고 근거가 있는 최소 수정만 해라. 해결된 Q01 좌우 무릎 자산과 AT7/AT21·사용자 WIP를 보존하고 다른 묶음/AT22/push/배포를 자동 실행하지 마라.
 ```
+
+구현·검증 로컬 commit: `3ee4587b12a7c8482d699f48fda71a0c430f0ae5` (361 files). 커밋 직후 기존 status 5,966건이 시작 원본과 byte 단위로 일치하고 index가 비어 있음을 확인했다. [로컬 영수증](../evidence/MV2/2026-10-12-q01-r1/local-commit-receipt.json)을 후속 문서 checkpoint로 함께 보존한다.
