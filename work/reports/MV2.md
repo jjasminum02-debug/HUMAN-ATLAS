@@ -49,3 +49,70 @@ HUMAN ATLAS에서 MV2의 MV1-Q02-left-external-oblique-lateral-layering만 재�
 ```
 
 구현·검증 로컬 commit: `3ee4587b12a7c8482d699f48fda71a0c430f0ae5` (361 files). 커밋 직후 기존 status 5,966건이 시작 원본과 byte 단위로 일치하고 index가 비어 있음을 확인했다. [로컬 영수증](../evidence/MV2/2026-10-12-q01-r1/local-commit-receipt.json)을 후속 문서 checkpoint로 함께 보존한다.
+
+
+## 2026-10-12 재개 — q01-learning-quality
+
+이번 unit은 **교육용 작용 표현 통과**다. 기존 Q01 돌출 수정의 engineering pass는 보존했다. 최신 후보라는 이유로 r8을 승인하지 않았으며, 실제 비교 후 **r9**를 양측 learner 교체 자산으로 채택했다. 전체 MV2는 **partial / acceptancePassed=false**다. Q02–Q05 4묶음·32매핑은 기존 observed_ambiguous 상태를 유지하며 이번에 조사하거나 승인하지 않았다. MV1 미관찰 0과 기존 220/74/332 검사는 재사용했다.
+
+[최종 판정](../evidence/MV2/2026-10-12-q01-learning-quality-r1/validation-final-r1.json), [새 큐](../evidence/MV2/2026-10-12-q01-learning-quality-r1/repair-queue.json), [잔여 unit](../evidence/MV2/2026-10-12-q01-learning-quality-r1/remaining-units.json).
+
+### 복원한 중단 지점과 소유 범위
+
+시작/재개 HEAD는 AT22 완료 커밋 `b9b041fa579ac463fd6158e8a5d37b7d71cb9853`다. 재개 시 실제 manifest는 r5를 가리켰고, r8은 후보 폴더에만 있었다. 기존 45 WIP와 보호 입력 1,771개 hash가 시작 기록과 일치했다. 원본 Q01 교체본 `a82d6459…` / `2c09324f…`, original base `04b6461e…` / `5d8fb2a5…`도 보존했다. 기존 생성/검사를 반복하지 않고 남은 loader/앱 검사와 실제로 발견한 r8 접촉 잔여의 국소 보완만 이어갔다.
+
+소유 구현은 새 GLB 2개와 `source-motion-repairs-r1.json`의 두 row URI/hash/bytes/revision뿐이다. original base URI/hash와 전체 binding signature는 불변이다. 원본에 직접 대응하는 교체이며 runtime patch chain이 없다. 새 renderer/rig/근육별 runtime 분기, 카메라 정책·거리·연출·UI·보기옵션 변경은 없다. 기존 resolver, actual loader/controller와 offline source reader/contact corrective를 재사용했다. 공통 authoring 및 viewer 파일의 기존 WIP는 수정하지 않았다.
+
+### 관찰·작성·채택 근거
+
+기존 수정본은 source 근복 영역을 고정하고 원위 전환 구간만 움직여, 주요 근복의 길이 변화를 보여주는 데 부족했다. 원본 upper 12 vertex의 실제 좌표와 centroid, distal sleeve vertex 521 및 taper 275를 양측 source matrix로 각각 읽었다. source origin→sleeve 축에 근거한 material coordinate와 9개 native section centroid를 작성했다. 이는 AI의 교육용 모형 지표다. 측정된 기시 footprint나 근섬유가 아니다. 잘못된 원래 hip-fixed 52개를 그대로 복사하지 않았고, 실제 근위 neck 61개를 고정했다.
+
+r9는 source sleeve 이동의 **축 방향 성분**을 기존 distal weight와 부드러운 분포에 연결한다. patella의 횡방향 이동은 기존 원위 sleeve에 남기며, 근복 전체를 knee pivot으로 돌리지 않는다. distal 153개는 기존 통과본의 LINEAR 경로를 정확히 유지한다. 기존 접촉 보정은 표면 정합 도구로 사용했다. 통째 scale/rigid 이동, 임의 부풀림, 색 변화, 숨김, 각도 축소로 수축을 대신하지 않았다.
+
+| 구분 | 왼쪽 | 오른쪽 |
+|---|---:|---:|
+| 근복 section-centroid 경로: 처음→준비 | 291.710→303.523mm | 291.709→303.523mm |
+| 작용 구간 3→0초의 경로 단축 | 11.814mm | 11.814mm |
+| 주요 근복 최대 이동 | 12.909mm | 12.909mm |
+| 고정 근위부 오차 | 0 | 0 |
+| 원위 기존 경로 오차 | <2nm | <2nm |
+| 최소 면적 비 / 최대 edge 변화 | 0.578 /0.248 | 0.578 /0.248 |
+| 면 뒤집힘 / 네 기준 뼈의 새 contained vertex | 0 /0 | 0 /0 |
+
+3초 clip의 0→3은 무릎을 굽히는 준비, 3→0은 무릎 폄 작용이다. 경로는 준비 중 증가하고 작용 중 단조 감소한다. 이것은 약 4%의 **모형 경로 변화**이며 실제 fascicle 수축률·조직 물성·volume·정상 ROM 인증이 아니다. 기존 19.5° pivot/좌표계/pose/양측 topology와 다른 70 node의 모든 sampled pose는 그대로다.
+
+이전 시도는 versioned evidence에 보존했다. r2/r6은 뒤집힘, r3/r7은 과도한 edge 변화로 제외했다. r4/r5의 전체 sleeve-vector 보정과 비교해 r9의 축 방향 변형은 면적/edge 품질이 낫다. r8은 새 광근 contained 표본 6/7/8, 새 표본의 nearest-depth 최대 2.664mm가 남았다. r9의 기존 wrap 적용 후 각각 **3/3/2**, 최대 **1.850mm**로 줄었다. r8 record에 r5의 wrap 설명이 남았던 오류는 원본을 덮지 않고 `r8-annotation-corrigendum.json`으로 정정했다.
+
+**한계는 남는다.** 원래 source/accepted pose에도 광근 vertex overlap이 있으며, r9에도 위 추가 국소 겹침이 있다. 새 표본의 nearest-depth 측정은 기존 already-inside 깊이 증가나 모든 triangle 교차를 검증한 것이 아니다. 기존 네 뼈 접촉 기준은 유지하고 통과했지만, 모든 연부조직 충돌이 없는 정확한 생체 모형이라고 주장하지 않는다. 이 알려진 거친 표면 근사를 포함한 local teaching demo를 판정했고, 교수 검토/생체역학 인증/공개 재배포 승인과 분리했다.
+
+### 실제 emitted 파일·앱 검증
+
+- 좌우 각각 **193시점**을 actual `loadAnimationScene` / `AnimationPlaybackController` / Three `getVertexPosition`+matrixWorld로 읽었다. 독립 GLB replay와 최대 차이는 0 /1.15e-16m다. compaction 전후 71 node 재생 오차0, 원본 대비 다른70 node 변화0이다. 준비·역방향 작용·왕복 경계·빠른 재시작·0.7초 복귀 후 원상복귀를 확인했다.
+- 실제 **1280×720** 앱에서 양측 0/50/100, 준비·작용·반복 1배속과 오른쪽 100→90%의 느린 보간, 측면의 무릎/근육/뼈 관계를 확인했다. 1배속 시리즈 **175장**을 기록했고, 대표16장을 모은 contact sheet와 별도 static/측면/부착 화면을 판독했다. 캡처 수를 전수 시각 승인 수로 세지 않았다. 왼쪽 근위부가 잘리던 초기 확대 증거를 보존하고 전체 부착 문맥 화면을 추가했다.
+- 기존 통과본과 최종본의 실제 전후는 같은 viewport에서 수동 정합했다. target 오차0, camera 위치 잔차 **0.87mm**를 명시한다. bit-identical camera라고 주장하지 않는다. 각 learner session 내부의 root/renderer는 유지했으며, 의도적인 reload/DEV route의 다른 UUID를 합쳐 한 session으로 세지 않았다.
+- 빠른 중단/재시작, 재생 중 다른 근육 선택, 원본 geometry/선택/레이어 복귀를 확인했다. 무관한 대흉근 100/50 및 종료를 비교했다. 해당 원본 URI/hash는 불변이며, Q01과 동일한 원인으로 판정하거나 대흉근 전체 자연스러움을 승인하지 않았다.
+- 변형 자세에서 경혈 진입은 ‘정지 자세에서 다시 열어 주세요’로 차단되어 정지 좌표 overlay가 노출되지 않았다. 대퇴직근 종료→LU7 점/경로/AT21 부분 면→닫기 후 source motion=null, update0, camera owner=null, native 배열 **6,947,334 bytes**·선택·레이어·camera가 복원됐다. 대흉근 종료 후 같은 왕복도 확인했다.
+- AT22의 DEV triangle fixture 882면을 열고 닫아 기존 root/camera/선택/레이어와 native 배열 복원을 확인했다. 편집하거나 새 revision을 저장하지 않았다. AT22의 원래 36검사/13단계/화면 evidence를 재사용하며 이를 새 ST 영역 검증으로 세지 않는다.
+
+관련 자동 검사 **17/17**, typecheck를 포함한 isolated package build **13/13** 통과. 최종은 `related-tests-r9.log`, `build-final-r2.json`이다. 역사 전체 suite를 재실행하지 않았다. 기존 large-chunk warning과 예산 threshold는 유지했다. 실제 browser warn/error0이며 임시 viewport/tab을 정리했다.
+
+![최종 왼쪽 준비·부착 문맥](../evidence/MV2/2026-10-12-q01-learning-quality-r1/final-left-complete-attachment100-r1.png)
+![양측 실제 시리즈 대표 프레임](../evidence/MV2/2026-10-12-q01-learning-quality-r1/final-motion-contact-sheet-r1.png)
+
+### 비용·권리·기록·정지
+
+| actual loader 비용 | 기존 Q01 왼쪽/오른쪽 | 최종 왼쪽/오른쪽 |
+|---|---:|---:|
+| 파일 bytes | 3,297,068 /3,298,376 | **3,128,960 /3,130,044** |
+| geometry 배열, morph 포함 | 2,711,754 | **2,925,450** |
+| animation 배열 | 28,808 | **30,684** |
+| source+geometry+animation 추정 | 6,037,630 /6,038,938 | **6,085,094 /6,086,178** |
+| 파일 triangles /source node | 37,087 /71 | **37,087 /71** |
+
+RF target12→24로 geometry 배열은 213,696 bytes 증가했지만 미사용 accessor49개 정리로 파일은 약168KB씩 감소했다. 총 loader 추정은 약47KB씩 증가한다. 같은 왼쪽 비교 구도의 render calls59/triangles34,099는 그대로다. DOM native/base-array 통계는 morph target을 포함하지 않으므로 전체 GPU 비용으로 대신 쓰지 않았다. 위 수치는 실제 배열 용량/호출 계수이며 driver VRAM 실측은 아니다. 20MiB overview /96MiB geometry /1M triangles /8MiB repair 예산은 올리지 않았다. 실제 lazy fetch/parse/attachment latency는 각 PNG의 JSON player profile에 남겼다. 종료 시 motion bytes0과 update0, native geometry 복원을 확인했다.
+
+최종 왼쪽 SHA-256 `ab259d772f166d8417959680e5b7a1e1fd7de34e3320ee25169b7e22c318cde4`, 오른쪽 `60fa091ca479ba6d237cfe25a4e7b91776542793137e3b2bff1ddebb02cb8b53`. 두 파일은 `atlas-data/assets/motion/mv2-q01-learning-r1-{left,right}/motion.glb`이며 actual manifest/hash/binding을 대조했다. source-only/local-use 상속, AI 작성, humanReview=not_performed, publicRedistribution=held를 보존한다. 실패 후보/전체 authoring/evidence/private source를 learner bundle에 넣지 않는다.
+
+최신 EXECUTION을 다시 읽고 **MV2 record와 motion-quality-review.lastDisposition만** 갱신했다. MV2 전체 acceptance=false, 이번 lastRun acceptance=true를 구분한다. AT/AC/T record와 acupoint plan은 불변이다. sync_execution.py는 Updated 0, --check는 Execution projections match; no writes로 통과했다. 원문 결과는 evidence에 남겼다. 커밋 포함은 위 두 GLB/repair manifest/이 보고서/versioned evidence/EXECUTION이다. 원본/OpenSim/T13/AT21/22/기존45 WIP 및 기존 미추적 파일은 제외한다. 실패 후보 GLB·uncompact·loader world dump·isolated build 출력은 versioned 위치에 보존하되 Git/learner bundle에서 제외한다.
+
+다음 수리 큐는 **MV2 Q02**이며 [붙여 넣을 프롬프트](../evidence/MV2/2026-10-12-q01-learning-quality-r1/next-prompt-MV2-Q02.txt)를 남겼다. 경혈 계획의 현재 다음 ID는 **AT8**이다. 이번에는 q01-learning-quality만 수행했고 다음 묶음/AT8/위임/push/배포를 실행하지 않았다. 소유 커밋 hash와 최종 잔여 status는 완료 답변 및 해당 Git 기록에서 확인한다.

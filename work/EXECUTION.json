@@ -7855,9 +7855,60 @@
       "autoRunNext": false,
       "acceptancePassed": false,
       "report": "work/reports/MV2.md",
-      "evidence": "work/evidence/MV2/2026-10-12-q01-r1",
+      "evidence": "work/evidence/MV2/2026-10-12-q01-learning-quality-r1",
       "updatedDate": "2026-10-12",
       "lastRun": {
+        "date": "2026-10-12",
+        "unit": "q01-learning-quality",
+        "acceptancePassed": true,
+        "engineeringValidationPassed": true,
+        "learningExpressionAssessment": "passed_model_demo",
+        "selectedCandidate": "r9",
+        "finalAssets": [
+          "atlas-data/assets/motion/mv2-q01-learning-r1-left/motion.glb",
+          "atlas-data/assets/motion/mv2-q01-learning-r1-right/motion.glb"
+        ],
+        "sourcePinnedRepairManifest": "atlas-data/motion/source-motion-repairs-r1.json",
+        "sameSceneLearnerSidesVerified": 2,
+        "denseFinalGlbTimesPerSide": 193,
+        "relatedTestsPassed": 17,
+        "packageBuildChecksPassed": 13,
+        "validation": "work/evidence/MV2/2026-10-12-q01-learning-quality-r1/validation-final-r1.json",
+        "humanReview": "not_performed",
+        "publicRedistribution": "held",
+        "physiologicalCertification": false,
+        "limits": {
+          "newSampledVastusContainmentMaximaPerSide": [
+            3,
+            3,
+            2
+          ],
+          "newSampledNearestSurfaceDepthMaximumMm": 1.8498557955100856,
+          "evidence": "neighbor-contact-comparison-r9.json / neighbor-new-depth-r9.json",
+          "interpretation": "coarse source surfaces already overlap; r9 adds small local residual vertex overlap. Existing four-bone contact criterion remains zero. This is not a claim of zero surface intersections or physiological contact.",
+          "measuredFascicleOrAttachmentFootprint": false,
+          "volumeClaim": false,
+          "automaticFraming": "unchanged; presentation deferred to user-requested later UI work; local manual observations completed"
+        },
+        "commitReceipt": "work/evidence/MV2/2026-10-12-q01-learning-quality-r1/commit-receipt.json"
+      },
+      "result": {
+        "resolvedGroups": 1,
+        "resolvedMappings": 2,
+        "remainingObservedAmbiguousGroups": 4,
+        "remainingObservedAmbiguousMappings": 32,
+        "uninspectedMV1Mappings": 0,
+        "wholeMV2Complete": false,
+        "learningQualityUnitsPassed": 1
+      },
+      "repairQueue": "work/evidence/MV2/2026-10-12-q01-learning-quality-r1/repair-queue.json",
+      "remainingUnits": "work/evidence/MV2/2026-10-12-q01-learning-quality-r1/remaining-units.json",
+      "nextRepairUnit": "MV1-Q02-left-external-oblique-lateral-layering",
+      "nextScheduledTask": "AT8",
+      "noAutoAdvance": true,
+      "startingHead": "6651c2049e0bb2e1e5215723e166cf6d5fc5ee51",
+      "localImplementationCommit": "3ee4587b12a7c8482d699f48fda71a0c430f0ae5",
+      "priorEngineeringRun": {
         "date": "2026-10-12",
         "unit": "MV1-Q01-rectus-femoris-knee-contour",
         "acceptancePassed": true,
@@ -7876,21 +7927,8 @@
         "humanReview": "not_performed",
         "publicRedistribution": "held"
       },
-      "result": {
-        "resolvedGroups": 1,
-        "resolvedMappings": 2,
-        "remainingObservedAmbiguousGroups": 4,
-        "remainingObservedAmbiguousMappings": 32,
-        "uninspectedMV1Mappings": 0,
-        "wholeMV2Complete": false
-      },
-      "repairQueue": "work/evidence/MV2/2026-10-12-q01-r1/repair-queue.json",
-      "remainingUnits": "work/evidence/MV2/2026-10-12-q01-r1/remaining-units.json",
-      "nextRepairUnit": "MV1-Q02-left-external-oblique-lateral-layering",
-      "nextScheduledTask": "AT22",
-      "noAutoAdvance": true,
-      "startingHead": "6651c2049e0bb2e1e5215723e166cf6d5fc5ee51",
-      "localImplementationCommit": "3ee4587b12a7c8482d699f48fda71a0c430f0ae5"
+      "nextPrompt": "work/evidence/MV2/2026-10-12-q01-learning-quality-r1/next-prompt-MV2-Q02.txt",
+      "localImplementationCommitUnit": "prior MV1-Q01-rectus-femoris-knee-contour engineering"
     }
   },
   "featurePlans": {
@@ -7958,7 +7996,7 @@
       "nextUnit": "MV2",
       "autoRunNext": false,
       "unitPolicy": "MV1 freezes exhaustive reachable inventory; MV2 repairs one frozen common-cause group per explicit run; completion requires remaining queue empty.",
-      "lastDisposition": "partial; 220/220 dense sheets, 74/74 playback groups, and 332/332 learner flows reviewed; 34 targets remain observed_ambiguous across five groups; no naturalness approval; MV2 requires an explicit user run."
+      "lastDisposition": "MV1 inspection preserved (0 uninspected); Q01 engineering pass and q01-learning-quality r9 bilateral teaching pass; MV2 partial with Q02–Q05, 4 groups/32 mappings remaining. No automatic execution."
     }
   }
 }
