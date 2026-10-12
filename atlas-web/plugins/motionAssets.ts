@@ -3,13 +3,15 @@ import { createReadStream } from 'node:fs';
 import { readFile, realpath } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import type { Plugin } from 'vite';
+import { motionAssetByteBudget, motionRepairByteBudget, motionRepairBytesEligible } from '../src/domain/motionAssetBudget.ts';
+export { motionAssetByteBudget } from '../src/domain/motionAssetBudget.ts';
 
-// The native trunk package retains 365 context surfaces and 17 corrected poses.
-// Its measured file size is pinned; other assets retain the 8 MiB default.
-export function motionAssetByteBudget(entry: { uri: string; sha256: string }): number {
-  return entry.uri === 'atlas-data/assets/motion/t66-priority-s04-flex/motion.glb'
-    && entry.sha256 === 'fd09265a937bebff65f0d1b095bc2d0350f13b7222e53a90c32bb40b80c43adf'
-    ? 31_306_820 : 8 * 1024 * 1024;
+interface DeliveryEntry {
+  uri: string;
+  sha256: string;
+  bytes?: number;
+  byteBudget?: number;
+  base?: { uri: string; sha256: string };
 }
 
 /** Deliver registered, hashed local motion packages lazily; unknown paths never fall through as HTML. */
@@ -17,7 +19,7 @@ export function motionAssetsPlugin(root: string): Plugin {
   const prefix = '/atlas-data/assets/motion/';
   const learnerRegistryPath = resolve(root, 'atlas-data/motion/motion-learning.json');
   const wave1RegistryPath = resolve(root, 'atlas-data/motion/t66-wave1-registration.json');
-  let entriesPromise: Promise<Array<{ uri: string; sha256: string }>> | null = null;
+  let entriesPromise: Promise<DeliveryEntry[]> | null = null;
   const deliveryPath = resolve(root, 'atlas-data/motion/local-motion-delivery-index.json');
   const repairsPath = resolve(root, 'atlas-data/motion/source-motion-repairs-r1.json');
   async function entries() {
@@ -39,12 +41,13 @@ export function motionAssetsPlugin(root: string): Plugin {
         for await (const chunk of createReadStream(resolve(root, relative))) { digest.update(chunk); bytes += chunk.length; }
         if (bytes !== dependency.bytes || digest.digest('hex') !== dependency.sha256) throw Error('stale motion delivery index');
       }
-      const unique = new Map<string, { uri: string; sha256: string }>();
+      const unique = new Map<string, DeliveryEntry>();
       for (const row of index.entries as Array<{ uri: string; sha256: string }>) {
         if (typeof row.uri !== 'string' || !row.uri.startsWith(prefix.slice(1)) || row.uri.includes('..')
           || !/^[a-f0-9]{64}$/.test(row.sha256) || unique.has(row.uri)) throw Error('motion delivery entry');
-        unique.set(row.uri, row);
+        unique.set(row.uri, { uri: row.uri, sha256: row.sha256 });
       }
+      const registeredBases = new Map(unique);
       // Versioned repairs retain the original registry/WIP and require its exact
       // base hash. The browser also pins the complete source binding contract.
       const repairs = JSON.parse(await readFile(repairsPath, 'utf8'));
@@ -52,23 +55,29 @@ export function motionAssetsPlugin(root: string): Plugin {
         || repairs.publicRedistribution !== 'held' || repairs.humanReview !== 'not_performed'
         || !Array.isArray(repairs.rows)) throw Error('motion repair contract');
       for (const row of repairs.rows) {
-        if (unique.get(row.baseUri)?.sha256 !== row.baseSha256
+        if (registeredBases.get(row.baseUri)?.sha256 !== row.baseSha256
           || typeof row.assetId !== 'string' || typeof row.bindingSignature !== 'string'
           || typeof row.uri !== 'string' || !row.uri.startsWith(prefix.slice(1)) || row.uri.includes('..')
           || !/^[a-f0-9]{64}$/.test(row.sha256) || unique.has(row.uri)
-          || !Number.isSafeInteger(row.bytes) || row.bytes <= 0 || row.bytes > 8 * 1024 * 1024) throw Error('motion repair base/path/hash/budget');
-        unique.set(row.uri, { uri: row.uri, sha256: row.sha256 });
+          || !motionRepairBytesEligible(row)) throw Error('motion repair base/path/hash/budget');
+        unique.set(row.uri, { uri: row.uri, sha256: row.sha256, bytes: row.bytes,
+          byteBudget: motionRepairByteBudget(row), base: { uri: row.baseUri, sha256: row.baseSha256 } });
       }
       return [...unique.values()];
     })().catch((error) => { entriesPromise = null; throw error; });
     return entriesPromise;
   }
-  async function verified(entry: { uri: string; sha256: string }) {
+  async function verified(entry: DeliveryEntry): Promise<Buffer> {
     if (!entry.uri.startsWith(prefix.slice(1)) || entry.uri.includes('..') || !/^[a-f0-9]{64}$/.test(entry.sha256)) throw Error('motion asset path/hash');
     const path = await realpath(resolve(root, entry.uri));
     if (!path.startsWith(await realpath(resolve(root, 'atlas-data/assets/motion')) + sep)) throw Error('motion asset containment');
+    // Recheck the actual registered original before authorizing its replacement.
+    // Only original index entries may be bases; repair chains are rejected above.
+    if (entry.base) await verified(entry.base);
     const bytes = await readFile(path);
-    if (bytes.length > motionAssetByteBudget(entry) || createHash('sha256').update(bytes).digest('hex') !== entry.sha256) throw Error('motion asset integrity/budget');
+    if (bytes.length > (entry.byteBudget ?? motionAssetByteBudget(entry))
+      || (entry.bytes !== undefined && bytes.length !== entry.bytes)
+      || createHash('sha256').update(bytes).digest('hex') !== entry.sha256) throw Error('motion asset integrity/budget');
     return bytes;
   }
   return {
@@ -100,7 +109,7 @@ export function motionAssetsPlugin(root: string): Plugin {
       });
     },
     async generateBundle() {
-      const unique = new Map<string, { uri: string; sha256: string }>();
+      const unique = new Map<string, DeliveryEntry>();
       for (const entry of await entries()) {
         const previous = unique.get(entry.uri);
         if (previous && previous.sha256 !== entry.sha256) throw Error('Conflicting motion asset hashes');

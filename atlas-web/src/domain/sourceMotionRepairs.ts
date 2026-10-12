@@ -1,4 +1,5 @@
 import type { MotionAsset } from './motionLearning.ts';
+import { motionRepairBytesEligible } from './motionAssetBudget.ts';
 
 export interface SourceMotionRepair {
   assetId: string;
@@ -28,6 +29,6 @@ export function applySourceMotionRepair<T extends { definition: unknown; asset: 
       || motionRepairBindingSignature(asset) !== row.bindingSignature
       || !/^[a-f0-9]{64}$/.test(row.sha256)
       || !row.uri.startsWith('atlas-data/assets/motion/') || row.uri.includes('..')
-      || !Number.isSafeInteger(row.bytes) || row.bytes <= 0 || row.bytes > 8 * 1024 * 1024) return null;
+      || !motionRepairBytesEligible(row)) return null;
   return { ...candidate, asset: { ...asset, uri: row.uri, sha256: row.sha256, revision: row.revision } };
 }

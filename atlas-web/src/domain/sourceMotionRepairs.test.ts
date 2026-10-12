@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import runtime from '../data/learnerMotionRuntime.generated.ts';
 import repairs from '../../../atlas-data/motion/source-motion-repairs-r1.json' with { type: 'json' };
-import { applySourceMotionRepair } from './sourceMotionRepairs.ts';
+import { applySourceMotionRepair, motionRepairBindingSignature } from './sourceMotionRepairs.ts';
+import { NATIVE_TRUNK_BASE } from './motionAssetBudget.ts';
 import type { MotionAsset } from './motionLearning.ts';
 
 const all = Object.values(runtime.actions).flat() as unknown as Array<{candidate: {definition: unknown; asset: MotionAsset} | null}>;
@@ -29,6 +30,23 @@ test('unrelated candidates and null retain their original identity', () => {
   const base = all.find(o => o.candidate && !repairs.rows.some(r => r.assetId === o.candidate!.asset.id))!.candidate;
   assert.equal(applySourceMotionRepair(base, repairs.rows), base);
   assert.equal(applySourceMotionRepair(null, repairs.rows), null);
+});
+
+test('native trunk replacement uses the common existing ceiling and still pins side, frame and full binding', () => {
+  const base = all.find(o => o.candidate?.asset.id === 'T66-PRIORITY-S04-L-OBLIQUE-ASSET')!.candidate!;
+  assert.equal(base.asset.uri, NATIVE_TRUNK_BASE.uri);
+  assert.equal(base.asset.sha256, NATIVE_TRUNK_BASE.sha256);
+  const row = { assetId: base.asset.id, baseUri: base.asset.uri, baseSha256: base.asset.sha256,
+    bindingSignature: motionRepairBindingSignature(base.asset), uri: 'atlas-data/assets/motion/test-only-trunk/motion.glb',
+    sha256: '1'.repeat(64), revision: 'test-only', bytes: NATIVE_TRUNK_BASE.bytes };
+  const result = applySourceMotionRepair(base, [row])!;
+  assert.equal(result.asset.uri, row.uri);
+  assert.equal(result.asset.sourceBinding, base.asset.sourceBinding);
+  assert.equal(result.asset.poseControl, base.asset.poseControl);
+  assert.equal(applySourceMotionRepair(base, [{ ...row, bytes: row.bytes + 1 }]), null);
+  assert.equal(applySourceMotionRepair(base, [{ ...row, baseSha256: '0'.repeat(64) }]), null);
+  const drift = structuredClone(base); drift.asset.staticBinding.side = 'right';
+  assert.equal(applySourceMotionRepair(drift, [row]), null);
 });
 
 test('the same rectus source in hip-flexion keeps its independent asset and weights', () => {

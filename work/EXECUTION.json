@@ -7846,7 +7846,7 @@
     "MV2": {
       "status": "partial",
       "feature": "motion-quality-review",
-      "owner": "Sol High",
+      "owner": "Sol xhigh",
       "spec": "work/tasks/MV2.md",
       "promptFile": "work/tasks/MV2.md",
       "dependsOn": [
@@ -7855,9 +7855,81 @@
       "autoRunNext": false,
       "acceptancePassed": false,
       "report": "work/reports/MV2.md",
-      "evidence": "work/evidence/MV2/2026-10-12-q01-learning-quality-r1",
+      "evidence": "work/evidence/MV2/2026-10-12-q02-r1",
       "updatedDate": "2026-10-12",
       "lastRun": {
+        "date": "2026-10-12",
+        "unit": "MV1-Q02-left-external-oblique-lateral-layering",
+        "owner": "Sol xhigh",
+        "startingHead": "2d182a6fcce068409c804f4e7391f607c14a3b20",
+        "acceptancePassed": true,
+        "engineeringValidationPassed": true,
+        "learningExpressionAssessment": "passed_model_demo_with_native_surface_limits",
+        "geometryModified": false,
+        "finalAssets": [
+          "atlas-data/assets/motion/t66-priority-s04-flex/motion.glb"
+        ],
+        "actualSha256": "fd09265a937bebff65f0d1b095bc2d0350f13b7222e53a90c32bb40b80c43adf",
+        "actualBytes": 31306820,
+        "sameSceneLearnerSidesVerified": 2,
+        "denseFinalGlbTimesPerSide": 129,
+        "relatedTestsPassed": 21,
+        "packageBuildChecksPassed": 13,
+        "validation": "work/evidence/MV2/2026-10-12-q02-r1/validation-final.json",
+        "humanReview": "not_performed",
+        "publicRedistribution": "held",
+        "physiologicalCertification": false,
+        "limits": {
+          "sourceEOInsideIOBaselineUniqueVerticesPerSide": 291,
+          "sampledNewEOInsideIOVerticesPerSide": 3,
+          "maximumNewSampledNearestSurfaceDepthMm": 0.8174728505162328,
+          "layerProbePosesPerSide": 5,
+          "uniqueSourceVerticesPerSide": 2665,
+          "allSurfaceIntersectionsExcluded": false,
+          "measuredAttachmentFootprints": false,
+          "physiologicalCertification": false,
+          "interpretation": "Native rough/overlapping surfaces retained. Small new sampled soft-layer overlaps are disclosed; local teaching/legibility acceptance is not anatomical normality or zero intersection approval."
+        },
+        "commitReceipt": "work/evidence/MV2/2026-10-12-q02-r1/commit-receipt.json"
+      },
+      "result": {
+        "resolvedGroups": 2,
+        "resolvedMappings": 3,
+        "remainingObservedAmbiguousGroups": 3,
+        "remainingObservedAmbiguousMappings": 31,
+        "uninspectedMV1Mappings": 0,
+        "wholeMV2Complete": false,
+        "learningQualityUnitsPassed": 1
+      },
+      "repairQueue": "work/evidence/MV2/2026-10-12-q02-r1/repair-queue.json",
+      "remainingUnits": "work/evidence/MV2/2026-10-12-q02-r1/remaining-units.json",
+      "nextRepairUnit": "MV1-Q03-biceps-lateral-contour-and-visibility",
+      "nextScheduledTask": "AT8",
+      "noAutoAdvance": true,
+      "startingHead": "6651c2049e0bb2e1e5215723e166cf6d5fc5ee51",
+      "localImplementationCommit": "3ee4587b12a7c8482d699f48fda71a0c430f0ae5",
+      "priorEngineeringRun": {
+        "date": "2026-10-12",
+        "unit": "MV1-Q01-rectus-femoris-knee-contour",
+        "acceptancePassed": true,
+        "resolvedMappings": 2,
+        "cause": "native attachment-role/weight-region mismatch; rectus belly incorrectly followed knee pivot",
+        "finalAssets": [
+          "atlas-data/assets/motion/mv2-q01-r1-left/motion.glb",
+          "atlas-data/assets/motion/mv2-q01-r1-right/motion.glb"
+        ],
+        "sourcePinnedRepairManifest": "atlas-data/motion/source-motion-repairs-r1.json",
+        "sameSceneLearnerSidesVerified": 2,
+        "denseFinalGlbTimesPerSide": 97,
+        "relatedTestsPassed": 20,
+        "packageBuildChecksPassed": 13,
+        "naturalContractionApproval": "not_performed",
+        "humanReview": "not_performed",
+        "publicRedistribution": "held"
+      },
+      "nextPrompt": "work/evidence/MV2/2026-10-12-q02-r1/next-prompt-MV2-Q03.txt",
+      "localImplementationCommitUnit": "prior MV1-Q01-rectus-femoris-knee-contour engineering",
+      "priorLearningQualityRun": {
         "date": "2026-10-12",
         "unit": "q01-learning-quality",
         "acceptancePassed": true,
@@ -7890,45 +7962,9 @@
           "volumeClaim": false,
           "automaticFraming": "unchanged; presentation deferred to user-requested later UI work; local manual observations completed"
         },
-        "commitReceipt": "work/evidence/MV2/2026-10-12-q01-learning-quality-r1/commit-receipt.json"
-      },
-      "result": {
-        "resolvedGroups": 1,
-        "resolvedMappings": 2,
-        "remainingObservedAmbiguousGroups": 4,
-        "remainingObservedAmbiguousMappings": 32,
-        "uninspectedMV1Mappings": 0,
-        "wholeMV2Complete": false,
-        "learningQualityUnitsPassed": 1
-      },
-      "repairQueue": "work/evidence/MV2/2026-10-12-q01-learning-quality-r1/repair-queue.json",
-      "remainingUnits": "work/evidence/MV2/2026-10-12-q01-learning-quality-r1/remaining-units.json",
-      "nextRepairUnit": "MV1-Q02-left-external-oblique-lateral-layering",
-      "nextScheduledTask": "AT8",
-      "noAutoAdvance": true,
-      "startingHead": "6651c2049e0bb2e1e5215723e166cf6d5fc5ee51",
-      "localImplementationCommit": "3ee4587b12a7c8482d699f48fda71a0c430f0ae5",
-      "priorEngineeringRun": {
-        "date": "2026-10-12",
-        "unit": "MV1-Q01-rectus-femoris-knee-contour",
-        "acceptancePassed": true,
-        "resolvedMappings": 2,
-        "cause": "native attachment-role/weight-region mismatch; rectus belly incorrectly followed knee pivot",
-        "finalAssets": [
-          "atlas-data/assets/motion/mv2-q01-r1-left/motion.glb",
-          "atlas-data/assets/motion/mv2-q01-r1-right/motion.glb"
-        ],
-        "sourcePinnedRepairManifest": "atlas-data/motion/source-motion-repairs-r1.json",
-        "sameSceneLearnerSidesVerified": 2,
-        "denseFinalGlbTimesPerSide": 97,
-        "relatedTestsPassed": 20,
-        "packageBuildChecksPassed": 13,
-        "naturalContractionApproval": "not_performed",
-        "humanReview": "not_performed",
-        "publicRedistribution": "held"
-      },
-      "nextPrompt": "work/evidence/MV2/2026-10-12-q01-learning-quality-r1/next-prompt-MV2-Q02.txt",
-      "localImplementationCommitUnit": "prior MV1-Q01-rectus-femoris-knee-contour engineering"
+        "commitReceipt": "work/evidence/MV2/2026-10-12-q01-learning-quality-r1/commit-receipt.json",
+        "localImplementationCommit": "2d182a6fcce068409c804f4e7391f607c14a3b20"
+      }
     }
   },
   "featurePlans": {
@@ -7996,7 +8032,7 @@
       "nextUnit": "MV2",
       "autoRunNext": false,
       "unitPolicy": "MV1 freezes exhaustive reachable inventory; MV2 repairs one frozen common-cause group per explicit run; completion requires remaining queue empty.",
-      "lastDisposition": "MV1 inspection preserved (0 uninspected); Q01 engineering pass and q01-learning-quality r9 bilateral teaching pass; MV2 partial with Q02–Q05, 4 groups/32 mappings remaining. No automatic execution."
+      "lastDisposition": "Q01 engineering and q01-learning-quality r9 pass preserved; Q02 local teaching inspection/budget contract pass with explicit native-surface overlap limits and unchanged GLB. MV2 partial: Q03/Q04/Q05, 3 groups/31 mappings; next explicit repair Q03; AT next AT8. No automatic execution."
     }
   }
 }
