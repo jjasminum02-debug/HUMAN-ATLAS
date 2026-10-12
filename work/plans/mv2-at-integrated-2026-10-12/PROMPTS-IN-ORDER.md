@@ -1,85 +1,155 @@
 # MV2·AT 순서별 붙여 넣을 프롬프트
 
-2026-10-12. 아래는 실행 지시 템플릿이다. 이 문서를 생성했다고 각 작업을 실행하거나 완료한 것이 아니다.
-**한 코드블록만 복사한다.** 최신 기록에서 Q01 학습 표현과 Q02가 완료됐으므로 현재는 [Q03 프롬프트](NEXT-MV2-Q03.md)를 사용한다. 아래 일반 재개는 최신 미완 unit만 선택한다.
-핵심 변경은 Sol xhigh, 반복 작업은 Luna Max로 선택한다. [인수·재개 규칙](RESUME-OWNERSHIP.md)을 적용하고 과거 ‘진행 중’ 문구만으로 대기하지 않는다.
-후속 UI 개편은 하지 않는다. 검사용 수동 맞춤과 기존 기능의 연결/회귀는 유지한다.
+2026-10-12 Q03 중단 원인 재검토. **현재 실행 프롬프트의 단일 기준**이다.
+한 번에 아래 한 코드블록을 사용한다. 현재 시작은 **1번 MV2 Q03 / Sol xhigh**다.
+Q01·q01-learning-quality·Q02는 완료했다. AT1–7/20–22도 반복하지 않는다.
+현재 실제 상태가 이 문서 작성 시점보다 앞섰다면 EXECUTION과 최종 evidence를 우선한다.
+옛 evidence에 저장된 재개 프롬프트보다 이 문서를 우선하며 완료 근거는 수정하지 않는다.
 
-## 1. MV2 다음 한 묶음 — Sol xhigh
+**기본 순서:** 1번 Q03 수리/검증 → 2번 Q04/Q05 검사 → 실제 결함이 있을 때 3번 수정/종료 → AT8–19 → AT23–29.
+시간이 아니라 결과물로 작업을 나눈다. 새 task 번호를 만들지 않는다.
+2번에서 필수 검증이 모두 끝났으면 3번은 생략한다. 그래도 남은 사실상의 실패를 통과로 바꾸지는 않는다.
+모델 역할은 프로젝트 난이도에 따른 배정이지 자동 성공 보장이 아니다.
 
-현재 q01이 partial이면 같은 q01의 실제 미완만, 통과하면 Q02, 다음 요청에서 Q03을 수행한다.
-매번 아래 하나를 재사용하되 이미 통과한 묶음을 다시 수행하지 않는다. Q03 뒤에는 아래 Luna 검증으로 넘긴다.
+## 공통 실행 계약 — 이번 재계획이 옛 재개 템플릿보다 우선한다
+
+- 실제 상태는 `work/EXECUTION.json.featureWorkUnits.MV2`와 최종 evidence로 확인한다. 이 문서는 실행 계획이다. 과거 evidence의 next prompt는 당시 기록이며 현재 명령이 아니다.
+- 재개는 같은 범위의 중단된 WIP 인수·검증·커밋을 포함한다. 최근 수정/같은 HEAD/프로세스 조회 불가는 다른 writer의 증거가 아니다. 실제 동시 쓰기가 확인된 경로만 보호한다. `RESUME-OWNERSHIP.md`의 소유 원칙을 유지한다.
+- 원본/OpenSim_Models/T13/역사 evidence/무관한 WIP를 보존한다. 단일 장면·renderer·camera, source identity/hash/권리 기록을 유지한다. UI 배치·테마·카메라 자동 이동은 보류한다. **기존 버튼의 선택·lazy loading·resolver·재생·복원 결함을 고치는 것은 이번 기능 수리 범위다.**
+- 현재 재생 가능한 자세 관찰을 근육 수축으로 일괄 재분류하지 않는다. 근육 작용으로 제공할 항목은 기존 작용 자료·부착 역할·실제 clip phase/변형을 대조해 항목별로 수정할 수 있다. 증거 없는 수축/임상/생리 인증은 만들지 않는다.
+- 모든 역사 설계·모든 raw evidence를 다시 읽지 않는다. 현재 명세, EXECUTION의 현재 MV2, 최신 요약과 지정된 실제 입력부터 읽고 실패 원인에 해당하는 코드만 확장해서 읽는다.
+- 입력 hash가 같은 기존 GLB 수치 QC는 재사용한다. runtime/loader/material/선택 로직이 바뀌면 영향을 받는 실제 앱 검증은 다시 한다. 자산 hash만 같다고 runtime QA까지 재사용하지 않는다.
+- 검사 앱은 현재 checkout의 서버·포트·반환 HTML·필요 chunk/GLB·실행 revision을 먼저 확인한다. 서버를 필요하면 시작하고 준비 응답을 확인한다. **사용자 Chrome의 화면 좌표/오래된 AX 번호 대신, 도구가 지원하는 독립 IAB/브라우저 탭에서 역할·이름 기반 실제 버튼 조작을 우선한다.** 사용자 제어 차단을 우회하지 않는다. 단순 CLI/DOM 상태를 영상 통과로 대체하지 않는다.
+- 중단 대비 체크포인트는 같은 evidence 폴더의 compact manifest에 입력 fingerprint·현재 단계·통과한 항목·남은 정확한 항목·재현 명령/화면 경로를 갱신한다. 매번 새 전체 스냅샷/원장/QA viewer를 만들지 않는다. 도구가 허용하는 실제 화면 캡처와 짧은 contact sheet를 보존한다.
+- 테스트는 수정 영역 중심으로 실행하고 runtime 변경 때 typecheck/build와 필요한 통합 검증을 한다. 변경이 없는 전체 빌드/전수 MV1 검사를 승인 의식처럼 반복하지 않는다.
+- report/evidence와 최신 EXECUTION의 MV2만 갱신하고 `python3 work/tools/sync_execution.py` 및 `--check`를 실행한다. 소유 변경만 선택적으로 로컬 커밋한다. 다른 WIP/비밀자료/임시 산출물은 제외한다. 해시·포함/제외·잔여 변경·다음 단계 하나를 보고한다. 자동 다음 실행/위임/push/배포/진단/치료/침 시뮬레이션은 하지 않는다.
+
+## 판정과 종료 기준
+
+| 항목 | 통과에 필요한 것 | 통과로 바꾸면 안 되는 것 |
+|---|---|---|
+| 실제 재생 | 선택한 source + actionId + clip/hash가 실제 loader에 연결되고 같은 장면에서 한 주기와 복귀가 보임 | 검색 0건만 보고 자료 없음, CLI QC만 보고 재생 성공 |
+| 형태·학습 표현 | 전체 주기 및 준비/중간/최대/복귀에서 부착 관계·윤곽·주변 구조가 이해되며 비정상 돌출/분리/뒤집힘/점프가 없음 | 통째 scale·숨김·각도 축소·색만으로 결함 은폐 |
+| 정상 원본 한계 | rest와 motion의 차이, 국소 관찰 및 실측으로 기존 표면 겹침과 새 변형 결함을 구분 | 모든 겹침을 자동 결함 또는 자동 정상으로 일괄 판정 |
+| 화면 표현 보류 | 수동으로 실제 변형을 확인한 뒤 자동 framing/배치만 후속 UI로 남김 | 관찰을 못한 항목을 UI 보류로 바꿔 완료 |
+| 전체 MV2 | 동결된 Q01–Q05 34매핑의 필수 판정 + q01 학습 표현 + 공통 재생 회귀가 해결됨 | 모든 근육의 새 수축 animation/교수 승인/공개 권리까지 완료라고 주장 |
+
+현재 완료 3매핑(Q01 2 + Q02 1), 미완 31매핑(Q03 3 + Q04 26 + Q05 2)이다. `partial`은 전체 큐의 상태와 unit의 상태를 따로 보고한다. 사람 검토 미수행은 자동 기술 차단 사유가 아니며 선택적 검토/공개 배포 hold는 별도 유지한다. 정당한 필수 실패를 문구만 바꿔 승인하지 않는다.
+
+공통 재생/중단/재시작/원본·선택·레이어 복원/경혈 점·면 재진입 검사는 같은 runtime fingerprint의 대표 경로에서 한 묶음으로 수행한다. 각 매핑은 **정확한 연결·한 주기·중간 자세·국소 형태**를 빠짐없이 확인한다. 공통 검사를 31번 복제하지 않는다. 영향이 다른 loader/clip family가 있으면 그 분기만 추가한다.
+
+## 1. Q03 실제 재생·형태 판정·필요 수리 — Sol xhigh
 
 ```text
-HUMAN ATLAS에서 MV2의 다음 한 수정 묶음만 수행해라. 담당 Sol xhigh.
-AGENTS.md, 최신 EXECUTION의 MV2, work/tasks/MV2.md,
-work/plans/mv2-at-integrated-2026-10-12/START-HERE.md,
-work/plans/mv2-completion-2026-10-12/MV2-SOL-RESUME.md,
-최신 MV2 report/repairQueue/remainingUnits와 실제 최종 GLB·검증 evidence를 읽어라.
-work/plans/mv2-at-integrated-2026-10-12/RESUME-OWNERSHIP.md를 먼저 적용해라.
-최신 완료 record/evidence/커밋을 확인하고 요청 unit의 기존 미커밋 결과는 diff/hash를 기록해 인수한다.
-미커밋/최근 시간/동일 HEAD/프로세스 조회 불가만으로 중단하거나 같은 승인을 다시 요구하지 마라.
-현재 동일 소유 파일을 쓰는 별도 활성 실행이 직접 확인된 경우만 그 충돌 경로의 중복 쓰기를 보류한다.
-선택 순서는 q01-learning-quality의 남은 필수 결과 → Q02 → Q03이다.
-이들이 끝났으면 Q04/Q05 검증 결과에서 확인된 공통 원인 하나만 수행한다.
-단순 not_performed/옛 nextScheduledTask=AT22를 현재 승인 대기나 재실행 이유로 쓰지 마라.
-Q01 돌출 수정 통과와 이후 learning-quality 결과를 보존하고 완료한 전수조사를 반복하지 마라.
-Q02 자산 수정이 필요하면 31,306,820-byte exact base와 새 repair 8MiB 계약 충돌을
-resolver/delivery/실제 파일 검증의 공통 계약으로 해결해라. 전역 제한 완화나 주변 구조 삭제는 금지한다.
-부착 역할·source/frame/side·pivot·weights·보간·접촉을 분리해 실제 원인을 수정해라.
-offline authoring과 공통 replacement를 재사용하고 기존 원본 GLB를 덮지 마라.
-통째 scale/고정/색 변화/각도 축소만으로 수축 표현을 대신하지 마라.
-최종 emitted GLB를 실제 앱에서 준비·작용·복귀·중간 프레임·양측·주변 구조와 함께 검증해라.
-1배속/필요한 느린 재생, 빠른 중단·전환·반복·원본 복귀와 경혈/영역 재진입을 확인해라.
-실제 bytes/geometry 비용과 관련 tests/typecheck/build를 남겨라. 문서·수치만으로 pass하지 마라.
-카메라 정책·UI 개편은 하지 마라. 선택적 human review와 기술/학습 표현 합격을 구분해라.
-최신 EXECUTION을 다시 읽고 이번 MV2 record/관련 plan만 갱신해라. AT 기록/다른 WIP를 덮지 마라.
-versioned report/evidence와 다음 정확한 unit을 남기고 sync_execution.py 및 --check를 실행해라.
-원본/OpenSim_Models/T13/역사 freeze/기존 사용자 변경을 보존한다.
-소유 변경만 선별 로컬 커밋하고 hash·포함/제외·잔여 변경을 보고한 뒤 멈춰라.
-자동 다음 묶음·AT 실행·위임·push·배포·진단·치료·침 시뮬레이션 금지.
+HUMAN ATLAS에서 MV2 Q03만 구현·검증까지 마무리해라. 담당 Sol xhigh.
+work/tasks/MV2.md, work/EXECUTION.json의 최신 MV2,
+work/plans/mv2-at-integrated-2026-10-12/PROMPTS-IN-ORDER.md의 공통 계약과 1번,
+최신 MV2 report 및 record가 가리키는 validation/repairQueue를 읽어라.
+이 재개는 Q03 기존 WIP 인수와 필요한 기능 수정을 포함한다.
+Q01 engineering·q01-learning-quality·Q02 완료를 보존하고 반복하지 마라.
+
+확인된 원인부터 처리한다. Q03 옵션은 현재 posture_observation이므로
+'근육 작용 찾기' 검색 0건은 clip 부재가 아니다.
+실제 선택 경로는 source 선택 → 기능 → '자세에서 관찰하기' 펼치기
+→ 정확한 동작 선택 → '움직임으로 이해하기'다.
+현재 고정 대상은 다음 3개다. 최신 등록과 hash도 대조해라.
+- 왼쪽 source ZA-c7010a9-b20b574e456449c5d571c7a1,
+  motion-option-298: 팔꿈치 굽힘, group21, elbow-flexion-left-source-frame-r4.
+- 같은 왼쪽 source, motion-option-297: 어깨 앞쪽 굽힘,
+  group23, shoulder-flexion-left-source-frame-r4.
+- 오른쪽 source ZA-c7010a9-a0c2ea00609e874a7faa926d,
+  motion-option-299: 어깨 앞쪽 굽힘, group24, shoulder-flexion-right-source-frame-r4.
+같은 source의 서로 다른 clip을 하나로 세지 마라.
+
+먼저 기존 경로로 재생해라. 실제 연결/lazy load/선택/재생 결함이 재현되면
+관련 공통 코드와 회귀 검사를 수정하여 이번 범위에서 해결해라.
+검색 0건이나 disabled 버튼만 기록하고 끝내지 마라.
+기존 경로가 정상이라면 UI를 새로 만들지 마라.
+근육 작용으로 제공할 항목은 기존 action 근거·부착/phase·실제 변형을 대조해
+필요한 해당 항목만 보완한다. 단순 learningIntent 변경은 수축 구현이 아니다.
+
+현재 checkout의 살아 있는 서버와 asset 응답을 확인한 뒤,
+도구가 허용하는 독립 브라우저 탭과 실제 버튼으로 세 clip을 재생해라.
+사용자 Chrome 포커스/오래된 AX 번호에 의존하지 마라.
+1배속 전체 주기 및 필요한 느린 관찰, 준비·중간·최대·작용·복귀를 보고
+이두근의 부착·윤곽·주변 구조와 좌우를 실제 화면으로 확인해라.
+공통 중단/재시작/선택·레이어·원본 복원/경혈 재진입은 공유 경로 기준 한 번 묶어 검사한다.
+기하 결함이 확인되면 source/frame/pivot/weights/보간/접촉 중 원인을 좁혀
+기존 offline authoring·source-bound replacement·공통 예산 계약으로 최소 수리하고 재검증해라.
+정상이라면 기존 GLB를 보존하고 관찰 근거로 Q03을 닫아라.
+수축 기능과 자세 관찰 범위는 보고서에서 정확히 구분한다.
+
+중단돼도 같은 범위의 체크포인트부터 이어가라. 같은 자료를 처음부터 재조사하지 마라.
+Q03의 3개 판정과 변경 영향 검증을 마친 뒤 보고서/evidence/EXECUTION의 MV2,
+sync 및 --check와 소유 변경의 로컬 커밋까지 마무리해라.
+UI·카메라 개편, Q04/Q05·AT 자동 실행, push·배포는 하지 마라.
+전체 MV2의 partial과 이번 Q03 통과 여부를 구분해 보고하고 멈춰라.
 ```
 
-## 2. MV2 Q04/Q05 직렬 검증 — Luna Max
-
-Q02/Q03과 **병렬**로 검사하려면 이 코드블록 대신 [PARALLEL.md](PARALLEL.md)의 worker 프롬프트를 쓴다.
+## 2. Q04/Q05 28매핑 검사와 가능한 경우 종료 — Luna Max
 
 ```text
-HUMAN ATLAS에서 MV2 Q04/Q05 검증 묶음만 수행해라. 담당 Luna Max.
-work/plans/mv2-at-integrated-2026-10-12/START-HERE.md,
-work/plans/mv2-completion-2026-10-12/MV2-LUNA-VERIFY.md와 지정 최신 입력을 읽어라.
-단독 실행이며 RESUME-OWNERSHIP.md에 따라 이번 unit의 기존 WIP를 인수한다. 미커밋/최근 시간만으로 중단하지 마라.
-실제 동일 경로의 별도 활성 writer가 확인되면 충돌을 피하고 병렬 후보 모드는 PARALLEL.md를 따른다.
-원래 Q04 26매핑/Q05 2매핑 중 최신 evidence로 완료한 항목은 제외한다.
-병렬 worker 결과가 있으면 입력 hash를 대조해 재사용하고 browser pending만 마무리해라.
-실제 앱에서 근육·관절·주변을 수동 관찰하여 준비/작용/중간/복귀를 확인해라.
-pass/실제 기하·재생 결함/UI만 보류/관찰 근거 부족을 구분하고 검증 수를 정확히 보고해라.
-geometry/pivot/weights/GLB/repair manifest/카메라 정책/UI를 바꾸지 마라.
-실제 결함의 hash·clip·시점·구도·기대와 관찰을 Sol에 인계해라.
-이번 검증 evidence/report와 MV2의 해당 판정만 갱신하고 sync_execution.py 및 --check를 실행해라.
-원본·기존 WIP를 보존하고 소유 변경만 로컬 커밋한 뒤 다음 한 unit을 적고 멈춰라.
-다음 구현·위임·push·배포는 하지 마라.
+HUMAN ATLAS에서 MV2 Q04/Q05의 남은 검증 묶음만 수행해라. 담당 Luna Max.
+work/tasks/MV2.md, 최신 EXECUTION의 MV2와 지정된 최종 evidence,
+work/plans/mv2-at-integrated-2026-10-12/PROMPTS-IN-ORDER.md의 공통 계약과 2번을 읽어라.
+이 요청은 두 기존 검증 그룹을 한 번에 처리하는 범위다. 새 task ID를 만들지 마라.
+Q03의 재생 경로/공통 회귀 결과와 같은 unit의 기존 WIP를 인수·재사용해라.
+Q01/Q02/Q03가 이미 통과했다면 재조사하지 마라.
+
+Q04 26개와 Q05 2개 중 최신 미판정만 hash·source·action·clip 기준으로 확정한다.
+각각 현재 learningIntent에 맞는 실제 UI 경로를 사용한다.
+posture_observation은 기능의 '자세에서 관찰하기'에서 선택한다.
+근육 작용 검색에 안 나온다는 이유로 absent/blocked 판정하지 마라.
+고정 서버/독립 탭의 실제 앱에서 해당 근육·부착·주변 구조가 보이도록 수동 관찰하고
+한 주기와 준비·중간·최대·복귀를 확인한다. 필요한 항목만 느리게 다시 본다.
+입력이 같은 기존 dense GLB QC는 재사용하고 화면 판정은 항목별로 남긴다.
+공통 lifecycle 회귀는 동일 코드 기준 결과를 재사용하고 달라진 분기만 추가한다.
+
+결과를 정상/실제 변형·재생 결함/관찰 후 UI만 보류/검증 불가로 구분해라.
+실제 결함은 asset·source·action·clip·발생 시점·기대/관찰·캡처·추정 공통 원인을 기록한다.
+정확한 원인을 찾을 수 없으면 추정임을 표시하고 성공으로 바꾸지 마라.
+geometry/authoring/repair manifest/기존 UI·카메라를 수정하지 마라.
+브라우저가 막혔으면 가능한 코드·파일 판정까지 끝내고 정확한 도구 실패와 미실행 항목을 남긴다.
+현재 지원되는 경로를 확인하지 않은 채 '승인 없음'이라는 포괄적 이유로 중단하지 마라.
+
+28개 결과를 compact 표로 통합하고 실제 결함만 공통 원인으로 묶어 Sol에 넘겨라.
+모든 필수 mapping 판정과 공통 회귀가 이미 통과했다면 이번 실행에서
+Q01–Q05 34개와 q01 학습 표현을 대조하여 MV2 scoped acceptance까지 닫아라.
+단순 종료 보고를 위한 별도 Sol 실행은 필요 없다.
+그 외에는 정확한 남은 결함 목록을 3번 프롬프트의 고정 입력으로 남긴다.
+report/evidence/EXECUTION의 MV2·sync/--check·소유 로컬 커밋을 마치고 멈춰라.
+AT 자동 실행·위임·push·배포는 하지 마라.
 ```
 
-## 3. MV2 최종 대조 — Sol xhigh
-
-남은 실제 결함이 있으면 위 1번으로 해당 공통 원인만 수정한다. 이미 모든 필수 판정과 회귀가 완료됐다면
-새 종료 task를 만들거나 의미 없이 다시 실행할 필요 없다. 다음은 AT8이다.
+## 3. 실제 잔여 결함이 있을 때만 수정·종료 — Sol xhigh
 
 ```text
-HUMAN ATLAS에서 MV2의 최종 대조/통합 검증만 수행해라. 담당 Sol xhigh.
-work/plans/mv2-at-integrated-2026-10-12/START-HERE.md,
-최신 MV2 record/report/repairQueue와 Q01–Q05 및 q01-learning-quality 최종 evidence를 읽어라.
-매핑별 최신 GLB/hash와 해결/실제 미완/UI만 보류를 대조하고 숫자가 빠지지 않도록 해라.
-수정 자산의 같은 장면 재생/종료/전환/경혈 점·면 복귀를 실제 앱에서 회귀 확인해라.
-변경 없는 전체 MV1 조사를 반복하지 마라. 미확인 항목을 정상이나 UI 보류로 돌리지 마라.
-필수 결함이 남으면 정확한 동일 MV2 unit으로 남기고 이번에 다른 원인 묶음까지 자동 수정하지 마라.
-필수 기술·학습 표현 기준을 충족하면 MV2 scoped acceptance를 닫되
-모든 근육의 동작 제작·교수 승인·UI 개편 완료라고 하지 마라.
-현재 카메라/UI와 원본/사용자 WIP를 보존해라.
-최신 EXECUTION의 MV2만 반영하고 보고서/evidence·sync_execution.py 및 --check를 남겨라.
-소유 변경만 로컬 커밋하고 해시·범위·잔여 변경·다음 AT8 프롬프트를 적고 멈춰라.
-AT8 자동 실행·push·배포 금지.
+HUMAN ATLAS에서 MV2의 확인된 잔여 결함 수정과 종료만 수행해라. 담당 Sol xhigh.
+work/tasks/MV2.md, 최신 EXECUTION의 MV2,
+work/plans/mv2-at-integrated-2026-10-12/PROMPTS-IN-ORDER.md의 공통 계약과 3번,
+Q03 및 Q04/Q05의 최신 결함 표·실제 입력/evidence를 읽어라.
+MV2가 이미 acceptancePassed=true이고 필수 근거가 일치하면 재수리하지 말고 결과를 알려라.
+
+이번 입력은 Q03/Q04/Q05에 남은 구체적 결함 목록이다.
+동일 원인들을 묶어 기존 공통 authoring/resolver/player 중 해당 경로를 한 번 고치고,
+영향 자산만 재생성·검증해라. 원인 그룹 하나를 고친 뒤 관성적으로 끝내지 말고,
+이번에 고정한 잔여 목록의 수정·회귀·종료까지 하나의 MV2 요청으로 수행해라.
+새 근육/새 task/전수 재조사로 범위를 늘리지 마라.
+기존 정상 GLB/통과 결과를 보존하고 수정된 자산은 versioned replacement로 등록한다.
+통째 scale·숨김·정지·각도 축소·임계값 완화로 결함을 감추지 마라.
+
+실제 learner에서 수정된 clip의 정확한 연결, 한 주기·중간·복귀와 주변 구조를 확인한다.
+공통 runtime 변경이 있으면 영향 분기의 선택/중단/원본 복원/경혈 점·면 재진입을 회귀한다.
+기존 화면을 사용하고 UI·카메라 정책을 개편하지 마라.
+같은 입력의 이미 통과한 dense QC/검사는 재사용한다.
+
+34개 기존 매핑과 q01 학습 표현에서 필수 미판정/실패가 0이면
+MV2 scoped acceptance를 완료하고 큐·보고서·EXECUTION을 일치시켜라.
+선택적 human review/공개 권리 hold/후속 UI/전신 신규 동작 제작은 별도 상태를 유지한다.
+필수 기준이 남으면 이유를 은폐하지 말고 정확한 재현/수정 시도/필요 입력만 남긴다.
+새 번호나 '승인 없음'만 반복하는 종료는 하지 마라.
+검증·evidence·sync/--check와 소유 변경의 로컬 커밋을 마치고 다음 AT8을 알려라.
+AT8 자동 시작·push·배포는 하지 마라.
 ```
 
 ## 4. AT8부터 AT29까지

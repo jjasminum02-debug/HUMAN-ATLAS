@@ -4,11 +4,17 @@
 
 [인수·재개 규칙](RESUME-OWNERSHIP.md)을 함께 적용한다. 아래 동시 writer 제한은 **실제로 동시에 실행할 때**의 소유 규칙이다. 중단된 같은 task의 미커밋 결과를 이어받지 말라는 뜻이 아니다. 단독 재개자는 관련 WIP를 인수해 마무리한다. 후보 worker는 여전히 배정 출력만 소유하며 임의로 통합 권한을 갖지 않는다.
 
-## 권장 조합
+## 이번 기본값
+
+이번에는 **직렬 진행을 기본값**으로 권한다. Q03의 정확한 재생 경로를 먼저 확정하면 Luna가 같은 실패를 반복하지 않는다.
+속도를 위해 병렬화하려면 아래 후보 작업만 분리한다. 같은 checkout에서 두 실행자가 runtime·EXECUTION·Git index를 함께 수정하지 않는다.
+이 문서는 worker 후보 모드이며 직렬 작업의 완료 상태를 바꾸지 않는다. 실제 실행 프롬프트는 [PROMPTS-IN-ORDER.md](PROMPTS-IN-ORDER.md)가 우선한다.
+
+## 가능한 조합
 
 | 시점 | 통합/수정 담당 | 병렬로 가능한 Luna 작업 | 합류 조건 |
 |---|---|---|---|
-| 현재 q01 종료 후 | Sol xhigh: MV2 Q02, 이어서 별도 요청의 Q03 | MV2 Q04/Q05 고정 입력 검증; 또는 AT8 문헌·명칭·위치 규칙 후보 | stable snapshot과 실제 GLB hash가 고정돼야 함. 라이브 앱 QA는 독점 또는 별도 고정 서버 |
+| 현재 Q03 검증/수리 중 | Sol xhigh: MV2 Q03 | MV2 Q04/Q05 고정 입력 후보 검사; 또는 AT8 문헌·명칭·위치 규칙 후보 | stable snapshot과 실제 GLB hash가 고정돼야 함. 라이브 앱 QA는 독점 또는 별도 고정 서버 |
 | AT8 공통 계약 완료 후 | 각 AT 통합 담당 1명 | AT9+AT10, 다음 AT11+AT12, AT13+AT14, AT15+AT16, AT17+AT18의 후보 자료를 각각 작성 | 서로 다른 task 소유 output, 공유 carrier 읽기 전용. 병렬 작성 순서는 통합 순서/완료 판정을 바꾸지 않음 |
 | AT23 mask 계약 완료 후 | Sol/Luna: 최신 공식 순서의 한 task 통합 | AT24와 AT25 경계 자료·mask 후보 | 공통 mask schema/carrier topology가 고정, 같은 면을 공유해도 각 mask file은 독립 |
 | AT26 작업 중 | Sol: AT26 | AT27 교재 importer 입력 형식/제공 자료 대조 후보 | private 자료는 local, runtime/카드는 단독 통합 |

@@ -1,37 +1,49 @@
-# MV2 Q03 — Sol xhigh
+# 현재 바로 실행할 MV2 프롬프트
 
-Q02 완료 이후 사용할 한 묶음 실행 프롬프트다. 역사 Q02 evidence의 인계문은 수정하지 않는다.
+현재 기준: [PROMPTS-IN-ORDER.md](PROMPTS-IN-ORDER.md) 1번. Q03 실패 원인을 반영한 동일 프롬프트다.
 
 ```text
-HUMAN ATLAS에서 MV2의 Q03 이두근 묶음만 수행해라. 담당 Sol xhigh.
-AGENTS.md, 최신 work/EXECUTION.json의 MV2, work/tasks/MV2.md,
-work/plans/mv2-at-integrated-2026-10-12/RESUME-OWNERSHIP.md,
-work/plans/mv2-at-integrated-2026-10-12/START-HERE.md,
-최신 MV2 report와 record가 지정한 repairQueue/remainingUnits/최종 evidence를 읽어라.
+HUMAN ATLAS에서 MV2 Q03만 구현·검증까지 마무리해라. 담당 Sol xhigh.
+work/tasks/MV2.md, work/EXECUTION.json의 최신 MV2,
+work/plans/mv2-at-integrated-2026-10-12/PROMPTS-IN-ORDER.md의 공통 계약과 1번,
+최신 MV2 report 및 record가 가리키는 validation/repairQueue를 읽어라.
+이 재개는 Q03 기존 WIP 인수와 필요한 기능 수정을 포함한다.
+Q01 engineering·q01-learning-quality·Q02 완료를 보존하고 반복하지 마라.
 
-Q02 완료 기준선은 5b51ff627ea048ee4d0c0f9e526a46268d96d094다.
-현재 HEAD/실제 기록을 확인하고 Q01 돌출·q01-learning-quality·Q02 통과를 보존해라.
-Q02와 완료한 전수조사를 반복하지 마라. Q03도 이미 완료됐다면 결과를 확인하고 멈춰라.
+확인된 원인부터 처리한다. Q03 옵션은 현재 posture_observation이므로
+'근육 작용 찾기' 검색 0건은 clip 부재가 아니다.
+실제 선택 경로는 source 선택 → 기능 → '자세에서 관찰하기' 펼치기
+→ 정확한 동작 선택 → '움직임으로 이해하기'다.
+현재 고정 대상은 다음 3개다. 최신 등록과 hash도 대조해라.
+- 왼쪽 source ZA-c7010a9-b20b574e456449c5d571c7a1,
+  motion-option-298: 팔꿈치 굽힘, group21, elbow-flexion-left-source-frame-r4.
+- 같은 왼쪽 source, motion-option-297: 어깨 앞쪽 굽힘,
+  group23, shoulder-flexion-left-source-frame-r4.
+- 오른쪽 source ZA-c7010a9-a0c2ea00609e874a7faa926d,
+  motion-option-299: 어깨 앞쪽 굽힘, group24, shoulder-flexion-right-source-frame-r4.
+같은 source의 서로 다른 clip을 하나로 세지 마라.
 
-이번 재개는 Q03에 해당하는 기존 미커밋 결과의 검토·인수를 포함한다.
-미커밋/최근 evidence/동일 HEAD/프로세스 조회 불가만으로 중단하지 마라.
-현재 같은 파일을 수정하는 별도 활성 실행이 직접 확인된 경우만 충돌 경로의 쓰기를 보류해라.
-그런 증거가 없으면 관련 WIP의 diff/hash를 기준선으로 남기고 인수하여 마무리해라.
-무관한 사용자 변경·원본/OpenSim_Models/T13/역사 freeze는 보존한다.
+먼저 기존 경로로 재생해라. 실제 연결/lazy load/선택/재생 결함이 재현되면
+관련 공통 코드와 회귀 검사를 수정하여 이번 범위에서 해결해라.
+검색 0건이나 disabled 버튼만 기록하고 끝내지 마라.
+기존 경로가 정상이라면 UI를 새로 만들지 마라.
+근육 작용으로 제공할 항목은 기존 action 근거·부착/phase·실제 변형을 대조해
+필요한 해당 항목만 보완한다. 단순 learningIntent 변경은 수축 구현이 아니다.
 
-Q03 세 매핑의 실제 최종 GLB/source/authoring/MV1 evidence를 대조한다.
-팔꿈치·어깨 작용의 부착 역할/pivot/weights/frame/side/보간/접촉/역재생을 분리해 원인을 판단해라.
-실제 결함은 공통 offline authoring과 source-bound replacement로 최소 수정하고 원본을 덮지 마라.
-공통 motionAssetBudget을 재사용한다. 기존 Q02의 예산 해결을 재구현하지 마라.
-단순 scale/고정/숨김/색 변화/각도 축소로 학습 표현을 대신하지 마라.
-실제 앱에서 준비·작용·복귀/중간 프레임/양측/주변 구조를 1배속과 필요한 느린 재생으로 확인해라.
-중단·재시작·근육 전환·선택/레이어/원본 복귀와 경혈/영역 재진입도 확인한다.
-수정이 필요 없는 경우에도 실제 국소 관찰 근거를 남겨라. 카메라 정책·UI는 개편하지 마라.
+현재 checkout의 살아 있는 서버와 asset 응답을 확인한 뒤,
+도구가 허용하는 독립 브라우저 탭과 실제 버튼으로 세 clip을 재생해라.
+사용자 Chrome 포커스/오래된 AX 번호에 의존하지 마라.
+1배속 전체 주기 및 필요한 느린 관찰, 준비·중간·최대·작용·복귀를 보고
+이두근의 부착·윤곽·주변 구조와 좌우를 실제 화면으로 확인해라.
+공통 중단/재시작/선택·레이어·원본 복원/경혈 재진입은 공유 경로 기준 한 번 묶어 검사한다.
+기하 결함이 확인되면 source/frame/pivot/weights/보간/접촉 중 원인을 좁혀
+기존 offline authoring·source-bound replacement·공통 예산 계약으로 최소 수리하고 재검증해라.
+정상이라면 기존 GLB를 보존하고 관찰 근거로 Q03을 닫아라.
+수축 기능과 자세 관찰 범위는 보고서에서 정확히 구분한다.
 
-동일 입력의 통과 검사는 재사용하고 변경된 입력·누락된 실제 QA만 검증한다.
-이번 unit과 전체 MV2 상태를 분리하고 report/versioned evidence를 남겨라.
-최신 EXECUTION의 해당 MV2 결과만 반영하고 sync_execution.py 및 --check를 수행해라.
-이번 task로 인수한 WIP를 포함해 소유 변경만 선별 로컬 커밋해라.
-해시·포함/제외·잔여 변경과 다음 unit을 적고 멈춰라.
-Q04/Q05·AT 자동 실행·위임·push·배포·진단·치료·침 시뮬레이션 금지.
+중단돼도 같은 범위의 체크포인트부터 이어가라. 같은 자료를 처음부터 재조사하지 마라.
+Q03의 3개 판정과 변경 영향 검증을 마친 뒤 보고서/evidence/EXECUTION의 MV2,
+sync 및 --check와 소유 변경의 로컬 커밋까지 마무리해라.
+UI·카메라 개편, Q04/Q05·AT 자동 실행, push·배포는 하지 마라.
+전체 MV2의 partial과 이번 Q03 통과 여부를 구분해 보고하고 멈춰라.
 ```
