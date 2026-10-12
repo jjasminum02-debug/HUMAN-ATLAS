@@ -21,6 +21,9 @@ test('compact delivery verifies dependencies, cached bytes and invalidation with
       dependencies: inputs.map(input => ({ path: input.path, sha256: sha(input.value), bytes: Buffer.byteLength(input.value) })),
       entries: [{ uri, sha256: sha(bytes) }] };
     const indexPath = join(root, 'atlas-data/motion/local-motion-delivery-index.json'); await writeFile(indexPath, JSON.stringify(index));
+    const repairsPath = join(root, 'atlas-data/motion/source-motion-repairs-r1.json');
+    const repairs = { schemaVersion: 'source-motion-repairs-v1', sourceOnly: true, publicRedistribution: 'held', humanReview: 'not_performed', rows: [] as any[] };
+    await writeFile(repairsPath, JSON.stringify(repairs));
     const listeners = new Map<string, ((path: string) => void)[]>(); let handler: any;
     const watcher = { add() {}, on(event: string, callback: (path: string) => void) { listeners.set(event, [...listeners.get(event) ?? [], callback]); return this; }, off() {} };
     (motionAssetsPlugin(root).configureServer as Function)({ watcher, middlewares: { use(callback: any) { handler = callback; } } });
@@ -35,6 +38,20 @@ test('compact delivery verifies dependencies, cached bytes and invalidation with
     assert.equal((await call('/atlas-data/assets/motion/unknown.glb')).statusCode, 404);
     assert.equal((await call('/atlas-data/assets/motion/../outside.glb')).statusCode, 404);
     assert.equal((await call('/' + uri, { 'if-none-match': `"${sha(bytes)}"` })).statusCode, 304);
+    const repairUri = 'atlas-data/assets/motion/repaired/motion.glb';
+    await mkdir(join(root, 'atlas-data/assets/motion/repaired'), { recursive: true });
+    await writeFile(join(root, repairUri), bytes);
+    repairs.rows.push({ assetId: 'repaired-asset', bindingSignature: 'pinned-binding', baseUri: uri,
+      baseSha256: sha(bytes), uri: repairUri, sha256: sha(bytes), bytes: bytes.length });
+    await writeFile(repairsPath, JSON.stringify(repairs));
+    for (const callback of listeners.get('change') ?? []) callback(repairsPath);
+    assert.equal((await call('/' + repairUri)).statusCode, 200, 'verified repair is delivered');
+    repairs.rows[0].baseSha256 = '0'.repeat(64);
+    await writeFile(repairsPath, JSON.stringify(repairs));
+    for (const callback of listeners.get('change') ?? []) callback(repairsPath);
+    assert.equal((await call('/' + repairUri)).statusCode, 503, 'drifted base cannot authorize a repair');
+    repairs.rows = []; await writeFile(repairsPath, JSON.stringify(repairs));
+    for (const callback of listeners.get('change') ?? []) callback(repairsPath);
     await writeFile(join(root, uri), 'changed-file');
     assert.equal((await call('/' + uri, { 'if-none-match': `"${sha(bytes)}"` })).statusCode, 503, '304 never conceals a changed asset');
     await writeFile(join(root, uri), bytes);

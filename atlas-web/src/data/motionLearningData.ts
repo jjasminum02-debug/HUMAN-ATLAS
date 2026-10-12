@@ -1,4 +1,6 @@
 import learnerMotionRuntime from "./learnerMotionRuntime.generated.ts";
+import motionRepairs from "../../../atlas-data/motion/source-motion-repairs-r1.json" with { type: "json" };
+import { applySourceMotionRepair } from "../domain/sourceMotionRepairs.ts";
 import learnerCardRuntime from "../../../atlas-data/terminology/learner-card-runtime.json" with { type: "json" };
 import { learnerActionAppliesToSide } from "../domain/learnerActionText.ts";
 import { resolveLearnerMotionCandidate, type LearnerMotionActionOption, type LearnerActionText } from "../domain/motionLearning.ts";
@@ -25,7 +27,7 @@ type LearnerMotionRuntime = {
 };
 const motionRuntime = learnerMotionRuntime as unknown as LearnerMotionRuntime;
 /** Learner-only action text is preprojected; source/evidence references stay out of this bundle. */
-export function motionActionOptionsForLearner(conceptId: string | null, selectedSide?: string | null, sourceKey?: string | null) {
+function originalMotionActionOptionsForLearner(conceptId: string | null, selectedSide?: string | null, sourceKey?: string | null) {
   const selector = sourceKey && motionRuntime.actions[sourceKey]?.length ? sourceKey : conceptId ?? sourceKey;
   const projected = (selector ? motionRuntime.actions[selector] ?? [] : []).filter(row =>
     !row.candidate || !sourceKey || row.candidate.asset.sourceBinding?.subjectSourceKey === sourceKey);
@@ -57,4 +59,10 @@ export function motionActionOptionsForLearner(conceptId: string | null, selected
   }));
   const byId = new Map([...sourceRows, ...wave1Options].map(row => [row.id, row]));
   return [...byId.values()];
+}
+
+export function motionActionOptionsForLearner(conceptId: string | null, selectedSide?: string | null, sourceKey?: string | null) {
+  return originalMotionActionOptionsForLearner(conceptId, selectedSide, sourceKey).map(option => ({
+    ...option, candidate: applySourceMotionRepair(option.candidate, motionRepairs.rows),
+  }));
 }

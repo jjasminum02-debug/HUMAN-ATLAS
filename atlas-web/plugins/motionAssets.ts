@@ -19,6 +19,7 @@ export function motionAssetsPlugin(root: string): Plugin {
   const wave1RegistryPath = resolve(root, 'atlas-data/motion/t66-wave1-registration.json');
   let entriesPromise: Promise<Array<{ uri: string; sha256: string }>> | null = null;
   const deliveryPath = resolve(root, 'atlas-data/motion/local-motion-delivery-index.json');
+  const repairsPath = resolve(root, 'atlas-data/motion/source-motion-repairs-r1.json');
   async function entries() {
     if (entriesPromise) return entriesPromise;
     entriesPromise = (async () => {
@@ -44,6 +45,20 @@ export function motionAssetsPlugin(root: string): Plugin {
           || !/^[a-f0-9]{64}$/.test(row.sha256) || unique.has(row.uri)) throw Error('motion delivery entry');
         unique.set(row.uri, row);
       }
+      // Versioned repairs retain the original registry/WIP and require its exact
+      // base hash. The browser also pins the complete source binding contract.
+      const repairs = JSON.parse(await readFile(repairsPath, 'utf8'));
+      if (repairs.schemaVersion !== 'source-motion-repairs-v1' || repairs.sourceOnly !== true
+        || repairs.publicRedistribution !== 'held' || repairs.humanReview !== 'not_performed'
+        || !Array.isArray(repairs.rows)) throw Error('motion repair contract');
+      for (const row of repairs.rows) {
+        if (unique.get(row.baseUri)?.sha256 !== row.baseSha256
+          || typeof row.assetId !== 'string' || typeof row.bindingSignature !== 'string'
+          || typeof row.uri !== 'string' || !row.uri.startsWith(prefix.slice(1)) || row.uri.includes('..')
+          || !/^[a-f0-9]{64}$/.test(row.sha256) || unique.has(row.uri)
+          || !Number.isSafeInteger(row.bytes) || row.bytes <= 0 || row.bytes > 8 * 1024 * 1024) throw Error('motion repair base/path/hash/budget');
+        unique.set(row.uri, { uri: row.uri, sha256: row.sha256 });
+      }
       return [...unique.values()];
     })().catch((error) => { entriesPromise = null; throw error; });
     return entriesPromise;
@@ -59,9 +74,9 @@ export function motionAssetsPlugin(root: string): Plugin {
   return {
     name: 'registered-local-motion-assets',
     configureServer(server) {
-      server.watcher.add([learnerRegistryPath, wave1RegistryPath, deliveryPath]);
+      server.watcher.add([learnerRegistryPath, wave1RegistryPath, deliveryPath, repairsPath]);
       const invalidate = (file: string) => {
-        if ([learnerRegistryPath, wave1RegistryPath, deliveryPath].includes(resolve(file))) entriesPromise = null;
+        if ([learnerRegistryPath, wave1RegistryPath, deliveryPath, repairsPath].includes(resolve(file))) entriesPromise = null;
       };
       server.watcher.on('change', invalidate).on('unlink', invalidate).on('add', invalidate);
       server.httpServer?.once('close', () => {
