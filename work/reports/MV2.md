@@ -241,3 +241,65 @@ Q03 3개 mapping은 모두 승격하지 않았다. 전체 MV2는 여전히 Q03/Q
 기하·authoring·등록·runtime 수리는 확인된 원인이 없어 하지 않았고 기존 GLB 원본을 보존했다. 새 제품 테스트/typecheck/build는 입력 변경이 없어 실행하지 않았다. 실제 Safari 화면은 CUA 도구 출력에서 판독했으며 도구의 screenshot API가 local file export를 제공하지 않아 새 screenshot binary 파일은 evidence 폴더에 직렬화하지 않았다. 해당 화면 접근 관찰과 frozen MV1 frame sheets의 재사용 경계는 위 JSON에 기록했다.
 
 이 Q03 unit 뒤에도 전체 MV2는 **partial**이다. Q01/Q02/Q03 세 그룹·6매핑이 resolved 범위이고, Q04 26 + Q05 2 = 28매핑이 미검사로 남는다. `nextScheduledTask=AT8`와 auto-execution=false를 유지했다. 다음 정확한 unit은 Q04/Q05의 별도 사용자 요청이며 이번에는 실행하지 않았다. AT, Q04, Q05, push 및 배포는 하지 않았다.
+
+## 2026-10-13 Q04/Q05 — 28개 실제 learner 판정 및 MV2 scoped acceptance
+
+**Q04 26/26, Q05 2/2 통과.** 이번 28개는 최신 source/action/side/clip/asset hash와 learner 연결을 대조하고, 항목별 실제 화면에서 한 주기·중간·최대 부근·원위치 복귀와 국소 구조를 확인했다. 처음 증거에서 cycle 끝이 관찰되지 않았던 Q04 ACTION-0006/0007/0020은 동일 정확 route에서 1배속 cycle, near-maximum→return 구간, stop 후 0% 복귀를 추가로 확인했다. 결함·UI 보류·검증불가·미검사는 0건이며 확정 수리 원인이 없어 repair queue는 비었다. Q01 engineering 2 + Q02 1 + Q03 3 + Q04 26 + Q05 2 = 기존 34매핑 필수 판정이 모두 닫혔고, 별도 q01-learning-quality 통과와 Q03에서 재사용한 공통 재생 lifecycle 결과도 대조하여 **MV2 scoped acceptance를 완료**로 기록했다. 모든 근육의 신규/자연 수축 승인, 해부학적 정상성, 교수 검토, 생리 인증 또는 공개 권리 승인은 아니다.
+
+[시작·보존 경계](../evidence/MV2/2026-10-13-q04-q05-r2/start.json) · [28개 동결 매핑 원장](../evidence/MV2/2026-10-13-q04-q05-r2/assessed-inventory.json) · [항목별 화면/phase 판정](../evidence/MV2/2026-10-13-q04-q05-r2/ui-observations.json) · [실제 파일 hash/bytes 대조](../evidence/MV2/2026-10-13-q04-q05-r2/asset-integrity.json) · [검증 요약](../evidence/MV2/2026-10-13-q04-q05-r2/validation.json) · [빈 repair queue](../evidence/MV2/2026-10-13-q04-q05-r2/repair-queue.json) · [잔여 unit](../evidence/MV2/2026-10-13-q04-q05-r2/remaining-units.json) · [execution sync/--check 로그](../evidence/MV2/2026-10-13-q04-q05-r2/execution-sync.log).
+
+### 통합 28행 판정
+
+| 묶음/ID | sourceKey · side | 실제 선택 동작 | clip · GLB SHA prefix | 화면 cycle / 판정 |
+|---|---|---|---|---|
+| Q04 / `ACTION-0001` | `ZA-c7010a9-0f56fb6c5633c34da16a6eda` · right | 엄지손가락 손허리손가락관절 벌림 | `A-right-thumb-mcp-abduction-digit-1` · `03a4ba7b2a05` | 0 → 49% mid → 93% near-max → 0; normal/pass |
+| Q04 / `ACTION-0002` | `ZA-c7010a9-38fd3807c5ebc354eb98cb97` · right | 새끼손가락 손허리손가락관절 굽힘 | `A-right-little-mcp-flexion-digit-5` · `5c0b1bf0e448` | 0 → 54% mid → 87% near-max → 0; normal/pass |
+| Q04 / `ACTION-0003` | `ZA-c7010a9-3e2eb1f161758086655ab8ee` · left | 엄지손가락 손가락뼈사이관절 굽힘 | `A-left-thumb-ip-flexion-digit-1` · `887a52c7fe80` | 0 → 36% mid → 92% near-max → 0; normal/pass |
+| Q04 / `ACTION-0004` | `ZA-c7010a9-3e5e8ba5b4c22f5a18105199` · left | 엄지손가락 손허리손가락관절 벌림 | `A-left-thumb-mcp-abduction-digit-1` · `d0de141ac8f9` | 0 → 46% mid → 98% near-max → 0; normal/pass |
+| Q04 / `ACTION-0005` | `ZA-c7010a9-43f48b8384f56a4dc1cd4777` · left | 약손가락 손허리손가락관절 모음 | `A-left-finger-mcp-adduction-digit-4` · `63e4aba32cab` | 0 → 37% mid → 92% near-max → 0; normal/pass |
+| Q04 / `ACTION-0006` | `ZA-c7010a9-43f48b8384f56a4dc1cd4777` · left | 새끼손가락 손허리손가락관절 모음 | `A-left-finger-mcp-adduction-digit-5` · `235d981e2d18` | 0 → 58% mid → 98% near-max → 0; normal/pass |
+| Q04 / `ACTION-0007` | `ZA-c7010a9-43f48b8384f56a4dc1cd4777` · left | 새끼손가락 손허리손가락관절 굽힘 | `A-left-finger-mcp-flexion-digit-5` · `721eb0741a26` | 0 → 51% mid → 99% near-max → 0; normal/pass |
+| Q04 / `ACTION-0008` | `ZA-c7010a9-512feee2bcf3c58b440cc29e` · left | 집게손가락 손허리손가락관절 벌림 | `A-left-finger-mcp-abduction-digit-2` · `d18990850323` | 0 → 52% mid → 90% near-max → 0; normal/pass |
+| Q04 / `ACTION-0009` | `ZA-c7010a9-512feee2bcf3c58b440cc29e` · left | 약손가락 손허리손가락관절 벌림 | `A-left-finger-mcp-abduction-digit-4` · `54499ba75834` | 0 → 54% mid → 98% near-max → 0; normal/pass |
+| Q04 / `ACTION-0010` | `ZA-c7010a9-512feee2bcf3c58b440cc29e` · left | 집게손가락 손허리손가락관절 굽힘 | `A-left-finger-mcp-flexion-digit-2` · `87ee81567910` | 0 → 46% mid → 89% near-max → 0; normal/pass |
+| Q04 / `ACTION-0011` | `ZA-c7010a9-549d6cdff769758b90e1a925` · right | 엄지손가락 손가락뼈사이관절 굽힘 | `A-right-thumb-ip-flexion-digit-1` · `0716c8b06751` | 0 → 46% mid → 89% near-max → 0; normal/pass |
+| Q04 / `ACTION-0012` | `ZA-c7010a9-797eeab0e43eb1f0e6034b65` · right | 집게손가락 손허리손가락관절 벌림 | `A-right-finger-mcp-abduction-digit-2` · `b9602051e9b5` | 0 → 47% mid → 98% near-max → 0; normal/pass |
+| Q04 / `ACTION-0013` | `ZA-c7010a9-797eeab0e43eb1f0e6034b65` · right | 약손가락 손허리손가락관절 벌림 | `A-right-finger-mcp-abduction-digit-4` · `be8bfd1f523a` | 0 → 47% mid → 89% near-max → 0; normal/pass |
+| Q04 / `ACTION-0014` | `ZA-c7010a9-797eeab0e43eb1f0e6034b65` · right | 집게손가락 손허리손가락관절 굽힘 | `A-right-finger-mcp-flexion-digit-2` · `9dac02105f38` | 0 → 44% mid → 89% near-max → 0; normal/pass |
+| Q04 / `ACTION-0016` | `ZA-c7010a9-8c15eaf1238e70f4cbedc7fa` · right | 새끼손가락 손허리손가락관절 굽힘 | `A-right-finger-mcp-flexion-digit-5` · `baa644d308d8` | 0 → 44% mid → 89% near-max → 0; normal/pass |
+| Q04 / `ACTION-0017` | `ZA-c7010a9-961942c3537b8a434267a8b9` · left | 새끼손가락 손허리손가락관절 굽힘 | `A-left-little-mcp-flexion-digit-5` · `1570dcaa7dd7` | 0 → 46% mid → 98% near-max → 0; normal/pass |
+| Q04 / `ACTION-0020` | `ZA-c7010a9-9e5c3efa530741ae8f0595ec` · left | 가운뎃손가락 몸쪽손가락뼈사이관절 굽힘 | `A-left-finger-pip-flexion-digit-3` · `82d2df17d5eb` | 0 → 64% mid → 98% near-max → 0; normal/pass |
+| Q04 / `ACTION-0021` | `ZA-c7010a9-9e5c3efa530741ae8f0595ec` · left | 새끼손가락 몸쪽손가락뼈사이관절 굽힘 | `A-left-finger-pip-flexion-digit-5` · `d0edd2023199` | 0 → 46% mid → 90% near-max → 0; normal/pass |
+| Q04 / `ACTION-0022` | `ZA-c7010a9-ae5d77d291f383b3bf2cdf55` · right | 새끼손가락 손허리손가락관절 벌림 | `A-right-little-mcp-abduction-digit-5` · `7477fb327ce7` | 0 → 38% mid → 100% near-max → 0; normal/pass |
+| Q04 / `ACTION-0025` | `ZA-c7010a9-b530e3a19526f627fdd45923` · left | 약손가락 먼쪽손가락뼈사이관절 굽힘 | `A-left-finger-dip-flexion-digit-4` · `ce0bc3bfcde1` | 0 → 71% mid → 99% near-max → 0; normal/pass |
+| Q04 / `ACTION-0026` | `ZA-c7010a9-bef2f7c5fe91a0b7328ceaef` · right | 약손가락 먼쪽손가락뼈사이관절 굽힘 | `A-right-finger-dip-flexion-digit-4` · `66f402cb015c` | 0 → 47% mid → 87% near-max → 0; normal/pass |
+| Q04 / `ACTION-0027` | `ZA-c7010a9-d3839cec2e0626a3881b2d21` · left | 새끼손가락 손허리손가락관절 벌림 | `A-left-little-mcp-abduction-digit-5` · `7119c1c0185f` | 0 → 46% mid → 90% near-max → 0; normal/pass |
+| Q04 / `ACTION-0028` | `ZA-c7010a9-e3bf9cdaa3f5e54585e75139` · right | 약손가락 손허리손가락관절 모음 | `A-right-finger-mcp-adduction-digit-4` · `434a8e60ce60` | 0 → 37% mid → 98% near-max → 0; normal/pass |
+| Q04 / `ACTION-0029` | `ZA-c7010a9-e3bf9cdaa3f5e54585e75139` · right | 새끼손가락 손허리손가락관절 모음 | `A-right-finger-mcp-adduction-digit-5` · `7436f5654836` | 0 → 36% mid → 97% near-max → 0; normal/pass |
+| Q04 / `ACTION-0033` | `ZA-c7010a9-f04b81d9566c227fb9805995` · right | 가운뎃손가락 몸쪽손가락뼈사이관절 굽힘 | `A-right-finger-pip-flexion-digit-3` · `41bfb69ad214` | 0 → 39% mid → 92% near-max → 0; normal/pass |
+| Q04 / `ACTION-0034` | `ZA-c7010a9-f04b81d9566c227fb9805995` · right | 새끼손가락 몸쪽손가락뼈사이관절 굽힘 | `A-right-finger-pip-flexion-digit-5` · `18447559cf77` | 0 → 44% mid → 88% near-max → 0; normal/pass |
+| Q05 / `ACTION-0738` | `ZA-c7010a9-0032489e5062440b0fa49b28` · right | 허리 폄 자세 관찰 | `lumbar-multifidus-extension-local` · `a4a05edb572b` | 0 → 40% mid → 93% near-max → 0; normal/pass |
+| Q05 / `ACTION-0745` | `ZA-c7010a9-634eba3397c00766765d1c25` · left | 목 굽힘 자세 관찰 | `cervical-longus-colli-flexion-local` · `fe5264cc4226` | 0 → 38% mid → 85% near-max → 0; normal/pass |
+
+### 실제 경로·관찰 및 재사용 범위
+
+- **Q04 muscle_action 26건:** 기존 `근육 작용 찾기 → 정확한 동작 범주 → exact target·side → 기능 카드의 exact action 선택 → 움직임으로 이해하기`를 사용했다. 같은 표시 이름이 다른 범주에 있는 경우 범주 안에서 target을 다시 특정해 정확한 action 선택을 확인했다. 선택한 쪽 손/전완의 근육과 뼈·주변 구조를 실제 learner 화면의 정지·중간·최대 부근에서 확인하고 cycle 끝/반복 경계 후 정지해 progress 0으로 복귀했다.
+- **Q05 posture_observation 2건:** 근육 작용 검색을 자료 부재로 사용하지 않았다. 긴목근 왼쪽은 구조 검색 → 기능 → `자세에서 관찰하기` → `목 굽힘 자세 관찰`, 허리 다열근 오른쪽은 exact 오른쪽 source 선택 → 기능 → `자세에서 관찰하기` → `허리 폄 자세 관찰` → 재생했다. 각각 rest, 중간(38%/40%; 캡처 프레임은 각각 43%/46%), 최대 부근(85%/93%, inline 캡처에서 85%/98%), 반복/끝 경계와 0 복귀를 확인했다. 경추 및 요추·천골·골반과 대상 근육 표면을 같이 관찰했다. UI가 주변 자세를 보여 주며 근육 작용/활성도를 증명하지 않는다는 문구도 유지된다. exact posture option을 고른 뒤 재생이 활성화되는 것은 의도된 경로였다.
+- ACTION-0006/0007/0020은 실제 화면에서 정확한 근육·side·action을 재확인했다. 각각 0→중간→최대 부근(화면 약 96%/99%/98%)→진행값 감소/복귀 프레임→stop 후 0%로 돌아왔다. 반복 동작 진행 숫자는 캡처 호출 시간차에 따라 달라질 수 있어 row JSON에는 AX 진행 sample과 별도 캡처 관찰 phase를 함께 보관했다.
+- 모든 28행에서 관찰된 범위 내 부착부 gross 이탈, 관통, 접힘/면 뒤집힘, 과도 돌출, 주변 분리 또는 temporal pop은 보이지 않았다. 이는 화면 샘플에 한정된 육안 분류다. 기존 MV1 exact-hash dense GLB metrics와 real-loader 결과는 hash/clip/transform/playback fingerprint가 그대로라 재사용했다. 해당 수치는 변형 수치 QC이지 모든 접촉의 부재·자연 수축의 증명이 아니다. 기존 QC가 부착 landmark/충돌 oracle을 갖지 않아 attachment drift·전체 표면 관통을 별도 수치로 승인하지 않는다.
+- Q03 r3에서 같은 runtime/code fingerprint로 확인한 stop/restart, 원래 선택·레이어, 경혈/영역 재진입 lifecycle은 재사용했다. 이번에는 달라진 Q04 정확 action-card 선택 26경로와 Q05 posture-option 선택/side 2경로 및 cycle/return만 추가 확인했다. 동결 실행 입력 18개는 전부 그대로다. 새 asset, runtime, UI, camera, geometry, authoring, repair manifest 변경이 없어 새 product tests/typecheck/build는 실행하지 않았다.
+- 실제 CUA 화면 캡처는 이 실행 transcript에서 inline으로 육안 판독했으며, 사용 가능한 캡처 인터페이스에는 workspace 파일 export가 없어 화면 PNG를 새 파일로 직렬화하지 못했다. row별 phase/selection/시각 판정은 JSON에 기록했다. linked contact sheets는 동결 hash의 기존 정적 GLB QC이며 실제 앱 스크린샷으로 오인하지 않도록 분리했다: [긴목근 정적 재생 sheet](../evidence/MV1/2026-10-11-run-01/visual/playback-contact-sheets-v3/71-103ac709c58d-part-01.jpg), [다열근 정적 재생 sheet](../evidence/MV1/2026-10-11-run-01/visual/playback-contact-sheets-v3/72-ba5642407e3f-part-01.jpg).
+
+### MV2 상태와 경계
+
+| 범위 | 기존 필수 매핑 | 결과 |
+|---|---:|---|
+| Q01 engineering | 2 | pass; 기존 versioned GLB/수리 결과 보존 |
+| q01-learning-quality | 별도 quality unit | pass; 새 매핑 수에 중복 합산하지 않음 |
+| Q02 | 1 | pass; 기존 exact budget 계약/최종 자산 보존 |
+| Q03 | 3 | pass; 등록된 posture observation 전달 범위 |
+| Q04 | 26 | 이번 실행에서 모두 pass |
+| Q05 | 2 | 이번 실행에서 모두 pass |
+| **동결 Q01–Q05 매핑 합계** | **34** | **unresolved 0; MV2 scoped acceptance complete** |
+
+`humanReview=not_performed`, `publicRedistribution=held`, `physiologicalCertification=false`를 유지했다. 다음 계획은 **AT8**이며 시작하지 않았고 `autoRunNext=false`다. AT/AC 상태, 단일 장면, 카메라·보기 옵션, 원본/OpenSim_Models/T13/역사 freeze와 사전 사용자 WIP에는 변경을 가하지 않았다.

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "mv2-q04-q05-final-validation-v1",
+  "runDate": "2026-10-13",
+  "unit": "Q04-Q05 remaining validation bundle and MV2 scoped acceptance closure",
+  "owner": "Luna Max",
+  "startingHead": "54a10fe1da39529c8d51389eaad9997ba43984db",
+  "startingStatusEntryCount": 5975,
+  "unchangedFrozenInputs": [
+    "AGENTS.md",
+    "work/tasks/MV2.md",
+    "work/plans/mv2-at-integrated-2026-10-12/PROMPTS-IN-ORDER.md",
+    "work/EXECUTION.json",
+    "work/reports/MV2.md",
+    "work/evidence/MV2/2026-10-12-q02-r1/repair-queue.json",
+    "work/evidence/MV2/2026-10-12-q03-r3/validation.json",
+    "work/evidence/MV2/2026-10-12-q03-r3/learner-screen-addendum.json",
+    "work/evidence/MV1/2026-10-11-run-01/inventory.json",
+    "work/evidence/MV1/2026-10-11-run-01/metrics/automatic-metrics-v3.json",
+    "work/evidence/MV1/2026-10-11-run-01/runtime/real-loader-validation.json",
+    "atlas-data/motion/t66-wave1-registration.json",
+    "atlas-web/src/data/learnerMotionRuntime.generated.ts",
+    "atlas-web/src/data/motionLearningData.ts",
+    "atlas-web/src/domain/motionLearning.ts",
+    "atlas-web/src/ui/MotionLearningPanel.tsx",
+    "atlas-web/src/viewer/animationSceneAdapter.ts",
+    "atlas-web/src/viewer/datasets/DatasetSceneAdapter.ts"
+  ],
+  "changedFrozenInputs": [],
+  "mappingAudit": {
+    "expected": 28,
+    "checked": 28,
+    "q04": 26,
+    "q05": 2,
+    "uniqueActionIds": 28,
+    "sourceActionClipHashSideExact": true,
+    "actualFileHashAndBytesMatchRegistration": true,
+    "actualFileHashAndBytesMatchR1Snapshot": true,
+    "exactHashClipTransformPlaybackDeduplicationRows": 28,
+    "sideVariantsPreservedAsSeparateChecks": true
+  },
+  "learnerScreen": {
+    "resultCounts": {
+      "pass": 28,
+      "actualDefect": 0,
+      "uiHoldAfterObservation": 0,
+      "verificationUnavailable": 0,
+      "notChecked": 0,
+      "error": 0
+    },
+    "q04Path": "근육 작용 찾기 → 정확한 동작 범주 → exact target·side → 기능 카드 exact action 선택 → 움직임으로 이해하기",
+    "q05Path": "구조 찾기 → exact target·side → 기능 → 자세에서 관찰하기 → exact posture option → 움직임으로 이해하기",
+    "oneCycleRestMidpointNearMaximumReturnVerifiedForEveryMapping": true,
+    "actualLocalMuscleAttachmentAndNeighborContextManuallyObserved": true,
+    "manualVisualDisposition": "normal for the observed learner frames; not anatomical or physiological certification",
+    "localScreenshotFiles": false,
+    "screenshotConstraint": "CUA screenshots were visually reviewed inline in the task transcript; the exposed screenshot API returns inline images and has no local-file export method. Durable row-by-row phase/status data and exact-hash contact sheets are linked in this evidence version.",
+    "perMappingDetails": "ui-observations.json"
+  },
+  "reusedEvidence": {
+    "exactHashDenseGlbQc": "work/evidence/MV1/2026-10-11-run-01/metrics/automatic-metrics-v3.json",
+    "sameHashRealLoader": "work/evidence/MV1/2026-10-11-run-01/runtime/real-loader-validation.json",
+    "q01Engineering": "work/EXECUTION.json.featureWorkUnits.MV2.priorEngineeringRun",
+    "q01LearningQuality": "work/evidence/MV2/2026-10-12-q01-learning-quality-r1/validation-final-r1.json",
+    "q02": "work/evidence/MV2/2026-10-12-q02-r1/validation-final.json",
+    "q03ScreenAndSharedLifecycle": "work/evidence/MV2/2026-10-12-q03-r3/validation.json and learner-screen-addendum.json",
+    "frozenInputFingerprintChanged": false,
+    "priorGates": {
+      "q01-learning-quality": {
+        "path": "work/evidence/MV2/2026-10-12-q01-learning-quality-r1/validation-final-r1.json",
+        "acceptancePassed": true,
+        "unitStatus": null
+      },
+      "Q02": {
+        "path": "work/evidence/MV2/2026-10-12-q02-r1/validation-final.json",
+        "acceptancePassed": true,
+        "unitStatus": null
+      },
+      "Q03": {
+        "path": "work/evidence/MV2/2026-10-12-q03-r3/validation.json",
+        "acceptancePassed": true,
+        "unitStatus": "pass_for_registered_posture_observation_delivery"
+      }
+    }
+  },
+  "repairQueue": "empty_no_confirmed_defects",
+  "productFilesModified": false,
+  "testsTypecheckBuildRerun": false,
+  "mv2ScopedAcceptance": {
+    "passed": true,
+    "originalQ01ToQ05Mappings": 34,
+    "unresolvedRequiredMappings": 0,
+    "q01LearningQualityPassed": true,
+    "sharedPlaybackLifecyclePassed": true,
+    "allMusclesNaturalContractionApproved": false,
+    "humanReview": "not_performed",
+    "publicRedistribution": "held",
+    "physiologicalCertification": false
+  },
+  "nextExactUnit": "AT8 (planned next; not started; no automatic execution)",
+  "executionSync": {
+    "command": "python3 work/tools/sync_execution.py",
+    "result": "Updated 0 execution views from 40b136358f5f",
+    "checkCommand": "python3 work/tools/sync_execution.py --check",
+    "checkResult": "Execution projections match; no writes.",
+    "log": "execution-sync.log"
+  },
+  "ownershipAudit": {
+    "preCommitStatusEntryCount": 5985,
+    "preExistingUserWipEntriesPreserved": 5975,
+    "ownedPendingEntries": 10,
+    "generatedProjectionChanges": 0
+  }
+}

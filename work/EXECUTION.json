@@ -7844,7 +7844,7 @@
       "frozenSourceEvidence": "work/evidence/MV1/2026-10-11-run-01"
     },
     "MV2": {
-      "status": "partial",
+      "status": "complete",
       "feature": "motion-quality-review",
       "owner": "Sol xhigh",
       "spec": "work/tasks/MV2.md",
@@ -7853,75 +7853,78 @@
         "MV1"
       ],
       "autoRunNext": false,
-      "acceptancePassed": false,
+      "acceptancePassed": true,
       "report": "work/reports/MV2.md",
-      "evidence": "work/evidence/MV2/2026-10-12-q03-r3",
-      "updatedDate": "2026-10-12",
+      "evidence": "work/evidence/MV2/2026-10-13-q04-q05-r2",
+      "updatedDate": "2026-10-13",
       "lastRun": {
-        "date": "2026-10-12",
-        "unit": "MV1-Q03-biceps-lateral-contour-and-visibility",
-        "owner": "Sol xhigh",
-        "startingHead": "3bbae4961ddca6c027235ee6102d1aa710426245",
+        "date": "2026-10-13",
+        "unit": "MV2-Q04-Q05-28-mapping-actual-learner-validation-and-scoped-closure",
+        "owner": "Luna Max",
+        "startingHead": "54a10fe1da39529c8d51389eaad9997ba43984db",
         "unitAcceptancePassed": true,
         "acceptancePassed": true,
         "engineeringValidationPassed": true,
-        "learningExpressionAssessment": "passed_posture_observation_selection_playback_midframe_and_return_only",
+        "learningExpressionAssessment": "passed_frozen_Q01-Q05_34_mapping_scope_plus_q01_learning_quality; posture_observation remains posture_observation",
         "geometryModified": false,
         "assetsModified": false,
         "authoringModified": false,
         "runtimeModified": false,
-        "finalAssets": [
-          "atlas-data/assets/motion/t66-unit01-elbow-flexion-left-source-frame-r4/motion.glb",
-          "atlas-data/assets/motion/t66-unit01-shoulder-flexion-left-source-frame-r4/motion.glb",
-          "atlas-data/assets/motion/t66-unit01-shoulder-flexion-right-source-frame-r4/motion.glb"
-        ],
-        "finalAssetSha256AndBytes": [
-          {
-            "uri": "atlas-data/assets/motion/t66-unit01-elbow-flexion-left-source-frame-r4/motion.glb",
-            "sha256": "a263144376925c2ece792c965347f26911e6c6b9de4cc29dfc398983e8e3844d",
-            "bytes": 2100760
-          },
-          {
-            "uri": "atlas-data/assets/motion/t66-unit01-shoulder-flexion-left-source-frame-r4/motion.glb",
-            "sha256": "13cb37b2d1bf048626cb79d46ed28a3c2f6453f1d19444c106e46b6ec2403e86",
-            "bytes": 1519788
-          },
-          {
-            "uri": "atlas-data/assets/motion/t66-unit01-shoulder-flexion-right-source-frame-r4/motion.glb",
-            "sha256": "8f7e3a5ea0a27a4b2a6254ce65c6b8ed01c99dab67f2e2e0266a7fed12225b96",
-            "bytes": 1518568
-          }
-        ],
-        "sameSceneLearnerSidesObservedAtRest": 2,
-        "completeQ03CyclesVerifiedThisRun": 3,
+        "uiModified": false,
+        "cameraPolicyModified": false,
+        "q04Mappings": 26,
+        "q05Mappings": 2,
+        "mappingCountTotal": 28,
         "screenStatusCounts": {
-          "pass": 3,
+          "pass": 28,
           "fail": 0,
           "not_checked": 0,
           "error": 0
         },
-        "observationClassCounts": {
-          "posture_observation": 3
+        "visualDispositionCounts": {
+          "normal": 28,
+          "actualGeometryOrPlaybackDefect": 0,
+          "uiHoldAfterObservation": 0,
+          "verificationUnavailable": 0,
+          "notChecked": 0
         },
+        "finalMappingEvidence": "work/evidence/MV2/2026-10-13-q04-q05-r2/assessed-inventory.json",
+        "screenEvidence": "work/evidence/MV2/2026-10-13-q04-q05-r2/ui-observations.json",
+        "assetIntegrity": "work/evidence/MV2/2026-10-13-q04-q05-r2/asset-integrity.json",
+        "validation": "work/evidence/MV2/2026-10-13-q04-q05-r2/validation.json",
+        "repairQueue": "work/evidence/MV2/2026-10-13-q04-q05-r2/repair-queue.json",
+        "remainingUnits": "work/evidence/MV2/2026-10-13-q04-q05-r2/remaining-units.json",
+        "sameHashDenseGlbQcReused": 28,
+        "sameHashRealLoaderResultsReused": 28,
+        "actualLearnerFullCyclesAndReturnVerified": 28,
+        "additionalFullCycleChecks": [
+          "T66-W1-ACTION-0006",
+          "T66-W1-ACTION-0007",
+          "T66-W1-ACTION-0020"
+        ],
+        "commonLifecycleRegression": "Q03 r3 same-code baseline reused; Q04 exact action route and Q05 posture-option/side branches verified in this run",
         "newTestsRun": 0,
         "newTypechecksRun": 0,
         "newPackageBuildsRun": 0,
-        "validation": "work/evidence/MV2/2026-10-12-q03-r3/validation.json",
-        "screenEvidence": "work/evidence/MV2/2026-10-12-q03-r3/learner-screen-addendum.json",
+        "confirmedRepairCause": null,
+        "repairApplied": false,
+        "repairQueueCount": 0,
         "humanReview": "not_performed",
         "publicRedistribution": "held",
         "physiologicalCertification": false,
-        "confirmedRepairCause": null,
-        "repairApplied": false,
-        "nextExactUnit": "MV2 Q04/Q05 validation: 28 mappings (not executed; wait for a separate user request)."
+        "naturalContractionApproval": "not_performed",
+        "localScreenCaptureFile": false,
+        "screenCaptureLimitation": "CUA screenshots were visually inspected inline in this task transcript; no supported workspace file-export method was exposed.",
+        "nextExactUnit": "AT8 (planned; not started; automatic execution false)",
+        "executionSync": "work/evidence/MV2/2026-10-13-q04-q05-r2/execution-sync.log"
       },
       "result": {
-        "resolvedGroups": 3,
-        "resolvedMappings": 6,
-        "remainingObservedAmbiguousGroups": 2,
-        "remainingObservedAmbiguousMappings": 28,
+        "resolvedGroups": 5,
+        "resolvedMappings": 34,
+        "remainingObservedAmbiguousGroups": 0,
+        "remainingObservedAmbiguousMappings": 0,
         "uninspectedMV1Mappings": 0,
-        "wholeMV2Complete": false,
+        "wholeMV2Complete": true,
         "learningQualityUnitsPassed": 1,
         "currentQ03MappingsNotPromoted": 3,
         "q03MappingsNotPromotedToMuscleAction": 3,
@@ -7937,14 +7940,69 @@
         "q03LearningIntentCounts": {
           "posture_observation": 3,
           "muscle_action": 0
+        },
+        "scopedAcceptance": "complete_for_frozen_original_Q01-Q05_34_mappings_and_q01_learning_quality",
+        "mappingCountReconciliation": {
+          "Q01": 2,
+          "Q02": 1,
+          "Q03": 3,
+          "Q04": 26,
+          "Q05": 2,
+          "total": 34
+        },
+        "q01LearningQualityPassed": true,
+        "q04ScreenStatusCounts": {
+          "pass": 26,
+          "fail": 0,
+          "not_checked": 0,
+          "error": 0
+        },
+        "q05ScreenStatusCounts": {
+          "pass": 2,
+          "fail": 0,
+          "not_checked": 0,
+          "error": 0
+        },
+        "q04ObservationClassCounts": {
+          "muscle_action": 26
+        },
+        "q05ObservationClassCounts": {
+          "posture_observation": 2
+        },
+        "humanReview": "not_performed",
+        "publicRedistribution": "held",
+        "physiologicalCertification": false,
+        "priorQ03HistoricalResult": {
+          "resolvedGroups": 3,
+          "resolvedMappings": 6,
+          "remainingObservedAmbiguousGroups": 2,
+          "remainingObservedAmbiguousMappings": 28,
+          "uninspectedMV1Mappings": 0,
+          "wholeMV2Complete": false,
+          "learningQualityUnitsPassed": 1,
+          "currentQ03MappingsNotPromoted": 3,
+          "q03MappingsNotPromotedToMuscleAction": 3,
+          "q03ScreenStatusCounts": {
+            "pass": 3,
+            "fail": 0,
+            "not_checked": 0,
+            "error": 0
+          },
+          "q03ObservationClassCounts": {
+            "posture_observation": 3
+          },
+          "q03LearningIntentCounts": {
+            "posture_observation": 3,
+            "muscle_action": 0
+          }
         }
       },
-      "repairQueue": "work/evidence/MV2/2026-10-12-q03-r3/repair-queue.json",
-      "remainingUnits": "work/evidence/MV2/2026-10-12-q03-r3/remaining-units.json",
-      "nextRepairUnit": "Q04/Q05 28-mapping validation (separate request; no automatic execution)",
+      "repairQueue": "work/evidence/MV2/2026-10-13-q04-q05-r2/repair-queue.json",
+      "remainingUnits": "work/evidence/MV2/2026-10-13-q04-q05-r2/remaining-units.json",
+      "nextRepairUnit": null,
       "nextScheduledTask": "AT8",
       "noAutoAdvance": true,
-      "startingHead": "fa37d4109e33e4e31082570ac9d74e2708685e1f",
+      "startingHead": "54a10fe1da39529c8d51389eaad9997ba43984db",
       "localImplementationCommit": "3ee4587b12a7c8482d699f48fda71a0c430f0ae5",
       "priorEngineeringRun": {
         "date": "2026-10-12",
@@ -7965,7 +8023,7 @@
         "humanReview": "not_performed",
         "publicRedistribution": "held"
       },
-      "nextPrompt": "work/plans/mv2-at-integrated-2026-10-12/NEXT-MV2-Q03.md",
+      "nextPrompt": "work/tasks/AT8.md (scheduled next; not executed)",
       "localImplementationCommitUnit": "prior MV1-Q01-rectus-femoris-knee-contour engineering",
       "priorLearningQualityRun": {
         "date": "2026-10-12",
@@ -8037,6 +8095,64 @@
           "interpretation": "Native rough/overlapping surfaces retained. Small new sampled soft-layer overlaps are disclosed; local teaching/legibility acceptance is not anatomical normality or zero intersection approval."
         },
         "commitReceipt": "work/evidence/MV2/2026-10-12-q02-r1/commit-receipt.json"
+      },
+      "priorQ03Run": {
+        "date": "2026-10-12",
+        "unit": "MV1-Q03-biceps-lateral-contour-and-visibility",
+        "owner": "Sol xhigh",
+        "startingHead": "3bbae4961ddca6c027235ee6102d1aa710426245",
+        "unitAcceptancePassed": true,
+        "acceptancePassed": true,
+        "engineeringValidationPassed": true,
+        "learningExpressionAssessment": "passed_posture_observation_selection_playback_midframe_and_return_only",
+        "geometryModified": false,
+        "assetsModified": false,
+        "authoringModified": false,
+        "runtimeModified": false,
+        "finalAssets": [
+          "atlas-data/assets/motion/t66-unit01-elbow-flexion-left-source-frame-r4/motion.glb",
+          "atlas-data/assets/motion/t66-unit01-shoulder-flexion-left-source-frame-r4/motion.glb",
+          "atlas-data/assets/motion/t66-unit01-shoulder-flexion-right-source-frame-r4/motion.glb"
+        ],
+        "finalAssetSha256AndBytes": [
+          {
+            "uri": "atlas-data/assets/motion/t66-unit01-elbow-flexion-left-source-frame-r4/motion.glb",
+            "sha256": "a263144376925c2ece792c965347f26911e6c6b9de4cc29dfc398983e8e3844d",
+            "bytes": 2100760
+          },
+          {
+            "uri": "atlas-data/assets/motion/t66-unit01-shoulder-flexion-left-source-frame-r4/motion.glb",
+            "sha256": "13cb37b2d1bf048626cb79d46ed28a3c2f6453f1d19444c106e46b6ec2403e86",
+            "bytes": 1519788
+          },
+          {
+            "uri": "atlas-data/assets/motion/t66-unit01-shoulder-flexion-right-source-frame-r4/motion.glb",
+            "sha256": "8f7e3a5ea0a27a4b2a6254ce65c6b8ed01c99dab67f2e2e0266a7fed12225b96",
+            "bytes": 1518568
+          }
+        ],
+        "sameSceneLearnerSidesObservedAtRest": 2,
+        "completeQ03CyclesVerifiedThisRun": 3,
+        "screenStatusCounts": {
+          "pass": 3,
+          "fail": 0,
+          "not_checked": 0,
+          "error": 0
+        },
+        "observationClassCounts": {
+          "posture_observation": 3
+        },
+        "newTestsRun": 0,
+        "newTypechecksRun": 0,
+        "newPackageBuildsRun": 0,
+        "validation": "work/evidence/MV2/2026-10-12-q03-r3/validation.json",
+        "screenEvidence": "work/evidence/MV2/2026-10-12-q03-r3/learner-screen-addendum.json",
+        "humanReview": "not_performed",
+        "publicRedistribution": "held",
+        "physiologicalCertification": false,
+        "confirmedRepairCause": null,
+        "repairApplied": false,
+        "nextExactUnit": "MV2 Q04/Q05 validation: 28 mappings (not executed; wait for a separate user request)."
       }
     }
   },
