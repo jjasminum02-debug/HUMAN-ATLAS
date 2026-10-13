@@ -56,3 +56,42 @@ navel/nipple/crease/nail의 정확한 source annotation과 derived 적합성은 
 [재개 프롬프트](../evidence/AT10/2026-10-13-skin-fit-r1/next-skin-fit-prompt.txt)는 같은 AT10/skin-fit의 구체적 재개다. 통과 후에만 [문서의 skin-runtime 프롬프트](../plans/acupoint-surface-posture-2026-10-13/PROMPTS-IN-ORDER.md)를 사용한다. skin-runtime, reconciliation, AT30/31, 361점 authoring, 취혈자세, push/배포는 실행하지 않았다.
 
 로컬 commit에는 report/evidence와 offline tools/candidate/mapping/manifest 및 AT10 record만 포함한다. native-surfaces-r1.json(재구성 가능한 106MiB reference cache), 나머지 실패 후보/중간 render, 전체 source cache/private 교재, 기존 사용자 WIP는 stage하지 않는다. 실제 commit hash/포함·제외/잔여 변경은 같은 evidence의 commit-receipt.json 및 최종 응답에 기록한다.
+
+
+## 2026-10-13 r2 — 실제 남은 국소 정합 재개, 인수 미달
+
+시작 HEAD `0179ab8df828e90858ece4aa8fd64ab2d335cad2`. [r2 start](../evidence/AT10/2026-10-13-skin-fit-r2/start.json)의 45 tracked WIP/원본/native snapshot hash를 대조했다. 기존 r9 GLB `1ff4f35229f1b598796f2fb55a9ee9d1813c9831c5a40624213e6ed54de659f7`, MakeHuman pinned SHA/4 source files, 고정 native detail 입력/각 unit world matrix, Startup.blend와 기존 package가 모두 그대로다. Luna portfolio/source 확보/전신 변환은 재실행하지 않았다. 재개는 이미 생성한 r9의 source topology와 실제 native/probe를 사용했다.
+
+**완성 피부가 아니다. 선택한 r22는 독립 국소 개선을 보존한 review checkpoint이며 acceptancePassed/geometryValidationPassed/learnerEligible는 모두 false다.** 실제 emitted native 교차는 **3,874 / 26,756 skin triangles**, non-adjacent 자기 교차는 **1,604쌍**이다. 동일 검사기로 원본 r9 emitted GLB를 영향 범위만 재대조한 값은 5,197개/1,358쌍이다. native 교차 감소를 승인으로 바꾸지 않았고 자기 교차 증가를 숨기지 않았다. 정합 승인 피부/learner import/경혈 추가/자세 구현은 전부 0이다.
+
+### 구현과 원인
+
+- 손목의 얇은 skeleton-cage handoff 대신 실제 source wrist/MCP와 양측 native cap 주소를 사용하는 연속 Gaussian 변형장을 작성했다. 손바닥의 proper frame 회전은 양측에서 determinant >0.999이다. source 관절 입력만으로 표면 정합이 끝났다고 하지 않는다. 손목·손바닥·엄지/fascia와 손가락은 여전히 관통한다.
+- 발목/뒤꿈치/발등·발바닥/발가락의 독립 source helper와 실제 Calcaneus/native facet 주소로 cage와 표면 station 입력을 작성했다. 변형된 후보의 각도 대신 원본 dorsal/plantar 방향을 사용했다. native vertex만 단면으로 잘라 긴 fascia facet 사이를 놓치는 문제도 실제 triangle–section 교차로 고쳤다. 그러나 toe/ankle seam과 음수 ground clearance, 표면 대응 충돌이 남았다. r21 발 surface control residual 최대 11.55 mm와 실제 화면을 보존하고 실패한 발 후보는 r22에 적용하지 않았다. r22 발은 r9를 유지한다.
+- source `abs(X)<45 mm`로 안쪽 넙다리를 몸통에 넣던 분류가 샅의 큰 틈을 만들었다. 실제 source femur axis/양측 native bone와 adductor/fascia facet에 연결해 안쪽 넙다리를 다시 정합했다. 샅 틈은 줄었지만 seam/후면 볼기·상부 넙다리 교차와 접힘은 남았다.
+- outer scalp/neck에 실제 native facet 단면을 적용하고 pinna는 양측 original Helix/Lobule/Tragus source를 독립 사용했다. 두개/후경부 노출은 줄었으나 귀 rim/attachment가 미달이다. source inward-normal eyelid/oral return cohort는 원본 vertex/face 주소로 별도 기록했다. provisional cohort에 닿은 86 crossing triangle도 총수 3,874에서 제외하지 않는다. 이 분류는 임상적 mucosa 확인이 아니며, 기존 AT4의 tongue 부분과 실제 없는 gingiva/frenulum/sublingual 입력을 구분했다.
+
+[attempt ledger](../evidence/AT10/2026-10-13-skin-fit-r2/attempt-ledger.json), source/native 표면 지표를 직접 작성한 [r21 correspondence](../evidence/AT10/2026-10-13-skin-fit-r2/surface-correspondence-r21.json), [588개 실제 미달 표본](../evidence/AT10/2026-10-13-skin-fit-r2/remaining-probes-r22.json)과 압축된 전체 crossing native-source/local-triangle 주소가 있다. nearest/raycast를 혈위 의미로 쓰지 않았다.
+
+r12–15 normal/support contact push는 교차 일부를 줄였지만 65 mm 이상 변위와 접힘을 만들어 폐기했다. r20 unsmoothed envelope도 손/샅/발 seam을 악화시켰다. r21의 surface-extrema 대응은 thumb distortion/발 입력 충돌을 재현했다. 이를 상동 해부 지표나 최종본으로 승인하지 않았다. r22는 r19의 head/hip field와 r14의 continuous-hand field만 보존하고 원래 발을 유지한 구성이다. 새로운 번호라는 이유로 통과한 것이 아니다. 현재 실제 재현 결함은 **native 접촉 제약과 국소 bind의 접힘/자기 교차를 동시에 해결하지 못하는 것**이며, 전신 파일 부재나 교수 승인 대기가 아니다.
+
+### 실제 자산과 검증
+
+[manifest](../../atlas-data/anatomy/skin/at10-fit-r2/manifest-r22.json), [emitted GLB](../../atlas-data/anatomy/skin/at10-fit-r2/skin-candidate-r22.glb), [source mapping](../../atlas-data/anatomy/skin/at10-fit-r2/source-to-derived-r22.json), [recipe](../../atlas-data/anatomy/skin/at10-fit-r2/recipe-r22.json), [지표/return registry](../../atlas-data/anatomy/skin/at10-fit-r2/landmarks-r22.json). GLB SHA **`53b3a057ff9df98162cfa3deb47844103886d5ced28121b30a24534c41834b93`**.
+
+body 13,380 logical vertices/13,378 original quads/26,756 triangles, 14,517 emitted UV seam vertices를 유지했다. helper 5,778 vertices는 원본에서 보존하고 export하지 않는다. original vertex/face ID, 모든 face-corner UV, source dm→m 0.1와 이미 적용한 native world frame이 불변이다. 추가 전신 scale/복제 인체/원본 변경은 없다. 새 recipe는 `author_at10_skin_patches.py → envelope_at10_skin_patches.py(r19) → compose_at10_skin_checkpoint.py(r22) → export_at10_skin.py(r22)`이며 별도 `/private/tmp/at10-local-fit-r2-reproduction`에서 GLB 전체 bytes가 일치했다.
+
+- 같은 설치된 Three GLTFLoader parse와 Blender glTF import 통과. 후보가 learner eligible=false인 것과 실제 learner import 0을 검사했다.
+- `check_at10_skin_local.py`는 pinned source/native/unit-matrix hash, 원본 source/face/UV 대응, 좌우/rotation, package와 WIP 45개 보존, 독립 재현, 검사기 read-only를 통과했다. `validatorReadOnlyPassed=true`; 검사기는 입력 후보를 수정하지 않는다.
+- native 교차는 emitted float32 POSITION을 실제 mapping으로 읽은 뒤 BVH와 공통 양방향 segment–triangle 검사로 계산했다. 자기 교차는 source 인접 vertex를 공유하지 않는 삼각형 쌍을 따로 검사했다. unsigned 최단 거리/부위별 median/p95는 간격 진단이며 signed containment/정밀 취혈 승인이 아니다.
+- 고정 native와 최종 GLB의 정면/후면/양측, 얼굴/양측 귀/후경부, 어깨/양측 팔꿈치/손목/손바닥·손가락, 몸통/천골/샅/무릎, 발목·발등/양측 발바닥·발가락 **23시점 × 피부/중첩 = 46장**을 실제 렌더하고 판독했다. [review 1](../evidence/AT10/2026-10-13-skin-fit-r2/screens/review-r22-1.jpg), [review 2](../evidence/AT10/2026-10-13-skin-fit-r2/screens/review-r22-2.jpg), [review 3](../evidence/AT10/2026-10-13-skin-fit-r2/screens/review-r22-3.jpg), [review 4](../evidence/AT10/2026-10-13-skin-fit-r2/screens/review-r22-4.jpg). 관통과 접힘을 그대로 남겼다. 이 offline 검증을 실제 learner G1–G8 합격으로 세지 않았다.
+
+GLB **626,572 bytes**, decoded geometry **625,080 bytes**, **26,756 triangles**, material 1/texture 0, degenerate <1e-12 m² 0. 기존 carrier 포함한 합산 비용과 overview budget 초과 **510,664 bytes**는 r1과 동일하다. 예산은 올리지 않았고 주변 native 구조를 삭제하지 않았다. Blender/program은 web bundle에 넣지 않았으며 learner VRAM/FPS로 주장하지 않는다. runtime 코드가 변하지 않아 typecheck/build/역사 전수 suite를 반복하지 않고 관련 offline/loader/format 검사를 실행했다.
+
+### 정확한 남은 작업과 경계
+
+[remaining-units](../evidence/AT10/2026-10-13-skin-fit-r2/remaining-units.json)은 손목·손바닥·엄지 양측, 발목·발등·발바닥·MTP/toe 양측, pinna/neck/return, pelvis/perineal/thigh와 잔여 arm/trunk seam, 전신 최종 QA/landmark다. source/native 주소는 충분히 존재하지만 제안한 bind/표면 대응이 통과하지 못했다. 다음 정합은 상동 표면 쌍과 fold-aware 변형/양의 국소 Jacobian을 작성하고 native/self 교차를 함께 해결해야 한다. navel/nipple/crease/nail의 최종 교육 지표 판정도 아직 미완이다.
+
+source CC0, native ZA/BP3D 권리/derivative 공개 보류, AI 작성 provenance, 교수 검토 미수행, 위치·geometry 승인 상태는 독립 유지했다. source/cached 자료가 없는 것으로 바꾸지 않았고 실제 없는 구강 점막을 외피로 옮기지 않았다. AT10 parent result/acceptance와 Luna portfolio, AT30/31 planned, 다른 AT/MV 기록, 원본/OpenSim_Models/T13 drafts/WIP/역사 evidence는 보존한다. 웹 camera/UI/보기옵션/홈/로딩/361점/자세는 변경하지 않았다.
+
+실제 재개 단위는 계속 **AT10/skin-fit**이다. [구체적 다음 프롬프트](../evidence/AT10/2026-10-13-skin-fit-r2/next-skin-fit-prompt.txt)를 남겼다. 통과 후 계획만 AT10/skin-runtime이며 자동 실행하지 않는다. 로컬 commit은 offline 소유 도구·선택된 checkpoint/recipe/mapping·versioned evidence·보고서·AT10.skinFit만 포함하며 실패 중간 GLB/전체 native cache/private source/사용자 WIP는 제외한다. hash/실제 포함·제외/잔여 변경은 r2 commit receipt와 최종 응답에 기록한다.

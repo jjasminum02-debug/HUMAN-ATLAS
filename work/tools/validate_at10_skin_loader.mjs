@@ -3,10 +3,13 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {GLTFLoader} from '../../atlas-web/node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 import {Box3,Vector3} from '../../atlas-web/node_modules/three/build/three.module.js';
-const root=new URL('../../',import.meta.url),dir=new URL('atlas-data/anatomy/skin/at10-fit-r1/',root);
-const bytes=readFileSync(new URL('skin-candidate-r9.glb',dir));
-const mapping=JSON.parse(readFileSync(new URL('source-to-derived-r9.json',dir),'utf8'));
-const cost=JSON.parse(readFileSync(new URL('cost-r9.json',dir),'utf8'));
+const root=new URL('../../',import.meta.url);
+const revision=process.argv[2]??'r9';
+const dir=new URL((process.env.AT10_SKIN_ARTIFACTS??'atlas-data/anatomy/skin/at10-fit-r1')+'/',root);
+const evidence=new URL((process.env.AT10_SKIN_EVIDENCE??'work/evidence/AT10/2026-10-13-skin-fit-r1')+'/',root);
+const bytes=readFileSync(new URL(`skin-candidate-${revision}.glb`,dir));
+const mapping=JSON.parse(readFileSync(new URL(`source-to-derived-${revision}.json`,dir),'utf8'));
+const cost=JSON.parse(readFileSync(new URL(`cost-${revision}.json`,dir),'utf8'));
 const loaded=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
 const meshes=[];loaded.scene.traverse(o=>{if(o.isMesh)meshes.push(o)});assert.equal(meshes.length,1);const mesh=meshes[0],g=mesh.geometry;
 assert.equal(createHash('sha256').update(bytes).digest('hex'),mapping.glbSha256);
@@ -16,7 +19,7 @@ assert.equal(loaded.animations.length,0);assert.equal(mesh.isSkinnedMesh,undefin
 for(let i=0;i<g.attributes.normal.count;i++){const n=new Vector3().fromBufferAttribute(g.attributes.normal,i);assert.ok(Number.isFinite(n.length())&&Math.abs(n.length()-1)<1e-4)}
 assert.ok(!loaded.scene.children.some(o=>/helper|joint/i.test(o.name)));
 const gpu=Object.values(g.attributes).reduce((a,x)=>a+x.array.byteLength,0)+g.index.array.byteLength;assert.equal(gpu,cost.decodedGpuGeometryBytes);
-const bounds=new Box3().setFromObject(loaded.scene);assert.ok(bounds.max.y>1.70&&bounds.max.y<1.73);assert.ok(bounds.min.y>-.001);assert.ok(bytes.byteLength<8*1024**2);
-const result={loader:'same installed three GLTFLoader as AnatomySceneController',glbSha256:mapping.glbSha256,meshes:meshes.length,vertices:g.attributes.position.count,triangles:g.index.count/3,geometryBytes:gpu,bounds:[bounds.min.toArray(),bounds.max.toArray()],helperMeshes:0,animations:0,actualLearnerImportCount:0,formatValidationPassed:true,fitAcceptancePassed:false};
-writeFileSync(new URL('work/evidence/AT10/2026-10-13-skin-fit-r1/loader-validation-r9.json',root),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));
+const bounds=new Box3().setFromObject(loaded.scene);assert.ok(bounds.max.y>1.70&&bounds.max.y<1.73);const groundClearancePassed=bounds.min.y>-.001;assert.ok(bytes.byteLength<8*1024**2);
+const result={loader:'same installed three GLTFLoader as AnatomySceneController',glbSha256:mapping.glbSha256,meshes:meshes.length,vertices:g.attributes.position.count,triangles:g.index.count/3,geometryBytes:gpu,bounds:[bounds.min.toArray(),bounds.max.toArray()],helperMeshes:0,animations:0,actualLearnerImportCount:0,formatValidationPassed:true,groundClearancePassed,fitAcceptancePassed:false};
+writeFileSync(new URL(`loader-validation-${revision}.json`,evidence),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));
 g.dispose();mesh.material.dispose();

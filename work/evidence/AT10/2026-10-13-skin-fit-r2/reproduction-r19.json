@@ -1,0 +1,47 @@
+{
+  "commands": [
+    {
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "work/tools/author_at10_skin_patches.py",
+        "--evidence",
+        "/private/tmp/at10-local-fit-r2-reproduction",
+        "--revision",
+        "r14-base"
+      ],
+      "exitCode": 0,
+      "stdout": "CONTINUOUS_PATCHES r14-base [('continuous-hand-left', 1.0283786962764326e-06), ('continuous-foot-left', 5.0695745012000485e-05), ('continuous-hand-right', 1.02837869632165e-06), ('continuous-foot-right', 5.0695746041974103e-05)]\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "work/tools/envelope_at10_skin_patches.py",
+        "--evidence",
+        "/private/tmp/at10-local-fit-r2-reproduction",
+        "--revision",
+        "r19"
+      ],
+      "exitCode": 0,
+      "stdout": "PATCH_ENVELOPE r19 max 0.10509165824507145\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "work/tools/export_at10_skin.py",
+        "--revision",
+        "r19"
+      ],
+      "exitCode": 0,
+      "stdout": "{\"glbBytes\": 626576, \"logicalVertices\": 13380, \"emittedVertices\": 14517, \"sourceBodyQuads\": 13378, \"triangles\": 26756, \"decodedGpuGeometryBytes\": 625080, \"materialCount\": 1, \"textureBytes\": 0, \"bufferCount\": 4, \"degenerateTrianglesBelow1e-12M2\": 0, \"boundsM\": [[-0.33753374218940735, -0.005087103229016066, -0.14123044908046722], [0.33753377199172974, 1.713114857673645, 0.16090714931488037]], \"sha256\": \"9b315dec8ef51df60709df72babe599fe808c725c2aa2f2c6945fd32f5b737da\", \"topologySha256\": \"d00ab149f431064d25e49a561abcba639abcafc59801d98ead1c57a19a998010\", \"existingBudgetsChanged\": false, \"runtimeCostMeasured\": false, \"runtimeResidentBytes\": 0, \"costKind\": \"exact emitted buffers; skin-runtime not implemented\", \"perAsset8MiBPassed\": true}\n",
+      "stderr": ""
+    }
+  ],
+  "independentDirectory": "/private/tmp/at10-local-fit-r2-reproduction",
+  "glbSha256": "9b315dec8ef51df60709df72babe599fe808c725c2aa2f2c6945fd32f5b737da",
+  "regeneratedSha256": "9b315dec8ef51df60709df72babe599fe808c725c2aa2f2c6945fd32f5b737da",
+  "exactBytesEqual": true,
+  "baselineInputsReused": true,
+  "geometryAcceptance": false
+}

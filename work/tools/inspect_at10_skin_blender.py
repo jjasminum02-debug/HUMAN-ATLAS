@@ -6,7 +6,11 @@ from mathutils.bvhtree import BVHTree
 import numpy as np
 R=Path(__file__).resolve().parents[2];E=Path(os.environ.get('AT10_SKIN_EVIDENCE',str(R/'work/evidence/AT10/2026-10-13-skin-fit-r1')))
 bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
-d=json.loads((E/'candidates/fit-r9.json').read_text());native=json.loads((E/'native-surfaces-r1.json').read_text())
+rev=sys.argv[sys.argv.index('--revision')+1] if '--revision' in sys.argv else 'r9'
+O=Path(os.environ.get('AT10_SKIN_ARTIFACTS',str(R/'atlas-data/anatomy/skin/at10-fit-r1')))
+nativePath=E/'native-surfaces-r1.json'
+if not nativePath.exists():nativePath=R/'work/evidence/AT10/2026-10-13-skin-fit-r1/native-surfaces-r1.json'
+d=json.loads((E/f'candidates/fit-{rev}.json').read_text());native=json.loads(nativePath.read_text())
 v=np.array(d['positions']);faces=[f['derivedVertices'] for f in d['faces']]
 t=np.array([[f[0],f[i],f[i+1]] for f in faces for i in range(1,len(f)-1)])
 # Geometry in HUMAN ATLAS axes throughout numerical QA. Blender draw conversion only.
@@ -31,8 +35,8 @@ near=[]
 for p in v:
     q,n,idx,dist=bvh.find_nearest(Vector(p));near.append([dist,float((Vector(p)-q).dot(n))])
 near=np.array(near)
-(E/'candidates/fit-r9-distance.json').write_text(json.dumps({'contactPasses':contactPasses,'nearestDistanceP50M':float(np.median(near[:,0])),'nearestDistanceP95M':float(np.percentile(near[:,0],95)),'negativeNormalDistances':int((near[:,1]<-.0005).sum()),'maximumDeformationFromCageM':float(np.linalg.norm(v-original,axis=1).max()),'regionStatistics':{r:{'vertices':int(sum(x==r for x in region)),'distanceP50M':float(np.median(near[np.array(region)==r,0])),'distanceP95M':float(np.percentile(near[np.array(region)==r,0],95)),'negativeNormalDistances':int((near[np.array(region)==r,1]<-.0005).sum())} for r in sorted(set(region))},'limitations':'nearest normal sign is not a closed-volume containment proof; contact correction is a geometric constraint after anatomical cage'},indent=2))
-bpy.ops.import_scene.gltf(filepath=str(R/'atlas-data/anatomy/skin/at10-fit-r1/skin-candidate-r9.glb'))
+(E/f'candidates/fit-{rev}-distance.json').write_text(json.dumps({'contactPasses':contactPasses,'nearestDistanceP50M':float(np.median(near[:,0])),'nearestDistanceP95M':float(np.percentile(near[:,0],95)),'negativeNormalDistances':int((near[:,1]<-.0005).sum()),'maximumDeformationFromCageM':float(np.linalg.norm(v-original,axis=1).max()),'regionStatistics':{r:{'vertices':int(sum(x==r for x in region)),'distanceP50M':float(np.median(near[np.array(region)==r,0])),'distanceP95M':float(np.percentile(near[np.array(region)==r,0],95)),'negativeNormalDistances':int((near[np.array(region)==r,1]<-.0005).sum())} for r in sorted(set(region))},'limitations':'nearest normal sign is not a closed-volume containment proof; contact correction is a geometric constraint after anatomical cage'},indent=2))
+bpy.ops.import_scene.gltf(filepath=str(O/f'skin-candidate-{rev}.glb'))
 skin=next(o for o in bpy.context.selected_objects if o.type=='MESH');skin.data.materials[0].diffuse_color=(.57,.37,.24,1)
 print('EMITTED_GLB_IMPORTED',len(skin.data.vertices),len(skin.data.polygons),flush=True)
 # native scene comparison below is exact fixed source geometry
@@ -45,14 +49,14 @@ def render(label,centre,direction,scale,shown):
     c=Vector((centre[0],-centre[2],centre[1]));dr=Vector((direction[0],-direction[2],direction[1]));camera.location=c+dr.normalized()*3;camera.rotation_euler=(c-camera.location).to_track_quat('-Z','Y').to_euler();camera.data.ortho_scale=scale
     skin.hide_render=shown=='native';nat.hide_render=shown=='skin';scene.render.filepath=str(E/'screens'/f'{label}-{shown}.png');bpy.ops.render.render(write_still=True)
 for shown in ([] if '--only' in sys.argv else ['skin','overlay']):
-    for label,dr in [('front',[0,0,1]),('back',[0,0,-1]),('left',[1,0,0]),('right',[-1,0,0])]:render('emitted-r9-'+label,[0,.86,0],dr,1.90,shown)
+    for label,dr in [('front',[0,0,1]),('back',[0,0,-1]),('left',[1,0,0]),('right',[-1,0,0])]:render('emitted-'+rev+'-'+label,[0,.86,0],dr,1.90,shown)
 for label,centre,dr,scale in [
- ('face',[0,1.6,0],[0,0,1],.27),('ear-left',[.08,1.585,0],[1,0,.4],.15),('shoulder',[.12,1.36,0],[.3,0,1],.35),
+ ('face',[0,1.6,0],[0,0,1],.27),('ear-left',[.08,1.585,0],[1,0,.4],.15),('ear-right',[-.08,1.585,0],[-1,0,.4],.15),('neck-back',[0,1.49,-.025],[0,0,-1],.27),('shoulder',[.12,1.36,0],[.3,0,1],.35),
  ('torso',[0,1.17,0],[0,0,1],.65),('sacrum-back',[0,1.11,0],[0,0,-1],.7),('groin',[0,.86,0],[0,0,1],.35),
  ('hand-left',[.28,.8,.06],[0,0,1],.2),('hand-right',[-.28,.8,.06],[0,0,1],.2),('knees',[0,.44,0],[0,0,1],.33),
  ('feet',[0,.045,.05],[0,.7,1],.3),('sole-left',[.09,.025,.04],[0,-1,0],.27),('sole-right',[-.09,.025,.04],[0,-1,0],.27),('palm-left',[.28,.8,.06],[0,0,-1],.2),('palm-right',[-.28,.8,.06],[0,0,-1],.2),('elbow-left',[.22,1.1,0],[.3,0,1],.24),('elbow-right',[-.22,1.1,0],[-.3,0,1],.24),('perineum',[0,.8,0],[0,-1,.3],.28)]:
     if '--only' in sys.argv and label not in sys.argv[sys.argv.index('--only')+1].split(','):continue
-    render('emitted-r9-'+label,centre,dr,scale,'skin');render('emitted-r9-'+label,centre,dr,scale,'overlay')
+    render('emitted-'+rev+'-'+label,centre,dr,scale,'skin');render('emitted-'+rev+'-'+label,centre,dr,scale,'overlay')
 if '--whole-back' in sys.argv:
-    for shown in ['skin','overlay']:render('emitted-r9-whole-back',[0,.86,0],[0,0,-1],1.9,shown)
+    for shown in ['skin','overlay']:render('emitted-'+rev+'-whole-back',[0,.86,0],[0,0,-1],1.9,shown)
 print('QA_RENDERS_DONE',flush=True)
