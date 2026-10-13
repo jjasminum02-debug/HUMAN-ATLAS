@@ -12,7 +12,7 @@ test('actual 22 source-addressed placements replay; raw concepts, AI provenance 
   assert.equal(Object.values(batch.ledger.units).filter(u=>u.status==='passed').length,22);
   const p=await projectCompiledBatch(batch.ledger,doc.inputs,{...doc.context,motionActive:false});assert.equal(p.flatMap(p=>p.instances).length,22);
   for(const u of Object.values(batch.ledger.units)){assert.equal(u.assessment.precision,'educational_approximation');assert.equal(u.assessment.author,'ai');assert.equal(u.instance!.professorReview,'not_performed');assert.equal(u.assessment.rights.publicRedistribution,'held');assert.ok(u.assessment.landmarks.every(l=>l.modelIndicator?.observedSkinLandmark===false));}
-  const pkg=read('atlas-data/acupoints/learner/lung-r7.json') as LearningPackage;validateLearningPackage(pkg,doc.context);
+  const pkg=read('atlas-data/acupoints/learner/lung-r7.json') as LearningPackage;validateLearningPackage(pkg,doc.context,read('atlas-data/acupoints/observation/catalog-r1.json'));
   assert.deepEqual(pkg.concepts,read('atlas-data/acupoints/learner/lung.json').concepts);assert.deepEqual(pkg.precisionCounts,{precise:0,educationalApproximation:22,unresolved:0});
   for(const code of ['LU1','LU5','LU7','LU9','LU11'])assert.notEqual(get(code).landmarks[0].sourceKey,get(code,'left').landmarks[0].sourceKey);
 });

@@ -1,8 +1,9 @@
 import { decodeCarrierChunk, validateCarrierManifest, type CarrierManifest, type CarrierSample, type CarrierFamily } from './carrierSample.ts';
 import type { AnchorContext } from './anchorAdapter.ts';
 const directories=[
-  {name:'education-r1',manifest:()=>import('../../../../atlas-data/acupoints/carriers/education-r1/manifest.json?url'),urls:import.meta.glob('../../../../atlas-data/acupoints/carriers/education-r1/*.bin',{query:'?url',import:'default'})},
-  {name:'lung-AT6-r2',manifest:()=>import('../../../../atlas-data/acupoints/carriers/lung-AT6-r2/manifest.json?url'),urls:import.meta.glob('../../../../atlas-data/acupoints/carriers/lung-AT6-r2/*.bin',{query:'?url',import:'default'})},
+  {name:'education-r1',manifest:()=>import('../../../../atlas-data/acupoints/carriers/runtime-registry-r1/education-r1.json?url'),urls:import.meta.glob('../../../../atlas-data/acupoints/carriers/education-r1/*.bin',{query:'?url',import:'default'})},
+  {name:'lung-AT6-r2',manifest:()=>import('../../../../atlas-data/acupoints/carriers/runtime-registry-r1/lung-AT6-r2.json?url'),urls:import.meta.glob('../../../../atlas-data/acupoints/carriers/lung-AT6-r2/*.bin',{query:'?url',import:'default'})},
+  {name:'upper-yang-final-AT8-r18',manifest:()=>import('../../../../atlas-data/acupoints/carriers/runtime-registry-r1/upper-yang-final-AT8-r18.json?url'),urls:import.meta.glob('../../../../atlas-data/acupoints/carriers/upper-yang-final-AT8-r18/*.bin',{query:'?url',import:'default'})},
 ] as const;
 /** One abortable registry/decoder path. Allocate only requested immutable chunks, never retain geometry between sessions. */
 export async function loadCarrierSet(family:'all'|CarrierFamily|readonly string[],context:AnchorContext,signal:AbortSignal,cancelled:()=>boolean) {

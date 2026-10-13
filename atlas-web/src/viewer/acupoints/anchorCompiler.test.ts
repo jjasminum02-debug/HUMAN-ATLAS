@@ -140,3 +140,28 @@ test('policy rejects incomplete/forged checks and stale binding rather than trus
   assert.equal(productInstances(f.carrier,[incomplete]).length,0);
   const legacy={...i,assessment:undefined} as PointInstance;assert.equal(productInstances({...f.carrier,precision:'landmarks_verified'},[legacy]).length,0);
 });
+
+test('shared midline native context retains source side, validates addressed hemisphere and cannot reflect',async()=>{
+ const f=await compilerFixture('landmark');const native=f.inputs.native['fixture-native'];native.side='midline';f.unit.landmarks.forEach(l=>l.native.side='midline');
+ assert.equal((await compilePlacementUnit(f.unit,f.inputs)).status,'passed');
+ const wrong=structuredClone(f.unit);wrong.landmarks[0].native.side='left';assert.equal((await compilePlacementUnit(wrong,f.inputs)).status,'failed');
+ const reflected=structuredClone(f.inputs);reflected.native['fixture-native'].positions=reflected.native['fixture-native'].positions.map((v,i)=>i%3===0?-v:v);
+ const p=new Float32Array(reflected.native['fixture-native'].positions),idx=new Uint32Array(reflected.native['fixture-native'].indices),bytes=new Uint8Array(p.byteLength+idx.byteLength);bytes.set(new Uint8Array(p.buffer));bytes.set(new Uint8Array(idx.buffer),p.byteLength);reflected.native['fixture-native'].topologySha256=await sha256(bytes);f.unit.landmarks.forEach(l=>l.native.carrierHash=reflected.native['fixture-native'].topologySha256);
+ assert.match((await compilePlacementUnit(f.unit,reflected)).errors.join(),/side mismatch/);
+});
+test('named CV midline technical fixture still exports zero product locations',async()=>{
+ const f=await compilerFixture('midline');f.unit.code='CV1';f.inputs.evidence.forEach(e=>e.pointCode='CV1');const r=await compilePlacementUnit(f.unit,f.inputs);assert.equal(r.status,'passed');assert.equal(r.instance!.side,'midline');
+ assert.deepEqual(await projectCompiledBatch({version:2,compilerVersion:r.assessment.compilerVersion,units:{[r.id]:r}},f.inputs,{...f.context,motionActive:false}),[]);
+});
+
+test('surface fraction requires its own source denominator and connected path; never exports fixture',async()=>{
+ const f=await compilerFixture('B-cun');if(f.unit.rule.kind!=='B-cun')throw Error('fixture');
+ f.unit.rule={...f.unit.rule,kind:'surface_fraction',value:1,denominator:3};f.inputs.evidence.find(e=>e.id==='proportion')!.measurement={kind:'surface_fraction',value:3};
+ const passed=await compilePlacementUnit(f.unit,f.inputs);assert.equal(passed.status,'passed');assert.equal(productInstances(f.carrier,[passed.instance!]).length,0);
+ const bad=structuredClone(f.inputs);bad.evidence.find(e=>e.id==='proportion')!.measurement={kind:'B-cun',value:3};assert.match((await compilePlacementUnit(f.unit,bad)).errors.join(),/surface-fraction/);
+ const broken=structuredClone(f.unit);if(broken.rule.kind==='surface_fraction')broken.rule.path[1].from=[1,0,0];assert.match((await compilePlacementUnit(broken,f.inputs)).errors.join(),/disconnected/);
+});
+test('source orientation rejects the wrong surface without allowing nearest approval',async()=>{
+ const f=await compilerFixture('landmark');const surface=f.inputs.evidence.find(e=>e.purpose==='surface_registration')!;const normal=resolveAnchor(f.carrier,{...f.unit.landmarks[0].surface,carrierId:f.carrier.id,carrierRevision:f.carrier.revision,carrierHash:f.carrier.topologySha256,frameId:f.context.frameId,unit:'m',poseId:f.context.poseId,side:f.unit.side}).normal;
+ surface.surfaceOrientation={direction:normal.toArray(),minimumDot:.9};assert.equal((await compilePlacementUnit(f.unit,f.inputs)).status,'passed');surface.surfaceOrientation.direction=normal.negate().toArray();assert.match((await compilePlacementUnit(f.unit,f.inputs)).errors.join(),/orientation/);
+});

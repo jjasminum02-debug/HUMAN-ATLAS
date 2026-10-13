@@ -3,7 +3,7 @@ import { anchorBinding, localLearnerEligible, projectLearnerInstances } from './
 import { sha256 } from './placementMigration.ts';
 import type { Carrier, PlacementAssessment, PointInstance, Side, SourceRef, Vec3 } from './schema.ts';
 
-export const ANCHOR_COMPILER_VERSION='explicit-landmarks-2.2';
+export const ANCHOR_COMPILER_VERSION='explicit-landmarks-2.5';
 type Address={triangle:number;barycentric:Vec3;carrierId?:string};
 export interface LandmarkInput {
   id:string; anatomy:string; acquisition:'anatomical_annotation'|'bounds'|'nearest'|'mirror'|'unresolved';
@@ -19,13 +19,16 @@ export interface RuleEvidence {
   side:Side; frameId:string; poseId:string; carrierHash:string; pointCode:string;
   /** Explicit replay tolerance for the annotated surface/native correspondence, never a nearest search. */
   maxRegistrationGapMetres?:number;
-  measurement?:{kind:'B-cun'|'F-cun';value:number};
+  /** Pose/frame-bound outward direction required by this authored anatomical relation. */
+  surfaceOrientation?:{direction:Vec3;minimumDot:number};
+  measurement?:{kind:'B-cun'|'F-cun'|'surface_fraction';value:number};
   measurementAxis?:'anatomical_native_axis';
   rights:{localObservation:'supported'|'held';publicRedistribution:'held'|'supported'};
 }
 export type PlacementRule =
   | {kind:'landmark';landmark:string}
   | {kind:'B-cun';from:string;to:string;value:number;totalCun:number;path:SurfaceSegment[];evidenceId:string;measurementAxis?:{from:string;to:string}}
+  | {kind:'surface_fraction';from:string;to:string;value:number;denominator:number;path:SurfaceSegment[];evidenceId:string}
   | {kind:'F-cun';from:string;directionTo:string;value:number;calibration:{from:string;to:string;cun:number};path:SurfaceSegment[];evidenceId:string;
       nativeDirections?:{origin:string;from:string;to:string}[]}
   | {kind:'bounds'|'nearest'|'unresolved'};
@@ -61,9 +64,9 @@ const blank=(unit:PlacementUnit,inputSha256:string):PlacementAssessment=>({schem
 async function unitFingerprint(unit:PlacementUnit,inputs:CompilerInputs) {
   const landmarks=Array.isArray(unit.landmarks)?unit.landmarks:[];
   const ids=[unit.relationEvidenceId,unit.surfaceEvidenceId,...landmarks.map(l=>l.evidenceId),...(unit.observedReferences??[]).map(l=>l.evidenceId)];
-  if(unit.rule?.kind==='B-cun'||unit.rule?.kind==='F-cun')ids.push(unit.rule.evidenceId);
+  if(unit.rule?.kind==='B-cun'||unit.rule?.kind==='F-cun'||unit.rule?.kind==='surface_fraction')ids.push(unit.rule.evidenceId);
   const refs=[unit.carrierId,...landmarks.flatMap(l=>l.surface?.carrierId?[l.surface.carrierId]:[])];
-  if(unit.rule?.kind==='B-cun'||unit.rule?.kind==='F-cun')refs.push(...unit.rule.path.flatMap(s=>s.carrierId?[s.carrierId]:[]));
+  if(unit.rule?.kind==='B-cun'||unit.rule?.kind==='F-cun'||unit.rule?.kind==='surface_fraction')refs.push(...unit.rule.path.flatMap(s=>s.carrierId?[s.carrierId]:[]));
   return sha256(encode({version:ANCHOR_COMPILER_VERSION,domain:inputs.domain,unit,carriers:Object.fromEntries([...new Set(refs)].sort().map(k=>[k,inputs.carriers[k]])),
     native:Object.fromEntries([...new Set([...landmarks,...(unit.observedReferences??[])].map(l=>l.sourceKey))].sort().map(k=>[k,inputs.native[k]])),
     evidence:inputs.evidence.filter(e=>ids.includes(e.id)).sort((a,b)=>a.id.localeCompare(b.id))}));
@@ -89,7 +92,7 @@ export async function compilePlacementUnit(unit:PlacementUnit,inputs:CompilerInp
     const surfaceCarriers=new Map<string,Carrier>([[c.id,c]]);
     const referenced=(a:{carrierId?:string})=>surfaceCarriers.get(a.carrierId??c.id)??fail('unverified reference carrier');
     const refs=[...unit.landmarks.map(l=>l.surface)];
-    if(unit.rule.kind==='B-cun'||unit.rule.kind==='F-cun')refs.push(...unit.rule.path.map(s=>({triangle:s.triangle,barycentric:s.from,carrierId:s.carrierId})));
+    if(unit.rule.kind==='B-cun'||unit.rule.kind==='F-cun'||unit.rule.kind==='surface_fraction')refs.push(...unit.rule.path.map(s=>({triangle:s.triangle,barycentric:s.from,carrierId:s.carrierId})));
     for(const ref of refs)if(ref.carrierId&&!surfaceCarriers.has(ref.carrierId)){
       const other=inputs.carriers[ref.carrierId];if(!other)fail('missing reference carrier');
       validateCarrier(other,unit.context);await verifyCarrierHash(other);
@@ -132,7 +135,8 @@ export async function compilePlacementUnit(unit:PlacementUnit,inputs:CompilerInp
       if(native.rights?.localObservation!=='supported')fail(`native source local rights held: ${l.id}`);
       if(native.rights.publicRedistribution!=='supported')assessment.rights.publicRedistribution='held';
       assessment.rights.sourceIds.push(native.rights.source);
-      if(native.side!==unit.side||l.native.side!==unit.side){assessment.technical='failed';assessment.checks.side=false;fail(`native landmark side mismatch: ${l.id}`);}
+      const nativePoint=resolveAnchor(native,l.native).position;
+      if(l.native.side!==native.side||(native.side!==unit.side&&!(native.side==='midline'&&unit.side!=='midline'&&(unit.side==='right'?nativePoint.x<=1e-5:nativePoint.x>=-1e-5)))){assessment.technical='failed';assessment.checks.side=false;fail(`native landmark side mismatch: ${l.id}`);}
       const evidence=getEvidence(l.evidenceId,'landmark_annotation');
       if(resolveAnchor(native,l.native).position.distanceTo(surfaceVector(l.surface))>gap!)fail(`surface/native annotation gap exceeds explicit tolerance: ${l.id}`);
       annotated.set(l.id,l);
@@ -142,7 +146,8 @@ export async function compilePlacementUnit(unit:PlacementUnit,inputs:CompilerInp
       if(!ref.id||!ref.anatomy.trim()||!ref.interpretation.trim()||ref.acquisition!=='anatomical_annotation'||ref.side!==unit.side)fail('invalid observed anatomical context');
       const native=inputs.native[ref.sourceKey];if(!native||native.id!==ref.sourceKey)fail('missing observed context geometry');
       validateTopology(native,unit.context);await verifyCarrierHash(native);resolveAnchor(native,ref.native);
-      if(native.side!==unit.side||ref.native.side!==unit.side)fail('observed context side mismatch');
+      const nativePoint=resolveAnchor(native,ref.native).position;
+      if(ref.native.side!==native.side||(native.side!==unit.side&&!(native.side==='midline'&&unit.side!=='midline'&&(unit.side==='right'?nativePoint.x<=1e-5:nativePoint.x>=-1e-5))))fail('observed context side mismatch');
       if(native.rights.localObservation!=='supported')fail('observed context local rights held');
       if(native.rights.publicRedistribution!=='supported')assessment.rights.publicRedistribution='held';
       const e=getEvidence(ref.evidenceId,'landmark_annotation');
@@ -152,10 +157,10 @@ export async function compilePlacementUnit(unit:PlacementUnit,inputs:CompilerInp
     const landmark=(id:string)=>annotated.get(id)??fail(`missing meaningful landmark: ${id}`);
     const r=unit.rule;let result:Address|null=null;
     if(r.kind==='landmark') {result=landmark(r.landmark).surface;if(referenced(result).id!==c.id)fail('target carrier mismatch');assessment.basis='landmark';}
-    else if(r.kind==='B-cun'||r.kind==='F-cun') {
+    else if(r.kind==='B-cun'||r.kind==='F-cun'||r.kind==='surface_fraction') {
       const ev=getEvidence(r.evidenceId,'proportion');
       if(!Number.isFinite(r.value)||r.value<0||r.value>64)fail('invalid proportion numerator');
-      const start=landmark(r.from),end=landmark(r.kind==='B-cun'?r.to:r.directionTo);
+      const start=landmark(r.from),end=landmark(r.kind==='F-cun'?r.directionTo:r.to);
       if(start.id===end.id||surfaceVector(start.surface).distanceTo(surfaceVector(end.surface))<1e-6)fail('degenerate proportional landmarks');
       if(!r.path.length)fail('missing explicit surface path');
       const connected=(a:Address,b:Address)=>{
@@ -182,6 +187,9 @@ export async function compilePlacementUnit(unit:PlacementUnit,inputs:CompilerInp
         if(!Number.isFinite(r.totalCun)||r.totalCun<=0||r.totalCun>64||r.value>r.totalCun
           ||ev.measurement?.kind!=='B-cun'||ev.measurement.value!==r.totalCun)fail('B-cun denominator lacks matching source evidence');
         distance=length*r.value/r.totalCun;assessment.basis='B-cun';
+      } else if(r.kind==='surface_fraction'){
+        if(!Number.isFinite(r.denominator)||r.denominator<=0||r.denominator>64||r.value>r.denominator||ev.measurement?.kind!=='surface_fraction'||ev.measurement.value!==r.denominator)fail('explicit source surface-fraction denominator required; not B-cun');
+        distance=length*r.value/r.denominator;assessment.basis='landmark';
       } else {
         const cal=r.calibration;
         if(landmark(cal.from).role!=='finger_cun_reference'||landmark(cal.to).role!=='finger_cun_reference')fail('F-cun calibration must use annotated finger references');
@@ -233,7 +241,12 @@ export async function compilePlacementUnit(unit:PlacementUnit,inputs:CompilerInp
     instance={code:unit.code,side:unit.side,revision:unit.revision,carrierId:c.id,carrierRevision:c.revision,carrierHash:c.topologySha256,
       frameId:c.frameId,unit:c.unit,poseId:c.poseId,...resolvedAddress,landmarkSourceKeys:assessment.landmarks.map(l=>l.sourceKey),
       locationValidation:'landmarks_verified',aiProposal:unit.author==='ai',professorReview:unit.professorReview,missing:[],assessment};
-    const position=resolveAnchor(c,instance).position;
+    const resolved=resolveAnchor(c,instance),position=resolved.position;
+    if(surface.surfaceOrientation){const o=surface.surfaceOrientation;
+      if(o.direction.length!==3||!o.direction.every(Number.isFinite)||Math.hypot(...o.direction)<1e-6||!Number.isFinite(o.minimumDot)||o.minimumDot<0||o.minimumDot>1)fail('invalid explicit anatomical surface orientation');
+      const expected=resolved.normal.clone().fromArray(o.direction).normalize();
+      if(resolved.normal.dot(expected)<o.minimumDot)fail('surface orientation conflicts with anatomical relation in frozen frame/pose');
+    }
     if(unit.side==='midline'&&Math.abs(position.x)>1e-5)fail('midline anchor is not on the anatomical midline');
     if(unit.side==='right'&&position.x>=0||unit.side==='left'&&position.x<=0)fail('anchor subject side mismatch');
     assessment.checks.surface=true;assessment.checks.anatomicalRelation=true;

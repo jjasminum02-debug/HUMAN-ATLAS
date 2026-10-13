@@ -1,6 +1,6 @@
 export const LUNG_ORDER=Array.from({length:11},(_,i)=>`LU${i+1}`);
 export const LUNG_SECTIONS=[{name:'가슴',codes:['LU1','LU2']},{name:'위팔',codes:['LU3','LU4']},{name:'팔꿈치·아래팔',codes:['LU5','LU6','LU7','LU8']},{name:'손목·엄지',codes:['LU9','LU10','LU11']}];
-export function sectionFor(code:string){return LUNG_SECTIONS.findIndex(s=>s.codes.includes(code));}
+export function sectionFor(code:string,sections:{codes:string[]}[]=LUNG_SECTIONS){return sections.findIndex(s=>s.codes.includes(code));}
 /** Deterministic clock, shared with the existing scene update. No timer/RAF owner. */
 export class PointTour {
   state:'ready'|'touring'|'paused'='ready'; index=0; elapsed=0; autoReturn=true;

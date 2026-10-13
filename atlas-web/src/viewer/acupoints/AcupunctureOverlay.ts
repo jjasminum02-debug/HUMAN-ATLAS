@@ -1,13 +1,13 @@
 import * as THREE from 'three';
 import type { DatasetSceneAdapter } from '../datasets/DatasetSceneAdapter.ts';
 import { LUNG_ORDER, LUNG_SECTIONS, PointTour } from './tour.ts';
-import type { Carrier, PointInstance } from './schema.ts';
+import type { Carrier, PointInstance, Side } from './schema.ts';
 import { resolveAnchor, validateCarrier, verifyCarrierHash, withinOverlayBudget } from './anchorAdapter.ts';
 import type { CameraState } from '../wholeBody/cameraObservation.ts';
 import { contextBounds, observationCamera, projectContext, visibleRect, rect, type ObservationContext } from './observationContext.ts';
 import { DATASET_BUDGET } from '../datasets/schema.ts';
 import type { TerritoryMaskLayer, TerritoryMode } from './territoryMask.ts';
-interface OverlayOptions {returnCamera?:CameraState;carriers?:Carrier[];side?:'right'|'left'|'both';route:number[];names:Record<string,string>;changed:(state:PointTour['state'])=>void;cancelled:()=>boolean;contexts?:ObservationContext[];order?:string[];sections?:{name:string;codes:string[]}[]}
+interface OverlayOptions {returnCamera?:CameraState;carriers?:Carrier[];side?:Side|'both';route:number[];names:Record<string,string>;changed:(state:PointTour['state'])=>void;cancelled:()=>boolean;contexts?:ObservationContext[];order?:string[];sections?:{name:string;codes:string[]}[]}
 /** A bounded static-pose overlay attached to the sole AnatomySceneRoot. */
 export class AcupunctureOverlay {
   readonly group = new THREE.Group();
@@ -27,7 +27,7 @@ export class AcupunctureOverlay {
   private dead = false;
   private down = {x:0,y:0};
   private selected: string | null = null;
-  private selectedSide:'right'|'left'='right';
+  private selectedSide:Side='right';
   private resizeObserver:ResizeObserver;
   private removeFit:()=>void;
   private fitHandler=(kind:'all'|'selection')=>{if(kind==='all')this.overview();else if(this.selected)this.observe(this.selected,this.selectedSide,true);};
@@ -44,7 +44,7 @@ export class AcupunctureOverlay {
   private loadTerritoryModule=()=>import('./territoryMask.ts');
   private halo:THREE.Mesh;
   private reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  static async create(adapter: DatasetSceneAdapter, carrier: Carrier, points: PointInstance[], onSelect: (code: string,side?:'right'|'left') => void, onStop: (reason: string) => void, encodedBytes: number, options?: OverlayOptions) {
+  static async create(adapter: DatasetSceneAdapter, carrier: Carrier, points: PointInstance[], onSelect: (code: string,side?:Side) => void, onStop: (reason: string) => void, encodedBytes: number, options?: OverlayOptions) {
     if(options&&(options.route.length%3||!options.route.every(Number.isFinite)))throw Error('Invalid teaching route');
     const d = adapter.resources.dataset;
     const all=options?.carriers??[carrier],context={datasetRevision:d.revision,frameId:d.frameContract?.targetFrameId??'',unit:d.unit,poseId:d.frameContract?.staticReferencePose?.id??''};
@@ -55,7 +55,7 @@ export class AcupunctureOverlay {
     if(adapter.scene.cameraOwner==='motion'||adapter.resources.motionOverrides.size>0)throw Error('경혈 표시는 복원된 정지 자세에서만 가능합니다.');
     return new AcupunctureOverlay(adapter,carrier,points,onSelect,onStop,encodedBytes,options);
   }
-  private constructor(private adapter: DatasetSceneAdapter, readonly carrier: Carrier, readonly points: PointInstance[], private onSelect: (code: string,side?:'right'|'left') => void, private onStop: (reason: string) => void, private encodedBytes: number, private options?: OverlayOptions) {
+  private constructor(private adapter: DatasetSceneAdapter, readonly carrier: Carrier, readonly points: PointInstance[], private onSelect: (code: string,side?:Side) => void, private onStop: (reason: string) => void, private encodedBytes: number, private options?: OverlayOptions) {
     const scene = adapter.scene;
     adapter.restoreSourceMotion('acupoint-static-review');
     this.savedCamera=structuredClone(options?.returnCamera??scene.observationReturnState('acupoint'));scene.cancelCameraMotion();
@@ -83,6 +83,7 @@ export class AcupunctureOverlay {
     const cost=this.cost();
     const d=adapter.resources.dataset;
     const base={overviewBytes:d.chunks.filter(c=>c.level==='overview'&&!c.selectionScoped).reduce((n,c)=>n+c.bytes,0)+Math.max(0,...d.chunks.filter(c=>c.selectionScoped).map(c=>c.bytes)),geometryBytes:adapter.resources.queue.bytes,triangles:d.instances.reduce((n,i)=>n+i.lods.overview.triangles,0)};
+    scene.renderer.domElement.dataset.acupointBudget=JSON.stringify({base,overlay:cost,encodedBytes,limits:DATASET_BUDGET});
     if (!withinOverlayBudget(base,{bytes:cost.geometryBufferBytes,overviewBytes:encodedBytes,triangles:cost.triangles})) { this.releaseGeometry();this.label.remove();scene.endObservation('acupoint',false); throw Error('경혈 체표가 기존 장면 예산을 초과합니다.'); }
     scene.renderer.domElement.dataset.acupointTransfers=JSON.stringify(performance.getEntriesByType('resource').filter(e=>/AcupointReview|AcupunctureOverlay|learning.json/.test(e.name)).map(e=>({name:e.name,bytes:(e as PerformanceResourceTiming).encodedBodySize})));
     this.group.name='AcupunctureOverlay';scene.root.add(this.group);scene.requestRender();
@@ -150,7 +151,7 @@ export class AcupunctureOverlay {
     const mesh=this.group.children.find(n=>n instanceof THREE.Mesh&&n.geometry===surface.geometry) as THREE.Mesh;
     return {...surface,mesh};
   }
-  select(code:string,side:'right'|'left'=this.selectedSide) {
+  select(code:string,side:Side=this.selectedSide) {
     this.selectedSide=side;this.selected=this.markers.has(`${code}:${side}`)?code:null;this.label.hidden=!this.selected;this.tour.index=(this.options?.order??LUNG_ORDER).indexOf(code);
     const [normal,selected]=this.group.userData.markerMaterials as THREE.Material[];
     for(const [key,m] of this.markers)m.material=key===`${code}:${side}`?selected:normal;
@@ -161,13 +162,13 @@ export class AcupunctureOverlay {
   play(){this.userMoved=false;this.tour.play();this.adapter.scene.requestRender();}
   pause(){this.tour.pause();this.adapter.scene.cancelCameraMotion();}
   step(delta:number){this.userMoved=false;this.tour.step(delta);}
-  choose(code:string,side:'right'|'left'=this.selectedSide){this.userMoved=false;this.selectedSide=side;const index=(this.options?.order??LUNG_ORDER).indexOf(code);if(index>=0)this.tour.choose(index);else{this.tour.pause();this.select(code,side);this.onSelect(code,side);this.observe(code,side);}}
+  choose(code:string,side:Side=this.selectedSide){this.userMoved=false;this.selectedSide=side;const index=(this.options?.order??LUNG_ORDER).indexOf(code);if(index>=0)this.tour.choose(index);else{this.tour.pause();this.select(code,side);this.onSelect(code,side);this.observe(code,side);}}
   private safeRect() {
     const canvas=this.adapter.scene.renderer.domElement,r=canvas.getBoundingClientRect();
     const panels=[...canvas.closest('.study-layout')?.querySelectorAll('.acupoint-review,.body-tools,.study-header,.study-details')??[]].filter(e=>getComputedStyle(e).visibility!=='hidden').map(e=>{const p=e.getBoundingClientRect();return rect(p.left,p.top,p.right,p.bottom);});
     return visibleRect(rect(r.left,r.top,r.right,r.bottom),panels);
   }
-  observe(code:string,side:'right'|'left'=this.selectedSide,force=false) {
+  observe(code:string,side:Side=this.selectedSide,force=false) {
     const context=this.options?.contexts?.find(c=>c.code===code&&c.side===side);if(!context)return;
     this.frameContexts([context],force);
   }
@@ -222,7 +223,7 @@ export class AcupunctureOverlay {
     const blocked=ray.intersectObjects([...this.adapter.resources.nodes.values()].filter(n=>n.visible),false)[0];
     if(blocked&&blocked.distance<scene.camera.position.distanceTo(marker.position)-.0025*marker.scale.x-.0001)return;
     e.stopImmediatePropagation();const side=this.points.find(p=>this.markers.get(`${p.code}:${p.side}`)===marker)?.side;
-    this.choose(String(marker.userData.code),side==='left'?'left':'right');
+    this.choose(String(marker.userData.code),side as Side);
   };
   private inspect() {
     const scene=this.adapter.scene,r=scene.renderer.domElement.getBoundingClientRect();scene.camera.updateMatrixWorld();
