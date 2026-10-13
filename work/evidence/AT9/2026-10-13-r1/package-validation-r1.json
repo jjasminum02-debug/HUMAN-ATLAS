@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "run": "2026-10-13-r1",
+  "catalog": {
+    "channels": 14,
+    "concepts": 361,
+    "plannedInstances": 670
+  },
+  "at9": {
+    "concepts": 37,
+    "targetCodes": [
+      "HT1",
+      "HT2",
+      "HT3",
+      "HT4",
+      "HT5",
+      "HT6",
+      "HT7",
+      "HT8",
+      "HT9",
+      "PC1",
+      "PC2",
+      "PC3",
+      "PC4",
+      "PC5",
+      "PC6",
+      "PC7",
+      "PC8",
+      "PC9",
+      "SI1",
+      "SI2",
+      "SI3",
+      "SI4",
+      "SI5",
+      "SI6",
+      "SI7",
+      "SI8",
+      "SI9",
+      "SI10",
+      "SI11",
+      "SI12",
+      "SI13",
+      "SI14",
+      "SI15",
+      "SI16",
+      "SI17",
+      "SI18",
+      "SI19"
+    ],
+    "instances": 74,
+    "right": 37,
+    "left": 37,
+    "midline": 0,
+    "resolved": 0,
+    "unresolved": 74,
+    "duplicates": 0,
+    "missingCodes": [],
+    "extraCodes": [],
+    "projections": 0,
+    "supportedPathSegments": 0
+  },
+  "preservedExistingRegistrationIds": [
+    "lung-r7",
+    "li-r1",
+    "te-r1"
+  ],
+  "packageResults": [
+    {
+      "registration": "heart-r1",
+      "channel": "HT",
+      "conceptCount": 9,
+      "codes": [
+        "HT1",
+        "HT2",
+        "HT3",
+        "HT4",
+        "HT5",
+        "HT6",
+        "HT7",
+        "HT8",
+        "HT9"
+      ],
+      "uniqueNames": 9,
+      "instanceCount": 18,
+      "rightCount": 9,
+      "leftCount": 9,
+      "unresolvedCount": 18,
+      "projectionCount": 0
+    },
+    {
+      "registration": "pericardium-r1",
+      "channel": "PC",
+      "conceptCount": 9,
+      "codes": [
+        "PC1",
+        "PC2",
+        "PC3",
+        "PC4",
+        "PC5",
+        "PC6",
+        "PC7",
+        "PC8",
+        "PC9"
+      ],
+      "uniqueNames": 9,
+      "instanceCount": 18,
+      "rightCount": 9,
+      "leftCount": 9,
+      "unresolvedCount": 18,
+      "projectionCount": 0
+    },
+    {
+      "registration": "small-intestine-r1",
+      "channel": "SI",
+      "conceptCount": 19,
+      "codes": [
+        "SI1",
+        "SI2",
+        "SI3",
+        "SI4",
+        "SI5",
+        "SI6",
+        "SI7",
+        "SI8",
+        "SI9",
+        "SI10",
+        "SI11",
+        "SI12",
+        "SI13",
+        "SI14",
+        "SI15",
+        "SI16",
+        "SI17",
+        "SI18",
+        "SI19"
+      ],
+      "uniqueNames": 19,
+      "instanceCount": 38,
+      "rightCount": 19,
+      "leftCount": 19,
+      "unresolvedCount": 38,
+      "projectionCount": 0
+    }
+  ],
+  "decodedObservation": [
+    {
+      "registration": "heart-r1",
+      "encodedBytes": 274,
+      "decodedBytes": 319,
+      "contexts": 0,
+      "paths": 0,
+      "sha256": "8287edec961585363bf268dc9d5f29708a08bb58dfa4f0d1778c3e59a5f8435d"
+    },
+    {
+      "registration": "pericardium-r1",
+      "encodedBytes": 274,
+      "decodedBytes": 319,
+      "contexts": 0,
+      "paths": 0,
+      "sha256": "8287edec961585363bf268dc9d5f29708a08bb58dfa4f0d1778c3e59a5f8435d"
+    },
+    {
+      "registration": "small-intestine-r1",
+      "encodedBytes": 274,
+      "decodedBytes": 319,
+      "contexts": 0,
+      "paths": 0,
+      "sha256": "8287edec961585363bf268dc9d5f29708a08bb58dfa4f0d1778c3e59a5f8435d"
+    }
+  ],
+  "sharedValidation": "validateLearningCatalog + validateLearningRegistry + validateLearningPackage + composeLearningPackages + assertUniqueInstances passed"
+}

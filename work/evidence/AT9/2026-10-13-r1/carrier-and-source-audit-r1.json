@@ -1,0 +1,295 @@
+{
+  "schemaVersion": 1,
+  "run": "2026-10-13-r1",
+  "headAtStart": "6cbf333300a285876f39ec04e870ff68a3b448f1",
+  "targetCodes": [
+    "HT1",
+    "HT2",
+    "HT3",
+    "HT4",
+    "HT5",
+    "HT6",
+    "HT7",
+    "HT8",
+    "HT9",
+    "PC1",
+    "PC2",
+    "PC3",
+    "PC4",
+    "PC5",
+    "PC6",
+    "PC7",
+    "PC8",
+    "PC9",
+    "SI1",
+    "SI2",
+    "SI3",
+    "SI4",
+    "SI5",
+    "SI6",
+    "SI7",
+    "SI8",
+    "SI9",
+    "SI10",
+    "SI11",
+    "SI12",
+    "SI13",
+    "SI14",
+    "SI15",
+    "SI16",
+    "SI17",
+    "SI18",
+    "SI19"
+  ],
+  "concepts": 37,
+  "instances": 74,
+  "uniqueCodes": 37,
+  "sideCounts": {
+    "right": 37,
+    "left": 37
+  },
+  "verdictCounts": {
+    "resolved": 0,
+    "unresolved": 74,
+    "duplicate": 0,
+    "missing": 0
+  },
+  "candidates": {
+    "education-r1": {
+      "path": "atlas-data/acupoints/carriers/education-r1/manifest.json",
+      "sha256": "039bf3606e9ed2f28c1e906ab5ea9ee062d1302fc06e001b819a75ead7cc7a73",
+      "revision": "education-envelope-r1"
+    },
+    "lung-AT6-r2": {
+      "path": "atlas-data/acupoints/carriers/lung-AT6-r2/manifest.json",
+      "sha256": "d8e2881fbecf540f5b03b226b71b5ea1ab2605f7eacd237a86908021db57b58a",
+      "revision": "AT6-active-local-carriers-r2"
+    },
+    "upper-yang-final-AT8-r18": {
+      "path": "atlas-data/acupoints/carriers/upper-yang-final-AT8-r18/manifest.json",
+      "sha256": "3d515c04e8dd71772da76780b1c8c10471f9b04ee58ebc8ef3ec1178537a66eb",
+      "revision": "AT8-source-subset-r18"
+    }
+  },
+  "packageRegistrations": [
+    {
+      "id": "heart-r1",
+      "channel": "HT",
+      "codes": [
+        "HT1",
+        "HT2",
+        "HT3",
+        "HT4",
+        "HT5",
+        "HT6",
+        "HT7",
+        "HT8",
+        "HT9"
+      ],
+      "learnerFile": "ht-r1.json",
+      "observationFile": "ht-context-r1.bin",
+      "sections": [
+        {
+          "name": "겨드랑·위팔",
+          "codes": [
+            "HT1",
+            "HT2"
+          ]
+        },
+        {
+          "name": "팔꿈치",
+          "codes": [
+            "HT3"
+          ]
+        },
+        {
+          "name": "손목·아래팔",
+          "codes": [
+            "HT4",
+            "HT5",
+            "HT6",
+            "HT7"
+          ]
+        },
+        {
+          "name": "손바닥",
+          "codes": [
+            "HT8"
+          ]
+        },
+        {
+          "name": "손가락 끝",
+          "codes": [
+            "HT9"
+          ]
+        }
+      ],
+      "learnerSha256": "3d5b4c0b2a947650187c473f91fc39533bbe4590e6a86cc0238e38e275f4ad5f",
+      "observationSha256": "8287edec961585363bf268dc9d5f29708a08bb58dfa4f0d1778c3e59a5f8435d",
+      "observationEncoding": "gzip"
+    },
+    {
+      "id": "pericardium-r1",
+      "channel": "PC",
+      "codes": [
+        "PC1",
+        "PC2",
+        "PC3",
+        "PC4",
+        "PC5",
+        "PC6",
+        "PC7",
+        "PC8",
+        "PC9"
+      ],
+      "learnerFile": "pc-r1.json",
+      "observationFile": "pc-context-r1.bin",
+      "sections": [
+        {
+          "name": "가슴",
+          "codes": [
+            "PC1"
+          ]
+        },
+        {
+          "name": "위팔·팔꿈치",
+          "codes": [
+            "PC2",
+            "PC3"
+          ]
+        },
+        {
+          "name": "손목·아래팔",
+          "codes": [
+            "PC4",
+            "PC5",
+            "PC6",
+            "PC7"
+          ]
+        },
+        {
+          "name": "손바닥",
+          "codes": [
+            "PC8"
+          ]
+        },
+        {
+          "name": "손가락 끝",
+          "codes": [
+            "PC9"
+          ]
+        }
+      ],
+      "learnerSha256": "65982ce9014afb7fa8917d08f4d6b4fa110e4547a5af2c9857bb48ce087288e9",
+      "observationSha256": "8287edec961585363bf268dc9d5f29708a08bb58dfa4f0d1778c3e59a5f8435d",
+      "observationEncoding": "gzip"
+    },
+    {
+      "id": "small-intestine-r1",
+      "channel": "SI",
+      "codes": [
+        "SI1",
+        "SI2",
+        "SI3",
+        "SI4",
+        "SI5",
+        "SI6",
+        "SI7",
+        "SI8",
+        "SI9",
+        "SI10",
+        "SI11",
+        "SI12",
+        "SI13",
+        "SI14",
+        "SI15",
+        "SI16",
+        "SI17",
+        "SI18",
+        "SI19"
+      ],
+      "learnerFile": "si-r1.json",
+      "observationFile": "si-context-r1.bin",
+      "sections": [
+        {
+          "name": "손가락 끝",
+          "codes": [
+            "SI1"
+          ]
+        },
+        {
+          "name": "손가락·손등",
+          "codes": [
+            "SI2",
+            "SI3"
+          ]
+        },
+        {
+          "name": "손목·아래팔",
+          "codes": [
+            "SI4",
+            "SI5",
+            "SI6",
+            "SI7"
+          ]
+        },
+        {
+          "name": "팔꿈치·위팔",
+          "codes": [
+            "SI8"
+          ]
+        },
+        {
+          "name": "어깨·견갑부",
+          "codes": [
+            "SI9",
+            "SI10"
+          ]
+        },
+        {
+          "name": "견갑부·등",
+          "codes": [
+            "SI11",
+            "SI12",
+            "SI13",
+            "SI14",
+            "SI15"
+          ]
+        },
+        {
+          "name": "목",
+          "codes": [
+            "SI16",
+            "SI17"
+          ]
+        },
+        {
+          "name": "얼굴",
+          "codes": [
+            "SI18"
+          ]
+        },
+        {
+          "name": "귀",
+          "codes": [
+            "SI19"
+          ]
+        }
+      ],
+      "learnerSha256": "3a0085ea5a47dde7e0d22dbadcfb0a0a16364f32abe2934c8dadb51e6ff0c512",
+      "observationSha256": "8287edec961585363bf268dc9d5f29708a08bb58dfa4f0d1778c3e59a5f8435d",
+      "observationEncoding": "gzip"
+    }
+  ],
+  "existingRegistryPackagesPreserved": [
+    "lung-r7",
+    "li-r1",
+    "te-r1"
+  ],
+  "locationDataSource": {
+    "who": "https://iris.who.int/bitstream/handle/10665/353407/9789290613831-eng.pdf",
+    "kmcricTemplate": "https://m.kmcric.com/knowledge/acupoint/{channel}/{code}"
+  },
+  "pathSegments": 0,
+  "note": "Source location relationships and candidate carrier hashes are recorded. No candidate is bound as a point projection; missing target-specific surface annotations stay unresolved."
+}

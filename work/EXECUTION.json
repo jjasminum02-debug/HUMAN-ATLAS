@@ -7100,7 +7100,7 @@
       "nextUnit": "AT9"
     },
     "AT9": {
-      "status": "planned",
+      "status": "partial",
       "feature": "acupoint-at-361",
       "title": "심경·심포경·소장경 37혈 위치·경로 연결",
       "dependsOn": [
@@ -7148,7 +7148,81 @@
         "SI17",
         "SI18",
         "SI19"
-      ]
+      ],
+      "owner": "Luna Max",
+      "updatedDate": "2026-10-13",
+      "acceptancePassed": false,
+      "engineeringValidationPassed": true,
+      "report": "work/reports/AT9.md",
+      "evidence": "work/evidence/AT9/2026-10-13-r1",
+      "validation": "work/evidence/AT9/2026-10-13-r1/validation-r1.json",
+      "result": {
+        "scope": "HT1-HT9, PC1-PC9, SI1-SI19 catalog names, source location rules, side dispositions, common package registration and existing learner interaction only",
+        "catalogChannels": 14,
+        "catalogConcepts": 361,
+        "catalogPlannedInstances": 670,
+        "targetConcepts": 37,
+        "targetInstances": 74,
+        "targetInstanceSides": {
+          "right": 37,
+          "left": 37,
+          "midline": 0
+        },
+        "targetCodeMissing": 0,
+        "targetCodeDuplicates": 0,
+        "duplicateCodeSideKeys": 0,
+        "registrations": [
+          "heart-r1",
+          "pericardium-r1",
+          "small-intestine-r1"
+        ],
+        "learnerCodeLists": {
+          "HT": 9,
+          "PC": 9,
+          "SI": 19
+        },
+        "compilerVersion": "explicit-landmarks-2.5",
+        "compilerAttempted": 74,
+        "compilerEligible": 0,
+        "compilerUnresolved": 74,
+        "resolvedPositions": 0,
+        "educationalApproximationPositions": 0,
+        "precisePositions": 0,
+        "positionCoordinatesCreated": 0,
+        "anchorInstancesCreated": 0,
+        "acceptedProductInstances": 0,
+        "supportedPathSegments": 0,
+        "actualLearnerCodeSelectionsChecked": [
+          "HT1",
+          "PC6",
+          "PC8",
+          "SI11",
+          "SI19"
+        ],
+        "actualSideModesChecked": [
+          "right",
+          "left",
+          "bilateral"
+        ],
+        "actualPositionMarkers": {
+          "HT": "0/9; bilateral 0/18",
+          "PC": "0/9; bilateral 0/18",
+          "SI": "0/19; bilateral 0/38"
+        },
+        "channelSwitchAndReturnVerified": true,
+        "panelCloseSceneReturnVerified": true,
+        "pointOcclusionVerifiable": false,
+        "localScreenCaptureFiles": false,
+        "ac1Ac2ProposalsPreservedUnresolved": 22,
+        "professorReview": "not_performed",
+        "textbook": "pending",
+        "publicRedistribution": "held",
+        "acceptancePassed": false,
+        "acceptanceLimit": "The 74 target instances remain unresolved; no position projection exists for point-level occlusion or local visual acceptance.",
+        "remainingUnits": "work/evidence/AT9/2026-10-13-r1/remaining-units-r1.json"
+      },
+      "nextUnit": "AT10",
+      "noAutoAdvance": true
     },
     "AT10": {
       "status": "planned",
@@ -8210,7 +8284,7 @@
         "AT28",
         "AT29"
       ],
-      "nextUnit": "AT9",
+      "nextUnit": "AT10",
       "conceptCount": 361,
       "channelCount": 14,
       "extraPointsIncluded": false,
