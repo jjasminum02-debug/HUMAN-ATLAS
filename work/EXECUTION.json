@@ -7225,7 +7225,7 @@
       "noAutoAdvance": true
     },
     "AT10": {
-      "status": "planned",
+      "status": "partial",
       "feature": "acupoint-at-361",
       "title": "위경 ST1–25 25혈 위치·경로 연결",
       "dependsOn": [
@@ -7261,7 +7261,67 @@
         "ST23",
         "ST24",
         "ST25"
-      ]
+      ],
+      "owner": "Sol xhigh",
+      "updatedDate": "2026-10-13",
+      "acceptancePassed": false,
+      "engineeringValidationPassed": true,
+      "report": "work/reports/AT10.md",
+      "evidence": "work/evidence/AT10/2026-10-13-r1",
+      "validation": "work/evidence/AT10/2026-10-13-r1/validation-r1.json",
+      "result": {
+        "scope": "ST1-ST25 WHO names and location rules, 25 concepts / 50 bilateral instances, partial learner package and existing UI selection/side/control verification",
+        "catalogChannels": 14,
+        "catalogConcepts": 361,
+        "catalogPlannedInstances": 670,
+        "targetConcepts": 25,
+        "targetInstances": 50,
+        "targetInstanceSides": {
+          "right": 25,
+          "left": 25,
+          "midline": 0
+        },
+        "targetCodeMissing": 0,
+        "targetCodeDuplicates": 0,
+        "duplicateCodeSideKeys": 0,
+        "registration": "st-r1",
+        "registeredCodes": 25,
+        "locationRulesRecorded": 25,
+        "candidateCarrierHashRows": 50,
+        "resolvedPositions": 0,
+        "educationalApproximationPositions": 0,
+        "precisePositions": 0,
+        "positionCoordinatesCreated": 0,
+        "acceptedPointInstances": 0,
+        "unresolvedInstances": 50,
+        "supportedPathSegments": 0,
+        "actualLearnerCodeSelectionsChecked": [
+          "ST1",
+          "ST25"
+        ],
+        "actualSideModesChecked": [
+          "right",
+          "left",
+          "bilateral"
+        ],
+        "actualPositionMarkers": {
+          "ST": "0/45 right; 0/45 left; 0/90 bilateral"
+        },
+        "channelSwitchAndReturnVerified": true,
+        "layerControlsAndRestoreVerified": true,
+        "panelCloseSceneReturnVerified": true,
+        "pointOcclusionVerifiable": false,
+        "localScreenCaptureFiles": false,
+        "ac1Ac2ProposalsPreservedUnresolved": 22,
+        "professorReview": "not_performed",
+        "textbook": "pending",
+        "publicRedistribution": "held",
+        "acceptancePassed": false,
+        "acceptanceLimit": "All 50 ST instances remain unresolved because inspected inputs have no source-bound target-specific external skin surfaces and topology addresses; point visibility, occlusion and supported route cannot pass.",
+        "remainingUnits": "work/evidence/AT10/2026-10-13-r1/remaining-units.json"
+      },
+      "nextUnit": "AT11",
+      "noAutoAdvance": true
     },
     "AT11": {
       "status": "planned",
@@ -8284,7 +8344,7 @@
         "AT28",
         "AT29"
       ],
-      "nextUnit": "AT10",
+      "nextUnit": "AT11",
       "conceptCount": 361,
       "channelCount": 14,
       "extraPointsIncluded": false,
