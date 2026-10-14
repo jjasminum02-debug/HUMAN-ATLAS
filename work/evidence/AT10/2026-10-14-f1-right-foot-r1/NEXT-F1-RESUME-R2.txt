@@ -1,0 +1,11 @@
+HUMAN ATLAS에서 AT10/skin-fit F1 오른발 연속 정합만 재개해라. 담당 Sol xhigh.
+
+work/tasks/AT10.md와 최신 work/EXECUTION.json AT10.skinFit, 이 run의 f1-assessment-r2.json, remaining-units-r2.json, repair-queue-r2.json, source-role-review-r1.json, cage-shell-mapping-r1.json, ordered-source-native-cage-audit-r10.json, volume-cage-cell-audit-r6.json을 읽어라. 이전 raw 834 검사·양손 r41 보존·991-face 오른쪽 Crural fascia 정책과 frozen r56 recipe를 재사용해라.
+
+첫 번째 남은 범위는 source 원본 단면의 역할 확인이다. body-axis station 0.35–0.95에서 closest loop는 source axis를 포함하지 않으며 centroids가 50.2–97.8 mm 벗어나 있다. nearest-loop라는 이유만으로 heel/arch/MTP/web/plantar/toe-pad라고 승인하지 마라. source face/edge/vertex의 dorsal/plantar/heel/MTP/web/toe-pad/tip 단면을 실제로 대조하고 native bone/tendon/fascia 역할을 피부와 분리해라.
+
+그 근거가 확보된 뒤에만 22개 실제 topological boundary와 18개 interior fixed control을 함께 만족하는 하나의 conforming 3D cage를 구성해라. body와 독립 toe tube overlap을 남기지 말고, 1,209 nonfixed patch vertices와 416 exact source/native contacts가 연속 주소를 갖도록 해라. 정확 source barycentric 계보·unit 밖 보존·seam 위치/접선/gap을 기록해라.
+
+실제 3D cell derivative·적응형 내부/경계 표본·finite differences·local self·834 raw 및 9,884 retained reference policy를 각각 확인해라. nonfinite/nonpositive/잔여 유효 참조 교차는 거부한다. 미달 candidate는 등록하지 않는다.
+
+통과 후보에 한해서 versioned GLB를 내고, 고정 Blender 3.5 exporter 및 설치 loader·기존 learner scene에서 발등/발바닥/heel/MTP-web/toe-pad-tip과 주변 anatomy를 실제 화면으로 확인해라. 보고서·evidence·해당 AT10 skinFit 상태만 갱신하고 sync_execution.py 및 --check, 소유 변경 로컬 commit 후 멈춰라. F1 미달이면 정확한 unit에 남고 F2/다른 AT는 시작하지 마라.

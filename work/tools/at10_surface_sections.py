@@ -7,8 +7,15 @@ import collections
 import numpy as np
 
 def section_loops(vertices, triangles, origin, normal, face_ids=None):
-    v=np.asarray(vertices);t=np.asarray(triangles);o=np.asarray(origin);n=np.asarray(normal);n=n/np.linalg.norm(n)
-    distances=(v-o)@n;face_ids=np.arange(len(t)) if face_ids is None else np.asarray(face_ids)
+    v=np.asarray(vertices);t=np.asarray(triangles);o=np.asarray(origin,dtype=float);n=np.array(normal,dtype=float,copy=True)
+    normalLength=float(np.linalg.norm(n))
+    if not np.isfinite(normalLength) or normalLength<1e-12:raise ValueError('section normal must be finite and nonzero')
+    n/=normalLength
+    # Explicit rowwise products avoid platform BLAS floating-point warnings on
+    # the pinned macOS build. Also reject invalid coordinates before graph work.
+    distances=np.sum((v-o[None,:])*n[None,:],axis=1)
+    if not np.isfinite(distances).all():raise ValueError('section distances contain nonfinite values')
+    face_ids=np.arange(len(t)) if face_ids is None else np.asarray(face_ids)
     graph=collections.defaultdict(set);nodes={};segments={}
     for fi in face_ids:
         face=t[fi];dd=distances[face]
@@ -39,7 +46,11 @@ def section_loops(vertices, triangles, origin, normal, face_ids=None):
     return loops,open_components
 
 def ordered_samples(loop,vertices,triangles,origin,normal,up,count=20):
-    points=np.array([x['pointM'] for x in loop['nodes']]);n=np.asarray(normal,dtype=float);n/=np.linalg.norm(n);u=np.asarray(up,dtype=float);u=u-n*(u@n);u/=np.linalg.norm(u);right=np.cross(u,n)
+    points=np.array([x['pointM'] for x in loop['nodes']]);n=np.array(normal,dtype=float,copy=True);normalLength=float(np.linalg.norm(n))
+    if not np.isfinite(normalLength) or normalLength<1e-12:raise ValueError('ordered section normal must be finite and nonzero')
+    n/=normalLength;u=np.array(up,dtype=float,copy=True);u=u-n*(u@n);upLength=float(np.linalg.norm(u))
+    if not np.isfinite(upLength) or upLength<1e-12:raise ValueError('ordered section up vector must not be parallel to its normal')
+    u/=upLength;right=np.cross(u,n)
     # Positive polar winding in the section, beginning at its actual dorsal rim.
     xy=np.column_stack([(points-origin)@right,(points-origin)@u]);area=np.sum(xy[:,0]*np.roll(xy[:,1],-1)-xy[:,1]*np.roll(xy[:,0],-1))
     if area<0:

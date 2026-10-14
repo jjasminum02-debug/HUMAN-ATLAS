@@ -1,0 +1,479 @@
+{
+  "schemaVersion": 1,
+  "task": "AT10/skin-fit/F1-right-foot-continuous-registration",
+  "status": "source-role-addresses-recorded-semantic-role-review-incomplete",
+  "sourceSurface": {
+    "input": "MakeHuman source outer skin topology",
+    "sha256": "8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c",
+    "frame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+    "surfaceRole": "outer skin geometry only; not fascia/bone/tendon tissue"
+  },
+  "sectionOrientation": {
+    "frameAxis": "source +Z projection",
+    "orientationStatus": "geometric orientation tag only",
+    "dorsalAnchor": "positive-Z projection maximum in source loop ordering",
+    "oppositeSide": "negative-Z projection side; not auto-labeled plantar",
+    "sourceTopologyModified": false
+  },
+  "bodyAxis": {
+    "sourceStart": [
+      -0.16028954545454546,
+      -0.43763681818181815,
+      -0.003514090909090904
+    ],
+    "sourceEnd": [
+      -0.19113300000000005,
+      -0.7923035,
+      0.1334105
+    ],
+    "targetStart": [
+      -0.08779793960384792,
+      0.3788594787371156,
+      -0.0481925242096011
+    ],
+    "targetEnd": [
+      -0.1063928897664436,
+      0.017445774478244115,
+      0.07385696132610554
+    ],
+    "sourceBoundaryInput": {
+      "sourceVertices": 40,
+      "topologicalBoundaryVertices": 22,
+      "r56ToApprovedBoundaryPositionMaxResidualM": 0.0,
+      "sourceDistanceFromAnkleJointControlRangeM": [
+        0.29818704960142056,
+        0.3353099563836422
+      ],
+      "identity": "source set labels this shared boundary; its distance from the explicit joint-r-ankle control is retained as a discrepancy, not silently relabeled"
+    },
+    "stations": [
+      {
+        "stationFraction": 0.0,
+        "status": "preserved_topological_boundary",
+        "sourceOriginM": [
+          -0.16028954545454546,
+          -0.43763681818181815,
+          -0.003514090909090904
+        ],
+        "sampleCount": 32,
+        "perimeterM": 0.4477933745554824,
+        "semanticRole": "boundary only; not called ankle from geometry"
+      },
+      {
+        "stationFraction": 0.05,
+        "status": "closed_ordered_nearest_main_foot_loop",
+        "sourceOriginM": [
+          -0.16183171818181818,
+          -0.45537015227272726,
+          0.0033321386363636407
+        ],
+        "sourceCenterToLoopCentroidM": 0.008483467792350654,
+        "nearestAlternativeMarginM": 0.31828925338804787,
+        "sourceBodyAxisInsideLoop": true,
+        "sampleCount": 32,
+        "perimeterM": 0.3624314535968,
+        "sourceFaceCount": 24,
+        "semanticRole": "unassigned source contour; do not automatically label heel, arch, MTP, web, plantar, or toe pad"
+      },
+      {
+        "stationFraction": 0.15,
+        "status": "closed_ordered_nearest_main_foot_loop",
+        "sourceOriginM": [
+          -0.16491606363636366,
+          -0.49083682045454546,
+          0.01702459772727273
+        ],
+        "sourceCenterToLoopCentroidM": 0.024697681785321744,
+        "nearestAlternativeMarginM": 0.3056039262932223,
+        "sourceBodyAxisInsideLoop": true,
+        "sampleCount": 32,
+        "perimeterM": 0.3513830502516789,
+        "sourceFaceCount": 24,
+        "semanticRole": "unassigned source contour; do not automatically label heel, arch, MTP, web, plantar, or toe pad"
+      },
+      {
+        "stationFraction": 0.25,
+        "status": "closed_ordered_nearest_main_foot_loop",
+        "sourceOriginM": [
+          -0.1680004090909091,
+          -0.5263034886363637,
+          0.03071705681818182
+        ],
+        "sourceCenterToLoopCentroidM": 0.0364160431389336,
+        "nearestAlternativeMarginM": 0.30180999797575614,
+        "sourceBodyAxisInsideLoop": true,
+        "sampleCount": 32,
+        "perimeterM": 0.32465402002619315,
+        "sourceFaceCount": 22,
+        "semanticRole": "unassigned source contour; do not automatically label heel, arch, MTP, web, plantar, or toe pad"
+      },
+      {
+        "stationFraction": 0.35,
+        "status": "closed_ordered_nearest_main_foot_loop",
+        "sourceOriginM": [
+          -0.17108475454545458,
+          -0.5617701568181818,
+          0.04440951590909091
+        ],
+        "sourceCenterToLoopCentroidM": 0.050191836599594405,
+        "nearestAlternativeMarginM": 0.29603057000413124,
+        "sourceBodyAxisInsideLoop": false,
+        "sampleCount": 32,
+        "perimeterM": 0.29015957321253516,
+        "sourceFaceCount": 22,
+        "semanticRole": "unassigned source contour; do not automatically label heel, arch, MTP, web, plantar, or toe pad"
+      },
+      {
+        "stationFraction": 0.45,
+        "status": "closed_ordered_nearest_main_foot_loop",
+        "sourceOriginM": [
+          -0.17416910000000002,
+          -0.597236825,
+          0.058101975
+        ],
+        "sourceCenterToLoopCentroidM": 0.06461666259892143,
+        "nearestAlternativeMarginM": 0.29053393336783484,
+        "sourceBodyAxisInsideLoop": false,
+        "sampleCount": 32,
+        "perimeterM": 0.2539418621651397,
+        "sourceFaceCount": 22,
+        "semanticRole": "unassigned source contour; do not automatically label heel, arch, MTP, web, plantar, or toe pad"
+      },
+      {
+        "stationFraction": 0.55,
+        "status": "closed_ordered_nearest_main_foot_loop",
+        "sourceOriginM": [
+          -0.1772534454545455,
+          -0.6327034931818182,
+          0.0717944340909091
+        ],
+        "sourceCenterToLoopCentroidM": 0.07360048692003301,
+        "nearestAlternativeMarginM": 0.29369018889862336,
+        "sourceBodyAxisInsideLoop": false,
+        "sampleCount": 32,
+        "perimeterM": 0.2243542513462093,
+        "sourceFaceCount": 20,
+        "semanticRole": "unassigned source contour; do not automatically label heel, arch, MTP, web, plantar, or toe pad"
+      },
+      {
+        "stationFraction": 0.65,
+        "status": "closed_ordered_nearest_main_foot_loop",
+        "sourceOriginM": [
+          -0.18033779090909094,
+          -0.6681701613636364,
+          0.08548689318181818
+        ],
+        "sourceCenterToLoopCentroidM": 0.08261111433797076,
+        "nearestAlternativeMarginM": 0.29296027747421993,
+        "sourceBodyAxisInsideLoop": false,
+        "sampleCount": 32,
+        "perimeterM": 0.20987720865877607,
+        "sourceFaceCount": 22,
+        "semanticRole": "unassigned source contour; do not automatically label heel, arch, MTP, web, plantar, or toe pad"
+      },
+      {
+        "stationFraction": 0.75,
+        "status": "closed_ordered_nearest_main_foot_loop",
+        "sourceOriginM": [
+          -0.1834221363636364,
+          -0.7036368295454546,
+          0.09917935227272726
+        ],
+        "sourceCenterToLoopCentroidM": 0.09256412841379415,
+        "nearestAlternativeMarginM": 0.29056079970849036,
+        "sourceBodyAxisInsideLoop": false,
+        "sampleCount": 32,
+        "perimeterM": 0.24281576668027763,
+        "sourceFaceCount": 26,
+        "semanticRole": "unassigned source contour; do not automatically label heel, arch, MTP, web, plantar, or toe pad"
+      },
+      {
+        "stationFraction": 0.85,
+        "status": "closed_ordered_nearest_main_foot_loop",
+        "sourceOriginM": [
+          -0.18650648181818186,
+          -0.7391034977272728,
+          0.11287181136363636
+        ],
+        "sourceCenterToLoopCentroidM": 0.09775704329559701,
+        "nearestAlternativeMarginM": 0.285275742328991,
+        "sourceBodyAxisInsideLoop": false,
+        "sampleCount": 32,
+        "perimeterM": 0.322141730394842,
+        "sourceFaceCount": 32,
+        "semanticRole": "unassigned source contour; do not automatically label heel, arch, MTP, web, plantar, or toe pad"
+      },
+      {
+        "stationFraction": 0.95,
+        "status": "closed_ordered_nearest_main_foot_loop",
+        "sourceOriginM": [
+          -0.18959082727272733,
+          -0.7745701659090909,
+          0.12656427045454544
+        ],
+        "sourceCenterToLoopCentroidM": 0.052657898532636235,
+        "nearestAlternativeMarginM": 0.3348140564513737,
+        "sourceBodyAxisInsideLoop": false,
+        "sampleCount": 32,
+        "perimeterM": 0.2794279322690574,
+        "sourceFaceCount": 42,
+        "semanticRole": "unassigned source contour; do not automatically label heel, arch, MTP, web, plantar, or toe pad"
+      }
+    ],
+    "importantObservation": "The nearest closed loop includes the source body axis at 0.05, 0.15, 0.25; at 0.35–0.95 the selected nearest loop excludes the axis and its centroid is 50.2–97.8 mm from it. This is not accepted as anatomical identification."
+  },
+  "nativeContactRoles": [
+    {
+      "sourceKey": "ZA-c7010a9-97a5556947c926b0b5483338",
+      "nativeName": "Crural fascia",
+      "side": "right",
+      "nativeTriangleIds": [
+        8846,
+        8847,
+        8848,
+        8945,
+        8946,
+        9317,
+        9322,
+        9395,
+        9396,
+        9397,
+        9400,
+        9401,
+        10491
+      ],
+      "skinSourceObjFaces": [
+        5569,
+        6222,
+        6231,
+        6395,
+        6396,
+        6403,
+        6407,
+        6432
+      ],
+      "skinLogicalTriangles": [
+        11138,
+        11139,
+        12445,
+        12462,
+        12463,
+        12790,
+        12793,
+        12806,
+        12807,
+        12814,
+        12815,
+        12864,
+        12865
+      ],
+      "exactIntersectionAddressCount": 70,
+      "tissueRole": "native target component label only; not the identity of the skin section"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-440e8f3a5e420fb40740e2fa",
+      "nativeName": "Fifth metatarsal bone",
+      "side": "right",
+      "nativeTriangleIds": [
+        173,
+        174,
+        291,
+        303,
+        311,
+        312,
+        327,
+        333,
+        380,
+        382,
+        391,
+        392,
+        393,
+        394,
+        398,
+        399,
+        407,
+        408,
+        464
+      ],
+      "skinSourceObjFaces": [
+        5759,
+        6231,
+        6396,
+        6403,
+        6431,
+        6432
+      ],
+      "skinLogicalTriangles": [
+        11518,
+        11519,
+        12462,
+        12463,
+        12792,
+        12793,
+        12806,
+        12807,
+        12862,
+        12863,
+        12864,
+        12865
+      ],
+      "exactIntersectionAddressCount": 90,
+      "tissueRole": "native target component label only; not the identity of the skin section"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-48acd9f4e0949932aafb2354",
+      "nativeName": "First metatarsal bone",
+      "side": "right",
+      "nativeTriangleIds": [
+        837,
+        912,
+        914,
+        915,
+        924,
+        925,
+        945,
+        946,
+        949,
+        950,
+        954,
+        955,
+        960,
+        967,
+        969,
+        970,
+        971,
+        972
+      ],
+      "skinSourceObjFaces": [
+        5862,
+        6157,
+        6222,
+        6407
+      ],
+      "skinLogicalTriangles": [
+        11724,
+        11725,
+        12315,
+        12445,
+        12814,
+        12815
+      ],
+      "exactIntersectionAddressCount": 80,
+      "tissueRole": "native target component label only; not the identity of the skin section"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-da68304526f8c9bbc61306da",
+      "nativeName": "Proximal phalanx of fifth finger of foot",
+      "side": "right",
+      "nativeTriangleIds": [
+        143,
+        153,
+        199
+      ],
+      "skinSourceObjFaces": [
+        6431
+      ],
+      "skinLogicalTriangles": [
+        12862,
+        12863
+      ],
+      "exactIntersectionAddressCount": 12,
+      "tissueRole": "native target component label only; not the identity of the skin section"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-811c52b6b45c12323e057e8b",
+      "nativeName": "Proximal phalanx of first finger of foot",
+      "side": "right",
+      "nativeTriangleIds": [
+        357,
+        358,
+        360,
+        410,
+        412,
+        413,
+        415,
+        428
+      ],
+      "skinSourceObjFaces": [
+        5862,
+        6157,
+        6222,
+        6407
+      ],
+      "skinLogicalTriangles": [
+        11724,
+        11725,
+        12315,
+        12445,
+        12814
+      ],
+      "exactIntersectionAddressCount": 44,
+      "tissueRole": "native target component label only; not the identity of the skin section"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-7cddd66b511f6de270d99843",
+      "nativeName": "Tendon of extensor digitorum longus",
+      "side": "right",
+      "nativeTriangleIds": [
+        2458,
+        2459,
+        2466,
+        2467,
+        2468,
+        2470,
+        2472,
+        2473,
+        2474,
+        2475,
+        2476,
+        2480,
+        2481,
+        2482,
+        2483,
+        2484,
+        2485,
+        5044,
+        5045,
+        5046,
+        5052,
+        5053,
+        5054,
+        5057,
+        5060,
+        5061,
+        5062,
+        5063,
+        5064,
+        5069,
+        5070,
+        5072,
+        5073
+      ],
+      "skinSourceObjFaces": [
+        6231,
+        6396
+      ],
+      "skinLogicalTriangles": [
+        12463,
+        12792,
+        12793
+      ],
+      "exactIntersectionAddressCount": 120,
+      "tissueRole": "native target component label only; not the identity of the skin section"
+    }
+  ],
+  "anatomicalLabels": {
+    "heel": "not_checked",
+    "midfootArch": "not_checked",
+    "metatarsalHead": "not_checked",
+    "MTPWeb": "not_checked",
+    "toePadTip": "not_checked",
+    "plantarSurface": "not_checked",
+    "dorsalOrientation": "geometric +Z tag only"
+  },
+  "limitations": [
+    "No final candidate exists for actual two-sided screen review.",
+    "Native mesh object names identify target roles, not exact attachment or boundary acceptance.",
+    "The nearest-loop branch is a geometric candidate and must be visually/source-checked before it can define body-axis correspondence."
+  ]
+}
