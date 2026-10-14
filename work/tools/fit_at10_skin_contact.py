@@ -45,6 +45,12 @@ p.add_argument('--hard-helper-ids',nargs='*',default=[])
 p.add_argument('--steps', type=int, default=30)
 p.add_argument('--centers', type=int, default=360)
 p.add_argument('--resume')
+p.add_argument('--reference-exceptions',help='Explicit user-authorized source/facet exceptions; raw full-reference QA remains mandatory.')
+p.add_argument('--jacobian-barriers',action='store_true',help='Add first-order positive-volume inequalities to the same constrained solve; exact trial Jacobian guard still applies.')
+p.add_argument('--hard-contacts',action='store_true',help='Use addressed native clearance inequalities in the QP, not only its soft objective.')
+p.add_argument('--collision-priority',action='store_true',help='Prioritize strict reduction of actual native crossings over clearance energy; do not permit more crossing facets.')
+p.add_argument('--shape-target',help='Explicit source-topology shape prior; does not replace correspondence, collision or volume checks.')
+p.add_argument('--shape-weight',type=float,default=3.)
 args = p.parse_args(sys.argv[sys.argv.index('--')+1:])
 assert 0 < args.minimum_margin <= args.target_clearance
 E = R / args.evidence
@@ -81,24 +87,36 @@ else:
     raise ValueError('Explicit initial candidate or frozen initial unit positions required.')
 v[roots] = np.array(d['positions'])[roots]
 initial = v.copy()
+shape_target=np.array(load(R/args.shape_target)['positions']) if args.shape_target else initial
+assert shape_target.shape==v.shape and np.isfinite(shape_target).all()
 native = load(B1 / 'native-surfaces-r1.json')
 supplement=os.environ.get('AT10_NATIVE_SUPPLEMENT')
 if supplement:
     extra=load(R/supplement);assert not set(extra)&set(native);native.update(extra)
 native_vertices, native_triangles, native_keys, native_local = [], [], [], []
 sample_points, sample_addresses = [], []
+exceptions={}
+if args.reference_exceptions:
+    policy=load(R/args.reference_exceptions)
+    assert policy['schemaVersion']==1 and policy['userAuthorized'] is True and policy['rawFullReferenceQaRequired'] is True
+    for item in policy['facets']:
+        n=native[item['sourceKey']]
+        digest=hashlib.sha256(np.asarray(n['v'],dtype='<f8').tobytes()+np.asarray(n['t'],dtype='<u4').tobytes()).hexdigest()
+        assert digest==item['geometrySha256'] and n['name']==item['sourceName'] and n['side']==item['side']
+        exceptions[item['sourceKey']]=set(item['triangleIds'])
 lower, upper = v[ids].min(0)-.035, v[ids].max(0)+.035
 for key, item in native.items():
     nv = np.array(item['v']); nt = np.array(item['t']); off = len(native_vertices)
-    native_vertices.extend(nv.tolist()); native_triangles.extend((nt+off).tolist())
-    native_keys.extend([key]*len(nt)); native_local.extend(range(len(nt)))
+    kept=np.array([i for i in range(len(nt)) if i not in exceptions.get(key,set())],dtype=int)
+    native_vertices.extend(nv.tolist()); native_triangles.extend((nt[kept]+off).tolist())
+    native_keys.extend([key]*len(kept)); native_local.extend(kept.tolist())
     if args.side!='bilateral' and item['side'] not in [args.side, None, 'midline', 'bilateral', 'unspecified']:
         continue
-    vertex_ids = np.flatnonzero(((nv >= lower) & (nv <= upper)).all(1))
+    vertex_ids = np.intersect1d(np.unique(nt[kept]),np.flatnonzero(((nv >= lower) & (nv <= upper)).all(1)))
     sample_points.extend(nv[vertex_ids].tolist())
     sample_addresses.extend({'nativeSourceKey': key, 'nativeVertex': int(i)} for i in vertex_ids)
     centroids = nv[nt].mean(1)
-    face_ids = np.flatnonzero(((centroids >= lower) & (centroids <= upper)).all(1))
+    face_ids = np.intersect1d(kept,np.flatnonzero(((centroids >= lower) & (centroids <= upper)).all(1)))
     sample_points.extend(centroids[face_ids].tolist())
     sample_addresses.extend({'nativeSourceKey': key, 'nativeTriangle': int(i), 'barycentric': [1/3]*3} for i in face_ids)
 nv, nt = np.array(native_vertices), np.array(native_triangles)
@@ -294,6 +312,10 @@ source_unit = {'side': args.side, 'sourceVertices': ids.tolist(), 'sharedBoundar
     'sourceHelperPolicy':{'mode':args.helper_mode,'maximumDerivedHandleDriftM':args.maximum_helper_drift,
         'originalSourceHelpersChanged':False,'nativeBonesChanged':False,'meaning':'static skin recipe handles, not claimed anatomical bone points'},
     'sourceTopologyAndUvPreserved': True, 'acupointMeaningApproved': False}
+source_unit['referenceExceptions']=args.reference_exceptions
+source_unit['rawFullReferenceQaRequired']=True
+source_unit['shapeTarget']=args.shape_target
+source_unit['shapeWeight']=args.shape_weight
 if args.resume:
     source_unit['resumedFromRevision'] = args.resume
     source_unit['resumedCandidateSha256'] = hashlib.sha256((E / f'candidates/fit-{args.resume}.json').read_bytes()).hexdigest()
@@ -356,19 +378,21 @@ for iteration in range(args.steps):
         np.add.at(neighbours, aa, values[bb]); np.add.at(neighbours, bb, values[aa])
         return values-neighbours/np.maximum(degree[:, None], 1)
     unit_basis = basis[ids]; lap_basis = laplacian(unit_basis)
-    prior_delta = v[ids]-initial[ids]; lap_prior = laplacian(prior_delta)
-    regularizer = np.eye(null.shape[1])*.015 + unit_basis.T@unit_basis*.002 + lap_basis.T@lap_basis*3.
+    prior_delta = v[ids]-shape_target[ids]; lap_prior = laplacian(prior_delta)
+    regularizer = np.eye(null.shape[1])*.015 + unit_basis.T@unit_basis*.002 + lap_basis.T@lap_basis*args.shape_weight
     helper_basis=gaussian(query[helper_start:])[0]@null
     helper_prior=query[helper_start:]-initial_helper_query
     if args.helper_mode=='bounded-soft':regularizer+=helper_basis.T@helper_basis*10.
     system = constraint_weight*(matrix_rows.T@matrix_rows) + np.kron(regularizer, np.eye(3))
-    target_rhs = constraint_weight*(matrix_rows.T@rhs) - (.002*unit_basis.T@prior_delta+3.*lap_basis.T@lap_prior).ravel()
+    target_rhs = constraint_weight*(matrix_rows.T@rhs) - (.002*unit_basis.T@prior_delta+args.shape_weight*lap_basis.T@lap_prior).ravel()
     if args.helper_mode=='bounded-soft':target_rhs-=(10.*helper_basis.T@helper_prior).ravel()
     coefficients = np.linalg.solve(system, target_rhs)
     # Rejected trials reveal the actual non-adjacent skin feature pairs. Their
     # current separation enters this same solve as a hard linear inequality;
     # rejecting a self-intersection alone provides no feasible escape direction.
     barrier_rows, barrier_rhs = [], []
+    if args.hard_contacts:
+        barrier_rows.extend(matrix_rows.tolist());barrier_rhs.extend(rhs.tolist())
     for fa, fb in sorted(barrier_pairs):
         ta, tb = tri[fa], tri[fb]
         distance, pa, pb = separated_triangle_witness(v[ta], v[tb])
@@ -381,6 +405,16 @@ for iteration in range(args.steps):
         for vi in ids[v[ids,1] < args.floor_m+.008]:
             barrier_rows.append(np.outer(basis[vi],[0.,1.,0.]).ravel())
             barrier_rhs.append(args.floor_m-v[vi,1])
+    if args.jacobian_barriers:
+        _,query_gradient=gaussian(query)
+        gradient_basis=np.einsum('qnk,nm->qmk',query_gradient,null)
+        determinant=np.linalg.det(jac)
+        predicted_trace=np.einsum('qmk,mk->q',gradient_basis,coefficients.reshape(-1,3))
+        limits=.005/np.maximum(determinant,1e-12)-1
+        active=np.flatnonzero((predicted_trace<limits+.1)|(determinant<.015))
+        for qi in active:
+            barrier_rows.append(gradient_basis[qi].ravel());barrier_rhs.append(float(limits[qi]))
+        print('JACOBIAN_BARRIERS',len(active),flush=True)
     if barrier_rows:
         constraints=np.array(barrier_rows); limits=np.array(barrier_rhs)
         inverse=np.linalg.solve(system,constraints.T)
@@ -399,8 +433,12 @@ for iteration in range(args.steps):
                     multiplier[k]=updated;residual-=gram[:,k]*change
                     maximum_change=max(maximum_change,abs(change)*diagonal[k])
             if residual.max()<1e-8 and maximum_change<1e-8:break
+        if not np.isfinite(multiplier).all() or not np.isfinite(residual).all():
+            print('QP_NONFINITE_REJECTED',iteration,flush=True);break
         coefficients+=inverse@multiplier
         print('QP',qp_sweep,'constraints',len(limits),'maximum_violation',float(max(0,residual.max())),flush=True)
+    if not np.isfinite(coefficients).all():
+        print('NONFINITE_COEFFICIENTS_REJECTED',iteration,flush=True);break
     coefficients = coefficients.reshape(-1, 3)
     raw_coefficients = null@coefficients
     delta = phi@raw_coefficients
@@ -415,6 +453,8 @@ for iteration in range(args.steps):
     while step >= 1/2048:
         trial = v+step*delta
         trial_jac = (np.eye(3)[None]+step*qgradient)@jac
+        if not np.isfinite(trial).all() or not np.isfinite(trial_jac).all():
+            rejected['nonfinite']+=1;step*=.5;continue
         if args.helper_mode=='bounded-soft' and np.linalg.norm(query[helper_start:]+step*qdelta[helper_start:]-initial_helper_query,axis=1).max()>args.maximum_helper_drift:
             rejected['model_handle_drift']+=1;step*=.5;continue
         if np.linalg.det(trial_jac).min() <= .004:
@@ -428,7 +468,16 @@ for iteration in range(args.steps):
         next_rows, next_energy = contacts(trial, next_tree, next_native)
         # Initial native penetration may have to pass nested surfaces to escape.
         # Once collision-free, exact native tests forbid its reintroduction.
-        if next_energy >= energy*(1-1e-7) or (not len(native_pairs) and len(next_native)):
+        old_count=len(set(native_pairs[:,0]));next_count=len(set(next_native[:,0]))
+        not_improved=(next_energy >= energy*(1-1e-7)) if not args.collision_priority else (next_count>old_count or next_count==old_count and next_energy>=energy*(1-1e-7))
+        if args.shape_target:
+            # The line search must use the same shape/contact objective as the
+            # solve. Contact-only descent otherwise freezes the collapsed pose.
+            def shape_energy(points):
+                diff=points[ids]-shape_target[ids]
+                return .002*float((diff*diff).sum())+args.shape_weight*float((laplacian(diff)**2).sum())
+            not_improved=constraint_weight*next_energy+shape_energy(trial)>=constraint_weight*energy+shape_energy(v)
+        if not_improved or (not len(native_pairs) and len(next_native)):
             rejected['contact_energy'] += 1; step *= .5; continue
         accepted = True; break
     if not accepted:

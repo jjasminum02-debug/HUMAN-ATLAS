@@ -1,0 +1,57 @@
+{
+  "status": "partial",
+  "acceptancePassed": false,
+  "resumeUnit": "skin-fit",
+  "immediateUnit": "AT10/F1/right-foot-continuous-surface-fit",
+  "sourceInputMissing": false,
+  "humanApprovalPending": false,
+  "rightFootReferenceExceptionDecisionCompleted": true,
+  "approvedFittedSkinCount": 0,
+  "preservedLocalSuccess": [
+    "r41 hand-right contact native0/self0",
+    "r41 hand-left contact native0/self0"
+  ],
+  "remaining": [
+    {
+      "id": "F1",
+      "required": "Actual source dorsal/plantar/heel/MTP/toe-pad/web continuous surface correspondence and positive 3D deformation with natural toe cross sections",
+      "current": "r56 retained references foot21, raw513, local self0; shape fails. r58 retained foot228, raw730, local self0; source-shaped dense field r60/r61 has4 nonpositive samples.",
+      "addresses": "right-foot-remaining-r56.json",
+      "nextImplementation": "Resolve fifth-toe source field fold at original source query [-0.21347,-0.80155,0.1554] and adjacent 3 face centroids; couple source cross-section/ordered native bone+tendon boundary constraints before contact solve. Do not repeat unqualified normal push, exclude more native wholesale, or accept sampled positive J alone."
+    },
+    {
+      "id": "F2",
+      "required": "Actual left foot chain/bands, reference classification and own emitted QA; no mirrored approval",
+      "current": "r41 unchanged left foot raw877 crossings; not worked beyond baseline reuse."
+    },
+    {
+      "id": "F3",
+      "required": "Head/ear/neck/eyelid/oral return correspondence and adult morphology",
+      "current": "head raw461 facets; actual app shows eyelid/oral/ear/neck mismatch. No new shape accepted."
+    },
+    {
+      "id": "F4",
+      "required": "Axilla/arm/trunk/pelvis/groin continuous seam and body containment",
+      "current": "r56 unchanged arm54+54/trunk262/groin30 and remaining leg61+79; no whole acceptance."
+    },
+    {
+      "id": "F5/F6",
+      "required": "Whole geometry+landmark registry+deterministic recipe and actual final app QA",
+      "current": "No fitted whole skin accepted. New metadata binding and finite sample QA are engineering only."
+    },
+    {
+      "id": "R1/R2",
+      "required": "Accepted canonical skin -> shared loader/mask,108 anchor migration/contact, budgets and final responsive QA",
+      "current": "Existing108 all-point budget regression fixed; accepted skin/canonical share/point contact0. Raw skin+all-point total21,492,219 exceeds20MiB by520,699 bytes. No limit raised."
+    },
+    {
+      "id": "C1",
+      "required": "Existing-package-reconciliation74 AT9+50 ST instances with source-bound locations",
+      "current": "124 unresolved; source material preserved. No invented coordinates."
+    }
+  ],
+  "afterWholeSkinPassOnly": "AT10/skin-runtime",
+  "afterRuntimePassOnly": "AT10/existing-package-reconciliation",
+  "nextAT": "AT11 only after AT10 acceptance; not run",
+  "autoRunNext": false
+}

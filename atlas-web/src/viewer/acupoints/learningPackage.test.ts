@@ -40,3 +40,13 @@ test('lossless observation delivery replays actual LI/TE source bytes and coordi
   const bytes=readFileSync(new URL(`../../../../atlas-data/acupoints/observation/${channel}-context-r1.bin`,import.meta.url));const raw=readFileSync(new URL(`../../../../work/evidence/AT8/2026-10-13-r1/delivery-r19/${channel}-context-r1.json`,import.meta.url));assert.deepEqual(gunzipSync(bytes),raw);const decoded=await decodeLearningDocument(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),true);assert.deepEqual(decoded.document,JSON.parse(raw.toString()));assert.equal(decoded.decodedBytes,raw.length);
  }
 });
+test('LU delivery reuses the common gzip decoder and preserves every historical point/route/context byte',async()=>{
+ const {decodeLearningDocument}=await import('./learningPackage.ts');const {gunzipSync}=await import('node:zlib');const {createHash}=await import('node:crypto');
+ const registry=JSON.parse(readFileSync(new URL('../../../../atlas-data/acupoints/learner/registry-r1.json',import.meta.url),'utf8'));
+ const lu=registry.packages.find((p:{channel:string})=>p.channel==='LU');assert.equal(lu.observationEncoding,'gzip');
+ const packed=readFileSync(new URL('../../../../atlas-data/acupoints/observation/'+lu.observationFile,import.meta.url));
+ const raw=readFileSync(new URL('../../../../atlas-data/acupoints/observation/lung-context-r1.json',import.meta.url));
+ assert.deepEqual(gunzipSync(packed),raw);assert.equal(createHash('sha256').update(packed).digest('hex'),lu.observationSha256);
+ const decoded=await decodeLearningDocument(packed.buffer.slice(packed.byteOffset,packed.byteOffset+packed.byteLength),true);assert.deepEqual(decoded.document,JSON.parse(raw.toString()));
+ assert.equal(decoded.decodedBytes,139176);assert.equal(packed.byteLength,30822);
+});

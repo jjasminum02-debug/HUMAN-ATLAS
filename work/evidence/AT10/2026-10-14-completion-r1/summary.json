@@ -1,0 +1,117 @@
+{
+  "scope": "AT10 completion request; actual F1 repair attempts plus independent common delivery/pose metadata defects",
+  "date": "2026-10-14",
+  "baselineHead": "bf2f970dc7fb71eaf323b88352314cd856786732",
+  "status": "partial",
+  "acceptancePassed": false,
+  "geometryAcceptance": false,
+  "sourceInputMissing": false,
+  "humanApprovalPending": false,
+  "approvedWholeSkins": 0,
+  "newSkinAnchoredInstances": 0,
+  "preservedSkinCheckpoint": "r22 geometry=false native3874/self1604 old648 reference",
+  "preservedLocalSuccess": "r41 both hand contact native0/self0; whole geometry false",
+  "referencePolicy": {
+    "userAuthorized": true,
+    "file": "reference-exceptions-right-r1.json",
+    "rightTrianglesSeparated": 991,
+    "rightFasciaTrianglesRetained": 9884,
+    "rawFull834NativeQaPreserved": true,
+    "leftPolicyNotAuthored": true,
+    "wholeSourceChanged": false
+  },
+  "attemptLedger": "attempt-ledger.json",
+  "bestContactDiagnostic": {
+    "revision": "r56",
+    "adopted": false,
+    "rawNativeWhole": 2391,
+    "wholeSelfPairs": 1334,
+    "retainedReferenceRightFoot": 21,
+    "rawRightFoot": 513,
+    "reason": "remaining bone/tendon/fascia contact + boxy/folded toes"
+  },
+  "latestShapeDiagnostic": {
+    "revision": "r58",
+    "adopted": false,
+    "rawNativeWhole": 2624,
+    "wholeSelfPairs": 1334,
+    "retainedReferenceRightFoot": 228,
+    "rawRightFoot": 730,
+    "reason": "native crossings increase; actual feet/head mismatch"
+  },
+  "denseInitialFieldsRejected": {
+    "revisions": [
+      "r60",
+      "r61"
+    ],
+    "nonPositiveSamples": 4,
+    "glbEmitted": false
+  },
+  "technicalFixes": [
+    "lossless LU observation transport using existing common gzip decoder",
+    "canonical frame0 pose metadata with actual current native checks; no geometry/acceptance change",
+    "nonfinite trial rejection and shared shape/contact line-search objective"
+  ],
+  "currentLegacyAllPoints": {
+    "renderedInstances": 108,
+    "exhaustiveIndividualVisualQAClaimed": false,
+    "encodedOverlayBytes": 823127,
+    "baseBytes": 20042516,
+    "totalBytes": 20865643,
+    "budgetBytes": 20971520,
+    "headroomBytes": 105877,
+    "coordinateRouteBytesUnchanged": true,
+    "preciseSkinContacts": 0
+  },
+  "rawSkinPlusAllPoints": {
+    "totalBytes": 21492219,
+    "excessBytes": 520699,
+    "budgetRaised": false,
+    "surroundingStructuresRemoved": false
+  },
+  "actualApp": {
+    "devReviewOnly": true,
+    "actualAcceptedSkinImport": 0,
+    "hashes": [
+      "66be5e641fdf318ae9d47a1890556005da2aa0d90e418f32dcb9683fdc822665",
+      "06f6a9216165fc7f5e701a426acbe24778ee116d81c3afcf5804ae3b80695efe"
+    ],
+    "regions": [
+      "whole",
+      "both feet",
+      "head/ears/neck"
+    ],
+    "legacyViewports": [
+      390,
+      1024,
+      1440
+    ],
+    "reviewViewportDisplayObserved": [
+      390,
+      1024,
+      1440
+    ],
+    "singleRootPerSession": true,
+    "offCostZeroObserved": true,
+    "frameCallbacks": 0,
+    "geometryVisualPass": false,
+    "skinPointContactPass": false,
+    "screens": "screens/"
+  },
+  "tests": {
+    "related": 25,
+    "overlayMaskLifecycle": 34,
+    "total": 59,
+    "typecheckBuildPassed": true,
+    "pythonSyntaxFiles": 11,
+    "productionReviewAssetLeak": false
+  },
+  "preservation": "preservation-checks.json",
+  "report": "work/reports/AT10-completion-2026-10-14-r1.md",
+  "remainingUnits": "remaining-units.json",
+  "nextPrompt": "next-skin-fit-prompt.txt",
+  "resumeUnit": "AT10/F1/right-foot-continuous-surface-fit",
+  "nextAfterWholeSkinPassOnly": "AT10/skin-runtime",
+  "nextAfterRuntimePassOnly": "AT10/existing-package-reconciliation",
+  "noNextTaskExecuted": true
+}

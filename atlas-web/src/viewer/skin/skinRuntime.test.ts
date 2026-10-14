@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import * as THREE from 'three';
 import { decodeSkin, SkinLayer } from './SkinLayer.ts';
 import { registeredSkin, skinWithinBudget, validateSkinAsset, type SkinAsset } from './skinContract.ts';
@@ -24,6 +25,24 @@ test('actual frozen GLB uses one reference topology, identity transform and matt
 test('tampered GLB bytes and topology binding fail instead of retargeting the anchor',async()=>{
   const b=bytes();new Uint8Array(b)[b.byteLength-1]^=1;await assert.rejects(decodeSkin(b,asset,true),/hash/);
   await assert.rejects(decodeSkin(bytes(),{...asset,topologySha256:'0'.repeat(64)},true),/topology hash/);
+});
+test('current dataset pose accepts only hash-bound metadata correction, with original geometry unchanged and eligibility still false',async()=>{
+  const root=new URL('../../../../',import.meta.url),dir='atlas-data/anatomy/skin/at10-completion-r1/';
+  const dataset=JSON.parse(readFileSync(new URL('atlas-data/source-cache/datasets/za/compiled/manifest.json',root),'utf8'));
+  assert.throws(()=>validateSkinAsset({...asset,datasetRevision:dataset.revision},{...asset,datasetRevision:dataset.revision,poseId:dataset.frameContract.staticReferencePose.id},true),/pose/);
+  const hashes={r41:asset.topologySha256,r56:'503a429c096697bf80b22bcac0e44b2696eff9aff1cbbbe7063fc5840104118d',r58:'7ebe77d34cc001b04b661cf8d903f5f523c55d47df66e8c012f73c99711e4b83'};
+  for(const revision of ['r41','r56','r58'] as const){
+    const b=readFileSync(new URL(`${dir}skin-candidate-${revision}p1.glb`,root));
+    const old=readFileSync(new URL(`${revision==='r41'?'atlas-data/anatomy/skin/at10-fit-r5/':dir}skin-candidate-${revision}.glb`,root));
+    assert.deepEqual(b.subarray(28+b.readUInt32LE(12)),old.subarray(28+old.readUInt32LE(12)),'metadata correction changes no binary position, normal, UV or index');
+    const mapping=readFileSync(new URL(`${dir}source-to-derived-${revision}p1.json`,root));
+    const m=JSON.parse(mapping.toString());assert.equal(m.referencePoseBinding.sourceHash,dataset.sourceHash);assert.equal(m.referencePoseBinding.sourceFrame,0);
+    assert.equal(m.referencePoseBinding.actualCurrentNativeChecks.length,3);assert.equal(m.acceptancePassed,false);
+    const current={...asset,revision:revision+'p1',datasetRevision:dataset.revision,poseId:dataset.frameContract.staticReferencePose.id,bytes:b.length,sha256:createHash('sha256').update(b).digest('hex'),topologySha256:hashes[revision],mappingSha256:createHash('sha256').update(mapping).digest('hex')};
+    validateSkinAsset(current,current,true);assert.throws(()=>validateSkinAsset(current,current),/not learner eligible/);
+    const decoded=await decodeSkin(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),current,true);
+    assert.equal(decoded.carrier.precision,'coarse_not_skin');decoded.mesh.geometry.dispose();(decoded.mesh.material as THREE.Material).dispose();
+  }
 });
 test('first mode entry, manual OFF, repeated entry and original skin state restore are independent',()=>{
   const s=new SkinLayerState();s.acupoints(true);assert.equal(s.visible,true);s.manual(false);s.acupoints(true);assert.equal(s.visible,false);

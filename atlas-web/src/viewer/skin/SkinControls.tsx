@@ -23,7 +23,7 @@ export default function SkinControls({adapter,acupoints}:{adapter:DatasetSceneAd
         unsubscribe.current=layer.current.subscribe(()=>setVisible(layer.current?.visible??false));
       }
       await layer.current.on();if(token===generation.current)setVisible(layer.current.visible);
-    } catch(error){if(token===generation.current){state.current.suspend();setVisible(false);setNotice(error instanceof Error&&/[가-힣]/.test(error.message)?error.message:'피부 자료의 정합·좌표·파일 검증을 통과하지 못했습니다.');}}
+    } catch(error){if(import.meta.env.DEV&&review)console.error('[skin-review]',error);if(token===generation.current){state.current.suspend();setVisible(false);setNotice(error instanceof Error&&/[가-힣]/.test(error.message)?error.message:'피부 자료의 정합·좌표·파일 검증을 통과하지 못했습니다.');}}
     finally {if(token===generation.current)setLoading(false);}
   };
   useEffect(()=>{state.current.acupoints(acupoints);void sync();},[acupoints,adapter]);

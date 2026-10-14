@@ -227,3 +227,8 @@ r41은 `/private/tmp/at10-contact-r5-replay-01`에서 원본 대응 numeric 초�
 원본/UV/helpers/IDs/native/OpenSim_Models/T13 drafts/역사 evidence와 기존 WIP45개를 보존했다. MakeHuman asset CC0/program AGPL, native 권리/public held, AI 작성, 선택적 human review와 기술/위치 승인은 분리했다. 새 학습 지표/정밀 혈위/learner eligible는0이다. 성공한 두 손 contact를 다음 실패로 덮지 않는다.
 
 최신 EXECUTION은 AT10.skinFit의 이번 부분 결과/보존 구역/정확한 재개만 병합한다. parent result·acceptance/Luna/AT30·31 planned/다른 task와 plan nextUnit=AT10을 보존한다. [다음 프롬프트](../evidence/AT10/2026-10-14-skin-fit-r5/next-skin-fit-prompt.txt)는 계속 **AT10/skin-fit**이다. 전신이 실제 통과한 뒤 예정만 skin-runtime이며 자동 실행하지 않는다. 시간 경과를 합격/종료 조건으로 쓰지 않았다. 소유 도구·선택 자산과 versioned evidence/report/해당 EXECUTION hunk만 로컬 commit하며 raw native supplement/source cache/실패 중간 자산·사용자 WIP는 제외·보존한다. 실제 commit hash/포함·제외·잔여 변경은 종료 receipt와 최종 응답에 남긴다. 위임/push/배포는 하지 않았다.
+
+
+## 2026-10-14 completion-r1 후속 실제 결과
+
+[후속 보고서](AT10-completion-2026-10-14-r1.md)와 [versioned summary](../evidence/AT10/2026-10-14-completion-r1/summary.json)를 확인한다. 승인된 오른발 fascia991면의 주소별 참조 분리, 전체108개 예산 회귀 및 실제 loader pose metadata 오류는 해결했다. r56/r58 및 dense/분할 대안은 실제 geometry/형태 미달로 채택하지 않았다. AT10 acceptance=false, r22 primary/양손 r41 성공/Luna 산출물을 보존하고 같은 AT10/F1이 남는다. 새 피부 product import·접촉·다음 AT 실행은0이다. 이 후속 결과는 앞의 역사 수치를 덮지 않는다.

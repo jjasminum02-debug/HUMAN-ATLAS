@@ -26,8 +26,13 @@ def mesh(name,p,t,color):
     return o
 original=v.copy()
 npv=[];npt=[]
-for s in native.values():
+policyPath=os.environ.get('AT10_REFERENCE_EXCEPTIONS')
+policy=json.loads((R/policyPath).read_text()) if policyPath else None
+exceptionFacets={f['sourceKey']:set(f['triangleIds']) for f in policy['facets']} if policy else {}
+highlightFaces=[]
+for nativeKey,s in native.items():
     off=len(npv);npv.extend(s['v']);pv=np.array(s['v']);pt=np.array(s['t']);volume=np.einsum('ij,ij->i',pv[pt[:,0]],np.cross(pv[pt[:,1]],pv[pt[:,2]])).sum()/6
+    faceOffset=len(npt);highlightFaces.extend(faceOffset+i for i in exceptionFacets.get(nativeKey,set()))
     npt.extend([[a+off,b+off,c+off] if volume>=0 else [a+off,c+off,b+off] for a,b,c in s['t']])
 print('BVH inputs',len(npv),len(npt),flush=True)
 # Build exact fixed native triangle geometry index. No approximation geometry is used for contact QA.
@@ -45,6 +50,9 @@ skin=next(o for o in bpy.context.selected_objects if o.type=='MESH');skin.data.m
 print('EMITTED_GLB_IMPORTED',len(skin.data.vertices),len(skin.data.polygons),flush=True)
 # native scene comparison below is exact fixed source geometry
 nat=mesh('ZA-fixed-reference',npv,npt,(.7,.15,.1,1))
+if highlightFaces:
+    highlight=bpy.data.materials.new('Authorized-addressed-reference-review');highlight.diffuse_color=(.95,.68,.08,1);nat.data.materials.append(highlight)
+    for face in highlightFaces:nat.data.polygons[face].material_index=1
 guide_path=os.environ.get('AT10_SKIN_GUIDES')
 if guide_path:
     guides=json.loads((R/guide_path).read_text())['guides']
@@ -80,6 +88,7 @@ for label,centre,dr,scale in [
  ('feet',[0,.045,.05],[0,.7,1],.3),('sole-left',[.09,.025,.04],[0,-1,0],.27),('sole-right',[-.09,.025,.04],[0,-1,0],.27),('palm-left',[.28,.8,.06],[0,0,-1],.2),('palm-right',[-.28,.8,.06],[0,0,-1],.2),('elbow-left',[.22,1.1,0],[.3,0,1],.24),('elbow-right',[-.22,1.1,0],[-.3,0,1],.24),('perineum',[0,.8,0],[0,-1,.3],.28)]:
     if '--only' in sys.argv and label not in sys.argv[sys.argv.index('--only')+1].split(','):continue
     render('emitted-'+rev+'-'+label,centre,dr,scale,'skin');render('emitted-'+rev+'-'+label,centre,dr,scale,'overlay')
+    if '--native-only' in sys.argv:render('emitted-'+rev+'-'+label,centre,dr,scale,'native')
 if '--whole-back' in sys.argv:
     for shown in ['skin','overlay']:render('emitted-'+rev+'-whole-back',[0,.86,0],[0,0,-1],1.9,shown)
 print('QA_RENDERS_DONE',flush=True)

@@ -29,3 +29,8 @@
 남은 것은 **전신 skin-fit의 실제 국소 대응/변형 → skin-runtime 제품 연결·예산·실화면 QA → existing-package-reconciliation124개**다. 구체 산출물/통과 기준/다음 프롬프트는 완료 계획에 있다. immediate 다음 구현 입력은 같은 `AT10/skin-fit/right-foot-continuous-surface-bands`다. F1 오른발 이후의 묶음이나 runtime/reconciliation을 이번 요청에서 자동 실행하지 않는다.
 
 EXECUTION은 AT10.skinRuntime의 부분 결과와 계획 링크만 추가하고 parent acceptance/result, resumeUnit=skin-fit, skinFit의 모든 기존 판정, Luna 결과, AT30/31 planned, 다른 AT/MV 기록과 feature plan nextUnit=AT10을 보존한다. `sync_execution.py`와 `--check`를 실행한다. 소유 코드/보고서/계획/versioned evidence만 로컬 커밋하고45개 기존 tracked WIP 및 수천개 source/cache/역사 untracked는 제외·보존한다. 위임/push/배포는 하지 않는다.
+
+
+## 2026-10-14 completion-r1 후속 실제 결과
+
+[후속 보고서](AT10-completion-2026-10-14-r1.md)와 [versioned summary](../evidence/AT10/2026-10-14-completion-r1/summary.json)를 확인한다. 승인된 오른발 fascia991면의 주소별 참조 분리, 전체108개 예산 회귀 및 실제 loader pose metadata 오류는 해결했다. r56/r58 및 dense/분할 대안은 실제 geometry/형태 미달로 채택하지 않았다. AT10 acceptance=false, r22 primary/양손 r41 성공/Luna 산출물을 보존하고 같은 AT10/F1이 남는다. 새 피부 product import·접촉·다음 AT 실행은0이다. 이 후속 결과는 앞의 역사 수치를 덮지 않는다.
