@@ -1,5 +1,7 @@
 # AT10 실제 미완과 완료 계획 — 2026-10-14
 
+> **현재 실행은 [completion-r2 계획/프롬프트](at10-completion-r2/START-HERE.md)를 따른다.** 아래는 d187148 이전 상태의 계획으로 보존한다. 전체108개 예산 오류와 pose metadata 오류는 이미 수정됐으며 초기 source 확보/옛 수치를 재실행 근거로 쓰지 않는다.
+
 확인 기준 HEAD `c66412364bf655352c997e84f79dc92056fa3caf`. 최신 EXECUTION, AT10 task/r2 계획, 실제 r22/r41/r54 파일 hash, r5 독립 검사/remaining-units/화면, 현재 learner registry를 대조했다. 이번 문서는 **계획과 현재 부분 구현의 점검**이며 skin-fit 또는 skin-runtime 합격 기록이 아니다. 사용자의 후속 요청에 따라 새 모델링·후속 기능 확대를 실행하지 않는다.
 
 ## 1. 지금 AT10은 끝나지 않았다

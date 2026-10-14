@@ -1,8 +1,10 @@
 # 현재부터 최종 검증까지 — 유일한 미래 실행 프롬프트
 
+> **2026-10-14 AT10 재개 정정:** 현재 AT10은 `partial/acceptance=false`이며 [새 8단계 계획](at10-completion-r2/START-HERE.md)과 [01 F1 오른발](at10-completion-r2/01-F1-RIGHT-FOOT.txt)을 사용한다. 아래 1–3절은 초기 단계 프롬프트의 보존본이며 AT10 현재 재개에는 새 r2가 우선한다. 아래 AT11 이후 순서는 그대로 유지하고 자동 실행하지 않는다.
+
 2026-10-13 r2. **진행 중 Luna 자료 대조 → Sol 전신 피부 정합 → Sol 피부 버튼/접촉 표시 → Luna 기존 점 복구 → AT11–19 정지 361혈 → AT23–27 영역/내용 → AT30 자세 조사 → AT31 자세 구현 → AT28/29 최종 검사**.
 
-취혈자세는 마지막 기능 단계다. AT10에서 자세를 먼저 구현하라는 구버전 프롬프트는 사용하지 않는다. 완료한 MV2/AT1–8/20–22는 재실행하지 않는다. 0번 Luna 자료 작업은 738316a로 완료됐다. **지금 넣을 것은 1번**이다. 직접 붙여 넣을 다음 프롬프트만 필요하면 [NEXT-AFTER-CONTENT.md](NEXT-AFTER-CONTENT.md)를 쓴다.
+취혈자세는 마지막 기능 단계다. AT10에서 자세를 먼저 구현하라는 구버전 프롬프트는 사용하지 않는다. 완료한 MV2/AT1–8/20–22는 재실행하지 않는다. 0번 Luna 자료 작업은 738316a로 완료됐다. **지금 넣을 것은 새 r2의 [01 F1 오른발](at10-completion-r2/01-F1-RIGHT-FOOT.txt)**이다. 직접 붙여 넣을 다음 프롬프트만 필요하면 [NEXT-AFTER-CONTENT.md](NEXT-AFTER-CONTENT.md)를 쓴다.
 
 각 코드블록은 한 번의 명확한 산출물이다. 시간 종료 조건이 아니다. 자료가 준비된 데이터/검증은 Luna Max, 전신 정합·공통 renderer·자세 구현은 Sol xhigh. 지금은 직렬 실행한다. Luna는 이 재설계 중 738316a로 종료됐으며 그 결과를 보존하고 [execution-amendment.json](execution-amendment.json)을 EXECUTION에 적용했다. 다음 첫 Sol은 적용 여부만 확인한다. 아래 0번은 완료된 내용 작업의 원래 프롬프트를 그대로 보존했으며 재실행 요청이 아니다.
 
@@ -33,7 +35,7 @@ TE2 손가락, SI19 귀 기준점, ST7 입 자세, PC8 손허리뼈 표현을 �
 소유 후보 폴더와 인계만 남겨 유일한 통합자가 반영하게 해라.
 ```
 
-## 1. 전신 피부 파일과 정합 — Sol xhigh / 다음에 넣을 프롬프트
+## 1. 전신 피부 파일과 정합 — 초기 보존본 / 현재는 r2 01–05 사용
 
 ```text
 HUMAN ATLAS에서 AT10의 skin-fit만 수행해라. 담당 Sol xhigh.
@@ -64,7 +66,7 @@ skin-source-review의 MakeHuman 원본 후보와 이미 조사한 ZA Skin/Dermis
 해시·포함/제외·잔여 변경·다음 ID와 이 문서의 다음 프롬프트를 남겨라. push·배포·진단·치료·침 시뮬레이션은 하지 마라.
 ```
 
-## 2. 피부 버튼·같은 장면·점 접촉 — Sol xhigh
+## 2. 피부 버튼·같은 장면·점 접촉 — 초기 보존본 / 현재는 r2 06–07 사용
 
 ```text
 HUMAN ATLAS에서 AT10의 skin-runtime만 수행해라. 담당 Sol xhigh.
@@ -92,7 +94,7 @@ geometry/material/cache/취소/dispose와 기존 예산을 지켜라. OFF일 때
 해시·포함/제외·잔여 변경·다음 ID와 이 문서의 다음 프롬프트를 남겨라. push·배포·진단·치료·침 시뮬레이션은 하지 마라.
 ```
 
-## 3. 기존 124개 미표시 instance 복구 — Luna Max
+## 3. 기존 124개 미표시 instance 복구 — 초기 보존본 / 현재는 r2 08 사용
 
 ```text
 HUMAN ATLAS에서 AT10의 existing-package-reconciliation만 수행해라. 담당 Luna Max.
