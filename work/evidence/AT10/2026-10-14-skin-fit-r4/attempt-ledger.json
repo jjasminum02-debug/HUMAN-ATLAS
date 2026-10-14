@@ -1,0 +1,188 @@
+{
+  "date": "2026-10-14",
+  "retainedPrimary": "r22",
+  "trials": [
+    {
+      "revision": "r31",
+      "disposition": "rejected_not_selected",
+      "reason": "Joint/boundary continuous source field positive at sampled vertices but actual skin still under native fascia; rejected.",
+      "candidateSha256": "67ff6a72751822d15da1251919da36fc95c3feb1676563396ae45e9847356e89",
+      "emittedGeometryChecked": true,
+      "crossingSkinTriangles": 4607,
+      "selfCrossingPairs": 1063,
+      "patchJacobianDiagnostics": [
+        {
+          "patch": "hand-left",
+          "minimumAnalyticFieldJacobian": 0.024747294291360737,
+          "nonPositiveAnalyticJacobianCount": 0,
+          "finalHelperCenterDriftM": null
+        },
+        {
+          "patch": "foot-left",
+          "minimumAnalyticFieldJacobian": 0.02907465632722311,
+          "nonPositiveAnalyticJacobianCount": 0,
+          "finalHelperCenterDriftM": null
+        },
+        {
+          "patch": "hand-right",
+          "minimumAnalyticFieldJacobian": 0.024754987617249116,
+          "nonPositiveAnalyticJacobianCount": 0,
+          "finalHelperCenterDriftM": null
+        },
+        {
+          "patch": "foot-right",
+          "minimumAnalyticFieldJacobian": 0.029075783789165192,
+          "nonPositiveAnalyticJacobianCount": 0,
+          "finalHelperCenterDriftM": null
+        }
+      ],
+      "sourceNativeBandPairs": 0,
+      "acceptancePassed": false
+    },
+    {
+      "revision": "r32",
+      "disposition": "rejected_not_selected",
+      "reason": "Old surface proposals make analytic Jacobian negative; not emitted or treated as valid.",
+      "candidateSha256": "522f65aa4f861991f4354a5d3fab5bc2261b179936ec078b6492f72f014f1379",
+      "emittedGeometryChecked": false,
+      "crossingSkinTriangles": null,
+      "selfCrossingPairs": null,
+      "patchJacobianDiagnostics": [
+        {
+          "patch": "hand-left",
+          "minimumAnalyticFieldJacobian": -0.6581695915218042,
+          "nonPositiveAnalyticJacobianCount": 87,
+          "finalHelperCenterDriftM": null
+        },
+        {
+          "patch": "foot-left",
+          "minimumAnalyticFieldJacobian": -0.3682668934246022,
+          "nonPositiveAnalyticJacobianCount": 123,
+          "finalHelperCenterDriftM": null
+        },
+        {
+          "patch": "hand-right",
+          "minimumAnalyticFieldJacobian": -0.4013139151767705,
+          "nonPositiveAnalyticJacobianCount": 40,
+          "finalHelperCenterDriftM": null
+        },
+        {
+          "patch": "foot-right",
+          "minimumAnalyticFieldJacobian": -0.5563268278190813,
+          "nonPositiveAnalyticJacobianCount": 162,
+          "finalHelperCenterDriftM": null
+        }
+      ],
+      "sourceNativeBandPairs": 0,
+      "acceptancePassed": false
+    },
+    {
+      "revision": "r33",
+      "disposition": "rejected_not_selected",
+      "reason": "Surface correction without helper-center preservation/monotonic fit increases actual crossings; rejected.",
+      "candidateSha256": "335c1cd4832c08d922f9376709f0de5b8d245db09c8330dea422294b1874f021",
+      "emittedGeometryChecked": true,
+      "crossingSkinTriangles": 4752,
+      "selfCrossingPairs": 1069,
+      "patchJacobianDiagnostics": [
+        {
+          "patch": "hand-left",
+          "minimumAnalyticFieldJacobian": 0.0192512401744852,
+          "nonPositiveAnalyticJacobianCount": 0,
+          "finalHelperCenterDriftM": null
+        },
+        {
+          "patch": "foot-left",
+          "minimumAnalyticFieldJacobian": 0.0040063110167081785,
+          "nonPositiveAnalyticJacobianCount": 0,
+          "finalHelperCenterDriftM": null
+        },
+        {
+          "patch": "hand-right",
+          "minimumAnalyticFieldJacobian": 0.019088488057939876,
+          "nonPositiveAnalyticJacobianCount": 0,
+          "finalHelperCenterDriftM": null
+        },
+        {
+          "patch": "foot-right",
+          "minimumAnalyticFieldJacobian": 0.004006332741835769,
+          "nonPositiveAnalyticJacobianCount": 0,
+          "finalHelperCenterDriftM": null
+        }
+      ],
+      "sourceNativeBandPairs": 5676,
+      "acceptancePassed": false
+    },
+    {
+      "revision": "r34",
+      "disposition": "rejected_not_selected",
+      "reason": "Dense ear facet proposals and a single bilateral pelvis field remain mismatched at rim/lobule and gluteal/perineal surfaces; rejected independently.",
+      "candidateSha256": "83ed0d9b708925e0a8f5a229c2b9681c0d50249a90f2bb71eee143dd2cc8a9d8",
+      "emittedGeometryChecked": true,
+      "crossingSkinTriangles": 3978,
+      "selfCrossingPairs": 1130,
+      "patchJacobianDiagnostics": [
+        {
+          "patch": "ear-left",
+          "minimumAnalyticFieldJacobian": 0.09973296973416976,
+          "nonPositiveAnalyticJacobianCount": 0,
+          "finalHelperCenterDriftM": null
+        },
+        {
+          "patch": "ear-right",
+          "minimumAnalyticFieldJacobian": 0.09611341629872233,
+          "nonPositiveAnalyticJacobianCount": 0,
+          "finalHelperCenterDriftM": null
+        },
+        {
+          "patch": "pelvis-bilateral",
+          "minimumAnalyticFieldJacobian": 0.1090078985678458,
+          "nonPositiveAnalyticJacobianCount": 0,
+          "finalHelperCenterDriftM": null
+        }
+      ],
+      "sourceNativeBandPairs": 1246,
+      "acceptancePassed": false
+    },
+    {
+      "revision": "r35",
+      "disposition": "rejected_not_selected",
+      "reason": "Helper-center preservation and monotonic fitting pass sampled local Jacobian/field replay, but actual native/self crossings and surface mismatch fail; rejected.",
+      "candidateSha256": "623f6275ec17f1b6e5baf6352aeec3e64ebf6d149f34d546957490ae6760b090",
+      "emittedGeometryChecked": true,
+      "crossingSkinTriangles": 4775,
+      "selfCrossingPairs": 1063,
+      "patchJacobianDiagnostics": [
+        {
+          "patch": "hand-left",
+          "minimumAnalyticFieldJacobian": 0.03544619420465286,
+          "nonPositiveAnalyticJacobianCount": 0,
+          "finalHelperCenterDriftM": 2.2408126409432143e-06
+        },
+        {
+          "patch": "foot-left",
+          "minimumAnalyticFieldJacobian": 0.023139648431082207,
+          "nonPositiveAnalyticJacobianCount": 0,
+          "finalHelperCenterDriftM": 3.7445475559169828e-06
+        },
+        {
+          "patch": "hand-right",
+          "minimumAnalyticFieldJacobian": 0.035446551876444264,
+          "nonPositiveAnalyticJacobianCount": 0,
+          "finalHelperCenterDriftM": 2.2406702465249604e-06
+        },
+        {
+          "patch": "foot-right",
+          "minimumAnalyticFieldJacobian": 0.02314027530999828,
+          "nonPositiveAnalyticJacobianCount": 0,
+          "finalHelperCenterDriftM": 3.7445683697754955e-06
+        }
+      ],
+      "sourceNativeBandPairs": 5676,
+      "acceptancePassed": false
+    }
+  ],
+  "noTrialPromoted": true,
+  "historicalAlgorithmWarning": "Final generator implements r34/r35. Historical r31-r33 outputs/logs do not claim full regeneration by the final script. r33 initial argument/BVH conversion failure logs preserved.",
+  "numericalWarnings": "Blender NumPy emitted floating-point status warnings. Actual generated coordinates were finite; independent field replay, finite differences, emitted mapping and GLTF loader checks validate actual values. No warning is used as a pass."
+}

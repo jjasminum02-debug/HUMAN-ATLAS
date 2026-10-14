@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 4,
+  "kind": "rejected_fit_recipe_not_production_character",
+  "baselineManifest": "atlas-data/anatomy/skin/at10-fit-r2/manifest-r22.json",
+  "baselineCandidate": "work/evidence/AT10/2026-10-13-skin-fit-r2/candidates/fit-r22.json",
+  "baselineGlbSha256": "53b3a057ff9df98162cfa3deb47844103886d5ced28121b30a24534c41834b93",
+  "sourceInputHashes": {
+    "atlas-data/source-cache/datasets/skin-source-review-2026-10-13/base.obj": "8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c",
+    "atlas-data/source-cache/datasets/skin-source-review-2026-10-13/makehuman-asian-male-young.target": "ed2e8c191cb6b87b4a2d97c80486acb2604fa549316c7aa2a738a5d5a14334dc",
+    "atlas-data/source-cache/datasets/skin-source-review-2026-10-13/LICENSE.md": "edd99571ca62698f78c943fd4fffb159a413c315fa0d4819d3cec5cadaf8b4f1",
+    "atlas-data/source-cache/datasets/skin-source-review-2026-10-13/makehuman-LICENSE.ASSETS.md": "f6089cba01cb570a24712b41ab8a586ccd3cc5ef53dc266ca50b95c288956d2c"
+  },
+  "nativeSnapshot": {
+    "file": "work/evidence/AT10/2026-10-13-skin-fit-r1/native-surfaces-r1.json",
+    "sha256": "dae05308086193d459abae5cafa18270e6b0d24f018c9f88521c892a8a3a8941",
+    "reconstructionTool": "work/tools/fit_at10_skin.py --revision r2 with pinned source/probe; reuse completed cache in this workspace"
+  },
+  "sourceUnitConversion": "official dm->m 0.1 already applied; no second scale/world multiplication",
+  "worldFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+  "poseId": "za-c7010a9-9f08a17ea011-frame0-static",
+  "method": "cubic volumetric radial-basis field from actual source helper/native joint addresses; shared source boundary retained; native facet-band constraints and Jacobian line search",
+  "numericRecipe": "work/evidence/AT10/2026-10-14-skin-fit-r4/surface-bands-r34.json",
+  "numericRecipeSha256": "5c1bb83c254b20c086dd123e148172c2374aa2e855be766dce872954d2c76d92",
+  "authoringFlags": [
+    "--skip-extremities",
+    "--extras"
+  ],
+  "reproductionCommand": "<blender> --background --factory-startup --disable-autoexec --python work/tools/at10_skin_surface_bands.py -- --evidence <fresh-evidence> --revision r34 --skip-extremities --extras",
+  "pipeline": [
+    "work/tools/at10_skin_surface_bands.py",
+    "work/tools/export_at10_skin.py",
+    "work/tools/validate_at10_skin_blender.py",
+    "work/tools/inspect_at10_skin_blender.py",
+    "work/tools/inspect_at10_skin_fields.py"
+  ],
+  "toolHashes": {
+    "work/tools/at10_skin_surface_bands.py": "87dcec81c20adb3a247e9d14e300090fc1c5cbb4386e74ac3b307ecb6421070e",
+    "work/tools/inspect_at10_skin_fields.py": "92c3737d2c3a5c9c16644148aedeb823f1836133dbbbe99797310b1635efc376"
+  },
+  "independentNumericFieldReplay": "work/evidence/AT10/2026-10-14-skin-fit-r4/field-inspection-r34.json",
+  "newFullGenerationIndependentReproductionPerformed": false,
+  "priorR22IndependentFormatReproductionReused": true,
+  "geometryAcceptance": false,
+  "learnerEligible": false,
+  "generatorOrBlenderBundledInWeb": false,
+  "semanticLimit": "All nearest/ray/axis pairing is geometric registration only; no new anatomical homology/acupoint approval.",
+  "postGenerationGuardChanges": "finite coordinate assertions and refusal to overwrite existing evidence only; numerical field unchanged"
+}
