@@ -1,0 +1,59 @@
+# 현재 AT10 다음 프롬프트 — 2026-10-14 r2
+
+전신 피부는 아직 미합격이다. 현재 순서는 **F1 오른발 → F2 왼발 → F3 머리/귀/목 → F4 연결부 → F5/F6 전신 동결 → R1 전달/공유 → R2 피부 접촉 → C1 기존124개/마감**이다.
+[단계별 산출물·합격 기준](at10-completion-r2/START-HERE.md)과 [첫 실행문 원본](at10-completion-r2/01-F1-RIGHT-FOOT.txt)을 사용한다. 이번 파일의 갱신은 계획이며 실행/완료 기록이 아니다.
+기존 초기 source 확보 프롬프트는 [그대로 보존](at10-completion-r2/historical-NEXT-AFTER-CONTENT-before-r2.md)했으며 다시 실행하지 않는다.
+
+아래 **한 unit만** 붙여 넣는다. 후속은 해당 unit 실제 합격 후 별도로 실행하며 자동 실행하지 않는다.
+
+```text
+HUMAN ATLAS에서 AT10/skin-fit F1 오른발 연속 정합만 수행해라. 담당 Sol xhigh.
+AGENTS.md, 최신 work/EXECUTION.json의 AT10 해당 하위 record/resumeUnit과 acupoint-at-361.order,
+work/tasks/AT10.md, work/plans/acupoint-surface-posture-2026-10-13/at10-completion-r2/START-HERE.md,
+30/31 설계의 해당 범위와 지정 선행의 실제 최종 manifest/GLB/hash/검사/앱 화면을 읽어라.
+계획 문서나 이름이 아니라 실제 산출물로 선행 합격을 대조해라. 선행 미달이면 이번 단계는 실행하지 않고 정확한 같은 AT10 잔여 unit을 남겨라.
+시작 HEAD/status·현재 입력 hash·소유 경계를 기록하고 기존 완료 결과는 재사용한다. 다른 실행자가 같은 자산을 수정 중이면 중복 구현하지 마라.
+
+현재 첫 재개는 미합격 오른발 자체를 해결하는 F1이다. skin-fit 전신과 AT10의 acceptance=false를 F1 실행 차단으로 해석하지 마라.
+F1 선행 대조는 확보 source/hash/frame·승인된 참조 정책·양손 보존 입력 확인이다. F5/F6 전신 통과를 F1의 선행으로 요구하지 마라. r22는 primary review checkpoint일 뿐이다.
+work/reports/AT10-completion-2026-10-14-r1.md와 work/evidence/AT10/2026-10-14-completion-r1/의
+summary.json, attempt-ledger.json, right-foot-remaining-r56.json, dense-field-r60.json, dense-field-r61.json,
+authorization-r1.json, reference-exceptions-right-r1.json, frozen-recipes-index.json 및 실제 r56p1/r58p1 화면을 읽어라.
+필요한 frozen recipe는 해당 archive에서 새 작업 폴더에 풀고 원문/기존 실패 파일을 덮지 마라.
+
+r41 양손 native0/self0를 보존한다. r56은 전체834 raw2391/self1334, 오른발 raw513/유효참조21면이며 발끝 형태가 미달이다.
+r58은 raw2624/self1334, 오른발 raw730/유효참조228면으로 미채택이다. p1 사본은 canonical pose metadata만 고친 같은 geometry다.
+사용자가 승인한 오른쪽 Crural fascia 정확한991면의 참조 분리를 재사용하고 나머지9884면과 다른 native는 계속 검사해라.
+전체834 raw 검사와 정책 분리 후 유효 참조 검사를 따로 남겨라. 추가 면을 일괄 빼거나 오른쪽 정책을 왼쪽에 mirror하지 마라.
+
+먼저 실제 실패 구역의 source original face/edge/vertex와 native sourceKey/triangle/barycentric를 복원해라.
+r60/r61의 source query [-0.21347,-0.80155,0.1554]와 인접3 centroid는 대안 초기장의 비양의 J 진단이다.
+이4개가 r56의21면 전체 원인이라고 단정하거나 혈위/landmark로 부르지 마라.
+source의 dorsal/plantar/heel/MTP/toe-pad/진짜 web ordered 단면·경계와 native 골격/힘줄의 축·포함/간격 역할을 분리 작성해라.
+피부와 다른 조직을 동종 피부 표면으로 주장하지 마라. 없는 주름 등은 근거 있는 AI 교육 지표로 작성할 수 있으나 원본 관찰과 구분해라.
+
+이번에는 source 단면과 ankle 공유 boundary를 보존하는 국소 cage/patch 정합을 우선 구현 방향으로 삼아,
+제5발가락–MTP/web 작은 구역에서 실제 대응·3D 변형·접촉·형태를 함께 닫고 오른발로 확장해라.
+기존 sparse RBF의 가중치/normal push만 바꾸거나 r59처럼 세분화만 반복하지 마라. 이 권고 방식도 검증 전에는 성공으로 취급하지 마라.
+선택한 변형 표현의 실제 체적 cell/3D derivative, 내부/경계 적응 표본, 유한 차분, native/self, seam 위치·접선·간격을 함께 검사해라.
+non-finite/미수렴 QP·잔여 위반을 명시 거부하고 유한 표본 J 양성만으로 전역 injectivity나 전신 정합을 승인하지 마라.
+현재 topology 보존이 기본이며 입증된 국소 결함만 별도 derived revision으로 보완하고 source face/barycentric/UV 계보와 비용을 남겨라.
+
+산출물은 ordered 대응/경계 manifest, 재현 가능한 국소 recipe, emitted GLB/mapping, 실제 교차 주소와 deformation/gap 검사다.
+기존 검증 Blender 경로와 --factory-startup --disable-autoexec를 사용하고 생성기를 웹 bundle에 넣지 마라.
+최종 emitted GLB를 실제 설치된 loader와 기존 learner 장면에서 발등/발바닥/발목/발가락 양면으로 검사해라. offline Blender 화면만으로 pass하지 마라.
+유효 참조의 의도하지 않은 교차0·국소 self0·실제 양의3D 변형 검사·자연스러운 발끝/단면·seam/간격·unit 밖 보존을 함께 통과해야 F1 합격이다.
+원본 source 확보/Luna portfolio/완료한 전체 조사를 반복하지 마라. 전체108개 예산과 canonical pose loader 수리는 이미 끝났으니 보존해라.
+피부 제품 등록/108개 migration/124개 위치/361점/취혈자세는 이 실행에서 하지 마라. F1 합격 후 예정은 F2이며 자동 실행하지 마라.
+
+원본/OpenSim_Models/T13 drafts/기존 사용자 WIP·UV/helpers/original IDs·native와 역사 evidence를 보존해라.
+공통 compiler/loader/anchor adapter/overlay/territory editor/tour/CameraSessions를 재사용한다. task별 renderer나 인체 복사본을 만들지 마라.
+기존 카메라 정책·거리·전환 연출·UI 디자인·보기옵션 배치·홈·로딩은 개편하지 마라. source 권리·AI 작성·위치 등급·교수 검토·공개 재배포를 분리해라.
+검사기는 candidate를 수정하지 않는다. 새 versioned report/evidence와 해당 unit의 산출물/실제 화면/정확한 미완을 남겨라.
+데이터 처리/기술 표시/실제 시각 검사/교육용 위치/정밀 위치/자세 지원 수를 분리하고 문서나 수치만으로 완료 처리하지 마라.
+최신 EXECUTION을 다시 읽어 이 프롬프트에 명시된 담당/연계 범위만 병합하고 기존 result/Luna/역사 acceptance의 근거를 보존해라.
+명시된 실제 합격 판정 밖에서 parent acceptance를 바꾸거나 무관한 AT·T·AC·MV 기록을 덮지 마라.
+sync_execution.py와 --check를 실행하고 소유 변경만 선별 로컬 commit해라. hash·포함/제외·잔여 변경·다음 정확한 unit/프롬프트를 보고해라.
+시간 경과나 revision 수를 종료 조건으로 쓰지 마라. 현재 unit을 실제 합격 기준으로 닫고 다음 프롬프트는 자동 실행하지 마라.
+자동 위임·다음 AT·push·배포·진단·치료·침 시뮬레이션은 금지한다.
+```

@@ -7322,8 +7322,8 @@
       },
       "nextUnit": "AT10",
       "noAutoAdvance": true,
-      "nextPrompt": "work/plans/acupoint-surface-posture-2026-10-13/NEXT-AFTER-CONTENT.md",
-      "resumeUnit": "skin-fit",
+      "nextPrompt": "work/plans/skin-quality-completion-2026-10-15/01-V1-SKIN-APPEARANCE.txt",
+      "resumeUnit": "skin-appearance/V1",
       "contentSupplement": {
         "unit": "portfolio-content",
         "status": "pass_with_review_holds",
@@ -7700,7 +7700,7 @@
         ],
         "preservedLocalFits": "work/evidence/AT10/2026-10-14-skin-fit-r5/preserved-units-r41-full-native-r1.json",
         "primaryReferenceScope": "historical 648 surfaces; counts unchanged, geometry false; latest diagnostic covers 834",
-        "completionPlan": "work/plans/acupoint-surface-posture-2026-10-13/at10-completion-r2/START-HERE.md",
+        "completionPlan": "work/plans/skin-quality-completion-2026-10-15/START-HERE.md",
         "f2Preflight": {
           "date": "2026-10-14",
           "unit": "F2-left-foot-continuous-registration",
@@ -7859,7 +7859,7 @@
         "newSkinAnchoredInstances": 0,
         "report": "work/reports/AT10-skin-runtime.md",
         "evidence": "work/evidence/AT10/2026-10-14-skin-runtime-r1",
-        "completionPlan": "work/plans/acupoint-surface-posture-2026-10-13/at10-completion-r2/START-HERE.md",
+        "completionPlan": "work/plans/skin-quality-completion-2026-10-15/START-HERE.md",
         "partialEngineering": [
           "independent skin layer state and disabled product button",
           "static hashed loader cancellation/dispose budget gate",
@@ -7904,6 +7904,97 @@
           "relatedTestsPassed": 59,
           "buildPassed": true
         }
+      },
+      "completionExecution": {
+        "revision": "2026-10-15-r3-skin-quality",
+        "plan": "work/plans/skin-quality-completion-2026-10-15/START-HERE.md",
+        "order": [
+          "V1",
+          "F3",
+          "F4",
+          "V2",
+          "F5-F6",
+          "R1",
+          "R2",
+          "C1"
+        ],
+        "nextUnit": "V1",
+        "nextPrompt": "work/plans/skin-quality-completion-2026-10-15/01-V1-SKIN-APPEARANCE.txt",
+        "status": "planned",
+        "autoRunNext": false,
+        "preservedGeometryResults": [
+          "F1 f1c7",
+          "F2 f2c3",
+          "r41 bilateral hands"
+        ],
+        "units": {
+          "V1": {
+            "status": "planned",
+            "owner": "Sol xhigh",
+            "prompt": "work/plans/skin-quality-completion-2026-10-15/01-V1-SKIN-APPEARANCE.txt",
+            "requires": []
+          },
+          "F3": {
+            "status": "planned",
+            "owner": "Sol xhigh",
+            "prompt": "work/plans/skin-quality-completion-2026-10-15/02-F3-HEAD-EAR-NECK.txt",
+            "requires": []
+          },
+          "F4": {
+            "status": "planned",
+            "owner": "Sol xhigh",
+            "prompt": "work/plans/skin-quality-completion-2026-10-15/03-F4-BODY-SEAMS.txt",
+            "requires": [
+              "F3"
+            ]
+          },
+          "V2": {
+            "status": "planned",
+            "owner": "Sol xhigh",
+            "prompt": "work/plans/skin-quality-completion-2026-10-15/04-V2-FINAL-SKIN-LOOK.txt",
+            "requires": [
+              "F4"
+            ]
+          },
+          "F5-F6": {
+            "status": "planned",
+            "owner": "Sol xhigh",
+            "prompt": "work/plans/skin-quality-completion-2026-10-15/05-F5-F6-FREEZE.txt",
+            "requires": [
+              "V2"
+            ]
+          },
+          "R1": {
+            "status": "planned",
+            "owner": "Sol xhigh",
+            "prompt": "work/plans/skin-quality-completion-2026-10-15/06-R1-DELIVERY.txt",
+            "requires": [
+              "F5-F6"
+            ]
+          },
+          "R2": {
+            "status": "planned",
+            "owner": "Sol xhigh",
+            "prompt": "work/plans/skin-quality-completion-2026-10-15/07-R2-CONTACT-APP.txt",
+            "requires": [
+              "R1"
+            ]
+          },
+          "C1": {
+            "status": "planned",
+            "owner": "Luna Max",
+            "prompt": "work/plans/skin-quality-completion-2026-10-15/08-C1-CLOSE-AT10.txt",
+            "requires": [
+              "R2"
+            ]
+          }
+        },
+        "planningOnly": true,
+        "historicalPreflightNotCurrent": [
+          "skinFit.f2Preflight",
+          "skinFit.f3Preflight"
+        ],
+        "appearanceDoesNotRevokeHistoricalGeometryPass": true
       }
     },
     "AT11": {
@@ -8972,9 +9063,10 @@
       ],
       "autoRunNext": false,
       "experienceContract": "design/2026-09-25-muscle-atlas/31-AT-EXPERIENCE-AND-DELIVERY-CONTRACT.md",
-      "revision": "2026-10-13-r2-skin-first-posture-last",
-      "executionPolicy": "Use work/plans/acupoint-surface-posture-2026-10-13/PROMPTS-IN-ORDER.md r2. AT10 content -> skin-fit -> skin-runtime -> existing-package-reconciliation -> AT11-19 static 361 points -> AT23-27 territories/content -> AT30 posture audit -> AT31 posture implementation -> AT28/29 final QA. No early posture requirement; no automatic next task.",
-      "futurePrompts": "work/plans/acupoint-surface-posture-2026-10-13/PROMPTS-IN-ORDER.md"
+      "revision": "2026-10-15-r3-skin-quality",
+      "executionPolicy": "Use AT10.completionExecution for current subunit. V1 -> F3 -> F4 -> V2 -> F5-F6 -> R1 -> R2 -> C1. F1/F2 latest local passes preserved. Independent fit may proceed while material remains open; final registration requires geometry and appearance. AT11-19 -> AT23-27 -> AT30/31 -> AT28/29 follows existing futurePrompts. No automatic next task.",
+      "futurePrompts": "work/plans/acupoint-surface-posture-2026-10-13/PROMPTS-IN-ORDER.md",
+      "currentCompletionPlan": "work/plans/skin-quality-completion-2026-10-15/START-HERE.md"
     },
     "motion-quality-review": {
       "status": "in_progress",

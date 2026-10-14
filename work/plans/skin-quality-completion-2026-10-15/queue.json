@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "scope": "AT10 completion subunits; not new AT tasks",
+  "autoRunNext": false,
+  "stages": [
+    {
+      "unit": "V1",
+      "owner": "Sol xhigh",
+      "title": "피부 외관 시제품",
+      "status": "planned",
+      "requires": [],
+      "prompt": "work/plans/skin-quality-completion-2026-10-15/01-V1-SKIN-APPEARANCE.txt"
+    },
+    {
+      "unit": "F3",
+      "owner": "Sol xhigh",
+      "title": "머리·귀·목 정합",
+      "status": "planned",
+      "requires": [],
+      "prompt": "work/plans/skin-quality-completion-2026-10-15/02-F3-HEAD-EAR-NECK.txt"
+    },
+    {
+      "unit": "F4",
+      "owner": "Sol xhigh",
+      "title": "몸통·겨드랑·샅·잔여 연결부",
+      "status": "planned",
+      "requires": [
+        "F3"
+      ],
+      "prompt": "work/plans/skin-quality-completion-2026-10-15/03-F4-BODY-SEAMS.txt"
+    },
+    {
+      "unit": "V2",
+      "owner": "Sol xhigh",
+      "title": "최종 피부 외관 보정",
+      "status": "planned",
+      "requires": [
+        "F4"
+      ],
+      "prompt": "work/plans/skin-quality-completion-2026-10-15/04-V2-FINAL-SKIN-LOOK.txt"
+    },
+    {
+      "unit": "F5-F6",
+      "owner": "Sol xhigh",
+      "title": "전신 형상·외관 동결",
+      "status": "planned",
+      "requires": [
+        "V2"
+      ],
+      "prompt": "work/plans/skin-quality-completion-2026-10-15/05-F5-F6-FREEZE.txt"
+    },
+    {
+      "unit": "R1",
+      "owner": "Sol xhigh",
+      "title": "재질 포함 공유 로딩·비용",
+      "status": "planned",
+      "requires": [
+        "F5-F6"
+      ],
+      "prompt": "work/plans/skin-quality-completion-2026-10-15/06-R1-DELIVERY.txt"
+    },
+    {
+      "unit": "R2",
+      "owner": "Sol xhigh",
+      "title": "피부 버튼·108점 접촉·실앱",
+      "status": "planned",
+      "requires": [
+        "R1"
+      ],
+      "prompt": "work/plans/skin-quality-completion-2026-10-15/07-R2-CONTACT-APP.txt"
+    },
+    {
+      "unit": "C1",
+      "owner": "Luna Max",
+      "title": "기존124점 연결·AT10 마감",
+      "status": "planned",
+      "requires": [
+        "R2"
+      ],
+      "prompt": "work/plans/skin-quality-completion-2026-10-15/08-C1-CLOSE-AT10.txt"
+    }
+  ],
+  "role": "Planning snapshot; live state is EXECUTION.AT10.completionExecution",
+  "nextUnitAtPlanning": "V1"
+}

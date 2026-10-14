@@ -1,0 +1,11 @@
+HUMAN ATLAS에서 아래 AT10 내부 V2 한 묶음만 수행해라. 담당 Sol xhigh.
+먼저 work/plans/skin-quality-completion-2026-10-15/START-HERE.md와 COMMON.md, 최신 EXECUTION의 AT10 completionExecution, work/tasks/AT10.md를 읽어라.
+이 파일은 2026-10-15 사용자 외관 개선 요청의 실행문이다. 순서/범위가 충돌하면 이 개정과 최신 실제 결과를 우선하고, 과거 명세의 별도 geometry/권리/검증 기준은 유지한다.
+
+AT10/skin-appearance/V2만 수행한다. 최신 F4 누적 geometry와 V1 material/잔여 목록을 사용한다. V1 미완은 이 작업에서 직접 해결할 잔여이며 별도 동일 조사 태스크를 반복하지 않는다.
+최신 전신 피부에서 UV 늘어짐, 노멀 이음, 손발톱 위치, 실제 silhouette의 각짐, 질감 스케일을 교정한다. geometry를 바꾸지 않는 재질/노멀 해결부터 적용한다. 실제 silhouette 결함은 필요한 국소 derived 보정만 하고 versioned source/UV/anchor mapping과 영향 영역 native/self/seam/field 검사를 수행한다. 전신 subdivision·평균 smoothing으로 모델을 축소하거나 기존 수치 통과를 무효화하지 않는다.
+현재 보존 계약을 바꿀 필요가 있는 실루엣 보정은 새 revision으로 원형을 보존하고, 옛 국소 pass를 새 자산에 무검증 승계하지 않는다. 표시 mesh와 anchor mesh를 분리해야만 해결되는 경우 명시적 삼각형 대응과 점 접촉 오차 검사가 필요하며 기본은 단일 canonical topology다.
+얼굴/귀/손등·손바닥/발등·발바닥/몸통을 같은 시점에서 무채색과 최종재질로 확인한다. 일반 관찰 거리에서 faceted 음영·UV 이음·균일 고무색 없음, 손발톱 구분, 은은한 피부결, 실루엣 각짐 감소를 눈으로 판정한다. 단순 테스트 통과/roughness 변경만으로 완료하지 않는다.
+실제 앱 화면, 적용 material recipe, 변경한 geometry 주소/검사, 비용을 남긴다. 필요 범위의 검증된 노멀/형상 수정까지 이 unit 안에서 마친다. 자산 품질에 근거 없는 무결점 선언이나 사용자 만족 승인은 하지 않는다. 다음은 F5/F6.
+
+COMMON.md의 보존·실제 화면·보고서·EXECUTION 병합·sync 및 --check·소유 변경 로컬 커밋·종료 규칙을 모두 수행해라. 이번 단계 이후 자동 실행/위임/push/배포/취혈자세/UI 개편은 하지 마라.

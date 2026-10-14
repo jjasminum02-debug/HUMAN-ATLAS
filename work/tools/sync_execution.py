@@ -83,11 +83,32 @@ def render(data):
         "# 현재 다음 실행\n\n"
         "자동 생성. 편집 원본은 [EXECUTION.json](EXECUTION.json). 역사 handoff/자료 개수로 다음 작업을 결정하지 않는다.\n\n"
         f"- 확인된 최근 진행: {latest}\n"
-        f"- 다음 ID: **{next_id or '없음'}**\n"
+        f"- 기본 앱 큐 다음 ID: **{next_id or '없음'}** (기능 확장 큐는 아래 별도 표시)\n"
         "- 현재 지원 앱 완성: T100 통합 마무리 → T80 사용 감사/보완 → T58 UI·성능 최적화. 전체 콘텐츠 확보는 별도 상태로 유지한다.\n\n"
     )
     if next_id:
         next_text += "```text\n" + prompt(data, next_id) + "```\n"
+    # Feature work continues after the base product queue. Do not infer a pass
+    # or restart old task snapshots just because the base next_id is None.
+    feature_lines = []
+    for feature_id, plan in data.get("featurePlans", {}).items():
+        unit_id = plan.get("nextUnit")
+        record = data.get("featureWorkUnits", {}).get(unit_id, {})
+        completion = record.get("completionExecution", {})
+        # Legacy feature records may contain prose rather than a path. Only
+        # project the structured completion pointer, leaving other plans intact.
+        path = completion.get("nextPrompt")
+        if not unit_id or not path:
+            continue
+        resolved = (ROOT / path).resolve()
+        if not resolved.is_relative_to(ROOT) or not resolved.is_file():
+            raise ValueError(f"Missing or out-of-workspace feature prompt: {feature_id}: {path}")
+        label = f"{unit_id}/{completion['nextUnit']}" if completion.get("nextUnit") else unit_id
+        feature_lines.append(f"- FEATURE_NEXT: {feature_id} / {label} / {path}")
+        next_text += (f"## 기능 확장 — {feature_id}\n\n"
+                      f"- 다음: **{label}**\n"
+                      f"- 현재 실행문: [{path}](../{path})\n"
+                      "- 이 기능의 실제 선행 결과를 사용한다. 기본 앱 큐 완료는 기능 확장 완료가 아니다. 자동 실행하지 않는다.\n\n")
     book = (
         "# 현행 실행 순서와 프롬프트\n\n"
         "자동 생성 · 원본: `work/EXECUTION.json` · `python3 work/tools/sync_execution.py --check`로 일치 검증.\n\n"
@@ -126,6 +147,7 @@ def render(data):
         "- NEXT_PROMPT: work/NEXT.md\n"
         "- CURRENT_GOAL: 현재 지원 앱 통합 → 사용 감사/보완 → UI·실측 성능 완성. 전체 콘텐츠 completeness는 별도 보고. 이후 설명→신경→모션.\n"
         "- HISTORY: 아래 기존 보고/상태와 work/evidence/*의 nextTask는 당시 snapshot이며 실행 지시가 아니다.\n"
+        + ("\n".join(feature_lines) + "\n" if feature_lines else "") +
         f"{END}\n\n"
     )
     registry_path = ROOT / "work/task-registry-r15.json"
