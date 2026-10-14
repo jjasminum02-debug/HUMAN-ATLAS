@@ -95,3 +95,38 @@ GLB **626,572 bytes**, decoded geometry **625,080 bytes**, **26,756 triangles**,
 source CC0, native ZA/BP3D 권리/derivative 공개 보류, AI 작성 provenance, 교수 검토 미수행, 위치·geometry 승인 상태는 독립 유지했다. source/cached 자료가 없는 것으로 바꾸지 않았고 실제 없는 구강 점막을 외피로 옮기지 않았다. AT10 parent result/acceptance와 Luna portfolio, AT30/31 planned, 다른 AT/MV 기록, 원본/OpenSim_Models/T13 drafts/WIP/역사 evidence는 보존한다. 웹 camera/UI/보기옵션/홈/로딩/361점/자세는 변경하지 않았다.
 
 실제 재개 단위는 계속 **AT10/skin-fit**이다. [구체적 다음 프롬프트](../evidence/AT10/2026-10-13-skin-fit-r2/next-skin-fit-prompt.txt)를 남겼다. 통과 후 계획만 AT10/skin-runtime이며 자동 실행하지 않는다. 로컬 commit은 offline 소유 도구·선택된 checkpoint/recipe/mapping·versioned evidence·보고서·AT10.skinFit만 포함하며 실패 중간 GLB/전체 native cache/private source/사용자 WIP는 제외한다. hash/실제 포함·제외/잔여 변경은 r2 commit receipt와 최종 응답에 기록한다.
+
+## 2026-10-14 r3 — 국소 surface-pair/ARAP 시도 종료, 정합 미달
+
+시작 HEAD는 `bb3840b4ed9d416c9c83064705190f735c5c8ddb`다. [start.json](../evidence/AT10/2026-10-13-skin-fit-r3/start.json)에 45개 tracked WIP hash와 소유 경계를 고정했다. 기존 r22 GLB hash 및 r2의 source/native/권리·독립 형식 재현 검사를 재사용했다. source 확보, Luna portfolio/package 조사, 전신 변환을 다시 수행하지 않았다. 10월 13일 시작한 r3 디렉터리에 10월 14일 종료 결과를 추가했으며 기존 r1/r2 evidence는 덮지 않았다.
+
+**이번 시도에서도 완성 피부를 얻지 못했다. r23–r30은 모두 미채택이며 r22 review checkpoint를 그대로 유지한다.** r22의 native 교차 3,874개/자기 교차 1,604쌍과 geometry acceptance=false도 변하지 않는다. 최신 r30은 native 교차 **4,339개**, non-adjacent 자기 교차 **1,211쌍**으로 native 교차가 465개 증가했다. 자기 교차 감소를 전신 정합 통과로 바꾸지 않았다. approved fitted skin/실제 learner import/새 교육 지표 승인/경혈 추가/자세 구현은 모두 0이다.
+
+### 실제 구현·실패 원인
+
+[at10_skin_arap.py](../tools/at10_skin_arap.py)는 원본 source 관절·같은 손가락/마디 소유 구역과 native의 이름 있는 fascia/bone facet을 연결하는 국소 ring 제약을 작성한다. source 원래 vertex/OBJ face와 native source key/local triangle/world 좌표를 남겼다. 긴 fascia facet의 중심만 국소 범위에 있어 다른 구역을 잡는 문제는 실제 hit의 축/반경 검사로 제한했다. 동일 source vertex에 서로 다른 손가락 제약을 평균하지 않고 구체적인 digit 역할을 우선하며 충돌을 기록한다. source helper 관절은 원본에서 읽은 제작 지표이고, source radial/ulnar·tibial/fibular 방향과 ring 역할은 AI 작성 모형 지표다. 이를 관찰된 피부 주름이나 검증된 상동 취혈 지표로 주장하지 않는다.
+
+양의 source edge weight를 쓰는 ARAP와 단계적 target, proper local rotation, 국소 line search를 구현했다. 손목은 실제 Radius/Ulna distal cap과 source 아래팔 관절/면을 사용하고, 발은 ankle–MTP frame 및 실제 Tibia/Fibula cap으로 종아리 연속 구역을 확장했다. 전신 scale/shrinkwrap/normal push로 결과를 감추지 않았다. 다만 **현재 source/native 표면 제약과 접합 경계 조건이 맞물려 수렴하지 않는 실제 결함**이 남았다. 원본 입력 부재나 교수 승인 대기가 아니다.
+
+엄격한 one-ring determinant guard는 target residual 약 51–56mm에서 멈췄다. transported tangent/normal skin-prism guard는 더 움직이지만 양의 prism만으로 3차원 변형/전역 비관통이 증명되지 않는다. r28의 최종 회전 갱신 누락으로 남은 음수 prism은 r29에서 수정했다. r30은 prism 음수 0이지만 regularized one-ring 음수 진단은 손 양측 각각 109, 발 각각 68개이며 control residual은 손 최대 27.35mm/발 19.62mm다. 이를 양의 3D 국소 변형 합격으로 세지 않았다. 관통과 실제 손목/엄지·발 형태도 여전히 실패한다.
+
+r27은 별도로 양측 original Helix/Lobule/Tragus와 source pinna에 6개씩 실제 주소 제약을 작성했다. control residual 0.081mm에도 귀 전체 rim/attachment가 native를 감싸지 못했다. 여섯 extrema 제안을 상동 지표로 자동 승인하지 않고 폐기했다. pelvis/thigh와 실제 Gluteus maximus facet 제약도 residual 최대 28.46mm 및 접합/접힘이 남아 적용하지 않았다. [attempt-ledger](../evidence/AT10/2026-10-13-skin-fit-r3/attempt-ledger.json)에 각 시도와 실제 판정을 구분했다. r30 초기 syntax 실패 로그도 보존하며 성공 실행은 `arap-r30-run2.log`다. 현재 도구는 최종 r30 알고리즘이고 과거 모든 중간 알고리즘의 재현을 주장하지 않는다.
+
+### 실제 emitted 자산·화면·검사
+
+**미채택 진단 자산** [manifest](../../atlas-data/anatomy/skin/at10-fit-r3/manifest-r30.json), [GLB](../../atlas-data/anatomy/skin/at10-fit-r3/skin-candidate-r30.glb), [mapping](../../atlas-data/anatomy/skin/at10-fit-r3/source-to-derived-r30.json), [recipe](../../atlas-data/anatomy/skin/at10-fit-r3/recipe-r30.json)를 남겼다. r30 GLB SHA는 `218b6bba246bc8f306e2d8d6fe50e6c4da9a58468fbc89a46e4e0733860db5af`다. learner package에는 등록하지 않았다. source CC0, target/native 권리와 공개 재배포 보류, AI 작성 provenance, 선택적 교수 검토 미수행, geometry 판정을 각각 유지한다.
+
+- 같은 설치된 Three GLTFLoader와 Blender glTF import 통과. 실제 emitted POSITION과 original IDs, 모든 face-corner UV의 대응을 전수 확인했다. helper는 보존하되 GLB에 내보내지 않았다. dm→m와 native world matrix를 다시 적용하지 않았다.
+- [scoped checks](../evidence/AT10/2026-10-13-skin-fit-r3/scoped-checks-r30.json)는 1,236개 source/native 실제 facet·좌우 주소, proper reference frame, 원본 topology/UV/ID/return cohort, 검사기 read-only, r22 불변, WIP 45개 보존을 통과했다. **검사 도구의 정상 수행과 geometry acceptance=false는 별개**다. r30 새 전체 생성의 독립 재현은 수행하지 않았고 이미 통과한 r22 형식 재현만 재사용했다.
+- actual emitted float32 기반 공통 양방향 segment–triangle 검사와 자기 교차 쌍을 보존했다. shared validator의 유일한 변경은 full self-pair 주소를 기존 NPZ에 함께 저장하는 것이다. [remaining probes](../evidence/AT10/2026-10-13-skin-fit-r3/remaining-probes-r30.json)에는 source/native 실제 주소와 self-pair 표본, NPZ에는 전체 45,092 native crossing pair와 1,211 self pair가 있다. return cohort 관련 86개도 총수에서 빼지 않았다.
+- 고정 native와 GLB의 정면/뒤/양측·머리/귀/목·어깨/팔꿈치·손목/손바닥/손가락·흉복부/천골/샅·무릎/발등/양측 발바닥·발가락을 23시점 × 피부/중첩 **46장**으로 렌더·판독했다. [sheet 1](../evidence/AT10/2026-10-13-skin-fit-r3/screens/review-r30-1.jpg), [sheet 2](../evidence/AT10/2026-10-13-skin-fit-r3/screens/review-r30-2.jpg), [sheet 3](../evidence/AT10/2026-10-13-skin-fit-r3/screens/review-r30-3.jpg), [sheet 4](../evidence/AT10/2026-10-13-skin-fit-r3/screens/review-r30-4.jpg)에 관통/접합 결함이 보인다. **실제 learner 화면 0, G1–G8 합격 아님**을 명시했다. 제품 camera/UI는 건드리지 않았다.
+
+GLB **626,576 bytes**, logical/emitted vertices 13,380/14,517, triangles 26,756, decoded geometry 625,080 bytes, material 1/texture 0, degenerate 0이다. GLB metadata가 r22보다 4bytes 늘었고 geometry 비용은 같다. ymin −7.70mm로 ground clearance도 실패한다. 기존 carrier와 overview를 함께 더하면 encoded 21,482,188bytes/964,488triangles/decoded geometry 18,875,724bytes이며 기존 20MiB보다 **510,668bytes 초과**한다. 예산을 올리거나 native를 삭제하지 않았다. 실제 learner VRAM/FPS 측정으로 주장하지 않는다. 런타임 코드 변경이 없으므로 전체 web build/역사 suite를 반복하지 않고 관련 Python syntax·loader·source mapping·주소·read-only·WIP 검사를 수행했다.
+
+### 종료 상태와 남은 unit
+
+[remaining-units](../evidence/AT10/2026-10-13-skin-fit-r3/remaining-units.json)의 다섯 unit은 양측 손목/손바닥/엄지, 양측 발목/발바닥/발등/MTP/toe, 귀 attachment/목/return, 골반/샅/넙다리와 잔여 seam, 최종 전신/교육 지표 QA다. 필요한 것은 현재 모델에 존재하는 source/native **연속 표면 band와 공유 경계·접촉 조건의 올바른 대응**이다. 여섯 점 residual, 단면 extrema 또는 교차 수 감소만으로 해결됐다고 할 수 없다. 실제 없는 gingiva/frenulum/sublingual mucosa만 별도 미지원으로 유지한다.
+
+EXECUTION은 기존 r22 candidate/count/format result를 보존하고 AT10.skinFit의 이번 미채택 시도·재개 evidence만 추가한다. AT10 parent result/acceptance와 Luna 산출물, AT30/31 planned, 다른 AT/MV/feature plan의 순서를 보존한다. 재개는 계속 **AT10/skin-fit**, [다음 정확한 프롬프트](../evidence/AT10/2026-10-13-skin-fit-r3/next-skin-fit-prompt.txt)에 남겼다. 통과 후 예정만 skin-runtime이며 실행하지 않았다.
+
+소유 offline 도구/진단 r30 자산·versioned evidence/보고서/AT10.skinFit만 로컬 commit한다. 실패 중간 GLB/전체 native cache/source 원본/private 자료/45개 사용자 WIP/역사 evidence는 제외하며 그대로 남긴다. 실제 hash/포함·제외·잔여 변경은 종료 후 이 evidence의 `commit-receipt.json`과 최종 응답에 기록한다. 다음 task·위임·push·배포는 수행하지 않는다.

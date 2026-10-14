@@ -56,5 +56,5 @@ out['returnCohortExcludedFromTotal']=False
 out['nonAdjacentSelfCrossingPairs']=len(selfPairs)
 out['selfCrossingSkinTriangleIds']=sorted(set(selfPairs.ravel().tolist()))
 out['candidateUnchanged']=candidateHash==hashlib.sha256(candidatePath.read_bytes()).hexdigest();assert out['candidateUnchanged']
-np.savez_compressed(E/f'candidates/fit-{rev}-contact-addresses.npz',skinTriangle=actual[:,0],nativeSourceIndex=np.array([list(native).index(sources[i]) for i in actual[:,1]]),nativeLocalTriangle=np.array([localTriangleIds[i] for i in actual[:,1]]),nativeSourceKeys=np.array(list(native)))
+np.savez_compressed(E/f'candidates/fit-{rev}-contact-addresses.npz',skinTriangle=actual[:,0],nativeSourceIndex=np.array([list(native).index(sources[i]) for i in actual[:,1]]),nativeLocalTriangle=np.array([localTriangleIds[i] for i in actual[:,1]]),nativeSourceKeys=np.array(list(native)),selfCrossingTrianglePairs=selfPairs)
 (E/f'candidates/fit-{rev}-intersections.json').write_text(json.dumps(out,indent=2)+'\n');print(out['countsByRegion'],flush=True)
