@@ -11,6 +11,7 @@ import type { SourceMotionHost } from '../datasets/sourceMotionHost';
 import { motorRelationsForNerve, nerveConceptForSourceName } from '../../data/learning';
 
 const AcupointReview = lazy(() => import('../acupoints/AcupointEntry.tsx'));
+const SkinControls = lazy(() => import('../skin/SkinControls.tsx'));
 const acupointDevelopmentReview = import.meta.env.DEV && new URLSearchParams(window.location.search).get('acupointReview') === '1';
 const surfaceSample = import.meta.env.DEV && new URLSearchParams(window.location.search).get('carrierSample') === '1';
 const territoryDevelopmentReview = import.meta.env.DEV && window.location.pathname === '/review' && new URLSearchParams(window.location.search).get('territories') === '1';
@@ -60,6 +61,7 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
   }, [selectedNerve]);
   const staticPose = datasetSource?.integration.objects.find(r => r.nerve)?.nerve?.poseId;
   const [muscles, setMuscles] = useState(true);
+  const [acupointsActive, setAcupointsActive] = useState(false);
   type Presentation = { observeNerves: boolean; highlightInnervation: boolean; dim: boolean; isolated: boolean; hidden: string[]; translucent: string[] };
   const [presentation, setPresentation] = useState<Presentation>({ observeNerves: true, highlightInnervation: true, dim: true, isolated: false, hidden: [], translucent: [] });
   useEffect(() => { onSelectionHiddenChange?.(Boolean(selectedId && presentation.hidden.includes(selectedId))); }, [selectedId, presentation.hidden, onSelectionHiddenChange]);
@@ -127,7 +129,7 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
   useEffect(() => { if (ready && homeRevision > 0) { stopEntrance(); controller.current?.focus([]); } }, [ready, homeRevision]);
   return <div className="whole-body-viewer" onPointerDownCapture={stopEntrance}>
     <div className="whole-body-canvas" inert={!entered} aria-hidden={!entered} ref={host}/>
-    {entered && AcupointReview && controller.current instanceof DatasetSceneAdapter && <Suspense fallback={null}><AcupointReview adapter={controller.current} surfaceSample={surfaceSample} developmentReview={acupointDevelopmentReview} territoryDevelopmentReview={territoryDevelopmentReview}/></Suspense>}
+    {entered && AcupointReview && controller.current instanceof DatasetSceneAdapter && <Suspense fallback={null}><AcupointReview adapter={controller.current} onModeChange={setAcupointsActive} surfaceSample={surfaceSample} developmentReview={acupointDevelopmentReview} territoryDevelopmentReview={territoryDevelopmentReview}/></Suspense>}
     {!entered && <AtlasLoading failed={error || Boolean(progress?.failed)} loaded={progress?.loaded} total={progress?.total} onRetry={() => error ? setRevision(r => r + 1) : controller.current?.retry()}/> }
     <div inert={!entered} ref={tools} className="body-tools" aria-label="모형 보기 설정">
       <span className="view-options-label">보기 옵션</span>
@@ -136,6 +138,7 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
         <button aria-pressed={bones} onClick={() => { const enabled = !bones; setBones(enabled); onBoneLayerChange?.(enabled); }}>뼈</button>
         <button aria-pressed={muscles} onClick={() => { const enabled = !muscles; setMuscles(enabled); onMuscleLayerChange?.(enabled); }}>근육</button>
         {staticPose && <button aria-pressed={nerves} onClick={() => { nerveLayerExplicitlyOff.current = nerves; setNerves(!nerves); }}>신경</button>}
+        {entered && controller.current instanceof DatasetSceneAdapter && <Suspense fallback={null}><SkinControls adapter={controller.current} acupoints={acupointsActive}/></Suspense>}
       </div>
       <div className="selection-view-options">
         {!selectedNerve && <button disabled={!selectedId} aria-pressed={presentation.dim} onClick={() => updatePresentation({ ...presentation, dim: !presentation.dim })}>선택 강조</button>}

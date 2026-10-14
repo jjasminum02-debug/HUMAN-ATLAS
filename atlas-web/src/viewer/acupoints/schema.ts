@@ -11,6 +11,8 @@ export interface PointConcept {
   measurements: { kind: 'B-cun' | 'F-cun' | 'landmark'; value: number | null; reference: string }[];
 }
 export interface Carrier {
+  /** Bilateral immutable reference surface; side of each anchor/mask is checked separately. */
+  coverage?: 'whole_body';
   id: string; revision: string; topologySha256: string; datasetRevision: string;
   frameId: string; unit: 'm'; poseId: string; side: Side;
   kind: 'source_skin' | 'registered_skin' | 'authored_teaching_surface'; precision: 'coarse_not_skin' | 'landmarks_verified';

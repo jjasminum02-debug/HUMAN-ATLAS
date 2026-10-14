@@ -1,0 +1,69 @@
+(node:84038) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ all 108 real-input LU/LI/TE bindings survive contact-glyph conversion with no re-authoring or nearest muscle (28.204375ms)
+(node:84039) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ common overlay rejects source motion even after motion releases camera ownership (5.380208ms)
+✔ late overlay disposal releases resources without cancelling or moving a foreign camera owner (0.393458ms)
+✔ late disposal of an older acupoint request cannot release a newer acupoint camera session (0.117875ms)
+✔ touch/pointer contact immediately cancels the tour and return before drag threshold (0.242333ms)
+✔ closing during an explicit return finishes the original snapshot even when moved flag is cleared (0.109333ms)
+(node:84040) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ right real contour with independent topology and all three actual educational points (5.305041ms)
+✔ left real contour with independent topology and all three actual educational points (1.503083ms)
+✔ mask rejects side (0.462125ms)
+✔ mask rejects pose (0.265208ms)
+✔ mask rejects frame (0.280708ms)
+✔ mask rejects hash (1.354334ms)
+✔ mask rejects revision (0.311ms)
+✔ mask rejects rights (0.216459ms)
+✔ mask rejects fixture promotion (0.196792ms)
+✔ mask rejects anatomy certainty (0.313958ms)
+✔ mask rejects type conflation (0.338583ms)
+✔ mask rejects missing weight (0.269042ms)
+✔ mask rejects invalid density (0.21325ms)
+✔ mask rejects unknown face (0.188ms)
+✔ mask rejects unknown channel (0.18475ms)
+✔ mask rejects face content tamper (0.229625ms)
+✔ mask rejects weight content tamper (0.403417ms)
+✔ mask rejects fictitious CV jingjin (0.223042ms)
+✔ two real masks share canonical positions, retain holes and release GPU bindings without changing CPU topology (8.041916ms)
+✔ selection/comparison preserve separate overlapping masks with stable order; no geometry union (3.934541ms)
+✔ mask visual revision changes density independently of carrier/points and leaves public review unchanged (1.431917ms)
+✔ repeated construction/OFF balances resource disposal and creates no position/normal copies (1.7555ms)
+(node:84041) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ no rejected local checkpoint is registered or accepted through the learner gate (3.842042ms)
+✔ actual frozen GLB uses one reference topology, identity transform and matte material without an added clock (7.901834ms)
+✔ tampered GLB bytes and topology binding fail instead of retargeting the anchor (8.444709ms)
+✔ first mode entry, manual OFF, repeated entry and original skin state restore are independent (0.124333ms)
+✔ combined legacy carrier plus skin cannot quietly exceed 20MiB (0.056625ms)
+✔ OFF during fetch, repeated OFF and late completion cannot attach; source motion cannot start a static skin (14.153875ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 33
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 183.713833
+
+✖ failing tests:
+
+test at src/viewer/acupoints/contactGlyph.test.ts:5:1
+✖ all 108 real-input LU/LI/TE bindings survive contact-glyph conversion with no re-authoring or nearest muscle (28.204375ms)
+  Error: ENOENT: no such file or directory, open '/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/AT6/resume-r1/bilateral-compiler-r9/ledger.json'
+      at readFileSync (node:fs:484:20)
+      at read (/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-web/src/viewer/acupoints/contactGlyph.test.ts:4:35)
+      at TestContext.<anonymous> (/Users/daniel/Downloads/SIM /HUMAN ATLAS/atlas-web/src/viewer/acupoints/contactGlyph.test.ts:8:80)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/AT6/resume-r1/bilateral-compiler-r9/ledger.json'
+  }

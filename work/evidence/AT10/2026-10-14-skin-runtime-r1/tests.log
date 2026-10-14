@@ -1,0 +1,109 @@
+✖ all 108 real-input LU/LI/TE bindings survive contact-glyph conversion with no re-authoring or nearest muscle (22.418792ms)
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+file:///Users/daniel/Downloads/SIM%20/HUMAN%20ATLAS/atlas-web/src/viewer/acupoints/AcupunctureOverlay.ts:61
+  }
+  private constructor(private adapter: DatasetSceneAdapter, readonly carrier: Carrier, readonly points: PointInstance[], private onSelect: (code: string,side?:Side) => void, private onStop: (reason: string) => void, private encodedBytes: number, private options?: OverlayOptions) {
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    const scene = adapter.scene;
+
+SyntaxError [ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX]: TypeScript parameter property is not supported in strip-only mode
+    at parseTypeScript (node:internal/modules/typescript:68:40)
+    at processTypeScriptCode (node:internal/modules/typescript:146:42)
+    at stripTypeScriptModuleTypes (node:internal/modules/typescript:215:22)
+    at ModuleLoader.<anonymous> (node:internal/modules/esm/translators:680:29)
+    at #translate (node:internal/modules/esm/loader:434:20)
+    at afterLoad (node:internal/modules/esm/loader:502:29)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:507:12)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:560:36)
+    at afterResolve (node:internal/modules/esm/loader:607:52)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:613:12) {
+  code: 'ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX'
+}
+
+Node.js v24.19.0
+✖ src/viewer/acupoints/overlayStaticGuard.test.ts (64.950291ms)
+✔ right real contour with independent topology and all three actual educational points (5.220292ms)
+✔ left real contour with independent topology and all three actual educational points (1.279542ms)
+✔ mask rejects side (0.704542ms)
+✔ mask rejects pose (0.277041ms)
+✔ mask rejects frame (0.250375ms)
+✔ mask rejects hash (0.23ms)
+✔ mask rejects revision (0.203125ms)
+✔ mask rejects rights (0.215ms)
+✔ mask rejects fixture promotion (0.937833ms)
+✔ mask rejects anatomy certainty (0.25025ms)
+✔ mask rejects type conflation (0.196292ms)
+✔ mask rejects missing weight (0.245ms)
+✔ mask rejects invalid density (0.204458ms)
+✔ mask rejects unknown face (0.170417ms)
+✔ mask rejects unknown channel (0.177542ms)
+✔ mask rejects face content tamper (0.1995ms)
+✔ mask rejects weight content tamper (0.344625ms)
+✔ mask rejects fictitious CV jingjin (0.256625ms)
+✔ two real masks share canonical positions, retain holes and release GPU bindings without changing CPU topology (11.76525ms)
+✔ selection/comparison preserve separate overlapping masks with stable order; no geometry union (2.009541ms)
+✔ mask visual revision changes density independently of carrier/points and leaves public review unchanged (1.2175ms)
+✔ repeated construction/OFF balances resource disposal and creates no position/normal copies (1.671208ms)
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+file:///Users/daniel/Downloads/SIM%20/HUMAN%20ATLAS/atlas-web/src/viewer/skin/SkinLayer.ts:60
+  private removeMotion:()=>void;
+  constructor(private adapter:DatasetSceneAdapter,readonly asset:SkinAsset,private review=false) {
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    if(skinLayers.has(adapter))throw Error('Only one skin layer per anatomy scene');
+
+SyntaxError [ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX]: TypeScript parameter property is not supported in strip-only mode
+    at parseTypeScript (node:internal/modules/typescript:68:40)
+    at processTypeScriptCode (node:internal/modules/typescript:146:42)
+    at stripTypeScriptModuleTypes (node:internal/modules/typescript:215:22)
+    at ModuleLoader.<anonymous> (node:internal/modules/esm/translators:680:29)
+    at #translate (node:internal/modules/esm/loader:434:20)
+    at afterLoad (node:internal/modules/esm/loader:502:29)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:507:12)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:560:36)
+    at afterResolve (node:internal/modules/esm/loader:607:52)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:613:12) {
+  code: 'ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX'
+}
+
+Node.js v24.19.0
+✖ src/viewer/skin/skinRuntime.test.ts (71.102875ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 22
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 133.846916
+
+✖ failing tests:
+
+test at src/viewer/acupoints/contactGlyph.test.ts:5:1
+✖ all 108 real-input LU/LI/TE bindings survive contact-glyph conversion with no re-authoring or nearest muscle (22.418792ms)
+  Error: ENOENT: no such file or directory, open '/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/AT6/resume-r1/bilateral-compiler-r9/ledger.json'
+      at readFileSync (node:fs:484:20)
+      at read (file:///Users/daniel/Downloads/SIM%20/HUMAN%20ATLAS/atlas-web/src/viewer/acupoints/contactGlyph.test.ts:4:35)
+      at TestContext.<anonymous> (file:///Users/daniel/Downloads/SIM%20/HUMAN%20ATLAS/atlas-web/src/viewer/acupoints/contactGlyph.test.ts:8:80)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/AT6/resume-r1/bilateral-compiler-r9/ledger.json'
+  }
+
+test at src/viewer/acupoints/overlayStaticGuard.test.ts:1:1
+✖ src/viewer/acupoints/overlayStaticGuard.test.ts (64.950291ms)
+  'test failed'
+
+test at src/viewer/skin/skinRuntime.test.ts:1:1
+✖ src/viewer/skin/skinRuntime.test.ts (71.102875ms)
+  'test failed'

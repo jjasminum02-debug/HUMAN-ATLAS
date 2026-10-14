@@ -11,7 +11,7 @@ export const maskContentHash=(m:Pick<TerritoryMask,'triangleIds'|'vertexWeights'
 export async function validateTerritoryMask(m:TerritoryMask,c:Carrier,context:AnchorContext,allowTechnicalFixture=false) {
   validateCarrier(c,context);await verifyCarrierHash(c);
   if(!['LU','LI','ST','SP','HT','SI','BL','KI','PC','TE','GB','LR','CV','GV'].includes(m.channel)||(['CV','GV'].includes(m.channel)!==(m.side==='midline')))throw Error('territory channel/laterality');
-  if(m.schemaVersion!==1||(m.scope!=='real_input'&&!(allowTechnicalFixture&&m.scope==='technical_fixture'))||m.carrierId!==c.id||m.carrierRevision!==c.revision||m.carrierHash!==c.topologySha256||m.side!==c.side
+  if(m.schemaVersion!==1||(m.scope!=='real_input'&&!(allowTechnicalFixture&&m.scope==='technical_fixture'))||m.carrierId!==c.id||m.carrierRevision!==c.revision||m.carrierHash!==c.topologySha256||m.side!==c.side&&!(c.coverage==='whole_body'&&c.side==='midline')
     ||m.datasetRevision!==context.datasetRevision||m.frameId!==context.frameId||m.poseId!==context.poseId||m.unit!=='m')throw Error('stale territory binding');
   const kind=m.basisKind==='cutaneous'?'cutaneous':m.basisKind==='sinew_projection'?'sinew_projection':'teaching_region';
   if(m.kind!==kind||!['ai','human'].includes(m.author)||m.canonicalBoundaryClaim!==false||m.precision!=='educational_approximation_not_skin'
@@ -19,6 +19,7 @@ export async function validateTerritoryMask(m:TerritoryMask,c:Carrier,context:An
     ||!['surface_learning_connection','cutaneous','sinew_projection','professor_interpretation'].includes(m.basisKind)
     ||(['CV','GV'].includes(m.channel)&&m.basisKind==='sinew_projection'))throw Error('territory provenance/type');
   if(!m.triangleIds.length||new Set(m.triangleIds).size!==m.triangleIds.length||!m.triangleIds.every((f,i)=>Number.isInteger(f)&&f>=0&&f<c.indices.length/3&&(i===0||f>m.triangleIds[i-1])))throw Error('territory face IDs');
+  if(c.coverage==='whole_body'&&m.side!=='midline'&&!m.triangleIds.every(f=>c.indices.slice(f*3,f*3+3).every(v=>m.side==='right'?c.positions[v*3]<=0:c.positions[v*3]>=0)))throw Error('territory subject side');
   const used=new Set(m.triangleIds.flatMap(f=>c.indices.slice(f*3,f*3+3))),vertices=new Set<number>();
   for(const [v,w] of m.vertexWeights){if(!used.has(v)||vertices.has(v)||!Number.isFinite(w)||w<0||w>1)throw Error('territory visual weights');vertices.add(v);}
   if(vertices.size!==used.size)throw Error('missing territory weights');

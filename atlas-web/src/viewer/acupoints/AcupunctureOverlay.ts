@@ -7,6 +7,9 @@ import type { CameraState } from '../wholeBody/cameraObservation.ts';
 import { contextBounds, observationCamera, projectContext, visibleRect, rect, type ObservationContext } from './observationContext.ts';
 import { DATASET_BUDGET } from '../datasets/schema.ts';
 import type { TerritoryMaskLayer, TerritoryMode } from './territoryMask.ts';
+import { CONTACT_RADIUS, localContactTriangle, placeContactGlyph } from './contactGlyph.ts';
+import { reserveSkinResidency } from '../skin/skinRegistry.ts';
+import { registeredSkin } from '../skin/skinContract.ts';
 interface OverlayOptions {returnCamera?:CameraState;carriers?:Carrier[];side?:Side|'both';route:number[];names:Record<string,string>;changed:(state:PointTour['state'])=>void;cancelled:()=>boolean;contexts?:ObservationContext[];order?:string[];sections?:{name:string;codes:string[]}[]}
 /** A bounded static-pose overlay attached to the sole AnatomySceneRoot. */
 export class AcupunctureOverlay {
@@ -43,6 +46,9 @@ export class AcupunctureOverlay {
   private territoryChannel='LU';
   private loadTerritoryModule=()=>import('./territoryMask.ts');
   private halo:THREE.Mesh;
+  private contactCue:THREE.Mesh;
+  // Preserve the verified legacy presentation until a fitted canonical skin is available.
+  private contactGlyphs=registeredSkin!==null || import.meta.env.DEV&&new URLSearchParams(window.location.search).get('skinReview')==='1';
   private reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   static async create(adapter: DatasetSceneAdapter, carrier: Carrier, points: PointInstance[], onSelect: (code: string,side?:Side) => void, onStop: (reason: string) => void, encodedBytes: number, options?: OverlayOptions) {
     if(options&&(options.route.length%3||!options.route.every(Number.isFinite)))throw Error('Invalid teaching route');
@@ -66,15 +72,17 @@ export class AcupunctureOverlay {
     const meshes=(options?.carriers??[carrier]).map(c=>{const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(c.positions,3));geometry.setIndex(c.indices);geometry.computeVertexNormals();
       const mesh=new THREE.Mesh(geometry,carrierMaterial);mesh.name='AcupointTeachingCarrier';mesh.visible=false;this.sharedCarriers.set(c.id,{carrier:c,geometry});this.group.add(mesh);return mesh;});
     this.carrierMesh=meshes[0];
-    const markerGeometry=new THREE.SphereGeometry(.0025,12,8),normalMaterial=new THREE.MeshBasicMaterial({color:0xd36b24,depthTest:true}),selectedMaterial=new THREE.MeshBasicMaterial({color:0xed3f16,depthTest:true});
+    const markerGeometry=this.contactGlyphs?new THREE.CircleGeometry(CONTACT_RADIUS,16):new THREE.SphereGeometry(.0025,12,8),normalMaterial=new THREE.MeshBasicMaterial({color:0xd36b24,depthTest:true,depthWrite:!this.contactGlyphs,side:this.contactGlyphs?THREE.DoubleSide:THREE.FrontSide}),selectedMaterial=new THREE.MeshBasicMaterial({color:0xed3f16,depthTest:true,depthWrite:!this.contactGlyphs,side:this.contactGlyphs?THREE.DoubleSide:THREE.FrontSide});
     this.group.userData.markerMaterials=[normalMaterial,selectedMaterial];
     for (const point of points) {
-      const anchor=resolveAnchor((options?.carriers??[carrier]).find(c=>c.id===point.carrierId)!,point);
       const marker = new THREE.Mesh(markerGeometry,normalMaterial);
-      marker.position.copy(anchor.position).addScaledVector(anchor.normal,.0008); marker.name=`AC-review-${point.code}-${point.side}`; marker.userData.code=point.code;
+      placeContactGlyph(marker,(options?.carriers??[carrier]).find(c=>c.id===point.carrierId)!,point); marker.name=`AC-review-${point.code}-${point.side}`; marker.userData.code=point.code;
+      if(!this.contactGlyphs)marker.position.fromArray(marker.userData.anchor.position).addScaledVector(new THREE.Vector3().fromArray(marker.userData.anchor.normal),.0008);
       this.markers.set(`${point.code}:${point.side}`,marker);this.group.add(marker);
     }
     this.halo=new THREE.Mesh(new THREE.RingGeometry(.0036,.0045,24),new THREE.MeshBasicMaterial({color:0xed8c47,transparent:true,opacity:.35,depthTest:true,depthWrite:false,side:THREE.DoubleSide}));this.halo.name='SelectedPointHalo';this.halo.visible=false;this.group.add(this.halo);
+    this.contactCue=new THREE.Mesh(new THREE.BufferGeometry().setAttribute('position',new THREE.Float32BufferAttribute(new Float32Array(9),3)),new THREE.MeshBasicMaterial({color:0xc9a080,transparent:true,opacity:.25,depthTest:true,depthWrite:false,side:THREE.DoubleSide}));
+    this.contactCue.name='SelectedAnchorSurfaceCue';this.contactCue.raycast=()=>{};this.contactCue.visible=false;this.group.add(this.contactCue);
     if(options?.route.length) {
       if(options.route.length%3||!options.route.every(Number.isFinite))throw Error('Invalid teaching route');
       const lineGeometry=new THREE.BufferGeometry().setAttribute('position',new THREE.Float32BufferAttribute(options.route,3));
@@ -87,6 +95,7 @@ export class AcupunctureOverlay {
     if (!withinOverlayBudget(base,{bytes:cost.geometryBufferBytes,overviewBytes:encodedBytes,triangles:cost.triangles})) { this.releaseGeometry();this.label.remove();scene.endObservation('acupoint',false); throw Error('경혈 체표가 기존 장면 예산을 초과합니다.'); }
     scene.renderer.domElement.dataset.acupointTransfers=JSON.stringify(performance.getEntriesByType('resource').filter(e=>/AcupointReview|AcupunctureOverlay|learning.json/.test(e.name)).map(e=>({name:e.name,bytes:(e as PerformanceResourceTiming).encodedBodySize})));
     this.group.name='AcupunctureOverlay';scene.root.add(this.group);scene.requestRender();
+    reserveSkinResidency(adapter,this,{encodedBytes:cost.encodedBytes,geometryBytes:cost.geometryBufferBytes,triangles:cost.triangles});
     const canvas=scene.renderer.domElement;
     canvas.addEventListener('pointerdown',this.onDown,true);canvas.addEventListener('pointerup',this.onUp,true);
     canvas.addEventListener('pointermove',this.onDrag);canvas.addEventListener('wheel',this.onManual);canvas.addEventListener('keydown',this.onManualKey);
@@ -102,7 +111,7 @@ export class AcupunctureOverlay {
   }
   cost() {
     const geometries=new Set<THREE.BufferGeometry>(),buffers=new Set<ArrayBufferLike>();let triangles=0;
-    this.group.traverse(o=>{if(o instanceof THREE.Mesh||o instanceof THREE.Line){geometries.add(o.geometry);if(o instanceof THREE.Mesh)triangles+=(o.geometry.index?.count??0)/3;}});
+    this.group.traverse(o=>{if(o instanceof THREE.Mesh||o instanceof THREE.Line){geometries.add(o.geometry);if(o instanceof THREE.Mesh)triangles+=(o.geometry.index?.count??o.geometry.getAttribute('position').count)/3;}});
     for(const g of geometries){for(const a of Object.values(g.attributes) as THREE.BufferAttribute[])buffers.add(a.array.buffer);if(g.index)buffers.add(g.index.array.buffer);}
     const geometryBufferBytes=[...buffers].reduce((n,b)=>n+b.byteLength,0),maskCalls=this.territoryLayer?.diagnostics().drawCalls??0;
     return {encodedBytes:this.encodedBytes+this.territoryEncodedBytes,geometryBufferBytes,triangles,textures:0,geometryCount:geometries.size,routeBufferBytes:this.encodedRouteBytes,drawCallsCarrierOff:(this.pointsVisible?this.points.length+1:0)+(this.options?.route.length?1:0)+maskCalls,drawCallsCarrierOn:(this.pointsVisible?this.points.length+1:0)+(this.options?.carriers?.length??1)+(this.options?.route.length?1:0)+maskCalls};
@@ -143,6 +152,7 @@ export class AcupunctureOverlay {
     if(!withinOverlayBudget(base,{bytes:cost.geometryBufferBytes-(old?.additionalBufferBytes??0)+extra.additionalBufferBytes,overviewBytes:cost.encodedBytes-this.territoryEncodedBytes+encodedBytes,triangles:cost.triangles-(old?.triangles??0)+extra.triangles})){layer.dispose();throw Error('학습 영역이 기존 그래픽 예산을 초과합니다.');}
     if(cancelled()){layer.dispose();return;}
     this.territoryLayer?.dispose();this.territoryLayer=layer;this.territoryEncodedBytes=encodedBytes;this.group.add(layer.group);this.adapter.scene.requestRender();
+    const total=this.cost();reserveSkinResidency(this.adapter,this,{encodedBytes:total.encodedBytes,geometryBytes:total.geometryBufferBytes,triangles:total.triangles});
   }
   /** Development editing picks the already-owned hidden canonical carrier. */
   reviewCarrierSurface(id:string) {
@@ -155,6 +165,9 @@ export class AcupunctureOverlay {
     this.selectedSide=side;this.selected=this.markers.has(`${code}:${side}`)?code:null;this.label.hidden=!this.selected;this.tour.index=(this.options?.order??LUNG_ORDER).indexOf(code);
     const [normal,selected]=this.group.userData.markerMaterials as THREE.Material[];
     for(const [key,m] of this.markers)m.material=key===`${code}:${side}`?selected:normal;
+    const point=this.points.find(p=>p.code===code&&p.side===side),surface=point?this.sharedCarriers.get(point.carrierId):null;
+    this.contactCue.visible=Boolean(this.contactGlyphs&&point&&surface&&this.pointsVisible);
+    if(point&&surface){const attr=this.contactCue.geometry.getAttribute('position') as THREE.BufferAttribute;attr.array.set(localContactTriangle(surface.carrier,point));attr.needsUpdate=true;this.contactCue.geometry.computeBoundingSphere();}
     this.label.textContent=`${this.options?.names[code]??code} · ${code}`;
     this.adapter.scene.requestRender();this.inspect();
   }
@@ -231,12 +244,13 @@ export class AcupunctureOverlay {
     const cameraSettled=!cameraTarget||scene.cameraState().position.every((v,i)=>Math.abs(v-cameraTarget.position[i])<1e-8);
     scene.renderer.domElement.dataset.acupointTerritory=JSON.stringify({loading:this.territoryLoading,cameraSettled,currentCamera:scene.cameraState(),mode:this.territoryMode,channel:this.territoryChannel,encodedBytes:this.territoryEncodedBytes,...this.territoryLayer?.diagnostics()??{maskCount:0,visibleMasks:[],additionalBufferBytes:0,triangles:0,fixtureMasks:0}});
     if(this.selected){const marker=this.markers.get(`${this.selected}:${this.selectedSide}`);if(marker){const p=marker.position.clone().project(scene.camera);this.label.hidden=!this.pointsVisible||this.userMoved||Math.abs(p.x)>1||Math.abs(p.y)>1||Math.abs(p.z)>1;this.label.style.left=`${(p.x+1)/2*r.width+8}px`;this.label.style.top=`${(1-p.y)/2*r.height-24}px`;}}
-    for(const marker of this.markers.values()){const radius=scene.camera.position.distanceTo(marker.position)*Math.tan(THREE.MathUtils.degToRad(scene.camera.fov/2))*8/r.height;marker.scale.setScalar(radius/.0025);}
-    const marker=this.selected?this.markers.get(`${this.selected}:${this.selectedSide}`):undefined;this.halo.visible=Boolean(marker&&this.pointsVisible&&!this.userMoved);if(marker){this.halo.position.copy(marker.position);this.halo.quaternion.copy(scene.camera.quaternion);this.halo.scale.copy(marker.scale);}
+    for(const marker of this.markers.values()){const radius=scene.camera.position.distanceTo(marker.position)*Math.tan(THREE.MathUtils.degToRad(scene.camera.fov/2))*(this.contactGlyphs?6:8)/r.height;marker.scale.setScalar(this.contactGlyphs?THREE.MathUtils.clamp(radius/CONTACT_RADIUS,.75,1.6):radius/.0025);}
+    const marker=this.selected?this.markers.get(`${this.selected}:${this.selectedSide}`):undefined;this.halo.visible=Boolean(marker&&this.pointsVisible&&!this.userMoved);if(marker){this.halo.position.copy(marker.position);this.halo.quaternion.copy(this.contactGlyphs?marker.quaternion:scene.camera.quaternion);this.halo.scale.copy(marker.scale);}this.contactCue.visible=Boolean(this.contactGlyphs&&marker&&this.pointsVisible);
     let actualObservation=null;if(this.observation){const o=this.observation as {worldBounds:[number[],number[]]};const box=new THREE.Box3(new THREE.Vector3().fromArray(o.worldBounds[0]),new THREE.Vector3().fromArray(o.worldBounds[1]));actualObservation=projectContext(box,scene.cameraState(),scene.camera.fov,rect(r.left,r.top,r.right,r.bottom),this.safeRect(),marker?.position.toArray() as [number,number,number]|undefined);}
     scene.renderer.domElement.dataset.acupointReview=JSON.stringify({root:scene.root.uuid,groupParent:this.group.parent?.name,carrier:this.carrier.id,carrierHash:this.carrier.topologySha256,frame:this.carrier.frameId,unit:'m',pose:this.carrier.poseId,side:this.options?.side??this.carrier.side,selection:{kind:'acupoint',code:this.selected,side:this.selectedSide},selected:this.selected,observation:this.observation,actualObservation,pointsVisible:this.pointsVisible,selectedSide:this.selectedSide,tour:this.tour.state,tourIndex:this.tour.index,autoReturn:this.tour.autoReturn,userMoved:this.userMoved,section:this.section,safeViewport:this.safeRect(),cameraOwner:scene.cameraOwner,reducedMotion:this.reducedMotion,carrierVisible:this.carrierMesh.visible,cost:this.cost(),points:[...this.markers].map(([id,m])=>{const [code,side]=id.split(':');const p=m.position.clone().project(scene.camera);return {code,side,world:m.position.toArray(),screen:[r.left+(p.x+1)/2*r.width,r.top+(1-p.y)/2*r.height],inFrustum:Math.abs(p.x)<=1&&Math.abs(p.y)<=1&&Math.abs(p.z)<=1,locationValidation:this.points.find(i=>i.code===code)?.locationValidation};})});
   }
   private releaseGeometry() {
+    reserveSkinResidency(this.adapter,this,null);
     this.territoryGeneration++;this.territoryRequest?.abort();this.territoryRequest=null;this.territoryLayer?.dispose();this.territoryLayer=null;
     const geometries=new Set<THREE.BufferGeometry>(),materials=new Set<THREE.Material>();
     this.group.traverse(o=>{if(o instanceof THREE.Mesh||o instanceof THREE.Line){geometries.add(o.geometry);materials.add(o.material as THREE.Material);}});
