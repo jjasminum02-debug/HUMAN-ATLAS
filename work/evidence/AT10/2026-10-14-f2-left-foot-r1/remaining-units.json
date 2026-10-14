@@ -1,0 +1,52 @@
+{
+  "task": "AT10",
+  "unit": "skin-fit/F2",
+  "f2LocalRequiredRemainingUnits": [],
+  "f2AcceptedLocalRevision": "f2c3",
+  "wholeSkinAcceptancePassed": false,
+  "learnerEligible": false,
+  "currentWholeRaw": {
+    "nativeCrossingSkinTriangles": 1712,
+    "selfPairs": 1063,
+    "referenceObjects": 834
+  },
+  "currentWholeRetainedReferenceByLegacyRegion": {
+    "arm-left": 54,
+    "arm-right": 54,
+    "groin": 30,
+    "head": 461,
+    "leg-left": 61,
+    "leg-right": 61,
+    "trunk": 262
+  },
+  "primaryHistoricalCheckpointUnchanged": {
+    "revision": "r22",
+    "native": 3874,
+    "self": 1604,
+    "scope": "historical 648 reference inspection, not the new 834-reference population"
+  },
+  "preservedLocalFits": [
+    "hand-left",
+    "hand-right",
+    "foot-right F1 f1c7",
+    "foot-left F2 f2c3"
+  ],
+  "nextPlannedUnit": "AT10/skin-fit/F3 head/ear/neck only",
+  "remainingPlan": [
+    "F3 head/ear/neck and eyelid/oral-return cohort",
+    "F4 axilla/groin and residual body seams; also inspect retained upper-leg/trunk/arm cohorts from exact new raw addresses",
+    "F5/F6 whole-body geometry, landmark and freeze QA",
+    "R1 shared carrier delivery/budget reconciliation",
+    "R2 skin/contact actual-app QA after whole fit passes",
+    "C1 existing-package-reconciliation and AT10 closure"
+  ],
+  "notStartedHere": [
+    "F3",
+    "skin-runtime",
+    "361 point authoring",
+    "posture",
+    "UI/camera redesign"
+  ],
+  "rawRemainingAddressEvidence": "reference-assessment-f2c3.json; candidates/fit-f2c3-contact-addresses.npz",
+  "noAutoAdvance": true
+}

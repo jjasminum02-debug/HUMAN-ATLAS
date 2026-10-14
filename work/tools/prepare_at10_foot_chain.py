@@ -11,11 +11,11 @@ from mathutils import Vector
 from mathutils.bvhtree import BVHTree
 R=Path(__file__).resolve().parents[2];sys.path.insert(0,str(R/'work/tools'))
 from at10_skin_field_math import cubic_operator
-p=argparse.ArgumentParser();p.add_argument('--evidence',required=True);p.add_argument('--revision',required=True);p.add_argument('--side',choices=['right','left'],required=True);p.add_argument('--base',default='r41');a=p.parse_args(sys.argv[sys.argv.index('--')+1:])
+p=argparse.ArgumentParser();p.add_argument('--evidence',required=True);p.add_argument('--revision',required=True);p.add_argument('--side',choices=['right','left'],required=True);p.add_argument('--base',default='r41');p.add_argument('--base-candidate');p.add_argument('--source-field-manifest');p.add_argument('--native-supplement');p.add_argument('--controls-only',action='store_true');a=p.parse_args(sys.argv[sys.argv.index('--')+1:])
 E=R/a.evidence;load=lambda p:json.loads(p.read_text());letter='r' if a.side=='right' else 'l'
-d=load(E/f'candidates/fit-{a.base}.json');s=np.array(d['sourceVertices']);v=np.array(d['positions'])
-f=copy.deepcopy(next(x for x in load(E/'initial-foot-fields-r31.json')['patches'] if x['patch']=='foot-'+a.side))
-native=load(R/'work/evidence/AT10/2026-10-13-skin-fit-r1/native-surfaces-r1.json');native.update(load(E/'native-supplement-r1.json'))
+d=load(R/a.base_candidate if a.base_candidate else E/f'candidates/fit-{a.base}.json');s=np.array(d['sourceVertices']);v=np.array(d['positions'])
+f=copy.deepcopy(next(x for x in load(R/a.source_field_manifest if a.source_field_manifest else E/'initial-foot-fields-r31.json')['patches'] if x['patch']=='foot-'+a.side))
+native=load(R/'work/evidence/AT10/2026-10-13-skin-fit-r1/native-surfaces-r1.json');native.update(load(R/a.native_supplement if a.native_supplement else E/'native-supplement-r1.json'))
 source_path=R/'atlas-data/source-cache/datasets/skin-source-review-2026-10-13'
 raw=[];groups={};current=''
 for line in (source_path/'base.obj').read_text().splitlines():
@@ -80,6 +80,10 @@ for digit,word in enumerate(words,1):
         identifier=f'joint-{letter}-toe-{digit}-{part}';controls.append(source_control(identifier,target,refs,role))
         roles.append({'sourceHandle':identifier,'role':role,'omittedByOldThreeHandleRecipe':digit>1 and part==4,
             'oldDIPToTipMisassignmentCorrected':digit>1 and part==3,'nativeSources':[x['nativeSourceKey'] for x in refs]})
+if a.controls_only:
+    f.update(nativeJointControls=controls,sourceToeRoleAudit=roles,sourceHelperCounts={'hallux':3,'lesserToesEach':4,'allToeHandles':19},originalSourceHelpersChanged=False,wholeSkinAcceptance=False)
+    out=E/f'surface-bands-{a.revision}.json';assert not out.exists();out.write_text(json.dumps({'patches':[f]},separators=(',',':'))+'\n')
+    print({'side':a.side,'actualNativeControls':len(controls),'toeHandles':19,'cubicCandidateNotGenerated':True},flush=True);sys.exit(0)
 roots=np.array([x['sourceVertex'] for x in f['sharedBoundary']]);ids=np.array(f['sourceVertices'])
 centers=np.vstack([s[roots],np.array([x['source'] for x in controls])]);targets=np.vstack([v[roots],np.array([x['target'] for x in controls])]);reg=np.r_[np.full(len(roots),1e-10),np.full(len(controls),1e-8)]
 op=cubic_operator(centers,targets,reg);mapped,jac=op(s[ids]);old=v.copy();v[ids]=mapped;v[roots]=old[roots]

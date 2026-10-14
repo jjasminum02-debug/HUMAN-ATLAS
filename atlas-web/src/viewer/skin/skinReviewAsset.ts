@@ -1,9 +1,21 @@
 import type { SkinAsset } from './skinContract.ts';
-/** DEV-only checkpoints and scoped F1 candidates. No entry approves a whole skin. */
+/** DEV-only checkpoints and scoped foot candidates. No entry approves a whole skin. */
 export async function skinReviewAsset(datasetRevision:string):Promise<SkinAsset> {
   const requested=new URLSearchParams(window.location.search).get('skinCandidate');
-  const revision=requested==='f1c7'||requested==='f1c4'||requested==='f1c5'||requested==='f1c1'||requested==='r56'||requested==='r58'?requested:'r41';
-  const candidate=revision==='f1c7'?{
+  const revision=requested==='f2c3'||requested==='f2c2'||requested==='f2c1'||requested==='f1c7'||requested==='f1c4'||requested==='f1c5'||requested==='f1c1'||requested==='r56'||requested==='r58'?requested:'r41';
+  const candidate=revision==='f2c3'?{
+    url:(await import('../../../../atlas-data/anatomy/skin/at10-f2-left-foot-r1/skin-candidate-f2c3.glb?url')).default,
+    sha256:'07ab569e3a3a3453ed825e9bc583869394e5e94babdee7edec6b6c437836586f',
+    topologySha256:'34146f987e073e14863c91e0d8003356b1a42235e82f9684611965a140a6d4b2',mappingSha256:'61f329005c20aa523877b0817b1121be39abf0fa7071a6f4e77d3498d6ed3c70',
+  }:revision==='f2c2'?{
+    url:(await import('../../../../atlas-data/anatomy/skin/at10-f2-left-foot-r1/skin-candidate-f2c2.glb?url')).default,
+    sha256:'f6c50ab1cea1ffa9d7b5d4d3d280859936ee81f73a3a834ded1ac8e694bf2122',
+    topologySha256:'a359f1d1381b0cddb29caabe36f62b3b69f1b864f5c2ef5851a4da320c50d2e5',mappingSha256:'b4dcb213338dcab8fd179ee21491813770681330b25bcb6759704c47f1a71894',
+  }:revision==='f2c1'?{
+    url:(await import('../../../../atlas-data/anatomy/skin/at10-f2-left-foot-r1/skin-candidate-f2c1.glb?url')).default,
+    sha256:'541914c44f256b58f58833cd0a320ca377ae972a0c5b1a6f3b2ec6c8c6ebafec',
+    topologySha256:'c1f9c5d1b1ba402e7bdf784451a943c2217340ada487a2ce5ca884605118d722',mappingSha256:'f406fa62755a7aff411632e30f9c9ed58711b5e10b68727cedad1e10bd77345a',
+  }:revision==='f1c7'?{
     url:(await import('../../../../atlas-data/anatomy/skin/at10-f1-correspondence-r2/skin-candidate-f1c7.glb?url')).default,
     sha256:'fd119f927a59e86e66f1fd145b4848e00aa0904a0969ac9d944aafb62fda0bcb',
     topologySha256:'128db0930d88aad4c9306fb7767f29e997b7efffe0a6dfb1b75f923aaf8741ec',mappingSha256:'ac96729ff2b28e0b4cda676c20a763c4bb766a3d747c39cdaaa4b46050586a27',
@@ -32,7 +44,7 @@ export async function skinReviewAsset(datasetRevision:string):Promise<SkinAsset>
     sha256:'4eb7dd0b75d510cb3f6f4f249de549bc3ec5c6f59feb6880c7261a86d967b529',
     topologySha256:'6980bfdf6a90a1a1bcf23d7462b0c3645f2b5e7ad50a28a93ab555e9d6cc9d14',mappingSha256:'271193d59f2e80f1cff32a476d9b214f2d6088cd10ec7af2d16f0d7b5d4c85ff',
   };
-  return {schemaVersion:1,id:`at10-skin-${revision}-review-only`,revision:revision.startsWith('f1')?revision:revision+'p1',datasetRevision,...candidate,
+  return {schemaVersion:1,id:`at10-skin-${revision}-review-only`,revision:revision.startsWith('f')?revision:revision+'p1',datasetRevision,...candidate,
     bytes:626576,geometryBytes:625080,triangles:26756,
     frameId:'HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR',unit:'m',poseId:'ZA-9f08a17ea0115fed-frame0-autoexec-off',
     geometryAccepted:false,learnerEligible:false,landmarkRevision:null,localObservation:'supported',publicRedistribution:'held',author:'ai',professorReview:'not_performed',staticPoseOnly:true};

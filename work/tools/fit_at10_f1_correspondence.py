@@ -1,4 +1,4 @@
-"""Offline right-foot source correspondence repair; never approves a skin.
+"""Offline side-addressed foot source correspondence repair; never approves a skin.
 
 Reuses r41 topology/hands, actual r52 toe cap addresses, and the shared exporter
 and independent contact checker. Each Gaussian displacement has a conservative
@@ -17,11 +17,13 @@ p.add_argument('--refine',action='store_true',help='Coarse-to-fine velocity supp
 p.add_argument('--surface-pairs',action='store_true',help='Actual closed source sections paired with addressed native containment supports')
 p.add_argument('--continue-recipe',help='Continue a saved finite solve, preserving completed field stages')
 p.add_argument('--centre-indicators',action='store_true',help='Separate source rig handles from authored inner model axes using own-digit closed skin sections')
-a=p.parse_args();E=R/a.evidence;E.mkdir(exist_ok=True);(E/'candidates').mkdir(exist_ok=True)
+p.add_argument('--side',choices=['right','left'],default='right');p.add_argument('--base-candidate');p.add_argument('--field-manifest');p.add_argument('--body-controls',help='Explicit independently inspected source/native support proposals');a=p.parse_args();E=R/a.evidence;E.mkdir(exist_ok=True);(E/'candidates').mkdir(exist_ok=True)
 load=lambda x:json.loads(x.read_text())
 B=R/'work/evidence/AT10/2026-10-14-skin-fit-r5'
-d=load(B/'candidates/fit-r41.json');s=np.array(d['sourceVertices']);old=np.array(d['positions']);v=old.copy()
-f=load(B/'surface-bands-r52.json')['patches'][0];ids=np.array(f['sourceVertices']);n=len(s)
+base_path=R/a.base_candidate if a.base_candidate else B/'candidates/fit-r41.json'
+d=load(base_path);s=np.array(d['sourceVertices']);old=np.array(d['positions']);v=old.copy()
+f=next(x for x in load(R/a.field_manifest if a.field_manifest else B/'surface-bands-r52.json')['patches'] if x['patch']=='foot-'+a.side);ids=np.array(f['sourceVertices']);n=len(s)
+assert all(c['id'].startswith('joint-'+('r' if a.side=='right' else 'l')+'-') for c in f['nativeJointControls'])
 faces=[x['derivedVertices'] for x in d['faces']]
 t=np.array([[z[0],z[j],z[j+1]] for z in faces for j in range(1,len(z)-1)])
 edges=np.array(sorted({tuple(sorted((int(x),int(y)))) for z in t for x,y in zip(z,np.roll(z,-1))}))
@@ -56,7 +58,7 @@ if a.centre_indicators:
  from at10_surface_sections import section_loops
  localfaces=np.flatnonzero(mask[t].all(1));indicatorAudit=[]
  for digit in range(1,6):
-  chain=[c for c in f['nativeJointControls'] if c['id'].startswith('joint-r-toe-'+str(digit)+'-')];observed=[]
+  chain=[c for c in f['nativeJointControls'] if c['id'].startswith('joint-'+('r' if a.side=='right' else 'l')+'-toe-'+str(digit)+'-')];observed=[]
   for part,(ca,cb) in enumerate(zip(chain[:-1],chain[1:])):
    sa=np.array(ca['sourceOriginalHelperM']);sb=np.array(cb['sourceOriginalHelperM']);axis=sb-sa;axis/=np.linalg.norm(axis)
    up=np.array([0.,1.,0.]);up-=axis*(up@axis);up/=np.linalg.norm(up);right=np.cross(up,axis)
@@ -71,8 +73,9 @@ if a.centre_indicators:
      rec={'part':part,'fraction':fraction,'sourceOriginM':so.tolist(),'areaCentroidM':centre.tolist(),'ringLengthM':float(length),'lateralCentreDistanceM':float(lateral),'nodes':loop['nodes'],'segmentTriangles':loop['segmentTriangles']}
      if length<(.105 if digit==1 else .082) and lateral<(.010 if digit==1 else .0055):selected.append(rec)
      else:rejected.append(rec)
-    if selected:observed.append(min(selected,key=lambda q:np.linalg.norm(np.array(q['areaCentroidM'])-so)))
-    indicatorAudit.append({'digit':digit,'part':part,'fraction':fraction,'acceptedForAuthoredModelAxis':bool(selected),'rejectedLoops':rejected,'anatomicalSourceBoneApproval':False})
+    assert len(selected)<=1,('ambiguous own-digit source sections; do not choose by nearest',digit,part,fraction)
+    if selected:observed.append(selected[0])
+    indicatorAudit.append({'digit':digit,'part':part,'fraction':fraction,'acceptedForAuthoredModelAxis':bool(selected),'plausibleOwnDigitLoopCount':len(selected),'rejectedLoops':rejected,'anatomicalSourceBoneApproval':False})
   assert observed,('no own-digit source section',digit)
   for part,c in enumerate(chain[:-1]):
    row=next(x for x in controls if x['id']==c['id']);q=np.array(c['sourceOriginalHelperM']);nearest=min(observed,key=lambda x:np.linalg.norm(np.array(x['sourceOriginM'])-q));offset=np.array(nearest['areaCentroidM'])-nearest['sourceOriginM'];row['source']=(q+offset).tolist()
@@ -93,8 +96,12 @@ body=[
  ('medial-midfoot',[-.150,-.785,.040],'Navicular bone',0,1,.007),
  ('forefoot-plantar',[-.190,-.817,.108],'Superficial transverse metatarsal ligament',1,-1,.003),
 ]
+if a.body_controls:
+ body_spec=load(R/a.body_controls);assert body_spec['side']==a.side;body=body_spec['controls']
+elif a.side!='right':
+ raise ValueError('Left side requires independently inspected and addressed body controls.')
 for name,point,term,axis,sign,pad in body:
- vi=int(ids[np.linalg.norm(s[ids]-point,axis=1).argmin()]);key=next(k for k,x in native.items() if x['side']=='right' and x['name']==term)
+ vi=int(ids[np.linalg.norm(s[ids]-point,axis=1).argmin()]);key=next(k for k,x in native.items() if x['side']==a.side and x['name']==term)
  item=native[key];nv=np.array(item['v']);nt=np.array(item['t']);value=nv[:,axis]*sign
  cohort=np.flatnonzero(value>value.max()-.003);centre=nv[cohort].mean(0);ni=int(cohort[np.linalg.norm(nv[cohort]-centre,axis=1).argmin()])
  ti=int(np.flatnonzero((nt==ni).any(1))[0]);corner=int(np.flatnonzero(nt[ti]==ni)[0]);bary=[0.,0.,0.];bary[corner]=1.
@@ -105,6 +112,7 @@ for name,point,term,axis,sign,pad in body:
                       skinAllowanceM=pad,clinicalLandmarkApproval=False,sigmaM=.045))
 
 if a.surface_pairs:
+ assert a.side=='right','Archived optional surface-pair proposals have no left-side semantic authoring.'
  sys.path.insert(0,str(R/'work/tools'))
  from at10_surface_sections import section_loops,ordered_samples
  policy=load(R/'work/evidence/AT10/2026-10-14-completion-r1/reference-exceptions-right-r1.json')
@@ -152,7 +160,7 @@ if a.surface_pairs:
   section('midfoot-dorsal-plantar-'+str(z),np.array([-.185,-.79,z]),np.array([-.095,.035,tz]),[0,0,1],[0,0,1],['foot','metatarsal','cuneiform','cuboid','navicular','crural fascia','digitorum','hallucis','fibularis'],.003,True)
  words=['first','second','third','fourth','fifth']
  for digit,word in enumerate(words,1):
-  chain=[c for c in f['nativeJointControls'] if c['id'].startswith('joint-r-toe-'+str(digit)+'-')]
+  chain=[c for c in f['nativeJointControls'] if c['id'].startswith('joint-'+('r' if a.side=='right' else 'l')+'-toe-'+str(digit)+'-')]
   for k,(ca,cb) in enumerate(zip(chain[:-1],chain[1:])):
    sa=np.array(ca.get('sourceOriginalHelperM',ca['source']));sb=np.array(cb.get('sourceOriginalHelperM',cb['source']));ta=np.array(ca['target']);tb=np.array(cb['target'])
    for u in [.35,.72]:
@@ -161,7 +169,7 @@ if a.surface_pairs:
  (E/f'surface-pair-audit-{a.revision}.json').write_text(json.dumps({'sections':sections,'pairs':pairs,'approvedExceptionCount':991,'sourceSkinHomologyAutoApproved':False,'nativeModified':False},indent=2)+'\n')
 
 if a.recipe:
- recipe=load(R/a.recipe);assert recipe['baseCandidateSha256']==hashlib.sha256((B/'candidates/fit-r41.json').read_bytes()).hexdigest()
+ recipe=load(R/a.recipe);assert recipe['baseCandidateSha256']==hashlib.sha256(base_path.read_bytes()).hexdigest()
  A=np.array(recipe['affine']);b=np.array(recipe['translation']);stages=recipe['stages'];controls=recipe['controls']
 else:
  X=np.array([c['source'] for c in controls]);T=np.array([c['target'] for c in controls]);sig=np.array([c['sigmaM'] for c in controls])
@@ -192,7 +200,7 @@ else:
   if step%50==0:print('FLOW',step,'max target residual',error,'step',alpha,flush=True)
  print('FINAL_CONTROL_RESIDUAL',error,flush=True)
  recipe={'method':'affine + Lipschitz-bounded Gaussian landmark flow','controls':controls,'affine':A.tolist(),'translation':b.tolist(),'stages':stages,
-         'baseCandidateSha256':hashlib.sha256((B/'candidates/fit-r41.json').read_bytes()).hexdigest()}
+         'baseCandidateSha256':hashlib.sha256(base_path.read_bytes()).hexdigest()}
 
 # These are actual source vertices, face interiors, plus interior source-foot
 # points. The global bound is independent of this finite diagnostic set.
@@ -209,7 +217,7 @@ boundaryError=float(np.linalg.norm(v[roots]-old[roots],axis=1).max())
 # its residual are exposed; a large residual fails rather than withholding QA.
 v[roots]=old[roots]
 outside=np.setdiff1d(np.arange(n),ids);assert np.array_equal(v[outside],old[outside])
-recipe.update(revision=a.revision,sourceUnitVertices=ids.tolist(),actualTopologicalBoundary=roots.tolist(),releasedPseudoBoundaryControls=interior.tolist(),
+recipe.update(revision=a.revision,side=a.side,baseCandidate=str(base_path.relative_to(R)),sourceUnitVertices=ids.tolist(),actualTopologicalBoundary=roots.tolist(),releasedPseudoBoundaryControls=interior.tolist(),
               sourceBoundaryAnkleDistancesM=np.linalg.norm(s[roots]-f['nativeJointControls'][0]['source'],axis=1).tolist(),
               boundaryResidualBeforeExactJoinM=boundaryError,minimumAffineDeterminant=float(np.linalg.det(A)),
               minimumComposedSampled3DDeterminant=float(np.linalg.det(J).min()),minimumIncrementSampledDeterminant=minimumStepDet,
@@ -220,7 +228,9 @@ recipe.update(revision=a.revision,sourceUnitVertices=ids.tolist(),actualTopologi
 d.update(positions=v.tolist(),candidateRevision=a.revision,fitAcceptancePassed=False,learnerEligible=False)
 dataset=load(R/'atlas-data/source-cache/datasets/za/compiled/manifest.json')
 d['referencePoseBinding']={'sourceHash':dataset['sourceHash'],'sourceFrame':0,'canonicalPoseId':dataset['frameContract']['staticReferencePose']['id'],'frameId':dataset['frameContract']['targetFrameId'],'meaning':'same previously hash-verified static native input; no rig/posture or geometry approval'}
-d['f1CorrespondenceRecipe']=str((E/f'recipe-{a.revision}.json').relative_to(R))
+recipe_path=str((E/f'recipe-{a.revision}.json').relative_to(R))
+d.setdefault('sourceCorrespondenceRecipes',{})[a.side]=recipe_path
+if a.side=='right':d['f1CorrespondenceRecipe']=recipe_path
 for path,payload in [(E/f'candidates/fit-{a.revision}.json',d),(E/f'recipe-{a.revision}.json',recipe)]:
  assert not path.exists(),path
  path.write_text(json.dumps(payload,separators=(',',':'))+'\n')
