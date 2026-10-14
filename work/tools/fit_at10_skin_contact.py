@@ -260,6 +260,10 @@ def contacts(vertices, tree, crossing_pairs):
     return rows, energy
 
 def cubic_field(points):
+    if 'sourceLandmarkFlowRecipe' in record:
+        sys.path.insert(0,str(R/'work/tools'))
+        from at10_skin_field_math import landmark_flow_operator
+        return landmark_flow_operator(load(R/record['sourceLandmarkFlowRecipe']))(points)
     centers = np.array(record['sourceFieldCentersM']); targets = np.array(record['nativeFieldTargetsM'])
     center = centers.mean(0); x = (centers-center)/.1; q = (points-center)/.1
     rr = np.linalg.norm(x[:, None]-x[None, :], axis=2)
@@ -449,6 +453,12 @@ for iteration in range(args.steps):
     qdelta = qphi@raw_coefficients
     qgradient = np.einsum('qnk,no->qok', qderivative, raw_coefficients)
     step = min(1., .008/max(float(np.linalg.norm(delta[ids], axis=1).max()), 1e-12))
+    # A bounded flow input retains its continuous 3D guarantee through contact
+    # corrections. Legacy cubic inputs keep their historical sampled guard.
+    global_step_bound=None
+    if 'sourceLandmarkFlowRecipe' in record:
+        lip=float((np.linalg.norm(raw_coefficients,axis=1)/(np.sqrt(np.e)*sigma)).sum())
+        step=min(step,.5/max(lip,1e-20));global_step_bound=lip
     accepted = False; rejected = collections.Counter(); added_barrier=False
     while step >= 1/2048:
         trial = v+step*delta
@@ -501,6 +511,7 @@ for iteration in range(args.steps):
         'centersSourceVertexIds': ids[centers_ids].tolist(), 'sigmaM': sigma.tolist(),
         'fieldCentersM': centers.tolist(), 'rawFieldCoefficients': (step*raw_coefficients).tolist()}
     steps.append(log); print({k: val for k, val in log.items() if not isinstance(val, list)}, flush=True)
+    if global_step_bound is not None:log['globalDisplacementLipschitzBound']=step*global_step_bound
     # 1.5mm is the solve target, 1mm the numerical source/native sample margin.
     # Neither is an anatomical skin-thickness assertion or whole-body approval.
     if not len(native_pairs) and not len(self_pairs) and max((r['violationM'] for r in rows), default=0) < args.target_clearance-args.minimum_margin:

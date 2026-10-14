@@ -1,0 +1,40 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+file:///Users/daniel/Downloads/SIM%20/HUMAN%20ATLAS/atlas-web/src/viewer/skin/SkinLayer.ts:60
+  private removeMotion:()=>void;
+  constructor(private adapter:DatasetSceneAdapter,readonly asset:SkinAsset,private review=false) {
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    if(skinLayers.has(adapter))throw Error('Only one skin layer per anatomy scene');
+
+SyntaxError [ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX]: TypeScript parameter property is not supported in strip-only mode
+    at parseTypeScript (node:internal/modules/typescript:68:40)
+    at processTypeScriptCode (node:internal/modules/typescript:146:42)
+    at stripTypeScriptModuleTypes (node:internal/modules/typescript:215:22)
+    at ModuleLoader.<anonymous> (node:internal/modules/esm/translators:680:29)
+    at #translate (node:internal/modules/esm/loader:434:20)
+    at afterLoad (node:internal/modules/esm/loader:502:29)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:507:12)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:560:36)
+    at afterResolve (node:internal/modules/esm/loader:607:52)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:613:12) {
+  code: 'ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX'
+}
+
+Node.js v24.19.0
+✖ src/viewer/skin/skinRuntime.test.ts (88.669209ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 93.383583
+
+✖ failing tests:
+
+test at src/viewer/skin/skinRuntime.test.ts:1:1
+✖ src/viewer/skin/skinRuntime.test.ts (88.669209ms)
+  'test failed'
