@@ -1,0 +1,87 @@
+{
+  "task": "AT10/skin-fit",
+  "primaryR22StillNotPassed": true,
+  "preservedLocalContactCheckpoint": "r41",
+  "lastFailedDiagnostic": "r54",
+  "allMandatoryAcceptancePassed": false,
+  "units": [
+    {
+      "id": "bilateral-hand-contact",
+      "state": "local_contact_pass_only",
+      "successEvidence": [
+        "work/evidence/AT10/2026-10-14-skin-fit-r5/preserved-unit-hand-right-r40.json",
+        "work/evidence/AT10/2026-10-14-skin-fit-r5/scoped-checks-r41-r54.json"
+      ],
+      "nativeCrossings": [
+        0,
+        0
+      ],
+      "selfPairs": [
+        0,
+        0
+      ],
+      "wholeSkinOrLandmarksApproved": false
+    },
+    {
+      "id": "right-foot-surface-bands",
+      "state": "partial_reproduced_failure",
+      "candidate": "r54_not_final",
+      "nativeCrossingSkinTriangles": 410,
+      "selfPairsTouchingUnit": 0,
+      "actualEmittedBoneCrossingTriangles": 18,
+      "accessoryCrossingTriangles": 406,
+      "roleCountSetsOverlap": true,
+      "sourceRoleFix": "actual 3 hallux / 4 lesser toe helpers; separate original rig handles and derived interior controls",
+      "neededAuthoring": "actual dorsal/plantar/MTP/toe-pad/interdigital valley source face/edge cohorts and corresponding native support bands; correct natural tip shape, not rejected bone-bisector paths or normal push",
+      "evidence": "work/evidence/AT10/2026-10-14-skin-fit-r5/right-foot-remaining-role-classification-r54.json"
+    },
+    {
+      "id": "left-foot-and-ankle",
+      "state": "unresolved",
+      "baselineNativeCrossingTriangles": 877,
+      "baselineSelfPairs": 271,
+      "neededAuthoring": "apply actual left source/native toe chain (not mirror approval), then independent surface/shape/native/self QA after the right method works"
+    },
+    {
+      "id": "head-pinna-neck-returns",
+      "state": "unresolved",
+      "baselineHeadNativeCrossingTriangles": 461,
+      "baselineHeadSelfPairs": 527,
+      "diagnostic": "core source has zero self pairs; full young preview has 30. r48 head/neck field removes local self crossing but native contacts worsen; r49 still 1156 local authoring crossings and hits the positive-Jacobian guard. Neither adopted.",
+      "neededAuthoring": "source/native outer cranial and facial bands; ordered helix/concha/lobule/root; separate true oral/eyelid returns and unsupported mucosa; preserve actual source IDs"
+    },
+    {
+      "id": "axilla-upper-arm-trunk",
+      "state": "unresolved",
+      "baselineNativeTriangles": {
+        "armLeft": 54,
+        "armRight": 54,
+        "trunk": 262
+      },
+      "baselineArmTrunkAndArmSelfPairs": 272,
+      "neededAuthoring": "coupled source shoulder/upper-arm/chest surface and boundary/tangent/contact constraints; preserve both hand fields"
+    },
+    {
+      "id": "pelvis-groin-upper-thigh",
+      "state": "unresolved",
+      "baselineNativeTriangles": {
+        "groin": 30,
+        "legLeft": 79,
+        "legRight": 79
+      },
+      "baselineSelfPairs": 264,
+      "neededAuthoring": "bilateral inner-thigh/perineal/gluteal ordered surface pairs and a continuous shared seam, not region bounds ratios"
+    },
+    {
+      "id": "whole-asset-final-qa-landmarks",
+      "state": "pending_actual_geometry",
+      "needed": "all above units plus natural shape, full emitted source/UV/helper lineage, positive local deformation/native/self, independent final recipe reproduction, educational landmark readiness and unchanged delivery budget",
+      "learnerEligible": false,
+      "skinRuntimeStarted": false
+    }
+  ],
+  "reasonForPartial": "Repeated actual geometry/shape failure at feet and remaining body; no source-rights absence or professor-approval wait. Rejected chart guides are not relabeled to make a pass.",
+  "nextTask": "AT10/skin-fit",
+  "afterActualWholePassOnly": "AT10/skin-runtime",
+  "autoRunNext": false
+}

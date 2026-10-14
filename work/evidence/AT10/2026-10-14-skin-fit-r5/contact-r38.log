@@ -1,0 +1,88 @@
+NATIVE 2114537 samples 137499 source unit 1787
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:193: RuntimeWarning: divide by zero encountered in matmul
+  values = np.einsum('qn,no->qo', radius**3, coef[:-4])+np.column_stack([np.ones(len(q)), q])@coef[-4:]
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:193: RuntimeWarning: overflow encountered in matmul
+  values = np.einsum('qn,no->qo', radius**3, coef[:-4])+np.column_stack([np.ones(len(q)), q])@coef[-4:]
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:193: RuntimeWarning: invalid value encountered in matmul
+  values = np.einsum('qn,no->qo', radius**3, coef[:-4])+np.column_stack([np.ones(len(q)), q])@coef[-4:]
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:214: RuntimeWarning: divide by zero encountered in matmul
+  query += phi@coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:214: RuntimeWarning: overflow encountered in matmul
+  query += phi@coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:214: RuntimeWarning: invalid value encountered in matmul
+  query += phi@coefficients
+RESUMED r37 field replay error 8.270975252328749e-16
+INITIAL 153 native 0 self 966 contact faces 0.0012983353763282625
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:265: RuntimeWarning: divide by zero encountered in matmul
+  basis = phi@null
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:265: RuntimeWarning: overflow encountered in matmul
+  basis = phi@null
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:265: RuntimeWarning: invalid value encountered in matmul
+  basis = phi@null
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:288: RuntimeWarning: divide by zero encountered in matmul
+  regularizer = np.eye(null.shape[1])*.015 + unit_basis.T@unit_basis*.002 + lap_basis.T@lap_basis*3.
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:288: RuntimeWarning: overflow encountered in matmul
+  regularizer = np.eye(null.shape[1])*.015 + unit_basis.T@unit_basis*.002 + lap_basis.T@lap_basis*3.
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:288: RuntimeWarning: invalid value encountered in matmul
+  regularizer = np.eye(null.shape[1])*.015 + unit_basis.T@unit_basis*.002 + lap_basis.T@lap_basis*3.
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:289: RuntimeWarning: divide by zero encountered in matmul
+  system = constraint_weight*(matrix_rows.T@matrix_rows) + np.kron(regularizer, np.eye(3))
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:289: RuntimeWarning: overflow encountered in matmul
+  system = constraint_weight*(matrix_rows.T@matrix_rows) + np.kron(regularizer, np.eye(3))
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:289: RuntimeWarning: invalid value encountered in matmul
+  system = constraint_weight*(matrix_rows.T@matrix_rows) + np.kron(regularizer, np.eye(3))
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:290: RuntimeWarning: divide by zero encountered in matmul
+  target_rhs = constraint_weight*(matrix_rows.T@rhs) - (.002*unit_basis.T@prior_delta+3.*lap_basis.T@lap_prior).ravel()
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:290: RuntimeWarning: overflow encountered in matmul
+  target_rhs = constraint_weight*(matrix_rows.T@rhs) - (.002*unit_basis.T@prior_delta+3.*lap_basis.T@lap_prior).ravel()
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:290: RuntimeWarning: invalid value encountered in matmul
+  target_rhs = constraint_weight*(matrix_rows.T@rhs) - (.002*unit_basis.T@prior_delta+3.*lap_basis.T@lap_prior).ravel()
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:292: RuntimeWarning: divide by zero encountered in matmul
+  raw_coefficients = null@coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:292: RuntimeWarning: overflow encountered in matmul
+  raw_coefficients = null@coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:292: RuntimeWarning: invalid value encountered in matmul
+  raw_coefficients = null@coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:293: RuntimeWarning: divide by zero encountered in matmul
+  delta = phi@raw_coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:293: RuntimeWarning: overflow encountered in matmul
+  delta = phi@raw_coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:293: RuntimeWarning: invalid value encountered in matmul
+  delta = phi@raw_coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:298: RuntimeWarning: divide by zero encountered in matmul
+  qdelta = qphi@raw_coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:298: RuntimeWarning: overflow encountered in matmul
+  qdelta = qphi@raw_coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:298: RuntimeWarning: invalid value encountered in matmul
+  qdelta = qphi@raw_coefficients
+{'iteration': 0, 'step': 1.0, 'constraintWeight': 1.0, 'crossingSkinTrianglesInUnit': 70, 'nativeCrossingPairsInUnit': 291, 'selfPairsTouchingUnit': 0, 'contactFaces': 732, 'contactEnergyM2': 0.0006560629328736235, 'maximumContactViolationM': 0.003928018720820546, 'minimumSampled3DFieldJacobian': 0.06164205288743022, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 1, 'step': 1.0, 'constraintWeight': 1.0, 'crossingSkinTrianglesInUnit': 72, 'nativeCrossingPairsInUnit': 273, 'selfPairsTouchingUnit': 0, 'contactFaces': 744, 'contactEnergyM2': 0.0006358349008802059, 'maximumContactViolationM': 0.0035787580870091915, 'minimumSampled3DFieldJacobian': 0.06161876647303789, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 2, 'step': 1.0, 'constraintWeight': 1.0, 'crossingSkinTrianglesInUnit': 61, 'nativeCrossingPairsInUnit': 237, 'selfPairsTouchingUnit': 0, 'contactFaces': 714, 'contactEnergyM2': 0.0005269877728487526, 'maximumContactViolationM': 0.0033318963702768088, 'minimumSampled3DFieldJacobian': 0.061764761015253015, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 3, 'step': 1.0, 'constraintWeight': 1.0, 'crossingSkinTrianglesInUnit': 56, 'nativeCrossingPairsInUnit': 224, 'selfPairsTouchingUnit': 0, 'contactFaces': 717, 'contactEnergyM2': 0.0004992530955926822, 'maximumContactViolationM': 0.0035945873111486435, 'minimumSampled3DFieldJacobian': 0.06082731924165969, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 4, 'step': 1.0, 'constraintWeight': 1.0, 'crossingSkinTrianglesInUnit': 52, 'nativeCrossingPairsInUnit': 205, 'selfPairsTouchingUnit': 0, 'contactFaces': 707, 'contactEnergyM2': 0.00046142784917109974, 'maximumContactViolationM': 0.003396049245260656, 'minimumSampled3DFieldJacobian': 0.06027933238475397, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 5, 'step': 0.5, 'constraintWeight': 1.0, 'crossingSkinTrianglesInUnit': 54, 'nativeCrossingPairsInUnit': 207, 'selfPairsTouchingUnit': 0, 'contactFaces': 710, 'contactEnergyM2': 0.0004518924470551833, 'maximumContactViolationM': 0.0034027080852538348, 'minimumSampled3DFieldJacobian': 0.06027125124598109, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 6, 'step': 1.0, 'constraintWeight': 1.0, 'crossingSkinTrianglesInUnit': 52, 'nativeCrossingPairsInUnit': 192, 'selfPairsTouchingUnit': 0, 'contactFaces': 706, 'contactEnergyM2': 0.00042833913389287944, 'maximumContactViolationM': 0.0034083507359027863, 'minimumSampled3DFieldJacobian': 0.06011195998897747, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 7, 'step': 0.0625, 'constraintWeight': 1.0, 'crossingSkinTrianglesInUnit': 52, 'nativeCrossingPairsInUnit': 190, 'selfPairsTouchingUnit': 0, 'contactFaces': 705, 'contactEnergyM2': 0.0004283344305942229, 'maximumContactViolationM': 0.003407060737721622, 'minimumSampled3DFieldJacobian': 0.06011817962975131, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 8, 'step': 0.0078125, 'constraintWeight': 1.0, 'crossingSkinTrianglesInUnit': 52, 'nativeCrossingPairsInUnit': 190, 'selfPairsTouchingUnit': 0, 'contactFaces': 703, 'contactEnergyM2': 0.00042775843922848413, 'maximumContactViolationM': 0.003406867837533355, 'minimumSampled3DFieldJacobian': 0.06011891715051062, 'maximumBoundaryDisplacementM': 0.0}
+RETRY_CONTACT_WEIGHT 9 1.0 {'contact_energy': 12}
+{'iteration': 10, 'step': 1.0, 'constraintWeight': 5.0, 'crossingSkinTrianglesInUnit': 20, 'nativeCrossingPairsInUnit': 67, 'selfPairsTouchingUnit': 0, 'contactFaces': 389, 'contactEnergyM2': 0.00014652142973128069, 'maximumContactViolationM': 0.0025940033243969083, 'minimumSampled3DFieldJacobian': 0.06131630098018903, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 11, 'step': 1.0, 'constraintWeight': 5.0, 'crossingSkinTrianglesInUnit': 27, 'nativeCrossingPairsInUnit': 68, 'selfPairsTouchingUnit': 0, 'contactFaces': 329, 'contactEnergyM2': 0.00012711171039421246, 'maximumContactViolationM': 0.0023410682785324753, 'minimumSampled3DFieldJacobian': 0.06172480492739772, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 12, 'step': 1.0, 'constraintWeight': 5.0, 'crossingSkinTrianglesInUnit': 11, 'nativeCrossingPairsInUnit': 35, 'selfPairsTouchingUnit': 0, 'contactFaces': 300, 'contactEnergyM2': 8.666400164886272e-05, 'maximumContactViolationM': 0.0022459844928234816, 'minimumSampled3DFieldJacobian': 0.06099233723134861, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 13, 'step': 0.03125, 'constraintWeight': 5.0, 'crossingSkinTrianglesInUnit': 11, 'nativeCrossingPairsInUnit': 35, 'selfPairsTouchingUnit': 0, 'contactFaces': 300, 'contactEnergyM2': 8.631495541417003e-05, 'maximumContactViolationM': 0.002244676508475095, 'minimumSampled3DFieldJacobian': 0.06100432891304246, 'maximumBoundaryDisplacementM': 0.0}
+RETRY_CONTACT_WEIGHT 14 5.0 {'contact_energy': 12}
+{'iteration': 15, 'step': 0.25, 'constraintWeight': 25.0, 'crossingSkinTrianglesInUnit': 10, 'nativeCrossingPairsInUnit': 30, 'selfPairsTouchingUnit': 0, 'contactFaces': 273, 'contactEnergyM2': 6.862750234691396e-05, 'maximumContactViolationM': 0.0020626867641694844, 'minimumSampled3DFieldJacobian': 0.06136175643550055, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 16, 'step': 0.0625, 'constraintWeight': 25.0, 'crossingSkinTrianglesInUnit': 10, 'nativeCrossingPairsInUnit': 30, 'selfPairsTouchingUnit': 0, 'contactFaces': 269, 'contactEnergyM2': 6.68412599498167e-05, 'maximumContactViolationM': 0.0020256489966996014, 'minimumSampled3DFieldJacobian': 0.061444462551116595, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 17, 'step': 0.015625, 'constraintWeight': 25.0, 'crossingSkinTrianglesInUnit': 10, 'nativeCrossingPairsInUnit': 30, 'selfPairsTouchingUnit': 0, 'contactFaces': 269, 'contactEnergyM2': 6.640554774811084e-05, 'maximumContactViolationM': 0.002016411499120295, 'minimumSampled3DFieldJacobian': 0.061461996359601624, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 18, 'step': 0.0009765625, 'constraintWeight': 25.0, 'crossingSkinTrianglesInUnit': 10, 'nativeCrossingPairsInUnit': 30, 'selfPairsTouchingUnit': 0, 'contactFaces': 268, 'contactEnergyM2': 6.637848266464395e-05, 'maximumContactViolationM': 0.0020158757558092475, 'minimumSampled3DFieldJacobian': 0.061463472229050437, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 19, 'step': 0.00048828125, 'constraintWeight': 25.0, 'crossingSkinTrianglesInUnit': 10, 'nativeCrossingPairsInUnit': 30, 'selfPairsTouchingUnit': 0, 'contactFaces': 268, 'contactEnergyM2': 6.636630061711666e-05, 'maximumContactViolationM': 0.00201562994485721, 'minimumSampled3DFieldJacobian': 0.06146421009294595, 'maximumBoundaryDisplacementM': 0.0}
+RETRY_CONTACT_WEIGHT 20 25.0 {'self_contact': 12}
+RETRY_CONTACT_WEIGHT 21 125.0 {'self_contact': 11}
+RETRY_CONTACT_WEIGHT 22 625.0 {'self_contact': 11}
+RETRY_CONTACT_WEIGHT 23 3125.0 {'self_contact': 11}
+RETRY_CONTACT_WEIGHT 24 15625.0 {'self_contact': 10}
+RETRY_CONTACT_WEIGHT 25 78125.0 {'self_contact': 9}
+WROTE /Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/AT10/2026-10-14-skin-fit-r5/candidates/fit-r38.json 10 0
+Blender 3.5.0 (hash 1be25cfff18b built 2023-03-29 06:34:18)
+Device with name Apple M5 supports metal minimum requirements
+
+Blender quit

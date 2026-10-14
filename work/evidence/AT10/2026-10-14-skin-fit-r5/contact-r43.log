@@ -1,0 +1,115 @@
+NATIVE 2114537 samples 158017 source unit 1249
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:228: RuntimeWarning: divide by zero encountered in matmul
+  values = np.einsum('qn,no->qo', radius**3, coef[:-4])+np.column_stack([np.ones(len(q)), q])@coef[-4:]
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:228: RuntimeWarning: overflow encountered in matmul
+  values = np.einsum('qn,no->qo', radius**3, coef[:-4])+np.column_stack([np.ones(len(q)), q])@coef[-4:]
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:228: RuntimeWarning: invalid value encountered in matmul
+  values = np.einsum('qn,no->qo', radius**3, coef[:-4])+np.column_stack([np.ones(len(q)), q])@coef[-4:]
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:250: RuntimeWarning: divide by zero encountered in matmul
+  query += phi@coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:250: RuntimeWarning: overflow encountered in matmul
+  query += phi@coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:250: RuntimeWarning: invalid value encountered in matmul
+  query += phi@coefficients
+RESUMED r42 field replay error 1.7639672804223517e-16
+INITIAL 286 native 0 self 493 contact faces 0.00023409440721645892
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:304: RuntimeWarning: divide by zero encountered in matmul
+  basis = phi@null
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:304: RuntimeWarning: overflow encountered in matmul
+  basis = phi@null
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:304: RuntimeWarning: invalid value encountered in matmul
+  basis = phi@null
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:327: RuntimeWarning: divide by zero encountered in matmul
+  regularizer = np.eye(null.shape[1])*.015 + unit_basis.T@unit_basis*.002 + lap_basis.T@lap_basis*3.
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:327: RuntimeWarning: overflow encountered in matmul
+  regularizer = np.eye(null.shape[1])*.015 + unit_basis.T@unit_basis*.002 + lap_basis.T@lap_basis*3.
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:327: RuntimeWarning: invalid value encountered in matmul
+  regularizer = np.eye(null.shape[1])*.015 + unit_basis.T@unit_basis*.002 + lap_basis.T@lap_basis*3.
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:328: RuntimeWarning: divide by zero encountered in matmul
+  system = constraint_weight*(matrix_rows.T@matrix_rows) + np.kron(regularizer, np.eye(3))
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:328: RuntimeWarning: overflow encountered in matmul
+  system = constraint_weight*(matrix_rows.T@matrix_rows) + np.kron(regularizer, np.eye(3))
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:328: RuntimeWarning: invalid value encountered in matmul
+  system = constraint_weight*(matrix_rows.T@matrix_rows) + np.kron(regularizer, np.eye(3))
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:329: RuntimeWarning: divide by zero encountered in matmul
+  target_rhs = constraint_weight*(matrix_rows.T@rhs) - (.002*unit_basis.T@prior_delta+3.*lap_basis.T@lap_prior).ravel()
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:329: RuntimeWarning: overflow encountered in matmul
+  target_rhs = constraint_weight*(matrix_rows.T@rhs) - (.002*unit_basis.T@prior_delta+3.*lap_basis.T@lap_prior).ravel()
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:329: RuntimeWarning: invalid value encountered in matmul
+  target_rhs = constraint_weight*(matrix_rows.T@rhs) - (.002*unit_basis.T@prior_delta+3.*lap_basis.T@lap_prior).ravel()
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:349: RuntimeWarning: divide by zero encountered in matmul
+  active=np.flatnonzero(constraints@coefficients < limits-1e-9).tolist()
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:349: RuntimeWarning: overflow encountered in matmul
+  active=np.flatnonzero(constraints@coefficients < limits-1e-9).tolist()
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:349: RuntimeWarning: invalid value encountered in matmul
+  active=np.flatnonzero(constraints@coefficients < limits-1e-9).tolist()
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:355: RuntimeWarning: divide by zero encountered in matmul
+  gram=aa@inverse
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:355: RuntimeWarning: overflow encountered in matmul
+  gram=aa@inverse
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:355: RuntimeWarning: invalid value encountered in matmul
+  gram=aa@inverse
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:356: RuntimeWarning: divide by zero encountered in matmul
+  multiplier=np.linalg.lstsq(gram,limits[active]-aa@np.linalg.solve(system,target_rhs),rcond=1e-9)[0]
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:356: RuntimeWarning: overflow encountered in matmul
+  multiplier=np.linalg.lstsq(gram,limits[active]-aa@np.linalg.solve(system,target_rhs),rcond=1e-9)[0]
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:356: RuntimeWarning: invalid value encountered in matmul
+  multiplier=np.linalg.lstsq(gram,limits[active]-aa@np.linalg.solve(system,target_rhs),rcond=1e-9)[0]
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:359: RuntimeWarning: divide by zero encountered in matmul
+  coefficients=np.linalg.solve(system,target_rhs)+inverse@multiplier
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:359: RuntimeWarning: overflow encountered in matmul
+  coefficients=np.linalg.solve(system,target_rhs)+inverse@multiplier
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:359: RuntimeWarning: invalid value encountered in matmul
+  coefficients=np.linalg.solve(system,target_rhs)+inverse@multiplier
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:360: RuntimeWarning: divide by zero encountered in matmul
+  violated=np.flatnonzero(constraints@coefficients < limits-1e-8)
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:360: RuntimeWarning: overflow encountered in matmul
+  violated=np.flatnonzero(constraints@coefficients < limits-1e-8)
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:360: RuntimeWarning: invalid value encountered in matmul
+  violated=np.flatnonzero(constraints@coefficients < limits-1e-8)
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:365: RuntimeWarning: divide by zero encountered in matmul
+  raw_coefficients = null@coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:365: RuntimeWarning: overflow encountered in matmul
+  raw_coefficients = null@coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:365: RuntimeWarning: invalid value encountered in matmul
+  raw_coefficients = null@coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:366: RuntimeWarning: divide by zero encountered in matmul
+  delta = phi@raw_coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:366: RuntimeWarning: overflow encountered in matmul
+  delta = phi@raw_coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:366: RuntimeWarning: invalid value encountered in matmul
+  delta = phi@raw_coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:371: RuntimeWarning: divide by zero encountered in matmul
+  qdelta = qphi@raw_coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:371: RuntimeWarning: overflow encountered in matmul
+  qdelta = qphi@raw_coefficients
+/Users/daniel/Downloads/SIM /HUMAN ATLAS/work/tools/fit_at10_skin_contact.py:371: RuntimeWarning: invalid value encountered in matmul
+  qdelta = qphi@raw_coefficients
+RETRY_CONTACT_WEIGHT 0 1.0 {'self_contact': 1, 'contact_energy': 9}
+ADDED_SELF_BARRIERS 1
+RETRY_CONTACT_WEIGHT 1 1.0 {'contact_energy': 10}
+RETRY_CONTACT_WEIGHT 2 5.0 {'self_contact': 6, 'contact_energy': 4}
+ADDED_SELF_BARRIERS 3
+RETRY_CONTACT_WEIGHT 3 5.0 {'self_contact': 1, 'contact_energy': 9}
+{'iteration': 4, 'step': 0.029760645173409, 'constraintWeight': 25.0, 'crossingSkinTrianglesInUnit': 290, 'nativeCrossingPairsInUnit': 712, 'selfPairsTouchingUnit': 0, 'contactFaces': 497, 'contactEnergyM2': 0.00023405079690806102, 'selfSeparationConstraintCount': 350, 'maximumContactViolationM': 0.00229355766158551, 'minimumSampled3DFieldJacobian': 0.11400097870372534, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 5, 'step': 0.03114799036984806, 'constraintWeight': 25.0, 'crossingSkinTrianglesInUnit': 295, 'nativeCrossingPairsInUnit': 715, 'selfPairsTouchingUnit': 0, 'contactFaces': 509, 'contactEnergyM2': 0.00023371387769887772, 'selfSeparationConstraintCount': 368, 'maximumContactViolationM': 0.002288886496797204, 'minimumSampled3DFieldJacobian': 0.11362197082231108, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 6, 'step': 0.003454261865665035, 'constraintWeight': 25.0, 'crossingSkinTrianglesInUnit': 295, 'nativeCrossingPairsInUnit': 715, 'selfPairsTouchingUnit': 0, 'contactFaces': 509, 'contactEnergyM2': 0.0002335447580741742, 'selfSeparationConstraintCount': 367, 'maximumContactViolationM': 0.002288348308764398, 'minimumSampled3DFieldJacobian': 0.11356293941193617, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 7, 'step': 0.001732519402883852, 'constraintWeight': 25.0, 'crossingSkinTrianglesInUnit': 295, 'nativeCrossingPairsInUnit': 713, 'selfPairsTouchingUnit': 0, 'contactFaces': 510, 'contactEnergyM2': 0.00023346056495241916, 'selfSeparationConstraintCount': 381, 'maximumContactViolationM': 0.0022880714731290937, 'minimumSampled3DFieldJacobian': 0.11353334527110397, 'maximumBoundaryDisplacementM': 0.0}
+{'iteration': 8, 'step': 0.0008681842316853192, 'constraintWeight': 25.0, 'crossingSkinTrianglesInUnit': 295, 'nativeCrossingPairsInUnit': 713, 'selfPairsTouchingUnit': 0, 'contactFaces': 511, 'contactEnergyM2': 0.00023342039478004822, 'selfSeparationConstraintCount': 381, 'maximumContactViolationM': 0.0022879342194646597, 'minimumSampled3DFieldJacobian': 0.11351836822869063, 'maximumBoundaryDisplacementM': 0.0}
+RETRY_CONTACT_WEIGHT 9 25.0 {'self_contact': 12}
+ADDED_SELF_BARRIERS 37
+RETRY_CONTACT_WEIGHT 10 25.0 {'self_contact': 12}
+RETRY_CONTACT_WEIGHT 11 125.0 {'self_contact': 12}
+ADDED_SELF_BARRIERS 104
+RETRY_CONTACT_WEIGHT 12 125.0 {'self_contact': 12}
+RETRY_CONTACT_WEIGHT 13 625.0 {'self_contact': 11}
+ADDED_SELF_BARRIERS 110
+RETRY_CONTACT_WEIGHT 14 625.0 {'self_contact': 11}
+RETRY_CONTACT_WEIGHT 15 3125.0 {'self_contact': 10}
+RETRY_CONTACT_WEIGHT 16 15625.0 {'self_contact': 9}
+RETRY_CONTACT_WEIGHT 17 78125.0 {'self_contact': 8}
+WROTE /Users/daniel/Downloads/SIM /HUMAN ATLAS/work/evidence/AT10/2026-10-14-skin-fit-r5/candidates/fit-r43.json 295 0
+Blender 3.5.0 (hash 1be25cfff18b built 2023-03-29 06:34:18)
+Device with name Apple M5 supports metal minimum requirements
+
+Blender quit

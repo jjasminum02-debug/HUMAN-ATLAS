@@ -11,6 +11,10 @@ O=Path(os.environ.get('AT10_SKIN_ARTIFACTS',str(R/'atlas-data/anatomy/skin/at10-
 nativePath=E/'native-surfaces-r1.json'
 if not nativePath.exists():nativePath=R/'work/evidence/AT10/2026-10-13-skin-fit-r1/native-surfaces-r1.json'
 d=json.loads((E/f'candidates/fit-{rev}.json').read_text());native=json.loads(nativePath.read_text())
+tag=os.environ.get('AT10_SKIN_QA_TAG','');suffix=('-'+tag) if tag else ''
+supplement=os.environ.get('AT10_NATIVE_SUPPLEMENT')
+if supplement:
+    extra=json.loads((R/supplement).read_text());assert not set(extra)&set(native);native.update(extra)
 v=np.array(d['positions']);faces=[f['derivedVertices'] for f in d['faces']]
 t=np.array([[f[0],f[i],f[i+1]] for f in faces for i in range(1,len(f)-1)])
 # Geometry in HUMAN ATLAS axes throughout numerical QA. Blender draw conversion only.
@@ -35,17 +39,36 @@ near=[]
 for p in v:
     q,n,idx,dist=bvh.find_nearest(Vector(p));near.append([dist,float((Vector(p)-q).dot(n))])
 near=np.array(near)
-(E/f'candidates/fit-{rev}-distance.json').write_text(json.dumps({'contactPasses':contactPasses,'nearestDistanceP50M':float(np.median(near[:,0])),'nearestDistanceP95M':float(np.percentile(near[:,0],95)),'negativeNormalDistances':int((near[:,1]<-.0005).sum()),'maximumDeformationFromCageM':float(np.linalg.norm(v-original,axis=1).max()),'regionStatistics':{r:{'vertices':int(sum(x==r for x in region)),'distanceP50M':float(np.median(near[np.array(region)==r,0])),'distanceP95M':float(np.percentile(near[np.array(region)==r,0],95)),'negativeNormalDistances':int((near[np.array(region)==r,1]<-.0005).sum())} for r in sorted(set(region))},'limitations':'nearest normal sign is not a closed-volume containment proof; contact correction is a geometric constraint after anatomical cage'},indent=2))
+(E/f'candidates/fit-{rev}{suffix}-distance.json').write_text(json.dumps({'nativeObjects':len(native),'referenceSupplement':supplement,'contactPasses':contactPasses,'nearestDistanceP50M':float(np.median(near[:,0])),'nearestDistanceP95M':float(np.percentile(near[:,0],95)),'negativeNormalDistances':int((near[:,1]<-.0005).sum()),'maximumDeformationFromCageM':float(np.linalg.norm(v-original,axis=1).max()),'regionStatistics':{r:{'vertices':int(sum(x==r for x in region)),'distanceP50M':float(np.median(near[np.array(region)==r,0])),'distanceP95M':float(np.percentile(near[np.array(region)==r,0],95)),'negativeNormalDistances':int((near[np.array(region)==r,1]<-.0005).sum())} for r in sorted(set(region))},'limitations':'nearest normal sign is not a closed-volume containment proof; contact correction is a geometric constraint after anatomical cage'},indent=2))
 bpy.ops.import_scene.gltf(filepath=str(O/f'skin-candidate-{rev}.glb'))
 skin=next(o for o in bpy.context.selected_objects if o.type=='MESH');skin.data.materials[0].diffuse_color=(.57,.37,.24,1)
 print('EMITTED_GLB_IMPORTED',len(skin.data.vertices),len(skin.data.polygons),flush=True)
 # native scene comparison below is exact fixed source geometry
 nat=mesh('ZA-fixed-reference',npv,npt,(.7,.15,.1,1))
+guide_path=os.environ.get('AT10_SKIN_GUIDES')
+if guide_path:
+    guides=json.loads((R/guide_path).read_text())['guides']
+    def line_object(name,points,color,radius):
+        curve=bpy.data.curves.new(name,'CURVE');curve.dimensions='3D';curve.bevel_depth=radius;curve.bevel_resolution=1
+        spline=curve.splines.new('POLY');spline.points.add(len(points)-1)
+        for p,q in zip(spline.points,points):p.co=(float(q[0]),float(-q[2]),float(q[1]),1)
+        obj=bpy.data.objects.new(name,curve);bpy.context.collection.objects.link(obj)
+        material=bpy.data.materials.new(name);material.diffuse_color=color;obj.data.materials.append(material)
+    for i,g in enumerate(guides):
+        point=np.array(g['sourceWeights'])@v[np.array(g['sourceLogicalVertices'])]
+        target=np.array(g['targetPointM'])
+        line_object('source-native-guide-'+str(i),[point,target],(.9,.9,.2,1),.00025)
+    for digits in [[1,2],[2,3],[3,4],[4,5]]:
+        for branch in ['dorsal','plantar']:
+            group=[g for g in guides if g['betweenDigits']==digits and g['branch']==branch]
+            line_object('source-chart-'+str(digits)+branch,[np.array(g['sourceWeights'])@v[np.array(g['sourceLogicalVertices'])] for g in group],(.1,1,.25,1),.00055)
+            line_object('native-chart-'+str(digits)+branch,[g['targetPointM'] for g in group],(.05,.4,1,1),.00055)
 scene=bpy.context.scene;scene.render.engine='BLENDER_WORKBENCH';scene.render.resolution_x=900;scene.render.resolution_y=1000;scene.render.resolution_percentage=100
 scene.display.shading.light='STUDIO';scene.display.shading.studiolight_rotate_z=.3;scene.display.shading.color_type='MATERIAL';scene.display.shading.show_shadows=True;scene.display.shading.show_cavity=True;scene.display.shading.cavity_type='BOTH';scene.display.shading.background_type='WORLD';scene.world.color=(.055,.065,.08)
 scene.view_settings.view_transform='Standard';scene.view_settings.look='Medium High Contrast';scene.render.image_settings.file_format='PNG'
 camera=bpy.data.objects.new('Inspection-camera',bpy.data.cameras.new('Inspection-camera'));scene.collection.objects.link(camera);scene.camera=camera;camera.data.type='ORTHO'
 def render(label,centre,direction,scale,shown):
+    if tag:label=label.replace('emitted-'+rev,'emitted-'+rev+suffix,1)
     c=Vector((centre[0],-centre[2],centre[1]));dr=Vector((direction[0],-direction[2],direction[1]));camera.location=c+dr.normalized()*3;camera.rotation_euler=(c-camera.location).to_track_quat('-Z','Y').to_euler();camera.data.ortho_scale=scale
     skin.hide_render=shown=='native';nat.hide_render=shown=='skin';scene.render.filepath=str(E/'screens'/f'{label}-{shown}.png');bpy.ops.render.render(write_still=True)
 for shown in ([] if '--only' in sys.argv else ['skin','overlay']):

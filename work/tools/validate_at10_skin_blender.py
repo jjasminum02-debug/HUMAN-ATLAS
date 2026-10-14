@@ -19,6 +19,11 @@ if emitted.exists():
 nativePath=E/'native-surfaces-r1.json'
 if not nativePath.exists():nativePath=R/'work/evidence/AT10/2026-10-13-skin-fit-r1/native-surfaces-r1.json'
 native=json.loads(nativePath.read_text());nv=[];nt=[];sources=[];localTriangleIds=[];names={}
+tag=os.environ.get('AT10_SKIN_QA_TAG','');suffix=('-'+tag) if tag else ''
+supplement=os.environ.get('AT10_NATIVE_SUPPLEMENT')
+if supplement:
+    extra=json.loads((R/supplement).read_text());assert not set(extra)&set(native)
+    native.update(extra)
 for key,s in native.items():
     off=len(nv);nv.extend(s['v']);nt.extend([[a+off,b+off,c+off] for a,b,c in s['t']]);sources.extend([key]*len(s['t']));localTriangleIds.extend(range(len(s['t'])));names[key]=s['name']
 print('build bvh',flush=True);skin=BVHTree.FromPolygons(v.tolist(),t.tolist(),all_triangles=True);nb=BVHTree.FromPolygons(nv,nt,all_triangles=True)
@@ -37,7 +42,7 @@ if len(selfPairs):
     for a,b in [(0,1),(1,2),(2,0)]:
         selfHits|=m.SurfaceIndex.crosses(sa[:,a],sa[:,b]-sa[:,a],sb);selfHits|=m.SurfaceIndex.crosses(sb[:,a],sb[:,b]-sb[:,a],sa)
     selfPairs=selfPairs[selfHits]
-out={'revision':rev,'nativeTriangles':len(nt),'skinTriangles':len(t),'sourceTopologyPreserved':True,'exactSegmentTriangleCrossingPairs':len(actual),'crossingSkinTriangles':len(set(actual[:,0].tolist())),'countsByRegion':dict(collections.Counter(regions)),'countsByNativeSurface':dict(collections.Counter(names[sources[i]] for i in actual[:,1])),'sourceVolumeM3':float(np.einsum('ij,ij->i',v[t[:,0]],np.cross(v[t[:,1]],v[t[:,2]])).sum()/6),'crossingSkinTriangleIds':sorted(set(actual[:,0].tolist())),'method':'BVH candidate pairs -> shared nativeSurfaceIntersections Moller-Trumbore edges in both directions; no nearest-normal acceptance','acceptancePassed':False}
+out={'revision':rev,'nativeObjects':len(native),'referenceSupplement':supplement,'nativeTriangles':len(nt),'skinTriangles':len(t),'sourceTopologyPreserved':True,'exactSegmentTriangleCrossingPairs':len(actual),'crossingSkinTriangles':len(set(actual[:,0].tolist())),'countsByRegion':dict(collections.Counter(regions)),'countsByNativeSurface':dict(collections.Counter(names[sources[i]] for i in actual[:,1])),'sourceVolumeM3':float(np.einsum('ij,ij->i',v[t[:,0]],np.cross(v[t[:,1]],v[t[:,2]])).sum()/6),'crossingSkinTriangleIds':sorted(set(actual[:,0].tolist())),'method':'BVH candidate pairs -> shared nativeSurfaceIntersections Moller-Trumbore edges in both directions; no nearest-normal acceptance','acceptancePassed':False}
 probes=[];seen=collections.Counter()
 for si,ni in actual:
     region=str(r[t[si,0]]);key=sources[ni]
@@ -45,7 +50,7 @@ for si,ni in actual:
     seen[region]+=1;verts=t[si]
     faceIndex=int(si//2)
     probes.append({'region':region,'skinTriangle':int(si),'sourceObjFace':d['faces'][faceIndex]['sourceFace'],'sourceVertexIds':[d['originalVertexIds'][int(x)] for x in verts],'skinWorldM':v[verts].tolist(),'nativeSourceKey':key,'nativeName':names[key],'nativeTriangle':localTriangleIds[ni],'nativeWorldM':nv[nt[ni]].tolist(),'finding':'proper segment-triangle crossing; does not establish acupoint location'})
-(E/f'candidates/fit-{rev}-remaining-probes.json').write_text(json.dumps(probes,indent=2)+'\n')
+(E/f'candidates/fit-{rev}{suffix}-remaining-probes.json').write_text(json.dumps(probes,indent=2)+'\n')
 out['emittedGlbSha256']=hashlib.sha256(emitted.read_bytes()).hexdigest() if emitted.exists() else None
 out['uniqueCrossingTrianglesByRegion']={region:len(set(actual[regions==region,0].tolist())) for region in sorted(set(regions))}
 returnVertices=np.zeros(len(v),bool);returnVertices[d.get('sourceReturnVertices',[])]=True
@@ -56,5 +61,5 @@ out['returnCohortExcludedFromTotal']=False
 out['nonAdjacentSelfCrossingPairs']=len(selfPairs)
 out['selfCrossingSkinTriangleIds']=sorted(set(selfPairs.ravel().tolist()))
 out['candidateUnchanged']=candidateHash==hashlib.sha256(candidatePath.read_bytes()).hexdigest();assert out['candidateUnchanged']
-np.savez_compressed(E/f'candidates/fit-{rev}-contact-addresses.npz',skinTriangle=actual[:,0],nativeSourceIndex=np.array([list(native).index(sources[i]) for i in actual[:,1]]),nativeLocalTriangle=np.array([localTriangleIds[i] for i in actual[:,1]]),nativeSourceKeys=np.array(list(native)),selfCrossingTrianglePairs=selfPairs)
-(E/f'candidates/fit-{rev}-intersections.json').write_text(json.dumps(out,indent=2)+'\n');print(out['countsByRegion'],flush=True)
+np.savez_compressed(E/f'candidates/fit-{rev}{suffix}-contact-addresses.npz',skinTriangle=actual[:,0],nativeSourceIndex=np.array([list(native).index(sources[i]) for i in actual[:,1]]),nativeLocalTriangle=np.array([localTriangleIds[i] for i in actual[:,1]]),nativeSourceKeys=np.array(list(native)),selfCrossingTrianglePairs=selfPairs)
+(E/f'candidates/fit-{rev}{suffix}-intersections.json').write_text(json.dumps(out,indent=2)+'\n');print(out['countsByRegion'],flush=True)
