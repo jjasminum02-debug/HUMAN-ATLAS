@@ -1,7 +1,7 @@
 import type { SkinAsset } from './skinContract.ts';
 /** DEV-only checkpoints and scoped foot candidates. No entry approves a whole skin. */
-export async function skinReviewAsset(datasetRevision:string):Promise<SkinAsset> {
-  const requested=new URLSearchParams(window.location.search).get('skinCandidate');
+export async function skinReviewAsset(datasetRevision:string,params:URLSearchParams):Promise<SkinAsset> {
+  const requested=params.get('skinCandidate');
   const revision=requested==='f2c3'||requested==='f2c2'||requested==='f2c1'||requested==='f1c7'||requested==='f1c4'||requested==='f1c5'||requested==='f1c1'||requested==='r56'||requested==='r58'?requested:'r41';
   const candidate=revision==='f2c3'?{
     url:(await import('../../../../atlas-data/anatomy/skin/at10-f2-left-foot-r1/skin-candidate-f2c3.glb?url')).default,
@@ -44,7 +44,9 @@ export async function skinReviewAsset(datasetRevision:string):Promise<SkinAsset>
     sha256:'4eb7dd0b75d510cb3f6f4f249de549bc3ec5c6f59feb6880c7261a86d967b529',
     topologySha256:'6980bfdf6a90a1a1bcf23d7462b0c3645f2b5e7ad50a28a93ab555e9d6cc9d14',mappingSha256:'271193d59f2e80f1cff32a476d9b214f2d6088cd10ec7af2d16f0d7b5d4c85ff',
   };
-  return {schemaVersion:1,id:`at10-skin-${revision}-review-only`,revision:revision.startsWith('f')?revision:revision+'p1',datasetRevision,...candidate,
+  const appearance=revision==='f2c3' && params.get('skinAppearance')==='v1'
+    ? (await import('./skinAppearanceReview.ts')).skinAppearanceReview : undefined;
+  return {appearance,schemaVersion:1,id:`at10-skin-${revision}-review-only`,revision:revision.startsWith('f')?revision:revision+'p1',datasetRevision,...candidate,
     bytes:626576,geometryBytes:625080,triangles:26756,
     frameId:'HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR',unit:'m',poseId:'ZA-9f08a17ea0115fed-frame0-autoexec-off',
     geometryAccepted:false,learnerEligible:false,landmarkRevision:null,localObservation:'supported',publicRedistribution:'held',author:'ai',professorReview:'not_performed',staticPoseOnly:true};

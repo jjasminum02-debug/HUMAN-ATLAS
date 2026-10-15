@@ -1,3 +1,4 @@
+import { loadSkinMaterial, disposeSkinMaterial, validateSkinMaterial } from './skinMaterial.ts';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import type { DatasetSceneAdapter } from '../datasets/DatasetSceneAdapter.ts';
@@ -10,7 +11,7 @@ const digest = async (b: ArrayBuffer) => [...new Uint8Array(await crypto.subtle.
 const disposeGroup = (group: THREE.Object3D) => {
   const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>();
   group.traverse(o=>{if(o instanceof THREE.Mesh){geometries.add(o.geometry);(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>materials.add(m));}});
-  geometries.forEach(g=>g.dispose()); materials.forEach(m=>m.dispose()); group.removeFromParent();
+  geometries.forEach(g=>g.dispose()); materials.forEach(m=>disposeSkinMaterial(m)); group.removeFromParent();
 };
 /** One immutable reference topology, no LOD substitution or pose/scale conversion at runtime. */
 export async function decodeSkin(bytes: ArrayBuffer, asset: SkinAsset, review = false) {
@@ -54,11 +55,13 @@ export class SkinLayer {
   private request:AbortController|null=null;
   private surface:Awaited<ReturnType<typeof decodeSkin>>|null=null;
   private dead=false;
+  private loadMs=0;
   private extra:SkinCost={encodedBytes:0,geometryBytes:0,triangles:0};
   private listeners=new Set<()=>void>();
   private removeMotion:()=>void;
   constructor(private adapter:DatasetSceneAdapter,readonly asset:SkinAsset,private review=false) {
     if(skinLayers.has(adapter))throw Error('Only one skin layer per anatomy scene');
+    if(asset.appearance)validateSkinMaterial(asset.appearance,asset.sha256);
     const d=adapter.resources.dataset;validateSkinAsset(asset,{datasetRevision:d.revision,frameId:d.frameContract?.targetFrameId??'',unit:d.unit,poseId:d.frameContract?.staticReferencePose?.id??''},review);
     skinLayers.set(adapter,this);this.removeMotion=adapter.onSourceMotionStart(()=>this.off());
     this.extra=skinReservationCost(adapter);
@@ -80,17 +83,26 @@ export class SkinLayer {
   async on() {
     if(this.dead || this.surface)return;
     this.off();const token=++this.generation,abort=new AbortController();this.request=abort;
+    const started=performance.now();
     const cancelled=()=>this.dead||abort.signal.aborted||token!==this.generation;
     try {
       if(this.adapter.resources.motionOverrides.size || this.adapter.scene.cameraOwner==='motion')throw Error('피부는 복원된 정지 자세에서만 표시할 수 있습니다.');
-      const declared={encodedBytes:this.asset.bytes,geometryBytes:this.asset.geometryBytes,triangles:this.asset.triangles};
+      const appearance=this.asset.appearance;
+      const declared={encodedBytes:this.asset.bytes+(appearance?.encodedBytes??0),geometryBytes:this.asset.geometryBytes,triangles:this.asset.triangles,textureBytes:appearance?.textureBytes??0};
       if(!skinWithinBudget(this.baseCost(),declared,this.extra))throw Error('피부가 기존 장면 예산을 초과합니다.');
       this.inspect('loading');const response=await fetch(this.asset.url,{signal:abort.signal});if(!response.ok)throw Error('피부 자료를 읽을 수 없습니다.');
       const bytes=await response.arrayBuffer();if(cancelled())return;
       const decoded=await decodeSkin(bytes,this.asset,this.review);
+      if(appearance) {
+        try {
+          const material=await loadSkinMaterial(appearance,this.asset.sha256,decoded.mesh.geometry.getAttribute('uv') as THREE.BufferAttribute,abort.signal);
+          disposeSkinMaterial(decoded.mesh.material);decoded.mesh.material=material;
+          decoded.cost={...declared};
+        } catch(error){disposeGroup(decoded.mesh);throw error;}
+      }
       if(cancelled() || this.adapter.resources.motionOverrides.size || this.adapter.scene.cameraOwner==='motion'){disposeGroup(decoded.mesh);return;}
       if(!skinWithinBudget(this.baseCost(),decoded.cost,this.extra)){disposeGroup(decoded.mesh);throw Error('피부가 기존 장면 예산을 초과합니다.');}
-      this.surface=decoded;this.adapter.scene.root.add(decoded.mesh);this.inspect('on');this.changed();
+      this.surface=decoded;this.loadMs=performance.now()-started;this.adapter.scene.root.add(decoded.mesh);this.inspect('on');this.changed();
     } catch(error) {if(!cancelled()){this.inspect('error');throw error;}}
     finally {if(!cancelled())this.request=null;}
   }
@@ -106,7 +118,7 @@ export class SkinLayer {
   };
   private changed(){this.adapter.scene.requestRender();for(const listener of this.listeners)listener();}
   private inspect(state:string) {
-    this.adapter.scene.renderer.domElement.dataset.skinLayer=JSON.stringify({state,root:this.adapter.scene.root.uuid,review:this.review,learnerEligible:!this.review&&this.asset.learnerEligible,assetHash:this.asset.sha256,topologyHash:this.asset.topologySha256,pose:this.asset.poseId,cost:this.surface?.cost??{encodedBytes:0,geometryBytes:0,triangles:0},extra:this.extra,frameCallbacks:0});
+    this.adapter.scene.renderer.domElement.dataset.skinLayer=JSON.stringify({state,camera:this.adapter.scene.cameraState?.(),loadMs:this.loadMs,baseCost:this.baseCost(),root:this.adapter.scene.root.uuid,review:this.review,learnerEligible:!this.review&&this.asset.learnerEligible,assetHash:this.asset.sha256,topologyHash:this.asset.topologySha256,pose:this.asset.poseId,appearance:this.asset.appearance?.id??null,textures:this.surface?.mesh.material.userData.skinTextures?.length??0,cost:this.surface?.cost??{encodedBytes:0,geometryBytes:0,triangles:0},extra:this.extra,frameCallbacks:0});
   }
   dispose(){if(this.dead)return;this.off();this.dead=true;this.removeMotion();this.adapter.scene.renderer.domElement.removeEventListener('webglcontextlost',this.off);this.listeners.clear();skinLayers.delete(this.adapter);delete this.adapter.scene.renderer.domElement.dataset.skinLayer;}
 }

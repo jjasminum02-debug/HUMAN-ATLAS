@@ -7918,9 +7918,9 @@
           "R2",
           "C1"
         ],
-        "nextUnit": "V1",
-        "nextPrompt": "work/plans/skin-quality-completion-2026-10-15/01-V1-SKIN-APPEARANCE.txt",
-        "status": "planned",
+        "nextUnit": "F3",
+        "nextPrompt": "work/plans/skin-quality-completion-2026-10-15/02-F3-HEAD-EAR-NECK.txt",
+        "status": "in_progress",
         "autoRunNext": false,
         "preservedGeometryResults": [
           "F1 f1c7",
@@ -7929,10 +7929,23 @@
         ],
         "units": {
           "V1": {
-            "status": "planned",
+            "status": "partial_visual_quality_rejected",
             "owner": "Sol xhigh",
             "prompt": "work/plans/skin-quality-completion-2026-10-15/01-V1-SKIN-APPEARANCE.txt",
-            "requires": []
+            "requires": [],
+            "technicalImplementation": "passed",
+            "appearanceAcceptance": false,
+            "userVisualReview": "rejected_2026-10-15",
+            "report": "work/reports/AT10-skin-appearance-v1-2026-10-15.md",
+            "evidence": "work/evidence/AT10/2026-10-15-v1-appearance",
+            "geometryInputSha256": "07ab569e3a3a3453ed825e9bc583869394e5e94babdee7edec6b6c437836586f",
+            "materialManifest": "atlas-data/anatomy/skin/at10-appearance-v1/material.json",
+            "remaining": [
+              "F3 face-neck silhouette and exposed eyes/mouth",
+              "F4 torso and shoulder proportions/continuity",
+              "V2 hand/foot silhouette, UV stretch, photographic shading and regional nail material"
+            ],
+            "blocksF3": false
           },
           "F3": {
             "status": "planned",
@@ -7989,7 +8002,7 @@
             ]
           }
         },
-        "planningOnly": true,
+        "planningOnly": false,
         "historicalPreflightNotCurrent": [
           "skinFit.f2Preflight",
           "skinFit.f3Preflight"

@@ -5,7 +5,7 @@ import type { SkinCost } from './skinContract.ts';
 export const skinLayers = new WeakMap<DatasetSceneAdapter, SkinLayer>();
 const reservations = new WeakMap<DatasetSceneAdapter, Map<object,SkinCost>>();
 export function skinReservationCost(adapter:DatasetSceneAdapter):SkinCost {
-  return [...reservations.get(adapter)?.values()??[]].reduce((a,b)=>({encodedBytes:a.encodedBytes+b.encodedBytes,geometryBytes:a.geometryBytes+b.geometryBytes,triangles:a.triangles+b.triangles}),{encodedBytes:0,geometryBytes:0,triangles:0});
+  return [...reservations.get(adapter)?.values()??[]].reduce((a,b)=>({encodedBytes:a.encodedBytes+b.encodedBytes,geometryBytes:a.geometryBytes+b.geometryBytes,triangles:a.triangles+b.triangles,textureBytes:(a.textureBytes??0)+(b.textureBytes??0)}),{encodedBytes:0,geometryBytes:0,triangles:0});
 }
 export function reserveSkinResidency(adapter:DatasetSceneAdapter,owner:object,cost:SkinCost|null) {
   let values=reservations.get(adapter);if(!values){values=new Map();reservations.set(adapter,values);}

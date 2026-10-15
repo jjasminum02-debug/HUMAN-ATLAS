@@ -4,7 +4,8 @@ import type { SkinLayer } from './SkinLayer.ts';
 import { registeredSkin } from './skinContract.ts';
 import { SkinLayerState } from './skinState.ts';
 
-const review = import.meta.env.DEV && new URLSearchParams(window.location.search).get('skinReview')==='1';
+const reviewParams = new URLSearchParams(window.location.search);
+const review = import.meta.env.DEV && reviewParams.get('skinReview')==='1';
 export default function SkinControls({adapter,acupoints}:{adapter:DatasetSceneAdapter;acupoints:boolean}) {
   const state=useRef(new SkinLayerState()),layer=useRef<SkinLayer|null>(null),generation=useRef(0);
   const unsubscribe=useRef<(()=>void)|null>(null);
@@ -17,7 +18,7 @@ export default function SkinControls({adapter,acupoints}:{adapter:DatasetSceneAd
     try {
       if(!layer.current){
         const module=await import('./SkinLayer.ts');
-        const asset=registeredSkin??(import.meta.env.DEV&&review?await (await import('./skinReviewAsset.ts')).skinReviewAsset(adapter.resources.dataset.revision):null);
+        const asset=registeredSkin??(import.meta.env.DEV&&review?await (await import('./skinReviewAsset.ts')).skinReviewAsset(adapter.resources.dataset.revision,reviewParams):null);
         if(token!==generation.current||!asset)return;
         layer.current=new module.SkinLayer(adapter,asset,review);
         unsubscribe.current=layer.current.subscribe(()=>setVisible(layer.current?.visible??false));
