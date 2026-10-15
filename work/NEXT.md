@@ -38,3 +38,9 @@ AGENTS.md, work/NEXT.md, work/EXECUTION.json, work/product-acceptance.json, T66 
 
 종료 후 wave1 worker A/B/C/F의 네 파일02·03·04·05를 동시에 수동 실행하도록 안내하고 멈춰라. 자동 worker/thread는 만들지 않는다. run-manifest를 실제 만들지 못했으면 불가 원인/수정만 구체적으로 남기고 worker-ready라고 하지 않는다.
 ```
+
+## 기능 확장 — acupoint-at-361
+
+- 다음: **AT10/F3**
+- 현재 실행문: [work/evidence/AT10/2026-10-15-f3-head-r1/NEXT-F3.md](../work/evidence/AT10/2026-10-15-f3-head-r1/NEXT-F3.md)
+- 이 기능의 실제 선행 결과를 사용한다. 기본 앱 큐 완료는 기능 확장 완료가 아니다. 자동 실행하지 않는다.

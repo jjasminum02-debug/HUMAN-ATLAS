@@ -10,6 +10,7 @@
 - NEXT_PROMPT: work/NEXT.md
 - CURRENT_GOAL: 현재 지원 앱 통합 → 사용 감사/보완 → UI·실측 성능 완성. 전체 콘텐츠 completeness는 별도 보고. 이후 설명→신경→모션.
 - HISTORY: 아래 기존 보고/상태와 work/evidence/*의 nextTask는 당시 snapshot이며 실행 지시가 아니다.
+- FEATURE_NEXT: acupoint-at-361 / AT10/F3 / work/evidence/AT10/2026-10-15-f3-head-r1/NEXT-F3.md
 <!-- END GENERATED EXECUTION -->
 
 # 진행 상태 — HUMAN ATLAS

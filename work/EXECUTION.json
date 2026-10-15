@@ -7919,7 +7919,7 @@
           "C1"
         ],
         "nextUnit": "F3",
-        "nextPrompt": "work/plans/skin-quality-completion-2026-10-15/02-F3-HEAD-EAR-NECK.txt",
+        "nextPrompt": "work/evidence/AT10/2026-10-15-f3-head-r1/NEXT-F3.md",
         "status": "in_progress",
         "autoRunNext": false,
         "preservedGeometryResults": [
@@ -7948,10 +7948,43 @@
             "blocksF3": false
           },
           "F3": {
-            "status": "planned",
+            "status": "partial_geometry_visual_not_accepted",
             "owner": "Sol xhigh",
             "prompt": "work/plans/skin-quality-completion-2026-10-15/02-F3-HEAD-EAR-NECK.txt",
-            "requires": []
+            "requires": [],
+            "acceptancePassed": false,
+            "geometryAccepted": false,
+            "appearanceAccepted": false,
+            "report": "work/reports/AT10-skin-fit-f3-2026-10-15-r1.md",
+            "evidence": "work/evidence/AT10/2026-10-15-f3-head-r1",
+            "manifest": "work/evidence/AT10/2026-10-15-f3-head-r1/manifest.json",
+            "resumePrompt": "work/evidence/AT10/2026-10-15-f3-head-r1/NEXT-F3.md",
+            "result": {
+              "reviewCandidate": "f3c11",
+              "reviewCandidateSha256": "0999bebef773bd842f93429a8b183ea397dc8011bf47cec2c579aec6a73b30da",
+              "sourceCoreFacePinnaNeckModified": true,
+              "nativeOcularSurfaceDisplay": "existing root, source-bound component package",
+              "localNativeCrossingTriangles": 1703,
+              "localSelfCrossingPairs": 0,
+              "wholeRawNativeCrossingTriangles": 2954,
+              "wholeRawSelfCrossingPairs": 536,
+              "minimumSampled3DDeterminant": 0.04595561984187562,
+              "byteExactReproduction": true,
+              "outsidePatchVerticesExact": 8866,
+              "bothHandsFeetPreserved": true,
+              "sharedBoundaryGapM": 0,
+              "sharedBoundaryMaximumDihedralChangeDeg": 97.0803557138652,
+              "latestAttempt": "f3c12",
+              "latestAttemptAccepted": false,
+              "latestAttemptReason": "Original seam angle difference0 and raw native1514 locally, but actual neutral side shows a new folded collar transition. Not adopted.",
+              "remainingUnits": "work/evidence/AT10/2026-10-15-f3-head-r1/remaining-units-final.json",
+              "learnerEligible": false,
+              "newAcupointLocationsApproved": 0,
+              "professorReview": "not_performed",
+              "publicRedistribution": "held",
+              "sourceMissing": false,
+              "autoRunNext": false
+            }
           },
           "F4": {
             "status": "planned",

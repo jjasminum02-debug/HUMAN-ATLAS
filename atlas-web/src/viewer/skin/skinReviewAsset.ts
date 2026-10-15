@@ -2,8 +2,13 @@ import type { SkinAsset } from './skinContract.ts';
 /** DEV-only checkpoints and scoped foot candidates. No entry approves a whole skin. */
 export async function skinReviewAsset(datasetRevision:string,params:URLSearchParams):Promise<SkinAsset> {
   const requested=params.get('skinCandidate');
-  const revision=requested==='f2c3'||requested==='f2c2'||requested==='f2c1'||requested==='f1c7'||requested==='f1c4'||requested==='f1c5'||requested==='f1c1'||requested==='r56'||requested==='r58'?requested:'r41';
-  const candidate=revision==='f2c3'?{
+  const revision=requested==='f3c11'||requested==='f2c3'||requested==='f2c2'||requested==='f2c1'||requested==='f1c7'||requested==='f1c4'||requested==='f1c5'||requested==='f1c1'||requested==='r56'||requested==='r58'?requested:'r41';
+  const candidate=revision==='f3c11'?{
+    url:(await import('../../../../atlas-data/anatomy/skin/at10-f3-head-r1/skin-candidate-f3c11.glb?url')).default,
+    sha256:'0999bebef773bd842f93429a8b183ea397dc8011bf47cec2c579aec6a73b30da',topologySha256:'5431c6545e12ed5a5abe47f836ce8536579fa5de67e7d3fd73ccc115a098a1b5',mappingSha256:'4129f5dfac7bb3eacedb2c21e4ff75d4c9990dd132c8651a1f6a936b0e8c3fc5',
+    appearanceBinding:(await import('../../../../atlas-data/anatomy/skin/at10-f3-head-r1/material-f3c11.json')).default,
+    components:{...(await import('../../../../atlas-data/anatomy/skin/at10-f3-head-r1/ocular-components-r1.json')).default,datasetRevision,url:(await import('../../../../atlas-data/anatomy/skin/at10-f3-head-r1/ocular-components-r1.glb?url')).default,unit:'m' as const},
+  }:revision==='f2c3'?{
     url:(await import('../../../../atlas-data/anatomy/skin/at10-f2-left-foot-r1/skin-candidate-f2c3.glb?url')).default,
     sha256:'07ab569e3a3a3453ed825e9bc583869394e5e94babdee7edec6b6c437836586f',
     topologySha256:'34146f987e073e14863c91e0d8003356b1a42235e82f9684611965a140a6d4b2',mappingSha256:'61f329005c20aa523877b0817b1121be39abf0fa7071a6f4e77d3498d6ed3c70',
@@ -44,8 +49,8 @@ export async function skinReviewAsset(datasetRevision:string,params:URLSearchPar
     sha256:'4eb7dd0b75d510cb3f6f4f249de549bc3ec5c6f59feb6880c7261a86d967b529',
     topologySha256:'6980bfdf6a90a1a1bcf23d7462b0c3645f2b5e7ad50a28a93ab555e9d6cc9d14',mappingSha256:'271193d59f2e80f1cff32a476d9b214f2d6088cd10ec7af2d16f0d7b5d4c85ff',
   };
-  const appearance=revision==='f2c3' && params.get('skinAppearance')==='v1'
-    ? (await import('./skinAppearanceReview.ts')).skinAppearanceReview : undefined;
+  const appearance=params.get('skinAppearance')==='v1' && (revision==='f2c3'||'appearanceBinding' in candidate)
+    ? (await import('./skinAppearanceReview.ts')).skinAppearanceReviewFor('appearanceBinding' in candidate?candidate.appearanceBinding:undefined) : undefined;
   return {appearance,schemaVersion:1,id:`at10-skin-${revision}-review-only`,revision:revision.startsWith('f')?revision:revision+'p1',datasetRevision,...candidate,
     bytes:626576,geometryBytes:625080,triangles:26756,
     frameId:'HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR',unit:'m',poseId:'ZA-9f08a17ea0115fed-frame0-autoexec-off',

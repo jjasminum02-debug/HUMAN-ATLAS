@@ -10,13 +10,15 @@ def landmark_flow_operator(recipe):
         assert np.isfinite(sigma).all() and (sigma>0).all() and np.isfinite(coefficient).all()
         assert (np.linalg.norm(coefficient,axis=1)/(np.sqrt(np.e)*sigma)).sum()<1
     def evaluate(points):
-        values=np.asarray(points)@affine.T+translation;jac=np.tile(affine,(len(values),1,1))
+        values,jac=landmark_flow_operator(recipe['initialField'])(points) if 'initialField' in recipe else (np.asarray(points)@affine.T+translation,np.tile(affine,(len(points),1,1)))
         for centres,sigma,coefficient in stages:
             delta=values[:,None,:]-centres[None,:,:]
             phi=np.exp(-np.einsum('qci,qci->qc',delta,delta)/(2*sigma**2))
             derivative=-phi[:,:,None]*delta/sigma[None,:,None]**2
             gradient=np.eye(3)+np.einsum('ci,qcj->qij',coefficient,derivative)
             jac=gradient@jac;values+=phi@coefficient
+        for field in recipe.get('postFields',[]):
+            values,g=regional_shape_operator(field)(values);jac=g@jac
         return values,jac
     return evaluate
 
@@ -33,4 +35,46 @@ def cubic_operator(centers, targets, regularization, scale=.1):
             values.append(np.einsum('qn,no->qo',radius**3,coefficient[:-4])+np.column_stack([np.ones(len(q)),q])@coefficient[-4:])
             derivatives.append((np.einsum('qnk,no->qok',3*radius[:,:,None]*delta,coefficient[:-4])+coefficient[-3:].T)/scale)
         return np.concatenate(values),np.concatenate(derivatives)
+    return evaluate
+
+def solve_landmark_flow(controls, *, initial_affine=None, initial_translation=None, max_stages=1800, tolerance=1e-8):
+    """Shared offline source-bound solve; every accepted 3D increment has ||Du||<1.
+
+    Targets are explicitly authored before this numerical tool. It makes no
+    anatomical, topology, surface containment or visual acceptance decision.
+    """
+    x=np.asarray([c['source'] for c in controls]);target=np.asarray([c['target'] for c in controls]);base_sigma=np.asarray([c['sigmaM'] for c in controls])
+    if initial_affine is None:
+        affine=np.linalg.lstsq(np.c_[x,np.ones(len(x))],target,rcond=None)[0];a=affine[:3].T;b=affine[3]
+    else:a=np.asarray(initial_affine);b=np.asarray(initial_translation)
+    assert np.linalg.det(a)>0 and np.isfinite(a).all() and (base_sigma>0).all()
+    current=x@a.T+b;stages=[]
+    for step in range(max_stages):
+        residual=target-current;error=float(np.linalg.norm(residual,axis=1).max())
+        if error<tolerance:break
+        delta=current[:,None,:]-current[None,:,:]
+        nearest=np.sqrt((delta**2).sum(2)+np.eye(len(x))*100).min(1)
+        sigma=np.minimum(base_sigma,np.maximum(nearest*.85,base_sigma/(2**(step//250))))
+        kernel=np.exp(-(delta**2).sum(2)/(2*sigma[None,:]**2));coefficient=np.linalg.solve(kernel+np.eye(len(kernel))*.001,residual)
+        bound=float((np.linalg.norm(coefficient,axis=1)/(np.sqrt(np.e)*sigma)).sum());alpha=min(1.,.30/max(bound,1e-20));coefficient*=alpha
+        stages.append({'centres':current.tolist(),'sigmaM':sigma.tolist(),'coefficients':coefficient.tolist(),'globalDisplacementLipschitzBound':alpha*bound});current+=kernel@coefficient
+        if step%100==0:print('FLOW',step,'residual',error,flush=True)
+    return {'method':'proper initial 3D map + Lipschitz-bounded Gaussian landmark flow','controls':controls,'affine':a.tolist(),'translation':b.tolist(),'stages':stages,'maximumControlResidualM':float(np.linalg.norm(target-current,axis=1).max()),'sourceMeaningNotApprovedBySolver':True}
+
+def regional_shape_operator(field):
+    """Analytic bounded local correction; containment aid, not a landmark claim."""
+    centre=np.asarray(field['centreM']);sigma=float(field['sigmaM']);assert sigma>0
+    if field['kind']=='gaussian_translation':
+        shift=np.asarray(field['translationM']);bound=np.linalg.norm(shift)/(np.sqrt(np.e)*sigma)
+    else:
+        assert field['kind']=='regional_affine';scale=np.asarray(field['linearDisplacement']);lo,hi=field['axialWindowY'];assert hi>lo
+        bound=np.max(abs(scale))*(1+2/np.e+1.5/(hi-lo)*sigma/np.sqrt(np.e))
+    assert bound<1 and abs(bound-field['globalDisplacementLipschitzBound'])<1e-10
+    def evaluate(points):
+        p=np.asarray(points);d=p-centre;phi=np.exp(-np.einsum('ij,ij->i',d,d)/(2*sigma*sigma));gradient=-phi[:,None]*d/(sigma*sigma)
+        if field['kind']=='gaussian_translation':u=phi[:,None]*shift;du=np.einsum('i,pj->pij',shift,gradient)
+        else:
+            t=np.clip((p[:,1]-lo)/(hi-lo),0,1);w=t*t*(3-2*t);dw=6*t*(1-t)/(hi-lo);radial=d*scale;factor=w*phi;gf=w[:,None]*gradient;gf[:,1]+=dw*phi
+            u=factor[:,None]*radial;du=np.einsum('pi,pj->pij',radial,gf)+factor[:,None,None]*np.diag(scale)[None]
+        return p+u,np.eye(3)[None]+du
     return evaluate

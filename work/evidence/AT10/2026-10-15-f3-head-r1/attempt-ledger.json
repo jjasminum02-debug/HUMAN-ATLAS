@@ -1,0 +1,129 @@
+{
+  "reviewCandidate": "f3c11",
+  "latestAttemptNotFinal": "f3c12",
+  "originalInputsReused": true,
+  "noReattemptCountOrElapsedTimeAcceptance": true,
+  "attempts": [
+    {
+      "revision": "f3c1",
+      "method": "Original core face + old sparse pinna controls",
+      "decision": "Rejected: actual pointed ears and broad cranial/native protrusion.",
+      "acceptancePassed": false,
+      "glb": "atlas-data/anatomy/skin/at10-f3-head-r1/skin-candidate-f3c1.glb",
+      "sha256": "67f43448ac3fe654b6f80169de47a5defbe743f0a28c5fa9eaba944f833a9867",
+      "bytes": 626576,
+      "rawNativeTriangles": 3790,
+      "rawSelfPairs": 536
+    },
+    {
+      "revision": "f3c2",
+      "method": "Actual scalp/neck sector support + distributed original pinna shape",
+      "decision": "Rejected: sparse sector targets gave lumpy cranial profile; local contacts remained.",
+      "acceptancePassed": false,
+      "glb": "atlas-data/anatomy/skin/at10-f3-head-r1/skin-candidate-f3c2.glb",
+      "sha256": "f44cc379b3c5ac7ce28eaa296b00e7232fb1558426f9393897aa6365e9a98189",
+      "bytes": 626576,
+      "rawNativeTriangles": 3513,
+      "rawSelfPairs": 591
+    },
+    {
+      "revision": "f3c3",
+      "method": "Distributed scalp shape + old F2 neck constraints",
+      "decision": "Rejected before export: inconsistent close controls; about98mm residual at collar.",
+      "acceptancePassed": false
+    },
+    {
+      "revision": "f3c4",
+      "method": "Removed duplicate controls and mislabeled chin/neck overlap",
+      "decision": "Review only: face/ocular display improved, but original broad neck and native defects remained.",
+      "acceptancePassed": false,
+      "glb": "atlas-data/anatomy/skin/at10-f3-head-r1/skin-candidate-f3c4.glb",
+      "sha256": "ebefcc10d8fcf4d42a0d3f45e475846c7df0674aae4687d3475942a5e5b9bb2f",
+      "bytes": 626576
+    },
+    {
+      "revision": "f3c5",
+      "method": "Shared collision-aware native containment solve on c4",
+      "decision": "Interrupted, no emitted final. Full native samples and source return semantics did not give a resolved natural solution; five recorded increments are not a pass.",
+      "acceptancePassed": false
+    },
+    {
+      "revision": "f3c6",
+      "method": "Actual superficial neck chart plus source face/pinna shape",
+      "decision": "Useful parent: thinner neck/source face; cranial/native and pinna relation unresolved.",
+      "acceptancePassed": false,
+      "glb": "atlas-data/anatomy/skin/at10-f3-head-r1/skin-candidate-f3c6.glb",
+      "sha256": "8bd6817bc9a774a7b518a66d840f1d795c25bec553a4191e166f7bcae8a8fc25",
+      "bytes": 626576,
+      "rawNativeTriangles": 3275,
+      "rawSelfPairs": 536
+    },
+    {
+      "revision": "f3c7",
+      "method": "Continuous monotone axial whole-head shape chart",
+      "decision": "Rejected actual app: cheek and forehead proportions worsened, despite fewer crossing triangles.",
+      "acceptancePassed": false,
+      "glb": "atlas-data/anatomy/skin/at10-f3-head-r1/skin-candidate-f3c7.glb",
+      "sha256": "fc9f0c18ac213ccb21eedb83363250e6b9ee87297de41c60ef6cb4ef60ab15e1",
+      "bytes": 626576,
+      "rawNativeTriangles": 2753,
+      "rawSelfPairs": 536
+    },
+    {
+      "revision": "f3c8",
+      "method": "Bounded local cranial and coherent pinna support corrections on c6",
+      "decision": "Useful parent only, nasal bridge and ocular relation unresolved.",
+      "acceptancePassed": false,
+      "glb": "atlas-data/anatomy/skin/at10-f3-head-r1/skin-candidate-f3c8.glb",
+      "sha256": "fd3f9e0edd12d862caa9583e2632b2ac5286913b57126b29b5c144035a647b9b",
+      "bytes": 626576,
+      "rawNativeTriangles": 3120,
+      "rawSelfPairs": 536
+    },
+    {
+      "revision": "f3c9",
+      "method": "Addressed nasal/ocular relation first correction",
+      "decision": "Review only: nasal witness cohort selected too high; actual triangle addresses located remaining lower bridge defect.",
+      "acceptancePassed": false,
+      "glb": "atlas-data/anatomy/skin/at10-f3-head-r1/skin-candidate-f3c9.glb",
+      "sha256": "82b55f5b3211176739d730e19f226a2c7a0525950703ba6fe41478b3e6908b7b",
+      "bytes": 626576,
+      "rawNativeTriangles": 3103,
+      "rawSelfPairs": 536
+    },
+    {
+      "revision": "f3c10",
+      "method": "Actual lower nasal bridge and side-specific palpebral surface support",
+      "decision": "Useful face parent; full pinna still pointed at attachment.",
+      "acceptancePassed": false,
+      "glb": "atlas-data/anatomy/skin/at10-f3-head-r1/skin-candidate-f3c10.glb",
+      "sha256": "3a97c09990390240ba02f263fd31123838503fbb21fde553e58f498962dcea59",
+      "bytes": 626576,
+      "rawNativeTriangles": 3035,
+      "rawSelfPairs": 536
+    },
+    {
+      "revision": "f3c11",
+      "method": "Whole original pinna fold restoration with shared positive field",
+      "decision": "Selected DEV review only. Natural ear shape improved; local native1703, self0, shared collar dihedral change97.08deg and appearance failures remain.",
+      "acceptancePassed": false,
+      "glb": "atlas-data/anatomy/skin/at10-f3-head-r1/skin-candidate-f3c11.glb",
+      "sha256": "0999bebef773bd842f93429a8b183ea397dc8011bf47cec2c579aec6a73b30da",
+      "bytes": 626576,
+      "rawNativeTriangles": 2954,
+      "rawSelfPairs": 536
+    },
+    {
+      "revision": "f3c12",
+      "method": "Two interior source collar rings restored, 158 fixed vertices",
+      "decision": "Rejected actual neutral side: rolled/folded collar. Boundary dihedral change0 and local native1514 do not approve the candidate.",
+      "acceptancePassed": false,
+      "glb": "atlas-data/anatomy/skin/at10-f3-head-r1/skin-candidate-f3c12.glb",
+      "sha256": "b2bf3871c9f92dec3d2fe861d77cbd3aabdedfc3554562793d6c83900fda72f6",
+      "bytes": 626576,
+      "rawNativeTriangles": 2765,
+      "rawSelfPairs": 536
+    }
+  ],
+  "allUncommittedFailedInputsRemainOnDisk": true
+}

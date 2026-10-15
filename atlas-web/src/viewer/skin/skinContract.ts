@@ -1,3 +1,4 @@
+import type { SkinComponents } from './skinComponents.ts';
 import type { SkinMaterialPackage } from './skinMaterial.ts';
 import type { AnchorContext } from '../acupoints/anchorAdapter.ts';
 import { DATASET_BUDGET } from '../datasets/schema.ts';
@@ -5,6 +6,7 @@ import { DATASET_BUDGET } from '../datasets/schema.ts';
 /** Compact delivery contract. Source authoring/evidence stay outside the learner bundle. */
 export interface SkinAsset extends AnchorContext {
   appearance?: SkinMaterialPackage;
+  components?: SkinComponents;
   schemaVersion: 1;
   id: string;
   revision: string;
