@@ -1,5 +1,7 @@
 // Card body for ligament/joint, fascia and tendon rows (ROADMAP C3). Data: atlas-data/runtime/structure-cards.json.
 import type { RuntimeStructureRecord } from '../viewer/datasets/integration';
+import type { RigFile } from '../viewer/rig';
+import { rigJointForBones } from '../viewer/movement';
 
 export interface StructureCardJoint {
   name: string; names: RuntimeStructureRecord['names']; type: 'synovial' | 'fibrous' | 'cartilaginous' | null; side: string;
@@ -13,8 +15,10 @@ export interface StructureCardsFile {
 
 const JOINT_TYPE: Record<string, string> = { synovial: '윤활관절', fibrous: '섬유관절', cartilaginous: '연골관절' };
 
-export function StructureCard({ row, cards, rows, onSelect }: {
+export function StructureCard({ row, cards, rows, onSelect, rig, onMoveJoint }: {
   row: RuntimeStructureRecord; cards: StructureCardsFile | null; rows: Map<string, RuntimeStructureRecord>; onSelect: (key: string) => void;
+  /** M3: open the movement panel on the rig joint these bones form. */
+  rig?: RigFile | null; onMoveJoint?: (jointId: string) => void;
 }) {
   if (!cards) return <p className="quiet-note">구조 설명을 불러오는 중…</p>;
   const card = cards.cards[row.sourceKey];
@@ -24,7 +28,10 @@ export function StructureCard({ row, cards, rows, onSelect }: {
   const bones = links(card?.bones ?? []);
   const muscles = links(card?.muscles ?? []);
   const members = joint ? links(joint.members, row.sourceKey) : [];
+  const rigJoint = rig && onMoveJoint ? rigJointForBones(rig, [...joint?.bones ?? [], ...card?.bones ?? []]) : null;
   return <>
+    {rigJoint && <button className="attachment-observe rig-joint-move" onClick={() => onMoveJoint!(rigJoint)}>
+      {rig!.joints[rigJoint].name} 움직여 보기<span>관절 움직임 창에서 각도를 바꾸고 작용 근육을 봅니다.</span></button>}
     {card?.text && <section className="attachment-section" aria-label="구조 설명"><h3>하는 일</h3><p>{card.text}</p></section>}
     {bones.length > 0 && <section className="attachment-section"><h3>{row.kind === 'joint' && row.tissue === 'bursa' ? '맞닿은 뼈' : '잇는 뼈'}</h3>
       <div className="attachment-bone-links">{bones}</div></section>}

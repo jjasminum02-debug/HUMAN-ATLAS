@@ -22,11 +22,12 @@ import { muscleActionEmphasis } from "../../domain/atlasMotionExperience.ts";
 import { boneSegments, clampPose, segmentTransforms, type RigFile, type RigPose } from '../rig.ts';
 import { parseSkinChunk, posedCopy, segmentForRole, skinGeometry, type SkinChunk } from '../skin.ts';
 import type { Instance } from './schema.ts';
+import type { ActionHighlight, MuscleActionsFile, RigHost } from '../movement.ts';
 /** Row kinds whose surfaces bend with the rig (M2); bones move rigidly instead. */
 const SKINNED_KINDS = new Set(['muscle', 'tendon', 'fascia', 'joint']);
 import type { MotionLearningIntent } from '../../domain/atlasMotionExperience.ts';
 /** Dataset selection/presentation adapter; renderer, camera and lifecycle remain owned by the existing controller. */
-export class DatasetSceneAdapter implements SourceMotionHost {
+export class DatasetSceneAdapter implements SourceMotionHost, RigHost {
     readonly scene: AnatomySceneController;
     readonly resources: DatasetResources;
     readonly integration: RuntimeIntegration;
@@ -37,6 +38,13 @@ export class DatasetSceneAdapter implements SourceMotionHost {
     private rigState: { file: RigFile; segmentOf: Map<string, string>; transforms: Map<string, THREE.Matrix4> | null } | null = null;
     private readonly skinChunks = new Map<string, SkinChunk | 'loading' | 'failed'>();
     private instanceByKey?: Map<string, Instance>;
+    /** M3: learner pose (as set, before clamping), agonist/antagonist colouring, and the panel's open requests. */
+    private pose: RigPose | null = null;
+    private actionHighlight: ActionHighlight = null;
+    private rigFile?: Promise<RigFile>;
+    private muscleActions?: Promise<MuscleActionsFile>;
+    private readonly poseListeners = new Set<(pose: RigPose | null) => void>();
+    private readonly openMovementListeners = new Set<(jointId: string) => void>();
     private down = { x: 0, y: 0 };
     private dead = false;
     private contextLost = false;
@@ -112,9 +120,27 @@ export class DatasetSceneAdapter implements SourceMotionHost {
     /** Pose the bones by joint angles (degrees per dof id), clamped to each dof's range; null returns to rest. */
     setRigPose(rig: RigFile, pose: RigPose | null) {
         const segmentOf = this.rigState?.file === rig ? this.rigState.segmentOf : boneSegments(rig);
-        this.rigState = { file: rig, segmentOf, transforms: pose ? segmentTransforms(rig, clampPose(rig, pose)) : null };
+        const clamped = pose && Object.values(pose).some(Boolean) ? clampPose(rig, pose) : null;
+        this.rigState = { file: rig, segmentOf, transforms: clamped ? segmentTransforms(rig, clamped) : null };
+        this.pose = clamped;
+        for (const listener of this.poseListeners) listener(clamped);
         this.apply();
     }
+    get rigPose() { return this.pose; }
+    onRigPoseChange(listener: (pose: RigPose | null) => void) { this.poseListeners.add(listener); return () => { this.poseListeners.delete(listener); }; }
+    loadRig() {
+        this.rigFile ??= fetch('/__atlas/v2/rig.json').then(r => r.ok ? r.json() as Promise<RigFile> : Promise.reject(Error(String(r.status))));
+        this.rigFile.catch(() => { this.rigFile = undefined; });
+        return this.rigFile;
+    }
+    loadMuscleActions() {
+        this.muscleActions ??= fetch('/__atlas/v2/actions.json').then(r => r.ok ? r.json() as Promise<MuscleActionsFile> : Promise.reject(Error(String(r.status))));
+        this.muscleActions.catch(() => { this.muscleActions = undefined; });
+        return this.muscleActions;
+    }
+    setActionHighlight(highlight: ActionHighlight) { this.actionHighlight = highlight; this.apply(); }
+    openMovement(jointId: string) { for (const listener of this.openMovementListeners) listener(jointId); }
+    onOpenMovement(listener: (jointId: string) => void) { this.openMovementListeners.add(listener); return () => { this.openMovementListeners.delete(listener); }; }
     setView(view: BodyView) {
         const nextContextKey = this.motionContextKey(view);
         if (this.motion && this.motion.contextKey !== nextContextKey) this.restoreSourceMotion('selection-or-view-changed');
@@ -158,7 +184,8 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         presentation?: { intent: MotionLearningIntent }): Promise<AnimationPlaybackController> {
         for (const listener of this.sourceMotionStartListeners) listener();
         // Motion clips verify rest geometry and transforms: return any rig pose to rest first.
-        if (this.rigState?.transforms) { this.rigState = { ...this.rigState, transforms: null }; this.apply(); }
+        if (this.rigState?.transforms) this.setRigPose(this.rigState.file, null);
+        this.actionHighlight = null;
         this.scene.cancelCameraMotion();
         const zoom = asset.poseControl?.observationZoom ?? 1;
         if (!Number.isFinite(zoom) || zoom < 1 || zoom > 1.5) throw new Error('관찰 화면 확대 범위가 올바르지 않습니다.');
@@ -442,7 +469,10 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 && this.motion.asset.sourceBinding?.subjectSourceKey === key ? this.motionPhase : null;
             const phaseTone = actionPhase === 'action' ? 'action' : actionPhase === 'return' ? 'return' : null;
             const layerId = layerIdOf(row);
-            const material = this.materials.get(row.kind, { mode, phase: phaseTone, contextOpacity: motionContextOpacity, userTranslucent: Boolean(attachmentMode && this.view.translucentSourceKeys?.includes(key)),
+            const highlight = this.motion || !this.actionHighlight || selected ? undefined
+                : this.actionHighlight.agonists.includes(key) ? 'agonist' as const : this.actionHighlight.antagonists.includes(key) ? 'antagonist' as const : undefined;
+            // Shown movers stay coloured even while the rest is dimmed around a selection.
+            const material = this.materials.get(row.kind, { mode: highlight && mode === 'dim' ? 'normal' : mode, phase: phaseTone, role: highlight, contextOpacity: motionContextOpacity, userTranslucent: Boolean(attachmentMode && this.view.translucentSourceKeys?.includes(key)),
                 variant: row.tissue, layerOpacity: layerId ? this.view.layerOpacity?.[layerId] : undefined });
             node.material = material;
             node.userData.nerveObservationContext = observe && row.kind !== 'nerve';

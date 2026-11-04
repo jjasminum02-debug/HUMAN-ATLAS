@@ -8,6 +8,9 @@ import { learnerFunctionUnavailableText } from '../domain/learnerActionText';
 import { nerveActionRouteLabel, shouldDisplayNerveFunctionContext, nerveLearningTargets } from '../domain/nerveRelations';
 import { AtlasLoading } from './AtlasLoading';
 import { StructureCard, type StructureCardsFile } from './StructureCard';
+import { MuscleRigActions } from './MuscleRigActions';
+import { isRigHost } from '../viewer/movement';
+import type { RigFile } from '../viewer/rig';
 import { anatomicalPartSubtitle } from '../domain/displayNames';
 import { attachmentBoneKeys, inRegionalRoute } from '../viewer/datasets/regionalContext';
 import { useMotionFeature } from './useMotionFeature';
@@ -145,6 +148,13 @@ export default function App() {
         void fetch('/__atlas/v2/cards.json').then(response => response.ok ? response.json() : null).then(file => { if (live && file) setStructureCards(file); }).catch(() => {});
         return () => { live = false; };
     }, [needsStructureCards, structureCards]);
+    const [cardRig, setCardRig] = useState<RigFile | null>(null);
+    useEffect(() => {
+        if (!needsStructureCards || cardRig || !isRigHost(motionHost)) return;
+        let live = true;
+        void motionHost.loadRig().then(rig => { if (live) setCardRig(rig); }).catch(() => {});
+        return () => { live = false; };
+    }, [needsStructureCards, cardRig, motionHost]);
     const attachmentKey = JSON.stringify([route.selected, route.regions, homeRevision, viewResetRevision]);
     const attachmentRole = tab === '구조' && attachmentFocus?.key === attachmentKey ? attachmentFocus.role : null;
     useEffect(() => { setAttachmentFocus(previous => previous?.key === attachmentKey && tab === '구조' ? previous : null); }, [attachmentKey, tab]);
@@ -501,6 +511,7 @@ export default function App() {
       </section>
     </section>
     <section id="study-function-panel" className="study-tab-panel function-tab-panel" role="tabpanel" aria-labelledby="tab-기능" hidden={tab !== '기능'}>
+      {isRigHost(motionHost) && <MuscleRigActions host={motionHost} sourceKey={selected.sourceKey} visible={key => runtimeByKey.get(key)?.localDisplayEligible ?? false}/>}
       {!motionFeature && motionNotice}
       {functionActions.length > 0 && <fieldset className="learner-action-picker" aria-label="근육 작용 선택">
         <legend>근육 작용</legend>
@@ -526,7 +537,8 @@ export default function App() {
     </section>
     </div>
     </> : selected?.kind === 'bone' ? <>{MotionLearningPanel ? <MotionLearningPanel subjectHidden={selectedSourceHidden} actions={motionActions} selectedActionId={actionId ?? preferredMotionAction(motionActions)?.id ?? null} onSelectAction={setActionId} host={motionHost} sourceContextKey={selected.sourceKey} showActionPicker={true} muscleLayerEnabled={boneLayerEnabled} subjectKind="bone"/> : motionNotice}<section className="attachment-section"><h3>관련 근육</h3>{relatedMuscles.length ? <ul>{relatedMuscles.map(r => <li key={r.sourceKey}><button className="bone-related-muscle" onClick={() => select(r.sourceKey)}>{r.label}</button><span>{r.roles.map(role => role === 'origin' ? '기시' : role === 'insertion' ? '정지' : '부착').join(' · ')}</span></li>)}</ul> : <p className="quiet-note">주요 표지와 관련 근육 설명을 준비하고 있습니다.</p>}</section></>
-    : selected && LAYER_HINTS[selected.kind] ? <StructureCard row={selected} cards={structureCards} rows={runtimeByKey} onSelect={select}/> : null}
+    : selected && LAYER_HINTS[selected.kind] ? <StructureCard row={selected} cards={structureCards} rows={runtimeByKey} onSelect={select}
+      rig={cardRig} onMoveJoint={isRigHost(motionHost) ? jointId => motionHost.openMovement(jointId) : undefined}/> : null}
    </div></div></details>}
   </div>
  </div>;

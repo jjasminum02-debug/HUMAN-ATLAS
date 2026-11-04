@@ -384,3 +384,27 @@
   .atlas-shell .body-tools .toolbar-main button, .atlas-shell .body-tools .more-actions button, .atlas-shell .body-tools .selection-view-options button { min-height: 38px; padding: 6px 10px; flex: none; }
   .atlas-shell .body-tools .selection-view-options { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
 }
+
+/* M3 movement panel: joint chips, side, one slider per dof, movers by colour (red produces, blue opposes). */
+.atlas-shell .movement-panel { display: flex; flex-direction: column; gap: 6px; padding: 6px 2px 2px; border-top: 1px solid #edf0ed; max-height: 46vh; overflow-y: auto; }
+.atlas-shell .movement-joints, .atlas-shell .movement-side, .atlas-shell .movement-actions { display: flex; flex-wrap: wrap; gap: 4px; }
+.atlas-shell .body-tools .movement-panel button { min-height: 32px; padding: 5px 10px; white-space: nowrap; width: auto; }
+.atlas-shell .movement-dofs { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2px 14px; }
+.atlas-shell .movement-dofs label { display: grid; grid-template-columns: 1fr 6.5em; align-items: center; gap: 2px 8px; padding: 3px 6px; border-radius: 8px; font-size: 12px; color: #4b5d57; }
+.atlas-shell .movement-dofs label.active { background: #f1f5f2; }
+.atlas-shell .movement-dof-name { grid-column: 1 / -1; font-weight: 600; }
+.atlas-shell .movement-slider { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 6px; }
+.atlas-shell .movement-slider small { font-size: 11px; color: #7a8781; }
+.atlas-shell .movement-slider input { width: 100%; accent-color: #47796b; }
+.atlas-shell .movement-dofs output { text-align: right; font-variant-numeric: tabular-nums; }
+.atlas-shell .movement-roles h4 { display: flex; align-items: center; gap: 6px; margin: 6px 0 4px; font-size: 12px; color: #4b5d57; }
+.atlas-shell .movement-roles .swatch { width: 10px; height: 10px; border-radius: 3px; }
+.atlas-shell .swatch.agonist { background: #d4472f; }
+.atlas-shell .swatch.antagonist { background: #3f7cc4; }
+.atlas-shell .movement-roles small { color: #7a8781; }
+.atlas-shell .rig-actions { margin: 10px 0; }
+.atlas-shell .rig-actions ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.atlas-shell .rig-actions li button { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 40px; padding: 7px 10px; border: 1px solid #dfe6e0; border-radius: 8px; background: #fff; color: #33463f; font: inherit; font-size: 13px; text-align: left; cursor: pointer; }
+.atlas-shell .rig-actions li button[aria-pressed="true"] { border-color: #d4472f; box-shadow: inset 3px 0 #d4472f; }
+.atlas-shell .rig-actions li small { color: #6b7a73; font-size: 11px; }
+.atlas-shell .rig-joint-move { --attachment-tone: #47796b; }

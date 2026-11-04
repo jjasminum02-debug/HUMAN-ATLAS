@@ -4,11 +4,13 @@ import { installMuscleSurface } from './muscleSurface.ts';
 // Tissue identity must come from the source contract. A muscle's pale ends are not tendon labels.
 export type Tissue = 'bone' | 'muscle' | 'nerve' | 'accessory' | 'tendon' | 'fascia' | 'joint';
 export type MaterialMode = 'normal' | 'selected' | 'dim' | 'translucent' | 'nerveContext' | 'motorContext' | 'innervated' | 'observationContext' | 'motionContext' | 'originContext' | 'insertionContext';
-/** variant: fine tissue (ligament, meniscus, tooth ...); layerOpacity: learner's per-layer opacity (0.1-1). */
-export type MaterialState = { mode?: MaterialMode; phase?: 'action' | 'return' | null; contextOpacity?: number; userTranslucent?: boolean; hovered?: boolean; variant?: string; layerOpacity?: number };
+/** variant: fine tissue (ligament, meniscus, tooth ...); layerOpacity: learner's per-layer opacity (0.1-1);
+ * role: M3 movement colouring (muscles producing / opposing the shown movement). */
+export type MaterialState = { mode?: MaterialMode; phase?: 'action' | 'return' | null; role?: 'agonist' | 'antagonist'; contextOpacity?: number; userTranslucent?: boolean; hovered?: boolean; variant?: string; layerOpacity?: number };
 export const ANATOMY_PALETTE = {
   bone: '#e6dbc2', muscle: '#d48b78', nerve: '#dbbb32', accessory: '#c5bdb1', tendon: '#f1ebdc', fascia: '#e1dde9', joint: '#f6f0e1',
   origin: '#476eb4', insertion: '#bc7135', selected: '#237f79', selectedNerve: '#d0c42f', related: '#338fc1', action: '#df8065', return: '#a4aaa8',
+  agonist: '#d4472f', antagonist: '#3f7cc4',
 };
 
 // Cartilage-like joint tissue reads blue-white; synovial sacs and sheaths blue; fat pads yellow.
@@ -25,6 +27,7 @@ export function anatomyMaterialParameters(tissue: Tissue, state: MaterialState =
     : tissue === 'bone' && mode === 'insertionContext' ? ANATOMY_PALETTE.insertion : mode === 'selected' ? tissue === 'nerve' ? ANATOMY_PALETTE.selectedNerve : ANATOMY_PALETTE.selected
     : mode === 'innervated' || mode === 'motorContext' ? ANATOMY_PALETTE.related : base);
   if (tissue === 'muscle' && state.phase) color.set(ANATOMY_PALETTE[state.phase]);
+  if ((tissue === 'muscle' || tissue === 'tendon') && state.role) color.set(ANATOMY_PALETTE[state.role]);
   if (mode === 'dim' && tissue !== 'nerve') color.lerp(new THREE.Color('#e5e5dd'), .48);
   const modeOpacity = mode === 'translucent' || state.userTranslucent ? .3 : mode === 'nerveContext' ? .12 : mode === 'motorContext' ? .5
     : mode === 'observationContext' ? .18 : mode === 'motionContext' ? Math.max(.1, Math.min(.6, state.contextOpacity ?? .3)) : 1;
@@ -58,7 +61,7 @@ export class AnatomyMaterials {
   get(tissue: Tissue, state: MaterialState = {}) {
     const opacity = state.mode === 'motionContext' ? Math.max(.1, Math.min(.6, state.contextOpacity ?? .3)) : '';
     const layerOpacity = state.layerOpacity === undefined ? '' : Math.round(state.layerOpacity * 20) / 20;
-    const key = `${tissue}:${state.mode ?? 'normal'}:${state.phase ?? ''}:${Boolean(state.hovered)}:${opacity}${state.userTranslucent ? ':user-translucent' : ''}:${state.variant ?? ''}:${layerOpacity}`;
+    const key = `${tissue}:${state.mode ?? 'normal'}:${state.phase ?? ''}:${state.role ?? ''}:${Boolean(state.hovered)}:${opacity}${state.userTranslucent ? ':user-translucent' : ''}:${state.variant ?? ''}:${layerOpacity}`;
     let material = this.instances.get(key);
     if (!material) {
       material = createMaterial(tissue, { ...state, layerOpacity: layerOpacity === '' ? undefined : layerOpacity });

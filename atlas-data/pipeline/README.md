@@ -72,5 +72,14 @@ blender --background --factory-startup --python atlas-data/pipeline/build_skin.p
 - `build_skin.py`: 연조직 정점마다 두 분절 가중치. 실제 런타임 chunk를 읽으므로 형상 chunk를 다시 만들면 이것도 다시 실행한다.
 - 앱: `src/viewer/rig.ts`(자세 → 분절 변환), `src/viewer/skin.ts`(CPU 선형 블렌드). 개발용 콘솔: `window.__atlasRig`.
 
+## 근육 작용 (로드맵 M3)
+
+```bash
+python3 atlas-data/pipeline/build_actions.py   # → runtime/muscle-actions.json + anatomy/muscle-action-checks.json (1초 미만)
+```
+- 표: `muscle_actions.py`(`ACTIONS` 근육 → rig 자유도·방향·주/보조, `OUTSIDE` rig에 없는 움직임, `OPENSIM` 대조용 모델 근육 이름).
+- 대조: `opensim_moment_arms.py`가 `OpenSim_Models/`(읽기만)의 경로점으로 모멘트 팔을 계산. OpenSim과 부호가 다른 작용은 런타임에서 빠진다.
+- 앱: `src/viewer/movement.ts`, `src/viewer/wholeBody/MovementPanel.tsx`(관절 움직임 창), `src/ui/MuscleRigActions.tsx`(근육 기능 탭).
+
 ## 범위 밖 (이번 추출에서 제외)
 심혈관(5, 곡선 654개 포함)·림프(6)·내장(8)·부위(9) 컬렉션, 라벨 지시선(`.j`·`.i`), 계통 합본(`.g`), 글자 객체.

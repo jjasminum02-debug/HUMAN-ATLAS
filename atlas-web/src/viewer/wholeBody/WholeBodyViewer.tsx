@@ -10,6 +10,7 @@ import type { RuntimeIntegration } from '../datasets/integration';
 import { AtlasLoading } from '../../ui/AtlasLoading';
 import type { SourceMotionHost } from '../datasets/sourceMotionHost';
 import { motorRelationsForNerve, nerveConceptForSourceName } from '../../data/learning';
+import { MovementPanel } from './MovementPanel';
 
 const AcupointReview = lazy(() => import('../acupoints/AcupointEntry.tsx'));
 const SkinControls = lazy(() => import('../skin/SkinControls.tsx'));
@@ -51,6 +52,9 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
   const [layerOpacity, setLayerOpacity] = useState<Partial<Record<LayerId, number>>>({});
   const [moreOpen, setMoreOpen] = useState(false);
   const [shading, setShading] = useState<boolean | null>(null);
+  const [movementOpen, setMovementOpen] = useState(false);
+  const [movementRequest, setMovementRequest] = useState<{ jointId: string; revision: number } | null>(null);
+  const rowsByKey = useMemo(() => new Map((datasetSource?.integration.objects ?? []).map(r => [r.sourceKey, r])), [datasetSource]);
   const sceneOf = () => { const c = controller.current; return c instanceof DatasetSceneAdapter ? c.scene : c; };
   const toggleShading = () => { const scene = sceneOf(); if (!scene) return; scene.ambientOcclusion = !scene.ambientOcclusion; setShading(scene.ambientOcclusion); };
   const bones = layers.bone, nerves = layers.nerve, muscles = layers.superficialMuscle || layers.deepMuscle;
@@ -157,6 +161,12 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
     previousView.current = { regionKey, selectedId, resetRevision: viewResetRevision };
   }, [ready, regionIds, selectedId, selectedIds, layers, layerOpacity, staticPose, nerveConceptMuscleKeys, presentation, attachmentRole, viewResetRevision]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (ready && homeRevision > 0) { stopEntrance(); controller.current?.focus([]); } }, [ready, homeRevision]);
+  useEffect(() => {
+    const c = controller.current;
+    if (!ready || !(c instanceof DatasetSceneAdapter)) return;
+    // A joint card's "움직여 보기" opens this panel on that joint.
+    return c.onOpenMovement(jointId => { setMovementOpen(true); setMovementRequest(previous => ({ jointId, revision: (previous?.revision ?? 0) + 1 })); });
+  }, [ready]);
   return <div className="whole-body-viewer" onPointerDownCapture={stopEntrance}>
     <div className="whole-body-canvas" inert={!entered} aria-hidden={!entered} ref={host}/>
     {entered && AcupointReview && controller.current instanceof DatasetSceneAdapter && <Suspense fallback={null}><AcupointReview adapter={controller.current} onModeChange={setAcupointsActive} surfaceSample={surfaceSample} developmentReview={acupointDevelopmentReview} territoryDevelopmentReview={territoryDevelopmentReview}/></Suspense>}
@@ -173,6 +183,7 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
         <button disabled={!peelTarget} title="바깥쪽 층부터 하나씩 숨겨 안쪽 구조를 봅니다." onClick={peel}>한 겹 벗기기</button>
         <button disabled={!peeled.length} onClick={unpeel}>벗긴 층 되돌리기</button>
         <button onClick={() => {const c=controller.current;if(c instanceof DatasetSceneAdapter&&c.scene.handleObservationFit('all'))return;c?.focus(regionIds);}}>화면 맞춤</button>
+          {datasetSource && <button aria-expanded={movementOpen} aria-controls="movement-panel" title="관절을 움직이고 작용 근육을 색으로 봅니다." onClick={() => setMovementOpen(open => !open)}>관절 움직임</button>}
           <button aria-expanded={moreOpen} aria-controls="view-more" onClick={() => setMoreOpen(open => !open)}>더보기</button>
         </div>
       </div>
@@ -188,6 +199,8 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
           <output>{Math.round((layerOpacity[id] ?? 1) * 100)}%</output></label>)}
         </div>
       </div>}
+      {movementOpen && entered && controller.current instanceof DatasetSceneAdapter && <MovementPanel host={controller.current} rows={rowsByKey}
+        request={movementRequest} musclesVisible={muscles} onSelect={key => select.current(key, rowsByKey.get(key)?.side ?? null)}/>}
       {selectedId && <div className="selection-view-options">
         {!selectedNerve && <button disabled={!selectedId} aria-pressed={presentation.dim} onClick={() => updatePresentation({ ...presentation, dim: !presentation.dim })}>선택 강조</button>}
         <button disabled={!selectedId || Boolean(selectedNerve) || !progress?.selectedAvailable || presentation.hidden.includes(selectedId)} title="선택한 구조를 숨겨 안쪽 구조를 봅니다." onClick={() => selectedId && setPresentation(previous => previous.hidden.includes(selectedId) ? previous : { ...previous, hidden: [...previous.hidden, selectedId] })}>선택 숨기기</button>
