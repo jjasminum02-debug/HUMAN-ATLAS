@@ -49,7 +49,7 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
   const [layers, setLayers] = useState(DEFAULT_LAYERS);
   const [peeled, setPeeled] = useState<LayerId[]>([]);
   const [layerOpacity, setLayerOpacity] = useState<Partial<Record<LayerId, number>>>({});
-  const [opacityOpen, setOpacityOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
   const [shading, setShading] = useState<boolean | null>(null);
   const sceneOf = () => { const c = controller.current; return c instanceof DatasetSceneAdapter ? c.scene : c; };
   const toggleShading = () => { const scene = sceneOf(); if (!scene) return; scene.ambientOcclusion = !scene.ambientOcclusion; setShading(scene.ambientOcclusion); };
@@ -163,30 +163,37 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
     {!entered && <AtlasLoading failed={error || Boolean(progress?.failed)} loaded={progress?.loaded} total={progress?.total} onRetry={() => error ? setRevision(r => r + 1) : controller.current?.retry()}/> }
     <div inert={!entered} ref={tools} className="body-tools" aria-label="모형 보기 설정">
       <span className="view-options-label">보기 옵션</span>
-      <div className="view-options-row">
-        <button onClick={() => {const c=controller.current;if(c instanceof DatasetSceneAdapter&&c.scene.handleObservationFit('all'))return;c?.focus(regionIds);}}>화면 맞춤</button>
-        <button disabled={!peelTarget} title="바깥쪽 층부터 하나씩 숨겨 안쪽 구조를 봅니다." onClick={peel}>한 겹 벗기기</button>
-        <button disabled={!peeled.length} onClick={unpeel}>벗긴 층 되돌리기</button>
-        <button aria-pressed={opacityOpen} aria-controls="layer-opacity" onClick={() => setOpacityOpen(open => !open)}>층 투명도</button>
-        <button aria-pressed={shading ?? Boolean(ready && sceneOf()?.ambientOcclusion)} title="멈춰 있을 때 구조 사이의 그늘을 그립니다. 느린 기기에서는 꺼 주세요." onClick={toggleShading}>음영 효과</button>
-        {entered && controller.current instanceof DatasetSceneAdapter && <Suspense fallback={null}><SkinControls adapter={controller.current} acupoints={acupointsActive}/></Suspense>}
-      </div>
+      {/* V3: one compact toolbar — layers first, then peel/fit; secondary options behind 더보기. */}
+      <div className="toolbar-main">
       <div className="layer-row" role="group" aria-label="구조 층">
         {(Object.keys(LAYER_LABELS) as LayerId[]).filter(id => id !== 'nerve' || staticPose).map(id => <button key={id} aria-pressed={layers[id]}
           onClick={() => { if (id === 'nerve') nerveLayerExplicitlyOff.current = nerves; toggleLayer(id); }}>{LAYER_LABELS[id]}</button>)}
       </div>
-      {opacityOpen && <div className="layer-opacity" id="layer-opacity" role="group" aria-label="층 투명도">
+        <div className="view-options-row">
+        <button disabled={!peelTarget} title="바깥쪽 층부터 하나씩 숨겨 안쪽 구조를 봅니다." onClick={peel}>한 겹 벗기기</button>
+        <button disabled={!peeled.length} onClick={unpeel}>벗긴 층 되돌리기</button>
+        <button onClick={() => {const c=controller.current;if(c instanceof DatasetSceneAdapter&&c.scene.handleObservationFit('all'))return;c?.focus(regionIds);}}>화면 맞춤</button>
+          <button aria-expanded={moreOpen} aria-controls="view-more" onClick={() => setMoreOpen(open => !open)}>더보기</button>
+        </div>
+      </div>
+      {moreOpen && <div className="more-panel" id="view-more">
+        <div className="more-actions">
+        <button aria-pressed={shading ?? Boolean(ready && sceneOf()?.ambientOcclusion)} title="멈춰 있을 때 구조 사이의 그늘을 그립니다. 느린 기기에서는 꺼 주세요." onClick={toggleShading}>음영 효과</button>
+        {entered && controller.current instanceof DatasetSceneAdapter && <Suspense fallback={null}><SkinControls adapter={controller.current} acupoints={acupointsActive}/></Suspense>}
+        </div>
+        <div className="layer-opacity" id="layer-opacity" role="group" aria-label="층 투명도">
         {(Object.keys(LAYER_LABELS) as LayerId[]).filter(id => layers[id]).map(id => <label key={id}><span>{LAYER_LABELS[id]}</span>
           <input type="range" min={10} max={100} step={5} value={Math.round((layerOpacity[id] ?? 1) * 100)}
             onChange={event => setLayerOpacity(previous => ({ ...previous, [id]: Number(event.target.value) / 100 }))}/>
           <output>{Math.round((layerOpacity[id] ?? 1) * 100)}%</output></label>)}
+        </div>
       </div>}
-      <div className="selection-view-options">
+      {selectedId && <div className="selection-view-options">
         {!selectedNerve && <button disabled={!selectedId} aria-pressed={presentation.dim} onClick={() => updatePresentation({ ...presentation, dim: !presentation.dim })}>선택 강조</button>}
         <button disabled={!selectedId || Boolean(selectedNerve) || !progress?.selectedAvailable || presentation.hidden.includes(selectedId)} title="선택한 구조를 숨겨 안쪽 구조를 봅니다." onClick={() => selectedId && setPresentation(previous => previous.hidden.includes(selectedId) ? previous : { ...previous, hidden: [...previous.hidden, selectedId] })}>선택 숨기기</button>
         <button disabled={!selectedId || !progress?.selectedAvailable} onClick={() => {const c=controller.current;if(c instanceof DatasetSceneAdapter&&c.scene.handleObservationFit('selection'))return;c?.focusSelection();}}>선택 맞춤</button>
         {selectedNerve ? (selectedNerve.muscleKeys.length > 0 || nerveConceptMuscleKeys.length > 0) && <button disabled={!nerves} aria-pressed={presentation.highlightInnervation} onClick={() => updatePresentation({ ...presentation, highlightInnervation: !presentation.highlightInnervation })}>관련 근육 강조</button> : <button disabled={!selectedId || (!progress?.selectedAvailable && !presentation.translucent.includes(selectedId))} aria-pressed={Boolean(selectedId && presentation.translucent.includes(selectedId))} onClick={() => selectedId && updatePresentation({ ...presentation, translucent: presentation.translucent.includes(selectedId) ? presentation.translucent.filter(id => id !== selectedId) : [...presentation.translucent, selectedId] })}>선택 반투명</button>}
-      </div>
+      </div>}
     </div>
     <div className="body-status" inert={!entered} aria-hidden={!entered} role="status" aria-live="polite">
       {error ? <><span>이 환경에서 모형 자료를 열 수 없습니다.</span><button onClick={() => setRevision(r => r + 1)}>다시 시도</button></>
