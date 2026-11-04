@@ -19,6 +19,7 @@ import { motionFrameSourceKeys } from './motionFrameContext.ts';
 import { motionContextVisibility } from './motionContextVisibility.ts';
 import { contextBoneFollowers, followContextBone, limbMotionContextKeys } from './motionContextBonePose.ts';
 import { muscleActionEmphasis } from "../../domain/atlasMotionExperience.ts";
+import { boneSegments, clampPose, segmentTransforms, type RigFile, type RigPose } from '../rig.ts';
 import type { MotionLearningIntent } from '../../domain/atlasMotionExperience.ts';
 /** Dataset selection/presentation adapter; renderer, camera and lifecycle remain owned by the existing controller. */
 export class DatasetSceneAdapter implements SourceMotionHost {
@@ -28,6 +29,8 @@ export class DatasetSceneAdapter implements SourceMotionHost {
     readonly records: Map<string, RuntimeStructureRecord>;
     private view: BodyView = { region: null, regionIds: [], bones: true, muscles: true, supplements: false, selectedId: null, dim: true };
     private materials = new AnatomyMaterials();
+    /** M1 skeleton rig: bones follow their segment transform; null transforms = rest pose. Ignored while a motion clip plays. */
+    private rigState: { file: RigFile; segmentOf: Map<string, string>; transforms: Map<string, THREE.Matrix4> | null } | null = null;
     private down = { x: 0, y: 0 };
     private dead = false;
     private contextLost = false;
@@ -60,6 +63,15 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         canvas.addEventListener('pointerup', this.onUp);
         this.setView(this.view);
         this.focus([], false);
+        if (import.meta.env?.DEV) (window as unknown as { __atlasRig?: object }).__atlasRig = { // dev inspection only
+            load: async () => (await fetch('/__atlas/v2/rig.json')).json() as Promise<RigFile>,
+            set: (rig: RigFile, pose: RigPose) => this.setRigPose(rig, pose), reset: (rig: RigFile) => this.setRigPose(rig, null) };
+    }
+    /** Pose the bones by joint angles (degrees per dof id), clamped to each dof's range; null returns to rest. */
+    setRigPose(rig: RigFile, pose: RigPose | null) {
+        const segmentOf = this.rigState?.file === rig ? this.rigState.segmentOf : boneSegments(rig);
+        this.rigState = { file: rig, segmentOf, transforms: pose ? segmentTransforms(rig, clampPose(rig, pose)) : null };
+        this.apply();
     }
     setView(view: BodyView) {
         const nextContextKey = this.motionContextKey(view);
@@ -390,6 +402,14 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 variant: row.tissue, layerOpacity: layerId ? this.view.layerOpacity?.[layerId] : undefined });
             node.material = material;
             node.userData.nerveObservationContext = observe && row.kind !== 'nerve';
+        }
+        if (this.rigState && !this.motion) {
+            const { segmentOf, transforms } = this.rigState;
+            for (const [key, node] of this.resources.nodes) {
+                const segment = segmentOf.get(key); if (!segment) continue;
+                node.matrix.fromArray(node.userData.instanceMatrix);
+                const posed = transforms?.get(segment); if (posed) node.matrix.premultiply(posed);
+            }
         }
         const selectedNode = this.view.selectedId ? this.resources.nodes.get(this.view.selectedId) : undefined;
         this.scene.setOutline(selectedNode?.visible && !this.motion ? [selectedNode] : []);
