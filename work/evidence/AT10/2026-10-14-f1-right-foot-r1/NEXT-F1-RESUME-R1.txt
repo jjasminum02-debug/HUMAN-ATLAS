@@ -1,9 +1,0 @@
-HUMAN ATLAS에서 AT10/skin-fit F1 오른발의 conforming branch cage와 source-surface embedding만 재개해라.
-
-work/tasks/AT10.md, 최신 work/EXECUTION.json AT10.skinFit, 이 run의 f1-assessment-r1.json, repair-queue-r1.json, remaining-units-r1.json, cage-shell-mapping-r1.json, ordered-source-native-cage-audit-r10.json, volume-cage-cell-audit-r6.json을 읽어라. 기존 raw 834 검사, 양손 r41 보존, 991-face 오른쪽 Crural fascia 정책, r56/r58 화면과 frozen recipe를 재사용해라.
-
-이번 unit은 body/tendon/toe 튜브를 별개로 겹쳐 놓지 않는 하나의 conforming 3D cage다. 22개 실제 topological boundary vertex와 18개 내부 고정 control의 target을 분리해 모두 보존하고, heel/midfoot/MTP/web/toe pad-tip의 source face/barycentric 대응을 원본 topology와 연결해라. face/edge branch와 cell 사이에서 같은 source point는 하나의 target에 연속적으로 대응해야 한다. skin/native 접촉점 416개를 모두 exact address로 기록하고 기존 21 valid-reference crossing을 제거해라.
-
-고정 Blender 3.5 --background --factory-startup --disable-autoexec와 공통 offline exporter/loader를 사용해라. 전체 patch 대응, 실제 cell derivative·adaptive interior/boundary 표본, finite differences, seam 위치/접선/간격, local self, 834 raw와 9,884 retained reference QA, outside-unit 보존을 별도로 검사해라. 미수렴/nonfinite/잔여 충돌은 거부해라.
-
-기준을 통과한 source-bound versioned GLB에만 설치된 loader와 기존 learner scene QA를 수행해 준비·발등·발바닥·heel·MTP/web·toe pad/tip를 실제 화면에서 확인해라. 기술 수치만으로 자연스러운 형태를 승인하지 마라. 이전 F1 실패 파일을 덮거나 F2/다른 AT를 시작하지 마라. 최신 EXECUTION의 AT10.skinFit만 갱신하고 sync_execution.py 및 --check, 소유 변경 로컬 commit 후 멈춰라.

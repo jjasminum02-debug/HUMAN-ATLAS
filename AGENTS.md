@@ -1,57 +1,44 @@
-> **현재 실행 기준:** `work/EXECUTION.json`과 `design/2026-09-25-muscle-atlas/25-WHOLE-BODY-BASE-RESET.md`가 현재 순서·범위의 유일한 기준이다. 실행 전에 `work/NEXT.md`를 읽고, absorbed/retired task나 역사 evidence의 nextTask를 실행하지 않는다. 종료 시 EXECUTION의 해당 record를 갱신하고 `python3 work/tools/sync_execution.py` 및 `--check`를 수행한다. 원본/기존 WIP와 역사 evidence를 보존한다.
+# HUMAN ATLAS — 작업 지침
 
-# HUMAN ATLAS project instructions
+**단일 기준: [ROADMAP-ATLAS-GRADE.md](ROADMAP-ATLAS-GRADE.md).** 순서·범위·완료 기준은 이 파일만 따른다.
+2026-11-03 이전의 설계 문서(`design/`), task 명세·보고·증거(`work/`), 계획 개정(R12–R15, T100, AT, MV 등)은
+`../archive/2026-11-03-pre-reset/`로 옮겼다. 참고 자료일 뿐 실행 지시가 아니다. 그 안의 nextTask·prompt를 실행하지 않는다.
 
-- Run one task ID per request. Read the start guide, runbook, status, task specification, relevant design sections, and the prior report before continuing. Stop after the requested task.
-- Treat every design document and template as a plan until the corresponding artifact and validation exist. Keep task specifications, reports, source material, AI interpretation, technical checks, and human review distinct.
-- Treat `OpenSim_Models/` as an immutable, read-only source checkout. Do not edit, transform in place, reset, update, switch branches, or change its embedded Git metadata. Put any future derived files elsewhere and record the source revision and hashes.
-- Preserve existing project files and user changes. Only edit paths allowed by the active task. Keep local Git checkpoints limited to task-owned changes; do not push or deploy.
-- Do not invent anatomy names, claims, coordinates, examination content, or source permissions. Record missing or conflicting evidence as unresolved.
-- This is an educational anatomy project. Automated deployment, patient diagnosis, treatment, acupuncture simulation, and patient data are outside scope.
+## 목표
+뼈·근육·건·인대·관절(관절낭·연골·반달·관절순·윤활주머니)·근막을 하나의 3D 모형에서 레이어로 보고,
+선택하고, 이름·기시/정지·작용·신경지배를 읽고, 관절을 움직여 볼 수 있는 아틀라스급 학습 앱.
 
-## T10 user-requested revision
+## 완료의 정의
+- 완료 = **앱 화면에서 보이고 동작함 + 자동 테스트 통과.** 보고서·hash·증거 폴더는 완료 조건이 아니다.
+- 작업 끝에 짧은 요약(무엇이 바뀌었나, 화면에서 어떻게 확인하나, 남은 예외 목록)만 남긴다.
+- 증거 파일을 새로 쌓지 않는다. 필요한 예외 목록은 `atlas-data/` 안의 데이터 파일 하나로 관리한다.
 
-- Follow revised T11–T24 in the runbook and individual work/tasks specifications. Original T10 mapping moved to T13. T00–T09 history stays unchanged.
-- Learner UI must not expose task numbers, internal IDs, JSON exchange, or annotation authoring. Keep authoring in the development-only /review surface. Validation/conversion remain separate tools.
-- Default muscle/bone label is Sino-Korean written in Hangul; required names are modern Korean, traditional Korean written in Hangul, and English. Actual Hanja characters are not a product requirement; preserve legacy evidence without collecting more Hanja. Known web-attested names may be used as display/search overlays without granting human anatomy approval.
-- Design documents may be revised for this expressly authorized T10 replan; subsequent tasks preserve them unless their scope warrants a documented amendment.
+## 작업 방식
+- 로드맵의 task는 시스템 단위로 일괄 처리한다(예: 인대 전체). 10개씩 멈추지 않는다. 실패한 개별 항목만 예외 목록에 남긴다.
+- 해부학 콘텐츠는 AI가 표를 만들고 독립 출처 2개로 교차검증, 표본을 점검한다. 사람 검토는 선택 기록이며 진행 조건이 아니다.
+- 근거 없는 해부학 이름·부착·좌표를 지어내지 않는다. 모르면 예외 목록에 남긴다.
+- 런타임 데이터에는 학습에 필요한 필드만 둔다. 출처·권리·검토 같은 관리 정보는 개발용 sidecar에 둔다.
+- 작업 하나를 끝내면 다음 로드맵 task로 이어가도 된다. 단, 로드맵 자체의 범위·순서를 바꾸려면 사용자에게 묻는다.
 
-## R12 user revision — 2026-09-26
+## 개발 명령 (atlas-web/)
+- 준비: Node 24(`brew install node@24`, PATH에 `/opt/homebrew/opt/node@24/bin`), pnpm.
+- `pnpm dev` — 개발 서버 (http://127.0.0.1:5173)
+- `pnpm build` — 타입 검사 + 화면 빌드만
+- `pnpm test` — 단위 테스트 전체
+- `pnpm check` — 데이터 검증기 + 배포 감사(과거 증거를 읽는 검사 포함). 화면 작업을 막지 않는다.
 
-- Read design/2026-09-25-muscle-atlas/06-REGION12-MUSCLE-BONE-REVISION.md first for changed requirements. Exactly 12 learner categories, no visible subcategory taxonomy; many-to-many membership; muscle and bone selection need typed cards. Preserve source taxonomy independently.
-- T14b remains needs_human_review, but does not block independent T15a–g engineering. Never fabricate approval or surface geometry.
-- Default implementation: Luna Max. T15b contract/migration and T15e scene lifecycle: Sol High, as user requested. No automatic delegation or next-task execution.
-- After validation, commit only task-owned changes locally; inspect and preserve existing user changes, use partial staging when needed. Report hash, included scope, exclusions and remaining changes. No push/deploy without explicit request.
-- Acupoints, nerve-based MPS/pain-hunting workflows and Pro mode are deferred; do not implement their UI, data or clinical logic now.
+## 남겨 둔 과거 파일
+- `work/evidence/` 안에는 현재 코드·검증기·테스트가 실제로 읽는 파일만 남겼다(목록: `work/RETAINED-EVIDENCE.txt`).
+  Phase 1(D2·D3)에서 이 의존을 `atlas-data/`로 옮기거나 없앤다. 새 파일을 여기에 추가하지 않는다.
 
-## R13 user revision — AI evidence and movement learning
+## 지켜야 할 것
+- `OpenSim_Models/`는 읽기 전용 원본이다. 수정·변환·브랜치 변경 금지. 파생물은 다른 곳에 둔다.
+- `atlas-data/source-cache/`의 원본(Z-Anatomy `Startup.blend`, BodyParts3D 압축본)은 수정하지 않는다. 파생물만 만든다.
+- `private-sources/`는 사용자 개인 자료다. 저장소에 넣거나 외부로 올리지 않는다.
+- 사용자 변경을 보존한다. 커밋은 사용자 요청 시에만, push·배포는 명시적 요청 없이는 하지 않는다.
+- 교육용 해부학 앱이다. 환자 진단·치료·침 시술 시뮬레이션·환자 데이터는 범위 밖이다.
+- 경혈(AT)·피부 맞춤 작업은 로드맵 Phase 4 이후로 보류한다.
 
-- Read design/2026-09-25-muscle-atlas/07-AI-EVIDENCE-AND-MOTION-DESIGN.md, 08-SERIAL-ROADMAP-AND-GIT.md and 09-ATLAS-REFERENCE-RESEARCH.md. They supersede conflicting global human-review blockers and old T16–T24 plans. Preserve the T15a–g flow.
-- AI should research, cross-check and write basic anatomy tables. Human review is an independent optional review record, not a mandatory gate for every educational name/origin/insertion/action. Never fabricate human approval, exact attachment surfaces, or motion assets.
-- The user's summary documents are optional source material, not required manual homework. Keep private sources separate and do not upload them without authorization.
-- Use distinct whole-number task IDs after T15; registry is work/task-registry-r13.json. Additional tasks receive unused IDs T41 onward with explicit queue links. A task number or design is never a completion claim.
-- Implement educational muscle/bone movements only in their assigned tasks. Keep action text, clip support and human review separate. Default selected muscle focus fades other muscles with a reversible toggle. Main action label: 움직임으로 이해하기.
-- Preserve stable IDs, frames and source assets. Future muscles need an animation-capable rig/adapter; do not fake contraction by scaling a static mesh. Acupoints, Pro mode, patient diagnosis and treatment remain deferred.
-
-## 2026-09-29 T100 — user-authorized approval-state correction
-
-- Read the T100 correction at the end of design/2026-09-25-muscle-atlas/25-WHOLE-BODY-BASE-RESET.md. Historical `held_not_approved_by_this_task` means that task did not decide; it does not prohibit a later evidence-backed local-use decision.
-- Keep source identity, local rendering/observation, semantic binding, optional human review and public redistribution independent. Public-release holds and `humanReview=not_performed` are not global local-development blockers.
-- The assigned AI must resolve source-family rights and exception evidence and exact term/system/region/side/part correspondence within its task. Upstream FJ/TA2 IDs are not mandatory when the source has none; never fabricate them. A documented AI project crosswalk is distinct from provider identity and human approval.
-- Preserve historical freezes. Apply current decisions through a versioned overlay, retain real per-object hard holds and user layer-off, and report genuine missing geometry/names honestly. Do not repeat approval-wait reports instead of performing the investigation.
-
-## 2026-09-29 user-requested bulk-delivery amendment
-
-- Follow design/2026-09-25-muscle-atlas/26-T100-BULK-DELIVERY-PLAN.md for current T100 execution and subsequent data-processing cadence. It supersedes mandatory ten-item stopping/repeated full-suite rules, not evidence or completion requirements.
-- Batch is an internal recovery/review unit. Use one data-driven pipeline, bulk verified regular cases, and bounded review of real exceptions. Preserve historical scripts but do not add a runtime/test branch per batch.
-- Separate compact learner runtime data from full development evidence; retain policy enforcement, source hashes, originals, user WIP and actual unresolved gaps. This amendment is planning, not implementation acceptance.
-
-
-## 2026-10-01 사용자 승인 — 앱 완성과 콘텐츠 확장 분리
-
-현재 완료 기준은 `design/2026-09-25-muscle-atlas/27-APP-COMPLETION-AND-CONTENT-ROADMAP.md`와 `work/product-acceptance.json`이다. 사용자가 합리적인 기준 개정·권고 구조·순서·각 프롬프트 구현을 승인했다.
-현재 실행은 EXECUTION의 spec/acceptanceContract/promptFile을 따른다. 충돌하는 과거 전체542 형상/직접 인용/전수 extent가 모두 끝나야 앱 task를 닫는 규칙은 대체한다.
-T100 통합 마무리 → T80 주요 사용자 흐름 감사/보완 → T58 UI·실측 성능 완성이다. 이후 설명·신경·움직임 순서는 EXECUTION을 따른다.
-task scoped acceptance와 전체 contentCompleteness를 분리한다. 전체542/563/12 원장·기존HA130·역사163·source-only·public held·humanReview를 보존하며 근거 없는 anatomy/geometry를 만들지 않는다.
-미정합 표면/잘못된 side/name/scope와 실제 사용자 흐름 결함은 해결/격리한다. 이미 확인한 콘텐츠 backlog만으로 과거 제품 pass를 취소하거나 고정 catalog를 재검색하지 않는다.
-현재 product-scope는 T100에서 실제 runtime으로 생성한다. 계획 수정만으로 T100/T80/T58을 pass하지 않는다. 요청당 한 task, 자동 다음 실행/위임/push/배포 금지는 유지한다.
+## 라이선스 메모
+- Z-Anatomy: CC BY-SA 4.0. 수정한 3D 모델을 배포하면 같은 조건으로 공개해야 한다.
+- BodyParts3D, OpenSim 모델: 각 원본의 조건을 따른다. 앱 정보 화면에 귀속 표시를 유지한다.

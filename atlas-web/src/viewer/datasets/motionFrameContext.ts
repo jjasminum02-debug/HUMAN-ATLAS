@@ -1,5 +1,5 @@
 export type MotionFrameMember = { sourceKey: string; role: string };
-export type MotionFrameKind = 'bone' | 'muscle' | 'nerve' | 'accessory' | null | undefined;
+export type MotionFrameKind = 'bone' | 'muscle' | 'nerve' | 'accessory' | 'fascia' | 'joint' | 'tendon' | null | undefined;
 
 /**
  * Keep authored focus keys, but never crop out bones that actually move with the

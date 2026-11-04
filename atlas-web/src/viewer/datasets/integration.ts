@@ -198,7 +198,11 @@ export interface RuntimeStructureRecord {
     /** Separates learner-ready routes from local-only source inspection routes. */
     routeAudience: 'learner' | 'inspection';
     searchGroupKey: string;
-    kind: 'bone' | 'muscle' | 'accessory' | 'nerve';
+    kind: 'bone' | 'muscle' | 'accessory' | 'nerve' | 'fascia' | 'joint' | 'tendon';
+    /** Muscle/tendon rows: superficial layer (ZA "Superficial muscles") or deeper. */
+    depth?: 'superficial' | 'deep';
+    /** Fine tissue type for fascia/joint/tendon rows and non-bone skeletal rows (ligament, meniscus, tooth ...). */
+    tissue?: string;
     regionIds: string[];
     side: string | null;
     label: string;
@@ -817,7 +821,8 @@ function runtimeCanDisplayLocally(row: RuntimeStructureRecord, policy: RuntimeIn
 function runtimeKindForDataset(kind: string): RuntimeStructureRecord['kind'] | null {
     return kind === 'skeletal_surface' ? 'bone'
         : kind === 'muscle_surface_or_part' ? 'muscle'
-            : kind === 'musculoskeletal_accessory' ? 'accessory' : kind === 'nerve_surface' ? 'nerve' : null;
+            : kind === 'musculoskeletal_accessory' ? 'accessory' : kind === 'nerve_surface' ? 'nerve'
+                : kind === 'fascia_surface' ? 'fascia' : kind === 'joint_surface' ? 'joint' : kind === 'tendon_surface' ? 'tendon' : null;
 }
 /** Strictly validate the developer ledger first, then emit one allowlisted learner projection. */
 export function buildRuntimeIntegration(value: unknown, dataset: Dataset, sourceOverlaySha256: string, rightsEvidenceSha256: string, frozenTargetLexicon: FrozenTargetLexicon): RuntimeIntegration {
@@ -899,9 +904,11 @@ export function validateRuntimeIntegration(value: unknown, dataset: Dataset): Ru
     const seen = new Set<string>();
     const regions = new Set<string>();
     for (const row of i.objects) {
-        const expectedRowKeys = row.selectionSuppressSourceKeys === undefined
-            ? runtimeRowKeys.filter(key => key !== 'selectionSuppressSourceKeys') : runtimeRowKeys;
-        exactKeys(row, row.nerve === undefined ? expectedRowKeys : [...expectedRowKeys, 'nerve'], 'runtime row shape');
+        const expectedRowKeys = [...runtimeRowKeys.filter(key => key !== 'selectionSuppressSourceKeys'),
+            ...(['selectionSuppressSourceKeys', 'nerve', 'depth', 'tissue'] as const).filter(key => row[key] !== undefined)];
+        exactKeys(row, expectedRowKeys, 'runtime row shape');
+        if (row.depth !== undefined && (!['superficial', 'deep'].includes(row.depth) || !['muscle', 'tendon'].includes(row.kind))
+            || row.tissue !== undefined && (typeof row.tissue !== 'string' || !row.tissue)) throw Error('runtime layer fields');
         if (row.kind === 'nerve') {
             exactKeys(row.nerve, ['poseId', 'branchKeys', 'muscleKeys'], 'runtime nerve shape');
             const n = row.nerve!;
@@ -914,7 +921,7 @@ export function validateRuntimeIntegration(value: unknown, dataset: Dataset): Ru
         const geometryKind = instance ? runtimeKindForDataset(instance.kind) : null;
         if (!row.sourceKey || !instance || seen.has(row.sourceKey) || !geometryKind || (row.kind !== 'accessory' && geometryKind !== row.kind)
             || row.routeAudience !== (instance.sourceNamespace === 'bp3d-r4' ? 'inspection' : 'learner')
-            || !['bone', 'muscle', 'accessory', 'nerve'].includes(row.kind) || !row.searchGroupKey || !row.label
+            || !['bone', 'muscle', 'accessory', 'nerve', 'fascia', 'joint', 'tendon'].includes(row.kind) || !row.searchGroupKey || !row.label
             || !Array.isArray(row.regionIds) || row.regionIds.some(id => typeof id !== 'string' || !id)
             || !Array.isArray(row.aliases) || row.aliases.some(alias => typeof alias !== 'string')
             || !Array.isArray(row.learnerConceptKeys) || row.learnerConceptKeys.some(key => typeof key !== 'string' || !/^LC-[a-f0-9]{20}$/.test(key))

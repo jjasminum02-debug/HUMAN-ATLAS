@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { AnatomyMaterials, ANATOMY_PALETTE, type MaterialMode } from '../anatomyMaterials.ts';
-import { demandedStructureKeys, innervationHighlightKeys, observingNerves, observationFrameKeys, attachmentObservationKeys, shouldFocusNerveSelection, nerveCourseKeys } from './presentation.ts';
+import { demandedStructureKeys, layerIdOf, innervationHighlightKeys, observingNerves, observationFrameKeys, attachmentObservationKeys, shouldFocusNerveSelection, nerveCourseKeys } from './presentation.ts';
 import { AnatomySceneController, type BodyProgress } from '../wholeBody/AnatomySceneController.ts';
 import type { BodyManifest, BodyView } from '../wholeBody/contract.ts';
 import { DatasetResources } from './DatasetResources.ts';
@@ -385,7 +385,9 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             const actionPhase = selected && row.kind === 'muscle' && this.motion && this.motionIntent === 'muscle_action'
                 && this.motion.asset.sourceBinding?.subjectSourceKey === key ? this.motionPhase : null;
             const phaseTone = actionPhase === 'action' ? 'action' : actionPhase === 'return' ? 'return' : null;
-            const material = this.materials.get(row.kind, { mode, phase: phaseTone, contextOpacity: motionContextOpacity, userTranslucent: Boolean(attachmentMode && this.view.translucentSourceKeys?.includes(key)) });
+            const layerId = layerIdOf(row);
+            const material = this.materials.get(row.kind, { mode, phase: phaseTone, contextOpacity: motionContextOpacity, userTranslucent: Boolean(attachmentMode && this.view.translucentSourceKeys?.includes(key)),
+                variant: row.tissue, layerOpacity: layerId ? this.view.layerOpacity?.[layerId] : undefined });
             node.material = material;
             node.userData.nerveObservationContext = observe && row.kind !== 'nerve';
         }

@@ -91,6 +91,7 @@ for(const entry of index.entries){
 }
 await put('/__atlas/integration.json',integration,'projection');
 await put('/__atlas/datasets/human-atlas-local/manifest.json',datasetBytes,'projection');
+await put('/__atlas/v2/cards.json',await capture('/__atlas/v2/cards.json'),'projection');
 for(const chunk of dataset.chunks){
   const body=await capture(chunk.url);
   if(sha(body)!==chunk.sha256||body.length!==chunk.bytes)throw Error('Chunk mismatch '+chunk.id);

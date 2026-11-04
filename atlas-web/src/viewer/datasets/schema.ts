@@ -24,7 +24,7 @@ export function validateDataset(value:unknown):Dataset {
   }
   for(const i of d.instances) {
     const sourceNamespace=i.sourceNamespace??d.namespace;
-    const validSourceKey=sourceNamespace==='za-c7010a9'?i.sourceKey.startsWith('ZA-'):
+    const validSourceKey=sourceNamespace==='za-c7010a9'||sourceNamespace==='za-v2'?i.sourceKey.startsWith('ZA-'):
       sourceNamespace==='bp3d-r4'?i.sourceKey.startsWith('BP3D4-'):false;
     const requiredSpace=d.geometrySpace==='mixed'
       ?sourceNamespace==='za-c7010a9'?i.geometrySpace!=='source_local':sourceNamespace==='bp3d-r4'?i.geometrySpace!=='registered_world':true
@@ -37,7 +37,10 @@ export function validateDataset(value:unknown):Dataset {
   }
   const baseOverviewBytes=d.chunks.filter(c=>c.level==='overview'&&c.selectionScoped!==true).reduce((n,c)=>n+c.bytes,0);
   const maxOneSelectedSupplementBytes=Math.max(0,...d.chunks.filter(c=>c.selectionScoped===true).map(c=>c.bytes));
-  if(baseOverviewBytes+maxOneSelectedSupplementBytes>DATASET_BUDGET.overviewBytes||d.instances.reduce((n,i)=>n+i.lods.overview.triangles,0)>DATASET_BUDGET.triangles)throw Error('overview budget');
+  // Static budget covers the always-loaded base; on-demand (selection-scoped) chunks load per layer/selection
+  // and stay bounded by the chunk byte cap and planLods' active triangle budget.
+  const baseTriangles=d.instances.filter(i=>chunks.get(i.lods.overview.chunk)?.selectionScoped!==true).reduce((n,i)=>n+i.lods.overview.triangles,0);
+  if(baseOverviewBytes+maxOneSelectedSupplementBytes>DATASET_BUDGET.overviewBytes||baseTriangles>DATASET_BUDGET.triangles)throw Error('overview budget');
   return d;
 }
 /** Stable fallback-first planning. Detail upgrades never displace another visible structure. */

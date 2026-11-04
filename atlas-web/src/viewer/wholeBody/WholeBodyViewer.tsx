@@ -1,9 +1,10 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { AnatomySceneController, type BodyProgress } from './AnatomySceneController';
-import { type BodyManifest, validateManifest } from './contract';
+import { type BodyManifest, type LayerId, validateManifest } from './contract';
 import './wholeBody.css';
 import '../acupoints/entry.css';
 import { DatasetSceneAdapter } from '../datasets/DatasetSceneAdapter';
+import { layerIdOf } from '../datasets/presentation';
 import type { Dataset } from '../datasets/schema';
 import type { RuntimeIntegration } from '../datasets/integration';
 import { AtlasLoading } from '../../ui/AtlasLoading';
@@ -15,6 +16,10 @@ const SkinControls = lazy(() => import('../skin/SkinControls.tsx'));
 const acupointDevelopmentReview = import.meta.env.DEV && new URLSearchParams(window.location.search).get('acupointReview') === '1';
 const surfaceSample = import.meta.env.DEV && new URLSearchParams(window.location.search).get('carrierSample') === '1';
 const territoryDevelopmentReview = import.meta.env.DEV && window.location.pathname === '/review' && new URLSearchParams(window.location.search).get('territories') === '1';
+/** Outer to inner: the order "한 겹 벗기기" removes layers in. Bone and nerve are never peeled. */
+const PEEL_ORDER: LayerId[] = ['fascia', 'superficialMuscle', 'deepMuscle', 'joint'];
+const LAYER_LABELS: Record<LayerId, string> = { fascia: '근막', superficialMuscle: '얕은 근육', deepMuscle: '깊은 근육', joint: '인대·관절', bone: '뼈', nerve: '신경' };
+const DEFAULT_LAYERS: Record<LayerId, boolean> = { fascia: false, superficialMuscle: true, deepMuscle: true, joint: false, bone: true, nerve: false };
 
 export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewResetRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, onEntered, onMotionHostChange, onMuscleLayerChange, onBoneLayerChange, onSelectionHiddenChange }: { attachmentRole?: 'origin' | 'insertion' | null; homeRevision?: number; viewResetRevision?: number; datasetSource?: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; onMotionHostChange?: (host: SourceMotionHost | null) => void; onMuscleLayerChange?: (enabled: boolean) => void; onBoneLayerChange?: (enabled: boolean) => void; onSelectionHiddenChange?: (hidden: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
   const host = useRef<HTMLDivElement>(null);
@@ -41,12 +46,29 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
   const controller = useRef<AnatomySceneController | DatasetSceneAdapter | null>(null);
   const previousView = useRef<{ regionKey: string; selectedId: string | null; resetRevision: number } | null>(null);
   const select = useRef(onSelect); select.current = onSelect;
-  const [bones, setBones] = useState(true);
-  const [nerves, setNerves] = useState(false);
+  const [layers, setLayers] = useState(DEFAULT_LAYERS);
+  const [peeled, setPeeled] = useState<LayerId[]>([]);
+  const [layerOpacity, setLayerOpacity] = useState<Partial<Record<LayerId, number>>>({});
+  const [opacityOpen, setOpacityOpen] = useState(false);
+  const bones = layers.bone, nerves = layers.nerve, muscles = layers.superficialMuscle || layers.deepMuscle;
+  const setNerves = (on: boolean) => setLayers(previous => ({ ...previous, nerve: on }));
+  const toggleLayer = (id: LayerId) => { setPeeled([]); setLayers(previous => ({ ...previous, [id]: !previous[id] })); };
+  const peelTarget = PEEL_ORDER.find(id => layers[id]);
+  const peel = () => { if (!peelTarget) return; setPeeled(previous => [...previous, peelTarget]); setLayers(previous => ({ ...previous, [peelTarget]: false })); };
+  const unpeel = () => { const last = peeled[peeled.length - 1]; if (!last) return; setPeeled(previous => previous.slice(0, -1)); setLayers(previous => ({ ...previous, [last]: true })); };
+  const firstLayerRender = useRef(true);
+  useEffect(() => {
+    if (firstLayerRender.current) { firstLayerRender.current = false; return; }
+    onMuscleLayerChange?.(muscles);
+  }, [muscles]); // eslint-disable-line react-hooks/exhaustive-deps
+  const firstBoneRender = useRef(true);
+  useEffect(() => {
+    if (firstBoneRender.current) { firstBoneRender.current = false; return; }
+    onBoneLayerChange?.(bones);
+  }, [bones]); // eslint-disable-line react-hooks/exhaustive-deps
   const nerveLayerExplicitlyOff = useRef(false);
   const selectedSourceRow = datasetSource?.integration.objects.find(r => r.sourceKey === selectedId);
   const selectedNerve = selectedSourceRow?.nerve;
-  const selectedMuscle = selectedSourceRow?.kind === 'muscle';
   const nerveConceptMuscleKeys = useMemo(() => {
     if (selectedSourceRow?.kind !== 'nerve') return [];
     const concept = nerveConceptForSourceName(selectedSourceRow.names.en);
@@ -56,11 +78,15 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
       && r.localDisplayEligible && r.side === selectedSourceRow.side).map(r => r.sourceKey);
   }, [datasetSource, selectedSourceRow]);
   useEffect(() => {
+    // Selecting a structure (e.g. from search) turns its layer on; nerves keep their own rule below.
+    const layer = selectedSourceRow && selectedSourceRow.kind !== 'nerve' ? layerIdOf(selectedSourceRow) : null;
+    if (layer) setLayers(previous => previous[layer] ? previous : { ...previous, [layer]: true });
+  }, [selectedSourceRow?.sourceKey]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
     // Initial nerve selection is visible; an explicit learner layer-off persists.
     if (selectedNerve && !nerveLayerExplicitlyOff.current) setNerves(true);
   }, [selectedNerve]);
   const staticPose = datasetSource?.integration.objects.find(r => r.nerve)?.nerve?.poseId;
-  const [muscles, setMuscles] = useState(true);
   const [acupointsActive, setAcupointsActive] = useState(false);
   type Presentation = { observeNerves: boolean; highlightInnervation: boolean; dim: boolean; isolated: boolean; hidden: string[]; translucent: string[] };
   const [presentation, setPresentation] = useState<Presentation>({ observeNerves: true, highlightInnervation: true, dim: true, isolated: false, hidden: [], translucent: [] });
@@ -114,7 +140,8 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
     stopEntrance();
     const regionKey = JSON.stringify(regionIds);
     const previous = previousView.current;
-    controller.current?.setView({ region: null, regionIds, selectedId, selectedIds, bones, muscles, nerves, attachmentObservation: attachmentRole && selectedId ? {sourceKey: selectedId, role: attachmentRole} : null, poseId: staticPose, nerveConceptMuscleKeys, observeNerves: presentation.observeNerves, highlightInnervation: presentation.highlightInnervation, supplements: false, dim: presentation.dim, isolate: presentation.isolated && Boolean(selectedId), hiddenSourceKeys: presentation.hidden, translucentSourceKeys: presentation.translucent });
+    controller.current?.setView({ region: null, regionIds, selectedId, selectedIds, bones, muscles, nerves,
+      fascia: layers.fascia, joints: layers.joint, superficialMuscles: layers.superficialMuscle, deepMuscles: layers.deepMuscle, layerOpacity, attachmentObservation: attachmentRole && selectedId ? {sourceKey: selectedId, role: attachmentRole} : null, poseId: staticPose, nerveConceptMuscleKeys, observeNerves: presentation.observeNerves, highlightInnervation: presentation.highlightInnervation, supplements: false, dim: presentation.dim, isolate: presentation.isolated && Boolean(selectedId), hiddenSourceKeys: presentation.hidden, translucentSourceKeys: presentation.translucent });
     const nerveFramed = controller.current instanceof DatasetSceneAdapter && selectedNerve && nerves
       && !presentation.hidden.includes(selectedId ?? '');
     if (previous === null) {
@@ -125,7 +152,7 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
       else controller.current?.focus(regionIds);
     }
     previousView.current = { regionKey, selectedId, resetRevision: viewResetRevision };
-  }, [ready, regionIds, selectedId, selectedIds, bones, muscles, nerves, staticPose, nerveConceptMuscleKeys, presentation, attachmentRole, viewResetRevision]);
+  }, [ready, regionIds, selectedId, selectedIds, layers, layerOpacity, staticPose, nerveConceptMuscleKeys, presentation, attachmentRole, viewResetRevision]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (ready && homeRevision > 0) { stopEntrance(); controller.current?.focus([]); } }, [ready, homeRevision]);
   return <div className="whole-body-viewer" onPointerDownCapture={stopEntrance}>
     <div className="whole-body-canvas" inert={!entered} aria-hidden={!entered} ref={host}/>
@@ -135,14 +162,24 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
       <span className="view-options-label">보기 옵션</span>
       <div className="view-options-row">
         <button onClick={() => {const c=controller.current;if(c instanceof DatasetSceneAdapter&&c.scene.handleObservationFit('all'))return;c?.focus(regionIds);}}>화면 맞춤</button>
-        <button aria-pressed={bones} onClick={() => { const enabled = !bones; setBones(enabled); onBoneLayerChange?.(enabled); }}>뼈</button>
-        <button aria-pressed={muscles} onClick={() => { const enabled = !muscles; setMuscles(enabled); onMuscleLayerChange?.(enabled); }}>근육</button>
-        {staticPose && <button aria-pressed={nerves} onClick={() => { nerveLayerExplicitlyOff.current = nerves; setNerves(!nerves); }}>신경</button>}
+        <button disabled={!peelTarget} title="바깥쪽 층부터 하나씩 숨겨 안쪽 구조를 봅니다." onClick={peel}>한 겹 벗기기</button>
+        <button disabled={!peeled.length} onClick={unpeel}>벗긴 층 되돌리기</button>
+        <button aria-pressed={opacityOpen} aria-controls="layer-opacity" onClick={() => setOpacityOpen(open => !open)}>층 투명도</button>
         {entered && controller.current instanceof DatasetSceneAdapter && <Suspense fallback={null}><SkinControls adapter={controller.current} acupoints={acupointsActive}/></Suspense>}
       </div>
+      <div className="layer-row" role="group" aria-label="구조 층">
+        {(Object.keys(LAYER_LABELS) as LayerId[]).filter(id => id !== 'nerve' || staticPose).map(id => <button key={id} aria-pressed={layers[id]}
+          onClick={() => { if (id === 'nerve') nerveLayerExplicitlyOff.current = nerves; toggleLayer(id); }}>{LAYER_LABELS[id]}</button>)}
+      </div>
+      {opacityOpen && <div className="layer-opacity" id="layer-opacity" role="group" aria-label="층 투명도">
+        {(Object.keys(LAYER_LABELS) as LayerId[]).filter(id => layers[id]).map(id => <label key={id}><span>{LAYER_LABELS[id]}</span>
+          <input type="range" min={10} max={100} step={5} value={Math.round((layerOpacity[id] ?? 1) * 100)}
+            onChange={event => setLayerOpacity(previous => ({ ...previous, [id]: Number(event.target.value) / 100 }))}/>
+          <output>{Math.round((layerOpacity[id] ?? 1) * 100)}%</output></label>)}
+      </div>}
       <div className="selection-view-options">
         {!selectedNerve && <button disabled={!selectedId} aria-pressed={presentation.dim} onClick={() => updatePresentation({ ...presentation, dim: !presentation.dim })}>선택 강조</button>}
-        <button disabled={!selectedMuscle || !selectedId || !muscles || !progress?.selectedAvailable || presentation.hidden.includes(selectedId)} title="선택한 근육을 숨겨 안쪽 구조를 봅니다." onClick={() => selectedId && setPresentation(previous => previous.hidden.includes(selectedId) ? previous : { ...previous, hidden: [...previous.hidden, selectedId] })}>근육 숨기기</button>
+        <button disabled={!selectedId || Boolean(selectedNerve) || !progress?.selectedAvailable || presentation.hidden.includes(selectedId)} title="선택한 구조를 숨겨 안쪽 구조를 봅니다." onClick={() => selectedId && setPresentation(previous => previous.hidden.includes(selectedId) ? previous : { ...previous, hidden: [...previous.hidden, selectedId] })}>선택 숨기기</button>
         <button disabled={!selectedId || !progress?.selectedAvailable} onClick={() => {const c=controller.current;if(c instanceof DatasetSceneAdapter&&c.scene.handleObservationFit('selection'))return;c?.focusSelection();}}>선택 맞춤</button>
         {selectedNerve ? (selectedNerve.muscleKeys.length > 0 || nerveConceptMuscleKeys.length > 0) && <button disabled={!nerves} aria-pressed={presentation.highlightInnervation} onClick={() => updatePresentation({ ...presentation, highlightInnervation: !presentation.highlightInnervation })}>관련 근육 강조</button> : <button disabled={!selectedId || (!progress?.selectedAvailable && !presentation.translucent.includes(selectedId))} aria-pressed={Boolean(selectedId && presentation.translucent.includes(selectedId))} onClick={() => selectedId && updatePresentation({ ...presentation, translucent: presentation.translucent.includes(selectedId) ? presentation.translucent.filter(id => id !== selectedId) : [...presentation.translucent, selectedId] })}>선택 반투명</button>}
       </div>
@@ -153,7 +190,7 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
         : progress?.contextLost ? '그래픽 연결을 복원하고 있습니다. 현재 시점과 선택을 유지합니다.'
         : progress?.failed ? <><span>일부 모형을 불러오지 못했습니다. 표시 중인 모형은 계속 살펴볼 수 있습니다.</span><button onClick={() => controller.current?.retry()}>다시 불러오기</button></>
         : progress && progress.loaded < progress.total ? `모형 불러오는 중 · ${progress.loaded}/${progress.total}`
-        : !bones && !muscles && !nerves ? '뼈·근육·신경 중 볼 구조를 켜 주세요.'
+        : !Object.values(layers).some(Boolean) ? '보기 옵션에서 볼 구조 층을 켜 주세요.'
         : selectedNerve && !nerves ? '신경 보기를 켜면 선택한 주행을 볼 수 있습니다.'
         : selectedId && presentation.hidden.includes(selectedId) ? '선택한 모형을 숨겼습니다. 다른 구조를 선택해도 숨김을 유지합니다.'
         : selectedId && presentation.isolated ? '선택만 보기에서는 주변 뼈와 근육이 숨겨집니다. 관절 움직임을 함께 보려면 선택만 보기를 해제해 주세요.'

@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import type { Plugin } from "vite";
 import { defineConfig } from "vite";
+import { atlasV2Plugin } from "./plugins/atlasV2.ts";
 import { motionAssetsPlugin } from "./plugins/motionAssets.ts";
 import { wholeBodyPlugin } from "./plugins/wholeBody.ts";
 
@@ -222,7 +223,8 @@ function meshManifestPlugin(): Plugin {
 
 export default defineConfig({
   root: projectRoot + "atlas-web",
-  plugins: [catalogPlugin(), meshManifestPlugin(), wholeBodyPlugin(projectRoot), motionAssetsPlugin(projectRoot)],
+  // atlasV2Plugin first: it answers the runtime URLs and anatomy chunks before the legacy whole-body composition.
+  plugins: [atlasV2Plugin(projectRoot), catalogPlugin(), meshManifestPlugin(), wholeBodyPlugin(projectRoot), motionAssetsPlugin(projectRoot)],
   server: { strictPort: true, fs: { allow: [projectRoot] } },
   preview: { strictPort: true },
   build: { manifest: true },

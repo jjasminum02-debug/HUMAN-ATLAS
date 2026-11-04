@@ -319,3 +319,20 @@
 /* Deferred learning content loads inside its card; the anatomy scene remains mounted. */
 .atlas-shell .feature-load-notice { padding: 14px 0; color: #6a7b72; font-size: 13px; line-height: 1.6; }
 .atlas-shell .feature-load-notice button { display: block; padding: 8px 12px; margin-top: 8px; min-height: 44px; color: #42675b; background: white; border: 1px solid #dfe6e0; border-radius: 8px; cursor: pointer; }
+
+/* V1 structure layers: outer-to-inner toggles and on-demand opacity sliders. */
+.atlas-shell .layer-row { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 5px; }
+.atlas-shell .layer-opacity { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px 12px; padding: 4px 2px; }
+.atlas-shell .layer-opacity label { display: grid; grid-template-columns: 5.5em 1fr 3em; align-items: center; gap: 6px; padding: 2px 0; font-size: 12px; color: #4b5d57; }
+.atlas-shell .layer-opacity input { width: 100%; accent-color: #47796b; }
+.atlas-shell .layer-opacity output { text-align: right; font-variant-numeric: tabular-nums; }
+@media (max-width: 760px) {
+  .atlas-shell .layer-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .atlas-shell .layer-opacity { grid-template-columns: 1fr; }
+}
+
+/* C3 structure cards */
+.atlas-shell .joint-facts { display: grid; grid-template-columns: 4em 1fr; gap: 4px 8px; margin: 8px 0; font-size: 13px; }
+.atlas-shell .joint-facts dt { color: #6b7a73; }
+.atlas-shell .joint-facts dd { margin: 0; }
+.atlas-shell .attachment-section h4 { margin: 12px 0 6px; font-size: 13px; color: #4b5d57; }
