@@ -20,6 +20,10 @@ import { motionContextVisibility } from './motionContextVisibility.ts';
 import { contextBoneFollowers, followContextBone, limbMotionContextKeys } from './motionContextBonePose.ts';
 import { muscleActionEmphasis } from "../../domain/atlasMotionExperience.ts";
 import { boneSegments, clampPose, segmentTransforms, type RigFile, type RigPose } from '../rig.ts';
+import { parseSkinChunk, posedCopy, segmentForRole, skinGeometry, type SkinChunk } from '../skin.ts';
+import type { Instance } from './schema.ts';
+/** Row kinds whose surfaces bend with the rig (M2); bones move rigidly instead. */
+const SKINNED_KINDS = new Set(['muscle', 'tendon', 'fascia', 'joint']);
 import type { MotionLearningIntent } from '../../domain/atlasMotionExperience.ts';
 /** Dataset selection/presentation adapter; renderer, camera and lifecycle remain owned by the existing controller. */
 export class DatasetSceneAdapter implements SourceMotionHost {
@@ -31,6 +35,8 @@ export class DatasetSceneAdapter implements SourceMotionHost {
     private materials = new AnatomyMaterials();
     /** M1 skeleton rig: bones follow their segment transform; null transforms = rest pose. Ignored while a motion clip plays. */
     private rigState: { file: RigFile; segmentOf: Map<string, string>; transforms: Map<string, THREE.Matrix4> | null } | null = null;
+    private readonly skinChunks = new Map<string, SkinChunk | 'loading' | 'failed'>();
+    private instanceByKey?: Map<string, Instance>;
     private down = { x: 0, y: 0 };
     private dead = false;
     private contextLost = false;
@@ -66,6 +72,42 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         if (import.meta.env?.DEV) (window as unknown as { __atlasRig?: object }).__atlasRig = { // dev inspection only
             load: async () => (await fetch('/__atlas/v2/rig.json')).json() as Promise<RigFile>,
             set: (rig: RigFile, pose: RigPose) => this.setRigPose(rig, pose), reset: (rig: RigFile) => this.setRigPose(rig, null) };
+    }
+    /** M2: bend muscles, tendons, ligaments, capsules and fascia with the pose; restore rest geometry when unposed. */
+    private skinSoftTissue() {
+        const transforms = this.rigState?.transforms ?? null;
+        this.instanceByKey ??= new Map(this.resources.dataset.instances.map(instance => [instance.sourceKey, instance]));
+        const instanceMatrix = new THREE.Matrix4(), inverse = new THREE.Matrix4();
+        for (const [key, node] of this.resources.nodes) {
+            const row = this.records.get(key);
+            if (!row || !SKINNED_KINDS.has(row.kind)) continue;
+            const posed = node.userData.posedGeometry as THREE.BufferGeometry | undefined;
+            const rest = posed && node.geometry === posed ? posed.userData.skinRest as THREE.BufferGeometry : node.geometry;
+            if (!transforms) {
+                if (posed) { node.geometry = rest; posed.dispose(); delete node.userData.posedGeometry; }
+                continue;
+            }
+            const instance = this.instanceByKey.get(key);
+            const chunkId = instance && [instance.lods.overview, instance.lods.detail].find(lod => lod.resource === node.userData.resourceKey)?.chunk;
+            if (!chunkId) continue;
+            const chunk = this.skinChunks.get(chunkId);
+            if (!chunk) { this.loadSkin(chunkId); continue; }
+            if (chunk === 'loading' || chunk === 'failed') continue;
+            const weights = chunk.get(node.userData.resourceKey);
+            if (!weights || weights.data.length !== rest.getAttribute('position').count) continue;
+            instanceMatrix.fromArray(node.userData.instanceMatrix); inverse.copy(instanceMatrix).invert();
+            const slots = weights.roles.map(role => inverse.clone().multiply(transforms.get(segmentForRole(role, row.side)) ?? new THREE.Matrix4()).multiply(instanceMatrix));
+            let target = posed && posed.userData.skinRest === rest ? posed : undefined;
+            if (!target) { posed?.dispose(); target = posedCopy(rest); node.userData.posedGeometry = target; }
+            skinGeometry(rest, weights.data, slots, target);
+            node.geometry = target;
+        }
+    }
+    private loadSkin(chunkId: string) {
+        this.skinChunks.set(chunkId, 'loading');
+        fetch(`/__atlas/v2/skin/${chunkId}.bin`).then(response => response.ok ? response.arrayBuffer() : Promise.reject(Error(String(response.status))))
+            .then(buffer => { this.skinChunks.set(chunkId, parseSkinChunk(buffer)); if (!this.dead) this.apply(); })
+            .catch(() => this.skinChunks.set(chunkId, 'failed'));
     }
     /** Pose the bones by joint angles (degrees per dof id), clamped to each dof's range; null returns to rest. */
     setRigPose(rig: RigFile, pose: RigPose | null) {
@@ -115,6 +157,8 @@ export class DatasetSceneAdapter implements SourceMotionHost {
         onTimeChange?: AnimationPlaybackOptions['onTimeChange'], onInvalidated?: (reason: string) => void,
         presentation?: { intent: MotionLearningIntent }): Promise<AnimationPlaybackController> {
         for (const listener of this.sourceMotionStartListeners) listener();
+        // Motion clips verify rest geometry and transforms: return any rig pose to rest first.
+        if (this.rigState?.transforms) { this.rigState = { ...this.rigState, transforms: null }; this.apply(); }
         this.scene.cancelCameraMotion();
         const zoom = asset.poseControl?.observationZoom ?? 1;
         if (!Number.isFinite(zoom) || zoom < 1 || zoom > 1.5) throw new Error('관찰 화면 확대 범위가 올바르지 않습니다.');
@@ -410,6 +454,7 @@ export class DatasetSceneAdapter implements SourceMotionHost {
                 node.matrix.fromArray(node.userData.instanceMatrix);
                 const posed = transforms?.get(segment); if (posed) node.matrix.premultiply(posed);
             }
+            this.skinSoftTissue();
         }
         const selectedNode = this.view.selectedId ? this.resources.nodes.get(this.view.selectedId) : undefined;
         this.scene.setOutline(selectedNode?.visible && !this.motion ? [selectedNode] : []);

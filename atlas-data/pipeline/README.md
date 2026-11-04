@@ -62,5 +62,15 @@ python3 atlas-data/pipeline/build_cards.py                                      
 - 설명 문장: `joint_content.py`(AI 작성, 사람 검토 전). 관절 이름 사전 대조: `terminology/joint-names-kmle.json`.
 - 앱은 `/__atlas/v2/cards.json`을 인대·관절·근막·힘줄 선택 시에만 불러온다(`src/ui/StructureCard.tsx`).
 
+## 뼈대와 연조직 변형 (로드맵 M1·M2)
+
+```bash
+blender --background --factory-startup --python atlas-data/pipeline/build_rig.py    # → runtime/rig.json (약 12초)
+blender --background --factory-startup --python atlas-data/pipeline/build_skin.py   # → za-v2/skin/*.bin (git 제외, 약 18초)
+```
+- `build_rig.py`: 분절 22개·관절 21개. 계층·범위는 OpenSim Rajagopal2016, 중심·축은 ZA 뼈 표면 맞춤(주석에 방법·접촉 실측).
+- `build_skin.py`: 연조직 정점마다 두 분절 가중치. 실제 런타임 chunk를 읽으므로 형상 chunk를 다시 만들면 이것도 다시 실행한다.
+- 앱: `src/viewer/rig.ts`(자세 → 분절 변환), `src/viewer/skin.ts`(CPU 선형 블렌드). 개발용 콘솔: `window.__atlasRig`.
+
 ## 범위 밖 (이번 추출에서 제외)
 심혈관(5, 곡선 654개 포함)·림프(6)·내장(8)·부위(9) 컬렉션, 라벨 지시선(`.j`·`.i`), 계통 합본(`.g`), 글자 객체.
