@@ -11,6 +11,7 @@
     "check:data": "node --experimental-strip-types scripts/buildLearnerCardRuntime.mjs --check && node --experimental-strip-types scripts/buildLearnerMotionRuntime.mjs --check && python3 scripts/validate-learning-content.py && python3 ../atlas-data/schemas/validate_ai_evidence.py --check && python3 ../atlas-data/schemas/validate_bone_name_overlay.py --check && python3 ../atlas-data/schemas/validate_motion_learning.py --check && python3 ../atlas-data/schemas/validate_motion_asset_sources.py && python3 ../work/tools/validate_t83_function_content.py --validate-only && node scripts/check-scene-decoders.mjs",
     "check:dist": "node scripts/auditLearnerCardDistribution.mjs --check && node scripts/checkLazyFeatures.mjs",
     "preview": "vite preview --host 127.0.0.1",
+    "qa:flows": "node scripts/qaFlows.mjs",
     "typecheck": "tsc -b --pretty false",
     "test:annotations": "node --experimental-strip-types --test src/viewer/annotationDrafts.test.ts && python3 scripts/validate-annotation-exchange-schema.py",
     "test:spatial-drafts": "node --experimental-strip-types --test src/viewer/spatialDraftLayer.test.ts && python3 scripts/validate-spatial-draft-schema.py",
@@ -61,6 +62,7 @@
     "@types/react": "19.2.12",
     "@types/react-dom": "19.2.3",
     "@types/three": "0.186.0",
+    "playwright-core": "1.64.1",
     "typescript": "5.9.3",
     "vite": "8.3.1"
   }
