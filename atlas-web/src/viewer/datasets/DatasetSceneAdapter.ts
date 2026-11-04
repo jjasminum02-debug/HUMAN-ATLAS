@@ -391,6 +391,8 @@ export class DatasetSceneAdapter implements SourceMotionHost {
             node.material = material;
             node.userData.nerveObservationContext = observe && row.kind !== 'nerve';
         }
+        const selectedNode = this.view.selectedId ? this.resources.nodes.get(this.view.selectedId) : undefined;
+        this.scene.setOutline(selectedNode?.visible && !this.motion ? [selectedNode] : []);
         this.scene.requestRender();
         const q = this.resources.queue;
         const wanted = [...q.wanted];

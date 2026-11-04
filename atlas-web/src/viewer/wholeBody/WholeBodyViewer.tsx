@@ -50,6 +50,9 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
   const [peeled, setPeeled] = useState<LayerId[]>([]);
   const [layerOpacity, setLayerOpacity] = useState<Partial<Record<LayerId, number>>>({});
   const [opacityOpen, setOpacityOpen] = useState(false);
+  const [shading, setShading] = useState<boolean | null>(null);
+  const sceneOf = () => { const c = controller.current; return c instanceof DatasetSceneAdapter ? c.scene : c; };
+  const toggleShading = () => { const scene = sceneOf(); if (!scene) return; scene.ambientOcclusion = !scene.ambientOcclusion; setShading(scene.ambientOcclusion); };
   const bones = layers.bone, nerves = layers.nerve, muscles = layers.superficialMuscle || layers.deepMuscle;
   const setNerves = (on: boolean) => setLayers(previous => ({ ...previous, nerve: on }));
   const toggleLayer = (id: LayerId) => { setPeeled([]); setLayers(previous => ({ ...previous, [id]: !previous[id] })); };
@@ -165,6 +168,7 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
         <button disabled={!peelTarget} title="바깥쪽 층부터 하나씩 숨겨 안쪽 구조를 봅니다." onClick={peel}>한 겹 벗기기</button>
         <button disabled={!peeled.length} onClick={unpeel}>벗긴 층 되돌리기</button>
         <button aria-pressed={opacityOpen} aria-controls="layer-opacity" onClick={() => setOpacityOpen(open => !open)}>층 투명도</button>
+        <button aria-pressed={shading ?? Boolean(ready && sceneOf()?.ambientOcclusion)} title="멈춰 있을 때 구조 사이의 그늘을 그립니다. 느린 기기에서는 꺼 주세요." onClick={toggleShading}>음영 효과</button>
         {entered && controller.current instanceof DatasetSceneAdapter && <Suspense fallback={null}><SkinControls adapter={controller.current} acupoints={acupointsActive}/></Suspense>}
       </div>
       <div className="layer-row" role="group" aria-label="구조 층">

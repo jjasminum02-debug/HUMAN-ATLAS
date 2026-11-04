@@ -1,6 +1,7 @@
 import { fetchAtlasAsset, ASSET_INSPECTION_ENABLED } from '../../transport/assetTransport.ts';
 import * as THREE from 'three';
 import { AnatomyMaterials, installAnatomyLighting } from '../anatomyMaterials.ts';
+import { AnatomyPostprocess, defaultAmbientOcclusion } from '../postprocess.ts';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { type BodyAsset, type BodyManifest, type BodyView, visible, pickable, selected } from './contract';
@@ -10,6 +11,7 @@ import { CameraSessions } from './cameraSessions.ts';
 import { boundsCamera, interpolateCamera, observationState, OBSERVATION_FRAME, type CameraState, type ObservationDirection } from './cameraObservation.ts';
 
 export interface BodyProgress { loaded: number; total: number; failed: number; contextLost: boolean; selectedAvailable: boolean; calls: number; triangles: number; geometries: number }
+const REFINE_DELAY_MS = 160;
 /** Sole owner of renderer, frame loop, camera, controls and the persistent anatomy root. */
 export class AnatomySceneController {
   readonly scene = new THREE.Scene();
@@ -27,6 +29,9 @@ export class AnatomySceneController {
   private dead = false;
   private readonly materials = new AnatomyMaterials();
   private dirty = true;
+  /** Ambient-occlusion frame scheduled once the view has been still for REFINE_DELAY_MS (0 = none pending). */
+  private refineAt = 0;
+  private readonly postprocess: AnatomyPostprocess;
   private previous = 0;
   private renderedFrames = 0;
   private cameraTransition: { from: CameraState; to: CameraState; elapsed: number } | null = null;
@@ -53,6 +58,9 @@ export class AnatomySceneController {
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
     installAnatomyLighting(this.scene, this.renderer);
+    // Several passes render per frame; reset counters once per frame so reported calls/triangles stay per frame.
+    this.renderer.info.autoReset = false;
+    this.postprocess = new AnatomyPostprocess(this.renderer, this.scene, this.camera, 1, 1, defaultAmbientOcclusion());
     const canvas = this.renderer.domElement;
     canvas.id = `anatomy-${this.root.uuid}`;
     canvas.tabIndex = 0; canvas.setAttribute('aria-label', '해부학 모형. 방향키로 회전, 더하기와 빼기로 확대, Home으로 전체 보기');
@@ -73,7 +81,7 @@ export class AnatomySceneController {
       const { width, height } = host.getBoundingClientRect();
       if (!width || !height) return;
       this.size = { width, height }; this.camera.aspect = width / height; this.camera.updateProjectionMatrix();
-      this.renderer.setSize(width, height); this.dirty = true;
+      this.renderer.setSize(width, height); this.postprocess.setSize(width, height); this.dirty = true;
     };
     resize(); // Measure the mounted host before the initial fit, not the old 1:1 placeholder.
     this.observer = new ResizeObserver(resize);
@@ -90,9 +98,14 @@ export class AnatomySceneController {
     canvas.addEventListener('keydown', this.onKey);
     this.focus(null, false);
     this.renderer.setAnimationLoop(this.frame);
+    if (import.meta.env?.DEV) (window as unknown as { __atlasScene?: AnatomySceneController }).__atlasScene = this; // dev inspection only
   }
 
   requestRender() { this.dirty = true; }
+  /** Meshes drawn with the selection outline (empty = none). */
+  setOutline(objects: THREE.Object3D[]) { this.postprocess.setOutline(objects); this.dirty = true; }
+  get ambientOcclusion() { return this.postprocess.ambientOcclusion; }
+  set ambientOcclusion(enabled: boolean) { this.postprocess.ambientOcclusion = enabled; this.dirty = true; }
   /** One opening presentation on the existing frame clock; input always takes over. */
   startEntrance() {
     this.cancelCameraMotion();
@@ -179,11 +192,18 @@ export class AnatomySceneController {
     if (this.hoverPoint) { const p = this.hoverPoint; this.hoverPoint = null; this.setHover(this.pick(p.x, p.y)?.nodeId ?? null); }
     if (this.dirty || poseChanged || entranceChanged || cameraChanged) {
       const started = ASSET_INSPECTION_ENABLED ? performance.now() : 0;
-      this.renderer.render(this.scene, this.camera); this.dirty = false; this.renderedFrames += 1;
+      this.renderer.info.reset();
+      this.postprocess.render(false); this.dirty = false; this.renderedFrames += 1;
+      this.refineAt = time + REFINE_DELAY_MS;
       if (ASSET_INSPECTION_ENABLED) {
         this.renderDurationsMs.push(performance.now() - started);
         if (this.renderDurationsMs.length > 240) this.renderDurationsMs.shift();
       }
+    }
+    else if (this.refineAt && time >= this.refineAt) {
+      // Still view: redraw once with ambient occlusion. Skipped silently when it is off.
+      this.refineAt = 0;
+      if (this.postprocess.ambientOcclusion && !this.lost) { this.renderer.info.reset(); this.postprocess.render(true); }
     }
     if (time - this.lastReport > 500) { this.report(); this.lastReport = time; }
   };
@@ -380,6 +400,6 @@ export class AnatomySceneController {
     canvas.removeEventListener('webglcontextlost', this.onLost); canvas.removeEventListener('webglcontextrestored', this.onRestored);
     canvas.removeEventListener('pointermove', this.onMove); canvas.removeEventListener('pointerleave', this.onLeave);
     canvas.removeEventListener('pointerdown', this.onDown); canvas.removeEventListener('pointerup', this.onUp); canvas.removeEventListener('keydown', this.onKey);
-    this.renderer.dispose(); canvas.remove();
+    this.postprocess.dispose(); this.renderer.dispose(); canvas.remove();
   }
 }
