@@ -4,7 +4,9 @@
 Table: muscle_actions.py (AI-written from standard texts). Independent check: OpenSim moment arms
 (opensim_moment_arms.py on the bundled Rajagopal2016 / Arm26 / WristModel, right side), averaged over five angles inside
 the rig's range with the other coordinates at 0. A listed action agrees when the OpenSim moment arm has the same sign and
-is at least 2 mm. Actions OpenSim contradicts are left out of the runtime file (listed in the sidecar); OpenSim
+is at least 2 mm - for the muscle as a whole (mean of its model parts), or for one model part (gluteus medius anterior
+fibres), or with the hip flexed 45 degrees for the hip's other dofs (rotation moment arms change sign with flexion).
+The sidecar records which basis agreed. Actions OpenSim contradicts are left out of the runtime file (listed in the sidecar); OpenSim
 actions >= 10 mm missing from the table are reported, not added.
 Writes atlas-data/runtime/muscle-actions.json (runtime) and atlas-data/anatomy/muscle-action-checks.json (check sidecar).
 """
@@ -40,18 +42,23 @@ def main():
     assert not unknown, f'names not in runtime: {unknown}'
 
     # Independent check: OpenSim moment arms (mm, right side) per ZA name and dof.
-    opensim = {}
+    opensim, flexed = {}, {}
     for path, spec in OPENSIM.items():
         model = Model(MODELS / path)
+        hip_flexion = next((c for c, d in spec['coordinates'].items() if d == 'hip:flexion'), None)
         for muscle, targets in spec['muscles'].items():
             for coordinate, dof in spec['coordinates'].items():
                 flip = -1 if dof.startswith('-') else 1; dof = dof.lstrip('-')
                 lo, hi = dof_range[f"{dof.split(':')[0]}_r:{dof.split(':')[1]}"]
                 angles = [math.radians(lo + (hi - lo) * (i + .5) / SAMPLES) for i in range(SAMPLES)]
-                arm = flip * sum(model.moment_arm(muscle, coordinate, flip * a) for a in angles) / SAMPLES * 1000
+                arm = lambda base=None: flip * sum(model.moment_arm(muscle, coordinate, flip * a, base) for a in angles) / SAMPLES * 1000
+                bent = arm({hip_flexion: math.radians(45)}) if hip_flexion and dof.startswith('hip:') and coordinate != hip_flexion else None
                 for name in targets if isinstance(targets, list) else [targets]:
-                    opensim.setdefault(name, {}).setdefault(dof, []).append(arm)
-    opensim = {name: {dof: sum(v) / len(v) for dof, v in dofs.items()} for name, dofs in opensim.items()}
+                    opensim.setdefault(name, {}).setdefault(dof, []).append(arm())
+                    if bent is not None: flexed.setdefault(name, {}).setdefault(dof, []).append(bent)
+    parts = opensim
+    opensim = {name: {dof: sum(v) / len(v) for dof, v in dofs.items()} for name, dofs in parts.items()}
+    flexed = {name: {dof: sum(v) / len(v) for dof, v in dofs.items()} for name, dofs in flexed.items()}
 
     checks, disagreements, unlisted, rejected = {}, [], [], set()
     for name, text in ACTIONS.items():
@@ -62,10 +69,16 @@ def main():
             for joint, dof, sign, role in rows:
                 key = f'{joint}:{dof}'
                 if key not in model or sign.startswith('='): continue
+                agrees = lambda mm: abs(mm) >= AGREE_MM and (mm > 0) == (sign == '+')
                 arm = model[key]
-                if not (abs(arm) >= AGREE_MM and (arm > 0) == (sign == '+')):
+                basis = 'whole' if agrees(arm) else 'part' if any(agrees(a) for a in parts[name][key]) \
+                    else 'hipFlexed45' if agrees(flexed.get(name, {}).get(key, 0)) else None
+                if basis is None:
                     disagreements.append({'muscle': name, 'action': f'{key}{sign}{role}', 'opensimMm': round(arm, 1)})
                     rejected.add((name, key))
+                elif basis != 'whole':
+                    entry.setdefault('agreedBy', {})[key] = {'basis': basis, 'parts': [round(a, 1) for a in parts[name][key]],
+                                                             'hipFlexed45Mm': round(flexed.get(name, {}).get(key, 0), 1)}
             listed = {f'{j}:{d}' for j, d, _, _ in rows}
             for key, arm in model.items():
                 if abs(arm) >= UNLISTED_MM and key not in listed:

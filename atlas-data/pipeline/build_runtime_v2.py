@@ -25,8 +25,8 @@ NAVIGATION = ROOT / 'atlas-data/navigation/atlas-navigation.json'
 ON_DEMAND_CHUNK_BYTES = 2 * 1024 * 1024
 LEGACY_NAMESPACE, NEW_NAMESPACE = 'za-c7010a9', 'za-v2'
 
-# Display layer per structure (ROADMAP V1). None = not shown as a layer yet (CNS, sense organs,
-# attachment patches, sinus/air-cell cavities).
+# Display layer per structure (ROADMAP V1, vessels Q2-1). None = not shown as a layer yet (CNS, sense organs,
+# attachment patches, sinus/air-cell cavities, heart surface landmarks).
 FASCIA_KINDS = {'fascia', 'aponeurosis', 'retinaculum', 'septum', 'raphe', 'sheath', 'connective'}
 def layer_of(system, kind):
     if system == 'skeletal': return 'bone' if kind in ('bone', 'cartilage', 'tooth') else None
@@ -34,13 +34,14 @@ def layer_of(system, kind):
         return 'muscle' if kind in ('muscle', 'tendon') else 'fascia' if kind in FASCIA_KINDS else 'joint' if kind in ('bursa', 'ligament') else None
     if system == 'joint': return 'joint' if kind else None
     if system == 'nervous': return 'nerve' if kind == 'nerve' else None
+    if system == 'cardiovascular': return 'vessel' if kind in ('artery', 'vein', 'heart') else None  # Q2-1
     return None
 # Korean tissue-type words for search and card labels (type terms, not structure names).
 TYPE_TERMS = {'ligament': ['인대'], 'capsule': ['관절주머니', '관절낭'], 'disc': ['원판', '디스크'], 'meniscus': ['반달', '반월판'],
               'labrum': ['관절테두리', '관절순'], 'membrane': ['막'], 'cartilaginous_joint': ['연골결합'], 'cartilage': ['연골'],
               'fat_pad': ['지방체'], 'bursa': ['윤활주머니', '점액낭'], 'fascia': ['근막'], 'aponeurosis': ['널힘줄', '건막'],
               'retinaculum': ['지지띠'], 'septum': ['사이막'], 'raphe': ['솔기'], 'sheath': ['힘줄집', '건초'], 'connective': ['결합조직'],
-              'tendon': ['힘줄', '건'], 'tooth': ['치아']}
+              'tendon': ['힘줄', '건'], 'tooth': ['치아'], 'artery': ['동맥', '혈관'], 'vein': ['정맥', '혈관'], 'heart': ['심장']}
 
 
 def sha(data):

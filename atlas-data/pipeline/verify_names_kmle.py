@@ -16,6 +16,7 @@ import urllib.request
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from names_ko import NAMES, series  # noqa: E402
+from vessel_names_ko import vessel_name  # noqa: E402
 
 CACHE = ROOT / 'atlas-data/source-cache/kmle-2026-11-04'
 OUT = ROOT / 'atlas-data/terminology/structure-names-kmle.json'
@@ -69,7 +70,9 @@ def compact(text):
 
 
 def main():
-    terms = sorted({k for k in NAMES if not series(k)} | set(UNNAMED))
+    structures = json.loads((ROOT / 'atlas-data/runtime/structures.json').read_text())['structures']
+    vessels = {s['names']['en'].rstrip('.') for s in structures if s['layer'] == 'vessel' and vessel_name(s['names']['en'])}
+    terms = sorted({k for k in NAMES if not series(k)} | set(UNNAMED) | vessels)
     previous = json.loads(OUT.read_text())['terms'] if OUT.exists() else {}
     results = {}
     for i, term in enumerate(terms, 1):
@@ -80,7 +83,7 @@ def main():
             results[term] = {'status': 'fetch_failed'}; continue
         rows = kaa_entries(page)
         hit = next((r for r in rows if r[0].lower() == term.lower()), None) or next((r for r in rows if norm(r[0]) == norm(term)), None)
-        draft = NAMES.get(term)
+        draft = NAMES.get(term) or vessel_name(term)
         if not hit:
             results[term] = {'status': 'not_in_kaa_dictionary', 'url': BASE + urllib.parse.quote_plus(term)}
         else:

@@ -24,12 +24,14 @@ test('each of the seven joints has primary movers in both directions on both sid
     const primary = groupDofs(rig, group.id, side).filter(({ dof }) => !['back:rotation', `wrist_${side}:deviation`, `mtp_${side}:extension`].includes(dof.id));
     for (const { dof } of primary) for (const sign of [1, -1] as const) {
       const { agonists } = movementRoles(actions, dof.id, sign);
-      // Known gap: hip internal rotators (anterior gluteal fibres, TFL) are contradicted by OpenSim's averaged
-      // gluteal parts and left out (atlas-data/anatomy/muscle-action-checks.json).
-      if (dof.id === `hip_${side}:rotation` && sign === 1) { assert.equal(agonists.length, 0); continue; }
       assert.ok(agonists.some(a => a.role === 'primary'), `${dof.id} ${sign > 0 ? dof.positive : dof.negative}`);
     }
   }
+});
+
+test('hip internal rotation: gluteus medius and minimus lead (OpenSim anterior parts), TFL assists (OpenSim with the hip flexed)', () => {
+  const roles = movementRoles(actions, 'hip_r:rotation', 1).agonists.map(a => `${byKey.get(a.key)?.names.en}:${a.role}`).sort();
+  assert.deepEqual(roles, ['Gluteus medius muscle:primary', 'Gluteus minimus muscle:primary', 'Tensor fasciae latae:assist']);
 });
 
 test('textbook movers and opposers come out of the table', () => {

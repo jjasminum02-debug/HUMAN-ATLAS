@@ -8,9 +8,11 @@ import { projectLegacyRuntime, type V2GeometryFile } from '../src/data/atlasV2.t
 const PROJECTED = new Set(['/__atlas/integration.json', '/__atlas/datasets/human-atlas-local/manifest.json']);
 const RAW: Record<string, string> = { '/__atlas/v2/structures.json': 'structures.json', '/__atlas/v2/relations.json': 'relations.json',
   '/__atlas/v2/cards.json': 'structure-cards.json', '/__atlas/v2/rig.json': 'rig.json',
-  '/__atlas/v2/actions.json': 'muscle-actions.json' };
+  '/__atlas/v2/actions.json': 'muscle-actions.json', '/__atlas/v2/attachments.json': 'attachments.json',
+  '/__atlas/v2/muscle-cards.json': 'muscle-cards.json' };
 const CHUNK = /^\/__atlas\/datasets\/(za-c7010a9|za-v2)\/([a-f0-9]{64})\.glb$/;
 const SKIN = /^\/__atlas\/v2\/skin\/([a-f0-9]{64})\.bin$/;
+const CONTACTS = /^\/__atlas\/v2\/attachments\/(ZA-[A-Za-z0-9-]+)\.json$/;
 
 export function atlasV2Plugin(root: string): Plugin {
   const runtime = resolve(root, 'atlas-data/runtime');
@@ -33,13 +35,17 @@ export function atlasV2Plugin(root: string): Plugin {
       server.watcher.on('change', invalidate).on('add', invalidate).on('unlink', invalidate);
       server.middlewares.use(async (req, res, next) => {
         const path = req.url?.split('?')[0] ?? '';
-        const chunk = CHUNK.exec(path), skin = SKIN.exec(path);
-        if (!PROJECTED.has(path) && !RAW[path] && !chunk && !skin) { next(); return; }
+        const chunk = CHUNK.exec(path), skin = SKIN.exec(path), contacts = CONTACTS.exec(path);
+        if (!PROJECTED.has(path) && !RAW[path] && !chunk && !skin && !contacts) { next(); return; }
         try {
           res.setHeader('Cache-Control', 'no-store');
           if (skin) {
             res.setHeader('Content-Type', 'application/octet-stream');
             res.end(await readFile(resolve(geometryDir, 'skin', `${skin[1]}.bin`))); return;
+          }
+          if (contacts) {
+            res.setHeader('Content-Type', 'application/json');
+            res.end(await readFile(resolve(geometryDir, 'attachments', `${contacts[1]}.json`))); return;
           }
           if (RAW[path]) {
             res.setHeader('Content-Type', 'application/json'); res.end(await readFile(resolve(runtime, RAW[path]))); return;

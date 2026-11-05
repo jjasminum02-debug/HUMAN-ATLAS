@@ -9,7 +9,10 @@ import { nerveActionRouteLabel, shouldDisplayNerveFunctionContext, nerveLearning
 import { AtlasLoading } from './AtlasLoading';
 import { StructureCard, type StructureCardsFile } from './StructureCard';
 import { MuscleRigActions } from './MuscleRigActions';
-import { isRigHost } from '../viewer/movement';
+import { AttachmentAreas } from './AttachmentAreas';
+import { MuscleActionSummary, MuscleBloodSupply, MuscleNerves, VesselCard } from './MuscleCardFacts';
+import { BookmarkButton, StudyTools } from './StudyTools';
+import { isRigHost, type MuscleActionsFile } from '../viewer/movement';
 import type { RigFile } from '../viewer/rig';
 import { anatomicalPartSubtitle } from '../domain/displayNames';
 import { attachmentBoneKeys, inRegionalRoute } from '../viewer/datasets/regionalContext';
@@ -37,11 +40,12 @@ function NameRows({ row }: {
 }
 const TISSUE_LABELS: Record<string, string> = { ligament: '인대', capsule: '관절주머니', disc: '원판', meniscus: '반달', labrum: '관절테두리',
     membrane: '막', cartilaginous_joint: '연골결합', cartilage: '연골', fat_pad: '지방체', bursa: '윤활주머니', fascia: '근막', aponeurosis: '널힘줄',
-    retinaculum: '지지띠', septum: '사이막', raphe: '솔기', sheath: '힘줄집', connective: '결합조직', tendon: '힘줄', tooth: '치아' };
+    retinaculum: '지지띠', septum: '사이막', raphe: '솔기', sheath: '힘줄집', connective: '결합조직', tendon: '힘줄', tooth: '치아',
+    artery: '동맥', vein: '정맥', heart: '심장' };
 function kindLabel(row: RuntimeStructureRecord) {
     return (row.tissue && TISSUE_LABELS[row.tissue]) || (row.kind === 'bone' ? '뼈' : row.kind === 'nerve' ? '신경' : row.kind === 'muscle' ? '근육' : '구조');
 }
-const LAYER_HINTS: Partial<Record<RuntimeStructureRecord['kind'], string>> = { fascia: '근막', joint: '인대·관절', tendon: '얕은 근육 또는 깊은 근육' };
+const LAYER_HINTS: Partial<Record<RuntimeStructureRecord['kind'], string>> = { fascia: '근막', joint: '인대·관절', tendon: '얕은 근육 또는 깊은 근육', vessel: '혈관' };
 function learnerRowTitle(row: RuntimeStructureRecord) {
     return row.kind === 'nerve' ? nerveNamesForSource(row.names.en)?.koModern ?? row.label : row.label;
 }
@@ -73,6 +77,7 @@ export default function App() {
     const [attachmentFocus, setAttachmentFocus] = useState<{ key: string; role: 'origin' | 'insertion' } | null>(null);
     const [tab, setTab] = useState<'구조' | '기능'>('구조');
     const [explorerMode, setExplorerMode] = useState<'structures' | 'actions'>('structures');
+    const [toolsOpen, setToolsOpen] = useState(false);
     const [actionId, setActionId] = useState<string | null>(null);
     const [motionHost, setMotionHost] = useState<SourceMotionHost | null>(null);
     const [muscleLayerEnabled, setMuscleLayerEnabled] = useState(true);
@@ -141,18 +146,18 @@ export default function App() {
     const selectedSourceKeys = useMemo(() => route.selected ? [route.selected] : [], [route.selected]);
     const selected = runtimeByKey.get(route.selected ?? '');
     const [structureCards, setStructureCards] = useState<StructureCardsFile | null>(null);
-    const needsStructureCards = Boolean(selected && LAYER_HINTS[selected.kind]);
+    const needsStructureCards = Boolean(selected && LAYER_HINTS[selected.kind] && selected.kind !== 'vessel');
     useEffect(() => {
         if (!needsStructureCards || structureCards) return;
         let live = true;
         void fetch('/__atlas/v2/cards.json').then(response => response.ok ? response.json() : null).then(file => { if (live && file) setStructureCards(file); }).catch(() => {});
         return () => { live = false; };
     }, [needsStructureCards, structureCards]);
-    const [cardRig, setCardRig] = useState<RigFile | null>(null);
+    const [cardRig, setCardRig] = useState<{ rig: RigFile; actions: MuscleActionsFile } | null>(null);
     useEffect(() => {
         if (!needsStructureCards || cardRig || !isRigHost(motionHost)) return;
         let live = true;
-        void motionHost.loadRig().then(rig => { if (live) setCardRig(rig); }).catch(() => {});
+        void Promise.all([motionHost.loadRig(), motionHost.loadMuscleActions()]).then(([rig, actions]) => { if (live) setCardRig({ rig, actions }); }).catch(() => {});
         return () => { live = false; };
     }, [needsStructureCards, cardRig, motionHost]);
     const attachmentKey = JSON.stringify([route.selected, route.regions, homeRevision, viewResetRevision]);
@@ -362,6 +367,7 @@ export default function App() {
    <div className="header-brand-group"><button className="brand" aria-label="Human Atlas 전신 홈" onClick={() => { setQuery(''); resetPresentation(); navigate({ regions: [], selected: null }, false, ''); setHomeRevision(v => v + 1); }}><span className="brand-dot"/> HUMAN ATLAS</button></div>
    <button className="explore-trigger" aria-expanded={exploreOpen} aria-controls="atlas-explorer" onClick={() => setExploreOpen(!exploreOpen)}>부위 탐색 · {regionLabel} ▾</button>
    <label className="global-search"><span aria-hidden="true">⌕</span><input ref={searchInput} type="search" aria-label="구조 검색" aria-keyshortcuts="/" title="/ 키로 검색" placeholder={explorerMode === "actions" ? "움직임·근육 이름 검색" : "근육·뼈·신경 이름 검색"} autoComplete="off" value={query} onChange={e => { updateQuery(e.target.value); setExploreOpen(true); }}/>{query && <button aria-label="검색 지우기" onClick={() => updateQuery('')}>×</button>}</label>
+   <button className="study-tools-trigger" aria-expanded={toolsOpen} aria-controls="study-tools" onClick={() => setToolsOpen(open => !open)}>퀴즈·북마크</button>
   </header>
   <button inert={!entered} className="app-info-trigger" onClick={() => info.current?.showModal()}>앱 정보</button>
   <dialog className="app-info-dialog" ref={info} aria-labelledby="app-info-title"><div className="app-info-content"><button className="app-info-close" aria-label="앱 정보 닫기" onClick={() => info.current?.close()}>닫기</button><h2 id="app-info-title">모형·자료 정보</h2>
@@ -430,10 +436,12 @@ export default function App() {
 
    </aside>
    <section id="atlas-stage" tabIndex={-1} className="study-stage" aria-label={`${title} 학습 장면`}><div className="stage-caption" aria-hidden={!entered}><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{title}</h2><p>회전하고 확대하며 구조를 살펴보세요.</p></div>
+    {toolsOpen && entered && <StudyTools rows={data.integration.objects.filter(r => r.routeAudience === (route.audience ?? 'learner'))} host={motionHost}
+      selected={selected ?? null} onSelect={select} onClearSelection={() => navigate({ regions: route.regions, selected: null })} onClose={() => setToolsOpen(false)}/>}
     <WholeBodyViewer attachmentRole={attachmentRole} homeRevision={homeRevision} viewResetRevision={viewResetRevision} datasetSource={data} onEntered={setEntered} onMotionHostChange={setMotionHost} onMuscleLayerChange={setMuscleLayerEnabled} onBoneLayerChange={setBoneLayerEnabled} onSelectionHiddenChange={setSelectedSourceHidden} regionIds={route.regions} selectedId={route.selected} selectedIds={selectedSourceKeys} whole={!route.regions.length} onWholeChange={() => { resetPresentation(); navigate({ regions: [], selected: route.selected }); }} onSelect={select}/>
    </section>
    {(selected || selectedTextNerve) && <details inert={!entered} className="study-details" id="study-details" open={detailsOpen} onToggle={e => setDetailsOpen(e.currentTarget.open)}><summary className="mobile-detail-summary">{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</summary><div className="study-detail-body"><div className="study-detail-header">
-    <button className="bone-related-muscle" onClick={() => navigate({ regions: [], selected: null })}>선택 해제</button><h2>{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</h2>{selected && anatomicalPartSubtitle(selected.names.en) && <p className="anatomical-part-subtitle">{anatomicalPartSubtitle(selected.names.en)}</p>}
+    <button className="bone-related-muscle" onClick={() => navigate({ regions: [], selected: null })}>선택 해제</button>{selected && <BookmarkButton row={selected}/>}<h2>{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</h2>{selected && anatomicalPartSubtitle(selected.names.en) && <p className="anatomical-part-subtitle">{anatomicalPartSubtitle(selected.names.en)}</p>}
 
     {selected && <><div className="names-card"><div><span>{kindLabel(selected)}</span><strong>{selected.side === 'left' ? '왼쪽' : selected.side === 'right' ? '오른쪽' : '좌우 구분 없음'}</strong></div></div>
     <div className="part-pills" aria-label="좌우 모형">{data.integration.objects.filter(r => r.routeAudience === (route.audience ?? 'learner') && r.localDisplayEligible && r.inspectionEligible && r.names.en === selected.names.en && r.side).map(r => <button key={r.sourceKey} aria-pressed={r.sourceKey === selected.sourceKey} onClick={() => select(r.sourceKey)}>{r.side === 'left' ? '왼쪽' : '오른쪽'}</button>)}</div></>}
@@ -492,6 +500,7 @@ export default function App() {
           {bones.length > 0 && <div className="attachment-bone-links" aria-label={`${role === 'origin' ? '기시' : '정지'} 관련 뼈`}>{bones.map(bone => <button key={bone.sourceKey} onClick={() => select(bone.sourceKey)}>{bone.label}</button>)}</div>}
         </section>;
       })}
+      <AttachmentAreas sourceKey={selected.sourceKey} rows={runtimeByKey} bonesVisible={boneLayerEnabled} onSelect={select}/>
       {attachmentBoneKeys(selected.sourceKey, undefined, data.integration.objects).length > 0 && <p className="quiet-note">주요 부착 부위를 요약했습니다. 관련 뼈는 전체 모형으로 함께 표시하며, 정확한 부착점 표시는 제공하지 않습니다.</p>}
       <section className="attachment-section attachment-summary-block">
         <h3>운동신경</h3>
@@ -500,17 +509,19 @@ export default function App() {
           return <li key={`${relation.nerveKey}:${relation.targetEnglishConcept}:${relation.targetSide}`}>
             <button className="bone-related-muscle" onClick={() => openNerveConcept(relation.nerveKey, relation.targetSide ?? selected.side)}>{concept?.names.koModern ?? '신경 설명'}</button>
           </li>;
-        })}</ul> : <p>{structureUnavailabilityForLearner('motorNerve')}</p>}
+        })}</ul> : <MuscleNerves muscle={selected} rows={runtimeByKey} onSelect={select} fallback={<p>{structureUnavailabilityForLearner('motorNerve')}</p>}/>}
         {selectedMuscleNerveRelations.length > 0 && <details key={`relation-${selected.sourceKey}`} className="nerve-learning-context"><summary>관계 안내</summary>
           {[...new Set(selectedMuscleNerveRelations.map(relation => relation.displayNote))].map(note => <p key={note}>{note}</p>)}
         </details>}
       </section>
+      <MuscleBloodSupply muscle={selected} rows={runtimeByKey} onSelect={select}/>
       <section className="attachment-section attachment-summary-block">
         <h3>감각·고유감각</h3>
         <p>{structureUnavailabilityForLearner('sensoryProprioception')}</p>
       </section>
     </section>
     <section id="study-function-panel" className="study-tab-panel function-tab-panel" role="tabpanel" aria-labelledby="tab-기능" hidden={tab !== '기능'}>
+      <MuscleActionSummary muscle={selected}/>
       {isRigHost(motionHost) && <MuscleRigActions host={motionHost} sourceKey={selected.sourceKey} visible={key => runtimeByKey.get(key)?.localDisplayEligible ?? false}/>}
       {!motionFeature && motionNotice}
       {functionActions.length > 0 && <fieldset className="learner-action-picker" aria-label="근육 작용 선택">
@@ -537,8 +548,9 @@ export default function App() {
     </section>
     </div>
     </> : selected?.kind === 'bone' ? <>{MotionLearningPanel ? <MotionLearningPanel subjectHidden={selectedSourceHidden} actions={motionActions} selectedActionId={actionId ?? preferredMotionAction(motionActions)?.id ?? null} onSelectAction={setActionId} host={motionHost} sourceContextKey={selected.sourceKey} showActionPicker={true} muscleLayerEnabled={boneLayerEnabled} subjectKind="bone"/> : motionNotice}<section className="attachment-section"><h3>관련 근육</h3>{relatedMuscles.length ? <ul>{relatedMuscles.map(r => <li key={r.sourceKey}><button className="bone-related-muscle" onClick={() => select(r.sourceKey)}>{r.label}</button><span>{r.roles.map(role => role === 'origin' ? '기시' : role === 'insertion' ? '정지' : '부착').join(' · ')}</span></li>)}</ul> : <p className="quiet-note">주요 표지와 관련 근육 설명을 준비하고 있습니다.</p>}</section></>
+    : selected?.kind === 'vessel' ? <VesselCard vessel={selected} rows={runtimeByKey} onSelect={select}/>
     : selected && LAYER_HINTS[selected.kind] ? <StructureCard row={selected} cards={structureCards} rows={runtimeByKey} onSelect={select}
-      rig={cardRig} onMoveJoint={isRigHost(motionHost) ? jointId => motionHost.openMovement(jointId) : undefined}/> : null}
+      rig={cardRig?.rig} actions={cardRig?.actions} onMoveJoint={isRigHost(motionHost) ? jointId => motionHost.openMovement(jointId) : undefined}/> : null}
    </div></div></details>}
   </div>
  </div>;

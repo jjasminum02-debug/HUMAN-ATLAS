@@ -1,28 +1,13 @@
 {
  "schemaVersion": 1,
- "method": "Muscle actions for the movement UI (ROADMAP M3).\n\n  python3 atlas-data/pipeline/build_actions.py\nTable: muscle_actions.py (AI-written from standard texts). Independent check: OpenSim moment arms\n(opensim_moment_arms.py on the bundled Rajagopal2016 / Arm26 / WristModel, right side), averaged over five angles inside\nthe rig's range with the other coordinates at 0. A listed action agrees when the OpenSim moment arm has the same sign and\nis at least 2 mm. Actions OpenSim contradicts are left out of the runtime file (listed in the sidecar); OpenSim\nactions >= 10 mm missing from the table are reported, not added.\nWrites atlas-data/runtime/muscle-actions.json (runtime) and atlas-data/anatomy/muscle-action-checks.json (check sidecar).",
+ "method": "Muscle actions for the movement UI (ROADMAP M3).\n\n  python3 atlas-data/pipeline/build_actions.py\nTable: muscle_actions.py (AI-written from standard texts). Independent check: OpenSim moment arms\n(opensim_moment_arms.py on the bundled Rajagopal2016 / Arm26 / WristModel, right side), averaged over five angles inside\nthe rig's range with the other coordinates at 0. A listed action agrees when the OpenSim moment arm has the same sign and\nis at least 2 mm - for the muscle as a whole (mean of its model parts), or for one model part (gluteus medius anterior\nfibres), or with the hip flexed 45 degrees for the hip's other dofs (rotation moment arms change sign with flexion).\nThe sidecar records which basis agreed. Actions OpenSim contradicts are left out of the runtime file (listed in the sidecar); OpenSim\nactions >= 10 mm missing from the table are reported, not added.\nWrites atlas-data/runtime/muscle-actions.json (runtime) and atlas-data/anatomy/muscle-action-checks.json (check sidecar).",
  "summary": {
   "tableMuscles": 115,
   "opensimChecked": 56,
-  "disagreements": 4,
+  "disagreements": 1,
   "unlisted": 7
  },
  "disagreements": [
-  {
-   "muscle": "Gluteus medius muscle",
-   "action": "hip:rotation+s",
-   "opensimMm": -11.0
-  },
-  {
-   "muscle": "Gluteus minimus muscle",
-   "action": "hip:rotation+s",
-   "opensimMm": -1.8
-  },
-  {
-   "muscle": "Tensor fasciae latae",
-   "action": "hip:rotation+s",
-   "opensimMm": 0.6
-  },
   {
    "muscle": "Short head of biceps brachii",
    "action": "shoulder:flexion+s",
@@ -76,17 +61,39 @@
    }
   },
   "Gluteus medius muscle": {
-   "actions": "hip:adduction-p hip:rotation+s",
+   "actions": "hip:adduction-p hip:rotation+p",
    "opensim": {
     "hip:flexion": -10.7,
     "hip:adduction": -43.2,
     "hip:rotation": -11.0
+   },
+   "agreedBy": {
+    "hip:rotation": {
+     "basis": "part",
+     "parts": [
+      11.4,
+      -12.4,
+      -32.0
+     ],
+     "hipFlexed45Mm": 18.2
+    }
    }
   },
   "Gluteus minimus muscle": {
-   "actions": "hip:adduction-p hip:rotation+s",
+   "actions": "hip:adduction-p hip:rotation+p",
    "opensim": {
     "hip:adduction": -45.9
+   },
+   "agreedBy": {
+    "hip:rotation": {
+     "basis": "part",
+     "parts": [
+      8.1,
+      -1.2,
+      -12.5
+     ],
+     "hipFlexed45Mm": 25.9
+    }
    }
   },
   "Tensor fasciae latae": {
@@ -95,6 +102,15 @@
     "hip:flexion": 58.7,
     "hip:adduction": -60.4,
     "knee:flexion": -9.2
+   },
+   "agreedBy": {
+    "hip:rotation": {
+     "basis": "hipFlexed45",
+     "parts": [
+      0.6
+     ],
+     "hipFlexed45Mm": 21.1
+    }
    }
   },
   "Iliacus muscle": {

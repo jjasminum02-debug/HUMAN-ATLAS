@@ -16,8 +16,10 @@ export interface BodyChunk { id: string; url: string; sha256: string; bytes: num
 export interface BodyManifest { version: number; revision?: string; localOnly: boolean; publicRedistribution: string; frame: string; unit: string; lodLevels: number; chunks: BodyChunk[] }
 export interface BodyView { attachmentObservation?: { sourceKey: string; role: 'origin' | 'insertion' } | null; focusObservation?: boolean; nerveConceptMuscleKeys?: string[]; nerves?: boolean; poseId?: string; highlightInnervation?: boolean; observeNerves?: boolean; region: string | null; regionIds?: string[]; bones: boolean; muscles: boolean; supplements: boolean; selectedId: string | null; selectedIds?: string[]; dim: boolean; isolate?: boolean; selectedPresentation?: 'normal' | 'translucent' | 'hidden'; hiddenSourceKeys?: string[]; translucentSourceKeys?: string[];
   /** V1 layers: fascia/joint layers, muscle depth split, and per-layer opacity (0.1-1). */
-  fascia?: boolean; joints?: boolean; superficialMuscles?: boolean; deepMuscles?: boolean; layerOpacity?: Partial<Record<LayerId, number>> }
-export type LayerId = 'fascia' | 'superficialMuscle' | 'deepMuscle' | 'joint' | 'bone' | 'nerve';
+  fascia?: boolean; joints?: boolean; superficialMuscles?: boolean; deepMuscles?: boolean; layerOpacity?: Partial<Record<LayerId, number>>;
+  /** Q2-1: arteries, veins and heart. */
+  vessels?: boolean }
+export type LayerId = 'fascia' | 'superficialMuscle' | 'deepMuscle' | 'joint' | 'bone' | 'nerve' | 'vessel';
 export function visible(a: BodyAsset, view: BodyView): boolean {
   const regionIds = view.regionIds ?? (view.region ? [view.region] : []);
   return (a.localDisplay ? a.localDisplay.state === 'allowed' && a.defaultVisible : (a.defaultVisible || (a.supplement && view.supplements && a.pickState === 'source_only_unbound')))

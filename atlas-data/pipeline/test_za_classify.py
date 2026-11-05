@@ -18,7 +18,17 @@ class ClassifyTest(unittest.TestCase):
         self.assertIn('exclude', self.kind('Joints.g', '3: Joints'))
 
     def test_out_of_scope_collection(self):
-        self.assertEqual(self.kind('Heart', '5: Cardiovascular system')['exclude'], 'collection_out_of_scope_cardiovascular')
+        self.assertEqual(self.kind('Liver', '8: Visceral systems')['exclude'], 'collection_out_of_scope_8')
+
+    def test_cardiovascular_kinds(self):
+        cv = '5: Cardiovascular system'
+        arteries, veins = [['Bonus collection', 'Cardiovascular system', 'Systemic arteries']], [['Bonus collection', 'Cardiovascular system', 'Systemic veins']]
+        self.assertEqual(self.kind('Femoral artery.l', cv, arteries)['kind'], 'artery')
+        self.assertEqual(self.kind('Great saphenous vein.r', cv, veins)['kind'], 'vein')
+        self.assertEqual(self.kind('Sigmoid sinus.l', cv)['kind'], 'vein')
+        self.assertEqual(self.kind('Left ventricle', cv)['kind'], 'heart')
+        self.assertEqual(self.kind('Apex of heart', cv)['kind'], 'heart_landmark')
+        self.assertEqual(self.kind('????????', cv)['exclude'], 'unnamed_object')
 
     def test_joint_kinds(self):
         self.assertEqual(self.kind('Anterior cruciate ligament.r', '3: Joints', JOINT_LL)['kind'], 'ligament')

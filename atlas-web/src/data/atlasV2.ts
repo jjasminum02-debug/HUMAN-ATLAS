@@ -1,13 +1,13 @@
 // v2 runtime data (ROADMAP D2): atlas-data/runtime/structures.json + relations.json, geometry chunks.
 // projectLegacyRuntime() turns it into the Dataset/RuntimeIntegration shapes the current viewer and UI
 // consume. Pre-v2 structures keep their keys, geometry bytes and binding identity, so motion, acupoint and
-// skin bindings stay valid. `layer` decides the row kind (bone/muscle/tendon/fascia/joint/nerve); structures
+// skin bindings stay valid. `layer` decides the row kind (bone/muscle/tendon/fascia/joint/nerve/vessel); structures
 // without a layer (CNS, sense organs, attachment patches, cavities) project as hidden accessories.
 import { validateDataset, type Dataset, type Instance, type Level } from '../viewer/datasets/schema.ts';
 import { validateRuntimeIntegration, type RuntimeIntegration, type RuntimeStructureRecord } from '../viewer/datasets/integration.ts';
 
-export type V2System = 'skeletal' | 'attachment' | 'joint' | 'muscular' | 'nervous';
-export type V2Layer = 'bone' | 'muscle' | 'fascia' | 'joint' | 'nerve';
+export type V2System = 'skeletal' | 'attachment' | 'joint' | 'muscular' | 'nervous' | 'cardiovascular';
+export type V2Layer = 'bone' | 'muscle' | 'fascia' | 'joint' | 'nerve' | 'vessel';
 export interface V2Lod { resource: string; chunk: string; triangles: number; vertices: number; geometryBytes: number }
 export interface V2Structure {
   id: string; key: string; sourceName: string; system: V2System; kind: string | null;
@@ -35,7 +35,7 @@ export interface V2GeometryFile { schemaVersion: 2; revision: string; chunks: V2
 
 const HIDDEN_REASON = 'accessory-or-original-hidden-or-exception';
 const INSTANCE_KIND: Record<string, string> = { bone: 'skeletal_surface', muscle: 'muscle_surface_or_part', tendon: 'tendon_surface',
-  fascia: 'fascia_surface', joint: 'joint_surface', nerve: 'nerve_surface' };
+  fascia: 'fascia_surface', joint: 'joint_surface', nerve: 'nerve_surface', vessel: 'vessel_surface' };
 function rowKind(s: V2Structure): RuntimeStructureRecord['kind'] {
   return s.layer === null ? 'accessory' : s.layer === 'muscle' && s.kind === 'tendon' ? 'tendon' : s.layer;
 }
@@ -92,7 +92,7 @@ export function projectLegacyRuntime(file: V2StructuresFile, relationsFile: V2Re
     };
     if (kind === 'nerve') row.nerve = { poseId: s.nerve!.poseId, ...(nerveLinks.get(s.id) ?? { branchKeys: [], muscleKeys: [] }) };
     if (s.depth) row.depth = s.depth;
-    if (kind === 'fascia' || kind === 'joint' || kind === 'tendon' || kind === 'bone' && s.kind !== 'bone') row.tissue = s.kind!;
+    if (kind === 'fascia' || kind === 'joint' || kind === 'tendon' || kind === 'vessel' || kind === 'bone' && s.kind !== 'bone') row.tissue = s.kind!;
     return row;
   });
   const integration = validateRuntimeIntegration({

@@ -1,6 +1,6 @@
 # Z-Anatomy 추출 파이프라인 (로드맵 D1)
 
-Z-Anatomy `Startup.blend` 하나에서 뼈·근육·관절/인대·근막·부착 면·신경을 구조당 GLB와 `structures.json`으로 뽑는다.
+Z-Anatomy `Startup.blend` 하나에서 뼈·근육·관절/인대·근막·부착 면·신경·혈관(Q2-1)을 구조당 GLB와 `structures.json`으로 뽑는다.
 원본 .blend는 저장하지 않는다. 출력은 `atlas-data/source-cache/datasets/za-full/`(git 제외, 약 105MB).
 
 ```bash
@@ -69,7 +69,7 @@ blender --background --factory-startup --python atlas-data/pipeline/build_rig.py
 blender --background --factory-startup --python atlas-data/pipeline/build_skin.py   # → za-v2/skin/*.bin (git 제외, 약 18초)
 ```
 - `build_rig.py`: 분절 22개·관절 21개. 계층·범위는 OpenSim Rajagopal2016, 중심·축은 ZA 뼈 표면 맞춤(주석에 방법·접촉 실측).
-- `build_skin.py`: 연조직 정점마다 두 분절 가중치. 실제 런타임 chunk를 읽으므로 형상 chunk를 다시 만들면 이것도 다시 실행한다.
+- `build_skin.py`: 연조직(근육·힘줄·인대·근막·혈관·신경) 정점마다 두 분절 가중치. 실제 런타임 chunk를 읽으므로 형상 chunk를 다시 만들면 이것도 다시 실행한다.
 - 앱: `src/viewer/rig.ts`(자세 → 분절 변환), `src/viewer/skin.ts`(CPU 선형 블렌드). 개발용 콘솔: `window.__atlasRig`.
 
 ## 근육 작용 (로드맵 M3)
@@ -78,8 +78,44 @@ blender --background --factory-startup --python atlas-data/pipeline/build_skin.p
 python3 atlas-data/pipeline/build_actions.py   # → runtime/muscle-actions.json + anatomy/muscle-action-checks.json (1초 미만)
 ```
 - 표: `muscle_actions.py`(`ACTIONS` 근육 → rig 자유도·방향·주/보조, `OUTSIDE` rig에 없는 움직임, `OPENSIM` 대조용 모델 근육 이름).
-- 대조: `opensim_moment_arms.py`가 `OpenSim_Models/`(읽기만)의 경로점으로 모멘트 팔을 계산. OpenSim과 부호가 다른 작용은 런타임에서 빠진다.
+- 대조: `opensim_moment_arms.py`가 `OpenSim_Models/`(읽기만)의 경로점으로 모멘트 팔을 계산. 근육 전체 평균, 모형의 한 부분, 엉덩 45° 굽힘 중 하나라도
+  부호가 맞으면 일치(근거는 sidecar `agreedBy`). 어느 쪽도 안 맞는 작용은 런타임에서 빠진다.
 - 앱: `src/viewer/movement.ts`, `src/viewer/wholeBody/MovementPanel.tsx`(관절 움직임 창), `src/ui/MuscleRigActions.tsx`(근육 기능 탭).
 
+## 부착 면 (로드맵 C4)
+
+```bash
+python3 atlas-data/pipeline/build_attachments.py                                                   # ZA 패치 → runtime/attachments.json
+blender --background --factory-startup --python atlas-data/pipeline/build_attachment_contacts.py   # 접촉 추정 면 추가 (약 50초)
+```
+- 두 번째는 첫 번째 결과에 행을 더하므로 항상 순서대로 실행한다. 형상 chunk를 다시 만들면 둘 다 다시 실행한다.
+- 앱: `DatasetSceneAdapter`(뼈 위 면), `src/ui/AttachmentAreas.tsx`(근육 카드 목록).
+
+## 근육 카드 (로드맵 C2)
+
+```bash
+python3 atlas-data/pipeline/build_muscle_cards.py   # → runtime/muscle-cards.json + anatomy/muscle-card-checks.json (처음엔 Wikipedia 약 190쪽 받음, 이후 캐시)
+```
+- 표: `muscle_content.py`(`NERVES`·`ARTERIES` 용어표와 정보상자 문구 패턴, `CONCEPTS` 근육별 신경·분절·동맥·작용, `PARTS` ZA 이름 → 근육, `TENDONS`).
+- 비교: Wikipedia 근육 정보상자의 nerve·blood·action 칸. 두 출처가 함께 말한 값만 런타임에 넣고 나머지는 checks 파일의 `exceptions`.
+  초안을 Wikipedia에 맞춰 고치지 않는다(독립성). 고칠 수 있는 것은 문구 패턴·쪽 제목 같은 읽기 문제뿐.
+- 앱: `src/ui/MuscleCardFacts.tsx`(운동신경·혈액공급·작용 요약).
+
+## 혈관 (로드맵 Q2-1)
+
+```bash
+blender ... --python atlas-data/pipeline/extract_za.py        # 위 1번과 같음(심혈관 컬렉션 5 포함, 약 100초)
+python3 atlas-data/pipeline/build_runtime_v2.py
+python3 atlas-data/pipeline/verify_names_kmle.py && python3 atlas-data/pipeline/names_ko.py && python3 atlas-data/pipeline/build_runtime_v2.py
+blender --background --factory-startup --python atlas-data/pipeline/build_skin.py   # 혈관도 rig를 따라감
+python3 atlas-data/pipeline/build_muscle_cards.py                                    # 근육 혈액공급 → 혈관 연결
+```
+- 분류(`za_classify.py`): Bonus 컬렉션의 동맥·정맥 묶음, 이름(정맥굴·대정맥 등) → `artery`·`vein`, 심장 방·실·판막·꼭지근 → `heart`,
+  심장 표면 표지(고랑·끝·모서리) → `heart_landmark`(표시 안 함). 곡선은 신경처럼 bevel 관(굵기 = bevel 0.5mm × 점 반지름).
+- ZA 혈관 관은 지나치게 잘게 나뉘어 있어 혈관만 낮은 비율(overview 3–12%, detail 15–60%, detail은 허용 오차의 1/3)로 줄인다.
+  다른 계통의 형상·chunk는 바뀌지 않는다(재추출 후 2,660개 전부 동일 확인).
+- 한국어 이름: `vessel_names_ko.py`(혈관 이름 표 + 좌우·허파 구역·'~의 ~가지' 조합 규칙), KMLE 사전 대조 후 사전 값 우선.
+- 앱: 층 `혈관`(동맥 빨강·정맥 파랑·심장), `src/ui/MuscleCardFacts.tsx` `VesselCard`(혈액을 받는 근육).
+
 ## 범위 밖 (이번 추출에서 제외)
-심혈관(5, 곡선 654개 포함)·림프(6)·내장(8)·부위(9) 컬렉션, 라벨 지시선(`.j`·`.i`), 계통 합본(`.g`), 글자 객체.
+림프(6)·내장(8)·부위(9) 컬렉션, 라벨 지시선(`.j`·`.i`), 계통 합본(`.g`), 글자 객체.

@@ -1,4 +1,4 @@
-"""Skin weights for soft tissue (ROADMAP M2): muscles, tendons, ligaments, capsules, fascia follow the rig.
+"""Skin weights for soft tissue (ROADMAP M2): muscles, tendons, ligaments, capsules, fascia, vessels and nerves follow the rig.
 
   blender --background --factory-startup --python atlas-data/pipeline/build_skin.py
 (Blender only for numpy + mathutils.kdtree.) Reads the exact runtime geometry chunks, so vertex order
@@ -28,7 +28,7 @@ OUT = GEOMETRY / 'skin'
 SIGMA = .012
 NEAR, NEAR_SHARE = .02, .03  # a segment is "near" when >= 3 % of a structure's vertices lie within 2 cm of its bones
 ROLE_ORDER = ['pelvis', 'torso', 'femur', 'patella', 'tibia', 'talus', 'calcn', 'toes', 'humerus', 'ulna', 'radius', 'hand']
-SOFT_LAYERS = {'muscle', 'fascia', 'joint'}
+SOFT_LAYERS = {'muscle', 'fascia', 'joint', 'vessel', 'nerve'}  # vessels (Q2-1) and nerves follow the bones they run along
 
 
 def role(segment):

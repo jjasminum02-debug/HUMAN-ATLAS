@@ -5,8 +5,8 @@ Run (Blender 5.2, source scripts disabled; the source .blend is never saved):
     atlas-data/source-cache/z-anatomy/t97/extracted/Z-Anatomy/Startup.blend \
     --python atlas-data/pipeline/extract_za.py [-- --limit N]
 
-Scope: numbered collections 1 skeletal, 2 muscular insertions, 3 joints, 4 muscular, 7 nervous
-(meshes, and beveled curves converted to tubes). Classification lives in za_classify.py.
+Scope: numbered collections 1 skeletal, 2 muscular insertions, 3 joints, 4 muscular, 5 cardiovascular (Q2-1),
+7 nervous (meshes, and beveled curves converted to tubes). Classification lives in za_classify.py.
 Geometry stays in object-local space; `matrix` (column-major) applies the source world transform and
 the Blender->app axis change [x, z, -y] once. Units are metres. Re-running reuses finished units.
 """
@@ -96,12 +96,19 @@ def sampled_error(a, at, b, bt, matrix):
     return worst
 
 
-def overview(mesh, p, t, ip, n, it, matrix, temporary):
+OVERVIEW_RATIOS = [.18, .32, .5, .75]
+# Q2-1: ZA vessel tubes are tessellated far finer than their few-millimetre radius needs (one retinal artery has 207k
+# triangles), so vessels also try lower overview ratios and get a decimated detail level at a third of the tolerance.
+VESSEL_OVERVIEW_RATIOS = [.03, .05, .08, .12] + OVERVIEW_RATIOS
+VESSEL_DETAIL_RATIOS = [.15, .25, .4, .6]
+
+
+def overview(mesh, p, t, ip, n, it, matrix, temporary, ratios=OVERVIEW_RATIOS, tolerance_scale=1.):
     world = p.astype('f8') @ matrix[:3, :3].T + matrix[:3, 3]
-    tolerance = max(.00015, min(.002, float(np.linalg.norm(world.max(0) - world.min(0))) * .01))
+    tolerance = max(.00015, min(.002, float(np.linalg.norm(world.max(0) - world.min(0))) * .01)) * tolerance_scale
     if len(t) <= 256:
         return (ip, n, it), {'ratio': 1., 'errorMetres': 0., 'toleranceMetres': tolerance}
-    for ratio in [.18, .32, .5, .75]:
+    for ratio in ratios:
         copy = mesh.copy(); temp = bpy.data.objects.new('extract-temp', copy); temporary.collection.objects.link(temp)
         try:
             mod = temp.modifiers.new('overview', 'DECIMATE'); mod.ratio = max(ratio, 256 / len(t)); mod.use_collapse_triangulate = True
@@ -160,8 +167,8 @@ def main():
         info = classify(obj.name, top, bonus.get(obj.name, []), obj.parent.name if obj.parent else None)
         if 'exclude' in info:
             exclude(info['exclude']); continue
-        if obj.type == 'CURVE' and info['system'] != 'nervous':
-            exclude('curve_outside_nervous'); continue
+        if obj.type == 'CURVE' and info['system'] not in ('nervous', 'cardiovascular'):
+            exclude('curve_outside_nervous_or_vessels'); continue
         if obj.type == 'MESH' and len(obj.data.vertices) <= 2:
             exclude('label_leader_line'); continue
         checkpoint = OUT / 'units' / f'{slug(obj.name)}.json'
@@ -181,14 +188,17 @@ def main():
             matrix = np.array(evaluated.matrix_world, dtype='f8'); assert np.isfinite(matrix).all()
             app = APP_FRAME @ matrix
             world = p.astype('f8') @ app[:3, :3].T + app[:3, 3]
+            vessel = info['system'] == 'cardiovascular'
+            if vessel:
+                (ip, n, it), detail_quality = overview(mesh, p, t, ip, n, it, matrix, temporary, VESSEL_DETAIL_RATIOS, 1 / 3)
             lods = {'detail': emit(ip, n, it)}
-            (op, on, ot), quality = overview(mesh, p, t, ip, n, it, matrix, temporary)
+            (op, on, ot), quality = overview(mesh, p, t, ip, n, it, matrix, temporary, VESSEL_OVERVIEW_RATIOS if vessel else OVERVIEW_RATIOS)
             lods['overview'] = emit(op, on, ot) if quality['ratio'] < 1. else lods['detail']
             unit = {**info, 'sourceName': obj.name, 'sourceType': obj.type, 'topCollection': top,
                     'bonusPaths': bonus.get(obj.name, []), 'fingerprint': fingerprint,
                     'matrix': app.T.ravel().tolist(), 'mirrored': bool(np.linalg.det(app[:3, :3]) < 0),
                     'bounds': {'min': world.min(0).tolist(), 'max': world.max(0).tolist()},
-                    'lods': lods, 'overviewQuality': quality}
+                    'lods': lods, 'overviewQuality': quality, **({'detailQuality': detail_quality} if vessel else {})}
             save(checkpoint, unit); structures.append(unit)
         except Exception as error:  # one bad object never stops the batch
             exceptions.append({'id': info['id'], 'sourceName': obj.name, 'reason': 'extract_failed', 'detail': repr(error)})

@@ -15,7 +15,7 @@ SENSE_WORDS = (r'eye|retina|sclera|lens|iris|cornea|vitreous|zonular|choroid|cil
                r'labyrinth|semicircular|utricle|saccule|vestibul|lacrimal|conjunctiva|eyelid|tarsus|ear\b|auricle|nasal|olfactory|tongue|taste')
 
 TOP = {'1': 'skeletal', '2': 'attachment', '3': 'joint', '4': 'muscular', '5': 'cardiovascular', '7': 'nervous'}
-EXTRACTED_TOPS = {'1', '2', '3', '4', '7'}
+EXTRACTED_TOPS = {'1', '2', '3', '4', '5', '7'}
 
 REGIONS = {'Head': 'head', 'Neck': 'neck', 'Trunk': 'trunk', 'upper limb': 'upper_limb', 'hand': 'hand',
            'lower limb': 'lower_limb', 'foot': 'foot'}
@@ -82,6 +82,20 @@ def _nervous_kind(n, paths):
     return None
 
 
+HEART_LANDMARK = r'surface of heart|border of heart|sulcus|apex|notch of|base of heart'
+HEART_PART = r'heart|atri(um|al)|ventric|leaflet|valve|papillary|septum|cusp|chordae'
+
+
+def _cardiovascular_kind(n, paths):
+    # Q2-1: vessels by the Bonus collection (systemic / pulmonary / cardiac arteries and veins), heart by name.
+    if re.search(HEART_LANDMARK, n): return 'heart_landmark'
+    if _has(paths, 'veins') or re.search(r'\bveins?\b|\bsinus(es)?\b|venous|vena cava|azygos', n): return 'vein'
+    if _has(paths, 'arteries') or _has(paths, 'Aorta') or _has(paths, 'artery') or re.search(
+            r'arter|aort|\btrunk\b|\barch\b|branch|anastomosis|arterial circle|bifurcation', n): return 'artery'
+    if _has(paths, 'Heart') or re.search(HEART_PART, n): return 'heart'
+    return None
+
+
 def classify(name, top, bonus_paths, parent=None):
     """Return a dict with either `exclude` (reason) or the structure classification."""
     base, suffix, parenthesized = split_name(name)
@@ -90,6 +104,8 @@ def classify(name, top, bonus_paths, parent=None):
         return {'exclude': 'label_or_aggregate_suffix_.' + suffix}
     if top_key not in EXTRACTED_TOPS:
         return {'exclude': 'collection_out_of_scope_' + TOP.get(top_key, top_key)}
+    if not re.search(r'[A-Za-z]{3}', base):
+        return {'exclude': 'unnamed_object'}  # ZA placeholder names such as '????????'
     n = base.lower()
     out = {'name': base, 'parenthesized': parenthesized, 'system': TOP[top_key]}
     attachment = ATTACHMENT_SUFFIX.match(suffix) if top_key == '2' else None
@@ -112,6 +128,8 @@ def classify(name, top, bonus_paths, parent=None):
             out['kind'] = _joint_kind(n)
         elif top_key == '4':
             out['kind'] = _muscular_kind(n, bonus_paths)
+        elif top_key == '5':
+            out['kind'] = _cardiovascular_kind(n, bonus_paths)
         elif top_key == '7':
             out['kind'] = _nervous_kind(n, bonus_paths)
     regions = []

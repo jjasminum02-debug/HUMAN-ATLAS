@@ -49,3 +49,22 @@ test('thigh muscle follows the femur; the ACL blends femur and tibia', () => {
   assert.deepEqual(w.roles, ['femur', 'tibia']);
   assert.ok(roleShare('Anterior cruciate ligament', 'left', 'femur').share > .1 && roleShare('Anterior cruciate ligament', 'left', 'tibia').share > .1);
 });
+
+test('volume preservation: a shortened cylinder bulges at mid-belly by about sqrt(L0/L), ends stay, limits clamp', async () => {
+  const { volumeProfile, preserveVolume } = await import('./skin.ts');
+  const rings = 21, sides = 12, radius = .02, length = .3, points: number[] = [];
+  for (let r = 0; r < rings; r++) for (let s = 0; s < sides; s++) {
+    const a = s / sides * Math.PI * 2; points.push(Math.cos(a) * radius, r / (rings - 1) * length, Math.sin(a) * radius);
+  }
+  const rest = new Float32Array(points), profile = volumeProfile(rest)!;
+  assert.ok(Math.abs(profile.restLength - length * .85) < .02, `rest length ${profile.restLength}`);
+  const posed = (scale: number) => { const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(rest.map((v, i) => i % 3 === 1 ? v * scale : v), 3)); return g; };
+  const ringRadius = (g: THREE.BufferGeometry, ring: number) => { const p = g.getAttribute('position').array; return Math.hypot(p[ring * sides * 3], p[ring * sides * 3 + 2]); };
+  const short = posed(.8), k = preserveVolume(profile, short);
+  assert.ok(Math.abs(k - Math.sqrt(1 / .8)) < .02, `k ${k}`);
+  assert.ok(Math.abs(ringRadius(short, 10) - radius * k) < 1e-3, 'mid-belly radius');
+  assert.ok(Math.abs(ringRadius(short, 0) - radius) < 1e-4 && Math.abs(ringRadius(short, rings - 1) - radius) < 1e-4, 'ends stay on their attachments');
+  assert.ok(preserveVolume(profile, posed(1.15)) < 1, 'stretched muscle thins');
+  assert.equal(preserveVolume(profile, posed(.3)), 1.25, 'clamped');
+  assert.equal(preserveVolume(profile, posed(1)), 1, 'rest length: untouched');
+});

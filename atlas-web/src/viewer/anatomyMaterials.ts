@@ -1,14 +1,17 @@
 import * as THREE from 'three';
 import { installMuscleSurface } from './muscleSurface.ts';
+import { installSectionCap } from './section.ts';
 
 // Tissue identity must come from the source contract. A muscle's pale ends are not tendon labels.
-export type Tissue = 'bone' | 'muscle' | 'nerve' | 'accessory' | 'tendon' | 'fascia' | 'joint';
-export type MaterialMode = 'normal' | 'selected' | 'dim' | 'translucent' | 'nerveContext' | 'motorContext' | 'innervated' | 'observationContext' | 'motionContext' | 'originContext' | 'insertionContext';
+export type Tissue = 'bone' | 'muscle' | 'nerve' | 'accessory' | 'tendon' | 'fascia' | 'joint' | 'vessel';
+export type MaterialMode = 'normal' | 'selected' | 'dim' | 'translucent' | 'nerveContext' | 'motorContext' | 'innervated' | 'observationContext' | 'motionContext' | 'originContext' | 'insertionContext'
+  /** C4: the bone carries the muscle's drawn origin/insertion area, so the whole-bone cue is lighter and the area reads. */
+  | 'originAreaContext' | 'insertionAreaContext';
 /** variant: fine tissue (ligament, meniscus, tooth ...); layerOpacity: learner's per-layer opacity (0.1-1);
  * role: M3 movement colouring (muscles producing / opposing the shown movement). */
 export type MaterialState = { mode?: MaterialMode; phase?: 'action' | 'return' | null; role?: 'agonist' | 'antagonist'; contextOpacity?: number; userTranslucent?: boolean; hovered?: boolean; variant?: string; layerOpacity?: number };
 export const ANATOMY_PALETTE = {
-  bone: '#e6dbc2', muscle: '#d48b78', nerve: '#dbbb32', accessory: '#c5bdb1', tendon: '#f1ebdc', fascia: '#e1dde9', joint: '#f6f0e1',
+  bone: '#e6dbc2', muscle: '#d48b78', nerve: '#dbbb32', accessory: '#c5bdb1', tendon: '#f1ebdc', fascia: '#e1dde9', joint: '#f6f0e1', vessel: '#b5463d',
   origin: '#476eb4', insertion: '#bc7135', selected: '#237f79', selectedNerve: '#d0c42f', related: '#338fc1', action: '#df8065', return: '#a4aaa8',
   agonist: '#d4472f', antagonist: '#3f7cc4',
 };
@@ -17,13 +20,19 @@ export const ANATOMY_PALETTE = {
 const VARIANT_COLORS: Record<string, string> = {
   meniscus: '#a5c5dc', disc: '#a2c1da', labrum: '#a5c5dc', cartilage: '#b1cde0', cartilaginous_joint: '#a5c5dc',
   capsule: '#d3dfc6', membrane: '#e3ddcc', bursa: '#8dbde0', fat_pad: '#ecd28c', sheath: '#a3cad8', tooth: '#f4f1e8',
+  // C4 attachment areas: deeper than the whole-bone cues (origin/insertion) so they still read on a tinted bone.
+  attachmentOrigin: '#2f5aa8', attachmentInsertion: '#b0561a', attachmentEstimated: '#7d5aa6',
+  // Q2-1 vessels: textbook red arteries, blue veins; the heart a darker muscle red.
+  artery: '#c23b32', vein: '#3f63b0', heart: '#a3443d',
 };
 const VARIANT_OPACITY: Record<string, number> = { bursa: .7, capsule: .85, membrane: .85 };
 
 export function anatomyMaterialParameters(tissue: Tissue, state: MaterialState = {}): THREE.MeshStandardMaterialParameters {
   const mode = state.mode ?? 'normal';
   const base = (state.variant && VARIANT_COLORS[state.variant]) || ANATOMY_PALETTE[tissue];
-  const color = new THREE.Color(tissue === 'bone' && mode === 'originContext' ? ANATOMY_PALETTE.origin
+  const color = new THREE.Color(tissue === 'bone' && mode === 'originAreaContext' ? new THREE.Color(base).lerp(new THREE.Color(ANATOMY_PALETTE.origin), .45)
+    : tissue === 'bone' && mode === 'insertionAreaContext' ? new THREE.Color(base).lerp(new THREE.Color(ANATOMY_PALETTE.insertion), .45)
+    : tissue === 'bone' && mode === 'originContext' ? ANATOMY_PALETTE.origin
     : tissue === 'bone' && mode === 'insertionContext' ? ANATOMY_PALETTE.insertion : mode === 'selected' ? tissue === 'nerve' ? ANATOMY_PALETTE.selectedNerve : ANATOMY_PALETTE.selected
     : mode === 'innervated' || mode === 'motorContext' ? ANATOMY_PALETTE.related : base);
   if (tissue === 'muscle' && state.phase) color.set(ANATOMY_PALETTE[state.phase]);
@@ -35,7 +44,9 @@ export function anatomyMaterialParameters(tissue: Tissue, state: MaterialState =
   const tissueOpacity = tissue === 'fascia' && mode !== 'selected' ? .5 : (mode === 'selected' ? 1 : VARIANT_OPACITY[state.variant ?? ''] ?? 1);
   const opacity = modeOpacity * tissueOpacity * Math.max(.1, Math.min(1, state.layerOpacity ?? 1));
   const nerve = tissue === 'nerve', selected = mode === 'selected';
-  return { color, metalness: 0, roughness: nerve ? selected ? .42 : .55 : tissue === 'bone' ? .62 : tissue === 'muscle' ? .64 : tissue === 'joint' || tissue === 'tendon' ? .45 : .8,
+  // Patches are copies of the bone surface: pull them toward the camera so they never z-fight with it.
+  const attachment = state.variant?.startsWith('attachment');
+  return { ...(attachment ? { polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -4 } : {}), color, metalness: 0, roughness: nerve ? selected ? .42 : .55 : tissue === 'bone' ? .62 : tissue === 'muscle' ? .64 : tissue === 'joint' || tissue === 'tendon' ? .45 : tissue === 'vessel' ? .5 : .8,
     transparent: opacity < 1, opacity, depthTest: true, depthWrite: opacity === 1,
     // Selection also changes luminance/specular response; tissue identity remains yellow for nerves.
     emissive: nerve ? color : state.hovered ? '#628b83' : '#000000',
@@ -58,6 +69,7 @@ function createMaterial(tissue: Tissue, state: MaterialState) {
 export class AnatomyMaterials {
   private readonly instances = new Map<string, THREE.MeshStandardMaterial>();
   private readonly owned = new Set<THREE.Material>();
+  private sectioned = false;
   get(tissue: Tissue, state: MaterialState = {}) {
     const opacity = state.mode === 'motionContext' ? Math.max(.1, Math.min(.6, state.contextOpacity ?? .3)) : '';
     const layerOpacity = state.layerOpacity === undefined ? '' : Math.round(state.layerOpacity * 20) / 20;
@@ -66,9 +78,20 @@ export class AnatomyMaterials {
     if (!material) {
       material = createMaterial(tissue, { ...state, layerOpacity: layerOpacity === '' ? undefined : layerOpacity });
       if (tissue === 'muscle') installMuscleSurface(material);
+      installSectionCap(material);
+      if (this.sectioned && !material.transparent) material.side = THREE.DoubleSide;
       material.name = key; this.instances.set(key, material); this.owned.add(material);
     }
     return material;
+  }
+  /** Q2-2: opaque tissue is drawn double-sided while a cross-section is shown, so cut faces fill solid. */
+  setSectioned(on: boolean) {
+    if (this.sectioned === on) return;
+    this.sectioned = on;
+    for (const material of this.instances.values()) {
+      const side = on && !material.transparent ? THREE.DoubleSide : THREE.FrontSide;
+      if (material.side !== side) { material.side = side; material.needsUpdate = true; }
+    }
   }
   get size() { return this.instances.size; }
   owns(material: THREE.Material) { return this.owned.has(material); }

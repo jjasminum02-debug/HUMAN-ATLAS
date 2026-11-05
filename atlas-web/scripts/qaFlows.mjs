@@ -64,12 +64,33 @@ function expect(condition, message) { if (!condition) throw new Error(message); 
 
 // ── flows ───────────────────────────────────────────────────────────────────
 const flows = [
-  ['첫 화면: 전신 모형과 기본 층', async page => {
+  ['첫 화면: 전신 모형과 기본 층, 퀴즈·북마크', async page => {
     await open(page);
     expect(await pressed(page, '.layer-row', '얕은 근육') === 'true' && await pressed(page, '.layer-row', '뼈') === 'true', '기본 층(얕은 근육·뼈)이 켜져 있지 않음');
     const visible = Object.values(await scene(page)).filter(n => n.visible).length;
     expect(visible > 300, `보이는 구조 ${visible}개`);
-    return `보이는 구조 ${visible}개`;
+    // Q2-3 name quiz: exactly one drawn structure is highlighted (not selected: no card); its label is one of four choices.
+    await page.getByRole('button', { name: '퀴즈·북마크' }).click();
+    await page.getByRole('button', { name: '문제 내기' }).click();
+    await page.locator('.quiz-choices button').first().waitFor();
+    const highlighted = Object.entries(await scene(page)).filter(([, n]) => n.visible && n.material.includes(':selected:')).map(([key]) => key);
+    expect(highlighted.length === 1 && !(await page.locator('#study-details').count()), `퀴즈 강조 ${highlighted.length}개`);
+    const target = (await runtime(page)).find(r => r.key === highlighted[0]);
+    const choices = await page.locator('.quiz-choices button').allInnerTexts();
+    expect(choices.length === 4 && choices.includes(target.label), `보기 ${choices.join('/')} · 정답 ${target.label}`);
+    await page.locator('.quiz-choices').getByRole('button', { name: target.label, exact: true }).click();
+    await page.locator('.quiz-result.is-right').waitFor({ timeout: 5000 }).catch(() => { throw new Error(`이름 퀴즈 채점 실패: ${target.label}`); });
+    // Find quiz: selecting the named structure (here through search) is graded as the answer.
+    await page.locator('.quiz-kinds button', { hasText: '모형에서 찾기' }).click();
+    const name = (await page.locator('.quiz-prompt').innerText()).match(/^모형에서 (?:왼쪽 |오른쪽 )?(.+)을\(를\) 찾아/)[1];
+    await search(page, name, name);
+    await page.locator('.quiz-result.is-right').waitFor({ timeout: 5000 }).catch(async () => { throw new Error(`찾기 퀴즈 채점 실패: ${name} → ${await page.locator('.quiz').innerText()}`); });
+    // Bookmark the found structure from its card; the panel lists it.
+    await page.locator('.bookmark-toggle').click();
+    await page.getByRole('tab', { name: /북마크/ }).click();
+    expect((await page.locator('.bookmarks li').allInnerTexts()).some(t => t.includes(name)), '북마크 목록에 없음');
+    const score = await page.locator('.quiz-score').count() ? '' : (await page.getByRole('tab', { name: '퀴즈' }).click(), await page.locator('.quiz-score').innerText());
+    return `보이는 구조 ${visible}개 · 이름 퀴즈(${target.label})·찾기 퀴즈(${name}) 정답 · 북마크 · ${score}`;
   }],
   ['검색으로 근육 찾기: 넙다리곧은근 이름·기시·정지', async page => {
     await open(page);
@@ -78,7 +99,23 @@ const flows = [
     expect(text.includes('Rectus femoris') && text.includes('기시') && text.includes('정지'), '카드에 영어명·기시·정지 없음');
     const key = new URL(page.url()).searchParams.get('source');
     expect((await scene(page))[key]?.material.includes(':selected:'), '3D에서 선택 표시 안 됨');
-    return '카드·3D 선택 일치';
+    // C4: the origin (Z-Anatomy patch) and insertion (contact estimate) areas are drawn on the bones.
+    await page.locator('.attachment-areas li').first().waitFor({ timeout: 10000 });
+    const areas = await page.evaluate(() => { const roles = []; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && o.userData.attachmentPatch) roles.push(o.material.name.match(/attachment(\w+)/)?.[1]); }); return roles.sort(); });
+    expect(areas.join() === 'Insertion,Origin', `뼈 위 부착 면: ${areas.join() || '없음'}`);
+    // C2: blood supply from the two-source muscle card table.
+    const supply = await page.locator('.attachment-section', { hasText: '혈액공급' }).innerText({ timeout: 10000 });
+    expect(supply.includes('가쪽넙다리휘돌이동맥'), `혈액공급: ${supply.replace(/\s+/g, ' ').slice(0, 200)}`);
+    // Q2-1: the supplying artery opens in the vessel layer, and its card lists the muscle back.
+    await page.locator('.attachment-section', { hasText: '혈액공급' }).getByRole('button', { name: /가쪽넙다리휘돌이동맥/ }).click();
+    await page.locator('.vessel-supplied').waitFor({ timeout: 10000 });
+    expect(await pressed(page, '.layer-row', '혈관') === 'true', '혈관 층이 자동으로 켜지지 않음');
+    const supplied = await page.locator('.vessel-supplied').innerText();
+    expect(supplied.includes('넙다리곧은근'), `혈액을 받는 근육: ${supplied.replace(/\s+/g, ' ').slice(0, 200)}`);
+    await settle(page);
+    const vessels = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && /^vessel:/.test(o.material.name)) n++; }); return n; });
+    expect(vessels > 600, `보이는 혈관 ${vessels}개`);
+    return `카드·3D 선택 일치, 기시·정지 면·혈액공급 표시 → 동맥 카드, 혈관 ${vessels}개`;
   }],
   ['무릎 인대 구조 보기: 앞십자인대 → 무릎 움직여 보기', async page => {
     await open(page);
@@ -87,15 +124,20 @@ const flows = [
     await page.locator('.attachment-section h3', { hasText: '잇는 뼈' }).waitFor({ timeout: 10000 });
     const text = await card(page);
     expect(text.includes('대퇴골') && text.includes('경골'), '잇는 뼈에 대퇴골·경골 없음');
+    // C3: the card lists who moves the knee, per movement.
+    const movers = await page.locator('.joint-movers').innerText({ timeout: 10000 });
+    expect(/굽힘/.test(movers) && /폄/.test(movers) && movers.includes('넙다리곧은근'), `무릎을 움직이는 근육 목록: ${movers.replace(/\s+/g, " ").slice(0, 300)}`);
     await page.getByRole('button', { name: /무릎관절 .* 움직여 보기/ }).click();
     await page.locator('#movement-panel .movement-dofs').waitFor();
     expect(await pressed(page, '.movement-joints', '무릎') === 'true', '움직임 창이 무릎으로 열리지 않음');
-    return '인대 카드 → 무릎 움직임 창';
+    return '인대 카드(움직이는 근육 목록) → 무릎 움직임 창';
   }],
   ['회전근개 작용 보기: 극하근 가쪽돌림 재생과 색', async page => {
     await open(page);
     await search(page, '극하근', '극하근');
     await page.getByRole('tab', { name: '기능' }).click();
+    const summary = await page.locator('.muscle-action-summary').innerText({ timeout: 10000 });
+    expect(summary.includes('가쪽으로 돌'), `작용 요약: ${summary.replace(/\s+/g, ' ')}`);
     const play = page.locator('.rig-actions button', { hasText: '가쪽돌림' }).first();
     await play.waitFor({ timeout: 10000 });
     const rows = await runtime(page), side = new URL(page.url()).searchParams.get('source');
@@ -124,7 +166,7 @@ const flows = [
     expect((await page.locator('.movement-dofs output').first().innerText()) === '중립', '처음 자세로 돌아가지 않음');
     return '굽힘 주동근(상완근)·길항근(삼두근), 처음 자세 복귀';
   }],
-  ['층 벗기기: 근막 → 얕은 근육, 되돌리기, 투명도', async page => {
+  ['층 벗기기: 근막 → 얕은 근육, 되돌리기, 투명도, 단면', async page => {
     await open(page);
     await page.locator('.layer-row button', { hasText: '근막' }).click();
     await settle(page);
@@ -138,7 +180,19 @@ const flows = [
     await page.locator('.layer-opacity label', { hasText: '뼈' }).locator('input').fill('50');
     const translucent = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && o.material?.name?.startsWith('bone:') && o.material.opacity < .6) n++; }); return n; });
     expect(translucent > 50, `반투명 뼈 ${translucent}개`);
-    return `벗기기·되돌리기, 뼈 50% (${translucent}개)`;
+    // Q2-2: an axial section clips every pass and fills cut faces (double-sided opaque tissue); 끄기 restores both.
+    const sectionState = () => page.evaluate(() => { const s = window.__atlasScene; let both = 0, opaque = 0;
+      s.root.traverse(o => { if (o.isMesh && o.visible && !o.material.transparent) { opaque++; if (o.material.side === 2) both++; } });
+      return { planes: s.renderer.clippingPlanes.length, both, opaque }; });
+    await page.getByRole('button', { name: '단면', exact: true }).click();
+    await page.locator('#section-panel button', { hasText: '가로면' }).click();
+    const on = await sectionState();
+    expect(on.planes === 1 && on.both === on.opaque && on.opaque > 0, `단면 켬: ${JSON.stringify(on)}`);
+    expect(/바닥에서 \d+cm/.test(await page.locator('.section-position output').innerText()), '단면 위치 표시 없음');
+    await page.locator('#section-panel button', { hasText: '끄기' }).click();
+    const off = await sectionState();
+    expect(off.planes === 0 && off.both === 0, `단면 끔: ${JSON.stringify(off)}`);
+    return `벗기기·되돌리기, 뼈 50% (${translucent}개), 가로 단면 ${on.both}개 면 채움 후 해제`;
   }],
   ['신경 보기: 좌골신경 주행', async page => {
     await open(page);
@@ -160,7 +214,7 @@ const flows = [
     await button.click();
     await settle(page);
     expect(await button.getAttribute('aria-pressed') === 'true', '기시 관찰이 켜지지 않음');
-    const origin = Object.values(await scene(page)).filter(n => n.visible && n.material.startsWith('bone:originContext')).length;
+    const origin = Object.values(await scene(page)).filter(n => n.visible && /^bone:origin(Area)?Context/.test(n.material)).length;
     expect(origin >= 1, '기시 뼈 색이 없음');
     await button.click();
     expect(await button.getAttribute('aria-pressed') === 'false', '기시 관찰이 끝나지 않음');

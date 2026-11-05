@@ -11,6 +11,10 @@ AI-written; sample cross-check results are recorded in the output, human review 
 import json
 from pathlib import Path
 import re
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from vessel_names_ko import vessel_name  # noqa: E402  (Q2-1 vessels and heart)
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'atlas-data/terminology/structure-names-ko.json'
@@ -450,7 +454,7 @@ def kaa_convention(en, modern, traditional):
 def lookup(name):
     """(koModern, koTraditional, basis) or None. Parenthesised ZA names are looked up without the brackets."""
     bare = name[1:-1] if name.startswith('(') and name.endswith(')') else name
-    return NAMES.get(bare) or series(bare)
+    return NAMES.get(bare) or series(bare) or vessel_name(bare)
 
 
 def main():

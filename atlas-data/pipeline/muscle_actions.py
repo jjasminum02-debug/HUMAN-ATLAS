@@ -15,8 +15,8 @@ listed under OUTSIDE instead.
 ACTIONS = {
     # Hip and thigh
     'Gluteus maximus muscle': 'hip:flexion-p hip:rotation-p',
-    'Gluteus medius muscle': 'hip:adduction-p hip:rotation+s',
-    'Gluteus minimus muscle': 'hip:adduction-p hip:rotation+s',
+    'Gluteus medius muscle': 'hip:adduction-p hip:rotation+p',  # internal rotation: anterior fibres (strongest with the hip flexed)
+    'Gluteus minimus muscle': 'hip:adduction-p hip:rotation+p',
     'Tensor fasciae latae': 'hip:adduction-p hip:flexion+s hip:rotation+s',
     'Iliacus muscle': 'hip:flexion+p',
     'Psoas major': 'hip:flexion+p back:flexion+s back:bending=ipsis',

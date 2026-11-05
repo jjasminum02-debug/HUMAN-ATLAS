@@ -59,3 +59,68 @@ export function posedCopy(rest: THREE.BufferGeometry) {
   target.userData.skinRest = rest;
   return target;
 }
+
+/**
+ * Volume preservation (M2 follow-up): a shortened muscle belly thickens, a stretched one thins. Per rest mesh: the
+ * main axis (PCA), each vertex's position t along it (0..1), and the vertices of both ends (outer 15 %). After
+ * skinning, the posed end centres give the current length; vertices move away from the end-to-end axis by
+ * 1 + (k - 1)·sin(πt) with k = √(rest length / current length), so the ends stay on their attachments.
+ * Teaching approximation, not muscle mechanics.
+ */
+export interface VolumeProfile { t: Float32Array; ends: [Uint32Array, Uint32Array]; restLength: number }
+export const VOLUME_LIMITS: [number, number] = [.85, 1.25];
+
+export function volumeProfile(p: Float32Array): VolumeProfile | null {
+  const count = p.length / 3;
+  if (count < 24) return null;
+  let cx = 0, cy = 0, cz = 0;
+  for (let i = 0; i < p.length; i += 3) { cx += p[i]; cy += p[i + 1]; cz += p[i + 2]; }
+  cx /= count; cy /= count; cz /= count;
+  const c = [0, 0, 0, 0, 0, 0]; // xx xy xz yy yz zz
+  for (let i = 0; i < p.length; i += 3) {
+    const x = p[i] - cx, y = p[i + 1] - cy, z = p[i + 2] - cz;
+    c[0] += x * x; c[1] += x * y; c[2] += x * z; c[3] += y * y; c[4] += y * z; c[5] += z * z;
+  }
+  let a = [1, .5, .25];
+  for (let k = 0; k < 40; k++) { // power iteration: main axis
+    const b = [c[0] * a[0] + c[1] * a[1] + c[2] * a[2], c[1] * a[0] + c[3] * a[1] + c[4] * a[2], c[2] * a[0] + c[4] * a[1] + c[5] * a[2]];
+    const l = Math.hypot(b[0], b[1], b[2]) || 1; a = b.map(v => v / l);
+  }
+  const s = new Float32Array(count);
+  let lo = Infinity, hi = -Infinity;
+  for (let v = 0, i = 0; v < count; v++, i += 3) { s[v] = (p[i] - cx) * a[0] + (p[i + 1] - cy) * a[1] + (p[i + 2] - cz) * a[2]; lo = Math.min(lo, s[v]); hi = Math.max(hi, s[v]); }
+  if (!(hi - lo > 1e-4)) return null;
+  const t = new Float32Array(count), start: number[] = [], end: number[] = [];
+  for (let v = 0; v < count; v++) { t[v] = (s[v] - lo) / (hi - lo); if (t[v] < .15) start.push(v); else if (t[v] > .85) end.push(v); }
+  const profile: VolumeProfile = { t, ends: [Uint32Array.from(start), Uint32Array.from(end)], restLength: 0 };
+  profile.restLength = endsLength(profile, p).length;
+  return profile.restLength > 1e-4 ? profile : null;
+}
+
+function centre(ids: Uint32Array, p: ArrayLike<number>) {
+  let x = 0, y = 0, z = 0;
+  for (const v of ids) { x += p[3 * v]; y += p[3 * v + 1]; z += p[3 * v + 2]; }
+  return [x / ids.length, y / ids.length, z / ids.length];
+}
+function endsLength(profile: VolumeProfile, p: ArrayLike<number>) {
+  const a = centre(profile.ends[0], p), b = centre(profile.ends[1], p);
+  return { a, b, length: Math.hypot(b[0] - a[0], b[1] - a[1], b[2] - a[2]) };
+}
+
+/** Thicken/thin the posed muscle in `target` (positions already skinned). Returns the belly scale k applied (1 = none). */
+export function preserveVolume(profile: VolumeProfile, target: THREE.BufferGeometry, limits = VOLUME_LIMITS) {
+  const attribute = target.getAttribute('position'), p = attribute.array as Float32Array;
+  const { a, b, length } = endsLength(profile, p);
+  const k = Math.min(limits[1], Math.max(limits[0], Math.sqrt(profile.restLength / Math.max(length, 1e-6))));
+  if (Math.abs(k - 1) < .005) return 1;
+  const d = [(b[0] - a[0]) / length, (b[1] - a[1]) / length, (b[2] - a[2]) / length];
+  for (let v = 0, i = 0; v < profile.t.length; v++, i += 3) {
+    const along = (p[i] - a[0]) * d[0] + (p[i + 1] - a[1]) * d[1] + (p[i + 2] - a[2]) * d[2];
+    const qx = a[0] + d[0] * along, qy = a[1] + d[1] * along, qz = a[2] + d[2] * along;
+    const f = 1 + (k - 1) * Math.sin(Math.PI * profile.t[v]);
+    p[i] = qx + (p[i] - qx) * f; p[i + 1] = qy + (p[i + 1] - qy) * f; p[i + 2] = qz + (p[i + 2] - qz) * f;
+  }
+  attribute.needsUpdate = true;
+  target.computeBoundingSphere(); target.computeBoundingBox();
+  return k;
+}

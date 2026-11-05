@@ -6,6 +6,7 @@ import type { BodyManifest, BodyView } from '../wholeBody/contract.ts';
 import { DatasetResources } from './DatasetResources.ts';
 import { framingRecords } from './framing.ts';
 import { pickSurface } from './surfacePicking.ts';
+import { keptBySection, sectionPlane, sectionViewDirection, type Bounds, type Section } from '../section.ts';
 import type { Dataset } from './schema.ts';
 import { DATASET_BUDGET } from './schema.ts';
 import { validateRuntimeIntegration, type RuntimeIntegration, type RuntimeStructureRecord } from './integration.ts';
@@ -20,11 +21,27 @@ import { motionContextVisibility } from './motionContextVisibility.ts';
 import { contextBoneFollowers, followContextBone, limbMotionContextKeys } from './motionContextBonePose.ts';
 import { muscleActionEmphasis } from "../../domain/atlasMotionExperience.ts";
 import { boneSegments, clampPose, segmentTransforms, type RigFile, type RigPose } from '../rig.ts';
-import { parseSkinChunk, posedCopy, segmentForRole, skinGeometry, type SkinChunk } from '../skin.ts';
+import { parseSkinChunk, posedCopy, segmentForRole, skinGeometry, type SkinChunk, preserveVolume, volumeProfile } from '../skin.ts';
 import type { Instance } from './schema.ts';
 import type { ActionHighlight, MuscleActionsFile, RigHost } from '../movement.ts';
 /** Row kinds whose surfaces bend with the rig (M2); bones move rigidly instead. */
-const SKINNED_KINDS = new Set(['muscle', 'tendon', 'fascia', 'joint']);
+const SKINNED_KINDS = new Set(['muscle', 'tendon', 'fascia', 'joint', 'vessel', 'nerve']);
+/** C4 attachment area: a Z-Anatomy patch (`key`) or an estimated bone-contact area (`source: 'contact'`). */
+type AttachmentRow = { key?: string; role: 'origin' | 'insertion' | 'attachment'; bone: string | null; source: 'za' | 'contact' };
+const ATTACHMENT_VARIANT = { origin: 'attachmentOrigin', insertion: 'attachmentInsertion', attachment: 'attachmentEstimated' } as const;
+/** Non-indexed copy of the given triangles of `source` (own buffers, safe to dispose). */
+function triangleSubset(source: THREE.BufferGeometry, triangles: Uint32Array) {
+    const index = source.getIndex()!, position = source.getAttribute('position'), normal = source.getAttribute('normal');
+    const p = new Float32Array(triangles.length * 9), n = new Float32Array(triangles.length * 9);
+    triangles.forEach((t, i) => { for (let k = 0; k < 3; k++) { const v = index.getX(t * 3 + k), o = (i * 3 + k) * 3;
+        p[o] = position.getX(v); p[o + 1] = position.getY(v); p[o + 2] = position.getZ(v);
+        if (normal) { n[o] = normal.getX(v); n[o + 1] = normal.getY(v); n[o + 2] = normal.getZ(v); } } });
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(p, 3));
+    if (normal) geometry.setAttribute('normal', new THREE.BufferAttribute(n, 3)); else geometry.computeVertexNormals();
+    return geometry;
+}
+const decodeTriangles = (packed: string) => { const bytes = Uint8Array.from(atob(packed), c => c.charCodeAt(0)); return new Uint32Array(bytes.buffer); };
 import type { MotionLearningIntent } from '../../domain/atlasMotionExperience.ts';
 /** Dataset selection/presentation adapter; renderer, camera and lifecycle remain owned by the existing controller. */
 export class DatasetSceneAdapter implements SourceMotionHost, RigHost {
@@ -34,6 +51,10 @@ export class DatasetSceneAdapter implements SourceMotionHost, RigHost {
     readonly records: Map<string, RuntimeStructureRecord>;
     private view: BodyView = { region: null, regionIds: [], bones: true, muscles: true, supplements: false, selectedId: null, dim: true };
     private materials = new AnatomyMaterials();
+    /** Q2-2 cross-section: one clipping plane on the renderer, so every pass (AO, outline) is cut too. */
+    private sectionState: { section: Section; plane: THREE.Plane } | null = null;
+    /** Q2-3 quiz: structure highlighted like a selection, without selecting it (the card would give the name away). */
+    private quizTarget: string | null = null;
     /** M1 skeleton rig: bones follow their segment transform; null transforms = rest pose. Ignored while a motion clip plays. */
     private rigState: { file: RigFile; segmentOf: Map<string, string>; transforms: Map<string, THREE.Matrix4> | null } | null = null;
     private readonly skinChunks = new Map<string, SkinChunk | 'loading' | 'failed'>();
@@ -45,6 +66,13 @@ export class DatasetSceneAdapter implements SourceMotionHost, RigHost {
     private muscleActions?: Promise<MuscleActionsFile>;
     private readonly poseListeners = new Set<(pose: RigPose | null) => void>();
     private readonly openMovementListeners = new Set<(jointId: string) => void>();
+    /** C4: origin/insertion patches drawn on the bone for the selected muscle (/__atlas/v2/attachments.json). */
+    private attachments: { muscles: Record<string, AttachmentRow[]> } | 'loading' | 'failed' | null = null;
+    /** Estimated (contact) areas: triangle indices per bone resource, fetched per muscle; meshes built from the bone. */
+    private readonly contactTris = new Map<string, Record<string, string>[] | 'loading' | 'failed'>();
+    private readonly contactNodes = new Map<string, THREE.Mesh>();
+    private readonly patchRole = new Map<string, { role: AttachmentRow['role']; bone: string | null }>();
+    private readonly displayKeys: Set<string>;
     private down = { x: 0, y: 0 };
     private dead = false;
     private contextLost = false;
@@ -70,7 +98,8 @@ export class DatasetSceneAdapter implements SourceMotionHost, RigHost {
             if (this.resources)
                 this.apply();
         } }, () => { });
-        this.resources = new DatasetResources(dataset, this.scene.root, false, () => this.apply(), new Set(integration.objects.filter(r => r.localDisplayEligible).map(r => r.sourceKey)));
+        this.displayKeys = new Set(integration.objects.filter(r => r.localDisplayEligible).map(r => r.sourceKey));
+        this.resources = new DatasetResources(dataset, this.scene.root, false, () => this.apply(), this.displayKeys);
         const canvas = this.scene.renderer.domElement;
         canvas.addEventListener('keydown', this.onKey, true);
         canvas.addEventListener('pointerdown', this.onDown);
@@ -108,6 +137,11 @@ export class DatasetSceneAdapter implements SourceMotionHost, RigHost {
             let target = posed && posed.userData.skinRest === rest ? posed : undefined;
             if (!target) { posed?.dispose(); target = posedCopy(rest); node.userData.posedGeometry = target; }
             skinGeometry(rest, weights.data, slots, target);
+            // Muscle bellies keep their volume: thicker when shortened, thinner when stretched (tendons and sheets do not).
+            if (row.kind === 'muscle') {
+                if (rest.userData.volumeProfile === undefined) rest.userData.volumeProfile = volumeProfile(rest.getAttribute('position').array as Float32Array);
+                if (rest.userData.volumeProfile) preserveVolume(rest.userData.volumeProfile, target);
+            }
             node.geometry = target;
         }
     }
@@ -116,6 +150,34 @@ export class DatasetSceneAdapter implements SourceMotionHost, RigHost {
         fetch(`/__atlas/v2/skin/${chunkId}.bin`).then(response => response.ok ? response.arrayBuffer() : Promise.reject(Error(String(response.status))))
             .then(buffer => { this.skinChunks.set(chunkId, parseSkinChunk(buffer)); if (!this.dead) this.apply(); })
             .catch(() => this.skinChunks.set(chunkId, 'failed'));
+    }
+    /** Estimated attachment areas of the selected muscle, rebuilt from the bone mesh it lies on; follows the bone's pose. */
+    private syncContactAreas() {
+        const muscle = this.view.selectedId ?? '';
+        const rows = this.selectedAttachments().filter(r => r.source === 'contact');
+        let tris = rows.length ? this.contactTris.get(muscle) : undefined;
+        if (rows.length && !tris) {
+            this.contactTris.set(muscle, 'loading'); tris = 'loading';
+            fetch(`/__atlas/v2/attachments/${muscle}.json`).then(r => r.ok ? r.json() : Promise.reject(Error(String(r.status))))
+                .then(file => { this.contactTris.set(muscle, file.rows); if (!this.dead) this.apply(); })
+                .catch(() => this.contactTris.set(muscle, 'failed'));
+        }
+        const wanted = new Set<string>();
+        if (Array.isArray(tris)) rows.forEach((row, i) => {
+            const bone = this.resources.nodes.get(row.bone ?? ''), resource = bone?.userData.resourceKey as string | undefined;
+            const packed = resource && (tris as Record<string, string>[])[i]?.[resource];
+            if (!bone || !bone.visible || !packed) return;
+            const id = `${muscle}:${i}:${resource}`;
+            let mesh = this.contactNodes.get(id);
+            if (!mesh) {
+                mesh = new THREE.Mesh(triangleSubset(bone.geometry, decodeTriangles(packed)));
+                mesh.matrixAutoUpdate = false; mesh.userData = { attachmentPatch: true, attachmentOf: muscle };
+                this.contactNodes.set(id, mesh); this.scene.root.add(mesh);
+            }
+            mesh.material = this.materials.get('accessory', { variant: ATTACHMENT_VARIANT[row.role] });
+            mesh.matrix.copy(bone.matrix); mesh.visible = true; wanted.add(id);
+        });
+        for (const [id, mesh] of this.contactNodes) if (!wanted.has(id)) { mesh.removeFromParent(); mesh.geometry.dispose(); this.contactNodes.delete(id); }
     }
     /** Pose the bones by joint angles (degrees per dof id), clamped to each dof's range; null returns to rest. */
     setRigPose(rig: RigFile, pose: RigPose | null) {
@@ -159,7 +221,7 @@ export class DatasetSceneAdapter implements SourceMotionHost, RigHost {
             [...this.motion.asset.sourceBinding?.members ?? [], ...this.motion.extraContextKeys.map(sourceKey => ({sourceKey, role:'co_moving_context'}))],
             this.motion.frameSourceKeys, key => this.records.get(key), view)
             : demandedStructureKeys(this.integration.objects, view);
-        this.resources.demand(keys, view.selectedId && keys.includes(view.selectedId) ? [view.selectedId] : []);
+        this.resources.demand(this.withPatches(keys), view.selectedId && keys.includes(view.selectedId) ? [view.selectedId] : []);
         this.apply();
         // Fit the initial deep link before the opening orbit captures its camera.
         if (focusNerve && !observing && !this.motion) this.focusSelection(this.resources.nodes.size > 0 && !this.scene.renderer.domElement.dataset.entrance);
@@ -404,7 +466,7 @@ export class DatasetSceneAdapter implements SourceMotionHost, RigHost {
             resource.dispose();
             if (!this.dead) {
                 const keys = demandedStructureKeys(this.integration.objects, this.view);
-                this.resources.demand(keys, this.view.selectedId ? [this.view.selectedId] : []);
+                this.resources.demand(this.withPatches(keys), this.view.selectedId ? [this.view.selectedId] : []);
                 this.apply();
             }
             throw error;
@@ -436,8 +498,29 @@ export class DatasetSceneAdapter implements SourceMotionHost, RigHost {
         active.resource.dispose();
         active.onInvalidated?.(reason);
         const keys = demandedStructureKeys(this.integration.objects, this.view);
-        this.resources.demand(keys, this.view.selectedId ? [this.view.selectedId] : []);
+        this.resources.demand(this.withPatches(keys), this.view.selectedId ? [this.view.selectedId] : []);
         this.apply();
+    }
+    /** The selected muscle's attachment patches, when bones are shown; fetches the patch table on first use. */
+    private selectedAttachments(): AttachmentRow[] {
+        const id = this.view.selectedId;
+        if (!id || this.records.get(id)?.kind !== 'muscle' || !this.view.bones || this.motion) return [];
+        if (this.attachments === null) this.loadAttachments();
+        return typeof this.attachments === 'object' && this.attachments ? this.attachments.muscles[id] ?? [] : [];
+    }
+    private selectedPatches() { return this.selectedAttachments().filter((p): p is AttachmentRow & { key: string } => Boolean(p.key)); }
+    private withPatches(keys: string[]) {
+        const patches = this.selectedPatches().map(p => p.key);
+        return patches.length ? [...keys, ...patches] : keys;
+    }
+    private loadAttachments() {
+        this.attachments = 'loading';
+        fetch('/__atlas/v2/attachments.json').then(r => r.ok ? r.json() : Promise.reject(Error(String(r.status)))).then(file => {
+            this.attachments = file;
+            for (const rows of Object.values(file.muscles) as AttachmentRow[][])
+                for (const p of rows) if (p.key) { this.patchRole.set(p.key, { role: p.role, bone: p.bone }); this.displayKeys.add(p.key); }
+            if (!this.dead) this.setView(this.view);
+        }).catch(() => { this.attachments = 'failed'; });
     }
     private apply() {
         if (this.dead)
@@ -456,15 +539,31 @@ export class DatasetSceneAdapter implements SourceMotionHost, RigHost {
         const highlights = new Set(innervationHighlightKeys(rows, this.view, visibleKeys));
         const observe = observingNerves(rows, this.view, visibleKeys);
         const selectionAlternativeKeys = new Set(this.records.get(this.view.selectedId ?? '')?.selectionSuppressSourceKeys ?? []);
+        const attachmentRows = this.selectedAttachments();
+        const shownPatches = new Set(this.selectedPatches().map(p => p.key));
         for (const [key, node] of this.resources.nodes) {
             const row = this.records.get(key)!;
+            const patch = this.patchRole.get(key);
+            if (patch) {
+                node.visible = shownPatches.has(key) && !this.view.hiddenSourceKeys?.includes(patch.bone ?? '');
+                node.userData.attachmentPatch = true;
+                node.material = this.materials.get('accessory', { variant: ATTACHMENT_VARIANT[patch.role] });
+                continue;
+            }
             const selected = key === this.view.selectedId;
             const motionContextOpacity = this.motion?.asset.poseControl?.contextOpacity;
             node.visible = visibleKeys.has(key) && !(this.motionPoseActive && row.kind === 'nerve') && !this.view.hiddenSourceKeys?.includes(key) && !selectionAlternativeKeys.has(key) && !(selected && this.view.selectedPresentation === 'hidden');
-            const attachmentMode = attachmentBones.has(key) ? this.view.attachmentObservation!.role === 'origin' ? 'originContext' : 'insertionContext' : null;
-            const mode: MaterialMode = attachmentMode ?? (this.view.translucentSourceKeys?.includes(key) || selected && this.view.selectedPresentation === 'translucent' ? 'translucent'
-                : selected || course.has(key) ? 'selected' : observe && row.kind !== 'nerve' ? highlights.has(key) ? 'motorContext' : 'nerveContext'
-                : highlights.has(key) ? 'innervated' : this.view.focusObservation && row.kind === 'muscle' ? 'observationContext' : this.motion?.originals.has(key) ? row.kind === 'muscle' && motionContextOpacity != null ? 'motionContext' : 'normal' : this.view.selectedId && this.view.dim ? 'dim' : 'normal');
+            const observedRole = attachmentBones.has(key) ? this.view.attachmentObservation!.role : null;
+            const drawnArea = observedRole && attachmentRows.some(r => r.bone === key && r.role === observedRole);
+            const attachmentMode = observedRole ? observedRole === 'origin' ? drawnArea ? 'originAreaContext' : 'originContext'
+                : drawnArea ? 'insertionAreaContext' : 'insertionContext' : null;
+            // While observing its attachments, the selected muscle is see-through so the drawn areas under it show.
+            const observingAreas = selected && this.view.attachmentObservation && attachmentRows.length > 0;
+            const mode: MaterialMode = attachmentMode ?? (this.view.translucentSourceKeys?.includes(key) || observingAreas || selected && this.view.selectedPresentation === 'translucent' ? 'translucent'
+                : selected || course.has(key) || key === this.quizTarget ? 'selected'
+                // Quiz: the target may lie under muscles or bone, so everything else turns see-through (bones less so).
+                : this.quizTarget && !this.view.selectedId ? row.kind === 'bone' ? 'translucent' : 'observationContext' : observe && row.kind !== 'nerve' ? highlights.has(key) ? 'motorContext' : 'nerveContext'
+                : highlights.has(key) ? 'innervated' : this.view.focusObservation && row.kind === 'muscle' ? 'observationContext' : this.motion?.originals.has(key) ? row.kind === 'muscle' && motionContextOpacity != null ? 'motionContext' : 'normal' : this.view.selectedId && this.view.dim || this.quizTarget ? 'dim' : 'normal');
             const actionPhase = selected && row.kind === 'muscle' && this.motion && this.motionIntent === 'muscle_action'
                 && this.motion.asset.sourceBinding?.subjectSourceKey === key ? this.motionPhase : null;
             const phaseTone = actionPhase === 'action' ? 'action' : actionPhase === 'return' ? 'return' : null;
@@ -480,13 +579,14 @@ export class DatasetSceneAdapter implements SourceMotionHost, RigHost {
         if (this.rigState && !this.motion) {
             const { segmentOf, transforms } = this.rigState;
             for (const [key, node] of this.resources.nodes) {
-                const segment = segmentOf.get(key); if (!segment) continue;
+                const segment = segmentOf.get(key) ?? segmentOf.get(this.patchRole.get(key)?.bone ?? ''); if (!segment) continue;
                 node.matrix.fromArray(node.userData.instanceMatrix);
                 const posed = transforms?.get(segment); if (posed) node.matrix.premultiply(posed);
             }
             this.skinSoftTissue();
         }
-        const selectedNode = this.view.selectedId ? this.resources.nodes.get(this.view.selectedId) : undefined;
+        this.syncContactAreas();
+        const selectedNode = this.view.selectedId ? this.resources.nodes.get(this.view.selectedId) : this.quizTarget ? this.resources.nodes.get(this.quizTarget) : undefined;
         this.scene.setOutline(selectedNode?.visible && !this.motion ? [selectedNode] : []);
         this.scene.requestRender();
         const q = this.resources.queue;
@@ -526,6 +626,48 @@ export class DatasetSceneAdapter implements SourceMotionHost, RigHost {
         this.scene.fitObservationBounds(box, 1.25, smooth);
     }
     retry() { this.resources.queue.retry(); }
+    get section() { return this.sectionState?.section ?? null; }
+    setQuizTarget(key: string | null) {
+        this.quizTarget = key; this.apply();
+        const row = key ? this.records.get(key) : undefined;
+        if (!row) return;
+        // Frame at least 30 cm around the target so a small muscle is shown in its body region.
+        const box = new THREE.Box3(new THREE.Vector3().fromArray(row.bounds[0]), new THREE.Vector3().fromArray(row.bounds[1]));
+        const size = box.getSize(new THREE.Vector3()), centre = box.getCenter(new THREE.Vector3());
+        box.setFromCenterAndSize(centre, size.max(new THREE.Vector3(.3, .3, .3)));
+        this.scene.fitObservationBounds(box, 1.25, true);
+    }
+    /** Selectable structures drawn right now (layer on, not hidden, not cut away by a section). */
+    visibleQuizKeys() {
+        const plane = this.sectionState?.plane ?? null;
+        return [...this.resources.nodes].filter(([key, node]) => node.visible && !node.userData.attachmentPatch && this.records.get(key)?.inspectionEligible
+            && keptBySection(plane, new THREE.Vector3().fromArray(this.records.get(key)!.bounds[0]).add(new THREE.Vector3().fromArray(this.records.get(key)!.bounds[1])).multiplyScalar(.5)))
+            .map(([key]) => key);
+    }
+    /** Extent of every displayable structure: the section slider runs across it. */
+    sectionBounds(): Bounds {
+        const box = new THREE.Box3();
+        for (const r of this.records.values()) if (r.localDisplayEligible) { box.expandByPoint(new THREE.Vector3().fromArray(r.bounds[0])); box.expandByPoint(new THREE.Vector3().fromArray(r.bounds[1])); }
+        return [box.min.toArray(), box.max.toArray()];
+    }
+    setSection(section: Section | null) {
+        const plane = section ? sectionPlane(section, this.sectionBounds()) : null;
+        this.sectionState = section && plane ? { section, plane } : null;
+        this.scene.renderer.clippingPlanes = plane ? [plane] : [];
+        this.materials.setSectioned(Boolean(plane));
+        this.scene.requestRender();
+    }
+    /** Turn the camera to look straight at the cut face, keeping the current distance. */
+    faceSection() {
+        const plane = this.sectionState?.plane; if (!plane) return;
+        const { camera, controls } = this.scene;
+        this.scene.cancelCameraMotion();
+        const target = plane.projectPoint(controls.target, new THREE.Vector3());
+        const distance = camera.position.distanceTo(controls.target);
+        controls.target.copy(target);
+        camera.position.copy(target).addScaledVector(sectionViewDirection(plane), distance);
+        camera.lookAt(target); controls.update(); this.scene.requestRender();
+    }
     private onKey = (e: KeyboardEvent) => { if (e.key === 'Home') {
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -536,9 +678,10 @@ export class DatasetSceneAdapter implements SourceMotionHost, RigHost {
         if (e.button !== 0 || Math.hypot(e.clientX - this.down.x, e.clientY - this.down.y) > 5)
             return;
         const rect = this.scene.renderer.domElement.getBoundingClientRect();
-        const nodes = [...this.resources.nodes.values()].filter(n => n.visible);
+        const nodes = [...this.resources.nodes.values()].filter(n => n.visible && !n.userData.attachmentPatch);
         const observe = nodes.some(n => n.userData.nerveObservationContext);
-        const hit = pickSurface(this.scene.camera, nodes, { x: e.clientX, y: e.clientY }, rect, observe);
+        const plane = this.sectionState?.plane ?? null;
+        const hit = pickSurface(this.scene.camera, nodes, { x: e.clientX, y: e.clientY }, rect, observe, point => keptBySection(plane, point));
         if (!hit)
             return;
         const row = this.records.get(String(hit.object.userData.sourceKey ?? hit.object.name));
