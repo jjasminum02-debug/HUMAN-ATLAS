@@ -8,7 +8,7 @@ const sourceContent = JSON.parse(readFileSync(new URL("atlas-data/terminology/le
 const originalNames = JSON.parse(readFileSync(new URL("atlas-data/terminology/learning-names.json", root), "utf8"));
 
 test("learner card runtime is a minimal text projection with no source or review ledger fields", () => {
-  assert.deepEqual(Object.keys(runtime).sort(), ["actions", "names", "schemaVersion", "structure"]);
+  assert.deepEqual(Object.keys(runtime).sort(), ["actions", "names", "nerveLearning", "schemaVersion", "structure"]);
   assert.deepEqual(Object.keys(runtime.structure).sort(), ["byConcept", "bySource"]);
   assert.equal(runtime.names.length, originalNames.entries.length);
   for (const [index, row] of runtime.names.entries()) {
@@ -18,7 +18,7 @@ test("learner card runtime is a minimal text projection with no source or review
       assert.doesNotMatch(value ?? "", /\p{Script=Han}/u);
     }
   }
-  assert.equal(Object.keys(runtime.structure.bySource).length, 14);
+  assert.equal(Object.keys(runtime.structure.bySource).length, 461);
   assert.equal(Object.keys(runtime.structure.byConcept).length, 8);
   assert.equal(runtime.actions.length, 7);
   const encoded = JSON.stringify(runtime);

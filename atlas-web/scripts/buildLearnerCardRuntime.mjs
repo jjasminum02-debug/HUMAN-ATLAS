@@ -18,7 +18,7 @@ async function load(relativePath) {
   return JSON.parse(await readFile(resolve(root, relativePath), "utf8"));
 }
 
-const [aiOverlay, legacySummaries, sourceContent, motionBundle, names, t65Attachments, t65NerveLearning, nerveSupport] = await Promise.all([
+const [aiOverlay, legacySummaries, sourceContent, motionBundle, names, t65Attachments, t65NerveLearning, nerveSupport, reviewedAttachments] = await Promise.all([
   load("atlas-data/terminology/ai-evidence-overlay.json"),
   load("atlas-data/terminology/learning-structure-summaries.json"),
   load("atlas-data/terminology/learner-structure-source-content.json"),
@@ -27,6 +27,7 @@ const [aiOverlay, legacySummaries, sourceContent, motionBundle, names, t65Attach
   load("atlas-data/terminology/muscle-attachment-content-t65.json"),
   load("atlas-data/terminology/nerve-learning-content-t65.json"),
   load("atlas-data/overlays/nerve-support-t63.json"),
+  load("atlas-data/terminology/muscle-attachment-content-2026-10-02.json"),
 ]);
 
 const aiBySubjectField = new Map(aiOverlay.items.map((row) => [`${row.subjectId}\u0000${row.field}`, row]));
@@ -68,7 +69,8 @@ for (const row of sourceContent.records) {
 const attachments = await load("atlas-data/terminology/muscle-attachment-content-t90.json");
 const integrationBytes = await readFile(resolve(root, "atlas-data/overlays/za-local-integration.json"));
 const integrationHash = createHash('sha256').update(integrationBytes).digest('hex');
-if (integrationHash !== attachments.sourceOverlaySha256 || integrationHash !== t65Attachments.sourceOverlaySha256) throw Error('Attachment identity input changed; review before rebuilding');
+if (integrationHash !== attachments.sourceOverlaySha256 || integrationHash !== t65Attachments.sourceOverlaySha256
+  || integrationHash !== reviewedAttachments.sourceOverlaySha256) throw Error('Attachment identity input changed; review before rebuilding');
 const attachmentProjection = projectSourceAttachments(attachments, JSON.parse(integrationBytes).objects);
 for (const [sourceKey, fields] of Object.entries(attachmentProjection.text)) {
   if (bySource[sourceKey]) throw Error('New attachment text must not override an existing field or conflict');
@@ -101,6 +103,47 @@ for (const [sourceKey, fields] of Object.entries(t65AttachmentProjection.text)) 
 }
 for (const [sourceKey, roles] of Object.entries(t65AttachmentProjection.contexts)) {
   if (attachmentProjection.contexts[sourceKey]) throw Error("T65 attachment context overlaps T90 source scope");
+  attachmentProjection.contexts[sourceKey] = roles;
+}
+
+const reviewedNotesBytes = await readFile(resolve(root, reviewedAttachments.reviewNotesPath));
+const reviewedNotesHash = createHash("sha256").update(reviewedNotesBytes).digest("hex");
+const reviewedCatalogBytes = await readFile(resolve(root, reviewedAttachments.sourceCatalogPath));
+const reviewedCatalogHash = createHash("sha256").update(reviewedCatalogBytes).digest("hex");
+const reviewedDispositionBytes = await readFile(resolve(root, "work/evidence/T65/muscle-attachment-dispositions.json"));
+const reviewedClaimsBytes = await readFile(resolve(root, "work/evidence/muscle-attachment-review-2026-10-02/claims.json"));
+const reviewedSupplementBytes = await readFile(resolve(root, "work/evidence/muscle-attachment-review-2026-10-02/supplemental-claims.json"));
+const reviewedInputHashes = {
+  sourceOverlay: integrationHash,
+  sourceCatalog: reviewedCatalogHash,
+  t65DispositionBaseline: createHash("sha256").update(reviewedDispositionBytes).digest("hex"),
+  claims: createHash("sha256").update(reviewedClaimsBytes).digest("hex"),
+  supplementalClaims: createHash("sha256").update(reviewedSupplementBytes).digest("hex"),
+};
+if (reviewedNotesHash !== reviewedAttachments.reviewNotesSha256 || reviewedCatalogHash !== reviewedAttachments.sourceCatalogSha256
+  || Object.entries(reviewedInputHashes).some(([key, value]) => reviewedAttachments.inputHashes?.[key] !== value)
+  || reviewedAttachments.contract.sourceOnly !== true || reviewedAttachments.contract.humanReview !== "not_performed"
+  || reviewedAttachments.contract.publicRedistribution !== "held" || reviewedAttachments.contract.canonicalBindingsCreated !== 0
+  || reviewedAttachments.contract.geometryCreated !== 0
+  || reviewedAttachments.sources.some((source) => source.reviewNotesPath !== reviewedAttachments.reviewNotesPath
+    || source.reviewNotesSha256 !== reviewedNotesHash)) throw Error("Reviewed attachment inputs or authority changed; rebuild/review before projecting");
+const reviewedWebSourceIds = new Set(reviewedAttachments.sources.filter((source) => source.accessMethod === "web_reader_opened_fulltext").map((source) => source.id));
+const reviewedPdfSourceIds = new Set(reviewedAttachments.sources.filter((source) => source.accessMethod === "user_provided_pdf_text_extraction_and_selected_visual_page_review").map((source) => source.id));
+for (const record of reviewedAttachments.records) for (const field of ["origin", "insertion"]) {
+  const value = record[field]; const proof = record.fieldEvidence[field];
+  if (!proof.locator || !proof.sourceIds.length || createHash("sha256").update(value).digest("hex") !== proof.learnerValueSha256
+    || proof.reviewNotesSha256 !== reviewedNotesHash || proof.sourceIds.some((id) => !reviewedAttachments.sources.some((source) => source.id === id))) {
+    throw Error(`Reviewed attachment field evidence invalid: ${record.sourceDispositionName}/${field}`);
+  }
+}
+const reviewedAttachmentProjection = projectSourceAttachments(reviewedAttachments, JSON.parse(integrationBytes).objects,
+  { verifiedWebReaderSourceIds: reviewedWebSourceIds, verifiedPdfSourceIds: reviewedPdfSourceIds });
+for (const [sourceKey, fields] of Object.entries(reviewedAttachmentProjection.text)) {
+  if (bySource[sourceKey]) throw Error("Reviewed attachment must not override existing structure text or conflict");
+  bySource[sourceKey] = fields;
+}
+for (const [sourceKey, roles] of Object.entries(reviewedAttachmentProjection.contexts)) {
+  if (attachmentProjection.contexts[sourceKey]) throw Error("Reviewed attachment context overlaps previous source scope");
   attachmentProjection.contexts[sourceKey] = roles;
 }
 
