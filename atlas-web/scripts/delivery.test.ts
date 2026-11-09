@@ -46,7 +46,8 @@ test('local integration route serves the validated compact allowlist, never the 
  const nerveRightsHash=createHash('sha256').update(await readFile(root+nerve.rightsPath)).digest('hex');
  const nerveCount=nerve.objects.length;
  const supplementHash=createHash('sha256').update(supplementBytes).digest('hex');
- assert.equal(value.sourceOverlaySha256,createHash('sha256').update([createHash('sha256').update([createHash('sha256').update(rawBytes).digest('hex'),supplementHash].join('\n')).digest('hex'),nerveHash].join('\n')).digest('hex'));
+ const nameAliasHash=createHash('sha256').update(await readFile(root+'atlas-data/terminology/learner-name-aliases-2026-10-06.json')).digest('hex');
+ assert.equal(value.sourceOverlaySha256,createHash('sha256').update([createHash('sha256').update([createHash('sha256').update(rawBytes).digest('hex'),supplementHash,nameAliasHash].join('\n')).digest('hex'),nerveHash].join('\n')).digest('hex'));
  const supplementRights=await readFile(root+supplement.rightsDecision.evidencePath);
  assert.equal(value.rightsEvidenceSha256,createHash('sha256').update([createHash('sha256').update([raw.policy.rightsEvidenceSha256,createHash('sha256').update(supplementRights).digest('hex')].join('\n')).digest('hex'),nerveRightsHash].join('\n')).digest('hex'));
  assert.equal(value.objects.length,raw.objects.length+supplement.objects.length+nerveCount);

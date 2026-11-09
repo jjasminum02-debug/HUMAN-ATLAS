@@ -5,7 +5,8 @@ export function sectionFor(code:string,sections:{codes:string[]}[]=LUNG_SECTIONS
 export class PointTour {
   state:'ready'|'touring'|'paused'='ready'; index=0; elapsed=0; autoReturn=true;
   private select:(index:number,focus:boolean)=>void; private finish:()=>void; private changed:(state:PointTour['state'])=>void;
-  constructor(select:(index:number,focus:boolean)=>void,finish:()=>void,changed:(state:PointTour['state'])=>void,readonly order=LUNG_ORDER,readonly sections:{codes:string[]}[]=LUNG_SECTIONS){this.select=select;this.finish=finish;this.changed=changed;}
+  readonly order:typeof LUNG_ORDER;readonly sections:{codes:string[]}[];
+  constructor(select:(index:number,focus:boolean)=>void,finish:()=>void,changed:(state:PointTour['state'])=>void,order=LUNG_ORDER,sections:{codes:string[]}[]=LUNG_SECTIONS){this.order=order;this.sections=sections;this.select=select;this.finish=finish;this.changed=changed;}
   private section(code:string){return this.sections.findIndex(s=>s.codes.includes(code));}
   play(){if(this.index===this.order.length-1)this.index=0;this.autoReturn=true;this.elapsed=0;this.state='touring';this.select(this.index,true);this.changed(this.state);}
   pause(manual=false){this.state='paused';this.elapsed=0;if(manual)this.autoReturn=false;this.changed(this.state);}

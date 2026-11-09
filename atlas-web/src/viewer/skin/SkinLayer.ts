@@ -60,7 +60,9 @@ export class SkinLayer {
   private extra:SkinCost={encodedBytes:0,geometryBytes:0,triangles:0};
   private listeners=new Set<()=>void>();
   private removeMotion:()=>void;
-  constructor(private adapter:DatasetSceneAdapter,readonly asset:SkinAsset,private review=false) {
+  private adapter:DatasetSceneAdapter;readonly asset:SkinAsset;private review:boolean;
+  constructor(adapter:DatasetSceneAdapter,asset:SkinAsset,review=false) {
+    this.adapter=adapter;this.asset=asset;this.review=review;
     if(skinLayers.has(adapter))throw Error('Only one skin layer per anatomy scene');
     if(asset.appearance)validateSkinMaterial(asset.appearance,asset.sha256);
     if(asset.components){validateSkinComponents(asset.components,asset);if(asset.components.nativeSourceSha256!==(adapter.resources.dataset as {sourceHash?:string}).sourceHash)throw Error('Skin component native source hash');}

@@ -9,7 +9,9 @@ export class TerritoryEditSession {
   readonly base:TerritoryMask;
   private faces:Set<number>;private undoStack:Set<number>[]=[];private redoStack:Set<number>[]=[];private stroke:Set<number>|null=null;private epoch=0;private restoredMask:TerritoryMask|null=null;
   private centers:number[][]=[];private neighbors:number[][]=[];
-  constructor(readonly carrier:Carrier,mask:TerritoryMask,readonly bindings:EditBindings) {
+  readonly carrier:Carrier;readonly bindings:EditBindings;
+  constructor(carrier:Carrier,mask:TerritoryMask,bindings:EditBindings) {
+    this.carrier=carrier;this.bindings=bindings;
     if(mask.carrierHash!==carrier.topologySha256||bindings.carrierHash!==carrier.topologySha256)throw Error('Editor carrier binding');
     this.base=structuredClone(mask);this.faces=new Set(mask.triangleIds);
     const edges=new Map<string,number[]>();

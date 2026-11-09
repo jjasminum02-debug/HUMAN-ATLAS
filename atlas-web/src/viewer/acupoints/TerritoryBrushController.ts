@@ -7,7 +7,9 @@ export type BrushTool='orbit'|'paint'|'erase';
 export class TerritoryBrushController {
   private tool:BrushTool='orbit';private radius=.016;private pointer:number|null=null;private generation=0;private dead=false;private comparing=false;
   private readonly canvas:HTMLCanvasElement;private readonly parent:HTMLElement;private readonly surface:ReturnType<AcupunctureOverlay['reviewCarrierSurface']>;
-  constructor(private adapter:DatasetSceneAdapter,private overlay:AcupunctureOverlay,readonly model:TerritoryEditSession,private changed:()=>void,private failed:(error:unknown)=>void) {
+  private adapter:DatasetSceneAdapter;private overlay:AcupunctureOverlay;readonly model:TerritoryEditSession;private changed:()=>void;private failed:(error:unknown)=>void;
+  constructor(adapter:DatasetSceneAdapter,overlay:AcupunctureOverlay,model:TerritoryEditSession,changed:()=>void,failed:(error:unknown)=>void) {
+    this.adapter=adapter;this.overlay=overlay;this.model=model;this.changed=changed;this.failed=failed;
     this.canvas=adapter.scene.renderer.domElement;this.parent=this.canvas.parentElement!;this.surface=overlay.reviewCarrierSurface(model.carrier.id);
     for(const type of ['pointerdown','pointermove','pointerup','pointercancel','lostpointercapture'] as const)this.parent.addEventListener(type,this.pointerEvent,true);
     this.parent.addEventListener('keydown',this.key,true);

@@ -35,3 +35,21 @@ coverage/
 /atlas-web/dist-vercel/
 /atlas-data/source-cache/kmle-2026-11-04/
 /atlas-data/source-cache/wikipedia-2026-11-04/
+
+# Python bytecode.
+__pycache__/
+
+# Held skin fitting and acupoint iterations, and T66 run evidence: kept on disk, out of history.
+# Anything the app or tests read in these folders is committed with `git add -f` and stays tracked.
+/atlas-data/anatomy/skin/at10-f3-head-r1/
+/atlas-data/anatomy/skin/at10-f3-head-r2/
+/atlas-data/anatomy/skin/at10-fit-r[2-5]/
+/atlas-data/acupoints/carriers/
+/work/evidence/T66/
+/work/evidence/acupoint-AC2/
+/atlas-web/work/
+
+# Motion clips no longer registered in motion-learning.json.
+/atlas-data/assets/motion/t66-unit01-*-source-frame-r3/
+/atlas-data/assets/motion/t66-unit03-forearm-pronation-*/
+/atlas-data/assets/derived-glb/t66-unit03-forearm-pronation-*/

@@ -61,7 +61,9 @@ export class AcupunctureOverlay {
     if(adapter.scene.cameraOwner==='motion'||adapter.resources.motionOverrides.size>0)throw Error('경혈 표시는 복원된 정지 자세에서만 가능합니다.');
     return new AcupunctureOverlay(adapter,carrier,points,onSelect,onStop,encodedBytes,options);
   }
-  private constructor(private adapter: DatasetSceneAdapter, readonly carrier: Carrier, readonly points: PointInstance[], private onSelect: (code: string,side?:Side) => void, private onStop: (reason: string) => void, private encodedBytes: number, private options?: OverlayOptions) {
+  private adapter: DatasetSceneAdapter;readonly carrier: Carrier;readonly points: PointInstance[];private onSelect: (code: string,side?:Side) => void;private onStop: (reason: string) => void;private encodedBytes: number;private options?: OverlayOptions;
+  private constructor(adapter: DatasetSceneAdapter,carrier: Carrier,points: PointInstance[],onSelect: (code: string,side?:Side) => void,onStop: (reason: string) => void,encodedBytes: number,options?: OverlayOptions) {
+    this.adapter=adapter;this.carrier=carrier;this.points=points;this.onSelect=onSelect;this.onStop=onStop;this.encodedBytes=encodedBytes;this.options=options;
     const scene = adapter.scene;
     adapter.restoreSourceMotion('acupoint-static-review');
     this.savedCamera=structuredClone(options?.returnCamera??scene.observationReturnState('acupoint'));scene.cancelCameraMotion();
