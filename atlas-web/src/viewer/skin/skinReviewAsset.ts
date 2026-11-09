@@ -2,8 +2,13 @@ import type { SkinAsset } from './skinContract.ts';
 /** DEV-only checkpoints and scoped foot candidates. No entry approves a whole skin. */
 export async function skinReviewAsset(datasetRevision:string,params:URLSearchParams):Promise<SkinAsset> {
   const requested=params.get('skinCandidate');
-  const revision=requested==='f3c11'||requested==='f2c3'||requested==='f2c2'||requested==='f2c1'||requested==='f1c7'||requested==='f1c4'||requested==='f1c5'||requested==='f1c1'||requested==='r56'||requested==='r58'?requested:'r41';
-  const candidate=revision==='f3c11'?{
+  const revision=requested==='f3c29'||requested==='f3c11'||requested==='f2c3'||requested==='f2c2'||requested==='f2c1'||requested==='f1c7'||requested==='f1c4'||requested==='f1c5'||requested==='f1c1'||requested==='r56'||requested==='r58'?requested:'r41';
+  const candidate=revision==='f3c29'?{
+    url:(await import('../../../../atlas-data/anatomy/skin/at10-f3-head-r2/skin-candidate-f3c29.glb?url')).default,
+    sha256:'e7c9cb8679cb0288da8a895a435ccea66f053f7e8f042f2e1d3991a5bf7862f3',topologySha256:'1b05e13f1600d55803f0a4368252b3990e57cb525e012901184168e71c0e6b23',mappingSha256:'e0f014f477ba073b92464e1022a5e38c3d109c4641a90267a3fceeb7977e33c1',
+    appearanceBinding:(await import('../../../../atlas-data/anatomy/skin/at10-f3-head-r2/material-f3c29.json')).default,
+    components:{...(await import('../../../../atlas-data/anatomy/skin/at10-f3-head-r1/ocular-components-r1.json')).default,datasetRevision,url:(await import('../../../../atlas-data/anatomy/skin/at10-f3-head-r1/ocular-components-r1.glb?url')).default,unit:'m' as const},
+  }:revision==='f3c11'?{
     url:(await import('../../../../atlas-data/anatomy/skin/at10-f3-head-r1/skin-candidate-f3c11.glb?url')).default,
     sha256:'0999bebef773bd842f93429a8b183ea397dc8011bf47cec2c579aec6a73b30da',topologySha256:'5431c6545e12ed5a5abe47f836ce8536579fa5de67e7d3fd73ccc115a098a1b5',mappingSha256:'4129f5dfac7bb3eacedb2c21e4ff75d4c9990dd132c8651a1f6a936b0e8c3fc5',
     appearanceBinding:(await import('../../../../atlas-data/anatomy/skin/at10-f3-head-r1/material-f3c11.json')).default,

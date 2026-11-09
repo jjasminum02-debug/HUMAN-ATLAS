@@ -1,6 +1,41 @@
 """Pure numerical cubic field used by offline AT10 authoring and inspection."""
 import numpy as np
 
+def flow_line_search_floor(certified_step, unscaled_surface_update_m):
+    """A coefficient scale must not invalidate an otherwise useful safe motion.
+
+    Retain twelve relative halvings and a 10nm numerical movement floor. Neither
+    value is a source/native clearance, geometry, or anatomical acceptance gate.
+    """
+    assert np.isfinite(certified_step) and certified_step>0
+    assert np.isfinite(unscaled_surface_update_m) and unscaled_surface_update_m>=0
+    if certified_step*unscaled_surface_update_m<1e-8:return None
+    return max(certified_step/2048,1e-8/unscaled_surface_update_m)
+
+def owned_field_basis(values, active_vertices, fixed_vertices):
+    """Make the solve predict the same per-vertex ownership as emitted updates."""
+    result=np.asarray(values).copy()
+    result[~np.asarray(active_vertices,dtype=bool)]=0
+    result[np.asarray(fixed_vertices,dtype=int)]=0
+    return result
+
+def boundary_nullspace(values, derivatives=None, directions=None):
+    """Null displacement and optional surface directional derivatives at anchors.
+
+    This is a numerical boundary condition, not anatomical correspondence.
+    Derivative rows use a metre scale to keep the SVD units comparable.
+    """
+    rows=np.asarray(values)
+    if derivatives is not None:
+        gradients=np.asarray(derivatives);vectors=np.asarray(directions)
+        assert gradients.shape[0]==vectors.shape[0] and vectors.shape[-1]==3
+        rows=np.vstack([rows,np.einsum('ank,adk->adn',gradients,vectors).reshape(-1,rows.shape[1])*.01])
+    _,singular,vh=np.linalg.svd(rows,full_matrices=True)
+    rank=int((singular>singular[0]*1e-9).sum())
+    null=vh[rank:].T
+    assert null.shape[1]>0,'Boundary constraints leave no free field coefficients'
+    return null,rank
+
 def landmark_flow_operator(recipe):
     """Replay a source-bound 3D field; no candidate or source is modified."""
     affine=np.asarray(recipe['affine']);translation=np.asarray(recipe['translation'])

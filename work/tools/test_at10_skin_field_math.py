@@ -1,7 +1,27 @@
 """Numerical tests of shared offline bounded field composition, no anatomy approval."""
 import unittest,numpy as np
-from at10_skin_field_math import landmark_flow_operator,regional_shape_operator,solve_landmark_flow
+from at10_skin_field_math import landmark_flow_operator,regional_shape_operator,solve_landmark_flow,boundary_nullspace,owned_field_basis,flow_line_search_floor
 class Fields(unittest.TestCase):
+ def test_line_search_is_invariant_to_coefficient_parameterization(self):
+  a=flow_line_search_floor(.1,.002);b=flow_line_search_floor(.1/1e6,.002*1e6)
+  self.assertAlmostEqual(a*.002,b*.002*1e6)
+  self.assertLess(b,.1/1e6)
+  self.assertIsNone(flow_line_search_floor(1e-8,.00001))
+ def test_contact_prediction_matches_actual_owned_triangle_displacement(self):
+  rng=np.random.default_rng(33);kernel=rng.normal(size=(7,5));coefficients=rng.normal(size=(5,3));active=np.array([False,True,True,True,True,False,False]);fixed=[1]
+  actual=kernel@coefficients;actual[~active]=0;actual[fixed]=0
+  basis=owned_field_basis(kernel,active,fixed);tri=np.array([0,1,2]);bary=np.array([.2,.3,.5])
+  np.testing.assert_allclose((bary@basis[tri])@coefficients,bary@actual[tri])
+  self.assertGreater(np.linalg.norm((bary@kernel[tri])@coefficients-bary@actual[tri]),.01)
+  np.testing.assert_array_equal(basis[[0,1,5,6]],0)
+ def test_boundary_position_and_surface_tangents_are_null_without_freezing_interior(self):
+  rng=np.random.default_rng(42);centers=rng.uniform(-.07,.07,(70,3));anchors=np.array([[0,0,0],[.03,0,0],[-.03,0,0]])
+  delta=anchors[:,None]-centers[None];phi=np.exp(-(delta*delta).sum(2)/(2*.04**2));grad=-phi[:,:,None]*delta/.04**2
+  directions=np.tile([[1.,0,0],[0,1.,0]],(len(anchors),1,1));null,_=boundary_nullspace(phi,grad,directions)
+  coefficients=null@rng.normal(size=(null.shape[1],3));self.assertLess(abs(phi@coefficients).max(),1e-7)
+  self.assertLess(abs(np.einsum('ank,adk->adn',grad,directions)@coefficients).max(),1e-5)
+  q=np.array([[0,.04,.02]]);values=np.exp(-((q[:,None]-centers[None])**2).sum(2)/(2*.04**2))@coefficients
+  self.assertGreater(np.linalg.norm(values),1e-4)
  def test_composed_analytic_derivative_and_positive_3d_orientation(self):
   g={'kind':'gaussian_translation','centreM':[.02,1.6,0],'sigmaM':.04,'translationM':[.002,.001,.003]};g['globalDisplacementLipschitzBound']=float(np.linalg.norm(g['translationM'])/(np.sqrt(np.e)*g['sigmaM']))
   f={'kind':'regional_affine','centreM':[0,1.64,-.012],'sigmaM':.09,'linearDisplacement':[.08,0,.22],'axialWindowY':[1.56,1.64]};f['globalDisplacementLipschitzBound']=float(.22*(1+2/np.e+1.5/.08*.09/np.sqrt(np.e)))

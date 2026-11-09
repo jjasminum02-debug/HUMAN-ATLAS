@@ -14,6 +14,7 @@ import importlib.util
 import json
 import sys
 import os
+import gzip
 import numpy as np
 from mathutils import Vector
 from mathutils.geometry import closest_point_on_tri
@@ -51,13 +52,14 @@ p.add_argument('--hard-contacts',action='store_true',help='Use addressed native 
 p.add_argument('--collision-priority',action='store_true',help='Prioritize strict reduction of actual native crossings over clearance energy; do not permit more crossing facets.')
 p.add_argument('--shape-target',help='Explicit source-topology shape prior; does not replace correspondence, collision or volume checks.')
 p.add_argument('--shape-weight',type=float,default=3.)
+p.add_argument('--native-sample-addresses',help='Hash-bound authoring sample subset only; full native BVH and exact trial/QA tests remain unchanged.')
 args = p.parse_args(sys.argv[sys.argv.index('--')+1:])
 assert 0 < args.minimum_margin <= args.target_clearance
 E = R / args.evidence
 (E / 'candidates').mkdir(parents=True, exist_ok=True)
 output = E / f'candidates/fit-{args.revision}.json'
 assert not output.exists(), 'Preserve previous candidates: choose a fresh revision.'
-load = lambda path: json.loads(path.read_text())
+load = lambda path: json.loads(gzip.decompress(path.read_bytes()) if path.suffix=='.gz' else path.read_text())
 B1 = R / 'work/evidence/AT10/2026-10-13-skin-fit-r1'
 B2 = R / 'work/evidence/AT10/2026-10-13-skin-fit-r2'
 B4 = R / 'work/evidence/AT10/2026-10-14-skin-fit-r4'
@@ -96,6 +98,23 @@ if supplement:
 native_vertices, native_triangles, native_keys, native_local = [], [], [], []
 sample_points, sample_addresses = [], []
 exceptions={}
+sample_selection=None
+if args.native_sample_addresses:
+    sample_selection=load(R/args.native_sample_addresses)
+    assert sample_selection['schemaVersion']==1 and sample_selection['solverSamplesOnly'] is True
+    assert sample_selection['rawFullReferenceQaRequired'] is True
+    assert sample_selection['inputCandidateSha256']==hashlib.sha256(initial_path.read_bytes()).hexdigest()
+    binding=d['referencePoseBinding']
+    assert sample_selection['nativeSourceSha256']==binding['sourceHash']
+    assert sample_selection['frameId']==binding['frameId']
+    assert sample_selection['poseId']==binding['canonicalPoseId']
+    assert set(sample_selection['sources'])==set(sample_selection['nativeGeometrySha256'])
+    for key,digest in sample_selection['nativeGeometrySha256'].items():
+        item=native[key]
+        assert hashlib.sha256(np.asarray(item['v'],dtype='<f8').tobytes()+np.asarray(item['t'],dtype='<u4').tobytes()).hexdigest()==digest
+        selected=sample_selection['sources'][key]
+        assert all(type(i) is int and 0<=i<len(item['v']) for i in selected['vertexIds'])
+        assert all(type(i) is int and 0<=i<len(item['t']) for i in selected['triangleIds'])
 if args.reference_exceptions:
     policy=load(R/args.reference_exceptions)
     assert policy['schemaVersion']==1 and policy['userAuthorized'] is True and policy['rawFullReferenceQaRequired'] is True
@@ -113,10 +132,14 @@ for key, item in native.items():
     if args.side!='bilateral' and item['side'] not in [args.side, None, 'midline', 'bilateral', 'unspecified']:
         continue
     vertex_ids = np.intersect1d(np.unique(nt[kept]),np.flatnonzero(((nv >= lower) & (nv <= upper)).all(1)))
+    if sample_selection is not None:
+        vertex_ids=np.intersect1d(vertex_ids,np.asarray(sample_selection['sources'].get(key,{}).get('vertexIds',[]),dtype=int))
     sample_points.extend(nv[vertex_ids].tolist())
     sample_addresses.extend({'nativeSourceKey': key, 'nativeVertex': int(i)} for i in vertex_ids)
     centroids = nv[nt].mean(1)
     face_ids = np.intersect1d(kept,np.flatnonzero(((centroids >= lower) & (centroids <= upper)).all(1)))
+    if sample_selection is not None:
+        face_ids=np.intersect1d(face_ids,np.asarray(sample_selection['sources'].get(key,{}).get('triangleIds',[]),dtype=int))
     sample_points.extend(centroids[face_ids].tolist())
     sample_addresses.extend({'nativeSourceKey': key, 'nativeTriangle': int(i), 'barycentric': [1/3]*3} for i in face_ids)
 nv, nt = np.array(native_vertices), np.array(native_triangles)
@@ -320,6 +343,10 @@ source_unit['referenceExceptions']=args.reference_exceptions
 source_unit['rawFullReferenceQaRequired']=True
 source_unit['shapeTarget']=args.shape_target
 source_unit['shapeWeight']=args.shape_weight
+source_unit['nativeSampleAddresses']=args.native_sample_addresses
+source_unit['boundaryDerivativeControls']=record.get('boundaryDerivativeControls',[])
+source_unit['solveGuardFailures']=[]
+source_unit['lineSearchPolicy']={'relativeHalvings':12,'numericalMovementFloorM':1e-8,'positiveGlobalBoundAndNativeSelfGuardsUnchanged':True}
 if args.resume:
     source_unit['resumedFromRevision'] = args.resume
     source_unit['resumedCandidateSha256'] = hashlib.sha256((E / f'candidates/fit-{args.resume}.json').read_bytes()).hexdigest()
@@ -356,19 +383,36 @@ for iteration in range(args.steps):
         return phi, derivative
     anchors = np.vstack([v[roots], helper_points])
     constraint_basis = gaussian(anchors)[0]
-    _, singular, vh = np.linalg.svd(constraint_basis, full_matrices=True)
-    rank = int((singular > singular[0]*1e-9).sum())
-    null = vh[rank:].T
+    if record.get('boundaryDerivativeControls'):
+        sys.path.insert(0,str(R/'work/tools'))
+        from at10_skin_field_math import boundary_nullspace
+        boundary_records=record['boundaryDerivativeControls']
+        assert all(x['sourceVertex'] in set(roots.tolist()) for x in boundary_records)
+        _,boundary_gradients=gaussian(v[[x['sourceVertex'] for x in boundary_records]])
+        null,rank=boundary_nullspace(constraint_basis,boundary_gradients,np.array([x['worldDirections'] for x in boundary_records]))
+    else:
+        _, singular, vh = np.linalg.svd(constraint_basis, full_matrices=True)
+        rank = int((singular > singular[0]*1e-9).sum())
+        null = vh[rank:].T
     phi, derivative = gaussian(v)
-    basis = phi@null
+    sys.path.insert(0,str(R/'work/tools'))
+    from at10_skin_field_math import owned_field_basis
+    basis = owned_field_basis(phi@null,mask,roots)
     matrix_rows, rhs = [], []
+    immovable_contacts=[]
     for row in rows:
         weights = np.array(row['barycentric'])
         feature = weights@basis[tri[row['skinTriangle']]]
+        if np.linalg.norm(feature)<1e-12:
+            immovable_contacts.append(row)
+            continue
         matrix_rows.append(np.outer(feature, row['skinOutwardNormal']).ravel())
         rhs.append(row['violationM'])
     matrix_rows = np.array(matrix_rows); rhs = np.array(rhs)
-    if not len(rows): break
+    source_unit['immovableBoundaryContacts']=immovable_contacts
+    if not len(matrix_rows):
+        print('NO_MOVABLE_CONTACT_CONSTRAINTS',len(immovable_contacts),flush=True)
+        break
     # Preserve the posed source's differential shape, not merely small field
     # coefficients. All shared source edges contribute to the same solve.
     edges = np.array(sorted({tuple(sorted((int(x), int(y)))) for f in unit_tri
@@ -459,8 +503,22 @@ for iteration in range(args.steps):
     if 'sourceLandmarkFlowRecipe' in record:
         lip=float((np.linalg.norm(raw_coefficients,axis=1)/(np.sqrt(np.e)*sigma)).sum())
         step=min(step,.5/max(lip,1e-20));global_step_bound=lip
+    from at10_skin_field_math import flow_line_search_floor
+    unscaled_surface_update=float(np.linalg.norm(delta[ids],axis=1).max())
+    minimum_step=flow_line_search_floor(step,unscaled_surface_update)
+    if minimum_step is None:
+        failure={'iteration':iteration,'reason':'certified surface update is below the numerical movement floor; no geometry acceptance implied',
+            'certifiedMaximumStep':float(step),'numericalMovementFloorM':1e-8,
+            'globalDisplacementLipschitzBoundBeforeStep':global_step_bound,
+            'unscaledMaximumSurfaceUpdateM':float(np.linalg.norm(delta[ids],axis=1).max()),
+            'safeMaximumSurfaceUpdateM':float(step*np.linalg.norm(delta[ids],axis=1).max()),
+            'boundaryConstraintRank':rank,'freeFieldCoefficients':int(null.shape[1]),
+            'immovableBoundaryContacts':len(immovable_contacts)}
+        source_unit['solveGuardFailures'].append(failure)
+        print('FIELD_BASIS_GUARD',failure,flush=True)
+        break
     accepted = False; rejected = collections.Counter(); added_barrier=False
-    while step >= 1/2048:
+    while step >= minimum_step:
         trial = v+step*delta
         trial_jac = (np.eye(3)[None]+step*qgradient)@jac
         if not np.isfinite(trial).all() or not np.isfinite(trial_jac).all():
@@ -487,6 +545,8 @@ for iteration in range(args.steps):
                 diff=points[ids]-shape_target[ids]
                 return .002*float((diff*diff).sum())+args.shape_weight*float((laplacian(diff)**2).sum())
             not_improved=constraint_weight*next_energy+shape_energy(trial)>=constraint_weight*energy+shape_energy(v)
+            if args.collision_priority and next_count>old_count:
+                not_improved=True
         if not_improved or (not len(native_pairs) and len(next_native)):
             rejected['contact_energy'] += 1; step *= .5; continue
         accepted = True; break
