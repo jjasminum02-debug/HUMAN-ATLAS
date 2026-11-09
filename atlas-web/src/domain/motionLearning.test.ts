@@ -39,11 +39,11 @@ const asset: MotionAsset = {
   technicalStatus: "binding_verified",
 };
 
-test("production bundle retains six original texts and adds one right ankle source-bound clip", () => {
+test("production bundle retains original motions and registers unit-01 bilateral flexion observations", () => {
   assert.equal((production.muscleActions as MuscleAction[]).filter(a => a.subjectKind !== "bone" && !a.sourceFamilyId).length, 8);
   assert.equal((production.muscleActions as MuscleAction[]).filter(a => a.subjectKind === "bone" && !a.sourceFamilyId).length, 27);
-  assert.equal(production.motionDefinitions.length, 275);
-  assert.equal(production.motionAssets.length, 275);
+  assert.equal(production.motionDefinitions.length, production.motionAssets.length);
+  assert.ok(production.motionAssets.length >= 279);
   const actions = production.muscleActions as MuscleAction[];
   assert.deepEqual(actions.filter((row) => row.id.startsWith("T21-ACTION-")).map((row) => row.subjectIds[0]), [
     "HA-M-000001", "HA-M-000002", "HA-M-000003", "HA-M-000004", "HA-M-000005", "HA-M-000006",
@@ -58,6 +58,10 @@ test("production bundle retains six original texts and adds one right ankle sour
   assert.equal(authored.sourceBinding?.subjectSourceKey, "ZA-c7010a9-54ae5266082b61f48ed8e83e");
   assert.equal(authored.staticBinding.side, "right");
   assert.equal(authored.technicalStatus, "binding_verified");
+  const sourceFamilies = new Set((production.motionAssets as MotionAsset[]).flatMap((row) => row.sourceBinding?.sourceFamilyId ? [row.sourceBinding.sourceFamilyId] : []));
+  for (const family of ["shoulder-flexion-left", "shoulder-flexion-right", "elbow-flexion-left", "elbow-flexion-right"]) {
+    assert.ok(sourceFamilies.has(family), `missing registered unit-01 observation ${family}`);
+  }
 });
 
 test("text can be present while there is no compatible motion clip", () => {

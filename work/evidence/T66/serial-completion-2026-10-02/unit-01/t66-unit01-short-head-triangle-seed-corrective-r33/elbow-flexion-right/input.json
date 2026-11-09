@@ -1,0 +1,1447 @@
+{
+  "schemaVersion": "t66-family-surface-authoring-v1",
+  "revision": "t66-unit01-short-head-triangle-seed-corrective-r33",
+  "id": "T66-elbow-flexion-right",
+  "clipId": "T66-CLIP-elbow-flexion-right",
+  "side": "right",
+  "rights": {
+    "sourceOnly": true,
+    "localUseRights": "inherits_pinned_source_decision",
+    "publicRedistribution": "held",
+    "humanReview": "not_performed"
+  },
+  "dataset": {
+    "path": "atlas-data/source-cache/datasets/za/compiled/manifest.json",
+    "sha256": "56ffd2d93d9a4c4b0b3954511c471358e3da54f47e6915cb35d4b6111f1b7f42"
+  },
+  "family": {
+    "id": "elbow-flexion-right",
+    "type": "elbow",
+    "label": "팔꿈치 굽힘",
+    "frameId": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+    "referencePoseId": "ZA-9f08a17ea0115fed-frame0-autoexec-off",
+    "poseMeaning": "pinned source frame0 static reference, not measured neutral",
+    "axis": [
+      -1,
+      0,
+      0
+    ],
+    "pivotMetres": [
+      -0.21511644259527316,
+      1.0938570666249166,
+      -0.03433301774810724
+    ],
+    "endDegrees": 15,
+    "validatedAuthoringLimitDegrees": 15,
+    "samples": 16,
+    "durationSeconds": 2,
+    "rotationOrder": "single authored DOF; no unverified multi-axis combination",
+    "landmarks": [
+      {
+        "sourceKey": "ZA-c7010a9-34b418ba01ebccb353db5982",
+        "lod": "overview",
+        "vertexIndices": [
+          15,
+          22,
+          23,
+          25,
+          37,
+          42,
+          47,
+          48,
+          61,
+          63,
+          77,
+          85,
+          86,
+          114,
+          124,
+          127,
+          133,
+          134,
+          135,
+          137,
+          146,
+          147,
+          153,
+          155,
+          156,
+          158,
+          162,
+          164,
+          167,
+          183,
+          222
+        ],
+        "meaning": "authored centroid of inspected joint end; not measured instantaneous normal axis"
+      }
+    ],
+    "qualitativeEvidence": [
+      {
+        "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-5-types-of-body-movements",
+        "locator": "9.5 Flexion/Extension, Rotation and joint types; educational axis/range is authored separately"
+      }
+    ],
+    "surroundingTissuePolicy": "original actual attachment-linked muscles receive source-specific masks; intrinsic same-segment tissue co-moves",
+    "unresolved": [
+      "Joint-end centroid is an authored approximation; articular pivot fitting/contact correction and actual scene QA required before registration.",
+      "Unlinked attachment contexts do not establish passive-tissue completeness."
+    ]
+  },
+  "members": [
+    {
+      "sourceKey": "ZA-c7010a9-288b2f7df8d9a68245276571",
+      "lod": "overview",
+      "role": "moving_structure"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-34b418ba01ebccb353db5982",
+      "lod": "overview",
+      "role": "fixed_structure"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-60fdfbce8b40f76046cc1110",
+      "lod": "overview",
+      "role": "fixed_structure"
+    },
+    {
+      "sourceKey": "ZA-c7010a9-a0c2ea00609e874a7faa926d",
+      "lod": "overview",
+      "role": "deforming_passive_surface",
+      "fixedVertexIndices": [
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237
+      ],
+      "movingVertexIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        13,
+        14,
+        16,
+        17,
+        18,
+        27
+      ],
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.9999660421837095,
+        1.0,
+        1.0,
+        0.949165299387432,
+        1.0,
+        1.0,
+        0.9959226936954603,
+        1.0,
+        1.0,
+        1.0,
+        0.9999981083865624,
+        0.9671964429768443,
+        0.9983925317668129,
+        0.9950889312793462,
+        0.9618347432969975,
+        0.8653702031461084,
+        0.994279760605359,
+        0.9319081799095543,
+        1.0,
+        0.9551374816035678,
+        0.9494231959031453,
+        0.8676985836792046,
+        0.9311544201001981,
+        0.9494808296247371,
+        0.8570534729482889,
+        0.9605268608596615,
+        0.8860997650357998,
+        0.8630749316228086,
+        0.8841728158742935,
+        0.767195680325418,
+        0.7169717214499904,
+        0.879222046150582,
+        0.7962116792345035,
+        0.8041441069839615,
+        0.8850025975762182,
+        0.9524689754932627,
+        0.9439479526310925,
+        0.9856259233470449,
+        0.7664564981891401,
+        0.9808244328313696,
+        0.7786709141782543,
+        0.6900190331953447,
+        0.6816950451834033,
+        0.6203478511397936,
+        0.5796713401796576,
+        0.714159238967071,
+        0.9283754703991534,
+        0.5417758764774607,
+        0.6802813289899498,
+        0.8247033024064124,
+        0.57411621063337,
+        0.6218410259599872,
+        0.7021915746332221,
+        0.7903525935818988,
+        0.4583096556977596,
+        0.4850887066654813,
+        0.45700780376385,
+        0.4495387767475795,
+        0.45666808432871203,
+        0.449502478739739,
+        0.42156601138098265,
+        0.44752677755990217,
+        0.4501152159933843,
+        0.63293796688432,
+        0.3741709900167614,
+        0.38558546099089624,
+        0.37274883765834144,
+        0.3734763484644996,
+        0.5349335029242543,
+        0.3794400909614418,
+        0.5252329494870644,
+        0.3774857792912771,
+        0.3739250561168747,
+        0.37347984668687567,
+        0.4950009482136869,
+        0.7106702581867442,
+        0.3787219074887482,
+        0.46259853334558476,
+        0.5695074231188999,
+        0.8882541865521764,
+        0.3054649681981753,
+        0.37462974911676883,
+        0.48698168629631183,
+        0.8954781196747119,
+        0.7375327808575443,
+        0.9154394904770696,
+        0.549900025632653,
+        0.6101506905969669,
+        0.799186028669719,
+        0.7885081725890718,
+        0.5400006115786832,
+        0.9059128459189117,
+        0.31498338867744463,
+        0.5955934556382704,
+        0.9041625466427577,
+        0.3846898925964744,
+        0.8867013280041426,
+        0.40494040331910874,
+        0.6402311726500812,
+        0.39677317151746605,
+        0.6251409092356947,
+        0.26737214244934426,
+        0.3469903748182454,
+        0.6594555085446455,
+        0.4120466928838974,
+        0.48373002343116933,
+        0.49166013415971443,
+        0.46069935215185853,
+        0.19041418151074122,
+        0.5637042064807448,
+        0.28928223920411034,
+        0.29825639235042356,
+        0.8606508772944563,
+        0.8090494152736607,
+        0.7286818321569476,
+        0.7452417247257457,
+        0.32008031550238386,
+        0.8433598936483023,
+        0.15754203754287974,
+        0.8317645513899224,
+        0.627757345465381,
+        0.6900908931354586,
+        0.20641406756031372,
+        0.16985426877602552,
+        0.45971254367150305,
+        0.5131490766776722,
+        0.4563540480119036,
+        0.7418290514711264,
+        0.14499412013676807,
+        0.12135048127418203,
+        0.5151827150718049,
+        0.2732617553052355,
+        0.11404926960047261,
+        0.1513054913664506,
+        0.554696153640159,
+        0.7628909550768941,
+        0.5330809579139907,
+        0.7539100114528828,
+        0.4553403244275775,
+        0.6536025537341658,
+        0.3464153765320595,
+        0.15502243732330878,
+        0.5561202510819904,
+        0.72118831652332,
+        0.6908676404728812,
+        0.46954447553087103,
+        0.05655624931122219,
+        0.30094133715874094,
+        0.04030840344926902,
+        0.14631649479518394,
+        0.11336615739491561,
+        0.33293534575137934,
+        0.3903115514486152,
+        0.033219341401377486,
+        0.6587950631485006,
+        0.616948278244719,
+        0.5739824835309726,
+        0.4459503330877659,
+        0.01613304233241567,
+        0.01508640065187806,
+        0.044278522305480024,
+        0.04433751187556518,
+        0.014703080869862032,
+        0.014306662604796157,
+        0.11595626012331915,
+        0.04676883909877361,
+        0.06998347558769767,
+        0.42394726624109125,
+        0.015665028084981075,
+        0.00979301989434053,
+        0.17423072392310418,
+        0.012764522570349913,
+        0.027922773856382355,
+        0.47505896035167144,
+        0.2590374194293998,
+        0.01958996447846439,
+        0.016450175619992503,
+        0.5084416669545493,
+        0.03988041673500553,
+        0.4327563681816108,
+        0.15437913916400903,
+        0.040447007716114924,
+        0.45982097938335864,
+        0.4929356923041203,
+        0.32043173869576996,
+        0.006469949905977624,
+        0.015638265494974983,
+        0.29986498794793176,
+        0.14142281226163303,
+        0.019544758507396738,
+        0.11532008766694919,
+        0.19504558148226697,
+        0.008813390368349666,
+        0.37559991645306623,
+        0.004580813729899031,
+        0.3188805369091952,
+        0.009006614020880214,
+        0.16855007655566043,
+        0.011951834764315513,
+        0.3470775122866827,
+        0.170655054091351,
+        0.28371029164781447,
+        0.009506292335017695,
+        0.2631926590615535,
+        0.21149050412005851,
+        0.00409295002236881,
+        0.004268636169269347,
+        0.004910053840010807,
+        0.002472584898530768,
+        0.00013910072379719508,
+        0.0004052944392571137,
+        0.004244951302018515,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "maskMeaning": "authored nearest-source-surface regions, not measured attachment footprints",
+      "fixedBoneKeys": [
+        "ZA-c7010a9-60fdfbce8b40f76046cc1110"
+      ],
+      "movingBoneKeys": [
+        "ZA-c7010a9-bbf9bc7490f29cabf346c53a"
+      ],
+      "contactWeightPolicy": "source-phase-contact-and-shape-feasible-weight-fields",
+      "sourceTopologyCoupledVertexGroups": [
+        [
+          26,
+          30,
+          38,
+          50
+        ],
+        [
+          31,
+          36,
+          37
+        ],
+        [
+          40,
+          41,
+          49
+        ],
+        [
+          52,
+          53,
+          72
+        ],
+        [
+          63,
+          65,
+          66,
+          67,
+          68,
+          70,
+          71
+        ],
+        [
+          73,
+          74,
+          75,
+          76,
+          78,
+          80,
+          81,
+          82,
+          85
+        ]
+      ],
+      "sourceTopologyCoupledEdges": [],
+      "sourceTopologyCoupledActiveSteps": [],
+      "sourceTopologyGroupEvidence": {
+        "sources": [
+          {
+            "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/short-head-stretched-edge-detail-r15.json",
+            "sha256": "115d11c7dd0798452f4e15b0143f10b003bd29b303a99daedbcacd24245b3bf1",
+            "failedDerivedGlbSha256": "290f2abab39ce4ed16de8d1de2ad35efc279f5b1847b8232d7e0bc649c91b936"
+          },
+          {
+            "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/short-head-stretched-edge-detail-r16.json",
+            "sha256": "bf73ca51c2070beaa28b75f93a37512f6e2a9dafda2c28c2a4595569e2ebe92d",
+            "failedDerivedGlbSha256": "a9398ef9c69c43f74eff60f7b5aaedac13a40822f276e4d0b08d2e2baa791617"
+          }
+        ],
+        "failedSourceEdges": [
+          {
+            "sourceVertexIndices": [
+              73,
+              76
+            ],
+            "sourceLengthMetres": 0.00018293848287957826,
+            "maximumLengthRatio": 76.93705713813748,
+            "maximumAtSeconds": 1.75,
+            "maximumAtPhase": 0.875
+          },
+          {
+            "sourceVertexIndices": [
+              73,
+              75
+            ],
+            "sourceLengthMetres": 0.0002304878493256231,
+            "maximumLengthRatio": 61.18889226325323,
+            "maximumAtSeconds": 1.75,
+            "maximumAtPhase": 0.875
+          },
+          {
+            "sourceVertexIndices": [
+              81,
+              82
+            ],
+            "sourceLengthMetres": 0.00017644405082033724,
+            "maximumLengthRatio": 59.14825242431104,
+            "maximumAtSeconds": 1.5,
+            "maximumAtPhase": 0.75
+          },
+          {
+            "sourceVertexIndices": [
+              63,
+              65
+            ],
+            "sourceLengthMetres": 0.00028974199532423773,
+            "maximumLengthRatio": 56.32314587396089,
+            "maximumAtSeconds": 2.0,
+            "maximumAtPhase": 1.0
+          },
+          {
+            "sourceVertexIndices": [
+              65,
+              67
+            ],
+            "sourceLengthMetres": 0.000321054139889256,
+            "maximumLengthRatio": 50.74415125824411,
+            "maximumAtSeconds": 2.0,
+            "maximumAtPhase": 1.0
+          },
+          {
+            "sourceVertexIndices": [
+              78,
+              80
+            ],
+            "sourceLengthMetres": 0.000488584576484091,
+            "maximumLengthRatio": 25.771722652922694,
+            "maximumAtSeconds": 1.375,
+            "maximumAtPhase": 0.6875
+          },
+          {
+            "sourceVertexIndices": [
+              70,
+              71
+            ],
+            "sourceLengthMetres": 0.0009261995896179803,
+            "maximumLengthRatio": 22.81908604178014,
+            "maximumAtSeconds": 2.0,
+            "maximumAtPhase": 1.0
+          },
+          {
+            "sourceVertexIndices": [
+              76,
+              81
+            ],
+            "sourceLengthMetres": 0.0005108826019789192,
+            "maximumLengthRatio": 22.666317594745184,
+            "maximumAtSeconds": 1.125,
+            "maximumAtPhase": 0.5625
+          },
+          {
+            "sourceVertexIndices": [
+              75,
+              81
+            ],
+            "sourceLengthMetres": 0.0006155978682247761,
+            "maximumLengthRatio": 18.81250991197705,
+            "maximumAtSeconds": 1.125,
+            "maximumAtPhase": 0.5625
+          },
+          {
+            "sourceVertexIndices": [
+              74,
+              78
+            ],
+            "sourceLengthMetres": 0.0009094976353885813,
+            "maximumLengthRatio": 15.892193233736467,
+            "maximumAtSeconds": 1.125,
+            "maximumAtPhase": 0.5625
+          },
+          {
+            "sourceVertexIndices": [
+              78,
+              85
+            ],
+            "sourceLengthMetres": 0.0005444773451588151,
+            "maximumLengthRatio": 15.510519409639821,
+            "maximumAtSeconds": 1.125,
+            "maximumAtPhase": 0.5625
+          },
+          {
+            "sourceVertexIndices": [
+              80,
+              85
+            ],
+            "sourceLengthMetres": 0.0005232680091697765,
+            "maximumLengthRatio": 14.792927764519215,
+            "maximumAtSeconds": 1.375,
+            "maximumAtPhase": 0.6875
+          },
+          {
+            "sourceVertexIndices": [
+              73,
+              81
+            ],
+            "sourceLengthMetres": 0.000566755942616772,
+            "maximumLengthRatio": 11.399211653552774,
+            "maximumAtSeconds": 1.875,
+            "maximumAtPhase": 0.9375
+          },
+          {
+            "sourceVertexIndices": [
+              80,
+              81
+            ],
+            "sourceLengthMetres": 0.0006231211111714295,
+            "maximumLengthRatio": 7.637773011994827,
+            "maximumAtSeconds": 1.875,
+            "maximumAtPhase": 0.9375
+          },
+          {
+            "sourceVertexIndices": [
+              76,
+              82
+            ],
+            "sourceLengthMetres": 0.0004752657642999034,
+            "maximumLengthRatio": 7.006944447550566,
+            "maximumAtSeconds": 1.75,
+            "maximumAtPhase": 0.875
+          },
+          {
+            "sourceVertexIndices": [
+              75,
+              82
+            ],
+            "sourceLengthMetres": 0.0005805372762703662,
+            "maximumLengthRatio": 5.931179487423627,
+            "maximumAtSeconds": 1.75,
+            "maximumAtPhase": 0.875
+          },
+          {
+            "sourceVertexIndices": [
+              66,
+              68
+            ],
+            "sourceLengthMetres": 9.231222394005748e-05,
+            "maximumLengthRatio": 137.06093047612225,
+            "maximumAtSeconds": 1.125,
+            "maximumAtPhase": 0.5625
+          },
+          {
+            "sourceVertexIndices": [
+              66,
+              71
+            ],
+            "sourceLengthMetres": 0.000865503083692664,
+            "maximumLengthRatio": 17.804017270459482,
+            "maximumAtSeconds": 1.875,
+            "maximumAtPhase": 0.9375
+          },
+          {
+            "sourceVertexIndices": [
+              68,
+              71
+            ],
+            "sourceLengthMetres": 0.0008046765548293113,
+            "maximumLengthRatio": 7.592833424706378,
+            "maximumAtSeconds": 2.0,
+            "maximumAtPhase": 1.0
+          }
+        ],
+        "connectedSourceTopologyDisplacementGroups": [
+          [
+            26,
+            30,
+            38,
+            50
+          ],
+          [
+            31,
+            36,
+            37
+          ],
+          [
+            40,
+            41,
+            49
+          ],
+          [
+            52,
+            53,
+            72
+          ],
+          [
+            63,
+            65,
+            66,
+            67,
+            68,
+            70,
+            71
+          ],
+          [
+            73,
+            74,
+            75,
+            76,
+            78,
+            80,
+            81,
+            82,
+            85
+          ]
+        ],
+        "shapeProtectedTriangles": [
+          {
+            "triangleIndex": 95,
+            "sourceVertexIndices": [
+              37,
+              36,
+              31
+            ]
+          },
+          {
+            "triangleIndex": 110,
+            "sourceVertexIndices": [
+              38,
+              30,
+              26
+            ]
+          },
+          {
+            "triangleIndex": 118,
+            "sourceVertexIndices": [
+              41,
+              49,
+              40
+            ]
+          },
+          {
+            "triangleIndex": 126,
+            "sourceVertexIndices": [
+              26,
+              50,
+              38
+            ]
+          },
+          {
+            "triangleIndex": 191,
+            "sourceVertexIndices": [
+              52,
+              53,
+              72
+            ]
+          },
+          {
+            "triangleIndex": 294,
+            "sourceVertexIndices": [
+              80,
+              81,
+              74
+            ]
+          },
+          {
+            "triangleIndex": 483,
+            "sourceVertexIndices": [
+              68,
+              66,
+              71
+            ]
+          }
+        ],
+        "meaning": "Union of exact source topology components implicated by emitted-GLB edge expansion and the exact source triangles that collapsed in failed derived GLB samples; common displacement preserves these source-relative vectors, not an anatomical subdivision or measured attachment footprint."
+      }
+    },
+    {
+      "sourceKey": "ZA-c7010a9-6128f2699ae77753bc6015f9",
+      "lod": "overview",
+      "role": "co_moving_context"
+    }
+  ],
+  "correctContactWeights": true,
+  "contactFieldSmoothness": 0.5,
+  "phaseInterpolationSubdivisions": 1,
+  "sourceBoneProjectionCorrectives": false,
+  "sourceBoneProjectionMarginMetres": 0.002,
+  "sourceTopologyContactPatchCorrectives": true,
+  "sourceTopologyContactPatchRings": 4,
+  "sourceTopologyShapeFloor": 0.101,
+  "candidateOnlyForMandatoryGlbInterpolationRepair": true,
+  "sourceTopologyShapeRepairTriangleIds": [
+    95,
+    110,
+    118,
+    126,
+    191,
+    294,
+    483
+  ],
+  "sourceTopologyShapeRepairEvidence": {
+    "sources": [
+      {
+        "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/short-head-interpolation-defect-detail.json",
+        "sha256": "4bde433a712bcc650c98e632992578c602d5432559a0118ea37822ea439839ee",
+        "failedDerivedGlbSha256": "478d8b1ca956b3eb48bee37347c893eeea8694b385c7d73f23cbd19ebac43496"
+      },
+      {
+        "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/short-head-interpolation-defect-detail-r16.json",
+        "sha256": "f1eb608b4d05ecb75ec08344441a32987a9af65a33a199f6e53c68ada9c91802",
+        "failedDerivedGlbSha256": "a9398ef9c69c43f74eff60f7b5aaedac13a40822f276e4d0b08d2e2baa791617"
+      },
+      {
+        "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/short-head-interpolation-defect-detail-r19.json",
+        "sha256": "b9f27ec7c50e4a86a9e18bd65bfa3e7c04adc58376c962afcc350d6ece88b8da",
+        "failedDerivedGlbSha256": "de83cb3d0c0353f0279077f927b75656d4a1b95df7f0112adf5f16bbffe7fcd6"
+      },
+      {
+        "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/short-head-interpolation-defect-detail-r29.json",
+        "sha256": "10d3d0466eef3927e2bed21ee670600e0ad840afc60c33be5583fe832eaaef4f",
+        "failedDerivedGlbSha256": "d115b381f734ed1e89a794ba0f15d4c5d60c35daf88637cb01b9e6f85de11a7c"
+      },
+      {
+        "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/short-head-interpolation-defect-detail-r30.json",
+        "sha256": "78559f1cedd14ebb8e0a6e8dd7757dc93cacab2ae09bab49dcb3f1d019105a7e",
+        "failedDerivedGlbSha256": "10cf8e05149365a177130456ee0f8fba46367d1ea7f22ee26e267b9d91f7c926"
+      }
+    ],
+    "derivedSourceTriangleIndices": [
+      95,
+      110,
+      118,
+      126,
+      191,
+      294,
+      483
+    ],
+    "meaning": "local corrective seeds copied from exact source triangle identities that failed emitted-GLB interpolation; not an anatomical region or attachment footprint"
+  },
+  "sourceTopologyCoupling": {
+    "geometrySha256": "ffe0e775daa48c8ecb3141aa67dd0cb169f248a4f880385d1dde6ca83cee2d41",
+    "edgeLengthThresholdMetres": 0.0002,
+    "derivation": "connected components of exact source triangle edges no longer than 0.2 mm; engineering seam-continuity constraint, not an anatomical boundary",
+    "edgeCount": 4,
+    "allNearZeroEdgeComponents": [
+      [
+        66,
+        68
+      ],
+      [
+        73,
+        75,
+        76
+      ],
+      [
+        81,
+        82
+      ]
+    ],
+    "vertexGroups": [
+      [
+        26,
+        30,
+        38,
+        50
+      ],
+      [
+        31,
+        36,
+        37
+      ],
+      [
+        40,
+        41,
+        49
+      ],
+      [
+        52,
+        53,
+        72
+      ],
+      [
+        63,
+        65,
+        66,
+        67,
+        68,
+        70,
+        71
+      ],
+      [
+        73,
+        74,
+        75,
+        76,
+        78,
+        80,
+        81,
+        82,
+        85
+      ]
+    ],
+    "sourceEdges": [
+      {
+        "sourceVertexIndices": [
+          73,
+          76
+        ],
+        "sourceLengthMetres": 0.00018293848287957826,
+        "maximumLengthRatio": 76.93705713813748,
+        "maximumAtSeconds": 1.75,
+        "maximumAtPhase": 0.875
+      },
+      {
+        "sourceVertexIndices": [
+          73,
+          75
+        ],
+        "sourceLengthMetres": 0.0002304878493256231,
+        "maximumLengthRatio": 61.18889226325323,
+        "maximumAtSeconds": 1.75,
+        "maximumAtPhase": 0.875
+      },
+      {
+        "sourceVertexIndices": [
+          81,
+          82
+        ],
+        "sourceLengthMetres": 0.00017644405082033724,
+        "maximumLengthRatio": 59.14825242431104,
+        "maximumAtSeconds": 1.5,
+        "maximumAtPhase": 0.75
+      },
+      {
+        "sourceVertexIndices": [
+          63,
+          65
+        ],
+        "sourceLengthMetres": 0.00028974199532423773,
+        "maximumLengthRatio": 56.32314587396089,
+        "maximumAtSeconds": 2.0,
+        "maximumAtPhase": 1.0
+      },
+      {
+        "sourceVertexIndices": [
+          65,
+          67
+        ],
+        "sourceLengthMetres": 0.000321054139889256,
+        "maximumLengthRatio": 50.74415125824411,
+        "maximumAtSeconds": 2.0,
+        "maximumAtPhase": 1.0
+      },
+      {
+        "sourceVertexIndices": [
+          78,
+          80
+        ],
+        "sourceLengthMetres": 0.000488584576484091,
+        "maximumLengthRatio": 25.771722652922694,
+        "maximumAtSeconds": 1.375,
+        "maximumAtPhase": 0.6875
+      },
+      {
+        "sourceVertexIndices": [
+          70,
+          71
+        ],
+        "sourceLengthMetres": 0.0009261995896179803,
+        "maximumLengthRatio": 22.81908604178014,
+        "maximumAtSeconds": 2.0,
+        "maximumAtPhase": 1.0
+      },
+      {
+        "sourceVertexIndices": [
+          76,
+          81
+        ],
+        "sourceLengthMetres": 0.0005108826019789192,
+        "maximumLengthRatio": 22.666317594745184,
+        "maximumAtSeconds": 1.125,
+        "maximumAtPhase": 0.5625
+      },
+      {
+        "sourceVertexIndices": [
+          75,
+          81
+        ],
+        "sourceLengthMetres": 0.0006155978682247761,
+        "maximumLengthRatio": 18.81250991197705,
+        "maximumAtSeconds": 1.125,
+        "maximumAtPhase": 0.5625
+      },
+      {
+        "sourceVertexIndices": [
+          74,
+          78
+        ],
+        "sourceLengthMetres": 0.0009094976353885813,
+        "maximumLengthRatio": 15.892193233736467,
+        "maximumAtSeconds": 1.125,
+        "maximumAtPhase": 0.5625
+      },
+      {
+        "sourceVertexIndices": [
+          78,
+          85
+        ],
+        "sourceLengthMetres": 0.0005444773451588151,
+        "maximumLengthRatio": 15.510519409639821,
+        "maximumAtSeconds": 1.125,
+        "maximumAtPhase": 0.5625
+      },
+      {
+        "sourceVertexIndices": [
+          80,
+          85
+        ],
+        "sourceLengthMetres": 0.0005232680091697765,
+        "maximumLengthRatio": 14.792927764519215,
+        "maximumAtSeconds": 1.375,
+        "maximumAtPhase": 0.6875
+      },
+      {
+        "sourceVertexIndices": [
+          73,
+          81
+        ],
+        "sourceLengthMetres": 0.000566755942616772,
+        "maximumLengthRatio": 11.399211653552774,
+        "maximumAtSeconds": 1.875,
+        "maximumAtPhase": 0.9375
+      },
+      {
+        "sourceVertexIndices": [
+          80,
+          81
+        ],
+        "sourceLengthMetres": 0.0006231211111714295,
+        "maximumLengthRatio": 7.637773011994827,
+        "maximumAtSeconds": 1.875,
+        "maximumAtPhase": 0.9375
+      },
+      {
+        "sourceVertexIndices": [
+          76,
+          82
+        ],
+        "sourceLengthMetres": 0.0004752657642999034,
+        "maximumLengthRatio": 7.006944447550566,
+        "maximumAtSeconds": 1.75,
+        "maximumAtPhase": 0.875
+      },
+      {
+        "sourceVertexIndices": [
+          75,
+          82
+        ],
+        "sourceLengthMetres": 0.0005805372762703662,
+        "maximumLengthRatio": 5.931179487423627,
+        "maximumAtSeconds": 1.75,
+        "maximumAtPhase": 0.875
+      },
+      {
+        "sourceVertexIndices": [
+          66,
+          68
+        ],
+        "sourceLengthMetres": 9.231222394005748e-05,
+        "maximumLengthRatio": 137.06093047612225,
+        "maximumAtSeconds": 1.125,
+        "maximumAtPhase": 0.5625
+      },
+      {
+        "sourceVertexIndices": [
+          66,
+          71
+        ],
+        "sourceLengthMetres": 0.000865503083692664,
+        "maximumLengthRatio": 17.804017270459482,
+        "maximumAtSeconds": 1.875,
+        "maximumAtPhase": 0.9375
+      },
+      {
+        "sourceVertexIndices": [
+          68,
+          71
+        ],
+        "sourceLengthMetres": 0.0008046765548293113,
+        "maximumLengthRatio": 7.592833424706378,
+        "maximumAtSeconds": 2.0,
+        "maximumAtPhase": 1.0
+      }
+    ],
+    "activeMotionSteps": [],
+    "edgeLengthSha256": "f0f76a5524d4a91ae3fe1dcf65a1a05cb43d38ca5614b051288cae7c143248f1",
+    "evidence": {
+      "sources": [
+        {
+          "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/short-head-stretched-edge-detail-r15.json",
+          "sha256": "115d11c7dd0798452f4e15b0143f10b003bd29b303a99daedbcacd24245b3bf1",
+          "failedDerivedGlbSha256": "290f2abab39ce4ed16de8d1de2ad35efc279f5b1847b8232d7e0bc649c91b936"
+        },
+        {
+          "path": "work/evidence/T66/serial-completion-2026-10-02/unit-01/short-head-stretched-edge-detail-r16.json",
+          "sha256": "bf73ca51c2070beaa28b75f93a37512f6e2a9dafda2c28c2a4595569e2ebe92d",
+          "failedDerivedGlbSha256": "a9398ef9c69c43f74eff60f7b5aaedac13a40822f276e4d0b08d2e2baa791617"
+        }
+      ],
+      "failedSourceEdges": [
+        {
+          "sourceVertexIndices": [
+            73,
+            76
+          ],
+          "sourceLengthMetres": 0.00018293848287957826,
+          "maximumLengthRatio": 76.93705713813748,
+          "maximumAtSeconds": 1.75,
+          "maximumAtPhase": 0.875
+        },
+        {
+          "sourceVertexIndices": [
+            73,
+            75
+          ],
+          "sourceLengthMetres": 0.0002304878493256231,
+          "maximumLengthRatio": 61.18889226325323,
+          "maximumAtSeconds": 1.75,
+          "maximumAtPhase": 0.875
+        },
+        {
+          "sourceVertexIndices": [
+            81,
+            82
+          ],
+          "sourceLengthMetres": 0.00017644405082033724,
+          "maximumLengthRatio": 59.14825242431104,
+          "maximumAtSeconds": 1.5,
+          "maximumAtPhase": 0.75
+        },
+        {
+          "sourceVertexIndices": [
+            63,
+            65
+          ],
+          "sourceLengthMetres": 0.00028974199532423773,
+          "maximumLengthRatio": 56.32314587396089,
+          "maximumAtSeconds": 2.0,
+          "maximumAtPhase": 1.0
+        },
+        {
+          "sourceVertexIndices": [
+            65,
+            67
+          ],
+          "sourceLengthMetres": 0.000321054139889256,
+          "maximumLengthRatio": 50.74415125824411,
+          "maximumAtSeconds": 2.0,
+          "maximumAtPhase": 1.0
+        },
+        {
+          "sourceVertexIndices": [
+            78,
+            80
+          ],
+          "sourceLengthMetres": 0.000488584576484091,
+          "maximumLengthRatio": 25.771722652922694,
+          "maximumAtSeconds": 1.375,
+          "maximumAtPhase": 0.6875
+        },
+        {
+          "sourceVertexIndices": [
+            70,
+            71
+          ],
+          "sourceLengthMetres": 0.0009261995896179803,
+          "maximumLengthRatio": 22.81908604178014,
+          "maximumAtSeconds": 2.0,
+          "maximumAtPhase": 1.0
+        },
+        {
+          "sourceVertexIndices": [
+            76,
+            81
+          ],
+          "sourceLengthMetres": 0.0005108826019789192,
+          "maximumLengthRatio": 22.666317594745184,
+          "maximumAtSeconds": 1.125,
+          "maximumAtPhase": 0.5625
+        },
+        {
+          "sourceVertexIndices": [
+            75,
+            81
+          ],
+          "sourceLengthMetres": 0.0006155978682247761,
+          "maximumLengthRatio": 18.81250991197705,
+          "maximumAtSeconds": 1.125,
+          "maximumAtPhase": 0.5625
+        },
+        {
+          "sourceVertexIndices": [
+            74,
+            78
+          ],
+          "sourceLengthMetres": 0.0009094976353885813,
+          "maximumLengthRatio": 15.892193233736467,
+          "maximumAtSeconds": 1.125,
+          "maximumAtPhase": 0.5625
+        },
+        {
+          "sourceVertexIndices": [
+            78,
+            85
+          ],
+          "sourceLengthMetres": 0.0005444773451588151,
+          "maximumLengthRatio": 15.510519409639821,
+          "maximumAtSeconds": 1.125,
+          "maximumAtPhase": 0.5625
+        },
+        {
+          "sourceVertexIndices": [
+            80,
+            85
+          ],
+          "sourceLengthMetres": 0.0005232680091697765,
+          "maximumLengthRatio": 14.792927764519215,
+          "maximumAtSeconds": 1.375,
+          "maximumAtPhase": 0.6875
+        },
+        {
+          "sourceVertexIndices": [
+            73,
+            81
+          ],
+          "sourceLengthMetres": 0.000566755942616772,
+          "maximumLengthRatio": 11.399211653552774,
+          "maximumAtSeconds": 1.875,
+          "maximumAtPhase": 0.9375
+        },
+        {
+          "sourceVertexIndices": [
+            80,
+            81
+          ],
+          "sourceLengthMetres": 0.0006231211111714295,
+          "maximumLengthRatio": 7.637773011994827,
+          "maximumAtSeconds": 1.875,
+          "maximumAtPhase": 0.9375
+        },
+        {
+          "sourceVertexIndices": [
+            76,
+            82
+          ],
+          "sourceLengthMetres": 0.0004752657642999034,
+          "maximumLengthRatio": 7.006944447550566,
+          "maximumAtSeconds": 1.75,
+          "maximumAtPhase": 0.875
+        },
+        {
+          "sourceVertexIndices": [
+            75,
+            82
+          ],
+          "sourceLengthMetres": 0.0005805372762703662,
+          "maximumLengthRatio": 5.931179487423627,
+          "maximumAtSeconds": 1.75,
+          "maximumAtPhase": 0.875
+        },
+        {
+          "sourceVertexIndices": [
+            66,
+            68
+          ],
+          "sourceLengthMetres": 9.231222394005748e-05,
+          "maximumLengthRatio": 137.06093047612225,
+          "maximumAtSeconds": 1.125,
+          "maximumAtPhase": 0.5625
+        },
+        {
+          "sourceVertexIndices": [
+            66,
+            71
+          ],
+          "sourceLengthMetres": 0.000865503083692664,
+          "maximumLengthRatio": 17.804017270459482,
+          "maximumAtSeconds": 1.875,
+          "maximumAtPhase": 0.9375
+        },
+        {
+          "sourceVertexIndices": [
+            68,
+            71
+          ],
+          "sourceLengthMetres": 0.0008046765548293113,
+          "maximumLengthRatio": 7.592833424706378,
+          "maximumAtSeconds": 2.0,
+          "maximumAtPhase": 1.0
+        }
+      ],
+      "connectedSourceTopologyDisplacementGroups": [
+        [
+          26,
+          30,
+          38,
+          50
+        ],
+        [
+          31,
+          36,
+          37
+        ],
+        [
+          40,
+          41,
+          49
+        ],
+        [
+          52,
+          53,
+          72
+        ],
+        [
+          63,
+          65,
+          66,
+          67,
+          68,
+          70,
+          71
+        ],
+        [
+          73,
+          74,
+          75,
+          76,
+          78,
+          80,
+          81,
+          82,
+          85
+        ]
+      ],
+      "shapeProtectedTriangles": [
+        {
+          "triangleIndex": 95,
+          "sourceVertexIndices": [
+            37,
+            36,
+            31
+          ]
+        },
+        {
+          "triangleIndex": 110,
+          "sourceVertexIndices": [
+            38,
+            30,
+            26
+          ]
+        },
+        {
+          "triangleIndex": 118,
+          "sourceVertexIndices": [
+            41,
+            49,
+            40
+          ]
+        },
+        {
+          "triangleIndex": 126,
+          "sourceVertexIndices": [
+            26,
+            50,
+            38
+          ]
+        },
+        {
+          "triangleIndex": 191,
+          "sourceVertexIndices": [
+            52,
+            53,
+            72
+          ]
+        },
+        {
+          "triangleIndex": 294,
+          "sourceVertexIndices": [
+            80,
+            81,
+            74
+          ]
+        },
+        {
+          "triangleIndex": 483,
+          "sourceVertexIndices": [
+            68,
+            66,
+            71
+          ]
+        }
+      ],
+      "meaning": "Union of exact source topology components implicated by emitted-GLB edge expansion and the exact source triangles that collapsed in failed derived GLB samples; common displacement preserves these source-relative vectors, not an anatomical subdivision or measured attachment footprint."
+    }
+  },
+  "unitTargetSourceKey": "ZA-c7010a9-a0c2ea00609e874a7faa926d",
+  "unitContactContext": [
+    {
+      "sourceKey": "ZA-c7010a9-288b2f7df8d9a68245276571",
+      "role": "moving_structure",
+      "boundsMetres": [
+        [
+          -0.2556302123646733,
+          0.8554984975809234,
+          -0.060482057516333856
+        ],
+        [
+          -0.20338147365856143,
+          1.1108713545564861,
+          0.02261754003921972
+        ]
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-34b418ba01ebccb353db5982",
+      "role": "fixed_structure",
+      "boundsMetres": [
+        [
+          -0.24880217817420716,
+          1.087084548812252,
+          -0.053913677228971314
+        ],
+        [
+          -0.1444782508611178,
+          1.4046193954590294,
+          -0.0011573630735377996
+        ]
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-60fdfbce8b40f76046cc1110",
+      "role": "fixed_structure",
+      "boundsMetres": [
+        [
+          -0.17356443751838,
+          1.25425705535481,
+          -0.1128235583104684
+        ],
+        [
+          -0.060625642279646716,
+          1.4178792523284696,
+          0.0013006779159563818
+        ]
+      ]
+    },
+    {
+      "sourceKey": "ZA-c7010a9-6128f2699ae77753bc6015f9",
+      "role": "co_moving_context",
+      "boundsMetres": [
+        [
+          -0.237049063667655,
+          0.8817109167575842,
+          -0.05596254393458505
+        ],
+        [
+          -0.1954661961644888,
+          1.1020389869809148,
+          0.014696158468724956
+        ]
+      ]
+    }
+  ]
+}

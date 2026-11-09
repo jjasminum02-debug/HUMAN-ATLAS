@@ -9,9 +9,9 @@ export function selectedMotionSubjectRole(
   sourceContextKey: string | null,
 ): MotionSubjectRole | null {
   if (!asset?.sourceBinding || !sourceContextKey) return null;
-  const rows = asset.sourceBinding.members.filter((row) =>
-    row.sourceKey === sourceContextKey && row.side === asset.staticBinding.side,
-  );
+  const rows = asset.sourceBinding.members.filter((row) => row.sourceKey === sourceContextKey
+    && (row.side === asset.staticBinding.side
+      || (asset.sourceBinding?.subjectKind === "bone" && asset.staticBinding.side === "midline" && row.side === null)));
   if (rows.length === 0) return null;
   const roles = new Set(rows.map((row) => row.role));
   return roles.size === 1 ? rows[0]!.role : null;

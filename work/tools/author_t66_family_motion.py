@@ -10,7 +10,16 @@ import numpy as np
 from author_source_surface_motion import ROOT, RIGHTS, read, dump, source_geometry, array, normals, quat, rotation, container
 from derive_source_surface_motion import accessor_bytes, geometry_hash, append_bytes, sha
 from source_surface_constraints import inside
-from t66_contact_correctives import wrap, arap_wrap
+from t66_contact_correctives import (
+    wrap,
+    arap_wrap,
+    source_bone_projection_corrective,
+    source_topology_contact_patch_corrective,
+)
+from t66_contact_weights import (
+    source_frame_contact_feasible_weights,
+    source_phase_contact_feasible_weight_fields,
+)
 
 def signed_quat(matrix):
     """Preserve actual reflected source frames when glTF uses animated TRS.
@@ -85,7 +94,7 @@ def author(payload):
         primitive={'attributes':attrs,'indices':put(raw,'SCALAR',count,src['accessors'][prim['indices']]['componentType']),'mode':4}
         mesh={'name':row['lods'][lod]['resource'],'primitives':[primitive]}
         node={'name':nodeId,'mesh':len(doc['meshes']),'matrix':row['matrix'],'extras':{'sourceKey':key}}
-        phaseFrames=[world];fixed=[];moving=[];weights=None;vectorCorrectives=[]
+        phaseFrames=[world];fixed=[];moving=[];weights=None;weightsByPhase=None;vectorCorrectives=[];contactWeightSolve=None
         if role in ['deforming_muscle_surface','deforming_passive_surface']:
             weights=np.array(entry['weights'],float);fixed=entry['fixedVertexIndices'];moving=entry['movingVertexIndices']
             if len(weights)!=n or not np.isfinite(weights).all() or weights.min()<0 or weights.max()>1 or not fixed or not moving or set(fixed)&set(moving):
@@ -105,7 +114,38 @@ def author(payload):
             edges=np.unique(np.sort(np.r_[idx[:,[0,1]],idx[:,[1,2]],idx[:,[2,0]]],axis=1),axis=0)
             ew=1/np.maximum(np.linalg.norm(world[edges[:,0]]-world[edges[:,1]],axis=1),1e-8)
             degree=np.bincount(edges.ravel(),weights=np.repeat(ew,2),minlength=n)
-            for correctivePass in range(12 if payload.get('correctContactWeights',False) else 0):
+            # Contact pinning is a convenience for broad surfaces, not a universal
+            # rule for every source topology. A small tendon-connected surface can
+            # already have a continuous, source-specific blend field. Turning a
+            # handful of contact-crossing vertices into binary 0/1 weights may
+            # introduce a discontinuity across an authored attachment boundary.
+            # In that case the input can explicitly retain its authored transition
+            # field; the independent emitted-geometry and contact validators still
+            # decide whether the candidate passes.
+            contact_weight_policy = entry.get('contactWeightPolicy', 'auto-pin-and-relax')
+            if contact_weight_policy not in ('auto-pin-and-relax', 'preserve-authored-mask-transition', 'source-frame-contact-feasible-smooth-field', 'source-phase-contact-and-shape-feasible-weight-fields'):
+                raise ValueError('unknown source contact-weight policy')
+            if contact_weight_policy in ('preserve-authored-mask-transition', 'source-frame-contact-feasible-smooth-field', 'source-phase-contact-and-shape-feasible-weight-fields') and not payload.get('correctContactWeights', False):
+                raise ValueError('preserve-authored-mask-transition is only meaningful when family contact correction is enabled')
+            if contact_weight_policy == 'source-frame-contact-feasible-smooth-field':
+                contactRows=[(ck,ce['role'],cg[-1],cg[4],baseline) for ck,(ce,cg,baseline) in relevant.items()]
+                weights,contactWeightSolve=source_frame_contact_feasible_weights(
+                    world,idx,weights,fixed,moving,pivot,axis,degrees,samples,contactRows,
+                    method=payload.get('deformationMethod','linear_blend'),
+                    phase_subdivisions_per_segment=payload.get('contactFieldPhaseSubdivisions',4),
+                    smoothness=payload.get('contactFieldSmoothness',0.5),
+                    cache_path=(ROOT / payload['contactWeightCachePath']) if payload.get('contactWeightCachePath') else None)
+            elif contact_weight_policy == 'source-phase-contact-and-shape-feasible-weight-fields':
+                contactRows=[(ck,ce['role'],cg[-1],cg[4],baseline) for ck,(ce,cg,baseline) in relevant.items()]
+                weightsByPhase,contactWeightSolve=source_phase_contact_feasible_weight_fields(
+                    world,idx,weights,fixed,moving,pivot,axis,degrees,samples,contactRows,
+                    method=payload.get('deformationMethod','linear_blend'),
+                    smoothness=payload.get('contactFieldSmoothness',0.5),
+                    interpolation_subdivisions=payload.get('phaseInterpolationSubdivisions',4),
+                    coupled_vertex_groups=entry.get('sourceTopologyCoupledVertexGroups',()),
+                    coupled_group_active_steps=entry.get('sourceTopologyCoupledActiveSteps'))
+                weights=weightsByPhase[-1]
+            for correctivePass in range(12 if payload.get('correctContactWeights',False) and contact_weight_policy == 'auto-pin-and-relax' else 0):
                 added=False
                 for ck,(ce,cg,baseline) in relevant.items():
                     isMoving=ce['role']=='moving_structure'
@@ -143,7 +183,36 @@ def author(payload):
             normal=array(src,binary,prim['attributes']['NORMAL']);primitive['targets']=[]
             for step in range(1,samples+1):
                 R=rotation(axis,math.radians(degrees)*step/samples)
-                frame=deform(world,pivot,axis,degrees,step/samples,weights,payload.get('deformationMethod','linear_blend'))
+                step_weights=weightsByPhase[step-1] if weightsByPhase is not None else weights
+                frame=deform(world,pivot,axis,degrees,step/samples,step_weights,payload.get('deformationMethod','linear_blend'))
+                if payload.get('sourceTopologyContactPatchCorrectives',False):
+                    phaseContacts=[(ck,(cg[-1]-pivot)@R.T+pivot if ce['role']=='moving_structure' else cg[-1],cg[4],baseline)
+                        for ck,(ce,cg,baseline) in relevant.items()]
+                    edge_targets=[]
+                    for edge in entry.get('sourceTopologyCoupledEdges',()):
+                        a,b=map(int,edge['vertices']);source_edge=world[b]-world[a]
+                        mean_weight=float(np.mean(step_weights[[a,b]]))
+                        desired=source_edge+mean_weight*(R@source_edge-source_edge)
+                        edge_targets.append({'vertices':[a,b],'desiredVectorMetres':desired.tolist()})
+                    repair_ids=sorted(set(int(i) for i in payload.get('sourceTopologyShapeRepairTriangleIds',[])))
+                    if repair_ids and (min(repair_ids)<0 or max(repair_ids)>=len(idx)):
+                        raise ValueError('source-topology shape-repair triangle ID outside exact target topology')
+                    shape_seeds=sorted(set(int(v) for v in idx[repair_ids].reshape(-1))) if repair_ids else []
+                    frame,corrective=source_topology_contact_patch_corrective(frame,world,idx,phaseContacts,
+                        set(fixed)|set(moving),edge_targets,
+                        patch_rings=payload.get('sourceTopologyContactPatchRings',3),
+                        margin_metres=payload.get('sourceBoneProjectionMarginMetres',.0002),
+                        shape_floor=payload.get('sourceTopologyShapeFloor',.1),
+                        shape_seed_vertices=shape_seeds,
+                        topology_groups=entry.get('sourceTopologyCoupledVertexGroups',()))
+                    vectorCorrectives.append(corrective)
+                elif payload.get('sourceBoneProjectionCorrectives',False):
+                    phaseContacts=[(ck,(cg[-1]-pivot)@R.T+pivot if ce['role']=='moving_structure' else cg[-1],cg[4],baseline)
+                        for ck,(ce,cg,baseline) in relevant.items()]
+                    frame,corrective=source_bone_projection_corrective(frame,world,idx,phaseContacts,
+                        set(fixed)|set(moving),entry.get('sourceTopologyCoupledVertexGroups',()),
+                        margin_metres=payload.get('sourceBoneProjectionMarginMetres',.0002))
+                    vectorCorrectives.append(corrective)
                 if payload.get('arapShapeCorrectives',False):
                     frame,corrective=arap_wrap(frame,world,idx,[],locked,force_shape=True)
                     vectorCorrectives.append(corrective)
@@ -172,23 +241,45 @@ def author(payload):
         # Include interpolated middle samples; relative normal test against local trajectory,
         # not a fixed world normal which would falsely classify a rotating rigid bone as folded.
         tri=world[idx];baseNormal=np.cross(tri[:,1]-tri[:,0],tri[:,2]-tri[:,0]);baseArea=np.linalg.norm(baseNormal,axis=1);nondeg=baseArea>=1e-12
-        flips=0;minAreaRatio=1.;maxEdgeRatio=0.
+        keyFlips=0;keyMinimumAreaRatio=1.;interpolationFlips=0;interpolationMinimumAreaRatio=1.;maxEdgeRatio=0.
         edges=np.unique(np.sort(np.r_[idx[:,[0,1]],idx[:,[1,2]],idx[:,[2,0]]],axis=1),axis=0)
         baseLength=np.linalg.norm(world[edges[:,0]]-world[edges[:,1]],axis=1)
+        # Exact authored keys and the interpolation between those keys are
+        # reported independently. A candidate may be emitted only for a
+        # mandatory downstream GLB repair pass; interpolation failures never
+        # count as acceptance and remain subject to the unchanged strict GLB
+        # verifier after resampling/correctives.
+        for frame in phaseFrames:
+            t=frame[idx];normal=np.cross(t[:,1]-t[:,0],t[:,2]-t[:,0]);area=np.linalg.norm(normal,axis=1)
+            keyFlips+=int(((normal*baseNormal).sum(1)[nondeg]<0).sum())
+            if nondeg.any():keyMinimumAreaRatio=min(keyMinimumAreaRatio,float((area[nondeg]/baseArea[nondeg]).min()))
         for a,b in zip(phaseFrames[:-1],phaseFrames[1:]):
-            for f in [0,.5,1]:
+            for f in [.25,.5,.75]:
                 frame=a*(1-f)+b*f;t=frame[idx];normal=np.cross(t[:,1]-t[:,0],t[:,2]-t[:,0]);area=np.linalg.norm(normal,axis=1)
-                flips+=int(((normal*baseNormal).sum(1)[nondeg]<0).sum())
-                if nondeg.any():minAreaRatio=min(minAreaRatio,float((area[nondeg]/baseArea[nondeg]).min()))
+                interpolationFlips+=int(((normal*baseNormal).sum(1)[nondeg]<0).sum())
+                if nondeg.any():interpolationMinimumAreaRatio=min(interpolationMinimumAreaRatio,float((area[nondeg]/baseArea[nondeg]).min()))
                 ratio=np.linalg.norm(frame[edges[:,0]]-frame[edges[:,1]],axis=1)/np.maximum(baseLength,1e-12)
                 maxEdgeRatio=max(maxEdgeRatio,float(np.max(abs(ratio-1))))
                 if not np.isfinite(frame).all():raise ValueError('nonfinite geometry')
-        if flips or minAreaRatio<.1:raise ValueError(f'folded/collapsed authored geometry {key}: {flips}/{minAreaRatio}')
-        metrics.append({'sourceKey':key,'role':role,'vertices':n,'triangles':len(idx),'flips':flips,'minimumAreaRatio':minAreaRatio,
+        if keyFlips or keyMinimumAreaRatio<.1:raise ValueError(f'folded/collapsed authored key geometry {key}: {keyFlips}/{keyMinimumAreaRatio}')
+        interpolation_repair_needed=bool(interpolationFlips or interpolationMinimumAreaRatio<.1)
+        if interpolation_repair_needed and not payload.get('candidateOnlyForMandatoryGlbInterpolationRepair',False):
+            raise ValueError(f'folded/collapsed authored interpolation {key}: {interpolationFlips}/{interpolationMinimumAreaRatio}')
+        metrics.append({'sourceKey':key,'role':role,'vertices':n,'triangles':len(idx),'flips':keyFlips,'minimumAreaRatio':keyMinimumAreaRatio,
+            'preRefinementInterpolationFlips':interpolationFlips,
+            'preRefinementInterpolationMinimumAreaRatio':interpolationMinimumAreaRatio,
+            'requiresMandatoryGlbInterpolationRepair':interpolation_repair_needed,
             'maximumRelativeEdgeChange':maxEdgeRatio,'maximumDisplacementMetres':float(np.linalg.norm(phaseFrames[-1]-world,axis=1).max()),
             'sourceDegenerateTriangles':int((~nondeg).sum()),'fixedMaskCount':len(fixed),'movingMaskCount':len(moving),
             'weightCorrections':corrections if weights is not None else [],'fixedMaskErrorMetres':float(np.linalg.norm(phaseFrames[-1][fixed]-world[fixed],axis=1).max()) if fixed else None})
-        if weights is not None:metrics[-1].update(authoredFinalWeights=weights.tolist(),contactPins=contactPins,vectorCorrectives=vectorCorrectives)
+        if weights is not None:
+            metrics[-1].update(authoredFinalWeights=weights.tolist(),contactPins=contactPins,vectorCorrectives=vectorCorrectives,
+                contactWeightPolicy=entry.get('contactWeightPolicy', 'auto-pin-and-relax'),
+                authoredWeightFieldSha256=sha(np.asarray(entry['weights'],dtype='<f8').tobytes()),
+                finalWeightFieldSha256=sha(np.asarray(weightsByPhase if weightsByPhase is not None else weights,dtype='<f8').tobytes()),
+                contactWeightSolve=contactWeightSolve)
+            if weightsByPhase is not None:
+                metrics[-1]['authoredFinalWeightsByPhase']=[field.tolist() for field in weightsByPhase]
         frames[key]=(phaseFrames,idx);members.append({'sourceKey':key,'nodeId':nodeId,'sourceNamespace':manifest['namespace'],'role':role,
             'side':row['sourceLabelSide'],'resourceKey':row['lods'][lod]['resource'],'lod':lod,'sourceChunkSha256':row['lods'][lod]['chunk'],
             'geometrySha256':digest,'instanceMatrix':row['matrix']})

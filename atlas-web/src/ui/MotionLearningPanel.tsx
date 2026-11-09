@@ -1,4 +1,4 @@
-import { fetchAtlasAsset } from '../transport/assetTransport.ts';
+import { fetchAtlasAsset, ASSET_INSPECTION_ENABLED } from '../transport/assetTransport.ts';
 import { useEffect, useRef, useState } from "react";
 import {
   acceptMotionAssetLoad,
@@ -93,6 +93,7 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
   const timePublication = useRef({ at: 0, phase: "rest" });
   const stateRef = useRef(state);
   const abortRef = useRef<AbortController | null>(null);
+  const profileElement = useRef<HTMLElement | null>(null);
   const playbackRef = useRef<AnimationPlaybackController | null>(null);
 
   function publish(next: MotionPlayerState) {
@@ -186,14 +187,17 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
     const abort = new AbortController();
     abortRef.current = abort;
     try {
+      const loadStarted = performance.now();
       const uri = new URL(playable.asset.uri, window.location.href);
       const response = await fetchAtlasAsset(uri, { signal: abort.signal });
       if (!response.ok) throw new Error("asset request failed");
       const bytes = await readMotionPackage(response, abort.signal);
+      const fetchedAt = performance.now();
       const resource = await loadAnimationScene(bytes, playable.asset, {
         basePath: new URL(".", uri).href,
         signal: abort.signal,
       });
+      const parsedAt = performance.now();
       const current = stateRef.current;
       if (abort.signal.aborted || current.generation !== begun.requestToken || current.session.status !== "loading") {
         resource.dispose();
@@ -223,6 +227,12 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
           setPhase("rest");
           void reason;
         }, { intent: motionLearningIntent(option) });
+      if (ASSET_INSPECTION_ENABLED && profileElement.current) {
+        const attachedAt = performance.now();
+        profileElement.current.dataset.motionLoadProfile = JSON.stringify({ bytes: bytes.byteLength,
+          fetchAndReadMs: fetchedAt - loadStarted, parseAndValidationMs: parsedAt - fetchedAt,
+          attachmentValidationMs: attachedAt - parsedAt, totalMs: attachedAt - loadStarted });
+      }
       const afterAttach = stateRef.current;
       if (abort.signal.aborted || afterAttach.generation !== begun.requestToken || afterAttach.session.status !== "loading") {
         host.restoreSourceMotion("late-motion-response");
@@ -337,7 +347,7 @@ export function MotionLearningPanel({ actions, selectedActionId, onSelectAction,
               ? returning ? "처음 자세로 서서히 돌아갑니다." : state.session.status === "playing" ? "움직임을 반복해서 보여 줍니다. 버튼을 다시 누르면 처음 자세로 서서히 돌아갑니다." : state.session.currentTimeSeconds > 0 ? "진행 막대로 고른 자세를 유지합니다. 버튼을 누르면 반복 시범을 시작합니다." : "움직임으로 이해하기를 눌러 시범을 볼 수 있습니다."
               : "움직임으로 이해하기를 누르면 시범을 반복해서 보여 줍니다.";
 
-  return <section className="motion-player" aria-label="움직임으로 이해하기" data-testid="motion-player">
+  return <section ref={profileElement} className="motion-player" aria-label="움직임으로 이해하기" data-testid="motion-player">
     <div className="motion-heading"><h4>{motionLearningTitle(intent)}</h4>
       {selectedAction && <span className="motion-kind">{intent === "muscle_action" ? "작용 시범" : intent === "bone_motion" ? "관절 시범" : intent === "posture_observation" ? "주변 구조 관찰" : "글 설명"}</span>}
     </div>

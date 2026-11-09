@@ -273,7 +273,8 @@ export class DatasetSceneAdapter implements SourceMotionHost, RigHost {
                 || binding.units !== dataset.unit || binding.referencePoseId !== frameContract?.staticReferencePose?.id
                 || asset.staticBinding.modelId !== binding.datasetNamespace || asset.staticBinding.sceneRevision !== binding.datasetRevision
                 || this.view.selectedId !== binding.subjectSourceKey || asset.staticBinding.side === 'bilateral'
-                || asset.staticBinding.side === 'midline' || asset.staticBinding.side === 'not_applicable') {
+                || (asset.staticBinding.side === 'midline' && binding.subjectKind !== 'bone')
+                || asset.staticBinding.side === 'not_applicable') {
                 throw new Error('motion의 dataset/revision/overlay/frame/unit/reference-pose가 현재 학습 장면과 다릅니다.');
             }
             const currentContextKey = this.motionContextKey(this.view);
@@ -350,7 +351,8 @@ export class DatasetSceneAdapter implements SourceMotionHost, RigHost {
                 if (motionNode.parent !== resource.scene) throw new Error(`motion surface는 고정된 scene root의 직접 child여야 합니다: ${member.nodeId}`);
                 if (member.sourceKey === binding.subjectSourceKey) {
                     if (binding.subjectKind === 'bone') {
-                        if (row.kind !== 'bone' || !['moving_structure', 'fixed_structure'].includes(member.role) || member.side !== asset.staticBinding.side)
+                        if (row.kind !== 'bone' || !['moving_structure', 'fixed_structure'].includes(member.role)
+                            || (member.side !== asset.staticBinding.side && !(asset.staticBinding.side === 'midline' && member.side === null)))
                             throw new Error('뼈 subject는 실제 같은 쪽 이동·고정 관절 구조여야 합니다.');
                         hasSubject = true;
                     } else {
@@ -375,7 +377,8 @@ export class DatasetSceneAdapter implements SourceMotionHost, RigHost {
                 packageMaterials.set(member.sourceKey, Array.isArray(motionMesh.material) ? [...motionMesh.material] : motionMesh.material);
             }
             if (!hasSubject) throw new Error('선택 근육의 exact sourceKey/side 변형 표면이 manifest에 없습니다.');
-            if (!binding.members.some(member => member.sourceKey === binding.subjectSourceKey && member.side === asset.staticBinding.side))
+            if (!binding.members.some(member => member.sourceKey === binding.subjectSourceKey
+                && (member.side === asset.staticBinding.side || (binding.subjectKind === 'bone' && asset.staticBinding.side === 'midline' && member.side === null))))
                 throw new Error('선택 sourceKey/side가 motion package에 없습니다.');
             // A static observation may have opened while the motion resource was loading.
             for (const listener of this.sourceMotionStartListeners) listener();

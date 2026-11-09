@@ -107,7 +107,8 @@ function assertAssetContract(asset: MotionAsset): void {
       ? new Set(["moving_structure", "fixed_structure"])
       : new Set(["deforming_muscle_surface", "deforming_passive_surface"]);
     if (!binding.members.some((row) => subjectRoles.has(row.role) && row.sourceKey === binding.subjectSourceKey
-      && row.side === asset.staticBinding.side)) {
+      && (row.side === asset.staticBinding.side
+        || (binding.subjectKind === "bone" && asset.staticBinding.side === "midline" && row.side === null)))) {
       throw new Error("source_bound_surface에 선택된 source instance와 일치하는 같은 쪽 변형 표면 또는 관절 구조가 없습니다.");
     }
     if (asset.illustration) throw new Error("source_bound_surface는 별도 경로 illustration을 허용하지 않습니다.");
