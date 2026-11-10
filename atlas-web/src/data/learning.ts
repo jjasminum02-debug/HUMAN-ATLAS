@@ -1,6 +1,5 @@
 import learnerCardRuntime from "../../../atlas-data/terminology/learner-card-runtime.json";
-import { displayTerms, termText, type PilotCatalog } from "./catalog";
-import { learnerNameProjection, learnerSearchEntry, learnerVisibleTerms, mergeLearningConcepts, searchEntries, type SearchEntry } from "../domain/search";
+import { learnerSearchEntry, searchEntries} from "../domain/search";
 import learnerNerveGraph from "../../../atlas-data/terminology/learner-nerve-graph-t66.json";
 import nerveDisplayNames from "../../../atlas-data/terminology/learner-nerve-display-names.json";
 import { withNerveDisplayNames } from "../domain/nerveDisplayNames.ts";
@@ -55,32 +54,6 @@ const nerveSearchEntries = nerveGraph.concepts.map(concept => learnerSearchEntry
 ));
 export const vocabulary = cardRuntime.names;
 
-export function nameFor(catalog: PilotCatalog, id: string) {
-  const entry = lookups.namesById.get(id);
-  const terms = learnerVisibleTerms(displayTerms(catalog, id));
-  return learnerNameProjection(id, entry ?? {}, {
-    korean: terms.find((term) => term.language === "ko")?.text,
-    english: termText(catalog, id, "en"),
-    latin: termText(catalog, id, "la"),
-  });
-}
-
-export function learningConcepts(catalog: PilotCatalog) {
-  return mergeLearningConcepts(catalog.concepts, vocabulary);
-}
-
-export function findMuscles(catalog: PilotCatalog, query: string) {
-  const entries: SearchEntry[] = learningConcepts(catalog).map((concept) => {
-    const names = nameFor(catalog, concept.id);
-    const custom = lookups.namesById.get(concept.id);
-    const terms = learnerVisibleTerms(displayTerms(catalog, concept.id));
-    return learnerSearchEntry(concept.id, names.label, [names.koTraditional, names.koModern, names.en, ...custom?.aliases ?? [],
-      ...terms.flatMap((term) => typeof term.text === "string" ? [term.text] : [])]);
-  });
-  return searchEntries(entries, query);
-}
-
-/** Learner-safe field projection; provenance and review detail stay in development evidence. */
 export function structureFieldForLearner(conceptId: string, field: string): LearnerFieldProjection | null {
   if (field !== "origin" && field !== "insertion") return null;
   const text = cardRuntime.structure.byConcept[conceptId]?.[field];

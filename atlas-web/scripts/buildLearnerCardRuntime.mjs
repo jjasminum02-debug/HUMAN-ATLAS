@@ -110,9 +110,9 @@ const reviewedNotesBytes = await readFile(resolve(root, reviewedAttachments.revi
 const reviewedNotesHash = createHash("sha256").update(reviewedNotesBytes).digest("hex");
 const reviewedCatalogBytes = await readFile(resolve(root, reviewedAttachments.sourceCatalogPath));
 const reviewedCatalogHash = createHash("sha256").update(reviewedCatalogBytes).digest("hex");
-const reviewedDispositionBytes = await readFile(resolve(root, "work/evidence/T65/muscle-attachment-dispositions.json"));
-const reviewedClaimsBytes = await readFile(resolve(root, "work/evidence/muscle-attachment-review-2026-10-02/claims.json"));
-const reviewedSupplementBytes = await readFile(resolve(root, "work/evidence/muscle-attachment-review-2026-10-02/supplemental-claims.json"));
+const reviewedDispositionBytes = await readFile(resolve(root, "atlas-data/provenance/T65/muscle-attachment-dispositions.json"));
+const reviewedClaimsBytes = await readFile(resolve(root, "atlas-data/provenance/muscle-attachment-review-2026-10-02/claims.json"));
+const reviewedSupplementBytes = await readFile(resolve(root, "atlas-data/provenance/muscle-attachment-review-2026-10-02/supplemental-claims.json"));
 const reviewedInputHashes = {
   sourceOverlay: integrationHash,
   sourceCatalog: reviewedCatalogHash,

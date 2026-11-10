@@ -120,8 +120,8 @@ test("learner-facing text carries no internal evidence IDs and preserves held re
     const actualHash = createHash(course[nerveName][field]);
     if (actualHash !== evidence.valueSha256) {
       // A later accepted prose-only correction has its own chain; never rewrite the frozen ledger.
-      const adopted = JSON.parse(readFileSync(new URL('../../../work/reviews/atlas-quality-review-2026-10-06/integration/applied-corrections.json', import.meta.url), 'utf8'));
-      const proposals = JSON.parse(readFileSync(new URL('../../../work/reviews/atlas-quality-review-2026-10-06/nerve/proposals.json', import.meta.url), 'utf8'));
+      const adopted = JSON.parse(readFileSync(new URL('../../../atlas-data/provenance/atlas-quality-review-2026-10-06/integration/applied-corrections.json', import.meta.url), 'utf8'));
+      const proposals = JSON.parse(readFileSync(new URL('../../../atlas-data/provenance/atlas-quality-review-2026-10-06/nerve/proposals.json', import.meta.url), 'utf8'));
       const receipt = adopted.corrections.find((row: any) => row.target === `atlas-data/terminology/nerve-learning-t66.json#/${nerveName}/${field}`);
       assert.ok(receipt, `unrecorded field change: ${fieldKey}`);
       assert.equal(receipt.status, 'applied_as_bounded_prose_only');

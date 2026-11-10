@@ -8,10 +8,10 @@ const projectRoot = resolve(scriptDir, "../..");
 const webRoot = resolve(projectRoot, "atlas-web");
 const bundleRoot = resolve(webRoot, "dist");
 const runtimePath = resolve(projectRoot, "atlas-data/terminology/learner-card-runtime.json");
-const evidenceRoot = resolve(projectRoot, "work/evidence/T82");
+const evidenceRoot = resolve(projectRoot, "atlas-data/provenance/T82");
 const baselinePath = resolve(evidenceRoot, "baseline.json");
 const aiOverlayPath = resolve(projectRoot, "atlas-data/terminology/ai-evidence-overlay.json");
-const workbookDispositionPath = resolve(projectRoot, "work/evidence/T81/workbook-row-dispositions.json");
+const workbookDispositionPath = resolve(projectRoot, "atlas-data/provenance/T81/workbook-row-dispositions.json");
 
 const argv = process.argv.slice(2);
 const reportArgument = argv.find((arg) => arg.startsWith("--report="));

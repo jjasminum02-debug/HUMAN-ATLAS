@@ -31,7 +31,7 @@ test('reject renamed/part-expanded muscle, held/wrong-side context, missing sour
 
 test('T65 adds only exact part-scoped or whole-source summaries with pinned web-reader notes and existing same-side bones', () => {
   const t65 = JSON.parse(readFileSync(new URL('../../../atlas-data/terminology/muscle-attachment-content-t65.json', import.meta.url), 'utf8'));
-  const notes = readFileSync(new URL('../../../work/evidence/T65/source-review-notes.md', import.meta.url));
+  const notes = readFileSync(new URL('../../../atlas-data/provenance/T65/source-review-notes.md', import.meta.url));
   assert.equal(createHash('sha256').update(notes).digest('hex'), t65.reviewNotesSha256);
   assert.equal(t65.sources.every((s: any) => s.originalHtmlRetrieved === false && s.originalHtmlSha256 === null), true);
   const verified = new Set<string>(t65.sources.map((s: any) => s.id));
