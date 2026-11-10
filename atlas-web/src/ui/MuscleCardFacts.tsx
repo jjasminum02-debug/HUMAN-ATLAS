@@ -61,8 +61,32 @@ export function MuscleActionSummary({ muscle }: { muscle: RuntimeStructureRecord
 }
 
 /** Q2-1 vessel card: what the vessel is and, for arteries, the muscles whose C2 blood supply names it. */
+// 4-1 step 6: parent vessel per English name (artery: branches off; vein: drains into); `{S}` = the vessel's own side.
+type Branches = { parents: Record<string, string> };
+let branchFile: Promise<Branches | null> | undefined;
+const loadBranches = () => branchFile ??= fetch('/__atlas/v2/vessel-branches.json').then(r => r.ok ? r.json() : null).catch(() => { branchFile = undefined; return null; });
+function useBranches() {
+  const [file, setFile] = useState<Branches | null>(null);
+  useEffect(() => { let live = true; void loadBranches().then(f => { if (live) setFile(f); }); return () => { live = false; }; }, []);
+  return file;
+}
+/** A vessel row by English name on the given side (or unpaired). */
+function vesselNamed(rows: Map<string, RuntimeStructureRecord>, en: string, side: string | null) {
+  let fallback: RuntimeStructureRecord | undefined;
+  for (const row of rows.values()) if (row.kind === 'vessel' && row.names.en === en && row.localDisplayEligible) {
+    if (row.side === side || row.side === null) return row; fallback ??= row;
+  }
+  return fallback;
+}
+
 export function VesselCard({ vessel, rows, onSelect }: { vessel: RuntimeStructureRecord; rows: Map<string, RuntimeStructureRecord>; onSelect: (key: string) => void }) {
-  const data = useMuscleCards();
+  const data = useMuscleCards(), branches = useBranches();
+  const sideWord = vessel.side === 'left' ? 'Left' : 'Right';
+  const parentName = branches?.parents[vessel.names.en]?.replace('{S}', sideWord);
+  const parent = parentName ? vesselNamed(rows, parentName, vessel.side) : undefined;
+  const children = branches ? Object.entries(branches.parents).filter(([, p]) => p.replace('{S}', sideWord) === vessel.names.en)
+    .map(([en]) => vesselNamed(rows, en, vessel.side)).filter((r): r is RuntimeStructureRecord => Boolean(r)) : [];
+  const vein = vessel.tissue === 'vein';
   const keys = data ? Object.entries(data.arteries).filter(([, t]) => t.structures?.includes(vessel.names.en)).map(([key]) => key) : [];
   const supplied = data ? Object.entries(data.cards).filter(([, c]) => c.artery?.some(k => keys.includes(k)))
     .map(([en]) => rowNamed(rows, 'muscle', en, vessel.side)).filter((r): r is RuntimeStructureRecord => Boolean(r?.localDisplayEligible)) : [];
@@ -73,6 +97,13 @@ export function VesselCard({ vessel, rows, onSelect }: { vessel: RuntimeStructur
       <p>{vessel.tissue === 'vein' ? '조직의 혈액을 모아 심장 쪽으로 돌려보내는 혈관입니다.'
         : vessel.tissue === 'heart' ? '혈액을 온몸과 허파로 내보내는 심장의 한 부분입니다.' : '심장에서 나온 혈액을 조직으로 보내는 혈관입니다.'}</p>
     </section>
+    {vessel.tissue !== 'heart' && (parent || children.length > 0) && <section className="attachment-section attachment-summary-block vessel-branches">
+      {parent && <><h3>{vein ? '흘러드는 혈관' : '갈라져 나온 혈관'}</h3>
+        <div className="attachment-bone-links"><button className="bone-related-muscle" onClick={() => onSelect(parent.sourceKey)}>{parent.label}</button></div></>}
+      {children.length > 0 && <><h3>{vein ? '흘러드는 가지' : '갈라지는 가지'}</h3>
+        <div className="attachment-bone-links">{[...new Map(children.map(r => [r.sourceKey, r])).values()].map(r => <button key={r.sourceKey} className="bone-related-muscle" onClick={() => onSelect(r.sourceKey)}>{r.label}</button>)}</div></>}
+      <p className="quiet-note">Z-Anatomy 이름에 적힌 관계, 또는 AI 초안과 Wikipedia 혈관 정보가 일치한 관계만 보입니다.</p>
+    </section>}
     {vessel.tissue === 'artery' && <section className="attachment-section attachment-summary-block vessel-supplied">
       <h3>혈액을 받는 근육</h3>
       {unique.length ? <div className="attachment-bone-links">{unique.map(r => <button key={r.sourceKey} className="bone-related-muscle" onClick={() => onSelect(r.sourceKey)}>{r.label}</button>)}</div>

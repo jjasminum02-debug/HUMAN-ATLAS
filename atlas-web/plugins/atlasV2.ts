@@ -9,7 +9,7 @@ const PROJECTED = new Set(['/__atlas/integration.json', '/__atlas/datasets/human
 const RAW: Record<string, string> = { '/__atlas/v2/structures.json': 'structures.json', '/__atlas/v2/relations.json': 'relations.json',
   '/__atlas/v2/cards.json': 'structure-cards.json', '/__atlas/v2/rig.json': 'rig.json',
   '/__atlas/v2/actions.json': 'muscle-actions.json', '/__atlas/v2/attachments.json': 'attachments.json',
-  '/__atlas/v2/muscle-cards.json': 'muscle-cards.json' };
+  '/__atlas/v2/muscle-cards.json': 'muscle-cards.json', '/__atlas/v2/vessel-branches.json': 'vessel-branches.json' };
 const CHUNK = /^\/__atlas\/datasets\/(za-c7010a9|za-v2)\/([a-f0-9]{64})\.glb$/;
 const SKIN = /^\/__atlas\/v2\/skin\/([a-f0-9]{64})\.bin$/;
 const CONTACTS = /^\/__atlas\/v2\/attachments\/(ZA-[A-Za-z0-9-]+)\.json$/;

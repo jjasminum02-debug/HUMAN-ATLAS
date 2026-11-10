@@ -95,6 +95,14 @@ const flows = [
     await page.locator('.bookmark-toggle').click();
     await page.getByRole('tab', { name: /북마크/ }).click();
     expect((await page.locator('.bookmarks li').allInnerTexts()).some(t => t.includes(name)), '북마크 목록에 없음');
+    // 4-1 step 6: the bookmark keeps the view it was saved with; opening it restores the camera.
+    expect((await page.locator('.bookmarks li').allInnerTexts()).some(t => t.includes(name) && t.includes('저장한 시점')), '북마크에 시점이 저장되지 않음');
+    const saved = JSON.parse(await page.evaluate(() => localStorage.getItem('atlas.bookmarks.v1'))).find(b => b.label === name)?.view?.camera;
+    await page.evaluate(() => { const s = window.__atlasScene; s.camera.position.set(2, 2, 2); s.controls.target.set(0, .5, 0); s.requestRender(); });
+    await page.locator('.bookmarks .bookmark-open', { hasText: name }).first().click();
+    await page.waitForTimeout(1500);
+    const now = await page.evaluate(() => window.__atlasScene.camera.position.toArray());
+    expect(saved && Math.hypot(...now.map((v, i) => v - saved.position[i])) < .02, `북마크 시점 복원 안 됨: ${JSON.stringify(now)} vs ${JSON.stringify(saved?.position)}`);
     const score = await page.locator('.quiz-score').count() ? '' : (await page.getByRole('tab', { name: '퀴즈' }).click(), await page.locator('.quiz-score').innerText());
     return `보이는 구조 ${visible}개 · 이름 퀴즈(${target.label})·찾기 퀴즈(${name}) 정답 · 북마크 · ${score}`;
   }],
@@ -106,7 +114,9 @@ const flows = [
     const key = new URL(page.url()).searchParams.get('source');
     expect((await scene(page))[key]?.material.includes(':selected:'), '3D에서 선택 표시 안 됨');
     // C4: the origin (Z-Anatomy patch) and insertion (contact estimate) areas are drawn on the bones.
-    await page.locator('.attachment-areas li').first().waitFor({ timeout: 10000 });
+    // 4-1 step 6: the areas sit inside the origin and insertion blocks.
+    await page.locator('.attachment-origin .attachment-area-chips li').first().waitFor({ timeout: 10000 });
+    await page.locator('.attachment-insertion .attachment-area-chips li').first().waitFor({ timeout: 10000 });
     const areas = await page.evaluate(() => { const roles = []; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && o.userData.attachmentPatch) roles.push(o.material.name.match(/attachment(\w+)/)?.[1]); }); return roles.sort(); });
     expect(areas.join() === 'Insertion,Origin', `뼈 위 부착 면: ${areas.join() || '없음'}`);
     // C2: blood supply from the two-source muscle card table.
@@ -117,6 +127,9 @@ const flows = [
     await page.locator('.vessel-supplied').waitFor({ timeout: 10000 });
     expect(await pressed(page, '.layer-row', '혈관') === 'true', '혈관 층이 자동으로 켜지지 않음');
     const supplied = await page.locator('.vessel-supplied').innerText();
+    // 4-1 step 6: the artery card names where it branches off.
+    const origin = await page.locator('.vessel-branches').innerText({ timeout: 10000 });
+    expect(origin.includes('갈라져 나온 혈관') && origin.includes('대퇴심동맥'), `갈라져 나온 혈관: ${origin.replace(/\s+/g, ' ').slice(0, 160)}`);
     expect(supplied.includes('대퇴직근'), `혈액을 받는 근육: ${supplied.replace(/\s+/g, ' ').slice(0, 200)}`);
     await settle(page);
     const vessels = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && /^vessel:/.test(o.material.name)) n++; }); return n; });
@@ -130,13 +143,20 @@ const flows = [
     await page.locator('.attachment-section h3', { hasText: '잇는 뼈' }).waitFor({ timeout: 10000 });
     const text = await card(page);
     expect(text.includes('대퇴골') && text.includes('경골'), '잇는 뼈에 대퇴골·경골 없음');
+    // 4-1 step 6: the ligament's attachment areas are listed and drawn on the bones.
+    const areas = await page.locator('.attachment-areas').innerText({ timeout: 10000 });
+    expect(areas.includes('대퇴골') && areas.includes('경골'), `인대 부착 면: ${areas.replace(/\s+/g, ' ').slice(0, 120)}`);
+    await page.locator('.attachment-areas .attachment-observe').click();
+    await settle(page);
+    const drawn = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && o.userData.attachmentPatch) n++; }); return n; });
+    expect(drawn >= 2, `뼈 위에 칠한 인대 부착 면 ${drawn}개`);
     // C3: the card lists who moves the knee, per movement.
     const movers = await page.locator('.joint-movers').innerText({ timeout: 10000 });
     expect(/굽힘/.test(movers) && /폄/.test(movers) && movers.includes('대퇴직근'), `무릎을 움직이는 근육 목록: ${movers.replace(/\s+/g, " ").slice(0, 300)}`);
     await page.getByRole('button', { name: /무릎관절 .* 움직여 보기/ }).click();
     await page.locator('#movement-panel .movement-dofs').waitFor();
     expect(await pressed(page, '.movement-joints', '무릎') === 'true', '움직임 창이 무릎으로 열리지 않음');
-    return '인대 카드(움직이는 근육 목록) → 무릎 움직임 창';
+    return `인대 카드(부착 면 ${drawn}개·움직이는 근육 목록) → 무릎 움직임 창`;
   }],
   ['회전근개 작용 보기: 극하근 가쪽돌림 재생과 색', async page => {
     await open(page);
@@ -231,14 +251,21 @@ const flows = [
     await open(page);
     await search(page, '넙다리곧은근', '대퇴직근'); // modern name finds the Sino-Korean title
     const button = page.locator('.attachment-origin .attachment-observe');
+    expect((await button.innerText()).startsWith('기시 면 관찰'), `버튼: ${await button.innerText()}`);
+    const distance = () => page.evaluate(() => window.__atlasScene.camera.position.distanceTo(window.__atlasScene.controls.target));
+    const before = await distance();
     await button.click();
     await settle(page);
+    await page.waitForTimeout(900); // camera transition
     expect(await button.getAttribute('aria-pressed') === 'true', '기시 관찰이 켜지지 않음');
+    // 4-1 step 6: the camera goes to the drawn origin area, closer than the whole-body view.
+    const after = await distance();
+    expect(after < before * .6, `기시 면으로 다가가지 않음 (${before.toFixed(2)} → ${after.toFixed(2)}m)`);
     const origin = Object.values(await scene(page)).filter(n => n.visible && /^bone:origin(Area)?Context/.test(n.material)).length;
     expect(origin >= 1, '기시 뼈 색이 없음');
     await button.click();
     expect(await button.getAttribute('aria-pressed') === 'false', '기시 관찰이 끝나지 않음');
-    return `기시 뼈 ${origin}개 표시 후 해제`;
+    return `기시 면 관찰(시점 ${before.toFixed(1)} → ${after.toFixed(1)}m), 기시 뼈 ${origin}개 표시 후 해제`;
   }],
   ['부위 탐색: 넙다리 부위 목록과 시점', async page => {
     await open(page);

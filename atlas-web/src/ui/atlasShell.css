@@ -413,19 +413,21 @@
 .atlas-shell .rig-actions li button[aria-pressed="true"] { border-color: #d4472f; box-shadow: inset 3px 0 #d4472f; }
 .atlas-shell .rig-actions li small { color: #6b7a73; font-size: 11px; }
 .atlas-shell .rig-joint-move { --attachment-tone: #47796b; }
+.atlas-shell .attachment-areas .attachment-observe { --attachment-tone: #7d5aa6; }
 
 /* C4 attachment areas on the muscle card: same tones as the areas drawn on the bone. */
-.atlas-shell .attachment-areas ul { list-style: none; margin: 0 0 6px; padding: 0; display: grid; gap: 4px; }
-.atlas-shell .attachment-areas li { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-size: 13px; }
-.atlas-shell .attachment-areas li i { width: 10px; height: 10px; border-radius: 3px; background: var(--area-tone); }
-.atlas-shell .attachment-areas li small { color: #6b7a73; font-size: 11px; }
+.atlas-shell .attachment-area-chips { list-style: none; margin: 0 0 6px; padding: 0; display: grid; gap: 4px; }
+.atlas-shell .attachment-area-chips li { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+.atlas-shell .attachment-area-chips li i { width: 10px; height: 10px; border-radius: 3px; background: var(--area-tone); }
+.atlas-shell .attachment-area-chips li small { color: #6b7a73; font-size: 11px; }
 .atlas-shell .muscle-facts { list-style: none; margin: 0 0 6px; padding: 0; display: grid; gap: 4px; }
 .atlas-shell .muscle-facts li { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; font-size: 13px; }
 .atlas-shell .muscle-facts li small { color: #6b7a73; font-size: 11px; }
 .atlas-shell .muscle-facts-roots { font-size: 12px; color: #4d5b55; margin: 2px 0 0; }
-.atlas-shell .attachment-areas .area-origin { --area-tone: #2f5aa8; }
-.atlas-shell .attachment-areas .area-insertion { --area-tone: #b0561a; }
-.atlas-shell .attachment-areas .area-attachment { --area-tone: #7d5aa6; }
+.atlas-shell .attachment-area-chips .area-origin { --area-tone: #2f5aa8; }
+.atlas-shell .attachment-area-chips .area-insertion { --area-tone: #b0561a; }
+.atlas-shell .attachment-area-chips .area-attachment { --area-tone: #7d5aa6; }
+.atlas-shell .attachment-section h3 i.attachment { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; background: #7d5aa6; }
 .atlas-shell .joint-movers dl { margin: 0; display: grid; gap: 6px; }
 .atlas-shell .joint-movers dt { font-size: 12px; font-weight: 600; color: #4b5d57; margin-bottom: 2px; }
 .atlas-shell .joint-movers dd { margin: 0; }

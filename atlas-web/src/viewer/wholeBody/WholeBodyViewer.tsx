@@ -155,6 +155,19 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
   }, [ready, regionIds, selectedId, selectedIds, layers, layerOpacity, staticPose, nerveConceptMuscleKeys, presentation, attachmentRole, viewResetRevision]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (ready && homeRevision > 0) { stopEntrance(); controller.current?.focus([]); } }, [ready, homeRevision]);
   useEffect(() => { const c = controller.current; if (ready && c instanceof DatasetSceneAdapter) c.setSection(section); }, [ready, section]);
+  // Bookmarks capture and restore what this viewer owns (layers, opacity, section); the scene adds the camera.
+  const studyState = useRef({ layers, layerOpacity, section }); studyState.current = { layers, layerOpacity, section };
+  useEffect(() => {
+    const c = controller.current;
+    if (!ready || !(c instanceof DatasetSceneAdapter)) return;
+    return c.registerStudyView(() => ({ layers: { ...studyState.current.layers }, layerOpacity: { ...studyState.current.layerOpacity } as Record<string, number>,
+      section: studyState.current.section ? { ...studyState.current.section } : null }), view => {
+      setPeeled([]);
+      setLayers(previous => ({ ...previous, ...Object.fromEntries(Object.entries(view.layers).filter(([id]) => id in previous)) }));
+      setLayerOpacity(view.layerOpacity as Partial<Record<LayerId, number>>);
+      setSection(view.section as Section | null); setSectionOpen(Boolean(view.section));
+    });
+  }, [ready]);
   useEffect(() => {
     const c = controller.current;
     if (!ready || !(c instanceof DatasetSceneAdapter)) return;

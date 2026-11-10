@@ -295,4 +295,5 @@ def main():
     print('CARDS', len(cards), json.dumps(tally))
 
 
-main()
+if __name__ == '__main__':
+    main()

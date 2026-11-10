@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { RuntimeStructureRecord } from '../viewer/datasets/integration';
 import { gradeFind, isQuizHost, makeRng, nextQuestion, QUIZ_KINDS, readQuizRecord, recordAnswer, writeQuizRecord, type QuizCards, type QuizKind, type QuizQuestion } from '../domain/quiz';
-import { liveBookmarks, readBookmarks, toggleBookmark, writeBookmarks, type Bookmark } from '../domain/bookmarks';
+import { isStudyViewHost, liveBookmarks, readBookmarks, toggleBookmark, validStudyView, writeBookmarks, type Bookmark } from '../domain/bookmarks';
 import { loadMuscleCards } from './MuscleCardFacts';
 
 // One bookmark list shared by the card star and the panel (same tab), persisted in this browser.
@@ -16,11 +16,13 @@ function useBookmarks(): [Bookmark[], (next: Bookmark[]) => void] {
 
 const KIND_LABEL: Record<string, string> = { muscle: '근육', bone: '뼈', joint: '인대·관절', vessel: '혈관', fascia: '근막', tendon: '힘줄', nerve: '신경' };
 
-export function BookmarkButton({ row }: { row: RuntimeStructureRecord }) {
+export function BookmarkButton({ row, host }: { row: RuntimeStructureRecord; host?: unknown }) {
   const [list, setList] = useBookmarks();
   const saved = list.some(b => b.key === row.sourceKey);
-  return <button className="bookmark-toggle" aria-pressed={saved} title={saved ? '북마크에서 빼기' : '이 구조를 북마크에 저장'}
-    onClick={() => setList(toggleBookmark(list, { key: row.sourceKey, label: row.label, kind: row.kind }))}>{saved ? '★ 저장됨' : '☆ 북마크'}</button>;
+  // The current camera, layers and section are saved with the structure (4-1 step 6).
+  const view = () => (isStudyViewHost(host) ? host.captureStudyView() : null) ?? undefined;
+  return <button className="bookmark-toggle" aria-pressed={saved} title={saved ? '북마크에서 빼기' : '이 구조를 지금 보는 시점·층과 함께 저장'}
+    onClick={() => setList(toggleBookmark(list, { key: row.sourceKey, label: row.label, kind: row.kind, view: view() }))}>{saved ? '★ 저장됨' : '☆ 북마크'}</button>;
 }
 
 export function StudyTools({ rows, host, selected, onSelect, onClearSelection, onClose }: {
@@ -102,10 +104,10 @@ export function StudyTools({ rows, host, selected, onSelect, onClearSelection, o
       </details>}
     </div> : <div className="bookmarks" role="tabpanel">
       {live.length ? <ul>{live.map(b => <li key={b.key}>
-        <button className="bookmark-open" onClick={() => onSelect(b.key)}><span>{byKey.get(b.key)?.label ?? b.label}</span>
-          <small>{KIND_LABEL[b.kind] ?? '구조'}{byKey.get(b.key)?.side === 'left' ? ' · 왼쪽' : byKey.get(b.key)?.side === 'right' ? ' · 오른쪽' : ''}</small></button>
+        <button className="bookmark-open" onClick={() => { onSelect(b.key); if (validStudyView(b.view) && isStudyViewHost(host)) host.restoreStudyView(b.view); }}><span>{byKey.get(b.key)?.label ?? b.label}</span>
+          <small>{KIND_LABEL[b.kind] ?? '구조'}{byKey.get(b.key)?.side === 'left' ? ' · 왼쪽' : byKey.get(b.key)?.side === 'right' ? ' · 오른쪽' : ''}{validStudyView(b.view) ? ' · 저장한 시점' : ''}</small></button>
         <button className="bookmark-remove" aria-label={`${b.label} 북마크 빼기`} onClick={() => setBookmarks(bookmarks.filter(x => x.key !== b.key))}>×</button>
-      </li>)}</ul> : <p className="quiet-note">구조 카드의 ☆ 북마크를 누르면 여기에 모입니다. 이 브라우저에만 저장됩니다.</p>}
+      </li>)}</ul> : <p className="quiet-note">구조 카드의 ☆ 북마크를 누르면 그때의 시점·층·단면과 함께 여기에 모입니다. 이 브라우저에만 저장됩니다.</p>}
     </div>}
   </section>;
 }

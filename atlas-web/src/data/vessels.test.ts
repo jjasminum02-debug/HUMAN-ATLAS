@@ -44,3 +44,22 @@ test('muscle blood supply terms link to drawn vessels', () => {
   for (const a of linked) for (const n of a.structures!) assert.ok(names.has(n), n);
   assert.deepEqual(cards.arteries.lateral_circumflex_femoral.structures, ['Lateral circumflex femoral artery']);
 });
+
+test('vessel branch links (4-1 step 6) point at vessels in the model, follow textbook examples and never loop', () => {
+  const branches = JSON.parse(readFileSync(new URL('../../../atlas-data/runtime/vessel-branches.json', import.meta.url), 'utf8')).parents as Record<string, string>;
+  const all = JSON.parse(readFileSync(new URL('../../../atlas-data/runtime/structures.json', import.meta.url), 'utf8')).structures as { layer: string | null; names: { en: string } }[];
+  const names = new Set(all.filter(s => s.layer === 'vessel').map(s => s.names.en));
+  for (const [child, parent] of Object.entries(branches)) {
+    assert.ok(names.has(child), child);
+    assert.ok(parent.includes('{S}') ? names.has(parent.replace('{S}', 'Left')) && names.has(parent.replace('{S}', 'Right')) : names.has(parent), `${child} -> ${parent}`);
+  }
+  assert.equal(branches['Brachial artery'], 'Axillary artery');
+  assert.equal(branches['Femoral vein'], 'External iliac vein');
+  assert.equal(branches['Lateral circumflex femoral artery'], 'Deep femoral artery');
+  assert.equal(branches['Descending branch of lateral circumflex femoral artery'], 'Lateral circumflex femoral artery'); // from the name
+  assert.equal(branches['Thoracic aorta'], undefined); // draft and Wikipedia disagree: not shown
+  for (const start of Object.keys(branches)) {
+    const seen = new Set<string>(); let at: string | undefined = start;
+    while (at && branches[at]) { assert.ok(!seen.has(at), `loop at ${start}`); seen.add(at); at = branches[at].replace('{S}', 'Left'); }
+  }
+});

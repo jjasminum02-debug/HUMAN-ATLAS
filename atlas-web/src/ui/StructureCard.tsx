@@ -1,4 +1,5 @@
 // Card body for ligament/joint, fascia and tendon rows (ROADMAP C3). Data: atlas-data/runtime/structure-cards.json.
+import { LigamentAttachmentAreas } from './AttachmentAreas';
 import type { RuntimeStructureRecord } from '../viewer/datasets/integration';
 import type { RigFile } from '../viewer/rig';
 import { movementRoles, rigJointForBones, type MuscleActionsFile } from '../viewer/movement';
@@ -15,8 +16,10 @@ export interface StructureCardsFile {
 
 const JOINT_TYPE: Record<string, string> = { synovial: '윤활관절', fibrous: '섬유관절', cartilaginous: '연골관절' };
 
-export function StructureCard({ row, cards, rows, onSelect, rig, onMoveJoint, actions }: {
+export function StructureCard({ row, cards, rows, onSelect, rig, onMoveJoint, actions, bonesVisible = true, onFocusAreas }: {
   row: RuntimeStructureRecord; cards: StructureCardsFile | null; rows: Map<string, RuntimeStructureRecord>; onSelect: (key: string) => void;
+  /** 4-1 step 6: ligament attachment areas on the bones, and a camera move to them. */
+  bonesVisible?: boolean; onFocusAreas?: () => void;
   /** M3: open the movement panel on the rig joint these bones form. */
   rig?: RigFile | null; onMoveJoint?: (jointId: string) => void;
   /** M3 action table: lists the muscles that move this joint, per movement. */
@@ -39,6 +42,7 @@ export function StructureCard({ row, cards, rows, onSelect, rig, onMoveJoint, ac
     {rigJoint && onMoveJoint && <button className="attachment-observe rig-joint-move" onClick={() => onMoveJoint!(rigJoint)}>
       {rig!.joints[rigJoint].name} 움직여 보기<span>관절 움직임 창에서 각도를 바꾸고 작용 근육을 봅니다.</span></button>}
     {card?.text && <section className="attachment-section" aria-label="구조 설명"><h3>하는 일</h3><p>{card.text}</p></section>}
+    {row.kind === 'joint' && <LigamentAttachmentAreas sourceKey={row.sourceKey} rows={rows} bonesVisible={bonesVisible} onSelect={onSelect} onFocus={onFocusAreas}/>}
     {bones.length > 0 && <section className="attachment-section"><h3>{row.kind === 'joint' && row.tissue === 'bursa' ? '맞닿은 뼈' : '잇는 뼈'}</h3>
       <div className="attachment-bone-links">{bones}</div></section>}
     {muscles.length > 0 && <section className="attachment-section"><h3>{row.kind === 'tendon' ? '이어진 근육' : '감싸거나 맞닿은 근육'}</h3>

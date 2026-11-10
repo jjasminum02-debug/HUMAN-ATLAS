@@ -13,6 +13,7 @@ import { boneSegments, clampPose, segmentTransforms, type RigFile, type RigPose 
 import { parseSkinChunk, posedCopy, segmentForRole, skinGeometry, type SkinChunk, preserveVolume, volumeProfile } from '../skin.ts';
 import type { Instance } from './schema.ts';
 import type { ActionHighlight, MuscleActionsFile, RigHost } from '../movement.ts';
+import type { StudyView } from '../../domain/bookmarks.ts';
 /** Row kinds whose surfaces bend with the rig (M2); bones move rigidly instead. */
 const SKINNED_KINDS = new Set(['muscle', 'tendon', 'fascia', 'joint', 'vessel', 'nerve']);
 /** C4 attachment area: a Z-Anatomy patch (`key`) or an estimated bone-contact area (`source: 'contact'`). */
@@ -55,7 +56,11 @@ export class DatasetSceneAdapter implements RigHost {
     private readonly poseListeners = new Set<(pose: RigPose | null) => void>();
     private readonly openMovementListeners = new Set<(jointId: string) => void>();
     /** C4: origin/insertion patches drawn on the bone for the selected muscle (/__atlas/v2/attachments.json). */
-    private attachments: { muscles: Record<string, AttachmentRow[]> } | 'loading' | 'failed' | null = null;
+    private attachments: { muscles: Record<string, AttachmentRow[]>; ligaments?: Record<string, AttachmentRow[]> } | 'loading' | 'failed' | null = null;
+    /** An attachment observation waits for its drawn areas to load before framing them. */
+    private pendingAreaFocus = false;
+    /** Ligament area view: muscles and fascia turn see-through so areas inside a joint show (cleared on a new selection). */
+    private areaObservation = false;
     /** Estimated (contact) areas: triangle indices per bone resource, fetched per muscle; meshes built from the bone. */
     private readonly contactTris = new Map<string, Record<string, string>[] | 'loading' | 'failed'>();
     private readonly contactNodes = new Map<string, THREE.Mesh>();
@@ -154,7 +159,7 @@ export class DatasetSceneAdapter implements RigHost {
             let mesh = this.contactNodes.get(id);
             if (!mesh) {
                 mesh = new THREE.Mesh(triangleSubset(bone.geometry, decodeTriangles(packed)));
-                mesh.matrixAutoUpdate = false; mesh.userData = { attachmentPatch: true, attachmentOf: muscle };
+                mesh.matrixAutoUpdate = false; mesh.userData = { attachmentPatch: true, attachmentOf: muscle, role: row.role };
                 this.contactNodes.set(id, mesh); this.scene.root.add(mesh);
             }
             mesh.material = this.materials.get('accessory', { variant: ATTACHMENT_VARIANT[row.role] });
@@ -187,6 +192,17 @@ export class DatasetSceneAdapter implements RigHost {
         return this.muscleActions;
     }
     setActionHighlight(highlight: ActionHighlight) { this.actionHighlight = highlight; this.apply(); }
+    // Bookmarks (4-1 step 6): the viewer owns layers and the section; the scene owns the camera.
+    private studyView?: { get: () => Omit<StudyView, 'camera'>; restore: (view: StudyView) => void };
+    registerStudyView(get: () => Omit<StudyView, 'camera'>, restore: (view: StudyView) => void) {
+        this.studyView = { get, restore }; return () => { if (this.studyView?.get === get) this.studyView = undefined; };
+    }
+    captureStudyView(): StudyView | null { return this.studyView ? { ...this.studyView.get(), camera: this.scene.cameraState() } : null; }
+    restoreStudyView(view: StudyView) {
+        this.studyView?.restore(view);
+        // After the selection's own framing has run.
+        requestAnimationFrame(() => requestAnimationFrame(() => { if (!this.dead) this.scene.moveCamera(view.camera); }));
+    }
     openMovement(jointId: string) { for (const listener of this.openMovementListeners) listener(jointId); }
     onOpenMovement(listener: (jointId: string) => void) { this.openMovementListeners.add(listener); return () => { this.openMovementListeners.delete(listener); }; }
     setView(view: BodyView) {
@@ -194,6 +210,7 @@ export class DatasetSceneAdapter implements RigHost {
         const observing = Boolean(view.focusObservation || view.attachmentObservation);
         const changedAttachment = this.view.attachmentObservation?.role !== view.attachmentObservation?.role;
         const changedSelection = this.view.selectedId !== view.selectedId;
+        if (changedSelection) { this.pendingAreaFocus = false; this.areaObservation = false; }
         if (changedSelection || this.view.poseId !== view.poseId) for (const listener of this.sourceSelectionListeners) listener();
         const focusNerve = shouldFocusNerveSelection(this.integration.objects, this.view, view);
         if (wasObserving && (!observing || changedSelection)) this.scene.endObservation();
@@ -224,10 +241,12 @@ export class DatasetSceneAdapter implements RigHost {
     }
     /** The selected muscle's attachment patches, when bones are shown; fetches the patch table on first use. */
     private selectedAttachments(): AttachmentRow[] {
-        const id = this.view.selectedId;
-        if (!id || this.records.get(id)?.kind !== 'muscle' || !this.view.bones) return [];
+        const id = this.view.selectedId, kind = id ? this.records.get(id)?.kind : undefined;
+        if (!id || (kind !== 'muscle' && kind !== 'joint') || !this.view.bones) return [];
         if (this.attachments === null) this.loadAttachments();
-        return typeof this.attachments === 'object' && this.attachments ? this.attachments.muscles[id] ?? [] : [];
+        if (typeof this.attachments !== 'object' || !this.attachments) return [];
+        // Ligaments, capsules, labra and menisci (4-1 step 6): estimated contact areas only.
+        return (kind === 'muscle' ? this.attachments.muscles[id] : this.attachments.ligaments?.[id]) ?? [];
     }
     private selectedPatches() { return this.selectedAttachments().filter((p): p is AttachmentRow & { key: string } => Boolean(p.key)); }
     private withPatches(keys: string[]) {
@@ -276,7 +295,7 @@ export class DatasetSceneAdapter implements RigHost {
                 : selected || course.has(key) || key === this.quizTarget ? 'selected'
                 // Quiz: the target may lie under muscles or bone, so everything else turns see-through (bones less so).
                 : this.quizTarget && !this.view.selectedId ? row.kind === 'bone' ? 'translucent' : 'observationContext' : observe && row.kind !== 'nerve' ? highlights.has(key) ? 'motorContext' : 'nerveContext'
-                : highlights.has(key) ? 'innervated' : this.view.focusObservation && row.kind === 'muscle' ? 'observationContext' : this.view.selectedId && this.view.dim || this.quizTarget ? 'dim' : 'normal');
+                : highlights.has(key) ? 'innervated' : (this.view.focusObservation && row.kind === 'muscle') || (this.areaObservation && ['muscle', 'fascia', 'tendon'].includes(row.kind)) ? 'observationContext' : this.view.selectedId && this.view.dim || this.quizTarget ? 'dim' : 'normal');
             const phaseTone = null;
             const layerId = layerIdOf(row);
             const highlight = !this.actionHighlight || selected ? undefined
@@ -297,6 +316,10 @@ export class DatasetSceneAdapter implements RigHost {
             this.skinSoftTissue();
         }
         this.syncContactAreas();
+        if (this.pendingAreaFocus && !this.attachmentAreaBox(this.view.attachmentObservation?.role).isEmpty()) {
+            this.pendingAreaFocus = false;
+            if (this.view.attachmentObservation) this.focusSelection(true); else this.focusAttachmentAreas(true);
+        }
         const selectedNode = this.view.selectedId ? this.resources.nodes.get(this.view.selectedId) : this.quizTarget ? this.resources.nodes.get(this.quizTarget) : undefined;
         this.scene.setOutline(selectedNode?.visible ? [selectedNode] : []);
         this.scene.requestRender();
@@ -321,7 +344,52 @@ export class DatasetSceneAdapter implements RigHost {
         this.scene.fitObservationBounds(box, padding, smooth);
     }
     focus(regions: string[], smooth = true) { this.fit(framingRecords(this.integration.objects, this.view, regions), 1.25, smooth); }
+    /** World box of the attachment areas drawn for the selection (one role, or all). */
+    private attachmentAreaBox(role?: AttachmentRow['role']) {
+        const box = new THREE.Box3(), part = new THREE.Box3();
+        const add = (mesh: THREE.Mesh) => {
+            if (!mesh.visible) return;
+            if (!mesh.geometry.boundingBox) mesh.geometry.computeBoundingBox();
+            box.union(part.copy(mesh.geometry.boundingBox!).applyMatrix4(mesh.matrix));
+        };
+        for (const p of this.selectedPatches()) { const node = this.resources.nodes.get(p.key); if (node && (!role || p.role === role)) add(node); }
+        for (const mesh of this.contactNodes.values()) if (!role || mesh.userData.role === role) add(mesh);
+        // A footprint is small: keep at least 8 cm of view around it.
+        if (!box.isEmpty()) box.expandByVector(box.getSize(new THREE.Vector3()).subScalar(.08).negate().max(new THREE.Vector3()).multiplyScalar(.5));
+        return box;
+    }
+    /** Camera facing the drawn areas along their mean surface normal, at least 16 cm of view across. */
+    private attachmentAreaView(role?: AttachmentRow['role']) {
+        const box = this.attachmentAreaBox(role);
+        if (box.isEmpty()) return null;
+        const normal = new THREE.Vector3(), n = new THREE.Vector3(), normalMatrix = new THREE.Matrix3();
+        const add = (mesh: THREE.Mesh) => {
+            const attribute = mesh.geometry.getAttribute('normal'); if (!mesh.visible || !attribute) return;
+            normalMatrix.getNormalMatrix(mesh.matrix);
+            for (let i = 0; i < attribute.count; i++) normal.add(n.fromBufferAttribute(attribute, i).applyMatrix3(normalMatrix));
+        };
+        for (const p of this.selectedPatches()) { const node = this.resources.nodes.get(p.key); if (node && (!role || p.role === role)) add(node); }
+        for (const mesh of this.contactNodes.values()) if (!role || mesh.userData.role === role) add(mesh);
+        if (normal.lengthSq() < 1e-12) return null;
+        const centre = box.getCenter(new THREE.Vector3()), radius = Math.max(box.getSize(n).length() / 2, .08);
+        const distance = radius / Math.sin(THREE.MathUtils.degToRad(this.scene.camera.fov) / 2) * 1.2;
+        return { position: centre.clone().addScaledVector(normal.normalize(), distance).toArray(), target: centre.toArray(), zoom: 1 };
+    }
+    /** Frame the drawn attachment areas of the selection (ligament cards, "부착 면 관찰"). Returns false when none are drawn yet. */
+    focusAttachmentAreas(smooth = true) {
+        if (!this.areaObservation) { this.areaObservation = true; this.apply(); }
+        const view = this.attachmentAreaView();
+        if (!view) { this.pendingAreaFocus = true; return false; }
+        this.pendingAreaFocus = false; this.scene.moveCamera(view, smooth); return true;
+    }
     focusSelection(smooth = true) {
+        // Origin/insertion observation looks at the drawn area on the bone, not the whole bone (4-1 step 6).
+        const role = this.view.attachmentObservation?.role;
+        if (role) {
+            const view = this.attachmentAreaView(role);
+            if (view) { this.pendingAreaFocus = false; this.scene.moveCamera(view, smooth); return; }
+            this.pendingAreaFocus = true;
+        }
         const keys = observationFrameKeys(this.integration.objects, this.view);
         const box = new THREE.Box3();
         for (const key of keys) {

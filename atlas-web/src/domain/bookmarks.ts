@@ -1,7 +1,23 @@
 // Structure bookmarks (ROADMAP Q2-3): the learner's saved structures, kept in this browser only.
 import { safeStorage } from './quiz.ts';
 
-export interface Bookmark { key: string; label: string; kind: string; savedAt: string }
+/** What the learner was looking at when saving (4-1 step 6): camera, layers, their opacity and the cross-section. */
+export interface StudyView {
+  camera: { position: number[]; target: number[]; zoom: number };
+  layers: Record<string, boolean>; layerOpacity: Record<string, number>;
+  section: { axis: string; position: number; flip: boolean } | null;
+}
+export interface Bookmark { key: string; label: string; kind: string; savedAt: string; view?: StudyView }
+/** Scene side: capture the current view, and restore one (layers first, then the camera). */
+export interface StudyViewHost { captureStudyView(): StudyView | null; restoreStudyView(view: StudyView): void }
+export const isStudyViewHost = (host: unknown): host is StudyViewHost => typeof (host as StudyViewHost | null)?.captureStudyView === 'function';
+/** A saved view is usable only if it has a finite camera and known shapes. */
+export function validStudyView(view: unknown): view is StudyView {
+  const v = view as StudyView | null;
+  const finite = (a: unknown, n: number) => Array.isArray(a) && a.length === n && a.every(Number.isFinite);
+  return Boolean(v && finite(v.camera?.position, 3) && finite(v.camera?.target, 3) && Number.isFinite(v.camera?.zoom) && v.layers && typeof v.layers === 'object'
+    && (v.section === null || (v.section && typeof v.section.axis === 'string' && Number.isFinite(v.section.position))));
+}
 const KEY = 'atlas.bookmarks.v1';
 
 export function readBookmarks(storage: Pick<Storage, 'getItem'> | null = safeStorage()): Bookmark[] {

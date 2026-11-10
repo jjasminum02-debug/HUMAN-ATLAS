@@ -12,6 +12,10 @@ the area is an unlabelled 'attachment'. Clusters at an end Z-Anatomy already cov
 Rows in attachments.json carry role, bone and area; the triangle indices per bone resource (overview and detail, base64
 little-endian uint32) go to source-cache/datasets/za-v2/attachments/<muscle key>.json (git-ignored, like skin weights),
 which the app fetches when that muscle is selected.
+
+Ligaments, capsules, membranes, labra and menisci (4-1 step 6) get the same contact clusters without the end rule (a
+ligament attaches along its ends and sometimes its edge) and without a role: they are 'attachment' areas, the largest
+LIGAMENT_AREAS per structure, in attachments.json `ligaments`.
 """
 import base64
 import json
@@ -27,6 +31,7 @@ RUNTIME = ROOT / 'atlas-data/runtime'
 GEOMETRY = ROOT / 'atlas-data/source-cache/datasets/za-v2'
 OUT = GEOMETRY / 'attachments'
 CONTACT, LINK, END, MIN_TRIS, MIN_AREA = .003, .008, .25, 6, 20e-6
+LIGAMENT_KINDS, LIGAMENT_AREAS = {'ligament', 'capsule', 'membrane', 'labrum', 'meniscus'}, 6
 
 
 def chunk_meshes(path):
@@ -148,10 +153,43 @@ def main():
             stats['muscles'] += 1; stats['rows'] += len(rows)
             stats['labelled' if known_end else 'unlabelled'] += 1
         else: stats['noContact'] += 1
+    # Ligaments and other joint tissue: every contact cluster with a bone, largest first.
+    ligaments, lig_stats = {}, {'structures': 0, 'rows': 0, 'noContact': 0}
+    for m in (s for s in structures if s['learner']['visible'] and s['layer'] == 'joint' and s['kind'] in LIGAMENT_KINDS):
+        _, pts, _ = mesh(m, 'detail')
+        kd = kdtree(pts); mlo, mhi = pts.min(0) - .005, pts.max(0) + .005
+        rows = []
+        for bone in bones:
+            blo, bhi = bounds(bone)
+            if (blo > mhi).any() or (bhi < mlo).any(): continue
+            per_level = {}
+            for level in ('detail', 'overview'):
+                resource, bp, tris = mesh(bone, level)
+                cent = bp[tris].mean(1)
+                per_level[level] = (resource, bp, tris, cent, np.flatnonzero([kd.find(Vector(c))[2] <= CONTACT for c in cent]))
+            resource, bp, tris, cent, hit = per_level['detail']
+            if len(hit) < MIN_TRIS: continue
+            for group in clusters(cent[hit]):
+                sel = hit[group]
+                area = np.linalg.norm(np.cross(bp[tris[sel, 1]] - bp[tris[sel, 0]], bp[tris[sel, 2]] - bp[tris[sel, 0]]), axis=1).sum() / 2
+                if len(sel) < MIN_TRIS or area < MIN_AREA: continue
+                o_res, _, _, o_cent, o_hit = per_level['overview']
+                ckd = kdtree(cent[sel])
+                o_sel = [i for i in o_hit if ckd.find(Vector(o_cent[i]))[2] <= LINK] or [i for i in range(len(o_cent)) if ckd.find(Vector(o_cent[i]))[2] <= LINK / 2]
+                pack = lambda ids: base64.b64encode(np.asarray(sorted(ids), '<u4').tobytes()).decode()
+                rows.append({'role': 'attachment', 'bone': bone['key'], 'source': 'contact', 'areaMm2': round(area * 1e6),
+                             'tris': {resource: pack(sel), o_res: pack(o_sel)}})
+        rows = sorted(rows, key=lambda r: -r['areaMm2'])[:LIGAMENT_AREAS]
+        if rows:
+            (OUT / f"{m['key']}.json").write_text(json.dumps({'rows': [r.pop('tris') for r in rows]}, separators=(',', ':')) + '\n')
+            ligaments[m['key']] = rows; lig_stats['structures'] += 1; lig_stats['rows'] += len(rows)
+        else: lig_stats['noContact'] += 1
+    attachments['ligaments'] = ligaments
     attachments['missing'] = sorted(m['key'] for m in muscles if m['key'] not in attachments['muscles'])
-    attachments['note'] = 'Z-Anatomy origin/insertion patches per muscle, plus estimated contact areas (build_attachments.py, build_attachment_contacts.py)'
+    attachments['note'] = ('Z-Anatomy origin/insertion patches per muscle, plus estimated contact areas for muscles and ligaments '
+                           '(build_attachments.py, build_attachment_contacts.py)')
     (RUNTIME / 'attachments.json').write_text(json.dumps(attachments, ensure_ascii=False, separators=(',', ':')) + '\n')
-    print('CONTACTS', json.dumps({**stats, 'missing': len(attachments['missing'])}), flush=True)
+    print('CONTACTS', json.dumps({**stats, 'missing': len(attachments['missing']), 'ligaments': lig_stats}), flush=True)
 
 
 main()

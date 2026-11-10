@@ -66,3 +66,12 @@ test('score, missed list and bookmarks persist and survive bad storage', () => {
   assert.deepEqual(liveBookmarks(marks, k => k === 'A').map(b => b.key), ['A']);
   assert.deepEqual(readBookmarks(null), []);
 });
+
+test('bookmarks keep the saved view and reject a broken one (4-1 step 6)', async () => {
+  const { toggleBookmark, validStudyView } = await import('./bookmarks.ts');
+  const view = { camera: { position: [0, 1, 2], target: [0, 1, 0], zoom: 1 }, layers: { bone: true, fascia: false }, layerOpacity: { bone: .5 }, section: { axis: 'axial', position: .7, flip: false } };
+  const [saved] = toggleBookmark([], { key: 'ZA-x', label: '대퇴직근', kind: 'muscle', view });
+  assert.deepEqual(saved.view, view);
+  assert.ok(validStudyView(view) && validStudyView({ ...view, section: null }));
+  assert.ok(!validStudyView({ ...view, camera: { position: [0, NaN, 0], target: [0, 0, 0], zoom: 1 } }) && !validStudyView(undefined));
+});
