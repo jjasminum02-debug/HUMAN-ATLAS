@@ -35,7 +35,7 @@ function shuffle<T>(list: T[], rng: Rng) {
 const HANGUL = /[가-힣]/;
 const QUIZ_KINDS_ROW = new Set(['muscle', 'bone', 'joint', 'vessel', 'fascia', 'tendon']);
 const sharesRegion = (a: QuizRow, b: QuizRow) => a.regionIds.some(r => b.regionIds.includes(r));
-const termName = (t: Term) => t.ko;
+const termName = (t: Term) => t.koTraditional || t.ko;
 
 /** Rows a learner can be asked about: displayable, selectable and named in Korean. */
 export function quizRows(rows: QuizRow[]) {

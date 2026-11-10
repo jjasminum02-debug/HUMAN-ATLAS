@@ -3,7 +3,7 @@ export interface AssetTransportConfig { revision: string; urls: Record<string,st
 declare global { interface Window { __ATLAS_ASSET_TRANSPORT__?: AssetTransportConfig } }
 // Reuse existing development counters only in the explicit loopback package preview.
 // This never enables profiling for the public HTTPS delivery configuration.
-export const ASSET_INSPECTION_ENABLED = Boolean(import.meta.env?.DEV || (typeof window !== 'undefined'
+export const ASSET_INSPECTION_ENABLED = Boolean(import.meta.env?.DEV || import.meta.env?.MODE === 'qa' || (typeof window !== 'undefined'
   && ['127.0.0.1', 'localhost', '[::1]'].includes(window.location.hostname)
   && window.__ATLAS_ASSET_TRANSPORT__?.inspection === true));
 export function resolveAssetUrl(input: string | URL, base: string, config?: AssetTransportConfig): string {

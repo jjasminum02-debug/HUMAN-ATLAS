@@ -7,10 +7,20 @@
    "accessedOn": "2026-11-04",
    "license": "CC BY-SA 4.0",
    "use": "infobox nerve/artery/action fields parsed to vocabulary keys; no text copied to the runtime"
+  },
+  "uams": {
+   "site": "medicine.uams.edu (Department of Neuroscience muscle tables)",
+   "accessedOn": "2026-11-10",
+   "use": "second source where Wikipedia is empty or contradicts the draft (`by: uams`); no text copied to the runtime"
+  },
+  "kenhub": {
+   "site": "www.kenhub.com (library \"Key facts\")",
+   "accessedOn": "2026-11-10",
+   "use": "asked only when Wikipedia and UAMS settle nothing (`by: kenhub`); values parsed to vocabulary keys, no text copied"
   }
  },
  "statuses": {
-  "agree": "both sources state the same values",
+  "agree": "both sources state the same values (Wikipedia, or UAMS where marked by: uams)",
   "partial": "shown values are those both state; one source adds others",
   "conflict": "no common value; not shown",
   "noSource": "infobox missing or the field is empty / unrecognised; not shown",
@@ -18,31 +28,31 @@
  },
  "summary": {
   "nerve": {
-   "agree": 208,
+   "agree": 214,
    "partial": 18,
    "conflict": 0,
-   "noSource": 6,
+   "noSource": 0,
    "noDraft": 0
   },
   "roots": {
-   "agree": 49,
-   "partial": 25,
+   "agree": 97,
+   "partial": 38,
    "conflict": 1,
-   "noSource": 83,
+   "noSource": 22,
    "noDraft": 74
   },
   "artery": {
-   "agree": 116,
-   "partial": 51,
-   "conflict": 17,
-   "noSource": 45,
+   "agree": 139,
+   "partial": 87,
+   "conflict": 0,
+   "noSource": 3,
    "noDraft": 3
   },
   "action": {
-   "agree": 217,
+   "agree": 231,
    "partial": 0,
-   "conflict": 8,
-   "noSource": 7,
+   "conflict": 0,
+   "noSource": 1,
    "noDraft": 0
   }
  },
@@ -86,32 +96,22 @@
   },
   {
    "muscle": "(Opponens digiti minimi muscle of foot)",
-   "field": "nerve",
-   "status": "noSource",
-   "draft": [
-    "lateral_plantar"
-   ],
-   "unparsed": null
-  },
-  {
-   "muscle": "(Opponens digiti minimi muscle of foot)",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "kenhub",
    "draft": [
     "lateral_plantar"
    ],
-   "unparsed": null
-  },
-  {
-   "muscle": "(Opponens digiti minimi muscle of foot)",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "S2–S3"
-  },
-  {
-   "muscle": "(Opponens digiti minimi muscle of foot)",
-   "field": "action",
-   "status": "noSource"
+   "kenhub": [
+    "arcuate",
+    "dorsalis_pedis",
+    "lateral_plantar"
+   ],
+   "wikipedia": null,
+   "onlyKenhub": [
+    "arcuate",
+    "dorsalis_pedis"
+   ]
   },
   {
    "muscle": "Abductor digiti minimi of foot",
@@ -120,34 +120,12 @@
    "draft": "S2–S3"
   },
   {
-   "muscle": "Abductor digiti minimi of hand",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C8–T1"
-  },
-  {
    "muscle": "Abductor hallucis",
    "field": "roots",
-   "status": "noSource",
-   "draft": "S1–S2"
-  },
-  {
-   "muscle": "Abductor pollicis brevis",
-   "field": "artery",
-   "status": "conflict",
-   "draft": [
-    "superficial_palmar_branch"
-   ],
-   "wikipedia": [
-    "superficial_palmar_arch"
-   ],
-   "onlyDraft": [
-    "superficial_palmar_branch"
-   ],
-   "onlyWikipedia": [
-    "superficial_palmar_arch"
-   ],
-   "unparsed": "arch"
+   "status": "partial",
+   "by": "kenhub",
+   "draft": "S1–S2",
+   "kenhub": "S1–S3"
   },
   {
    "muscle": "Abductor pollicis brevis",
@@ -165,8 +143,10 @@
   {
    "muscle": "Acromial part of deltoid muscle",
    "field": "roots",
-   "status": "noSource",
-   "draft": "C5–C6"
+   "status": "partial",
+   "by": "uams",
+   "draft": "C5–C6",
+   "uams": "C5"
   },
   {
    "muscle": "Adductor brevis",
@@ -184,12 +164,6 @@
    ]
   },
   {
-   "muscle": "Adductor brevis",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "L2–L4"
-  },
-  {
    "muscle": "Adductor longus",
    "field": "artery",
    "status": "partial",
@@ -203,12 +177,6 @@
    "onlyDraft": [
     "obturator"
    ]
-  },
-  {
-   "muscle": "Adductor longus",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "L2–L4"
   },
   {
    "muscle": "Adductor magnus",
@@ -369,17 +337,10 @@
   {
    "muscle": "Clavicular part of deltoid muscle",
    "field": "roots",
-   "status": "noSource",
-   "draft": "C5–C6"
-  },
-  {
-   "muscle": "Coccygeus muscle",
-   "field": "artery",
-   "status": "noSource",
-   "draft": [
-    "inferior_gluteal"
-   ],
-   "unparsed": null
+   "status": "partial",
+   "by": "uams",
+   "draft": "C5–C6",
+   "uams": "C5"
   },
   {
    "muscle": "Coccygeus muscle",
@@ -412,33 +373,9 @@
   },
   {
    "muscle": "Deep head of flexor pollicis brevis",
-   "field": "artery",
-   "status": "conflict",
-   "draft": [
-    "superficial_palmar_branch"
-   ],
-   "wikipedia": [
-    "superficial_palmar_arch"
-   ],
-   "onlyDraft": [
-    "superficial_palmar_branch"
-   ],
-   "onlyWikipedia": [
-    "superficial_palmar_arch"
-   ],
-   "unparsed": "arch"
-  },
-  {
-   "muscle": "Deep head of flexor pollicis brevis",
    "field": "roots",
    "status": "noSource",
    "draft": "C8–T1"
-  },
-  {
-   "muscle": "Deep head of pronator teres",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C6–C7"
   },
   {
    "muscle": "Deep part of masseter",
@@ -455,26 +392,26 @@
   {
    "muscle": "Depressor labii inferioris",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "inferior_labial"
    ],
-   "unparsed": null
+   "uams": [
+    "inferior_labial",
+    "facial",
+    "mental"
+   ],
+   "wikipedia": null,
+   "onlyUams": [
+    "mental"
+   ]
   },
   {
    "muscle": "Depressor labii inferioris",
    "field": "roots",
    "status": "noDraft",
    "wikipedia": null
-  },
-  {
-   "muscle": "Depressor septi nasi",
-   "field": "artery",
-   "status": "noSource",
-   "draft": [
-    "superior_labial"
-   ],
-   "unparsed": null
   },
   {
    "muscle": "Depressor septi nasi",
@@ -534,12 +471,6 @@
    ]
   },
   {
-   "muscle": "Diaphragm",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C3–C5"
-  },
-  {
    "muscle": "Dorsal interossei muscles of foot",
    "field": "artery",
    "status": "noSource",
@@ -595,11 +526,23 @@
   {
    "muscle": "Dorsal parts of lateral intertransversarii lumborum muscles",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "lumbar"
    ],
-   "unparsed": null
+   "uams": [
+    "intercostal",
+    "subcostal",
+    "lumbar",
+    "deep_cervical"
+   ],
+   "wikipedia": null,
+   "onlyUams": [
+    "intercostal",
+    "subcostal",
+    "deep_cervical"
+   ]
   },
   {
    "muscle": "Dorsal parts of lateral intertransversarii lumborum muscles",
@@ -616,8 +559,10 @@
   {
    "muscle": "Extensor carpi radialis longus",
    "field": "roots",
-   "status": "noSource",
-   "draft": "C6–C7"
+   "status": "partial",
+   "by": "kenhub",
+   "draft": "C6–C7",
+   "kenhub": "C5–C8"
   },
   {
    "muscle": "Extensor digiti minimi",
@@ -627,28 +572,12 @@
    "wikipedia": "C7"
   },
   {
-   "muscle": "Extensor digitorum",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C7–C8"
-  },
-  {
-   "muscle": "Extensor digitorum brevis",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "L5–S1"
-  },
-  {
-   "muscle": "Extensor digitorum longus",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "L5–S1"
-  },
-  {
    "muscle": "Extensor hallucis brevis",
    "field": "roots",
-   "status": "noSource",
-   "draft": "L5–S1"
+   "status": "partial",
+   "by": "kenhub",
+   "draft": "L5–S1",
+   "kenhub": "S1–S2"
   },
   {
    "muscle": "Extensor hallucis longus",
@@ -664,77 +593,54 @@
    "draft": "C7–C8"
   },
   {
-   "muscle": "Extensor pollicis brevis",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C7–C8"
-  },
-  {
-   "muscle": "Extensor pollicis longus",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C7–C8"
-  },
-  {
    "muscle": "External abdominal oblique muscle",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "inferior_epigastric",
     "circumflex_iliac",
     "intercostal"
    ],
-   "unparsed": null
-  },
-  {
-   "muscle": "External anal sphincter",
-   "field": "artery",
-   "status": "noSource",
-   "draft": [
-    "inferior_rectal"
+   "uams": [
+    "circumflex_iliac",
+    "superior_epigastric",
+    "inferior_epigastric",
+    "musculophrenic",
+    "intercostal",
+    "subcostal",
+    "lumbar"
    ],
-   "unparsed": null
-  },
-  {
-   "muscle": "External anal sphincter",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "S2–S4"
-  },
-  {
-   "muscle": "External intercostal muscles",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "T1–T11"
+   "wikipedia": null,
+   "onlyUams": [
+    "superior_epigastric",
+    "musculophrenic",
+    "subcostal",
+    "lumbar"
+   ]
   },
   {
    "muscle": "External part of thyro-arytenoid muscle",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "superior_thyroid",
     "inferior_thyroid"
    ],
-   "unparsed": null
+   "uams": [
+    "superior_thyroid"
+   ],
+   "wikipedia": null,
+   "onlyDraft": [
+    "inferior_thyroid"
+   ]
   },
   {
    "muscle": "External part of thyro-arytenoid muscle",
    "field": "roots",
    "status": "noDraft",
    "wikipedia": null
-  },
-  {
-   "muscle": "External part of thyro-arytenoid muscle",
-   "field": "action",
-   "status": "conflict",
-   "expected": "relax|shorten|slacken",
-   "wikipedia": "Helps to reduce tension on the vocal folds during speech (Manner of articulation) to decrease pitch"
-  },
-  {
-   "muscle": "Fibularis brevis muscle",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "L5–S1"
   },
   {
    "muscle": "Fibularis longus muscle",
@@ -758,12 +664,6 @@
    "draft": "L5–S1"
   },
   {
-   "muscle": "Fibularis tertius muscle",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "L5–S1"
-  },
-  {
    "muscle": "Flexor carpi radialis",
    "field": "artery",
    "status": "partial",
@@ -779,31 +679,10 @@
    ]
   },
   {
-   "muscle": "Flexor carpi radialis",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C6–C7"
-  },
-  {
-   "muscle": "Flexor digiti minimi of foot",
-   "field": "artery",
-   "status": "noSource",
-   "draft": [
-    "lateral_plantar"
-   ],
-   "unparsed": null
-  },
-  {
    "muscle": "Flexor digiti minimi of foot",
    "field": "roots",
    "status": "noSource",
    "draft": "S2–S3"
-  },
-  {
-   "muscle": "Flexor digiti minimi of hand",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C8–T1"
   },
   {
    "muscle": "Flexor digitorum brevis",
@@ -826,14 +705,10 @@
   {
    "muscle": "Flexor digitorum brevis",
    "field": "roots",
-   "status": "noSource",
-   "draft": "S1–S2"
-  },
-  {
-   "muscle": "Flexor digitorum longus",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "L5–S2"
+   "status": "partial",
+   "by": "kenhub",
+   "draft": "S1–S2",
+   "kenhub": "S1–S3"
   },
   {
    "muscle": "Flexor digitorum profundus",
@@ -861,13 +736,6 @@
    "wikipedia": null
   },
   {
-   "muscle": "Geniohyoid muscle",
-   "field": "action",
-   "status": "conflict",
-   "expected": "elevat|depress|pull|draw",
-   "wikipedia": "Carry hyoid bone and the tongue upward during deglutition"
-  },
-  {
    "muscle": "Gluteus maximus muscle",
    "field": "artery",
    "status": "partial",
@@ -884,18 +752,6 @@
    "unparsed": "superior"
   },
   {
-   "muscle": "Gracilis muscle",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "L2–L3"
-  },
-  {
-   "muscle": "Humeral head of extensor carpi ulnaris",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C7–C8"
-  },
-  {
    "muscle": "Humero-ulnar head of flexor digitorum superficialis",
    "field": "artery",
    "status": "partial",
@@ -909,21 +765,6 @@
    "onlyDraft": [
     "ulnar"
    ]
-  },
-  {
-   "muscle": "Humero-ulnar head of flexor digitorum superficialis",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C8–T1"
-  },
-  {
-   "muscle": "Hyoglossus muscle",
-   "field": "artery",
-   "status": "noSource",
-   "draft": [
-    "lingual"
-   ],
-   "unparsed": null
   },
   {
    "muscle": "Hyoglossus muscle",
@@ -950,8 +791,10 @@
   {
    "muscle": "Iliacus muscle",
    "field": "roots",
-   "status": "noSource",
-   "draft": "L2–L3"
+   "status": "partial",
+   "by": "kenhub",
+   "draft": "L2–L3",
+   "kenhub": "L2–L4"
   },
   {
    "muscle": "Iliococcygeus muscle",
@@ -995,33 +838,28 @@
   },
   {
    "muscle": "Inferior gemellus muscle",
-   "field": "nerve",
-   "status": "noSource",
-   "draft": [
-    "n_quadratus_femoris"
-   ],
-   "unparsed": null
-  },
-  {
-   "muscle": "Inferior gemellus muscle",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "inferior_gluteal",
     "medial_circumflex_femoral"
    ],
-   "unparsed": null
+   "uams": [
+    "inferior_gluteal"
+   ],
+   "wikipedia": null,
+   "onlyDraft": [
+    "medial_circumflex_femoral"
+   ]
   },
   {
    "muscle": "Inferior gemellus muscle",
    "field": "roots",
-   "status": "noSource",
-   "draft": "L4–S1"
-  },
-  {
-   "muscle": "Inferior gemellus muscle",
-   "field": "action",
-   "status": "noSource"
+   "status": "partial",
+   "by": "kenhub",
+   "draft": "L4–S1",
+   "kenhub": "L4, S1"
   },
   {
    "muscle": "Inferior head of lateral pterygoid muscle",
@@ -1070,17 +908,6 @@
   },
   {
    "muscle": "Inferior pharyngeal constrictor",
-   "field": "artery",
-   "status": "noSource",
-   "draft": [
-    "ascending_pharyngeal",
-    "superior_thyroid",
-    "inferior_thyroid"
-   ],
-   "unparsed": null
-  },
-  {
-   "muscle": "Inferior pharyngeal constrictor",
    "field": "roots",
    "status": "noDraft",
    "wikipedia": null
@@ -1092,36 +919,32 @@
    "wikipedia": null
   },
   {
-   "muscle": "Infraspinatus muscle",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C5–C6"
-  },
-  {
-   "muscle": "Innermost intercostal muscles",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "T1–T11"
-  },
-  {
    "muscle": "Internal abdominal oblique muscle",
    "field": "artery",
-   "status": "conflict",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "inferior_epigastric",
     "circumflex_iliac",
     "superior_epigastric"
    ],
+   "uams": [
+    "circumflex_iliac",
+    "superior_epigastric",
+    "inferior_epigastric",
+    "musculophrenic",
+    "intercostal",
+    "subcostal",
+    "lumbar"
+   ],
    "wikipedia": [
     "subcostal"
    ],
-   "onlyDraft": [
-    "inferior_epigastric",
-    "circumflex_iliac",
-    "superior_epigastric"
-   ],
-   "onlyWikipedia": [
-    "subcostal"
+   "onlyUams": [
+    "musculophrenic",
+    "intercostal",
+    "subcostal",
+    "lumbar"
    ]
   },
   {
@@ -1142,19 +965,6 @@
    ]
   },
   {
-   "muscle": "Internal intercostal muscles",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "T1–T11"
-  },
-  {
-   "muscle": "Internal intercostal muscles",
-   "field": "action",
-   "status": "conflict",
-   "expected": "depress|expir|exhal",
-   "wikipedia": "Hold ribs steady"
-  },
-  {
    "muscle": "Interspinales colli muscles",
    "field": "artery",
    "status": "noDraft",
@@ -1165,13 +975,6 @@
    "field": "roots",
    "status": "noDraft",
    "wikipedia": null
-  },
-  {
-   "muscle": "Interspinales colli muscles",
-   "field": "action",
-   "status": "conflict",
-   "expected": "extend|extens",
-   "wikipedia": "Proprioception of vertebral column"
   },
   {
    "muscle": "Interspinales lumborum muscles",
@@ -1186,13 +989,6 @@
    "wikipedia": null
   },
   {
-   "muscle": "Interspinales lumborum muscles",
-   "field": "action",
-   "status": "conflict",
-   "expected": "extend|extens",
-   "wikipedia": "Proprioception of vertebral column"
-  },
-  {
    "muscle": "Interspinales thoracis muscles",
    "field": "artery",
    "status": "noDraft",
@@ -1203,60 +999,30 @@
    "field": "roots",
    "status": "noDraft",
    "wikipedia": null
-  },
-  {
-   "muscle": "Interspinales thoracis muscles",
-   "field": "action",
-   "status": "conflict",
-   "expected": "extend|extens",
-   "wikipedia": "Proprioception of vertebral column"
   },
   {
    "muscle": "Lateral crico-arytenoid muscle",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "superior_thyroid",
     "inferior_thyroid"
    ],
-   "unparsed": null
+   "uams": [
+    "superior_laryngeal",
+    "superior_thyroid"
+   ],
+   "wikipedia": null,
+   "onlyDraft": [
+    "inferior_thyroid"
+   ]
   },
   {
    "muscle": "Lateral crico-arytenoid muscle",
    "field": "roots",
    "status": "noDraft",
    "wikipedia": null
-  },
-  {
-   "muscle": "Lateral head of flexor hallucis brevis",
-   "field": "artery",
-   "status": "noSource",
-   "draft": [
-    "medial_plantar"
-   ],
-   "unparsed": null
-  },
-  {
-   "muscle": "Lateral head of flexor hallucis brevis",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "S1–S2"
-  },
-  {
-   "muscle": "Lateral head of triceps brachii",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C6–C8"
-  },
-  {
-   "muscle": "Lateral rectus muscle",
-   "field": "artery",
-   "status": "noSource",
-   "draft": [
-    "ophthalmic",
-    "lacrimal"
-   ],
-   "unparsed": null
   },
   {
    "muscle": "Lateral rectus muscle",
@@ -1362,11 +1128,19 @@
   {
    "muscle": "Levatores breves costarum",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "intercostal"
    ],
-   "unparsed": null
+   "uams": [
+    "intercostal",
+    "deep_cervical"
+   ],
+   "wikipedia": null,
+   "onlyUams": [
+    "deep_cervical"
+   ]
   },
   {
    "muscle": "Levatores longi costarum",
@@ -1387,11 +1161,19 @@
   {
    "muscle": "Levatores longi costarum",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "intercostal"
    ],
-   "unparsed": null
+   "uams": [
+    "intercostal",
+    "deep_cervical"
+   ],
+   "wikipedia": null,
+   "onlyUams": [
+    "deep_cervical"
+   ]
   },
   {
    "muscle": "Long head of biceps brachii",
@@ -1433,34 +1215,26 @@
    "unparsed": "long head biceps femoris"
   },
   {
-   "muscle": "Long head of biceps femoris",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "L5–S2"
-  },
-  {
-   "muscle": "Long head of triceps brachii",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C6–C8"
-  },
-  {
    "muscle": "Longissimus capitis muscle",
    "field": "artery",
-   "status": "conflict",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "intercostal",
     "lumbar"
    ],
+   "uams": [
+    "intercostal",
+    "subcostal",
+    "lumbar",
+    "deep_cervical"
+   ],
    "wikipedia": [
     "lateral_sacral"
    ],
-   "onlyDraft": [
-    "intercostal",
-    "lumbar"
-   ],
-   "onlyWikipedia": [
-    "lateral_sacral"
+   "onlyUams": [
+    "subcostal",
+    "deep_cervical"
    ]
   },
   {
@@ -1472,20 +1246,24 @@
   {
    "muscle": "Longissimus colli muscle",
    "field": "artery",
-   "status": "conflict",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "intercostal",
     "lumbar"
    ],
+   "uams": [
+    "intercostal",
+    "subcostal",
+    "lumbar",
+    "deep_cervical"
+   ],
    "wikipedia": [
     "lateral_sacral"
    ],
-   "onlyDraft": [
-    "intercostal",
-    "lumbar"
-   ],
-   "onlyWikipedia": [
-    "lateral_sacral"
+   "onlyUams": [
+    "subcostal",
+    "deep_cervical"
    ]
   },
   {
@@ -1497,20 +1275,24 @@
   {
    "muscle": "Longissimus thoracis muscle",
    "field": "artery",
-   "status": "conflict",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "intercostal",
     "lumbar"
    ],
+   "uams": [
+    "intercostal",
+    "subcostal",
+    "lumbar",
+    "deep_cervical"
+   ],
    "wikipedia": [
     "lateral_sacral"
    ],
-   "onlyDraft": [
-    "intercostal",
-    "lumbar"
-   ],
-   "onlyWikipedia": [
-    "lateral_sacral"
+   "onlyUams": [
+    "subcostal",
+    "deep_cervical"
    ]
   },
   {
@@ -1518,15 +1300,6 @@
    "field": "roots",
    "status": "noDraft",
    "wikipedia": null
-  },
-  {
-   "muscle": "Longus capitis muscle",
-   "field": "nerve",
-   "status": "noSource",
-   "draft": [
-    "ventral_rami"
-   ],
-   "unparsed": "c c"
   },
   {
    "muscle": "Longus capitis muscle",
@@ -1544,15 +1317,6 @@
    "onlyWikipedia": [
     "ascending_cervical"
    ]
-  },
-  {
-   "muscle": "Longus colli muscle",
-   "field": "nerve",
-   "status": "noSource",
-   "draft": [
-    "ventral_rami"
-   ],
-   "unparsed": "c c"
   },
   {
    "muscle": "Longus colli muscle",
@@ -1603,40 +1367,10 @@
    "draft": "C8–T1"
   },
   {
-   "muscle": "Medial head of flexor hallucis brevis",
-   "field": "artery",
-   "status": "noSource",
-   "draft": [
-    "medial_plantar"
-   ],
-   "unparsed": null
-  },
-  {
-   "muscle": "Medial head of flexor hallucis brevis",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "S1–S2"
-  },
-  {
-   "muscle": "Medial head of triceps brachii",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C6–C8"
-  },
-  {
    "muscle": "Medial pterygoid muscle",
    "field": "roots",
    "status": "noDraft",
    "wikipedia": null
-  },
-  {
-   "muscle": "Medial rectus muscle",
-   "field": "artery",
-   "status": "noSource",
-   "draft": [
-    "ophthalmic"
-   ],
-   "unparsed": null
   },
   {
    "muscle": "Medial rectus muscle",
@@ -1647,11 +1381,20 @@
   {
    "muscle": "Mentalis muscle",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "inferior_labial"
    ],
-   "unparsed": null
+   "uams": [
+    "inferior_labial",
+    "facial",
+    "mental"
+   ],
+   "wikipedia": null,
+   "onlyUams": [
+    "mental"
+   ]
   },
   {
    "muscle": "Mentalis muscle",
@@ -1668,12 +1411,23 @@
   {
    "muscle": "Multifidus colli muscle",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "intercostal",
     "lumbar"
    ],
-   "unparsed": null
+   "uams": [
+    "intercostal",
+    "subcostal",
+    "lumbar",
+    "deep_cervical"
+   ],
+   "wikipedia": null,
+   "onlyUams": [
+    "subcostal",
+    "deep_cervical"
+   ]
   },
   {
    "muscle": "Multifidus colli muscle",
@@ -1684,12 +1438,23 @@
   {
    "muscle": "Multifidus lumborum muscle",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "intercostal",
     "lumbar"
    ],
-   "unparsed": null
+   "uams": [
+    "intercostal",
+    "subcostal",
+    "lumbar",
+    "deep_cervical"
+   ],
+   "wikipedia": null,
+   "onlyUams": [
+    "subcostal",
+    "deep_cervical"
+   ]
   },
   {
    "muscle": "Multifidus lumborum muscle",
@@ -1700,12 +1465,23 @@
   {
    "muscle": "Multifidus thoracis muscle",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "intercostal",
     "lumbar"
    ],
-   "unparsed": null
+   "uams": [
+    "intercostal",
+    "subcostal",
+    "lumbar",
+    "deep_cervical"
+   ],
+   "wikipedia": null,
+   "onlyUams": [
+    "subcostal",
+    "deep_cervical"
+   ]
   },
   {
    "muscle": "Multifidus thoracis muscle",
@@ -1726,26 +1502,11 @@
    "wikipedia": null
   },
   {
-   "muscle": "Oblique head of adductor hallucis",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "S2–S3"
-  },
-  {
    "muscle": "Oblique head of adductor pollicis",
    "field": "roots",
    "status": "partial",
    "draft": "C8–T1",
    "wikipedia": "T1"
-  },
-  {
-   "muscle": "Oblique part of cricothyroid muscle",
-   "field": "artery",
-   "status": "noSource",
-   "draft": [
-    "superior_thyroid"
-   ],
-   "unparsed": null
   },
   {
    "muscle": "Oblique part of cricothyroid muscle",
@@ -1756,34 +1517,36 @@
   {
    "muscle": "Obliquus inferior capitis muscle",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "vertebral",
     "occipital"
    ],
-   "unparsed": null
-  },
-  {
-   "muscle": "Obliquus inferior capitis muscle",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C1"
+   "uams": [
+    "occipital"
+   ],
+   "wikipedia": null,
+   "onlyDraft": [
+    "vertebral"
+   ]
   },
   {
    "muscle": "Obliquus superior capitis muscle",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "vertebral",
     "occipital"
    ],
-   "unparsed": null
-  },
-  {
-   "muscle": "Obliquus superior capitis muscle",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C1"
+   "uams": [
+    "occipital"
+   ],
+   "wikipedia": null,
+   "onlyDraft": [
+    "vertebral"
+   ]
   },
   {
    "muscle": "Obturator externus",
@@ -1801,28 +1564,22 @@
    ]
   },
   {
-   "muscle": "Obturator externus",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "L3–L4"
-  },
-  {
    "muscle": "Obturator internus",
    "field": "artery",
-   "status": "conflict",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "internal_pudendal",
+    "obturator"
+   ],
+   "uams": [
     "obturator"
    ],
    "wikipedia": [
     "inferior_gluteal"
    ],
    "onlyDraft": [
-    "internal_pudendal",
-    "obturator"
-   ],
-   "onlyWikipedia": [
-    "inferior_gluteal"
+    "internal_pudendal"
    ]
   },
   {
@@ -1849,40 +1606,21 @@
   {
    "muscle": "Omohyoid muscle",
    "field": "artery",
-   "status": "conflict",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "superior_thyroid",
+    "transverse_cervical"
+   ],
+   "uams": [
     "transverse_cervical"
    ],
    "wikipedia": [
     "inferior_thyroid"
    ],
    "onlyDraft": [
-    "superior_thyroid",
-    "transverse_cervical"
-   ],
-   "onlyWikipedia": [
-    "inferior_thyroid"
-   ],
-   "unparsed": "ita"
-  },
-  {
-   "muscle": "Opponens pollicis muscle",
-   "field": "artery",
-   "status": "conflict",
-   "draft": [
-    "superficial_palmar_branch"
-   ],
-   "wikipedia": [
-    "superficial_palmar_arch"
-   ],
-   "onlyDraft": [
-    "superficial_palmar_branch"
-   ],
-   "onlyWikipedia": [
-    "superficial_palmar_arch"
-   ],
-   "unparsed": "arch"
+    "superior_thyroid"
+   ]
   },
   {
    "muscle": "Opponens pollicis muscle",
@@ -1942,18 +1680,6 @@
    "wikipedia": null
   },
   {
-   "muscle": "Palmar interossei muscles",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C8–T1"
-  },
-  {
-   "muscle": "Palmaris longus muscle",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C7–C8"
-  },
-  {
    "muscle": "Palpebral part of orbicularis oculi",
    "field": "artery",
    "status": "partial",
@@ -2009,12 +1735,6 @@
    ]
   },
   {
-   "muscle": "Pectineus muscle",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "L2–L3"
-  },
-  {
    "muscle": "Pectoralis minor muscle",
    "field": "artery",
    "status": "partial",
@@ -2062,30 +1782,6 @@
    "wikipedia": "L5–S2"
   },
   {
-   "muscle": "Plantar interossei muscles",
-   "field": "artery",
-   "status": "conflict",
-   "draft": [
-    "plantar_metatarsal"
-   ],
-   "wikipedia": [
-    "dorsal_metatarsal"
-   ],
-   "onlyDraft": [
-    "plantar_metatarsal"
-   ],
-   "onlyWikipedia": [
-    "dorsal_metatarsal"
-   ],
-   "unparsed": "plantar a"
-  },
-  {
-   "muscle": "Plantar interossei muscles",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "S2–S3"
-  },
-  {
    "muscle": "Plantaris muscle",
    "field": "nerve",
    "status": "partial",
@@ -2106,19 +1802,6 @@
    "field": "roots",
    "status": "noDraft",
    "wikipedia": null
-  },
-  {
-   "muscle": "Platysma",
-   "field": "action",
-   "status": "conflict",
-   "expected": "depress|tens",
-   "wikipedia": "Draws the corners of the mouth inferiorly and widens it (as in expressions of sadness and fright). Also draws the skin of the neck superiorly (Anatomical terms of location#Superior and inferior) when "
-  },
-  {
-   "muscle": "Popliteus muscle",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "L4–S1"
   },
   {
    "muscle": "Posterior belly of digastric muscle",
@@ -2168,15 +1851,6 @@
   },
   {
    "muscle": "Posterior crico-arytenoid muscle",
-   "field": "artery",
-   "status": "noSource",
-   "draft": [
-    "inferior_thyroid"
-   ],
-   "unparsed": null
-  },
-  {
-   "muscle": "Posterior crico-arytenoid muscle",
    "field": "roots",
    "status": "noDraft",
    "wikipedia": null
@@ -2201,12 +1875,6 @@
    "field": "roots",
    "status": "noDraft",
    "wikipedia": null
-  },
-  {
-   "muscle": "Pronator quadratus",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C7–C8"
   },
   {
    "muscle": "Pubo-analis muscle",
@@ -2255,20 +1923,21 @@
   {
    "muscle": "Pyramidalis muscle",
    "field": "artery",
-   "status": "conflict",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "inferior_epigastric"
+   ],
+   "uams": [
+    "inferior_epigastric",
+    "subcostal"
    ],
    "wikipedia": [
     "superior_epigastric"
    ],
-   "onlyDraft": [
-    "inferior_epigastric"
-   ],
-   "onlyWikipedia": [
-    "superior_epigastric"
-   ],
-   "unparsed": "inferior"
+   "onlyUams": [
+    "subcostal"
+   ]
   },
   {
    "muscle": "Quadratus lumborum muscle",
@@ -2307,12 +1976,19 @@
   {
    "muscle": "Quadratus plantae muscle",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "lateral_plantar",
     "medial_plantar"
    ],
-   "unparsed": null
+   "uams": [
+    "lateral_plantar"
+   ],
+   "wikipedia": null,
+   "onlyDraft": [
+    "medial_plantar"
+   ]
   },
   {
    "muscle": "Quadratus plantae muscle",
@@ -2337,12 +2013,6 @@
    ]
   },
   {
-   "muscle": "Radial head of flexor digitorum superficialis",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C8–T1"
-  },
-  {
    "muscle": "Rectus abdominis muscle",
    "field": "artery",
    "status": "partial",
@@ -2358,16 +2028,6 @@
    ]
   },
   {
-   "muscle": "Rectus anterior capitis muscle",
-   "field": "artery",
-   "status": "noSource",
-   "draft": [
-    "vertebral",
-    "ascending_pharyngeal"
-   ],
-   "unparsed": "ascending"
-  },
-  {
    "muscle": "Rectus femoris muscle",
    "field": "roots",
    "status": "noSource",
@@ -2375,22 +2035,22 @@
   },
   {
    "muscle": "Rectus lateralis capitis muscle",
-   "field": "nerve",
-   "status": "noSource",
-   "draft": [
-    "ventral_rami"
-   ],
-   "unparsed": "c c"
-  },
-  {
-   "muscle": "Rectus lateralis capitis muscle",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "kenhub",
    "draft": [
     "vertebral",
     "occipital"
    ],
-   "unparsed": null
+   "kenhub": [
+    "occipital",
+    "ascending_pharyngeal",
+    "vertebral"
+   ],
+   "wikipedia": null,
+   "onlyKenhub": [
+    "ascending_pharyngeal"
+   ]
   },
   {
    "muscle": "Rectus posterior major capitis muscle",
@@ -2410,18 +2070,19 @@
   {
    "muscle": "Rectus posterior minor capitis muscle",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "vertebral",
     "occipital"
    ],
-   "unparsed": null
-  },
-  {
-   "muscle": "Rectus posterior minor capitis muscle",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C1"
+   "uams": [
+    "occipital"
+   ],
+   "wikipedia": null,
+   "onlyDraft": [
+    "vertebral"
+   ]
   },
   {
    "muscle": "Rhomboid major muscle",
@@ -2439,22 +2100,29 @@
   {
    "muscle": "Rotatores",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "intercostal"
    ],
-   "unparsed": null
+   "uams": [
+    "intercostal",
+    "subcostal",
+    "lumbar",
+    "deep_cervical"
+   ],
+   "wikipedia": null,
+   "onlyUams": [
+    "subcostal",
+    "lumbar",
+    "deep_cervical"
+   ]
   },
   {
    "muscle": "Rotatores",
    "field": "roots",
    "status": "noDraft",
    "wikipedia": null
-  },
-  {
-   "muscle": "Rotatores",
-   "field": "action",
-   "status": "noSource"
   },
   {
    "muscle": "Sartorius muscle",
@@ -2495,18 +2163,31 @@
   {
    "muscle": "Scapular spinal part of deltoid muscle",
    "field": "roots",
-   "status": "noSource",
-   "draft": "C5–C6"
+   "status": "partial",
+   "by": "uams",
+   "draft": "C5–C6",
+   "uams": "C5"
   },
   {
    "muscle": "Semispinalis colli muscle",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "intercostal",
     "deep_cervical"
    ],
-   "unparsed": null
+   "uams": [
+    "intercostal",
+    "subcostal",
+    "lumbar",
+    "deep_cervical"
+   ],
+   "wikipedia": null,
+   "onlyUams": [
+    "subcostal",
+    "lumbar"
+   ]
   },
   {
    "muscle": "Semispinalis colli muscle",
@@ -2515,30 +2196,31 @@
    "wikipedia": null
   },
   {
-   "muscle": "Semispinalis colli muscle",
-   "field": "action",
-   "status": "noSource"
-  },
-  {
    "muscle": "Semispinalis thoracis muscle",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "intercostal",
     "deep_cervical"
    ],
-   "unparsed": null
+   "uams": [
+    "intercostal",
+    "subcostal",
+    "lumbar",
+    "deep_cervical"
+   ],
+   "wikipedia": null,
+   "onlyUams": [
+    "subcostal",
+    "lumbar"
+   ]
   },
   {
    "muscle": "Semispinalis thoracis muscle",
    "field": "roots",
    "status": "noDraft",
    "wikipedia": null
-  },
-  {
-   "muscle": "Semispinalis thoracis muscle",
-   "field": "action",
-   "status": "noSource"
   },
   {
    "muscle": "Serratus posterior inferior muscle",
@@ -2559,8 +2241,10 @@
   {
    "muscle": "Serratus posterior superior muscle",
    "field": "roots",
-   "status": "noSource",
-   "draft": "T2–T5"
+   "status": "partial",
+   "by": "uams",
+   "draft": "T2–T5",
+   "uams": "T1–T4"
   },
   {
    "muscle": "Short head of biceps brachii",
@@ -2602,12 +2286,6 @@
    "unparsed": "long head biceps femoris"
   },
   {
-   "muscle": "Short head of biceps femoris",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "L5–S2"
-  },
-  {
    "muscle": "Soleus muscle",
    "field": "roots",
    "status": "partial",
@@ -2617,18 +2295,24 @@
   {
    "muscle": "Spinalis capitis muscle",
    "field": "artery",
-   "status": "conflict",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "intercostal"
+   ],
+   "uams": [
+    "intercostal",
+    "subcostal",
+    "lumbar",
+    "deep_cervical"
    ],
    "wikipedia": [
     "lateral_sacral"
    ],
-   "onlyDraft": [
-    "intercostal"
-   ],
-   "onlyWikipedia": [
-    "lateral_sacral"
+   "onlyUams": [
+    "subcostal",
+    "lumbar",
+    "deep_cervical"
    ]
   },
   {
@@ -2640,18 +2324,24 @@
   {
    "muscle": "Spinalis colli muscle",
    "field": "artery",
-   "status": "conflict",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "intercostal"
+   ],
+   "uams": [
+    "intercostal",
+    "subcostal",
+    "lumbar",
+    "deep_cervical"
    ],
    "wikipedia": [
     "lateral_sacral"
    ],
-   "onlyDraft": [
-    "intercostal"
-   ],
-   "onlyWikipedia": [
-    "lateral_sacral"
+   "onlyUams": [
+    "subcostal",
+    "lumbar",
+    "deep_cervical"
    ]
   },
   {
@@ -2663,18 +2353,24 @@
   {
    "muscle": "Spinalis thoracis muscle",
    "field": "artery",
-   "status": "conflict",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "intercostal"
+   ],
+   "uams": [
+    "intercostal",
+    "subcostal",
+    "lumbar",
+    "deep_cervical"
    ],
    "wikipedia": [
     "lateral_sacral"
    ],
-   "onlyDraft": [
-    "intercostal"
-   ],
-   "onlyWikipedia": [
-    "lateral_sacral"
+   "onlyUams": [
+    "subcostal",
+    "lumbar",
+    "deep_cervical"
    ]
   },
   {
@@ -2682,15 +2378,6 @@
    "field": "roots",
    "status": "noDraft",
    "wikipedia": null
-  },
-  {
-   "muscle": "Splenius capitis muscle",
-   "field": "artery",
-   "status": "noSource",
-   "draft": [
-    "occipital"
-   ],
-   "unparsed": "aorta"
   },
   {
    "muscle": "Splenius colli muscle",
@@ -2715,21 +2402,6 @@
    "unparsed": "trunk"
   },
   {
-   "muscle": "Sternothyroid muscle",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C1–C3"
-  },
-  {
-   "muscle": "Straight part of cricothyroid muscle",
-   "field": "artery",
-   "status": "noSource",
-   "draft": [
-    "superior_thyroid"
-   ],
-   "unparsed": null
-  },
-  {
    "muscle": "Straight part of cricothyroid muscle",
    "field": "roots",
    "status": "noDraft",
@@ -2738,27 +2410,27 @@
   {
    "muscle": "Stylohyoid muscle",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "kenhub",
    "draft": [
     "facial",
     "occipital"
    ],
-   "unparsed": null
+   "kenhub": [
+    "facial",
+    "posterior_auricular",
+    "occipital"
+   ],
+   "wikipedia": null,
+   "onlyKenhub": [
+    "posterior_auricular"
+   ]
   },
   {
    "muscle": "Stylohyoid muscle",
    "field": "roots",
    "status": "noDraft",
    "wikipedia": null
-  },
-  {
-   "muscle": "Stylopharyngeus muscle",
-   "field": "artery",
-   "status": "noSource",
-   "draft": [
-    "ascending_pharyngeal"
-   ],
-   "unparsed": null
   },
   {
    "muscle": "Stylopharyngeus muscle",
@@ -2769,8 +2441,10 @@
   {
    "muscle": "Subclavius muscle",
    "field": "roots",
-   "status": "noSource",
-   "draft": "C5–C6"
+   "status": "partial",
+   "by": "uams",
+   "draft": "C5–C6",
+   "uams": "C5"
   },
   {
    "muscle": "Superficial head of flexor pollicis brevis",
@@ -2790,33 +2464,9 @@
   },
   {
    "muscle": "Superficial head of flexor pollicis brevis",
-   "field": "artery",
-   "status": "conflict",
-   "draft": [
-    "superficial_palmar_branch"
-   ],
-   "wikipedia": [
-    "superficial_palmar_arch"
-   ],
-   "onlyDraft": [
-    "superficial_palmar_branch"
-   ],
-   "onlyWikipedia": [
-    "superficial_palmar_arch"
-   ],
-   "unparsed": "arch"
-  },
-  {
-   "muscle": "Superficial head of flexor pollicis brevis",
    "field": "roots",
    "status": "noSource",
    "draft": "C8–T1"
-  },
-  {
-   "muscle": "Superficial head of pronator teres",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C6–C7"
   },
   {
    "muscle": "Superficial part of masseter",
@@ -2826,33 +2476,28 @@
   },
   {
    "muscle": "Superior gemellus muscle",
-   "field": "nerve",
-   "status": "noSource",
-   "draft": [
-    "n_obturator_internus"
-   ],
-   "unparsed": null
-  },
-  {
-   "muscle": "Superior gemellus muscle",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "inferior_gluteal",
     "internal_pudendal"
    ],
-   "unparsed": null
+   "uams": [
+    "inferior_gluteal"
+   ],
+   "wikipedia": null,
+   "onlyDraft": [
+    "internal_pudendal"
+   ]
   },
   {
    "muscle": "Superior gemellus muscle",
    "field": "roots",
-   "status": "noSource",
-   "draft": "L5–S2"
-  },
-  {
-   "muscle": "Superior gemellus muscle",
-   "field": "action",
-   "status": "noSource"
+   "status": "partial",
+   "by": "kenhub",
+   "draft": "L5–S2",
+   "kenhub": "L5–S1"
   },
   {
    "muscle": "Superior head of lateral pterygoid muscle",
@@ -2890,15 +2535,6 @@
   },
   {
    "muscle": "Superior rectus muscle",
-   "field": "artery",
-   "status": "noSource",
-   "draft": [
-    "ophthalmic"
-   ],
-   "unparsed": null
-  },
-  {
-   "muscle": "Superior rectus muscle",
    "field": "roots",
    "status": "noDraft",
    "wikipedia": null
@@ -2927,8 +2563,10 @@
   {
    "muscle": "Supraspinatus muscle",
    "field": "roots",
-   "status": "noSource",
-   "draft": "C5–C6"
+   "status": "partial",
+   "by": "uams",
+   "draft": "C5–C6",
+   "uams": "C5"
   },
   {
    "muscle": "Temporalis muscle",
@@ -2966,25 +2604,25 @@
   {
    "muscle": "Thyro-epiglottic part of thyro-arytenoid muscle",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "superior_thyroid",
     "inferior_thyroid"
    ],
-   "unparsed": null
+   "uams": [
+    "superior_thyroid"
+   ],
+   "wikipedia": null,
+   "onlyDraft": [
+    "inferior_thyroid"
+   ]
   },
   {
    "muscle": "Thyro-epiglottic part of thyro-arytenoid muscle",
    "field": "roots",
    "status": "noDraft",
    "wikipedia": null
-  },
-  {
-   "muscle": "Thyro-epiglottic part of thyro-arytenoid muscle",
-   "field": "action",
-   "status": "conflict",
-   "expected": "relax|shorten|slacken",
-   "wikipedia": "Helps to reduce tension on the vocal folds during speech (Manner of articulation) to decrease pitch"
   },
   {
    "muscle": "Thyrohyoid muscle",
@@ -3010,12 +2648,6 @@
    "wikipedia": "L5"
   },
   {
-   "muscle": "Tibialis posterior muscle",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "L4–L5"
-  },
-  {
    "muscle": "Transverse arytenoid muscle",
    "field": "artery",
    "status": "partial",
@@ -3035,12 +2667,6 @@
    "field": "roots",
    "status": "noDraft",
    "wikipedia": null
-  },
-  {
-   "muscle": "Transverse head of adductor hallucis",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "S2–S3"
   },
   {
    "muscle": "Transverse head of adductor pollicis",
@@ -3068,22 +2694,30 @@
   {
    "muscle": "Transversus abdominis muscle",
    "field": "artery",
-   "status": "conflict",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "inferior_epigastric",
     "circumflex_iliac",
     "intercostal"
    ],
+   "uams": [
+    "circumflex_iliac",
+    "superior_epigastric",
+    "inferior_epigastric",
+    "musculophrenic",
+    "intercostal",
+    "subcostal",
+    "lumbar"
+   ],
    "wikipedia": [
     "subcostal"
    ],
-   "onlyDraft": [
-    "inferior_epigastric",
-    "circumflex_iliac",
-    "intercostal"
-   ],
-   "onlyWikipedia": [
-    "subcostal"
+   "onlyUams": [
+    "superior_epigastric",
+    "musculophrenic",
+    "subcostal",
+    "lumbar"
    ]
   },
   {
@@ -3095,32 +2729,9 @@
   },
   {
    "muscle": "Transversus thoracis muscle",
-   "field": "artery",
-   "status": "conflict",
-   "draft": [
-    "internal_thoracic"
-   ],
-   "wikipedia": [
-    "intercostal"
-   ],
-   "onlyDraft": [
-    "internal_thoracic"
-   ],
-   "onlyWikipedia": [
-    "intercostal"
-   ]
-  },
-  {
-   "muscle": "Transversus thoracis muscle",
    "field": "roots",
    "status": "noSource",
    "draft": "T2–T6"
-  },
-  {
-   "muscle": "Ulnar head of extensor carpi ulnaris",
-   "field": "roots",
-   "status": "noSource",
-   "draft": "C7–C8"
   },
   {
    "muscle": "Vastus intermedius muscle",
@@ -3159,11 +2770,23 @@
   {
    "muscle": "Ventral parts of lateral intertransversarii lumborum muscles",
    "field": "artery",
-   "status": "noSource",
+   "status": "partial",
+   "by": "uams",
    "draft": [
     "lumbar"
    ],
-   "unparsed": null
+   "uams": [
+    "intercostal",
+    "subcostal",
+    "lumbar",
+    "deep_cervical"
+   ],
+   "wikipedia": null,
+   "onlyUams": [
+    "intercostal",
+    "subcostal",
+    "deep_cervical"
+   ]
   },
   {
    "muscle": "Ventral parts of lateral intertransversarii lumborum muscles",
@@ -3189,7 +2812,8 @@
    "source": {
     "page": "Pectoralis major",
     "revid": 1377970174,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:pectoralis major"
    },
    "nerve": {
     "status": "agree",
@@ -3229,7 +2853,9 @@
    "source": {
     "page": "Adductor magnus muscle",
     "revid": 1380879907,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:adductor magnus",
+    "kenhub": "adductor-magnus"
    },
    "nerve": {
     "status": "agree",
@@ -3267,35 +2893,56 @@
    "source": {
     "page": null,
     "revid": null,
-    "infobox": false
+    "infobox": false,
+    "kenhub": "opponens-digiti-minimi-muscle-of-foot"
    },
    "nerve": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "kenhub",
     "draft": [
      "lateral_plantar"
     ],
-    "unparsed": null
+    "kenhub": [
+     "lateral_plantar"
+    ],
+    "wikipedia": null
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "kenhub",
     "draft": [
      "lateral_plantar"
     ],
-    "unparsed": null
+    "kenhub": [
+     "arcuate",
+     "dorsalis_pedis",
+     "lateral_plantar"
+    ],
+    "wikipedia": null,
+    "onlyKenhub": [
+     "arcuate",
+     "dorsalis_pedis"
+    ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "S2–S3"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "S2–S3",
+    "kenhub": "S2–S3"
    },
    "action": {
-    "status": "noSource"
+    "status": "agree",
+    "by": "kenhub",
+    "wikipedia": null,
+    "kenhub": "Metatarsophalangeal joint 5: toe abduction, toe flexion"
    }
   },
   "Abductor digiti minimi of foot": {
    "source": {
     "page": "Abductor digiti minimi muscle of foot",
     "revid": 1352526324,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:abductor digiti minimi (foot)"
    },
    "nerve": {
     "status": "agree",
@@ -3327,7 +2974,9 @@
    "source": {
     "page": "Abductor digiti minimi muscle of the hand",
     "revid": 1380481653,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:abductor digiti minimi (hand)",
+    "kenhub": "abductor-digiti-minimi-muscle-of-hand"
    },
    "nerve": {
     "status": "agree",
@@ -3348,8 +2997,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C8–T1"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C8–T1",
+    "kenhub": "C8–T1"
    },
    "action": {
     "status": "agree"
@@ -3359,7 +3010,9 @@
    "source": {
     "page": "Abductor hallucis muscle",
     "revid": 1380881716,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:abductor hallucis",
+    "kenhub": "abductor-hallucis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -3380,8 +3033,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "S1–S2"
+    "status": "partial",
+    "by": "kenhub",
+    "draft": "S1–S2",
+    "kenhub": "S1–S3"
    },
    "action": {
     "status": "agree"
@@ -3391,7 +3046,9 @@
    "source": {
     "page": "Abductor pollicis brevis muscle",
     "revid": 1360606364,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:abductor pollicis brevis",
+    "kenhub": "abductor-pollicis-brevis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -3403,20 +3060,18 @@
     ]
    },
    "artery": {
-    "status": "conflict",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "superficial_palmar_branch"
     ],
+    "uams": [
+     "superficial_palmar_branch",
+     "radial"
+    ],
     "wikipedia": [
      "superficial_palmar_arch"
-    ],
-    "onlyDraft": [
-     "superficial_palmar_branch"
-    ],
-    "onlyWikipedia": [
-     "superficial_palmar_arch"
-    ],
-    "unparsed": "arch"
+    ]
    },
    "roots": {
     "status": "noSource",
@@ -3430,7 +3085,8 @@
    "source": {
     "page": "Abductor pollicis longus muscle",
     "revid": 1360606370,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:abductor pollicis longus"
    },
    "nerve": {
     "status": "agree",
@@ -3463,7 +3119,8 @@
    "source": {
     "page": "Deltoid muscle",
     "revid": 1380880370,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:deltoid"
    },
    "nerve": {
     "status": "agree",
@@ -3486,8 +3143,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C5–C6"
+    "status": "partial",
+    "by": "uams",
+    "draft": "C5–C6",
+    "uams": "C5"
    },
    "action": {
     "status": "agree"
@@ -3497,7 +3156,9 @@
    "source": {
     "page": "Adductor brevis muscle",
     "revid": 1355350325,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:adductor brevis",
+    "kenhub": "adductor-brevis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -3522,8 +3183,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "L2–L4"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "L2–L4",
+    "kenhub": "L2–L4"
    },
    "action": {
     "status": "agree"
@@ -3533,7 +3196,9 @@
    "source": {
     "page": "Adductor longus muscle",
     "revid": 1366565862,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:adductor longus",
+    "kenhub": "adductor-longus-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -3558,8 +3223,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "L2–L4"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "L2–L4",
+    "kenhub": "L2–L4"
    },
    "action": {
     "status": "agree"
@@ -3569,7 +3236,9 @@
    "source": {
     "page": "Adductor magnus muscle",
     "revid": 1380879907,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:adductor magnus",
+    "kenhub": "adductor-magnus"
    },
    "nerve": {
     "status": "agree",
@@ -3607,7 +3276,8 @@
    "source": {
     "page": "Anconeus muscle",
     "revid": 1345459781,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:anconeus"
    },
    "nerve": {
     "status": "agree",
@@ -3642,7 +3312,8 @@
    "source": {
     "page": "Digastric muscle",
     "revid": 1380879218,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:digastric"
    },
    "nerve": {
     "status": "partial",
@@ -3723,7 +3394,8 @@
    "source": {
     "page": "Trapezius",
     "revid": 1377970464,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:trapezius"
    },
    "nerve": {
     "status": "agree",
@@ -3763,7 +3435,8 @@
    "source": {
     "page": "Brachialis muscle",
     "revid": 1369774255,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:brachialis"
    },
    "nerve": {
     "status": "agree",
@@ -3800,7 +3473,8 @@
    "source": {
     "page": "Brachioradialis",
     "revid": 1378846149,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:brachioradialis"
    },
    "nerve": {
     "status": "agree",
@@ -3833,7 +3507,8 @@
    "source": {
     "page": "Bucinator muscle",
     "revid": 1354805370,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:buccinator"
    },
    "nerve": {
     "status": "agree",
@@ -3869,7 +3544,8 @@
    "source": {
     "page": "Pectoralis major",
     "revid": 1377970174,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:pectoralis major"
    },
    "nerve": {
     "status": "agree",
@@ -3909,7 +3585,8 @@
    "source": {
     "page": "Deltoid muscle",
     "revid": 1380880370,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:deltoid"
    },
    "nerve": {
     "status": "agree",
@@ -3932,8 +3609,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C5–C6"
+    "status": "partial",
+    "by": "uams",
+    "draft": "C5–C6",
+    "uams": "C5"
    },
    "action": {
     "status": "agree"
@@ -3943,7 +3622,8 @@
    "source": {
     "page": "Coccygeus muscle",
     "revid": 1380879098,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-pelvis-and-perineum:coccygeus"
    },
    "nerve": {
     "status": "agree",
@@ -3956,11 +3636,15 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "inferior_gluteal"
     ],
-    "unparsed": null
+    "uams": [
+     "inferior_gluteal"
+    ],
+    "wikipedia": null
    },
    "roots": {
     "status": "partial",
@@ -3975,7 +3659,8 @@
    "source": {
     "page": "Coracobrachialis muscle",
     "revid": 1378219774,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:coracobrachialis"
    },
    "nerve": {
     "status": "agree",
@@ -4008,7 +3693,8 @@
    "source": {
     "page": "Corrugator supercilii muscle",
     "revid": 1292342825,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:corrugator"
    },
    "nerve": {
     "status": "agree",
@@ -4041,7 +3727,9 @@
    "source": {
     "page": "Flexor pollicis brevis muscle",
     "revid": 1360659630,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:flexor pollicis brevis",
+    "kenhub": "flexor-pollicis-brevis-muscle"
    },
    "nerve": {
     "status": "partial",
@@ -4058,20 +3746,18 @@
     "unparsed": "recurrent deep medial head"
    },
    "artery": {
-    "status": "conflict",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "superficial_palmar_branch"
     ],
+    "uams": [
+     "superficial_palmar_branch",
+     "radial"
+    ],
     "wikipedia": [
      "superficial_palmar_arch"
-    ],
-    "onlyDraft": [
-     "superficial_palmar_branch"
-    ],
-    "onlyWikipedia": [
-     "superficial_palmar_arch"
-    ],
-    "unparsed": "arch"
+    ]
    },
    "roots": {
     "status": "noSource",
@@ -4085,7 +3771,9 @@
    "source": {
     "page": "Pronator teres muscle",
     "revid": 1345264622,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:pronator teres",
+    "kenhub": "pronator-teres-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -4108,8 +3796,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C6–C7"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C6–C7",
+    "kenhub": "C6–C7"
    },
    "action": {
     "status": "agree"
@@ -4119,7 +3809,8 @@
    "source": {
     "page": "Masseter muscle",
     "revid": 1314488567,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:masseter"
    },
    "nerve": {
     "status": "agree",
@@ -4151,7 +3842,8 @@
    "source": {
     "page": "Depressor anguli oris muscle",
     "revid": 1291865209,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:depressor anguli oris"
    },
    "nerve": {
     "status": "agree",
@@ -4183,7 +3875,8 @@
    "source": {
     "page": "Depressor labii inferioris muscle",
     "revid": 1353353797,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:depressor labii inferioris"
    },
    "nerve": {
     "status": "agree",
@@ -4195,11 +3888,20 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "inferior_labial"
     ],
-    "unparsed": null
+    "uams": [
+     "inferior_labial",
+     "facial",
+     "mental"
+    ],
+    "wikipedia": null,
+    "onlyUams": [
+     "mental"
+    ]
    },
    "roots": {
     "status": "noDraft",
@@ -4213,7 +3915,8 @@
    "source": {
     "page": "Depressor septi nasi muscle",
     "revid": 1292092954,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:depressor septi"
    },
    "nerve": {
     "status": "agree",
@@ -4225,11 +3928,16 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "superior_labial"
     ],
-    "unparsed": null
+    "uams": [
+     "superior_labial",
+     "facial"
+    ],
+    "wikipedia": null
    },
    "roots": {
     "status": "noDraft",
@@ -4243,7 +3951,8 @@
    "source": {
     "page": "Trapezius",
     "revid": 1377970464,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:trapezius"
    },
    "nerve": {
     "status": "agree",
@@ -4283,7 +3992,9 @@
    "source": {
     "page": "Thoracic diaphragm",
     "revid": 1379575665,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-thorax:diaphragm",
+    "kenhub": "diaphragm"
    },
    "nerve": {
     "status": "partial",
@@ -4317,8 +4028,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C3–C5"
+    "status": "agree",
+    "by": "uams",
+    "draft": "C3–C5",
+    "uams": "C3–C5"
    },
    "action": {
     "status": "agree"
@@ -4395,7 +4108,8 @@
    "source": {
     "page": "Intertransversarii",
     "revid": 1253177864,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:intertransversarii"
    },
    "nerve": {
     "status": "partial",
@@ -4412,11 +4126,23 @@
     "unparsed": "spinal"
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "lumbar"
     ],
-    "unparsed": null
+    "uams": [
+     "intercostal",
+     "subcostal",
+     "lumbar",
+     "deep_cervical"
+    ],
+    "wikipedia": null,
+    "onlyUams": [
+     "intercostal",
+     "subcostal",
+     "deep_cervical"
+    ]
    },
    "roots": {
     "status": "noDraft",
@@ -4430,7 +4156,9 @@
    "source": {
     "page": "Extensor carpi radialis brevis muscle",
     "revid": 1355535817,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:extensor carpi radialis brevis",
+    "kenhub": "extensor-carpi-radialis-brevis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -4462,7 +4190,9 @@
    "source": {
     "page": "Extensor carpi radialis longus muscle",
     "revid": 1360657171,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:extensor carpi radialis longus",
+    "kenhub": "extensor-carpi-radialis-longus-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -4484,8 +4214,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C6–C7"
+    "status": "partial",
+    "by": "kenhub",
+    "draft": "C6–C7",
+    "kenhub": "C5–C8"
    },
    "action": {
     "status": "agree"
@@ -4495,7 +4227,8 @@
    "source": {
     "page": "Extensor digiti minimi muscle",
     "revid": 1365975936,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:extensor digiti minimi"
    },
    "nerve": {
     "status": "agree",
@@ -4528,7 +4261,9 @@
    "source": {
     "page": "Extensor digitorum muscle",
     "revid": 1360657173,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:extensor digitorum",
+    "kenhub": "extensor-digitorum-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -4549,8 +4284,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C7–C8"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C7–C8",
+    "kenhub": "C7–C8"
    },
    "action": {
     "status": "agree"
@@ -4560,7 +4297,9 @@
    "source": {
     "page": "Extensor digitorum brevis muscle",
     "revid": 1380881768,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:extensor digitorum brevis",
+    "kenhub": "extensor-digitorum-brevis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -4581,8 +4320,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "L5–S1"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "L5–S1",
+    "kenhub": "L5–S1"
    },
    "action": {
     "status": "agree"
@@ -4592,7 +4333,9 @@
    "source": {
     "page": "Extensor digitorum longus muscle",
     "revid": 1380884194,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:extensor digitorum longus",
+    "kenhub": "extensor-digitorum-longus-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -4613,8 +4356,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "L5–S1"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "L5–S1",
+    "kenhub": "L5–S1"
    },
    "action": {
     "status": "agree"
@@ -4624,7 +4369,9 @@
    "source": {
     "page": "Extensor hallucis brevis muscle",
     "revid": 1374105534,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:extensor hallucis brevis",
+    "kenhub": "extensor-hallucis-brevis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -4645,8 +4392,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "L5–S1"
+    "status": "partial",
+    "by": "kenhub",
+    "draft": "L5–S1",
+    "kenhub": "S1–S2"
    },
    "action": {
     "status": "agree"
@@ -4656,7 +4405,8 @@
    "source": {
     "page": "Extensor hallucis longus muscle",
     "revid": 1380879008,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:extensor hallucis longus"
    },
    "nerve": {
     "status": "agree",
@@ -4689,7 +4439,8 @@
    "source": {
     "page": "Extensor indicis muscle",
     "revid": 1380884676,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:extensor indicis"
    },
    "nerve": {
     "status": "agree",
@@ -4721,7 +4472,9 @@
    "source": {
     "page": "Extensor pollicis brevis muscle",
     "revid": 1352367762,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:extensor pollicis brevis",
+    "kenhub": "extensor-pollicis-brevis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -4742,8 +4495,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C7–C8"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C7–C8",
+    "kenhub": "C7–C8"
    },
    "action": {
     "status": "agree"
@@ -4753,7 +4508,9 @@
    "source": {
     "page": "Extensor pollicis longus muscle",
     "revid": 1380252781,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:extensor pollicis longus",
+    "kenhub": "extensor-pollicis-longus-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -4775,8 +4532,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C7–C8"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C7–C8",
+    "kenhub": "C7–C8"
    },
    "action": {
     "status": "agree"
@@ -4786,7 +4545,8 @@
    "source": {
     "page": "Abdominal external oblique muscle",
     "revid": 1360606362,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-abdominal-region:external abdominal oblique"
    },
    "nerve": {
     "status": "agree",
@@ -4800,13 +4560,29 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "inferior_epigastric",
      "circumflex_iliac",
      "intercostal"
     ],
-    "unparsed": null
+    "uams": [
+     "circumflex_iliac",
+     "superior_epigastric",
+     "inferior_epigastric",
+     "musculophrenic",
+     "intercostal",
+     "subcostal",
+     "lumbar"
+    ],
+    "wikipedia": null,
+    "onlyUams": [
+     "superior_epigastric",
+     "musculophrenic",
+     "subcostal",
+     "lumbar"
+    ]
    },
    "roots": {
     "status": "agree",
@@ -4821,7 +4597,9 @@
    "source": {
     "page": "External anal sphincter",
     "revid": 1380886400,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-pelvis-and-perineum:anal sphincter, external",
+    "kenhub": "external-anal-sphincter"
    },
    "nerve": {
     "status": "agree",
@@ -4834,15 +4612,21 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "inferior_rectal"
     ],
-    "unparsed": null
+    "uams": [
+     "inferior_rectal"
+    ],
+    "wikipedia": null
    },
    "roots": {
-    "status": "noSource",
-    "draft": "S2–S4"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "S2–S4",
+    "kenhub": "S2–S4"
    },
    "action": {
     "status": "agree"
@@ -4852,7 +4636,9 @@
    "source": {
     "page": "External intercostal muscles",
     "revid": 1318027493,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-thorax:external intercostal",
+    "kenhub": "external-intercostal-muscles"
    },
    "nerve": {
     "status": "agree",
@@ -4873,8 +4659,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "T1–T11"
+    "status": "agree",
+    "by": "uams",
+    "draft": "T1–T11",
+    "uams": "T1–T11"
    },
    "action": {
     "status": "agree"
@@ -4884,7 +4672,8 @@
    "source": {
     "page": "Thyroarytenoid muscle",
     "revid": 1380887097,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:thyroarytenoid"
    },
    "nerve": {
     "status": "agree",
@@ -4897,28 +4686,37 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "superior_thyroid",
      "inferior_thyroid"
     ],
-    "unparsed": null
+    "uams": [
+     "superior_thyroid"
+    ],
+    "wikipedia": null,
+    "onlyDraft": [
+     "inferior_thyroid"
+    ]
    },
    "roots": {
     "status": "noDraft",
     "wikipedia": null
    },
    "action": {
-    "status": "conflict",
-    "expected": "relax|shorten|slacken",
-    "wikipedia": "Helps to reduce tension on the vocal folds during speech (Manner of articulation) to decrease pitch"
+    "status": "agree",
+    "by": "uams",
+    "wikipedia": "Helps to reduce tension on the vocal folds during speech (Manner of articulation) to decrease pitch",
+    "uams": "draws the arytenoid cartilage forward, relaxing and adducting the vocal folds"
    }
   },
   "Fibularis brevis muscle": {
    "source": {
     "page": "Fibularis brevis",
     "revid": 1380881166,
-    "infobox": true
+    "infobox": true,
+    "kenhub": "fibularis-brevis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -4939,8 +4737,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "L5–S1"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "L5–S1",
+    "kenhub": "L5–S1"
    },
    "action": {
     "status": "agree"
@@ -4986,7 +4786,8 @@
    "source": {
     "page": "Fibularis tertius",
     "revid": 1380884628,
-    "infobox": true
+    "infobox": true,
+    "kenhub": "fibularis-tertius-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -5007,8 +4808,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "L5–S1"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "L5–S1",
+    "kenhub": "L5–S1"
    },
    "action": {
     "status": "agree"
@@ -5018,7 +4821,9 @@
    "source": {
     "page": "Flexor carpi radialis muscle",
     "revid": 1344437114,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:flexor carpi radialis",
+    "kenhub": "flexor-carpi-radialis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -5043,8 +4848,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C6–C7"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C6–C7",
+    "kenhub": "C6–C7"
    },
    "action": {
     "status": "agree"
@@ -5054,7 +4861,8 @@
    "source": {
     "page": "Flexor digiti minimi brevis muscle of foot",
     "revid": 1352578921,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:flexor digiti minimi brevis (foot)"
    },
    "nerve": {
     "status": "agree",
@@ -5066,11 +4874,15 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "lateral_plantar"
     ],
-    "unparsed": null
+    "uams": [
+     "lateral_plantar"
+    ],
+    "wikipedia": null
    },
    "roots": {
     "status": "noSource",
@@ -5084,7 +4896,9 @@
    "source": {
     "page": "Flexor digiti minimi brevis muscle of hand",
     "revid": 1355367355,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:flexor digiti minimi brevis (hand)",
+    "kenhub": "flexor-digiti-minimi-brevis-muscle-of-hand"
    },
    "nerve": {
     "status": "agree",
@@ -5105,8 +4919,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C8–T1"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C8–T1",
+    "kenhub": "C8–T1"
    },
    "action": {
     "status": "agree"
@@ -5116,7 +4932,9 @@
    "source": {
     "page": "Flexor digitorum brevis muscle",
     "revid": 1380880954,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:flexor digitorum brevis",
+    "kenhub": "flexor-digitorum-brevis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -5144,8 +4962,10 @@
     "unparsed": "medial plantar digital"
    },
    "roots": {
-    "status": "noSource",
-    "draft": "S1–S2"
+    "status": "partial",
+    "by": "kenhub",
+    "draft": "S1–S2",
+    "kenhub": "S1–S3"
    },
    "action": {
     "status": "agree"
@@ -5155,7 +4975,9 @@
    "source": {
     "page": "Flexor digitorum longus muscle",
     "revid": 1380880760,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:flexor digitorum longus",
+    "kenhub": "flexor-digitorum-longus-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -5176,8 +4998,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "L5–S2"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "L5–S2",
+    "kenhub": "L5–S2"
    },
    "action": {
     "status": "agree"
@@ -5187,7 +5011,9 @@
    "source": {
     "page": "Flexor digitorum profundus muscle",
     "revid": 1360993083,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:flexor digitorum profundus",
+    "kenhub": "flexor-digitorum-profundus-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -5223,7 +5049,8 @@
    "source": {
     "page": "Flexor hallucis longus muscle",
     "revid": 1380890547,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:flexor hallucis longus"
    },
    "nerve": {
     "status": "agree",
@@ -5258,7 +5085,8 @@
    "source": {
     "page": "Flexor pollicis longus muscle",
     "revid": 1344838149,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:flexor pollicis longus"
    },
    "nerve": {
     "status": "agree",
@@ -5292,7 +5120,8 @@
    "source": {
     "page": "Frontalis muscle",
     "revid": 1259582090,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:frontalis"
    },
    "nerve": {
     "status": "agree",
@@ -5326,7 +5155,8 @@
    "source": {
     "page": "Genioglossus",
     "revid": 1319544872,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:genioglossus"
    },
    "nerve": {
     "status": "agree",
@@ -5358,7 +5188,8 @@
    "source": {
     "page": "Geniohyoid muscle",
     "revid": 1375060378,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:geniohyoid"
    },
    "nerve": {
     "status": "agree",
@@ -5384,16 +5215,18 @@
     "wikipedia": "C1"
    },
    "action": {
-    "status": "conflict",
-    "expected": "elevat|depress|pull|draw",
-    "wikipedia": "Carry hyoid bone and the tongue upward during deglutition"
+    "status": "agree",
+    "by": "uams",
+    "wikipedia": "Carry hyoid bone and the tongue upward during deglutition",
+    "uams": "elevates the hyoid bone; depresses the mandible"
    }
   },
   "Gluteus maximus muscle": {
    "source": {
     "page": "Gluteus maximus",
     "revid": 1359877966,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:gluteus maximus"
    },
    "nerve": {
     "status": "agree",
@@ -5432,7 +5265,8 @@
    "source": {
     "page": "Gluteus medius",
     "revid": 1380890721,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:gluteus medius"
    },
    "nerve": {
     "status": "agree",
@@ -5465,7 +5299,8 @@
    "source": {
     "page": "Gluteus minimus",
     "revid": 1380879741,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:gluteus minimus"
    },
    "nerve": {
     "status": "agree",
@@ -5498,7 +5333,9 @@
    "source": {
     "page": "Gracilis muscle",
     "revid": 1380395616,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:gracilis",
+    "kenhub": "gracilis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -5521,8 +5358,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "L2–L3"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "L2–L3",
+    "kenhub": "L2–L3"
    },
    "action": {
     "status": "agree"
@@ -5532,7 +5371,9 @@
    "source": {
     "page": "Extensor carpi ulnaris muscle",
     "revid": 1345277848,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:extensor carpi ulnaris",
+    "kenhub": "extensor-carpi-ulnaris-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -5553,8 +5394,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C7–C8"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C7–C8",
+    "kenhub": "C7–C8"
    },
    "action": {
     "status": "agree"
@@ -5564,7 +5407,8 @@
    "source": {
     "page": "Flexor carpi ulnaris muscle",
     "revid": 1344841887,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:flexor carpi ulnaris"
    },
    "nerve": {
     "status": "agree",
@@ -5597,7 +5441,9 @@
    "source": {
     "page": "Flexor digitorum superficialis muscle",
     "revid": 1361709869,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:flexor digitorum superficialis",
+    "kenhub": "flexor-digitorum-superficialis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -5622,8 +5468,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C8–T1"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C8–T1",
+    "kenhub": "C8–T1"
    },
    "action": {
     "status": "agree"
@@ -5633,7 +5481,8 @@
    "source": {
     "page": "Hyoglossus",
     "revid": 1251936632,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:hyoglossus"
    },
    "nerve": {
     "status": "agree",
@@ -5645,11 +5494,15 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "lingual"
     ],
-    "unparsed": null
+    "uams": [
+     "lingual"
+    ],
+    "wikipedia": null
    },
    "roots": {
     "status": "noDraft",
@@ -5663,7 +5516,9 @@
    "source": {
     "page": "Iliacus muscle",
     "revid": 1360690546,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-abdominal-region:iliacus",
+    "kenhub": "iliacus-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -5689,8 +5544,10 @@
     "unparsed": "iliac"
    },
    "roots": {
-    "status": "noSource",
-    "draft": "L2–L3"
+    "status": "partial",
+    "by": "kenhub",
+    "draft": "L2–L3",
+    "kenhub": "L2–L4"
    },
    "action": {
     "status": "agree"
@@ -5700,7 +5557,8 @@
    "source": {
     "page": "Levator ani",
     "revid": 1380891777,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-pelvis-and-perineum:levator ani"
    },
    "nerve": {
     "status": "agree",
@@ -5740,7 +5598,8 @@
    "source": {
     "page": "Iliocostalis",
     "revid": 1349919788,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:iliocostalis"
    },
    "nerve": {
     "status": "agree",
@@ -5774,7 +5633,8 @@
    "source": {
     "page": "Iliocostalis",
     "revid": 1349919788,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:iliocostalis"
    },
    "nerve": {
     "status": "agree",
@@ -5808,7 +5668,8 @@
    "source": {
     "page": "Iliocostalis",
     "revid": 1349919788,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:iliocostalis"
    },
    "nerve": {
     "status": "agree",
@@ -5842,36 +5703,55 @@
    "source": {
     "page": "Gemelli muscles",
     "revid": 1380894806,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:gemellus, inferior",
+    "kenhub": "inferior-gemellus-muscle"
    },
    "nerve": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "n_quadratus_femoris"
     ],
-    "unparsed": null
+    "uams": [
+     "n_quadratus_femoris"
+    ],
+    "wikipedia": null
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "inferior_gluteal",
      "medial_circumflex_femoral"
     ],
-    "unparsed": null
+    "uams": [
+     "inferior_gluteal"
+    ],
+    "wikipedia": null,
+    "onlyDraft": [
+     "medial_circumflex_femoral"
+    ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "L4–S1"
+    "status": "partial",
+    "by": "kenhub",
+    "draft": "L4–S1",
+    "kenhub": "L4, S1"
    },
    "action": {
-    "status": "noSource"
+    "status": "agree",
+    "by": "uams",
+    "wikipedia": null,
+    "uams": "laterally rotates the femur"
    }
   },
   "Inferior head of lateral pterygoid muscle": {
    "source": {
     "page": "Lateral pterygoid muscle",
     "revid": 1291880834,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:lateral pterygoid"
    },
    "nerve": {
     "status": "agree",
@@ -5904,7 +5784,8 @@
    "source": {
     "page": "Inferior oblique muscle",
     "revid": 1251331357,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:inferior oblique"
    },
    "nerve": {
     "status": "agree",
@@ -5940,7 +5821,8 @@
    "source": {
     "page": "Inferior pharyngeal constrictor muscle",
     "revid": 1314016153,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:constrictor, inferior pharyngeal"
    },
    "nerve": {
     "status": "partial",
@@ -5959,13 +5841,19 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "ascending_pharyngeal",
      "superior_thyroid",
      "inferior_thyroid"
     ],
-    "unparsed": null
+    "uams": [
+     "superior_thyroid",
+     "inferior_thyroid",
+     "ascending_pharyngeal"
+    ],
+    "wikipedia": null
    },
    "roots": {
     "status": "noDraft",
@@ -5979,7 +5867,8 @@
    "source": {
     "page": "Inferior rectus muscle",
     "revid": 1381766676,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:inferior rectus"
    },
    "nerve": {
     "status": "agree",
@@ -6013,7 +5902,9 @@
    "source": {
     "page": "Infraspinatus muscle",
     "revid": 1300467547,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:infraspinatus",
+    "kenhub": "infraspinatus-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -6036,8 +5927,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C5–C6"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C5–C6",
+    "kenhub": "C5–C6"
    },
    "action": {
     "status": "agree"
@@ -6047,7 +5940,9 @@
    "source": {
     "page": "Innermost intercostal muscle",
     "revid": 1380891900,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-thorax:innermost intercostal",
+    "kenhub": "innermost-intercostal-muscles"
    },
    "nerve": {
     "status": "agree",
@@ -6068,8 +5963,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "T1–T11"
+    "status": "agree",
+    "by": "uams",
+    "draft": "T1–T11",
+    "uams": "T1–T11"
    },
    "action": {
     "status": "agree"
@@ -6079,7 +5976,8 @@
    "source": {
     "page": "Abdominal internal oblique muscle",
     "revid": 1335108303,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-abdominal-region:internal abdominal oblique"
    },
    "nerve": {
     "status": "agree",
@@ -6097,22 +5995,30 @@
     ]
    },
    "artery": {
-    "status": "conflict",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "inferior_epigastric",
      "circumflex_iliac",
      "superior_epigastric"
     ],
+    "uams": [
+     "circumflex_iliac",
+     "superior_epigastric",
+     "inferior_epigastric",
+     "musculophrenic",
+     "intercostal",
+     "subcostal",
+     "lumbar"
+    ],
     "wikipedia": [
      "subcostal"
     ],
-    "onlyDraft": [
-     "inferior_epigastric",
-     "circumflex_iliac",
-     "superior_epigastric"
-    ],
-    "onlyWikipedia": [
-     "subcostal"
+    "onlyUams": [
+     "musculophrenic",
+     "intercostal",
+     "subcostal",
+     "lumbar"
     ]
    },
    "roots": {
@@ -6128,7 +6034,9 @@
    "source": {
     "page": "Internal intercostal muscles",
     "revid": 1380879883,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-thorax:internal intercostal",
+    "kenhub": "internal-intercostal-muscles"
    },
    "nerve": {
     "status": "agree",
@@ -6155,20 +6063,24 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "T1–T11"
+    "status": "agree",
+    "by": "uams",
+    "draft": "T1–T11",
+    "uams": "T1–T11"
    },
    "action": {
-    "status": "conflict",
-    "expected": "depress|expir|exhal",
-    "wikipedia": "Hold ribs steady"
+    "status": "agree",
+    "by": "kenhub",
+    "wikipedia": "Hold ribs steady",
+    "kenhub": "Depress ribs during forced expiration;"
    }
   },
   "Interspinales colli muscles": {
    "source": {
     "page": "Interspinales muscles",
     "revid": 1222225477,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:interspinales"
    },
    "nerve": {
     "status": "agree",
@@ -6188,16 +6100,18 @@
     "wikipedia": null
    },
    "action": {
-    "status": "conflict",
-    "expected": "extend|extens",
-    "wikipedia": "Proprioception of vertebral column"
+    "status": "agree",
+    "by": "uams",
+    "wikipedia": "Proprioception of vertebral column",
+    "uams": "extend trunk and neck"
    }
   },
   "Interspinales lumborum muscles": {
    "source": {
     "page": "Interspinales muscles",
     "revid": 1222225477,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:interspinales"
    },
    "nerve": {
     "status": "agree",
@@ -6217,16 +6131,18 @@
     "wikipedia": null
    },
    "action": {
-    "status": "conflict",
-    "expected": "extend|extens",
-    "wikipedia": "Proprioception of vertebral column"
+    "status": "agree",
+    "by": "uams",
+    "wikipedia": "Proprioception of vertebral column",
+    "uams": "extend trunk and neck"
    }
   },
   "Interspinales thoracis muscles": {
    "source": {
     "page": "Interspinales muscles",
     "revid": 1222225477,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:interspinales"
    },
    "nerve": {
     "status": "agree",
@@ -6246,16 +6162,18 @@
     "wikipedia": null
    },
    "action": {
-    "status": "conflict",
-    "expected": "extend|extens",
-    "wikipedia": "Proprioception of vertebral column"
+    "status": "agree",
+    "by": "uams",
+    "wikipedia": "Proprioception of vertebral column",
+    "uams": "extend trunk and neck"
    }
   },
   "Lateral crico-arytenoid muscle": {
    "source": {
     "page": "Lateral cricoarytenoid muscle",
     "revid": 1325042787,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:cricoarytenoid, lateral"
    },
    "nerve": {
     "status": "agree",
@@ -6268,12 +6186,20 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "superior_thyroid",
      "inferior_thyroid"
     ],
-    "unparsed": null
+    "uams": [
+     "superior_laryngeal",
+     "superior_thyroid"
+    ],
+    "wikipedia": null,
+    "onlyDraft": [
+     "inferior_thyroid"
+    ]
    },
    "roots": {
     "status": "noDraft",
@@ -6287,7 +6213,9 @@
    "source": {
     "page": "Flexor hallucis brevis muscle",
     "revid": 1360659628,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:flexor hallucis brevis",
+    "kenhub": "flexor-hallucis-brevis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -6299,15 +6227,21 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "medial_plantar"
     ],
-    "unparsed": null
+    "uams": [
+     "medial_plantar"
+    ],
+    "wikipedia": null
    },
    "roots": {
-    "status": "noSource",
-    "draft": "S1–S2"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "S1–S2",
+    "kenhub": "S1–S2"
    },
    "action": {
     "status": "agree"
@@ -6317,7 +6251,8 @@
    "source": {
     "page": "Gastrocnemius muscle",
     "revid": 1380879124,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:gastrocnemius"
    },
    "nerve": {
     "status": "agree",
@@ -6351,7 +6286,9 @@
    "source": {
     "page": "Triceps",
     "revid": 1380879033,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:triceps brachii",
+    "kenhub": "triceps-brachii-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -6374,8 +6311,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C6–C8"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C6–C8",
+    "kenhub": "C6–C8"
    },
    "action": {
     "status": "agree"
@@ -6385,7 +6324,8 @@
    "source": {
     "page": "Lateral rectus muscle",
     "revid": 1354453891,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:lateral rectus"
    },
    "nerve": {
     "status": "agree",
@@ -6397,12 +6337,16 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "ophthalmic",
      "lacrimal"
     ],
-    "unparsed": null
+    "uams": [
+     "ophthalmic"
+    ],
+    "wikipedia": null
    },
    "roots": {
     "status": "noDraft",
@@ -6416,7 +6360,8 @@
    "source": {
     "page": "Latissimus dorsi muscle",
     "revid": 1382512580,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:latissimus dorsi"
    },
    "nerve": {
     "status": "agree",
@@ -6450,7 +6395,8 @@
    "source": {
     "page": "Levator anguli oris",
     "revid": 1254139580,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:levator anguli oris"
    },
    "nerve": {
     "status": "agree",
@@ -6486,7 +6432,8 @@
    "source": {
     "page": "Levator labii superioris",
     "revid": 1258120423,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:levator labii superioris"
    },
    "nerve": {
     "status": "agree",
@@ -6553,7 +6500,8 @@
    "source": {
     "page": "Levator palpebrae superioris muscle",
     "revid": 1360702546,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:levator palpebrae superioris"
    },
    "nerve": {
     "status": "agree",
@@ -6625,7 +6573,8 @@
    "source": {
     "page": "Levatores costarum muscles",
     "revid": 1353005564,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-thorax:levatores costarum"
    },
    "nerve": {
     "status": "partial",
@@ -6642,11 +6591,19 @@
     "unparsed": "spinal c t"
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "intercostal"
     ],
-    "unparsed": null
+    "uams": [
+     "intercostal",
+     "deep_cervical"
+    ],
+    "wikipedia": null,
+    "onlyUams": [
+     "deep_cervical"
+    ]
    },
    "roots": {
     "status": "agree",
@@ -6661,7 +6618,8 @@
    "source": {
     "page": "Levatores costarum muscles",
     "revid": 1353005564,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-thorax:levatores costarum"
    },
    "nerve": {
     "status": "partial",
@@ -6678,11 +6636,19 @@
     "unparsed": "spinal c t"
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "intercostal"
     ],
-    "unparsed": null
+    "uams": [
+     "intercostal",
+     "deep_cervical"
+    ],
+    "wikipedia": null,
+    "onlyUams": [
+     "deep_cervical"
+    ]
    },
    "roots": {
     "status": "agree",
@@ -6697,7 +6663,8 @@
    "source": {
     "page": "Biceps",
     "revid": 1383126595,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:biceps brachii"
    },
    "nerve": {
     "status": "agree",
@@ -6730,7 +6697,9 @@
    "source": {
     "page": "Biceps femoris muscle",
     "revid": 1380891884,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:biceps femoris",
+    "kenhub": "biceps-femoris-muscle"
    },
    "nerve": {
     "status": "partial",
@@ -6761,8 +6730,10 @@
     "unparsed": "long head biceps femoris"
    },
    "roots": {
-    "status": "noSource",
-    "draft": "L5–S2"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "L5–S2",
+    "kenhub": "L5–S2"
    },
    "action": {
     "status": "agree"
@@ -6772,7 +6743,9 @@
    "source": {
     "page": "Triceps",
     "revid": 1380879033,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:triceps brachii",
+    "kenhub": "triceps-brachii-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -6795,8 +6768,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C6–C8"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C6–C8",
+    "kenhub": "C6–C8"
    },
    "action": {
     "status": "agree"
@@ -6806,7 +6781,8 @@
    "source": {
     "page": "Longissimus",
     "revid": 1350050293,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:longissimus"
    },
    "nerve": {
     "status": "agree",
@@ -6818,20 +6794,24 @@
     ]
    },
    "artery": {
-    "status": "conflict",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "intercostal",
      "lumbar"
     ],
+    "uams": [
+     "intercostal",
+     "subcostal",
+     "lumbar",
+     "deep_cervical"
+    ],
     "wikipedia": [
      "lateral_sacral"
     ],
-    "onlyDraft": [
-     "intercostal",
-     "lumbar"
-    ],
-    "onlyWikipedia": [
-     "lateral_sacral"
+    "onlyUams": [
+     "subcostal",
+     "deep_cervical"
     ]
    },
    "roots": {
@@ -6846,7 +6826,8 @@
    "source": {
     "page": "Longissimus",
     "revid": 1350050293,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:longissimus"
    },
    "nerve": {
     "status": "agree",
@@ -6858,20 +6839,24 @@
     ]
    },
    "artery": {
-    "status": "conflict",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "intercostal",
      "lumbar"
     ],
+    "uams": [
+     "intercostal",
+     "subcostal",
+     "lumbar",
+     "deep_cervical"
+    ],
     "wikipedia": [
      "lateral_sacral"
     ],
-    "onlyDraft": [
-     "intercostal",
-     "lumbar"
-    ],
-    "onlyWikipedia": [
-     "lateral_sacral"
+    "onlyUams": [
+     "subcostal",
+     "deep_cervical"
     ]
    },
    "roots": {
@@ -6886,7 +6871,8 @@
    "source": {
     "page": "Longissimus",
     "revid": 1350050293,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:longissimus"
    },
    "nerve": {
     "status": "agree",
@@ -6898,20 +6884,24 @@
     ]
    },
    "artery": {
-    "status": "conflict",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "intercostal",
      "lumbar"
     ],
+    "uams": [
+     "intercostal",
+     "subcostal",
+     "lumbar",
+     "deep_cervical"
+    ],
     "wikipedia": [
      "lateral_sacral"
     ],
-    "onlyDraft": [
-     "intercostal",
-     "lumbar"
-    ],
-    "onlyWikipedia": [
-     "lateral_sacral"
+    "onlyUams": [
+     "subcostal",
+     "deep_cervical"
     ]
    },
    "roots": {
@@ -6926,14 +6916,20 @@
    "source": {
     "page": "Longus capitis muscle",
     "revid": 1378126138,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:longus capitis"
    },
    "nerve": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "ventral_rami"
     ],
-    "unparsed": "c c"
+    "uams": [
+     "ventral_rami",
+     "cervical"
+    ],
+    "wikipedia": null
    },
    "artery": {
     "status": "partial",
@@ -6963,14 +6959,20 @@
    "source": {
     "page": "Longus colli muscle",
     "revid": 1221883297,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:longus colli",
+    "kenhub": "longus-colli-muscle"
    },
    "nerve": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "kenhub",
     "draft": [
      "ventral_rami"
     ],
-    "unparsed": "c c"
+    "kenhub": [
+     "ventral_rami"
+    ],
+    "wikipedia": null
    },
    "artery": {
     "status": "partial",
@@ -7002,7 +7004,8 @@
    "source": {
     "page": "Lumbricals of the foot",
     "revid": 1296966274,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:lumbricals (foot)"
    },
    "nerve": {
     "status": "partial",
@@ -7041,7 +7044,8 @@
    "source": {
     "page": "Lumbricals of the hand",
     "revid": 1368936862,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:lumbrical (hand)"
    },
    "nerve": {
     "status": "agree",
@@ -7077,7 +7081,9 @@
    "source": {
     "page": "Flexor hallucis brevis muscle",
     "revid": 1360659628,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:flexor hallucis brevis",
+    "kenhub": "flexor-hallucis-brevis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -7089,15 +7095,21 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "medial_plantar"
     ],
-    "unparsed": null
+    "uams": [
+     "medial_plantar"
+    ],
+    "wikipedia": null
    },
    "roots": {
-    "status": "noSource",
-    "draft": "S1–S2"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "S1–S2",
+    "kenhub": "S1–S2"
    },
    "action": {
     "status": "agree"
@@ -7107,7 +7119,8 @@
    "source": {
     "page": "Gastrocnemius muscle",
     "revid": 1380879124,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:gastrocnemius"
    },
    "nerve": {
     "status": "agree",
@@ -7141,7 +7154,9 @@
    "source": {
     "page": "Triceps",
     "revid": 1380879033,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:triceps brachii",
+    "kenhub": "triceps-brachii-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -7164,8 +7179,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C6–C8"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C6–C8",
+    "kenhub": "C6–C8"
    },
    "action": {
     "status": "agree"
@@ -7175,7 +7192,8 @@
    "source": {
     "page": "Medial pterygoid muscle",
     "revid": 1292248156,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:medial pterygoid"
    },
    "nerve": {
     "status": "agree",
@@ -7208,7 +7226,8 @@
    "source": {
     "page": "Medial rectus muscle",
     "revid": 1381766543,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:medial rectus"
    },
    "nerve": {
     "status": "agree",
@@ -7220,11 +7239,15 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "ophthalmic"
     ],
-    "unparsed": null
+    "uams": [
+     "ophthalmic"
+    ],
+    "wikipedia": null
    },
    "roots": {
     "status": "noDraft",
@@ -7238,7 +7261,8 @@
    "source": {
     "page": "Mentalis",
     "revid": 1301133906,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:mentalis"
    },
    "nerve": {
     "status": "agree",
@@ -7250,11 +7274,20 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "inferior_labial"
     ],
-    "unparsed": null
+    "uams": [
+     "inferior_labial",
+     "facial",
+     "mental"
+    ],
+    "wikipedia": null,
+    "onlyUams": [
+     "mental"
+    ]
    },
    "roots": {
     "status": "noDraft",
@@ -7268,7 +7301,8 @@
    "source": {
     "page": "Middle pharyngeal constrictor muscle",
     "revid": 1313572522,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:constrictor, middle pharyngeal"
    },
    "nerve": {
     "status": "agree",
@@ -7301,7 +7335,8 @@
    "source": {
     "page": "Multifidus muscle",
     "revid": 1349962618,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:multifidus"
    },
    "nerve": {
     "status": "agree",
@@ -7313,12 +7348,23 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "intercostal",
      "lumbar"
     ],
-    "unparsed": null
+    "uams": [
+     "intercostal",
+     "subcostal",
+     "lumbar",
+     "deep_cervical"
+    ],
+    "wikipedia": null,
+    "onlyUams": [
+     "subcostal",
+     "deep_cervical"
+    ]
    },
    "roots": {
     "status": "noDraft",
@@ -7332,7 +7378,8 @@
    "source": {
     "page": "Multifidus muscle",
     "revid": 1349962618,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:multifidus"
    },
    "nerve": {
     "status": "agree",
@@ -7344,12 +7391,23 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "intercostal",
      "lumbar"
     ],
-    "unparsed": null
+    "uams": [
+     "intercostal",
+     "subcostal",
+     "lumbar",
+     "deep_cervical"
+    ],
+    "wikipedia": null,
+    "onlyUams": [
+     "subcostal",
+     "deep_cervical"
+    ]
    },
    "roots": {
     "status": "noDraft",
@@ -7363,7 +7421,8 @@
    "source": {
     "page": "Multifidus muscle",
     "revid": 1349962618,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:multifidus"
    },
    "nerve": {
     "status": "agree",
@@ -7375,12 +7434,23 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "intercostal",
      "lumbar"
     ],
-    "unparsed": null
+    "uams": [
+     "intercostal",
+     "subcostal",
+     "lumbar",
+     "deep_cervical"
+    ],
+    "wikipedia": null,
+    "onlyUams": [
+     "subcostal",
+     "deep_cervical"
+    ]
    },
    "roots": {
     "status": "noDraft",
@@ -7394,7 +7464,8 @@
    "source": {
     "page": "Mylohyoid muscle",
     "revid": 1362328556,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:mylohyoid"
    },
    "nerve": {
     "status": "agree",
@@ -7429,7 +7500,8 @@
    "source": {
     "page": "Nasalis muscle",
     "revid": 1313468684,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:nasalis"
    },
    "nerve": {
     "status": "agree",
@@ -7461,7 +7533,9 @@
    "source": {
     "page": "Adductor hallucis muscle",
     "revid": 1380892479,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:adductor hallucis",
+    "kenhub": "adductor-hallucis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -7482,8 +7556,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "S2–S3"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "S2–S3",
+    "kenhub": "S2–S3"
    },
    "action": {
     "status": "agree"
@@ -7493,7 +7569,8 @@
    "source": {
     "page": "Adductor pollicis muscle",
     "revid": 1339422079,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:adductor pollicis"
    },
    "nerve": {
     "status": "agree",
@@ -7526,7 +7603,8 @@
    "source": {
     "page": "Cricothyroid muscle",
     "revid": 1362397771,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:cricothyroid"
    },
    "nerve": {
     "status": "agree",
@@ -7539,11 +7617,16 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "superior_thyroid"
     ],
-    "unparsed": null
+    "uams": [
+     "superior_laryngeal",
+     "superior_thyroid"
+    ],
+    "wikipedia": null
    },
    "roots": {
     "status": "noDraft",
@@ -7557,7 +7640,9 @@
    "source": {
     "page": "Obliquus capitis inferior muscle",
     "revid": 1354035125,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:obliquus capitis inferior",
+    "kenhub": "obliquus-capitis-inferior-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -7569,16 +7654,25 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "vertebral",
      "occipital"
     ],
-    "unparsed": null
+    "uams": [
+     "occipital"
+    ],
+    "wikipedia": null,
+    "onlyDraft": [
+     "vertebral"
+    ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C1"
+    "status": "agree",
+    "by": "uams",
+    "draft": "C1",
+    "uams": "C1"
    },
    "action": {
     "status": "agree"
@@ -7588,7 +7682,9 @@
    "source": {
     "page": "Obliquus capitis superior muscle",
     "revid": 1354035018,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:obliquus capitis superior",
+    "kenhub": "obliquus-capitis-superior-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -7600,16 +7696,25 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "vertebral",
      "occipital"
     ],
-    "unparsed": null
+    "uams": [
+     "occipital"
+    ],
+    "wikipedia": null,
+    "onlyDraft": [
+     "vertebral"
+    ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C1"
+    "status": "agree",
+    "by": "uams",
+    "draft": "C1",
+    "uams": "C1"
    },
    "action": {
     "status": "agree"
@@ -7619,7 +7724,9 @@
    "source": {
     "page": "External obturator muscle",
     "revid": 1303877904,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:obturator externus",
+    "kenhub": "obturator-externus-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -7645,8 +7752,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "L3–L4"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "L3–L4",
+    "kenhub": "L3–L4"
    },
    "action": {
     "status": "agree"
@@ -7656,7 +7765,8 @@
    "source": {
     "page": "Internal obturator muscle",
     "revid": 1380879176,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-pelvis-and-perineum:obturator internus"
    },
    "nerve": {
     "status": "agree",
@@ -7668,20 +7778,20 @@
     ]
    },
    "artery": {
-    "status": "conflict",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "internal_pudendal",
+     "obturator"
+    ],
+    "uams": [
      "obturator"
     ],
     "wikipedia": [
      "inferior_gluteal"
     ],
     "onlyDraft": [
-     "internal_pudendal",
-     "obturator"
-    ],
-    "onlyWikipedia": [
-     "inferior_gluteal"
+     "internal_pudendal"
     ]
    },
    "roots": {
@@ -7697,7 +7807,8 @@
    "source": {
     "page": "Occipitalis muscle",
     "revid": 1263737633,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:occipitalis"
    },
    "nerve": {
     "status": "agree",
@@ -7733,7 +7844,8 @@
    "source": {
     "page": "Omohyoid muscle",
     "revid": 1380891918,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:omohyoid"
    },
    "nerve": {
     "status": "agree",
@@ -7745,22 +7857,21 @@
     ]
    },
    "artery": {
-    "status": "conflict",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "superior_thyroid",
+     "transverse_cervical"
+    ],
+    "uams": [
      "transverse_cervical"
     ],
     "wikipedia": [
      "inferior_thyroid"
     ],
     "onlyDraft": [
-     "superior_thyroid",
-     "transverse_cervical"
-    ],
-    "onlyWikipedia": [
-     "inferior_thyroid"
-    ],
-    "unparsed": "ita"
+     "superior_thyroid"
+    ]
    },
    "roots": {
     "status": "agree",
@@ -7775,7 +7886,8 @@
    "source": {
     "page": "Opponens digiti minimi muscle of hand",
     "revid": 1353446721,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:opponens digiti minimi"
    },
    "nerve": {
     "status": "agree",
@@ -7808,7 +7920,9 @@
    "source": {
     "page": "Opponens pollicis muscle",
     "revid": 1360715023,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:opponens pollicis",
+    "kenhub": "opponens-pollicis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -7820,20 +7934,18 @@
     ]
    },
    "artery": {
-    "status": "conflict",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "superficial_palmar_branch"
     ],
+    "uams": [
+     "superficial_palmar_branch",
+     "radial"
+    ],
     "wikipedia": [
      "superficial_palmar_arch"
-    ],
-    "onlyDraft": [
-     "superficial_palmar_branch"
-    ],
-    "onlyWikipedia": [
-     "superficial_palmar_arch"
-    ],
-    "unparsed": "arch"
+    ]
    },
    "roots": {
     "status": "noSource",
@@ -7847,7 +7959,8 @@
    "source": {
     "page": "Orbicularis oris muscle",
     "revid": 1311495846,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:orbicularis oris"
    },
    "nerve": {
     "status": "agree",
@@ -7881,7 +7994,8 @@
    "source": {
     "page": "Orbicularis oculi muscle",
     "revid": 1357503437,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:orbicularis oculi"
    },
    "nerve": {
     "status": "agree",
@@ -7920,7 +8034,8 @@
    "source": {
     "page": "Palatopharyngeus muscle",
     "revid": 1380892468,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:palatopharyngeus"
    },
    "nerve": {
     "status": "agree",
@@ -7957,7 +8072,9 @@
    "source": {
     "page": "Palmar interossei muscles",
     "revid": 1368456966,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:interosseous, palmar",
+    "kenhub": "palmar-interossei-muscles"
    },
    "nerve": {
     "status": "agree",
@@ -7979,8 +8096,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C8–T1"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C8–T1",
+    "kenhub": "C8–T1"
    },
    "action": {
     "status": "agree"
@@ -7990,7 +8109,9 @@
    "source": {
     "page": "Palmaris longus muscle",
     "revid": 1382460841,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:palmaris longus",
+    "kenhub": "palmaris-longus-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -8011,8 +8132,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C7–C8"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C7–C8",
+    "kenhub": "C7–C8"
    },
    "action": {
     "status": "agree"
@@ -8022,7 +8145,8 @@
    "source": {
     "page": "Orbicularis oculi muscle",
     "revid": 1357503437,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:orbicularis oculi"
    },
    "nerve": {
     "status": "agree",
@@ -8061,7 +8185,9 @@
    "source": {
     "page": "Pectineus muscle",
     "revid": 1368156766,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:pectineus",
+    "kenhub": "pectineus-muscle"
    },
    "nerve": {
     "status": "partial",
@@ -8091,8 +8217,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "L2–L3"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "L2–L3",
+    "kenhub": "L2–L3"
    },
    "action": {
     "status": "agree"
@@ -8102,7 +8230,8 @@
    "source": {
     "page": "Pectoralis minor",
     "revid": 1380880935,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:pectoralis minor"
    },
    "nerve": {
     "status": "agree",
@@ -8140,7 +8269,8 @@
    "source": {
     "page": "Piriformis muscle",
     "revid": 1380879535,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-pelvis-and-perineum:piriformis"
    },
    "nerve": {
     "status": "agree",
@@ -8179,7 +8309,9 @@
    "source": {
     "page": "Plantar interossei muscles",
     "revid": 1354938444,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:interosseous, plantar",
+    "kenhub": "plantar-interossei-muscles"
    },
    "nerve": {
     "status": "agree",
@@ -8191,24 +8323,23 @@
     ]
    },
    "artery": {
-    "status": "conflict",
+    "status": "agree",
+    "by": "uams",
     "draft": [
+     "plantar_metatarsal"
+    ],
+    "uams": [
      "plantar_metatarsal"
     ],
     "wikipedia": [
      "dorsal_metatarsal"
-    ],
-    "onlyDraft": [
-     "plantar_metatarsal"
-    ],
-    "onlyWikipedia": [
-     "dorsal_metatarsal"
-    ],
-    "unparsed": "plantar a"
+    ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "S2–S3"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "S2–S3",
+    "kenhub": "S2–S3"
    },
    "action": {
     "status": "agree"
@@ -8218,7 +8349,8 @@
    "source": {
     "page": "Plantaris muscle",
     "revid": 1380881097,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:plantaris"
    },
    "nerve": {
     "status": "partial",
@@ -8256,7 +8388,8 @@
    "source": {
     "page": "Platysma muscle",
     "revid": 1381564032,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:platysma"
    },
    "nerve": {
     "status": "agree",
@@ -8283,16 +8416,19 @@
     "wikipedia": null
    },
    "action": {
-    "status": "conflict",
-    "expected": "depress|tens",
-    "wikipedia": "Draws the corners of the mouth inferiorly and widens it (as in expressions of sadness and fright). Also draws the skin of the neck superiorly (Anatomical terms of location#Superior and inferior) when "
+    "status": "agree",
+    "by": "uams",
+    "wikipedia": "Draws the corners of the mouth inferiorly and widens it (as in expressions of sadness and fright). Also draws the skin of the neck superiorly (Anatomical terms of location#Superior and inferior) when ",
+    "uams": "draws the corners of the mouth down; it aids in depression of the mandible"
    }
   },
   "Popliteus muscle": {
    "source": {
     "page": "Popliteus muscle",
     "revid": 1380881418,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:popliteus",
+    "kenhub": "popliteus-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -8313,8 +8449,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "L4–S1"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "L4–S1",
+    "kenhub": "L4–S1"
    },
    "action": {
     "status": "agree"
@@ -8324,7 +8462,8 @@
    "source": {
     "page": "Digastric muscle",
     "revid": 1380879218,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:digastric"
    },
    "nerve": {
     "status": "partial",
@@ -8374,7 +8513,9 @@
    "source": {
     "page": "Posterior cricoarytenoid muscle",
     "revid": 1301177460,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:cricoarytenoid, posterior",
+    "kenhub": "posterior-cricoarytenoid-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -8387,11 +8528,15 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "kenhub",
     "draft": [
      "inferior_thyroid"
     ],
-    "unparsed": null
+    "kenhub": [
+     "inferior_thyroid"
+    ],
+    "wikipedia": null
    },
    "roots": {
     "status": "noDraft",
@@ -8405,7 +8550,8 @@
    "source": {
     "page": "Procerus muscle",
     "revid": 1279617870,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:procerus"
    },
    "nerve": {
     "status": "agree",
@@ -8441,7 +8587,9 @@
    "source": {
     "page": "Pronator quadratus muscle",
     "revid": 1360730200,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:pronator quadratus",
+    "kenhub": "pronator-quadratus-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -8463,8 +8611,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C7–C8"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C7–C8",
+    "kenhub": "C7–C8"
    },
    "action": {
     "status": "agree"
@@ -8474,7 +8624,8 @@
    "source": {
     "page": "Psoas major muscle",
     "revid": 1373821279,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-abdominal-region:psoas major"
    },
    "nerve": {
     "status": "agree",
@@ -8509,7 +8660,8 @@
    "source": {
     "page": "Levator ani",
     "revid": 1380891777,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-pelvis-and-perineum:levator ani"
    },
    "nerve": {
     "status": "agree",
@@ -8549,7 +8701,8 @@
    "source": {
     "page": "Levator ani",
     "revid": 1380891777,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-pelvis-and-perineum:levator ani"
    },
    "nerve": {
     "status": "agree",
@@ -8589,7 +8742,8 @@
    "source": {
     "page": "Pyramidalis muscle",
     "revid": 1380880137,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-abdominal-region:pyramidalis"
    },
    "nerve": {
     "status": "agree",
@@ -8601,20 +8755,21 @@
     ]
    },
    "artery": {
-    "status": "conflict",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "inferior_epigastric"
+    ],
+    "uams": [
+     "inferior_epigastric",
+     "subcostal"
     ],
     "wikipedia": [
      "superior_epigastric"
     ],
-    "onlyDraft": [
-     "inferior_epigastric"
-    ],
-    "onlyWikipedia": [
-     "superior_epigastric"
-    ],
-    "unparsed": "inferior"
+    "onlyUams": [
+     "subcostal"
+    ]
    },
    "roots": {
     "status": "agree",
@@ -8629,7 +8784,8 @@
    "source": {
     "page": "Quadratus femoris muscle",
     "revid": 1380879690,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:quadratus femoris"
    },
    "nerve": {
     "status": "agree",
@@ -8665,7 +8821,8 @@
    "source": {
     "page": "Quadratus lumborum muscle",
     "revid": 1340238342,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-abdominal-region:quadratus lumborum"
    },
    "nerve": {
     "status": "partial",
@@ -8710,7 +8867,8 @@
    "source": {
     "page": "Quadratus plantae muscle",
     "revid": 1355549311,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:quadratus plantae"
    },
    "nerve": {
     "status": "agree",
@@ -8722,12 +8880,19 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "lateral_plantar",
      "medial_plantar"
     ],
-    "unparsed": null
+    "uams": [
+     "lateral_plantar"
+    ],
+    "wikipedia": null,
+    "onlyDraft": [
+     "medial_plantar"
+    ]
    },
    "roots": {
     "status": "conflict",
@@ -8742,7 +8907,9 @@
    "source": {
     "page": "Flexor digitorum superficialis muscle",
     "revid": 1361709869,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:flexor digitorum superficialis",
+    "kenhub": "flexor-digitorum-superficialis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -8767,8 +8934,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C8–T1"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C8–T1",
+    "kenhub": "C8–T1"
    },
    "action": {
     "status": "agree"
@@ -8778,7 +8947,8 @@
    "source": {
     "page": "Rectus abdominis muscle",
     "revid": 1380878886,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-abdominal-region:rectus abdominis"
    },
    "nerve": {
     "status": "agree",
@@ -8817,7 +8987,9 @@
    "source": {
     "page": "Rectus capitis anterior muscle",
     "revid": 1263738198,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:rectus capitis anterior",
+    "kenhub": "rectus-capitis-anterior-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -8829,12 +9001,17 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "kenhub",
     "draft": [
      "vertebral",
      "ascending_pharyngeal"
     ],
-    "unparsed": "ascending"
+    "kenhub": [
+     "ascending_pharyngeal",
+     "vertebral"
+    ],
+    "wikipedia": null
    },
    "roots": {
     "status": "agree",
@@ -8849,7 +9026,8 @@
    "source": {
     "page": "Rectus femoris muscle",
     "revid": 1378245670,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:rectus femoris"
    },
    "nerve": {
     "status": "agree",
@@ -8882,22 +9060,37 @@
    "source": {
     "page": "Rectus capitis lateralis muscle",
     "revid": 1263738184,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:rectus capitis lateralis",
+    "kenhub": "rectus-capitis-lateralis-muscle"
    },
    "nerve": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "ventral_rami"
     ],
-    "unparsed": "c c"
+    "uams": [
+     "ventral_rami"
+    ],
+    "wikipedia": null
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "kenhub",
     "draft": [
      "vertebral",
      "occipital"
     ],
-    "unparsed": null
+    "kenhub": [
+     "occipital",
+     "ascending_pharyngeal",
+     "vertebral"
+    ],
+    "wikipedia": null,
+    "onlyKenhub": [
+     "ascending_pharyngeal"
+    ]
    },
    "roots": {
     "status": "agree",
@@ -8912,7 +9105,8 @@
    "source": {
     "page": "Rectus capitis posterior major muscle",
     "revid": 1380880159,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:rectus capitis posterior major"
    },
    "nerve": {
     "status": "agree",
@@ -8950,7 +9144,9 @@
    "source": {
     "page": "Rectus capitis posterior minor muscle",
     "revid": 1380880232,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:rectus capitis posterior minor",
+    "kenhub": "rectus-capitis-posterior-minor-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -8962,16 +9158,25 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "vertebral",
      "occipital"
     ],
-    "unparsed": null
+    "uams": [
+     "occipital"
+    ],
+    "wikipedia": null,
+    "onlyDraft": [
+     "vertebral"
+    ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C1"
+    "status": "agree",
+    "by": "uams",
+    "draft": "C1",
+    "uams": "C1"
    },
    "action": {
     "status": "agree"
@@ -8981,7 +9186,8 @@
    "source": {
     "page": "Rhomboid major muscle",
     "revid": 1349920065,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:rhomboideus major"
    },
    "nerve": {
     "status": "agree",
@@ -9014,7 +9220,8 @@
    "source": {
     "page": "Rhomboid minor muscle",
     "revid": 1380886856,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:rhomboideus minor"
    },
    "nerve": {
     "status": "agree",
@@ -9047,7 +9254,8 @@
    "source": {
     "page": "Risorius",
     "revid": 1377830845,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:risorius"
    },
    "nerve": {
     "status": "agree",
@@ -9079,7 +9287,8 @@
    "source": {
     "page": "Rotatores muscles",
     "revid": 1323867112,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:rotatores"
    },
    "nerve": {
     "status": "agree",
@@ -9091,25 +9300,41 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "intercostal"
     ],
-    "unparsed": null
+    "uams": [
+     "intercostal",
+     "subcostal",
+     "lumbar",
+     "deep_cervical"
+    ],
+    "wikipedia": null,
+    "onlyUams": [
+     "subcostal",
+     "lumbar",
+     "deep_cervical"
+    ]
    },
    "roots": {
     "status": "noDraft",
     "wikipedia": null
    },
    "action": {
-    "status": "noSource"
+    "status": "agree",
+    "by": "uams",
+    "wikipedia": null,
+    "uams": "rotates the vertebral column to the opposite side"
    }
   },
   "Sartorius muscle": {
    "source": {
     "page": "Sartorius muscle",
     "revid": 1383063554,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:sartorius"
    },
    "nerve": {
     "status": "agree",
@@ -9141,7 +9366,8 @@
    "source": {
     "page": "Scalene muscles",
     "revid": 1326382532,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:anterior scalene"
    },
    "nerve": {
     "status": "agree",
@@ -9209,7 +9435,8 @@
    "source": {
     "page": "Scalene muscles",
     "revid": 1326382532,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:posterior scalene"
    },
    "nerve": {
     "status": "agree",
@@ -9247,7 +9474,8 @@
    "source": {
     "page": "Deltoid muscle",
     "revid": 1380880370,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:deltoid"
    },
    "nerve": {
     "status": "agree",
@@ -9270,8 +9498,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C5–C6"
+    "status": "partial",
+    "by": "uams",
+    "draft": "C5–C6",
+    "uams": "C5"
    },
    "action": {
     "status": "agree"
@@ -9281,7 +9511,8 @@
    "source": {
     "page": "Semimembranosus muscle",
     "revid": 1380886656,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:semimembranosus"
    },
    "nerve": {
     "status": "agree",
@@ -9315,7 +9546,8 @@
    "source": {
     "page": "Semispinalis muscles",
     "revid": 1350243730,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:semispinalis"
    },
    "nerve": {
     "status": "agree",
@@ -9327,26 +9559,41 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "intercostal",
      "deep_cervical"
     ],
-    "unparsed": null
+    "uams": [
+     "intercostal",
+     "subcostal",
+     "lumbar",
+     "deep_cervical"
+    ],
+    "wikipedia": null,
+    "onlyUams": [
+     "subcostal",
+     "lumbar"
+    ]
    },
    "roots": {
     "status": "noDraft",
     "wikipedia": null
    },
    "action": {
-    "status": "noSource"
+    "status": "agree",
+    "by": "uams",
+    "wikipedia": null,
+    "uams": "extends the trunk and laterally bends the trunk, rotates the trunk to the opposite side"
    }
   },
   "Semispinalis thoracis muscle": {
    "source": {
     "page": "Semispinalis muscles",
     "revid": 1350243730,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:semispinalis"
    },
    "nerve": {
     "status": "agree",
@@ -9358,26 +9605,41 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "intercostal",
      "deep_cervical"
     ],
-    "unparsed": null
+    "uams": [
+     "intercostal",
+     "subcostal",
+     "lumbar",
+     "deep_cervical"
+    ],
+    "wikipedia": null,
+    "onlyUams": [
+     "subcostal",
+     "lumbar"
+    ]
    },
    "roots": {
     "status": "noDraft",
     "wikipedia": null
    },
    "action": {
-    "status": "noSource"
+    "status": "agree",
+    "by": "uams",
+    "wikipedia": null,
+    "uams": "extends the trunk and laterally bends the trunk, rotates the trunk to the opposite side"
    }
   },
   "Semitendinosus muscle": {
    "source": {
     "page": "Semitendinosus muscle",
     "revid": 1306233203,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:semitendinosus"
    },
    "nerve": {
     "status": "agree",
@@ -9413,7 +9675,8 @@
    "source": {
     "page": "Serratus anterior muscle",
     "revid": 1377969850,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:serratus anterior"
    },
    "nerve": {
     "status": "agree",
@@ -9448,7 +9711,8 @@
    "source": {
     "page": "Serratus posterior inferior muscle",
     "revid": 1360735373,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:serratus posterior inferior"
    },
    "nerve": {
     "status": "partial",
@@ -9486,7 +9750,8 @@
    "source": {
     "page": "Serratus posterior superior muscle",
     "revid": 1350051520,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:serratus posterior superior"
    },
    "nerve": {
     "status": "agree",
@@ -9507,8 +9772,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "T2–T5"
+    "status": "partial",
+    "by": "uams",
+    "draft": "T2–T5",
+    "uams": "T1–T4"
    },
    "action": {
     "status": "agree"
@@ -9518,7 +9785,8 @@
    "source": {
     "page": "Biceps",
     "revid": 1383126595,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:biceps brachii"
    },
    "nerve": {
     "status": "agree",
@@ -9551,7 +9819,9 @@
    "source": {
     "page": "Biceps femoris muscle",
     "revid": 1380891884,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:biceps femoris",
+    "kenhub": "biceps-femoris-muscle"
    },
    "nerve": {
     "status": "partial",
@@ -9582,8 +9852,10 @@
     "unparsed": "long head biceps femoris"
    },
    "roots": {
-    "status": "noSource",
-    "draft": "L5–S2"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "L5–S2",
+    "kenhub": "L5–S2"
    },
    "action": {
     "status": "agree"
@@ -9593,7 +9865,8 @@
    "source": {
     "page": "Soleus muscle",
     "revid": 1380892390,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:soleus"
    },
    "nerve": {
     "status": "agree",
@@ -9630,7 +9903,8 @@
    "source": {
     "page": "Spinalis",
     "revid": 1349912549,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:spinalis"
    },
    "nerve": {
     "status": "agree",
@@ -9642,18 +9916,24 @@
     ]
    },
    "artery": {
-    "status": "conflict",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "intercostal"
+    ],
+    "uams": [
+     "intercostal",
+     "subcostal",
+     "lumbar",
+     "deep_cervical"
     ],
     "wikipedia": [
      "lateral_sacral"
     ],
-    "onlyDraft": [
-     "intercostal"
-    ],
-    "onlyWikipedia": [
-     "lateral_sacral"
+    "onlyUams": [
+     "subcostal",
+     "lumbar",
+     "deep_cervical"
     ]
    },
    "roots": {
@@ -9668,7 +9948,8 @@
    "source": {
     "page": "Spinalis",
     "revid": 1349912549,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:spinalis"
    },
    "nerve": {
     "status": "agree",
@@ -9680,18 +9961,24 @@
     ]
    },
    "artery": {
-    "status": "conflict",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "intercostal"
+    ],
+    "uams": [
+     "intercostal",
+     "subcostal",
+     "lumbar",
+     "deep_cervical"
     ],
     "wikipedia": [
      "lateral_sacral"
     ],
-    "onlyDraft": [
-     "intercostal"
-    ],
-    "onlyWikipedia": [
-     "lateral_sacral"
+    "onlyUams": [
+     "subcostal",
+     "lumbar",
+     "deep_cervical"
     ]
    },
    "roots": {
@@ -9706,7 +9993,8 @@
    "source": {
     "page": "Spinalis",
     "revid": 1349912549,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:spinalis"
    },
    "nerve": {
     "status": "agree",
@@ -9718,18 +10006,24 @@
     ]
    },
    "artery": {
-    "status": "conflict",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "intercostal"
+    ],
+    "uams": [
+     "intercostal",
+     "subcostal",
+     "lumbar",
+     "deep_cervical"
     ],
     "wikipedia": [
      "lateral_sacral"
     ],
-    "onlyDraft": [
-     "intercostal"
-    ],
-    "onlyWikipedia": [
-     "lateral_sacral"
+    "onlyUams": [
+     "subcostal",
+     "lumbar",
+     "deep_cervical"
     ]
    },
    "roots": {
@@ -9744,7 +10038,9 @@
    "source": {
     "page": "Splenius capitis muscle",
     "revid": 1350024993,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:splenius capitis",
+    "kenhub": "splenius-capitis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -9756,11 +10052,15 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "kenhub",
     "draft": [
      "occipital"
     ],
-    "unparsed": "aorta"
+    "kenhub": [
+     "occipital"
+    ],
+    "wikipedia": null
    },
    "roots": {
     "status": "agree",
@@ -9775,7 +10075,8 @@
    "source": {
     "page": "Splenius cervicis muscle",
     "revid": 1350050737,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:splenius cervicis"
    },
    "nerve": {
     "status": "agree",
@@ -9810,7 +10111,8 @@
    "source": {
     "page": "Sternocleidomastoid muscle",
     "revid": 1360739152,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:sternocleidomastoid"
    },
    "nerve": {
     "status": "agree",
@@ -9848,7 +10150,8 @@
    "source": {
     "page": "Pectoralis major",
     "revid": 1377970174,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:pectoralis major"
    },
    "nerve": {
     "status": "agree",
@@ -9888,7 +10191,8 @@
    "source": {
     "page": "Sternohyoid muscle",
     "revid": 1380891867,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:sternohyoid"
    },
    "nerve": {
     "status": "agree",
@@ -9921,7 +10225,9 @@
    "source": {
     "page": "Sternothyroid muscle",
     "revid": 1380881374,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:sternothyroid",
+    "kenhub": "sternothyroid-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -9942,8 +10248,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C1–C3"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C1–C3",
+    "kenhub": "C1–C3"
    },
    "action": {
     "status": "agree"
@@ -9953,7 +10261,8 @@
    "source": {
     "page": "Cricothyroid muscle",
     "revid": 1362397771,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:cricothyroid"
    },
    "nerve": {
     "status": "agree",
@@ -9966,11 +10275,16 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "superior_thyroid"
     ],
-    "unparsed": null
+    "uams": [
+     "superior_laryngeal",
+     "superior_thyroid"
+    ],
+    "wikipedia": null
    },
    "roots": {
     "status": "noDraft",
@@ -9984,7 +10298,9 @@
    "source": {
     "page": "Stylohyoid muscle",
     "revid": 1360739417,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:stylohyoid",
+    "kenhub": "stylohyoid-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -9996,12 +10312,21 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "kenhub",
     "draft": [
      "facial",
      "occipital"
     ],
-    "unparsed": null
+    "kenhub": [
+     "facial",
+     "posterior_auricular",
+     "occipital"
+    ],
+    "wikipedia": null,
+    "onlyKenhub": [
+     "posterior_auricular"
+    ]
    },
    "roots": {
     "status": "noDraft",
@@ -10015,7 +10340,8 @@
    "source": {
     "page": "Stylopharyngeus muscle",
     "revid": 1302607408,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:stylopharyngeus"
    },
    "nerve": {
     "status": "agree",
@@ -10027,11 +10353,15 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "ascending_pharyngeal"
     ],
-    "unparsed": null
+    "uams": [
+     "ascending_pharyngeal"
+    ],
+    "wikipedia": null
    },
    "roots": {
     "status": "noDraft",
@@ -10045,7 +10375,9 @@
    "source": {
     "page": "Subclavius muscle",
     "revid": 1292233586,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:subclavius",
+    "kenhub": "subclavius-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -10066,8 +10398,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C5–C6"
+    "status": "partial",
+    "by": "uams",
+    "draft": "C5–C6",
+    "uams": "C5"
    },
    "action": {
     "status": "agree"
@@ -10077,7 +10411,8 @@
    "source": {
     "page": "Subscapularis muscle",
     "revid": 1378347173,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:subscapularis"
    },
    "nerve": {
     "status": "agree",
@@ -10110,7 +10445,9 @@
    "source": {
     "page": "Flexor pollicis brevis muscle",
     "revid": 1360659630,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:flexor pollicis brevis",
+    "kenhub": "flexor-pollicis-brevis-muscle"
    },
    "nerve": {
     "status": "partial",
@@ -10127,20 +10464,18 @@
     "unparsed": "recurrent deep medial head"
    },
    "artery": {
-    "status": "conflict",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "superficial_palmar_branch"
     ],
+    "uams": [
+     "superficial_palmar_branch",
+     "radial"
+    ],
     "wikipedia": [
      "superficial_palmar_arch"
-    ],
-    "onlyDraft": [
-     "superficial_palmar_branch"
-    ],
-    "onlyWikipedia": [
-     "superficial_palmar_arch"
-    ],
-    "unparsed": "arch"
+    ]
    },
    "roots": {
     "status": "noSource",
@@ -10154,7 +10489,9 @@
    "source": {
     "page": "Pronator teres muscle",
     "revid": 1345264622,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:pronator teres",
+    "kenhub": "pronator-teres-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -10177,8 +10514,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C6–C7"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C6–C7",
+    "kenhub": "C6–C7"
    },
    "action": {
     "status": "agree"
@@ -10188,7 +10527,8 @@
    "source": {
     "page": "Masseter muscle",
     "revid": 1314488567,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:masseter"
    },
    "nerve": {
     "status": "agree",
@@ -10220,36 +10560,55 @@
    "source": {
     "page": "Gemelli muscles",
     "revid": 1380894806,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:gemellus, superior",
+    "kenhub": "superior-gemellus-muscle"
    },
    "nerve": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "n_obturator_internus"
     ],
-    "unparsed": null
+    "uams": [
+     "n_obturator_internus"
+    ],
+    "wikipedia": null
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "inferior_gluteal",
      "internal_pudendal"
     ],
-    "unparsed": null
+    "uams": [
+     "inferior_gluteal"
+    ],
+    "wikipedia": null,
+    "onlyDraft": [
+     "internal_pudendal"
+    ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "L5–S2"
+    "status": "partial",
+    "by": "kenhub",
+    "draft": "L5–S2",
+    "kenhub": "L5–S1"
    },
    "action": {
-    "status": "noSource"
+    "status": "agree",
+    "by": "uams",
+    "wikipedia": null,
+    "uams": "laterally rotates the femur"
    }
   },
   "Superior head of lateral pterygoid muscle": {
    "source": {
     "page": "Lateral pterygoid muscle",
     "revid": 1291880834,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:lateral pterygoid"
    },
    "nerve": {
     "status": "agree",
@@ -10282,7 +10641,8 @@
    "source": {
     "page": "Superior oblique muscle",
     "revid": 1293269913,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:oblique, superior"
    },
    "nerve": {
     "status": "agree",
@@ -10314,7 +10674,8 @@
    "source": {
     "page": "Superior pharyngeal constrictor muscle",
     "revid": 1379296747,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:constrictor, superior pharyngeal"
    },
    "nerve": {
     "status": "agree",
@@ -10352,7 +10713,8 @@
    "source": {
     "page": "Superior rectus muscle",
     "revid": 1353400916,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:rectus, superior"
    },
    "nerve": {
     "status": "agree",
@@ -10364,11 +10726,15 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "ophthalmic"
     ],
-    "unparsed": null
+    "uams": [
+     "ophthalmic"
+    ],
+    "wikipedia": null
    },
    "roots": {
     "status": "noDraft",
@@ -10382,7 +10748,9 @@
    "source": {
     "page": "Supinator muscle",
     "revid": 1360739757,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:supinator",
+    "kenhub": "supinator-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -10418,7 +10786,9 @@
    "source": {
     "page": "Supraspinatus muscle",
     "revid": 1379905252,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:supraspinatus",
+    "kenhub": "supraspinatus-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -10439,8 +10809,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C5–C6"
+    "status": "partial",
+    "by": "uams",
+    "draft": "C5–C6",
+    "uams": "C5"
    },
    "action": {
     "status": "agree"
@@ -10450,7 +10822,8 @@
    "source": {
     "page": "Temporalis muscle",
     "revid": 1380879793,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:temporalis"
    },
    "nerve": {
     "status": "agree",
@@ -10512,7 +10885,8 @@
    "source": {
     "page": "Tensor fasciae latae muscle",
     "revid": 1347097167,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:tensor fasciae latae"
    },
    "nerve": {
     "status": "agree",
@@ -10548,7 +10922,8 @@
    "source": {
     "page": "Teres major muscle",
     "revid": 1360741033,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:teres major"
    },
    "nerve": {
     "status": "agree",
@@ -10583,7 +10958,8 @@
    "source": {
     "page": "Teres minor muscle",
     "revid": 1313769663,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:teres minor"
    },
    "nerve": {
     "status": "agree",
@@ -10618,7 +10994,8 @@
    "source": {
     "page": "Thyroarytenoid muscle",
     "revid": 1380887097,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:thyroarytenoid"
    },
    "nerve": {
     "status": "agree",
@@ -10631,28 +11008,37 @@
     ]
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "superior_thyroid",
      "inferior_thyroid"
     ],
-    "unparsed": null
+    "uams": [
+     "superior_thyroid"
+    ],
+    "wikipedia": null,
+    "onlyDraft": [
+     "inferior_thyroid"
+    ]
    },
    "roots": {
     "status": "noDraft",
     "wikipedia": null
    },
    "action": {
-    "status": "conflict",
-    "expected": "relax|shorten|slacken",
-    "wikipedia": "Helps to reduce tension on the vocal folds during speech (Manner of articulation) to decrease pitch"
+    "status": "agree",
+    "by": "uams",
+    "wikipedia": "Helps to reduce tension on the vocal folds during speech (Manner of articulation) to decrease pitch",
+    "uams": "draws the arytenoid cartilage forward, relaxing and adducting the vocal folds"
    }
   },
   "Thyrohyoid muscle": {
    "source": {
     "page": "Thyrohyoid muscle",
     "revid": 1380880285,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:thyrohyoid"
    },
    "nerve": {
     "status": "partial",
@@ -10690,7 +11076,8 @@
    "source": {
     "page": "Tibialis anterior muscle",
     "revid": 1380879440,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:tibialis anterior"
    },
    "nerve": {
     "status": "agree",
@@ -10723,7 +11110,9 @@
    "source": {
     "page": "Tibialis posterior muscle",
     "revid": 1382821012,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:tibialis posterior",
+    "kenhub": "tibialis-posterior-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -10745,8 +11134,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "L4–L5"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "L4–L5",
+    "kenhub": "L4–L5"
    },
    "action": {
     "status": "agree"
@@ -10793,7 +11184,9 @@
    "source": {
     "page": "Adductor hallucis muscle",
     "revid": 1380892479,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:adductor hallucis",
+    "kenhub": "adductor-hallucis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -10814,8 +11207,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "S2–S3"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "S2–S3",
+    "kenhub": "S2–S3"
    },
    "action": {
     "status": "agree"
@@ -10825,7 +11220,8 @@
    "source": {
     "page": "Adductor pollicis muscle",
     "revid": 1339422079,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:adductor pollicis"
    },
    "nerve": {
     "status": "agree",
@@ -10858,7 +11254,8 @@
    "source": {
     "page": "Trapezius",
     "revid": 1377970464,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:trapezius"
    },
    "nerve": {
     "status": "agree",
@@ -10898,7 +11295,8 @@
    "source": {
     "page": "Transverse abdominal muscle",
     "revid": 1380886702,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-abdominal-region:transversus abdominis"
    },
    "nerve": {
     "status": "agree",
@@ -10916,22 +11314,30 @@
     ]
    },
    "artery": {
-    "status": "conflict",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "inferior_epigastric",
      "circumflex_iliac",
      "intercostal"
     ],
+    "uams": [
+     "circumflex_iliac",
+     "superior_epigastric",
+     "inferior_epigastric",
+     "musculophrenic",
+     "intercostal",
+     "subcostal",
+     "lumbar"
+    ],
     "wikipedia": [
      "subcostal"
     ],
-    "onlyDraft": [
-     "inferior_epigastric",
-     "circumflex_iliac",
-     "intercostal"
-    ],
-    "onlyWikipedia": [
-     "subcostal"
+    "onlyUams": [
+     "superior_epigastric",
+     "musculophrenic",
+     "subcostal",
+     "lumbar"
     ]
    },
    "roots": {
@@ -10947,7 +11353,9 @@
    "source": {
     "page": "Transversus thoracis muscle",
     "revid": 1380881213,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-thorax:transversus thoracis",
+    "kenhub": "transversus-thoracis-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -10959,17 +11367,15 @@
     ]
    },
    "artery": {
-    "status": "conflict",
+    "status": "agree",
+    "by": "uams",
     "draft": [
      "internal_thoracic"
     ],
-    "wikipedia": [
-     "intercostal"
-    ],
-    "onlyDraft": [
+    "uams": [
      "internal_thoracic"
     ],
-    "onlyWikipedia": [
+    "wikipedia": [
      "intercostal"
     ]
    },
@@ -10985,7 +11391,9 @@
    "source": {
     "page": "Extensor carpi ulnaris muscle",
     "revid": 1345277848,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:extensor carpi ulnaris",
+    "kenhub": "extensor-carpi-ulnaris-muscle"
    },
    "nerve": {
     "status": "agree",
@@ -11006,8 +11414,10 @@
     ]
    },
    "roots": {
-    "status": "noSource",
-    "draft": "C7–C8"
+    "status": "agree",
+    "by": "kenhub",
+    "draft": "C7–C8",
+    "kenhub": "C7–C8"
    },
    "action": {
     "status": "agree"
@@ -11017,7 +11427,8 @@
    "source": {
     "page": "Flexor carpi ulnaris muscle",
     "revid": 1344841887,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-upper-limb:flexor carpi ulnaris"
    },
    "nerve": {
     "status": "agree",
@@ -11050,7 +11461,8 @@
    "source": {
     "page": "Vastus intermedius muscle",
     "revid": 1338088416,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:vastus intermedius"
    },
    "nerve": {
     "status": "agree",
@@ -11083,7 +11495,8 @@
    "source": {
     "page": "Vastus lateralis muscle",
     "revid": 1282030801,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:vastus lateralis"
    },
    "nerve": {
     "status": "agree",
@@ -11116,7 +11529,8 @@
    "source": {
     "page": "Vastus medialis",
     "revid": 1336718053,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-lower-limb:vastus medialis"
    },
    "nerve": {
     "status": "agree",
@@ -11149,7 +11563,8 @@
    "source": {
     "page": "Intertransversarii",
     "revid": 1253177864,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-back-region:intertransversarii"
    },
    "nerve": {
     "status": "partial",
@@ -11166,11 +11581,23 @@
     "unparsed": "spinal"
    },
    "artery": {
-    "status": "noSource",
+    "status": "partial",
+    "by": "uams",
     "draft": [
      "lumbar"
     ],
-    "unparsed": null
+    "uams": [
+     "intercostal",
+     "subcostal",
+     "lumbar",
+     "deep_cervical"
+    ],
+    "wikipedia": null,
+    "onlyUams": [
+     "intercostal",
+     "subcostal",
+     "deep_cervical"
+    ]
    },
    "roots": {
     "status": "noDraft",
@@ -11184,7 +11611,8 @@
    "source": {
     "page": "Zygomaticus major muscle",
     "revid": 1345448933,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:zygomaticus major"
    },
    "nerve": {
     "status": "agree",
@@ -11216,7 +11644,8 @@
    "source": {
     "page": "Zygomaticus minor muscle",
     "revid": 1303064717,
-    "infobox": true
+    "infobox": true,
+    "uams": "muscles-of-the-head-and-neck:zygomaticus minor"
    },
    "nerve": {
     "status": "agree",

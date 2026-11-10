@@ -26,6 +26,10 @@ test('every pre-v2 visible row projects unchanged apart from the new muscle dept
       assert.ok(before.aliases.every((alias: string) => after.aliases.includes(alias)), `${before.sourceKey} lost an alias`);
       Object.assign(after, { names: before.names, label: before.label, aliases: before.aliases });
     }
+    // Titles now lead with the Sino-Korean term (2026-11-10); only titles that were the modern term change.
+    if (before.label === before.names.koModern && before.names.koTraditional) {
+      assert.equal(after.label, before.names.koTraditional, before.sourceKey); after.label = before.label;
+    }
     assert.deepEqual(after, before, before.sourceKey);
     assert.equal(depth !== undefined, before.kind === 'muscle', before.sourceKey);
   }

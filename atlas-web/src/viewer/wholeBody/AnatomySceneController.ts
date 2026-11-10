@@ -4,6 +4,7 @@ import { AnatomyMaterials, installAnatomyLighting } from '../anatomyMaterials.ts
 import { AnatomyPostprocess, defaultAmbientOcclusion } from '../postprocess.ts';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { AdaptiveResolution } from '../adaptiveResolution.ts';
 import { type BodyAsset, type BodyManifest, type BodyView, visible, pickable, selected } from './contract';
 import { ResourceQueue } from './resources';
 import { entranceFrame } from './sceneEntrance.ts';
@@ -40,6 +41,8 @@ export class AnatomySceneController {
   private readonly reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   private readonly frameIntervalsMs: number[] = [];
   private readonly renderDurationsMs: number[] = [];
+  private readonly resolution = new AdaptiveResolution(Math.min(devicePixelRatio, 1.75));
+  private drewPreviousFrame = false;
   private pointer = { x: 0, y: 0 };
   private lastReport = 0;
   private lastProgress: BodyProgress | null = null;
@@ -56,7 +59,7 @@ export class AnatomySceneController {
     this.assets = new Map(manifest.chunks.flatMap(c => c.assets.map(a => [a.nodeId, a] as const)));
     this.root.name = 'AnatomySceneRoot'; this.scene.add(this.root);
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-    this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
+    this.renderer.setPixelRatio(this.resolution.full);
     installAnatomyLighting(this.scene, this.renderer);
     // Several passes render per frame; reset counters once per frame so reported calls/triangles stay per frame.
     this.renderer.info.autoReset = false;
@@ -98,7 +101,7 @@ export class AnatomySceneController {
     canvas.addEventListener('keydown', this.onKey);
     this.focus(null, false);
     this.renderer.setAnimationLoop(this.frame);
-    if (import.meta.env?.DEV) (window as unknown as { __atlasScene?: AnatomySceneController }).__atlasScene = this; // dev inspection only
+    if (import.meta.env?.DEV || import.meta.env?.MODE === 'qa') (window as unknown as { __atlasScene?: AnatomySceneController }).__atlasScene = this; // dev inspection only
   }
 
   requestRender() { this.dirty = true; }
@@ -171,6 +174,11 @@ export class AnatomySceneController {
     return true;
   }
   private invalidate = () => { this.dirty = true; };
+  private setPixelRatio(ratio: number) {
+    if (ratio === this.renderer.getPixelRatio()) return;
+    const size = this.renderer.getSize(new THREE.Vector2());
+    this.renderer.setPixelRatio(ratio); this.postprocess.setSize(size.x, size.y);
+  }
   /** Future pose controllers register updates here, never create a second RAF/renderer. */
   addUpdate(update: (seconds: number) => boolean | void) { this.updates.add(update); return () => { this.updates.delete(update); this.dirty = true; }; }
   private frame = (time: number) => {
@@ -190,7 +198,9 @@ export class AnatomySceneController {
     const cameraChanged = this.updateCamera(dt);
     this.controls.update();
     if (this.hoverPoint) { const p = this.hoverPoint; this.hoverPoint = null; this.setHover(this.pick(p.x, p.y)?.nodeId ?? null); }
-    if (this.dirty || poseChanged || entranceChanged || cameraChanged) {
+    const draw = this.dirty || poseChanged || entranceChanged || cameraChanged;
+    if (draw) {
+      this.setPixelRatio(this.resolution.moving(intervalMs, this.drewPreviousFrame));
       const started = ASSET_INSPECTION_ENABLED ? performance.now() : 0;
       this.renderer.info.reset();
       this.postprocess.render(false); this.dirty = false; this.renderedFrames += 1;
@@ -201,10 +211,13 @@ export class AnatomySceneController {
       }
     }
     else if (this.refineAt && time >= this.refineAt) {
-      // Still view: redraw once with ambient occlusion. Skipped silently when it is off.
+      // Still view: redraw once at full resolution, with ambient occlusion unless this machine is struggling.
       this.refineAt = 0;
-      if (this.postprocess.ambientOcclusion && !this.lost) { this.renderer.info.reset(); this.postprocess.render(true); }
+      const sharpen = this.resolution.degraded, occlusion = this.postprocess.ambientOcclusion && !sharpen;
+      if (sharpen) this.setPixelRatio(this.resolution.full);
+      if ((sharpen || occlusion) && !this.lost) { this.renderer.info.reset(); this.postprocess.render(occlusion); }
     }
+    this.drewPreviousFrame = draw;
     if (time - this.lastReport > 500) { this.report(); this.lastReport = time; }
   };
   setView(view: BodyView) {

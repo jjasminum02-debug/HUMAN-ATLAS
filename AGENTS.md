@@ -23,9 +23,10 @@
 ## 개발 명령 (atlas-web/)
 - 준비: Node 24(`brew install node@24`, PATH에 `/opt/homebrew/opt/node@24/bin`), pnpm.
 - `pnpm dev` — 개발 서버 (http://127.0.0.1:5173)
-- `pnpm build` — 타입 검사 + 화면 빌드만
+- `pnpm build` — 타입 검사 + 앱과 v2 데이터 빌드(`dist`, 약 30초). `pnpm preview`로 확인. 외부에 올리지 않는다.
 - `pnpm test` — 단위 테스트 전체
 - `pnpm qa:flows` — 대표 학습 흐름 10개 브라우저 테스트 + 성능 숫자(설치된 Chrome, 자체 개발 서버, 약 30초). 화면을 바꾸면 돌린다.
+- `pnpm qa:flows:build` — 같은 흐름을 빌드본에서 실행. `pnpm qa:perf`(`pnpm build:qa` 다음) — 저사양 조건별 성능.
 - `pnpm check` — 데이터 검증기 + 배포 감사(과거 증거를 읽는 검사 포함). 화면 작업을 막지 않는다.
 
 ## 남겨 둔 과거 파일

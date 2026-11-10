@@ -36,7 +36,7 @@ function NameRows({ row }: {
     const nerveNames = row.kind === 'nerve' ? nerveNamesForSource(row.names.en) : null;
     const names = nerveNames ? { koModern: nerveNames.koModern, koTraditional: nerveNames.koTraditional, en: nerveNames.en }
         : row.names;
-    return <div className="names-card" aria-label="이름">{[['우리말명', names.koModern], ['한자어명 (한글 표기)', names.koTraditional], ['영어명', names.en]].map(([label, value]) => <div key={label}><span>{label}</span><strong>{value || '이름 정리 중'}</strong></div>)}</div>;
+    return <div className="names-card" aria-label="이름">{[['한자어명 (한글 표기)', names.koTraditional], ['우리말명', names.koModern], ['영어명', names.en]].map(([label, value]) => <div key={label}><span>{label}</span><strong>{value || '이름 정리 중'}</strong></div>)}</div>;
 }
 const TISSUE_LABELS: Record<string, string> = { ligament: '인대', capsule: '관절주머니', disc: '원판', meniscus: '반달', labrum: '관절테두리',
     membrane: '막', cartilaginous_joint: '연골결합', cartilage: '연골', fat_pad: '지방체', bursa: '윤활주머니', fascia: '근막', aponeurosis: '널힘줄',
@@ -47,7 +47,7 @@ function kindLabel(row: RuntimeStructureRecord) {
 }
 const LAYER_HINTS: Partial<Record<RuntimeStructureRecord['kind'], string>> = { fascia: '근막', joint: '인대·관절', tendon: '얕은 근육 또는 깊은 근육', vessel: '혈관' };
 function learnerRowTitle(row: RuntimeStructureRecord) {
-    return row.kind === 'nerve' ? nerveNamesForSource(row.names.en)?.koModern ?? row.label : row.label;
+    return row.kind === 'nerve' ? nerveNamesForSource(row.names.en)?.koTraditional ?? row.label : row.label;
 }
 function motionPanelOptions(actions: ReturnType<typeof ResolveMotionActions>, sourceKey: string): LearnerMotionActionOption[] {
     return actions.map(action => ({
@@ -427,7 +427,7 @@ export default function App() {
     <nav className="study-list region-structure-list" aria-label="구조 목록">{rows.map(r => { const sameSearchConcept = selected && (selected.searchGroupKey ?? selected.sourceKey) === (r.searchGroupKey ?? r.sourceKey); return <button key={r.sourceKey} className={sameSearchConcept ? 'selected' : ''} aria-pressed={Boolean(sameSearchConcept)} onClick={() => select(r.sourceKey)}><span>{learnerRowTitle(r)}</span>{learnerRowTitle(r) !== r.names.en && <small>{r.names.en}</small>}{r.searchApproximate && <em>비슷한 이름</em>}</button>; })}{!rows.length && !nerveSearchResults.length && <p className="quiet-note">등록된 이름을 찾지 못했습니다. 다른 이름으로 검색해 보세요.</p>}</nav>
     {nerveSearchResults.length > 0 && <section className="nerve-search-results" aria-label="신경 검색 결과"><h2>신경 설명</h2>
       {nerveSearchResults.map(({ concept, nativeRows, approximate }) => <div className="nerve-search-result" key={concept.key}>
-        <strong>{concept.names.koModern}</strong><small>{concept.names.en}</small>
+        <strong>{concept.names.koTraditional || concept.names.koModern}</strong><small>{concept.names.koTraditional && concept.names.koModern !== concept.names.koTraditional ? `${concept.names.koModern} · ` : ''}{concept.names.en}</small>
         {nativeRows.length ? <div>{nativeRows.map(row => <button key={row.sourceKey} onClick={() => select(row.sourceKey)}>{row.side === 'left' ? '왼쪽' : row.side === 'right' ? '오른쪽' : '선택'} 모형</button>)}</div>
           : <button onClick={() => selectTextNerve(concept.key)}>설명 보기</button>}
         {approximate && <em>비슷한 이름</em>}
@@ -454,7 +454,7 @@ export default function App() {
             } }}>{t}</button>)}</div>
     </>}
     </div><div ref={detailContent} className="study-detail-content" onScroll={e => { if (detailSubject) detailScrollPositions.current.set(`${detailSubject}:${tab}`, e.currentTarget.scrollTop); }}>
-    {selected ? <NameRows row={selected}/> : <div className="names-card" aria-label="이름"><div><span>우리말명</span><strong>{selectedTextNerve!.names.koModern}</strong></div><div><span>한자어명 (한글 표기)</span><strong>{selectedTextNerve!.names.koTraditional}</strong></div><div><span>영어명</span><strong>{selectedTextNerve!.names.en}</strong></div></div>}
+    {selected ? <NameRows row={selected}/> : <div className="names-card" aria-label="이름"><div><span>한자어명 (한글 표기)</span><strong>{selectedTextNerve!.names.koTraditional}</strong></div><div><span>우리말명</span><strong>{selectedTextNerve!.names.koModern}</strong></div><div><span>영어명</span><strong>{selectedTextNerve!.names.en}</strong></div></div>}
     {selected?.names.en === 'Rotatores' && route.regions.length > 0 && !route.regions.includes('back') && <p className="quiet-note">선택한 돌림근 모형은 목에만 한정되지 않고 척추를 따라 이어지는 전체 묶음입니다.</p>}
     {!selected && selectedTextNerve && <section className="attachment-section nerve-card text-nerve-card" aria-label="신경 개념 설명">
       <h3>신경 설명</h3>
@@ -507,7 +507,7 @@ export default function App() {
         {selectedMuscleNerveRelations.length ? <ul>{selectedMuscleNerveRelations.map(relation => {
           const concept = nerveConceptForLearner(relation.nerveKey);
           return <li key={`${relation.nerveKey}:${relation.targetEnglishConcept}:${relation.targetSide}`}>
-            <button className="bone-related-muscle" onClick={() => openNerveConcept(relation.nerveKey, relation.targetSide ?? selected.side)}>{concept?.names.koModern ?? '신경 설명'}</button>
+            <button className="bone-related-muscle" onClick={() => openNerveConcept(relation.nerveKey, relation.targetSide ?? selected.side)}>{concept?.names.koTraditional || concept?.names.koModern || '신경 설명'}</button>
           </li>;
         })}</ul> : <MuscleNerves muscle={selected} rows={runtimeByKey} onSelect={select} fallback={<p>{structureUnavailabilityForLearner('motorNerve')}</p>}/>}
         {selectedMuscleNerveRelations.length > 0 && <details key={`relation-${selected.sourceKey}`} className="nerve-learning-context"><summary>관계 안내</summary>

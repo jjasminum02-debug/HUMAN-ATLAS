@@ -15,7 +15,8 @@ function useMuscleCards() {
   return cards;
 }
 
-const termName = (t: Term) => t.ko === t.koTraditional ? t.ko : `${t.ko} (${t.koTraditional})`;
+// Sino-Korean term first, modern term after it (2026-11-10).
+const termName = (t: Term) => t.ko === t.koTraditional || !t.koTraditional ? t.ko : `${t.koTraditional} (${t.ko})`;
 /** The drawn structure with this English name, on the given side when the model has both sides. */
 const rowNamed = (rows: Map<string, RuntimeStructureRecord>, kind: RuntimeStructureRecord['kind'], en: string, side: string | null) =>
   [...rows.values()].find(r => r.kind === kind && r.names.en === en && r.side === side) ?? [...rows.values()].find(r => r.kind === kind && r.names.en === en);

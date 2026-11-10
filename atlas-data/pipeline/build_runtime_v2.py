@@ -115,7 +115,8 @@ def main():
             visible = (layer is not None) if was_accessory else row['localDisplayEligible']
             record.update({
                 'regions': row['regionIds'] or (nearest_bone_regions({'min': row['bounds'][0], 'max': row['bounds'][1]}, s['side']) if visible else []),
-                'names': row['names'], 'label': row['label'],
+                # Sino-Korean term first (user decision 2026-11-10); the modern term stays searchable through names.koModern.
+                'names': row['names'], 'label': row['names']['koTraditional'] if row['label'] == row['names']['koModern'] and row['names']['koTraditional'] else row['label'],
                 'aliases': row['aliases'] + (TYPE_TERMS.get(s['kind'], []) if was_accessory else []),
                 'searchGroup': row['searchGroupKey'],
                 'learner': {'visible': visible, 'defaultVisible': visible if was_accessory else row['defaultVisible'],

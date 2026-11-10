@@ -41,7 +41,8 @@ test('textbook examples', () => {
   assert.deepEqual(nerves('Long head of biceps femoris'), ['Tibial nerve']);
   assert.deepEqual(nerves('Short head of biceps femoris'), ['Common fibular nerve']);
   assert.equal(file.cards['Gluteus medius muscle'].roots, 'L4–S1');
-  assert.equal(file.cards['Diaphragm'].roots, undefined); // the infobox names no segments: not shown
+  assert.equal(file.cards['Diaphragm'].roots, 'C3–C5'); // Wikipedia names no segments; the draft and UAMS agree
+  assert.equal(file.cards['Interspinales colli muscles'].artery, undefined); // no draft value: never filled from sources alone
   assert.deepEqual(file.cards['Rectus femoris muscle'].artery!.map(k => file.arteries[k].en), ['Lateral circumflex femoral artery']);
   assert.equal(file.cards['Calcaneal tendon'].tendonOf, 'Gastrocnemius');
 });

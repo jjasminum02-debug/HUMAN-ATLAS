@@ -3,7 +3,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { Plugin } from 'vite';
-import { projectLegacyRuntime, type V2GeometryFile } from '../src/data/atlasV2.ts';
+import { precompress, projectRuntime, staticRuntimeMiddleware, writeStaticRuntime } from './atlasV2Static.ts';
 
 const PROJECTED = new Set(['/__atlas/integration.json', '/__atlas/datasets/human-atlas-local/manifest.json']);
 const RAW: Record<string, string> = { '/__atlas/v2/structures.json': 'structures.json', '/__atlas/v2/relations.json': 'relations.json',
@@ -19,16 +19,21 @@ export function atlasV2Plugin(root: string): Plugin {
   const geometryDir = resolve(root, 'atlas-data/source-cache/datasets/za-v2');
   type Built = { manifest: Buffer; integration: Buffer; chunks: Map<string, string> };
   let built: Promise<Built> | undefined;
+  let outDir = resolve(root, 'atlas-web/dist');
   const build = () => built ??= (async () => {
-    const [structures, relations, geometry] = await Promise.all([
-      readFile(resolve(runtime, 'structures.json'), 'utf8'), readFile(resolve(runtime, 'relations.json'), 'utf8'),
-      readFile(resolve(geometryDir, 'geometry.json'), 'utf8')]).then(texts => texts.map(text => JSON.parse(text)));
-    const { dataset, integration } = projectLegacyRuntime(structures, relations, geometry);
-    const chunks = new Map((geometry as V2GeometryFile).chunks.map(c => [`${c.namespace}/${c.id}`, c.sha256]));
-    return { manifest: Buffer.from(JSON.stringify(dataset)), integration: Buffer.from(JSON.stringify(integration)), chunks };
+    const { geometry, manifest, integration } = await projectRuntime(root);
+    const chunks = new Map(geometry.chunks.map(c => [`${c.namespace}/${c.id}`, c.sha256]));
+    return { manifest, integration, chunks };
   })().catch(error => { built = undefined; throw error; });
   return {
     name: 'atlas-v2-runtime',
+    configResolved(config) { outDir = resolve(config.root, config.build.outDir); },
+    async writeBundle() {
+      await writeStaticRuntime(root, outDir);
+      const { files, raw, encoded } = await precompress(outDir);
+      console.log(`atlas v2 runtime: ${files} files, ${(raw / 1e6).toFixed(0)} MB, ${(encoded / 1e6).toFixed(0)} MB with brotli`);
+    },
+    configurePreviewServer(server) { server.middlewares.use(staticRuntimeMiddleware(outDir)); },
     configureServer(server) {
       server.watcher.add([runtime, resolve(geometryDir, 'geometry.json')]);
       const invalidate = (path: string) => { if (path.startsWith(runtime) || path.startsWith(geometryDir)) built = undefined; };

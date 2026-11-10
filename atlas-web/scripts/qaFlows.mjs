@@ -11,7 +11,13 @@ const option = name => { const i = args.indexOf(name); return i >= 0 ? args[i + 
 const only = option('--only');
 
 let server, base = option('--url');
-if (!base) {
+if (flag('--preview')) {
+  // The built app from `pnpm build:qa`: production code plus the two scene hooks these flows read.
+  const { preview } = await import('vite');
+  const previewServer = await preview({ root: fileURLToPath(new URL('..', import.meta.url)), mode: 'qa', logLevel: 'error', preview: { host: '127.0.0.1', port: 5197, strictPort: false } });
+  server = { close: () => previewServer.close(), label: '빌드본' };
+  base = previewServer.resolvedUrls.local[0].replace(/\/$/, '');
+} else if (!base) {
   const { createServer } = await import('vite');
   server = await createServer({ root: fileURLToPath(new URL('..', import.meta.url)), logLevel: 'error', server: { host: '127.0.0.1', port: 5199, strictPort: false } });
   await server.listen();
@@ -94,7 +100,7 @@ const flows = [
   }],
   ['검색으로 근육 찾기: 넙다리곧은근 이름·기시·정지', async page => {
     await open(page);
-    await search(page, '넙다리곧은근', '넙다리곧은근');
+    await search(page, '넙다리곧은근', '대퇴직근'); // modern name finds the Sino-Korean title
     const text = await card(page);
     expect(text.includes('Rectus femoris') && text.includes('기시') && text.includes('정지'), '카드에 영어명·기시·정지 없음');
     const key = new URL(page.url()).searchParams.get('source');
@@ -111,7 +117,7 @@ const flows = [
     await page.locator('.vessel-supplied').waitFor({ timeout: 10000 });
     expect(await pressed(page, '.layer-row', '혈관') === 'true', '혈관 층이 자동으로 켜지지 않음');
     const supplied = await page.locator('.vessel-supplied').innerText();
-    expect(supplied.includes('넙다리곧은근'), `혈액을 받는 근육: ${supplied.replace(/\s+/g, ' ').slice(0, 200)}`);
+    expect(supplied.includes('대퇴직근'), `혈액을 받는 근육: ${supplied.replace(/\s+/g, ' ').slice(0, 200)}`);
     await settle(page);
     const vessels = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && /^vessel:/.test(o.material.name)) n++; }); return n; });
     expect(vessels > 600, `보이는 혈관 ${vessels}개`);
@@ -126,7 +132,7 @@ const flows = [
     expect(text.includes('대퇴골') && text.includes('경골'), '잇는 뼈에 대퇴골·경골 없음');
     // C3: the card lists who moves the knee, per movement.
     const movers = await page.locator('.joint-movers').innerText({ timeout: 10000 });
-    expect(/굽힘/.test(movers) && /폄/.test(movers) && movers.includes('넙다리곧은근'), `무릎을 움직이는 근육 목록: ${movers.replace(/\s+/g, " ").slice(0, 300)}`);
+    expect(/굽힘/.test(movers) && /폄/.test(movers) && movers.includes('대퇴직근'), `무릎을 움직이는 근육 목록: ${movers.replace(/\s+/g, " ").slice(0, 300)}`);
     await page.getByRole('button', { name: /무릎관절 .* 움직여 보기/ }).click();
     await page.locator('#movement-panel .movement-dofs').waitFor();
     expect(await pressed(page, '.movement-joints', '무릎') === 'true', '움직임 창이 무릎으로 열리지 않음');
@@ -209,7 +215,7 @@ const flows = [
   }],
   ['기시·정지 관찰: 넙다리곧은근 기시 뼈', async page => {
     await open(page);
-    await search(page, '넙다리곧은근', '넙다리곧은근');
+    await search(page, '넙다리곧은근', '대퇴직근'); // modern name finds the Sino-Korean title
     const button = page.locator('.attachment-origin .attachment-observe');
     await button.click();
     await settle(page);
@@ -315,7 +321,7 @@ for (const [name, run] of selected) {
 if (!only) {
   const page = await context.newPage();
   const p = await performance(page);
-  console.log(`\n성능 (1440×900, DPR 2, ${server ? '개발 서버' : base}):`);
+  console.log(`\n성능 (1440×900, DPR 2, ${server?.label ?? (server ? '개발 서버' : base)}):`);
   console.log(`  처음 로딩 ${(p.coldLoadMs / 1000).toFixed(2)}s · 모형 요청 ${p.requests}개 ${p.mb.toFixed(1)}MB`);
   console.log(`  회전 ${p.orbit.frames}프레임/3s · 프레임 간격 p50 ${p.orbit.p50Ms.toFixed(1)}ms p95 ${p.orbit.p95Ms.toFixed(1)}ms (화면 주사율 상한) · 렌더 CPU p50 ${p.orbit.renderP50Ms.toFixed(1)}ms p95 ${p.orbit.renderP95Ms.toFixed(1)}ms · draw ${p.orbit.calls} · 삼각형 ${(p.orbit.triangles / 1e6).toFixed(2)}M`);
   console.log(`  자세 변경 첫 ${p.pose.firstMs.toFixed(1)}ms(뼈만, 가중치 요청) · 가중치 로딩 후 뼈+연조직 ${p.pose.steadyMs.toFixed(1)}ms · JS heap ${p.heapMb.toFixed(0)}MB`);

@@ -106,7 +106,7 @@ export class DatasetSceneAdapter implements SourceMotionHost, RigHost {
         canvas.addEventListener('pointerup', this.onUp);
         this.setView(this.view);
         this.focus([], false);
-        if (import.meta.env?.DEV) (window as unknown as { __atlasRig?: object }).__atlasRig = { // dev inspection only
+        if (import.meta.env?.DEV || import.meta.env?.MODE === 'qa') (window as unknown as { __atlasRig?: object }).__atlasRig = { // dev inspection only
             load: async () => (await fetch('/__atlas/v2/rig.json')).json() as Promise<RigFile>,
             set: (rig: RigFile, pose: RigPose) => this.setRigPose(rig, pose), reset: (rig: RigFile) => this.setRigPose(rig, null) };
     }

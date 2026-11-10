@@ -20,6 +20,17 @@ test('all three names find one entry for a left/right pair', () => {
   }
 });
 
+test('titles lead with the Sino-Korean term, and a modern-term search still finds it', () => {
+  assert.equal(rectus[0].label, '대퇴직근');
+  for (const query of ['넙다리곧은근', '넙다리곧', '대퇴직근']) {
+    const [hit] = searchStructures(rows, query, []);
+    assert.equal(hit?.label, '대퇴직근', query);
+  }
+  const named = rows.filter(row => row.names.koTraditional && row.names.koModern && row.localDisplayEligible);
+  assert.ok(named.length > 2000);
+  assert.deepEqual(named.filter(row => row.label !== row.names.koTraditional).map(row => row.label), []);
+});
+
 test('region filters use the union of the chosen regions', () => {
   const [a, b] = regionIds, one = searchStructures(rows, '', [a]).length, other = searchStructures(rows, '', [b]).length;
   const both = searchStructures(rows, '', [a, b]).length;

@@ -17,6 +17,7 @@ import re
 import sys
 import time
 import urllib.parse
+import urllib.error
 import urllib.request
 
 sys.dont_write_bytecode = True
@@ -28,6 +29,12 @@ CACHE = ROOT / 'atlas-data/source-cache/wikipedia-2026-11-04'
 API = 'https://en.wikipedia.org/w/api.php'
 OUT = ROOT / 'atlas-data/runtime/muscle-cards.json'
 CHECKS = ROOT / 'atlas-data/anatomy/muscle-card-checks.json'
+# Second independent source for what Wikipedia leaves empty or contradicts: UAMS Department of Neuroscience muscle tables
+# (Muscle / Origin / Insertion / Action / Innervation / Artery). Cached HTML, git-ignored; refetch with fetch_uams().
+UAMS = ROOT / 'atlas-data/source-cache/uams-2026-11-10'
+UAMS_URL = 'https://medicine.uams.edu/neuroscience/education/medical-school-courses/human-structure-module/anatomy-tables/muscle-tables/{}/'
+UAMS_PAGES = ['muscles-of-the-head-and-neck', 'muscles-of-the-upper-limb', 'muscles-of-the-back-region', 'muscles-of-the-thorax',
+              'muscles-of-the-pelvis-and-perineum', 'muscles-of-the-abdominal-region', 'muscles-of-the-lower-limb']
 
 
 def fetch(titles):
@@ -108,11 +115,107 @@ def infobox(wikitext):
             'action': fields.get('action') or fields.get('actions') or ''}
 
 
+def fetch_uams():
+    UAMS.mkdir(parents=True, exist_ok=True)
+    for page in UAMS_PAGES:
+        path = UAMS / f'{page}.html'
+        if not path.exists():
+            request = urllib.request.Request(UAMS_URL.format(page), headers={'User-Agent': 'HUMAN-ATLAS-anatomy-check/1.0 (local educational build)'})
+            with urllib.request.urlopen(request, timeout=40) as response: path.write_bytes(response.read())
+
+
+ABBREVIATIONS = [(r'\baa\.', 'arteries'), (r'\ba\.', 'artery'), (r'\bnn\.', 'nerves'), (r'\bn\.', 'nerve'), (r'\bbrs?\.', 'branch'), (r'\bmm?\.', 'muscle'),
+                 (r'\bant\.', 'anterior'), (r'\bpost\.', 'posterior'), (r'\bsup\.', 'superior'), (r'\binf\.', 'inferior'), (r'\blat\.', 'lateral'),
+                 (r'\bmed\.', 'medial'), (r'\bint\.', 'internal'), (r'\bext\.', 'external'), (r'\bdesc\.', 'descending'), (r'\basc\.', 'ascending')]
+
+
+# Third source, asked only for what the draft and neither Wikipedia nor UAMS settle: Kenhub "Key facts" (cached, git-ignored).
+KENHUB = ROOT / 'atlas-data/source-cache/kenhub-2026-11-10'
+KENHUB_URL = 'https://www.kenhub.com/en/library/anatomy/{}'
+KENHUB_FIELDS = {'innervation': 'nerve', 'blood supply': 'artery', 'action': 'action', 'actions': 'action', 'function': 'action', 'functions': 'action'}
+
+
+def kenhub_facts(*names):
+    """{'nerve', 'artery', 'action'} text from the first Kenhub page found for these names, or None."""
+    KENHUB.mkdir(parents=True, exist_ok=True)
+    slugs = []
+    for name in names:
+        base = re.sub(r'[^a-z0-9]+', '-', name.lower().strip('() ')).strip('-')
+        slugs += [base] if base.endswith(('-muscle', '-muscles')) else [f'{base}-muscle', f'{base}-muscles', base]
+    for slug in dict.fromkeys(slugs):
+        path, missing = KENHUB / f'{slug}.html', KENHUB / f'{slug}.missing'
+        if missing.exists(): continue
+        if not path.exists():
+            request = urllib.request.Request(KENHUB_URL.format(slug), headers={'User-Agent': 'HUMAN-ATLAS-anatomy-check/1.0 (local educational build)'})
+            time.sleep(1)
+            try:
+                with urllib.request.urlopen(request, timeout=30) as response: path.write_bytes(response.read())
+            except urllib.error.HTTPError as error:
+                if error.code == 404: missing.write_text(''); continue
+                raise
+        text = path.read_text(errors='ignore'); start = text.find('Key facts')
+        if start < 0: continue
+        parts = [' '.join(html.unescape(p).split()) for p in re.split(r'<[^>]+>', text[start:start + 6000])]
+        parts = [p for p in parts if p]
+        facts = {}
+        for i, part in enumerate(parts[:-1]):
+            field = KENHUB_FIELDS.get(part.lower())
+            if field and field not in facts: facts[field] = parts[i + 1]
+        if facts: return {**facts, 'page': slug}
+    return None
+
+
+def uams_name(name):
+    """'oblique, external abdominal' / 'Abductor digiti minimi muscle of foot' -> 'external abdominal oblique' / 'abductor digiti minimi foot'."""
+    n = name.lower().strip('() ')
+    if ',' in n and '(' not in n: head, _, tail = n.partition(','); n = f'{tail} {head}'
+    n = re.sub(r'\b(muscles?|musculus|of|the|in|m)\b|[^a-z ]', ' ', n.replace('-', ''))
+    return ' '.join(n.split())
+
+
+def uams_rows():
+    """Normalized muscle name -> row; names whose rows disagree between tables are dropped as ambiguous."""
+    fetch_uams(); rows, clash = {}, set()
+    for page in UAMS_PAGES:
+        text = (UAMS / f'{page}.html').read_text(errors='ignore')
+        for table in re.findall(r'<table.*?</table>', text, re.S):
+            trs = re.findall(r'<tr.*?</tr>', table, re.S)
+            cell = lambda c: ' '.join(html.unescape(re.sub(r'<[^>]+>', ' ', c)).split())
+            head = [cell(c).lower() for c in re.findall(r'<t[hd].*?</t[hd]>', trs[0], re.S)]
+            for tr in trs[1:]:
+                cells = [cell(c) for c in re.findall(r'<t[hd].*?</t[hd]>', tr, re.S)]
+                if len(cells) != len(head) or not cells[0]: continue
+                row = dict(zip(head, cells)); key = uams_name(row['muscle'])
+                for pattern, word in ABBREVIATIONS:
+                    for field in ('action', 'innervation', 'artery'): row[field] = re.sub(pattern, word, row.get(field, ''), flags=re.I)
+                if key in rows and (rows[key]['innervation'], rows[key]['artery']) != (row['innervation'], row['artery']): clash.add(key)
+                rows.setdefault(key, {**row, 'page': page})
+    return {k: v for k, v in rows.items() if k not in clash}
+
+
+# Same muscle, different spelling in the UAMS tables (name equivalence only; values still have to agree with the draft).
+UAMS_ALIASES = {'Dorsal interossei muscles of foot': 'dorsal interosseous (foot)', 'Dorsal interossei muscles of hand': 'dorsal interosseous (hand)',
+                'Plantar interossei muscles': 'plantar interosseous', 'Palmar interossei muscles': 'palmar interosseous',
+                'Depressor septi nasi': 'depressor septi', 'Corrugator supercilii': 'corrugator', 'Rhomboid major muscle': 'rhomboideus major',
+                'Rhomboid minor muscle': 'rhomboideus minor', 'Scalenus medius muscle': 'middle scalene', 'Opponens digiti minimi muscle of hand': 'opponens digiti minimi',
+                'Fibularis brevis muscle': 'fibularis (peroneus) brevis', 'Fibularis longus muscle': 'fibularis (peroneus) longus',
+                'Fibularis tertius muscle': 'fibularis (peroneus) tertius', 'Levator nasolabialis': 'levator labii superioris alaque nasi'}
+
+
+def uams_row(rows, *names):
+    names = [UAMS_ALIASES.get(n, n) for n in names]
+    for name in names:
+        key = uams_name(name)
+        if key in rows: return rows[key]
+        if key.endswith(('foot', 'hand')) and f'{key[:-5]} {key[-4:]}' in rows: return rows[f'{key[:-5]} {key[-4:]}']
+    return None
+
+
 def vocab_keys(text, vocab):
     """Vocabulary keys named in an infobox field, specific names first; matched text is consumed."""
     text, found = f' {text.lower()} ', []
     for key, entry in vocab.items():
-        pattern = re.compile(entry[4])
+        pattern = re.compile(rf'(?<![a-z])(?:{entry[4]})')  # whole words only: 'segmental' must not read as 'mental'
         if pattern.search(text):
             found.append(key); text = pattern.sub(' ', text)
     rest = re.sub(r'\b(nerves?|arter(y|ies)|branch(es)?|of|the|and|via|from|to|or|its|muscular|supplied|by|division|part|portion|fibers?|fibres?|motor|sensory)\b|[^a-z]', ' ', text)
@@ -182,6 +285,7 @@ def main():
     unmapped = [n for n in muscles if n not in TENDONS and PARTS.get(n, n) not in CONCEPTS]
     if unmapped: raise SystemExit(f'no concept for {unmapped}')
     pages = fetch(sorted({c['wiki'] for c in CONCEPTS.values()}))
+    second = uams_rows()
 
     cards, checks, exceptions, used = {}, {}, [], {'nerve': set(), 'artery': set()}
     tally = {f: {'agree': 0, 'partial': 0, 'conflict': 0, 'noSource': 0, 'noDraft': 0} for f in ('nerve', 'roots', 'artery', 'action')}
@@ -193,6 +297,14 @@ def main():
         page = pages[concept['wiki']]; box = infobox(page['wikitext']) if page else None
         source = {'page': page['title'] if page else None, 'revid': page['revid'] if page else None, 'infobox': box is not None}
         card = {'concept': concept_name}; check = {'source': source}
+        uams = uams_row(second, concept_name, concept['wiki'])
+        if uams: source['uams'] = uams['page'] + ':' + uams['muscle']
+        third = {}
+        def kenhub():
+            if 'facts' not in third:
+                third['facts'] = kenhub_facts(concept['wiki'], concept_name)
+                if third['facts']: source['kenhub'] = third['facts']['page']
+            return third['facts']
 
         def record(field, status, **detail):
             tally[field][status] += 1; check[field] = {'status': status, **detail}
@@ -202,7 +314,26 @@ def main():
             mine = draft[field]
             wiki, rest = vocab_keys(box[field], vocab) if box else ([], '')
             if not mine: record(field, 'noDraft', wikipedia=wiki); continue
-            if not wiki: record(field, 'noSource', draft=mine, unparsed=rest[:160] or None); continue
+            agreed = compare(mine, wiki, vocab)[0] if wiki else []
+            if not agreed and uams:
+                # Wikipedia is empty or contradicts the draft: the draft is shown only where UAMS states the same value.
+                theirs = vocab_keys(uams['innervation' if field == 'nerve' else 'artery'], vocab)[0]
+                ok, only_draft, only_uams = compare(mine, theirs, vocab)
+                if ok:
+                    card[field] = ok; used[field].update(ok)
+                    record(field, 'agree' if not only_draft and not only_uams else 'partial', by='uams', draft=mine, uams=theirs,
+                           wikipedia=wiki or None, **({'onlyDraft': only_draft} if only_draft else {}), **({'onlyUams': only_uams} if only_uams else {}))
+                    continue
+            if not agreed and (facts := kenhub()) and facts.get(field):
+                theirs = vocab_keys(facts[field], vocab)[0]
+                ok, only_draft, only_kenhub = compare(mine, theirs, vocab)
+                if ok:
+                    card[field] = ok; used[field].update(ok)
+                    record(field, 'agree' if not only_draft and not only_kenhub else 'partial', by='kenhub', draft=mine, kenhub=theirs,
+                           wikipedia=wiki or None, **({'onlyDraft': only_draft} if only_draft else {}), **({'onlyKenhub': only_kenhub} if only_kenhub else {}))
+                    continue
+            if not wiki: record(field, 'noSource', draft=mine, unparsed=rest[:160] or None,
+                                **({'uams': uams['innervation' if field == 'nerve' else 'artery'][:160]} if uams else {})); continue
             agreed, only_draft, only_wiki = compare(mine, wiki, vocab)
             if agreed: card[field] = agreed; used[field].update(agreed)
             status = 'agree' if agreed and not only_draft and not only_wiki else 'partial' if agreed else 'conflict'
@@ -211,7 +342,14 @@ def main():
 
         mine = segments(draft['roots']); wiki = segments(box['nerve']) if box else set()
         if not mine: record('roots', 'noDraft', wikipedia=segment_text(wiki) or None)
-        elif not wiki: record('roots', 'noSource', draft=draft['roots'])
+        elif not wiki:
+            # Wikipedia gives no segments: the draft is shown where UAMS or Kenhub names the same segments.
+            for by, text in (('uams', uams['innervation'] if uams else ''), ('kenhub', (kenhub() or {}).get('nerve', ''))):
+                theirs = segments(text); both = mine & theirs
+                if both:
+                    card['roots'] = segment_text(both)
+                    record('roots', 'agree' if both == mine == theirs else 'partial', by=by, draft=segment_text(mine), **{by: segment_text(theirs)}); break
+            else: record('roots', 'noSource', draft=draft['roots'])
         else:
             both = mine & wiki
             if both: card['roots'] = segment_text(both)
@@ -219,16 +357,21 @@ def main():
                    draft=segment_text(mine), wikipedia=segment_text(wiki))
 
         action = box['action'] if box else ''
-        if not action: record('action', 'noSource')
-        elif re.search(draft['check'], action.lower()):
+        if action and re.search(draft['check'], action.lower()):
             card['action'] = draft['action']; record('action', 'agree')
-        else: record('action', 'conflict', expected=draft['check'], wikipedia=action[:200])
+        elif uams and re.search(draft['check'], uams['action'].lower()):
+            card['action'] = draft['action']; record('action', 'agree', by='uams', wikipedia=action[:200] or None, uams=uams['action'][:200])
+        elif (facts := kenhub()) and re.search(draft['check'], facts.get('action', '').lower()):
+            card['action'] = draft['action']; record('action', 'agree', by='kenhub', wikipedia=action[:200] or None, kenhub=facts['action'][:200])
+        elif not action: record('action', 'noSource', **({'uams': uams['action'][:200]} if uams else {}))
+        else: record('action', 'conflict', expected=draft['check'], wikipedia=action[:200], **({'uams': uams['action'][:200]} if uams else {}))
         cards[name] = card; checks[name] = check
 
     OUT.write_text(json.dumps({
         'schemaVersion': 1,
         'note': 'Muscle innervation, spinal segments, blood supply and action (ROADMAP C2). Values stated by both an AI-drafted table '
-                '(atlas-data/pipeline/muscle_content.py) and the English Wikipedia muscle infobox; human review not performed. '
+                '(atlas-data/pipeline/muscle_content.py) and the English Wikipedia muscle infobox, or the UAMS muscle tables where Wikipedia is '
+                'empty or disagrees, or Kenhub where neither settles it; human review not performed. '
                 'Keyed by Z-Anatomy English name; tendon structures point at their muscle.',
         # Vocabulary for the keys used below; `structure` = English name of the visible Z-Anatomy nerve to link to.
         'nerves': {k: entry(k, NERVES, nerve_names) for k in sorted(used['nerve'])},
@@ -240,8 +383,12 @@ def main():
         'schemaVersion': 1,
         'sources': {'draft': 'atlas-data/pipeline/muscle_content.py (AI-drafted, not human-reviewed)',
                     'wikipedia': {'site': 'en.wikipedia.org', 'accessedOn': '2026-11-04', 'license': 'CC BY-SA 4.0',
-                                  'use': 'infobox nerve/artery/action fields parsed to vocabulary keys; no text copied to the runtime'}},
-        'statuses': {'agree': 'both sources state the same values', 'partial': 'shown values are those both state; one source adds others',
+                                  'use': 'infobox nerve/artery/action fields parsed to vocabulary keys; no text copied to the runtime'},
+                    'uams': {'site': 'medicine.uams.edu (Department of Neuroscience muscle tables)', 'accessedOn': '2026-11-10',
+                             'use': 'second source where Wikipedia is empty or contradicts the draft (`by: uams`); no text copied to the runtime'},
+                    'kenhub': {'site': 'www.kenhub.com (library "Key facts")', 'accessedOn': '2026-11-10',
+                               'use': 'asked only when Wikipedia and UAMS settle nothing (`by: kenhub`); values parsed to vocabulary keys, no text copied'}},
+        'statuses': {'agree': 'both sources state the same values (Wikipedia, or UAMS where marked by: uams)', 'partial': 'shown values are those both state; one source adds others',
                      'conflict': 'no common value; not shown', 'noSource': 'infobox missing or the field is empty / unrecognised; not shown',
                      'noDraft': 'the draft table has no value; not shown'},
         'summary': tally, 'exceptions': exceptions, 'muscles': checks,
