@@ -20,11 +20,29 @@ sys.dont_write_bytecode = True  # no __pycache__ next to the pipeline
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from muscle_actions import ACTIONS, OPENSIM, OUTSIDE  # noqa: E402
 from opensim_moment_arms import Model  # noqa: E402
+from muscle_content import CONCEPTS, PARTS, TENDONS  # noqa: E402
+from second_sources import kenhub_facts, uams_row, uams_rows  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 MODELS = ROOT / 'OpenSim_Models/Models'
 TOKEN = re.compile(r'^(\w+):(\w+)([+-]|=ipsi|=contra)([ps])$')
 AGREE_MM, UNLISTED_MM, SAMPLES = 2.0, 10.0, 5
+MIDLINE = {'back', 'neck', 'head'}
+# Joints added in 4-1 step 4 (no OpenSim model covers them) and the toes: an action is kept only when the UAMS table
+# or Kenhub key facts name that movement for the muscle. Words per (joint, dof): (positive direction, negative direction).
+FLEX, EXT = r'flex', r'extend|extens'
+WORDS = {('sternoclavicular', 'elevation'): (r'elevat|raise|shrug', r'depress|lower|downward|inferior'),
+         ('sternoclavicular', 'protraction'): (r'protract|forward|abduct', r'retract|adduct|backward'),
+         ('acromioclavicular', 'upwardRotation'): (r'upward|superior(ly)? rotat|rotat\w*[^.;]*(upward|superior)', r'downward|inferior(ly)? rotat|rotat\w*[^.;]*(downward|inferior)'),
+         ('neck', 'flexion'): (FLEX, EXT), ('head', 'flexion'): (FLEX, EXT),
+         ('neck', 'bending'): (r'lateral(ly)?[ -]*(flex|bend)|side|bend', None), ('neck', 'rotation'): (r'rotat|turn', None),
+         ('head', 'rotation'): (r'rotat|turn', None),
+         ('cmc1', 'flexion'): (r'flex|oppos', EXT), ('cmc1', 'abduction'): (r'abduct', r'adduct'),
+         ('mcp1', 'flexion'): (FLEX, EXT), ('ip1', 'flexion'): (FLEX, EXT),
+         ('fingers', 'mcpFlexion'): (FLEX, EXT), ('fingers', 'pipFlexion'): (FLEX, EXT), ('fingers', 'dipFlexion'): (FLEX, EXT),
+         ('fingers', 'spread'): (r'abduct', r'adduct'),
+         ('mtp1', 'extension'): (r'extend|extens|dorsiflex', FLEX), ('mtp', 'extension'): (r'extend|extens|dorsiflex', FLEX),
+         ('iphallux', 'flexion'): (FLEX, EXT), ('toes', 'ipFlexion'): (FLEX, EXT)}
 
 
 def parse(text):
@@ -85,6 +103,25 @@ def main():
                     unlisted.append({'muscle': name, 'dof': key, 'opensimMm': round(arm, 1)})
         checks[name] = entry
 
+    # Second-source check for joints OpenSim cannot speak to.
+    second, unconfirmed = uams_rows(), []
+    for name, text in ACTIONS.items():
+        concept = TENDONS.get(name) or PARTS.get(name, name); wiki = CONCEPTS.get(concept, {}).get('wiki', concept)
+        sources = {}
+        for joint, dof, sign, role in parse(text):
+            key = f'{joint}:{dof}'
+            if (joint, dof) not in WORDS or (key in opensim.get(name, {}) and not sign.startswith('=')): continue
+            if not sources:
+                uams = uams_row(second, name, concept, wiki); facts = kenhub_facts(wiki, concept)
+                sources = {'uams': (uams or {}).get('action', ''), 'kenhub': (facts or {}).get('action', ''), '_': 'looked up'}
+            positive, negative = WORDS[(joint, dof)]
+            pattern = positive if sign in ('+', '=ipsi', '=contra') or negative is None else negative
+            found = [by for by in ('uams', 'kenhub') if sources[by] and re.search(pattern, sources[by].lower())]
+            if found: checks[name].setdefault('confirmedBy', {})[f'{key}{sign}'] = found
+            else:
+                unconfirmed.append({'muscle': name, 'action': f'{key}{sign}{role}', 'uams': sources['uams'][:160] or None, 'kenhub': sources['kenhub'][:160] or None})
+                rejected.add((name, key))
+
     out, outside = {}, {}
     for label, names in OUTSIDE.items():
         for name in names: outside.setdefault(name, []).append(label)
@@ -97,11 +134,11 @@ def main():
             if (name, f'{joint}:{dof}') in rejected: continue
             if sign.startswith('='):
                 if s['side'] not in ('left', 'right'): continue
-                # rig back bending/rotation: + = toward the subject's left
+                # rig back/neck/head bending and rotation: + = toward the subject's left
                 toward_left = (s['side'] == 'left') == (sign == '=ipsi')
                 value = 1 if toward_left else -1
             else: value = 1 if sign == '+' else -1
-            actions.append({'dof': f'{joint}:{dof}' if joint == 'back' else f'{joint}_{suffix}:{dof}', 'sign': value,
+            actions.append({'dof': f'{joint}:{dof}' if joint in MIDLINE else f'{joint}_{suffix}:{dof}', 'sign': value,
                             'role': 'primary' if role == 'p' else 'assist'})
         row = {'actions': actions}
         if name in outside: row['outside'] = outside[name]
@@ -110,15 +147,16 @@ def main():
         for a in row['actions']: assert a['dof'] in dof_range, a
 
     (ROOT / 'atlas-data/runtime/muscle-actions.json').write_text(json.dumps(
-        {'schemaVersion': 1, 'note': 'AI-written action table checked against OpenSim moment arms; see atlas-data/anatomy/muscle-action-checks.json',
+        {'schemaVersion': 1, 'note': 'AI-written action table checked against OpenSim moment arms, or the UAMS / Kenhub tables for the shoulder girdle, '
+                 'neck, fingers and toes; see atlas-data/anatomy/muscle-action-checks.json',
          'muscles': out}, ensure_ascii=False, separators=(',', ':')) + '\n')
     checked = sum(1 for n in ACTIONS if n in opensim)
     (ROOT / 'atlas-data/anatomy/muscle-action-checks.json').write_text(json.dumps(
         {'schemaVersion': 1, 'method': __doc__.strip(), 'summary': {'tableMuscles': len(ACTIONS), 'opensimChecked': checked,
-         'disagreements': len(disagreements), 'unlisted': len(unlisted)},
-         'disagreements': disagreements, 'unlisted': unlisted, 'muscles': checks}, ensure_ascii=False, indent=1) + '\n')
+         'disagreements': len(disagreements), 'unlisted': len(unlisted), 'unconfirmed': len(unconfirmed)},
+         'disagreements': disagreements, 'unlisted': unlisted, 'unconfirmed': unconfirmed, 'muscles': checks}, ensure_ascii=False, indent=1) + '\n')
     print('ACTIONS', json.dumps({'structures': len(out), 'tableMuscles': len(ACTIONS), 'opensimChecked': checked,
-                                 'disagreements': disagreements, 'unlisted': unlisted}, ensure_ascii=False), flush=True)
+                                 'disagreements': len(disagreements), 'unlisted': len(unlisted), 'unconfirmed': unconfirmed}, ensure_ascii=False), flush=True)
 
 
 if __name__ == '__main__':

@@ -170,7 +170,21 @@ const flows = [
     expect(roles.includes('상완근') && /삼두근/.test(roles), `목록에 상완근·삼두근 없음: ${roles.slice(0, 120)}`);
     await page.getByRole('button', { name: '처음 자세로' }).click();
     expect((await page.locator('.movement-dofs output').first().innerText()) === '중립', '처음 자세로 돌아가지 않음');
-    return '굽힘 주동근(상완근)·길항근(삼두근), 처음 자세 복귀';
+    // 4-1 step 4: shoulder girdle, fingers and neck have their own sliders and movers.
+    const movers = async (group, dof, value) => {
+      await page.locator('.movement-joints button', { hasText: group }).click();
+      await page.locator('.movement-dofs label', { hasText: dof }).locator('input').first().fill(String(value));
+      await page.locator('.movement-roles').waitFor();
+      return page.locator('.movement-roles').innerText();
+    };
+    const girdle = await movers('어깨뼈', '올림 / 내림', 25);
+    expect(girdle.includes('견갑거근'), `어깨뼈 올림 주동근: ${girdle.slice(0, 120)}`);
+    const fingers = await movers('손가락', '몸쪽마디 굽힘', 60);
+    expect(fingers.includes('천지굴근'), `손가락 몸쪽마디 굽힘 주동근: ${fingers.slice(0, 120)}`);
+    const neck = await movers('목·머리', '왼쪽 돌림 / 오른쪽 돌림', 30);
+    expect(neck.includes('흉쇄유돌근'), `목 돌림 주동근: ${neck.slice(0, 160)}`);
+    await page.getByRole('button', { name: '처음 자세로' }).click();
+    return '굽힘 주동근(상완근)·길항근(삼두근), 어깨뼈 올림(견갑거근)·손가락 굽힘(천지굴근)·목 돌림(흉쇄유돌근), 처음 자세 복귀';
   }],
   ['층 벗기기: 근막 → 얕은 근육, 되돌리기, 투명도, 단면', async page => {
     await open(page);
@@ -239,7 +253,21 @@ const flows = [
     expect(count > 20, `목록 ${count}개`);
     const after = await page.evaluate(() => window.__atlasScene.camera.position.toArray());
     expect(Math.hypot(...after.map((v, i) => v - before[i])) > .05, '시점이 부위로 이동하지 않음');
-    return `목록 ${count}개, 시점 이동`;
+    // D3 part 2: browsing by movement comes from the rig action table (no clips).
+    await page.locator('.explorer-mode button', { hasText: '근육 작용 찾기' }).click();
+    const knee = page.locator('.motion-library details', { hasText: '무릎관절 굽힘' }).first();
+    await knee.waitFor({ timeout: 10000 }).catch(async error => { throw new Error(`무릎관절 굽힘 항목 없음: ${(await page.locator('.motion-library summary').allInnerTexts()).slice(0, 8).join(', ')} / ${await page.locator('.result-count').first().innerText()}`); });
+    await knee.locator('summary').click();
+    const movers = await knee.innerText();
+    expect(/대퇴이두근|반건양근/.test(movers), `넙다리 무릎 굽힘 근육: ${movers.replace(/\s+/g, ' ').slice(0, 160)}`);
+    await knee.locator('button').first().click();
+    await page.locator('.rig-actions').waitFor({ timeout: 10000 }).catch(async () => { throw new Error(`기능 탭 재생 없음: tab=${await page.locator('[role=tab][aria-selected=true]').allInnerTexts()} selected=${new URL(page.url()).searchParams.get('source')} rig=${await page.locator('.rig-actions').count()} title=${await page.locator('.study-detail-header h2').innerText().catch(() => '-')}`); });
+    // A bone opens the joints that move it (back to the structure list first).
+    await page.evaluate(() => [...document.querySelectorAll('.explorer-mode button')].find(b => b.textContent === '구조 찾기')?.click());
+    await search(page, '경골', '경골');
+    const joints = await page.locator('.bone-joints').innerText({ timeout: 10000 });
+    expect(joints.includes('무릎관절') && joints.includes('발목관절'), `경골 관절: ${joints.replace(/\s+/g, ' ')}`);
+    return `목록 ${count}개, 시점 이동, 움직임별 근육(무릎 굽힘) → 기능 탭, 경골 → 무릎·발목 관절`;
   }],
   ['모형 클릭으로 선택 → 숨기기 → 뒤로 가기', async page => {
     await open(page);

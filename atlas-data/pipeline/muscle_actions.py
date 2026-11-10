@@ -3,13 +3,17 @@ moment arms by build_actions.py (independent source), human review pending.
 
 Keys are Z-Anatomy English names (both sides). Each token: `<joint>:<dof><sign><role>`
   sign  + / -  the dof's positive / negative label in rig.json (e.g. hip:flexion+ = 굽힘, hip:flexion- = 폄)
-        =ipsi / =contra  for back bending/rotation: toward the muscle's own / the opposite side
+        =ipsi / =contra  for back, neck and head bending/rotation: toward the muscle's own / the opposite side
   role  p primary mover, s assisting
 Joint names are side-free; the muscle's side picks the rig joint. Rig sign conventions: hip adduction+, hip rotation+
 = internal, ankle dorsiflexion+, subtalar inversion+, mtp extension+, shoulder abduction+, shoulder rotation+ =
 internal, radioulnar pronation+, wrist flexion+ (palmar), wrist deviation+ = ulnar, back bending+ / rotation+ = to the
-left. The rig has one lumbar joint for the whole trunk, a fixed scapula and no finger/toe joints, so actions there are
-listed under OUTSIDE instead.
+left. The rig has one lumbar joint for the whole trunk. 4-1 step 4 added (positive first): sternoclavicular elevation+
+/ protraction+, acromioclavicular upwardRotation+, neck and head flexion+ / bending+ / rotation+ (to the left, like back),
+cmc1 flexion+ (across the palm) / abduction+ (palmar), mcp1 and ip1 flexion+, fingers (2-5) mcpFlexion+ / spread+
+(away from the middle finger) / pipFlexion+ / dipFlexion+, mtp1 extension+, iphallux flexion+, mtp (toes 2-5)
+extension+, toes (2-5) ipFlexion+. Actions on those joints need UAMS or Kenhub to state the same movement
+(build_actions.py), since OpenSim has no model for them. What the rig still cannot show is listed under OUTSIDE.
 """
 
 ACTIONS = {
@@ -53,25 +57,25 @@ ACTIONS = {
     'Fibularis longus muscle': 'subtalar:inversion-p ankle:dorsiflexion-s',
     'Fibularis brevis muscle': 'subtalar:inversion-p ankle:dorsiflexion-s',
     'Fibularis tertius muscle': 'ankle:dorsiflexion+s subtalar:inversion-s',
-    'Extensor digitorum longus': 'mtp:extension+p ankle:dorsiflexion+p subtalar:inversion-s',
-    'Tendon of extensor digitorum longus': 'mtp:extension+p ankle:dorsiflexion+p subtalar:inversion-s',
-    'Extensor hallucis longus': 'mtp:extension+p ankle:dorsiflexion+s',
-    'Flexor digitorum longus': 'mtp:extension-p ankle:dorsiflexion-s subtalar:inversion+s',
-    'Flexor hallucis longus': 'mtp:extension-p ankle:dorsiflexion-s subtalar:inversion+s',
-    # Foot (the rig moves all toes together at one MTP joint)
-    'Extensor digitorum brevis': 'mtp:extension+p',
-    'Extensor hallucis brevis': 'mtp:extension+p',
-    'Flexor digitorum brevis': 'mtp:extension-p',
-    'Lateral head of flexor hallucis brevis': 'mtp:extension-p',
-    'Medial head of flexor hallucis brevis': 'mtp:extension-p',
+    'Extensor digitorum longus': 'mtp:extension+p toes:ipFlexion-p ankle:dorsiflexion+p subtalar:inversion-s',
+    'Tendon of extensor digitorum longus': 'mtp:extension+p toes:ipFlexion-p ankle:dorsiflexion+p subtalar:inversion-s',
+    'Extensor hallucis longus': 'mtp1:extension+p iphallux:flexion-p ankle:dorsiflexion+s',
+    'Flexor digitorum longus': 'toes:ipFlexion+p mtp:extension-p ankle:dorsiflexion-s subtalar:inversion+s',
+    'Flexor hallucis longus': 'iphallux:flexion+p mtp1:extension-p ankle:dorsiflexion-s subtalar:inversion+s',
+    # Foot: big toe on its own (mtp1, iphallux), toes 2-5 together (mtp, toes)
+    'Extensor digitorum brevis': 'mtp:extension+p toes:ipFlexion-s mtp1:extension+s',
+    'Extensor hallucis brevis': 'mtp1:extension+p',
+    'Flexor digitorum brevis': 'toes:ipFlexion+p mtp:extension-s',
+    'Lateral head of flexor hallucis brevis': 'mtp1:extension-p',
+    'Medial head of flexor hallucis brevis': 'mtp1:extension-p',
     'Flexor digiti minimi of foot': 'mtp:extension-s',
-    'Lumbrical muscles of foot': 'mtp:extension-s',
+    'Lumbrical muscles of foot': 'mtp:extension-s toes:ipFlexion-s',
     'Plantar interossei muscles': 'mtp:extension-s',
     'Dorsal interossei muscles of foot': 'mtp:extension-s',
-    'Quadratus plantae muscle': 'mtp:extension-s',
-    'Abductor hallucis': 'mtp:extension-s',
+    'Quadratus plantae muscle': 'toes:ipFlexion+s',
+    'Abductor hallucis': 'mtp1:extension-s',
     'Abductor digiti minimi of foot': 'mtp:extension-s',
-    'Oblique head of adductor hallucis': 'mtp:extension-s',
+    'Oblique head of adductor hallucis': 'mtp1:extension-s',
     # Shoulder (glenohumeral; the scapula is fixed to the trunk in the rig)
     'Clavicular part of deltoid muscle': 'shoulder:flexion+p shoulder:rotation+s',
     'Acromial part of deltoid muscle': 'shoulder:abduction+p',
@@ -107,16 +111,59 @@ ACTIONS = {
     'Extensor carpi radialis brevis': 'wrist:flexion-p wrist:deviation-s',
     'Humeral head of extensor carpi ulnaris': 'wrist:flexion-p wrist:deviation+p',
     'Ulnar head of extensor carpi ulnaris': 'wrist:flexion-p wrist:deviation+p',
-    'Extensor digitorum': 'wrist:flexion-s',
-    'Extensor digiti minimi': 'wrist:flexion-s',
-    'Extensor indicis': 'wrist:flexion-s',
-    'Humero-ulnar head of flexor digitorum superficialis': 'wrist:flexion+s',
-    'Radial head of flexor digitorum superficialis': 'wrist:flexion+s',
-    'Flexor digitorum profundus': 'wrist:flexion+s',
-    'Flexor pollicis longus': 'wrist:flexion+s',
-    'Abductor pollicis longus': 'wrist:deviation-s',
-    'Extensor pollicis brevis': 'wrist:deviation-s',
-    'Extensor pollicis longus': 'wrist:flexion-s',
+    'Extensor digitorum': 'fingers:mcpFlexion-p fingers:pipFlexion-s fingers:dipFlexion-s wrist:flexion-s',
+    'Extensor digiti minimi': 'fingers:mcpFlexion-s wrist:flexion-s',
+    'Extensor indicis': 'fingers:mcpFlexion-s wrist:flexion-s',
+    'Humero-ulnar head of flexor digitorum superficialis': 'fingers:pipFlexion+p fingers:mcpFlexion+s wrist:flexion+s',
+    'Radial head of flexor digitorum superficialis': 'fingers:pipFlexion+p fingers:mcpFlexion+s wrist:flexion+s',
+    'Flexor digitorum profundus': 'fingers:dipFlexion+p fingers:pipFlexion+s fingers:mcpFlexion+s wrist:flexion+s',
+    'Flexor pollicis longus': 'ip1:flexion+p mcp1:flexion+s wrist:flexion+s',
+    'Abductor pollicis longus': 'cmc1:abduction+p cmc1:flexion-p wrist:deviation-s',
+    'Extensor pollicis brevis': 'mcp1:flexion-p cmc1:flexion-s wrist:deviation-s',
+    'Extensor pollicis longus': 'ip1:flexion-p mcp1:flexion-s wrist:flexion-s',
+    # Hand
+    'Lumbrical muscles of hand': 'fingers:mcpFlexion+p fingers:pipFlexion-p fingers:dipFlexion-p',
+    'Palmar interossei muscles': 'fingers:spread-p fingers:mcpFlexion+s fingers:pipFlexion-s',
+    'Dorsal interossei muscles of hand': 'fingers:spread+p fingers:mcpFlexion+s fingers:pipFlexion-s',
+    'Abductor digiti minimi of hand': 'fingers:spread+s',
+    'Flexor digiti minimi of hand': 'fingers:mcpFlexion+s',
+    'Abductor pollicis brevis': 'cmc1:abduction+p',
+    'Superficial head of flexor pollicis brevis': 'mcp1:flexion+p cmc1:flexion+s',
+    'Deep head of flexor pollicis brevis': 'mcp1:flexion+p cmc1:flexion+s',
+    'Opponens pollicis muscle': 'cmc1:flexion+p cmc1:abduction+s',
+    'Oblique head of adductor pollicis': 'cmc1:abduction-p',
+    'Transverse head of adductor pollicis': 'cmc1:abduction-p',
+    # Shoulder girdle
+    'Descending part of trapezius muscle': 'sternoclavicular:elevation+p acromioclavicular:upwardRotation+p neck:flexion-s neck:bending=ipsis neck:rotation=contras',
+    'Transverse part of trapezius muscle': 'sternoclavicular:protraction-p',
+    'Ascending part of trapezius muscle': 'sternoclavicular:elevation-p acromioclavicular:upwardRotation+p',
+    'Rhomboid major muscle': 'sternoclavicular:protraction-p acromioclavicular:upwardRotation-p sternoclavicular:elevation+s',
+    'Rhomboid minor muscle': 'sternoclavicular:protraction-p acromioclavicular:upwardRotation-p sternoclavicular:elevation+s',
+    'Levator scapulae': 'sternoclavicular:elevation+p acromioclavicular:upwardRotation-s neck:bending=ipsis',
+    'Serratus anterior muscle': 'sternoclavicular:protraction+p acromioclavicular:upwardRotation+p',
+    'Pectoralis minor muscle': 'sternoclavicular:elevation-p sternoclavicular:protraction+s acromioclavicular:upwardRotation-s',
+    'Subclavius muscle': 'sternoclavicular:elevation-s',
+    # Neck and head (lower neck C2-T1, head at C0-C2)
+    'Sternocleidomastoid muscle': 'neck:flexion+p neck:bending=ipsip head:rotation=contrap neck:rotation=contras',
+    'Scalenus anterior muscle': 'neck:bending=ipsip neck:flexion+s',
+    'Scalenus medius muscle': 'neck:bending=ipsip',
+    'Scalenus posterior muscle': 'neck:bending=ipsip',
+    'Longus colli muscle': 'neck:flexion+p neck:bending=ipsis',
+    'Longus capitis muscle': 'head:flexion+p neck:flexion+s',
+    'Rectus anterior capitis muscle': 'head:flexion+p',
+    'Splenius capitis muscle': 'neck:flexion-p head:flexion-s neck:rotation=ipsip head:rotation=ipsis',
+    'Splenius colli muscle': 'neck:flexion-p neck:rotation=ipsis',
+    'Semispinalis colli muscle': 'neck:flexion-p neck:rotation=contras',
+    'Longissimus capitis muscle': 'head:flexion-s neck:rotation=ipsis',
+    'Longissimus colli muscle': 'neck:flexion-s neck:bending=ipsis',
+    'Spinalis capitis muscle': 'head:flexion-s',
+    'Spinalis colli muscle': 'neck:flexion-s',
+    'Multifidus colli muscle': 'neck:flexion-s neck:rotation=contras',
+    'Interspinales colli muscles': 'neck:flexion-s',
+    'Rectus posterior major capitis muscle': 'head:flexion-p head:rotation=ipsip',
+    'Rectus posterior minor capitis muscle': 'head:flexion-p',
+    'Obliquus inferior capitis muscle': 'head:rotation=ipsip',
+    'Obliquus superior capitis muscle': 'head:flexion-p',
     # Trunk (one lumbar joint stands for the whole trunk)
     'Rectus abdominis muscle': 'back:flexion+p',
     'External abdominal oblique muscle': 'back:flexion+p back:bending=ipsis back:rotation=contrap',
@@ -138,17 +185,10 @@ ACTIONS = {
 
 # Movements the rig cannot show yet (label shown to the learner).
 OUTSIDE = {
-    '어깨뼈': ['Descending part of trapezius muscle', 'Transverse part of trapezius muscle', 'Ascending part of trapezius muscle',
-              'Rhomboid major muscle', 'Rhomboid minor muscle', 'Levator scapulae', 'Serratus anterior muscle', 'Pectoralis minor muscle',
-              'Subclavius muscle'],
-    '손가락': ['Extensor digitorum', 'Extensor digiti minimi', 'Extensor indicis', 'Humero-ulnar head of flexor digitorum superficialis',
-              'Radial head of flexor digitorum superficialis', 'Flexor digitorum profundus', 'Lumbrical muscles of hand', 'Palmar interossei muscles',
-              'Dorsal interossei muscles of hand', 'Abductor digiti minimi of hand', 'Flexor digiti minimi of hand', 'Opponens digiti minimi muscle of hand'],
-    '엄지': ['Flexor pollicis longus', 'Abductor pollicis longus', 'Extensor pollicis brevis', 'Extensor pollicis longus', 'Abductor pollicis brevis',
-            'Superficial head of flexor pollicis brevis', 'Deep head of flexor pollicis brevis', 'Opponens pollicis muscle',
-            'Oblique head of adductor pollicis', 'Transverse head of adductor pollicis'],
+    '손가락 맞섬(새끼)': ['Opponens digiti minimi muscle of hand'],
     '발가락 벌림·모음': ['Abductor hallucis', 'Abductor digiti minimi of foot', 'Plantar interossei muscles', 'Dorsal interossei muscles of foot',
                    'Oblique head of adductor hallucis', 'Transverse head of adductor hallucis', '(Opponens digiti minimi muscle of foot)'],
+    '머리 옆굽힘': ['Rectus lateralis capitis muscle'],
     '호흡(갈비뼈·가로막)': ['Diaphragm', 'External intercostal muscles', 'Internal intercostal muscles', 'Innermost intercostal muscles',
                       'Transversus thoracis muscle', 'Levatores breves costarum', 'Levatores longi costarum', 'Serratus posterior superior muscle',
                       'Serratus posterior inferior muscle'],

@@ -16,31 +16,60 @@ export function parseSkinChunk(buffer: ArrayBuffer): SkinChunk {
 }
 
 /** Rig segment id for a role on a given body side ("femur" + right -> "femur_r"). */
-export function segmentForRole(role: string, side: string | null) {
-  return role === 'pelvis' || role === 'torso' ? role : `${role}_${side === 'left' ? 'l' : 'r'}`;
+export function segmentForRole(role: string, side: string | null, segments?: { has(id: string): boolean }) {
+  // Segments without a side (pelvis, torso, neck vertebrae, head) are their own role.
+  if (segments ? segments.has(role) : role === 'pelvis' || role === 'torso') return role;
+  return `${role}_${side === 'left' ? 'l' : 'r'}`;
+}
+
+/** Rigid transform as a unit dual quaternion [rx, ry, rz, rw, dx, dy, dz, dw]. Slot matrices are rigid (a segment pose
+ * conjugated by the instance matrix, whose mirror and scale cancel), so rotation and translation are all there is. */
+const scratch = { position: new THREE.Vector3(), rotation: new THREE.Quaternion(), scale: new THREE.Vector3() };
+export function dualQuaternion(matrix: THREE.Matrix4) {
+  matrix.decompose(scratch.position, scratch.rotation, scratch.scale);
+  const { x: rx, y: ry, z: rz, w: rw } = scratch.rotation, { x: tx, y: ty, z: tz } = scratch.position;
+  // d = ½ · (t, 0) ⊗ r
+  return Float64Array.of(rx, ry, rz, rw, .5 * (tx * rw + ty * rz - tz * ry), .5 * (-tx * rz + ty * rw + tz * rx), .5 * (tx * ry - ty * rx + tz * rw), -.5 * (tx * rx + ty * ry + tz * rz));
 }
 
 /**
  * Write the posed positions/normals of `rest` into `target` (same vertex count). `slotMatrices[i]` maps rest
  * object space to posed object space for role slot i (instance⁻¹ · segment pose · instance).
+ * Dual-quaternion blending (4-1 step 4): a linear blend of two rotations shrinks tissue on the inside of a bent joint
+ * (the elbow crease collapses, a twisted forearm pinches); blending the rotations themselves keeps the cross-section.
  */
 export function skinGeometry(rest: THREE.BufferGeometry, weights: Uint16Array, slotMatrices: THREE.Matrix4[], target: THREE.BufferGeometry) {
   const p = rest.getAttribute('position').array as Float32Array, n = rest.getAttribute('normal')?.array as Float32Array | undefined;
   const tp = target.getAttribute('position').array as Float32Array, tn = target.getAttribute('normal')?.array as Float32Array | undefined;
-  const m = slotMatrices.map(matrix => matrix.elements);
+  const q = slotMatrices.map(dualQuaternion), m = slotMatrices.map(matrix => matrix.elements);
   for (let v = 0, i = 0; v < weights.length; v++, i += 3) {
-    const packed = weights[v], a = m[packed >> 12], b = m[(packed >> 8) & 15], wa = (packed & 255) / 255, wb = 1 - wa;
+    const packed = weights[v], sa = packed >> 12, sb = (packed >> 8) & 15, share = packed & 255;
+    if (sa === sb || share === 255 || share === 0) {
+      // One segment only (most vertices away from joints): the rigid matrix is exact and cheaper.
+      const e = m[share === 0 ? sb : sa], x = p[i], y = p[i + 1], z = p[i + 2];
+      tp[i] = e[0] * x + e[4] * y + e[8] * z + e[12]; tp[i + 1] = e[1] * x + e[5] * y + e[9] * z + e[13]; tp[i + 2] = e[2] * x + e[6] * y + e[10] * z + e[14];
+      if (n && tn) {
+        const nx = n[i], ny = n[i + 1], nz = n[i + 2];
+        tn[i] = e[0] * nx + e[4] * ny + e[8] * nz; tn[i + 1] = e[1] * nx + e[5] * ny + e[9] * nz; tn[i + 2] = e[2] * nx + e[6] * ny + e[10] * nz;
+      }
+      continue;
+    }
+    const a = q[sa], b = q[sb], wa = share / 255;
+    const wb = (1 - wa) * (a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] < 0 ? -1 : 1); // shortest arc
+    let rx = wa * a[0] + wb * b[0], ry = wa * a[1] + wb * b[1], rz = wa * a[2] + wb * b[2], rw = wa * a[3] + wb * b[3];
+    let dx = wa * a[4] + wb * b[4], dy = wa * a[5] + wb * b[5], dz = wa * a[6] + wb * b[6], dw = wa * a[7] + wb * b[7];
+    const length = Math.hypot(rx, ry, rz, rw) || 1;
+    rx /= length; ry /= length; rz /= length; rw /= length; dx /= length; dy /= length; dz /= length; dw /= length;
+    // translation t = 2 · (rw·d − dw·r + r × d)
+    const tx = 2 * (rw * dx - dw * rx + ry * dz - rz * dy), ty = 2 * (rw * dy - dw * ry + rz * dx - rx * dz), tz = 2 * (rw * dz - dw * rz + rx * dy - ry * dx);
     const x = p[i], y = p[i + 1], z = p[i + 2];
-    tp[i] = wa * (a[0] * x + a[4] * y + a[8] * z + a[12]) + wb * (b[0] * x + b[4] * y + b[8] * z + b[12]);
-    tp[i + 1] = wa * (a[1] * x + a[5] * y + a[9] * z + a[13]) + wb * (b[1] * x + b[5] * y + b[9] * z + b[13]);
-    tp[i + 2] = wa * (a[2] * x + a[6] * y + a[10] * z + a[14]) + wb * (b[2] * x + b[6] * y + b[10] * z + b[14]);
+    // rotate: v + 2·r × (r × v + rw·v)
+    let cx = ry * z - rz * y + rw * x, cy = rz * x - rx * z + rw * y, cz = rx * y - ry * x + rw * z;
+    tp[i] = x + 2 * (ry * cz - rz * cy) + tx; tp[i + 1] = y + 2 * (rz * cx - rx * cz) + ty; tp[i + 2] = z + 2 * (rx * cy - ry * cx) + tz;
     if (n && tn) {
       const nx = n[i], ny = n[i + 1], nz = n[i + 2];
-      const ox = wa * (a[0] * nx + a[4] * ny + a[8] * nz) + wb * (b[0] * nx + b[4] * ny + b[8] * nz);
-      const oy = wa * (a[1] * nx + a[5] * ny + a[9] * nz) + wb * (b[1] * nx + b[5] * ny + b[9] * nz);
-      const oz = wa * (a[2] * nx + a[6] * ny + a[10] * nz) + wb * (b[2] * nx + b[6] * ny + b[10] * nz);
-      const length = Math.hypot(ox, oy, oz) || 1;
-      tn[i] = ox / length; tn[i + 1] = oy / length; tn[i + 2] = oz / length;
+      cx = ry * nz - rz * ny + rw * nx; cy = rz * nx - rx * nz + rw * ny; cz = rx * ny - ry * nx + rw * nz;
+      tn[i] = nx + 2 * (ry * cz - rz * cy); tn[i + 1] = ny + 2 * (rz * cx - rx * cz); tn[i + 2] = nz + 2 * (rx * cy - ry * cx);
     }
   }
   target.getAttribute('position').needsUpdate = true;

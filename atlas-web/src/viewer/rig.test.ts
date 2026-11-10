@@ -41,10 +41,35 @@ test('joint motions move distal joints in the anatomical direction', () => {
   assert.equal(patella.parent, 'femur_r');
   assert.ok(!patellaMatrix.equals(new THREE.Matrix4()), 'patella follows knee flexion through its coupled dof');
   assert.ok(moved('knee_r', { 'hip_r:flexion': 45 }).z > knee.z + .2, 'hip flexion swings the knee forward');
-  assert.ok(moved('mtp_r', { 'ankle_r:dorsiflexion': 20 }).y > centre('mtp_r').y + .02, 'dorsiflexion lifts the forefoot');
+  assert.ok(moved('mtp1_r', { 'ankle_r:dorsiflexion': 20 }).y > centre('mtp1_r').y + .02, 'dorsiflexion lifts the forefoot');
   assert.ok(moved('wrist_l', { 'elbow_l:flexion': 90 }).z > centre('wrist_l').z + .15, 'elbow flexion brings the hand forward');
   assert.ok(moved('elbow_r', { 'shoulder_r:abduction': 90 }).x < centre('elbow_r').x - .2, 'right shoulder abduction moves the elbow outward (−x)');
   assert.ok(moved('shoulder_l', { 'back:flexion': 40 }).z > centre('shoulder_l').z + .2, 'trunk flexion tips the shoulders forward');
+});
+
+test('shoulder girdle, fingers, toes and neck move the way their labels say (4-1 step 4)', () => {
+  const lift = (joint: string, pose: Record<string, number>) => moved(joint, pose).sub(centre(joint));
+  assert.ok(lift('acromioclavicular_r', { 'sternoclavicular_r:elevation': 30 }).y > .03, 'clavicle elevation raises the acromion');
+  assert.ok(lift('acromioclavicular_r', { 'sternoclavicular_r:protraction': 20 }).z > .02, 'protraction brings the shoulder forward');
+  assert.ok(lift('shoulder_r', { 'acromioclavicular_r:upwardRotation': 30 }).y > .005, 'upward rotation lifts the glenoid');
+  assert.equal(rig.segments['humerus_r'].parent, 'scapula_r');
+  // At rest the fingers already point down and a little forward, so curling them lifts the tips along the palm side.
+  const mcp = lift('dip3_r', { 'fingers_r:mcpFlexion': 70 }), pip = lift('dip3_r', { 'fingers_r:pipFlexion': 90 });
+  assert.ok(mcp.z > .015 && mcp.y > .03, 'MCP flexion swings the fingertips forward and up toward the palm');
+  assert.ok(pip.y > .02 && pip.z > -.005, 'PIP flexion curls the finger toward the palm, not backward');
+  assert.ok(lift('dip2_r', { 'fingers_r:spread': 20 }).x < -.004 && lift('dip5_r', { 'fingers_r:spread': 20 }).x > .004, 'spread fans index and little finger away from the middle finger (right hand: lateral is -x)');
+  assert.ok(lift('ip1_r', { 'cmc1_r:flexion': 40 }).x > .005, 'thumb flexion moves it across the palm (medially, +x on the right)');
+  assert.ok(lift('ip1_r', { 'cmc1_r:abduction': 50 }).z > .01, 'palmar abduction lifts the thumb forward');
+  assert.ok(lift('iphallux_r', { 'mtp1_r:extension': 40 }).y > .008, 'big toe extension lifts the toe');
+  assert.ok(lift('dipt3_r', { 'toes_r:ipFlexion': 50 }).y < -.003, 'toe flexion curls the lesser toes down');
+  assert.ok(lift('atlantooccipital', { 'neck:flexion': 40 }).z > .02, 'neck flexion brings the head forward');
+  const front = new THREE.Vector3(...rig.joints['atlantooccipital'].centre).add(new THREE.Vector3(0, 0, .1));
+  const turned = front.clone().applyMatrix4(segmentTransforms(rig, { 'head:rotation': 30 }).get('head')!);
+  assert.ok(turned.x > front.x + .03, 'head rotation + turns the face to the left (+x)');
+  for (const control of ['neck', 'head']) for (const dof of rig.joints[control].dofs) {
+    const share = Object.values(rig.joints).flatMap(j => j.dofs).filter(d => d.coupledTo === dof.id).reduce((n, d) => n + (d.ratio ?? 1), 0);
+    assert.ok(Math.abs(share - 1) < 1e-9, `${dof.id} shares add up to the whole movement (${share})`);
+  }
 });
 
 test('poses are clamped to each dof range', () => {

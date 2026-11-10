@@ -5,7 +5,9 @@ import * as THREE from 'three';
 export interface RigDof { id: string; axis: [number, number, number]; range: [number, number]; positive: string; negative: string; rangeSource: string;
   /** Driven by another dof (patella follows knee flexion); never set directly. */
   coupledTo?: string; ratio?: number }
-export interface RigJoint { name: string; centre: [number, number, number]; estimate: string; dofs: RigDof[] }
+export interface RigJoint { name: string; centre: [number, number, number]; estimate: string; dofs: RigDof[];
+  /** A control without a segment of its own (neck, fingers 2–5, toes 2–5): its dofs drive coupled joints. */
+  control?: boolean }
 export interface RigSegment { parent: string | null; joint: string | null; side: string; bones: string[] }
 export interface RigFile { schemaVersion: 1; revision: string; segments: Record<string, RigSegment>; joints: Record<string, RigJoint> }
 /** Degrees per dof id (e.g. "knee_r:flexion"); missing dofs are 0. */

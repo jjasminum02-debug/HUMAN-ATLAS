@@ -2,8 +2,6 @@ import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import { learnerStructureText } from "../src/domain/learnerStructureText.ts";
-import { projectLearnerMotionActionOptions } from "../src/domain/motionLearning.ts";
-import { learnerActionExplanation } from "../src/domain/learnerActionText.ts";
 import { hasHanScript } from "../src/domain/search.ts";
 import { projectSourceAttachments } from "../src/domain/sourceAttachments.ts";
 import { createHash } from "node:crypto";
@@ -18,11 +16,10 @@ async function load(relativePath) {
   return JSON.parse(await readFile(resolve(root, relativePath), "utf8"));
 }
 
-const [aiOverlay, legacySummaries, sourceContent, motionBundle, names, t65Attachments, t65NerveLearning, nerveSupport, reviewedAttachments] = await Promise.all([
+const [aiOverlay, legacySummaries, sourceContent, names, t65Attachments, t65NerveLearning, nerveSupport, reviewedAttachments] = await Promise.all([
   load("atlas-data/terminology/ai-evidence-overlay.json"),
   load("atlas-data/terminology/learning-structure-summaries.json"),
   load("atlas-data/terminology/learner-structure-source-content.json"),
-  load("atlas-data/motion/motion-learning.json"),
   load("atlas-data/terminology/learning-names.json"),
   load("atlas-data/terminology/muscle-attachment-content-t65.json"),
   load("atlas-data/terminology/nerve-learning-content-t65.json"),
@@ -169,27 +166,6 @@ for (const row of t65NerveLearning.records) {
 }
 if (Object.keys(nerveLearning).length !== verifiedNerveNames.length) throw Error("T65 nerve learning coverage does not match the three supported fibular nerve concepts");
 
-const actionConceptIds = [...new Set(motionBundle.muscleActions.flatMap((row) => row.subjectIds))].sort();
-const actions = [];
-let optionIndex = 0;
-for (const conceptId of actionConceptIds) {
-  const options = projectLearnerMotionActionOptions(conceptId, motionBundle, aiOverlay.items);
-  for (const option of options) {
-    // Explicit motion bindings reuse an existing authored card; adding an asset must
-    // not duplicate learner actions or shift the existing action keys.
-    if (motionBundle.muscleActions.some(row => row.learnerActionKey === option.id && row.subjectIds.includes(conceptId))) continue;
-    actions.push({
-      conceptId,
-      key: `option-${String(optionIndex++).padStart(3, "0")}`,
-      label: option.text.label,
-      explanation: learnerActionExplanation(option.text.explanation),
-      sideApplicability: option.sideApplicability === "left" || option.sideApplicability === "right"
-        ? option.sideApplicability
-        : null,
-    });
-  }
-}
-
 const projected = {
   schemaVersion: "learner-card-runtime-v1",
   names: names.entries.map((row) => ({
@@ -204,7 +180,6 @@ const projected = {
   })),
   structure: { byConcept, bySource },
   nerveLearning,
-  actions,
 };
 
 function assertSafeProjection(value) {
@@ -231,7 +206,7 @@ function assertSafeProjection(value) {
     }
   };
   visit(value);
-  if (Object.keys(value).sort().join(",") !== "actions,names,nerveLearning,schemaVersion,structure") throw new Error("Unexpected top-level learner projection fields");
+  if (Object.keys(value).sort().join(",") !== "names,nerveLearning,schemaVersion,structure") throw new Error("Unexpected top-level learner projection fields");
   if (Object.keys(value.structure).sort().join(",") !== "byConcept,bySource") throw new Error("Unexpected structure projection fields");
   for (const [name, row] of Object.entries(value.nerveLearning)) {
     if (!["Common fibular nerve", "Deep fibular nerve", "Superficial fibular nerve"].includes(name)
@@ -250,14 +225,6 @@ function assertSafeProjection(value) {
   for (const [key, row] of Object.entries(value.structure.bySource)) {
     if (!/^ZA-[a-z0-9]+-[a-f0-9]{24}$/.test(key) || Object.keys(row).some((field) => !["origin", "insertion"].includes(field))) throw new Error(`Invalid source projection ${key}`);
   }
-  for (const row of value.actions) {
-    if (Object.keys(row).sort().join(",") !== "conceptId,explanation,key,label,sideApplicability") throw new Error(`Unexpected action projection fields at ${row.key}`);
-    if (!/^HA-[A-Z]-\d{6}$/.test(row.conceptId) || !/^option-\d{3}$/.test(row.key)) throw new Error(`Invalid learner action key at ${row.key}`);
-    if (row.sideApplicability !== null && row.sideApplicability !== "left" && row.sideApplicability !== "right") throw new Error(`Invalid action side applicability at ${row.key}`);
-    for (const text of [row.label, row.explanation]) {
-      if (typeof text !== "string" || hasHanScript(text)) throw new Error(`Learner action text must be Hangul/Latin only at ${row.key}`);
-    }
-  }
 }
 
 assertSafeProjection(projected);
@@ -270,10 +237,10 @@ if (checkOnly) {
     console.error("Learner card runtime is stale; regenerate with node --experimental-strip-types scripts/buildLearnerCardRuntime.mjs");
     process.exitCode = 1;
   } else {
-    console.log(JSON.stringify({ status: "passed", conceptRows: Object.keys(byConcept).length, sourceRows: Object.keys(bySource).length, actionRows: actions.length }));
+    console.log(JSON.stringify({ status: "passed", conceptRows: Object.keys(byConcept).length, sourceRows: Object.keys(bySource).length }));
   }
 } else {
   await writeFile(outputPath, bytes);
   await writeFile(contextOutputPath, contextBytes);
-  console.log(JSON.stringify({ status: "built", conceptRows: Object.keys(byConcept).length, sourceRows: Object.keys(bySource).length, actionRows: actions.length }));
+  console.log(JSON.stringify({ status: "built", conceptRows: Object.keys(byConcept).length, sourceRows: Object.keys(bySource).length }));
 }

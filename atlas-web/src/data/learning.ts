@@ -17,7 +17,6 @@ type LearnerCardRuntime = {
     bySource: Record<string, Partial<Record<"origin" | "insertion", string>>>;
   };
   nerveLearning: Record<string, { courseContext: string; compressionContext: string; functionContext: string }>;
-  actions: Array<{ conceptId: string; key: string; label: string; explanation: string; sideApplicability: "left" | "right" | null }>;
 };
 
 const cardRuntime = learnerCardRuntime as LearnerCardRuntime;
@@ -47,7 +46,7 @@ type LearnerNerveGraph = {
 const nativeNerveGraph = learnerNerveGraph as LearnerNerveGraph;
 const nerveGraph: LearnerNerveGraph = { ...nativeNerveGraph,
   concepts: withNerveDisplayNames(nativeNerveGraph.concepts, nerveDisplayNames) };
-const lookups = createLearnerLookupIndex(cardRuntime.names, cardRuntime.actions, nerveGraph.concepts, nerveGraph.motorRelations);
+const lookups = createLearnerLookupIndex(cardRuntime.names, [], nerveGraph.concepts, nerveGraph.motorRelations);
 const nerveSearchEntries = nerveGraph.concepts.map(concept => learnerSearchEntry(
   concept.key, concept.names.koTraditional || concept.names.koModern,
   [concept.names.koModern, concept.names.en, concept.names.latin, ...concept.searchTerms],

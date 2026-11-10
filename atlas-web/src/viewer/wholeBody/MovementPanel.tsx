@@ -5,6 +5,13 @@ import type { RigFile, RigPose } from '../rig';
 import { groupDofs, groupOfJoint, MOVEMENT_GROUPS, movementRoles, type MuscleActionsFile, type RigHost } from '../movement';
 
 type Row = { label: string; localDisplayEligible: boolean };
+const NOTES: Record<string, string> = {
+  back: '허리는 요추 전체의 움직임을 한 관절로 단순화했습니다.',
+  neck: '목은 C2–C3부터 C7–T1까지 마디마다 나누어 움직이고, 머리는 고리뒤통수관절(끄덕임)과 고리중쇠관절(돌림)에서 움직입니다.',
+  girdle: '빗장뼈가 복장빗장관절에서 움직이면 어깨뼈도 함께 따라갑니다. 어깨뼈 위쪽돌림은 가슴벽 위 미끄러짐을 단순화했습니다.',
+  fingers: '둘째–다섯째 손가락은 함께 움직입니다. 엄지 맞섬은 굽힘과 벌림을 함께 써서 보여 줍니다.',
+  toes: '둘째–다섯째 발가락은 함께 움직입니다. 발가락 벌림·모음은 아직 움직이지 않습니다.',
+};
 
 export function MovementPanel({ host, rows, request, musclesVisible, onSelect }: {
   host: RigHost; rows: Map<string, Row>; request: { jointId: string; revision: number } | null; musclesVisible: boolean; onSelect: (key: string) => void;
@@ -44,7 +51,7 @@ export function MovementPanel({ host, rows, request, musclesVisible, onSelect }:
     <div className="movement-joints" role="group" aria-label="관절">
       {MOVEMENT_GROUPS.map(g => <button key={g.id} aria-pressed={group === g.id} onClick={() => { setGroup(g.id); setActive(null); }}>{g.label}</button>)}
     </div>
-    {group !== 'back' && <div className="movement-side" role="group" aria-label="몸의 쪽">
+    {group !== 'back' && group !== 'neck' && <div className="movement-side" role="group" aria-label="몸의 쪽">
       {(['r', 'l'] as const).map(s => <button key={s} aria-pressed={side === s} onClick={() => { setSide(s); setActive(null); }}>{s === 'r' ? '오른쪽' : '왼쪽'}</button>)}
     </div>}
     <div className="movement-dofs">
@@ -71,7 +78,7 @@ export function MovementPanel({ host, rows, request, musclesVisible, onSelect }:
       <div className="attachment-bone-links">{roles.antagonists.length ? names(roles.antagonists) : <span className="quiet-note">자료에 없음</span>}</div>
       {!musclesVisible && <p className="quiet-note">근육 층을 켜면 색으로 볼 수 있습니다.</p>}
     </div>}
-    <p className="quiet-note">{group === 'back' ? '허리는 요추 전체의 움직임을 한 관절로 단순화했습니다. ' : ''}
-      작용 근육은 교과서 표를 OpenSim 모델의 모멘트 팔로 확인한 학습용 요약입니다. 어깨뼈·손가락은 아직 움직이지 않습니다.</p>
+    <p className="quiet-note">{NOTES[group] ?? ''}
+      작용 근육은 교과서 표를 OpenSim 모델의 모멘트 팔이나 독립 해부학 표(UAMS·Kenhub)로 확인한 학습용 요약입니다.</p>
   </div>;
 }

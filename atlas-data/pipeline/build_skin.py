@@ -27,12 +27,15 @@ GEOMETRY = ROOT / 'atlas-data/source-cache/datasets/za-v2'
 OUT = GEOMETRY / 'skin'
 SIGMA = .012
 NEAR, NEAR_SHARE = .02, .03  # a segment is "near" when >= 3 % of a structure's vertices lie within 2 cm of its bones
-ROLE_ORDER = ['pelvis', 'torso', 'femur', 'patella', 'tibia', 'talus', 'calcn', 'toes', 'humerus', 'ulna', 'radius', 'hand']
+MAX_ROLES = 16  # 4-bit slots in the packed weights
 SOFT_LAYERS = {'muscle', 'fascia', 'joint', 'vessel', 'nerve'}  # vessels (Q2-1) and nerves follow the bones they run along
 
 
+UNPAIRED = set()  # filled from the rig: segments without a side keep their id as their role
+
+
 def role(segment):
-    return segment if segment in ('pelvis', 'torso') else segment[:-2]
+    return segment if segment in UNPAIRED else segment[:-2]
 
 
 def chunk_positions(path):
@@ -68,6 +71,8 @@ def main():
     d1 = {s['id']: s for s in json.loads((D1 / 'structures.json').read_text())['structures']}
     by_id = {s['id']: s for s in runtime}
     segment_of = {bone: seg for seg, v in rig['segments'].items() for bone in v['bones']}
+    UNPAIRED.update(seg for seg, v in rig['segments'].items() if v['side'] == 'unpaired')
+    role_order = list(dict.fromkeys(role(seg) for seg in rig['segments']))
     parent = {seg: v['parent'] for seg, v in rig['segments'].items()}
 
     def chain(segments):
@@ -132,11 +137,15 @@ def main():
                     per_chunk.setdefault(lod['chunk'], []).append((lod['resource'], *done[lod['resource']]))
                     placed.add((lod['chunk'], lod['resource']))
                 continue
-            roles = sorted(resource_roles[lod['resource']], key=ROLE_ORDER.index)
+            roles = sorted(resource_roles[lod['resource']], key=role_order.index)
             if lod['chunk'] not in positions_cache: positions_cache[lod['chunk']] = chunk_positions(GEOMETRY / 'chunks' / f"{lod['chunk']}.glb")
             pts = world(positions_cache[lod['chunk']][lod['resource']], s['geometry']['matrix'])
-            resolve = lambda r: r if r in ('pelvis', 'torso') else f'{r}_{side or "r"}'
+            resolve = lambda r: r if r in UNPAIRED else f'{r}_{side or "r"}'
             d = np.array([[trees[resolve(r)].find(Vector(p))[2] for r in roles] for p in pts])
+            if len(roles) > MAX_ROLES:
+                # Keep the segments nearest to most vertices (e.g. a long finger flexor spans forearm, palm and 12 phalanges).
+                counts = np.bincount(d.argmin(1), minlength=len(roles)); keep = sorted(np.argsort(-counts, kind='stable')[:MAX_ROLES])
+                roles, d = [roles[i] for i in keep], d[:, keep]; stats['pruned'] = stats.get('pruned', 0) + 1
             w = np.exp(-(d - d.min(1, keepdims=True)) / SIGMA)
             order = np.argsort(-w, 1)
             a, b = order[:, 0], order[:, 1] if len(roles) > 1 else order[:, 0]

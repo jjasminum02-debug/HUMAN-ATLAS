@@ -68,10 +68,6 @@ for (const row of runtime.names) {
 }
 for (const row of Object.values(runtime.structure.byConcept)) for (const text of Object.values(row)) learnerText.add(text);
 for (const row of Object.values(runtime.structure.bySource)) for (const text of Object.values(row)) learnerText.add(text);
-for (const row of runtime.actions) {
-  learnerText.add(row.label);
-  learnerText.add(row.explanation);
-}
 
 const staticMarkers = [
   "T18-FIELD-", "T18-E-", "T18-C-", "T18-HANDS-ON-ANATOMY", "T18-STATPEARLS",
@@ -112,7 +108,6 @@ const result = {
     names: runtime.names.length,
     conceptStructureRows: Object.keys(runtime.structure.byConcept).length,
     sourceStructureRows: Object.keys(runtime.structure.bySource).length,
-    actions: runtime.actions.length,
   },
   distribution: { scannedFiles: scanFiles.length, bundles },
   provenanceMarkersChecked: provenanceMarkers.size,

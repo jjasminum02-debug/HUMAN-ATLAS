@@ -19,7 +19,7 @@ test('every action names a settable rig dof and a visible muscle', () => {
   }
 });
 
-test('each of the seven joints has primary movers in both directions on both sides', () => {
+test('every joint group has primary movers in both directions on both sides', () => {
   for (const group of MOVEMENT_GROUPS) for (const side of ['l', 'r'] as const) {
     const primary = groupDofs(rig, group.id, side).filter(({ dof }) => !['back:rotation', `wrist_${side}:deviation`, `mtp_${side}:extension`].includes(dof.id));
     for (const { dof } of primary) for (const sign of [1, -1] as const) {
@@ -46,7 +46,7 @@ test('textbook movers and opposers come out of the table', () => {
 });
 
 test('left and right muscles carry the same limb actions', () => {
-  const sig = (key: string) => actions.muscles[key].actions.filter(a => !a.dof.startsWith('back:')).map(a => `${a.dof.replace(/_[lr]:/, ':')}${a.sign}${a.role}`).sort().join();
+  const sig = (key: string) => actions.muscles[key].actions.filter(a => !/^(back|neck|head):/.test(a.dof)).map(a => `${a.dof.replace(/_[lr]:/, ':')}${a.sign}${a.role}`).sort().join();
   for (const s of structures.filter(s => s.side === 'left' && actions.muscles[s.key])) {
     const twin = structures.find(t => t.side === 'right' && t.names.en === s.names.en && actions.muscles[t.key]);
     if (twin) assert.equal(sig(s.key), sig(twin.key), s.names.en);

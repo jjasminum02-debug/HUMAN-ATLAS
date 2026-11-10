@@ -9,7 +9,7 @@ const graph = json("../../../atlas-data/terminology/learner-nerve-graph-t66.json
 const support = json("../../../atlas-data/overlays/nerve-support-t66.json");
 const integration = json("../../../atlas-data/overlays/za-local-integration.json");
 const course = json("../../../atlas-data/terminology/nerve-learning-t66.json");
-const ledger = json("../../../work/evidence/T66/nerve-learning-2026-10-05/nerve-relation-ledger.json");
+const ledger = json("../../../atlas-data/provenance/T66/nerve-learning-2026-10-05/nerve-relation-ledger.json");
 const eligibleMuscles = new Map(integration.objects
   .filter((row: any) => row.kind === "muscle" && row.localDisplayEligible && row.inspectionEligible)
   .map((row: any) => [row.sourceKey, row]));

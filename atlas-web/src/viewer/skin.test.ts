@@ -68,3 +68,28 @@ test('volume preservation: a shortened cylinder bulges at mid-belly by about sqr
   assert.equal(preserveVolume(profile, posed(.3)), 1.25, 'clamped');
   assert.equal(preserveVolume(profile, posed(1)), 1, 'rest length: untouched');
 });
+
+test('dual-quaternion blend keeps a bent tube round where a linear blend collapses it (4-1 step 4)', () => {
+  // A tube of radius 2 cm along +x, bent 120° about the z axis at x = 0; weights ramp from segment A to B over ±3 cm.
+  const ring = 24, rows = 41, positions: number[] = [], weights: number[] = [];
+  for (let r = 0; r < rows; r++) {
+    const x = -.1 + .2 * r / (rows - 1), share = Math.min(1, Math.max(0, (x + .03) / .06));
+    for (let k = 0; k < ring; k++) {
+      const a = 2 * Math.PI * k / ring; positions.push(x, .02 * Math.cos(a), .02 * Math.sin(a));
+      weights.push(0 << 12 | 1 << 8 | Math.round(255 * (1 - share)));
+    }
+  }
+  const rest = new THREE.BufferGeometry(); rest.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  const slots = [new THREE.Matrix4(), new THREE.Matrix4().makeRotationZ(THREE.MathUtils.degToRad(120))];
+  const posed = posedCopy(rest); skinGeometry(rest, Uint16Array.from(weights), slots, posed);
+  const out = posed.getAttribute('position').array as Float32Array;
+  // Middle ring (x = 0, half/half): its spread across the tube should stay close to the 4 cm diameter.
+  const mid = (rows - 1) / 2 * ring * 3, xs: number[] = [], ys: number[] = [], zs: number[] = [];
+  for (let k = 0; k < ring; k++) { xs.push(out[mid + 3 * k]); ys.push(out[mid + 3 * k + 1]); zs.push(out[mid + 3 * k + 2]); }
+  const span = (v: number[]) => Math.max(...v) - Math.min(...v);
+  const diameter = Math.max(Math.hypot(span(xs), span(ys)), span(zs));
+  assert.ok(diameter > .036, `bent tube keeps its cross-section (${(diameter * 100).toFixed(2)} cm, linear blend gives about 2 cm)`);
+  // Fully weighted rows move rigidly with their segment.
+  const end = (rows - 1) * ring * 3, expected = new THREE.Vector3(positions[end], positions[end + 1], positions[end + 2]).applyMatrix4(slots[1]);
+  assert.ok(Math.hypot(out[end] - expected.x, out[end + 1] - expected.y, out[end + 2] - expected.z) < 1e-6);
+});

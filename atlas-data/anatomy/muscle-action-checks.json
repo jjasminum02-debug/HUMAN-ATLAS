@@ -2,10 +2,11 @@
  "schemaVersion": 1,
  "method": "Muscle actions for the movement UI (ROADMAP M3).\n\n  python3 atlas-data/pipeline/build_actions.py\nTable: muscle_actions.py (AI-written from standard texts). Independent check: OpenSim moment arms\n(opensim_moment_arms.py on the bundled Rajagopal2016 / Arm26 / WristModel, right side), averaged over five angles inside\nthe rig's range with the other coordinates at 0. A listed action agrees when the OpenSim moment arm has the same sign and\nis at least 2 mm - for the muscle as a whole (mean of its model parts), or for one model part (gluteus medius anterior\nfibres), or with the hip flexed 45 degrees for the hip's other dofs (rotation moment arms change sign with flexion).\nThe sidecar records which basis agreed. Actions OpenSim contradicts are left out of the runtime file (listed in the sidecar); OpenSim\nactions >= 10 mm missing from the table are reported, not added.\nWrites atlas-data/runtime/muscle-actions.json (runtime) and atlas-data/anatomy/muscle-action-checks.json (check sidecar).",
  "summary": {
-  "tableMuscles": 115,
+  "tableMuscles": 155,
   "opensimChecked": 56,
   "disagreements": 1,
-  "unlisted": 7
+  "unlisted": 7,
+  "unconfirmed": 3
  },
  "disagreements": [
   {
@@ -49,6 +50,26 @@
    "muscle": "Extensor digiti minimi",
    "dof": "wrist:deviation",
    "opensimMm": 11.9
+  }
+ ],
+ "unconfirmed": [
+  {
+   "muscle": "Opponens pollicis muscle",
+   "action": "cmc1:abduction+s",
+   "uams": "opposes the thumb",
+   "kenhub": "Carpometacarpal joint 1: Thumb opposition"
+  },
+  {
+   "muscle": "Descending part of trapezius muscle",
+   "action": "neck:flexion-s",
+   "uams": "elevates and depresses the scapula (depending on which part of the muscle contracts); rotates the scapula superiorly; retracts scapula",
+   "kenhub": "Descending (upper) fibers Ascending (lower) fibers Transverse (middle) fibers"
+  },
+  {
+   "muscle": "Descending part of trapezius muscle",
+   "action": "neck:bending=ipsis",
+   "uams": "elevates and depresses the scapula (depending on which part of the muscle contracts); rotates the scapula superiorly; retracts scapula",
+   "kenhub": "Descending (upper) fibers Ascending (lower) fibers Transverse (middle) fibers"
   }
  ],
  "muscles": {
@@ -333,91 +354,223 @@
    "opensim": {}
   },
   "Extensor digitorum longus": {
-   "actions": "mtp:extension+p ankle:dorsiflexion+p subtalar:inversion-s",
+   "actions": "mtp:extension+p toes:ipFlexion-p ankle:dorsiflexion+p subtalar:inversion-s",
    "opensim": {
     "ankle:dorsiflexion": 34.5,
     "subtalar:inversion": -14.4,
     "mtp:extension": 5.5
+   },
+   "confirmedBy": {
+    "toes:ipFlexion-": [
+     "uams",
+     "kenhub"
+    ]
    }
   },
   "Tendon of extensor digitorum longus": {
-   "actions": "mtp:extension+p ankle:dorsiflexion+p subtalar:inversion-s",
-   "opensim": {}
+   "actions": "mtp:extension+p toes:ipFlexion-p ankle:dorsiflexion+p subtalar:inversion-s",
+   "opensim": {},
+   "confirmedBy": {
+    "mtp:extension+": [
+     "uams",
+     "kenhub"
+    ],
+    "toes:ipFlexion-": [
+     "uams",
+     "kenhub"
+    ]
+   }
   },
   "Extensor hallucis longus": {
-   "actions": "mtp:extension+p ankle:dorsiflexion+s",
+   "actions": "mtp1:extension+p iphallux:flexion-p ankle:dorsiflexion+s",
    "opensim": {
     "ankle:dorsiflexion": 37.1,
     "mtp:extension": 6.4
+   },
+   "confirmedBy": {
+    "mtp1:extension+": [
+     "uams",
+     "kenhub"
+    ],
+    "iphallux:flexion-": [
+     "uams",
+     "kenhub"
+    ]
    }
   },
   "Flexor digitorum longus": {
-   "actions": "mtp:extension-p ankle:dorsiflexion-s subtalar:inversion+s",
+   "actions": "toes:ipFlexion+p mtp:extension-p ankle:dorsiflexion-s subtalar:inversion+s",
    "opensim": {
     "ankle:dorsiflexion": -8.4,
     "subtalar:inversion": 16.7,
     "mtp:extension": -6.3
+   },
+   "confirmedBy": {
+    "toes:ipFlexion+": [
+     "uams",
+     "kenhub"
+    ]
    }
   },
   "Flexor hallucis longus": {
-   "actions": "mtp:extension-p ankle:dorsiflexion-s subtalar:inversion+s",
+   "actions": "iphallux:flexion+p mtp1:extension-p ankle:dorsiflexion-s subtalar:inversion+s",
    "opensim": {
     "ankle:dorsiflexion": -14.3,
     "subtalar:inversion": 14.5,
     "mtp:extension": -5.5
+   },
+   "confirmedBy": {
+    "iphallux:flexion+": [
+     "uams",
+     "kenhub"
+    ],
+    "mtp1:extension-": [
+     "uams",
+     "kenhub"
+    ]
    }
   },
   "Extensor digitorum brevis": {
-   "actions": "mtp:extension+p",
-   "opensim": {}
+   "actions": "mtp:extension+p toes:ipFlexion-s mtp1:extension+s",
+   "opensim": {},
+   "confirmedBy": {
+    "mtp:extension+": [
+     "uams",
+     "kenhub"
+    ],
+    "toes:ipFlexion-": [
+     "uams",
+     "kenhub"
+    ],
+    "mtp1:extension+": [
+     "uams",
+     "kenhub"
+    ]
+   }
   },
   "Extensor hallucis brevis": {
-   "actions": "mtp:extension+p",
-   "opensim": {}
+   "actions": "mtp1:extension+p",
+   "opensim": {},
+   "confirmedBy": {
+    "mtp1:extension+": [
+     "uams",
+     "kenhub"
+    ]
+   }
   },
   "Flexor digitorum brevis": {
-   "actions": "mtp:extension-p",
-   "opensim": {}
+   "actions": "toes:ipFlexion+p mtp:extension-s",
+   "opensim": {},
+   "confirmedBy": {
+    "toes:ipFlexion+": [
+     "uams",
+     "kenhub"
+    ],
+    "mtp:extension-": [
+     "uams",
+     "kenhub"
+    ]
+   }
   },
   "Lateral head of flexor hallucis brevis": {
-   "actions": "mtp:extension-p",
-   "opensim": {}
+   "actions": "mtp1:extension-p",
+   "opensim": {},
+   "confirmedBy": {
+    "mtp1:extension-": [
+     "uams",
+     "kenhub"
+    ]
+   }
   },
   "Medial head of flexor hallucis brevis": {
-   "actions": "mtp:extension-p",
-   "opensim": {}
+   "actions": "mtp1:extension-p",
+   "opensim": {},
+   "confirmedBy": {
+    "mtp1:extension-": [
+     "uams",
+     "kenhub"
+    ]
+   }
   },
   "Flexor digiti minimi of foot": {
    "actions": "mtp:extension-s",
-   "opensim": {}
+   "opensim": {},
+   "confirmedBy": {
+    "mtp:extension-": [
+     "uams"
+    ]
+   }
   },
   "Lumbrical muscles of foot": {
-   "actions": "mtp:extension-s",
-   "opensim": {}
+   "actions": "mtp:extension-s toes:ipFlexion-s",
+   "opensim": {},
+   "confirmedBy": {
+    "mtp:extension-": [
+     "uams",
+     "kenhub"
+    ],
+    "toes:ipFlexion-": [
+     "uams",
+     "kenhub"
+    ]
+   }
   },
   "Plantar interossei muscles": {
    "actions": "mtp:extension-s",
-   "opensim": {}
+   "opensim": {},
+   "confirmedBy": {
+    "mtp:extension-": [
+     "uams",
+     "kenhub"
+    ]
+   }
   },
   "Dorsal interossei muscles of foot": {
    "actions": "mtp:extension-s",
-   "opensim": {}
+   "opensim": {},
+   "confirmedBy": {
+    "mtp:extension-": [
+     "uams"
+    ]
+   }
   },
   "Quadratus plantae muscle": {
-   "actions": "mtp:extension-s",
-   "opensim": {}
+   "actions": "toes:ipFlexion+s",
+   "opensim": {},
+   "confirmedBy": {
+    "toes:ipFlexion+": [
+     "uams",
+     "kenhub"
+    ]
+   }
   },
   "Abductor hallucis": {
-   "actions": "mtp:extension-s",
-   "opensim": {}
+   "actions": "mtp1:extension-s",
+   "opensim": {},
+   "confirmedBy": {
+    "mtp1:extension-": [
+     "uams",
+     "kenhub"
+    ]
+   }
   },
   "Abductor digiti minimi of foot": {
    "actions": "mtp:extension-s",
-   "opensim": {}
+   "opensim": {},
+   "confirmedBy": {
+    "mtp:extension-": [
+     "uams"
+    ]
+   }
   },
   "Oblique head of adductor hallucis": {
-   "actions": "mtp:extension-s",
-   "opensim": {}
+   "actions": "mtp1:extension-s",
+   "opensim": {},
+   "confirmedBy": {
+    "mtp1:extension-": [
+     "kenhub"
+    ]
+   }
   },
   "Clavicular part of deltoid muscle": {
    "actions": "shoulder:flexion+p shoulder:rotation+s",
@@ -591,72 +744,679 @@
    }
   },
   "Extensor digitorum": {
-   "actions": "wrist:flexion-s",
+   "actions": "fingers:mcpFlexion-p fingers:pipFlexion-s fingers:dipFlexion-s wrist:flexion-s",
    "opensim": {
     "wrist:flexion": -16.0,
     "wrist:deviation": 3.9
+   },
+   "confirmedBy": {
+    "fingers:mcpFlexion-": [
+     "uams",
+     "kenhub"
+    ],
+    "fingers:pipFlexion-": [
+     "uams",
+     "kenhub"
+    ],
+    "fingers:dipFlexion-": [
+     "uams",
+     "kenhub"
+    ]
    }
   },
   "Extensor digiti minimi": {
-   "actions": "wrist:flexion-s",
+   "actions": "fingers:mcpFlexion-s wrist:flexion-s",
    "opensim": {
     "wrist:flexion": -14.3,
     "wrist:deviation": 11.9
+   },
+   "confirmedBy": {
+    "fingers:mcpFlexion-": [
+     "uams",
+     "kenhub"
+    ]
    }
   },
   "Extensor indicis": {
-   "actions": "wrist:flexion-s",
+   "actions": "fingers:mcpFlexion-s wrist:flexion-s",
    "opensim": {
     "wrist:flexion": -13.1,
     "wrist:deviation": -3.4
+   },
+   "confirmedBy": {
+    "fingers:mcpFlexion-": [
+     "uams"
+    ]
    }
   },
   "Humero-ulnar head of flexor digitorum superficialis": {
-   "actions": "wrist:flexion+s",
+   "actions": "fingers:pipFlexion+p fingers:mcpFlexion+s wrist:flexion+s",
    "opensim": {
     "wrist:flexion": 15.9,
     "wrist:deviation": 4.0
+   },
+   "confirmedBy": {
+    "fingers:pipFlexion+": [
+     "uams",
+     "kenhub"
+    ],
+    "fingers:mcpFlexion+": [
+     "uams",
+     "kenhub"
+    ]
    }
   },
   "Radial head of flexor digitorum superficialis": {
-   "actions": "wrist:flexion+s",
+   "actions": "fingers:pipFlexion+p fingers:mcpFlexion+s wrist:flexion+s",
    "opensim": {
     "wrist:flexion": 15.9,
     "wrist:deviation": 4.0
+   },
+   "confirmedBy": {
+    "fingers:pipFlexion+": [
+     "uams",
+     "kenhub"
+    ],
+    "fingers:mcpFlexion+": [
+     "uams",
+     "kenhub"
+    ]
    }
   },
   "Flexor digitorum profundus": {
-   "actions": "wrist:flexion+s",
+   "actions": "fingers:dipFlexion+p fingers:pipFlexion+s fingers:mcpFlexion+s wrist:flexion+s",
    "opensim": {
     "wrist:flexion": 13.5
+   },
+   "confirmedBy": {
+    "fingers:dipFlexion+": [
+     "uams",
+     "kenhub"
+    ],
+    "fingers:pipFlexion+": [
+     "uams",
+     "kenhub"
+    ],
+    "fingers:mcpFlexion+": [
+     "uams",
+     "kenhub"
+    ]
    }
   },
   "Flexor pollicis longus": {
-   "actions": "wrist:flexion+s",
+   "actions": "ip1:flexion+p mcp1:flexion+s wrist:flexion+s",
    "opensim": {
     "wrist:flexion": 16.2,
     "wrist:deviation": -5.1
+   },
+   "confirmedBy": {
+    "ip1:flexion+": [
+     "uams",
+     "kenhub"
+    ],
+    "mcp1:flexion+": [
+     "uams",
+     "kenhub"
+    ]
    }
   },
   "Abductor pollicis longus": {
-   "actions": "wrist:deviation-s",
+   "actions": "cmc1:abduction+p cmc1:flexion-p wrist:deviation-s",
    "opensim": {
     "wrist:flexion": 8.0,
     "wrist:deviation": -21.6
+   },
+   "confirmedBy": {
+    "cmc1:abduction+": [
+     "uams",
+     "kenhub"
+    ],
+    "cmc1:flexion-": [
+     "kenhub"
+    ]
    }
   },
   "Extensor pollicis brevis": {
-   "actions": "wrist:deviation-s",
+   "actions": "mcp1:flexion-p cmc1:flexion-s wrist:deviation-s",
    "opensim": {
     "wrist:flexion": 3.9,
     "wrist:deviation": -26.2
+   },
+   "confirmedBy": {
+    "mcp1:flexion-": [
+     "uams",
+     "kenhub"
+    ],
+    "cmc1:flexion-": [
+     "uams",
+     "kenhub"
+    ]
    }
   },
   "Extensor pollicis longus": {
-   "actions": "wrist:flexion-s",
+   "actions": "ip1:flexion-p mcp1:flexion-s wrist:flexion-s",
    "opensim": {
     "wrist:flexion": -7.6,
     "wrist:deviation": -7.6
+   },
+   "confirmedBy": {
+    "ip1:flexion-": [
+     "uams",
+     "kenhub"
+    ],
+    "mcp1:flexion-": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Lumbrical muscles of hand": {
+   "actions": "fingers:mcpFlexion+p fingers:pipFlexion-p fingers:dipFlexion-p",
+   "opensim": {},
+   "confirmedBy": {
+    "fingers:mcpFlexion+": [
+     "uams"
+    ],
+    "fingers:pipFlexion-": [
+     "uams"
+    ],
+    "fingers:dipFlexion-": [
+     "uams"
+    ]
+   }
+  },
+  "Palmar interossei muscles": {
+   "actions": "fingers:spread-p fingers:mcpFlexion+s fingers:pipFlexion-s",
+   "opensim": {},
+   "confirmedBy": {
+    "fingers:spread-": [
+     "uams",
+     "kenhub"
+    ],
+    "fingers:mcpFlexion+": [
+     "uams",
+     "kenhub"
+    ],
+    "fingers:pipFlexion-": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Dorsal interossei muscles of hand": {
+   "actions": "fingers:spread+p fingers:mcpFlexion+s fingers:pipFlexion-s",
+   "opensim": {},
+   "confirmedBy": {
+    "fingers:spread+": [
+     "uams"
+    ],
+    "fingers:mcpFlexion+": [
+     "uams"
+    ],
+    "fingers:pipFlexion-": [
+     "uams"
+    ]
+   }
+  },
+  "Abductor digiti minimi of hand": {
+   "actions": "fingers:spread+s",
+   "opensim": {},
+   "confirmedBy": {
+    "fingers:spread+": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Flexor digiti minimi of hand": {
+   "actions": "fingers:mcpFlexion+s",
+   "opensim": {},
+   "confirmedBy": {
+    "fingers:mcpFlexion+": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Abductor pollicis brevis": {
+   "actions": "cmc1:abduction+p",
+   "opensim": {},
+   "confirmedBy": {
+    "cmc1:abduction+": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Superficial head of flexor pollicis brevis": {
+   "actions": "mcp1:flexion+p cmc1:flexion+s",
+   "opensim": {},
+   "confirmedBy": {
+    "mcp1:flexion+": [
+     "uams",
+     "kenhub"
+    ],
+    "cmc1:flexion+": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Deep head of flexor pollicis brevis": {
+   "actions": "mcp1:flexion+p cmc1:flexion+s",
+   "opensim": {},
+   "confirmedBy": {
+    "mcp1:flexion+": [
+     "uams",
+     "kenhub"
+    ],
+    "cmc1:flexion+": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Opponens pollicis muscle": {
+   "actions": "cmc1:flexion+p cmc1:abduction+s",
+   "opensim": {},
+   "confirmedBy": {
+    "cmc1:flexion+": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Oblique head of adductor pollicis": {
+   "actions": "cmc1:abduction-p",
+   "opensim": {},
+   "confirmedBy": {
+    "cmc1:abduction-": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Transverse head of adductor pollicis": {
+   "actions": "cmc1:abduction-p",
+   "opensim": {},
+   "confirmedBy": {
+    "cmc1:abduction-": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Descending part of trapezius muscle": {
+   "actions": "sternoclavicular:elevation+p acromioclavicular:upwardRotation+p neck:flexion-s neck:bending=ipsis neck:rotation=contras",
+   "opensim": {},
+   "confirmedBy": {
+    "sternoclavicular:elevation+": [
+     "uams"
+    ],
+    "acromioclavicular:upwardRotation+": [
+     "uams"
+    ],
+    "neck:rotation=contra": [
+     "uams"
+    ]
+   }
+  },
+  "Transverse part of trapezius muscle": {
+   "actions": "sternoclavicular:protraction-p",
+   "opensim": {},
+   "confirmedBy": {
+    "sternoclavicular:protraction-": [
+     "uams"
+    ]
+   }
+  },
+  "Ascending part of trapezius muscle": {
+   "actions": "sternoclavicular:elevation-p acromioclavicular:upwardRotation+p",
+   "opensim": {},
+   "confirmedBy": {
+    "sternoclavicular:elevation-": [
+     "uams",
+     "kenhub"
+    ],
+    "acromioclavicular:upwardRotation+": [
+     "uams"
+    ]
+   }
+  },
+  "Rhomboid major muscle": {
+   "actions": "sternoclavicular:protraction-p acromioclavicular:upwardRotation-p sternoclavicular:elevation+s",
+   "opensim": {},
+   "confirmedBy": {
+    "sternoclavicular:protraction-": [
+     "uams"
+    ],
+    "acromioclavicular:upwardRotation-": [
+     "uams"
+    ],
+    "sternoclavicular:elevation+": [
+     "uams"
+    ]
+   }
+  },
+  "Rhomboid minor muscle": {
+   "actions": "sternoclavicular:protraction-p acromioclavicular:upwardRotation-p sternoclavicular:elevation+s",
+   "opensim": {},
+   "confirmedBy": {
+    "sternoclavicular:protraction-": [
+     "uams"
+    ],
+    "acromioclavicular:upwardRotation-": [
+     "uams"
+    ],
+    "sternoclavicular:elevation+": [
+     "uams"
+    ]
+   }
+  },
+  "Levator scapulae": {
+   "actions": "sternoclavicular:elevation+p acromioclavicular:upwardRotation-s neck:bending=ipsis",
+   "opensim": {},
+   "confirmedBy": {
+    "sternoclavicular:elevation+": [
+     "uams"
+    ],
+    "acromioclavicular:upwardRotation-": [
+     "kenhub"
+    ],
+    "neck:bending=ipsi": [
+     "kenhub"
+    ]
+   }
+  },
+  "Serratus anterior muscle": {
+   "actions": "sternoclavicular:protraction+p acromioclavicular:upwardRotation+p",
+   "opensim": {},
+   "confirmedBy": {
+    "sternoclavicular:protraction+": [
+     "uams"
+    ],
+    "acromioclavicular:upwardRotation+": [
+     "uams"
+    ]
+   }
+  },
+  "Pectoralis minor muscle": {
+   "actions": "sternoclavicular:elevation-p sternoclavicular:protraction+s acromioclavicular:upwardRotation-s",
+   "opensim": {},
+   "confirmedBy": {
+    "sternoclavicular:elevation-": [
+     "uams",
+     "kenhub"
+    ],
+    "sternoclavicular:protraction+": [
+     "uams"
+    ],
+    "acromioclavicular:upwardRotation-": [
+     "uams"
+    ]
+   }
+  },
+  "Subclavius muscle": {
+   "actions": "sternoclavicular:elevation-s",
+   "opensim": {},
+   "confirmedBy": {
+    "sternoclavicular:elevation-": [
+     "kenhub"
+    ]
+   }
+  },
+  "Sternocleidomastoid muscle": {
+   "actions": "neck:flexion+p neck:bending=ipsip head:rotation=contrap neck:rotation=contras",
+   "opensim": {},
+   "confirmedBy": {
+    "neck:flexion+": [
+     "uams",
+     "kenhub"
+    ],
+    "neck:bending=ipsi": [
+     "uams",
+     "kenhub"
+    ],
+    "head:rotation=contra": [
+     "uams",
+     "kenhub"
+    ],
+    "neck:rotation=contra": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Scalenus anterior muscle": {
+   "actions": "neck:bending=ipsip neck:flexion+s",
+   "opensim": {},
+   "confirmedBy": {
+    "neck:bending=ipsi": [
+     "uams"
+    ],
+    "neck:flexion+": [
+     "uams"
+    ]
+   }
+  },
+  "Scalenus medius muscle": {
+   "actions": "neck:bending=ipsip",
+   "opensim": {},
+   "confirmedBy": {
+    "neck:bending=ipsi": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Scalenus posterior muscle": {
+   "actions": "neck:bending=ipsip",
+   "opensim": {},
+   "confirmedBy": {
+    "neck:bending=ipsi": [
+     "uams"
+    ]
+   }
+  },
+  "Longus colli muscle": {
+   "actions": "neck:flexion+p neck:bending=ipsis",
+   "opensim": {},
+   "confirmedBy": {
+    "neck:flexion+": [
+     "uams",
+     "kenhub"
+    ],
+    "neck:bending=ipsi": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Longus capitis muscle": {
+   "actions": "head:flexion+p neck:flexion+s",
+   "opensim": {},
+   "confirmedBy": {
+    "head:flexion+": [
+     "uams",
+     "kenhub"
+    ],
+    "neck:flexion+": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Rectus anterior capitis muscle": {
+   "actions": "head:flexion+p",
+   "opensim": {},
+   "confirmedBy": {
+    "head:flexion+": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Splenius capitis muscle": {
+   "actions": "neck:flexion-p head:flexion-s neck:rotation=ipsip head:rotation=ipsis",
+   "opensim": {},
+   "confirmedBy": {
+    "neck:flexion-": [
+     "uams",
+     "kenhub"
+    ],
+    "head:flexion-": [
+     "uams",
+     "kenhub"
+    ],
+    "neck:rotation=ipsi": [
+     "uams",
+     "kenhub"
+    ],
+    "head:rotation=ipsi": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Splenius colli muscle": {
+   "actions": "neck:flexion-p neck:rotation=ipsis",
+   "opensim": {},
+   "confirmedBy": {
+    "neck:flexion-": [
+     "uams",
+     "kenhub"
+    ],
+    "neck:rotation=ipsi": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Semispinalis colli muscle": {
+   "actions": "neck:flexion-p neck:rotation=contras",
+   "opensim": {},
+   "confirmedBy": {
+    "neck:flexion-": [
+     "uams"
+    ],
+    "neck:rotation=contra": [
+     "uams"
+    ]
+   }
+  },
+  "Longissimus capitis muscle": {
+   "actions": "head:flexion-s neck:rotation=ipsis",
+   "opensim": {},
+   "confirmedBy": {
+    "head:flexion-": [
+     "uams",
+     "kenhub"
+    ],
+    "neck:rotation=ipsi": [
+     "kenhub"
+    ]
+   }
+  },
+  "Longissimus colli muscle": {
+   "actions": "neck:flexion-s neck:bending=ipsis",
+   "opensim": {},
+   "confirmedBy": {
+    "neck:flexion-": [
+     "uams",
+     "kenhub"
+    ],
+    "neck:bending=ipsi": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Spinalis capitis muscle": {
+   "actions": "head:flexion-s",
+   "opensim": {},
+   "confirmedBy": {
+    "head:flexion-": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Spinalis colli muscle": {
+   "actions": "neck:flexion-s",
+   "opensim": {},
+   "confirmedBy": {
+    "neck:flexion-": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Multifidus colli muscle": {
+   "actions": "neck:flexion-s neck:rotation=contras",
+   "opensim": {},
+   "confirmedBy": {
+    "neck:flexion-": [
+     "uams",
+     "kenhub"
+    ],
+    "neck:rotation=contra": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Interspinales colli muscles": {
+   "actions": "neck:flexion-s",
+   "opensim": {},
+   "confirmedBy": {
+    "neck:flexion-": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Rectus posterior major capitis muscle": {
+   "actions": "head:flexion-p head:rotation=ipsip",
+   "opensim": {},
+   "confirmedBy": {
+    "head:flexion-": [
+     "uams",
+     "kenhub"
+    ],
+    "head:rotation=ipsi": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Rectus posterior minor capitis muscle": {
+   "actions": "head:flexion-p",
+   "opensim": {},
+   "confirmedBy": {
+    "head:flexion-": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Obliquus inferior capitis muscle": {
+   "actions": "head:rotation=ipsip",
+   "opensim": {},
+   "confirmedBy": {
+    "head:rotation=ipsi": [
+     "uams",
+     "kenhub"
+    ]
+   }
+  },
+  "Obliquus superior capitis muscle": {
+   "actions": "head:flexion-p",
+   "opensim": {},
+   "confirmedBy": {
+    "head:flexion-": [
+     "uams",
+     "kenhub"
+    ]
    }
   },
   "Rectus abdominis muscle": {
