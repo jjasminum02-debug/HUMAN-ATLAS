@@ -316,6 +316,48 @@ const flows = [
     await page.waitForFunction(k => new URL(location.href).searchParams.get('source') !== k, key, { timeout: 5000 });
     return `클릭 선택 (${(await runtime(page)).find(r => r.key === key)?.label}), 숨김, 뒤로 가기`;
   }],
+  ['경혈·경근: 척택 → 주변 구조, 팔꿉을 굽히면 따라감, 족태양경근', async page => {
+    await open(page);
+    await page.locator('.acupoint-entry button').click();
+    await page.locator('.acupoint-channel button', { hasText: '척택' }).click();
+    const detail = await page.locator('.acupoint-detail').innerText({ timeout: 10000 });
+    expect(detail.includes('위팔두갈래근') && detail.includes('완요골근'), `척택 설명·주변 구조: ${detail.replace(/\s+/g, ' ').slice(0, 160)}`);
+    const marker = () => page.evaluate(() => { let at = null; window.__atlasScene.root.traverse(o => { if (o.userData.acupoint === 'LU9:right') at = o.position.toArray(); }); return at; });
+    const before = await marker();
+    await page.evaluate(async () => { const rig = await window.__atlasRig.load(); window.__atlasRig.set(rig, { 'elbow_r:flexion': 90 }); });
+    await page.waitForTimeout(300);
+    const after = await marker();
+    expect(before && after && after[2] - before[2] > .1, `태연 표지가 팔꿉 굽힘을 따라가지 않음: ${JSON.stringify(before)} → ${JSON.stringify(after)}`);
+    await page.locator('.acupoint-detail button', { hasText: '요골신경' }).first().click();
+    await page.waitForTimeout(1500);
+    const title = await page.locator('.study-detail-header h2').innerText().catch(() => '(없음)');
+    expect(/요골신경/.test(title), `주변 구조 → 카드: ${title} · ${page.url()}`);
+    // Another channel: the governor vessel runs on the midline (no side choice) and only its markers stay visible.
+    if (await page.locator('.acupoint-entry button').count()) await page.locator('.acupoint-entry button').click();
+    await page.locator('.acupoint-channels button', { hasText: '독맥' }).click({ timeout: 10000 });
+    await page.locator('.acupoint-channel button', { hasText: '백회' }).click();
+    const gv = await page.locator('.acupoint-detail').innerText({ timeout: 10000 });
+    expect(gv.includes('정중선') && (await page.locator('.acupoint-panel .movement-side:not(.acupoint-mode)').count()) === 0, `백회: ${gv.replace(/\s+/g, ' ').slice(0, 120)}`);
+    const shown = await page.evaluate(() => { const ids = []; window.__atlasScene.root.traverse(o => { if (o.userData.acupoint && o.visible) ids.push(o.userData.acupoint); }); return ids; });
+    expect(shown.length > 20 && shown.every(id => /^GV\d+:midline$/.test(id)), `독맥만 보여야 함: ${shown.length}개, ${shown.slice(0, 4).join(',')}`);
+    // Sinews: the bladder sinew's line and knots ride the rig (knee flexion moves the ankle knot), its muscles open cards.
+    await page.evaluate(async () => { const rig = await window.__atlasRig.load(); window.__atlasRig.set(rig, {}); });
+    await page.locator('.acupoint-mode button', { hasText: '경근' }).click();
+    await page.locator('.acupoint-channels button', { hasText: '족태양' }).click();
+    const sinew = await page.locator('.sinew-detail').innerText({ timeout: 10000 });
+    expect(sinew.includes('오금에 맺힘') && sinew.includes('경로가 지나는 근육'), `족태양경근: ${sinew.replace(/\s+/g, ' ').slice(0, 120)}`);
+    const knot = () => page.evaluate(() => { let at = null, beads = 0; window.__atlasScene.root.traverse(o => { if (o.userData.sinewNode === 'BL:right:BL60') at = o.position.toArray(); if (o.isInstancedMesh && o.parent?.name === 'Sinews') beads += o.count; }); return { at, beads }; });
+    const k0 = await knot();
+    await page.evaluate(async () => { const rig = await window.__atlasRig.load(); window.__atlasRig.set(rig, { 'knee_r:flexion': 60 }); });
+    await page.waitForTimeout(300);
+    const k1 = await knot();
+    expect(k0.beads > 200 && k0.at && k1.at && Math.hypot(k1.at[1] - k0.at[1], k1.at[2] - k0.at[2]) > .1, `곤륜 매듭이 무릎 굽힘을 따라가지 않음: ${JSON.stringify(k0)} → ${JSON.stringify(k1)}`);
+    const muscle = page.locator('.sinew-detail .bone-related-muscle').first(); const name = await muscle.innerText();
+    await muscle.click(); await page.waitForTimeout(1500);
+    const card = await page.locator('.study-detail-header h2').innerText().catch(() => '(없음)');
+    expect(card.includes(name.split(' ')[0]), `경근 근육 → 카드: ${name} → ${card}`);
+    return `경맥 14개 → 척택 설명·주변 구조 → 태연 표지가 팔꿉 90°를 따라감 → 요골신경 카드 → 독맥 백회(정중선, ${shown.length}혈만 표시) → 족태양경근(구슬 ${k0.beads}개, 곤륜 매듭이 무릎 굽힘을 따라감) → ${name} 카드`;
+  }],
 ];
 
 // ── performance ─────────────────────────────────────────────────────────────

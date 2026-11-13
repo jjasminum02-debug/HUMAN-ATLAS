@@ -14,6 +14,7 @@ import { parseSkinChunk, posedCopy, segmentForRole, skinGeometry, type SkinChunk
 import type { Instance } from './schema.ts';
 import type { ActionHighlight, MuscleActionsFile, RigHost } from '../movement.ts';
 import type { StudyView } from '../../domain/bookmarks.ts';
+import { acupointId, channelSegments, type AcupointFile, type AcupointHost, type SinewFile } from '../acupointLayer.ts';
 /** Row kinds whose surfaces bend with the rig (M2); bones move rigidly instead. */
 const SKINNED_KINDS = new Set(['muscle', 'tendon', 'fascia', 'joint', 'vessel', 'nerve']);
 /** C4 attachment area: a Z-Anatomy patch (`key`) or an estimated bone-contact area (`source: 'contact'`). */
@@ -33,7 +34,7 @@ function triangleSubset(source: THREE.BufferGeometry, triangles: Uint32Array) {
 }
 const decodeTriangles = (packed: string) => { const bytes = Uint8Array.from(atob(packed), c => c.charCodeAt(0)); return new Uint32Array(bytes.buffer); };
 /** Dataset selection/presentation adapter; renderer, camera and lifecycle remain owned by the existing controller. */
-export class DatasetSceneAdapter implements RigHost {
+export class DatasetSceneAdapter implements RigHost, AcupointHost {
     readonly scene: AnatomySceneController;
     readonly resources: DatasetResources;
     readonly integration: RuntimeIntegration;
@@ -192,6 +193,109 @@ export class DatasetSceneAdapter implements RigHost {
         return this.muscleActions;
     }
     setActionHighlight(highlight: ActionHighlight) { this.actionHighlight = highlight; this.apply(); }
+    // Acupoints (4-1 step 7): markers and channel lines ride on their rig segment; a click on a marker picks it.
+    private acupoints?: { file: AcupointFile; group: THREE.Group; markers: Map<string, THREE.Mesh>; lines: { line: THREE.Line; ids: string[]; channel: string }[];
+        selected: string | null; channel: string | null; onPick?: (id: string) => void };
+    showAcupoints(file: AcupointFile | null, onPick?: (id: string) => void) {
+        if (this.acupoints) { this.acupoints.group.removeFromParent(); this.acupoints.group.traverse(o => { const m = o as THREE.Mesh; m.geometry?.dispose(); (m.material as THREE.Material | undefined)?.dispose?.(); }); this.acupoints = undefined; }
+        if (file) {
+            const group = new THREE.Group(); group.name = 'Acupoints'; group.renderOrder = 10;
+            const sphere = new THREE.SphereGeometry(.0025, 12, 8), markers = new Map<string, THREE.Mesh>();
+            for (const p of file.points) {
+                const marker = new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({ color: 0xc2410c, depthTest: false, transparent: true, opacity: .95 }));
+                marker.renderOrder = 11; marker.userData.acupoint = acupointId(p); markers.set(acupointId(p), marker); group.add(marker);
+            }
+            const lines = Object.keys(file.channels).flatMap(channel => ['right', 'left', 'midline'].flatMap(side => channelSegments(file, channel, side))
+                .map(path => {
+                    const line = new THREE.Line(new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(new Float32Array(path.length * 3), 3)),
+                        new THREE.LineBasicMaterial({ color: 0xc2410c, transparent: true, opacity: .55, depthTest: false }));
+                    line.renderOrder = 10; group.add(line); return { line, ids: path.map(acupointId), channel };
+                }));
+            this.scene.root.add(group);
+            this.acupoints = { file, group, markers, lines, selected: null, channel: null, onPick };
+        }
+        this.apply();
+    }
+    selectAcupoint(id: string | null, focus = true) {
+        if (!this.acupoints) return;
+        this.acupoints.selected = id; this.apply();
+        const marker = id ? this.acupoints.markers.get(id) : undefined, point = this.acupoints.file.points.find(p => acupointId(p) === id);
+        if (focus && marker && point) {
+            const normal = new THREE.Vector3(...point.normal), at = marker.position.clone();
+            this.scene.moveCamera({ position: at.clone().addScaledVector(normal, .32).add(new THREE.Vector3(0, .04, 0)).toArray(), target: at.toArray(), zoom: 1 });
+        }
+    }
+    showAcupointChannel(channel: string | null) {
+        if (!this.acupoints) return;
+        this.acupoints.channel = channel; this.apply();
+    }
+    // Meridian sinews: each line vertex and binding marker rides on its own rig segment.
+    private sinews?: { group: THREE.Group; items: { object: THREE.Line | THREE.Mesh | THREE.InstancedMesh; rest: Float32Array; segments: string[] }[] };
+    showSinew(file: SinewFile | null, sinew: string | null) {
+        if (this.sinews) { this.sinews.group.removeFromParent(); this.sinews.group.traverse(o => { const m = o as THREE.Mesh; m.geometry?.dispose(); (m.material as THREE.Material | undefined)?.dispose?.(); }); this.sinews = undefined; }
+        if (file && sinew) {
+            const group = new THREE.Group(); group.name = 'Sinews'; group.renderOrder = 10;
+            const items: { object: THREE.Line | THREE.Mesh | THREE.InstancedMesh; rest: Float32Array; segments: string[] }[] = [];
+            const knot = new THREE.SphereGeometry(.004, 12, 8), bead = new THREE.SphereGeometry(.0018, 8, 6);
+            for (const path of file.paths.filter(p => p.sinew === sinew)) {
+                const rest = new Float32Array(path.points.flat());
+                const line = new THREE.Line(new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(rest.slice(), 3)),
+                    new THREE.LineBasicMaterial({ color: 0x0f766e, transparent: true, opacity: .9, depthTest: false }));
+                line.renderOrder = 10; group.add(line); items.push({ object: line, rest, segments: path.segments });
+                // A 1-px line is hard to see on muscle: a bead every sample along it.
+                const beads = new THREE.InstancedMesh(bead, new THREE.MeshBasicMaterial({ color: 0x14b8a6, depthTest: false, transparent: true, opacity: .85 }), path.points.length);
+                beads.renderOrder = 10; beads.frustumCulled = false; group.add(beads); items.push({ object: beads, rest, segments: path.segments });
+                for (const node of path.nodes) {
+                    const mesh = new THREE.Mesh(knot, new THREE.MeshBasicMaterial({ color: 0x115e59, depthTest: false, transparent: true, opacity: .95 }));
+                    mesh.renderOrder = 11; mesh.userData.sinewNode = `${sinew}:${path.side}:${node.anchor}`; group.add(mesh);
+                    items.push({ object: mesh, rest: new Float32Array(node.position), segments: [node.segment] });
+                }
+            }
+            this.scene.root.add(group); this.sinews = { group, items };
+        }
+        this.apply();
+    }
+    private syncSinews() {
+        const s = this.sinews; if (!s) return;
+        const transforms = this.rigState?.transforms, at = new THREE.Vector3();
+        const matrix = new THREE.Matrix4();
+        for (const { object, rest, segments } of s.items) {
+            if (object instanceof THREE.InstancedMesh) {
+                for (let i = 0; i < segments.length; i++) {
+                    at.fromArray(rest, i * 3); const posed = transforms?.get(segments[i]); if (posed) at.applyMatrix4(posed);
+                    object.setMatrixAt(i, matrix.makeTranslation(at.x, at.y, at.z));
+                }
+                object.instanceMatrix.needsUpdate = true; continue;
+            }
+            if (object instanceof THREE.Mesh) {
+                at.fromArray(rest); const posed = transforms?.get(segments[0]); if (posed) at.applyMatrix4(posed); object.position.copy(at); continue;
+            }
+            const attribute = object.geometry.getAttribute('position') as THREE.BufferAttribute;
+            for (let i = 0; i < segments.length; i++) {
+                at.fromArray(rest, i * 3); const posed = transforms?.get(segments[i]); if (posed) at.applyMatrix4(posed);
+                attribute.setXYZ(i, at.x, at.y, at.z);
+            }
+            attribute.needsUpdate = true; object.geometry.computeBoundingSphere();
+        }
+    }
+    private syncAcupoints() {
+        const a = this.acupoints; if (!a) return;
+        const shown = (code: string) => a.channel === null || code.replace(/\d+$/, '') === a.channel;
+        const transforms = this.rigState?.transforms, at = new THREE.Vector3();
+        for (const p of a.file.points) {
+            const marker = a.markers.get(acupointId(p))!;
+            at.set(...p.position); const posed = transforms?.get(p.segment); if (posed) at.applyMatrix4(posed);
+            marker.position.copy(at); marker.visible = shown(p.code);
+            const selected = a.selected === acupointId(p);
+            marker.scale.setScalar(selected ? 1.9 : 1); (marker.material as THREE.MeshBasicMaterial).color.setHex(selected ? 0x7c2d12 : 0xc2410c);
+        }
+        for (const { line, ids, channel } of a.lines) {
+            line.visible = a.channel === null || channel === a.channel;
+            const attribute = line.geometry.getAttribute('position') as THREE.BufferAttribute;
+            ids.forEach((id, i) => attribute.setXYZ(i, ...a.markers.get(id)!.position.toArray() as [number, number, number]));
+            attribute.needsUpdate = true; line.geometry.computeBoundingSphere();
+        }
+    }
     // Bookmarks (4-1 step 6): the viewer owns layers and the section; the scene owns the camera.
     private studyView?: { get: () => Omit<StudyView, 'camera'>; restore: (view: StudyView) => void };
     registerStudyView(get: () => Omit<StudyView, 'camera'>, restore: (view: StudyView) => void) {
@@ -316,6 +420,8 @@ export class DatasetSceneAdapter implements RigHost {
             this.skinSoftTissue();
         }
         this.syncContactAreas();
+        this.syncAcupoints();
+        this.syncSinews();
         if (this.pendingAreaFocus && !this.attachmentAreaBox(this.view.attachmentObservation?.role).isEmpty()) {
             this.pendingAreaFocus = false;
             if (this.view.attachmentObservation) this.focusSelection(true); else this.focusAttachmentAreas(true);
@@ -452,6 +558,19 @@ export class DatasetSceneAdapter implements RigHost {
         if (e.button !== 0 || Math.hypot(e.clientX - this.down.x, e.clientY - this.down.y) > 5)
             return;
         const rect = this.scene.renderer.domElement.getBoundingClientRect();
+        if (this.acupoints) {
+            // Markers draw on top, so they are picked first (a small screen radius around each).
+            const pointer = new THREE.Vector2(e.clientX, e.clientY);
+            let best: { id: string; d: number } | null = null;
+            for (const [id, marker] of this.acupoints.markers) {
+                if (!marker.visible) continue;
+                const s = marker.position.clone().project(this.scene.camera);
+                if (s.z > 1) continue;
+                const d = pointer.distanceTo(new THREE.Vector2(rect.left + (s.x + 1) / 2 * rect.width, rect.top + (1 - s.y) / 2 * rect.height));
+                if (d < 10 && (!best || d < best.d)) best = { id, d };
+            }
+            if (best) { this.acupoints.onPick?.(best.id); return; }
+        }
         const nodes = [...this.resources.nodes.values()].filter(n => n.visible && !n.userData.attachmentPatch);
         const observe = nodes.some(n => n.userData.nerveObservationContext);
         const plane = this.sectionState?.plane ?? null;
