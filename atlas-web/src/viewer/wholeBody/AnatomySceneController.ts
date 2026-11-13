@@ -1,14 +1,18 @@
 import { fetchAtlasAsset, ASSET_INSPECTION_ENABLED } from '../../transport/assetTransport.ts';
 import * as THREE from 'three';
 import { AnatomyMaterials, installAnatomyLighting } from '../anatomyMaterials.ts';
+import { AnatomyPostprocess, defaultAmbientOcclusion } from '../postprocess.ts';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { AdaptiveResolution } from '../adaptiveResolution.ts';
 import { type BodyAsset, type BodyManifest, type BodyView, visible, pickable, selected } from './contract';
 import { ResourceQueue } from './resources';
 import { entranceFrame } from './sceneEntrance.ts';
+import { CameraSessions } from './cameraSessions.ts';
 import { boundsCamera, interpolateCamera, observationState, OBSERVATION_FRAME, type CameraState, type ObservationDirection } from './cameraObservation.ts';
 
 export interface BodyProgress { loaded: number; total: number; failed: number; contextLost: boolean; selectedAvailable: boolean; calls: number; triangles: number; geometries: number }
+const REFINE_DELAY_MS = 160;
 /** Sole owner of renderer, frame loop, camera, controls and the persistent anatomy root. */
 export class AnatomySceneController {
   readonly scene = new THREE.Scene();
@@ -19,20 +23,26 @@ export class AnatomySceneController {
   readonly queue: ResourceQueue<THREE.Group>;
   readonly assets: Map<string, BodyAsset>;
   readonly updates = new Set<(seconds: number) => boolean | void>();
+  private readonly cameraMoveListeners = new Set<() => void>();
   private observer: ResizeObserver;
   private view: BodyView = { region: null, bones: true, muscles: true, supplements: false, selectedId: null, dim: true };
   private lost = false;
   private dead = false;
   private readonly materials = new AnatomyMaterials();
   private dirty = true;
+  /** Ambient-occlusion frame scheduled once the view has been still for REFINE_DELAY_MS (0 = none pending). */
+  private refineAt = 0;
+  private readonly postprocess: AnatomyPostprocess;
   private previous = 0;
   private renderedFrames = 0;
   private cameraTransition: { from: CameraState; to: CameraState; elapsed: number } | null = null;
-  private observationCamera: CameraState | null = null;
+  private readonly cameraSessions = new CameraSessions();
   private entrance: { elapsed: number; target: THREE.Vector3; offset: THREE.Vector3 } | null = null;
   private readonly reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   private readonly frameIntervalsMs: number[] = [];
   private readonly renderDurationsMs: number[] = [];
+  private readonly resolution = new AdaptiveResolution(Math.min(devicePixelRatio, 1.75));
+  private drewPreviousFrame = false;
   private pointer = { x: 0, y: 0 };
   private lastReport = 0;
   private lastProgress: BodyProgress | null = null;
@@ -49,8 +59,11 @@ export class AnatomySceneController {
     this.assets = new Map(manifest.chunks.flatMap(c => c.assets.map(a => [a.nodeId, a] as const)));
     this.root.name = 'AnatomySceneRoot'; this.scene.add(this.root);
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-    this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
+    this.renderer.setPixelRatio(this.resolution.full);
     installAnatomyLighting(this.scene, this.renderer);
+    // Several passes render per frame; reset counters once per frame so reported calls/triangles stay per frame.
+    this.renderer.info.autoReset = false;
+    this.postprocess = new AnatomyPostprocess(this.renderer, this.scene, this.camera, 1, 1, defaultAmbientOcclusion());
     const canvas = this.renderer.domElement;
     canvas.id = `anatomy-${this.root.uuid}`;
     canvas.tabIndex = 0; canvas.setAttribute('aria-label', '해부학 모형. 방향키로 회전, 더하기와 빼기로 확대, Home으로 전체 보기');
@@ -71,7 +84,7 @@ export class AnatomySceneController {
       const { width, height } = host.getBoundingClientRect();
       if (!width || !height) return;
       this.size = { width, height }; this.camera.aspect = width / height; this.camera.updateProjectionMatrix();
-      this.renderer.setSize(width, height); this.dirty = true;
+      this.renderer.setSize(width, height); this.postprocess.setSize(width, height); this.dirty = true;
     };
     resize(); // Measure the mounted host before the initial fit, not the old 1:1 placeholder.
     this.observer = new ResizeObserver(resize);
@@ -88,9 +101,14 @@ export class AnatomySceneController {
     canvas.addEventListener('keydown', this.onKey);
     this.focus(null, false);
     this.renderer.setAnimationLoop(this.frame);
+    if (import.meta.env?.DEV || import.meta.env?.MODE === 'qa') (window as unknown as { __atlasScene?: AnatomySceneController }).__atlasScene = this; // dev inspection only
   }
 
   requestRender() { this.dirty = true; }
+  /** Meshes drawn with the selection outline (empty = none). */
+  setOutline(objects: THREE.Object3D[]) { this.postprocess.setOutline(objects); this.dirty = true; }
+  get ambientOcclusion() { return this.postprocess.ambientOcclusion; }
+  set ambientOcclusion(enabled: boolean) { this.postprocess.ambientOcclusion = enabled; this.dirty = true; }
   /** One opening presentation on the existing frame clock; input always takes over. */
   startEntrance() {
     this.cancelCameraMotion();
@@ -108,24 +126,32 @@ export class AnatomySceneController {
     this.dirty = true;
   };
   cameraState(): CameraState { return { position: this.camera.position.toArray(), target: this.controls.target.toArray(), zoom: this.camera.zoom }; }
-  cancelCameraMotion = () => { this.stopEntrance(); this.cameraTransition = null; };
+  cancelCameraMotion = () => { this.stopEntrance(); this.cameraTransition = null; this.cameraSessions.settleReturn(); };
   private applyCamera(state: CameraState) {
     this.controls.target.fromArray(state.target); this.camera.position.fromArray(state.position);
     this.camera.zoom = state.zoom; this.camera.updateProjectionMatrix(); this.controls.update(); this.dirty = true;
   }
   moveCamera(state: CameraState, smooth = true) {
+    for (const listener of this.cameraMoveListeners) listener();
     this.cancelCameraMotion();
     if (!smooth || this.reducedMotion.matches) this.applyCamera(state);
     else this.cameraTransition = { from: this.cameraState(), to: state, elapsed: 0 };
     this.dirty = true;
   }
+  onCameraMove(listener: () => void) { this.cameraMoveListeners.add(listener); return () => { this.cameraMoveListeners.delete(listener); }; }
   get canObserveDirections() { return this.manifest.frame === OBSERVATION_FRAME; }
   observeDirection(direction: ObservationDirection) { this.moveCamera(observationState(this.cameraTransition?.to ?? this.cameraState(), direction, this.manifest.frame)); }
-  beginObservation() { if (this.observationCamera) return false; this.observationCamera = this.cameraState(); return true; }
-  endObservation() {
-    const previous = this.observationCamera; this.observationCamera = null;
-    if (previous) this.moveCamera(previous);
+  observationReturnState(owner:string){return this.cameraSessions.returnState(owner,this.cameraState());}
+  beginObservation(owner = 'anatomy', revoke?: () => void, returnCamera?:CameraState) { return this.cameraSessions.begin(owner, returnCamera??this.observationReturnState(owner), revoke); }
+  private observationFits=new Map<string,(kind:'all'|'selection')=>void>();
+  registerObservationFit(owner:string,fit:(kind:'all'|'selection')=>void){this.observationFits.set(owner,fit);return()=>{if(this.observationFits.get(owner)===fit)this.observationFits.delete(owner);};}
+  isObservationFit(owner:string,fit:(kind:'all'|'selection')=>void){return this.observationFits.get(owner)===fit;}
+  handleObservationFit(kind:'all'|'selection'){const fit=this.cameraOwner?this.observationFits.get(this.cameraOwner):undefined;if(!fit)return false;fit(kind);return true;}
+  endObservation(owner = 'anatomy', restore = true, smooth = true) {
+    const previous = this.cameraSessions.end(owner, restore);
+    if (previous) {this.moveCamera(previous,smooth);if(this.cameraTransition)this.cameraSessions.markReturn(owner,previous);}
   }
+  get cameraOwner() { return this.cameraSessions.owner; }
   fitObservationBounds(box: THREE.Box3, padding = 1.25, smooth = false) {
     if (!box.isEmpty()) this.moveCamera(boundsCamera(box, this.cameraTransition?.to ?? this.cameraState(), this.camera.aspect, this.camera.fov, padding), smooth);
   }
@@ -133,7 +159,7 @@ export class AnatomySceneController {
     const transition = this.cameraTransition; if (!transition) return false;
     transition.elapsed += dt;
     this.applyCamera(interpolateCamera(transition.from, transition.to, transition.elapsed / .56));
-    if (transition.elapsed >= .56) this.cameraTransition = null;
+    if (transition.elapsed >= .56) {this.cameraTransition = null;this.cameraSessions.settleReturn();}
     return true;
   }
   private updateEntrance(dt: number) {
@@ -148,6 +174,11 @@ export class AnatomySceneController {
     return true;
   }
   private invalidate = () => { this.dirty = true; };
+  private setPixelRatio(ratio: number) {
+    if (ratio === this.renderer.getPixelRatio()) return;
+    const size = this.renderer.getSize(new THREE.Vector2());
+    this.renderer.setPixelRatio(ratio); this.postprocess.setSize(size.x, size.y);
+  }
   /** Future pose controllers register updates here, never create a second RAF/renderer. */
   addUpdate(update: (seconds: number) => boolean | void) { this.updates.add(update); return () => { this.updates.delete(update); this.dirty = true; }; }
   private frame = (time: number) => {
@@ -167,14 +198,26 @@ export class AnatomySceneController {
     const cameraChanged = this.updateCamera(dt);
     this.controls.update();
     if (this.hoverPoint) { const p = this.hoverPoint; this.hoverPoint = null; this.setHover(this.pick(p.x, p.y)?.nodeId ?? null); }
-    if (this.dirty || poseChanged || entranceChanged || cameraChanged) {
+    const draw = this.dirty || poseChanged || entranceChanged || cameraChanged;
+    if (draw) {
+      this.setPixelRatio(this.resolution.moving(intervalMs, this.drewPreviousFrame));
       const started = ASSET_INSPECTION_ENABLED ? performance.now() : 0;
-      this.renderer.render(this.scene, this.camera); this.dirty = false; this.renderedFrames += 1;
+      this.renderer.info.reset();
+      this.postprocess.render(false); this.dirty = false; this.renderedFrames += 1;
+      this.refineAt = time + REFINE_DELAY_MS;
       if (ASSET_INSPECTION_ENABLED) {
         this.renderDurationsMs.push(performance.now() - started);
         if (this.renderDurationsMs.length > 240) this.renderDurationsMs.shift();
       }
     }
+    else if (this.refineAt && time >= this.refineAt) {
+      // Still view: redraw once at full resolution, with ambient occlusion unless this machine is struggling.
+      this.refineAt = 0;
+      const sharpen = this.resolution.degraded, occlusion = this.postprocess.ambientOcclusion && !sharpen;
+      if (sharpen) this.setPixelRatio(this.resolution.full);
+      if ((sharpen || occlusion) && !this.lost) { this.renderer.info.reset(); this.postprocess.render(occlusion); }
+    }
+    this.drewPreviousFrame = draw;
     if (time - this.lastReport > 500) { this.report(); this.lastReport = time; }
   };
   setView(view: BodyView) {
@@ -274,7 +317,7 @@ export class AnatomySceneController {
       });
       this.renderer.domElement.dataset.scene = JSON.stringify({
         root: this.root.uuid, renderer: this.renderer.domElement.id, selectedId: this.view.selectedId,
-        camera: this.camera.position.toArray(), target: this.controls.target.toArray(), cameraTransition: Boolean(this.cameraTransition), focusObservation: Boolean(this.observationCamera),
+        camera: this.camera.position.toArray(), target: this.controls.target.toArray(), cameraTransition: Boolean(this.cameraTransition), focusObservation: Boolean(this.cameraSessions.owner), cameraOwner: this.cameraSessions.owner,
         loaded: [...this.queue.loaded.keys()], pending: [...this.queue.pending.keys()],
         visible: [...this.root.children].flatMap(g => g.children.filter(o => o.visible).map(o => o.name)),
         calls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles,
@@ -359,7 +402,7 @@ export class AnatomySceneController {
   }
   dispose() {
     this.stopEntrance();
-    this.dead = true; this.renderer.setAnimationLoop(null); this.queue.dispose(); this.updates.clear(); this.observer.disconnect();
+    this.dead = true; this.renderer.setAnimationLoop(null); this.queue.dispose(); this.updates.clear(); this.cameraMoveListeners.clear(); this.cameraSessions.clear(); this.observer.disconnect();
     this.controls.removeEventListener('start', this.cancelCameraMotion);
     this.reducedMotion.removeEventListener('change', this.cancelCameraMotion);
     this.controls.dispose(); this.materials.dispose();
@@ -370,6 +413,6 @@ export class AnatomySceneController {
     canvas.removeEventListener('webglcontextlost', this.onLost); canvas.removeEventListener('webglcontextrestored', this.onRestored);
     canvas.removeEventListener('pointermove', this.onMove); canvas.removeEventListener('pointerleave', this.onLeave);
     canvas.removeEventListener('pointerdown', this.onDown); canvas.removeEventListener('pointerup', this.onUp); canvas.removeEventListener('keydown', this.onKey);
-    this.renderer.dispose(); canvas.remove();
+    this.postprocess.dispose(); this.renderer.dispose(); canvas.remove();
   }
 }

@@ -1,0 +1,1629 @@
+{
+ "schemaVersion": 1,
+ "sources": {
+  "draft": "atlas-data/pipeline/sinew_channels.py (AI-written from Lingshu ch. 13)",
+  "lingshu": "zh.wikisource.org 靈樞經 (四庫全書本)/卷04 經筋第十三, accessed 2026-11-13",
+  "english": "acupuncture-notes.com <channel>_sinew_channel pages (Pathway section matched, not quoted), accessed 2026-11-13"
+ },
+ "variants": [
+  "于 -> 於",
+  "斜 -> 邪",
+  "隂 -> 陰",
+  "内 -> 內",
+  "㢘 -> 廉",
+  "亷 -> 廉",
+  "胷 -> 胸",
+  "挟 -> 挾",
+  "脇 -> 脅",
+  "鋭 -> 銳",
+  "顔 -> 顏",
+  "别 -> 別",
+  "齊 -> 臍",
+  "並 -> 并",
+  "眀 -> 明",
+  "兎 -> 兔",
+  "頬 -> 頰",
+  "属 -> 屬",
+  "乗 -> 乘",
+  "{{SKchar|3394}} -> 脊",
+  "{{SKchar|3115}} -> 眥"
+ ],
+ "sinews": {
+  "LU": {
+   "lingshu": "手太陰之筋起於大指之上循指上行結於魚後行寸口外側上循臂結肘中上臑內廉入腋下出缺盆結肩前髃上結缺盆下結胸裏散貫賁合賁下抵季脅其病當所過者支轉筋痛甚成息賁脅急吐血治在燔針刼刺以知為數以痛為輸名曰仲冬痺也",
+   "englishSource": "https://acupuncture-notes.com/lung_sinew_channel",
+   "nodes": [
+    {
+     "strand": 0,
+     "node": 0,
+     "anchor": "LU11",
+     "label": "엄지 위에서 시작(起於大指之上)",
+     "lingshu": "大指之上",
+     "english": "thumb",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 1,
+     "anchor": "LU10",
+     "label": "손가락을 따라 올라가 어제 뒤에 맺힘(結於魚後)",
+     "lingshu": "魚後",
+     "english": "thenar|thumb",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 2,
+     "anchor": "LU9",
+     "label": "촌구 가쪽을 지남(行寸口外側)",
+     "lingshu": "寸口",
+     "english": "radial artery|wrist|pulse",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 3,
+     "anchor": "LU6",
+     "label": "팔을 따라 올라감(上循臂)",
+     "lingshu": "上循臂",
+     "english": "forearm|arm",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 4,
+     "anchor": "LU5",
+     "label": "팔꿉 가운데에 맺힘(結肘中)",
+     "lingshu": "肘中",
+     "english": "elbow",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 5,
+     "anchor": "LU4",
+     "label": "위팔 안쪽 모서리로(上臑內廉)",
+     "lingshu": "臑內廉",
+     "english": "upper arm|arm",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 6,
+     "anchor": "HT1",
+     "label": "겨드랑 아래로 들어감(入腋下)",
+     "lingshu": "入腋下",
+     "english": "axilla|armpit",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 7,
+     "anchor": "ST12",
+     "label": "빗장위오목으로 나옴(出缺盆)",
+     "lingshu": "出缺盆",
+     "english": "supraclavicular|clavicle",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 8,
+     "anchor": "LI15",
+     "label": "어깨 앞 끝에 맺힘(結肩前髃)",
+     "lingshu": "肩前髃",
+     "english": "shoulder|acromion",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 0,
+     "node": 9,
+     "anchor": "ST12",
+     "label": "다시 빗장위오목에 맺힘(上結缺盆)",
+     "lingshu": "上結缺盆",
+     "english": "supraclavicular|clavicle",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 0,
+     "anchor": "LU1",
+     "label": "가슴 속으로 내려가 맺힘(下結胸裏) — 표면 위치",
+     "lingshu": "胸裏",
+     "english": "chest",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 1,
+     "node": 1,
+     "anchor": "LR13",
+     "label": "옆구리 갈비에 닿음(抵季脅)",
+     "lingshu": "季脅",
+     "english": "rib|hypochondri|flank",
+     "status": "agree"
+    }
+   ]
+  },
+  "LI": {
+   "lingshu": "手陽明之筋起於大指次指之端結於腕上循臂上結於肘外上臑結於髃其支者繞肩胛挾脊直者從肩髃上頸其支者上頰結於頄直者上出手太陽之前上左角絡頭下右頷其病當所過者支痛及轉筋肩不舉頸不可左右視治在燔針刼刺以知為數以痛為輸名曰孟夏痺也",
+   "englishSource": "https://acupuncture-notes.com/large_intestine_sinew_channel",
+   "nodes": [
+    {
+     "strand": 0,
+     "node": 0,
+     "anchor": "LI1",
+     "label": "집게손가락 끝에서 시작(起於大指次指之端)",
+     "lingshu": "大指次指",
+     "english": "index finger|second finger",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 1,
+     "anchor": "LI5",
+     "label": "손목에 맺힘(結於腕)",
+     "lingshu": "結於腕",
+     "english": "wrist",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 2,
+     "anchor": "LI10",
+     "label": "팔을 따라 올라감(上循臂)",
+     "lingshu": "上循臂",
+     "english": "forearm|arm",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 3,
+     "anchor": "LI11",
+     "label": "팔꿉 가쪽에 맺힘(上結於肘外)",
+     "lingshu": "肘外",
+     "english": "elbow",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 4,
+     "anchor": "LI14",
+     "label": "위팔로 올라감(上臑)",
+     "lingshu": "上臑",
+     "english": "upper arm|arm",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 5,
+     "anchor": "LI15",
+     "label": "어깨끝에 맺힘(結於髃)",
+     "lingshu": "結於髃",
+     "english": "shoulder|acromion",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 0,
+     "anchor": "SI11",
+     "label": "어깨뼈를 돌아(繞肩胛)",
+     "lingshu": "肩胛",
+     "english": "scapula|shoulder blade",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 1,
+     "node": 1,
+     "anchor": "BL13",
+     "label": "척추를 낌(挾脊)",
+     "lingshu": "挾脊",
+     "english": "spine|vertebra",
+     "status": "agree"
+    },
+    {
+     "strand": 2,
+     "node": 0,
+     "anchor": "LI15",
+     "label": "어깨끝에서 목으로 올라감(從肩髃上頸)",
+     "lingshu": "上頸",
+     "english": "neck",
+     "status": "agree"
+    },
+    {
+     "strand": 2,
+     "node": 1,
+     "anchor": "LI18",
+     "label": "목(頸)",
+     "lingshu": "頸",
+     "english": "neck",
+     "status": "agree"
+    },
+    {
+     "strand": 2,
+     "node": 2,
+     "anchor": "ST6",
+     "label": "뺨으로 올라감(上頰)",
+     "lingshu": "上頰",
+     "english": "cheek",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 2,
+     "node": 3,
+     "anchor": "SI18",
+     "label": "광대뼈에 맺힘(結於頄)",
+     "lingshu": "結於頄",
+     "english": "cheek|zygoma|malar",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 3,
+     "node": 0,
+     "anchor": "LI18",
+     "label": "수태양 앞으로 나옴(上出手太陽之前)",
+     "lingshu": "手太陽之前",
+     "english": "small intestine|neck",
+     "status": "agree"
+    },
+    {
+     "strand": 3,
+     "node": 1,
+     "anchor": "~ST8",
+     "label": "반대쪽 이마 모서리로(上左角)",
+     "lingshu": "左角",
+     "english": "corner of the (forehead|head)|forehead|temple|opposite",
+     "status": "agree"
+    },
+    {
+     "strand": 3,
+     "node": 2,
+     "anchor": "GV20",
+     "label": "머리를 얽음(絡頭)",
+     "lingshu": "絡頭",
+     "english": "head",
+     "status": "agree"
+    },
+    {
+     "strand": 3,
+     "node": 3,
+     "anchor": "~ST6",
+     "label": "반대쪽 턱으로 내려감(下右頷)",
+     "lingshu": "右頷",
+     "english": "jaw|mandible|chin|opposite",
+     "status": "agree"
+    }
+   ]
+  },
+  "ST": {
+   "lingshu": "足陽明之筋起於中三指結於跗上邪外上加於輔骨上結於膝外廉直上結於髀樞上循脅屬脊其直者上循骭結於{{SKnotes|闕}}其支者結於外輔骨合少陽其直者上循伏兔上結於髀聚於陰器上腹而布至缺盆而結上頸上挾口合於頄下結於鼻上合於太陽太陽為目上網陽明為目下網其支者從頰結於耳前其病足中指支脛轉筋脚跳堅伏兔轉筋髀前腫㿉疝腹筋急引缺盆及頰卒口僻急者目不合熱則筋縱自不開頰筋有寒則急引頰移口有熱則筋㢮縱緩不勝收故僻治之以馬膏膏其急者以白酒和桂以塗其緩者以桑鉤鉤之即以生桑灰置之坎中髙下以坐等以膏熨急頰且飲美酒噉美炙肉不飲酒者自强也為之三拊而已治在燔針刼刺以知為數以痛為輸名曰季春痺也",
+   "englishSource": "https://acupuncture-notes.com/stomach_sinew_channel",
+   "nodes": [
+    {
+     "strand": 0,
+     "node": 0,
+     "anchor": "ST45",
+     "label": "가운데 세 발가락에서 시작(起於中三指)",
+     "lingshu": "中三指",
+     "english": "middle three toes|second|toes",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 1,
+     "anchor": "ST42",
+     "label": "발등에 맺힘(結於跗上)",
+     "lingshu": "跗上",
+     "english": "dorsum of the foot|instep|dorsum",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 2,
+     "anchor": "GB34",
+     "label": "비스듬히 가쪽 종아리뼈로(邪外上加於輔骨)",
+     "lingshu": "輔骨",
+     "english": "fibula",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 3,
+     "anchor": "GB33",
+     "label": "무릎 가쪽 모서리에 맺힘(上結於膝外廉)",
+     "lingshu": "膝外廉",
+     "english": "lateral (side|aspect) of the knee|knee",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 4,
+     "anchor": "GB30",
+     "label": "엉덩관절에 맺힘(直上結於髀樞)",
+     "lingshu": "髀樞",
+     "english": "hip",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 5,
+     "anchor": "GB25",
+     "label": "옆구리를 따라감(上循脅)",
+     "lingshu": "循脅",
+     "english": "rib|flank|hypochondri",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 6,
+     "anchor": "BL21",
+     "label": "척추에 붙음(屬脊)",
+     "lingshu": "屬脊",
+     "english": "spine|vertebra",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 0,
+     "anchor": "ST41",
+     "label": "정강이를 따라 올라감(上循骭)",
+     "lingshu": "骭",
+     "english": "tibia|shin",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 1,
+     "anchor": "ST36",
+     "label": "정강이(骭)",
+     "lingshu": "骭",
+     "english": "tibia|shin",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 2,
+     "anchor": "ST35",
+     "label": "무릎에 맺힘(結於膝)",
+     "lingshu": "結於膝",
+     "english": "knee",
+     "status": "agree"
+    },
+    {
+     "strand": 2,
+     "node": 0,
+     "anchor": "ST36",
+     "label": "가쪽 종아리뼈에 맺혀 족소양과 합침(結於外輔骨 合少陽)",
+     "lingshu": "外輔骨",
+     "english": "fibula",
+     "status": "agree"
+    },
+    {
+     "strand": 2,
+     "node": 1,
+     "anchor": "GB34",
+     "label": "종아리뼈(外輔骨)",
+     "lingshu": "外輔骨",
+     "english": "fibula",
+     "status": "agree"
+    },
+    {
+     "strand": 3,
+     "node": 0,
+     "anchor": "ST35",
+     "label": "복토를 따라 올라감(上循伏兔)",
+     "lingshu": "伏兔",
+     "english": "rectus femoris|quadriceps|front of the thigh|anterior thigh",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 3,
+     "node": 1,
+     "anchor": "ST32",
+     "label": "복토(伏兔)",
+     "lingshu": "伏兔",
+     "english": "rectus femoris|quadriceps|front of the thigh|anterior thigh",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 3,
+     "node": 2,
+     "anchor": "ST31",
+     "label": "넙다리에 맺힘(上結於髀)",
+     "lingshu": "結於髀",
+     "english": "thigh|hip",
+     "status": "agree"
+    },
+    {
+     "strand": 3,
+     "node": 3,
+     "anchor": "ST30",
+     "label": "음부에 모임(聚於陰器)",
+     "lingshu": "陰器",
+     "english": "genital",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 3,
+     "node": 4,
+     "anchor": "ST25",
+     "label": "배 위로 퍼짐(上腹而布)",
+     "lingshu": "上腹",
+     "english": "abdomen",
+     "status": "agree"
+    },
+    {
+     "strand": 3,
+     "node": 5,
+     "anchor": "ST12",
+     "label": "빗장위오목에 맺힘(至缺盆而結)",
+     "lingshu": "缺盆",
+     "english": "supraclavicular|clavicle",
+     "status": "agree"
+    },
+    {
+     "strand": 3,
+     "node": 6,
+     "anchor": "ST9",
+     "label": "목으로 올라감(上頸)",
+     "lingshu": "上頸",
+     "english": "neck",
+     "status": "agree"
+    },
+    {
+     "strand": 3,
+     "node": 7,
+     "anchor": "ST4",
+     "label": "입을 끼고 올라감(上挾口)",
+     "lingshu": "挾口",
+     "english": "mouth",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 3,
+     "node": 8,
+     "anchor": "SI18",
+     "label": "광대뼈에서 합침(合於頄)",
+     "lingshu": "合於頄",
+     "english": "cheek|zygoma|malar",
+     "status": "agree"
+    },
+    {
+     "strand": 3,
+     "node": 9,
+     "anchor": "LI20",
+     "label": "코에 맺힘(下結於鼻)",
+     "lingshu": "結於鼻",
+     "english": "nose",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 3,
+     "node": 10,
+     "anchor": "ST1",
+     "label": "눈 아래 그물(陽明為目下網)",
+     "lingshu": "目下網",
+     "english": "lower eyelid|eyelid|below the eye",
+     "status": "agree"
+    },
+    {
+     "strand": 4,
+     "node": 0,
+     "anchor": "ST6",
+     "label": "뺨에서(從頰)",
+     "lingshu": "從頰",
+     "english": "cheek",
+     "status": "agree"
+    },
+    {
+     "strand": 4,
+     "node": 1,
+     "anchor": "SI19",
+     "label": "귀 앞에 맺힘(結於耳前)",
+     "lingshu": "耳前",
+     "english": "in front of the ear|front of the ear|ear",
+     "status": "agree"
+    }
+   ]
+  },
+  "SP": {
+   "lingshu": "足太陰之筋起於大指之端內側上結於內踝其直者絡於膝內輔骨上循陰股結於髀聚於陰器上腹結於臍循腹裏結於肋散於胸中其內者著於脊其病足大指支內踝痛轉筋痛膝內輔骨痛陰股引髀而痛陰器紐痛下引臍兩脅痛引膺中脊內痛治在燔針刼刺以知為數以痛為輸命曰孟秋痺也",
+   "englishSource": "https://acupuncture-notes.com/spleen_sinew_channel",
+   "nodes": [
+    {
+     "strand": 0,
+     "node": 0,
+     "anchor": "SP1",
+     "label": "엄지발가락 끝 안쪽에서 시작(起於大指之端內側)",
+     "lingshu": "大指之端內側",
+     "english": "big toe|great toe|hallux",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 1,
+     "anchor": "SP5",
+     "label": "안쪽복사에 맺힘(上結於內踝)",
+     "lingshu": "內踝",
+     "english": "medial malleolus|ankle",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 2,
+     "anchor": "SP9",
+     "label": "무릎 안쪽 보골에 이어짐(絡於膝內輔骨)",
+     "lingshu": "膝內輔骨",
+     "english": "medial (condyle|side|aspect).{0,20}(knee|tibia)|knee",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 0,
+     "node": 3,
+     "anchor": "SP11",
+     "label": "넙다리 안쪽을 따라감(上循陰股)",
+     "lingshu": "陰股",
+     "english": "medial (side|aspect) of the thigh|inner thigh|medial thigh|thigh",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 4,
+     "anchor": "SP12",
+     "label": "넙다리 위에 맺힘(結於髀)",
+     "lingshu": "結於髀",
+     "english": "thigh|hip|groin",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 5,
+     "anchor": "LR12",
+     "label": "음부에 모임(聚於陰器)",
+     "lingshu": "陰器",
+     "english": "genital",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 6,
+     "anchor": "KI16",
+     "label": "배꼽에 맺힘(上腹結於臍)",
+     "lingshu": "臍",
+     "english": "umbilicus|navel",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 7,
+     "anchor": "LR13",
+     "label": "갈비에 맺힘(結於肋)",
+     "lingshu": "結於肋",
+     "english": "rib",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 8,
+     "anchor": "SP18",
+     "label": "가슴 속에 흩어짐(散於胸中)",
+     "lingshu": "胸中",
+     "english": "chest",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    }
+   ]
+  },
+  "HT": {
+   "lingshu": "手少陰之筋起於小指之內側結於銳骨上結肘內廉上入腋交太陰挾乳裏結於胸中循臂下繫於臍其病內急心承伏梁下為肘網其病當所過者支轉筋筋痛治在燔針刼刺以知為數以痛為輸其成伏梁吐血膿者死不治經筋之病寒則反折筋急熱則筋㢮縦不收陰痿不用陽急則反折陰急則俛不伸焠刺者刺寒急也熱則筋縱不收無用燔針名曰季冬痺也足之陽明手之太陽筋急則口目為噼眥急不能卒視治皆如右方也頄{{SKnotes|音求}}{{SKanchor|骨度第十四}}黄帝問於伯髙曰脉度言經脉之長短何以立之伯髙曰先度其骨節之大小廣狭長短而脉度定矣黄帝曰願問衆人之度人長七尺五寸者其骨節之大小長短各㡬何伯髙曰頭之大骨圍二尺六寸胸圍四尺五寸腰圍四尺三寸髪所覆者顱至項尺二寸髪以下至頥長一尺君子終折結喉以下至缺盆中長四寸缺盆以下至{{SKchar|1722}}{{SKchar|1717}}長九寸過則肺大不滿則肺小{{SKchar|1722}}{{SKchar|171",
+   "englishSource": "https://acupuncture-notes.com/heart_sinew_channel",
+   "nodes": [
+    {
+     "strand": 0,
+     "node": 0,
+     "anchor": "HT9",
+     "label": "새끼손가락 안쪽에서 시작(起於小指之內側)",
+     "lingshu": "小指之內側",
+     "english": "little finger|small finger|fifth finger",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 1,
+     "anchor": "HT7",
+     "label": "손목 뾰족뼈에 맺힘(結於銳骨)",
+     "lingshu": "銳骨",
+     "english": "pisiform|wrist",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 2,
+     "anchor": "HT3",
+     "label": "팔꿉 안쪽 모서리에 맺힘(上結肘內廉)",
+     "lingshu": "肘內廉",
+     "english": "elbow",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 0,
+     "node": 3,
+     "anchor": "HT1",
+     "label": "겨드랑으로 들어가 수태음과 만남(上入腋 交太陰)",
+     "lingshu": "入腋",
+     "english": "axilla|armpit",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 4,
+     "anchor": "ST17",
+     "label": "젖 안쪽을 낌(挾乳裏)",
+     "lingshu": "乳裏",
+     "english": "breast|nipple|chest",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 5,
+     "anchor": "CV17",
+     "label": "가슴 가운데에 맺힘(結於胸中)",
+     "lingshu": "胸中",
+     "english": "chest",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 6,
+     "anchor": "CV8",
+     "label": "아래로 배꼽에 이어짐(下繫於臍)",
+     "lingshu": "臍",
+     "english": "umbilicus|navel",
+     "status": "agree"
+    }
+   ]
+  },
+  "SI": {
+   "lingshu": "手太陽之筋起於小指之上結於腕上循臂內廉結於肘內銳骨之後彈之應小指之上入結於腋下其支者後走腋後廉上繞肩脾循頸出走太陽之前結於耳後完骨其支者入耳中直者出耳上下結於頷上屬目外眥其病小指支肘內銳骨後廉痛循臂陰入腋下腋下痛腋後廉痛繞肩脾引頸而痛應耳中鳴痛引頷目瞑良乆乃得視頸筋急則為筋瘻頸腫寒熱在頸者治在燔針刼刺之以知為數以痛為輸其為腫者復而銳之本支者上曲牙循耳前屬目外眥上頷結於角其痛當所過者支轉筋治在燔針刼刺以知為數以痛為輸名曰仲夏痺也",
+   "englishSource": "https://acupuncture-notes.com/small_intestine_sinew_channel",
+   "nodes": [
+    {
+     "strand": 0,
+     "node": 0,
+     "anchor": "SI1",
+     "label": "새끼손가락 위에서 시작(起於小指之上)",
+     "lingshu": "起於小指",
+     "english": "little finger|small finger|fifth finger",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 1,
+     "anchor": "SI5",
+     "label": "손목에 맺힘(結於腕)",
+     "lingshu": "結於腕",
+     "english": "wrist",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 2,
+     "anchor": "SI7",
+     "label": "아래팔 안쪽 모서리를 따라감(上循臂內廉)",
+     "lingshu": "臂內廉",
+     "english": "forearm|arm",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 3,
+     "anchor": "SI8",
+     "label": "팔꿉 안쪽 뾰족뼈 뒤에 맺힘(結於肘內銳骨之後)",
+     "lingshu": "銳骨",
+     "english": "medial epicondyle|elbow",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 4,
+     "anchor": "HT1",
+     "label": "겨드랑 아래에 맺힘(入結於腋下)",
+     "lingshu": "腋下",
+     "english": "axilla|armpit",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 0,
+     "anchor": "SI9",
+     "label": "겨드랑 뒤 모서리로(後走腋後廉)",
+     "lingshu": "腋後廉",
+     "english": "axilla|armpit",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 1,
+     "anchor": "SI11",
+     "label": "어깨뼈를 돌아 올라감(上繞肩胛)",
+     "lingshu": "肩胛",
+     "english": "scapula|shoulder blade",
+     "status": "conflict",
+     "unmatched": [
+      "lingshu"
+     ]
+    },
+    {
+     "strand": 1,
+     "node": 2,
+     "anchor": "SI16",
+     "label": "목을 따라감(循頸)",
+     "lingshu": "循頸",
+     "english": "neck",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 3,
+     "anchor": "GB12",
+     "label": "귀 뒤 꼭지돌기에 맺힘(結於耳後完骨)",
+     "lingshu": "完骨",
+     "english": "mastoid",
+     "status": "agree"
+    },
+    {
+     "strand": 2,
+     "node": 0,
+     "anchor": "SI17",
+     "label": "턱으로 내려가 맺힘(下結於頷)",
+     "lingshu": "下結於頷",
+     "english": "jaw|mandible|chin",
+     "status": "agree"
+    },
+    {
+     "strand": 2,
+     "node": 1,
+     "anchor": "GB1",
+     "label": "가쪽눈구석에 붙음(上屬目外眥)",
+     "lingshu": "目外眥",
+     "english": "outer canthus|canthus|corner of the eye",
+     "status": "agree"
+    }
+   ]
+  },
+  "BL": {
+   "lingshu": "足太陽之筋起於足小指上結於踝邪上結於膝其下循足外側結於踵上循跟結於膕其別者結於踹外上膕中內廉與膕中并上結於臀上挾脊上項其支者別入結於舌本其直者結於枕骨上頭下顏結於鼻其支者為目上網下結於頄其支者從腋後外廉結於肩髃其支者入腋下上出缺盆上結於完骨其支者出缺盆邪上出於頄其病小指支跟腫痛膕攣脊反折項筋急肩不舉腋支缺盆中紐痛不可左右摇治在燔針刼刺以知為數以痛為輸名曰仲春痺",
+   "englishSource": "https://acupuncture-notes.com/bladder_sinew_channel",
+   "nodes": [
+    {
+     "strand": 0,
+     "node": 0,
+     "anchor": "BL67",
+     "label": "새끼발가락에서 시작(起於足小指)",
+     "lingshu": "起於足小指",
+     "english": "little toe|small toe|fifth toe",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 1,
+     "anchor": "BL60",
+     "label": "가쪽복사에 맺힘(結於踝)",
+     "lingshu": "結於踝",
+     "english": "ankle|malleolus",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 2,
+     "anchor": "GB33",
+     "label": "무릎에 맺힘(結於膝)",
+     "lingshu": "結於膝",
+     "english": "knee",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 1,
+     "node": 0,
+     "anchor": "BL64",
+     "label": "발 가쪽을 따라감(循足外側)",
+     "lingshu": "足外側",
+     "english": "lateral (side|aspect) of the foot|lateral foot|outside of the foot",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 1,
+     "node": 1,
+     "anchor": "BL61",
+     "label": "발꿈치에 맺힘(結於踵)",
+     "lingshu": "結於踵",
+     "english": "heel",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 2,
+     "anchor": "BL40",
+     "label": "오금에 맺힘(結於膕)",
+     "lingshu": "結於膕",
+     "english": "popliteal|back of the knee",
+     "status": "agree"
+    },
+    {
+     "strand": 2,
+     "node": 0,
+     "anchor": "BL58",
+     "label": "장딴지 가쪽에 맺힘(結於踹外)",
+     "lingshu": "踹外",
+     "english": "calf",
+     "status": "agree"
+    },
+    {
+     "strand": 2,
+     "node": 1,
+     "anchor": "BL40",
+     "label": "오금 안쪽 모서리로 올라감(上膕中內廉)",
+     "lingshu": "膕中",
+     "english": "popliteal|back of the knee",
+     "status": "agree"
+    },
+    {
+     "strand": 2,
+     "node": 2,
+     "anchor": "BL36",
+     "label": "볼기에 맺힘(結於臀)",
+     "lingshu": "結於臀",
+     "english": "buttock|gluteal",
+     "status": "agree"
+    },
+    {
+     "strand": 2,
+     "node": 3,
+     "anchor": "BL25",
+     "label": "척추 양옆을 끼고 올라감(挾脊)",
+     "lingshu": "挾脊",
+     "english": "spine|vertebra",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 2,
+     "node": 4,
+     "anchor": "BL15",
+     "label": "척추 양옆(挾脊)",
+     "lingshu": "挾脊",
+     "english": "spine|vertebra",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 2,
+     "node": 5,
+     "anchor": "BL11",
+     "label": "척추 양옆(挾脊)",
+     "lingshu": "挾脊",
+     "english": "spine|vertebra",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 2,
+     "node": 6,
+     "anchor": "BL10",
+     "label": "목덜미로 올라감(上項)",
+     "lingshu": "上項",
+     "english": "nape|neck",
+     "status": "agree"
+    },
+    {
+     "strand": 2,
+     "node": 7,
+     "anchor": "BL9",
+     "label": "뒤통수뼈에 맺힘(結於枕骨)",
+     "lingshu": "枕骨",
+     "english": "occiput|occipital",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 2,
+     "node": 8,
+     "anchor": "BL7",
+     "label": "머리 위로 올라감(上頭)",
+     "lingshu": "上頭",
+     "english": "head|vertex",
+     "status": "agree"
+    },
+    {
+     "strand": 2,
+     "node": 9,
+     "anchor": "BL2",
+     "label": "이마로 내려옴(下顏)",
+     "lingshu": "下顏",
+     "english": "forehead|face",
+     "status": "agree"
+    },
+    {
+     "strand": 2,
+     "node": 10,
+     "anchor": "LI20",
+     "label": "코에 맺힘(結於鼻)",
+     "lingshu": "結於鼻",
+     "english": "nose",
+     "status": "agree"
+    },
+    {
+     "strand": 3,
+     "node": 0,
+     "anchor": "BL2",
+     "label": "눈 위 그물(目上網)",
+     "lingshu": "目上網",
+     "english": "upper eyelid|eyelid|above the eye",
+     "status": "agree"
+    },
+    {
+     "strand": 3,
+     "node": 1,
+     "anchor": "SI18",
+     "label": "광대뼈에 맺힘(下結於頄)",
+     "lingshu": "頄",
+     "english": "cheek|zygoma|malar",
+     "status": "agree"
+    },
+    {
+     "strand": 4,
+     "node": 0,
+     "anchor": "SI9",
+     "label": "겨드랑 뒤 가쪽 모서리(腋後外廉)",
+     "lingshu": "腋後外廉",
+     "english": "axilla|armpit",
+     "status": "agree"
+    },
+    {
+     "strand": 4,
+     "node": 1,
+     "anchor": "LI15",
+     "label": "어깨끝에 맺힘(結於肩髃)",
+     "lingshu": "肩髃",
+     "english": "shoulder|acromion",
+     "status": "agree"
+    },
+    {
+     "strand": 5,
+     "node": 0,
+     "anchor": "HT1",
+     "label": "겨드랑 아래로 들어감(入腋下)",
+     "lingshu": "入腋下",
+     "english": "axilla|armpit",
+     "status": "agree"
+    },
+    {
+     "strand": 5,
+     "node": 1,
+     "anchor": "ST12",
+     "label": "빗장위오목으로 나옴(上出缺盆)",
+     "lingshu": "缺盆",
+     "english": "supraclavicular|clavicle",
+     "status": "agree"
+    },
+    {
+     "strand": 5,
+     "node": 2,
+     "anchor": "GB12",
+     "label": "꼭지돌기 뒤에 맺힘(上結於完骨)",
+     "lingshu": "完骨",
+     "english": "mastoid",
+     "status": "agree"
+    },
+    {
+     "strand": 6,
+     "node": 0,
+     "anchor": "ST12",
+     "label": "빗장위오목에서 나옴(出缺盆)",
+     "lingshu": "出缺盆",
+     "english": "supraclavicular|clavicle",
+     "status": "agree"
+    },
+    {
+     "strand": 6,
+     "node": 1,
+     "anchor": "SI18",
+     "label": "비스듬히 광대뼈로(邪上出於頄)",
+     "lingshu": "出於頄",
+     "english": "cheek|zygoma|malar",
+     "status": "agree"
+    }
+   ]
+  },
+  "KI": {
+   "lingshu": "足少陰之筋起於小指之下并足太陰之筋邪走內踝之下結於踵與太陽之筋合而上結於內輔之下并太陰之筋而上循陰股結於陰器循脊內挾膂上至項結於枕骨與足太陽之筋合其病足下轉筋及所過而結者皆痛及轉筋病在此者主癎瘛及痙在外者不能俛在內者不能仰故陽病者腰反折不能俛陰病者不能仰治在燔針刼刺以知為數以痛為輸在內者熨引飲藥此筋折紐紐發數甚者死不治名曰仲秋痺也",
+   "englishSource": "https://acupuncture-notes.com/kidney_sinew_channel",
+   "nodes": [
+    {
+     "strand": 0,
+     "node": 0,
+     "anchor": "KI1",
+     "label": "새끼발가락 아래에서 시작(起於小指之下)",
+     "lingshu": "小指之下",
+     "english": "little toe|small toe|fifth toe|sole",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 1,
+     "anchor": "KI6",
+     "label": "비스듬히 안쪽복사 아래로(邪走內踝之下)",
+     "lingshu": "內踝之下",
+     "english": "medial malleolus|ankle",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 2,
+     "anchor": "KI5",
+     "label": "발꿈치에 맺힘(結於踵)",
+     "lingshu": "結於踵",
+     "english": "heel",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 0,
+     "node": 3,
+     "anchor": "KI10",
+     "label": "무릎 안쪽 보골 아래에 맺힘(上結於內輔之下)",
+     "lingshu": "內輔之下",
+     "english": "medial (condyle|side|aspect).{0,20}(knee|tibia)|knee",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 0,
+     "node": 4,
+     "anchor": "LR11",
+     "label": "넙다리 안쪽을 따라감(上循陰股)",
+     "lingshu": "陰股",
+     "english": "medial (side|aspect) of the thigh|inner thigh|medial thigh|thigh",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 5,
+     "anchor": "LR12",
+     "label": "음부에 맺힘(結於陰器)",
+     "lingshu": "陰器",
+     "english": "genital",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 0,
+     "anchor": "BL10",
+     "label": "목덜미로 올라감(上至項)",
+     "lingshu": "上至項",
+     "english": "nape|neck",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 1,
+     "anchor": "BL9",
+     "label": "뒤통수뼈에 맺혀 족태양과 합침(結於枕骨)",
+     "lingshu": "枕骨",
+     "english": "occiput|occipital",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    }
+   ]
+  },
+  "PC": {
+   "lingshu": "手心主之筋起於中指與太陰之筋并行結於肘內廉上臂陰結腋下下散前後挾脅其支者入腋散胸中結於臂其病當所過者支轉筋前及胸痛息賁治在燔針刼刺以知為數以痛為輸名曰孟冬痺也",
+   "englishSource": "https://acupuncture-notes.com/pericardium_sinew_channel",
+   "nodes": [
+    {
+     "strand": 0,
+     "node": 0,
+     "anchor": "PC9",
+     "label": "가운데손가락에서 시작(起於中指)",
+     "lingshu": "起於中指",
+     "english": "middle finger",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 1,
+     "anchor": "PC7",
+     "label": "수태음 경근과 나란히 감(與太陰之筋并行)",
+     "lingshu": "并行",
+     "english": "wrist|forearm|lung",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 2,
+     "anchor": "PC3",
+     "label": "팔꿉 안쪽 모서리에 맺힘(結於肘內廉)",
+     "lingshu": "肘內廉",
+     "english": "elbow",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 3,
+     "anchor": "PC2",
+     "label": "위팔 안쪽으로 올라감(上臂陰)",
+     "lingshu": "臂陰",
+     "english": "upper arm|arm",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 4,
+     "anchor": "HT1",
+     "label": "겨드랑 아래에 맺힘(結腋下)",
+     "lingshu": "結腋下",
+     "english": "axilla|armpit",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 5,
+     "anchor": "GB22",
+     "label": "갈비 앞뒤로 흩어짐(下散前後挾脅)",
+     "lingshu": "挾脅",
+     "english": "rib|hypochondri|flank",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 6,
+     "anchor": "LR13",
+     "label": "옆구리(脅)",
+     "lingshu": "脅",
+     "english": "rib|hypochondri|flank",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 0,
+     "anchor": "PC1",
+     "label": "겨드랑으로 들어가 가슴 속에 흩어짐(入腋 散胸中)",
+     "lingshu": "散胸中",
+     "english": "chest",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    }
+   ]
+  },
+  "TE": {
+   "lingshu": "手少陽之筋起於小指次指之端結於腕上循臂結於肘上繞臑外廉上肩走頸合手太陽其支者當曲頰入繫舌本其支者上曲牙循耳前屬目外眥上乘頷結於角其病當所過者即支轉筋舌卷治在燔針刼刺以知為數以痛為輸名曰季夏痺也",
+   "englishSource": "https://acupuncture-notes.com/triple_burner_sinew_channel",
+   "nodes": [
+    {
+     "strand": 0,
+     "node": 0,
+     "anchor": "TE1",
+     "label": "약손가락 끝에서 시작(起於小指次指之端)",
+     "lingshu": "小指次指",
+     "english": "ring finger|fourth finger",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 1,
+     "anchor": "TE4",
+     "label": "손목에 맺힘(結於腕)",
+     "lingshu": "結於腕",
+     "english": "wrist",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 2,
+     "anchor": "TE8",
+     "label": "팔을 따라 올라감(上循臂)",
+     "lingshu": "上循臂",
+     "english": "forearm|arm",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 3,
+     "anchor": "TE10",
+     "label": "팔꿉에 맺힘(結於肘)",
+     "lingshu": "結於肘",
+     "english": "elbow|olecranon",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 4,
+     "anchor": "TE13",
+     "label": "위팔 가쪽 모서리를 돌아 올라감(上繞臑外廉)",
+     "lingshu": "臑外廉",
+     "english": "upper arm|arm",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 5,
+     "anchor": "TE14",
+     "label": "어깨로 올라감(上肩)",
+     "lingshu": "上肩",
+     "english": "shoulder",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 6,
+     "anchor": "TE16",
+     "label": "목으로 가서 수태양과 합침(走頸 合手太陽)",
+     "lingshu": "走頸",
+     "english": "neck",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 0,
+     "anchor": "ST6",
+     "label": "턱 굽이(曲頰)",
+     "lingshu": "曲頰",
+     "english": "angle of the (jaw|mandible)|jaw|mandible|cheek",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 1,
+     "anchor": "SI19",
+     "label": "귀 앞을 따라감(循耳前)",
+     "lingshu": "耳前",
+     "english": "in front of the ear|front of the ear|ear",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 2,
+     "anchor": "GB1",
+     "label": "가쪽눈구석에 붙음(屬目外眥)",
+     "lingshu": "目外眥",
+     "english": "outer canthus|canthus|corner of the eye",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 3,
+     "anchor": "ST8",
+     "label": "이마 모서리에 맺힘(結於角)",
+     "lingshu": "結於角",
+     "english": "corner of the forehead|forehead|temple|corner",
+     "status": "agree"
+    }
+   ]
+  },
+  "GB": {
+   "lingshu": "足少陽之筋起於小指次指上結外踝上循脛外廉結於膝外廉其支者別起外輔骨上走髀前者結於伏兔之上後者結於尻其直者上乘䏚季脅上走腋前廉繫於膺乳結於缺盆直者上出腋貫缺盆出太陽之前循耳後上額角交巔上下走頷上結於頄支者結於目眥為外維其病小指次指支轉筋引膝外轉筋膝不可屈伸膕筋急前引髀後引尻即上乘䏚季脅痛上引缺盆膺乳頸維筋急從左之右右目不開上過右角并蹻脉而行左絡於右故傷左角右足不用命曰維筋相交治在燔針刼刺以知為數以痛為輸名曰孟春痺也",
+   "englishSource": "https://acupuncture-notes.com/gallbladder_sinew_channel",
+   "nodes": [
+    {
+     "strand": 0,
+     "node": 0,
+     "anchor": "GB44",
+     "label": "넷째 발가락에서 시작(起於小指次指)",
+     "lingshu": "小指次指",
+     "english": "fourth toe|4th toe",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 1,
+     "anchor": "GB40",
+     "label": "가쪽복사에 맺힘(上結外踝)",
+     "lingshu": "外踝",
+     "english": "lateral malleolus|ankle",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 2,
+     "anchor": "GB37",
+     "label": "정강이 가쪽을 따라감(循脛外廉)",
+     "lingshu": "脛外廉",
+     "english": "lateral (side|aspect) of the (leg|tibia|shin)|lateral leg|shin|tibia|fibula",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 3,
+     "anchor": "GB33",
+     "label": "무릎 가쪽 모서리에 맺힘(結於膝外廉)",
+     "lingshu": "膝外廉",
+     "english": "lateral (side|aspect) of the knee|knee",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 0,
+     "anchor": "GB34",
+     "label": "종아리뼈(외보골)에서 갈라짐(別起外輔骨)",
+     "lingshu": "外輔骨",
+     "english": "fibula",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 1,
+     "anchor": "GB31",
+     "label": "넙다리로 올라감(上走髀)",
+     "lingshu": "上走髀",
+     "english": "thigh",
+     "status": "agree"
+    },
+    {
+     "strand": 1,
+     "node": 2,
+     "anchor": "ST32",
+     "label": "앞 가지는 복토 위에 맺힘(前者結於伏兔之上)",
+     "lingshu": "伏兔",
+     "english": "rectus femoris|quadriceps|front of the thigh|anterior thigh|ST.?32",
+     "status": "agree"
+    },
+    {
+     "strand": 2,
+     "node": 0,
+     "anchor": "GB31",
+     "label": "넙다리 뒤쪽 가지(後者)",
+     "lingshu": "後者",
+     "english": "thigh",
+     "status": "agree"
+    },
+    {
+     "strand": 2,
+     "node": 1,
+     "anchor": "BL35",
+     "label": "엉치에 맺힘(後者結於尻)",
+     "lingshu": "結於尻",
+     "english": "sacrum|sacral|coccyx|buttock",
+     "status": "agree"
+    },
+    {
+     "strand": 3,
+     "node": 0,
+     "anchor": "LR13",
+     "label": "옆구리 갈비 아래로 올라감(上乘䏚季脅)",
+     "lingshu": "季脅",
+     "english": "rib|hypochondri|flank",
+     "status": "agree"
+    },
+    {
+     "strand": 3,
+     "node": 1,
+     "anchor": "GB22",
+     "label": "겨드랑 앞 모서리로(上走腋前廉)",
+     "lingshu": "腋前廉",
+     "english": "axilla|armpit",
+     "status": "agree"
+    },
+    {
+     "strand": 3,
+     "node": 2,
+     "anchor": "ST17",
+     "label": "가슴·젖에 이어짐(繫於膺乳)",
+     "lingshu": "膺乳",
+     "english": "breast|chest",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 3,
+     "node": 3,
+     "anchor": "ST12",
+     "label": "빗장위오목에 맺힘(結於缺盆)",
+     "lingshu": "結於缺盆",
+     "english": "supraclavicular|clavicle",
+     "status": "agree"
+    },
+    {
+     "strand": 4,
+     "node": 0,
+     "anchor": "GB22",
+     "label": "겨드랑으로 나옴(上出腋)",
+     "lingshu": "上出腋",
+     "english": "axilla|armpit",
+     "status": "agree"
+    },
+    {
+     "strand": 4,
+     "node": 1,
+     "anchor": "ST12",
+     "label": "빗장위오목을 꿰뚫음(貫缺盆)",
+     "lingshu": "貫缺盆",
+     "english": "supraclavicular|clavicle",
+     "status": "agree"
+    },
+    {
+     "strand": 4,
+     "node": 2,
+     "anchor": "TE17",
+     "label": "귀 뒤를 따라감(循耳後)",
+     "lingshu": "耳後",
+     "english": "behind the ear|ear",
+     "status": "agree"
+    },
+    {
+     "strand": 4,
+     "node": 3,
+     "anchor": "ST8",
+     "label": "이마 모서리로 올라감(上額角)",
+     "lingshu": "額角",
+     "english": "corner of the forehead|forehead|temple",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 4,
+     "node": 4,
+     "anchor": "GV20",
+     "label": "정수리에서 만남(交巔上)",
+     "lingshu": "巔上",
+     "english": "vertex|top of the head",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 4,
+     "node": 5,
+     "anchor": "ST6",
+     "label": "턱으로 내려감(下走頷)",
+     "lingshu": "頷",
+     "english": "jaw|mandible|chin",
+     "status": "conflict",
+     "unmatched": [
+      "english"
+     ]
+    },
+    {
+     "strand": 4,
+     "node": 6,
+     "anchor": "SI18",
+     "label": "광대뼈에 맺힘(上結於頄)",
+     "lingshu": "結於頄",
+     "english": "cheek|zygoma|malar",
+     "status": "agree"
+    },
+    {
+     "strand": 5,
+     "node": 0,
+     "anchor": "GB1",
+     "label": "가쪽눈구석에 맺혀 바깥 벼리가 됨(結於目眥為外維)",
+     "lingshu": "目眥",
+     "english": "outer canthus|canthus|corner of the eye",
+     "status": "agree"
+    }
+   ]
+  },
+  "LR": {
+   "lingshu": "足厥陰之筋起於大指之上上結於內踝之前上循脛上結內輔之下上循陰股結於陰器絡諸筋其病足大指支內踝之前痛內輔痛陰股痛轉筋陰器不用傷於內則不起傷於寒則陰縮入傷於熱則縱挺不收治在行水清陰氣其病轉筋者治在燔針刼刺以知為數以痛為輸命曰季秋痺也",
+   "englishSource": "https://acupuncture-notes.com/liver_sinew_channel",
+   "nodes": [
+    {
+     "strand": 0,
+     "node": 0,
+     "anchor": "LR1",
+     "label": "엄지발가락 위에서 시작(起於大指之上)",
+     "lingshu": "大指之上",
+     "english": "big toe|great toe|hallux",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 1,
+     "anchor": "LR4",
+     "label": "안쪽복사 앞에 맺힘(上結於內踝之前)",
+     "lingshu": "內踝之前",
+     "english": "medial malleolus|ankle",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 2,
+     "anchor": "LR5",
+     "label": "정강이를 따라 올라감(上循脛)",
+     "lingshu": "循脛",
+     "english": "tibia|shin|leg",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 3,
+     "anchor": "LR7",
+     "label": "무릎 안쪽 보골 아래에 맺힘(上結內輔之下)",
+     "lingshu": "內輔之下",
+     "english": "medial (condyle|side|aspect).{0,20}(knee|tibia)|knee",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 4,
+     "anchor": "LR9",
+     "label": "넙다리 안쪽을 따라감(上循陰股)",
+     "lingshu": "陰股",
+     "english": "medial (side|aspect) of the thigh|inner thigh|medial thigh|thigh",
+     "status": "agree"
+    },
+    {
+     "strand": 0,
+     "node": 5,
+     "anchor": "LR12",
+     "label": "음부에 맺혀 여러 힘줄에 이어짐(結於陰器 絡諸筋)",
+     "lingshu": "陰器",
+     "english": "genital",
+     "status": "agree"
+    }
+   ]
+  }
+ }
+}

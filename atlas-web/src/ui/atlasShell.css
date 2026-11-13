@@ -275,17 +275,10 @@
   .atlas-shell .study-detail-header > :is(.study-tabs,.anatomical-part-subtitle) { grid-column: 1/-1; }
 }
 
-/* Observation tools stay compact; the temporary panel grows upward inside scene space. */
+/* Keep the remaining selection tools compact. */
 .atlas-shell .selection-view-options { grid-template-columns: repeat(4,minmax(0,1fr)); }
-.atlas-shell .observation-menu { min-width: 0; position: relative; }
-.atlas-shell .observation-menu > summary { list-style: none; display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 6px; font-size: 12px; line-height: 1.35; cursor: pointer; border: 1px solid #e0e6df; border-radius: 8px; color: #42675b; background: white; }
-.atlas-shell .observation-menu > summary::-webkit-details-marker { display: none; }
-.atlas-shell .observation-menu[open] > summary { background: #e7efea; }
-.atlas-shell .observation-popover { position: absolute; bottom: calc(100% + 12px); left: 0; width: min(280px,calc(100vw - 36px)); padding: 12px; display: grid; gap: 8px; background: #fffffff7; border: 1px solid #dfe6e0; border-radius: 14px; box-shadow: 0 10px 30px #334b4020; animation: observation-reveal 280ms ease-out; }
-.atlas-shell .observation-popover > div { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 6px; }
-.atlas-shell .observation-menu summary:focus-visible, .atlas-shell .explore-rail:focus-visible { outline: 3px solid #d49a36; outline-offset: 2px; }
+.atlas-shell .explore-rail:focus-visible { outline: 3px solid #d49a36; outline-offset: 2px; }
 .atlas-shell .explore-rail { display: none; }
-@keyframes observation-reveal { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
 @media (min-width:600px) and (max-width:1100px) {
   .atlas-shell .explore-trigger { display: none; }
   .atlas-shell .explore-rail { display: flex; flex-direction: column; align-items: center; gap: 8px; position: absolute; z-index: 4; top: 8px; left: 12px; width: 48px; min-height: 112px; padding: 12px 7px; border: 1px solid #dfe6e0; border-radius: 14px; background: #fffffff5; color: #42675b; font-size: 12px; word-break: keep-all; }
@@ -298,7 +291,6 @@
   .atlas-shell .selection-view-options { grid-template-columns: repeat(4,minmax(0,1fr)); }
 
 }
-@media (prefers-reduced-motion:reduce) { .atlas-shell .observation-popover { animation: none; } }
 @media (min-width:600px) and (max-width:950px) {
   /* On compact tablets the left drawer overlays context rather than shrinking the canvas to zero. */
   .atlas-shell .study-layout:has(.study-sidebar.is-open) { --scene-left: 72px; }
@@ -327,3 +319,149 @@
 /* Deferred learning content loads inside its card; the anatomy scene remains mounted. */
 .atlas-shell .feature-load-notice { padding: 14px 0; color: #6a7b72; font-size: 13px; line-height: 1.6; }
 .atlas-shell .feature-load-notice button { display: block; padding: 8px 12px; margin-top: 8px; min-height: 44px; color: #42675b; background: white; border: 1px solid #dfe6e0; border-radius: 8px; cursor: pointer; }
+
+/* V1 structure layers: outer-to-inner toggles and on-demand opacity sliders. */
+.atlas-shell .layer-row { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 5px; }
+.atlas-shell .layer-opacity { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px 12px; padding: 4px 2px; }
+.atlas-shell .layer-opacity label { display: grid; grid-template-columns: 5.5em 1fr 3em; align-items: center; gap: 6px; padding: 2px 0; font-size: 12px; color: #4b5d57; }
+.atlas-shell .layer-opacity input { width: 100%; accent-color: #47796b; }
+.atlas-shell .layer-opacity output { text-align: right; font-variant-numeric: tabular-nums; }
+@media (max-width: 760px) {
+  .atlas-shell .layer-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .atlas-shell .layer-opacity { grid-template-columns: 1fr; }
+}
+
+/* C3 structure cards */
+.atlas-shell .joint-facts { display: grid; grid-template-columns: 4em 1fr; gap: 4px 8px; margin: 8px 0; font-size: 13px; }
+.atlas-shell .joint-facts dt { color: #6b7a73; }
+.atlas-shell .joint-facts dd { margin: 0; }
+.atlas-shell .attachment-section h4 { margin: 12px 0 6px; font-size: 13px; color: #4b5d57; }
+
+/* ── V3 layout: viewport first ──────────────────────────────────────────────
+   One compact toolbar (layers, peel, fit, 더보기) instead of three button grids; the canvas
+   reserves only what the toolbar actually measures (--view-tools-height). */
+.atlas-shell .body-tools { display: flex; flex-direction: column; gap: 6px; padding: 6px; border-radius: 14px; }
+.atlas-shell .body-tools .view-options-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.atlas-shell .toolbar-main { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.atlas-shell .toolbar-main .layer-row { display: flex; flex-wrap: wrap; gap: 4px; }
+.atlas-shell .toolbar-main .view-options-row { display: flex; flex-wrap: wrap; gap: 4px; margin-left: auto; }
+.atlas-shell .body-tools .toolbar-main button, .atlas-shell .body-tools .more-actions button, .atlas-shell .body-tools .selection-view-options button {
+  min-height: 36px; padding: 6px 11px; white-space: nowrap; width: auto; }
+.atlas-shell .more-panel { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px 16px; padding: 6px 2px 2px; border-top: 1px solid #edf0ed; }
+.atlas-shell .more-actions { display: flex; flex-wrap: wrap; gap: 4px; }
+.atlas-shell .more-panel .layer-opacity { flex: 1 1 360px; }
+.atlas-shell .body-tools .selection-view-options { display: flex; flex-wrap: wrap; gap: 4px; padding-top: 6px; border-top: 1px solid #edf0ed; }
+
+/* Tablet and desktop: the structure list is a rail that opens on demand; the info card can collapse. */
+@media (min-width:600px) {
+  .atlas-shell .explore-trigger { display: none; }
+  .atlas-shell .explore-rail { display: flex; flex-direction: column; align-items: center; gap: 8px; position: absolute; z-index: 4; top: 8px; left: 12px; width: 48px; min-height: 112px; padding: 12px 7px; border: 1px solid #dfe6e0; border-radius: 14px; background: #fffffff2; color: #476b60; font-size: 11px; line-height: 1.3; }
+  .atlas-shell .explore-rail[aria-expanded=true] { background: #47796b; color: white; }
+  .atlas-shell .study-sidebar { display: none; top: 8px; left: 68px; right: auto; width: 250px; bottom: 20px; max-height: none; box-shadow: 0 15px 40px #314b3a22; }
+  .atlas-shell .study-sidebar.is-open { display: flex; }
+  .atlas-shell .explore-close { display: block; }
+  .atlas-shell .study-layout { --scene-left: 72px; }
+  .atlas-shell .study-layout:has(.study-sidebar.is-open) { --scene-left: 330px; }
+}
+@media (min-width:1101px) {
+  .atlas-shell .study-layout { --scene-right: 20px; --detail-summary-height: 52px; }
+  .atlas-shell:has(.study-details[open]) .study-layout { --scene-right: 340px; }
+  /* A collapsed card is only its title bar, which floats over the canvas corner. */
+  .atlas-shell:has(.study-details:not([open])) .study-layout { --scene-right: 20px; }
+  .atlas-shell .study-details > .mobile-detail-summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; height: var(--detail-summary-height); padding: 8px 16px; font-size: 15px; font-weight: 600; color: #34584e; cursor: pointer; line-height: 1.35; }
+  .atlas-shell .mobile-detail-summary::after { content: '접기'; flex: none; font-size: 11px; font-weight: 400; color: #73877e; }
+  .atlas-shell .study-details:not([open]) .mobile-detail-summary::after { content: '펼치기'; }
+  .atlas-shell .study-details:not([open]) { width: 240px; }
+  .atlas-shell .study-detail-header > h2 { display: none; }
+  .atlas-shell .study-detail-header { padding-top: 0; }
+}
+/* Phones: layer chips scroll sideways in one row instead of stacking into a grid. */
+@media (max-width:599px) {
+  .atlas-shell .toolbar-main { flex-direction: column; align-items: stretch; }
+  .atlas-shell .toolbar-main .layer-row { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .atlas-shell .toolbar-main .layer-row::-webkit-scrollbar { display: none; }
+  .atlas-shell .toolbar-main .view-options-row { margin-left: 0; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .atlas-shell .body-tools .toolbar-main button, .atlas-shell .body-tools .more-actions button, .atlas-shell .body-tools .selection-view-options button { min-height: 38px; padding: 6px 10px; flex: none; }
+  .atlas-shell .body-tools .selection-view-options { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+}
+
+/* M3 movement panel: joint chips, side, one slider per dof, movers by colour (red produces, blue opposes). */
+.atlas-shell .section-panel { display: flex; flex-direction: column; gap: 6px; padding: 6px 2px 2px; border-top: 1px solid #edf0ed; }
+.atlas-shell .section-axes, .atlas-shell .section-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.atlas-shell .body-tools .section-panel button { min-height: 32px; padding: 5px 10px; white-space: nowrap; width: auto; }
+.atlas-shell .section-position { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 8px; font-size: 13px; }
+.atlas-shell .section-position output { font-variant-numeric: tabular-nums; color: #4d5b55; min-width: 9em; text-align: right; }
+.atlas-shell .movement-panel { display: flex; flex-direction: column; gap: 6px; padding: 6px 2px 2px; border-top: 1px solid #edf0ed; max-height: 46vh; overflow-y: auto; }
+.atlas-shell .movement-joints, .atlas-shell .movement-side, .atlas-shell .movement-actions { display: flex; flex-wrap: wrap; gap: 4px; }
+.atlas-shell .body-tools .movement-panel button { min-height: 32px; padding: 5px 10px; white-space: nowrap; width: auto; }
+.atlas-shell .movement-dofs { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2px 14px; }
+.atlas-shell .movement-dofs label { display: grid; grid-template-columns: 1fr 6.5em; align-items: center; gap: 2px 8px; padding: 3px 6px; border-radius: 8px; font-size: 12px; color: #4b5d57; }
+.atlas-shell .movement-dofs label.active { background: #f1f5f2; }
+.atlas-shell .movement-dof-name { grid-column: 1 / -1; font-weight: 600; }
+.atlas-shell .movement-slider { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 6px; }
+.atlas-shell .movement-slider small { font-size: 11px; color: #7a8781; }
+.atlas-shell .movement-slider input { width: 100%; accent-color: #47796b; }
+.atlas-shell .movement-dofs output { text-align: right; font-variant-numeric: tabular-nums; }
+.atlas-shell .movement-roles h4 { display: flex; align-items: center; gap: 6px; margin: 6px 0 4px; font-size: 12px; color: #4b5d57; }
+.atlas-shell .movement-roles .swatch { width: 10px; height: 10px; border-radius: 3px; }
+.atlas-shell .swatch.agonist { background: #d4472f; }
+.atlas-shell .swatch.antagonist { background: #3f7cc4; }
+.atlas-shell .movement-roles small { color: #7a8781; }
+.atlas-shell .rig-actions { margin: 10px 0; }
+.atlas-shell .rig-actions ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.atlas-shell .rig-actions li button { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 40px; padding: 7px 10px; border: 1px solid #dfe6e0; border-radius: 8px; background: #fff; color: #33463f; font: inherit; font-size: 13px; text-align: left; cursor: pointer; }
+.atlas-shell .rig-actions li button[aria-pressed="true"] { border-color: #d4472f; box-shadow: inset 3px 0 #d4472f; }
+.atlas-shell .rig-actions li small { color: #6b7a73; font-size: 11px; }
+.atlas-shell .rig-joint-move { --attachment-tone: #47796b; }
+.atlas-shell .attachment-areas .attachment-observe { --attachment-tone: #7d5aa6; }
+
+/* C4 attachment areas on the muscle card: same tones as the areas drawn on the bone. */
+.atlas-shell .attachment-area-chips { list-style: none; margin: 0 0 6px; padding: 0; display: grid; gap: 4px; }
+.atlas-shell .attachment-area-chips li { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+.atlas-shell .attachment-area-chips li i { width: 10px; height: 10px; border-radius: 3px; background: var(--area-tone); }
+.atlas-shell .attachment-area-chips li small { color: #6b7a73; font-size: 11px; }
+.atlas-shell .muscle-facts { list-style: none; margin: 0 0 6px; padding: 0; display: grid; gap: 4px; }
+.atlas-shell .muscle-facts li { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+.atlas-shell .muscle-facts li small { color: #6b7a73; font-size: 11px; }
+.atlas-shell .muscle-facts-roots { font-size: 12px; color: #4d5b55; margin: 2px 0 0; }
+.atlas-shell .attachment-area-chips .area-origin { --area-tone: #2f5aa8; }
+.atlas-shell .attachment-area-chips .area-insertion { --area-tone: #b0561a; }
+.atlas-shell .attachment-area-chips .area-attachment { --area-tone: #7d5aa6; }
+.atlas-shell .attachment-section h3 i.attachment { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; background: #7d5aa6; }
+.atlas-shell .joint-movers dl { margin: 0; display: grid; gap: 6px; }
+.atlas-shell .joint-movers dt { font-size: 12px; font-weight: 600; color: #4b5d57; margin-bottom: 2px; }
+.atlas-shell .joint-movers dd { margin: 0; }
+.atlas-shell .joint-movers h3 span { margin-left: 6px; font-size: 11px; color: #6b7a73; font-weight: 400; }
+
+/* Q2-3 study tools: quiz and bookmarks, a floating panel over the scene's left side. */
+.atlas-shell .study-tools-trigger { min-height: 34px; padding: 6px 12px; border-radius: 10px; border: 1px solid #dfe6e2; background: #fff; font-size: 13px; white-space: nowrap; }
+.atlas-shell .study-tools-trigger[aria-expanded="true"] { background: #e6f1ef; border-color: #9cc6bf; }
+.atlas-shell .study-tools { position: absolute; z-index: 4; top: 8px; left: 72px; width: 300px; max-height: calc(100dvh - 120px); overflow-y: auto;
+  display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 16px; border: 1px solid #fff; background: #fffffff5; box-shadow: 0 12px 45px #334b4014; font-size: 13px; }
+.atlas-shell .study-tools-head, .atlas-shell .study-tools-tabs { display: flex; gap: 6px; align-items: center; justify-content: space-between; }
+.atlas-shell .study-tools button { min-height: 32px; padding: 5px 10px; border-radius: 9px; border: 1px solid #dfe6e2; background: #fff; font-size: 13px; cursor: pointer; }
+.atlas-shell .study-tools button[aria-pressed="true"], .atlas-shell .study-tools button[aria-selected="true"] { background: #237f79; border-color: #237f79; color: #fff; }
+.atlas-shell .study-tools-tabs small { margin-left: 4px; font-size: 11px; }
+.atlas-shell .quiz, .atlas-shell .bookmarks { display: flex; flex-direction: column; gap: 8px; }
+.atlas-shell .quiz-kinds { display: flex; flex-wrap: wrap; gap: 5px; }
+.atlas-shell .quiz-prompt { margin: 0; font-weight: 600; font-size: 14px; }
+.atlas-shell .quiz-quote { margin: 0; padding: 6px 10px; border-left: 3px solid #9cc6bf; background: #f4f8f6; }
+.atlas-shell .quiz-choices { display: grid; gap: 6px; }
+.atlas-shell .quiz-choices button { text-align: left; }
+.atlas-shell .quiz-choices button.is-answer { background: #e3f3ea; border-color: #4b9a6c; }
+.atlas-shell .quiz-choices button.is-wrong { background: #fbe9e6; border-color: #c25a47; }
+.atlas-shell .quiz-result { padding: 8px 10px; border-radius: 10px; background: #f4f8f6; }
+.atlas-shell .quiz-result.is-wrong { background: #fdf2f0; }
+.atlas-shell .quiz-result p { margin: 4px 0 6px; }
+.atlas-shell .quiz-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.atlas-shell .quiz-score { margin: 0; color: #4d5b55; font-size: 12px; font-variant-numeric: tabular-nums; }
+.atlas-shell .quiz-missed ul, .atlas-shell .bookmarks ul { list-style: none; margin: 4px 0; padding: 0; display: grid; gap: 4px; }
+.atlas-shell .quiz-missed li { display: grid; gap: 1px; font-size: 12px; }
+.atlas-shell .bookmarks li { display: flex; gap: 4px; }
+.atlas-shell .bookmark-open { flex: 1; display: flex; justify-content: space-between; gap: 6px; text-align: left; }
+.atlas-shell .bookmark-open small { color: #6b7a73; }
+.atlas-shell .bookmark-toggle { min-height: 28px; padding: 3px 9px; border-radius: 8px; border: 1px solid #dfe6e2; background: #fff; font-size: 12px; margin-left: 6px; }
+.atlas-shell .bookmark-toggle[aria-pressed="true"] { background: #fff6dc; border-color: #e0c060; }
+/* The explorer sidebar (search results) stays usable: the panel moves beside it, or under it on phones. */
+.atlas-shell:has(.study-sidebar.is-open) .study-tools { left: 280px; }
+@media (max-width: 599px) { .atlas-shell .study-tools, .atlas-shell:has(.study-sidebar.is-open) .study-tools { left: 8px; right: 8px; width: auto; top: 4px; z-index: 2; } }

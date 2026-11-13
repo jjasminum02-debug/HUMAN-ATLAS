@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "kind": "frozen_numeric_local_fit_recipe",
+  "baseline": "work/evidence/AT10/2026-10-13-skin-fit-r2/candidates/fit-r22.json",
+  "baselineWholeGeometryPassed": false,
+  "steps": [
+    {
+      "unit": "hand-right",
+      "numericInitialField": "work/evidence/AT10/2026-10-14-skin-fit-r5/initial-hand-fields-r31.json",
+      "acceptedFieldStages": "work/evidence/AT10/2026-10-14-skin-fit-r5/contact-fit-r40.json"
+    },
+    {
+      "unit": "hand-left",
+      "numericInitialField": "work/evidence/AT10/2026-10-14-skin-fit-r5/initial-hand-fields-r31.json",
+      "acceptedFieldStages": "work/evidence/AT10/2026-10-14-skin-fit-r5/contact-fit-r41.json"
+    }
+  ],
+  "reproduce": "<bundled-python> work/tools/replay_at10_skin_contact.py --evidence work/evidence/AT10/2026-10-14-skin-fit-r5 --out <fresh-directory> --revisions r40 r41; set AT10_SKIN_EVIDENCE=<fresh-directory> and AT10_SKIN_ARTIFACTS=<fresh-directory>/assets, then run export_at10_skin.py --revision r41",
+  "reproductionEvidence": "work/evidence/AT10/2026-10-14-skin-fit-r5/reproduction-r41.json",
+  "wholeSkinAcceptance": false
+}

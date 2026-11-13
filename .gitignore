@@ -33,3 +33,23 @@ coverage/
 
 # Stage06 frontend/static-store derivatives; never commit held asset payloads.
 /atlas-web/dist-vercel/
+/atlas-data/source-cache/kmle-2026-11-04/
+/atlas-data/source-cache/wikipedia-2026-11-04/
+
+# Python bytecode.
+__pycache__/
+
+# Held skin fitting and acupoint iterations, and old T66 run evidence: kept on disk, out of history.
+# Anything the app or tests read in these folders is committed with `git add -f` and stays tracked.
+/atlas-data/anatomy/skin/at10-f3-head-r1/
+/atlas-data/anatomy/skin/at10-f3-head-r2/
+/atlas-data/anatomy/skin/at10-fit-r[2-5]/
+/atlas-data/acupoints/carriers/
+/work/evidence/T66/
+/work/evidence/acupoint-AC2/
+/atlas-web/work/
+
+/atlas-data/source-cache/uams-2026-11-10/
+/atlas-data/source-cache/kenhub-2026-11-10/
+/atlas-data/source-cache/acupoints-2026-11-10/
+/atlas-data/source-cache/sinews-2026-11-13/

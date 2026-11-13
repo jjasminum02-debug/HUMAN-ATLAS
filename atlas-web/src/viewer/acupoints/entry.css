@@ -1,0 +1,26 @@
+.acupoint-entry {position:absolute;z-index:3;top:8px;right:var(--scene-right,20px);}
+.acupoint-entry button {min-height:36px;padding:6px 9px;border:1px solid #cadbd4;background:white;border-radius:8px;color:#345e51;font-size:12px;cursor:pointer;}
+
+.acupoint-entry p {max-width:230px;padding:8px;border-radius:8px;background:#fff;font-size:12px;color:#4e685e;}
+
+/* 4-1 step 7: learner acupoint panel (rig-based points). */
+.acupoint-panel {position:absolute;z-index:4;top:8px;right:var(--scene-right,20px);width:min(300px,calc(100% - 32px));max-height:calc(100% - 120px);overflow:auto;
+  padding:12px 14px;border:1px solid #d8e3df;border-radius:12px;background:#fff;box-shadow:0 8px 24px rgba(30,50,45,.12);font-size:13px;color:#33433e;}
+.acupoint-panel-head {display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.acupoint-panel-head button {border:1px solid #cadbd4;background:#fff;border-radius:8px;padding:4px 8px;font-size:12px;color:#345e51;cursor:pointer;}
+.acupoint-channel h4, .acupoint-detail h4 {margin:10px 0 6px;font-size:13px;color:#7c2d12;}
+.acupoint-channel h4 span, .acupoint-detail h4 span {margin-left:6px;font-weight:400;font-size:11px;color:#6b7a73;}
+.acupoint-channel ol {list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:4px;}
+.acupoint-channel button {width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:5px 7px;border:1px solid #ead7cf;border-radius:8px;background:#fffaf7;cursor:pointer;font-size:12px;color:#40312b;}
+.acupoint-channel button[aria-pressed="true"] {border-color:#c2410c;background:#fdeee6;}
+.acupoint-channel button small {font-size:10px;color:#8a6f64;}
+.acupoint-detail p {margin:0 0 6px;line-height:1.5;}
+.acupoint-detail h5 {margin:8px 0 4px;font-size:12px;color:#4b5d57;}
+.acupoint-channels {display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:8px;}
+.acupoint-channels button {display:flex;flex-direction:column;align-items:center;padding:4px 2px;border:1px solid #ead7cf;border-radius:8px;background:#fffaf7;cursor:pointer;font-size:12px;color:#40312b;}
+.acupoint-channels button small {font-size:10px;color:#8a6f64;}
+.acupoint-channels button[aria-pressed="true"] {border-color:#c2410c;background:#fdeee6;color:#7c2d12;}
+.acupoint-mode {margin-bottom:8px;}
+.sinew-strand {margin:4px 0 8px;padding-left:18px;font-size:12px;line-height:1.5;color:#40312b;}
+.sinew-strand li::marker {color:#0f766e;}
+.sinew-detail h4 {color:#115e59;}

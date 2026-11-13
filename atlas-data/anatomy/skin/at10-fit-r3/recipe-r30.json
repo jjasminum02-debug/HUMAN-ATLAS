@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 3,
+  "kind": "rejected_trial_recipe_not_production_character",
+  "baselineManifest": "atlas-data/anatomy/skin/at10-fit-r2/manifest-r22.json",
+  "baselineGlbSha256": "53b3a057ff9df98162cfa3deb47844103886d5ced28121b30a24534c41834b93",
+  "baselineRecipe": "atlas-data/anatomy/skin/at10-fit-r2/recipe-r22.json",
+  "baselineCandidate": "work/evidence/AT10/2026-10-13-skin-fit-r2/candidates/fit-r22.json",
+  "nativeSnapshot": {
+    "file": "work/evidence/AT10/2026-10-13-skin-fit-r1/native-surfaces-r1.json",
+    "sha256": "dae05308086193d459abae5cafa18270e6b0d24f018c9f88521c892a8a3a8941",
+    "reconstructionTool": "work/tools/fit_at10_skin.py --revision r2 with pinned source/probe; reuse completed cache in this workspace"
+  },
+  "sourceInputHashes": {
+    "atlas-data/source-cache/datasets/skin-source-review-2026-10-13/base.obj": "8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c",
+    "atlas-data/source-cache/datasets/skin-source-review-2026-10-13/makehuman-asian-male-young.target": "ed2e8c191cb6b87b4a2d97c80486acb2604fa549316c7aa2a738a5d5a14334dc",
+    "atlas-data/source-cache/datasets/skin-source-review-2026-10-13/LICENSE.md": "edd99571ca62698f78c943fd4fffb159a413c315fa0d4819d3cec5cadaf8b4f1",
+    "atlas-data/source-cache/datasets/skin-source-review-2026-10-13/makehuman-LICENSE.ASSETS.md": "f6089cba01cb570a24712b41ab8a586ccd3cc5ef53dc266ca50b95c288956d2c"
+  },
+  "sourceUnitConversion": "official dm->m 0.1 already applied; no second scale/native world matrix",
+  "worldFrame": "HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR",
+  "poseId": "za-c7010a9-9f08a17ea011-frame0-static",
+  "method": "source joint-local rings, named native facet constraints, proper local reference, positive edge-weight ARAP, staged targets and transported tangent-normal skin-prism line search",
+  "guardLimitation": "Positive constructed prisms do not prove positive 3D deformation/global injectivity. One-ring negatives and actual native/self crossings remain.",
+  "bodyHelpersUvPolicy": "original body IDs/quads/face-corner UV retained; original helpers unchanged and excluded from GLB",
+  "sourceVersusAuthoredIndicators": "Raw helper joint IDs and native facet/cap addresses retained. Source radial/ulnar and tibial/fibular directions are authored model indicators, not observed skin landmarks.",
+  "numericConstraints": "work/evidence/AT10/2026-10-13-skin-fit-r3/fold-aware-correspondence-r30.json",
+  "constraintSha256": "9ead5f5e13f272fec18430e2ff59122490065e909d240e1adaae7da1a870cb4d",
+  "steps": 12,
+  "parts": [
+    "hand",
+    "foot"
+  ],
+  "guard": "active-prism",
+  "extendedReference": true,
+  "commands": [
+    "/Volumes/Blender/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python work/tools/at10_skin_arap.py -- --evidence <fresh-evidence> --revision r30 --parts hand,foot --guard active-prism --extended-reference",
+    "AT10_SKIN_EVIDENCE=<fresh-evidence> AT10_SKIN_ARTIFACTS=<fresh-artifacts> python3 work/tools/export_at10_skin.py --revision r30",
+    "AT10_SKIN_EVIDENCE=<fresh-evidence> AT10_SKIN_ARTIFACTS=<fresh-artifacts> <blender> --background --factory-startup --disable-autoexec --python work/tools/validate_at10_skin_blender.py -- r30"
+  ],
+  "toolHashes": {
+    "work/tools/at10_skin_arap.py": "9e824fbd04577e2f2846afd093da9014646755e8a71ddaba736c3ffda1e72174",
+    "work/tools/export_at10_skin.py": "5b1ec8cdc456e6e02ac12773ef8d3569ae517dd99a00fe81943e2c3f6500cd9c",
+    "work/tools/validate_at10_skin_blender.py": "a89b7e5bb561d90fc048d59bd9651ce84b5ba414f085d71b28f284651001d00b",
+    "work/tools/inspect_at10_skin_blender.py": "71d3c7bdb83653829b259075c59386c24854397265e5730079ae54df4a288ef0"
+  },
+  "observedGlbSha256": "218b6bba246bc8f306e2d8d6fe50e6c4da9a58468fbc89a46e4e0733860db5af",
+  "independentFullGenerationReproductionPerformed": false,
+  "priorR22IndependentReproductionReused": true,
+  "fitAcceptancePassed": false,
+  "learnerEligible": false,
+  "webRuntimeGeneratorIncluded": false
+}

@@ -6,7 +6,7 @@ import { attachmentBoneKeys, inRegionalRoute } from './regionalContext.ts';
 import { readDatasetRoute, searchStructures, type RuntimeStructureRecord } from './integration.ts';
 import { framingRecords } from './framing.ts';
 import type { BodyView } from '../wholeBody/contract.ts';
-const rows = JSON.parse(readFileSync(new URL('../../../../work/evidence/T63/browser/runtime.json', import.meta.url), 'utf8')).objects as RuntimeStructureRecord[];
+const rows = JSON.parse(readFileSync(new URL('../../../../atlas-data/provenance/T63/browser/runtime.json', import.meta.url), 'utf8')).objects as RuntimeStructureRecord[];
 const view: BodyView = { region: null, bones: true, muscles: true, selectedId: null, dim: true, supplements: false };
 const visible = (region: string, extra: Partial<BodyView> = {}) => rows.filter(r => demandedStructureKeys(rows, { ...view, regionIds: [region], ...extra }).includes(r.sourceKey));
 

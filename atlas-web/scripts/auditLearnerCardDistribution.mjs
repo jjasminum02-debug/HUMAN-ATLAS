@@ -8,10 +8,10 @@ const projectRoot = resolve(scriptDir, "../..");
 const webRoot = resolve(projectRoot, "atlas-web");
 const bundleRoot = resolve(webRoot, "dist");
 const runtimePath = resolve(projectRoot, "atlas-data/terminology/learner-card-runtime.json");
-const evidenceRoot = resolve(projectRoot, "work/evidence/T82");
+const evidenceRoot = resolve(projectRoot, "atlas-data/provenance/T82");
 const baselinePath = resolve(evidenceRoot, "baseline.json");
 const aiOverlayPath = resolve(projectRoot, "atlas-data/terminology/ai-evidence-overlay.json");
-const workbookDispositionPath = resolve(projectRoot, "work/evidence/T81/workbook-row-dispositions.json");
+const workbookDispositionPath = resolve(projectRoot, "atlas-data/provenance/T81/workbook-row-dispositions.json");
 
 const argv = process.argv.slice(2);
 const reportArgument = argv.find((arg) => arg.startsWith("--report="));
@@ -68,10 +68,6 @@ for (const row of runtime.names) {
 }
 for (const row of Object.values(runtime.structure.byConcept)) for (const text of Object.values(row)) learnerText.add(text);
 for (const row of Object.values(runtime.structure.bySource)) for (const text of Object.values(row)) learnerText.add(text);
-for (const row of runtime.actions) {
-  learnerText.add(row.label);
-  learnerText.add(row.explanation);
-}
 
 const staticMarkers = [
   "T18-FIELD-", "T18-E-", "T18-C-", "T18-HANDS-ON-ANATOMY", "T18-STATPEARLS",
@@ -112,7 +108,6 @@ const result = {
     names: runtime.names.length,
     conceptStructureRows: Object.keys(runtime.structure.byConcept).length,
     sourceStructureRows: Object.keys(runtime.structure.bySource).length,
-    actions: runtime.actions.length,
   },
   distribution: { scannedFiles: scanFiles.length, bundles },
   provenanceMarkersChecked: provenanceMarkers.size,

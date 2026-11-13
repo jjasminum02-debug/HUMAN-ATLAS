@@ -20,10 +20,8 @@ test('the full current learner data retains names, action order and both directi
   const load = (file: string) => JSON.parse(readFileSync(new URL(`../../../atlas-data/terminology/${file}`, import.meta.url), 'utf8'));
   const card = load('learner-card-runtime.json');
   const graph = load('learner-nerve-graph-t66.json') as { concepts: NerveConceptNameRow[]; motorRelations: MotorRelationRow[] };
-  const index = createLearnerLookupIndex(card.names, card.actions, graph.concepts, graph.motorRelations);
+  const index = createLearnerLookupIndex(card.names, [], graph.concepts, graph.motorRelations);
   for (const row of card.names) assert.equal(index.namesById.get(row.id), card.names.find((r: typeof row) => r.id === row.id));
-  for (const id of new Set(card.actions.map((row: { conceptId: string }) => row.conceptId)))
-    assert.deepEqual(index.actionsByConcept.get(id as string), card.actions.filter((row: { conceptId: string }) => row.conceptId === id));
   for (const name of new Set(graph.concepts.flatMap((row: { sourceNativeEnglishName: string | null; names: { en: string } }) => [row.sourceNativeEnglishName, row.names.en])))
     if (name !== null) assert.equal(index.nerveForExactName(name as string), conceptForExactNerveName(graph.concepts, name as string));
   for (const nerve of graph.concepts) for (const side of [null, 'left', 'right'])

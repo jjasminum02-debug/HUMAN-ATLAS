@@ -1,11 +1,12 @@
 import * as THREE from 'three';
 
 /** A one-CSS-pixel picking tolerance for thin native nerve surfaces in transparent observation mode. */
-export function pickSurface(camera: THREE.Camera, nodes: THREE.Mesh[], point: { x: number; y: number }, rect: { left: number; top: number; width: number; height: number }, observe: boolean) {
+export function pickSurface(camera: THREE.Camera, nodes: THREE.Mesh[], point: { x: number; y: number }, rect: { left: number; top: number; width: number; height: number }, observe: boolean,
+  /** Q2-2: hits cut away by the cross-section plane are not pickable. */ kept: (point: THREE.Vector3) => boolean = () => true) {
   const ray = new THREE.Raycaster();
   const intersect = (x: number, y: number, candidates = nodes) => {
     ray.setFromCamera(new THREE.Vector2((x - rect.left) / rect.width * 2 - 1, -(y - rect.top) / rect.height * 2 + 1), camera);
-    return ray.intersectObjects(candidates, false);
+    return ray.intersectObjects(candidates, false).filter(hit => kept(hit.point));
   };
   const hits = intersect(point.x, point.y);
   if (!observe) return hits[0];

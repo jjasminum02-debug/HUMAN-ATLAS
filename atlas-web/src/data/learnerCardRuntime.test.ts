@@ -8,7 +8,7 @@ const sourceContent = JSON.parse(readFileSync(new URL("atlas-data/terminology/le
 const originalNames = JSON.parse(readFileSync(new URL("atlas-data/terminology/learning-names.json", root), "utf8"));
 
 test("learner card runtime is a minimal text projection with no source or review ledger fields", () => {
-  assert.deepEqual(Object.keys(runtime).sort(), ["actions", "names", "schemaVersion", "structure"]);
+  assert.deepEqual(Object.keys(runtime).sort(), ["names", "nerveLearning", "schemaVersion", "structure"]);
   assert.deepEqual(Object.keys(runtime.structure).sort(), ["byConcept", "bySource"]);
   assert.equal(runtime.names.length, originalNames.entries.length);
   for (const [index, row] of runtime.names.entries()) {
@@ -18,9 +18,8 @@ test("learner card runtime is a minimal text projection with no source or review
       assert.doesNotMatch(value ?? "", /\p{Script=Han}/u);
     }
   }
-  assert.equal(Object.keys(runtime.structure.bySource).length, 14);
+  assert.equal(Object.keys(runtime.structure.bySource).length, 461);
   assert.equal(Object.keys(runtime.structure.byConcept).length, 8);
-  assert.equal(runtime.actions.length, 7);
   const encoded = JSON.stringify(runtime);
   assert.doesNotMatch(encoded, /https?:\/\/|cross_checked|single_source|evidenceHash|fieldEvidenceId|T18-|T21-|sourceIds|humanReviewed|not_performed|publicRedistribution|locator|accessedOn/);
 });
@@ -39,16 +38,3 @@ test("supported structure cards preserve exact claim text, conflict copy, and fi
   assert.equal(runtime.structure.bySource[sourceKey].insertion, "자료에는 비복근의 공통 정지가 종골로 기록되어 있고, 외측두만의 별도 원위 부착면은 나뉘어 제시되지 않습니다.");
 });
 
-test("action tab receives only learner strings and retains the current no-clip state", () => {
-  const rows = runtime.actions.filter((row: { conceptId: string }) => row.conceptId === "HA-M-000003");
-  assert.equal(rows.length, 2);
-  assert.equal(rows[0].sideApplicability, null);
-  assert.equal(rows[1].sideApplicability, "right");
-  for (const row of rows) {
-    assert.deepEqual(Object.keys(row).sort(), ["conceptId", "explanation", "key", "label", "sideApplicability"]);
-    assert.doesNotMatch(JSON.stringify(row), /https?:\/\/|evidence|claim|source|T21-|T18-/i);
-    assert.doesNotMatch(`${row.label} ${row.explanation}`, /\p{Script=Han}/u);
-  }
-  assert.match(rows[1].explanation, /오른쪽 발목/);
-  assert.doesNotMatch(rows[1].explanation, /이 시범은/);
-});

@@ -61,6 +61,8 @@ test('muscle microrelief shares a program across states and follows rest coordin
   const boneShader = {vertexShader: THREE.ShaderLib.standard.vertexShader, fragmentShader: THREE.ShaderLib.standard.fragmentShader, uniforms: {}};
   const bone = cache.get('bone');
   bone.onBeforeCompile(boneShader as Parameters<typeof bone.onBeforeCompile>[0], {} as THREE.WebGLRenderer);
-  assert.equal(boneShader.fragmentShader, THREE.ShaderLib.standard.fragmentShader);
+  // Bone gets no microrelief; only the Q2-2 cut-face fill, which acts only while a section makes it double-sided.
+  assert(!boneShader.fragmentShader.includes('atlasDetail') && boneShader.vertexShader === THREE.ShaderLib.standard.vertexShader);
+  assert.equal(boneShader.fragmentShader.replace(/\n#ifdef DOUBLE_SIDED\nif \(!gl_FrontFacing\)[^\n]*\n#endif/, ''), THREE.ShaderLib.standard.fragmentShader);
   cache.dispose();
 });

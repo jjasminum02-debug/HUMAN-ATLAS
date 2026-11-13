@@ -1,0 +1,5814 @@
+{
+  "schemaVersion": 1,
+  "catalogId": "who-361-acupoint-concepts",
+  "revision": "AT1-r1",
+  "usage": "source_catalog_only_not_runtime_or_location_approval",
+  "standard": "WHO 361 classical acupuncture point code set; AT1 design ranges",
+  "hangulLabelLineage": "Transcribed from the KMCRIC Standard Acupuncture Point DB meridian lists.",
+  "instanceSemantics": "planned side memberships only; no PointInstance anchors, coordinates, routes, territories, 3D geometry, or learner projection are created by this catalog.",
+  "publicRedistribution": "held",
+  "professorReview": "not_performed",
+  "sourceRegistry": [
+    {
+      "id": "who-361-classical-nomenclature",
+      "title": "Standard acupuncture nomenclature: a brief explanation of 361 classical acupuncture point names and their multilingual comparative list",
+      "organization": "World Health Organization, Regional Office for the Western Pacific",
+      "url": "https://www.who.int/publications/i/item/9290611057",
+      "factsUsed": "The 361-classical-point naming and code-set context; this page does not supply the Hangul transcription used below.",
+      "retrievedDate": "2026-10-11"
+    },
+    {
+      "id": "design-at-361",
+      "title": "AT1–AT29 — 361혈 전체와 체표 영역",
+      "path": "design/2026-09-25-muscle-atlas/30-AT-361-POINTS-AND-TERRITORIES.md",
+      "factsUsed": "The 14 channel code ranges, 309 bilateral concepts, 52 midline concepts, and 670 planned side instances."
+    },
+    {
+      "id": "kmcric-lu",
+      "title": "KMCRIC 표준경혈 DB — 수태음폐경",
+      "url": "https://www.kmcric.com/database/acupoint/LU",
+      "factsUsed": "Hangul point labels and channel membership for LU codes.",
+      "retrievedDate": "2026-10-11"
+    },
+    {
+      "id": "kmcric-li",
+      "title": "KMCRIC 표준경혈 DB — 수양명대장경",
+      "url": "https://www.kmcric.com/database/acupoint/LI",
+      "factsUsed": "Hangul point labels and channel membership for LI codes.",
+      "retrievedDate": "2026-10-11"
+    },
+    {
+      "id": "kmcric-st",
+      "title": "KMCRIC 표준경혈 DB — 족양명위경",
+      "url": "https://www.kmcric.com/database/acupoint/ST",
+      "factsUsed": "Hangul point labels and channel membership for ST codes.",
+      "retrievedDate": "2026-10-11"
+    },
+    {
+      "id": "kmcric-sp",
+      "title": "KMCRIC 표준경혈 DB — 족태음비경",
+      "url": "https://www.kmcric.com/database/acupoint/SP",
+      "factsUsed": "Hangul point labels and channel membership for SP codes.",
+      "retrievedDate": "2026-10-11"
+    },
+    {
+      "id": "kmcric-ht",
+      "title": "KMCRIC 표준경혈 DB — 수소음심경",
+      "url": "https://www.kmcric.com/database/acupoint/HT",
+      "factsUsed": "Hangul point labels and channel membership for HT codes.",
+      "retrievedDate": "2026-10-11"
+    },
+    {
+      "id": "kmcric-si",
+      "title": "KMCRIC 표준경혈 DB — 수태양소장경",
+      "url": "https://www.kmcric.com/database/acupoint/SI",
+      "factsUsed": "Hangul point labels and channel membership for SI codes.",
+      "retrievedDate": "2026-10-11"
+    },
+    {
+      "id": "kmcric-bl",
+      "title": "KMCRIC 표준경혈 DB — 족태양방광경",
+      "url": "https://www.kmcric.com/database/acupoint/BL",
+      "factsUsed": "Hangul point labels and channel membership for BL codes.",
+      "retrievedDate": "2026-10-11"
+    },
+    {
+      "id": "kmcric-ki",
+      "title": "KMCRIC 표준경혈 DB — 족소음신경",
+      "url": "https://www.kmcric.com/database/acupoint/KI",
+      "factsUsed": "Hangul point labels and channel membership for KI codes.",
+      "retrievedDate": "2026-10-11"
+    },
+    {
+      "id": "kmcric-pc",
+      "title": "KMCRIC 표준경혈 DB — 수궐음심포경",
+      "url": "https://www.kmcric.com/database/acupoint/PC",
+      "factsUsed": "Hangul point labels and channel membership for PC codes.",
+      "retrievedDate": "2026-10-11"
+    },
+    {
+      "id": "kmcric-te",
+      "title": "KMCRIC 표준경혈 DB — 수소양삼초경",
+      "url": "https://www.kmcric.com/database/acupoint/TE",
+      "factsUsed": "Hangul point labels and channel membership for TE codes.",
+      "retrievedDate": "2026-10-11"
+    },
+    {
+      "id": "kmcric-gb",
+      "title": "KMCRIC 표준경혈 DB — 족소양담경",
+      "url": "https://www.kmcric.com/database/acupoint/GB",
+      "factsUsed": "Hangul point labels and channel membership for GB codes.",
+      "retrievedDate": "2026-10-11"
+    },
+    {
+      "id": "kmcric-lr",
+      "title": "KMCRIC 표준경혈 DB — 족궐음간경",
+      "url": "https://www.kmcric.com/database/acupoint/LR",
+      "factsUsed": "Hangul point labels and channel membership for LR codes.",
+      "retrievedDate": "2026-10-11"
+    },
+    {
+      "id": "kmcric-cv",
+      "title": "KMCRIC 표준경혈 DB — 임맥",
+      "url": "https://www.kmcric.com/database/acupoint/CV",
+      "factsUsed": "Hangul point labels and channel membership for CV codes.",
+      "retrievedDate": "2026-10-11"
+    },
+    {
+      "id": "kmcric-gv",
+      "title": "KMCRIC 표준경혈 DB — 독맥",
+      "url": "https://www.kmcric.com/database/acupoint/GV",
+      "factsUsed": "Hangul point labels and channel membership for GV codes.",
+      "retrievedDate": "2026-10-11"
+    }
+  ],
+  "channelCount": 14,
+  "conceptCount": 361,
+  "channels": [
+    {
+      "code": "LU",
+      "nameKo": "수태음폐경",
+      "firstCode": "LU1",
+      "lastCode": "LU11",
+      "conceptCount": 11,
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "plannedInstanceCountPerConcept": 2,
+      "nameSourceId": "kmcric-lu"
+    },
+    {
+      "code": "LI",
+      "nameKo": "수양명대장경",
+      "firstCode": "LI1",
+      "lastCode": "LI20",
+      "conceptCount": 20,
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "plannedInstanceCountPerConcept": 2,
+      "nameSourceId": "kmcric-li"
+    },
+    {
+      "code": "ST",
+      "nameKo": "족양명위경",
+      "firstCode": "ST1",
+      "lastCode": "ST45",
+      "conceptCount": 45,
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "plannedInstanceCountPerConcept": 2,
+      "nameSourceId": "kmcric-st"
+    },
+    {
+      "code": "SP",
+      "nameKo": "족태음비경",
+      "firstCode": "SP1",
+      "lastCode": "SP21",
+      "conceptCount": 21,
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "plannedInstanceCountPerConcept": 2,
+      "nameSourceId": "kmcric-sp"
+    },
+    {
+      "code": "HT",
+      "nameKo": "수소음심경",
+      "firstCode": "HT1",
+      "lastCode": "HT9",
+      "conceptCount": 9,
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "plannedInstanceCountPerConcept": 2,
+      "nameSourceId": "kmcric-ht"
+    },
+    {
+      "code": "SI",
+      "nameKo": "수태양소장경",
+      "firstCode": "SI1",
+      "lastCode": "SI19",
+      "conceptCount": 19,
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "plannedInstanceCountPerConcept": 2,
+      "nameSourceId": "kmcric-si"
+    },
+    {
+      "code": "BL",
+      "nameKo": "족태양방광경",
+      "firstCode": "BL1",
+      "lastCode": "BL67",
+      "conceptCount": 67,
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "plannedInstanceCountPerConcept": 2,
+      "nameSourceId": "kmcric-bl"
+    },
+    {
+      "code": "KI",
+      "nameKo": "족소음신경",
+      "firstCode": "KI1",
+      "lastCode": "KI27",
+      "conceptCount": 27,
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "plannedInstanceCountPerConcept": 2,
+      "nameSourceId": "kmcric-ki"
+    },
+    {
+      "code": "PC",
+      "nameKo": "수궐음심포경",
+      "firstCode": "PC1",
+      "lastCode": "PC9",
+      "conceptCount": 9,
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "plannedInstanceCountPerConcept": 2,
+      "nameSourceId": "kmcric-pc"
+    },
+    {
+      "code": "TE",
+      "nameKo": "수소양삼초경",
+      "firstCode": "TE1",
+      "lastCode": "TE23",
+      "conceptCount": 23,
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "plannedInstanceCountPerConcept": 2,
+      "nameSourceId": "kmcric-te"
+    },
+    {
+      "code": "GB",
+      "nameKo": "족소양담경",
+      "firstCode": "GB1",
+      "lastCode": "GB44",
+      "conceptCount": 44,
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "plannedInstanceCountPerConcept": 2,
+      "nameSourceId": "kmcric-gb"
+    },
+    {
+      "code": "LR",
+      "nameKo": "족궐음간경",
+      "firstCode": "LR1",
+      "lastCode": "LR14",
+      "conceptCount": 14,
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "plannedInstanceCountPerConcept": 2,
+      "nameSourceId": "kmcric-lr"
+    },
+    {
+      "code": "CV",
+      "nameKo": "임맥",
+      "firstCode": "CV1",
+      "lastCode": "CV24",
+      "conceptCount": 24,
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "plannedInstanceCountPerConcept": 1,
+      "nameSourceId": "kmcric-cv"
+    },
+    {
+      "code": "GV",
+      "nameKo": "독맥",
+      "firstCode": "GV1",
+      "lastCode": "GV28",
+      "conceptCount": 28,
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "plannedInstanceCountPerConcept": 1,
+      "nameSourceId": "kmcric-gv"
+    }
+  ],
+  "concepts": [
+    {
+      "code": "LU1",
+      "nameKo": "중부",
+      "channelCode": "LU",
+      "channelNameKo": "수태음폐경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lu",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LU2",
+      "nameKo": "운문",
+      "channelCode": "LU",
+      "channelNameKo": "수태음폐경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lu",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LU3",
+      "nameKo": "천부",
+      "channelCode": "LU",
+      "channelNameKo": "수태음폐경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lu",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LU4",
+      "nameKo": "협백",
+      "channelCode": "LU",
+      "channelNameKo": "수태음폐경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lu",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LU5",
+      "nameKo": "척택",
+      "channelCode": "LU",
+      "channelNameKo": "수태음폐경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lu",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LU6",
+      "nameKo": "공최",
+      "channelCode": "LU",
+      "channelNameKo": "수태음폐경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lu",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LU7",
+      "nameKo": "열결",
+      "channelCode": "LU",
+      "channelNameKo": "수태음폐경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lu",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LU8",
+      "nameKo": "경거",
+      "channelCode": "LU",
+      "channelNameKo": "수태음폐경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lu",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LU9",
+      "nameKo": "태연",
+      "channelCode": "LU",
+      "channelNameKo": "수태음폐경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lu",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LU10",
+      "nameKo": "어제",
+      "channelCode": "LU",
+      "channelNameKo": "수태음폐경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lu",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LU11",
+      "nameKo": "소상",
+      "channelCode": "LU",
+      "channelNameKo": "수태음폐경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lu",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI1",
+      "nameKo": "상양",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI2",
+      "nameKo": "이간",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI3",
+      "nameKo": "삼간",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI4",
+      "nameKo": "합곡",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI5",
+      "nameKo": "양계",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI6",
+      "nameKo": "편력",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI7",
+      "nameKo": "온류",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI8",
+      "nameKo": "하렴",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI9",
+      "nameKo": "상렴",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI10",
+      "nameKo": "수삼리",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI11",
+      "nameKo": "곡지",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI12",
+      "nameKo": "주료",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI13",
+      "nameKo": "수오리",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI14",
+      "nameKo": "비노",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI15",
+      "nameKo": "견우",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI16",
+      "nameKo": "거골",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI17",
+      "nameKo": "천정",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI18",
+      "nameKo": "부돌",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI19",
+      "nameKo": "화료",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LI20",
+      "nameKo": "영향",
+      "channelCode": "LI",
+      "channelNameKo": "수양명대장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-li",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST1",
+      "nameKo": "승읍",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST2",
+      "nameKo": "사백",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST3",
+      "nameKo": "거료",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST4",
+      "nameKo": "지창",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST5",
+      "nameKo": "대영",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST6",
+      "nameKo": "협거",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST7",
+      "nameKo": "하관",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST8",
+      "nameKo": "두유",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST9",
+      "nameKo": "인영",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST10",
+      "nameKo": "수돌",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST11",
+      "nameKo": "기사",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST12",
+      "nameKo": "결분",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST13",
+      "nameKo": "기호",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST14",
+      "nameKo": "고방",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST15",
+      "nameKo": "옥예",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST16",
+      "nameKo": "응창",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST17",
+      "nameKo": "유중",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST18",
+      "nameKo": "유근",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST19",
+      "nameKo": "불용",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST20",
+      "nameKo": "승만",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST21",
+      "nameKo": "양문",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST22",
+      "nameKo": "관문",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST23",
+      "nameKo": "태을",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST24",
+      "nameKo": "활육문",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST25",
+      "nameKo": "천추",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST26",
+      "nameKo": "외릉",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST27",
+      "nameKo": "대거",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST28",
+      "nameKo": "수도",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST29",
+      "nameKo": "귀래",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST30",
+      "nameKo": "기충",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST31",
+      "nameKo": "비관",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST32",
+      "nameKo": "복토",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST33",
+      "nameKo": "음시",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST34",
+      "nameKo": "양구",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST35",
+      "nameKo": "독비",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST36",
+      "nameKo": "족삼리",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST37",
+      "nameKo": "상거허",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST38",
+      "nameKo": "조구",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST39",
+      "nameKo": "하거허",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST40",
+      "nameKo": "풍륭",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST41",
+      "nameKo": "해계",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST42",
+      "nameKo": "충양",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST43",
+      "nameKo": "함곡",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST44",
+      "nameKo": "내정",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "ST45",
+      "nameKo": "여태",
+      "channelCode": "ST",
+      "channelNameKo": "족양명위경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-st",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP1",
+      "nameKo": "은백",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP2",
+      "nameKo": "대도",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP3",
+      "nameKo": "태백",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP4",
+      "nameKo": "공손",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP5",
+      "nameKo": "상구",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP6",
+      "nameKo": "삼음교",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP7",
+      "nameKo": "누곡",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP8",
+      "nameKo": "지기",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP9",
+      "nameKo": "음릉천",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP10",
+      "nameKo": "혈해",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP11",
+      "nameKo": "기문",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP12",
+      "nameKo": "충문",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP13",
+      "nameKo": "부사",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP14",
+      "nameKo": "복결",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP15",
+      "nameKo": "대횡",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP16",
+      "nameKo": "복애",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP17",
+      "nameKo": "식두",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP18",
+      "nameKo": "천계",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP19",
+      "nameKo": "흉향",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP20",
+      "nameKo": "주영",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SP21",
+      "nameKo": "대포",
+      "channelCode": "SP",
+      "channelNameKo": "족태음비경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-sp",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "HT1",
+      "nameKo": "극천",
+      "channelCode": "HT",
+      "channelNameKo": "수소음심경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ht",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "HT2",
+      "nameKo": "청령",
+      "channelCode": "HT",
+      "channelNameKo": "수소음심경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ht",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "HT3",
+      "nameKo": "소해",
+      "channelCode": "HT",
+      "channelNameKo": "수소음심경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ht",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "HT4",
+      "nameKo": "영도",
+      "channelCode": "HT",
+      "channelNameKo": "수소음심경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ht",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "HT5",
+      "nameKo": "통리",
+      "channelCode": "HT",
+      "channelNameKo": "수소음심경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ht",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "HT6",
+      "nameKo": "음극",
+      "channelCode": "HT",
+      "channelNameKo": "수소음심경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ht",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "HT7",
+      "nameKo": "신문",
+      "channelCode": "HT",
+      "channelNameKo": "수소음심경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ht",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "HT8",
+      "nameKo": "소부",
+      "channelCode": "HT",
+      "channelNameKo": "수소음심경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ht",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "HT9",
+      "nameKo": "소충",
+      "channelCode": "HT",
+      "channelNameKo": "수소음심경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ht",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI1",
+      "nameKo": "소택",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI2",
+      "nameKo": "전곡",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI3",
+      "nameKo": "후계",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI4",
+      "nameKo": "완골",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI5",
+      "nameKo": "양곡",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI6",
+      "nameKo": "양로",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI7",
+      "nameKo": "지정",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI8",
+      "nameKo": "소해",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI9",
+      "nameKo": "견정",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI10",
+      "nameKo": "노수",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI11",
+      "nameKo": "천종",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI12",
+      "nameKo": "병풍",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI13",
+      "nameKo": "곡원",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI14",
+      "nameKo": "견외수",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI15",
+      "nameKo": "견중수",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI16",
+      "nameKo": "천창",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI17",
+      "nameKo": "천용",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI18",
+      "nameKo": "관료",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "SI19",
+      "nameKo": "청궁",
+      "channelCode": "SI",
+      "channelNameKo": "수태양소장경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-si",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL1",
+      "nameKo": "정명",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL2",
+      "nameKo": "찬죽",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL3",
+      "nameKo": "미충",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL4",
+      "nameKo": "곡차",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL5",
+      "nameKo": "오처",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL6",
+      "nameKo": "승광",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL7",
+      "nameKo": "통천",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL8",
+      "nameKo": "낙각",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL9",
+      "nameKo": "옥침",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL10",
+      "nameKo": "천주",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL11",
+      "nameKo": "대저",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL12",
+      "nameKo": "풍문",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL13",
+      "nameKo": "폐수",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL14",
+      "nameKo": "궐음수",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL15",
+      "nameKo": "심수",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL16",
+      "nameKo": "독수",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL17",
+      "nameKo": "격수",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL18",
+      "nameKo": "간수",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL19",
+      "nameKo": "담수",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL20",
+      "nameKo": "비수",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL21",
+      "nameKo": "위수",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL22",
+      "nameKo": "삼초수",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL23",
+      "nameKo": "신수",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL24",
+      "nameKo": "기해수",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL25",
+      "nameKo": "대장수",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL26",
+      "nameKo": "관원수",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL27",
+      "nameKo": "소장수",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL28",
+      "nameKo": "방광수",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL29",
+      "nameKo": "중려수",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL30",
+      "nameKo": "백환수",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL31",
+      "nameKo": "상료",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL32",
+      "nameKo": "차료",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL33",
+      "nameKo": "중료",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL34",
+      "nameKo": "하료",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL35",
+      "nameKo": "회양",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL36",
+      "nameKo": "승부",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL37",
+      "nameKo": "은문",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL38",
+      "nameKo": "부극",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL39",
+      "nameKo": "위양",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL40",
+      "nameKo": "위중",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL41",
+      "nameKo": "부분",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL42",
+      "nameKo": "백호",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL43",
+      "nameKo": "고황",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL44",
+      "nameKo": "신당",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL45",
+      "nameKo": "의희",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL46",
+      "nameKo": "격관",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL47",
+      "nameKo": "혼문",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL48",
+      "nameKo": "양강",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL49",
+      "nameKo": "의사",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL50",
+      "nameKo": "위창",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL51",
+      "nameKo": "황문",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL52",
+      "nameKo": "지실",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL53",
+      "nameKo": "포황",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL54",
+      "nameKo": "질변",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL55",
+      "nameKo": "합양",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL56",
+      "nameKo": "승근",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL57",
+      "nameKo": "승산",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL58",
+      "nameKo": "비양",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL59",
+      "nameKo": "부양",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL60",
+      "nameKo": "곤륜",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL61",
+      "nameKo": "복삼",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL62",
+      "nameKo": "신맥",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL63",
+      "nameKo": "금문",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL64",
+      "nameKo": "경골",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL65",
+      "nameKo": "속골",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL66",
+      "nameKo": "족통곡",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "BL67",
+      "nameKo": "지음",
+      "channelCode": "BL",
+      "channelNameKo": "족태양방광경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-bl",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI1",
+      "nameKo": "용천",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI2",
+      "nameKo": "연곡",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI3",
+      "nameKo": "태계",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI4",
+      "nameKo": "대종",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI5",
+      "nameKo": "수천",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI6",
+      "nameKo": "조해",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI7",
+      "nameKo": "부류",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI8",
+      "nameKo": "교신",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI9",
+      "nameKo": "축빈",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI10",
+      "nameKo": "음곡",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI11",
+      "nameKo": "횡골",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI12",
+      "nameKo": "대혁",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI13",
+      "nameKo": "기혈",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI14",
+      "nameKo": "사만",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI15",
+      "nameKo": "중주",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI16",
+      "nameKo": "황수",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI17",
+      "nameKo": "상곡",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI18",
+      "nameKo": "석관",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI19",
+      "nameKo": "음도",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI20",
+      "nameKo": "복통곡",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI21",
+      "nameKo": "유문",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI22",
+      "nameKo": "보랑",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI23",
+      "nameKo": "신봉",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI24",
+      "nameKo": "영허",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI25",
+      "nameKo": "신장",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI26",
+      "nameKo": "욱중",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "KI27",
+      "nameKo": "수부",
+      "channelCode": "KI",
+      "channelNameKo": "족소음신경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-ki",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "PC1",
+      "nameKo": "천지",
+      "channelCode": "PC",
+      "channelNameKo": "수궐음심포경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-pc",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "PC2",
+      "nameKo": "천천",
+      "channelCode": "PC",
+      "channelNameKo": "수궐음심포경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-pc",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "PC3",
+      "nameKo": "곡택",
+      "channelCode": "PC",
+      "channelNameKo": "수궐음심포경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-pc",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "PC4",
+      "nameKo": "극문",
+      "channelCode": "PC",
+      "channelNameKo": "수궐음심포경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-pc",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "PC5",
+      "nameKo": "간사",
+      "channelCode": "PC",
+      "channelNameKo": "수궐음심포경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-pc",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "PC6",
+      "nameKo": "내관",
+      "channelCode": "PC",
+      "channelNameKo": "수궐음심포경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-pc",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "PC7",
+      "nameKo": "대릉",
+      "channelCode": "PC",
+      "channelNameKo": "수궐음심포경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-pc",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "PC8",
+      "nameKo": "노궁",
+      "channelCode": "PC",
+      "channelNameKo": "수궐음심포경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-pc",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "PC9",
+      "nameKo": "중충",
+      "channelCode": "PC",
+      "channelNameKo": "수궐음심포경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-pc",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE1",
+      "nameKo": "관충",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE2",
+      "nameKo": "액문",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE3",
+      "nameKo": "중저",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE4",
+      "nameKo": "양지",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE5",
+      "nameKo": "외관",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE6",
+      "nameKo": "지구",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE7",
+      "nameKo": "회종",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE8",
+      "nameKo": "삼양락",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE9",
+      "nameKo": "사독",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE10",
+      "nameKo": "천정",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE11",
+      "nameKo": "청랭연",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE12",
+      "nameKo": "소락",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE13",
+      "nameKo": "노회",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE14",
+      "nameKo": "견료",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE15",
+      "nameKo": "천료",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE16",
+      "nameKo": "천유",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE17",
+      "nameKo": "예풍",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE18",
+      "nameKo": "계맥",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE19",
+      "nameKo": "노식",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE20",
+      "nameKo": "각손",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE21",
+      "nameKo": "이문",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE22",
+      "nameKo": "화료",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "TE23",
+      "nameKo": "사죽공",
+      "channelCode": "TE",
+      "channelNameKo": "수소양삼초경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-te",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB1",
+      "nameKo": "동자료",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB2",
+      "nameKo": "청회",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB3",
+      "nameKo": "상관",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB4",
+      "nameKo": "함염",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB5",
+      "nameKo": "현로",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB6",
+      "nameKo": "현리",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB7",
+      "nameKo": "곡빈",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB8",
+      "nameKo": "솔곡",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB9",
+      "nameKo": "천충",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB10",
+      "nameKo": "부백",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB11",
+      "nameKo": "두규음",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB12",
+      "nameKo": "완골",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB13",
+      "nameKo": "본신",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB14",
+      "nameKo": "양백",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB15",
+      "nameKo": "두임읍",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB16",
+      "nameKo": "목창",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB17",
+      "nameKo": "정영",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB18",
+      "nameKo": "승령",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB19",
+      "nameKo": "뇌공",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB20",
+      "nameKo": "풍지",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB21",
+      "nameKo": "견정",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB22",
+      "nameKo": "연액",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB23",
+      "nameKo": "첩근",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB24",
+      "nameKo": "일월",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB25",
+      "nameKo": "경문",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB26",
+      "nameKo": "대맥",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB27",
+      "nameKo": "오추",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB28",
+      "nameKo": "유도",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB29",
+      "nameKo": "거료",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB30",
+      "nameKo": "환도",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB31",
+      "nameKo": "풍시",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB32",
+      "nameKo": "중독",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB33",
+      "nameKo": "슬양관",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB34",
+      "nameKo": "양릉천",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB35",
+      "nameKo": "양교",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB36",
+      "nameKo": "외구",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB37",
+      "nameKo": "광명",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB38",
+      "nameKo": "양보",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB39",
+      "nameKo": "현종",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB40",
+      "nameKo": "구허",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB41",
+      "nameKo": "족임읍",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB42",
+      "nameKo": "지오회",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB43",
+      "nameKo": "협계",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GB44",
+      "nameKo": "족규음",
+      "channelCode": "GB",
+      "channelNameKo": "족소양담경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-gb",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LR1",
+      "nameKo": "대돈",
+      "channelCode": "LR",
+      "channelNameKo": "족궐음간경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lr",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LR2",
+      "nameKo": "행간",
+      "channelCode": "LR",
+      "channelNameKo": "족궐음간경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lr",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LR3",
+      "nameKo": "태충",
+      "channelCode": "LR",
+      "channelNameKo": "족궐음간경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lr",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LR4",
+      "nameKo": "중봉",
+      "channelCode": "LR",
+      "channelNameKo": "족궐음간경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lr",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LR5",
+      "nameKo": "여구",
+      "channelCode": "LR",
+      "channelNameKo": "족궐음간경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lr",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LR6",
+      "nameKo": "중도",
+      "channelCode": "LR",
+      "channelNameKo": "족궐음간경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lr",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LR7",
+      "nameKo": "슬관",
+      "channelCode": "LR",
+      "channelNameKo": "족궐음간경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lr",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LR8",
+      "nameKo": "곡천",
+      "channelCode": "LR",
+      "channelNameKo": "족궐음간경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lr",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LR9",
+      "nameKo": "음포",
+      "channelCode": "LR",
+      "channelNameKo": "족궐음간경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lr",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LR10",
+      "nameKo": "족오리",
+      "channelCode": "LR",
+      "channelNameKo": "족궐음간경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lr",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LR11",
+      "nameKo": "음렴",
+      "channelCode": "LR",
+      "channelNameKo": "족궐음간경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lr",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LR12",
+      "nameKo": "급맥",
+      "channelCode": "LR",
+      "channelNameKo": "족궐음간경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lr",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LR13",
+      "nameKo": "장문",
+      "channelCode": "LR",
+      "channelNameKo": "족궐음간경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lr",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "LR14",
+      "nameKo": "기문",
+      "channelCode": "LR",
+      "channelNameKo": "족궐음간경",
+      "lateralityRule": "bilateral",
+      "plannedSides": [
+        "right",
+        "left"
+      ],
+      "nameSourceId": "kmcric-lr",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV1",
+      "nameKo": "회음",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV2",
+      "nameKo": "곡골",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV3",
+      "nameKo": "중극",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV4",
+      "nameKo": "관원",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV5",
+      "nameKo": "석문",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV6",
+      "nameKo": "기해",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV7",
+      "nameKo": "음교",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV8",
+      "nameKo": "신궐",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV9",
+      "nameKo": "수분",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV10",
+      "nameKo": "하완",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV11",
+      "nameKo": "건리",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV12",
+      "nameKo": "중완",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV13",
+      "nameKo": "상완",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV14",
+      "nameKo": "거궐",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV15",
+      "nameKo": "구미",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV16",
+      "nameKo": "중정",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV17",
+      "nameKo": "단중",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV18",
+      "nameKo": "옥당",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV19",
+      "nameKo": "자궁",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV20",
+      "nameKo": "화개",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV21",
+      "nameKo": "선기",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV22",
+      "nameKo": "천돌",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV23",
+      "nameKo": "염천",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "CV24",
+      "nameKo": "승장",
+      "channelCode": "CV",
+      "channelNameKo": "임맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-cv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV1",
+      "nameKo": "장강",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV2",
+      "nameKo": "요수",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV3",
+      "nameKo": "요양관",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV4",
+      "nameKo": "명문",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV5",
+      "nameKo": "현추",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV6",
+      "nameKo": "척중",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV7",
+      "nameKo": "중추",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV8",
+      "nameKo": "근축",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV9",
+      "nameKo": "지양",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV10",
+      "nameKo": "영대",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV11",
+      "nameKo": "신도",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV12",
+      "nameKo": "신주",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV13",
+      "nameKo": "도도",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV14",
+      "nameKo": "대추",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV15",
+      "nameKo": "아문",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV16",
+      "nameKo": "풍부",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV17",
+      "nameKo": "뇌호",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV18",
+      "nameKo": "강간",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV19",
+      "nameKo": "후정",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV20",
+      "nameKo": "백회",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV21",
+      "nameKo": "전정",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV22",
+      "nameKo": "신회",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV23",
+      "nameKo": "상성",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV24",
+      "nameKo": "신정",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV25",
+      "nameKo": "소료",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV26",
+      "nameKo": "수구",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV27",
+      "nameKo": "태단",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    },
+    {
+      "code": "GV28",
+      "nameKo": "은교",
+      "channelCode": "GV",
+      "channelNameKo": "독맥",
+      "lateralityRule": "midline",
+      "plannedSides": [
+        "midline"
+      ],
+      "nameSourceId": "kmcric-gv",
+      "anchorState": "not_created_by_AT1",
+      "locationApproval": "not_decided_by_AT1"
+    }
+  ],
+  "lateralitySummary": {
+    "bilateralConcepts": 309,
+    "rightPlannedInstances": 309,
+    "leftPlannedInstances": 309,
+    "midlineConcepts": 52,
+    "midlinePlannedInstances": 52,
+    "plannedInstanceCount": 670,
+    "actualAnchoredInstanceCountCreatedByAT1": 0
+  },
+  "legacyProposalMigration": {
+    "sourceFeatureRecords": [
+      "AC1",
+      "AC2"
+    ],
+    "proposalCount": 22,
+    "acceptedCount": 0,
+    "entries": [
+      {
+        "migrationId": "LU1-right",
+        "ledgerCode": "LU1",
+        "nameKo": "중부",
+        "channelCode": "LU",
+        "side": "right",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/right-learning.json",
+        "carrierId": "za-right-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "82991216229e5332bdd53c5e092341373a8b9b7ad8482ebfe99fe4194487a69a",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": true,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU2-right",
+        "ledgerCode": "LU2",
+        "nameKo": "운문",
+        "channelCode": "LU",
+        "side": "right",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/right-learning.json",
+        "carrierId": "za-right-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "82991216229e5332bdd53c5e092341373a8b9b7ad8482ebfe99fe4194487a69a",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU3-right",
+        "ledgerCode": "LU3",
+        "nameKo": "천부",
+        "channelCode": "LU",
+        "side": "right",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/right-learning.json",
+        "carrierId": "za-right-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "82991216229e5332bdd53c5e092341373a8b9b7ad8482ebfe99fe4194487a69a",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU4-right",
+        "ledgerCode": "LU4",
+        "nameKo": "협백",
+        "channelCode": "LU",
+        "side": "right",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/right-learning.json",
+        "carrierId": "za-right-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "82991216229e5332bdd53c5e092341373a8b9b7ad8482ebfe99fe4194487a69a",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU5-right",
+        "ledgerCode": "LU5",
+        "nameKo": "척택",
+        "channelCode": "LU",
+        "side": "right",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/right-learning.json",
+        "carrierId": "za-right-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "82991216229e5332bdd53c5e092341373a8b9b7ad8482ebfe99fe4194487a69a",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU6-right",
+        "ledgerCode": "LU6",
+        "nameKo": "공최",
+        "channelCode": "LU",
+        "side": "right",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/right-learning.json",
+        "carrierId": "za-right-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "82991216229e5332bdd53c5e092341373a8b9b7ad8482ebfe99fe4194487a69a",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU7-right",
+        "ledgerCode": "LU7",
+        "nameKo": "열결",
+        "channelCode": "LU",
+        "side": "right",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/right-learning.json",
+        "carrierId": "za-right-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "82991216229e5332bdd53c5e092341373a8b9b7ad8482ebfe99fe4194487a69a",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU8-right",
+        "ledgerCode": "LU8",
+        "nameKo": "경거",
+        "channelCode": "LU",
+        "side": "right",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/right-learning.json",
+        "carrierId": "za-right-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "82991216229e5332bdd53c5e092341373a8b9b7ad8482ebfe99fe4194487a69a",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU9-right",
+        "ledgerCode": "LU9",
+        "nameKo": "태연",
+        "channelCode": "LU",
+        "side": "right",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/right-learning.json",
+        "carrierId": "za-right-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "82991216229e5332bdd53c5e092341373a8b9b7ad8482ebfe99fe4194487a69a",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": true,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU10-right",
+        "ledgerCode": "LU10",
+        "nameKo": "어제",
+        "channelCode": "LU",
+        "side": "right",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/right-learning.json",
+        "carrierId": "za-right-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "82991216229e5332bdd53c5e092341373a8b9b7ad8482ebfe99fe4194487a69a",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU11-right",
+        "ledgerCode": "LU11",
+        "nameKo": "소상",
+        "channelCode": "LU",
+        "side": "right",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/right-learning.json",
+        "carrierId": "za-right-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "82991216229e5332bdd53c5e092341373a8b9b7ad8482ebfe99fe4194487a69a",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": true,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU1-left",
+        "ledgerCode": "LU1",
+        "nameKo": "중부",
+        "channelCode": "LU",
+        "side": "left",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/left-learning.json",
+        "carrierId": "za-left-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "23c60b5d92a4b4370d40150496470ddffcf7b4e4a132bb1fccf3969188f9a42c",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU2-left",
+        "ledgerCode": "LU2",
+        "nameKo": "운문",
+        "channelCode": "LU",
+        "side": "left",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/left-learning.json",
+        "carrierId": "za-left-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "23c60b5d92a4b4370d40150496470ddffcf7b4e4a132bb1fccf3969188f9a42c",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU3-left",
+        "ledgerCode": "LU3",
+        "nameKo": "천부",
+        "channelCode": "LU",
+        "side": "left",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/left-learning.json",
+        "carrierId": "za-left-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "23c60b5d92a4b4370d40150496470ddffcf7b4e4a132bb1fccf3969188f9a42c",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU4-left",
+        "ledgerCode": "LU4",
+        "nameKo": "협백",
+        "channelCode": "LU",
+        "side": "left",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/left-learning.json",
+        "carrierId": "za-left-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "23c60b5d92a4b4370d40150496470ddffcf7b4e4a132bb1fccf3969188f9a42c",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU5-left",
+        "ledgerCode": "LU5",
+        "nameKo": "척택",
+        "channelCode": "LU",
+        "side": "left",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/left-learning.json",
+        "carrierId": "za-left-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "23c60b5d92a4b4370d40150496470ddffcf7b4e4a132bb1fccf3969188f9a42c",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU6-left",
+        "ledgerCode": "LU6",
+        "nameKo": "공최",
+        "channelCode": "LU",
+        "side": "left",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/left-learning.json",
+        "carrierId": "za-left-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "23c60b5d92a4b4370d40150496470ddffcf7b4e4a132bb1fccf3969188f9a42c",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU7-left",
+        "ledgerCode": "LU7",
+        "nameKo": "열결",
+        "channelCode": "LU",
+        "side": "left",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/left-learning.json",
+        "carrierId": "za-left-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "23c60b5d92a4b4370d40150496470ddffcf7b4e4a132bb1fccf3969188f9a42c",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU8-left",
+        "ledgerCode": "LU8",
+        "nameKo": "경거",
+        "channelCode": "LU",
+        "side": "left",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/left-learning.json",
+        "carrierId": "za-left-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "23c60b5d92a4b4370d40150496470ddffcf7b4e4a132bb1fccf3969188f9a42c",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU9-left",
+        "ledgerCode": "LU9",
+        "nameKo": "태연",
+        "channelCode": "LU",
+        "side": "left",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/left-learning.json",
+        "carrierId": "za-left-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "23c60b5d92a4b4370d40150496470ddffcf7b4e4a132bb1fccf3969188f9a42c",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU10-left",
+        "ledgerCode": "LU10",
+        "nameKo": "어제",
+        "channelCode": "LU",
+        "side": "left",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/left-learning.json",
+        "carrierId": "za-left-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "23c60b5d92a4b4370d40150496470ddffcf7b4e4a132bb1fccf3969188f9a42c",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      },
+      {
+        "migrationId": "LU11-left",
+        "ledgerCode": "LU11",
+        "nameKo": "소상",
+        "channelCode": "LU",
+        "side": "left",
+        "legacyConceptRevision": "AC2-text-r1",
+        "legacyInstanceRevision": "AC2-proposal-r1",
+        "legacyConceptFile": "work/evidence/acupoint-AC2/point-concepts.json",
+        "legacyLearningFile": "work/evidence/acupoint-AC2/left-learning.json",
+        "carrierId": "za-left-lung-teaching-patches",
+        "carrierRevision": "AC2-r1",
+        "carrierHash": "23c60b5d92a4b4370d40150496470ddffcf7b4e4a132bb1fccf3969188f9a42c",
+        "locationValidation": "unresolved",
+        "aiProposal": true,
+        "professorReview": "not_performed",
+        "acceptedProductPoint": false,
+        "coordinatesCopiedIntoAT1Catalog": false,
+        "ac1RightSidePredecessor": false,
+        "migrationAction": "retain_as_unresolved_proposal_reference"
+      }
+    ]
+  },
+  "placementState": {
+    "ac1Ac2ProposalInstances": 22,
+    "acceptedProductInstances": 0,
+    "unresolvedProposalInstances": 22,
+    "humanReview": "not_performed"
+  }
+}

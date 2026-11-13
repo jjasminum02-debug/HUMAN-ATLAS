@@ -1,4 +1,4 @@
-import type { BodyView } from '../wholeBody/contract.ts';
+import type { BodyView, LayerId } from '../wholeBody/contract.ts';
 import type { RuntimeStructureRecord } from './integration.ts';
 import { attachmentBoneKeys, inRegionalScene, regionalAttachmentBoneKeys } from './regionalContext.ts';
 /** Exact selected muscle/side and existing same-source bones only; no footprint or new binding. */
@@ -31,8 +31,16 @@ export function nerveCourseKeys(rows: RuntimeStructureRecord[], view: BodyView):
   }
   return [...visited];
 }
+/** The learner layer a row belongs to (for per-layer opacity); null for rows outside the layer panel. */
+export function layerIdOf(row: RuntimeStructureRecord): LayerId | null {
+  return row.kind === 'muscle' || row.kind === 'tendon' ? row.depth === 'superficial' ? 'superficialMuscle' : 'deepMuscle'
+    : row.kind === 'bone' ? 'bone' : row.kind === 'fascia' ? 'fascia' : row.kind === 'joint' ? 'joint' : row.kind === 'nerve' ? 'nerve' : row.kind === 'vessel' ? 'vessel' : null;
+}
 export function layerAvailable(row: RuntimeStructureRecord, view: BodyView) {
-  return row.kind === 'bone' ? view.bones : row.kind === 'muscle' ? view.muscles
+  if (row.kind === 'muscle' || row.kind === 'tendon')
+    return view.muscles && (row.depth === 'superficial' ? view.superficialMuscles !== false : view.deepMuscles !== false);
+  return row.kind === 'bone' ? view.bones : row.kind === 'fascia' ? Boolean(view.fascia) : row.kind === 'joint' ? Boolean(view.joints)
+    : row.kind === 'vessel' ? Boolean(view.vessels)
     : row.kind === 'nerve' && Boolean(view.nerves) && row.nerve?.poseId === view.poseId;
 }
 /** Selection, highlights and restore never override a user layer-off or hidden structure. */

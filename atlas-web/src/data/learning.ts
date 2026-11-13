@@ -1,6 +1,5 @@
 import learnerCardRuntime from "../../../atlas-data/terminology/learner-card-runtime.json";
-import { displayTerms, termText, type PilotCatalog } from "./catalog";
-import { learnerNameProjection, learnerSearchEntry, learnerVisibleTerms, mergeLearningConcepts, searchEntries, type SearchEntry } from "../domain/search";
+import { learnerSearchEntry, searchEntries} from "../domain/search";
 import learnerNerveGraph from "../../../atlas-data/terminology/learner-nerve-graph-t66.json";
 import nerveDisplayNames from "../../../atlas-data/terminology/learner-nerve-display-names.json";
 import { withNerveDisplayNames } from "../domain/nerveDisplayNames.ts";
@@ -18,7 +17,6 @@ type LearnerCardRuntime = {
     bySource: Record<string, Partial<Record<"origin" | "insertion", string>>>;
   };
   nerveLearning: Record<string, { courseContext: string; compressionContext: string; functionContext: string }>;
-  actions: Array<{ conceptId: string; key: string; label: string; explanation: string; sideApplicability: "left" | "right" | null }>;
 };
 
 const cardRuntime = learnerCardRuntime as LearnerCardRuntime;
@@ -48,39 +46,13 @@ type LearnerNerveGraph = {
 const nativeNerveGraph = learnerNerveGraph as LearnerNerveGraph;
 const nerveGraph: LearnerNerveGraph = { ...nativeNerveGraph,
   concepts: withNerveDisplayNames(nativeNerveGraph.concepts, nerveDisplayNames) };
-const lookups = createLearnerLookupIndex(cardRuntime.names, cardRuntime.actions, nerveGraph.concepts, nerveGraph.motorRelations);
+const lookups = createLearnerLookupIndex(cardRuntime.names, [], nerveGraph.concepts, nerveGraph.motorRelations);
 const nerveSearchEntries = nerveGraph.concepts.map(concept => learnerSearchEntry(
-  concept.key, concept.names.koModern,
-  [concept.names.koTraditional, concept.names.en, concept.names.latin, ...concept.searchTerms],
+  concept.key, concept.names.koTraditional || concept.names.koModern,
+  [concept.names.koModern, concept.names.en, concept.names.latin, ...concept.searchTerms],
 ));
 export const vocabulary = cardRuntime.names;
 
-export function nameFor(catalog: PilotCatalog, id: string) {
-  const entry = lookups.namesById.get(id);
-  const terms = learnerVisibleTerms(displayTerms(catalog, id));
-  return learnerNameProjection(id, entry ?? {}, {
-    korean: terms.find((term) => term.language === "ko")?.text,
-    english: termText(catalog, id, "en"),
-    latin: termText(catalog, id, "la"),
-  });
-}
-
-export function learningConcepts(catalog: PilotCatalog) {
-  return mergeLearningConcepts(catalog.concepts, vocabulary);
-}
-
-export function findMuscles(catalog: PilotCatalog, query: string) {
-  const entries: SearchEntry[] = learningConcepts(catalog).map((concept) => {
-    const names = nameFor(catalog, concept.id);
-    const custom = lookups.namesById.get(concept.id);
-    const terms = learnerVisibleTerms(displayTerms(catalog, concept.id));
-    return learnerSearchEntry(concept.id, names.label, [names.koTraditional, names.koModern, names.en, ...custom?.aliases ?? [],
-      ...terms.flatMap((term) => typeof term.text === "string" ? [term.text] : [])]);
-  });
-  return searchEntries(entries, query);
-}
-
-/** Learner-safe field projection; provenance and review detail stay in development evidence. */
 export function structureFieldForLearner(conceptId: string, field: string): LearnerFieldProjection | null {
   if (field !== "origin" && field !== "insertion") return null;
   const text = cardRuntime.structure.byConcept[conceptId]?.[field];

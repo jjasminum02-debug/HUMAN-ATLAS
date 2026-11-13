@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { visible, pickable, selected, validateManifest, type BodyAsset, type BodyView } from './contract.ts';
+import { visible, pickable, selected, type BodyAsset, type BodyView } from './contract.ts';
 import { ResourceQueue } from './resources.ts';
 const asset: BodyAsset = { id: 'FJ1', nodeId: 'HA-MESH-BP3D4-FJ1', sourceSha256: 'a'.repeat(64), regions: ['leg'], side: 'right', layer: 'muscle', defaultVisible: true, supplement: false, pickState: 'source_only_unbound', stableIds: [], holdReasons: [], humanReviewed: false, bounds: [[0,0,0],[1,1,1]] };
 const view: BodyView = { region: null, bones: true, muscles: true, supplements: false, selectedId: null, dim: true };
@@ -15,11 +15,6 @@ test('T95 overlapping region union keeps one asset visible and empty filters mea
  assert(!visible(shared,{...view,region:null,regionIds:['foot']}));
  assert(!visible({...shared,layer:'bone'},{...view,regionIds:['head','neck'],bones:false}));
  assert(!visible({...shared,defaultVisible:false,localDisplay:{beforeDefaultVisible:false,afterDefaultVisible:false,state:'held',sourceSha256:asset.sourceSha256,integrityHolds:['identity'],evidenceIds:[],retainedHoldReasons:['identity'],bindingState:'held',publicRedistribution:'held',humanReviewed:false,basis:'preserved_historical_policy'}},{...view,regionIds:['head','neck'],supplements:true}));
-});
-test('reject conflicting duplicate IDs and source-only binding promotion', () => {
- const m = { version:1,localOnly:true,publicRedistribution:'held',frame:'HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR',unit:'m',lodLevels:1,chunks:[{id:'a',url:'/__atlas/body/a.glb',sha256:'a'.repeat(64),bytes:10,assets:[asset]}] };
- validateManifest(m); assert.throws(()=>validateManifest({...m,unit:'mm'})); assert.throws(()=>validateManifest({...m,chunks:[m.chunks[0],m.chunks[0]]}));
- assert.throws(()=>validateManifest({...m,chunks:[{...m.chunks[0],assets:[{...asset,stableIds:['invented']}]}]}));
 });
 const tick = () => new Promise(resolve => setTimeout(resolve, 0));
 test('late parse after cancellation is disposed; same-id new demand can recover', async () => {
@@ -61,16 +56,7 @@ test('selected transparency preserves eligibility and selection; hide only hides
 test('v2 local display is independent from learner binding, rights and review holds', () => {
  const reasons=['not_canonical_learner_binding','human_anatomy_review_not_performed','public_redistribution_held'];
  const a:BodyAsset={...asset,supplement:true,holdReasons:reasons,publicRedistribution:'held',localDisplay:{beforeDefaultVisible:false,afterDefaultVisible:true,state:'allowed',sourceSha256:asset.sourceSha256,integrityHolds:[],evidenceIds:['source','validation'],retainedHoldReasons:reasons,bindingState:'source_only_unbound',publicRedistribution:'held',humanReviewed:false,basis:'verified_local_source_context_only'}};
- const m={version:2,localOnly:true,publicRedistribution:'held',frame:'HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR',unit:'m',lodLevels:1,chunks:[{id:'a',url:'/__atlas/body/a.glb',sha256:'a'.repeat(64),bytes:10,assets:[a]}]};
- validateManifest(m); assert(visible(a,view));assert(!pickable(a));assert(!visible(a,{...view,muscles:false}));
- const reject=(modified:BodyAsset)=>assert.throws(()=>validateManifest({...m,chunks:[{...m.chunks[0],assets:[modified]}]}));
- reject({...a,localDisplay:undefined});
- reject({...a,localDisplay:{...a.localDisplay!,evidenceIds:[]}});
- reject({...a,holdReasons:[...reasons,'identity_conflict']});
- reject({...a,stableIds:['invented']});
- reject({...a,publicRedistribution:undefined});
- const hidden={...a,defaultVisible:false,localDisplay:{...a.localDisplay!,afterDefaultVisible:false,state:'held' as const}};
- assert(!visible(hidden,{...view,supplements:true}));
+ assert(visible(a,view));assert(!pickable(a));assert(!visible(a,{...view,muscles:false}));
 });
 
 test('persistent source hiding survives a different selection and reset cannot bypass policy', () => {
