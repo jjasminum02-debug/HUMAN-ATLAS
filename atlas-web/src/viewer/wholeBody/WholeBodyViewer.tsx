@@ -14,7 +14,9 @@ import { SectionPanel } from './SectionPanel';
 import { AcupointPanel } from './AcupointPanel';
 import type { Section } from '../section';
 
-const AcupointReview = lazy(() => import('../acupoints/AcupointEntry.tsx'));
+// The old acupoint review screens (skin carriers, territories; redistribution held) exist only in development builds:
+// with no import in production, their code and data are not emitted into dist.
+const AcupointReview = import.meta.env.DEV ? lazy(() => import('../acupoints/AcupointEntry.tsx')) : null;
 const SkinControls = lazy(() => import('../skin/SkinControls.tsx'));
 const acupointDevelopmentReview = import.meta.env.DEV && new URLSearchParams(window.location.search).get('acupointReview') === '1';
 const surfaceSample = import.meta.env.DEV && new URLSearchParams(window.location.search).get('carrierSample') === '1';
