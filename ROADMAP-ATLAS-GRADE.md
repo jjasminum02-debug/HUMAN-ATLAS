@@ -457,7 +457,12 @@ Phase 0–4와 Q1이 끝난 뒤 남은 항목을 학습자 가치 ÷ 위험 순�
 - `NOTICE.md`: 출처와 조건(Z-Anatomy 수정 형상·파생 데이터 CC BY-SA 4.0, BodyParts3D CC BY-SA 2.1 JP, MakeHuman 재질 CC0, OpenSim 모델은 확인용·미포함, 내용 대조 출처). 코드는 라이선스 미정(모든 권리 보유).
 - 히스토리: 공개된 `origin/main`(2026-10-09)은 건드리지 않고, 그 뒤 아직 올리지 않은 커밋에서만 100MB를 넘는 `work/evidence/MV1` 파일 3개(각 132MB)를 뺐다(`git filter-branch`, 최종 파일은 동일). 되돌릴 수 있도록 로컬 `backup/atlas-grade-reset-before-filter`를 남겼다.
 - 푸시: `atlas-grade-reset`을 GitHub에 새 브랜치로 올렸다(`main`은 그대로). 64MB `atlas-data/motion/motion-learning.json`은 GitHub 50MB 경고만 받았다.
-- 남은 것: 코드 라이선스 결정, `main`에 합칠지 결정(GitHub에서 PR), 로컬 `main` 브랜치는 정리 전 커밋을 가리켜 그대로 올리면 거부된다. 빌드에 옛 경혈 개발 화면 자료(`publicRedistribution: held`)가 들어 있어 실제 배포 전에 개발용 화면을 빌드에서 빼야 한다. 실기기 성능 측정.
+- 남은 것: 코드 라이선스 결정, `main`에 합칠지 결정(GitHub에서 PR), 로컬 `main` 브랜치는 정리 전 커밋을 가리켜 그대로 올리면 거부된다. 실기기 성능 측정.
+- 빌드 정리 (2026-11-13): 옛 경혈 검토 화면(피부 운반체·영역 편집, `publicRedistribution: held`)을 개발 빌드에서만 만들도록 바꿔 배포 빌드에서 코드와 자료가 빠졌다(`dist/assets` 343 → 12개 파일, 첫 화면 JS는 그대로 1.4MB).
+  `scripts/checkLazyFeatures.mjs`(`pnpm check`)가 그 파일이 다시 들어오거나 묶음 파일에 held 표시 자료가 섞이면 실패한다.
+- 실기기 측정 준비 (2026-11-15): `pnpm build && pnpm preview:lan` → 같은 Wi-Fi의 기기에서 `https://<이 맥의 IP>:4173/?perf=1`(자체 서명 인증서, `atlas-web/.cert` git 제외).
+  `?perf=1`일 때만 측정 패널이 붙는다(`src/perf/devicePerf.ts`, 별도 chunk): 첫 화면·전송량, 기본 층과 모든 층으로 4초 회전(fps·프레임 p50/p95·draw·삼각형), 결과 복사. 이 맥에서 LAN 주소로 확인: 보안 컨텍스트, 7.1MB, 기본 층 60fps(draw 742), 모든 층 60fps(draw 2,296). 실제 iPad·저가 노트북 숫자는 아직 없다.
+  남은 표시: `src/data/atlasV2.ts`가 옛 형식 호환을 위해 모든 구조 기록에 `publicRedistribution: held` 같은 관리 표시를 붙인다(Z-Anatomy 자료 자체, 제3자 자료 아님). 런타임에는 학습 필드만 둔다는 원칙에 맞게 나중에 sidecar로 옮기거나 지운다.
 
 ## 5. 결정이 필요한 사항
 

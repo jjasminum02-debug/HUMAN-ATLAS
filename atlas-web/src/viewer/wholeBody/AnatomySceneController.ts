@@ -101,7 +101,9 @@ export class AnatomySceneController {
     canvas.addEventListener('keydown', this.onKey);
     this.focus(null, false);
     this.renderer.setAnimationLoop(this.frame);
-    if (import.meta.env?.DEV || import.meta.env?.MODE === 'qa') (window as unknown as { __atlasScene?: AnatomySceneController }).__atlasScene = this; // dev inspection only
+    // Dev and QA inspection, and the on-device performance check (?perf=1).
+    if (import.meta.env?.DEV || import.meta.env?.MODE === 'qa' || new URLSearchParams(window.location.search).get('perf') === '1')
+      (window as unknown as { __atlasScene?: AnatomySceneController }).__atlasScene = this;
   }
 
   requestRender() { this.dirty = true; }
