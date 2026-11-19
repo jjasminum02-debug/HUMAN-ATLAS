@@ -612,3 +612,18 @@
 }
 /* 4-3 U2: the 구용어 title reads first. */
 .atlas-shell .study-details > .mobile-detail-summary { font-size: 18px; font-weight: 650; color: #23443b; }
+
+/* 4-3 U3: folding sections in study order; a closed one is a single bar with its summary. */
+.atlas-shell .study-sections { display: grid; gap: 6px; }
+.atlas-shell .study-section { border: 1px solid #e1e8e5; border-radius: 10px; background: #fff; }
+.atlas-shell .study-section.is-open { border-color: #c5d6cf; }
+.atlas-shell .study-section-head { margin: 0; }
+.atlas-shell .study-section-head button { width: 100%; display: grid; grid-template-columns: auto minmax(0, 1fr) 14px; align-items: center; gap: 8px; min-height: 44px; padding: 8px 10px; border: 0; background: none; text-align: left; cursor: pointer; border-radius: 10px; }
+.atlas-shell .study-section-head button::after { content: ''; width: 7px; height: 7px; border-right: 1.6px solid #6b7a75; border-bottom: 1.6px solid #6b7a75; transform: rotate(45deg) translateY(-2px); justify-self: center; }
+.atlas-shell .study-section-head button[aria-expanded=true]::after { transform: rotate(-135deg) translateY(-1px); }
+.atlas-shell .study-section-head button:hover { background: #f5f8f7; }
+.atlas-shell .section-title { font-size: 14px; font-weight: 650; color: #23443b; }
+.atlas-shell .section-summary { font-size: 12px; font-weight: 400; color: #6b7a75; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.atlas-shell .study-section-head button[aria-expanded=true] .section-summary { visibility: hidden; }
+.atlas-shell .study-section > .study-tab-panel { padding: 0 10px 10px; }
+@media (pointer: coarse) { .atlas-shell .study-section-head button { min-height: 50px; } }

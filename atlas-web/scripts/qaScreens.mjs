@@ -87,7 +87,9 @@ const cardFacts = page => page.evaluate(() => {
   const openPanel = [...card.querySelectorAll('.study-tab-panel')].find(p => !p.hidden)?.id ?? 'card';
   const panels = new Set(Object.values(facts).map(f => f.panel));
   panels.delete(openPanel); panels.delete('card'); // facts on the card itself need no tab
-  const firstSection = card.querySelector('.study-tab-panel:not([hidden]) section, .study-tab-panel:not([hidden]) h3');
+  const firstSection = card.querySelector('.study-section, .study-tab-panel:not([hidden]) section, .study-tab-panel:not([hidden]) h3');
+  // U3: section bars visible without scrolling (title + summary readable at a glance).
+  const bars = [...card.querySelectorAll('.study-section-head button')].filter(b => { const t = b.getBoundingClientRect().top; return t >= box.top && t < bottom - 20; }).length;
   return {
     cardWidth: Math.round(box.width),
     factsWithoutScroll: Object.values(facts).filter(f => f.visibleWithoutScroll).length,
@@ -95,18 +97,19 @@ const cardFacts = page => page.evaluate(() => {
     contentStartsAt: firstSection ? Math.round(firstSection.getBoundingClientRect().top - box.top) : null,
     notices: card.querySelectorAll('.quiet-note').length,
     buttons: card.querySelectorAll('button').length,
+    sectionBarsWithoutScroll: bars, sections: card.querySelectorAll('.study-section').length,
   };
 });
 /** Notices across every tab of the card (each tab's panel renders when opened), then back to the first tab. */
 async function noticesAllTabs(page) {
-  const tabs = page.locator('#study-details [role=tab]'), n = await tabs.count();
+  const tabs = page.locator('#study-details .study-section-head button'), n = await tabs.count(); // U3: sections replace tabs
   if (!n) return page.evaluate(() => document.querySelectorAll('#study-details .quiet-note').length);
   const seen = new Set();
   for (let i = 0; i < n; i++) {
-    await tabs.nth(i).click(); await page.waitForTimeout(400);
+    if (await tabs.nth(i).getAttribute('aria-expanded') !== 'true') await tabs.nth(i).click(); await page.waitForTimeout(400);
     for (const t of await page.evaluate(() => [...document.querySelectorAll('#study-details .quiet-note')].filter(e => e.offsetParent).map(e => e.textContent.trim()))) seen.add(t);
   }
-  await tabs.first().click(); await page.waitForTimeout(200);
+  const opened = page.locator('#study-details .study-section-head button[aria-expanded=true]'); if (await opened.count()) { await opened.first().click(); await page.waitForTimeout(200); }
   return seen.size;
 }
 const toolbarButtons = page => page.evaluate(() => [...document.querySelectorAll('.body-tools button')].filter(b => b.offsetParent).length);
@@ -145,7 +148,7 @@ await server?.close();
 writeFileSync(join(out, 'screens.json'), JSON.stringify(report, null, 1) + '\n');
 for (const [id, r] of Object.entries(report.sizes)) {
   console.log(`${r.label} (${id}): 첫 화면 모형 ${r.home.modelVisiblePct}% · 도구 버튼 ${r.home.toolbarButtons}개`);
-  for (const [name, m] of Object.entries(r.muscles)) console.log(`  ${name} 카드: 모형 ${m.modelVisiblePct}% · 폭 ${m.cardWidth}px · 핵심 4개 중 스크롤 없이 ${m.factsWithoutScroll}개 · 탭 전환 ${m.tabSwitchesForFacts}번 · 본문 시작 ${m.contentStartsAt}px · 안내문(탭 전부) ${m.notices}개 · 카드 버튼 ${m.buttons}개 · 도구 버튼 ${m.toolbarButtons}개`);
+  for (const [name, m] of Object.entries(r.muscles)) console.log(`  ${name} 카드: 모형 ${m.modelVisiblePct}% · 폭 ${m.cardWidth}px · 핵심 4개 중 스크롤 없이 ${m.factsWithoutScroll}개 · 탭 전환 ${m.tabSwitchesForFacts}번 · 본문 시작 ${m.contentStartsAt}px · 칸 ${m.sections}개 중 스크롤 없이 ${m.sectionBarsWithoutScroll}개 · 안내문(탭 전부) ${m.notices}개 · 카드 버튼 ${m.buttons}개 · 도구 버튼 ${m.toolbarButtons}개`);
   console.log(`  경혈 창(폐경): 모형 ${r.acupoint.modelVisiblePct}% · 창 버튼 ${r.acupoint.panelButtons}개 · 동시에 열린 창 ${r.acupoint.openPanels}개`);
 }
 console.log(`\n캡처: ${out}`);

@@ -65,6 +65,12 @@ async function search(page, text, label) {
   await settle(page);
 }
 const card = page => page.locator('#study-details').innerText();
+/** 4-3 U3: open a muscle-card section by its title (sections replace the tabs; one is open at a time). */
+async function openSection(page, title) {
+  const button = page.locator('.study-section-head button', { hasText: title }).first();
+  await button.waitFor({ timeout: 10000 });
+  if (await button.getAttribute('aria-expanded') !== 'true') await button.click();
+}
 const pressed = (page, scope, name) => page.locator(`${scope} button`, { hasText: name }).first().getAttribute('aria-pressed');
 function expect(condition, message) { if (!condition) throw new Error(message); }
 
@@ -109,6 +115,10 @@ const flows = [
   ['검색으로 근육 찾기: 넙다리곧은근 이름·기시·정지', async page => {
     await open(page);
     await search(page, '넙다리곧은근', '대퇴직근'); // modern name finds the Sino-Korean title
+    // 4-3 U3: the card opens with every section closed; their bars and summaries show in study order.
+    const bars = await page.locator('.study-section-head button').evaluateAll(b => b.map(x => `${x.querySelector('.section-title').textContent}:${x.getAttribute('aria-expanded')}`));
+    expect(bars.join() === '구조:false,기능:false,한의학적 접근:false', `칸: ${bars.join()}`);
+    await openSection(page, '구조');
     const text = await card(page);
     expect(text.includes('Rectus femoris') && text.includes('기시') && text.includes('정지'), '카드에 영어명·기시·정지 없음');
     const key = new URL(page.url()).searchParams.get('source');
@@ -126,9 +136,7 @@ const flows = [
     const facts = await page.locator('.key-facts [data-fact]').evaluateAll(rows => rows.map(r => r.dataset.fact + ':' + r.querySelector('dd').textContent));
     expect(facts.length === 4 && /attach:.*→/.test(facts[0]) && /nerve:대퇴신경/.test(facts[1]) && /action:/.test(facts[2]) && /meridian:.*족양명경근/.test(facts[3]), `핵심 네 줄: ${facts.join(' | ')}`);
     await page.locator('.key-facts [data-fact=meridian]').click();
-    expect(await page.getByRole('tab', { name: '경락' }).getAttribute('aria-selected') === 'true', '경락 줄을 눌러도 경락 탭이 열리지 않음');
-    await page.getByRole('tab', { name: '구조' }).click();
-    await page.getByRole('tab', { name: '경락' }).click();
+    expect(await page.locator('#tab-경락').getAttribute('aria-expanded') === 'true' && await page.locator('#tab-구조').getAttribute('aria-expanded') === 'false', '경락 줄을 눌러도 한의학적 접근 칸이 열리지 않음');
     await page.locator('#study-meridian-panel h3', { hasText: '지나가는 경근' }).waitFor({ timeout: 10000 });
     const meridian = await page.locator('#study-meridian-panel').innerText();
     expect(/족양명경근/.test(meridian) && /바로 위의 경혈/.test(meridian), `경락 탭: ${meridian.replace(/\s+/g, ' ').slice(0, 200)}`);
@@ -151,7 +159,7 @@ const flows = [
     const opened = await page.locator('.acupoint-detail h4').innerText({ timeout: 10000 });
     expect(opened.startsWith(pointName), `경혈 창에서 ${pointName} 열림: ${opened}`);
     await page.getByRole('button', { name: '경혈 닫기' }).click();
-    await page.getByRole('tab', { name: '구조' }).click();
+    await openSection(page, '구조');
     // C2: blood supply from the two-source muscle card table.
     const supply = await page.locator('.attachment-section', { hasText: '혈액공급' }).innerText({ timeout: 10000 });
     expect(supply.includes('가쪽넙다리휘돌이동맥'), `혈액공급: ${supply.replace(/\s+/g, ' ').slice(0, 200)}`);
@@ -194,7 +202,7 @@ const flows = [
   ['회전근개 작용 보기: 극하근 가쪽돌림 재생과 색', async page => {
     await open(page);
     await search(page, '극하근', '극하근');
-    await page.getByRole('tab', { name: '기능' }).click();
+    await openSection(page, '기능');
     const summary = await page.locator('.muscle-action-summary').innerText({ timeout: 10000 });
     expect(summary.includes('가쪽으로 돌'), `작용 요약: ${summary.replace(/\s+/g, ' ')}`);
     const play = page.locator('.rig-actions button', { hasText: '가쪽돌림' }).first();
@@ -286,6 +294,7 @@ const flows = [
   ['기시·정지 관찰: 넙다리곧은근 기시 뼈', async page => {
     await open(page);
     await search(page, '넙다리곧은근', '대퇴직근'); // modern name finds the Sino-Korean title
+    await openSection(page, '구조');
     const button = page.locator('.attachment-origin .attachment-observe');
     expect((await button.innerText()).startsWith('기시 면 관찰'), `버튼: ${await button.innerText()}`);
     const distance = () => page.evaluate(() => window.__atlasScene.camera.position.distanceTo(window.__atlasScene.controls.target));
@@ -324,7 +333,7 @@ const flows = [
     const movers = await knee.innerText();
     expect(/대퇴이두근|반건양근/.test(movers), `넙다리 무릎 굽힘 근육: ${movers.replace(/\s+/g, ' ').slice(0, 160)}`);
     await knee.locator('button').first().click();
-    await page.locator('.rig-actions').waitFor({ timeout: 10000 }).catch(async () => { throw new Error(`기능 탭 재생 없음: tab=${await page.locator('[role=tab][aria-selected=true]').allInnerTexts()} selected=${new URL(page.url()).searchParams.get('source')} rig=${await page.locator('.rig-actions').count()} title=${await page.locator('.study-detail-header h2').innerText().catch(() => '-')}`); });
+    await page.locator('.rig-actions').waitFor({ timeout: 10000 }).catch(async () => { throw new Error(`기능 탭 재생 없음: open=${await page.locator('.study-section-head button[aria-expanded=true]').allInnerTexts()} selected=${new URL(page.url()).searchParams.get('source')} rig=${await page.locator('.rig-actions').count()} title=${await page.locator('.study-detail-header h2').innerText().catch(() => '-')}`); });
     // A bone opens the joints that move it (back to the structure list first).
     await page.evaluate(() => [...document.querySelectorAll('.explorer-mode button')].find(b => b.textContent === '구조 찾기')?.click());
     await search(page, '경골', '경골');
@@ -439,8 +448,10 @@ const flows = [
   ['검사 이름: 견갑하근 기능 탭, 내측 반월, 좌골신경', async page => {
     await open(page);
     await search(page, '어깨밑근', '견갑하근');
-    await page.getByRole('tab', { name: '기능' }).click();
-    const muscle = await page.locator('#study-function-panel .clinical-tests').innerText({ timeout: 10000 });
+    // 4-3 U3: test names sit in the 평가 section; its bar summary names them.
+    expect(/벨리프레스 · 리프트오프/.test(await page.locator('#tab-평가').innerText()), '평가 칸 요약에 검사 이름 없음');
+    await openSection(page, '평가');
+    const muscle = await page.locator('#study-evaluation-panel .clinical-tests').innerText({ timeout: 10000 });
     expect(/벨리프레스/.test(muscle) && /리프트오프/.test(muscle), `견갑하근 검사: ${muscle.replace(/\s+/g, ' ').slice(0, 120)}`);
     await search(page, '안쪽반달', '내측반월');
     const meniscus = await page.locator('#study-details .clinical-tests').innerText({ timeout: 10000 });
@@ -454,8 +465,8 @@ const flows = [
     const nerve = await page.locator('#study-details .clinical-tests').innerText({ timeout: 10000 });
     expect(/SLR/.test(nerve) && /이 신경을 보는 검사/.test(nerve), `좌골신경 검사: ${nerve.replace(/\s+/g, ' ').slice(0, 120)}`);
     await search(page, '넙다리곧은근', '대퇴직근');
-    await page.getByRole('tab', { name: '기능' }).click();
-    expect(await page.locator('#study-function-panel .clinical-tests').count() === 0, '보류한 토마스→대퇴직근이 보임');
+    expect(await page.locator('#study-evaluation-panel').count() === 0, '보류한 토마스→대퇴직근이 보임(평가 칸)');
+    await openSection(page, '기능');
     // 4-2 step 10: the 기능 tab says which posture pattern names the muscle (rectus femoris: lower crossed, short side).
     const posture = await page.locator('#study-function-panel .posture-membership').innerText({ timeout: 10000 });
     expect(/하부 교차 증후군/.test(posture) && /긴장·짧아지는 쪽/.test(posture), `체형 패턴 줄: ${posture.replace(/\s+/g, ' ').slice(0, 120)}`);

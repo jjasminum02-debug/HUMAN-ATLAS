@@ -1,5 +1,5 @@
 // 4-3 U2: four lines under a muscle card's title, always in view: where it attaches, its nerve, what it does, which sinew lies on it.
-// Each line opens the tab that holds the detail. Values come from the same checked data as the tabs (no new content).
+// Each line opens the section that holds the detail. Values come from the same checked data as the tabs (no new content).
 import { useEffect, useState } from 'react';
 import type { RuntimeStructureRecord } from '../viewer/datasets/integration';
 import type { AcupointFile, SinewFile } from '../viewer/acupointLayer';
@@ -46,7 +46,7 @@ export function MuscleKeyFacts({ muscle, attach, onOpen }: {
   const lines = keyFactLines(muscle, cards, attach, meridian);
   if (!lines.length) return null;
   return <dl className="key-facts" aria-label="핵심">
-    {lines.map(l => <div key={l.fact} data-fact={l.fact} role="button" tabIndex={0} title={`${l.tab} 탭에서 자세히`}
+    {lines.map(l => <div key={l.fact} data-fact={l.fact} role="button" tabIndex={0} title={`${l.tab === '경락' ? '한의학적 접근' : l.tab} 칸에서 자세히`}
       onClick={() => onOpen(l.tab)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(l.tab); } }}>
       <dt>{l.label}</dt><dd>{l.value}</dd></div>)}
   </dl>;

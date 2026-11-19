@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { WholeBodyViewer } from '../viewer/wholeBody/WholeBodyViewer';
 import { validateDataset, type Dataset } from '../viewer/datasets/schema';
 import { validateRuntimeIntegration, searchStructures, readDatasetRoute, datasetRouteQuery, type RuntimeIntegration, type DatasetRoute, type RuntimeStructureRecord } from '../viewer/datasets/integration';
@@ -12,10 +12,12 @@ import { MuscleRigActions } from './MuscleRigActions';
 import { AreaChips, UnlabelledAttachmentAreas, useAttachmentAreas } from './AttachmentAreas';
 import { MuscleActionSummary, MuscleBloodSupply, MuscleNerves, VesselCard } from './MuscleCardFacts';
 import { BookmarkButton, StudyTools } from './StudyTools';
-import { ClinicalTests } from './ClinicalTests';
+import { ClinicalTests, useClinicalTests } from './ClinicalTests';
+import { testsFor } from '../data/clinicalTests';
+import { patternsFor } from '../data/posturePatterns';
 import { CardLimits } from './CardLimits';
 import { MuscleKeyFacts } from './MuscleKeyFacts';
-import { MusclePosture } from './PosturePatterns';
+import { MusclePosture, usePosturePatterns } from './PosturePatterns';
 import { MeridianLinks } from './MeridianLinks';
 import { isRigHost, jointsForBone, movementLabel, movementLibrary, type MuscleActionsFile } from '../viewer/movement';
 import type { RigFile } from '../viewer/rig';
@@ -30,10 +32,21 @@ function routeAudienceFor(search: string): 'learner' | 'inspection' {
 function resolveRoute(search: string, rows: RuntimeStructureRecord[]): DatasetRoute {
     return readDatasetRoute(search, rows, regionIds, routeAudienceFor(search));
 }
-// Muscle card tabs: anatomy, movement, and the channel picture (경혈·경근) for Korean-medicine students.
-type DetailTab = '구조' | '기능' | '경락';
-const DETAIL_TABS: DetailTab[] = ['구조', '기능', '경락'];
-const TAB_PANELS: Record<DetailTab, string> = { 구조: 'study-structure-panel', 기능: 'study-function-panel', 경락: 'study-meridian-panel' };
+// 4-3 U3: the muscle card reads in study order as folding sections (one open at a time):
+// structure → function → evaluation (test names) → Korean-medicine approach (sinew region, channel, points).
+type DetailTab = '구조' | '기능' | '평가' | '경락';
+const SECTION_TITLES: Record<DetailTab, string> = { 구조: '구조', 기능: '기능', 평가: '평가', 경락: '한의학적 접근' };
+const TAB_PANELS: Record<DetailTab, string> = { 구조: 'study-structure-panel', 기능: 'study-function-panel', 평가: 'study-evaluation-panel', 경락: 'study-meridian-panel' };
+/** One folding section: a bar with the title and a one-line summary, then the body. */
+function StudySection({ id, open, summary, onToggle, children, className = '' }: {
+    id: DetailTab; open: boolean; summary: string; onToggle: (id: DetailTab) => void; children: ReactNode; className?: string;
+}) {
+    return <section className={`study-section${open ? ' is-open' : ''}`}>
+        <h3 className="study-section-head"><button id={`tab-${id}`} aria-expanded={open} aria-controls={TAB_PANELS[id]} onClick={() => onToggle(id)}>
+            <span className="section-title">{SECTION_TITLES[id]}</span><span className="section-summary">{summary}</span></button></h3>
+        <div id={TAB_PANELS[id]} className={`study-tab-panel ${className}`} role="region" aria-labelledby={`tab-${id}`} hidden={!open}>{children}</div>
+    </section>;
+}
 /** Names shown under the card title; nerves use their own term table. */
 function cardNames(row: RuntimeStructureRecord): { koTraditional?: string | null; koModern?: string | null; en?: string | null } {
     const nerveNames = row.kind === 'nerve' ? nerveNamesForSource(row.names.en) : null;
@@ -67,7 +80,7 @@ export default function App() {
     const [regionMenuOpen, setRegionMenuOpen] = useState(false);
     const [detailsOpen, setDetailsOpen] = useState(true);
     const [attachmentFocus, setAttachmentFocus] = useState<{ key: string; role: 'origin' | 'insertion' } | null>(null);
-    const [tab, setTab] = useState<DetailTab>('구조');
+    const [tab, setTab] = useState<DetailTab | null>(null);
     const [explorerMode, setExplorerMode] = useState<'structures' | 'actions'>('structures');
     const [toolsOpen, setToolsOpen] = useState(false);
     const [motionHost, setMotionHost] = useState<DatasetSceneAdapter | null>(null);
@@ -180,12 +193,16 @@ export default function App() {
         const key = `${detailSubject}:${tab}`;
         content.scrollTop = detailScrollPositions.current.get(key) ?? 0;
     }, [detailSubject, tab]);
-    const switchDetailTab = (next: DetailTab) => {
+    const switchDetailTab = (next: DetailTab | null) => {
         if (detailSubject && detailContent.current) {
             detailScrollPositions.current.set(`${detailSubject}:${tab}`, detailContent.current.scrollTop);
         }
         setTab(next);
     };
+    /** A section bar toggles its section; a key line opens one and brings it into view. */
+    const toggleSection = (id: DetailTab) => switchDetailTab(tab === id ? null : id);
+    const openSection = (id: DetailTab) => { switchDetailTab(id); requestAnimationFrame(() => document.getElementById(`tab-${id}`)?.scrollIntoView({ block: 'nearest' })); };
+    const clinicalTests = useClinicalTests(), posturePatterns = usePosturePatterns();
     const selectedNerveConcept = selected?.kind === 'nerve' ? nerveConceptForSourceName(selected.names.en) : null;
     const relatedMuscles = useMemo(() => {
         const result = new Map((selected?.relatedMuscles ?? []).map(row => [row.sourceKey, { ...row, roles: [...row.roles] }]));
@@ -223,7 +240,7 @@ export default function App() {
         setRoute(nextRoute);
         if (!keepExplore) setRegionMenuOpen(false);
         setDetailsOpen(true);
-        setTab('구조');
+        setTab(null);
         if (!keepExplore)
             setExploreOpen(false);
     }
@@ -279,7 +296,7 @@ export default function App() {
         setRoute(nextRoute);
         setTextNerveKey(key);
         setDetailsOpen(true);
-        setTab('구조');
+        setTab(null);
         setExploreOpen(false);
     }
     function openNerveConcept(key: string, preferredSide?: string | null) {
@@ -419,19 +436,10 @@ export default function App() {
         <button className="card-close" aria-label="선택 해제" title="선택 해제" onClick={() => navigate({ regions: [], selected: null })}>×</button>
       </div>
     </div>
-    {selected?.kind === 'muscle' && <MuscleKeyFacts muscle={selected} onOpen={switchDetailTab} attach={{
+    {selected?.kind === 'muscle' && <MuscleKeyFacts muscle={selected} onOpen={openSection} attach={{
       origin: attachmentBoneKeys(selected.sourceKey, 'origin', data.integration.objects).map(key => runtimeByKey.get(key)?.label).filter((l): l is string => Boolean(l)),
       insertion: attachmentBoneKeys(selected.sourceKey, 'insertion', data.integration.objects).map(key => runtimeByKey.get(key)?.label).filter((l): l is string => Boolean(l)),
       text: { origin: structureTextForSource(selected.sourceKey, 'origin') || undefined, insertion: structureTextForSource(selected.sourceKey, 'insertion') || undefined } }}/>}
-    {selected?.kind === 'muscle' && <>
-    <div className="study-tabs" role="tablist" aria-label="학습 내용">{DETAIL_TABS.map(t => <button key={t} role="tab" id={`tab-${t}`} aria-controls={TAB_PANELS[t]} aria-selected={tab === t} tabIndex={tab === t ? 0 : -1} onClick={() => switchDetailTab(t)} onKeyDown={e => { if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) {
-                e.preventDefault();
-                const i = DETAIL_TABS.indexOf(tab), n = DETAIL_TABS.length;
-                const next = e.key === 'Home' ? DETAIL_TABS[0] : e.key === 'End' ? DETAIL_TABS[n - 1] : DETAIL_TABS[(i + (e.key === 'ArrowLeft' ? n - 1 : 1)) % n];
-                switchDetailTab(next);
-                document.getElementById(`tab-${next}`)?.focus();
-            } }}>{t}</button>)}</div>
-    </>}
     </div><div ref={detailContent} className="study-detail-content" onScroll={e => { if (detailSubject) detailScrollPositions.current.set(`${detailSubject}:${tab}`, e.currentTarget.scrollTop); }}>
     {selected?.names.en === 'Rotatores' && route.regions.length > 0 && !route.regions.includes('back') && <p className="quiet-note">선택한 돌림근 모형은 목에만 한정되지 않고 척추를 따라 이어지는 전체 묶음입니다.</p>}
     {!selected && selectedTextNerve && <section className="attachment-section nerve-card text-nerve-card" aria-label="신경 개념 설명">
@@ -467,8 +475,8 @@ export default function App() {
       <ClinicalTests row={selected}/>
       {nerveLearning && <details key={selected.sourceKey} className="nerve-learning-context"><summary>주행·포착 맥락</summary>{shouldDisplayNerveFunctionContext(nerveLearning.functionContext, selectedNerveConcept?.functionEvidenceClass) && <section><h4>기능 연결</h4><p>{nerveLearning.functionContext}</p></section>}<section><h4>포착 가능 구간과 주변 조직</h4><p>{nerveLearning.compressionContext}</p></section>{"variationContext" in nerveLearning && <section><h4>변이와 자세 범위</h4><p>{String(nerveLearning.variationContext)}</p></section>}</details>}
     </section> : selected?.kind === 'muscle' ? <>
-    <div className="study-tab-panels">
-    <section id="study-structure-panel" className="study-tab-panel" role="tabpanel" aria-labelledby="tab-구조" hidden={tab !== '구조'}>
+    <div className="study-tab-panels study-sections">
+    <StudySection id="구조" open={tab === '구조'} onToggle={toggleSection} summary="기시·정지 · 신경 · 혈관">
       {(['origin', 'insertion'] as const).map(role => {
         const text = structureTextForSource(selected.sourceKey, role) || (selected.haConceptId && structureTextForLearner(selected.haConceptId, role));
         const bones = attachmentBoneKeys(selected.sourceKey, role, data.integration.objects).map(key => runtimeByKey.get(key)!).filter(Boolean);
@@ -496,20 +504,24 @@ export default function App() {
         </details>}
       </section>
       <MuscleBloodSupply muscle={selected} rows={runtimeByKey} onSelect={select}/>
-    </section>
-    <section id="study-function-panel" className="study-tab-panel function-tab-panel" role="tabpanel" aria-labelledby="tab-기능" hidden={tab !== '기능'}>
+    </StudySection>
+    <StudySection id="기능" open={tab === '기능'} onToggle={toggleSection} className="function-tab-panel"
+      summary={['작용', '관절에서 움직여 보기', ...patternsFor(posturePatterns, selected.names.en).map(h => h.pattern.name)].join(' · ')}>
       <MuscleActionSummary muscle={selected}/>
       {isRigHost(motionHost) && <MuscleRigActions host={motionHost} sourceKey={selected.sourceKey} visible={key => runtimeByKey.get(key)?.localDisplayEligible ?? false}/>}
-      <ClinicalTests row={selected}/>
       <MusclePosture muscle={selected}/>
-    </section>
-    <section id="study-meridian-panel" className="study-tab-panel" role="tabpanel" aria-labelledby="tab-경락" hidden={tab !== '경락'}>
+    </StudySection>
+    {testsFor(clinicalTests, selected.names.en).length > 0 && <StudySection id="평가" open={tab === '평가'} onToggle={toggleSection}
+      summary={testsFor(clinicalTests, selected.names.en).map(t => t.name.replace(/ 검사$/, '').replace(/ \(.*\)$/, '')).join(' · ')}>
+      <ClinicalTests row={selected}/>
+    </StudySection>}
+    <StudySection id="경락" open={tab === '경락'} onToggle={toggleSection} summary="경근 영역 → 경맥 → 경혈">
       {tab === '경락' && <MeridianLinks muscle={selected} host={motionHost} onOpen={motionHost ? target => {
         // On a tablet the card and the acupoint panel would cover the model between them: fold the card to its title bar.
         if (window.matchMedia('(max-width: 1100px)').matches) setDetailsOpen(false);
         motionHost.openAcupoint(target);
       } : undefined}/>}
-    </section>
+    </StudySection>
     </div>
     <CardLimits kind="muscle"/>
     </> : selected?.kind === 'bone' ? <>{cardRig && jointsForBone(cardRig.rig, selected.sourceKey).length > 0 && isRigHost(motionHost) && <section className="attachment-section bone-joints">
