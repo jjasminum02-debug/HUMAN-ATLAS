@@ -697,6 +697,15 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
         e.stopImmediatePropagation();
         this.focus(this.view.regionIds ?? (this.view.region ? [this.view.region] : []));
     } };
+    /** 4-3 U7: turn to a fixed side of the body (distance and height kept). */
+    viewFrom(direction: 'front' | 'back' | 'left' | 'right') { if (this.scene.canObserveDirections) this.scene.observeDirection(direction); }
+    /** 4-3 U7: move in on a surface point and orbit around it (double tap / double click). */
+    diveTo(point: THREE.Vector3) {
+        const camera = this.scene.camera, offset = camera.position.clone().sub(this.scene.controls.target);
+        const distance = THREE.MathUtils.clamp(offset.length() * .5, .22, 3);
+        this.scene.moveCamera({ target: point.toArray(), position: point.clone().addScaledVector(offset.normalize(), distance).toArray(), zoom: camera.zoom });
+    }
+    private lastTap: { t: number; x: number; y: number; point: THREE.Vector3 | null } | null = null;
     private onDown = (e: PointerEvent) => { this.down = { x: e.clientX, y: e.clientY }; };
     private onUp = (e: PointerEvent) => {
         if (e.button !== 0 || Math.hypot(e.clientX - this.down.x, e.clientY - this.down.y) > 5)
@@ -719,6 +728,12 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
         const observe = nodes.some(n => n.userData.nerveObservationContext);
         const plane = this.sectionState?.plane ?? null;
         const hit = pickSurface(this.scene.camera, nodes, { x: e.clientX, y: e.clientY }, rect, observe, point => keptBySection(plane, point));
+        // A second tap on the same spot within 320 ms moves in on it instead of selecting again. The first tap's surface
+        // point is kept: selecting opens the card, the canvas narrows and the body shifts under the finger.
+        // Input time, not handling time: the first tap's selection can keep the page busy for a moment.
+        const now = e.timeStamp, tap = this.lastTap;
+        this.lastTap = { t: now, x: e.clientX, y: e.clientY, point: hit?.point.clone() ?? null };
+        if (tap && now - tap.t < 320 && Math.hypot(e.clientX - tap.x, e.clientY - tap.y) < 24 && (tap.point || hit)) { this.lastTap = null; this.diveTo((tap.point ?? hit!.point).clone()); return; }
         if (!hit)
             return;
         const row = this.records.get(String(hit.object.userData.sourceKey ?? hit.object.name));

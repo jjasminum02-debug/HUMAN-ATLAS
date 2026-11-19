@@ -516,6 +516,27 @@ const flows = [
     await page.setViewportSize({ width: 1440, height: 900 });
     return '가로: 경혈 창 → 카드 접힘, 카드 펴기 → 경혈 창 닫힘 · 세로: 경혈 창이 아래 시트, 도구 막대는 그 위';
   }],
+  // 4-3 U7: fixed sides of the body in one press, and a double tap moves in on the tapped spot.
+  ['시점: 앞·뒤·왼·오, 두 번 눌러 다가가기', async page => {
+    await open(page);
+    const cam = () => page.evaluate(() => { const s = window.__atlasScene; return { p: s.camera.position.toArray(), t: s.controls.target.toArray() }; });
+    const wait = () => page.waitForTimeout(900);
+    expect(await page.locator('.view-pad button').count() === 4, '시점 버튼 4개가 아님');
+    await page.getByRole('button', { name: '뒤에서 보기' }).click(); await wait();
+    const back = await cam();
+    await page.getByRole('button', { name: '몸의 왼쪽에서 보기' }).click(); await wait();
+    const left = await cam();
+    await page.getByRole('button', { name: '앞에서 보기' }).click(); await wait();
+    const front = await cam();
+    expect(back.p[2] - back.t[2] < -.3 && left.p[0] - left.t[0] > .3 && front.p[2] - front.t[2] > .3, `시점: 뒤 z${(back.p[2] - back.t[2]).toFixed(2)} · 왼 x${(left.p[0] - left.t[0]).toFixed(2)} · 앞 z${(front.p[2] - front.t[2]).toFixed(2)}`);
+    const box = await page.locator('canvas').first().boundingBox();
+    const at = await page.evaluate(() => { const s = window.__atlasScene, r = s.renderer.domElement.getBoundingClientRect(), v = s.controls.target.clone().add({ x: 0, y: .25, z: 0 }).project(s.camera); return [(v.x + 1) / 2 * r.width, (1 - v.y) / 2 * r.height]; });
+    const before = Math.hypot(...front.p.map((v, i) => v - front.t[i]));
+    await page.mouse.dblclick(box.x + at[0], box.y + at[1]); await wait(); await page.waitForTimeout(400);
+    const dived = await cam(), after = Math.hypot(...dived.p.map((v, i) => v - dived.t[i]));
+    expect(after < before * .7 && Math.abs(dived.t[1] - front.t[1]) > .1, `두 번 눌러 다가가기: 거리 ${before.toFixed(2)} → ${after.toFixed(2)}, 중심 높이 ${front.t[1].toFixed(2)} → ${dived.t[1].toFixed(2)}`);
+    return `뒤·왼·앞 시점, 두 번 눌러 거리 ${before.toFixed(2)} → ${after.toFixed(2)}m, 누른 자리가 회전 중심`;
+  }],
 ];
 
 // ── performance ─────────────────────────────────────────────────────────────

@@ -207,6 +207,11 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
       : entered && controller.current instanceof DatasetSceneAdapter && (acupointPanelOpen
         ? <AcupointPanel host={controller.current} rows={rowsByKey} request={acupointRequest} onSelectStructure={(key, side) => select.current(key, side)} onClose={() => setAcupointPanelOpen(false)}/>
         : <aside className="acupoint-entry"><button onClick={() => setAcupointPanelOpen(true)}>경혈·경근</button></aside>)}
+    {/* 4-3 U7: fixed sides of the body, one press each; a double tap on the model moves in on that spot. */}
+    {entered && controller.current instanceof DatasetSceneAdapter && <div className="view-pad" role="group" aria-label="보는 방향">
+      {([['front', '앞', '앞에서 보기'], ['back', '뒤', '뒤에서 보기'], ['left', '왼쪽', '몸의 왼쪽에서 보기'], ['right', '오른쪽', '몸의 오른쪽에서 보기']] as const).map(([id, label, title]) =>
+        <button key={id} title={title} aria-label={title} onClick={() => (controller.current as DatasetSceneAdapter).viewFrom(id)}>{label}</button>)}
+    </div>}
     {!entered && <AtlasLoading failed={error || Boolean(progress?.failed)} loaded={progress?.loaded} total={progress?.total} onRetry={() => error ? setRevision(r => r + 1) : controller.current?.retry()}/> }
     <div inert={!entered} ref={tools} className="body-tools" aria-label="모형 보기 설정">
       <span className="view-options-label">보기 옵션</span>
