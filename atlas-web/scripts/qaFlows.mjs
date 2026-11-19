@@ -399,7 +399,17 @@ const flows = [
     await muscle.click(); await page.waitForTimeout(1500);
     const card = await page.locator('.study-detail-header h2').innerText().catch(() => '(없음)');
     expect(card.includes(name.split(' ')[0]), `경근 근육 → 카드: ${name} → ${card}`);
-    return `경맥 14개 → 척택 설명·취혈 기준(표지)·아래 구조(요골신경)·주변 구조 → 태연 표지가 팔꿉 90°를 따라감 → 요골신경 카드 → 독맥 백회(정중선, ${shown.length}혈만 표시) → 족태양경근(구슬 ${k0.beads}개, 곤륜 매듭이 무릎 굽힘을 따라감, 영역 근육 ${region.muscles}개·結 ${region.bindings}곳, 태양 손발 함께) → ${name} 카드`;
+    // 2026-11-19: teaching landmarks; side bending shortens the 12th rib–iliac crest distance on the bending side.
+    await page.locator('.acupoint-mode button', { hasText: '기준점' }).click();
+    await page.locator('.measure-table').waitFor({ timeout: 10000 });
+    const marks = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.userData.landmark) n++; }); return n; });
+    const rest = await page.locator('.measure-table').innerText();
+    await page.evaluate(async () => { const rig = await window.__atlasRig.load(); window.__atlasRig.set(rig, { 'back:bending': 20 }); });
+    await page.waitForTimeout(500);
+    const bent = await page.locator('.measure-table tr', { hasText: '12번 갈비 끝' }).innerText();
+    expect(marks === 30 && /같음/.test(rest) && /왼쪽 \d+mm/.test(bent), `기준점 ${marks}개, 서 있을 때 ${rest.replace(/\s+/g, ' ').slice(0, 80)}, 왼쪽 옆굽힘 ${bent.replace(/\s+/g, ' ')}`);
+    await page.evaluate(async () => { const rig = await window.__atlasRig.load(); window.__atlasRig.set(rig, {}); });
+    return `경맥 14개 → 척택 설명·취혈 기준(표지)·아래 구조(요골신경)·주변 구조 → 태연 표지가 팔꿉 90°를 따라감 → 요골신경 카드 → 독맥 백회(정중선, ${shown.length}혈만 표시) → 족태양경근(구슬 ${k0.beads}개, 곤륜 매듭이 무릎 굽힘을 따라감, 영역 근육 ${region.muscles}개·結 ${region.bindings}곳, 태양 손발 함께) → ${name} 카드 → 기준점 30개, 허리 왼쪽 옆굽힘에 12번 갈비–장골능 왼쪽이 짧아짐`;
   }],
 ];
 

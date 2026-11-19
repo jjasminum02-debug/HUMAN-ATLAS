@@ -35,3 +35,14 @@ test('중부 lies on pectoralis major, not on a deep muscle across the empty axi
   assert.match(structures.get(file.points.find(p => p.code === 'LU1')!.surfaceOf!) ?? '', /pectoralis major/);
   assert.match(structures.get(file.points.find(p => p.code === 'GB30')!.surfaceOf!) ?? '', /Gluteus maximus/);
 });
+
+test('teaching landmarks sit where palpation finds them, and every measure has both ends on both sides', () => {
+  const at = (id: string, side = 'right') => file.landmarks!.find(m => m.id === id && (m.side === side || m.side === 'midline'))!.position;
+  assert.equal(new Set(file.landmarks!.map(m => m.id)).size, 17);
+  assert.ok(at('psis')[2] < at('asis')[2] - .1 && Math.abs(at('psis')[0]) < Math.abs(at('asis')[0]), 'PSIS behind and medial to ASIS');
+  assert.ok(at('rib12')[1] > at('iliacCrest')[1] && at('iliacCrest')[1] > at('asis')[1], '12th rib above the crest, crest above ASIS');
+  assert.ok(at('coracoid')[2] > at('greaterTubercle')[2] && Math.abs(at('scj')[0]) < .03, 'coracoid in front of the greater tubercle; SC joint beside the midline');
+  assert.ok(at('eop')[1] > at('suboccipital')[1], 'suboccipital below the external occipital protuberance');
+  for (const m of file.landmarks!) if (m.side === 'right') { const l = at(m.id, 'left'); assert.ok(Math.abs(l[0] + m.position[0]) < .002 && Math.abs(l[1] - m.position[1]) < .002, `${m.id} mirrors`); }
+  for (const measure of file.measures!) for (const side of ['right', 'left']) assert.ok(at(measure.from, side) && at(measure.to, side), `${measure.id} ${side}`);
+});

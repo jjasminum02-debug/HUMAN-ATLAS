@@ -7,7 +7,16 @@ export interface AcupointInstance { code: string; side: 'left' | 'right' | 'midl
   /** Vessels and nerves under the point: within 1 cm of the line straight inward, to 6 cm, nearest first (depth in mm, model). */
   beneath?: { key: string; depth: number }[] }
 export interface AcupointChannel { nameKo: string; nameHanja: string; en: string; codes: string[]; midline?: boolean; breaks?: string[] }
-export interface AcupointFile { schemaVersion: number; channels: Record<string, AcupointChannel>; concepts: AcupointConcept[]; points: AcupointInstance[] }
+/** Bony reference points palpated in the diagnosis practicum (on the bone; navel and snuffbox at their points). */
+export interface Landmark { id: string; nameKo: string; side: 'left' | 'right' | 'midline'; position: [number, number, number]; segment: string; bone: string | null }
+/** A two-point distance compared left and right to find the short side; a midline end is shared by both sides. */
+export interface LandmarkMeasure { id: string; nameKo: string; from: string; to: string; reads: string }
+export interface AcupointFile { schemaVersion: number; channels: Record<string, AcupointChannel>; concepts: AcupointConcept[]; points: AcupointInstance[];
+  landmarks?: Landmark[]; measures?: LandmarkMeasure[] }
+export const landmarkId = (m: { id: string; side: string }) => `${m.id}:${m.side}`;
+/** The landmark at one end of a measure on a side (midline ends are shared). */
+export const measureEnd = (file: AcupointFile, id: string, side: 'left' | 'right') =>
+  file.landmarks?.find(m => m.id === id && (m.side === side || m.side === 'midline'));
 export const acupointId = (p: { code: string; side: string }) => `${p.code}:${p.side}`;
 
 /**
@@ -43,6 +52,12 @@ export interface AcupointHost {
   showSinew(file: SinewFile | null, sinew: string | string[] | null): void;
   /** Colour the muscles of a sinew's region (null clears). */
   setSinewRegion(keys: string[] | null): void;
+  /** Teaching landmarks and the measuring lines (null hides); selecting one enlarges it. */
+  showLandmarks(file: AcupointFile | null): void;
+  selectLandmark(id: string | null): void;
+  /** Current (posed) left and right length of each measure, in metres. */
+  measureLengths(): Record<string, { right: number; left: number }>;
+  onRigPoseChange?(listener: (pose: unknown) => void): () => void;
 }
 export const isAcupointHost = (host: unknown): host is AcupointHost => typeof (host as AcupointHost | null)?.showAcupoints === 'function';
 

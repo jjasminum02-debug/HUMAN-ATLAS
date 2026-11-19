@@ -789,7 +789,7 @@ def main():
             if key in self.L: return self.g(key)
             raise KeyError(key)
 
-    points, failures, anchor_at = [], {}, {}
+    points, failures, anchor_at, marks = [], {}, {}, []
     midline = {k for k, v in CHANNELS.items() if v.get('midline')}
     for side in ('right', 'left'):
         L, g, fns = side_ns(side)
@@ -844,6 +844,22 @@ def main():
                            'position': [round(float(v), 5) for v in pos], 'normal': [round(float(v), 4) for v in d],
                            'surfaceOf': on, 'near': list(dict.fromkeys(k for _, k in sorted(near)))[:8],
                            'beneath': [{'key': k, 'depth': round(dd * 1000)} for dd, k in sorted(beneath)[:BENEATH_MAX]]})
+        # Teaching landmarks (bony reference points palpated in the diagnosis practicum), on the bone itself.
+        lat_s = 1 if side == 'left' else -1; med = V(-lat_s, 0, 0); SS = lambda n: S(n, side)
+        Hp = SS('Hip bone'); Hp = Hp[np.sign(Hp[:, 0]) == lat_s]; sac_top = S('Sacrum', 'unpaired')[:, 1].max()
+        R12 = SS('Twelfth rib'); R12 = R12[np.sign(R12[:, 0]) == lat_s]; r12_head = X(R12, med)
+        pos_of = lambda code: next((np.array(q['position']) for q in points if q['code'] == code and q['side'] in (side, 'midline')), None)
+        for lid, (ko, at) in {
+            'scj': ('흉쇄관절', lambda: g('clavMed')), 'coracoid': ('오구돌기', lambda: X(SS('Scapula'), ant)),
+            'greaterTubercle': ('대결절', lambda: g('greaterTub')), 'lateralEpicondyle': ('외측상과', lambda: g('epiL')),
+            'snuffbox': ('코담배갑(양계 자리)', lambda: pos_of('LI5')), 'asis': ('ASIS(위앞엉덩뼈가시)', lambda: g('asis')),
+            'psis': ('PSIS(위뒤엉덩뼈가시)', lambda: X(Hp[(lat_s * Hp[:, 0] > .02) & (Hp[:, 1] > sac_top - .08) & (Hp[:, 1] < sac_top)], post)),
+            'iliacCrest': ('장골능 꼭대기', lambda: X(Hp, up)), 'rib12': ('12번 갈비 끝', lambda: R12[np.argmax(np.linalg.norm(R12 - r12_head, axis=1))]),
+            'greaterTrochanter': ('대전자', lambda: g('greaterTroch')), 'fibularHead': ('비골두', lambda: g('fibHead')),
+            'lateralMalleolus': ('외과', lambda: g('latMall')), 'medialMalleolus': ('내과', lambda: g('medMall'))}.items():
+            try: q = at()
+            except Exception as e: failures[f'landmark:{lid}'] = f'{type(e).__name__}: {e}'; continue  # noqa: BLE001
+            if q is not None: marks.append({'id': lid, 'nameKo': ko, 'side': side, 'position': np.asarray(q, dtype='f8')})
         print(side, len(anchors), 'anchors', flush=True)
 
     # Comparison source.
@@ -887,9 +903,28 @@ def main():
     for k, v in CHANNELS.items():
         cs = [p['code'] for p in POINTS if p['code'][:2] == k and p['code'] in agreed]
         channels[k] = {kk: vv for kk, vv in v.items() if kk not in ('breaks',)} | {'codes': cs, 'breaks': [b for b in v.get('breaks', []) if b in cs]}
+    # Unpaired teaching landmarks and the bone each lies on (click selects it); segment for following the rig.
+    for lid, ko, q in [('eop', '외후두융기', u('eop')), ('suboccipital', '후두골하(풍부 자리)', next((np.array(x['position']) for x in points if x['code'] == 'GV16'), None)),
+                       ('jugularNotch', '흉골 위패임', u('notch')), ('navel', '배꼽(신궐 자리)', next((np.array(x['position']) for x in points if x['code'] == 'CV8'), None))]:
+        if q is not None: marks.append({'id': lid, 'nameKo': ko, 'side': 'midline', 'position': np.asarray(q, dtype='f8')})
+    bones = [x for x in visible if layer(x) == 'bone']
+    def bone_at(q):
+        best = (1e9, None)
+        for x in bones:
+            b = runtime[x['id']]['geometry']['bounds']
+            if not all(b[0][i] - .03 < q[i] < b[1][i] + .03 for i in range(3)): continue
+            dd = float(np.min(np.linalg.norm(geo(x)[0] - q, axis=1)))
+            if dd < best[0]: best = (dd, runtime[x['id']]['key'])
+        return best[1]
+    landmarks = [{'id': m['id'], 'nameKo': m['nameKo'], 'side': m['side'], 'position': [round(float(v), 5) for v in m['position']],
+                  'segment': segment(m['position']), 'bone': bone_at(m['position'])} for m in marks]
+    # Two-point distances compared left and right to find the short side (diagnosis practicum).
+    measures = [{'id': 'navel-asis', 'nameKo': '배꼽–ASIS', 'from': 'navel', 'to': 'asis', 'reads': '복부 앞쪽(장요근 쪽) 짧은 쪽'},
+                {'id': 'rib12-crest', 'nameKo': '12번 갈비 끝–장골능', 'from': 'rib12', 'to': 'iliacCrest', 'reads': '옆구리(요방형근 쪽) 짧은 쪽'},
+                {'id': 'scj-coracoid', 'nameKo': '흉쇄관절–오구돌기', 'from': 'scj', 'to': 'coracoid', 'reads': '가슴 앞(소흉근 쪽) 짧은 쪽'}]
     OUT.write_text(json.dumps({'schemaVersion': 2, 'note': 'Educational acupoint positions on the Z-Anatomy model (rules + proportional cun); '
                                'not needling guidance. See atlas-data/anatomy/acupoint-checks.json.',
-                               'channels': channels, 'concepts': concepts, 'points': kept}, ensure_ascii=False, indent=1) + '\n')
+                               'channels': channels, 'concepts': concepts, 'points': kept, 'landmarks': landmarks, 'measures': measures}, ensure_ascii=False, indent=1) + '\n')
     CHECKS.write_text(json.dumps({'schemaVersion': 2, 'sources': {'draft': 'atlas-data/pipeline/acupoint_locations.py (AI-written, WHO 2008 conventions)',
         'acupunctureCom': 'www.acupuncture.com point pages, accessed 2026-11-10 (location sentence matched; not copied here or to the runtime)'},
         'normalization': [f'{a} -> {b}' for a, b in NORMALIZE],

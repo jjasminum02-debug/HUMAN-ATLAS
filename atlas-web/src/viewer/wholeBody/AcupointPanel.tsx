@@ -1,7 +1,7 @@
 // Acupoint panel (ROADMAP 4-1 step 7): channel points on the model, their location and the structures around them.
 import { useEffect, useState } from 'react';
 import type { RuntimeStructureRecord } from '../datasets/integration';
-import { acupointId, channelPath, channelSide, isBinding, LOCATION_BASIS_LABEL, locationBasis, sixChannelOf, type AcupointInstance, type AcupointFile, type AcupointHost, type AcupointTarget, type SinewFile } from '../acupointLayer';
+import { acupointId, channelPath, channelSide, isBinding, landmarkId, LOCATION_BASIS_LABEL, locationBasis, sixChannelOf, type AcupointInstance, type Landmark, type AcupointFile, type AcupointHost, type AcupointTarget, type SinewFile } from '../acupointLayer';
 
 const SIDE = { right: '오른쪽', left: '왼쪽', midline: '정중선' } as const;
 let file: Promise<AcupointFile | null> | undefined;
@@ -18,7 +18,7 @@ export function AcupointPanel({ host, rows, request = null, onSelectStructure, o
   const [side, setSide] = useState<'right' | 'left'>('right');
   const [selected, setSelected] = useState<string | null>(null);
   const [channel, setChannel] = useState('LU');
-  const [mode, setMode] = useState<'points' | 'sinews'>('points');
+  const [mode, setMode] = useState<'points' | 'sinews' | 'landmarks'>('points');
   useEffect(() => { let live = true; void loadAcupoints().then(f => { if (!live) return; if (f) setData(f); else setFailed(true); }); return () => { live = false; }; }, []);
   useEffect(() => {
     if (!data) return;
@@ -51,8 +51,10 @@ export function AcupointPanel({ host, rows, request = null, onSelectStructure, o
     <div className="movement-side acupoint-mode" role="group" aria-label="보기">
       <button aria-pressed={mode === 'points'} onClick={() => setMode('points')}>경혈</button>
       <button aria-pressed={mode === 'sinews'} onClick={() => { setMode('sinews'); setSelected(null); host.selectAcupoint(null, false); }}>경근</button>
+      <button aria-pressed={mode === 'landmarks'} onClick={() => { setMode('landmarks'); setSelected(null); host.selectAcupoint(null, false); }}>기준점</button>
     </div>
-    {mode === 'sinews' ? <SinewView host={host} rows={rows} request={sinewRequest} acupoints={data} onPoint={goToPoint} onSelectStructure={onSelectStructure}/> : <>
+    {mode === 'landmarks' ? <LandmarkView host={host} file={data} rows={rows} onSelectStructure={onSelectStructure}/>
+    : mode === 'sinews' ? <SinewView host={host} rows={rows} request={sinewRequest} acupoints={data} onPoint={goToPoint} onSelectStructure={onSelectStructure}/> : <>
     <div className="acupoint-channels" role="group" aria-label="경맥">
       {Object.entries(data.channels).map(([code, c]) => <button key={code} aria-pressed={channel === code} title={`${c.nameKo} ${c.nameHanja}`}
         onClick={() => { setChannel(code); setSelected(null); host.selectAcupoint(null, false); }}>{c.nameKo.replace(/^[수족]/, '').replace(/^(태음|양명|소음|태양|궐음|소양)/, '')}<small>{code}</small></button>)}
@@ -144,4 +146,44 @@ function Beneath({ point, rows, onSelectStructure }: { point: AcupointInstance; 
       <i className={`beneath-${tone(row)}`}/><button className="bone-related-muscle" onClick={() => onSelectStructure(row.sourceKey, row.side)}>{row.label}</button>
       <small>{depth < 3 ? '바로 아래' : `약 ${Math.round(depth / 5) * 5 || depth}mm`}</small></li>)}</ul>
     <p className="quiet-note">혈 자리에서 곧게 안쪽으로 6cm까지, 1cm 반경 안을 이 모형에서 잰 값입니다. 사람·체형·자세에 따라 다르며 자침 깊이 기준이 아닙니다.</p></>;
+}
+
+const LANDMARK_GROUPS: { name: string; ids: string[] }[] = [
+  { name: '머리·목', ids: ['eop', 'suboccipital'] },
+  { name: '가슴·어깨·팔', ids: ['jugularNotch', 'scj', 'coracoid', 'greaterTubercle', 'lateralEpicondyle', 'snuffbox'] },
+  { name: '배·골반', ids: ['navel', 'rib12', 'iliacCrest', 'asis', 'psis', 'greaterTrochanter'] },
+  { name: '다리', ids: ['fibularHead', 'lateralMalleolus', 'medialMalleolus'] }];
+
+/**
+ * Bony reference points of the diagnosis practicum and the two-point distances compared left and right to find the
+ * short side. Lengths follow the current pose (bend the trunk sideways in 관절 움직임 and one side shortens).
+ */
+function LandmarkView({ host, file, rows, onSelectStructure }: {
+  host: AcupointHost; file: AcupointFile; rows: Map<string, RuntimeStructureRecord>; onSelectStructure: (key: string, side: string | null) => void;
+}) {
+  const [selected, setSelected] = useState<string | null>(null);
+  const [lengths, setLengths] = useState<Record<string, { right: number; left: number }>>({});
+  useEffect(() => {
+    host.showLandmarks(file); setLengths(host.measureLengths());
+    const off = host.onRigPoseChange?.(() => setLengths(host.measureLengths()));
+    return () => { off?.(); host.showLandmarks(null); };
+  }, [host, file]);
+  useEffect(() => { host.selectLandmark(selected); }, [host, selected]);
+  const marks = file.landmarks ?? [];
+  const pick = (m: Landmark) => { const id = landmarkId(m); setSelected(selected === id ? null : id); const bone = m.bone && rows.get(m.bone); if (bone && selected !== id) onSelectStructure(bone.sourceKey, bone.side); };
+  const cm = (v?: number) => v === undefined ? '–' : `${(v * 100).toFixed(1)}cm`;
+  return <section className="acupoint-detail landmark-view" aria-label="기준점">
+    <p className="quiet-note">진단학 실습에서 좌우를 비교하는 뼈 기준점입니다(모형 위 보라색 점). 누르면 그 뼈를 고르고 점을 크게 표시합니다.</p>
+    {LANDMARK_GROUPS.map(group => <div key={group.name} className="landmark-group"><h5>{group.name}</h5>
+      <ul>{group.ids.map(id => { const sides = marks.filter(m => m.id === id); if (!sides.length) return null;
+        return <li key={id}><span>{sides[0].nameKo}</span>{sides.map(m => <button key={m.side} aria-pressed={selected === landmarkId(m)} onClick={() => pick(m)}>
+          {m.side === 'right' ? '오른쪽' : m.side === 'left' ? '왼쪽' : '보기'}</button>)}</li>; })}</ul></div>)}
+    {(file.measures?.length ?? 0) > 0 && <><h5>좌우 비교 거리</h5>
+      <table className="measure-table"><thead><tr><th>두 점</th><th>오른쪽</th><th>왼쪽</th><th>짧은 쪽</th></tr></thead><tbody>
+        {file.measures!.map(m => { const l = lengths[m.id], diff = l ? l.right - l.left : 0;
+          return <tr key={m.id}><td>{m.nameKo}<small>{m.reads}</small></td><td>{cm(l?.right)}</td><td>{cm(l?.left)}</td>
+            <td>{!l || Math.abs(diff) < .002 ? '같음' : `${diff < 0 ? '오른쪽' : '왼쪽'} ${(Math.abs(diff) * 1000).toFixed(0)}mm`}</td></tr>; })}
+      </tbody></table>
+      <p className="quiet-note">모형이 좌우 대칭이라 서 있는 자세에서는 같습니다. 관절 움직임에서 허리를 옆으로 굽히거나 돌리면 짧아지는 쪽이 숫자로 보입니다. 실제 촉진에서는 두 뼈 사이를 손으로 잡아 비교합니다.</p></>}
+  </section>;
 }

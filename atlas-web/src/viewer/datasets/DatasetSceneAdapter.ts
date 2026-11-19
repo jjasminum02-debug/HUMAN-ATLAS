@@ -14,7 +14,7 @@ import { flattenContacts, parseSkinChunk, posedCopy, segmentForRole, skinGeometr
 import type { Instance } from './schema.ts';
 import type { ActionHighlight, MuscleActionsFile, RigHost } from '../movement.ts';
 import type { StudyView } from '../../domain/bookmarks.ts';
-import { acupointId, channelSegments, isBinding, type AcupointFile, type AcupointHost, type AcupointTarget, type SinewFile } from '../acupointLayer.ts';
+import { acupointId, channelSegments, isBinding, landmarkId, measureEnd, type AcupointFile, type AcupointHost, type AcupointTarget, type SinewFile } from '../acupointLayer.ts';
 /** Row kinds whose surfaces bend with the rig (M2); bones move rigidly instead. */
 const SKINNED_KINDS = new Set(['muscle', 'tendon', 'fascia', 'joint', 'vessel', 'nerve']);
 /** C4 attachment area: a Z-Anatomy patch (`key`) or an estimated bone-contact area (`source: 'contact'`). */
@@ -299,6 +299,57 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
         const box = rest.boundingBox!.clone().applyMatrix4(new THREE.Matrix4().fromArray(node.userData.instanceMatrix));
         return [box.min.y, box.max.y];
     }
+    // Teaching landmarks: a purple diamond per bony point and a line per measure and side, riding on their segments.
+    private landmarks?: { group: THREE.Group; marks: Map<string, { mesh: THREE.Mesh; rest: THREE.Vector3; segment: string }>;
+        lines: { line: THREE.Line; ends: [string, string]; measure: string; side: 'left' | 'right' }[]; selected: string | null };
+    showLandmarks(file: AcupointFile | null) {
+        if (this.landmarks) { this.landmarks.group.removeFromParent(); this.landmarks.group.traverse(o => { const m = o as THREE.Mesh; m.geometry?.dispose(); (m.material as THREE.Material | undefined)?.dispose?.(); }); this.landmarks = undefined; }
+        if (file?.landmarks?.length) {
+            const group = new THREE.Group(); group.name = 'Landmarks'; group.renderOrder = 12;
+            const shape = new THREE.OctahedronGeometry(.007), marks = new Map<string, { mesh: THREE.Mesh; rest: THREE.Vector3; segment: string }>();
+            for (const m of file.landmarks) {
+                const mesh = new THREE.Mesh(shape, new THREE.MeshBasicMaterial({ color: 0x6d4fb3, depthTest: false, transparent: true, opacity: .95 }));
+                mesh.renderOrder = 12; mesh.userData.landmark = landmarkId(m); group.add(mesh);
+                marks.set(landmarkId(m), { mesh, rest: new THREE.Vector3(...m.position), segment: m.segment });
+            }
+            const lines: { line: THREE.Line; ends: [string, string]; measure: string; side: 'left' | 'right' }[] = [];
+            for (const measure of file.measures ?? []) for (const side of ['right', 'left'] as const) {
+                const a = measureEnd(file, measure.from, side), b = measureEnd(file, measure.to, side); if (!a || !b) continue;
+                const line = new THREE.Line(new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(new Float32Array(6), 3)),
+                    new THREE.LineBasicMaterial({ color: 0x8b6fd0, transparent: true, opacity: .9, depthTest: false }));
+                line.renderOrder = 12; group.add(line); lines.push({ line, ends: [landmarkId(a), landmarkId(b)], measure: measure.id, side });
+            }
+            this.scene.root.add(group); this.landmarks = { group, marks, lines, selected: null };
+        }
+        this.apply();
+    }
+    selectLandmark(id: string | null) {
+        if (!this.landmarks) return;
+        this.landmarks.selected = id;
+        for (const [key, { mesh }] of this.landmarks.marks) { mesh.scale.setScalar(key === id ? 1.9 : 1); (mesh.material as THREE.MeshBasicMaterial).color.set(key === id ? 0xd39a2c : 0x6d4fb3); }
+        this.scene.requestRender();
+    }
+    private landmarkAt(key: string, out = new THREE.Vector3()) {
+        const m = this.landmarks?.marks.get(key); if (!m) return null;
+        out.copy(m.rest); const posed = this.rigState?.transforms?.get(m.segment); if (posed) out.applyMatrix4(posed); return out;
+    }
+    measureLengths() {
+        const out: Record<string, { right: number; left: number }> = {}, a = new THREE.Vector3(), b = new THREE.Vector3();
+        for (const l of this.landmarks?.lines ?? []) {
+            if (!this.landmarkAt(l.ends[0], a) || !this.landmarkAt(l.ends[1], b)) continue;
+            (out[l.measure] ??= { right: 0, left: 0 })[l.side] = a.distanceTo(b);
+        }
+        return out;
+    }
+    private syncLandmarks() {
+        const s = this.landmarks; if (!s) return;
+        const at = new THREE.Vector3(), b = new THREE.Vector3();
+        for (const [key, { mesh }] of s.marks) if (this.landmarkAt(key, at)) mesh.position.copy(at);
+        for (const { line, ends } of s.lines) {
+            if (!this.landmarkAt(ends[0], at) || !this.landmarkAt(ends[1], b)) continue;
+            const p = line.geometry.getAttribute('position') as THREE.BufferAttribute; p.setXYZ(0, at.x, at.y, at.z); p.setXYZ(1, b.x, b.y, b.z); p.needsUpdate = true; line.geometry.computeBoundingSphere();
+        }
+    }
     private syncSinews() {
         const s = this.sinews; if (!s) return;
         const transforms = this.rigState?.transforms, at = new THREE.Vector3();
@@ -472,6 +523,7 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
         this.syncAcupoints();
         this.syncSinews();
         this.syncBoundary();
+        this.syncLandmarks();
         if (this.pendingAreaFocus && !this.attachmentAreaBox(this.view.attachmentObservation?.role).isEmpty()) {
             this.pendingAreaFocus = false;
             if (this.view.attachmentObservation) this.focusSelection(true); else this.focusAttachmentAreas(true);

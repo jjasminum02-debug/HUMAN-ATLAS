@@ -540,3 +540,15 @@
 .atlas-shell .point-beneath i { flex: none; width: 9px; height: 9px; border-radius: 50%; }
 .atlas-shell .beneath-artery { background: #c23b32; } .atlas-shell .beneath-vein { background: #3f63b0; } .atlas-shell .beneath-nerve { background: #d0b42f; }
 .atlas-shell .landmark-mark { margin-left: 5px; padding: 0 4px; border-radius: 4px; background: #e2f0ea; color: #2f6b58; font-size: 9px; font-style: normal; font-weight: 700; }
+/* Teaching landmarks (2026-11-19). */
+.atlas-shell .landmark-group h5 { margin: 8px 0 4px; }
+.atlas-shell .landmark-group ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.atlas-shell .landmark-group li { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.atlas-shell .landmark-group li span { flex: 1; color: #3f4f49; }
+.atlas-shell .landmark-group button { min-height: 30px; padding: 3px 9px; border: 1px solid #d8cdee; border-radius: 8px; background: #faf8fe; color: #5b3f99; font-size: 11px; cursor: pointer; }
+.atlas-shell .landmark-group button[aria-pressed=true] { background: #d39a2c; border-color: #d39a2c; color: #fff; }
+.atlas-shell .measure-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.atlas-shell .measure-table th, .atlas-shell .measure-table td { padding: 4px 3px; border-bottom: 1px solid #edf0ed; text-align: right; font-variant-numeric: tabular-nums; }
+.atlas-shell .measure-table th:first-child, .atlas-shell .measure-table td:first-child { text-align: left; }
+.atlas-shell .measure-table td small { display: block; color: #8a9891; font-size: 10px; }
+@media (pointer: coarse) { .atlas-shell .landmark-group button { min-height: 40px; } }
