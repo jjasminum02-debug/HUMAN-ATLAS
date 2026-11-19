@@ -567,11 +567,26 @@
 .atlas-shell .posture-patterns li span, .atlas-shell .posture-patterns li small { font-size: 12px; color: #4b5d57; }
 .atlas-shell .posture-legend { display: flex; gap: 12px; margin: 4px 0; font-size: 12px; }
 .atlas-shell .posture-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 4px; vertical-align: -1px; }
-.atlas-shell .posture-legend .posture-short { background: #d4472f; }
-.atlas-shell .posture-legend .posture-weak { background: #3f7cc4; }
+.atlas-shell .posture-legend .posture-short { background: #c2255c; }
+.atlas-shell .posture-legend .posture-weak { background: #5c940d; }
 .atlas-shell .posture-membership ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .atlas-shell .posture-membership li { padding: 7px 9px; border-radius: 8px; background: #f3f5f4; color: #33413c; font-size: 13px; }
 .atlas-shell .posture-membership li span { display: block; font-size: 12px; color: #6b7a75; margin-top: 2px; }
 .atlas-shell .posture-patterns li button { min-height: 30px; padding: 3px 10px; border: 1px solid #c9d6d1; border-radius: 8px; background: #f6faf8; color: #2f5d50; font-size: 12px; cursor: pointer; }
 .atlas-shell .posture-patterns li button[aria-pressed=true] { background: #2f5d50; border-color: #2f5d50; color: #fff; }
 @media (pointer: coarse) { .atlas-shell .posture-patterns li button { min-height: 40px; } }
+
+/* 2026-11-20: the channel's sinew drawn faint teal next to its points. */
+.atlas-shell .acupoint-sinew-toggle { display: flex; align-items: center; gap: 6px; margin: 4px 0 8px; font-size: 12px; color: #33413c; cursor: pointer; }
+.atlas-shell .acupoint-sinew-toggle i { width: 18px; height: 4px; border-radius: 2px; background: #2dd4bf; }
+@media (pointer: coarse) { .atlas-shell .acupoint-sinew-toggle { min-height: 36px; } .atlas-shell .acupoint-sinew-toggle input { width: 20px; height: 20px; } }
+
+/* 4-3 U1: one "자료와 한계" fold per card; empty answers read as answers; hints and legends are not notices. */
+.atlas-shell .card-limits { margin: 14px 0 4px; border-top: 1px solid #e3e8e6; padding-top: 8px; font-size: 12px; color: #5b6b66; }
+.atlas-shell .card-limits summary { cursor: pointer; font-weight: 600; color: #4b5d57; min-height: 28px; display: flex; align-items: center; }
+.atlas-shell .card-limits ul { margin: 6px 0 0; padding-left: 16px; display: grid; gap: 4px; line-height: 1.5; }
+.atlas-shell .empty-answer { margin: 2px 0; color: #33413c; font-size: 13px; }
+.atlas-shell .card-hint { margin: 6px 0 0; font-size: 12px; color: #6b7a75; }
+.atlas-shell .role-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 6px 0 0; font-size: 12px; color: #4b5d57; }
+.atlas-shell .role-legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+@media (pointer: coarse) { .atlas-shell .card-limits summary { min-height: 40px; } }

@@ -47,7 +47,6 @@ export function MuscleBloodSupply({ muscle, rows, onSelect }: { muscle: RuntimeS
       return <li key={key}>{vessel ? <button className="bone-related-muscle" onClick={() => onSelect(vessel.sourceKey)}>{termName(t)}</button> : <span>{termName(t)}</span>}<small>{t.en}</small></li>;
     })}</ul>
       : <p>두 자료가 일치하는 혈관 정보가 아직 없습니다.</p>}
-    <p className="quiet-note">신경 분지와 혈관 분포에는 개인차가 있습니다.</p>
   </section>;
 }
 

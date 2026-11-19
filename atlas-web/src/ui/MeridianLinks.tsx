@@ -78,7 +78,7 @@ export function MeridianLinks({ muscle, host, onOpen }: { muscle: RuntimeStructu
           <button className="bone-related-muscle meridian-point" disabled={!onOpen} onClick={() => { setRegion(null); onOpen?.({ sinew: code, side }); }}>{s.nameKo}<small>{s.hanja}</small></button>
           {regionButton([code], `영역 보기 · 근육 ${s.muscles[side].length}`)}
         </li>; })}</ul>
-        : <p className="quiet-note">이 모형에서 경근 경로가 이 근육 위를 지나지 않습니다.</p>}
+        : <p className="empty-answer">이 모형에서 경근 경로가 이 근육 위를 지나지 않습니다.</p>}
     </section>
     {names.length > 0 && <section className="attachment-section attachment-summary-block">
       <h3>같은 이름으로 묶기</h3>
@@ -93,13 +93,12 @@ export function MeridianLinks({ muscle, host, onOpen }: { muscle: RuntimeStructu
     </section>}
     <section className="attachment-section attachment-summary-block">
       <h3>바로 위의 경혈</h3>
-      {links.over.length ? points(links.over) : <p className="quiet-note">이 근육 표면에 놓인 경혈이 없습니다.</p>}
+      {links.over.length ? points(links.over) : <p className="empty-answer">이 근육 표면에 놓인 경혈이 없습니다.</p>}
     </section>
     {links.near.length > 0 && <section className="attachment-section attachment-summary-block">
       <h3>주변 경혈</h3>
       {points(links.near)}
     </section>}
-    <p className="quiet-note">경혈은 뼈 표지와 골도분촌으로 이 모형에 계산한 위치이고, 경근은 『영추·경근』의 경로를 이 모형에 이어 그린 것입니다.
-      누르면 경혈·경근 창에서 위치를 보여 줍니다. 해부와 경락을 잇는 학습 자료이며, 진단·치료 지침이 아닙니다.</p>
+    <p className="card-hint">경혈·경근 이름을 누르면 경혈·경근 창에서 위치를 보여 줍니다.</p>
   </div>;
 }

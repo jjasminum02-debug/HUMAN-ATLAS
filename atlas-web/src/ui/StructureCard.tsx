@@ -1,6 +1,7 @@
 // Card body for ligament/joint, fascia and tendon rows (ROADMAP C3). Data: atlas-data/runtime/structure-cards.json.
 import { LigamentAttachmentAreas } from './AttachmentAreas';
 import { ClinicalTests } from './ClinicalTests';
+import { CardLimits } from './CardLimits';
 import type { RuntimeStructureRecord } from '../viewer/datasets/integration';
 import type { RigFile } from '../viewer/rig';
 import { movementRoles, rigJointForBones, type MuscleActionsFile } from '../viewer/movement';
@@ -66,6 +67,6 @@ export function StructureCard({ row, cards, rows, onSelect, rig, onMoveJoint, ac
     </section>}
     <ClinicalTests row={row}/>
     {!card?.text && !joint && bones.length === 0 && muscles.length === 0 && <p className="quiet-note">구조 설명을 준비하고 있습니다.</p>}
-    <p className="quiet-note">설명은 학습용 요약입니다. 연결된 뼈·근육은 3D 모형의 표면 접촉으로 찾았습니다.</p>
+    <CardLimits kind="structure"/>
   </>;
 }

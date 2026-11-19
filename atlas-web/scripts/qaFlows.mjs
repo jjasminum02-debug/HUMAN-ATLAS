@@ -353,6 +353,14 @@ const flows = [
     expect(detail.includes('위팔두갈래근') && detail.includes('완요골근'), `척택 설명·주변 구조: ${detail.replace(/\s+/g, ' ').slice(0, 160)}`);
     // 2026-11-19: how the point is found, and the vessels and nerves beneath it (척택: radial nerve under the hollow).
     expect(/취혈 기준\s*표지에서 바로/.test(detail) && /아래 지나는 혈관·신경[\s\S]*요골신경/.test(detail), `척택 취혈 기준·아래 구조: ${detail.replace(/\s+/g, ' ').slice(0, 240)}`);
+    // 2026-11-20: fixed-size ringed dots and a wide channel line, a name tag on the chosen point, the lung sinew faint beside them.
+    const look = await page.evaluate(() => { const r = { dots: 0, wide: 0, tag: 0, sinew: 0, overlay: true }; window.__atlasScene.root.traverse(o => {
+      if (o.userData.acupoint && o.visible) { r.dots++; if (!o.isSprite) r.overlay = false; }
+      if (o.isLine2 && o.visible && o.parent?.name === 'Acupoints') r.wide++;
+      if (o.isSprite && !o.userData.acupoint && o.visible && o.parent?.name === 'Acupoints') r.tag++;
+      if (o.isLine2 && o.parent?.name === 'Sinews') r.sinew++;
+      if ((o.userData.acupoint || o.parent?.name === 'Sinews') && !o.layers.isEnabled(3)) r.overlay = false; }); return r; });
+    expect(look.dots === 22 && look.wide === 2 && look.tag === 1 && look.sinew >= 1 && look.overlay, `폐경 표시: ${JSON.stringify(look)}`);
     const marker = () => page.evaluate(() => { let at = null; window.__atlasScene.root.traverse(o => { if (o.userData.acupoint === 'LU9:right') at = o.position.toArray(); }); return at; });
     const before = await marker();
     await page.evaluate(async () => { const rig = await window.__atlasRig.load(); window.__atlasRig.set(rig, { 'elbow_r:flexion': 90 }); });
@@ -409,16 +417,16 @@ const flows = [
     const bent = await page.locator('.measure-table tr', { hasText: '12번 갈비 끝' }).innerText();
     expect(marks === 30 && /같음/.test(rest) && /왼쪽 \d+mm/.test(bent), `기준점 ${marks}개, 서 있을 때 ${rest.replace(/\s+/g, ' ').slice(0, 80)}, 왼쪽 옆굽힘 ${bent.replace(/\s+/g, ' ')}`);
     await page.evaluate(async () => { const rig = await window.__atlasRig.load(); window.__atlasRig.set(rig, {}); });
-    // 4-2 step 10: a posture pattern colours its short side red and weak side blue; switching it off clears both.
-    const roles = () => page.evaluate(() => { const n = { agonist: 0, antagonist: 0 }; window.__atlasScene.root.traverse(o => { const m = o.isMesh && o.visible && o.material?.name?.match(/:(agonist|antagonist):/); if (m) n[m[1]]++; }); return n; });
+    // 4-2 step 10: a posture pattern colours its short side magenta and weak side green (4-3 U1: not the movement red/blue); off clears both.
+    const roles = () => page.evaluate(() => { const n = { postureShort: 0, postureWeak: 0, agonist: 0, antagonist: 0 }; window.__atlasScene.root.traverse(o => { const m = o.isMesh && o.visible && o.material?.name?.match(/:(postureShort|postureWeak|agonist|antagonist):/); if (m) n[m[1]]++; }); return n; });
     await page.locator('.posture-patterns button', { hasText: '상부 교차 증후군' }).click();
     await page.waitForTimeout(300);
     const upper = await roles();
     await page.locator('.posture-patterns button', { hasText: '상부 교차 증후군' }).click();
     await page.waitForTimeout(300);
     const cleared = await roles();
-    expect(upper.agonist >= 10 && upper.antagonist >= 10 && cleared.agonist + cleared.antagonist === 0, `상부 교차 색: ${JSON.stringify(upper)}, 끈 뒤 ${JSON.stringify(cleared)}`);
-    return `경맥 14개 → 척택 설명·취혈 기준(표지)·아래 구조(요골신경)·주변 구조 → 태연 표지가 팔꿉 90°를 따라감 → 요골신경 카드 → 독맥 백회(정중선, ${shown.length}혈만 표시) → 족태양경근(구슬 ${k0.beads}개, 곤륜 매듭이 무릎 굽힘을 따라감, 영역 근육 ${region.muscles}개·結 ${region.bindings}곳, 태양 손발 함께) → ${name} 카드 → 기준점 30개, 허리 왼쪽 옆굽힘에 12번 갈비–장골능 왼쪽이 짧아짐 → 상부 교차 증후군 색(짧은 쪽 ${upper.agonist}·약한 쪽 ${upper.antagonist}개)`;
+    expect(upper.postureShort >= 10 && upper.postureWeak >= 10 && upper.agonist + upper.antagonist === 0 && cleared.postureShort + cleared.postureWeak === 0, `상부 교차 색: ${JSON.stringify(upper)}, 끈 뒤 ${JSON.stringify(cleared)}`);
+    return `경맥 14개 → 폐경 점 22개·굵은 선·이름표·수태음경근 청록 → 척택 설명·취혈 기준(표지)·아래 구조(요골신경)·주변 구조 → 태연 표지가 팔꿉 90°를 따라감 → 요골신경 카드 → 독맥 백회(정중선, ${shown.length}혈만 표시) → 족태양경근(구슬 ${k0.beads}개, 곤륜 매듭이 무릎 굽힘을 따라감, 영역 근육 ${region.muscles}개·結 ${region.bindings}곳, 태양 손발 함께) → ${name} 카드 → 기준점 30개, 허리 왼쪽 옆굽힘에 12번 갈비–장골능 왼쪽이 짧아짐 → 상부 교차 증후군 색(짧은 쪽 ${upper.postureShort}·약한 쪽 ${upper.postureWeak}개, 움직임 색 없음)`;
   }],
   // 4-2 step 9: test names at the end of the 기능 tab (muscle) and on ligament/meniscus and nerve cards; held tests stay out.
   ['검사 이름: 견갑하근 기능 탭, 내측 반월, 좌골신경', async page => {

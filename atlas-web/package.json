@@ -14,6 +14,7 @@
     "preview": "vite preview --host 127.0.0.1",
     "preview:lan": "node scripts/previewLan.mjs",
     "qa:flows": "node scripts/qaFlows.mjs",
+    "qa:screens": "node scripts/qaScreens.mjs",
     "qa:flows:build": "pnpm build:qa && node scripts/qaFlows.mjs --preview",
     "qa:perf": "node scripts/perfProfiles.mjs",
     "typecheck": "tsc -b --pretty false",

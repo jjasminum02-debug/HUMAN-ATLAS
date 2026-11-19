@@ -27,6 +27,14 @@ export function AcupointPanel({ host, rows, request = null, onSelectStructure, o
     return () => host.showAcupoints(null);
   }, [host, data]);
   useEffect(() => { if (data) host.showAcupointChannel(mode === 'points' ? channel : ''); }, [host, data, channel, mode]);
+  // 2026-11-20: next to a channel's points, its sinew in faint teal (the 12 regular channels have one; 督·任 do not).
+  const [sinews, setSinews] = useState<SinewFile | null>(null);
+  useEffect(() => { let live = true; void loadSinews().then(f => { if (live) setSinews(f); }); return () => { live = false; }; }, []);
+  const [withSinew, setWithSinew] = useState(true);
+  useEffect(() => {
+    if (mode !== 'points' || !sinews || !withSinew || !sinews.sinews[channel]) return;
+    host.showSinew(sinews, channel, 'companion'); return () => host.showSinew(null, null);
+  }, [host, sinews, channel, mode, withSinew]);
   // Opened from a muscle card: go to that point (its channel) or that sinew.
   const [sinewRequest, setSinewRequest] = useState<{ sinew: string; side: 'right' | 'left'; revision: number } | null>(null);
   useEffect(() => {
@@ -63,6 +71,8 @@ export function AcupointPanel({ host, rows, request = null, onSelectStructure, o
     {current && !current.midline && <div className="movement-side" role="group" aria-label="몸의 쪽">
       {(['right', 'left'] as const).map(s => <button key={s} aria-pressed={side === s} onClick={() => { setSide(s); if (point && point.side !== 'midline') choose(acupointId({ code: point.code, side: s })); }}>{s === 'right' ? '오른쪽' : '왼쪽'}</button>)}
     </div>}
+    {sinews?.sinews[channel] && <label className="acupoint-sinew-toggle"><input type="checkbox" checked={withSinew} onChange={e => setWithSinew(e.target.checked)}/>
+      <i aria-hidden="true"/>{sinews.sinews[channel].nameKo} 함께 보기</label>}
     {point && concept && <section className="acupoint-detail" aria-label="선택한 경혈">
       <h4>{concept.nameKo} <span>{concept.hanja} · {concept.code} · {SIDE[point.side]}</span></h4>
       <p>{concept.location}</p>

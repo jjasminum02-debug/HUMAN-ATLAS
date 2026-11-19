@@ -14,6 +14,5 @@ export function ClinicalTests({ row }: { row: RuntimeStructureRecord }) {
   return <section className="attachment-section clinical-tests" aria-label="검사">
     <h3>{row.kind === 'muscle' ? '이 근육을 보는 검사' : row.kind === 'nerve' ? '이 신경을 보는 검사' : '이 구조를 보는 검사'}</h3>
     <ul>{tests.map(t => <li key={t.id}><strong>{t.name}</strong><span className="clinical-test-en">{t.en}</span><p>{t.what}</p></li>)}</ul>
-    <p className="quiet-note">검사 이름과 보는 대상만 적었습니다. 한 검사로 진단하지 않으며, 하는 법은 진단학 실습에서 익힙니다.</p>
   </section>;
 }

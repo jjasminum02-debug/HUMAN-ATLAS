@@ -13,6 +13,7 @@ import { AreaChips, UnlabelledAttachmentAreas, useAttachmentAreas } from './Atta
 import { MuscleActionSummary, MuscleBloodSupply, MuscleNerves, VesselCard } from './MuscleCardFacts';
 import { BookmarkButton, StudyTools } from './StudyTools';
 import { ClinicalTests } from './ClinicalTests';
+import { CardLimits } from './CardLimits';
 import { MusclePosture } from './PosturePatterns';
 import { MeridianLinks } from './MeridianLinks';
 import { isRigHost, jointsForBone, movementLabel, movementLibrary, type MuscleActionsFile } from '../viewer/movement';
@@ -479,7 +480,6 @@ export default function App() {
         </section>;
       })}
       <UnlabelledAttachmentAreas areas={muscleAreas} rows={runtimeByKey} bonesVisible={boneLayerEnabled} onSelect={select}/>
-      {attachmentBoneKeys(selected.sourceKey, undefined, data.integration.objects).length > 0 && <p className="quiet-note">주요 부착 부위를 요약했습니다. 관련 뼈는 전체 모형으로 함께 표시하며, 정확한 부착점 표시는 제공하지 않습니다.</p>}
       <section className="attachment-section attachment-summary-block">
         <h3>운동신경</h3>
         {selectedMuscleNerveRelations.length ? <ul>{selectedMuscleNerveRelations.map(relation => {
@@ -493,10 +493,6 @@ export default function App() {
         </details>}
       </section>
       <MuscleBloodSupply muscle={selected} rows={runtimeByKey} onSelect={select}/>
-      <section className="attachment-section attachment-summary-block">
-        <h3>감각·고유감각</h3>
-        <p>{structureUnavailabilityForLearner('sensoryProprioception')}</p>
-      </section>
     </section>
     <section id="study-function-panel" className="study-tab-panel function-tab-panel" role="tabpanel" aria-labelledby="tab-기능" hidden={tab !== '기능'}>
       <MuscleActionSummary muscle={selected}/>
@@ -512,6 +508,7 @@ export default function App() {
       } : undefined}/>}
     </section>
     </div>
+    <CardLimits kind="muscle"/>
     </> : selected?.kind === 'bone' ? <>{cardRig && jointsForBone(cardRig.rig, selected.sourceKey).length > 0 && isRigHost(motionHost) && <section className="attachment-section bone-joints">
       <h3>이 뼈를 움직이는 관절</h3>
       <div className="attachment-bone-links">{jointsForBone(cardRig.rig, selected.sourceKey).map(id => <button key={id} className="bone-related-muscle"

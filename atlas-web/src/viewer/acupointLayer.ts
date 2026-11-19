@@ -49,7 +49,7 @@ export interface AcupointHost {
   /** Show one channel's markers and lines (null: every channel). */
   showAcupointChannel(channel: string | null): void;
   /** Meridian sinews: lines through the binding regions, one sinew at a time (null hides them). */
-  showSinew(file: SinewFile | null, sinew: string | string[] | null): void;
+  showSinew(file: SinewFile | null, sinew: string | string[] | null, style?: 'focus' | 'companion'): void;
   /** Colour the muscles of a sinew's region (null clears). */
   setSinewRegion(keys: string[] | null): void;
   /** Teaching landmarks and the measuring lines (null hides); selecting one enlarges it. */
@@ -58,7 +58,7 @@ export interface AcupointHost {
   /** Current (posed) left and right length of each measure, in metres. */
   measureLengths(): Record<string, { right: number; left: number }>;
   onRigPoseChange?(listener: (pose: unknown) => void): () => void;
-  /** 4-2 step 10: colour a posture pattern (short/tight red, weak blue; null clears). */
+  /** 4-2 step 10: colour a posture pattern (short/tight magenta, weak green; null clears). */
   setPostureHighlight?(groups: { short: string[]; weak: string[] } | null): void;
 }
 export const isAcupointHost = (host: unknown): host is AcupointHost => typeof (host as AcupointHost | null)?.showAcupoints === 'function';

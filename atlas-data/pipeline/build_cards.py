@@ -6,6 +6,7 @@ touches come from contacts.json; learner text comes from joint_content.py (AI-wr
 Writes atlas-data/runtime/structure-cards.json keyed by runtime structure key.
 """
 import hashlib
+from polite import polite_tree
 import json
 from pathlib import Path
 import re
@@ -86,7 +87,7 @@ def main():
         entry.update({'names': {'koModern': modern, 'koTraditional': traditional, 'en': entry['name']},
                       'form': form or None, 'movements': movements or None, 'summary': summary or None,
                       'bones': [k for k, n in sorted(votes.items(), key=lambda kv: -kv[1]) if n >= .05 * total][:6]})
-    body = {'joints': dict(sorted(joints.items())), 'cards': dict(sorted(cards.items()))}
+    body = polite_tree({'joints': dict(sorted(joints.items())), 'cards': dict(sorted(cards.items()))})  # 합니다체 (ROADMAP 4-3 U1)
     revision = hashlib.sha256(json.dumps(body, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
     OUT.write_text(json.dumps({'schemaVersion': 1, 'revision': revision,
                                'provenance': 'membership: Z-Anatomy Arthrology; links: surface contacts; text: AI-written, human review not performed',

@@ -10,6 +10,20 @@ import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
  * ambient occlusion only on a "refine" frame drawn once the camera has settled, so orbiting stays light.
  * Translucent layers (fascia, capsules) are left out of the occlusion depth so they do not darken what lies under them.
  */
+/** Camera layer for on-top markers; the main pass leaves them out and `OverlayPass` draws them over the occluded image. */
+export const OVERLAY_LAYER = 3;
+export function toOverlay(object: THREE.Object3D) { object.traverse(o => o.layers.set(OVERLAY_LAYER)); }
+
+class OverlayPass extends RenderPass {
+  constructor(scene: THREE.Scene, camera: THREE.Camera) { super(scene, camera); this.clear = false; this.needsSwap = false; }
+  render(...args: Parameters<RenderPass['render']>) {
+    const camera = this.camera, scene = this.scene, mask = camera.layers.mask, background = scene.background;
+    camera.layers.set(OVERLAY_LAYER); scene.background = null; // a colour background would clear the frame
+    super.render(...args);
+    camera.layers.mask = mask; scene.background = background;
+  }
+}
+
 export class AnatomyPostprocess {
   private readonly composer: EffectComposer;
   private readonly gtao: GTAOPass;
@@ -29,6 +43,8 @@ export class AnatomyPostprocess {
     this.gtao.updatePdMaterial({ lumaPhi: 10, depthPhi: 2, normalPhi: 3, radius: 6, rings: 2, samples: 12 });
     this.hideTranslucentFromOcclusion(scene);
     this.composer.addPass(this.gtao);
+    // Markers and lines drawn on top (acupoints, sinews, landmarks) come after occlusion, so it does not darken them.
+    this.composer.addPass(new OverlayPass(scene, camera));
     this.outline = new OutlinePass(new THREE.Vector2(width, height), scene, camera);
     Object.assign(this.outline, { edgeStrength: 3.5, edgeGlow: 0, edgeThickness: 1.2, pulsePeriod: 0 });
     this.outline.visibleEdgeColor.set('#1d756f'); this.outline.hiddenEdgeColor.set('#1d756f');

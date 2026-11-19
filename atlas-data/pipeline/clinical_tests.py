@@ -25,7 +25,7 @@ SOURCES = {
 # id: (name, English name, what it looks at (one line), target English names, [(source, url, what that page states)])
 TESTS = {
     'jobe': ('엠티캔·풀캔 검사', 'Empty can / full can (Jobe) test',
-             '어깨 높이로 든 팔을 내리누를 때의 약함·통증 — 극상근. 다른 근육도 함께 버티므로 극상근만 따로 보지는 못한다.',
+             '어깨 높이로 든 팔을 내리누를 때의 약함·통증 — 극상근. 다른 근육도 함께 버티므로 극상근만 따로 보지는 못합니다.',
              ['Supraspinatus muscle'],
              [('ob', 'https://www.orthobullets.com/shoulder-and-elbow/3037/shoulder-exam', 'Jobe test: supraspinatus weakness / impingement'),
               ('pt', 'https://www.physiotutors.com/wiki/full-can-test', 'full can: supraspinatus tears; does not selectively activate supraspinatus')]),
