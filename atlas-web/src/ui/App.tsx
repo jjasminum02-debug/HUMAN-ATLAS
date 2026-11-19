@@ -81,6 +81,8 @@ export default function App() {
     const [detailsOpen, setDetailsOpen] = useState(true);
     // 4-3 U5: below 1400px only one of the card and the acupoint panel is unfolded; the card folds to its title bar and comes back.
     const [closeAcupointRevision, setCloseAcupointRevision] = useState(0);
+    // 4-3 U6: the model's selection actions render here (card head) instead of a toolbar row.
+    const [selectionTarget, setSelectionTarget] = useState<HTMLDivElement | null>(null);
     const acupointOpen = useRef(false), cardFoldedForPanel = useRef(false);
     const oneWindow = () => window.matchMedia('(max-width: 1399px)').matches;
     const onAcupointPanelChange = (open: boolean) => {
@@ -436,7 +438,7 @@ export default function App() {
    <section id="atlas-stage" tabIndex={-1} className="study-stage" aria-label={`${title} 학습 장면`}><div className="stage-caption" aria-hidden={!entered}><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{title}</h2><p>회전하고 확대하며 구조를 살펴보세요.</p></div>
     {toolsOpen && entered && <StudyTools rows={data.integration.objects.filter(r => r.routeAudience === (route.audience ?? 'learner'))} host={motionHost}
       selected={selected ?? null} onSelect={select} onClearSelection={() => navigate({ regions: route.regions, selected: null })} onClose={() => setToolsOpen(false)}/>}
-    <WholeBodyViewer attachmentRole={attachmentRole} homeRevision={homeRevision} viewResetRevision={viewResetRevision} datasetSource={data} onEntered={setEntered} onMotionHostChange={setMotionHost} onMuscleLayerChange={setMuscleLayerEnabled} onBoneLayerChange={setBoneLayerEnabled} onSelectionHiddenChange={setSelectedSourceHidden} onAcupointPanelChange={onAcupointPanelChange} closeAcupointRevision={closeAcupointRevision} regionIds={route.regions} selectedId={route.selected} selectedIds={selectedSourceKeys} whole={!route.regions.length} onWholeChange={() => { resetPresentation(); navigate({ regions: [], selected: route.selected }); }} onSelect={select}/>
+    <WholeBodyViewer attachmentRole={attachmentRole} homeRevision={homeRevision} viewResetRevision={viewResetRevision} datasetSource={data} onEntered={setEntered} onMotionHostChange={setMotionHost} onMuscleLayerChange={setMuscleLayerEnabled} onBoneLayerChange={setBoneLayerEnabled} onSelectionHiddenChange={setSelectedSourceHidden} onAcupointPanelChange={onAcupointPanelChange} closeAcupointRevision={closeAcupointRevision} selectionActionsTarget={detailsOpen && selected ? selectionTarget : null} regionIds={route.regions} selectedId={route.selected} selectedIds={selectedSourceKeys} whole={!route.regions.length} onWholeChange={() => { resetPresentation(); navigate({ regions: [], selected: route.selected }); }} onSelect={select}/>
    </section>
    {(selected || selectedTextNerve) && <details inert={!entered} className="study-details" id="study-details" open={detailsOpen} onToggle={e => onDetailsToggle(e.currentTarget.open)}><summary className="mobile-detail-summary">{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</summary><div className="study-detail-body"><div className="study-detail-header">
     <h2>{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</h2>{selected && anatomicalPartSubtitle(selected.names.en) && <p className="anatomical-part-subtitle">{anatomicalPartSubtitle(selected.names.en)}</p>}
@@ -453,6 +455,7 @@ export default function App() {
         <button className="card-close" aria-label="선택 해제" title="선택 해제" onClick={() => navigate({ regions: [], selected: null })}>×</button>
       </div>
     </div>
+    {selected && <div className="card-view-actions" ref={setSelectionTarget}/>}
     {selected?.kind === 'muscle' && <MuscleKeyFacts muscle={selected} onOpen={openSection} attach={{
       origin: attachmentBoneKeys(selected.sourceKey, 'origin', data.integration.objects).map(key => runtimeByKey.get(key)?.label).filter((l): l is string => Boolean(l)),
       insertion: attachmentBoneKeys(selected.sourceKey, 'insertion', data.integration.objects).map(key => runtimeByKey.get(key)?.label).filter((l): l is string => Boolean(l)),

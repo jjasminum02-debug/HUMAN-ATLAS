@@ -256,6 +256,10 @@ const flows = [
   }],
   ['층 벗기기: 근막 → 얕은 근육, 되돌리기, 투명도, 단면', async page => {
     await open(page);
+    // 4-3 U6: layers sit behind one "층" button; the toolbar is one row of at most 8 buttons.
+    const row = await page.locator('.toolbar-main .view-options-row button').evaluateAll(b => ({ n: b.filter(x => x.offsetParent).length, tops: new Set(b.map(x => Math.round(x.getBoundingClientRect().top))).size }));
+    expect(row.n <= 8 && row.tops === 1, `도구 막대 ${row.n}개 · ${row.tops}줄`);
+    await page.locator('.layers-toggle').click();
     await page.locator('.layer-row button', { hasText: '근막' }).click();
     await settle(page);
     await page.getByRole('button', { name: '한 겹 벗기기' }).click();
@@ -264,7 +268,6 @@ const flows = [
     expect(await pressed(page, '.layer-row', '얕은 근육') === 'false', '두 번째 벗기기에서 얕은 근육이 꺼지지 않음');
     await page.getByRole('button', { name: '벗긴 층 되돌리기' }).click();
     expect(await pressed(page, '.layer-row', '얕은 근육') === 'true', '되돌리기에서 얕은 근육이 돌아오지 않음');
-    await page.getByRole('button', { name: '더보기' }).click();
     await page.locator('.layer-opacity label', { hasText: '뼈' }).locator('input').fill('50');
     const translucent = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && o.material?.name?.startsWith('bone:') && o.material.opacity < .6) n++; }); return n; });
     expect(translucent > 50, `반투명 뼈 ${translucent}개`);
@@ -357,7 +360,9 @@ const flows = [
     await page.waitForFunction(() => new URL(location.href).searchParams.get('source'), null, { timeout: 5000 });
     await settle(page);
     const key = new URL(page.url()).searchParams.get('source');
-    await page.getByRole('button', { name: '선택 숨기기' }).click();
+    // 4-3 U6: the selection actions are on the card head, not in the toolbar.
+    expect(await page.locator('.card-view-actions').getByRole('button', { name: '선택 숨기기' }).count() === 1 && await page.locator('.body-tools .selection-view-options').count() === 0, '선택 버튼이 카드 머리에 없음');
+    await page.locator('.card-view-actions').getByRole('button', { name: '선택 숨기기' }).click();
     await settle(page);
     const hidden = await scene(page);
     expect(!hidden[key]?.visible, '선택 숨기기 뒤에도 보임'); // hidden meshes leave the scene graph

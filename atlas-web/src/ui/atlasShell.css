@@ -665,3 +665,22 @@
   .atlas-shell:has(.acupoint-panel) .study-details:not([open]) { top: 8px; bottom: auto; left: auto; right: 12px; width: 240px; border-radius: 12px; }
   .atlas-shell:has(.study-details:not([open])) .acupoint-entry { top: 8px; }
 }
+
+/* 4-3 U6: one toolbar row; layers behind one button; selection actions on the card head. */
+.atlas-shell .toolbar-main .view-options-row { display: flex; flex-wrap: nowrap; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+.atlas-shell .toolbar-main .view-options-row::-webkit-scrollbar { display: none; }
+.atlas-shell .body-tools .toolbar-main .view-options-row button { flex: 1 0 auto; width: auto; white-space: nowrap; padding: 6px 12px; }
+.atlas-shell .layers-toggle small { margin-left: 5px; padding: 0 6px; border-radius: 8px; background: #e9f1ee; color: #2f5d50; font-size: 11px; }
+.atlas-shell .layers-toggle[aria-expanded=true] { background: #47796b; color: #fff; }
+.atlas-shell .layers-toggle[aria-expanded=true] small { background: rgba(255,255,255,.25); color: #fff; }
+.atlas-shell .layer-panel { display: grid; gap: 6px; padding-top: 6px; border-top: 1px solid #edf0ed; }
+.atlas-shell .layer-panel[hidden] { display: none; }
+.atlas-shell .layer-panel .layer-row { display: flex; flex-wrap: wrap; gap: 4px; }
+.atlas-shell .layer-panel .layer-row button { flex: 0 0 auto; width: auto; padding: 6px 12px; white-space: nowrap; }
+.atlas-shell .card-view-actions:empty { display: none; }
+.atlas-shell .card-view-actions { margin: -2px 0 8px; }
+.atlas-shell .selection-view-options.in-card { display: flex; flex-wrap: wrap; gap: 4px; padding: 0; border: 0; }
+.atlas-shell .selection-view-options.in-card button { min-height: 30px; padding: 2px 10px; border: 1px solid #d5dfdb; border-radius: 8px; background: #fff; color: #2f5d50; font-size: 12px; cursor: pointer; }
+.atlas-shell .selection-view-options.in-card button[aria-pressed=true] { background: #47796b; color: #fff; border-color: #47796b; }
+.atlas-shell .selection-view-options.in-card button:disabled { opacity: .45; cursor: default; }
+@media (pointer: coarse) { .atlas-shell .selection-view-options.in-card button { min-height: 38px; } }
