@@ -9,12 +9,12 @@ import { pickSurface } from './surfacePicking.ts';
 import { keptBySection, sectionPlane, sectionViewDirection, type Bounds, type Section } from '../section.ts';
 import type { Dataset } from './schema.ts';
 import { validateRuntimeIntegration, type RuntimeIntegration, type RuntimeStructureRecord } from './integration.ts';
-import { boneSegments, clampPose, segmentTransforms, type RigFile, type RigPose } from '../rig.ts';
-import { parseSkinChunk, posedCopy, segmentForRole, skinGeometry, type SkinChunk, preserveVolume, volumeProfile } from '../skin.ts';
+import { boneSegments, clampPose, contactPlanes, segmentTransforms, type ContactPlane, type RigFile, type RigPose } from '../rig.ts';
+import { flattenContacts, parseSkinChunk, posedCopy, segmentForRole, skinGeometry, type ObjectContact, type SkinChunk, preserveVolume, volumeProfile } from '../skin.ts';
 import type { Instance } from './schema.ts';
 import type { ActionHighlight, MuscleActionsFile, RigHost } from '../movement.ts';
 import type { StudyView } from '../../domain/bookmarks.ts';
-import { acupointId, channelSegments, type AcupointFile, type AcupointHost, type SinewFile } from '../acupointLayer.ts';
+import { acupointId, channelSegments, isBinding, type AcupointFile, type AcupointHost, type AcupointTarget, type SinewFile } from '../acupointLayer.ts';
 /** Row kinds whose surfaces bend with the rig (M2); bones move rigidly instead. */
 const SKINNED_KINDS = new Set(['muscle', 'tendon', 'fascia', 'joint', 'vessel', 'nerve']);
 /** C4 attachment area: a Z-Anatomy patch (`key`) or an estimated bone-contact area (`source: 'contact'`). */
@@ -46,7 +46,7 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
     /** Q2-3 quiz: structure highlighted like a selection, without selecting it (the card would give the name away). */
     private quizTarget: string | null = null;
     /** M1 skeleton rig: bones follow their segment transform; null transforms = rest pose. */
-    private rigState: { file: RigFile; segmentOf: Map<string, string>; transforms: Map<string, THREE.Matrix4> | null } | null = null;
+    private rigState: { file: RigFile; segmentOf: Map<string, string>; transforms: Map<string, THREE.Matrix4> | null; contacts: ContactPlane[] } | null = null;
     private readonly skinChunks = new Map<string, SkinChunk | 'loading' | 'failed'>();
     private instanceByKey?: Map<string, Instance>;
     /** M3: learner pose (as set, before clamping), agonist/antagonist colouring, and the panel's open requests. */
@@ -131,6 +131,16 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
                 if (rest.userData.volumeProfile === undefined) rest.userData.volumeProfile = volumeProfile(rest.getAttribute('position').array as Float32Array);
                 if (rest.userData.volumeProfile) preserveVolume(rest.userData.volumeProfile, target);
             }
+            // Tissue of the two segments meets on the inside of a bent elbow, knee or hip instead of passing through.
+            const segments = weights.roles.map(role => segmentForRole(role, row.side, transforms));
+            const contacts: ObjectContact[] = [];
+            for (const plane of this.rigState?.contacts ?? []) {
+                const sides = segments.map(s => s === plane.proximal ? 1 : plane.distal.has(s) ? -1 : 0);
+                if (!sides.some(Boolean)) continue;
+                contacts.push({ centre: plane.centre.clone().applyMatrix4(inverse), normal: plane.normal.clone().transformDirection(inverse), inside: plane.inside.clone().transformDirection(inverse),
+                    restCentre: plane.restCentre.clone().applyMatrix4(inverse), restNormal: plane.restNormal.clone().transformDirection(inverse), radius: plane.radius, strength: plane.strength, sides });
+            }
+            if (contacts.length) flattenContacts(rest, weights.data, contacts, target);
             node.geometry = target;
         }
     }
@@ -172,7 +182,8 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
     setRigPose(rig: RigFile, pose: RigPose | null) {
         const segmentOf = this.rigState?.file === rig ? this.rigState.segmentOf : boneSegments(rig);
         const clamped = pose && Object.values(pose).some(Boolean) ? clampPose(rig, pose) : null;
-        this.rigState = { file: rig, segmentOf, transforms: clamped ? segmentTransforms(rig, clamped) : null };
+        const transforms = clamped ? segmentTransforms(rig, clamped) : null;
+        this.rigState = { file: rig, segmentOf, transforms, contacts: transforms ? contactPlanes(rig, transforms) : [] };
         const starting = !this.pose && clamped;
         this.pose = clamped;
         // A joint pose leaves the rest geometry that static observers (skin, acupoints) were fitted to.
@@ -193,6 +204,8 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
         return this.muscleActions;
     }
     setActionHighlight(highlight: ActionHighlight) { this.actionHighlight = highlight; this.apply(); }
+    private sinewRegion: Set<string> | null = null;
+    setSinewRegion(keys: string[] | null) { this.sinewRegion = keys?.length ? new Set(keys) : null; this.apply(); }
     // Acupoints (4-1 step 7): markers and channel lines ride on their rig segment; a click on a marker picks it.
     private acupoints?: { file: AcupointFile; group: THREE.Group; markers: Map<string, THREE.Mesh>; lines: { line: THREE.Line; ids: string[]; channel: string }[];
         selected: string | null; channel: string | null; onPick?: (id: string) => void };
@@ -231,13 +244,14 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
     }
     // Meridian sinews: each line vertex and binding marker rides on its own rig segment.
     private sinews?: { group: THREE.Group; items: { object: THREE.Line | THREE.Mesh | THREE.InstancedMesh; rest: Float32Array; segments: string[] }[] };
-    showSinew(file: SinewFile | null, sinew: string | null) {
+    showSinew(file: SinewFile | null, sinew: string | string[] | null) {
         if (this.sinews) { this.sinews.group.removeFromParent(); this.sinews.group.traverse(o => { const m = o as THREE.Mesh; m.geometry?.dispose(); (m.material as THREE.Material | undefined)?.dispose?.(); }); this.sinews = undefined; }
         if (file && sinew) {
             const group = new THREE.Group(); group.name = 'Sinews'; group.renderOrder = 10;
             const items: { object: THREE.Line | THREE.Mesh | THREE.InstancedMesh; rest: Float32Array; segments: string[] }[] = [];
-            const knot = new THREE.SphereGeometry(.004, 12, 8), bead = new THREE.SphereGeometry(.0018, 8, 6);
-            for (const path of file.paths.filter(p => p.sinew === sinew)) {
+            const knot = new THREE.SphereGeometry(.004, 12, 8), binding = new THREE.SphereGeometry(.0065, 16, 10), bead = new THREE.SphereGeometry(.0018, 8, 6);
+            const shown = new Set(Array.isArray(sinew) ? sinew : [sinew]);
+            for (const path of file.paths.filter(p => shown.has(p.sinew))) {
                 const rest = new Float32Array(path.points.flat());
                 const line = new THREE.Line(new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(rest.slice(), 3)),
                     new THREE.LineBasicMaterial({ color: 0x0f766e, transparent: true, opacity: .9, depthTest: false }));
@@ -245,15 +259,45 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
                 // A 1-px line is hard to see on muscle: a bead every sample along it.
                 const beads = new THREE.InstancedMesh(bead, new THREE.MeshBasicMaterial({ color: 0x14b8a6, depthTest: false, transparent: true, opacity: .85 }), path.points.length);
                 beads.renderOrder = 10; beads.frustumCulled = false; group.add(beads); items.push({ object: beads, rest, segments: path.segments });
-                for (const node of path.nodes) {
-                    const mesh = new THREE.Mesh(knot, new THREE.MeshBasicMaterial({ color: 0x115e59, depthTest: false, transparent: true, opacity: .95 }));
-                    mesh.renderOrder = 11; mesh.userData.sinewNode = `${sinew}:${path.side}:${node.anchor}`; group.add(mesh);
+                path.nodes.forEach((node, i) => {
+                    // Binding places (結) read larger and amber: the sinew fastens there, and the classical points sit there.
+                    const course = file.sinews[path.sinew].strands[path.strand]?.[i], bound = Boolean(course && isBinding(course));
+                    const mesh = new THREE.Mesh(bound ? binding : knot, new THREE.MeshBasicMaterial({ color: bound ? 0xb7791f : 0x115e59, depthTest: false, transparent: true, opacity: .95 }));
+                    mesh.renderOrder = 11; mesh.userData.sinewNode = `${path.sinew}:${path.side}:${node.anchor}`; mesh.userData.binding = bound; group.add(mesh);
                     items.push({ object: mesh, rest: new Float32Array(node.position), segments: [node.segment] });
-                }
+                });
             }
             this.scene.root.add(group); this.sinews = { group, items };
         }
         this.apply();
+    }
+    // Hand/foot channel boundary (『영추·종시』): a faint level band at the thoracolumbar junction, riding with the torso.
+    private boundary?: { group: THREE.Group; segment: string };
+    async showHandFootBoundary(on: boolean) {
+        if (this.boundary) { this.boundary.group.removeFromParent(); this.boundary.group.traverse(o => { const m = o as THREE.Mesh; m.geometry?.dispose(); (m.material as THREE.Material | undefined)?.dispose?.(); }); this.boundary = undefined; }
+        const level = on ? (await this.loadRig().catch(() => null))?.landmarks?.handFootBoundary : undefined;
+        if (level && !this.dead) {
+            const group = new THREE.Group(); group.name = 'HandFootBoundary'; group.matrixAutoUpdate = false; group.renderOrder = 9;
+            const plane = new THREE.Mesh(new THREE.PlaneGeometry(.62, .42).rotateX(-Math.PI / 2).translate(0, level.y, -.01),
+                new THREE.MeshBasicMaterial({ color: 0x7c5cbf, transparent: true, opacity: .13, depthWrite: false, side: THREE.DoubleSide }));
+            const edge = new THREE.LineSegments(new THREE.EdgesGeometry(plane.geometry), new THREE.LineBasicMaterial({ color: 0x6d4fb3, transparent: true, opacity: .7 }));
+            plane.renderOrder = edge.renderOrder = 9; group.add(plane, edge);
+            this.scene.root.add(group); this.boundary = { group, segment: level.segment };
+        }
+        this.apply();
+    }
+    private syncBoundary() {
+        const b = this.boundary; if (!b) return;
+        b.group.matrix.copy(this.rigState?.transforms?.get(b.segment) ?? new THREE.Matrix4()); b.group.matrixWorldNeedsUpdate = true;
+    }
+    /** Lowest and highest point (y, rest pose) of a loaded structure, or null before its mesh has loaded. */
+    structureHeight(key: string): [number, number] | null {
+        const node = this.resources.nodes.get(key); if (!node) return null;
+        const posed = node.userData.posedGeometry as THREE.BufferGeometry | undefined;
+        const rest = posed && node.geometry === posed ? posed.userData.skinRest as THREE.BufferGeometry : node.geometry;
+        rest.computeBoundingBox();
+        const box = rest.boundingBox!.clone().applyMatrix4(new THREE.Matrix4().fromArray(node.userData.instanceMatrix));
+        return [box.min.y, box.max.y];
     }
     private syncSinews() {
         const s = this.sinews; if (!s) return;
@@ -309,6 +353,10 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
     }
     openMovement(jointId: string) { for (const listener of this.openMovementListeners) listener(jointId); }
     onOpenMovement(listener: (jointId: string) => void) { this.openMovementListeners.add(listener); return () => { this.openMovementListeners.delete(listener); }; }
+    /** Open the acupoint panel on a point ("PC6:right") or a meridian sinew ("PC") — from a muscle card's 경락 tab. */
+    private readonly openAcupointListeners = new Set<(target: AcupointTarget) => void>();
+    openAcupoint(target: AcupointTarget) { for (const listener of this.openAcupointListeners) listener(target); }
+    onOpenAcupoint(listener: (target: AcupointTarget) => void) { this.openAcupointListeners.add(listener); return () => { this.openAcupointListeners.delete(listener); }; }
     setView(view: BodyView) {
         const wasObserving = Boolean(this.view.focusObservation || this.view.attachmentObservation);
         const observing = Boolean(view.focusObservation || view.attachmentObservation);
@@ -402,8 +450,9 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
                 : highlights.has(key) ? 'innervated' : (this.view.focusObservation && row.kind === 'muscle') || (this.areaObservation && ['muscle', 'fascia', 'tendon'].includes(row.kind)) ? 'observationContext' : this.view.selectedId && this.view.dim || this.quizTarget ? 'dim' : 'normal');
             const phaseTone = null;
             const layerId = layerIdOf(row);
-            const highlight = !this.actionHighlight || selected ? undefined
-                : this.actionHighlight.agonists.includes(key) ? 'agonist' as const : this.actionHighlight.antagonists.includes(key) ? 'antagonist' as const : undefined;
+            const highlight = selected ? undefined
+                : this.actionHighlight?.agonists.includes(key) ? 'agonist' as const : this.actionHighlight?.antagonists.includes(key) ? 'antagonist' as const
+                : this.sinewRegion?.has(key) ? 'meridian' as const : undefined;
             // Shown movers stay coloured even while the rest is dimmed around a selection.
             const material = this.materials.get(row.kind, { mode: highlight && mode === 'dim' ? 'normal' : mode, phase: phaseTone, role: highlight, userTranslucent: Boolean(attachmentMode && this.view.translucentSourceKeys?.includes(key)),
                 variant: row.tissue, layerOpacity: layerId ? this.view.layerOpacity?.[layerId] : undefined });
@@ -422,6 +471,7 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
         this.syncContactAreas();
         this.syncAcupoints();
         this.syncSinews();
+        this.syncBoundary();
         if (this.pendingAreaFocus && !this.attachmentAreaBox(this.view.attachmentObservation?.role).isEmpty()) {
             this.pendingAreaFocus = false;
             if (this.view.attachmentObservation) this.focusSelection(true); else this.focusAttachmentAreas(true);

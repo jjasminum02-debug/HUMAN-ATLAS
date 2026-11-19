@@ -160,6 +160,47 @@ def across(u, v):
     return unit(np.cross(u, np.cross(v, u)))
 
 
+THORAX_RIBS = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth']
+THORAX_Y, THORAX_STEP, THORAX_ANGLES = 1.12, .02, 36
+
+
+def thorax_table(ribs):
+    """Outer surface of the rib cage as a radius table: rows by height (THORAX_Y + i * THORAX_STEP), columns by angle
+    about the vertical line x = 0, z = z0 (angle = atan2(x, -(z - z0)), column j centred at -pi + (j + .5) * 2pi / N).
+    Each cell is the 95th percentile rib radius; gaps between ribs are filled along the height and around the body,
+    then a running max over neighbouring heights spans the intercostal spaces. The scapula slides on this surface."""
+    z0 = float(np.median(ribs[:, 2]))
+    ys = THORAX_Y + np.arange(20) * THORAX_STEP
+    th = np.arctan2(ribs[:, 0], -(ribs[:, 2] - z0)); rr = np.hypot(ribs[:, 0], ribs[:, 2] - z0)
+    grid = np.full((len(ys), THORAX_ANGLES), np.nan)
+    for i, yv in enumerate(ys):
+        for j in range(THORAX_ANGLES):
+            dt = np.angle(np.exp(1j * (th - (-np.pi + (j + .5) * 2 * np.pi / THORAX_ANGLES))))
+            m = (np.abs(ribs[:, 1] - yv) < .016) & (np.abs(dt) < np.pi / THORAX_ANGLES * 1.2)
+            if m.sum() > 8: grid[i, j] = np.percentile(rr[m], 95)
+    for j in range(THORAX_ANGLES):
+        ok = ~np.isnan(grid[:, j])
+        if ok.sum() >= 2: grid[:, j] = np.interp(ys, ys[ok], grid[ok, j])
+    for i in range(len(ys)):
+        ok = ~np.isnan(grid[i]); a = np.arange(THORAX_ANGLES)
+        if ok.sum() >= 2: grid[i] = np.interp(a, a[ok], grid[i, ok], period=THORAX_ANGLES)
+    env = np.array([grid[max(0, i - 1):i + 2].max(0) for i in range(len(ys))])
+    env = (np.roll(env, 1, 1) + 2 * env + np.roll(env, -1, 1)) / 4
+    return {'z0': round(z0, 5), 'y0': THORAX_Y, 'step': THORAX_STEP, 'angles': THORAX_ANGLES,
+            'radius': [[round(float(v), 4) for v in row] for row in env],
+            'estimate': f'outer envelope of the {THORAX_RIBS[0].lower()}-{THORAX_RIBS[-1].lower()} ribs (95th percentile radius per cell, intercostal gaps spanned)'}
+
+
+def scapula_contacts(sc, lat):
+    """Points of the medial border that rest on the chest wall: superior angle, two border points, inferior angle."""
+    m = lat * sc[:, 0]
+    inferior = sc[np.argmin(sc[:, 1])]; superior = sc[m <= np.percentile(m, 25)]; superior = superior[np.argmax(superior[:, 1])]
+    def border(yv):
+        band = sc[np.abs(sc[:, 1] - yv) < .006]; mm = lat * band[:, 0]
+        return band[mm <= np.percentile(mm, 3)].mean(0)
+    return [superior, border(superior[1] * .67 + inferior[1] * .33), border(superior[1] * .33 + inferior[1] * .67), inferior]
+
+
 def knee_offset(knees):
     """One sagittal offset (±10 mm) for both fixed knee axes, chosen so femur-tibia contact stays closest to the
     rest contact through flexion. Shared so the rig stays left/right symmetric. A real knee rolls and glides;
@@ -229,7 +270,8 @@ def main():
     empty = [k for k, v in segments.items() if not v['bones']]
     if empty: raise SystemExit(f'segments without bones: {empty}')
 
-    joints, notes, knee_inputs = {}, {}, []
+    joints, notes, knee_inputs, extras = {}, {}, [], {}
+    thorax = thorax_table(np.concatenate([P(f'{r} rib', sd) for r in THORAX_RIBS for sd in ('left', 'right')]))
     lumbosacral = P('Intervertebral disc L5-S1').mean(0)
     head = P('Frontal bone').mean(0)
     joints['back'] = {'centre': lumbosacral, 'axes': {
@@ -314,7 +356,13 @@ def main():
                                                                        'protraction': signed([0, 1, 0], cl_med, cl_lat, [0, 0, 1])}}
         joints[f'acromioclavicular_{s}'] = {'centre': cl_lat, 'axes': {'upwardRotation': signed(plane, cl_lat, inferior_angle, lateral)}}
         notes[f'sternoclavicular_{s}'] = 'centre: medial end of the clavicle; the scapula follows the clavicle'
-        notes[f'acromioclavicular_{s}'] = 'centre: lateral end of the clavicle; axis normal to the scapular plane (scapulothoracic upward rotation, simplified)'
+        notes[f'acromioclavicular_{s}'] = ('centre: lateral end of the clavicle; axis normal to the scapular plane (scapulothoracic upward rotation, simplified); '
+                                           'the clavicle carries only this point, the scapula keeps its medial border on the chest wall')
+        extras[f'acromioclavicular_{s}'] = {'scapulothoracic': {'contacts': [[round(float(v), 5) for v in p] for p in scapula_contacts(Sc, lat)]}}
+        # Scapulohumeral rhythm (Inman 1944, textbook teaching ratio): beyond the first 30° the arm rises 2 : 1 at the
+        # shoulder joint and on the chest wall. The shoulder sliders give the arm's angle to the trunk.
+        extras[f'shoulder_{s}'] = {'rhythm': {'dofs': [f'shoulder_{s}:flexion', f'shoulder_{s}:abduction'], 'scapula': f'acromioclavicular_{s}:upwardRotation',
+                                              'start': 30, 'share': round(1 / 3, 5), 'source': 'Inman 1944 (2:1 glenohumeral : scapulothoracic after 30°)'}}
         # Fingers 2-5 (one control for all four, per-joint axes) and the thumb. Palm faces anterior (+z) at rest.
         palm = np.array([0, 0, 1.])
         mc1b, mc1h, mc1u = ends(P('First metacarpal bone', side), wrist)
@@ -398,11 +446,18 @@ def main():
                          **({'coupledTo': link[0], 'ratio': link[1]} if link[0] else {})})
         out_joints[jid] = {'name': JOINT_NAMES[kind] + ({'_l': ' (왼쪽)', '_r': ' (오른쪽)'}.get(jid[-2:], '')),
                            'centre': [round(float(v), 5) for v in j['centre']], 'estimate': notes[jid],
-                           **({'control': True} if kind in CONTROLS else {}), 'dofs': rows}
-    body = {'segments': segments, 'joints': out_joints}
+                           **({'control': True} if kind in CONTROLS else {}), 'dofs': rows, **extras.get(jid, {})}
+    # Hand/foot channel boundary (『영추·종시』: above the waist the hand channels, below it the foot channels; the class
+    # draws it at the diaphragm). One height for the whole body: the thoracolumbar junction, where the diaphragm's crura
+    # and costal attachments meet the spine (centre of the T12-L1 disc). Rides with the torso segment.
+    tl = P('Intervertebral disc T12-L1').mean(0)
+    landmarks = {'handFootBoundary': {'y': round(float(tl[1]), 5), 'segment': 'torso',
+                                      'estimate': 'centre of the Z-Anatomy T12-L1 intervertebral disc (thoracolumbar junction)'}}
+    body = {'segments': segments, 'joints': out_joints, 'thorax': thorax, 'landmarks': landmarks}
     revision = hashlib.sha256(json.dumps(body, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
     OUT.write_text(json.dumps({'schemaVersion': 1, 'revision': revision, 'frame': 'HUMAN_ATLAS_RH_M_XLEFT_YHEAD_ZANTERIOR, metres',
-                               'composition': 'posed(segment) = posed(parent) * T(centre) * R(dof_1) * ... * T(-centre), all in the rest frame',
+                               'composition': 'posed(segment) = posed(parent) * T(centre) * R(dof_1) * ... * T(-centre), all in the rest frame; '
+                               'a joint with scapulothoracic contacts instead takes only its centre from the parent and turns the scapula to keep the contacts on the thorax table',
                                **body}, ensure_ascii=False, indent=1) + '\n')
     print('RIG', json.dumps({k: len(v['bones']) for k, v in segments.items()}), 'hip radius mm', round(hip_r * 1000, 1), flush=True)
 

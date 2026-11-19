@@ -12,6 +12,7 @@ import { motorRelationsForNerve, nerveConceptForSourceName } from '../../data/le
 import { MovementPanel } from './MovementPanel';
 import { SectionPanel } from './SectionPanel';
 import { AcupointPanel } from './AcupointPanel';
+import type { AcupointTarget } from '../acupointLayer';
 import type { Section } from '../section';
 
 // The old acupoint review screens (skin carriers, territories; redistribution held) exist only in development builds:
@@ -178,13 +179,20 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
     // A joint card's "움직여 보기" opens this panel on that joint.
     return c.onOpenMovement(jointId => { setMovementOpen(true); setMovementRequest(previous => ({ jointId, revision: (previous?.revision ?? 0) + 1 })); });
   }, [ready]);
+  // A muscle card's 경락 tab opens the acupoint panel on a point or a meridian sinew.
+  const [acupointRequest, setAcupointRequest] = useState<(AcupointTarget & { revision: number }) | null>(null);
+  useEffect(() => {
+    const c = controller.current;
+    if (!ready || !(c instanceof DatasetSceneAdapter)) return;
+    return c.onOpenAcupoint(target => { setAcupointPanelOpen(true); setAcupointRequest(previous => ({ ...target, revision: (previous?.revision ?? 0) + 1 })); });
+  }, [ready]);
   return <div className="whole-body-viewer" onPointerDownCapture={stopEntrance}>
     <div className="whole-body-canvas" inert={!entered} aria-hidden={!entered} ref={host}/>
     {/* 4-1 step 7: learners get the rig-based acupoint panel; the earlier carrier review stays behind its development flags. */}
     {entered && controller.current instanceof DatasetSceneAdapter && (acupointDevelopmentReview || surfaceSample || territoryDevelopmentReview) && AcupointReview
       ? <Suspense fallback={null}><AcupointReview adapter={controller.current} onModeChange={setAcupointsActive} surfaceSample={surfaceSample} developmentReview={acupointDevelopmentReview} territoryDevelopmentReview={territoryDevelopmentReview}/></Suspense>
       : entered && controller.current instanceof DatasetSceneAdapter && (acupointPanelOpen
-        ? <AcupointPanel host={controller.current} rows={rowsByKey} onSelectStructure={(key, side) => select.current(key, side)} onClose={() => setAcupointPanelOpen(false)}/>
+        ? <AcupointPanel host={controller.current} rows={rowsByKey} request={acupointRequest} onSelectStructure={(key, side) => select.current(key, side)} onClose={() => setAcupointPanelOpen(false)}/>
         : <aside className="acupoint-entry"><button onClick={() => setAcupointPanelOpen(true)}>경혈·경근</button></aside>)}
     {!entered && <AtlasLoading failed={error || Boolean(progress?.failed)} loaded={progress?.loaded} total={progress?.total} onRetry={() => error ? setRevision(r => r + 1) : controller.current?.retry()}/> }
     <div inert={!entered} ref={tools} className="body-tools" aria-label="모형 보기 설정">

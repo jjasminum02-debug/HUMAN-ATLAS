@@ -7,6 +7,8 @@ export interface AcupointInstance { code: string; side: 'left' | 'right' | 'midl
 export interface AcupointChannel { nameKo: string; nameHanja: string; en: string; codes: string[]; midline?: boolean; breaks?: string[] }
 export interface AcupointFile { schemaVersion: number; channels: Record<string, AcupointChannel>; concepts: AcupointConcept[]; points: AcupointInstance[] }
 export const acupointId = (p: { code: string; side: string }) => `${p.code}:${p.side}`;
+/** What a muscle card's 경락 tab asks the acupoint panel to show: a point ("PC6:right") or a meridian sinew on one side. */
+export type AcupointTarget = { point: string } | { sinew: string; side: 'right' | 'left' };
 
 /** Scene side of the acupoint panel (implemented by DatasetSceneAdapter). */
 export interface AcupointHost {
@@ -15,7 +17,9 @@ export interface AcupointHost {
   /** Show one channel's markers and lines (null: every channel). */
   showAcupointChannel(channel: string | null): void;
   /** Meridian sinews: lines through the binding regions, one sinew at a time (null hides them). */
-  showSinew(file: SinewFile | null, sinew: string | null): void;
+  showSinew(file: SinewFile | null, sinew: string | string[] | null): void;
+  /** Colour the muscles of a sinew's region (null clears). */
+  setSinewRegion(keys: string[] | null): void;
 }
 export const isAcupointHost = (host: unknown): host is AcupointHost => typeof (host as AcupointHost | null)?.showAcupoints === 'function';
 
@@ -44,3 +48,10 @@ export interface Sinew { nameKo: string; hanja: string; strands: SinewNode[][]; 
 export interface SinewPath { sinew: string; side: 'right' | 'left'; strand: number; points: [number, number, number][]; segments: string[];
   nodes: { anchor: string; position: [number, number, number]; segment: string }[] }
 export interface SinewFile { schemaVersion: number; order: string[]; sinews: Record<string, Sinew>; paths: SinewPath[] }
+/** A binding place (結) of the sinew course, as 『영추·경근』 names it: where the sinew fastens on bone or at a joint. */
+export const isBinding = (node: SinewNode) => node.label.includes('結');
+/** The six channel names (六經): a hand and a foot channel share each name, and their sinews join at the head or chest. */
+export const SIX_CHANNELS: { name: string; hanja: string; hand: string; foot: string }[] = [
+  { name: '태양', hanja: '太陽', hand: 'SI', foot: 'BL' }, { name: '양명', hanja: '陽明', hand: 'LI', foot: 'ST' }, { name: '소양', hanja: '少陽', hand: 'TE', foot: 'GB' },
+  { name: '태음', hanja: '太陰', hand: 'LU', foot: 'SP' }, { name: '소음', hanja: '少陰', hand: 'HT', foot: 'KI' }, { name: '궐음', hanja: '厥陰', hand: 'PC', foot: 'LR' }];
+export const sixChannelOf = (code: string) => SIX_CHANNELS.find(c => c.hand === code || c.foot === code);

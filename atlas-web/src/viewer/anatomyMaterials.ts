@@ -8,12 +8,14 @@ export type MaterialMode = 'normal' | 'selected' | 'dim' | 'translucent' | 'nerv
   /** C4: the bone carries the muscle's drawn origin/insertion area, so the whole-bone cue is lighter and the area reads. */
   | 'originAreaContext' | 'insertionAreaContext';
 /** variant: fine tissue (ligament, meniscus, tooth ...); layerOpacity: learner's per-layer opacity (0.1-1);
- * role: M3 movement colouring (muscles producing / opposing the shown movement). */
-export type MaterialState = { mode?: MaterialMode; phase?: 'action' | 'return' | null; role?: 'agonist' | 'antagonist'; contextOpacity?: number; userTranslucent?: boolean; hovered?: boolean; variant?: string; layerOpacity?: number };
+ * role: M3 movement colouring (muscles producing / opposing the shown movement), or a meridian sinew's region. */
+export type MaterialState = { mode?: MaterialMode; phase?: 'action' | 'return' | null; role?: 'agonist' | 'antagonist' | 'meridian'; contextOpacity?: number; userTranslucent?: boolean; hovered?: boolean; variant?: string; layerOpacity?: number };
 export const ANATOMY_PALETTE = {
   bone: '#e6dbc2', muscle: '#d48b78', nerve: '#dbbb32', accessory: '#c5bdb1', tendon: '#f1ebdc', fascia: '#e1dde9', joint: '#f6f0e1', vessel: '#b5463d',
   origin: '#476eb4', insertion: '#bc7135', selected: '#237f79', selectedNerve: '#d0c42f', related: '#338fc1', action: '#df8065', return: '#a4aaa8',
   agonist: '#d4472f', antagonist: '#3f7cc4',
+  // Muscles of the meridian sinew region being shown (amber: apart from the muscle pink, the teal selection and the sinew line).
+  meridian: '#d39a2c',
 };
 
 // Cartilage-like joint tissue reads blue-white; synovial sacs and sheaths blue; fat pads yellow.

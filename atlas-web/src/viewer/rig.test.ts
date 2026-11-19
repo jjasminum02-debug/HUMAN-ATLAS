@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import * as THREE from 'three';
-import { boneSegments, clampPose, segmentTransforms, type RigFile } from './rig.ts';
+import { boneSegments, clampPose, contactPlanes, rhythmPose, segmentTransforms, thoraxGap, type RigFile } from './rig.ts';
 
 const read = (path: string) => JSON.parse(readFileSync(new URL(`../../../atlas-data/runtime/${path}`, import.meta.url), 'utf8'));
 const rig = read('rig.json') as RigFile;
@@ -69,6 +69,47 @@ test('shoulder girdle, fingers, toes and neck move the way their labels say (4-1
   for (const control of ['neck', 'head']) for (const dof of rig.joints[control].dofs) {
     const share = Object.values(rig.joints).flatMap(j => j.dofs).filter(d => d.coupledTo === dof.id).reduce((n, d) => n + (d.ratio ?? 1), 0);
     assert.ok(Math.abs(share - 1) < 1e-9, `${dof.id} shares add up to the whole movement (${share})`);
+  }
+});
+
+test('the scapula stays on the chest wall through shoulder girdle movement', () => {
+  const thorax = rig.thorax!;
+  for (const s of ['l', 'r']) {
+    const joint = rig.joints[`acromioclavicular_${s}`], contacts = joint.scapulothoracic!.contacts.map(p => new THREE.Vector3(...p));
+    const rest = contacts.map(p => thoraxGap(thorax, p));
+    for (const pose of [{ elevation: 40 }, { protraction: 25 }, { protraction: -25 }, { upwardRotation: 50 }, { elevation: 30, protraction: 25, upwardRotation: 50 }, { elevation: -10, protraction: -25, upwardRotation: -10 }]) {
+      const p: Record<string, number> = {};
+      for (const [dof, v] of Object.entries(pose)) p[`${dof === 'upwardRotation' ? 'acromioclavicular' : 'sternoclavicular'}_${s}:${dof}`] = v;
+      const transforms = segmentTransforms(rig, p), m = transforms.get(`scapula_${s}`)!;
+      const drift = contacts.map((c, i) => Math.abs(thoraxGap(thorax, c.clone().applyMatrix4(m)) - rest[i]));
+      assert.ok(Math.max(...drift) < .03, `${s} ${JSON.stringify(pose)}: medial border within 3 cm of its rest distance (${drift.map(d => (d * 1000).toFixed(0)).join(', ')} mm)`);
+      const ac = centre(`acromioclavicular_${s}`);
+      assert.ok(ac.clone().applyMatrix4(m).distanceTo(ac.clone().applyMatrix4(transforms.get(`clavicle_${s}`)!)) < 1e-6, 'the scapula still meets the clavicle');
+    }
+  }
+});
+
+test('scapulohumeral rhythm: beyond 30° the scapula takes a third of arm elevation', () => {
+  assert.deepEqual(rhythmPose(rig, { 'shoulder_r:abduction': 20 }), { 'shoulder_r:abduction': 20 });
+  const applied = rhythmPose(rig, { 'shoulder_r:abduction': 90 });
+  assert.ok(Math.abs(applied['acromioclavicular_r:upwardRotation'] - 20) < 1e-3 && Math.abs(applied['shoulder_r:abduction'] - 70) < 1e-3);
+  const elbow = moved('elbow_r', { 'shoulder_r:abduction': 90 }), shoulder = moved('shoulder_r', { 'shoulder_r:abduction': 90 });
+  const angle = THREE.MathUtils.radToDeg(elbow.clone().sub(shoulder).angleTo(new THREE.Vector3(0, -1, 0)));
+  assert.ok(Math.abs(angle - 90) < 12, `the arm still ends up near 90° to the trunk (${angle.toFixed(0)}°)`);
+  assert.equal(Object.keys(rhythmPose(rig, { 'shoulder_r:flexion': -40 })).length, 1, 'extension does not turn the scapula');
+});
+
+test('contact planes appear once a hinge is well bent and separate its two segments', () => {
+  assert.equal(contactPlanes(rig, segmentTransforms(rig, { 'elbow_r:flexion': 20 })).length, 0, 'small bends are untouched');
+  const transforms = segmentTransforms(rig, { 'elbow_r:flexion': 140, 'knee_l:flexion': 120 });
+  const planes = contactPlanes(rig, transforms);
+  assert.deepEqual(planes.map(p => p.proximal).sort(), ['femur_l', 'humerus_r']);
+  for (const plane of planes) {
+    assert.equal(plane.strength, 1);
+    const [joint, from, to] = plane.proximal === 'humerus_r' ? ['elbow_r', 'shoulder_r', 'wrist_r'] : ['knee_l', 'hip_l', 'ankle_l'];
+    const side = (id: string) => moved(id, plane.proximal === 'humerus_r' ? { 'elbow_r:flexion': 140 } : { 'knee_l:flexion': 120 }).sub(plane.centre).dot(plane.normal);
+    assert.ok(side(from) > .05 && side(to) < -.05, `${joint}: proximal joint on the proximal side, distal joint on the distal side`);
+    assert.ok(plane.distal.has(plane.proximal === 'humerus_r' ? 'hand_r' : 'calcn_l'), 'everything below the joint rides on the distal side');
   }
 });
 

@@ -1,16 +1,17 @@
 // Acupoint panel (ROADMAP 4-1 step 7): channel points on the model, their location and the structures around them.
 import { useEffect, useState } from 'react';
 import type { RuntimeStructureRecord } from '../datasets/integration';
-import { acupointId, channelPath, channelSide, type AcupointFile, type AcupointHost, type SinewFile } from '../acupointLayer';
+import { acupointId, channelPath, channelSide, isBinding, sixChannelOf, type AcupointFile, type AcupointHost, type AcupointTarget, type SinewFile } from '../acupointLayer';
 
 const SIDE = { right: '오른쪽', left: '왼쪽', midline: '정중선' } as const;
 let file: Promise<AcupointFile | null> | undefined;
 let sinewFile: Promise<SinewFile | null> | undefined;
-const loadSinews = () => sinewFile ??= fetch('/__atlas/v2/sinews.json').then(r => r.ok ? r.json() : null).catch(() => { sinewFile = undefined; return null; });
-const load = () => file ??= fetch('/__atlas/v2/acupoints.json').then(r => r.ok ? r.json() : null).catch(() => { file = undefined; return null; });
+export const loadSinews = () => sinewFile ??= fetch('/__atlas/v2/sinews.json').then(r => r.ok ? r.json() : null).catch(() => { sinewFile = undefined; return null; });
+export const loadAcupoints = () => file ??= fetch('/__atlas/v2/acupoints.json').then(r => r.ok ? r.json() : null).catch(() => { file = undefined; return null; });
 
-export function AcupointPanel({ host, rows, onSelectStructure, onClose }: {
-  host: AcupointHost; rows: Map<string, RuntimeStructureRecord>; onSelectStructure: (key: string, side: string | null) => void; onClose: () => void;
+export function AcupointPanel({ host, rows, request = null, onSelectStructure, onClose }: {
+  host: AcupointHost; rows: Map<string, RuntimeStructureRecord>; request?: (AcupointTarget & { revision: number }) | null;
+  onSelectStructure: (key: string, side: string | null) => void; onClose: () => void;
 }) {
   const [data, setData] = useState<AcupointFile | null>(null);
   const [failed, setFailed] = useState(false);
@@ -18,13 +19,28 @@ export function AcupointPanel({ host, rows, onSelectStructure, onClose }: {
   const [selected, setSelected] = useState<string | null>(null);
   const [channel, setChannel] = useState('LU');
   const [mode, setMode] = useState<'points' | 'sinews'>('points');
-  useEffect(() => { let live = true; void load().then(f => { if (!live) return; if (f) setData(f); else setFailed(true); }); return () => { live = false; }; }, []);
+  useEffect(() => { let live = true; void loadAcupoints().then(f => { if (!live) return; if (f) setData(f); else setFailed(true); }); return () => { live = false; }; }, []);
   useEffect(() => {
     if (!data) return;
     host.showAcupoints(data, id => { setSelected(id); if (!id.endsWith(':midline')) setSide(id.endsWith(':left') ? 'left' : 'right'); host.selectAcupoint(id, false); });
     return () => host.showAcupoints(null);
   }, [host, data]);
   useEffect(() => { if (data) host.showAcupointChannel(mode === 'points' ? channel : ''); }, [host, data, channel, mode]);
+  // Opened from a muscle card: go to that point (its channel) or that sinew.
+  const [sinewRequest, setSinewRequest] = useState<{ sinew: string; side: 'right' | 'left'; revision: number } | null>(null);
+  useEffect(() => {
+    if (!request || !data) return;
+    if ('sinew' in request) { setMode('sinews'); setSelected(null); host.selectAcupoint(null, false); setSinewRequest(request); return; }
+    goToPoint(request.point);
+  }, [request?.revision, data]); // eslint-disable-line react-hooks/exhaustive-deps
+  /** Show one point ("BL60:right") in its channel; used by a muscle card and by the sinew view's binding places. */
+  function goToPoint(id: string) {
+    const concept = data?.concepts.find(c => c.code === id.split(':')[0]);
+    if (!concept || !data?.points.some(p => acupointId(p) === id)) return;
+    setMode('points'); setChannel(concept.channel); setSelected(id);
+    if (!id.endsWith(':midline')) setSide(id.endsWith(':left') ? 'left' : 'right');
+    host.selectAcupoint(id);
+  }
   const choose = (id: string) => { setSelected(id); host.selectAcupoint(id); };
   if (failed) return <aside className="acupoint-panel" aria-label="경혈"><p className="quiet-note">경혈 자료를 불러오지 못했습니다.</p></aside>;
   if (!data) return <aside className="acupoint-panel" aria-label="경혈"><p className="quiet-note">경혈 자료를 불러오는 중…</p></aside>;
@@ -36,7 +52,7 @@ export function AcupointPanel({ host, rows, onSelectStructure, onClose }: {
       <button aria-pressed={mode === 'points'} onClick={() => setMode('points')}>경혈</button>
       <button aria-pressed={mode === 'sinews'} onClick={() => { setMode('sinews'); setSelected(null); host.selectAcupoint(null, false); }}>경근</button>
     </div>
-    {mode === 'sinews' ? <SinewView host={host} rows={rows} onSelectStructure={onSelectStructure}/> : <>
+    {mode === 'sinews' ? <SinewView host={host} rows={rows} request={sinewRequest} acupoints={data} onPoint={goToPoint} onSelectStructure={onSelectStructure}/> : <>
     <div className="acupoint-channels" role="group" aria-label="경맥">
       {Object.entries(data.channels).map(([code, c]) => <button key={code} aria-pressed={channel === code} title={`${c.nameKo} ${c.nameHanja}`}
         onClick={() => { setChannel(code); setSelected(null); host.selectAcupoint(null, false); }}>{c.nameKo.replace(/^[수족]/, '').replace(/^(태음|양명|소음|태양|궐음|소양)/, '')}<small>{code}</small></button>)}
@@ -62,15 +78,23 @@ export function AcupointPanel({ host, rows, onSelectStructure, onClose }: {
 }
 
 /** Meridian sinews: course through the binding regions (『영추·경근』) and the muscles the line lies on in this model. */
-function SinewView({ host, rows, onSelectStructure }: {
-  host: AcupointHost; rows: Map<string, RuntimeStructureRecord>; onSelectStructure: (key: string, side: string | null) => void;
+function SinewView({ host, rows, request, acupoints, onPoint, onSelectStructure }: {
+  host: AcupointHost; rows: Map<string, RuntimeStructureRecord>; request: { sinew: string; side: 'right' | 'left'; revision: number } | null;
+  acupoints: AcupointFile; onPoint: (id: string) => void; onSelectStructure: (key: string, side: string | null) => void;
 }) {
+  const [region, setRegion] = useState(true);
+  // Hand and foot sinews of the same name (태양 = 수태양 + 족태양) drawn and coloured together.
+  const [paired, setPaired] = useState(false);
   const [data, setData] = useState<SinewFile | null>(null);
   const [failed, setFailed] = useState(false);
-  const [sinew, setSinew] = useState('BL');
-  const [side, setSide] = useState<'right' | 'left'>('right');
+  const [sinew, setSinew] = useState(request?.sinew ?? 'BL');
+  const [side, setSide] = useState<'right' | 'left'>(request?.side ?? 'right');
+  useEffect(() => { if (request) { setSinew(request.sinew); setSide(request.side); } }, [request]);
   useEffect(() => { let live = true; void loadSinews().then(f => { if (!live) return; if (f) setData(f); else setFailed(true); }); return () => { live = false; }; }, []);
-  useEffect(() => { if (data) host.showSinew(data, sinew); return () => host.showSinew(null, null); }, [host, data, sinew]);
+  const six = sixChannelOf(sinew), shown = paired && six ? [six.hand, six.foot] : [sinew];
+  useEffect(() => { if (data) host.showSinew(data, shown); return () => host.showSinew(null, null); }, [host, data, shown.join()]); // eslint-disable-line react-hooks/exhaustive-deps
+  // The sinew's region: every muscle its course lies on, coloured on the model (on by default).
+  useEffect(() => { host.setSinewRegion(data && region ? [...new Set(shown.flatMap(code => data.sinews[code].muscles[side]))] : null); return () => host.setSinewRegion(null); }, [host, data, shown.join(), side, region]); // eslint-disable-line react-hooks/exhaustive-deps
   if (failed) return <p className="quiet-note">경근 자료를 불러오지 못했습니다.</p>;
   if (!data) return <p className="quiet-note">경근 자료를 불러오는 중…</p>;
   const current = data.sinews[sinew];
@@ -82,11 +106,18 @@ function SinewView({ host, rows, onSelectStructure }: {
     </div>
     <section className="acupoint-detail sinew-detail" aria-label="선택한 경근">
       <h4>{current.nameKo} <span>{current.hanja}</span></h4>
-      {current.strands.map((strand, i) => <ol key={i} className="sinew-strand">{strand.map((n, j) => <li key={j}>{n.label}</li>)}</ol>)}
+      {current.strands.map((strand, i) => <ol key={i} className="sinew-strand">{strand.map((n, j) => {
+        const concept = acupoints.concepts.find(c => c.code === n.anchor), id = acupointId({ code: n.anchor, side: acupoints.points.some(p => p.code === n.anchor && p.side === 'midline') ? 'midline' : side });
+        return <li key={j} className={isBinding(n) ? 'sinew-binding' : undefined}>{isBinding(n) && <b className="binding-mark">結</b>}{n.label}
+          {concept && <button className="sinew-anchor" onClick={() => onPoint(id)} title="이 자리를 경혈 보기로">{concept.nameKo}<small>{concept.code}</small></button>}</li>; })}</ol>)}
+      <p className="quiet-note">結은 경근이 뼈·관절에 맺히는 곳입니다(모형 위 큰 호박색 점). 그 자리의 혈은 바닥이 되는 뼈와 건이 있어 매번 같은 곳을 짚기 쉽습니다.</p>
       {current.internal.length > 0 && <p className="quiet-note">몸속 경로(선으로 그리지 않음): {current.internal.join(' · ')}</p>}
       <div className="movement-side" role="group" aria-label="몸의 쪽">
         {(['right', 'left'] as const).map(s => <button key={s} aria-pressed={side === s} onClick={() => setSide(s)}>{s === 'right' ? '오른쪽' : '왼쪽'}</button>)}
       </div>
+      <label className="sinew-region-toggle"><input type="checkbox" checked={region} onChange={e => setRegion(e.target.checked)}/> 영역 칠하기 <small>경로가 지나는 근육을 호박색으로</small></label>
+      {six && <label className="sinew-region-toggle"><input type="checkbox" checked={paired} onChange={e => setPaired(e.target.checked)}/> 같은 이름 함께 · {six.name}({six.hanja})
+        <small>{data.sinews[six.hand].nameKo} + {data.sinews[six.foot].nameKo}</small></label>}
       {muscles.length > 0 && <><h5>경로가 지나는 근육</h5><div className="attachment-bone-links">{muscles
         .map(r => <button key={r.sourceKey} className="bone-related-muscle" onClick={() => onSelectStructure(r.sourceKey, r.side)}>{r.label}</button>)}</div></>}
     </section>

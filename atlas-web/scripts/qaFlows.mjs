@@ -119,6 +119,32 @@ const flows = [
     await page.locator('.attachment-insertion .attachment-area-chips li').first().waitFor({ timeout: 10000 });
     const areas = await page.evaluate(() => { const roles = []; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && o.userData.attachmentPatch) roles.push(o.material.name.match(/attachment(\w+)/)?.[1]); }); return roles.sort(); });
     expect(areas.join() === 'Insertion,Origin', `뼈 위 부착 면: ${areas.join() || '없음'}`);
+    // 2026-11-16: names lead with 구용어, and the 경락 tab links the muscle to sinews and acupoints that open in the panel.
+    expect(/구용어\s*대퇴직근/.test(text) && /신용어\s*넙다리곧은근/.test(text), `이름 순서: ${text.slice(0, 120)}`);
+    await page.getByRole('tab', { name: '경락' }).click();
+    await page.locator('#study-meridian-panel h3', { hasText: '지나가는 경근' }).waitFor({ timeout: 10000 });
+    const meridian = await page.locator('#study-meridian-panel').innerText();
+    expect(/족양명경근/.test(meridian) && /바로 위의 경혈/.test(meridian), `경락 탭: ${meridian.replace(/\s+/g, ' ').slice(0, 200)}`);
+    // 2026-11-19: the card colours a passing sinew's region on the model (the muscle itself stays selected).
+    const coloured = () => page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && /:meridian:/.test(o.material?.name ?? '')) n++; }); return n; });
+    await page.locator('#study-meridian-panel section', { hasText: '지나가는 경근' }).locator('li', { hasText: '족양명경근' }).locator('.meridian-region').click();
+    const regionMuscles = await coloured();
+    expect(regionMuscles > 10, `족양명경근 영역 근육 ${regionMuscles}개`);
+    await page.locator('#study-meridian-panel section', { hasText: '지나가는 경근' }).locator('li', { hasText: '족양명경근' }).locator('.meridian-region').click();
+    expect(await coloured() === 0, '영역 끄기 뒤에도 색이 남음');
+    // 2026-11-19: hand/foot boundary (rectus femoris lies below it) and the same-name pairs.
+    expect(/경계 아래/.test(meridian) && /從腰以上者/.test(meridian), `손·발 경계: ${meridian.replace(/\s+/g, ' ').slice(0, 200)}`);
+    await page.locator('#study-meridian-panel .meridian-sinews li', { hasText: '수양명경근 + 족양명경근' }).locator('.meridian-region').click();
+    const pairMuscles = await coloured();
+    expect(pairMuscles > regionMuscles, `양명 손발 함께 ${pairMuscles}개 > 족양명 ${regionMuscles}개`);
+    await page.locator('#study-meridian-panel .meridian-sinews li', { hasText: '수양명경근 + 족양명경근' }).locator('.meridian-region').click();
+    const firstPoint = page.locator('#study-meridian-panel .meridian-group .meridian-point').first();
+    const pointName = await firstPoint.evaluate(b => b.firstChild.textContent.trim());
+    await firstPoint.click();
+    const opened = await page.locator('.acupoint-detail h4').innerText({ timeout: 10000 });
+    expect(opened.startsWith(pointName), `경혈 창에서 ${pointName} 열림: ${opened}`);
+    await page.getByRole('button', { name: '경혈 닫기' }).click();
+    await page.getByRole('tab', { name: '구조' }).click();
     // C2: blood supply from the two-source muscle card table.
     const supply = await page.locator('.attachment-section', { hasText: '혈액공급' }).innerText({ timeout: 10000 });
     expect(supply.includes('가쪽넙다리휘돌이동맥'), `혈액공급: ${supply.replace(/\s+/g, ' ').slice(0, 200)}`);
@@ -134,7 +160,7 @@ const flows = [
     await settle(page);
     const vessels = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && /^vessel:/.test(o.material.name)) n++; }); return n; });
     expect(vessels > 600, `보이는 혈관 ${vessels}개`);
-    return `카드·3D 선택 일치, 기시·정지 면·혈액공급 표시 → 동맥 카드, 혈관 ${vessels}개`;
+    return `카드·3D 선택 일치, 구용어→신용어→영어, 기시·정지 면, 경락 탭(족양명경근 영역 · 손·발 경계 아래 · 양명 손발 함께 · ${pointName} → 경혈 창), 혈액공급 표시 → 동맥 카드, 혈관 ${vessels}개`;
   }],
   ['무릎 인대 구조 보기: 앞십자인대 → 무릎 움직여 보기', async page => {
     await open(page);
@@ -203,8 +229,11 @@ const flows = [
     expect(fingers.includes('천지굴근'), `손가락 몸쪽마디 굽힘 주동근: ${fingers.slice(0, 120)}`);
     const neck = await movers('목·머리', '왼쪽 돌림 / 오른쪽 돌림', 30);
     expect(neck.includes('흉쇄유돌근'), `목 돌림 주동근: ${neck.slice(0, 160)}`);
+    // Scapulohumeral rhythm: raising the arm past 30° also turns the scapula upward, and its movers are listed.
+    const raised = await movers(/^어깨$/, '벌림 / 모음', 120);
+    expect(/어깨뼈 위쪽돌림 30°/.test(raised) && raised.includes('전거근'), `어깨 벌림 120°의 어깨뼈 위쪽돌림(전거근): ${raised.slice(0, 200)}`);
     await page.getByRole('button', { name: '처음 자세로' }).click();
-    return '굽힘 주동근(상완근)·길항근(삼두근), 어깨뼈 올림(견갑거근)·손가락 굽힘(천지굴근)·목 돌림(흉쇄유돌근), 처음 자세 복귀';
+    return '굽힘 주동근(상완근)·길항근(삼두근), 어깨뼈 올림(견갑거근)·손가락 굽힘(천지굴근)·목 돌림(흉쇄유돌근), 어깨 벌림 120° → 어깨뼈 위쪽돌림 30°(전거근), 처음 자세 복귀';
   }],
   ['층 벗기기: 근막 → 얕은 근육, 되돌리기, 투명도, 단면', async page => {
     await open(page);
@@ -352,11 +381,23 @@ const flows = [
     await page.waitForTimeout(300);
     const k1 = await knot();
     expect(k0.beads > 200 && k0.at && k1.at && Math.hypot(k1.at[1] - k0.at[1], k1.at[2] - k0.at[2]) > .1, `곤륜 매듭이 무릎 굽힘을 따라가지 않음: ${JSON.stringify(k0)} → ${JSON.stringify(k1)}`);
+    // 2026-11-19: the sinew's region is coloured on the model, and its binding places (結) are marked with their points.
+    const region = await page.evaluate(() => { let muscles = 0, bindings = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && /:meridian:/.test(o.material?.name ?? '')) muscles++; if (o.userData.binding) bindings++; }); return { muscles, bindings }; });
+    const marked = await page.locator('.sinew-detail .sinew-binding').count();
+    expect(region.muscles > 10 && region.bindings > 5 && marked > 5, `족태양경근 영역·結: ${JSON.stringify(region)}, 목록 結 ${marked}`);
+    await page.locator('.sinew-region-toggle', { hasText: '영역 칠하기' }).locator('input').uncheck();
+    expect(await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && /:meridian:/.test(o.material?.name ?? '')) n++; }); return n; }) === 0, '영역 칠하기를 꺼도 색이 남음');
+    await page.locator('.sinew-region-toggle', { hasText: '영역 칠하기' }).locator('input').check();
+    // Same name together: 수태양 + 족태양 lines on the model.
+    await page.locator('.sinew-region-toggle', { hasText: '같은 이름 함께' }).locator('input').check();
+    const paired = await page.evaluate(() => { const s = new Set(); window.__atlasScene.root.traverse(o => { if (o.userData.sinewNode) s.add(o.userData.sinewNode.split(':')[0]); }); return [...s].sort().join(); });
+    expect(paired === 'BL,SI', `태양 손발 함께 그린 경근: ${paired}`);
+    await page.locator('.sinew-region-toggle', { hasText: '같은 이름 함께' }).locator('input').uncheck();
     const muscle = page.locator('.sinew-detail .bone-related-muscle').first(); const name = await muscle.innerText();
     await muscle.click(); await page.waitForTimeout(1500);
     const card = await page.locator('.study-detail-header h2').innerText().catch(() => '(없음)');
     expect(card.includes(name.split(' ')[0]), `경근 근육 → 카드: ${name} → ${card}`);
-    return `경맥 14개 → 척택 설명·주변 구조 → 태연 표지가 팔꿉 90°를 따라감 → 요골신경 카드 → 독맥 백회(정중선, ${shown.length}혈만 표시) → 족태양경근(구슬 ${k0.beads}개, 곤륜 매듭이 무릎 굽힘을 따라감) → ${name} 카드`;
+    return `경맥 14개 → 척택 설명·주변 구조 → 태연 표지가 팔꿉 90°를 따라감 → 요골신경 카드 → 독맥 백회(정중선, ${shown.length}혈만 표시) → 족태양경근(구슬 ${k0.beads}개, 곤륜 매듭이 무릎 굽힘을 따라감, 영역 근육 ${region.muscles}개·結 ${region.bindings}곳, 태양 손발 함께) → ${name} 카드`;
   }],
 ];
 

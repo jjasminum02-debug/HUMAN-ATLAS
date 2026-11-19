@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
-import type { SinewFile } from '../viewer/acupointLayer.ts';
+import { isBinding, SIX_CHANNELS, type SinewFile } from '../viewer/acupointLayer.ts';
 
 const read = (path: string) => JSON.parse(readFileSync(new URL(`../../../atlas-data/${path}`, import.meta.url), 'utf8'));
 const file = read('runtime/sinews.json') as SinewFile;
@@ -39,4 +39,24 @@ test('muscles under the lines: calf and buttock for the bladder sinew, adductors
   assert.ok(en('LR').includes('Adductor longus') || en('LR').includes('Gracilis muscle'), en('LR').join());
   assert.ok(en('LU').some(n => /biceps brachii/.test(n)), en('LU').join());
   assert.ok(en('BL', 'left').some(n => /gastrocnemius/.test(n)));
+});
+
+test('every sinew has binding places (結), each on a computed point, and path nodes line up with the course text', () => {
+  for (const code of file.order) {
+    const nodes = file.sinews[code].strands.flat();
+    assert.ok(nodes.some(isBinding), `${code}: no 結 in the course`);
+    for (const path of file.paths.filter(p => p.sinew === code))
+      assert.deepEqual(path.nodes.map(n => n.anchor), file.sinews[code].strands[path.strand].map(n => n.anchor), `${code} ${path.side} strand ${path.strand}`);
+  }
+});
+
+test('six channel names pair each hand sinew with one foot sinew, covering all twelve', () => {
+  const codes = SIX_CHANNELS.flatMap(c => [c.hand, c.foot]);
+  assert.deepEqual([...codes].sort(), [...file.order].sort());
+  for (const c of SIX_CHANNELS) assert.ok(file.sinews[c.hand].nameKo.startsWith('수') && file.sinews[c.foot].nameKo.startsWith('족') && file.sinews[c.hand].nameKo.slice(1) === file.sinews[c.foot].nameKo.slice(1), c.name);
+});
+
+test('the hand/foot boundary sits at the thoracolumbar junction', () => {
+  const y = rig.landmarks.handFootBoundary.y;
+  assert.ok(y > 1.10 && y < 1.17 && rig.landmarks.handFootBoundary.segment === 'torso', `boundary y ${y}`);
 });

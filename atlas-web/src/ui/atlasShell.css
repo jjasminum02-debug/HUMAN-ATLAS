@@ -465,3 +465,67 @@
 /* The explorer sidebar (search results) stays usable: the panel moves beside it, or under it on phones. */
 .atlas-shell:has(.study-sidebar.is-open) .study-tools { left: 280px; }
 @media (max-width: 599px) { .atlas-shell .study-tools, .atlas-shell:has(.study-sidebar.is-open) .study-tools { left: 8px; right: 8px; width: auto; top: 4px; z-index: 2; } }
+
+/* Phones (2026-11-16): more room for the model. The quiz button shares the search row, the layer chips and the view
+   actions share one sideways-scrolling row (faded at the edge so it reads as scrollable), and the app-info link sits
+   above the card instead of over its text. */
+@media (max-width:599px) {
+  .atlas-shell .study-header { grid-template-columns: minmax(0,1fr) auto; min-height: 0; }
+  .atlas-shell .global-search { grid-column: 1; grid-row: 2; }
+  .atlas-shell .study-tools-trigger { grid-column: 2; grid-row: 2; min-height: 40px; }
+  .atlas-shell .toolbar-main { flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 4px; overflow-x: auto; scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent); padding-right: 20px; }
+  .atlas-shell .toolbar-main::-webkit-scrollbar { display: none; }
+  /* Rows and panels inside the toolbar take the screen width, not the width of their longest line. */
+  .atlas-shell .body-tools > * { align-self: stretch; min-width: 0; max-width: 100%; }
+  .atlas-shell .movement-dofs { grid-template-columns: minmax(0, 1fr); }
+  .atlas-shell .toolbar-main .layer-row, .atlas-shell .toolbar-main .view-options-row { flex: none; overflow: visible; }
+  .atlas-shell:has(.study-details[open]) .app-info-trigger { bottom: calc(clamp(232px,30dvh,280px) + 6px); }
+  .atlas-shell:has(.study-details:not([open])) .app-info-trigger { bottom: 58px; }
+}
+
+/* Names (2026-11-16): 구용어 (한자어) leads, 신용어 and English follow in quieter type. */
+.atlas-shell .names-card .name-traditional strong { font-size: 15px; font-weight: 700; color: #23342e; }
+.atlas-shell .names-card .name-modern strong { font-size: 13px; font-weight: 500; }
+.atlas-shell .names-card .name-en strong { font-size: 12px; font-weight: 400; font-style: italic; color: #56665f; }
+.atlas-shell .names-card span { flex-basis: 44px; }
+.atlas-shell .card-kind { margin: 2px 0 4px; font-size: 11px; color: #73877e; }
+@media (max-width:599px) { .atlas-shell .study-detail-header > .card-kind { display: none; } }
+
+/* Muscle card 경락 tab. */
+.atlas-shell .meridian-summary { margin: 4px 0 10px; padding: 8px 10px; border-radius: 10px; background: #f1f6f3; font-size: 12px; color: #4b5d57; line-height: 1.6; }
+.atlas-shell .meridian-summary strong { color: #2f5d50; }
+.atlas-shell .meridian-group { margin: 6px 0 10px; }
+.atlas-shell .meridian-group h5 { margin: 0 0 4px; font-size: 12px; color: #4b5d57; }
+.atlas-shell .meridian-group h5 span { font-weight: 400; color: #8a9891; }
+.atlas-shell .meridian-point small { margin-left: 5px; font-size: 10px; color: #7c8b84; }
+
+/* Tablets (touch, about 70 % of learners): finger-sized targets and sliders. */
+@media (pointer: coarse) {
+  .atlas-shell .body-tools .toolbar-main button, .atlas-shell .body-tools .selection-view-options button, .atlas-shell .study-tabs button { min-height: 44px; }
+  .atlas-shell :is(.movement-panel, .section-panel, .acupoint-panel) button, .atlas-shell .bone-related-muscle, .atlas-shell .attachment-bone-links button { min-height: 40px; }
+  .atlas-shell :is(.movement-panel, .section-panel) input[type=range] { height: 32px; }
+}
+/* A folded card's title bar sits in the canvas corner: the acupoint panel and its entry button start below it. */
+.atlas-shell:has(.study-details:not([open])) :is(.acupoint-panel, .acupoint-entry) { top: calc(var(--detail-summary-height, 52px) + 16px); }
+.atlas-shell .acupoint-panel { max-height: calc(100% - var(--view-tools-height, 128px) - 52px); }
+.atlas-shell:has(.study-details:not([open])) .acupoint-panel { max-height: calc(100% - var(--view-tools-height, 128px) - 52px - var(--detail-summary-height, 52px) - 8px); }
+
+/* Meridian sinew regions and binding places (2026-11-19). */
+.atlas-shell .meridian-sinews { list-style: none; margin: 4px 0; padding: 0; display: grid; gap: 6px; }
+.atlas-shell .meridian-sinews li { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.atlas-shell .meridian-region, .atlas-shell .sinew-anchor { min-height: 32px; padding: 4px 9px; border: 1px solid #e3cfa2; border-radius: 8px; background: #fffaf0; color: #7a5413; font-size: 12px; cursor: pointer; }
+.atlas-shell .meridian-region[aria-pressed=true] { background: #d39a2c; border-color: #d39a2c; color: #fff; }
+.atlas-shell .sinew-strand li.sinew-binding { color: #6b4a12; }
+.atlas-shell .binding-mark { display: inline-block; margin-right: 4px; padding: 0 4px; border-radius: 5px; background: #d39a2c; color: #fff; font-size: 10px; font-weight: 700; }
+.atlas-shell .sinew-anchor { margin-left: 6px; min-height: 26px; padding: 1px 7px; font-size: 11px; }
+.atlas-shell .sinew-anchor small { margin-left: 3px; color: #9a7a3d; }
+.atlas-shell .sinew-region-toggle { display: flex; align-items: center; gap: 6px; margin: 8px 0 4px; font-size: 12px; color: #4b5d57; }
+.atlas-shell .sinew-region-toggle small { color: #8a9891; }
+@media (pointer: coarse) { .atlas-shell .meridian-region, .atlas-shell .sinew-anchor { min-height: 40px; } }
+/* Hand/foot boundary and six-channel names (2026-11-19). */
+.atlas-shell .six-channel { display: inline-block; min-width: 2.6em; padding: 1px 6px; border-radius: 6px; background: #efe8f8; color: #5b3f99; font-size: 11px; font-weight: 700; text-align: center; }
+.atlas-shell .six-pair { font-size: 12px; color: #4b5d57; }
+.atlas-shell .hand-foot p { margin: 4px 0; font-size: 12px; line-height: 1.6; }
+.atlas-shell .classic-quote { padding: 6px 9px; border-left: 3px solid #b9a3e0; background: #f7f4fc; color: #3f3555; font-size: 12px; }
+.atlas-shell .classic-quote small { margin-left: 6px; color: #8a7fa1; }
