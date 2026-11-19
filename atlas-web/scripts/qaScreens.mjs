@@ -78,9 +78,15 @@ const cardFacts = page => page.evaluate(() => {
     const top = h ? h.getBoundingClientRect().top : Infinity;
     facts[name] = { panel: panel?.id ?? 'card', visibleWithoutScroll: shown && top < bottom && top >= box.top };
   }
+  // U2: the key lines under the title carry the four facts (붙는 곳 = 기시 + 정지) without a tab.
+  for (const row of card.querySelectorAll('.key-facts [data-fact]')) {
+    const top = row.getBoundingClientRect().top, seen = top < bottom && top >= box.top;
+    const names = { attach: ['기시', '정지'], nerve: ['신경'], action: ['작용'] }[row.dataset.fact] ?? [];
+    for (const name of names) if (seen) facts[name] = { panel: 'card', visibleWithoutScroll: true };
+  }
   const openPanel = [...card.querySelectorAll('.study-tab-panel')].find(p => !p.hidden)?.id ?? 'card';
   const panels = new Set(Object.values(facts).map(f => f.panel));
-  panels.delete(openPanel);
+  panels.delete(openPanel); panels.delete('card'); // facts on the card itself need no tab
   const firstSection = card.querySelector('.study-tab-panel:not([hidden]) section, .study-tab-panel:not([hidden]) h3');
   return {
     cardWidth: Math.round(box.width),

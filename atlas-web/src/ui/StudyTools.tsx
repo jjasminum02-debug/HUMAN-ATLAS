@@ -16,13 +16,14 @@ function useBookmarks(): [Bookmark[], (next: Bookmark[]) => void] {
 
 const KIND_LABEL: Record<string, string> = { muscle: '근육', bone: '뼈', joint: '인대·관절', vessel: '혈관', fascia: '근막', tendon: '힘줄', nerve: '신경' };
 
-export function BookmarkButton({ row, host }: { row: RuntimeStructureRecord; host?: unknown }) {
+export function BookmarkButton({ row, host, compact = false }: { row: RuntimeStructureRecord; host?: unknown; compact?: boolean }) {
   const [list, setList] = useBookmarks();
   const saved = list.some(b => b.key === row.sourceKey);
   // The current camera, layers and section are saved with the structure (4-1 step 6).
   const view = () => (isStudyViewHost(host) ? host.captureStudyView() : null) ?? undefined;
   return <button className="bookmark-toggle" aria-pressed={saved} title={saved ? '북마크에서 빼기' : '이 구조를 지금 보는 시점·층과 함께 저장'}
-    onClick={() => setList(toggleBookmark(list, { key: row.sourceKey, label: row.label, kind: row.kind, view: view() }))}>{saved ? '★ 저장됨' : '☆ 북마크'}</button>;
+    aria-label={compact ? (saved ? '북마크 저장됨' : '북마크') : undefined}
+    onClick={() => setList(toggleBookmark(list, { key: row.sourceKey, label: row.label, kind: row.kind, view: view() }))}>{compact ? (saved ? '★' : '☆') : saved ? '★ 저장됨' : '☆ 북마크'}</button>;
 }
 
 export function StudyTools({ rows, host, selected, onSelect, onClearSelection, onClose }: {

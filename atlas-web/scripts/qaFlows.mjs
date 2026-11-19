@@ -120,7 +120,14 @@ const flows = [
     const areas = await page.evaluate(() => { const roles = []; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && o.userData.attachmentPatch) roles.push(o.material.name.match(/attachment(\w+)/)?.[1]); }); return roles.sort(); });
     expect(areas.join() === 'Insertion,Origin', `뼈 위 부착 면: ${areas.join() || '없음'}`);
     // 2026-11-16: names lead with 구용어, and the 경락 tab links the muscle to sinews and acupoints that open in the panel.
-    expect(/구용어\s*대퇴직근/.test(text) && /신용어\s*넙다리곧은근/.test(text), `이름 순서: ${text.slice(0, 120)}`);
+    // 4-3 U2: the title is the 구용어; one line under it carries 신용어 and English, then four key lines.
+    const head = await page.locator('.study-detail-header').innerText();
+    expect(/대퇴직근/.test(await page.locator('.study-details > summary').innerText()) && /넙다리곧은근[\s\S]*Rectus femoris/.test(head), `이름 순서: ${head.replace(/\s+/g, ' ').slice(0, 120)}`);
+    const facts = await page.locator('.key-facts [data-fact]').evaluateAll(rows => rows.map(r => r.dataset.fact + ':' + r.querySelector('dd').textContent));
+    expect(facts.length === 4 && /attach:.*→/.test(facts[0]) && /nerve:대퇴신경/.test(facts[1]) && /action:/.test(facts[2]) && /meridian:.*족양명경근/.test(facts[3]), `핵심 네 줄: ${facts.join(' | ')}`);
+    await page.locator('.key-facts [data-fact=meridian]').click();
+    expect(await page.getByRole('tab', { name: '경락' }).getAttribute('aria-selected') === 'true', '경락 줄을 눌러도 경락 탭이 열리지 않음');
+    await page.getByRole('tab', { name: '구조' }).click();
     await page.getByRole('tab', { name: '경락' }).click();
     await page.locator('#study-meridian-panel h3', { hasText: '지나가는 경근' }).waitFor({ timeout: 10000 });
     const meridian = await page.locator('#study-meridian-panel').innerText();
@@ -160,7 +167,7 @@ const flows = [
     await settle(page);
     const vessels = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && /^vessel:/.test(o.material.name)) n++; }); return n; });
     expect(vessels > 600, `보이는 혈관 ${vessels}개`);
-    return `카드·3D 선택 일치, 구용어→신용어→영어, 기시·정지 면, 경락 탭(족양명경근 영역 · 손·발 경계 아래 · 양명 손발 함께 · ${pointName} → 경혈 창), 혈액공급 표시 → 동맥 카드, 혈관 ${vessels}개`;
+    return `카드·3D 선택 일치, 구용어 제목·신용어·영어 한 줄, 핵심 네 줄(경락 줄 → 경락 탭), 기시·정지 면, 경락 탭(족양명경근 영역 · 손·발 경계 아래 · 양명 손발 함께 · ${pointName} → 경혈 창), 혈액공급 표시 → 동맥 카드, 혈관 ${vessels}개`;
   }],
   ['무릎 인대 구조 보기: 앞십자인대 → 무릎 움직여 보기', async page => {
     await open(page);

@@ -14,6 +14,7 @@ import { MuscleActionSummary, MuscleBloodSupply, MuscleNerves, VesselCard } from
 import { BookmarkButton, StudyTools } from './StudyTools';
 import { ClinicalTests } from './ClinicalTests';
 import { CardLimits } from './CardLimits';
+import { MuscleKeyFacts } from './MuscleKeyFacts';
 import { MusclePosture } from './PosturePatterns';
 import { MeridianLinks } from './MeridianLinks';
 import { isRigHost, jointsForBone, movementLabel, movementLibrary, type MuscleActionsFile } from '../viewer/movement';
@@ -29,25 +30,14 @@ function routeAudienceFor(search: string): 'learner' | 'inspection' {
 function resolveRoute(search: string, rows: RuntimeStructureRecord[]): DatasetRoute {
     return readDatasetRoute(search, rows, regionIds, routeAudienceFor(search));
 }
-/** Names in the order a Korean-medicine student uses them after 본과 2학년: 구용어 (한자어) first, then 신용어 (우리말), then English. */
-function NameList({ names }: { names: { koTraditional?: string | null; koModern?: string | null; en?: string | null } }) {
-    return <div className="names-card" aria-label="이름">
-        <div className="name-traditional"><span>구용어</span><strong>{names.koTraditional || '이름 정리 중'}</strong></div>
-        <div className="name-modern"><span>신용어</span><strong>{names.koModern || '이름 정리 중'}</strong></div>
-        <div className="name-en"><span>영어</span><strong lang="en">{(names.en || '').replace(/^\((.*)\)$/, '$1') || '이름 정리 중'}</strong></div>
-    </div>;
-}
 // Muscle card tabs: anatomy, movement, and the channel picture (경혈·경근) for Korean-medicine students.
 type DetailTab = '구조' | '기능' | '경락';
 const DETAIL_TABS: DetailTab[] = ['구조', '기능', '경락'];
 const TAB_PANELS: Record<DetailTab, string> = { 구조: 'study-structure-panel', 기능: 'study-function-panel', 경락: 'study-meridian-panel' };
-function NameRows({ row }: {
-    row: RuntimeStructureRecord;
-}) {
+/** Names shown under the card title; nerves use their own term table. */
+function cardNames(row: RuntimeStructureRecord): { koTraditional?: string | null; koModern?: string | null; en?: string | null } {
     const nerveNames = row.kind === 'nerve' ? nerveNamesForSource(row.names.en) : null;
-    const names = nerveNames ? { koModern: nerveNames.koModern, koTraditional: nerveNames.koTraditional, en: nerveNames.en }
-        : row.names;
-    return <NameList names={names}/>;
+    return nerveNames ? { koModern: nerveNames.koModern, koTraditional: nerveNames.koTraditional, en: nerveNames.en } : row.names;
 }
 const TISSUE_LABELS: Record<string, string> = { ligament: '인대', capsule: '관절주머니', disc: '원판', meniscus: '반달', labrum: '관절테두리',
     membrane: '막', cartilaginous_joint: '연골결합', cartilage: '연골', fat_pad: '지방체', bursa: '윤활주머니', fascia: '근막', aponeurosis: '널힘줄',
@@ -415,10 +405,24 @@ export default function App() {
     <WholeBodyViewer attachmentRole={attachmentRole} homeRevision={homeRevision} viewResetRevision={viewResetRevision} datasetSource={data} onEntered={setEntered} onMotionHostChange={setMotionHost} onMuscleLayerChange={setMuscleLayerEnabled} onBoneLayerChange={setBoneLayerEnabled} onSelectionHiddenChange={setSelectedSourceHidden} regionIds={route.regions} selectedId={route.selected} selectedIds={selectedSourceKeys} whole={!route.regions.length} onWholeChange={() => { resetPresentation(); navigate({ regions: [], selected: route.selected }); }} onSelect={select}/>
    </section>
    {(selected || selectedTextNerve) && <details inert={!entered} className="study-details" id="study-details" open={detailsOpen} onToggle={e => setDetailsOpen(e.currentTarget.open)}><summary className="mobile-detail-summary">{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</summary><div className="study-detail-body"><div className="study-detail-header">
-    <button className="bone-related-muscle" onClick={() => navigate({ regions: [], selected: null })}>선택 해제</button>{selected && <BookmarkButton row={selected} host={motionHost}/>}<h2>{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</h2>{selected && anatomicalPartSubtitle(selected.names.en) && <p className="anatomical-part-subtitle">{anatomicalPartSubtitle(selected.names.en)}</p>}
-
-    {selected && <><p className="card-kind">{kindLabel(selected)} · {selected.side === 'left' ? '왼쪽' : selected.side === 'right' ? '오른쪽' : '좌우 구분 없음'}</p>
-    <div className="part-pills" aria-label="좌우 모형">{data.integration.objects.filter(r => r.routeAudience === (route.audience ?? 'learner') && r.localDisplayEligible && r.inspectionEligible && r.names.en === selected.names.en && r.side).map(r => <button key={r.sourceKey} aria-pressed={r.sourceKey === selected.sourceKey} onClick={() => select(r.sourceKey)}>{r.side === 'left' ? '왼쪽' : '오른쪽'}</button>)}</div></>}
+    <h2>{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</h2>{selected && anatomicalPartSubtitle(selected.names.en) && <p className="anatomical-part-subtitle">{anatomicalPartSubtitle(selected.names.en)}</p>}
+    {/* 4-3 U2: one line under the title: kind, 신용어 and English (구용어 is the title), side, bookmark and clear. */}
+    <div className="card-meta">
+      <p className="card-names">{(() => {
+        const n = selected ? cardNames(selected) : selectedTextNerve!.names, title = selected ? learnerRowTitle(selected) : null;
+        return <>{selected && <span className="card-kind-chip">{kindLabel(selected)}</span>}{n.koModern && n.koModern !== title && <span>{n.koModern}</span>}
+          {n.en && <span lang="en">{n.en.replace(/^\((.*)\)$/, '$1')}</span>}</>;
+      })()}</p>
+      <div className="card-actions">
+        {selected && <div className="part-pills" aria-label="좌우 모형">{data.integration.objects.filter(r => r.routeAudience === (route.audience ?? 'learner') && r.localDisplayEligible && r.inspectionEligible && r.names.en === selected.names.en && r.side).map(r => <button key={r.sourceKey} aria-pressed={r.sourceKey === selected.sourceKey} onClick={() => select(r.sourceKey)}>{r.side === 'left' ? '왼쪽' : '오른쪽'}</button>)}</div>}
+        {selected && <BookmarkButton row={selected} host={motionHost} compact/>}
+        <button className="card-close" aria-label="선택 해제" title="선택 해제" onClick={() => navigate({ regions: [], selected: null })}>×</button>
+      </div>
+    </div>
+    {selected?.kind === 'muscle' && <MuscleKeyFacts muscle={selected} onOpen={switchDetailTab} attach={{
+      origin: attachmentBoneKeys(selected.sourceKey, 'origin', data.integration.objects).map(key => runtimeByKey.get(key)?.label).filter((l): l is string => Boolean(l)),
+      insertion: attachmentBoneKeys(selected.sourceKey, 'insertion', data.integration.objects).map(key => runtimeByKey.get(key)?.label).filter((l): l is string => Boolean(l)),
+      text: { origin: structureTextForSource(selected.sourceKey, 'origin') || undefined, insertion: structureTextForSource(selected.sourceKey, 'insertion') || undefined } }}/>}
     {selected?.kind === 'muscle' && <>
     <div className="study-tabs" role="tablist" aria-label="학습 내용">{DETAIL_TABS.map(t => <button key={t} role="tab" id={`tab-${t}`} aria-controls={TAB_PANELS[t]} aria-selected={tab === t} tabIndex={tab === t ? 0 : -1} onClick={() => switchDetailTab(t)} onKeyDown={e => { if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) {
                 e.preventDefault();
@@ -429,7 +433,6 @@ export default function App() {
             } }}>{t}</button>)}</div>
     </>}
     </div><div ref={detailContent} className="study-detail-content" onScroll={e => { if (detailSubject) detailScrollPositions.current.set(`${detailSubject}:${tab}`, e.currentTarget.scrollTop); }}>
-    {selected ? <NameRows row={selected}/> : <NameList names={selectedTextNerve!.names}/>}
     {selected?.names.en === 'Rotatores' && route.regions.length > 0 && !route.regions.includes('back') && <p className="quiet-note">선택한 돌림근 모형은 목에만 한정되지 않고 척추를 따라 이어지는 전체 묶음입니다.</p>}
     {!selected && selectedTextNerve && <section className="attachment-section nerve-card text-nerve-card" aria-label="신경 개념 설명">
       <h3>신경 설명</h3>
