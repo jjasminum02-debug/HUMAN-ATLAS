@@ -3,7 +3,7 @@
 // acupoints.json / sinews.json the acupoint panel uses (positions computed on this model; 『영추·경근』 courses).
 import { useEffect, useMemo, useState } from 'react';
 import type { RuntimeStructureRecord } from '../viewer/datasets/integration';
-import { acupointId, sixChannelOf, type AcupointFile, type AcupointInstance, type AcupointTarget, type SinewFile } from '../viewer/acupointLayer';
+import { acupointId, locationBasis, sixChannelOf, type AcupointFile, type AcupointInstance, type AcupointTarget, type SinewFile } from '../viewer/acupointLayer';
 import { loadAcupoints, loadSinews } from '../viewer/wholeBody/AcupointPanel';
 
 export function meridianLinks(muscleKey: string, side: string | null, acupoints: AcupointFile, sinews: SinewFile) {
@@ -57,7 +57,7 @@ export function MeridianLinks({ muscle, host, onOpen }: { muscle: RuntimeStructu
       <h5>{c ? <>{c.nameKo} <span>{c.nameHanja}</span></> : channel}</h5>
       <div className="attachment-bone-links">{list.map(p => { const concept = acupoints.concepts.find(x => x.code === p.code)!;
         return <button key={acupointId(p)} className="bone-related-muscle meridian-point" disabled={!onOpen} onClick={() => onOpen?.({ point: acupointId(p) })}>
-          {concept.nameKo}<small>{concept.hanja} · {concept.code}</small></button>; })}</div>
+          {concept.nameKo}<small>{concept.hanja} · {concept.code}</small>{locationBasis(concept.location).kind === 'landmark' && <i className="landmark-mark" title="표지에서 바로 잡는 혈">표지</i>}</button>; })}</div>
     </div>;
   });
   return <div className="meridian-links">

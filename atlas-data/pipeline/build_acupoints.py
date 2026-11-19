@@ -45,6 +45,15 @@ SINEW_STEP, SINEW_NEAR = .01, .01
 NEAR, LIFT, GAP, REACH = .012, .0015, .02, .25
 SURFACE_LAYERS = {'muscle', 'fascia', 'joint', 'bone'}
 NEAR_LAYERS = {'muscle', 'joint', 'bone', 'vessel', 'nerve', 'fascia'}
+# Vessels and nerves beneath a point (learner safety context): within BENEATH_RADIUS of the line from the point straight
+# inward, down to BENEATH_DEPTH, nearest first. A model measurement of what lies under the point, not a needling depth.
+BENEATH_DEPTH, BENEATH_RADIUS, BENEATH_MAX = .06, .01, 6
+# Where the model itself limits a point (kept in the checks file, the one exception list).
+MODEL_NOTES = {
+    'LU1': 'surface taken from outside (outer:): the outward walk crossed the empty axilla (no axillary fat in the model) onto subscapularis',
+    'GB30': 'surface taken from outside (outer:): the outward walk stopped on the deep rotators below an empty gap under gluteus maximus',
+    'HT1': 'the model has no axillary floor (fascia, fat, skin): the point lies on the chest wall at the apex of the axilla',
+}
 ORD = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth', 'eleventh', 'twelfth']
 ALIASES = {'LU': 'LU|Lu|L', 'LI': 'LI|L\\.I\\.|Co', 'ST': 'ST|St|S', 'SP': 'SP|Sp', 'HT': 'HT|HE|Ht|H', 'SI': 'SI|S\\.I\\.',
            'BL': 'BL|UB|Bl|B', 'KI': 'KI|KD|Kid|K', 'PC': 'PC|PE|P', 'TE': 'TE|SJ|TB|TW|San ?Jiao', 'GB': 'GB|G\\.B\\.',
@@ -803,10 +812,15 @@ def main():
             c = p['code']
             if c not in anchors or (side == 'left' and c[:2] in midline): continue
             a = anchors[c]; anchor_at.setdefault(c, {})[side] = [round(float(v), 4) for v in a]
-            if p['dir'] == 'radial': d = norm(a - u('headC'))
-            else: d = norm(eval(p['dir'], fns, {}))
+            # 'outer:<dir>': take the first surface met coming from outside (where the model leaves an empty space under the
+            # skin, e.g. no axillary or deep gluteal fat, the outward walk would stop on a deep muscle).
+            from_outside = p['dir'].startswith('outer:'); dir_expr = p['dir'][6:] if from_outside else p['dir']
+            if dir_expr == 'radial': d = norm(a - u('headC'))
+            else: d = norm(eval(dir_expr, fns, {}))
             if c[:2] in midline: d = d.copy(); d[0] = 0; d = norm(d)
-            pos, on = surface(a, d)
+            if from_outside:
+                pos, on = surface.outer(a, d, .12); on = runtime[on]['key'] if on else None
+            else: pos, on = surface(a, d)
             if pos is None: failures[c] = 'no surface along the direction'; continue
             near = []
             for x in visible:
@@ -815,9 +829,21 @@ def main():
                 if not all(b[0][i] - NEAR < pos[i] < b[1][i] + NEAR for i in range(3)): continue
                 dist = float(np.min(np.linalg.norm(geo(x)[0] - pos, axis=1)))
                 if dist <= NEAR: near.append((dist, runtime[x['id']]['key']))
+            beneath = []
+            deep = pos - d * BENEATH_DEPTH
+            lo, hi = np.minimum(pos, deep) - BENEATH_RADIUS, np.maximum(pos, deep) + BENEATH_RADIUS
+            for x in visible:
+                if layer(x) not in ('vessel', 'nerve'): continue
+                b = runtime[x['id']]['geometry']['bounds']
+                if not all(b[0][i] < hi[i] and b[1][i] > lo[i] for i in range(3)): continue
+                verts_x = geo(x)[0]; depth = (pos - verts_x) @ d
+                radial = np.linalg.norm((verts_x - pos) + depth[:, None] * d, axis=1)
+                hit = (depth > 0) & (depth < BENEATH_DEPTH) & (radial < BENEATH_RADIUS)
+                if hit.any(): beneath.append((float(depth[hit].min()), runtime[x['id']]['key']))
             points.append({'code': c, 'side': 'midline' if c[:2] in midline else side, 'segment': segment(pos),
                            'position': [round(float(v), 5) for v in pos], 'normal': [round(float(v), 4) for v in d],
-                           'surfaceOf': on, 'near': list(dict.fromkeys(k for _, k in sorted(near)))[:8]})
+                           'surfaceOf': on, 'near': list(dict.fromkeys(k for _, k in sorted(near)))[:8],
+                           'beneath': [{'key': k, 'depth': round(dd * 1000)} for dd, k in sorted(beneath)[:BENEATH_MAX]]})
         print(side, len(anchors), 'anchors', flush=True)
 
     # Comparison source.
@@ -850,6 +876,7 @@ def main():
             found = [bool(re.search(expand(k), normalize(location), re.I)) for k in p['check']]
             row_['status'] = 'agree' if all(found) else 'conflict'
             if not all(found): row_['unmatched'] = [k for k, f in zip(p['check'], found) if not f]
+        if c in MODEL_NOTES: row_['modelNote'] = MODEL_NOTES[c]
         checks[c] = row_
     agreed = {c for c, v in checks.items() if v['status'] == 'agree'}
     if os.environ.get('ACUPOINT_PREVIEW'):  # development view of every computed point, checked or not

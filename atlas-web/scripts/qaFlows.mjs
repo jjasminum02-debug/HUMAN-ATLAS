@@ -351,6 +351,8 @@ const flows = [
     await page.locator('.acupoint-channel button', { hasText: '척택' }).click();
     const detail = await page.locator('.acupoint-detail').innerText({ timeout: 10000 });
     expect(detail.includes('위팔두갈래근') && detail.includes('완요골근'), `척택 설명·주변 구조: ${detail.replace(/\s+/g, ' ').slice(0, 160)}`);
+    // 2026-11-19: how the point is found, and the vessels and nerves beneath it (척택: radial nerve under the hollow).
+    expect(/취혈 기준\s*표지에서 바로/.test(detail) && /아래 지나는 혈관·신경[\s\S]*요골신경/.test(detail), `척택 취혈 기준·아래 구조: ${detail.replace(/\s+/g, ' ').slice(0, 240)}`);
     const marker = () => page.evaluate(() => { let at = null; window.__atlasScene.root.traverse(o => { if (o.userData.acupoint === 'LU9:right') at = o.position.toArray(); }); return at; });
     const before = await marker();
     await page.evaluate(async () => { const rig = await window.__atlasRig.load(); window.__atlasRig.set(rig, { 'elbow_r:flexion': 90 }); });
@@ -397,7 +399,7 @@ const flows = [
     await muscle.click(); await page.waitForTimeout(1500);
     const card = await page.locator('.study-detail-header h2').innerText().catch(() => '(없음)');
     expect(card.includes(name.split(' ')[0]), `경근 근육 → 카드: ${name} → ${card}`);
-    return `경맥 14개 → 척택 설명·주변 구조 → 태연 표지가 팔꿉 90°를 따라감 → 요골신경 카드 → 독맥 백회(정중선, ${shown.length}혈만 표시) → 족태양경근(구슬 ${k0.beads}개, 곤륜 매듭이 무릎 굽힘을 따라감, 영역 근육 ${region.muscles}개·結 ${region.bindings}곳, 태양 손발 함께) → ${name} 카드`;
+    return `경맥 14개 → 척택 설명·취혈 기준(표지)·아래 구조(요골신경)·주변 구조 → 태연 표지가 팔꿉 90°를 따라감 → 요골신경 카드 → 독맥 백회(정중선, ${shown.length}혈만 표시) → 족태양경근(구슬 ${k0.beads}개, 곤륜 매듭이 무릎 굽힘을 따라감, 영역 근육 ${region.muscles}개·結 ${region.bindings}곳, 태양 손발 함께) → ${name} 카드`;
   }],
 ];
 

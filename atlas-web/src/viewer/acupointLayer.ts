@@ -3,10 +3,33 @@
 // source; not needling guidance.
 export interface AcupointConcept { code: string; nameKo: string; hanja: string; location: string; channel: string }
 export interface AcupointInstance { code: string; side: 'left' | 'right' | 'midline'; segment: string; position: [number, number, number];
-  normal: [number, number, number]; surfaceOf: string | null; near: string[] }
+  normal: [number, number, number]; surfaceOf: string | null; near: string[];
+  /** Vessels and nerves under the point: within 1 cm of the line straight inward, to 6 cm, nearest first (depth in mm, model). */
+  beneath?: { key: string; depth: number }[] }
 export interface AcupointChannel { nameKo: string; nameHanja: string; en: string; codes: string[]; midline?: boolean; breaks?: string[] }
 export interface AcupointFile { schemaVersion: number; channels: Record<string, AcupointChannel>; concepts: AcupointConcept[]; points: AcupointInstance[] }
 export const acupointId = (p: { code: string; side: string }) => `${p.code}:${p.side}`;
+
+/**
+ * How a point is found, read from its standard location text: straight on a landmark (a hollow between tendons, a bone
+ * edge, a pulse), as a ratio between two landmarks (midpoint, 1/3), by finger breadth, or by proportional cun from a
+ * landmark. Points found on a landmark are the easiest to press in the same place every time.
+ * 0.1 cun (beside a nail corner) counts as on the landmark.
+ */
+export type LocationBasis = { kind: 'landmark' | 'between' | 'finger' | 'cun'; cun?: number; marks: string[] };
+const MARKS: [string, RegExp][] = [['뼈', /뼈|융기|돌기|관절|복사|가시|구멍|모서리|이음|결합|거친면|결절/], ['힘줄', /힘줄/], ['주름', /주름/], ['오목', /오목|패임/],
+  ['맥', /동맥|박동/], ['털경계', /털경계/], ['피부 경계', /피부 경계/], ['손발톱', /발톱|손톱/]];
+export function locationBasis(location: string): LocationBasis {
+  const marks = MARKS.filter(([, re]) => re.test(location)).map(([name]) => name);
+  const cuns = [...location.matchAll(/(\d+(?:\.\d+)?)\s*촌/g)].map(m => Number(m[1])).filter(n => n > .1);
+  if (cuns.length) return { kind: 'cun', cun: Math.max(...cuns), marks };
+  if (/손가락 너비|횡지/.test(location)) return { kind: 'finger', marks };
+  // A ratio along the line joining two landmarks (곡지: midpoint of 척택–lateral epicondyle); the midpoint of one crease is on it.
+  if (/\d\/\d|잇는 선/.test(location)) return { kind: 'between', marks };
+  return { kind: 'landmark', marks };
+}
+export const LOCATION_BASIS_LABEL: Record<LocationBasis['kind'], string> = {
+  landmark: '표지에서 바로', between: '두 표지 사이 비율', finger: '표지에서 손가락 너비', cun: '표지에서 비례촌' };
 /** What a muscle card's 경락 tab asks the acupoint panel to show: a point ("PC6:right") or a meridian sinew on one side. */
 export type AcupointTarget = { point: string } | { sinew: string; side: 'right' | 'left' };
 

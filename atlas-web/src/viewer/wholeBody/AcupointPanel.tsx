@@ -1,7 +1,7 @@
 // Acupoint panel (ROADMAP 4-1 step 7): channel points on the model, their location and the structures around them.
 import { useEffect, useState } from 'react';
 import type { RuntimeStructureRecord } from '../datasets/integration';
-import { acupointId, channelPath, channelSide, isBinding, sixChannelOf, type AcupointFile, type AcupointHost, type AcupointTarget, type SinewFile } from '../acupointLayer';
+import { acupointId, channelPath, channelSide, isBinding, LOCATION_BASIS_LABEL, locationBasis, sixChannelOf, type AcupointInstance, type AcupointFile, type AcupointHost, type AcupointTarget, type SinewFile } from '../acupointLayer';
 
 const SIDE = { right: '오른쪽', left: '왼쪽', midline: '정중선' } as const;
 let file: Promise<AcupointFile | null> | undefined;
@@ -63,6 +63,8 @@ export function AcupointPanel({ host, rows, request = null, onSelectStructure, o
     {point && concept && <section className="acupoint-detail" aria-label="선택한 경혈">
       <h4>{concept.nameKo} <span>{concept.hanja} · {concept.code} · {SIDE[point.side]}</span></h4>
       <p>{concept.location}</p>
+      <PointBasis location={concept.location}/>
+      <Beneath point={point} rows={rows} onSelectStructure={onSelectStructure}/>
       {point.near.length > 0 && <><h5>주변 구조</h5><div className="attachment-bone-links">{point.near.map(key => rows.get(key)).filter((r): r is RuntimeStructureRecord => Boolean(r))
         .map(r => <button key={r.sourceKey} className="bone-related-muscle" onClick={() => onSelectStructure(r.sourceKey, r.side)}>{r.label}</button>)}</div></>}
     </section>}
@@ -123,4 +125,23 @@ function SinewView({ host, rows, request, acupoints, onPoint, onSelectStructure 
     </section>
     <p className="quiet-note">『영추·경근』의 맺히는 곳(結)을 이 모형의 해당 부위에 이어 그린 교육용 경로입니다. 근육 목록은 선 아래 근육을 모형에서 잰 것이며, 시술 안내가 아닙니다.</p>
   </>;
+}
+
+/** How the point is found (from its standard location text): on a landmark is the easiest to find the same way every time. */
+function PointBasis({ location }: { location: string }) {
+  const basis = locationBasis(location);
+  return <p className={`point-basis basis-${basis.kind}`}><b>취혈 기준</b> {LOCATION_BASIS_LABEL[basis.kind]}{basis.cun ? ` ${basis.cun}촌` : ''}
+    {basis.marks.length > 0 && <small> · 표지: {basis.marks.join('·')}</small>}</p>;
+}
+
+/** Vessels and nerves under the point, nearest first, with the depth measured on this model. */
+function Beneath({ point, rows, onSelectStructure }: { point: AcupointInstance; rows: Map<string, RuntimeStructureRecord>; onSelectStructure: (key: string, side: string | null) => void }) {
+  const list = (point.beneath ?? []).map(b => ({ ...b, row: rows.get(b.key) })).filter((b): b is { key: string; depth: number; row: RuntimeStructureRecord } => Boolean(b.row));
+  if (!list.length) return null;
+  const tone = (r: RuntimeStructureRecord) => r.kind === 'nerve' ? 'nerve' : r.tissue === 'artery' ? 'artery' : 'vein';
+  return <><h5>아래 지나는 혈관·신경</h5>
+    <ul className="point-beneath">{list.map(({ key, depth, row }) => <li key={key}>
+      <i className={`beneath-${tone(row)}`}/><button className="bone-related-muscle" onClick={() => onSelectStructure(row.sourceKey, row.side)}>{row.label}</button>
+      <small>{depth < 3 ? '바로 아래' : `약 ${Math.round(depth / 5) * 5 || depth}mm`}</small></li>)}</ul>
+    <p className="quiet-note">혈 자리에서 곧게 안쪽으로 6cm까지, 1cm 반경 안을 이 모형에서 잰 값입니다. 사람·체형·자세에 따라 다르며 자침 깊이 기준이 아닙니다.</p></>;
 }
