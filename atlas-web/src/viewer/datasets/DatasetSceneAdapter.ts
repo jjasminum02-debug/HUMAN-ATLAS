@@ -52,6 +52,8 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
     /** M3: learner pose (as set, before clamping), agonist/antagonist colouring, and the panel's open requests. */
     private pose: RigPose | null = null;
     private actionHighlight: ActionHighlight = null;
+    /** 4-2 step 10: posture pattern colouring (short = red, weak = blue), by source key. */
+    private postureHighlight: { short: Set<string>; weak: Set<string> } | null = null;
     private rigFile?: Promise<RigFile>;
     private muscleActions?: Promise<MuscleActionsFile>;
     private readonly poseListeners = new Set<(pose: RigPose | null) => void>();
@@ -206,6 +208,7 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
     setActionHighlight(highlight: ActionHighlight) { this.actionHighlight = highlight; this.apply(); }
     private sinewRegion: Set<string> | null = null;
     setSinewRegion(keys: string[] | null) { this.sinewRegion = keys?.length ? new Set(keys) : null; this.apply(); }
+    setPostureHighlight(groups: { short: string[]; weak: string[] } | null) { this.postureHighlight = groups ? { short: new Set(groups.short), weak: new Set(groups.weak) } : null; this.apply(); }
     // Acupoints (4-1 step 7): markers and channel lines ride on their rig segment; a click on a marker picks it.
     private acupoints?: { file: AcupointFile; group: THREE.Group; markers: Map<string, THREE.Mesh>; lines: { line: THREE.Line; ids: string[]; channel: string }[];
         selected: string | null; channel: string | null; onPick?: (id: string) => void };
@@ -503,6 +506,7 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
             const layerId = layerIdOf(row);
             const highlight = selected ? undefined
                 : this.actionHighlight?.agonists.includes(key) ? 'agonist' as const : this.actionHighlight?.antagonists.includes(key) ? 'antagonist' as const
+                : this.postureHighlight?.short.has(key) ? 'agonist' as const : this.postureHighlight?.weak.has(key) ? 'antagonist' as const
                 : this.sinewRegion?.has(key) ? 'meridian' as const : undefined;
             // Shown movers stay coloured even while the rest is dimmed around a selection.
             const material = this.materials.get(row.kind, { mode: highlight && mode === 'dim' ? 'normal' : mode, phase: phaseTone, role: highlight, userTranslucent: Boolean(attachmentMode && this.view.translucentSourceKeys?.includes(key)),

@@ -1,5 +1,6 @@
 // Acupoint panel (ROADMAP 4-1 step 7): channel points on the model, their location and the structures around them.
 import { useEffect, useState } from 'react';
+import { PosturePatternList } from '../../ui/PosturePatterns';
 import type { RuntimeStructureRecord } from '../datasets/integration';
 import { acupointId, channelPath, channelSide, isBinding, landmarkId, LOCATION_BASIS_LABEL, locationBasis, sixChannelOf, type AcupointInstance, type Landmark, type AcupointFile, type AcupointHost, type AcupointTarget, type SinewFile } from '../acupointLayer';
 
@@ -185,5 +186,6 @@ function LandmarkView({ host, file, rows, onSelectStructure }: {
             <td>{!l || Math.abs(diff) < .002 ? '같음' : `${diff < 0 ? '오른쪽' : '왼쪽'} ${(Math.abs(diff) * 1000).toFixed(0)}mm`}</td></tr>; })}
       </tbody></table>
       <p className="quiet-note">모형이 좌우 대칭이라 서 있는 자세에서는 같습니다. 관절 움직임에서 허리를 옆으로 굽히거나 돌리면 짧아지는 쪽이 숫자로 보입니다. 실제 촉진에서는 두 뼈 사이를 손으로 잡아 비교합니다.</p></>}
+    <PosturePatternList host={host} rows={rows}/>
   </section>;
 }

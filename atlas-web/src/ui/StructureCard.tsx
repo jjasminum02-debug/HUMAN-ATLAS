@@ -1,5 +1,6 @@
 // Card body for ligament/joint, fascia and tendon rows (ROADMAP C3). Data: atlas-data/runtime/structure-cards.json.
 import { LigamentAttachmentAreas } from './AttachmentAreas';
+import { ClinicalTests } from './ClinicalTests';
 import type { RuntimeStructureRecord } from '../viewer/datasets/integration';
 import type { RigFile } from '../viewer/rig';
 import { movementRoles, rigJointForBones, type MuscleActionsFile } from '../viewer/movement';
@@ -63,6 +64,7 @@ export function StructureCard({ row, cards, rows, onSelect, rig, onMoveJoint, ac
         <button key={key} className="bone-related-muscle" onClick={() => onSelect(key)}>{rows.get(key)!.label}{role === 'assist' && <small> 보조</small>}</button>)}</dd></div>)}</dl>
       <p className="quiet-note">근육 작용 표(OpenSim 모멘트 팔로 확인)에서 이 관절의 움직임마다 주동근을 모았습니다.</p>
     </section>}
+    <ClinicalTests row={row}/>
     {!card?.text && !joint && bones.length === 0 && muscles.length === 0 && <p className="quiet-note">구조 설명을 준비하고 있습니다.</p>}
     <p className="quiet-note">설명은 학습용 요약입니다. 연결된 뼈·근육은 3D 모형의 표면 접촉으로 찾았습니다.</p>
   </>;

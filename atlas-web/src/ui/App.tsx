@@ -12,6 +12,8 @@ import { MuscleRigActions } from './MuscleRigActions';
 import { AreaChips, UnlabelledAttachmentAreas, useAttachmentAreas } from './AttachmentAreas';
 import { MuscleActionSummary, MuscleBloodSupply, MuscleNerves, VesselCard } from './MuscleCardFacts';
 import { BookmarkButton, StudyTools } from './StudyTools';
+import { ClinicalTests } from './ClinicalTests';
+import { MusclePosture } from './PosturePatterns';
 import { MeridianLinks } from './MeridianLinks';
 import { isRigHost, jointsForBone, movementLabel, movementLibrary, type MuscleActionsFile } from '../viewer/movement';
 import type { RigFile } from '../viewer/rig';
@@ -458,6 +460,7 @@ export default function App() {
         {[...new Set(selectedNerveRelations.map(relation => relation.displayNote))].map(note => <p key={note}>{note}</p>)}
         <p>현재 연결된 관계만 표시합니다. 강조 색은 학습용이며 힘이나 활성도를 나타내지 않습니다. 신경의 분지·주행에는 개인차가 있습니다.</p>
       </details>}
+      <ClinicalTests row={selected}/>
       {nerveLearning && <details key={selected.sourceKey} className="nerve-learning-context"><summary>주행·포착 맥락</summary>{shouldDisplayNerveFunctionContext(nerveLearning.functionContext, selectedNerveConcept?.functionEvidenceClass) && <section><h4>기능 연결</h4><p>{nerveLearning.functionContext}</p></section>}<section><h4>포착 가능 구간과 주변 조직</h4><p>{nerveLearning.compressionContext}</p></section>{"variationContext" in nerveLearning && <section><h4>변이와 자세 범위</h4><p>{String(nerveLearning.variationContext)}</p></section>}</details>}
     </section> : selected?.kind === 'muscle' ? <>
     <div className="study-tab-panels">
@@ -498,6 +501,8 @@ export default function App() {
     <section id="study-function-panel" className="study-tab-panel function-tab-panel" role="tabpanel" aria-labelledby="tab-기능" hidden={tab !== '기능'}>
       <MuscleActionSummary muscle={selected}/>
       {isRigHost(motionHost) && <MuscleRigActions host={motionHost} sourceKey={selected.sourceKey} visible={key => runtimeByKey.get(key)?.localDisplayEligible ?? false}/>}
+      <ClinicalTests row={selected}/>
+      <MusclePosture muscle={selected}/>
     </section>
     <section id="study-meridian-panel" className="study-tab-panel" role="tabpanel" aria-labelledby="tab-경락" hidden={tab !== '경락'}>
       {tab === '경락' && <MeridianLinks muscle={selected} host={motionHost} onOpen={motionHost ? target => {

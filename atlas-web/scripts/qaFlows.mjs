@@ -409,7 +409,42 @@ const flows = [
     const bent = await page.locator('.measure-table tr', { hasText: '12번 갈비 끝' }).innerText();
     expect(marks === 30 && /같음/.test(rest) && /왼쪽 \d+mm/.test(bent), `기준점 ${marks}개, 서 있을 때 ${rest.replace(/\s+/g, ' ').slice(0, 80)}, 왼쪽 옆굽힘 ${bent.replace(/\s+/g, ' ')}`);
     await page.evaluate(async () => { const rig = await window.__atlasRig.load(); window.__atlasRig.set(rig, {}); });
-    return `경맥 14개 → 척택 설명·취혈 기준(표지)·아래 구조(요골신경)·주변 구조 → 태연 표지가 팔꿉 90°를 따라감 → 요골신경 카드 → 독맥 백회(정중선, ${shown.length}혈만 표시) → 족태양경근(구슬 ${k0.beads}개, 곤륜 매듭이 무릎 굽힘을 따라감, 영역 근육 ${region.muscles}개·結 ${region.bindings}곳, 태양 손발 함께) → ${name} 카드 → 기준점 30개, 허리 왼쪽 옆굽힘에 12번 갈비–장골능 왼쪽이 짧아짐`;
+    // 4-2 step 10: a posture pattern colours its short side red and weak side blue; switching it off clears both.
+    const roles = () => page.evaluate(() => { const n = { agonist: 0, antagonist: 0 }; window.__atlasScene.root.traverse(o => { const m = o.isMesh && o.visible && o.material?.name?.match(/:(agonist|antagonist):/); if (m) n[m[1]]++; }); return n; });
+    await page.locator('.posture-patterns button', { hasText: '상부 교차 증후군' }).click();
+    await page.waitForTimeout(300);
+    const upper = await roles();
+    await page.locator('.posture-patterns button', { hasText: '상부 교차 증후군' }).click();
+    await page.waitForTimeout(300);
+    const cleared = await roles();
+    expect(upper.agonist >= 10 && upper.antagonist >= 10 && cleared.agonist + cleared.antagonist === 0, `상부 교차 색: ${JSON.stringify(upper)}, 끈 뒤 ${JSON.stringify(cleared)}`);
+    return `경맥 14개 → 척택 설명·취혈 기준(표지)·아래 구조(요골신경)·주변 구조 → 태연 표지가 팔꿉 90°를 따라감 → 요골신경 카드 → 독맥 백회(정중선, ${shown.length}혈만 표시) → 족태양경근(구슬 ${k0.beads}개, 곤륜 매듭이 무릎 굽힘을 따라감, 영역 근육 ${region.muscles}개·結 ${region.bindings}곳, 태양 손발 함께) → ${name} 카드 → 기준점 30개, 허리 왼쪽 옆굽힘에 12번 갈비–장골능 왼쪽이 짧아짐 → 상부 교차 증후군 색(짧은 쪽 ${upper.agonist}·약한 쪽 ${upper.antagonist}개)`;
+  }],
+  // 4-2 step 9: test names at the end of the 기능 tab (muscle) and on ligament/meniscus and nerve cards; held tests stay out.
+  ['검사 이름: 견갑하근 기능 탭, 내측 반월, 좌골신경', async page => {
+    await open(page);
+    await search(page, '어깨밑근', '견갑하근');
+    await page.getByRole('tab', { name: '기능' }).click();
+    const muscle = await page.locator('#study-function-panel .clinical-tests').innerText({ timeout: 10000 });
+    expect(/벨리프레스/.test(muscle) && /리프트오프/.test(muscle), `견갑하근 검사: ${muscle.replace(/\s+/g, ' ').slice(0, 120)}`);
+    await search(page, '안쪽반달', '내측반월');
+    const meniscus = await page.locator('#study-details .clinical-tests').innerText({ timeout: 10000 });
+    expect(/맥머레이/.test(meniscus), `반월 검사: ${meniscus.replace(/\s+/g, ' ').slice(0, 120)}`);
+    await page.getByRole('searchbox', { name: '구조 검색' }).fill('좌골신경');
+    const model = page.locator('.nerve-search-result button', { hasText: '오른쪽 모형' }).first();
+    const listed = page.locator('nav.region-structure-list button', { hasText: '좌골신경' }).first();
+    await Promise.race([model.waitFor({ timeout: 10000 }), listed.waitFor({ timeout: 10000 })]);
+    await (await model.count() ? model : listed).click();
+    await settle(page);
+    const nerve = await page.locator('#study-details .clinical-tests').innerText({ timeout: 10000 });
+    expect(/SLR/.test(nerve) && /이 신경을 보는 검사/.test(nerve), `좌골신경 검사: ${nerve.replace(/\s+/g, ' ').slice(0, 120)}`);
+    await search(page, '넙다리곧은근', '대퇴직근');
+    await page.getByRole('tab', { name: '기능' }).click();
+    expect(await page.locator('#study-function-panel .clinical-tests').count() === 0, '보류한 토마스→대퇴직근이 보임');
+    // 4-2 step 10: the 기능 tab says which posture pattern names the muscle (rectus femoris: lower crossed, short side).
+    const posture = await page.locator('#study-function-panel .posture-membership').innerText({ timeout: 10000 });
+    expect(/하부 교차 증후군/.test(posture) && /긴장·짧아지는 쪽/.test(posture), `체형 패턴 줄: ${posture.replace(/\s+/g, ' ').slice(0, 120)}`);
+    return '견갑하근(벨리프레스·리프트오프) → 내측반월(맥머레이) → 좌골신경(SLR) → 대퇴직근은 보류라 검사 없음, 체형 패턴 줄(하부 교차·짧아지는 쪽)';
   }],
 ];
 

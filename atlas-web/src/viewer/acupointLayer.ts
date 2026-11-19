@@ -58,6 +58,8 @@ export interface AcupointHost {
   /** Current (posed) left and right length of each measure, in metres. */
   measureLengths(): Record<string, { right: number; left: number }>;
   onRigPoseChange?(listener: (pose: unknown) => void): () => void;
+  /** 4-2 step 10: colour a posture pattern (short/tight red, weak blue; null clears). */
+  setPostureHighlight?(groups: { short: string[]; weak: string[] } | null): void;
 }
 export const isAcupointHost = (host: unknown): host is AcupointHost => typeof (host as AcupointHost | null)?.showAcupoints === 'function';
 

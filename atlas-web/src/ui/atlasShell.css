@@ -552,3 +552,26 @@
 .atlas-shell .measure-table th:first-child, .atlas-shell .measure-table td:first-child { text-align: left; }
 .atlas-shell .measure-table td small { display: block; color: #8a9891; font-size: 10px; }
 @media (pointer: coarse) { .atlas-shell .landmark-group button { min-height: 40px; } }
+
+/* 4-2 step 9: clinical test names (name, English, one line). */
+.atlas-shell .clinical-tests ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.atlas-shell .clinical-tests li { padding: 7px 9px; border-radius: 8px; background: #f3f5f4; color: #33413c; }
+.atlas-shell .clinical-tests li strong { font-weight: 650; color: #2f5d50; }
+.atlas-shell .clinical-tests .clinical-test-en { margin-left: 6px; font-size: 11px; color: #6b7a75; }
+.atlas-shell .clinical-tests li p { margin: 3px 0 0; font-size: 12.5px; line-height: 1.45; }
+
+/* 4-2 step 10: posture patterns (Janda) in the landmark view and on the 기능 tab. */
+.atlas-shell .posture-patterns ul { list-style: none; margin: 0 0 6px; padding: 0; display: grid; gap: 6px; }
+.atlas-shell .posture-patterns li { display: grid; gap: 2px; }
+.atlas-shell .posture-patterns li button { justify-self: start; }
+.atlas-shell .posture-patterns li span, .atlas-shell .posture-patterns li small { font-size: 12px; color: #4b5d57; }
+.atlas-shell .posture-legend { display: flex; gap: 12px; margin: 4px 0; font-size: 12px; }
+.atlas-shell .posture-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 4px; vertical-align: -1px; }
+.atlas-shell .posture-legend .posture-short { background: #d4472f; }
+.atlas-shell .posture-legend .posture-weak { background: #3f7cc4; }
+.atlas-shell .posture-membership ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.atlas-shell .posture-membership li { padding: 7px 9px; border-radius: 8px; background: #f3f5f4; color: #33413c; font-size: 13px; }
+.atlas-shell .posture-membership li span { display: block; font-size: 12px; color: #6b7a75; margin-top: 2px; }
+.atlas-shell .posture-patterns li button { min-height: 30px; padding: 3px 10px; border: 1px solid #c9d6d1; border-radius: 8px; background: #f6faf8; color: #2f5d50; font-size: 12px; cursor: pointer; }
+.atlas-shell .posture-patterns li button[aria-pressed=true] { background: #2f5d50; border-color: #2f5d50; color: #fff; }
+@media (pointer: coarse) { .atlas-shell .posture-patterns li button { min-height: 40px; } }
