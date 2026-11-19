@@ -137,18 +137,22 @@ const flows = [
     expect(facts.length === 4 && /attach:.*→/.test(facts[0]) && /nerve:대퇴신경/.test(facts[1]) && /action:/.test(facts[2]) && /meridian:.*족양명경근/.test(facts[3]), `핵심 네 줄: ${facts.join(' | ')}`);
     await page.locator('.key-facts [data-fact=meridian]').click();
     expect(await page.locator('#tab-경락').getAttribute('aria-expanded') === 'true' && await page.locator('#tab-구조').getAttribute('aria-expanded') === 'false', '경락 줄을 눌러도 한의학적 접근 칸이 열리지 않음');
-    await page.locator('#study-meridian-panel h3', { hasText: '지나가는 경근' }).waitFor({ timeout: 10000 });
+    await page.locator('#study-meridian-panel h3', { hasText: '경근 영역' }).waitFor({ timeout: 10000 });
     const meridian = await page.locator('#study-meridian-panel').innerText();
-    expect(/족양명경근/.test(meridian) && /바로 위의 경혈/.test(meridian), `경락 탭: ${meridian.replace(/\s+/g, ' ').slice(0, 200)}`);
+    // 4-3 U4: answers in order (sinew region → channel and points → distal points → landmarks), the basis folded.
+    const steps = await page.locator('#study-meridian-panel .meridian-step h3').allInnerTexts();
+    expect(/족양명경근/.test(meridian) && steps.map(t => t.replace(/^\d\s*/, '')).join() === '경근 영역,경맥 · 경혈,원위혈,표지점', `한의학적 접근 순서: ${steps.join(' / ').replace(/\s+/g, ' ')}`);
+    expect(!/從腰以上者/.test(meridian) && await page.locator('#study-meridian-panel .meridian-basis').getAttribute('open') === null, '근거가 접혀 있지 않음');
     // 2026-11-19: the card colours a passing sinew's region on the model (the muscle itself stays selected).
     const coloured = () => page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && /:meridian:/.test(o.material?.name ?? '')) n++; }); return n; });
-    await page.locator('#study-meridian-panel section', { hasText: '지나가는 경근' }).locator('li', { hasText: '족양명경근' }).locator('.meridian-region').click();
+    await page.locator('#study-meridian-panel .meridian-sinews:not(.six-pairs) li', { hasText: '족양명경근' }).locator('.meridian-region').click();
     const regionMuscles = await coloured();
     expect(regionMuscles > 10, `족양명경근 영역 근육 ${regionMuscles}개`);
-    await page.locator('#study-meridian-panel section', { hasText: '지나가는 경근' }).locator('li', { hasText: '족양명경근' }).locator('.meridian-region').click();
+    await page.locator('#study-meridian-panel .meridian-sinews:not(.six-pairs) li', { hasText: '족양명경근' }).locator('.meridian-region').click();
     expect(await coloured() === 0, '영역 끄기 뒤에도 색이 남음');
     // 2026-11-19: hand/foot boundary (rectus femoris lies below it) and the same-name pairs.
-    expect(/경계 아래/.test(meridian) && /從腰以上者/.test(meridian), `손·발 경계: ${meridian.replace(/\s+/g, ' ').slice(0, 200)}`);
+    await page.locator('#study-meridian-panel .meridian-basis summary').click();
+    expect(/손·발 높이 · 경계 아래/.test(meridian) && /從腰以上者/.test(await page.locator('#study-meridian-panel .meridian-basis').innerText()), `손·발 경계: ${meridian.replace(/\s+/g, ' ').slice(0, 200)}`);
     await page.locator('#study-meridian-panel .meridian-sinews li', { hasText: '수양명경근 + 족양명경근' }).locator('.meridian-region').click();
     const pairMuscles = await coloured();
     expect(pairMuscles > regionMuscles, `양명 손발 함께 ${pairMuscles}개 > 족양명 ${regionMuscles}개`);
@@ -175,7 +179,7 @@ const flows = [
     await settle(page);
     const vessels = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && /^vessel:/.test(o.material.name)) n++; }); return n; });
     expect(vessels > 600, `보이는 혈관 ${vessels}개`);
-    return `카드·3D 선택 일치, 구용어 제목·신용어·영어 한 줄, 핵심 네 줄(경락 줄 → 경락 탭), 기시·정지 면, 경락 탭(족양명경근 영역 · 손·발 경계 아래 · 양명 손발 함께 · ${pointName} → 경혈 창), 혈액공급 표시 → 동맥 카드, 혈관 ${vessels}개`;
+    return `카드·3D 선택 일치, 구용어 제목·신용어·영어 한 줄, 핵심 네 줄(경락 줄 → 경락 탭), 기시·정지 면, 한의학적 접근(1–4 순서·근거 접힘 · 족양명경근 영역 · 손·발 경계 아래 · 양명 손발 함께 · ${pointName} → 경혈 창), 혈액공급 표시 → 동맥 카드, 혈관 ${vessels}개`;
   }],
   ['무릎 인대 구조 보기: 앞십자인대 → 무릎 움직여 보기', async page => {
     await open(page);
@@ -469,8 +473,43 @@ const flows = [
     await openSection(page, '기능');
     // 4-2 step 10: the 기능 tab says which posture pattern names the muscle (rectus femoris: lower crossed, short side).
     const posture = await page.locator('#study-function-panel .posture-membership').innerText({ timeout: 10000 });
+    // 4-3 U4 on 견갑하근 (no sinew crosses it): the nearest sinew is named, and a landmark on its bones opens the landmark view.
+    await search(page, '어깨밑근', '견갑하근');
+    await openSection(page, '한의학적 접근');
+    const near = await page.locator('#study-meridian-panel .meridian-step', { hasText: '경근 영역' }).innerText({ timeout: 10000 });
+    expect(/가장 가까운 경근은 \S+경근\(약 \d+cm\)/.test(near), `가장 가까운 경근: ${near.replace(/\s+/g, ' ')}`);
+    const mark = page.locator('#study-meridian-panel .landmark-link').first(), markName = await mark.evaluate(b => b.firstChild.textContent.trim());
+    await mark.click();
+    await page.locator('.landmark-view').waitFor({ timeout: 10000 });
+    const chosen = await page.locator('.landmark-view button[aria-pressed=true]').count();
+    expect(chosen === 1 && (await page.locator('.landmark-group li', { has: page.locator('button[aria-pressed=true]') }).innerText()).includes(markName), `표지점 ${markName} → 기준점 보기 선택 ${chosen}개`);
+    await page.getByRole('button', { name: '경혈 닫기' }).click();
     expect(/하부 교차 증후군/.test(posture) && /긴장·짧아지는 쪽/.test(posture), `체형 패턴 줄: ${posture.replace(/\s+/g, ' ').slice(0, 120)}`);
-    return '견갑하근(벨리프레스·리프트오프) → 내측반월(맥머레이) → 좌골신경(SLR) → 대퇴직근은 보류라 검사 없음, 체형 패턴 줄(하부 교차·짧아지는 쪽)';
+    return `견갑하근(벨리프레스·리프트오프) → 내측반월(맥머레이) → 좌골신경(SLR) → 대퇴직근은 보류라 검사 없음, 체형 패턴 줄(하부 교차·짧아지는 쪽) → 견갑하근 가장 가까운 경근 · 표지점 ${markName} → 기준점 보기`;
+  }],
+  // 4-3 U5: on a tablet the card and the acupoint panel share one slot; in portrait both are a bottom sheet.
+  ['태블릿 창 하나: 카드 ↔ 경혈 창, 세로는 아래 시트', async page => {
+    await page.setViewportSize({ width: 1180, height: 820 });
+    await open(page);
+    await search(page, '어깨밑근', '견갑하근');
+    const cardOpen = () => page.evaluate(() => document.querySelector('#study-details')?.open ?? null);
+    expect(await cardOpen() === true, '카드가 열려 있지 않음');
+    await page.locator('.acupoint-entry button').click();
+    await page.locator('.acupoint-panel').waitFor({ timeout: 10000 });
+    await page.waitForTimeout(300);
+    expect(await cardOpen() === false, '경혈 창을 열어도 카드가 접히지 않음');
+    await page.locator('.study-details > summary').click();
+    await page.waitForTimeout(300);
+    expect(await cardOpen() === true && await page.locator('.acupoint-panel').count() === 0, '카드를 펴도 경혈 창이 닫히지 않음');
+    await page.setViewportSize({ width: 820, height: 1180 });
+    await page.waitForTimeout(300);
+    await page.locator('.acupoint-entry button').click();
+    await page.locator('.acupoint-panel').waitFor({ timeout: 10000 });
+    await page.waitForTimeout(300);
+    const box = await page.evaluate(() => { const r = s => document.querySelector(s).getBoundingClientRect(); return { panel: r('.acupoint-panel'), tools: r('.body-tools'), h: innerHeight }; });
+    expect(Math.abs(box.panel.bottom - box.h) < 2 && box.tools.bottom <= box.panel.top + 1, `세로 시트: 창 ${Math.round(box.panel.top)}–${Math.round(box.panel.bottom)}, 도구 ${Math.round(box.tools.bottom)}`);
+    await page.setViewportSize({ width: 1440, height: 900 });
+    return '가로: 경혈 창 → 카드 접힘, 카드 펴기 → 경혈 창 닫힘 · 세로: 경혈 창이 아래 시트, 도구 막대는 그 위';
   }],
 ];
 

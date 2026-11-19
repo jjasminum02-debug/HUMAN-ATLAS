@@ -37,9 +37,11 @@ export function AcupointPanel({ host, rows, request = null, onSelectStructure, o
   }, [host, sinews, channel, mode, withSinew]);
   // Opened from a muscle card: go to that point (its channel) or that sinew.
   const [sinewRequest, setSinewRequest] = useState<{ sinew: string; side: 'right' | 'left'; revision: number } | null>(null);
+  const [landmarkRequest, setLandmarkRequest] = useState<{ id: string; revision: number } | null>(null);
   useEffect(() => {
     if (!request || !data) return;
     if ('sinew' in request) { setMode('sinews'); setSelected(null); host.selectAcupoint(null, false); setSinewRequest(request); return; }
+    if ('landmark' in request) { setMode('landmarks'); setSelected(null); host.selectAcupoint(null, false); setLandmarkRequest({ id: request.landmark, revision: request.revision }); return; }
     goToPoint(request.point);
   }, [request?.revision, data]); // eslint-disable-line react-hooks/exhaustive-deps
   /** Show one point ("BL60:right") in its channel; used by a muscle card and by the sinew view's binding places. */
@@ -62,7 +64,7 @@ export function AcupointPanel({ host, rows, request = null, onSelectStructure, o
       <button aria-pressed={mode === 'sinews'} onClick={() => { setMode('sinews'); setSelected(null); host.selectAcupoint(null, false); }}>경근</button>
       <button aria-pressed={mode === 'landmarks'} onClick={() => { setMode('landmarks'); setSelected(null); host.selectAcupoint(null, false); }}>기준점</button>
     </div>
-    {mode === 'landmarks' ? <LandmarkView host={host} file={data} rows={rows} onSelectStructure={onSelectStructure}/>
+    {mode === 'landmarks' ? <LandmarkView host={host} file={data} rows={rows} onSelectStructure={onSelectStructure} request={landmarkRequest}/>
     : mode === 'sinews' ? <SinewView host={host} rows={rows} request={sinewRequest} acupoints={data} onPoint={goToPoint} onSelectStructure={onSelectStructure}/> : <>
     <div className="acupoint-channels" role="group" aria-label="경맥">
       {Object.entries(data.channels).map(([code, c]) => <button key={code} aria-pressed={channel === code} title={`${c.nameKo} ${c.nameHanja}`}
@@ -169,10 +171,13 @@ const LANDMARK_GROUPS: { name: string; ids: string[] }[] = [
  * Bony reference points of the diagnosis practicum and the two-point distances compared left and right to find the
  * short side. Lengths follow the current pose (bend the trunk sideways in 관절 움직임 and one side shortens).
  */
-function LandmarkView({ host, file, rows, onSelectStructure }: {
+function LandmarkView({ host, file, rows, onSelectStructure, request = null }: {
   host: AcupointHost; file: AcupointFile; rows: Map<string, RuntimeStructureRecord>; onSelectStructure: (key: string, side: string | null) => void;
+  /** Opened from a muscle card (4-3 U4): start with this landmark chosen. */
+  request?: { id: string; revision: number } | null;
 }) {
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, setSelected] = useState<string | null>(request?.id ?? null);
+  useEffect(() => { if (request) setSelected(request.id); }, [request?.revision]); // eslint-disable-line react-hooks/exhaustive-deps
   const [lengths, setLengths] = useState<Record<string, { right: number; left: number }>>({});
   useEffect(() => {
     host.showLandmarks(file); setLengths(host.measureLengths());

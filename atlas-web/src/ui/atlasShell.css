@@ -627,3 +627,41 @@
 .atlas-shell .study-section-head button[aria-expanded=true] .section-summary { visibility: hidden; }
 .atlas-shell .study-section > .study-tab-panel { padding: 0 10px 10px; }
 @media (pointer: coarse) { .atlas-shell .study-section-head button { min-height: 50px; } }
+
+/* 4-3 U4: the Korean-medicine section reads as numbered steps; the classical basis is folded last. */
+.atlas-shell .meridian-step h3 { display: flex; align-items: center; gap: 6px; }
+.atlas-shell .step-no { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: #2f5d50; color: #fff; font-size: 11px; font-weight: 600; }
+.atlas-shell .meridian-step h4 { margin: 8px 0 2px; font-size: 12px; color: #6b7a75; font-weight: 600; }
+.atlas-shell .six-pairs { margin-top: 6px; }
+.atlas-shell .hand-foot-line { margin: 8px 0 0; font-size: 12.5px; color: #33413c; }
+.atlas-shell .meridian-basis { margin-top: 8px; padding: 6px 0; border-top: 1px solid #e3e8e6; font-size: 12.5px; color: #4b5d57; }
+.atlas-shell .meridian-basis summary { cursor: pointer; font-weight: 600; min-height: 30px; display: flex; align-items: center; }
+.atlas-shell .meridian-basis h4 { margin: 8px 0 2px; font-size: 12px; color: #2f5d50; }
+.atlas-shell .meridian-basis p { margin: 2px 0 6px; line-height: 1.55; }
+.atlas-shell .landmark-link small { margin-left: 4px; }
+@media (pointer: coarse) { .atlas-shell .meridian-basis summary { min-height: 40px; } }
+/* U4: one row per sinew (name, then its region button) so three crossing sinews stay short. */
+.atlas-shell .meridian-links .meridian-sinews { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.atlas-shell .meridian-links .meridian-sinews li { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; }
+.atlas-shell .meridian-links .meridian-sinews .meridian-region, .atlas-shell .meridian-links .meridian-sinews .sinew-anchor { min-height: 28px; padding: 2px 8px; font-size: 11px; margin: 0; }
+.atlas-shell .meridian-links .six-pairs { padding-top: 6px; border-top: 1px dashed #e3e8e6; }
+.atlas-shell .meridian-links .six-pair { font-size: 12px; color: #4b5d57; }
+@media (pointer: coarse) { .atlas-shell .meridian-links .meridian-sinews .meridian-region, .atlas-shell .meridian-links .meridian-sinews .sinew-anchor { min-height: 36px; } }
+.atlas-shell .meridian-links .meridian-sinews .meridian-point { width: auto; flex: 0 1 auto; min-width: 0; }
+
+/* 4-3 U5: tablet portrait — the card and the acupoint panel are one bottom sheet (only one unfolded at a time), the model uses the top. */
+@media (min-width:600px) and (max-width:1100px) and (orientation: portrait) {
+  .atlas-shell .study-layout { --card-space: 0px; --sheet: clamp(300px, 40dvh, 480px); }
+  .atlas-shell:has(.study-details[open]) .study-layout { --scene-right: 12px; --card-space: var(--sheet); }
+  .atlas-shell:has(.study-details:not([open])) .study-layout { --scene-right: 12px; --card-space: 60px; }
+  /* :not([hidden]) lifts this to the folded-card rule's weight, so the open panel's sheet wins. */
+  .atlas-shell:has(.acupoint-panel:not([hidden])) .study-layout { --scene-right: 12px; --card-space: var(--sheet); }
+  .atlas-shell .whole-body-canvas { left: 0; right: 0; bottom: calc(var(--card-space) + 28px + var(--view-tools-height,128px) + 8px); }
+  .atlas-shell .body-tools { bottom: calc(var(--card-space) + 28px); }
+  .atlas-shell .body-status { bottom: calc(var(--card-space) + 1px); }
+  .atlas-shell .study-details { --detail-panel-height: var(--sheet); top: auto; bottom: 0; left: 12px; right: 12px; width: auto; border-radius: 16px 16px 0 0; }
+  .atlas-shell .acupoint-panel { top: auto !important; bottom: 0; left: 12px; right: 12px; width: auto; height: var(--sheet); max-height: var(--sheet) !important; border-radius: 16px 16px 0 0; }
+  /* With the panel in the sheet, the folded card waits as a title chip at the top right. */
+  .atlas-shell:has(.acupoint-panel) .study-details:not([open]) { top: 8px; bottom: auto; left: auto; right: 12px; width: 240px; border-radius: 12px; }
+  .atlas-shell:has(.study-details:not([open])) .acupoint-entry { top: 8px; }
+}

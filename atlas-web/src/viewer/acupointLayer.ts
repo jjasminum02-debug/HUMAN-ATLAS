@@ -40,7 +40,7 @@ export function locationBasis(location: string): LocationBasis {
 export const LOCATION_BASIS_LABEL: Record<LocationBasis['kind'], string> = {
   landmark: '표지에서 바로', between: '두 표지 사이 비율', finger: '표지에서 손가락 너비', cun: '표지에서 비례촌' };
 /** What a muscle card's 경락 tab asks the acupoint panel to show: a point ("PC6:right") or a meridian sinew on one side. */
-export type AcupointTarget = { point: string } | { sinew: string; side: 'right' | 'left' };
+export type AcupointTarget = { point: string } | { sinew: string; side: 'right' | 'left' } | { landmark: string };
 
 /** Scene side of the acupoint panel (implemented by DatasetSceneAdapter). */
 export interface AcupointHost {

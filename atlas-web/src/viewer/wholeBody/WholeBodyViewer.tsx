@@ -27,7 +27,7 @@ const PEEL_ORDER: LayerId[] = ['fascia', 'superficialMuscle', 'deepMuscle', 'joi
 const LAYER_LABELS: Record<LayerId, string> = { fascia: '근막', superficialMuscle: '얕은 근육', deepMuscle: '깊은 근육', joint: '인대·관절', bone: '뼈', nerve: '신경', vessel: '혈관' };
 const DEFAULT_LAYERS: Record<LayerId, boolean> = { fascia: false, superficialMuscle: true, deepMuscle: true, joint: false, bone: true, nerve: false, vessel: false };
 
-export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewResetRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, onEntered, onMotionHostChange, onMuscleLayerChange, onBoneLayerChange, onSelectionHiddenChange }: { attachmentRole?: 'origin' | 'insertion' | null; homeRevision?: number; viewResetRevision?: number; datasetSource: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; onMotionHostChange?: (host: DatasetSceneAdapter | null) => void; onMuscleLayerChange?: (enabled: boolean) => void; onBoneLayerChange?: (enabled: boolean) => void; onSelectionHiddenChange?: (hidden: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
+export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewResetRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, onEntered, onMotionHostChange, onMuscleLayerChange, onBoneLayerChange, onSelectionHiddenChange, onAcupointPanelChange, closeAcupointRevision = 0 }: { attachmentRole?: 'origin' | 'insertion' | null; onAcupointPanelChange?: (open: boolean) => void; closeAcupointRevision?: number; homeRevision?: number; viewResetRevision?: number; datasetSource: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; onMotionHostChange?: (host: DatasetSceneAdapter | null) => void; onMuscleLayerChange?: (enabled: boolean) => void; onBoneLayerChange?: (enabled: boolean) => void; onSelectionHiddenChange?: (hidden: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
   const host = useRef<HTMLDivElement>(null);
   const tools = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -186,6 +186,9 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
     if (!ready || !(c instanceof DatasetSceneAdapter)) return;
     return c.onOpenAcupoint(target => { setAcupointPanelOpen(true); setAcupointRequest(previous => ({ ...target, revision: (previous?.revision ?? 0) + 1 })); });
   }, [ready]);
+  // 4-3 U5: the card and the acupoint panel share one slot on tablets; the page decides which one is open.
+  useEffect(() => { onAcupointPanelChange?.(acupointPanelOpen); }, [acupointPanelOpen]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (closeAcupointRevision) setAcupointPanelOpen(false); }, [closeAcupointRevision]);
   return <div className="whole-body-viewer" onPointerDownCapture={stopEntrance}>
     <div className="whole-body-canvas" inert={!entered} aria-hidden={!entered} ref={host}/>
     {/* 4-1 step 7: learners get the rig-based acupoint panel; the earlier carrier review stays behind its development flags. */}

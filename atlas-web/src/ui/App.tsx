@@ -79,6 +79,23 @@ export default function App() {
     const [exploreOpen, setExploreOpen] = useState(false);
     const [regionMenuOpen, setRegionMenuOpen] = useState(false);
     const [detailsOpen, setDetailsOpen] = useState(true);
+    // 4-3 U5: below 1400px only one of the card and the acupoint panel is unfolded; the card folds to its title bar and comes back.
+    const [closeAcupointRevision, setCloseAcupointRevision] = useState(0);
+    const acupointOpen = useRef(false), cardFoldedForPanel = useRef(false);
+    const oneWindow = () => window.matchMedia('(max-width: 1399px)').matches;
+    const onAcupointPanelChange = (open: boolean) => {
+        acupointOpen.current = open;
+        if (!oneWindow()) return;
+        if (open && detailsOpenRef.current) { cardFoldedForPanel.current = true; setDetailsOpen(false); }
+        if (!open && cardFoldedForPanel.current) { cardFoldedForPanel.current = false; setDetailsOpen(true); }
+    };
+    const detailsOpenRef = useRef(true);
+    // The card unfolding (a tap on its title bar or a new selection) closes the panel in the shared slot.
+    useEffect(() => {
+        detailsOpenRef.current = detailsOpen;
+        if (detailsOpen && acupointOpen.current && oneWindow()) { cardFoldedForPanel.current = false; setCloseAcupointRevision(r => r + 1); }
+    }, [detailsOpen]);
+    const onDetailsToggle = (open: boolean) => setDetailsOpen(open);
     const [attachmentFocus, setAttachmentFocus] = useState<{ key: string; role: 'origin' | 'insertion' } | null>(null);
     const [tab, setTab] = useState<DetailTab | null>(null);
     const [explorerMode, setExplorerMode] = useState<'structures' | 'actions'>('structures');
@@ -130,7 +147,7 @@ export default function App() {
         return () => { clearTimeout(timer); abort.abort(); };
     }, []);
     useEffect(() => { if (!data)
-        return; const pop = () => { setRoute(resolveRoute(location.search, data.integration.objects)); setTextNerveKey(nerveConceptForLearner(new URLSearchParams(location.search).get('nerveConcept') ?? '')?.key ?? null); setQuery(history.state?.atlasSearchQuery ?? ''); setDetailsOpen(true); setTab('구조'); setRegionMenuOpen(false); }; window.addEventListener('popstate', pop); return () => window.removeEventListener('popstate', pop); }, [data]);
+        return; const pop = () => { setRoute(resolveRoute(location.search, data.integration.objects)); setTextNerveKey(nerveConceptForLearner(new URLSearchParams(location.search).get('nerveConcept') ?? '')?.key ?? null); setQuery(history.state?.atlasSearchQuery ?? ''); setDetailsOpen(true); setTab(null); setRegionMenuOpen(false); }; window.addEventListener('popstate', pop); return () => window.removeEventListener('popstate', pop); }, [data]);
     useEffect(() => {
         if (!regionMenuOpen) return;
         const closeOutside = (event: PointerEvent) => {
@@ -419,9 +436,9 @@ export default function App() {
    <section id="atlas-stage" tabIndex={-1} className="study-stage" aria-label={`${title} 학습 장면`}><div className="stage-caption" aria-hidden={!entered}><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{title}</h2><p>회전하고 확대하며 구조를 살펴보세요.</p></div>
     {toolsOpen && entered && <StudyTools rows={data.integration.objects.filter(r => r.routeAudience === (route.audience ?? 'learner'))} host={motionHost}
       selected={selected ?? null} onSelect={select} onClearSelection={() => navigate({ regions: route.regions, selected: null })} onClose={() => setToolsOpen(false)}/>}
-    <WholeBodyViewer attachmentRole={attachmentRole} homeRevision={homeRevision} viewResetRevision={viewResetRevision} datasetSource={data} onEntered={setEntered} onMotionHostChange={setMotionHost} onMuscleLayerChange={setMuscleLayerEnabled} onBoneLayerChange={setBoneLayerEnabled} onSelectionHiddenChange={setSelectedSourceHidden} regionIds={route.regions} selectedId={route.selected} selectedIds={selectedSourceKeys} whole={!route.regions.length} onWholeChange={() => { resetPresentation(); navigate({ regions: [], selected: route.selected }); }} onSelect={select}/>
+    <WholeBodyViewer attachmentRole={attachmentRole} homeRevision={homeRevision} viewResetRevision={viewResetRevision} datasetSource={data} onEntered={setEntered} onMotionHostChange={setMotionHost} onMuscleLayerChange={setMuscleLayerEnabled} onBoneLayerChange={setBoneLayerEnabled} onSelectionHiddenChange={setSelectedSourceHidden} onAcupointPanelChange={onAcupointPanelChange} closeAcupointRevision={closeAcupointRevision} regionIds={route.regions} selectedId={route.selected} selectedIds={selectedSourceKeys} whole={!route.regions.length} onWholeChange={() => { resetPresentation(); navigate({ regions: [], selected: route.selected }); }} onSelect={select}/>
    </section>
-   {(selected || selectedTextNerve) && <details inert={!entered} className="study-details" id="study-details" open={detailsOpen} onToggle={e => setDetailsOpen(e.currentTarget.open)}><summary className="mobile-detail-summary">{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</summary><div className="study-detail-body"><div className="study-detail-header">
+   {(selected || selectedTextNerve) && <details inert={!entered} className="study-details" id="study-details" open={detailsOpen} onToggle={e => onDetailsToggle(e.currentTarget.open)}><summary className="mobile-detail-summary">{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</summary><div className="study-detail-body"><div className="study-detail-header">
     <h2>{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</h2>{selected && anatomicalPartSubtitle(selected.names.en) && <p className="anatomical-part-subtitle">{anatomicalPartSubtitle(selected.names.en)}</p>}
     {/* 4-3 U2: one line under the title: kind, 신용어 and English (구용어 is the title), side, bookmark and clear. */}
     <div className="card-meta">
@@ -516,10 +533,9 @@ export default function App() {
       <ClinicalTests row={selected}/>
     </StudySection>}
     <StudySection id="경락" open={tab === '경락'} onToggle={toggleSection} summary="경근 영역 → 경맥 → 경혈">
-      {tab === '경락' && <MeridianLinks muscle={selected} host={motionHost} onOpen={motionHost ? target => {
-        // On a tablet the card and the acupoint panel would cover the model between them: fold the card to its title bar.
-        if (window.matchMedia('(max-width: 1100px)').matches) setDetailsOpen(false);
-        motionHost.openAcupoint(target);
+      {tab === '경락' && <MeridianLinks muscle={selected} host={motionHost}
+        attachBones={(['origin', 'insertion'] as const).flatMap(role => attachmentBoneKeys(selected.sourceKey, role, data.integration.objects))} onOpen={motionHost ? target => {
+        motionHost.openAcupoint(target); // below 1400px the card folds itself when the panel opens (U5)
       } : undefined}/>}
     </StudySection>
     </div>

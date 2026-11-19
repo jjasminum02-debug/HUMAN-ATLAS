@@ -309,6 +309,15 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
         b.group.matrix.copy(this.rigState?.transforms?.get(b.segment) ?? new THREE.Matrix4()); b.group.matrixWorldNeedsUpdate = true;
     }
     /** Lowest and highest point (y, rest pose) of a loaded structure, or null before its mesh has loaded. */
+    /** Rest-pose bounds of a structure in the app frame (the frame sinew and acupoint data use). */
+    structureBox(key: string): { min: [number, number, number]; max: [number, number, number] } | null {
+        const node = this.resources.nodes.get(key); if (!node) return null;
+        const posed = node.userData.posedGeometry as THREE.BufferGeometry | undefined;
+        const rest = posed && node.geometry === posed ? posed.userData.skinRest as THREE.BufferGeometry : node.geometry;
+        rest.computeBoundingBox();
+        const box = rest.boundingBox!.clone().applyMatrix4(new THREE.Matrix4().fromArray(node.userData.instanceMatrix));
+        return { min: box.min.toArray() as [number, number, number], max: box.max.toArray() as [number, number, number] };
+    }
     structureHeight(key: string): [number, number] | null {
         const node = this.resources.nodes.get(key); if (!node) return null;
         const posed = node.userData.posedGeometry as THREE.BufferGeometry | undefined;
