@@ -123,6 +123,12 @@ for (const size of SIZES) {
   await open(page);
   const r = { label: size.label, home: { modelVisiblePct: await modelVisible(page), toolbarButtons: await toolbarButtons(page) }, muscles: {} };
   await shot('home');
+  // U9: a close view of the thighs for material and light (same camera every run).
+  await page.evaluate(() => { const sc = window.__atlasScene; sc.stopEntrance(); sc.moveCamera({ target: [0.1, 0.62, 0.05], position: [0.22, 0.74, 0.72], zoom: 1 }, false); sc.requestRender(); });
+  await page.waitForTimeout(2200);
+  await shot('closeup-thigh');
+  await page.evaluate(() => { const sc = window.__atlasScene; sc.moveCamera({ target: [0, 0.86, 0], position: [0, 0.86, 3.5], zoom: 1 }, false); });
+  await settle(page);
   for (const m of MUSCLES) {
     await pick(page, m.query, m.label);
     r.muscles[m.label] = { modelVisiblePct: await modelVisible(page), ...await cardFacts(page), toolbarButtons: await toolbarButtons(page) };

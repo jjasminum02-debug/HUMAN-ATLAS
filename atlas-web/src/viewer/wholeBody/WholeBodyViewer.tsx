@@ -62,6 +62,7 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
   const [shading, setShading] = useState<boolean | null>(null);
   const [movementOpen, setMovementOpen] = useState(false);
   const [layersOpen, setLayersOpen] = useState(false);
+  const [labelsOn, setLabelsOn] = useState(true);
   const [movementRequest, setMovementRequest] = useState<{ jointId: string; revision: number } | null>(null);
   const rowsByKey = useMemo(() => new Map((datasetSource.integration.objects ?? []).map(r => [r.sourceKey, r])), [datasetSource]);
   const sceneOf = () => { const c = controller.current; return c instanceof DatasetSceneAdapter ? c.scene : c; };
@@ -105,7 +106,7 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
   const staticPose = datasetSource.integration.objects.find(r => r.nerve)?.nerve?.poseId;
   const [acupointsActive, setAcupointsActive] = useState(false);
   const [acupointPanelOpen, setAcupointPanelOpen] = useState(false);
-  type Presentation = { observeNerves: boolean; highlightInnervation: boolean; dim: boolean; isolated: boolean; hidden: string[]; translucent: string[] };
+  type Presentation = { observeNerves: boolean; highlightInnervation: boolean; dim: boolean; isolated: boolean; xray?: boolean; hidden: string[]; translucent: string[] };
   const [presentation, setPresentation] = useState<Presentation>({ observeNerves: true, highlightInnervation: true, dim: true, isolated: false, hidden: [], translucent: [] });
   useEffect(() => { onSelectionHiddenChange?.(Boolean(selectedId && presentation.hidden.includes(selectedId))); }, [selectedId, presentation.hidden, onSelectionHiddenChange]);
   const updatePresentation = (next: Presentation) => setPresentation(next);
@@ -148,7 +149,7 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
     const regionKey = JSON.stringify(regionIds);
     const previous = previousView.current;
     controller.current?.setView({ region: null, regionIds, selectedId, selectedIds, bones, muscles, nerves,
-      fascia: layers.fascia, joints: layers.joint, vessels: layers.vessel, superficialMuscles: layers.superficialMuscle, deepMuscles: layers.deepMuscle, layerOpacity, attachmentObservation: attachmentRole && selectedId ? {sourceKey: selectedId, role: attachmentRole} : null, poseId: staticPose, nerveConceptMuscleKeys, observeNerves: presentation.observeNerves, highlightInnervation: presentation.highlightInnervation, supplements: false, dim: presentation.dim, isolate: presentation.isolated && Boolean(selectedId), hiddenSourceKeys: presentation.hidden, translucentSourceKeys: presentation.translucent });
+      fascia: layers.fascia, joints: layers.joint, vessels: layers.vessel, superficialMuscles: layers.superficialMuscle, deepMuscles: layers.deepMuscle, layerOpacity, attachmentObservation: attachmentRole && selectedId ? {sourceKey: selectedId, role: attachmentRole} : null, poseId: staticPose, nerveConceptMuscleKeys, observeNerves: presentation.observeNerves, highlightInnervation: presentation.highlightInnervation, supplements: false, dim: presentation.dim, isolate: presentation.isolated && Boolean(selectedId), xray: Boolean(presentation.xray && selectedId), hiddenSourceKeys: presentation.hidden, translucentSourceKeys: presentation.translucent });
     const nerveFramed = controller.current instanceof DatasetSceneAdapter && selectedNerve && nerves
       && !presentation.hidden.includes(selectedId ?? '');
     if (previous === null) {
@@ -192,6 +193,8 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
   const inCard = Boolean(selectionActionsTarget);
   const selectionActions = selectedId ? <div className={`selection-view-options${inCard ? ' in-card' : ''}`} role="group" aria-label="고른 구조를 모형에서">
         {!selectedNerve && <button disabled={!selectedId} aria-pressed={presentation.dim} onClick={() => updatePresentation({ ...presentation, dim: !presentation.dim })}>{inCard ? '강조' : '선택 강조'}</button>}
+        {!selectedNerve && <button disabled={!selectedId} aria-pressed={Boolean(presentation.xray)} aria-label="투시 보기" title="고른 구조만 진하게, 나머지는 비쳐 보이게 합니다."
+          onClick={() => updatePresentation({ ...presentation, xray: !presentation.xray })}>{inCard ? '투시' : '투시 보기'}</button>}
         <button disabled={!selectedId || Boolean(selectedNerve) || !progress?.selectedAvailable || presentation.hidden.includes(selectedId)} aria-label="선택 숨기기" title="선택한 구조를 숨겨 안쪽 구조를 봅니다." onClick={() => selectedId && setPresentation(previous => previous.hidden.includes(selectedId) ? previous : { ...previous, hidden: [...previous.hidden, selectedId] })}>{inCard ? '숨기기' : '선택 숨기기'}</button>
         <button disabled={!selectedId || !progress?.selectedAvailable} onClick={() => {const c=controller.current;if(c instanceof DatasetSceneAdapter&&c.scene.handleObservationFit('selection'))return;c?.focusSelection();}} aria-label="선택 맞춤">{inCard ? '맞춤' : '선택 맞춤'}</button>
         {selectedNerve ? (selectedNerve.muscleKeys.length > 0 || nerveConceptMuscleKeys.length > 0) && <button disabled={!nerves} aria-pressed={presentation.highlightInnervation} onClick={() => updatePresentation({ ...presentation, highlightInnervation: !presentation.highlightInnervation })}>{inCard ? '관련 근육' : '관련 근육 강조'}</button> : <button disabled={!selectedId || (!progress?.selectedAvailable && !presentation.translucent.includes(selectedId))} aria-pressed={Boolean(selectedId && presentation.translucent.includes(selectedId))} onClick={() => selectedId && updatePresentation({ ...presentation, translucent: presentation.translucent.includes(selectedId) ? presentation.translucent.filter(id => id !== selectedId) : [...presentation.translucent, selectedId] })}>{inCard ? '반투명' : '선택 반투명'}</button>}
@@ -243,6 +246,8 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
       </div>
       {moreOpen && <div className="more-panel" id="view-more">
         <div className="more-actions">
+        {controller.current instanceof DatasetSceneAdapter && <button aria-pressed={labelsOn} title="고른 구조와 기시·정지 뼈에 이름표를 붙입니다."
+          onClick={() => { const next = !labelsOn; setLabelsOn(next); (controller.current as DatasetSceneAdapter).setLabelsVisible(next); }}>이름표</button>}
         <button aria-pressed={shading ?? Boolean(ready && sceneOf()?.ambientOcclusion)} title="멈춰 있을 때 구조 사이의 그늘을 그립니다. 느린 기기에서는 꺼 주세요." onClick={toggleShading}>음영 효과</button>
         {entered && controller.current instanceof DatasetSceneAdapter && <Suspense fallback={null}><SkinControls adapter={controller.current} acupoints={acupointsActive}/></Suspense>}
         </div>

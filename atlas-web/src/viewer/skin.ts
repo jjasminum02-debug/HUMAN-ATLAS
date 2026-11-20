@@ -123,6 +123,9 @@ export function posedCopy(rest: THREE.BufferGeometry) {
   target.setAttribute('position', new THREE.BufferAttribute(new Float32Array(rest.getAttribute('position').array), 3));
   const normal = rest.getAttribute('normal');
   if (normal) target.setAttribute('normal', new THREE.BufferAttribute(new Float32Array(normal.array), 3));
+  // 4-3 U9: the constant fibre axis is shared, not copied.
+  const fiber = rest.getAttribute('fiberAxis');
+  if (fiber) target.setAttribute('fiberAxis', fiber);
   target.userData.skinRest = rest;
   return target;
 }

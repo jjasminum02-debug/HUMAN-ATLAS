@@ -115,6 +115,18 @@ const flows = [
   ['검색으로 근육 찾기: 넙다리곧은근 이름·기시·정지', async page => {
     await open(page);
     await search(page, '넙다리곧은근', '대퇴직근'); // modern name finds the Sino-Korean title
+    // 4-3 U8: name tags on the model — the muscle, its origin bone and insertion bones, none overlapping.
+    await page.locator('.scene-label.is-origin').first().waitFor({ timeout: 10000 });
+    const tags = await page.evaluate(() => [...document.querySelectorAll('.scene-label')].filter(t => t.style.visibility === 'visible').map(t => { const r = t.getBoundingClientRect(); return { k: t.className.replace('scene-label is-', ''), text: t.textContent, r: [r.left, r.top, r.right, r.bottom] }; }));
+    const overlap = tags.some((a, i) => tags.some((b, j) => i < j && a.r[0] < b.r[2] && b.r[0] < a.r[2] && a.r[1] < b.r[3] && b.r[1] < a.r[3]));
+    expect(tags.some(t => t.k === 'selected' && /대퇴직근/.test(t.text)) && tags.some(t => t.k === 'origin' && /관골/.test(t.text)) && tags.some(t => t.k === 'insertion') && !overlap,
+      `이름표: ${tags.map(t => `${t.k}:${t.text}`).join(', ')}${overlap ? ' (겹침)' : ''}`);
+    // 4-3 U8: the mouse over the model names the structure under it.
+    const canvasBox = await page.locator('canvas').first().boundingBox();
+    const chest = await page.evaluate(() => { const s = window.__atlasScene, r = s.renderer.domElement.getBoundingClientRect(), v = s.controls.target.clone().add({ x: .03, y: .35, z: .12 }).project(s.camera); return [(v.x + 1) / 2 * r.width, (1 - v.y) / 2 * r.height]; });
+    await page.mouse.move(canvasBox.x + chest[0], canvasBox.y + chest[1]);
+    const hover = await page.locator('.scene-label.is-hover').textContent({ timeout: 5000 }).catch(() => '');
+    expect(hover.length > 1, '마우스를 올려도 이름이 뜨지 않음');
     // 4-3 U3: the card opens with every section closed; their bars and summaries show in study order.
     const bars = await page.locator('.study-section-head button').evaluateAll(b => b.map(x => `${x.querySelector('.section-title').textContent}:${x.getAttribute('aria-expanded')}`));
     expect(bars.join() === '구조:false,기능:false,한의학적 접근:false', `칸: ${bars.join()}`);
@@ -179,7 +191,7 @@ const flows = [
     await settle(page);
     const vessels = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && /^vessel:/.test(o.material.name)) n++; }); return n; });
     expect(vessels > 600, `보이는 혈관 ${vessels}개`);
-    return `카드·3D 선택 일치, 구용어 제목·신용어·영어 한 줄, 핵심 네 줄(경락 줄 → 경락 탭), 기시·정지 면, 한의학적 접근(1–4 순서·근거 접힘 · 족양명경근 영역 · 손·발 경계 아래 · 양명 손발 함께 · ${pointName} → 경혈 창), 혈액공급 표시 → 동맥 카드, 혈관 ${vessels}개`;
+    return `카드·3D 선택 일치, 구용어 제목·신용어·영어 한 줄, 3D 이름표(근육·기시·정지, 겹침 없음, 마우스 올리면 ${hover}), 핵심 네 줄(경락 줄 → 경락 탭), 기시·정지 면, 한의학적 접근(1–4 순서·근거 접힘 · 족양명경근 영역 · 손·발 경계 아래 · 양명 손발 함께 · ${pointName} → 경혈 창), 혈액공급 표시 → 동맥 카드, 혈관 ${vessels}개`;
   }],
   ['무릎 인대 구조 보기: 앞십자인대 → 무릎 움직여 보기', async page => {
     await open(page);
@@ -478,6 +490,22 @@ const flows = [
     await openSection(page, '기능');
     // 4-2 step 10: the 기능 tab says which posture pattern names the muscle (rectus femoris: lower crossed, short side).
     const posture = await page.locator('#study-function-panel .posture-membership').innerText({ timeout: 10000 });
+    // 4-3 U8/U9 on 견갑하근 (a deep muscle loaded on demand): its tag dot sits on the muscle, and see-through leaves only it solid.
+    await page.locator('.scene-label.is-selected').waitFor({ timeout: 10000 });
+    await page.waitForTimeout(400);
+    const tagCheck = await page.evaluate(() => { const s = window.__atlasScene, key = new URL(location.href).searchParams.get('source'); let mesh = null; s.root.traverse(o => { if (o.isMesh && o.userData.sourceKey === key) mesh = o; });
+      const r = s.renderer.domElement.getBoundingClientRect(), at = mesh.geometry.boundingSphere ? mesh.geometry.boundingSphere.center.clone() : { x: 0, y: 0, z: 0 };
+      mesh.geometry.computeBoundingSphere(); const c = mesh.geometry.boundingSphere.center.clone().applyMatrix4(mesh.matrix).project(s.camera);
+      const dot = document.querySelector('.scene-label-lines circle.is-selected'); return { dx: Math.abs((c.x + 1) / 2 * r.width - Number(dot.getAttribute('cx'))), dy: Math.abs((1 - c.y) / 2 * r.height - Number(dot.getAttribute('cy'))) }; });
+    expect(tagCheck.dx < 60 && tagCheck.dy < 60, `견갑하근 이름표 점이 근육에서 멀다: ${Math.round(tagCheck.dx)}, ${Math.round(tagCheck.dy)}px`);
+    const ghosts = () => page.evaluate(() => { let ghost = 0, solid = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && o.userData.sourceKey) { if (/:observationContext:|:translucent:/.test(o.material?.name ?? '')) ghost++; else if (/:selected:/.test(o.material?.name ?? '')) solid++; } }); return { ghost, solid }; });
+    await page.locator('.card-view-actions').getByRole('button', { name: '투시 보기' }).click();
+    await page.waitForTimeout(300);
+    const xray = await ghosts();
+    await page.locator('.card-view-actions').getByRole('button', { name: '투시 보기' }).click();
+    await page.waitForTimeout(300);
+    const plain = await ghosts();
+    expect(xray.ghost > 200 && xray.solid >= 1 && plain.ghost < 20, `투시: 비침 ${xray.ghost}·진함 ${xray.solid} → 끈 뒤 비침 ${plain.ghost}`);
     // 4-3 U4 on 견갑하근 (no sinew crosses it): the nearest sinew is named, and a landmark on its bones opens the landmark view.
     await search(page, '어깨밑근', '견갑하근');
     await openSection(page, '한의학적 접근');

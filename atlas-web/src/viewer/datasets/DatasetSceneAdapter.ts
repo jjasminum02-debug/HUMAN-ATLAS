@@ -1,6 +1,9 @@
 import { dotTexture, labelSprite, LINE_COLOR, POINT_COLOR, POINT_PX, POINT_SELECTED, POINT_SELECTED_PX, screenSprite, setLinePoints, wideLine } from '../acupointMarkers.ts';
 import type { Line2 } from 'three/examples/jsm/lines/Line2.js';
 import { toOverlay } from '../postprocess.ts';
+import { attachFiberAxis } from '../muscleSurface.ts';
+import { closestApproach, LabelLayer, surfaceMiddle, type SceneLabel } from '../labelLayer.ts';
+import { attachmentBoneKeys } from './regionalContext.ts';
 import * as THREE from 'three';
 import { AnatomyMaterials, type MaterialMode } from '../anatomyMaterials.ts';
 import { demandedStructureKeys, layerIdOf, innervationHighlightKeys, observingNerves, observationFrameKeys, attachmentObservationKeys, shouldFocusNerveSelection, nerveCourseKeys } from './presentation.ts';
@@ -98,6 +101,12 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
         canvas.addEventListener('keydown', this.onKey, true);
         canvas.addEventListener('pointerdown', this.onDown);
         canvas.addEventListener('pointerup', this.onUp);
+        // 4-3 U8: name tags over the model, re-placed after every drawn frame; hover (mouse) and long press (touch) name a structure.
+        this.labels = new LabelLayer(canvas.parentElement ?? canvas);
+        this.removeDrawListener = this.scene.onDraw(() => this.labels.update(this.scene.camera, canvas.clientWidth, canvas.clientHeight));
+        canvas.addEventListener('pointermove', this.onHoverMove);
+        canvas.addEventListener('pointerleave', this.onHoverLeave);
+        this.poseListeners.add(() => this.scheduleLabels());
         this.setView(this.view);
         this.focus([], false);
         if (import.meta.env?.DEV || import.meta.env?.MODE === 'qa') (window as unknown as { __atlasRig?: object }).__atlasRig = { // dev inspection only
@@ -467,7 +476,71 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
         this.apply();
         // Fit the initial deep link before the opening orbit captures its camera.
         if (focusNerve && !observing) this.focusSelection(this.resources.nodes.size > 0 && !this.scene.renderer.domElement.dataset.entrance);
+        if (changedSelection) this.scheduleLabels();
     }
+    // ── 4-3 U8: name tags ────────────────────────────────────────────────────
+    private readonly labels: LabelLayer;
+    private readonly removeDrawListener: () => void;
+    private labelsOn = true;
+    private labelSignature = '';
+    private selectionLabels: SceneLabel[] = [];
+    private hoverLabel: SceneLabel | null = null;
+    private labelTimer = 0;
+    /** Show or hide the tags (the hover name stays). */
+    setLabelsVisible(on: boolean) { this.labelsOn = on; this.scheduleLabels(); }
+    get labelsVisible() { return this.labelsOn; }
+    /** Recompute anchors after the selection, its meshes or the pose change (deferred: it walks mesh vertices). */
+    private scheduleLabels() {
+        clearTimeout(this.labelTimer);
+        this.labelTimer = window.setTimeout(() => { if (!this.dead) { this.selectionLabels = this.buildSelectionLabels(); this.pushLabels(); } }, 60);
+    }
+    private pushLabels() { this.labels.set([...(this.labelsOn ? this.selectionLabels : []), ...(this.hoverLabel ? [this.hoverLabel] : [])]); this.scene.requestRender(); }
+    private buildSelectionLabels(): SceneLabel[] {
+        const id = this.view.selectedId, row = id ? this.records.get(id) : undefined, mesh = id ? this.resources.nodes.get(id) : undefined;
+        const count = (m: THREE.Mesh | undefined) => (m?.geometry.getAttribute('position') as THREE.BufferAttribute | undefined)?.count ?? 0;
+        if (!row || !mesh || !mesh.visible || count(mesh) < 3) return [];
+        const middle = surfaceMiddle(mesh); if (!middle) return [];
+        const out: SceneLabel[] = [{ id: `sel:${row.sourceKey}`, text: row.label, kind: 'selected', anchor: middle, priority: 100 }];
+        if (row.kind !== 'muscle') return out;
+        for (const role of ['origin', 'insertion'] as const) {
+            for (const key of attachmentBoneKeys(row.sourceKey, role, this.integration.objects).slice(0, 2)) {
+                const bone = this.resources.nodes.get(key), boneRow = this.records.get(key);
+                if (!bone || !bone.visible || !boneRow || count(bone) < 3) continue;
+                const at = closestApproach(mesh, bone);
+                if (at) out.push({ id: `${role}:${key}`, text: boneRow.label, sub: role === 'origin' ? '기시' : '정지', kind: role, anchor: at, priority: role === 'origin' ? 60 : 50 });
+            }
+        }
+        return out;
+    }
+    private hoverFrame = 0;
+    private longPress: { timer: number; x: number; y: number } | null = null;
+    private suppressTap = false;
+    private hoverClear = 0;
+    /** The structure under a screen point (same picking as a tap). */
+    private structureAt(x: number, y: number) {
+        const rect = this.scene.renderer.domElement.getBoundingClientRect();
+        const nodes = [...this.resources.nodes.values()].filter(n => n.visible && !n.userData.attachmentPatch);
+        const plane = this.sectionState?.plane ?? null;
+        const hit = pickSurface(this.scene.camera, nodes, { x, y }, rect, nodes.some(n => n.userData.nerveObservationContext), point => keptBySection(plane, point));
+        const row = hit && this.records.get(String(hit.object.userData.sourceKey ?? hit.object.name));
+        return hit && row?.inspectionEligible ? { row, point: hit.point.clone() } : null;
+    }
+    private showHover(x: number, y: number, hold = 0) {
+        const found = this.structureAt(x, y);
+        const next = found ? { id: 'hover', text: found.row.label, kind: 'hover' as const, anchor: found.point, priority: 200 } : null;
+        if ((next?.text ?? null) === (this.hoverLabel?.text ?? null) && !hold) { if (next && this.hoverLabel) this.hoverLabel.anchor = next.anchor; this.scene.requestRender(); return; }
+        this.hoverLabel = next; this.pushLabels();
+        clearTimeout(this.hoverClear);
+        if (hold && next) this.hoverClear = window.setTimeout(() => { this.hoverLabel = null; this.pushLabels(); }, hold);
+    }
+    private onHoverMove = (e: PointerEvent) => {
+        if (this.longPress && Math.hypot(e.clientX - this.longPress.x, e.clientY - this.longPress.y) > 8) { clearTimeout(this.longPress.timer); this.longPress = null; }
+        if (e.pointerType !== 'mouse' || e.buttons) return;
+        const { clientX: x, clientY: y } = e;
+        cancelAnimationFrame(this.hoverFrame);
+        this.hoverFrame = requestAnimationFrame(() => this.showHover(x, y));
+    };
+    private onHoverLeave = () => { cancelAnimationFrame(this.hoverFrame); if (this.hoverLabel) { this.hoverLabel = null; this.pushLabels(); } };
     private readonly sourceSelectionListeners = new Set<() => void>();
     onSourceSelectionChange(listener: () => void) {
         this.sourceSelectionListeners.add(listener);
@@ -535,7 +608,9 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
                 : drawnArea ? 'insertionAreaContext' : 'insertionContext' : null;
             // While observing its attachments, the selected muscle is see-through so the drawn areas under it show.
             const observingAreas = selected && this.view.attachmentObservation && attachmentRows.length > 0;
-            const mode: MaterialMode = attachmentMode ?? (this.view.translucentSourceKeys?.includes(key) || observingAreas || selected && this.view.selectedPresentation === 'translucent' ? 'translucent'
+            // 4-3 U9 see-through: the selection stays solid; bones read faintly, everything else as a ghost.
+            const xray = this.view.xray && this.view.selectedId && !selected && !course.has(key);
+            const mode: MaterialMode = xray && !attachmentMode ? (row.kind === 'bone' ? 'translucent' : 'observationContext') : attachmentMode ?? (this.view.translucentSourceKeys?.includes(key) || observingAreas || selected && this.view.selectedPresentation === 'translucent' ? 'translucent'
                 : selected || course.has(key) || key === this.quizTarget ? 'selected'
                 // Quiz: the target may lie under muscles or bone, so everything else turns see-through (bones less so).
                 : this.quizTarget && !this.view.selectedId ? row.kind === 'bone' ? 'translucent' : 'observationContext' : observe && row.kind !== 'nerve' ? highlights.has(key) ? 'motorContext' : 'nerveContext'
@@ -550,6 +625,7 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
             const material = this.materials.get(row.kind, { mode: highlight && mode === 'dim' ? 'normal' : mode, phase: phaseTone, role: highlight, userTranslucent: Boolean(attachmentMode && this.view.translucentSourceKeys?.includes(key)),
                 variant: row.tissue, layerOpacity: layerId ? this.view.layerOpacity?.[layerId] : undefined });
             node.material = material;
+            if (row.kind === 'muscle') attachFiberAxis(node); // 4-3 U9: fibre streaks along the muscle's long axis
             node.userData.nerveObservationContext = observe && row.kind !== 'nerve';
         }
         if (this.rigState) {
@@ -563,6 +639,13 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
         }
         this.syncContactAreas();
         this.syncAcupoints();
+        // Tags follow what is drawn: rebuild when the selection's mesh or its attachment bones load, show or hide.
+        const id = this.view.selectedId, row = id ? this.records.get(id) : undefined;
+        // A mesh can exist before its geometry arrives (deep layers load on demand): its vertex count is part of the key.
+        const meshKey = (key: string) => { const n = this.resources.nodes.get(key); return n ? `${n.visible}:${(n.geometry.getAttribute('position') as THREE.BufferAttribute | undefined)?.count ?? 0}` : 'none'; };
+        const signature = !id ? '' : [id, meshKey(id),
+            ...(row?.kind === 'muscle' ? (['origin', 'insertion'] as const).flatMap(role => attachmentBoneKeys(id, role, this.integration.objects).slice(0, 2).map(k => `${k}:${meshKey(k)}`)) : [])].join('|');
+        if (signature !== this.labelSignature) { this.labelSignature = signature; this.scheduleLabels(); }
         this.syncSinews();
         this.syncBoundary();
         this.syncLandmarks();
@@ -706,8 +789,17 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
         this.scene.moveCamera({ target: point.toArray(), position: point.clone().addScaledVector(offset.normalize(), distance).toArray(), zoom: camera.zoom });
     }
     private lastTap: { t: number; x: number; y: number; point: THREE.Vector3 | null } | null = null;
-    private onDown = (e: PointerEvent) => { this.down = { x: e.clientX, y: e.clientY }; };
+    private onDown = (e: PointerEvent) => {
+        this.down = { x: e.clientX, y: e.clientY }; this.suppressTap = false;
+        if (this.longPress) { clearTimeout(this.longPress.timer); this.longPress = null; }
+        if (e.pointerType === 'touch' && e.isPrimary) {
+            const { clientX: x, clientY: y } = e;
+            this.longPress = { x, y, timer: window.setTimeout(() => { this.longPress = null; this.suppressTap = true; this.showHover(x, y, 2500); }, 450) };
+        }
+    };
     private onUp = (e: PointerEvent) => {
+        if (this.longPress) { clearTimeout(this.longPress.timer); this.longPress = null; }
+        if (this.suppressTap) { this.suppressTap = false; return; } // a long press only names the structure
         if (e.button !== 0 || Math.hypot(e.clientX - this.down.x, e.clientY - this.down.y) > 5)
             return;
         const rect = this.scene.renderer.domElement.getBoundingClientRect();
@@ -741,5 +833,5 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
             this.select(row.sourceKey, row.side);
     };
     dispose() { if (this.dead)
-        return; this.restoreSourceMotion('viewer-unmounted'); this.dead = true; const canvas = this.scene.renderer.domElement; canvas.removeEventListener('keydown', this.onKey, true); canvas.removeEventListener('pointerdown', this.onDown); canvas.removeEventListener('pointerup', this.onUp); this.resources.dispose(); this.materials.dispose(); this.scene.dispose(); }
+        return; this.restoreSourceMotion('viewer-unmounted'); this.dead = true; const canvas = this.scene.renderer.domElement; canvas.removeEventListener('keydown', this.onKey, true); canvas.removeEventListener('pointerdown', this.onDown); canvas.removeEventListener('pointerup', this.onUp); canvas.removeEventListener('pointermove', this.onHoverMove); canvas.removeEventListener('pointerleave', this.onHoverLeave); this.removeDrawListener(); this.labels.dispose(); clearTimeout(this.labelTimer); this.resources.dispose(); this.materials.dispose(); this.scene.dispose(); }
 }

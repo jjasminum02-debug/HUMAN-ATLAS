@@ -11,7 +11,8 @@ export type MaterialMode = 'normal' | 'selected' | 'dim' | 'translucent' | 'nerv
  * role: M3 movement colouring (muscles producing / opposing the shown movement), or a meridian sinew's region. */
 export type MaterialState = { mode?: MaterialMode; phase?: 'action' | 'return' | null; role?: 'agonist' | 'antagonist' | 'meridian' | 'postureShort' | 'postureWeak'; contextOpacity?: number; userTranslucent?: boolean; hovered?: boolean; variant?: string; layerOpacity?: number };
 export const ANATOMY_PALETTE = {
-  bone: '#e6dbc2', muscle: '#d48b78', nerve: '#dbbb32', accessory: '#c5bdb1', tendon: '#f1ebdc', fascia: '#e1dde9', joint: '#f6f0e1', vessel: '#b5463d',
+  // 4-3 U9: muscle one step deeper (still clear of the movement red), tendon a cooler white so the muscle–tendon line reads, bone ivory.
+  bone: '#e9dec4', muscle: '#c77866', nerve: '#dbbb32', accessory: '#c5bdb1', tendon: '#eeeadf', fascia: '#e1dde9', joint: '#f6f0e1', vessel: '#b5463d',
   origin: '#476eb4', insertion: '#bc7135', selected: '#237f79', selectedNerve: '#d0c42f', related: '#338fc1', action: '#df8065', return: '#a4aaa8',
   agonist: '#d4472f', antagonist: '#3f7cc4',
   // Muscles of the meridian sinew region being shown (amber: apart from the muscle pink, the teal selection and the sinew line).
@@ -50,7 +51,7 @@ export function anatomyMaterialParameters(tissue: Tissue, state: MaterialState =
   const nerve = tissue === 'nerve', selected = mode === 'selected';
   // Patches are copies of the bone surface: pull them toward the camera so they never z-fight with it.
   const attachment = state.variant?.startsWith('attachment');
-  return { ...(attachment ? { polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -4 } : {}), color, metalness: 0, roughness: nerve ? selected ? .42 : .55 : tissue === 'bone' ? .62 : tissue === 'muscle' ? .64 : tissue === 'joint' || tissue === 'tendon' ? .45 : tissue === 'vessel' ? .5 : .8,
+  return { ...(attachment ? { polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -4 } : {}), color, metalness: 0, roughness: nerve ? selected ? .42 : .55 : tissue === 'bone' ? .62 : tissue === 'muscle' ? .58 : tissue === 'joint' || tissue === 'tendon' ? .45 : tissue === 'vessel' ? .5 : .8,
     transparent: opacity < 1, opacity, depthTest: true, depthWrite: opacity === 1,
     // Selection also changes luminance/specular response; tissue identity remains yellow for nerves.
     emissive: nerve ? color : state.hovered ? '#628b83' : '#000000',
@@ -105,9 +106,11 @@ export class AnatomyMaterials {
 /** Same three unshadowed lights and standard PBR shader; no textures, AO pass or extra renderer. */
 export function installAnatomyLighting(scene: THREE.Scene, renderer: THREE.WebGLRenderer) {
   scene.background = new THREE.Color('#eff1ef');
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x9caaa8, 1.15));
-  const key = new THREE.DirectionalLight(0xfff5ed, 2.1); key.position.set(-2, 3, 4); scene.add(key);
-  const rim = new THREE.DirectionalLight(0xe0eeee, .85); rim.position.set(2, 1, -3); scene.add(rim);
+  // 4-3 U9: less flat fill, a stronger key from the upper left front and a cool rim, so muscle bellies read in relief.
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x8d9b99, .9));
+  const key = new THREE.DirectionalLight(0xfff3e8, 2.45); key.position.set(-2, 3.2, 4); scene.add(key);
+  const fill = new THREE.DirectionalLight(0xeef3f6, .45); fill.position.set(3, .5, 2.5); scene.add(fill);
+  const rim = new THREE.DirectionalLight(0xe0eeee, 1); rim.position.set(2, 1.2, -3); scene.add(rim);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1;

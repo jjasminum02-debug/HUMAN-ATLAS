@@ -141,6 +141,9 @@ export class AnatomySceneController {
     this.dirty = true;
   }
   onCameraMove(listener: () => void) { this.cameraMoveListeners.add(listener); return () => { this.cameraMoveListeners.delete(listener); }; }
+  /** 4-3 U8: called after a frame is drawn (camera, pose or scene changed), e.g. to move screen-space labels. */
+  private readonly drawListeners = new Set<() => void>();
+  onDraw(listener: () => void) { this.drawListeners.add(listener); return () => { this.drawListeners.delete(listener); }; }
   get canObserveDirections() { return this.manifest.frame === OBSERVATION_FRAME; }
   observeDirection(direction: ObservationDirection) { this.moveCamera(observationState(this.cameraTransition?.to ?? this.cameraState(), direction, this.manifest.frame)); }
   observationReturnState(owner:string){return this.cameraSessions.returnState(owner,this.cameraState());}
@@ -206,6 +209,7 @@ export class AnatomySceneController {
       const started = ASSET_INSPECTION_ENABLED ? performance.now() : 0;
       this.renderer.info.reset();
       this.postprocess.render(false); this.dirty = false; this.renderedFrames += 1;
+      for (const listener of this.drawListeners) listener();
       this.refineAt = time + REFINE_DELAY_MS;
       if (ASSET_INSPECTION_ENABLED) {
         this.renderDurationsMs.push(performance.now() - started);
