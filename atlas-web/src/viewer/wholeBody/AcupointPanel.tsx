@@ -30,6 +30,8 @@ export function AcupointPanel({ host, rows, request = null, onSelectStructure, o
   const [sinews, setSinews] = useState<SinewFile | null>(null);
   useEffect(() => { let live = true; void loadSinews().then(f => { if (live) setSinews(f); }); return () => { live = false; }; }, []);
   const [withSinew, setWithSinew] = useState(true);
+  const [others, setOthers] = useState(false);
+  useEffect(() => { host.showOtherChannels?.(mode === 'points' && others); }, [host, others, mode, data]);
   useEffect(() => {
     if (mode !== 'points' || !sinews || !withSinew || !sinews.sinews[channel]) return;
     host.showSinew(sinews, channel, 'companion'); return () => host.showSinew(null, null);
@@ -73,6 +75,7 @@ export function AcupointPanel({ host, rows, request = null, onSelectStructure, o
     </div>}
     {sinews?.sinews[channel] && <label className="acupoint-sinew-toggle"><input type="checkbox" checked={withSinew} onChange={e => setWithSinew(e.target.checked)}/>
       <i aria-hidden="true"/>{sinews.sinews[channel].nameKo} 함께 보기</label>}
+    <label className="acupoint-sinew-toggle is-others"><input type="checkbox" checked={others} onChange={e => setOthers(e.target.checked)}/><i aria-hidden="true"/>다른 경맥도 옅게</label>
     {/* 4-3 U10: the answer first (name, where, how it is found), the structures around it in folds. */}
     {point && concept && <section className="acupoint-detail" aria-label="선택한 경혈">
       <h4>{concept.nameKo} <span>{concept.hanja} · {concept.code} · {SIDE[point.side]}</span></h4>

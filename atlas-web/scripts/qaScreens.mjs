@@ -151,6 +151,15 @@ for (const size of SIZES) {
     openPanels: await page.evaluate(() => ['#study-details', '.acupoint-panel'].filter(s => { const el = document.querySelector(s); return el && el.getBoundingClientRect().height > 80; }).length),
   };
   await shot('acupoint-LU');
+  if (size.id === 'laptop') {
+    // V3: overlay styles — other channels faint, the bladder sinew with its 結, landmarks and measure lines.
+    await page.locator('.acupoint-sinew-toggle.is-others input').check(); await page.waitForTimeout(600); await shot('overlay-others');
+    await page.locator('.acupoint-sinew-toggle.is-others input').uncheck();
+    await page.locator('.acupoint-mode button', { hasText: '경근' }).click();
+    await page.locator('.channel-picker-toggle').click(); await page.locator('.acupoint-channels button', { hasText: '족태양' }).click();
+    await page.getByRole('button', { name: '뒤에서 보기' }).click(); await page.waitForTimeout(1200); await shot('overlay-sinew');
+    await page.locator('.acupoint-mode button', { hasText: '기준점' }).click(); await page.getByRole('button', { name: '앞에서 보기' }).click(); await page.waitForTimeout(1200); await shot('overlay-landmarks');
+  }
   report.sizes[size.id] = r;
   await context.close();
 }

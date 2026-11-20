@@ -1,4 +1,4 @@
-import { dotTexture, labelSprite, LINE_COLOR, POINT_COLOR, POINT_PX, POINT_SELECTED, POINT_SELECTED_PX, screenSprite, setLinePoints, wideLine } from '../acupointMarkers.ts';
+import { diamondTexture, dotTexture, labelSprite, LINE_COLOR, OVERLAY, POINT_COLOR, POINT_PX, POINT_SELECTED, POINT_SELECTED_PX, screenSprite, setLinePoints, wideLine } from '../acupointMarkers.ts';
 import type { Line2 } from 'three/examples/jsm/lines/Line2.js';
 import { toOverlay } from '../postprocess.ts';
 import { attachFiberAxis } from '../muscleSurface.ts';
@@ -224,7 +224,7 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
     setPostureHighlight(groups: { short: string[]; weak: string[] } | null) { this.scene.crossfade(); this.postureHighlight = groups ? { short: new Set(groups.short), weak: new Set(groups.weak) } : null; this.apply(); }
     // Acupoints (4-1 step 7): markers and channel lines ride on their rig segment; a click on a marker picks it.
     private acupoints?: { file: AcupointFile; group: THREE.Group; markers: Map<string, THREE.Sprite>; lines: { line: Line2; ids: string[]; channel: string }[];
-        selected: string | null; channel: string | null; onPick?: (id: string) => void; label?: { id: string; sprite: THREE.Sprite } };
+        selected: string | null; channel: string | null; onPick?: (id: string) => void; label?: { id: string; sprite: THREE.Sprite }; others?: boolean };
     showAcupoints(file: AcupointFile | null, onPick?: (id: string) => void) {
         if (this.acupoints) { this.acupoints.group.removeFromParent(); this.acupoints.group.traverse(o => { const m = o as THREE.Mesh; m.geometry?.dispose(); (m.material as THREE.Material | undefined)?.dispose?.(); }); this.acupoints = undefined; }
         if (file) {
@@ -259,39 +259,30 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
         if (!this.acupoints) return;
         this.acupoints.channel = channel; this.apply();
     }
+    /** 4-3 V3: the other channels drawn faint grey behind the chosen one (context for where it runs). */
+    showOtherChannels(on: boolean) { if (!this.acupoints) return; this.scene.crossfade(); this.acupoints.others = on; this.apply(); }
     // Meridian sinews: each line vertex and binding marker rides on its own rig segment.
-    private sinews?: { group: THREE.Group; items: { object: THREE.Line | THREE.Mesh | THREE.InstancedMesh | Line2; rest: Float32Array; segments: string[] }[] };
+    private sinews?: { group: THREE.Group; items: { object: THREE.Line | THREE.Mesh | THREE.InstancedMesh | Line2 | THREE.Sprite; rest: Float32Array; segments: string[] }[] };
     /** `companion`: drawn faint and teal next to a channel's points (경혈 보기), without the small knots. */
     showSinew(file: SinewFile | null, sinew: string | string[] | null, style: 'focus' | 'companion' = 'focus') {
         if (this.sinews) { this.sinews.group.removeFromParent(); this.sinews.group.traverse(o => { const m = o as THREE.Mesh; m.geometry?.dispose(); (m.material as THREE.Material | undefined)?.dispose?.(); }); this.sinews = undefined; }
         if (file && sinew) {
             const group = new THREE.Group(); group.name = 'Sinews'; group.renderOrder = 10;
-            const items: { object: THREE.Line | THREE.Mesh | THREE.InstancedMesh | Line2; rest: Float32Array; segments: string[] }[] = [];
-            const knot = new THREE.SphereGeometry(.004, 12, 8), binding = new THREE.SphereGeometry(.0065, 16, 10), bead = new THREE.SphereGeometry(.0018, 8, 6);
+            const items: { object: THREE.Line | THREE.Mesh | THREE.InstancedMesh | Line2 | THREE.Sprite; rest: Float32Array; segments: string[] }[] = [];
+            // 4-3 V3: one screen-width stroke per path (no beads), knots and 結 as fixed-size dots.
             const shown = new Set(Array.isArray(sinew) ? sinew : [sinew]);
             for (const path of file.paths.filter(p => shown.has(p.sinew))) {
                 const rest = new Float32Array(path.points.flat());
-                const companion = style === 'companion';
-                if (companion) {
-                    // Next to a channel's points: one thin teal stroke, so it reads as "the sinew" and not as more points.
-                    const stroke = wideLine(0x14b8a6, 2.5, .75); stroke.renderOrder = 10; group.add(stroke);
-                    items.push({ object: stroke, rest, segments: path.segments });
-                }
-                if (!companion) {
-                const line = new THREE.Line(new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(rest.slice(), 3)),
-                    new THREE.LineBasicMaterial({ color: companion ? 0x2dd4bf : 0x0f766e, transparent: true, opacity: companion ? .6 : .9, depthTest: false }));
-                line.renderOrder = 10; group.add(line); items.push({ object: line, rest, segments: path.segments });
-                // A 1-px line is hard to see on muscle: a bead every sample along it.
-                const beads = new THREE.InstancedMesh(bead, new THREE.MeshBasicMaterial({ color: companion ? 0x5eead4 : 0x14b8a6, depthTest: false, transparent: true, opacity: companion ? .55 : .85 }), path.points.length);
-                beads.renderOrder = 10; beads.frustumCulled = false; group.add(beads); items.push({ object: beads, rest, segments: path.segments });
-                }
+                const companion = style === 'companion', look = companion ? OVERLAY.sinewCompanion : OVERLAY.sinew;
+                const stroke = wideLine(look.color, look.line, look.opacity); stroke.renderOrder = 10; group.add(stroke);
+                items.push({ object: stroke, rest, segments: path.segments });
                 path.nodes.forEach((node, i) => {
                     // Binding places (結) read larger and amber: the sinew fastens there, and the classical points sit there.
                     const course = file.sinews[path.sinew].strands[path.strand]?.[i], bound = Boolean(course && isBinding(course));
                     if (companion && !bound) return; // next to points only the binding places (結) stay
-                    const mesh = new THREE.Mesh(bound ? binding : knot, new THREE.MeshBasicMaterial({ color: bound ? 0xb7791f : 0x115e59, depthTest: false, transparent: true, opacity: .95 }));
-                    mesh.renderOrder = 11; mesh.userData.sinewNode = `${path.sinew}:${path.side}:${node.anchor}`; mesh.userData.binding = bound; group.add(mesh);
-                    items.push({ object: mesh, rest: new Float32Array(node.position), segments: [node.segment] });
+                    const dot = screenSprite(dotTexture(bound ? OVERLAY.binding.fill : OVERLAY.knot.fill), bound ? companion ? OVERLAY.binding.companionPx : OVERLAY.binding.px : OVERLAY.knot.px);
+                    dot.renderOrder = 11; dot.userData.sinewNode = `${path.sinew}:${path.side}:${node.anchor}`; dot.userData.binding = bound; group.add(dot);
+                    items.push({ object: dot, rest: new Float32Array(node.position), segments: [node.segment] });
                 });
             }
             toOverlay(group);
@@ -337,23 +328,23 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
         return [box.min.y, box.max.y];
     }
     // Teaching landmarks: a purple diamond per bony point and a line per measure and side, riding on their segments.
-    private landmarks?: { group: THREE.Group; marks: Map<string, { mesh: THREE.Mesh; rest: THREE.Vector3; segment: string }>;
-        lines: { line: THREE.Line; ends: [string, string]; measure: string; side: 'left' | 'right' }[]; selected: string | null };
+    private landmarks?: { group: THREE.Group; marks: Map<string, { mesh: THREE.Sprite; rest: THREE.Vector3; segment: string }>;
+        lines: { line: Line2; ends: [string, string]; measure: string; side: 'left' | 'right' }[]; selected: string | null };
     showLandmarks(file: AcupointFile | null) {
         if (this.landmarks) { this.landmarks.group.removeFromParent(); this.landmarks.group.traverse(o => { const m = o as THREE.Mesh; m.geometry?.dispose(); (m.material as THREE.Material | undefined)?.dispose?.(); }); this.landmarks = undefined; }
         if (file?.landmarks?.length) {
             const group = new THREE.Group(); group.name = 'Landmarks'; group.renderOrder = 12;
-            const shape = new THREE.OctahedronGeometry(.007), marks = new Map<string, { mesh: THREE.Mesh; rest: THREE.Vector3; segment: string }>();
+            // 4-3 V3: fixed-size purple diamonds (bony points, not acupoints) and 2 px measure lines.
+            const marks = new Map<string, { mesh: THREE.Sprite; rest: THREE.Vector3; segment: string }>();
             for (const m of file.landmarks) {
-                const mesh = new THREE.Mesh(shape, new THREE.MeshBasicMaterial({ color: 0x6d4fb3, depthTest: false, transparent: true, opacity: .95 }));
+                const mesh = screenSprite(diamondTexture(OVERLAY.landmark.fill), OVERLAY.landmark.px);
                 mesh.renderOrder = 12; mesh.userData.landmark = landmarkId(m); group.add(mesh);
                 marks.set(landmarkId(m), { mesh, rest: new THREE.Vector3(...m.position), segment: m.segment });
             }
-            const lines: { line: THREE.Line; ends: [string, string]; measure: string; side: 'left' | 'right' }[] = [];
+            const lines: { line: Line2; ends: [string, string]; measure: string; side: 'left' | 'right' }[] = [];
             for (const measure of file.measures ?? []) for (const side of ['right', 'left'] as const) {
                 const a = measureEnd(file, measure.from, side), b = measureEnd(file, measure.to, side); if (!a || !b) continue;
-                const line = new THREE.Line(new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(new Float32Array(6), 3)),
-                    new THREE.LineBasicMaterial({ color: 0x8b6fd0, transparent: true, opacity: .9, depthTest: false }));
+                const line = wideLine(OVERLAY.measure.color, OVERLAY.measure.line, OVERLAY.measure.opacity);
                 line.renderOrder = 12; group.add(line); lines.push({ line, ends: [landmarkId(a), landmarkId(b)], measure: measure.id, side });
             }
             toOverlay(group);
@@ -364,7 +355,11 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
     selectLandmark(id: string | null) {
         if (!this.landmarks) return;
         this.landmarks.selected = id;
-        for (const [key, { mesh }] of this.landmarks.marks) { mesh.scale.setScalar(key === id ? 1.9 : 1); (mesh.material as THREE.MeshBasicMaterial).color.set(key === id ? 0xd39a2c : 0x6d4fb3); }
+        for (const [key, { mesh }] of this.landmarks.marks) {
+            const chosen = key === id, material = mesh.material as THREE.SpriteMaterial;
+            mesh.userData.px = chosen ? OVERLAY.landmark.selectedPx : OVERLAY.landmark.px; mesh.renderOrder = chosen ? 13 : 12;
+            material.map = diamondTexture(chosen ? OVERLAY.landmark.selected : OVERLAY.landmark.fill); material.needsUpdate = true;
+        }
         this.scene.requestRender();
     }
     private landmarkAt(key: string, out = new THREE.Vector3()) {
@@ -385,7 +380,7 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
         for (const [key, { mesh }] of s.marks) if (this.landmarkAt(key, at)) mesh.position.copy(at);
         for (const { line, ends } of s.lines) {
             if (!this.landmarkAt(ends[0], at) || !this.landmarkAt(ends[1], b)) continue;
-            const p = line.geometry.getAttribute('position') as THREE.BufferAttribute; p.setXYZ(0, at.x, at.y, at.z); p.setXYZ(1, b.x, b.y, b.z); p.needsUpdate = true; line.geometry.computeBoundingSphere();
+            setLinePoints(line, [at.clone(), b.clone()]);
         }
     }
     private syncSinews() {
@@ -396,6 +391,9 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
             if ((object as Line2).isLine2) {
                 const points = segments.map((segment, i) => { const p = new THREE.Vector3().fromArray(rest, i * 3); const posed = transforms?.get(segment); return posed ? p.applyMatrix4(posed) : p; });
                 setLinePoints(object as Line2, points); continue;
+            }
+            if ((object as THREE.Sprite).isSprite) {
+                at.fromArray(rest); const posed = transforms?.get(segments[0]); if (posed) at.applyMatrix4(posed); object.position.copy(at); continue;
             }
             if (object instanceof THREE.InstancedMesh) {
                 for (let i = 0; i < segments.length; i++) {
@@ -417,7 +415,10 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
     }
     private syncAcupoints() {
         const a = this.acupoints; if (!a) return;
-        const shown = (code: string) => a.channel === null || code.replace(/\d+$/, '') === a.channel;
+        const own = (code: string) => a.channel === null || code.replace(/\d+$/, '') === a.channel;
+        const faint = (code: string) => Boolean(a.others && a.channel && !own(code));
+        const shown = (code: string) => own(code) || faint(code);
+        const otherDot = dotTexture(OVERLAY.channelOther.fill);
         const transforms = this.rigState?.transforms, at = new THREE.Vector3();
         const normal = dotTexture(POINT_COLOR), chosen = dotTexture(POINT_SELECTED);
         for (const p of a.file.points) {
@@ -425,9 +426,10 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
             at.set(...p.position); const posed = transforms?.get(p.segment); if (posed) at.applyMatrix4(posed);
             marker.position.copy(at); marker.visible = shown(p.code);
             const selected = a.selected === acupointId(p);
-            marker.userData.px = selected ? POINT_SELECTED_PX : POINT_PX; marker.renderOrder = selected ? 13 : 12;
-            const material = marker.material as THREE.SpriteMaterial;
-            if (material.map !== (selected ? chosen : normal)) { material.map = selected ? chosen : normal; material.needsUpdate = true; }
+            const dim = faint(p.code);
+            marker.userData.px = selected ? POINT_SELECTED_PX : dim ? OVERLAY.channelOther.point : POINT_PX; marker.renderOrder = selected ? 13 : dim ? 11 : 12;
+            const material = marker.material as THREE.SpriteMaterial, map = selected ? chosen : dim ? otherDot : normal;
+            if (material.map !== map) { material.map = map; material.needsUpdate = true; }
         }
         // The chosen point carries its name, so it can be read on the model without the list.
         if (a.label && a.label.id !== a.selected) { a.label.sprite.removeFromParent(); a.label.sprite.material.map?.dispose(); a.label.sprite.material.dispose(); a.label = undefined; }
@@ -438,7 +440,11 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
         }
         if (a.label && target) { a.label.sprite.position.copy(target.position); a.label.sprite.visible = target.visible; }
         for (const { line, ids, channel } of a.lines) {
-            line.visible = a.channel === null || channel === a.channel;
+            const mine = a.channel === null || channel === a.channel;
+            line.visible = mine || Boolean(a.others && a.channel);
+            const look = line.material as unknown as { color: THREE.Color; linewidth: number; opacity: number };
+            look.color.setHex(mine ? LINE_COLOR : OVERLAY.channelOther.color); look.linewidth = mine ? OVERLAY.channel.line : OVERLAY.channelOther.line; look.opacity = mine ? OVERLAY.channel.opacity : OVERLAY.channelOther.opacity;
+            line.renderOrder = mine ? 11 : 10;
             if (line.visible) setLinePoints(line, ids.map(id => a.markers.get(id)!.position));
         }
     }
@@ -815,7 +821,7 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
             const pointer = new THREE.Vector2(e.clientX, e.clientY);
             let best: { id: string; d: number } | null = null;
             for (const [id, marker] of this.acupoints.markers) {
-                if (!marker.visible) continue;
+                if (!marker.visible || marker.userData.px <= OVERLAY.channelOther.point) continue; // faint other-channel dots are context only
                 const s = marker.position.clone().project(this.scene.camera);
                 if (s.z > 1) continue;
                 const d = pointer.distanceTo(new THREE.Vector2(rect.left + (s.x + 1) / 2 * rect.width, rect.top + (1 - s.y) / 2 * rect.height));

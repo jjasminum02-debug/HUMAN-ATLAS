@@ -418,6 +418,14 @@ const flows = [
       if (o.isLine2 && o.parent?.name === 'Sinews') r.sinew++;
       if ((o.userData.acupoint || o.parent?.name === 'Sinews') && !o.layers.isEnabled(3)) r.overlay = false; }); return r; });
     expect(look.dots === 22 && look.wide === 2 && look.tag === 1 && look.sinew >= 1 && look.overlay, `폐경 표시: ${JSON.stringify(look)}`);
+    // 4-3 V3: the other channels can be shown faint behind the chosen one.
+    const dotCount = () => page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.userData.acupoint && o.visible) n++; }); return n; });
+    await page.locator('.acupoint-sinew-toggle.is-others input').check();
+    await page.waitForTimeout(300);
+    const withOthers = await dotCount();
+    await page.locator('.acupoint-sinew-toggle.is-others input').uncheck();
+    await page.waitForTimeout(300);
+    expect(withOthers > 300 && await dotCount() === 22, `다른 경맥 옅게: ${withOthers}개 → 끄면 ${await dotCount()}개`);
     const marker = () => page.evaluate(() => { let at = null; window.__atlasScene.root.traverse(o => { if (o.userData.acupoint === 'LU9:right') at = o.position.toArray(); }); return at; });
     const before = await marker();
     await page.evaluate(async () => { const rig = await window.__atlasRig.load(); window.__atlasRig.set(rig, { 'elbow_r:flexion': 90 }); });
@@ -446,7 +454,7 @@ const flows = [
     await page.locator('.acupoint-channels button', { hasText: '족태양' }).click();
     const sinew = await page.locator('.sinew-detail').innerText({ timeout: 10000 });
     expect(sinew.includes('오금에 맺힘') && sinew.includes('경로가 지나는 근육'), `족태양경근: ${sinew.replace(/\s+/g, ' ').slice(0, 120)}`);
-    const knot = () => page.evaluate(() => { let at = null, beads = 0; window.__atlasScene.root.traverse(o => { if (o.userData.sinewNode === 'BL:right:BL60') at = o.position.toArray(); if (o.isInstancedMesh && o.parent?.name === 'Sinews') beads += o.count; }); return { at, beads }; });
+    const knot = () => page.evaluate(() => { let at = null, beads = 0; window.__atlasScene.root.traverse(o => { if (o.userData.sinewNode === 'BL:right:BL60') at = o.position.toArray(); if (o.isLine2 && o.parent?.name === 'Sinews') beads += o.geometry.attributes.instanceStart?.count ?? 0; }); return { at, beads }; }); // 4-3 V3: one wide stroke per path; count its segments
     const k0 = await knot();
     await page.evaluate(async () => { const rig = await window.__atlasRig.load(); window.__atlasRig.set(rig, { 'knee_r:flexion': 60 }); });
     await page.waitForTimeout(300);
@@ -488,7 +496,7 @@ const flows = [
     await page.waitForTimeout(300);
     const cleared = await roles();
     expect(upper.postureShort >= 10 && upper.postureWeak >= 10 && upper.agonist + upper.antagonist === 0 && cleared.postureShort + cleared.postureWeak === 0, `상부 교차 색: ${JSON.stringify(upper)}, 끈 뒤 ${JSON.stringify(cleared)}`);
-    return `경맥 14개 → 폐경 점 22개·굵은 선·이름표·수태음경근 청록 → 척택 설명·취혈 기준(표지)·아래 구조(요골신경)·주변 구조 → 태연 표지가 팔꿉 90°를 따라감 → 요골신경 카드 → 독맥 백회(정중선, ${shown.length}혈만 표시) → 족태양경근(구슬 ${k0.beads}개, 곤륜 매듭이 무릎 굽힘을 따라감, 영역 근육 ${region.muscles}개·結 ${region.bindings}곳, 태양 손발 함께) → ${name} 카드 → 기준점 30개, 허리 왼쪽 옆굽힘에 12번 갈비–장골능 왼쪽이 짧아짐 → 상부 교차 증후군 색(짧은 쪽 ${upper.postureShort}·약한 쪽 ${upper.postureWeak}개, 움직임 색 없음)`;
+    return `경맥 14개 → 폐경 점 22개·굵은 선·이름표·수태음경근 청록 → 척택 설명·취혈 기준(표지)·아래 구조(요골신경)·주변 구조 → 태연 표지가 팔꿉 90°를 따라감 → 요골신경 카드 → 독맥 백회(정중선, ${shown.length}혈만 표시) → 족태양경근(선 마디 ${k0.beads}개, 곤륜 매듭이 무릎 굽힘을 따라감, 영역 근육 ${region.muscles}개·結 ${region.bindings}곳, 태양 손발 함께) → ${name} 카드 → 기준점 30개, 허리 왼쪽 옆굽힘에 12번 갈비–장골능 왼쪽이 짧아짐 → 상부 교차 증후군 색(짧은 쪽 ${upper.postureShort}·약한 쪽 ${upper.postureWeak}개, 움직임 색 없음)`;
   }],
   // 4-2 step 9: test names at the end of the 기능 tab (muscle) and on ligament/meniscus and nerve cards; held tests stay out.
   ['검사 이름: 견갑하근 기능 탭, 내측 반월, 좌골신경', async page => {

@@ -48,6 +48,8 @@ export interface AcupointHost {
   selectAcupoint(id: string | null, focus?: boolean): void;
   /** Show one channel's markers and lines (null: every channel). */
   showAcupointChannel(channel: string | null): void;
+  /** 4-3 V3: other channels faint grey behind the chosen one. */
+  showOtherChannels?(on: boolean): void;
   /** Meridian sinews: lines through the binding regions, one sinew at a time (null hides them). */
   showSinew(file: SinewFile | null, sinew: string | string[] | null, style?: 'focus' | 'companion'): void;
   /** Colour the muscles of a sinew's region (null clears). */
