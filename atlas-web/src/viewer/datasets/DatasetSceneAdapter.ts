@@ -1,4 +1,4 @@
-import { diamondTexture, dotTexture, labelSprite, LINE_COLOR, OVERLAY, POINT_COLOR, POINT_PX, POINT_SELECTED, POINT_SELECTED_PX, screenSprite, setLinePoints, wideLine } from '../acupointMarkers.ts';
+import { arrowTexture, diamondTexture, dotTexture, labelSprite, LINE_COLOR, OVERLAY, POINT_COLOR, POINT_PX, POINT_SELECTED, POINT_SELECTED_PX, screenSprite, setLinePoints, wideLine } from '../acupointMarkers.ts';
 import type { Line2 } from 'three/examples/jsm/lines/Line2.js';
 import { toOverlay } from '../postprocess.ts';
 import { attachFiberAxis } from '../muscleSurface.ts';
@@ -20,7 +20,7 @@ import { flattenContacts, parseSkinChunk, posedCopy, segmentForRole, skinGeometr
 import type { Instance } from './schema.ts';
 import type { ActionHighlight, MuscleActionsFile, RigHost } from '../movement.ts';
 import type { StudyView } from '../../domain/bookmarks.ts';
-import { acupointId, channelSegments, isBinding, landmarkId, measureEnd, type AcupointFile, type AcupointHost, type AcupointTarget, type SinewFile } from '../acupointLayer.ts';
+import { acupointId, channelPath, channelSegments, isBinding, landmarkId, measureEnd, nextChannel, prevChannel, type AcupointFile, type AcupointHost, type AcupointTarget, type SinewFile } from '../acupointLayer.ts';
 /** Row kinds whose surfaces bend with the rig (M2); bones move rigidly instead. */
 const SKINNED_KINDS = new Set(['muscle', 'tendon', 'fascia', 'joint', 'vessel', 'nerve']);
 /** C4 attachment area: a Z-Anatomy patch (`key`) or an estimated bone-contact area (`source: 'contact'`). */
@@ -224,7 +224,8 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
     setPostureHighlight(groups: { short: string[]; weak: string[] } | null) { this.scene.crossfade(); this.postureHighlight = groups ? { short: new Set(groups.short), weak: new Set(groups.weak) } : null; this.apply(); }
     // Acupoints (4-1 step 7): markers and channel lines ride on their rig segment; a click on a marker picks it.
     private acupoints?: { file: AcupointFile; group: THREE.Group; markers: Map<string, THREE.Sprite>; lines: { line: Line2; ids: string[]; channel: string }[];
-        selected: string | null; channel: string | null; onPick?: (id: string) => void; label?: { id: string; sprite: THREE.Sprite }; others?: boolean };
+        selected: string | null; channel: string | null; onPick?: (id: string) => void; label?: { id: string; sprite: THREE.Sprite }; others?: boolean;
+        flow: { arrows: { sprite: THREE.Sprite; from: string; to: string; channel: string }[]; joins: Line2[]; tags: THREE.Sprite[]; pulse?: () => void } };
     showAcupoints(file: AcupointFile | null, onPick?: (id: string) => void) {
         if (this.acupoints) { this.acupoints.group.removeFromParent(); this.acupoints.group.traverse(o => { const m = o as THREE.Mesh; m.geometry?.dispose(); (m.material as THREE.Material | undefined)?.dispose?.(); }); this.acupoints = undefined; }
         if (file) {
@@ -240,9 +241,30 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
                     const line = wideLine(LINE_COLOR, 3, .8);
                     line.renderOrder = 11; group.add(line); return { line, ids: path.map(acupointId), channel };
                 }));
+            // 4-3 V4 flow: an arrow between each pair of points (turned to the flow on screen every frame), dashed joins to the
+            // neighbouring channels in the 12-channel cycle, and 시작/끝 tags.
+            const screen = new THREE.Vector2(), pa = new THREE.Vector3(), pb = new THREE.Vector3();
+            const arrows = lines.flatMap(({ ids, channel }) => ids.slice(1).map((to, k) => {
+                const from = ids[k], sprite = screenSprite(arrowTexture(OVERLAY.flow.arrow), OVERLAY.flow.arrowPx), sized = sprite.onBeforeRender;
+                sprite.onBeforeRender = (renderer, scene, camera, geometry, material, groupItem) => {
+                    sized.call(sprite, renderer, scene, camera, geometry, material, groupItem);
+                    renderer.getSize(screen);
+                    pa.copy(markers.get(from)!.position).project(camera); pb.copy(markers.get(to)!.position).project(camera);
+                    const dx = (pb.x - pa.x) * screen.x / 2, dy = (pb.y - pa.y) * screen.y / 2, m = material as THREE.SpriteMaterial;
+                    m.rotation = Math.atan2(dy, dx); m.opacity = Math.hypot(dx, dy) < 26 ? 0 : 1; // too short on screen: the dots say it
+                };
+                sprite.renderOrder = 11; group.add(sprite);
+                return { sprite, from, to, channel };
+            }));
+            const joins = [0, 1, 2, 3].map(() => {
+                const line = wideLine(OVERLAY.flow.join, OVERLAY.flow.joinLine, OVERLAY.flow.joinOpacity);
+                const m = line.material as unknown as { dashed: boolean; dashSize: number; gapSize: number; needsUpdate: boolean };
+                m.dashed = true; m.dashSize = .012; m.gapSize = .009; m.needsUpdate = true; line.renderOrder = 10; group.add(line); return line;
+            });
+            const tags = ['시작', '끝', '시작', '끝'].map(text => { const tag = labelSprite(text); tag.userData.px = 19; tag.renderOrder = 12; group.add(tag); return tag; });
             toOverlay(group);
             this.scene.root.add(group);
-            this.acupoints = { file, group, markers, lines, selected: null, channel: null, onPick };
+            this.acupoints = { file, group, markers, lines, selected: null, channel: null, onPick, flow: { arrows, joins, tags } };
         }
         this.apply();
     }
@@ -257,10 +279,36 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
     }
     showAcupointChannel(channel: string | null) {
         if (!this.acupoints) return;
+        if (this.acupoints.channel !== channel) this.acupoints.flow.pulse?.();
         this.acupoints.channel = channel; this.apply();
     }
     /** 4-3 V3: the other channels drawn faint grey behind the chosen one (context for where it runs). */
     showOtherChannels(on: boolean) { if (!this.acupoints) return; this.scene.crossfade(); this.acupoints.others = on; this.apply(); }
+    /** 4-3 V4: a glowing dot runs from the chosen channel's first point to its last (both sides at once), then goes. */
+    playChannelFlow() {
+        const a = this.acupoints; if (!a?.channel) return;
+        a.flow.pulse?.();
+        const sides = a.file.channels[a.channel]?.midline ? ['midline'] : ['right', 'left'];
+        const runs = sides.map(side => channelPath(a.file, a.channel!, side).map(p => a.markers.get(acupointId(p))!.position)).filter(path => path.length > 1);
+        const dots = runs.map(() => { const dot = screenSprite(dotTexture(OVERLAY.flow.pulse), OVERLAY.flow.pulsePx); dot.renderOrder = 14; toOverlay(dot); a.group.add(dot); return dot; });
+        const lengths = runs.map(path => path.slice(1).reduce((n, p, i) => n + p.distanceTo(path[i]), 0));
+        let travelled = 0;
+        const stop = () => { remove(); for (const dot of dots) { dot.removeFromParent(); dot.material.dispose(); } if (a.flow.pulse === stop) a.flow.pulse = undefined; this.scene.requestRender(); };
+        const remove = this.scene.addUpdate(dt => {
+            travelled += dt * OVERLAY.flow.metresPerSecond;
+            runs.forEach((path, r) => {
+                let left = Math.min(travelled, lengths[r]);
+                for (let i = 1; i < path.length; i++) {
+                    const step = path[i].distanceTo(path[i - 1]);
+                    if (left <= step || i === path.length - 1) { dots[r].position.copy(path[i - 1]).lerp(path[i], step ? Math.min(1, left / step) : 1); break; }
+                    left -= step;
+                }
+            });
+            if (travelled >= Math.max(...lengths) + .05) { queueMicrotask(stop); }
+            return true;
+        });
+        a.flow.pulse = stop;
+    }
     // Meridian sinews: each line vertex and binding marker rides on its own rig segment.
     private sinews?: { group: THREE.Group; items: { object: THREE.Line | THREE.Mesh | THREE.InstancedMesh | Line2 | THREE.Sprite; rest: Float32Array; segments: string[] }[] };
     /** `companion`: drawn faint and teal next to a channel's points (경혈 보기), without the small knots. */
@@ -447,6 +495,28 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
             line.renderOrder = mine ? 11 : 10;
             if (line.visible) setLinePoints(line, ids.map(id => a.markers.get(id)!.position));
         }
+        // Flow: arrows on the chosen channel, joins to the previous and next channel, start/end tags (per side).
+        for (const arrow of a.flow.arrows) {
+            arrow.sprite.visible = a.channel !== null && arrow.channel === a.channel;
+            if (arrow.sprite.visible) arrow.sprite.position.copy(a.markers.get(arrow.from)!.position).lerp(a.markers.get(arrow.to)!.position, .5);
+        }
+        const sides = a.channel && a.file.channels[a.channel]?.midline ? ['midline'] : ['right', 'left'];
+        const ends = (channel: string | null, side: string) => { if (!channel) return null; const path = channelPath(a.file, channel, side); return path.length ? { first: a.markers.get(acupointId(path[0]))!.position, last: a.markers.get(acupointId(path[path.length - 1]))!.position } : null; };
+        let join = 0, tag = 0;
+        for (const side of sides) {
+            const own = ends(a.channel, side), next = a.channel ? ends(nextChannel(a.channel), side) : null, prev = a.channel ? ends(prevChannel(a.channel), side) : null;
+            for (const [from, to] of [[prev?.last, own?.first], [own?.last, next?.first]] as const) {
+                const line = a.flow.joins[join++]; if (!line) continue;
+                line.visible = Boolean(from && to);
+                if (from && to) setLinePoints(line, [from, to]);
+            }
+            for (const at of [own?.first, own?.last]) {
+                const sprite = a.flow.tags[tag++]; if (!sprite) continue;
+                sprite.visible = Boolean(at); if (at) sprite.position.copy(at);
+            }
+        }
+        for (; join < a.flow.joins.length; join++) a.flow.joins[join].visible = false;
+        for (; tag < a.flow.tags.length; tag++) a.flow.tags[tag].visible = false;
     }
     // Bookmarks (4-1 step 6): the viewer owns layers and the section; the scene owns the camera.
     private studyView?: { get: () => Omit<StudyView, 'camera'>; restore: (view: StudyView) => void };

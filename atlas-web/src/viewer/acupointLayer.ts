@@ -50,6 +50,8 @@ export interface AcupointHost {
   showAcupointChannel(channel: string | null): void;
   /** 4-3 V3: other channels faint grey behind the chosen one. */
   showOtherChannels?(on: boolean): void;
+  /** 4-3 V4: a pulse runs along the chosen channel from its first to its last point. */
+  playChannelFlow?(): void;
   /** Meridian sinews: lines through the binding regions, one sinew at a time (null hides them). */
   showSinew(file: SinewFile | null, sinew: string | string[] | null, style?: 'focus' | 'companion'): void;
   /** Colour the muscles of a sinew's region (null clears). */
@@ -75,6 +77,15 @@ export function channelPath(file: AcupointFile, channel: string, side: string) {
 export const channelSide = (file: AcupointFile, channel: string, side: string) => file.channels[channel]?.midline ? 'midline' : side;
 
 /** The channel line in drawable pieces: a new piece starts at each break code (where the pathway jumps). */
+/**
+ * 4-3 V4: the order qi flows through the 12 regular channels, closing back to the lung. Within a channel the point numbers
+ * follow the flow (LU1 chest → LU11 thumb). Order checked on two sites (atlas-data/anatomy/channel-cycle-checks.json); where
+ * exactly one channel hands over to the next is not drawn — the model joins the end point to the next start point only.
+ */
+export const CHANNEL_CYCLE = ['LU', 'LI', 'ST', 'SP', 'HT', 'SI', 'BL', 'KI', 'PC', 'TE', 'GB', 'LR'] as const;
+export const nextChannel = (c: string) => { const i = CHANNEL_CYCLE.indexOf(c as typeof CHANNEL_CYCLE[number]); return i < 0 ? null : CHANNEL_CYCLE[(i + 1) % 12]; };
+export const prevChannel = (c: string) => { const i = CHANNEL_CYCLE.indexOf(c as typeof CHANNEL_CYCLE[number]); return i < 0 ? null : CHANNEL_CYCLE[(i + 11) % 12]; };
+
 export function channelSegments(file: AcupointFile, channel: string, side: string) {
   const breaks = new Set(file.channels[channel]?.breaks ?? []), out: AcupointInstance[][] = [];
   for (const p of channelPath(file, channel, side)) {

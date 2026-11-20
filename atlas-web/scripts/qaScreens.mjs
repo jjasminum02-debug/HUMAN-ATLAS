@@ -153,6 +153,10 @@ for (const size of SIZES) {
   await shot('acupoint-LU');
   if (size.id === 'laptop') {
     // V3: overlay styles — other channels faint, the bladder sinew with its 結, landmarks and measure lines.
+    // V4: the lung channel's flow, close on the arm (arrows, 시작/끝, dashed joins to 간경 and 대장경).
+    await page.evaluate(() => { const sc = window.__atlasScene; sc.moveCamera({ target: [-0.22, 1.12, 0.05], position: [-0.35, 1.25, 1.0], zoom: 1 }, false); sc.requestRender(); });
+    await page.waitForTimeout(1500); await shot('flow-LU');
+    await page.evaluate(() => { const sc = window.__atlasScene; sc.moveCamera({ target: [0, 0.86, 0], position: [0, 0.86, 3.5], zoom: 1 }, false); });
     await page.locator('.acupoint-sinew-toggle.is-others input').check(); await page.waitForTimeout(600); await shot('overlay-others');
     await page.locator('.acupoint-sinew-toggle.is-others input').uncheck();
     await page.locator('.acupoint-mode button', { hasText: '경근' }).click();

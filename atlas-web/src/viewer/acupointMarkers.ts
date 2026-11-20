@@ -21,6 +21,8 @@ export const OVERLAY = {
   binding: { fill: '#d39a2c', px: 15, companionPx: 11 },
   landmark: { fill: '#6d4fb3', px: 14, selected: '#d39a2c', selectedPx: 21 },
   measure: { color: 0x8b6fd0, line: 2, opacity: .9 },
+  // 4-3 V4 flow: arrows between points, dashed joins to the neighbouring channels, the travelling pulse.
+  flow: { arrow: '#c2410c', arrowPx: 15, join: 0xe8590c, joinLine: 2, joinOpacity: .6, pulse: '#f59f00', pulsePx: 18, metresPerSecond: .3 },
 } as const;
 
 const textures = new Map<string, THREE.CanvasTexture>();
@@ -49,6 +51,22 @@ export function diamondTexture(fill: string) {
     diamond(31); g.fillStyle = 'rgba(20,20,20,.45)'; g.fill();
     diamond(29); g.fillStyle = '#fff'; g.fill();
     diamond(20); g.fillStyle = fill; g.fill();
+    t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; textures.set(key, t);
+  }
+  return t;
+}
+
+/** A chevron pointing right (rotated per frame to the flow direction on screen). */
+export function arrowTexture(fill: string) {
+  const key = `arrow:${fill}`;
+  let t = textures.get(key);
+  if (!t) {
+    const c = document.createElement('canvas'); c.width = c.height = 64;
+    const g = c.getContext('2d')!;
+    const chevron = () => { g.beginPath(); g.moveTo(18, 14); g.lineTo(46, 32); g.lineTo(18, 50); };
+    g.lineCap = 'round'; g.lineJoin = 'round';
+    chevron(); g.strokeStyle = '#fff'; g.lineWidth = 18; g.stroke();
+    chevron(); g.strokeStyle = fill; g.lineWidth = 9; g.stroke();
     t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; textures.set(key, t);
   }
   return t;
