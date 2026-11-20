@@ -65,6 +65,12 @@ async function search(page, text, label) {
   await settle(page);
 }
 const card = page => page.locator('#study-details').innerText();
+/** 4-3 U12: open a fold on a bone, ligament, nerve or vessel card by its id. */
+async function openFold(page, id) {
+  const fold = page.locator(`#study-details details[data-fold="${id}"]`);
+  await fold.waitFor({ state: 'attached', timeout: 10000 });
+  if (await fold.getAttribute('open') === null) await fold.locator('summary').click();
+}
 /** 4-3 U3: open a muscle-card section by its title (sections replace the tabs; one is open at a time). */
 async function openSection(page, title) {
   const button = page.locator('.study-section-head button', { hasText: title }).first();
@@ -185,10 +191,14 @@ const flows = [
     expect(supply.includes('가쪽넙다리휘돌이동맥'), `혈액공급: ${supply.replace(/\s+/g, ' ').slice(0, 200)}`);
     // Q2-1: the supplying artery opens in the vessel layer, and its card lists the muscle back.
     await page.locator('.attachment-section', { hasText: '혈액공급' }).getByRole('button', { name: /가쪽넙다리휘돌이동맥/ }).click();
+    // 4-3 U12: the vessel card answers in key lines; the lists sit in folds.
+    await page.locator('#study-details .key-facts [data-fact=kind]').waitFor({ timeout: 10000 });
+    await openFold(page, 'supplied');
     await page.locator('.vessel-supplied').waitFor({ timeout: 10000 });
     expect(await pressed(page, '.layer-row', '혈관') === 'true', '혈관 층이 자동으로 켜지지 않음');
     const supplied = await page.locator('.vessel-supplied').innerText();
     // 4-1 step 6: the artery card names where it branches off.
+    await openFold(page, 'branches');
     const origin = await page.locator('.vessel-branches').innerText({ timeout: 10000 });
     expect(origin.includes('갈라져 나온 혈관') && origin.includes('대퇴심동맥'), `갈라져 나온 혈관: ${origin.replace(/\s+/g, ' ').slice(0, 160)}`);
     expect(supplied.includes('대퇴직근'), `혈액을 받는 근육: ${supplied.replace(/\s+/g, ' ').slice(0, 200)}`);
@@ -201,10 +211,12 @@ const flows = [
     await open(page);
     await search(page, '앞십자인대', '전십자인대'); // modern name finds the traditional label
     expect(await pressed(page, '.layer-row', '인대·관절') === 'true', '인대·관절 층이 자동으로 켜지지 않음');
-    await page.locator('.attachment-section h3', { hasText: '잇는 뼈' }).waitFor({ timeout: 10000 });
+    // 4-3 U12: what the ligament joins is a key line; the attachment areas are a fold.
+    expect(/대퇴골[\s\S]*경골|경골[\s\S]*대퇴골/.test(await page.locator('#study-details .key-facts [data-fact=bones]').innerText({ timeout: 10000 })), '잇는 뼈 핵심 줄 없음');
     const text = await card(page);
     expect(text.includes('대퇴골') && text.includes('경골'), '잇는 뼈에 대퇴골·경골 없음');
     // 4-1 step 6: the ligament's attachment areas are listed and drawn on the bones.
+    await openFold(page, 'areas');
     const areas = await page.locator('.attachment-areas').innerText({ timeout: 10000 });
     expect(areas.includes('대퇴골') && areas.includes('경골'), `인대 부착 면: ${areas.replace(/\s+/g, ' ').slice(0, 120)}`);
     await page.locator('.attachment-areas .attachment-observe').click();
@@ -212,6 +224,7 @@ const flows = [
     const drawn = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && o.userData.attachmentPatch) n++; }); return n; });
     expect(drawn >= 2, `뼈 위에 칠한 인대 부착 면 ${drawn}개`);
     // C3: the card lists who moves the knee, per movement.
+    await openFold(page, 'movers');
     const movers = await page.locator('.joint-movers').innerText({ timeout: 10000 });
     expect(/굽힘/.test(movers) && /폄/.test(movers) && movers.includes('대퇴직근'), `무릎을 움직이는 근육 목록: ${movers.replace(/\s+/g, " ").slice(0, 300)}`);
     await page.getByRole('button', { name: /무릎관절 .* 움직여 보기/ }).click();
@@ -360,6 +373,9 @@ const flows = [
     // A bone opens the joints that move it (back to the structure list first).
     await page.evaluate(() => [...document.querySelectorAll('.explorer-mode button')].find(b => b.textContent === '구조 찾기')?.click());
     await search(page, '경골', '경골');
+    const jointLine = await page.locator('#study-details .key-facts [data-fact=joints]').innerText({ timeout: 10000 });
+    expect(/무릎관절/.test(jointLine) && /발목관절/.test(jointLine), `경골 관절 핵심 줄: ${jointLine}`);
+    await openFold(page, 'joints');
     const joints = await page.locator('.bone-joints').innerText({ timeout: 10000 });
     expect(joints.includes('무릎관절') && joints.includes('발목관절'), `경골 관절: ${joints.replace(/\s+/g, ' ')}`);
     return `목록 ${count}개, 시점 이동, 움직임별 근육(무릎 굽힘) → 기능 탭, 경골 → 무릎·발목 관절`;
@@ -484,6 +500,8 @@ const flows = [
     const muscle = await page.locator('#study-evaluation-panel .clinical-tests').innerText({ timeout: 10000 });
     expect(/벨리프레스/.test(muscle) && /리프트오프/.test(muscle), `견갑하근 검사: ${muscle.replace(/\s+/g, ' ').slice(0, 120)}`);
     await search(page, '안쪽반달', '내측반월');
+    expect(/맥머레이/.test(await page.locator('#study-details .key-facts [data-fact=tests]').innerText({ timeout: 10000 })), '반월 검사 핵심 줄 없음');
+    await openFold(page, 'tests');
     const meniscus = await page.locator('#study-details .clinical-tests').innerText({ timeout: 10000 });
     expect(/맥머레이/.test(meniscus), `반월 검사: ${meniscus.replace(/\s+/g, ' ').slice(0, 120)}`);
     // 4-3 U11: the 신용어 finds the nerve too (nerve matches are listed above the structure list).
@@ -492,6 +510,7 @@ const flows = [
     await model.waitFor({ timeout: 10000 });
     await model.click();
     await settle(page);
+    await openFold(page, 'tests');
     const nerve = await page.locator('#study-details .clinical-tests').innerText({ timeout: 10000 });
     expect(/SLR/.test(nerve) && /이 신경을 보는 검사/.test(nerve), `좌골신경 검사: ${nerve.replace(/\s+/g, ' ').slice(0, 120)}`);
     await search(page, '넙다리곧은근', '대퇴직근');
@@ -627,7 +646,7 @@ for (const [name, run] of selected) {
     console.log(`✔ ${name} — ${note} (${((Date.now() - started) / 1000).toFixed(1)}s)`);
   } catch (error) {
     failed++;
-    console.log(`✖ ${name} — ${error.message.split('\n')[0]}`);
+    console.log(`✖ ${name} — ${process.env.QA_VERBOSE ? error.message : error.message.split('\n')[0]}`);
   }
   await page.close();
 }

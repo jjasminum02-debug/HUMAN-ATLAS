@@ -17,6 +17,7 @@ import { testsFor } from '../data/clinicalTests';
 import { patternsFor } from '../data/posturePatterns';
 import { CardLimits } from './CardLimits';
 import { MuscleKeyFacts } from './MuscleKeyFacts';
+import { firstSentence, Fold, KeyLines } from './CardParts';
 import { MusclePosture, usePosturePatterns } from './PosturePatterns';
 import { MeridianLinks } from './MeridianLinks';
 import { isRigHost, jointsForBone, movementLabel, movementLibrary, type MuscleActionsFile } from '../viewer/movement';
@@ -85,6 +86,8 @@ export default function App() {
     const quizEnabled = useMemo(() => new URLSearchParams(location.search).has('quiz'), []);
     // 4-3 U6: the model's selection actions render here (card head) instead of a toolbar row.
     const [selectionTarget, setSelectionTarget] = useState<HTMLDivElement | null>(null);
+    const [boneFold, setBoneFold] = useState<string | null>(null);
+    useEffect(() => setBoneFold(null), [route.selected]);
     const acupointOpen = useRef(false), cardFoldedForPanel = useRef(false);
     const oneWindow = () => window.matchMedia('(max-width: 1399px)').matches;
     const onAcupointPanelChange = (open: boolean) => {
@@ -490,20 +493,44 @@ export default function App() {
       </>}
       <p className="quiet-note">선택 가능한 신경 모형이 없는 개념은 설명 카드로만 표시합니다.</p>
     </section>}
-    {selected?.kind === 'nerve' ? <section className="attachment-section nerve-card" aria-label="신경 설명"><h3>신경 주행</h3>
-      {nerveLearning && <section><h4>정적 모형에서 관찰하는 주행</h4><p>{nerveLearning.courseContext}</p></section>}
-      <p className="quiet-note">정적 주행 · 근육 동작 중에는 신경 모형을 숨깁니다.</p>
-      <p className="nerve-legend"><span><i className="nerve-swatch"/>선택 신경</span><span><i className="motor-swatch"/>관련 근육</span></p>
-      {selected.nerve!.branchKeys.length > 0 && <><h3>연결된 분지</h3>{selected.nerve!.branchKeys.map(key => { const row = runtimeByKey.get(key); return row ? <button className="bone-related-muscle" key={key} onClick={() => select(key)}>{learnerRowTitle(row)}</button> : null; })}</>}
-      {selectedNerveConcept && selectedNerveConcept.functionEvidenceClass !== 'relationship_not_linked' && <><h3>운동·감각 관계</h3><p>{nerveFunctionStatus(selectedNerveConcept)}</p></>}
-      {selectedNerveRelations.length > 0 && <><h3>지배 근육</h3>{renderNerveRelations(selectedNerveRelations, selected.side)}</>}
-      {selectedNerveRelations.length > 0 && <details key={`relation-${selected.sourceKey}`} className="nerve-learning-context"><summary>관계 안내</summary>
-        {[...new Set(selectedNerveRelations.map(relation => relation.displayNote))].map(note => <p key={note}>{note}</p>)}
-        <p>현재 연결된 관계만 표시합니다. 강조 색은 학습용이며 힘이나 활성도를 나타내지 않습니다. 신경의 분지·주행에는 개인차가 있습니다.</p>
-      </details>}
-      <ClinicalTests row={selected}/>
-      {nerveLearning && <details key={selected.sourceKey} className="nerve-learning-context"><summary>주행·포착 맥락</summary>{shouldDisplayNerveFunctionContext(nerveLearning.functionContext, selectedNerveConcept?.functionEvidenceClass) && <section><h4>기능 연결</h4><p>{nerveLearning.functionContext}</p></section>}<section><h4>포착 가능 구간과 주변 조직</h4><p>{nerveLearning.compressionContext}</p></section>{"variationContext" in nerveLearning && <section><h4>변이와 자세 범위</h4><p>{String(nerveLearning.variationContext)}</p></section>}</details>}
-    </section> : selected?.kind === 'muscle' ? <>
+    {selected?.kind === 'nerve' ? (() => {
+      // 4-3 U12: key lines (course, muscles it supplies, branches, tests), then folds; the notes go to 자료와 한계.
+      const tests = testsFor(clinicalTests, selected.names.en);
+      const branches = selected.nerve!.branchKeys.map(key => runtimeByKey.get(key)).filter((r): r is RuntimeStructureRecord => Boolean(r));
+      const testNames = tests.map(t => t.name.replace(/ 검사$/, '')).join(' · ');
+      return <><section className="attachment-section nerve-card" aria-label="신경 설명">
+      <KeyLines onOpen={setBoneFold} lines={[
+        { fact: 'course', label: '주행', value: firstSentence(nerveLearning?.courseContext), opens: 'course' },
+        { fact: 'muscles', label: '지배 근육', value: selectedNerveRelations.length ? `${selectedNerveRelations.length}개` : '', opens: 'muscles' },
+        { fact: 'branches', label: '분지', value: branches.length ? `${branches.length}개` : '', opens: 'branches' },
+        { fact: 'tests', label: '검사', value: testNames, opens: 'tests' }]}/>
+      <div className="card-folds">
+      <Fold id="course" title="신경 주행" summary="정적 모형에서 보는 주행" open={boneFold === 'course'}>
+        {nerveLearning && <p>{nerveLearning.courseContext}</p>}
+        <p className="nerve-legend"><span><i className="nerve-swatch"/>선택 신경</span><span><i className="motor-swatch"/>관련 근육</span></p>
+        <p className="card-hint">정적 주행 · 근육 동작 중에는 신경 모형을 숨깁니다.</p>
+      </Fold>
+      {selectedNerveRelations.length > 0 && <Fold id="muscles" title="지배 근육" summary={`${selectedNerveRelations.length}개`} open={boneFold === 'muscles'}>
+        {renderNerveRelations(selectedNerveRelations, selected.side)}
+        <details key={`relation-${selected.sourceKey}`} className="nerve-learning-context"><summary>관계 안내</summary>
+          {[...new Set(selectedNerveRelations.map(relation => relation.displayNote))].map(note => <p key={note}>{note}</p>)}
+          <p>현재 연결된 관계만 표시합니다. 강조 색은 학습용이며 힘이나 활성도를 나타내지 않습니다.</p>
+        </details>
+      </Fold>}
+      {branches.length > 0 && <Fold id="branches" title="연결된 분지" summary={`${branches.length}개`} open={boneFold === 'branches'}>
+        <div className="attachment-bone-links">{branches.map(row => <button className="bone-related-muscle" key={row.sourceKey} onClick={() => select(row.sourceKey)}>{learnerRowTitle(row)}</button>)}</div>
+      </Fold>}
+      {selectedNerveConcept && selectedNerveConcept.functionEvidenceClass !== 'relationship_not_linked' && <Fold id="function" title="운동·감각 관계" open={boneFold === 'function'}><p>{nerveFunctionStatus(selectedNerveConcept)}</p></Fold>}
+      {nerveLearning && <Fold id="context" title="주행·포착 맥락" summary="포착 가능 구간과 주변 조직" open={boneFold === 'context'}>
+        {shouldDisplayNerveFunctionContext(nerveLearning.functionContext, selectedNerveConcept?.functionEvidenceClass) && <section><h4>기능 연결</h4><p>{nerveLearning.functionContext}</p></section>}
+        <section><h4>포착 가능 구간과 주변 조직</h4><p>{nerveLearning.compressionContext}</p></section>
+        {"variationContext" in nerveLearning && <section><h4>변이와 자세 범위</h4><p>{String(nerveLearning.variationContext)}</p></section>}
+      </Fold>}
+      {tests.length > 0 && <Fold id="tests" title="평가" summary={testNames} open={boneFold === 'tests'}><ClinicalTests row={selected}/></Fold>}
+      </div>
+      </section><CardLimits kind="nerve"/></>;
+    })()
+ : selected?.kind === 'muscle' ? <>
     <div className="study-tab-panels study-sections">
     <StudySection id="구조" open={tab === '구조'} onToggle={toggleSection} summary="기시·정지 · 신경 · 혈관">
       {(['origin', 'insertion'] as const).map(role => {
@@ -552,11 +579,23 @@ export default function App() {
     </StudySection>
     </div>
     <CardLimits kind="muscle"/>
-    </> : selected?.kind === 'bone' ? <>{cardRig && jointsForBone(cardRig.rig, selected.sourceKey).length > 0 && isRigHost(motionHost) && <section className="attachment-section bone-joints">
-      <h3>이 뼈를 움직이는 관절</h3>
-      <div className="attachment-bone-links">{jointsForBone(cardRig.rig, selected.sourceKey).map(id => <button key={id} className="bone-related-muscle"
-        onClick={() => motionHost.openMovement(id)}>{cardRig.rig.joints[id].name.replace(/ \((왼|오른)쪽\)$/, '')} 움직여 보기</button>)}</div>
-    </section>}<section className="attachment-section"><h3>관련 근육</h3>{relatedMuscles.length ? <ul>{relatedMuscles.map(r => <li key={r.sourceKey}><button className="bone-related-muscle" onClick={() => select(r.sourceKey)}>{r.label}</button><span>{r.roles.map(role => role === 'origin' ? '기시' : role === 'insertion' ? '정지' : '부착').join(' · ')}</span></li>)}</ul> : <p className="quiet-note">주요 표지와 관련 근육 설명을 준비하고 있습니다.</p>}</section></>
+    </> : selected?.kind === 'bone' ? (() => {
+      // 4-3 U12: key lines (joints it moves at, muscles by role), then folds.
+      const joints = cardRig && isRigHost(motionHost) ? jointsForBone(cardRig.rig, selected.sourceKey) : [];
+      const jointNames = joints.map(id => cardRig!.rig.joints[id].name.replace(/ \((왼|오른)쪽\)$/, ''));
+      const origins = relatedMuscles.filter(r => r.roles.includes('origin')).length, insertions = relatedMuscles.filter(r => r.roles.includes('insertion')).length;
+      const muscleLine = relatedMuscles.length ? [origins && `기시 ${origins}`, insertions && `정지 ${insertions}`].filter(Boolean).join(' · ') || `${relatedMuscles.length}개` : '';
+      return <>
+        <KeyLines lines={[{ fact: 'joints', label: '관절', value: jointNames.join(' · '), opens: 'joints' }, { fact: 'muscles', label: '붙는 근육', value: muscleLine, opens: 'muscles' }]} onOpen={setBoneFold}/>
+        <div className="card-folds">
+        {joints.length > 0 && <Fold id="joints" title="관절에서 움직여 보기" summary={jointNames.join(' · ')} open={boneFold === 'joints'}><section className="attachment-section bone-joints">
+          <div className="attachment-bone-links">{joints.map((id, i) => <button key={id} className="bone-related-muscle" onClick={() => { if (isRigHost(motionHost)) motionHost.openMovement(id); }}>{jointNames[i]} 움직여 보기</button>)}</div>
+        </section></Fold>}
+        <Fold id="muscles" title="관련 근육" summary={muscleLine || '준비 중'} open={boneFold === 'muscles'}><section className="attachment-section">{relatedMuscles.length ? <ul>{relatedMuscles.map(r => <li key={r.sourceKey}><button className="bone-related-muscle" onClick={() => select(r.sourceKey)}>{r.label}</button><span>{r.roles.map(role => role === 'origin' ? '기시' : role === 'insertion' ? '정지' : '부착').join(' · ')}</span></li>)}</ul> : <p className="quiet-note">주요 표지와 관련 근육 설명을 준비하고 있습니다.</p>}</section></Fold>
+        </div>
+        <CardLimits kind="bone"/>
+      </>;
+    })()
     : selected?.kind === 'vessel' ? <VesselCard vessel={selected} rows={runtimeByKey} onSelect={select}/>
     : selected && LAYER_HINTS[selected.kind] ? <StructureCard row={selected} cards={structureCards} rows={runtimeByKey} onSelect={select}
       rig={cardRig?.rig} actions={cardRig?.actions} onMoveJoint={isRigHost(motionHost) ? jointId => motionHost.openMovement(jointId) : undefined}

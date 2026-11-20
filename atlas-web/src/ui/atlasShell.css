@@ -719,3 +719,14 @@
 .atlas-shell .point-fold summary { cursor: pointer; font-size: 12.5px; font-weight: 600; color: #4b3a30; min-height: 30px; display: flex; align-items: center; gap: 6px; }
 .atlas-shell .point-fold summary small { padding: 0 6px; border-radius: 8px; background: #f6ece5; color: #7c4a2d; font-size: 11px; }
 @media (pointer: coarse) { .atlas-shell .point-fold summary { min-height: 40px; } }
+
+/* 4-3 U12: folds on bone, ligament, nerve and vessel cards share the muscle card's section look. */
+.atlas-shell .fold-section > summary { list-style: none; display: grid; grid-template-columns: auto minmax(0, 1fr) 14px; align-items: center; gap: 8px; min-height: 44px; padding: 8px 10px; cursor: pointer; border-radius: 10px; }
+.atlas-shell .fold-section > summary::-webkit-details-marker { display: none; }
+.atlas-shell .fold-section > summary::after { content: ''; width: 7px; height: 7px; border-right: 1.6px solid #6b7a75; border-bottom: 1.6px solid #6b7a75; transform: rotate(45deg) translateY(-2px); justify-self: center; }
+.atlas-shell .fold-section[open] > summary::after { transform: rotate(-135deg) translateY(-1px); }
+.atlas-shell .fold-section[open] { border-color: #c5d6cf; }
+.atlas-shell .fold-section[open] > summary .section-summary { visibility: hidden; }
+.atlas-shell .fold-section > summary:hover { background: #f5f8f7; }
+.atlas-shell .card-folds { display: grid; gap: 6px; margin-top: 4px; }
+@media (pointer: coarse) { .atlas-shell .fold-section > summary { min-height: 50px; } }
