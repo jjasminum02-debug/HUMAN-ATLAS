@@ -93,7 +93,7 @@ export class LabelLayer {
 
 /** World transform from the mesh's own matrix and its parent's world matrix: a mesh loaded this frame has not been drawn,
  * so its `matrixWorld` is still unset. */
-export function worldOf(mesh: THREE.Object3D) {
+export function worldOf(mesh: THREE.Object3D): THREE.Matrix4 {
   const local = mesh.matrixAutoUpdate ? mesh.matrix.compose(mesh.position, mesh.quaternion, mesh.scale) : mesh.matrix;
   return mesh.parent ? new THREE.Matrix4().multiplyMatrices(worldOf(mesh.parent), local) : local.clone();
 }

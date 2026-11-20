@@ -82,7 +82,11 @@ const flows = [
     const visible = Object.values(await scene(page)).filter(n => n.visible).length;
     expect(visible > 300, `보이는 구조 ${visible}개`);
     // Q2-3 name quiz: exactly one drawn structure is highlighted (not selected: no card); its label is one of four choices.
-    await page.getByRole('button', { name: '퀴즈·북마크' }).click();
+    // 4-3 U11: learners see bookmarks only; the quiz code stays reachable for development with ?quiz=1.
+    await page.locator('.study-tools-trigger').click();
+    expect((await page.locator('.study-tools-trigger').innerText()).trim() === '북마크' && await page.getByRole('tab', { name: '퀴즈' }).count() === 0, '퀴즈가 학생 화면에 보임');
+    await open(page, '/?quiz=1');
+    await page.locator('.study-tools-trigger').click();
     await page.getByRole('button', { name: '문제 내기' }).click();
     await page.locator('.quiz-choices button').first().waitFor();
     const highlighted = Object.entries(await scene(page)).filter(([, n]) => n.visible && n.material.includes(':selected:')).map(([key]) => key);
@@ -482,11 +486,11 @@ const flows = [
     await search(page, '안쪽반달', '내측반월');
     const meniscus = await page.locator('#study-details .clinical-tests').innerText({ timeout: 10000 });
     expect(/맥머레이/.test(meniscus), `반월 검사: ${meniscus.replace(/\s+/g, ' ').slice(0, 120)}`);
-    await page.getByRole('searchbox', { name: '구조 검색' }).fill('좌골신경');
-    const model = page.locator('.nerve-search-result button', { hasText: '오른쪽 모형' }).first();
-    const listed = page.locator('nav.region-structure-list button', { hasText: '좌골신경' }).first();
-    await Promise.race([model.waitFor({ timeout: 10000 }), listed.waitFor({ timeout: 10000 })]);
-    await (await model.count() ? model : listed).click();
+    // 4-3 U11: the 신용어 finds the nerve too (nerve matches are listed above the structure list).
+    await page.getByRole('searchbox', { name: '구조 검색' }).fill('궁둥신경');
+    const model = page.locator('.nerve-search-result', { hasText: '좌골신경' }).locator('button', { hasText: '오른쪽 모형' }).first();
+    await model.waitFor({ timeout: 10000 });
+    await model.click();
     await settle(page);
     const nerve = await page.locator('#study-details .clinical-tests').innerText({ timeout: 10000 });
     expect(/SLR/.test(nerve) && /이 신경을 보는 검사/.test(nerve), `좌골신경 검사: ${nerve.replace(/\s+/g, ' ').slice(0, 120)}`);

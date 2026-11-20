@@ -81,6 +81,8 @@ export default function App() {
     const [detailsOpen, setDetailsOpen] = useState(true);
     // 4-3 U5: below 1400px only one of the card and the acupoint panel is unfolded; the card folds to its title bar and comes back.
     const [closeAcupointRevision, setCloseAcupointRevision] = useState(0);
+    // 4-3 U11: no quiz for learners (user's decision); the code stays reachable for development with ?quiz=1.
+    const quizEnabled = useMemo(() => new URLSearchParams(location.search).has('quiz'), []);
     // 4-3 U6: the model's selection actions render here (card head) instead of a toolbar row.
     const [selectionTarget, setSelectionTarget] = useState<HTMLDivElement | null>(null);
     const acupointOpen = useRef(false), cardFoldedForPanel = useRef(false);
@@ -368,13 +370,20 @@ export default function App() {
    <div className="header-brand-group"><button className="brand" aria-label="Human Atlas 전신 홈" onClick={() => { setQuery(''); resetPresentation(); navigate({ regions: [], selected: null }, false, ''); setHomeRevision(v => v + 1); }}><span className="brand-dot"/> HUMAN ATLAS</button></div>
    <button className="explore-trigger" aria-expanded={exploreOpen} aria-controls="atlas-explorer" onClick={() => setExploreOpen(!exploreOpen)}>부위 탐색 · {regionLabel} ▾</button>
    <label className="global-search"><span aria-hidden="true">⌕</span><input ref={searchInput} type="search" aria-label="구조 검색" aria-keyshortcuts="/" title="/ 키로 검색" placeholder={explorerMode === "actions" ? "움직임·근육 이름 검색" : "근육·뼈·신경 이름 검색"} autoComplete="off" value={query} onChange={e => { updateQuery(e.target.value); setExploreOpen(true); }}/>{query && <button aria-label="검색 지우기" onClick={() => updateQuery('')}>×</button>}</label>
-   <button className="study-tools-trigger" aria-expanded={toolsOpen} aria-controls="study-tools" onClick={() => setToolsOpen(open => !open)}>퀴즈·북마크</button>
+   <button className="study-tools-trigger" aria-expanded={toolsOpen} aria-controls="study-tools" onClick={() => setToolsOpen(open => !open)}>북마크</button>
   </header>
   <button inert={!entered} className="app-info-trigger" onClick={() => info.current?.showModal()}>앱 정보</button>
   <dialog className="app-info-dialog" ref={info} aria-labelledby="app-info-title"><div className="app-info-content"><button className="app-info-close" aria-label="앱 정보 닫기" onClick={() => info.current?.close()}>닫기</button><h2 id="app-info-title">모형·자료 정보</h2>
-   <p>Z-Anatomy — The libre 3D atlas of anatomy — CC BY-SA 4.0</p><p>BodyParts3D — The Database Center for Life Science — CC BY-SA 2.1 Japan</p><p>고정한 Z-Anatomy 모형을 웹용으로 변환하고 상세 단계를 조정했습니다. 로컬 학습용 시제품이며 일부 구조와 이름·설명은 준비 중입니다. 원본의 별도 출처와 이용 조건을 보존하며 공개 재배포는 보류합니다.</p>
-   <a href="https://github.com/Z-Anatomy/Models-of-human-anatomy/blob/c7010a903b75a2fd24a13b1c2c4c3546a9223780/Readme.md" target="_blank" rel="noreferrer">원본·제작자·이용 조건 ↗</a>
-   <p>근육 부착 설명은 NCBI Bookshelf의 StatPearls 해부학 자료를 대조한 한국어 요약입니다. 자세한 기시·정지 범위에는 개인차가 있습니다.</p><a href="https://www.ncbi.nlm.nih.gov/books/NBK459392/" target="_blank" rel="noreferrer">해부학 설명 참고 자료 ↗</a>
+   {/* 4-3 U11: the same facts as NOTICE.md (the record of sources and terms). */}
+   <p>한의대생용 해부·경락 학습 시제품입니다. 특정 환자의 진단·처방이나 자침 깊이·각도 같은 시술 안내가 아닙니다.</p>
+   <h3>3D 모형</h3>
+   <p>Z-Anatomy — The libre 3D atlas of anatomy — CC BY-SA 4.0. 원본을 웹용으로 바꾸고 상세 단계·관절 움직임·부착 면·경혈·경근 위치를 계산했습니다. 이렇게 고친 형상과 그 파생 자료는 같은 CC BY-SA 4.0 조건을 따릅니다.</p>
+   <a href="https://github.com/Z-Anatomy/Models-of-human-anatomy/blob/c7010a903b75a2fd24a13b1c2c4c3546a9223780/Readme.md" target="_blank" rel="noreferrer">Z-Anatomy 원본·제작자·이용 조건 ↗</a>
+   <p>BodyParts3D — The Database Center for Life Science — CC BY-SA 2.1 Japan. 피부 재질 MakeHuman — CC0. 근육 작용은 OpenSim 모델의 모멘트 팔로 확인했습니다(모델 파일은 포함하지 않음).</p>
+   <h3>내용</h3>
+   <p>근육의 신경·혈관·작용, 검사 이름, 체형 패턴은 AI가 만든 표를 서로 다른 두 출처(Wikipedia, UAMS, Kenhub, Orthobullets, Physiotutors, Physiopedia, MedBridge 등)와 대조해 일치한 것만 보여 줍니다. 출처의 문장은 옮기지 않았습니다.
+     경근은 『영추·경근』(공유 저작물), 경혈 위치는 WHO 표준 경혈 위치(2008)의 관례를 따라 이 모형에 계산했습니다. 사람 검토는 아직 거치지 않았습니다.</p>
+   <p>앱 코드는 아직 이용 조건을 정하지 않았습니다(모든 권리 보유).</p>
   </div></dialog>
   <div className="study-layout">
    <button inert={!entered} className="explore-rail" aria-expanded={exploreOpen} aria-controls="atlas-explorer" onClick={() => setExploreOpen(!exploreOpen)}><span aria-hidden="true">☰</span><span>부위 탐색</span></button>
@@ -436,7 +445,7 @@ export default function App() {
 
    </aside>
    <section id="atlas-stage" tabIndex={-1} className="study-stage" aria-label={`${title} 학습 장면`}><div className="stage-caption" aria-hidden={!entered}><span className="eyebrow">INTERACTIVE ANATOMY</span><h2>{title}</h2><p>회전하고 확대하며 구조를 살펴보세요.</p></div>
-    {toolsOpen && entered && <StudyTools rows={data.integration.objects.filter(r => r.routeAudience === (route.audience ?? 'learner'))} host={motionHost}
+    {toolsOpen && entered && <StudyTools quiz={quizEnabled} rows={data.integration.objects.filter(r => r.routeAudience === (route.audience ?? 'learner'))} host={motionHost}
       selected={selected ?? null} onSelect={select} onClearSelection={() => navigate({ regions: route.regions, selected: null })} onClose={() => setToolsOpen(false)}/>}
     <WholeBodyViewer attachmentRole={attachmentRole} homeRevision={homeRevision} viewResetRevision={viewResetRevision} datasetSource={data} onEntered={setEntered} onMotionHostChange={setMotionHost} onMuscleLayerChange={setMuscleLayerEnabled} onBoneLayerChange={setBoneLayerEnabled} onSelectionHiddenChange={setSelectedSourceHidden} onAcupointPanelChange={onAcupointPanelChange} closeAcupointRevision={closeAcupointRevision} selectionActionsTarget={detailsOpen && selected ? selectionTarget : null} selectionActionsOnCard={Boolean(selected)} regionIds={route.regions} selectedId={route.selected} selectedIds={selectedSourceKeys} whole={!route.regions.length} onWholeChange={() => { resetPresentation(); navigate({ regions: [], selected: route.selected }); }} onSelect={select}/>
    </section>

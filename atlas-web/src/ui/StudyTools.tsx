@@ -26,11 +26,11 @@ export function BookmarkButton({ row, host, compact = false }: { row: RuntimeStr
     onClick={() => setList(toggleBookmark(list, { key: row.sourceKey, label: row.label, kind: row.kind, view: view() }))}>{compact ? (saved ? '★' : '☆') : saved ? '★ 저장됨' : '☆ 북마크'}</button>;
 }
 
-export function StudyTools({ rows, host, selected, onSelect, onClearSelection, onClose }: {
-  rows: RuntimeStructureRecord[]; host: unknown; selected: RuntimeStructureRecord | null;
+export function StudyTools({ rows, host, selected, onSelect, onClearSelection, onClose, quiz = false }: {
+  rows: RuntimeStructureRecord[]; host: unknown; selected: RuntimeStructureRecord | null; quiz?: boolean;
   onSelect: (key: string) => void; onClearSelection: () => void; onClose: () => void;
 }) {
-  const [tab, setTab] = useState<'quiz' | 'bookmarks'>('quiz');
+  const [tab, setTab] = useState<'quiz' | 'bookmarks'>(quiz ? 'quiz' : 'bookmarks');
   const [kind, setKind] = useState<QuizKind>('name');
   const [cards, setCards] = useState<QuizCards | null>(null);
   const [question, setQuestion] = useState<QuizQuestion | null>(null);
@@ -68,12 +68,12 @@ export function StudyTools({ rows, host, selected, onSelect, onClearSelection, o
   return <section className="study-tools" id="study-tools" aria-label="학습 도구">
     <div className="study-tools-head">
       <div className="study-tools-tabs" role="tablist">
-        <button role="tab" aria-selected={tab === 'quiz'} onClick={() => setTab('quiz')}>퀴즈</button>
+        {quiz && <button role="tab" aria-selected={tab === 'quiz'} onClick={() => setTab('quiz')}>퀴즈</button>}
         <button role="tab" aria-selected={tab === 'bookmarks'} onClick={() => setTab('bookmarks')}>북마크 {live.length > 0 && <small>{live.length}</small>}</button>
       </div>
       <button className="study-tools-close" aria-label="학습 도구 닫기" onClick={() => { quizHost?.setQuizTarget(null); onClose(); }}>닫기</button>
     </div>
-    {tab === 'quiz' ? <div className="quiz" role="tabpanel">
+    {quiz && tab === 'quiz' ? <div className="quiz" role="tabpanel">
       <div className="quiz-kinds" role="group" aria-label="문제 종류">
         {(Object.keys(QUIZ_KINDS) as QuizKind[]).map(k => <button key={k} aria-pressed={kind === k} onClick={() => { setKind(k); ask(k); }}>{QUIZ_KINDS[k]}</button>)}
       </div>
