@@ -413,11 +413,32 @@ const flows = [
     // 2026-11-20: fixed-size ringed dots and a wide channel line, a name tag on the chosen point, the lung sinew faint beside them.
     const look = await page.evaluate(() => { const r = { dots: 0, wide: 0, tag: 0, sinew: 0, overlay: true }; window.__atlasScene.root.traverse(o => {
       if (o.userData.acupoint && o.visible) { r.dots++; if (!o.isSprite) r.overlay = false; }
-      if (o.isLine2 && o.visible && o.parent?.name === 'Acupoints') r.wide++;
-      if (o.isSprite && !o.userData.acupoint && o.visible && o.parent?.name === 'Acupoints') r.tag++;
+      if (o.isLine2 && o.visible && o.parent?.name === 'Acupoints' && !o.material.dashed) r.wide++;
+      if (o.isSprite && !o.userData.acupoint && o.visible && o.parent?.name === 'Acupoints' && o.userData.px === 23) r.tag++; // the chosen point's name tag
       if (o.isLine2 && o.parent?.name === 'Sinews') r.sinew++;
       if ((o.userData.acupoint || o.parent?.name === 'Sinews') && !o.layers.isEnabled(3)) r.overlay = false; }); return r; });
     expect(look.dots === 22 && look.wide === 2 && look.tag === 1 && look.sinew >= 1 && look.overlay, `폐경 표시: ${JSON.stringify(look)}`);
+    // 4-3 V4: flow — an arrow between each pair of points, dashed joins to 간경 and 대장경, 시작/끝 tags, the flow line and a pulse.
+    const flow = await page.evaluate(() => { const r = { arrows: 0, joins: 0, tags: 0 }; window.__atlasScene.root.traverse(o => {
+      if (!o.visible || o.parent?.name !== 'Acupoints') return;
+      if (o.isSprite && o.material.map?.image && o.userData.px === 15) r.arrows++;
+      if (o.isLine2 && o.material.dashed) r.joins++;
+      if (o.isSprite && o.userData.px === 19) r.tags++; }); return r; });
+    const flowLine = await page.locator('.channel-flow').innerText();
+    expect(flow.arrows === 20 && flow.joins === 4 && flow.tags === 4 && /중부 LU1[\s\S]*소상 LU11/.test(flowLine), `폐경 흐름: ${JSON.stringify(flow)} · ${flowLine.replace(/\s+/g, ' ')}`);
+    await page.locator('.channel-play').click();
+    await page.waitForTimeout(500);
+    const pulse = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isSprite && o.visible && o.userData.px === 18) n++; }); return n; });
+    expect(pulse === 2, `흐름 따라가기 점 ${pulse}개`);
+    await page.locator('.channel-neighbours button', { hasText: '대장경' }).click();
+    expect(/수양명대장경/.test(await page.locator('.acupoint-channel h4').innerText()), '다음 경맥으로 가지 않음');
+    await page.locator('.channel-neighbours button', { hasText: '폐경' }).click();
+    // 4-4 V5: a light caution line on 중부 (over the pleura), none on 척택.
+    await page.locator('.acupoint-channel button', { hasText: '중부' }).click();
+    const caution = await page.locator('.acupoint-detail .point-caution').innerText({ timeout: 5000 });
+    expect(/흉강 주의/.test(caution), `중부 주의 표시: ${caution}`);
+    await page.locator('.acupoint-channel button', { hasText: '척택' }).click(); // back to the point the rest of the flow reads
+    expect(await page.locator('.acupoint-detail .point-caution').count() === 0, '척택에 주의 표시가 붙음');
     // 4-3 V3: the other channels can be shown faint behind the chosen one.
     const dotCount = () => page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.userData.acupoint && o.visible) n++; }); return n; });
     await page.locator('.acupoint-sinew-toggle.is-others input').check();
@@ -496,7 +517,7 @@ const flows = [
     await page.waitForTimeout(300);
     const cleared = await roles();
     expect(upper.postureShort >= 10 && upper.postureWeak >= 10 && upper.agonist + upper.antagonist === 0 && cleared.postureShort + cleared.postureWeak === 0, `상부 교차 색: ${JSON.stringify(upper)}, 끈 뒤 ${JSON.stringify(cleared)}`);
-    return `경맥 14개 → 폐경 점 22개·굵은 선·이름표·수태음경근 청록 → 척택 설명·취혈 기준(표지)·아래 구조(요골신경)·주변 구조 → 태연 표지가 팔꿉 90°를 따라감 → 요골신경 카드 → 독맥 백회(정중선, ${shown.length}혈만 표시) → 족태양경근(선 마디 ${k0.beads}개, 곤륜 매듭이 무릎 굽힘을 따라감, 영역 근육 ${region.muscles}개·結 ${region.bindings}곳, 태양 손발 함께) → ${name} 카드 → 기준점 30개, 허리 왼쪽 옆굽힘에 12번 갈비–장골능 왼쪽이 짧아짐 → 상부 교차 증후군 색(짧은 쪽 ${upper.postureShort}·약한 쪽 ${upper.postureWeak}개, 움직임 색 없음)`;
+    return `경맥 14개 → 폐경 점 22개·굵은 선·이름표·수태음경근 청록 → 흐름 화살표 20·이음 점선 4·시작/끝·흐름 따라가기·다음 경맥 → 중부 흉강 주의(척택 없음) → 척택 설명·취혈 기준(표지)·아래 구조(요골신경)·주변 구조 → 태연 표지가 팔꿉 90°를 따라감 → 요골신경 카드 → 독맥 백회(정중선, ${shown.length}혈만 표시) → 족태양경근(선 마디 ${k0.beads}개, 곤륜 매듭이 무릎 굽힘을 따라감, 영역 근육 ${region.muscles}개·結 ${region.bindings}곳, 태양 손발 함께) → ${name} 카드 → 기준점 30개, 허리 왼쪽 옆굽힘에 12번 갈비–장골능 왼쪽이 짧아짐 → 상부 교차 증후군 색(짧은 쪽 ${upper.postureShort}·약한 쪽 ${upper.postureWeak}개, 움직임 색 없음)`;
   }],
   // 4-2 step 9: test names at the end of the 기능 tab (muscle) and on ligament/meniscus and nerve cards; held tests stay out.
   ['검사 이름: 견갑하근 기능 탭, 내측 반월, 좌골신경', async page => {

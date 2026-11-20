@@ -11,7 +11,8 @@ const RAW: Record<string, string> = { '/__atlas/v2/structures.json': 'structures
   '/__atlas/v2/actions.json': 'muscle-actions.json', '/__atlas/v2/attachments.json': 'attachments.json',
   '/__atlas/v2/muscle-cards.json': 'muscle-cards.json', '/__atlas/v2/vessel-branches.json': 'vessel-branches.json', '/__atlas/v2/acupoints.json': 'acupoints.json',
   '/__atlas/v2/sinews.json': 'sinews.json', '/__atlas/v2/clinical-tests.json': 'clinical-tests.json',
-  '/__atlas/v2/posture-patterns.json': 'posture-patterns.json' };
+  '/__atlas/v2/posture-patterns.json': 'posture-patterns.json',
+  '/__atlas/v2/acupoint-cautions.json': 'acupoint-cautions.json' };
 const CHUNK = /^\/__atlas\/datasets\/(za-c7010a9|za-v2)\/([a-f0-9]{64})\.glb$/;
 const SKIN = /^\/__atlas\/v2\/skin\/([a-f0-9]{64})\.bin$/;
 const CONTACTS = /^\/__atlas\/v2\/attachments\/(ZA-[A-Za-z0-9-]+)\.json$/;

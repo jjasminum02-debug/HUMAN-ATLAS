@@ -1,12 +1,16 @@
 // Acupoint panel (ROADMAP 4-1 step 7): channel points on the model, their location and the structures around them.
 import { useEffect, useState } from 'react';
 import type { RuntimeStructureRecord } from '../datasets/integration';
-import { acupointId, channelPath, channelSide, isBinding, landmarkId, LOCATION_BASIS_LABEL, locationBasis, sixChannelOf, type AcupointInstance, type Landmark, type AcupointFile, type AcupointHost, type AcupointTarget, type SinewFile } from '../acupointLayer';
+import { acupointId, channelPath, channelSide, nextChannel, prevChannel, isBinding, landmarkId, LOCATION_BASIS_LABEL, locationBasis, sixChannelOf, type AcupointInstance, type Landmark, type AcupointFile, type AcupointHost, type AcupointTarget, type SinewFile } from '../acupointLayer';
 
 const SIDE = { right: '오른쪽', left: '왼쪽', midline: '정중선' } as const;
 let file: Promise<AcupointFile | null> | undefined;
 let sinewFile: Promise<SinewFile | null> | undefined;
 export const loadSinews = () => sinewFile ??= fetch('/__atlas/v2/sinews.json').then(r => r.ok ? r.json() : null).catch(() => { sinewFile = undefined; return null; });
+/** 4-4 V5: light marks on points over the pleura or the kidney (two sources each; atlas-data/pipeline/needle_cautions.py). */
+export interface CautionFile { schemaVersion: 1; kinds: Record<string, { label: string; hint: string }>; points: Record<string, string> }
+let cautionFile: Promise<CautionFile | null> | undefined;
+const loadCautions = () => cautionFile ??= fetch('/__atlas/v2/acupoint-cautions.json').then(r => r.ok ? r.json() : null).catch(() => { cautionFile = undefined; return null; });
 export const loadAcupoints = () => file ??= fetch('/__atlas/v2/acupoints.json').then(r => r.ok ? r.json() : null).catch(() => { file = undefined; return null; });
 
 export function AcupointPanel({ host, rows, request = null, onSelectStructure, onClose }: {
@@ -30,6 +34,8 @@ export function AcupointPanel({ host, rows, request = null, onSelectStructure, o
   const [sinews, setSinews] = useState<SinewFile | null>(null);
   useEffect(() => { let live = true; void loadSinews().then(f => { if (live) setSinews(f); }); return () => { live = false; }; }, []);
   const [withSinew, setWithSinew] = useState(true);
+  const [cautions, setCautions] = useState<CautionFile | null>(null);
+  useEffect(() => { let live = true; void loadCautions().then(f => { if (live) setCautions(f); }); return () => { live = false; }; }, []);
   const [others, setOthers] = useState(false);
   useEffect(() => { host.showOtherChannels?.(mode === 'points' && others); }, [host, others, mode, data]);
   useEffect(() => {
@@ -81,17 +87,34 @@ export function AcupointPanel({ host, rows, request = null, onSelectStructure, o
       <h4>{concept.nameKo} <span>{concept.hanja} · {concept.code} · {SIDE[point.side]}</span></h4>
       <p>{concept.location}</p>
       <PointBasis location={concept.location}/>
+      <PointCaution file={cautions} code={concept.code}/>
       <Beneath point={point} rows={rows} onSelectStructure={onSelectStructure}/>
       {point.near.length > 0 && <details className="point-fold"><summary>주변 구조 <small>{point.near.length}</small></summary><div className="attachment-bone-links">{point.near.map(key => rows.get(key)).filter((r): r is RuntimeStructureRecord => Boolean(r))
         .map(r => <button key={r.sourceKey} className="bone-related-muscle" onClick={() => onSelectStructure(r.sourceKey, r.side)}>{r.label}</button>)}</div></details>}
     </section>}
     {current && <section className="acupoint-channel">
       <h4>{current.nameKo}<span>{current.nameHanja} · {current.codes.length}혈</span></h4>
+      {/* 4-3 V4: which way it flows, and the channels before and after it in the 12-channel cycle. */}
+      {(() => {
+        const path = channelPath(data, channel, channelSide(data, channel, side));
+        const name = (code: string | undefined) => code ? data.concepts.find(c => c.code === code)?.nameKo ?? code : '';
+        const prev = prevChannel(channel), next = nextChannel(channel);
+        const short = (code: string | null) => code ? data.channels[code]?.nameKo.replace(/^[수족](태음|양명|소음|태양|궐음|소양)/, '') ?? code : '';
+        return <>
+          {path.length > 1 && <p className="channel-flow"><small>흐름</small><b>{name(path[0].code)} {path[0].code}</b><i aria-hidden="true">→</i><b>{name(path[path.length - 1].code)} {path[path.length - 1].code}</b></p>}
+          <div className="channel-neighbours">
+            {prev && <button onClick={() => { setChannel(prev); setSelected(null); host.selectAcupoint(null, false); }} title="흐름에서 앞 경맥">← {short(prev)}</button>}
+            {host.playChannelFlow && <button className="channel-play" onClick={() => host.playChannelFlow!()}>흐름 따라가기 ▶</button>}
+            {next && <button onClick={() => { setChannel(next); setSelected(null); host.selectAcupoint(null, false); }} title="흐름에서 다음 경맥">{short(next)} →</button>}
+          </div>
+        </>;
+      })()}
       <ol>{channelPath(data, channel, channelSide(data, channel, side)).map(p => { const c = data.concepts.find(x => x.code === p.code)!;
         return <li key={acupointId(p)}><button aria-pressed={selected === acupointId(p)} onClick={() => choose(acupointId(p))}>
           <span>{c.nameKo}</span><small>{c.hanja} · {c.code}</small></button></li>; })}</ol>
     </section>}
     <PanelLimits items={['경혈은 뼈 표지와 골도분촌(비례촌)으로 이 모형 위에 계산한 교육용 위치이며, 실제 취혈·시술 안내가 아닙니다. 관절을 움직이면 함께 따라갑니다.',
+      '흉강·신장 주의 표시는 두 출처가 함께 꼽은 혈에만 붙였습니다(기흉 위험 부위, 콩팥 위 부위). 자침 깊이·각도 기준이 아니며, 교과서 대조는 남아 있습니다.',
       '아래 지나는 혈관·신경은 혈 자리에서 곧게 안쪽으로 6cm까지, 1cm 반경 안을 이 모형에서 잰 값입니다. 사람·체형·자세에 따라 다르며 자침 깊이 기준이 아닙니다.']}/>
     </>}
   </aside>;
@@ -166,6 +189,13 @@ function PointBasis({ location }: { location: string }) {
   const basis = locationBasis(location);
   return <p className={`point-basis basis-${basis.kind}`}><b>취혈 기준</b> {LOCATION_BASIS_LABEL[basis.kind]}{basis.cun ? ` ${basis.cun}촌` : ''}
     {basis.marks.length > 0 && <small> · 표지: {basis.marks.join('·')}</small>}</p>;
+}
+
+/** One quiet line, not a warning box (the user asked for a light mark). */
+function PointCaution({ file, code }: { file: CautionFile | null; code: string }) {
+  const kind = file?.points[code], info = kind ? file?.kinds[kind] : undefined;
+  if (!kind || !info) return null;
+  return <p className={`point-caution caution-${kind}`}><b>{info.label}</b> {info.hint}</p>;
 }
 
 /** Vessels and nerves under the point, nearest first, with the depth measured on this model. */

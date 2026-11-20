@@ -15,7 +15,8 @@ export const STATIC_JSON: Record<string, string> = { '/__atlas/v2/cards.json': '
   '/__atlas/v2/actions.json': 'muscle-actions.json', '/__atlas/v2/attachments.json': 'attachments.json', '/__atlas/v2/muscle-cards.json': 'muscle-cards.json',
   '/__atlas/v2/vessel-branches.json': 'vessel-branches.json', '/__atlas/v2/acupoints.json': 'acupoints.json',
   '/__atlas/v2/sinews.json': 'sinews.json', '/__atlas/v2/clinical-tests.json': 'clinical-tests.json',
-  '/__atlas/v2/posture-patterns.json': 'posture-patterns.json' };
+  '/__atlas/v2/posture-patterns.json': 'posture-patterns.json',
+  '/__atlas/v2/acupoint-cautions.json': 'acupoint-cautions.json' };
 
 export async function projectRuntime(root: string) {
   const runtime = resolve(root, 'atlas-data/runtime'), geometryDir = resolve(root, 'atlas-data/source-cache/datasets/za-v2');

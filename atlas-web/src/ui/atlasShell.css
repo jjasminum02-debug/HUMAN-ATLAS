@@ -534,6 +534,9 @@
 .atlas-shell .point-basis b { margin-right: 4px; color: #2f5d50; }
 .atlas-shell .point-basis.basis-landmark { background: #e9f4ef; }
 .atlas-shell .point-basis small { color: #7c8b84; }
+/* 4-4 V5: a light caution line (chip + one sentence), quieter than the location basis. */
+.atlas-shell .point-caution { margin: -4px 0 8px; font-size: 12px; line-height: 1.45; color: #6b7a74; }
+.atlas-shell .point-caution b { display: inline-block; margin-right: 5px; padding: 0 6px; border-radius: 999px; font-size: 11px; font-weight: 600; line-height: 18px; background: #fdf3e1; color: #8a5a0b; border: 1px solid #f0d9a8; }
 .atlas-shell .point-beneath { list-style: none; margin: 4px 0; padding: 0; display: grid; gap: 4px; }
 .atlas-shell .point-beneath li { display: flex; align-items: center; gap: 6px; font-size: 12px; }
 .atlas-shell .point-beneath li small { color: #7c8b84; margin-left: auto; white-space: nowrap; }
@@ -751,3 +754,12 @@
   .atlas-shell *, .atlas-shell *::after { animation: none !important; transition: none !important; }
 }
 .atlas-shell .acupoint-sinew-toggle.is-others i { background: #a3aaa7; height: 2px; }
+
+/* 4-3 V4: channel flow line and neighbours in the 12-channel cycle. */
+.atlas-shell .channel-flow { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; margin: 2px 0 6px; font-size: 12.5px; color: #4b3a30; }
+.atlas-shell .channel-flow small { font-size: 11px; color: #9a6a52; }
+.atlas-shell .channel-flow i { font-style: normal; color: #c2410c; font-weight: 700; }
+.atlas-shell .channel-neighbours { display: flex; gap: 4px; margin: 0 0 8px; flex-wrap: wrap; }
+.atlas-shell .channel-neighbours button { min-height: 30px; padding: 2px 9px; border: 1px solid #e2cdbd; border-radius: 8px; background: #fff; color: #7c2d12; font-size: 12px; cursor: pointer; }
+.atlas-shell .channel-neighbours .channel-play { background: #fff4e6; border-color: #f0b27a; font-weight: 600; margin: 0 auto; }
+@media (pointer: coarse) { .atlas-shell .channel-neighbours button { min-height: 40px; } }
