@@ -669,6 +669,9 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
         const visibleKeys = new Set(demandedStructureKeys(rows, this.view));
         const course = new Set(nerveCourseKeys(rows, this.view));
         const attachmentBones = new Set(attachmentObservationKeys(rows, this.view));
+        // Both ends are shown while observing one; the role of each attachment bone decides its colour.
+        const attachmentRoleOf = new Map<string, 'origin' | 'insertion'>();
+        if (this.view.attachmentObservation) for (const role of ['insertion', 'origin'] as const) for (const key of attachmentObservationKeys(rows, this.view, role)) attachmentRoleOf.set(key, role);
         const highlights = new Set(innervationHighlightKeys(rows, this.view, visibleKeys));
         const observe = observingNerves(rows, this.view, visibleKeys);
         const selectionAlternativeKeys = new Set(this.records.get(this.view.selectedId ?? '')?.selectionSuppressSourceKeys ?? []);
@@ -685,15 +688,17 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
             }
             const selected = key === this.view.selectedId;
             node.visible = visibleKeys.has(key) && !this.view.hiddenSourceKeys?.includes(key) && !selectionAlternativeKeys.has(key) && !(selected && this.view.selectedPresentation === 'hidden');
-            const observedRole = attachmentBones.has(key) ? this.view.attachmentObservation!.role : null;
+            const observedRole = attachmentBones.has(key) ? this.view.attachmentObservation!.role : attachmentRoleOf.get(key) ?? null;
             const drawnArea = observedRole && attachmentRows.some(r => r.bone === key && r.role === observedRole);
-            const attachmentMode = observedRole ? observedRole === 'origin' ? drawnArea ? 'originAreaContext' : 'originContext'
-                : drawnArea ? 'insertionAreaContext' : 'insertionContext' : null;
+            // 2026-11-20: with a drawn area the bone keeps its own colour and only the area is painted (a whole tinted bone hid the area);
+            // without one the whole bone carries the role colour. Other bones around are pale context.
+            const attachmentMode: MaterialMode | null = observedRole ? drawnArea ? 'normal' : observedRole === 'origin' ? 'originContext' : 'insertionContext'
+                : this.view.attachmentObservation && this.view.selectedId && !selected && row.kind === 'bone' ? 'dim' : null;
             // While observing its attachments, the selected muscle is see-through so the drawn areas under it show.
             const observingAreas = selected && this.view.attachmentObservation && attachmentRows.length > 0;
             // 4-3 U9 see-through: the selection stays solid; bones read faintly, everything else as a ghost.
             const xray = this.view.xray && this.view.selectedId && !selected && !course.has(key);
-            const mode: MaterialMode = xray && !attachmentMode ? (row.kind === 'bone' ? 'translucent' : 'observationContext') : attachmentMode ?? (this.view.translucentSourceKeys?.includes(key) || observingAreas || selected && this.view.selectedPresentation === 'translucent' ? 'translucent'
+            const mode: MaterialMode = xray && !attachmentMode ? (row.kind === 'bone' ? 'translucent' : 'observationContext') : attachmentMode ?? (observingAreas ? 'attachmentMuscle' : this.view.translucentSourceKeys?.includes(key) || selected && this.view.selectedPresentation === 'translucent' ? 'translucent'
                 : selected || course.has(key) || key === this.quizTarget ? 'selected'
                 // Quiz: the target may lie under muscles or bone, so everything else turns see-through (bones less so).
                 : this.quizTarget && !this.view.selectedId ? row.kind === 'bone' ? 'translucent' : 'observationContext' : observe && row.kind !== 'nerve' ? highlights.has(key) ? 'motorContext' : 'nerveContext'
@@ -787,8 +792,21 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
         for (const p of this.selectedPatches()) { const node = this.resources.nodes.get(p.key); if (node && (!role || p.role === role)) add(node); }
         for (const mesh of this.contactNodes.values()) if (!role || mesh.userData.role === role) add(mesh);
         if (normal.lengthSq() < 1e-12) return null;
-        const centre = box.getCenter(new THREE.Vector3()), radius = Math.max(box.getSize(n).length() / 2, .08);
-        const distance = radius / Math.sin(THREE.MathUtils.degToRad(this.scene.camera.fov) / 2) * 1.2;
+        // 2026-11-20: look from the side the muscle covers the bone (bone centre → muscle centre). The mean patch normal alone
+        // pointed anywhere on a rib (patches wrap round it) and showed the chest from behind.
+        const muscle = this.records.get(this.view.selectedId ?? ''), boneBox = new THREE.Box3();
+        for (const p of this.selectedAttachments()) if (p.bone && (!role || p.role === role)) {
+          const bone = this.records.get(p.bone); if (!bone) continue;
+          boneBox.expandByPoint(n.fromArray(bone.bounds[0])); boneBox.expandByPoint(n.fromArray(bone.bounds[1]));
+        }
+        if (muscle && !boneBox.isEmpty()) {
+          const muscleCentre = new THREE.Box3(new THREE.Vector3().fromArray(muscle.bounds[0]), new THREE.Vector3().fromArray(muscle.bounds[1])).getCenter(new THREE.Vector3());
+          const outward = muscleCentre.sub(boneBox.getCenter(n));
+          if (outward.length() > .01) normal.copy(outward.normalize()).multiplyScalar(.75).addScaledVector(normal.normalize(), .25);
+        }
+        // At least 20 cm across, so the bones around the area are in view too.
+        const centre = box.getCenter(new THREE.Vector3()), radius = Math.max(box.getSize(n).length() / 2, .1);
+        const distance = radius / Math.sin(THREE.MathUtils.degToRad(this.scene.camera.fov) / 2) * 1.05;
         return { position: centre.clone().addScaledVector(normal.normalize(), distance).toArray(), target: centre.toArray(), zoom: 1 };
     }
     /** Frame the drawn attachment areas of the selection (ligament cards, "부착 면 관찰"). Returns false when none are drawn yet. */

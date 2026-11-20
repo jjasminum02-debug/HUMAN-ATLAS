@@ -23,7 +23,7 @@ export function AreaChips({ areas, rows, onSelect }: { areas: AreaRow[]; rows: M
   return <ul className="attachment-area-chips">{areas.map((a, i) => <li key={`${a.key ?? a.bone}:${i}`} className={`area-${a.role}`}>
     <i aria-hidden="true"/>
     {a.bone && rows.get(a.bone) ? <button className="bone-related-muscle" onClick={() => onSelect(a.bone!)}>{rows.get(a.bone)!.label}</button> : <span>뼈 정보 없음</span>}
-    <small>{a.source === 'za' ? '모형 부착면' : '접촉 추정'}</small>
+    <small>{a.source === 'za' ? '붙는 자리' : '붙는 자리(추정)'}</small>
   </li>)}</ul>;
 }
 

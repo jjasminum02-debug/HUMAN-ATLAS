@@ -258,7 +258,7 @@ export default function App() {
         const routeQuery = datasetRouteQuery(nextRoute);
         const url = location.pathname + (routeQuery ? '?' + routeQuery : '');
         if (url !== location.pathname + location.search)
-            history.pushState({ atlasSearchQuery: searchQuery }, '', url);
+            history.pushState({ atlasSearchQuery: searchQuery, atlasPrev: next.selected && next.selected !== route.selected && runtimeByKey.get(next.selected) && learnerRowTitle(runtimeByKey.get(next.selected)!) !== currentCardTitle() ? currentCardTitle() : null }, '', url);
         else history.replaceState({ ...history.state, atlasSearchQuery: searchQuery }, '', url);
         setTextNerveKey(null);
         setRoute(nextRoute);
@@ -268,6 +268,12 @@ export default function App() {
         if (!keepExplore)
             setExploreOpen(false);
     }
+    /** The open card's title, kept on the next history entry so its card can offer "← 돌아가기" (2026-11-20). */
+    function currentCardTitle(): string | null {
+        if (selected) return learnerRowTitle(selected);
+        return selectedTextNerve ? selectedTextNerve.names.koModern : null;
+    }
+    const previousCard: string | null = (selected || selectedTextNerve) && typeof history.state?.atlasPrev === 'string' ? history.state.atlasPrev : null;
     function updateQuery(value: string) {
         setQuery(value);
         // Retain the search that led to a selected history entry. A new search is saved
@@ -315,7 +321,7 @@ export default function App() {
         params.set('nerveConcept', key);
         const nextSearch = `?${params.toString()}`;
         const url = location.pathname + nextSearch;
-        if (url !== location.pathname + location.search) history.pushState({ atlasSearchQuery: query }, '', url);
+        if (url !== location.pathname + location.search) history.pushState({ atlasSearchQuery: query, atlasPrev: key !== textNerveKey ? currentCardTitle() : null }, '', url);
         else history.replaceState({ ...history.state, atlasSearchQuery: query }, '', url);
         setRoute(nextRoute);
         setTextNerveKey(key);
@@ -453,6 +459,7 @@ export default function App() {
     <WholeBodyViewer attachmentRole={attachmentRole} homeRevision={homeRevision} viewResetRevision={viewResetRevision} datasetSource={data} onEntered={setEntered} onMotionHostChange={setMotionHost} onMuscleLayerChange={setMuscleLayerEnabled} onBoneLayerChange={setBoneLayerEnabled} onSelectionHiddenChange={setSelectedSourceHidden} onAcupointPanelChange={onAcupointPanelChange} closeAcupointRevision={closeAcupointRevision} selectionActionsTarget={detailsOpen && selected ? selectionTarget : null} selectionActionsOnCard={Boolean(selected)} regionIds={route.regions} selectedId={route.selected} selectedIds={selectedSourceKeys} whole={!route.regions.length} onWholeChange={() => { resetPresentation(); navigate({ regions: [], selected: route.selected }); }} onSelect={select}/>
    </section>
    {(selected || selectedTextNerve) && <details inert={!entered} className="study-details" id="study-details" open={detailsOpen} onToggle={e => onDetailsToggle(e.currentTarget.open)}><summary className="mobile-detail-summary">{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</summary><div className="study-detail-body"><div className="study-detail-header">
+    {previousCard && <button type="button" className="card-back" onClick={() => history.back()} title="앞에 보던 구조로 돌아가기"><span aria-hidden="true">←</span> {previousCard}</button>}
     <h2>{selected ? learnerRowTitle(selected) : selectedTextNerve!.names.koModern}</h2>{selected && anatomicalPartSubtitle(selected.names.en) && <p className="anatomical-part-subtitle">{anatomicalPartSubtitle(selected.names.en)}</p>}
     {/* 4-3 U2: one line under the title: kind, 신용어 and English (구용어 is the title), side, bookmark and clear. */}
     <div className="card-meta">
@@ -540,7 +547,7 @@ export default function App() {
         return <section className={`attachment-section attachment-summary-block attachment-${role}`} key={role}>
           <h3><i className={role}/>{role === 'origin' ? '기시' : '정지'}<span>{role === 'origin' ? 'ORIGIN' : 'INSERTION'}</span></h3>
           <p>{text || structureUnavailabilityForLearner(role)}</p>
-          {(bones.length > 0 || areas.length > 0) && <button className="attachment-observe" aria-pressed={attachmentRole === role} onClick={() => setAttachmentFocus(attachmentRole === role ? null : {key: attachmentKey, role})}>{attachmentRole === role ? `${name} 관찰 끝내기` : areas.length ? `${name} 면 관찰` : `${name} 뼈 관찰`}<span>{areas.length ? '뼈 위 칠한 면으로 시점 이동' : '뼈 전체 · 부착 문맥'}</span></button>}
+          {(bones.length > 0 || areas.length > 0) && <button className="attachment-observe" aria-pressed={attachmentRole === role} onClick={() => setAttachmentFocus(attachmentRole === role ? null : {key: attachmentKey, role})}>{attachmentRole === role ? `${name} 보기 끝` : `${name} 보기`}<span>{attachmentRole === role ? '모형을 원래대로' : areas.length ? '뼈에 붙는 자리를 색으로, 근육은 반투명' : '붙는 뼈를 색으로, 근육은 반투명'}</span></button>}
           {/* 4-1 step 6: the drawn areas replace the plain bone list when Z-Anatomy or a contact estimate gives them. */}
           {areas.length > 0 ? <AreaChips areas={areas} rows={runtimeByKey} onSelect={select}/>
             : bones.length > 0 && <div className="attachment-bone-links" aria-label={`${name} 관련 뼈`}>{bones.map(bone => <button key={bone.sourceKey} onClick={() => select(bone.sourceKey)}>{bone.label}</button>)}</div>}

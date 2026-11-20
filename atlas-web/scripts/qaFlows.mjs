@@ -283,20 +283,20 @@ const flows = [
     await page.getByRole('button', { name: '처음 자세로' }).click();
     return '굽힘 주동근(상완근)·길항근(삼두근), 어깨뼈 올림(견갑거근)·손가락 굽힘(천지굴근)·목 돌림(흉쇄유돌근), 어깨 벌림 120° → 어깨뼈 위쪽돌림 30°(전거근), 처음 자세 복귀';
   }],
-  ['층 벗기기: 근막 → 얕은 근육, 되돌리기, 투명도, 단면', async page => {
+  ['층 벗기기: 얕은 → 깊은 근육, 되돌리기, 투명도, 단면', async page => {
     await open(page);
-    // 4-3 U6: layers sit behind one "층" button; the toolbar is one row of at most 8 buttons.
-    const row = await page.locator('.toolbar-main .view-options-row button').evaluateAll(b => ({ n: b.filter(x => x.offsetParent).length, tops: new Set(b.map(x => Math.round(x.getBoundingClientRect().top))).size }));
-    expect(row.n <= 8 && row.tops === 1, `도구 막대 ${row.n}개 · ${row.tops}줄`);
+    // 2026-11-20 dock: one row of at most 8 icon buttons in 4 groups; no fascia layer for learners.
+    const row = await page.locator('.toolbar-main .view-options-row button').evaluateAll(b => ({ n: b.filter(x => x.offsetParent).length, tops: new Set(b.map(x => Math.round(x.getBoundingClientRect().top))).size,
+      groups: document.querySelectorAll('.tool-dock .tool-group').length, icons: document.querySelectorAll('.tool-dock .tool-icon').length }));
+    expect(row.n <= 8 && row.tops === 1 && row.groups === 4 && row.icons === row.n, `도구 막대 ${JSON.stringify(row)}`);
     await page.locator('.layers-toggle').click();
-    await page.locator('.layer-row button', { hasText: '근막' }).click();
-    await settle(page);
+    expect(await page.locator('.layer-row button', { hasText: '근막' }).count() === 0, '근막 층 버튼이 남아 있음');
     await page.getByRole('button', { name: '한 겹 벗기기' }).click();
-    expect(await pressed(page, '.layer-row', '근막') === 'false', '첫 벗기기에서 근막이 꺼지지 않음');
+    expect(await pressed(page, '.layer-row', '얕은 근육') === 'false', '첫 벗기기에서 얕은 근육이 꺼지지 않음');
     await page.getByRole('button', { name: '한 겹 벗기기' }).click();
-    expect(await pressed(page, '.layer-row', '얕은 근육') === 'false', '두 번째 벗기기에서 얕은 근육이 꺼지지 않음');
+    expect(await pressed(page, '.layer-row', '깊은 근육') === 'false', '두 번째 벗기기에서 깊은 근육이 꺼지지 않음');
     await page.getByRole('button', { name: '벗긴 층 되돌리기' }).click();
-    expect(await pressed(page, '.layer-row', '얕은 근육') === 'true', '되돌리기에서 얕은 근육이 돌아오지 않음');
+    expect(await pressed(page, '.layer-row', '깊은 근육') === 'true', '되돌리기에서 깊은 근육이 돌아오지 않음');
     await page.locator('.layer-opacity label', { hasText: '뼈' }).locator('input').fill('50');
     const translucent = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && o.material?.name?.startsWith('bone:') && o.material.opacity < .6) n++; }); return n; });
     expect(translucent > 50, `반투명 뼈 ${translucent}개`);
@@ -312,7 +312,7 @@ const flows = [
     await page.locator('#section-panel button', { hasText: '끄기' }).click();
     const off = await sectionState();
     expect(off.planes === 0 && off.both === 0, `단면 끔: ${JSON.stringify(off)}`);
-    return `벗기기·되돌리기, 뼈 50% (${translucent}개), 가로 단면 ${on.both}개 면 채움 후 해제`;
+    return `도구 막대 4묶음·아이콘, 근막 없음, 벗기기·되돌리기, 뼈 50% (${translucent}개), 가로 단면 ${on.both}개 면 채움 후 해제`;
   }],
   ['신경 보기: 좌골신경 주행', async page => {
     await open(page);
@@ -332,7 +332,7 @@ const flows = [
     await search(page, '넙다리곧은근', '대퇴직근'); // modern name finds the Sino-Korean title
     await openSection(page, '구조');
     const button = page.locator('.attachment-origin .attachment-observe');
-    expect((await button.innerText()).startsWith('기시 면 관찰'), `버튼: ${await button.innerText()}`);
+    expect((await button.innerText()).startsWith('기시 보기'), `버튼: ${await button.innerText()}`);
     const distance = () => page.evaluate(() => window.__atlasScene.camera.position.distanceTo(window.__atlasScene.controls.target));
     const before = await distance();
     await button.click();
@@ -342,11 +342,24 @@ const flows = [
     // 4-1 step 6: the camera goes to the drawn origin area, closer than the whole-body view.
     const after = await distance();
     expect(after < before * .6, `기시 면으로 다가가지 않음 (${before.toFixed(2)} → ${after.toFixed(2)}m)`);
-    const origin = Object.values(await scene(page)).filter(n => n.visible && /^bone:origin(Area)?Context/.test(n.material)).length;
-    expect(origin >= 1, '기시 뼈 색이 없음');
+    // 2026-11-20: a bone with a drawn area keeps its colour and only the area is painted; without one the bone is tinted.
+    const origin = Object.values(await scene(page)).filter(n => n.visible && (/^bone:originContext/.test(n.material) || /attachmentOrigin/.test(n.material))).length;
+    expect(origin >= 1, '기시 자리 색이 없음');
+    const muscle = await page.evaluate(() => { let m = ''; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.userData.sourceKey === new URLSearchParams(location.search).get('source')) m = o.material.name; }); return m; });
+    expect(/attachmentMuscle/.test(muscle), `근육이 반투명이 아님: ${muscle}`);
     await button.click();
     expect(await button.getAttribute('aria-pressed') === 'false', '기시 관찰이 끝나지 않음');
-    return `기시 면 관찰(시점 ${before.toFixed(1)} → ${after.toFixed(1)}m), 기시 뼈 ${origin}개 표시 후 해제`;
+    // 2026-11-20: a bone opened from the card offers "← 넙다리곧은근"; it returns to the muscle.
+    const title = () => page.locator('.study-details > summary').innerText();
+    const muscleTitle = await title();
+    await page.locator('.attachment-origin :is(.attachment-bone-links, .attachment-area-chips) button').first().click();
+    await settle(page);
+    const back = page.locator('.card-back');
+    expect((await back.innerText()).includes(muscleTitle.trim()) && (await title()) !== muscleTitle, `돌아가기 버튼: ${await back.count() ? await back.innerText() : '없음'}`);
+    await back.click();
+    await page.waitForTimeout(400);
+    expect((await title()) === muscleTitle, `돌아가기 후 카드: ${await title()}`);
+    return `기시 보기(시점 ${before.toFixed(1)} → ${after.toFixed(1)}m), 기시 자리 ${origin}개·근육 반투명 후 해제, 뼈 카드 → ← 돌아가기`;
   }],
   ['부위 탐색: 넙다리 부위 목록과 시점', async page => {
     await open(page);

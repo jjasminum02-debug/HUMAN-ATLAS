@@ -6,7 +6,9 @@ import { installSectionCap } from './section.ts';
 export type Tissue = 'bone' | 'muscle' | 'nerve' | 'accessory' | 'tendon' | 'fascia' | 'joint' | 'vessel';
 export type MaterialMode = 'normal' | 'selected' | 'dim' | 'translucent' | 'nerveContext' | 'motorContext' | 'innervated' | 'observationContext' | 'motionContext' | 'originContext' | 'insertionContext'
   /** C4: the bone carries the muscle's drawn origin/insertion area, so the whole-bone cue is lighter and the area reads. */
-  | 'originAreaContext' | 'insertionAreaContext';
+  | 'originAreaContext' | 'insertionAreaContext'
+  /** The selected muscle while its attachments are observed: its own colour, half see-through so the areas under it show. */
+  | 'attachmentMuscle';
 /** variant: fine tissue (ligament, meniscus, tooth ...); layerOpacity: learner's per-layer opacity (0.1-1);
  * role: M3 movement colouring (muscles producing / opposing the shown movement), or a meridian sinew's region. */
 export type MaterialState = { mode?: MaterialMode; phase?: 'action' | 'return' | null; role?: 'agonist' | 'antagonist' | 'meridian' | 'postureShort' | 'postureWeak'; contextOpacity?: number; userTranslucent?: boolean; hovered?: boolean; variant?: string; layerOpacity?: number };
@@ -53,7 +55,7 @@ export function anatomyMaterialParameters(tissue: Tissue, state: MaterialState =
   if (tissue === 'muscle' && state.phase) color.set(ANATOMY_PALETTE[state.phase]);
   if ((tissue === 'muscle' || tissue === 'tendon') && state.role) color.set(ANATOMY_PALETTE[state.role]);
   if (mode === 'dim' && tissue !== 'nerve') color.lerp(new THREE.Color(HIERARCHY.contextColor), HIERARCHY.contextTint);
-  const modeOpacity = mode === 'translucent' || state.userTranslucent ? .3 : mode === 'nerveContext' ? .12 : mode === 'motorContext' ? .5
+  const modeOpacity = mode === 'attachmentMuscle' ? .5 : mode === 'translucent' || state.userTranslucent ? .3 : mode === 'nerveContext' ? .12 : mode === 'motorContext' ? .5
     : mode === 'observationContext' ? .18 : mode === 'motionContext' ? Math.max(.1, Math.min(.6, state.contextOpacity ?? .3)) : 1;
   // Fascia is a sheet over the muscles: translucent by default unless selected.
   const tissueOpacity = tissue === 'fascia' && mode !== 'selected' ? .5 : (mode === 'selected' ? 1 : VARIANT_OPACITY[state.variant ?? ''] ?? 1);

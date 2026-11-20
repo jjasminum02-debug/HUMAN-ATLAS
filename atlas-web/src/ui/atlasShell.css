@@ -216,6 +216,10 @@
 .atlas-shell .mobile-detail-summary { display: none; }
 .atlas-shell .study-detail-body { display: flex; flex-direction: column; height: calc(var(--detail-panel-height) - var(--detail-summary-height) - 2px); min-height: 0; }
 .atlas-shell .study-detail-header { flex: none; padding: 16px 16px 0; min-width: 0; }
+/* 2026-11-20: back to the card seen before (a muscle → its nerve or rib → back). */
+.atlas-shell .card-back { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; min-height: 32px; margin: 0 0 2px; padding: 4px 12px 4px 10px; border: 1px solid #d5dfdb; border-radius: 999px; background: #f6faf8; color: #2f5d50; font-size: 13px; font-weight: 600; cursor: pointer; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.atlas-shell .card-back span { font-size: 15px; }
+.atlas-shell .card-back:hover { background: #e9f4ef; }
 .atlas-shell .study-detail-header > h2 { font-size: 23px; letter-spacing: -.04em; margin: 8px 0 12px; line-height: 1.35; }
 .atlas-shell .study-detail-header > .bone-related-muscle { float: right; font-size: 11px; min-height: 32px; }
 .atlas-shell .study-detail-header .part-pills { margin: 8px 0; }
@@ -763,3 +767,34 @@
 .atlas-shell .channel-neighbours button { min-height: 30px; padding: 2px 9px; border: 1px solid #e2cdbd; border-radius: 8px; background: #fff; color: #7c2d12; font-size: 12px; cursor: pointer; }
 .atlas-shell .channel-neighbours .channel-play { background: #fff4e6; border-color: #f0b27a; font-weight: 600; margin: 0 auto; }
 @media (pointer: coarse) { .atlas-shell .channel-neighbours button { min-height: 40px; } }
+
+/* ── 2026-11-20 tool dock ─────────────────────────────────────────────────────
+   The toolbar is one floating dock at the bottom centre: icon over a short label, four groups split by thin rules
+   (층 · 화면 · 도구 · 더보기). Panels the dock opens float above it as cards; the canvas stays visible around them. */
+.atlas-shell .body-tools { background: transparent; border: 0; padding: 0; align-items: center; pointer-events: none; }
+.atlas-shell .body-tools > * { pointer-events: auto; }
+.atlas-shell .body-tools > .toolbar-main { order: 10; }
+.atlas-shell .body-tools > :is(.layer-panel, .more-panel, .section-panel, .movement-panel, .selection-view-options) {
+  width: min(640px, 100%); box-sizing: border-box; padding: 10px 12px; border: 1px solid #dfe6e0; border-radius: 14px; background: #fffffff5; box-shadow: 0 10px 30px #1d3b3018; }
+.atlas-shell .body-tools > .layer-panel[hidden] { display: none; }
+.atlas-shell .toolbar-main { display: block; max-width: 100%; }
+.atlas-shell .toolbar-main .tool-dock { display: flex; flex-wrap: nowrap; align-items: stretch; gap: 0; margin: 0; padding: 5px; border: 1px solid #dfe6e0; border-radius: 18px; background: #fffffff7;
+  box-shadow: 0 10px 30px #1d3b301c, 0 1px 2px #1d3b3012; overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+.atlas-shell .toolbar-main .tool-dock::-webkit-scrollbar { display: none; }
+.atlas-shell .tool-group { display: flex; gap: 2px; padding: 0 5px; }
+.atlas-shell .tool-group + .tool-group { border-left: 1px solid #e6ebe7; }
+.atlas-shell .body-tools .toolbar-main button.tool { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; flex: none;
+  min-width: 62px; min-height: 54px; padding: 6px 8px 5px; border: 0; border-radius: 12px; background: transparent; color: #3e5a52; font-size: 11px; line-height: 1.2; white-space: nowrap;
+  transition: background .12s, color .12s; }
+.atlas-shell .body-tools .toolbar-main button.tool:hover:not(:disabled) { background: #eef4f1; }
+.atlas-shell .body-tools .toolbar-main button.tool:is([aria-expanded=true], [aria-pressed=true]) { background: #e1eee8; color: #24574a; }
+.atlas-shell .body-tools .toolbar-main button.tool:disabled { opacity: .35; }
+.atlas-shell .tool-icon { display: block; }
+.atlas-shell .body-tools .toolbar-main button.tool small { position: absolute; top: 4px; right: 9px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: #47796b; color: #fff;
+  font-size: 10px; line-height: 16px; text-align: center; box-sizing: border-box; }
+.atlas-shell .body-tools .layer-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.atlas-shell .body-tools .layer-row button { min-height: 36px; padding: 6px 12px; border-radius: 999px; width: auto; white-space: nowrap; }
+@media (max-width:599px) {
+  .atlas-shell .body-tools .toolbar-main button.tool { min-width: 54px; min-height: 50px; padding: 5px 6px 4px; font-size: 10px; }
+  .atlas-shell .tool-group { padding: 0 3px; }
+}

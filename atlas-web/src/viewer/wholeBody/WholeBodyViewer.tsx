@@ -25,7 +25,9 @@ const acupointDevelopmentReview = import.meta.env.DEV && new URLSearchParams(win
 const surfaceSample = import.meta.env.DEV && new URLSearchParams(window.location.search).get('carrierSample') === '1';
 const territoryDevelopmentReview = import.meta.env.DEV && window.location.pathname === '/review' && new URLSearchParams(window.location.search).get('territories') === '1';
 /** Outer to inner: the order "한 겹 벗기기" removes layers in. Bone and nerve are never peeled. */
-const PEEL_ORDER: LayerId[] = ['fascia', 'superficialMuscle', 'deepMuscle', 'joint'];
+const PEEL_ORDER: LayerId[] = ['superficialMuscle', 'deepMuscle', 'joint'];
+/** 2026-11-20: fascia is not offered to learners (the user asked; a sheet over the muscles only hid them). A fascia found by search still shows. */
+const LEARNER_LAYERS: LayerId[] = ['superficialMuscle', 'deepMuscle', 'joint', 'bone', 'nerve', 'vessel'];
 const LAYER_LABELS: Record<LayerId, string> = { fascia: '근막', superficialMuscle: '얕은 근육', deepMuscle: '깊은 근육', joint: '인대·관절', bone: '뼈', nerve: '신경', vessel: '혈관' };
 const DEFAULT_LAYERS: Record<LayerId, boolean> = { fascia: false, superficialMuscle: true, deepMuscle: true, joint: false, bone: true, nerve: false, vessel: false };
 
@@ -99,6 +101,8 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
     // Selecting a structure (e.g. from search) turns its layer on; nerves keep their own rule below.
     const layer = selectedSourceRow && selectedSourceRow.kind !== 'nerve' ? layerIdOf(selectedSourceRow) : null;
     if (layer) setLayers(previous => previous[layer] ? previous : { ...previous, [layer]: true });
+    // Fascia has no learner toggle: it shows only while a fascia found by search is selected.
+    if (layer !== 'fascia') setLayers(previous => previous.fascia ? { ...previous, fascia: false } : previous);
   }, [selectedSourceRow?.sourceKey]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     // Initial nerve selection is visible; an explicit learner layer-off persists.
@@ -221,25 +225,34 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
       <span className="view-options-label">보기 옵션</span>
       {/* 4-3 U6: one row — layers behind one button, peel/undo, fit, movement, section, more; selection actions sit on the card. */}
       <div className="toolbar-main">
-        <div className="view-options-row">
-        <button className="layers-toggle" aria-expanded={layersOpen} aria-controls="layer-panel" title="보일 층(근육·뼈·신경 등)과 층 투명도" onClick={() => setLayersOpen(open => !open)}>
-          층<small>{(Object.keys(LAYER_LABELS) as LayerId[]).filter(id => layers[id]).length}</small></button>
-        <button disabled={!peelTarget} title="바깥쪽 층부터 하나씩 숨겨 안쪽 구조를 봅니다." onClick={peel}>한 겹 벗기기</button>
-        <button disabled={!peeled.length} aria-label="벗긴 층 되돌리기" title="벗긴 층 되돌리기" onClick={unpeel}>되돌리기</button>
-        <button onClick={() => {const c=controller.current;if(c instanceof DatasetSceneAdapter&&c.scene.handleObservationFit('all'))return;c?.focus(regionIds);}}>화면 맞춤</button>
-          <button aria-expanded={movementOpen} aria-controls="movement-panel" title="관절을 움직이고 작용 근육을 색으로 봅니다." onClick={() => setMovementOpen(open => !open)}>관절 움직임</button>
-          <button aria-expanded={sectionOpen} aria-pressed={Boolean(section)} aria-controls="section-panel" title="모형을 한 면에서 잘라 속을 봅니다." onClick={() => setSectionOpen(open => !open)}>단면</button>
-          <button aria-expanded={moreOpen} aria-controls="view-more" onClick={() => setMoreOpen(open => !open)}>더보기</button>
+        {/* 2026-11-20: one dock of icon buttons in four groups — layers (층, 벗기기, 되돌리기) · view (맞춤) · tools (움직임, 단면) · 더보기. */}
+        <div className="view-options-row tool-dock">
+          <div className="tool-group" role="group" aria-label="층">
+            <button className="layers-toggle tool" aria-expanded={layersOpen} aria-controls="layer-panel" title="보일 층(근육·뼈·신경 등)과 층 투명도" onClick={() => setLayersOpen(open => !open)}>
+              <ToolIcon name="layers"/><span>층</span><small>{LEARNER_LAYERS.filter(id => layers[id]).length}</small></button>
+            <button className="tool" disabled={!peelTarget} title="바깥쪽 층부터 하나씩 숨겨 안쪽 구조를 봅니다." onClick={peel}><ToolIcon name="peel"/><span>한 겹 벗기기</span></button>
+            <button className="tool" disabled={!peeled.length} aria-label="벗긴 층 되돌리기" title="벗긴 층 되돌리기" onClick={unpeel}><ToolIcon name="undo"/><span>되돌리기</span></button>
+          </div>
+          <div className="tool-group" role="group" aria-label="화면">
+            <button className="tool" title="보이는 구조가 화면에 꽉 차게" onClick={() => {const c=controller.current;if(c instanceof DatasetSceneAdapter&&c.scene.handleObservationFit('all'))return;c?.focus(regionIds);}}><ToolIcon name="fit"/><span>화면 맞춤</span></button>
+          </div>
+          <div className="tool-group" role="group" aria-label="살펴보기 도구">
+            <button className="tool" aria-expanded={movementOpen} aria-controls="movement-panel" title="관절을 움직이고 작용 근육을 색으로 봅니다." onClick={() => setMovementOpen(open => !open)}><ToolIcon name="joint"/><span>관절 움직임</span></button>
+            <button className="tool" aria-expanded={sectionOpen} aria-pressed={Boolean(section)} aria-controls="section-panel" title="모형을 한 면에서 잘라 속을 봅니다." onClick={() => setSectionOpen(open => !open)}><ToolIcon name="section"/><span>단면</span></button>
+          </div>
+          <div className="tool-group" role="group" aria-label="그 밖의 설정">
+            <button className="tool" aria-expanded={moreOpen} aria-controls="view-more" onClick={() => setMoreOpen(open => !open)}><ToolIcon name="more"/><span>더보기</span></button>
+          </div>
         </div>
       </div>
       {/* Kept in the page while folded so the pressed state of every layer stays readable. */}
       <div className="layer-panel" id="layer-panel" hidden={!layersOpen}>
       <div className="layer-row" role="group" aria-label="구조 층">
-        {(Object.keys(LAYER_LABELS) as LayerId[]).filter(id => id !== 'nerve' || staticPose).map(id => <button key={id} aria-pressed={layers[id]}
+        {LEARNER_LAYERS.filter(id => id !== 'nerve' || staticPose).map(id => <button key={id} aria-pressed={layers[id]}
           onClick={() => { if (id === 'nerve') nerveLayerExplicitlyOff.current = nerves; toggleLayer(id); }}>{LAYER_LABELS[id]}</button>)}
       </div>
         <div className="layer-opacity" id="layer-opacity" role="group" aria-label="층 투명도">
-        {(Object.keys(LAYER_LABELS) as LayerId[]).filter(id => layers[id]).map(id => <label key={id}><span>{LAYER_LABELS[id]}</span>
+        {LEARNER_LAYERS.filter(id => layers[id]).map(id => <label key={id}><span>{LAYER_LABELS[id]}</span>
           <input type="range" min={10} max={100} step={5} value={Math.round((layerOpacity[id] ?? 1) * 100)}
             onChange={event => setLayerOpacity(previous => ({ ...previous, [id]: Number(event.target.value) / 100 }))}/>
           <output>{Math.round((layerOpacity[id] ?? 1) * 100)}%</output></label>)}
@@ -279,4 +292,19 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
       <small>현재 확보된 모형을 표시합니다. 일부 구조와 설명은 준비 중입니다.</small>
     </div>
   </div>;
+}
+
+/** Line icons for the tool dock (24-unit box, current colour). */
+function ToolIcon({ name }: { name: 'layers' | 'peel' | 'undo' | 'fit' | 'joint' | 'section' | 'more' }) {
+  const d = {
+    layers: 'M12 4 3 8.5l9 4.5 9-4.5L12 4ZM3 12.5l9 4.5 9-4.5M3 16.5l9 4.5 9-4.5',
+    peel: 'M3 14.5l9 4.5 9-4.5M12 3v8.5M8.5 6.5 12 3l3.5 3.5',
+    undo: 'M9 7 4.5 11.5 9 16M5 11.5h9a5 5 0 0 1 0 10h-2',
+    fit: 'M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5',
+    joint: 'M5 19l5-5M14 10l5-5M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM16.5 17.5a6.5 6.5 0 0 0 1-6',
+    section: 'M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9ZM4 12.5l16-4',
+    more: 'M6 12h.01M12 12h.01M18 12h.01',
+  }[name];
+  return <svg className="tool-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor"
+    strokeWidth={name === 'more' ? 3.2 : 1.7} strokeLinecap="round" strokeLinejoin="round"><path d={d}/></svg>;
 }

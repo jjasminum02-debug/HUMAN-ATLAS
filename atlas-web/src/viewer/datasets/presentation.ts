@@ -2,12 +2,12 @@ import type { BodyView, LayerId } from '../wholeBody/contract.ts';
 import type { RuntimeStructureRecord } from './integration.ts';
 import { attachmentBoneKeys, inRegionalScene, regionalAttachmentBoneKeys } from './regionalContext.ts';
 /** Exact selected muscle/side and existing same-source bones only; no footprint or new binding. */
-export function attachmentObservationKeys(rows: RuntimeStructureRecord[], view: BodyView) {
+export function attachmentObservationKeys(rows: RuntimeStructureRecord[], view: BodyView, role: 'origin' | 'insertion' | undefined = view.attachmentObservation?.role) {
   const focus = view.attachmentObservation;
   const muscle = rows.find(r => r.sourceKey === focus?.sourceKey && r.sourceKey === view.selectedId
     && r.kind === 'muscle' && r.localDisplayEligible && r.defaultVisible && !r.hardHoldReasons.length);
-  if (!muscle || !focus) return [];
-  const keys = new Set(attachmentBoneKeys(muscle.sourceKey, focus.role, rows));
+  if (!muscle || !focus || !role) return [];
+  const keys = new Set(attachmentBoneKeys(muscle.sourceKey, role, rows));
   return rows.filter(r => keys.has(r.sourceKey) && r.kind === 'bone' && r.localDisplayEligible && r.defaultVisible
     && !r.hardHoldReasons.length && !r.sourceHiddenStatePreserved.hideViewport
     && (r.side === muscle.side || r.side === null || r.side === 'midline')
@@ -48,8 +48,11 @@ export function observationContextKeys(rows: RuntimeStructureRecord[], view: Bod
   const selection = rows.find(r => r.sourceKey === view.selectedId);
   if (!selection) return [];
   if (view.attachmentObservation) {
-    const bones = new Set(attachmentObservationKeys(rows, view));
-    return rows.filter(r => (r.sourceKey === selection.sourceKey || bones.has(r.sourceKey))
+    // 2026-11-20: both ends of the muscle and the skeleton around them, so the learner sees where on the body it spans.
+    const bones = new Set([...attachmentObservationKeys(rows, view, 'origin'), ...attachmentObservationKeys(rows, view, 'insertion')]);
+    return rows.filter(r => (r.sourceKey === selection.sourceKey || bones.has(r.sourceKey)
+      || r.kind === 'bone' && r.localDisplayEligible && r.defaultVisible && r.regionIds.some(id => selection.regionIds.includes(id))
+        && (!r.side || r.side === 'midline' || r.side === selection.side))
       && layerAvailable(r, view) && !view.hiddenSourceKeys?.includes(r.sourceKey)).map(r => r.sourceKey);
   }
   const related = new Set([...nerveCourseKeys(rows, view), selection.sourceKey, ...attachmentBoneKeys(selection.sourceKey, undefined, rows),
