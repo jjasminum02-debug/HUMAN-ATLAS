@@ -44,6 +44,6 @@ export function MusclePosture({ muscle }: { muscle: RuntimeStructureRecord }) {
   return <section className="attachment-section posture-membership" aria-label="체형 패턴">
     <h3>체형 패턴에서</h3>
     <ul>{hits.map(({ pattern, role }) => <li key={pattern.id}><strong>{pattern.name}</strong> — {role === 'short' ? '긴장·짧아지는 쪽' : '약해지는 쪽'}<span>{pattern.signs}</span></li>)}</ul>
-    <p className="card-hint">경혈·경근 창의 기준점 보기에서 패턴 전체를 색으로 볼 수 있습니다.</p>
+    <p className="card-hint">도구 막대 더보기의 체형 패턴에서 패턴 전체를 색으로 볼 수 있습니다.</p>
   </section>;
 }

@@ -1,6 +1,5 @@
 // Acupoint panel (ROADMAP 4-1 step 7): channel points on the model, their location and the structures around them.
 import { useEffect, useState } from 'react';
-import { PosturePatternList } from '../../ui/PosturePatterns';
 import type { RuntimeStructureRecord } from '../datasets/integration';
 import { acupointId, channelPath, channelSide, isBinding, landmarkId, LOCATION_BASIS_LABEL, locationBasis, sixChannelOf, type AcupointInstance, type Landmark, type AcupointFile, type AcupointHost, type AcupointTarget, type SinewFile } from '../acupointLayer';
 
@@ -66,22 +65,22 @@ export function AcupointPanel({ host, rows, request = null, onSelectStructure, o
     </div>
     {mode === 'landmarks' ? <LandmarkView host={host} file={data} rows={rows} onSelectStructure={onSelectStructure} request={landmarkRequest}/>
     : mode === 'sinews' ? <SinewView host={host} rows={rows} request={sinewRequest} acupoints={data} onPoint={goToPoint} onSelectStructure={onSelectStructure}/> : <>
-    <div className="acupoint-channels" role="group" aria-label="경맥">
-      {Object.entries(data.channels).map(([code, c]) => <button key={code} aria-pressed={channel === code} title={`${c.nameKo} ${c.nameHanja}`}
-        onClick={() => { setChannel(code); setSelected(null); host.selectAcupoint(null, false); }}>{c.nameKo.replace(/^[수족]/, '').replace(/^(태음|양명|소음|태양|궐음|소양)/, '')}<small>{code}</small></button>)}
-    </div>
+    <Picker label="경맥" current={current ? `${current.nameKo} ${channel}` : channel} items={Object.entries(data.channels).map(([code, c]) => ({ code, title: `${c.nameKo} ${c.nameHanja}`,
+      short: c.nameKo.replace(/^[수족]/, '').replace(/^(태음|양명|소음|태양|궐음|소양)/, '') }))} value={channel}
+      onPick={code => { setChannel(code); setSelected(null); host.selectAcupoint(null, false); }}/>
     {current && !current.midline && <div className="movement-side" role="group" aria-label="몸의 쪽">
       {(['right', 'left'] as const).map(s => <button key={s} aria-pressed={side === s} onClick={() => { setSide(s); if (point && point.side !== 'midline') choose(acupointId({ code: point.code, side: s })); }}>{s === 'right' ? '오른쪽' : '왼쪽'}</button>)}
     </div>}
     {sinews?.sinews[channel] && <label className="acupoint-sinew-toggle"><input type="checkbox" checked={withSinew} onChange={e => setWithSinew(e.target.checked)}/>
       <i aria-hidden="true"/>{sinews.sinews[channel].nameKo} 함께 보기</label>}
+    {/* 4-3 U10: the answer first (name, where, how it is found), the structures around it in folds. */}
     {point && concept && <section className="acupoint-detail" aria-label="선택한 경혈">
       <h4>{concept.nameKo} <span>{concept.hanja} · {concept.code} · {SIDE[point.side]}</span></h4>
       <p>{concept.location}</p>
       <PointBasis location={concept.location}/>
       <Beneath point={point} rows={rows} onSelectStructure={onSelectStructure}/>
-      {point.near.length > 0 && <><h5>주변 구조</h5><div className="attachment-bone-links">{point.near.map(key => rows.get(key)).filter((r): r is RuntimeStructureRecord => Boolean(r))
-        .map(r => <button key={r.sourceKey} className="bone-related-muscle" onClick={() => onSelectStructure(r.sourceKey, r.side)}>{r.label}</button>)}</div></>}
+      {point.near.length > 0 && <details className="point-fold"><summary>주변 구조 <small>{point.near.length}</small></summary><div className="attachment-bone-links">{point.near.map(key => rows.get(key)).filter((r): r is RuntimeStructureRecord => Boolean(r))
+        .map(r => <button key={r.sourceKey} className="bone-related-muscle" onClick={() => onSelectStructure(r.sourceKey, r.side)}>{r.label}</button>)}</div></details>}
     </section>}
     {current && <section className="acupoint-channel">
       <h4>{current.nameKo}<span>{current.nameHanja} · {current.codes.length}혈</span></h4>
@@ -89,7 +88,8 @@ export function AcupointPanel({ host, rows, request = null, onSelectStructure, o
         return <li key={acupointId(p)}><button aria-pressed={selected === acupointId(p)} onClick={() => choose(acupointId(p))}>
           <span>{c.nameKo}</span><small>{c.hanja} · {c.code}</small></button></li>; })}</ol>
     </section>}
-    <p className="quiet-note">뼈 표지와 골도분촌(비례촌)으로 이 모형 위에 계산한 교육용 위치이며, 실제 취혈·시술 안내가 아닙니다. 관절을 움직이면 함께 따라갑니다.</p>
+    <PanelLimits items={['경혈은 뼈 표지와 골도분촌(비례촌)으로 이 모형 위에 계산한 교육용 위치이며, 실제 취혈·시술 안내가 아닙니다. 관절을 움직이면 함께 따라갑니다.',
+      '아래 지나는 혈관·신경은 혈 자리에서 곧게 안쪽으로 6cm까지, 1cm 반경 안을 이 모형에서 잰 값입니다. 사람·체형·자세에 따라 다르며 자침 깊이 기준이 아닙니다.']}/>
     </>}
   </aside>;
 }
@@ -117,17 +117,15 @@ function SinewView({ host, rows, request, acupoints, onPoint, onSelectStructure 
   const current = data.sinews[sinew];
   const muscles = [...new Map(current.muscles[side].map(key => rows.get(key)).filter((r): r is RuntimeStructureRecord => Boolean(r)).map(r => [r.label, r])).values()];
   return <>
-    <div className="acupoint-channels" role="group" aria-label="경근">
-      {data.order.map(code => { const s = data.sinews[code]; return <button key={code} aria-pressed={sinew === code} title={`${s.nameKo} ${s.hanja}`}
-        onClick={() => setSinew(code)}>{s.nameKo.replace(/경근$/, '')}<small>{code}</small></button>; })}
-    </div>
+    <Picker label="경근" current={`${current.nameKo} ${sinew}`} value={sinew} onPick={setSinew}
+      items={data.order.map(code => ({ code, title: `${data.sinews[code].nameKo} ${data.sinews[code].hanja}`, short: data.sinews[code].nameKo.replace(/경근$/, '') }))}/>
     <section className="acupoint-detail sinew-detail" aria-label="선택한 경근">
       <h4>{current.nameKo} <span>{current.hanja}</span></h4>
       {current.strands.map((strand, i) => <ol key={i} className="sinew-strand">{strand.map((n, j) => {
         const concept = acupoints.concepts.find(c => c.code === n.anchor), id = acupointId({ code: n.anchor, side: acupoints.points.some(p => p.code === n.anchor && p.side === 'midline') ? 'midline' : side });
         return <li key={j} className={isBinding(n) ? 'sinew-binding' : undefined}>{isBinding(n) && <b className="binding-mark">結</b>}{n.label}
           {concept && <button className="sinew-anchor" onClick={() => onPoint(id)} title="이 자리를 경혈 보기로">{concept.nameKo}<small>{concept.code}</small></button>}</li>; })}</ol>)}
-      <p className="quiet-note">結은 경근이 뼈·관절에 맺히는 곳입니다(모형 위 큰 호박색 점). 그 자리의 혈은 바닥이 되는 뼈와 건이 있어 매번 같은 곳을 짚기 쉽습니다.</p>
+      <p className="card-hint"><b className="binding-mark">結</b> 경근이 뼈·관절에 맺히는 곳(모형 위 큰 호박색 점) — 그 자리의 혈은 매번 같은 곳을 짚기 쉽습니다.</p>
       {current.internal.length > 0 && <p className="quiet-note">몸속 경로(선으로 그리지 않음): {current.internal.join(' · ')}</p>}
       <div className="movement-side" role="group" aria-label="몸의 쪽">
         {(['right', 'left'] as const).map(s => <button key={s} aria-pressed={side === s} onClick={() => setSide(s)}>{s === 'right' ? '오른쪽' : '왼쪽'}</button>)}
@@ -138,8 +136,26 @@ function SinewView({ host, rows, request, acupoints, onPoint, onSelectStructure 
       {muscles.length > 0 && <><h5>경로가 지나는 근육</h5><div className="attachment-bone-links">{muscles
         .map(r => <button key={r.sourceKey} className="bone-related-muscle" onClick={() => onSelectStructure(r.sourceKey, r.side)}>{r.label}</button>)}</div></>}
     </section>
-    <p className="quiet-note">『영추·경근』의 맺히는 곳(結)을 이 모형의 해당 부위에 이어 그린 교육용 경로입니다. 근육 목록은 선 아래 근육을 모형에서 잰 것이며, 시술 안내가 아닙니다.</p>
+    <PanelLimits items={['『영추·경근』의 맺히는 곳(結)을 이 모형의 해당 부위에 이어 그린 교육용 경로입니다. 근육 목록은 선 아래 근육을 모형에서 잰 것이며, 시술 안내가 아닙니다.']}/>
   </>;
+}
+
+/** 4-3 U10: the channel (or sinew) choice folded to one button; the 14-button grid opens under it. */
+function Picker({ label, current, items, value, onPick }: {
+  label: string; current: string; value: string; onPick: (code: string) => void; items: { code: string; title: string; short: string }[];
+}) {
+  const [open, setOpen] = useState(false);
+  return <div className="channel-picker">
+    <button className="channel-picker-toggle" aria-expanded={open} onClick={() => setOpen(o => !o)}><small>{label}</small>{current}</button>
+    {open && <div className="acupoint-channels" role="group" aria-label={label}>
+      {items.map(i => <button key={i.code} aria-pressed={value === i.code} title={i.title} onClick={() => { onPick(i.code); setOpen(false); }}>{i.short}<small>{i.code}</small></button>)}
+    </div>}
+  </div>;
+}
+
+/** One "자료와 한계" fold at the panel's bottom (same rule as the cards, U1). */
+function PanelLimits({ items }: { items: string[] }) {
+  return <details className="card-limits"><summary>자료와 한계</summary><ul>{items.map(t => <li key={t}>{t}</li>)}</ul></details>;
 }
 
 /** How the point is found (from its standard location text): on a landmark is the easiest to find the same way every time. */
@@ -154,11 +170,10 @@ function Beneath({ point, rows, onSelectStructure }: { point: AcupointInstance; 
   const list = (point.beneath ?? []).map(b => ({ ...b, row: rows.get(b.key) })).filter((b): b is { key: string; depth: number; row: RuntimeStructureRecord } => Boolean(b.row));
   if (!list.length) return null;
   const tone = (r: RuntimeStructureRecord) => r.kind === 'nerve' ? 'nerve' : r.tissue === 'artery' ? 'artery' : 'vein';
-  return <><h5>아래 지나는 혈관·신경</h5>
+  return <details className="point-fold" open><summary>아래 지나는 혈관·신경 <small>{list.length}</small></summary>
     <ul className="point-beneath">{list.map(({ key, depth, row }) => <li key={key}>
       <i className={`beneath-${tone(row)}`}/><button className="bone-related-muscle" onClick={() => onSelectStructure(row.sourceKey, row.side)}>{row.label}</button>
-      <small>{depth < 3 ? '바로 아래' : `약 ${Math.round(depth / 5) * 5 || depth}mm`}</small></li>)}</ul>
-    <p className="quiet-note">혈 자리에서 곧게 안쪽으로 6cm까지, 1cm 반경 안을 이 모형에서 잰 값입니다. 사람·체형·자세에 따라 다르며 자침 깊이 기준이 아닙니다.</p></>;
+      <small>{depth < 3 ? '바로 아래' : `약 ${Math.round(depth / 5) * 5 || depth}mm`}</small></li>)}</ul></details>;
 }
 
 const LANDMARK_GROUPS: { name: string; ids: string[] }[] = [
@@ -201,6 +216,5 @@ function LandmarkView({ host, file, rows, onSelectStructure, request = null }: {
             <td>{!l || Math.abs(diff) < .002 ? '같음' : `${diff < 0 ? '오른쪽' : '왼쪽'} ${(Math.abs(diff) * 1000).toFixed(0)}mm`}</td></tr>; })}
       </tbody></table>
       <p className="quiet-note">모형이 좌우 대칭이라 서 있는 자세에서는 같습니다. 관절 움직임에서 허리를 옆으로 굽히거나 돌리면 짧아지는 쪽이 숫자로 보입니다. 실제 촉진에서는 두 뼈 사이를 손으로 잡아 비교합니다.</p></>}
-    <PosturePatternList host={host} rows={rows}/>
   </section>;
 }

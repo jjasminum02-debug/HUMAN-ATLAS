@@ -11,6 +11,7 @@ import type { RuntimeIntegration } from '../datasets/integration';
 import { AtlasLoading } from '../../ui/AtlasLoading';
 import { motorRelationsForNerve, nerveConceptForSourceName } from '../../data/learning';
 import { MovementPanel } from './MovementPanel';
+import { PosturePatternList } from '../../ui/PosturePatterns';
 import { SectionPanel } from './SectionPanel';
 import { AcupointPanel } from './AcupointPanel';
 import type { AcupointTarget } from '../acupointLayer';
@@ -28,7 +29,7 @@ const PEEL_ORDER: LayerId[] = ['fascia', 'superficialMuscle', 'deepMuscle', 'joi
 const LAYER_LABELS: Record<LayerId, string> = { fascia: '근막', superficialMuscle: '얕은 근육', deepMuscle: '깊은 근육', joint: '인대·관절', bone: '뼈', nerve: '신경', vessel: '혈관' };
 const DEFAULT_LAYERS: Record<LayerId, boolean> = { fascia: false, superficialMuscle: true, deepMuscle: true, joint: false, bone: true, nerve: false, vessel: false };
 
-export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewResetRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, onEntered, onMotionHostChange, onMuscleLayerChange, onBoneLayerChange, onSelectionHiddenChange, onAcupointPanelChange, closeAcupointRevision = 0, selectionActionsTarget = null }: { selectionActionsTarget?: HTMLElement | null; attachmentRole?: 'origin' | 'insertion' | null; onAcupointPanelChange?: (open: boolean) => void; closeAcupointRevision?: number; homeRevision?: number; viewResetRevision?: number; datasetSource: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; onMotionHostChange?: (host: DatasetSceneAdapter | null) => void; onMuscleLayerChange?: (enabled: boolean) => void; onBoneLayerChange?: (enabled: boolean) => void; onSelectionHiddenChange?: (hidden: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
+export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewResetRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, onEntered, onMotionHostChange, onMuscleLayerChange, onBoneLayerChange, onSelectionHiddenChange, onAcupointPanelChange, closeAcupointRevision = 0, selectionActionsTarget = null, selectionActionsOnCard = false }: { selectionActionsTarget?: HTMLElement | null; /** The page's card owns these actions: while it is folded they are not shown in the toolbar either. */ selectionActionsOnCard?: boolean; attachmentRole?: 'origin' | 'insertion' | null; onAcupointPanelChange?: (open: boolean) => void; closeAcupointRevision?: number; homeRevision?: number; viewResetRevision?: number; datasetSource: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; onMotionHostChange?: (host: DatasetSceneAdapter | null) => void; onMuscleLayerChange?: (enabled: boolean) => void; onBoneLayerChange?: (enabled: boolean) => void; onSelectionHiddenChange?: (hidden: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
   const host = useRef<HTMLDivElement>(null);
   const tools = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -251,12 +252,14 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
         <button aria-pressed={shading ?? Boolean(ready && sceneOf()?.ambientOcclusion)} title="멈춰 있을 때 구조 사이의 그늘을 그립니다. 느린 기기에서는 꺼 주세요." onClick={toggleShading}>음영 효과</button>
         {entered && controller.current instanceof DatasetSceneAdapter && <Suspense fallback={null}><SkinControls adapter={controller.current} acupoints={acupointsActive}/></Suspense>}
         </div>
+        {/* 4-3 U10: posture patterns colour the whole model, so they live with the view options, not in the acupoint panel. */}
+        {entered && controller.current instanceof DatasetSceneAdapter && <PosturePatternList host={controller.current} rows={rowsByKey}/>}
       </div>}
       {sectionOpen && entered && controller.current instanceof DatasetSceneAdapter && <SectionPanel section={section} bounds={controller.current.sectionBounds()}
         onChange={setSection} onFace={() => (controller.current as DatasetSceneAdapter).faceSection()}/>}
       {movementOpen && entered && controller.current instanceof DatasetSceneAdapter && <MovementPanel host={controller.current} rows={rowsByKey}
         request={movementRequest} musclesVisible={muscles} onSelect={key => select.current(key, rowsByKey.get(key)?.side ?? null)}/>}
-      {!inCard && selectionActions}
+      {!inCard && !selectionActionsOnCard && selectionActions}
     </div>
     {inCard && selectionActions && createPortal(selectionActions, selectionActionsTarget!)}
     <div className="body-status" inert={!entered} aria-hidden={!entered} role="status" aria-live="polite">

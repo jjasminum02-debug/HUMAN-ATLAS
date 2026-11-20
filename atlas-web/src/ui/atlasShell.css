@@ -707,3 +707,15 @@
 .atlas-shell .scene-label.is-insertion { border-color: #ecc3a4; }
 .atlas-shell .scene-label.is-insertion small { color: #b05a21; }
 .atlas-shell .scene-label.is-hover { background: #23443b; border-color: #23443b; color: #fff; font-size: 12px; padding: 3px 8px; }
+
+/* 4-3 U10: acupoint panel — channel choice folded to one button, point structures in folds. */
+.atlas-shell .channel-picker { margin: 6px 0; }
+.atlas-shell .channel-picker-toggle { width: 100%; display: flex; align-items: baseline; gap: 8px; min-height: 40px; padding: 6px 10px; border: 1px solid #e2cdbd; border-radius: 9px; background: #fff8f3; color: #7c2d12; font-size: 14px; font-weight: 650; text-align: left; cursor: pointer; }
+.atlas-shell .channel-picker-toggle small { font-size: 11px; font-weight: 500; color: #9a6a52; }
+.atlas-shell .channel-picker-toggle::after { content: ''; margin-left: auto; width: 7px; height: 7px; border-right: 1.6px solid #9a6a52; border-bottom: 1.6px solid #9a6a52; transform: rotate(45deg) translateY(-2px); }
+.atlas-shell .channel-picker-toggle[aria-expanded=true]::after { transform: rotate(-135deg); }
+.atlas-shell .channel-picker .acupoint-channels { margin-top: 6px; }
+.atlas-shell .point-fold { margin: 6px 0; border-top: 1px solid #efe5dd; padding-top: 4px; }
+.atlas-shell .point-fold summary { cursor: pointer; font-size: 12.5px; font-weight: 600; color: #4b3a30; min-height: 30px; display: flex; align-items: center; gap: 6px; }
+.atlas-shell .point-fold summary small { padding: 0 6px; border-radius: 8px; background: #f6ece5; color: #7c4a2d; font-size: 11px; }
+@media (pointer: coarse) { .atlas-shell .point-fold summary { min-height: 40px; } }

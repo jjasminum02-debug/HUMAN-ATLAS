@@ -386,7 +386,7 @@ const flows = [
     await open(page);
     await page.locator('.acupoint-entry button').click();
     await page.locator('.acupoint-channel button', { hasText: '척택' }).click();
-    const detail = await page.locator('.acupoint-detail').innerText({ timeout: 10000 });
+    const detail = await page.locator('.acupoint-detail').textContent({ timeout: 10000 }); // 4-3 U10: 주변 구조 sits in a fold
     expect(detail.includes('위팔두갈래근') && detail.includes('완요골근'), `척택 설명·주변 구조: ${detail.replace(/\s+/g, ' ').slice(0, 160)}`);
     // 2026-11-19: how the point is found, and the vessels and nerves beneath it (척택: radial nerve under the hollow).
     expect(/취혈 기준\s*표지에서 바로/.test(detail) && /아래 지나는 혈관·신경[\s\S]*요골신경/.test(detail), `척택 취혈 기준·아래 구조: ${detail.replace(/\s+/g, ' ').slice(0, 240)}`);
@@ -410,15 +410,19 @@ const flows = [
     expect(/요골신경/.test(title), `주변 구조 → 카드: ${title} · ${page.url()}`);
     // Another channel: the governor vessel runs on the midline (no side choice) and only its markers stay visible.
     if (await page.locator('.acupoint-entry button').count()) await page.locator('.acupoint-entry button').click();
+    // 4-3 U10: the channel grid is folded behind one button.
+    expect(await page.locator('.acupoint-panel .acupoint-channels').count() === 0, '경맥 고르기가 접혀 있지 않음');
+    await page.locator('.channel-picker-toggle').click();
     await page.locator('.acupoint-channels button', { hasText: '독맥' }).click({ timeout: 10000 });
     await page.locator('.acupoint-channel button', { hasText: '백회' }).click();
-    const gv = await page.locator('.acupoint-detail').innerText({ timeout: 10000 });
+    const gv = await page.locator('.acupoint-detail').textContent({ timeout: 10000 });
     expect(gv.includes('정중선') && (await page.locator('.acupoint-panel .movement-side:not(.acupoint-mode)').count()) === 0, `백회: ${gv.replace(/\s+/g, ' ').slice(0, 120)}`);
     const shown = await page.evaluate(() => { const ids = []; window.__atlasScene.root.traverse(o => { if (o.userData.acupoint && o.visible) ids.push(o.userData.acupoint); }); return ids; });
     expect(shown.length > 20 && shown.every(id => /^GV\d+:midline$/.test(id)), `독맥만 보여야 함: ${shown.length}개, ${shown.slice(0, 4).join(',')}`);
     // Sinews: the bladder sinew's line and knots ride the rig (knee flexion moves the ankle knot), its muscles open cards.
     await page.evaluate(async () => { const rig = await window.__atlasRig.load(); window.__atlasRig.set(rig, {}); });
     await page.locator('.acupoint-mode button', { hasText: '경근' }).click();
+    await page.locator('.channel-picker-toggle').click();
     await page.locator('.acupoint-channels button', { hasText: '족태양' }).click();
     const sinew = await page.locator('.sinew-detail').innerText({ timeout: 10000 });
     expect(sinew.includes('오금에 맺힘') && sinew.includes('경로가 지나는 근육'), `족태양경근: ${sinew.replace(/\s+/g, ' ').slice(0, 120)}`);
@@ -456,6 +460,7 @@ const flows = [
     await page.evaluate(async () => { const rig = await window.__atlasRig.load(); window.__atlasRig.set(rig, {}); });
     // 4-2 step 10: a posture pattern colours its short side magenta and weak side green (4-3 U1: not the movement red/blue); off clears both.
     const roles = () => page.evaluate(() => { const n = { postureShort: 0, postureWeak: 0, agonist: 0, antagonist: 0 }; window.__atlasScene.root.traverse(o => { const m = o.isMesh && o.visible && o.material?.name?.match(/:(postureShort|postureWeak|agonist|antagonist):/); if (m) n[m[1]]++; }); return n; });
+    await page.getByRole('button', { name: '더보기' }).click(); // 4-3 U10: posture patterns live under 더보기
     await page.locator('.posture-patterns button', { hasText: '상부 교차 증후군' }).click();
     await page.waitForTimeout(300);
     const upper = await roles();
