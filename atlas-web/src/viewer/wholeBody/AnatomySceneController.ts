@@ -14,6 +14,7 @@ import { boundsCamera, interpolateCamera, observationState, OBSERVATION_FRAME, t
 export interface BodyProgress { loaded: number; total: number; failed: number; contextLost: boolean; selectedAvailable: boolean; calls: number; triangles: number; geometries: number }
 const REFINE_DELAY_MS = 160;
 /** Sole owner of renderer, frame loop, camera, controls and the persistent anatomy root. */
+const CAMERA_SECONDS = .4;
 export class AnatomySceneController {
   readonly scene = new THREE.Scene();
   readonly root = new THREE.Group();
@@ -54,6 +55,31 @@ export class AnatomySceneController {
   private select: (id: string, side: string | null) => void;
   private fetchAsset: typeof fetch;
 
+  /** 4-3 V1: a scene change (layer, selection, view mode) fades from a half-resolution still of the frame before it,
+   * so nothing pops; one 2D image and a CSS opacity transition, no second render. Off with reduced motion. */
+  private fadeLayer?: HTMLCanvasElement;
+  private lastFade = 0;
+  crossfade(ms = 180) {
+    if (this.reducedMotion.matches || this.dead || this.lost || this.entrance) return;
+    const now = performance.now(); if (now - this.lastFade < 90) return;
+    this.lastFade = now;
+    const source = this.renderer.domElement, host = source.parentElement; if (!host || !source.width) return;
+    let layer = this.fadeLayer;
+    if (!layer) {
+      layer = this.fadeLayer = document.createElement('canvas'); layer.className = 'scene-crossfade'; layer.setAttribute('aria-hidden', 'true');
+      Object.assign(layer.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', pointerEvents: 'none', opacity: '0' });
+      host.append(layer);
+    }
+    const w = Math.max(1, source.width >> 1), h = Math.max(1, source.height >> 1);
+    if (layer.width !== w || layer.height !== h) { layer.width = w; layer.height = h; }
+    // Draw the current state first: the canvas is only guaranteed readable in the same task as its render.
+    this.postprocess.render(false);
+    const g = layer.getContext('2d'); if (!g) return;
+    g.drawImage(source, 0, 0, w, h);
+    layer.style.transition = 'none'; layer.style.opacity = '1';
+    requestAnimationFrame(() => requestAnimationFrame(() => { if (!layer) return; layer.style.transition = `opacity ${ms}ms ease-out`; layer.style.opacity = '0'; }));
+    this.dirty = true;
+  }
   constructor(host: HTMLElement, manifest: BodyManifest, notify: (progress: BodyProgress) => void, select: (id: string, side: string | null) => void, fetchAsset: typeof fetch = fetchAtlasAsset) {
     this.manifest = manifest; this.notify = notify; this.select = select; this.fetchAsset = fetchAsset;
     this.assets = new Map(manifest.chunks.flatMap(c => c.assets.map(a => [a.nodeId, a] as const)));
@@ -163,8 +189,9 @@ export class AnatomySceneController {
   private updateCamera(dt: number) {
     const transition = this.cameraTransition; if (!transition) return false;
     transition.elapsed += dt;
-    this.applyCamera(interpolateCamera(transition.from, transition.to, transition.elapsed / .56));
-    if (transition.elapsed >= .56) {this.cameraTransition = null;this.cameraSessions.settleReturn();}
+    // 4-3 V1: 0.4 s (was 0.56) — smooth but never slow.
+    this.applyCamera(interpolateCamera(transition.from, transition.to, transition.elapsed / CAMERA_SECONDS));
+    if (transition.elapsed >= CAMERA_SECONDS) {this.cameraTransition = null;this.cameraSessions.settleReturn();}
     return true;
   }
   private updateEntrance(dt: number) {
@@ -419,6 +446,6 @@ export class AnatomySceneController {
     canvas.removeEventListener('webglcontextlost', this.onLost); canvas.removeEventListener('webglcontextrestored', this.onRestored);
     canvas.removeEventListener('pointermove', this.onMove); canvas.removeEventListener('pointerleave', this.onLeave);
     canvas.removeEventListener('pointerdown', this.onDown); canvas.removeEventListener('pointerup', this.onUp); canvas.removeEventListener('keydown', this.onKey);
-    this.postprocess.dispose(); this.renderer.dispose(); canvas.remove();
+    this.postprocess.dispose(); this.renderer.dispose(); canvas.remove(); this.fadeLayer?.remove();
   }
 }

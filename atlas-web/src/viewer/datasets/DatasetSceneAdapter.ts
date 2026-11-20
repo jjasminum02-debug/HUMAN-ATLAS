@@ -96,7 +96,8 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
                 this.apply();
         } }, () => { });
         this.displayKeys = new Set(integration.objects.filter(r => r.localDisplayEligible).map(r => r.sourceKey));
-        this.resources = new DatasetResources(dataset, this.scene.root, false, () => this.apply(), this.displayKeys);
+        // New meshes arriving after a layer change fade in rather than pop (4-3 V1).
+        this.resources = new DatasetResources(dataset, this.scene.root, false, () => { if (this.view.selectedId !== undefined) this.scene.crossfade(); this.apply(); }, this.displayKeys);
         const canvas = this.scene.renderer.domElement;
         canvas.addEventListener('keydown', this.onKey, true);
         canvas.addEventListener('pointerdown', this.onDown);
@@ -219,8 +220,8 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
     }
     setActionHighlight(highlight: ActionHighlight) { this.actionHighlight = highlight; this.apply(); }
     private sinewRegion: Set<string> | null = null;
-    setSinewRegion(keys: string[] | null) { this.sinewRegion = keys?.length ? new Set(keys) : null; this.apply(); }
-    setPostureHighlight(groups: { short: string[]; weak: string[] } | null) { this.postureHighlight = groups ? { short: new Set(groups.short), weak: new Set(groups.weak) } : null; this.apply(); }
+    setSinewRegion(keys: string[] | null) { this.scene.crossfade(); this.sinewRegion = keys?.length ? new Set(keys) : null; this.apply(); }
+    setPostureHighlight(groups: { short: string[]; weak: string[] } | null) { this.scene.crossfade(); this.postureHighlight = groups ? { short: new Set(groups.short), weak: new Set(groups.weak) } : null; this.apply(); }
     // Acupoints (4-1 step 7): markers and channel lines ride on their rig segment; a click on a marker picks it.
     private acupoints?: { file: AcupointFile; group: THREE.Group; markers: Map<string, THREE.Sprite>; lines: { line: Line2; ids: string[]; channel: string }[];
         selected: string | null; channel: string | null; onPick?: (id: string) => void; label?: { id: string; sprite: THREE.Sprite } };
@@ -458,7 +459,13 @@ export class DatasetSceneAdapter implements RigHost, AcupointHost {
     private readonly openAcupointListeners = new Set<(target: AcupointTarget) => void>();
     openAcupoint(target: AcupointTarget) { for (const listener of this.openAcupointListeners) listener(target); }
     onOpenAcupoint(listener: (target: AcupointTarget) => void) { this.openAcupointListeners.add(listener); return () => { this.openAcupointListeners.delete(listener); }; }
+    /** Fields whose change redraws the scene's look at once (layers, selection, emphasis): those fade (4-3 V1). */
+    private static lookKey(v: BodyView) {
+        return JSON.stringify([v.selectedId, v.bones, v.muscles, v.nerves, v.fascia, v.joints, v.vessels, v.superficialMuscles, v.deepMuscles, v.dim, v.isolate, v.xray,
+            v.hiddenSourceKeys, v.translucentSourceKeys, v.highlightInnervation, v.observeNerves, v.attachmentObservation?.role ?? null]);
+    }
     setView(view: BodyView) {
+        if (DatasetSceneAdapter.lookKey(view) !== DatasetSceneAdapter.lookKey(this.view)) this.scene.crossfade();
         const wasObserving = Boolean(this.view.focusObservation || this.view.attachmentObservation);
         const observing = Boolean(view.focusObservation || view.attachmentObservation);
         const changedAttachment = this.view.attachmentObservation?.role !== view.attachmentObservation?.role;

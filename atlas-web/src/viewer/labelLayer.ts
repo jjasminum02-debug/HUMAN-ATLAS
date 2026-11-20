@@ -109,17 +109,39 @@ export function surfaceMiddle(mesh: THREE.Mesh) {
   return out.applyMatrix4(worldOf(mesh));
 }
 
-/** Where two meshes come closest (sampled), on the first mesh, in world space: a muscle's attachment on a bone. */
-export function closestApproach(a: THREE.Mesh, b: THREE.Mesh, samples = 1500) {
-  const pa = a.geometry.getAttribute('position') as THREE.BufferAttribute | undefined, pb = b.geometry.getAttribute('position') as THREE.BufferAttribute | undefined;
-  if (!pa || !pb) return null;
-  const sa = Math.max(1, Math.floor(pa.count / samples)), sb = Math.max(1, Math.floor(pb.count / samples));
-  const bw: THREE.Vector3[] = [], wa = worldOf(a), wb = worldOf(b);
-  for (let j = 0; j < pb.count; j += sb) bw.push(new THREE.Vector3().fromBufferAttribute(pb, j).applyMatrix4(wb));
-  let best = Infinity; const out = new THREE.Vector3(), v = new THREE.Vector3();
-  for (let i = 0; i < pa.count; i += sa) {
-    v.fromBufferAttribute(pa, i).applyMatrix4(wa);
-    for (const w of bw) { const d = v.distanceToSquared(w); if (d < best) { best = d; out.copy(v); } }
+/** World-space vertex samples of a mesh as a flat array (every `stride`-th vertex). */
+function worldSamples(mesh: THREE.Mesh, samples: number) {
+  const p = mesh.geometry.getAttribute('position') as THREE.BufferAttribute | undefined; if (!p) return null;
+  const stride = Math.max(1, Math.floor(p.count / samples)), m = worldOf(mesh), v = new THREE.Vector3(), out = new Float32Array(Math.ceil(p.count / stride) * 3);
+  let n = 0;
+  for (let i = 0; i < p.count; i += stride) { v.fromBufferAttribute(p, i).applyMatrix4(m); out[n++] = v.x; out[n++] = v.y; out[n++] = v.z; }
+  return out.subarray(0, n);
+}
+function nearestPair(a: Float32Array, b: Float32Array, near?: { x: number; y: number; z: number; r2: number }) {
+  const inside = (s: Float32Array, i: number) => !near || (s[i] - near.x) ** 2 + (s[i + 1] - near.y) ** 2 + (s[i + 2] - near.z) ** 2 <= near.r2;
+  const kept: number[] = [];
+  for (let j = 0; j < b.length; j += 3) if (inside(b, j)) kept.push(b[j], b[j + 1], b[j + 2]);
+  let best = Infinity, at = -1;
+  for (let i = 0; i < a.length; i += 3) {
+    if (!inside(a, i)) continue;
+    const x = a[i], y = a[i + 1], z = a[i + 2];
+    for (let j = 0; j < kept.length; j += 3) {
+      const dx = x - kept[j], dy = y - kept[j + 1], dz = z - kept[j + 2], d = dx * dx + dy * dy + dz * dz;
+      if (d < best) { best = d; at = i; }
+    }
   }
-  return best < Infinity ? out : null;
+  return { best, at };
+}
+/** Where two meshes come closest, on the first mesh, in world space: a muscle's attachment on a bone.
+ * Coarse pass on ~300 samples each, then a fine pass (~1500) only within a few cm of the coarse answer
+ * (2026-11-20: 26 ms → a few ms per selection). */
+export function closestApproach(a: THREE.Mesh, b: THREE.Mesh, samples = 1500) {
+  const ca = worldSamples(a, 300), cb = worldSamples(b, 300), fa = worldSamples(a, samples), fb = worldSamples(b, samples);
+  if (!ca || !cb || !fa || !fb || !ca.length || !cb.length) return null;
+  const coarse = nearestPair(ca, cb);
+  if (coarse.at < 0) return null;
+  const reach = Math.sqrt(coarse.best) + .03;
+  const fine = nearestPair(fa, fb, { x: ca[coarse.at], y: ca[coarse.at + 1], z: ca[coarse.at + 2], r2: reach * reach * 4 });
+  const src = fine.at >= 0 ? fa : ca, i = fine.at >= 0 ? fine.at : coarse.at;
+  return new THREE.Vector3(src[i], src[i + 1], src[i + 2]);
 }

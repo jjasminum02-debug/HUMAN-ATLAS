@@ -382,7 +382,7 @@ const flows = [
   }],
   ['모형 클릭으로 선택 → 숨기기 → 뒤로 가기', async page => {
     await open(page);
-    const box = await page.locator('.whole-body-canvas canvas').boundingBox();
+    const box = await page.locator('.whole-body-canvas canvas:not(.scene-crossfade)').first().boundingBox();
     // Aim 30 cm above the orbit centre (pelvis), off the midline: the right chest wall.
     const target = await page.evaluate(() => {
       const s = window.__atlasScene, rect = s.renderer.domElement.getBoundingClientRect(), v = s.controls.target.clone().add({ x: -.07, y: .3, z: .08 }).project(s.camera);
