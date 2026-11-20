@@ -32,17 +32,27 @@ const VARIANT_COLORS: Record<string, string> = {
 };
 const VARIANT_OPACITY: Record<string, number> = { bursa: .7, capsule: .85, membrane: .85 };
 
+/**
+ * 4-3 V2 visual hierarchy, one table for every mode:
+ *  1 selected — the selection teal (a tissue tint muddies it: muscle red and teal are near complements), fibre and shading kept, slight glow, outline;
+ *  2 related  — role colours (origin/insertion, movers, sinew region, posture), full strength;
+ *  3 context  — the rest while something is selected: pale and matte, so it recedes;
+ *  4 background — translucent / observation modes, and distance fog behind the focus (controller).
+ */
+export const HIERARCHY = { selectedTint: .92, selectedGlow: .1, contextTint: .56, contextColor: '#e8eae5', contextRoughness: .82 };
+
 export function anatomyMaterialParameters(tissue: Tissue, state: MaterialState = {}): THREE.MeshStandardMaterialParameters {
   const mode = state.mode ?? 'normal';
   const base = (state.variant && VARIANT_COLORS[state.variant]) || ANATOMY_PALETTE[tissue];
   const color = new THREE.Color(tissue === 'bone' && mode === 'originAreaContext' ? new THREE.Color(base).lerp(new THREE.Color(ANATOMY_PALETTE.origin), .45)
     : tissue === 'bone' && mode === 'insertionAreaContext' ? new THREE.Color(base).lerp(new THREE.Color(ANATOMY_PALETTE.insertion), .45)
     : tissue === 'bone' && mode === 'originContext' ? ANATOMY_PALETTE.origin
-    : tissue === 'bone' && mode === 'insertionContext' ? ANATOMY_PALETTE.insertion : mode === 'selected' ? tissue === 'nerve' ? ANATOMY_PALETTE.selectedNerve : ANATOMY_PALETTE.selected
+    : tissue === 'bone' && mode === 'insertionContext' ? ANATOMY_PALETTE.insertion
+    : mode === 'selected' ? tissue === 'nerve' ? ANATOMY_PALETTE.selectedNerve : new THREE.Color(base).lerp(new THREE.Color(ANATOMY_PALETTE.selected), HIERARCHY.selectedTint)
     : mode === 'innervated' || mode === 'motorContext' ? ANATOMY_PALETTE.related : base);
   if (tissue === 'muscle' && state.phase) color.set(ANATOMY_PALETTE[state.phase]);
   if ((tissue === 'muscle' || tissue === 'tendon') && state.role) color.set(ANATOMY_PALETTE[state.role]);
-  if (mode === 'dim' && tissue !== 'nerve') color.lerp(new THREE.Color('#e5e5dd'), .48);
+  if (mode === 'dim' && tissue !== 'nerve') color.lerp(new THREE.Color(HIERARCHY.contextColor), HIERARCHY.contextTint);
   const modeOpacity = mode === 'translucent' || state.userTranslucent ? .3 : mode === 'nerveContext' ? .12 : mode === 'motorContext' ? .5
     : mode === 'observationContext' ? .18 : mode === 'motionContext' ? Math.max(.1, Math.min(.6, state.contextOpacity ?? .3)) : 1;
   // Fascia is a sheet over the muscles: translucent by default unless selected.
@@ -51,11 +61,12 @@ export function anatomyMaterialParameters(tissue: Tissue, state: MaterialState =
   const nerve = tissue === 'nerve', selected = mode === 'selected';
   // Patches are copies of the bone surface: pull them toward the camera so they never z-fight with it.
   const attachment = state.variant?.startsWith('attachment');
-  return { ...(attachment ? { polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -4 } : {}), color, metalness: 0, roughness: nerve ? selected ? .42 : .55 : tissue === 'bone' ? .62 : tissue === 'muscle' ? .58 : tissue === 'joint' || tissue === 'tendon' ? .45 : tissue === 'vessel' ? .5 : .8,
+  const baseRoughness = nerve ? selected ? .42 : .55 : tissue === 'bone' ? .62 : tissue === 'muscle' ? .58 : tissue === 'joint' || tissue === 'tendon' ? .45 : tissue === 'vessel' ? .5 : .8;
+  return { ...(attachment ? { polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -4 } : {}), color, metalness: 0, roughness: mode === 'dim' ? Math.max(baseRoughness, HIERARCHY.contextRoughness) : baseRoughness,
     transparent: opacity < 1, opacity, depthTest: true, depthWrite: opacity === 1,
     // Selection also changes luminance/specular response; tissue identity remains yellow for nerves.
-    emissive: nerve ? color : state.hovered ? '#628b83' : '#000000',
-    emissiveIntensity: nerve ? selected ? .3 : state.hovered ? .24 : .16 : state.hovered ? .16 : 0 };
+    emissive: nerve ? color : selected ? ANATOMY_PALETTE.selected : state.hovered ? '#628b83' : '#000000',
+    emissiveIntensity: nerve ? selected ? .3 : state.hovered ? .24 : .16 : selected ? HIERARCHY.selectedGlow : state.hovered ? .16 : 0 };
 }
 
 // Fibrous tissue (ligament, tendon, fascia) reads glossier than bone through a soft sheen; cartilage-like

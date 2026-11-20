@@ -134,6 +134,11 @@ for (const size of SIZES) {
     r.muscles[m.label] = { modelVisiblePct: await modelVisible(page), ...await cardFacts(page), toolbarButtons: await toolbarButtons(page) };
     r.muscles[m.label].notices = await noticesAllTabs(page);
     await shot(`card-${m.label}`);
+    // V2: the selection against its context, close up (same camera every run).
+    if (m.label === '대퇴직근' && size.id === 'laptop') {
+      await page.evaluate(() => { const sc = window.__atlasScene; sc.moveCamera({ target: [0.1, 0.62, 0.05], position: [0.55, 0.85, 1.2], zoom: 1 }, false); sc.requestRender(); });
+      await page.waitForTimeout(2200); await shot('hierarchy-selected');
+    }
   }
   // Acupoint panel on lung channel, with the subscapularis card still selected.
   await pick(page, MUSCLES[0].query, MUSCLES[0].label);

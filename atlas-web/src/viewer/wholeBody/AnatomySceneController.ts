@@ -90,6 +90,9 @@ export class AnatomySceneController {
     // Several passes render per frame; reset counters once per frame so reported calls/triangles stay per frame.
     this.renderer.info.autoReset = false;
     this.postprocess = new AnatomyPostprocess(this.renderer, this.scene, this.camera, 1, 1, defaultAmbientOcclusion());
+    // 4-3 V2 depth cue: what lies behind the orbit centre fades a little toward the background (front reads in front).
+    // Same colour as the (pre-tone-mapped) background, so faded structures settle into it; overlays skip it.
+    if (this.scene.background instanceof THREE.Color) this.scene.fog = new THREE.Fog(this.scene.background.clone(), 10, 20);
     const canvas = this.renderer.domElement;
     canvas.id = `anatomy-${this.root.uuid}`;
     canvas.tabIndex = 0; canvas.setAttribute('aria-label', '해부학 모형. 방향키로 회전, 더하기와 빼기로 확대, Home으로 전체 보기');
@@ -229,6 +232,7 @@ export class AnatomySceneController {
     const entranceChanged = this.updateEntrance(dt);
     const cameraChanged = this.updateCamera(dt);
     this.controls.update();
+    if (this.scene.fog instanceof THREE.Fog) { const d = this.camera.position.distanceTo(this.controls.target); this.scene.fog.near = d + .05; this.scene.fog.far = d + 1.8; }
     if (this.hoverPoint) { const p = this.hoverPoint; this.hoverPoint = null; this.setHover(this.pick(p.x, p.y)?.nodeId ?? null); }
     const draw = this.dirty || poseChanged || entranceChanged || cameraChanged;
     if (draw) {

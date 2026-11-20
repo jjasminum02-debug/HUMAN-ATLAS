@@ -17,10 +17,10 @@ export function toOverlay(object: THREE.Object3D) { object.traverse(o => o.layer
 class OverlayPass extends RenderPass {
   constructor(scene: THREE.Scene, camera: THREE.Camera) { super(scene, camera); this.clear = false; this.needsSwap = false; }
   render(...args: Parameters<RenderPass['render']>) {
-    const camera = this.camera, scene = this.scene, mask = camera.layers.mask, background = scene.background;
-    camera.layers.set(OVERLAY_LAYER); scene.background = null; // a colour background would clear the frame
+    const camera = this.camera, scene = this.scene, mask = camera.layers.mask, background = scene.background, fog = scene.fog;
+    camera.layers.set(OVERLAY_LAYER); scene.background = null; scene.fog = null; // a colour background would clear the frame; markers stay unfogged
     super.render(...args);
-    camera.layers.mask = mask; scene.background = background;
+    camera.layers.mask = mask; scene.background = background; scene.fog = fog;
   }
 }
 
