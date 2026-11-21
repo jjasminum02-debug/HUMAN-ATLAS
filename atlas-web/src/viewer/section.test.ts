@@ -41,7 +41,7 @@ test('materials become double-sided while sectioned, with the cut-face shader; t
   const shader = { fragmentShader: '#include <opaque_fragment>\n', vertexShader: '#include <common>\n#include <begin_vertex>', uniforms: {} } as unknown as THREE.WebGLProgramParametersWithUniforms;
   muscle.onBeforeCompile(shader, {} as THREE.WebGLRenderer);
   assert.match(shader.fragmentShader, /gl_FrontFacing/);
-  assert.match(muscle.customProgramCacheKey(), /atlas-muscle-microrelief-v1\|atlas-section-cap-v1/);
+  assert.match(muscle.customProgramCacheKey(), /atlas-muscle-fibres-v2\|atlas-section-cap-v1/);
   const plain = new THREE.MeshStandardMaterial(); installSectionCap(plain);
   assert.match(plain.customProgramCacheKey(), /atlas-section-cap-v1$/);
 });

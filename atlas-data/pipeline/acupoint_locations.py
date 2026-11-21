@@ -44,7 +44,7 @@ NAIL = r'nail'
 _ = None
 R = [
     # ── LU 수태음폐경 (pilot rules, same anchors) ──
-    ('LU1', '중부', '中府', '가슴 위 가쪽, 첫째 갈비사이 높이에서 앞정중선 가쪽 6촌.', 'LU2 + down*cChY', 'ant', [r'6 cun', r'first intercostal|1st intercostal']),
+    ('LU1', '중부', '中府', '가슴 위 가쪽, 첫째 갈비사이 높이에서 앞정중선 가쪽 6촌.', 'LU2 + down*cChY', 'outer:ant', [r'6 cun', r'first intercostal|1st intercostal']),
     ('LU2', '운문', '雲門', '빗장뼈 아래 오목, 앞정중선 가쪽 6촌.', 'clavBelow(6)', 'ant', [r'6 cun', r'clavicle|infraclavicular']),
     ('LU3', '천부', '天府', '위팔 앞가쪽, 위팔두갈래근 가쪽 가장자리, 겨드랑 앞주름 아래 3촌.', 'bicepsLat(3)', 'ant+.35*lat', [r'3 cun', r'axillary|axilla', r'biceps']),
     ('LU4', '협백', '俠白', '위팔 앞가쪽, 위팔두갈래근 가쪽 가장자리, 겨드랑 앞주름 아래 4촌.', 'bicepsLat(4)', 'ant+.35*lat', [r'4 cun', r'biceps']),
@@ -324,7 +324,7 @@ R = [
     ('GB27', '오추', '五樞', '아랫배, 배꼽 아래 3촌, 위앞엉덩뼈가시 안쪽.', 'V(asis[0] + med[0]*.01, umbY - 3*cAbL, asis[2])', 'ant+.3*lat', [r'anterior superior iliac spine|ASIS', r'3 cun']),
     ('GB28', '유도', '維道', '아랫배, 오추 앞아래 0.5촌.', 'GB27 + norm(down+med)*.5*cAbL', 'ant+.3*lat', [r'0?\.5 cun', r'@GB27|anterior superior iliac spine']),
     ('GB29', '거료', '居髎', '볼기, 위앞엉덩뼈가시와 넙다리뼈 큰돌기 융기를 잇는 선의 중점.', 'mid(asis, greaterTroch)', 'lat', [r'greater trochanter', r'anterior superior iliac spine|ASIS']),
-    ('GB30', '환도', '環跳', '볼기, 큰돌기 융기와 엉치뼈틈새를 잇는 선의 가쪽 1/3.', 'lerp(greaterTroch, sacralHiatus, 1/3)', 'post+.5*lat', [r'greater trochanter', r'sacral hiatus|coccyx|sacrum']),
+    ('GB30', '환도', '環跳', '볼기, 큰돌기 융기와 엉치뼈틈새를 잇는 선의 가쪽 1/3.', 'lerp(greaterTroch, sacralHiatus, 1/3)', 'outer:post+.5*lat', [r'greater trochanter', r'sacral hiatus|coccyx|sacrum']),
     ('GB31', '풍시', '風市', '넙다리 가쪽, 엉덩정강띠 뒤 오목(팔을 내렸을 때 가운데손가락 끝이 닿는 곳, 오금주름 위 9촌).', 'X(row(S("Iliotibial tract"), kneeY + 9*cThigh), lat+.3*post)', 'lat', [r'iliotibial|middle finger|7 cun|9 cun']),
     ('GB32', '중독', '中瀆', '넙다리 가쪽, 엉덩정강띠 뒤, 오금주름 위 7촌.', 'X(row(S("Iliotibial tract"), kneeY + 7*cThigh), lat+.3*post)', 'lat', [r'popliteal|@GB31|5 cun|7 cun', r'iliotibial|biceps femoris|vastus lateralis']),
     ('GB33', '슬양관', '膝陽關', '무릎 가쪽, 넙다리두갈래근 힘줄과 엉덩정강띠 사이, 넙다리뼈 가쪽위관절융기 뒤위 오목.', 'femEpiLat + up*.012 + post*.006', 'lat', [r'lateral epicondyle', r'femur']),

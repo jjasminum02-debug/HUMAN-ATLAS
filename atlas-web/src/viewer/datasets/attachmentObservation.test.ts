@@ -16,7 +16,10 @@ test('bijoint rectus keeps exact left hip origin separate from patella/tibia ins
   assert.match(attachmentText(rectus, 'origin')!, /엉덩뼈/);
   assert.deepEqual(attachmentBoneKeys(rectus.sourceKey, 'origin', rows), [find('Hip bone','left').sourceKey]);
   assert.deepEqual(new Set(attachmentBoneKeys(rectus.sourceKey, 'insertion', rows)), new Set([find('Patella','left').sourceKey,find('Tibia','left').sourceKey]));
-  assert.deepEqual(new Set(demandedStructureKeys(rows, view)),new Set([rectus.sourceKey,find('Hip bone','left').sourceKey]));
+  // 2026-11-20: both ends and the bones around them are shown (the observed role decides colour and camera only).
+  const shown = new Set(demandedStructureKeys(rows, view));
+  for (const key of [rectus.sourceKey, find('Hip bone','left').sourceKey, find('Patella','left').sourceKey, find('Tibia','left').sourceKey]) assert.ok(shown.has(key), key);
+  for (const key of shown) { const r = rows.find(x => x.sourceKey === key)!; assert.ok(key === rectus.sourceKey || r.kind === 'bone' && (!r.side || r.side === 'midline' || r.side === 'left'), key); }
   assert.deepEqual(new Set(observationFrameKeys(rows, view)),new Set(demandedStructureKeys(rows, view)));
 });
 test('attachment observation never revives hidden, layer-off, held, wrong-side or foreign-source bones', () => {

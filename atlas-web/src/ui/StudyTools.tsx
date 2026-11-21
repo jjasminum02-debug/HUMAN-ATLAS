@@ -16,20 +16,21 @@ function useBookmarks(): [Bookmark[], (next: Bookmark[]) => void] {
 
 const KIND_LABEL: Record<string, string> = { muscle: '근육', bone: '뼈', joint: '인대·관절', vessel: '혈관', fascia: '근막', tendon: '힘줄', nerve: '신경' };
 
-export function BookmarkButton({ row, host }: { row: RuntimeStructureRecord; host?: unknown }) {
+export function BookmarkButton({ row, host, compact = false }: { row: RuntimeStructureRecord; host?: unknown; compact?: boolean }) {
   const [list, setList] = useBookmarks();
   const saved = list.some(b => b.key === row.sourceKey);
   // The current camera, layers and section are saved with the structure (4-1 step 6).
   const view = () => (isStudyViewHost(host) ? host.captureStudyView() : null) ?? undefined;
   return <button className="bookmark-toggle" aria-pressed={saved} title={saved ? '북마크에서 빼기' : '이 구조를 지금 보는 시점·층과 함께 저장'}
-    onClick={() => setList(toggleBookmark(list, { key: row.sourceKey, label: row.label, kind: row.kind, view: view() }))}>{saved ? '★ 저장됨' : '☆ 북마크'}</button>;
+    aria-label={compact ? (saved ? '북마크 저장됨' : '북마크') : undefined}
+    onClick={() => setList(toggleBookmark(list, { key: row.sourceKey, label: row.label, kind: row.kind, view: view() }))}>{compact ? (saved ? '★' : '☆') : saved ? '★ 저장됨' : '☆ 북마크'}</button>;
 }
 
-export function StudyTools({ rows, host, selected, onSelect, onClearSelection, onClose }: {
-  rows: RuntimeStructureRecord[]; host: unknown; selected: RuntimeStructureRecord | null;
+export function StudyTools({ rows, host, selected, onSelect, onClearSelection, onClose, quiz = false }: {
+  rows: RuntimeStructureRecord[]; host: unknown; selected: RuntimeStructureRecord | null; quiz?: boolean;
   onSelect: (key: string) => void; onClearSelection: () => void; onClose: () => void;
 }) {
-  const [tab, setTab] = useState<'quiz' | 'bookmarks'>('quiz');
+  const [tab, setTab] = useState<'quiz' | 'bookmarks'>(quiz ? 'quiz' : 'bookmarks');
   const [kind, setKind] = useState<QuizKind>('name');
   const [cards, setCards] = useState<QuizCards | null>(null);
   const [question, setQuestion] = useState<QuizQuestion | null>(null);
@@ -67,12 +68,12 @@ export function StudyTools({ rows, host, selected, onSelect, onClearSelection, o
   return <section className="study-tools" id="study-tools" aria-label="학습 도구">
     <div className="study-tools-head">
       <div className="study-tools-tabs" role="tablist">
-        <button role="tab" aria-selected={tab === 'quiz'} onClick={() => setTab('quiz')}>퀴즈</button>
+        {quiz && <button role="tab" aria-selected={tab === 'quiz'} onClick={() => setTab('quiz')}>퀴즈</button>}
         <button role="tab" aria-selected={tab === 'bookmarks'} onClick={() => setTab('bookmarks')}>북마크 {live.length > 0 && <small>{live.length}</small>}</button>
       </div>
       <button className="study-tools-close" aria-label="학습 도구 닫기" onClick={() => { quizHost?.setQuizTarget(null); onClose(); }}>닫기</button>
     </div>
-    {tab === 'quiz' ? <div className="quiz" role="tabpanel">
+    {quiz && tab === 'quiz' ? <div className="quiz" role="tabpanel">
       <div className="quiz-kinds" role="group" aria-label="문제 종류">
         {(Object.keys(QUIZ_KINDS) as QuizKind[]).map(k => <button key={k} aria-pressed={kind === k} onClick={() => { setKind(k); ask(k); }}>{QUIZ_KINDS[k]}</button>)}
       </div>

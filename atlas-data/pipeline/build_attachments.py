@@ -9,6 +9,8 @@ Muscles without patches are listed in the file's `missing` (filled by contact la
 import json
 from pathlib import Path
 
+from attachment_roles import fix_certain, fix_roles, fix_sides, write_checks
+
 ROOT = Path(__file__).resolve().parents[2]
 RUNTIME = ROOT / 'atlas-data/runtime'
 
@@ -27,6 +29,10 @@ def main():
         for owner in r['owners']:
             if owner not in visible: continue
             muscles.setdefault(by_id[owner]['key'], []).append({'key': patch['key'], 'role': r['type'], 'bone': bone['key'] if bone else None, 'source': 'za'})
+    sides = fix_sides(muscles)  # patches owned by or linked to the other side
+    flipped = fix_roles(muscles)  # Z-Anatomy .o/.e names reversed for some muscles; the card text decides (attachment_roles.py)
+    write_checks(flipped, sides, fix_certain(muscles))
+    muscles = {k: v for k, v in muscles.items() if v}  # a muscle whose only patches belonged to the other side
     for rows in muscles.values(): rows.sort(key=lambda x: (x['role'] != 'origin', x['key']))
     missing = sorted(by_id[i]['key'] for i in visible if by_id[i]['key'] not in muscles)
     doc = {'schemaVersion': 1, 'note': 'Z-Anatomy origin/insertion patches per muscle (build_attachments.py)', 'muscles': muscles, 'missing': missing}

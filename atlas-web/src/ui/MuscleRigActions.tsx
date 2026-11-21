@@ -53,6 +53,6 @@ export function MuscleRigActions({ host, sourceKey, visible }: { host: RigHost; 
       </button></li>;
     })}</ul>}
     {row.outside?.length ? <p className="quiet-note">모형에서 아직 움직이지 않는 작용: {row.outside.join(', ')}</p> : null}
-    <p className="quiet-note">재생 중 빨간색은 같은 움직임을 만드는 근육, 파란색은 반대로 작용하는 근육입니다.</p>
+    <p className="role-legend"><span><i className="swatch agonist"/>같은 움직임을 만드는 근육</span><span><i className="swatch antagonist"/>반대로 작용하는 근육</span></p>
   </section>;
 }

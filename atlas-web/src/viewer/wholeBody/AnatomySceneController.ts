@@ -14,6 +14,7 @@ import { boundsCamera, interpolateCamera, observationState, OBSERVATION_FRAME, t
 export interface BodyProgress { loaded: number; total: number; failed: number; contextLost: boolean; selectedAvailable: boolean; calls: number; triangles: number; geometries: number }
 const REFINE_DELAY_MS = 160;
 /** Sole owner of renderer, frame loop, camera, controls and the persistent anatomy root. */
+const CAMERA_SECONDS = .4;
 export class AnatomySceneController {
   readonly scene = new THREE.Scene();
   readonly root = new THREE.Group();
@@ -54,6 +55,31 @@ export class AnatomySceneController {
   private select: (id: string, side: string | null) => void;
   private fetchAsset: typeof fetch;
 
+  /** 4-3 V1: a scene change (layer, selection, view mode) fades from a half-resolution still of the frame before it,
+   * so nothing pops; one 2D image and a CSS opacity transition, no second render. Off with reduced motion. */
+  private fadeLayer?: HTMLCanvasElement;
+  private lastFade = 0;
+  crossfade(ms = 180) {
+    if (this.reducedMotion.matches || this.dead || this.lost || this.entrance) return;
+    const now = performance.now(); if (now - this.lastFade < 90) return;
+    this.lastFade = now;
+    const source = this.renderer.domElement, host = source.parentElement; if (!host || !source.width) return;
+    let layer = this.fadeLayer;
+    if (!layer) {
+      layer = this.fadeLayer = document.createElement('canvas'); layer.className = 'scene-crossfade'; layer.setAttribute('aria-hidden', 'true');
+      Object.assign(layer.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', pointerEvents: 'none', opacity: '0' });
+      host.append(layer);
+    }
+    const w = Math.max(1, source.width >> 1), h = Math.max(1, source.height >> 1);
+    if (layer.width !== w || layer.height !== h) { layer.width = w; layer.height = h; }
+    // Draw the current state first: the canvas is only guaranteed readable in the same task as its render.
+    this.postprocess.render(false);
+    const g = layer.getContext('2d'); if (!g) return;
+    g.drawImage(source, 0, 0, w, h);
+    layer.style.transition = 'none'; layer.style.opacity = '1';
+    requestAnimationFrame(() => requestAnimationFrame(() => { if (!layer) return; layer.style.transition = `opacity ${ms}ms ease-out`; layer.style.opacity = '0'; }));
+    this.dirty = true;
+  }
   constructor(host: HTMLElement, manifest: BodyManifest, notify: (progress: BodyProgress) => void, select: (id: string, side: string | null) => void, fetchAsset: typeof fetch = fetchAtlasAsset) {
     this.manifest = manifest; this.notify = notify; this.select = select; this.fetchAsset = fetchAsset;
     this.assets = new Map(manifest.chunks.flatMap(c => c.assets.map(a => [a.nodeId, a] as const)));
@@ -64,6 +90,9 @@ export class AnatomySceneController {
     // Several passes render per frame; reset counters once per frame so reported calls/triangles stay per frame.
     this.renderer.info.autoReset = false;
     this.postprocess = new AnatomyPostprocess(this.renderer, this.scene, this.camera, 1, 1, defaultAmbientOcclusion());
+    // 4-3 V2 depth cue: what lies behind the orbit centre fades a little toward the background (front reads in front).
+    // Same colour as the (pre-tone-mapped) background, so faded structures settle into it; overlays skip it.
+    if (this.scene.background instanceof THREE.Color) this.scene.fog = new THREE.Fog(this.scene.background.clone(), 10, 20);
     const canvas = this.renderer.domElement;
     canvas.id = `anatomy-${this.root.uuid}`;
     canvas.tabIndex = 0; canvas.setAttribute('aria-label', '해부학 모형. 방향키로 회전, 더하기와 빼기로 확대, Home으로 전체 보기');
@@ -101,7 +130,9 @@ export class AnatomySceneController {
     canvas.addEventListener('keydown', this.onKey);
     this.focus(null, false);
     this.renderer.setAnimationLoop(this.frame);
-    if (import.meta.env?.DEV || import.meta.env?.MODE === 'qa') (window as unknown as { __atlasScene?: AnatomySceneController }).__atlasScene = this; // dev inspection only
+    // Dev and QA inspection, and the on-device performance check (?perf=1).
+    if (import.meta.env?.DEV || import.meta.env?.MODE === 'qa' || new URLSearchParams(window.location.search).get('perf') === '1')
+      (window as unknown as { __atlasScene?: AnatomySceneController }).__atlasScene = this;
   }
 
   requestRender() { this.dirty = true; }
@@ -139,6 +170,9 @@ export class AnatomySceneController {
     this.dirty = true;
   }
   onCameraMove(listener: () => void) { this.cameraMoveListeners.add(listener); return () => { this.cameraMoveListeners.delete(listener); }; }
+  /** 4-3 U8: called after a frame is drawn (camera, pose or scene changed), e.g. to move screen-space labels. */
+  private readonly drawListeners = new Set<() => void>();
+  onDraw(listener: () => void) { this.drawListeners.add(listener); return () => { this.drawListeners.delete(listener); }; }
   get canObserveDirections() { return this.manifest.frame === OBSERVATION_FRAME; }
   observeDirection(direction: ObservationDirection) { this.moveCamera(observationState(this.cameraTransition?.to ?? this.cameraState(), direction, this.manifest.frame)); }
   observationReturnState(owner:string){return this.cameraSessions.returnState(owner,this.cameraState());}
@@ -158,8 +192,9 @@ export class AnatomySceneController {
   private updateCamera(dt: number) {
     const transition = this.cameraTransition; if (!transition) return false;
     transition.elapsed += dt;
-    this.applyCamera(interpolateCamera(transition.from, transition.to, transition.elapsed / .56));
-    if (transition.elapsed >= .56) {this.cameraTransition = null;this.cameraSessions.settleReturn();}
+    // 4-3 V1: 0.4 s (was 0.56) — smooth but never slow.
+    this.applyCamera(interpolateCamera(transition.from, transition.to, transition.elapsed / CAMERA_SECONDS));
+    if (transition.elapsed >= CAMERA_SECONDS) {this.cameraTransition = null;this.cameraSessions.settleReturn();}
     return true;
   }
   private updateEntrance(dt: number) {
@@ -197,6 +232,7 @@ export class AnatomySceneController {
     const entranceChanged = this.updateEntrance(dt);
     const cameraChanged = this.updateCamera(dt);
     this.controls.update();
+    if (this.scene.fog instanceof THREE.Fog) { const d = this.camera.position.distanceTo(this.controls.target); this.scene.fog.near = d + .05; this.scene.fog.far = d + 1.8; }
     if (this.hoverPoint) { const p = this.hoverPoint; this.hoverPoint = null; this.setHover(this.pick(p.x, p.y)?.nodeId ?? null); }
     const draw = this.dirty || poseChanged || entranceChanged || cameraChanged;
     if (draw) {
@@ -204,6 +240,7 @@ export class AnatomySceneController {
       const started = ASSET_INSPECTION_ENABLED ? performance.now() : 0;
       this.renderer.info.reset();
       this.postprocess.render(false); this.dirty = false; this.renderedFrames += 1;
+      for (const listener of this.drawListeners) listener();
       this.refineAt = time + REFINE_DELAY_MS;
       if (ASSET_INSPECTION_ENABLED) {
         this.renderDurationsMs.push(performance.now() - started);
@@ -413,6 +450,6 @@ export class AnatomySceneController {
     canvas.removeEventListener('webglcontextlost', this.onLost); canvas.removeEventListener('webglcontextrestored', this.onRestored);
     canvas.removeEventListener('pointermove', this.onMove); canvas.removeEventListener('pointerleave', this.onLeave);
     canvas.removeEventListener('pointerdown', this.onDown); canvas.removeEventListener('pointerup', this.onUp); canvas.removeEventListener('keydown', this.onKey);
-    this.postprocess.dispose(); this.renderer.dispose(); canvas.remove();
+    this.postprocess.dispose(); this.renderer.dispose(); canvas.remove(); this.fadeLayer?.remove();
   }
 }

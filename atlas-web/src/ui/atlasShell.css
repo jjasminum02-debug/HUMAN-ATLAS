@@ -127,7 +127,7 @@
 .atlas-shell .region-picker-trigger:focus-visible,
 .atlas-shell .region-picker-menu button:focus-visible,
 .atlas-shell .action-choice-row:focus-visible { outline: 3px solid #d49a36; outline-offset: 2px; }
-.atlas-shell .region-picker-disclosure { display: grid; grid-template-rows: 0fr; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: grid-template-rows 440ms cubic-bezier(.4,0,.2,1), opacity 320ms cubic-bezier(.4,0,.2,1), transform 440ms cubic-bezier(.4,0,.2,1); }
+.atlas-shell .region-picker-disclosure { display: grid; grid-template-rows: 0fr; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: grid-template-rows 220ms cubic-bezier(.4,0,.2,1), opacity 160ms cubic-bezier(.4,0,.2,1), transform 220ms cubic-bezier(.4,0,.2,1); /* 4-3 V1: was 440 ms */ }
 .atlas-shell .region-picker-disclosure[data-open=true] { grid-template-rows: 1fr; opacity: 1; transform: translateY(0); pointer-events: auto; }
 .atlas-shell .region-picker-clip { min-height: 0; overflow: hidden; }
 .atlas-shell .region-picker-menu { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 3px; max-height: min(38dvh, 300px); overflow-y: auto; overscroll-behavior: contain; margin-top: 5px; padding: 5px; border: 1px solid #dfe8e2; border-radius: 12px; background: #fff; box-shadow: 0 8px 24px #314b4018; }
@@ -216,6 +216,10 @@
 .atlas-shell .mobile-detail-summary { display: none; }
 .atlas-shell .study-detail-body { display: flex; flex-direction: column; height: calc(var(--detail-panel-height) - var(--detail-summary-height) - 2px); min-height: 0; }
 .atlas-shell .study-detail-header { flex: none; padding: 16px 16px 0; min-width: 0; }
+/* 2026-11-20: back to the card seen before (a muscle → its nerve or rib → back). */
+.atlas-shell .card-back { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; min-height: 32px; margin: 0 0 2px; padding: 4px 12px 4px 10px; border: 1px solid #d5dfdb; border-radius: 999px; background: #f6faf8; color: #2f5d50; font-size: 13px; font-weight: 600; cursor: pointer; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.atlas-shell .card-back span { font-size: 15px; }
+.atlas-shell .card-back:hover { background: #e9f4ef; }
 .atlas-shell .study-detail-header > h2 { font-size: 23px; letter-spacing: -.04em; margin: 8px 0 12px; line-height: 1.35; }
 .atlas-shell .study-detail-header > .bone-related-muscle { float: right; font-size: 11px; min-height: 32px; }
 .atlas-shell .study-detail-header .part-pills { margin: 8px 0; }
@@ -465,3 +469,332 @@
 /* The explorer sidebar (search results) stays usable: the panel moves beside it, or under it on phones. */
 .atlas-shell:has(.study-sidebar.is-open) .study-tools { left: 280px; }
 @media (max-width: 599px) { .atlas-shell .study-tools, .atlas-shell:has(.study-sidebar.is-open) .study-tools { left: 8px; right: 8px; width: auto; top: 4px; z-index: 2; } }
+
+/* Phones (2026-11-16): more room for the model. The quiz button shares the search row, the layer chips and the view
+   actions share one sideways-scrolling row (faded at the edge so it reads as scrollable), and the app-info link sits
+   above the card instead of over its text. */
+@media (max-width:599px) {
+  .atlas-shell .study-header { grid-template-columns: minmax(0,1fr) auto; min-height: 0; }
+  .atlas-shell .global-search { grid-column: 1; grid-row: 2; }
+  .atlas-shell .study-tools-trigger { grid-column: 2; grid-row: 2; min-height: 40px; }
+  .atlas-shell .toolbar-main { flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 4px; overflow-x: auto; scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent); padding-right: 20px; }
+  .atlas-shell .toolbar-main::-webkit-scrollbar { display: none; }
+  /* Rows and panels inside the toolbar take the screen width, not the width of their longest line. */
+  .atlas-shell .body-tools > * { align-self: stretch; min-width: 0; max-width: 100%; }
+  .atlas-shell .movement-dofs { grid-template-columns: minmax(0, 1fr); }
+  .atlas-shell .toolbar-main .layer-row, .atlas-shell .toolbar-main .view-options-row { flex: none; overflow: visible; }
+  .atlas-shell:has(.study-details[open]) .app-info-trigger { bottom: calc(clamp(232px,30dvh,280px) + 6px); }
+  .atlas-shell:has(.study-details:not([open])) .app-info-trigger { bottom: 58px; }
+}
+
+/* Names (2026-11-16): 구용어 (한자어) leads, 신용어 and English follow in quieter type. */
+.atlas-shell .names-card .name-traditional strong { font-size: 15px; font-weight: 700; color: #23342e; }
+.atlas-shell .names-card .name-modern strong { font-size: 13px; font-weight: 500; }
+.atlas-shell .names-card .name-en strong { font-size: 12px; font-weight: 400; font-style: italic; color: #56665f; }
+.atlas-shell .names-card span { flex-basis: 44px; }
+.atlas-shell .card-kind { margin: 2px 0 4px; font-size: 11px; color: #73877e; }
+@media (max-width:599px) { .atlas-shell .study-detail-header > .card-kind { display: none; } }
+
+/* Muscle card 경락 tab. */
+.atlas-shell .meridian-summary { margin: 4px 0 10px; padding: 8px 10px; border-radius: 10px; background: #f1f6f3; font-size: 12px; color: #4b5d57; line-height: 1.6; }
+.atlas-shell .meridian-summary strong { color: #2f5d50; }
+.atlas-shell .meridian-group { margin: 6px 0 10px; }
+.atlas-shell .meridian-group h5 { margin: 0 0 4px; font-size: 12px; color: #4b5d57; }
+.atlas-shell .meridian-group h5 span { font-weight: 400; color: #8a9891; }
+.atlas-shell .meridian-point small { margin-left: 5px; font-size: 10px; color: #7c8b84; }
+
+/* Tablets (touch, about 70 % of learners): finger-sized targets and sliders. */
+@media (pointer: coarse) {
+  .atlas-shell .body-tools .toolbar-main button, .atlas-shell .body-tools .selection-view-options button, .atlas-shell .study-tabs button { min-height: 44px; }
+  .atlas-shell :is(.movement-panel, .section-panel, .acupoint-panel) button, .atlas-shell .bone-related-muscle, .atlas-shell .attachment-bone-links button { min-height: 40px; }
+  .atlas-shell :is(.movement-panel, .section-panel) input[type=range] { height: 32px; }
+}
+/* A folded card's title bar sits in the canvas corner: the acupoint panel and its entry button start below it. */
+.atlas-shell:has(.study-details:not([open])) :is(.acupoint-panel, .acupoint-entry) { top: calc(var(--detail-summary-height, 52px) + 16px); }
+.atlas-shell .acupoint-panel { max-height: calc(100% - var(--view-tools-height, 128px) - 52px); }
+.atlas-shell:has(.study-details:not([open])) .acupoint-panel { max-height: calc(100% - var(--view-tools-height, 128px) - 52px - var(--detail-summary-height, 52px) - 8px); }
+
+/* Meridian sinew regions and binding places (2026-11-19). */
+.atlas-shell .meridian-sinews { list-style: none; margin: 4px 0; padding: 0; display: grid; gap: 6px; }
+.atlas-shell .meridian-sinews li { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.atlas-shell .meridian-region, .atlas-shell .sinew-anchor { min-height: 32px; padding: 4px 9px; border: 1px solid #e3cfa2; border-radius: 8px; background: #fffaf0; color: #7a5413; font-size: 12px; cursor: pointer; }
+.atlas-shell .meridian-region[aria-pressed=true] { background: #d39a2c; border-color: #d39a2c; color: #fff; }
+.atlas-shell .sinew-strand li.sinew-binding { color: #6b4a12; }
+.atlas-shell .binding-mark { display: inline-block; margin-right: 4px; padding: 0 4px; border-radius: 5px; background: #d39a2c; color: #fff; font-size: 10px; font-weight: 700; }
+.atlas-shell .sinew-anchor { margin-left: 6px; min-height: 26px; padding: 1px 7px; font-size: 11px; }
+.atlas-shell .sinew-anchor small { margin-left: 3px; color: #9a7a3d; }
+.atlas-shell .sinew-region-toggle { display: flex; align-items: center; gap: 6px; margin: 8px 0 4px; font-size: 12px; color: #4b5d57; }
+.atlas-shell .sinew-region-toggle small { color: #8a9891; }
+@media (pointer: coarse) { .atlas-shell .meridian-region, .atlas-shell .sinew-anchor { min-height: 40px; } }
+/* Hand/foot boundary and six-channel names (2026-11-19). */
+.atlas-shell .six-channel { display: inline-block; min-width: 2.6em; padding: 1px 6px; border-radius: 6px; background: #efe8f8; color: #5b3f99; font-size: 11px; font-weight: 700; text-align: center; }
+.atlas-shell .six-pair { font-size: 12px; color: #4b5d57; }
+.atlas-shell .hand-foot p { margin: 4px 0; font-size: 12px; line-height: 1.6; }
+.atlas-shell .classic-quote { padding: 6px 9px; border-left: 3px solid #b9a3e0; background: #f7f4fc; color: #3f3555; font-size: 12px; }
+.atlas-shell .classic-quote small { margin-left: 6px; color: #8a7fa1; }
+/* Acupoint detail: how the point is found, and what runs beneath it (2026-11-19). */
+.atlas-shell .point-basis { margin: 4px 0 8px; padding: 5px 8px; border-radius: 8px; font-size: 12px; background: #f3f5f4; color: #4b5d57; }
+.atlas-shell .point-basis b { margin-right: 4px; color: #2f5d50; }
+.atlas-shell .point-basis.basis-landmark { background: #e9f4ef; }
+.atlas-shell .point-basis small { color: #7c8b84; }
+/* 4-4 V5: a light caution line (chip + one sentence), quieter than the location basis. */
+.atlas-shell .point-caution { margin: -4px 0 8px; font-size: 12px; line-height: 1.45; color: #6b7a74; }
+.atlas-shell .point-caution b { display: inline-block; margin-right: 5px; padding: 0 6px; border-radius: 999px; font-size: 11px; font-weight: 600; line-height: 18px; background: #fdf3e1; color: #8a5a0b; border: 1px solid #f0d9a8; }
+.atlas-shell .point-beneath { list-style: none; margin: 4px 0; padding: 0; display: grid; gap: 4px; }
+.atlas-shell .point-beneath li { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.atlas-shell .point-beneath li small { color: #7c8b84; margin-left: auto; white-space: nowrap; }
+.atlas-shell .point-beneath i { flex: none; width: 9px; height: 9px; border-radius: 50%; }
+.atlas-shell .beneath-artery { background: #c23b32; } .atlas-shell .beneath-vein { background: #3f63b0; } .atlas-shell .beneath-nerve { background: #d0b42f; }
+.atlas-shell .landmark-mark { margin-left: 5px; padding: 0 4px; border-radius: 4px; background: #e2f0ea; color: #2f6b58; font-size: 9px; font-style: normal; font-weight: 700; }
+/* Teaching landmarks (2026-11-19). */
+.atlas-shell .landmark-group h5 { margin: 8px 0 4px; }
+.atlas-shell .landmark-group ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.atlas-shell .landmark-group li { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.atlas-shell .landmark-group li span { flex: 1; color: #3f4f49; }
+.atlas-shell .landmark-group button { min-height: 30px; padding: 3px 9px; border: 1px solid #d8cdee; border-radius: 8px; background: #faf8fe; color: #5b3f99; font-size: 11px; cursor: pointer; }
+.atlas-shell .landmark-group button[aria-pressed=true] { background: #d39a2c; border-color: #d39a2c; color: #fff; }
+.atlas-shell .measure-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.atlas-shell .measure-table th, .atlas-shell .measure-table td { padding: 4px 3px; border-bottom: 1px solid #edf0ed; text-align: right; font-variant-numeric: tabular-nums; }
+.atlas-shell .measure-table th:first-child, .atlas-shell .measure-table td:first-child { text-align: left; }
+.atlas-shell .measure-table td small { display: block; color: #8a9891; font-size: 10px; }
+@media (pointer: coarse) { .atlas-shell .landmark-group button { min-height: 40px; } }
+
+/* 4-2 step 9: clinical test names (name, English, one line). */
+.atlas-shell .clinical-tests ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.atlas-shell .clinical-tests li { padding: 7px 9px; border-radius: 8px; background: #f3f5f4; color: #33413c; }
+.atlas-shell .clinical-tests li strong { font-weight: 650; color: #2f5d50; }
+.atlas-shell .clinical-tests .clinical-test-en { margin-left: 6px; font-size: 11px; color: #6b7a75; }
+.atlas-shell .clinical-tests li p { margin: 3px 0 0; font-size: 12.5px; line-height: 1.45; }
+
+/* 4-2 step 10: posture patterns (Janda) in the landmark view and on the 기능 tab. */
+.atlas-shell .posture-patterns ul { list-style: none; margin: 0 0 6px; padding: 0; display: grid; gap: 6px; }
+.atlas-shell .posture-patterns li { display: grid; gap: 2px; }
+.atlas-shell .posture-patterns li button { justify-self: start; }
+.atlas-shell .posture-patterns li span, .atlas-shell .posture-patterns li small { font-size: 12px; color: #4b5d57; }
+.atlas-shell .posture-legend { display: flex; gap: 12px; margin: 4px 0; font-size: 12px; }
+.atlas-shell .posture-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 4px; vertical-align: -1px; }
+.atlas-shell .posture-legend .posture-short { background: #c2255c; }
+.atlas-shell .posture-legend .posture-weak { background: #5c940d; }
+.atlas-shell .posture-membership ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.atlas-shell .posture-membership li { padding: 7px 9px; border-radius: 8px; background: #f3f5f4; color: #33413c; font-size: 13px; }
+.atlas-shell .posture-membership li span { display: block; font-size: 12px; color: #6b7a75; margin-top: 2px; }
+.atlas-shell .posture-patterns li button { min-height: 30px; padding: 3px 10px; border: 1px solid #c9d6d1; border-radius: 8px; background: #f6faf8; color: #2f5d50; font-size: 12px; cursor: pointer; }
+.atlas-shell .posture-patterns li button[aria-pressed=true] { background: #2f5d50; border-color: #2f5d50; color: #fff; }
+@media (pointer: coarse) { .atlas-shell .posture-patterns li button { min-height: 40px; } }
+
+/* 2026-11-20: the channel's sinew drawn faint teal next to its points. */
+.atlas-shell .acupoint-sinew-toggle { display: flex; align-items: center; gap: 6px; margin: 4px 0 8px; font-size: 12px; color: #33413c; cursor: pointer; }
+.atlas-shell .acupoint-sinew-toggle i { width: 18px; height: 4px; border-radius: 2px; background: #2dd4bf; }
+@media (pointer: coarse) { .atlas-shell .acupoint-sinew-toggle { min-height: 36px; } .atlas-shell .acupoint-sinew-toggle input { width: 20px; height: 20px; } }
+
+/* 4-3 U1: one "자료와 한계" fold per card; empty answers read as answers; hints and legends are not notices. */
+.atlas-shell .card-limits { margin: 14px 0 4px; border-top: 1px solid #e3e8e6; padding-top: 8px; font-size: 12px; color: #5b6b66; }
+.atlas-shell .card-limits summary { cursor: pointer; font-weight: 600; color: #4b5d57; min-height: 28px; display: flex; align-items: center; }
+.atlas-shell .card-limits ul { margin: 6px 0 0; padding-left: 16px; display: grid; gap: 4px; line-height: 1.5; }
+.atlas-shell .empty-answer { margin: 2px 0; color: #33413c; font-size: 13px; }
+.atlas-shell .card-hint { margin: 6px 0 0; font-size: 12px; color: #6b7a75; }
+.atlas-shell .role-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 6px 0 0; font-size: 12px; color: #4b5d57; }
+.atlas-shell .role-legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+@media (pointer: coarse) { .atlas-shell .card-limits summary { min-height: 40px; } }
+
+/* 4-3 U2: card head = title bar, one names/actions line, four key lines, then tabs. */
+.atlas-shell .card-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin: 6px 0 8px; }
+.atlas-shell .card-names { margin: 0; min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; font-size: 12.5px; color: #4b5d57; }
+.atlas-shell .card-names [lang=en] { font-style: italic; color: #6b7a75; }
+.atlas-shell .card-kind-chip { padding: 1px 7px; border-radius: 6px; background: #e9f1ee; color: #2f5d50; font-size: 11px; font-style: normal; }
+.atlas-shell .card-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+.atlas-shell .card-actions .part-pills { margin: 0; display: flex; gap: 4px; }
+.atlas-shell .study-detail-header .card-actions .part-pills button { min-height: 30px; padding: 2px 9px; font-size: 12px; }
+.atlas-shell .card-actions .bookmark-toggle, .atlas-shell .card-close { min-width: 32px; min-height: 30px; padding: 0 8px; border: 1px solid #d5dfdb; border-radius: 8px; background: #fff; color: #2f5d50; font-size: 15px; line-height: 1; cursor: pointer; }
+.atlas-shell .card-close { font-size: 18px; color: #4b5d57; }
+.atlas-shell .key-facts { margin: 0 0 10px; padding: 4px 0; border-top: 1px solid #e3e8e6; border-bottom: 1px solid #e3e8e6; display: grid; }
+.atlas-shell .key-facts > div { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 8px; padding: 5px 2px; border-radius: 6px; cursor: pointer; }
+.atlas-shell .key-facts > div:hover, .atlas-shell .key-facts > div:focus-visible { background: #f3f7f5; outline: none; }
+.atlas-shell .key-facts dt { font-size: 11.5px; color: #6b7a75; padding-top: 1px; }
+.atlas-shell .key-facts dd { margin: 0; font-size: 13px; line-height: 1.45; color: #22302b; }
+@media (pointer: coarse) {
+  .atlas-shell .study-detail-header .card-actions .part-pills button, .atlas-shell .card-actions .bookmark-toggle, .atlas-shell .card-close { min-height: 38px; min-width: 38px; }
+  .atlas-shell .key-facts > div { padding: 7px 2px; }
+}
+/* 4-3 U2: the 구용어 title reads first. */
+.atlas-shell .study-details > .mobile-detail-summary { font-size: 18px; font-weight: 650; color: #23443b; }
+
+/* 4-3 U3: folding sections in study order; a closed one is a single bar with its summary. */
+.atlas-shell .study-sections { display: grid; gap: 6px; }
+.atlas-shell .study-section { border: 1px solid #e1e8e5; border-radius: 10px; background: #fff; }
+.atlas-shell .study-section.is-open { border-color: #c5d6cf; }
+.atlas-shell .study-section-head { margin: 0; }
+.atlas-shell .study-section-head button { width: 100%; display: grid; grid-template-columns: auto minmax(0, 1fr) 14px; align-items: center; gap: 8px; min-height: 44px; padding: 8px 10px; border: 0; background: none; text-align: left; cursor: pointer; border-radius: 10px; }
+.atlas-shell .study-section-head button::after { content: ''; width: 7px; height: 7px; border-right: 1.6px solid #6b7a75; border-bottom: 1.6px solid #6b7a75; transform: rotate(45deg) translateY(-2px); justify-self: center; }
+.atlas-shell .study-section-head button[aria-expanded=true]::after { transform: rotate(-135deg) translateY(-1px); }
+.atlas-shell .study-section-head button:hover { background: #f5f8f7; }
+.atlas-shell .section-title { font-size: 14px; font-weight: 650; color: #23443b; }
+.atlas-shell .section-summary { font-size: 12px; font-weight: 400; color: #6b7a75; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.atlas-shell .study-section-head button[aria-expanded=true] .section-summary { visibility: hidden; }
+.atlas-shell .study-section > .study-tab-panel { padding: 0 10px 10px; }
+@media (pointer: coarse) { .atlas-shell .study-section-head button { min-height: 50px; } }
+
+/* 4-3 U4: the Korean-medicine section reads as numbered steps; the classical basis is folded last. */
+.atlas-shell .meridian-step h3 { display: flex; align-items: center; gap: 6px; }
+.atlas-shell .step-no { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: #2f5d50; color: #fff; font-size: 11px; font-weight: 600; }
+.atlas-shell .meridian-step h4 { margin: 8px 0 2px; font-size: 12px; color: #6b7a75; font-weight: 600; }
+.atlas-shell .six-pairs { margin-top: 6px; }
+.atlas-shell .hand-foot-line { margin: 8px 0 0; font-size: 12.5px; color: #33413c; }
+.atlas-shell .meridian-basis { margin-top: 8px; padding: 6px 0; border-top: 1px solid #e3e8e6; font-size: 12.5px; color: #4b5d57; }
+.atlas-shell .meridian-basis summary { cursor: pointer; font-weight: 600; min-height: 30px; display: flex; align-items: center; }
+.atlas-shell .meridian-basis h4 { margin: 8px 0 2px; font-size: 12px; color: #2f5d50; }
+.atlas-shell .meridian-basis p { margin: 2px 0 6px; line-height: 1.55; }
+.atlas-shell .landmark-link small { margin-left: 4px; }
+@media (pointer: coarse) { .atlas-shell .meridian-basis summary { min-height: 40px; } }
+/* U4: one row per sinew (name, then its region button) so three crossing sinews stay short. */
+.atlas-shell .meridian-links .meridian-sinews { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.atlas-shell .meridian-links .meridian-sinews li { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; }
+.atlas-shell .meridian-links .meridian-sinews .meridian-region, .atlas-shell .meridian-links .meridian-sinews .sinew-anchor { min-height: 28px; padding: 2px 8px; font-size: 11px; margin: 0; }
+.atlas-shell .meridian-links .six-pairs { padding-top: 6px; border-top: 1px dashed #e3e8e6; }
+.atlas-shell .meridian-links .six-pair { font-size: 12px; color: #4b5d57; }
+@media (pointer: coarse) { .atlas-shell .meridian-links .meridian-sinews .meridian-region, .atlas-shell .meridian-links .meridian-sinews .sinew-anchor { min-height: 36px; } }
+.atlas-shell .meridian-links .meridian-sinews .meridian-point { width: auto; flex: 0 1 auto; min-width: 0; }
+
+/* 4-3 U5: tablet portrait — the card and the acupoint panel are one bottom sheet (only one unfolded at a time), the model uses the top. */
+@media (min-width:600px) and (max-width:1100px) and (orientation: portrait) {
+  .atlas-shell .study-layout { --card-space: 0px; --sheet: clamp(300px, 40dvh, 480px); }
+  .atlas-shell:has(.study-details[open]) .study-layout { --scene-right: 12px; --card-space: var(--sheet); }
+  .atlas-shell:has(.study-details:not([open])) .study-layout { --scene-right: 12px; --card-space: 60px; }
+  /* :not([hidden]) lifts this to the folded-card rule's weight, so the open panel's sheet wins. */
+  .atlas-shell:has(.acupoint-panel:not([hidden])) .study-layout { --scene-right: 12px; --card-space: var(--sheet); }
+  .atlas-shell .whole-body-canvas { left: 0; right: 0; bottom: calc(var(--card-space) + 28px + var(--view-tools-height,128px) + 8px); }
+  .atlas-shell .body-tools { bottom: calc(var(--card-space) + 28px); }
+  .atlas-shell .body-status { bottom: calc(var(--card-space) + 1px); }
+  .atlas-shell .study-details { --detail-panel-height: var(--sheet); top: auto; bottom: 0; left: 12px; right: 12px; width: auto; border-radius: 16px 16px 0 0; }
+  .atlas-shell .acupoint-panel { top: auto !important; bottom: 0; left: 12px; right: 12px; width: auto; height: var(--sheet); max-height: var(--sheet) !important; border-radius: 16px 16px 0 0; }
+  /* With the panel in the sheet, the folded card waits as a title chip at the top right. */
+  .atlas-shell:has(.acupoint-panel) .study-details:not([open]) { top: 8px; bottom: auto; left: auto; right: 12px; width: 240px; border-radius: 12px; }
+  .atlas-shell:has(.study-details:not([open])) .acupoint-entry { top: 8px; }
+}
+
+/* 4-3 U6: one toolbar row; layers behind one button; selection actions on the card head. */
+.atlas-shell .toolbar-main .view-options-row { display: flex; flex-wrap: nowrap; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+.atlas-shell .toolbar-main .view-options-row::-webkit-scrollbar { display: none; }
+.atlas-shell .body-tools .toolbar-main .view-options-row button { flex: 1 0 auto; width: auto; white-space: nowrap; padding: 6px 12px; }
+.atlas-shell .layers-toggle small { margin-left: 5px; padding: 0 6px; border-radius: 8px; background: #e9f1ee; color: #2f5d50; font-size: 11px; }
+.atlas-shell .layers-toggle[aria-expanded=true] { background: #47796b; color: #fff; }
+.atlas-shell .layers-toggle[aria-expanded=true] small { background: rgba(255,255,255,.25); color: #fff; }
+.atlas-shell .layer-panel { display: grid; gap: 6px; padding-top: 6px; border-top: 1px solid #edf0ed; }
+.atlas-shell .layer-panel[hidden] { display: none; }
+.atlas-shell .layer-panel .layer-row { display: flex; flex-wrap: wrap; gap: 4px; }
+.atlas-shell .layer-panel .layer-row button { flex: 0 0 auto; width: auto; padding: 6px 12px; white-space: nowrap; }
+.atlas-shell .card-view-actions:empty { display: none; }
+.atlas-shell .card-view-actions { margin: -2px 0 8px; }
+.atlas-shell .selection-view-options.in-card { display: flex; flex-wrap: wrap; gap: 4px; padding: 0; border: 0; }
+.atlas-shell .selection-view-options.in-card button { min-height: 30px; padding: 2px 10px; border: 1px solid #d5dfdb; border-radius: 8px; background: #fff; color: #2f5d50; font-size: 12px; cursor: pointer; }
+.atlas-shell .selection-view-options.in-card button[aria-pressed=true] { background: #47796b; color: #fff; border-color: #47796b; }
+.atlas-shell .selection-view-options.in-card button:disabled { opacity: .45; cursor: default; }
+@media (pointer: coarse) { .atlas-shell .selection-view-options.in-card button { min-height: 38px; } }
+
+/* 4-3 U7: view directions at the canvas's top left. */
+.atlas-shell .view-pad { position: absolute; z-index: 3; top: 48px; left: calc(var(--scene-left) + 4px); display: flex; gap: 3px; padding: 3px; border: 1px solid #dfe6e3; border-radius: 10px; background: rgba(255,255,255,.88); }
+.atlas-shell .view-pad button { min-height: 30px; min-width: 38px; padding: 2px 8px; border: 0; border-radius: 7px; background: transparent; color: #2f5d50; font-size: 12px; cursor: pointer; }
+.atlas-shell .view-pad button:hover { background: #eef4f1; }
+@media (pointer: coarse) { .atlas-shell .view-pad button { min-height: 40px; min-width: 44px; } }
+
+/* 4-3 U8: name tags over the model (screen space, leader line to the spot). */
+.atlas-shell .scene-labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 2; }
+.atlas-shell .scene-label-lines { position: absolute; inset: 0; overflow: visible; }
+.atlas-shell .scene-label-lines line { stroke: #23443b; stroke-width: 1.4; opacity: .75; }
+.atlas-shell .scene-label-lines circle { fill: #fff; stroke: #23443b; stroke-width: 1.6; }
+.atlas-shell .scene-label-lines .is-origin { stroke: #3b6fd6; }
+.atlas-shell .scene-label-lines .is-insertion { stroke: #c2682b; }
+.atlas-shell .scene-label { position: absolute; left: 0; top: 0; display: flex; align-items: baseline; gap: 5px; padding: 4px 9px; border-radius: 8px; background: rgba(255,255,255,.95); border: 1px solid #cfdcd6; box-shadow: 0 1px 4px rgba(20,40,34,.12); white-space: nowrap; font-size: 13px; color: #1f3a33; will-change: transform; }
+.atlas-shell .scene-label b { font-weight: 650; }
+.atlas-shell .scene-label small { font-size: 11px; color: #5b6b66; }
+.atlas-shell .scene-label.is-selected { border-color: #2f5d50; }
+.atlas-shell .scene-label.is-origin { border-color: #9db8ee; }
+.atlas-shell .scene-label.is-origin small { color: #2f5fbf; }
+.atlas-shell .scene-label.is-insertion { border-color: #ecc3a4; }
+.atlas-shell .scene-label.is-insertion small { color: #b05a21; }
+.atlas-shell .scene-label.is-hover { background: #23443b; border-color: #23443b; color: #fff; font-size: 12px; padding: 3px 8px; }
+
+/* 4-3 U10: acupoint panel — channel choice folded to one button, point structures in folds. */
+.atlas-shell .channel-picker { margin: 6px 0; }
+.atlas-shell .channel-picker-toggle { width: 100%; display: flex; align-items: baseline; gap: 8px; min-height: 40px; padding: 6px 10px; border: 1px solid #e2cdbd; border-radius: 9px; background: #fff8f3; color: #7c2d12; font-size: 14px; font-weight: 650; text-align: left; cursor: pointer; }
+.atlas-shell .channel-picker-toggle small { font-size: 11px; font-weight: 500; color: #9a6a52; }
+.atlas-shell .channel-picker-toggle::after { content: ''; margin-left: auto; width: 7px; height: 7px; border-right: 1.6px solid #9a6a52; border-bottom: 1.6px solid #9a6a52; transform: rotate(45deg) translateY(-2px); }
+.atlas-shell .channel-picker-toggle[aria-expanded=true]::after { transform: rotate(-135deg); }
+.atlas-shell .channel-picker .acupoint-channels { margin-top: 6px; }
+.atlas-shell .point-fold { margin: 6px 0; border-top: 1px solid #efe5dd; padding-top: 4px; }
+.atlas-shell .point-fold summary { cursor: pointer; font-size: 12.5px; font-weight: 600; color: #4b3a30; min-height: 30px; display: flex; align-items: center; gap: 6px; }
+.atlas-shell .point-fold summary small { padding: 0 6px; border-radius: 8px; background: #f6ece5; color: #7c4a2d; font-size: 11px; }
+@media (pointer: coarse) { .atlas-shell .point-fold summary { min-height: 40px; } }
+
+/* 4-3 U12: folds on bone, ligament, nerve and vessel cards share the muscle card's section look. */
+.atlas-shell .fold-section > summary { list-style: none; display: grid; grid-template-columns: auto minmax(0, 1fr) 14px; align-items: center; gap: 8px; min-height: 44px; padding: 8px 10px; cursor: pointer; border-radius: 10px; }
+.atlas-shell .fold-section > summary::-webkit-details-marker { display: none; }
+.atlas-shell .fold-section > summary::after { content: ''; width: 7px; height: 7px; border-right: 1.6px solid #6b7a75; border-bottom: 1.6px solid #6b7a75; transform: rotate(45deg) translateY(-2px); justify-self: center; }
+.atlas-shell .fold-section[open] > summary::after { transform: rotate(-135deg) translateY(-1px); }
+.atlas-shell .fold-section[open] { border-color: #c5d6cf; }
+.atlas-shell .fold-section[open] > summary .section-summary { visibility: hidden; }
+.atlas-shell .fold-section > summary:hover { background: #f5f8f7; }
+.atlas-shell .card-folds { display: grid; gap: 6px; margin-top: 4px; }
+@media (pointer: coarse) { .atlas-shell .fold-section > summary { min-height: 50px; } }
+
+/* 4-3 V1: short, quiet transitions (at most 0.16 s); none when the device asks for reduced motion. */
+@keyframes atlas-reveal { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: none; } }
+@keyframes atlas-appear { from { opacity: 0; } to { opacity: 1; } }
+.atlas-shell .study-section.is-open > .study-tab-panel,
+.atlas-shell .fold-section[open] > .study-tab-panel,
+.atlas-shell .point-fold[open] > :not(summary),
+.atlas-shell .card-limits[open] > ul,
+.atlas-shell .meridian-basis[open] > :not(summary),
+.atlas-shell .layer-panel:not([hidden]),
+.atlas-shell .more-panel,
+.atlas-shell .channel-picker .acupoint-channels { animation: atlas-reveal .16s ease-out; }
+.atlas-shell .acupoint-panel, .atlas-shell .movement-panel, .atlas-shell .section-panel,
+.atlas-shell .study-details[open] .study-detail-body, .atlas-shell .scene-label { animation: atlas-appear .14s ease-out; }
+.atlas-shell .body-tools button, .atlas-shell .study-section-head button, .atlas-shell .key-facts > div,
+.atlas-shell .part-pills button, .atlas-shell .card-actions button, .atlas-shell .selection-view-options button { transition: background-color .12s ease-out, color .12s ease-out, border-color .12s ease-out; }
+.atlas-shell .study-section-head button::after, .atlas-shell .fold-section > summary::after, .atlas-shell .channel-picker-toggle::after { transition: transform .14s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .atlas-shell *, .atlas-shell *::after { animation: none !important; transition: none !important; }
+}
+.atlas-shell .acupoint-sinew-toggle.is-others i { background: #a3aaa7; height: 2px; }
+
+/* 4-3 V4: channel flow line and neighbours in the 12-channel cycle. */
+.atlas-shell .channel-flow { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; margin: 2px 0 6px; font-size: 12.5px; color: #4b3a30; }
+.atlas-shell .channel-flow small { font-size: 11px; color: #9a6a52; }
+.atlas-shell .channel-flow i { font-style: normal; color: #c2410c; font-weight: 700; }
+.atlas-shell .channel-neighbours { display: flex; gap: 4px; margin: 0 0 8px; flex-wrap: wrap; }
+.atlas-shell .channel-neighbours button { min-height: 30px; padding: 2px 9px; border: 1px solid #e2cdbd; border-radius: 8px; background: #fff; color: #7c2d12; font-size: 12px; cursor: pointer; }
+.atlas-shell .channel-neighbours .channel-play { background: #fff4e6; border-color: #f0b27a; font-weight: 600; margin: 0 auto; }
+@media (pointer: coarse) { .atlas-shell .channel-neighbours button { min-height: 40px; } }
+
+/* ── 2026-11-20 tool dock ─────────────────────────────────────────────────────
+   The toolbar is one floating dock at the bottom centre: icon over a short label, four groups split by thin rules
+   (층 · 화면 · 도구 · 더보기). Panels the dock opens float above it as cards; the canvas stays visible around them. */
+.atlas-shell .body-tools { background: transparent; border: 0; padding: 0; align-items: center; pointer-events: none; }
+.atlas-shell .body-tools > * { pointer-events: auto; }
+.atlas-shell .body-tools > .toolbar-main { order: 10; }
+.atlas-shell .body-tools > :is(.layer-panel, .more-panel, .section-panel, .movement-panel, .selection-view-options) {
+  width: min(640px, 100%); box-sizing: border-box; padding: 10px 12px; border: 1px solid #dfe6e0; border-radius: 14px; background: #fffffff5; box-shadow: 0 10px 30px #1d3b3018; }
+.atlas-shell .body-tools > .layer-panel[hidden] { display: none; }
+.atlas-shell .toolbar-main { display: block; max-width: 100%; }
+.atlas-shell .toolbar-main .tool-dock { display: flex; flex-wrap: nowrap; align-items: stretch; gap: 0; margin: 0; padding: 5px; border: 1px solid #dfe6e0; border-radius: 18px; background: #fffffff7;
+  box-shadow: 0 10px 30px #1d3b301c, 0 1px 2px #1d3b3012; overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+.atlas-shell .toolbar-main .tool-dock::-webkit-scrollbar { display: none; }
+.atlas-shell .tool-group { display: flex; gap: 2px; padding: 0 5px; }
+.atlas-shell .tool-group + .tool-group { border-left: 1px solid #e6ebe7; }
+.atlas-shell .body-tools .toolbar-main button.tool { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; flex: none;
+  min-width: 62px; min-height: 54px; padding: 6px 8px 5px; border: 0; border-radius: 12px; background: transparent; color: #3e5a52; font-size: 11px; line-height: 1.2; white-space: nowrap;
+  transition: background .12s, color .12s; }
+.atlas-shell .body-tools .toolbar-main button.tool:hover:not(:disabled) { background: #eef4f1; }
+.atlas-shell .body-tools .toolbar-main button.tool:is([aria-expanded=true], [aria-pressed=true]) { background: #e1eee8; color: #24574a; }
+.atlas-shell .body-tools .toolbar-main button.tool:disabled { opacity: .35; }
+.atlas-shell .tool-icon { display: block; }
+.atlas-shell .body-tools .toolbar-main button.tool small { position: absolute; top: 4px; right: 9px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: #47796b; color: #fff;
+  font-size: 10px; line-height: 16px; text-align: center; box-sizing: border-box; }
+.atlas-shell .body-tools .layer-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.atlas-shell .body-tools .layer-row button { min-height: 36px; padding: 6px 12px; border-radius: 999px; width: auto; white-space: nowrap; }
+@media (max-width:599px) {
+  .atlas-shell .body-tools .toolbar-main button.tool { min-width: 54px; min-height: 50px; padding: 5px 6px 4px; font-size: 10px; }
+  .atlas-shell .tool-group { padding: 0 3px; }
+}

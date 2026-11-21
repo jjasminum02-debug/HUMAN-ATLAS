@@ -87,6 +87,7 @@ python3 atlas-data/pipeline/build_actions.py   # → runtime/muscle-actions.json
 ```bash
 python3 atlas-data/pipeline/build_attachments.py                                                   # ZA 패치 → runtime/attachments.json
 blender --background --factory-startup --python atlas-data/pipeline/build_attachment_contacts.py   # 접촉 추정 면 추가 (약 50초)
+python3 atlas-data/pipeline/attachment_roles.py                                                    # 기시·정지 역할을 카드 글로 바로잡기(Z-Anatomy 이름이 반대인 근육)
 ```
 - 두 번째는 첫 번째 결과에 행을 더하므로 항상 순서대로 실행한다. 형상 chunk를 다시 만들면 둘 다 다시 실행한다.
 - 앱: `DatasetSceneAdapter`(뼈 위 면), `src/ui/AttachmentAreas.tsx`(근육 카드 목록).

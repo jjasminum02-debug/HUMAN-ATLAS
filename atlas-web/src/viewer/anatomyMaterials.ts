@@ -6,14 +6,21 @@ import { installSectionCap } from './section.ts';
 export type Tissue = 'bone' | 'muscle' | 'nerve' | 'accessory' | 'tendon' | 'fascia' | 'joint' | 'vessel';
 export type MaterialMode = 'normal' | 'selected' | 'dim' | 'translucent' | 'nerveContext' | 'motorContext' | 'innervated' | 'observationContext' | 'motionContext' | 'originContext' | 'insertionContext'
   /** C4: the bone carries the muscle's drawn origin/insertion area, so the whole-bone cue is lighter and the area reads. */
-  | 'originAreaContext' | 'insertionAreaContext';
+  | 'originAreaContext' | 'insertionAreaContext'
+  /** The selected muscle while its attachments are observed: its own colour, half see-through so the areas under it show. */
+  | 'attachmentMuscle';
 /** variant: fine tissue (ligament, meniscus, tooth ...); layerOpacity: learner's per-layer opacity (0.1-1);
- * role: M3 movement colouring (muscles producing / opposing the shown movement). */
-export type MaterialState = { mode?: MaterialMode; phase?: 'action' | 'return' | null; role?: 'agonist' | 'antagonist'; contextOpacity?: number; userTranslucent?: boolean; hovered?: boolean; variant?: string; layerOpacity?: number };
+ * role: M3 movement colouring (muscles producing / opposing the shown movement), or a meridian sinew's region. */
+export type MaterialState = { mode?: MaterialMode; phase?: 'action' | 'return' | null; role?: 'agonist' | 'antagonist' | 'meridian' | 'postureShort' | 'postureWeak'; contextOpacity?: number; userTranslucent?: boolean; hovered?: boolean; variant?: string; layerOpacity?: number };
 export const ANATOMY_PALETTE = {
-  bone: '#e6dbc2', muscle: '#d48b78', nerve: '#dbbb32', accessory: '#c5bdb1', tendon: '#f1ebdc', fascia: '#e1dde9', joint: '#f6f0e1', vessel: '#b5463d',
+  // 4-3 U9: muscle one step deeper (still clear of the movement red), tendon a cooler white so the muscle–tendon line reads, bone ivory.
+  bone: '#e9dec4', muscle: '#c77866', nerve: '#dbbb32', accessory: '#c5bdb1', tendon: '#eeeadf', fascia: '#e1dde9', joint: '#f6f0e1', vessel: '#b5463d',
   origin: '#476eb4', insertion: '#bc7135', selected: '#237f79', selectedNerve: '#d0c42f', related: '#338fc1', action: '#df8065', return: '#a4aaa8',
   agonist: '#d4472f', antagonist: '#3f7cc4',
+  // Muscles of the meridian sinew region being shown (amber: apart from the muscle pink, the teal selection and the sinew line).
+  meridian: '#d39a2c',
+  // 4-3 U1: posture patterns get their own pair so red/blue keep meaning movement only (magenta = tight/short, green = weak).
+  postureShort: '#c2255c', postureWeak: '#5c940d',
 };
 
 // Cartilage-like joint tissue reads blue-white; synovial sacs and sheaths blue; fat pads yellow.
@@ -27,18 +34,28 @@ const VARIANT_COLORS: Record<string, string> = {
 };
 const VARIANT_OPACITY: Record<string, number> = { bursa: .7, capsule: .85, membrane: .85 };
 
+/**
+ * 4-3 V2 visual hierarchy, one table for every mode:
+ *  1 selected — the selection teal (a tissue tint muddies it: muscle red and teal are near complements), fibre and shading kept, slight glow, outline;
+ *  2 related  — role colours (origin/insertion, movers, sinew region, posture), full strength;
+ *  3 context  — the rest while something is selected: pale and matte, so it recedes;
+ *  4 background — translucent / observation modes, and distance fog behind the focus (controller).
+ */
+export const HIERARCHY = { selectedTint: .92, selectedGlow: .1, contextTint: .56, contextColor: '#e8eae5', contextRoughness: .82 };
+
 export function anatomyMaterialParameters(tissue: Tissue, state: MaterialState = {}): THREE.MeshStandardMaterialParameters {
   const mode = state.mode ?? 'normal';
   const base = (state.variant && VARIANT_COLORS[state.variant]) || ANATOMY_PALETTE[tissue];
   const color = new THREE.Color(tissue === 'bone' && mode === 'originAreaContext' ? new THREE.Color(base).lerp(new THREE.Color(ANATOMY_PALETTE.origin), .45)
     : tissue === 'bone' && mode === 'insertionAreaContext' ? new THREE.Color(base).lerp(new THREE.Color(ANATOMY_PALETTE.insertion), .45)
     : tissue === 'bone' && mode === 'originContext' ? ANATOMY_PALETTE.origin
-    : tissue === 'bone' && mode === 'insertionContext' ? ANATOMY_PALETTE.insertion : mode === 'selected' ? tissue === 'nerve' ? ANATOMY_PALETTE.selectedNerve : ANATOMY_PALETTE.selected
+    : tissue === 'bone' && mode === 'insertionContext' ? ANATOMY_PALETTE.insertion
+    : mode === 'selected' ? tissue === 'nerve' ? ANATOMY_PALETTE.selectedNerve : new THREE.Color(base).lerp(new THREE.Color(ANATOMY_PALETTE.selected), HIERARCHY.selectedTint)
     : mode === 'innervated' || mode === 'motorContext' ? ANATOMY_PALETTE.related : base);
   if (tissue === 'muscle' && state.phase) color.set(ANATOMY_PALETTE[state.phase]);
   if ((tissue === 'muscle' || tissue === 'tendon') && state.role) color.set(ANATOMY_PALETTE[state.role]);
-  if (mode === 'dim' && tissue !== 'nerve') color.lerp(new THREE.Color('#e5e5dd'), .48);
-  const modeOpacity = mode === 'translucent' || state.userTranslucent ? .3 : mode === 'nerveContext' ? .12 : mode === 'motorContext' ? .5
+  if (mode === 'dim' && tissue !== 'nerve') color.lerp(new THREE.Color(HIERARCHY.contextColor), HIERARCHY.contextTint);
+  const modeOpacity = mode === 'attachmentMuscle' ? .5 : mode === 'translucent' || state.userTranslucent ? .3 : mode === 'nerveContext' ? .12 : mode === 'motorContext' ? .5
     : mode === 'observationContext' ? .18 : mode === 'motionContext' ? Math.max(.1, Math.min(.6, state.contextOpacity ?? .3)) : 1;
   // Fascia is a sheet over the muscles: translucent by default unless selected.
   const tissueOpacity = tissue === 'fascia' && mode !== 'selected' ? .5 : (mode === 'selected' ? 1 : VARIANT_OPACITY[state.variant ?? ''] ?? 1);
@@ -46,11 +63,12 @@ export function anatomyMaterialParameters(tissue: Tissue, state: MaterialState =
   const nerve = tissue === 'nerve', selected = mode === 'selected';
   // Patches are copies of the bone surface: pull them toward the camera so they never z-fight with it.
   const attachment = state.variant?.startsWith('attachment');
-  return { ...(attachment ? { polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -4 } : {}), color, metalness: 0, roughness: nerve ? selected ? .42 : .55 : tissue === 'bone' ? .62 : tissue === 'muscle' ? .64 : tissue === 'joint' || tissue === 'tendon' ? .45 : tissue === 'vessel' ? .5 : .8,
+  const baseRoughness = nerve ? selected ? .42 : .55 : tissue === 'bone' ? .62 : tissue === 'muscle' ? .58 : tissue === 'joint' || tissue === 'tendon' ? .45 : tissue === 'vessel' ? .5 : .8;
+  return { ...(attachment ? { polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -4 } : {}), color, metalness: 0, roughness: mode === 'dim' ? Math.max(baseRoughness, HIERARCHY.contextRoughness) : baseRoughness,
     transparent: opacity < 1, opacity, depthTest: true, depthWrite: opacity === 1,
     // Selection also changes luminance/specular response; tissue identity remains yellow for nerves.
-    emissive: nerve ? color : state.hovered ? '#628b83' : '#000000',
-    emissiveIntensity: nerve ? selected ? .3 : state.hovered ? .24 : .16 : state.hovered ? .16 : 0 };
+    emissive: nerve ? color : selected ? ANATOMY_PALETTE.selected : state.hovered ? '#628b83' : '#000000',
+    emissiveIntensity: nerve ? selected ? .3 : state.hovered ? .24 : .16 : selected ? HIERARCHY.selectedGlow : state.hovered ? .16 : 0 };
 }
 
 // Fibrous tissue (ligament, tendon, fascia) reads glossier than bone through a soft sheen; cartilage-like
@@ -101,9 +119,11 @@ export class AnatomyMaterials {
 /** Same three unshadowed lights and standard PBR shader; no textures, AO pass or extra renderer. */
 export function installAnatomyLighting(scene: THREE.Scene, renderer: THREE.WebGLRenderer) {
   scene.background = new THREE.Color('#eff1ef');
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x9caaa8, 1.15));
-  const key = new THREE.DirectionalLight(0xfff5ed, 2.1); key.position.set(-2, 3, 4); scene.add(key);
-  const rim = new THREE.DirectionalLight(0xe0eeee, .85); rim.position.set(2, 1, -3); scene.add(rim);
+  // 4-3 U9: less flat fill, a stronger key from the upper left front and a cool rim, so muscle bellies read in relief.
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x8d9b99, .9));
+  const key = new THREE.DirectionalLight(0xfff3e8, 2.45); key.position.set(-2, 3.2, 4); scene.add(key);
+  const fill = new THREE.DirectionalLight(0xeef3f6, .45); fill.position.set(3, .5, 2.5); scene.add(fill);
+  const rim = new THREE.DirectionalLight(0xe0eeee, 1); rim.position.set(2, 1.2, -3); scene.add(rim);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1;

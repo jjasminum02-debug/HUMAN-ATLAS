@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { AnatomySceneController, type BodyProgress } from './AnatomySceneController';
 import { type LayerId } from './contract';
@@ -10,21 +11,27 @@ import type { RuntimeIntegration } from '../datasets/integration';
 import { AtlasLoading } from '../../ui/AtlasLoading';
 import { motorRelationsForNerve, nerveConceptForSourceName } from '../../data/learning';
 import { MovementPanel } from './MovementPanel';
+import { PosturePatternList } from '../../ui/PosturePatterns';
 import { SectionPanel } from './SectionPanel';
 import { AcupointPanel } from './AcupointPanel';
+import type { AcupointTarget } from '../acupointLayer';
 import type { Section } from '../section';
 
-const AcupointReview = lazy(() => import('../acupoints/AcupointEntry.tsx'));
+// The old acupoint review screens (skin carriers, territories; redistribution held) exist only in development builds:
+// with no import in production, their code and data are not emitted into dist.
+const AcupointReview = import.meta.env.DEV ? lazy(() => import('../acupoints/AcupointEntry.tsx')) : null;
 const SkinControls = lazy(() => import('../skin/SkinControls.tsx'));
 const acupointDevelopmentReview = import.meta.env.DEV && new URLSearchParams(window.location.search).get('acupointReview') === '1';
 const surfaceSample = import.meta.env.DEV && new URLSearchParams(window.location.search).get('carrierSample') === '1';
 const territoryDevelopmentReview = import.meta.env.DEV && window.location.pathname === '/review' && new URLSearchParams(window.location.search).get('territories') === '1';
 /** Outer to inner: the order "한 겹 벗기기" removes layers in. Bone and nerve are never peeled. */
-const PEEL_ORDER: LayerId[] = ['fascia', 'superficialMuscle', 'deepMuscle', 'joint'];
+const PEEL_ORDER: LayerId[] = ['superficialMuscle', 'deepMuscle', 'joint'];
+/** 2026-11-20: fascia is not offered to learners (the user asked; a sheet over the muscles only hid them). A fascia found by search still shows. */
+const LEARNER_LAYERS: LayerId[] = ['superficialMuscle', 'deepMuscle', 'joint', 'bone', 'nerve', 'vessel'];
 const LAYER_LABELS: Record<LayerId, string> = { fascia: '근막', superficialMuscle: '얕은 근육', deepMuscle: '깊은 근육', joint: '인대·관절', bone: '뼈', nerve: '신경', vessel: '혈관' };
 const DEFAULT_LAYERS: Record<LayerId, boolean> = { fascia: false, superficialMuscle: true, deepMuscle: true, joint: false, bone: true, nerve: false, vessel: false };
 
-export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewResetRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, onEntered, onMotionHostChange, onMuscleLayerChange, onBoneLayerChange, onSelectionHiddenChange }: { attachmentRole?: 'origin' | 'insertion' | null; homeRevision?: number; viewResetRevision?: number; datasetSource: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; onMotionHostChange?: (host: DatasetSceneAdapter | null) => void; onMuscleLayerChange?: (enabled: boolean) => void; onBoneLayerChange?: (enabled: boolean) => void; onSelectionHiddenChange?: (hidden: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
+export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewResetRevision = 0, datasetSource, regionIds, selectedId, selectedIds, onSelect, onEntered, onMotionHostChange, onMuscleLayerChange, onBoneLayerChange, onSelectionHiddenChange, onAcupointPanelChange, closeAcupointRevision = 0, selectionActionsTarget = null, selectionActionsOnCard = false }: { selectionActionsTarget?: HTMLElement | null; /** The page's card owns these actions: while it is folded they are not shown in the toolbar either. */ selectionActionsOnCard?: boolean; attachmentRole?: 'origin' | 'insertion' | null; onAcupointPanelChange?: (open: boolean) => void; closeAcupointRevision?: number; homeRevision?: number; viewResetRevision?: number; datasetSource: { dataset: Dataset; integration: RuntimeIntegration }; onEntered?: (value: boolean) => void; onMotionHostChange?: (host: DatasetSceneAdapter | null) => void; onMuscleLayerChange?: (enabled: boolean) => void; onBoneLayerChange?: (enabled: boolean) => void; onSelectionHiddenChange?: (hidden: boolean) => void; whole: boolean; onWholeChange: (value: boolean) => void; regionIds: string[]; selectedId: string | null; selectedIds: string[]; onSelect: (id: string, side: string | null) => void }) {
   const host = useRef<HTMLDivElement>(null);
   const tools = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -57,6 +64,8 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
   const [moreOpen, setMoreOpen] = useState(false);
   const [shading, setShading] = useState<boolean | null>(null);
   const [movementOpen, setMovementOpen] = useState(false);
+  const [layersOpen, setLayersOpen] = useState(false);
+  const [labelsOn, setLabelsOn] = useState(true);
   const [movementRequest, setMovementRequest] = useState<{ jointId: string; revision: number } | null>(null);
   const rowsByKey = useMemo(() => new Map((datasetSource.integration.objects ?? []).map(r => [r.sourceKey, r])), [datasetSource]);
   const sceneOf = () => { const c = controller.current; return c instanceof DatasetSceneAdapter ? c.scene : c; };
@@ -92,6 +101,8 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
     // Selecting a structure (e.g. from search) turns its layer on; nerves keep their own rule below.
     const layer = selectedSourceRow && selectedSourceRow.kind !== 'nerve' ? layerIdOf(selectedSourceRow) : null;
     if (layer) setLayers(previous => previous[layer] ? previous : { ...previous, [layer]: true });
+    // Fascia has no learner toggle: it shows only while a fascia found by search is selected.
+    if (layer !== 'fascia') setLayers(previous => previous.fascia ? { ...previous, fascia: false } : previous);
   }, [selectedSourceRow?.sourceKey]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     // Initial nerve selection is visible; an explicit learner layer-off persists.
@@ -100,7 +111,7 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
   const staticPose = datasetSource.integration.objects.find(r => r.nerve)?.nerve?.poseId;
   const [acupointsActive, setAcupointsActive] = useState(false);
   const [acupointPanelOpen, setAcupointPanelOpen] = useState(false);
-  type Presentation = { observeNerves: boolean; highlightInnervation: boolean; dim: boolean; isolated: boolean; hidden: string[]; translucent: string[] };
+  type Presentation = { observeNerves: boolean; highlightInnervation: boolean; dim: boolean; isolated: boolean; xray?: boolean; hidden: string[]; translucent: string[] };
   const [presentation, setPresentation] = useState<Presentation>({ observeNerves: true, highlightInnervation: true, dim: true, isolated: false, hidden: [], translucent: [] });
   useEffect(() => { onSelectionHiddenChange?.(Boolean(selectedId && presentation.hidden.includes(selectedId))); }, [selectedId, presentation.hidden, onSelectionHiddenChange]);
   const updatePresentation = (next: Presentation) => setPresentation(next);
@@ -143,7 +154,7 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
     const regionKey = JSON.stringify(regionIds);
     const previous = previousView.current;
     controller.current?.setView({ region: null, regionIds, selectedId, selectedIds, bones, muscles, nerves,
-      fascia: layers.fascia, joints: layers.joint, vessels: layers.vessel, superficialMuscles: layers.superficialMuscle, deepMuscles: layers.deepMuscle, layerOpacity, attachmentObservation: attachmentRole && selectedId ? {sourceKey: selectedId, role: attachmentRole} : null, poseId: staticPose, nerveConceptMuscleKeys, observeNerves: presentation.observeNerves, highlightInnervation: presentation.highlightInnervation, supplements: false, dim: presentation.dim, isolate: presentation.isolated && Boolean(selectedId), hiddenSourceKeys: presentation.hidden, translucentSourceKeys: presentation.translucent });
+      fascia: layers.fascia, joints: layers.joint, vessels: layers.vessel, superficialMuscles: layers.superficialMuscle, deepMuscles: layers.deepMuscle, layerOpacity, attachmentObservation: attachmentRole && selectedId ? {sourceKey: selectedId, role: attachmentRole} : null, poseId: staticPose, nerveConceptMuscleKeys, observeNerves: presentation.observeNerves, highlightInnervation: presentation.highlightInnervation, supplements: false, dim: presentation.dim, isolate: presentation.isolated && Boolean(selectedId), xray: Boolean(presentation.xray && selectedId), hiddenSourceKeys: presentation.hidden, translucentSourceKeys: presentation.translucent });
     const nerveFramed = controller.current instanceof DatasetSceneAdapter && selectedNerve && nerves
       && !presentation.hidden.includes(selectedId ?? '');
     if (previous === null) {
@@ -176,55 +187,94 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
     // A joint card's "움직여 보기" opens this panel on that joint.
     return c.onOpenMovement(jointId => { setMovementOpen(true); setMovementRequest(previous => ({ jointId, revision: (previous?.revision ?? 0) + 1 })); });
   }, [ready]);
+  // A muscle card's 경락 tab opens the acupoint panel on a point or a meridian sinew.
+  const [acupointRequest, setAcupointRequest] = useState<(AcupointTarget & { revision: number }) | null>(null);
+  useEffect(() => {
+    const c = controller.current;
+    if (!ready || !(c instanceof DatasetSceneAdapter)) return;
+    return c.onOpenAcupoint(target => { setAcupointPanelOpen(true); setAcupointRequest(previous => ({ ...target, revision: (previous?.revision ?? 0) + 1 })); });
+  }, [ready]);
+  // 4-3 U6: selection actions (emphasis, hide, fit, translucent) live on the card head when the page gives a place for them.
+  const inCard = Boolean(selectionActionsTarget);
+  const selectionActions = selectedId ? <div className={`selection-view-options${inCard ? ' in-card' : ''}`} role="group" aria-label="고른 구조를 모형에서">
+        {!selectedNerve && <button disabled={!selectedId} aria-pressed={presentation.dim} onClick={() => updatePresentation({ ...presentation, dim: !presentation.dim })}>{inCard ? '강조' : '선택 강조'}</button>}
+        {!selectedNerve && <button disabled={!selectedId} aria-pressed={Boolean(presentation.xray)} aria-label="투시 보기" title="고른 구조만 진하게, 나머지는 비쳐 보이게 합니다."
+          onClick={() => updatePresentation({ ...presentation, xray: !presentation.xray })}>{inCard ? '투시' : '투시 보기'}</button>}
+        <button disabled={!selectedId || Boolean(selectedNerve) || !progress?.selectedAvailable || presentation.hidden.includes(selectedId)} aria-label="선택 숨기기" title="선택한 구조를 숨겨 안쪽 구조를 봅니다." onClick={() => selectedId && setPresentation(previous => previous.hidden.includes(selectedId) ? previous : { ...previous, hidden: [...previous.hidden, selectedId] })}>{inCard ? '숨기기' : '선택 숨기기'}</button>
+        <button disabled={!selectedId || !progress?.selectedAvailable} onClick={() => {const c=controller.current;if(c instanceof DatasetSceneAdapter&&c.scene.handleObservationFit('selection'))return;c?.focusSelection();}} aria-label="선택 맞춤">{inCard ? '맞춤' : '선택 맞춤'}</button>
+        {selectedNerve ? (selectedNerve.muscleKeys.length > 0 || nerveConceptMuscleKeys.length > 0) && <button disabled={!nerves} aria-pressed={presentation.highlightInnervation} onClick={() => updatePresentation({ ...presentation, highlightInnervation: !presentation.highlightInnervation })}>{inCard ? '관련 근육' : '관련 근육 강조'}</button> : <button disabled={!selectedId || (!progress?.selectedAvailable && !presentation.translucent.includes(selectedId))} aria-pressed={Boolean(selectedId && presentation.translucent.includes(selectedId))} onClick={() => selectedId && updatePresentation({ ...presentation, translucent: presentation.translucent.includes(selectedId) ? presentation.translucent.filter(id => id !== selectedId) : [...presentation.translucent, selectedId] })}>{inCard ? '반투명' : '선택 반투명'}</button>}
+</div> : null;
+  // 4-3 U5: the card and the acupoint panel share one slot on tablets; the page decides which one is open.
+  useEffect(() => { onAcupointPanelChange?.(acupointPanelOpen); }, [acupointPanelOpen]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (closeAcupointRevision) setAcupointPanelOpen(false); }, [closeAcupointRevision]);
   return <div className="whole-body-viewer" onPointerDownCapture={stopEntrance}>
     <div className="whole-body-canvas" inert={!entered} aria-hidden={!entered} ref={host}/>
     {/* 4-1 step 7: learners get the rig-based acupoint panel; the earlier carrier review stays behind its development flags. */}
     {entered && controller.current instanceof DatasetSceneAdapter && (acupointDevelopmentReview || surfaceSample || territoryDevelopmentReview) && AcupointReview
       ? <Suspense fallback={null}><AcupointReview adapter={controller.current} onModeChange={setAcupointsActive} surfaceSample={surfaceSample} developmentReview={acupointDevelopmentReview} territoryDevelopmentReview={territoryDevelopmentReview}/></Suspense>
       : entered && controller.current instanceof DatasetSceneAdapter && (acupointPanelOpen
-        ? <AcupointPanel host={controller.current} rows={rowsByKey} onSelectStructure={(key, side) => select.current(key, side)} onClose={() => setAcupointPanelOpen(false)}/>
+        ? <AcupointPanel host={controller.current} rows={rowsByKey} request={acupointRequest} onSelectStructure={(key, side) => select.current(key, side)} onClose={() => setAcupointPanelOpen(false)}/>
         : <aside className="acupoint-entry"><button onClick={() => setAcupointPanelOpen(true)}>경혈·경근</button></aside>)}
+    {/* 4-3 U7: fixed sides of the body, one press each; a double tap on the model moves in on that spot. */}
+    {entered && controller.current instanceof DatasetSceneAdapter && <div className="view-pad" role="group" aria-label="보는 방향">
+      {([['front', '앞', '앞에서 보기'], ['back', '뒤', '뒤에서 보기'], ['left', '왼쪽', '몸의 왼쪽에서 보기'], ['right', '오른쪽', '몸의 오른쪽에서 보기']] as const).map(([id, label, title]) =>
+        <button key={id} title={title} aria-label={title} onClick={() => (controller.current as DatasetSceneAdapter).viewFrom(id)}>{label}</button>)}
+    </div>}
     {!entered && <AtlasLoading failed={error || Boolean(progress?.failed)} loaded={progress?.loaded} total={progress?.total} onRetry={() => error ? setRevision(r => r + 1) : controller.current?.retry()}/> }
     <div inert={!entered} ref={tools} className="body-tools" aria-label="모형 보기 설정">
       <span className="view-options-label">보기 옵션</span>
-      {/* V3: one compact toolbar — layers first, then peel/fit; secondary options behind 더보기. */}
+      {/* 4-3 U6: one row — layers behind one button, peel/undo, fit, movement, section, more; selection actions sit on the card. */}
       <div className="toolbar-main">
+        {/* 2026-11-20: one dock of icon buttons in four groups — layers (층, 벗기기, 되돌리기) · view (맞춤) · tools (움직임, 단면) · 더보기. */}
+        <div className="view-options-row tool-dock">
+          <div className="tool-group" role="group" aria-label="층">
+            <button className="layers-toggle tool" aria-expanded={layersOpen} aria-controls="layer-panel" title="보일 층(근육·뼈·신경 등)과 층 투명도" onClick={() => setLayersOpen(open => !open)}>
+              <ToolIcon name="layers"/><span>층</span><small>{LEARNER_LAYERS.filter(id => layers[id]).length}</small></button>
+            <button className="tool" disabled={!peelTarget} title="바깥쪽 층부터 하나씩 숨겨 안쪽 구조를 봅니다." onClick={peel}><ToolIcon name="peel"/><span>한 겹 벗기기</span></button>
+            <button className="tool" disabled={!peeled.length} aria-label="벗긴 층 되돌리기" title="벗긴 층 되돌리기" onClick={unpeel}><ToolIcon name="undo"/><span>되돌리기</span></button>
+          </div>
+          <div className="tool-group" role="group" aria-label="화면">
+            <button className="tool" title="보이는 구조가 화면에 꽉 차게" onClick={() => {const c=controller.current;if(c instanceof DatasetSceneAdapter&&c.scene.handleObservationFit('all'))return;c?.focus(regionIds);}}><ToolIcon name="fit"/><span>화면 맞춤</span></button>
+          </div>
+          <div className="tool-group" role="group" aria-label="살펴보기 도구">
+            <button className="tool" aria-expanded={movementOpen} aria-controls="movement-panel" title="관절을 움직이고 작용 근육을 색으로 봅니다." onClick={() => setMovementOpen(open => !open)}><ToolIcon name="joint"/><span>관절 움직임</span></button>
+            <button className="tool" aria-expanded={sectionOpen} aria-pressed={Boolean(section)} aria-controls="section-panel" title="모형을 한 면에서 잘라 속을 봅니다." onClick={() => setSectionOpen(open => !open)}><ToolIcon name="section"/><span>단면</span></button>
+          </div>
+          <div className="tool-group" role="group" aria-label="그 밖의 설정">
+            <button className="tool" aria-expanded={moreOpen} aria-controls="view-more" onClick={() => setMoreOpen(open => !open)}><ToolIcon name="more"/><span>더보기</span></button>
+          </div>
+        </div>
+      </div>
+      {/* Kept in the page while folded so the pressed state of every layer stays readable. */}
+      <div className="layer-panel" id="layer-panel" hidden={!layersOpen}>
       <div className="layer-row" role="group" aria-label="구조 층">
-        {(Object.keys(LAYER_LABELS) as LayerId[]).filter(id => id !== 'nerve' || staticPose).map(id => <button key={id} aria-pressed={layers[id]}
+        {LEARNER_LAYERS.filter(id => id !== 'nerve' || staticPose).map(id => <button key={id} aria-pressed={layers[id]}
           onClick={() => { if (id === 'nerve') nerveLayerExplicitlyOff.current = nerves; toggleLayer(id); }}>{LAYER_LABELS[id]}</button>)}
       </div>
-        <div className="view-options-row">
-        <button disabled={!peelTarget} title="바깥쪽 층부터 하나씩 숨겨 안쪽 구조를 봅니다." onClick={peel}>한 겹 벗기기</button>
-        <button disabled={!peeled.length} onClick={unpeel}>벗긴 층 되돌리기</button>
-        <button onClick={() => {const c=controller.current;if(c instanceof DatasetSceneAdapter&&c.scene.handleObservationFit('all'))return;c?.focus(regionIds);}}>화면 맞춤</button>
-          <button aria-expanded={movementOpen} aria-controls="movement-panel" title="관절을 움직이고 작용 근육을 색으로 봅니다." onClick={() => setMovementOpen(open => !open)}>관절 움직임</button>
-          <button aria-expanded={sectionOpen} aria-pressed={Boolean(section)} aria-controls="section-panel" title="모형을 한 면에서 잘라 속을 봅니다." onClick={() => setSectionOpen(open => !open)}>단면</button>
-          <button aria-expanded={moreOpen} aria-controls="view-more" onClick={() => setMoreOpen(open => !open)}>더보기</button>
-        </div>
-      </div>
-      {moreOpen && <div className="more-panel" id="view-more">
-        <div className="more-actions">
-        <button aria-pressed={shading ?? Boolean(ready && sceneOf()?.ambientOcclusion)} title="멈춰 있을 때 구조 사이의 그늘을 그립니다. 느린 기기에서는 꺼 주세요." onClick={toggleShading}>음영 효과</button>
-        {entered && controller.current instanceof DatasetSceneAdapter && <Suspense fallback={null}><SkinControls adapter={controller.current} acupoints={acupointsActive}/></Suspense>}
-        </div>
         <div className="layer-opacity" id="layer-opacity" role="group" aria-label="층 투명도">
-        {(Object.keys(LAYER_LABELS) as LayerId[]).filter(id => layers[id]).map(id => <label key={id}><span>{LAYER_LABELS[id]}</span>
+        {LEARNER_LAYERS.filter(id => layers[id]).map(id => <label key={id}><span>{LAYER_LABELS[id]}</span>
           <input type="range" min={10} max={100} step={5} value={Math.round((layerOpacity[id] ?? 1) * 100)}
             onChange={event => setLayerOpacity(previous => ({ ...previous, [id]: Number(event.target.value) / 100 }))}/>
           <output>{Math.round((layerOpacity[id] ?? 1) * 100)}%</output></label>)}
         </div>
+      </div>
+      {moreOpen && <div className="more-panel" id="view-more">
+        <div className="more-actions">
+        {controller.current instanceof DatasetSceneAdapter && <button aria-pressed={labelsOn} title="고른 구조와 기시·정지 뼈에 이름표를 붙입니다."
+          onClick={() => { const next = !labelsOn; setLabelsOn(next); (controller.current as DatasetSceneAdapter).setLabelsVisible(next); }}>이름표</button>}
+        <button aria-pressed={shading ?? Boolean(ready && sceneOf()?.ambientOcclusion)} title="멈춰 있을 때 구조 사이의 그늘을 그립니다. 느린 기기에서는 꺼 주세요." onClick={toggleShading}>음영 효과</button>
+        {entered && controller.current instanceof DatasetSceneAdapter && <Suspense fallback={null}><SkinControls adapter={controller.current} acupoints={acupointsActive}/></Suspense>}
+        </div>
+        {/* 4-3 U10: posture patterns colour the whole model, so they live with the view options, not in the acupoint panel. */}
+        {entered && controller.current instanceof DatasetSceneAdapter && <PosturePatternList host={controller.current} rows={rowsByKey}/>}
       </div>}
       {sectionOpen && entered && controller.current instanceof DatasetSceneAdapter && <SectionPanel section={section} bounds={controller.current.sectionBounds()}
         onChange={setSection} onFace={() => (controller.current as DatasetSceneAdapter).faceSection()}/>}
       {movementOpen && entered && controller.current instanceof DatasetSceneAdapter && <MovementPanel host={controller.current} rows={rowsByKey}
         request={movementRequest} musclesVisible={muscles} onSelect={key => select.current(key, rowsByKey.get(key)?.side ?? null)}/>}
-      {selectedId && <div className="selection-view-options">
-        {!selectedNerve && <button disabled={!selectedId} aria-pressed={presentation.dim} onClick={() => updatePresentation({ ...presentation, dim: !presentation.dim })}>선택 강조</button>}
-        <button disabled={!selectedId || Boolean(selectedNerve) || !progress?.selectedAvailable || presentation.hidden.includes(selectedId)} title="선택한 구조를 숨겨 안쪽 구조를 봅니다." onClick={() => selectedId && setPresentation(previous => previous.hidden.includes(selectedId) ? previous : { ...previous, hidden: [...previous.hidden, selectedId] })}>선택 숨기기</button>
-        <button disabled={!selectedId || !progress?.selectedAvailable} onClick={() => {const c=controller.current;if(c instanceof DatasetSceneAdapter&&c.scene.handleObservationFit('selection'))return;c?.focusSelection();}}>선택 맞춤</button>
-        {selectedNerve ? (selectedNerve.muscleKeys.length > 0 || nerveConceptMuscleKeys.length > 0) && <button disabled={!nerves} aria-pressed={presentation.highlightInnervation} onClick={() => updatePresentation({ ...presentation, highlightInnervation: !presentation.highlightInnervation })}>관련 근육 강조</button> : <button disabled={!selectedId || (!progress?.selectedAvailable && !presentation.translucent.includes(selectedId))} aria-pressed={Boolean(selectedId && presentation.translucent.includes(selectedId))} onClick={() => selectedId && updatePresentation({ ...presentation, translucent: presentation.translucent.includes(selectedId) ? presentation.translucent.filter(id => id !== selectedId) : [...presentation.translucent, selectedId] })}>선택 반투명</button>}
-      </div>}
+      {!inCard && !selectionActionsOnCard && selectionActions}
     </div>
+    {inCard && selectionActions && createPortal(selectionActions, selectionActionsTarget!)}
     <div className="body-status" inert={!entered} aria-hidden={!entered} role="status" aria-live="polite">
       {error ? <><span>이 환경에서 모형 자료를 열 수 없습니다.</span><button onClick={() => setRevision(r => r + 1)}>다시 시도</button></>
         : !ready ? '모형을 준비하고 있습니다…'
@@ -242,4 +292,19 @@ export function WholeBodyViewer({ attachmentRole = null, homeRevision = 0, viewR
       <small>현재 확보된 모형을 표시합니다. 일부 구조와 설명은 준비 중입니다.</small>
     </div>
   </div>;
+}
+
+/** Line icons for the tool dock (24-unit box, current colour). */
+function ToolIcon({ name }: { name: 'layers' | 'peel' | 'undo' | 'fit' | 'joint' | 'section' | 'more' }) {
+  const d = {
+    layers: 'M12 4 3 8.5l9 4.5 9-4.5L12 4ZM3 12.5l9 4.5 9-4.5M3 16.5l9 4.5 9-4.5',
+    peel: 'M3 14.5l9 4.5 9-4.5M12 3v8.5M8.5 6.5 12 3l3.5 3.5',
+    undo: 'M9 7 4.5 11.5 9 16M5 11.5h9a5 5 0 0 1 0 10h-2',
+    fit: 'M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5',
+    joint: 'M5 19l5-5M14 10l5-5M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM16.5 17.5a6.5 6.5 0 0 0 1-6',
+    section: 'M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9ZM4 12.5l16-4',
+    more: 'M6 12h.01M12 12h.01M18 12h.01',
+  }[name];
+  return <svg className="tool-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor"
+    strokeWidth={name === 'more' ? 3.2 : 1.7} strokeLinecap="round" strokeLinejoin="round"><path d={d}/></svg>;
 }

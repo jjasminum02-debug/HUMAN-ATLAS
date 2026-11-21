@@ -65,6 +65,18 @@ async function search(page, text, label) {
   await settle(page);
 }
 const card = page => page.locator('#study-details').innerText();
+/** 4-3 U12: open a fold on a bone, ligament, nerve or vessel card by its id. */
+async function openFold(page, id) {
+  const fold = page.locator(`#study-details details[data-fold="${id}"]`);
+  await fold.waitFor({ state: 'attached', timeout: 10000 });
+  if (await fold.getAttribute('open') === null) await fold.locator('summary').click();
+}
+/** 4-3 U3: open a muscle-card section by its title (sections replace the tabs; one is open at a time). */
+async function openSection(page, title) {
+  const button = page.locator('.study-section-head button', { hasText: title }).first();
+  await button.waitFor({ timeout: 10000 });
+  if (await button.getAttribute('aria-expanded') !== 'true') await button.click();
+}
 const pressed = (page, scope, name) => page.locator(`${scope} button`, { hasText: name }).first().getAttribute('aria-pressed');
 function expect(condition, message) { if (!condition) throw new Error(message); }
 
@@ -76,7 +88,11 @@ const flows = [
     const visible = Object.values(await scene(page)).filter(n => n.visible).length;
     expect(visible > 300, `보이는 구조 ${visible}개`);
     // Q2-3 name quiz: exactly one drawn structure is highlighted (not selected: no card); its label is one of four choices.
-    await page.getByRole('button', { name: '퀴즈·북마크' }).click();
+    // 4-3 U11: learners see bookmarks only; the quiz code stays reachable for development with ?quiz=1.
+    await page.locator('.study-tools-trigger').click();
+    expect((await page.locator('.study-tools-trigger').innerText()).trim() === '북마크' && await page.getByRole('tab', { name: '퀴즈' }).count() === 0, '퀴즈가 학생 화면에 보임');
+    await open(page, '/?quiz=1');
+    await page.locator('.study-tools-trigger').click();
     await page.getByRole('button', { name: '문제 내기' }).click();
     await page.locator('.quiz-choices button').first().waitFor();
     const highlighted = Object.entries(await scene(page)).filter(([, n]) => n.visible && n.material.includes(':selected:')).map(([key]) => key);
@@ -109,6 +125,22 @@ const flows = [
   ['검색으로 근육 찾기: 넙다리곧은근 이름·기시·정지', async page => {
     await open(page);
     await search(page, '넙다리곧은근', '대퇴직근'); // modern name finds the Sino-Korean title
+    // 4-3 U8: name tags on the model — the muscle, its origin bone and insertion bones, none overlapping.
+    await page.locator('.scene-label.is-origin').first().waitFor({ timeout: 10000 });
+    const tags = await page.evaluate(() => [...document.querySelectorAll('.scene-label')].filter(t => t.style.visibility === 'visible').map(t => { const r = t.getBoundingClientRect(); return { k: t.className.replace('scene-label is-', ''), text: t.textContent, r: [r.left, r.top, r.right, r.bottom] }; }));
+    const overlap = tags.some((a, i) => tags.some((b, j) => i < j && a.r[0] < b.r[2] && b.r[0] < a.r[2] && a.r[1] < b.r[3] && b.r[1] < a.r[3]));
+    expect(tags.some(t => t.k === 'selected' && /대퇴직근/.test(t.text)) && tags.some(t => t.k === 'origin' && /관골/.test(t.text)) && tags.some(t => t.k === 'insertion') && !overlap,
+      `이름표: ${tags.map(t => `${t.k}:${t.text}`).join(', ')}${overlap ? ' (겹침)' : ''}`);
+    // 4-3 U8: the mouse over the model names the structure under it.
+    const canvasBox = await page.locator('canvas').first().boundingBox();
+    const chest = await page.evaluate(() => { const s = window.__atlasScene, r = s.renderer.domElement.getBoundingClientRect(), v = s.controls.target.clone().add({ x: .03, y: .35, z: .12 }).project(s.camera); return [(v.x + 1) / 2 * r.width, (1 - v.y) / 2 * r.height]; });
+    await page.mouse.move(canvasBox.x + chest[0], canvasBox.y + chest[1]);
+    const hover = await page.locator('.scene-label.is-hover').textContent({ timeout: 5000 }).catch(() => '');
+    expect(hover.length > 1, '마우스를 올려도 이름이 뜨지 않음');
+    // 4-3 U3: the card opens with every section closed; their bars and summaries show in study order.
+    const bars = await page.locator('.study-section-head button').evaluateAll(b => b.map(x => `${x.querySelector('.section-title').textContent}:${x.getAttribute('aria-expanded')}`));
+    expect(bars.join() === '구조:false,기능:false,한의학적 접근:false', `칸: ${bars.join()}`);
+    await openSection(page, '구조');
     const text = await card(page);
     expect(text.includes('Rectus femoris') && text.includes('기시') && text.includes('정지'), '카드에 영어명·기시·정지 없음');
     const key = new URL(page.url()).searchParams.get('source');
@@ -119,31 +151,72 @@ const flows = [
     await page.locator('.attachment-insertion .attachment-area-chips li').first().waitFor({ timeout: 10000 });
     const areas = await page.evaluate(() => { const roles = []; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && o.userData.attachmentPatch) roles.push(o.material.name.match(/attachment(\w+)/)?.[1]); }); return roles.sort(); });
     expect(areas.join() === 'Insertion,Origin', `뼈 위 부착 면: ${areas.join() || '없음'}`);
+    // 2026-11-16: names lead with 구용어, and the 경락 tab links the muscle to sinews and acupoints that open in the panel.
+    // 4-3 U2: the title is the 구용어; one line under it carries 신용어 and English, then four key lines.
+    const head = await page.locator('.study-detail-header').innerText();
+    expect(/대퇴직근/.test(await page.locator('.study-details > summary').innerText()) && /넙다리곧은근[\s\S]*Rectus femoris/.test(head), `이름 순서: ${head.replace(/\s+/g, ' ').slice(0, 120)}`);
+    const facts = await page.locator('.key-facts [data-fact]').evaluateAll(rows => rows.map(r => r.dataset.fact + ':' + r.querySelector('dd').textContent));
+    expect(facts.length === 4 && /attach:.*→/.test(facts[0]) && /nerve:대퇴신경/.test(facts[1]) && /action:/.test(facts[2]) && /meridian:.*족양명경근/.test(facts[3]), `핵심 네 줄: ${facts.join(' | ')}`);
+    await page.locator('.key-facts [data-fact=meridian]').click();
+    expect(await page.locator('#tab-경락').getAttribute('aria-expanded') === 'true' && await page.locator('#tab-구조').getAttribute('aria-expanded') === 'false', '경락 줄을 눌러도 한의학적 접근 칸이 열리지 않음');
+    await page.locator('#study-meridian-panel h3', { hasText: '경근 영역' }).waitFor({ timeout: 10000 });
+    const meridian = await page.locator('#study-meridian-panel').innerText();
+    // 4-3 U4: answers in order (sinew region → channel and points → distal points → landmarks), the basis folded.
+    const steps = await page.locator('#study-meridian-panel .meridian-step h3').allInnerTexts();
+    expect(/족양명경근/.test(meridian) && steps.map(t => t.replace(/^\d\s*/, '')).join() === '경근 영역,경맥 · 경혈,원위혈,표지점', `한의학적 접근 순서: ${steps.join(' / ').replace(/\s+/g, ' ')}`);
+    expect(!/從腰以上者/.test(meridian) && await page.locator('#study-meridian-panel .meridian-basis').getAttribute('open') === null, '근거가 접혀 있지 않음');
+    // 2026-11-19: the card colours a passing sinew's region on the model (the muscle itself stays selected).
+    const coloured = () => page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && /:meridian:/.test(o.material?.name ?? '')) n++; }); return n; });
+    await page.locator('#study-meridian-panel .meridian-sinews:not(.six-pairs) li', { hasText: '족양명경근' }).locator('.meridian-region').click();
+    const regionMuscles = await coloured();
+    expect(regionMuscles > 10, `족양명경근 영역 근육 ${regionMuscles}개`);
+    await page.locator('#study-meridian-panel .meridian-sinews:not(.six-pairs) li', { hasText: '족양명경근' }).locator('.meridian-region').click();
+    expect(await coloured() === 0, '영역 끄기 뒤에도 색이 남음');
+    // 2026-11-19: hand/foot boundary (rectus femoris lies below it) and the same-name pairs.
+    await page.locator('#study-meridian-panel .meridian-basis summary').click();
+    expect(/손·발 높이 · 경계 아래/.test(meridian) && /從腰以上者/.test(await page.locator('#study-meridian-panel .meridian-basis').innerText()), `손·발 경계: ${meridian.replace(/\s+/g, ' ').slice(0, 200)}`);
+    await page.locator('#study-meridian-panel .meridian-sinews li', { hasText: '수양명경근 + 족양명경근' }).locator('.meridian-region').click();
+    const pairMuscles = await coloured();
+    expect(pairMuscles > regionMuscles, `양명 손발 함께 ${pairMuscles}개 > 족양명 ${regionMuscles}개`);
+    await page.locator('#study-meridian-panel .meridian-sinews li', { hasText: '수양명경근 + 족양명경근' }).locator('.meridian-region').click();
+    const firstPoint = page.locator('#study-meridian-panel .meridian-group .meridian-point').first();
+    const pointName = await firstPoint.evaluate(b => b.firstChild.textContent.trim());
+    await firstPoint.click();
+    const opened = await page.locator('.acupoint-detail h4').innerText({ timeout: 10000 });
+    expect(opened.startsWith(pointName), `경혈 창에서 ${pointName} 열림: ${opened}`);
+    await page.getByRole('button', { name: '경혈 닫기' }).click();
+    await openSection(page, '구조');
     // C2: blood supply from the two-source muscle card table.
     const supply = await page.locator('.attachment-section', { hasText: '혈액공급' }).innerText({ timeout: 10000 });
     expect(supply.includes('가쪽넙다리휘돌이동맥'), `혈액공급: ${supply.replace(/\s+/g, ' ').slice(0, 200)}`);
     // Q2-1: the supplying artery opens in the vessel layer, and its card lists the muscle back.
     await page.locator('.attachment-section', { hasText: '혈액공급' }).getByRole('button', { name: /가쪽넙다리휘돌이동맥/ }).click();
+    // 4-3 U12: the vessel card answers in key lines; the lists sit in folds.
+    await page.locator('#study-details .key-facts [data-fact=kind]').waitFor({ timeout: 10000 });
+    await openFold(page, 'supplied');
     await page.locator('.vessel-supplied').waitFor({ timeout: 10000 });
     expect(await pressed(page, '.layer-row', '혈관') === 'true', '혈관 층이 자동으로 켜지지 않음');
     const supplied = await page.locator('.vessel-supplied').innerText();
     // 4-1 step 6: the artery card names where it branches off.
+    await openFold(page, 'branches');
     const origin = await page.locator('.vessel-branches').innerText({ timeout: 10000 });
     expect(origin.includes('갈라져 나온 혈관') && origin.includes('대퇴심동맥'), `갈라져 나온 혈관: ${origin.replace(/\s+/g, ' ').slice(0, 160)}`);
     expect(supplied.includes('대퇴직근'), `혈액을 받는 근육: ${supplied.replace(/\s+/g, ' ').slice(0, 200)}`);
     await settle(page);
     const vessels = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && /^vessel:/.test(o.material.name)) n++; }); return n; });
     expect(vessels > 600, `보이는 혈관 ${vessels}개`);
-    return `카드·3D 선택 일치, 기시·정지 면·혈액공급 표시 → 동맥 카드, 혈관 ${vessels}개`;
+    return `카드·3D 선택 일치, 구용어 제목·신용어·영어 한 줄, 3D 이름표(근육·기시·정지, 겹침 없음, 마우스 올리면 ${hover}), 핵심 네 줄(경락 줄 → 경락 탭), 기시·정지 면, 한의학적 접근(1–4 순서·근거 접힘 · 족양명경근 영역 · 손·발 경계 아래 · 양명 손발 함께 · ${pointName} → 경혈 창), 혈액공급 표시 → 동맥 카드, 혈관 ${vessels}개`;
   }],
   ['무릎 인대 구조 보기: 앞십자인대 → 무릎 움직여 보기', async page => {
     await open(page);
     await search(page, '앞십자인대', '전십자인대'); // modern name finds the traditional label
     expect(await pressed(page, '.layer-row', '인대·관절') === 'true', '인대·관절 층이 자동으로 켜지지 않음');
-    await page.locator('.attachment-section h3', { hasText: '잇는 뼈' }).waitFor({ timeout: 10000 });
+    // 4-3 U12: what the ligament joins is a key line; the attachment areas are a fold.
+    expect(/대퇴골[\s\S]*경골|경골[\s\S]*대퇴골/.test(await page.locator('#study-details .key-facts [data-fact=bones]').innerText({ timeout: 10000 })), '잇는 뼈 핵심 줄 없음');
     const text = await card(page);
     expect(text.includes('대퇴골') && text.includes('경골'), '잇는 뼈에 대퇴골·경골 없음');
     // 4-1 step 6: the ligament's attachment areas are listed and drawn on the bones.
+    await openFold(page, 'areas');
     const areas = await page.locator('.attachment-areas').innerText({ timeout: 10000 });
     expect(areas.includes('대퇴골') && areas.includes('경골'), `인대 부착 면: ${areas.replace(/\s+/g, ' ').slice(0, 120)}`);
     await page.locator('.attachment-areas .attachment-observe').click();
@@ -151,6 +224,7 @@ const flows = [
     const drawn = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && o.userData.attachmentPatch) n++; }); return n; });
     expect(drawn >= 2, `뼈 위에 칠한 인대 부착 면 ${drawn}개`);
     // C3: the card lists who moves the knee, per movement.
+    await openFold(page, 'movers');
     const movers = await page.locator('.joint-movers').innerText({ timeout: 10000 });
     expect(/굽힘/.test(movers) && /폄/.test(movers) && movers.includes('대퇴직근'), `무릎을 움직이는 근육 목록: ${movers.replace(/\s+/g, " ").slice(0, 300)}`);
     await page.getByRole('button', { name: /무릎관절 .* 움직여 보기/ }).click();
@@ -161,7 +235,7 @@ const flows = [
   ['회전근개 작용 보기: 극하근 가쪽돌림 재생과 색', async page => {
     await open(page);
     await search(page, '극하근', '극하근');
-    await page.getByRole('tab', { name: '기능' }).click();
+    await openSection(page, '기능');
     const summary = await page.locator('.muscle-action-summary').innerText({ timeout: 10000 });
     expect(summary.includes('가쪽으로 돌'), `작용 요약: ${summary.replace(/\s+/g, ' ')}`);
     const play = page.locator('.rig-actions button', { hasText: '가쪽돌림' }).first();
@@ -203,20 +277,26 @@ const flows = [
     expect(fingers.includes('천지굴근'), `손가락 몸쪽마디 굽힘 주동근: ${fingers.slice(0, 120)}`);
     const neck = await movers('목·머리', '왼쪽 돌림 / 오른쪽 돌림', 30);
     expect(neck.includes('흉쇄유돌근'), `목 돌림 주동근: ${neck.slice(0, 160)}`);
+    // Scapulohumeral rhythm: raising the arm past 30° also turns the scapula upward, and its movers are listed.
+    const raised = await movers(/^어깨$/, '벌림 / 모음', 120);
+    expect(/어깨뼈 위쪽돌림 30°/.test(raised) && raised.includes('전거근'), `어깨 벌림 120°의 어깨뼈 위쪽돌림(전거근): ${raised.slice(0, 200)}`);
     await page.getByRole('button', { name: '처음 자세로' }).click();
-    return '굽힘 주동근(상완근)·길항근(삼두근), 어깨뼈 올림(견갑거근)·손가락 굽힘(천지굴근)·목 돌림(흉쇄유돌근), 처음 자세 복귀';
+    return '굽힘 주동근(상완근)·길항근(삼두근), 어깨뼈 올림(견갑거근)·손가락 굽힘(천지굴근)·목 돌림(흉쇄유돌근), 어깨 벌림 120° → 어깨뼈 위쪽돌림 30°(전거근), 처음 자세 복귀';
   }],
-  ['층 벗기기: 근막 → 얕은 근육, 되돌리기, 투명도, 단면', async page => {
+  ['층 벗기기: 얕은 → 깊은 근육, 되돌리기, 투명도, 단면', async page => {
     await open(page);
-    await page.locator('.layer-row button', { hasText: '근막' }).click();
-    await settle(page);
+    // 2026-11-20 dock: one row of at most 8 icon buttons in 4 groups; no fascia layer for learners.
+    const row = await page.locator('.toolbar-main .view-options-row button').evaluateAll(b => ({ n: b.filter(x => x.offsetParent).length, tops: new Set(b.map(x => Math.round(x.getBoundingClientRect().top))).size,
+      groups: document.querySelectorAll('.tool-dock .tool-group').length, icons: document.querySelectorAll('.tool-dock .tool-icon').length }));
+    expect(row.n <= 8 && row.tops === 1 && row.groups === 4 && row.icons === row.n, `도구 막대 ${JSON.stringify(row)}`);
+    await page.locator('.layers-toggle').click();
+    expect(await page.locator('.layer-row button', { hasText: '근막' }).count() === 0, '근막 층 버튼이 남아 있음');
     await page.getByRole('button', { name: '한 겹 벗기기' }).click();
-    expect(await pressed(page, '.layer-row', '근막') === 'false', '첫 벗기기에서 근막이 꺼지지 않음');
+    expect(await pressed(page, '.layer-row', '얕은 근육') === 'false', '첫 벗기기에서 얕은 근육이 꺼지지 않음');
     await page.getByRole('button', { name: '한 겹 벗기기' }).click();
-    expect(await pressed(page, '.layer-row', '얕은 근육') === 'false', '두 번째 벗기기에서 얕은 근육이 꺼지지 않음');
+    expect(await pressed(page, '.layer-row', '깊은 근육') === 'false', '두 번째 벗기기에서 깊은 근육이 꺼지지 않음');
     await page.getByRole('button', { name: '벗긴 층 되돌리기' }).click();
-    expect(await pressed(page, '.layer-row', '얕은 근육') === 'true', '되돌리기에서 얕은 근육이 돌아오지 않음');
-    await page.getByRole('button', { name: '더보기' }).click();
+    expect(await pressed(page, '.layer-row', '깊은 근육') === 'true', '되돌리기에서 깊은 근육이 돌아오지 않음');
     await page.locator('.layer-opacity label', { hasText: '뼈' }).locator('input').fill('50');
     const translucent = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && o.material?.name?.startsWith('bone:') && o.material.opacity < .6) n++; }); return n; });
     expect(translucent > 50, `반투명 뼈 ${translucent}개`);
@@ -232,7 +312,7 @@ const flows = [
     await page.locator('#section-panel button', { hasText: '끄기' }).click();
     const off = await sectionState();
     expect(off.planes === 0 && off.both === 0, `단면 끔: ${JSON.stringify(off)}`);
-    return `벗기기·되돌리기, 뼈 50% (${translucent}개), 가로 단면 ${on.both}개 면 채움 후 해제`;
+    return `도구 막대 4묶음·아이콘, 근막 없음, 벗기기·되돌리기, 뼈 50% (${translucent}개), 가로 단면 ${on.both}개 면 채움 후 해제`;
   }],
   ['신경 보기: 좌골신경 주행', async page => {
     await open(page);
@@ -250,8 +330,9 @@ const flows = [
   ['기시·정지 관찰: 넙다리곧은근 기시 뼈', async page => {
     await open(page);
     await search(page, '넙다리곧은근', '대퇴직근'); // modern name finds the Sino-Korean title
+    await openSection(page, '구조');
     const button = page.locator('.attachment-origin .attachment-observe');
-    expect((await button.innerText()).startsWith('기시 면 관찰'), `버튼: ${await button.innerText()}`);
+    expect((await button.innerText()).startsWith('기시 보기'), `버튼: ${await button.innerText()}`);
     const distance = () => page.evaluate(() => window.__atlasScene.camera.position.distanceTo(window.__atlasScene.controls.target));
     const before = await distance();
     await button.click();
@@ -261,11 +342,24 @@ const flows = [
     // 4-1 step 6: the camera goes to the drawn origin area, closer than the whole-body view.
     const after = await distance();
     expect(after < before * .6, `기시 면으로 다가가지 않음 (${before.toFixed(2)} → ${after.toFixed(2)}m)`);
-    const origin = Object.values(await scene(page)).filter(n => n.visible && /^bone:origin(Area)?Context/.test(n.material)).length;
-    expect(origin >= 1, '기시 뼈 색이 없음');
+    // 2026-11-20: a bone with a drawn area keeps its colour and only the area is painted; without one the bone is tinted.
+    const origin = Object.values(await scene(page)).filter(n => n.visible && (/^bone:originContext/.test(n.material) || /attachmentOrigin/.test(n.material))).length;
+    expect(origin >= 1, '기시 자리 색이 없음');
+    const muscle = await page.evaluate(() => { let m = ''; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.userData.sourceKey === new URLSearchParams(location.search).get('source')) m = o.material.name; }); return m; });
+    expect(/attachmentMuscle/.test(muscle), `근육이 반투명이 아님: ${muscle}`);
     await button.click();
     expect(await button.getAttribute('aria-pressed') === 'false', '기시 관찰이 끝나지 않음');
-    return `기시 면 관찰(시점 ${before.toFixed(1)} → ${after.toFixed(1)}m), 기시 뼈 ${origin}개 표시 후 해제`;
+    // 2026-11-20: a bone opened from the card offers "← 넙다리곧은근"; it returns to the muscle.
+    const title = () => page.locator('.study-details > summary').innerText();
+    const muscleTitle = await title();
+    await page.locator('.attachment-origin :is(.attachment-bone-links, .attachment-area-chips) button').first().click();
+    await settle(page);
+    const back = page.locator('.card-back');
+    expect((await back.innerText()).includes(muscleTitle.trim()) && (await title()) !== muscleTitle, `돌아가기 버튼: ${await back.count() ? await back.innerText() : '없음'}`);
+    await back.click();
+    await page.waitForTimeout(400);
+    expect((await title()) === muscleTitle, `돌아가기 후 카드: ${await title()}`);
+    return `기시 보기(시점 ${before.toFixed(1)} → ${after.toFixed(1)}m), 기시 자리 ${origin}개·근육 반투명 후 해제, 뼈 카드 → ← 돌아가기`;
   }],
   ['부위 탐색: 넙다리 부위 목록과 시점', async page => {
     await open(page);
@@ -288,17 +382,20 @@ const flows = [
     const movers = await knee.innerText();
     expect(/대퇴이두근|반건양근/.test(movers), `넙다리 무릎 굽힘 근육: ${movers.replace(/\s+/g, ' ').slice(0, 160)}`);
     await knee.locator('button').first().click();
-    await page.locator('.rig-actions').waitFor({ timeout: 10000 }).catch(async () => { throw new Error(`기능 탭 재생 없음: tab=${await page.locator('[role=tab][aria-selected=true]').allInnerTexts()} selected=${new URL(page.url()).searchParams.get('source')} rig=${await page.locator('.rig-actions').count()} title=${await page.locator('.study-detail-header h2').innerText().catch(() => '-')}`); });
+    await page.locator('.rig-actions').waitFor({ timeout: 10000 }).catch(async () => { throw new Error(`기능 탭 재생 없음: open=${await page.locator('.study-section-head button[aria-expanded=true]').allInnerTexts()} selected=${new URL(page.url()).searchParams.get('source')} rig=${await page.locator('.rig-actions').count()} title=${await page.locator('.study-detail-header h2').innerText().catch(() => '-')}`); });
     // A bone opens the joints that move it (back to the structure list first).
     await page.evaluate(() => [...document.querySelectorAll('.explorer-mode button')].find(b => b.textContent === '구조 찾기')?.click());
     await search(page, '경골', '경골');
+    const jointLine = await page.locator('#study-details .key-facts [data-fact=joints]').innerText({ timeout: 10000 });
+    expect(/무릎관절/.test(jointLine) && /발목관절/.test(jointLine), `경골 관절 핵심 줄: ${jointLine}`);
+    await openFold(page, 'joints');
     const joints = await page.locator('.bone-joints').innerText({ timeout: 10000 });
     expect(joints.includes('무릎관절') && joints.includes('발목관절'), `경골 관절: ${joints.replace(/\s+/g, ' ')}`);
     return `목록 ${count}개, 시점 이동, 움직임별 근육(무릎 굽힘) → 기능 탭, 경골 → 무릎·발목 관절`;
   }],
   ['모형 클릭으로 선택 → 숨기기 → 뒤로 가기', async page => {
     await open(page);
-    const box = await page.locator('.whole-body-canvas canvas').boundingBox();
+    const box = await page.locator('.whole-body-canvas canvas:not(.scene-crossfade)').first().boundingBox();
     // Aim 30 cm above the orbit centre (pelvis), off the midline: the right chest wall.
     const target = await page.evaluate(() => {
       const s = window.__atlasScene, rect = s.renderer.domElement.getBoundingClientRect(), v = s.controls.target.clone().add({ x: -.07, y: .3, z: .08 }).project(s.camera);
@@ -308,7 +405,9 @@ const flows = [
     await page.waitForFunction(() => new URL(location.href).searchParams.get('source'), null, { timeout: 5000 });
     await settle(page);
     const key = new URL(page.url()).searchParams.get('source');
-    await page.getByRole('button', { name: '선택 숨기기' }).click();
+    // 4-3 U6: the selection actions are on the card head, not in the toolbar.
+    expect(await page.locator('.card-view-actions').getByRole('button', { name: '선택 숨기기' }).count() === 1 && await page.locator('.body-tools .selection-view-options').count() === 0, '선택 버튼이 카드 머리에 없음');
+    await page.locator('.card-view-actions').getByRole('button', { name: '선택 숨기기' }).click();
     await settle(page);
     const hidden = await scene(page);
     expect(!hidden[key]?.visible, '선택 숨기기 뒤에도 보임'); // hidden meshes leave the scene graph
@@ -320,8 +419,47 @@ const flows = [
     await open(page);
     await page.locator('.acupoint-entry button').click();
     await page.locator('.acupoint-channel button', { hasText: '척택' }).click();
-    const detail = await page.locator('.acupoint-detail').innerText({ timeout: 10000 });
+    const detail = await page.locator('.acupoint-detail').textContent({ timeout: 10000 }); // 4-3 U10: 주변 구조 sits in a fold
     expect(detail.includes('위팔두갈래근') && detail.includes('완요골근'), `척택 설명·주변 구조: ${detail.replace(/\s+/g, ' ').slice(0, 160)}`);
+    // 2026-11-19: how the point is found, and the vessels and nerves beneath it (척택: radial nerve under the hollow).
+    expect(/취혈 기준\s*표지에서 바로/.test(detail) && /아래 지나는 혈관·신경[\s\S]*요골신경/.test(detail), `척택 취혈 기준·아래 구조: ${detail.replace(/\s+/g, ' ').slice(0, 240)}`);
+    // 2026-11-20: fixed-size ringed dots and a wide channel line, a name tag on the chosen point, the lung sinew faint beside them.
+    const look = await page.evaluate(() => { const r = { dots: 0, wide: 0, tag: 0, sinew: 0, overlay: true }; window.__atlasScene.root.traverse(o => {
+      if (o.userData.acupoint && o.visible) { r.dots++; if (!o.isSprite) r.overlay = false; }
+      if (o.isLine2 && o.visible && o.parent?.name === 'Acupoints' && !o.material.dashed) r.wide++;
+      if (o.isSprite && !o.userData.acupoint && o.visible && o.parent?.name === 'Acupoints' && o.userData.px === 23) r.tag++; // the chosen point's name tag
+      if (o.isLine2 && o.parent?.name === 'Sinews') r.sinew++;
+      if ((o.userData.acupoint || o.parent?.name === 'Sinews') && !o.layers.isEnabled(3)) r.overlay = false; }); return r; });
+    expect(look.dots === 22 && look.wide === 2 && look.tag === 1 && look.sinew >= 1 && look.overlay, `폐경 표시: ${JSON.stringify(look)}`);
+    // 4-3 V4: flow — an arrow between each pair of points, dashed joins to 간경 and 대장경, 시작/끝 tags, the flow line and a pulse.
+    const flow = await page.evaluate(() => { const r = { arrows: 0, joins: 0, tags: 0 }; window.__atlasScene.root.traverse(o => {
+      if (!o.visible || o.parent?.name !== 'Acupoints') return;
+      if (o.isSprite && o.material.map?.image && o.userData.px === 15) r.arrows++;
+      if (o.isLine2 && o.material.dashed) r.joins++;
+      if (o.isSprite && o.userData.px === 19) r.tags++; }); return r; });
+    const flowLine = await page.locator('.channel-flow').innerText();
+    expect(flow.arrows === 20 && flow.joins === 4 && flow.tags === 4 && /중부 LU1[\s\S]*소상 LU11/.test(flowLine), `폐경 흐름: ${JSON.stringify(flow)} · ${flowLine.replace(/\s+/g, ' ')}`);
+    await page.locator('.channel-play').click();
+    await page.waitForTimeout(500);
+    const pulse = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isSprite && o.visible && o.userData.px === 18) n++; }); return n; });
+    expect(pulse === 2, `흐름 따라가기 점 ${pulse}개`);
+    await page.locator('.channel-neighbours button', { hasText: '대장경' }).click();
+    expect(/수양명대장경/.test(await page.locator('.acupoint-channel h4').innerText()), '다음 경맥으로 가지 않음');
+    await page.locator('.channel-neighbours button', { hasText: '폐경' }).click();
+    // 4-4 V5: a light caution line on 중부 (over the pleura), none on 척택.
+    await page.locator('.acupoint-channel button', { hasText: '중부' }).click();
+    const caution = await page.locator('.acupoint-detail .point-caution').innerText({ timeout: 5000 });
+    expect(/흉강 주의/.test(caution), `중부 주의 표시: ${caution}`);
+    await page.locator('.acupoint-channel button', { hasText: '척택' }).click(); // back to the point the rest of the flow reads
+    expect(await page.locator('.acupoint-detail .point-caution').count() === 0, '척택에 주의 표시가 붙음');
+    // 4-3 V3: the other channels can be shown faint behind the chosen one.
+    const dotCount = () => page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.userData.acupoint && o.visible) n++; }); return n; });
+    await page.locator('.acupoint-sinew-toggle.is-others input').check();
+    await page.waitForTimeout(300);
+    const withOthers = await dotCount();
+    await page.locator('.acupoint-sinew-toggle.is-others input').uncheck();
+    await page.waitForTimeout(300);
+    expect(withOthers > 300 && await dotCount() === 22, `다른 경맥 옅게: ${withOthers}개 → 끄면 ${await dotCount()}개`);
     const marker = () => page.evaluate(() => { let at = null; window.__atlasScene.root.traverse(o => { if (o.userData.acupoint === 'LU9:right') at = o.position.toArray(); }); return at; });
     const before = await marker();
     await page.evaluate(async () => { const rig = await window.__atlasRig.load(); window.__atlasRig.set(rig, { 'elbow_r:flexion': 90 }); });
@@ -334,29 +472,168 @@ const flows = [
     expect(/요골신경/.test(title), `주변 구조 → 카드: ${title} · ${page.url()}`);
     // Another channel: the governor vessel runs on the midline (no side choice) and only its markers stay visible.
     if (await page.locator('.acupoint-entry button').count()) await page.locator('.acupoint-entry button').click();
+    // 4-3 U10: the channel grid is folded behind one button.
+    expect(await page.locator('.acupoint-panel .acupoint-channels').count() === 0, '경맥 고르기가 접혀 있지 않음');
+    await page.locator('.channel-picker-toggle').click();
     await page.locator('.acupoint-channels button', { hasText: '독맥' }).click({ timeout: 10000 });
     await page.locator('.acupoint-channel button', { hasText: '백회' }).click();
-    const gv = await page.locator('.acupoint-detail').innerText({ timeout: 10000 });
+    const gv = await page.locator('.acupoint-detail').textContent({ timeout: 10000 });
     expect(gv.includes('정중선') && (await page.locator('.acupoint-panel .movement-side:not(.acupoint-mode)').count()) === 0, `백회: ${gv.replace(/\s+/g, ' ').slice(0, 120)}`);
     const shown = await page.evaluate(() => { const ids = []; window.__atlasScene.root.traverse(o => { if (o.userData.acupoint && o.visible) ids.push(o.userData.acupoint); }); return ids; });
     expect(shown.length > 20 && shown.every(id => /^GV\d+:midline$/.test(id)), `독맥만 보여야 함: ${shown.length}개, ${shown.slice(0, 4).join(',')}`);
     // Sinews: the bladder sinew's line and knots ride the rig (knee flexion moves the ankle knot), its muscles open cards.
     await page.evaluate(async () => { const rig = await window.__atlasRig.load(); window.__atlasRig.set(rig, {}); });
     await page.locator('.acupoint-mode button', { hasText: '경근' }).click();
+    await page.locator('.channel-picker-toggle').click();
     await page.locator('.acupoint-channels button', { hasText: '족태양' }).click();
     const sinew = await page.locator('.sinew-detail').innerText({ timeout: 10000 });
     expect(sinew.includes('오금에 맺힘') && sinew.includes('경로가 지나는 근육'), `족태양경근: ${sinew.replace(/\s+/g, ' ').slice(0, 120)}`);
-    const knot = () => page.evaluate(() => { let at = null, beads = 0; window.__atlasScene.root.traverse(o => { if (o.userData.sinewNode === 'BL:right:BL60') at = o.position.toArray(); if (o.isInstancedMesh && o.parent?.name === 'Sinews') beads += o.count; }); return { at, beads }; });
+    const knot = () => page.evaluate(() => { let at = null, beads = 0; window.__atlasScene.root.traverse(o => { if (o.userData.sinewNode === 'BL:right:BL60') at = o.position.toArray(); if (o.isLine2 && o.parent?.name === 'Sinews') beads += o.geometry.attributes.instanceStart?.count ?? 0; }); return { at, beads }; }); // 4-3 V3: one wide stroke per path; count its segments
     const k0 = await knot();
     await page.evaluate(async () => { const rig = await window.__atlasRig.load(); window.__atlasRig.set(rig, { 'knee_r:flexion': 60 }); });
     await page.waitForTimeout(300);
     const k1 = await knot();
     expect(k0.beads > 200 && k0.at && k1.at && Math.hypot(k1.at[1] - k0.at[1], k1.at[2] - k0.at[2]) > .1, `곤륜 매듭이 무릎 굽힘을 따라가지 않음: ${JSON.stringify(k0)} → ${JSON.stringify(k1)}`);
+    // 2026-11-19: the sinew's region is coloured on the model, and its binding places (結) are marked with their points.
+    const region = await page.evaluate(() => { let muscles = 0, bindings = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && /:meridian:/.test(o.material?.name ?? '')) muscles++; if (o.userData.binding) bindings++; }); return { muscles, bindings }; });
+    const marked = await page.locator('.sinew-detail .sinew-binding').count();
+    expect(region.muscles > 10 && region.bindings > 5 && marked > 5, `족태양경근 영역·結: ${JSON.stringify(region)}, 목록 結 ${marked}`);
+    await page.locator('.sinew-region-toggle', { hasText: '영역 칠하기' }).locator('input').uncheck();
+    expect(await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && /:meridian:/.test(o.material?.name ?? '')) n++; }); return n; }) === 0, '영역 칠하기를 꺼도 색이 남음');
+    await page.locator('.sinew-region-toggle', { hasText: '영역 칠하기' }).locator('input').check();
+    // Same name together: 수태양 + 족태양 lines on the model.
+    await page.locator('.sinew-region-toggle', { hasText: '같은 이름 함께' }).locator('input').check();
+    const paired = await page.evaluate(() => { const s = new Set(); window.__atlasScene.root.traverse(o => { if (o.userData.sinewNode) s.add(o.userData.sinewNode.split(':')[0]); }); return [...s].sort().join(); });
+    expect(paired === 'BL,SI', `태양 손발 함께 그린 경근: ${paired}`);
+    await page.locator('.sinew-region-toggle', { hasText: '같은 이름 함께' }).locator('input').uncheck();
     const muscle = page.locator('.sinew-detail .bone-related-muscle').first(); const name = await muscle.innerText();
     await muscle.click(); await page.waitForTimeout(1500);
     const card = await page.locator('.study-detail-header h2').innerText().catch(() => '(없음)');
     expect(card.includes(name.split(' ')[0]), `경근 근육 → 카드: ${name} → ${card}`);
-    return `경맥 14개 → 척택 설명·주변 구조 → 태연 표지가 팔꿉 90°를 따라감 → 요골신경 카드 → 독맥 백회(정중선, ${shown.length}혈만 표시) → 족태양경근(구슬 ${k0.beads}개, 곤륜 매듭이 무릎 굽힘을 따라감) → ${name} 카드`;
+    // 2026-11-19: teaching landmarks; side bending shortens the 12th rib–iliac crest distance on the bending side.
+    await page.locator('.acupoint-mode button', { hasText: '기준점' }).click();
+    await page.locator('.measure-table').waitFor({ timeout: 10000 });
+    const marks = await page.evaluate(() => { let n = 0; window.__atlasScene.root.traverse(o => { if (o.userData.landmark) n++; }); return n; });
+    const rest = await page.locator('.measure-table').innerText();
+    await page.evaluate(async () => { const rig = await window.__atlasRig.load(); window.__atlasRig.set(rig, { 'back:bending': 20 }); });
+    await page.waitForTimeout(500);
+    const bent = await page.locator('.measure-table tr', { hasText: '12번 갈비 끝' }).innerText();
+    expect(marks === 30 && /같음/.test(rest) && /왼쪽 \d+mm/.test(bent), `기준점 ${marks}개, 서 있을 때 ${rest.replace(/\s+/g, ' ').slice(0, 80)}, 왼쪽 옆굽힘 ${bent.replace(/\s+/g, ' ')}`);
+    await page.evaluate(async () => { const rig = await window.__atlasRig.load(); window.__atlasRig.set(rig, {}); });
+    // 4-2 step 10: a posture pattern colours its short side magenta and weak side green (4-3 U1: not the movement red/blue); off clears both.
+    const roles = () => page.evaluate(() => { const n = { postureShort: 0, postureWeak: 0, agonist: 0, antagonist: 0 }; window.__atlasScene.root.traverse(o => { const m = o.isMesh && o.visible && o.material?.name?.match(/:(postureShort|postureWeak|agonist|antagonist):/); if (m) n[m[1]]++; }); return n; });
+    await page.getByRole('button', { name: '더보기' }).click(); // 4-3 U10: posture patterns live under 더보기
+    await page.locator('.posture-patterns button', { hasText: '상부 교차 증후군' }).click();
+    await page.waitForTimeout(300);
+    const upper = await roles();
+    await page.locator('.posture-patterns button', { hasText: '상부 교차 증후군' }).click();
+    await page.waitForTimeout(300);
+    const cleared = await roles();
+    expect(upper.postureShort >= 10 && upper.postureWeak >= 10 && upper.agonist + upper.antagonist === 0 && cleared.postureShort + cleared.postureWeak === 0, `상부 교차 색: ${JSON.stringify(upper)}, 끈 뒤 ${JSON.stringify(cleared)}`);
+    return `경맥 14개 → 폐경 점 22개·굵은 선·이름표·수태음경근 청록 → 흐름 화살표 20·이음 점선 4·시작/끝·흐름 따라가기·다음 경맥 → 중부 흉강 주의(척택 없음) → 척택 설명·취혈 기준(표지)·아래 구조(요골신경)·주변 구조 → 태연 표지가 팔꿉 90°를 따라감 → 요골신경 카드 → 독맥 백회(정중선, ${shown.length}혈만 표시) → 족태양경근(선 마디 ${k0.beads}개, 곤륜 매듭이 무릎 굽힘을 따라감, 영역 근육 ${region.muscles}개·結 ${region.bindings}곳, 태양 손발 함께) → ${name} 카드 → 기준점 30개, 허리 왼쪽 옆굽힘에 12번 갈비–장골능 왼쪽이 짧아짐 → 상부 교차 증후군 색(짧은 쪽 ${upper.postureShort}·약한 쪽 ${upper.postureWeak}개, 움직임 색 없음)`;
+  }],
+  // 4-2 step 9: test names at the end of the 기능 tab (muscle) and on ligament/meniscus and nerve cards; held tests stay out.
+  ['검사 이름: 견갑하근 기능 탭, 내측 반월, 좌골신경', async page => {
+    await open(page);
+    await search(page, '어깨밑근', '견갑하근');
+    // 4-3 U3: test names sit in the 평가 section; its bar summary names them.
+    expect(/벨리프레스 · 리프트오프/.test(await page.locator('#tab-평가').innerText()), '평가 칸 요약에 검사 이름 없음');
+    await openSection(page, '평가');
+    const muscle = await page.locator('#study-evaluation-panel .clinical-tests').innerText({ timeout: 10000 });
+    expect(/벨리프레스/.test(muscle) && /리프트오프/.test(muscle), `견갑하근 검사: ${muscle.replace(/\s+/g, ' ').slice(0, 120)}`);
+    await search(page, '안쪽반달', '내측반월');
+    expect(/맥머레이/.test(await page.locator('#study-details .key-facts [data-fact=tests]').innerText({ timeout: 10000 })), '반월 검사 핵심 줄 없음');
+    await openFold(page, 'tests');
+    const meniscus = await page.locator('#study-details .clinical-tests').innerText({ timeout: 10000 });
+    expect(/맥머레이/.test(meniscus), `반월 검사: ${meniscus.replace(/\s+/g, ' ').slice(0, 120)}`);
+    // 4-3 U11: the 신용어 finds the nerve too (nerve matches are listed above the structure list).
+    await page.getByRole('searchbox', { name: '구조 검색' }).fill('궁둥신경');
+    const model = page.locator('.nerve-search-result', { hasText: '좌골신경' }).locator('button', { hasText: '오른쪽 모형' }).first();
+    await model.waitFor({ timeout: 10000 });
+    await model.click();
+    await settle(page);
+    await openFold(page, 'tests');
+    const nerve = await page.locator('#study-details .clinical-tests').innerText({ timeout: 10000 });
+    expect(/SLR/.test(nerve) && /이 신경을 보는 검사/.test(nerve), `좌골신경 검사: ${nerve.replace(/\s+/g, ' ').slice(0, 120)}`);
+    await search(page, '넙다리곧은근', '대퇴직근');
+    expect(await page.locator('#study-evaluation-panel').count() === 0, '보류한 토마스→대퇴직근이 보임(평가 칸)');
+    await openSection(page, '기능');
+    // 4-2 step 10: the 기능 tab says which posture pattern names the muscle (rectus femoris: lower crossed, short side).
+    const posture = await page.locator('#study-function-panel .posture-membership').innerText({ timeout: 10000 });
+    // 4-3 U8/U9 on 견갑하근 (a deep muscle loaded on demand): its tag dot sits on the muscle, and see-through leaves only it solid.
+    await page.locator('.scene-label.is-selected').waitFor({ timeout: 10000 });
+    await page.waitForTimeout(400);
+    const tagCheck = await page.evaluate(() => { const s = window.__atlasScene, key = new URL(location.href).searchParams.get('source'); let mesh = null; s.root.traverse(o => { if (o.isMesh && o.userData.sourceKey === key) mesh = o; });
+      const r = s.renderer.domElement.getBoundingClientRect(), at = mesh.geometry.boundingSphere ? mesh.geometry.boundingSphere.center.clone() : { x: 0, y: 0, z: 0 };
+      mesh.geometry.computeBoundingSphere(); const c = mesh.geometry.boundingSphere.center.clone().applyMatrix4(mesh.matrix).project(s.camera);
+      const dot = document.querySelector('.scene-label-lines circle.is-selected'); return { dx: Math.abs((c.x + 1) / 2 * r.width - Number(dot.getAttribute('cx'))), dy: Math.abs((1 - c.y) / 2 * r.height - Number(dot.getAttribute('cy'))) }; });
+    expect(tagCheck.dx < 60 && tagCheck.dy < 60, `견갑하근 이름표 점이 근육에서 멀다: ${Math.round(tagCheck.dx)}, ${Math.round(tagCheck.dy)}px`);
+    const ghosts = () => page.evaluate(() => { let ghost = 0, solid = 0; window.__atlasScene.root.traverse(o => { if (o.isMesh && o.visible && o.userData.sourceKey) { if (/:observationContext:|:translucent:/.test(o.material?.name ?? '')) ghost++; else if (/:selected:/.test(o.material?.name ?? '')) solid++; } }); return { ghost, solid }; });
+    await page.locator('.card-view-actions').getByRole('button', { name: '투시 보기' }).click();
+    await page.waitForTimeout(300);
+    const xray = await ghosts();
+    await page.locator('.card-view-actions').getByRole('button', { name: '투시 보기' }).click();
+    await page.waitForTimeout(300);
+    const plain = await ghosts();
+    expect(xray.ghost > 200 && xray.solid >= 1 && plain.ghost < 20, `투시: 비침 ${xray.ghost}·진함 ${xray.solid} → 끈 뒤 비침 ${plain.ghost}`);
+    // 4-3 U4 on 견갑하근 (no sinew crosses it): the nearest sinew is named, and a landmark on its bones opens the landmark view.
+    await search(page, '어깨밑근', '견갑하근');
+    await openSection(page, '한의학적 접근');
+    const near = await page.locator('#study-meridian-panel .meridian-step', { hasText: '경근 영역' }).innerText({ timeout: 10000 });
+    expect(/가장 가까운 경근은 \S+경근\(약 \d+cm\)/.test(near), `가장 가까운 경근: ${near.replace(/\s+/g, ' ')}`);
+    const mark = page.locator('#study-meridian-panel .landmark-link').first(), markName = await mark.evaluate(b => b.firstChild.textContent.trim());
+    await mark.click();
+    await page.locator('.landmark-view').waitFor({ timeout: 10000 });
+    const chosen = await page.locator('.landmark-view button[aria-pressed=true]').count();
+    expect(chosen === 1 && (await page.locator('.landmark-group li', { has: page.locator('button[aria-pressed=true]') }).innerText()).includes(markName), `표지점 ${markName} → 기준점 보기 선택 ${chosen}개`);
+    await page.getByRole('button', { name: '경혈 닫기' }).click();
+    expect(/하부 교차 증후군/.test(posture) && /긴장·짧아지는 쪽/.test(posture), `체형 패턴 줄: ${posture.replace(/\s+/g, ' ').slice(0, 120)}`);
+    return `견갑하근(벨리프레스·리프트오프) → 내측반월(맥머레이) → 좌골신경(SLR) → 대퇴직근은 보류라 검사 없음, 체형 패턴 줄(하부 교차·짧아지는 쪽) → 견갑하근 가장 가까운 경근 · 표지점 ${markName} → 기준점 보기`;
+  }],
+  // 4-3 U5: on a tablet the card and the acupoint panel share one slot; in portrait both are a bottom sheet.
+  ['태블릿 창 하나: 카드 ↔ 경혈 창, 세로는 아래 시트', async page => {
+    await page.setViewportSize({ width: 1180, height: 820 });
+    await open(page);
+    await search(page, '어깨밑근', '견갑하근');
+    const cardOpen = () => page.evaluate(() => document.querySelector('#study-details')?.open ?? null);
+    expect(await cardOpen() === true, '카드가 열려 있지 않음');
+    await page.locator('.acupoint-entry button').click();
+    await page.locator('.acupoint-panel').waitFor({ timeout: 10000 });
+    await page.waitForTimeout(300);
+    expect(await cardOpen() === false, '경혈 창을 열어도 카드가 접히지 않음');
+    await page.locator('.study-details > summary').click();
+    await page.waitForTimeout(300);
+    expect(await cardOpen() === true && await page.locator('.acupoint-panel').count() === 0, '카드를 펴도 경혈 창이 닫히지 않음');
+    await page.setViewportSize({ width: 820, height: 1180 });
+    await page.waitForTimeout(300);
+    await page.locator('.acupoint-entry button').click();
+    await page.locator('.acupoint-panel').waitFor({ timeout: 10000 });
+    await page.waitForTimeout(300);
+    const box = await page.evaluate(() => { const r = s => document.querySelector(s).getBoundingClientRect(); return { panel: r('.acupoint-panel'), tools: r('.body-tools'), h: innerHeight }; });
+    expect(Math.abs(box.panel.bottom - box.h) < 2 && box.tools.bottom <= box.panel.top + 1, `세로 시트: 창 ${Math.round(box.panel.top)}–${Math.round(box.panel.bottom)}, 도구 ${Math.round(box.tools.bottom)}`);
+    await page.setViewportSize({ width: 1440, height: 900 });
+    return '가로: 경혈 창 → 카드 접힘, 카드 펴기 → 경혈 창 닫힘 · 세로: 경혈 창이 아래 시트, 도구 막대는 그 위';
+  }],
+  // 4-3 U7: fixed sides of the body in one press, and a double tap moves in on the tapped spot.
+  ['시점: 앞·뒤·왼·오, 두 번 눌러 다가가기', async page => {
+    await open(page);
+    const cam = () => page.evaluate(() => { const s = window.__atlasScene; return { p: s.camera.position.toArray(), t: s.controls.target.toArray() }; });
+    const wait = () => page.waitForTimeout(900);
+    expect(await page.locator('.view-pad button').count() === 4, '시점 버튼 4개가 아님');
+    await page.getByRole('button', { name: '뒤에서 보기' }).click(); await wait();
+    const back = await cam();
+    await page.getByRole('button', { name: '몸의 왼쪽에서 보기' }).click(); await wait();
+    const left = await cam();
+    await page.getByRole('button', { name: '앞에서 보기' }).click(); await wait();
+    const front = await cam();
+    expect(back.p[2] - back.t[2] < -.3 && left.p[0] - left.t[0] > .3 && front.p[2] - front.t[2] > .3, `시점: 뒤 z${(back.p[2] - back.t[2]).toFixed(2)} · 왼 x${(left.p[0] - left.t[0]).toFixed(2)} · 앞 z${(front.p[2] - front.t[2]).toFixed(2)}`);
+    const box = await page.locator('canvas').first().boundingBox();
+    const at = await page.evaluate(() => { const s = window.__atlasScene, r = s.renderer.domElement.getBoundingClientRect(), v = s.controls.target.clone().add({ x: 0, y: .25, z: 0 }).project(s.camera); return [(v.x + 1) / 2 * r.width, (1 - v.y) / 2 * r.height]; });
+    const before = Math.hypot(...front.p.map((v, i) => v - front.t[i]));
+    await page.mouse.dblclick(box.x + at[0], box.y + at[1]); await wait(); await page.waitForTimeout(400);
+    const dived = await cam(), after = Math.hypot(...dived.p.map((v, i) => v - dived.t[i]));
+    expect(after < before * .7 && Math.abs(dived.t[1] - front.t[1]) > .1, `두 번 눌러 다가가기: 거리 ${before.toFixed(2)} → ${after.toFixed(2)}, 중심 높이 ${front.t[1].toFixed(2)} → ${dived.t[1].toFixed(2)}`);
+    return `뒤·왼·앞 시점, 두 번 눌러 거리 ${before.toFixed(2)} → ${after.toFixed(2)}m, 누른 자리가 회전 중심`;
   }],
 ];
 
@@ -411,7 +688,7 @@ for (const [name, run] of selected) {
     console.log(`✔ ${name} — ${note} (${((Date.now() - started) / 1000).toFixed(1)}s)`);
   } catch (error) {
     failed++;
-    console.log(`✖ ${name} — ${error.message.split('\n')[0]}`);
+    console.log(`✖ ${name} — ${process.env.QA_VERBOSE ? error.message : error.message.split('\n')[0]}`);
   }
   await page.close();
 }

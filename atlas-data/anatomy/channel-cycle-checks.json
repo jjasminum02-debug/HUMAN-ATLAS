@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "what": "Order of qi flow through the 12 regular channels (4-3 V4), used in atlas-web/src/viewer/acupointLayer.ts CHANNEL_CYCLE.",
+  "order": ["LU", "LI", "ST", "SP", "HT", "SI", "BL", "KI", "PC", "TE", "GB", "LR"],
+  "closesTo": "LU",
+  "accessedOn": "2026-11-20",
+  "sources": [
+    { "url": "https://new.shen-nong.com/articleDetails/2123", "states": "order-of-flow table: LU, LI, ST, SP, HT, SI, BL, Ki, PC, Sj, GB, LR" },
+    { "url": "https://www.attiliodalberto.com/traditional-chinese-medicine/meridians.php", "states": "an unbroken 24-hour circuit from the Lung through to the Liver; channel start and end places adjacent pair by pair" }
+  ],
+  "withinChannel": "Point numbers follow the flow (LU1 → LU11). Not separately checked; standard numbering.",
+  "held": [
+    { "item": "the exact handover places and branches between channels (e.g. LU7 branch to LI1, LI20 to ST1)", "why": "neither source states them pair by pair; the model joins the end point to the next start point with a dashed line only" },
+    { "item": "the 督脈·任脈 place in the cycle", "why": "not checked; 督·任 are shown with their own direction only" }
+  ]
+}

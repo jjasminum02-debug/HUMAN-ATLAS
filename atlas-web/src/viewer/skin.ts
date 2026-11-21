@@ -77,6 +77,44 @@ export function skinGeometry(rest: THREE.BufferGeometry, weights: Uint16Array, s
   target.computeBoundingSphere(); target.computeBoundingBox();
 }
 
+/**
+ * Contact plane in a mesh's object space, with which weight slots ride on each side: 1 = proximal, -1 = distal, 0 = neither.
+ * Built from a world `ContactPlane` (rig.ts) and the instance matrix (rigid, possibly mirrored, so distances are kept).
+ */
+export interface ObjectContact { centre: THREE.Vector3; normal: THREE.Vector3; inside: THREE.Vector3; restCentre: THREE.Vector3; restNormal: THREE.Vector3;
+  radius: number; strength: number; sides: number[] }
+export const CONTACT_GAP = .0015;
+
+/**
+ * Tissue that crossed a contact plane is pressed back onto it (a gap of CONTACT_GAP on its own side), on the inside of
+ * the bend and within the plane's radius: the forearm flexors and the biceps meet in a flat crease at a bent elbow
+ * instead of passing through each other. Each vertex belongs to the side of its larger weight. Whatever already lay
+ * past the plane at rest (tissue spanning the joint) is allowed that much, so nothing jumps when the bend starts.
+ * Teaching approximation, not contact mechanics. Returns the number of vertices moved.
+ */
+export function flattenContacts(rest: THREE.BufferGeometry, weights: Uint16Array, contacts: ObjectContact[], target: THREE.BufferGeometry) {
+  const r = rest.getAttribute('position').array as Float32Array, attribute = target.getAttribute('position'), p = attribute.array as Float32Array;
+  let moved = 0;
+  for (const c of contacts) {
+    const { centre: o, normal: n, inside: b, restCentre: o0, restNormal: n0 } = c, r2 = c.radius * c.radius;
+    for (let v = 0, i = 0; v < weights.length; v++, i += 3) {
+      const packed = weights[v], side = c.sides[(packed & 255) >= 128 ? packed >> 12 : (packed >> 8) & 15];
+      if (!side) continue;
+      const x = p[i] - o.x, y = p[i + 1] - o.y, z = p[i + 2] - o.z;
+      if (x * x + y * y + z * z > r2 || x * b.x + y * b.y + z * b.z <= 0) continue;
+      // Depth past the plane into the other side (proximal tissue wants d ≥ gap, distal d ≤ −gap).
+      const depth = CONTACT_GAP - side * (x * n.x + y * n.y + z * n.z);
+      if (depth <= 0) continue;
+      const allowed = Math.max(0, CONTACT_GAP - side * ((r[i] - o0.x) * n0.x + (r[i + 1] - o0.y) * n0.y + (r[i + 2] - o0.z) * n0.z));
+      const push = (depth - allowed) * c.strength;
+      if (push <= 0) continue;
+      p[i] += side * n.x * push; p[i + 1] += side * n.y * push; p[i + 2] += side * n.z * push; moved++;
+    }
+  }
+  if (moved) { attribute.needsUpdate = true; target.computeBoundingSphere(); target.computeBoundingBox(); }
+  return moved;
+}
+
 /** A writable copy of `rest` (own index too: disposing a geometry frees every GPU buffer it references). */
 export function posedCopy(rest: THREE.BufferGeometry) {
   const target = new THREE.BufferGeometry();
@@ -85,6 +123,9 @@ export function posedCopy(rest: THREE.BufferGeometry) {
   target.setAttribute('position', new THREE.BufferAttribute(new Float32Array(rest.getAttribute('position').array), 3));
   const normal = rest.getAttribute('normal');
   if (normal) target.setAttribute('normal', new THREE.BufferAttribute(new Float32Array(normal.array), 3));
+  // 4-3 U9: the constant fibre axis is shared, not copied.
+  const fiber = rest.getAttribute('fiberAxis');
+  if (fiber) target.setAttribute('fiberAxis', fiber);
   target.userData.skinRest = rest;
   return target;
 }

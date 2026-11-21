@@ -2,6 +2,8 @@
 // only values two independent sources agree on (atlas-data/pipeline/build_muscle_cards.py).
 import { useEffect, useState, type ReactNode } from 'react';
 import type { RuntimeStructureRecord } from '../viewer/datasets/integration';
+import { Fold, KeyLines } from './CardParts';
+import { CardLimits } from './CardLimits';
 
 type Term = { ko: string; koTraditional: string; en: string; structure?: string; structures?: string[] };
 type Card = { concept?: string; tendonOf?: string | null; nerve?: string[]; roots?: string; artery?: string[]; action?: string };
@@ -47,7 +49,6 @@ export function MuscleBloodSupply({ muscle, rows, onSelect }: { muscle: RuntimeS
       return <li key={key}>{vessel ? <button className="bone-related-muscle" onClick={() => onSelect(vessel.sourceKey)}>{termName(t)}</button> : <span>{termName(t)}</span>}<small>{t.en}</small></li>;
     })}</ul>
       : <p>두 자료가 일치하는 혈관 정보가 아직 없습니다.</p>}
-    <p className="quiet-note">신경 분지와 혈관 분포에는 개인차가 있습니다.</p>
   </section>;
 }
 
@@ -81,6 +82,8 @@ function vesselNamed(rows: Map<string, RuntimeStructureRecord>, en: string, side
 
 export function VesselCard({ vessel, rows, onSelect }: { vessel: RuntimeStructureRecord; rows: Map<string, RuntimeStructureRecord>; onSelect: (key: string) => void }) {
   const data = useMuscleCards(), branches = useBranches();
+  const [fold, setFold] = useState<string | null>(null);
+  useEffect(() => setFold(null), [vessel.sourceKey]);
   const sideWord = vessel.side === 'left' ? 'Left' : 'Right';
   const parentName = branches?.parents[vessel.names.en]?.replace('{S}', sideWord);
   const parent = parentName ? vesselNamed(rows, parentName, vessel.side) : undefined;
@@ -91,24 +94,29 @@ export function VesselCard({ vessel, rows, onSelect }: { vessel: RuntimeStructur
   const supplied = data ? Object.entries(data.cards).filter(([, c]) => c.artery?.some(k => keys.includes(k)))
     .map(([en]) => rowNamed(rows, 'muscle', en, vessel.side)).filter((r): r is RuntimeStructureRecord => Boolean(r?.localDisplayEligible)) : [];
   const unique = [...new Map(supplied.map(r => [r.label, r])).values()];
+  // 4-3 U12: key lines (kind, where it comes from, branches, muscles it supplies), then folds.
+  const kind = vessel.tissue === 'vein' ? '정맥' : vessel.tissue === 'heart' ? '심장' : '동맥';
+  const kids = [...new Map(children.map(r => [r.sourceKey, r])).values()];
   return <>
-    <section className="attachment-section attachment-summary-block vessel-card" aria-label="혈관">
-      <h3>{vessel.tissue === 'vein' ? '정맥' : vessel.tissue === 'heart' ? '심장' : '동맥'}</h3>
-      <p>{vessel.tissue === 'vein' ? '조직의 혈액을 모아 심장 쪽으로 돌려보내는 혈관입니다.'
-        : vessel.tissue === 'heart' ? '혈액을 온몸과 허파로 내보내는 심장의 한 부분입니다.' : '심장에서 나온 혈액을 조직으로 보내는 혈관입니다.'}</p>
-    </section>
-    {vessel.tissue !== 'heart' && (parent || children.length > 0) && <section className="attachment-section attachment-summary-block vessel-branches">
-      {parent && <><h3>{vein ? '흘러드는 혈관' : '갈라져 나온 혈관'}</h3>
+    <KeyLines onOpen={setFold} lines={[
+      { fact: 'kind', label: '종류', value: `${kind} — ${vessel.tissue === 'vein' ? '혈액을 모아 심장 쪽으로 돌려보냅니다' : vessel.tissue === 'heart' ? '혈액을 온몸과 허파로 내보냅니다' : '심장에서 나온 혈액을 조직으로 보냅니다'}` },
+      { fact: 'parent', label: vein ? '흘러드는 곳' : '갈라져 나온 곳', value: parent?.label ?? '', opens: 'branches' },
+      { fact: 'children', label: '가지', value: kids.length ? `${kids.length}개` : '', opens: 'branches' },
+      { fact: 'supplied', label: '혈액을 받는 근육', value: vessel.tissue === 'artery' && unique.length ? `${unique.length}개 · ${unique.slice(0, 2).map(r => r.label).join(' · ')}${unique.length > 2 ? ' …' : ''}` : '', opens: 'supplied' }]}/>
+    <div className="card-folds">
+    {vessel.tissue !== 'heart' && (parent || kids.length > 0) && <Fold id="branches" title="갈래" summary={[parent?.label, kids.length ? `가지 ${kids.length}` : ''].filter(Boolean).join(' · ')} open={fold === 'branches'}>
+      <section className="attachment-section attachment-summary-block vessel-branches">
+      {parent && <><h4>{vein ? '흘러드는 혈관' : '갈라져 나온 혈관'}</h4>
         <div className="attachment-bone-links"><button className="bone-related-muscle" onClick={() => onSelect(parent.sourceKey)}>{parent.label}</button></div></>}
-      {children.length > 0 && <><h3>{vein ? '흘러드는 가지' : '갈라지는 가지'}</h3>
-        <div className="attachment-bone-links">{[...new Map(children.map(r => [r.sourceKey, r])).values()].map(r => <button key={r.sourceKey} className="bone-related-muscle" onClick={() => onSelect(r.sourceKey)}>{r.label}</button>)}</div></>}
-      <p className="quiet-note">Z-Anatomy 이름에 적힌 관계, 또는 AI 초안과 Wikipedia 혈관 정보가 일치한 관계만 보입니다.</p>
-    </section>}
-    {vessel.tissue === 'artery' && <section className="attachment-section attachment-summary-block vessel-supplied">
-      <h3>혈액을 받는 근육</h3>
+      {kids.length > 0 && <><h4>{vein ? '흘러드는 가지' : '갈라지는 가지'}</h4>
+        <div className="attachment-bone-links">{kids.map(r => <button key={r.sourceKey} className="bone-related-muscle" onClick={() => onSelect(r.sourceKey)}>{r.label}</button>)}</div></>}
+      </section></Fold>}
+    {vessel.tissue === 'artery' && <Fold id="supplied" title="혈액을 받는 근육" summary={unique.length ? `${unique.length}개` : '자료 없음'} open={fold === 'supplied'}>
+      <section className="attachment-section attachment-summary-block vessel-supplied">
       {unique.length ? <div className="attachment-bone-links">{unique.map(r => <button key={r.sourceKey} className="bone-related-muscle" onClick={() => onSelect(r.sourceKey)}>{r.label}</button>)}</div>
-        : <p>근육 카드의 혈액공급 자료에 이 동맥이 아직 없습니다.</p>}
-    </section>}
-    <p className="quiet-note">혈관은 Z-Anatomy 모형의 중심선을 따라 그린 관이며, 가지와 주행에는 개인차가 큽니다.</p>
+        : <p className="empty-answer">근육 카드의 혈액공급 자료에 이 동맥이 아직 없습니다.</p>}
+      </section></Fold>}
+    </div>
+    <CardLimits kind="vessel"/>
   </>;
 }

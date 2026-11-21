@@ -1,14 +1,15 @@
 // Joint movement panel (ROADMAP M3): pick a joint, move its dofs with sliders, see which muscles produce the
 // movement (agonists, red) and which oppose it (antagonists, blue).
 import { useEffect, useState } from 'react';
-import type { RigFile, RigPose } from '../rig';
+import { rhythmPose, type RigFile, type RigPose } from '../rig';
 import { groupDofs, groupOfJoint, MOVEMENT_GROUPS, movementRoles, type MuscleActionsFile, type RigHost } from '../movement';
 
 type Row = { label: string; localDisplayEligible: boolean };
 const NOTES: Record<string, string> = {
   back: '허리는 요추 전체의 움직임을 한 관절로 단순화했습니다.',
   neck: '목은 C2–C3부터 C7–T1까지 마디마다 나누어 움직이고, 머리는 고리뒤통수관절(끄덕임)과 고리중쇠관절(돌림)에서 움직입니다.',
-  girdle: '빗장뼈가 복장빗장관절에서 움직이면 어깨뼈도 함께 따라갑니다. 어깨뼈 위쪽돌림은 가슴벽 위 미끄러짐을 단순화했습니다.',
+  girdle: '빗장뼈가 복장빗장관절에서 움직이면 어깨뼈는 봉우리빗장관절에 매달려 따라가고, 안쪽모서리가 가슴벽에 닿은 채 미끄러지도록 방향을 맞춥니다(교육용 근사).',
+  shoulder: '슬라이더 값은 몸통에 대한 팔의 각도입니다. 30°를 넘으면 어깨관절과 어깨뼈(위쪽돌림)가 2 : 1로 나누어 움직입니다(어깨위팔 리듬).',
   fingers: '둘째–다섯째 손가락은 함께 움직입니다. 엄지 맞섬은 굽힘과 벌림을 함께 써서 보여 줍니다.',
   toes: '둘째–다섯째 발가락은 함께 움직입니다. 발가락 벌림·모음은 아직 움직이지 않습니다.',
 };
@@ -36,10 +37,15 @@ export function MovementPanel({ host, rows, request, musclesVisible, onSelect }:
   // Closing the panel returns the body to rest.
   useEffect(() => () => { host.setActionHighlight(null); void host.loadRig().then(r => host.setRigPose(r, null)).catch(() => {}); }, [host]);
   const value = active ? pose?.[active] ?? 0 : 0;
-  const roles = actions && active && value ? movementRoles(actions, active, value > 0 ? 1 : -1, key => rows.get(key)?.localDisplayEligible ?? false) : null;
+  const visible = (key: string) => rows.get(key)?.localDisplayEligible ?? false;
+  const roles = actions && active && value ? movementRoles(actions, active, value > 0 ? 1 : -1, visible) : null;
+  // Raising the arm past 30° also turns the scapula upward (scapulohumeral rhythm): its movers work too.
+  const rhythm = rig && active ? Object.values(rig.joints).find(j => j.rhythm?.dofs.includes(active))?.rhythm : undefined;
+  const scapulaTurn = rhythm && pose && value > 0 ? Math.round((rhythmPose(rig!, pose)[rhythm.scapula] ?? 0) - (pose[rhythm.scapula] ?? 0)) : 0;
+  const rhythmRoles = actions && rhythm && scapulaTurn > 0 ? movementRoles(actions, rhythm.scapula, 1, visible) : null;
   useEffect(() => {
-    host.setActionHighlight(roles ? { agonists: roles.agonists.map(r => r.key), antagonists: roles.antagonists.map(r => r.key) } : null);
-  }, [host, active, value > 0, value < 0, actions]); // eslint-disable-line react-hooks/exhaustive-deps
+    host.setActionHighlight(roles ? { agonists: [...roles.agonists, ...(rhythmRoles?.agonists ?? [])].map(r => r.key), antagonists: roles.antagonists.map(r => r.key) } : null);
+  }, [host, active, value > 0, value < 0, actions, Boolean(rhythmRoles)]); // eslint-disable-line react-hooks/exhaustive-deps
   if (failed) return <div className="movement-panel" id="movement-panel"><p className="quiet-note">관절 자료를 불러오지 못했습니다.</p></div>;
   if (!rig || !actions) return <div className="movement-panel" id="movement-panel"><p className="quiet-note">관절 자료를 불러오는 중…</p></div>;
   const dofs = groupDofs(rig, group, side);
@@ -76,9 +82,13 @@ export function MovementPanel({ host, rows, request, musclesVisible, onSelect }:
       <div className="attachment-bone-links">{roles.agonists.length ? names(roles.agonists) : <span className="quiet-note">자료에 없음</span>}</div>
       <h4><span className="swatch antagonist"/>반대로 작용하는 근육 · {roles.antagonists.length}</h4>
       <div className="attachment-bone-links">{roles.antagonists.length ? names(roles.antagonists) : <span className="quiet-note">자료에 없음</span>}</div>
+      {rhythmRoles && <>
+        <h4 className="movement-rhythm"><span className="swatch agonist"/>함께 일하는 근육 · 어깨뼈 위쪽돌림 {scapulaTurn}° · {rhythmRoles.agonists.length}</h4>
+        <div className="attachment-bone-links">{names(rhythmRoles.agonists)}</div>
+      </>}
       {!musclesVisible && <p className="quiet-note">근육 층을 켜면 색으로 볼 수 있습니다.</p>}
     </div>}
-    <p className="quiet-note">{NOTES[group] ?? ''}
+    <p className="quiet-note">{NOTES[group] ? `${NOTES[group]} ` : ''}
       작용 근육은 교과서 표를 OpenSim 모델의 모멘트 팔이나 독립 해부학 표(UAMS·Kenhub)로 확인한 학습용 요약입니다.</p>
   </div>;
 }

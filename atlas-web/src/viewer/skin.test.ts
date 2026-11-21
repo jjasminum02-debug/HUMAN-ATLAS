@@ -2,7 +2,30 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import * as THREE from 'three';
-import { parseSkinChunk, posedCopy, skinGeometry, type SkinChunk } from './skin.ts';
+import { CONTACT_GAP, flattenContacts, parseSkinChunk, posedCopy, skinGeometry, type SkinChunk } from './skin.ts';
+
+test('contact at a bent hinge presses crossed tissue back onto the plane, inside the bend only', () => {
+  // Plane through the origin, proximal side +y, inside of the bend +z. Slot 0 rides proximal, slot 1 distal.
+  const rest = new THREE.BufferGeometry().setAttribute('position', new THREE.Float32BufferAttribute([
+    0, -.02, .02,   // distal, crossed after bending (posed below)
+    0, -.02, -.02,  // distal, outside the bend: left alone
+    0, .02, .02,    // proximal, crossed
+    0, .004, .03,   // distal, already 4 mm past the plane at rest (tissue spanning the joint)
+  ], 3));
+  const posed = posedCopy(rest), p = posed.getAttribute('position').array as Float32Array;
+  p.set([0, .01, .02, 0, .01, -.02, 0, -.005, .02, 0, .01, .03]);
+  const distal = (1 << 12) | (1 << 8) | 255, proximal = 255;
+  const plane = { centre: new THREE.Vector3(), normal: new THREE.Vector3(0, 1, 0), inside: new THREE.Vector3(0, 0, 1),
+    restCentre: new THREE.Vector3(), restNormal: new THREE.Vector3(0, 1, 0), radius: .1, strength: 1, sides: [1, -1] };
+  assert.equal(flattenContacts(rest, Uint16Array.of(distal, distal, proximal, distal), [plane], posed), 3);
+  assert.ok(Math.abs(p[1] + CONTACT_GAP) < 1e-6, 'distal tissue back on its own side');
+  assert.ok(Math.abs(p[4] - .01) < 1e-9, 'outside the bend nothing moves');
+  assert.ok(Math.abs(p[7] - CONTACT_GAP) < 1e-6, 'proximal tissue back on its own side');
+  assert.ok(Math.abs(p[10] - .004) < 1e-6, 'tissue past the plane at rest keeps that much');
+  p.set([0, .01, .02], 0);
+  assert.equal(flattenContacts(rest, Uint16Array.of(distal, distal, proximal, distal), [{ ...plane, strength: .5 }], posed), 1);
+  assert.ok(Math.abs(p[1] - (.01 - .5 * (.01 + CONTACT_GAP))) < 1e-6, 'half strength, half the push');
+});
 
 const data = (path: string) => new URL(`../../../atlas-data/${path}`, import.meta.url);
 const structures = JSON.parse(readFileSync(data('runtime/structures.json'), 'utf8')).structures as

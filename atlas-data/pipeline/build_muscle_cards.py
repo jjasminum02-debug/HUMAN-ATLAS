@@ -11,6 +11,7 @@ spinal segments in both, and the drafted action sentence when the infobox action
 Everything else is listed in the checks file with its reason. Wikipedia text itself is not copied into the runtime.
 """
 import html
+from polite import polite  # learner text ends in 합니다체 (ROADMAP 4-3 U1)
 import json
 from pathlib import Path
 import re
@@ -257,11 +258,11 @@ def main():
 
         action = box['action'] if box else ''
         if action and re.search(draft['check'], action.lower()):
-            card['action'] = draft['action']; record('action', 'agree')
+            card['action'] = polite(draft['action']); record('action', 'agree')
         elif uams and re.search(draft['check'], uams['action'].lower()):
-            card['action'] = draft['action']; record('action', 'agree', by='uams', wikipedia=action[:200] or None, uams=uams['action'][:200])
+            card['action'] = polite(draft['action']); record('action', 'agree', by='uams', wikipedia=action[:200] or None, uams=uams['action'][:200])
         elif (facts := kenhub()) and re.search(draft['check'], facts.get('action', '').lower()):
-            card['action'] = draft['action']; record('action', 'agree', by='kenhub', wikipedia=action[:200] or None, kenhub=facts['action'][:200])
+            card['action'] = polite(draft['action']); record('action', 'agree', by='kenhub', wikipedia=action[:200] or None, kenhub=facts['action'][:200])
         elif not action: record('action', 'noSource', **({'uams': uams['action'][:200]} if uams else {}))
         else: record('action', 'conflict', expected=draft['check'], wikipedia=action[:200], **({'uams': uams['action'][:200]} if uams else {}))
         cards[name] = card; checks[name] = check
